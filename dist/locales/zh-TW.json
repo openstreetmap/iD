@@ -20,6 +20,14 @@
             "favorites": "最愛",
             "add_feature": "新增圖徽"
         },
+        "title": {
+            "format": {
+                "context": "{base} – {context}",
+                "changes": "({changes}) {base}",
+                "changes_context": "({changes}) {base} – {context}"
+            },
+            "labeled_and_more": "{labeled} 與 {count} 個"
+        },
         "modes": {
             "add_feature": {
                 "title": "新增圖徽",
@@ -590,7 +598,7 @@
             "request_review": "我需要其他人檢視查核我的編輯。",
             "save": "上傳",
             "cancel": "取消",
-            "changes": "{count}  變動數",
+            "changes": "變更 ({count})",
             "download_changes": "下載 osmChange 檔案",
             "errors": "錯誤",
             "warnings": "警告",
@@ -678,20 +686,19 @@
             "no_results_worldwide": "找不到搜尋結果"
         },
         "geolocate": {
+            "key": "L",
             "title": "顯示我的位置",
-            "locating": "正在定位，請等待..."
+            "locating": "正在定位，請等待...",
+            "location_unavailable": "您的位置不可用。"
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "縮放到這裡",
-                "tooltip_feature": "置中和縮放地圖到這圖徵。",
-                "tooltip_note": "置中和縮放地圖到這註解。",
-                "tooltip_data": "置中和縮放地圖到這資料。",
-                "tooltip_issue": "置中和縮放地圖到這問題。"
+                "title": "縮放到選取的部份"
             },
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
+            "view_on_osmose": "在 osmose.openstreetmap.fr 上檢視",
             "view_on_keepRight": "在 keepright.at 檢視",
             "feature_type": "圖徽類型",
             "fields": "欄位",
@@ -1043,19 +1050,24 @@
             "used_with": "可與 {type} 使用"
         },
         "zoom": {
-            "in": "拉近",
-            "out": "拉遠"
+            "in": "放大",
+            "out": "縮小"
         },
         "cannot_zoom": "在此模式下不能再縮小。",
         "full_screen": "啟動全螢幕",
+        "self_intersection": {
+            "error": {
+                "lines": "線段不能跨越自己。",
+                "areas": "區域不能跨越自己。"
+            }
+        },
         "QA": {
             "osmose": {
                 "title": "Osmose 問題",
                 "detail_title": "詳細資訊",
                 "elems_title": "圖徽",
                 "fix_title": "修復指南",
-                "trap_title": "常見錯誤",
-                "translation": "由 Osmose 提供的翻譯"
+                "trap_title": "常見錯誤"
             },
             "improveOSM": {
                 "title": " ImproveOSM 偵測",
@@ -1515,7 +1527,7 @@
                 "before_start": "你應該先熟悉開放街圖以及編輯器之前再開始編輯。iD 編輯器中有教學能教你基本編輯開放街圖的方法。點螢幕上的\"開始新手教學\"進行新手教學－這只會花 15 分鐘。",
                 "open_source_h": "開源",
                 "open_source": "iD 編輯器是共同協作的開源專案，你現在則是使用 {version} 版本。專案的原始碥在 [GitHub 上面](https://github.com/openstreetmap/iD)。",
-                "open_source_help": "你可以藉由[翻譯](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 或是 [回報臭蟲](https://github.com/openstreetmap/iD/issues)，協助 iD 專案的發展。"
+                "open_source_help": "你可以藉由[翻譯](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) 或是[回報臭蟲](https://github.com/openstreetmap/iD/issues)，協助 iD 專案的發展。"
             },
             "overview": {
                 "title": "概要",
@@ -2434,7 +2446,8 @@
                     "pan": "平移地圖",
                     "pan_more": "全螢幕平移地圖",
                     "zoom": "放大 / 縮小",
-                    "zoom_more": "大幅度放大 / 縮小"
+                    "zoom_more": "大幅度放大 / 縮小",
+                    "geolocate": "縮放到我的位置"
                 },
                 "help": {
                     "title": "幫助",
@@ -2824,7 +2837,7 @@
                     "label": "專業",
                     "options": {
                         "foot_bath": "泡腳",
-                        "hot_spring": "熱溫泉",
+                        "hot_spring": "溫泉",
                         "onsen": "日式溫泉"
                     }
                 },
@@ -2893,6 +2906,9 @@
                 "bridge/support": {
                     "label": "類型"
                 },
+                "bridge_combo": {
+                    "label": "類型"
+                },
                 "building": {
                     "label": "建築物",
                     "terms": "建築"
@@ -2947,6 +2963,14 @@
                     "placeholder": "50, 100, 200...",
                     "terms": "容量,位子數"
                 },
+                "capacity/disabled_parking": {
+                    "label": "無障礙空間",
+                    "placeholder": "1, 2, 3..."
+                },
+                "capacity_parking": {
+                    "label": "總空間",
+                    "placeholder": "10, 20, 30..."
+                },
                 "cash_in": {
                     "label": "存款"
                 },
@@ -2967,7 +2991,13 @@
                     "terms": "收費金額"
                 },
                 "check_date": {
-                    "label": "最後檢查日期"
+                    "label": "最後檢查日期",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "circumference": {
+                    "label": "圓周",
+                    "placeholder": "1 m, 20 cm, 30 in…",
+                    "terms": "圓周"
                 },
                 "clothes": {
                     "label": "服飾"
@@ -3134,6 +3164,9 @@
                         "yes": "是"
                     }
                 },
+                "depth": {
+                    "label": "深度（公尺）"
+                },
                 "description": {
                     "label": "描述",
                     "terms": "敘述,描述"
@@ -3217,9 +3250,13 @@
                     "label": "顯示"
                 },
                 "distance": {
-                    "label": "距離"
+                    "label": "距離",
+                    "terms": "距離"
                 },
                 "disused/railway": {
+                    "label": "類型"
+                },
+                "disused/shop": {
                     "label": "類型"
                 },
                 "dock": {
@@ -3256,6 +3293,14 @@
                     "placeholder": "00:00",
                     "terms": "持續時間"
                 },
+                "ele": {
+                    "label": "海拔高度",
+                    "terms": "海拔高度"
+                },
+                "ele_node": {
+                    "label": "海拔高度",
+                    "terms": "海拔高度"
+                },
                 "electrified": {
                     "label": "電氣化",
                     "options": {
@@ -3266,10 +3311,6 @@
                     },
                     "placeholder": "架空電車線, 第三軌供電",
                     "terms": "電氣化"
-                },
-                "elevation": {
-                    "label": "海拔高度",
-                    "terms": "海拔,海拔高度"
                 },
                 "email": {
                     "label": "Email",
@@ -3386,6 +3427,9 @@
                 },
                 "gambling": {
                     "label": "遊戲"
+                },
+                "garden/type": {
+                    "label": "花園類型"
                 },
                 "gauge": {
                     "label": "軌距"
@@ -3568,7 +3612,7 @@
                     "label": "週期性水流"
                 },
                 "internet_access": {
-                    "label": "網際網絡存取",
+                    "label": "網際網路連線",
                     "options": {
                         "no": "無",
                         "terminal": "終端",
@@ -3576,11 +3620,16 @@
                         "wlan": "無線網絡",
                         "yes": "有"
                     },
-                    "terms": "網路連線"
+                    "terms": "網既網路連線"
                 },
                 "internet_access/fee": {
-                    "label": "網路存取費用",
-                    "terms": "網路連線費用"
+                    "label": "網際網路存取使用費",
+                    "options": {
+                        "customers": "僅客戶",
+                        "no": "免費",
+                        "yes": "付費"
+                    },
+                    "terms": "網際網路存取使用費"
                 },
                 "internet_access/ssid": {
                     "label": "Wifi 網路名稱",
@@ -3778,6 +3827,10 @@
                     "label": "微釀啤酒作坊",
                     "terms": "私釀酒"
                 },
+                "mimics": {
+                    "label": "偽裝",
+                    "terms": "偽裝"
+                },
                 "min_age": {
                     "label": "最小年齡",
                     "terms": "最小年紀"
@@ -3845,8 +3898,7 @@
                     "terms": "網路,連鎖體系"
                 },
                 "network/type": {
-                    "label": "網路類型",
-                    "terms": "網路類型"
+                    "label": "網路類型"
                 },
                 "network_bicycle": {
                     "label": "網路類型",
@@ -3921,7 +3973,8 @@
                     "terms": "允許明火"
                 },
                 "opening_date": {
-                    "label": "預計開放日期"
+                    "label": "預計開放日期",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "opening_hours": {
                     "label": "小時",
@@ -3958,6 +4011,9 @@
                         "surface": "平面",
                         "underground": "地下"
                     }
+                },
+                "parking_space": {
+                    "label": "類型"
                 },
                 "payment_multi": {
                     "label": "付款類型",
@@ -4098,6 +4154,10 @@
                 },
                 "playground/theme": {
                     "label": "主題"
+                },
+                "plots": {
+                    "label": "小塊土地",
+                    "placeholder": "10, 20, 30..."
                 },
                 "polling_station": {
                     "label": "投票站",
@@ -4518,6 +4578,7 @@
                 },
                 "start_date": {
                     "label": "啟始日期",
+                    "placeholder": "YYYY-MM-DD",
                     "terms": "開始日期,開工日期,開業日期"
                 },
                 "step_count": {
@@ -4631,6 +4692,9 @@
                 },
                 "target": {
                     "label": "目標"
+                },
+                "telecom/medium": {
+                    "label": "媒介"
                 },
                 "tidal": {
                     "label": "潮汐",
@@ -4758,6 +4822,9 @@
                 "tunnel": {
                     "label": "類型",
                     "placeholder": "預設"
+                },
+                "tunnel_combo": {
+                    "label": "類型"
                 },
                 "usage_rail": {
                     "label": "用途類型",
@@ -4952,8 +5019,8 @@
                     "terms": "牽引纜車"
                 },
                 "aerialway/gondola": {
-                    "name": "空中纜車",
-                    "terms": "吊車"
+                    "name": "貢多拉纜車",
+                    "terms": "貢多拉纜車"
                 },
                 "aerialway/goods": {
                     "name": "載貨纜車",
@@ -5436,6 +5503,10 @@
                     "name": "停車位",
                     "terms": "停車格,停車空間"
                 },
+                "amenity/parking_space/disabled": {
+                    "name": "無障礙停車位",
+                    "terms": "無障礙停車位"
+                },
                 "amenity/payment_centre": {
                     "name": "繳費中心",
                     "terms": "繳費中心"
@@ -5445,8 +5516,8 @@
                     "terms": "繳費處"
                 },
                 "amenity/pharmacy": {
-                    "name": "藥房櫃臺",
-                    "terms": "藥房櫃臺"
+                    "name": "藥局",
+                    "terms": "藥房櫃臺,藥房,藥店"
                 },
                 "amenity/photo_booth": {
                     "name": "照相站",
@@ -5575,9 +5646,6 @@
                     "name": "回收筒",
                     "terms": "回收箱"
                 },
-                "amenity/register_office": {
-                    "name": "戶政事務所"
-                },
                 "amenity/research_institute": {
                     "name": "研究機構場地",
                     "terms": "研究機構場地"
@@ -5666,9 +5734,6 @@
                     "name": "中小學範圍",
                     "terms": "學校,中學,小學,國中,國小,高中,學校用地,學校範圍,School Grounds,School"
                 },
-                "amenity/scrapyard": {
-                    "name": "汽車廢料場"
-                },
                 "amenity/shelter": {
                     "name": "涼亭",
                     "terms": "遮雨棚,亭,亭子"
@@ -5743,9 +5808,6 @@
                 "amenity/studio/video": {
                     "name": "電影製片場",
                     "terms": "電影製片場"
-                },
-                "amenity/swimming_pool": {
-                    "name": "游泳池"
                 },
                 "amenity/taxi": {
                     "name": "計程車招呼站",
@@ -6103,6 +6165,10 @@
                 "barrier/sally_port": {
                     "name": "出擊口",
                     "terms": "出擊口"
+                },
+                "barrier/spikes": {
+                    "name": "地釘",
+                    "terms": "地釘"
                 },
                 "barrier/stile": {
                     "name": "梯磴",
@@ -6576,6 +6642,9 @@
                 "disused/railway": {
                     "name": "廢棄鐵軌圖徽"
                 },
+                "disused/shop": {
+                    "name": "廢棄商店"
+                },
                 "embankment": {
                     "name": "路堤"
                 },
@@ -6937,6 +7006,10 @@
                     "name": "路徑",
                     "terms": "路徑"
                 },
+                "highway/path/boardwalk": {
+                    "name": "木板路",
+                    "terms": "木板路"
+                },
                 "highway/path/informal": {
                     "name": "非正式的路徑",
                     "terms": "非正式的路徑"
@@ -7206,8 +7279,8 @@
                     "name": "土地利用圖徵"
                 },
                 "landuse/allotments": {
-                    "name": "社區農園",
-                    "terms": "社區田圃,城市農園,社區園圃,社區農地,都市農園"
+                    "name": "社群花園",
+                    "terms": "社群花園"
                 },
                 "landuse/aquaculture": {
                     "name": "養殖漁業",
@@ -7315,16 +7388,16 @@
                     "terms": "軍港,海軍基地"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "障礙課程場地",
-                    "terms": "障礙課程場地,障礙課程"
+                    "name": "軍事障礙課程",
+                    "terms": "軍事障礙課程"
                 },
                 "landuse/military/range": {
                     "name": "軍用靶場",
                     "terms": "靶場,軍用靶場,射擊場,軍事靶場"
                 },
                 "landuse/military/training_area": {
-                    "name": "訓練場地",
-                    "terms": "教練場,訓練場"
+                    "name": "軍事訓練區域",
+                    "terms": "軍事訓練區域"
                 },
                 "landuse/orchard": {
                     "name": "果園",
@@ -7498,6 +7571,14 @@
                 "leisure/garden": {
                     "name": "花園",
                     "terms": "花園,果園,菜園,植物園,公園"
+                },
+                "leisure/garden/botanical": {
+                    "name": "植物園",
+                    "terms": "植物園"
+                },
+                "leisure/garden/community": {
+                    "name": "社區花園",
+                    "terms": "社區花園"
                 },
                 "leisure/golf_course": {
                     "name": "高爾夫球場",
@@ -7691,23 +7772,11 @@
                     "name": "自行車道",
                     "terms": "單車道"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "自行車道",
-                    "terms": "自行車道"
-                },
                 "leisure/track/horse_racing": {
                     "name": "賽馬跑道",
                     "terms": "賽馬跑道"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "賽馬道",
-                    "terms": "賽馬道"
-                },
                 "leisure/track/running": {
-                    "name": "跑道",
-                    "terms": "跑道"
-                },
-                "leisure/track/running_point": {
                     "name": "跑道",
                     "terms": "跑道"
                 },
@@ -7791,8 +7860,8 @@
                     "terms": "煤氣筒"
                 },
                 "man_made/groyne": {
-                    "name": "堤防",
-                    "terms": "河堤,海堤"
+                    "name": "防波堤",
+                    "terms": "防波堤"
                 },
                 "man_made/lighthouse": {
                     "name": "燈塔",
@@ -8002,8 +8071,8 @@
                     "terms": "軍用掩體"
                 },
                 "military/checkpoint": {
-                    "name": "檢查站",
-                    "terms": "檢查站"
+                    "name": "軍方檢查站",
+                    "terms": "軍方檢查站"
                 },
                 "military/nuclear_explosion_site": {
                     "name": "核武測試場",
@@ -8105,9 +8174,13 @@
                 "natural/shingle": {
                     "name": "礫灘"
                 },
+                "natural/shrub": {
+                    "name": "灌木",
+                    "terms": "灌木"
+                },
                 "natural/spring": {
-                    "name": "溫泉",
-                    "terms": "溫泉"
+                    "name": "泉水",
+                    "terms": "泉水"
                 },
                 "natural/stone": {
                     "name": "孤石"
@@ -8543,6 +8616,9 @@
                 "power": {
                     "name": "電力圖徽"
                 },
+                "power/cable": {
+                    "name": "電纜"
+                },
                 "power/cable/underground": {
                     "name": "地下電纜",
                     "terms": "電纜,地底式電纜"
@@ -8812,8 +8888,8 @@
                     "terms": "廢棄鐵道,廢棄的鐵路"
                 },
                 "railway/funicular": {
-                    "name": "纜車",
-                    "terms": "纜車"
+                    "name": "纜車軌道",
+                    "terms": "纜車軌道"
                 },
                 "railway/halt": {
                     "name": "火車站 (小站/招呼)"
@@ -8823,35 +8899,43 @@
                     "terms": "鐵路平交道,平交道"
                 },
                 "railway/light_rail": {
-                    "name": "輕軌",
-                    "terms": "輕軌鐵路"
+                    "name": "輕軌軌道",
+                    "terms": "輕軌軌道"
                 },
                 "railway/milestone": {
                     "name": "鐵路里程碑",
                     "terms": "鐵路里程碑"
                 },
                 "railway/miniature": {
-                    "name": "微型鐵路",
-                    "terms": "微型鐵路,微型鐵軌"
+                    "name": "微型火車軌道",
+                    "terms": "微型火車軌道"
                 },
                 "railway/monorail": {
-                    "name": "單軌電車",
-                    "terms": "畢軌電車"
+                    "name": "單軌軌道",
+                    "terms": "單軌軌道"
+                },
+                "railway/monorail/hanging": {
+                    "name": "懸掛式單軌列車",
+                    "terms": "懸掛式單軌列車"
                 },
                 "railway/narrow_gauge": {
-                    "name": "窄軌鐵路",
-                    "terms": "窄軌鐵路"
+                    "name": "窄軌軌道",
+                    "terms": "窄軌軌道"
                 },
                 "railway/platform": {
                     "name": "火車月台"
                 },
+                "railway/preserved": {
+                    "name": "觀光鐵路",
+                    "terms": "觀光鐵路"
+                },
                 "railway/rail": {
-                    "name": "鐵軌",
-                    "terms": "路軌"
+                    "name": "火車軌道",
+                    "terms": "火車軌道"
                 },
                 "railway/rail/highspeed": {
-                    "name": "高速鐵路",
-                    "terms": "高速鐵路,高鐵"
+                    "name": "高鐵軌道",
+                    "terms": "高鐵軌道"
                 },
                 "railway/signal": {
                     "name": "鐵道信號",
@@ -8861,8 +8945,8 @@
                     "name": "火車站"
                 },
                 "railway/subway": {
-                    "name": "捷運",
-                    "terms": "地鐵,地下鐵,管子"
+                    "name": "地下鐵軌道",
+                    "terms": "地下鐵軌道"
                 },
                 "railway/subway_entrance": {
                     "name": "捷運入口",
@@ -8877,8 +8961,8 @@
                     "terms": "火車清洗處"
                 },
                 "railway/tram": {
-                    "name": "電車",
-                    "terms": "電車"
+                    "name": "路面電車軌道",
+                    "terms": "路面電車軌道"
                 },
                 "railway/tram_stop": {
                     "name": "街車停靠點"
@@ -9185,9 +9269,6 @@
                     "name": "釣魚用品店",
                     "terms": "釣魚用品店"
                 },
-                "shop/fishmonger": {
-                    "name": "魚販"
-                },
                 "shop/flooring": {
                     "name": "地板商店",
                     "terms": "地板商店"
@@ -9201,8 +9282,8 @@
                     "terms": "表框店, 裱框店"
                 },
                 "shop/frozen_food": {
-                    "name": "冷凍食品",
-                    "terms": "冷凍食品"
+                    "name": "冷凍食品商店",
+                    "terms": "冷凍食品商店"
                 },
                 "shop/fuel": {
                     "name": "燃料店",
@@ -9211,9 +9292,6 @@
                 "shop/funeral_directors": {
                     "name": "生命禮儀公司",
                     "terms": "禮儀公司"
-                },
-                "shop/furnace": {
-                    "name": "火爐店"
                 },
                 "shop/furniture": {
                     "name": "傢具店",
@@ -9590,6 +9668,10 @@
                     "name": "資料中心",
                     "terms": "資料中心"
                 },
+                "telecom/exchange": {
+                    "name": "電信交換",
+                    "terms": "電信交換"
+                },
                 "tourism": {
                     "name": "旅遊圖徽"
                 },
@@ -9943,6 +10025,10 @@
                     "name": "電車路線",
                     "terms": "電車路線"
                 },
+                "type/route/trolleybus": {
+                    "name": "無軌電車路線",
+                    "terms": "無軌電車路線"
+                },
                 "type/route_master": {
                     "name": "路線總纜",
                     "terms": "路線總目"
@@ -10289,6 +10375,13 @@
                 "description": "城市地圖是描述哥特堡的概覽地圖。它包含了關於土地、通訊、水文、建築、地址號碼與街道名稱、行政區劃與其他方向文字等的一般性資訊。",
                 "name": "哥特堡城市地圖"
             },
+            "gothenburg-ortho": {
+                "attribution": {
+                    "text": "© 哥特堡市，CC0"
+                },
+                "description": "哥特堡市的正射影像",
+                "name": "哥特堡正射影像"
+            },
             "gsi.go.jp_airphoto": {
                 "attribution": {
                     "text": "GSI 日本"
@@ -10456,6 +10549,12 @@
                 },
                 "name": "Thunderforest Landscape"
             },
+            "tf-outdoors": {
+                "attribution": {
+                    "text": "地圖 © Thunderforest，資料 © OpenStreetMap 貢獻者們"
+                },
+                "name": "Thunderforest Outdoors"
+            },
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
@@ -10497,6 +10596,12 @@
                 },
                 "description": "Swedish NVDB 有多個選項的路網圖層",
                 "name": "Trafikverket 路網選項"
+            },
+            "wroclaw-orto2018": {
+                "attribution": {
+                    "text": "Urząd Miasta Wrocław"
+                },
+                "name": "Wrocław: Orthophotomap 2018（航照圖）"
             }
         },
         "community": {
@@ -10528,10 +10633,21 @@
                 "description": "達拉斯—沃斯堡的 OpenStreetMap 使用者群組",
                 "extendedDescription": "達拉斯、沃斯堡與其間的所有城市都充滿了極具創造力且技術精湛的人才。這個使用者群組的願景是找出新的方法來使用 OSM 上的驚人資源。"
             },
+            "Galicia-Telegram": {
+                "name": "開放街圖加利西亞 Telegram",
+                "description": "開放街圖加利西亞 Telegram"
+            },
+            "Galicia-Twitter": {
+                "name": "開放街圖加利西亞 Twitter",
+                "description": "在{url}於 Twitter 追隨我們"
+            },
             "GeoPhilly": {
                 "name": "GeoPhilly",
                 "description": "費城地區的地圖愛好者聚會",
                 "extendedDescription": "GeoPhilly 將開發者、地理學家、資料極客、開放原始碼愛好者、公民駭客與地圖愛好者聯合起來，並將我們對地圖的熱愛與他們的故事連結起來。如果你在工作中會用到地圖，或僅僅只是想要了解更多，這就是為你而辦的聚會！我們的活動旨在開放、友好、教育與社交，從歡樂時光到閃電講，甚至是工作坊都有。跟我們一起在費城建立一個多元化且激勵人心的地理空間社群！"
+            },
+            "MapColabora-twitter": {
+                "description": "協作製圖/薩拉戈薩地理信息Twitter帳戶"
             },
             "MapMinnesota": {
                 "name": "MapMinnesota",

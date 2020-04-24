@@ -337,7 +337,6 @@
             "request_review": "Želim da netko pregleda moja uređivanja.",
             "save": "Postavi",
             "cancel": "Otkaži",
-            "changes": "{count} Promjena",
             "download_changes": "Preuzmi osmChange datoteku promjena",
             "warnings": "Upozorenja",
             "modified": "Uređeno",
@@ -616,10 +615,6 @@
             "description": "Opis",
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "koristi se sa {type}"
-        },
-        "zoom": {
-            "in": "Približi",
-            "out": "Udalji"
         },
         "cannot_zoom": "Nije moguće više udaljiti u trenutnom môdu.",
         "full_screen": "Slika preko cijelog zaslona",
@@ -1492,8 +1487,14 @@
                         "reversible": "Izmjenjiv smjer"
                     }
                 },
+                "conveying_escalator": {
+                    "label": "Pokretne stepenice"
+                },
                 "country": {
                     "label": "Država"
+                },
+                "country_flag": {
+                    "label": "Država zastave"
                 },
                 "covered": {
                     "label": "Pokriven"
@@ -1598,7 +1599,12 @@
                 "diameter": {
                     "label": "Promjer"
                 },
+                "direction": {
+                    "label": "Smjer (stupnjeva u smjeru kazaljke na satu)",
+                    "placeholder": "45, 90, 180, 270"
+                },
                 "direction_cardinal": {
+                    "label": "Smjer",
                     "options": {
                         "E": "Istok",
                         "ENE": "Istok-sjeveroistok",
@@ -1661,9 +1667,6 @@
                         "yes": "Da (nedefinirano)"
                     },
                     "placeholder": "Kontaktni vod, elektrificirana šina..."
-                },
-                "elevation": {
-                    "label": "Nadmorska visina"
                 },
                 "email": {
                     "label": "Email",
@@ -1795,8 +1798,10 @@
                 "information": {
                     "label": "Vrsta"
                 },
+                "inscription": {
+                    "label": "Natpis"
+                },
                 "internet_access": {
-                    "label": "Dostupan internet",
                     "options": {
                         "no": "Ne",
                         "terminal": "Terminal",
@@ -2367,10 +2372,6 @@
                     "name": "Sjedežnica",
                     "terms": "sedežnica"
                 },
-                "aerialway/gondola": {
-                    "name": "Kabinska žičara",
-                    "terms": "Gondola"
-                },
                 "aerialway/magic_carpet": {
                     "name": "Skijaški tepih"
                 },
@@ -2553,6 +2554,10 @@
                 "amenity/hunting_stand": {
                     "name": "Lovačka čeka"
                 },
+                "amenity/kindergarten": {
+                    "name": "Zemljište dječjeg vrtića",
+                    "terms": "dječji vrtić,vrtić"
+                },
                 "amenity/library": {
                     "name": "Knjižnica",
                     "terms": "knjižnica,biblioteka,čitaonica,zbirka knjiga"
@@ -2570,6 +2575,9 @@
                 "amenity/parking": {
                     "name": "Parkiralište za automobile",
                     "terms": "parking,kamione"
+                },
+                "amenity/parking_entrance": {
+                    "name": "Ulaz/izlaz iz garaže za automobile"
                 },
                 "amenity/parking_space": {
                     "name": "Parkirališno mjesto"
@@ -2625,9 +2633,6 @@
                 },
                 "amenity/recycling_container": {
                     "name": "Kontejner za reciklažu"
-                },
-                "amenity/register_office": {
-                    "name": "Matični ured"
                 },
                 "amenity/restaurant": {
                     "name": "Restoran",
@@ -2699,9 +2704,6 @@
                 },
                 "amenity/studio": {
                     "name": "Studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Sportski bazen"
                 },
                 "amenity/taxi": {
                     "name": "Taksi stajalište",
@@ -2937,6 +2939,9 @@
                 "building/industrial": {
                     "name": "Industrijska zgrada"
                 },
+                "building/kindergarten": {
+                    "name": "Zgrada vrtića"
+                },
                 "building/mosque": {
                     "name": "Zgrada džamije"
                 },
@@ -3145,6 +3150,10 @@
                 },
                 "emergency/phone": {
                     "name": "Telefon za nuždu"
+                },
+                "entrance": {
+                    "name": "Ulaz / izlaz",
+                    "terms": "vrata"
                 },
                 "ford": {
                     "name": "Prijelaz preko potoka"
@@ -3570,9 +3579,6 @@
                     "terms": "bazen"
                 },
                 "leisure/track/running": {
-                    "name": "Staza za trčanje"
-                },
-                "leisure/track/running_point": {
                     "name": "Staza za trčanje"
                 },
                 "leisure/water_park": {
@@ -4022,44 +4028,17 @@
                     "name": "Željeznička pruga izvan uporabe",
                     "terms": "željeznička pruga izvan uporabe,pruga koja se ne koristi,nekorištena željeznička pruga,nekorištena željeznica,pruga izvan uporabe"
                 },
-                "railway/funicular": {
-                    "name": "Uspinjača"
-                },
                 "railway/halt": {
                     "name": "Željeznička postaja"
                 },
                 "railway/level_crossing": {
                     "name": "Cestovni prijelaz preko pruge"
                 },
-                "railway/light_rail": {
-                    "name": "Laka željeznica"
-                },
-                "railway/miniature": {
-                    "name": "Minijaturna željeznica"
-                },
-                "railway/monorail": {
-                    "name": "Jednotračna željeznička pruga",
-                    "terms": "monorail željeznička pruga,pruga sa jednim kolosjekom"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Uskotračna željeznica"
-                },
                 "railway/platform": {
                     "name": "Željezničko stajalište"
                 },
-                "railway/rail": {
-                    "name": "Željeznička pruga",
-                    "terms": "željeznička pruga,pruga pune širine,željeznica pune veličine"
-                },
-                "railway/rail/highspeed": {
-                    "name": "Brza željeznica"
-                },
                 "railway/station": {
                     "name": "Željeznička stanica"
-                },
-                "railway/subway": {
-                    "name": "Podzemna željeznica",
-                    "terms": "podzemna željeznica,željeznica ispod zemlje,metro,gradska željeznica,gradska podzemna željeznica"
                 },
                 "railway/subway_entrance": {
                     "name": "Ulaz u podzemnu željeznicu",
@@ -4067,10 +4046,6 @@
                 },
                 "railway/train_wash": {
                     "name": "Praonica vagona"
-                },
-                "railway/tram": {
-                    "name": "Tramvaj",
-                    "terms": "tramvaj,tramvajska pruga,električni tramvaj,pruga za tramvaj"
                 },
                 "railway/tram_stop": {
                     "name": "Mjesto stajanja tramvaja"
@@ -4085,6 +4060,9 @@
                 },
                 "seamark": {
                     "name": "Morska oznaka"
+                },
+                "seamark/mooring": {
+                    "name": "Brodski vez"
                 },
                 "shop": {
                     "name": "Prodavaonica",
@@ -4239,9 +4217,6 @@
                 },
                 "shop/fishing": {
                     "name": "Prodavaonica ribolovne opreme"
-                },
-                "shop/fishmonger": {
-                    "name": "Ribarnica"
                 },
                 "shop/florist": {
                     "name": "Cvjećarna",

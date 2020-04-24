@@ -423,6 +423,8 @@
             "best_imagery": "Najbolj znan slikovni vir ozadja za to območje",
             "switch": "Preklopi nazaj na to ozadje.",
             "custom": "Po meri",
+            "overlays": "Prekrivni zemljevidi",
+            "imagery_problem_faq": "Prijavi težavo z ozadjem",
             "reset": "ponastavi",
             "display_options": "Možnosti prikaza",
             "brightness": "Svetlost",
@@ -575,10 +577,6 @@
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "uporabljeno: {type}"
         },
-        "zoom": {
-            "in": "Približaj",
-            "out": "Oddalji"
-        },
         "cannot_zoom": "V trenutnem načinu nadaljnje oddaljevanje pogleda ni mogoče.",
         "full_screen": "Preklopi celozaslonski način",
         "streetside": {
@@ -608,7 +606,8 @@
             "key": "H",
             "help": {
                 "title": "Pomoč",
-                "welcome": "Dobrodošli v urejevalniku iD za [OpenStreetMap](https://www.openstreetmap.org/). S tem urejevalnikom lahko OpenStreetMap posodobite neposredno iz brskalnika."
+                "welcome": "Dobrodošli v urejevalniku iD za [OpenStreetMap](https://www.openstreetmap.org/). S tem urejevalnikom lahko OpenStreetMap posodobite neposredno iz brskalnika.",
+                "open_source_h": "Odprta koda"
             },
             "overview": {
                 "title": "Pregled",
@@ -1444,9 +1443,6 @@
                     },
                     "placeholder": "Elektrificiran tir"
                 },
-                "elevation": {
-                    "label": "Nadmorska višina"
-                },
                 "email": {
                     "label": "Elektronski naslov",
                     "placeholder": "ime.naziv@naziv.domene.si"
@@ -1567,7 +1563,6 @@
                     "label": "Presihajoč"
                 },
                 "internet_access": {
-                    "label": "Dostop do interneta",
                     "options": {
                         "no": "Ne",
                         "terminal": "Računalniški terminal",
@@ -1575,9 +1570,6 @@
                         "wlan": "WiFi – brezžično",
                         "yes": "Da"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Brezplačen dostop do interneta"
                 },
                 "kerb": {
                     "label": "Cestni robnik"
@@ -2216,10 +2208,6 @@
                     "name": "Vlečnica",
                     "terms": "vlečnica, krogci, krožci,sidro,kramp"
                 },
-                "aerialway/gondola": {
-                    "name": "Kabinska žičnica",
-                    "terms": "gondola"
-                },
                 "aerialway/goods": {
                     "name": "Oskrbovalna žičnica",
                     "terms": "oskrbovalka,žičnica,zipline"
@@ -2539,9 +2527,6 @@
                 "amenity/recycling_centre": {
                     "name": "Center za recikliranje"
                 },
-                "amenity/register_office": {
-                    "name": "Prijavi urad"
-                },
                 "amenity/restaurant": {
                     "name": "Restavracija",
                     "terms": "gostilna,gostinski obrat"
@@ -2583,9 +2568,6 @@
                 "amenity/studio": {
                     "name": "Studio",
                     "terms": "snemalni studio,radijski studio,televizijski studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Plavalni bazen"
                 },
                 "amenity/taxi": {
                     "name": "Postajališče za taksi",
@@ -3420,14 +3402,8 @@
                 "landuse/military/naval_base": {
                     "name": "Vojaško pomorsko oporišče"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Vojaške ovire za trening"
-                },
                 "landuse/military/range": {
                     "name": "Vojaško strelišče"
-                },
-                "landuse/military/training_area": {
-                    "name": "Vojaško vadbišče"
                 },
                 "landuse/orchard": {
                     "name": "Sadovnjak",
@@ -3644,9 +3620,6 @@
                 },
                 "man_made/gasometer": {
                     "name": "Plinski rezervoar"
-                },
-                "man_made/groyne": {
-                    "name": "Leseni valolom"
                 },
                 "man_made/lighthouse": {
                     "name": "Svetilnik",
@@ -3965,31 +3938,11 @@
                     "name": "Opuščena železnica",
                     "terms": "zapuščena železnica"
                 },
-                "railway/funicular": {
-                    "name": "Vzpenjača",
-                    "terms": "tirna vzpenjača"
-                },
                 "railway/level_crossing": {
                     "name": "Železniški prehod (cesta)"
                 },
-                "railway/monorail": {
-                    "name": "Enotirna železnica",
-                    "terms": "monorail"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Ozkotirna železnica",
-                    "terms": "železnica z ozkimi tiri"
-                },
-                "railway/rail": {
-                    "name": "Železniški tir",
-                    "terms": "železnica,železniški tir,tirnica"
-                },
                 "railway/station": {
                     "name": "Železniška postaja"
-                },
-                "railway/subway": {
-                    "name": "Podzemna železnica",
-                    "terms": "metro"
                 },
                 "railway/subway_entrance": {
                     "name": "Vhod podzemne železnice",
@@ -3997,10 +3950,6 @@
                 },
                 "railway/switch": {
                     "name": "Kretnica"
-                },
-                "railway/tram": {
-                    "name": "Tramvaj",
-                    "terms": "tramvaj"
                 },
                 "relation": {
                     "name": "Zveza",
@@ -4169,9 +4118,6 @@
                 "shop/fashion": {
                     "name": "Trgovina z modnimi oblačili"
                 },
-                "shop/fishmonger": {
-                    "name": "Ribarnica"
-                },
                 "shop/florist": {
                     "name": "Cvetličarna",
                     "terms": "cvetlice,cvetličarstvo"
@@ -4179,9 +4125,6 @@
                 "shop/funeral_directors": {
                     "name": "Pogrebne storitve",
                     "terms": "pogrebni zavod"
-                },
-                "shop/furnace": {
-                    "name": "Trgovina s pečmi"
                 },
                 "shop/furniture": {
                     "name": "Trgovina s pohištvom",

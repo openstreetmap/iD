@@ -181,7 +181,6 @@
             "title": "OpenStreetMapలో మార్పులను భద్రపరచండి ",
             "upload_explanation": "మీరు ఎక్కించే మార్పులు ఓపెన్‌స్ట్రీట్‌మ్యాప్ డేటాను వాడే పటాలన్నింటిలోనూ కనిపిస్తాయి.",
             "cancel": "రద్దుచేయి",
-            "changes": "{count} మార్పులు",
             "warnings": "హెచ్చరికలు",
             "modified": "మార్చబడింది",
             "deleted": "తొలగించబడింది",
@@ -519,9 +518,6 @@
                 },
                 "amenity/restaurant": {
                     "name": "రెస్టారెంట్"
-                },
-                "amenity/swimming_pool": {
-                    "name": "ఈత కొలను"
                 },
                 "amenity/toilets": {
                     "name": "మరుగుదొడ్లు"

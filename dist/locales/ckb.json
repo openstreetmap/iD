@@ -67,7 +67,6 @@
             "title": "بەرزکردنەوە بۆ OpenStreetMap",
             "request_review": "پێم باشە کەسێک پێداچوونەوە بە دەستکارییکانم بکات.",
             "cancel": "پاشگەزبوونەوە",
-            "changes": "{count} دەستکاری",
             "warnings": "ئاگادارکردنەوەکان",
             "deleted": "سڕایەوە",
             "created": "دروستکرا",
@@ -545,9 +544,6 @@
                         "no": "نەخێر"
                     }
                 },
-                "elevation": {
-                    "label": "بەرزی"
-                },
                 "entrance": {
                     "label": "جۆر"
                 },
@@ -939,9 +935,6 @@
                 },
                 "amenity/studio": {
                     "name": "ستۆدیۆ"
-                },
-                "amenity/swimming_pool": {
-                    "name": "حەزی مەلەوانی"
                 },
                 "amenity/telephone": {
                     "name": "تەلەفۆن"

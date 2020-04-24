@@ -302,7 +302,6 @@
             "request_review": "Saya mahukan seseorang yang boleh memeriksa suntingan saya.",
             "save": "Muat naik",
             "cancel": "Batal",
-            "changes": "{count} Perubahan",
             "download_changes": "Muat turun fail osmChange",
             "errors": "Ralat-ralat",
             "warnings": "Amaran",
@@ -554,10 +553,6 @@
             "description": "Perincian",
             "on_wiki": "{tag} pada wiki.osm.org",
             "used_with": "digunakan dengan {type}"
-        },
-        "zoom": {
-            "in": "Zum dekat",
-            "out": "Zum jauh"
         },
         "cannot_zoom": "Had zum jauh telah dicapai dalam mod yang sedang dipakai.",
         "full_screen": "Togol Skrin Penuh",
@@ -1145,9 +1140,6 @@
                         "yes": "Ya (tidak ditentukan)"
                     }
                 },
-                "elevation": {
-                    "label": "Ketinggian"
-                },
                 "email": {
                     "label": "Emel",
                     "placeholder": "contoh@contoh.com"
@@ -1258,7 +1250,6 @@
                     "label": "Berjeda"
                 },
                 "internet_access": {
-                    "label": "Akses Internet",
                     "options": {
                         "no": "Tidak",
                         "terminal": "Terminal",
@@ -1266,9 +1257,6 @@
                         "wlan": "Wifi",
                         "yes": "Ya"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Bayaran Akses Internet"
                 },
                 "kerb": {
                     "label": "Sekatan"
@@ -1916,9 +1904,6 @@
                 "aerialway/cable_car": {
                     "name": "Kereta Kabel"
                 },
-                "aerialway/gondola": {
-                    "name": "Gondola"
-                },
                 "amenity/cafe": {
                     "name": "Kafe"
                 },
@@ -2001,9 +1986,6 @@
                 "amenity/recycling_centre": {
                     "name": "Pusat Kitar Semula"
                 },
-                "amenity/register_office": {
-                    "name": "Pejabat Pendaftar"
-                },
                 "amenity/restaurant": {
                     "name": "Restoran"
                 },
@@ -2012,9 +1994,6 @@
                 },
                 "amenity/studio": {
                     "name": "Studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Kolam Renang"
                 },
                 "amenity/taxi": {
                     "name": "Tempat Menunggu Teksi"
@@ -2351,35 +2330,14 @@
                 "railway/disused": {
                     "name": "Jalan Kereta Api yang Tidak Diguna"
                 },
-                "railway/funicular": {
-                    "name": "Funikulus"
-                },
                 "railway/level_crossing": {
                     "name": "Lintasan Kereta Api (Jalan)"
-                },
-                "railway/light_rail": {
-                    "name": "Rel Ringan"
-                },
-                "railway/monorail": {
-                    "name": "Monorel"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Rel Landasan Sempit"
-                },
-                "railway/rail": {
-                    "name": "Kereta Api"
                 },
                 "railway/signal": {
                     "name": "Isyarat Kereta Api"
                 },
                 "railway/station": {
                     "name": "Stesen Kereta Api"
-                },
-                "railway/subway": {
-                    "name": "Kereta Api Bawah Tanah"
-                },
-                "railway/tram": {
-                    "name": "Tram"
                 },
                 "shop": {
                     "name": "Kedai"

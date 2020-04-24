@@ -7,7 +7,10 @@
             "undo": "Peru",
             "zoom_to": "lähennä",
             "copy": "kopioi",
-            "favorite": "suosikki"
+            "favorite": "suosikki",
+            "list": "lista",
+            "text": "teksti",
+            "deselect": "poista valinta"
         },
         "toolbar": {
             "inspect": "Muokkaa",
@@ -15,6 +18,13 @@
             "recent": "Viimeisimmät",
             "favorites": "Suosikit",
             "add_feature": "Lisää karttakohde"
+        },
+        "title": {
+            "format": {
+                "context": "{base} – {context}",
+                "changes": "({changes}) {base}",
+                "changes_context": "({changes}) {base} – {context}"
+            }
         },
         "modes": {
             "add_feature": {
@@ -103,11 +113,89 @@
             },
             "circularize": {
                 "title": "Pyöristä",
-                "key": "O"
+                "description": {
+                    "single": "Pyöristä tämä kohde.",
+                    "multiple": "Pyöristä nämä kohteet."
+                },
+                "key": "O",
+                "annotation": {
+                    "single": "Kohde pyöristettiin.",
+                    "multiple": "Kohteet pyöristettiin."
+                },
+                "multiple_blockers": {
+                    "multiple": "Useista syistä johtuen näitä ei voi pyöristää."
+                },
+                "not_closed": {
+                    "single": "Tätä ei voi pyöristää koska sitä ei ole suljettu.",
+                    "multiple": "Näitä ei voi pyöristää koska niitä ei ole suljettu."
+                },
+                "too_large": {
+                    "single": "Tätä kohdetta ei voi pyöristää, sillä se ei ole kokonaan näkyvissä.",
+                    "multiple": "Näitä ei voida pyöristää koska ne eivät ole kokonaan näkyvissä."
+                },
+                "connected_to_hidden": {
+                    "single": "Tätä kohdetta ei voi pyöristää, sillä se on yhdistetty piilotettuun kohteeseen.",
+                    "multiple": "Näitä kohteita ei voi pyöristää, sillä ne on yhdistetty piilotettuihin kohteisiin."
+                },
+                "not_downloaded": {
+                    "single": "Tätä kohdetta ei voi pyöristää, sillä sen kaikkia osia ei ole vielä ladattu.",
+                    "multiple": "Näitä kohteita ei voi pyöristää, sillä niiden kaikkia osia ei ole vielä ladattu."
+                },
+                "already_circular": {
+                    "single": "Tätä kohdetta ei voi enää pyöristää enempää.",
+                    "multiple": "Näitä ei voi pyöristää enää enempää."
+                }
             },
             "orthogonalize": {
                 "title": "Muuta suorakulmaiseksi",
-                "key": "Q"
+                "description": {
+                    "corner": {
+                        "single": "Tämä kulma suorakulmaiseksi.",
+                        "multiple": "Nämä kulmat suorakulmaisiksi."
+                    },
+                    "feature": {
+                        "single": "Tämä karttakohteen kulmat suorakulmaisiksi.",
+                        "multiple": "Näiden karttakohteiden kulmat suorakulmaisiksi."
+                    }
+                },
+                "key": "Q",
+                "annotation": {
+                    "corner": {
+                        "single": "Kulma tehtiin suorakulmaiseksi.",
+                        "multiple": "Useita kulmia tehtiin suorakulmaisiksi."
+                    },
+                    "feature": {
+                        "single": "Karttakohteen kulmat tehtiin suorakulmaisiksi.",
+                        "multiple": "Useiden karttakohteiden kulmat tehtiin suorakulmaisiksi."
+                    }
+                },
+                "multiple_blockers": {
+                    "multiple": "Useista syistä johtuen näitä ei voida tehdä suorakulmaisiksi."
+                },
+                "end_vertex": {
+                    "single": "Tätä kohdetta ei voi tehdä suorakulmaiseksi, sillä se on päätepiste.",
+                    "multiple": "Näitä ei voi tehdä suorakulmaisiksi, sillä ne ovat päätepisteitä."
+                },
+                "square_enough": {
+                    "single": "Tämä kohde on jo niin suorakulmainen, kuin se voi olla.",
+                    "multiple": "Tätä ei voida tehdä suorakulmaiseksi koska on päätepiste."
+                },
+                "not_squarish": {
+                    "single": "Tätä ei voi tehdä suorakulmaiseksi, koska se ei ole neliömäinen.",
+                    "multiple": "Näitä ei voi tehdä suorakulmaiseksi, sillä ne eivät ole neliömäisiä."
+                },
+                "too_large": {
+                    "single": "Tätä kohdetta ei voi muuttaa suorakulmaiseksi, sillä se ei ole kokonaan näkyvissä.",
+                    "multiple": "Näitä ei voida tehdä suorakulmaisiksi koska ne eivät ole kokonaan näkyvissä."
+                },
+                "connected_to_hidden": {
+                    "single": "Tätä kohdetta ei voi tehdä suorakulmaiseksi, sillä se on yhdistetty piilotettuun karttakohteeseen.",
+                    "multiple": "Näitä kohteita ei voi tehdä suorakulmaisiksi, sillä ne on yhdistetty piilotettuihin kohteisiin."
+                },
+                "not_downloaded": {
+                    "single": "Tätä kohdetta ei voi tehdä suorakulmaiseksi, sillä sen kaikkia osia ei ole vielä ladattu.",
+                    "multiple": "Näitä kohteita ei voi tehdä suorakulmaiseksi, sillä niiden kaikkia osia ei ole vielä ladattu."
+                }
             },
             "straighten": {
                 "title": "Suorista",
@@ -230,6 +318,7 @@
                     "single": "Tätä liitosta ei voi purkaa, koska sitä ei ole nykyisin riittävästi näkyvillä."
                 },
                 "not_connected": "Ei riittävästi viivoja/alueita niiden erottamiseksi.",
+                "not_downloaded": "Tätä ei voi irrottaa, sillä sen kaikkia osia ei ole vielä ladattu.",
                 "connected_to_hidden": "Tätä kohdetta ei voi katkaista, sillä se on yhdistetty piilotettuun karttakohteeseen.",
                 "relation": "Tätä ei voi katkaista, sillä se on yhteydessä relaatiojäseniin."
             },
@@ -271,6 +360,10 @@
                 "connected_to_hidden": {
                     "single": "Tätä kohdetta ei voi siirtää, sillä se on yhdistetty piilotettuun karttakohteeseen.",
                     "multiple": "Näitä kohteita ei voi siirtää, koska osa niistä on yhdistetty piilotettuihin ominaisuuksiin"
+                },
+                "not_downloaded": {
+                    "single": "Tätä kohdetta ei voi siirtää, sillä sen kaikkia osia ei ole vielä ladattu.",
+                    "multiple": "Näitä kohteita ei voi siirtää, sillä niiden kaikkia osia ei ole vielä ladattu."
                 }
             },
             "reflect": {
@@ -342,7 +435,12 @@
             },
             "reverse": {
                 "title": "Vaihda suuntaa",
-                "key": "V"
+                "key": "V",
+                "annotation": {
+                    "line": "Viivan suunta vaihdettu.",
+                    "lines": "Vaihdettu usean viivan suunta.",
+                    "features": "Usean kohteen suunta vaihdettu."
+                }
             },
             "split": {
                 "title": "Jaa",
@@ -380,6 +478,21 @@
                 },
                 "annotation": {
                     "single": "Irroitettu piste."
+                },
+                "too_large": {
+                    "area": {
+                        "single": "Pistettä ei voi irrottaa alueesta koska riittävän suuri osa siitä ei ole näkyvissä."
+                    }
+                },
+                "restriction": {
+                    "vertex": {
+                        "single": "Tätä pistettä ei voi irrottaa, koska se vahingoittaisi relaatiota \"{relation}\"."
+                    }
+                },
+                "connected_to_hidden": {
+                    "vertex": {
+                        "single": "Tätä pistettä ei voi irrottaa, koska se on yhdistetty piilotettuun karttakohteeseen."
+                    }
                 }
             }
         },
@@ -433,7 +546,8 @@
             "translate": "Käännä",
             "localized_translation_label": "Monikielinen nimi",
             "localized_translation_language": "Valitse kieli",
-            "localized_translation_name": "Nimi"
+            "localized_translation_name": "Nimi",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Aloita muokkaaminen lähentämällä karttaa",
         "login": "Kirjaudu sisään",
@@ -451,8 +565,12 @@
         },
         "osm_api_status": {
             "message": {
-                "error": "Ei yhteyttä OpenStreetMapin palvelimeen. Muutokset on tallennettu tälle tietokoneelle. Tarkista verkkoyhteytesi."
-            }
+                "error": "Ei yhteyttä OpenStreetMapin palvelimeen. Muutokset on tallennettu tälle tietokoneelle. Tarkista verkkoyhteytesi.",
+                "offline": "OpenStreetMap-sovellusrajapinta on pois käytöstä. Muutokset on tallennettu tälle tietokoneelle. Yritä myödhemmin uudelleen.",
+                "readonly": "OpenStreetMap-sovellusrajapinta on kirjoitussuojatussa tilassa. Voit jatkaa muokkaamista, mutta sinun on odotettava voidaksesi tallentaa muutoksesi.",
+                "rateLimit": "OpenStreetMap-sovellusrajapinta rajoitaa tunnistautumattomia yhteyksiä. Poista ongelma kirjautumalla sisään."
+            },
+            "retry": "Yritä uudelleen"
         },
         "commit": {
             "title": "Tallenna OpenStreetMapiin",
@@ -461,7 +579,7 @@
             "request_review": "Haluan jonkun tarkistavan muokkaukseni",
             "save": "Tallenna",
             "cancel": "Takaisin muokkaamaan",
-            "changes": "{count} muutosta",
+            "changes": "Muutokset ({count})",
             "download_changes": "Lataa osmChange-tiedosto",
             "errors": "Virheet",
             "warnings": "Varoitukset",
@@ -548,20 +666,23 @@
         },
         "geolocate": {
             "title": "Näytä oma sijaintini",
-            "locating": "Paikannetaan, pieni hetki..."
+            "locating": "Paikannetaan, pieni hetki...",
+            "location_unavailable": "Sijaintitietosi ei ole saatavilla."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Lähennä tähän",
-                "tooltip_feature": "Keskitä ja lähennä kartta tähän kohteeseen.",
-                "tooltip_note": "Keskitä ja lähennä kartta tähän huomautukseen.",
-                "tooltip_data": "Keskitä ja lähennä kartta tähän aineistoon.",
-                "tooltip_issue": "Keskitä ja lähennä kartta thän karttailmoitukseen."
+                "title": "Sovita valintaan"
             },
             "show_more": "Näytä lisää",
             "view_on_osm": "Näytä openstreetmap.org-sivustolla",
+            "view_on_osmose": "Näytä osmose.openstreetmap.fr-sivustolla",
             "view_on_keepRight": "Tarkastele KeepRight.at-sivustolla",
+            "feature_type": "Kohdetyyppi",
+            "fields": "Kentät",
+            "tags_count": "Ominaisuustiedot ({count})",
+            "relations_count": "Relaatiot ({count})",
+            "features_count": "Kohteet ({count})",
             "add_to_relation": "Lisää relaatioon",
             "new_relation": "Uusi relaatio...",
             "choose_relation": "Valitse isäntärelaatio",
@@ -572,16 +693,20 @@
             "edit_reference": "muokkaa/käännä",
             "wiki_reference": "Näytä ohjeistus",
             "wiki_en_reference": "Näytä englanninkielinen ohjeistus",
+            "multiple_values": "Useita arvoja",
+            "multiple_types": "Useita tyyppejä",
             "hidden_preset": {
                 "manual": "Valitse {features} näkyviin Kartta-aineisto-näkymästä.",
                 "zoom": "Näytä {features} lähentämällä karttaa."
             },
+            "back_tooltip": "Muuta kohdetyyppiä",
             "remove": "Poista",
             "search": "Hae",
             "unknown": "Ei tiedossa",
             "incomplete": "<ei ladattu>",
             "feature_list": "Etsi karttakohteita",
             "edit": "Muokkaa karttakohdetta",
+            "edit_features": "Muokkaa kohteita",
             "check": {
                 "yes": "Kyllä",
                 "no": "Ei",
@@ -629,6 +754,7 @@
                 "description": "Näytä lisätietonäkymä",
                 "tooltip": "Näytä lisätietoja taustakuva-aineistosta"
             },
+            "fix_misalignment": "Ilmakuvavirhe",
             "offset": "Korjaa ilmakuvan asemointivirhettä vetämällä hiiren osoitinta harmaan laatikon sisällä tai syöttämällä korjausluvut metreinä"
         },
         "map_data": {
@@ -650,6 +776,9 @@
                 },
                 "improveOSM": {
                     "title": "ImproveOSM-ilmoitukset"
+                },
+                "osmose": {
+                    "title": "Osmose-ongelmat"
                 },
                 "custom": {
                     "tooltip": "Vedä ja pudota tiedosto tähän tai selaa tiedostoja napsauttamalla oikealla olevaa painiketta ",
@@ -697,7 +826,7 @@
                 "tooltip": "Huoltotiet, pysäköintialueväylät, syrjätiet..."
             },
             "paths": {
-                "description": "Kevyenliikenteenväylät",
+                "description": "Kävely- ja pyörätiet",
                 "tooltip": "Jalkakäytävät, kävely- ja pyörätiet jne."
             },
             "buildings": {
@@ -713,7 +842,7 @@
                 "tooltip": "Huoneet, käytävät, portaikot..."
             },
             "landuse": {
-                "description": "Maankäyttökohteet",
+                "description": "Maankäyttö",
                 "tooltip": "Metsät, maatilat, puistot, asutus, kaupalliset alueet jne."
             },
             "boundaries": {
@@ -768,7 +897,6 @@
             "custom_background": {
                 "tooltip": "Muokkaa mukautettua taustaa",
                 "header": "Mukautetun taustan asetukset",
-                "instructions": "Syötä taustakartan osoite. Käytettävissä olevat muuttujat:\n   {zoom} tai {z}, {x}, {y} Z/X/Y-koordinaatistoa varten\n   {-y} tai {ty} TMS-tyylin käännettyjä y-koordinaatteja varten\n   {u} neloisrakennetta varten\n   {switch:a,b,c} DNS-palvelimen multipleksointia varten\n\nEsimerkki:\n{example}",
                 "template": {
                     "placeholder": "Syötä taustakartan osoite"
                 }
@@ -866,6 +994,8 @@
             "welcome": "Tervetuloa iD- OpenStreetMapin kartanmuokkausohjelmaan",
             "text": "iD on tehokas ja helppokäyttöinen kartanmuokkausohjelma maailman tasokkaimman kartan luomiseen. Tämä on versio {version}. Lisätietoja ohjelmasta on osoitteessa {website}, ja ohjelmistovirheistä voi ilmoittaa osoitteessa {github}.",
             "privacy_update": "Tietosuojakäytäntömme on päivitetty.",
+            "privacy_policy": "iD:n tietosuojakäytäntö",
+            "privacy": "{updateMessage} Jatkamalla ohjelmiston käyttöä hyväksyt {privacyLink}.",
             "walkthrough": "Aloitusopas",
             "start": "Muokkaa heti"
         },
@@ -889,6 +1019,12 @@
         "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
         "full_screen": "Koko näytön tila",
         "QA": {
+            "osmose": {
+                "title": "Osmose-ongelma",
+                "detail_title": "Yksityiskohdat",
+                "elems_title": "Kohteet",
+                "trap_title": "Yleiset virheet"
+            },
             "improveOSM": {
                 "title": "ImproveOSM-tunnistus",
                 "geometry_types": {
@@ -920,11 +1056,15 @@
                 }
             },
             "keepRight": {
+                "title": "KeepRight",
                 "detail_description": "Kuvaus",
                 "comment": "Kommentti",
                 "comment_placeholder": "Kirjoita julkinen kommentti",
+                "close": "Ratkaise (ongelma korjattu)",
+                "ignore": "Ohita (ei virhe)",
                 "save_comment": "Tallenna kommentti",
                 "close_comment": "Sulje ja kommentoi",
+                "ignore_comment": "Ohita ja kommentoi",
                 "error_parts": {
                     "this_node": "tämä piste",
                     "this_way": "tämä tie",
@@ -1038,8 +1178,14 @@
                     "180": {
                         "title": "Relaatiolla ei ole tyyppiä"
                     },
+                    "190": {
+                        "title": "Risteys ilman yhteistä viivapistettä"
+                    },
                     "210": {
                         "title": "Tie risteää itsensä kanssa"
+                    },
+                    "221": {
+                        "description": "{var1} on merkitty epäilyttävällä ominaisuustiedolla \"{var2}\""
                     },
                     "230": {
                         "title": "Korkeustasoristiriita",
@@ -1142,7 +1288,30 @@
         "mapillary_images": {
             "tooltip": "Katunäkymäkuvat (Mapillary)"
         },
+        "mapillary_map_features": {
+            "object": {
+                "bench": "penkki",
+                "bike_rack": "pyöräteline",
+                "billboard": "tienvarsimainos",
+                "cctv_camera": "valvontakamera",
+                "fire_hydrant": "paloposti",
+                "mailbox": "postilaatikko",
+                "manhole": "katukaivo",
+                "phone_booth": "puhelinkoppi",
+                "sign": {
+                    "advertisement": "mainos"
+                },
+                "street_light": "katuvalaisin",
+                "traffic_light": {
+                    "cyclists": "pyöräilijäopastin",
+                    "other": "liikennevalot",
+                    "pedestrians": "liikennevalot jalankulkijoille"
+                },
+                "trash_can": "roskakori"
+            }
+        },
         "mapillary": {
+            "title": "Mapillary",
             "signs": {
                 "tooltip": "Liikennemerkit Mapillarystä"
             },
@@ -1152,6 +1321,7 @@
             "tooltip": "OpenStreetCam-katutasokuvat"
         },
         "openstreetcam": {
+            "title": "OpenStreetCam",
             "view_on_openstreetcam": "Näytä tämä kuva OpenStreetCam-palvelussa"
         },
         "note": {
@@ -1193,7 +1363,7 @@
                 "before_start": "Tutustu huolellisesti OpenStreetMapiin ja tähän kartanmuokkausohjelmaan ennen muokkaamisen aloittamista. Aloitusoppaan avulla voit harjoitella muokkaamista vuorovaikutteisesti. Aloita harjoittelu napsauttamalla Aloitusopas - se vie vain 15 minuuttia.",
                 "open_source_h": "Avoin lähdekoodi",
                 "open_source": "Tämä avoimen lähdekoodin iD-ohjelman versio {version} perustuu vapaaehtoisten käyttäjien työhön. Lähdekoodi on saatavilla [GitHub-palvelusta](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Voit osallistua projektiin auttamalla ohjelman [kääntämisessä](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) tai [ilmoittamalla ohjelmistovirheistä](https://github.com/openstreetmap/iD/issues)."
+                "open_source_help": "Voit osallistua iD-projektiin auttamalla [kääntämisessä](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) tai [ilmoittamalla ohjelmistovirheistä](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Perusteet",
@@ -1201,12 +1371,13 @@
                 "navigation_drag": "Liiku kartalla pitämällä pohjassa {leftclick} hiiren vasenta painiketta ja liikuttelemalla hiirtä. Voit myös käyttää näppäimistön nuolinäppäimiä `↓`, `↑`, `←` ja `→`.",
                 "navigation_zoom": "Loitonna ja lähennä hiiren rullalla, kosketuslevyllä tai napsauttamalla {plus} ja {minus} -painikkeita karttaikkunan oikeassa laidassa. Voit myös käyttää näppäimistön näppäimiä `+` ja `-`.",
                 "features_h": "Karttaominaisuudet",
-                "features": "Kartalla näkyviä teitä, rakennuksia ja muita paikkoja kutsutaan *karttakohteiksi* tai lyhyemmin *kohteiksi*. Kaikki maailmassa olemassa olevat kohteet voidaan lisätä OpenStreetMapiin. Karttakohteet jaetaan niiden muodon mukaan *pisteisiin*, *viivoihin* ja *alueisiin*."
+                "features": "Kartalla näkyviä teitä, rakennuksia ja muita paikkoja kutsutaan *karttakohteiksi* tai lyhyemmin *kohteiksi*. Kaikki maailmassa olemassa olevat kohteet voidaan lisätä OpenStreetMapiin. Karttakohteet jaetaan niiden muodon mukaan *pisteisiin*, *viivoihin* ja *alueisiin*.",
+                "nodes_ways": "Pisteet jaetaan vielä *viivapisteiksi* ja *paikkapisteiksi* riippuen siitä, onko se viivan osana vai itsenäinen paikkaa kuvaava piste."
             },
             "editing": {
                 "title": "Muokkaaminen ja tallentaminen",
                 "select_h": "Yhden kohteen valitseminen",
-                "select_left_click": "Valitse kohde napsauttamalla sitä hiiren {leftclick} vasemmalla painikkeella. Kohde korostetaan sykkivällä hehkulla, ja vasempaan reunaan ilmestyy lisätietoja kohteesta, kuten nimi ja osoite.",
+                "select_left_click": "Valitse kohde napsauttamalla sitä hiiren {leftclick} vasemmalla painikkeella. Kohde korostuu sykkivällä hehkulla, ja näkymän vasempaan laitaan ilmestyy lisätietoja kohteesta, kuten nimi ja osoite.",
                 "select_right_click": "Avaa toimintovalikko napsauttamalla kohdetta hiiren {rightclick} oikealla painikkeella. Valikon kautta voi esimerkiksi kääntää, siirtää ja poistaa kohteen.",
                 "multiselect_h": "Usean kohteen valitseminen",
                 "multiselect_shift_click": "Valitse useita karttakohteita painamalla `{shift}`+{leftclick} hiiren vasenta painiketta. Useiden kohteiden poistaminen tai siirtäminen helpottuu.",
@@ -1229,11 +1400,13 @@
                 "definitions": "Yläosassa näkyy karttakohteen tyyppi. Keskiosa sisältää *kenttiä*, jotka kuvaavat kohteen ominaisuuksia, kuten nimen ja osoitteen. ",
                 "type_h": "Kohdetyyppi",
                 "type": "Vaihda karttakohteen tyyppiä napsauttamalla kohdemuokkaimen yläosasta nykyistä tyypiä. Erilaisia kohdetyyppejä on tuhansia, joten tutustu huolella vaihtoehtoihin ja valitse kaikista kuvaavin kohdetyyppi.",
-                "type_picker": "Kohdemuokkain näyttää kaikkein tavallisimmat kohdetyypit kuten puistot, sairaalat, ravintolat, tiet ja rakennukset. Voit hakea mitä tyyppiä tahansa kirjoittamalla hakulaatikkoon, mitä olet etsimässä. Voit myös klikata {inspect} **Tietoa** -ikonia kohteen tyypin vieressä saadaksesi kohdetyypistä lisätietoa.",
+                "type_picker": "Kohdemuokkain näyttää kaikkein tavallisimmat kohdetyypit kuten puistot, sairaalat, ravintolat, tiet ja rakennukset. Voit hakea mitä tyyppiä tahansa kirjoittamalla hakulaatikkoon, mitä olet etsimässä. Saat lisätietoja kohdetyypistä napsauttamalla {inspect} **Tietoa** kohdetyypin oikeasta reunasta.",
                 "fields_h": "Kentät",
+                "fields_all_fields": "Kentät-osio sisältää kaikki muokattavissa olevat karttakohteen ominaisuudet. Minkään kentän täyttäminen ei ole pakollista.",
                 "fields_example": "Kohdemuokkain näyttää kohdetyypin mukaan erilaisia kenttiä. Esimerkiksi tielle voi muokata nopeusrajoitusta ja päällystemateriaalia, kun taas ravintolan kohdalla näkyy kentät aukioloajoille ja ruokavalikoimalle.",
                 "fields_add_field": "Lisää uusia kenttiä napsauttamalla Lisää kenttä -pudotusvalikkoa: saatavilla on esimerkiksi kuvaus, Wikipedia-artikkelin linkki ja esteettömyyskuvaus.",
                 "tags_h": "Ominaisuustiedot",
+                "tags_all_tags": "Kenttien alapuolella olevassa Ominaisuustiedot-osiossa voi muokata kaikkia OpenStreetMap-palvelussa käytettäviä *ominaisuustietoja*. Jokainen ominaisuustieto koostuu kahdesta osasta: *avaimesta* ja *arvosta*. Avain näytetään Ominaisuustiedot-osion vasemmassa sarakkeessa ja arvo oikeassa sarakkeessa.",
                 "tags_resources": "Karttakohteiden muokkaaminen edellyttää perustason osaamista OpenStreetMapin ominaisuuksista. Lisätietoa erilaisista ominaisuuksista ja karttakohteista on saatavilla esimerkiksi [OpenStreetMapin Wikistä](https://wiki.openstreetmap.org/wiki/Fi:Main_Page) ja [Taginfo-sivustolla](https://taginfo.openstreetmap.org/)."
             },
             "points": {
@@ -1329,7 +1502,8 @@
                 "choosing": "Tutustu saatavilla oleviin palveluihin napsauttamalla {layers} **Taustan asetukset** oikeasta laidasta.",
                 "sources": "Oletuksena taustakuvana on [Bing-karttojen](https://www.bing.com/maps/) satelliittikuva-aineisto. Sijainnista riippuen saatavilla saattaa olla myös muuta, mahdollisesti tuoreempaa tai korkealaatuisempaa aineistoa, joten eri vaihtoehtojen kokeileminen kannattaa.",
                 "offsets_h": "Ilmakuvavirheen korjaaminen",
-                "offset": "Joskus ilmakuva ei osu tarkalleen kerättyyn kartta-aineistoon. Jos virhe on selvästi järjestelmällinen, voi vika olla myös ilmakuva- eikä kerätyssä kartta-aineistossa. Älä lähde siirtämään kaikkia karttakohteita, vaan kokeile säätää ilmakuvan asemointia kartta-aineiston mukaiseksi Korjaa ilmakuvavirhe -toiminnolla, joka löytyy alimmaisena Taustan asetukset -näkymästä."
+                "offset": "Joskus ilmakuva ei osu tarkalleen kerättyyn kartta-aineistoon. Jos virhe on selvästi järjestelmällinen, voi vika olla myös ilmakuva- eikä kerätyssä kartta-aineistossa. Älä lähde siirtämään kaikkia karttakohteita, vaan kokeile säätää ilmakuvan asemointia kartta-aineiston mukaiseksi Korjaa ilmakuvavirhe -toiminnolla, joka löytyy alimmaisena Taustan asetukset -näkymästä.",
+                "offset_change": "Liikuttele ilmakuvaa napsauttelemalla pieniä kolmioita tai vetämällä {leftclick} hiiren vasemmalla painikkeella harmaata suorakulmiota. Asemoi ilmakuva ja kartta-aineisto ilmakuvavirheen korjaamiseksi."
             },
             "streetlevel": {
                 "title": "Katunäkymäkuvat",
@@ -1341,7 +1515,7 @@
             },
             "gps": {
                 "title": "GPS-jäljet",
-                "intro": "Käyttäjien keräämät GPS-jäljet ovat arvokasta lähdemateriaalia OSM-karttaprojektille. Tämä ohjelma tukee *.gpx-*, *.geojson-* ja *.kml*-tiedostomuotoja. Voit kerätä GPS-jälkiä älypuhelimella tai -kellolla sekä muilla GPS- tai Glonass-laitteilla.",
+                "intro": "Käyttäjien keräämät GPS-jäljet ovat arvokasta lähdemateriaalia OSM-karttaprojektille. Ohjelma tukee *GPX-*, *GEOJSON-* ja *KML*-tiedostomuotoja. Voit kerätä GPS-jälkiä älypuhelimella tai -kellolla sekä muilla GPS-laitteilla.",
                 "survey": "Tutustu [käyttäjiemme kokeilemiin tapoihin](https://wiki.openstreetmap.org/wiki/Fi:Karttatietojen_ker%C3%A4%C3%A4minen) kartta-aineiston keräämiseen muun muassa älypuhelimella, GPS-laitteella ja paperilla.",
                 "using_h": "GPS-jälkien käyttö",
                 "using": "Vedä ja pudota GPS-jälkitiedosto kartanmuokkausnäkymään, jolloin GPS-jäljet ilmestyvät kartalle violetteina viivoina. Voit piilottaa ja palauttaa jäljet takaisin näkyviin oikean laidan {data} **Kartta-aineisto** -näkymästä.",
@@ -1352,6 +1526,7 @@
                 "title": "Laaduntarkkailu",
                 "intro": "*Laaduntarkkailutoiminto* pyrkii automaattisesti tunnistamaan muokkauksista yleisimpiä virheitä, kuten virheellisiä ominaisuustietoja ja risteysmerkintöjä. Kartoittajan on kuitenkin itse korjattava havaitut puutteet. Tarkastele muokkausvirhelistaa napsauttamalla {data} **Kartta-aineisto**.",
                 "tools_h": "Työkalut",
+                "tools": "iD tukee toistaiseksi ohjelmistoja [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) ja [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Muokkausvirheiden käsittely",
                 "issues": "Muokkausvirheiden käsittely muistuttaa karttailmoitusten käsittelyä. Napsauta sivupalkin painiketta. Käytettävissä olevat toiminnot vaihtelevat, mutta yleensä virheitä voi kommentoida ja merkitä ratkaistuksi."
             },
@@ -1408,6 +1583,7 @@
                 "title": "Automaattisesti havaittavat virheet"
             },
             "user_resolved_issues": "Ratkaisemasi virheet",
+            "warnings_and_errors": "Varoitukset ja virheet",
             "no_issues": {
                 "message": {
                     "everything": "Kaikki kunnossa",
@@ -1421,8 +1597,8 @@
                     "elsewhere": "Virheet muualla: {count}",
                     "everything_else": "Kaikki muut virheet: {count}",
                     "everything_else_elsewhere": "Kaikki muut virheet kaikkialla: {count}",
-                    "disabled_rules": "Virheet, jotka on piilotettu automaattisesti havaittavista: {count}",
-                    "disabled_rules_elsewhere": "Virheet kaikkialta, jotka on piilotettu automaattisesti havaittavista: {count}",
+                    "disabled_rules": "Piilotetut virheet: {count}",
+                    "disabled_rules_elsewhere": "Piilotetut virheet kaikkialta: {count}",
                     "ignored_issues": "Ohitetut virheet: {count}",
                     "ignored_issues_elsewhere": "Ohitetut virheet kaikkialta: {count}"
                 }
@@ -1442,23 +1618,79 @@
             "suggested": "Korjausehdotus:",
             "enable_all": "Valitse kaikki",
             "disable_all": "Poista kaikki",
+            "fix_one": {
+                "title": "korjaa"
+            },
             "fix_all": {
+                "title": "Korjaa kaikki",
                 "annotation": "Korjattiin useita muokkausvirheitä."
             },
             "almost_junction": {
                 "title": "Puuttuva risteysmerkintä",
                 "message": "{feature} on hyvin lähellä mutta ei yhdistetty kohteeseen {feature2}",
-                "tip": "Korosta toisiin kohteisiin linkitettävät kohteet"
+                "tip": "Korosta toisiin kohteisiin linkitettävät kohteet",
+                "self": {
+                    "message": "{feature} on hyvin lähellä itseään muttei yhdistetty."
+                },
+                "highway-highway": {
+                    "reference": "Risteävillä teillä tulisi olla yhteinen viivapiste."
+                }
             },
             "close_nodes": {
                 "title": "Liian lähekkäiset pisteet",
                 "tip": "Korosta liian tiheässä olevat viivapisteet",
-                "reference": "Liian lähekkäiset pisteet tulisi yhdistää tai siirtää loitommaksi toisistaan."
+                "message": "Viivan {way} kaksi pistettä ovat todella lähellä toisiaan.",
+                "reference": "Liian lähekkäiset pisteet tulisi yhdistää tai siirtää loitommaksi toisistaan.",
+                "detached": {
+                    "message": "{feature} on liian lähellä kohdetta {feature2}"
+                }
             },
             "crossing_ways": {
                 "title": "Ylimääräinen risteysmerkintä",
                 "message": "{feature} risteää kohteen {feature2} kanssa",
                 "tip": "Korosta virheellisesti risteävät kohteet",
+                "building-building": {
+                    "reference": "Rakennusten ei tulisi leikata toisiaan, elleivät ne ole eri korkeuksilla."
+                },
+                "building-highway": {
+                    "reference": "Rakennuksen kanssa risteävä tie tulisi merkitä sillaksi, tunneliksi tai eri korkeudelle."
+                },
+                "building-railway": {
+                    "reference": "Rakennuksen kanssa risteävä rautatie tulisi merkata sillaksi, tunneliksi tai eri korkeudelle."
+                },
+                "building-waterway": {
+                    "reference": "Rakennuksen kanssa risteävä vesiväylä tulisi merkitä tunneliksi tai eri korkeuksille."
+                },
+                "highway-highway": {
+                    "reference": "Risteävät tiet tulisi merkitä sillalla, tunnelilla tai risteyksenä."
+                },
+                "highway-railway": {
+                    "reference": "Tien kanssa risteävä rautatie tulisi merkitä sillalla, tunnelilla tai tasoristeyksellä."
+                },
+                "highway-waterway": {
+                    "reference": "Tien kanssa risteävä vesiväylä tulisi merkitä sillalla, tunnelilla tai kahluupaikkana."
+                },
+                "railway-railway": {
+                    "reference": "Risteävät rautatiet tulisi yhdistää viivapisteellä tai merkitä sillalla tai tunnelilla."
+                },
+                "railway-waterway": {
+                    "reference": "Vesiväylän kanssa risteävä rautatie tulisi merkitä sillalla tai tunnelilla."
+                },
+                "waterway-waterway": {
+                    "reference": "Risteävät vesiväylät tulisi merkitä yhteisellä viivapisteellä tai tunnelina."
+                },
+                "tunnel-tunnel": {
+                    "reference": "Risteävät tunnelit tulisi merkitä eri korkeustasoihin."
+                },
+                "tunnel-tunnel_connectable": {
+                    "reference": "Risteävät tunnelit tulisi merkitä yhteisellä viivapisteellä tai eri korkeustasoihin."
+                },
+                "bridge-bridge": {
+                    "reference": "Risteävät sillat tulisi merkitä eri korkeustasoihin."
+                },
+                "bridge-bridge_connectable": {
+                    "reference": "Risteävät sillat tulisi merkitä yhteisellä viivapisteellä tai eri korkeustasoihin."
+                },
                 "indoor-indoor": {
                     "reference": "Risteävät sisäkohteet tulisi merkitä eri korkeustasoihin."
                 },
@@ -1469,6 +1701,12 @@
             "disconnected_way": {
                 "title": "Yksinäiset tiet",
                 "tip": "Korosta reititysongelmia aiheuttavat muuhun väyläverkostoon kytkemättömät viivat",
+                "routable": {
+                    "message": {
+                        "multiple": "{count} reititettävää kohdetta on yhteydessä vain toisiinsa."
+                    },
+                    "reference": "Kaikki kadut, polut ja lauttareitit tulisi yhdistää yhteen reittiverkostoon."
+                },
                 "highway": {
                     "message": "{highway} ei ole yhdistetty tieverkostoon"
                 }
@@ -1479,6 +1717,7 @@
             },
             "generic_name": {
                 "message": "{feature} on merkitty epäilyttävällä nimellä {name}",
+                "message_language": "{feature} on merkitty epäilyttävällä nimellä \"{name}\" kielellä {language}",
                 "reference": "Nimien tulisi olla kohteiden voimassaolevia, todellisuudessa käytettäviä nimiä."
             },
             "help_request": {
@@ -1497,7 +1736,12 @@
             },
             "invalid_format": {
                 "title": "Virheelliset ominaisuustiedot",
-                "tip": "Korosta virheellisesti merkityt ominaisuustiedot"
+                "tip": "Korosta virheellisesti merkityt ominaisuustiedot",
+                "email": {
+                    "message": "{feature} on merkitty virheellisellä sähköpostiosoitteella",
+                    "message_multi": "{feature} on merkitty usealla virheellisellä sähköpostiosoitteella",
+                    "reference": "Sähköpostiosoitteen tulee olla muotoa \"erkki@esimerkki.fi\"."
+                }
             },
             "mismatched_geometry": {
                 "title": "Epätyypillinen muoto",
@@ -1537,7 +1781,14 @@
                 "incomplete": {
                     "message": "{feature} tarvitsee lisää ominaisuustietoja",
                     "reference": "Joidenkin karttakohteiden ominaisuustietomerkinnät eivät kuvaa kohdetta tarpeeksi."
+                },
+                "noncanonical_brand": {
+                    "reference": "Kaikki saman brändin kohteet pitäisi merkata samalla tavalla."
                 }
+            },
+            "point_as_vertex": {
+                "message": "{feature} tulisi olla erillinen piste ominaisuustietojen perusteella",
+                "reference": "Tiettyjen kohteiden ei pitäisi olla merkattuna viivojen tai alueiden osiksi."
             },
             "private_data": {
                 "title": "Tietosuojattu sisältö",
@@ -1548,6 +1799,7 @@
                 }
             },
             "suspicious_name": {
+                "title": "Epäilyttävät nimet",
                 "tip": "Korosta kohteet, joiden nimi on liian yleinen tai epäilyttävä"
             },
             "tag_suggests_area": {
@@ -1583,6 +1835,9 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "Kohteella {feature} on sulkematon osa"
+            },
             "unsquare_way": {
                 "title": "Liian vinot kulmat ({val}° asti)",
                 "message": "Kohteen {feature} kulmat ovat vinot",
@@ -1592,6 +1847,14 @@
                 }
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Lisää silta",
+                    "annotation": "Silta lisättiin."
+                },
+                "add_a_tunnel": {
+                    "title": "Lisää tunneli",
+                    "annotation": "Tunneli lisättiin."
+                },
                 "connect_almost_junction": {
                     "annotation": "Vierekkäiset kohteet yhdistetty."
                 },
@@ -1616,6 +1879,9 @@
                 },
                 "delete_feature": {
                     "title": "Poista karttakohde"
+                },
+                "extract_point": {
+                    "title": "Irroita tämä piste"
                 },
                 "ignore_issue": {
                     "title": "Älä huomioi"
@@ -1651,6 +1917,9 @@
                 },
                 "remove_tags": {
                     "title": "Poista ominaisuustietoja"
+                },
+                "remove_the_name": {
+                    "title": "Poista nimi"
                 },
                 "reposition_features": {
                     "title": "Siirrä kohde toiseen sijaintiin"
@@ -1693,6 +1962,9 @@
                 },
                 "use_different_layers": {
                     "title": "Käytä eri korkeustasoja"
+                },
+                "use_different_layers_or_levels": {
+                    "title": "Käytä eri korkeustasoja tai kerroksia"
                 },
                 "use_different_levels": {
                     "title": "Käytä eri kerroksia"
@@ -1984,7 +2256,8 @@
                     "pan": "Vieritä karttaa",
                     "pan_more": "Vieritä karttaa näytön verran",
                     "zoom": "Lähennä/loitonna",
-                    "zoom_more": "Lähennä/loitonna enemmän"
+                    "zoom_more": "Lähennä/loitonna enemmän",
+                    "geolocate": "Lähennä sijaintiini"
                 },
                 "help": {
                     "title": "Ohjeet",
@@ -2042,9 +2315,13 @@
                     "continue_line": "Jatka viivaa valitusta pisteestä",
                     "merge": "Yhdistä useita valittuja kohteita",
                     "disconnect": "Katkaise kohteiden yhdistäminen valitussa pisteessä",
+                    "extract": "Irrota piste kohteesta",
                     "split": "Jaa viiva kahteen osaan valitussa pisteessä",
+                    "reverse": "Vaihda valittujen kohteiden suuntaa.",
                     "move": "Siirrä valittuja kohteita",
                     "rotate": "Kierrä valittuja kohteita",
+                    "orthogonalize": "Muuta viivan tai alueen kulmat suorakulmaisiksi",
+                    "straighten": "Suorista viiva tai pisteet.",
                     "circularize": "Pyöristä alue",
                     "reflect_long": "Peilaa kohde sen pitkän keskiviivan suuntaisesti",
                     "reflect_short": "Peilaa kohde sen lyhyen keskiviivan suuntaisesti",
@@ -2354,8 +2631,11 @@
                     "options": {
                         "foot_bath": "Jalkakylpy",
                         "hot_spring": "Kuuma lähde",
-                        "onsen": "Japanilainen Onsen"
+                        "onsen": "Japanilainen kylpylä"
                     }
+                },
+                "beauty": {
+                    "label": "Palvelut"
                 },
                 "bench": {
                     "label": "Penkki"
@@ -2461,6 +2741,13 @@
                     "label": "Paikkamäärä",
                     "placeholder": "5, 10, 20, 100..."
                 },
+                "capacity/disabled_parking": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "capacity_parking": {
+                    "label": "Paikkoja yhteensä",
+                    "placeholder": "10, 20, 30..."
+                },
                 "cash_in": {
                     "label": "Käteisen talletus"
                 },
@@ -2471,15 +2758,20 @@
                     "label": "Vaipanvaihtopöytä"
                 },
                 "charge_fee": {
-                    "label": "Maksun määrä",
+                    "label": "Hinta",
                     "placeholder": "1 EUR, 5 USD, 10 JPY..."
                 },
                 "charge_toll": {
-                    "label": "Tullimaksun määrä",
+                    "label": "Hinta",
                     "placeholder": "1 EUR, 5 USD, 10 JPY..."
                 },
                 "check_date": {
-                    "label": "Tarkistettu viimeksi"
+                    "label": "Tarkistettu viimeksi",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "circumference": {
+                    "label": "Ympärysmitta",
+                    "placeholder": "1 m, 20 cm, 30 in..."
                 },
                 "clothes": {
                     "label": "Vaatteet"
@@ -2630,6 +2922,9 @@
                         "yes": "Kyllä"
                     }
                 },
+                "depth": {
+                    "label": "Syvyys (metreinä)"
+                },
                 "description": {
                     "label": "Kuvaus"
                 },
@@ -2714,6 +3009,9 @@
                 "disused/railway": {
                     "label": "Tyyppi"
                 },
+                "disused/shop": {
+                    "label": "Tyyppi"
+                },
                 "dock": {
                     "label": "Tyyppi"
                 },
@@ -2744,6 +3042,9 @@
                     "label": "Kesto",
                     "placeholder": "00:00"
                 },
+                "ele": {
+                    "label": "Korkeus merenpinnasta"
+                },
                 "electrified": {
                     "label": "Sähköistys",
                     "options": {
@@ -2753,9 +3054,6 @@
                         "yes": "Kyllä (tarkemmin määrittelemätön)"
                     },
                     "placeholder": "Sähköjohtimet, sähkökisko..."
-                },
-                "elevation": {
-                    "label": "Korkeus merenpinnasta"
                 },
                 "email": {
                     "label": "Sähköpostiosoite",
@@ -2855,6 +3153,9 @@
                 },
                 "gambling": {
                     "label": "Pelit"
+                },
+                "garden/type": {
+                    "label": "Puutarhan tyyppi"
                 },
                 "gauge": {
                     "label": "Raideväli"
@@ -2976,6 +3277,9 @@
                         "undefined": "Ei"
                     }
                 },
+                "hot_water": {
+                    "label": "Kuuma vesi"
+                },
                 "iata": {
                     "label": "IATA-lentoasemakoodi"
                 },
@@ -3017,17 +3321,22 @@
                     "label": "Ajoittain kuivuva"
                 },
                 "internet_access": {
-                    "label": "Internet-yhteys",
+                    "label": "Internetyhteys",
                     "options": {
                         "no": "Ei",
                         "terminal": "Terminaali",
                         "wired": "Langallinen",
                         "wlan": "WiFi",
                         "yes": "Kyllä"
-                    }
+                    },
+                    "terms": "internet-yhteys, nettiyhteys"
                 },
                 "internet_access/fee": {
-                    "label": "Internet-yhteyden maksullisuus"
+                    "options": {
+                        "customers": "Vain asiakkaille",
+                        "no": "Ilmainen",
+                        "yes": "Maksullinen"
+                    }
                 },
                 "internet_access/ssid": {
                     "label": "Langattoman verkon nimi"
@@ -3243,6 +3552,9 @@
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
+                "museum": {
+                    "label": "Tyyppi"
+                },
                 "name": {
                     "label": "Nimi",
                     "placeholder": "Käytettävä nimi (jos on)"
@@ -3323,14 +3635,17 @@
                     }
                 },
                 "openfire": {
-                    "label": "Avotuli sallittu"
+                    "label": "Avotuli sallittu",
+                    "terms": "Avotulenteko sallittu"
                 },
                 "opening_date": {
-                    "label": "Uudelleenavaamispäivä"
+                    "label": "Uudelleenavaamispäivä",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "opening_hours": {
                     "label": "Aukioloajat",
-                    "placeholder": "Ei tiedossa"
+                    "placeholder": "Ei tiedossa",
+                    "terms": "Tunnit"
                 },
                 "operator": {
                     "label": "Toimija"
@@ -3379,6 +3694,7 @@
                     "options": {
                         "advanced": "Vaikea",
                         "easy": "Helppo",
+                        "extreme": "Äärimmäinen",
                         "freeride": "Vapaalasku",
                         "intermediate": "Keskivaikea",
                         "novice": "Erittäin helppo"
@@ -3474,6 +3790,9 @@
                 "playground/theme": {
                     "label": "Teema"
                 },
+                "plots": {
+                    "placeholder": "10, 20, 30..."
+                },
                 "polling_station": {
                     "label": "Äänestyspaikka"
                 },
@@ -3539,7 +3858,8 @@
                     "options": {
                         "centre": "Kierrätysasema",
                         "container": "Keräysastia"
-                    }
+                    },
+                    "placeholder": "Keräysastia, keskus"
                 },
                 "ref": {
                     "label": "Tunnus"
@@ -3681,6 +4001,9 @@
                         "other": "Muu"
                     }
                 },
+                "seamark/buoy_lateral/category": {
+                    "label": "Luokka"
+                },
                 "seamark/mooring/category": {
                     "label": "Luokka"
                 },
@@ -3698,7 +4021,7 @@
                     "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
-                    "label": "Myy käytettyjä",
+                    "label": "Käytetyn tavaran myynti",
                     "options": {
                         "no": "Ei",
                         "only": "Ainoastaan",
@@ -3785,6 +4108,10 @@
                     },
                     "placeholder": "Ohuet rullarenkaat, perusrenkaat, maastorenkaat..."
                 },
+                "sms": {
+                    "label": "tekstiviesti",
+                    "terms": "tekstiviesti, SMS"
+                },
                 "social_facility": {
                     "label": "Tyyppi"
                 },
@@ -3792,7 +4119,8 @@
                     "label": "Kohderyhmä"
                 },
                 "source": {
-                    "label": "Lähteet"
+                    "label": "Lähteet",
+                    "terms": "lähteet, tietolähteet"
                 },
                 "species/wikidata": {
                     "label": "Lajin Wikidata"
@@ -3813,7 +4141,8 @@
                     "label": "Tähtiluokitus"
                 },
                 "start_date": {
-                    "label": "Perustamispäivä"
+                    "label": "Perustamispäivä",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "step_count": {
                     "label": "Askelten lukumäärä"
@@ -3832,7 +4161,7 @@
                     "label": "Tyyppi"
                 },
                 "stroller": {
-                    "label": "Pääsy lastenvaunuilla",
+                    "label": "Lastenvaunut",
                     "options": {
                         "limited": "Osittain",
                         "no": "Ei",
@@ -4043,6 +4372,9 @@
                 "vending": {
                     "label": "Hyödykkeiden tyyppi"
                 },
+                "video_calls": {
+                    "label": "Videopuhelut"
+                },
                 "visibility": {
                     "label": "Näkyvyys",
                     "options": {
@@ -4113,25 +4445,30 @@
                 "wheelchair": {
                     "label": "Esteettömyys",
                     "options": {
+                        "limited": "Osittain",
                         "no": "Ei",
                         "yes": "Kyllä"
-                    }
+                    },
+                    "terms": "saavuttettavuus pyörätuolilla, saavutettavuus"
                 },
                 "wholesale": {
                     "label": "Tukkukauppa"
                 },
                 "width": {
-                    "label": "Leveys (metreinä)"
+                    "label": "Leveys (metreinä)",
+                    "terms": "leveys (metreinä)"
                 },
                 "wikidata": {
-                    "label": "Wikidata"
+                    "label": "Wikidata",
+                    "terms": "Wikidata"
                 },
                 "wikimedia_commons": {
-                    "label": "Wikimedia Commons-sivu",
+                    "label": "Wikimedia Commons",
                     "placeholder": "File:Esimerkki.svg"
                 },
                 "wikipedia": {
-                    "label": "Wikipedia"
+                    "label": "Wikipedia",
+                    "terms": "Wikipedia"
                 },
                 "windings": {
                     "label": "Käämit",
@@ -4172,10 +4509,6 @@
                 },
                 "aerialway/drag_lift": {
                     "name": "Vetohissi"
-                },
-                "aerialway/gondola": {
-                    "name": "Gondolihissi",
-                    "terms": "hissi, hiihtohissi, lasketteluhissi, laskettelu, gondoli, koppi, koppihissi"
                 },
                 "aerialway/goods": {
                     "name": "Rahti-ilmarata",
@@ -4687,9 +5020,6 @@
                 "amenity/recycling_container": {
                     "name": "Kierrätyspiste"
                 },
-                "amenity/register_office": {
-                    "name": "Maistraatti"
-                },
                 "amenity/research_institute": {
                     "name": "Tutkimuslaitos"
                 },
@@ -4758,9 +5088,6 @@
                     "name": "Koulualue (peruskoulu/lukio/ammattikoulu)",
                     "terms": "koulu, koulutus, ala-aste, koulualue, alue, koulupiha, piha, välitunti, välituntialue, yläaste, yläkoulu, lukio, ammatti, ammattioppilaitos, ammattiopisto, oppilaitos, ammattikoulu, amis, yhtenäiskoulu, yhtenäislukio, yhteislukio"
                 },
-                "amenity/scrapyard": {
-                    "name": "Autonromuttamo"
-                },
                 "amenity/shelter": {
                     "name": "Katos",
                     "terms": "katos, katettu, kota, kotus, korsu, laavu, maja, koppi, suoja, tauko, taukopaikka, taukokatos, piknik, picnic, retki, lepo, lepääminen, pukukoppi, pukeutuminen, bussi, linja-auto, kalliolippa"
@@ -4809,6 +5136,9 @@
                 "amenity/studio": {
                     "name": "Studio"
                 },
+                "amenity/studio/audio": {
+                    "name": "Nauhoitusstudio"
+                },
                 "amenity/studio/radio": {
                     "name": "Radioasema"
                 },
@@ -4817,9 +5147,6 @@
                 },
                 "amenity/studio/video": {
                     "name": "Elokuvastudio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Uima-allas"
                 },
                 "amenity/taxi": {
                     "name": "Taksitolppa",
@@ -5970,10 +6297,6 @@
                 "landuse": {
                     "name": "Maankäyttökohde"
                 },
-                "landuse/allotments": {
-                    "name": "Yhteisöpuutarha",
-                    "terms": "siirtolapuutarha"
-                },
                 "landuse/aquaculture": {
                     "name": "Vesiviljely",
                     "terms": "akvakulttuuri"
@@ -6061,17 +6384,9 @@
                     "name": "Laivastotukikohta",
                     "terms": "sotilaallinen, sotilas, armeija, maanpuolustus, puolustus, puolustusvoimat, sodankäynti, sota, merivoimat, meri, rannikko, laivasto, laivat, laiva, sotalaiva, sotalaivat"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Esterata",
-                    "terms": "sotilaallinen, sotilas, armeija, maanpuolustus, puolustus, puolustusvoimat, sodankäynti, sota, este, hyppy, kiipeily"
-                },
                 "landuse/military/range": {
                     "name": "Sotilasampumarata",
                     "terms": "ampumarata, rata, radat, ampumaradat, ampuminen, ase, harjoittelu, sotilaallinen, sotilas, armeija, maanpuolustus, puolustus, puolustusvoimat, sodankäynti, sota"
-                },
-                "landuse/military/training_area": {
-                    "name": "Sotilaskoulutusalue",
-                    "terms": "koulutus, harjoittelu, sotilaallinen, sotilas, armeija, maanpuolustus, puolustus, puolustusvoimat, sodankäynti, sota"
                 },
                 "landuse/orchard": {
                     "name": "Hedelmätarha"
@@ -6347,19 +6662,10 @@
                 "leisure/track/cycling": {
                     "name": "Pyöräilyrata"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Pyöräilyrata"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Ravirata"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Ravirata"
-                },
                 "leisure/track/running": {
-                    "name": "Kuntorata"
-                },
-                "leisure/track/running_point": {
                     "name": "Kuntorata"
                 },
                 "leisure/water_park": {
@@ -6418,10 +6724,6 @@
                 },
                 "man_made/gasometer": {
                     "name": "Kaasusäiliö"
-                },
-                "man_made/groyne": {
-                    "name": "Rantavalli",
-                    "terms": "suojapato"
                 },
                 "man_made/lighthouse": {
                     "name": "Majakka"
@@ -6553,9 +6855,6 @@
                 },
                 "military/bunker": {
                     "name": "Sotilasbunkkeri"
-                },
-                "military/checkpoint": {
-                    "name": "Sotilasalueen tarkastuspiste"
                 },
                 "military/nuclear_explosion_site": {
                     "name": "Ydinräjäytyspaikka"
@@ -7195,10 +7494,6 @@
                 "railway/disused": {
                     "name": "Käyttämätön rautatie"
                 },
-                "railway/funicular": {
-                    "name": "Kiskoköysirata",
-                    "terms": "funikulaari, köysihissi, gondoli, gondolihissi, hissi, rata, hissirata, köysirata"
-                },
                 "railway/halt": {
                     "name": "Seisake"
                 },
@@ -7206,29 +7501,11 @@
                     "name": "Moottoriajoneuvoliikenteen tasoristeys",
                     "terms": "tasoristeys, ylityspaikka, rautatie, radanylitys, ajoneuvo, tie, katu, moottoriajoneuvo, ajoneuvo, auto"
                 },
-                "railway/light_rail": {
-                    "name": "Pikaraitiotie"
-                },
                 "railway/milestone": {
                     "name": "Rautatien kilometritolppa"
                 },
-                "railway/miniature": {
-                    "name": "Pienoisrautatie"
-                },
-                "railway/monorail": {
-                    "name": "Kohorata"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Kapearaiteinen rautatie"
-                },
                 "railway/platform": {
                     "name": "Rautatielaituri"
-                },
-                "railway/rail": {
-                    "name": "Rata"
-                },
-                "railway/rail/highspeed": {
-                    "name": "Suurnopeusrata"
                 },
                 "railway/signal": {
                     "name": "Rautatieopastin",
@@ -7236,9 +7513,6 @@
                 },
                 "railway/station": {
                     "name": "Rautatieasema"
-                },
-                "railway/subway": {
-                    "name": "Metrorata"
                 },
                 "railway/subway_entrance": {
                     "name": "Metron sisäänkäynti"
@@ -7249,9 +7523,6 @@
                 "railway/train_wash": {
                     "name": "Junapesula",
                     "terms": "veturi, vaunu, juna, pesu, pesukone, pesula"
-                },
-                "railway/tram": {
-                    "name": "Katuraitiotie"
                 },
                 "railway/tram_stop": {
                     "name": "Katuraitiovaunun pysähtymiskohta"
@@ -7355,6 +7626,9 @@
                 "shop/butcher": {
                     "name": "Lihakauppa"
                 },
+                "shop/camera": {
+                    "name": "Kameraliike"
+                },
                 "shop/candles": {
                     "name": "Kynttiläkauppa"
                 },
@@ -7363,6 +7637,9 @@
                 },
                 "shop/car": {
                     "name": "Autokauppa"
+                },
+                "shop/car/second_hand": {
+                    "name": "Käytettyjen autojen kauppa"
                 },
                 "shop/car_parts": {
                     "name": "Varaosamyymälä",
@@ -7395,8 +7672,14 @@
                     "name": "Vaatekauppa",
                     "terms": "vaate, muoti, vaatetus, vaatteet, pukeutuminen, pukea, pukeutua, hm, h&m, hennes, mauritz, dressmann, lindex, kappahl, carlings, bikbok, bik bok, seppälä, aleksi13, aleksi 13,  cubus, ginatricot, gina, tricot, halonen, mango, zara, kauppa, liike, yritys, putiikki, myymälä, vaateliike, vaateyritys, vaatemyymälä"
                 },
+                "shop/clothes/second_hand": {
+                    "name": "Käytettyjen vaatteiden kauppa"
+                },
                 "shop/clothes/underwear": {
                     "name": "Alusvaatekauppa"
+                },
+                "shop/clothes/wedding": {
+                    "name": "Häävaatekauppa"
                 },
                 "shop/coffee": {
                     "name": "Kahvikauppa"
@@ -7480,18 +7763,12 @@
                 "shop/fishing": {
                     "name": "Kalastuskauppa"
                 },
-                "shop/fishmonger": {
-                    "name": "Kalakauppa"
-                },
                 "shop/florist": {
                     "name": "Kukkakauppa"
                 },
                 "shop/frame": {
                     "name": "Kehystämö",
                     "terms": "kehys, kehykset, taulunkehys, taulunkehykset"
-                },
-                "shop/frozen_food": {
-                    "name": "Pakasteruokakauppa"
                 },
                 "shop/fuel": {
                     "name": "Polttoainemyymälä",
@@ -7500,9 +7777,6 @@
                 "shop/funeral_directors": {
                     "name": "Hautaustoimisto",
                     "terms": "hautajaiset, hautajaistoimisto, toimisto, vainaja"
-                },
-                "shop/furnace": {
-                    "name": "Uunimyymälä"
                 },
                 "shop/furniture": {
                     "name": "Huonekaluliike"
@@ -7750,6 +8024,9 @@
                 "shop/tobacco": {
                     "name": "Tupakkapuoti"
                 },
+                "shop/tool_hire": {
+                    "name": "Työkaluvuokraamo"
+                },
                 "shop/toys": {
                     "name": "Lelukauppa"
                 },
@@ -7899,6 +8176,9 @@
                 },
                 "tourism/museum": {
                     "name": "Museo"
+                },
+                "tourism/museum/history": {
+                    "name": "Historian museo"
                 },
                 "tourism/picnic_site": {
                     "name": "Piknikpuisto"

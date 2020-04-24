@@ -171,7 +171,6 @@
             "upload_explanation": "ඔබ ඇතුලත් කරන ලද වෙනස්කම් OpenStreetMap දත්ත බාවිතා කරන සියලු සිතියම් තුල දිස්වනු ඇත",
             "upload_explanation_with_user": "{user} වශයෙන් ඔබ ඇතුලත් කරන ලද වෙනස්කම් OpenStreetMap දත්ත බාවිතා කරන සියලු සිතියම් තුල දිස්වනු ඇත",
             "cancel": "අහෝසි කරන්න",
-            "changes": " වෙනස්කම් {count} ක් ",
             "warnings": "අනතුරු ඇගවීම්",
             "modified": "වෙනස් කරන ලදී",
             "deleted": "මකාදමන ලදී",

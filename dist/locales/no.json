@@ -107,7 +107,38 @@
             },
             "circularize": {
                 "title": "Gjør rund",
-                "key": "O"
+                "description": {
+                    "single": "Gjør denne trekk sirkulær.",
+                    "multiple": "Gjør disse trekk sirkulær."
+                },
+                "key": "O",
+                "annotation": {
+                    "single": "Gjorde et trekk sirkulær.",
+                    "multiple": "Gjorde trekk sirkulære."
+                },
+                "multiple_blockers": {
+                    "multiple": "Disse kan ikke gjøres sirkulær av flere grunner."
+                },
+                "not_closed": {
+                    "single": "Det can ikke gjøres sirkulær fordi det ikke er en løkke.",
+                    "multiple": "Disse kan ikke gjøres sirkulære fordi de er ikke løkker."
+                },
+                "too_large": {
+                    "single": "Det kan ikke gjøres sirkulære fordi ikke nok av det er for tiden synlig.",
+                    "multiple": "Disse kan ikke gjøres sirkulære fordi ikke nok av det er for tiden synlig."
+                },
+                "connected_to_hidden": {
+                    "single": "Det kan ikke gjøres sirkulære fordi det er koblet til et skjult trekk.",
+                    "multiple": "Disse kan ikke gjøres sirkulært fordi noen er koblet til skjulte trekk."
+                },
+                "not_downloaded": {
+                    "single": "Det kan ikke gjøres sirkulært fordi deler av det har ikke blitt lastet ned.",
+                    "multiple": "Disse objektene kan ikke gjøres sirkulære, da deler av objektene ikke er lastet ned ennå."
+                },
+                "already_circular": {
+                    "single": "Dette kan ikke gjøres mer sirkulært enn det allerede er.",
+                    "multiple": " Disse kan ikke gjøres mer sirkulært enn de allerede er."
+                }
             },
             "orthogonalize": {
                 "title": "Rett opp hjørner",
@@ -559,7 +590,7 @@
             "request_review": "Jeg ønsker at noen skal gjennomgå endringene mine.",
             "save": "Last opp",
             "cancel": "Avbryt",
-            "changes": "{count} endringer",
+            "changes": "Endringer ({count})",
             "download_changes": "Last ned osmChange-fil",
             "errors": "Feil",
             "warnings": "Advarsler",
@@ -647,20 +678,18 @@
             "no_results_worldwide": "Ingen resultater funnet"
         },
         "geolocate": {
+            "key": "L",
             "title": "Vis min posisjon",
             "locating": "Finner sted, vennligst vent..."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoom til objektet",
-                "tooltip_feature": "Midtstill og zoom kartet for å sette fokus på dette objektet.",
-                "tooltip_note": "Midtstill og zoom kartet for å sette fokus på dette notatet.",
-                "tooltip_data": "Midtstill og zoom kartet for å sette fokus på disse dataene.",
-                "tooltip_issue": "Midtstill og zoom kartet for å sette fokus på dette problemet."
+                "title": "Zoom til utvalget"
             },
             "show_more": "Vis mer",
             "view_on_osm": "Se på openstreetmap.org",
+            "view_on_osmose": "Se på osmose.openstreetmap.fr",
             "view_on_keepRight": "Se på keepright.at",
             "feature_type": "Objekttype",
             "fields": "Felt",
@@ -681,6 +710,7 @@
             "key_value": "nøkkel=verdi",
             "multiple_values": "Flere verdier",
             "multiple_types": "Flere typer",
+            "unshared_value_tooltip": "ikke  delt av alle trekk",
             "hidden_preset": {
                 "manual": "{features} er skjult. Aktiver dem i Kartdata-menyen.",
                 "zoom": "{features} er skjult. Zoom inn for å se dem."
@@ -761,10 +791,16 @@
                     "title": "OpenStreetMap notater"
                 },
                 "keepRight": {
+                    "tooltip": "Dataproblem oppdaget av keepright.at",
                     "title": "KeepRight Problemer"
                 },
                 "improveOSM": {
+                    "tooltip": "Manglende data oppdaget av improveosm.org",
                     "title": "ImproveOSM problemer"
+                },
+                "osmose": {
+                    "tooltip": "Dataproblemer oppdaget av osmose.openstreetmap.fr",
+                    "title": "Osmose-problemer"
                 },
                 "custom": {
                     "tooltip": "Dra og slipp en datafil på siden, eller klikk knappen for å sette opp",
@@ -887,7 +923,6 @@
             "custom_background": {
                 "tooltip": "Endre egendefinert bakgrunn",
                 "header": "Innstillinger for egendefinert bakgrunn",
-                "instructions": "Angi en flis-URL mal. Gyldige parametere er:\n   {zoom} eller {z}, {x}, {y} for Z/X/Y flisskjema\n   {-y} eller {ty} for speilvendte TMS-stil Y koordinater\n   {u} for fjerdedels-flisskjema\n   {switch:a,b,c} for DNS server multipleksing\n\nEksempel:\n{example}",
                 "template": {
                     "placeholder": "Angi en URL-mal"
                 }
@@ -1011,6 +1046,13 @@
         "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
         "full_screen": "Skru av/på fullskjerm.",
         "QA": {
+            "osmose": {
+                "title": "Osmose-problem",
+                "detail_title": "Detaljer",
+                "elems_title": "Objekter",
+                "fix_title": "Fiks hjelpelinjer",
+                "trap_title": "Vanlige Feil"
+            },
             "improveOSM": {
                 "title": "ImproveOSM-oppdagelser",
                 "geometry_types": {
@@ -1046,11 +1088,15 @@
                 }
             },
             "keepRight": {
+                "title": "KeepRight",
                 "detail_description": "Beskrivelse",
                 "comment": "Kommentar",
                 "comment_placeholder": "Skriv en kommentar som skal deles med andre brukere.",
+                "close": "Lukk (Issue Fixed)",
+                "ignore": "Fjern (False Positive)",
                 "save_comment": "Lagre kommentar",
                 "close_comment": "Lukk og kommenter",
+                "ignore_comment": "Fjern og kommenter",
                 "error_parts": {
                     "this_node": "dette punktet",
                     "this_way": "denne linja",
@@ -1464,8 +1510,7 @@
                 "before_start_h": "Før du starter",
                 "before_start": "Du burde gjøre deg kjent med OpenStreetMap og dette verktøyet for du starter å bruke det. iD inneholder en gjennomgang for å lære deg det grunnleggende om redigering av OpenStreetMap. Klikk \"Start gjennomgangen\" på denne skjermen for å ta opplæringen - det tar bare rundt 15 minutter.",
                 "open_source_h": "Åpen kilde",
-                "open_source": "iD redigereren er et åpen-kildekode-prosjekt basert på samarbeid, og du bruker versjon {version} nå. Kildekoden er tilgjengelig [på GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Du kan hjelpe iD ved å [oversette](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) eller ved å [rapportere feil](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "iD redigereren er et åpen-kildekode-prosjekt basert på samarbeid, og du bruker versjon {version} nå. Kildekoden er tilgjengelig [på GitHub](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Oversikt",
@@ -1504,9 +1549,11 @@
                 "type": "Du kan klikke på objekttypen for å endre objektet til en annen type. Alt som eksisterer i den virkelige verden kan legges til på OpenStreetMap, så det er tusener av objekttyper å velge mellom.",
                 "type_picker": "Type-velgeren viser de vanligste objekttypene, slik som parker, sykehus, restauranter, veier og bygninger. Du kan søke etter hva som helst i søkefeltet. Du kan også klikke {inspect} **Info**-ikonet ved siden av objekttypen for å lære mer om det.",
                 "fields_h": "Felt",
+                "fields_all_fields": "\"Fields\" seksjonen inneholder alle av trekk's  detaljer som du kan redigere. I OpenStreetMap, alle av feltene er valgfrie, og det er OK å la et felt stå tomt hvis du er usikker.",
                 "fields_example": "Hver objekttype vil vise forskjellige felter. For eksempel, en vei kan vise felter for overflaten eller fartsgrensa, mens en restaurant kan vise felt for typen mat de serverer og når den åpner.",
                 "fields_add_field": "Du kan også klikke rullegardinmenyen \"Legg til felt\" for å legge til flere felt, slik som beskrivelse, Wikipedia-link, rullestoltilgang, og mer.",
                 "tags_h": "Egenskaper",
+                "tags_all_tags": "Nedenfor feltene seksjonen , du kan utvide \"Stikkord\" seksjonen for å redigere alle av OpenStreetMap *stikkord*for valgte trekk. Hvert stikkord består av en *nøkkel* og *verdi*, data elementer som definerer alle av trekkene lagret i OpenStreetMap.",
                 "tags_resources": "Å redigere et objekts egenskaper behøver passe med kunnskap om OpenStreetMap. Du burde se i ressursene som [OpenStreetMap Wikien](https://wiki.openstreetmap.org/wiki/Main_Page) eller [Taginfo](https://taginfo.openstreetmap.org/) for å lære mer om akseptert OpenStreetMap-egenskaper og bruken av de."
             },
             "points": {
@@ -1567,6 +1614,8 @@
                 "title": "Relasjoner",
                 "intro": "En *relation* er et spesielt type objekt på OpenStreetMap som grupperer sammen andre objekter. Objektene som tilhører relasjonen kalles *medlemmer*, og hvert medlem kan ha en *rolle* i en relasjon.",
                 "edit_relation_h": "Endre Relasjoner",
+                "edit_relation": "På bunnen av trekk redigeren, kan du utvide \"Relasjoner\" seksjonen for å se om de valgte trekkene er medlemmer av noen relasjoner. Du kan deretter klikke på relasjonen for å velge og redigere det.",
+                "edit_relation_add": "For å legge et objekt til en relasjon, velg objektet, deretter trykk {plus} legg til-knappen i relasjon-delen i objekt-redigereren. Du kan velge fra en liste over nærliggende relasjoner, eller velge \"Ny relasjon...\"-valget.",
                 "edit_relation_delete": "Du kan også klikke {delete} **Slett**-knappen for å slette det valgte objektet fra relasjonen. Hvis du fjerner alle medlemmene fra relasjonen, vil relasjonen automatisk bli slettet.",
                 "maintain_relation_h": "Opprettholde Relasjoner",
                 "maintain_relation": "For det meste vil iD opprettholde relasjonene automatisk mens du redigerer. Du burde passe på når du bytter ut relasjoner som kan være medlem av en relasjon. For eksempel, hvis du sletter en del av en vei og tegner en ny strekning for å erstatte den, burde du legge den nye strekningen til den samme relasjonen (ruter, svingebegrensninger, etc.) som originalen var medlem i.",
@@ -1581,8 +1630,10 @@
                 "turn_restriction_editing": "I \"Svingebegrensning\"-feltet, klikk for å velge en \"fra\"-vei, og se om svingen er tillatt eller forbudt mot en av \"til\"-veiene. Du kan klikke på sving-ikonene for å gjøre svingen forbudt eller tillatt. iD vil lage relasjoner automatisk og angi fra, via og til-rollene basert på valgene dine.",
                 "route_h": "Ruter",
                 "route": "En *rute*-relasjon er en gruppe med en eller flere linjer som danner et rutenettverk, som en bussrute, togrute, eller veirute.",
+                "route_add": "For å legge til en rute relasjon, trekk og rull ned, til \"Relasjoner\" seksjonen av trekkstredigereren, deretter klikk (pluss) legg till knappen for å legge dette til objekt til til en eksisterende relasjon i nærheten eller en ny relasjon",
                 "boundary_h": "Grenser",
-                "boundary": "En *grense*-relasjon er en gruppe med en eller flere linjer som sammen danner en administrativ grense."
+                "boundary": "En *grense*-relasjon er en gruppe med en eller flere linjer som sammen danner en administrativ grense.",
+                "boundary_add": "For å legge et objekt til en grense-relasjon, velg objektet og rull ned til relasjon-delen i objekt-redigereren. Deretter klikk {plus} Legg til-knappen for å legge dette objektet til en nærliggende relasjon eller en ny relasjon."
             },
             "notes": {
                 "title": "Notater",
@@ -1626,6 +1677,7 @@
                 "title": "Kvalitetssikring",
                 "intro": "*Kvalitetssikring* (KS) verktøy kan finne feilaktige egenskaper, frakoblede veier og andre feil på OpenStreetMap, som kartleggere da kan fikse. For å se eksisterende KS-problemer, klikk {data} **Kartdata**-panelet for å aktivere spesifikke KS-lag.",
                 "tools_h": "Verktøy",
+                "tools": "Følgende verktøy er foreløpig støttet: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) og [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Håndtere problemer",
                 "issues": "Å håndtere problemer er likt som å håndtere notater. Klikk på en markør for å se detaljer på problemet i sidemenyen. Hvert verktøy har sine egne funksjoner, men generelt vil du kunne kommentere og/eller lukke et problem."
             },
@@ -2377,7 +2429,8 @@
                     "pan": "Flytt kartet",
                     "pan_more": "Flytt kartet med en hel skjermstørrelse",
                     "zoom": "Zoom inn / Zoom ut",
-                    "zoom_more": "Zoom inn / zoom ut mye"
+                    "zoom_more": "Zoom inn / zoom ut mye",
+                    "geolocate": "Zoom til min posisjon"
                 },
                 "help": {
                     "title": "Hjelp",
@@ -2620,6 +2673,7 @@
                         "county": "Fylke",
                         "county!jp": "Distrikt",
                         "district": "Distrikt",
+                        "district!vn": "Arrondissement/By/Distrikt",
                         "floor": "Gulv",
                         "hamlet": "Bosetning",
                         "housename": "Husnavn",
@@ -2633,6 +2687,7 @@
                         "state": "Stat",
                         "street": "Gate",
                         "subdistrict": "Underdistrikt",
+                        "subdistrict!vn": "Avdeling/Bokollektiv/Landsby",
                         "suburb": "Forstad",
                         "suburb!jp": "avdeling",
                         "unit": "Enhet"
@@ -2732,7 +2787,8 @@
                     "label": "Ryggstøtte"
                 },
                 "bar": {
-                    "label": "Bar"
+                    "label": "Bar",
+                    "terms": "Utested, pub, nattklubb"
                 },
                 "barrier": {
                     "label": "Type"
@@ -2750,17 +2806,23 @@
                     "label": "Spesialitet",
                     "options": {
                         "foot_bath": "Fotbad",
-                        "hot_spring": "Varm kilde"
+                        "hot_spring": "Varm kilde",
+                        "onsen": "Japansk Onsen"
                     }
                 },
+                "beauty": {
+                    "label": "Tjenester"
+                },
                 "bench": {
-                    "label": "Benk"
+                    "label": "Benk",
+                    "terms": "Sete"
                 },
                 "bicycle_parking": {
                     "label": "Type"
                 },
                 "bin": {
-                    "label": "Søppelkasse"
+                    "label": "Søppelkasse",
+                    "terms": "Søppelkasse, søppelbøtte, bosspann, søppelspann, papirkurv"
                 },
                 "blind": {
                     "label": "Blind personstilgang",
@@ -2774,6 +2836,8 @@
                     "label": "Blodkomponenter",
                     "options": {
                         "plasma": "plasma",
+                        "platelets": "blodplater ",
+                        "stemcells": "stamcelleprøver",
                         "whole": "helblod"
                     }
                 },
@@ -2855,6 +2919,12 @@
                     "label": "Kapasitet",
                     "placeholder": "50, 100, 200..."
                 },
+                "capacity/disabled_parking": {
+                    "label": "Tilgjengelige Plasser"
+                },
+                "capacity_parking": {
+                    "label": "Totalt Antall Plasser"
+                },
                 "cash_in": {
                     "label": "Innskudd"
                 },
@@ -2873,7 +2943,12 @@
                     "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "check_date": {
-                    "label": "Dato sist sjekket"
+                    "label": "Dato sist sjekket",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "circumference": {
+                    "label": "Omkrets",
+                    "placeholder": "1 m, 20 cm, 30 tommer ..."
                 },
                 "clothes": {
                     "label": "Klær"
@@ -2957,6 +3032,9 @@
                 "crossing/island": {
                     "label": "Fotgjenger øy"
                 },
+                "cuisine": {
+                    "label": "Kjøkken"
+                },
                 "currency_multi": {
                     "label": "Valutetyper"
                 },
@@ -3014,6 +3092,12 @@
                 "delivery": {
                     "label": "Levering"
                 },
+                "denomination": {
+                    "label": "Benevnelse"
+                },
+                "denotation": {
+                    "label": "Bokstavelig"
+                },
                 "departures_board": {
                     "label": "Avgangsoversikt",
                     "options": {
@@ -3022,6 +3106,9 @@
                         "timetable": "Rutetabell",
                         "yes": "Ja"
                     }
+                },
+                "depth": {
+                    "label": "Dybde(Meter)"
                 },
                 "description": {
                     "label": "Beskrivelse"
@@ -3092,6 +3179,9 @@
                         "forward": "Fremover"
                     }
                 },
+                "dispensing": {
+                    "label": "Dispenser Resepter"
+                },
                 "display": {
                     "label": "Skjerm"
                 },
@@ -3110,7 +3200,8 @@
                         "leashed": "Kun i bånd",
                         "no": "Ikke tillatt",
                         "yes": "Tillatt"
-                    }
+                    },
+                    "terms": "Hunder, bisker, bikkjer"
                 },
                 "door": {
                     "label": "Dør"
@@ -3131,6 +3222,12 @@
                     "label": "Varighet",
                     "placeholder": "00:00"
                 },
+                "ele": {
+                    "label": "Elevasjon"
+                },
+                "ele_node": {
+                    "label": "Elevasjon"
+                },
                 "electrified": {
                     "label": "Elektrifisering",
                     "options": {
@@ -3138,14 +3235,13 @@
                         "no": "Nei",
                         "rail": "Elektrifisert jernbane",
                         "yes": "Ja (uspesifisert)"
-                    }
-                },
-                "elevation": {
-                    "label": "Høyde over havet"
+                    },
+                    "placeholder": "Kontaktlinje, elektrifisert jernbane ..."
                 },
                 "email": {
                     "label": "E-post",
-                    "placeholder": "eksempel@eksempel.no"
+                    "placeholder": "eksempel@eksempel.no",
+                    "terms": "E-post, epost, e-mail, email, elektronisk post"
                 },
                 "embankment": {
                     "label": "Type",
@@ -3180,7 +3276,8 @@
                     "placeholder": "+47 22 12 34 56"
                 },
                 "fee": {
-                    "label": "Avgift"
+                    "label": "Avgift",
+                    "terms": "Avgift, kostnad, pris, gebyr"
                 },
                 "fence_type": {
                     "label": "Type"
@@ -3245,6 +3342,9 @@
                 },
                 "gambling": {
                     "label": "Spill"
+                },
+                "garden/type": {
+                    "label": "Hage Type"
                 },
                 "gauge": {
                     "label": "Måler"
@@ -3354,7 +3454,11 @@
                 "horse_scale": {
                     "label": "Riding Vanskelighetsgrad",
                     "options": {
-                        "common": "Enkel: Ingen problemer eller vanskeligheter. (standard)"
+                        "common": "Enkel: Ingen problemer eller vanskeligheter. (standard)",
+                        "dangerous": "Farlig: Brukbar bare for veldig erfarne ryttere og hester og bare i godt vær. Avstige.",
+                        "demanding": "Bruk med forsiktighet: Ujevn måte, tidvis vanskelige passasjer.",
+                        "difficult": "Vanskelig: Måten smal og utsatt. Kan inneholde hindringer for å gå over og smale passasjer.",
+                        "impossible": "Unngåelig: vei eller bro ikke farbar for hester. For smal, utilstrekkelig støtte, hindringer som stiger. Livsfare."
                     },
                     "placeholder": "Vanskelig, Farlig ..."
                 },
@@ -3367,6 +3471,12 @@
                 },
                 "hot_water": {
                     "label": "Varmt vann"
+                },
+                "iata": {
+                    "label": "IATA Airport Kode"
+                },
+                "icao": {
+                    "label": "ICAO Airport Kode"
                 },
                 "incline": {
                     "label": "Stigning"
@@ -3394,7 +3504,8 @@
                     "label": "Type"
                 },
                 "inscription": {
-                    "label": "Inskripsjon"
+                    "label": "Inskripsjon",
+                    "terms": "Inskripsjon, innskrift, påskrift, epigraf"
                 },
                 "intermittent": {
                     "label": "Intermittent"
@@ -3403,7 +3514,7 @@
                     "label": "Intermittent"
                 },
                 "internet_access": {
-                    "label": "Internettilgang",
+                    "label": "Internett-tilkobling",
                     "options": {
                         "no": "Nei",
                         "terminal": "Terminal",
@@ -3413,7 +3524,7 @@
                     }
                 },
                 "internet_access/fee": {
-                    "label": "Internettilgangsavgift"
+                    "label": "Internettilgang"
                 },
                 "internet_access/ssid": {
                     "label": "Wifi-Nettverksnavn"
@@ -3471,7 +3582,9 @@
                 "leaf_cycle_singular": {
                     "label": "Bladsyklus",
                     "options": {
-                        "evergreen": "Eviggrønn"
+                        "deciduous": "Løvfellende",
+                        "evergreen": "Eviggrønn",
+                        "semi_deciduous": "Semi-Løvfellende"
                     }
                 },
                 "leaf_type": {
@@ -3526,6 +3639,9 @@
                 "lock": {
                     "label": "Lås"
                 },
+                "lockable": {
+                    "label": "Låsbar"
+                },
                 "man_made": {
                     "label": "Type"
                 },
@@ -3562,6 +3678,7 @@
                     "placeholder": "40, 50, 60 …"
                 },
                 "maxspeed/advisory": {
+                    "label": "Anbefalt fartsgrense",
                     "placeholder": "40, 50, 60 …"
                 },
                 "maxstay": {
@@ -3578,6 +3695,9 @@
                 },
                 "microbrewery": {
                     "label": "Mikrobryggeri"
+                },
+                "mimics": {
+                    "label": "Etterligner"
                 },
                 "min_age": {
                     "label": "Minimum Alder"
@@ -3615,6 +3735,14 @@
                 },
                 "mtb/scale/uphill": {
                     "label": "Terrengsykling Klatre Vanskelighetsgrad",
+                    "options": {
+                        "0": "0: Gjennomsnitt. stigning <10%, grus / pakket jord, ingen hindringer",
+                        "1": "1: Gjennomsnitt. stigning <15%, grus / pakket jord, få små gjenstander",
+                        "2": "2: Gjennomsnitt skråning <20%, stabil overflate, knyttneve størrelse berg / røtter",
+                        "3": "3: Gjennomsnitt stigning <25%, variabel overflate, knyttneve størrelse berg / grener",
+                        "4": "4: Gjennomsnitt stigning <30%, dårlig tilstand, store bergarter / grener",
+                        "5": "Veldig bratt, sykkel må stort sett dyttes eller bæres"
+                    },
                     "placeholder": "0, 1, 2, 3 …"
                 },
                 "museum": {
@@ -3701,12 +3829,22 @@
                 "openfire": {
                     "label": "Åpen Ild Tillat"
                 },
+                "opening_date": {
+                    "label": "Forventet åpningstid",
+                    "placeholder": "YYYY-MM-DD"
+                },
                 "opening_hours": {
                     "label": "Åpningstider",
                     "placeholder": "Ukjent"
                 },
                 "operator": {
                     "label": "Betjener"
+                },
+                "operator/type": {
+                    "label": "Operator Type"
+                },
+                "outdoor_seating": {
+                    "label": "Utendørs sitteplass"
                 },
                 "par": {
                     "placeholder": "3, 4, 5..."
@@ -3718,13 +3856,20 @@
                     "label": "Type",
                     "options": {
                         "carports": "Carporter",
+                        "multi-storey": "Fler-etasjes",
                         "sheds": "Skur/utebod",
                         "surface": "Overflate",
                         "underground": "Under overflaten"
                     }
                 },
+                "parking_space": {
+                    "label": "Type"
+                },
                 "payment_multi": {
                     "label": "Betalingstyper"
+                },
+                "payment_multi_fee": {
+                    "label": "Betalingsmetoder"
                 },
                 "phases": {
                     "label": "faser",
@@ -3744,25 +3889,96 @@
                         "freeride": "Frikjøring",
                         "intermediate": "mellomnivå",
                         "novice": "Nybegynner"
-                    }
+                    },
+                    "placeholder": "Enkelt, Middels, Avansert…"
                 },
                 "piste/difficulty_downhill": {
                     "label": "Vanskelighetsgrad",
                     "options": {
-                        "easy": "Enkel (grønn sirkel)"
-                    }
+                        "advanced": "Avansert (black diamond)",
+                        "easy": "Enkel (grønn sirkel)",
+                        "expert": "Ekspert (double black diamond)",
+                        "extreme": "Ekstrem (klatreutstyr nødvendig)",
+                        "freeride": "Frikjøring (off-piste)",
+                        "intermediate": "Mellomnivå (blue square)",
+                        "novice": "Nybegynner (instruksjon)"
+                    },
+                    "placeholder": "Enkel, Middels, Avansert ..."
                 },
                 "piste/difficulty_nordic": {
-                    "label": "Vanskelighetsgrad"
+                    "label": "Vanskelighetsgrad",
+                    "options": {
+                        "advanced": "Avansert - smal, bratt eller isete del, skarp sving",
+                        "easy": "Enkel - Myke bakker, kort bratt parti",
+                        "expert": "Ekspert - Farlig terreng rundt",
+                        "intermediate": "Mellomliggende - Bratt parti",
+                        "novice": "Nybegynner - Flat, ingen anstrengelse nødvendig"
+                    },
+                    "placeholder": "Enkel, middels, avansert ..."
                 },
                 "piste/difficulty_skitour": {
-                    "label": "Vanskelighetsgrad"
+                    "label": "Vanskelighetsgrad",
+                    "options": {
+                        "advanced": "Avansert - S: 40-45 ° stigning",
+                        "easy": "Enkel - WS: 30-35 ° stigning",
+                        "expert": "Ekspert - SS: 45–50 ° stigning",
+                        "extreme": "Ekstrem - EX:> 55 ° stigning",
+                        "freeride": "Frigjøring - AS: 50–55 ° stigning",
+                        "intermediate": "Mellomliggende - ZS: stigning på 35-40 °",
+                        "novice": "Nybegynner - L: <30 ° stigning"
+                    },
+                    "placeholder": "Enkel, middels, avansert ..."
+                },
+                "piste/grooming": {
+                    "options": {
+                        "classic": "Klassisk",
+                        "classic+skating": "Klassisk og Skøyting",
+                        "mogul": "Kulekjøring",
+                        "scooter": "Snøscooter",
+                        "skating": "Skøyting"
+                    }
+                },
+                "piste/grooming_hike": {
+                    "options": {
+                        "backcountry": "Tur - Truger",
+                        "classic": "Klassisk - Vinter Fottur"
+                    }
+                },
+                "piste/grooming_nordic": {
+                    "label": "Løypepreparering",
+                    "options": {
+                        "backcountry": "Tur, ingen løypepreparering",
+                        "classic": "Klassisk",
+                        "classic+skating": "Klassisk og Skøyting",
+                        "scooter": "Snøscooter/Snøskuter",
+                        "skating": "Skøyting"
+                    }
                 },
                 "piste/type": {
-                    "label": "Type"
+                    "label": "Type",
+                    "options": {
+                        "connection": "Kobling",
+                        "downhill": "Utfor",
+                        "hike": "Turgåing",
+                        "ice_skate": "Skøyte",
+                        "nordic": "Langrenn",
+                        "playground": "Lekeplass"
+                    }
                 },
                 "place": {
                     "label": "Type"
+                },
+                "plant/source": {
+                    "label": "Energikilde"
+                },
+                "playground": {
+                    "label": "Type"
+                },
+                "playground/theme": {
+                    "label": "Tema"
+                },
+                "polling_station": {
+                    "label": "Valglokale"
                 },
                 "population": {
                     "label": "Befolkning"
@@ -3770,8 +3986,32 @@
                 "power": {
                     "label": "Type"
                 },
+                "power_supply": {
+                    "label": "Strømforsyning"
+                },
+                "preschool": {
+                    "label": "Førskole"
+                },
+                "product": {
+                    "label": "Produkter",
+                    "terms": "Varer"
+                },
+                "public_bookcase/type": {
+                    "label": "Type"
+                },
+                "pump": {
+                    "options": {
+                        "manual": "Manuell Håndpumpe",
+                        "no": "Ingen",
+                        "powered": "Maskindrevet Pumpe",
+                        "yes": "Ja"
+                    }
+                },
                 "railway": {
                     "label": "Type"
+                },
+                "railway/position": {
+                    "placeholder": "Distanse, innenfor ett desimaltall (123,4)"
                 },
                 "railway/signal/direction": {
                     "options": {
@@ -3780,11 +4020,36 @@
                         "forward": "Framover"
                     }
                 },
+                "rating": {
+                    "label": "Effektvurdering"
+                },
                 "recycling_type": {
-                    "label": "Type"
+                    "label": "Type",
+                    "options": {
+                        "centre": "Senter",
+                        "container": "Container"
+                    }
+                },
+                "ref": {
+                    "label": "Referansekode"
                 },
                 "ref/isil": {
                     "label": "ISIL-kode"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Port Nummer"
+                },
+                "ref_platform": {
+                    "label": "Platform Nummer"
+                },
+                "ref_road_number": {
+                    "label": "Vei Nummer"
+                },
+                "ref_room_number": {
+                    "label": "Rom Nummer"
+                },
+                "ref_route": {
+                    "label": "Løype Number"
                 },
                 "ref_runway": {
                     "label": "Rullebanenummer",
@@ -3796,11 +4061,28 @@
                 "religion": {
                     "label": "Religion"
                 },
+                "reservation": {
+                    "options": {
+                        "no": "Ikke tillatt",
+                        "recommended": "Anbefalt",
+                        "required": "Nødvendig",
+                        "yes": "Akseptert"
+                    }
+                },
+                "residential": {
+                    "label": "Type"
+                },
+                "resort": {
+                    "label": "Type"
+                },
                 "resource": {
                     "label": "Ressurser"
                 },
                 "restriction": {
                     "label": "Type"
+                },
+                "restrictions": {
+                    "label": "Sving Begrensninger"
                 },
                 "roof/colour": {
                     "label": "Takfarge"
@@ -3817,6 +4099,21 @@
                 "route_master": {
                     "label": "Type"
                 },
+                "sac_scale": {
+                    "label": "Fottur Vanskelighetsgrad",
+                    "options": {
+                        "alpine_hiking": "T4: Alpin Fottur Vanskelighetsgrad",
+                        "demanding_alpine_hiking": "T5: Krevende Alpin Fottur",
+                        "demanding_mountain_hiking": "T3: Krevende Fjell Fottur",
+                        "difficult_alpine_hiking": "T6: Vanskelig Alpin Fottur",
+                        "hiking": "Fottur",
+                        "mountain_hiking": "T2:  Fjell Fottur"
+                    },
+                    "placeholder": " Fjell Fottur, Alpin Fottur"
+                },
+                "salt": {
+                    "label": "Salt"
+                },
                 "scuba_diving": {
                     "label": "Tjenester"
                 },
@@ -3826,8 +4123,12 @@
                 "seamark/beacon_lateral/category": {
                     "label": "Kategori",
                     "options": {
+                        "danger_left": "Fare til Venstre",
+                        "danger_right": "Fare til Høyre",
                         "port": "Babord",
-                        "starboard": "Styrbord"
+                        "starboard": "Styrbord",
+                        "waterway_left": "Vannveie til venstre",
+                        "waterway_right": "Vannveie til Høyre"
                     }
                 },
                 "seamark/beacon_lateral/colour": {
@@ -3853,8 +4154,16 @@
                 "seamark/buoy_lateral/category": {
                     "label": "Kategori",
                     "options": {
+                        "channel_left": "Kanal til Venstre",
+                        "channel_right": "Kanal til Høyre",
+                        "danger_left": "Fare til venstre",
+                        "danger_right": "Fare til Høyre",
                         "port": "Babord",
-                        "starboard": "Styrbord"
+                        "preferred_channel_port": "Foretrukket Kanalport",
+                        "preferred_channel_starboard": "Foretrukket Kanal Styrbord",
+                        "starboard": "Styrbord",
+                        "waterway_left": "Vannvei til Venstre",
+                        "waterway_right": "Vannvei til Høyre"
                     }
                 },
                 "seamark/buoy_lateral/colour": {
@@ -3888,10 +4197,22 @@
                 "seamark/wreck/category": {
                     "label": "Kategori"
                 },
+                "seasonal": {
+                    "label": "Sesongbasert"
+                },
+                "seats": {
+                    "placeholder": "2, 4, 6…"
+                },
                 "second_hand": {
+                    "label": "Selger Brukt",
                     "options": {
+                        "no": "Nei",
+                        "only": "Kun",
                         "yes": "Ja"
                     }
+                },
+                "self_service": {
+                    "label": "Selvbetjening"
                 },
                 "service": {
                     "label": "Type"
@@ -3903,7 +4224,10 @@
                     "label": "Tjenester"
                 },
                 "service_rail": {
-                    "label": "Tjenestetype"
+                    "label": "Tjenestetype",
+                    "options": {
+                        "siding": "Sidespor"
+                    }
                 },
                 "shelter": {
                     "label": "Skur"
@@ -3929,7 +4253,19 @@
                     "label": "Type"
                 },
                 "smoking": {
-                    "label": "Røyking"
+                    "label": "Røyking",
+                    "options": {
+                        "no": "Ingen Røyking Overalt.",
+                        "yes": "Tillatt overalt"
+                    }
+                },
+                "smoothness": {
+                    "options": {
+                        "very_horrible": "Spesialisert off-road: traktor, ATV"
+                    }
+                },
+                "sms": {
+                    "label": "SMS"
                 },
                 "social_facility": {
                     "label": "Type"
@@ -3942,6 +4278,39 @@
                 },
                 "sport_ice": {
                     "label": "Sport"
+                },
+                "sport_racing_motor": {
+                    "label": "Sport"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Sport"
+                },
+                "stars": {
+                    "label": "Stjerner"
+                },
+                "start_date": {
+                    "label": "Startdato",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "step_count": {
+                    "label": "Antall steg"
+                },
+                "stile": {
+                    "label": "Type"
+                },
+                "stop": {
+                    "label": "Stop Type",
+                    "options": {
+                        "minor": "Mindre vei"
+                    }
+                },
+                "stroller": {
+                    "label": "Barnevogn Tilgang",
+                    "options": {
+                        "limited": "Begrenset",
+                        "no": "Nei",
+                        "yes": "Ja"
+                    }
                 },
                 "structure": {
                     "label": "Struktur",
@@ -3963,17 +4332,33 @@
                 "studio": {
                     "label": "Type"
                 },
+                "substance": {
+                    "label": "Substans"
+                },
                 "substation": {
                     "label": "Type"
+                },
+                "supervised": {
+                    "label": "Veiledet"
+                },
+                "support": {
+                    "label": "Støtte"
                 },
                 "surface": {
                     "label": "Overflate"
                 },
+                "surveillance": {
+                    "label": "Overvåkning Type"
+                },
                 "surveillance/type": {
+                    "label": "Overvåkning Type",
                     "options": {
                         "camera": "Kamera",
                         "guard": "Vakt"
                     }
+                },
+                "surveillance/zone": {
+                    "label": "Overvåkingssone"
                 },
                 "swimming_pool": {
                     "label": "Type"
@@ -4143,9 +4528,6 @@
                 "aerialway/drag_lift": {
                     "name": "Skitrekk"
                 },
-                "aerialway/gondola": {
-                    "name": "Gondol"
-                },
                 "aerialway/j-bar": {
                     "name": "J-Bar Heis"
                 },
@@ -4223,6 +4605,9 @@
                 },
                 "amenity/bicycle_parking": {
                     "name": "Sykkelparkering"
+                },
+                "amenity/bicycle_parking/building": {
+                    "name": "Sykkelhotel"
                 },
                 "amenity/bicycle_parking/lockers": {
                     "name": "Sykkelgarasje"
@@ -4524,9 +4909,6 @@
                 "amenity/recycling_container": {
                     "name": "Resirkuleringskonteiner"
                 },
-                "amenity/register_office": {
-                    "name": "Registrer Kontor"
-                },
                 "amenity/research_institute": {
                     "name": "Forskningsinstitutt Grunn"
                 },
@@ -4593,9 +4975,6 @@
                 "amenity/school": {
                     "name": "Skoleområde"
                 },
-                "amenity/scrapyard": {
-                    "name": "Skraphandel"
-                },
                 "amenity/shelter": {
                     "name": "Skur"
                 },
@@ -4640,9 +5019,6 @@
                 },
                 "amenity/studio/video": {
                     "name": "Filmstudio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Svømmebasseng"
                 },
                 "amenity/taxi": {
                     "name": "Taxiholdeplass"
@@ -5190,6 +5566,9 @@
                 "golf/bunker": {
                     "name": "Bunkers"
                 },
+                "golf/cartpath": {
+                    "name": "Golfbilvei"
+                },
                 "golf/driving_range": {
                     "name": "Drivingrange"
                 },
@@ -5201,6 +5580,9 @@
                 },
                 "golf/hole": {
                     "name": "Golfbanehull"
+                },
+                "golf/path": {
+                    "name": "Golf Gangvei"
                 },
                 "golf/rough": {
                     "name": "Rough"
@@ -5265,8 +5647,17 @@
                 "highway/cycleway": {
                     "name": "Sykkelvei"
                 },
-                "highway/cycleway/crossing/marked": {
+                "highway/cycleway/bicycle_foot": {
+                    "name": "Gang- og sykkelvei"
+                },
+                "highway/cycleway/crossing": {
                     "name": "Sykkelovergang"
+                },
+                "highway/cycleway/crossing/bicycle_foot": {
+                    "name": "Sykkel og Gangovergang"
+                },
+                "highway/cycleway/crossing/marked": {
+                    "name": "Merket Sykkelovergang"
                 },
                 "highway/cycleway/crossing/unmarked": {
                     "name": "Umerket sykkelovergang"
@@ -5315,6 +5706,9 @@
                 },
                 "highway/path": {
                     "name": "Sti"
+                },
+                "highway/path/informal": {
+                    "name": "Uformell bane"
                 },
                 "highway/pedestrian_area": {
                     "name": "Fotgjengerområde"
@@ -5448,9 +5842,6 @@
                 "junction": {
                     "name": "Kryss"
                 },
-                "landuse/allotments": {
-                    "name": "Felleshage"
-                },
                 "landuse/aquaculture": {
                     "name": "Havbruk"
                 },
@@ -5513,12 +5904,6 @@
                 },
                 "landuse/military/naval_base": {
                     "name": "Marinebase"
-                },
-                "landuse/military/obstacle_course": {
-                    "name": "Hinderløye"
-                },
-                "landuse/military/training_area": {
-                    "name": "Øvingsområde"
                 },
                 "landuse/orchard": {
                     "name": "Frukthage"
@@ -5694,19 +6079,10 @@
                 "leisure/track/cycling": {
                     "name": "Sykkelbane"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Sykkelbane"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Travbane"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Travbane"
-                },
                 "leisure/track/running": {
-                    "name": "Løpe bane"
-                },
-                "leisure/track/running_point": {
                     "name": "Løpe bane"
                 },
                 "leisure/water_park": {
@@ -5744,9 +6120,6 @@
                 },
                 "man_made/gasometer": {
                     "name": "Gasometer"
-                },
-                "man_made/groyne": {
-                    "name": "Bølgebryter / høfde"
                 },
                 "man_made/lighthouse": {
                     "name": "Fyrtårn"
@@ -5795,6 +6168,9 @@
                 },
                 "man_made/storage_tank/water": {
                     "name": "Vanntank"
+                },
+                "man_made/street_cabinet": {
+                    "name": "Gateskap"
                 },
                 "man_made/surveillance": {
                     "name": "Overvåkning"
@@ -5982,6 +6358,9 @@
                 "office/estate_agent": {
                     "name": "Eiendomsmegler"
                 },
+                "office/forestry": {
+                    "name": "Skogbrukskontoret"
+                },
                 "office/government": {
                     "name": "Regjeringskontor"
                 },
@@ -6135,11 +6514,20 @@
                 "public_transport/platform/bus_point": {
                     "name": "Busstopp"
                 },
+                "public_transport/platform/subway": {
+                    "name": "T-baneplattform"
+                },
+                "public_transport/platform/subway_point": {
+                    "name": "T-banestopp / -plattform"
+                },
                 "public_transport/platform/train": {
                     "name": "Tog Platform"
                 },
                 "public_transport/platform/tram": {
                     "name": "Trikk Platform"
+                },
+                "public_transport/station_subway": {
+                    "name": "T-banestasjon"
                 },
                 "public_transport/station_train": {
                     "name": "Togstasjon"
@@ -6150,26 +6538,14 @@
                 "railway/abandoned": {
                     "name": "Nedlagt jernbane"
                 },
+                "railway/crossing": {
+                    "name": "Jernbaneovergang"
+                },
                 "railway/disused": {
                     "name": "Ubrukt jernbane"
                 },
-                "railway/funicular": {
-                    "name": "Kabelbane"
-                },
-                "railway/miniature": {
-                    "name": "Miniatyrjernbane"
-                },
-                "railway/monorail": {
-                    "name": "Monorail"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Smalsporet jernbane"
-                },
                 "railway/platform": {
                     "name": "Togperrong"
-                },
-                "railway/rail": {
-                    "name": "Skinne"
                 },
                 "railway/signal": {
                     "name": "Togsignal"
@@ -6177,17 +6553,11 @@
                 "railway/station": {
                     "name": "Togstasjon"
                 },
-                "railway/subway": {
-                    "name": "T-bane"
-                },
                 "railway/subway_entrance": {
                     "name": "T-baneinngang"
                 },
                 "railway/train_wash": {
                     "name": "Tog Vask"
-                },
-                "railway/tram": {
-                    "name": "Trikk"
                 },
                 "relation": {
                     "name": "Relasjon"
@@ -6357,26 +6727,17 @@
                 "shop/fishing": {
                     "name": "Fiskebutikk"
                 },
-                "shop/fishmonger": {
-                    "name": "Fiskeforhandler"
-                },
                 "shop/florist": {
                     "name": "Blomsterbutikk"
                 },
                 "shop/frame": {
                     "name": "Innrammingsbutikk"
                 },
-                "shop/frozen_food": {
-                    "name": "Frossenmat"
-                },
                 "shop/fuel": {
                     "name": "Drivstoffbuttikk"
                 },
                 "shop/funeral_directors": {
                     "name": "Begravelsesagent"
-                },
-                "shop/furnace": {
-                    "name": "Varmebutikk"
                 },
                 "shop/furniture": {
                     "name": "Møbelforhandler"
@@ -6605,6 +6966,9 @@
                 },
                 "tourism/artwork/installation": {
                     "name": "Kunstinstallasjon"
+                },
+                "tourism/artwork/mural": {
+                    "name": "Veggmaleri"
                 },
                 "tourism/artwork/sculpture": {
                     "name": "Skulptur"
@@ -6872,6 +7236,9 @@
                 "name": "Esri World ortofoto (skarphet) beta"
             },
             "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap-bidragsytere, CC-BY-SA 2.0"
+                },
                 "description": "Standard OpenStreerMap-laget.",
                 "name": "OpenStreetMap (standard)"
             },
@@ -6927,96 +7294,950 @@
             "SPW_ORTHO_LAST": {
                 "name": "SPW(allonie) nyligste ortofoto"
             },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC numerisk ortofoto"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "På zoom-nivåer høyere enn 16, offentlig domene data fra US Census. På lavere zoom-nivåer, er det bare endringer siden 2006 minus endringer innlemmet i OpenStreetMap",
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Gul = Offentlig domene kartdata fra US Census. Rød = Data ikke funnet i OpenStreetMap",
+                "name": "TIGER Roads 2017"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Gul = Offentlig domene kartdata fra US Census. Rød = Data ikke funnet i OpenStreetMap",
+                "name": "TIGER Roads 2018"
+            },
+            "US-TIGER-Roads-2019": {
+                "description": "Gul = Offentlig domene kartdata fra US Census. Rød = Data ikke funnet i OpenStreetMap",
+                "name": "TIGER Roads 2019"
+            },
+            "USDA-NAIP": {
+                "description": "Det nyligste året av DOQQs fra National Agriculture Imagery Program (NAIP) for hver stat i det kontinentale USA.",
+                "name": "National Agriculture Imagery Program"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Vei: Grønt omriss = uklassifisert, Brunt omriss = traktorvei. Overflate: grus = lysebrunt fyll, Asfalt = svart, solid veidekke = grå, bar bakke = hvit, betong = blå, gress = grønn. Sesongveier = hvite tverrsnitt",
+                "name": "U.S. Forest Roads-overlegg"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realisert med finansiering fra Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realisert med finansiering fra Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realisert med finansiering fra Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realisert med finansiering fra Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realisert med finansiering fra Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realisert med finansiering fra Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap-bidragsytere, CC-BY-SA 3.0"
+                },
+                "name": "Waymarked Trails: Sykkel"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap-bidragsytere, CC-BY-SA 3.0"
+                },
+                "name": "Waymarked Trails: Fottur"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap-bidragsytere, CC-BY-SA 3.0"
+                },
+                "name": "Waymarked Trails: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap-bidragsytere, CC-BY-SA 3.0"
+                },
+                "name": "Waymarked Trails: Skøyter"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, OpenStreetMap-bidragsytere, CC-BY-SA 3.0"
+                },
+                "name": "Waymarked Trails: Vintersport"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Grunnkart over Østerrike, basert på data fra regjeringen.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofoto-lag gitt av basemap.at. \"Etterfølgeren\" til geoimage.at sine ortofoto.",
+                "name": "basemap.at ortofoto"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Overlegg gitt av basemap.at.",
+                "name": "basemap.at overlegg"
+            },
+            "eufar-balaton": {
+                "attribution": {
+                    "text": "EUFAR Balaton ortofotó 2010"
+                },
+                "description": "1940 georefererte bilder fra Balaton Limnological Institute.",
+                "name": "EUFAR Balaton ortofoto"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 via finds.jp. Bra å kartlegge etter, men litt eldre.",
+                "name": "Japan GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Gothenburg kommune, CC0"
+                },
+                "description": "Bykartet er et oversiktskart som beskriver Gothenburg. Den inneholder generell informasjon om areal, kommunikasjon, hydrografi, bygninger, adressenummer og gatenavn, administrative grenser og andre beskrivelser av omgivelsene.",
+                "name": "Gothenburg Bykart"
+            },
+            "gothenburg-ortho": {
+                "attribution": {
+                    "text": "© Gothenburg kommune, CC0"
+                },
+                "description": "Ortofoto for Gothenburg kommune",
+                "name": "Gothenburg Ortofoto"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI flyfoto. Ikke fullstendig og feilfri georeferanse, men litt nyere og forskjellig dekning enn GSI ortofoto.",
+                "name": "Japan GSI flyfoto"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan sømløse bilder"
+                },
+                "description": "Japan GSI sømløse bilder. En samling av de siste bildene fra GSI ortofoto, flyfoto, post-katastrofe og andre.",
+                "name": "Japan GSI sømløse bilder"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI standard kart. Stor dekning.",
+                "name": "Japan GSI standard kart"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg kommune"
+                },
+                "description": "Ortofoto fra Helsingborg kommune 2016, offentlig domene",
+                "name": "Helsingborg ortofoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar kommune"
+                },
+                "description": "Ortofoto fra nordre kyst av kommunen Kalmar 2014.",
+                "name": "Kalmar nordre ortofoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar kommune"
+                },
+                "description": "Ortofoto for sør kysten av Kalmar kommunen 2016",
+                "name": "Kalmar Sør-Ortofoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar Kommune"
+                },
+                "description": "Ortofoto for byområder i Kalmar kommune 2018",
+                "name": "Kalmar Urban Orthophoto 2018"
+            },
+            "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi Snøscooterløyper fra OSM (Nordisk dekning)",
+                "name": "Nordisk snøscooteroverlegg"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaikk av Sverige ortofoto fra the periode 1955–1965. Eldre og yngre bilder kan skje.",
+                "name": "Lantmäteriet Historisk ortofoto 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaikk av Sverige ortofoto fra the periode 1970–1980. Is under konstruksjon.",
+                "name": "Lantmäteriet Historisk ortofoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topografisk kart av Sverige 1:50 000",
+                "name": "Lantmäteriet Topografisk kart"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping kommune"
+                },
+                "description": "Ortofotografi  av Linköping Kommune 2010, open data",
+                "name": "Linköping Orthophoto"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Vilkår og tilbakemeldinger"
+                },
+                "description": "Viser viktige funksjoner som hjelper deg å orientere deg.",
+                "name": "Lokalisator Overlegg"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap bidragsytere, CC-BY-SA"
+                },
+                "name": "OpenPT-kart (overlegg)"
+            },
             "osm-gps": {
                 "attribution": {
                     "text": "© OpenStreetMap bidragsytere"
-                }
+                },
+                "description": "Offentlige GPS-spor lastet opp til OpenStreetMap.",
+                "name": "OpenStreetMap GPS spor"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap bidragsytere, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard Svart & Hvitt)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap bidragsytere, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Tysk Stil)"
+            },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Skanning av \"Økonomiske Kart\" ca. 1950-1980",
+                "name": "Lantmäteriet Economisk Kart 1950–1980"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMap bidragsytere"
+                },
+                "name": "QA Ingen Adresse"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Fliser: skobbler Kart data: OpenStreetMap bidragsytere"
+                },
+                "name": "skobbler"
+            },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snøscooterløyper",
+                "name": "Snøscooterkart Sverige"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kart fliser av Stamen Design, under CC BY 3.0. Data av OpenStreetMap, under ODbL"
+                },
+                "name": "Stamen Terreng"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm kommune, CC0"
+                },
+                "description": "Portofotografi fra Stockholm Kommune 2016, CC0 Lisens",
+                "name": "Stockholm Orthophoto"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Kart © Thunderforest, Data © OpenStreetMap Stamen Terreng"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Kart © Thunderforest, Data © OpenStreetMap Stamen Terrain"
+                },
+                "name": "Thunderforest Landscape"
+            },
+            "tf-outdoors": {
+                "attribution": {
+                    "text": "Kart © Thunderforest, Data © OpenStreetMap Stamen Terreng"
+                },
+                "name": "Thunderforest Outdoors"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svensk jernbanenett, inkludert sidelinjer",
+                "name": "Trafikkverket jernbanenett"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svensk jernbane nettverk med flere valg for lartlag",
+                "name": "Trafikverket Alternativer for Jernbanenettverk"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svensk NVDB veinett",
+                "name": "Trafikverket Veinett"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svensk NVDB ekstra detaljer: Motorveisreferanse,trafikk beroligende, hvile område, buss stop, bru, tunnel, fotoboks",
+                "name": "Trafikverket Veinett ekstra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenske NVDB-gatenavn",
+                "name": "Trafikverket Gatenavn"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svensk NVDB veinett med flere alternativer for kartlag",
+                "name": "Trafikverket Vegnettverkalternativer"
+            },
+            "wroclaw-orto2018": {
+                "attribution": {
+                    "text": "Wroclaw rådhus"
+                },
+                "name": "Wroclaw: Orthophotomap 2018 (aerial image)"
             }
         },
         "community": {
+            "Bahia-telegram": {
+                "name": "OpenStreetMap Bahia Telegram-gruppe",
+                "description": "Bli med i OpenStreetMap Bahia-fellesskapet på Telegram",
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap, spørre spørsmål eller delta på møtene våre. Alle er velkommen!"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMap-kartleggere",
+                "description": "Forbedre OpenStreetMap i Bay Area",
+                "extendedDescription": "Denne gruppen handler om å utvide OpenStreetMap-fellesskapet her i Bay Area. Hendelsene våre er åpne for alle, fra åpen-kildekode-entusiaster, syklister, GIS-profesjonelle, geocachere, og videre. Hvem som helst og alle som er interesserte i kart, lage kart og åpne kartdata er velkommen for å bli med i gruppen vår og delta på hendelsene våre."
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM",
+                "description": "Online kartlegging-fellesskap basert i State College, PA"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Programmere for San Jose Slack",
+                "description": "Alle er velkommen! Registrer deg på {signupUrl}, så bli med i #osm-kanalen"
+            },
+            "DF-telegram": {
+                "name": "OpenStreetMap Brasília Telegram-gruppe.",
+                "description": "Bli med OpenStreetMap Brasília-fellesskapet på Telegram",
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap, spørre spørsmål eller delta på møtene våre. Alle er velkommen!"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "OpenStreetMap-brukergruppen for Dallas-Fort Worth",
+                "extendedDescription": "Dallas, Fort Worth, og alle byene i mellom har rikelig med kreative og teknisk-interesserte folk. Visjonen for denne brukergruppen er å finne nye måter å bruke den fantastiske ressursen OSM."
+            },
+            "Galicia-Telegram": {
+                "name": "OpenStreetMap Galicia Telegram",
+                "description": "OpenStreetMap Telegram for Galicia"
+            },
             "Galicia-Twitter": {
-                "description": "Følg oss på Twitter på {url}"
+                "name": "OpenStreetMap Galicia Twitter",
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly",
+                "description": "Oppmøte for kartentusiaster i Philadelphia-området",
+                "extendedDescription": "GeoPhilly forener utviklere, geografer, datanerder, åpen-kildekode-entusiaster, hackere og kartavhengige i vår delte interesse i kart og historiene de forteller. Hvis du bruker kart som del av yrket ditt, eller bare vil vite mer, er dette oppmøtet for deg! Hendelsen vår har i mål å være åpen, vennlig, lærerik og sosial, og består av alt fra \"happy hours\" til lynprat og til og med workshops. Kom og ta del av en mangfoldig, inspirerende fellesskap i Philadelphia med oss!"
+            },
+            "MapColabora-mailinglist": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza e-postliste"
+            },
+            "MapColabora-meetup": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza oppmøte-side"
+            },
+            "MapColabora-twitter": {
+                "name": "Mapeado Colaborativo / Geoinquietos Zaragoza",
+                "description": "Mapeado Colaborativo / Geoinquietos Zaragoza Twitter-konto"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota",
+                "description": "Kartleggere og OpenStreetMap-entusiaster i Twin Cities-området",
+                "extendedDescription": "Forener OpenStreetMap-entusiaster i Minnesota og Twin Cities!"
+            },
+            "Mapping-DC-meetup": {
+                "name": "Kartlegge DC",
+                "description": "Forbedre OpenStreetMap i DC-området",
+                "extendedDescription": "Vi er en gruppe frivillige kartleggere som har i mål å forbedre OpenStreetMap i DC-området. Vi har også i mål å lære hverandre om OSM-økosystemet, dataanalyser, kartografi, og GIS. Vi samles annen hver måned på oppmøter for å fokusere på et område i byen vår."
+            },
+            "MappingWR": {
+                "name": "MappingWR",
+                "description": "Gjør lav-karbonutslipps ruter rundt Waterloo Region enkle å finne."
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotá",
+                "description": "Vi er en gruppe kartleggere interessert i kartlegging på OpenStreetMap rundt Bogotá.",
+                "extendedDescription": "Lær å samle data utendørs og digitalisere det på OpenStreetMap. Det er ikke nødvendig å ha tidligere erfaring! Du trenger bare lysten til å bidra, lære og ha det gøy."
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME",
+                "description": "Kartleggere og OpenStreetMap-brukere, rundt Portland, ME",
+                "extendedDescription": "Maptime er, ganske bokstavelig, tid til kartlegging. Målet vårt er å åpne dørene til kartografiske muligheter for alle som er interesserte ved å sette av tid til samarbeid, læring, utforsking og å lage kart ved hjelp av kartverktøy og teknologi."
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania Slack",
+                "description": "Registrer deg på {signupUrl}"
             },
             "MaptimeHRVA-twitter": {
-                "description": "Følg oss på Twitter på {url}"
+                "name": "MaptimeHRVA Twitter",
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "Nottingham-OSM-pub-meetup": {
+                "name": "East Midlands (Nottingham) månedlig pub-oppmøte",
+                "description": "Sosialt oppmøte for East Midlands-kartleggere og brukere",
+                "extendedDescription": "En gruppe har møtt opp siden mars 2011, i utgangspunktet i Nottingham, og mer nylig i Derby, og noen ganger i East Midlands. Disse er sosiale oppmøter, men er et perfekt sted for å komme og spørre spesifikke spørsmål OSM eller om området generelt. I sommer-månedene gjør vi ofte litt rolig kartlegging i en time rundt kartleggingsområdet. Gruppen i sin helhet har en spesiell interesse i offentlige rights-of-way og til tider har et oppmøte dedikert til å kartlegge disse."
+            },
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Argentina Facebook",
+                "description": "Bli med OpenStreetMap Argentina-fellesskapet på Facebook",
+                "extendedDescription": "Nyheter fra det lokale fellesskapet."
+            },
+            "OSM-AR-forum": {
+                "name": "OpenStreetMap Argentina web forum",
+                "description": "bli med OpenStreetMap Argentina web forumet",
+                "extendedDescription": "Ideelt for lange eller viktige diskusjoner. Treg responstid."
+            },
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap Argentina IRC",
+                "description": "Bli med #osm-ar på irc.oftc.net (port 6667)",
+                "extendedDescription": "Du kan kanskje finne den mest nerdete brukeren i fellesskapet."
             },
             "OSM-AR-mailinglist": {
                 "name": "Talk-ar e-postliste",
                 "description": "Historisk postliste. Nesten ubrukt i dag."
             },
+            "OSM-AR-telegram": {
+                "name": "OpenStreetMap Argentina Telegram",
+                "description": "Bli med i OpenStreetMap Argentina-fellesskapet på Telegram",
+                "extendedDescription": "De mest aktive kanalene i fellesskapet, ideelt for å chatte og å få svar på spørsmålene dine veldig raskt. Alle er velkomne!"
+            },
             "OSM-AR-twitter": {
                 "name": "OpenStreetMap Argentina Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}",
+                "extendedDescription": "Nyheter fra det lokale fellesskapet og OpenStreetMap generelt."
+            },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap Asia e-postliste",
+                "description": "Talk-asia er den offisielle e-postlisten for det Asiatiske fellesskapet"
             },
             "OSM-BGD-facebook": {
-                "description": "Forbedre OpenStreetMap i Bangladesh"
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Forbedre OpenStreetMap i Bangladesh",
+                "extendedDescription": "Kartlegger du i Bangladesh? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!",
+                "events": {
+                    "sotmasia2019": {
+                        "name": "State of the Map Asia 2019",
+                        "description": "Bli med på OpenStreetMaps regionale hendelse i 2019 på State of the Map Asia i Dhaka",
+                        "where": "Krishibid Institution Bangladesh (KIB), Dhaka, Bangladesh"
+                    }
+                }
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo e-postliste",
+                "description": "Talk-bo er den offisielle e-postlisten for det Bolivianske OpenStreetMap-fellesskapet",
+                "extendedDescription": "Kartlegger du i Bolivia? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSM-BiH-telegram": {
+                "name": "OpenStreetMap BiH Telegram",
+                "description": "En Telegram-gruppe for OSM-fellesskapet i Bosnia og Herzegovina: {url}"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston",
+                "description": "Kartleggere og OpenStreetMap-brukere i Boston-området",
+                "extendedDescription": "OpenStreetMap er det gratise og åpne, wiki-aktige kartet over verden, med flere hundre tusen bidrag hver dag fra folk som deg. Å redigere kartet er enkelt, og morsomt! Bli med oss både innendørs og utendørs i å lage det beste kartet i Boston-området og resten av verden!"
             },
             "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
                 "description": "Alle er velkomne! Registrer deg på {signupUrl}."
             },
+            "OSM-CA-mailinglist": {
+                "name": "OSM-CA e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Canada."
+            },
+            "OSM-CA-telegram": {
+                "name": "@osmca på Telegram",
+                "description": "OpenStreetMap Canada Telegram-chat"
+            },
+            "OSM-CL-facebook": {
+                "name": "OpenStreetMap Chile Facebook",
+                "description": "Bli med OpenStreetMap Chile-fellesskapet på Facebook",
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap, spørre spørsmål eller delta på møtene våre. Alle er velkommen!"
+            },
             "OSM-CL-mailinglist": {
-                "name": "Talk-cl postliste"
+                "name": "Talk-cl e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Chile"
+            },
+            "OSM-CL-telegram": {
+                "name": "OpenStreetMap Chile Telegram",
+                "description": "Bli med i OpenStreetMap Chile-fellesskapet på Telegram",
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap, spørre spørsmål eller delta på møtene våre. Alle er velkommen!"
             },
             "OSM-CL-twitter": {
                 "name": "OpenStreetMap Chile Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "OSM-CN-telegram": {
+                "name": "OpenStreetMap Kina Telegram",
+                "description": "En Telegram-gruppe for det kinesiske OSM-fellesskapet: {url}"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colombia",
+                "description": "Nyheter fra OpenStreetMap Colombia-fellesskapet og OSMCo Foundation"
+            },
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Colombia Facebook",
+                "description": "Bli med OpenStreetMap Colombia-fellesskapet på Facebook",
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap. Alle er velkommen!"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Colombia"
+            },
+            "OSM-CO-telegram": {
+                "name": "OSM Colombia på Telegram",
+                "description": "OpenStreetMap Colombia Telegram-chat"
             },
             "OSM-CO-twitter": {
                 "name": "OpenStreetMap Colombia Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba på Telegram",
+                "description": "OpenStreetMap Cuba Telegram-chat"
+            },
+            "OSM-CZ-telegram": {
+                "name": "OpenStreetMap CZ Telegram",
+                "description": "En Telegram-gruppe for det tsjekkiske OSM-fellesskapet: {url}"
+            },
+            "OSM-Central-Salish-Sea": {
+                "name": "OpenStreetMap Central Salish Sea",
+                "description": "Kartleggere og OpenStreetMap-brukere, rundt Mount Vernon, WA",
+                "extendedDescription": "OpenStreetMap er et kart over verden laget av folk som deg. Det er et kart som du bygger, som gis bort gratis, litt som Wikipedia. Sjekk ut osm.org for mer info. Vi møtes hele tiden for å snakke kart, lage kart og ha det gøy!"
+            },
+            "OSM-Chattanooga": {
+                "name": "OSM Chattanooga",
+                "description": "OpenStreetMap-brukergruppen for Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado",
+                "description": "Kartleggere og OpenStreetMap-brukere i Colorado, USA",
+                "extendedDescription": "OpenStreetMap (OSM) Colorado er ett lokalt samarbeid av folk interessert i å bidra i å lage frie kart. Vi oppmuntrer alle våre kartleggere til å organisere eller foreslå kartleggingshendelser i staten. Aktiviteter under oppmøte kan være enkel sosial miksing, grunnleggende OSM til avansert trening, eller fellesskap kartleggingsgrupper."
             },
             "OSM-Discord": {
+                "name": "OpenStreetMap Discord",
                 "description": "Ta kontakt med andre kartleggere via Discord"
             },
+            "OSM-EC-telegram": {
+                "name": "OSM Ecuador på Telegram",
+                "description": "OpenStreetMap Ecuador Telegram-chat"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Spania"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes på Telegram",
+                "description": "OpenStreetMap Spain Telegram-chat"
+            },
             "OSM-Facebook": {
-                "name": "OpenStreetMap på Facebook"
+                "name": "OpenStreetMap på Facebook",
+                "description": "Lik oss på Facebook for nyheter og oppdateringer om OpenStreetMap."
             },
             "OSM-IDN-facebook": {
-                "description": "Forbedre OpenStreetMap i Indonesia"
+                "name": "OpenStreetMap Indonesia",
+                "description": "Forbedre OpenStreetMap i Indonesia",
+                "extendedDescription": "Kartlegger du i Indonesia? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "Bli med #osm på irc.oftc.net (port 6667)"
+            },
+            "OSM-India-Puducherry-Facebook": {
+                "name": "Free Software Hardware Movement - Facebook",
+                "description": "FSHM Facebook-siden for å lese om hendelser og aktiviteter blant fellesskapet",
+                "extendedDescription": "FSHM organiserer hendelser som handler om gratis programvare/maskinvare, teknologi, aktivisme og OpenStreetMap. Deres FB-side er den beste måten å holde seg oppdatert på fremtidige hendelser."
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Free Software Hardware Movement - Matrix",
+                "description": "FSHM Riot- for å diskutere, dele og få oppdateringer om aktiviteter/hendelser i og rundt Puducherry",
+                "extendedDescription": "FSHM fellesskapmedlemmer deler deres oppdateringer / erfaringer når det gjelder OSM-kartlegging gjennom Riot.im-gruppen. Denne gruppen brukes også til å diskutere ting rundt gratis programvare / maskinvare, teknologi og aktivisme."
             },
             "OSM-India-facebook": {
-                "description": "Forbedre OpenStreetMap i India"
+                "name": "OpenStreetMap India - Participatory neighborhood mapping",
+                "description": "Forbedre OpenStreetMap i India",
+                "extendedDescription": "Kartlegger du i India? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSM-Japan-telegram": {
+                "name": "OpenStreetMap Japan Telegram",
+                "description": "En Telegram-gruppe for det japanske OSM-fellesskapet: {url}"
+            },
+            "OSM-Kerala-facebook": {
+                "name": "OpenStreetMap Kerala - Participatory neighborhood mapping",
+                "description": "Forbedre OpenStreetMap i Kerala",
+                "extendedDescription": "Kartlegger du i Kerala? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSM-Korea-mailinglist": {
+                "name": "OpenStreetMap Korea e-postliste",
+                "description": "Talk-ko er den offisielle e-postlisten der fellesskapet kan diskutere hva som skjer i Korea"
+            },
+            "OSM-Korea-telegram": {
+                "name": "OSM Korea Telegram",
+                "description": "Uoffisiell gruppe for OpenStreetMap-bidragsytere, fellesskap, og brukere i Korea for å dele og diskutere."
             },
             "OSM-MMR-facebook": {
-                "description": "Forbedre OpenStreetMap i Myanmar"
+                "name": "OpenStreetMap Myanmar",
+                "description": "Forbedre OpenStreetMap i Myanmar",
+                "extendedDescription": "Kartlegger du i Myanmar? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
             },
             "OSM-MNG-facebook": {
-                "description": "Forbedre OpenStreetMap i Mongolia"
+                "name": "OpenStreetMap Mongolia",
+                "description": "Forbedre OpenStreetMap i Mongolia",
+                "extendedDescription": "Kartlegger du i Mongolia? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaysia på Facebook",
+                "description": "For å chatte om hva som helst som er relatert til OpenStreetMap!"
+            },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap Malaysia Forum",
+                "description": "Offisielt OpenStreetMap Malaysia Forum"
+            },
+            "OSM-MY-matrix": {
+                "name": "OpenStreetMap Malaysia Riot-kanal",
+                "description": "Alle kartleggere er velkomne! Registrer deg på {signupUrl}"
             },
             "OSM-Nepal-facebook": {
-                "description": "Forbedre OpenStreetMap i Nepal"
+                "name": "OpenStreetMap Nepal",
+                "description": "Forbedre OpenStreetMap i Nepal",
+                "extendedDescription": "Kartlegger du i Nepal? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSM-Ottawa-meetup": {
+                "name": "OpenStreetMap Ottawa",
+                "description": "Kartleggere og OpenStreetMap-brukere i Ottawa-området"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru",
+                "description": "Nyheter og ressurser for i OpenStreetMap Peru-fellesskapet"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Peru Facebook",
+                "description": "Bli med OpenStreetMap Peru-fellesskapet på Facebook"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe e-postliste",
+                "description": "Den offisielle e-postlisten for OpenStreetMap Peru-fellesskapet"
+            },
+            "OSM-PE-matrix": {
+                "name": "OpenStreetMap Peru Matrix-chat",
+                "description": "Chat med andre medlemmer av OpenStreetMap Peru-fellesskapet på Matrix."
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram",
+                "description": "Bli med i OpenStreetMap Peru-fellesskapet på Telegram"
             },
             "OSM-PE-twitter": {
                 "name": "OpenStreetMap Peru Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap PH Facebook",
+                "description": "Velkommen til OpenStreetMap Filippinene, der vi oppmuntrer alle andre Filippinere til å bidra til OpenStreetMap-prosjektet."
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Filippinene"
+            },
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap PH Slack",
+                "description": "Alle er velkomne! Registrer deg på {signupUrl}"
+            },
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap PH Telegram",
+                "description": "Uoffisiell Telegram for lokale OpenStreetMap-bidragsytere og venner i Filippinene"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Polen Facebook-gruppe",
+                "description": "Gruppe for kartleggere og OpenStreetMap-brukere i Polen"
+            },
+            "OSM-PL-forum": {
+                "name": "OpenStreetMap Polen Forum",
+                "description": "Forum til det polske OpenStreetMap-fellesskapet"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paraguay på Telegram",
+                "description": "OpenStreetMap Paraguay Telegram-chat"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland",
+                "description": "Kartleggere og OpenStreetMap-brukere i Portland-området",
+                "extendedDescription": "OpenStreetMap er et kart over verden laget av folk som deg. Det er et kart som du bygger, som gis bort gratis, litt som Wikipedia. Sjekk ut osm.org for mer info. Bli med på oppmøter for å snakke kart, bidra på OpenStreetMap og ha det gøy!"
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap PDX Google-gruppe",
+                "description": "Forum og e-postliste for OpenStreetMap-brukere i Portland-området",
+                "extendedDescription": "Denne gruppen er til for å legge til rette for forbedringer på OpenStreetMap i Portland, Oregon-området for å støtte applikasjoner som Open Trip Planner."
+            },
+            "OSM-Puducherry-Mailing-List": {
+                "name": "Free Software Hardware Movement - E-postliste",
+                "description": "FSHM Puducherry e-postliste for å diskutere kartlegging i Puducherry og andre ting.",
+                "extendedDescription": "FSHM organiserer hendelser som handler om gratis programvare/maskinvare, teknologi, aktivisme og OpenStreetMap."
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap RU forum",
+                "description": "OpenStreetMap Russland nettforum"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap RU Telegram",
+                "description": "OpenStreetMap Russland Telegram-chat"
+            },
+            "OSM-Reddit": {
+                "name": "OpenStreetMap på Reddit",
+                "description": "/r/openstreetmap/ er en super plass å lære mer om OpenStreetMap. Spør oss hva som helst!"
+            },
+            "OSM-Rome-meetup": {
+                "name": "Incontro Mappatori Romani",
+                "description": "Forbedre OpenStreetMap i Romani-området",
+                "extendedDescription": "Vi har som mål å være en ressurs der folk kan diskutere og dele kunnskap om å bruke geografiske datasett, spesielt OpenStreetMap, og åpne geospatial programvare som behandler, endrer og viser geografiske data, og støtter bruken i Lazio."
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle",
+                "description": "Kartleggere og OpenStreetMap-brukere i Seattle-området"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Sør-California",
+                "description": "La oss ha det gøy, bidra til kartet rundt Los Angeles, og lære om kartlegging!"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay"
+            },
+            "OSM-TH-CNX-meetup": {
+                "name": "OSM-oppmøte Chiang Mai",
+                "description": "Uregelmessig møte i OpenStreetMap-samfunnet i Chiang Mai"
+            },
+            "OSM-TH-facebook": {
+                "name": "OpenStreetMap TH Facebook-gruppe",
+                "description": "Facebook-gruppe for OpenStreetMap Kartleggere i Thailand"
+            },
+            "OSM-TH-forum": {
+                "name": "OpenStreetMap TH forum",
+                "description": "OpenStreetMap Thailand nettforum"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taiwan-fellesskapet",
+                "description": "Facebook Group for Kartleggere og OpenStreetMap-brukere for å diskutere saker om Taiwan."
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Taiwan e-postliste"
+            },
+            "OSM-TW-telegram": {
+                "name": "OpenStreetMap Taiwan Telegram",
+                "description": "En Telegram-gruppe for det taiwanske OSM-fellesskapet: {url}"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram"
             },
             "OSM-Twitter": {
                 "name": "OpenStreetMap Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap Amerika"
             },
             "OSM-US-Slack": {
+                "name": "OpenStreetMap Amerika Slack",
                 "description": "Alle er velkomne! Registrer deg på {signupUrl}"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brasil Discord",
+                "description": "Bli med i OpenStreetMap Brasil-samfunnet på Discord"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Brasil"
+            },
+            "OSM-br-telegram": {
+                "name": "OpenStreetMap Brasil Telegram",
+                "description": "Bli med i OpenStreetMap Brasil-samfunnet på Telegram",
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap, spørre spørsmål eller delta på møtene våre. Alle er velkommen!"
             },
             "OSM-br-twitter": {
                 "name": "OpenStreetMap Brasil Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "OSM-help": {
+                "name": "OpenStreetMap Hjelp",
+                "description": "Still et spørsmål og få svar på OSMs samfunnsdrevne spørsmål- og svarsted."
+            },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap India e-postliste"
             },
             "OSM-india-twitter": {
                 "name": "OpenStreetMap India Twitter"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japan-fellesskapet"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japan e-postliste"
             },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap Japan Twitter",
                 "description": "Hashtag på Twitter: {url}"
             },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japan"
+            },
+            "OSM-sri-lanka-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
+                "extendedDescription": "Kartlegger du i Sri Lanka? Har du spørsmål, og har lyst til å sosialisere med fellesskapet her? Bli med på {url}. Alle er velkomne!"
+            },
+            "OSMF": {
+                "name": "OpenStreetMap Foundation",
+                "events": {
+                    "sotm2020": {
+                        "name": "State of the Map 2020",
+                        "where": "Cape Town, Sør-Afrika"
+                    }
+                }
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland"
+            },
             "PHXGeo-twitter": {
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "RS-telegram": {
+                "extendedDescription": "Bli med i fellesskapet for å lære mer om OpenStreetMap, spørre spørsmål eller delta på møtene våre. Alle er velkommen!"
+            },
+            "South-Tyrol-Mailing-List": {
+                "name": "OpenStreetMap e-postliste for Sør-Tyrol"
+            },
+            "Trentino-Mailing-List": {
+                "name": "OpenStreetMap e-postliste for Trentino"
+            },
+            "Western-Slope-facebook": {
+                "name": "Western Slope OSM Facebook"
+            },
+            "Western-Slope-meetup": {
+                "name": "Western Slope OSM oppmøte"
+            },
+            "al-forum": {
+                "name": "OSM Albania Forum",
+                "description": "OpenStreetMap Albania Forum"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana"
+            },
+            "al-telegram": {
+                "name": "OSM Albania Telegram-kanal",
+                "description": "OpenStreetMap Albania Telegram-kanal"
+            },
+            "al-twitter": {
+                "name": "OpenStreetMap Albania Twitter",
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "at-forum": {
+                "name": "OpenStreetMap Østerrike Forum"
+            },
+            "at-mailinglist": {
+                "name": "Talk-at e-postliste"
             },
             "at-twitter": {
                 "name": "OpenStreetMap Østerrike Twitter",
                 "description": "OpenStreetMap Østerrike på Twitter: {url}"
             },
+            "be-forum": {
+                "name": "OpenStreetMap BE forum",
+                "description": "OpenStreetMap Belgia nettforum"
+            },
+            "be-irc": {
+                "name": "OpenStreetMap Belgia IRC"
+            },
+            "be-mailinglist": {
+                "name": "Talk-be e-postliste"
+            },
+            "be-matrix": {
+                "name": "OpenStreetMap BE Matrix-kanal"
+            },
+            "be-meetup": {
+                "name": "OpenStreetMap Belgia Oppmøte"
+            },
             "be-twitter": {
                 "name": "OpenStreetMap Belgia Twitter"
+            },
+            "bg-forum": {
+                "name": "OpenStreetMap Bulgaria Forum"
+            },
+            "bg-wiki": {
+                "name": "OpenStreetMap Wikiproject Bulgaria"
             },
             "bw-facebook": {
                 "name": "Mapping Botswana på Facebook",
@@ -7026,20 +8247,257 @@
                 "name": "Mapping Botswana på Twitter",
                 "description": "OpenStreetMap Twitter-kontoen i Botswana"
             },
+            "byosm": {
+                "name": "OpenStreetMap Hviterussland",
+                "description": "OpenStreetMap Hviterussland Telegram-chat"
+            },
             "cape-coast-youthmappers": {
                 "description": "Følg oss på Twitter: {url}"
+            },
+            "ch-irc": {
+                "name": "OpenStreetMap Sveits IRC"
+            },
+            "ch-mailinglist": {
+                "name": "OpenStreetMap Sveits e-postliste",
+                "description": "E-postliste for Sveits"
+            },
+            "ch-twitter": {
+                "name": "OpenStreetMap Sveits Twitter",
+                "description": "Følg oss på Twitter: {url}"
+            },
+            "cuneo-telegram": {
+                "name": "OpenStreetMap Cuneo-kartleggere",
+                "description": "OpenStreetMap Cuneo Telegram-chat"
+            },
+            "czech-community": {
+                "name": "Tsjekkisk OSM-fellesskap"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Berlin e-postliste"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin på Telegram",
+                "description": "OpenStreetMap Berlin Telegram-chat"
             },
             "de-berlin-twitter": {
                 "name": "OpenStreetMap Berlin Twitter",
                 "description": "Følg oss på Twitter: {url}"
             },
+            "de-forum": {
+                "name": "OpenStreetMap DE forum",
+                "description": "OpenStreetMap Tyskland nettforum"
+            },
+            "de-hamburg-telegram": {
+                "name": "OSM Hamburg på Telegram"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Tyskland IRC"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de e-postliste"
+            },
+            "de-matrix": {
+                "name": "OpenStreetMap Tyskland Matrix"
+            },
+            "de-ostwestfalen-lippe-mailinglist": {
+                "name": "OWL e-postliste"
+            },
+            "de-telegram": {
+                "name": "OpenStreetMap Tyskland Telegram"
+            },
+            "de-viersen-meetup": {
+                "name": "OpenStreetMap Viersen oppmøte"
+            },
+            "dk-forum": {
+                "name": "OpenStreetMap Danmark nettforum",
+                "description": "OpenStreetMap Danmark nettforum"
+            },
+            "dk-irc": {
+                "name": "OpenStreetMap Danmark IRC"
+            },
+            "dk-mailinglist": {
+                "name": "Talk-dk e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Danmark"
+            },
+            "es-twitter": {
+                "name": "OpenStreetMap Spania Twitter",
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "et-telegram": {
+                "name": "@OpenStreetMapEthiopia på Telegram",
+                "description": "OpenStreetMap Etiopia Telegram-chat"
+            },
+            "fi-forum": {
+                "name": "OpenStreetMap FI forum",
+                "description": "OpenStreetMap Finland nettforum"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap Finland IRC"
+            },
+            "fi-mailinglist": {
+                "name": "Talk-fi e-postliste"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Talk-fr-bzh e-postliste",
+                "description": "Talk-fr-bzh e-postliste"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH på Twitter",
+                "description": "OpenStreetMap BZH på Twitter: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "OpenStreetMap BZH nettsted"
+            },
+            "fr-facebook": {
+                "name": "OpenStreetMap Frankrike Facebook-side",
+                "description": "OpenStreetMap Frankrike Facebook-side"
+            },
+            "fr-forum": {
+                "name": "OpenStreetMap Frankrike nettforum",
+                "description": "OpenStreetMap Frankrike nettforum"
+            },
+            "fr-irc": {
+                "name": "OpenStreetMap Frankrike på IRC",
+                "description": "Bli med #osm-fr på irc.oftc.net (port 6667)"
+            },
+            "fr-mailinglist": {
+                "name": "Talk-fr e-postliste",
+                "description": "Talk-fr e-postliste"
+            },
+            "fr-telegram": {
+                "name": "OpenStreetMap Frankrike på Telegram",
+                "description": "En Telegram-gruppe for det franske OSM-fellesskapet: {url}"
+            },
             "fr-twitter": {
                 "name": "OpenStreetMap Frankrike på Twitter",
                 "description": "OpenStreetMap Frankrike på Twitter: {url}"
             },
+            "galicia-wiki": {
+                "name": "OpenStreetMap Wikiproject Galicia"
+            },
+            "gb-irc": {
+                "name": "OpenStreetMap Storbitannia IRC"
+            },
+            "gb-mailinglist": {
+                "name": "Talk-gb e-postliste"
+            },
+            "guatemala-telegram": {
+                "description": "OpenStreetMap Guatemala Telegram-chat"
+            },
+            "hr-facebook": {
+                "name": "OpenStreetMap Kroatia Facebook-gruppe",
+                "description": "OpenStreetMap Kroatia Facebook-gruppe"
+            },
+            "hr-irc": {
+                "name": "OpenStreetMap Kroatia på IRC"
+            },
+            "hr-mailinglist": {
+                "name": "Talk-hr e-postliste",
+                "description": "Talk-hr e-postliste"
+            },
+            "hu-facebook": {
+                "name": "OpenStreetMap HU på Facebook"
+            },
+            "hu-forum": {
+                "name": "OpenStreetMap HU forum",
+                "description": "OpenStreetMap Ungarn nettforum"
+            },
+            "hu-matrix": {
+                "name": "OpenStreetMap HU Matrix-rom",
+                "description": "OpenStreetMap Ungarn Matrix-chat"
+            },
+            "hu-meetup": {
+                "name": "OpenStreetMap Hungary oppmøte"
+            },
+            "il-telegram": {
+                "name": "OSM Israel på Telegram"
+            },
+            "ireland-facebook": {
+                "name": "OpenStreetMap Irland Facebook-gruppe",
+                "description": "OpenStreetMap Irland Facebook-side"
+            },
+            "ireland-irc": {
+                "name": "OpenStreetMap Irland IRC"
+            },
+            "ireland-mailinglist": {
+                "name": "Talk-ie e-postliste"
+            },
+            "ireland-telegram": {
+                "name": "OSM Irland på Telegram",
+                "description": "OpenStreetMap Irland Telegram-chat"
+            },
+            "ireland-twitter": {
+                "name": "OpenStreetMap IE på Twitter",
+                "description": "OpenStreetMap IE på Twitter: {url}"
+            },
+            "is-facebook": {
+                "name": "OSM Island på Facebook"
+            },
+            "is-mailinglist": {
+                "name": "Talk-is e-postliste"
+            },
+            "is-twitter": {
+                "name": "OSM Island på Twitter"
+            },
+            "it-facebook": {
+                "name": "OpenStreetMap Italia Facebook"
+            },
+            "it-irc": {
+                "name": "OpenStreetMap Italia IRC"
+            },
+            "it-mailinglist": {
+                "name": "Talk-it e-postliste"
+            },
+            "it-telegram": {
+                "name": "@OpenStreetMapItalia på Telegram",
+                "description": "OpenStreetMap Italia Telegram-chat"
+            },
             "it-twitter": {
                 "name": "OpenStreetMap Italia Twitter",
-                "description": "Følg oss på Twitter på {url}"
+                "description": "Følg oss på Twitter via {url}"
+            },
+            "kazakhstan-telegram": {
+                "name": "OSM Kazakhstan på Telegram",
+                "description": "OpenStreetMap Kazakhstan Telegram-chat"
+            },
+            "kosovo-telegram": {
+                "name": "OpenStreetMap Kosovo på Telegram"
+            },
+            "latam-mailinglist": {
+                "name": "Talk-latam e-postliste"
+            },
+            "lu-mailinglist": {
+                "name": "Talk-lu e-postliste"
+            },
+            "md-googlegroup": {
+                "name": "OSM Moldova Google-gruppe",
+                "description": "OpenStreetMap Moldova Google-gruppe"
+            },
+            "md-telegram": {
+                "name": "@OSMMoldova på Telegram",
+                "description": "OpenStreetMap Moldova Telegram-chat"
+            },
+            "ni-facebook": {
+                "name": "OpenStreetMap NI-fellesskapet"
+            },
+            "ni-mailinglist": {
+                "name": "Talk-ni e-postliste"
+            },
+            "ni-telegram": {
+                "name": "OSM Nicaragua på Telegram",
+                "description": "OpenStreetMap Nicaragua Telegram-chat"
+            },
+            "ni-twitter": {
+                "name": "OpenStreetMap Nicaragua Twitter",
+                "description": "OSM Nicaragua på Twitter: @osm_ni"
+            },
+            "nl-forum": {
+                "name": "Nederland OpenStreetMap forum",
+                "description": "OpenStreetMap  Nederland nettforum"
+            },
+            "nl-telegram": {
+                "name": "Nederland OpenStreetMap Telegram",
+                "description": "En Telegram-gruppe for det nederlandske OSM-fellesskapet: {url}"
             },
             "no-forum": {
                 "name": "OpenStreetMap Norge Nettforum",
@@ -7054,28 +8512,251 @@
                 "description": "E-postliste for kartleggere og OpenStreetMap-brukere, utviklere og entusiaster i Norge"
             },
             "no-telegram": {
-                "name": "@OSM_no på Telegram"
+                "name": "@OSM_no på Telegram",
+                "description": "OpenStreetMap Norge Telegram-chat"
+            },
+            "osm-afghanistan-facebook": {
+                "name": "OpenStreetMap Afghanistan"
+            },
+            "osm-africa-telegram": {
+                "name": "OpenStreetMap Afrika Telegram",
+                "description": "OpenStreetMap Telegram for Afrika"
+            },
+            "osm-asia-telegram": {
+                "name": "OpenStreetMap Asia Telegram"
             },
             "osm-at": {
                 "name": "OpenStreetMap Østerrike"
             },
+            "osm-ch": {
+                "name": "OpenStreetMap Sveits"
+            },
+            "osm-de": {
+                "name": "OpenStreetMap Tyskland"
+            },
+            "osm-gh-telegram": {
+                "name": "OpenStreetMap Ghana Telegram",
+                "description": "OpenStreetMap Ghana-fellesskapet på Telegram"
+            },
             "osm-gh-twitter": {
                 "name": "OpenStreetMap Ghana på Twitter",
+                "description": "Følg oss på Twitter: {url}"
+            },
+            "osm-india-forum": {
+                "name": "OpenStreetMap India forum",
+                "description": "OpenStreetMap India nettforum"
+            },
+            "osm-india-github": {
+                "name": "OpenStreetMap India GitHub"
+            },
+            "osm-india-telegram": {
+                "name": "OpenStreetMap India Telegram"
+            },
+            "osm-india-website": {
+                "name": "OpenStreetMap India"
+            },
+            "osm-india-wiki": {
+                "name": "OpenStreetMap Wikiproject India"
+            },
+            "osm-india-youtube": {
+                "name": "OpenStreetMap India YouTube"
+            },
+            "osm-iran-forum": {
+                "name": "OpenStreetMap Iran nettforum",
+                "description": "OpenStreetMap Iran nettforum"
+            },
+            "osm-iran-telegram": {
+                "name": "OpenStreetMap Iran Telegram"
+            },
+            "osm-kenya": {
+                "name": "OSM Kenya"
+            },
+            "osm-kerala-telegram": {
+                "name": "OpenStreetMap Kerala Telegram"
+            },
+            "osm-kerala-wiki": {
+                "name": "OpenStreetMap Kerala"
+            },
+            "osm-ni": {
+                "name": "MapaNica.net"
+            },
+            "osm-se": {
+                "name": "OpenStreetMap.se"
+            },
+            "osm-za-twitter": {
                 "description": "Følg oss på Twitter: {url}"
             },
             "osmgraz-twitter": {
                 "name": "OSM-samfunnet i Graz på Twitter",
                 "description": "OpenStreetMap-samfunnet i Graz på Twitter"
             },
+            "panama-telegram": {
+                "name": "OSM Panama på Telegram",
+                "description": "OpenStreetMap Panama Telegram-chat"
+            },
+            "pt-mailinglist": {
+                "name": "Talk-pt e-postliste"
+            },
+            "pt-telegram": {
+                "name": "OpenStreetMap Portugal på Telegram"
+            },
+            "romania-telegram": {
+                "name": "@OSMRomania på Telegram",
+                "description": "OpenStreetMap Romania Telegram-chat"
+            },
+            "sa-telegram": {
+                "name": "OSM Saudi-Arabia på Telegram"
+            },
+            "scotland-twitter": {
+                "name": "OpenStreetMap Alba på Twitter",
+                "description": "OpenStreetMap Alba på Twitter: {url}"
+            },
+            "se-facebook": {
+                "name": "OpenStreetMap Sverige Facebook",
+                "description": "OpenStreetMap Sverige på Facebook"
+            },
+            "se-forum": {
+                "name": "OpenStreetMap Sverige nettforum",
+                "description": "OpenStreetMap Sverige nettforum"
+            },
+            "se-irc": {
+                "name": "OpenStreetMap Sverige IRC"
+            },
+            "se-mailinglist": {
+                "name": "Talk-se e-postliste",
+                "description": "En e-postliste for å diskutere OpenStreetMap i Sverige"
+            },
+            "se-telegram": {
+                "name": "OSM Sverige på Telegram",
+                "description": "OpenStreetMap Sverige Telegram-chat"
+            },
             "se-twitter": {
                 "name": "OpenStreetMap Sverige på Twitter",
                 "description": "Følg oss på Twitter: {url}"
             },
+            "si-forum": {
+                "name": "OpenStreetMap Slovenia forum"
+            },
+            "si-mailinglist": {
+                "name": "OpenStreetMap Slovenia e-postliste"
+            },
+            "si-twitter": {
+                "name": "OpenStreetMap Slovenia Twitter"
+            },
+            "sk-freemap": {
+                "name": "OpenStreetMap nettsted Freemap Slovakia"
+            },
+            "sk-freemap-wiki": {
+                "name": "OpenStreetMap Freemap Slovakia Wiki"
+            },
+            "sk-twitter": {
+                "name": "OpenStreetMap Freemap Slovensko på Twitter"
+            },
+            "talk-africa": {
+                "name": "Talk-africa e-postliste"
+            },
+            "talk-au": {
+                "name": "Talk-au e-postliste"
+            },
+            "talk-gh": {
+                "name": "Talk-gh e-postliste"
+            },
             "talk-it-lazio": {
+                "name": "OpenStreetMap IT Lazio",
                 "description": "Alle er velkomne! Registrer deg på {signupUrl}"
+            },
+            "talk-mg": {
+                "name": "Talk-mg e-postliste"
+            },
+            "talk-nz": {
+                "name": "Talk-nz e-postliste"
+            },
+            "talk-tz": {
+                "name": "Talk-tz e-postliste"
+            },
+            "talk-za": {
+                "name": "Talk-za e-postliste"
+            },
+            "ua-facebook": {
+                "name": "OpenStreetMap Ukraina Facebook-gruppe"
+            },
+            "ua-forum": {
+                "name": "OpenStreetMap Ukraina forum"
+            },
+            "ua-github": {
+                "name": "OpenStreetMap Ukraina på GitHub",
+                "description": "OpenStreetMap Ukraina GitHub"
+            },
+            "ua-osm": {
+                "name": "OpenStreetMap nettside Ukraina",
+                "description": "OpenStreetMap nettside i Ukraina"
+            },
+            "ua-slack": {
+                "name": "OpenStreetMap Ukraina Slack"
+            },
+            "ua-telegram": {
+                "name": "@osmUA på Telegram",
+                "description": "OpenStreetMap Ukraina Telegram-chat"
+            },
+            "ua-twitter": {
+                "name": "OpenStreetMap UA Twitter",
+                "description": "OpenStreetMap Ukraina på Twitter: {url}"
+            },
+            "uk-localchapter": {
+                "name": "OpenStreetMap UK"
+            },
+            "uk-london-twitter": {
+                "name": "OpenStreetMap London på Twitter",
+                "description": "OpenStreetMap London på Twitter: {url}"
+            },
+            "uk-twitter": {
+                "name": "OpenStreetMap UK på Twitter",
+                "description": "OpenStreetMap UK på Twitter: {url}"
+            },
+            "uy-forum": {
+                "name": "OpenStreetMap UY forum",
+                "description": "OpenStreetMap Uruguay nettforum"
+            },
+            "uy-irc": {
+                "name": "OpenStreetMap Uruguay på IRC"
+            },
+            "uy-mailinglist": {
+                "name": "Talk-uy e-postliste"
+            },
+            "uzbekistan-telegram": {
+                "name": "OSM Uzbekistan på Telegram",
+                "description": "OpenStreetMap Uzbekistan Telegram-chat"
+            },
+            "ve-forum": {
+                "name": "OpenStreetMap VE forum",
+                "description": "OpenStreetMap Venezuela nettforum"
+            },
+            "ve-mailinglist": {
+                "name": "Talk-ve e-postliste"
+            },
+            "ve-telegram": {
+                "name": "OpenStreetMap Venezuela Telegram"
+            },
+            "ym-Abia-State-University": {
+                "name": "AbsuMappersTeam"
             },
             "ym-Centre-Universitaire-de-Recherche-et-dApplication-en-Tldtection-CURAT-de-lUniversit-Felix-Houphouet-Boigny": {
                 "name": "YouthMappers CURAT"
+            },
+            "ym-Dhaka-University": {
+                "name": "Openstreetmap YouthMappers"
+            },
+            "ym-The-University-of-Zambia": {
+                "name": "YouthMappers Unza"
+            },
+            "ym-UW-Madison": {
+                "name": "BadgerMaps"
+            },
+            "ym-University-Muhammadiyah-Surakarta": {
+                "name": "SpaceTime"
+            },
+            "ym-University-of-Energy-and-Natural-Resources": {
+                "name": "Eco-Club"
             }
         }
     }

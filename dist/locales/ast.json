@@ -16,6 +16,9 @@
                 "description": "Amiesta al mapa restaurantes, monumentos, buzones o otros puntos.",
                 "tail": "Fai click nel mapa p'amestar un puntu."
             },
+            "add_note": {
+                "key": "N"
+            },
             "browse": {
                 "title": "Navegar",
                 "description": "Mover y ampliar el mapa."
@@ -69,7 +72,8 @@
                 "key": "O"
             },
             "orthogonalize": {
-                "title": "Escuadrar"
+                "title": "Escuadrar",
+                "key": "Q"
             },
             "straighten": {
                 "title": "Enderechar",
@@ -252,6 +256,9 @@
                     "create": "Amestada una torga de xiru",
                     "delete": "Desaniciada una torga de xiru"
                 }
+            },
+            "extract": {
+                "key": "E"
             }
         },
         "undo": {
@@ -273,6 +280,9 @@
         "loading_auth": "Coneutando con OpenStreetMap...",
         "report_a_bug": "Informar d'un fallu",
         "help_translate": "Ayudar a traducir",
+        "sidebar": {
+            "key": "`"
+        },
         "feature_info": {
             "hidden_warning": "{count} carauterístiques tapecíes",
             "hidden_details": "Anguaño estes carauterístiques tán tapecíes: {details}"
@@ -284,7 +294,6 @@
             "request_review": "Prestaríame que dalguién revise les mios ediciones.",
             "save": "Xubir",
             "cancel": "Encaboxar",
-            "changes": "{count} cambios",
             "download_changes": "Descargar ficheru osmChange",
             "warnings": "Avisos",
             "modified": "Camudáu",
@@ -302,7 +311,7 @@
         "info_panels": {
             "key": "I",
             "background": {
-                "key": "F",
+                "key": "B",
                 "title": "Fondu",
                 "zoom": "Ampliación",
                 "vintage": "Antigüedá",
@@ -363,6 +372,9 @@
             "locating": "Llocalizando, aguarda..."
         },
         "inspector": {
+            "zoom_to": {
+                "key": "Z"
+            },
             "show_more": "Ver más",
             "view_on_osm": "Ver en openstreetmap.org",
             "new_relation": "Nueva rellación...",
@@ -419,6 +431,9 @@
                     "tooltip": "Datos del mapa dende OpenStreetMap",
                     "title": "Datos d'OpenStreetMap"
                 }
+            },
+            "highlight_edits": {
+                "key": "G"
             },
             "map_features": "Elementos del mapa",
             "autohidden": "Estos elementos tapeciéronse automáticamente porque s'amosaríen demasiaos en pantalla. Puedes averate pa editalos.",
@@ -487,6 +502,9 @@
                 "tooltip": "Les árees dibúxense col rellenu completu"
             }
         },
+        "preferences": {
+            "key": "P"
+        },
         "save": {
             "title": "Guardar",
             "no_changes": "Nun hai cambios que guardar.",
@@ -528,10 +546,6 @@
             "on_wiki": "{tag} en wiki.osm.org",
             "used_with": "usada con {type}"
         },
-        "zoom": {
-            "in": "Averar",
-            "out": "Alloñar"
-        },
         "cannot_zoom": "Nun puede alloñase más nel mou actual.",
         "full_screen": "Conmutar pantalla completa",
         "mapillary_images": {
@@ -548,7 +562,7 @@
         },
         "help": {
             "title": "Ayuda",
-            "key": "A",
+            "key": "H",
             "help": {
                 "title": "Ayuda",
                 "open_data_h": "Open Data",
@@ -560,6 +574,9 @@
             "editing": {
                 "save_h": "Guardar"
             }
+        },
+        "issues": {
+            "key": "I"
         },
         "intro": {
             "done": "fecho",
@@ -1053,9 +1070,6 @@
                     },
                     "placeholder": "Catenaria, ferrocarril electrificáu..."
                 },
-                "elevation": {
-                    "label": "Altor"
-                },
                 "email": {
                     "label": "Corréu-e",
                     "placeholder": "example@example.com"
@@ -1195,7 +1209,6 @@
                     "label": "Intermitente"
                 },
                 "internet_access": {
-                    "label": "Accesu a Internet",
                     "options": {
                         "no": "Non",
                         "terminal": "Terminal",
@@ -1203,9 +1216,6 @@
                         "wlan": "Wifi",
                         "yes": "Si"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Accesu a Internet de pagu"
                 },
                 "label": {
                     "label": "Etiqueta"
@@ -1912,10 +1922,6 @@
                     "name": "Telesquí",
                     "terms": "remonte, arrastre"
                 },
-                "aerialway/gondola": {
-                    "name": "Telecabina",
-                    "terms": "cabina"
-                },
                 "aerialway/magic_carpet": {
                     "name": "Alfombra máxica",
                     "terms": "remonte de cinta rodante"
@@ -2193,9 +2199,6 @@
                 "amenity/recycling_centre": {
                     "name": "Centru de reciclax"
                 },
-                "amenity/register_office": {
-                    "name": "Oficina de rexistru"
-                },
                 "amenity/restaurant": {
                     "name": "Restaurante",
                     "terms": "Chigre, llagar"
@@ -2207,9 +2210,6 @@
                 "amenity/school": {
                     "name": "Antoxana d'escuela",
                     "terms": "Terrén d'escuela, zona escolar"
-                },
-                "amenity/scrapyard": {
-                    "name": "Chatarrería"
                 },
                 "amenity/shelter": {
                     "name": "Abellugu"
@@ -2234,9 +2234,6 @@
                 "amenity/studio": {
                     "name": "Estudiu",
                     "terms": "Música,Radio,Televisión"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Piscina"
                 },
                 "amenity/taxi": {
                     "name": "Parada de taxis"
@@ -2913,9 +2910,6 @@
                 "junction": {
                     "name": "Crucie"
                 },
-                "landuse/allotments": {
-                    "name": "Xardín acomuñáu"
-                },
                 "landuse/aquaculture": {
                     "name": "Acuacultura"
                 },
@@ -2983,14 +2977,8 @@
                     "name": "Base naval",
                     "terms": "Arsenal"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Recorríu d'obstáculos"
-                },
                 "landuse/military/range": {
                     "name": "Campu de tiru"
-                },
-                "landuse/military/training_area": {
-                    "name": "Campu de maniobres"
                 },
                 "landuse/orchard": {
                     "name": "Plantación"
@@ -3164,9 +3152,6 @@
                 },
                 "man_made/gasometer": {
                     "name": "Gasómetru"
-                },
-                "man_made/groyne": {
-                    "name": "Espigón"
                 },
                 "man_made/lighthouse": {
                     "name": "Faru"
@@ -3465,22 +3450,8 @@
                 "railway/disused": {
                     "name": "Ferrocarril ensin usu"
                 },
-                "railway/funicular": {
-                    "name": "Funicular",
-                    "terms": "Cremallera,Cable"
-                },
                 "railway/level_crossing": {
                     "name": "Pasu a nivel (estrada)"
-                },
-                "railway/monorail": {
-                    "name": "Monocarril"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Ferrocarril de vía estrecha",
-                    "terms": "FEVE,Vía estrecha"
-                },
-                "railway/rail": {
-                    "name": "Carril"
                 },
                 "railway/signal": {
                     "name": "Señal de ferrocarril"
@@ -3488,15 +3459,8 @@
                 "railway/station": {
                     "name": "Estación de tren"
                 },
-                "railway/subway": {
-                    "name": "Metro"
-                },
                 "railway/subway_entrance": {
                     "name": "Boca del metro"
-                },
-                "railway/tram": {
-                    "name": "Tranvía",
-                    "terms": "Tranvía, tresporte, trole"
                 },
                 "relation": {
                     "name": "Rellación"
@@ -3613,9 +3577,6 @@
                 "shop/fashion": {
                     "name": "Tienda de moda"
                 },
-                "shop/fishmonger": {
-                    "name": "Pescadería"
-                },
                 "shop/florist": {
                     "name": "Floristería",
                     "terms": "flores, florista, floristería"
@@ -3626,9 +3587,6 @@
                 "shop/funeral_directors": {
                     "name": "Velatoriu",
                     "terms": "Tanatoriu, Funeraria"
-                },
-                "shop/furnace": {
-                    "name": "Fornos"
                 },
                 "shop/furniture": {
                     "name": "Mueblería"
@@ -4085,9 +4043,46 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "Imáxenes aérees más nueves de AIV Flandes"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015  imáxenes aérees de 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, sombráu multidireicional 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Vista aérea factor 0,25 m"
+            },
             "Bing": {
                 "description": "Imáxenes aerees y de satélite.",
                 "name": "Imáxenes aerees de Bing."
+            },
+            "EOXAT2018CLOUDLESS": {
+                "attribution": {
+                    "text": "Sentinel-2 ensin nubes - https://s2maps.eu por EOX IT Services GmbH (Contien datos tresformaos de Copernicus Sentinel 2017 & 2018)"
+                },
+                "description": "Imáxenes de satélite Sentinel post-procesaes.",
+                "name": "eox.at 2018 ensin nubes"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -4096,7 +4091,17 @@
                 "description": "Imáxenes mundiales Esri.",
                 "name": "Imáxenes mundiales Esri"
             },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Términos y comentarios "
+                },
+                "description": "Imáxenes del archivu Esri que puen se más clares y más precises que la capa predeterminada.",
+                "name": "Imáxenes mundiales Esri (Clarity) Beta"
+            },
             "MAPNIK": {
+                "attribution": {
+                    "text": "© collaboradores d'OpenStreetMap, CC-BY-SA 2.0"
+                },
                 "description": "La capa predeterminada d'OpenStreetMap.",
                 "name": "OpenStreetMap (Estándar)"
             },
@@ -4149,6 +4154,12 @@
                 },
                 "name": "OSM Inspector: Etiquetáu"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "Imáxenes aérees más nueves de SPW(allonie)"
+            },
+            "SPW_PICC": {
+                "name": "Imáxenes dixitales PICC de SPW(allonie)"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "A nivel d'ampliación 16+, datos del mapa de dominiu públicu dende US Census. A nivel d'ampliación menor, sólo los cambios dende 2006 menos los cambios yá incorporaos a OpenStreetMap",
                 "name": "Estraes TIGER 2014"
@@ -4157,25 +4168,88 @@
                 "description": "Mariellu = Datos del mapa de dominiu públicu dende US Census. Bermeyu = Datos que nun s'alcuentren n'OpenStreetMap",
                 "name": "Estraes TIGER 2017"
             },
+            "US-TIGER-Roads-2018": {
+                "description": "Mariellu = Datos del mapa de dominiu públicu del US Census. Bermeyu = Datos que nun s'alcuentren n'OpenStreetMap",
+                "name": "Estraes TIGER 2018"
+            },
+            "US-TIGER-Roads-2019": {
+                "description": "Mariellu = Datos del mapa de dominiu públicu del US Census. Bermeyu = Datos que nun s'alcuentren n'OpenStreetMap",
+                "name": "Estraes TIGER 2019"
+            },
+            "US_Forest_Service_roads_overlay": {
+                "name": "Capa d'estraes de U.S. Forest"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Fecho por mediu de Brussels UrbIS®© - Distribución & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Fecho por mediu de Brussels UrbIS®© - Distribución & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Fecho por mediu de Brussels UrbIS®© - Distribución & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Fecho por mediu de Brussels UrbIS®© - Distribución & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Fecho por mediu de Brussels UrbIS®© - Distribución & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Fecho por mediu de Brussels UrbIS®© - Distribución & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
+            },
             "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Collaboradores d'OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Rutes marcaes: Ciclismu"
             },
             "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Collaboradores d'OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Rutes marcaes: Escursionismu"
             },
             "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Collaboradores d'OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Rutes marcaes: BTT"
             },
             "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Collaboradores d'OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Rutes marcaes: Patinaxe"
             },
             "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© waymarkedtrails.org, Collaboradores d'OpenStreetMap, CC by-SA 3.0"
+                },
                 "name": "Rutes marcaes: Deportes d'iviernu"
             },
             "basemap.at": {
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "Mapa base d 'Austria, basáu en datos gubernamentales.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
@@ -4184,6 +4258,37 @@
                 },
                 "description": "Capa d'ortofotos proporcionada por basemap.at «Socesor» de les imáxenes de geoimage.at.",
                 "name": "Ortofoto de basemap.at"
+            },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa d'anotaciones proporcionada por basemap.at.",
+                "name": "Capa basemap.at"
+            },
+            "eufar-balaton": {
+                "attribution": {
+                    "text": "Ortofotó EUFAR Balaton 2010"
+                }
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 via finds.jp. Bonu pa dibuxar, anque daqué más antiguu.",
+                "name": "GSI KIBAN 2500 del Xapón"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© conceyu de Gotemburgu, CC0"
+                },
+                "description": "El mapa de la ciudá ye un mapa de supervisión que describe Gotemburgu. Contien información xeneral sobro'l terrén, comunicaciones, hidrografía, edificios, númberos de direición y nomes de calles, divisiones alministratives y otros testos d'orientación.",
+                "name": "Mapa de la Ciudá de Gotemburgu"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Xapón"
+                }
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -4246,6 +4351,16 @@
             }
         },
         "community": {
+            "Bahia-telegram": {
+                "name": "Grupu de Telegram OpenStreetMap Bahia",
+                "description": "Xunite a la comunidá OpenStreetMap Bahia en Telegram",
+                "extendedDescription": "Xúnite a la comunidá pa saber más sobro OpenStreetMap, facer entrugues o participar nos nuesos alcuentros. ¡Tol mundu ye bienveníu!"
+            },
+            "DF-telegram": {
+                "name": "Grupu de Telegram OpenStreetMap Brasília",
+                "description": "Xunite a la comunidá OpenStreetMap Brasília en Telegram",
+                "extendedDescription": "Xúnite a la comunidá pa saber más sobro OpenStreetMap, facer entrugues o participar nos nuesos alcuentros. ¡Tol mundu ye bienveníu!"
+            },
             "OSM-ES-mailinglist": {
                 "name": "Llista de corréu Talk-es",
                 "description": "Llista de corréu p'alderiques sobro OpenStreetMap n'España"

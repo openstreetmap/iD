@@ -284,7 +284,6 @@
             "request_review": "ಬೇರೆ ಯಾರಾದರೂ ನನ್ನ ಪರಿಷ್ಕರಣೆಯನ್ನು ಪುನರವಲೋಕಿಸಲು ಇಚ್ಛಿಸುತ್ತೇನೆ",
             "save": "ಅಂತರಜಾಲಕ್ಕೆ ರವಾನೆ ಮಾಡು ",
             "cancel": "ರದ್ದು ಮಾಡು",
-            "changes": "{count} ಬದಲಾವಣೆಗಳು",
             "download_changes": "osmChange ಅನ್ನು ಡೌನ್ಲೋಡ್ ಮಾಡಿರಿ",
             "warnings": "ಎಚ್ಚರಿಕೆಗಳು",
             "modified": "ಮಾರ್ಪಡಿಸು",
@@ -885,9 +884,6 @@
                     },
                     "placeholder": "ಸಂಪರ್ಕ ರೇಖೆ, ವಿದ್ಯುದೀಕರಿಸಿದ ರೈಲು "
                 },
-                "elevation": {
-                    "label": "ಎತ್ತರ"
-                },
                 "email": {
                     "label": "ಮಿಂಚಂಚೆ",
                     "placeholder": "example@example.com"
@@ -974,7 +970,6 @@
                     "label": "ವಿಧ"
                 },
                 "internet_access": {
-                    "label": "ಅಂತರ್ಜಾಲ ಸಂಪರ್ಕ",
                     "options": {
                         "no": "ಇಲ್ಲ",
                         "terminal": "‍ನಿಲ್ದಾಣ",
@@ -982,9 +977,6 @@
                         "wlan": "ವೈಫೈ",
                         "yes": "ಹೌದು"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "‍‍ಅಂತರ್ಜಾಲ‍ ಬಳಕೆ ಶುಲ್ಕ‍"
                 },
                 "lamp_type": {
                     "label": "ವಿಧ"
@@ -1371,9 +1363,6 @@
                 },
                 "amenity/shelter": {
                     "name": "ಅಡೆ"
-                },
-                "amenity/swimming_pool": {
-                    "name": "ಈಜುಕೊಳ"
                 },
                 "amenity/taxi": {
                     "name": "‍ಕಾರು ನಿಲ್ಡಾಣ "

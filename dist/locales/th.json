@@ -286,14 +286,10 @@
                     "label": "แหล่งที่มา"
                 },
                 "internet_access": {
-                    "label": "การเข้าใช้อินเทอร์เน็ต",
                     "options": {
                         "wired": "ใช้สาย",
                         "wlan": "ไร้สาย"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "ค่าธรรมเนียมการเข้าใช้อินเทอร์เน็ต"
                 }
             },
             "presets": {

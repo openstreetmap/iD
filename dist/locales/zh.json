@@ -323,9 +323,6 @@
                 "description": {
                     "label": "描述"
                 },
-                "elevation": {
-                    "label": "海拔"
-                },
                 "emergency": {
                     "label": "急诊"
                 },
@@ -352,7 +349,6 @@
                     "label": "斜度"
                 },
                 "internet_access": {
-                    "label": "互联网接入",
                     "options": {
                         "terminal": "终端",
                         "wired": "有线网络",
@@ -580,9 +576,6 @@
                 },
                 "amenity/restaurant": {
                     "name": "餐馆"
-                },
-                "amenity/swimming_pool": {
-                    "name": "游泳池"
                 },
                 "amenity/telephone": {
                     "name": "电话"
@@ -965,20 +958,8 @@
                 "railway/disused": {
                     "name": "废弃的铁路"
                 },
-                "railway/monorail": {
-                    "name": "单轨铁路"
-                },
-                "railway/rail": {
-                    "name": "铁轨"
-                },
-                "railway/subway": {
-                    "name": "地铁"
-                },
                 "railway/subway_entrance": {
                     "name": "地铁口"
-                },
-                "railway/tram": {
-                    "name": "电车"
                 },
                 "relation": {
                     "name": "关系"
@@ -1039,9 +1020,6 @@
                 },
                 "shop/electronics": {
                     "name": "电器店"
-                },
-                "shop/fishmonger": {
-                    "name": "海产店"
                 },
                 "shop/florist": {
                     "name": "花店"

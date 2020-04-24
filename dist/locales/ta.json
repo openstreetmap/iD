@@ -142,7 +142,6 @@
         "commit": {
             "save": "பதிவேற்றுக",
             "cancel": "ரத்து",
-            "changes": "{எண்ணிக்கை} மாற்றங்கள்",
             "warnings": "எச்சரிக்கைகள்",
             "modified": "திருத்தப்பட்ட",
             "deleted": "நீக்கப்பட்டது",
@@ -853,9 +852,6 @@
                         "yes": "ஆம் (குறிப்பிடப்படவில்லை)"
                     }
                 },
-                "elevation": {
-                    "label": "உயரம்"
-                },
                 "email": {
                     "label": "மின்னஞ்சல்"
                 },
@@ -979,7 +975,6 @@
                     "label": "வகை"
                 },
                 "internet_access": {
-                    "label": "இணைய அணுகல்",
                     "options": {
                         "no": "இல்லை",
                         "terminal": "முணையம்",
@@ -987,9 +982,6 @@
                         "wlan": "வைஃபை",
                         "yes": "ஆம்"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "இணைய அணுகல் கட்டணம்"
                 },
                 "lamp_type": {
                     "label": "வகை"
@@ -1738,9 +1730,6 @@
                 "amenity/pub": {
                     "name": "பப் "
                 },
-                "amenity/register_office": {
-                    "name": "பதிவு அலுவலகம்"
-                },
                 "amenity/restaurant": {
                     "name": "உணவகம்"
                 },
@@ -1749,9 +1738,6 @@
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "உணவு வங்கி"
-                },
-                "amenity/swimming_pool": {
-                    "name": "நீச்சல் குளம்"
                 },
                 "amenity/telephone": {
                     "name": "தொலைபேசி"
@@ -2185,29 +2171,14 @@
                 "railway/disused": {
                     "name": "பயன்படுத்தப்படாத இரயில்வே"
                 },
-                "railway/light_rail": {
-                    "name": "இலகு இரயில்"
-                },
                 "railway/milestone": {
                     "name": "இரயில்வே மைல்கல்"
-                },
-                "railway/monorail": {
-                    "name": "மோனோ இரயில்"
-                },
-                "railway/rail": {
-                    "name": "இரயில்"
                 },
                 "railway/station": {
                     "name": "தொடருந்து நிலையம்"
                 },
-                "railway/subway": {
-                    "name": "சுரங்கப்பாதை"
-                },
                 "railway/subway_entrance": {
                     "name": "சுரங்கப்பாதை நுழைவுவாயில்"
-                },
-                "railway/tram": {
-                    "name": "அமிழ் தண்டூர்தி"
                 },
                 "relation": {
                     "name": "தொடர்பு"

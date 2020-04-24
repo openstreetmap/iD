@@ -590,7 +590,7 @@
             "request_review": "編集のレビューを希望します。",
             "save": "アップロード",
             "cancel": "キャンセル",
-            "changes": "{count} 個の変更",
+            "changes": "変更 ({count})",
             "download_changes": "osmChangeファイルをダウンロード",
             "errors": "エラー",
             "warnings": "注意",
@@ -678,20 +678,19 @@
             "no_results_worldwide": "検索結果がありません"
         },
         "geolocate": {
+            "key": "L",
             "title": "編集画面を現在地へ移動",
-            "locating": "位置情報を取得中です。しばらくお待ちください。"
+            "locating": "位置情報を取得中です。しばらくお待ちください。",
+            "location_unavailable": "あなたの現在地情報が取得できません"
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "ここにズーム",
-                "tooltip_feature": "マップを中央寄せ・ズームしてこの地物にフォーカス。",
-                "tooltip_note": "マップを中央寄せ・ズームしてこのメモにフォーカス。",
-                "tooltip_data": "マップを中央寄せ・ズームしてこのデータにフォーカス。",
-                "tooltip_issue": "マップを中央寄せ・ズームしてこの課題にフォーカス。"
+                "title": "ズームして選択"
             },
             "show_more": "次を表示",
             "view_on_osm": "openstreetmap.orgで確認",
+            "view_on_osmose": "osmose.openstreetmap.fr で見る",
             "view_on_keepRight": "keepright.at 上で閲覧",
             "feature_type": "地物の種類",
             "fields": "すべての項目",
@@ -1048,14 +1047,19 @@
         },
         "cannot_zoom": "現在のモードでは、これ以上ズームアウトできません。",
         "full_screen": "フルスクリーンにする",
+        "self_intersection": {
+            "error": {
+                "lines": "ラインは自身と交差できません。",
+                "areas": "エリアは自身と交差できません。"
+            }
+        },
         "QA": {
             "osmose": {
                 "title": "Osmose の改善提案",
                 "detail_title": "詳細",
                 "elems_title": "地物",
                 "fix_title": "修正ガイドライン",
-                "trap_title": "よくある間違い",
-                "translation": "Osmose による翻訳"
+                "trap_title": "よくある間違い"
             },
             "improveOSM": {
                 "title": "ImproveOSM 検知内容",
@@ -1514,8 +1518,7 @@
                 "before_start_h": "始める前に",
                 "before_start": "編集を始める前に、少しOpenStreetMapとこのエディタに慣れたほうが良いでしょう。iDにはウォークスルーがあり、OpenStreetMap編集の基礎を教えてくれます。この画面にある「チュートリアルを開始」をクリックしてチュートリアルで学んでください - 15分ほどで終わります。",
                 "open_source_h": "オープンソース",
-                "open_source": "iDエディタは共同作業のオープンソースプロジェクトであり、現在のバージョンは{version} です。ソースコードは[GitHub上](https://github.com/openstreetmap/iD)にあります。",
-                "open_source_help": "あなたも[翻訳](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)したり[バグ報告](https://github.com/openstreetmap/iD/issues)したりすることでiDを支援できます。"
+                "open_source": "iDエディタは共同作業のオープンソースプロジェクトであり、現在のバージョンは{version} です。ソースコードは[GitHub上](https://github.com/openstreetmap/iD)にあります。"
             },
             "overview": {
                 "title": "概要",
@@ -2434,7 +2437,8 @@
                     "pan": "マップを動かす",
                     "pan_more": "マップを1画面分動かす",
                     "zoom": "拡大/縮小",
-                    "zoom_more": "ロット単位でズームイン/ズームアウト"
+                    "zoom_more": "ロット単位でズームイン/ズームアウト",
+                    "geolocate": "現在地にズーム"
                 },
                 "help": {
                     "title": "ヘルプ",
@@ -2964,7 +2968,13 @@
                     "terms": "通行料金, 料金"
                 },
                 "check_date": {
-                    "label": "最終確認日"
+                    "label": "最終確認日",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "circumference": {
+                    "label": "円周",
+                    "placeholder": "1 m, 20 cm, 30 in…",
+                    "terms": "円周, 外周, 周囲"
                 },
                 "clothes": {
                     "label": "服"
@@ -3131,6 +3141,9 @@
                         "yes": "あり"
                     }
                 },
+                "depth": {
+                    "label": "深さ (メートル)"
+                },
                 "description": {
                     "label": "説明",
                     "terms": "説明, 概要, サマリー"
@@ -3263,10 +3276,6 @@
                     },
                     "placeholder": "架線、集電レール...",
                     "terms": "電化"
-                },
-                "elevation": {
-                    "label": "標高",
-                    "terms": "高度"
                 },
                 "email": {
                     "label": "メールアドレス",
@@ -3559,7 +3568,7 @@
                     "label": "間欠性"
                 },
                 "internet_access": {
-                    "label": "インターネット環境",
+                    "label": "インターネット接続",
                     "options": {
                         "no": "無し",
                         "terminal": "情報端末",
@@ -3567,11 +3576,10 @@
                         "wlan": "Wi-Fi",
                         "yes": "有り"
                     },
-                    "terms": "インターネット, ネット, アクセスポイント"
+                    "terms": "インターネット, ネット, アクセスポイント, インターネット接続, wifi"
                 },
                 "internet_access/fee": {
-                    "label": "インターネット接続利用料金",
-                    "terms": "インターネットアクセス料金, アクセス料金, 使用料, 料金"
+                    "label": "インターネット接続利用料金"
                 },
                 "internet_access/ssid": {
                     "label": "SSID (Wifiネットワーク名)",
@@ -3836,8 +3844,7 @@
                     "terms": "ネットワーク"
                 },
                 "network/type": {
-                    "label": "ネットワークの種類",
-                    "terms": "ネットワークの種類, ネットワーク"
+                    "label": "ネットワークの種類"
                 },
                 "network_bicycle": {
                     "label": "ネットワーク",
@@ -3912,7 +3919,8 @@
                     "terms": "焚き火可否, 焚き火, キャンプファイア, キャンプ"
                 },
                 "opening_date": {
-                    "label": "開始予定日"
+                    "label": "開始予定日",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "opening_hours": {
                     "label": "営業時間",
@@ -4509,6 +4517,7 @@
                 },
                 "start_date": {
                     "label": "供用開始日",
+                    "placeholder": "YYYY-MM-DD",
                     "terms": "開始日"
                 },
                 "step_count": {
@@ -4622,6 +4631,9 @@
                 },
                 "target": {
                     "label": "目標国"
+                },
+                "telecom/medium": {
+                    "label": "通信線の素材"
                 },
                 "tidal": {
                     "label": "潮間帯",
@@ -4941,10 +4953,6 @@
                 "aerialway/drag_lift": {
                     "name": "ドラッグリフト",
                     "terms": "ドラッグリフト,牽引リフト"
-                },
-                "aerialway/gondola": {
-                    "name": "循環式ロープウェイ",
-                    "terms": "ゴンドラ, ロープウェイ, ロープウェー, ゴンドラリフト, 索道"
                 },
                 "aerialway/goods": {
                     "name": "貨物索道",
@@ -5569,9 +5577,6 @@
                     "name": "リサイクルボックス",
                     "terms": "リサイクルボックス, リサイクルコンテナ, リサイクル箱, コンテナ, 公園, 廃棄物, 資源ごみ, 資源ゴミ, ゴミ, ごみ箱, 再生利用, リサイクル"
                 },
-                "amenity/register_office": {
-                    "name": "登記所"
-                },
                 "amenity/research_institute": {
                     "name": "研究所",
                     "terms": "研究所, 研究施設"
@@ -5660,9 +5665,6 @@
                     "name": "学校（代表点または敷地）",
                     "terms": "学校の敷地, 学校, 小学校, 中学校, 高校, 教育"
                 },
-                "amenity/scrapyard": {
-                    "name": "自動車解体場"
-                },
                 "amenity/shelter": {
                     "name": "シェルター全般（休憩所、避難所）",
                     "terms": "避難所, シェルター, 逃げ場, 雨宿り, 東屋, あずまや, 四阿, しあ, 休憩所, 屋根, アウトドア, 小屋, 保護施設"
@@ -5738,9 +5740,6 @@
                 "amenity/studio/video": {
                     "name": "映画スタジオ",
                     "terms": "映画スタジオ, フィルムスタジオ, スタジオ"
-                },
-                "amenity/swimming_pool": {
-                    "name": "遊泳プール（旧）"
                 },
                 "amenity/taxi": {
                     "name": "タクシー乗り場",
@@ -7202,10 +7201,6 @@
                 "landuse": {
                     "name": "土地利用関連"
                 },
-                "landuse/allotments": {
-                    "name": "市民農園",
-                    "terms": "市民菜園, 市民農園, コミュニティガーデン, ガーデン, 農業, 畑, 農園"
-                },
                 "landuse/aquaculture": {
                     "name": "養殖場（水域）",
                     "terms": "養殖場, 養魚場, いけす, 生簀"
@@ -7311,17 +7306,9 @@
                     "name": "海軍基地",
                     "terms": "海軍, 軍事基地"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "障害物コース",
-                    "terms": "障害物コース, アスレチックコース"
-                },
                 "landuse/military/range": {
                     "name": "軍事演習場",
                     "terms": "軍事演習場"
-                },
-                "landuse/military/training_area": {
-                    "name": "訓練場",
-                    "terms": "練習場, トレーニングエリア, 訓練場"
                 },
                 "landuse/orchard": {
                     "name": "果樹園",
@@ -7688,25 +7675,13 @@
                     "name": "自転車競技場",
                     "terms": "自転車競技場, 自転車, 自転車トラック, 自転車レース場"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "自転車競技場",
-                    "terms": "自転車競技場, 自転車, 自転車トラック, 自転車レース場"
-                },
                 "leisure/track/horse_racing": {
-                    "name": "競馬トラック",
-                    "terms": "競馬トラック, 競馬場, 競馬, レース, トラック, 馬場, ギャンブル"
-                },
-                "leisure/track/horse_racing_point": {
                     "name": "競馬トラック",
                     "terms": "競馬トラック, 競馬場, 競馬, レース, トラック, 馬場, ギャンブル"
                 },
                 "leisure/track/running": {
                     "name": "ランニングトラック",
                     "terms": "ランニングトラック, ランニング用周回走路, トラック, 周回走路, 競技トラック, スポーツ"
-                },
-                "leisure/track/running_point": {
-                    "name": "トラック（周回走路）",
-                    "terms": "ランニングトラック, ランニング用周回走路"
                 },
                 "leisure/water_park": {
                     "name": "ウォーターパーク",
@@ -7786,10 +7761,6 @@
                 "man_made/gasometer": {
                     "name": "ガスタンク",
                     "terms": "ガスタンク"
-                },
-                "man_made/groyne": {
-                    "name": "水制",
-                    "terms": "水制, ケレップ水制, 防波堤, 突堤"
                 },
                 "man_made/lighthouse": {
                     "name": "灯台",
@@ -8803,10 +8774,6 @@
                     "name": "休止線路",
                     "terms": "休止線路, 廃線"
                 },
-                "railway/funicular": {
-                    "name": "ケーブルカー",
-                    "terms": "ケーブルカー"
-                },
                 "railway/halt": {
                     "name": "鉄道駅（停留場）"
                 },
@@ -8814,36 +8781,12 @@
                     "name": "踏切 (車道)",
                     "terms": "踏切 (車道), 踏切"
                 },
-                "railway/light_rail": {
-                    "name": "ライトレール",
-                    "terms": "ライトレール, 軽便鉄道"
-                },
                 "railway/milestone": {
                     "name": "距離標(鉄道)",
                     "terms": "距離標, 距離, キロポスト, マイルストーン, 距離標識, 鉄道"
                 },
-                "railway/miniature": {
-                    "name": "ミニチュア鉄道",
-                    "terms": "ミニチュア鉄道"
-                },
-                "railway/monorail": {
-                    "name": "モノレール",
-                    "terms": "モノレール"
-                },
-                "railway/narrow_gauge": {
-                    "name": "ナローゲージ",
-                    "terms": "軽便鉄道, ナローゲージ, 線路, 特殊狭軌, 狭軌"
-                },
                 "railway/platform": {
                     "name": "鉄道プラットホーム"
-                },
-                "railway/rail": {
-                    "name": "線路",
-                    "terms": "線路"
-                },
-                "railway/rail/highspeed": {
-                    "name": "高速鉄道",
-                    "terms": "高速鉄道, 鉄道"
                 },
                 "railway/signal": {
                     "name": "鉄道信号機",
@@ -8851,10 +8794,6 @@
                 },
                 "railway/station": {
                     "name": "鉄道駅"
-                },
-                "railway/subway": {
-                    "name": "地下鉄",
-                    "terms": "地下鉄, 線路"
                 },
                 "railway/subway_entrance": {
                     "name": "出入口（地下鉄）",
@@ -8867,10 +8806,6 @@
                 "railway/train_wash": {
                     "name": "洗車機（鉄道用）",
                     "terms": "洗車機, 洗車"
-                },
-                "railway/tram": {
-                    "name": "路面電車",
-                    "terms": "路面電車, トラム, LRT"
                 },
                 "railway/tram_stop": {
                     "name": "トラム停車位置"
@@ -9180,9 +9115,6 @@
                     "name": "釣具店",
                     "terms": "釣具店, 釣り, 魚釣り, フィッシング, 釣り道具, スポーツ, ホビー"
                 },
-                "shop/fishmonger": {
-                    "name": "魚屋（非推奨）"
-                },
                 "shop/flooring": {
                     "name": "床用品店",
                     "terms": "床用品店, フロア, フローリング"
@@ -9206,9 +9138,6 @@
                 "shop/funeral_directors": {
                     "name": "葬儀社",
                     "terms": "葬儀屋, 葬儀業"
-                },
-                "shop/furnace": {
-                    "name": "釜戸屋"
                 },
                 "shop/furniture": {
                     "name": "家具店",
@@ -10289,6 +10218,13 @@
                 "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
                 "name": "Gothenburg City map"
             },
+            "gothenburg-ortho": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "Orthophoto for Gothenburg municipality",
+                "name": "Gothenburg Orthophoto"
+            },
             "gsi.go.jp_airphoto": {
                 "attribution": {
                     "text": "国土地理院 簡易空中写真"
@@ -10456,6 +10392,12 @@
                 },
                 "name": "Thunderforest Landscape"
             },
+            "tf-outdoors": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest アウトドア"
+            },
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
@@ -10497,6 +10439,12 @@
                 },
                 "description": "Swedish NVDB road network with several options for map layers",
                 "name": "Trafikverket Road Network options"
+            },
+            "wroclaw-orto2018": {
+                "attribution": {
+                    "text": "Urząd Miasta Wrocław"
+                },
+                "name": "Wrocław: Orthophotomap 2018 (aerial image)"
             }
         },
         "community": {
@@ -10534,6 +10482,10 @@
             },
             "Galicia-Twitter": {
                 "name": "OpenStreetMap Galicia Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
+            "Galicia-Xeoinquedos-Twitter": {
+                "name": "Geoinquetos on Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
             "GeoPhilly": {
@@ -11011,6 +10963,10 @@
                 "name": "OpenStreetMap 日本メーリングリスト",
                 "description": "Talk-ja は日本コミュニティ向けの公式メーリングリストです"
             },
+            "OSM-japan-slack": {
+                "name": "OpenStreetMap日本のSlack",
+                "description": "OSM日本コミュニティ向けのSlack ワークスペース {signupUrl}"
+            },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap 日本のTwitter",
                 "description": "Twitterでのハッシュタグ: {url}"
@@ -11223,6 +11179,14 @@
                 "name": "OpenStreetMap Germany Matrix",
                 "description": "Join #osm-de:matrix.org at https://riot.im/app/#/room/%23osm-de:matrix.org"
             },
+            "de-mv-mailinglist": {
+                "name": "Mecklenburg-Vorpommern Mailing List",
+                "description": "This is the mailing list for the OSM community of Mecklenburg-Vorpommern"
+            },
+            "de-mv-twitter": {
+                "name": "OpenStreetMap Mecklenburg-Vorpommern Twitter",
+                "description": "Follow us on Twitter: {url}"
+            },
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
@@ -11328,6 +11292,18 @@
                 "name": "GeoGeeks Perth Meetup",
                 "description": "Perth-based meetup group for people interested in mapping, geospatial data, and open source. We'll be working on anything that involves a sense of place."
             },
+            "gr-forum": {
+                "name": "OpenStreetMap GR forum",
+                "description": "OpenStreetMap Greece web forum"
+            },
+            "gr-mailinglist": {
+                "name": "Talk-gr Mailing List",
+                "description": "Talk-gr is the official mailing list for the Greek OSM community"
+            },
+            "gr-matrix": {
+                "name": "OpenStreetMap Greece Matrix",
+                "description": "Join #osm-gr:matrix.org at https://riot.im/app/#/room/%23osm-gr:matrix.org"
+            },
             "guatemala-telegram": {
                 "name": "OSM Guatemala on Telegram",
                 "description": "OpenStreetMap Guatemala Telegram chat"
@@ -11336,6 +11312,10 @@
                 "name": "OpenStreetMap Croatia Facebook group",
                 "description": "OpenStreetMap Croatia Facebook group"
             },
+            "hr-forum": {
+                "name": "OSM Croaria Forum",
+                "description": "OpenStreetMap Croatia Forum"
+            },
             "hr-irc": {
                 "name": "OpenStreetMap Croatia on IRC",
                 "description": "Join #osm-hr on irc.freenode.org (port 6667)"
@@ -11343,6 +11323,10 @@
             "hr-mailinglist": {
                 "name": "Talk-hr Mailing List",
                 "description": "Talk-hr mailing list"
+            },
+            "hr-wiki": {
+                "name": "OpenStreetMap Wikiproject Croatia",
+                "description": "Wikiproject page for Croatia"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU on Facebook",
@@ -11574,6 +11558,10 @@
                 "name": "OpenStreetMap Ghana on Twitter",
                 "description": "Follow us on Twitter: {url}"
             },
+            "osm-hr": {
+                "name": "OpenStreetMap Croatia",
+                "description": "The platform for information on OpenStreetMap in Croatia"
+            },
             "osm-india-forum": {
                 "name": "OpenStreetMap India forum",
                 "description": "OpenStreetMap India web forum"
@@ -11737,6 +11725,10 @@
                 "name": "OpenStreetMap Freemap Slovensko on Twitter",
                 "description": "OpenStreetMap Freemap Slovensko on Twitter: {url}"
             },
+            "talk-africa": {
+                "name": "Talk-africa Mailing List",
+                "description": "Talk-africa is the official mailing list for the African OSM community."
+            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
@@ -11766,6 +11758,10 @@
             "talk-nz": {
                 "name": "Talk-nz Mailing List",
                 "description": "New Zealand's OSM community talk"
+            },
+            "talk-tz": {
+                "name": "Talk-tz Mailing List",
+                "description": "Talk-tz is the official mailing list for the Tanzanian OSM community."
             },
             "talk-za": {
                 "name": "Talk-za Mailing List",

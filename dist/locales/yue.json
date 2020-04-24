@@ -211,7 +211,6 @@
             "request_review": "想有人翻睇我修改。",
             "save": "傳上",
             "cancel": "唔記",
-            "changes": "變更 {count} 個",
             "download_changes": "公家街圖修改嘅檔案，傳落來",
             "warnings": "警告",
             "modified": "改咗",
@@ -410,10 +409,6 @@
             "description": "描述",
             "on_wiki": "喺公家街圖百科度嘅{tag}",
             "used_with": "同{type}一齊用"
-        },
-        "zoom": {
-            "in": "放大",
-            "out": "縮細"
         },
         "cannot_zoom": "今下模式，無得再縮。",
         "full_screen": "來回全螢幕",
@@ -878,9 +873,6 @@
                     },
                     "placeholder": "電纜、有電軌道⋯⋯"
                 },
-                "elevation": {
-                    "label": "海拔"
-                },
                 "email": {
                     "label": "電郵",
                     "placeholder": "example@example.com"
@@ -993,7 +985,6 @@
                     "label": "類"
                 },
                 "internet_access": {
-                    "label": "用到互聯網",
                     "options": {
                         "no": "無",
                         "terminal": "終端機",
@@ -1001,9 +992,6 @@
                         "wlan": "無綫上網",
                         "yes": "有"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "上網費"
                 },
                 "lamp_type": {
                     "label": "類"
@@ -1541,10 +1529,6 @@
                     "name": "吊櫈",
                     "terms": "Chair Lift,吊櫈"
                 },
-                "aerialway/gondola": {
-                    "name": "吊船",
-                    "terms": "Gondola,吊船"
-                },
                 "aerialway/magic_carpet": {
                     "name": "輸送帶",
                     "terms": "Magic Carpet Lift,輸送帶"
@@ -1713,9 +1697,6 @@
                 "amenity/shelter": {
                     "name": "天遮或亭",
                     "terms": "Shelter,亭,天遮,蓋,避難,避難所"
-                },
-                "amenity/swimming_pool": {
-                    "name": "游水池"
                 },
                 "amenity/taxi": {
                     "name": "的士站",
@@ -2460,29 +2441,9 @@
                 "railway/level_crossing": {
                     "name": "鐵道口（車道）"
                 },
-                "railway/monorail": {
-                    "name": "單軌",
-                    "terms": "Monorail,單軌,單軌鐵路,單軌電車"
-                },
-                "railway/narrow_gauge": {
-                    "name": "窄軌火車",
-                    "terms": "Narrow Gauge Rails,窄軌火車,窄軌,窄軌鐵路"
-                },
-                "railway/rail": {
-                    "name": "路軌",
-                    "terms": "Rail,火車軌,路軌,軌,鐵軌"
-                },
-                "railway/subway": {
-                    "name": "地下鐵路",
-                    "terms": "MTR,Mass Transit Railway,Subway,地下鐵,地下鐵路,地鐵"
-                },
                 "railway/subway_entrance": {
                     "name": "地下鐵路入口",
                     "terms": "Subway Entrance,地下鐵路入口,地鐵入口,地鐵口"
-                },
-                "railway/tram": {
-                    "name": "電車",
-                    "terms": "Tram,電車"
                 },
                 "relation": {
                     "name": "關係",
@@ -2566,9 +2527,6 @@
                 "shop/farm": {
                     "name": "檔",
                     "terms": "Produce Stand,檔,水果攤,農場"
-                },
-                "shop/fishmonger": {
-                    "name": "魚檔"
                 },
                 "shop/florist": {
                     "name": "花舖",

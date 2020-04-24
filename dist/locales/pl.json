@@ -20,6 +20,13 @@
             "favorites": "Ulubione",
             "add_feature": "Dodaj obiekt"
         },
+        "title": {
+            "format": {
+                "context": "{base} – {context}",
+                "changes": "({changes}) {base}",
+                "changes_context": "({changes}) {base} – {context}"
+            }
+        },
         "modes": {
             "add_feature": {
                 "title": "Dodaj obiekt",
@@ -678,20 +685,19 @@
             "no_results_worldwide": "Brak wyników"
         },
         "geolocate": {
+            "key": "L",
             "title": "Wyświetl aktualne położenie",
-            "locating": "Ustalanie położenia, proszę czekać..."
+            "locating": "Ustalanie położenia, proszę czekać...",
+            "location_unavailable": "Nie można ustalić twojego położenia."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Przybliż ten obiekt",
-                "tooltip_feature": "Wyśrodkuj i przybliż mapę na ten obiekt.",
-                "tooltip_note": "Wyśrodkuj i przybliż mapę na ten węzeł.",
-                "tooltip_data": "Wyśrodkuj i przybliż mapę na ten obiekt.",
-                "tooltip_issue": "Wyśrodkuj i przybliż mapę na ten problem."
+                "title": "Przybliż do zaznaczenia"
             },
             "show_more": "Wyświetl więcej",
             "view_on_osm": "Wyświetl na openstreetmap.org",
+            "view_on_osmose": "Wyświetl na osmose.openstreetmap.fr",
             "view_on_keepRight": "Wyświetl na keepright.at",
             "feature_type": "Rodzaj obiektu",
             "fields": "Wszystkie pola",
@@ -1048,14 +1054,19 @@
         },
         "cannot_zoom": "Nie można bardziej oddalić widoku w obecnym trybie.",
         "full_screen": "Tryb pełnoekranowy",
+        "self_intersection": {
+            "error": {
+                "lines": "Linie nie mogą przecinać samych siebie.",
+                "areas": "Obszary nie mogą przecinać samych siebie."
+            }
+        },
         "QA": {
             "osmose": {
                 "title": "Problem Osmose",
                 "detail_title": "Szczegóły",
                 "elems_title": "Obiekty:",
                 "fix_title": "Zalecenia dotyczące naprawy",
-                "trap_title": "Często popełniane błędy",
-                "translation": "Tłumaczenia dostarczone przez Osmose"
+                "trap_title": "Często popełniane błędy"
             },
             "improveOSM": {
                 "title": "Wykrycie ImproveOSM",
@@ -1515,7 +1526,7 @@
                 "before_start": "Zapoznaj się z OpenStreetMap i tym edytorem, zanim zaczniesz edytowanie. iD zawiera samouczek uczący podstaw edytowania OpenStreetMap. Kliknij „Rozpocznij samouczek” na tym ekranie, by rozpocząć naukę – trwa ona tylko 15 minut.",
                 "open_source_h": "Otwarte oprogramowanie",
                 "open_source": "Edytor iD to projekt społecznościowy o otwartym oprogramowaniu i korzystasz teraz z wersji {version}. Kod źródłowy jest dostępny  [na GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Możesz pomóc w rozwoju iD poprzez [tłumaczenie](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) lub poprzez [zgłaszanie błędów](https://github.com/openstreetmap/iD/issues)."
+                "open_source_help": "Możesz pomóc w rozwoju iD poprzez [tłumaczenie](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) lub poprzez [zgłaszanie błędów](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Przegląd",
@@ -2434,7 +2445,8 @@
                     "pan": "Przesuń mapę",
                     "pan_more": "Przesuń mapę o jeden ekran",
                     "zoom": "Przybliż / Oddal",
-                    "zoom_more": "Przybliż / Oddal mocniej"
+                    "zoom_more": "Przybliż / Oddal mocniej",
+                    "geolocate": "Przybliż do mojego położenia"
                 },
                 "help": {
                     "title": "Pomoc",
@@ -2893,6 +2905,9 @@
                 "bridge/support": {
                     "label": "Rodzaj"
                 },
+                "bridge_combo": {
+                    "label": "Rodzaj"
+                },
                 "building": {
                     "label": "Budynek",
                     "terms": "budynek"
@@ -2947,6 +2962,14 @@
                     "placeholder": "50, 100, 200...",
                     "terms": "liczba miejsc, pojemność"
                 },
+                "capacity/disabled_parking": {
+                    "label": "Liczba miejsc dla niepełnosprawnych",
+                    "placeholder": "1, 2, 3..."
+                },
+                "capacity_parking": {
+                    "label": "Całkowita liczba miejsc",
+                    "placeholder": "10, 20, 30..."
+                },
                 "cash_in": {
                     "label": "Wpłatomat"
                 },
@@ -2967,7 +2990,13 @@
                     "terms": "kwota, cena"
                 },
                 "check_date": {
-                    "label": "Data ostatniego sprawdzenia"
+                    "label": "Data ostatniego sprawdzenia",
+                    "placeholder": "YYYY-MM-DD"
+                },
+                "circumference": {
+                    "label": "Obwód pnia na wysokości 1,3 m",
+                    "placeholder": "w metrach, np. 4.5",
+                    "terms": "obwód, pierśnica"
                 },
                 "clothes": {
                     "label": "Ubrania"
@@ -3059,8 +3088,8 @@
                     "terms": "kuchnia"
                 },
                 "currency_multi": {
-                    "label": "Rodzaje środków płatności",
-                    "terms": "rodzaje środków płatności, karta, gotówka"
+                    "label": "Waluty",
+                    "terms": "waluty, waluta"
                 },
                 "cutting": {
                     "label": "Rodzaj",
@@ -3133,6 +3162,9 @@
                         "timetable": "Papierowy rozkład jazdy",
                         "yes": "Tak"
                     }
+                },
+                "depth": {
+                    "label": "Głębokość (w metrach)"
                 },
                 "description": {
                     "label": "Opis obiektu",
@@ -3217,9 +3249,13 @@
                     "label": "Typ wyświetlacza"
                 },
                 "distance": {
-                    "label": "Odległość"
+                    "label": "Odległość",
+                    "terms": "odległość"
                 },
                 "disused/railway": {
+                    "label": "Rodzaj"
+                },
+                "disused/shop": {
                     "label": "Rodzaj"
                 },
                 "dock": {
@@ -3256,6 +3292,14 @@
                     "placeholder": "00:00",
                     "terms": "czas trwania, trwanie"
                 },
+                "ele": {
+                    "label": "Wysokość n.p.m. (WGS84)",
+                    "terms": "wysokość"
+                },
+                "ele_node": {
+                    "label": "Wysokość n.p.m. (WGS84)",
+                    "terms": "wysokość"
+                },
                 "electrified": {
                     "label": "Elektryfikacja",
                     "options": {
@@ -3266,10 +3310,6 @@
                     },
                     "placeholder": "Linia napowietrzna, Trzecia szyna",
                     "terms": "elektryfikacja"
-                },
-                "elevation": {
-                    "label": "Wysokość n.p.m. (WGS84)",
-                    "terms": "wysokość"
                 },
                 "email": {
                     "label": "E-mail",
@@ -3386,6 +3426,9 @@
                 },
                 "gambling": {
                     "label": "Gry"
+                },
+                "garden/type": {
+                    "label": "Rodzaj ogrodu"
                 },
                 "gauge": {
                     "label": "Rozstaw szyn"
@@ -3576,11 +3619,16 @@
                         "wlan": "Bezprzewodowy",
                         "yes": "Tak"
                     },
-                    "terms": "dostęp do internetu, internet"
+                    "terms": "dostęp do internetu, internet, wifi, wi-fi"
                 },
                 "internet_access/fee": {
-                    "label": "Płatny dostęp do Internetu",
-                    "terms": "płatny dostęp do Internetu"
+                    "label": "Dostęp do Internetu (opłata)",
+                    "options": {
+                        "customers": "Tylko dla klientów",
+                        "no": "Darmowy",
+                        "yes": "Płatny"
+                    },
+                    "terms": "internet, opłata"
                 },
                 "internet_access/ssid": {
                     "label": "Wi-Fi (nazwa sieci)",
@@ -3778,6 +3826,10 @@
                     "label": "Browar restauracyjny",
                     "terms": "browar restauracyjny"
                 },
+                "mimics": {
+                    "label": "Imitator",
+                    "terms": "imitator, kamuflaż"
+                },
                 "min_age": {
                     "label": "Minimalny wiek",
                     "terms": "minimalny wiek dziecka"
@@ -3845,8 +3897,7 @@
                     "terms": "sieć"
                 },
                 "network/type": {
-                    "label": "Typ sieci",
-                    "terms": "typ sieci, rodzaj sieci"
+                    "label": "Typ sieci"
                 },
                 "network_bicycle": {
                     "label": "Sieć",
@@ -3921,7 +3972,8 @@
                     "terms": "rozpalanie ognia, ognisko, grill"
                 },
                 "opening_date": {
-                    "label": "Oczekiwana data otwarcia"
+                    "label": "Oczekiwana data otwarcia",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "opening_hours": {
                     "label": "Godziny otwarcia w formacie podanym na Wiki",
@@ -3959,9 +4011,12 @@
                         "underground": "Podziemny"
                     }
                 },
+                "parking_space": {
+                    "label": "Rodzaj"
+                },
                 "payment_multi": {
                     "label": "Rodzaje płatności",
-                    "terms": "rodzaje płatności"
+                    "terms": "rodzaj płatności, sposób płatności, metoda płatności, płatność, karta płatnicza, karta kredytowa, gotówka"
                 },
                 "payment_multi_fee": {
                     "label": "Rodzaje płatności",
@@ -4098,6 +4153,10 @@
                 },
                 "playground/theme": {
                     "label": "Motyw"
+                },
+                "plots": {
+                    "label": "Działki",
+                    "placeholder": "10, 20, 30..."
                 },
                 "polling_station": {
                     "label": "Lokal wyborczy",
@@ -4518,6 +4577,7 @@
                 },
                 "start_date": {
                     "label": "Data początku istnienia",
+                    "placeholder": "YYYY-MM-DD",
                     "terms": "data początku istnienia"
                 },
                 "step_count": {
@@ -4631,6 +4691,9 @@
                 },
                 "target": {
                     "label": "Kraj przyjmujący"
+                },
+                "telecom/medium": {
+                    "label": "Medium"
                 },
                 "tidal": {
                     "label": "W strefie pływów",
@@ -4758,6 +4821,9 @@
                 "tunnel": {
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
+                },
+                "tunnel_combo": {
+                    "label": "Rodzaj"
                 },
                 "usage_rail": {
                     "label": "Sposób użytkowania",
@@ -4940,8 +5006,8 @@
                     "name": "Transport napowietrzny"
                 },
                 "aerialway/cable_car": {
-                    "name": "Kolejka górska",
-                    "terms": "kolejka górska wagonikowa"
+                    "name": "Kolej linowa",
+                    "terms": "kolej linowa, kolejka linowa, wyciąg narciarski"
                 },
                 "aerialway/chair_lift": {
                     "name": "Wyciag krzesełkowy",
@@ -4949,15 +5015,15 @@
                 },
                 "aerialway/drag_lift": {
                     "name": "Wyciąg orczykowy",
-                    "terms": "wyciąg orczykowy, orczyk"
+                    "terms": "wyciąg narciarski orczykowy, orczyk"
                 },
                 "aerialway/gondola": {
-                    "name": "Gondola",
+                    "name": "Kolej gondolowa",
                     "terms": "wyciąg narciarski gondolowy, gondola"
                 },
                 "aerialway/goods": {
                     "name": "Wyciąg towarowy",
-                    "terms": "wyciąg towarowy, gondola towarowa,"
+                    "terms": "wyciąg towarowy, gondola towarowa, kolej linowa"
                 },
                 "aerialway/j-bar": {
                     "name": "Wyciąg J-bar",
@@ -4969,19 +5035,19 @@
                 },
                 "aerialway/mixed_lift": {
                     "name": "Wyciąg hybrydowy",
-                    "terms": "wyciąg hybrydowy, wyciąg mieszany"
+                    "terms": "wyciąg narciarski hybrydowy, wyciąg mieszany"
                 },
                 "aerialway/platter": {
                     "name": "Wyciąg talerzykowy",
-                    "terms": "wyciąg talerzykowy"
+                    "terms": "wyciąg narciarski talerzykowy"
                 },
                 "aerialway/pylon": {
-                    "name": "Podpora wyciagu narciarskiego",
-                    "terms": "Podpora, słup"
+                    "name": "Podpora kolei linowej",
+                    "terms": "podpora kolei linowej, podpora wyciagu narciarskiego, podpora trasowa, słup, kolej linowa"
                 },
                 "aerialway/rope_tow": {
-                    "name": "Wyciąg linowy",
-                    "terms": "wyciąg linowy,wyrwirączka"
+                    "name": "Wyciąg bezpodporowy",
+                    "terms": "wyciąg narciarski bezpodporowy, wyciąg linowy, wyrwirączka, wyrwiłapka"
                 },
                 "aerialway/t-bar": {
                     "name": "Wyciąg orczykowy podwójny",
@@ -5003,7 +5069,7 @@
                     "terms": "rampa"
                 },
                 "aeroway/gate": {
-                    "name": "Brama lotniska",
+                    "name": "Bramka na lotnisku",
                     "terms": "brama lotniska, bramka, wyjście"
                 },
                 "aeroway/hangar": {
@@ -5067,7 +5133,7 @@
                 },
                 "amenity/arts_centre": {
                     "name": "Centrum artystyczne",
-                    "terms": "centrum artystyczne, centrum sztuki, sztuka"
+                    "terms": "centrum artystyczne, centrum sztuki, sztuka, ośrodek kultury"
                 },
                 "amenity/atm": {
                     "name": "Bankomat",
@@ -5437,7 +5503,11 @@
                 },
                 "amenity/parking_space": {
                     "name": "Miejsce/miejsca parkingowe (pojedyncze lub ich zwarty blok)",
-                    "terms": "zatoczka"
+                    "terms": "miejsce parkingowe, miejsca parkingowe, miejsce postojowe, miejsca postojowe, zatoczka"
+                },
+                "amenity/parking_space/disabled": {
+                    "name": "Miejsca parkingowe dla niepełnosprawnych",
+                    "terms": "miejsce parkingowe dla niepełnosprawnych, miejsca parkingowe dla niepełnosprawnych, miejsce postojowe dla niepełnosprawnych, miejsca postojowe dla niepełnosprawnych"
                 },
                 "amenity/payment_centre": {
                     "name": "Centrum płatnicze",
@@ -5576,10 +5646,7 @@
                 },
                 "amenity/recycling_container": {
                     "name": "Pojemnik na surowce wtórne",
-                    "terms": "kosz,pojemnik,kontener,śmieci,szkło,papier,metal,plastik,śmietnik,butelki,puszki"
-                },
-                "amenity/register_office": {
-                    "name": "Urząd stanu cywilnego"
+                    "terms": "kontener na surowce wtórne, recykling, segregacja odpadów, odpady, segregacja śmieci, śmieci, śmietnik, kosz na śmieci, plastik, szkło, papier, metal, butelki, puszki, kontener na odzież używaną, pojemnik na odzież używaną, odzież używana, zbiórka odzieży"
                 },
                 "amenity/research_institute": {
                     "name": "Instytut badawczy",
@@ -5669,9 +5736,6 @@
                     "name": "Szkoła podstawowa/średnia – teren (nie stosować dla budynku!)",
                     "terms": "szkoła, szkoła podstawowa, gimnazjum, liceum, szkoła średnia, szkoła ponadpodstawowa, szkoła ponadgimnazjalna, technikum, szkoła branżowa, szkoła zawodowa, szkoła specjalna, zespół szkół, teren szkoły, tereny szkolne, edukacja"
                 },
-                "amenity/scrapyard": {
-                    "name": "Złomowisko"
-                },
                 "amenity/shelter": {
                     "name": "Schronienie",
                     "terms": "schronienie"
@@ -5747,9 +5811,6 @@
                 "amenity/studio/video": {
                     "name": "Studio filmowe",
                     "terms": "studio filmowe, wytwórnia filmowa, wytwórnia filmów, produkcja filmowa, produkcja filmów"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Basen"
                 },
                 "amenity/taxi": {
                     "name": "Postój taksówek",
@@ -5901,11 +5962,11 @@
                 },
                 "amenity/waste_basket": {
                     "name": "Kosz na śmieci",
-                    "terms": "kosz,kubeł,śmietnik"
+                    "terms": "kosz, śmietnik, kubeł, odpady, śmieci"
                 },
                 "amenity/waste_disposal": {
                     "name": "Śmietnik",
-                    "terms": "śmietnik"
+                    "terms": "śmietnik, odpady, śmieci"
                 },
                 "amenity/waste_transfer_station": {
                     "name": "Stacja przeładunku odpadów",
@@ -5991,8 +6052,8 @@
                     "terms": "kolejka górska, rollercoaster, park rozrywki, lunapark, wesołe miasteczko"
                 },
                 "attraction/summer_toboggan": {
-                    "name": "Letnie saneczkarstwo",
-                    "terms": "letnie saneczkarstwo,zjazd alpejski,kolejka górska"
+                    "name": "Letni tor saneczkowy",
+                    "terms": "letnie saneczkarstwo, zjazd alpejski, bobsleje"
                 },
                 "attraction/swing_carousel": {
                     "name": "Karuzela huśtawkowa",
@@ -6012,7 +6073,7 @@
                 },
                 "barrier/block": {
                     "name": "Blok",
-                    "terms": "blok"
+                    "terms": "blok, bariera"
                 },
                 "barrier/bollard": {
                     "name": "Słupek drogowy",
@@ -6020,27 +6081,27 @@
                 },
                 "barrier/bollard_line": {
                     "name": "Rząd słupków",
-                    "terms": "rząd słupków, rząd pachołków, słupki, pachołki, słupek, pachołek"
+                    "terms": "rząd słupków, rząd pachołków, słupki, pachołki, słupek, pachołek, bariera"
                 },
                 "barrier/border_control": {
                     "name": "Kontrola graniczna",
-                    "terms": "kontrola graniczna"
+                    "terms": "kontrola graniczna, granica, bariera"
                 },
                 "barrier/cattle_grid": {
                     "name": "Przeszkoda dla zwierząt",
-                    "terms": "przeszkoda dla zwierząt, przeszkoda dla bydła, bydło, psy, kratka"
+                    "terms": "przeszkoda dla zwierząt, przeszkoda dla bydła, bydło, psy, kratka, bariera"
                 },
                 "barrier/chain": {
                     "name": "Łańcuch",
-                    "terms": "łańcuch"
+                    "terms": "łańcuch, bariera"
                 },
                 "barrier/city_wall": {
                     "name": "Mur miejski",
-                    "terms": "mur,ściana,miejski"
+                    "terms": "mur, ściana, bariera"
                 },
                 "barrier/cycle_barrier": {
                     "name": "Przegroda antyrowerowa",
-                    "terms": "przeszkoda antyrowerowa"
+                    "terms": "przeszkoda antyrowerowa, bariera"
                 },
                 "barrier/ditch": {
                     "name": "Rów",
@@ -6051,7 +6112,7 @@
                 },
                 "barrier/fence": {
                     "name": "Płot",
-                    "terms": "ogrodzenie,płot"
+                    "terms": "płot, ogrodzenie, bariera"
                 },
                 "barrier/fence/railing": {
                     "name": "Poręcz",
@@ -6059,7 +6120,7 @@
                 },
                 "barrier/gate": {
                     "name": "Brama",
-                    "terms": "brama,bramka,przejście,furtka"
+                    "terms": "brama, bramka, przejście, furtka, bariera"
                 },
                 "barrier/guard_rail": {
                     "name": "Barierka",
@@ -6067,11 +6128,11 @@
                 },
                 "barrier/hedge": {
                     "name": "Żywopłot",
-                    "terms": "żywopłot"
+                    "terms": "żywopłot, krzewy, bariera"
                 },
                 "barrier/height_restrictor": {
                     "name": "Ogranicznik wysokości",
-                    "terms": "ogranicznik wysokości, ograniczenie wysokości"
+                    "terms": "ogranicznik wysokości, ograniczenie wysokości, bariera"
                 },
                 "barrier/kerb": {
                     "name": "Krawężnik",
@@ -6095,19 +6156,23 @@
                 },
                 "barrier/kissing_gate": {
                     "name": "Kissing gate",
-                    "terms": "kissing gate"
+                    "terms": "kissing gate, bariera"
                 },
                 "barrier/lift_gate": {
                     "name": "Szlaban",
-                    "terms": "szlaban"
+                    "terms": "szlaban, bariera"
                 },
                 "barrier/retaining_wall": {
                     "name": "Mur oporowy",
-                    "terms": "mur,oporowy"
+                    "terms": "mur oporowy, bariera"
                 },
                 "barrier/sally_port": {
                     "name": "Przejście przez mur",
                     "terms": "przejście przez mur"
+                },
+                "barrier/spikes": {
+                    "name": "Kolczatka",
+                    "terms": "kolczatka, bariera"
                 },
                 "barrier/stile": {
                     "name": "Przełaz",
@@ -6119,7 +6184,7 @@
                 },
                 "barrier/toll_booth": {
                     "name": "Punkt poboru opłat",
-                    "terms": "punkt,poboru,opłat"
+                    "terms": "punkt poboru opłat, bariera"
                 },
                 "barrier/turnstile": {
                     "name": "Bramka obrotowa",
@@ -6127,11 +6192,11 @@
                 },
                 "barrier/wall": {
                     "name": "Mur",
-                    "terms": "ściana,mur"
+                    "terms": "mur, ściana, bariera"
                 },
                 "barrier/wall/noise_barrier": {
                     "name": "Ekrany akustyczne",
-                    "terms": "ekrany akustyczne, ekran akustyczny, ekran dźwiękochłonny"
+                    "terms": "ekrany akustyczne, ekran akustyczny, ekran dźwiękochłonny, bariera"
                 },
                 "boundary": {
                     "name": "Granica"
@@ -6351,7 +6416,7 @@
                 },
                 "building/warehouse": {
                     "name": "Magazyn",
-                    "terms": "Magazyn"
+                    "terms": "magazyn, hala magazynowa"
                 },
                 "building_part": {
                     "name": "Część budynku",
@@ -6586,7 +6651,10 @@
                     "name": "Niedawno wyburzony budynek"
                 },
                 "disused/railway": {
-                    "name": "Nieużywany tor"
+                    "name": "Nieużywany obiekt kolejowy"
+                },
+                "disused/shop": {
+                    "name": "Zamknięty sklep"
                 },
                 "embankment": {
                     "name": "Nasyp"
@@ -6950,6 +7018,10 @@
                     "name": "Ścieżka/droga ",
                     "terms": "ścieżka,dróżka"
                 },
+                "highway/path/boardwalk": {
+                    "name": "Chodnik z desek",
+                    "terms": "chodnik z desek, drewniany chodnik, ścieżka dla pieszych"
+                },
                 "highway/path/informal": {
                     "name": "Nieoficjalna droga",
                     "terms": "nieoficjalna droga"
@@ -7221,7 +7293,7 @@
                 },
                 "landuse/allotments": {
                     "name": "Ogródki działkowe",
-                    "terms": "działki, ogród działkowy"
+                    "terms": "ogródki działkowe, ogród działkowy, działki"
                 },
                 "landuse/aquaculture": {
                     "name": "Teren akwakultury",
@@ -7273,8 +7345,8 @@
                     "terms": "garaże,garażowisko,obszar garaży,wiaty"
                 },
                 "landuse/grass": {
-                    "name": "Trawa/trawnik",
-                    "terms": "trawa, trawnik, skwer, klomb, zieleń"
+                    "name": "Trawnik",
+                    "terms": "trawnik, trawa, trawy, skwer, klomb, zieleń"
                 },
                 "landuse/greenfield": {
                     "name": "Teren niezabudowany",
@@ -7329,8 +7401,8 @@
                     "terms": "Port wojenny"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "Tor przeszkód",
-                    "terms": "tor przeszkód"
+                    "name": "Wojskowy tor przeszkód",
+                    "terms": "wojskowy tor przeszkód"
                 },
                 "landuse/military/range": {
                     "name": "Strzelnica wojskowa",
@@ -7338,7 +7410,7 @@
                 },
                 "landuse/military/training_area": {
                     "name": "Poligon wojskowy",
-                    "terms": "poligon wojskowy, poligon"
+                    "terms": "poligon wojskowy"
                 },
                 "landuse/orchard": {
                     "name": "Sad",
@@ -7357,7 +7429,7 @@
                 },
                 "landuse/railway": {
                     "name": "Teren kolejowy",
-                    "terms": "torowisko"
+                    "terms": "tereny kolejowe"
                 },
                 "landuse/recreation_ground": {
                     "name": "Park rekreacyjno-sportowy",
@@ -7513,6 +7585,14 @@
                     "name": "Ogród",
                     "terms": "ogród, zieleń"
                 },
+                "leisure/garden/botanical": {
+                    "name": "Ogród botaniczny",
+                    "terms": "ogród botaniczny"
+                },
+                "leisure/garden/community": {
+                    "name": "Wspólny ogród",
+                    "terms": "wspólny ogród"
+                },
                 "leisure/golf_course": {
                     "name": "Pole golfowe",
                     "terms": "pole golfowe"
@@ -7547,7 +7627,7 @@
                 },
                 "leisure/park": {
                     "name": "Park rekreacyjno-wypoczynkowy",
-                    "terms": "park, wypoczynek, rekreacja, teren rekreacyjny, zieleń"
+                    "terms": "park, zieleniec, skwer, parczek, bulwar, promenada, teren rekreacyjny, zieleń, wypoczynek, rekreacja"
                 },
                 "leisure/picnic_table": {
                     "name": "Stół piknikowy",
@@ -7705,23 +7785,11 @@
                     "name": "Tor kolarski",
                     "terms": "tor, kolarstwo, welodrom, rower"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Tor kolarski",
-                    "terms": "tor, kolarstwo, welodrom, rower"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Hipodrom (Wyścigi konne)",
                     "terms": "hipodrom, wyścigi, konne, konie, tor wyścigowy"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Hipodrom (Wyścigi konne)",
-                    "terms": "hipodrom, wyścigi, konne, konie, tor wyścigowy"
-                },
                 "leisure/track/running": {
-                    "name": "Bieżnia",
-                    "terms": "bieżnia, bieganie, tor"
-                },
-                "leisure/track/running_point": {
                     "name": "Bieżnia",
                     "terms": "bieżnia, bieganie, tor"
                 },
@@ -7806,7 +7874,7 @@
                 },
                 "man_made/groyne": {
                     "name": "Ostroga brzegowa",
-                    "terms": "ostroga, tama poprzeczna"
+                    "terms": "ostroga brzegowa, ostroga morska, tama poprzeczna, morze"
                 },
                 "man_made/lighthouse": {
                     "name": "Latarnia morska",
@@ -8018,7 +8086,7 @@
                 },
                 "military/checkpoint": {
                     "name": "Wojskowy punkt kontrolny",
-                    "terms": "siły powietrzne,armia,baza,wojsko,ochrona,marynarka,żołnierze,wojna"
+                    "terms": "wojskowy punkt kontrolny, siły powietrzne, armia, baza, wojsko, ochrona, marynarka, żołnierze, wojna"
                 },
                 "military/nuclear_explosion_site": {
                     "name": "Doświadczalny poligon jądrowy",
@@ -8117,15 +8185,19 @@
                 },
                 "natural/scrub": {
                     "name": "Zarośla",
-                    "terms": "zarośla, krzaki, zieleń"
+                    "terms": "zarośla, krzewy, krzaki, nieużytki, trawy, zieleń"
                 },
                 "natural/shingle": {
                     "name": "Plaża kamienista",
                     "terms": "plaża kamienista, plaża żwirowa, żwir, żwirowisko"
                 },
+                "natural/shrub": {
+                    "name": "Krzew",
+                    "terms": "krzew"
+                },
                 "natural/spring": {
                     "name": "Źródło",
-                    "terms": "źródło"
+                    "terms": "źródło, młaka"
                 },
                 "natural/stone": {
                     "name": "Kamień",
@@ -8180,8 +8252,8 @@
                     "terms": "koryto rzeki, obszar rzeki, rzeka"
                 },
                 "natural/water/stream": {
-                    "name": "Strumień",
-                    "terms": "strumień, strumyk, potok, ciek"
+                    "name": "Koryto strumienia",
+                    "terms": "strumień, strumyk, struga, potok, ciek"
                 },
                 "natural/water/wastewater": {
                     "name": "Osadnik",
@@ -8189,7 +8261,7 @@
                 },
                 "natural/wetland": {
                     "name": "Bagno",
-                    "terms": "bagno, bagna, mokradło, mokradła, moczary, szuwary, grzęzawisko, trzęsawisko, trzcinowisko, podmokłe łąki, podmokły teren, namorzyny, torfowisko"
+                    "terms": "bagno, bagna, mokradło, mokradła, moczary, szuwary, grzęzawisko, trzęsawisko, trzcinowisko, podmokłe łąki, podmokły teren, namorzyny, torfowisko, młaka"
                 },
                 "natural/wood": {
                     "name": "Drzewa",
@@ -8416,7 +8488,7 @@
                     "terms": "szlak narciarstwa klasycznego, szlak narciarstwa przełajowego, narty, klasyczne, przełajowe, narciarstwo, trasa narciarska"
                 },
                 "piste/piste": {
-                    "name": "Szlaki sportów zimowych",
+                    "name": "Szlak sportów zimowych",
                     "terms": "szlaki sportów zimowych, narty, klasyczne, przełajowe, downhill, alpejskie, snowboard, wycieczki narciarskie, sanki, saneczki, sanie, kulig, skijöring, husky, koń, zimowa wspinaczka, rakiety śniegowe, lód, łyżwiarstwo"
                 },
                 "piste/skitour": {
@@ -8563,17 +8635,20 @@
                 "power": {
                     "name": "Energetyka"
                 },
+                "power/cable": {
+                    "name": "Kabel elektryczny"
+                },
                 "power/cable/underground": {
                     "name": "Podziemny kabel zasilający",
-                    "terms": "podziemny kabel zasilający"
+                    "terms": "podziemny kabel zasilający, energetyka, elektroenergetyka, prąd"
                 },
                 "power/generator": {
                     "name": "Źródło energii",
-                    "terms": "generator,prądnica,wytwornica"
+                    "terms": "generator, prądnica, wytwornica, energetyka, elektroenergetyka, prąd"
                 },
                 "power/generator/method/photovoltaic": {
                     "name": "Panel słoneczny",
-                    "terms": "panel słoneczny,moduł fotowoltaiczny,moduł PV,światło słoneczne"
+                    "terms": "panel słoneczny, moduł fotowoltaiczny, moduł PV, światło słoneczne, energetyka, elektroenergetyka, prąd"
                 },
                 "power/generator/source/hydro": {
                     "name": "Turbina wodna",
@@ -8585,19 +8660,19 @@
                 },
                 "power/generator/source/wind": {
                     "name": "Turbina wiatrowa",
-                    "terms": "turbina wiatrowa,generator,turbina,wiatrak,wiatr"
+                    "terms": "turbina wiatrowa, generator, wiatrak, energetyka, prąd"
                 },
                 "power/line": {
                     "name": "Linia energetyczna wysokiego napięcia",
-                    "terms": "lina wysokiego napięcia, lina energetyczna"
+                    "terms": "lina wysokiego napięcia, lina energetyczna, energetyka, elektroenergetyka, prąd"
                 },
                 "power/minor_line": {
                     "name": "Linia energetyczna drugorzędna",
-                    "terms": "Linia energetyczna, linia niskiego napięcia, linia średniego napięcia"
+                    "terms": "linia energetyczna, linia niskiego napięcia, linia średniego napięcia, energetyka, elektroenergetyka, prąd"
                 },
                 "power/plant": {
                     "name": "Elektrownia",
-                    "terms": "elektrownia, elektrociepłownia, generator"
+                    "terms": "elektrownia, elektrociepłownia, generator, energetyka, elektroenergetyka, prąd"
                 },
                 "power/plant/source/coal": {
                     "name": "Elektrownia węglowa",
@@ -8625,34 +8700,34 @@
                 },
                 "power/pole": {
                     "name": "Słup elektryczny",
-                    "terms": "słup elektryczny"
+                    "terms": "słup elektryczny, energetyka, elektroenergetyka, prąd"
                 },
                 "power/substation": {
                     "name": "Podstacja",
-                    "terms": "podstacja energetyczna"
+                    "terms": "podstacja energetyczna, stacja elektroenergetyczna, rozdzielnia, transformatornia, energetyka, elektroenergetyka, prąd"
                 },
                 "power/switch": {
                     "name": "Przełącznik wysokiego napięcia",
-                    "terms": "wyłącznik zasilania"
+                    "terms": "wyłącznik zasilania, energetyka, elektroenergetyka, prąd"
                 },
                 "power/tower": {
                     "name": "Słup wysokiego napięcia",
-                    "terms": "wieża wysokiego napięcia"
+                    "terms": "wieża wysokiego napięcia, energetyka, elektroenergetyka, prąd"
                 },
                 "power/transformer": {
                     "name": "Transformator",
-                    "terms": "transformator"
+                    "terms": "transformator, energetyka, elektroenergetyka, prąd"
                 },
                 "public_transport/platform": {
                     "name": "Przystanek / Peron",
                     "terms": "przystanek, peron, transport publiczny, transport, przewozy"
                 },
                 "public_transport/platform/aerialway": {
-                    "name": "Przystanek / Peron wyciągu",
-                    "terms": "przystanek wyciągu, peron, przystanek, wyciąg, kolejka linowa, transport publiczny, transport, przewozy"
+                    "name": "Przystanek kolei linowej",
+                    "terms": "przystanek kolei linowej, przystanek wyciągu narciarskiego, peron, wyciąg narciarski, kolej linowa, kolejka linowa, transport publiczny, przewozy"
                 },
                 "public_transport/platform/aerialway_point": {
-                    "name": "Przystanek / Peron wyciągu"
+                    "name": "Przystanek / Peron kolei linowej"
                 },
                 "public_transport/platform/bus": {
                     "name": "Przystanek autobusowy (peron)",
@@ -8722,8 +8797,8 @@
                     "terms": "stacja,transport publiczny,terminal,dworzec,transport,przewozy"
                 },
                 "public_transport/station_aerialway": {
-                    "name": "Stacja publicznej kolejki linowej",
-                    "terms": "stacja wyciągu,wyciąg,kolejka linowa,transport publiczny,stacja,terminal,dworzec,transport,przewozy"
+                    "name": "Stacja kolei linowej",
+                    "terms": "stacja kolei linowej, stacja kolejki linowej, stacja wyciągu, wyciąg, kolej linowa, kolejka linowa, transport publiczny, terminal, przewozy"
                 },
                 "public_transport/station_bus": {
                     "name": "Dworzec autobusowy",
@@ -8770,8 +8845,8 @@
                     "terms": "miejsce zatrzymania,transport publiczny,transport,przewozy"
                 },
                 "public_transport/stop_position_aerialway": {
-                    "name": "Miejsce zatrzymania się wyciągu",
-                    "terms": "miejsce zatrzymania wyciągu,wyciąg,kolejka linowa,transport publiczny,transport,przewozy"
+                    "name": "Miejsce zatrzymania się kolei linowej",
+                    "terms": "miejsce zatrzymania się kolei linowej, miejsce zatrzymania wyciągu narciarskiego, wyciąg narciarski, kolej linowa, kolejka linowa, transport publiczny, przewozy"
                 },
                 "public_transport/stop_position_bus": {
                     "name": "Miejsce zatrzymania się autobusu",
@@ -8814,7 +8889,7 @@
                 },
                 "railway/buffer_stop": {
                     "name": "Kozioł oporowy",
-                    "terms": "kozioł oporowy"
+                    "terms": "kozioł oporowy, koniec toru, bariera, torowisko, tory, kolej"
                 },
                 "railway/construction": {
                     "name": "Kolej w budowie",
@@ -8833,8 +8908,8 @@
                     "terms": "nieużywany tor"
                 },
                 "railway/funicular": {
-                    "name": "Kolejka linowo-szynowa",
-                    "terms": "funikular, kolejka"
+                    "name": "Tor kolei linowo-terenowej",
+                    "terms": "tor kolei linowo-terenowej, tory kolei linowo-terenowej, tor kolejowy, tory kolejowe, torowisko, kolej linowo-terenowa, kolej linowa"
                 },
                 "railway/halt": {
                     "name": "Przystanek kolejowy"
@@ -8844,35 +8919,43 @@
                     "terms": "przejazd kolejowy"
                 },
                 "railway/light_rail": {
-                    "name": "Kolej miejska",
-                    "terms": "kolej miejska,wagon,tramwaj"
+                    "name": "Tor kolei miejskiej / szybkiego tramwaju",
+                    "terms": "tor kolei miejskiej, tor szybkiego tramwaju, tor kolejowy, tory kolejowe, torowisko, pociąg, tramwaj, kolej miejska, szybka kolej miejska, SKM"
                 },
                 "railway/milestone": {
                     "name": "Słupek kilometrowy (kolej)",
                     "terms": "słupek kilometrowy, kilometraż, kilometracja, pikietaż, kolej"
                 },
                 "railway/miniature": {
-                    "name": "Minikolejka",
-                    "terms": "minikolejka"
+                    "name": "Tor minikolejki",
+                    "terms": "tor minikolejki, tory minikolejki, tor kolejowy, tory kolejowe, minikolejka"
                 },
                 "railway/monorail": {
-                    "name": "Kolej jednoszynowa",
-                    "terms": "Kolej jednoszynowa"
+                    "name": "Tor kolei jednoszynowej",
+                    "terms": "tor kolei jednoszynowej, tory kolei jednoszynowej, tor kolejowy, tory kolejowe, torowisko, pociąg, kolej jednoszynowa"
+                },
+                "railway/monorail/hanging": {
+                    "name": "Tor kolei jednoszynowej wiszącej",
+                    "terms": "tor kolei jednoszynowej wiszącej, tory kolei jednoszynowej wiszącej, tor kolejowy, tory kolejowe, torowisko, pociąg, kolej jednoszynowa wisząca"
                 },
                 "railway/narrow_gauge": {
-                    "name": "Linia kolejowa wąskotorowa",
-                    "terms": "kolej wąskotorowa"
+                    "name": "Tor kolei wąskotorowej",
+                    "terms": "tor kolei wąskotorowej, tory kolei wąskotorowej, tor kolejowy, tory kolejowe, torowisko, pociąg, kolej wąskotorowa"
                 },
                 "railway/platform": {
                     "name": "Peron kolejowy"
                 },
+                "railway/preserved": {
+                    "name": "Tor kolei historycznej",
+                    "terms": "tor kolei historycznej, tory kolei historycznej, tor kolejowy, tory kolejowe, torowisko, pociąg, kolej historyczna, kolej turystyczna"
+                },
                 "railway/rail": {
                     "name": "Tor kolejowy",
-                    "terms": "tory, torowisko"
+                    "terms": "tor kolejowy, tory kolejowe, torowisko, pociągi"
                 },
                 "railway/rail/highspeed": {
                     "name": "Tor kolei dużych prędkości",
-                    "terms": "tor kolei dużych prędkości, szybka kolej, Shinkansen, TGV"
+                    "terms": "tory kolei dużych prędkości, tor kolejowy, tory kolejowe, torowisko, pociąg, kolej dużych prędkości, szybka kolej, Shinkansen, TGV"
                 },
                 "railway/signal": {
                     "name": "Semafor",
@@ -8882,8 +8965,8 @@
                     "name": "Stacja kolejowa, osobowa lub osobowo-towarowa"
                 },
                 "railway/subway": {
-                    "name": "Metro",
-                    "terms": "Metro"
+                    "name": "Tor metra",
+                    "terms": "tor metra, tory metra, tor kolejowy, tory kolejowe, torowisko, metro"
                 },
                 "railway/subway_entrance": {
                     "name": "Wejście do metra",
@@ -8898,8 +8981,8 @@
                     "terms": "myjnia pociągów"
                 },
                 "railway/tram": {
-                    "name": "Tramwaj",
-                    "terms": "Tory tramwajowe"
+                    "name": "Tor tramwajowy",
+                    "terms": "tor tramwajowy, tory tramwajowe, tor kolejowy, tory kolejowe, torowisko, tramwaj"
                 },
                 "railway/tram_stop": {
                     "name": "Przystanek tramwajowy – miejsce zatrzymania tramwaju"
@@ -8940,8 +9023,8 @@
                     "terms": "boja boczna, cevni, znacznik kanału, iala"
                 },
                 "seamark/mooring": {
-                    "name": "Cumowanie",
-                    "terms": "delfin,pal,słupek,boja"
+                    "name": "Miejsce do cumowania",
+                    "terms": "cumowanie, kotwicowisko, przedporcie, przedmorze, przedport, awanport, delfin, pal, słupek, boja"
                 },
                 "shop": {
                     "name": "Sklep",
@@ -8977,7 +9060,7 @@
                 },
                 "shop/bag": {
                     "name": "Sklep z torebkami/walizkami",
-                    "terms": "torebki,walizki"
+                    "terms": "torebki, torby, walizki, galanteria"
                 },
                 "shop/bakery": {
                     "name": "Piekarnia",
@@ -9156,7 +9239,7 @@
                 },
                 "shop/doityourself": {
                     "name": "Market budowlany/sklep dla majsterkowiczów",
-                    "terms": "market budowlany, sklep dla majsterkowiczów, diy, obi, praktiker, leroy merlin"
+                    "terms": "market budowlany, sklep dla majsterkowiczów, diy, materiały budowlane, obi, praktiker, leroy merlin"
                 },
                 "shop/doors": {
                     "name": "Sklep z drzwiami",
@@ -9209,9 +9292,6 @@
                     "name": "Sklep wędkarski",
                     "terms": "wędki, przynęty, ryby, łowienie"
                 },
-                "shop/fishmonger": {
-                    "name": "Sklep rybny"
-                },
                 "shop/flooring": {
                     "name": "Sklep z posadzkami",
                     "terms": "sklep z posadzkami, posadzki"
@@ -9235,9 +9315,6 @@
                 "shop/funeral_directors": {
                     "name": "Zakład pogrzebowy",
                     "terms": "pochówek,pogrzeb"
-                },
-                "shop/furnace": {
-                    "name": "Sklep z ogrzewaniem"
                 },
                 "shop/furniture": {
                     "name": "Sklep meblowy",
@@ -9321,7 +9398,7 @@
                 },
                 "shop/kitchen": {
                     "name": "Sklep z wyposażeniem i meblami kuchennymi",
-                    "terms": "wyposażenie kuchni"
+                    "terms": "wyposażenie kuchni, kuchnie, meble kuchenne"
                 },
                 "shop/laundry": {
                     "name": "Pralnia",
@@ -9389,7 +9466,7 @@
                 },
                 "shop/newsagent": {
                     "name": "Sklep z prasą",
-                    "terms": "prasa, gazety, czasopisma, lotto, kolporter, inmedio, ruch"
+                    "terms": "salonik prasowy, kiosk, prasa, gazety, czasopisma, lotto, kolporter, inmedio, ruch"
                 },
                 "shop/nutrition_supplements": {
                     "name": "Sklep z suplementami diety",
@@ -9509,7 +9586,7 @@
                 },
                 "shop/supermarket": {
                     "name": "Supermarket",
-                    "terms": "supermarket,biedronka,netto,dino"
+                    "terms": "supermarket, hipermarket, sklep spożywczy, biedronka, netto, dino"
                 },
                 "shop/swimming_pool": {
                     "name": "Sklep z akcesoriami do basenów",
@@ -9533,7 +9610,7 @@
                 },
                 "shop/ticket": {
                     "name": "Sprzedaż biletów",
-                    "terms": "kasa biletowa"
+                    "terms": "kasa biletowa, kasy, bilety"
                 },
                 "shop/tiles": {
                     "name": "Sklep z płytkami ceramicznymi",
@@ -9613,6 +9690,10 @@
                 "telecom/data_center": {
                     "name": "Centrum danych",
                     "terms": "centrum danych, dane, serwery, systemy komputerowe"
+                },
+                "telecom/exchange": {
+                    "name": "Centrala telekomunikacyjna",
+                    "terms": "centrala telekomunikacyjna, centrala telefoniczna, telekomunikacja"
                 },
                 "tourism": {
                     "name": "Turystyka"
@@ -9823,19 +9904,19 @@
                 },
                 "traffic_sign/city_limit": {
                     "name": "Znak granicy miasta",
-                    "terms": "znak granicy miasta,miasto,wieś,przysiółek,granica,krawędź,droga,ulica"
+                    "terms": "znak granicy miasta, granica miasta, granica miejscowości, znak drogowy"
                 },
                 "traffic_sign/city_limit_vertex": {
                     "name": "Znak granicy miasta",
-                    "terms": "znak granicy miasta,miasto,wieś,przysiółek,granica,krawędź,droga,ulica"
+                    "terms": "znak granicy miasta, granica miasta, granica miejscowości, znak drogowy"
                 },
                 "traffic_sign/maxspeed": {
                     "name": "Znak ograniczenia prędkości",
-                    "terms": "znak ograniczenia prędkości,maks. prędkość,maksymalna prędkość,droga,ulica"
+                    "terms": "znak ograniczenia prędkości, ograniczenie prędkości, maksymalna prędkość, znak drogowy"
                 },
                 "traffic_sign/maxspeed_vertex": {
                     "name": "Znak ograniczenia prędkości",
-                    "terms": "znak ograniczenia prędkości,maks. prędkość,maksymalna prędkość,droga,ulica"
+                    "terms": "znak ograniczenia prędkości, ograniczenie prędkości, maksymalna prędkość, znak drogowy"
                 },
                 "traffic_sign_vertex": {
                     "name": "Znak drogowy",
@@ -9972,6 +10053,10 @@
                     "name": "Linia tramwajowa",
                     "terms": "linia tramwajowa,trasa tramwajowa"
                 },
+                "type/route/trolleybus": {
+                    "name": "Linia trolejbusowa",
+                    "terms": "linia trolejbusowa, trasa trolejbusowa, trolejbus"
+                },
                 "type/route_master": {
                     "name": "Trasa główna",
                     "terms": "trasa główna, trasa grupująca"
@@ -9982,7 +10067,7 @@
                 },
                 "type/waterway": {
                     "name": "Ciek",
-                    "terms": "ciek, droga wodna, szlak wodny, wody śródlądowe"
+                    "terms": "ciek, rzeka, strumień, struga, potok, droga wodna, szlak wodny, wody śródlądowe"
                 },
                 "waterway": {
                     "name": "Ciek"
@@ -10004,16 +10089,16 @@
                     "terms": "zapora"
                 },
                 "waterway/ditch": {
-                    "name": "Rów",
-                    "terms": "rów"
+                    "name": "Rów przydrożny",
+                    "terms": "rów przydrożny, rynsztok, kanał, ściek uliczny"
                 },
                 "waterway/dock": {
                     "name": "Suchy dok",
                     "terms": "Suchy dok"
                 },
                 "waterway/drain": {
-                    "name": "Odpływ",
-                    "terms": "kanał odwadniający, rów odwadniający, odwodnienie"
+                    "name": "Rów melioracyjny",
+                    "terms": "rów melioracyjny, rów odwadniający, rów wodny, rów odpływowy, rów stokowy, kanał odwadniający, odwodnienie, dreny, odpływ, przepust, strumień, struga, potok"
                 },
                 "waterway/fish_pass": {
                     "name": "Przepławka dla ryb",
@@ -10033,7 +10118,7 @@
                 },
                 "waterway/river": {
                     "name": "Rzeka",
-                    "terms": "odpływ,potok,ujście,strumyk,dopływ,ciek wodny"
+                    "terms": "rzeka, rzeczka, ciek"
                 },
                 "waterway/riverbank": {
                     "name": "Brzeg rzeki"
@@ -10044,11 +10129,11 @@
                 },
                 "waterway/stream": {
                     "name": "Strumień",
-                    "terms": "potok,odpływ,strumień,prąd,dryf,zalew,wezbranie,strumyk,fala,ciek wodny"
+                    "terms": "strumień, potok, struga, strumyk, rzeczka, rzeka, ciek, rów"
                 },
                 "waterway/stream_intermittent": {
                     "name": "Strumień okresowy",
-                    "terms": "strumień okresowy,potok okresowy"
+                    "terms": "strumień okresowy, potok okresowy, struga okresowa"
                 },
                 "waterway/tidal_channel": {
                     "name": "Kanał pływowy",
@@ -10318,6 +10403,13 @@
                 "description": "Mapa miasta to mapa przeglądowa Göteborga. Zawiera ogólne informacje o gruntach, komunikacji, hydrografii, budynkach, adresach, nazwach ulic i podziale administracyjnym.",
                 "name": "Mapa Göteborga"
             },
+            "gothenburg-ortho": {
+                "attribution": {
+                    "text": "© Gmina Göteborg, CC0"
+                },
+                "description": "Ortofotomapa dla gminy Göteborg",
+                "name": "Ortofotomapa Göteborg"
+            },
             "gsi.go.jp_airphoto": {
                 "attribution": {
                     "text": "GSI Japonia"
@@ -10476,6 +10568,12 @@
                 },
                 "name": "Thunderforest Krajobraz"
             },
+            "tf-outdoors": {
+                "attribution": {
+                    "text": "Mapy © Thunderforest; Data © autorzy OpenStreetMap"
+                },
+                "name": "Thunderforest Outdoors"
+            },
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
@@ -10517,6 +10615,12 @@
                 },
                 "description": "Szwedzka sieć drogowa NVDV z kilkoma wariantami warstw mapy",
                 "name": "Opcje sieci drogowej Trafikverket"
+            },
+            "wroclaw-orto2018": {
+                "attribution": {
+                    "text": "Urząd Miasta Wrocław"
+                },
+                "name": "Ortofotomapa Wrocławia 2018"
             }
         },
         "community": {
@@ -10554,6 +10658,10 @@
             },
             "Galicia-Twitter": {
                 "name": "OpenStreetMap Galicja na Twitterze",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
+            "Galicia-Xeoinquedos-Twitter": {
+                "name": "Geoinquetos na Twitterze",
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
             "GeoPhilly": {
@@ -11031,6 +11139,10 @@
                 "name": "Lista dyskusyjna OpenStreetMap Japonia",
                 "description": "Talk-ja to oficjalna lista dyskusyjna japońskiej społeczności"
             },
+            "OSM-japan-slack": {
+                "name": "OpenStreetMap Japonia na Slacku",
+                "description": "Miejsce na Slacku japońskiej społeczności OSM {signupUrl}"
+            },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap Japonia na Twitterze",
                 "description": "Hashtag na Twitterze: {url}"
@@ -11243,6 +11355,14 @@
                 "name": "Kanał OpenStreetMap Niemcy na Matriksie",
                 "description": "Wejdź na kanał #osm-de:matrix.org na https://riot.im/app/#/room/osm-de:matrix.org"
             },
+            "de-mv-mailinglist": {
+                "name": "Lista dyskusyjna Mecklenburg-Vorpommern",
+                "description": "Lista dyskusyjna społeczności OSM z Meklemburgii-Pomorza Przedniego"
+            },
+            "de-mv-twitter": {
+                "name": "OpenStreetMap Mecklenburg-Vorpommern na Twitterze",
+                "description": "Obserwuj nas na Twitterze: {url}"
+            },
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "Lista dyskusyjna OWL",
                 "description": "To oficjalna lista dyskusyjna społeczności OSM Ostwestfalen-Lippe"
@@ -11347,6 +11467,18 @@
             "geogeeks_perth_meetup": {
                 "name": "Spotkania GeoGeeks Perth"
             },
+            "gr-forum": {
+                "name": "Forum OpenStreetMap GR",
+                "description": "Forum www OpenStreetMap Grecja"
+            },
+            "gr-mailinglist": {
+                "name": "Lista dyskusyjna Talk-gr",
+                "description": "Talk-gr to oficjalna lista dyskusyjna greckiej społeczności OSM"
+            },
+            "gr-matrix": {
+                "name": "Kanał OpenStreetMap Grecja na Matriksie",
+                "description": "Wejdź na kanał #osm-gr:matrix.org na https://riot.im/app/#/room/osm-gr:matrix.org"
+            },
             "guatemala-telegram": {
                 "name": "OSM Gwatemala na Telegramie",
                 "description": "Kanał OpenStreetMap Gwatemala na Telegramie"
@@ -11355,6 +11487,10 @@
                 "name": "OpenStreetMap Chorwacja na Facebooku",
                 "description": "OpenStreetMap Chorwacja na Facebooku"
             },
+            "hr-forum": {
+                "name": "Forum OSM Chorwacja",
+                "description": "Forum OpenStreetMap Chorwacja"
+            },
             "hr-irc": {
                 "name": "OpenStreetMap Chorwacja na IRC",
                 "description": "Wejdź na kanał do #osm-hr na irc.freenode.org (port 6667)"
@@ -11362,6 +11498,10 @@
             "hr-mailinglist": {
                 "name": "Lista dyskusyjna Talk-hr",
                 "description": "Lista dyskusyjna Talk-hr"
+            },
+            "hr-wiki": {
+                "name": "OpenStreetMap Wikiprojekt Chorwacja",
+                "description": "Strona Wikiprojektu dla Chorwacji"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU na Facebooku",
@@ -11592,6 +11732,10 @@
                 "name": "OpenStreetMap Ghana na Twitterze",
                 "description": "Obserwuj nas na Twitterze: {url}"
             },
+            "osm-hr": {
+                "name": "OpenStreetMap Chorwacja",
+                "description": "Platforma z informacjami o OpenStreetMap w Chorwacji"
+            },
             "osm-india-forum": {
                 "name": "Hinduskie forum OpenStreetMap",
                 "description": "Hinduskie forum OpenStreetMap"
@@ -11755,6 +11899,10 @@
                 "name": "OpenStreetMap Słowacja na Twitterze",
                 "description": "OpenStreetMap Słowacja na Twitterze: {url}"
             },
+            "talk-africa": {
+                "name": "Lista dyskusyjna Talk-africa",
+                "description": "Talk-africa to oficjalna lista dyskusyjna afrykańskiej społeczności OSM"
+            },
             "talk-au": {
                 "name": "Lista dyskusyjna Talk-au",
                 "description": "Miejsce rozmów mapujących z Australii"
@@ -11783,6 +11931,10 @@
             },
             "talk-nz": {
                 "name": "Lista dyskusyjna Talk-nz"
+            },
+            "talk-tz": {
+                "name": "Lista dyskusyjna Talk-tz",
+                "description": "Talk-tz to oficjalna lista dyskusyjna tanzańskiej społeczności OSM"
             },
             "talk-za": {
                 "name": "Lista dyskusyjna Talk-za",
@@ -12086,6 +12238,7 @@
                 "description": "Oddział YouthMappers na Politechnice Namibijskiej (NUST)"
             },
             "ym-New-York-University": {
+                "name": "NYU mHealth Initiative Mapping Corps",
                 "description": "Oddział YouthMappers na Uniwersytecie Nowojorskim"
             },
             "ym-Nimba-County-Community-College": {
@@ -12101,6 +12254,7 @@
                 "description": "Oddział YouthMappers na Njala University, kampus Njala"
             },
             "ym-Ohio-Wesleyan-University": {
+                "name": "Environment and Wildlife Club",
                 "description": "Oddział YouthMappers na Ohio Wesleyan University"
             },
             "ym-Oklahoma-State-University": {
@@ -12172,6 +12326,7 @@
                 "description": "Oddział YouthMappers na The Gambia YMCA / University of the Gambia"
             },
             "ym-The-George-Washington-University": {
+                "name": "Humanitarian Mapping Society",
                 "description": "Oddział YouthMappers na George Washington University"
             },
             "ym-The-Johns-Hopkins-University-SAIS": {
@@ -12228,7 +12383,8 @@
             },
             "ym-Universidad-de-Antioquia": {
                 "name": "Geomatica UDEA",
-                "description": "Oddział YouthMappers na Uniwersytecie Antioquia"
+                "description": "Oddział YouthMappers na Uniwersytecie Antioquia",
+                "extendedDescription": "Jesteśmy grupą zainteresowaną geodanymi i mapowaniem wraz z innymi naszym państwie i wspólnie z innymi z sieci YouthMappers"
             },
             "ym-Universidad-de-Costa-Rica": {
                 "name": "YouthMappers na Universidad de Costa Rica",
@@ -12290,6 +12446,7 @@
                 "description": "Oddział YouthMappers na University of Central Florida"
             },
             "ym-University-of-Chicago": {
+                "name": "Tobler Society",
                 "description": "Oddział YouthMappers na Uniwersytecie Chicagowskim"
             },
             "ym-University-of-Dar-es-Salaam": {

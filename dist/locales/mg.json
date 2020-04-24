@@ -321,7 +321,6 @@
             "request_review": "Tiako hisy hanamarina ny fanovana nataoko.",
             "save": "Handefa",
             "cancel": "Hanafoana",
-            "changes": "Fanovana {count}",
             "download_changes": "Haka ny rakitra osmChange",
             "warnings": "Fampitandremana",
             "modified": "Voaova",
@@ -579,10 +578,6 @@
             "on_wiki": "{tag} ao amin'ny wiki.osm.org",
             "used_with": "ampiasaina miaraka amin'ny {type}"
         },
-        "zoom": {
-            "in": "Hanakaiky",
-            "out": "Hanalavitra"
-        },
         "cannot_zoom": "Tsy afaka manalavitra noho izao intsony amin'ity maody ity.",
         "full_screen": "Hameno ny Efijery",
         "note": {
@@ -623,8 +618,7 @@
                 "before_start_h": "Alohan'ny hanombohanao",
                 "before_start": "Tokony ho efa mifankazatra ny OpenStreetMap sy ity éditeur ity ianao mialohan'ny hanaovanao fanovana. Misy fanoroana atolotr'i iD hampianarana anao ny fototra amin'ny fanovana an'i OpenStreetMap. Tsindrio eo amin'ny \"Hanomboka ny Fanoroana\" eto amin'ity efijery ity raha hanomboka hianatra - 15 minitra eo ho eo fotsiny ny halavan'ilay izy.",
                 "open_source_h": "Hanokatra Loharano",
-                "open_source": "Ny éditeur iD dia tetikasa ifarimbonana manana kaody misokatra, ary ny fivoahana faha-{version} ity ampiasainao ity. Ny loharanon'ny kaody dia azo alaina [ao amin'ny GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Afaka manampy ny iD ianao amin'ny alalan'ny [fandikàna](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) na [fitaterana tsy fetezana](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "Ny éditeur iD dia tetikasa ifarimbonana manana kaody misokatra, ary ny fivoahana faha-{version} ity ampiasainao ity. Ny loharanon'ny kaody dia azo alaina [ao amin'ny GitHub](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Jery Ankapobeny",

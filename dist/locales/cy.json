@@ -214,14 +214,10 @@
                     "label": "Arysgrif"
                 },
                 "internet_access": {
-                    "label": "Mynediad Rhyngrwyd",
                     "options": {
                         "no": "Na",
                         "yes": "Ia"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Tâl Mynediad Rhyngrwyd"
                 },
                 "label": {
                     "label": "Label"

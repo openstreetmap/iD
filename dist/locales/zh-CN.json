@@ -590,7 +590,7 @@
             "request_review": "我想要让其他人复核我的编辑。",
             "save": "上传",
             "cancel": "取消",
-            "changes": "{count} 个更改",
+            "changes": "更改 ({count})",
             "download_changes": "下载 osmChange 文件",
             "errors": "错误",
             "warnings": "警告",
@@ -678,20 +678,17 @@
             "no_results_worldwide": "没有找到结果"
         },
         "geolocate": {
+            "key": "L",
             "title": "显示我的位置",
             "locating": "正在定位，请稍后……"
         },
         "inspector": {
             "zoom_to": {
-                "key": "Z",
-                "title": "缩放到此处",
-                "tooltip_feature": "居中并缩放地图以关注此要素。",
-                "tooltip_note": "居中并缩放地图以关注此笔记。",
-                "tooltip_data": "居中并缩放地图以关注此数据。",
-                "tooltip_issue": "居中并缩放地图以关注此问题。"
+                "key": "Z"
             },
             "show_more": "显示更多",
             "view_on_osm": "在 openstreetmap.org 上查看",
+            "view_on_osmose": "在 osmose.openstreetmap.fr 上查看",
             "view_on_keepRight": "在 keepright.at 查看",
             "feature_type": "要素类型",
             "fields": "字段",
@@ -925,7 +922,6 @@
             "custom_background": {
                 "tooltip": "编辑自定义背景",
                 "header": "自定义背景设置",
-                "instructions": "输入地图瓦片URL地址。有效的参数有：\n   {zoom} 或 {z}, {x}, {y} 作为 Z/X/Y 坐标系\n   {-y} 或 {ty} 作为翻转的 TMS 算法 Y 坐标\n   {u} 作为四叉树坐标编码\n   {switch:a,b,c} 作为 DNS 服务器解析的并行连接子域\n\n示例：\n{example}",
                 "template": {
                     "placeholder": "输入URL地址"
                 }
@@ -1042,10 +1038,6 @@
             "on_wiki": "wiki.osm.org上的{tag}",
             "used_with": "使用 {type}"
         },
-        "zoom": {
-            "in": "放大",
-            "out": "缩小"
-        },
         "cannot_zoom": "在此模式下不能再缩小",
         "full_screen": "切换全屏",
         "QA": {
@@ -1054,8 +1046,7 @@
                 "detail_title": "详情",
                 "elems_title": "要素",
                 "fix_title": "修复指导",
-                "trap_title": "常见错误",
-                "translation": "Osmose 提供的翻译"
+                "trap_title": "常见错误"
             },
             "improveOSM": {
                 "title": "ImproveOSM 检测",
@@ -1514,8 +1505,7 @@
                 "before_start_h": "在您开始之前",
                 "before_start": "您在开始编辑之前应当先了解熟悉 OpenStreetMap 和本编辑器。iD 包含了一个导览教程，可以帮助您了解编辑 OpenStreetMap 的基本知识。点击屏幕上的“开始教程”按钮即可进入，并且只需占用您大概 15 分钟。",
                 "open_source_h": "开放源代码",
-                "open_source": "iD 编辑器是一个合作开放源代码项目，您正在使用的版本是 {version}。其源代码 [在 GitHub](https://github.com/openstreetmap/iD) 上可找到。",
-                "open_source_help": "您可以帮助 iD [翻译文本](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) 或者 [报告问题](https://github.com/openstreetmap/iD/issues)。"
+                "open_source": "iD 编辑器是一个合作开放源代码项目，您正在使用的版本是 {version}。其源代码 [在 GitHub](https://github.com/openstreetmap/iD) 上可找到。"
             },
             "overview": {
                 "title": "概览",
@@ -1861,7 +1851,7 @@
                 "tip": "查找无法导航的道路、小路和渡轮航线",
                 "routable": {
                     "message": {
-                        "multiple": "{count} 个可导航要素仅彼此连接。"
+                        "multiple": "{count} 个可导航要素仅彼此连接"
                     },
                     "reference": "所有的道路、小路和渡轮航线应连接并形成一个导航网络。"
                 },
@@ -2967,7 +2957,8 @@
                     "terms": "收费,费用,费,服务费,金额,收款"
                 },
                 "check_date": {
-                    "label": "最近检查时间"
+                    "label": "最近检查时间",
+                    "placeholder": "YYYY-MM-DD"
                 },
                 "clothes": {
                     "label": "服饰"
@@ -3265,10 +3256,6 @@
                     },
                     "placeholder": "架空接触线、第三轨供电…"
                 },
-                "elevation": {
-                    "label": "海拔",
-                    "terms": "海拔,标高,高度"
-                },
                 "email": {
                     "label": "Email",
                     "placeholder": "example@example.com",
@@ -3544,7 +3531,6 @@
                     "label": "断流现象"
                 },
                 "internet_access": {
-                    "label": "互联网接入",
                     "options": {
                         "no": "否",
                         "terminal": "终端",
@@ -3552,9 +3538,6 @@
                         "wlan": "Wi-Fi",
                         "yes": "是"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "上网费用"
                 },
                 "internet_access/ssid": {
                     "label": "Wi-Fi 网络名称"
@@ -3786,8 +3769,7 @@
                     "label": "网络"
                 },
                 "network/type": {
-                    "label": "网络类型",
-                    "terms": "网络类型"
+                    "label": "网络类型"
                 },
                 "network_bicycle": {
                     "label": "网络类别",
@@ -4731,10 +4713,6 @@
                     "name": "拖拽缆道",
                     "terms": "路面缆道,drag lift,surface lift,滑雪拖车"
                 },
-                "aerialway/gondola": {
-                    "name": "环路缆车",
-                    "terms": "环路缆车,很多缆车,很多很多缆车,群体打转的缆车"
-                },
                 "aerialway/goods": {
                     "name": "物品缆车线路",
                     "terms": "物资缆车"
@@ -5232,9 +5210,6 @@
                 "amenity/recycling_container": {
                     "name": "回收容器"
                 },
-                "amenity/register_office": {
-                    "name": "民政登记处"
-                },
                 "amenity/restaurant": {
                     "name": "餐馆",
                     "terms": "餐馆,餐厅,饭店,酒楼,酒家,茶楼,美食,饭馆,食堂,食物,吃,美食,食肆,菜馆"
@@ -5319,9 +5294,6 @@
                     "name": "学校",
                     "terms": "学校,高中,初中,中学,小学,校园,中专,学习"
                 },
-                "amenity/scrapyard": {
-                    "name": "废品堆放场"
-                },
                 "amenity/shelter": {
                     "name": "亭",
                     "terms": "棚,棚屋"
@@ -5365,9 +5337,6 @@
                 "amenity/studio/video": {
                     "name": "电影制片厂",
                     "terms": "电影,影片,影像,映画,制片,录制,录音,后期,工作室,制片厂"
-                },
-                "amenity/swimming_pool": {
-                    "name": "游泳池"
                 },
                 "amenity/taxi": {
                     "name": "出租车停车处",
@@ -6508,10 +6477,6 @@
                 "landuse": {
                     "name": "土地利用要素"
                 },
-                "landuse/allotments": {
-                    "name": "公共花园",
-                    "terms": "公共花园,公共菜园"
-                },
                 "landuse/aquaculture": {
                     "name": "水产养殖",
                     "terms": "水产养殖,水产业"
@@ -6613,17 +6578,9 @@
                     "name": "海军基地",
                     "terms": "海军,基地"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "障碍训练场",
-                    "terms": "障碍,训练场"
-                },
                 "landuse/military/range": {
                     "name": "军事靶场",
                     "terms": "军事,靶场,靶子"
-                },
-                "landuse/military/training_area": {
-                    "name": "军事训练场",
-                    "terms": "军事训练场,军事练习场,训练场,练习场,训练营,军训,基地"
                 },
                 "landuse/orchard": {
                     "name": "果园",
@@ -6874,9 +6831,6 @@
                     "name": "体育跑道",
                     "terms": "跑道,田径,跑步,跑,马拉松,冲刺,竞走,健身,操场跑道"
                 },
-                "leisure/track/running_point": {
-                    "name": "体育跑道"
-                },
                 "leisure/water_park": {
                     "name": "水上乐园",
                     "terms": "水上乐园,水上公园"
@@ -6930,10 +6884,6 @@
                 "man_made/gasometer": {
                     "name": "大型燃气罐",
                     "terms": "大型燃气罐,大型储气罐,煤气包"
-                },
-                "man_made/groyne": {
-                    "name": "拦沙坝",
-                    "terms": "防波堤,拦沙坝"
                 },
                 "man_made/lighthouse": {
                     "name": "灯塔",
@@ -7668,10 +7618,6 @@
                     "name": "废弃铁路",
                     "terms": "废弃的铁路"
                 },
-                "railway/funicular": {
-                    "name": "缆索铁路",
-                    "terms": "缆车"
-                },
                 "railway/halt": {
                     "name": "列车站 (小站 / 招呼)"
                 },
@@ -7679,36 +7625,12 @@
                     "name": "铁路道口 (道路)",
                     "terms": "铁路道口,平交道口,铁路道口(道路)"
                 },
-                "railway/light_rail": {
-                    "name": "轻轨",
-                    "terms": "轻轨,地铁,地下铁,有轨,电车"
-                },
                 "railway/milestone": {
                     "name": "铁路里程碑",
                     "terms": "轨道,股道,铁轨,铁路,路轨,里程碑,里程,百米桩,桩,碑,界碑,火车,列车"
                 },
-                "railway/miniature": {
-                    "name": "微型铁路",
-                    "terms": "微型铁路,铁路,模型,小火车,玩具"
-                },
-                "railway/monorail": {
-                    "name": "单轨铁路",
-                    "terms": "单轨铁路"
-                },
-                "railway/narrow_gauge": {
-                    "name": "窄轨铁路",
-                    "terms": "窄轨铁路,铁路"
-                },
                 "railway/platform": {
                     "name": "火车站台"
-                },
-                "railway/rail": {
-                    "name": "标准铁路",
-                    "terms": "铁轨"
-                },
-                "railway/rail/highspeed": {
-                    "name": "高速铁路",
-                    "terms": "高铁,高速铁路,子弹头列车,动车,列车,铁路"
                 },
                 "railway/signal": {
                     "name": "铁路信号机",
@@ -7716,10 +7638,6 @@
                 },
                 "railway/station": {
                     "name": "火车站"
-                },
-                "railway/subway": {
-                    "name": "地铁",
-                    "terms": "地铁,轻轨,轨道交通,地下铁,有轨,电车,单轨"
                 },
                 "railway/subway_entrance": {
                     "name": "地铁出入口",
@@ -7732,10 +7650,6 @@
                 "railway/train_wash": {
                     "name": "列车清洗机",
                     "terms": "轨道,股道,铁轨,铁路,路轨,火车,列车,清洗,清洁,水洗,外皮,洗澡,机器"
-                },
-                "railway/tram": {
-                    "name": "电车",
-                    "terms": "电车"
                 },
                 "railway/tram_stop": {
                     "name": "有轨电车停车处"
@@ -7941,9 +7855,6 @@
                 "shop/fashion": {
                     "name": "服装店"
                 },
-                "shop/fishmonger": {
-                    "name": "海产店"
-                },
                 "shop/florist": {
                     "name": "花店",
                     "terms": "花店"
@@ -7952,16 +7863,9 @@
                     "name": "相框店",
                     "terms": "相框店"
                 },
-                "shop/frozen_food": {
-                    "name": "冷冻食品",
-                    "terms": "冷冻食品,冷冻,速冻,冷藏,生鲜,海鲜,超市,市场,卖场"
-                },
                 "shop/funeral_directors": {
                     "name": "殡仪馆",
                     "terms": "殡仪馆,墓园,墓地,坟墓,丧葬承办人,殡葬业者,殡葬,死亡,逝世,丧礼,葬"
-                },
-                "shop/furnace": {
-                    "name": "熔炉店"
                 },
                 "shop/furniture": {
                     "name": "家具店",
@@ -9248,6 +9152,10 @@
                 "name": "OSM 加拿大 邮件列表",
                 "description": "讨论在加拿大 OpenStreetMap 的邮件列表"
             },
+            "OSM-CA-telegram": {
+                "name": "Telegram 上的 @osmca",
+                "description": "OpenStreetMap 加拿大 Telegram 聊天"
+            },
             "OSM-CL-facebook": {
                 "name": "OpenStreetMap 智利 Facebook",
                 "description": "在 Facebook 上加入 OpenStreetMap 智利社区",
@@ -9479,6 +9387,9 @@
             },
             "OSM-Rome-meetup": {
                 "description": "在罗马地区改进 OpenStreetMap"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap 西雅图"
             },
             "OSM-South-Bay": {
                 "name": "OSM 南湾"

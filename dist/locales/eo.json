@@ -20,6 +20,14 @@
             "favorites": "Elstarigitaj",
             "add_feature": "Aldoni objekton"
         },
+        "title": {
+            "format": {
+                "context": "{base} – {context}",
+                "changes": "({changes}) {base}",
+                "changes_context": "({changes}) {base} – {context}"
+            },
+            "labeled_and_more": "{labeled} kaj {count} pli"
+        },
         "modes": {
             "add_feature": {
                 "title": "Aldoni objekton",
@@ -107,7 +115,38 @@
             },
             "circularize": {
                 "title": "Rondigi",
-                "key": "O"
+                "description": {
+                    "single": "Fari ĉi tiun objekton ronda.",
+                    "multiple": "Fari ĉi tiujn objektojn rondaj."
+                },
+                "key": "O",
+                "annotation": {
+                    "single": "Rondigis objekton.",
+                    "multiple": "Rondigis objektojn."
+                },
+                "multiple_blockers": {
+                    "multiple": "Ili ne povas esti rondigitaj pro diversaj kialoj."
+                },
+                "not_closed": {
+                    "single": "Ĝi ne povas esti rondigita, ĉar ne estas fermita linio.",
+                    "multiple": "Ili ne povas esti rondigitaj, ĉar ne estas fermitaj linioj."
+                },
+                "too_large": {
+                    "single": "Ĝi ne povas esti rondigita, ĉar nesufiĉa parto de ĝi estas nune videbla.",
+                    "multiple": "Ili ne povas esti rondigitaj, ĉar nesufiĉaj partoj de ili estas nuntempe videblaj."
+                },
+                "connected_to_hidden": {
+                    "single": "Ĝi ne povas esti rondigita, pro esti kunigita al kaŝita objekto.",
+                    "multiple": "Ili ne povas esti rondigitaj, ĉar kalkaj estas kunigitaj al kaŝitaj objektoj."
+                },
+                "not_downloaded": {
+                    "single": "Ĝi ne povas esti rondigita, ĉar parto de ĝi ankoraŭ ne estas elŝutita.",
+                    "multiple": "Ili ne povas esti rondigitaj, ĉar partoj de ili ankoraŭ ne estas elŝutitaj."
+                },
+                "already_circular": {
+                    "single": "Ĝi ne povas esti rondigita pli.",
+                    "multiple": "Ili ne povas esti rondigitaj pli."
+                }
             },
             "orthogonalize": {
                 "title": "Kvadratigi",
@@ -559,7 +598,7 @@
             "request_review": "Mi volas ke iu kontrolu miajn ŝanĝojn.",
             "save": "Alŝuti",
             "cancel": "Nuligi",
-            "changes": "{count} ŝanĝoj",
+            "changes": "Ŝanĝoj ({count})",
             "download_changes": "Elŝuti dosieron osmChange",
             "errors": "Eraroj",
             "warnings": "Avertoj",
@@ -646,21 +685,21 @@
             "no_results_worldwide": "Neniuj rezultoj trovitaj"
         },
         "geolocate": {
+            "key": "L",
             "title": "Montri mian pozicion",
-            "locating": "Trovado de pozicio, bonvolu atendi…"
+            "locating": "Trovado de pozicio, bonvolu atendi…",
+            "location_unavailable": "Via pozicio estas nekonata."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Pligrandigi al tio ĉi",
-                "tooltip_feature": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi objekto.",
-                "tooltip_note": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi rimarko.",
-                "tooltip_data": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi datumo.",
-                "tooltip_issue": "Centrigi kaj pligrandigi la mapon por koncentriĝi sur tiu ĉi problemo."
+                "title": "Pligrandigu por elekti"
             },
             "show_more": "Montri pli",
             "view_on_osm": "Montri ĉe openstreetmap.org",
+            "view_on_osmose": "Montri ĉe osmose.openstreetmap.fr",
             "view_on_keepRight": "Montri ĉe keepright.at",
+            "feature_type": "Speco de objekto",
             "fields": "Kampoj",
             "tags_count": "Etikedoj ({count})",
             "members_count": "Anoj ({count})",
@@ -678,10 +717,13 @@
             "wiki_en_reference": "Montri dokumenteron en la angla",
             "key_value": "ŝlosilo=valoro",
             "multiple_values": "Pluraj valoroj",
+            "multiple_types": "Pluraj specoj",
+            "unshared_value_tooltip": "ne kunhavigataj de ĉiuj objektoj",
             "hidden_preset": {
                 "manual": "{features} estas kaŝitaj. Vi povas aktivigi ilin per la panelo de map-datumoj.",
                 "zoom": "{features} estas kaŝitaj. Pligrandigu por vidigi ilin."
             },
+            "back_tooltip": "Ŝanĝi specon de objekto",
             "remove": "Forigi",
             "search": "Serĉi",
             "unknown": "Nekonata",
@@ -757,10 +799,16 @@
                     "title": "OpenStreetMap-rimarkoj"
                 },
                 "keepRight": {
+                    "tooltip": "Problemoj pri datumoj trovitaj de keepright.at",
                     "title": "KeepRight-eraroj"
                 },
                 "improveOSM": {
+                    "tooltip": "Mankantaj datumoj trovitaj de improveosm.org",
                     "title": "ImproveOSM-eraroj"
+                },
+                "osmose": {
+                    "tooltip": "Problemoj pri datumoj trovitaj de osmose.openstreetmap.fr",
+                    "title": "Osmose-eraroj"
                 },
                 "custom": {
                     "tooltip": "Ŝovu kaj demetu datum-dosieron sur la paĝon, aŭ klaku la butonon por agordi",
@@ -883,7 +931,7 @@
             "custom_background": {
                 "tooltip": "Redakti propran fonon",
                 "header": "Agordoj de propra fono",
-                "instructions": "Entajpu ligilon de kaheloj. Ĝustaj ĵetonoj estas:\n {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n {-y} aŭ {ty} por renversaj TMS-stilaj Y-koordinatoj\n {u} por kvarkahela (quadtile) skemo\n {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
+                "instructions": "Enigu ligilon de kaheloj. Ĝustaj ĵetonoj estas:\n {zoom} aŭ {z}, {x}, {y} por Z/X/Y kahela skemo\n {-y} aŭ {ty} por renversaj TMS-stilaj Y-koordinatoj\n {u} por kvarkahela (quadtile) skemo\n {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
                 "template": {
                     "placeholder": "Redakti ligilon de ŝablono"
                 }
@@ -1005,7 +1053,20 @@
         },
         "cannot_zoom": "Ne povas plie plibonigi en nuna reĝimo.",
         "full_screen": "Baskuligi plenekranon",
+        "self_intersection": {
+            "error": {
+                "lines": "Linioj ne povas intersekci sin.",
+                "areas": "Areoj ne povas intersekci sin."
+            }
+        },
         "QA": {
+            "osmose": {
+                "title": "Osmose-eraro",
+                "detail_title": "Detaloj",
+                "elems_title": "Objektoj",
+                "fix_title": "Konsiloj pri riparo",
+                "trap_title": "Oftaj eraroj"
+            },
             "improveOSM": {
                 "title": "Trovita de ImproveOSM",
                 "geometry_types": {
@@ -1041,11 +1102,15 @@
                 }
             },
             "keepRight": {
+                "title": "KeepRight",
                 "detail_description": "Priskribo",
                 "comment": "Komento",
                 "comment_placeholder": "Skribu komenton por sciigi aliajn uzantojn.",
+                "close": "Fermi (problemo solvita)",
+                "ignore": "Forigi (ne problemo)",
                 "save_comment": "Konservi komenton",
                 "close_comment": "Fermi kaj komenti",
+                "ignore_comment": "Forigi kaj komenti",
                 "error_parts": {
                     "this_node": "tiu ĉi nodo",
                     "this_way": "tiu ĉi linio",
@@ -1460,7 +1525,7 @@
                 "before_start": "Vi devus ekkoni kun OpenStreetMap kaj kun tiu ĉi redaktilo antaŭ vi komencos redakti. iD enhavas gvidilon por instrui al vi fundamenton de redakti OpenStreetMap. Klaku “malfermi gvidilon” sur tiu ĉi ekrano por legi la gvidilon – tio ĉi okupiĝos apenaŭ proksimume 15 minutoj.",
                 "open_source_h": "Malferma kodo",
                 "open_source": "La redaktilo iD estas kunlabora malfermkoda projekto kaj vi nun uzas version {version}. La fontkodo estas disponebla [ĉe GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Vi povas helpi al iD per [traduki](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) aŭ [raporti problemojn](https://github.com/openstreetmap/iD/issues)."
+                "open_source_help": "Vi povas helpi al iD per [traduki](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) aŭ [raporti problemojn](https://github.com/openstreetmap/iD/issues)."
             },
             "overview": {
                 "title": "Sumigo",
@@ -1627,6 +1692,7 @@
                 "title": "Certigo pri kvalito",
                 "intro": "Iloj por certigo pri kvalito povas trovi malĝustajn etikedojn, nekonektitajn vojojn kaj aliajn problemojn pri OpenStreetMap, kiuj mapigistoj povas ripari. Por vidigi ekzistajn problemojn pri kvalito, klaku la panelon {data} **map-datumoj** por vidigi specifan tavolon de problemoj pri kvalito.",
                 "tools_h": "Iloj",
+                "tools": "La jenaj iloj estas nuntempe subtenataj: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/) kaj [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Pritrakti problemojn",
                 "issues": "Pritrakti problemojn pri kvalito estas simila al pritrakti rimarkojn. Klaku la markon por vidigi detalojn pri la problemo sur la flankbreto. Ĉiu ilo karakterizas per siaj propraj kapabloj, sed ĝenerale vi povas komenti aŭ fermi problemon."
             },
@@ -2378,7 +2444,8 @@
                     "pan": "Rulumi mapon",
                     "pan_more": "Rulumi mapon je unu ekrano",
                     "zoom": "Pligrandigi / malgrandigi",
-                    "zoom_more": "Pligrandigegi / malgrandigegi"
+                    "zoom_more": "Pligrandigegi / malgrandigegi",
+                    "geolocate": "Pligrandigi al mia pozicio"
                 },
                 "help": {
                     "title": "Helpo",
@@ -3137,9 +3204,6 @@
                     },
                     "placeholder": "Lineo supertera, kontaktrelo…"
                 },
-                "elevation": {
-                    "label": "Altitudo"
-                },
                 "email": {
                     "label": "Retpoŝtadreso",
                     "placeholder": "ekzemplo@ekzemplo.com"
@@ -3386,7 +3450,6 @@
                     "label": "Perioda"
                 },
                 "internet_access": {
-                    "label": "Interret-aliro",
                     "options": {
                         "no": "Ne",
                         "terminal": "Terminalo",
@@ -3394,9 +3457,6 @@
                         "wlan": "Sendrata",
                         "yes": "Jes"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Pagenda interret-aliro"
                 },
                 "internet_access/ssid": {
                     "label": "Nomo de sendrata reto"
@@ -4541,10 +4601,6 @@
                     "name": "Skitelfero",
                     "terms": "skitelfero,telfero,skilifto,aertelfero"
                 },
-                "aerialway/gondola": {
-                    "name": "Telfero plur-vagoneta",
-                    "terms": "telfero,kablovojo,gondolo,aertelfero"
-                },
                 "aerialway/goods": {
                     "name": "Telfero vara",
                     "terms": "kablotransporto,ŝarĝolifto,shargholifto,sxargxolifto"
@@ -5085,9 +5141,6 @@
                     "name": "Centro de recikligo",
                     "terms": "rubujo,balaaĵujo,rubujego,recikligujo"
                 },
-                "amenity/register_office": {
-                    "name": "Oficejo de civila stato"
-                },
                 "amenity/restaurant": {
                     "name": "Restoracio",
                     "terms": "kafejo,manĝejo,gastejo,picejo"
@@ -5172,9 +5225,6 @@
                     "name": "Lernejo (ISCED 1-3)",
                     "terms": "lernejo,edukejo,instruejo"
                 },
-                "amenity/scrapyard": {
-                    "name": "Ferrubejo"
-                },
                 "amenity/shelter": {
                     "name": "Ŝirmejo",
                     "terms": "shirmejo,sxirmejo,ŝedo,budo,ŝirmo"
@@ -5234,9 +5284,6 @@
                 "amenity/studio": {
                     "name": "Studio",
                     "terms": "radiostudio,muzikstudio,filmejo"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Naĝejo"
                 },
                 "amenity/taxi": {
                     "name": "Taksistacio",
@@ -6554,10 +6601,6 @@
                     "name": "Vojkruciĝo",
                     "terms": "vojkrucigho,vojkrucigxo,vojnodo,kruciĝo,krucigo"
                 },
-                "landuse/allotments": {
-                    "name": "Familiaj ĝardenoj",
-                    "terms": "ĝardenoj,ghardenoj,gxardenoj,laborista ĝardeno,etĝardeno,familia ĝardeno,parcelo"
-                },
                 "landuse/aquaculture": {
                     "name": "Akvokulturejo",
                     "terms": "akvokultivo,akvokulturo,akvikultivo,fiŝbredado,moluskoj,akvofarmo"
@@ -6655,17 +6698,9 @@
                     "name": "Marbazo armea",
                     "terms": "haveno armea,ŝiparo milita"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Obstakl-kurejo",
-                    "terms": "dromo,soldatkurejo"
-                },
                 "landuse/military/range": {
                     "name": "Pafejo armea",
                     "terms": "pafdomo,bombejo"
-                },
-                "landuse/military/training_area": {
-                    "name": "Ekzercejo armea",
-                    "terms": "testejo,armea spaco"
                 },
                 "landuse/orchard": {
                     "name": "Fruktoĝardeno",
@@ -7021,25 +7056,13 @@
                     "name": "Kurejo bicikla",
                     "terms": "dromo,biciklado,biciklkonkursejo,konkursejo"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Kurejo bicikla",
-                    "terms": "dromo,biciklado,biciklkonkursejo,konkursejo"
-                },
                 "leisure/track/horse_racing": {
-                    "name": "Kurejo ĉevala",
-                    "terms": "ĉevalkurejo,chevalkurejo,cxevalkurejo,hipodromo"
-                },
-                "leisure/track/horse_racing_point": {
                     "name": "Kurejo ĉevala",
                     "terms": "ĉevalkurejo,chevalkurejo,cxevalkurejo,hipodromo"
                 },
                 "leisure/track/running": {
                     "name": "Kurejo",
                     "terms": "dromo,kurado"
-                },
-                "leisure/track/running_point": {
-                    "name": "Kurejo",
-                    "terms": "dromo,kurado,konkursejo"
                 },
                 "leisure/water_park": {
                     "name": "Akvoparko",
@@ -7112,10 +7135,6 @@
                 "man_made/gasometer": {
                     "name": "Gasujo (atmosfera premo)",
                     "terms": "gasometro"
-                },
-                "man_made/groyne": {
-                    "name": "Ond-rompileto",
-                    "terms": "ondorompileto,ondrompileto,digo,ĝeto"
                 },
                 "man_made/lighthouse": {
                     "name": "Lumturo",
@@ -7268,10 +7287,6 @@
                 "military/bunker": {
                     "name": "Ŝirmejo armea",
                     "terms": "bunkro,shirmejo,sxirmejo,blokhaŭso"
-                },
-                "military/checkpoint": {
-                    "name": "Kontrolejo armea",
-                    "terms": "armea kontrolejo,kontrolpunkto"
                 },
                 "military/nuclear_explosion_site": {
                     "name": "Eksplodejo de nuklea bombo",
@@ -7975,10 +7990,6 @@
                     "name": "Neuzata relvojo",
                     "terms": "eksa fervojlinio,trako,relvojo,forlasita fervojlinio"
                 },
-                "railway/funicular": {
-                    "name": "Funikularo",
-                    "terms": "kablovojo,fervojeto,trajneto,kablotramo,telfero"
-                },
                 "railway/halt": {
                     "name": "Stacio fervoja (laŭpete)"
                 },
@@ -7986,36 +7997,12 @@
                     "name": "Traknivela pasejo (por aŭtoj)",
                     "terms": "pasejo,nivelpasejo,trenpasejo,trajnpasejo"
                 },
-                "railway/light_rail": {
-                    "name": "Fervojo malpeza",
-                    "terms": "malpeza fervojo,malpeza trajno,suburba fervojo,tramo"
-                },
                 "railway/milestone": {
                     "name": "Kilometra fosto (apud fervojo)",
                     "terms": "mejloŝtono,cipo"
                 },
-                "railway/miniature": {
-                    "name": "Miniatura fervojo",
-                    "terms": "fervojeto,maketo,trajneto,vagonareto"
-                },
-                "railway/monorail": {
-                    "name": "Relvojo unurela",
-                    "terms": "unurela fervojo,unurelvojo,fervojo"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Relvojo etŝpura",
-                    "terms": "etŝpura fervojo,etshpura fervojo,etsxpura fervojo,mallarĝŝpura fervojo,erlvojo,relparo,trako"
-                },
                 "railway/platform": {
                     "name": "Haltejo fervoja (atendejo)"
-                },
-                "railway/rail": {
-                    "name": "Relvojo normalŝpura",
-                    "terms": "erlvojo,relparo,trako,normalŝpura,larĝŝpura"
-                },
-                "railway/rail/highspeed": {
-                    "name": "Fervojo altrapida",
-                    "terms": "grandrapida trajno,rapidega trajno,altrapida trajno"
                 },
                 "railway/signal": {
                     "name": "Fervojaj trafiklumoj",
@@ -8023,10 +8010,6 @@
                 },
                 "railway/station": {
                     "name": "Stacio fervoja"
-                },
-                "railway/subway": {
-                    "name": "Metroo",
-                    "terms": "subtera fervojo"
                 },
                 "railway/subway_entrance": {
                     "name": "Metroa enirejo",
@@ -8039,10 +8022,6 @@
                 "railway/train_wash": {
                     "name": "Vagonar-purigejo",
                     "terms": "purigejo,purigilo,vagonara purigejo,trajnpurigejo,vagonarpurigejo,trajnopurigejo,trajnolavejo"
-                },
-                "railway/tram": {
-                    "name": "Relvojo trama",
-                    "terms": "tramo,tramvojo,urbofervojo"
                 },
                 "railway/tram_stop": {
                     "name": "Haltejo trama (haltloko - trako)"
@@ -8308,9 +8287,6 @@
                     "name": "Fiŝkaptil-vendejo",
                     "terms": "fiŝhokado,fiŝkaptado,hokfiŝado"
                 },
-                "shop/fishmonger": {
-                    "name": "Fiŝa vendejo"
-                },
                 "shop/florist": {
                     "name": "Florvendejo",
                     "terms": "florovendejo,florejo"
@@ -8319,10 +8295,6 @@
                     "name": "Bild-kadra vendejo",
                     "terms": "kadroj,kadraĵoj,pentraĵkadroj,bildkadroj"
                 },
-                "shop/frozen_food": {
-                    "name": "Frostigit-manĝaĵo vendejo",
-                    "terms": "frostigita manĝaĵo,fridigita manĝaĵo"
-                },
                 "shop/fuel": {
                     "name": "Brulaĵ-vendejo",
                     "terms": "brulaĵo,benzino,fuelo,gaso,gasboteloj,gasujoj,boteloj"
@@ -8330,9 +8302,6 @@
                 "shop/funeral_directors": {
                     "name": "Tombistejo",
                     "terms": "tombisto,enterigisto,entombigisto,sepultisto"
-                },
-                "shop/furnace": {
-                    "name": "Hejtila vendejo"
                 },
                 "shop/furniture": {
                     "name": "Mebla vendejo",

@@ -304,7 +304,6 @@
             "request_review": "Θα ήθελα κάποιος να ελέγξει τις επεξεργασίες μου.",
             "save": "Μεταφόρτωση",
             "cancel": "Ακύρωση",
-            "changes": "{count} Αλλαγές",
             "download_changes": "Κατεβάστε το αρχείο osmChange",
             "errors": "Σφάλματα",
             "warnings": "Προειδοποιήσεις",
@@ -387,9 +386,6 @@
             "locating": "Εντοπισμός, παρακαλώ περιμένετε..."
         },
         "inspector": {
-            "zoom_to": {
-                "title": "Εστίαση σε "
-            },
             "show_more": "Εμφάνιση Περισσότερων",
             "view_on_osm": "Προβολή στο openstreetmap.org",
             "new_relation": "Νέα σχέση...",
@@ -583,10 +579,6 @@
             "on_wiki": "{tag} στο wiki.osm.org",
             "used_with": "χρησιμοποιείται με {type}"
         },
-        "zoom": {
-            "in": "Μεγέθυνση",
-            "out": "Απομάκρυνση"
-        },
         "cannot_zoom": "Δεν είναι δυνατή μεγαλύτερη σμίκρυνση στην τρέχουσα κατάσταση λειτουργίας.",
         "full_screen": "Αλλάξτε σε Πλήρη Οθόνη",
         "streetside": {
@@ -624,8 +616,7 @@
                 "before_start_h": "Πριν ξεκινήσετε",
                 "before_start": "Θα πρέπει να είστε εξοικειωμένοι με το OpenStreetMap και αυτόν τον επεξεργαστή πριν ξεκινήσετε την επεξεργασία. Το iD περιέχει μια καθοδήγηση για να σας διδάξει τα βασικά της επεξεργασίας του OpenStreetMap. Κάντε κλικ στο \"Εκκίνηση της Καθοδήγησης\" σε αυτήν την οθόνη για να πάρετε το μάθημα - χρειάζονται μόνο 15 λεπτά περίπου.",
                 "open_source_h": "Ανοιχτά Δεδομένα",
-                "open_source": "Ο επεξεργαστής iD είναι ένα συλλογικό έργο ανοιχτού κώδικα και τώρα χρησιμοποιείτε την έκδοση {version}. Ο πηγαίος κώδικας είναι διαθέσιμος [στο GitHub] (https://github.com/openstreetmap/iD).",
-                "open_source_help": "Μπορείτε να βοηθήσετε την iD με την [μετάφραση] (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ή [αναφορά σφαλμάτων] (https://github.com/openstreetmap/iD/issues )."
+                "open_source": "Ο επεξεργαστής iD είναι ένα συλλογικό έργο ανοιχτού κώδικα και τώρα χρησιμοποιείτε την έκδοση {version}. Ο πηγαίος κώδικας είναι διαθέσιμος [στο GitHub] (https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Επισκόπηση",
@@ -1352,6 +1343,9 @@
                         "onsen": "Ιαπωνική Onsen"
                     }
                 },
+                "beauty": {
+                    "label": "Υπηρεσίες"
+                },
                 "bench": {
                     "label": "Παγκάκι"
                 },
@@ -1414,6 +1408,10 @@
                     "label": "Κτίριο",
                     "terms": "Κτίριο, Κτήριο, Οικοδόμημα"
                 },
+                "building/levels": {
+                    "label": "Επίπεδα",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/levels/underground": {
                     "label": "Υπόγεια Επίπεδα",
                     "placeholder": "2, 4, 6..."
@@ -1473,7 +1471,8 @@
                     "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "check_date": {
-                    "label": "Πρόσφατη Ημερομηνία Ελέγχου"
+                    "label": "Πρόσφατη Ημερομηνία Ελέγχου",
+                    "placeholder": "ΕΕΕΕ-ΜΜ-ΗΗ"
                 },
                 "clothes": {
                     "label": "Ρούχα"
@@ -1763,9 +1762,6 @@
                     },
                     "placeholder": "Γραμμή επαφής, Ηλεκτροδοτούμενος Σιδηρόδρομος..."
                 },
-                "elevation": {
-                    "label": "Υψόμετρο"
-                },
                 "email": {
                     "label": "Διεύθυνση Ηλεκτρονικού Ταχυδρομείου",
                     "placeholder": "example@example.com"
@@ -1867,6 +1863,9 @@
                 "fuel_multi": {
                     "label": "Είδη Καυσίμων"
                 },
+                "gambling": {
+                    "label": "Παίγνια"
+                },
                 "gauge": {
                     "label": "Διάμετρος"
                 },
@@ -1897,6 +1896,9 @@
                 },
                 "grape_variety": {
                     "label": "Ποικιλία Αμπελιού"
+                },
+                "group_only": {
+                    "label": "Μόνο Ομάδες"
                 },
                 "guest_house": {
                     "label": "Τύπος"
@@ -1982,6 +1984,9 @@
                         "undefined": "Όχι"
                     }
                 },
+                "hot_water": {
+                    "label": "Καυτό Νερό"
+                },
                 "iata": {
                     "label": "Κωδικός Αεροδρομίου IATA"
                 },
@@ -2024,18 +2029,13 @@
                     "label": "Διακοπτόμενη"
                 },
                 "internet_access": {
-                    "label": "Πρόσβαση στο διαδίκτυο",
                     "options": {
                         "no": "Όχι",
                         "terminal": "Τερματικό",
                         "wired": "Ενσύρματο δίκτυο",
                         "wlan": "Ασύρματο Δίκτυο",
                         "yes": "Ναι"
-                    },
-                    "terms": "Δωρεάν Πρόσβαση στο Διαδίκτυο, Ελεύθερη Πρόσβαση στο Διαδίκτυο"
-                },
-                "internet_access/fee": {
-                    "label": "Κώμιστρο Πρόσβασης στο Διαδίκτυο"
+                    }
                 },
                 "internet_access/ssid": {
                     "label": "Όνομα Ασύρματου Δικτύου"
@@ -2186,7 +2186,7 @@
                     "placeholder": "40, 50, 60..."
                 },
                 "maxspeed/advisory": {
-                    "label": "Προειδοποιητικό Όριο Ταχύτητας",
+                    "label": "Συνιστώμενο Όριο Ταχύτητας",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
@@ -2249,6 +2249,9 @@
                         "5": "5: Πολύ απότομα, το ποδήλατο πρέπει γενικά να σπρωχθεί ή να μεταφερθεί"
                     },
                     "placeholder": "0, 1, 2, 3..."
+                },
+                "museum": {
+                    "label": "Τύπος"
                 },
                 "name": {
                     "label": "Όνομα",
@@ -2325,8 +2328,12 @@
                         "yes": "Ναι"
                     }
                 },
+                "openfire": {
+                    "label": "Επιτρέπονται οι ανοικτές εστίες φωτιάς"
+                },
                 "opening_date": {
-                    "label": "Αναμενόμενη Ημερομηνία Λειτουργίας "
+                    "label": "Αναμενόμενη Ημερομηνία Λειτουργίας ",
+                    "placeholder": "ΕΕΕΕ-ΜΜ-ΗΗ"
                 },
                 "opening_hours": {
                     "label": "Ωράριο",
@@ -2334,6 +2341,9 @@
                 },
                 "operator": {
                     "label": "Διαχειριστής"
+                },
+                "operator/type": {
+                    "label": "Τύπος Χειριστή"
                 },
                 "outdoor_seating": {
                     "label": "Εξωτερικά Καθίσματα"
@@ -2463,6 +2473,9 @@
                     "label": "Ισχύς Εξόδου",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "plant/source": {
+                    "label": "Πηγή Ενέργειας"
+                },
                 "playground": {
                     "label": "Τύπος"
                 },
@@ -2494,7 +2507,10 @@
                     "label": "Τύπος"
                 },
                 "pump": {
-                    "label": "Τρόμπα"
+                    "label": "Τρόμπα",
+                    "options": {
+                        "manual": "Τουλούμπα"
+                    }
                 },
                 "railway": {
                     "label": "Είδος"
@@ -3201,9 +3217,6 @@
                 "aerialway/drag_lift": {
                     "name": "Αναβατήρας"
                 },
-                "aerialway/gondola": {
-                    "name": "Γόνδολα"
-                },
                 "aerialway/goods": {
                     "name": "Τελεφερίκ Αγαθών"
                 },
@@ -3456,6 +3469,9 @@
                     "name": "Βενζινάδικο",
                     "terms": "Σταθμός καυσίμων, Πρατήριο καυσίμων"
                 },
+                "amenity/gambling": {
+                    "name": "Αίθουσα Τυχερών Παιγνίων για Διασκέδαση"
+                },
                 "amenity/grave_yard": {
                     "name": "Κοιμητήριο",
                     "terms": "Νεκροταφείο"
@@ -3612,9 +3628,6 @@
                 "amenity/recycling_container": {
                     "name": "Κάδος Ανακύκλωσης"
                 },
-                "amenity/register_office": {
-                    "name": "Ληξιαρχείο"
-                },
                 "amenity/restaurant": {
                     "name": "Εστιατόριο / Ταβέρνα",
                     "terms": "Εστιατόριο, Ταβέρνα, Μεζεδοπωλείο, Μαγειρείο, Οινομαγειρείο, ρεστοράν, κουτούκι, πιτσαρία, σουβλατζίδικο, φαγάδικο, φαγητό"
@@ -3677,9 +3690,6 @@
                     "name": "Χώρος Σχολείου",
                     "terms": "σχολείο, δημοτικό, γυμνάσιο, λύκειο"
                 },
-                "amenity/scrapyard": {
-                    "name": "Μάντρα"
-                },
                 "amenity/shelter": {
                     "name": "Στέγαστρο"
                 },
@@ -3705,7 +3715,7 @@
                     "name": "Κοινωνικό Κέντρο"
                 },
                 "amenity/social_facility": {
-                    "name": "Μονάδα Κοινωνικών Παροχών"
+                    "name": "Μονάδα Κοινωνικών Υπηρεσιών"
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Τράπεζα Τροφίμων"
@@ -3734,9 +3744,6 @@
                 },
                 "amenity/studio/video": {
                     "name": "Κινηματογραφικό Studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Πισίνα"
                 },
                 "amenity/taxi": {
                     "name": "Πιάτσα Ταξί",
@@ -4788,9 +4795,6 @@
                 "junction": {
                     "name": "Κόμβος"
                 },
-                "landuse/allotments": {
-                    "name": "Κοινωτικοί Κήποι"
-                },
                 "landuse/aquaculture": {
                     "name": "Ιχθυοτροφείο",
                     "terms": "Ιχθυοκαλλιέργεια"
@@ -4882,16 +4886,9 @@
                     "name": "Ναυτική Βάση",
                     "terms": "Ναυτική Βάση"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Εμπόδιο Διαδρομής"
-                },
                 "landuse/military/range": {
                     "name": "Στρατιωτικό Πεδίο Βολής",
                     "terms": "Στρατιωτικό Πεδίο Βολής"
-                },
-                "landuse/military/training_area": {
-                    "name": "Περιοχή Εξάσκησης",
-                    "terms": "Περιοχή Εξάσκησης, Χώρος Εξάσκησης σε συγκεκριμένη δραστηριότητα - άθλημα - δεξιότητα"
                 },
                 "landuse/orchard": {
                     "name": "Περιβόλι",
@@ -5171,19 +5168,10 @@
                 "leisure/track/cycling": {
                     "name": "Ποδηλατική Πίστα"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Ποδηλατική Πίστα"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Πίστα Ιπποδρομιών"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Πίστα Ιπποδρομιών"
-                },
                 "leisure/track/running": {
-                    "name": "Στίβος"
-                },
-                "leisure/track/running_point": {
                     "name": "Στίβος"
                 },
                 "leisure/water_park": {
@@ -5231,9 +5219,6 @@
                 },
                 "man_made/gasometer": {
                     "name": "Αεριόμετρο"
-                },
-                "man_made/groyne": {
-                    "name": "Λιμενοβραχίονας"
                 },
                 "man_made/lighthouse": {
                     "name": "Φάρος",
@@ -5355,6 +5340,9 @@
                 "man_made/works": {
                     "name": "Εργοστάσιο",
                     "terms": "Εργοστάσιο, Φάμπρικα"
+                },
+                "military/bunker": {
+                    "name": "Στρατιωτικό Φυλάκιο-Πολυβολείο"
                 },
                 "military/office": {
                     "name": "Στρατολογικό Γραφείο"
@@ -5878,9 +5866,6 @@
                 "railway/disused": {
                     "name": "Σιδηροτροχιά εκτός Χρήσης"
                 },
-                "railway/funicular": {
-                    "name": "Τελεφερίκ"
-                },
                 "railway/halt": {
                     "name": "Σιδηροδρομικός Σταθμός ( Σε Παραγγελία Στάσης )"
                 },
@@ -5890,28 +5875,14 @@
                 "railway/milestone": {
                     "name": "Σιδηροδρομικό Χιλιομετρικό Σημείο"
                 },
-                "railway/miniature": {
-                    "name": "Μινιατούρα Σιδηρόδρομου"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Σιδηροτροχιά Στενού Εύρους"
-                },
                 "railway/platform": {
                     "name": "Αποβάθρα Τρένου δίπλα στη διαδρομή"
-                },
-                "railway/rail": {
-                    "name": "Σιδηροδρομική Γραμμή",
-                    "terms": "Σιδηροτροχιά, Ράγα"
                 },
                 "railway/signal": {
                     "name": "Σιδηροδρομικό Σήμα"
                 },
                 "railway/station": {
                     "name": "Σταθμός Τρένου δίπλα στη διαδρομή"
-                },
-                "railway/subway": {
-                    "name": "Μετρό",
-                    "terms": "Μετρό, Υπόγειος Σιδηρόδρομος"
                 },
                 "railway/subway_entrance": {
                     "name": "Είσοδος Μετρό",
@@ -5922,10 +5893,6 @@
                 },
                 "railway/train_wash": {
                     "name": "Πλυντήριο Τρένου"
-                },
-                "railway/tram": {
-                    "name": "Τραμ",
-                    "terms": "Τραμ"
                 },
                 "railway/tram_stop": {
                     "name": "Τοποθεσία Στάσης Τραμ πάνω στις ράγες"
@@ -6141,15 +6108,9 @@
                 "shop/fishing": {
                     "name": "Είδη Αλιείας"
                 },
-                "shop/fishmonger": {
-                    "name": "Ψαράδικο"
-                },
                 "shop/florist": {
                     "name": "Ανθοπωλείο",
                     "terms": "Ανθοπωλείο"
-                },
-                "shop/frozen_food": {
-                    "name": "Κατεψυγμένα Τρόφιμα"
                 },
                 "shop/fuel": {
                     "name": "Κατάστημα Καυσίμων"
@@ -6157,9 +6118,6 @@
                 "shop/funeral_directors": {
                     "name": "Γραφείο Τελετών",
                     "terms": "Γραφείο κηδειών"
-                },
-                "shop/furnace": {
-                    "name": "Κατάστημα Κλιβάνων"
                 },
                 "shop/furniture": {
                     "name": "Κατάστημα Επίπλων"

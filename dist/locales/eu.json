@@ -107,7 +107,14 @@
             },
             "straighten": {
                 "title": "Zuzendu",
+                "description": {
+                    "points": "Puntu hauek zuzendu.",
+                    "line": "Lerro hau zuzendu."
+                },
                 "key": "S",
+                "annotation": {
+                    "points": "Puntu batzuk zuzendu."
+                },
                 "too_bendy": "Hau ezin da zuzendu gehiegi okertu delako."
             },
             "delete": {
@@ -202,7 +209,6 @@
         "commit": {
             "save": "Igo",
             "cancel": "Ezeztatu",
-            "changes": "{count} Aldaketak",
             "modified": "Editatuta",
             "deleted": "Ezabatua",
             "created": "Sortua"
@@ -213,7 +219,8 @@
                 "key": "B"
             },
             "history": {
-                "key": "H"
+                "key": "H",
+                "version": "Bertsioa"
             },
             "location": {
                 "key": "L"
@@ -244,19 +251,85 @@
         "map_data": {
             "key": "F"
         },
+        "photo_overlays": {
+            "photo_type": {
+                "flat": {
+                    "tooltip": "Argazki tradizionalak"
+                },
+                "panoramic": {
+                    "title": "Argazki panoramikoak",
+                    "tooltip": "360° argazkiak"
+                }
+            }
+        },
+        "feature": {
+            "points": {
+                "description": "Puntuak",
+                "tooltip": "Puntu interesgarriak"
+            },
+            "buildings": {
+                "description": "Eraikinak"
+            }
+        },
         "area_fill": {
             "wireframe": {
                 "key": "W"
             }
         },
+        "save": {
+            "title": "Gorde"
+        },
+        "success": {
+            "just_edited": "OpenStreetMap editatu berri duzu!",
+            "thank_you": "Eskerrik asko mapa hobetzeagatik.",
+            "more": "Gehiago",
+            "tell_us": "Kontaiguzu!"
+        },
         "confirm": {
             "okay": "ADOS"
+        },
+        "QA": {
+            "improveOSM": {
+                "geometry_types": {
+                    "parking": "aparkalekua",
+                    "road": "errepideak"
+                },
+                "directions": {
+                    "east": "ekialde",
+                    "north": "iparra",
+                    "south": "hegoa",
+                    "west": "mendebalde"
+                }
+            },
+            "keepRight": {
+                "error_parts": {
+                    "this_crossing": "bidegurutze hau",
+                    "this_bridge": "zubi hau",
+                    "this_tunnel": "tunel hau",
+                    "railway": "trenbide",
+                    "waterway": "ubide",
+                    "university": "unibertsitatea"
+                }
+            }
+        },
+        "streetside": {
+            "title": "Bing Streetside"
+        },
+        "mapillary": {
+            "title": "Mapillary"
+        },
+        "openstreetcam": {
+            "title": "OpenStreetCam"
+        },
+        "note": {
+            "close": "Oharra itxi"
         },
         "help": {
             "title": "Laguntza",
             "key": "H",
             "help": {
-                "title": "Laguntza"
+                "title": "Laguntza",
+                "before_start_h": "Hasi aurretik"
             },
             "editing": {
                 "select_h": "Aukeratu",
@@ -285,6 +358,19 @@
                 }
             }
         },
+        "issues": {
+            "private_data": {
+                "title": "Informazio pribatua"
+            },
+            "fix": {
+                "add_a_bridge": {
+                    "title": "Zubi bat gehitu"
+                },
+                "add_a_tunnel": {
+                    "title": "Tunel bat gehitu"
+                }
+            }
+        },
         "intro": {
             "done": "eginda",
             "ok": "ADOS",
@@ -298,11 +384,23 @@
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "subdistrict": "<value for addr:subdistrict>",
-                "suburb": "<value for addr:suburb>"
+                "suburb": "<value for addr:suburb>",
+                "name": {
+                    "pizza-hut": "Pizza Hut"
+                }
+            },
+            "welcome": {
+                "title": "Ongi etorri"
+            },
+            "points": {
+                "title": "Puntuak"
             },
             "areas": {
                 "title": "Eremuak",
                 "choose_playground": "**Aukeratu {preset}-a zerrendatik.**"
+            },
+            "lines": {
+                "title": "Lerroak"
             },
             "buildings": {
                 "title": "Eraikuntzak"
@@ -325,6 +423,12 @@
                 "title": "Editatu",
                 "drawing": {
                     "title": "Marraztu"
+                },
+                "operations": {
+                    "straighten": "Puntu lerro bat zuzendu"
+                },
+                "commands": {
+                    "save": "Aldaketak gorde"
                 }
             },
             "tools": {
@@ -339,6 +443,9 @@
             "south": "S",
             "east": "E",
             "west": "W"
+        },
+        "wikidata": {
+            "label": "Etiketa"
         },
         "presets": {
             "categories": {
@@ -805,9 +912,6 @@
                     },
                     "placeholder": "Ukipenezko linea, Errail elektrifikatua..."
                 },
-                "elevation": {
-                    "label": "Goragune"
-                },
                 "email": {
                     "label": "Posta-elektroniko",
                     "placeholder": "example@example.com"
@@ -997,7 +1101,6 @@
                     "label": "Aldizka"
                 },
                 "internet_access": {
-                    "label": "Interneterako sarbide",
                     "options": {
                         "no": "Ez",
                         "terminal": "Terminal",
@@ -1005,9 +1108,6 @@
                         "wlan": "Wifi",
                         "yes": "Bai"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Interneterako sarbidearen tarifa"
                 },
                 "kerb": {
                     "label": "Frenatu"
@@ -1926,17 +2026,11 @@
                 "amenity/recycling_container": {
                     "name": "Birziklatze ontzi"
                 },
-                "amenity/register_office": {
-                    "name": "Erregistro bulegoa"
-                },
                 "amenity/restaurant": {
                     "name": "Jatetxe"
                 },
                 "amenity/school": {
                     "name": "Eskola eremu"
-                },
-                "amenity/scrapyard": {
-                    "name": "Txatarra metaketa"
                 },
                 "amenity/shelter": {
                     "name": "Aterpetxe"
@@ -1976,9 +2070,6 @@
                 },
                 "amenity/studio": {
                     "name": "Estudio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Igerileku"
                 },
                 "amenity/taxi": {
                     "name": "Taxi postu"

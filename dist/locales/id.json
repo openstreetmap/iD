@@ -188,7 +188,6 @@
             "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
             "save": "Unggah",
             "cancel": "Batal",
-            "changes": "{count} Perubahan",
             "warnings": "Peringatan",
             "modified": "Diubah",
             "deleted": "Terhapus",
@@ -405,29 +404,92 @@
             }
         },
         "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "Fitur Penghalang"
+                },
+                "category-building": {
+                    "name": "Fitur Bangunan"
+                },
+                "category-golf": {
+                    "name": "Fitur Golf"
+                },
+                "category-landuse": {
+                    "name": "Fitur Lahan"
+                },
+                "category-natural": {
+                    "name": "Fitur Alam"
+                },
+                "category-path": {
+                    "name": "Jalan Kecil / Gang"
+                },
+                "category-rail": {
+                    "name": "Rel"
+                },
+                "category-restriction": {
+                    "name": "Fitur Larangan"
+                },
+                "category-road_major": {
+                    "name": "Jalan Besar"
+                },
+                "category-road_minor": {
+                    "name": "Jalan Kecil"
+                },
+                "category-road_service": {
+                    "name": "Jalan Layanan"
+                },
+                "category-route": {
+                    "name": "Fitur Rute"
+                },
+                "category-utility": {
+                    "name": "Fitur Utilitas"
+                },
+                "category-water": {
+                    "name": "Badan Air"
+                },
+                "category-waterway": {
+                    "name": "Jalur Air"
+                }
+            },
             "fields": {
                 "access": {
                     "label": "Akses diperbolehkan",
                     "options": {
                         "designated": {
+                            "description": "Akses diperbolehkan tergantung tanda/rambu atau hukum daerah yang ada",
                             "title": "Ditunjuk"
                         },
                         "destination": {
+                            "description": "Akses dibolehkan hanya untuk mencapai tujuan",
                             "title": "Tujuan"
                         },
+                        "dismount": {
+                            "description": "Akses dibolehkan tapi pengendara harus turun",
+                            "title": "turun dari kendaraan"
+                        },
                         "no": {
+                            "description": "Akses tidak diperbolehkan untuk umum",
                             "title": "Terlarang"
                         },
                         "permissive": {
+                            "description": "Akses diperbolehkan sampai waktu pemilik merubah izin akses",
                             "title": "Dibolehkan"
                         },
+                        "permit": {
+                            "description": "Akses dibolehkan jika ada izin valid atau lisensi",
+                            "title": "Minta izin"
+                        },
                         "private": {
+                            "description": "Akses dibolehkan hanya seijin pemilik atau individu terkait",
                             "title": "Pribadi"
                         },
                         "yes": {
+                            "description": "Akses dibolehkan hukum; hak jalan",
                             "title": "Diizinkan"
                         }
                     },
+                    "placeholder": "Tidak dispesifikasikan",
+                    "terms": "Boleh masuk,Boleh akses,bisa masuk,bisa akses, akses diperbolehkan",
                     "types": {
                         "access": "Semua",
                         "bicycle": "Sepeda",
@@ -436,27 +498,54 @@
                         "motor_vehicle": "Kendaraan Bermotor"
                     }
                 },
+                "access_aisle": {
+                    "label": "Tipe/Jenis"
+                },
                 "access_simple": {
                     "label": "Akses diperbolehkan"
+                },
+                "addr/interpolation": {
+                    "label": "Tipe",
+                    "options": {
+                        "all": "Semua",
+                        "alphabetic": "Berdasar Abjad",
+                        "even": "Genap",
+                        "odd": "Ganjil"
+                    }
                 },
                 "address": {
                     "label": "Alamat",
                     "placeholders": {
+                        "block_number": "Nomor Blok",
+                        "block_number!jp": "Blok No.",
                         "city": "Kota",
+                        "city!cn": "Kota/Prefektur/Ligqa",
+                        "city!jp": "Kota/Kota/Kampung",
+                        "city!vn": "Kota",
                         "conscriptionnumber": "123",
                         "country": "Negara",
+                        "county": "Negara",
+                        "county!jp": "Distrik/Kabupaten",
                         "district": "Kabupaten",
+                        "district!cn": "Distrik//",
+                        "floor": "Lantai",
                         "hamlet": "Dusun",
                         "housename": "Nama rumah",
                         "housenumber": "123",
+                        "housenumber!jp": "Bangunan No.",
                         "place": "Tempat",
                         "postcode": "Kode pos",
                         "province": "Provinsi",
+                        "province!cn": "Provinsi",
+                        "province!jp": "Prefektur",
+                        "quarter": "Seperempat",
                         "state": "Negara Bagian",
                         "street": "Jalan",
                         "subdistrict": "Kecamatan",
-                        "suburb": "Kelurahan"
-                    }
+                        "suburb": "Kelurahan",
+                        "unit": "Unit"
+                    },
+                    "terms": "Alamat,Lokasi,Denah,Tempat"
                 },
                 "admin_level": {
                     "label": "Tingkat Admin"
@@ -498,7 +587,26 @@
                 "aeroway": {
                     "label": "Tipe"
                 },
+                "agrarian": {
+                    "label": "Produk"
+                },
                 "amenity": {
+                    "label": "Tipe"
+                },
+                "animal_boarding": {
+                    "label": "Untuk hewan"
+                },
+                "animal_breeding": {
+                    "label": "Untuk hewan"
+                },
+                "animal_shelter": {
+                    "label": "Untuk hewan"
+                },
+                "architect": {
+                    "label": "Arsitek",
+                    "terms": "Arsitek,Pembangun,Pembuat,Perancang"
+                },
+                "area/highway": {
                     "label": "Tipe"
                 },
                 "artist": {
@@ -510,42 +618,178 @@
                 "atm": {
                     "label": "ATM"
                 },
+                "attraction": {
+                    "label": "Tipe"
+                },
+                "baby_feeding": {
+                    "label": "Tempat merawat bayi",
+                    "options": {
+                        "no": "Tidak ada",
+                        "room": "Ruangan Khusus",
+                        "yes": "Ruangan bertanda"
+                    }
+                },
+                "baby_seat": {
+                    "label": "Tempat duduk bayi"
+                },
                 "backrest": {
                     "label": "Sandaran"
+                },
+                "bar": {
+                    "label": "Bar"
                 },
                 "barrier": {
                     "label": "Tipe"
                 },
+                "basin": {
+                    "label": "Tipe"
+                },
+                "bath/open_air": {
+                    "label": "Tempat Terbuka"
+                },
+                "bath/sand_bath": {
+                    "label": "Mandi Pasir"
+                },
+                "bath/type": {
+                    "options": {
+                        "foot_bath": "Mandi Kaki",
+                        "hot_spring": "Mata Air Panas",
+                        "onsen": "Onsen Jepang"
+                    }
+                },
+                "beauty": {
+                    "label": "Layanan"
+                },
                 "bench": {
-                    "label": "Bangku"
+                    "label": "Bangku",
+                    "terms": "Bangku,Kursi"
                 },
                 "bicycle_parking": {
+                    "label": "Tipe"
+                },
+                "bin": {
+                    "label": "Tong Sampah",
+                    "terms": "Tempat Sampah, Tempat Pembuangan, Tempat Limbah"
+                },
+                "blind": {
+                    "label": "Akses Tunanetra",
+                    "options": {
+                        "limited": "Terbatas",
+                        "no": "Tidak",
+                        "yes": "Ya"
+                    },
+                    "terms": "Akses Orang Buta,Akses ramah tunanetra"
+                },
+                "blood_components": {
+                    "label": "Komponen Darah",
+                    "options": {
+                        "plasma": "plasma",
+                        "platelets": "platelet"
+                    }
+                },
+                "board_type": {
+                    "label": "tipe"
+                },
+                "bollard": {
+                    "label": "tipe"
+                },
+                "bottle": {
+                    "label": "Pengisian Botol"
+                },
+                "boules": {
                     "label": "Tipe"
                 },
                 "boundary": {
                     "label": "Tipe"
                 },
                 "brand": {
-                    "label": "Merek"
+                    "label": "Merek",
+                    "terms": "Brand"
                 },
                 "building": {
                     "label": "Bangunan"
                 },
+                "building/levels/underground": {
+                    "label": "Jumlah lantai bawah tanah"
+                },
+                "building/levels_building": {
+                    "label": "Jumlah Lantai Bangunan"
+                },
                 "building_area": {
                     "label": "Bangunan"
                 },
+                "cables": {
+                    "label": "Kabel"
+                },
+                "camera/mount": {
+                    "label": "Pemasangan Kamera"
+                },
+                "camera/type": {
+                    "label": "Tipe kamera",
+                    "options": {
+                        "dome": "Kubah",
+                        "fixed": "Tetap",
+                        "panning": "Bisa bergerak"
+                    }
+                },
                 "capacity": {
                     "label": "Kapasitas",
-                    "placeholder": "50, 100, 200..."
+                    "placeholder": "50, 100, 200...",
+                    "terms": "Kapasitas"
+                },
+                "cash_in": {
+                    "label": "Tunai"
+                },
+                "changing_table": {
+                    "label": "Meja ganti popok"
+                },
+                "charge_fee": {
+                    "label": "Biaya pengunaan"
+                },
+                "check_date": {
+                    "label": "Tanggal terakhir dicek"
+                },
+                "circumference": {
+                    "label": "Keliling",
+                    "placeholder": "1 m, 20 cm, 30 inci…"
+                },
+                "clothes": {
+                    "label": "Baju"
                 },
                 "collection_times": {
                     "label": "Waktu Pengumpulan"
                 },
+                "colour": {
+                    "terms": "Warna"
+                },
+                "comment": {
+                    "label": "Komentar perubahan",
+                    "placeholder": "Deskripsi singkat tentang kontribusi (diperlukan)"
+                },
+                "communication_multi": {
+                    "label": "Tipe komunikasi"
+                },
+                "connectivity": {
+                    "label": "Konektivitas"
+                },
                 "construction": {
                     "label": "Tipe"
                 },
+                "contact/webcam": {
+                    "label": "URL Webcam",
+                    "placeholder": "http://contoh.com/"
+                },
+                "content": {
+                    "label": "Konten"
+                },
+                "conveying": {
+                    "label": "Arah gerak"
+                },
                 "country": {
                     "label": "Negara"
+                },
+                "country_flag": {
+                    "label": "Bendera Negara"
                 },
                 "covered": {
                     "label": "Terlindungi"
@@ -556,11 +800,21 @@
                 "crossing": {
                     "label": "Tipe"
                 },
+                "crossing/island": {
+                    "label": "Pulau Pengungsi"
+                },
+                "cuisine": {
+                    "label": "Masakan"
+                },
+                "currency_multi": {
+                    "label": "Tipe Mata Uang"
+                },
                 "cycleway": {
                     "label": "Jalur Sepeda",
                     "options": {
                         "lane": {
-                            "description": "Jalur sepeda dipisahkan dari lalu lintas oleh garis"
+                            "description": "Jalur sepeda dipisahkan dari lalu lintas oleh garis",
+                            "title": "Lajur Sepeda Standar"
                         },
                         "none": {
                             "description": "Tidak ada jalur sepeda",
@@ -573,10 +827,12 @@
                             "description": "Jalur sepeda yang melintas berlawanan arah dengan lalu lintas"
                         },
                         "share_busway": {
-                            "description": "Jalur sepeda berbagi dengan jalur bus"
+                            "description": "Jalur sepeda berbagi dengan jalur bus",
+                            "title": "Lajur sepeda berbagi dengan bus"
                         },
                         "shared_lane": {
-                            "description": "Jalur sepeda yang tak dipisahkan dari lalu lintas"
+                            "description": "Jalur sepeda yang tak dipisahkan dari lalu lintas",
+                            "title": "Lajur sepeda berbagi"
                         },
                         "track": {
                             "description": "Jalur sepeda dipisahkan dari lalu lintas oleh pembatas",
@@ -589,24 +845,117 @@
                         "cycleway:right": "Sisi kanan"
                     }
                 },
+                "dance/style": {
+                    "label": "Gaya tarian"
+                },
+                "date": {
+                    "label": "Tanggal"
+                },
+                "delivery": {
+                    "label": "Pesan Antar"
+                },
                 "denomination": {
                     "label": "Satuan"
                 },
                 "denotation": {
                     "label": "Penunjuk"
                 },
+                "departures_board": {
+                    "options": {
+                        "realtime": "Langsung"
+                    }
+                },
+                "depth": {
+                    "label": "Kedalaman (Meter)"
+                },
                 "description": {
                     "label": "Deskripsi"
                 },
+                "design": {
+                    "label": "Desain"
+                },
+                "destination/ref_oneway": {
+                    "label": "Nomor Jalan Tujuan"
+                },
+                "destination/symbol_oneway": {
+                    "label": "Simbol Tujuan"
+                },
+                "destination_oneway": {
+                    "label": "Tujuan"
+                },
+                "devices": {
+                    "label": "Perangkat"
+                },
+                "diameter": {
+                    "label": "Diameter",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
+                "diet_multi": {
+                    "label": "Tipe diet"
+                },
+                "direction_cardinal": {
+                    "options": {
+                        "E": "Timur",
+                        "ENE": "Timur-Timur Laut",
+                        "ESE": "Timur-Tenggara",
+                        "N": "Utara",
+                        "NE": "Timur Laut",
+                        "NNE": "Utara-Timur Laut",
+                        "NNW": "Utara-Barat laut",
+                        "NW": "Barat Laut",
+                        "S": "Selatan",
+                        "SE": "Tenggara",
+                        "SSE": "Selatan-tenggara",
+                        "SSW": "Selatan-barat daya",
+                        "SW": "Barat Daya",
+                        "W": "Barat",
+                        "WNW": "Barat-Barat Laut",
+                        "WSW": "Barat-Barat Daya"
+                    }
+                },
+                "direction_clock": {
+                    "options": {
+                        "anticlockwise": "Berlawanan Jarum Jam",
+                        "clockwise": "Searah Jarum Jam"
+                    }
+                },
+                "display": {
+                    "label": "Tampilan"
+                },
+                "distance": {
+                    "label": "Jarak"
+                },
+                "dog": {
+                    "label": "Anjing",
+                    "options": {
+                        "leashed": "Diikat",
+                        "no": "Tidak dibolehkan"
+                    }
+                },
+                "door": {
+                    "label": "Pintu"
+                },
+                "drink_multi": {
+                    "label": "Minuman"
+                },
+                "drinking_water": {
+                    "label": "Bisa diminum"
+                },
+                "duration": {
+                    "label": "Durasi",
+                    "placeholder": "00:00"
+                },
                 "electrified": {
+                    "label": "Memiliki Listrik",
                     "options": {
                         "no": "Tidak",
                         "rail": "Rel kereta listrik",
                         "yes": "Ya (umum)"
                     }
                 },
-                "elevation": {
-                    "label": "Ketinggian"
+                "email": {
+                    "label": "Email",
+                    "placeholder": "example@example.com"
                 },
                 "emergency": {
                     "label": "Darurat"
@@ -624,28 +973,66 @@
                 "fee": {
                     "label": "Biaya"
                 },
+                "fire_hydrant/diameter": {
+                    "label": "Diameter (mm, inci, atau letters)"
+                },
+                "fire_hydrant/pressure": {
+                    "label": "Tekanan (bar)"
+                },
                 "fire_hydrant/type": {
                     "options": {
                         "underground": "Bawah tanah",
                         "wall": "Tembok"
                     }
                 },
+                "fireplace": {
+                    "label": "Perapian"
+                },
+                "fishing": {
+                    "label": "Pemancingan"
+                },
+                "fitness_station": {
+                    "label": "Tipe peralatan"
+                },
                 "fixme": {
                     "label": "Perbaiki Saya"
                 },
+                "flag/type": {
+                    "label": "Tipe bendera"
+                },
+                "floating": {
+                    "label": "Mengapung"
+                },
+                "flood_prone": {
+                    "label": "Rawan Banjir"
+                },
+                "from": {
+                    "label": "Dari"
+                },
                 "fuel": {
                     "label": "Bahan bakar"
+                },
+                "fuel_multi": {
+                    "label": "Tipe Bahan Bakar"
+                },
+                "gambling": {
+                    "label": "Judi"
                 },
                 "gender": {
                     "label": "Kelamin",
                     "options": {
                         "female": "Perempuan",
-                        "male": "Laki-laki"
+                        "male": "Laki-laki",
+                        "unisex": "Unisex"
                     },
-                    "placeholder": "Tidak diketahui"
+                    "placeholder": "Tidak diketahui",
+                    "terms": "Kelamin"
                 },
                 "generator/method": {
                     "label": "Metode"
+                },
+                "generator/output/electricity": {
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
                 },
                 "generator/source": {
                     "label": "Sumber"
@@ -653,8 +1040,29 @@
                 "generator/type": {
                     "label": "Tipe"
                 },
+                "geyser/height": {
+                    "label": "Tinggi Erupsi"
+                },
+                "gnis/feature_id": {
+                    "label": "Fitur ID GNIS"
+                },
+                "grape_variety": {
+                    "label": "Varietas Anggur"
+                },
                 "handicap": {
                     "placeholder": "1-18"
+                },
+                "healthcare/speciality": {
+                    "label": "Keahlian"
+                },
+                "height": {
+                    "label": "Tinggi (Meter)"
+                },
+                "height_building": {
+                    "label": "Tinggi Bangunan (Meter)"
+                },
+                "highspeed": {
+                    "label": "Ngebut"
                 },
                 "highway": {
                     "label": "Tipe"
@@ -662,8 +1070,23 @@
                 "historic": {
                     "label": "Tipe"
                 },
+                "historic/civilization": {
+                    "label": "Peradaban Bersejarah"
+                },
+                "historic/wreck/date_sunk": {
+                    "label": "Tanggal Tenggelam"
+                },
+                "historic/wreck/visible_at_high_tide": {
+                    "label": "Kelihatan saat air pasang"
+                },
+                "historic/wreck/visible_at_low_tide": {
+                    "label": "Kelihatan saat air surut"
+                },
                 "hoops": {
                     "placeholder": "1, 2, 4..."
+                },
+                "hot_water": {
+                    "label": "Air panas"
                 },
                 "incline": {
                     "label": "Lereng"
@@ -674,11 +1097,13 @@
                         "up": "Atas"
                     }
                 },
+                "informal": {
+                    "label": "Tidak formal"
+                },
                 "information": {
                     "label": "Tipe"
                 },
                 "internet_access": {
-                    "label": "Akses Internet",
                     "options": {
                         "no": "Tidak",
                         "terminal": "Terminal",
@@ -686,6 +1111,27 @@
                         "wlan": "Wifi",
                         "yes": "Ya"
                     }
+                },
+                "internet_access/ssid": {
+                    "label": "Nama jaringan Wi-Fi"
+                },
+                "interval": {
+                    "label": "Interval"
+                },
+                "junction_line": {
+                    "options": {
+                        "circular": "Bundaran Kecil Jalan",
+                        "roundabout": "Bundaran"
+                    }
+                },
+                "kerb/height": {
+                    "label": "Tinggi"
+                },
+                "kneipp_water_cure_multi": {
+                    "label": "Tipe Basin"
+                },
+                "label": {
+                    "label": "Label"
                 },
                 "lamp_type": {
                     "label": "Tipe"
@@ -696,6 +1142,9 @@
                 "lanes": {
                     "label": "Jalur",
                     "placeholder": "1, 2, 3..."
+                },
+                "language_multi": {
+                    "label": "Bahasa"
                 },
                 "layer": {
                     "label": "Lapis"
@@ -716,18 +1165,57 @@
                 "length": {
                     "label": "Panjang (Meter)"
                 },
+                "level": {
+                    "label": "Tingkatan"
+                },
                 "lit": {
                     "label": "Disinari"
                 },
                 "location": {
                     "label": "Lokasi"
                 },
+                "location_pool": {
+                    "options": {
+                        "outdoor": "Luar Ruangan",
+                        "roof": "Atap"
+                    }
+                },
+                "lock": {
+                    "label": "Kunci"
+                },
+                "lockable": {
+                    "label": "Bisa Dikunci"
+                },
                 "man_made": {
                     "label": "Tipe"
+                },
+                "manufacturer": {
+                    "label": "Manufaktur",
+                    "terms": "Pembuat,Produsen,Pabrik"
+                },
+                "max_age": {
+                    "label": "Umur maksimal"
+                },
+                "maxheight": {
+                    "label": "Tinggi Maksimal",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
                     "label": "Batas Kecepatan",
                     "placeholder": "40, 50, 60..."
+                },
+                "maxspeed/advisory": {
+                    "label": "Batas Kecepatan yang disarankan"
+                },
+                "min_age": {
+                    "label": "Umur minimal"
+                },
+                "minspeed": {
+                    "label": "Batas kecepatan minimal",
+                    "placeholder": "20, 30, 40..."
+                },
+                "monitoring_multi": {
+                    "label": "Monitoring"
                 },
                 "mtb/scale": {
                     "placeholder": "0, 1, 2, 3..."
@@ -956,9 +1444,6 @@
                 "aerialway/cable_car": {
                     "name": "Kereta Gantung"
                 },
-                "aerialway/gondola": {
-                    "name": "Gondola"
-                },
                 "aeroway/aerodrome": {
                     "name": "Bandar udara",
                     "terms": "Bandara,Lapangan Terbang,"
@@ -1123,9 +1608,6 @@
                 "amenity/pub": {
                     "name": "Pub"
                 },
-                "amenity/register_office": {
-                    "name": "Dinas Catatan Sipil"
-                },
                 "amenity/restaurant": {
                     "name": "Restoran",
                     "terms": "Rumah Makan"
@@ -1144,9 +1626,6 @@
                 },
                 "amenity/studio": {
                     "name": "Studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Kolam Renang"
                 },
                 "amenity/taxi": {
                     "name": "Tempat Tunggu Taksi"
@@ -1912,24 +2391,8 @@
                 "railway/disused": {
                     "name": "Rel Tidak Terpakai"
                 },
-                "railway/monorail": {
-                    "name": "Monorel"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Sepur Sempit",
-                    "terms": "Narrow Gauge Rail, Trek, Trak, Lebar Jalur Kereta Api"
-                },
-                "railway/rail": {
-                    "name": "Rel Kereta"
-                },
-                "railway/subway": {
-                    "name": "Jalur Bawah Tanah"
-                },
                 "railway/subway_entrance": {
                     "name": "Pintu Terowongan"
-                },
-                "railway/tram": {
-                    "name": "Tram"
                 },
                 "relation": {
                     "name": "Relasi"
@@ -2051,9 +2514,6 @@
                 "shop/fashion": {
                     "name": "Toko Mode"
                 },
-                "shop/fishmonger": {
-                    "name": "Penjual Ikan"
-                },
                 "shop/florist": {
                     "name": "Toko Bunga"
                 },
@@ -2062,9 +2522,6 @@
                 },
                 "shop/funeral_directors": {
                     "name": "Rumah Pemakaman"
-                },
-                "shop/furnace": {
-                    "name": "Toko Perapian"
                 },
                 "shop/furniture": {
                     "name": "Toko Furnitur"
@@ -2351,6 +2808,12 @@
                 "type/route/tram": {
                     "name": "Rute Trem"
                 },
+                "type/waterway": {
+                    "name": "Jalur Air"
+                },
+                "waterway": {
+                    "name": "Fitur Jalur Air"
+                },
                 "waterway/canal": {
                     "name": "Kanal"
                 },
@@ -2373,10 +2836,60 @@
                 "waterway/stream": {
                     "name": "Aliran"
                 },
+                "waterway/waterfall": {
+                    "name": "Air terjun"
+                },
                 "waterway/weir": {
                     "name": "Tanggul",
                     "terms": "Sungai, Bendung"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Citra satelit dan udara",
+                "name": "Citra udara Bing"
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Ketentuan & Saran"
+                },
+                "description": "Citra Esri world",
+                "name": "Citra Esri World"
+            },
+            "EsriWorldImageryClarity": {
+                "attribution": {
+                    "text": "Ketentuan & Saran"
+                },
+                "description": "Arsip citra Esri mungkin lebih bersih dan lebih akurat daripada layer default."
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Ketentuan & Saran"
+                },
+                "description": "Citra satelit dan udara.",
+                "name": "Satelit Mapbox"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Kuning = Data peta publik dari sensus Amerika. Merah = Data tidak ditemukan di OpenStreetMap"
+            },
+            "US-TIGER-Roads-2018": {
+                "description": "Kuning = Data peta publik dari sensus Amerika. Merah = Data tidak ditemukan di OpenStreetMap"
+            },
+            "US-TIGER-Roads-2019": {
+                "description": "Kuning = Data peta publik dari sensus Amerika. Merah = Data tidak ditemukan di OpenStreetMap"
+            },
+            "USDA-NAIP": {
+                "name": "Program Nasional Pemetaan Pertanian "
+            },
+            "US_Forest_Service_roads_overlay": {
+                "description": "Jalan tol: Berwarna hijau = tidak bisa diklasifikasikan. Berwarna coklat = jalur. Permukaan: jalan makadam = coklat muda, Aspal = hitam, trotoar=putih, beton = biru, semak = hijau. Musiman = salur putih"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Jepang"
+                },
+                "name": "Peta standar GSI Jepang"
             }
         }
     }

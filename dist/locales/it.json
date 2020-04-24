@@ -7,6 +7,7 @@
             "undo": "annulla",
             "zoom_to": "zoom a",
             "copy": "copia",
+            "view_on": "visualizza su [dominio]",
             "favorite": "preferisci",
             "list": "lista",
             "text": "testo",
@@ -106,7 +107,38 @@
             },
             "circularize": {
                 "title": "Rendi rotondo",
-                "key": "O"
+                "description": {
+                    "single": "Rendi circolare questo elemento.",
+                    "multiple": "Rendi circolari questi elementi"
+                },
+                "key": "O",
+                "annotation": {
+                    "single": "Realizzato un elemento circolare.",
+                    "multiple": "Realizzato elementi circolari."
+                },
+                "multiple_blockers": {
+                    "multiple": "Questi non possono essere realizzati circolari per diversi motivi."
+                },
+                "not_closed": {
+                    "single": "Questo non può essere realizzato circolare perché non è un anello.",
+                    "multiple": "Questi non possono essere realizzati circolari perché non sono anelli."
+                },
+                "too_large": {
+                    "single": "Questo non può essere reso circolare in quanto non ne è visibile abbastanza.",
+                    "multiple": "Questi non possono essere resi circolai in quanto non ne sono visibili abbastanza."
+                },
+                "connected_to_hidden": {
+                    "single": "Questo non può essere reso circolare in quanto connesso a un elemento nascosto.",
+                    "multiple": "Questi non possono essere resi circolari in quanto alcuni sono connessi ad elementi nascosti."
+                },
+                "not_downloaded": {
+                    "single": "Questo non può essere reso circolare in quanto alcune parti non sono ancora state scaricate.",
+                    "multiple": "Questo non può essere reso circolare in quanto alcune parti non sono ancora state scaricate."
+                },
+                "already_circular": {
+                    "single": "Questo non può essere reso più circolare di quanto è già.",
+                    "multiple": "Questi non possono essere resi più circolare di quanto già siano."
+                }
             },
             "orthogonalize": {
                 "title": "Ortogonalizza",
@@ -121,6 +153,16 @@
                     }
                 },
                 "key": "Q",
+                "annotation": {
+                    "corner": {
+                        "single": "Squadrato un angolo.",
+                        "multiple": "Squadrati più angoli."
+                    },
+                    "feature": {
+                        "single": "Squadrati gli angoli di un elemento.",
+                        "multiple": "Squadrati gli angoli di più elementi."
+                    }
+                },
                 "multiple_blockers": {
                     "multiple": "Impossibile renderli retti per vari motivi."
                 },
@@ -131,6 +173,22 @@
                 "square_enough": {
                     "single": "Impossibile renderlo più retto di quanto non sia già.",
                     "multiple": "Impossibile renderli retti più di quanto non siano già."
+                },
+                "not_squarish": {
+                    "single": "Non può essere squadrato in quanto non sembra quadrato.",
+                    "multiple": "Non possono essere squadrati in quanto non sembrano quadrati."
+                },
+                "too_large": {
+                    "single": "Questo non può essere squadrato in quanto non ne è visibile abbastanza.",
+                    "multiple": "Questi non possono essere squadrati in quanto non ne sono visibili abbastanza."
+                },
+                "connected_to_hidden": {
+                    "single": "Questo non può essere squadrato perché è connetto a un elemento nascosto.",
+                    "multiple": "Questi non possono essere squadrati perché alcuni sono connessi a elementi nascosti."
+                },
+                "not_downloaded": {
+                    "single": "Non può essere squadrato perché alcune parti non sono state scaricate.",
+                    "multiple": "Non possono essere squadrati perché alcune parti non sono state scaricate."
                 }
             },
             "straighten": {
@@ -517,6 +575,12 @@
             "hidden_details": "Questi sono gli elementi attualmente nascosti: {details}"
         },
         "osm_api_status": {
+            "message": {
+                "error": "Impossibile raggiungere le API di OpenStreetMap. Le tue modifiche sono al sicuro in locale. Verifica la tua connessione.",
+                "offline": "Le API OpenStreetMap sono offline. Le tue modifiche sono al sicuro in locale. Per favore riprova più tardi.",
+                "readonly": "Le API OpenStreetMap sono disponibili in sola lettura. Puoi proseguire con le modifiche ma dovrai aspettare per salvare le tue modifche.",
+                "rateLimit": "Le API OpenStreetMap stanno limitando le connessioni anonime. Puoi risolvere effettuando l'accesso."
+            },
             "retry": "Riprova"
         },
         "commit": {
@@ -526,7 +590,7 @@
             "request_review": "Vorrei che qualcuno controllasse le mie modifiche.",
             "save": "Carica",
             "cancel": "Annulla",
-            "changes": "{count} Cambiamenti",
+            "changes": "Modifiche ({count})",
             "download_changes": "Scarica file in formato osmChange",
             "errors": "Errori",
             "warnings": "Avvertimenti",
@@ -614,20 +678,19 @@
             "no_results_worldwide": "Nessun risultato trovato"
         },
         "geolocate": {
+            "key": "L",
             "title": "Mostra la mia posizione",
-            "locating": "Localizzazione in corso, attendere..."
+            "locating": "Localizzazione in corso, attendere...",
+            "location_unavailable": "La tua posizione non è disponibile."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Ingrandisci su questo",
-                "tooltip_feature": "Centra e ingrandisci la mappa per focalizzare su questo elemento.",
-                "tooltip_note": "Centra e ingrandisci la mappa per focalizzare su questa nota.",
-                "tooltip_data": "Centra e ingrandisci la mappa per focalizzare su questi dati.",
-                "tooltip_issue": "Centra e ingrandisci la mappa per focalizzare su questo problema."
+                "title": "Ingrandisci sulla selezione"
             },
             "show_more": "Mostra di più",
             "view_on_osm": "Vedi su openstreetmap.org",
+            "view_on_osmose": "Vedi su osmose.openstreetmap.fr",
             "view_on_keepRight": "Vedi su keepright.at",
             "feature_type": "Tipo di elemento",
             "fields": "Campi",
@@ -648,6 +711,7 @@
             "key_value": "chiave=valore",
             "multiple_values": "Valori multipli",
             "multiple_types": "Tipi multipli",
+            "unshared_value_tooltip": "non condiviso da tutti gli elementi",
             "hidden_preset": {
                 "manual": "{elementi} sono nascosti. Abilitale nel pannello Dati della mappa.",
                 "zoom": "{elementi} sono nascosti. Ingrandisci per abilitarle."
@@ -678,7 +742,10 @@
             "way": "Linea",
             "relation": "Relazione",
             "location": "Posizione",
-            "add_fields": "Aggiungi campo:"
+            "add_fields": "Aggiungi campo:",
+            "lock": {
+                "suggestion": "Il campo \"{label}\" è bloccato perché esiste un tag Wikidata. Puoi cancellarlo o modificare il tag nella sezione \"Tags\"."
+            }
         },
         "background": {
             "title": "Sfondo",
@@ -707,6 +774,7 @@
                 "description": "Mostra pannello dettagli",
                 "tooltip": "Mostra informazioni avanzate sullo sfondo."
             },
+            "fix_misalignment": "Offset delle immagini",
             "offset": "Per correggere lo spostamento delle immagini trascina dove preferisci all'interno dell'area grigia sottostante o inserisci i valori correttivi in metri."
         },
         "map_data": {
@@ -724,10 +792,16 @@
                     "title": "Note di OpenStreetMap"
                 },
                 "keepRight": {
+                    "tooltip": "Problemi con i dati rilevato da keepright.at",
                     "title": "Problemi KeepRight"
                 },
                 "improveOSM": {
+                    "tooltip": "Dati mancanti rilevati da improveosm.org",
                     "title": "Problemi ImproveOSM"
+                },
+                "osmose": {
+                    "tooltip": "Problemi con i dati rilevato da osmose.openstreetmap.fr",
+                    "title": "Problemi di Osmose"
                 },
                 "custom": {
                     "tooltip": "Trascina un file dati sulla pagina oppure clicca il pulsante per impostarlo.",
@@ -874,7 +948,12 @@
             "description": "Preferenze",
             "key": "P",
             "privacy": {
-                "title": "Privacy"
+                "title": "Privacy",
+                "privacy_link": "Visualizza la privacy policy di iD",
+                "third_party_icons": {
+                    "description": "Mostra icone di terze parti",
+                    "tooltip": "Togli la spunta a questa casella per impedire il caricamento di icone di terze parti come Wikimedia Commons, Facebook e Twitter."
+                }
             }
         },
         "restore": {
@@ -943,6 +1022,9 @@
         "splash": {
             "welcome": "Benvenuti nell'editor OpenStreetMap iD",
             "text": "iD è un intuitivo ma potente strumento per contribuire alla migliore mappa libera del mondo. Questa è la versione {version}. Per ulteriori informazioni vai su {website} o segnala gli errori su {github}.",
+            "privacy_update": "La nostra privacy policy è stata recentemente aggiornata.",
+            "privacy_policy": "Privacy policy di iD",
+            "privacy": "{updateMessage} utilizzando questo software accetti di farlo secondo le indicazioni di {privacyLink}.",
             "walkthrough": "Inizia il tutorial",
             "start": "Modifica"
         },
@@ -965,7 +1047,20 @@
         },
         "cannot_zoom": "Impossibile rimpicciolire ulteriormente nella modalità attuale.",
         "full_screen": "Passa a schermo intero",
+        "self_intersection": {
+            "error": {
+                "lines": "Le linee non devono incrociarsi.",
+                "areas": "Le aree non devono incrociarsi."
+            }
+        },
         "QA": {
+            "osmose": {
+                "title": "Problemi di Osmose",
+                "detail_title": "Dettagli",
+                "elems_title": "Elementi",
+                "fix_title": "Sistema le linee guida",
+                "trap_title": "Errori comuni"
+            },
             "improveOSM": {
                 "title": "Rilevamento ImproveOSM",
                 "geometry_types": {
@@ -1001,11 +1096,15 @@
                 }
             },
             "keepRight": {
+                "title": "KeepRight",
                 "detail_description": "Descrizione",
                 "comment": "Commento",
                 "comment_placeholder": "Inserisci un commento da condividere con gli altri utenti.",
+                "close": "Chiudi (problema risolto)",
+                "ignore": "Rimuovi (falso positivo)",
                 "save_comment": "Salva commento",
                 "close_comment": "Chiudi e commenta",
+                "ignore_comment": "Rimuovi e commenta",
                 "error_parts": {
                     "this_node": "questo nodo",
                     "this_way": "questa linea",
@@ -1324,7 +1423,48 @@
         "mapillary_map_features": {
             "title": "Elementi della mappa",
             "tooltip": "Elementi della mappa da Mapillary",
-            "request_data": "Richiedi dati"
+            "request_data": "Richiedi dati",
+            "construction": {
+                "flat": {
+                    "crosswalk_plain": "attraversamento semplice"
+                }
+            },
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "attraversamento con zebre"
+                }
+            },
+            "object": {
+                "banner": "striscione",
+                "bench": "panchina",
+                "bike_rack": "portabici",
+                "billboard": "cartellone pubblicitario",
+                "catch_basin": "caditoia",
+                "cctv_camera": "telecamera a circuito chiuso",
+                "fire_hydrant": "idrante antincendio",
+                "mailbox": "casella postale",
+                "manhole": "tombino",
+                "phone_booth": "cabina telefonica",
+                "sign": {
+                    "advertisement": "pubblicità",
+                    "information": "cartello informativo",
+                    "store": "insegna"
+                },
+                "street_light": "lampione",
+                "support": {
+                    "utility_pole": "palo"
+                },
+                "traffic_cone": "cono di segnalazione",
+                "traffic_light": {
+                    "cyclists": "semaforo per ciclisti",
+                    "general_horizontal": "semaforo orizzontale",
+                    "general_single": "semaforo singolo",
+                    "general_upright": "semaforo verticale",
+                    "other": "semaforo",
+                    "pedestrians": "semaforo pedonale"
+                },
+                "trash_can": "cestino dell'immondizia"
+            }
         },
         "mapillary": {
             "title": "Mapillary",
@@ -1418,9 +1558,11 @@
                 "type": "Puoi cliccare sul tipo dell'elemento per cambiarlo in un tipo differente. Tutto ciò che esiste nel mondo reale può essere aggiunto ad OpenStreetMap, pertanto ci sono migliaia di tipologie tra le quali scegliere.",
                 "type_picker": "Il raccoglitore dei tipi mostra i tipi di elementi più comuni, come ad esempio i parchi pubblici, gli ospedali, i ristoranti, le strade e gli edifici. Cerca qualsiasi oggetto scrivendo nel riquadro di ricerca. Per conoscere i dettagli del tipo di elemento clicca l'icona {inspect} **Informazioni** a fianco.",
                 "fields_h": "Campi",
+                "fields_all_fields": "La sezione \"Campi\" contiene il dettaglio di tutti gli elementi che puoi modificare. In OpenStreetMap tutti i campi sono opzionali e è accettabile lasciare un campo in bianco se non si è sicuri.",
                 "fields_example": "Ogni elemento mostrerà campi differenti. Per esempio, per una una strada sarà possibile impostare la sua superficie e il limite di velocità, mentre per un ristorante saranno mostrati campi del cibo servito e degli orari di apertura.",
                 "fields_add_field": "Per aggiungere delle informazioni puoi cliccare \"Aggiungi campo\"",
                 "tags_h": "Etichette",
+                "tags_all_tags": "Sotto la sezione campi puoi espandere la sezione \"Tag\" per modificare qualsiasi *tag* OpenStreetMap dell'elemento selezionato. Ciascun tag consiste di una *chiave* ed un *valore* che definiscono tutti gli elementi memorizzati in OpenStreetMap.",
                 "tags_resources": "La modifica dei tag di un elemento richiede una conoscenza intermedia di OpenStreetMap. Dovresti consultare la [wiki di OpenStreetMap](https://wiki.openstreetmap.org/wiki/Main_Page) o [Taginfo](https://taginfo.openstreetmap.org/) per imparare quali usare di volta in volta."
             },
             "points": {
@@ -1481,6 +1623,8 @@
                 "title": "Relazioni",
                 "intro": "Una *relazione* è un tipo speciale di elemento di OpenStreetMap che serve a raggruppare insieme altri elementi. Gli elementi appartenenti ad una relazione sono chiamati *membri* e ogni membro può avere un *ruolo* nella relazione.",
                 "edit_relation_h": "Modificare le relazioni",
+                "edit_relation": "Alla fine dell'editor degli elementi puoi espandere a sezione \"Relazioni\" per verificare se gli elementi selezionati sono membri di qualche relazione. Puoi quindi cliccare sulla relazione per selezionarla e modificarla.",
+                "edit_relation_add": "Per aggiungere un elemento alla relazione seleziona l'elemento quindi clicca il bottone aggiungi {plus} nella sezione \"Relazioni\" dell'editor degli elementi. Puoi scegliere tra una lista di relazioni vicine oppure scegliere l'opzione \"Nuova relazione...\"",
                 "edit_relation_delete": "Puoi anche cliccare il pulsante {delete} **Cancella** per rimuovere l'elemento selezionato dalla relazione. Se rimuovi tutti i membri di una relazione, questa verrà eliminata a sua volta.",
                 "maintain_relation_h": "Manutenere le relazioni",
                 "maintain_relation": "Nella maggior parte dei casi, iD si occuperà automaticamente delle relazioni mentre fai le tue modifiche. Dovresti comunque prestare attenzione quando rimpiazzi elementi che potrebbero essere membri di una relazione. Per esempio, se elimini una parte di strada e tracci un altro pezzo al suo posto, dovresti poi aggiungere anche la nuova strada alle stesse relazioni (percorsi, divieti di svolta, etc.) dell'originale.",
@@ -1495,8 +1639,10 @@
                 "turn_restriction_editing": "Nel campo \"Obblighi di svolta\", clicca per selezionare una strada \"da\" e decidi se le svolte sono consentite oppure vietate per ogni strada \"verso\". Clicca nelle icone di svolta per alternare lo stato tra consentito e vietato. iD creerà automaticamente le relazione e imposterà i ruoli \"da\", \"via\" e \"verso\" basandosi sulle tue scelte.",
                 "route_h": "Percorsi",
                 "route": "Una relazione *percorso* consiste in un gruppo di uno o più elementi linea che formano insieme una rete di percorsi, come per esempio la linea di un autobus, quella di un treno oppure un percorso stradale.",
+                "route_add": "Per aggiungere un elemento alla relazione itinerario seleziona l'elemento e scorri fino alla sezione \"Relazioni\" nell'editor degli elementi, clicca quindi il bottone aggiungi {plus} per aggiungere questo elemento a una relazione esistente o ad una nuova relazione.",
                 "boundary_h": "Confini",
-                "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo."
+                "boundary": "Una relazione *Confine* consiste in un gruppo di uno o più elementi linea che insieme formano un confine amministrativo.",
+                "boundary_add": "Per aggiungere un elemento ad una relazione di confine seleziona l'elemento e scorri fino alla sezione \"Relazioni\" nell'editor degli elementi, clicca quindi il bottone aggiungi {plus} per aggiungere questo elemento a una relazione esistente o ad una nuova relazione. "
             },
             "notes": {
                 "title": "Note",
@@ -1540,6 +1686,7 @@
                 "title": "Controllo qualità.",
                 "intro": "Gli strumenti di controllo della qualità (Q/A in inglese) individuano etichette improprie, strade separate dalle altre e altri problemi in OpenStreetMap che gli altri mappatori possono risolvere. Per vedere i problemi esistenti, clicca sul pannello {data} **Dati della mappa** per abilitare uno specifico livello Q/A. ",
                 "tools_h": "Strumenti",
+                "tools": "I seguenti strumenti sono attualmente supportati: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) e [Osmose](https://osmose.openstreetmap.fr/).",
                 "issues_h": "Gestire i problemi",
                 "issues": "La gestione dei problemi di qualità è simile a quella delle note. Clicca su un segnaposto per vedere i dettagli del problema sulla barra laterale. Ogni strumento ha le sue proprietà a sé ma in genere è possibile commentare e/o chiudere un problema."
             },
@@ -1856,6 +2003,10 @@
                     }
                 }
             },
+            "unclosed_multipolygon_part": {
+                "message": "{feature} ha una parte non chiusa",
+                "reference": "Tutte le parti interne ed esterne di un multipoligono devono avere gli estremi connessi."
+            },
             "unsquare_way": {
                 "title": "Angoli non retti (fino a {val}°)",
                 "message": "{feature} ha angoli non retti",
@@ -1872,6 +2023,10 @@
                 "add_a_bridge": {
                     "title": "Aggiungi un ponte",
                     "annotation": "Aggiunto un ponte."
+                },
+                "add_a_tunnel": {
+                    "title": "Aggiungi una galleria",
+                    "annotation": "Galleria aggiunta."
                 },
                 "address_the_concern": {
                     "title": "Affronta il problema"
@@ -2283,7 +2438,8 @@
                     "pan": "Scorri la mappa",
                     "pan_more": "Scorri la mappa di una schermata",
                     "zoom": "Ingrandisci / Rimpicciolisci",
-                    "zoom_more": "Ingrandisci / Rimpicciolisci molto"
+                    "zoom_more": "Ingrandisci / Rimpicciolisci molto",
+                    "geolocate": "Ingrandisci sulla mia posizione"
                 },
                 "help": {
                     "title": "Aiuto",
@@ -2292,7 +2448,11 @@
                 },
                 "display_options": {
                     "title": "Mostra opzioni",
+                    "background": "Commuta pannello delle immagini",
                     "background_switch": "Ritorna all'ultimo sfondo",
+                    "map_data": "Commuta pannello dei dati",
+                    "issues": "Commuta pannello dei problemi di validazione",
+                    "preferences": "Commuta pannello delle preferenze utente",
                     "fullscreen": "Entra in modalità a tutto schermo",
                     "sidebar": "Commuta barra laterale",
                     "wireframe": "Commuta modalità \"fil di ferro\"",
@@ -2308,7 +2468,9 @@
                     "search": "Trova gli elementi che corrispondono al testo della ricerca"
                 },
                 "with_selected": {
-                    "edit_menu": "Commuta il menù edit"
+                    "title": "Con gli elementi selezionati",
+                    "edit_menu": "Commuta il menù edit",
+                    "zoom_to": "Ingrandisci agli elementi selezionati"
                 },
                 "vertex_selected": {
                     "title": "Con il nodo selezionato",
@@ -2491,6 +2653,9 @@
                         "motor_vehicle": "Veicoli a motore"
                     }
                 },
+                "access_aisle": {
+                    "label": "Tipo"
+                },
                 "access_simple": {
                     "label": "Accesso consentito",
                     "terms": "Accesso Consentito, Accesso Permesso, Accesso Pubblico"
@@ -2517,7 +2682,7 @@
                         "county": "Contea (in Italia NON usare)",
                         "county!jp": "Distretto",
                         "district": "Distretto",
-                        "district!vn": "Circoscrizione/Città/Distretto",
+                        "district!vn": "Circoscrizione/Cittadina/Distretto",
                         "floor": "Piano",
                         "hamlet": "Borgo",
                         "housename": "Numero civico",
@@ -2715,6 +2880,11 @@
                     "label": "Edificio",
                     "terms": "Edificio, Palazzo, Stabile, Costruzione"
                 },
+                "building/levels": {
+                    "label": "Piani",
+                    "placeholder": "2, 4, 6...",
+                    "terms": "piani,livelli"
+                },
                 "building/levels/underground": {
                     "label": "Piani sotterranei",
                     "placeholder": "2, 4, 6...",
@@ -2778,7 +2948,12 @@
                     "placeholder": "1 EUR, 5 USD, 10 JPY…"
                 },
                 "check_date": {
-                    "label": "Data dell'ultimo controllo"
+                    "label": "Data dell'ultimo controllo",
+                    "placeholder": "AAAA-MM-GG"
+                },
+                "circumference": {
+                    "label": "Circonferenza",
+                    "placeholder": "1 m, 20 cm, 30 in..."
                 },
                 "clothes": {
                     "label": "Abbigliamento"
@@ -3037,9 +3212,6 @@
                     },
                     "placeholder": "Linea aerea, rotaia elettrificata..."
                 },
-                "elevation": {
-                    "label": "Altitudine"
-                },
                 "email": {
                     "label": "Email",
                     "placeholder": "esempio@esempio.com"
@@ -3295,7 +3467,6 @@
                     "label": "Intermittente"
                 },
                 "internet_access": {
-                    "label": "Accesso ad Internet",
                     "options": {
                         "no": "No",
                         "terminal": "Terminale",
@@ -3303,9 +3474,6 @@
                         "wlan": "Wifi",
                         "yes": "Sì"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Accesso ad Internet a pagamento"
                 },
                 "internet_access/ssid": {
                     "label": "Nome rete Wifi"
@@ -4482,10 +4650,6 @@
                     "name": "Sciovia",
                     "terms": "sci,teleferica,skilift,lift"
                 },
-                "aerialway/gondola": {
-                    "name": "Cabinovia",
-                    "terms": "cabinovia, ovovia"
-                },
                 "aerialway/goods": {
                     "name": "Teleferica",
                     "terms": "funivia,cavo,gru,merci"
@@ -4838,6 +5002,10 @@
                     "name": "Scuola di lingue straniere",
                     "terms": "scuola,lingue,lingua,inglese,tedesco,arabo,cinese,spagnolo"
                 },
+                "amenity/lavoir": {
+                    "name": "Lavatoio",
+                    "terms": "lavatoio,lavanderia,abiti,pulizia,risciacquo"
+                },
                 "amenity/letter_box": {
                     "name": "Cassetta delle lettere"
                 },
@@ -5008,9 +5176,6 @@
                     "name": "Contenitore per il riciclaggio",
                     "terms": "cestino,contenitore,bidone,vetro,plastica,metallo,alluminio,batterie,pile,lampadine,cartone,giornali,carta,bottiglie,spazzatura,immondizia,rifiuti,riciclo,riciclaggio,differenziata"
                 },
-                "amenity/register_office": {
-                    "name": "Anagrafe"
-                },
                 "amenity/restaurant": {
                     "name": "Ristorante",
                     "terms": "bar,caffetteria,caffè,ristorante self-service,braceria,trattoria,negozio di ciambelle,bettola,griglieria,venditore di hamburger,venditore di hotdog,pizzeria"
@@ -5087,9 +5252,6 @@
                     "name": "Area scolastica",
                     "terms": "scuola,accademia,alma mater,lavagna,collegio,dipartimento,disciplina,classe,facoltà,aula,istituto,istituzione,riformatorio,scuola,edificio scolastico,seminario,università"
                 },
-                "amenity/scrapyard": {
-                    "name": "Sfasciacarrozze"
-                },
                 "amenity/shelter": {
                     "name": "Riparo",
                     "terms": "ricovero,rifugio,tettoia,pensilina,bivacco,grotta"
@@ -5154,9 +5316,6 @@
                 },
                 "amenity/studio/video": {
                     "name": "Studio di produzione video"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Piscina"
                 },
                 "amenity/taxi": {
                     "name": "Posteggio Taxi",
@@ -5247,6 +5406,10 @@
                 "amenity/vending_machine/ice_cream": {
                     "name": "Macchinetta del gelato",
                     "terms": "gelato,cioccolata,ghiaccoli,ghiacciato,vaniglia,grattachecca,gelati,panna,fragola,pistacchio"
+                },
+                "amenity/vending_machine/ice_cubes": {
+                    "name": "Macchinetta del ghiaccio",
+                    "terms": "cubetti,ghiaccio"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Distributore automatico di quotidiani",
@@ -5729,6 +5892,10 @@
                 "craft/chimney_sweeper": {
                     "name": "Spazzacamino"
                 },
+                "craft/cleaning": {
+                    "name": "Ditta di pulizie",
+                    "terms": "pulizia,disinfezione"
+                },
                 "craft/clockmaker": {
                     "name": "Costruttore di orologi",
                     "terms": "orologi"
@@ -5940,6 +6107,10 @@
                 },
                 "emergency/yes": {
                     "name": "Accesso di emergenza"
+                },
+                "entrance/emergency": {
+                    "name": "Uscita di emergenza",
+                    "terms": "porta antincendio,antincendio,incendio,fuoco"
                 },
                 "ford": {
                     "name": "Guado",
@@ -6422,10 +6593,6 @@
                     "name": "Svincolo",
                     "terms": "svincolo,uscita"
                 },
-                "landuse/allotments": {
-                    "name": "Orti in concessione",
-                    "terms": "orti,orto,pubblico,concessione,lotto,orti urbani"
-                },
                 "landuse/aquaculture": {
                     "name": "Acquacoltura",
                     "terms": "pesci,crostacei,alghe,gambero,gamberi,gamberetti,aragoste,maricoltura,algacoltura,allevamento,molluschi,cozze,ostriche,orate"
@@ -6524,17 +6691,9 @@
                     "name": "Base navale",
                     "terms": "base,navi,marina,marina militare"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Percorso ad ostacoli",
-                    "terms": "Percorso a ostacoli"
-                },
                 "landuse/military/range": {
                     "name": "Poligono di tiro militare",
                     "terms": "poligono,militare,militari,tiro,lancio,bombe,missile,missili,forze militari,forza aerea,forza,guardia,armi,fuoco,marina,fucile,cecchino,cecchini,truppe,truppa,addestramento,guerra,battaglia,battaglione"
-                },
-                "landuse/military/training_area": {
-                    "name": "Area di addestramento",
-                    "terms": "campo di addestramento,addestramento,militare"
                 },
                 "landuse/orchard": {
                     "name": "Frutteto",
@@ -6850,25 +7009,13 @@
                     "name": "Pista per ciclismo",
                     "terms": "pista bici,pista bicicletta,pista,pista ciclismo,ciclismo,bici,velodromo,circuito"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Pista ciclistica",
-                    "terms": "ciclo,cicli,bicicletta,biciclette,pista,velocipede,velocipedi,velodromo,corsa,gara"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Pista per la corsa dei cavalli",
                     "terms": "corsa equestre,pista da gara,corsa dei cavalli,scommesse,pista,cavalli"
                 },
-                "leisure/track/horse_racing_point": {
-                    "name": "Pista ippica",
-                    "terms": "equestre,equino,corsa,pista,cavalli,gara,scommesse,galoppo,ippodromo"
-                },
                 "leisure/track/running": {
                     "name": "Pista da corsa",
                     "terms": "pista di atletica,decathlon,gara podistica,distanza,maratona,sprint,camminata,camminare,pista"
-                },
-                "leisure/track/running_point": {
-                    "name": "Pista da corsa",
-                    "terms": "atletica,pista,decathlon,piede,piedi,a piedi,gara,lunga distanza,maratona,media distanza,running,percorso,camminata,cammino"
                 },
                 "leisure/water_park": {
                     "name": "Parco acquatico",
@@ -6934,10 +7081,6 @@
                 "man_made/gasometer": {
                     "name": "Gasometro",
                     "terms": "gazometro"
-                },
-                "man_made/groyne": {
-                    "name": "Pennello",
-                    "terms": "briglia,pennelli"
                 },
                 "man_made/lighthouse": {
                     "name": "Faro",
@@ -7069,9 +7212,6 @@
                 },
                 "military/bunker": {
                     "name": "Bunker militare"
-                },
-                "military/checkpoint": {
-                    "name": "Posto di blocco"
                 },
                 "military/nuclear_explosion_site": {
                     "name": "Sito esplosione nucleare"
@@ -7369,18 +7509,18 @@
                 },
                 "place/city": {
                     "name": "Città",
-                    "terms": "Città"
+                    "terms": "metropoli,cittadina,luogo"
                 },
                 "place/city_block": {
-                    "name": "Isolato",
-                    "terms": "isolato,blocco,manzana,gruppo"
+                    "name": "Isolato urbano",
+                    "terms": "blocco,caseggiato,manzana,gruppo,edifici,palazzi"
                 },
                 "place/farm": {
-                    "name": "Azienda agricola"
+                    "name": "Fattoria o cascina"
                 },
                 "place/hamlet": {
-                    "name": "Paese",
-                    "terms": "Borgo"
+                    "name": "Piccolo borgo",
+                    "terms": "paese,villaggio,frazione,luogo,località,insediamento"
                 },
                 "place/island": {
                     "name": "Isola"
@@ -7389,12 +7529,12 @@
                     "name": "Isoletta"
                 },
                 "place/isolated_dwelling": {
-                    "name": "Case Sparse",
-                    "terms": "Insediamento rurale isolato"
+                    "name": "Abitazione isolata",
+                    "terms": "borgo,frazione,luogo,località,insediamento,dimora,alloggio,isolato"
                 },
                 "place/locality": {
-                    "name": "Località",
-                    "terms": "Località (luogo con nome, non popolato)"
+                    "name": "Località non popolata",
+                    "terms": "luogo,località,zona,posto,sito,isolato"
                 },
                 "place/neighbourhood": {
                     "name": "Quartiere",
@@ -7415,12 +7555,12 @@
                     "terms": "borgo,quartiere"
                 },
                 "place/town": {
-                    "name": "Centro abitato tra 10000 e 100000 abitanti",
-                    "terms": "Paese"
+                    "name": "Cittadina",
+                    "terms": "città,paese,luogo"
                 },
                 "place/village": {
-                    "name": "Villaggio",
-                    "terms": "Paese,villaggio,frazione"
+                    "name": "Paese",
+                    "terms": "cittadina,villaggio,borgo,frazione,luogo,località"
                 },
                 "playground": {
                     "name": "Giochi"
@@ -7684,45 +7824,18 @@
                     "name": "Ferrovia in disuso",
                     "terms": "Ferrovia di disuso"
                 },
-                "railway/funicular": {
-                    "name": "Funicolare",
-                    "terms": "funicolare,treno,trenino"
-                },
                 "railway/halt": {
                     "name": "Fermata ferroviaria (facoltativa/su richiesta)"
                 },
                 "railway/level_crossing": {
                     "name": "Passaggio a livello (strada)"
                 },
-                "railway/light_rail": {
-                    "name": "Metropolitana di superficie",
-                    "terms": "tranvia,metrotranvia,metropolitana,metropolitana di superficie"
-                },
                 "railway/milestone": {
                     "name": "Pietra miliare ferroviaria",
                     "terms": "pietra,miliare,marcatore"
                 },
-                "railway/miniature": {
-                    "name": "Ferrovia in miniatura",
-                    "terms": "trenino,treno in miniatura,scartamento ridotto,scartamento minimo,ferrovia,binario"
-                },
-                "railway/monorail": {
-                    "name": "Monorotaia",
-                    "terms": "Monorotaia"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Ferrovia a scartamento ridotto",
-                    "terms": "scartamento ridotto"
-                },
                 "railway/platform": {
                     "name": "Banchina ferroviaria"
-                },
-                "railway/rail": {
-                    "name": "Ferrovia",
-                    "terms": "Ferrovia"
-                },
-                "railway/rail/highspeed": {
-                    "name": "Alta velocità"
                 },
                 "railway/signal": {
                     "name": "Segnale ferroviario",
@@ -7730,10 +7843,6 @@
                 },
                 "railway/station": {
                     "name": "Stazione ferroviaria"
-                },
-                "railway/subway": {
-                    "name": "Metropolitana",
-                    "terms": "Metropolitana"
                 },
                 "railway/subway_entrance": {
                     "name": "Entrata di metropolitana",
@@ -7746,9 +7855,6 @@
                 "railway/train_wash": {
                     "name": "Lavaggio treni",
                     "terms": "lavaggio,pulizia,treni,treno"
-                },
-                "railway/tram": {
-                    "name": "Tram"
                 },
                 "railway/tram_stop": {
                     "name": "Fermata del tram"
@@ -8004,9 +8110,6 @@
                     "name": "Negozio di pesca",
                     "terms": "pesca,pescatori,esca,esche vive,lenze,lenza,mosche,canne da pesca,canna da pesca,rocchetto,mulinello"
                 },
-                "shop/fishmonger": {
-                    "name": "Pescivendolo"
-                },
                 "shop/florist": {
                     "name": "Fioraio",
                     "terms": "Fioraio"
@@ -8015,19 +8118,12 @@
                     "name": "Negozio di cornici",
                     "terms": "Corniceria"
                 },
-                "shop/frozen_food": {
-                    "name": "Cibo surgelato",
-                    "terms": "surgelati,ghiaccio,cibo surgelato,pesce surgelato"
-                },
                 "shop/fuel": {
                     "name": "Negozio di carburanti"
                 },
                 "shop/funeral_directors": {
                     "name": "Casa funeraria",
                     "terms": "funerale,cimitero"
-                },
-                "shop/furnace": {
-                    "name": "Negozio di caldaie"
                 },
                 "shop/furniture": {
                     "name": "Negozio di mobili",
@@ -8805,6 +8901,9 @@
                 "name": "Esri World Imagery (Clarity) Beta"
             },
             "MAPNIK": {
+                "attribution": {
+                    "text": "© collaboratori OpenStreetMap, CC-BY-SA"
+                },
                 "description": "Il livello base di OpenStreetMap.",
                 "name": "OpenStreetMap (Standard)"
             },
@@ -8988,6 +9087,20 @@
                 "description": "GSI Kiban 2500 via finds.jp. Buono per la tracciatura ma un po’ vecchio.",
                 "name": "GSI KIBAN 2500 Giappone"
             },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© comune di Göteborg, CC0"
+                },
+                "description": "La mappa della città è una mappa panoramica che descrive Göteborg. Contiene informazioni generali su terreni, comunicazioni, idrografia, edifici, nomi di strada e numeri civici, divisione amministrativa e altro testo di orientamento.",
+                "name": "Mappa della città di Göteborg"
+            },
+            "gothenburg-ortho": {
+                "attribution": {
+                    "text": "© comune di Göteborg, CC0"
+                },
+                "description": "Ortofoto del comune di Göteborg",
+                "name": "Ortofoto di Göteborg"
+            },
             "gsi.go.jp_airphoto": {
                 "attribution": {
                     "text": "GSI del Giappone"
@@ -9155,6 +9268,12 @@
                 },
                 "name": "Thunderforest Landscape"
             },
+            "tf-outdoors": {
+                "attribution": {
+                    "text": "Mappe © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest Outdoors"
+            },
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
@@ -9196,6 +9315,12 @@
                 },
                 "description": "Rete stradale NVDB svedese con diverse opzioni per gli strati della mappa",
                 "name": "Opzioni della rete stradale di Trafikverket"
+            },
+            "wroclaw-orto2018": {
+                "attribution": {
+                    "text": "Comune di Breslavia"
+                },
+                "name": "Breslavia: mappe ortofoto 2018 (immagini aeree)"
             }
         },
         "community": {

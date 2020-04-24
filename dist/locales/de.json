@@ -20,6 +20,14 @@
             "favorites": "Favoriten",
             "add_feature": "Objekt hinzufügen"
         },
+        "title": {
+            "format": {
+                "context": "{base} – {context}",
+                "changes": "({changes}) {base}",
+                "changes_context": "({changes}) {base} – {context}"
+            },
+            "labeled_and_more": "{labeled} und {count} weitere"
+        },
         "modes": {
             "add_feature": {
                 "title": "Ein Objekt hinzufügen",
@@ -61,10 +69,10 @@
                 "description": "Verschiebe und zoome die Karte."
             },
             "draw_area": {
-                "tail": "Klicke, um weitere Knoten zur Fläche hinzuzufügen. Klicke auf den ersten Knoten, um die Fläche fertigzustellen."
+                "tail": "Klicke, um weitere Punkte zur Fläche hinzuzufügen. Klicke auf den ersten Punkt um die Fläche fertigzustellen."
             },
             "draw_line": {
-                "tail": "Klicke, um weitere Knoten zur Linie hinzuzufügen. Klicke auf eine andere Linie, um die Linien zu verbinden und klicke doppelt, um die Linie fertigzustellen."
+                "tail": "Klicke, um weitere Punkte zur Linie hinzuzufügen. Klicke auf eine andere Linie, um die Linien zu verbinden und klicke doppelt, um die Linie fertigzustellen."
             },
             "drag_node": {
                 "connected_to_hidden": "Dies kann nicht bearbeitet werden, weil es mit einem versteckten Objekt verbunden ist."
@@ -74,7 +82,7 @@
             "add": {
                 "annotation": {
                     "point": "Punkt hinzugefügt.",
-                    "vertex": "Einen Knoten zum Weg hinzugefügt.",
+                    "vertex": "Einen Punkt zum Weg hinzugefügt.",
                     "relation": "Relation hinzugefügt.",
                     "note": "Hinweis hinzugefügt."
                 }
@@ -214,7 +222,7 @@
                 },
                 "annotation": {
                     "point": "Punkt gelöscht.",
-                    "vertex": "Knoten aus einem Weg gelöscht.",
+                    "vertex": "Punkt aus einem Weg gelöscht.",
                     "line": "Linie gelöscht.",
                     "area": "Fläche gelöscht.",
                     "relation": "Relation gelöscht.",
@@ -338,7 +346,7 @@
                 "key": "M",
                 "annotation": {
                     "point": "Punkt verschoben.",
-                    "vertex": "Knoten eines Weges verschoben.",
+                    "vertex": "Punkt in einem Weg verschoben.",
                     "line": "Linie verschoben.",
                     "area": "Fläche verschoben.",
                     "multiple": "Mehrere Objekte verschoben."
@@ -456,9 +464,9 @@
             "split": {
                 "title": "Teilen",
                 "description": {
-                    "line": "Die Linie an diesem Knoten teilen.",
+                    "line": "Die Linie an diesem Punkt teilen.",
                     "area": "Die Grenze dieser Fläche in zwei Teile teilen.",
-                    "multiple": "Die Linie/Flächengrenze an diesem Knoten teilen."
+                    "multiple": "Die Linie/Flächengrenze an diesem Punkt teilen."
                 },
                 "key": "X",
                 "annotation": {
@@ -512,7 +520,7 @@
                 "distance": "Entfernung",
                 "distance_up_to": "bis zu {distance}",
                 "via": "Via",
-                "via_node_only": "nur ein Knoten",
+                "via_node_only": "nur ein Punkt",
                 "via_up_to_one": "nur ein Weg",
                 "via_up_to_two": "maximal zwei Wege"
             },
@@ -590,7 +598,7 @@
             "request_review": "Ich will meine Bearbeitungen von jemandem überprüfen lassen.",
             "save": "Hochladen",
             "cancel": "Abbrechen",
-            "changes": "{count} Änderungen",
+            "changes": "Änderungen ({count})",
             "download_changes": "osmChange File herunterladen",
             "errors": "Fehler",
             "warnings": "Warnungen",
@@ -662,12 +670,12 @@
                 "location": "Lage",
                 "metric": "metrische Maße",
                 "imperial": "imperiale Maße",
-                "node_count": "Anzahl der Knoten"
+                "node_count": "Anzahl der Punkte"
             }
         },
         "geometry": {
             "point": "Punkt",
-            "vertex": "Knoten",
+            "vertex": "Punkt",
             "line": "Linie",
             "area": "Fläche",
             "relation": "Relation",
@@ -678,20 +686,19 @@
             "no_results_worldwide": "Keine Ergebnisse gefunden"
         },
         "geolocate": {
+            "key": "L",
             "title": "Zeige meinen Standort",
-            "locating": "Lokalisiere, bitte warten ..."
+            "locating": "Lokalisiere, bitte warten ...",
+            "location_unavailable": "Dein Standort ist nicht verfügbar."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoome dorthin",
-                "tooltip_feature": "Zentriere die Karte und zoome zu diesem Objekt.",
-                "tooltip_note": "Zentriere die Karte und zoome zu diesem Hinweis.",
-                "tooltip_data": "Zentriere die Karte und zoome zu diesen Daten.",
-                "tooltip_issue": "Zentriere die Karte und zoome zu diesem Problem."
+                "title": "Zoome zur Auswahl"
             },
             "show_more": "Mehr zeigen",
             "view_on_osm": "Auf openstreetmap.org ansehen",
+            "view_on_osmose": "Auf osmose.openstreetmap.fr ansehen",
             "view_on_keepRight": "Auf keepright.at ansehen",
             "feature_type": "Objekttyp",
             "fields": "Felder",
@@ -739,7 +746,7 @@
             },
             "add": "Hinzufügen",
             "none": "Nichts",
-            "node": "Knoten",
+            "node": "Punkte",
             "way": "Linie",
             "relation": "Relation",
             "location": "Lage",
@@ -991,7 +998,7 @@
             "conflict": {
                 "deleted": "Dieses Objekt wurde von {user} gelöscht.",
                 "location": "Dieses Objekt wurde sowohl von Dir als auch von {user} verschoben.",
-                "nodelist": "Knoten wurden von {user} und dir geändert.",
+                "nodelist": "Punkte wurden von {user} und dir geändert.",
                 "memberlist": "Mitglieder der Relation wurden von {user} und dir geändert.",
                 "tags": "Du hast die Eigenschaft <b>{tag}</b> in „{local}“ geändert und {user} hat es in „{remote}“ geändert."
             }
@@ -1048,14 +1055,19 @@
         },
         "cannot_zoom": "Du kannst im aktuellen Modus nicht weiter herauszoomen.",
         "full_screen": "Vollbildmodus ein-/ausschalten",
+        "self_intersection": {
+            "error": {
+                "lines": "Linien dürfen sich nicht selbst kreuzen.",
+                "areas": "Flächengrenzen dürfen sich nicht selbst kreuzen."
+            }
+        },
         "QA": {
             "osmose": {
                 "title": "Osmose Problem",
                 "detail_title": "Details",
                 "elems_title": "Objekte",
                 "fix_title": "Korrekturrichtlinien",
-                "trap_title": "Häufige Fehler",
-                "translation": "Übersetzungen von Osmose"
+                "trap_title": "Häufige Fehler"
             },
             "improveOSM": {
                 "title": "ImproveOSM Meldungen",
@@ -1102,7 +1114,7 @@
                 "close_comment": "Kommentiere und Schließe",
                 "ignore_comment": "Kommentiere und Entferne",
                 "error_parts": {
-                    "this_node": "dieser Knoten",
+                    "this_node": "dieser Punkt",
                     "this_way": "dieser Weg",
                     "this_relation": "diese Relation",
                     "this_oneway": "diese Einbahn",
@@ -1150,8 +1162,8 @@
                 },
                 "errorTypes": {
                     "20": {
-                        "title": "Mehrere Knoten am selben Platz",
-                        "description": "Hier ist mehr als ein Knoten am selben Platz, Knoten-IDs: {var1}."
+                        "title": "Mehrere Punkte am selben Platz",
+                        "description": "Hier ist mehr als ein Punkt am selben Platz, Punkt-IDs: {var1}."
                     },
                     "30": {
                         "title": "Nicht geschlossene Fläche",
@@ -1159,10 +1171,10 @@
                     },
                     "40": {
                         "title": "Unmögliche Einbahn",
-                        "description": "Der erste Knoten {var1} von {var2} ist mit keinem anderen Weg verbunden."
+                        "description": "Der erste Punkt {var1} von {var2} ist mit keinem anderen Weg verbunden."
                     },
                     "41": {
-                        "description": "Der letzte Knoten {var1} von {var2} ist mit keinem anderen Weg verbunden."
+                        "description": "Der letzte Punkt {var1} von {var2} ist mit keinem anderen Weg verbunden."
                     },
                     "42": {
                         "description": "{var1} ist nicht erreichbar, weil dort nur Einbahnen beginnen."
@@ -1210,8 +1222,8 @@
                         "description": "{var1} hat die Eigenschaft \"{var2}\" und benötigt daher die Eigenschaft \"name\"."
                     },
                     "120": {
-                        "title": "Weg ohne Knoten",
-                        "description": "{var1} hat nur einen einzige Knoten."
+                        "title": "Weg ohne Punkte",
+                        "description": "{var1} hat nur einen einzigen Punkt"
                     },
                     "130": {
                         "title": "Nicht verbundener Weg",
@@ -1246,10 +1258,10 @@
                         "description": "Hier gibt es ein Problem mit sich selbst kreuzenden Wegen."
                     },
                     "211": {
-                        "description": "{var1} enthält mehr als einen Knoten ({var2}) mehrfach. Das kann ein Fehler oder auch Absicht sein."
+                        "description": "{var1} enthält mehr als einen Punkt {var2} mehrfach. Das kann ein Fehler oder auch Absicht sein."
                     },
                     "212": {
-                        "description": "{var1} hat nur zwei unterschiedliche Knoten und enthält einen davon mehrfach."
+                        "description": "{var1} hat nur zwei unterschiedliche Punkte und enthält einen davon mehrfach."
                     },
                     "220": {
                         "title": "Tippfehler bei der Eigenschaft",
@@ -1319,7 +1331,7 @@
                     },
                     "295": {
                         "title": "Das „via“ der Abbiegebeachränkung ist kein Endpunkt",
-                        "description": "{var1} hat einen \"via\" (Knoten {var2}) der nicht das erste oder letzte Mitgliedvon \"{var3}\" (Weg {var4}) ist."
+                        "description": "{var1} hat einen \"via\" (Punkt {var2}) der nicht das erste oder letzte Mitgliedvon \"{var3}\" (Weg {var4}) ist."
                     },
                     "296": {
                         "title": "Ungewöhnlicher Winkel der Abbiegebeschränkung",
@@ -1515,7 +1527,7 @@
                 "before_start": "Du solltest mit OpenStreetMap und diesem Editor vertraut sein, bevor du mit dem Bearbeiten anfängst. iD hat einen Rundgang mit dem du die Grundlagen des OpenStreetMap-Bearbeitens lernen kannst. Klicke \"Rundgang starten\" um das Lernprogramm zu starten - es dauert nur etwa 15 Minuten.",
                 "open_source_h": "Open Source",
                 "open_source": "Der iD Editor ist ein quelloffenes Gemeinschaftsprojekt und du benutzt gerade Version {version}. Der Quellcode ist [auf GitHub](https://github.com/openstreetmap/iD) verfügbar.",
-                "open_source_help": "Du kannst iD durch [Übersetzungen](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) oder [Fehlermeldungen](https://github.com/openstreetmap/iD/issues) unterstützen."
+                "open_source_help": "Du kannst iD durch [Übersetzungen] (https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) oder [Fehlermeldungen] (https://github.com/openstreetmap/iD/issues) unterstützen."
             },
             "overview": {
                 "title": "Überblick",
@@ -1578,18 +1590,18 @@
                 "intro": "*Linien* werden benutzt um Objekte wie Straßen, Eisenbahnschienen oder Flüsse darzustellen. Linien sollen in der Mitte des dargestellten Objekts gezeichnet werden.",
                 "add_line_h": "Linien hinzufügen",
                 "add_line": "Um eine Linie hinzuzufügen, klicke den {line} **Linie** Knopf auf der Werkzeugleiste über der Karte oder drücke die Taste `2`. Dadurch wird der Mauszeiger zu einem Kreuz.",
-                "add_line_draw": "Dann bewege den Mauszeiger dorthin, wo die Linie beginnen soll und {leftclick} klicke oder drücke die `Leertaste` um den ersten Knoten der Linie zu platzieren. Zeichne weitere Knoten durch Klicken oder Drücken der `Leertaste`. Während des Zeichnens kannst du die Karte zoomen oder ziehen, um mehr Details hinzuzufügen.",
-                "add_line_finish": "Um eine Linie zu beenden, drücke `{return}` oder klicke nochmals auf den letzten Knoten.",
+                "add_line_draw": "Dann bewege den Mauszeiger dorthin, wo die Linie beginnen soll und {leftclick} klicke oder drücke die `Leertaste` um den ersten Punkt der Linie zu platzieren. Zeichne weitere Punkte durch Klicken oder Drücken der `Leertaste`. Während des Zeichnens kannst du die Karte zoomen oder ziehen, um mehr Details hinzuzufügen.",
+                "add_line_finish": "Um eine Linie zu beenden, drücke `{return}` oder klicke nochmals auf den letzten Punkt.",
                 "modify_line_h": "Linien verändern",
-                "modify_line_dragnode": "Häufig siehst du Linien die nicht genau geformt sind, beispielweise eine Straße, die nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Linie anzupassen, wähle sie durch {leftclick} klicken aus. Alle Knoten der Linie werden als kleine Kreise angezeigt. Du kannst die Knoten an bessere Stellen ziehen.",
-                "modify_line_addnode": "Du kannst neue Knoten in einer Linie auch durch {leftclick}**x2** Doppelklicken auf die Linie oder durch Ziehen der kleinen Dreiecke in der Mitte zwischen zwei Knoten erzeugen.",
+                "modify_line_dragnode": "Häufig siehst du Linien die nicht genau geformt sind, beispielweise eine Straße, die nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Linie anzupassen, wähle sie durch {leftclick} klicken aus. Alle Punkte der Linie werden als kleine Kreise angezeigt. Du kannst die Punkte an bessere Stellen ziehen.",
+                "modify_line_addnode": "Du kannst neue Punkte in einer Linie auch durch {leftclick}**x2** Doppelklicken auf die Linie oder durch Ziehen der kleinen Dreiecke in der Mitte zwischen zwei Punkten erzeugen.",
                 "connect_line_h": "Linien verbinden",
                 "connect_line": "Die richtige Verbindung von Straßen ist wichtig für die Karte und notwendig für die Bereitstellung von Wegbeschreibungen.",
                 "connect_line_display": "Die Verbindungen von Straßen werden mit kleinen grauen Kreisen angezeigt. Die Endpunkte von Linien werden mit größeren weißen Kreise angezeigt, wenn sie nicht mit anderen Objekten verbunden sind.",
-                "connect_line_drag": "Um eine Linie mit einem anderen Objekt zu verbinden, ziehe einen Knoten der Linie auf das andere Objekt bis beide Objekte verbunden sind. Tipp: Du kannst verhindern, dass Knoten mit anderen Objekten verbunden werden, indem du die `{alt}` Taste beim Ziehen gedrückt hältst.",
-                "connect_line_tag": "Wenn du weißt, dass die Kreuzung eine Ampel oder einen Zebrastreifen hat, kannst du diese zeichnen, indem du den Knoten an der Kreuzung auswählst und dann im Objekteditor den richtigen Objekttyp auswählst.",
+                "connect_line_drag": "Um eine Linie mit einem anderen Objekt zu verbinden, ziehe einen Punkt der Linie auf das andere Objekt bis beide Objekte verbunden sind. Tipp: Du kannst verhindern, dass Punkte mit anderen Objekten verbunden werden, indem du die `{alt}` Taste beim Ziehen gedrückt hältst.",
+                "connect_line_tag": "Wenn du weißt, dass die Kreuzung eine Ampel oder einen Zebrastreifen hat, kannst du diese zeichnen, indem du den Punkt an der Kreuzung auswählst und dann im Objekteditor den richtigen Objekttyp auswählst.",
                 "disconnect_line_h": "Linien trennen",
-                "disconnect_line_command": "Um eine Straße von einem anderen Objekt zu trennen {rightclick} rechtsklicke auf den Verbindungsknoten und benutze den {disconnect} **Trennen** Befehl aus dem Bearbeitungsmenü.",
+                "disconnect_line_command": "Um eine Straße von einem anderen Objekt zu trennen {rightclick} rechtsklicke auf den Verbindungspunkt und benutze den {disconnect} **Trennen** Befehl aus dem Bearbeitungsmenü.",
                 "move_line_h": "Linien verschieben",
                 "move_line_command": "Um eine ganze Linie zu verschieben {rightclick} rechtsklicke auf die Linie und benutze den {move} **Verschieben** Befehl aus dem Bearbeitungsmenü. Dann bewege die Maus und {leftclick} klicke um die Linie an der neuen Stelle zu platzieren.",
                 "move_line_connected": "Linien die mit anderen Objekten verbunden sind bleiben verbunden während du die Linie an eine andere Stelle verschiebst. iD kann verhindern, dass du eine Linie über eine verbundene Linie hinweg schiebst.",
@@ -1604,13 +1616,13 @@
                 "point_or_area": "Viele Objekte können als Punkte oder Flächen gezeichnet werden. Du solltest Gebäude und Wohngebiete wenn möglich als Flächen zeichnen. Platziere Punkte innerhalb eines Gebäudes um Geschäfte, Einrichtungen und andere Objekte im Gebäude darzustellen.",
                 "add_area_h": "Flächen hinzufügen",
                 "add_area_command": "Um eine Fläche hinzuzufügen klicke den {area} **Fläche** Knopf auf der Werkzeugleiste über der Karte oder drücke die Taste `3`. Dadurch wird der Mauszeiger zu einem Kreuz.",
-                "add_area_draw": "Dann positioniere den Mauszeiger auf eine Ecke des Objekts und {leftclick} klicke oder drücke die `Leertaste` um den ersten Knoten am äußeren Rand der Fläche zu platzieren. Platziere weitere Knoten durch Klicken oder Drücken der `Leertaste`. Während des Zeichens kannst du die Karte zoomen oder ziehen um mehr Details zu zeichnen.",
-                "add_area_finish": "Um eine Fläche zu beenden drücke `{return}` oder klicke nochmals auf den ersten oder letzten Knoten.",
+                "add_area_draw": "Dann positioniere den Mauszeiger auf eine Ecke des Objekts und {leftclick} klicke oder drücke die `Leertaste` um den ersten Punkt am äußeren Rand der Fläche zu platzieren. Platziere weitere Punkte durch Klicken oder Drücken der `Leertaste`. Während des Zeichens kannst du die Karte zoomen oder ziehen um mehr Details zu zeichnen.",
+                "add_area_finish": "Um eine Fläche zu beenden drücke `{return}` oder klicke nochmals auf den ersten oder letzten Punkt.",
                 "square_area_h": "Ecken rechtwinklig machen",
                 "square_area_command": "Viele Gebäude und andere Flächen haben rechtwinklige Ecken. Um die Ecken rechtwinklig zu machen, {rightclick} rechtsklicke auf den Rand der Fläche um sie auszuwählen und das Bearbeitungsmenü anzuzeigen, dann benutze den {orthogonalize} **Rechtwinklig machen** Befehl.",
                 "modify_area_h": "Flächen verändern",
-                "modify_area_dragnode": "Häufig siehst du Flächen die nicht genau geformt sind, beispielweise ein Gebäude, das nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Fläche anzupassen, wähle sie mit {leftclick} Klicken aus. Alle Knoten der Fläche werden als kleine Kreise angezeigt. Du kannst die Knoten an bessere Stellen ziehen.",
-                "modify_area_addnode": "Du kannst neue Knoten in einer Fläche auch durch {leftclick}**x2** Doppelklicken am Rand der Fläche oder durch Ziehen der kleinen Dreiecke in der Mitte zwischen zwei Knoten erzeugen.",
+                "modify_area_dragnode": "Häufig siehst du Flächen die nicht genau geformt sind, beispielweise ein Gebäude, das nicht mit dem Hintergrund-Bildmaterial zusammenpasst. Um die Form der Fläche anzupassen, wähle sie mit {leftclick} Klicken aus. Alle Punkte der Fläche werden als kleine Kreise angezeigt. Du kannst die Punkte an bessere Stellen ziehen.",
+                "modify_area_addnode": "Du kannst neue Punkte in einer Fläche auch durch {leftclick}**x2** Doppelklicken am Rand der Fläche oder durch Ziehen der kleinen Dreiecke in der Mitte zwischen zwei Punkte erzeugen.",
                 "delete_area_h": "Flächen löschen",
                 "delete_area": "Wenn eine Fläche als Ganzes falsch ist, beispielsweise ein Gebäude in der echten Welt nicht existiert, kannst du sie löschen. Sei beim Löschen von Objekten vorsichtig: Das von dir benutzte Hintergrund-Bildmaterial kann veraltet sein und das Gebäude, welches falsch aussieht, könnte einfach neu gebaut sein.",
                 "delete_area_command": "Um eine Fläche zu löschen, {rightclick} rechtsklicke am Rand der Fläche um sie auszuwählen und das Bearbeitungsmenü anzuzeigen, dann benutze den {delete} **Löschen** Befehl."
@@ -1630,8 +1642,8 @@
                 "multipolygon_create": "Um ein Multipolygon zu erzeugen, beispielsweise ein Gebäude mit einem Innenhof, zeichne sowohl das äußere als auch das innere Objekt entlang dem Rand als Fläche. Dann wähle mit `{shift}`+{leftclick} Klick beide Objekte aus und {rightclick} rechtsklicke und benutze den {merge} **Vereinigen** Befehl aus dem Bearbeitungsmenü.",
                 "multipolygon_merge": "Verbinden von mehreren Linien oder Flächen erzeugt ein neues Multipolygon mit allen ausgewählten Objekten als Mitglieder. iD erkennt, welche Objekte in anderen enthalten sind und weist die Rollen innen und außen automatisch zu.",
                 "turn_restriction_h": "Abbiegebeschränkungen",
-                "turn_restriction": "Eine Relation vom Typ *Abbiegebeschränkung* ist eine Gruppe von Straßenabschnitten an einer Kreuzung. Abbiegebeschränkungen bestehen aus einer *von* Straße, einem *via* Knoten oder einer „via“ Straße und einer *nach* Straße.",
-                "turn_restriction_field": "Um Abbiegebeschränkungen zu bearbeiten, wähle einen Kreuzungsknoten aus wo sich zwei oder mehr Straßen treffen. Der Objekteditor zeigt das spezielle Feld \"Abbiegebeschränkung\" mit einem Modell der Kreuzung.",
+                "turn_restriction": "Eine Relation vom Typ *Abbiegebeschränkung* ist eine Gruppe von Straßenabschnitten an einer Kreuzung. Abbiegebeschränkungen bestehen aus einer *von* Straße, einem *via* Punkt oder einer „via“ Straße und einer *nach* Straße.",
+                "turn_restriction_field": "Um Abbiegebeschränkungen zu bearbeiten, wähle einen gemeinsamen Punkt  von zwei oder mehr Straßen aus. Der Objekteditor zeigt das spezielle Feld \"Abbiegebeschränkung\" mit einem Modell der Kreuzung.",
                 "turn_restriction_editing": "Im Feld \"Abbiegebeschränkungen\" wähle eine \"von\" Straße durch Klicken aus, dann siehst du ob Abbiegen zu allen \"nach\" Straßen erlaubt oder verboten ist. Du kannst das Abbiege-Symbol anklicken um zwischen erlaubt und verboten umzuschalten. iD wird die Relationen automatisch erzeugen und die Rollen \"von\", \"via\" und \"nach\" entsprechend deiner Auswahl vergeben.",
                 "route_h": "Routen",
                 "route": "Eine Relation des Typ *Route* fasst eine oder mehrere Linien zusammen, die gemeinsam ein Streckennetz wie eine Busstrecke, eine Zugstrecke oder eine Autobahnstrecke bilden.",
@@ -1692,7 +1704,7 @@
                     "about": {
                         "title": "Informationen",
                         "about": "Dieses Feld erlaubt es Abbiegebeschränkungen zu prüfen und zu ändern. Es zeigt ein Modell der ausgewählten Kreuzung mit den angrenzenden Straßen.",
-                        "from_via_to": "Eine Abbiegebeschränkung beinhaltet immer: einen  **VON Weg**, einen **Nach Weg** und entweder einen **VIA Knoten** oder einen oder mehrere **VIA Wege**.",
+                        "from_via_to": "Eine Abbiegebeschränkung beinhaltet immer: einen  **VON Weg**, einen **Nach Weg** und entweder einen **VIA Punkt** oder einen oder mehrere **VIA Wege**.",
                         "maxdist": "Die \"{distField}\" Schieberegler bestimmen, wie weit nach verbundenen Straßen gesucht wird.",
                         "maxvia": "Die \"{viaField}\" Schieberegler bestimmen, wie viele Zwischenwege in die Suche einbezogen werden. (Tipp: Einfacher ist besser)"
                     },
@@ -1717,7 +1729,7 @@
                     "tips": {
                         "title": "Tipps",
                         "simple": "**Bevorzuge einfache anstatt komplexe Beschränkungen.**",
-                        "simple_example": "Vermeide beispielsweise Abbiegebeschränkungen mit einem \"via-Weg\", wenn die Modellierung auch mit einem \"via-Knoten\" möglich ist.",
+                        "simple_example": "Vermeide beispielsweise Abbiegebeschränkungen mit einem \"VIA-Weg\", wenn die Modellierung auch mit einem \"VIA-Punkt\" möglich ist.",
                         "indirect": "**Einige Beschränkungen zeigen den Text \"(indirekt)\" an und werden heller angezeigt.**",
                         "indirect_example": "Diese Beschränkungen existieren wegen einer anderen Beschränkung in der Nähe. Zum Beispiel werden durch eine \"Nur Geradeaus\" Beschränkung indirekt ür alle anderen Wege über die Kreuzung \"Keine Kehrtwende\" Beschränkungen erstellt.",
                         "indirect_noedit": "Indirekte Beschränkungen sollte man nicht bearbeiten. Stattdessen sollte man die angrenzende, direkte Beschränkung bearbeiten."
@@ -1790,7 +1802,7 @@
                     "message": "{feature} endet sehr nahe zu sich selbst aber ist nicht verbunden"
                 },
                 "highway-highway": {
-                    "reference": "Kreuzende Straßen sollten sich einen Verbindungsknoten teilen."
+                    "reference": "Kreuzende Straßen sollten sich einen Verbindungspunkt teilen."
                 }
             },
             "close_nodes": {
@@ -2326,9 +2338,9 @@
             "areas": {
                 "title": "Flächen",
                 "add_playground": "*Flächen* werden benutzt um die Grenzen von Objekten wie Seen, Gebäuden oder Wohngebieten darzustellen.{br}Sie können auch benutzt werden um Objekte, die normalerweise als Punkte gezeichnet werden, genauer zu zeichnen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
-                "start_playground": "Zeichne diesen Spielplatz als Fläche auf der Karte. Flächen werden gezeichnet, indem *Knoten* entlang des äußeren Randes des Objekte gezeichnet werden. **Klicke oder drücke die Leertaste um den ersten Knoten an einer Ecke des Spielplatzes zu zeichnen.**",
-                "continue_playground": "Setze das Zeichnen der Fläche fort, indem du Knoten entlang des Randes des Spielplatzes setzt. Es ist okay, wenn du die Fläche mit bestehenden Fußwegen verbindest.{br}Tipp: Wenn du die '{alt}' Taste gedrückt hältst, kannst du verhindern, dass die Knoten sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
-                "finish_playground": "Beende die Fläche durch Drücken von Enter oder erneutes Klicken auf den ersten oder letzten Knoten. **Beende das Zeichnen der Fläche für den Spielplatz.**",
+                "start_playground": "Zeichne diesen Spielplatz als Fläche auf der Karte. Flächen werden gezeichnet, indem *Punkte* entlang des äußeren Randes des Objekte gezeichnet werden. **Klicke oder drücke die Leertaste um den ersten Punkt an einer Ecke des Spielplatzes zu zeichnen.**",
+                "continue_playground": "Setze das Zeichnen der Fläche fort, indem du Punkte entlang des Randes des Spielplatzes setzt. Es ist okay, wenn du die Fläche mit bestehenden Fußwegen verbindest.{br}Tipp: Wenn du die '{alt}' Taste gedrückt hältst, kannst du verhindern, dass die Punkte sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
+                "finish_playground": "Beende die Fläche durch Drücken von Enter oder erneutes Klicken auf den ersten oder letzten Punkt. **Beende das Zeichnen der Fläche für den Spielplatz.**",
                 "search_playground": "**Suche nach '{preset}'.**",
                 "choose_playground": "**Wähle {preset} aus der Liste.**",
                 "add_field": "Dieser Spielplatz hat keinen offiziellen Namen, daher lassen wir das Namensfeld frei.{br}Schreibe stattdessen einige zusätzliche Details über den Spielplatz in das Beschreibungs-Feld. **Öffne die Liste Feld hinzufügen.**",
@@ -2341,22 +2353,22 @@
                 "title": "Linien",
                 "add_line": "*Linien* werden benutzt um Objekt wie Straßen, Eisenbahnschienen oder Flüsse darzustellen. **Klicke auf {button} Linie um eine neue Linie zu zeichnen.**",
                 "start_line": "Hier fehlt eine Straße in OpenStreetMap. Lass sie uns zeichnen!{br}In OpenStreetMap soll die Linie in der Mitte der Straße gezeichnet werden. Du kannst die Karte während des Zeichnens zoomen und ziehen, wenn das notwendig ist. **Beginne die neue Linie durch Klicken auf das obere Ende der fehlenden Straße.**",
-                "intersect": "Klicke oder drücke die Leertaste um neue Knoten zur Linien hinzuzufügen.{br} Straßen und viele andere Typen von Linien sind Teil eines größeren Netzwerks. Es ist wichtig dass diese Linien verbunden sind, damit Routing-Anwendungen richtig funktionieren. **Klicke auf die {name} um eine Kreuzung zu erzeugen, die beide Linien verbindet.**",
+                "intersect": "Klicke oder drücke die Leertaste um neue Punkte zur Linien hinzuzufügen.{br} Straßen und viele andere Typen von Linien sind Teil eines größeren Netzwerks. Es ist wichtig dass diese Linien verbunden sind, damit Routing-Anwendungen richtig funktionieren. **Klicke auf die {name} um eine Kreuzung zu erzeugen, die beide Linien verbindet.**",
                 "retry_intersect": "Diese Straße soll {name} kreuzen. Versuch es nochmals!",
-                "continue_line": "Setze das Zeichnen der Linie für die neue Straße fort. Du kannst die Karte zoomen und ziehen, wenn das notwendig ist.{br}Wenn du fertig bist, klicke nochmals auf den letzten Knoten. **Beende das Zeichnen der Straße.**",
+                "continue_line": "Setze das Zeichnen der Linie für die neue Straße fort. Du kannst die Karte zoomen und ziehen, wenn das notwendig ist.{br}Wenn du fertig bist, klicke nochmals auf den letzten Punkt. **Beende das Zeichnen der Straße.**",
                 "choose_category_road": "**Wähle {category} aus der Liste.**",
                 "choose_preset_residential": "Es gibt viele verschiedene Typen von Straßen, diese ist eine Ortsstraße. **Wähle {preset}.**",
                 "retry_preset_residential": "Du hast nicht {preset} gewählt. **Klicke hier um erneut zu wählen.**",
                 "name_road": "**Gib dieser Straße einen Namen, dann drücke Escape oder Enter oder klicke auf den {button} Knopf um den Objekteditor zu schließen.**",
                 "did_name_road": "Sieht gut aus! Jetzt wirst du lernen, wie du die Form einer Linie verbessern kannst.",
                 "update_line": "Manchmal musst du die Form einer bestehenden Linie ändern. Hier ist eine Straße, die nicht ganz richtig aussieht.",
-                "add_node": "Du kannst einige weitere Knoten zu einer Linie hinzufügen, um die Form einer Linie zu verbessern. Eine Möglichkeit um neue Knoten zu zeichnen ist ein Doppelklick auf die Stelle der Linie, wo der neue Knoten entstehen soll. **Doppelklicke auf die Linie um einen neuen Knoten zu erzeugen.**",
-                "start_drag_endpoint": "Wenn eine Linie ausgewählt ist, kannst du jeden Knoten dieser Linie durch Klicken und Festhalten der linken Maustaste verschieben. **Schiebe den Endpunkt dorthin, wo sich diese Straßen kreuzen sollen.**",
+                "add_node": "Du kannst einige weitere Punkte zu einer Linie hinzufügen, um die Form einer Linie zu verbessern. Eine Möglichkeit um neue Punkte zu zeichnen ist ein Doppelklick auf die Stelle der Linie, wo der neue Punkt entstehen soll. **Doppelklicke auf die Linie um einen neuen Punkt zu erzeugen.**",
+                "start_drag_endpoint": "Wenn eine Linie ausgewählt ist, kannst du jeden Punkt dieser Linie durch Klicken und Festhalten der linken Maustaste verschieben. **Schiebe den Endpunkt dorthin, wo sich diese Straßen kreuzen sollen.**",
                 "finish_drag_endpoint": "Hier sieht es gut aus. **Lass die Maustaste aus, um das Verschieben zu beenden.**",
-                "start_drag_midpoint": "Kleine Dreiecke werden am *Mittelpunkt* zwischen zwei Knoten angezeigt. Eine weitere Möglichkeit um einen neuen Knoten zu erzeugen ist das Verschieben dieses Mittelpunkts zu einer neuen Stelle. **Schiebe den Mittelpunkt und erzeuge damit einen neuen Knoten in der Straßenkurve.**",
+                "start_drag_midpoint": "Kleine Dreiecke werden am *Mittelpunkt* zwischen zwei Punkte angezeigt. Eine weitere Möglichkeit um einen neuen Punkt zu erzeugen ist das Verschieben dieses Mittelpunkts zu einer neuen Stelle. **Schiebe den Mittelpunkt und erzeuge damit einen neuen Punkt in der Straßenkurve.**",
                 "continue_drag_midpoint": "Diese Linie sieht viel besser aus! Setze das Anpassen der Linie durch Doppelklicken oder Verschieben von Mittelpunkten fort, bis die Kurve dem Straßenverlauf folgt. **Wenn Dir die Linie gefällt, klicke OK.**",
                 "delete_lines": "Wenn es Straßen in der echten Welt nicht gibt, kannst du die zugehörigen Linien löschen.{br}Hier hat die Stadt eine {street} geplant, aber nie gebaut. Du kannst diesen Teil der Karte verbessern, wenn du die fehlerhaften Linien löschst.",
-                "rightclick_intersection": "Die letzte bestehende Straße ist die {street1}, daher wirst du die {street2} an dieser Kreuzung *teilen* und alles darüber löschen. **Rechtsklicke auf den Kreuzungs-Knoten.**",
+                "rightclick_intersection": "Die letzte bestehende Straße ist die {street1}, daher wirst du die {street2} an dieser Kreuzung *teilen* und alles darüber löschen. **Rechtsklicke auf den Kreuzungspunkt.**",
                 "split_intersection": "**Klicke auf den {button} Knopf um die {street} zu teilen.**",
                 "retry_split": "Du hast den Teilen-Knopf nicht gedrückt. Versuch es nochmals.",
                 "did_split_multi": "Gut gemacht! Die {street1} ist jetzt in zwei Teile geteilt, der obere Teil kann gelöscht werden. **Klicke den oberen Teil der {street2} zum Auswählen an.**",
@@ -2370,9 +2382,9 @@
             "buildings": {
                 "title": "Gebäude",
                 "add_building": "OpenStreetMap ist die größte Gebäude-Datenbank der Welt.{br}Du kannst helfen diese Datenbank zu verbessern, indem du Gebäude einzeichnest, die in der Karte noch fehlen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
-                "start_building": "Zeichne dieses Gebäude, indem du seinen Umriss nachzeichnest.{br}Gebäude sollten entlang ihrer Grundfläche so genau wie möglich gezeichnet werden. **Klicke oder drücke die Leertaste um den Startknoten auf einer Ecke des Gebäudes zu zeichnen.**",
-                "continue_building": "Erstelle weitere Knoten um den Umriss des Gebäudes nachzuzeichnen. Du kannst hinein zoomen, wenn du mehr Details zeichnen willst.{br}Beende das Gebäude durch Drücken von Enter oder nochmal Klicken auf den ersten oder letzten Knoten.**Beende den Umriss des Gebäudes.**",
-                "retry_building": "Es sieht so aus, als hättest du die Knoten nicht auf die Ecken des Gebäudes gesetzt. Versuche es noch einmal!",
+                "start_building": "Zeichne dieses Gebäude, indem du seinen Umriss nachzeichnest.{br}Gebäude sollten entlang ihrer Grundfläche so genau wie möglich gezeichnet werden. **Klicke oder drücke die Leertaste um den Startpunkt auf einer Ecke des Gebäudes zu zeichnen.**",
+                "continue_building": "Erstelle weitere Punkte um den Umriss des Gebäudes nachzuzeichnen. Du kannst hinein zoomen, wenn du mehr Details zeichnen willst.{br}Beende das Gebäude durch Drücken von Enter oder nochmal Klicken auf den ersten oder letzten Punkt.**Beende den Umriss des Gebäudes.**",
+                "retry_building": "Es sieht so aus, als hättest du die Punkte nicht auf die Ecken des Gebäudes gesetzt. Versuche es noch einmal!",
                 "choose_category_building": "**Wähle {category} aus der Liste.**",
                 "choose_preset_house": "Es gibt viele verschiedene Typen von Gebäuden, dieses ist eindeutig ein Einfamilienhaus.{br}Wenn du beim Gebäudetyp unsicher bist, wähle einfach Gebäude. **Wähle {preset}.**",
                 "close": "**Drücke Escape oder klicke auf den {button} Knopf um den Objekteditor zu schließen.**",
@@ -2381,8 +2393,8 @@
                 "retry_square": "Du hast nicht den Rechtwinklig-Machen-Knopf geklickt. Versuch es noch einmal.",
                 "done_square": "Siehst du, wie die Ecken des Gebäudes auf die richtige Stelle verschoben wurden? Lass uns einen weiteren nützlichen Trick lernen.",
                 "add_tank": "Als Nächstes wirst du einen kreisrunden Tank zeichnen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
-                "start_tank": "Keine Sorge, du musst keinen perfekten Kreis zeichnen. Zeichne einfach eine Fläche innerhalb des Tanks, die seinen Rand berührt. **Klicke oder drücke die Leertaste um den ersten Knoten an Rand des Tanks zu zeichnen.**",
-                "continue_tank": "Zeichne noch zwei weitere Knoten am Rand. Der Kreis wird außerhalb der gezeichneten Knoten erzeugt.{br}Beende die Fläche durch Drücken von Enter oder nochmal Klicken auf den ersten oder letzten Knoten.**Zeichne den Tank fertig.**",
+                "start_tank": "Keine Sorge, du musst keinen perfekten Kreis zeichnen. Zeichne einfach eine Fläche innerhalb des Tanks, die seinen Rand berührt. **Klicke oder drücke die Leertaste um den ersten Punkt am Rand des Tanks zu zeichnen.**",
+                "continue_tank": "Zeichne noch zwei weitere Punkte am Rand. Der Kreis wird außerhalb der gezeichneten Punkte erzeugt.{br}Beende die Fläche durch Drücken von Enter oder nochmal Klicken auf den ersten oder letzten Punkt.**Zeichne den Tank fertig.**",
                 "search_tank": "**Suche nach '{preset}'.**",
                 "choose_tank": "**Wähle {preset} von der Liste.**",
                 "rightclick_tank": "**Wähle den gezeichneten Tank durch Rechtsklicken aus und zeige das Bearbeitungs-Menü.**",
@@ -2434,7 +2446,8 @@
                     "pan": "Karte verschieben",
                     "pan_more": "Karte um einen Bildschirminhalt verschieben",
                     "zoom": "Hinein- / Herauszoomen",
-                    "zoom_more": "Weit hinein / Weit heraus zoomen"
+                    "zoom_more": "Weit hinein / Weit heraus zoomen",
+                    "geolocate": "Zoome zu meiner Lage"
                 },
                 "help": {
                     "title": "Hilfe",
@@ -2468,11 +2481,11 @@
                     "zoom_to": "Zoome zu ausgewählten Objekten"
                 },
                 "vertex_selected": {
-                    "title": "Mit ausgewähltem Knoten",
-                    "previous": "Vorheriger Knoten ",
-                    "next": "Nächster Knoten",
-                    "first": "Erster Knoten",
-                    "last": "Letzter Knoten",
+                    "title": "Mit ausgewähltem Punkt",
+                    "previous": "Vorheriger Punkt",
+                    "next": "Nächster Punkt",
+                    "first": "Erster Punkt",
+                    "last": "Letzter Punkt",
                     "change_parent": "Linie/Fläche wechseln"
                 }
             },
@@ -2490,11 +2503,11 @@
                 },
                 "operations": {
                     "title": "Tätigkeiten",
-                    "continue_line": "Linie am ausgewählten Knoten fortsetzen",
+                    "continue_line": "Linie am ausgewählten Punkt fortsetzen",
                     "merge": "Vereinige die ausgewählten Objekte",
-                    "disconnect": "Objekte am ausgewählten Knoten trennen",
+                    "disconnect": "Objekte am ausgewählten Punkt trennen",
                     "extract": "Entnimm einen Punkt von einem Objekt",
-                    "split": "Linie am ausgewählten Knoten in zwei Linien teilen",
+                    "split": "Linie am ausgewählten Punkt in zwei Linien teilen",
                     "reverse": "Drehe die ausgewählten Objekte um.",
                     "move": "Ausgewählte Objekte verschieben",
                     "rotate": "Ausgewählte Objekte drehen",
@@ -2893,6 +2906,9 @@
                 "bridge/support": {
                     "label": "Typ"
                 },
+                "bridge_combo": {
+                    "label": "Typ"
+                },
                 "building": {
                     "label": "Gebäude",
                     "terms": "Gebäude, Haus, Bauwerk"
@@ -2947,6 +2963,14 @@
                     "placeholder": "50, 100, 200...",
                     "terms": "Kapazität, Fassungsvermögen"
                 },
+                "capacity/disabled_parking": {
+                    "label": "Behindertenparkplätze",
+                    "placeholder": "1, 2, 3..."
+                },
+                "capacity_parking": {
+                    "label": "Plätze",
+                    "placeholder": "10, 20, 30..."
+                },
                 "cash_in": {
                     "label": "Bargeldannahme"
                 },
@@ -2967,7 +2991,13 @@
                     "terms": "Gebühr, Preis, Kosten"
                 },
                 "check_date": {
-                    "label": "Datum der letzten Überprüfung"
+                    "label": "Datum der letzten Überprüfung",
+                    "placeholder": "JJJJ-MM-TT"
+                },
+                "circumference": {
+                    "label": "Umfang",
+                    "placeholder": "1 m, 20 cm, 30 in…",
+                    "terms": "Umfang, Stammumfang"
                 },
                 "clothes": {
                     "label": "Kleidung"
@@ -3134,6 +3164,9 @@
                         "yes": "Ja"
                     }
                 },
+                "depth": {
+                    "label": "Tiefe (Meter)"
+                },
                 "description": {
                     "label": "Beschreibung",
                     "terms": "Beschreibung"
@@ -3217,10 +3250,14 @@
                     "label": "Anzeige"
                 },
                 "distance": {
-                    "label": "Distanz"
+                    "label": "Distanz",
+                    "terms": "Distanz, Entfernung, Abstand"
                 },
                 "disused/railway": {
                     "label": "Typ"
+                },
+                "disused/shop": {
+                    "label": "Typk"
                 },
                 "dock": {
                     "label": "Typ"
@@ -3256,6 +3293,14 @@
                     "placeholder": "00:00",
                     "terms": "Dauer, Zeitraum"
                 },
+                "ele": {
+                    "label": "Meter über Meereshöhe",
+                    "terms": "Höhe"
+                },
+                "ele_node": {
+                    "label": "Meter über Meereshöhe",
+                    "terms": "Höhe"
+                },
                 "electrified": {
                     "label": "Elektrifizierungsart",
                     "options": {
@@ -3266,10 +3311,6 @@
                     },
                     "placeholder": "Oberleitung, Stromschiene …",
                     "terms": "Elektrifzierung"
-                },
-                "elevation": {
-                    "label": "Höhe in m über dem Meeresspiegel",
-                    "terms": "Höhenangabe"
                 },
                 "email": {
                     "label": "E-Mail",
@@ -3299,10 +3340,10 @@
                     "label": "Ausnahmen"
                 },
                 "expected_rcn_route_relations": {
-                    "label": "Benachbarte Radnetzwerk-Knoten"
+                    "label": "Benachbarte Radnetzwerkpunkte"
                 },
                 "expected_rwn_route_relations": {
-                    "label": "Benachbarte Wandernetzwerk-Knoten"
+                    "label": "Benachbarte Wandernetzwerkpunkte"
                 },
                 "faces": {
                     "label": "Zifferblätter"
@@ -3386,6 +3427,9 @@
                 },
                 "gambling": {
                     "label": "Spiele"
+                },
+                "garden/type": {
+                    "label": "Garten Typ"
                 },
                 "gauge": {
                     "label": "Spurweite"
@@ -3576,11 +3620,16 @@
                         "wlan": "Wi-Fi",
                         "yes": "Ja"
                     },
-                    "terms": "Internetzugang, WLAN, WIFI"
+                    "terms": "Internetzugang, WIFI, WLAN, WiFi, Internet"
                 },
                 "internet_access/fee": {
-                    "label": "Internetzugangsgebühr",
-                    "terms": "Internetzugangskosten"
+                    "label": "Internetzugangskosten",
+                    "options": {
+                        "customers": "Nur für Kunden",
+                        "no": "Gratis",
+                        "yes": "Gebühr"
+                    },
+                    "terms": "Internetkosten, Zugangskosten, Internetgebühr, Internetpreis"
                 },
                 "internet_access/ssid": {
                     "label": "Wifi Netzwerkname",
@@ -3622,9 +3671,9 @@
                     "label": "Typ"
                 },
                 "lanes": {
-                    "label": "Fahrspuren",
+                    "label": "Fahrstreifen",
                     "placeholder": "1, 2, 3 …",
-                    "terms": "Spuren, Fahrspuren"
+                    "terms": "Streifen, Fahrstreifen"
                 },
                 "language_multi": {
                     "label": "Sprachen"
@@ -3778,6 +3827,10 @@
                     "label": "Hausbrauerei",
                     "terms": "Mikrobrauerei"
                 },
+                "mimics": {
+                    "label": "Nachahmung",
+                    "terms": "Sieht aus wie, Baum, getarnt, verkleidet"
+                },
                 "min_age": {
                     "label": "minimales Alter",
                     "terms": "Altersuntergrenze, Altersgrenze, Mindestalter"
@@ -3845,11 +3898,10 @@
                     "terms": "Netzwerk"
                 },
                 "network/type": {
-                    "label": "Netzwerktyp",
-                    "terms": "Netzwerktyp"
+                    "label": "Netzwerktyp"
                 },
                 "network_bicycle": {
-                    "label": "Netzwerk/Verkehrsverbund",
+                    "label": "Netzwerk",
                     "options": {
                         "icn": "International",
                         "lcn": "Lokal",
@@ -3921,12 +3973,17 @@
                     "terms": "offenes Feuer erlaubt"
                 },
                 "opening_date": {
-                    "label": "Erwartetes Öffnungsdatum"
+                    "label": "Erwartetes Öffnungsdatum",
+                    "placeholder": "JJJJ-MM-TT"
                 },
                 "opening_hours": {
                     "label": "Öffnungszeiten",
                     "placeholder": "Unbekannt",
                     "terms": "Stunden"
+                },
+                "opening_hours/covid19": {
+                    "label": "COVID-19 Pandemie Stunden",
+                    "terms": "COVID-19 Pandemie Stunden, SARS-Cov-2, 2019-nCov, Coronaöffnungszeiten"
                 },
                 "operator": {
                     "label": "Betreiber",
@@ -3958,6 +4015,9 @@
                         "surface": "Ebenerdig",
                         "underground": "Tiefgarage"
                     }
+                },
+                "parking_space": {
+                    "label": "Typ"
                 },
                 "payment_multi": {
                     "label": "Zahlungsarten",
@@ -4099,6 +4159,10 @@
                 "playground/theme": {
                     "label": "Thema"
                 },
+                "plots": {
+                    "label": "Parzelle",
+                    "placeholder": "10, 20, 30..."
+                },
                 "polling_station": {
                     "label": "Wahllokal",
                     "terms": "Wahllokal"
@@ -4114,7 +4178,7 @@
                 },
                 "power_supply": {
                     "label": "Stromversorgung",
-                    "terms": "Stromzugang"
+                    "terms": "Stromzugang, Stromversorgung"
                 },
                 "preschool": {
                     "label": "Vorschule"
@@ -4189,7 +4253,7 @@
                     "placeholder": "1-18"
                 },
                 "ref_highway_junction": {
-                    "label": "Verkehrsknotennummer"
+                    "label": "Nummer der Kreuzung"
                 },
                 "ref_platform": {
                     "label": "Steignummer"
@@ -4518,6 +4582,7 @@
                 },
                 "start_date": {
                     "label": "Startdatum/Inbetriebnahme",
+                    "placeholder": "JJJJ-MM-TT",
                     "terms": "Anfangsdatum, Startdatum"
                 },
                 "step_count": {
@@ -4631,6 +4696,9 @@
                 },
                 "target": {
                     "label": "Ländercode"
+                },
+                "telecom/medium": {
+                    "label": "Medium"
                 },
                 "tidal": {
                     "label": "Gezeiten",
@@ -4758,6 +4826,9 @@
                 "tunnel": {
                     "label": "Typ",
                     "placeholder": "Standard"
+                },
+                "tunnel_combo": {
+                    "label": "Typ"
                 },
                 "usage_rail": {
                     "label": "Nutzungsart",
@@ -4952,8 +5023,8 @@
                     "terms": "Schlepplift, Tellerlift, Bügelschlepplift"
                 },
                 "aerialway/gondola": {
-                    "name": "Gondel",
-                    "terms": "Gondel, Seilbahngondel"
+                    "name": "Gondelbahn",
+                    "terms": "Liftkabel, Lift, Schifahren, Snowboarden"
                 },
                 "aerialway/goods": {
                     "name": "Materialseilbahn",
@@ -5439,6 +5510,10 @@
                     "name": "Stellplatz",
                     "terms": "Parkplatz, Parkbox, Parklücke, Parkfeld, Stellplatz, Autoabstellplatz, Abstellplatz"
                 },
+                "amenity/parking_space/disabled": {
+                    "name": "Behindertenparkplatz",
+                    "terms": "Behindert, Behindertenparkplatz, Handicap, Rollstuhl"
+                },
                 "amenity/payment_centre": {
                     "name": "Zahlstelle",
                     "terms": "Zahlstellen, Einzahlstelle"
@@ -5578,9 +5653,6 @@
                     "name": "Recyclingcontainer",
                     "terms": "Recyclingcontainer, Wertstoffhof"
                 },
-                "amenity/register_office": {
-                    "name": "Standesamt"
-                },
                 "amenity/research_institute": {
                     "name": "Forschungseinrichtung",
                     "terms": "Forschungsinstitut,Forschungszentrum,Forschungsanstalt,Forschungsgelände"
@@ -5669,9 +5741,6 @@
                     "name": "Schule, Schulgelände",
                     "terms": "Schulhof, Schule, Realschule, Mittelschule, Grundschule, Gymnasium, Ganztagsschule, Förderschule"
                 },
-                "amenity/scrapyard": {
-                    "name": "Schrottplatz"
-                },
                 "amenity/shelter": {
                     "name": "Wetterschutz",
                     "terms": "Unterstand, Wetterschutz, Schutzdach, Wetterpilz"
@@ -5747,9 +5816,6 @@
                 "amenity/studio/video": {
                     "name": "Filmstudio",
                     "terms": "Filmproduktion, Filmstudio, Videoproduktion, Videoaufnahmestudio, Videostudio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Schwimmbecken (veraltet)"
                 },
                 "amenity/taxi": {
                     "name": "Taxistand",
@@ -6592,6 +6658,9 @@
                 "disused/railway": {
                     "name": "Stillgelegte Eisenbahnstrecken..."
                 },
+                "disused/shop": {
+                    "name": "geschlossener Laden"
+                },
                 "embankment": {
                     "name": "künstliche Böschung"
                 },
@@ -6954,6 +7023,10 @@
                     "name": "Mehrzweck-Weg",
                     "terms": "Weg, Mehrzweck-Weg, Rad- und Fußweg, Rad-/Fußweg, Wanderweg, Reitweg, Radweg, Fußweg, Pfad"
                 },
+                "highway/path/boardwalk": {
+                    "name": "Bohlenweg",
+                    "terms": "Pier, Steg, Knüppeldamm, erhöhter Fußweg aus Holz, Plankenweg, Prügelweg, Holzsteg"
+                },
                 "highway/path/informal": {
                     "name": "Trampelpfad",
                     "terms": "Trampelpfad, Kuhpfad, Elefantenpfad, entstandener Pfad"
@@ -7217,15 +7290,15 @@
                     "terms": "WiFi-Hotspot, Wi-Fi-Hotspot, WLAN-Zugangspunkt, WiFi-Zugangspunkt, Wi-Fi-Zugangspunkt"
                 },
                 "junction": {
-                    "name": "Straßenknotenpunkt",
-                    "terms": "Kreuzung, Abzweigung, Anschlussstelle, Knotenpunkt, Straßenknotenpunkt"
+                    "name": "Straßenkreuzung",
+                    "terms": "Kreuzung, Abzweigung, Anschlussstelle, Straßenkreuzung"
                 },
                 "landuse": {
                     "name": "Flächennutzung..."
                 },
                 "landuse/allotments": {
-                    "name": "Kleingartenanlage",
-                    "terms": "Kleingärten, Schrebergärten, Schrebergarten, Gartensparte"
+                    "name": "Kleingartengebiet",
+                    "terms": "Kleingartenverein, Kleingartengebiet, Gemeinschaftsgarten, Garten"
                 },
                 "landuse/aquaculture": {
                     "name": "Aquakultur",
@@ -7333,16 +7406,16 @@
                     "terms": "Flottenstützpunkt"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "Militärische Hindernisstrecke",
-                    "terms": "Militärische Hindernisbahn"
+                    "name": "Militärischer Hindernisparcour",
+                    "terms": "Armee, Basis, Truppe, Wache, Marine, Krieg, Militärischer Hindernisparcour"
                 },
                 "landuse/military/range": {
                     "name": "Truppenübungsplatz",
                     "terms": "Schießstand,Truppenübungsplatz"
                 },
                 "landuse/military/training_area": {
-                    "name": "Militärischer Übungsplatz",
-                    "terms": "Militärischer Übungsplatz"
+                    "name": "Militärisches Trainingsgebiet",
+                    "terms": "Luftwaffen, Armee, Basis, Kampf, Feuer, Wache, Gewehr, Marine, Schuss, Training, Krieg, Militärisches Trainingsgebiet"
                 },
                 "landuse/orchard": {
                     "name": "Obstplantage",
@@ -7515,6 +7588,14 @@
                 "leisure/garden": {
                     "name": "Garten",
                     "terms": "Garten, Gartenanlage, Hausgarten"
+                },
+                "leisure/garden/botanical": {
+                    "name": "Botanischer Garten",
+                    "terms": "Botanischer Garten, Pflanzensammlung, seltene Pflanzen"
+                },
+                "leisure/garden/community": {
+                    "name": "Gemeinschaftsgarten",
+                    "terms": "Gemeinschaftsgarten, Gartengemeinschaft, Kommunaler Garten, kooperativer Garten, kollektiver Garten"
                 },
                 "leisure/golf_course": {
                     "name": "Golfplatz",
@@ -7708,25 +7789,17 @@
                     "name": "Radrennbahn",
                     "terms": "Radrennbahn, Radsportrennbahn"
                 },
-                "leisure/track/cycling_point": {
-                    "name": "Radsportbahn",
-                    "terms": "Radrennbahn, Radsportbahn"
-                },
                 "leisure/track/horse_racing": {
                     "name": "Pferderennbahn",
                     "terms": "Pferderennbahn"
-                },
-                "leisure/track/horse_racing_point": {
-                    "name": "Pferderennbahn",
-                    "terms": "Pferderennbahn, Pferderennwetten, Pferderennen"
                 },
                 "leisure/track/running": {
                     "name": "Laufbahn",
                     "terms": "Laufbahn, Rennbahn für Laufsport"
                 },
-                "leisure/track/running_point": {
-                    "name": "Laufbahn",
-                    "terms": "Laufbahn, Lausportbahn"
+                "leisure/trampoline_park": {
+                    "name": "Trampolinpark",
+                    "terms": "Springen, Prallen"
                 },
                 "leisure/water_park": {
                     "name": "Erlebnisbad",
@@ -8013,15 +8086,15 @@
                 },
                 "marker/utility/power": {
                     "name": "Stromleitungsmarker",
-                    "terms": "Elektrisch Leitung, Stange, Starstromleitung, Zeichen"
+                    "terms": "Elektrisch Leitung, Stange, Starkstromleitung, Zeichen"
                 },
                 "military/bunker": {
                     "name": "Militärischer Bunker",
                     "terms": "Luftwaffe, Armee, Kampf, Wache, Marine, Kriegsflotte, Truppen, Krieg"
                 },
                 "military/checkpoint": {
-                    "name": "Kontrollpunkt",
-                    "terms": "Luftwaffe, Armee, Kampf, Wache, Marine, Kriegsflotte, Truppen, Krieg"
+                    "name": "Militärischer Kontrollpunkt",
+                    "terms": "Luftwaffe, Armee, Basis, Gewalt, Wache, Marine, Truppe, Krieg"
                 },
                 "military/nuclear_explosion_site": {
                     "name": "Atombombendetonationsstelle",
@@ -8126,6 +8199,10 @@
                     "name": "Schotter",
                     "terms": "Strand, Schotter, Kies, Sand, Grobsand, gerundetes Geröll"
                 },
+                "natural/shrub": {
+                    "name": "Strauch",
+                    "terms": "Busch, Strauch, Gehölz, Staude"
+                },
                 "natural/spring": {
                     "name": "Quelle",
                     "terms": "Quelle, Grundwasseraustritt"
@@ -8199,7 +8276,7 @@
                     "terms": "Wald, Naturwald, Urwald, Baum, Bäume"
                 },
                 "network/type/node_network": {
-                    "name": "Knotenroute",
+                    "name": "Erholungsnetzwerkpunlt",
                     "terms": "Knotennetzwerk, Knotenpunktnetzwerk, Knotennetzwerkroute, Knotenpunktnetzwerkroute, Knotenpunkte"
                 },
                 "noexit/yes": {
@@ -8566,9 +8643,12 @@
                 "power": {
                     "name": "Stromleitungen..."
                 },
+                "power/cable": {
+                    "name": "Unterirdische Stromleitung"
+                },
                 "power/cable/underground": {
-                    "name": "Erdkabel",
-                    "terms": "unterirdisches Stromkabel, Stromkabel unter der Erde, vergrabenes Stromkabel"
+                    "name": "Unterirdische Stromleitung",
+                    "terms": "unterirdische Stromleitung, unterirdisches Stromkabel, Stromkabel unter der Erde, vergrabenes Stromkabel"
                 },
                 "power/generator": {
                     "name": "Stromgenerator",
@@ -8600,7 +8680,7 @@
                 },
                 "power/plant": {
                     "name": "Kraftwerksgelände",
-                    "terms": "Kraftwerksgelände, Elektrizitätswerkgrundstück, Kraftwerk"
+                    "terms": "Kraftwerksgelände, Elektrizitätswerkgrundstück, Kraftwerk, Stromerzeugung"
                 },
                 "power/plant/source/coal": {
                     "name": "Kohlekraftwerk",
@@ -8615,7 +8695,7 @@
                     "terms": "Wasserkraft, Pumpspeicher, Wellenkraftwerk, Strömungskraftwerk, Gezeitenkraftwerk, Wasserturbine, Turbine, Stauanlage, Staumauer, Staustufe, Talsperre, Wasserrad, Laufwasserkraftwerk, Stausee, Flusskraftwerk, Speicherkraftwerk,"
                 },
                 "power/plant/source/nuclear": {
-                    "name": "Kernkraftwerk",
+                    "name": "Atomkraftwerk",
                     "terms": "Atom, Kraftwerk, Nuklear, Kernkraft, AKW, KKW, Reaktor, Fission, Kernenergie, Atomenergie, Atommeiler, Kernmeiler, Kernspaltung"
                 },
                 "power/plant/source/solar": {
@@ -8635,8 +8715,8 @@
                     "terms": "Umspannstation, Umspannwerk, Transformatorenstation, Schaltanlage, Trafostation"
                 },
                 "power/switch": {
-                    "name": "Netzschalter",
-                    "terms": "Netzschalter, Ein/Ausschalter"
+                    "name": "Hochspannungsschalter",
+                    "terms": "Netzschalter, Ein/Ausschalter, Hochspannungsschalter"
                 },
                 "power/tower": {
                     "name": "Hochspannungsmast",
@@ -8836,8 +8916,8 @@
                     "terms": "Unbenutzte Eisenbahnstrecke, Ungenutzte Eisenbahnstrecke, Eingestellte Eisenbahnstrecke, Stillgelegte Eisenbahnstrecke, Stillgelegte Bahnstrecke"
                 },
                 "railway/funicular": {
-                    "name": "Standseilbahn",
-                    "terms": "Standseilbahn, Seilbahn, Drahtseilbahn, Kettenbahn"
+                    "name": "Standseilbahngleis",
+                    "terms": "Standseilbahngleis, Klippenbahngleis"
                 },
                 "railway/halt": {
                     "name": "Eisenbahn-Haltepunkt"
@@ -8848,34 +8928,42 @@
                 },
                 "railway/light_rail": {
                     "name": "Stadtbahngleis",
-                    "terms": "Stadtbahngleise"
+                    "terms": "Stadtbahngleis, Straßenbahngleis, Trolleygleis"
                 },
                 "railway/milestone": {
                     "name": "Eisenbahn-Kilometerstein",
                     "terms": "Eisenbahnmeilenstein entlang einer Strecke"
                 },
                 "railway/miniature": {
-                    "name": "Miniatureisenbahn",
-                    "terms": "Miniatureisenbahn"
+                    "name": "Miniatureisenbahngleis",
+                    "terms": "fahrbares Miniaturbahngleis, Schmalspurbahngleis, Minimalspurbahngleis"
                 },
                 "railway/monorail": {
-                    "name": "Einschienenbahn",
-                    "terms": "Einschienenbahn"
+                    "name": "Einschienenbahngleis",
+                    "terms": "Einschienenbahngleis, Magnetschwebebahngleis, Sattelbahngleis, Hängebahngleis"
+                },
+                "railway/monorail/hanging": {
+                    "name": "Hängende Einschienenbahn",
+                    "terms": "Hängebahn"
                 },
                 "railway/narrow_gauge": {
-                    "name": "Schmalspurbahngleise",
-                    "terms": "Schmalspureisenbahn, Schmalspurbahn, schmalspurige Eisenbahn"
+                    "name": "Schmalspurbahn",
+                    "terms": "Schmalspurbahngleis"
                 },
                 "railway/platform": {
                     "name": "Bahnsteig (Wartebereich)"
                 },
+                "railway/preserved": {
+                    "name": "Museumsbahn",
+                    "terms": "historischer Zug, erhaltenen Schienen, Dampfzug, Touristenzug, Erlebniszug, Museumszug"
+                },
                 "railway/rail": {
-                    "name": "Eisenbahnschienen",
-                    "terms": "Gleise, Eisenbahnschienen, Schiene"
+                    "name": "Normalspurbahngleis",
+                    "terms": "Normalspurbahngleis, Bahngleis, Gleis, Schiene, Eisenbahnschiene, Eisenbahnlinie"
                 },
                 "railway/rail/highspeed": {
-                    "name": "Hochgeschwindigkeits-Eisenbahn",
-                    "terms": "Hochgeschwindigkeits-Eisenbahn"
+                    "name": "Hochgeschwindigkeitseisenbahngleis",
+                    "terms": "Hochgeschwindigkeitsstrecke, Hochgeschwindigkeitseisenbahngleich, HSR"
                 },
                 "railway/signal": {
                     "name": "Eisenbahnsignal"
@@ -8884,8 +8972,8 @@
                     "name": "Eisenbahnhaltestelle"
                 },
                 "railway/subway": {
-                    "name": "U-Bahn-Gleise",
-                    "terms": "U-Bahn-Gleise, Untergrundbahn, U-Bahn"
+                    "name": "Untergrundbahngleis",
+                    "terms": "U-Bahngleis, Untergrundeisenbahngleis, Metrogleis"
                 },
                 "railway/subway_entrance": {
                     "name": "U-Bahn-Eingang",
@@ -8900,8 +8988,8 @@
                     "terms": "Zugwaschstraße, Zugwaschanlage"
                 },
                 "railway/tram": {
-                    "name": "Straßenbahngleise",
-                    "terms": "Straßenbahngleise, Trambahngleise, Tramgleise, Bimgleis, Tramwaygleise, Stadtbahngleise"
+                    "name": "Straßenbahngleis",
+                    "terms": "Straßenbahngleis, elektrifiziertes Straßenbahngleis, Stadtbahngleis"
                 },
                 "railway/tram_stop": {
                     "name": "Straßenbahn-Halteplatz"
@@ -8915,8 +9003,8 @@
                     "terms": "Relation, Beziehung"
                 },
                 "route/ferry": {
-                    "name": "Fährenroute",
-                    "terms": "Fährlinie"
+                    "name": "Fährstrecke",
+                    "terms": "Boot, Schiff, Wasserbus, Wassershuttle, Wassertaxi"
                 },
                 "seamark": {
                     "name": "Schifffahrtszeichen"
@@ -9211,9 +9299,6 @@
                     "name": "Angelgeschäft",
                     "terms": "Angelgeschäft, Angelsportzentrum"
                 },
-                "shop/fishmonger": {
-                    "name": "Fischhändler"
-                },
                 "shop/flooring": {
                     "name": "Fußbodengeschäft",
                     "terms": "Fliese"
@@ -9227,8 +9312,8 @@
                     "terms": "Bilderrahmengeschäft"
                 },
                 "shop/frozen_food": {
-                    "name": "Tiefkühllebensmittel",
-                    "terms": "Tiefkühllebensmittel, Tiefkühlkost"
+                    "name": "Geschäft für Tiefkühlprodukte",
+                    "terms": "Tiefkühllebensmittel, Tiefkühlkost, Gefrier, gefroren, tiefgefroren"
                 },
                 "shop/fuel": {
                     "name": "Tankstelle",
@@ -9237,9 +9322,6 @@
                 "shop/funeral_directors": {
                     "name": "Beerdigungsinstitut",
                     "terms": "Beerdigungsinstitut, Bestattungsinstitut, Bestattungsunternehmen, Bestatter, Pompfüneberer"
-                },
-                "shop/furnace": {
-                    "name": "Heizungsfachgeschäft"
                 },
                 "shop/furniture": {
                     "name": "Möbelhaus",
@@ -9300,6 +9382,10 @@
                 "shop/hobby": {
                     "name": "Bastelgeschäft",
                     "terms": "Bastelgeschäft, Hobbyshop"
+                },
+                "shop/household_linen": {
+                    "name": "Haushaltswäschegeschäft",
+                    "terms": "Leintücher, Bettwäsche, Decken, Hauskleidung, Vorhänge, Stofftaschentücher, Stoffservietten, Tagesdecken, Decken, Haushaltswaren, Vorhänge, Taschentücher, Servietten, Kissenbezüge, Bademäntel, Bettwäsche, Handtücher"
                 },
                 "shop/houseware": {
                     "name": "Haushaltswarengeschäft",
@@ -9616,6 +9702,10 @@
                     "name": "Datencenter",
                     "terms": "Datencenter, Datenzentrum"
                 },
+                "telecom/exchange": {
+                    "name": "Telefonschaltzentrale",
+                    "terms": "Telefon, Telekommunikation, Telefonschaltzentrale"
+                },
                 "tourism": {
                     "name": "Tourismus..."
                 },
@@ -9916,26 +10006,26 @@
                 },
                 "type/route/bus": {
                     "name": "Buslinie",
-                    "terms": "Busroute, Stadtbuslinie, Stadtbusroute, Regionalbuslinie, Regionalbusroute, Expressbuslinie, Expressbusroute, Fernbuslinie, Fernbusroute"
+                    "terms": "Buslinie, Stadtbuslinie, Regionalbuslinie, Expressbuslinie, Fernbuslinie"
                 },
                 "type/route/detour": {
-                    "name": "Umleitungsroute",
+                    "name": "Umleitungsstrecke",
                     "terms": "Umleitungsstrecke"
                 },
                 "type/route/ferry": {
-                    "name": "Fährenroute",
+                    "name": "Fährstrecke",
                     "terms": "Fährlinie"
                 },
                 "type/route/foot": {
-                    "name": "Fußwegroute",
+                    "name": "Fußweg",
                     "terms": "Fußweg, Spazierweg"
                 },
                 "type/route/hiking": {
-                    "name": "Wanderroute",
+                    "name": "Wanderweg",
                     "terms": "Wanderweg, Fernwanderweg, Pilgerweg, Trekking"
                 },
                 "type/route/horse": {
-                    "name": "Reitroute",
+                    "name": "Reitstrecke",
                     "terms": "Reitwanderroute, Wanderreitroute"
                 },
                 "type/route/light_rail": {
@@ -9943,7 +10033,7 @@
                     "terms": "Stadtbahnlinie"
                 },
                 "type/route/monorail": {
-                    "name": "Monorail Route",
+                    "name": "Monorail Linie",
                     "terms": "Monorail Route"
                 },
                 "type/route/pipeline": {
@@ -9971,8 +10061,12 @@
                     "terms": "Eisenbahn-Linie"
                 },
                 "type/route/tram": {
-                    "name": "Straßenbahn-Linie",
-                    "terms": "Straßenbahn-Linie, Trambahn-Linie"
+                    "name": "Straßenbahnlinie",
+                    "terms": "Straßenbahnlinie, Trambahnlinie, Bimlinie, Tramlinie"
+                },
+                "type/route/trolleybus": {
+                    "name": "Obuslinie",
+                    "terms": "Oberleitungsbuslinie, Obuslinie"
                 },
                 "type/route_master": {
                     "name": "Hauptroute",
@@ -10303,7 +10397,7 @@
                 "attribution": {
                     "text": "EUFAR Balaton Orthofoto 2010"
                 },
-                "description": "1940 geo-tagged Photos vom limnologischen Balaton Institut",
+                "description": "1940 geo-tagged Fotos vom limnologischen Balaton Institut",
                 "name": "EUFAR Balaton Orthofoto"
             },
             "finds.jp_KBN_2500": {
@@ -10319,6 +10413,13 @@
                 },
                 "description": "Die Karte der Gemeinde ist eine Überblickskarte die Gothenburg zeigt. Sie enthält Informationen über Flächennutzung, Kommunikation, Hydrgraphie, Gebäude, Adressen und Straßennamen. administrative Gliederung und Orientierungstexte.",
                 "name": "Karte der Gemeinde Gothenburg"
+            },
+            "gothenburg-ortho": {
+                "attribution": {
+                    "text": "© Gemeinde Gothenburg, CC0"
+                },
+                "description": "Orthofoto für Gemeinde Gothenburg",
+                "name": "Gothenburg Orthofoto"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10346,7 +10447,7 @@
                     "text": "© Gemeinde Helsingborg"
                 },
                 "description": "Orthofotos von der Gemeinde Helsingborg 2016, public domain",
-                "name": "Helsingborg Orthophoto"
+                "name": "Helsingborg Orthooto"
             },
             "kalmar-orto-2014": {
                 "attribution": {
@@ -10381,14 +10482,14 @@
                     "text": "© Lantmäteriet, CC0"
                 },
                 "description": "Mosaic von schwedischen Orthofotos von 1955–1965. Frühere und spätere Aufnahmen können vorkommen.",
-                "name": "Lantmäteriet Historische Orthophotos 1960"
+                "name": "Lantmäteriet Historische Orthofotos 1960"
             },
             "lantmateriet-orto1975": {
                 "attribution": {
                     "text": "© Lantmäteriet, CC0"
                 },
                 "description": "Mosaic von schwedischen Orthofotos von 1970-1980. Wird noch aufgebaut.",
-                "name": "Lantmäteriet Historische Orthophotos 1975"
+                "name": "Lantmäteriet Historische Orthofotos 1975"
             },
             "lantmateriet-topowebb": {
                 "attribution": {
@@ -10477,15 +10578,21 @@
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende"
                 },
                 "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende"
                 },
                 "name": "Thunderforest Landscape"
+            },
+            "tf-outdoors": {
+                "attribution": {
+                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende"
+                },
+                "name": "Thunderforest Outdoors"
             },
             "trafikverket-baninfo": {
                 "attribution": {
@@ -10528,6 +10635,12 @@
                 },
                 "description": "Schwedisches NVDB Straßen-Netzwerk mit mehreren Optionen für Karten-Layer",
                 "name": "Trafikverket Straßen-Netzwerk Optionen"
+            },
+            "wroclaw-orto2018": {
+                "attribution": {
+                    "text": "Stadtverwaltung Wrocław"
+                },
+                "name": "Wrocław: Orthofotokarte 2018 (Luftbild)"
             }
         },
         "community": {
@@ -10565,6 +10678,10 @@
             },
             "Galicia-Twitter": {
                 "name": "OpenStreetMap Galizien Twitter",
+                "description": "Folge uns auf Twitter: {url}"
+            },
+            "Galicia-Xeoinquedos-Twitter": {
+                "name": "Galizien Geoinquetos auf Twitter",
                 "description": "Folge uns auf Twitter: {url}"
             },
             "GeoPhilly": {
@@ -11042,6 +11159,10 @@
                 "name": "OpenStreetMap Japan Mailingliste",
                 "description": "Talk-ja ist die offizielle Mailingliste für die Japanische OSM-Gemeinschaft"
             },
+            "OSM-japan-slack": {
+                "name": "OpenStreetMap Japan Slack",
+                "description": "Ein Slack Workspace für die OSM Gemeinschaft in Japan {signupUrl}"
+            },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap Japan Twitter",
                 "description": "Hashtag auf Twitter: {url}"
@@ -11254,6 +11375,14 @@
                 "name": "OpenStreetMap Deutschland Matrix",
                 "description": "Beteilige dich bei #osm-de:matrix.org auf https://riot.im/app/#/room/%23osm-de:matrix.org"
             },
+            "de-mv-mailinglist": {
+                "name": "Mecklenburg-Vorpommern Mailing Liste",
+                "description": "Das ist die Mailing Liste für die OSM Gemeinschaft in Mecklenburg-Vorpommern"
+            },
+            "de-mv-twitter": {
+                "name": "OpenStreetMap Mecklenburg-Vorpommern Twitter",
+                "description": "Folge uns auf Twitter: {url}"
+            },
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing Liste",
                 "description": "Das ist die Mailing Liste für die Ostwestfalen-Lippe OSM Gemeinschaft"
@@ -11359,6 +11488,18 @@
                 "name": "GeoGeeks Perth Treffen",
                 "description": "Treffen in Perth für Menschen die sich für GIS-Daten, Mappen und Open Source interessieren. Wir beschäftigen uns mit allen Angelegenheiten von lokaler Bedeutung."
             },
+            "gr-forum": {
+                "name": "OpenStreetMap GR Forum",
+                "description": "OpenStreetMap Griechenland Web Forum"
+            },
+            "gr-mailinglist": {
+                "name": "Talk-gr Mailing Liste",
+                "description": "Talk-gr ist die offizielle Mailingliste für die griechische OSM-Gemeinschaft"
+            },
+            "gr-matrix": {
+                "name": "OpenStreetMap Griechenland Matrix",
+                "description": "Beteilige dich bei #osm-gr:matrix.org auf https://riot.im/app/#/room/%23osm-gr:matrix.org"
+            },
             "guatemala-telegram": {
                 "name": "OSM Guatemala auf Telegram",
                 "description": "OpenStreetMap Guatemala Telegram Chat"
@@ -11367,6 +11508,10 @@
                 "name": "OpenStreetMap Kroatien Facebook Gruppe",
                 "description": "OpenStreetMap Kroatien Facebook Gruppe"
             },
+            "hr-forum": {
+                "name": "OSM Kroatien Forum",
+                "description": "OpenStreetMap Kroatien Forum"
+            },
             "hr-irc": {
                 "name": "OpenStreetMap Kroatien auf IRC",
                 "description": "Beteilige dich bei #osm-hr auf irc.freenode.org (Port 6667)"
@@ -11374,6 +11519,10 @@
             "hr-mailinglist": {
                 "name": "Talk-hr Mailing Liste",
                 "description": "Talk-hr Mailing Liste"
+            },
+            "hr-wiki": {
+                "name": "OpenStreetMap Wikiproject Kroatien",
+                "description": "Wikiproject page für Kroatien"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU auf Facebook",
@@ -11605,6 +11754,10 @@
                 "name": "OpenStreetMap Ghana auf Twitter",
                 "description": "Folge uns auf Twitter: {url}"
             },
+            "osm-hr": {
+                "name": "OpenStreetMap Kroatien",
+                "description": "Die Plattform für Information über OpenStreetMap in Kroatien"
+            },
             "osm-india-forum": {
                 "name": "OpenStreetMap Indien Forum",
                 "description": "OpenStreetMap Indien Web Forum"
@@ -11768,6 +11921,10 @@
                 "name": "OpenStreetMap Freemap Slovenien auf Twitter",
                 "description": "OpenStreetMap Freemap Slowenien auf Twitter: {url}"
             },
+            "talk-africa": {
+                "name": "Talk-africa Mailing Liste",
+                "description": "Talk-africa  ist die offizielle Mailingliste für die afrikanische OSM-Gemeinschaft."
+            },
             "talk-au": {
                 "name": "Talk-au Mailing Liste",
                 "description": "Mappers in Australien chatten hier"
@@ -11797,6 +11954,10 @@
             "talk-nz": {
                 "name": "Talk-nz Mailing Liste",
                 "description": "Neuseeland OSM Gemeinschafts-atalk"
+            },
+            "talk-tz": {
+                "name": "Talk-tz Mailing Liste",
+                "description": "Talk-tz  ist die offizielle Mailingliste für die tanzanische OSM-Gemeinschaft."
             },
             "talk-za": {
                 "name": "Talk-za Mailing Liste",

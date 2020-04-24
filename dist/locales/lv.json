@@ -297,7 +297,6 @@
             "request_review": "Es vēlos lai kāds pārbauda manus labojumus.",
             "save": "Augšupielādēt",
             "cancel": "Atcelt",
-            "changes": "{count} Izmaiņas",
             "download_changes": "Lejupielādēt osmChange failu",
             "warnings": "Brīdinājumi",
             "modified": "Mainīts",
@@ -578,10 +577,6 @@
             "on_wiki": "{tag} wiki.osm.org",
             "used_with": "izmantots kopā ar {type}"
         },
-        "zoom": {
-            "in": "Pietuvināt",
-            "out": "Attālināt"
-        },
         "streetside": {
             "tooltip": "Ielas līmeņa attēli no Microsoft",
             "view_on_bing": "Skatīt Bing kartēs",
@@ -635,8 +630,7 @@
                 "open_data_h": "Atvērti dati",
                 "before_start_h": "Pirms tu sāc",
                 "open_source_h": "Atvērta Pirmkoda",
-                "open_source": "iD redaktors ir kopienas atvērta koda projekts, un tu pašlaik izmanto versiju {version}. Pirmkods ir pieejams [GitHubā](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Tu vari palīdzēt iD [tulkojot](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) vai [ziņojot par kļūdām](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "iD redaktors ir kopienas atvērta koda projekts, un tu pašlaik izmanto versiju {version}. Pirmkods ir pieejams [GitHubā](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Pārskats",
@@ -1222,9 +1216,6 @@
                     },
                     "placeholder": "Saskarsmē ar līniju, Elektrizēta Sliede..."
                 },
-                "elevation": {
-                    "label": "Augstums"
-                },
                 "email": {
                     "label": "E-Pasts",
                     "placeholder": "example@example.com"
@@ -1401,7 +1392,6 @@
                     "label": "Tips"
                 },
                 "internet_access": {
-                    "label": "Interneta piekļuve",
                     "options": {
                         "no": "Nē",
                         "terminal": "Termināls",
@@ -1409,9 +1399,6 @@
                         "wlan": "Bezvadu internets",
                         "yes": "Jā"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Interneta Piekļuves Maksa"
                 },
                 "kerb": {
                     "label": "Apmale"
@@ -2287,9 +2274,6 @@
                 },
                 "amenity/studio": {
                     "name": "Studija"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Peldbaseins"
                 },
                 "amenity/telephone": {
                     "name": "Telefons"
@@ -3170,23 +3154,8 @@
                 "railway/disused": {
                     "name": "Nelietots dzelzceļš"
                 },
-                "railway/miniature": {
-                    "name": "Miniātura dzelzceļš"
-                },
-                "railway/monorail": {
-                    "name": "Viensliežu vilciens"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Šaursliežu dzelzceļš"
-                },
-                "railway/rail": {
-                    "name": "Sliedes"
-                },
                 "railway/station": {
                     "name": "Vilcienu Stacija"
-                },
-                "railway/subway": {
-                    "name": "Metro"
                 },
                 "railway/subway_entrance": {
                     "name": "Metro ieeja"
@@ -3197,9 +3166,6 @@
                 },
                 "railway/train_wash": {
                     "name": "Vilcienu mazgātuve"
-                },
-                "railway/tram": {
-                    "name": "Tramvajs"
                 },
                 "relation": {
                     "name": "Relācija"

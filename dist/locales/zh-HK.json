@@ -6,9 +6,28 @@
             "remove": "移除",
             "undo": "復原",
             "zoom_to": "縮放至",
-            "copy": "複製"
+            "copy": "複製",
+            "view_on": "在 {domain} 上查看",
+            "favorite": "喜愛",
+            "list": "清單",
+            "text": "文本",
+            "deselect": "取消選擇"
+        },
+        "toolbar": {
+            "inspect": "檢查",
+            "undo_redo": "撤消/重做",
+            "recent": "最近",
+            "favorites": "收藏夾",
+            "add_feature": "添加功能"
         },
         "modes": {
+            "add_feature": {
+                "title": "添加功能",
+                "description": "搜尋要新增到地圖上的圖徽。",
+                "key": "分頁",
+                "result": "{count} 個結果",
+                "results": "{count} 個結果"
+            },
             "add_area": {
                 "title": "範圍",
                 "description": "新增公園、建築物、湖或其他範圍至地圖。",
@@ -33,6 +52,9 @@
                 "description": "發現了問題？讓其他製圖者知道。",
                 "tail": "於地圖上按一下新增備註。",
                 "key": "N"
+            },
+            "add_preset": {
+                "title": "添加 {feature}"
             },
             "browse": {
                 "title": "瀏覽",
@@ -85,6 +107,9 @@
             },
             "circularize": {
                 "title": "圓形化",
+                "description": {
+                    "single": "讓此圖徽變成圓形。"
+                },
                 "key": "O"
             },
             "orthogonalize": {
@@ -354,7 +379,6 @@
             "request_review": "我希望有其他人覆核我的編輯。",
             "save": "上載",
             "cancel": "取消",
-            "changes": "{count} 項變更",
             "download_changes": "下載 osmChange 檔案",
             "errors": "錯誤",
             "warnings": "警告",
@@ -438,8 +462,7 @@
         },
         "inspector": {
             "zoom_to": {
-                "key": "Z",
-                "title": "放大至這個"
+                "key": "Z"
             },
             "show_more": "顯示更多",
             "view_on_osm": "在 openstreetmap.org 中檢視",
@@ -660,10 +683,6 @@
             "description": "描述",
             "on_wiki": "在wiki.osm.org上的 {tag}",
             "used_with": "與{type}一起用"
-        },
-        "zoom": {
-            "in": "放大",
-            "out": "縮小"
         },
         "cannot_zoom": "在這個模式下不能再縮小。",
         "full_screen": "切換全螢幕",
@@ -1573,9 +1592,6 @@
                     },
                     "placeholder": "電纜、已通電路軌…"
                 },
-                "elevation": {
-                    "label": "海拔"
-                },
                 "email": {
                     "label": "電郵",
                     "placeholder": "example@example.com"
@@ -1754,7 +1770,6 @@
                     "label": "間中"
                 },
                 "internet_access": {
-                    "label": "用到互聯網",
                     "options": {
                         "no": "否",
                         "terminal": "終端機",
@@ -1762,9 +1777,6 @@
                         "wlan": "無綫上網",
                         "yes": "有"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "互聯網費用"
                 },
                 "kerb": {
                     "label": "下斜路緣"
@@ -2714,10 +2726,6 @@
                     "name": "牽引纜車",
                     "terms": "Drag Lift, 牽引纜車"
                 },
-                "aerialway/gondola": {
-                    "name": "吊艙",
-                    "terms": "Gondola,吊籃,吊船,空中纜車"
-                },
                 "aerialway/goods": {
                     "name": "貨運纜車",
                     "terms": "Goods Aerialway,載貨纜車"
@@ -3131,9 +3139,6 @@
                     "name": "回收桶",
                     "terms": "回收桶,三色桶,回收箱"
                 },
-                "amenity/register_office": {
-                    "name": "人事登記處"
-                },
                 "amenity/restaurant": {
                     "name": "餐廳",
                     "terms": "Restaurant,茶樓,酒家,酒樓,飯店,飯館,餐廳,餐館"
@@ -3218,9 +3223,6 @@
                     "name": "學校範圍",
                     "terms": "學校,中學,小學,學校用地,學校範圍,國際學校"
                 },
-                "amenity/scrapyard": {
-                    "name": "廢料場"
-                },
                 "amenity/shelter": {
                     "name": "涼亭",
                     "terms": "Shelter,亭,蓋,避難,避難所,避雨亭"
@@ -3256,9 +3258,6 @@
                 "amenity/studio": {
                     "name": "工作室",
                     "terms": "影樓,畫室,放映室,美術室,工藝室,藝術工作室"
-                },
-                "amenity/swimming_pool": {
-                    "name": "游泳池"
                 },
                 "amenity/taxi": {
                     "name": "的士站",
@@ -4151,10 +4150,6 @@
                     "name": "路口",
                     "terms": "十字路口,交界處,交界"
                 },
-                "landuse/allotments": {
-                    "name": "社區園圃",
-                    "terms": "社區園圃"
-                },
                 "landuse/aquaculture": {
                     "name": "水產養殖",
                     "terms": "Aquaculture,水產"
@@ -4244,17 +4239,9 @@
                     "name": "海軍基地",
                     "terms": "Naval Base,軍港,海軍基地"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "越障訓練場",
-                    "terms": "Obstacle Course,越障訓練場"
-                },
                 "landuse/military/range": {
                     "name": "軍事靶場",
                     "terms": "Military Range,靶場,軍用靶場,射擊場"
-                },
-                "landuse/military/training_area": {
-                    "name": "訓練場地",
-                    "terms": "Training Area,訓練場, 練習場地, 練習場"
                 },
                 "landuse/orchard": {
                     "name": "果園",
@@ -4502,10 +4489,6 @@
                 "man_made/gasometer": {
                     "name": "煤氣鼓",
                     "terms": "氣鼓,石油氣鼓"
-                },
-                "man_made/groyne": {
-                    "name": "防波堤",
-                    "terms": "防波堤,防波板"
                 },
                 "man_made/lighthouse": {
                     "name": "燈塔",
@@ -4889,10 +4872,6 @@
                     "name": "停用鐵路",
                     "terms": "Disused Railway,停用鐵路,廢棄的鐵路"
                 },
-                "railway/funicular": {
-                    "name": "纜索鐵道",
-                    "terms": "纜索鐵道, 索道, 纜車"
-                },
                 "railway/level_crossing": {
                     "name": "鐵路交滙處 (道路)",
                     "terms": "Railway Crossing (Road), 鐵路交滙處 (道路)"
@@ -4901,25 +4880,9 @@
                     "name": "鐵道里程碑",
                     "terms": "Railway Milestone,鐵道里程碑"
                 },
-                "railway/monorail": {
-                    "name": "單軌鐵路",
-                    "terms": "Monorail,單軌,單軌鐵路,單軌電車,單軌火車"
-                },
-                "railway/narrow_gauge": {
-                    "name": "窄軌鐵路",
-                    "terms": "窄軌鐵路, 窄軌鐵道"
-                },
-                "railway/rail": {
-                    "name": "路軌",
-                    "terms": "Rail,火車軌,路軌,軌,鐵軌"
-                },
                 "railway/signal": {
                     "name": "鐵路訊號",
                     "terms": "Railway Signal,鐵道信號,鐵路信號"
-                },
-                "railway/subway": {
-                    "name": "地下鐵",
-                    "terms": "MTR,Mass Transit Railway,Subway,地下鐵,地下鐵路,地鐵,捷運"
                 },
                 "railway/subway_entrance": {
                     "name": "地鐵入口",
@@ -4932,10 +4895,6 @@
                 "railway/train_wash": {
                     "name": "火車洗滌器",
                     "terms": "Train Wah,火車清洗處,火車洗車機"
-                },
-                "railway/tram": {
-                    "name": "電車",
-                    "terms": "Tram,電車"
                 },
                 "relation": {
                     "name": "關係",
@@ -5131,9 +5090,6 @@
                 "shop/fashion": {
                     "name": "時裝店"
                 },
-                "shop/fishmonger": {
-                    "name": "魚檔"
-                },
                 "shop/florist": {
                     "name": "花店",
                     "terms": "Florist,花店,花舖"
@@ -5145,9 +5101,6 @@
                 "shop/funeral_directors": {
                     "name": "殯儀館",
                     "terms": "殯儀館"
-                },
-                "shop/furnace": {
-                    "name": "暖氣爐店"
                 },
                 "shop/furniture": {
                     "name": "傢俬店",

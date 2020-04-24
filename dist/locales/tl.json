@@ -266,7 +266,6 @@
             "upload_explanation_with_user": "Ang mga pagbabagong na-upload bilang {user} ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
             "save": "I-upload",
             "cancel": "Kanselahin",
-            "changes": "{count} Changes",
             "warnings": "Mga babala",
             "modified": "Binago",
             "deleted": "Binura",

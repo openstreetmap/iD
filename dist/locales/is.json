@@ -6,16 +6,32 @@
             "remove": "fjarlægja",
             "undo": "afturkalla",
             "zoom_to": "renna að",
-            "copy": "afrita"
+            "copy": "afrita",
+            "view_on": "skoða á {domain}",
+            "favorite": "eftirlæti",
+            "list": "listi",
+            "text": "texti",
+            "deselect": "afvelja"
         },
         "toolbar": {
-            "recent": "Nýlega"
+            "inspect": "Yfirfara",
+            "undo_redo": "Afturkalla / Endurtaka",
+            "recent": "Nýlegt",
+            "favorites": "Eftirlæti",
+            "add_feature": "Bæta við fitju"
         },
         "modes": {
+            "add_feature": {
+                "title": "Bæta við fitju",
+                "description": "Leita að fitjum til að bæta við landakortið.",
+                "result": "{count} niðurstaða",
+                "results": "{count} niðurstöður"
+            },
             "add_area": {
                 "title": "Svæði",
                 "description": "Bættu landsvæðum, byggingum, vötnum eða öðrum svæðum á kortið.",
-                "tail": "Smelltu á kortið til að teikna svæði, til dæmis garð, vatn eða byggingu."
+                "tail": "Smelltu á kortið til að teikna svæði, til dæmis garð, vatn eða byggingu.",
+                "filter_tooltip": "svæði"
             },
             "add_line": {
                 "title": "Lína",
@@ -27,12 +43,17 @@
                 "title": "Punktur",
                 "description": "Bættu veitingastöðum, minnismerkjum, póstkössum eða öðrum punktum við kortið.",
                 "tail": "Smelltu á kortið til að bæta við punkti.",
-                "filter_tooltip": "stig"
+                "filter_tooltip": "punktar"
             },
             "add_note": {
                 "title": "Minnispunktur",
+                "label": "Bæta við minnispunkti",
                 "description": "Fannstu hnökra? Láttu annað kortagerðarfólk vita.",
-                "tail": "Smelltu á kortið til að bæta við minnispunkti."
+                "tail": "Smelltu á kortið til að bæta við minnispunkti.",
+                "key": "N"
+            },
+            "add_preset": {
+                "title": "Bæta við {feature}"
             },
             "browse": {
                 "title": "Fletta",
@@ -51,7 +72,7 @@
         "operations": {
             "add": {
                 "annotation": {
-                    "point": "Bætti punkti við.",
+                    "point": "Bætti við punkti.",
                     "vertex": "Bætti hnúti við leið.",
                     "relation": "Bætti við venslum.",
                     "note": "Bætti við minnispunkti."
@@ -78,21 +99,44 @@
                 "annotation": "Hætti við að teikna."
             },
             "change_role": {
-                "annotation": "Breytti hlutverki tengds aðila."
+                "annotation": "Breytti hlutverki tengds staks."
             },
             "change_tags": {
                 "annotation": "Breytti merkingum."
             },
             "circularize": {
                 "title": "Hringlaga",
-                "key": "O"
+                "description": {
+                    "single": "Gera þessa fitju hringlaga.",
+                    "multiple": "Gera þessar fitjur hringlaga."
+                },
+                "key": "O",
+                "annotation": {
+                    "single": "Gerði fitju hringlaga.",
+                    "multiple": "Gerði fitjur hringlaga."
+                }
             },
             "orthogonalize": {
-                "title": "Hornrétta"
+                "title": "Hornrétta",
+                "description": {
+                    "corner": {
+                        "single": "Rétta þetta horn.",
+                        "multiple": "Rétta þessi horn."
+                    }
+                },
+                "key": "Q"
             },
             "straighten": {
                 "title": "Slétta",
+                "description": {
+                    "points": "Slétta þessa punkta.",
+                    "line": "Slétta þessa línu."
+                },
                 "key": "S",
+                "annotation": {
+                    "points": "Slétti nokkra punkta.",
+                    "line": "Slétti úr línu."
+                },
                 "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega"
             },
             "delete": {
@@ -127,10 +171,13 @@
                 }
             },
             "add_member": {
-                "annotation": "Bætti við vensl"
+                "annotation": "Bætti staki við vensl"
             },
             "delete_member": {
-                "annotation": "Fjarlægði úr venslum"
+                "annotation": "Fjarlægði stak úr venslum"
+            },
+            "reorder_members": {
+                "annotation": "Endurraðaði stökum vensla."
             },
             "connect": {
                 "annotation": {
@@ -159,7 +206,7 @@
                 "annotation": "Aðskilja línur/svæði.",
                 "not_connected": "Það eru ekki nógu margar línur/svæði hérna til að aftengja.",
                 "connected_to_hidden": "Ekki er hægt að aftengja þetta því að það tengist földu eigindi.",
-                "relation": "Ekki hægt að aftengja þetta því það tengir saman meðlimi í venslum."
+                "relation": "Ekki hægt að aftengja þetta því það tengir saman stök í venslum."
             },
             "merge": {
                 "title": "Sameina",
@@ -369,7 +416,6 @@
             "request_review": "Ég myndi vilja að einhver yfirfæri breytingarnar mínar.",
             "save": "Senda inn",
             "cancel": "Hætta við",
-            "changes": "{count} breytingar",
             "download_changes": "Sækja osmChange-skrá",
             "errors": "Villur",
             "warnings": "Aðvaranir",
@@ -460,12 +506,7 @@
         },
         "inspector": {
             "zoom_to": {
-                "key": "Z",
-                "title": "Renna að þessu",
-                "tooltip_feature": "Miðja og renna að þessari fitju á kortinu.",
-                "tooltip_note": "Miðja og renna að þessum minnispunkti á kortinu.",
-                "tooltip_data": "Miðja og renna að þessum gögnum á kortinu.",
-                "tooltip_issue": "Miðja og renna að þessu vandamáli á kortinu."
+                "key": "Z"
             },
             "show_more": "Sýna meira",
             "view_on_osm": "Skoða á openstreetmap.org",
@@ -634,7 +675,6 @@
             "custom_background": {
                 "tooltip": "Breyta sérsniðnum bakgrunni",
                 "header": "Sérsniðnar bakgrunnsstillingar",
-                "instructions": "Settu inn sniðmát slóðar á kortatígul. Gild viðföng eru:\n   {zoom} eða {z}, {x}, {y} fyrir Z/X/Y tíglaskema\n   {-y} eða {ty} fyrir flett TMS-stíls Y-hnit\n   {u} fyrir fjórtígla skema (quadtile)\n   {switch:a,b,c} fyrir fléttugreiningu á DNS-þjóni (multiplexing)\n\nDæmi:\n{example}",
                 "template": {
                     "placeholder": "Settu inn slóð á sniðmát"
                 }
@@ -682,7 +722,7 @@
                 "deleted": "Þessari fitju var eytt af {user}.",
                 "location": "Þessi fitja var færð bæði af þér og af {user}.",
                 "nodelist": "Hnútum var breytt bæði af þér og af {user}.",
-                "memberlist": "Meðlimum vensla var breytt bæði af þér og af {user}.",
+                "memberlist": "Stökum vensla var breytt bæði af þér og af {user}.",
                 "tags": "Þú breyttir <b>{tag}</b> merkinu í \"{local}\" og {user} breytti því í \"{remote}\"."
             }
         },
@@ -714,10 +754,6 @@
             "description": "Lýsing",
             "on_wiki": "{tag} á wiki.osm.org",
             "used_with": "notað með {type}"
-        },
-        "zoom": {
-            "in": "Renna að",
-            "out": "Renna frá"
         },
         "cannot_zoom": "Get ekki rennt lengra frá í núverandi ham.",
         "full_screen": "Víxla skjáfylli af/á",
@@ -774,7 +810,7 @@
                     "this_turn_restriction": "þessi takmörkun á beygju",
                     "this_roundabout": "þetta hringtorg",
                     "this_mini_roundabout": "þetta smáhringtorg",
-                    "this_track": "þessi slóð",
+                    "this_track": "þessi ferill",
                     "this_feature": "þessi fitja",
                     "highway": "þjóðvegur",
                     "railway": "lestarteinar",
@@ -885,6 +921,10 @@
                     "370": {
                         "title": "Tvíteknir staðir"
                     },
+                    "390": {
+                        "title": "Vantar gerð brautar (tracktype)",
+                        "description": "{var1} er ekki með \"tracktype\" merki."
+                    },
                     "401": {
                         "title": "Takmörkun á beygju vantar"
                     },
@@ -958,8 +998,7 @@
                 "before_start_h": "Áður en þú byrjar",
                 "before_start": "Þú þyrftir að vera kunnug(ur) OpenStreetMap og þessum ritli áður en þú hefst handa við breytingar. iD kemur með skref-fyrir-skref leiðarvísi sem getur kennt þér grunnatriði við breytingar á OpenStreetMap. Smelltu á \"Skoða leiðarvísi\" á þessum skjá til að fara í kennsluna - þetta tekur einungis um 15 mínútur.",
                 "open_source_h": "Opinn hugbúnaður",
-                "open_source": "iD ritillinn er samstarfsverkefni um opinn og frjálsan hugbúnað, og ert þú að nota núna útgáfu {version}. Grunnkóðinn er til taks [á GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Þú getur hjálpað iD með því að [þýða](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) hann eða með því að [tilkynna villur](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "iD ritillinn er samstarfsverkefni um opinn og frjálsan hugbúnað, og ert þú að nota núna útgáfu {version}. Grunnkóðinn er til taks [á GitHub](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Yfirlit",
@@ -1059,16 +1098,16 @@
             },
             "relations": {
                 "title": "Vensl",
-                "intro": "*Vensl* (relation) er sérstök tegund eiginda í OpenStreetMap sem hópar saman önnur eigindi/fitjur. Fitjur eða eigindi sem tilheyra venslum kallast *meðlimir* (members), og getur hver meðlimur haft *hlutverk* (role) í venslunum.",
+                "intro": "*Vensl* (relation) er sérstök tegund eiginda í OpenStreetMap sem hópar saman önnur eigindi/fitjur. Fitjur eða eigindi sem tilheyra venslum kallast *stök* (members), og getur hvert stak haft *hlutverk* (role) í venslunum.",
                 "edit_relation_h": "Breytingar á venslum",
-                "edit_relation_delete": "Þú getur einnig smellt á {delete} **Eyða** hnappin til að fjarlægja völdu fitjuna úr venslunum. Ef þú fjarlægir alla meðlimi úr venslum, verður þeim venslum eytt sjálfvirkt.",
+                "edit_relation_delete": "Þú getur einnig smellt á {delete} **Eyða** hnappin til að fjarlægja völdu fitjuna úr venslunum. Ef þú fjarlægir öll stök úr venslum, verður þeim venslum eytt sjálfvirkt.",
                 "maintain_relation_h": "Viðhalda venslum",
-                "maintain_relation": "Oftast nær mun iD viðhalda venslum um leið og þú sýslar með breytingar. Þú ættir að fara varlega þegar þú ert að skipta út fitjum sem gætu verið meðlimir í venslum. Til dæmis ef þú eyðir vegbút og teiknar nýjan veghluta í stað hans, ættirðu að bæta nýja veghlutanum í sömu vensl (vegir, beygjutakmarkanir, o.s.frv.) eins og upprunalegi vegurinn hafði.",
+                "maintain_relation": "Oftast nær mun iD viðhalda venslum um leið og þú sýslar með breytingar. Þú ættir að fara varlega þegar þú ert að skipta út fitjum sem gætu verið stök í venslum. Til dæmis ef þú eyðir vegbút og teiknar nýjan veghluta í stað hans, ættirðu að bæta nýja veghlutanum í sömu vensl (vegir, beygjutakmarkanir, o.s.frv.) eins og upprunalegi vegurinn hafði.",
                 "relation_types_h": "Tegundir vensla",
                 "multipolygon_h": "Fjölhyrningar (Flákar)",
                 "multipolygon": "Venslin *fjölhyrningur* er hópur af einni eða fleiri *ytri* fitjum og einni eða fleiri *innri* fitjum. Ytri fitjurnar skilgreina útjaðra fjölhyrningsins og innri fitjurnar skilgreina undirsvæði eða holur sem skornar eru út úr innri fleti fjölhyrningsins.",
                 "multipolygon_create": "Til að búa til fjölhyrning, til dæmis byggingu með inngarði, teiknaðu þá útjaðarinn sem svæði og svo innri jaðrana sem línu eða annarskonar svæði. Síðan skaltu nota `{shift}`+{leftclick} vinstri-smell til að velja báðar fitjurnar, {rightclick} hægri-smella til að birta breytingavalmyndina, og velja síðan {merge} **Sameina** skipunina.",
-                "multipolygon_merge": "Sameining nokkurra lína eða svæða mun útbúa ný fjölhyrningsvensl með öll valin svæði sem meðlimi. iD mun velja innri og ytri hlutverkin sjálfvirkt, byggt á því hvaða fitjur eru innan í öðrum fitjum.",
+                "multipolygon_merge": "Sameining nokkurra lína eða svæða mun útbúa ný fjölhyrningsvensl með öll valin svæði sem stök. iD mun velja innri og ytri hlutverkin sjálfvirkt, byggt á því hvaða fitjur eru innan í öðrum fitjum.",
                 "turn_restriction_h": "Takmarkanir á beygjum",
                 "turn_restriction": "Venslin *takmörkun á beygjum* er hópur nokkurra vegbúta á vegamótum. Takmarkanir á beygjum samanstanda af *frá* (from) vegi, *gegnum* (via) hnút eða vegi, og *til* (to) vegar.",
                 "turn_restriction_field": "Til að breyta beygjutakmörkunum, veldu þá tengihnút þar sem tveir eða fleiri vegir mætast. Fitjuritillinn mun birta sérstakt \"Takmarkanir á beygjum\" gagnasvið sem sýnir líkan af gatnamótunum.",
@@ -1164,6 +1203,12 @@
         "issues": {
             "warnings": {
                 "list_title": "Aðvaranir ({count})"
+            },
+            "missing_role": {
+                "message": "{member} hefur ekkert hlutverk innan {relation}"
+            },
+            "impossible_oneway": {
+                "title": "Ómögulegar einstefnur"
             },
             "fix": {
                 "connect_endpoints": {
@@ -1574,6 +1619,15 @@
                 "category-landuse": {
                     "name": "Fitjur fyrir landnotkun"
                 },
+                "category-natural": {
+                    "name": "Náttúrufyrirbæri"
+                },
+                "category-path": {
+                    "name": "Stígar"
+                },
+                "category-rail": {
+                    "name": "Lestarteinar"
+                },
                 "category-restriction": {
                     "name": "Takmörkunareigindi"
                 },
@@ -1591,6 +1645,9 @@
                 },
                 "category-utility": {
                     "name": "Eigindi aðstöðu"
+                },
+                "category-waterway": {
+                    "name": "Siglingaleiðir"
                 }
             },
             "fields": {
@@ -1963,7 +2020,7 @@
                         },
                         "track": {
                             "description": "Hjólabraut sem aðskilin er frá annarri umferð með eiginlegri hindrun",
-                            "title": "Hjólaslóð"
+                            "title": "Hjólabraut"
                         }
                     },
                     "placeholder": "ekkert",
@@ -2086,9 +2143,6 @@
                         "yes": "Já (óskilgreint)"
                     },
                     "placeholder": "Snertistrengur, rafteinar..."
-                },
-                "elevation": {
-                    "label": "Hæð"
                 },
                 "email": {
                     "label": "Tölvupóstur",
@@ -2295,7 +2349,6 @@
                     "label": "Tímabundið rennsli"
                 },
                 "internet_access": {
-                    "label": "Internetaðgangur",
                     "options": {
                         "no": "Nei",
                         "terminal": "Útstöð",
@@ -2303,9 +2356,6 @@
                         "wlan": "Þráðlaust",
                         "yes": "Já"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Gjald fyrir internetaðgang"
                 },
                 "junction_line": {
                     "options": {
@@ -3330,9 +3380,6 @@
                 "aerialway/drag_lift": {
                     "name": "Toglyfta"
                 },
-                "aerialway/gondola": {
-                    "name": "Eggjalyfta"
-                },
                 "aerialway/goods": {
                     "name": "Vöruvíralyfta"
                 },
@@ -3658,9 +3705,6 @@
                 "amenity/recycling_container": {
                     "name": "Endurvinnslugámur"
                 },
-                "amenity/register_office": {
-                    "name": "Skráningarskrifstofa"
-                },
                 "amenity/restaurant": {
                     "name": "Veitingahús"
                 },
@@ -3724,9 +3768,6 @@
                 "amenity/school": {
                     "name": "Skólalóð"
                 },
-                "amenity/scrapyard": {
-                    "name": "Brotajárnshaugur"
-                },
                 "amenity/shelter": {
                     "name": "Skýli"
                 },
@@ -3756,9 +3797,6 @@
                 },
                 "amenity/studio": {
                     "name": "Upptökustúdíó"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Sundlaug"
                 },
                 "amenity/taxi": {
                     "name": "Leigubílastæði"
@@ -4446,6 +4484,12 @@
                 "highway/primary_link": {
                     "name": "Stofnrein"
                 },
+                "highway/raceway": {
+                    "name": "Kappakstursbraut"
+                },
+                "highway/raceway/motocross": {
+                    "name": "Mótocrossbraut"
+                },
                 "highway/residential": {
                     "name": "Íbúðagata"
                 },
@@ -4505,7 +4549,8 @@
                     "name": "Safnbrautarrein"
                 },
                 "highway/track": {
-                    "name": "Vegslóði án viðhalds"
+                    "name": "Vegslóði án viðhalds",
+                    "terms": "vegslóði án þjónustu,skógarvegur,aðkoma slökkviliðs,bændaslóðar,virkjanavegir,fjórhjóladrifs,4x4,utanvegaslóð"
                 },
                 "highway/traffic_mirror": {
                     "name": "Umferðarspegill"
@@ -4569,9 +4614,6 @@
                 },
                 "junction": {
                     "name": "Tenging"
-                },
-                "landuse/allotments": {
-                    "name": "Samfélagsgarður"
                 },
                 "landuse/aquaculture": {
                     "name": "Vatnseldi"
@@ -4645,14 +4687,8 @@
                 "landuse/military/naval_base": {
                     "name": "Flotastöð"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Hindrunarhlaupabraut"
-                },
                 "landuse/military/range": {
                     "name": "Hersvæði"
-                },
-                "landuse/military/training_area": {
-                    "name": "Æfingasvæði"
                 },
                 "landuse/orchard": {
                     "name": "Aldingarður"
@@ -4879,6 +4915,12 @@
                 "leisure/track": {
                     "name": "Keppnisbraut (ekki mótorsport)"
                 },
+                "leisure/track/cycling": {
+                    "name": "Hjólreiðabraut"
+                },
+                "leisure/track/horse_racing": {
+                    "name": "Kappreiðabraut"
+                },
                 "leisure/track/running": {
                     "name": "Hlaupabraut"
                 },
@@ -4914,9 +4956,6 @@
                 },
                 "man_made/gasometer": {
                     "name": "Gasmælir"
-                },
-                "man_made/groyne": {
-                    "name": "Öldubrjótur"
                 },
                 "man_made/lighthouse": {
                     "name": "Viti"
@@ -5425,41 +5464,20 @@
                 "railway/disused": {
                     "name": "Ónotaðir lestarteinar"
                 },
-                "railway/funicular": {
-                    "name": "Toglest"
-                },
                 "railway/halt": {
                     "name": "Lestarstöð (stöðvun / beiðni)"
                 },
                 "railway/level_crossing": {
                     "name": "Þverun járnbrautar (vegur)"
                 },
-                "railway/light_rail": {
-                    "name": "Léttlest"
-                },
                 "railway/milestone": {
                     "name": "Vegalengdarmerki járnbrautar"
-                },
-                "railway/miniature": {
-                    "name": "Smájárnbraut"
-                },
-                "railway/monorail": {
-                    "name": "Einteinungur"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Mjótt lestarspor"
-                },
-                "railway/rail": {
-                    "name": "Lestarteinar"
                 },
                 "railway/signal": {
                     "name": "Lestarmerki"
                 },
                 "railway/station": {
                     "name": "Lestarstöð"
-                },
-                "railway/subway": {
-                    "name": "Neðanjarðarlest"
                 },
                 "railway/subway_entrance": {
                     "name": "Inngangur að neðanjarðarlest"
@@ -5469,9 +5487,6 @@
                 },
                 "railway/train_wash": {
                     "name": "Lestarvagnaþvottur"
-                },
-                "railway/tram": {
-                    "name": "Sporvagn"
                 },
                 "railway/tram_stop": {
                     "name": "Staðsetning stöðvunar sporvagna"
@@ -5647,23 +5662,14 @@
                 "shop/fashion": {
                     "name": "Tískuverslun"
                 },
-                "shop/fishmonger": {
-                    "name": "Fisksali"
-                },
                 "shop/florist": {
                     "name": "Blómabúð"
                 },
                 "shop/frame": {
                     "name": "Innrömmun"
                 },
-                "shop/frozen_food": {
-                    "name": "Frosin matvæli"
-                },
                 "shop/funeral_directors": {
                     "name": "Útfararheimili"
-                },
-                "shop/furnace": {
-                    "name": "Arinvöruverslun"
                 },
                 "shop/furniture": {
                     "name": "Húsgagnaverslun"

@@ -313,7 +313,6 @@
             "request_review": "Желим да неко провери моје измене.",
             "save": "Учитај",
             "cancel": "Откажи",
-            "changes": "{count} измена",
             "download_changes": "Преузми ОСМ датотеку са изменама",
             "warnings": "Упозорења",
             "modified": "Измењено",
@@ -394,12 +393,6 @@
             "locating": "Одређивање положаја, молимо сачекајте..."
         },
         "inspector": {
-            "zoom_to": {
-                "tooltip_feature": "Центрирај и увеличај мапу да се фокусираш на ово обележје.",
-                "tooltip_note": "Центрирај и увеличај мапу да се фокусираш на ову белешку.",
-                "tooltip_data": "Центрирај и увеличај мапу да се фокусираш на овај податак.",
-                "tooltip_issue": "Центрирај и увеличај мапу да се фокусираш на овај проблем."
-            },
             "show_more": "Прикажи још",
             "view_on_osm": "Прикажи на openstreetmap.org",
             "new_relation": "Нови однос...",
@@ -1403,9 +1396,6 @@
                         "yes": "да (неодређено)"
                     }
                 },
-                "elevation": {
-                    "label": "Надморска висина"
-                },
                 "email": {
                     "label": "Електронско писмо",
                     "placeholder": "example@example.com"
@@ -1591,7 +1581,6 @@
                     "label": "Натпис"
                 },
                 "internet_access": {
-                    "label": "Приступ Интернету",
                     "options": {
                         "no": "Не",
                         "terminal": "Терминал",
@@ -1599,9 +1588,6 @@
                         "wlan": "Бежични Интернет",
                         "yes": "Да"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Накнада за приступ интернету"
                 },
                 "junction_line": {
                     "options": {
@@ -2195,9 +2181,6 @@
                 "aerialway/cable_car": {
                     "name": "Жичара"
                 },
-                "aerialway/gondola": {
-                    "name": "Гондола"
-                },
                 "aeroway/aerodrome": {
                     "name": "Аеродром"
                 },
@@ -2478,9 +2461,6 @@
                 "amenity/school": {
                     "name": "Школско двориште"
                 },
-                "amenity/scrapyard": {
-                    "name": "Ауто-отпад"
-                },
                 "amenity/shelter": {
                     "name": "Склониште"
                 },
@@ -2507,9 +2487,6 @@
                 },
                 "amenity/studio": {
                     "name": "Студио"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Базен"
                 },
                 "amenity/taxi": {
                     "name": "Такси стајалиште"
@@ -3214,16 +3191,8 @@
                 "landuse/military/naval_base": {
                     "name": "Поморска база"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Коњички терен са препрекама",
-                    "terms": "терен са препрекама,коњички терен са препрекама"
-                },
                 "landuse/military/range": {
                     "name": "Војни полигон"
-                },
-                "landuse/military/training_area": {
-                    "name": "Тренажна област ",
-                    "terms": "тренажна област,тренажна зона,вежбалиште"
                 },
                 "landuse/orchard": {
                     "name": "Воћњак"
@@ -3359,9 +3328,6 @@
                     "name": "Базен"
                 },
                 "leisure/track/cycling": {
-                    "name": "Бициклистичка стаза"
-                },
-                "leisure/track/cycling_point": {
                     "name": "Бициклистичка стаза"
                 },
                 "leisure/water_park": {
@@ -3509,9 +3475,6 @@
                 },
                 "military/bunker": {
                     "name": "Војни бункер"
-                },
-                "military/checkpoint": {
-                    "name": "Контролна тачка"
                 },
                 "military/office": {
                     "name": "Војна канцеларија"
@@ -3693,26 +3656,8 @@
                 "railway/disused": {
                     "name": "Некоришћена железница"
                 },
-                "railway/funicular": {
-                    "name": "Успињача"
-                },
-                "railway/monorail": {
-                    "name": "Пруга са једним колосеком"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Уски колосек"
-                },
-                "railway/rail": {
-                    "name": "Шина"
-                },
-                "railway/subway": {
-                    "name": "Подземна железница"
-                },
                 "railway/subway_entrance": {
                     "name": "Улаз у подземну железницу"
-                },
-                "railway/tram": {
-                    "name": "Трамвај"
                 },
                 "relation": {
                     "name": "Однос"
@@ -3812,9 +3757,6 @@
                 },
                 "shop/fashion": {
                     "name": "Бутик"
-                },
-                "shop/fishmonger": {
-                    "name": "Рибарница"
                 },
                 "shop/florist": {
                     "name": "Цвећар"

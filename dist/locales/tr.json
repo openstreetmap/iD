@@ -389,7 +389,6 @@
             "request_review": "Birisinin yaptığım düzenlemeleri gözden geçirmesini isterim.",
             "save": "Yükle",
             "cancel": "İptal",
-            "changes": "{count} Değişiklik",
             "download_changes": "osmChange dosyasını indirin",
             "errors": "Hatalar",
             "warnings": "Uyarılar",
@@ -477,13 +476,6 @@
             "locating": "Buluyor, lütfen bekle..."
         },
         "inspector": {
-            "zoom_to": {
-                "title": "Buna yakınlaştır",
-                "tooltip_feature": "Bu özelliğe odaklanmak için haritayı ortala ve yaklaştır.",
-                "tooltip_note": "Bu nota odaklanmak için haritayı ortala ve yaklaştır.",
-                "tooltip_data": "Bu veriye odaklanmak için haritayı ortala ve yaklaştır.",
-                "tooltip_issue": "Bu soruna odaklanmak için haritayı ortala ve yaklaştır."
-            },
             "show_more": "Daha Fazla Göster",
             "view_on_osm": "OpenStreetMap.org sayfasında bak",
             "view_on_keepRight": "keepright.at sitesinde görüntüle",
@@ -756,10 +748,6 @@
             "on_wiki": "wiki.osm.org sitesinde {tag} ",
             "used_with": "{type} ile birlikte kullanılır"
         },
-        "zoom": {
-            "in": "Yakınlaştır",
-            "out": "Uzaklaştır"
-        },
         "cannot_zoom": "Bu modda daha fazla uzaklaşılamaz.",
         "full_screen": "Tam Ekran",
         "QA": {
@@ -835,8 +823,7 @@
                 "before_start_h": "Başlamadan önce",
                 "before_start": "Düzenlemeye başlamadan önce OpenStreetMap ve bu düzenleyiciye aşina olmanız gerekir. iD, OpenStreetMap'i düzenlemenin temellerini size öğretmej için bir gezinti içerir. Bu ekrandaki \"Gezintiyi Başlatınız\" tuşuna basarak öğreticiyi başlatabilirsiniz, sadece 15 dakika sürmektedir.",
                 "open_source_h": "Açık Kaynak",
-                "open_source": "iD düzenleyicisi işbirliğine dayalı bir açık kaynak projesidir ve şu anda  versiyon {version} kullanmaktasınız. Kaynak kodlar [on GitHub](https://github.com/openstreetmap/iD) erişime açıktır.",
-                "open_source_help": "iD'ye [translating] ile yardımcı olabilirsiniz (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "iD düzenleyicisi işbirliğine dayalı bir açık kaynak projesidir ve şu anda  versiyon {version} kullanmaktasınız. Kaynak kodlar [on GitHub](https://github.com/openstreetmap/iD) erişime açıktır."
             },
             "overview": {
                 "title": "Genel Bakış",
@@ -1889,9 +1876,6 @@
                     },
                     "placeholder": "Kablolu, Ray..."
                 },
-                "elevation": {
-                    "label": "Yükseklik"
-                },
                 "email": {
                     "label": "e-posta",
                     "placeholder": "ornek@adres.com"
@@ -2062,7 +2046,6 @@
                     "label": "Aralıklı"
                 },
                 "internet_access": {
-                    "label": "İnternet Bağlantısı",
                     "options": {
                         "no": "Hayır",
                         "terminal": "Bilgisayar",
@@ -2070,9 +2053,6 @@
                         "wlan": "Wifi",
                         "yes": "Evet"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "İnternet Erişim Ücreti"
                 },
                 "junction/ref_oneway": {
                     "label": "Kavşak Numarası"
@@ -2864,10 +2844,6 @@
                     "name": "Kayak Teleferiği",
                     "terms": "Kayak Teleferiği"
                 },
-                "aerialway/gondola": {
-                    "name": "Gondol Teleferik",
-                    "terms": "Gondol Teleferik"
-                },
                 "aerialway/goods": {
                     "name": "Taşıma Teleferiği",
                     "terms": "Taşıma Teleferiği, Mal Teleferiği"
@@ -3254,9 +3230,6 @@
                     "name": "Geri Dönüşüm Merkezi",
                     "terms": "Geri Dönüşüm Merkezi"
                 },
-                "amenity/register_office": {
-                    "name": "Nüfus Dairesi"
-                },
                 "amenity/restaurant": {
                     "name": "Lokanta",
                     "terms": "Lokanta, Restoran"
@@ -3320,9 +3293,6 @@
                     "name": "Okul",
                     "terms": "Okul, Okul Bahçesi"
                 },
-                "amenity/scrapyard": {
-                    "name": "Hurdalık"
-                },
                 "amenity/shelter": {
                     "name": "Barınak",
                     "terms": "Barınak"
@@ -3358,9 +3328,6 @@
                 "amenity/studio": {
                     "name": "Stüdyo",
                     "terms": "Stüdyo"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Yüzme Havuzu"
                 },
                 "amenity/taxi": {
                     "name": "Taksi Durağı",
@@ -4350,10 +4317,6 @@
                 "landuse": {
                     "name": "Arazi Kullanım Özelliği"
                 },
-                "landuse/allotments": {
-                    "name": "Hobi Bahçesi",
-                    "terms": "Hobi Bahçesi"
-                },
                 "landuse/aquaculture": {
                     "name": "Su Kültürü",
                     "terms": "Su Kültürü"
@@ -4441,17 +4404,9 @@
                     "name": "Deniz Üssü",
                     "terms": "Deniz Üssü"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Engelli Antreman Sahası",
-                    "terms": "Engelli Antreman Sahası"
-                },
                 "landuse/military/range": {
                     "name": "Atış Sahası",
                     "terms": "Atış Sahası, Poligon"
-                },
-                "landuse/military/training_area": {
-                    "name": "Antreman Sahası",
-                    "terms": "Antreman Sahası"
                 },
                 "landuse/orchard": {
                     "name": "Bağ",
@@ -4704,10 +4659,6 @@
                     "name": "Gazölçer",
                     "terms": "Gazölçer"
                 },
-                "man_made/groyne": {
-                    "name": "Kıyı Koruyucu Direk Şeridi",
-                    "terms": "Kıyı Koruyucu Direk Şeridi"
-                },
                 "man_made/lighthouse": {
                     "name": "Deniz Feneri",
                     "terms": "Deniz Feneri, Fener"
@@ -4788,9 +4739,6 @@
                 "man_made/works": {
                     "name": "Fabrika",
                     "terms": "Fabrika, Sanayi"
-                },
-                "military/checkpoint": {
-                    "name": "Kontrol Noktası"
                 },
                 "natural/bare_rock": {
                     "name": "Kayalık Bölge",
@@ -5258,28 +5206,12 @@
                     "name": "Kullanılmayan Demiryolu",
                     "terms": "Kullanılmayan Demiryolu"
                 },
-                "railway/funicular": {
-                    "name": "Kablolu Tren",
-                    "terms": "Kablolu Tren, Füniküler"
-                },
                 "railway/level_crossing": {
                     "name": "Hemzemin Geçit (Yol ile Kesişim)",
                     "terms": "Hemzemin Geçit (Yol ile Kesişim)"
                 },
-                "railway/monorail": {
-                    "name": "Tekray",
-                    "terms": "Tekray, Monoray"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Dar Demiryolu Geçidi",
-                    "terms": "Dar Demiryolu Geçidi"
-                },
                 "railway/platform": {
                     "name": "Tren Platformu"
-                },
-                "railway/rail": {
-                    "name": "Demiryolu",
-                    "terms": "Demiryolu"
                 },
                 "railway/signal": {
                     "name": "Demiryolu Sinyali"
@@ -5287,20 +5219,12 @@
                 "railway/station": {
                     "name": "Tren İstasyonu"
                 },
-                "railway/subway": {
-                    "name": "Metro",
-                    "terms": "Metro"
-                },
                 "railway/subway_entrance": {
                     "name": "Metro Girişi",
                     "terms": "Metro Girişi"
                 },
                 "railway/train_wash": {
                     "name": "Tren Yıkama"
-                },
-                "railway/tram": {
-                    "name": "Tramvay",
-                    "terms": "Tramvay"
                 },
                 "railway/yard": {
                     "name": "Demir Yolu Sahası"
@@ -5499,9 +5423,6 @@
                 "shop/fashion": {
                     "name": "Giyim Mağazası"
                 },
-                "shop/fishmonger": {
-                    "name": "Balıkçı"
-                },
                 "shop/florist": {
                     "name": "Çiçekçi",
                     "terms": "Çiçekçi"
@@ -5513,9 +5434,6 @@
                 "shop/funeral_directors": {
                     "name": "Cenaze Koordinatörü",
                     "terms": "Cenaze Koordinatörü"
-                },
-                "shop/furnace": {
-                    "name": "Soba Mağazası"
                 },
                 "shop/furniture": {
                     "name": "Mobilya Mağazası",

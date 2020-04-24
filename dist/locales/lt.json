@@ -393,7 +393,6 @@
             "request_review": "Aš norėčiau, kad kažkas patikrintų mano keitimus.",
             "save": "Įkelti",
             "cancel": "Atšaukti",
-            "changes": "{count} Pakeitimai",
             "download_changes": "Atsiųsti osmChange rinkmeną",
             "errors": "Klaidos",
             "warnings": "Įspėjimai",
@@ -480,8 +479,7 @@
         },
         "inspector": {
             "zoom_to": {
-                "key": "Z",
-                "title": "Priartinti prie šito"
+                "key": "Z"
             },
             "show_more": "Rodyti daugiau",
             "view_on_osm": "Žiūrėti svetainėje openstreetmap.org",
@@ -752,10 +750,6 @@
             "on_wiki": "{tag} svetainėje wiki.osm.org",
             "used_with": "naudojama su {type}"
         },
-        "zoom": {
-            "in": "Priartinti",
-            "out": "Atitolinti"
-        },
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
         "QA": {
@@ -1002,7 +996,8 @@
             },
             "outdated_tags": {
                 "title": "Nebegaliojančios Žymės",
-                "message": "{feature} turi nebegaliojančių žymių",
+                "message": "iD programuotojų, bet ne OpenStreetMap nuomone, {feature} turi nebegaliojančių žymių. Nieko nekeiskite!",
+                "reference": "iD programuotojai daro savo sprendimus dėl žymų nesitardami su OpenStreetMap bendruomene.",
                 "incomplete": {
                     "message": "{feature} turi neužbaigtų žymių"
                 }
@@ -1034,7 +1029,7 @@
                     "title": "Tęsti piešimą nuo pabaigos"
                 },
                 "ignore_issue": {
-                    "title": "Ignoruoti šią problemą"
+                    "title": "Viskas gerai su šiomis žymomis"
                 },
                 "merge_points": {
                     "title": "Sujungti šiuos taškus"
@@ -1050,6 +1045,9 @@
                 },
                 "tag_as_disconnected": {
                     "title": "Žymėti kaip atjungtą"
+                },
+                "upgrade_tags": {
+                    "title": "iD blogai veikia, NESPAUSKITE"
                 }
             }
         },
@@ -1823,9 +1821,6 @@
                     },
                     "placeholder": "Kontaktinė linija, elektrifikuoti bėgiai..."
                 },
-                "elevation": {
-                    "label": "Aukštis"
-                },
                 "email": {
                     "label": "El. paštas",
                     "placeholder": "pavyzdys@pavyzdys.lt"
@@ -2019,7 +2014,6 @@
                     "label": "Nepastovus"
                 },
                 "internet_access": {
-                    "label": "Interneto prieiga",
                     "options": {
                         "no": "Ne",
                         "terminal": "Terminalas",
@@ -2027,9 +2021,6 @@
                         "wlan": "Belaidis internetas",
                         "yes": "Taip"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Nemokama interneto prieiga"
                 },
                 "interval": {
                     "label": "Intervalas"
@@ -2925,10 +2916,6 @@
                     "name": "Funikulierius",
                     "terms": "funikulierius,keltuvas"
                 },
-                "aerialway/gondola": {
-                    "name": "Gondola",
-                    "terms": "Gondola"
-                },
                 "aeroway/aerodrome": {
                     "name": "Oro uostas",
                     "terms": "Oro uostas"
@@ -3164,18 +3151,12 @@
                 "amenity/recycling_centre": {
                     "name": "Rūšiavimo centras"
                 },
-                "amenity/register_office": {
-                    "name": "Registravimo biūras"
-                },
                 "amenity/restaurant": {
                     "name": "Restoranas",
                     "terms": "rastoranas"
                 },
                 "amenity/school": {
                     "name": "Mokyklos kiemas"
-                },
-                "amenity/scrapyard": {
-                    "name": "Metalo laužas"
                 },
                 "amenity/shelter": {
                     "name": "Pastogė",
@@ -3198,9 +3179,6 @@
                 "amenity/studio": {
                     "name": "Studija",
                     "terms": "studija"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Baseinas"
                 },
                 "amenity/taxi": {
                     "name": "Taksi stendas",
@@ -3803,9 +3781,6 @@
                     "name": "Jungtis",
                     "terms": "jungtis,sankryža"
                 },
-                "landuse/allotments": {
-                    "name": "Bendruomenės sodas"
-                },
                 "landuse/aquaculture": {
                     "name": "Akvakultūra"
                 },
@@ -4263,30 +4238,11 @@
                     "name": "Nebenaudojamas geležinkelis",
                     "terms": "nenaudojamas geležinkelis,nenaudojami bėgiai"
                 },
-                "railway/funicular": {
-                    "name": "Keltuvas",
-                    "terms": "Funikulierius"
-                },
                 "railway/level_crossing": {
                     "name": "Geležinkelio Pervaža (Kelias)"
                 },
-                "railway/monorail": {
-                    "name": "Vienbėgis geležinkelis"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Siaurukas",
-                    "terms": "siaurukas"
-                },
-                "railway/rail": {
-                    "name": "Gelžkelis",
-                    "terms": "geležinkelis,gelžkelis"
-                },
                 "railway/station": {
                     "name": "Traukinių stotis"
-                },
-                "railway/subway": {
-                    "name": "Metro",
-                    "terms": "metro"
                 },
                 "railway/subway_entrance": {
                     "name": "Metro įėjimas",
@@ -4294,10 +4250,6 @@
                 },
                 "railway/train_wash": {
                     "name": "Traukinių plovykla"
-                },
-                "railway/tram": {
-                    "name": "Tramvajus",
-                    "terms": "tramvajus"
                 },
                 "relation": {
                     "name": "Ryšys",
@@ -4445,9 +4397,6 @@
                 "shop/fashion": {
                     "name": "Mados parduotuvė"
                 },
-                "shop/fishmonger": {
-                    "name": "Žuvų pardavėjas"
-                },
                 "shop/florist": {
                     "name": "Gėlės"
                 },
@@ -4456,9 +4405,6 @@
                 },
                 "shop/funeral_directors": {
                     "name": "Laidojimo namai"
-                },
-                "shop/furnace": {
-                    "name": "Krosnių parduotuvė"
                 },
                 "shop/furniture": {
                     "name": "Baldų parduotuvė"

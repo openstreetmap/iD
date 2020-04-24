@@ -8,7 +8,10 @@
             "zoom_to": "zoom til",
             "copy": "kopier",
             "view_on": "vis på {domain}",
-            "favorite": "favorit"
+            "favorite": "favorit",
+            "list": "list",
+            "text": "tekst",
+            "deselect": "fravælg"
         },
         "toolbar": {
             "inspect": "Inspicer",
@@ -21,6 +24,7 @@
             "add_feature": {
                 "title": "Tilføj et kortobjekt",
                 "description": "Søg efter kortobjekter at tilføje til kortet",
+                "key": "Tab",
                 "result": "{count} resultat",
                 "results": "{count} resultater"
             },
@@ -46,7 +50,8 @@
                 "title": "Bemærkning",
                 "label": "Tilføj bemærkning",
                 "description": "Fundet en fejl? Læg en bemærkning til andre bidragsydere.",
-                "tail": "Klik på kortet for at tilføje en bemærkning."
+                "tail": "Klik på kortet for at tilføje en bemærkning.",
+                "key": "N"
             },
             "add_preset": {
                 "title": "Tilføj {feature}"
@@ -102,7 +107,38 @@
             },
             "circularize": {
                 "title": "Cirkulariser",
-                "key": "O"
+                "description": {
+                    "single": "Gør dette objekt rundt.",
+                    "multiple": "Lav disse objekter runde."
+                },
+                "key": "O",
+                "annotation": {
+                    "single": "Lavede objektet rundt.",
+                    "multiple": "Lavede objekterne runde."
+                },
+                "multiple_blockers": {
+                    "multiple": "Disse kan ikke gøres cirkulære af flere grunde."
+                },
+                "not_closed": {
+                    "single": "Dette kan ikke gøres cirkulært, da det ikke er en sløjfe.",
+                    "multiple": "Disse kan ikke gøres cirkulære, da de ikke er sløjfer."
+                },
+                "too_large": {
+                    "single": "Dette kan ikke gøres cirkulært, da ikke nok af det er synligt i den nuværende visning.",
+                    "multiple": "Disse kan ikke gøres cirkulære, da ikke nok af dem er synlige i den nuværende visning."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette kan ikke gøres cirkulært, da det er forbundet til et skjult kortobjekt.",
+                    "multiple": "Disse kan ikke gøres cirkulære, da de er forbundne til skjulte kortobjekter."
+                },
+                "not_downloaded": {
+                    "single": "Dette kan ikke gøres cirkulært, da dele af det endnu ikke er hentet.",
+                    "multiple": "Disse kan ikke gøres cirkulære, da dele af dem endnu ikke er hentet."
+                },
+                "already_circular": {
+                    "single": "Dette kan ikke gøres mere cirkulært end det allerede er.",
+                    "multiple": "Disse kan ikke gøres mere cirkulære end de allerede er."
+                }
             },
             "orthogonalize": {
                 "title": "Gør retvinklet",
@@ -116,6 +152,7 @@
                         "multiple": "Gør disse kortobjekters hjørner retvinklede."
                     }
                 },
+                "key": "Q",
                 "annotation": {
                     "corner": {
                         "single": "Gjorde et hjørne retvinklet.",
@@ -441,6 +478,7 @@
             },
             "extract": {
                 "title": "Frigør",
+                "key": "E",
                 "description": {
                     "vertex": {
                         "single": "Frigør dette punkt fra dets overordnede-linje/område."
@@ -519,7 +557,8 @@
             "translate": "Oversæt",
             "localized_translation_label": "Flersprogligt navn",
             "localized_translation_language": "Vælg sprog",
-            "localized_translation_name": "Navn"
+            "localized_translation_name": "Navn",
+            "language_and_code": "{language} ({code})"
         },
         "zoom_in_edit": "Zoom ind for at redigere",
         "login": "Log ind",
@@ -551,7 +590,7 @@
             "request_review": "Jeg ønsker at en anden bruger kontrollerer mine ændringer.",
             "save": "Upload",
             "cancel": "Annuller",
-            "changes": "{count} ændringer",
+            "changes": "Ændringer ({count})",
             "download_changes": "Hent osmChange fil",
             "errors": "Fejl",
             "warnings": "Advarsler",
@@ -639,21 +678,25 @@
             "no_results_worldwide": "Ingen søgeresultater fundet"
         },
         "geolocate": {
+            "key": "L",
             "title": "Vis hvor jeg er",
             "locating": "Lokaliserer, vent venligst..."
         },
         "inspector": {
             "zoom_to": {
                 "key": "Z",
-                "title": "Zoom hertil",
-                "tooltip_feature": "Centrer kortet på og zoom ind til dette kortobjekt.",
-                "tooltip_note": "Centrer kortet på og zoom ind til denne bemærkning.",
-                "tooltip_data": "Centrer kortet på og zoom ind til dette data.",
-                "tooltip_issue": "Centrer kortet på og zoom ind til dette problem."
+                "title": "Zoom til markering"
             },
             "show_more": "Vis mere",
             "view_on_osm": "Se på openstreetmap.org",
+            "view_on_osmose": "Vis hos osmose.openstreetmap.fr",
             "view_on_keepRight": "Vis på keepright.at",
+            "feature_type": "Kortobjekt-type",
+            "fields": "Felter",
+            "tags_count": "Tags ({count})",
+            "members_count": "Medlemmer ({count})",
+            "relations_count": "Relationer ({count})",
+            "features_count": "Kortobjekter ({count})",
             "add_to_relation": "Tilføj til en relation",
             "new_relation": "Ny relation...",
             "choose_relation": "Vælg den overordnede relation",
@@ -664,16 +707,22 @@
             "edit_reference": "rediger/oversæt",
             "wiki_reference": "Vis dokumentation",
             "wiki_en_reference": "Vis dokumentation på engelsk",
+            "key_value": "key=value",
+            "multiple_values": "Flere værdier",
+            "multiple_types": "Flere typer",
+            "unshared_value_tooltip": "ikke anvendt af alle objekter",
             "hidden_preset": {
                 "manual": "{features} er skjulte. Indstil visning i Kortdata-fanen.",
                 "zoom": "{features} er skjulte. Zoom ind for at se dem."
             },
+            "back_tooltip": "Ændr objektets type",
             "remove": "Fjern",
             "search": "Søg",
             "unknown": "Ukendt",
             "incomplete": "<ikke downloadet>",
             "feature_list": "Find objekter",
             "edit": "Rediger objekt",
+            "edit_features": "Rediger kortobjekter",
             "check": {
                 "yes": "Ja",
                 "no": "Nej",
@@ -692,7 +741,10 @@
             "way": "Vej",
             "relation": "Relation",
             "location": "Sted",
-            "add_fields": "Tilføj felt:"
+            "add_fields": "Tilføj felt:",
+            "lock": {
+                "suggestion": "Feltet \"{label}\" er låst da der er et Wikidata-tag. Du kan slette det eller redigere tags i \"Tags\"-afsnittet."
+            }
         },
         "background": {
             "title": "Baggrund",
@@ -741,7 +793,11 @@
                     "title": "KeepRight-problemer"
                 },
                 "improveOSM": {
+                    "tooltip": "improveosm.org har fundet ud af at der mangler data her",
                     "title": "ImproveOSM-problemer"
+                },
+                "osmose": {
+                    "title": "Osmose problemer"
                 },
                 "custom": {
                     "tooltip": "Træk og slip en datafil ind på siden, eller klik på knappen for opsætning",
@@ -750,6 +806,9 @@
                 }
             },
             "style_options": "Visningsindstillinger",
+            "highlight_edits": {
+                "key": "G"
+            },
             "map_features": "Kortobjekter",
             "autohidden": "Disse objekter er automatisk blevet skjult, da for mange ellers ville blive vist på skærmen.\nDu kan zoome ind for at redigere dem.",
             "osmhidden": "Disse kortobjekter er blevet automatisk gemt fordi OpenStreetMap-laget er gemt."
@@ -861,7 +920,6 @@
             "custom_background": {
                 "tooltip": "Rediger brugerdefineret baggrund",
                 "header": "Indstillinger for brugerdefineret baggrund",
-                "instructions": "Indtast en flise-URL-skabelon. Gyldige erstatninger er:\n   {zoom} eller {z}, {x}, {y} for Z/X/Y-fliseskema\n   {-y} or {ty} for spejlede Y-koordinater i TMS-stil\n   {u} for quadfliseskema\n   {switch:a,b,c} for DNS-server multiplexing\n\nEksempel:\n{example}",
                 "template": {
                     "placeholder": "Indtast en URL-skabelon"
                 }
@@ -883,6 +941,7 @@
         "preferences": {
             "title": "Præferencer",
             "description": "Præferencer",
+            "key": "P",
             "privacy": {
                 "title": "Privatliv",
                 "privacy_link": "Se privatlivspolitik for iD",
@@ -935,6 +994,9 @@
             "just_edited": "Du har lige redigeret OpenStreetMap!",
             "thank_you": "Mange tak for at du forbedrede kortet.",
             "thank_you_location": "Mange tak for at du forbedrede kortet omkring {where}.",
+            "thank_you_where": {
+                "separator": ", "
+            },
             "help_html": "Dine ændringer burde dukke op på OpenStreetMap indenfor få minutter. Det kan tage længere for andre kort at blive opdateret.",
             "help_link_text": "Detaljer",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F",
@@ -980,6 +1042,13 @@
         "cannot_zoom": "Kan ikke zoome længere ud i nuværende tilstand.",
         "full_screen": "Skift fuldskærmstilstand",
         "QA": {
+            "osmose": {
+                "title": "Osmose problemer",
+                "detail_title": "Detaljer",
+                "elems_title": "Kortobjekter",
+                "fix_title": "Ret retningslinjer",
+                "trap_title": "Almindelige fejltagelser"
+            },
             "improveOSM": {
                 "title": "ImproveOSM-detektering",
                 "geometry_types": {
@@ -1011,11 +1080,14 @@
                 }
             },
             "keepRight": {
+                "title": "KeepRight",
                 "detail_description": "Beskrivelse",
                 "comment": "Kommentar",
                 "comment_placeholder": "Indtast en kommentar der deles med andre brugere.",
+                "close": "Luk (problem løst)",
                 "save_comment": "Gem kommentar",
                 "close_comment": "Luk og Kommentér",
+                "ignore_comment": "Fjern og kommenter",
                 "error_parts": {
                     "this_node": "denne node",
                     "this_way": "denne vej",
@@ -1160,23 +1232,42 @@
                         "title": "Selvkrydsende vej",
                         "description": "Der er et ikke nærmere specificeret problem med selvkrydsende veje."
                     },
+                    "230": {
+                        "title": "Lag konflikt"
+                    },
+                    "270": {
+                        "title": "Usædvanlig motorvejsforbindelse"
+                    },
                     "280": {
                         "title": "Afgrænsningsproblem",
                         "description": "Der er et uspecificeret problem med denne afgrænsning."
+                    },
+                    "281": {
+                        "description": "{var1} har intet navn."
                     },
                     "290": {
                         "title": "Begrænsningsproblem",
                         "description": "Der er et uspecificeret problem med denne begrænsning."
                     },
+                    "300": {
+                        "title": "Manglende maxspeed"
+                    },
                     "310": {
                         "title": "Rundkørselsproblem",
                         "description": "Der er et uspecificeret problem med denne rundkørsel."
+                    },
+                    "311": {
+                        "title": "Rundkørsel er ikke lukket loop"
+                    },
+                    "400": {
+                        "title": "Geometri problemer"
                     }
                 }
             }
         },
         "streetside": {
             "tooltip": "Gadefotoer fra Microsoft",
+            "title": "Bing Streetside",
             "report": "Rapporter en privatlivsbekymring angående dette billede",
             "view_on_bing": "Vis på Bing Maps",
             "hires": "Høj opløsning"
@@ -1188,11 +1279,40 @@
             "title": "Kortobjekter",
             "tooltip": "Kortobjekter fra Mapillary",
             "request_data": "Hent data",
+            "marking": {
+                "discrete": {
+                    "crosswalk_zebra": "fodgængerfelt"
+                }
+            },
             "object": {
+                "banner": "banner",
+                "bench": "bænk",
+                "bike_rack": "cykelstativ",
+                "billboard": "billboard",
+                "catch_basin": "Regnvandsrist",
+                "cctv_camera": "Overvågningskamera",
+                "fire_hydrant": "Brandhane",
+                "mailbox": "postkasse",
+                "manhole": "Brønddæksel",
+                "phone_booth": "Telefonboks",
+                "sign": {
+                    "advertisement": "reklame",
+                    "information": "informationsskilt",
+                    "store": "Butiksskilt"
+                },
+                "street_light": "Gadelys",
+                "support": {
+                    "utility_pole": "lygtepæl"
+                },
+                "traffic_cone": "trafikkegle",
+                "traffic_light": {
+                    "cyclists": "cyklist trafiklys"
+                },
                 "trash_can": "skraldespand"
             }
         },
         "mapillary": {
+            "title": "Mapillary",
             "signs": {
                 "tooltip": "Trafikskilte fra Mapillary"
             },
@@ -1202,6 +1322,7 @@
             "tooltip": "Gadefoter fra OpenStreetCam"
         },
         "openstreetcam": {
+            "title": "OpenStreetCam",
             "view_on_openstreetcam": "Vis dette billede på OpenStreetCam"
         },
         "note": {
@@ -1242,8 +1363,7 @@
                 "before_start_h": "Før du starter",
                 "before_start": "Du bør gøre dig bekendt med OpenStreetMap og dette redigeringsværktøj før du begynder med egentlig redigering af kortet. iD indeholder en såkaldt Gennemgang som lærer dig de basale ting omkring redigering af OpenStreetMap. Klik på \"Start Gennemgang\" på denne side for at starte vejledningen - det tager kun omkring et kvarter.",
                 "open_source_h": "Open Source - Åben kildekode",
-                "open_source": "Dette iD-redigeringsværktøj udvikles i et fællesskabsdrevet open source-projekt og du anvender lige nu version {version}. Kildekoden er tilgængelig [på GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Du kan hjælpe iD ved at [oversætte](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) eller [rapportere fejl](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "Dette iD-redigeringsværktøj udvikles i et fællesskabsdrevet open source-projekt og du anvender lige nu version {version}. Kildekoden er tilgængelig [på GitHub](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Overblik",
@@ -1311,6 +1431,7 @@
             "areas": {
                 "title": "Områder",
                 "intro": "*Områder* bruges til at indikere afgrænsningen af større objekter såsom søer, bygninger eller boligområder. Områder bør kortlægges langs kanten af det fysiske objekt de repræsenter, eksempelvis for en bygning langs dens fundament.",
+                "point_or_area_h": "Punkter eller Områder",
                 "square_area_h": "Gør hjørner retvinklede"
             },
             "relations": {
@@ -1331,6 +1452,12 @@
                 "turn_restriction_editing": "I \"Svingbegrænsninger\"-feltet klik for at vælge en \"fra\"-vej og se hvilke sving der er tilladt eller begrænset ind på \"til\"-vejene. Du kan klikke på sving-ikonerne for at skifte mellem tilladt og begrænset. iD opretter relationer automatisk og tildeler fra, via og til-rollerne ud fra dine valg. ",
                 "route_h": "Ruter"
             },
+            "notes": {
+                "title": "Noter",
+                "add_note_h": "Tilføjer noter",
+                "update_note_h": "Lukker, genåbner og kommenterer",
+                "save_note_h": "Gemmer noter"
+            },
             "imagery": {
                 "title": "Luftfoto i baggrunden",
                 "intro": "Luftfotoet der vises i baggrunden bagved kortet er en vigtig ressource under redigering af kortet. Dette kan bestå af ortografiske fotoer opsamlet fra satellitter, fly eller droner, eller det kan være indskannede historiske kort eller andre frit tilgængelige kildedata.",
@@ -1342,6 +1469,9 @@
             },
             "streetlevel": {
                 "intro": "Gadefotoer er brugbare til kortlægning af trafikskilte, forretninger og andre detaljer der ikke kan ses fra satellit og ortografiske-fotoer. iD-værktøjet understøtter gadefotoer fra [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), og [OpenStreetCam](https://www.openstreetcam.org)."
+            },
+            "qa": {
+                "title": "Kvalitetssikring"
             },
             "field": {
                 "restrictions": {
@@ -1384,6 +1514,7 @@
         },
         "issues": {
             "title": "Problemer",
+            "key": "I",
             "list_title": "Problemer ({count})",
             "errors": {
                 "list_title": "Fejl ({count})"
@@ -1395,7 +1526,11 @@
                 "title": "Regler"
             },
             "user_resolved_issues": "Problemer løst af dine redigeringer",
+            "warnings_and_errors": "Advarsler og fejl",
             "no_issues": {
+                "message": {
+                    "everything": "Alting ser fint ud"
+                },
                 "hidden_issues": {
                     "none": "Detekterede problemer vil blive vist her",
                     "elsewhere": "Andre problemer: {count}",
@@ -1445,15 +1580,32 @@
                     "reference": "Bygninger bør ikke skære hinanden medmindre de er i forskellige lag."
                 }
             },
+            "private_data": {
+                "title": "Privat information"
+            },
             "impossible_oneway": {
                 "tip": "Find rutningsproblemer med ensrettede kortobjekter"
             },
             "fix": {
+                "add_a_bridge": {
+                    "title": "Tilføj en bro",
+                    "annotation": "Tilføjede en bro."
+                },
                 "extract_point": {
                     "title": "Frigør dette punkt"
                 },
                 "ignore_issue": {
                     "title": "Ignorer dette problem"
+                },
+                "remove_tag": {
+                    "title": "Fjern tag",
+                    "annotation": "Fjernede tag"
+                },
+                "remove_tags": {
+                    "title": "Fjern tags"
+                },
+                "remove_the_name": {
+                    "title": "Fjern navnet"
                 },
                 "reverse_feature": {
                     "title": "Vend dette kortobjekt"
@@ -1960,8 +2112,20 @@
                         "motor_vehicle": "Motorkøretøjer"
                     }
                 },
+                "access_aisle": {
+                    "label": "Type"
+                },
                 "access_simple": {
                     "label": "Tilladt adgang"
+                },
+                "addr/interpolation": {
+                    "label": "Type",
+                    "options": {
+                        "all": "Alle",
+                        "alphabetic": "Alfabetisk",
+                        "even": "Lige",
+                        "odd": "Ulige"
+                    }
                 },
                 "address": {
                     "label": "Adresse",
@@ -2078,6 +2242,14 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "baby_feeding": {
+                    "options": {
+                        "no": "Ingen"
+                    }
+                },
+                "baby_seat": {
+                    "label": "Babysæde"
+                },
                 "backrest": {
                     "label": "Ryglæn"
                 },
@@ -2113,6 +2285,13 @@
                 "bin": {
                     "label": "Skraldespand"
                 },
+                "blind": {
+                    "options": {
+                        "limited": "Begrænset",
+                        "no": "Nej",
+                        "yes": "Ja"
+                    }
+                },
                 "blood_components": {
                     "label": "Blodkomponenter",
                     "options": {
@@ -2124,6 +2303,15 @@
                 },
                 "board_type": {
                     "label": "Type"
+                },
+                "bollard": {
+                    "label": "Type"
+                },
+                "booth": {
+                    "label": "Begge"
+                },
+                "bottle": {
+                    "label": "Flaskepåfyldning"
                 },
                 "boules": {
                     "label": "Type"
@@ -2141,11 +2329,26 @@
                     "label": "Type",
                     "placeholder": "Standard"
                 },
+                "bridge/support": {
+                    "label": "Type"
+                },
                 "building": {
                     "label": "Bygning"
                 },
+                "building/levels": {
+                    "label": "Etager",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/levels/underground": {
+                    "label": "Underjordiske etager",
+                    "placeholder": "2, 4, 6..."
+                },
                 "building/levels_building": {
-                    "label": "Antal bygningsetager"
+                    "label": "Antal bygningsetager",
+                    "placeholder": "2, 4, 6..."
+                },
+                "building/material": {
+                    "label": "Materiale"
                 },
                 "building_area": {
                     "label": "Bygning"
@@ -2179,6 +2382,19 @@
                 "castle_type": {
                     "label": "Type"
                 },
+                "charge_fee": {
+                    "label": "Entre-beløb",
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                },
+                "charge_toll": {
+                    "placeholder": "1 EUR, 5 USD, 10 JPY…"
+                },
+                "check_date": {
+                    "placeholder": "ÅÅÅÅ-MM-DD"
+                },
+                "circumference": {
+                    "placeholder": "1 m, 20 cm, 30 in…"
+                },
                 "clothes": {
                     "label": "Beklædning"
                 },
@@ -2188,6 +2404,9 @@
                 "collection_times": {
                     "label": "Indsamlingstidspunkter"
                 },
+                "colour": {
+                    "label": "Farve"
+                },
                 "comment": {
                     "label": "Kommentar til ændringssæt",
                     "placeholder": "Kort beskrivelse af dine bidrag (påkrævet)"
@@ -2196,6 +2415,9 @@
                     "label": "Kommunikationstype"
                 },
                 "construction": {
+                    "label": "Type"
+                },
+                "consulate": {
                     "label": "Type"
                 },
                 "contact/webcam": {
@@ -2215,6 +2437,12 @@
                 },
                 "country": {
                     "label": "Land"
+                },
+                "country_flag": {
+                    "label": "Landeflag"
+                },
+                "couplings": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "covered": {
                     "label": "Overdækket"
@@ -2302,8 +2530,21 @@
                 "denotation": {
                     "label": "Betegnelse"
                 },
+                "departures_board": {
+                    "options": {
+                        "no": "Ingen",
+                        "timetable": "Tidsplan",
+                        "yes": "Ja"
+                    }
+                },
+                "depth": {
+                    "label": "Dybde (meter)"
+                },
                 "description": {
                     "label": "Beskrivelse"
+                },
+                "design": {
+                    "label": "Design"
                 },
                 "destination_oneway": {
                     "label": "Destinationer"
@@ -2311,6 +2552,16 @@
                 "devices": {
                     "label": "Enheder",
                     "placeholder": "1, 2, 3..."
+                },
+                "diameter": {
+                    "label": "Diameter",
+                    "placeholder": "5 mm, 10 cm, 15 in…"
+                },
+                "diet_multi": {
+                    "label": "Diæt type"
+                },
+                "diplomatic": {
+                    "label": "Type"
                 },
                 "direction": {
                     "label": "Retning (grader med uret)",
@@ -2360,8 +2611,30 @@
                 "distance": {
                     "label": "Afstand"
                 },
+                "disused/railway": {
+                    "label": "Type"
+                },
+                "disused/shop": {
+                    "label": "Type"
+                },
                 "dock": {
                     "label": "Type"
+                },
+                "dog": {
+                    "label": "Hunde",
+                    "options": {
+                        "no": "Ikke tilladt",
+                        "yes": "Tilladt"
+                    }
+                },
+                "door": {
+                    "label": "Dør"
+                },
+                "door_type": {
+                    "label": "Type"
+                },
+                "drink_multi": {
+                    "label": "Drinks"
                 },
                 "drive_through": {
                     "label": "Gennemkørsel - uden stop"
@@ -2380,9 +2653,6 @@
                     },
                     "placeholder": "Køreledning, elektrificeret jernbane"
                 },
-                "elevation": {
-                    "label": "Højde over havet"
-                },
                 "email": {
                     "label": "E-mail",
                     "placeholder": "example@example.com"
@@ -2391,8 +2661,17 @@
                     "label": "Type",
                     "placeholder": "Standard"
                 },
+                "embassy": {
+                    "label": "Type"
+                },
                 "emergency": {
                     "label": "Skadestue"
+                },
+                "emergency_combo": {
+                    "label": "Type"
+                },
+                "enforcement": {
+                    "label": "Type"
                 },
                 "entrance": {
                     "label": "Type"
@@ -2413,12 +2692,22 @@
                 "fence_type": {
                     "label": "Type"
                 },
+                "fire_hydrant/diameter": {
+                    "label": "Diameter (mm, in, eller bogstaver)"
+                },
+                "fire_hydrant/pressure": {
+                    "label": "Tryk (i bar)"
+                },
                 "fire_hydrant/type": {
+                    "label": "Udformning",
                     "options": {
                         "pillar": "Søjle/overjordisk",
                         "underground": "Underjordisk",
                         "wall": "Mur"
                     }
+                },
+                "fireplace": {
+                    "label": "Ildsted"
                 },
                 "fitness_station": {
                     "label": "Udstyrstype"
@@ -2433,6 +2722,9 @@
                     "label": "Type",
                     "placeholder": "Standard"
                 },
+                "fountain": {
+                    "label": "Type"
+                },
                 "frequency": {
                     "label": "Operationel frekvens"
                 },
@@ -2444,6 +2736,9 @@
                 },
                 "fuel_multi": {
                     "label": "Benzintyper"
+                },
+                "gambling": {
+                    "label": "Spil"
                 },
                 "gauge": {
                     "label": "Sporvidde"
@@ -2476,6 +2771,12 @@
                 "grape_variety": {
                     "label": "Vinsorteliste"
                 },
+                "group_only": {
+                    "label": "Kun grupper"
+                },
+                "guest_house": {
+                    "label": "Type"
+                },
                 "handicap": {
                     "label": "Handikap",
                     "placeholder": "1-18"
@@ -2484,6 +2785,7 @@
                     "label": "Gelænder"
                 },
                 "hashtags": {
+                    "label": "Hashtags",
                     "placeholder": "#eksempel"
                 },
                 "healthcare": {
@@ -2527,8 +2829,26 @@
                         "undefined": "Nej"
                     }
                 },
+                "horse_riding": {
+                    "options": {
+                        "horse_riding": "Ja",
+                        "undefined": "Nej"
+                    }
+                },
+                "horse_stables": {
+                    "options": {
+                        "stables": "Ja",
+                        "undefined": "Nej"
+                    }
+                },
                 "hot_water": {
                     "label": "Varmt vand"
+                },
+                "iata": {
+                    "label": "IATA lufthavnskode"
+                },
+                "icao": {
+                    "label": "ICAO lufthavnskode"
                 },
                 "incline": {
                     "label": "Stigning"
@@ -2543,6 +2863,12 @@
                 "indoor": {
                     "label": "Indendørs"
                 },
+                "indoor_type": {
+                    "label": "Type"
+                },
+                "industrial": {
+                    "label": "Type"
+                },
                 "information": {
                     "label": "Type"
                 },
@@ -2552,8 +2878,10 @@
                 "intermittent": {
                     "label": "Sporadisk"
                 },
+                "intermittent_yes": {
+                    "label": "Sporadisk"
+                },
                 "internet_access": {
-                    "label": "Internetadgang",
                     "options": {
                         "no": "Nej",
                         "terminal": "Terminal",
@@ -2562,14 +2890,29 @@
                         "yes": "Ja"
                     }
                 },
-                "internet_access/fee": {
-                    "label": "Internet gebyr"
+                "internet_access/ssid": {
+                    "label": "Wi-Fi netværksnavn"
+                },
+                "interval": {
+                    "label": "Interval"
                 },
                 "junction/ref_oneway": {
                     "label": "Vejkrydsnummer"
                 },
+                "junction_line": {
+                    "label": "Vejfletning",
+                    "options": {
+                        "roundabout": "Rundkørsel"
+                    }
+                },
                 "kerb": {
                     "label": "Kantsten"
+                },
+                "kerb/height": {
+                    "label": "Højde"
+                },
+                "kneipp_water_cure_multi": {
+                    "label": "Bassintype"
                 },
                 "label": {
                     "label": "Opmærkning"
@@ -2588,7 +2931,8 @@
                     "label": "Sprog"
                 },
                 "layer": {
-                    "label": "Lag"
+                    "label": "Lag",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Bladcyklus",
@@ -2635,11 +2979,27 @@
                 "level": {
                     "label": "Etage"
                 },
+                "level_semi": {
+                    "label": "Etager"
+                },
+                "liaison": {
+                    "label": "Type"
+                },
                 "lit": {
                     "label": "Gadebelysning"
                 },
                 "location": {
                     "label": "Lokalitet"
+                },
+                "location_pool": {
+                    "label": "Lokalitet",
+                    "options": {
+                        "indoor": "Indendørs",
+                        "outdoor": "Udendørs"
+                    }
+                },
+                "lock": {
+                    "label": "Lås"
                 },
                 "man_made": {
                     "label": "Type"
@@ -2653,6 +3013,18 @@
                 "map_type": {
                     "label": "Type"
                 },
+                "mapillary": {
+                    "label": "Mapillary billede ID"
+                },
+                "marker": {
+                    "label": "Type"
+                },
+                "material": {
+                    "label": "Materiale"
+                },
+                "max_age": {
+                    "label": "Max alder"
+                },
                 "maxheight": {
                     "label": "Maksimal højde",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
@@ -2662,7 +3034,8 @@
                     "placeholder": "40, 50, 60..."
                 },
                 "maxspeed/advisory": {
-                    "label": "Anbefalet fartgrænse"
+                    "label": "Anbefalet fartgrænse",
+                    "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
                     "label": "Max tid"
@@ -2677,6 +3050,15 @@
                 },
                 "memorial": {
                     "label": "Type"
+                },
+                "microbrewery": {
+                    "label": "Mikrobryggeri"
+                },
+                "min_age": {
+                    "label": "Minimumsalder"
+                },
+                "minspeed": {
+                    "placeholder": "20, 30, 40..."
                 },
                 "mtb/scale": {
                     "label": "Sværhedsgrad for mountainbike",
@@ -2714,6 +3096,9 @@
                     },
                     "placeholder": "0, 1, 2, 3..."
                 },
+                "museum": {
+                    "label": "Type"
+                },
                 "name": {
                     "label": "Navn",
                     "placeholder": "Mest kendte navn (hvis noget)"
@@ -2724,7 +3109,11 @@
                 "network": {
                     "label": "Netværk"
                 },
+                "network/type": {
+                    "label": "Netværkstype"
+                },
                 "network_bicycle": {
+                    "label": "Netværksklasse",
                     "options": {
                         "icn": "Internationalt",
                         "lcn": "Lokalt",
@@ -2734,6 +3123,7 @@
                     "placeholder": "Lokalt, Regionalt, Nationalt, Internationalt"
                 },
                 "network_foot": {
+                    "label": "Netværksklasse",
                     "options": {
                         "iwn": "Internationalt",
                         "lwn": "Lokalt",
@@ -2743,6 +3133,7 @@
                     "placeholder": "Lokalt, Regionalt, Nationalt, Internationalt"
                 },
                 "network_horse": {
+                    "label": "Netværksklasse",
                     "options": {
                         "ihn": "Internationalt",
                         "lhn": "Lokalt",
@@ -2753,6 +3144,9 @@
                 },
                 "network_road": {
                     "label": "Netværk"
+                },
+                "not/name": {
+                    "label": "Ukorrekte navne"
                 },
                 "note": {
                     "label": "Bemærkning"
@@ -2783,11 +3177,21 @@
                         "yes": "Ja"
                     }
                 },
+                "openfire": {
+                    "label": "Åben ild tilladt"
+                },
+                "opening_date": {
+                    "placeholder": "ÅÅÅÅ-MM-DD"
+                },
                 "opening_hours": {
-                    "label": "Åbningstider"
+                    "label": "Åbningstider",
+                    "placeholder": "Ukendt"
                 },
                 "operator": {
                     "label": "Operatør"
+                },
+                "operator/type": {
+                    "label": "Operatørtype"
                 },
                 "outdoor_seating": {
                     "label": "Udendørssiddepladser"
@@ -2814,6 +3218,9 @@
                 "payment_multi": {
                     "label": "Betalingstyper"
                 },
+                "payment_multi_fee": {
+                    "label": "Betallingstype"
+                },
                 "phases": {
                     "label": "Faser",
                     "placeholder": "1, 2, 3..."
@@ -2824,7 +3231,18 @@
                 },
                 "piste/difficulty": {
                     "label": "Sværhedsgrad",
+                    "options": {
+                        "easy": "Let",
+                        "expert": "Ekspert",
+                        "novice": "Begynder"
+                    },
                     "placeholder": "Let, mellemsvær, avanceret..."
+                },
+                "piste/difficulty_nordic": {
+                    "label": "Sværhedsgrad"
+                },
+                "piste/difficulty_skitour": {
+                    "label": "Sværhedsgrad"
                 },
                 "piste/grooming": {
                     "label": "Sikkerhed",
@@ -2861,6 +3279,12 @@
                     "label": "Udgangseffekt",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground": {
+                    "label": "Type"
+                },
+                "polling_station": {
+                    "label": "Valgsted"
+                },
                 "population": {
                     "label": "Befolkning"
                 },
@@ -2875,6 +3299,15 @@
                 },
                 "product": {
                     "label": "Produkter"
+                },
+                "public_bookcase/type": {
+                    "label": "Type"
+                },
+                "pump": {
+                    "options": {
+                        "no": "Ingen",
+                        "yes": "Ja"
+                    }
                 },
                 "railway": {
                     "label": "Type"
@@ -2892,8 +3325,14 @@
                 "recycling_accepts": {
                     "label": "Accepterer"
                 },
+                "recycling_type": {
+                    "label": "Type"
+                },
                 "ref": {
                     "label": "Referencekode"
+                },
+                "ref/isil": {
+                    "label": "ISIL kode"
                 },
                 "ref_aeroway_gate": {
                     "label": "Gate-nummer"
@@ -2910,6 +3349,9 @@
                 },
                 "ref_road_number": {
                     "label": "Vejnummer"
+                },
+                "ref_room_number": {
+                    "label": "Lokalenummer"
                 },
                 "ref_route": {
                     "label": "Rutenummer"
@@ -2931,11 +3373,20 @@
                 "religion": {
                     "label": "Religion"
                 },
+                "residential": {
+                    "label": "Type"
+                },
+                "resort": {
+                    "label": "Type"
+                },
                 "restriction": {
                     "label": "Type"
                 },
                 "restrictions": {
                     "label": "Svingbegrænsninger"
+                },
+                "room": {
+                    "label": "Type"
                 },
                 "rooms": {
                     "label": "Værelser"
@@ -2958,8 +3409,14 @@
                     },
                     "placeholder": "Bjergvandring, alpinvandring..."
                 },
+                "salt": {
+                    "label": "Salt"
+                },
                 "sanitary_dump_station": {
                     "label": "Sanitærdeponi"
+                },
+                "screen": {
+                    "placeholder": "1, 4, 8…"
                 },
                 "seamark/beacon_lateral/category": {
                     "options": {
@@ -2967,14 +3424,64 @@
                         "waterway_right": "Vandvej højre"
                     }
                 },
+                "seamark/beacon_lateral/colour": {
+                    "label": "Farve",
+                    "options": {
+                        "green": "Grøn",
+                        "grey": "Grå",
+                        "red": "Rød"
+                    }
+                },
+                "seamark/beacon_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Anden"
+                    }
+                },
                 "seamark/buoy_lateral/category": {
                     "options": {
+                        "channel_left": "Venstre kanal",
+                        "channel_right": "Højre kanal",
+                        "danger_left": "Fare til venstre",
+                        "danger_right": "Fare til højre",
                         "waterway_left": "Vandvej venstre",
                         "waterway_right": "Vandvej højre"
                     }
                 },
+                "seamark/buoy_lateral/colour": {
+                    "label": "Farve",
+                    "options": {
+                        "green": "Grøn",
+                        "green;red;green": "Grøn-Rød-Grøn",
+                        "green;white;green;white": "Grøn-Hvid-Grøn-Hvid",
+                        "red": "Rød",
+                        "red;green;red": "Rød-Grøn-Rød",
+                        "red;white;red;white": "Rød-Hvid-Rød-Hvid",
+                        "white": "Hvid",
+                        "yellow": "Gul"
+                    }
+                },
+                "seamark/buoy_lateral/system": {
+                    "label": "System",
+                    "options": {
+                        "cevni": "CEVNI",
+                        "iala-a": "IALA A",
+                        "iala-b": "IALA B",
+                        "other": "Anden"
+                    }
+                },
+                "seamark/type": {
+                    "label": "Sømærke"
+                },
                 "seasonal": {
                     "label": " Sæsonpræget"
+                },
+                "seats": {
+                    "label": "Sæder",
+                    "placeholder": "2, 4, 6..."
                 },
                 "second_hand": {
                     "label": "Sælger brugt",
@@ -3016,8 +3523,10 @@
                     "label": "Type"
                 },
                 "siren/type": {
+                    "label": "Type",
                     "options": {
-                        "electronic": "Elektronisk"
+                        "electronic": "Elektronisk",
+                        "other": "Anden"
                     }
                 },
                 "site": {
@@ -3049,6 +3558,9 @@
                     },
                     "placeholder": "Tynde hjul, hjul, offroad..."
                 },
+                "sms": {
+                    "label": "SMS"
+                },
                 "social_facility": {
                     "label": "Type"
                 },
@@ -3074,16 +3586,29 @@
                     "label": "Stjerner"
                 },
                 "start_date": {
-                    "label": "Startdato"
+                    "label": "Startdato",
+                    "placeholder": "ÅÅÅÅ-MM-DD"
                 },
                 "step_count": {
                     "label": "Antal trappetrin"
+                },
+                "stile": {
+                    "label": "Type"
                 },
                 "stop": {
                     "label": "Stoptype",
                     "options": {
                         "all": "Alle veje",
                         "minor": "Mindre vej"
+                    }
+                },
+                "street_cabinet": {
+                    "label": "Type"
+                },
+                "stroller": {
+                    "options": {
+                        "no": "Nej",
+                        "yes": "Ja"
                     }
                 },
                 "structure": {
@@ -3136,7 +3661,11 @@
                 "surveillance/zone": {
                     "label": "Overvågningszone"
                 },
+                "swimming_pool": {
+                    "label": "Type"
+                },
                 "switch": {
+                    "label": "Type",
                     "options": {
                         "circuit_breaker": "Kredsløbskontakt",
                         "disconnector": "Afkobler",
@@ -3155,6 +3684,12 @@
                         "yes": "Ja"
                     },
                     "placeholder": "Ja, nej, kun tag med..."
+                },
+                "target": {
+                    "label": "Mål"
+                },
+                "to": {
+                    "label": "Til"
                 },
                 "toilets/disposal": {
                     "label": "Funktionsmåde",
@@ -3180,6 +3715,9 @@
                 "tower/type": {
                     "label": "Type"
                 },
+                "townhall/type": {
+                    "label": "Type"
+                },
                 "tracktype": {
                     "label": "Sportype",
                     "options": {
@@ -3196,6 +3734,9 @@
                 },
                 "traffic_calming": {
                     "label": "Type"
+                },
+                "traffic_sign": {
+                    "label": "Trafikskilt"
                 },
                 "traffic_signals": {
                     "label": "Type"
@@ -3232,14 +3773,21 @@
                 "trees": {
                     "label": "Træer"
                 },
+                "trench": {
+                    "label": "Type"
+                },
                 "tunnel": {
                     "label": "Type",
                     "placeholder": "Standard"
                 },
                 "usage_rail": {
                     "options": {
+                        "test": "Test",
                         "tourism": "Turisme"
                     }
+                },
+                "valve": {
+                    "label": "Type"
                 },
                 "visibility": {
                     "label": "Synlighed",
@@ -3292,19 +3840,30 @@
                     "label": "Type"
                 },
                 "website": {
-                    "label": "Websted"
+                    "label": "Websted",
+                    "placeholder": "https://example.com"
                 },
                 "wetland": {
                     "label": "Type"
                 },
                 "wheelchair": {
-                    "label": "Kørestolsadgang"
+                    "label": "Kørestolsadgang",
+                    "options": {
+                        "no": "Nej",
+                        "yes": "Ja"
+                    }
                 },
                 "wholesale": {
                     "label": "Engros"
                 },
                 "width": {
                     "label": "Bredde (meter)"
+                },
+                "wikidata": {
+                    "label": "Wikidata"
+                },
+                "wikimedia_commons": {
+                    "placeholder": "Fil:Eksempel.jpg"
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
@@ -3327,7 +3886,8 @@
                     "terms": "Reklameskilt, Gadeopslagstavle"
                 },
                 "advertising/column": {
-                    "name": "Reklamesøjle"
+                    "name": "Reklamesøjle",
+                    "terms": "søjle,reklame,marketing,skilt"
                 },
                 "aerialway/cable_car": {
                     "name": "Svævebane",
@@ -3340,10 +3900,6 @@
                 "aerialway/drag_lift": {
                     "name": "Træklift",
                     "terms": "Træklift"
-                },
-                "aerialway/gondola": {
-                    "name": "Gondol",
-                    "terms": "Gondol"
                 },
                 "aerialway/goods": {
                     "name": "Varekabelbane",
@@ -3569,6 +4125,30 @@
                     "name": "Fast food",
                     "terms": "Fastfood, Grillbar, Pølsevogn"
                 },
+                "amenity/fast_food/burger": {
+                    "name": "Burger fastfood"
+                },
+                "amenity/fast_food/chicken": {
+                    "name": "Kylling fastfood"
+                },
+                "amenity/fast_food/donut": {
+                    "name": "Donut fastfood"
+                },
+                "amenity/fast_food/fish_and_chips": {
+                    "name": "Fish & Chips fastfood"
+                },
+                "amenity/fast_food/hot_dog": {
+                    "name": "Hot Dog fastfood"
+                },
+                "amenity/fast_food/mexican": {
+                    "name": "Mexicansk fastfood"
+                },
+                "amenity/fast_food/pizza": {
+                    "name": "Pizza fastfood"
+                },
+                "amenity/fast_food/sandwich": {
+                    "name": "Sandwich fastfood"
+                },
                 "amenity/ferry_terminal": {
                     "name": "Færgeterminal"
                 },
@@ -3657,6 +4237,9 @@
                     "name": "Fleretagesparkering",
                     "terms": "parkeringskælder,kælder,parkeringshus"
                 },
+                "amenity/parking/underground": {
+                    "name": "Underjordisk parkering"
+                },
                 "amenity/parking_entrance": {
                     "name": "Ind/udgang til parkeringsgarage"
                 },
@@ -3728,12 +4311,39 @@
                     "name": "Genbrugsplads",
                     "terms": "Genbrugsplads"
                 },
-                "amenity/register_office": {
-                    "name": "Tinglysningskontor"
-                },
                 "amenity/restaurant": {
                     "name": "Restaurant",
                     "terms": "Restaurant, Spisested, Spisehus"
+                },
+                "amenity/restaurant/german": {
+                    "name": "Tysk restaurant"
+                },
+                "amenity/restaurant/greek": {
+                    "name": "Græsk restaurant"
+                },
+                "amenity/restaurant/indian": {
+                    "name": "Indisk restaurant"
+                },
+                "amenity/restaurant/italian": {
+                    "name": "Italiensk restaurant"
+                },
+                "amenity/restaurant/japanese": {
+                    "name": "Japansk restaurant"
+                },
+                "amenity/restaurant/mexican": {
+                    "name": "Mexikansk restaurant"
+                },
+                "amenity/restaurant/pizza": {
+                    "name": "Pizza restaurant"
+                },
+                "amenity/restaurant/seafood": {
+                    "name": "Fiskerestaurant"
+                },
+                "amenity/restaurant/steakhouse": {
+                    "name": "Steakhouse"
+                },
+                "amenity/restaurant/sushi": {
+                    "name": "Sushi restaurant"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "Bortskaffelse af sanitært affald",
@@ -3742,9 +4352,6 @@
                 "amenity/school": {
                     "name": "Skolegrund",
                     "terms": "Skoleområde, Skolegrund"
-                },
-                "amenity/scrapyard": {
-                    "name": "Skrotplads"
                 },
                 "amenity/shelter": {
                     "name": "Læsted",
@@ -3798,8 +4405,17 @@
                     "name": "Studie",
                     "terms": "Studie"
                 },
-                "amenity/swimming_pool": {
-                    "name": "Svømmebassin"
+                "amenity/studio/audio": {
+                    "name": "Pladestudie"
+                },
+                "amenity/studio/radio": {
+                    "name": "Radiostation"
+                },
+                "amenity/studio/television": {
+                    "name": "TV-station"
+                },
+                "amenity/studio/video": {
+                    "name": "Filmstudie"
                 },
                 "amenity/taxi": {
                     "name": "Taxiholdeplads"
@@ -3922,6 +4538,9 @@
                     "name": "Område",
                     "terms": "Område"
                 },
+                "area/highway": {
+                    "name": "Vejområde"
+                },
                 "attraction/amusement_ride": {
                     "name": "Forlystelse",
                     "terms": "karrusel,tivoli,rutchebane"
@@ -3929,6 +4548,9 @@
                 "attraction/big_wheel": {
                     "name": "Pariserhjul",
                     "terms": "ferris"
+                },
+                "attraction/bumper_car": {
+                    "name": "Radiobiler"
                 },
                 "attraction/bungee_jumping": {
                     "name": "Elastikspring",
@@ -4070,6 +4692,9 @@
                 "building/cabin": {
                     "name": "Hytte",
                     "terms": "Hytte"
+                },
+                "building/carport": {
+                    "name": "Carport"
                 },
                 "building/cathedral": {
                     "name": "Katedralbygning",
@@ -4513,6 +5138,9 @@
                     "name": "Ridesti",
                     "terms": "Ridesti, Hestesti"
                 },
+                "highway/construction": {
+                    "name": "Vej lukket"
+                },
                 "highway/corridor": {
                     "name": "Indendørskorridor",
                     "terms": "Indendørskorridor, Indendørspassage"
@@ -4713,6 +5341,9 @@
                     "name": "Historisk befæstning",
                     "terms": "militær,fort,slot"
                 },
+                "historic/city_gate": {
+                    "name": "Byport"
+                },
                 "historic/fort": {
                     "name": "Historisk fort",
                     "terms": "fort, befæstning, slot"
@@ -4744,13 +5375,41 @@
                 "indoor": {
                     "name": "Indendørsegenskaber"
                 },
+                "indoor/area": {
+                    "name": "Indendørsområde",
+                    "terms": "indenfor,inde,under tag"
+                },
+                "indoor/corridor": {
+                    "name": "Indendørskorridor"
+                },
+                "indoor/corridor_line": {
+                    "name": "Indendørskorridor"
+                },
+                "indoor/door": {
+                    "name": "Indendørs-dør",
+                    "terms": "dør,adgang,portal"
+                },
+                "indoor/elevator": {
+                    "name": "Indendørs elevatorskakt",
+                    "terms": "elevator,lift,hejs"
+                },
+                "indoor/room": {
+                    "name": "Værelse"
+                },
+                "indoor/stairs": {
+                    "name": "Indendørs trappeskakt",
+                    "terms": "trappe,skakt,indendørs"
+                },
+                "indoor/wall": {
+                    "name": "Indendørs væg",
+                    "terms": "væg,indendørs,adskiller,barriere"
+                },
+                "internet_access/wlan": {
+                    "name": "Wi-Fi Hotspot"
+                },
                 "junction": {
                     "name": "Vejfletning",
                     "terms": "Vejfletning, Gadefletning"
-                },
-                "landuse/allotments": {
-                    "name": "Kolonihave",
-                    "terms": "kolonihaveområde, kolonihave,"
                 },
                 "landuse/aquaculture": {
                     "name": "Akvakultur",
@@ -4780,6 +5439,9 @@
                 "landuse/farmyard": {
                     "name": "Gårdsplads",
                     "terms": "Gård, Bondegård"
+                },
+                "landuse/flowerbed": {
+                    "name": "Blomsterbed"
                 },
                 "landuse/forest": {
                     "name": "Forvaltet skov",
@@ -4828,17 +5490,9 @@
                     "name": "Flådestation",
                     "terms": "Flådestation, Søværnsbase"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Forhindringsbane",
-                    "terms": "Forhindringsbane, Militærforhindringsbane"
-                },
                 "landuse/military/range": {
                     "name": "Militærskydebane",
                     "terms": "Militærskydebane, Skydebane"
-                },
-                "landuse/military/training_area": {
-                    "name": "Træningsområde",
-                    "terms": "Træningsområde, Militærtræningsområde"
                 },
                 "landuse/orchard": {
                     "name": "Frugtplantage",
@@ -4927,6 +5581,9 @@
                     "name": "Golfbane",
                     "terms": "Golfbane, Golfkurser"
                 },
+                "leisure/hackerspace": {
+                    "name": "Hackerspace"
+                },
                 "leisure/horse_riding": {
                     "name": "Ridningsfaciliteter",
                     "terms": "Ridningsfaciliteter, Hesteridningsfaciliteter"
@@ -4959,13 +5616,20 @@
                     "name": "Picnicbord",
                     "terms": "Picnicbord, Frokostbord"
                 },
+                "leisure/picnic_table/chess": {
+                    "name": "Skakbord"
+                },
                 "leisure/pitch": {
                     "name": "Sportsbane",
                     "terms": "Sportsbane, Sportsområde"
                 },
                 "leisure/pitch/american_football": {
                     "name": "Amerikansk fodboldbane",
-                    "terms": "Amerikansk Fodboldbane"
+                    "terms": "rugby,fodbold,amerikansk,amerika,football"
+                },
+                "leisure/pitch/australian_football": {
+                    "name": "Australsk fodboldbane",
+                    "terms": "rugby,fodbold,australien,football"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Basketballbane",
@@ -5114,13 +5778,12 @@
                     "name": "Gasmåler",
                     "terms": "Gasmåler, Gasometer"
                 },
-                "man_made/groyne": {
-                    "name": "Høfde",
-                    "terms": "Høfde"
-                },
                 "man_made/lighthouse": {
                     "name": "Fyr (navigation)",
                     "terms": "Fyr (navigation)"
+                },
+                "man_made/manhole": {
+                    "name": "Brønddæksel"
                 },
                 "man_made/manhole/water": {
                     "name": "Dæksel til vandforsyning",
@@ -5234,6 +5897,9 @@
                     "name": "Fabrik",
                     "terms": "Fabrik, Fremstillingsvirksomhed, Produktionsvirksomhed"
                 },
+                "military/bunker": {
+                    "name": "Militærbunker"
+                },
                 "natural/bare_rock": {
                     "name": "Klippe",
                     "terms": "Klippe, Klippeområde"
@@ -5262,6 +5928,9 @@
                     "name": "Fjeld",
                     "terms": "Fjeld"
                 },
+                "natural/geyser": {
+                    "name": "Gejser"
+                },
                 "natural/glacier": {
                     "name": "Gletsjer",
                     "terms": "Gletsjer, Isbræ"
@@ -5288,6 +5957,10 @@
                     "name": "Højderyg",
                     "terms": "Højderyg, Bjergryg, Bjergkam, Bakkekam"
                 },
+                "natural/rock": {
+                    "name": "Fæstnet klippe / kampesten",
+                    "terms": "sten,klippe,kampesten,formation,fast"
+                },
                 "natural/saddle": {
                     "name": "Sadel",
                     "terms": "Sadel"
@@ -5308,12 +5981,19 @@
                     "name": "Kilde (vand)",
                     "terms": "Kilde (vand), Kildeudspring"
                 },
+                "natural/stone": {
+                    "name": "Løs klippe / kampesten",
+                    "terms": "sten,klippe,kampesten,formation,rulle,rullesten,rokkesten"
+                },
                 "natural/tree": {
                     "name": "Træ",
                     "terms": "Træ"
                 },
                 "natural/tree_row": {
                     "name": "Trærække"
+                },
+                "natural/valley": {
+                    "name": "Dal"
                 },
                 "natural/volcano": {
                     "name": "Vulkan",
@@ -5323,9 +6003,19 @@
                     "name": "Vand",
                     "terms": "Vand"
                 },
+                "natural/water/basin": {
+                    "name": "Bassin",
+                    "terms": "overløb,tilbageholdelse,regn,regnvand,"
+                },
+                "natural/water/canal": {
+                    "name": "Kanalområde"
+                },
                 "natural/water/lake": {
                     "name": "Sø",
                     "terms": "Sø"
+                },
+                "natural/water/moat": {
+                    "name": "Voldgrav"
                 },
                 "natural/water/pond": {
                     "name": "Dam",
@@ -5334,6 +6024,13 @@
                 "natural/water/reservoir": {
                     "name": "Reservoir",
                     "terms": "Reservoir, Vandreservoir, Dam"
+                },
+                "natural/water/river": {
+                    "name": "Flodområde"
+                },
+                "natural/water/wastewater": {
+                    "name": "Brakvandsbassin",
+                    "terms": "lort,brak,kloak,ekskrement,chokolade"
                 },
                 "natural/wetland": {
                     "name": "Vådområde",
@@ -5373,6 +6070,9 @@
                 "office/diplomatic/consulate": {
                     "name": "Konsulat",
                     "terms": "konsul,diplomati,diplomat,repræsentation"
+                },
+                "office/diplomatic/embassy": {
+                    "name": "Ambassade"
                 },
                 "office/educational_institution": {
                     "name": "Uddannelsesinstitution",
@@ -5495,6 +6195,9 @@
                     "name": "Landsby",
                     "terms": "Landsby"
                 },
+                "playground/climbing_frame": {
+                    "name": "Klatrevæg"
+                },
                 "playground/cushion": {
                     "name": "Hoppepude"
                 },
@@ -5512,6 +6215,9 @@
                     "name": "Kraftværk",
                     "terms": "Kraftværk"
                 },
+                "power/generator/source/wind": {
+                    "name": "Vindturbine"
+                },
                 "power/line": {
                     "name": "Elledning",
                     "terms": "Elledning, Højspændingsledning"
@@ -5523,6 +6229,12 @@
                 "power/plant": {
                     "name": "Kraftværksgrund",
                     "terms": "kraftværk,elkraft,elektricitet,el,generator"
+                },
+                "power/plant/source/nuclear": {
+                    "name": "Atomkraftværk"
+                },
+                "power/plant/source/wind": {
+                    "name": "Vindmøllepark"
                 },
                 "power/pole": {
                     "name": "Elmast (telefonmast)",
@@ -5540,9 +6252,15 @@
                     "name": "Transformer",
                     "terms": "Transformer"
                 },
+                "public_transport/platform/bus_point": {
+                    "name": "Busstop"
+                },
                 "public_transport/stop_area": {
                     "name": "Stoppestedsområde",
                     "terms": "stop,stoppested,station"
+                },
+                "public_transport/stop_position_bus": {
+                    "name": "Busstoppested"
                 },
                 "railway/abandoned": {
                     "name": "Ej brugt jernbanespor",
@@ -5562,10 +6280,6 @@
                     "name": "Ej brugt jernbanespor",
                     "terms": "Ej brugt jernbanespor"
                 },
-                "railway/funicular": {
-                    "name": "Kabelsporvej",
-                    "terms": "Kabelsporvej"
-                },
                 "railway/level_crossing": {
                     "name": "Jernbaneoverskæring (vej)",
                     "terms": "Jernbaneoverskæring (vej)"
@@ -5573,27 +6287,11 @@
                 "railway/milestone": {
                     "name": "Jernbanemilepæl"
                 },
-                "railway/miniature": {
-                    "name": "Miniaturejernbane"
-                },
-                "railway/monorail": {
-                    "name": "Monorail",
-                    "terms": "Monorail"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Smalspor",
-                    "terms": "Smalspor, Smalsporbane, Smalsportogbane"
-                },
-                "railway/rail": {
-                    "name": "Jernbanespor",
-                    "terms": "Jernbanespor"
-                },
                 "railway/signal": {
                     "name": "Jernbanesignal"
                 },
-                "railway/subway": {
-                    "name": "S-togspor",
-                    "terms": "S-togspor"
+                "railway/station": {
+                    "name": "Togstation"
                 },
                 "railway/subway_entrance": {
                     "name": "S-togstationsindgang",
@@ -5604,10 +6302,6 @@
                 },
                 "railway/train_wash": {
                     "name": "Togvaskestation"
-                },
-                "railway/tram": {
-                    "name": "Sporvogn",
-                    "terms": "Sporvogn"
                 },
                 "relation": {
                     "name": "Relation",
@@ -5681,6 +6375,10 @@
                     "name": "Cykelbutik",
                     "terms": "Cykelforretning, Cykelbutik, Cykelsmed"
                 },
+                "shop/boat": {
+                    "name": "Bådforhandler",
+                    "terms": "fiskebåd,kutter,jetski,motorbåd,sejlbåd,robåd"
+                },
                 "shop/bookmaker": {
                     "name": "Bookmaker",
                     "terms": "Bookmaker"
@@ -5692,9 +6390,17 @@
                 "shop/boutique": {
                     "name": "Boutique"
                 },
+                "shop/brewing_supplies": {
+                    "name": "Bryggeudstyrsbutik",
+                    "terms": "brygning,øl,hjemmebryg,gæring"
+                },
                 "shop/butcher": {
                     "name": "Slagter",
                     "terms": "Slagter, Slagterbutik, Slagterforretning"
+                },
+                "shop/camera": {
+                    "name": "Fotoforhandler",
+                    "terms": "foto,kamera,linse,film"
                 },
                 "shop/candles": {
                     "name": "Stearinlysforhandler",
@@ -5709,8 +6415,8 @@
                     "terms": "autoforhandler,bil,automobil,bilforhandler,autokøretøj"
                 },
                 "shop/car_parts": {
-                    "name": "Biludstyrsbutik",
-                    "terms": "Autoudstyrsbutik, Biludstyrsbutik,bil,auto"
+                    "name": "Bilreservedelsforhandler",
+                    "terms": "Autoudstyrsbutik, Biludstyrsbutik,bil,auto,reservedele,auto"
                 },
                 "shop/car_repair": {
                     "name": "Bilværksted",
@@ -5739,6 +6445,18 @@
                 "shop/clothes": {
                     "name": "Tøjbutik",
                     "terms": "Tøjbutik, Herretøjsbutik, Dametøjsbutik, Børnetøjsbutik, Ekvipage, Herreekvipering"
+                },
+                "shop/clothes/second_hand": {
+                    "name": "Genbrugstøjbutik",
+                    "terms": "genbrug,rødekors,frelsens hær,frelleren,brugt"
+                },
+                "shop/clothes/underwear": {
+                    "name": "Lingeributik",
+                    "terms": "undertøj,underhakker,underbukser,bh,brysteholder,strømper"
+                },
+                "shop/clothes/wedding": {
+                    "name": "Bryllupstøjsbutik",
+                    "terms": "bryllup,brud,brudgom,gom,kjole,bryllupskjole,ægteskab"
                 },
                 "shop/coffee": {
                     "name": "Kaffebutik",
@@ -5784,6 +6502,10 @@
                     "name": "Gør det selv-butik",
                     "terms": "Gør det selv-butik, Byggemarked"
                 },
+                "shop/doors": {
+                    "name": "Dørforhandler",
+                    "terms": "dør,karm,håndtag"
+                },
                 "shop/dry_cleaning": {
                     "name": "Renseri",
                     "terms": "Renseri"
@@ -5805,14 +6527,11 @@
                     "terms": "Stofforretning"
                 },
                 "shop/farm": {
-                    "name": "Fødevarestand",
+                    "name": "Gårdbutik",
                     "terms": "fødevarestand,frugtstand,gårdbutik,stalddørssalg"
                 },
                 "shop/fashion": {
                     "name": "Modebutik"
-                },
-                "shop/fishmonger": {
-                    "name": "Fiskeforretning"
                 },
                 "shop/florist": {
                     "name": "Blomsterbutik",
@@ -5825,9 +6544,6 @@
                 "shop/funeral_directors": {
                     "name": "Bedemandsforretning",
                     "terms": "Bedemandsforretning, Begravelsesbutik, Begravelsesforretning"
-                },
-                "shop/furnace": {
-                    "name": "Oliefyr"
                 },
                 "shop/furniture": {
                     "name": "Møbelforhandler",
@@ -5869,9 +6585,15 @@
                     "name": "Radioforhandler",
                     "terms": "Radioforhandler, Hifi-butik"
                 },
+                "shop/hobby": {
+                    "name": "Hobbybutik"
+                },
                 "shop/houseware": {
                     "name": "Køkkenudstyr",
                     "terms": "Køkkenudstyr"
+                },
+                "shop/hunting": {
+                    "name": "Jagtbutik"
                 },
                 "shop/interior_decoration": {
                     "name": "Brugskunstbutik",
@@ -5880,6 +6602,9 @@
                 "shop/jewelry": {
                     "name": "Guldsmed",
                     "terms": "smykke,ædelsten,ring,guld,sølv"
+                },
+                "shop/kiosk": {
+                    "name": "Kiosk"
                 },
                 "shop/kitchen": {
                     "name": "Køkkenforhandler",
@@ -6008,6 +6733,9 @@
                 "shop/shoes": {
                     "name": "Skobutik",
                     "terms": "Skobutik, Skoforretning"
+                },
+                "shop/spices": {
+                    "name": "Krydeributik"
                 },
                 "shop/sports": {
                     "name": "Sportsudstyrsbutik",
@@ -6276,6 +7004,9 @@
                 "type/restriction/only_straight_on": {
                     "name": "Kun lige ud"
                 },
+                "type/restriction/only_u_turn": {
+                    "name": "Kun U-vending"
+                },
                 "type/route": {
                     "name": "Rute",
                     "terms": "Rute"
@@ -6382,6 +7113,12 @@
                     "name": "Bæk",
                     "terms": "Bæk"
                 },
+                "waterway/stream_intermittent": {
+                    "name": "Sporadisk bæk"
+                },
+                "waterway/tidal_channel": {
+                    "name": "Tidevandskanal"
+                },
                 "waterway/water_point": {
                     "name": "Havnedrikkevand",
                     "terms": "Havnedrikkevand, Ferskvand"
@@ -6397,9 +7134,43 @@
             }
         },
         "imagery": {
+            "AGIV": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders nyeste luftfoto"
+            },
+            "AGIV10cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders 2013-2015 luftfoto 10cm"
+            },
+            "AGIVFlandersGRB": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Flanders GRB"
+            },
+            "AIV_DHMV_II_HILL_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionale hillshade 0,25 m"
+            },
+            "AIV_DHMV_II_SVF_25cm": {
+                "attribution": {
+                    "text": "© agentschap Informatie Vlaanderen"
+                },
+                "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview faktor 0,25 m"
+            },
             "Bing": {
-                "description": "Satellit og luft-foto.",
+                "description": "Satellit og luftfoto.",
                 "name": "Bing luftfoto"
+            },
+            "EOXAT2018CLOUDLESS": {
+                "description": "Efterbehandlet Sentinel Satellite billeder",
+                "name": "eox.at 2018 skyfri"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -6416,6 +7187,9 @@
                 "name": "Esri World fotos (Clarity) Beta"
             },
             "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap bidragsydere, CC-BY-SA 2.0"
+                },
                 "description": "Standard-laget fra OpenStreetMap.",
                 "name": "OpenStreetMap (standard)"
             },
@@ -6423,7 +7197,7 @@
                 "attribution": {
                     "text": "Vilkår & tilbagemelding"
                 },
-                "description": "Satellit og luft-foto.",
+                "description": "Satellit- og luftfoto.",
                 "name": "Mapbox Satellite"
             },
             "OSM_Inspector-Addresses": {
@@ -6468,6 +7242,12 @@
                 },
                 "name": "OSM Inspector: Tagging"
             },
+            "SPW_ORTHO_LAST": {
+                "name": "SPW(allonie) mest nyeste luftfoto"
+            },
+            "SPW_PICC": {
+                "name": "SPW(allonie) PICC nummerisk luftfoto"
+            },
             "US-TIGER-Roads-2014": {
                 "description": "Ved zoom-niveau 16+ offentligt tilgængelige public domain kort-data fra US Census. Ved lavere niveauer kun ændringer siden 2006, eksklusiv ændringer allerede indarbejdet i OpenStreetMap.",
                 "name": "TIGER Roads 2014"
@@ -6476,8 +7256,55 @@
                 "description": "Gul = Public domain kort-data fra US Census. Rød = Ingen data i OpenStreetMap",
                 "name": "TIGER Roads 2017"
             },
+            "US-TIGER-Roads-2018": {
+                "description": "Gul = Offentlige kortdata fra US Census. Rød = Data ikke fundet i OpenStreetMap",
+                "name": "TIGER Roads 2018"
+            },
+            "US-TIGER-Roads-2019": {
+                "description": "Gul = Offentlige kortdata fra US Census. Rød = Data ikke fundet i OpenStreetMap",
+                "name": "TIGER Roads 2019"
+            },
+            "USDA-NAIP": {
+                "name": "National Agriculture Imagery Program"
+            },
             "US_Forest_Service_roads_overlay": {
                 "name": "Amerikansk skovvejs-overlag (U.S. Forest Service)"
+            },
+            "UrbISOrtho2016": {
+                "attribution": {
+                    "text": "Realiseret ved hjælp af Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2016"
+            },
+            "UrbISOrtho2017": {
+                "attribution": {
+                    "text": "Realiseret ved hjælp af Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2017"
+            },
+            "UrbISOrtho2018": {
+                "attribution": {
+                    "text": "Realiseret ved hjælp af Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2018"
+            },
+            "UrbISOrtho2019": {
+                "attribution": {
+                    "text": "Realiseret ved hjælp af Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbIS-Ortho 2019"
+            },
+            "UrbisAdmFR": {
+                "attribution": {
+                    "text": "Realiseret ved hjælp af Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm FR"
+            },
+            "UrbisAdmNL": {
+                "attribution": {
+                    "text": "Realiseret ved hjælp af Brussels UrbIS®© - Distribution & Copyright CIRB"
+                },
+                "name": "UrbisAdm NL"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -6489,7 +7316,7 @@
                 "attribution": {
                     "text": "© waymarkedtrails.org, OpenStreetMap-bidragsydere, CC by-SA 3.0"
                 },
-                "name": "Afmærkede spor: Vandring"
+                "name": "Waymarked Trails:: Vandring"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
@@ -6523,8 +7350,115 @@
                 "description": "Ortofoto-lag leveret af basemap.at. \"Efterfølger\" til geoimage.at.",
                 "name": "basemap.at Ortofoto"
             },
+            "basemap.at-overlay": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Annotationslag leveret af basemap.at.",
+                "name": "basemap.at Overlay"
+            },
+            "eufar-balaton": {
+                "attribution": {
+                    "text": "EUFAR Balaton ortofotó 2010"
+                },
+                "description": "1940 geotagget fotografi fra Balaton Limnological Institute.",
+                "name": "EUFAR Balaton ortofotos"
+            },
+            "finds.jp_KBN_2500": {
+                "attribution": {
+                    "text": "GSI KIBAN 2500"
+                },
+                "description": "GSI Kiban 2500 via finds.jp. God til at trace fra, men er en smule gammelt.",
+                "name": "Japan GSI KIBAN 2500"
+            },
+            "gothenburg-citymap": {
+                "attribution": {
+                    "text": "© Göteborg Kommune, CC0"
+                },
+                "description": "Bykortet er et oversigtskort der beskriver Göteborg. Det indeholder generelle informationer omkring land, kommunikation, hydrografi, bygninger, gadenavne og husnumre, administrativ afdeligt og anden orienterende tekst.",
+                "name": "Göteborg bykort"
+            },
+            "gsi.go.jp_airphoto": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "name": "Japan GSI luftfoto"
+            },
+            "gsi.go.jp_seamlessphoto": {
+                "attribution": {
+                    "text": "GSI Japan sømløs luftfoto"
+                },
+                "name": "GSI Japan sømløs luftfoto"
+            },
+            "gsi.go.jp_std_map": {
+                "attribution": {
+                    "text": "GSI Japan"
+                },
+                "description": "Japan GSI standardkort. Bredt dækkende",
+                "name": "Japan GSI  standardkort"
+            },
+            "helsingborg-orto": {
+                "attribution": {
+                    "text": "© Helsingborg Kommune"
+                },
+                "description": "Ortofotos fra Helsingborg Kommune 2016, public domain",
+                "name": "Helsingborg Ortofoto"
+            },
+            "kalmar-orto-2014": {
+                "attribution": {
+                    "text": "© Kalmar Kommune"
+                },
+                "description": "Ortofoto for nordkysten af Kalmar Kommune 2014",
+                "name": "Kalmar nord ortofoto 2014"
+            },
+            "kalmar-orto-2016": {
+                "attribution": {
+                    "text": "© Kalmar Kommune"
+                },
+                "description": "Ortofoto for sydkysten af Kalmar Kommune 2016",
+                "name": "Kalmar syd ortofoto 2016"
+            },
+            "kalmar-orto-2018": {
+                "attribution": {
+                    "text": "© Kalmar Kommune"
+                },
+                "description": "Ortofotos af byområdet i Kalmar Kommune 2018",
+                "name": "Kalmar by ortofoto 2018"
+            },
             "kelkkareitit": {
+                "attribution": {
+                    "text": "© Kelkkareitit.fi"
+                },
+                "description": "Kelkkareitit.fi snescooterspor fra OSM (nordisk dækkende)",
                 "name": "Nordisk snescooter-overlag (Kelkkareitit.fi)"
+            },
+            "lantmateriet-orto1960": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": " 73% match \nMosaik af svenske ortofotos fra perioden 1955-1965. Ældre og nyere billeder kan forekomme,",
+                "name": "Lantmäteriet historisk ortofoto 1960"
+            },
+            "lantmateriet-orto1975": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Mosaik af svenske ortofotos fra perioden 1970–1980. Er under udarbejdelse.",
+                "name": "Lantmäteriet historiske ortofoto 1975"
+            },
+            "lantmateriet-topowebb": {
+                "attribution": {
+                    "text": "© Lantmäteriet, CC0"
+                },
+                "description": "Topografisk kort af Sverige 1:50.000",
+                "name": "Lantmäteriet topografisk kort"
+            },
+            "linkoping-orto": {
+                "attribution": {
+                    "text": "© Linköping Kommune"
+                },
+                "description": "Ortofotos fra  Linköping Kommune 2010, open data",
+                "name": "Linköping Ortofoto"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -6558,6 +7492,13 @@
                 },
                 "name": "OpenStreetMap (tyskerstil)"
             },
+            "osmse-ekonomiska": {
+                "attribution": {
+                    "text": "© Lantmäteriet"
+                },
+                "description": "Indskaning af \"Økonomisk kort\" ca. 1950-1980",
+                "name": "Lantmäteriet økonomisk kort 1950-1980"
+            },
             "qa_no_address": {
                 "attribution": {
                     "text": "Simon Poole, Data ©OpenStreetMap bidragsydere"
@@ -6570,8 +7511,25 @@
                 },
                 "name": "skobbler"
             },
+            "skoterleder": {
+                "attribution": {
+                    "text": "© Skoterleder.org"
+                },
+                "description": "Snescooter spor",
+                "name": "Snescooterkort Sverige"
+            },
             "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kort tiles af Stamen Design, under CC BY 3.0. Data af OpenStreetMap, under ODbL"
+                },
                 "name": "Stamen Terræn"
+            },
+            "stockholm-orto": {
+                "attribution": {
+                    "text": "© Stockholm Kommune, CC0"
+                },
+                "description": "Ortofotos fra Stockholm Kommune 2016, CC0 licens",
+                "name": "Stockholm Ortofoto"
             },
             "tf-cycle": {
                 "attribution": {
@@ -6584,18 +7542,393 @@
                     "text": "Kort © Thunderforest, Data © OpenStreetMap bidragsydere"
                 },
                 "name": "Thunderforest Landskab"
+            },
+            "trafikverket-baninfo": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenske jernbanenet, inkl. sidespor",
+                "name": "Trafikverket jernbanenet"
+            },
+            "trafikverket-baninfo-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Det svenske jernbanenet med flere valgmuligheder for kortlag",
+                "name": "Trafikverket jernbanenet valgmuligheder"
+            },
+            "trafikverket-vagnat": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenske NVDB vejnet",
+                "name": "Trafikverket vejnet"
+            },
+            "trafikverket-vagnat-extra": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenske NVDB ekstra informationer: Vejreferencenumre, trafikdæmning, rastepladser, bustop, broer, fartkontrolkamera",
+                "name": "Trafikverket vejnet ekstra"
+            },
+            "trafikverket-vagnat-navn": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenske NVDB vejnavne",
+                "name": "Trafikverket vejnavne"
+            },
+            "trafikverket-vagnat-option": {
+                "attribution": {
+                    "text": "© Trafikverket, CC0"
+                },
+                "description": "Svenske NVDB vejnet med flere valgmuligheder for kortlag",
+                "name": "Trafikverket vejnet muligheder"
             }
         },
         "community": {
+            "Bahia-telegram": {
+                "name": "OpenStreetMap Bahia Telegram gruppen"
+            },
+            "Bay-Area-OpenStreetMappers": {
+                "name": "Bay Area OpenStreetMappers",
+                "description": "Forbedre OpenStreetMap i Bay Area"
+            },
+            "Central-Pennsylvania-OSM": {
+                "name": "Central Pennsylvania OSM"
+            },
+            "Code-for-San-Jose-Slack": {
+                "name": "Code for San Jose Slack"
+            },
+            "DF-telegram": {
+                "name": "OpenStreetMap Brasília Telegram Group"
+            },
+            "Dallas-Fort-Worth-OSM": {
+                "name": "Dallas-Fort Worth OSM",
+                "description": "OpenStreetMap brugergruppe for Dallas-Fort Worth"
+            },
+            "Galicia-Telegram": {
+                "name": "OpenStreetMap Galicia Telegram",
+                "description": "OpenStreetMap Telegram for Galicia"
+            },
+            "Galicia-Twitter": {
+                "name": "OpenStreetMap Galicia Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "GeoPhilly": {
+                "name": "GeoPhilly"
+            },
+            "MapMinnesota": {
+                "name": "MapMinnesota"
+            },
+            "Mapping-DC-meetup": {
+                "description": "Forbedrer OpenStreetMap i Washington D.C. området"
+            },
+            "Maptime-Bogota": {
+                "name": "Maptime Bogotá"
+            },
+            "Maptime-ME-meetup": {
+                "name": "MaptimeME"
+            },
+            "Maptime-Oceania-Slack": {
+                "name": "Maptime Oceania Slack",
+                "description": "Tilmeld dig på  {signupUrl}"
+            },
+            "MaptimeHRVA-twitter": {
+                "name": "MaptimeHRVA Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSM-AR-facebook": {
+                "name": "OpenStreetMap Argentina Facebook",
+                "extendedDescription": "Nyheder fra det lokale community"
+            },
+            "OSM-AR-forum": {
+                "name": "OpenStreetMap Argentina webforum"
+            },
+            "OSM-AR-irc": {
+                "name": "OpenStreetMap Argentina IRC",
+                "description": "Kom ind i kanalen #osm-ar på irc.oftc.net (port 6667)"
+            },
+            "OSM-AR-mailinglist": {
+                "name": "Talk-ar mailingliste"
+            },
+            "OSM-AR-telegram": {
+                "name": "OpenStreetMap Argentina Telegram",
+                "description": "Tilmeld dig OpenStreetMap Argentina community på Telegram"
+            },
+            "OSM-AR-twitter": {
+                "name": "OpenStreetMap Argentina Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSM-Asia-mailinglist": {
+                "name": "OpenStreetMap Asien mailingliste"
+            },
+            "OSM-BGD-facebook": {
+                "name": "OpenStreetMap Bangladesh",
+                "description": "Forbedre OpenStreetMap i Bangladesh",
+                "events": {
+                    "sotmasia2019": {
+                        "name": "State of the Map Asia 2019"
+                    }
+                }
+            },
+            "OSM-BO-mailinglist": {
+                "name": "Talk-bo mailingliste"
+            },
+            "OSM-BiH-telegram": {
+                "name": "OpenStreetMap BiH Telegram"
+            },
+            "OSM-Boston": {
+                "name": "OpenStreetMap Boston"
+            },
+            "OSM-CA-Slack": {
+                "name": "OSM-CA Slack",
+                "description": "Alle er velkomne! Tilmeld dig på {signupUrl}."
+            },
+            "OSM-CA-mailinglist": {
+                "name": "OSM-CA mailingliste"
+            },
+            "OSM-CA-telegram": {
+                "name": "@osmca på Telegram",
+                "description": "OpenStreetMap Canada Telegram chat"
+            },
+            "OSM-CL-facebook": {
+                "name": "OpenStreetMap Chile Facebook"
+            },
+            "OSM-CL-mailinglist": {
+                "name": "Talk-cl mailingliste"
+            },
+            "OSM-CL-telegram": {
+                "name": "OpenStreetMap Chile Telegram"
+            },
+            "OSM-CL-twitter": {
+                "name": "OpenStreetMap Chile Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSM-CN-telegram": {
+                "name": "OpenStreetMap China Telegram"
+            },
+            "OSM-CO": {
+                "name": "OpenStreetMap Colombia"
+            },
+            "OSM-CO-facebook": {
+                "name": "OpenStreetMap Colombia Facebook"
+            },
+            "OSM-CO-mailinglist": {
+                "name": "Talk-co mailingliste"
+            },
+            "OSM-CO-telegram": {
+                "name": "OSM Colombia på Telegram",
+                "description": "OpenStreetMap Colombia Telegram chat"
+            },
+            "OSM-CO-twitter": {
+                "name": "OpenStreetMap Colombia Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSM-CU-telegram": {
+                "name": "OSM Cuba på Telegram",
+                "description": "OpenStreetMap Cuba Telegram chat"
+            },
+            "OSM-CZ-telegram": {
+                "name": "OpenStreetMap CZ Telegram"
+            },
+            "OSM-Chattanooga": {
+                "name": "OpenStreetMap Colombia Twitter",
+                "description": "OpenStreetMap brugergruppen for Chattanooga"
+            },
+            "OSM-Colorado": {
+                "name": "OpenStreetMap Colorado"
+            },
+            "OSM-Discord": {
+                "name": "OpenStreetMap Discord",
+                "description": "Kom i kontakt med andre kortlæggere på Discord"
+            },
+            "OSM-EC-telegram": {
+                "name": "OSM Ecuador på Telegram",
+                "description": "OpenStreetMap Ecuador Telegram chat"
+            },
+            "OSM-ES-mailinglist": {
+                "name": "Talk-es mailingliste",
+                "description": "Maillingliste der snakker om OpenStreetMap i Spanien"
+            },
+            "OSM-ES-telegram": {
+                "name": "@OSMes på Telegram",
+                "description": "OpenStreetMap Spanien Telegram chat"
+            },
             "OSM-Facebook": {
                 "name": "OpenStreetMap på Facebook",
                 "description": "Like os på Facebook for nyheder og opdateringer om OpenStreetMap."
+            },
+            "OSM-IDN-facebook": {
+                "name": "OpenStreetMap Indonesia"
+            },
+            "OSM-IRC": {
+                "name": "OpenStreetMap IRC",
+                "description": "Kom ind i kanalen  #osm på irc.oftc.net (port 6667)"
+            },
+            "OSM-India-Puducherry-Matrix": {
+                "name": "Free Software Hardware Movement - Matrix"
+            },
+            "OSM-Japan-telegram": {
+                "name": "OpenStreetMap Japan Telegram"
+            },
+            "OSM-Kerala-facebook": {
+                "description": "Forbedre OpenStreetMap i Kerala"
+            },
+            "OSM-Korea-mailinglist": {
+                "name": "OpenStreetMap Korea mailingliste"
+            },
+            "OSM-Korea-telegram": {
+                "name": "OSM Korea Telegram"
+            },
+            "OSM-MMR-facebook": {
+                "name": "OpenStreetMap Myanmar",
+                "description": "Forbedre OpenStreetMap i Myanmar"
+            },
+            "OSM-MNG-facebook": {
+                "name": "OpenStreetMap Mongolia",
+                "description": "Forbedre OpenStreetMap i Mongoliet"
+            },
+            "OSM-MY-facebook": {
+                "name": "OpenStreetMap Malaysia på Facebook"
+            },
+            "OSM-MY-forum": {
+                "name": "OpenStreetMap Malaysia Forum"
+            },
+            "OSM-MY-matrix": {
+                "description": "Alle kortlæggere er velkomne! Tilmeld dig på  {signupUrl}"
+            },
+            "OSM-Nepal-facebook": {
+                "name": "OpenStreetMap Nepal",
+                "description": "Forbedre OpenStreetMap i Nepal"
+            },
+            "OSM-Ottawa-meetup": {
+                "name": "OpenStreetMap Ottawa"
+            },
+            "OSM-PE": {
+                "name": "OpenStreetMap Peru"
+            },
+            "OSM-PE-facebook": {
+                "name": "OpenStreetMap Peru Facebook"
+            },
+            "OSM-PE-mailinglist": {
+                "name": "Talk-pe mailingliste"
+            },
+            "OSM-PE-matrix": {
+                "name": "OpenStreetMap Peru Matrix Chat"
+            },
+            "OSM-PE-telegram": {
+                "name": "OpenStreetMap Peru Telegram",
+                "description": "Tilmeld dig OpenStreetMap Peru community på Telegram"
+            },
+            "OSM-PE-twitter": {
+                "name": "OpenStreetMap Peru Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSM-PH-facebook": {
+                "name": "OpenStreetMap PH Facebook"
+            },
+            "OSM-PH-mailinglist": {
+                "name": "Talk-ph mailingliste"
+            },
+            "OSM-PH-slack": {
+                "name": "OpenStreetMap PH Slack",
+                "description": "Alle er velkomne! Tilmeld dig på {signupUrl}"
+            },
+            "OSM-PH-telegram": {
+                "name": "OpenStreetMap PH Telegram"
+            },
+            "OSM-PL-facebook-group": {
+                "name": "OpenStreetMap Polen Facebook gruppen"
+            },
+            "OSM-PL-forum": {
+                "name": "OpenStreetMap Polen Forum"
+            },
+            "OSM-PY-telegram": {
+                "name": "OSM Paraguay på Telegram"
+            },
+            "OSM-Portland": {
+                "name": "OpenStreetMap Portland"
+            },
+            "OSM-Portland-forum": {
+                "name": "OpenStreetMap PDX Google gruppen"
+            },
+            "OSM-RU-forum": {
+                "name": "OpenStreetMap RU forum",
+                "description": "OpenStreetMap Rusland webforum"
+            },
+            "OSM-RU-telegram": {
+                "name": "OpenStreetMap RU telegram",
+                "description": "OpenStreetMap Rusland Telegram chat"
             },
             "OSM-Reddit": {
                 "name": "OpenStreetMap på Reddit",
                 "description": "/r/openstreetmap/ er et godt sted at lære mere om OpenStreetMap.  Spørg os om alt!"
             },
+            "OSM-Rome-meetup": {
+                "description": "Forbedre OpenStreetMap i Rom området"
+            },
+            "OSM-Seattle": {
+                "name": "OpenStreetMap Seattle"
+            },
+            "OSM-SoCal": {
+                "name": "OpenStreetMap Southern California"
+            },
+            "OSM-South-Bay": {
+                "name": "OSM South Bay"
+            },
+            "OSM-TH-CNX-meetup": {
+                "name": "OSM Meetup Chiang Mai"
+            },
+            "OSM-TH-facebook": {
+                "description": "Facebook gruppe for OpenStreetMap kortlæggere i Thailand"
+            },
+            "OSM-TH-forum": {
+                "name": "OpenStreetMap TH forum",
+                "description": "OpenStreetMap Thailand webforum"
+            },
+            "OSM-TW-facebook": {
+                "name": "OpenStreetMap Taiwan Community"
+            },
+            "OSM-TW-mailinglist": {
+                "name": "OpenStreetMap Taiwan mailingliste"
+            },
+            "OSM-TW-telegram": {
+                "name": "OpenStreetMap Taiwan Telegram"
+            },
+            "OSM-Tampa-Bay": {
+                "name": "OpenStreetMap Tampa Bay"
+            },
+            "OSM-Telegram": {
+                "name": "OpenStreetMap Telegram"
+            },
             "OSM-Twitter": {
+                "name": "OpenStreetMap Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "OSM-US": {
+                "name": "OpenStreetMap US"
+            },
+            "OSM-US-Slack": {
+                "name": "OpenStreetMap US Slack"
+            },
+            "OSM-Utah": {
+                "name": "OpenStreetMap Utah"
+            },
+            "OSM-Wyoming": {
+                "name": "OpenStreetMap Wyoming"
+            },
+            "OSM-br-discord": {
+                "name": "OpenStreetMap Brasil Discord"
+            },
+            "OSM-br-mailinglist": {
+                "name": "Talk-br mailingliste"
+            },
+            "OSM-br-telegram": {
+                "name": "OpenStreetMap Brasil Telegram"
+            },
+            "OSM-br-twitter": {
+                "name": "OpenStreetMap Brasil Twitter",
                 "description": "Følg os på Twitter på {url}"
             },
             "OSM-help": {
@@ -6603,15 +7936,154 @@
                 "description": "Stil et spørgsmål og få svar på OSM's fællesskabs-drevne spørgsmål- og svar side.",
                 "extendedDescription": "{url} er for alle der har brug for hjælp med OpenStreetMap. Hvad enten du er en begynder eller har et teknisk spørgsmål, er vi her for at hjælpe!"
             },
+            "OSM-india-mailinglist": {
+                "name": "OpenStreetMap Indien mailingliste"
+            },
+            "OSM-india-twitter": {
+                "name": "OpenStreetMap Indien Twitter",
+                "description": "Vi er kun et tweet væk: {url}"
+            },
+            "OSM-japan-facebook": {
+                "name": "OpenStreetMap Japan Community",
+                "description": "Kortlæggere og OpenStreetMap brugere i Japan"
+            },
+            "OSM-japan-mailinglist": {
+                "name": "OpenStreetMap Japan mailingliste"
+            },
+            "OSM-japan-twitter": {
+                "name": "OpenStreetMap Japan Twitter",
+                "description": "Hashtag på Twitter: {url}"
+            },
+            "OSM-japan-website": {
+                "name": "OpenStreetMap Japan",
+                "description": "Kortlæggere og OpenStreetMap brugere i Japan"
+            },
+            "OSM-sri-lanka-facebook": {
+                "name": "OpenStreetMap Sri Lanka",
+                "description": "Forbedre OpenStreetMap i Sri Lanka"
+            },
             "OSMF": {
+                "name": "OpenStreetMap Foundation",
                 "description": "OSMF er en UK-baseret non-profit organisation der støtter OpenStreetMap projektet",
-                "extendedDescription": "OSMF støtter OpenStreetMap ved at rejse penge, vedligeholde serverne der driver OSM, organisere den årlige State of the Map konference, og koordinere de frivillige der holder OSM kørende. Du kan vise din støtte og have en stemme i forhold til OpenStreetMaps retning ved at melde dig som OSMF medlem her: {signupUrl}"
+                "extendedDescription": "OSMF støtter OpenStreetMap ved at rejse penge, vedligeholde serverne der driver OSM, organisere den årlige State of the Map konference, og koordinere de frivillige der holder OSM kørende. Du kan vise din støtte og have en stemme i forhold til OpenStreetMaps retning ved at melde dig som OSMF medlem her: {signupUrl}",
+                "events": {
+                    "sotm2020": {
+                        "name": "State of the Map 2020",
+                        "where": "Cape Town, South Africa"
+                    }
+                }
+            },
+            "OpenCleveland-meetup": {
+                "name": "Open Cleveland",
+                "description": "Forbedre OpenStreetMap i Cleveland området"
+            },
+            "PHXGeo-meetup": {
+                "name": "PHXGeo Meetup"
+            },
+            "PHXGeo-twitter": {
+                "name": "PHXGeo Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "Western-Slope-facebook": {
+                "name": "Western Slope OSM Facebook"
+            },
+            "Western-Slope-meetup": {
+                "name": "Western Slope OSM Meetup"
+            },
+            "al-forum": {
+                "name": "OSM Albanien Forum",
+                "description": "OpenStreetMap Albanien Forum"
+            },
+            "al-maptime-tirana": {
+                "name": "Maptime Tirana"
+            },
+            "al-telegram": {
+                "description": "OpenStreetMap Albanien Telegram kanal"
+            },
+            "al-twitter": {
+                "name": "OpenStreetMap Albanien Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "at-forum": {
+                "name": "OpenStreetMap Østrig Forum"
+            },
+            "at-twitter": {
+                "name": "OpenStreetMap Østrig Twitter",
+                "description": "OpenStreetMap Østrig på Twitter: {url}"
+            },
+            "be-forum": {
+                "name": "OpenStreetMap BE forum",
+                "description": "OpenStreetMap Belgien webforum"
+            },
+            "be-irc": {
+                "name": "OpenStreetMap Belgien IRC",
+                "description": "Kom ind i kanalen #osmbe på irc.oftc.net (port 6667)"
+            },
+            "be-mailinglist": {
+                "name": "Talk-be mailingliste"
+            },
+            "be-matrix": {
+                "description": "Alle kortlæggere er velkomne!"
+            },
+            "be-twitter": {
+                "name": "OpenStreetMap Belgien Twitter"
+            },
+            "bg-wiki": {
+                "name": "OpenStreetMap Wikiprojekt Bulgarien",
+                "description": "Wikiprojektside for Bulgarien"
+            },
+            "bi-vc-cvl_wiki": {
+                "name": "OSMers BI-VC-CVL"
             },
             "bw-facebook": {
                 "name": "Kortlæg Botswana på Facebook"
             },
             "bw-twitter": {
                 "name": "Kortlæg Botswana på Twitter"
+            },
+            "cape-coast-youthmappers": {
+                "description": "Følg os på Twitter på {url}"
+            },
+            "ch-irc": {
+                "description": "Kom ind i kanalen #osm-ch på irc.oftc.net (port 6667)"
+            },
+            "ch-twitter": {
+                "description": "Følg os på Twitter på {url}"
+            },
+            "de-berlin-mailinglist": {
+                "name": "Berlin maillingliste"
+            },
+            "de-berlin-meetup": {
+                "name": "OpenStreetMap Berlin-Brandenburg Meetup"
+            },
+            "de-berlin-telegram": {
+                "name": "@osmberlin på Telegram",
+                "description": "OpenStreetMap Berlin Telegram chat"
+            },
+            "de-berlin-twitter": {
+                "name": "OpenStreetMap Berlin Twitter",
+                "description": "Følg os på Twitter på {url}"
+            },
+            "de-forum": {
+                "name": "OpenStreetMap DE forum",
+                "description": "OpenStreetMap Tyskland webforum"
+            },
+            "de-hamburg-telegram": {
+                "name": "OSM Hamburg på Telegram",
+                "description": "OpenStreetMap Hamburg Telegram chat: {url}"
+            },
+            "de-irc": {
+                "name": "OpenStreetMap Tyskland IRC",
+                "description": "Kom ind i kanalen #osm-de på irc.oftc.net (port 6667)"
+            },
+            "de-mailinglist": {
+                "name": "Talk-de mailingliste"
+            },
+            "de-matrix": {
+                "name": "OpenStreetMap Germany Matrix"
+            },
+            "de-viersen-meetup": {
+                "name": "OpenStreetMap Viersen Meetup"
             },
             "dk-forum": {
                 "name": "OpenStreetMap Danmark webforum",
@@ -6624,6 +8096,20 @@
             "dk-mailinglist": {
                 "name": "Talk-dk mailinglisten",
                 "description": "En mailingliste hvor OpenStreetMap i Danmark diskuteres"
+            },
+            "es-twitter": {
+                "description": "Følg os på Twitter på {url}"
+            },
+            "et-telegram": {
+                "name": "@OpenStreetMapEthiopia på Telegram",
+                "description": "OpenStreetMap Ethiopia Telegram chat"
+            },
+            "fi-forum": {
+                "name": "OpenStreetMap FI forum",
+                "description": "OpenStreetMap Finland webforum"
+            },
+            "fi-irc": {
+                "name": "OpenStreetMap Finland IRC"
             }
         }
     }

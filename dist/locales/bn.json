@@ -204,7 +204,6 @@
             "title": "ওপেনস্ট্রীটম্যাপে আপলোড করুন",
             "save": "আপলোড করুন",
             "cancel": "বাতিল করুন",
-            "changes": "{count}টি পরিবর্তন",
             "warnings": "সতর্কতা",
             "modified": "পরিবর্তিত",
             "deleted": "মুছে ফেলা হয়েছে",
@@ -258,9 +257,6 @@
             "title": "আমার অবস্থানটি দেখান"
         },
         "inspector": {
-            "zoom_to": {
-                "title": "এটিতে জুম করুন"
-            },
             "show_more": "আরো দেখান",
             "view_on_osm": "openstreetmap.org-এ দেখুন",
             "new_relation": "নতুন সম্পর্ক...",
@@ -359,10 +355,6 @@
             "description": "বিবরন",
             "on_wiki": "wiki.osm.org-এ {tag}",
             "used_with": "{type}-এর সাথে ব্যবহার করা হয়"
-        },
-        "zoom": {
-            "in": "জুম করুন",
-            "out": "জুম থেকে বাহির হোন"
         },
         "cannot_zoom": "বর্তমান মোডে আরও জুম আউট করা যাবে না।",
         "help": {
@@ -555,9 +547,6 @@
                 "description": {
                     "label": "বর্ননা"
                 },
-                "elevation": {
-                    "label": "উচ্চতা"
-                },
                 "emergency": {
                     "label": "জরুরি"
                 },
@@ -614,7 +603,6 @@
                     "label": "ধরন"
                 },
                 "internet_access": {
-                    "label": "ইন্টারনেট সুবিধা",
                     "options": {
                         "no": "না",
                         "terminal": "টার্মিনাল",
@@ -837,9 +825,6 @@
                 },
                 "amenity/restaurant": {
                     "name": "রেস্তোরাঁ"
-                },
-                "amenity/swimming_pool": {
-                    "name": "সাঁতার কাটার পুকুর"
                 },
                 "amenity/telephone": {
                     "name": "টেলিফোন"
@@ -1105,20 +1090,8 @@
                 "railway/disused": {
                     "name": "অব্যবহৃত রেলপথ"
                 },
-                "railway/monorail": {
-                    "name": "মনোরেল"
-                },
-                "railway/rail": {
-                    "name": "রেল"
-                },
-                "railway/subway": {
-                    "name": "ভূতলপথ"
-                },
                 "railway/subway_entrance": {
                     "name": "ভূতলপথ দ্বার"
-                },
-                "railway/tram": {
-                    "name": "ট্রাম"
                 },
                 "relation": {
                     "name": "সম্পর্ক"
@@ -1161,9 +1134,6 @@
                 },
                 "shop/electronics": {
                     "name": "ইলেকট্রনিক্স-এর দোকান"
-                },
-                "shop/fishmonger": {
-                    "name": "মৎস্য ব্যবসায়ী"
                 },
                 "shop/florist": {
                     "name": "ফুল ব্যবসায়ী"

@@ -75,7 +75,6 @@
         "commit": {
             "save": "Last opp",
             "cancel": "Avbryt",
-            "changes": "{count} endringar",
             "errors": "Feil",
             "warnings": "Åtvaringar",
             "modified": "Modifisert",
@@ -587,7 +586,6 @@
                     "label": "Innskrift"
                 },
                 "internet_access": {
-                    "label": "Internett-tilgang",
                     "options": {
                         "no": "Nei",
                         "terminal": "Terminal",
@@ -854,9 +852,6 @@
                 },
                 "attraction/carousel": {
                     "name": "Karusell"
-                },
-                "railway/tram": {
-                    "name": "Trikk"
                 },
                 "waterway/river": {
                     "name": "Elv"

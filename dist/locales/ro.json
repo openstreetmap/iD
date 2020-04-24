@@ -322,7 +322,6 @@
             "title": "Încarcă în OpenStreetMap",
             "save": "Încarcă",
             "cancel": "Renunță",
-            "changes": "{count} Modificări",
             "warnings": "Atenționări",
             "modified": "Modificat",
             "deleted": "Șters",
@@ -1098,9 +1097,6 @@
                         "yes": "Da (nespecificat)"
                     }
                 },
-                "elevation": {
-                    "label": "Elevație"
-                },
                 "email": {
                     "label": "Email",
                     "placeholder": "example@example.com"
@@ -1218,7 +1214,6 @@
                     "label": "Inscripție"
                 },
                 "internet_access": {
-                    "label": "Acces internet",
                     "options": {
                         "no": "Nu",
                         "terminal": "Terminal",
@@ -1226,9 +1221,6 @@
                         "wlan": "Wifi",
                         "yes": "Da"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Acces Internet Gratuit"
                 },
                 "kerb": {
                     "label": "Curbură"
@@ -1636,9 +1628,6 @@
                 "advertising/billboard": {
                     "name": "Billboard"
                 },
-                "aerialway/gondola": {
-                    "name": "Gondolă"
-                },
                 "aerialway/mixed_lift": {
                     "name": "Lift Mixat"
                 },
@@ -1807,9 +1796,6 @@
                 "amenity/recycling_centre": {
                     "name": "Centru de Reciclare"
                 },
-                "amenity/register_office": {
-                    "name": "Oficiu de Registrare"
-                },
                 "amenity/restaurant": {
                     "name": "Restaurant"
                 },
@@ -1821,9 +1807,6 @@
                 },
                 "amenity/studio": {
                     "name": "Studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Piscină"
                 },
                 "amenity/taxi": {
                     "name": "Stand de Taxi"
@@ -2149,9 +2132,6 @@
                 "junction": {
                     "name": "Juncție"
                 },
-                "landuse/allotments": {
-                    "name": "Grădină Comunitară"
-                },
                 "landuse/aquaculture": {
                     "name": "Acvacultură"
                 },
@@ -2203,14 +2183,8 @@
                 "landuse/military/naval_base": {
                     "name": "Bază Navală"
                 },
-                "landuse/military/obstacle_course": {
-                    "name": "Curs cu Obstacole"
-                },
                 "landuse/military/range": {
                     "name": "Gamă Militară"
-                },
-                "landuse/military/training_area": {
-                    "name": "Zonă de Training"
                 },
                 "landuse/residential": {
                     "name": "Zonă Rezidențială"
@@ -2551,29 +2525,11 @@
                 "railway/disused": {
                     "name": "Cale Ferată Învechită"
                 },
-                "railway/funicular": {
-                    "name": "Frânghie"
-                },
                 "railway/level_crossing": {
                     "name": "Traversare de Cale Ferată (Stradă)"
                 },
-                "railway/monorail": {
-                    "name": "Monoșină"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Cale Ferată Îngustă"
-                },
-                "railway/rail": {
-                    "name": "Șină"
-                },
-                "railway/subway": {
-                    "name": "Metrou"
-                },
                 "railway/subway_entrance": {
                     "name": "Intrare Metrou"
-                },
-                "railway/tram": {
-                    "name": "Tranvai"
                 },
                 "relation": {
                     "name": "Relație"

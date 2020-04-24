@@ -344,7 +344,6 @@
             "request_review": "Бих желал някой да прегледа моите промени.",
             "save": "Качи",
             "cancel": "Отказ",
-            "changes": "{count} промени",
             "download_changes": "Свалете osmChange файл",
             "warnings": "Предупреждения",
             "modified": "Променени",
@@ -622,10 +621,6 @@
             "on_wiki": "{tag} в wiki.osm.org",
             "used_with": "използва се с {type}"
         },
-        "zoom": {
-            "in": "Навътре",
-            "out": "Навън"
-        },
         "cannot_zoom": "Не можете да намалявате повече в текущия режим.",
         "full_screen": "Превключи на Цял Екран",
         "mapillary_images": {
@@ -651,8 +646,7 @@
                 "before_start_h": "Преди да започнете",
                 "before_start": "Трябва да сте запознати с OpenStreetMap и този редактор преди да започнете да редактирате. iD съдържа въвеждащ урок за основните неща при редактирането на OpenStreetMap. Кликнете на \"Стартирай въведението\" на този екран, за да започнете урока - отнема само около 15 минути.",
                 "open_source_h": "Отворен код",
-                "open_source": "Редакторът iD е съвместен проект с отворен код и в момента използвате издание {version}. Изходният код е наличен [в GitHub](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Може да помогнете на iD с [превод] (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) или [докладване на бъгове](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "Редакторът iD е съвместен проект с отворен код и в момента използвате издание {version}. Изходният код е наличен [в GitHub](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "title": "Преглед",
@@ -1184,9 +1178,6 @@
                     },
                     "placeholder": "Контактна мрежа, контактна релса"
                 },
-                "elevation": {
-                    "label": "Надморска височина"
-                },
                 "email": {
                     "label": "Email",
                     "placeholder": "example@example.com"
@@ -1326,7 +1317,6 @@
                     "label": "Пресъхващ"
                 },
                 "internet_access": {
-                    "label": "Интернет достъп",
                     "options": {
                         "no": "Не",
                         "terminal": "Терминал",
@@ -1334,9 +1324,6 @@
                         "wlan": "Wifi",
                         "yes": "Да"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Такса за достъп до интернет"
                 },
                 "kerb": {
                     "label": "Бордюр"
@@ -1877,9 +1864,6 @@
                 "amenity/restaurant": {
                     "name": "Ресторант"
                 },
-                "amenity/swimming_pool": {
-                    "name": "Плувен басейн"
-                },
                 "amenity/taxi": {
                     "name": "Такси стоянка"
                 },
@@ -2270,20 +2254,8 @@
                 "railway/disused": {
                     "name": "Закрита железопътна линия"
                 },
-                "railway/monorail": {
-                    "name": "Монорелсов път"
-                },
-                "railway/rail": {
-                    "name": "ЖП линия"
-                },
-                "railway/subway": {
-                    "name": "Метро"
-                },
                 "railway/subway_entrance": {
                     "name": "Вход на метростанция"
-                },
-                "railway/tram": {
-                    "name": "Трамвайни релси"
                 },
                 "relation": {
                     "name": "Релация"
@@ -2350,9 +2322,6 @@
                 },
                 "shop/farm": {
                     "name": "Щанд за плодове и зеленчуци"
-                },
-                "shop/fishmonger": {
-                    "name": "Магазин за риба"
                 },
                 "shop/florist": {
                     "name": "Магазин за цветя"

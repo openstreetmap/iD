@@ -114,7 +114,6 @@
         },
         "commit": {
             "cancel": "રદ કરો",
-            "changes": "{count} ફેરફારો",
             "warnings": "ચેતવણીઓ",
             "modified": "બદલેલ",
             "deleted": "દૂર કરેલ",

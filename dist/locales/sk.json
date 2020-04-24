@@ -280,7 +280,6 @@
             "request_review": "Chcem aby niekto skontroloval moje úpravy.",
             "save": "Nahrať",
             "cancel": "Zrušiť",
-            "changes": "{count} Zmien",
             "download_changes": "Stiahnuť osmChange súbor",
             "warnings": "Upozornenia",
             "modified": "Upravené",
@@ -1313,9 +1312,6 @@
                     },
                     "placeholder": "Troleje, elektrifikované koľaje..."
                 },
-                "elevation": {
-                    "label": "Nadmorská výška"
-                },
                 "email": {
                     "label": "Email",
                     "placeholder": "http://priklad.sk/"
@@ -1474,7 +1470,6 @@
                     "label": "Striedavý"
                 },
                 "internet_access": {
-                    "label": "Prístup k Internetu",
                     "options": {
                         "no": "Nie",
                         "terminal": "Terminál",
@@ -1482,9 +1477,6 @@
                         "wlan": "Wifi",
                         "yes": "Áno"
                     }
-                },
-                "internet_access/fee": {
-                    "label": "Poplatok za prístup k Internetu"
                 },
                 "kerb": {
                     "label": "Obrubník"
@@ -2194,10 +2186,6 @@
                     "name": "Vlek",
                     "terms": "lyžiarsky vlek, lyziarsky vlek"
                 },
-                "aerialway/gondola": {
-                    "name": "Kyvadlová lanovka",
-                    "terms": "kyvadlova lanovka,kyvadlo,lanovka,kabínka,kabinka"
-                },
                 "aerialway/goods": {
                     "name": "Zásobovacia lanovka",
                     "terms": "zasobovacia lanovka"
@@ -2522,9 +2510,6 @@
                     "name": "Recyklačné centrum",
                     "terms": "recyklacne centrum"
                 },
-                "amenity/register_office": {
-                    "name": "Matričný úrad"
-                },
                 "amenity/restaurant": {
                     "name": "Reštaurácia",
                     "terms": "bar,kafetéria,kantýna,jedáleň,pizzeria,jedlo,rýchloobčerstvenie,fastfood,večera,reštaurácia,reštika,jedenie,kantyna,jedalen,rychloobcerstvenie,vecera,restauracia,restika"
@@ -2536,9 +2521,6 @@
                 "amenity/school": {
                     "name": "Školský areál",
                     "terms": "Skolsky areal,skola,druzina"
-                },
-                "amenity/scrapyard": {
-                    "name": "Vrakovisko"
                 },
                 "amenity/shelter": {
                     "name": "Prístrešok",
@@ -2571,9 +2553,6 @@
                 "amenity/studio": {
                     "name": "Štúdio",
                     "terms": "Studio"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Plaváreň"
                 },
                 "amenity/taxi": {
                     "name": "Stanovisko taxíkov",
@@ -3278,10 +3257,6 @@
                     "name": "Križovatka",
                     "terms": "krizovatka"
                 },
-                "landuse/allotments": {
-                    "name": "Komunitná záhrada",
-                    "terms": "komunitna zahrada,pestovatelska plocha,poestvateľská plocha"
-                },
                 "landuse/basin": {
                     "name": "Zadržiavacia nádrž"
                 },
@@ -3774,36 +3749,12 @@
                     "name": "Železnica mimo prevádzky",
                     "terms": "zeleznica mimo prevadzky,mimo prevadzky"
                 },
-                "railway/funicular": {
-                    "name": "Lanová dráha",
-                    "terms": "lanova zeleznica,lanova draha"
-                },
-                "railway/monorail": {
-                    "name": "Jednokoľajnicová dráha",
-                    "terms": "jednokolajnicova draha,jednokolajka,monorail"
-                },
-                "railway/narrow_gauge": {
-                    "name": "Úzkorozchodná železnica",
-                    "terms": "uzkorozchodna zeleznica,uzkokolajka,úzkoľajka"
-                },
-                "railway/rail": {
-                    "name": "Železničná trať",
-                    "terms": "zeleznicna trat,trat,trať,železnica,zeleznica"
-                },
                 "railway/station": {
                     "name": "Vlaková stanica"
-                },
-                "railway/subway": {
-                    "name": "Metro",
-                    "terms": "metro,podzemna draha,podzemná dráha"
                 },
                 "railway/subway_entrance": {
                     "name": "Vstup do metra",
                     "terms": "vstup,metro,podchod,stanica metra"
-                },
-                "railway/tram": {
-                    "name": "Električka",
-                    "terms": "elektricka,tramvaj"
                 },
                 "relation": {
                     "name": "Relácia",
@@ -3976,9 +3927,6 @@
                 "shop/fashion": {
                     "name": "Obchod s módnymi doplnkami"
                 },
-                "shop/fishmonger": {
-                    "name": "Predaj rýb"
-                },
                 "shop/florist": {
                     "name": "Kvetinárstvo",
                     "terms": "kvetinarstvo,kvety,kytice"
@@ -3990,9 +3938,6 @@
                 "shop/funeral_directors": {
                     "name": "Pohrebný ústav",
                     "terms": "pohrebny ustav,pohreb,pohreb,pohrebníctvo,pohrebnictvo"
-                },
-                "shop/furnace": {
-                    "name": "Obchod so kotlami"
                 },
                 "shop/furniture": {
                     "name": "Obchod s nábytkom",

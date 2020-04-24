@@ -261,7 +261,6 @@
             "request_review": "Unë do doja që dikush ti rishikonte editimet e mia",
             "save": "Ngarkoni",
             "cancel": "Anullo",
-            "changes": "{count} Ndryshime",
             "warnings": "Paralajmërime",
             "modified": "Modifikuar",
             "deleted": "Fshirë",
@@ -507,10 +506,6 @@
             "on_wiki": "{tag} në wiki.osm.org",
             "used_with": "përdorur me {type}"
         },
-        "zoom": {
-            "in": "Zmadhoni",
-            "out": "Zvogëloni"
-        },
         "streetside": {
             "view_on_bing": "Shikoje në hartat e Bing",
             "hires": "Rezolucion i lartë"
@@ -556,8 +551,7 @@
                 "open_data_h": "Të dhëna të hapura",
                 "open_data": "Editimet që do bëni në këtë hartë do të jenë të dukshme tek çdokush që përdor OpenStreetMap. Editimet tuaja mund të bazohen në dijet vetjake, vëzhgimet tokësore apo imazheritë e mbledhura nga fotot aeriale apo tokësore. Të kopjuarit nga burime komerciale si Google Maps, [është rreptësisht e ndaluar](https://www.openstreetmap.org/copyright).",
                 "before_start_h": "Përpara se të filloni",
-                "open_source": "Editori iD është një projekt bashkëpunues me kodburim të hapur dhe ju po përdorni versionin {version} tani. Kodburimi është i disponueshëm [në Github](https://github.com/openstreetmap/iD).",
-                "open_source_help": "Ju mund të ndihmoni iD duke [përkthyer](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ose [të raportoni problematika](https://github.com/openstreetmap/iD/issues)."
+                "open_source": "Editori iD është një projekt bashkëpunues me kodburim të hapur dhe ju po përdorni versionin {version} tani. Kodburimi është i disponueshëm [në Github](https://github.com/openstreetmap/iD)."
             },
             "overview": {
                 "navigation_h": "Navigim",

@@ -281,9 +281,6 @@
                 "description": {
                     "label": "Beskrywing"
                 },
-                "elevation": {
-                    "label": "Hoogte bo seespiëel"
-                },
                 "emergency": {
                     "label": "Noodgeval"
                 },
@@ -310,7 +307,6 @@
                     "label": "Steilte"
                 },
                 "internet_access": {
-                    "label": "Internet Toegang",
                     "options": {
                         "terminal": "Terminaal",
                         "wired": "Bedraad",
@@ -554,9 +550,6 @@
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Swembad"
                 },
                 "amenity/taxi": {
                     "name": "Taxi staanplek"
@@ -966,20 +959,8 @@
                 "railway/disused": {
                     "name": "Ongebruikte spoorweg"
                 },
-                "railway/monorail": {
-                    "name": "Enkelspoorbaan"
-                },
-                "railway/rail": {
-                    "name": "Treinspoor"
-                },
-                "railway/subway": {
-                    "name": "Metro"
-                },
                 "railway/subway_entrance": {
                     "name": "Metro Ingang"
-                },
-                "railway/tram": {
-                    "name": "Trem"
                 },
                 "relation": {
                     "name": "Verhouding"
@@ -1043,9 +1024,6 @@
                 },
                 "shop/farm": {
                     "name": "Padstal"
-                },
-                "shop/fishmonger": {
-                    "name": "Viswinkel"
                 },
                 "shop/florist": {
                     "name": "Bloemiste"

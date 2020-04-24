@@ -176,10 +176,6 @@
         "tag_reference": {
             "description": "Sharaxaad"
         },
-        "zoom": {
-            "in": "Soo dhawee",
-            "out": "Fogee"
-        },
         "help": {
             "title": "Caawin",
             "help": {
@@ -393,7 +389,6 @@
                     "label": "Nooca"
                 },
                 "internet_access": {
-                    "label": "Helitaanka Internet-ka",
                     "options": {
                         "no": "Maya",
                         "yes": "Haa"
