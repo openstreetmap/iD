@@ -1606,6 +1606,11 @@ en:
         # opening_hours field placeholder
         placeholder: Unknown
         terms: '[translate with synonyms or related terms for ''Hours'', separated by commas]'
+      opening_hours/covid19:
+        # 'opening_hours:covid19=*'
+        label: COVID-19 Pandemic Hours
+        # 'terms: coronavirus,lockdown,opening hours,SARS‑CoV‑2'
+        terms: '[translate with synonyms or related terms for ''COVID-19 Pandemic Hours'', separated by commas]'
       operator:
         # operator=*
         label: Operator
@@ -3616,9 +3621,6 @@ en:
         name: Recycling Container
         # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
-      amenity/register_office:
-        # amenity=register_office
-        name: Register Office
       amenity/research_institute:
         # amenity=research_institute
         name: Research Institute Grounds
@@ -3729,9 +3731,6 @@ en:
         name: School Grounds
         # 'terms: academy,elementary school,middle school,high school'
         terms: '<translate with synonyms or related terms for ''School Grounds'', separated by commas>'
-      amenity/scrapyard:
-        # amenity=scrapyard
-        name: Scrap Yard
       amenity/shelter:
         # amenity=shelter
         name: Shelter
@@ -3822,9 +3821,6 @@ en:
         name: Film Studio
         # 'terms: movie production,movie studio,video production,video recording,video studio'
         terms: '<translate with synonyms or related terms for ''Film Studio'', separated by commas>'
-      amenity/swimming_pool:
-        # amenity=swimming_pool
-        name: Swimming Pool
       amenity/taxi:
         # amenity=taxi
         name: Taxi Stand
@@ -7884,9 +7880,6 @@ en:
         name: Fishing Shop
         # 'terms: bait,fishing line,flies,fly,lure,reel,rod,tackle'
         terms: '<translate with synonyms or related terms for ''Fishing Shop'', separated by commas>'
-      shop/fishmonger:
-        # shop=fishmonger
-        name: Fishmonger
       shop/flooring:
         # shop=flooring
         name: Flooring Supply Shop
@@ -7915,9 +7908,6 @@ en:
         name: Funeral Home
         # 'terms: undertaker,memorial home'
         terms: '<translate with synonyms or related terms for ''Funeral Home'', separated by commas>'
-      shop/furnace:
-        # shop=furnace
-        name: Furnace Store
       shop/furniture:
         # shop=furniture
         name: Furniture Store

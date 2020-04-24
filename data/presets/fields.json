@@ -288,6 +288,7 @@
   "openfire": {"key": "openfire", "type": "check", "label": "Open Fires Allowed"},
   "opening_date": {"key": "opening_date", "type": "text", "label": "Expected Opening Date", "placeholder": "YYYY-MM-DD"},
   "opening_hours": {"key": "opening_hours", "type": "combo", "label": "Hours", "placeholder": "Unknown", "snake_case": false},
+  "opening_hours/covid19": {"key": "opening_hours:covid19", "type": "combo", "label": "COVID-19 Pandemic Hours", "terms": ["coronavirus", "lockdown", "opening hours", "SARS‑CoV‑2"], "snake_case": false},
   "operator": {"key": "operator", "type": "text", "label": "Operator"},
   "operator/type": {"key": "operator:type", "type": "combo", "label": "Operator Type", "prerequisiteTag": {"key": "operator"}},
   "outdoor_seating": {"key": "outdoor_seating", "type": "check", "label": "Outdoor Seating"},
