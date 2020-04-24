@@ -183,6 +183,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Fix combobox suggestion list placement when embedding iD ([#7458])
 * Persist the changeset comment, hashtags, and sources from the URL through UI reloads ([#7504])
 
+[#7449]: https://github.com/openstreetmap/iD/issues/7449
 [#7437]: https://github.com/openstreetmap/iD/issues/7437
 [#7457]: https://github.com/openstreetmap/iD/issues/7457
 [#7458]: https://github.com/openstreetmap/iD/issues/7458
