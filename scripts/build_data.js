@@ -819,8 +819,8 @@ function writeTnpIcons(tnpIcons) {
    *  }
    */
   let nounAuth;
-  if (fs.existsSync('../the_noun_project.auth')) {
-    nounAuth = JSON.parse(fs.readFileSync('../the_noun_project.auth', 'utf8'));
+  if (fs.existsSync('the_noun_project.auth')) {
+    nounAuth = JSON.parse(fs.readFileSync('the_noun_project.auth', 'utf8'));
   }
   const baseURL = 'http://api.thenounproject.com/icon/';
 
