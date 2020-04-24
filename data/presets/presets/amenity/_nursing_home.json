@@ -8,6 +8,7 @@
         "social_facility",
         "social_facility_for",
         "opening_hours",
+        "opening_hours/covid19",
         "wheelchair"
     ],
     "geometry": [

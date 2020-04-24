@@ -2,6 +2,7 @@
     "icon": "temaki-shower",
     "fields": [
         "opening_hours",
+        "opening_hours/covid19",
         "access_simple",
         "fee",
         "payment_multi_fee",

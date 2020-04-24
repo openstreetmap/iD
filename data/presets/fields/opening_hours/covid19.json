@@ -1,0 +1,6 @@
+{
+    "key": "opening_hours:covid19",
+    "type": "combo",
+    "label": "COVID-19 Pandemic Hours",
+    "snake_case": false
+}

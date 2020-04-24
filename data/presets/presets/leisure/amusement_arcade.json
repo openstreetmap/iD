@@ -18,6 +18,7 @@
         "max_age",
         "min_age",
         "opening_hours",
+        "opening_hours/covid19",
         "payment_multi",
         "phone",
         "smoking",
