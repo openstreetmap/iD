@@ -6347,6 +6347,11 @@ en:
         # man_made=pumping_station
         name: Pumping Station
         terms: '<translate with synonyms or related terms for ''Pumping Station'', separated by commas>'
+      man_made/reservoir_covered:
+        # man_made=reservoir_covered
+        name: Covered Reservoir
+        # 'terms: underground reservoir,water tank'
+        terms: '<translate with synonyms or related terms for ''Covered Reservoir'', separated by commas>'
       man_made/silo:
         # man_made=silo
         name: Silo

@@ -8017,6 +8017,10 @@
                     "name": "Pumping Station",
                     "terms": ""
                 },
+                "man_made/reservoir_covered": {
+                    "name": "Covered Reservoir",
+                    "terms": "underground reservoir,water tank"
+                },
                 "man_made/silo": {
                     "name": "Silo",
                     "terms": "grain,corn,wheat"

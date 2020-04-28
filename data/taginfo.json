@@ -752,6 +752,7 @@
     {"key": "location", "value": "underground", "description": "🄿 Underground Pipeline, 🄿 Underground Power Cable", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/pipeline-line.svg"},
     {"key": "pipeline", "value": "valve", "description": "🄿 Pipeline Valve", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/wheel.svg"},
     {"key": "man_made", "value": "pumping_station", "description": "🄿 Pumping Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/powered_pump.svg"},
+    {"key": "man_made", "value": "reservoir_covered", "description": "🄿 Covered Reservoir", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "man_made", "value": "silo", "description": "🄿 Silo", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},
     {"key": "man_made", "value": "storage_tank", "description": "🄿 Storage Tank", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/storage_tank.svg"},
     {"key": "content", "value": "water", "description": "🄿 Water Tank", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/storage_tank.svg"},
