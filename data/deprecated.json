@@ -623,10 +623,6 @@
     "replace": {"boundary": "protected_area"}
   },
   {
-    "old": {"landuse": "farm"},
-    "replace": {"landuse": "farmland"}
-  },
-  {
     "old": {"landuse": "field"},
     "replace": {"landuse": "farmland"}
   },

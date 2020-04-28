@@ -586,7 +586,7 @@
     {"key": "junction", "value": "yes", "description": "🄿 Junction", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/junction.svg"},
     {"key": "landuse", "value": "basin", "description": "🄿 Basin (unsearchable), 🄳 ➜ natural=water + water=basin", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "landuse", "value": "churchyard", "description": "🄿 Churchyard (unsearchable)", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/religious-christian-15.svg"},
-    {"key": "landuse", "value": "farm", "description": "🄿 Farmland (unsearchable), 🄳 ➜ landuse=farmland", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/farm-15.svg"},
+    {"key": "landuse", "value": "farm", "description": "🄿 Farmland (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/farm-15.svg"},
     {"key": "landuse", "value": "pond", "description": "🄿 Pond (unsearchable), 🄳 ➜ natural=water + water=pond", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "landuse", "value": "reservoir", "description": "🄿 Reservoir (unsearchable), 🄳 ➜ natural=water + water=reservoir", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "landuse", "value": "allotments", "description": "🄿 Garden Allotments", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/garden-centre-15.svg"},
