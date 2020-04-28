@@ -3177,6 +3177,9 @@
                 "destination_oneway": {
                     "label": "Destinations"
                 },
+                "destination": {
+                    "label": "Destination"
+                },
                 "destination/ref_oneway": {
                     "label": "Destination Road Numbers"
                 },

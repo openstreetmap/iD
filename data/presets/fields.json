@@ -112,6 +112,7 @@
   "description": {"key": "description", "type": "textarea", "label": "Description", "universal": true, "terms": ["summary"]},
   "design": {"key": "design", "type": "combo", "label": "Design"},
   "destination_oneway": {"key": "destination", "type": "semiCombo", "label": "Destinations", "prerequisiteTag": {"key": "oneway", "value": "yes"}, "snake_case": false},
+  "destination": {"key": "destination", "type": "text", "label": "Destination"},
   "destination/ref_oneway": {"key": "destination:ref", "type": "semiCombo", "label": "Destination Road Numbers", "prerequisiteTag": {"key": "oneway", "value": "yes"}, "snake_case": false},
   "destination/symbol_oneway": {"key": "destination:symbol", "type": "semiCombo", "label": "Destination Symbols", "prerequisiteTag": {"key": "oneway", "value": "yes"}},
   "devices": {"key": "devices", "type": "number", "minValue": 0, "label": "Devices", "placeholder": "1, 2, 3..."},

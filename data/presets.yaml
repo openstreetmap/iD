@@ -655,6 +655,9 @@ en:
       design:
         # design=*
         label: Design
+      destination:
+        # destination=*
+        label: Destination
       destination/ref_oneway:
         # 'destination:ref=*'
         label: Destination Road Numbers

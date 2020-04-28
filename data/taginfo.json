@@ -1451,7 +1451,7 @@
     {"key": "depth", "description": "🄵 Depth (Meters)"},
     {"key": "description", "description": "🄵 Description"},
     {"key": "design", "description": "🄵 Design"},
-    {"key": "destination", "description": "🄵 Destinations"},
+    {"key": "destination", "description": "🄵 Destinations, 🄵 Destination"},
     {"key": "destination:ref", "description": "🄵 Destination Road Numbers"},
     {"key": "destination:symbol", "description": "🄵 Destination Symbols"},
     {"key": "devices", "description": "🄵 Devices"},
