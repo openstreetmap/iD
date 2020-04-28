@@ -6191,7 +6191,7 @@
                 },
                 "barrier/height_restrictor": {
                     "name": "Height Restrictor",
-                    "terms": ""
+                    "terms": "height barrier,height restriction barrier,maxheight,maximum height measurer"
                 },
                 "barrier/kerb": {
                     "name": "Curb",

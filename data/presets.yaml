@@ -4207,6 +4207,7 @@ en:
       barrier/height_restrictor:
         # barrier=height_restrictor
         name: Height Restrictor
+        # 'terms: height barrier,height restriction barrier,maxheight,maximum height measurer'
         terms: '<translate with synonyms or related terms for ''Height Restrictor'', separated by commas>'
       barrier/kerb:
         # barrier=kerb

@@ -9,5 +9,11 @@
     "tags": {
         "barrier": "height_restrictor"
     },
+    "terms": [
+        "height barrier",
+        "height restriction barrier",
+        "maxheight",
+        "maximum height measurer"
+    ],
     "name": "Height Restrictor"
 }
