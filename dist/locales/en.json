@@ -6219,7 +6219,7 @@
                 },
                 "barrier/lift_gate": {
                     "name": "Lift Gate",
-                    "terms": ""
+                    "terms": "boom barrier,boom gate,boom lift,hinged bar,pivoted pole"
                 },
                 "barrier/retaining_wall": {
                     "name": "Retaining Wall",

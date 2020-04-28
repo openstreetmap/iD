@@ -4238,6 +4238,7 @@ en:
       barrier/lift_gate:
         # barrier=lift_gate
         name: Lift Gate
+        # 'terms: boom barrier,boom gate,boom lift,hinged bar,pivoted pole'
         terms: '<translate with synonyms or related terms for ''Lift Gate'', separated by commas>'
       barrier/retaining_wall:
         # barrier=retaining_wall
