@@ -4358,6 +4358,11 @@ en:
         # building=construction
         name: Building Under Construction
         terms: '<translate with synonyms or related terms for ''Building Under Construction'', separated by commas>'
+      building/cowshed:
+        # building=cowshed
+        name: Cowshed
+        # 'terms: byre,cow barn,cow house,cow shed,cowbarn,cowhouse,dairy barn,milking barn'
+        terms: '<translate with synonyms or related terms for ''Cowshed'', separated by commas>'
       building/detached:
         # building=detached
         name: Detached House
@@ -4435,6 +4440,11 @@ en:
         # building=mosque
         name: Mosque Building
         terms: '<translate with synonyms or related terms for ''Mosque Building'', separated by commas>'
+      building/office:
+        # building=office
+        name: Office Building
+        # 'terms: business center,office block'
+        terms: '<translate with synonyms or related terms for ''Office Building'', separated by commas>'
       building/pavilion:
         # building=pavilion
         name: Pavilion Building
@@ -4493,6 +4503,11 @@ en:
         name: Static Mobile Home
         # 'terms: house trailer,manufactured home,mobile home,prefabricated home,residential caravan,static caravan,trailer home'
         terms: '<translate with synonyms or related terms for ''Static Mobile Home'', separated by commas>'
+      building/sty:
+        # building=sty
+        name: Pigsty
+        # 'terms: hog parlor,hog pen,pig ark,pig barn,pig parlor,pig pen,pig shed,pig shelter,pig-cote,piggery,pigpen,pigshed,sty'
+        terms: '<translate with synonyms or related terms for ''Pigsty'', separated by commas>'
       building/temple:
         # building=temple
         name: Temple Building

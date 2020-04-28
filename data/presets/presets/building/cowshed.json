@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-barn",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "cowshed"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "byre",
+        "cow barn",
+        "cow house",
+        "cow shed",
+        "cowbarn",
+        "cowhouse",
+        "dairy barn",
+        "milking barn"
+    ],
+    "name": "Cowshed"
+}

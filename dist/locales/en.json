@@ -6338,6 +6338,10 @@
                     "name": "Building Under Construction",
                     "terms": ""
                 },
+                "building/cowshed": {
+                    "name": "Cowshed",
+                    "terms": "byre,cow barn,cow house,cow shed,cowbarn,cowhouse,dairy barn,milking barn"
+                },
                 "building/detached": {
                     "name": "Detached House",
                     "terms": "home,single,family,residence,dwelling"
@@ -6406,6 +6410,10 @@
                     "name": "Mosque Building",
                     "terms": ""
                 },
+                "building/office": {
+                    "name": "Office Building",
+                    "terms": "business center,office block"
+                },
                 "building/pavilion": {
                     "name": "Pavilion Building",
                     "terms": "sports"
@@ -6457,6 +6465,10 @@
                 "building/static_caravan": {
                     "name": "Static Mobile Home",
                     "terms": "house trailer,manufactured home,mobile home,prefabricated home,residential caravan,static caravan,trailer home"
+                },
+                "building/sty": {
+                    "name": "Pigsty",
+                    "terms": "hog parlor,hog pen,pig ark,pig barn,pig parlor,pig pen,pig shed,pig shelter,pig-cote,piggery,pigpen,pigshed,sty"
                 },
                 "building/temple": {
                     "name": "Temple Building",
