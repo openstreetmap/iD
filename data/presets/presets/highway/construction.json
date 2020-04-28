@@ -2,6 +2,7 @@
     "icon": "maki-barrier",
     "fields": [
         "name",
+        "construction",
         "opening_date",
         "check_date",
         "note",
@@ -17,9 +18,11 @@
         "access": "no"
     },
     "terms": [
-        "closed",
         "closure",
-        "construction"
+        "construction",
+        "road closed",
+        "road work",
+        "roadwork"
     ],
-    "name": "Road Closed"
+    "name": "Closed Road"
 }

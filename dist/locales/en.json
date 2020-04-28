@@ -6922,8 +6922,8 @@
                     "terms": ""
                 },
                 "highway/construction": {
-                    "name": "Road Closed",
-                    "terms": "closed,closure,construction"
+                    "name": "Closed Road",
+                    "terms": "closure,construction,road closed,road work,roadwork"
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor",

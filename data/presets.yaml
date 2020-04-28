@@ -5032,9 +5032,9 @@ en:
         name: Bus Stop
       highway/construction:
         # 'highway=construction, access=no'
-        name: Road Closed
-        # 'terms: closed,closure,construction'
-        terms: '<translate with synonyms or related terms for ''Road Closed'', separated by commas>'
+        name: Closed Road
+        # 'terms: closure,construction,road closed,road work,roadwork'
+        terms: '<translate with synonyms or related terms for ''Closed Road'', separated by commas>'
       highway/corridor:
         # highway=corridor
         name: Indoor Corridor
