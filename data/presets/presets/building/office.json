@@ -4,6 +4,11 @@
         "{building}",
         "smoking"
     ],
+    "moreFields": [
+        "{building}",
+        "phone",
+        "website"
+    ],
     "geometry": [
         "area"
     ],
