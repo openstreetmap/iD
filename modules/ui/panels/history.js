@@ -84,7 +84,7 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'changeset-osmcha-link')
-            .attr('href', 'https://osmcha.mapbox.com/changesets/' + changeset)
+            .attr('href', 'https://osmcha.org/changesets/' + changeset)
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text('OSMCha');
