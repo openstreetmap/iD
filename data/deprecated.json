@@ -12,6 +12,14 @@
     "replace": {"access": "yes"}
   },
   {
+    "old": {"aerodrome": "military"},
+    "replace": {"military": "airfield"}
+  },
+  {
+    "old": {"aerodrome:type": "military"},
+    "replace": {"military": "airfield"}
+  },
+  {
     "old": {"agrarian": "agrcultural_machinry"},
     "replace": {"agrarian": "agricultural_machinery"}
   },
