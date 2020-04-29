@@ -276,13 +276,6 @@ en:
       bath/type:
         # 'bath:type=*'
         label: Specialty
-        options:
-          # 'bath:type=foot_bath'
-          foot_bath: Foot Bath
-          # 'bath:type=hot_spring'
-          hot_spring: Hot Spring
-          # 'bath:type=onsen'
-          onsen: Japanese Onsen
       beauty:
         # beauty=*
         label: Services

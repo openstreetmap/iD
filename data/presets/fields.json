@@ -35,7 +35,7 @@
   "basin": {"key": "basin", "type": "combo", "label": "Type"},
   "bath/open_air": {"key": "bath:open_air", "label": "Open Air", "type": "check"},
   "bath/sand_bath": {"key": "bath:sand_bath", "label": "Sand Bath", "type": "check"},
-  "bath/type": {"key": "bath:type", "type": "combo", "label": "Specialty", "strings": {"options": {"onsen": "Japanese Onsen", "foot_bath": "Foot Bath", "hot_spring": "Hot Spring"}}},
+  "bath/type": {"key": "bath:type", "type": "combo", "label": "Specialty"},
   "beauty": {"key": "beauty", "type": "semiCombo", "label": "Services"},
   "bench": {"key": "bench", "type": "check", "label": "Bench", "terms": ["seating"]},
   "bicycle_parking": {"key": "bicycle_parking", "type": "combo", "label": "Type"},

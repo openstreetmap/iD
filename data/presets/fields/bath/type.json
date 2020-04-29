@@ -1,12 +1,5 @@
 {
   "key": "bath:type",
   "type": "combo",
-  "label": "Specialty",
-  "strings": {
-    "options": {
-      "onsen": "Japanese Onsen",
-      "foot_bath": "Foot Bath",
-      "hot_spring": "Hot Spring"
-    }
-  }
+  "label": "Specialty"
 }
