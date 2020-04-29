@@ -1,10 +1,10 @@
 {
     "icon": "fas-plane",
-    "geometry": [
-        "point"
-    ],
     "fields": [
         "ref_aeroway_gate"
+    ],
+    "geometry": [
+        "point"
     ],
     "tags": {
         "aeroway": "gate"

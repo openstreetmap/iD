@@ -2917,9 +2917,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Airport'', separated by commas>'
       aeroway/apron:
         # aeroway=apron
-        name: Apron
-        # 'terms: ramp'
-        terms: '<translate with synonyms or related terms for ''Apron'', separated by commas>'
+        name: Airport Apron
+        # 'terms: aircraft parking,flight line,hardstand,ramp,tarmac,taxiway'
+        terms: '<translate with synonyms or related terms for ''Airport Apron'', separated by commas>'
       aeroway/gate:
         # aeroway=gate
         name: Airport Gate

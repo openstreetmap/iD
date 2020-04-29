@@ -46,7 +46,7 @@
     {"key": "aerialway", "value": "t-bar", "description": "🄿 T-Bar Lift", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/t_bar_lift.svg"},
     {"key": "aerialway", "value": "zip_line", "description": "🄿 Zip Line", "object_types": ["way"]},
     {"key": "aeroway", "value": "aerodrome", "description": "🄿 Airport", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/airport.svg"},
-    {"key": "aeroway", "value": "apron", "description": "🄿 Apron", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/planes.svg"},
+    {"key": "aeroway", "value": "apron", "description": "🄿 Airport Apron", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/planes.svg"},
     {"key": "aeroway", "value": "gate", "description": "🄿 Airport Gate", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-plane.svg"},
     {"key": "aeroway", "value": "hangar", "description": "🄿 Hangar", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/hangar.svg"},
     {"key": "aeroway", "value": "helipad", "description": "🄿 Helipad", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/heliport-15.svg"},

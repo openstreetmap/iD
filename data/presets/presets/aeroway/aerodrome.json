@@ -1,21 +1,30 @@
 {
     "icon": "temaki-airport",
-    "geometry": [
-        "area",
-        "point"
-    ],
     "fields": [
         "name",
         "iata",
         "icao",
+        "address",
         "operator",
+        "operator/type",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid"
     ],
     "moreFields": [
-        "gnis/feature_id"
+        "email",
+        "fax",
+        "gnis/feature_id",
+        "phone",
+        "website"
     ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "aeroway": "aerodrome"
+    },
     "terms": [
         "aerodrome",
         "aeroway",
@@ -24,9 +33,6 @@
         "jet",
         "plane"
     ],
-    "tags": {
-        "aeroway": "aerodrome"
-    },
     "matchScore": 0.9,
     "name": "Airport"
 }

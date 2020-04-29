@@ -1,9 +1,5 @@
 {
     "icon": "fas-space-shuttle",
-    "geometry": [
-        "area",
-        "point"
-    ],
     "fields": [
         "name",
         "operator",
@@ -19,6 +15,13 @@
         "internet_access/ssid",
         "phone"
     ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "aeroway": "spaceport"
+    },
     "terms": [
         "cosmodrome",
         "rocket launch center",
@@ -27,8 +30,5 @@
         "rocket range",
         "space port"
     ],
-    "tags": {
-        "aeroway": "spaceport"
-    },
     "name": "Spaceport"
 }

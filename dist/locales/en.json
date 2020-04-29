@@ -5128,8 +5128,8 @@
                     "terms": "aerodrome,aeroway,airplane,airport,jet,plane"
                 },
                 "aeroway/apron": {
-                    "name": "Apron",
-                    "terms": "ramp"
+                    "name": "Airport Apron",
+                    "terms": "aircraft parking,flight line,hardstand,ramp,tarmac,taxiway"
                 },
                 "aeroway/gate": {
                     "name": "Airport Gate",

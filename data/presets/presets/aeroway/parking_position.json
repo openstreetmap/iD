@@ -1,12 +1,12 @@
 {
     "icon": "temaki-plane_taxiing",
+    "fields": [
+        "ref"
+    ],
     "geometry": [
         "vertex",
         "point",
         "line"
-    ],
-    "fields": [
-        "ref"
     ],
     "tags": {
         "aeroway": "parking_position"
