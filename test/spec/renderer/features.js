@@ -121,7 +121,6 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'bridleway', tags: {highway: 'bridleway'}, version: 1}),
             iD.osmWay({id: 'steps', tags: {highway: 'steps'}, version: 1}),
             iD.osmWay({id: 'pedestrian', tags: {highway: 'pedestrian'}, version: 1}),
-            iD.osmWay({id: 'corridor', tags: {highway: 'corridor', indoor: 'yes'}, version: 1}),
 
             // Buildings
             iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
@@ -136,6 +135,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'room', tags: {area: 'yes', indoor: 'room'}, version: 1}),
             iD.osmWay({id: 'indoor_area', tags: {area: 'yes', indoor: 'area'}, version: 1}),
             iD.osmWay({id: 'indoor_bar', tags: {area: 'yes', indoor: 'room', amenity: 'bar'}, version: 1}),
+            iD.osmWay({id: 'corridor', tags: {highway: 'corridor', indoor: 'yes'}, version: 1}),
 
             // Pistes
             iD.osmWay({id: 'downhill_piste', tags: {'piste:type': 'downhill'}, version: 1}),
@@ -306,13 +306,13 @@ describe('iD.rendererFeatures', function() {
 
             doMatch('paths', [
                 'path', 'footway', 'cycleway', 'bridleway',
-                'steps', 'pedestrian', 'corridor'
+                'steps', 'pedestrian'
             ]);
 
             dontMatch('paths', [
                 'point_bar', 'motorway', 'service', 'building_yes',
                 'forest', 'boundary', 'boundary_member', 'water', 'railway', 'power_line',
-                'motorway_construction', 'fence'
+                'motorway_construction', 'fence', 'corridor'
             ]);
         });
 
