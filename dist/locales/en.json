@@ -8011,6 +8011,10 @@
                     "name": "Pipeline Valve",
                     "terms": "oil,natural gas,water,sewer,sewage"
                 },
+                "man_made/planter": {
+                    "name": "Planter",
+                    "terms": ""
+                },
                 "man_made/pumping_station": {
                     "name": "Pumping Station",
                     "terms": ""

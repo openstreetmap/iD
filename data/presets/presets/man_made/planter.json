@@ -1,0 +1,14 @@
+{
+    "icon": "maki-garden",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+	    "material"
+    ],
+    "tags": {
+        "man_made": "planter"
+    },
+    "name": "Planter"
+}

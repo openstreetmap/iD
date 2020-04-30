@@ -6339,6 +6339,10 @@ en:
         name: Pipeline Valve
         # 'terms: oil,natural gas,water,sewer,sewage'
         terms: '<translate with synonyms or related terms for ''Pipeline Valve'', separated by commas>'
+      man_made/planter:
+        # man_made=planter
+        name: Planter
+        terms: '<translate with synonyms or related terms for ''Planter'', separated by commas>'
       man_made/pumping_station:
         # man_made=pumping_station
         name: Pumping Station
