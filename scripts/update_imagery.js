@@ -60,6 +60,7 @@ const discard = {
   'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
   'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
   'tf-landscape': true,                 // 'Thunderforest Landscape'
+  'tf-outdoors': true,                  // 'Thunderforest Outdoors'
   'qa_no_address': true,                // 'QA No Address'
   'wikimedia-map': true,                // 'Wikimedia Map'
 
