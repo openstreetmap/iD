@@ -10,7 +10,8 @@
     ],
     "tags": {
         "highway": "crossing",
-        "crossing": "marked"
+        "crossing": "marked",
+        "bicycle": "yes"
     },
     "addTags": {
         "highway": "crossing",
