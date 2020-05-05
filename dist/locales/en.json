@@ -585,7 +585,6 @@
             },
             "extract": {
                 "title": "Extract",
-                "key": "E",
                 "description": {
                     "vertex": {
                         "single": "Extract this point from its parent lines/areas."
@@ -716,7 +715,6 @@
             "truncated_list": "Edits by {users} and {count} others"
         },
         "info_panels": {
-            "key": "I",
             "background": {
                 "key": "B",
                 "title": "Background",
@@ -1746,7 +1744,6 @@
         },
         "issues": {
             "title": "Issues",
-            "key": "I",
             "list_title": "Issues ({count})",
             "errors": {
                 "list_title": "Errors ({count})"
