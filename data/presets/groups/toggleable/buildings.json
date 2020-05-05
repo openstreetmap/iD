@@ -29,6 +29,7 @@
             },
             "shop": true,
             "office": true,
+            "craft": true,
             "emergency": true,
             "historic": true,
             "leisure": true,
@@ -36,7 +37,8 @@
             "military": true,
             "public_transport": true,
             "telecom": true,
-            "tourism": true
+            "tourism": true,
+            "healthcare": true
         }
     }
 }

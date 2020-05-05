@@ -5,12 +5,13 @@
         "hiddenByDefault": true
     },
     "matches": {
-        "geometry": ["line", "area", "relation"],
-        "allTags": {
+        "geometry": ["point", "line", "area", "relation"],
+        "anyTags": {
             "boundary": {
                 "*": true,
                 "no": false
-            }
+            },
+            "place": true
         },
         "allGroups": {
             "toggleable/traffic_roads": false,
