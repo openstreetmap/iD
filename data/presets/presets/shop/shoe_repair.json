@@ -1,0 +1,14 @@
+{
+    "icon": "maki-shoe",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "shoe_repair"
+    },
+    "terms": [
+        "cobbler"
+    ],
+    "name": "Shoe Repair Shop"
+}

@@ -1174,6 +1174,7 @@
   "shop/seafood": {"icon": "temaki-fish_cleaning", "geometry": ["point", "area"], "terms": ["fishmonger"], "tags": {"shop": "seafood"}, "name": "Seafood Shop"},
   "shop/second_hand": {"icon": "maki-shop", "fields": ["{shop}", "second_hand"], "geometry": ["point", "area"], "terms": ["secondhand", "second hand", "resale", "thrift", "used"], "tags": {"shop": "second_hand"}, "name": "Consignment/Thrift Store"},
   "shop/sewing": {"icon": "temaki-needle_and_spool", "geometry": ["point", "area"], "terms": ["haberdashery"], "tags": {"shop": "sewing"}, "name": "Sewing Supply Shop"},
+  "shop/shoe_repair": {"icon": "maki-shoe", "geometry": ["point", "area"], "tags": {"shop": "shoe_repair"}, "terms": ["cobbler"], "name": "Shoe Repair Shop"},
   "shop/shoes": {"icon": "maki-shoe", "geometry": ["point", "area"], "tags": {"shop": "shoes"}, "terms": ["boots", "cleats", "clogs", "heels", "loafers", "oxfords", "sneakers"], "name": "Shoe Store"},
   "shop/spices": {"icon": "temaki-spice_bottle", "geometry": ["point", "area"], "terms": ["chili", "cinnamon", "curry", "ginger", "herbs", "pepper", "saffron", "salt", "spice store", "spices", "turmeric", "wasabi"], "tags": {"shop": "spices"}, "name": "Spice Shop"},
   "shop/sports": {"icon": "fas-futbol", "fields": ["name", "operator", "sport", "{shop}"], "geometry": ["point", "area"], "tags": {"shop": "sports"}, "terms": ["athletics"], "name": "Sporting Goods Store"},

@@ -1119,6 +1119,7 @@
     {"key": "shop", "value": "seafood", "description": "🄿 Seafood Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/fish_cleaning.svg"},
     {"key": "shop", "value": "second_hand", "description": "🄿 Consignment/Thrift Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "sewing", "description": "🄿 Sewing Supply Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/needle_and_spool.svg"},
+    {"key": "shop", "value": "shoe_repair", "description": "🄿 Shoe Repair Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shoe-15.svg"},
     {"key": "shop", "value": "shoes", "description": "🄿 Shoe Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shoe-15.svg"},
     {"key": "shop", "value": "spices", "description": "🄿 Spice Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/spice_bottle.svg"},
     {"key": "shop", "value": "sports", "description": "🄿 Sporting Goods Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-futbol.svg"},

@@ -9603,6 +9603,10 @@
                     "name": "Sewing Supply Shop",
                     "terms": "haberdashery"
                 },
+                "shop/shoe_repair": {
+                    "name": "Shoe Repair Shop",
+                    "terms": "cobbler"
+                },
                 "shop/shoes": {
                     "name": "Shoe Store",
                     "terms": "boots,cleats,clogs,heels,loafers,oxfords,sneakers"

@@ -8232,6 +8232,11 @@ en:
         name: Sewing Supply Shop
         # 'terms: haberdashery'
         terms: '<translate with synonyms or related terms for ''Sewing Supply Shop'', separated by commas>'
+      shop/shoe_repair:
+        # shop=shoe_repair
+        name: Shoe Repair Shop
+        # 'terms: cobbler'
+        terms: '<translate with synonyms or related terms for ''Shoe Repair Shop'', separated by commas>'
       shop/shoes:
         # shop=shoes
         name: Shoe Store
