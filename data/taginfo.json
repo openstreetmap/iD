@@ -1563,6 +1563,7 @@
     {"key": "hot_water", "description": "🄵 Hot Water"},
     {"key": "iata", "description": "🄵 IATA Airport Code"},
     {"key": "icao", "description": "🄵 ICAO Airport Code"},
+    {"key": "image", "description": "🄵 Image"},
     {"key": "incline", "value": "up", "description": "🄵 Incline"},
     {"key": "incline", "value": "down", "description": "🄵 Incline"},
     {"key": "incline", "description": "🄵 Incline"},

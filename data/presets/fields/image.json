@@ -1,0 +1,13 @@
+{
+    "key": "image",
+    "type": "url",
+    "label": "Image",
+    "placeholder": "https://example.com/photo.jpg",
+    "universal": true,
+    "terms": [
+        "icon",
+        "image uri",
+        "photo",
+        "picture"
+    ]
+}

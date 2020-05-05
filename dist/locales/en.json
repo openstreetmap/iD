@@ -3570,6 +3570,11 @@
                 "icao": {
                     "label": "ICAO Airport Code"
                 },
+                "image": {
+                    "label": "Image",
+                    "terms": "icon,image uri,photo,picture",
+                    "placeholder": "https://example.com/photo.jpg"
+                },
                 "incline_steps": {
                     "label": "Incline",
                     "options": {

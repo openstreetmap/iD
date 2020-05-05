@@ -1110,6 +1110,13 @@ en:
       icao:
         # icao=*
         label: ICAO Airport Code
+      image:
+        # image=*
+        label: Image
+        # image field placeholder
+        placeholder: 'https://example.com/photo.jpg'
+        # 'terms: icon,image uri,photo,picture'
+        terms: '[translate with synonyms or related terms for ''Image'', separated by commas]'
       incline:
         # incline=*
         label: Incline
