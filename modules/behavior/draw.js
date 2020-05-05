@@ -19,7 +19,8 @@ var _lastSpace = null;
 
 export function behaviorDraw(context) {
     var dispatch = d3_dispatch(
-        'move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
+        'move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish',
+        'rejectedVertexAsPoint'
     );
 
     var keybinding = utilKeybinding('draw');
@@ -138,7 +139,12 @@ export function behaviorDraw(context) {
                 dispatch.call('clickWay', this, choice.loc, edge, d);
                 return;
             }
-        } else if (mode.id !== 'add-point' || mode.preset.matchGeometry('point')) {
+        } else {
+            if (mode.id === 'add-point' && !mode.preset.matchGeometry('point')) {
+                // attempting to add a vertex as an independent point
+                dispatch.call('rejectedVertexAsPoint', this);
+                return;
+            }
             var locLatLng = context.projection.invert(loc);
             dispatch.call('click', this, locLatLng, d);
         }

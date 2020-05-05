@@ -162,6 +162,38 @@ export var osmRightSideIsInsideTags = {
     }
 };
 
+export var osmTagsAllowingBridges = {
+    highway: {
+        motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
+        motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
+        unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true,
+        path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true,
+        raceway: true
+    },
+    railway: {
+        rail: true, light_rail: true, tram: true, subway: true,
+        monorail: true, funicular: true, miniature: true, narrow_gauge: true,
+        disused: true, preserved: true, abandoned: true
+    }
+};
+export var osmTagsAllowingTunnels = {
+    highway: {
+        motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
+        motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
+        unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true,
+        path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true,
+        raceway: true
+    },
+    railway: {
+        rail: true, light_rail: true, tram: true, subway: true,
+        monorail: true, funicular: true, miniature: true, narrow_gauge: true,
+        disused: true, preserved: true, abandoned: true
+    },
+    waterway: {
+        canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
+    }
+};
+
 // "highway" tag values for pedestrian or vehicle right-of-ways that make up the routable network
 // (does not include `raceway`)
 export var osmRoutableHighwayTagValues = {

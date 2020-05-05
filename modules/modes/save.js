@@ -59,7 +59,7 @@ export function modeSave(context) {
         var selection = context.container()
             .select('.sidebar')
             .append('div')
-            .attr('class','sidebar-component');
+            .attr('class','sidebar-component save-pane');
 
         context.container().selectAll('.main-content')
             .classed('active', true)

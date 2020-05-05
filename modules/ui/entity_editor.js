@@ -1,14 +1,13 @@
-import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { presetManager } from '../presets';
-import { t, localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { utilArrayIdentical } from '../util/array';
-import { utilCleanTags, utilCombinedTags, utilRebind } from '../util';
+import { utilCleanTags, utilCombinedTags } from '../util';
 
 import { uiSectionEntityIssues } from './sections/entity_issues';
 import { uiSectionFeatureType } from './sections/feature_type';
@@ -17,16 +16,16 @@ import { uiSectionRawMemberEditor } from './sections/raw_member_editor';
 import { uiSectionRawMembershipEditor } from './sections/raw_membership_editor';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { uiSectionSelectionList } from './sections/selection_list';
+import { uiViewOnOSM } from './view_on_osm';
 
 export function uiEntityEditor(context) {
-    var dispatch = d3_dispatch('choose');
     var _state = 'select';
     var _coalesceChanges = false;
     var _modified = false;
     var _base;
     var _entityIDs;
     var _activePresets = [];
-    var _newFeature;
+    var _newFeature = false;
 
     var _sections;
 
@@ -41,16 +40,11 @@ export function uiEntityEditor(context) {
         // Enter
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
 
         headerEnter
             .append('button')
-            .attr('class', 'fl preset-reset preset-choose')
-            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
-
-        headerEnter
-            .append('button')
-            .attr('class', 'fr preset-close')
+            .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
@@ -64,11 +58,6 @@ export function uiEntityEditor(context) {
         header.selectAll('h3')
             .text(_entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'));
 
-        header.selectAll('.preset-reset')
-            .on('click', function() {
-                dispatch.call('choose', this, _activePresets);
-            });
-
         // Body
         var body = selection.selectAll('.inspector-body')
             .data([0]);
@@ -76,7 +65,7 @@ export function uiEntityEditor(context) {
         // Enter
         var bodyEnter = body.enter()
             .append('div')
-            .attr('class', 'entity-editor inspector-body sep-top');
+            .attr('class', 'entity-editor inspector-body');
 
         // Update
         body = body
@@ -85,12 +74,16 @@ export function uiEntityEditor(context) {
         if (!_sections) {
             _sections = [
                 uiSectionSelectionList(context),
-                uiSectionFeatureType(context).on('choose', function(presets) {
-                    dispatch.call('choose', this, presets);
-                }),
+                uiSectionFeatureType(context)
+                    .on('choose.entityEditor', function(presets) {
+                        entityEditor.presets(presets);
+                    }),
                 uiSectionEntityIssues(context),
-                uiSectionPresetFields(context).on('change', changeTags).on('revert', revertTags),
-                uiSectionRawTagEditor('raw-tag-editor', context).on('change', changeTags),
+                uiSectionPresetFields(context)
+                    .on('change.entityEditor', changeTags)
+                    .on('revert.entityEditor', revertTags),
+                uiSectionRawTagEditor('raw-tag-editor', context)
+                    .on('change.entityEditor', changeTags),
                 uiSectionRawMemberEditor(context),
                 uiSectionRawMembershipEditor(context)
             ];
@@ -108,6 +101,9 @@ export function uiEntityEditor(context) {
             }
             if (section.state) {
                 section.state(_state);
+            }
+            if (section.newFeature) {
+                section.newFeature(_newFeature);
             }
             body.call(section.render);
         });
@@ -129,6 +125,19 @@ export function uiEntityEditor(context) {
                     body.select('input').node().focus();
                 }
             });
+
+        var footer = selection.selectAll('.footer')
+            .data([0]);
+
+        footer = footer.enter()
+            .append('div')
+            .attr('class', 'footer')
+            .merge(footer);
+
+        footer
+            .call(uiViewOnOSM(context)
+                .what(context.hasEntity(_entityIDs.length === 1 && _entityIDs[0]))
+            );
 
         context.history()
             .on('change.entity-editor', historyChanged);
@@ -283,6 +292,10 @@ export function uiEntityEditor(context) {
     entityEditor.state = function(val) {
         if (!arguments.length) return _state;
         _state = val;
+
+        // remove any old field help overlay that might have gotten attached to the inspector
+        context.container().selectAll('.field-help-body').remove();
+
         return entityEditor;
     };
 
@@ -344,11 +357,11 @@ export function uiEntityEditor(context) {
         if (!arguments.length) return _activePresets;
 
         // don't reload the same preset
-        if (!utilArrayIdentical(val, _activePresets)) {
+        if (!val || !_activePresets || !utilArrayIdentical(val, _activePresets)) {
             _activePresets = val;
         }
         return entityEditor;
     };
 
-    return utilRebind(entityEditor, dispatch, 'on');
+    return entityEditor;
 }

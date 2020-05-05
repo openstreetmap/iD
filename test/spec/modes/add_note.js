@@ -17,9 +17,7 @@ describe('iD.modeAddNote', function() {
 
         context.loadTiles = function () {};
 
-        container.call(context.map())
-            .append('div')
-            .attr('class', 'inspector-wrap');
+        container.call(context.map());
 
         context.map().centerZoom([-77.02271, 38.90085], 20);
         context.enter(iD.modeAddNote(context));

@@ -238,11 +238,13 @@ export function coreContext() {
   context.enter = (newMode) => {
     if (_mode) {
       _mode.exit();
+      _container.classed(`mode-${_mode.id}`, false);
       dispatch.call('exit', this, _mode);
     }
 
     _mode = newMode;
     _mode.enter();
+    _container.classed(`mode-${newMode.id}`, true);
     dispatch.call('enter', this, _mode);
   };
 
@@ -405,7 +407,7 @@ export function coreContext() {
     _uploader.reset();
 
     // don't leave stale state in the inspector
-    context.container().select('.inspector-wrap *').remove();
+    context.container().select('.entity-editor-pane *').remove();
 
     return context;
   };

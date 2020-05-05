@@ -247,11 +247,11 @@ export function uiIntroLine(context, reveal) {
         if (button.empty()) return chapter.restart();
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.entity-editor-pane .panewrap').style('right', '-100%');
 
             reveal(button.node(),
                 t('intro.lines.choose_category_road', { category: roadCategory.name() })
@@ -264,7 +264,7 @@ export function uiIntroLine(context, reveal) {
         }, 400);  // after editor pane visible
 
         function continueTo(nextStep) {
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             context.container().select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
@@ -316,7 +316,7 @@ export function uiIntroLine(context, reveal) {
         });
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         timeout(function() {
             var button = context.container().select('.entity-editor-pane .preset-list-button');
@@ -332,7 +332,7 @@ export function uiIntroLine(context, reveal) {
         }, 500);
 
         function continueTo(nextStep) {
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             context.container().select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
@@ -1058,7 +1058,7 @@ export function uiIntroLine(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        context.container().select('.inspector-wrap').on('wheel.intro', null);
+        context.container().select('.entity-editor-pane').on('wheel.intro', null);
         context.container().select('.preset-list-button').on('click.intro', null);
     };
 

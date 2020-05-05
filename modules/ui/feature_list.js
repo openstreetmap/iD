@@ -31,7 +31,7 @@ export function uiFeatureList(context) {
     function featureList(selection) {
         var header = selection
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
 
         header
             .append('h3')
@@ -59,7 +59,7 @@ export function uiFeatureList(context) {
 
         var list = listWrap
             .append('div')
-            .attr('class', 'feature-list cf');
+            .attr('class', 'feature-list');
 
         context
             .on('exit.feature-list', clearSearch);

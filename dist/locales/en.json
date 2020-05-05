@@ -14,11 +14,55 @@
             "deselect": "deselect"
         },
         "toolbar": {
-            "inspect": "Inspect",
             "undo_redo": "Undo / Redo",
             "recent": "Recent",
             "favorites": "Favorites",
-            "add_feature": "Add Feature"
+            "add_feature": "Add Feature",
+            "finish": "Finish",
+            "generic": {
+                "title": "Geometries"
+            },
+            "geometry": {
+                "key": "T"
+            },
+            "repeat": {
+                "title": "Repeat",
+                "tooltip": {
+                    "point": "Add another {feature} after this one.",
+                    "way": "Start another {feature} after finishing this one."
+                },
+                "key": "R"
+            },
+            "segments": {
+                "title": "Segments",
+                "straight": {
+                    "title": "Straight"
+                },
+                "orthogonal": {
+                    "title": "Rectangular"
+                },
+                "key": "A"
+            },
+            "structure": {
+                "none": {
+                    "title": "None"
+                },
+                "key": "S"
+            },
+            "support": {
+                "title": "Support",
+                "pole": {
+                    "title": "Pole"
+                },
+                "tower": {
+                    "title": "Tower"
+                },
+                "key": "S"
+            },
+            "toolbox": {
+                "title": "Tools",
+                "tooltip": "Customize the toolbar."
+            }
         },
         "title": {
             "format": {
@@ -30,9 +74,9 @@
         },
         "modes": {
             "add_feature": {
-                "title": "Add a feature",
-                "description": "Search for features to add to the map.",
-                "key": "Tab",
+                "search_placeholder": "Search feature types",
+                "description": "Browse features to add to the map.",
+                "key": "`",
                 "result": "{count} result",
                 "results": "{count} results"
             },
@@ -52,7 +96,10 @@
                 "title": "Point",
                 "description": "Add restaurants, monuments, postal boxes or other points to the map.",
                 "tail": "Click on the map to add a point.",
-                "filter_tooltip": "points"
+                "filter_tooltip": "points",
+                "warning": {
+                    "vertex_placement": "This must be placed along a line or area."
+                }
             },
             "add_note": {
                 "title": "Note",
@@ -574,10 +621,6 @@
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
-        "sidebar": {
-            "key": "`",
-            "tooltip": "Toggle the sidebar."
-        },
         "feature_info": {
             "hidden_warning": "{count} hidden features",
             "hidden_details": "These features are currently hidden: {details}"

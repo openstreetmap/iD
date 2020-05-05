@@ -63,7 +63,7 @@ export function uiFieldRestrictions(field, context) {
 
         // if form field is hidden or has detached from dom, clean up.
         if (!isOK ||
-            !context.container().select('.inspector-wrap.inspector-hidden').empty() ||
+            !context.container().select('.entity-editor-pane.inspector-hidden').empty() ||
             !selection.node().parentNode ||
             !selection.node().parentNode.parentNode) {
             selection.call(restrictions.off);

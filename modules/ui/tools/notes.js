@@ -15,7 +15,8 @@ export function uiToolNotes(context) {
 
     var tool = {
         id: 'notes',
-        label: t('modes.add_note.label')
+        label: t('modes.add_note.label'),
+        iconName: 'iD-icon-note'
     };
 
     var mode = modeAddNote(context);
@@ -44,22 +45,76 @@ export function uiToolNotes(context) {
         }
     });
 
-    tool.render = function(selection) {
+    var selection;
+    tool.render = function(sel) {
+        selection = sel;
+        update();
+    };
+
+    function update() {
+        var showNotes = notesEnabled();
+        var data = showNotes ? [mode] : [];
+
+        var buttons = selection.selectAll('button.add-button')
+            .data(data, function(d) { return d.id; });
+
+        // exit
+        buttons.exit()
+            .remove();
+
+        // enter
+        var buttonsEnter = buttons.enter()
+            .append('button')
+            .attr('tabindex', -1)
+            .attr('class', function(d) { return d.id + ' add-button bar-button'; })
+            .on('click.notes', function(d) {
+                if (!enabled(d)) return;
+
+                // When drawing, ignore accidental clicks on mode buttons - #4042
+                var currMode = context.mode().id;
+                if (/^draw/.test(currMode)) return;
+
+                if (d.id === currMode) {
+                    context.enter(modeBrowse(context));
+                } else {
+                    context.enter(d);
+                }
+            })
+            .call(uiTooltip()
+                .placement('bottom')
+                .title(function(d) { return d.description; })
+                .keys(function(d) { return [d.key]; })
+                .scrollContainer(context.container().select('.top-toolbar'))
+            );
+
+        buttonsEnter
+            .each(function() {
+                d3_select(this)
+                    .call(svgIcon('#' + tool.iconName));
+            });
+
+        // if we are adding/removing the buttons, check if toolbar has overflowed
+        if (buttons.enter().size() || buttons.exit().size()) {
+            context.ui().checkOverflow('.top-toolbar', true);
+        }
+
+        // update
+        buttons = buttons
+            .merge(buttonsEnter)
+            .classed('disabled', function(d) { return !enabled(d); });
+    }
+
+    tool.allowed = function() {
+        return notesEnabled();
+    };
+
+    tool.install = function() {
 
         context
             .on('enter.editor.notes', function(entered) {
                 selection.selectAll('button.add-button')
                     .classed('active', function(mode) { return entered.button === mode.button; });
-                context.container()
-                    .classed('mode-' + entered.id, true);
             });
-
-        context
-            .on('exit.editor.notes', function(exited) {
-                context.container()
-                    .classed('mode-' + exited.id, false);
-            });
-
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -69,62 +124,6 @@ export function uiToolNotes(context) {
 
         context
             .on('enter.notes', update);
-
-        update();
-
-
-        function update() {
-            var showNotes = notesEnabled();
-            var data = showNotes ? [mode] : [];
-
-            var buttons = selection.selectAll('button.add-button')
-                .data(data, function(d) { return d.id; });
-
-            // exit
-            buttons.exit()
-                .remove();
-
-            // enter
-            var buttonsEnter = buttons.enter()
-                .append('button')
-                .attr('tabindex', -1)
-                .attr('class', function(d) { return d.id + ' add-button bar-button'; })
-                .on('click.notes', function(d) {
-                    if (!enabled(d)) return;
-
-                    // When drawing, ignore accidental clicks on mode buttons - #4042
-                    var currMode = context.mode().id;
-                    if (/^draw/.test(currMode)) return;
-
-                    if (d.id === currMode) {
-                        context.enter(modeBrowse(context));
-                    } else {
-                        context.enter(d);
-                    }
-                })
-                .call(uiTooltip()
-                    .placement('bottom')
-                    .title(function(d) { return d.description; })
-                    .keys(function(d) { return [d.key]; })
-                    .scrollContainer(context.container().select('.top-toolbar'))
-                );
-
-            buttonsEnter
-                .each(function(d) {
-                    d3_select(this)
-                        .call(svgIcon(d.icon || '#iD-icon-' + d.button));
-                });
-
-            // if we are adding/removing the buttons, check if toolbar has overflowed
-            if (buttons.enter().size() || buttons.exit().size()) {
-                context.ui().checkOverflow('.top-toolbar', true);
-            }
-
-            // update
-            buttons = buttons
-                .merge(buttonsEnter)
-                .classed('disabled', function(d) { return !enabled(d); });
-        }
     };
 
     tool.uninstall = function() {

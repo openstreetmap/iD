@@ -207,11 +207,11 @@ export function uiIntroArea(context, reveal) {
         }
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.entity-editor-pane .panewrap').style('right', '-100%');
 
             context.container().select('.preset-search-input')
                 .on('keydown.intro', null)
@@ -233,9 +233,9 @@ export function uiIntroArea(context, reveal) {
                 context.enter(modeSelect(context, [_areaID]));
 
                 // reset pane, in case user somehow happened to change it..
-                context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
+                context.container().select('.entity-editor-pane .panewrap').style('right', '-100%');
                 // disallow scrolling
-                context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+                context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
                 context.container().select('.preset-search-input')
                     .on('keydown.intro', null)
@@ -269,7 +269,7 @@ export function uiIntroArea(context, reveal) {
         }
 
         function continueTo(nextStep) {
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
             context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
@@ -292,11 +292,11 @@ export function uiIntroArea(context, reveal) {
         }
 
         // disallow scrolling
-        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.entity-editor-pane').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+            context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
             // It's possible for the user to add a description in a previous step..
             // If they did this already, just continue to next step.
@@ -350,7 +350,7 @@ export function uiIntroArea(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.entity-editor-pane').on('wheel.intro', null);
             context.container().select('.more-fields .combobox-input').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
@@ -417,7 +417,7 @@ export function uiIntroArea(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
         if (context.container().select('.form-field-description').empty()) {
             return continueTo(retryChooseDescription);
@@ -449,7 +449,7 @@ export function uiIntroArea(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.entity-editor-pane .panewrap').style('right', '0%');
 
         reveal('.entity-editor-pane',
             t('intro.areas.retry_add_field', { field: descriptionField.label() }), {
@@ -490,7 +490,7 @@ export function uiIntroArea(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        context.container().select('.inspector-wrap').on('wheel.intro', null);
+        context.container().select('.entity-editor-pane').on('wheel.intro', null);
         context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
         context.container().select('.more-fields .combobox-input').on('click.intro', null);
     };

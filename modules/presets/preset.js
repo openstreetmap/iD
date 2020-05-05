@@ -1,3 +1,4 @@
+import { prefs } from '../core/preferences';
 import { t } from '../core/localizer';
 import { osmAreaKeys } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
@@ -260,6 +261,37 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       return true;
     }
   }
+
+  // The geometry type to use when adding a new feature of this preset
+  _this.defaultAddGeometry = (context, allowedGeometries) => {
+    var geometry = _this.geometry.slice().filter((geom) => {
+      if (allowedGeometries && allowedGeometries.indexOf(geom) === -1) return false;
+      if (context.features().isHiddenPreset(_this, geom)) return false;
+      return true;
+    });
+
+    var mostRecentAddGeom = prefs('preset.' + _this.id + '.addGeom');
+    if (mostRecentAddGeom === 'vertex') mostRecentAddGeom = 'point';
+    if (mostRecentAddGeom && geometry.indexOf(mostRecentAddGeom) !== -1) {
+      return mostRecentAddGeom;
+    }
+    var vertexIndex = geometry.indexOf('vertex');
+    if (vertexIndex !== -1 && geometry.indexOf('point') !== -1) {
+      // both point and vertex allowed, just use point
+      geometry.splice(vertexIndex, 1);
+    }
+    if (geometry.length) {
+      return geometry[0];
+    }
+    return null;
+  };
+
+  _this.setMostRecentAddGeometry = (geometry) => {
+    if (_this.geometry.length > 1 &&
+      _this.geometry.indexOf(geometry) !== -1) {
+      prefs('preset.' + _this.id + '.addGeom', geometry);
+    }
+  };
 
 
   return _this;
