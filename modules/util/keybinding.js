@@ -170,6 +170,12 @@ export function utilKeybinding(namespace) {
             _keybindings[id] = binding;
 
             var matches = arr[i].toLowerCase().match(/(?:(?:[^+⇧⌃⌥⌘])+|[⇧⌃⌥⌘]|\+\+|^\+$)/g);
+            /* kaligrafy START */
+            if (!matches)
+            {
+                matches = [];
+            }
+            /* kaligrafy END */
             for (var j = 0; j < matches.length; j++) {
                 // Normalise matching errors
                 if (matches[j] === '++') matches[j] = '+';

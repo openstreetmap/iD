@@ -1,0 +1,13 @@
+[
+  {"pID": "amenity/kindergarten"},
+  {"pID": "building/farm_auxiliary"},
+  {"pID": "building/kindergarten"},
+  {"pID": "highway/informal_path"},
+  {"pID": "highway/footway/private-informal"},
+  {"pID": "highway/footway/customers-informal"},
+  {"pID": "amenity/parking_entrance"},
+  {"pID": "landuse/industrial"},
+  {"pID": "landuse/commercial"},
+  {"pID": "highway/service/destination-driveway"},
+  {"pID": "highway/service/destination-parking-aisle"}
+]

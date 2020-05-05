@@ -7849,6 +7849,10 @@
                     "name": "Slipway",
                     "terms": "boat launch,boat ramp,boat landing"
                 },
+                "leisure/splash_pad": {
+                    "name": "Splash pad",
+                    "terms": "jungle gym,play area,water,splash"
+                },
                 "leisure/sports_centre": {
                     "name": "Sports Center / Complex",
                     "terms": ""

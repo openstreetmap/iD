@@ -39,8 +39,7 @@
   ],
   "tags": {
       "highway": "path",
-      "informal": "yes",
-      "path": "desire"
+      "informal": "yes"
   },
   "name": "InformalPath"
 }

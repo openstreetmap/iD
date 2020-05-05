@@ -5074,12 +5074,12 @@ en:
         # 'terms: Highway Emergency Bay'
         terms: '<translate with synonyms or related terms for ''Emergency Stopping Place'', separated by commas>'
       highway/footway:
-        # highway=footway
+        # 'highway=footway, bicycle=yes'
         name: Foot Path
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Foot Path'', separated by commas>'
       highway/footway/access_aisle:
-        # 'highway=footway, footway=access_aisle, motor_vehicle=no'
+        # 'highway=footway, footway=access_aisle, motor_vehicle=no, bicycle=yes'
         name: Access Aisle
         # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
         terms: '<translate with synonyms or related terms for ''Access Aisle'', separated by commas>'
@@ -5092,17 +5092,17 @@ en:
         # footway=crossing
         name: Pedestrian Crossing
       highway/footway/customers:
-        # 'highway=footway, access=customers, motor_vehicle=no'
+        # 'highway=footway, access=customers, motor_vehicle=no, bicycle=customers'
         name: Customers Foot Path
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Customers Foot Path'', separated by commas>'
       highway/footway/customers-informal:
-        # 'highway=path, informal=yes, path=desire, access=customers, motor_vehicle=no'
+        # 'highway=path, informal=yes, access=customers, motor_vehicle=no, bicycle=customers'
         name: Customers InformalPath
         # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
         terms: '<translate with synonyms or related terms for ''Customers InformalPath'', separated by commas>'
       highway/footway/customers_access_aisle:
-        # 'highway=footway, footway=access_aisle, access=customers, motor_vehicle=no'
+        # 'highway=footway, footway=access_aisle, access=customers, motor_vehicle=no, bicycle=customers'
         name: Customers Access Aisle
         # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
         terms: '<translate with synonyms or related terms for ''Customers Access Aisle'', separated by commas>'
@@ -5117,17 +5117,17 @@ en:
         # 'terms: zebra crossing,marked crossing,crosswalk,flat top,hump,speed,slow'
         terms: '<translate with synonyms or related terms for ''Marked Crosswalk (Raised)'', separated by commas>'
       highway/footway/private:
-        # 'highway=footway, access=private, motor_vehicle=no'
+        # 'highway=footway, access=private, motor_vehicle=no, bicycle=private'
         name: Private Foot Path
         # 'terms: hike,hiking,promenade,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Private Foot Path'', separated by commas>'
       highway/footway/private-informal:
-        # 'highway=path, informal=yes, path=desire, access=private, motor_vehicle=no'
+        # 'highway=path, informal=yes, access=private, motor_vehicle=no, bicycle=private'
         name: Private InformalPath
         # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
         terms: '<translate with synonyms or related terms for ''Private InformalPath'', separated by commas>'
       highway/footway/private_access_aisle:
-        # 'highway=footway, footway=access_aisle, access=private, motor_vehicle=no'
+        # 'highway=footway, footway=access_aisle, access=private, motor_vehicle=no, bicycle=private'
         name: Private Access Aisle
         # 'terms: accessible van loading zone,disabled parking access zone,handicap parking access zone,parking lot aisle,striped zone,tow zone,tow-away zone,towaway zone,wheelchair aisle'
         terms: '<translate with synonyms or related terms for ''Private Access Aisle'', separated by commas>'
@@ -5158,7 +5158,7 @@ en:
         # 'terms: give way,yield,sign'
         terms: '<translate with synonyms or related terms for ''Yield Sign'', separated by commas>'
       highway/informal_path:
-        # 'highway=path, informal=yes, path=desire'
+        # 'highway=path, informal=yes'
         name: InformalPath
         # 'terms: hike,hiking,trackway,trail,walk,desire,informal'
         terms: '<translate with synonyms or related terms for ''InformalPath'', separated by commas>'
@@ -6098,6 +6098,11 @@ en:
         name: Slipway
         # 'terms: boat launch,boat ramp,boat landing'
         terms: '<translate with synonyms or related terms for ''Slipway'', separated by commas>'
+      leisure/splash_pad:
+        # 'leisure=playground, palyground=splash_pad'
+        name: Splash pad
+        # 'terms: jungle gym,play area,water,splash'
+        terms: '<translate with synonyms or related terms for ''Splash pad'', separated by commas>'
       leisure/sports_centre:
         # leisure=sports_centre
         name: Sports Center / Complex

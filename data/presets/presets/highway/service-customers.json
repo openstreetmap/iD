@@ -4,14 +4,14 @@
       "name",
       "service",
       "oneway",
-      "maxspeed",
       "sidewalk",
       "sidewalk/separate-left",
       "sidewalk/separate-right",
+      "lanes",
+      "maxspeed",
+      "access",
       "surface",
-      "covered",
-      "structure",
-      "access"
+      "structure"
   ],
   "moreFields": [
       "flood_prone",

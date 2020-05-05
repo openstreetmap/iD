@@ -19,5 +19,6 @@
         "dwelling"
     ],
     "matchScore": 0.5,
-    "name": "Semi-Detached House"
+    "name": "Semi-Detached House",
+    "shortcut": ["⇧+h"]
 }

@@ -63,6 +63,7 @@ export function uiToolQuickPresets(context) {
         var items = tool.itemsToDraw();
 
         var modes = items.map(function(d) {
+
             var presetName = d.preset.name().split(' – ')[0];
             var markerClass = 'add-preset add-preset-' + d.preset.safeid
                 + ' add-' + d.source; // replace spaces with underscores to avoid css interpretation
@@ -107,11 +108,36 @@ export function uiToolQuickPresets(context) {
                 });
             }
 
+            /* kaligrafy START */
+            if (d.hidden)
+            {
+                if (mode)
+                {
+                    mode.hidden      = d.hidden;
+                }
+                if (protoMode)
+                {
+                    protoMode.hidden = d.hidden;
+                }
+            }
+            /* kaligrafy END */
+
             return mode || protoMode;
         });
 
+        /* kaligrafy START */
+        var buttonModes = [];
+        for (var i = 0, countI = modes.length; i < countI; i++)
+        {
+            if (!modes[i].hidden)
+            {
+                buttonModes.push(modes[i]);
+            }
+        }
+        /* kaligrafy END */
+
         var buttons = selection.selectAll('button.add-button')
-            .data(modes, function(d) { return d.button; })
+            .data(/* kaligrafy START */buttonModes/*modes*//* kaligrafy END */, function(d) { return d.button; })
             .order();
 
         // exit

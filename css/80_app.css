@@ -487,9 +487,8 @@ button[disabled].action:hover {
     position: absolute;
     left: 0;
     top: 0;
+    right: 0;
     z-index: 101;
-    /*transform: scale(0.85);
-    transform-origin: left top;*/
 }
 #bar {
     display: flex;
@@ -513,20 +512,16 @@ button[disabled].action:hover {
     flex: 0 1 auto;
     flex-flow: column wrap;
     justify-content: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    /*transform: scale(0.8);*/
-    
+    padding-top: 10px;
 }
 #bar .toolbar-item .item-content {
     display: flex;
     flex: 0 1 auto;
     flex-flow: row nowrap;
     justify-content: center;
-    height: 35px;
+    height: 40px;
     width: auto;
     margin: 0 5px;
-    /*transform: scale(0.8);*/
 }
 [dir='ltr'] #bar .toolbar-item:last-child .item-content,
 [dir='rtl'] #bar .toolbar-item:first-child .item-content {
@@ -1126,7 +1121,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border-bottom-right-radius: 6px;
 }
 .preset-browser .poplist-footer .message {
-    color: #666666;
+    color: #666666;
     flex-grow: 1;
 }
 .preset-browser .poplist-footer button.filter {
@@ -1857,8 +1852,8 @@ a.hide-toggle {
     justify-content: center;
 }
 .preset-icon-container.small {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     flex: 0 0 auto;
 }
 .preset-icon-container img.image-icon {

@@ -162,7 +162,11 @@ path.fill.tag-landuse-residential.tag-has-flats {
     fill: rgba(196, 189, 25, 0.3);
 }
 path.stroke.tag-landuse-residential.tag-has-flats {
-    stroke: rgb(255, 238, 0);
+    stroke: rgb(255, 255, 0);
+    stroke-width: 2;
+}
+path.fill.tag-landuse-residential.tag-has-flats {
+    stroke: rgba(255, 255, 0, 0.3);
 }
 
 /* Orange things */

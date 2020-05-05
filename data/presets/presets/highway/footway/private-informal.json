@@ -40,9 +40,9 @@
   "tags": {
       "highway": "path",
       "informal": "yes",
-      "path": "desire",
       "access": "private",
-      "motor_vehicle": "no"
+      "motor_vehicle": "no",
+      "bicycle": "private"
   },
   "name": "Private InformalPath"
 }

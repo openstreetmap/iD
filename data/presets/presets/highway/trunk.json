@@ -4,11 +4,11 @@
         "name",
         "ref_road_number",
         "oneway",
-        "maxspeed",
         "sidewalk",
         "sidewalk/separate-left",
         "sidewalk/separate-right",
         "lanes",
+        "maxspeed",
         "access",
         "surface",
         "structure"

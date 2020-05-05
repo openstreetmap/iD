@@ -3,11 +3,11 @@
     "fields": [
         "name",
         "oneway",
-        "maxspeed",
         "sidewalk",
         "sidewalk/separate-left",
         "sidewalk/separate-right",
         "lanes",
+        "maxspeed",
         "access",
         "surface",
         "structure"

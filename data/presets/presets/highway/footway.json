@@ -31,7 +31,8 @@
         "walk"
     ],
     "tags": {
-        "highway": "footway"
+        "highway": "footway",
+        "bicycle": "yes"
     },
     "name": "Foot Path",
     "shortcut": ["f"]

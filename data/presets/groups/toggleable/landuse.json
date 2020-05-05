@@ -7,7 +7,13 @@
         "anyTags": {
             "landuse": true,
             "natural": true,
-            "leisure": true
+            "leisure": true,
+            "amenity": {
+                "school": true,
+                "college": true,
+                "university": true,
+                "park": true
+            }
         },
         "allGroups": {
             "toggleable/buildings": false

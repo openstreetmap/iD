@@ -13,8 +13,6 @@ export function uiToolAddFavorite(context) {
 
         var items = context.presets().getFavorites();
 
-        //console.log(items);
-
         var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var indexModified = precedingCount;

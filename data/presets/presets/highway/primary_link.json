@@ -4,11 +4,11 @@
         "destination_oneway",
         "destination/ref_oneway",
         "oneway",
-        "maxspeed",
         "sidewalk",
         "sidewalk/separate-left",
         "sidewalk/separate-right",
         "lanes",
+        "maxspeed",
         "access",
         "surface",
         "structure"

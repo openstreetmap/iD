@@ -10,6 +10,11 @@ import { presetPreset } from './preset';
 import { utilArrayUniq, utilRebind } from '../util';
 import { groupManager } from '../entities/group_manager';
 
+/* kaligrafy START */
+import defaultFavorites from '../../data/default_favorites.json';
+import defaultHiddenFavorites from '../../data/default_hidden_favorites.json';
+/* kaligrafy END */
+
 export { presetCategory };
 export { presetCollection };
 export { presetField };
@@ -387,14 +392,24 @@ export function presetIndex(context) {
 
             // fetch from local storage
             var rawFavorites = JSON.parse(context.storage('preset_favorites'));
-
+            
             if (!rawFavorites) {
                 rawFavorites = [];
                 context.storage('preset_favorites', JSON.stringify(rawFavorites));
             }
 
-            _favorites = rawFavorites.reduce(function(output, d) {
+            /* kaligrafy START */
+            var uniqFavorites = rawFavorites.concat((defaultFavorites.concat(defaultHiddenFavorites)).filter((item) => rawFavorites.indexOf(item) < 0));
+            /* kaligrafy END */
+
+            _favorites = /* kaligrafy START */uniqFavorites/*rawFavorites*//* kaligrafy END */.reduce(function(output, d) {
                 var item = ribbonItemForMinified(d, 'favorite');
+                /* kaligrafy START */
+                if (d.hidden)
+                {
+                    item.hidden = d.hidden;
+                }
+                /* kaligrafy END */
                 if (item && item.preset.addable()) output.push(item);
                 return output;
             }, []);

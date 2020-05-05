@@ -430,9 +430,28 @@ path.fill.tag-building {
 }
 
 
+path.stroke.tag-building-commercial {
+    stroke: rgb(0, 26, 255);
+}
+
+path.fill.tag-building-commercial {
+    stroke: rgba(0, 26, 255, 0.3);
+}
+
+path.stroke.tag-building-industrial {
+    stroke: rgb(183, 0, 255);
+}
+
+path.fill.tag-building-industrial {
+    stroke: rgba(183, 0, 255, 0.3);
+}
+
 path.stroke.tag-building.tag-has-flats {
     stroke: rgb(226, 0, 0);
     stroke-width: 2;
+}
+path.stroke.tag-building.tag-flats-1 {
+    stroke: rgb(0, 204, 255);
 }
 path.stroke.tag-building.tag-flats-2 {
     stroke: rgb(0, 255, 234);
@@ -452,9 +471,7 @@ path.stroke.tag-building.tag-flats-6 {
 path.stroke.tag-building.tag-flats-8 {
     stroke: rgb(255, 166, 0);
 }
-path.stroke.tag-building.tag-flats-8 {
-    stroke: rgb(255, 60, 0);
-}
+
 
 
 path.stroke.tag-building-detached {

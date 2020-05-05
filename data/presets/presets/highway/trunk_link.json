@@ -1,10 +1,19 @@
 {
     "icon": "iD-highway-trunk-link",
     "fields": [
-        "{highway/motorway_link}",
+        "name",
+        "destination_oneway",
+        "destination/ref_oneway",
+        "junction/ref_oneway",
+        "oneway",
         "sidewalk",
         "sidewalk/separate-left",
-        "sidewalk/separate-right"
+        "sidewalk/separate-right",
+        "lanes",
+        "maxspeed",
+        "access",
+        "surface",
+        "structure"
     ],
     "moreFields": [
         "{highway/motorway_link}",

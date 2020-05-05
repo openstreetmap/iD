@@ -1,0 +1,33 @@
+{
+  "icon": "fas-swimmer",
+  "fields": [
+      "name",
+      "operator",
+      "playground/theme",
+      "surface",
+      "access_simple",
+      "min_age",
+      "max_age"
+  ],
+  "moreFields": [
+      "blind",
+      "dog",
+      "gnis/feature_id",
+      "wheelchair"
+  ],
+  "geometry": [
+      "area",
+      "point"
+  ],
+  "terms": [
+      "jungle gym",
+      "play area",
+      "water",
+      "splash"
+  ],
+  "tags": {
+      "leisure": "playground",
+      "palyground": "splash_pad"
+  },
+  "name": "Splash pad"
+}

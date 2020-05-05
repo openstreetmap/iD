@@ -38,7 +38,8 @@
       "highway": "footway",
       "footway": "access_aisle",
       "access": "private",
-      "motor_vehicle": "no"
+      "motor_vehicle": "no",
+      "bicycle": "private"
   },
   "reference": {
       "key": "footway",

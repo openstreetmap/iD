@@ -20,7 +20,13 @@
             "landuse": {
                 "parking": true
             },
-            "amenity": true,
+            "amenity": {
+                "*": true,
+                "school": false,
+                "college": false,
+                "university": false,
+                "park": false
+            },
             "shop": true,
             "office": true,
             "emergency": true,
