@@ -619,7 +619,7 @@
     {"key": "military", "value": "training_area", "description": "🄿 Military Training Area", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
     {"key": "landuse", "value": "orchard", "description": "🄿 Orchard", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/park-15.svg"},
     {"key": "landuse", "value": "plant_nursery", "description": "🄿 Plant Nursery", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-seedling.svg"},
-    {"key": "landuse", "value": "quarry", "description": "🄿 Quarry", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pick_hammer.svg"},
+    {"key": "landuse", "value": "quarry", "description": "🄿 Quarry", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pick_hammer.svg"},
     {"key": "landuse", "value": "railway", "description": "🄿 Railway Corridor", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/train.svg"},
     {"key": "landuse", "value": "recreation_ground", "description": "🄿 Recreation Ground", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "landuse", "value": "religious", "description": "🄿 Religious Area", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/place-of-worship-15.svg"},
