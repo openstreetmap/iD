@@ -10,6 +10,7 @@
   {"pID": "highway/service/private-parking_aisle", "hidden" : true},
   {"pID": "building/garage", "hidden" : true},
   {"pID": "building/shed", "hidden" : true},
+  {"pID": "building/semidetached_house", "hidden": true},
   {"pID": "landuse/residential", "hidden" : true},
   {"pID": "building/detached", "hidden" : true},
   {"pID": "building/terrace", "hidden" : true},

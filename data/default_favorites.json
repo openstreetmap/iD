@@ -1,13 +1,33 @@
 [
+  
   {"pID": "amenity/kindergarten"},
   {"pID": "building/farm_auxiliary"},
   {"pID": "building/kindergarten"},
   {"pID": "highway/informal_path"},
+  {"pID": "highway/steps"},
   {"pID": "highway/footway/private-informal"},
   {"pID": "highway/footway/customers-informal"},
   {"pID": "amenity/parking_entrance"},
   {"pID": "landuse/industrial"},
   {"pID": "landuse/commercial"},
   {"pID": "highway/service/destination-driveway"},
-  {"pID": "highway/service/destination-parking-aisle"}
+  {"pID": "highway/service/destination-parking-aisle"},
+  {"pID": "barrier/hedge"},
+  {"pID": "landuse/grass"},
+  {"pID": "natural/scrub"},
+  {"pID": "landuse/brownfield"},
+  {"pID": "landuse/meadow"},
+  {"pID": "landuse/farmland"},
+  {"pID": "landuse/farmyard"},
+  {"pID": "natural/wood"},
+  {"pID": "highway/track"},
+  {"pID": "highway/service/private-unpaved-driveway"},
+  {"pID": "highway/service/private-unpaved-parking-aisle"},
+  {"pID": "amenity/shelter"},
+  {"pID": "leisure/pitch/soccer"},
+  {"pID": "leisure/pitch/basketball"},
+  {"pID": "leisure/pitch/baseball"},
+  {"pID": "noexit/yes"},
+  {"pID": "building/farm_auxiliary"}
+  
 ]
