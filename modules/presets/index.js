@@ -11,9 +11,14 @@ import { utilArrayUniq, utilRebind } from '../util';
 import { groupManager } from '../entities/group_manager';
 
 /* kaligrafy START */
+import { utilArrayUniqBy } from '../util';
 import defaultFavorites from '../../data/default_favorites.json';
 import defaultHiddenFavorites from '../../data/default_hidden_favorites.json';
+
+var defaultHiddenFavoritesIds = defaultHiddenFavorites.map(function(d) { return d.pID; });
 /* kaligrafy END */
+
+
 
 export { presetCategory };
 export { presetCollection };
@@ -374,7 +379,9 @@ export function presetIndex(context) {
 
     function setFavorites(items) {
         _favorites = items;
-        var minifiedItems = items.map(function(d) { return d.minified(); });
+        /* kaligrafy START */
+        var minifiedItems = utilArrayUniqBy(items.filter(function(d) { return !defaultHiddenFavoritesIds.includes(d.preset.id) }).map(function(d) { return d.minified(); }),'pID'); // unique
+        /* kaligrafy END */
         context.storage('preset_favorites', JSON.stringify(minifiedItems));
 
         // call update
@@ -399,7 +406,7 @@ export function presetIndex(context) {
             }
 
             /* kaligrafy START */
-            var uniqFavorites = rawFavorites.concat((defaultFavorites.concat(defaultHiddenFavorites)).filter((item) => rawFavorites.indexOf(item) < 0));
+            var uniqFavorites = utilArrayUniqBy((defaultFavorites.concat(defaultHiddenFavorites)).concat(rawFavorites),'pID'); // unique
             /* kaligrafy END */
 
             _favorites = /* kaligrafy START */uniqFavorites/*rawFavorites*//* kaligrafy END */.reduce(function(output, d) {
