@@ -262,7 +262,7 @@
   "maxstay": {"key": "maxstay", "type": "combo", "label": "Max Stay", "options": ["15 min", "30 min", "45 min", "1 hr", "1.5 hr", "2 hr", "2.5 hr", "3 hr", "4 hr", "1 day", "2 day"], "snake_case": false},
   "maxweight_bridge": {"key": "maxweight", "type": "combo", "label": "Max Weight", "snake_case": false, "prerequisiteTag": {"key": "bridge", "valueNot": "no"}},
   "maxweight": {"key": "maxweight", "type": "combo", "label": "Max Weight", "snake_case": false},
-  "memorial": {"key": "memorial", "type": "typeCombo", "label": "Type"},
+  "memorial": {"key": "memorial", "type": "combo", "label": "Type"},
   "microbrewery": {"key": "microbrewery", "type": "check", "label": "Microbrewery", "terms": ["brewpub", "craft beer"]},
   "mimics": {"key": "mimics", "type": "combo", "label": "Mimics", "terms": ["camoflauged", "disguised", "looks like", "tree"]},
   "min_age": {"key": "min_age", "type": "number", "minValue": 0, "label": "Minimum Age", "terms": ["lower age limit"]},
