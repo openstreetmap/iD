@@ -452,7 +452,6 @@ en:
         delete: Deleted a turn restriction
     extract:
       title: Extract
-      key: E
       description:
         vertex:
           single: Extract this point from its parent lines/areas.
@@ -558,7 +557,6 @@ en:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
   info_panels:
-    key: I
     background:
       key: B
       title: Background
@@ -1416,7 +1414,6 @@ en:
           indirect_noedit: "You may not edit indirect restrictions. Instead, edit the nearby direct restriction."
   issues:
     title: Issues
-    key: I
     list_title: "Issues ({count})"
     errors:
       list_title: "Errors ({count})"
