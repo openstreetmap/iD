@@ -361,6 +361,7 @@
   "rooms": {"key": "rooms", "type": "number", "minValue": 0, "label": "Rooms"},
   "route_master": {"key": "route_master", "type": "combo", "label": "Type"},
   "route": {"key": "route", "type": "combo", "label": "Type"},
+  "ruins": {"key": "ruins", "type": "combo", "label": "Type"},
   "rwn_ref": {"key": "rwn_ref", "type": "text", "label": "Walking Code"},
   "sac_scale": {"key": "sac_scale", "type": "combo", "label": "Hiking Difficulty", "placeholder": "Mountain Hiking, Alpine Hiking...", "strings": {"options": {"hiking": "T1: Hiking", "mountain_hiking": "T2: Mountain Hiking", "demanding_mountain_hiking": "T3: Demanding Mountain Hiking", "alpine_hiking": "T4: Alpine Hiking", "demanding_alpine_hiking": "T5: Demanding Alpine Hiking", "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"}}},
   "salt": {"key": "salt", "type": "check", "label": "Salt", "terms": ["saline", "salinated"]},

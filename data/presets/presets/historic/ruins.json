@@ -2,6 +2,7 @@
     "icon": "temaki-ruins",
     "fields": [
         "name",
+        "ruins",
         "historic/civilization",
         "inscription",
         "access_simple"

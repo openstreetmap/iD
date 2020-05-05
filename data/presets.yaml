@@ -2024,6 +2024,9 @@ en:
       route_master:
         # route_master=*
         label: Type
+      ruins:
+        # ruins=*
+        label: Type
       rwn_ref:
         # rwn_ref=*
         label: Walking Code

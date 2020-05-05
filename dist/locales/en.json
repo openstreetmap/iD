@@ -4326,6 +4326,9 @@
                 "route": {
                     "label": "Type"
                 },
+                "ruins": {
+                    "label": "Type"
+                },
                 "rwn_ref": {
                     "label": "Walking Code"
                 },
