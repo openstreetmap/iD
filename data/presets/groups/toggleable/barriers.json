@@ -1,0 +1,11 @@
+{
+  "name": "Barriers",
+  "description": "Fences, etc.=.",
+  "toggleable": true,
+  "matches": {
+      "geometry": ["line"],
+      "anyTags": {
+          "barrier": true
+      }
+  }
+}

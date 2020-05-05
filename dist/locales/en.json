@@ -2631,6 +2631,14 @@
                 }
             },
             "groups": {
+                "toggleable/barriers": {
+                    "name": "Barriers",
+                    "description": "Fences, etc.=."
+                },
+                "toggleable/boundaries": {
+                    "name": "Boundaries",
+                    "description": "Administrative Boundaries"
+                },
                 "toggleable/buildings": {
                     "name": "Buildings",
                     "description": "Houses, Shelters, Garages, etc."
@@ -2643,21 +2651,9 @@
                     "name": "Paths",
                     "description": "Sidewalks, Foot Paths, Cycle Paths, etc."
                 },
-                "toggleable/points": {
-                    "name": "Points",
-                    "description": "Points of Interest"
-                },
-                "toggleable/service_roads": {
-                    "name": "Service Roads",
-                    "description": "Driveways, Parking Aisles, Tracks, etc."
-                },
                 "toggleable/traffic_roads": {
                     "name": "Traffic Roads, railways and aerialways",
                     "description": "Highways, Streets, Railways, Aerialways, etc."
-                },
-                "toggleable/water": {
-                    "name": "Water Features",
-                    "description": "Rivers, Lakes, Ponds, Basins, etc."
                 }
             },
             "fields": {

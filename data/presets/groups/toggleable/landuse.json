@@ -3,11 +3,15 @@
     "description": "Forests, Farmland, Parks, Residential, Commercial, etc.",
     "toggleable": true,
     "matches": {
-        "geometry": "area",
+        "geometry": ["area", "relation"],
+        "anyTags": {
+            "landuse": true,
+            "natural": true,
+            "leisure": true
+        },
         "allGroups": {
-            "toggleable/buildings": false,
-            "toggleable/paths": false,
-            "toggleable/water": false
+            "toggleable/buildings": false
         }
+        
     }
 }

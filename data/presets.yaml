@@ -2775,6 +2775,12 @@ en:
           zigzag: Zig Zag
         terms: '[translate with synonyms or related terms for ''Windings Configuration'', separated by commas]'
     groups:
+      toggleable/barriers:
+        description: 'Fences, etc.=.'
+        name: Barriers
+      toggleable/boundaries:
+        description: Administrative Boundaries
+        name: Boundaries
       toggleable/buildings:
         description: 'Houses, Shelters, Garages, etc.'
         name: Buildings
@@ -2784,18 +2790,9 @@ en:
       toggleable/paths:
         description: 'Sidewalks, Foot Paths, Cycle Paths, etc.'
         name: Paths
-      toggleable/points:
-        description: Points of Interest
-        name: Points
-      toggleable/service_roads:
-        description: 'Driveways, Parking Aisles, Tracks, etc.'
-        name: Service Roads
       toggleable/traffic_roads:
         description: 'Highways, Streets, Railways, Aerialways, etc.'
         name: 'Traffic Roads, railways and aerialways'
-      toggleable/water:
-        description: 'Rivers, Lakes, Ponds, Basins, etc.'
-        name: Water Features
     presets:
       addr/interpolation:
         # 'addr:interpolation=*'

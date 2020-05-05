@@ -7,15 +7,16 @@
         "anyTags": {
             "aerialway": {
                 "*": true,
-                "no": false,
-                "yes": false,
-                "station": false
+                "no": false
+            },
+            "waterway": {
+                "*": true,
+                "no": false
             },
             "railway": {
                 "*": true,
                 "no": false
             },
-            "landuse": "railway",
             "highway": {
                 "motorway": true,
                 "motorway_link": true,
@@ -29,7 +30,8 @@
                 "tertiary_link": true,
                 "residential": true,
                 "unclassified": true,
-                "living_street": true
+                "living_street": true,
+                "road": true
             }
         }
     }

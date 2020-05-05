@@ -3,9 +3,8 @@
     "description": "Sidewalks, Foot Paths, Cycle Paths, etc.",
     "toggleable": true,
     "matches": {
-        "geometry": ["line", "area"],
+        "geometry": ["line"],
         "anyTags": {
-            "barrier": "*",
             "highway": {
                 "path": true,
                 "footway": true,
@@ -13,7 +12,9 @@
                 "bridleway": true,
                 "pedestrian": true,
                 "corridor": true,
-                "steps": true
+                "steps": true,
+                "service": true,
+                "track": true
             }
         }
     }

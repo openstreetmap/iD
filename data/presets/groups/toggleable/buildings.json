@@ -5,7 +5,7 @@
         "maxShown": 500
     },
     "matches": {
-        "geometry": "area",
+        "geometry": ["point", "area", "relation"],
         "anyTags": {
             "building": {
                 "*": true,
@@ -16,7 +16,21 @@
                 "sheds": true,
                 "carports": true,
                 "garage_boxes": true
-            }
+            },
+            "landuse": {
+                "parking": true
+            },
+            "amenity": true,
+            "shop": true,
+            "office": true,
+            "emergency": true,
+            "historic": true,
+            "leisure": true,
+            "man_made": true,
+            "military": true,
+            "public_transport": true,
+            "telecom": true,
+            "tourism": true
         }
     }
 }
