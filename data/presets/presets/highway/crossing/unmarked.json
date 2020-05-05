@@ -10,12 +10,13 @@
     ],
     "tags": {
         "highway": "crossing",
-        "crossing": "unmarked",
-        "bicycle": "yes"
+        "crossing": "unmarked"
     },
     "addTags": {
         "highway": "crossing",
-        "crossing": "unmarked"
+        "crossing": "unmarked",
+        "bicycle": "yes"
+
     },
     "reference": {
         "key": "crossing",
