@@ -481,6 +481,7 @@
     {"key": "healthcare", "value": "birthing_center", "description": "🄿 Birthing Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-baby.svg"},
     {"key": "healthcare", "value": "blood_donation", "description": "🄿 Blood Donor Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/blood-bank-15.svg"},
     {"key": "healthcare", "value": "counselling", "description": "🄿 Counselling Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-comments.svg"},
+    {"key": "healthcare:speciality", "value": "orthodontics", "description": "🄿 Orthodontist", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-teeth.svg"},
     {"key": "healthcare", "value": "hospice", "description": "🄿 Hospice", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/hospital-15.svg"},
     {"key": "healthcare", "value": "laboratory", "description": "🄿 Medical Laboratory", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-vial.svg"},
     {"key": "healthcare", "value": "midwife", "description": "🄿 Midwife", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-baby.svg"},

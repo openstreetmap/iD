@@ -6875,6 +6875,10 @@
                     "name": "Counselling Center",
                     "terms": ""
                 },
+                "healthcare/dentist/orthodontics": {
+                    "name": "Orthodontist",
+                    "terms": "braces,dentistry,dentofacial orthopedics,headgear,jaw alignment,teeth,tooth"
+                },
                 "healthcare/hospice": {
                     "name": "Hospice",
                     "terms": "terminal,illness"
