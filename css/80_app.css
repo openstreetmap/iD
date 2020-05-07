@@ -5084,53 +5084,6 @@ svg.mouseclick use.right {
     background-color: #fff;
 }
 
-.tail {
-    width: 200px;
-    height: 400px;
-    pointer-events: none;
-    opacity: .8;
-    margin-top: -200px;
-    position: absolute;
-    background: transparent;
-}
-.tail::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    top: 50%;
-    right: -5px;
-    margin-top: -5px;
-    border-left-color: #fff;
-    border-width: 5px 0 5px 5px;
-}
-
-.tail div {
-    border-radius: 3px;
-    padding: 10px;
-    background: #fff;
-    position: absolute;
-    top: 180px;
-    left: 0;
-    right: 0;
-    margin: auto;
-}
-
-.left.tail::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-    top: 50%;
-    left: -5px;
-    margin-top: -5px;
-    border-right-color: #fff;
-    border-width: 5px 5px 5px 0;
-}
 .popover-arrow {
     position: absolute;
     width: 0;

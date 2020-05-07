@@ -12,7 +12,6 @@ export function modeAddLine(context, mode) {
     mode.id = 'add-line';
 
     var behavior = behaviorAddWay(context)
-        .tail(t('modes.add_line.tail'))
         .on('start', start)
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);

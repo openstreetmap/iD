@@ -20,7 +20,6 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, continui
         var headID = (affix === 'prefix') ? way.first() : way.last();
 
         behavior = behaviorDrawWay(context, wayID, index, mode, startGraph)
-            .tail(t('modes.draw_line.tail'))
             .on('rejectedSelfIntersection.modeDrawLine', function() {
                 context.ui().flash
                     .text(t('self_intersection.error.lines'))();

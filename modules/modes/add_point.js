@@ -13,7 +13,6 @@ export function modeAddPoint(context, mode) {
     mode.id = 'add-point';
 
     var behavior = behaviorDraw(context)
-        .tail(t('modes.add_point.tail'))
         .on('click', add)
         .on('clickWay', addWay)
         .on('clickNode', addNode)

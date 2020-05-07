@@ -16,7 +16,6 @@ export function modeAddNote(context) {
     };
 
     var behavior = behaviorDraw(context)
-        .tail(t('modes.add_note.tail'))
         .on('click', add)
         .on('cancel', cancel)
         .on('finish', cancel);

@@ -8,11 +8,9 @@ import {
 import { presetManager } from '../presets';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
-import { behaviorTail } from './tail';
 import { geoChooseEdge, geoVecLength } from '../geo';
 import { utilFastMouse, utilKeybinding, utilRebind } from '../util';
 
-var _usedTails = {};
 var _disableSpace = false;
 var _lastSpace = null;
 
@@ -26,7 +24,6 @@ export function behaviorDraw(context) {
 
     var _hover = behaviorHover(context).altDisables(true).ignoreVertex(true)
         .on('hover', context.ui().sidebar.hover);
-    var tail = behaviorTail();
     var edit = behaviorEdit(context);
 
     var closeTolerance = 4;
@@ -201,10 +198,6 @@ export function behaviorDraw(context) {
         context.install(_hover);
         context.install(edit);
 
-        if (!context.inIntro() && !_usedTails[tail.text()]) {
-            context.install(tail);
-        }
-
         keybinding
             .on('⌫', backspace)
             .on('⌦', del)
@@ -231,11 +224,6 @@ export function behaviorDraw(context) {
         context.uninstall(_hover);
         context.uninstall(edit);
 
-        if (!context.inIntro() && !_usedTails[tail.text()]) {
-            context.uninstall(tail);
-            _usedTails[tail.text()] = true;
-        }
-
         selection
             .on('mouseenter.draw', null)
             .on('mouseleave.draw', null)
@@ -250,11 +238,6 @@ export function behaviorDraw(context) {
             .call(keybinding.unbind);
     };
 
-
-    behavior.tail = function(_) {
-        tail.text(_);
-        return behavior;
-    };
 
     behavior.hover = function() {
         return _hover;
