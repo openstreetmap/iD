@@ -125,7 +125,6 @@ export function uiIntro(context) {
     let chapters = chapterFlow.map((chapter, i) => {
       let s = chapterUi[chapter](context, curtain.reveal)
         .on('done', () => {
-          presetManager.init();  // clear away "recent" presets
 
           buttons
             .filter(d => d.title === s.title)

@@ -14,8 +14,8 @@ import { utilFastMouse } from '../util/util';
 
 export function behaviorSelect(context) {
     // legacy option to show menu on every click
-    var isShowAlways = +prefs('edit-menu-show-always') === 1;
-    var tolerance = 4;
+    var _alwaysShowMenu = +prefs('edit-menu-show-always') === 1;
+    var _tolerancePx = 4;
     var _lastMouse = null;
     var _showMenu = false;
     var _p1 = null;
@@ -65,7 +65,7 @@ export function behaviorSelect(context) {
         d3_select(window)
             .on(_pointerPrefix + 'up.select', pointerup, true);
 
-        _showMenu = isShowAlways;
+        _showMenu = _alwaysShowMenu;
     }
 
 
@@ -110,7 +110,7 @@ export function behaviorSelect(context) {
         var p2 = point();
         var dist = geoVecLength(_p1, p2);
         _p1 = null;
-        if (dist > tolerance) return;
+        if (dist > _tolerancePx) return;
 
         var datum = d3_event.target.__data__ || (_lastMouse && _lastMouse.target.__data__);
         var isMultiselect = d3_event.shiftKey || context.surface().select('.lasso').node();
@@ -137,25 +137,22 @@ export function behaviorSelect(context) {
             context.selectedErrorID(null);
 
             if (!isMultiselect) {
-                if (selectedIDs.length > 1 && (_showMenu && !isShowAlways)) {
+                if (selectedIDs.length > 1 && (_showMenu && !_alwaysShowMenu)) {
                     // multiple things already selected, just show the menu...
                     mode.reselect().showMenu();
                 } else {
-                    if (mode.id !== 'select' || !utilArrayIdentical(mode.selectedIDs(), [datum.id])) {
-                        newMode = modeSelect(context, [datum.id]);
-                        // select a single thing if it's not already selected
-                        context.enter(newMode);
-                        if (_showMenu) newMode.showMenu();
-                    } else {
-                        mode.reselect();
-                        if (_showMenu) mode.showMenu();
-                    }
+                    // always enter modeSelect even if the entity is already
+                    // selected since listeners may expect `context.enter` events,
+                    // e.g. in the walkthrough
+                    newMode = modeSelect(context, [datum.id]);
+                    context.enter(newMode);
+                    if (_showMenu) newMode.showMenu();
                 }
 
             } else {
                 if (selectedIDs.indexOf(datum.id) !== -1) {
                     // clicked entity is already in the selectedIDs list..
-                    if (_showMenu && !isShowAlways) {
+                    if (_showMenu && !_alwaysShowMenu) {
                         // don't deselect clicked entity, just show the menu.
                         mode.reselect().showMenu();
                     } else {

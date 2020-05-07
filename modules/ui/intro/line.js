@@ -676,7 +676,7 @@ export function uiIntroLine(context, reveal) {
                     var node = selectMenuItem(context, 'split').node();
                     if (!node) return;
                     continueTo(splitIntersection);
-                }, 300);  // after menu visible
+                }, 50);  // after menu visible
             });
 
             context.history().on('change.intro', function() {

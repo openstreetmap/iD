@@ -388,7 +388,7 @@ export function uiIntroPoint(context, reveal) {
         reveal(box, t('intro.points.rightclick'), { duration: 600 });
 
         timeout(function() {
-            context.map().on('move.intro drawn.intro', function() {
+            context.map().on('move.intro', function() {
                 var entity = context.hasEntity(_pointID);
                 if (!entity) return chapter.restart();
                 var box = pointBox(entity.loc, context);
@@ -405,12 +405,12 @@ export function uiIntroPoint(context, reveal) {
                 var node = selectMenuItem(context, 'delete').node();
                 if (!node) return;
                 continueTo(enterDelete);
-            }, 300);  // after menu visible
+            }, 50);  // after menu visible
         });
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
-            context.map().on('move.intro drawn.intro', null);
+            context.map().on('move.intro', null);
             nextStep();
         }
     }
@@ -429,7 +429,7 @@ export function uiIntroPoint(context, reveal) {
         );
 
         timeout(function() {
-            context.map().on('move.intro drawn.intro', function() {
+            context.map().on('move.intro', function() {
                 revealEditMenu(entity.loc,
                     t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') }),
                     { duration: 0}
@@ -450,7 +450,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            context.map().on('move.intro drawn.intro', null);
+            context.map().on('move.intro', null);
             context.history().on('change.intro', null);
             context.on('exit.intro', null);
             nextStep();
