@@ -3286,7 +3286,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Sandwich Fast Food'', separated by commas>'
       amenity/ferry_terminal:
         # amenity=ferry_terminal
-        name: Ferry Station / Terminal
+        name: Ferry Terminal
       amenity/fire_station:
         # amenity=fire_station
         name: Fire Station
@@ -7334,9 +7334,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Bus Station / Terminal'', separated by commas>'
       public_transport/station_ferry:
         # 'public_transport=station, ferry=yes'
-        name: Ferry Station / Terminal
+        name: Ferry Terminal
         # 'terms: boat,dock,ferry,pier,public transit,public transportation,station,terminal,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Ferry Station / Terminal'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Ferry Terminal'', separated by commas>'
       public_transport/station_light_rail:
         # 'public_transport=station, light_rail=yes'
         name: Light Rail Station

@@ -5187,7 +5187,7 @@
                     "name": "Embassy"
                 },
                 "amenity/ferry_terminal": {
-                    "name": "Ferry Station / Terminal"
+                    "name": "Ferry Terminal"
                 },
                 "amenity/nursing_home": {
                     "name": "Nursing Home"
@@ -8834,7 +8834,7 @@
                     "terms": "bus,public transit,public transportation,station,terminal,transit,transportation"
                 },
                 "public_transport/station_ferry": {
-                    "name": "Ferry Station / Terminal",
+                    "name": "Ferry Terminal",
                     "terms": "boat,dock,ferry,pier,public transit,public transportation,station,terminal,transit,transportation"
                 },
                 "public_transport/station_light_rail": {
