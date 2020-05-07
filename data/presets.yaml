@@ -4656,13 +4656,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Glaziery'', separated by commas>'
       craft/handicraft:
         # craft=handicraft
-        name: Handicraft
-        terms: '<translate with synonyms or related terms for ''Handicraft'', separated by commas>'
+        name: Handicraft Workspace
+        terms: '<translate with synonyms or related terms for ''Handicraft Workspace'', separated by commas>'
       craft/hvac:
         # craft=hvac
-        name: HVAC
+        name: HVAC Workplace
         # 'terms: heat*,vent*,air conditioning'
-        terms: '<translate with synonyms or related terms for ''HVAC'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''HVAC Workplace'', separated by commas>'
       craft/insulator:
         # craft=insulation
         name: Insulator

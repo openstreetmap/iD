@@ -6589,11 +6589,11 @@
                     "terms": "glass,stained-glass,window"
                 },
                 "craft/handicraft": {
-                    "name": "Handicraft",
+                    "name": "Handicraft Workspace",
                     "terms": ""
                 },
                 "craft/hvac": {
-                    "name": "HVAC",
+                    "name": "HVAC Workplace",
                     "terms": "heat*,vent*,air conditioning"
                 },
                 "craft/insulator": {
