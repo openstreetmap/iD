@@ -8,7 +8,6 @@ import { modeSelectData } from '../modes/select_data';
 import { modeSelectNote } from '../modes/select_note';
 import { modeSelectError } from '../modes/select_error';
 import { osmEntity, osmNote, QAItem } from '../osm';
-import { utilArrayIdentical } from '../util/array';
 import { utilFastMouse } from '../util/util';
 
 

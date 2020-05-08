@@ -1,7 +1,6 @@
 import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
-import { presetManager } from '../../presets';
 import { prefs } from '../../core/preferences';
 import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
