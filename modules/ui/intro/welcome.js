@@ -168,6 +168,8 @@ function clickListener() {
     var tooltip = d3_select(null);
     var down = {};
 
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
     // `down` keeps track of which buttons/keys are down.
     // Setting a property in `down` happens immediately.
     // Unsetting a property in `down` is delayed because
@@ -201,7 +203,7 @@ function clickListener() {
     }
 
 
-    function mousedown() {
+    function pointerdown() {
         var button = d3_event.button;
         if (button === 0 && !d3_event.ctrlKey) {
             tooltip.classed('leftclick', true);
@@ -212,7 +214,7 @@ function clickListener() {
     }
 
 
-    function mouseup() {
+    function pointerup() {
         var button = d3_event.button;
         var endTime = d3_event.timeStamp;
         var startTime = down[button] || endTime;
@@ -262,8 +264,8 @@ function clickListener() {
         d3_select(window)
             .on('keydown.intro', keydown)
             .on('keyup.intro', keyup)
-            .on('mousedown.intro', mousedown)
-            .on('mouseup.intro', mouseup)
+            .on(_pointerPrefix + 'down.intro', pointerdown)
+            .on(_pointerPrefix + 'up.intro', pointerup)
             .on('contextmenu.intro', contextmenu);
     };
 
@@ -272,8 +274,8 @@ function clickListener() {
         d3_select(window)
             .on('keydown.intro', null)
             .on('keyup.intro', null)
-            .on('mousedown.intro', null)
-            .on('mouseup.intro', null)
+            .on(_pointerPrefix + 'down.intro', null)
+            .on(_pointerPrefix + 'up.intro', null)
             .on('contextmenu.intro', null);
 
         tooltip
