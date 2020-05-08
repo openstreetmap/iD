@@ -112,7 +112,7 @@ export function uiIntro(context) {
 
     context.container().selectAll('.main-map .layer-background').style('opacity', 1);
 
-    let curtain = uiCurtain();
+    let curtain = uiCurtain(context.container().node());
     selection.call(curtain);
 
     // Store that the user started the walkthrough..
