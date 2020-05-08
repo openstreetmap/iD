@@ -5,8 +5,9 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
 import { event as d3_event, customEvent as d3_customEvent } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
+import { zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import ZoomEvent from '../../node_modules/d3-zoom/src/event.js';
-import { Transform, identity } from '../../node_modules/d3-zoom/src/transform.js';
+import { Transform } from '../../node_modules/d3-zoom/src/transform.js';
 
 import { utilFastMouse, utilFunctor } from './util';
 
@@ -29,7 +30,7 @@ function defaultExtent() {
 }
 
 function defaultTransform() {
-  return this.__zoom || identity;
+  return this.__zoom || d3_zoomIdentity;
 }
 
 function defaultWheelDelta() {
@@ -117,7 +118,7 @@ export function utilZoomPan() {
       var e = extent.apply(this, arguments),
           t = this.__zoom,
           p0 = p == null ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p;
-      return constrain(identity.translate(p0[0], p0[1]).scale(t.k).translate(
+      return constrain(d3_zoomIdentity.translate(p0[0], p0[1]).scale(t.k).translate(
         typeof x === 'function' ? -x.apply(this, arguments) : -x,
         typeof y === 'function' ? -y.apply(this, arguments) : -y
       ), e, translateExtent);
