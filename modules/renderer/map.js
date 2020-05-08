@@ -555,7 +555,13 @@ export function rendererMap(context) {
                 y = y2;
                 k = k2;
                 eventTransform = d3_zoomIdentity.translate(x2, y2).scale(k2);
-                _zoomerPanner._transform(eventTransform);
+                if (_zoomerPanner._transform) {
+                    // utilZoomPan interface
+                    _zoomerPanner._transform(eventTransform);
+                } else {
+                    // d3_zoom interface
+                    _selection.node().__zoom = eventTransform;
+                }
             }
 
         }
