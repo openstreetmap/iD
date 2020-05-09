@@ -18,6 +18,7 @@ export function behaviorSelect(context) {
     var _lastMouse = null;
     var _showMenu = false;
     var _p1 = null;
+    var _longPressTimeout;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -28,6 +29,8 @@ export function behaviorSelect(context) {
 
 
     function keydown() {
+        if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+
         var e = d3_event;
         if (e && e.shiftKey) {
             context.surface()
@@ -42,6 +45,8 @@ export function behaviorSelect(context) {
 
 
     function keyup() {
+        if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+
         var e = d3_event;
         if (!e || !e.shiftKey) {
             context.surface()
@@ -60,7 +65,29 @@ export function behaviorSelect(context) {
     function pointerdown() {
         if (!_p1) {
             _p1 = point();
+
+            if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+
+            var node = this;
+
+            _longPressTimeout = window.setTimeout(function didLongPress() {
+                // simulate context menu event
+                if (window.CustomEvent) {
+                    node.dispatchEvent(new CustomEvent('contextmenu'));
+                } else if (document.createEvent) {
+                    var e = document.createEvent('HTMLEvents');
+                    e.initEvent('contextmenu', true, false);
+                    node.dispatchEvent(e);
+                } else { // IE
+                    node.fireEvent('oncontextmenu');
+                }
+            }, 500);
         }
+
+        if (d3_event) {
+            _lastMouse = d3_event;
+        }
+
         d3_select(window)
             .on(_pointerPrefix + 'up.select', pointerup, true);
 
@@ -102,6 +129,8 @@ export function behaviorSelect(context) {
 
 
     function click() {
+        if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+
         d3_select(window)
             .on(_pointerPrefix + 'up.select', null, true);
 
