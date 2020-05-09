@@ -26,6 +26,7 @@
   "artwork_type": {"key": "artwork_type", "type": "combo", "label": "Type"},
   "atm": {"key": "atm", "type": "check", "label": "ATM"},
   "attraction": {"key": "attraction", "type": "typeCombo", "label": "Type"},
+  "automated": {"key": "automated", "type": "check", "label": "automated"},
   "baby_feeding": {"key": "baby_feeding", "type": "combo", "label": "Baby Nursing Area", "strings": {"options": {"room": "Dedicated Room", "yes": "Marked Space", "no": "None"}}, "terms": ["baby feeding", "breastfeeding", "lactation", "mothers", "nursing"]},
   "baby_seat": {"key": "baby", "type": "check", "label": "Baby Seat"},
   "backcountry": {"key": "backcountry", "type": "check", "label": "Backcountry"},

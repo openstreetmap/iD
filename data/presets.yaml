@@ -235,6 +235,9 @@ en:
       attraction:
         # attraction=*
         label: Type
+      automated:
+        # automated=*
+        label: automated
       baby_feeding:
         # baby_feeding=*
         label: Baby Nursing Area

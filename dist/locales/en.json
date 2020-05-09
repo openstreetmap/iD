@@ -2798,6 +2798,9 @@
                 "attraction": {
                     "label": "Type"
                 },
+                "automated": {
+                    "label": "automated"
+                },
                 "baby_feeding": {
                     "label": "Baby Nursing Area",
                     "terms": "baby feeding,breastfeeding,lactation,mothers,nursing",
