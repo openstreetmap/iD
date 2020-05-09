@@ -19,7 +19,8 @@
         "payment_multi",
         "phone",
         "website",
-        "wheelchair"
+        "wheelchair",
+        "fee"
     ],
     "geometry": [
         "point",
