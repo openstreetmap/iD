@@ -2284,19 +2284,16 @@
                 "welcome": "Welcome! This walkthrough will teach you the basics of editing on OpenStreetMap.",
                 "practice": "All of the data in this walkthrough is just for practicing, and any edits that you make in the walkthrough will not be saved.",
                 "words": "This walkthrough will introduce some new words and concepts. When we introduce a new word, we'll use *italics*.",
-                "mouse": "You can use any input device to edit the map, but this walkthrough assumes you have a mouse with left and right buttons. **If you want to attach a mouse, do so now, then click OK.**",
-                "leftclick": "When this tutorial asks you to click or double-click, we mean with the left button. On a trackpad it might be a single-click or single-finger tap. **Left-click {num} times.**",
-                "rightclick": "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**",
-                "chapters": "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
+                "chapters": "You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Press '{next}' to continue.**"
             },
             "navigation": {
                 "title": "Navigation",
-                "drag": "The main map area shows OpenStreetMap data on top of a background.{br}You can drag the map by pressing and holding the left mouse button while moving the mouse around. You can also use the arrow keys on your keyboard. **Drag the map!**",
-                "zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons. **Zoom the map!**",
+                "drag": "The main map area shows OpenStreetMap data on top of a background.{br}You can click-and-drag or tap-and-drag the map to move it around. You can also use the arrow keys on a keyboard. **Drag the map!**",
+                "zoom": "You can zoom in or out by scrolling with a mouse wheel, pinching on a touchscreen, or pressing the {plus} / {minus} buttons. **Zoom the map!**",
                 "features": "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap.",
                 "points_lines_areas": "Map features are represented using *points, lines, or areas.*",
                 "nodes_ways": "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*.",
-                "click_townhall": "All features on the map can be selected by clicking on them. **Click on the point to select it.**",
+                "click_townhall": "All features on the map can be selected by clicking or tapping on them. **Select the point.**",
                 "selected_townhall": "Great! The point is now selected. Selected features are drawn with a pulsing glow.",
                 "editor_townhall": "When a feature is selected, the *feature editor* is displayed alongside the map.",
                 "preset_townhall": "The top part of the feature editor shows the feature's type. This point is a {preset}.",
@@ -2306,7 +2303,7 @@
                 "choose_street": "**Choose {name} from the list to select it.**",
                 "selected_street": "Great! {name} is now selected.",
                 "editor_street": "The fields shown for a street are different than the fields that were shown for the town hall.{br}For this selected street, the feature editor shows fields like '{field1}' and '{field2}'. **Close the feature editor by hitting escape or pressing the {button} button.**",
-                "play": "Try moving the map and clicking on some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
+                "play": "Try exploring the map and selecting some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, press '{next}'.**"
             },
             "points": {
                 "title": "Points",
