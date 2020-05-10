@@ -416,7 +416,7 @@
   "craft/insulator": {"icon": "temaki-tools", "geometry": ["point", "area"], "tags": {"craft": "insulation"}, "name": "Insulator"},
   "craft/joiner": {"icon": "temaki-tools", "geometry": ["point", "area"], "tags": {"craft": "joiner"}, "terms": ["furniture"], "name": "Joiner"},
   "craft/key_cutter": {"icon": "fas-key", "geometry": ["point", "area"], "tags": {"craft": "key_cutter"}, "name": "Key Cutter"},
-  "craft/metal_construction": {"icon": "temaki-tools", "geometry": ["point", "area"], "tags": {"craft": "metal_construction"}, "name": "Metal Construction"},
+  "craft/metal_construction": {"icon": "temaki-tools", "geometry": ["point", "area"], "tags": {"craft": "metal_construction"}, "name": "Metalworker"},
   "craft/painter": {"icon": "fas-paint-roller", "geometry": ["point", "area"], "tags": {"craft": "painter"}, "name": "Painter"},
   "craft/parquet_layer": {"icon": "temaki-brick_trowel", "geometry": ["point", "area"], "tags": {"craft": "parquet_layer"}, "name": "Parquet Layer"},
   "craft/photographer": {"icon": "maki-attraction", "geometry": ["point", "area"], "tags": {"craft": "photographer"}, "name": "Photographer"},

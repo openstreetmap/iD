@@ -412,7 +412,7 @@
     {"key": "craft", "value": "insulation", "description": "🄿 Insulator", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
     {"key": "craft", "value": "joiner", "description": "🄿 Joiner", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
     {"key": "craft", "value": "key_cutter", "description": "🄿 Key Cutter", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-key.svg"},
-    {"key": "craft", "value": "metal_construction", "description": "🄿 Metal Construction", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
+    {"key": "craft", "value": "metal_construction", "description": "🄿 Metalworker", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
     {"key": "craft", "value": "painter", "description": "🄿 Painter", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-paint-roller.svg"},
     {"key": "craft", "value": "parquet_layer", "description": "🄿 Parquet Layer", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/brick_trowel.svg"},
     {"key": "craft", "value": "photographer", "description": "🄿 Photographer", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/attraction-15.svg"},

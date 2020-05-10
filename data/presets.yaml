@@ -4681,8 +4681,8 @@ en:
         name: Locksmith
       craft/metal_construction:
         # craft=metal_construction
-        name: Metal Construction
-        terms: '<translate with synonyms or related terms for ''Metal Construction'', separated by commas>'
+        name: Metalworker
+        terms: '<translate with synonyms or related terms for ''Metalworker'', separated by commas>'
       craft/painter:
         # craft=painter
         name: Painter
