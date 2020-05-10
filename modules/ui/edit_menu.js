@@ -91,7 +91,8 @@ export function uiEditMenu(context) {
         }
 
         function pointerdown() {
-            d3_event.stopPropagation();  // https://github.com/openstreetmap/iD/issues/1869
+            // don't let button presses also act as map input - #1869
+            d3_event.stopPropagation();
         }
     };
 
