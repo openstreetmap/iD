@@ -9,7 +9,9 @@
             "access": "All",
             "foot": "Foot",
             "motor_vehicle": "Motor Vehicles",
+            "motor_vehicle:routing": "Motor Veh. Routing",
             "bicycle": "Bicycles",
+            "bicycle:routing": "Bicycles Routing",
             "horse": "Horses"
         },
         "options": {
@@ -36,6 +38,10 @@
             "destination": {
                 "title": "Destination",
                 "description": "Access allowed only to reach a destination"
+            },
+            "delivery": {
+                "title": "Delivery",
+                "description": "Access allowed only for delivery"
             },
             "dismount": {
                 "title": "Dismount",
