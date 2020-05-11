@@ -6,7 +6,7 @@
   "tags": {
       "highway": "service",
       "service": "driveway",
-      "motor_vehicle": "destination"
+      "motor_vehicle:routing": "destination"
   },
   "reference": {
       "key": "service",
