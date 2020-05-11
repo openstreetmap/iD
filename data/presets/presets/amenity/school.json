@@ -5,6 +5,7 @@
         "operator",
         "operator/type",
         "school",
+        "school_fee",
         "student_count",
         "address",
         "religion",

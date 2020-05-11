@@ -2668,11 +2668,12 @@
                     "types": {
                         "access": "All",
                         "foot": "Foot",
-                        "bus": "Bus",
                         "motor_vehicle": "Motor Vehicles",
                         "routing:motor_vehicle": "Motor Veh. Routing",
                         "bicycle": "Bicycles",
-                        "routing:bicycle": "Bicycles Routing"
+                        "routing:bicycle": "Bicycles Routing",
+                        "bus": "Bus",
+                        "routing:bus": "Bus Routing"
                     },
                     "options": {
                         "private": {
@@ -2682,6 +2683,10 @@
                         "destination": {
                             "title": "Destination",
                             "description": "Access allowed only to reach a destination"
+                        },
+                        "use_sidepath": {
+                            "title": "Use sidepath",
+                            "description": "use sidepath (for foot and/or bicycle)"
                         },
                         "delivery": {
                             "title": "Delivery",
@@ -4357,6 +4362,22 @@
                     "label": "Toilet Disposal",
                     "terms": ""
                 },
+                "school_fee": {
+                    "label": "Type",
+                    "placeholder": "No, yes...",
+                    "options": {
+                        "yes": "Yes",
+                        "no": "No"
+                    }
+                },
+                "school": {
+                    "label": "Type",
+                    "placeholder": "Primary, secondary...",
+                    "options": {
+                        "primary": "Primary",
+                        "secondary": "Secondary"
+                    }
+                },
                 "screen": {
                     "label": "Screens",
                     "placeholder": "1, 4, 8…"
@@ -4652,6 +4673,9 @@
                         "cutting": "Cutting",
                         "ford": "Ford"
                     }
+                },
+                "student_count": {
+                    "label": "Number of students"
                 },
                 "studio": {
                     "label": "Type"
@@ -7160,6 +7184,10 @@
                 },
                 "highway/service-customers": {
                     "name": "Customers Service Road",
+                    "terms": "road,street"
+                },
+                "highway/service-destination": {
+                    "name": "Destination Service Road",
                     "terms": "road,street"
                 },
                 "highway/service-private": {

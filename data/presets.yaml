@@ -33,7 +33,7 @@ en:
         name: Waterways
     fields:
       access:
-        # 'access=*, foot=*, motor_vehicle=*, routing:motor_vehicle=*, bicycle=*, routing:bicycle=*, bus=*'
+        # 'access=*, foot=*, motor_vehicle=*, routing:motor_vehicle=*, bicycle=*, routing:bicycle=*, bus=*, routing:bus=*'
         label: Allowed Access
         options:
           delivery:
@@ -81,6 +81,11 @@ en:
             description: Access allowed only with permission of the owner on an individual basis
             # access=private
             title: Private
+          use_sidepath:
+            # access=use_sidepath
+            description: use sidepath (for foot and/or bicycle)
+            # access=use_sidepath
+            title: Use sidepath
           'yes':
             # access=yes
             description: Access allowed by law; a right of way
@@ -92,10 +97,11 @@ en:
         types:
           access: All
           bicycle: Bicycles
-          'routing:bicycle': Bicycles Routing
           bus: Bus
           foot: Foot
           motor_vehicle: Motor Vehicles
+          'routing:bicycle': Bicycles Routing
+          'routing:bus': Bus Routing
           'routing:motor_vehicle': Motor Veh. Routing
       access_aisle:
         # access_aisle=*
@@ -2017,6 +2023,26 @@ en:
         # sanitary_dump_station=*
         label: Toilet Disposal
         terms: '[translate with synonyms or related terms for ''Toilet Disposal'', separated by commas]'
+      school:
+        # school=*
+        label: Type
+        options:
+          # school=primary
+          primary: Primary
+          # school=secondary
+          secondary: Secondary
+        # school field placeholder
+        placeholder: 'Primary, secondary...'
+      school_fee:
+        # fee=*
+        label: Type
+        options:
+          # fee=no
+          'no': 'No'
+          # fee=yes
+          'yes': 'Yes'
+        # school_fee field placeholder
+        placeholder: 'No, yes...'
       screen:
         # screen=*
         label: Screens
@@ -2383,6 +2409,9 @@ en:
           tunnel: Tunnel
         # structure_waterway field placeholder
         placeholder: Unknown
+      student_count:
+        # 'student:count=*'
+        label: Number of students
       studio:
         # studio=*
         label: Type
@@ -5293,6 +5322,11 @@ en:
         name: Customers Unpaved Service Road
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Customers Unpaved Service Road'', separated by commas>'
+      highway/service-destination:
+        # 'highway=service, motor_vehicle=destination'
+        name: Destination Service Road
+        # 'terms: road,street'
+        terms: '<translate with synonyms or related terms for ''Destination Service Road'', separated by commas>'
       highway/service-private:
         # 'highway=service, access=private'
         name: Private Service Road
@@ -5303,19 +5337,19 @@ en:
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
       highway/service/customers-driveway:
-        # 'highway=service, service=driveway, routing:motor_vehicle=customers'
+        # 'highway=service, service=driveway, motor_vehicle=customers'
         name: Customers Driveway
         terms: '<translate with synonyms or related terms for ''Customers Driveway'', separated by commas>'
       highway/service/customers-parking-aisle:
-        # 'highway=service, service=parking_aisle, routing:motor_vehicle=customers'
+        # 'highway=service, service=parking_aisle, motor_vehicle=customers'
         name: Customers Parking Aisle
         terms: '<translate with synonyms or related terms for ''Customers Parking Aisle'', separated by commas>'
       highway/service/destination-driveway:
-        # 'highway=service, service=driveway, routing:motor_vehicle=destination'
+        # 'highway=service, service=driveway, motor_vehicle=destination'
         name: Destination Driveway
         terms: '<translate with synonyms or related terms for ''Destination Driveway'', separated by commas>'
       highway/service/destination-parking-aisle:
-        # 'highway=service, service=parking_aisle, routing:motor_vehicle=destination'
+        # 'highway=service, service=parking_aisle, motor_vehicle=destination'
         name: Destination Parking Aisle
         terms: '<translate with synonyms or related terms for ''Destination Parking Aisle'', separated by commas>'
       highway/service/drive-through:

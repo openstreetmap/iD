@@ -1,0 +1,12 @@
+{
+  "key": "fee",
+  "type": "combo",
+  "label": "Type",
+  "placeholder": "No, yes...",
+  "strings": {
+      "options": {
+          "yes": "Yes",
+          "no": "No"
+      }
+  }
+}
