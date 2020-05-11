@@ -73,16 +73,19 @@ export function uiFieldAccess(field, context) {
 
 
     access.options = function(type) {
-        var options = ['no', 'permissive', 'private', 'permit', 'destination'];
+        /* kaligrafy START */
+        var options = ["private", "destination", "delivery", "no", "yes", "designated", "dismount", "emergency", "permissive", "permit"];
 
-        if (type !== 'access') {
-            options.unshift('yes');
+        /*if (type !== 'access') {
+            options.push('yes');
             options.push('designated');
 
             if (type === 'bicycle') {
                 options.push('dismount');
             }
-        }
+        }*/
+
+        /* kaligrafy END */
 
         return options.map(function(option) {
             return {

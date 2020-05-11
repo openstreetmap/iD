@@ -2668,11 +2668,33 @@
                     "types": {
                         "access": "All",
                         "foot": "Foot",
+                        "bus": "Bus",
                         "motor_vehicle": "Motor Vehicles",
+                        "motor_vehicle:routing": "Motor Veh. Routing",
                         "bicycle": "Bicycles",
-                        "horse": "Horses"
+                        "bicycle:routing": "Bicycles Routing"
                     },
                     "options": {
+                        "private": {
+                            "title": "Private",
+                            "description": "Access allowed only with permission of the owner on an individual basis"
+                        },
+                        "destination": {
+                            "title": "Destination",
+                            "description": "Access allowed only to reach a destination"
+                        },
+                        "delivery": {
+                            "title": "Delivery",
+                            "description": "Access allowed only for delivery"
+                        },
+                        "designated": {
+                            "title": "Designated",
+                            "description": "Access allowed according to signs or specific local laws"
+                        },
+                        "dismount": {
+                            "title": "Dismount",
+                            "description": "Access allowed but rider must dismount"
+                        },
                         "yes": {
                             "title": "Allowed",
                             "description": "Access allowed by law; a right of way"
@@ -2681,25 +2703,13 @@
                             "title": "Prohibited",
                             "description": "Access not allowed to the general public"
                         },
+                        "emergency": {
+                            "title": "Emergency",
+                            "description": "Access allowed only to emergency vehicles"
+                        },
                         "permissive": {
                             "title": "Permissive",
                             "description": "Access allowed until such time as the owner revokes the permission"
-                        },
-                        "private": {
-                            "title": "Private",
-                            "description": "Access allowed only with permission of the owner on an individual basis"
-                        },
-                        "designated": {
-                            "title": "Designated",
-                            "description": "Access allowed according to signs or specific local laws"
-                        },
-                        "destination": {
-                            "title": "Destination",
-                            "description": "Access allowed only to reach a destination"
-                        },
-                        "dismount": {
-                            "title": "Dismount",
-                            "description": "Access allowed but rider must dismount"
                         },
                         "permit": {
                             "title": "Permit",

@@ -33,9 +33,14 @@ en:
         name: Waterways
     fields:
       access:
-        # 'access=*, foot=*, motor_vehicle=*, bicycle=*, horse=*'
+        # 'access=*, foot=*, motor_vehicle=*, motor_vehicle:routing=*, bicycle=*, bicycle:routing=*, bus=*'
         label: Allowed Access
         options:
+          delivery:
+            # access=delivery
+            description: Access allowed only for delivery
+            # access=delivery
+            title: Delivery
           designated:
             # access=designated
             description: Access allowed according to signs or specific local laws
@@ -51,6 +56,11 @@ en:
             description: Access allowed but rider must dismount
             # access=dismount
             title: Dismount
+          emergency:
+            # access=emergency
+            description: Access allowed only to emergency vehicles
+            # access=emergency
+            title: Emergency
           'no':
             # access=no
             description: Access not allowed to the general public
@@ -82,9 +92,11 @@ en:
         types:
           access: All
           bicycle: Bicycles
+          'bicycle:routing': Bicycles Routing
+          bus: Bus
           foot: Foot
-          horse: Horses
           motor_vehicle: Motor Vehicles
+          'motor_vehicle:routing': Motor Veh. Routing
       access_aisle:
         # access_aisle=*
         label: Type
@@ -5291,19 +5303,19 @@ en:
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
       highway/service/customers-driveway:
-        # 'highway=service, service=driveway, motor_vehicle=customers'
+        # 'highway=service, service=driveway, motor_vehicle:routing=customers'
         name: Customers Driveway
         terms: '<translate with synonyms or related terms for ''Customers Driveway'', separated by commas>'
       highway/service/customers-parking-aisle:
-        # 'highway=service, service=parking_aisle, motor_vehicle=customers'
+        # 'highway=service, service=parking_aisle, motor_vehicle:routing=customers'
         name: Customers Parking Aisle
         terms: '<translate with synonyms or related terms for ''Customers Parking Aisle'', separated by commas>'
       highway/service/destination-driveway:
-        # 'highway=service, service=driveway, motor_vehicle=destination'
+        # 'highway=service, service=driveway, motor_vehicle:routing=destination'
         name: Destination Driveway
         terms: '<translate with synonyms or related terms for ''Destination Driveway'', separated by commas>'
       highway/service/destination-parking-aisle:
-        # 'highway=service, service=parking_aisle, motor_vehicle=destination'
+        # 'highway=service, service=parking_aisle, motor_vehicle:routing=destination'
         name: Destination Parking Aisle
         terms: '<translate with synonyms or related terms for ''Destination Parking Aisle'', separated by commas>'
       highway/service/drive-through:
