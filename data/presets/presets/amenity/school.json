@@ -4,6 +4,8 @@
         "name",
         "operator",
         "operator/type",
+        "school",
+        "student_count",
         "address",
         "religion",
         "denomination",

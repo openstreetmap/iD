@@ -1,0 +1,12 @@
+{
+  "key": "school",
+  "type": "combo",
+  "label": "Type",
+  "placeholder": "Primary, secondary...",
+  "strings": {
+      "options": {
+          "primary": "Primary",
+          "secondary": "Secondary"
+      }
+  }
+}

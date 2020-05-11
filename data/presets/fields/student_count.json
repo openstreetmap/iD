@@ -1,0 +1,6 @@
+{
+  "key": "student:count",
+  "type": "number",
+  "minValue": 0,
+  "label": "Number of students"
+}
