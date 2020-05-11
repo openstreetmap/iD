@@ -2,7 +2,7 @@
     "key": "access",
     "type": "combo",
     "label": "Allowed Access",
-    "options": ["private", "destination", "delivery", "designated", "dismount", "yes", "no", "emergency", "permissive", "permit"],
+    "options": ["private", "destination", "use_sidepath", "delivery", "designated", "dismount", "yes", "no", "emergency", "permissive", "permit"],
     "terms": [
         "permitted",
         "private",

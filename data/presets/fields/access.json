@@ -24,6 +24,10 @@
                 "title": "Destination",
                 "description": "Access allowed only to reach a destination"
             },
+            "use_sidepath": {
+                "title": "Use sidepath",
+                "description": "use sidepath (for foot and/or bicycle)"
+            },
             "delivery": {
                 "title": "Delivery",
                 "description": "Access allowed only for delivery"
