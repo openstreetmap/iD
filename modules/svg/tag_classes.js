@@ -223,11 +223,11 @@ export function svgTagClasses() {
 
             for (k in t) {
                 v = t[k];
-                if (k === 'foot' && v === 'use_sidepath')
+                if ((k === 'foot' || k === 'foot:routing') && v === 'use_sidepath')
                 {
                     sidewalkUseSidepath = true;
                 }
-                if (k === 'bicycle' && v === 'use_sidepath')
+                if ((k === 'bicycle' || k === 'bicycle:routing') && v === 'use_sidepath')
                 {
                     cyclewayUseSidepath = true;
                 }
@@ -254,6 +254,9 @@ export function svgTagClasses() {
                     customers = true;
                 }
                 if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'destination') {
+                    destination = true;
+                }
+                if ((k === 'bicycle:routing' || k === 'foot:routing' || k === 'motor_vehicle:routing' || k === 'access:routing') && v === 'destination') {
                     destination = true;
                 }
                 if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'delivery') {
