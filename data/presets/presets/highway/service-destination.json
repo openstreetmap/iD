@@ -29,13 +29,13 @@
   ],
   "tags": {
       "highway": "service",
-      "access": "private"
+      "motor_vehicle": "destination"
   },
   "terms": [
       "road",
       "street"
   ],
   "matchScore": 0.9,
-  "name": "Private Service Road",
-  "shortcut": ["⌥+⇧+v"]
+  "name": "Destination Service Road",
+  "shortcut": ["⇧+v"]
 }

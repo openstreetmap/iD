@@ -1,6 +1,9 @@
 [
   {"pID": "highway/service/customers-driveway", "hidden" : true},
   {"pID": "highway/service/customers-parking-aisle", "hidden" : true},
+  {"pID": "highway/service-customers", "hidden" : true},
+  {"pID": "highway/service-private", "hidden" : true},
+  {"pID": "highway/service-destination", "hidden" : true},
   {"pID": "highway/footway", "hidden" : true},
   {"pID": "entrance", "hidden" : true},
   {"pID": "leisure/playground", "hidden" : true},
