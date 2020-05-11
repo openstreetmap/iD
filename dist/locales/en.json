@@ -2670,9 +2670,9 @@
                         "foot": "Foot",
                         "bus": "Bus",
                         "motor_vehicle": "Motor Vehicles",
-                        "motor_vehicle:routing": "Motor Veh. Routing",
+                        "routing:motor_vehicle": "Motor Veh. Routing",
                         "bicycle": "Bicycles",
-                        "bicycle:routing": "Bicycles Routing"
+                        "routing:bicycle": "Bicycles Routing"
                     },
                     "options": {
                         "private": {

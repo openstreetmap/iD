@@ -33,7 +33,7 @@ en:
         name: Waterways
     fields:
       access:
-        # 'access=*, foot=*, motor_vehicle=*, motor_vehicle:routing=*, bicycle=*, bicycle:routing=*, bus=*'
+        # 'access=*, foot=*, motor_vehicle=*, routing:motor_vehicle=*, bicycle=*, routing:bicycle=*, bus=*'
         label: Allowed Access
         options:
           delivery:
@@ -92,11 +92,11 @@ en:
         types:
           access: All
           bicycle: Bicycles
-          'bicycle:routing': Bicycles Routing
+          'routing:bicycle': Bicycles Routing
           bus: Bus
           foot: Foot
           motor_vehicle: Motor Vehicles
-          'motor_vehicle:routing': Motor Veh. Routing
+          'routing:motor_vehicle': Motor Veh. Routing
       access_aisle:
         # access_aisle=*
         label: Type
@@ -5303,19 +5303,19 @@ en:
         name: Alley
         terms: '<translate with synonyms or related terms for ''Alley'', separated by commas>'
       highway/service/customers-driveway:
-        # 'highway=service, service=driveway, motor_vehicle:routing=customers'
+        # 'highway=service, service=driveway, routing:motor_vehicle=customers'
         name: Customers Driveway
         terms: '<translate with synonyms or related terms for ''Customers Driveway'', separated by commas>'
       highway/service/customers-parking-aisle:
-        # 'highway=service, service=parking_aisle, motor_vehicle:routing=customers'
+        # 'highway=service, service=parking_aisle, routing:motor_vehicle=customers'
         name: Customers Parking Aisle
         terms: '<translate with synonyms or related terms for ''Customers Parking Aisle'', separated by commas>'
       highway/service/destination-driveway:
-        # 'highway=service, service=driveway, motor_vehicle:routing=destination'
+        # 'highway=service, service=driveway, routing:motor_vehicle=destination'
         name: Destination Driveway
         terms: '<translate with synonyms or related terms for ''Destination Driveway'', separated by commas>'
       highway/service/destination-parking-aisle:
-        # 'highway=service, service=parking_aisle, motor_vehicle:routing=destination'
+        # 'highway=service, service=parking_aisle, routing:motor_vehicle=destination'
         name: Destination Parking Aisle
         terms: '<translate with synonyms or related terms for ''Destination Parking Aisle'', separated by commas>'
       highway/service/drive-through:

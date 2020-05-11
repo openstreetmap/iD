@@ -1,5 +1,5 @@
 {
-    "keys": ["access", "foot", "motor_vehicle", "motor_vehicle:routing", "bicycle", "bicycle:routing", "bus"],
+    "keys": ["access", "foot", "motor_vehicle", "routing:motor_vehicle", "bicycle", "routing:bicycle", "bus", "routing:bus"],
     "reference": {"key": "access"},
     "type": "access",
     "label": "Allowed Access",
@@ -8,11 +8,12 @@
         "types": {
             "access": "All",
             "foot": "Foot",
-            "bus": "Bus",
             "motor_vehicle": "Motor Vehicles",
-            "motor_vehicle:routing": "Motor Veh. Routing",
+            "routing:motor_vehicle": "Motor Veh. Routing",
             "bicycle": "Bicycles",
-            "bicycle:routing": "Bicycles Routing"
+            "routing:bicycle": "Bicycles Routing",
+            "bus": "Bus",
+            "routing:bus": "Bus Routing"
         },
         "options": {
             "private": {
