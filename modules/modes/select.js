@@ -149,7 +149,7 @@ export function modeSelect(context, selectedIDs) {
             .select('.edit-menu').remove();
     }
 
-    mode.showMenu = function() {
+    mode.showMenu = function(triggerType) {
 
         // remove any displayed menu
         closeMenu();
@@ -178,6 +178,7 @@ export function modeSelect(context, selectedIDs) {
 
         _editMenu
             .anchorLoc(point)
+            .triggerType(triggerType)
             .operations(operations);
 
         // render the menu
@@ -185,9 +186,9 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
-    function toggleMenu() {
+    function spacebar() { // toggle the menu
         if (context.map().supersurface.select('.edit-menu').empty()) {
-            mode.showMenu();
+            mode.showMenu('spacebar');
         } else {
             closeMenu();
         }
@@ -271,7 +272,7 @@ export function modeSelect(context, selectedIDs) {
             .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true)
-            .on('space', toggleMenu);
+            .on('space', spacebar);
 
         d3_select(document)
             .call(keybinding);
