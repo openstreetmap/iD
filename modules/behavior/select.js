@@ -18,6 +18,7 @@ export function behaviorSelect(context) {
     var _lastMouse = null;
     var _showMenu = false;
     var _p1 = null;
+    var _downPointerId = null;
     var _longPressTimeout;
 
     // use pointer events on supported platforms; fallback to mouse events
@@ -63,30 +64,29 @@ export function behaviorSelect(context) {
 
 
     function pointerdown() {
-        if (!_p1) {
-            _p1 = point();
+        if (_p1) return;
 
-            if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+        _p1 = point();
+        _downPointerId = d3_event.pointerId || 'mouse';
 
-            var node = this;
+        if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
 
-            _longPressTimeout = window.setTimeout(function didLongPress() {
-                // simulate context menu event
-                if (window.CustomEvent) {
-                    node.dispatchEvent(new CustomEvent('contextmenu'));
-                } else if (document.createEvent) {
-                    var e = document.createEvent('HTMLEvents');
-                    e.initEvent('contextmenu', true, false);
-                    node.dispatchEvent(e);
-                } else { // IE
-                    node.fireEvent('oncontextmenu');
-                }
-            }, 500);
-        }
+        var node = this;
 
-        if (d3_event) {
-            _lastMouse = d3_event;
-        }
+        _longPressTimeout = window.setTimeout(function didLongPress() {
+            // simulate context menu event
+            if (window.CustomEvent) {
+                node.dispatchEvent(new CustomEvent('contextmenu'));
+            } else if (document.createEvent) {
+                var e = document.createEvent('HTMLEvents');
+                e.initEvent('contextmenu', true, false);
+                node.dispatchEvent(e);
+            } else { // IE
+                node.fireEvent('oncontextmenu');
+            }
+        }, 500);
+
+        _lastMouse = d3_event;
 
         d3_select(window)
             .on(_pointerPrefix + 'up.select', pointerup, true);
@@ -96,13 +96,19 @@ export function behaviorSelect(context) {
 
 
     function pointermove() {
-        if (d3_event) {
-            _lastMouse = d3_event;
-        }
+        if (_downPointerId && _downPointerId !== (d3_event.pointerId || 'mouse')) return;
+
+        _lastMouse = d3_event;
     }
 
 
     function pointerup() {
+        if (_downPointerId !== (d3_event.pointerId || 'mouse')) return;
+        _downPointerId = null;
+
+        d3_select(window)
+            .on(_pointerPrefix + 'up.select', null, true);
+
         click();
     }
 
@@ -130,9 +136,6 @@ export function behaviorSelect(context) {
 
     function click() {
         if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
-
-        d3_select(window)
-            .on(_pointerPrefix + 'up.select', null, true);
 
         if (!_p1) return;
         var p2 = point();
@@ -230,6 +233,7 @@ export function behaviorSelect(context) {
         _lastMouse = null;
         _showMenu = false;
         _p1 = null;
+        _downPointerId = null;
 
         d3_select(window)
             .on('keydown.select', keydown)
