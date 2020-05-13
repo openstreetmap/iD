@@ -9,7 +9,7 @@ export function operationExtract(selectedIDs, context) {
     var action = actionExtract(entityID);
 
     var geometry = entityID && context.graph().hasEntity(entityID) && context.graph().geometry(entityID);
-    var extent = (geometry === 'area' || geometry === 'line') && context.entity(entityID).extent(context.graph());
+    var extent = (geometry === 'area' || geometry === 'line') && context.graph().entity(entityID).extent(context.graph());
 
 
     var operation = function () {
