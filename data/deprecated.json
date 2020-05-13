@@ -623,6 +623,14 @@
     "replace": {"kerb": "flush"}
   },
   {
+    "old": {"landcover": "flower_bed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
+    "old": {"landcover": "flowerbed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
     "old": {"landuse": "basin"},
     "replace": {"natural": "water", "water": "basin"}
   },
@@ -719,6 +727,18 @@
     "replace": {"man_made": "cutline"}
   },
   {
+    "old": {"man_made": "flower_bed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
+    "old": {"man_made": "flowerbed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
+    "old": {"man_made": "fuel_storage_tank"},
+    "replace": {"man_made": "storage_tank", "content": "fuel"}
+  },
+  {
     "old": {"man_made": "gas_well"},
     "replace": {"man_made": "petroleum_well", "substance": "gas"}
   },
@@ -733,10 +753,6 @@
   {
     "old": {"man_made": "MDF"},
     "replace": {"telecom": "exchange"}
-  },
-  {
-    "old": {"man_made": "fuel_storage_tank"},
-    "replace": {"man_made": "storage_tank", "content": "fuel"}
   },
   {
     "old": {"man_made": "oil_tank"},
