@@ -1,6 +1,5 @@
 export { behaviorAddWay } from './add_way';
 export { behaviorBreathe } from './breathe';
-export { behaviorCopy } from './copy';
 export { behaviorDrag } from './drag';
 export { behaviorDrawWay } from './draw_way';
 export { behaviorDraw } from './draw';

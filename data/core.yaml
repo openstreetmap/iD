@@ -80,6 +80,14 @@ en:
       annotation: Changed the role of a relation member.
     change_tags:
       annotation: Changed tags.
+    copy:
+      title: Copy
+      description:
+        single: Make this feature pasteable.
+        multiple: Make these features pasteable.
+      annotation:
+        single: Copied a feature.
+        multiple: "Copied {n} features."
     circularize:
       title: Circularize
       description:

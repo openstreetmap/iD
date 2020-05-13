@@ -6,7 +6,6 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionDeleteRelation } from '../actions/delete_relation';
 
 import { behaviorBreathe } from '../behavior/breathe';
-import { behaviorCopy } from '../behavior/copy';
 import { behaviorHover } from '../behavior/hover';
 import { behaviorLasso } from '../behavior/lasso';
 import { behaviorPaste } from '../behavior/paste';
@@ -38,7 +37,6 @@ export function modeSelect(context, selectedIDs) {
     var keybinding = utilKeybinding('select');
     var breatheBehavior = behaviorBreathe(context);
     var behaviors = [
-        behaviorCopy(context),
         behaviorPaste(context),
         breatheBehavior,
         behaviorHover(context),
