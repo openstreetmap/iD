@@ -7886,6 +7886,10 @@
                     "name": "Clearcut Forest",
                     "terms": "cut,forest,lumber,tree,wood"
                 },
+                "man_made/courtyard": {
+                    "name": "Courtyard",
+                    "terms": "court,enclosed open air,quadrangle,yard"
+                },
                 "man_made/crane": {
                     "name": "Crane",
                     "terms": ""

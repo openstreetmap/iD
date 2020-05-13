@@ -6207,6 +6207,11 @@ en:
         name: Clearcut Forest
         # 'terms: cut,forest,lumber,tree,wood'
         terms: '<translate with synonyms or related terms for ''Clearcut Forest'', separated by commas>'
+      man_made/courtyard:
+        # man_made=courtyard
+        name: Courtyard
+        # 'terms: court,enclosed open air,quadrangle,yard'
+        terms: '<translate with synonyms or related terms for ''Courtyard'', separated by commas>'
       man_made/crane:
         # man_made=crane
         name: Crane
