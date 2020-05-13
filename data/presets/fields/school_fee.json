@@ -1,7 +1,7 @@
 {
   "key": "fee",
   "type": "combo",
-  "label": "Type",
+  "label": "Private (fee)",
   "placeholder": "No, yes...",
   "strings": {
       "options": {
