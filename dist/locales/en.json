@@ -481,6 +481,9 @@
                     "vertex": {
                         "single": "Extract this point from its parent lines/areas."
                     },
+                    "line": {
+                        "single": "Extract a point from this line."
+                    },
                     "area": {
                         "single": "Extract a point from this area."
                     }

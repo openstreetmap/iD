@@ -9,7 +9,7 @@ export function operationExtract(selectedIDs, context) {
     var action = actionExtract(entityID);
 
     var geometry = entityID && context.graph().hasEntity(entityID) && context.graph().geometry(entityID);
-    var extent = geometry === 'area' && context.entity(entityID).extent(context.graph());
+    var extent = (geometry === 'area' || geometry === 'line') && context.entity(entityID).extent(context.graph());
 
 
     var operation = function () {
@@ -27,8 +27,9 @@ export function operationExtract(selectedIDs, context) {
 
         if (!entity.hasInterestingTags()) return false;
 
-        if (geometry === 'area') {
+        if (geometry === 'area' || geometry === 'line') {
             var preset = presetManager.match(entity, graph);
+            // only allow extraction from ways/multipolygons if the preset supports points
             return preset.geometry.indexOf('point') !== -1;
         }
 
