@@ -184,15 +184,6 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
-    function spacebar() { // toggle the menu
-        if (context.map().supersurface.select('.edit-menu').empty()) {
-            mode.showMenu('spacebar');
-        } else {
-            closeMenu();
-        }
-    }
-
-
     mode.selectedIDs = function() {
         return selectedIDs;
     };
@@ -269,8 +260,7 @@ export function modeSelect(context, selectedIDs) {
             .on(['{', uiCmd('⌘['), 'home'], firstVertex)
             .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
             .on(['\\', 'pause'], nextParent)
-            .on('⎋', esc, true)
-            .on('space', spacebar);
+            .on('⎋', esc, true);
 
         d3_select(document)
             .call(keybinding);

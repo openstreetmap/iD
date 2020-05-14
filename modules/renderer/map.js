@@ -684,6 +684,11 @@ export function rendererMap(context) {
     };
 
 
+    map.lastPointerEvent = function() {
+        return _lastPointerEvent;
+    };
+
+
     map.mouse = function() {
         var event = _lastPointerEvent || d3_event;
         if (event) {

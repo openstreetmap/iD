@@ -15,7 +15,7 @@ export function behaviorSelect(context) {
     // legacy option to show menu on every click
     var _alwaysShowMenu = +prefs('edit-menu-show-always') === 1;
     var _tolerancePx = 4;
-    var _lastMouse = null;
+    var _lastPointerEvent = null;
     var _showMenu = false;
     var _p1 = null;
     var _downPointerId = null;
@@ -26,21 +26,35 @@ export function behaviorSelect(context) {
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     function point(event) {
-        return utilFastMouse(context.container().node())(event || d3_event);
+        // don't use map().mouse() since additional pointers unrelated to selection can
+        // move between pointerdown and pointerup
+        return utilFastMouse(context.map().supersurface.node())(event || d3_event);
     }
 
 
     function keydown() {
+
+        if (d3_event.keyCode === 93 ||  // context menu key
+            d3_event.keyCode === 32) {  // spacebar
+            d3_event.preventDefault();
+        }
+
+        if (d3_event.repeat) return; // ignore repeated events for held keys
+
+        // if any key is pressed the user is probably doing something other than long-pressing
         if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
 
-        var e = d3_event;
-        if (e && e.shiftKey) {
+        if (d3_event.shiftKey) {
             context.surface()
                 .classed('behavior-multiselect', true);
         }
 
-        if (e && e.keyCode === 93) {  // context menu
-            e.preventDefault();
+        if (d3_event.keyCode === 32) {  // spacebar
+            if (!_p1) {
+                _p1 = point(_lastPointerEvent);
+                if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+                _longPressTimeout = window.setTimeout(didLongPress, 500, 'spacebar');
+            }
         }
     }
 
@@ -48,31 +62,33 @@ export function behaviorSelect(context) {
     function keyup() {
         if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
 
-        var e = d3_event;
-        if (!e || !e.shiftKey) {
+        if (!d3_event.shiftKey) {
             context.surface()
                 .classed('behavior-multiselect', false);
         }
 
-
-        if (e && e.keyCode === 93) {  // context menu
-            e.preventDefault();
+        if (d3_event.keyCode === 93) {  // context menu key
+            d3_event.preventDefault();
             _lastInteractionType = 'menukey';
             contextmenu();
+        } else if (d3_event.keyCode === 32) {  // spacebar
+            d3_event.preventDefault();
+            _lastInteractionType = 'spacebar';
+            _showMenu = _alwaysShowMenu;
+            click();
         }
     }
 
 
     function pointerdown() {
         if (_p1) return;
-
         _p1 = point();
         _downPointerId = d3_event.pointerId || 'mouse';
 
         if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
-        _longPressTimeout = window.setTimeout(didLongPress, 500, d3_event.pointerType || 'mouse');
+        _longPressTimeout = window.setTimeout(didLongPress, 500, 'longdown-' + (d3_event.pointerType || 'mouse'));
 
-        _lastMouse = d3_event;
+        _lastPointerEvent = d3_event;
 
         d3_select(window)
             .on(_pointerPrefix + 'up.select', pointerup, true);
@@ -81,9 +97,10 @@ export function behaviorSelect(context) {
     }
 
 
-    function didLongPress(pointerType) {
+    function didLongPress(iType) {
+        // treat long presses like right-clicks
         _longPressTimeout = null;
-        _lastInteractionType = 'longdown-' + pointerType;
+        _lastInteractionType = iType;
         _showMenu = true;
         click();
     }
@@ -92,7 +109,7 @@ export function behaviorSelect(context) {
     function pointermove() {
         if (_downPointerId && _downPointerId !== (d3_event.pointerId || 'mouse')) return;
 
-        _lastMouse = d3_event;
+        _lastPointerEvent = d3_event;
     }
 
 
@@ -112,13 +129,13 @@ export function behaviorSelect(context) {
         e.preventDefault();
 
         if (!+e.clientX && !+e.clientY) {
-            if (_lastMouse) {
-                e.sourceEvent = _lastMouse;
+            if (_lastPointerEvent) {
+                e.sourceEvent = _lastPointerEvent;
             } else {
                 return;
             }
         } else {
-            _lastMouse = d3_event;
+            _lastPointerEvent = d3_event;
             _lastInteractionType = 'rightclick';
         }
 
@@ -134,12 +151,12 @@ export function behaviorSelect(context) {
         if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
 
         if (!_p1) return;
-        var p2 = point(_lastMouse);
+        var p2 = point(_lastPointerEvent);
         var dist = geoVecLength(_p1, p2);
         _p1 = null;
         if (dist > _tolerancePx) return;
 
-        var datum = (d3_event && d3_event.target.__data__) || (_lastMouse && _lastMouse.target.__data__);
+        var datum = (d3_event && d3_event.target.__data__) || (_lastPointerEvent && _lastPointerEvent.target.__data__);
         var isMultiselect = (d3_event && d3_event.shiftKey) || context.surface().select('.lasso').node();
 
         processClick(datum, isMultiselect);
@@ -220,18 +237,24 @@ export function behaviorSelect(context) {
             }
         }
 
-        // reset for next time..
+        resetProperties();
+    }
+
+
+    function resetProperties() {
         _showMenu = false;
+        _p1 = null;
+        _downPointerId = null;
+        if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
+        _longPressTimeout = null;
+        _lastInteractionType = null;
+        // don't reset _lastPointerEvent since it might still be useful
     }
 
 
     function behavior(selection) {
-        _lastMouse = null;
-        _showMenu = false;
-        _p1 = null;
-        _downPointerId = null;
-        _longPressTimeout = null;
-        _lastInteractionType = null;
+        resetProperties();
+        _lastPointerEvent = context.map().lastPointerEvent();
 
         d3_select(window)
             .on('keydown.select', keydown)
