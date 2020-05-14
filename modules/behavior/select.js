@@ -34,6 +34,12 @@ export function behaviorSelect(context) {
 
     function keydown() {
 
+        if (d3_event.keyCode === 32) {
+            // don't react to spacebar events during text input 
+            var activeNode = document.activeElement;
+            if (activeNode && new Set(['INPUT', 'TEXTAREA']).has(activeNode.nodeName)) return;
+        }
+
         if (d3_event.keyCode === 93 ||  // context menu key
             d3_event.keyCode === 32) {  // spacebar
             d3_event.preventDefault();
