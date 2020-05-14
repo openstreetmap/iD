@@ -159,11 +159,11 @@ export function behaviorSelect(context) {
         var datum = (d3_event && d3_event.target.__data__) || (_lastPointerEvent && _lastPointerEvent.target.__data__);
         var isMultiselect = (d3_event && d3_event.shiftKey) || context.surface().select('.lasso').node();
 
-        processClick(datum, isMultiselect);
+        processClick(datum, isMultiselect, p2);
     }
 
 
-    function processClick(datum, isMultiselect) {
+    function processClick(datum, isMultiselect, point) {
         var mode = context.mode();
 
         var entity = datum && datum.properties && datum.properties.entity;
@@ -183,14 +183,14 @@ export function behaviorSelect(context) {
             if (!isMultiselect) {
                 if (selectedIDs.length > 1 && (_showMenu && !_alwaysShowMenu)) {
                     // multiple things already selected, just show the menu...
-                    mode.reselect().showMenu(_lastInteractionType);
+                    mode.reselect().showMenu(point, _lastInteractionType);
                 } else {
                     // always enter modeSelect even if the entity is already
                     // selected since listeners may expect `context.enter` events,
                     // e.g. in the walkthrough
                     newMode = modeSelect(context, [datum.id]);
                     context.enter(newMode);
-                    if (_showMenu) newMode.showMenu(_lastInteractionType);
+                    if (_showMenu) newMode.showMenu(point, _lastInteractionType);
                 }
 
             } else {
@@ -198,7 +198,7 @@ export function behaviorSelect(context) {
                     // clicked entity is already in the selectedIDs list..
                     if (_showMenu && !_alwaysShowMenu) {
                         // don't deselect clicked entity, just show the menu.
-                        mode.reselect().showMenu(_lastInteractionType);
+                        mode.reselect().showMenu(point, _lastInteractionType);
                     } else {
                         // deselect clicked entity, then reenter select mode or return to browse mode..
                         selectedIDs = selectedIDs.filter(function(id) { return id !== datum.id; });
@@ -210,7 +210,7 @@ export function behaviorSelect(context) {
                     selectedIDs = selectedIDs.concat([datum.id]);
                     newMode = modeSelect(context, selectedIDs);
                     context.enter(newMode);
-                    if (_showMenu) newMode.showMenu(_lastInteractionType);
+                    if (_showMenu) newMode.showMenu(point, _lastInteractionType);
                 }
             }
 

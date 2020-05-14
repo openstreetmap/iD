@@ -11,7 +11,7 @@ import { behaviorLasso } from '../behavior/lasso';
 import { behaviorPaste } from '../behavior/paste';
 import { behaviorSelect } from '../behavior/select';
 
-import { geoExtent, geoChooseEdge, geoPointInPolygon } from '../geo';
+import { geoExtent, geoChooseEdge } from '../geo';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
@@ -147,7 +147,7 @@ export function modeSelect(context, selectedIDs) {
             .select('.edit-menu').remove();
     }
 
-    mode.showMenu = function(triggerType) {
+    mode.showMenu = function(anchorPoint, triggerType) {
 
         // remove any displayed menu
         closeMenu();
@@ -160,11 +160,6 @@ export function modeSelect(context, selectedIDs) {
             return context.graph().geometry(id) === 'relation';
         })) return;
 
-        var point = context.map().mouse();
-        var viewport = geoExtent(context.projection.clipExtent()).polygon();
-        // make sure a vaild position can be determined
-        if (!point || !geoPointInPolygon(point, viewport)) return;
-
         var surfaceNode = context.surface().node();
         if (surfaceNode.focus) {   // FF doesn't support it
             // focus the surface or else clicking off the menu may not trigger modeBrowse
@@ -175,7 +170,7 @@ export function modeSelect(context, selectedIDs) {
         if (!_editMenu) _editMenu = uiEditMenu(context);
 
         _editMenu
-            .anchorLoc(point)
+            .anchorLoc(anchorPoint)
             .triggerType(triggerType)
             .operations(operations);
 
