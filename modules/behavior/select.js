@@ -1,7 +1,6 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { geoVecLength } from '../geo';
-import { prefs } from '../core/preferences';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
@@ -12,8 +11,6 @@ import { utilFastMouse } from '../util/util';
 
 
 export function behaviorSelect(context) {
-    // legacy option to show menu on every click
-    var _alwaysShowMenu = +prefs('edit-menu-show-always') === 1;
     var _tolerancePx = 4;
     var _lastPointerEvent = null;
     var _showMenu = false;
@@ -35,7 +32,7 @@ export function behaviorSelect(context) {
     function keydown() {
 
         if (d3_event.keyCode === 32) {
-            // don't react to spacebar events during text input 
+            // don't react to spacebar events during text input
             var activeNode = document.activeElement;
             if (activeNode && new Set(['INPUT', 'TEXTAREA']).has(activeNode.nodeName)) return;
         }
@@ -80,7 +77,6 @@ export function behaviorSelect(context) {
         } else if (d3_event.keyCode === 32) {  // spacebar
             d3_event.preventDefault();
             _lastInteractionType = 'spacebar';
-            _showMenu = _alwaysShowMenu;
             click();
         }
     }
@@ -98,8 +94,6 @@ export function behaviorSelect(context) {
 
         d3_select(window)
             .on(_pointerPrefix + 'up.select', pointerup, true);
-
-        _showMenu = _alwaysShowMenu;
     }
 
 
@@ -176,6 +170,7 @@ export function behaviorSelect(context) {
         if (entity) datum = entity;
 
         if (datum && datum.type === 'midpoint') {
+            // treat targeting midpoints as if targeting the parent way
             datum = datum.parents[0];
         }
 
@@ -187,36 +182,27 @@ export function behaviorSelect(context) {
             context.selectedErrorID(null);
 
             if (!isMultiselect) {
-                if (selectedIDs.length > 1 && (_showMenu && !_alwaysShowMenu)) {
-                    // multiple things already selected, just show the menu...
-                    mode.reselect().showMenu(point, _lastInteractionType);
-                } else {
+                if (selectedIDs.length <= 1 || !_showMenu) {
                     // always enter modeSelect even if the entity is already
                     // selected since listeners may expect `context.enter` events,
                     // e.g. in the walkthrough
                     newMode = modeSelect(context, [datum.id]);
                     context.enter(newMode);
-                    if (_showMenu) newMode.showMenu(point, _lastInteractionType);
                 }
 
             } else {
                 if (selectedIDs.indexOf(datum.id) !== -1) {
                     // clicked entity is already in the selectedIDs list..
-                    if (_showMenu && !_alwaysShowMenu) {
-                        // don't deselect clicked entity, just show the menu.
-                        mode.reselect().showMenu(point, _lastInteractionType);
-                    } else {
+                    if (!_showMenu) {
                         // deselect clicked entity, then reenter select mode or return to browse mode..
                         selectedIDs = selectedIDs.filter(function(id) { return id !== datum.id; });
                         context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
                     }
                 } else {
-
                     // clicked entity is not in the selected list, add it..
                     selectedIDs = selectedIDs.concat([datum.id]);
                     newMode = modeSelect(context, selectedIDs);
                     context.enter(newMode);
-                    if (_showMenu) newMode.showMenu(point, _lastInteractionType);
                 }
             }
 
@@ -242,6 +228,11 @@ export function behaviorSelect(context) {
                 context.enter(modeBrowse(context));
             }
         }
+
+        context.ui().closeEditMenu();
+
+        // always request to show the edit menu in case the mode needs it
+        if (_showMenu) context.ui().showEditMenu(point, _lastInteractionType);
 
         resetProperties();
     }

@@ -4,7 +4,7 @@ import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
 import { presetManager } from '../presets';
 
-export function operationExtract(selectedIDs, context) {
+export function operationExtract(context, selectedIDs) {
     var entityID = selectedIDs.length && selectedIDs[0];
     var action = actionExtract(entityID);
 

@@ -6,7 +6,7 @@ import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
 import { modeMove } from '../modes/move';
 import { uiCmd } from '../ui/cmd';
 
-
+// see also `operationPaste`
 export function behaviorPaste(context) {
 
     function doPaste() {
@@ -22,12 +22,12 @@ export function behaviorPaste(context) {
 
         if (!geoPointInPolygon(mouse, viewport)) return;
 
-        var extent = geoExtent();
         var oldIDs = context.copyIDs();
+        if (!oldIDs.length) return;
+
+        var extent = geoExtent();
         var oldGraph = context.copyGraph();
         var newIDs = [];
-
-        if (!oldIDs.length) return;
 
         var action = actionCopyEntities(oldIDs, oldGraph);
         context.perform(action);

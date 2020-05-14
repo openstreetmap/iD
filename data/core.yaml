@@ -88,6 +88,15 @@ en:
       annotation:
         single: Copied a feature.
         multiple: "Copied {n} features."
+    paste:
+      title: Paste
+      description:
+        single: "Add a duplicate {feature} here."
+        multiple: "Add {n} duplicate features here."
+      annotation:
+        single: Pasted a feature.
+        multiple: "Pasted {n} features."
+      nothing_copied: No features have been copied.
     circularize:
       title: Circularize
       description:

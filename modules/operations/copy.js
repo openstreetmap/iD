@@ -5,7 +5,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { uiCmd } from '../ui/cmd';
 import { utilArrayGroupBy } from '../util';
 
-export function operationCopy(selectedIDs, context) {
+export function operationCopy(context, selectedIDs) {
 
     function getFilteredIdsToCopy() {
         return selectedIDs.filter(function(selectedID) {
@@ -112,7 +112,7 @@ export function operationCopy(selectedIDs, context) {
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
             t('operations.copy.annotation.single') :
-            t('operations.copy.annotation.multiple', { n: selectedIDs.length });
+            t('operations.copy.annotation.multiple', { n: selectedIDs.length.toString() });
     };
 
 

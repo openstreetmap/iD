@@ -9,7 +9,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
 import { presetManager } from '../presets';
 
-export function operationMerge(selectedIDs, context) {
+export function operationMerge(context, selectedIDs) {
 
     var join = actionJoin(selectedIDs);
     var merge = actionMerge(selectedIDs);

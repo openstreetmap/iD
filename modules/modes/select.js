@@ -17,7 +17,6 @@ import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
-import { uiEditMenu } from '../ui/edit_menu';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
@@ -46,7 +45,6 @@ export function modeSelect(context, selectedIDs) {
         modeDragNote(context).behavior
     ];
     var inspector;   // unused?
-    var _editMenu; // uiEditMenu
     var _newFeature = false;
     var _follow = false;
 
@@ -141,44 +139,6 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
-    function closeMenu() {
-        // remove any existing menu no matter how it was added
-        context.map().supersurface
-            .select('.edit-menu').remove();
-    }
-
-    mode.showMenu = function(anchorPoint, triggerType) {
-
-        // remove any displayed menu
-        closeMenu();
-
-        // disable menu if in wide selection, for example
-        if (!context.map().editableDataEnabled()) return;
-
-        // don't show the menu for relations alone
-        if (selectedIDs.every(function(id) {
-            return context.graph().geometry(id) === 'relation';
-        })) return;
-
-        var surfaceNode = context.surface().node();
-        if (surfaceNode.focus) {   // FF doesn't support it
-            // focus the surface or else clicking off the menu may not trigger modeBrowse
-            surfaceNode.focus();
-        }
-
-        // don't load the menu until it's needed
-        if (!_editMenu) _editMenu = uiEditMenu(context);
-
-        _editMenu
-            .anchorLoc(anchorPoint)
-            .triggerType(triggerType)
-            .operations(operations);
-
-        // render the menu
-        context.map().supersurface.call(_editMenu);
-    };
-
-
     mode.selectedIDs = function() {
         return selectedIDs;
     };
@@ -186,12 +146,6 @@ export function modeSelect(context, selectedIDs) {
 
     mode.zoomToSelected = function() {
         context.map().zoomToEase(selectedEntities());
-    };
-
-
-    mode.reselect = function() {
-        if (!checkSelectedIDs()) return;
-        return mode;
     };
 
 
@@ -219,12 +173,12 @@ export function modeSelect(context, selectedIDs) {
         });
 
         operations = Object.values(Operations)
-            .map(function(o) { return o(selectedIDs, context); })
+            .map(function(o) { return o(context, selectedIDs); })
             .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
 
-        var downgradeOperation = Operations.operationDowngrade(selectedIDs, context);
+        var downgradeOperation = Operations.operationDowngrade(context, selectedIDs);
         // don't allow delete if downgrade is available
-        var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(selectedIDs, context);
+        var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(context, selectedIDs);
 
         operations.push(lastOperation);
 
@@ -235,8 +189,12 @@ export function modeSelect(context, selectedIDs) {
         });
 
         // remove any displayed menu
-        closeMenu();
+        context.ui().closeEditMenu();
     }
+
+    mode.operations = function() {
+        return operations;
+    };
 
 
     mode.enter = function() {
@@ -269,11 +227,10 @@ export function modeSelect(context, selectedIDs) {
                 // reselect after change in case relation members were removed or added
                 selectElements();
             })
-            .on('undone.select', update)
-            .on('redone.select', update);
+            .on('undone.select', checkSelectedIDs)
+            .on('redone.select', checkSelectedIDs);
 
         context.map()
-            .on('move.select', closeMenu)
             .on('drawn.select', selectElements)
             .on('crossEditableZoom.select', function() {
                 selectElements();
@@ -298,12 +255,6 @@ export function modeSelect(context, selectedIDs) {
             context.map().centerEase(loc);
         } else if (singular() && singular().type === 'way') {
             context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
-        }
-
-
-        function update() {
-            closeMenu();
-            checkSelectedIDs();
         }
 
 
@@ -500,7 +451,7 @@ export function modeSelect(context, selectedIDs) {
         d3_select(document)
             .call(keybinding.unbind);
 
-        closeMenu();
+        context.ui().closeEditMenu();
 
         context.history()
             .on('change.select', null)
