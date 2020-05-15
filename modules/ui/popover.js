@@ -152,8 +152,14 @@ export function uiPopover(klass) {
         var display = _displayType.apply(this, arguments);
 
         if (display === 'hover') {
-            anchor.on(_pointerPrefix + 'enter.popover', show);
-            anchor.on(_pointerPrefix + 'leave.popover', hide);
+            anchor.on(_pointerPrefix + 'enter.popover', function() {
+                if (d3_event.pointerType && d3_event.pointerType !== 'mouse') return;
+                show.apply(this, arguments);
+            });
+            anchor.on(_pointerPrefix + 'leave.popover', function() {
+                if (d3_event.pointerType && d3_event.pointerType !== 'mouse') return;
+                hide.apply(this, arguments);
+            });
 
         } else if (display === 'clickFocus') {
             anchor
