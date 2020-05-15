@@ -112,6 +112,10 @@
                 "annotation": {
                     "single": "Copied a feature.",
                     "multiple": "Copied {n} features."
+                },
+                "too_large": {
+                    "single": "This can't be copied because not enough of it is currently visible.",
+                    "multiple": "These can't be copied because not enough of them are currently visible."
                 }
             },
             "paste": {

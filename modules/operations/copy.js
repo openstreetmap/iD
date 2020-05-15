@@ -3,9 +3,12 @@ import { event as d3_event } from 'd3-selection';
 import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
 import { uiCmd } from '../ui/cmd';
-import { utilArrayGroupBy } from '../util';
+import { geoExtent } from '../geo';
+import { utilArrayGroupBy, utilGetAllNodes } from '../util';
 
 export function operationCopy(context, selectedIDs) {
+
+    var _multi = selectedIDs.length === 1 ? 'single' : 'multiple';
 
     function getFilteredIdsToCopy() {
         return selectedIDs.filter(function(selectedID) {
@@ -98,14 +101,22 @@ export function operationCopy(context, selectedIDs) {
 
 
     operation.disabled = function() {
+        var nodes = utilGetAllNodes(getFilteredIdsToCopy(), context.graph());
+        var extent = nodes.reduce(function(extent, node) {
+            return extent.extend(node.extent(context.graph()));
+        }, geoExtent());
+        if (extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
+            return 'too_large';
+        }
         return false;
     };
 
 
     operation.tooltip = function() {
-        return selectedIDs.length === 1 ?
-            t('operations.copy.description.single') :
-            t('operations.copy.description.multiple');
+        var disable = operation.disabled();
+        return disable ?
+            t('operations.copy.' + disable + '.' + _multi) :
+            t('operations.copy.description' + '.' + _multi);
     };
 
 
