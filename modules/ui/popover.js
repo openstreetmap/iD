@@ -152,12 +152,26 @@ export function uiPopover(klass) {
         var display = _displayType.apply(this, arguments);
 
         if (display === 'hover') {
+            var _lastNonMouseEnterTime;
             anchor.on(_pointerPrefix + 'enter.popover', function() {
-                if (d3_event.pointerType && d3_event.pointerType !== 'mouse') return;
+
+                if (d3_event.pointerType) {
+                    if (d3_event.pointerType !== 'mouse') {
+                        _lastNonMouseEnterTime = d3_event.timeStamp;
+                        // only allow hover behavior for mouse input
+                        return;
+                    } else if (_lastNonMouseEnterTime &&
+                        d3_event.timeStamp - _lastNonMouseEnterTime < 500) {
+                        // HACK: iOS 13.4 sends an erroneous `mouse` type pointerenter
+                        // event for non-mouse interactions right after sending
+                        // the correct type pointerenter event. Workaround by discarding
+                        // any mouse event that occurs immediately after a non-mouse event.
+                        return;
+                    }
+                }
                 show.apply(this, arguments);
             });
             anchor.on(_pointerPrefix + 'leave.popover', function() {
-                if (d3_event.pointerType && d3_event.pointerType !== 'mouse') return;
                 hide.apply(this, arguments);
             });
 
@@ -185,15 +199,11 @@ export function uiPopover(klass) {
 
 
     function show() {
-        var displayType = _displayType.apply(this, arguments);
-        if (displayType === 'hover' && d3_event.pointerType === 'touch') {
-            // don't show hover popovers on touch devices
-            return;
-        }
         var anchor = d3_select(this);
         var popoverSelection = anchor.selectAll('.popover-' + _id);
 
-        if (popoverSelection.empty()) {   // popover was removed somehow, put it back
+        if (popoverSelection.empty()) {
+            // popover was removed somehow, put it back
             anchor.call(popover.destroy);
             anchor.each(setup);
             popoverSelection = anchor.selectAll('.popover-' + _id);
@@ -201,6 +211,7 @@ export function uiPopover(klass) {
 
         popoverSelection.classed('in', true);
 
+        var displayType = _displayType.apply(this, arguments);
         if (displayType === 'clickFocus') {
             anchor.classed('active', true);
             popoverSelection.node().focus();
