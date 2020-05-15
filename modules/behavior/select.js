@@ -23,9 +23,10 @@ export function behaviorSelect(context) {
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     function point(event) {
-        // don't use map().mouse() since additional pointers unrelated to selection can
-        // move between pointerdown and pointerup
-        return utilFastMouse(context.map().supersurface.node())(event || d3_event);
+        // Don't use map().mouse() since additional pointers unrelated to selection can
+        // move between pointerdown and pointerup. Use the `main-map` coordinate system
+        // since the surface and supersurface are transformed when drag-panning.
+        return utilFastMouse(context.container().select('.main-map').node())(event || d3_event);
     }
 
 
@@ -150,11 +151,17 @@ export function behaviorSelect(context) {
     function click() {
         if (_longPressTimeout) window.clearTimeout(_longPressTimeout);
 
-        if (!_p1) return;
+        if (!_p1) {
+            resetProperties();
+            return;
+        }
         var p2 = point(_lastPointerEvent);
         var dist = geoVecLength(_p1, p2);
         _p1 = null;
-        if (dist > _tolerancePx) return;
+        if (dist > _tolerancePx) {
+            resetProperties();
+            return;
+        }
 
         var datum = (d3_event && d3_event.target.__data__) || (_lastPointerEvent && _lastPointerEvent.target.__data__);
         var isMultiselect = (d3_event && d3_event.shiftKey) || context.surface().select('.lasso').node();
