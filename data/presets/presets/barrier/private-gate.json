@@ -12,5 +12,6 @@
       "barrier": "gate",
       "access": "private"
   },
-  "name": "Private Gate"
+  "name": "Private Gate",
+  "shortcut": ["⌥+⇧+q"]
 }

@@ -6,6 +6,7 @@
   {"pID": "highway/service-destination", "hidden" : true},
   {"pID": "highway/footway", "hidden" : true},
   {"pID": "entrance", "hidden" : true},
+  {"pID": "entrance/main", "hidden" : true},
   {"pID": "leisure/playground", "hidden" : true},
   {"pID": "amenity/parking", "hidden" : true},
   {"pID": "amenity/parking-private", "hidden" : true},
@@ -38,5 +39,7 @@
   {"pID": "barrier/fence", "hidden" : true},
   {"pID": "traffic_calming/hump", "hidden" : true},
   {"pID": "highway/stop", "hidden" : true},
-  {"pID": "traffic_calming/bump", "hidden" : true}
+  {"pID": "traffic_calming/bump", "hidden" : true},
+  {"pID": "barrier/gate", "hidden" : true},
+  {"pID": "barrier/private-gate", "hidden" : true}
 ]
