@@ -10,11 +10,11 @@ import { utilDisplayLabel } from '../util/util';
 // see also `behaviorPaste`
 export function operationPaste(context) {
 
-    var _point;
+    var _pastePoint;
 
     var operation = function() {
 
-        if (!_point) return;
+        if (!_pastePoint) return;
 
         var oldIDs = context.copyIDs();
         if (!oldIDs.length) return;
@@ -48,16 +48,19 @@ export function operationPaste(context) {
             }
         }
 
-        // Put pasted objects where mouse pointer is..
-        var center = projection(extent.center());
-        var delta = geoVecSubtract(_point, center);
+        // Use the location of the copy operation to offset the paste location,
+        // or else use the center of the pasted extent
+        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) ||
+            projection(extent.center());
+        var delta = geoVecSubtract(_pastePoint, copyPoint);
 
+        // Move the pasted objects to be anchored at the paste location
         context.replace(actionMove(newIDs, delta, projection), operation.annotation());
         context.enter(modeSelect(context, newIDs));
     };
 
     operation.point = function(val) {
-        _point = val;
+        _pastePoint = val;
         return operation;
     };
 

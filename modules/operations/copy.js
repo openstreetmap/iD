@@ -53,6 +53,14 @@ export function operationCopy(context, selectedIDs) {
         }
 
         context.copyIDs(canCopy);
+        if (_point &&
+            (canCopy.length !== 1 || graph.entity(canCopy[0]).type !== 'node')) {
+            // store the anchor coordinates if copying more than a single node
+            context.copyLonLat(context.projection.invert(_point));
+        } else {
+            context.copyLonLat(null);
+        }
+
     };
 
 
@@ -124,6 +132,13 @@ export function operationCopy(context, selectedIDs) {
         return selectedIDs.length === 1 ?
             t('operations.copy.annotation.single') :
             t('operations.copy.annotation.multiple', { n: selectedIDs.length.toString() });
+    };
+
+
+    var _point;
+    operation.point = function(val) {
+        _point = val;
+        return operation;
     };
 
 
