@@ -126,11 +126,15 @@ em {
 strong {
     font-weight: bold;
 }
-a:visited, a {
+a,
+a:visited,
+a:active {
     color: #7092ff;
 }
-a:hover {
-    color: #597be7;
+@media (hover: hover) {
+    a:hover {
+        color: #597be7;
+    }
 }
 kbd {
     display: inline-block;
@@ -183,6 +187,8 @@ input[type=email] {
     padding: 5px 10px 5px 20px;
 }
 
+textarea:active,
+input:active,
 textarea:focus,
 input:focus {
     background-color: #f1f1f1;
@@ -308,8 +314,13 @@ button {
 }
 
 button:focus,
-button:hover {
+button:active {
     background-color: #ececec;
+}
+@media (hover: hover) {
+    button:hover {
+        background-color: #ececec;
+    }
 }
 button.active {
     background: #7092ff;
@@ -353,24 +364,37 @@ button.action {
     color: #fff;
 }
 button.action:focus,
-button.action:hover {
+button.action:active {
     background: #597be7;
 }
 button.secondary-action {
     background: #ececec;
 }
 button.secondary-action:focus,
-button.secondary-action:hover {
+button.secondary-action:active {
     background: #cccccc;
 }
 
 button.action.disabled,
-button.action.disabled:hover,
-button[disabled].action,
-button[disabled].action:hover {
+button[disabled].action {
     background: #cccccc;
     color: #888;
     cursor: not-allowed;
+}
+
+@media (hover: hover) {
+    button.action:hover {
+        background: #597be7;
+    }
+    button.secondary-action:hover {
+        background: #cccccc;
+    }
+    button.action.disabled:hover,
+    button[disabled].action:hover {
+        background: #cccccc;
+        color: #888;
+        cursor: not-allowed;
+    }
 }
 
 
@@ -897,9 +921,13 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .geocode-item {
     left: -25%;
 }
-
-.geocode-item:hover {
+.geocode-item:active {
     background-color: #aaa;
+}
+@media (hover: hover) {
+    .geocode-item:hover {
+        background-color: #aaa;
+    }
 }
 
 .feature-list-item {
@@ -909,8 +937,13 @@ a.hide-toggle {
     line-height: 20px;
     display: flex;
 }
-.feature-list-item:hover {
+.feature-list-item:active {
     background-color: #ececec;
+}
+@media (hover: hover) {
+    .feature-list-item:hover {
+        background-color: #ececec;
+    }
 }
 .feature-list-item button {
     background: transparent;
@@ -940,8 +973,13 @@ a.hide-toggle {
 .feature-list-item .entity-type {
     color: #7092ff;
 }
-.feature-list-item:hover .entity-type {
+.feature-list-item:active .entity-type {
     color: #597be7;
+}
+@media (hover: hover) {
+    .feature-list-item:hover .entity-type {
+        color: #597be7;
+    }
 }
 .feature-list-item .entity-name {
     font-weight: normal;
@@ -1169,11 +1207,16 @@ a.hide-toggle {
     font-weight: normal;
 }
 
-.preset-list-button:hover .label,
 .preset-list-button:focus .label,
+.preset-list-button:active .label,
 .preset-list-button.disabled,
 .preset-list-button.disabled .label {
     background-color: #ececec;
+}
+@media (hover: hover) {
+    .preset-list-button:hover .label {
+        background-color: #ececec;
+    }
 }
 
 .preset-list-item button.tag-reference-button {
@@ -1194,9 +1237,13 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .preset-list-item button:last-child {
     border-radius: 4px 0 0 4px;
 }
-
-.preset-list-item button.tag-reference-button:hover {
+.preset-list-item button.tag-reference-button:active {
     background: #f1f1f1;
+}
+@media (hover: hover) {
+    .preset-list-item button.tag-reference-button:hover {
+        background: #f1f1f1;
+    }
 }
 .preset-list-item button.tag-reference-button .icon {
     opacity: .5;
@@ -1352,8 +1399,13 @@ a.hide-toggle {
     border-left: none;
     border-right: 1px solid #ccc;
 }
-.field-label button:hover {
+.field-label button:active {
     background: #f1f1f1;
+}
+@media (hover: hover) {
+    .field-label button:hover {
+        background: #f1f1f1;
+    }
 }
 .field-label .icon {
     opacity: .5;
@@ -1420,8 +1472,13 @@ a.hide-toggle {
     border-left-width: 1px;
     border-right-width: 0;
 }
-.form-field-button:hover {
+.form-field-button:active {
     background-color: #f1f1f1;
+}
+@media (hover: hover) {
+    .form-field-button:hover {
+        background-color: #f1f1f1;
+    }
 }
 .form-field-button .icon {
     fill: #333;
@@ -1706,9 +1763,13 @@ a.hide-toggle {
 .form-field-input-check > .reverser.button.hide {
     display: none;
 }
-
-.form-field-input-check:hover {
+.form-field-input-check:active {
     background: #f1f1f1;
+}
+@media (hover: hover) {
+    .form-field-input-check:hover {
+        background: #f1f1f1;
+    }
 }
 .form-field-input-check .set {
     color: inherit;
@@ -1742,8 +1803,13 @@ a.hide-toggle {
 .form-field-input-radio > label:last-child {
     border-radius: 0 0 4px 4px;
 }
-.form-field-input-radio > label:hover {
+.form-field-input-radio > label:active {
     background-color: #ececec;
+}
+@media (hover: hover) {
+    .form-field-input-radio > label:hover {
+        background-color: #ececec;
+    }
 }
 .form-field-input-radio > label.active {
     background-color: #e8ebff;
@@ -2082,8 +2148,13 @@ div.combobox {
 }
 
 .combobox a.selected,
-.combobox a:hover {
+.combobox a:active {
     background: #ececec;
+}
+@media (hover: hover) {
+    .combobox a:hover {
+        background: #ececec;
+    }
 }
 
 .combobox a:first-child {
@@ -2161,9 +2232,15 @@ div.combobox {
     color: #7092ff;
     border-bottom: 2px solid;
 }
-.field-help-nav-item:hover {
+.field-help-nav-item:active {
     color: #597be7;
     background-color: #efefef;
+}
+@media (hover: hover) {
+    .field-help-nav-item:hover {
+        color: #597be7;
+        background-color: #efefef;
+    }
 }
 
 .field-help-content {
@@ -2266,10 +2343,15 @@ button.raw-tag-option {
     margin: 0 3px;
 }
 button.raw-tag-option:focus,
-button.raw-tag-option:hover,
 button.raw-tag-option.active {
     color: #fff;
     background: #597be7;
+}
+@media (hover: hover) {
+    button.raw-tag-option:hover {
+        color: #fff;
+        background: #597be7;
+    }
 }
 button.raw-tag-option.selected {
     color: #fff;
@@ -2378,8 +2460,13 @@ button.raw-tag-option svg.icon {
     border-right-width: 0;
 }
 
-.tag-row button:hover {
+.tag-row button:active {
     background: #f1f1f1;
+}
+@media (hover: hover) {
+    .tag-row button:hover {
+        background: #f1f1f1;
+    }
 }
 .tag-row button .icon {
     opacity: .5;
@@ -2560,8 +2647,13 @@ input.key-trap {
     background: rgba(0,0,0,.5);
 }
 .add-row button:focus,
-.add-row button:hover {
+.add-row button:active {
     background: rgba(0,0,0,.8);
+}
+@media (hover: hover) {
+    .add-row button:hover {
+        background: rgba(0,0,0,.8);
+    }
 }
 
 .add-tag {
@@ -2826,14 +2918,21 @@ input.key-trap {
     border-radius: 0;
 }
 
-.map-control > button:not(.disabled):hover,
-.map-control > button:not(.disabled):focus {
+.map-control > button:not(.disabled):focus,
+.map-control > button:not(.disabled):active {
     background: rgba(0, 0, 0, .8);
 }
-
 .map-control > button.active,
-.map-control > button.active:hover {
+.map-control > button.active:active {
     background: #7092ff;
+}
+@media (hover: hover) {
+    .map-control > button:not(.disabled):hover {
+        background: rgba(0, 0, 0, .8);
+    }
+    .map-control > button.active:hover {
+        background: #7092ff;
+    }
 }
 
 .map-control > button.disabled .icon {
@@ -2859,9 +2958,13 @@ div.full-screen > button, div.full-screen > button.active {
     height: 40px;
     background: transparent;
 }
-
-div.full-screen > button:hover {
+div.full-screen > button:active {
     background-color: rgba(0, 0, 0, .8);
+}
+@media (hover: hover) {
+    div.full-screen > button:hover {
+        background-color: rgba(0, 0, 0, .8);
+    }
 }
 
 
@@ -2953,8 +3056,13 @@ div.full-screen > button:hover {
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
-.layer-list li:hover {
+.layer-list li:active {
     background-color: #ececec;
+}
+@media (hover: hover) {
+    .layer-list li:hover {
+        background-color: #ececec;
+    }
 }
 
 .layer-list li.active button,
@@ -3092,9 +3200,14 @@ button.autofix.action {
     color: #fff;
 }
 button.autofix.action:focus,
-button.autofix.action:hover,
+button.autofix.action:active,
 button.autofix.action.active {
     background: #597be7;
+}
+@media (hover: hover) {
+    button.autofix.action:hover {
+        background: #597be7;
+    }
 }
 
 /* fix all */
@@ -3135,11 +3248,6 @@ button.autofix.action.active {
     background: #ffa;
 }
 
-.warnings-list .issue.severity-warning .issue-label:hover,
-.issue.severity-warning .issue-fix-item.actionable:hover {
-    background: #ff8;
-}
-
 .issue.severity-warning .issue-icon {
     color: #f90;
 }
@@ -3148,15 +3256,26 @@ button.autofix.action.active {
 .issue-container.active .issue.severity-warning .issue-info-button {
     color: #b15500;
     fill: #b15500;
-    /*color: #7092ff;*/
-    /*fill: #7092ff;*/
 }
-.issue.severity-warning .issue-fix-item.actionable:hover,
-.issue-container.active .issue.severity-warning .issue-info-button:hover {
+.warnings-list .issue.severity-warning .issue-label:active,
+.issue.severity-warning .issue-fix-item.actionable:active {
+    background: #ff8;
+}
+.issue.severity-warning .issue-fix-item.actionable:active,
+.issue-container.active .issue.severity-warning .issue-info-button:active {
     color: #7f3d00;
     fill: #7f3d00;
-    /*color: #597be7;*/
-    /*fill: #597be7;*/
+}
+@media (hover: hover) {
+    .warnings-list .issue.severity-warning .issue-label:hover,
+    .issue.severity-warning .issue-fix-item.actionable:hover {
+        background: #ff8;
+    }
+    .issue.severity-warning .issue-fix-item.actionable:hover,
+    .issue-container.active .issue.severity-warning .issue-info-button:hover {
+        color: #7f3d00;
+        fill: #7f3d00;
+    }
 }
 
 
@@ -3178,28 +3297,33 @@ button.autofix.action.active {
     background: #ffc6c6;
 }
 
-.errors-list .issue.severity-error .issue-label:hover,
-.issue.severity-error .issue-fix-item.actionable:hover {
-    background: #ffb6b6;
-}
-
-.issue.severity-error .issue-icon {
-    color: #dd1400;
-}
-
 .issue.severity-error .issue-fix-item.actionable,
 .issue-container.active .issue.severity-error .issue-info-button {
     color: #b91201;
     fill: #b91201;
-    /*color: #7092ff;*/
-    /*fill: #7092ff;*/
 }
-.issue.severity-error .issue-fix-item.actionable:hover,
-.issue-container.active .issue.severity-error .issue-info-button:hover {
+.issue.severity-error .issue-icon {
+    color: #dd1400;
+}
+.errors-list .issue.severity-error .issue-label:active,
+.issue.severity-error .issue-fix-item.actionable:active {
+    background: #ffb6b6;
+}
+.issue.severity-error .issue-fix-item.actionable:active,
+.issue-container.active .issue.severity-error .issue-info-button:active {
     color: #840c00;
     fill: #840c00;
-    /*color: #597be7;*/
-    /*fill: #597be7;*/
+}
+@media (hover: hover) {
+    .errors-list .issue.severity-error .issue-label:hover,
+    .issue.severity-error .issue-fix-item.actionable:hover {
+        background: #ffb6b6;
+    }
+    .issue.severity-error .issue-fix-item.actionable:hover,
+    .issue-container.active .issue.severity-error .issue-info-button:hover {
+        color: #840c00;
+        fill: #840c00;
+    }
 }
 
 
@@ -3272,9 +3396,15 @@ input.square-degrees-input {
     border: 1px solid #ccc;
     background: #f6f6f6;
 }
-.section-entity-issues .issue-container:not(.active) .issue-text:hover,
-.section-entity-issues .issue-container:not(.active) .issue-info-button:hover {
+.section-entity-issues .issue-container:not(.active) .issue-text:active,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:active {
     background: #f1f1f1;
+}
+@media (hover: hover) {
+    .section-entity-issues .issue-container:not(.active) .issue-text:hover,
+    .section-entity-issues .issue-container:not(.active) .issue-info-button:hover {
+        background: #f1f1f1;
+    }
 }
 .section-entity-issues .issue .issue-label .issue-text {
     padding-right: 10px;
@@ -3633,10 +3763,15 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .help-pane .toc li a {
     border-bottom: 0;
 }
-
-.help-pane .toc li a:hover,
-.help-pane .nav a:hover {
+.help-pane .toc li a:active,
+.help-pane .nav a:active {
     background: #ececec;
+}
+@media (hover: hover) {
+    .help-pane .toc li a:hover,
+    .help-pane .nav a:hover {
+        background: #ececec;
+    }
 }
 
 .help-pane .toc li a.selected {
@@ -4098,9 +4233,13 @@ img.tile-debug {
 .ideditor[dir='rtl'] .panel-title button.close {
     float: left;
 }
-
-.panel-title button.close:hover {
+.panel-title button.close:active {
     color: #fff;
+}
+@media (hover: hover) {
+    .panel-title button.close:hover {
+        color: #fff;
+    }
 }
 .panel-title button.close .icon {
     height: 20px;
@@ -4227,9 +4366,13 @@ img.tile-debug {
 .attribution-wrap .attribution a:visited {
     color: #ccf;
 }
-
 .attribution-wrap .attribution a:hover {
     color: #aaf;
+}
+@media (hover: hover) {
+    .attribution-wrap .attribution a:hover {
+        color: #aaf;
+    }
 }
 
 .attribution-wrap .attribution .source-image {
@@ -4305,13 +4448,10 @@ img.tile-debug {
 .scale-block .scale {
     height: 30px;
     width: 100%;
+    cursor: pointer;
 }
 .ideditor[dir='rtl'] .scale-block .scale {
     transform: scaleX(-1);
-}
-
-.scale-block .scale:hover {
-    cursor: pointer;
 }
 
 .scale-block .scale text {
@@ -4444,8 +4584,13 @@ img.tile-debug {
     color: #ccc;
     pointer-events: all;
 }
-.api-status a:hover {
+.api-status a:active {
     color: inherit;
+}
+@media (hover: hover) {
+    .api-status a:hover {
+        color: inherit;
+    }
 }
 
 /* Notification Badges
@@ -4590,9 +4735,6 @@ img.tile-debug {
     height: 160px;
     text-align: center;
     width: 100%;
-}
-.modal-actions button:hover {
-    background-color: #ececec;
 }
 
 .logo-small {
@@ -4757,9 +4899,15 @@ img.tile-debug {
     color: #7092ff;
     border-bottom: 2px solid;
 }
-.modal-shortcuts .tab:hover {
+.modal-shortcuts .tab:active {
     color: #597be7;
     background-color: #efefef;
+}
+@media (hover: hover) {
+    .modal-shortcuts .tab:hover {
+        color: #597be7;
+        background-color: #efefef;
+    }
 }
 
 .modal-shortcuts .shortcut-tab {
@@ -4903,9 +5051,13 @@ svg.mouseclick use.right {
     padding: 5px 10px;
     cursor: pointer;
 }
-
-.ideditor.mode-save .changeset-list li:hover {
+.ideditor.mode-save .changeset-list li:active {
     background-color: #ececec;
+}
+@media (hover: hover) {
+    .ideditor.mode-save .changeset-list li:hover {
+        background-color: #ececec;
+    }
 }
 
 .ideditor.mode-save .changeset-list .alert {
@@ -4992,9 +5144,14 @@ svg.mouseclick use.right {
     border-radius: 8px;
 }
 
-.notice .zoom-to:hover,
-.notice .zoom-to:focus {
+.notice .zoom-to:focus,
+.notice .zoom-to:active {
     background: rgba(0,0,0,0.6);
+}
+@media (hover: hover) {
+    .notice .zoom-to:hover {
+        background: rgba(0,0,0,0.6);
+    }
 }
 
 .notice .zoom-to .icon {
@@ -5285,9 +5442,13 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border-width: 3px 3px 3px 4px;
     border-radius: 6px;
 }
-::-webkit-scrollbar-track:hover,
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);
+}
+@media (hover: hover) {
+    ::-webkit-scrollbar-track:hover {
+        background-color: rgba(0,0,0,.05);
+    }
 }
 
 
