@@ -83,8 +83,8 @@ en:
     copy:
       title: Copy
       description:
-        single: Make this feature pasteable.
-        multiple: Make these features pasteable.
+        single: Set this feature for pasting.
+        multiple: Set these features for pasting.
       annotation:
         single: Copied a feature.
         multiple: "Copied {n} features."
