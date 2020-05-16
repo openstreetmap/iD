@@ -912,6 +912,9 @@ a.hide-toggle {
 .feature-list-item:hover {
     background-color: #ececec;
 }
+.feature-list-item.hover {
+    background-color: #ececec;
+}
 .feature-list-item button {
     background: transparent;
 }
