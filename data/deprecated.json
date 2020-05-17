@@ -1328,6 +1328,15 @@
     "replace": {"volcano:status": "extinct"}
   },
   {
+    "old": {"type": "gas",},
+    "replace": {"substance": "gas"}
+  }, 
+  {
+    "old": {"type": "oil",},
+    "replace": {"substance": "oil"}
+  },
+    
+  {
     "old": {"type": "scoria"},
     "replace": {"volcano:type": "scoria"}
   },
@@ -1343,6 +1352,10 @@
     "old": {"type": "video", "amenity": "studio"},
     "replace": {"studio": "video"}
   },
+  {
+    "old": {"type": "water",},
+    "replace": {"substance": "water"}
+  },    
   {
     "old": {"unnamed": "*"},
     "replace": {"noname": "$1"}
