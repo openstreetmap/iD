@@ -1328,14 +1328,29 @@
     "replace": {"volcano:status": "extinct"}
   },
   {
-    "old": {"type": "gas",},
-    "replace": {"substance": "gas"}
-  }, 
-  {
-    "old": {"type": "oil",},
-    "replace": {"substance": "oil"}
+    "old": {"type": "gas", "man_made": "pipeline"},
+    "replace": {"substance": "gas", "man_made": "pipeline"}
   },
-    
+  {
+    "old": {"type": "gas", "man_made": "pumping_rig"},
+    "replace": {"substance": "gas", "man_made": "pumping_rig"}
+  },
+  {
+    "old": {"type": "gas", "pipeline": "*"},
+    "replace": {"substance": "gas", "pipeline": "$1"}
+  },
+  {
+    "old": {"type": "oil", "man_made": "pipeline"},
+    "replace": {"substance": "oil", "man_made": "pipeline"}
+  },
+  {
+    "old": {"type": "oil", "man_made": "pumping_rig"},
+    "replace": {"substance": "oil", "man_made": "pumping_rig"}
+  },
+  {
+    "old": {"type": "oil", "pipeline": "*"},
+    "replace": {"substance": "oil", "pipeline": "$1"}
+  },
   {
     "old": {"type": "scoria"},
     "replace": {"volcano:type": "scoria"}
@@ -1353,9 +1368,17 @@
     "replace": {"studio": "video"}
   },
   {
-    "old": {"type": "water",},
-    "replace": {"substance": "water"}
-  },    
+    "old": {"type": "water", "man_made": "pipeline"},
+    "replace": {"substance": "water", "man_made": "pipeline"}
+  },
+  {
+    "old": {"type": "water", "man_made": "reservoir_covered"},
+    "replace": {"content": "water", "man_made": "reservoir_covered"}
+  },
+  {
+    "old": {"type": "water", "pipeline": "*"},
+    "replace": {"substance": "water", "pipeline": "$1"}
+  },
   {
     "old": {"unnamed": "*"},
     "replace": {"noname": "$1"}
