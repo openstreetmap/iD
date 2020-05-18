@@ -7812,7 +7812,7 @@ en:
       shop/collector:
         # shop=collector
         name: Collectibles Shop
-        # 'terms: antiques,coins,collection,collectors,comics,dolls,figurines,stamps,thrift'
+        # 'terms: antiques,coins,collection,collectors,comics,dolls,figurines,numismatics,philately,stamps,thrift'
         terms: '<translate with synonyms or related terms for ''Collectibles Shop'', separated by commas>'
       shop/computer:
         # shop=computer

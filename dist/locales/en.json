@@ -9267,7 +9267,7 @@
                 },
                 "shop/collector": {
                     "name": "Collectibles Shop",
-                    "terms": "antiques,coins,collection,collectors,comics,dolls,figurines,stamps,thrift"
+                    "terms": "antiques,coins,collection,collectors,comics,dolls,figurines,numismatics,philately,stamps,thrift"
                 },
                 "shop/computer": {
                     "name": "Computer Store",
