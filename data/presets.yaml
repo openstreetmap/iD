@@ -469,6 +469,9 @@ en:
       collection_times:
         # collection_times=*
         label: Collection Times
+      collector:
+        # collector=*
+        label: Items
       colour:
         # colour=*
         label: Color
@@ -7806,6 +7809,11 @@ en:
         # shop=coffee
         name: Coffee Store
         terms: '<translate with synonyms or related terms for ''Coffee Store'', separated by commas>'
+      shop/collector:
+        # shop=collector
+        name: Collectibles Shop
+        # 'terms: antiques,coins,collection,collectors,comics,dolls,figurines,stamps,thrift'
+        terms: '<translate with synonyms or related terms for ''Collectibles Shop'', separated by commas>'
       shop/computer:
         # shop=computer
         name: Computer Store

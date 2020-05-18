@@ -3021,6 +3021,9 @@
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "collector": {
+                    "label": "Items"
+                },
                 "colour": {
                     "label": "Color",
                     "terms": ""
@@ -9261,6 +9264,10 @@
                 "shop/coffee": {
                     "name": "Coffee Store",
                     "terms": ""
+                },
+                "shop/collector": {
+                    "name": "Collectibles Shop",
+                    "terms": "antiques,coins,collection,collectors,comics,dolls,figurines,stamps,thrift"
                 },
                 "shop/computer": {
                     "name": "Computer Store",
