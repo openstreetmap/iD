@@ -2046,6 +2046,8 @@
     {"key": "camp_site", "value": "camp_pitch", "description": "🄳 ➜ tourism=camp_pitch"},
     {"key": "color", "description": "🄳 ➜ colour=*"},
     {"key": "company", "value": "consulting", "description": "🄳 ➜ office=consulting"},
+    {"key": "content", "value": "unknown", "description": "🄳"},
+    {"key": "contents", "description": "🄳 ➜ content=*"},
     {"key": "craft", "value": "catering", "description": "🄳 ➜ craft=caterer"},
     {"key": "craft", "value": "glass", "description": "🄳 ➜ craft=glaziery"},
     {"key": "craft", "value": "jeweler", "description": "🄳 ➜ shop=jewelry"},

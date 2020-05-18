@@ -284,6 +284,13 @@
     "replace": {"office": "consulting"}
   },
   {
+    "old": {"content": "unknown"}
+  },
+  {
+    "old": {"contents": "*"},
+    "replace": {"content": "$1"}
+  },
+  {
     "old": {"craft": "catering"},
     "replace": {"craft": "caterer"}
   },
