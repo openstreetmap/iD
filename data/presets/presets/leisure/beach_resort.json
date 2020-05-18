@@ -4,6 +4,7 @@
         "name",
         "address",
         "opening_hours",
+        "opening_hours/covid19",
         "fee",
         "payment_multi_fee",
         "charge_fee"

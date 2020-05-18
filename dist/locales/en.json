@@ -39,26 +39,22 @@
             "add_area": {
                 "title": "Area",
                 "description": "Add parks, buildings, lakes or other areas to the map.",
-                "tail": "Click on the map to start drawing an area, like a park, lake, or building.",
                 "filter_tooltip": "areas"
             },
             "add_line": {
                 "title": "Line",
                 "description": "Add highways, streets, pedestrian paths, canals or other lines to the map.",
-                "tail": "Click on the map to start drawing a road, path, or route.",
                 "filter_tooltip": "lines"
             },
             "add_point": {
                 "title": "Point",
                 "description": "Add restaurants, monuments, postal boxes or other points to the map.",
-                "tail": "Click on the map to add a point.",
                 "filter_tooltip": "points"
             },
             "add_note": {
                 "title": "Note",
                 "label": "Add Note",
                 "description": "Spotted an issue? Let other mappers know.",
-                "tail": "Click on the map to add a note.",
                 "key": "N"
             },
             "add_preset": {
@@ -67,12 +63,6 @@
             "browse": {
                 "title": "Browse",
                 "description": "Pan and zoom the map."
-            },
-            "draw_area": {
-                "tail": "Click to add nodes to your area. Click the first node to finish the area."
-            },
-            "draw_line": {
-                "tail": "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
             },
             "drag_node": {
                 "connected_to_hidden": "This can't be edited because it is connected to a hidden feature."
@@ -112,6 +102,33 @@
             },
             "change_tags": {
                 "annotation": "Changed tags."
+            },
+            "copy": {
+                "title": "Copy",
+                "description": {
+                    "single": "Set this feature for pasting.",
+                    "multiple": "Set these features for pasting."
+                },
+                "annotation": {
+                    "single": "Copied a feature.",
+                    "multiple": "Copied {n} features."
+                },
+                "too_large": {
+                    "single": "This can't be copied because not enough of it is currently visible.",
+                    "multiple": "These can't be copied because not enough of them are currently visible."
+                }
+            },
+            "paste": {
+                "title": "Paste",
+                "description": {
+                    "single": "Add a duplicate {feature} here.",
+                    "multiple": "Add {n} duplicate features here."
+                },
+                "annotation": {
+                    "single": "Pasted a feature.",
+                    "multiple": "Pasted {n} features."
+                },
+                "nothing_copied": "No features have been copied."
             },
             "circularize": {
                 "title": "Circularize",
@@ -490,6 +507,9 @@
                 "description": {
                     "vertex": {
                         "single": "Extract this point from its parent lines/areas."
+                    },
+                    "line": {
+                        "single": "Extract a point from this line."
                     },
                     "area": {
                         "single": "Extract a point from this area."
@@ -2294,19 +2314,16 @@
                 "welcome": "Welcome! This walkthrough will teach you the basics of editing on OpenStreetMap.",
                 "practice": "All of the data in this walkthrough is just for practicing, and any edits that you make in the walkthrough will not be saved.",
                 "words": "This walkthrough will introduce some new words and concepts. When we introduce a new word, we'll use *italics*.",
-                "mouse": "You can use any input device to edit the map, but this walkthrough assumes you have a mouse with left and right buttons. **If you want to attach a mouse, do so now, then click OK.**",
-                "leftclick": "When this tutorial asks you to click or double-click, we mean with the left button. On a trackpad it might be a single-click or single-finger tap. **Left-click {num} times.**",
-                "rightclick": "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**",
-                "chapters": "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
+                "chapters": "You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Press '{next}' to continue.**"
             },
             "navigation": {
                 "title": "Navigation",
-                "drag": "The main map area shows OpenStreetMap data on top of a background.{br}You can drag the map by pressing and holding the left mouse button while moving the mouse around. You can also use the arrow keys on your keyboard. **Drag the map!**",
-                "zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons. **Zoom the map!**",
+                "drag": "The main map area shows OpenStreetMap data on top of a background.{br}You can click-and-drag or tap-and-drag the map to move it around. You can also use the arrow keys on a keyboard. **Drag the map!**",
+                "zoom": "You can zoom in or out by scrolling with a mouse wheel, pinching on a touchscreen, or pressing the {plus} / {minus} buttons. **Zoom the map!**",
                 "features": "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap.",
                 "points_lines_areas": "Map features are represented using *points, lines, or areas.*",
                 "nodes_ways": "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*.",
-                "click_townhall": "All features on the map can be selected by clicking on them. **Click on the point to select it.**",
+                "click_townhall": "All features on the map can be selected by clicking or tapping on them. **Select the point.**",
                 "selected_townhall": "Great! The point is now selected. Selected features are drawn with a pulsing glow.",
                 "editor_townhall": "When a feature is selected, the *feature editor* is displayed alongside the map.",
                 "preset_townhall": "The top part of the feature editor shows the feature's type. This point is a {preset}.",
@@ -2316,7 +2333,7 @@
                 "choose_street": "**Choose {name} from the list to select it.**",
                 "selected_street": "Great! {name} is now selected.",
                 "editor_street": "The fields shown for a street are different than the fields that were shown for the town hall.{br}For this selected street, the feature editor shows fields like '{field1}' and '{field2}'. **Close the feature editor by hitting escape or pressing the {button} button.**",
-                "play": "Try moving the map and clicking on some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
+                "play": "Try exploring the map and selecting some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, press '{next}'.**"
             },
             "points": {
                 "title": "Points",
@@ -2427,6 +2444,7 @@
                 "enter": "Enter",
                 "esc": "Esc",
                 "home": "Home",
+                "menu": "Menu",
                 "option": "Option",
                 "pause": "Pause",
                 "pgdn": "PgDn",
@@ -2834,12 +2852,7 @@
                     "label": "Sand Bath"
                 },
                 "bath/type": {
-                    "label": "Specialty",
-                    "options": {
-                        "onsen": "Japanese Onsen",
-                        "foot_bath": "Foot Bath",
-                        "hot_spring": "Hot Spring"
-                    }
+                    "label": "Specialty"
                 },
                 "beauty": {
                     "label": "Services"
@@ -2898,6 +2911,9 @@
                 "brewery": {
                     "label": "Draft Beers",
                     "terms": "on tap"
+                },
+                "bridge_combo": {
+                    "label": "Type"
                 },
                 "bridge": {
                     "label": "Type",
@@ -3004,6 +3020,9 @@
                 },
                 "collection_times": {
                     "label": "Collection Times"
+                },
+                "collector": {
+                    "label": "Items"
                 },
                 "colour": {
                     "label": "Color",
@@ -3174,6 +3193,9 @@
                 "destination_oneway": {
                     "label": "Destinations"
                 },
+                "destination": {
+                    "label": "Destination"
+                },
                 "destination/ref_oneway": {
                     "label": "Destination Road Numbers"
                 },
@@ -3225,6 +3247,13 @@
                     "options": {
                         "clockwise": "Clockwise",
                         "anticlockwise": "Counterclockwise"
+                    }
+                },
+                "direction_vertex_dual": {
+                    "label": "Direction Affected",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward"
                     }
                 },
                 "direction_vertex": {
@@ -3568,6 +3597,11 @@
                 },
                 "icao": {
                     "label": "ICAO Airport Code"
+                },
+                "image": {
+                    "label": "Image",
+                    "terms": "icon,image uri,photo,picture",
+                    "placeholder": "https://example.com/photo.jpg"
                 },
                 "incline_steps": {
                     "label": "Incline",
@@ -3978,6 +4012,10 @@
                     "terms": "",
                     "placeholder": "Unknown"
                 },
+                "opening_hours/covid19": {
+                    "label": "COVID-19 Pandemic Hours",
+                    "terms": "coronavirus,lockdown,opening hours,SARS‑CoV‑2"
+                },
                 "operator": {
                     "label": "Operator",
                     "terms": ""
@@ -4004,12 +4042,13 @@
                     "label": "Type",
                     "options": {
                         "surface": "Surface",
-                        "multi-storey": "Multilevel",
                         "underground": "Underground",
-                        "sheds": "Sheds",
+                        "multi-storey": "Multilevel",
+                        "lane": "Roadside Lane",
                         "carports": "Carports",
                         "garage_boxes": "Garage Boxes",
-                        "lane": "Roadside Lane"
+                        "rooftop": "Rooftop",
+                        "sheds": "Sheds"
                     }
                 },
                 "payment_multi_fee": {
@@ -4319,6 +4358,9 @@
                     "label": "Type"
                 },
                 "route": {
+                    "label": "Type"
+                },
+                "ruins": {
                     "label": "Type"
                 },
                 "rwn_ref": {
@@ -4816,6 +4858,9 @@
                     "label": "Overhead Trolley Wires",
                     "terms": ""
                 },
+                "tunnel_combo": {
+                    "label": "Type"
+                },
                 "tunnel": {
                     "label": "Type",
                     "placeholder": "Default"
@@ -5076,7 +5121,7 @@
                     "terms": "skiing,snowboarding,surface cable"
                 },
                 "aerialway/gondola": {
-                    "name": "Gondola",
+                    "name": "Gondola Lift",
                     "terms": "aerial cable,lift,skiing,snowboarding"
                 },
                 "aerialway/goods": {
@@ -5120,8 +5165,8 @@
                     "terms": "aerodrome,aeroway,airplane,airport,jet,plane"
                 },
                 "aeroway/apron": {
-                    "name": "Apron",
-                    "terms": "ramp"
+                    "name": "Airport Apron",
+                    "terms": "aircraft parking,flight line,hardstand,ramp,tarmac,taxiway"
                 },
                 "aeroway/gate": {
                     "name": "Airport Gate",
@@ -5181,22 +5226,13 @@
                     "name": "Embassy"
                 },
                 "amenity/ferry_terminal": {
-                    "name": "Ferry Station / Terminal"
+                    "name": "Ferry Terminal"
                 },
                 "amenity/nursing_home": {
                     "name": "Nursing Home"
                 },
                 "amenity/recycling": {
                     "name": "Recycling"
-                },
-                "amenity/register_office": {
-                    "name": "Register Office"
-                },
-                "amenity/scrapyard": {
-                    "name": "Scrap Yard"
-                },
-                "amenity/swimming_pool": {
-                    "name": "Swimming Pool"
                 },
                 "amenity/animal_boarding": {
                     "name": "Animal Boarding Facility",
@@ -6190,7 +6226,7 @@
                 },
                 "barrier/height_restrictor": {
                     "name": "Height Restrictor",
-                    "terms": ""
+                    "terms": "height barrier,height restriction barrier,maxheight,maximum height measurer"
                 },
                 "barrier/kerb": {
                     "name": "Curb",
@@ -6218,7 +6254,7 @@
                 },
                 "barrier/lift_gate": {
                     "name": "Lift Gate",
-                    "terms": ""
+                    "terms": "boom barrier,boom gate,boom lift,hinged bar,pivoted pole"
                 },
                 "barrier/retaining_wall": {
                     "name": "Retaining Wall",
@@ -6337,6 +6373,10 @@
                     "name": "Building Under Construction",
                     "terms": ""
                 },
+                "building/cowshed": {
+                    "name": "Cowshed",
+                    "terms": "byre,cow barn,cow house,cow shed,cowbarn,cowhouse,dairy barn,milking barn"
+                },
                 "building/detached": {
                     "name": "Detached House",
                     "terms": "home,single,family,residence,dwelling"
@@ -6405,6 +6445,10 @@
                     "name": "Mosque Building",
                     "terms": ""
                 },
+                "building/office": {
+                    "name": "Office Building",
+                    "terms": "business center,office block"
+                },
                 "building/pavilion": {
                     "name": "Pavilion Building",
                     "terms": "sports"
@@ -6456,6 +6500,10 @@
                 "building/static_caravan": {
                     "name": "Static Mobile Home",
                     "terms": "house trailer,manufactured home,mobile home,prefabricated home,residential caravan,static caravan,trailer home"
+                },
+                "building/sty": {
+                    "name": "Pigsty",
+                    "terms": "hog parlor,hog pen,pig ark,pig barn,pig parlor,pig pen,pig shed,pig shelter,pig-cote,piggery,pigpen,pigshed,sty"
                 },
                 "building/temple": {
                     "name": "Temple Building",
@@ -6580,11 +6628,11 @@
                     "terms": "glass,stained-glass,window"
                 },
                 "craft/handicraft": {
-                    "name": "Handicraft",
+                    "name": "Handicraft Workspace",
                     "terms": ""
                 },
                 "craft/hvac": {
-                    "name": "HVAC",
+                    "name": "HVAC Workplace",
                     "terms": "heat*,vent*,air conditioning"
                 },
                 "craft/insulator": {
@@ -6600,7 +6648,7 @@
                     "terms": ""
                 },
                 "craft/metal_construction": {
-                    "name": "Metal Construction",
+                    "name": "Metalworker",
                     "terms": ""
                 },
                 "craft/painter": {
@@ -6866,6 +6914,10 @@
                     "name": "Counselling Center",
                     "terms": ""
                 },
+                "healthcare/dentist/orthodontics": {
+                    "name": "Orthodontist",
+                    "terms": "braces,dentistry,dentofacial orthopedics,headgear,jaw alignment,teeth,tooth"
+                },
                 "healthcare/hospice": {
                     "name": "Hospice",
                     "terms": "terminal,illness"
@@ -6921,8 +6973,8 @@
                     "terms": ""
                 },
                 "highway/construction": {
-                    "name": "Road Closed",
-                    "terms": "closed,closure,construction"
+                    "name": "Closed Road",
+                    "terms": "closure,construction,road closed,road work,roadwork"
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor",
@@ -7057,6 +7109,10 @@
                 "highway/path": {
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
+                },
+                "highway/path/boardwalk": {
+                    "name": "Boardwalk",
+                    "terms": "pier,plank walkway,wooden raised foot path"
                 },
                 "highway/path/informal": {
                     "name": "Informal Path",
@@ -7820,6 +7876,10 @@
                     "name": "Running Track",
                     "terms": "athletics track,decathlon,foot race,long distance running,marathon,middle distance running,racetrack,running,sprint,track,walking"
                 },
+                "leisure/trampoline_park": {
+                    "name": "Trampoline Park",
+                    "terms": "bounce,jump,spring"
+                },
                 "leisure/water_park": {
                     "name": "Water Park",
                     "terms": "swim,pool,dive"
@@ -7867,6 +7927,10 @@
                 "man_made/clearcut": {
                     "name": "Clearcut Forest",
                     "terms": "cut,forest,lumber,tree,wood"
+                },
+                "man_made/courtyard": {
+                    "name": "Courtyard",
+                    "terms": "court,enclosed open air,quadrangle,yard"
                 },
                 "man_made/crane": {
                     "name": "Crane",
@@ -7995,6 +8059,10 @@
                 "man_made/pumping_station": {
                     "name": "Pumping Station",
                     "terms": ""
+                },
+                "man_made/reservoir_covered": {
+                    "name": "Covered Reservoir",
+                    "terms": "underground reservoir,water tank"
                 },
                 "man_made/silo": {
                     "name": "Silo",
@@ -8813,7 +8881,7 @@
                     "terms": "bus,public transit,public transportation,station,terminal,transit,transportation"
                 },
                 "public_transport/station_ferry": {
-                    "name": "Ferry Station / Terminal",
+                    "name": "Ferry Terminal",
                     "terms": "boat,dock,ferry,pier,public transit,public transportation,station,terminal,transit,transportation"
                 },
                 "public_transport/station_light_rail": {
@@ -8952,9 +9020,17 @@
                     "name": "Monorail Track",
                     "terms": ""
                 },
+                "railway/monorail/hanging": {
+                    "name": "Hanging Monorail Track",
+                    "terms": "suspension railway"
+                },
                 "railway/narrow_gauge": {
                     "name": "Narrow Gauge Track",
                     "terms": "narrow gauge railway,narrow gauge railroad"
+                },
+                "railway/preserved": {
+                    "name": "Heritage Railway Track",
+                    "terms": "historic train,preserved rail,steam train,tourist train"
                 },
                 "railway/rail": {
                     "name": "Train Track",
@@ -9033,12 +9109,6 @@
                 },
                 "shop/fashion": {
                     "name": "Fashion Store"
-                },
-                "shop/fishmonger": {
-                    "name": "Fishmonger"
-                },
-                "shop/furnace": {
-                    "name": "Furnace Store"
                 },
                 "shop/vacant": {
                     "name": "Vacant Shop"
@@ -9202,6 +9272,10 @@
                 "shop/coffee": {
                     "name": "Coffee Store",
                     "terms": ""
+                },
+                "shop/collector": {
+                    "name": "Collectibles Shop",
+                    "terms": "antiques,coins,collection,collectors,comics,dolls,figurines,numismatics,philately,stamps,thrift"
                 },
                 "shop/computer": {
                     "name": "Computer Store",
@@ -9382,6 +9456,10 @@
                 "shop/hobby": {
                     "name": "Hobby Shop",
                     "terms": "manga,figurine,model"
+                },
+                "shop/household_linen": {
+                    "name": "Household Linen Shop",
+                    "terms": "bedspreads,blankets,domestic cloths,curtains,handkerchieves,napkins,pillow cases,robes,sheets,towels"
                 },
                 "shop/houseware": {
                     "name": "Houseware Store",
@@ -9570,6 +9648,10 @@
                 "shop/sewing": {
                     "name": "Sewing Supply Shop",
                     "terms": "haberdashery"
+                },
+                "shop/shoe_repair": {
+                    "name": "Shoe Repair Shop",
+                    "terms": "cobbler"
                 },
                 "shop/shoes": {
                     "name": "Shoe Store",
@@ -10667,6 +10749,10 @@
                 "name": "OpenStreetMap Galicia Twitter",
                 "description": "Follow us on Twitter at {url}"
             },
+            "Galicia-Xeoinquedos-Twitter": {
+                "name": "Geoinquetos on Twitter",
+                "description": "Follow us on Twitter at {url}"
+            },
             "GeoPhilly": {
                 "name": "GeoPhilly",
                 "description": "Meetup for map enthusiasts in the Philadelphia area",
@@ -11099,10 +11185,6 @@
                 "description": "Mappers and OpenStreetMap users in the Salt Lake City area",
                 "extendedDescription": "Activities may include things like Learn To Map workshops, mapping parties and outdoor data collection. The events will take place in the SLC area, at least initially.  We are looking for seasoned mappers as well as people new to OSM. Join and let's do some mapping!"
             },
-            "OSM-Vancouver-meetup": {
-                "name": "OpenStreetMap Vancouver",
-                "description": "Mappers and OpenStreetMap users in the Vancouver, BC area"
-            },
             "OSM-Wyoming": {
                 "name": "OpenStreetMap Wyoming",
                 "description": "Mappers and OpenStreetMap users in the state of Wyoming",
@@ -11145,6 +11227,10 @@
             "OSM-japan-mailinglist": {
                 "name": "OpenStreetMap Japan Mailinglist",
                 "description": "Talk-ja is an Official Mailinglist for Japanese Community"
+            },
+            "OSM-japan-slack": {
+                "name": "OpenStreetMap Japan Slack",
+                "description": "A Slack workspace for the OSM Japan community {signupUrl}"
             },
             "OSM-japan-twitter": {
                 "name": "OpenStreetMap Japan Twitter",
@@ -11358,6 +11444,14 @@
                 "name": "OpenStreetMap Germany Matrix",
                 "description": "Join #osm-de:matrix.org at https://riot.im/app/#/room/%23osm-de:matrix.org"
             },
+            "de-mv-mailinglist": {
+                "name": "Mecklenburg-Vorpommern Mailing List",
+                "description": "This is the mailing list for the OSM community of Mecklenburg-Vorpommern"
+            },
+            "de-mv-twitter": {
+                "name": "OpenStreetMap Mecklenburg-Vorpommern Twitter",
+                "description": "Follow us on Twitter: {url}"
+            },
             "de-ostwestfalen-lippe-mailinglist": {
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
@@ -11401,6 +11495,22 @@
             "fi-mailinglist": {
                 "name": "Talk-fi Mailing List",
                 "description": "Talk-fi is the official mailing list for the Finnish OSM community"
+            },
+            "fr-35-wiki": {
+                "name": "OpenStreetMap Rennes Wiki page",
+                "description": "Wiki page of Rennes OSM local group"
+            },
+            "fr-bzh-mailinglist": {
+                "name": "Talk-fr-bzh Mailing List",
+                "description": "Talk-fr-bzh mailing list"
+            },
+            "fr-bzh-twitter": {
+                "name": "OSM-BZH on Twitter",
+                "description": "OpenStreetMap BZH on Twitter: {url}"
+            },
+            "fr-bzh-website": {
+                "name": "OpenStreetMap BZH Website",
+                "description": "The map which speaks Breton"
             },
             "fr-chapter": {
                 "name": "OpenStreetMap France Local Chapter",
@@ -11447,6 +11557,18 @@
                 "name": "GeoGeeks Perth Meetup",
                 "description": "Perth-based meetup group for people interested in mapping, geospatial data, and open source. We'll be working on anything that involves a sense of place."
             },
+            "gr-forum": {
+                "name": "OpenStreetMap GR forum",
+                "description": "OpenStreetMap Greece web forum"
+            },
+            "gr-mailinglist": {
+                "name": "Talk-gr Mailing List",
+                "description": "Talk-gr is the official mailing list for the Greek OSM community"
+            },
+            "gr-matrix": {
+                "name": "OpenStreetMap Greece Matrix",
+                "description": "Join #osm-gr:matrix.org at https://riot.im/app/#/room/%23osm-gr:matrix.org"
+            },
             "guatemala-telegram": {
                 "name": "OSM Guatemala on Telegram",
                 "description": "OpenStreetMap Guatemala Telegram chat"
@@ -11455,6 +11577,10 @@
                 "name": "OpenStreetMap Croatia Facebook group",
                 "description": "OpenStreetMap Croatia Facebook group"
             },
+            "hr-forum": {
+                "name": "OSM Croaria Forum",
+                "description": "OpenStreetMap Croatia Forum"
+            },
             "hr-irc": {
                 "name": "OpenStreetMap Croatia on IRC",
                 "description": "Join #osm-hr on irc.freenode.org (port 6667)"
@@ -11462,6 +11588,10 @@
             "hr-mailinglist": {
                 "name": "Talk-hr Mailing List",
                 "description": "Talk-hr mailing list"
+            },
+            "hr-wiki": {
+                "name": "OpenStreetMap Wikiproject Croatia",
+                "description": "Wikiproject page for Croatia"
             },
             "hu-facebook": {
                 "name": "OpenStreetMap HU on Facebook",
@@ -11693,6 +11823,10 @@
                 "name": "OpenStreetMap Ghana on Twitter",
                 "description": "Follow us on Twitter: {url}"
             },
+            "osm-hr": {
+                "name": "OpenStreetMap Croatia",
+                "description": "The platform for information on OpenStreetMap in Croatia"
+            },
             "osm-india-forum": {
                 "name": "OpenStreetMap India forum",
                 "description": "OpenStreetMap India web forum"
@@ -11856,6 +11990,10 @@
                 "name": "OpenStreetMap Freemap Slovensko on Twitter",
                 "description": "OpenStreetMap Freemap Slovensko on Twitter: {url}"
             },
+            "talk-africa": {
+                "name": "Talk-africa Mailing List",
+                "description": "Talk-africa is the official mailing list for the African OSM community."
+            },
             "talk-au": {
                 "name": "Talk-au Mailing List",
                 "description": "Place for Aussie mappers to chat"
@@ -11885,6 +12023,10 @@
             "talk-nz": {
                 "name": "Talk-nz Mailing List",
                 "description": "New Zealand's OSM community talk"
+            },
+            "talk-tz": {
+                "name": "Talk-tz Mailing List",
+                "description": "Talk-tz is the official mailing list for the Tanzanian OSM community."
             },
             "talk-za": {
                 "name": "Talk-za Mailing List",

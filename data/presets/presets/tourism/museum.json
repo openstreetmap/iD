@@ -7,7 +7,8 @@
         "museum",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "opening_hours/covid19"
     ],
     "moreFields": [
         "air_conditioning",

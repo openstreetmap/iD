@@ -1,0 +1,12 @@
+{
+    "key": "opening_hours:covid19",
+    "type": "combo",
+    "label": "COVID-19 Pandemic Hours",
+    "terms": [
+        "coronavirus",
+        "lockdown",
+        "opening hours",
+        "SARS‑CoV‑2"
+    ],
+    "snake_case": false
+}

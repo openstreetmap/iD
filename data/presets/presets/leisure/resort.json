@@ -5,7 +5,8 @@
         "operator",
         "resort",
         "address",
-        "opening_hours"
+        "opening_hours",
+        "opening_hours/covid19"
     ],
     "moreFields": [
         "access_simple",

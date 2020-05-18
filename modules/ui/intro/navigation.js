@@ -295,6 +295,11 @@ export function uiIntroNavigation(context, reveal) {
 
         var onClick = function() { continueTo(fieldsTownHall); };
 
+        reveal('.entity-editor-pane .section-feature-type',
+            t('intro.navigation.preset_townhall', { preset: preset.name() }),
+            { buttonText: t('intro.ok'), buttonCallback: onClick }
+        );
+
         context.on('exit.intro', function() {
             continueTo(clickTownHall);
         });
@@ -304,11 +309,6 @@ export function uiIntroNavigation(context, reveal) {
                 continueTo(clickTownHall);
             }
         });
-
-        reveal('.entity-editor .preset-list-item',
-            t('intro.navigation.preset_townhall', { preset: preset.name() }),
-            { buttonText: t('intro.ok'), buttonCallback: onClick }
-        );
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
@@ -329,7 +329,7 @@ export function uiIntroNavigation(context, reveal) {
 
         var onClick = function() { continueTo(closeTownHall); };
 
-        reveal('.inspector-body .preset-editor',
+        reveal('.entity-editor-pane .section-preset-fields',
             t('intro.navigation.fields_townhall'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );

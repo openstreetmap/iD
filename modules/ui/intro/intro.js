@@ -1,7 +1,6 @@
 import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
-import { presetManager } from '../../presets';
 import { prefs } from '../../core/preferences';
 import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
@@ -112,7 +111,7 @@ export function uiIntro(context) {
 
     context.container().selectAll('.main-map .layer-background').style('opacity', 1);
 
-    let curtain = uiCurtain();
+    let curtain = uiCurtain(context.container().node());
     selection.call(curtain);
 
     // Store that the user started the walkthrough..
@@ -125,7 +124,6 @@ export function uiIntro(context) {
     let chapters = chapterFlow.map((chapter, i) => {
       let s = chapterUi[chapter](context, curtain.reveal)
         .on('done', () => {
-          presetManager.init();  // clear away "recent" presets
 
           buttons
             .filter(d => d.title === s.title)

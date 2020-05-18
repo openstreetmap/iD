@@ -17,6 +17,7 @@
         "height_building",
         "level",
         "opening_hours",
+        "opening_hours/covid19",
         "payment_multi",
         "phone",
         "website",

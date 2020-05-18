@@ -5,7 +5,7 @@ import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 import { presetManager } from '../presets';
 
-export function operationDowngrade(selectedIDs, context) {
+export function operationDowngrade(context, selectedIDs) {
     var affectedFeatureCount = 0;
     var downgradeType;
 

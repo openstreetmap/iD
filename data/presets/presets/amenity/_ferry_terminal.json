@@ -1,5 +1,5 @@
 {
-    "icon": "maki-ferry",
+    "icon": "temaki-ferry",
     "fields": [
         "name",
         "network",
@@ -16,7 +16,7 @@
         "amenity": "ferry_terminal"
     },
     "matchScore": 0.95,
-    "name": "Ferry Station / Terminal",
+    "name": "Ferry Terminal",
     "searchable": false,
     "replacement": "public_transport/station_ferry"
 }

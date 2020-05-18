@@ -111,8 +111,8 @@ export function behaviorHash(context) {
         }
     }
 
-    var throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var throttledUpdateTitle = _throttle(function() {
+    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
+    var _throttledUpdateTitle = _throttle(function() {
         updateTitle(true /* includeChangeCount */);
     }, 500);
 
@@ -164,13 +164,13 @@ export function behaviorHash(context) {
 
     function behavior() {
         context.map()
-            .on('move.behaviorHash', throttledUpdate);
+            .on('move.behaviorHash', _throttledUpdate);
 
         context.history()
-            .on('change.behaviorHash', throttledUpdateTitle);
+            .on('change.behaviorHash', _throttledUpdateTitle);
 
         context
-            .on('enter.behaviorHash', throttledUpdate);
+            .on('enter.behaviorHash', _throttledUpdate);
 
         d3_select(window)
             .on('hashchange.behaviorHash', hashchange);
@@ -184,12 +184,6 @@ export function behaviorHash(context) {
                     context.zoomToEntity(q.id.split(',')[0], !q.map);
                 //}
             }
-
-            // Store these here instead of updating local storage since local
-            // storage could be flushed if the user discards pending changes
-            if (q.comment)  behavior.comment = q.comment;
-            if (q.source)   behavior.source = q.source;
-            if (q.hashtags) behavior.hashtags = q.hashtags;
 
             if (q.walkthrough === 'true') {
                 behavior.startWalkthrough = true;
@@ -206,8 +200,8 @@ export function behaviorHash(context) {
     }
 
     behavior.off = function() {
-        throttledUpdate.cancel();
-        throttledUpdateTitle.cancel();
+        _throttledUpdate.cancel();
+        _throttledUpdateTitle.cancel();
 
         context.map()
             .on('move.behaviorHash', null);

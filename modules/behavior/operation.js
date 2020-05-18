@@ -30,6 +30,7 @@ export function behaviorOperation(context) {
                 .text(_operation.annotation() || _operation.title);
 
             flash();
+            if (_operation.point) _operation.point(null);
             _operation();
         }
     }

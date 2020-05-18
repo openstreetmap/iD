@@ -1,5 +1,5 @@
 {
-    "icon": "temaki-sign_and_pedestrian",
+    "icon": "temaki-board_light_rail",
     "fields": [
         "{public_transport/platform}"
     ],

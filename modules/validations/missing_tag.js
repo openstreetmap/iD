@@ -107,12 +107,12 @@ export function validationMissingTag(context) {
                 var deleteOnClick;
 
                 var id = this.entityIds[0];
-                var operation = operationDelete([id], context);
+                var operation = operationDelete(context, [id]);
                 var disabledReasonID = operation.disabled();
                 if (!disabledReasonID) {
                     deleteOnClick = function(context) {
                         var id = this.issue.entityIds[0];
-                        var operation = operationDelete([id], context);
+                        var operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
                         }

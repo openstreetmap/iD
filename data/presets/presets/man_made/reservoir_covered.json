@@ -1,0 +1,26 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "operator",
+        "capacity",
+        "access_simple",
+        "location",
+        "layer"
+    ],
+    "moreFields": [
+        "ref"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "tags": {
+        "man_made": "reservoir_covered"
+    },
+    "terms": [
+        "underground reservoir",
+        "water tank"
+    ],
+    "name": "Covered Reservoir"
+}

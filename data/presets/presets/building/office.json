@@ -1,0 +1,24 @@
+{
+    "icon": "maki-suitcase",
+    "fields": [
+        "{building}",
+        "smoking"
+    ],
+    "moreFields": [
+        "{building}",
+        "phone",
+        "website"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "office"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "business center",
+        "office block"
+    ],
+    "name": "Office Building"
+}

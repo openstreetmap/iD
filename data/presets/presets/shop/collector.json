@@ -1,0 +1,29 @@
+{
+    "icon": "fas-th",
+    "fields": [
+        "name",
+        "collector",
+        "{shop}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "antiques",
+        "coins",
+        "collection",
+        "collectors",
+        "comics",
+        "dolls",
+        "figurines",
+        "numismatics",
+        "philately",
+        "stamps",
+        "thrift"
+    ],
+    "tags": {
+        "shop": "collector"
+    },
+    "name": "Collectibles Shop"
+}

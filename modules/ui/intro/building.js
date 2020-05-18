@@ -343,7 +343,7 @@ export function uiIntroBuilding(context, reveal) {
                 var node = selectMenuItem(context, 'orthogonalize').node();
                 if (!node) return;
                 continueTo(clickSquare);
-            }, 300);  // after menu visible
+            }, 50);  // after menu visible
         });
 
         context.map().on('move.intro drawn.intro', function() {
@@ -386,7 +386,7 @@ export function uiIntroBuilding(context, reveal) {
             }
         });
 
-        context.map().on('move.intro drawn.intro', function() {
+        context.map().on('move.intro', function() {
             var node = selectMenuItem(context, 'orthogonalize').node();
             if (!wasChanged && !node) { return continueTo(rightClickHouse); }
 
@@ -412,7 +412,7 @@ export function uiIntroBuilding(context, reveal) {
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
-            context.map().on('move.intro drawn.intro', null);
+            context.map().on('move.intro', null);
             context.history().on('change.intro', null);
             nextStep();
         }
@@ -661,7 +661,7 @@ export function uiIntroBuilding(context, reveal) {
                     var node = selectMenuItem(context, 'circularize').node();
                     if (!node) return;
                     continueTo(clickCircle);
-                }, 300);  // after menu visible
+                }, 50);  // after menu visible
             });
 
             revealTank(tank, t('intro.buildings.rightclick_tank'));
@@ -708,7 +708,7 @@ export function uiIntroBuilding(context, reveal) {
             }
         });
 
-        context.map().on('move.intro drawn.intro', function() {
+        context.map().on('move.intro', function() {
             var node = selectMenuItem(context, 'circularize').node();
             if (!wasChanged && !node) { return continueTo(rightClickTank); }
 
@@ -724,7 +724,7 @@ export function uiIntroBuilding(context, reveal) {
 
             // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.circularize.annotation.area')) {
+                if (context.history().undoAnnotation() === t('operations.circularize.annotation.single')) {
                     continueTo(play);
                 } else {
                     continueTo(retryClickCircle);
@@ -734,7 +734,7 @@ export function uiIntroBuilding(context, reveal) {
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
-            context.map().on('move.intro drawn.intro', null);
+            context.map().on('move.intro', null);
             context.history().on('change.intro', null);
             nextStep();
         }

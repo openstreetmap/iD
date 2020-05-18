@@ -18,6 +18,7 @@
         "level",
         "min_age",
         "opening_hours",
+        "opening_hours/covid19",
         "outdoor_seating",
         "payment_multi",
         "phone",

@@ -75,17 +75,16 @@ export function uiCommit(context) {
         if (!_changeset) {
 
             // load in the URL hash values, if any
-            var hash = context.ui().hash;
-            if (hash.comment) {
-                prefs('comment', hash.comment);
+            if (context.initialHashParams.comment) {
+                prefs('comment', context.initialHashParams.comment);
                 prefs('commentDate', Date.now());
             }
-            if (hash.source) {
-                prefs('source', hash.source);
+            if (context.initialHashParams.source) {
+                prefs('source', context.initialHashParams.source);
                 prefs('commentDate', Date.now());
             }
-            if (hash.hashtags) {
-                prefs('hashtags', hash.hashtags);
+            if (context.initialHashParams.hashtags) {
+                prefs('hashtags', context.initialHashParams.hashtags);
             }
 
             var detected = utilDetect();
@@ -473,41 +472,38 @@ export function uiCommit(context) {
 
 
     function findHashtags(tags, commentOnly) {
-        var inComment = commentTags();
-        var inHashTags = hashTags();
+        var detectedHashtags = commentHashtags();
 
-        if (inComment !== null) {                    // when hashtags are detected in comment...
-            prefs('hashtags', null);       // always remove stored hashtags - #4304
-            if (commentOnly) { inHashTags = []; }    // optionally override hashtags field
+        if (detectedHashtags.length) {
+            // always remove stored hashtags if there are hashtags in the comment - #4304
+            prefs('hashtags', null);
+        }
+        if (!detectedHashtags.length || !commentOnly) {
+            detectedHashtags = detectedHashtags.concat(hashtagHashtags());
         }
 
-        // keep only one copy of the tags
-        var all = new Set();
-        var keepTags = [];
-        inComment.forEach(checkTag);
-        inHashTags.forEach(checkTag);
-        return keepTags;
-
-        // Compare tags as lowercase strings, but keep original case tags
-        function checkTag(s) {
-            var compare = s.toLowerCase();
-            if (!all.has(compare)) {
-                all.add(compare);
-                keepTags.push(s);
+        var allLowerCase = new Set();
+        return detectedHashtags.filter(function(hashtag) {
+            // Compare tags as lowercase strings, but keep original case tags
+            var lowerCase = hashtag.toLowerCase();
+            if (!allLowerCase.has(lowerCase)) {
+                allLowerCase.add(lowerCase);
+                return true;
             }
-        }
+            return false;
+        });
 
         // Extract hashtags from `comment`
-        function commentTags() {
+        function commentHashtags() {
             var matches = (tags.comment || '')
                 .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
                 .match(hashtagRegex);
 
-            return (matches || []);
+            return matches || [];
         }
 
         // Extract and clean hashtags from `hashtags`
-        function hashTags() {
+        function hashtagHashtags() {
             var matches = (tags.hashtags || '')
                 .split(/[,;\s]+/)
                 .map(function (s) {
@@ -516,7 +512,7 @@ export function uiCommit(context) {
                     return matched && matched[0];
                 }).filter(Boolean);                       // exclude falsy
 
-            return (matches || []);
+            return matches || [];
         }
     }
 

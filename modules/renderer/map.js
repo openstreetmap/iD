@@ -60,7 +60,7 @@ export function rendererMap(context) {
     var _isTransformed = false;
     var _minzoom = 0;
     var _getMouseCoords;
-    var _mouseEvent;
+    var _lastPointerEvent;
     var _lastWithinEditableZoom;
 
     // whether a pointerdown event started the zoom
@@ -180,17 +180,19 @@ export function rendererMap(context) {
             })
             .on('gesturechange.surface', gestureChange)
             .on(_pointerPrefix + 'down.zoom', function() {
+                _lastPointerEvent = d3_event;
                 if (d3_event.button === 2) {
                     d3_event.stopPropagation();
                 }
             }, true)
             .on(_pointerPrefix + 'up.zoom', function() {
+                _lastPointerEvent = d3_event;
                 if (resetTransform()) {
                     immediateRedraw();
                 }
             })
             .on(_pointerPrefix + 'move.map', function() {
-                _mouseEvent = d3_event;
+                _lastPointerEvent = d3_event;
             })
             .on(_pointerPrefix + 'over.vertices', function() {
                 if (map.editableDataEnabled() && !_isTransformed) {
@@ -555,7 +557,13 @@ export function rendererMap(context) {
                 y = y2;
                 k = k2;
                 eventTransform = d3_zoomIdentity.translate(x2, y2).scale(k2);
-                _selection.node().__zoom = eventTransform;
+                if (_zoomerPanner._transform) {
+                    // utilZoomPan interface
+                    _zoomerPanner._transform(eventTransform);
+                } else {
+                    // d3_zoom interface
+                    _selection.node().__zoom = eventTransform;
+                }
             }
 
         }
@@ -593,7 +601,7 @@ export function rendererMap(context) {
         }
 
         if (source) {
-            _mouseEvent = event;
+            _lastPointerEvent = event;
         }
         _isTransformed = true;
         _transformLast = eventTransform;
@@ -676,8 +684,13 @@ export function rendererMap(context) {
     };
 
 
+    map.lastPointerEvent = function() {
+        return _lastPointerEvent;
+    };
+
+
     map.mouse = function() {
-        var event = _mouseEvent || d3_event;
+        var event = _lastPointerEvent || d3_event;
         if (event) {
             var s;
             while ((s = event.sourceEvent)) { event = s; }
@@ -906,7 +919,7 @@ export function rendererMap(context) {
 
     map.transformEase = function(t2, duration) {
         duration = duration || 250;
-        setTransform(t2, duration, false);
+        setTransform(t2, duration, false /* don't force */);
         return map;
     };
 

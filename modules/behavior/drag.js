@@ -34,6 +34,7 @@ export function behaviorDrag() {
     var _event;
     var _target;
     var _surface;
+    var _pointerId;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -49,12 +50,6 @@ export function behaviorDrag() {
         };
 
 
-    function d3_eventCancel() {
-        d3_event.stopPropagation();
-        d3_event.preventDefault();
-    }
-
-
     function eventOf(thiz, argumentz) {
         return function(e1) {
             e1.target = behavior;
@@ -64,13 +59,17 @@ export function behaviorDrag() {
 
 
     function pointerdown() {
+
+        if (_pointerId) return;
+
+        _pointerId = d3_event.pointerId || 'mouse';
+
         _target = this;
         _event = eventOf(_target, arguments);
 
         // only force reflow once per drag
         var pointerLocGetter = utilFastMouse(_surface || _target.parentNode);
 
-        var eventTarget = d3_event.target;
         var offset;
         var startOrigin = pointerLocGetter(d3_event);
         var started = false;
@@ -91,6 +90,8 @@ export function behaviorDrag() {
 
 
         function pointermove() {
+            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
+
             var p = pointerLocGetter(d3_event);
             var dx = p[0] - startOrigin[0];
             var dy = p[1] - startOrigin[1];
@@ -99,7 +100,8 @@ export function behaviorDrag() {
                 return;
 
             startOrigin = p;
-            d3_eventCancel();
+            d3_event.stopPropagation();
+            d3_event.preventDefault();
 
             if (!started) {
                 started = true;
@@ -115,14 +117,15 @@ export function behaviorDrag() {
 
 
         function pointerup() {
+            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
+
+            _pointerId = null;
+
             if (started) {
                 _event({ type: 'end' });
 
-                d3_eventCancel();
-                if (d3_event.target === eventTarget) {
-                    d3_select(window)
-                        .on('click.drag', click, true);
-                }
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
             }
 
             d3_select(window)
@@ -131,17 +134,11 @@ export function behaviorDrag() {
 
             selectEnable();
         }
-
-
-        function click() {
-            d3_eventCancel();
-            d3_select(window)
-                .on('click.drag', null);
-        }
     }
 
 
     function behavior(selection) {
+        _pointerId = null;
         var matchesSelector = utilPrefixDOMProperty('matchesSelector');
         var delegate = pointerdown;
 

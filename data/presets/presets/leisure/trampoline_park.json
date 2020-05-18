@@ -1,0 +1,38 @@
+{
+    "icon": "fas-chevron-circle-up",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours",
+        "opening_hours/covid19",
+        "phone",
+        "website"
+    ],
+    "moreFields": [
+        "brand",
+        "charge_fee",
+        "email",
+        "fax",
+        "fee",
+        "gnis/feature_id",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "operator",
+        "payment_multi"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "trampoline_park"
+    },
+    "terms": [
+        "bounce",
+        "jump",
+        "spring"
+    ],
+    "name": "Trampoline Park"
+}

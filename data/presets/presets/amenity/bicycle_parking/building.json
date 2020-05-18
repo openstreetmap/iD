@@ -3,6 +3,7 @@
     "fields": [
         "{amenity/bicycle_parking}",
         "opening_hours",
+        "opening_hours/covid19",
         "building_area"
     ],
     "geometry": [

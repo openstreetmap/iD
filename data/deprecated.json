@@ -12,6 +12,14 @@
     "replace": {"access": "yes"}
   },
   {
+    "old": {"aerodrome": "military"},
+    "replace": {"military": "airfield"}
+  },
+  {
+    "old": {"aerodrome:type": "military"},
+    "replace": {"military": "airfield"}
+  },
+  {
     "old": {"agrarian": "agrcultural_machinry"},
     "replace": {"agrarian": "agricultural_machinery"}
   },
@@ -216,6 +224,10 @@
     "replace": {"bridge": "yes"}
   },
   {
+    "old": {"bridge": "true"},
+    "replace": {"bridge": "yes"}
+  },
+  {
     "old": {"building": "entrance"},
     "replace": {"entrance": "*"}
   },
@@ -270,6 +282,13 @@
   {
     "old": {"company": "consulting"},
     "replace": {"office": "consulting"}
+  },
+  {
+    "old": {"content": "unknown"}
+  },
+  {
+    "old": {"contents": "*"},
+    "replace": {"content": "$1"}
   },
   {
     "old": {"craft": "catering"},
@@ -611,16 +630,20 @@
     "replace": {"kerb": "flush"}
   },
   {
+    "old": {"landcover": "flower_bed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
+    "old": {"landcover": "flowerbed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
     "old": {"landuse": "basin"},
     "replace": {"natural": "water", "water": "basin"}
   },
   {
     "old": {"landuse": "conservation"},
     "replace": {"boundary": "protected_area"}
-  },
-  {
-    "old": {"landuse": "farm"},
-    "replace": {"landuse": "farmland"}
   },
   {
     "old": {"landuse": "field"},
@@ -711,6 +734,18 @@
     "replace": {"man_made": "cutline"}
   },
   {
+    "old": {"man_made": "flower_bed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
+    "old": {"man_made": "flowerbed"},
+    "replace": {"landuse": "flowerbed"}
+  },
+  {
+    "old": {"man_made": "fuel_storage_tank"},
+    "replace": {"man_made": "storage_tank", "content": "fuel"}
+  },
+  {
     "old": {"man_made": "gas_well"},
     "replace": {"man_made": "petroleum_well", "substance": "gas"}
   },
@@ -725,10 +760,6 @@
   {
     "old": {"man_made": "MDF"},
     "replace": {"telecom": "exchange"}
-  },
-  {
-    "old": {"man_made": "fuel_storage_tank"},
-    "replace": {"man_made": "storage_tank", "content": "fuel"}
   },
   {
     "old": {"man_made": "oil_tank"},
@@ -886,6 +917,30 @@
   },
   {
     "old": {"operator:type": "unknown"}
+  },
+  {
+    "old": {"parking": "covered"},
+    "replace": {"covered": "yes"}
+  },
+  {
+    "old": {"parking": "customers"},
+    "replace": {"access": "customers"}
+  },
+  {
+    "old": {"parking": "entrance"},
+    "replace": {"amenity": "parking_entrance"}
+  },
+  {
+    "old": {"parking": "park_and_ride"},
+    "replace": {"park_ride": "yes"}
+  },
+  {
+    "old": {"parking": "private"},
+    "replace": {"access": "private"}
+  },
+  {
+    "old": {"parking": "street"},
+    "replace": {"parking": "lane"}
   },
   {
     "old": {"place_name": "*"},
@@ -1304,6 +1359,30 @@
     "replace": {"volcano:status": "extinct"}
   },
   {
+    "old": {"type": "gas", "man_made": "pipeline"},
+    "replace": {"substance": "gas", "man_made": "pipeline"}
+  },
+  {
+    "old": {"type": "gas", "man_made": "pumping_rig"},
+    "replace": {"substance": "gas", "man_made": "pumping_rig"}
+  },
+  {
+    "old": {"type": "gas", "pipeline": "*"},
+    "replace": {"substance": "gas", "pipeline": "$1"}
+  },
+  {
+    "old": {"type": "oil", "man_made": "pipeline"},
+    "replace": {"substance": "oil", "man_made": "pipeline"}
+  },
+  {
+    "old": {"type": "oil", "man_made": "pumping_rig"},
+    "replace": {"substance": "oil", "man_made": "pumping_rig"}
+  },
+  {
+    "old": {"type": "oil", "pipeline": "*"},
+    "replace": {"substance": "oil", "pipeline": "$1"}
+  },
+  {
     "old": {"type": "scoria"},
     "replace": {"volcano:type": "scoria"}
   },
@@ -1318,6 +1397,18 @@
   {
     "old": {"type": "video", "amenity": "studio"},
     "replace": {"studio": "video"}
+  },
+  {
+    "old": {"type": "water", "man_made": "pipeline"},
+    "replace": {"substance": "water", "man_made": "pipeline"}
+  },
+  {
+    "old": {"type": "water", "man_made": "reservoir_covered"},
+    "replace": {"content": "water", "man_made": "reservoir_covered"}
+  },
+  {
+    "old": {"type": "water", "pipeline": "*"},
+    "replace": {"substance": "water", "pipeline": "$1"}
   },
   {
     "old": {"unnamed": "*"},

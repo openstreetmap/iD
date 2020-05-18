@@ -7,7 +7,7 @@ export function validationIncompatibleSource() {
     var type = 'incompatible_source';
     var invalidSources = [
         {
-            id:'google', regex:'google', exceptRegex: 'books.google|Google Books'
+            id:'google', regex:'google', exceptRegex: 'books.google|Google Books|drive.google|googledrive|Google Drive'
         }
     ];
 

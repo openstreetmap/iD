@@ -22,6 +22,7 @@
         "internet_access/ssid",
         "openfire",
         "opening_hours",
+        "opening_hours/covid19",
         "phone",
         "power_supply",
         "ref/vatin",

@@ -1,7 +1,8 @@
 {
     "icon": "temaki-pick_hammer",
     "geometry": [
-        "area"
+        "area",
+        "point"
     ],
     "fields": [
         "name",

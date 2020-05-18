@@ -1,5 +1,5 @@
 {
-    "icon": "maki-aerialway",
+    "icon": "temaki-gondola_lift",
     "fields": [
         "{public_transport/stop_position}"
     ],

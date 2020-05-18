@@ -1,5 +1,5 @@
 {
-    "icon": "maki-rail",
+    "icon": "temaki-train",
     "fields": [
         "{public_transport/station}"
     ],

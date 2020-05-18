@@ -11,6 +11,7 @@
     ],
     "moreFields": [
         "opening_hours",
+        "opening_hours/covid19",
         "operator"
     ],
     "geometry": [

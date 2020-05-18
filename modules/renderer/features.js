@@ -39,8 +39,7 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
-        'pedestrian': true,
-        'corridor': true
+        'pedestrian': true
     };
 
     var past_futures = {

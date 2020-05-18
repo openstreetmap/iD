@@ -1,13 +1,5 @@
 {
     "icon": "maki-airport",
-    "geometry": [
-        "point",
-        "area"
-    ],
-    "terms": [
-        "airport",
-        "aerodrome"
-    ],
     "fields": [
         "name",
         "operator",
@@ -16,10 +8,19 @@
         "baby_feeding"
     ],
     "moreFields": [
+        "air_conditioning",
         "smoking"
+    ],
+    "geometry": [
+        "point",
+        "area"
     ],
     "tags": {
         "aeroway": "terminal"
     },
+    "terms": [
+        "airport",
+        "aerodrome"
+    ],
     "name": "Airport Terminal"
 }

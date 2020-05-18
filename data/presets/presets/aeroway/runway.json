@@ -1,20 +1,20 @@
 {
     "icon": "fas-plane-departure",
-    "geometry": [
-        "line",
-        "area"
-    ],
-    "terms": [
-        "landing strip"
-    ],
     "fields": [
         "ref_runway",
         "surface",
         "length",
         "width"
     ],
+    "geometry": [
+        "line",
+        "area"
+    ],
     "tags": {
         "aeroway": "runway"
     },
+    "terms": [
+        "landing strip"
+    ],
     "name": "Runway"
 }

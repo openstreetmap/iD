@@ -5,6 +5,7 @@
         "public_bookcase/type",
         "operator",
         "opening_hours",
+        "opening_hours/covid19",
         "capacity",
         "website",
         "lit"

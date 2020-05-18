@@ -1,0 +1,26 @@
+{
+    "icon": "temaki-barn",
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "sty"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "hog parlor",
+        "hog pen",
+        "pig ark",
+        "pig barn",
+        "pig parlor",
+        "pig pen",
+        "pig shed",
+        "pig shelter",
+        "pig-cote",
+        "piggery",
+        "pigpen",
+        "pigshed",
+        "sty"
+    ],
+    "name": "Pigsty"
+}

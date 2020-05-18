@@ -10,7 +10,10 @@ describe('iD.behaviorSelect', function() {
 
         context.perform(iD.actionAddEntity(a), iD.actionAddEntity(b));
 
-        container.call(context.map())
+        container
+            .append('div')
+            .attr('class', 'main-map')
+            .call(context.map())
             .append('div')
             .attr('class', 'inspector-wrap');
 

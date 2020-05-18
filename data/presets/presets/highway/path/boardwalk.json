@@ -1,0 +1,25 @@
+{
+    "icon": "temaki-pedestrian",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "path",
+        "bridge": "boardwalk"
+    },
+    "addTags": {
+        "highway": "path",
+        "bridge": "boardwalk",
+        "surface": "wood"
+    },
+    "reference": {
+        "key": "bridge",
+        "value": "boardwalk"
+    },
+    "terms": [
+        "pier",
+        "plank walkway",
+        "wooden raised foot path"
+    ],
+    "name": "Boardwalk"
+}

@@ -211,15 +211,25 @@
 .layer-mapillary-detections .icon-detected rect {
     fill: none;
 }
-.layer-mapillary-detections .icon-detected:hover rect {
+.layer-mapillary-detections .icon-detected:active {
+    opacity: 1;
+}
+.layer-mapillary-detections .icon-detected:active rect {
     outline: 3px solid rgba(255, 238, 0, 0.6);
+}
+@media (hover: hover) {
+    .layer-mapillary-detections .icon-detected:hover {
+        opacity: 1;
+    }
+    .layer-mapillary-detections .icon-detected:hover rect {
+        outline: 3px solid rgba(255, 238, 0, 0.6);
+    }
+}
+.layer-mapillary-detections .icon-detected.currentView {
+    opacity: 1;
 }
 .layer-mapillary-detections .icon-detected.currentView rect {
     outline: 3px solid rgba(255, 238, 0, 1);
-}
-.layer-mapillary-detections .icon-detected:hover,
-.layer-mapillary-detections .icon-detected.currentView {
-    opacity: 1;
 }
 
 
@@ -254,9 +264,13 @@
     text-align: right;
 }
 
-.ms-wrapper .photo-attribution a:active,
-.ms-wrapper .photo-attribution a:hover {
+.ms-wrapper .photo-attribution a:active {
     color: #0fffc4;
+}
+@media (hover: hover) {
+    .ms-wrapper .photo-attribution a:hover {
+        color: #0fffc4;
+    }
 }
 
 .ms-wrapper .pnlm-compass.pnlm-control {
@@ -295,9 +309,13 @@ label.streetside-hires {
     display: none;
 }
 
-.mly-wrapper .photo-attribution a:active,
-.mly-wrapper .photo-attribution a:hover {
+.mly-wrapper .photo-attribution a:active {
     color: #35af6d;
+}
+@media (hover: hover) {
+    .mly-wrapper .photo-attribution a:hover {
+        color: #35af6d;
+    }
 }
 
 .mly-wrapper .mapillary-js-dom {
@@ -314,9 +332,13 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
-.osc-wrapper .photo-attribution a:active,
-.osc-wrapper .photo-attribution a:hover {
+.osc-wrapper .photo-attribution a:active {
     color: #20c4ff;
+}
+@media (hover: hover) {
+    .osc-wrapper .photo-attribution a:hover {
+        color: #20c4ff;
+    }
 }
 
 .osc-image-wrap {
@@ -358,8 +380,13 @@ label.streetside-hires {
 .photo-controls button:last-of-type {
     border-radius: 0 3px 3px 0;
 }
-.photo-controls button:hover,
 .photo-controls button:active {
     background: rgba(0,0,0,0.85);
     color: #fff;
+}
+@media (hover: hover) {
+    .photo-controls button:hover {
+        background: rgba(0,0,0,0.85);
+        color: #fff;
+    }
 }

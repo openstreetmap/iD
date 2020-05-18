@@ -42,77 +42,77 @@ describe('iD.operationStraighten', function () {
         });
 
         it('is not available for no selected ids', function () {
-            var result = iD.operationStraighten([], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, []).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for way with only 2 nodes', function () {
-            var result = iD.operationStraighten(['w1'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w1']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is available for way with only 2 nodes connected to another 2-node way', function () {
-            var result = iD.operationStraighten(['w1', 'w1-2'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w1', 'w1-2']).available();
             expect(result).to.be.ok;
         });
 
         it('is not available for non-continuous ways', function () {
-            var result = iD.operationStraighten(['w2', 'w4'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w2', 'w4']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is available for selected way with more than 2 nodes', function () {
-            var result = iD.operationStraighten(['w2'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w2']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for selected, ordered, continuous ways', function () {
-            var result = iD.operationStraighten(['w1', 'w2', 'w3'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w1', 'w2', 'w3']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for selected, un-ordered, continuous ways', function () {
-            var result = iD.operationStraighten(['w1', 'w3', 'w2'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w1', 'w3', 'w2']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for selected, continuous ways with different way-directions', function () {
-            var result = iD.operationStraighten(['w1', 'w3', 'w2-2'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w1', 'w3', 'w2-2']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for 2 selected nodes in the same way, more than one node apart', function () {
-            var result = iD.operationStraighten(['w5', 'n9', 'n11'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w5', 'n9', 'n11']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for 2 selected nodes in adjacent ways, more than one node apart', function () {
-            var result = iD.operationStraighten(['w2', 'w3', 'n5', 'n3'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w2', 'w3', 'n5', 'n3']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for 2 selected nodes in non-adjacent ways, providing inbetween ways are selected', function () {
-            var result = iD.operationStraighten(['n2', 'n7', 'w4', 'w1', 'w3', 'w2'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['n2', 'n7', 'w4', 'w1', 'w3', 'w2']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for 2 selected nodes in non-adjacent, non-same-directional ways, providing inbetween ways are selected', function () {
-            var result = iD.operationStraighten(['n2', 'n7', 'w4', 'w1', 'w3', 'w2-2'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['n2', 'n7', 'w4', 'w1', 'w3', 'w2-2']).available();
             expect(result).to.be.ok;
         });
 
         it('is not available for nodes not on selected ways', function () {
-            var result = iD.operationStraighten(['w5', 'n4', 'n11'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w5', 'n4', 'n11']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for one selected node', function () {
-            var result = iD.operationStraighten(['w5', 'n9'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w5', 'n9']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for more than two selected nodes', function () {
-            var result = iD.operationStraighten(['w5', 'n9', 'n11', 'n12'], fakeContext).available();
+            var result = iD.operationStraighten(fakeContext, ['w5', 'n9', 'n11', 'n12']).available();
             expect(result).to.be.not.ok;
         });
     });

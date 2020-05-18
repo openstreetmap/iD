@@ -47,7 +47,7 @@ export function modeSelectData(context, selectedDatum) {
             // Return to browse mode if selected DOM elements have
             // disappeared because the user moved them out of view..
             var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
-            if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
+            if (drawn && source && (source.type === 'pointermove' || source.type === 'mousemove' || source.type === 'touchmove')) {
                 context.enter(modeBrowse(context));
             }
         } else {
