@@ -320,6 +320,7 @@ export function rendererMap(context) {
         var data;
         var set;
         var filter;
+        var applyFeatureLayerFilters = true;
 
         if (map.isInWideSelection()) {
             data = [];
@@ -329,6 +330,8 @@ export function rendererMap(context) {
             });
             fullRedraw = true;
             filter = utilFunctor(true);
+            // selected features should always be visible, so we can skip filtering
+            applyFeatureLayerFilters = false;
 
         } else if (difference) {
             var complete = difference.complete(map.extent());
@@ -356,7 +359,11 @@ export function rendererMap(context) {
             }
         }
 
-        data = features.filter(data, graph);
+        if (applyFeatureLayerFilters) {
+            data = features.filter(data, graph);
+        } else {
+            context.features().resetStats();
+        }
 
         if (mode && mode.id === 'select') {
             // update selected vertices - the user might have just double-clicked a way,
@@ -1022,7 +1029,7 @@ export function rendererMap(context) {
 
 
     map.isInWideSelection = function() {
-        return !map.withinEditableZoom() && context.mode() && context.mode().id === 'select';
+        return !map.withinEditableZoom() && context.selectedIDs().length;
     };
 
 

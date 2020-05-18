@@ -25,6 +25,7 @@ export function uiConflicts(context) {
     var keybinding = utilKeybinding('conflicts');
     var _origChanges;
     var _conflictList;
+    var _shownConflictIndex;
 
 
     function keybindingOn() {
@@ -145,6 +146,7 @@ export function uiConflicts(context) {
 
     function showConflict(selection, index) {
         index = utilWrap(index, _conflictList.length);
+        _shownConflictIndex = index;
 
         var parent = d3_select(selection.node().parentNode);
 
@@ -340,6 +342,14 @@ export function uiConflicts(context) {
         if (!arguments.length) return _origChanges;
         _origChanges = _;
         return conflicts;
+    };
+
+
+    conflicts.shownEntityIds = function() {
+        if (_conflictList && typeof _shownConflictIndex === 'number') {
+            return [_conflictList[_shownConflictIndex].id];
+        }
+        return [];
     };
 
 
