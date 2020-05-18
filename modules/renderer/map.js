@@ -919,7 +919,7 @@ export function rendererMap(context) {
 
     map.transformEase = function(t2, duration) {
         duration = duration || 250;
-        setTransform(t2, duration, false);
+        setTransform(t2, duration, false /* don't force */);
         return map;
     };
 
