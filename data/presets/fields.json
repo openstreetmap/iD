@@ -299,7 +299,7 @@
   "par": {"key": "par", "type": "number", "minValue": 1, "label": "Par", "placeholder": "3, 4, 5..."},
   "park_ride": {"key": "park_ride", "type": "check", "label": "Park and Ride"},
   "parking_space": {"key": "parking_space", "type": "combo", "label": "Type"},
-  "parking": {"key": "parking", "type": "combo", "label": "Type", "strings": {"options": {"surface": "Surface", "multi-storey": "Multilevel", "underground": "Underground", "sheds": "Sheds", "carports": "Carports", "garage_boxes": "Garage Boxes", "lane": "Roadside Lane"}}},
+  "parking": {"key": "parking", "type": "combo", "label": "Type", "strings": {"options": {"surface": "Surface", "underground": "Underground", "multi-storey": "Multilevel", "lane": "Roadside Lane", "carports": "Carports", "garage_boxes": "Garage Boxes", "rooftop": "Rooftop", "sheds": "Sheds"}}},
   "payment_multi_fee": {"key": "payment:", "type": "multiCombo", "label": "Payment Types", "prerequisiteTag": {"key": "fee", "valueNot": "no"}},
   "payment_multi": {"key": "payment:", "type": "multiCombo", "label": "Payment Types"},
   "phases": {"key": "phases", "type": "number", "minValue": 1, "label": "Phases", "placeholder": "1, 2, 3..."},

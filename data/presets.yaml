@@ -1657,6 +1657,8 @@ en:
           lane: Roadside Lane
           # parking=multi-storey
           multi-storey: Multilevel
+          # parking=rooftop
+          rooftop: Rooftop
           # parking=sheds
           sheds: Sheds
           # parking=surface

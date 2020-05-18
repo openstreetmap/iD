@@ -4042,12 +4042,13 @@
                     "label": "Type",
                     "options": {
                         "surface": "Surface",
-                        "multi-storey": "Multilevel",
                         "underground": "Underground",
-                        "sheds": "Sheds",
+                        "multi-storey": "Multilevel",
+                        "lane": "Roadside Lane",
                         "carports": "Carports",
                         "garage_boxes": "Garage Boxes",
-                        "lane": "Roadside Lane"
+                        "rooftop": "Rooftop",
+                        "sheds": "Sheds"
                     }
                 },
                 "payment_multi_fee": {

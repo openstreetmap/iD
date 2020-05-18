@@ -919,6 +919,30 @@
     "old": {"operator:type": "unknown"}
   },
   {
+    "old": {"parking": "covered"},
+    "replace": {"covered": "yes"}
+  },
+  {
+    "old": {"parking": "customers"},
+    "replace": {"access": "customers"}
+  },
+  {
+    "old": {"parking": "entrance"},
+    "replace": {"amenity": "parking_entrance"}
+  },
+  {
+    "old": {"parking": "park_and_ride"},
+    "replace": {"park_ride": "yes"}
+  },
+  {
+    "old": {"parking": "private"},
+    "replace": {"access": "private"}
+  },
+  {
+    "old": {"parking": "street"},
+    "replace": {"parking": "lane"}
+  },
+  {
     "old": {"place_name": "*"},
     "replace": {"name": "$1"}
   },
