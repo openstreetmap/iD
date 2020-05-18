@@ -745,6 +745,14 @@ en:
           both: Both / All
           # direction=forward
           forward: Forward
+      direction_vertex_dual:
+        # direction=*
+        label: Direction Affected
+        options:
+          # direction=backward
+          backward: Backward
+          # direction=forward
+          forward: Forward
       dispensing:
         # dispensing=*
         label: Dispenses Prescriptions

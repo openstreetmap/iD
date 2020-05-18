@@ -3249,6 +3249,13 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "direction_vertex_dual": {
+                    "label": "Direction Affected",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward"
+                    }
+                },
                 "direction_vertex": {
                     "label": "Direction Affected",
                     "options": {
