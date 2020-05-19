@@ -7,6 +7,7 @@ import {
     selection as d3_selection
 } from 'd3-selection';
 
+import { geoVecLength } from '../geo';
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
@@ -29,6 +30,11 @@ import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../
 
 export function behaviorDrag() {
     var dispatch = d3_dispatch('start', 'move', 'end');
+
+    // see also behaviorSelect
+    var _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
+    var _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
+
     var _origin = null;
     var _selector = '';
     var _event;
@@ -93,26 +99,28 @@ export function behaviorDrag() {
             if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
 
             var p = pointerLocGetter(d3_event);
-            var dx = p[0] - startOrigin[0];
-            var dy = p[1] - startOrigin[1];
 
-            if (dx === 0 && dy === 0)
-                return;
+            if (!started) {
+                var dist = geoVecLength(startOrigin,  p);
+                var tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
+                // don't start until the drag has actually moved somewhat
+                if (dist < tolerance) return;
+
+                started = true;
+                _event({ type: 'start' });
+            }
 
             startOrigin = p;
             d3_event.stopPropagation();
             d3_event.preventDefault();
 
-            if (!started) {
-                started = true;
-                _event({ type: 'start' });
-            } else {
-                _event({
-                    type: 'move',
-                    point: [p[0] + offset[0],  p[1] + offset[1]],
-                    delta: [dx, dy]
-                });
-            }
+            var dx = p[0] - startOrigin[0];
+            var dy = p[1] - startOrigin[1];
+            _event({
+                type: 'move',
+                point: [p[0] + offset[0],  p[1] + offset[1]],
+                delta: [dx, dy]
+            });
         }
 
 

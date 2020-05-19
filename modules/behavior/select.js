@@ -11,7 +11,7 @@ import { utilFastMouse } from '../util/util';
 
 
 export function behaviorSelect(context) {
-    var _tolerancePx = 4;
+    var _tolerancePx = 4; // see also behaviorDrag
     var _lastPointerEvent = null;
     var _showMenu = false;
     var _p1 = null;
