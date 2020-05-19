@@ -30,6 +30,15 @@ export function behaviorSelect(context) {
     }
 
 
+    function mapContains(event) {
+        var rect = context.container().select('.main-map').node().getBoundingClientRect();
+        return event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom;
+    }
+
+
     function keydown() {
 
         if (d3_event.keyCode === 32) {
@@ -158,7 +167,7 @@ export function behaviorSelect(context) {
         var p2 = point(_lastPointerEvent);
         var dist = geoVecLength(_p1, p2);
         _p1 = null;
-        if (dist > _tolerancePx) {
+        if (dist > _tolerancePx || !mapContains(_lastPointerEvent)) {
             resetProperties();
             return;
         }
@@ -263,6 +272,7 @@ export function behaviorSelect(context) {
         d3_select(window)
             .on('keydown.select', keydown)
             .on('keyup.select', keyup)
+            .on(_pointerPrefix + 'move.select', pointermove, true)
             .on('contextmenu.select-window', function() {
                 // Edge and IE really like to show the contextmenu on the
                 // menubar when user presses a keyboard menu button
@@ -275,7 +285,6 @@ export function behaviorSelect(context) {
 
         selection
             .on(_pointerPrefix + 'down.select', pointerdown)
-            .on(_pointerPrefix + 'move.select', pointermove)
             .on('contextmenu.select', contextmenu);
 
         if (d3_event && d3_event.shiftKey) {
@@ -292,11 +301,11 @@ export function behaviorSelect(context) {
             .on('keydown.select', null)
             .on('keyup.select', null)
             .on('contextmenu.select-window', null)
+            .on(_pointerPrefix + 'move.select', null, true)
             .on(_pointerPrefix + 'up.select', null, true);
 
         selection
             .on(_pointerPrefix + 'down.select', null)
-            .on(_pointerPrefix + 'move.select', null)
             .on('contextmenu.select', null);
 
         context.surface()
