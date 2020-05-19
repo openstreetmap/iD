@@ -48,8 +48,8 @@ describe('iD.behaviorSelect', function() {
 
     specify('click on entity selects the entity', function(done) {
         var el = context.surface().selectAll('.' + a.id).node();
-        happen.mousedown(el);
-        happen.mouseup(el);
+        happen.mousedown(el, { clientX: 100, clientY: 100 });
+        happen.mouseup(el, { clientX: 100, clientY: 100 });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id]);
             done();
@@ -59,8 +59,8 @@ describe('iD.behaviorSelect', function() {
     specify('click on empty space clears the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().node();
-        happen.mousedown(el);
-        happen.mouseup(el);
+        happen.mousedown(el, { clientX: 100, clientY: 100 });
+        happen.mouseup(el, { clientX: 100, clientY: 100 });
         window.setTimeout(function() {
             expect(context.mode().id).to.eql('browse');
             done();
@@ -70,8 +70,8 @@ describe('iD.behaviorSelect', function() {
     specify('shift-click on unselected entity adds it to the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().selectAll('.' + b.id).node();
-        happen.mousedown(el, { shiftKey: true });
-        happen.mouseup(el, { shiftKey: true });
+        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
+        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id, b.id]);
             done();
@@ -81,8 +81,8 @@ describe('iD.behaviorSelect', function() {
     specify('shift-click on selected entity removes it from the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id, b.id]));
         var el = context.surface().selectAll('.' + b.id).node();
-        happen.mousedown(el, { shiftKey: true });
-        happen.mouseup(el, { shiftKey: true });
+        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
+        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id]);
             done();
@@ -92,8 +92,8 @@ describe('iD.behaviorSelect', function() {
     specify('shift-click on last selected entity clears the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().selectAll('.' + a.id).node();
-        happen.mousedown(el, { shiftKey: true });
-        happen.mouseup(el, { shiftKey: true });
+        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
+        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
         window.setTimeout(function() {
             expect(context.mode().id).to.eql('browse');
             done();
@@ -103,8 +103,8 @@ describe('iD.behaviorSelect', function() {
     specify('shift-click on empty space leaves the selection unchanged', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().node();
-        happen.mousedown(el, { shiftKey: true });
-        happen.mouseup(el, { shiftKey: true });
+        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
+        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id]);
             done();
