@@ -5495,6 +5495,10 @@
                     "name": "Gambling Hall",
                     "terms": "betting,bingo,blackjack,casino,craps,gamble,gambling,keno,lottery,pachinko,poker,roulette,slot machines,slots"
                 },
+                "amenity/give_box": {
+                    "name": "Free Box",
+                    "terms": "donations,free box,free table,freebox,give box,give shelf,givebox,library,share shelf"
+                },
                 "amenity/grave_yard": {
                     "name": "Graveyard",
                     "terms": "burial ground,cemetary,cemetery,churchyard,columbarium,grave yard,graveyard,mausoleum,tomb"

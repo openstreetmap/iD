@@ -3324,6 +3324,11 @@ en:
         name: Gambling Hall
         # 'terms: betting,bingo,blackjack,casino,craps,gamble,gambling,keno,lottery,pachinko,poker,roulette,slot machines,slots'
         terms: '<translate with synonyms or related terms for ''Gambling Hall'', separated by commas>'
+      amenity/give_box:
+        # amenity=give_box
+        name: Free Box
+        # 'terms: donations,free box,free table,freebox,give box,give shelf,givebox,library,share shelf'
+        terms: '<translate with synonyms or related terms for ''Free Box'', separated by commas>'
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard

@@ -96,6 +96,10 @@
     "replace": {"landuse": "garages"}
   },
   {
+    "old": {"amenity": "givebox"},
+    "replace": {"amenity": "give_box"}
+  },
+  {
     "old": {"amenity": "gym"},
     "replace": {"leisure": "fitness_centre"}
   },
