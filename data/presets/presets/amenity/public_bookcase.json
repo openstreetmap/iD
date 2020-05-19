@@ -14,11 +14,13 @@
         "access_simple",
         "address",
         "brand",
+        "covered",
         "email",
+        "indoor",
         "level",
         "location",
         "phone",
-        "website",
+        "ref",
         "wheelchair"
     ],
     "geometry": [
