@@ -169,6 +169,10 @@ export function uiPopover(klass) {
                         return;
                     }
                 }
+
+                // don't show if buttons are pressed, e.g. during click and drag of map
+                if (d3_event.buttons !== 0) return;
+
                 show.apply(this, arguments);
             });
             anchor.on(_pointerPrefix + 'leave.popover', function() {
