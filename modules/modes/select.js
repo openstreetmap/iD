@@ -271,7 +271,8 @@ export function modeSelect(context, selectedIDs) {
 
         function nudgeSelection(delta) {
             return function() {
-                d3_event.stopImmediatePropagation();
+                // prevent nudging during low zoom selection
+                if (!context.map().withinEditableZoom()) return;
 
                 var moveOp = operationMove(context, selectedIDs);
                 if (moveOp.disabled()) {
