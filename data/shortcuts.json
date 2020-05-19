@@ -270,6 +270,18 @@
             "text": "shortcuts.editing.operations.move"
           },
           {
+            "modifiers": ["⇧"],
+            "shortcuts": ["↓", "↑", "←", "→"],
+            "text": "shortcuts.editing.operations.nudge",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⌘", "⇧"],
+            "shortcuts": ["↓", "↑", "←", "→"],
+            "text": "shortcuts.editing.operations.nudge_more",
+            "separator": ","
+          },
+          {
             "shortcuts": ["operations.rotate.key"],
             "text": "shortcuts.editing.operations.rotate"
           },

@@ -2528,6 +2528,8 @@
                     "split": "Split a line into two at the selected node",
                     "reverse": "Reverse selected features",
                     "move": "Move selected features",
+                    "nudge": "Nudge selected features",
+                    "nudge_more": "Nudge selected features by a lot",
                     "rotate": "Rotate selected features",
                     "orthogonalize": "Square corners of a line or area",
                     "straighten": "Straighten a line or points",

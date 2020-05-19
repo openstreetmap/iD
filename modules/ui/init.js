@@ -319,10 +319,10 @@ export function uiInit(context) {
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
             .on('↓', pan([0, -panPixels]))
-            .on(['⇧←', uiCmd('⌘←')], pan([map.dimensions()[0], 0]))
-            .on(['⇧↑', uiCmd('⌘↑')], pan([0, map.dimensions()[1]]))
-            .on(['⇧→', uiCmd('⌘→')], pan([-map.dimensions()[0], 0]))
-            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]))
+            .on(uiCmd('⌘←'), pan([map.dimensions()[0], 0]))
+            .on(uiCmd('⌘↑'), pan([0, map.dimensions()[1]]))
+            .on(uiCmd('⌘→'), pan([-map.dimensions()[0], 0]))
+            .on(uiCmd('⌘↓'), pan([0, -map.dimensions()[1]]))
             .on(uiCmd('⌘' + t('background.key')), function quickSwitch() {
                 if (d3_event) {
                     d3_event.stopImmediatePropagation();
@@ -399,6 +399,7 @@ export function uiInit(context) {
 
         function pan(d) {
             return function() {
+                if (d3_event.shiftKey) return;
                 if (context.container().select('.combobox').size()) return;
                 d3_event.preventDefault();
                 context.map().pan(d, 100);

@@ -4,12 +4,15 @@ import { t } from '../core/localizer';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionDeleteRelation } from '../actions/delete_relation';
+import { actionMove } from '../actions/move';
 
 import { behaviorBreathe } from '../behavior/breathe';
 import { behaviorHover } from '../behavior/hover';
 import { behaviorLasso } from '../behavior/lasso';
 import { behaviorPaste } from '../behavior/paste';
 import { behaviorSelect } from '../behavior/select';
+
+import { operationMove } from '../operations/move';
 
 import { geoExtent, geoChooseEdge } from '../geo';
 import { modeBrowse } from './browse';
@@ -212,6 +215,14 @@ export function modeSelect(context, selectedIDs) {
             .on([']', 'pgdown'], nextVertex)
             .on(['{', uiCmd('⌘['), 'home'], firstVertex)
             .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
+            .on(uiCmd('⇧←'), nudgeSelection([-10, 0]))
+            .on(uiCmd('⇧↑'), nudgeSelection([0, -10]))
+            .on(uiCmd('⇧→'), nudgeSelection([10, 0]))
+            .on(uiCmd('⇧↓'), nudgeSelection([0, 10]))
+            .on(uiCmd('⇧⌘←'), nudgeSelection([-100, 0]))
+            .on(uiCmd('⇧⌘↑'), nudgeSelection([0, -100]))
+            .on(uiCmd('⇧⌘→'), nudgeSelection([100, 0]))
+            .on(uiCmd('⇧⌘↓'), nudgeSelection([0, 100]))
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true);
 
@@ -255,6 +266,24 @@ export function modeSelect(context, selectedIDs) {
             context.map().centerEase(loc);
         } else if (singular() && singular().type === 'way') {
             context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
+        }
+
+
+        function nudgeSelection(delta) {
+            return function() {
+                d3_event.stopImmediatePropagation();
+
+                var moveOp = operationMove(context, selectedIDs);
+                if (moveOp.disabled()) {
+                    context.ui().flash
+                        .duration(4000)
+                        .iconName('#iD-operation-' + moveOp.id)
+                        .iconClass('operation disabled')
+                        .text(moveOp.tooltip)();
+                } else {
+                    context.perform(actionMove(selectedIDs, delta, context.projection), moveOp.annotation());
+                }
+            };
         }
 
 
