@@ -3,24 +3,28 @@
     "fields": [
         "name",
         "operator",
-        "capacity",
+        "phone",
+        "email",
+        "website",
         "fee",
         "payment_multi_fee",
         "charge_fee",
         "sanitary_dump_station",
-        "power_supply"
+        "internet_access",
+        "internet_access/fee",
+        "maxlength",
+        "maxwidth",
+        "maxdraft",
+        "maxairdraft",
+        "power_supply",
+        "vhf_channel"
     ],
     "moreFields": [
         "address",
-        "email",
+        "capacity",
         "fax",
         "gnis/feature_id",
-        "internet_access",
-        "internet_access/fee",
-        "internet_access/ssid",
-        "phone",
-        "seamark/type",
-        "website"
+        "seamark/harbour/category"
     ],
     "geometry": [
         "area",
@@ -32,6 +36,8 @@
     ],
     "tags": {
         "leisure": "marina"
+        "seamark:type": "harbour"
+        "seamark:harbour:category": "marina"
     },
     "name": "Marina"
 }
