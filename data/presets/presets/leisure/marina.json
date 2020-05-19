@@ -35,8 +35,8 @@
         "boat"
     ],
     "tags": {
-        "leisure": "marina"
-        "seamark:type": "harbour"
+        "leisure": "marina",
+        "seamark:type": "harbour",
         "seamark:harbour:category": "marina"
     },
     "name": "Marina"
