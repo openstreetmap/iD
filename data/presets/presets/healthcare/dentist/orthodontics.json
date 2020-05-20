@@ -1,0 +1,36 @@
+{
+    "icon": "fas-teeth",
+    "fields": [
+        "{amenity/dentist}"
+    ],
+    "moreFields": [
+        "{amenity/dentist}"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "braces",
+        "dentistry",
+        "dentofacial orthopedics",
+        "headgear",
+        "jaw alignment",
+        "teeth",
+        "tooth"
+    ],
+    "tags": {
+        "healthcare": "dentist",
+        "healthcare:speciality": "orthodontics"
+    },
+    "addTags": {
+        "healthcare": "dentist",
+        "amenity": "dentist",
+        "healthcare:speciality": "orthodontics"
+    },
+    "reference": {
+        "key": "healthcare:speciality",
+        "value": "orthodontics"
+    },
+    "name": "Orthodontist"
+}

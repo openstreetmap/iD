@@ -4,7 +4,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
 
 
-export function operationSplit(selectedIDs, context) {
+export function operationSplit(context, selectedIDs) {
     var vertices = selectedIDs
         .filter(function(id) { return context.graph().geometry(id) === 'vertex'; });
     var entityID = vertices[0];

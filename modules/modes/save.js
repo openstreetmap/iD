@@ -16,6 +16,7 @@ export function modeSave(context) {
 
     var commit = uiCommit(context)
         .on('cancel', cancel);
+    var _conflictsUi; // uiConflicts
 
     var _location;
     var _success;
@@ -65,7 +66,7 @@ export function modeSave(context) {
             .classed('active', true)
             .classed('inactive', false);
 
-        var ui = uiConflicts(context)
+        _conflictsUi = uiConflicts(context)
             .conflictList(conflicts)
             .origChanges(origChanges)
             .on('cancel', function() {
@@ -86,7 +87,7 @@ export function modeSave(context) {
                 uploader.processResolvedConflicts(changeset);
             });
 
-        selection.call(ui);
+        selection.call(_conflictsUi);
     }
 
 
@@ -197,6 +198,11 @@ export function modeSave(context) {
             );
         });
     }
+
+
+    mode.selectedIDs = function() {
+        return _conflictsUi ? _conflictsUi.shownEntityIds() : [];
+    };
 
 
     mode.enter = function() {

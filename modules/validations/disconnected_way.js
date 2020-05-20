@@ -65,7 +65,7 @@ export function validationDisconnectedWay() {
                     entityIds: [singleEntity.id],
                     onClick: function(context) {
                         var id = this.issue.entityIds[0];
-                        var operation = operationDelete([id], context);
+                        var operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
                         }

@@ -202,11 +202,11 @@ export function validationMismatchedGeometry() {
 
                     var extractOnClick = null;
                     if (!context.hasHiddenConnections(entityId) &&
-                        !actionExtract(entityId, context.projection).disabled(context.graph())) {
+                        !actionExtract(entityId).disabled(context.graph())) {
 
                         extractOnClick = function(context) {
                             var entityId = this.issue.entityIds[0];
-                            var action = actionExtract(entityId, context.projection);
+                            var action = actionExtract(entityId);
                             context.perform(
                                 action,
                                 t('operations.extract.annotation.single')

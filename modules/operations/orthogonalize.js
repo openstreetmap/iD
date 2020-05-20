@@ -4,7 +4,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationOrthogonalize(selectedIDs, context) {
+export function operationOrthogonalize(context, selectedIDs) {
     var _extent;
     var _type;
     var _actions = selectedIDs.map(chooseAction).filter(Boolean);

@@ -8,7 +8,7 @@ import { uiCmd } from '../ui/cmd';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationDelete(selectedIDs, context) {
+export function operationDelete(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var action = actionDeleteMultiple(selectedIDs);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());

@@ -1,44 +1,20 @@
 import { actionExtract } from '../actions/extract';
-import { actionMoveNode } from '../actions/move_node';
 import { behaviorOperation } from '../behavior/operation';
-import { modeMove } from '../modes/move';
+import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
 import { presetManager } from '../presets';
 
-export function operationExtract(selectedIDs, context) {
+export function operationExtract(context, selectedIDs) {
     var entityID = selectedIDs.length && selectedIDs[0];
-    var action = actionExtract(entityID, context.projection);
+    var action = actionExtract(entityID);
 
     var geometry = entityID && context.graph().hasEntity(entityID) && context.graph().geometry(entityID);
-    var extent = geometry === 'area' && context.entity(entityID).extent(context.graph());
+    var extent = (geometry === 'area' || geometry === 'line') && context.graph().entity(entityID).extent(context.graph());
 
 
     var operation = function () {
-        context.perform(action);  // do the extract
-        context.validator().validate();
-
-        var extractedNodeID = action.getExtractedNodeID();
-
-        var mouse = context.map().mouseCoordinates();
-        if (mouse.some(isNaN)) {
-            enterMoveMode();
-
-        } else {
-            // move detached node to the mouse location (transitioned)
-            context.perform(actionMoveNode(extractedNodeID, mouse));
-
-            // after transition completes, put at final mouse location and enter move mode.
-            window.setTimeout(function() {
-                mouse = context.map().mouseCoordinates();
-                context.replace(actionMoveNode(extractedNodeID, mouse));
-                enterMoveMode();
-            }, 150);
-        }
-
-        function enterMoveMode() {
-            var baseGraph = context.graph();
-            context.enter(modeMove(context, [extractedNodeID], baseGraph));
-        }
+        context.perform(action, operation.annotation());  // do the extract
+        context.enter(modeSelect(context, [action.getExtractedNodeID()]));
     };
 
 
@@ -51,8 +27,9 @@ export function operationExtract(selectedIDs, context) {
 
         if (!entity.hasInterestingTags()) return false;
 
-        if (geometry === 'area') {
+        if (geometry === 'area' || geometry === 'line') {
             var preset = presetManager.match(entity, graph);
+            // only allow extraction from ways/multipolygons if the preset supports points
             return preset.geometry.indexOf('point') !== -1;
         }
 

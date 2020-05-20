@@ -63,7 +63,7 @@ export function validationOutdatedTags() {
     // upgrade preset..
     if (preset.replacement) {
       const newPreset = presetManager.item(preset.replacement);
-      graph = actionChangePreset(entity.id, preset, newPreset)(graph);
+      graph = actionChangePreset(entity.id, preset, newPreset, true /* skip field defaults */)(graph);
       entity = graph.entity(entity.id);
       preset = newPreset;
     }

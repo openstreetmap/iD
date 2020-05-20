@@ -428,11 +428,5 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
     };
 
 
-    drawWay.tail = function(text) {
-        behavior.tail(text);
-        return drawWay;
-    };
-
-
     return utilRebind(drawWay, dispatch, 'on');
 }

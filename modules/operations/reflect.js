@@ -5,17 +5,17 @@ import { geoExtent } from '../geo';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationReflectShort(selectedIDs, context) {
-    return operationReflect(selectedIDs, context, 'short');
+export function operationReflectShort(context, selectedIDs) {
+    return operationReflect(context, selectedIDs, 'short');
 }
 
 
-export function operationReflectLong(selectedIDs, context) {
-    return operationReflect(selectedIDs, context, 'long');
+export function operationReflectLong(context, selectedIDs) {
+    return operationReflect(context, selectedIDs, 'long');
 }
 
 
-export function operationReflect(selectedIDs, context, axis) {
+export function operationReflect(context, selectedIDs, axis) {
     axis = axis || 'long';
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());

@@ -16,7 +16,6 @@ export function modeDrawArea(context, wayID, startGraph, button) {
         var way = context.entity(wayID);
 
         behavior = behaviorDrawWay(context, wayID, undefined, mode, startGraph)
-            .tail(t('modes.draw_area.tail'))
             .on('rejectedSelfIntersection.modeDrawArea', function() {
                 context.ui().flash
                     .text(t('self_intersection.error.areas'))();

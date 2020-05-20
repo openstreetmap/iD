@@ -83,8 +83,13 @@ export default {
   },
 
   reset() {
+    let _strings = {};
+    let _colors = {};
     if (_cache) {
       Object.values(_cache.inflightTile).forEach(abortRequest);
+      // Strings and colors are static and should not be re-populated
+      _strings = _cache.strings;
+      _colors = _cache.colors;
     }
     _cache = {
       data: {},
@@ -93,8 +98,8 @@ export default {
       inflightPost: {},
       closed: {},
       rtree: new RBush(),
-      strings: {},
-      colors: {}
+      strings: _strings,
+      colors: _colors
     };
   },
 

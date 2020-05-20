@@ -53,7 +53,7 @@ export function uiPresetList(context) {
                  d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                operationDelete(_entityIDs, context)();
+                operationDelete(context, _entityIDs)();
 
             // hack to let undo work when search is autofocused
             } else if (search.property('value').length === 0 &&

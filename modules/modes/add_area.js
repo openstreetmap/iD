@@ -1,4 +1,3 @@
-import { t } from '../core/localizer';
 import { actionAddEntity } from '../actions/add_entity';
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionAddVertex } from '../actions/add_vertex';
@@ -12,7 +11,6 @@ export function modeAddArea(context, mode) {
     mode.id = 'add-area';
 
     var behavior = behaviorAddWay(context)
-        .tail(t('modes.add_area.tail'))
         .on('start', start)
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);

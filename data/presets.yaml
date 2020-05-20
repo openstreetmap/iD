@@ -472,6 +472,9 @@ en:
       collection_times:
         # collection_times=*
         label: Collection Times
+      collector:
+        # collector=*
+        label: Items
       colour:
         # colour=*
         label: Color
@@ -743,6 +746,14 @@ en:
           backward: Backward
           # direction=both
           both: Both / All
+          # direction=forward
+          forward: Forward
+      direction_vertex_dual:
+        # direction=*
+        label: Direction Affected
+        options:
+          # direction=backward
+          backward: Backward
           # direction=forward
           forward: Forward
       dispensing:
@@ -1649,6 +1660,8 @@ en:
           lane: Roadside Lane
           # parking=multi-storey
           multi-storey: Multilevel
+          # parking=rooftop
+          rooftop: Rooftop
           # parking=sheds
           sheds: Sheds
           # parking=surface
@@ -3289,7 +3302,7 @@ en:
         terms: '<translate with synonyms or related terms for ''Sandwich Fast Food'', separated by commas>'
       amenity/ferry_terminal:
         # amenity=ferry_terminal
-        name: Ferry Station / Terminal
+        name: Ferry Terminal
       amenity/fire_station:
         # amenity=fire_station
         name: Fire Station
@@ -3314,6 +3327,11 @@ en:
         name: Gambling Hall
         # 'terms: betting,bingo,blackjack,casino,craps,gamble,gambling,keno,lottery,pachinko,poker,roulette,slot machines,slots'
         terms: '<translate with synonyms or related terms for ''Gambling Hall'', separated by commas>'
+      amenity/give_box:
+        # amenity=give_box
+        name: Free Box
+        # 'terms: donations,free box,free table,freebox,give box,give shelf,givebox,library,share shelf'
+        terms: '<translate with synonyms or related terms for ''Free Box'', separated by commas>'
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
@@ -4659,13 +4677,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Glaziery'', separated by commas>'
       craft/handicraft:
         # craft=handicraft
-        name: Handicraft
-        terms: '<translate with synonyms or related terms for ''Handicraft'', separated by commas>'
+        name: Handicraft Workspace
+        terms: '<translate with synonyms or related terms for ''Handicraft Workspace'', separated by commas>'
       craft/hvac:
         # craft=hvac
-        name: HVAC
+        name: HVAC Workplace
         # 'terms: heat*,vent*,air conditioning'
-        terms: '<translate with synonyms or related terms for ''HVAC'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''HVAC Workplace'', separated by commas>'
       craft/insulator:
         # craft=insulation
         name: Insulator
@@ -4989,6 +5007,11 @@ en:
         # healthcare=counselling
         name: Counselling Center
         terms: '<translate with synonyms or related terms for ''Counselling Center'', separated by commas>'
+      healthcare/dentist/orthodontics:
+        # 'healthcare=dentist, healthcare:speciality=orthodontics'
+        name: Orthodontist
+        # 'terms: braces,dentistry,dentofacial orthopedics,headgear,jaw alignment,teeth,tooth'
+        terms: '<translate with synonyms or related terms for ''Orthodontist'', separated by commas>'
       healthcare/hospice:
         # healthcare=hospice
         name: Hospice
@@ -6205,6 +6228,11 @@ en:
         name: Clearcut Forest
         # 'terms: cut,forest,lumber,tree,wood'
         terms: '<translate with synonyms or related terms for ''Clearcut Forest'', separated by commas>'
+      man_made/courtyard:
+        # man_made=courtyard
+        name: Courtyard
+        # 'terms: court,enclosed open air,quadrangle,yard'
+        terms: '<translate with synonyms or related terms for ''Courtyard'', separated by commas>'
       man_made/crane:
         # man_made=crane
         name: Crane
@@ -7337,9 +7365,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Bus Station / Terminal'', separated by commas>'
       public_transport/station_ferry:
         # 'public_transport=station, ferry=yes'
-        name: Ferry Station / Terminal
+        name: Ferry Terminal
         # 'terms: boat,dock,ferry,pier,public transit,public transportation,station,terminal,transit,transportation'
-        terms: '<translate with synonyms or related terms for ''Ferry Station / Terminal'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Ferry Terminal'', separated by commas>'
       public_transport/station_light_rail:
         # 'public_transport=station, light_rail=yes'
         name: Light Rail Station
@@ -7799,6 +7827,11 @@ en:
         # shop=coffee
         name: Coffee Store
         terms: '<translate with synonyms or related terms for ''Coffee Store'', separated by commas>'
+      shop/collector:
+        # shop=collector
+        name: Collectibles Shop
+        # 'terms: antiques,coins,collection,collectors,comics,dolls,figurines,numismatics,philately,stamps,thrift'
+        terms: '<translate with synonyms or related terms for ''Collectibles Shop'', separated by commas>'
       shop/computer:
         # shop=computer
         name: Computer Store

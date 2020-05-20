@@ -4,7 +4,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util/index';
 
 
-export function operationDisconnect(selectedIDs, context) {
+export function operationDisconnect(context, selectedIDs) {
     var vertexIDs = [];
     var wayIDs = [];
     var otherIDs = [];

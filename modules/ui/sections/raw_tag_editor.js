@@ -279,7 +279,7 @@ export function uiSectionRawTagEditor(id, context) {
             });
 
         items.selectAll('button.remove')
-            .on('mousedown', removeTag);  // 'click' fires too late - #5878
+            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', removeTag);  // 'click' fires too late - #5878
 
     }
 

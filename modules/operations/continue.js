@@ -4,7 +4,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { utilArrayGroupBy } from '../util';
 
 
-export function operationContinue(selectedIDs, context) {
+export function operationContinue(context, selectedIDs) {
     var graph = context.graph();
     var entities = selectedIDs.map(function(id) { return graph.entity(id); });
     var geometries = Object.assign(

@@ -10,7 +10,7 @@ import { uiToggle } from './toggle';
 
 
 // Tooltips and svg mask used to highlight certain features
-export function uiCurtain() {
+export function uiCurtain(containerNode) {
 
     var surface = d3_select(null),
         tooltip = d3_select(null),
@@ -46,8 +46,8 @@ export function uiCurtain() {
 
         function resize() {
             surface
-                .attr('width', window.innerWidth)
-                .attr('height', window.innerHeight);
+                .attr('width', containerNode.clientWidth)
+                .attr('height', containerNode.clientHeight);
             curtain.cut(darkness.datum());
         }
     }
@@ -72,6 +72,9 @@ export function uiCurtain() {
         }
         if (box && box.getBoundingClientRect) {
             box = copyBox(box.getBoundingClientRect());
+            var containerRect = containerNode.getBoundingClientRect();
+            box.top -= containerRect.top;
+            box.left -= containerRect.left;
         }
 
         options = options || {};
@@ -121,8 +124,8 @@ export function uiCurtain() {
             }
 
             var tip = copyBox(tooltip.node().getBoundingClientRect()),
-                w = window.innerWidth,
-                h = window.innerHeight,
+                w = containerNode.clientWidth,
+                h = containerNode.clientHeight,
                 tooltipWidth = 200,
                 tooltipArrow = 5,
                 side, pos;
@@ -134,7 +137,7 @@ export function uiCurtain() {
                 tip.height += 80;
             }
 
-            // trim box dimensions to just the portion that fits in the window..
+            // trim box dimensions to just the portion that fits in the container..
             if (tooltipBox.top + tooltipBox.height > h) {
                 tooltipBox.height -= (tooltipBox.top + tooltipBox.height - h);
             }
@@ -238,9 +241,11 @@ export function uiCurtain() {
 
         selection
             .attr('d', function(d) {
-                var string = 'M 0,0 L 0,' + window.innerHeight + ' L ' +
-                    window.innerWidth + ',' + window.innerHeight + 'L' +
-                    window.innerWidth + ',0 Z';
+                var containerWidth = containerNode.clientWidth;
+                var containerHeight = containerNode.clientHeight;
+                var string = 'M 0,0 L 0,' + containerHeight + ' L ' +
+                    containerWidth + ',' + containerHeight + 'L' +
+                    containerWidth + ',0 Z';
 
                 if (!d) return string;
                 return string + 'M' +
