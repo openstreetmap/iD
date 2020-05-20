@@ -10,6 +10,14 @@
       "description": "CMM 2018 Aerial imagery."
     },
     {
+      "id": "GoogleTest",
+      "name": "Google Test only for alignment verification",
+      "type": "tms",
+      "template": "http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga",
+      "zoomExtent": [8, 22],
+      "description": "Google Test only for alignment verification."
+    },
+    {
       "id": "sjcgis.org-Aerials_2013_WM",
       "name": "2013 aerial imagery for San Juan County WA",
       "type": "tms",
