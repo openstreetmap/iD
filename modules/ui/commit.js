@@ -16,7 +16,6 @@ import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 
 
-var _changeset;
 var readOnlyTags = [
     /^changesets_count$/,
     /^created_by$/,
@@ -54,8 +53,15 @@ export function uiCommit(context) {
     function commit(selection) {
         _selection = selection;
 
-        var osm = context.connection();
-        if (!osm) return;
+        // Initialize changeset if one does not exist yet.
+        if (!context.changeset) initChangeset();
+
+        loadDerivedChangesetTags();
+
+        selection.call(render);
+    }
+
+    function initChangeset() {
 
         var tagCharLimit = context.maxCharsForTagValue();
 
@@ -69,68 +75,73 @@ export function uiCommit(context) {
             prefs('source', null);
         }
 
-        var tags;
-        // Initialize changeset if one does not exist yet.
-        // Also pull values from local storage.
-        if (!_changeset) {
-
-            // load in the URL hash values, if any
-            if (context.initialHashParams.comment) {
-                prefs('comment', context.initialHashParams.comment);
-                prefs('commentDate', Date.now());
-            }
-            if (context.initialHashParams.source) {
-                prefs('source', context.initialHashParams.source);
-                prefs('commentDate', Date.now());
-            }
-            if (context.initialHashParams.hashtags) {
-                prefs('hashtags', context.initialHashParams.hashtags);
-            }
-
-            var detected = utilDetect();
-            tags = {
-                comment: prefs('comment') || '',
-                created_by: ('iD ' + context.version).substr(0, tagCharLimit),
-                host: detected.host.substr(0, tagCharLimit),
-                locale: localizer.localeCode().substr(0, tagCharLimit)
-            };
-
-            // call findHashtags initially - this will remove stored
-            // hashtags if any hashtags are found in the comment - #4304
-            findHashtags(tags, true);
-
-            var hashtags = prefs('hashtags');
-            if (hashtags) {
-                tags.hashtags = hashtags;
-            }
-
-            var source = prefs('source');
-            if (source) {
-                tags.source = source;
-            }
-            var photoOverlaysUsed = context.history().photoOverlaysUsed();
-            if (photoOverlaysUsed.length) {
-                var sources = (tags.source || '').split(';');
-
-                // include this tag for any photo layer
-                if (sources.indexOf('streetlevel imagery') === -1) {
-                    sources.push('streetlevel imagery');
-                }
-
-                // add the photo overlays used during editing as sources
-                photoOverlaysUsed.forEach(function(photoOverlay) {
-                    if (sources.indexOf(photoOverlay) === -1) {
-                        sources.push(photoOverlay);
-                    }
-                });
-
-                tags.source = sources.join(';').substr(0, tagCharLimit);
-            }
-
-            _changeset = new osmChangeset({ tags: tags });
+        // load in explicitly-set values, if any
+        if (context.defaultChangesetComment()) {
+            prefs('comment', context.defaultChangesetComment());
+            prefs('commentDate', Date.now());
+        }
+        if (context.defaultChangesetSource()) {
+            prefs('source', context.defaultChangesetSource());
+            prefs('commentDate', Date.now());
+        }
+        if (context.defaultChangesetHashtags()) {
+            prefs('hashtags', context.defaultChangesetHashtags());
+            prefs('commentDate', Date.now());
         }
 
-        tags = Object.assign({}, _changeset.tags);   // shallow copy
+        var detected = utilDetect();
+        var tags = {
+            comment: prefs('comment') || '',
+            created_by: ('iD ' + context.version).substr(0, tagCharLimit),
+            host: detected.host.substr(0, tagCharLimit),
+            locale: localizer.localeCode().substr(0, tagCharLimit)
+        };
+
+        // call findHashtags initially - this will remove stored
+        // hashtags if any hashtags are found in the comment - #4304
+        findHashtags(tags, true);
+
+        var hashtags = prefs('hashtags');
+        if (hashtags) {
+            tags.hashtags = hashtags;
+        }
+
+        var source = prefs('source');
+        if (source) {
+            tags.source = source;
+        }
+        var photoOverlaysUsed = context.history().photoOverlaysUsed();
+        if (photoOverlaysUsed.length) {
+            var sources = (tags.source || '').split(';');
+
+            // include this tag for any photo layer
+            if (sources.indexOf('streetlevel imagery') === -1) {
+                sources.push('streetlevel imagery');
+            }
+
+            // add the photo overlays used during editing as sources
+            photoOverlaysUsed.forEach(function(photoOverlay) {
+                if (sources.indexOf(photoOverlay) === -1) {
+                    sources.push(photoOverlay);
+                }
+            });
+
+            tags.source = sources.join(';').substr(0, tagCharLimit);
+        }
+
+        context.changeset = new osmChangeset({ tags: tags });
+    }
+
+    // Calculates read-only metadata tags based on the user's editing session and applies
+    // them to the changeset.
+    function loadDerivedChangesetTags() {
+
+        var osm = context.connection();
+        if (!osm) return;
+
+        var tagCharLimit = context.maxCharsForTagValue();
+
+        var tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, tagCharLimit);
@@ -193,7 +204,13 @@ export function uiCommit(context) {
         var resolvedIssues = context.validator().getResolvedIssues();
         addIssueCounts(resolvedIssues, 'resolved');
 
-        _changeset = _changeset.update({ tags: tags });
+        context.changeset = context.changeset.update({ tags: tags });
+    }
+
+    function render(selection) {
+
+        var osm = context.connection();
+        if (!osm) return;
 
         var header = selection.selectAll('.header')
             .data([0]);
@@ -242,8 +259,8 @@ export function uiCommit(context) {
 
         changesetSection
             .call(changesetEditor
-                .changesetID(_changeset.id)
-                .tags(tags)
+                .changesetID(context.changeset.id)
+                .tags(context.changeset.tags)
             );
 
 
@@ -331,7 +348,7 @@ export function uiCommit(context) {
             .merge(requestReviewEnter);
 
         var requestReviewInput = requestReview.selectAll('input')
-            .property('checked', isReviewRequested(_changeset.tags))
+            .property('checked', isReviewRequested(context.changeset.tags))
             .on('change', toggleRequestReview);
 
 
@@ -375,7 +392,7 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
-                    context.uploader().save(_changeset);
+                    context.uploader().save(context.changeset);
                 }
             });
 
@@ -398,7 +415,7 @@ export function uiCommit(context) {
 
         tagSection
             .call(rawTagEditor
-                .tags(Object.assign({}, _changeset.tags))   // shallow copy
+                .tags(Object.assign({}, context.changeset.tags))   // shallow copy
                 .render
             );
 
@@ -420,7 +437,7 @@ export function uiCommit(context) {
 
             tagSection
                 .call(rawTagEditor
-                    .tags(Object.assign({}, _changeset.tags))   // shallow copy
+                    .tags(Object.assign({}, context.changeset.tags))   // shallow copy
                     .render
                 );
         }
@@ -435,7 +452,7 @@ export function uiCommit(context) {
             return t('commit.outstanding_errors_message', { count: errors.length });
 
         } else {
-            var hasChangesetComment = _changeset && _changeset.tags.comment && _changeset.tags.comment.trim().length;
+            var hasChangesetComment = context.changeset && context.changeset.tags.comment && context.changeset.tags.comment.trim().length;
             if (!hasChangesetComment) {
                 return t('commit.comment_needed_message');
             }
@@ -462,11 +479,12 @@ export function uiCommit(context) {
                 prefs('commentDate', Date.now());
             }
         }
+        // no need to update `prefs` for `hashtags` here since it's done in `updateChangeset`
 
         updateChangeset(changed, onInput);
 
         if (_selection) {
-            _selection.call(commit);
+            _selection.call(render);
         }
     }
 
@@ -526,7 +544,7 @@ export function uiCommit(context) {
 
 
     function updateChangeset(changed, onInput) {
-        var tags = Object.assign({}, _changeset.tags);   // shallow copy
+        var tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         var tagCharLimit = context.maxCharsForTagValue();
 
@@ -586,14 +604,14 @@ export function uiCommit(context) {
             delete tags.changesets_count;
         }
 
-        if (!deepEqual(_changeset.tags, tags)) {
-            _changeset = _changeset.update({ tags: tags });
+        if (!deepEqual(context.changeset.tags, tags)) {
+            context.changeset = context.changeset.update({ tags: tags });
         }
     }
 
 
     commit.reset = function() {
-        _changeset = null;
+        context.changeset = null;
     };
 
 

@@ -35,6 +35,30 @@ export function coreContext() {
   context.isFirstSession = !prefs('sawSplash') && !prefs('sawPrivacyVersion');
 
 
+  /* Changeset */
+  // An osmChangeset object. Not loaded until needed.
+  context.changeset = null;
+
+  let _defaultChangesetComment = context.initialHashParams.comment;
+  let _defaultChangesetSource = context.initialHashParams.source;
+  let _defaultChangesetHashtags = context.initialHashParams.hashtags;
+  context.defaultChangesetComment = function(val) {
+    if (!arguments.length) return _defaultChangesetComment;
+    _defaultChangesetComment = val;
+    return context;
+  };
+  context.defaultChangesetSource = function(val) {
+    if (!arguments.length) return _defaultChangesetSource;
+    _defaultChangesetSource = val;
+    return context;
+  };
+  context.defaultChangesetHashtags = function(val) {
+    if (!arguments.length) return _defaultChangesetHashtags;
+    _defaultChangesetHashtags = val;
+    return context;
+  };
+
+
   /* User interface and keybinding */
   let _ui;
   context.ui = () => _ui;
@@ -405,6 +429,8 @@ export function coreContext() {
         service.reset(context);
       }
     });
+
+    context.changeset = null;
 
     _validator.reset();
     _features.reset();
