@@ -200,7 +200,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function retryIntersect() {
-        d3_select(window).on('mousedown.intro', eventCancel, true);
+        d3_select(window).on('pointerdown.intro mousedown.intro', eventCancel, true);
 
         var box = pad(tulipRoadIntersection, 80, context);
         reveal(box,
@@ -676,7 +676,7 @@ export function uiIntroLine(context, reveal) {
                     var node = selectMenuItem(context, 'split').node();
                     if (!node) return;
                     continueTo(splitIntersection);
-                }, 300);  // after menu visible
+                }, 50);  // after menu visible
             });
 
             context.history().on('change.intro', function() {
@@ -1054,7 +1054,7 @@ export function uiIntroLine(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        d3_select(window).on('mousedown.intro', null, true);
+        d3_select(window).on('pointerdown.intro mousedown.intro', null, true);
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);

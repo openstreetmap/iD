@@ -282,6 +282,13 @@ export function coreContext() {
     return context;
   };
 
+  let _copyLonLat;
+  context.copyLonLat = function(val) {
+    if (!arguments.length) return _copyLonLat;
+    _copyLonLat = val;
+    return context;
+  };
+
 
   /* Background */
   let _background;

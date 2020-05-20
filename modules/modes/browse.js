@@ -8,6 +8,7 @@ import { behaviorSelect } from '../behavior/select';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 
+import { operationPaste } from '../operations/paste';
 
 export function modeBrowse(context) {
     var mode = {
@@ -57,6 +58,11 @@ export function modeBrowse(context) {
         if (!arguments.length) return sidebar;
         sidebar = _;
         return mode;
+    };
+
+
+    mode.operations = function() {
+        return [operationPaste(context)];
     };
 
 

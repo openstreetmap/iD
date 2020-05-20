@@ -1,0 +1,44 @@
+{
+    "icon": "fas-box-open",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours",
+        "opening_hours/covid19",
+        "access_simple",
+        "website"
+    ],
+    "moreFields": [
+        "address",
+        "brand",
+        "capacity",
+        "covered",
+        "email",
+        "indoor",
+        "level",
+        "lit",
+        "location",
+        "phone",
+        "ref",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "donations",
+        "free box",
+        "free table",
+        "freebox",
+        "give box",
+        "give shelf",
+        "givebox",
+        "library",
+        "share shelf"
+    ],
+    "tags": {
+        "amenity": "give_box"
+    },
+    "name": "Free Box"
+}

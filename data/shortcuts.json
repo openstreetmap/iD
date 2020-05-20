@@ -107,7 +107,7 @@
             "text": "shortcuts.browsing.selecting.title"
           },
           {
-            "shortcuts": ["Left-click"],
+            "shortcuts": ["Left-click", "shortcuts.key.space"],
             "text": "shortcuts.browsing.selecting.select_one"
           },
           {
@@ -131,7 +131,7 @@
             "text": "shortcuts.browsing.with_selected.title"
           },
           {
-            "shortcuts": ["Right-click", "shortcuts.key.space"],
+            "shortcuts": ["Right-click", "☰"],
             "text": "shortcuts.browsing.with_selected.edit_menu"
           },
           {
@@ -268,6 +268,18 @@
           {
             "shortcuts": ["operations.move.key"],
             "text": "shortcuts.editing.operations.move"
+          },
+          {
+            "modifiers": ["⇧"],
+            "shortcuts": ["↓", "↑", "←", "→"],
+            "text": "shortcuts.editing.operations.nudge",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⌘", "⇧"],
+            "shortcuts": ["↓", "↑", "←", "→"],
+            "text": "shortcuts.editing.operations.nudge_more",
+            "separator": ","
           },
           {
             "shortcuts": ["operations.rotate.key"],

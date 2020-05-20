@@ -5,7 +5,7 @@ import { modeMove } from '../modes/move';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationMove(selectedIDs, context) {
+export function operationMove(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });

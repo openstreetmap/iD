@@ -470,14 +470,16 @@ export default {
 
     _pannellumViewer = window.pannellum.viewer('ideditor-viewer-streetside', options);
 
+    var pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
     _pannellumViewer
-      .on('mousedown', () => {
+      .on(pointerPrefix + 'down', () => {
         d3_select(window)
-          .on('mousemove.pannellum', () => { dispatch.call('viewerChanged'); });
+          .on(pointerPrefix + 'move.pannellum', () => { dispatch.call('viewerChanged'); });
       })
-      .on('mouseup', () => {
+      .on(pointerPrefix + 'up', () => {
         d3_select(window)
-          .on('mousemove.pannellum', null);
+          .on(pointerPrefix + 'move.pannellum', null);
 
         // continue dispatching events for a few seconds, in case viewer has inertia.
         let t = d3_timer(elapsed => {

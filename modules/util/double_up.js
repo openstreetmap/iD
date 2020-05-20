@@ -27,19 +27,24 @@ export function utilDoubleUp() {
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
 
-        var loc = utilFastMouse(this)(d3_event);
+        var loc = [d3_event.clientX, d3_event.clientY];
 
+        // Don't rely on pointerId here since it can change between pointerdown
+        // events on touch devices
         if (_pointer && !pointerIsValidFor(loc)) {
             // if this pointer is no longer valid, clear it so another can be started
             _pointer = undefined;
         }
+
         if (!_pointer) {
-            // don't rely on the pointerId since it can change between down events on touch devices
             _pointer = {
                 startLoc: loc,
                 startTime: new Date().getTime(),
-                upCount: 0
+                upCount: 0,
+                pointerId: d3_event.pointerId
             };
+        } else { // double down
+            _pointer.pointerId = d3_event.pointerId;
         }
     }
 
@@ -48,14 +53,15 @@ export function utilDoubleUp() {
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
 
-        if (!_pointer) return;
+        if (!_pointer || _pointer.pointerId !== d3_event.pointerId) return;
 
         _pointer.upCount += 1;
 
         if (_pointer.upCount === 2) { // double up!
-            var loc = utilFastMouse(this)(d3_event);
+            var loc = [d3_event.clientX, d3_event.clientY];
             if (pointerIsValidFor(loc)) {
-                dispatch.call('doubleUp', this, loc);
+                var locInThis = utilFastMouse(this)(d3_event);
+                dispatch.call('doubleUp', this, locInThis);
             }
             // clear the pointer info in any case
             _pointer = undefined;

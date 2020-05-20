@@ -1,4 +1,5 @@
 import { actionDeleteNode } from './delete_node';
+import { actionDeleteWay } from './delete_way';
 import { utilArrayUniq } from '../util';
 
 
@@ -36,9 +37,7 @@ export function actionConnect(nodeIDs) {
 
             parents = graph.parentWays(node);
             for (j = 0; j < parents.length; j++) {
-                if (!parents[j].areAdjacent(node.id, survivor.id)) {
-                    graph = graph.replace(parents[j].replaceNode(node.id, survivor.id));
-                }
+                graph = graph.replace(parents[j].replaceNode(node.id, survivor.id));
             }
 
             parents = graph.parentRelations(node);
@@ -51,6 +50,14 @@ export function actionConnect(nodeIDs) {
         }
 
         graph = graph.replace(survivor);
+
+        // find and delete any degenerate ways created by connecting adjacent vertices
+        parents = graph.parentWays(survivor);
+        for (i = 0; i < parents.length; i++) {
+            if (parents[i].isDegenerate()) {
+                graph = actionDeleteWay(parents[i].id)(graph);
+            }
+        }
 
         return graph;
     };

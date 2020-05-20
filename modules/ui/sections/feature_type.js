@@ -83,11 +83,7 @@ export function uiSectionFeatureType(context) {
             .on('click', function() {
                  dispatch.call('choose', this, _presets);
             })
-            .on('mousedown', function() {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-            })
-            .on('mouseup', function() {
+            .on('pointerdown pointerup mousedown mouseup', function() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             });

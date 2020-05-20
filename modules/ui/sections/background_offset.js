@@ -16,6 +16,8 @@ export function uiSectionBackgroundOffset(context) {
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
     var _directions = [
         ['right', [0.5, 0]],
         ['top', [0, -0.5]],
@@ -24,7 +26,7 @@ export function uiSectionBackgroundOffset(context) {
     ];
 
 
-    function d3_eventCancel() {
+    function cancelEvent() {
         d3_event.stopPropagation();
         d3_event.preventDefault();
     }
@@ -59,7 +61,7 @@ export function uiSectionBackgroundOffset(context) {
     }
 
 
-    function clickNudgeButton(d) {
+    function pointerdownNudgeButton(d) {
         var interval;
         var timeout = window.setTimeout(function() {
                 interval = window.setInterval(nudge.bind(null, d), 100);
@@ -69,13 +71,13 @@ export function uiSectionBackgroundOffset(context) {
             window.clearTimeout(timeout);
             window.clearInterval(interval);
             d3_select(window)
-                .on('mouseup.buttonoffset', null, true)
-                .on('mousedown.buttonoffset', null, true);
+                .on(_pointerPrefix + 'up.buttonoffset', null, true)
+                .on(_pointerPrefix + 'down.buttonoffset', null, true);
         }
 
         d3_select(window)
-            .on('mouseup.buttonoffset', doneNudge, true)
-            .on('mousedown.buttonoffset', doneNudge, true);
+            .on(_pointerPrefix + 'up.buttonoffset', doneNudge, true)
+            .on(_pointerPrefix + 'down.buttonoffset', doneNudge, true);
 
         nudge(d);
     }
@@ -107,30 +109,44 @@ export function uiSectionBackgroundOffset(context) {
 
         var origin = [d3_event.clientX, d3_event.clientY];
 
+        var pointerId = d3_event.pointerId || 'mouse';
+
         context.container()
             .append('div')
             .attr('class', 'nudge-surface');
 
         d3_select(window)
-            .on('mousemove.offset', function() {
-                var latest = [d3_event.clientX, d3_event.clientY];
-                var d = [
-                    -(origin[0] - latest[0]) / 4,
-                    -(origin[1] - latest[1]) / 4
-                ];
+            .on(_pointerPrefix + 'move.drag-bg-offset', pointermove)
+            .on(_pointerPrefix + 'up.drag-bg-offset', pointerup);
 
-                origin = latest;
-                nudge(d);
-            })
-            .on('mouseup.offset', function() {
-                if (d3_event.button !== 0) return;
-                context.container().selectAll('.nudge-surface')
-                    .remove();
+        if (_pointerPrefix === 'pointer') {
+            d3_select(window)
+                .on('pointercancel.drag-bg-offset', pointerup);
+        }
 
-                d3_select(window)
-                    .on('mousemove.offset', null)
-                    .on('mouseup.offset', null);
-            });
+        function pointermove() {
+            if (pointerId !== (d3_event.pointerId || 'mouse')) return;
+
+            var latest = [d3_event.clientX, d3_event.clientY];
+            var d = [
+                -(origin[0] - latest[0]) / 4,
+                -(origin[1] - latest[1]) / 4
+            ];
+
+            origin = latest;
+            nudge(d);
+        }
+
+        function pointerup() {
+            if (pointerId !== (d3_event.pointerId || 'mouse')) return;
+            if (d3_event.button !== 0) return;
+
+            context.container().selectAll('.nudge-surface')
+                .remove();
+
+            d3_select(window)
+                .on('.drag-bg-offset', null);
+        }
     }
 
 
@@ -150,7 +166,11 @@ export function uiSectionBackgroundOffset(context) {
         var nudgeEnter = containerEnter
             .append('div')
             .attr('class', 'nudge-outer-rect')
-            .on('mousedown', dragOffset);
+            .on('touchstart touchmove touchend', function() {
+                // prevent scrolling while dragging
+                d3_event.preventDefault();
+            })
+            .on(_pointerPrefix + 'down', dragOffset);
 
         nudgeEnter
             .append('div')
@@ -164,18 +184,19 @@ export function uiSectionBackgroundOffset(context) {
             .data(_directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
-            .on('contextmenu', d3_eventCancel)
-            .on('mousedown', function(d) {
+            .on('contextmenu', cancelEvent)
+            .on(_pointerPrefix + 'down', function(d) {
                 if (d3_event.button !== 0) return;
-                clickNudgeButton(d[1]);
+                pointerdownNudgeButton(d[1]);
             });
 
         containerEnter
             .append('button')
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
-            .on('contextmenu', d3_eventCancel)
+            .on('contextmenu', cancelEvent)
             .on('click', function() {
+                d3_event.preventDefault();
                 if (d3_event.button !== 0) return;
                 resetOffset();
             })
