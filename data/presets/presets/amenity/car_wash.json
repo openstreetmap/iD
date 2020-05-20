@@ -8,7 +8,9 @@
         "opening_hours",
         "opening_hours/covid19",
         "payment_multi",
-        "self_service"
+        "self_service",
+        "automated"
+        
     ],
     "moreFields": [
         "email",
