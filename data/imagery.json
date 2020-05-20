@@ -10,6 +10,15 @@
       "description": "CMM 2018 Aerial imagery."
     },
     {
+      "id": "Drummondville2018",
+      "name": "Drummondville 2019 aerial imagery",
+      "type": "tms",
+      "template": "http://132.207.95.135/cmm2018tiles/{zoom}/{x}/{y}",
+      "zoomExtent": [8, 22],
+      "default": true,
+      "description": "Drummondville 2018 Aerial imagery."
+    },
+    {
       "id": "GoogleTest",
       "name": "Google Test only for alignment verification",
       "type": "tms",

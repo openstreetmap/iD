@@ -125,7 +125,7 @@ export function uiCommit(context) {
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        if (imageryUsed.match(/(google)/))
+        if (imageryUsed.match(/(google)/) || imageryUsed.match(/(Google)/))
         {
             imageryUsed = 'Bing aerial imagery';
         }
