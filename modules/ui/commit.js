@@ -125,7 +125,11 @@ export function uiCommit(context) {
 
         // assign tags for imagery used
         var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        tags.imagery_used = imageryUsed;//'CMM Aerial Photos April 2018 resolution: 10cm';
+        if (imageryUsed.match(/(google)/))
+        {
+            imageryUsed = 'Bing aerial imagery';
+        }
+        tags.imagery_used = imageryUsed;
         
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();

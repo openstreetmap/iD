@@ -17,6 +17,7 @@
   {"pID": "natural/scrub"},
   {"pID": "landuse/brownfield"},
   {"pID": "landuse/meadow"},
+  {"pID": "landuse/flowerbed"},
   {"pID": "landuse/farmland"},
   {"pID": "landuse/farmyard"},
   {"pID": "natural/wood"},
