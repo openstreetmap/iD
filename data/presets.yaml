@@ -237,7 +237,7 @@ en:
         label: Type
       automated:
         # automated=*
-        label: automated
+        label: Automated
       baby_feeding:
         # baby_feeding=*
         label: Baby Nursing Area
