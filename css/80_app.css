@@ -1842,15 +1842,20 @@ a.hide-toggle {
 
 /* Field - Maxspeed
 ------------------------------------------------------- */
+.form-field-input-maxspeed input.maxspeed-number {
+    flex-basis: 0;
+}
+.form-field-input-maxspeed input.maxspeed-unit {
+    flex: 0 1 auto;
+    width: 80px;
+}
 .form-field-input-maxspeed > input:first-of-type {
     border-radius: 0 0 0 4px;
 }
 .ideditor[dir='rtl'] .form-field-input-maxspeed > input:first-of-type {
     border-radius: 0 0 4px 0;
 }
-.form-field-input-maxspeed > input:last-of-type {  /* unit field */
-    flex: 0 1 80px;
-    width: 80px;
+.form-field-input-maxspeed > input:last-of-type {
     border-left: 0;
     border-radius: 0 0 4px 0;
 }
