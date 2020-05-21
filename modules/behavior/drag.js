@@ -108,19 +108,23 @@ export function behaviorDrag() {
 
                 started = true;
                 _event({ type: 'start' });
+
+            // Don't send a `move` event in the same cycle as `start` since dragging
+            // a midpoint will convert the target to a node.
+            } else {
+
+                startOrigin = p;
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+
+                var dx = p[0] - startOrigin[0];
+                var dy = p[1] - startOrigin[1];
+                _event({
+                    type: 'move',
+                    point: [p[0] + offset[0],  p[1] + offset[1]],
+                    delta: [dx, dy]
+                });
             }
-
-            startOrigin = p;
-            d3_event.stopPropagation();
-            d3_event.preventDefault();
-
-            var dx = p[0] - startOrigin[0];
-            var dy = p[1] - startOrigin[1];
-            _event({
-                type: 'move',
-                point: [p[0] + offset[0],  p[1] + offset[1]],
-                delta: [dx, dy]
-            });
         }
 
 
