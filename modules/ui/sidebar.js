@@ -54,7 +54,7 @@ export function uiSidebar(context) {
             .attr('class', 'sidebar-resizer')
             .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
 
-        var downPointerId, lastClientX;
+        var downPointerId, lastClientX, containerLocGetter;
 
         function pointerdown() {
             if (downPointerId) return;
@@ -62,6 +62,8 @@ export function uiSidebar(context) {
             downPointerId = d3_event.pointerId || 'mouse';
 
             lastClientX = d3_event.clientX;
+
+            containerLocGetter = utilFastMouse(container.node());
 
             // offset from edge of sidebar-resizer
             dragOffset = utilFastMouse(resizer.node())(d3_event)[0] - 1;
@@ -98,7 +100,7 @@ export function uiSidebar(context) {
             var scaleX = isRTL ? 0 : 1;
             var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
 
-            var x = d3_event.clientX - dragOffset;
+            var x = containerLocGetter(d3_event)[0] - dragOffset;
             sidebarWidth = isRTL ? containerWidth - x : x;
 
             var isCollapsed = selection.classed('collapsed');
