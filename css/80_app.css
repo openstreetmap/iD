@@ -3993,6 +3993,8 @@ img.tile {
     -ms-user-select: none;
     user-select: none;
 
+    -webkit-user-drag: none;
+
     opacity: 0;
 
     -webkit-transition: opacity 200ms linear;
