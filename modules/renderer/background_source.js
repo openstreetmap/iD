@@ -476,8 +476,8 @@ rendererBackgroundSource.Esri = function(data) {
                         vintage: vintage,
                         source: clean(result.features[0].attributes.NICE_NAME),
                         description: clean(result.features[0].attributes.NICE_DESC),
-                        resolution: clean(result.features[0].attributes.SRC_RES),
-                        accuracy: clean(result.features[0].attributes.SRC_ACC)
+                        resolution: clean(+parseFloat(result.features[0].attributes.SRC_RES).toFixed(4)),
+                        accuracy: clean(+parseFloat(result.features[0].attributes.SRC_ACC).toFixed(4))
                     };
 
                     // append units - meters
