@@ -3,10 +3,10 @@
     "type": "combo",
     "label": "Type",
     "options": [
-        "parking_aisle",
         "driveway",
+        "parking_aisle",
         "alley",
-        "emergency_access",
-        "drive-through"
+        "drive-through",
+        "emergency_access"
     ]
 }

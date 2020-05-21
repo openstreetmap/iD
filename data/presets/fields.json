@@ -391,7 +391,7 @@
   "self_service": {"key": "self_service", "type": "check", "label": "Self-Service"},
   "service_rail": {"key": "service", "type": "combo", "label": "Service Type", "strings": {"options": {"spur": "Spur", "yard": "Yard", "siding": "Siding", "crossover": "Crossover"}}},
   "service_times": {"key": "service_times", "type": "text", "label": "Service Times"},
-  "service": {"key": "service", "type": "combo", "label": "Type", "options": ["parking_aisle", "driveway", "alley", "emergency_access", "drive-through"]},
+  "service": {"key": "service", "type": "combo", "label": "Type", "options": ["driveway", "parking_aisle", "alley", "drive-through", "emergency_access"]},
   "service/bicycle": {"key": "service:bicycle:", "type": "multiCombo", "label": "Services"},
   "service/vehicle": {"key": "service:vehicle:", "type": "multiCombo", "label": "Services"},
   "shelter_type": {"key": "shelter_type", "type": "combo", "label": "Type"},
