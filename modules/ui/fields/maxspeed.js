@@ -35,12 +35,13 @@ export function uiFieldMaxspeed(field, context) {
             .merge(wrap);
 
 
-        input = wrap.selectAll('#' + field.domId)
+        input = wrap.selectAll('input.maxspeed-number')
             .data([0]);
 
         input = input.enter()
             .append('input')
             .attr('type', 'text')
+            .attr('class', 'maxspeed-number')
             .attr('id', field.domId)
             .attr('maxlength', context.maxCharsForTagValue() - 4)
             .call(utilNoAuto)
