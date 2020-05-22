@@ -18,24 +18,25 @@ import { osmNode } from '../osm/node';
 import { utilRebind } from '../util/rebind';
 import { utilKeybinding } from '../util';
 
-export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
+export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     var dispatch = d3_dispatch('rejectedSelfIntersection');
 
-    var _origWay = context.entity(wayID);
-
-    var _annotation = t((_origWay.isDegenerate() ?
-        'operations.start.annotation.' :
-        'operations.continue.annotation.') + _origWay.geometry(context.graph())
-    );
-
     var behavior = behaviorDraw(context);
-    behavior.hover().initialNodeID(index ? _origWay.nodes[index] :
-        (_origWay.isClosed() ? _origWay.nodes[_origWay.nodes.length - 2] : _origWay.nodes[_origWay.nodes.length - 1]));
+
+    // Must be set by `drawWay.nodeIndex` before each install of this behavior.
+    var _nodeIndex;
+
+    var _origWay;
+    var _wayGeometry;
+    var _headNodeID;
+    var _annotation;
 
     // The osmNode to be placed.
     // This is temporary and just follows the mouse cursor until an "add" event occurs.
     var _drawNode;
+
+    var _didResolveTempEdit = false;
 
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
@@ -47,7 +48,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
             var way = graph.entity(wayID);
             return graph
                 .replace(_drawNode)
-                .replace(way.addNode(_drawNode.id, index));
+                .replace(way.addNode(_drawNode.id, _nodeIndex));
         }, _annotation);
         context.resumeChangeDispatch();
 
@@ -69,14 +70,6 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
         _drawNode = undefined;
         context.resumeChangeDispatch();
     }
-
-    var _didResolveTempEdit = false;
-
-    // Push an annotated state for undo to return back to.
-    // We must make sure to replace or remove it later.
-    context.pauseChangeDispatch();
-    context.perform(actionNoop(), _annotation);
-    context.resumeChangeDispatch();
 
 
     function keydown() {
@@ -241,6 +234,26 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
 
     var drawWay = function(surface) {
+        _drawNode = undefined;
+        _didResolveTempEdit = false;
+        _origWay = context.entity(wayID);
+        _headNodeID = typeof _nodeIndex === 'number' ? _origWay.nodes[_nodeIndex] :
+            (_origWay.isClosed() ? _origWay.nodes[_origWay.nodes.length - 2] : _origWay.nodes[_origWay.nodes.length - 1]);
+        _wayGeometry = _origWay.geometry(context.graph());
+        _annotation = t((_origWay.isDegenerate() ?
+            'operations.start.annotation.' :
+            'operations.continue.annotation.') + _wayGeometry
+        );
+
+        // Push an annotated state for undo to return back to.
+        // We must make sure to replace or remove it later.
+        context.pauseChangeDispatch();
+        context.perform(actionNoop(), _annotation);
+        context.resumeChangeDispatch();
+
+        behavior.hover()
+            .initialNodeID(_headNodeID);
+
         behavior
             .on('move', move)
             .on('click', drawWay.add)
@@ -279,6 +292,9 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
             context.resumeChangeDispatch();
         }
 
+        _drawNode = undefined;
+        _nodeIndex = undefined;
+
         context.map()
             .on('drawn.draw', null);
 
@@ -301,6 +317,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
 
     function attemptAdd(d, loc, doAdd) {
+
         var didJustAddDrawNode = false;
         if (_drawNode) {
             // move the node to the final loc in case move wasn't called
@@ -353,6 +370,15 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
 
     // Connect the way to an existing node
     drawWay.addNode = function(node, d) {
+
+        // finish drawing if the mapper targets the prior node
+        if (node.id === _headNodeID ||
+            // or the first node when drawing an area
+            (_wayGeometry === 'area' && node.id === _origWay.first())) {
+            drawWay.finish();
+            return;
+        }
+
         attemptAdd(d, node.loc, function() {
             context.replace(
                 function actionReplaceDrawNode(graph) {
@@ -363,7 +389,7 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
                         .replace(graph.entity(wayID).removeNode(_drawNode.id))
                         .remove(_drawNode);
                     return graph
-                        .replace(graph.entity(wayID).addNode(node.id, index));
+                        .replace(graph.entity(wayID).addNode(node.id, _nodeIndex));
                 },
                 _annotation
             );
@@ -418,6 +444,13 @@ export function behaviorDrawWay(context, wayID, index, mode, startGraph) {
             .classed('nope-suppressed', false);
 
         context.enter(modeBrowse(context));
+    };
+
+
+    drawWay.nodeIndex = function(val) {
+        if (!arguments.length) return _nodeIndex;
+        _nodeIndex = val;
+        return drawWay;
     };
 
 
