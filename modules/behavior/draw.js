@@ -22,14 +22,18 @@ export function behaviorDraw(context) {
 
     var keybinding = utilKeybinding('draw');
 
-    var _hover = behaviorHover(context).altDisables(true).ignoreVertex(true)
+    var _hover = behaviorHover(context)
+        .altDisables(true)
+        .ignoreVertex(true)
         .on('hover', context.ui().sidebar.hover);
-    var edit = behaviorEdit(context);
+    var _edit = behaviorEdit(context);
 
-    var closeTolerance = 4;
-    var tolerance = 12;
+    var _closeTolerance = 4;
+    var _tolerance = 12;
     var _mouseLeave = false;
     var _lastMouse = null;
+
+    var _downPointerId;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -58,6 +62,9 @@ export function behaviorDraw(context) {
 
     function pointerdown() {
 
+        if (_downPointerId) return;
+        var _downPointerId = d3_event.pointerId || 'mouse';
+
         var pointerLocGetter = utilFastMouse(this);
 
         var element = d3_select(this);
@@ -67,14 +74,18 @@ export function behaviorDraw(context) {
         element.on(_pointerPrefix + 'move.draw', null);
 
         d3_select(window).on(_pointerPrefix + 'up.draw', function() {
-            var t2 = +new Date();
-            var p2 = pointerLocGetter(d3_event);
-            var dist = geoVecLength(p1, p2);
+
+            if (_downPointerId !== (d3_event.pointerId || 'mouse')) return;
+            _downPointerId = null;
 
             element.on(_pointerPrefix + 'move.draw', pointermove);
             d3_select(window).on(_pointerPrefix + 'up.draw', null);
 
-            if (dist < closeTolerance || (dist < tolerance && (t2 - t1) < 500)) {
+            var t2 = +new Date();
+            var p2 = pointerLocGetter(d3_event);
+            var dist = geoVecLength(p1, p2);
+
+            if (dist < _closeTolerance || (dist < _tolerance && (t2 - t1) < 500)) {
                 // Prevent a quick second click
                 d3_select(window).on('click.draw-block', function() {
                     d3_event.stopPropagation();
@@ -94,6 +105,10 @@ export function behaviorDraw(context) {
 
 
     function pointermove() {
+        if ((d3_event.pointerType && d3_event.pointerType !== 'mouse') ||
+            d3_event.buttons ||
+            _downPointerId) return;
+
         _lastMouse = d3_event;
         dispatch.call('move', this, datum());
     }
@@ -150,7 +165,7 @@ export function behaviorDraw(context) {
         var currSpace = context.map().mouse();
         if (_disableSpace && _lastSpace) {
             var dist = geoVecLength(_lastSpace, currSpace);
-            if (dist > tolerance) {
+            if (dist > _tolerance) {
                 _disableSpace = false;
             }
         }
@@ -196,7 +211,9 @@ export function behaviorDraw(context) {
 
     function behavior(selection) {
         context.install(_hover);
-        context.install(edit);
+        context.install(_edit);
+
+        _downPointerId = null;
 
         keybinding
             .on('⌫', backspace)
@@ -222,7 +239,7 @@ export function behaviorDraw(context) {
     behavior.off = function(selection) {
         context.ui().sidebar.hover.cancel();
         context.uninstall(_hover);
-        context.uninstall(edit);
+        context.uninstall(_edit);
 
         selection
             .on('mouseenter.draw', null)

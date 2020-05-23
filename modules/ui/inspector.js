@@ -52,6 +52,9 @@ export function uiInspector(context) {
         editorPane = wrap.selectAll('.entity-editor-pane');
 
         function shouldDefaultToPresetList() {
+            // always show the inspector on hover
+            if (_state !== 'select') return false;
+
             // can only change preset on single selection
             if (_entityIDs.length !== 1) return false;
 

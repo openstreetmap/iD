@@ -152,8 +152,32 @@ export function uiPopover(klass) {
         var display = _displayType.apply(this, arguments);
 
         if (display === 'hover') {
-            anchor.on(_pointerPrefix + 'enter.popover', show);
-            anchor.on(_pointerPrefix + 'leave.popover', hide);
+            var _lastNonMouseEnterTime;
+            anchor.on(_pointerPrefix + 'enter.popover', function() {
+
+                if (d3_event.pointerType) {
+                    if (d3_event.pointerType !== 'mouse') {
+                        _lastNonMouseEnterTime = d3_event.timeStamp;
+                        // only allow hover behavior for mouse input
+                        return;
+                    } else if (_lastNonMouseEnterTime &&
+                        d3_event.timeStamp - _lastNonMouseEnterTime < 800) {
+                        // HACK: iOS 13.4 sends an erroneous `mouse` type pointerenter
+                        // event for non-mouse interactions right after sending
+                        // the correct type pointerenter event. Workaround by discarding
+                        // any mouse event that occurs immediately after a non-mouse event.
+                        return;
+                    }
+                }
+
+                // don't show if buttons are pressed, e.g. during click and drag of map
+                if (d3_event.buttons !== 0) return;
+
+                show.apply(this, arguments);
+            });
+            anchor.on(_pointerPrefix + 'leave.popover', function() {
+                hide.apply(this, arguments);
+            });
 
         } else if (display === 'clickFocus') {
             anchor
@@ -179,15 +203,11 @@ export function uiPopover(klass) {
 
 
     function show() {
-        var displayType = _displayType.apply(this, arguments);
-        if (displayType === 'hover' && d3_event.pointerType === 'touch') {
-            // don't show hover popovers on touch devices
-            return;
-        }
         var anchor = d3_select(this);
         var popoverSelection = anchor.selectAll('.popover-' + _id);
 
-        if (popoverSelection.empty()) {   // popover was removed somehow, put it back
+        if (popoverSelection.empty()) {
+            // popover was removed somehow, put it back
             anchor.call(popover.destroy);
             anchor.each(setup);
             popoverSelection = anchor.selectAll('.popover-' + _id);
@@ -195,6 +215,7 @@ export function uiPopover(klass) {
 
         popoverSelection.classed('in', true);
 
+        var displayType = _displayType.apply(this, arguments);
         if (displayType === 'clickFocus') {
             anchor.classed('active', true);
             popoverSelection.node().focus();
@@ -212,8 +233,9 @@ export function uiPopover(klass) {
         }
 
         updatePosition.apply(this, arguments);
-        // hack: update twice to fix instances where the absolute offset is
+        // hack: update multiple times to fix instances where the absolute offset is
         // set before the dynamic popover size is calculated by the browser
+        updatePosition.apply(this, arguments);
         updatePosition.apply(this, arguments);
     }
 

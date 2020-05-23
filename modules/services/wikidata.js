@@ -85,8 +85,12 @@ export default {
 
 
     languagesToQuery: function() {
+        var localeCode = localizer.localeCode().toLowerCase();
+        // HACK: en-us isn't a wikidata language. We should really be filtering by
+        // the languages known to be supported by wikidata.
+        if (localeCode === 'en-us') localeCode = 'en';
         return utilArrayUniq([
-            localizer.localeCode().toLowerCase(),
+            localeCode,
             localizer.languageCode().toLowerCase(),
             'en'
         ]);

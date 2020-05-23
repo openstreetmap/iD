@@ -14,6 +14,7 @@ import { utilGetDimensions } from '../util/dimensions';
 import { uiAccount } from './account';
 import { uiAttribution } from './attribution';
 import { uiContributors } from './contributors';
+import { uiEditMenu } from './edit_menu';
 import { uiFeatureInfo } from './feature_info';
 import { uiFlash } from './flash';
 import { uiFullScreen } from './full_screen';
@@ -318,10 +319,10 @@ export function uiInit(context) {
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
             .on('↓', pan([0, -panPixels]))
-            .on(['⇧←', uiCmd('⌘←')], pan([map.dimensions()[0], 0]))
-            .on(['⇧↑', uiCmd('⌘↑')], pan([0, map.dimensions()[1]]))
-            .on(['⇧→', uiCmd('⌘→')], pan([-map.dimensions()[0], 0]))
-            .on(['⇧↓', uiCmd('⌘↓')], pan([0, -map.dimensions()[1]]))
+            .on(uiCmd('⌘←'), pan([map.dimensions()[0], 0]))
+            .on(uiCmd('⌘↑'), pan([0, map.dimensions()[1]]))
+            .on(uiCmd('⌘→'), pan([-map.dimensions()[0], 0]))
+            .on(uiCmd('⌘↓'), pan([0, -map.dimensions()[1]]))
             .on(uiCmd('⌘' + t('background.key')), function quickSwitch() {
                 if (d3_event) {
                     d3_event.stopImmediatePropagation();
@@ -398,6 +399,7 @@ export function uiInit(context) {
 
         function pan(d) {
             return function() {
+                if (d3_event.shiftKey) return;
                 if (context.container().select('.combobox').size()) return;
                 d3_event.preventDefault();
                 context.map().pan(d, 100);
@@ -545,6 +547,48 @@ export function uiInit(context) {
                     d3_select(this).style('display', 'none');
                 });
         }
+    };
+
+
+    var _editMenu; // uiEditMenu
+
+    ui.showEditMenu = function(anchorPoint, triggerType, operations) {
+
+        // remove any displayed menu
+        ui.closeEditMenu();
+
+        if (!operations && context.mode().operations) operations = context.mode().operations();
+        if (!operations || !operations.length) return;
+
+        // disable menu if in wide selection, for example
+        if (!context.map().editableDataEnabled()) return;
+
+        var surfaceNode = context.surface().node();
+        if (surfaceNode.focus) {   // FF doesn't support it
+            // focus the surface or else clicking off the menu may not trigger modeBrowse
+            surfaceNode.focus();
+        }
+
+        // don't load the menu until it's needed
+        if (!_editMenu) _editMenu = uiEditMenu(context);
+
+        operations.forEach(function(operation) {
+            if (operation.point) operation.point(anchorPoint);
+        });
+
+        _editMenu
+            .anchorLoc(anchorPoint)
+            .triggerType(triggerType)
+            .operations(operations);
+
+        // render the menu
+        context.map().supersurface.call(_editMenu);
+    };
+
+    ui.closeEditMenu = function() {
+        // remove any existing menu no matter how it was added
+        context.map().supersurface
+            .select('.edit-menu').remove();
     };
 
 

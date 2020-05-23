@@ -11,7 +11,10 @@ export function uiEditMenu(context) {
     var _operations = [];
     // the position the menu should be displayed relative to
     var _anchorLoc = [0, 0];
+    // a string indicating how the menu was opened
+    var _triggerType = '';
 
+    var _vpTopMargin = 85; // viewport top margin
     var _vpBottomMargin = 45; // viewport bottom margin
     var _vpSideMargin = 35;   // viewport side margin
 
@@ -33,15 +36,30 @@ export function uiEditMenu(context) {
         var offset = [0, 0];
         var viewport = context.surfaceRect();
 
+        // position the menu above the anchor for stylus and finger input
+        // since the mapper's hand likely obscures the screen below the anchor
+        var menuTop = _triggerType.includes('touch') || _triggerType.includes('pen');
+
         var menuLeft = displayOnLeft(viewport);
 
         offset[0] = menuLeft ? -1 * (_menuSideMargin + _menuWidth) : _menuSideMargin;
 
         var menuHeight = _verticalPadding * 2 + _operations.length * _buttonHeight;
 
-        if (_anchorLoc[1] + menuHeight > (viewport.height - _vpBottomMargin)) {
-            // menu is near bottom viewport edge, shift upwards
-            offset[1] = -1 * (_anchorLoc[1] + menuHeight - viewport.height + _vpBottomMargin);
+        if (menuTop) {
+            if (_anchorLoc[1] - menuHeight < _vpTopMargin) {
+                // menu is near top viewport edge, shift downward
+                offset[1] = -_anchorLoc[1] + _vpTopMargin;
+            } else {
+                offset[1] = -menuHeight;
+            }
+        } else {
+            if (_anchorLoc[1] + menuHeight > (viewport.height - _vpBottomMargin)) {
+                // menu is near bottom viewport edge, shift upwards
+                offset[1] = -_anchorLoc[1] - menuHeight + viewport.height - _vpBottomMargin;
+            } else {
+                offset[1] = 0;
+            }
         }
 
         var origin = geoVecAdd(_anchorLoc, offset);
@@ -91,7 +109,8 @@ export function uiEditMenu(context) {
         }
 
         function pointerdown() {
-            d3_event.stopPropagation();  // https://github.com/openstreetmap/iD/issues/1869
+            // don't let button presses also act as map input - #1869
+            d3_event.stopPropagation();
         }
     };
 
@@ -149,6 +168,12 @@ export function uiEditMenu(context) {
     editMenu.anchorLoc = function(val) {
         if (!arguments.length) return _anchorLoc;
         _anchorLoc = val;
+        return editMenu;
+    };
+
+    editMenu.triggerType = function(val) {
+        if (!arguments.length) return _triggerType;
+        _triggerType = val;
         return editMenu;
     };
 

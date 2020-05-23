@@ -1,0 +1,11 @@
+{
+    "key": "direction",
+    "type": "combo",
+    "label": "Direction Affected",
+    "strings": {
+        "options": {
+          "forward": "Forward",
+          "backward": "Backward"
+        }
+    }
+}

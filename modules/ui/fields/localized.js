@@ -404,31 +404,32 @@ export function uiFieldLocalized(field, context) {
 
 
     function changeLang(d) {
-        var lang = utilGetSetValue(d3_select(this));
-        var t = {};
-        var language = _languagesArray.find(function(d) {
-            return (d.localName && d.localName.toLowerCase() === lang.toLowerCase()) ||
-                d.label.toLowerCase() === lang.toLowerCase() ||
-                (d.nativeName && d.nativeName.toLowerCase() === lang.toLowerCase());
-        });
+        var tags = {};
 
+        // make sure unrecognized suffixes are lowercase - #7156
+        var lang = utilGetSetValue(d3_select(this)).toLowerCase();
+
+        var language = _languagesArray.find(function(d) {
+            return d.label.toLowerCase() === lang ||
+                (d.localName && d.localName.toLowerCase() === lang) ||
+                (d.nativeName && d.nativeName.toLowerCase() === lang);
+        });
         if (language) lang = language.code;
 
         if (d.lang && d.lang !== lang) {
-            t[key(d.lang)] = undefined;
+            tags[key(d.lang)] = undefined;
         }
 
-        var value = utilGetSetValue(d3_select(this.parentNode)
-            .selectAll('.localized-value'));
+        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
 
         if (lang && value) {
-            t[key(lang)] = value;
+            tags[key(lang)] = value;
         } else if (lang && _wikiTitles && _wikiTitles[d.lang]) {
-            t[key(lang)] = _wikiTitles[d.lang];
+            tags[key(lang)] = _wikiTitles[d.lang];
         }
 
         d.lang = lang;
-        dispatch.call('change', this, t);
+        dispatch.call('change', this, tags);
     }
 
 

@@ -34,12 +34,12 @@ export function modeRotate(context, entityIDs) {
     var keybinding = utilKeybinding('rotate');
     var behaviors = [
         behaviorEdit(context),
-        operationCircularize(entityIDs, context).behavior,
-        operationDelete(entityIDs, context).behavior,
-        operationMove(entityIDs, context).behavior,
-        operationOrthogonalize(entityIDs, context).behavior,
-        operationReflectLong(entityIDs, context).behavior,
-        operationReflectShort(entityIDs, context).behavior
+        operationCircularize(context, entityIDs).behavior,
+        operationDelete(context, entityIDs).behavior,
+        operationMove(context, entityIDs).behavior,
+        operationOrthogonalize(context, entityIDs).behavior,
+        operationReflectLong(context, entityIDs).behavior,
+        operationReflectShort(context, entityIDs).behavior
     ];
     var annotation = entityIDs.length === 1 ?
         t('operations.rotate.annotation.' + context.graph().geometry(entityIDs[0])) :

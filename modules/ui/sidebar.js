@@ -1,12 +1,13 @@
 import _throttle from 'lodash-es/throttle';
 
-import { drag as d3_drag } from 'd3-drag';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
-
 import {
-    event as d3_event
+    event as d3_event,
+    select as d3_select
 } from 'd3-selection';
+
 import { utilArrayIdentical } from '../util/array';
+import { utilFastMouse } from '../util';
 import { osmEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
@@ -31,6 +32,9 @@ export function uiSidebar(context) {
     var _wasNote = false;
     var _wasQaItem = false;
 
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
 
     function sidebar(selection) {
         var container = context.container();
@@ -39,70 +43,106 @@ export function uiSidebar(context) {
         var containerWidth;
         var dragOffset;
 
-        var resizer = selection
-            .append('div')
-            .attr('class', 'sidebar-resizer');
-
         // Set the initial width constraints
         selection
             .style('min-width', minWidth + 'px')
             .style('max-width', '400px')
             .style('width', '33.3333%');
 
-        resizer.call(d3_drag()
-            .container(container.node())
-            .on('start', function() {
-                // offset from edge of sidebar-resizer
-                dragOffset = d3_event.sourceEvent.offsetX - 1;
+        var resizer = selection
+            .append('div')
+            .attr('class', 'sidebar-resizer')
+            .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
 
-                sidebarWidth = selection.node().getBoundingClientRect().width;
-                containerWidth = container.node().getBoundingClientRect().width;
+        var downPointerId, lastClientX, containerLocGetter;
+
+        function pointerdown() {
+            if (downPointerId) return;
+
+            downPointerId = d3_event.pointerId || 'mouse';
+
+            lastClientX = d3_event.clientX;
+
+            containerLocGetter = utilFastMouse(container.node());
+
+            // offset from edge of sidebar-resizer
+            dragOffset = utilFastMouse(resizer.node())(d3_event)[0] - 1;
+
+            sidebarWidth = selection.node().getBoundingClientRect().width;
+            containerWidth = container.node().getBoundingClientRect().width;
+            var widthPct = (sidebarWidth / containerWidth) * 100;
+            selection
+                .style('width', widthPct + '%')    // lock in current width
+                .style('max-width', '85%');        // but allow larger widths
+
+            resizer.classed('dragging', true);
+
+            d3_select(window)
+                .on('touchmove.sidebar-resizer', function() {
+                    // disable page scrolling while resizing on touch input
+                    d3_event.preventDefault();
+                }, { passive: false })
+                .on(_pointerPrefix + 'move.sidebar-resizer', pointermove)
+                .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', pointerup);
+        }
+
+        function pointermove() {
+
+            if (downPointerId !== (d3_event.pointerId || 'mouse')) return;
+
+            d3_event.preventDefault();
+
+            var dx = d3_event.clientX - lastClientX;
+
+            lastClientX = d3_event.clientX;
+
+            var isRTL = (localizer.textDirection() === 'rtl');
+            var scaleX = isRTL ? 0 : 1;
+            var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
+
+            var x = containerLocGetter(d3_event)[0] - dragOffset;
+            sidebarWidth = isRTL ? containerWidth - x : x;
+
+            var isCollapsed = selection.classed('collapsed');
+            var shouldCollapse = sidebarWidth < minWidth;
+
+            selection.classed('collapsed', shouldCollapse);
+
+            if (shouldCollapse) {
+                if (!isCollapsed) {
+                    selection
+                        .style(xMarginProperty, '-400px')
+                        .style('width', '400px');
+
+                    context.ui().onResize([(sidebarWidth - dx) * scaleX, 0]);
+                }
+
+            } else {
                 var widthPct = (sidebarWidth / containerWidth) * 100;
                 selection
-                    .style('width', widthPct + '%')    // lock in current width
-                    .style('max-width', '85%');        // but allow larger widths
+                    .style(xMarginProperty, null)
+                    .style('width', widthPct + '%');
 
-                resizer.classed('dragging', true);
-            })
-            .on('drag', function() {
-                var isRTL = (localizer.textDirection() === 'rtl');
-                var scaleX = isRTL ? 0 : 1;
-                var xMarginProperty = isRTL ? 'margin-right' : 'margin-left';
-
-                var x = d3_event.x - dragOffset;
-                sidebarWidth = isRTL ? containerWidth - x : x;
-
-                var isCollapsed = selection.classed('collapsed');
-                var shouldCollapse = sidebarWidth < minWidth;
-
-                selection.classed('collapsed', shouldCollapse);
-
-                if (shouldCollapse) {
-                    if (!isCollapsed) {
-                        selection
-                            .style(xMarginProperty, '-400px')
-                            .style('width', '400px');
-
-                        context.ui().onResize([(sidebarWidth - d3_event.dx) * scaleX, 0]);
-                    }
-
+                if (isCollapsed) {
+                    context.ui().onResize([-sidebarWidth * scaleX, 0]);
                 } else {
-                    var widthPct = (sidebarWidth / containerWidth) * 100;
-                    selection
-                        .style(xMarginProperty, null)
-                        .style('width', widthPct + '%');
-
-                    if (isCollapsed) {
-                        context.ui().onResize([-sidebarWidth * scaleX, 0]);
-                    } else {
-                        context.ui().onResize([-d3_event.dx * scaleX, 0]);
-                    }
+                    context.ui().onResize([-dx * scaleX, 0]);
                 }
-            })
-            .on('end', function() {
-                resizer.classed('dragging', false);
-            })
-        );
+            }
+        }
+
+        function pointerup() {
+            if (downPointerId !== (d3_event.pointerId || 'mouse')) return;
+
+            downPointerId = null;
+
+            resizer.classed('dragging', false);
+
+            d3_select(window)
+                .on('touchmove.sidebar-resizer', null)
+                .on(_pointerPrefix + 'move.sidebar-resizer', null)
+                .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
+        }
 
         var featureListWrap = selection
             .append('div')

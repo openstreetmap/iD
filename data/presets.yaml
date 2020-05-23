@@ -235,6 +235,9 @@ en:
       attraction:
         # attraction=*
         label: Type
+      automated:
+        # automated=*
+        label: Automated
       baby_feeding:
         # baby_feeding=*
         label: Baby Nursing Area
@@ -469,6 +472,9 @@ en:
       collection_times:
         # collection_times=*
         label: Collection Times
+      collector:
+        # collector=*
+        label: Items
       colour:
         # colour=*
         label: Color
@@ -740,6 +746,14 @@ en:
           backward: Backward
           # direction=both
           both: Both / All
+          # direction=forward
+          forward: Forward
+      direction_vertex_dual:
+        # direction=*
+        label: Direction Affected
+        options:
+          # direction=backward
+          backward: Backward
           # direction=forward
           forward: Forward
       dispensing:
@@ -1646,6 +1660,8 @@ en:
           lane: Roadside Lane
           # parking=multi-storey
           multi-storey: Multilevel
+          # parking=rooftop
+          rooftop: Rooftop
           # parking=sheds
           sheds: Sheds
           # parking=surface
@@ -3311,6 +3327,11 @@ en:
         name: Gambling Hall
         # 'terms: betting,bingo,blackjack,casino,craps,gamble,gambling,keno,lottery,pachinko,poker,roulette,slot machines,slots'
         terms: '<translate with synonyms or related terms for ''Gambling Hall'', separated by commas>'
+      amenity/give_box:
+        # amenity=give_box
+        name: Free Box
+        # 'terms: donations,free box,free table,freebox,give box,give shelf,givebox,library,share shelf'
+        terms: '<translate with synonyms or related terms for ''Free Box'', separated by commas>'
       amenity/grave_yard:
         # amenity=grave_yard
         name: Graveyard
@@ -4681,8 +4702,8 @@ en:
         name: Locksmith
       craft/metal_construction:
         # craft=metal_construction
-        name: Metal Construction
-        terms: '<translate with synonyms or related terms for ''Metal Construction'', separated by commas>'
+        name: Metalworker
+        terms: '<translate with synonyms or related terms for ''Metalworker'', separated by commas>'
       craft/painter:
         # craft=painter
         name: Painter
@@ -6207,6 +6228,11 @@ en:
         name: Clearcut Forest
         # 'terms: cut,forest,lumber,tree,wood'
         terms: '<translate with synonyms or related terms for ''Clearcut Forest'', separated by commas>'
+      man_made/courtyard:
+        # man_made=courtyard
+        name: Courtyard
+        # 'terms: court,enclosed open air,quadrangle,yard'
+        terms: '<translate with synonyms or related terms for ''Courtyard'', separated by commas>'
       man_made/crane:
         # man_made=crane
         name: Crane
@@ -7801,6 +7827,11 @@ en:
         # shop=coffee
         name: Coffee Store
         terms: '<translate with synonyms or related terms for ''Coffee Store'', separated by commas>'
+      shop/collector:
+        # shop=collector
+        name: Collectibles Shop
+        # 'terms: antiques,coins,collection,collectors,comics,dolls,figurines,numismatics,philately,stamps,thrift'
+        terms: '<translate with synonyms or related terms for ''Collectibles Shop'', separated by commas>'
       shop/computer:
         # shop=computer
         name: Computer Store

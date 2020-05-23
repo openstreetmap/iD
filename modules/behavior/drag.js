@@ -7,6 +7,7 @@ import {
     selection as d3_selection
 } from 'd3-selection';
 
+import { geoVecLength } from '../geo';
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
@@ -29,11 +30,17 @@ import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../
 
 export function behaviorDrag() {
     var dispatch = d3_dispatch('start', 'move', 'end');
+
+    // see also behaviorSelect
+    var _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
+    var _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
+
     var _origin = null;
     var _selector = '';
     var _event;
     var _target;
     var _surface;
+    var _pointerId;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -49,12 +56,6 @@ export function behaviorDrag() {
         };
 
 
-    function d3_eventCancel() {
-        d3_event.stopPropagation();
-        d3_event.preventDefault();
-    }
-
-
     function eventOf(thiz, argumentz) {
         return function(e1) {
             e1.target = behavior;
@@ -64,13 +65,17 @@ export function behaviorDrag() {
 
 
     function pointerdown() {
+
+        if (_pointerId) return;
+
+        _pointerId = d3_event.pointerId || 'mouse';
+
         _target = this;
         _event = eventOf(_target, arguments);
 
         // only force reflow once per drag
         var pointerLocGetter = utilFastMouse(_surface || _target.parentNode);
 
-        var eventTarget = d3_event.target;
         var offset;
         var startOrigin = pointerLocGetter(d3_event);
         var started = false;
@@ -91,20 +96,29 @@ export function behaviorDrag() {
 
 
         function pointermove() {
+            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
+
             var p = pointerLocGetter(d3_event);
-            var dx = p[0] - startOrigin[0];
-            var dy = p[1] - startOrigin[1];
-
-            if (dx === 0 && dy === 0)
-                return;
-
-            startOrigin = p;
-            d3_eventCancel();
 
             if (!started) {
+                var dist = geoVecLength(startOrigin,  p);
+                var tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
+                // don't start until the drag has actually moved somewhat
+                if (dist < tolerance) return;
+
                 started = true;
                 _event({ type: 'start' });
+
+            // Don't send a `move` event in the same cycle as `start` since dragging
+            // a midpoint will convert the target to a node.
             } else {
+
+                startOrigin = p;
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+
+                var dx = p[0] - startOrigin[0];
+                var dy = p[1] - startOrigin[1];
                 _event({
                     type: 'move',
                     point: [p[0] + offset[0],  p[1] + offset[1]],
@@ -115,14 +129,15 @@ export function behaviorDrag() {
 
 
         function pointerup() {
+            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
+
+            _pointerId = null;
+
             if (started) {
                 _event({ type: 'end' });
 
-                d3_eventCancel();
-                if (d3_event.target === eventTarget) {
-                    d3_select(window)
-                        .on('click.drag', click, true);
-                }
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
             }
 
             d3_select(window)
@@ -131,17 +146,11 @@ export function behaviorDrag() {
 
             selectEnable();
         }
-
-
-        function click() {
-            d3_eventCancel();
-            d3_select(window)
-                .on('click.drag', null);
-        }
     }
 
 
     function behavior(selection) {
+        _pointerId = null;
         var matchesSelector = utilPrefixDOMProperty('matchesSelector');
         var delegate = pointerdown;
 

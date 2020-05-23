@@ -3,6 +3,7 @@ import { event as d3_event, select as d3_select } from 'd3-selection';
 import { geoExtent, geoPointInPolygon } from '../geo';
 import { modeSelect } from '../modes/select';
 import { uiLasso } from '../ui/lasso';
+import { utilArrayIntersection } from '../util/array';
 
 
 export function behaviorLasso(context) {
@@ -57,6 +58,33 @@ export function behaviorLasso(context) {
                 return entity.type === 'node' &&
                     geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
+            });
+
+            // sort the lassoed nodes as best we can
+            intersects.sort(function(node1, node2) {
+                var parents1 = graph.parentWays(node1);
+                var parents2 = graph.parentWays(node2);
+                if (parents1.length && parents2.length) {
+                    // both nodes are vertices
+
+                    var sharedParents = utilArrayIntersection(parents1, parents2);
+                    if (sharedParents.length) {
+                        var sharedParentNodes = sharedParents[0].nodes;
+                        // vertices are members of the same way; sort them in their listed order
+                        return sharedParentNodes.indexOf(node1.id) -
+                            sharedParentNodes.indexOf(node2.id);
+                    } else {
+                        // vertices do not share a way; group them by their respective parent ways
+                        return parseFloat(parents1[0].id.slice(1)) -
+                            parseFloat(parents2[0].id.slice(1));
+                    }
+
+                } else if (parents1.length || parents2.length) {
+                    // only one node is a vertex; sort standalone points before vertices
+                    return parents1.length - parents2.length;
+                }
+                // both nodes are standalone points; sort left to right
+                return node1.loc[0] - node2.loc[0];
             });
 
             return intersects.map(function(entity) { return entity.id; });

@@ -5,7 +5,7 @@ import { modeRotate } from '../modes/rotate';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationRotate(selectedIDs, context) {
+export function operationRotate(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });

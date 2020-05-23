@@ -5,7 +5,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
-export function operationStraighten(selectedIDs, context) {
+export function operationStraighten(context, selectedIDs) {
     var wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
     var nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
 

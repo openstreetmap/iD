@@ -57,6 +57,7 @@ export function uiTooltip(klass) {
             headingSelect.enter()
                 .append('div')
                 .attr('class', 'tooltip-heading')
+                .merge(headingSelect)
                 .html(heading);
 
             var textSelect = selection
@@ -69,6 +70,7 @@ export function uiTooltip(klass) {
             textSelect.enter()
                 .append('div')
                 .attr('class', 'tooltip-text')
+                .merge(textSelect)
                 .html(text);
 
             var keyhintWrap = selection

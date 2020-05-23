@@ -68,14 +68,12 @@ export function uiFieldWikidata(field, context) {
             .append('li')
             .attr('class', 'wikidata-search');
 
-        _searchInput = searchRowEnter
+        searchRowEnter
             .append('input')
             .attr('type', 'text')
             .attr('id', field.domId)
             .style('flex', '1')
-            .call(utilNoAuto);
-
-        _searchInput
+            .call(utilNoAuto)
             .on('focus', function() {
                 var node = d3_select(this).node();
                 node.setSelectionRange(0, node.value.length);
@@ -102,6 +100,10 @@ export function uiFieldWikidata(field, context) {
                 d3_event.preventDefault();
                 if (_wikiURL) window.open(_wikiURL, '_blank');
             });
+
+        searchRow = searchRow.merge(searchRowEnter);
+
+        _searchInput = searchRow.select('input');
 
         var wikidataProperties = ['description', 'identifier'];
 

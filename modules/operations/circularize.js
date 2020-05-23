@@ -4,7 +4,7 @@ import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationCircularize(selectedIDs, context) {
+export function operationCircularize(context, selectedIDs) {
     var _extent;
     var _actions = selectedIDs.map(getAction).filter(Boolean);
     var _amount = _actions.length === 1 ? 'single' : 'multiple';
