@@ -153,6 +153,24 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
+        var hoverModeSelect = function hoverModeSelect(datum) {
+            context.container().selectAll('.feature-list-item').classed('hover', false);
+
+            if (context.mode().selectedIDs().length > 1 
+                && (datum instanceof osmEntity)){
+                
+                var elements = context.container().selectAll('.feature-list-item')
+                    .filter(function (node) {
+                        return node.id === datum.id;
+                });
+                
+                if (elements.size() > 0){
+                    elements.classed('hover', true);
+                }
+            }
+        }
+
+        sidebar.hoverModeSelect = _throttle(hoverModeSelect, 200);
 
         function hover(datum) {
             if (datum && datum.__featurehash__) {   // hovering on data
