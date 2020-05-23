@@ -153,7 +153,7 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
-        var hoverModeSelect = function hoverModeSelect(datum) {
+        var hoverModeSelect = function(datum) {
             context.container().selectAll('.feature-list-item').classed('hover', false);
 
             if (context.mode().selectedIDs().length > 1 
@@ -164,7 +164,7 @@ export function uiSidebar(context) {
                         return node.id === datum.id;
                 });
                 
-                if (elements.size() > 0){
+                if (!elements.empty()){
                     elements.classed('hover', true);
                 }
             }
