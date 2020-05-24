@@ -1,7 +1,18 @@
-import { t } from '../core/localizer';
 import { osmEntity, osmNote } from '../osm';
 import { svgIcon } from '../svg/icon';
 
+/** @param {Date} date @returns {string} */
+function timeSince(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    const s = n => Math.floor(seconds / n);
+
+    if (s(60*60*24*365) > 1) return s(60*60*24*365) + ' years';
+    if (s(60*60*24*30) > 1) return s(60*60*24*30) + ' months';
+    if (s(60*60*24) > 1) return s(60*60*24) + ' days';
+    if (s(60*60) > 1) return s(60*60) + ' hours';
+    if (s(60) > 1) return s(60) + ' minutes';
+    return s(1) + ' seconds';
+}
 
 export function uiViewOnOSM(context) {
     var _what;   // an osmEntity or osmNote
@@ -33,7 +44,7 @@ export function uiViewOnOSM(context) {
 
         linkEnter
             .append('span')
-            .text(t('inspector.view_on_osm'));
+            .text(`Last modified ${timeSince(new Date(_what.timestamp))} ago by ${_what.user}`);
     }
 
 
