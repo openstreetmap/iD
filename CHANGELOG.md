@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
 * Always take reduced map size due to open side panels into account when zooming to selected entities
 * Limit landuse tags that are considered for "Landuse" area features ([#11184], thanks [@youssefelzedy])
+* When a feature is selected, show when and who last modified it ([#7629], thanks [@k-yle])
 * Render climbing routes and via ferrata ways as dotted lines ([#11133], thanks [@harahu])
 #### :scissors: Operations
 #### :camera: Street-Level
@@ -64,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Add signatures audit to CI build pipeline and pin github action's versions ([#11103], thanks [@Harvester57])
 
+[#7629]: https://github.com/openstreetmap/iD/pull/7629
 [#8440]: https://github.com/openstreetmap/iD/pull/8440
 [#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
