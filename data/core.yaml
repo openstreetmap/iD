@@ -564,6 +564,7 @@ en:
       key: Z
       title: Zoom To Selection
     show_more: Show More
+    last_modified: Last modified {timeago} by {user}
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
