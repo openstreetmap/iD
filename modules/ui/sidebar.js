@@ -156,19 +156,19 @@ export function uiSidebar(context) {
         var hoverModeSelect = function(datum) {
             context.container().selectAll('.feature-list-item').classed('hover', false);
 
-            if (context.mode().selectedIDs().length > 1 
+            if (context.mode().selectedIDs().length > 1
                 && (datum instanceof osmEntity)){
-                
+
                 var elements = context.container().selectAll('.feature-list-item')
                     .filter(function (node) {
                         return node.id === datum.id;
                 });
-                
+
                 if (!elements.empty()){
                     elements.classed('hover', true);
                 }
             }
-        }
+        };
 
         sidebar.hoverModeSelect = _throttle(hoverModeSelect, 200);
 
