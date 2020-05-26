@@ -5754,6 +5754,10 @@
                     "name": "Green Waste Container",
                     "terms": "biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap"
                 },
+                "amenity/refugee_site": {
+                    "name": "Refugee Camp",
+                    "terms": "displaced people,evacuees,migrants,ngo,refugee site"
+                },
                 "amenity/research_institute": {
                     "name": "Research Institute Grounds",
                     "terms": "applied research,experimentation,r&d,r & d,r and d,research and development,research institution,research laboratory,research labs"

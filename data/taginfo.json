@@ -191,6 +191,7 @@
     {"key": "recycling_type", "value": "container", "description": "🄿 Recycling Container, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/recycling-15.svg"},
     {"key": "recycling:electrical_items", "value": "yes", "description": "🄿 E-Waste Container", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/recycling-15.svg"},
     {"key": "recycling:green_waste", "value": "yes", "description": "🄿 Green Waste Container", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/recycling-15.svg"},
+    {"key": "amenity", "value": "refugee_site", "description": "🄿 Refugee Camp", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/the-noun-project/2120771.svg"},
     {"key": "amenity", "value": "research_institute", "description": "🄿 Research Institute Grounds", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-flask.svg"},
     {"key": "amenity", "value": "restaurant", "description": "🄿 Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-15.svg"},
     {"key": "cuisine", "value": "american", "description": "🄿 American Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-15.svg"},

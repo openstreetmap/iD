@@ -3648,6 +3648,11 @@ en:
         name: Recycling Container
         # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
+      amenity/refugee_site:
+        # amenity=refugee_site
+        name: Refugee Camp
+        # 'terms: displaced people,evacuees,migrants,ngo,refugee site'
+        terms: '<translate with synonyms or related terms for ''Refugee Camp'', separated by commas>'
       amenity/research_institute:
         # amenity=research_institute
         name: Research Institute Grounds
