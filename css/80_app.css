@@ -3996,6 +3996,8 @@ img.tile {
     -ms-user-select: none;
     user-select: none;
 
+    pointer-events: none;
+
     -webkit-user-drag: none;
 
     opacity: 0;
