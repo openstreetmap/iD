@@ -41,7 +41,7 @@ export function modeSelect(context, selectedIDs) {
     var behaviors = [
         behaviorPaste(context),
         breatheBehavior,
-        behaviorHover(context),
+        behaviorHover(context).on('hover', context.ui().sidebar.hoverModeSelect),
         behaviorSelect(context),
         behaviorLasso(context),
         modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior,
