@@ -17,6 +17,8 @@ export function behaviorSelect(context) {
     var _downPointers = {};
     var _longPressTimeout = null;
     var _lastInteractionType = null;
+    // the id of the down pointer that's enabling multiselection while down
+    var _multiselectionPointerId = null;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -87,7 +89,7 @@ export function behaviorSelect(context) {
 
 
     function pointerdown() {
-        var id = d3_event.pointerId || 'mouse';
+        var id = (d3_event.pointerId || 'mouse').toString();
 
         cancelLongPress();
 
@@ -118,7 +120,7 @@ export function behaviorSelect(context) {
 
 
     function pointermove() {
-        var id = d3_event.pointerId || 'mouse';
+        var id = (d3_event.pointerId || 'mouse').toString();
         if (_downPointers[id]) {
             _downPointers[id].lastEvent = d3_event;
         }
@@ -132,12 +134,17 @@ export function behaviorSelect(context) {
 
 
     function pointerup() {
-        var id = d3_event.pointerId || 'mouse';
+        var id = (d3_event.pointerId || 'mouse').toString();
         var pointer = _downPointers[id];
         if (!pointer) return;
 
         delete _downPointers[id];
 
+        if (_multiselectionPointerId === id) {
+            _multiselectionPointerId = null;
+        }
+
+        // long-pressed pointers already sent a click, so don't send another
         if (pointer.longPressed) return;
 
         click(pointer.firstEvent, d3_event);
@@ -183,12 +190,26 @@ export function behaviorSelect(context) {
             return;
         }
 
-        var datum = lastEvent.target.__data__;
-        // only support multiselect if data is already selected
-        var isMultiselect = context.mode().id === 'select' &&
-            ((d3_event && d3_event.shiftKey) || context.surface().select('.lasso').node() || isPointerDownOnSelection());
+        var targetDatum = lastEvent.target.__data__;
 
-        processClick(datum, isMultiselect, p2);
+        if (!_multiselectionPointerId) {
+            // If a different pointer than the one triggering this click is down on the
+            // selection, treat this and all future clicks as multiselection until that
+            // pointer is raised.
+            var selectionPointer = context.mode().id === 'select' && pointerDownOnSelection();
+            if (selectionPointer) {
+                _multiselectionPointerId = selectionPointer;
+            }
+        }
+
+        // only support multiselect if data is already selected
+        var isMultiselect = context.mode().id === 'select' && (
+            (d3_event && d3_event.shiftKey) ||
+            context.surface().select('.lasso').node() ||
+            _multiselectionPointerId
+        );
+
+        processClick(targetDatum, isMultiselect, p2);
 
         function mapContains(event) {
             var rect = mapNode.getBoundingClientRect();
@@ -200,16 +221,16 @@ export function behaviorSelect(context) {
     }
 
 
-    function isPointerDownOnSelection() {
+    function pointerDownOnSelection() {
         var selectedIds = context.mode().id === 'select' && context.mode().selectedIDs();
         for (var id in _downPointers) {
             if (id === 'spacebar') continue;
 
             var datum = _downPointers[id].firstEvent.target.__data__;
             var entity = (datum && datum.properties && datum.properties.entity) || datum;
-            if (selectedIds.indexOf(entity.id) !== -1) return true;
+            if (selectedIds.indexOf(entity.id) !== -1) return id;
         }
-        return false;
+        return null;
     }
 
 
