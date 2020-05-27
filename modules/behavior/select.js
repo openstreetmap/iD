@@ -78,7 +78,7 @@ export function behaviorSelect(context) {
             if (pointer) {
                 delete _downPointers.spacebar;
 
-                if (pointer.longPressed) return;
+                if (pointer.done) return;
 
                 d3_event.preventDefault();
                 _lastInteractionType = 'spacebar';
@@ -108,7 +108,10 @@ export function behaviorSelect(context) {
         var pointer = _downPointers[id];
         if (!pointer) return;
 
-        pointer.longPressed = true;
+        for (var i in _downPointers) {
+            // don't allow this or any currently down pointer to trigger another click
+            _downPointers[i].done = true;
+        }
 
         // treat long presses like right-clicks
         _longPressTimeout = null;
@@ -144,8 +147,7 @@ export function behaviorSelect(context) {
             _multiselectionPointerId = null;
         }
 
-        // long-pressed pointers already sent a click, so don't send another
-        if (pointer.longPressed) return;
+        if (pointer.done) return;
 
         click(pointer.firstEvent, d3_event);
     }
@@ -249,7 +251,8 @@ export function behaviorSelect(context) {
 
         var newMode;
 
-        if (datum instanceof osmEntity) {    // clicked an entity..
+        if (datum instanceof osmEntity) {
+            // targeting an entity
             var selectedIDs = context.selectedIDs();
             context.selectedNoteID(null);
             context.selectedErrorID(null);
@@ -280,22 +283,26 @@ export function behaviorSelect(context) {
                 }
             }
 
-        } else if (datum && datum.__featurehash__ && !isMultiselect) {    // clicked Data..
+        } else if (datum && datum.__featurehash__ && !isMultiselect) {
+            // targeting custom data
             context
                 .selectedNoteID(null)
                 .enter(modeSelectData(context, datum));
 
-        } else if (datum instanceof osmNote && !isMultiselect) {    // clicked a Note..
+        } else if (datum instanceof osmNote && !isMultiselect) {
+            // targeting a note
             context
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
 
-        } else if (datum instanceof QAItem & !isMultiselect) {  // clicked an external QA issue
+        } else if (datum instanceof QAItem & !isMultiselect) {
+            // targeting an external QA issue
             context
                 .selectedErrorID(datum.id)
                 .enter(modeSelectError(context, datum.id, datum.service));
 
-        } else {    // clicked nothing..
+        } else {
+            // targeting nothing
             context.selectedNoteID(null);
             context.selectedErrorID(null);
             if (!isMultiselect && mode.id !== 'browse') {
