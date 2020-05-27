@@ -308,8 +308,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             .classed('nope-disabled', false);
 
         d3_select(window)
-            .on('keydown.hover', null)
-            .on('keyup.hover', null);
+            .on('keydown.drawWay', null)
+            .on('keyup.drawWay', null);
 
         context.history()
             .on('undone.draw', null);

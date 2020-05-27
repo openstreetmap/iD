@@ -153,15 +153,15 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'inspector-hidden inspector-wrap fr');
 
-        var hoverModeSelect = function(datum) {
+        var hoverModeSelect = function(targets) {
             context.container().selectAll('.feature-list-item').classed('hover', false);
 
             if (context.selectedIDs().length > 1 &&
-                datum instanceof osmEntity){
+                targets && targets.length) {
 
                 var elements = context.container().selectAll('.feature-list-item')
                     .filter(function (node) {
-                        return node.id === datum.id;
+                        return targets.indexOf(node) !== -1;
                     });
 
                 if (!elements.empty()) {
@@ -172,7 +172,8 @@ export function uiSidebar(context) {
 
         sidebar.hoverModeSelect = _throttle(hoverModeSelect, 200);
 
-        function hover(datum) {
+        function hover(targets) {
+            var datum = targets && targets.length && targets[0];
             if (datum && datum.__featurehash__) {   // hovering on data
                 _wasData = true;
                 sidebar

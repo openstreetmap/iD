@@ -457,8 +457,8 @@ export function modeDragNode(context) {
         context.install(edit);
 
         d3_select(window)
-            .on('keydown.drawWay', keydown)
-            .on('keyup.drawWay', keyup);
+            .on('keydown.dragNode', keydown)
+            .on('keyup.dragNode', keyup);
 
         context.history()
             .on('undone.drag-node', cancel);
@@ -471,8 +471,8 @@ export function modeDragNode(context) {
         context.uninstall(edit);
 
         d3_select(window)
-            .on('keydown.hover', null)
-            .on('keyup.hover', null);
+            .on('keydown.dragNode', null)
+            .on('keyup.dragNode', null);
 
         context.history()
             .on('undone.drag-node', null);
