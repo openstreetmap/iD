@@ -40,15 +40,8 @@ export function modeSelect(context, selectedIDs) {
 
     var _breatheBehavior = behaviorBreathe(context);
     var _modeDragNode = modeDragNode(context);
-    var _behaviors = [
-        behaviorPaste(context),
-        _breatheBehavior,
-        behaviorHover(context).on('hover', context.ui().sidebar.hoverModeSelect),
-        behaviorSelect(context),
-        behaviorLasso(context),
-        _modeDragNode.behavior,
-        modeDragNote(context).behavior
-    ];
+    var _selectBehavior;
+    var _behaviors = [];
 
     var _operations = [];
     var _newFeature = false;
@@ -160,6 +153,13 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
+    mode.selectBehavior = function(val) {
+        if (!arguments.length) return _selectBehavior;
+        _selectBehavior = val;
+        return mode;
+    };
+
+
     mode.follow = function(val) {
         if (!arguments.length) return _follow;
         _follow = val;
@@ -208,6 +208,19 @@ export function modeSelect(context, selectedIDs) {
 
         loadOperations();
 
+        if (!_behaviors.length) {
+            if (!_selectBehavior) _selectBehavior = behaviorSelect(context);
+
+            _behaviors = [
+                behaviorPaste(context),
+                _breatheBehavior,
+                behaviorHover(context).on('hover', context.ui().sidebar.hoverModeSelect),
+                _selectBehavior,
+                behaviorLasso(context),
+                _modeDragNode.behavior,
+                modeDragNote(context).behavior
+            ];
+        }
         _behaviors.forEach(context.install);
 
         keybinding

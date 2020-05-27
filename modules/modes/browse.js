@@ -16,20 +16,33 @@ export function modeBrowse(context) {
         id: 'browse',
         title: t('modes.browse.title'),
         description: t('modes.browse.description')
-    }, sidebar;
+    };
+    var sidebar;
 
-    var behaviors = [
-        behaviorPaste(context),
-        behaviorHover(context).on('hover', context.ui().sidebar.hover),
-        behaviorSelect(context),
-        behaviorLasso(context),
-        modeDragNode(context).behavior,
-        modeDragNote(context).behavior
-    ];
+    var _selectBehavior;
+    var _behaviors = [];
+
+
+    mode.selectBehavior = function(val) {
+        if (!arguments.length) return _selectBehavior;
+        _selectBehavior = val;
+        return mode;
+    };
 
 
     mode.enter = function() {
-        behaviors.forEach(context.install);
+        if (!_behaviors.length) {
+            if (!_selectBehavior) _selectBehavior = behaviorSelect(context);
+            _behaviors = [
+                behaviorPaste(context),
+                behaviorHover(context).on('hover', context.ui().sidebar.hover),
+                _selectBehavior,
+                behaviorLasso(context),
+                modeDragNode(context).behavior,
+                modeDragNote(context).behavior
+            ];
+        }
+        _behaviors.forEach(context.install);
 
         // Get focus on the body.
         if (document.activeElement && document.activeElement.blur) {
@@ -46,7 +59,7 @@ export function modeBrowse(context) {
 
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
-        behaviors.forEach(context.uninstall);
+        _behaviors.forEach(context.uninstall);
 
         if (sidebar) {
             context.ui().sidebar.hide();

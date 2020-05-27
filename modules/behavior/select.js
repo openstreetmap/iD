@@ -259,7 +259,7 @@ export function behaviorSelect(context) {
                     // always enter modeSelect even if the entity is already
                     // selected since listeners may expect `context.enter` events,
                     // e.g. in the walkthrough
-                    newMode = mode.id === 'select' ? mode.selectedIDs([datum.id]) : modeSelect(context, [datum.id]);
+                    newMode = mode.id === 'select' ? mode.selectedIDs([datum.id]) : modeSelect(context, [datum.id]).selectBehavior(behavior);
                     context.enter(newMode);
                 }
 
@@ -269,7 +269,7 @@ export function behaviorSelect(context) {
                     if (!showMenu) {
                         // deselect clicked entity, then reenter select mode or return to browse mode..
                         selectedIDs = selectedIDs.filter(function(id) { return id !== datum.id; });
-                        newMode = selectedIDs.length ? mode.selectedIDs(selectedIDs) : modeBrowse(context);
+                        newMode = selectedIDs.length ? mode.selectedIDs(selectedIDs) : modeBrowse(context).selectBehavior(behavior);
                         context.enter(newMode);
                     }
                 } else {
