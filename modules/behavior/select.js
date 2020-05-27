@@ -153,6 +153,18 @@ export function behaviorSelect(context) {
     }
 
 
+    function pointercancel() {
+        var id = (d3_event.pointerId || 'mouse').toString();
+        if (!_downPointers[id]) return;
+
+        delete _downPointers[id];
+
+        if (_multiselectionPointerId === id) {
+            _multiselectionPointerId = null;
+        }
+    }
+
+
     function contextmenu() {
         var e = d3_event;
         e.preventDefault();
@@ -342,6 +354,7 @@ export function behaviorSelect(context) {
             .on('keyup.select', keyup)
             .on(_pointerPrefix + 'move.select', pointermove, true)
             .on(_pointerPrefix + 'up.select', pointerup, true)
+            .on('pointercancel.select', pointercancel, true)
             .on('contextmenu.select-window', function() {
                 // Edge and IE really like to show the contextmenu on the
                 // menubar when user presses a keyboard menu button
@@ -371,7 +384,8 @@ export function behaviorSelect(context) {
             .on('keyup.select', null)
             .on('contextmenu.select-window', null)
             .on(_pointerPrefix + 'move.select', null, true)
-            .on(_pointerPrefix + 'up.select', null, true);
+            .on(_pointerPrefix + 'up.select', null, true)
+            .on('pointercancel.select', null, true);
 
         selection
             .on(_pointerPrefix + 'down.select', null)
