@@ -59,6 +59,7 @@ export function behaviorDraw(context) {
         return (d && d.properties && d.properties.target) ? d : {};
     }
 
+    var _lastPointerUpEvent;
 
     function pointerdown() {
 
@@ -73,10 +74,15 @@ export function behaviorDraw(context) {
 
         element.on(_pointerPrefix + 'move.draw', null);
 
-        d3_select(window).on(_pointerPrefix + 'up.draw', function() {
+        d3_select(window)
+             .on(_pointerPrefix + 'up.draw', pointerup, true);
+
+        function pointerup() {
 
             if (_downPointerId !== (d3_event.pointerId || 'mouse')) return;
             _downPointerId = null;
+
+            _lastPointerUpEvent = d3_event;
 
             element.on(_pointerPrefix + 'move.draw', pointermove);
             d3_select(window).on(_pointerPrefix + 'up.draw', null);
@@ -100,7 +106,7 @@ export function behaviorDraw(context) {
 
                 click(p2);
             }
-        }, true);
+        }
     }
 
 
@@ -108,6 +114,13 @@ export function behaviorDraw(context) {
         if ((d3_event.pointerType && d3_event.pointerType !== 'mouse') ||
             d3_event.buttons ||
             _downPointerId) return;
+
+        // HACK: Mobile Safari likes to send one or more `mouse` type pointermove
+        // events immediately after non-mouse pointerup events; detect and ignore them.
+        if (_lastPointerUpEvent &&
+            _lastPointerUpEvent.pointerType !== 'mouse' &&
+            geoVecLength([_lastPointerUpEvent.clientX, _lastPointerUpEvent.clientY], [d3_event.clientX, d3_event.clientY]) < 2 &&
+            d3_event.timeStamp - _lastPointerUpEvent.timeStamp < 100) return;
 
         _lastMouse = d3_event;
         dispatch.call('move', this, datum());
