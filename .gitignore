@@ -23,3 +23,12 @@ land.html
 /test/img
 
 \.vscode/
+
+
+# added by Kaligrafy:
+data/presets.yaml
+data/presets/fields.json
+data/presets/groups.json
+data/presets/presets.json
+data/taginfo.json
+dist/locales/en.json
