@@ -93,8 +93,10 @@ export function behaviorHover(context) {
         }
 
         function pointerover() {
-            // ignore mouse hovers with buttons pressed
-            if ((!d3_event.pointerType || d3_event.pointerType === 'mouse') && d3_event.buttons) return;
+            // ignore mouse hovers with buttons pressed unless dragging
+            if (!context.mode().id.includes('drag') &&
+                (!d3_event.pointerType || d3_event.pointerType === 'mouse') &&
+                d3_event.buttons) return;
 
             var target = eventTarget();
             if (target && _targets.indexOf(target) === -1) {
@@ -128,12 +130,29 @@ export function behaviorHover(context) {
 
         function updateHover(targets) {
 
-            var mode = context.mode();
-
             _selection.selectAll('.hover')
                 .classed('hover', false);
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
+
+            var mode = context.mode();
+
+            if (!_newNodeId && (mode.id === 'draw-line' || mode.id === 'draw-area')) {
+                var node = targets.find(function(target) {
+                    return target instanceof osmEntity && target.type === 'node';
+                });
+                _newNodeId = node && node.id;
+            }
+
+            targets = targets.filter(function(datum) {
+                if (datum instanceof osmEntity) {
+                    // If drawing a way, don't hover on a node that was just placed. #3974
+                    return datum.id !== _newNodeId &&
+                        (datum.type !== 'node' || !_ignoreVertex || allowsVertex(datum)) &&
+                        modeAllowsHover(datum);
+                }
+                return true;
+            });
 
             var selector = '';
 
@@ -152,33 +171,20 @@ export function behaviorHover(context) {
                     selector += ', .note-' + datum.id;
 
                 } else if (datum instanceof osmEntity) {
-
-                    // If drawing a way, don't hover on a node that was just placed. #3974
-                    if ((mode.id === 'draw-line' || mode.id === 'draw-area') &&
-                        !_newNodeId &&
-                        datum.type === 'node') {
-
-                        _newNodeId = datum.id;
-
-                    } else if (datum.id !== _newNodeId &&
-                        (datum.type !== 'node' || !_ignoreVertex || allowsVertex(datum)) &&
-                        modeAllowsHover(datum)) {
-
-                        selector += ', .' + datum.id;
-                        if (datum.type === 'relation') {
-                            for (var j in datum.members) {
-                                selector += ', .' + datum.members[j].id;
-                            }
+                    selector += ', .' + datum.id;
+                    if (datum.type === 'relation') {
+                        for (var j in datum.members) {
+                            selector += ', .' + datum.members[j].id;
                         }
                     }
                 }
             }
 
+            var suppressed = _altDisables && d3_event && d3_event.altKey;
+
             if (selector.trim().length) {
                 // remove the first comma
                 selector = selector.slice(1);
-
-                var suppressed = _altDisables && d3_event && d3_event.altKey;
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
             }
