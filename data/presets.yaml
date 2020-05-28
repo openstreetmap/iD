@@ -2035,7 +2035,7 @@ en:
         placeholder: 'Primary, secondary...'
       school_fee:
         # fee=*
-        label: Type
+        label: Private (fee)
         options:
           # fee=no
           'no': 'No'
@@ -4891,6 +4891,11 @@ en:
         name: Emergency Exit
         # 'terms: fire exit,door'
         terms: '<translate with synonyms or related terms for ''Emergency Exit'', separated by commas>'
+      entrance/main:
+        # entrance=main
+        name: Main Entrance / Exit
+        # 'terms: entrance,exit,door,main'
+        terms: '<translate with synonyms or related terms for ''Main Entrance / Exit'', separated by commas>'
       ford:
         # ford=yes
         name: Ford

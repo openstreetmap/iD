@@ -10,9 +10,6 @@ export function operationFollow(selectedIDs, context) {
     var action = actionFollow(selectedIDs, context.projection);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
 
     var operation = function() {
         context.perform(action, operation.annotation());
@@ -46,8 +43,6 @@ export function operationFollow(selectedIDs, context) {
         var actionDisabled = action.disabled(context.graph());
         if (actionDisabled) {
             return actionDisabled;
-        } else if (extent.percentContainedIn(context.extent()) < 0.8) {
-            return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {

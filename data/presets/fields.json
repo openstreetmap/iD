@@ -355,7 +355,7 @@
     "sac_scale": {"key": "sac_scale", "type": "combo", "label": "Hiking Difficulty", "placeholder": "Mountain Hiking, Alpine Hiking...", "strings": {"options": {"hiking": "T1: Hiking", "mountain_hiking": "T2: Mountain Hiking", "demanding_mountain_hiking": "T3: Demanding Mountain Hiking", "alpine_hiking": "T4: Alpine Hiking", "demanding_alpine_hiking": "T5: Demanding Alpine Hiking", "difficult_alpine_hiking": "T6: Difficult Alpine Hiking"}}},
     "salt": {"key": "salt", "type": "check", "label": "Salt", "terms": ["saline", "salinated"]},
     "sanitary_dump_station": {"key": "sanitary_dump_station", "type": "check", "label": "Toilet Disposal"},
-    "school_fee": {"key": "fee", "type": "combo", "label": "Type", "placeholder": "No, yes...", "strings": {"options": {"yes": "Yes", "no": "No"}}},
+    "school_fee": {"key": "fee", "type": "combo", "label": "Private (fee)", "placeholder": "No, yes...", "strings": {"options": {"yes": "Yes", "no": "No"}}},
     "school": {"key": "school", "type": "combo", "label": "Type", "placeholder": "Primary, secondary...", "strings": {"options": {"primary": "Primary", "secondary": "Secondary"}}},
     "screen": {"key": "screen", "type": "number", "label": "Screens", "placeholder": "1, 4, 8…", "minValue": 0},
     "scuba_diving": {"key": "scuba_diving:", "type": "multiCombo", "label": "Services", "options": ["repair", "courses", "rental", "filling", "air_filling", "nitrox_filling", "trimix_filling", "oxygen_filling"]},
