@@ -1257,7 +1257,7 @@
     {"key": "waterway", "value": "lock_gate", "description": "🄿 Lock Gate", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/dam-15.svg"},
     {"key": "waterway", "value": "milestone", "description": "🄿 Waterway Milestone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/milestone.svg"},
     {"key": "waterway", "value": "river", "description": "🄿 River", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/waterway-river.svg"},
-    {"key": "waterway", "value": "sanitary_dump_station", "description": "🄿 Marine Toilet Disposal", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/storage_tank.svg"},
+    {"key": "waterway", "value": "sanitary_dump_station", "description": "🄿 Marine Toilet Disposal", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/waste.svg"},
     {"key": "intermittent", "value": "yes", "description": "🄿 Intermittent Stream", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/waterway-stream.svg"},
     {"key": "waterway", "value": "stream", "description": "🄿 Stream", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/waterway-stream.svg"},
     {"key": "waterway", "value": "tidal_channel", "description": "🄿 Tidal Channel", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/waterway-stream.svg"},
