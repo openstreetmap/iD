@@ -5128,7 +5128,7 @@ en:
       highway/cycleway/bicycle_foot:
         # 'highway=cycleway, foot=designated'
         name: Cycle & Foot Path
-        # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail'
+        # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,shared path,shared use path,rail trail'
         terms: '<translate with synonyms or related terms for ''Cycle & Foot Path'', separated by commas>'
       highway/cycleway/crossing:
         # cycleway=crossing

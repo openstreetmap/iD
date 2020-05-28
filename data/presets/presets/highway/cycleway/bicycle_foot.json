@@ -33,6 +33,8 @@
         "mixed-use trail",
         "multi-use trail",
         "segregated trail",
+        "shared path",
+        "shared use path",
         "rail trail"
     ],
     "matchScore": 0.9,
