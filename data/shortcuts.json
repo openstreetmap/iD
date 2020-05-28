@@ -285,6 +285,10 @@
               "text": "shortcuts.editing.operations.reflect_long"
             },
             {
+              "shortcuts": ["operations.follow.key"],
+              "text": "shortcuts.editing.operations.follow"
+            },
+            {
               "shortcuts": ["operations.reflect.key.short"],
               "text": "shortcuts.editing.operations.reflect_short"
             },
