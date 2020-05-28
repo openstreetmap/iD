@@ -94,7 +94,7 @@ export function behaviorHover(context) {
 
         function pointerover() {
             // ignore mouse hovers with buttons pressed unless dragging
-            if (!context.mode().id.includes('drag') &&
+            if (context.mode().id.indexOf('drag') === -1 &&
                 (!d3_event.pointerType || d3_event.pointerType === 'mouse') &&
                 d3_event.buttons) return;
 
