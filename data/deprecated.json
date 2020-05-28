@@ -1279,6 +1279,10 @@
     "replace": {"station": "train", "train": "yes"}
   },
   {
+    "old": {"stream": "intermittent", "waterway": "stream"},
+    "replace": {"intermittent": "yes", "waterway": "stream"}
+  },
+  {
     "old": {"sustenance": "bar"},
     "replace": {"amenity": "bar"}
   },
