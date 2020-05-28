@@ -634,6 +634,38 @@
     "replace": {"kerb": "flush"}
   },
   {
+    "old": {"lamp_mount": "bent mast"},
+    "replace": {"lamp_mount": "bent_mast"}
+  },
+  {
+    "old": {"lamp_mount": "straight mast"},
+    "replace": {"lamp_mount": "straight_mast"}
+  },
+  {
+    "old": {"lamp_mount": "straightmast"},
+    "replace": {"lamp_mount": "straight_mast"}
+  },
+  {
+    "old": {"lamp_mount": "streight_mast"},
+    "replace": {"lamp_mount": "straight_mast"}
+  },
+  {
+    "old": {"lamp_mount": "wal"},
+    "replace": {"lamp_mount": "wall"}
+  },
+  {
+    "old": {"lamp_mount": "wall mounted"},
+    "replace": {"lamp_mount": "wall"}
+  },
+  {
+    "old": {"lamp_mount": "wall_mount"},
+    "replace": {"lamp_mount": "wall"}
+  },
+  {
+    "old": {"lamp_mount": "wall_mounted"},
+    "replace": {"lamp_mount": "wall"}
+  },
+  {
     "old": {"landcover": "flower_bed"},
     "replace": {"landuse": "flowerbed"}
   },

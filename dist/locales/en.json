@@ -3700,6 +3700,9 @@
                 "label": {
                     "label": "Label"
                 },
+                "lamp_mount": {
+                    "label": "Mount"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },

@@ -231,6 +231,7 @@
   "kerb/height": {"key": "kerb:height", "type": "combo", "snake_case": false, "label": "Height"},
   "kneipp_water_cure_multi": {"key": "kneipp_water_cure:", "type": "multiCombo", "label": "Basin Types"},
   "label": {"key": "label", "type": "textarea", "label": "Label"},
+  "lamp_mount": {"key": "lamp_mount", "type": "combo", "label": "Mount"},
   "lamp_type": {"key": "lamp_type", "type": "combo", "label": "Type"},
   "landuse": {"key": "landuse", "type": "typeCombo", "label": "Type"},
   "lanes": {"key": "lanes", "type": "number", "minValue": 0, "label": "Lanes", "placeholder": "1, 2, 3..."},

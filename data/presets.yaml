@@ -1235,6 +1235,9 @@ en:
       label:
         # label=*
         label: Label
+      lamp_mount:
+        # lamp_mount=*
+        label: Mount
       lamp_type:
         # lamp_type=*
         label: Type
