@@ -72,7 +72,7 @@ export function behaviorDraw(context) {
             downLoc: pointerLocGetter(d3_event)
         };
 
-        dispatch.call('pointerdown', this, datum());
+        dispatch.call('down', this, datum());
     }
 
     function pointerup() {
@@ -108,7 +108,9 @@ export function behaviorDraw(context) {
     }
 
     function pointermove() {
-        if (_downPointer && !_downPointer.isCancelled) {
+        if (_downPointer &&
+            _downPointer.id === (d3_event.pointerId || 'mouse') &&
+            !_downPointer.isCancelled) {
             var p2 = _downPointer.pointerLocGetter(d3_event);
             var dist = geoVecLength(_downPointer.downLoc, p2);
             if (dist >= _closeTolerance) {
@@ -129,6 +131,17 @@ export function behaviorDraw(context) {
 
         _lastMouse = d3_event;
         dispatch.call('move', this, datum());
+    }
+
+    function pointercancel() {
+        if (_downPointer &&
+            _downPointer.id === (d3_event.pointerId || 'mouse')) {
+
+            if (!_downPointer.isCancelled) {
+                dispatch.call('downcancel', this);
+            }
+            _downPointer = null;
+        }
     }
 
     function mouseenter() {
@@ -246,7 +259,8 @@ export function behaviorDraw(context) {
             .on(_pointerPrefix + 'move.draw', pointermove);
 
         d3_select(window)
-            .on(_pointerPrefix + 'up.draw', pointerup, true);
+            .on(_pointerPrefix + 'up.draw', pointerup, true)
+            .on('pointercancel.draw', pointercancel, true);
 
         d3_select(document)
             .call(keybinding);
@@ -267,7 +281,8 @@ export function behaviorDraw(context) {
             .on(_pointerPrefix + 'move.draw', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'up.draw', null);
+            .on(_pointerPrefix + 'up.draw', null)
+            .on('pointercancel.draw', null);
             // note: keyup.space-block, click.draw-block should remain
 
         d3_select(document)
