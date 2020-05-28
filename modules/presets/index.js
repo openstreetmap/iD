@@ -314,13 +314,23 @@ export function presetIndex() {
 
 
   _this.defaults = (geometry, n, startWithRecents) => {
-    let rec = [];
+    let recents = [];
     if (startWithRecents) {
-      rec = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
+      recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
     }
-    const def = utilArrayUniq(rec.concat(_defaults[geometry].collection)).slice(0, n - 1);
+    let defaults;
+    if (_addablePresetIDs) {
+      defaults = Array.from(_addablePresetIDs).map(function(id) {
+        var preset = _this.item(id);
+        if (preset && preset.matchGeometry(geometry)) return preset;
+        return null;
+      }).filter(Boolean);
+    } else {
+      defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
+    }
+
     return presetCollection(
-      utilArrayUniq(rec.concat(def).concat(_this.fallback(geometry)))
+      utilArrayUniq(recents.concat(defaults)).slice(0, n - 1)
     );
   };
 

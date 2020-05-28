@@ -181,7 +181,8 @@ describe('iD.presetIndex', function () {
     describe('#addablePresetIDs', function () {
         var testPresets = {
             residential: { tags: { highway: 'residential' }, geometry: ['line'] },
-            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] }
+            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] },
+            bench: { tags: { amenity: 'bench' }, geometry: ['point', 'line'] }
         };
 
         it('addablePresetIDs is initially null', function (done) {
@@ -207,6 +208,29 @@ describe('iD.presetIndex', function () {
                 presets.addablePresetIDs(null);
                 expect(presets.item('residential').addable()).to.be.true;
                 expect(presets.item('park').addable()).to.be.true;
+                done();
+            });
+        });
+
+        it('addablePresetIDs are default presets', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+                var ids = new Set(['bench', 'residential']);   // can only add presets with these IDs
+                presets.addablePresetIDs(ids);
+
+                var areaDefaults = presets.defaults('area', 10).collection;
+                expect(areaDefaults.length).to.eql(0);
+
+                var pointDefaults = presets.defaults('point', 10).collection;
+                expect(pointDefaults.length).to.eql(1);
+                expect(pointDefaults[0].id).to.eql('bench');
+
+                var lineDefaults = presets.defaults('line', 10).collection;
+                expect(lineDefaults.length).to.eql(2);
+                expect(lineDefaults[0].id).to.eql('bench');
+                expect(lineDefaults[1].id).to.eql('residential');
+
                 done();
             });
         });
