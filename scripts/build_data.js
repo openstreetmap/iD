@@ -800,7 +800,7 @@ function writeFaIcons(faIcons) {
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
-      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html);
+      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html.toString());
     } catch (error) {
       console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
