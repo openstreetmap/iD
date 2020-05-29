@@ -28,7 +28,10 @@ export function uiFieldText(field, context) {
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
-            .then(function(d) { _phoneFormats = d; })
+            .then(function(d) {
+                _phoneFormats = d;
+                updatePhonePlaceholder();
+            })
             .catch(function() { /* ignore */ });
     }
 
@@ -67,13 +70,7 @@ export function uiFieldText(field, context) {
 
 
         if (field.type === 'tel') {
-            var extent = combinedEntityExtent();
-            var countryCode = extent && countryCoder.iso1A2Code(extent.center());
-            var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
-            if (format) {
-                wrap.selectAll('input')
-                    .attr('placeholder', format);
-            }
+            updatePhonePlaceholder();
 
         } else if (field.type === 'number') {
             var rtl = (localizer.textDirection() === 'rtl');
@@ -133,6 +130,16 @@ export function uiFieldText(field, context) {
                 })
                 .merge(outlinkButton);
         }
+    }
+
+
+    function updatePhonePlaceholder() {
+        if (input.empty() || !Object.keys(_phoneFormats).length) return;
+
+        var extent = combinedEntityExtent();
+        var countryCode = extent && countryCoder.iso1A2Code(extent.center());
+        var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
+        if (format) input.attr('placeholder', format);
     }
 
 
