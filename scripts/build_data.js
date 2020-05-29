@@ -769,7 +769,7 @@ function translationsToYAML(translations) {
   }
 
   return YAML.safeDump({ en: { presets: translations }}, { sortKeys: commentFirst, lineWidth: -1 })
-    .replace(/\'.*#\':/g, '#');
+    .replace(/[^\s]+#'?:/g, '#');
 }
 
 
