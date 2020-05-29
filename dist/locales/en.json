@@ -10603,6 +10603,27 @@
                 },
                 "name": "OpenPT Map (overlay)"
             },
+            "openrailwaymap": {
+                "attribution": {
+                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
+                },
+                "description": "Overlay imagery showing railway infrastructure based on OpenStreetMap data",
+                "name": "OpenRailwayMap"
+            },
+            "openrailwaymap-maxspeeds": {
+                "attribution": {
+                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
+                },
+                "description": "Overlay imagery showing railway speed limits based on OpenStreetMap data",
+                "name": "OpenRailwayMap Maxspeeds"
+            },
+            "openrailwaymap-signalling": {
+                "attribution": {
+                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
+                },
+                "description": "Overlay imagery showing railway signals based on OpenStreetMap data",
+                "name": "OpenRailwayMap Signalling"
+            },
             "osm-gps": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors"
