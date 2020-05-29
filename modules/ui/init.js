@@ -56,6 +56,8 @@ export function uiInit(context) {
 
         container
             .on('click.ui', function() {
+                if (!d3_event.composedPath) return;
+
                 // some targets have default click events we don't want to override
                 var isOkayTarget = d3_event.composedPath().some(function(node) {
                     // clicking <label> affects its <input> by default
@@ -69,9 +71,9 @@ export function uiInit(context) {
                 d3_event.preventDefault();
             })
             // disable pinch-to-zoom in Safari
-            .on('gesturestart.ui', eventCancel)
-            .on('gesturechange.ui', eventCancel)
-            .on('gestureend.ui', eventCancel);
+            .on('gesturestart.ui gesturechange.ui gestureend.ui', function() {
+                d3_event.preventDefault();
+            });
 
         container
             .attr('dir', localizer.textDirection());
@@ -406,9 +408,6 @@ export function uiInit(context) {
             };
         }
 
-        function eventCancel() {
-            d3_event.preventDefault();
-        }
     }
 
 
