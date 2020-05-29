@@ -231,7 +231,7 @@
     {"key": "studio", "value": "television", "description": "🄿 Television Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-video.svg"},
     {"key": "studio", "value": "video", "description": "🄿 Film Studio", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-video.svg"},
     {"key": "amenity", "value": "taxi", "description": "🄿 Taxi Stand", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-taxi.svg"},
-    {"key": "amenity", "value": "telephone", "description": "🄿 Telephone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/telephone-15.svg"},
+    {"key": "amenity", "value": "telephone", "description": "🄿 Telephone", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-phone-alt.svg"},
     {"key": "amenity", "value": "theatre", "description": "🄿 Theater", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/theatre-15.svg"},
     {"key": "theatre:type", "value": "amphi", "description": "🄿 Amphitheatre", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/theatre-15.svg"},
     {"key": "amenity", "value": "toilets", "description": "🄿 Toilets", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/toilet-15.svg"},
