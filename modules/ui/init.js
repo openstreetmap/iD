@@ -364,6 +364,16 @@ export function uiInit(context) {
                 context.map().toggleHighlightEdited();
             });
 
+        context
+            .on('enter.editor', function(entered) {
+                container
+                    .classed('mode-' + entered.id, true);
+            })
+            .on('exit.editor', function(exited) {
+                container
+                    .classed('mode-' + exited.id, false);
+            });
+
         context.enter(modeBrowse(context));
 
         if (!_initCounter++) {
