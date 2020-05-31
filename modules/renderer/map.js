@@ -981,7 +981,7 @@ export function rendererMap(context) {
 
     map.trimmedExtent = function(val) {
         if (!arguments.length) {
-            var headerY = 60;
+            var headerY = 71; 
             var footerY = 30;
             var pad = 10;
             return new geoExtent(
