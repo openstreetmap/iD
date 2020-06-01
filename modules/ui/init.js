@@ -75,6 +75,20 @@ export function uiInit(context) {
                 d3_event.preventDefault();
             });
 
+        if ('PointerEvent' in window) {
+            d3_select(window)
+                .on('pointerdown.ui pointerup.ui', function() {
+                    var pointerType =  d3_event.pointerType || 'mouse';
+                    if (container.attr('pointer') !== pointerType) {
+                        container
+                            .attr('pointer', pointerType);
+                    }
+                }, true);
+        } else {
+            container
+                .attr('pointer', 'mouse');
+        }
+
         container
             .attr('dir', localizer.textDirection());
 
