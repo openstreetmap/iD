@@ -1198,6 +1198,7 @@
   "shop/toys": {"icon": "fas-rocket", "geometry": ["point", "area"], "tags": {"shop": "toys"}, "terms": ["games"], "name": "Toy Store"},
   "shop/trade": {"icon": "temaki-tools", "fields": ["name", "trade", "{shop}"], "geometry": ["point", "area"], "tags": {"shop": "trade"}, "name": "Trade Shop"},
   "shop/travel_agency": {"icon": "fas-suitcase", "geometry": ["point", "area"], "tags": {"shop": "travel_agency"}, "terms": ["cruises", "flights", "hotels", "tickets", "travel packages"], "name": "Travel Agency"},
+  "shop/trophy": {"icon": "fas-trophy", "geometry": ["point", "area"], "tags": {"shop": "trophy"}, "terms": ["awards", "engravings", "medals", "plaques", "trophy store"], "name": "Trophy Shop"},
   "shop/tyres": {"icon": "temaki-tire", "geometry": ["point", "area"], "tags": {"shop": "tyres"}, "name": "Tire Store"},
   "shop/vacuum_cleaner": {"icon": "temaki-vacuum", "geometry": ["point", "area"], "tags": {"shop": "vacuum_cleaner"}, "name": "Vacuum Cleaner Store"},
   "shop/variety_store": {"icon": "maki-shop", "geometry": ["point", "area"], "tags": {"shop": "variety_store"}, "name": "Variety Store"},

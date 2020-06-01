@@ -9741,6 +9741,10 @@
                     "name": "Travel Agency",
                     "terms": "cruises,flights,hotels,tickets,travel packages"
                 },
+                "shop/trophy": {
+                    "name": "Trophy Shop",
+                    "terms": "awards,engravings,medals,plaques,trophy store"
+                },
                 "shop/tyres": {
                     "name": "Tire Store",
                     "terms": ""

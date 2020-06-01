@@ -8374,6 +8374,11 @@ en:
         name: Travel Agency
         # 'terms: cruises,flights,hotels,tickets,travel packages'
         terms: '<translate with synonyms or related terms for ''Travel Agency'', separated by commas>'
+      shop/trophy:
+        # shop=trophy
+        name: Trophy Shop
+        # 'terms: awards,engravings,medals,plaques,trophy store'
+        terms: '<translate with synonyms or related terms for ''Trophy Shop'', separated by commas>'
       shop/tyres:
         # shop=tyres
         name: Tire Store

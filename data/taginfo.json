@@ -1143,6 +1143,7 @@
     {"key": "shop", "value": "toys", "description": "🄿 Toy Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-rocket.svg"},
     {"key": "shop", "value": "trade", "description": "🄿 Trade Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
     {"key": "shop", "value": "travel_agency", "description": "🄿 Travel Agency", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-suitcase.svg"},
+    {"key": "shop", "value": "trophy", "description": "🄿 Trophy Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-trophy.svg"},
     {"key": "shop", "value": "tyres", "description": "🄿 Tire Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tire.svg"},
     {"key": "shop", "value": "vacuum_cleaner", "description": "🄿 Vacuum Cleaner Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/vacuum.svg"},
     {"key": "shop", "value": "variety_store", "description": "🄿 Variety Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},

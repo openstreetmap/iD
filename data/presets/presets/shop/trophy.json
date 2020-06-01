@@ -1,0 +1,18 @@
+{
+    "icon": "fas-trophy",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "trophy"
+    },
+    "terms": [
+        "awards",
+        "engravings",
+        "medals",
+        "plaques",
+        "trophy store"
+    ],
+    "name": "Trophy Shop"
+}
