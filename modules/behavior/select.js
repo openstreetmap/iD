@@ -82,7 +82,7 @@ export function behaviorSelect(context) {
 
                 d3_event.preventDefault();
                 _lastInteractionType = 'spacebar';
-                click(pointer.firstEvent, pointer.lastEvent);
+                click(pointer.firstEvent, pointer.lastEvent, 'spacebar');
             }
         }
     }
@@ -118,7 +118,7 @@ export function behaviorSelect(context) {
         _lastInteractionType = interactionType;
         _showMenu = true;
 
-        click(pointer.firstEvent, pointer.lastEvent);
+        click(pointer.firstEvent, pointer.lastEvent, id);
     }
 
 
@@ -149,7 +149,7 @@ export function behaviorSelect(context) {
 
         if (pointer.done) return;
 
-        click(pointer.firstEvent, d3_event);
+        click(pointer.firstEvent, d3_event, id);
     }
 
 
@@ -185,7 +185,7 @@ export function behaviorSelect(context) {
     }
 
 
-    function click(firstEvent, lastEvent) {
+    function click(firstEvent, lastEvent, pointerId) {
         cancelLongPress();
 
         var mapNode = context.container().select('.main-map').node();
@@ -206,24 +206,31 @@ export function behaviorSelect(context) {
 
         var targetDatum = lastEvent.target.__data__;
 
+        var multiselectEntityId;
+
         if (!_multiselectionPointerId) {
             // If a different pointer than the one triggering this click is down on the
             // selection, treat this and all future clicks as multiselection until that
             // pointer is raised.
-            var selectionPointer = context.mode().id === 'select' && pointerDownOnSelection();
-            if (selectionPointer) {
-                _multiselectionPointerId = selectionPointer;
+            var selectPointerInfo = pointerDownOnSelection(pointerId);
+            if (selectPointerInfo) {
+                _multiselectionPointerId = selectPointerInfo.pointerId;
+                multiselectEntityId = !selectPointerInfo.selected && selectPointerInfo.entityId;
+                _downPointers[selectPointerInfo.pointerId].done = true;
             }
         }
 
-        // only support multiselect if data is already selected
+        // support multiselect if data is already selected
         var isMultiselect = context.mode().id === 'select' && (
+            // and shift key is down
             (d3_event && d3_event.shiftKey) ||
+            // or we're lasso-selecting
             context.surface().select('.lasso').node() ||
-            _multiselectionPointerId
+            // or a pointer is down over a selected or selectable feature
+            (_multiselectionPointerId && !multiselectEntityId)
         );
 
-        processClick(targetDatum, isMultiselect, p2);
+        processClick(targetDatum, isMultiselect, p2, multiselectEntityId);
 
         function mapContains(event) {
             var rect = mapNode.getBoundingClientRect();
@@ -232,23 +239,33 @@ export function behaviorSelect(context) {
                 event.clientY >= rect.top &&
                 event.clientY <= rect.bottom;
         }
-    }
 
+        function pointerDownOnSelection(skipPointerId) {
+            var mode = context.mode();
+            var selectedIDs = mode.id === 'select' ? mode.selectedIDs() : [];
+            for (var pointerId in _downPointers) {
+                if (pointerId === 'spacebar' || pointerId === skipPointerId) continue;
 
-    function pointerDownOnSelection() {
-        var selectedIds = context.mode().id === 'select' && context.mode().selectedIDs();
-        for (var id in _downPointers) {
-            if (id === 'spacebar') continue;
+                var pointerInfo = _downPointers[pointerId];
 
-            var datum = _downPointers[id].firstEvent.target.__data__;
-            var entity = (datum && datum.properties && datum.properties.entity) || datum;
-            if (selectedIds.indexOf(entity.id) !== -1) return id;
+                var p1 = pointGetter(pointerInfo.firstEvent);
+                var p2 = pointGetter(pointerInfo.lastEvent);
+                if (geoVecLength(p1, p2) > _tolerancePx) continue;
+
+                var datum = pointerInfo.firstEvent.target.__data__;
+                var entity = (datum && datum.properties && datum.properties.entity) || datum;
+                if (context.graph().hasEntity(entity.id)) return {
+                    pointerId: pointerId,
+                    entityId: entity.id,
+                    selected: selectedIDs.indexOf(entity.id) !== -1
+                };
+            }
+            return null;
         }
-        return null;
     }
 
 
-    function processClick(datum, isMultiselect, point) {
+    function processClick(datum, isMultiselect, point, alsoSelectId) {
         var mode = context.mode();
         var showMenu = _showMenu;
         var interactionType = _lastInteractionType;
@@ -270,11 +287,18 @@ export function behaviorSelect(context) {
             context.selectedErrorID(null);
 
             if (!isMultiselect) {
-                if (selectedIDs.length <= 1 || !showMenu) {
+                // don't change the selection if we're toggling the menu atop a multiselection
+                if (!showMenu ||
+                    selectedIDs.length <= 1 ||
+                    selectedIDs.indexOf(datum.id) === -1) {
+
+                    if (alsoSelectId === datum.id) alsoSelectId = null;
+
+                    selectedIDs = (alsoSelectId ? [alsoSelectId] : []).concat([datum.id]);
                     // always enter modeSelect even if the entity is already
                     // selected since listeners may expect `context.enter` events,
                     // e.g. in the walkthrough
-                    newMode = mode.id === 'select' ? mode.selectedIDs([datum.id]) : modeSelect(context, [datum.id]).selectBehavior(behavior);
+                    newMode = mode.id === 'select' ? mode.selectedIDs(selectedIDs) : modeSelect(context, selectedIDs).selectBehavior(behavior);
                     context.enter(newMode);
                 }
 
