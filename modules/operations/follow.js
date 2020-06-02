@@ -22,7 +22,7 @@ export function operationFollow(selectedIDs, context) {
 
     operation.available = function() {
 
-        if (selectedIDs.length !== 4) {
+        if (selectedIDs.length < 2 || selectedIDs.length > 4) {
             return false;
         }
 
@@ -30,7 +30,14 @@ export function operationFollow(selectedIDs, context) {
             return context.entity(selectedID);
         });
 
-        if (entities[0].type === 'way' && entities[1].type === 'way' && entities[2].type === 'node' && entities[3].type === 'node') {
+        if (
+            entities[0].type === 'way' && entities[1].type === 'way' && 
+            (
+                (entities[2] && entities[2].type === 'node' && entities[3] && entities[3].type === 'node') 
+             || (entities[2] && entities[2].type === 'node' && !entities[3]) 
+             || (!entities[2] && !entities[3])
+            )
+        ) {
             return true;
         }
         return false;

@@ -463,6 +463,7 @@ en:
         create: Added a turn restriction
         delete: Deleted a turn restriction
     extract:
+      key: None 
       title: Extract
       description:
         vertex:
@@ -569,6 +570,7 @@ en:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
   info_panels:
+    key: None
     background:
       key: B
       title: Background
@@ -1435,6 +1437,7 @@ en:
       title: Rules
     user_resolved_issues: Issues resolved by your edits
     warnings_and_errors: Warnings and errors
+    key: None
     no_issues:
       message:
         everything: Everything looks fine

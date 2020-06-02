@@ -1,94 +1,157 @@
 export function actionFollow(selectedIDs, projection) {
 
-  var action = function(graph, t) {
-    
-      var entities = selectedIDs.map(function(selectedID) {
-          return graph.entity(selectedID);
-      });
+    // tgt: target
+    // src: source
+    // cnt: count
+    // idx: index
 
-      var targetWay = entities[0];
-      var sourceWay = entities[1];
-      var startNode = entities[2];
-      var endNode   = entities[3];
-      
-      var targetNodes = targetWay.nodes.slice();
-      var sourceNodes = sourceWay.nodes.slice();
+    var getStartNodeId = function(startNodeId, tgtNodes, srcNodes, graph) {
+        if (startNodeId) {
+            return startNodeId;
+        } else {
+            for (var tgtI = 0, tgtNodesCnt = tgtNodes.length; tgtI < tgtNodesCnt; tgtI++) {
+                var tgtNodeIdxInSrc = srcNodes.indexOf(tgtNodes[tgtI]);
+                if (tgtNodeIdxInSrc >= 0)
+                {
+                    return tgtNodes[tgtI];
+                }
+            }
+        }
+        return null;
+    }
 
-      var startNodeIndexInTarget      = targetNodes.indexOf(startNode.id);
-      var endNodeIndexInTarget        = targetNodes.indexOf(endNode.id);
-      var targetNodesOrderIsAscending = endNodeIndexInTarget > startNodeIndexInTarget;
+    var getEndNodeId = function(startNodeId, endNodeId, tgtNodes, srcNodes, graph) {
+        if (endNodeId) {
+            return endNodeId;
+        } else {
+            for (var tgtI = 0, tgtNodesCnt = tgtNodes.length; tgtI < tgtNodesCnt; tgtI++) {
+                var tgtNodeIdxInSrc = srcNodes.indexOf(tgtNodes[tgtI]);
+                if (tgtNodeIdxInSrc >= 0 && tgtNodes[tgtI] !== startNodeId)
+                {
+                    return tgtNodes[tgtI];
+                }
+            }
+        }
+        return null;
 
-      var startNodeIndexInSource      = sourceNodes.indexOf(startNode.id);
-      var endNodeIndexInSource        = sourceNodes.indexOf(endNode.id);
-      var sourceNodesOrderIsAscending = endNodeIndexInSource > startNodeIndexInSource;
+    }
 
-      var newTargetNodes = targetNodes;
+    var action = function(graph, t) {
 
-      if (targetNodesOrderIsAscending && sourceNodesOrderIsAscending) {
-          var insertIndex = endNodeIndexInTarget;
-          for (var sourceNodeIndex = startNodeIndexInSource + 1; sourceNodeIndex < endNodeIndexInSource; sourceNodeIndex++) {
-              newTargetNodes.splice(insertIndex, 0, sourceNodes[sourceNodeIndex]);
-              insertIndex++;
-          }
-      }
-      else if (!targetNodesOrderIsAscending && !sourceNodesOrderIsAscending) {
-          var insertIndex = startNodeIndexInTarget;
-          for (var sourceNodeIndex = endNodeIndexInSource + 1; sourceNodeIndex < startNodeIndexInSource; sourceNodeIndex++) {
-              newTargetNodes.splice(insertIndex, 0, sourceNodes[sourceNodeIndex]);
-              insertIndex++;
-          }
-      }
-      else if (targetNodesOrderIsAscending && !sourceNodesOrderIsAscending) {
-          var insertIndex = endNodeIndexInTarget;
-          for (var sourceNodeIndex = endNodeIndexInSource + 1; sourceNodeIndex < startNodeIndexInSource; sourceNodeIndex++) {
-              newTargetNodes.splice(insertIndex, 0, sourceNodes[sourceNodeIndex]);
-          }
-      }
-      else if (!targetNodesOrderIsAscending && sourceNodesOrderIsAscending) {
-          var insertIndex = startNodeIndexInTarget;
-          for (var sourceNodeIndex = startNodeIndexInSource + 1; sourceNodeIndex < endNodeIndexInSource; sourceNodeIndex++) {
-              newTargetNodes.splice(insertIndex, 0, sourceNodes[sourceNodeIndex]);
-          }
-      }
+        var tgtWay         = graph.entity(selectedIDs[0]);
+        var tgtWayIsClosed = tgtWay.isClosed();
+        var tgtNodes       = tgtWay.nodes.slice();
+        var tgtNodesCnt    = tgtNodes.length;
+        var srcWay         = graph.entity(selectedIDs[1]);
+        var srcWayIsClosed = srcWay.isClosed();
+        var srcNodes       = srcWay.nodes.slice();
+        var srcNodesCnt    = srcNodes.length;
 
-      targetWay = targetWay.update({nodes: newTargetNodes});
-      graph     = graph.replace(targetWay);
+        var startNodeId = getStartNodeId(selectedIDs[2], tgtNodes, srcNodes);
+        var endNodeId   = getEndNodeId(startNodeId, selectedIDs[3], tgtNodes, srcNodes);
 
-      return graph;
-  };
+        var startNodeIdxInSrc = srcNodes.indexOf(startNodeId);
+        var endNodeIdxInSrc   = srcNodes.indexOf(endNodeId);
 
-  action.disabled = function(graph) {
-     
-      var entities = selectedIDs.map(function(selectedID) {
-          return graph.entity(selectedID);
-      });
+        var startNodeIdxInTgt = tgtNodes.indexOf(startNodeId);
+        var endNodeIdxInTgt   = tgtNodes.indexOf(endNodeId);
 
-      var targetWay = entities[0];
-      var sourceWay = entities[1];
-      var startNode = entities[2];
-      var endNode   = entities[3];
-      
-      var targetNodes = targetWay.nodes.slice();
-      var sourceNodes = sourceWay.nodes.slice();
+        if (!srcWayIsClosed && startNodeIdxInSrc > endNodeIdxInSrc) { // reverse direction for src if backward
+            var tmpNodeIdx        = startNodeIdxInSrc;
+                startNodeIdxInSrc = endNodeIdxInSrc;
+                endNodeIdxInSrc   = tmpNodeIdx;
+        }
 
-      var startNodeIndexInTarget = targetNodes.indexOf(startNode.id);
-      var endNodeIndexInTarget   = targetNodes.indexOf(endNode.id);
-      var startNodeIndexInSource = sourceNodes.indexOf(startNode.id);
-      var endNodeIndexInSource   = sourceNodes.indexOf(endNode.id);
+        if (!tgtWayIsClosed && !srcWayIsClosed && startNodeIdxInTgt > endNodeIdxInTgt) { // reverse direction for src if backward
+            var tmpNodeIdx        = startNodeIdxInTgt;
+                startNodeIdxInTgt = endNodeIdxInTgt;
+                endNodeIdxInTgt   = tmpNodeIdx;
+        }
 
-      // make sure the nodes are shared by source and target ways, and that are consecutive in target way
-      if (startNodeIndexInTarget === -1 || endNodeIndexInTarget === -1 || startNodeIndexInSource === -1 || endNodeIndexInSource === -1) {
-          return 'nodes_are_not_shared_by_both_ways';
-      }
-      if (Math.abs(startNodeIndexInTarget - endNodeIndexInTarget) !== 1) {
-          return 'nodes_are_not_consecutive_in_target';
-      }
-      return false;
+        // check if target is closed and if start and end target nodes are the last segment of the loop :
+        var tgtIsLastSegmentOfClosedWay = tgtWayIsClosed && ((startNodeIdxInTgt === 0 && endNodeIdxInTgt === tgtNodesCnt - 2) || (endNodeIdxInTgt === 0 && startNodeIdxInTgt === tgtNodesCnt - 2));
+        var sameDirection               = srcNodes[startNodeIdxInSrc] === tgtNodes[startNodeIdxInTgt];
 
-  };
+        var newTgtNodes = tgtNodes;
 
-  action.transitionable = true;
+        var insertIdx  = endNodeIdxInTgt;
+        var srcNodeIdx = srcWayIsClosed && startNodeIdxInSrc === srcNodesCnt - 2 ? 0 : startNodeIdxInSrc + 1;
+
+        var srcIndexIncrement = sameDirection ? 1 : 0;
+        var insertIdx         = endNodeIdxInTgt;
+
+        if (srcWayIsClosed)
+        {
+            var tgtDirectionAsc   = endNodeIdxInTgt > startNodeIdxInTgt;
+                srcIndexIncrement = tgtDirectionAsc ? 1 : 0;
+                insertIdx         = tgtDirectionAsc ? endNodeIdxInTgt : startNodeIdxInTgt;
+
+            if (tgtIsLastSegmentOfClosedWay) {
+                insertIdx = tgtNodesCnt - 1;
+                srcIndexIncrement = tgtDirectionAsc ? 0 : 1;
+            }
+        }
+        else
+        {
+            if (tgtIsLastSegmentOfClosedWay) {
+                insertIdx = tgtNodesCnt - 1;
+                srcIndexIncrement = 0;
+            }
+        }
+
+        while (srcNodeIdx !== endNodeIdxInSrc)
+        {
+            newTgtNodes.splice(insertIdx, 0, srcNodes[srcNodeIdx]);
+            insertIdx = insertIdx + srcIndexIncrement;
+             // jump to the first node if source is closed:
+            srcNodeIdx = srcWayIsClosed && srcNodeIdx + 1 === srcNodesCnt - 1 ? 0 : srcNodeIdx + 1; 
+        }
+       
+        tgtWay = tgtWay.update({nodes: newTgtNodes});
+        graph  = graph.replace(tgtWay);
+
+        return graph;
+    };
+
+    action.disabled = function(graph) {
+
+        var tgtWay         = graph.entity(selectedIDs[0]);
+        var tgtWayIsClosed = tgtWay.isClosed();
+        var tgtNodes       = tgtWay.nodes.slice();
+        var tgtNodesCnt    = tgtNodes.length;
+        var srcWay         = graph.entity(selectedIDs[1]);
+        var srcNodes       = srcWay.nodes.slice();
+
+        var startNodeId = getStartNodeId(selectedIDs[2], tgtNodes, srcNodes);
+        var endNodeId   = getEndNodeId(startNodeId, selectedIDs[3], tgtNodes, srcNodes);
+
+        var startNodeIdxInTgt = tgtNodes.indexOf(startNodeId);
+        var endNodeIdxInTgt   = tgtNodes.indexOf(endNodeId);
+        var startNodeIdxInSrc = srcNodes.indexOf(startNodeId);
+        var endNodeIdxInSrc   = srcNodes.indexOf(endNodeId);
+
+        var tgtNodesCnt = tgtNodes.length;
+
+        var tgtIsLastSegmentOfClosedWay = tgtWayIsClosed && ((startNodeIdxInTgt === 0 && endNodeIdxInTgt === tgtNodesCnt - 2) || (endNodeIdxInTgt === 0 && startNodeIdxInTgt === tgtNodesCnt - 2));
+
+        // make sure the nodes are shared by source and target ways, and that are consecutive in target way
+        if (startNodeIdxInTgt === -1 || endNodeIdxInTgt === -1 || startNodeIdxInSrc === -1 || endNodeIdxInSrc === -1) {
+            return 'nodes_are_not_shared_by_both_ways';
+        }
+
+        if (tgtIsLastSegmentOfClosedWay) {
+          return false;
+        }
+
+        if (Math.abs(startNodeIdxInTgt - endNodeIdxInTgt) !== 1 && (endNodeIdxInTgt !== tgtNodesCnt - 1 || startNodeIdxInTgt !== 0)) {
+            return 'nodes_are_not_consecutive_in_target';
+        }
+        return false;
+
+    };
+
+    action.transitionable = true;
 
 
-  return action;
+    return action;
 }
