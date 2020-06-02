@@ -1,11 +1,11 @@
-export function actionFollow(selectedIDs, projection) {
+export function actionFollow(selectedIDs) {
 
   // tgt: target
   // src: source
   // cnt: count
   // idx: index
 
-  var getStartNodeId = function(startNodeId, tgtNodes, srcNodes, graph) {
+  var getStartNodeId = function(startNodeId, tgtNodes, srcNodes) {
       if (startNodeId) {
           return startNodeId;
       } else {
@@ -18,9 +18,9 @@ export function actionFollow(selectedIDs, projection) {
           }
       }
       return null;
-  }
+  };
 
-  var getEndNodeId = function(startNodeId, endNodeId, tgtNodes, srcNodes, graph) {
+  var getEndNodeId = function(startNodeId, endNodeId, tgtNodes, srcNodes) {
       if (endNodeId) {
           return endNodeId;
       } else {
@@ -33,10 +33,9 @@ export function actionFollow(selectedIDs, projection) {
           }
       }
       return null;
+  };
 
-  }
-
-  var action = function(graph, t) {
+  var action = function(graph) {
 
       var tgtWay         = graph.entity(selectedIDs[0]);
       var tgtWayIsClosed = tgtWay.isClosed();
@@ -56,16 +55,17 @@ export function actionFollow(selectedIDs, projection) {
       var startNodeIdxInTgt = tgtNodes.indexOf(startNodeId);
       var endNodeIdxInTgt   = tgtNodes.indexOf(endNodeId);
 
+      
       if (!srcWayIsClosed && startNodeIdxInSrc > endNodeIdxInSrc) { // reverse direction for src if backward
-          var tmpNodeIdx        = startNodeIdxInSrc;
+          var tmpStartNodeIdx   = startNodeIdxInSrc;
               startNodeIdxInSrc = endNodeIdxInSrc;
-              endNodeIdxInSrc   = tmpNodeIdx;
+              endNodeIdxInSrc   = tmpStartNodeIdx;
       }
 
       if (!tgtWayIsClosed && !srcWayIsClosed && startNodeIdxInTgt > endNodeIdxInTgt) { // reverse direction for src if backward
-          var tmpNodeIdx        = startNodeIdxInTgt;
+          var tmpEndNodeIdx     = startNodeIdxInTgt;
               startNodeIdxInTgt = endNodeIdxInTgt;
-              endNodeIdxInTgt   = tmpNodeIdx;
+              endNodeIdxInTgt   = tmpEndNodeIdx;
       }
 
       // check if target is closed and if start and end target nodes are the last segment of the loop :
@@ -78,7 +78,6 @@ export function actionFollow(selectedIDs, projection) {
       var srcNodeIdx = srcWayIsClosed && startNodeIdxInSrc === srcNodesCnt - 2 ? 0 : startNodeIdxInSrc + 1;
 
       var srcIndexIncrement = sameDirection ? 1 : 0;
-      var insertIdx         = endNodeIdxInTgt;
 
       if (srcWayIsClosed)
       {
@@ -129,8 +128,6 @@ export function actionFollow(selectedIDs, projection) {
       var endNodeIdxInTgt   = tgtNodes.indexOf(endNodeId);
       var startNodeIdxInSrc = srcNodes.indexOf(startNodeId);
       var endNodeIdxInSrc   = srcNodes.indexOf(endNodeId);
-
-      var tgtNodesCnt = tgtNodes.length;
 
       var tgtIsLastSegmentOfClosedWay = tgtWayIsClosed && ((startNodeIdxInTgt === 0 && endNodeIdxInTgt === tgtNodesCnt - 2) || (endNodeIdxInTgt === 0 && startNodeIdxInTgt === tgtNodesCnt - 2));
 
