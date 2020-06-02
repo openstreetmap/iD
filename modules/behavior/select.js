@@ -209,12 +209,13 @@ export function behaviorSelect(context) {
         var multiselectEntityId;
 
         if (!_multiselectionPointerId) {
-            // If a different pointer than the one triggering this click is down on the
-            // selection, treat this and all future clicks as multiselection until that
+            // If a different pointer than the one triggering this click is down on a
+            // feature, treat this and all future clicks as multiselection until that
             // pointer is raised.
             var selectPointerInfo = pointerDownOnSelection(pointerId);
             if (selectPointerInfo) {
                 _multiselectionPointerId = selectPointerInfo.pointerId;
+                // if the other feature isn't selected yet, make sure we select it
                 multiselectEntityId = !selectPointerInfo.selected && selectPointerInfo.entityId;
                 _downPointers[selectPointerInfo.pointerId].done = true;
             }
@@ -226,7 +227,7 @@ export function behaviorSelect(context) {
             (d3_event && d3_event.shiftKey) ||
             // or we're lasso-selecting
             context.surface().select('.lasso').node() ||
-            // or a pointer is down over a selected or selectable feature
+            // or a pointer is down over a selected feature
             (_multiselectionPointerId && !multiselectEntityId)
         );
 
