@@ -384,7 +384,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         // finish drawing if the mapper targets the prior node
         if (node.id === _headNodeID ||
             // or the first node when drawing an area
-            (_wayGeometry === 'area' && node.id === _origWay.first())) {
+            (_origWay.isClosed() && node.id === _origWay.first())) {
             drawWay.finish();
             return;
         }
