@@ -198,6 +198,10 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             presets.ensureLoaded().then(function() {
+
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
                 var ids = new Set(['residential']);   // can only add preset with this ID
                 presets.addablePresetIDs(ids);
 
@@ -208,6 +212,42 @@ describe('iD.presetIndex', function () {
                 presets.addablePresetIDs(null);
                 expect(presets.item('residential').addable()).to.be.true;
                 expect(presets.item('park').addable()).to.be.true;
+
+                done();
+            });
+        });
+
+        it('ignores invalid IDs in addablePresetIDs', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
+                var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
+                presets.addablePresetIDs(ids);
+
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.false;
+                expect(presets.addablePresetIDs()).to.eql(ids);
+
+                presets.addablePresetIDs(null);
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
                 done();
             });
         });

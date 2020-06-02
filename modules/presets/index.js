@@ -338,11 +338,19 @@ export function presetIndex() {
   _this.addablePresetIDs = function(val) {
     if (!arguments.length) return _addablePresetIDs;
 
+    // accept and convert arrays
+    if (Array.isArray(val)) val = new Set(val);
+
     _addablePresetIDs = val;
     if (_addablePresetIDs) {   // reset all presets
-      _this.collection.forEach(p => p.addable(_addablePresetIDs.has(p.id)));
+      _this.collection.forEach(p => {
+        // categories aren't addable
+        if (p.addable) p.addable(_addablePresetIDs.has(p.id));
+      });
     } else {
-      _this.collection.forEach(p => p.addable(true));
+      _this.collection.forEach(p => {
+        if (p.addable) p.addable(true);
+      });
     }
 
     return _this;
