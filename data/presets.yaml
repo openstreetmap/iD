@@ -5314,6 +5314,10 @@ en:
         name: Unknown Road
         # 'terms: road,street'
         terms: '<translate with synonyms or related terms for ''Unknown Road'', separated by commas>'
+      highway/road/bridge:
+        # 'highway=road, bridge=*'
+        name: Unknown Road Bridge
+        terms: '<translate with synonyms or related terms for ''Unknown Road Bridge'', separated by commas>'
       highway/secondary:
         # highway=secondary
         name: Secondary Road

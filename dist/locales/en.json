@@ -7199,6 +7199,10 @@
                     "name": "Unknown Road",
                     "terms": "road,street"
                 },
+                "highway/road/bridge": {
+                    "name": "Unknown Road Bridge",
+                    "terms": ""
+                },
                 "highway/secondary_link": {
                     "name": "Secondary Link",
                     "terms": "on ramp,off ramp,ramp,road,street"

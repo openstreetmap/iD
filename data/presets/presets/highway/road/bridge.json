@@ -1,0 +1,24 @@
+{
+    "icon": "iD-other-line",
+    "fields": [
+        "highway",
+        "{highway/residential}"
+    ],
+    "moreFields": [
+        "{highway/residential}"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "road",
+        "bridge": "*"
+    },
+    "addTags": {
+        "highway": "road",
+        "bridge": "yes",
+        "layer": "1"
+    },
+    "name": "Unknown Road Bridge",
+    "matchScore": 0.25
+}
