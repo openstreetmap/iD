@@ -46,20 +46,6 @@ export function uiToolNotes(context) {
 
     tool.render = function(selection) {
 
-        context
-            .on('enter.editor.notes', function(entered) {
-                selection.selectAll('button.add-button')
-                    .classed('active', function(mode) { return entered.button === mode.button; });
-                context.container()
-                    .classed('mode-' + entered.id, true);
-            });
-
-        context
-            .on('exit.editor.notes', function(exited) {
-                context.container()
-                    .classed('mode-' + exited.id, false);
-            });
-
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -123,7 +109,8 @@ export function uiToolNotes(context) {
             // update
             buttons = buttons
                 .merge(buttonsEnter)
-                .classed('disabled', function(d) { return !enabled(d); });
+                .classed('disabled', function(d) { return !enabled(d); })
+                .classed('active', function(d) { return context.mode() && context.mode().button === d.button; });
         }
     };
 

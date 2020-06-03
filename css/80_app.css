@@ -945,6 +945,9 @@ a.hide-toggle {
         background-color: #ececec;
     }
 }
+.feature-list-item.hover {
+    background-color: #ececec;
+}
 .feature-list-item button {
     background: transparent;
 }
@@ -3992,6 +3995,8 @@ img.tile {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    pointer-events: none;
 
     -webkit-user-drag: none;
 

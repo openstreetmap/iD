@@ -17,7 +17,7 @@ var _lastSpace = null;
 
 export function behaviorDraw(context) {
     var dispatch = d3_dispatch(
-        'move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
+        'move', 'down', 'downcancel', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
     );
 
     var keybinding = utilKeybinding('draw');
@@ -32,8 +32,9 @@ export function behaviorDraw(context) {
     var _tolerance = 12;
     var _mouseLeave = false;
     var _lastMouse = null;
+    var _lastPointerUpEvent;
 
-    var _downPointerId;
+    var _downPointer;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -59,65 +60,93 @@ export function behaviorDraw(context) {
         return (d && d.properties && d.properties.target) ? d : {};
     }
 
-
     function pointerdown() {
 
-        if (_downPointerId) return;
-        var _downPointerId = d3_event.pointerId || 'mouse';
+        if (_downPointer) return;
 
         var pointerLocGetter = utilFastMouse(this);
+        _downPointer = {
+            id: d3_event.pointerId || 'mouse',
+            pointerLocGetter: pointerLocGetter,
+            downTime: +new Date(),
+            downLoc: pointerLocGetter(d3_event)
+        };
 
-        var element = d3_select(this);
-        var t1 = +new Date();
-        var p1 = pointerLocGetter(d3_event);
-
-        element.on(_pointerPrefix + 'move.draw', null);
-
-        d3_select(window).on(_pointerPrefix + 'up.draw', function() {
-
-            if (_downPointerId !== (d3_event.pointerId || 'mouse')) return;
-            _downPointerId = null;
-
-            element.on(_pointerPrefix + 'move.draw', pointermove);
-            d3_select(window).on(_pointerPrefix + 'up.draw', null);
-
-            var t2 = +new Date();
-            var p2 = pointerLocGetter(d3_event);
-            var dist = geoVecLength(p1, p2);
-
-            if (dist < _closeTolerance || (dist < _tolerance && (t2 - t1) < 500)) {
-                // Prevent a quick second click
-                d3_select(window).on('click.draw-block', function() {
-                    d3_event.stopPropagation();
-                }, true);
-
-                context.map().dblclickZoomEnable(false);
-
-                window.setTimeout(function() {
-                    context.map().dblclickZoomEnable(true);
-                    d3_select(window).on('click.draw-block', null);
-                }, 500);
-
-                click(p2);
-            }
-        }, true);
+        dispatch.call('down', this, datum());
     }
 
+    function pointerup() {
+
+        if (!_downPointer || _downPointer.id !== (d3_event.pointerId || 'mouse')) return;
+
+        var downPointer = _downPointer;
+        _downPointer = null;
+
+        _lastPointerUpEvent = d3_event;
+
+        if (downPointer.isCancelled) return;
+
+        var t2 = +new Date();
+        var p2 = downPointer.pointerLocGetter(d3_event);
+        var dist = geoVecLength(downPointer.downLoc, p2);
+
+        if (dist < _closeTolerance || (dist < _tolerance && (t2 - downPointer.downTime) < 500)) {
+            // Prevent a quick second click
+            d3_select(window).on('click.draw-block', function() {
+                d3_event.stopPropagation();
+            }, true);
+
+            context.map().dblclickZoomEnable(false);
+
+            window.setTimeout(function() {
+                context.map().dblclickZoomEnable(true);
+                d3_select(window).on('click.draw-block', null);
+            }, 500);
+
+            click(p2);
+        }
+    }
 
     function pointermove() {
+        if (_downPointer &&
+            _downPointer.id === (d3_event.pointerId || 'mouse') &&
+            !_downPointer.isCancelled) {
+            var p2 = _downPointer.pointerLocGetter(d3_event);
+            var dist = geoVecLength(_downPointer.downLoc, p2);
+            if (dist >= _closeTolerance) {
+                _downPointer.isCancelled = true;
+                dispatch.call('downcancel', this);
+            }
+        }
+
         if ((d3_event.pointerType && d3_event.pointerType !== 'mouse') ||
             d3_event.buttons ||
-            _downPointerId) return;
+            _downPointer) return;
+
+        // HACK: Mobile Safari likes to send one or more `mouse` type pointermove
+        // events immediately after non-mouse pointerup events; detect and ignore them.
+        if (_lastPointerUpEvent &&
+            _lastPointerUpEvent.pointerType !== 'mouse' &&
+            d3_event.timeStamp - _lastPointerUpEvent.timeStamp < 100) return;
 
         _lastMouse = d3_event;
         dispatch.call('move', this, datum());
     }
 
+    function pointercancel() {
+        if (_downPointer &&
+            _downPointer.id === (d3_event.pointerId || 'mouse')) {
+
+            if (!_downPointer.isCancelled) {
+                dispatch.call('downcancel', this);
+            }
+            _downPointer = null;
+        }
+    }
 
     function mouseenter() {
         _mouseLeave = false;
     }
-
 
     function mouseleave() {
         _mouseLeave = true;
@@ -213,7 +242,7 @@ export function behaviorDraw(context) {
         context.install(_hover);
         context.install(_edit);
 
-        _downPointerId = null;
+        _downPointer = null;
 
         keybinding
             .on('⌫', backspace)
@@ -228,6 +257,10 @@ export function behaviorDraw(context) {
             .on('mouseleave.draw', mouseleave)
             .on(_pointerPrefix + 'down.draw', pointerdown)
             .on(_pointerPrefix + 'move.draw', pointermove);
+
+        d3_select(window)
+            .on(_pointerPrefix + 'up.draw', pointerup, true)
+            .on('pointercancel.draw', pointercancel, true);
 
         d3_select(document)
             .call(keybinding);
@@ -248,7 +281,8 @@ export function behaviorDraw(context) {
             .on(_pointerPrefix + 'move.draw', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'up.draw', null);
+            .on(_pointerPrefix + 'up.draw', null)
+            .on('pointercancel.draw', null);
             // note: keyup.space-block, click.draw-block should remain
 
         d3_select(document)

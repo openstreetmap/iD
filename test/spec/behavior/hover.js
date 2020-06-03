@@ -30,7 +30,7 @@ describe('iD.behaviorHover', function() {
         });
     });
 
-    describe('mouseover', function () {
+    describe('mouseover and mouseout', function () {
         it('adds the .hover class to all elements to which the same datum is bound', function () {
             var a = iD.osmNode({id: 'a'});
             var b = iD.osmNode({id: 'b'});
@@ -45,6 +45,9 @@ describe('iD.behaviorHover', function() {
 
             expect(_container.selectAll('.a.hover').nodes()).to.have.length(2);
             expect(_container.selectAll('.b.hover').nodes()).to.have.length(0);
+
+            iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseout');
+            expect(_container.selectAll('.hover').nodes()).to.have.length(0);
         });
 
         it('adds the .hover class to all members of a relation', function() {
@@ -61,16 +64,8 @@ describe('iD.behaviorHover', function() {
 
             expect(_container.selectAll('.a.hover').nodes()).to.have.length(1);
             expect(_container.selectAll('.b.hover').nodes()).to.have.length(1);
-        });
-    });
 
-    describe('mouseout', function () {
-        it('removes the .hover class from all elements', function () {
-            _container.append('span').attr('class', 'hover');
-
-            _container.call(iD.behaviorHover(_context));
-            iD.utilTriggerEvent(_container.selectAll('.hover'), 'mouseout');
-
+            iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseout');
             expect(_container.selectAll('.hover').nodes()).to.have.length(0);
         });
     });

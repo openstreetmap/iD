@@ -1,5 +1,5 @@
 {
-    "icon": "maki-telephone",
+    "icon": "fas-phone-alt",
     "fields": [
         "operator",
         "phone",

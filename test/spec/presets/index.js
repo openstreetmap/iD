@@ -181,7 +181,8 @@ describe('iD.presetIndex', function () {
     describe('#addablePresetIDs', function () {
         var testPresets = {
             residential: { tags: { highway: 'residential' }, geometry: ['line'] },
-            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] }
+            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] },
+            bench: { tags: { amenity: 'bench' }, geometry: ['point', 'line'] }
         };
 
         it('addablePresetIDs is initially null', function (done) {
@@ -197,6 +198,10 @@ describe('iD.presetIndex', function () {
             iD.fileFetcher.cache().preset_presets = testPresets;
             var presets = iD.presetIndex();
             presets.ensureLoaded().then(function() {
+
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
                 var ids = new Set(['residential']);   // can only add preset with this ID
                 presets.addablePresetIDs(ids);
 
@@ -207,6 +212,65 @@ describe('iD.presetIndex', function () {
                 presets.addablePresetIDs(null);
                 expect(presets.item('residential').addable()).to.be.true;
                 expect(presets.item('park').addable()).to.be.true;
+
+                done();
+            });
+        });
+
+        it('ignores invalid IDs in addablePresetIDs', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
+                var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
+                presets.addablePresetIDs(ids);
+
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.false;
+                expect(presets.addablePresetIDs()).to.eql(ids);
+
+                presets.addablePresetIDs(null);
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
+                done();
+            });
+        });
+
+        it('addablePresetIDs are default presets', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+                var ids = new Set(['bench', 'residential']);   // can only add presets with these IDs
+                presets.addablePresetIDs(ids);
+
+                var areaDefaults = presets.defaults('area', 10).collection;
+                expect(areaDefaults.length).to.eql(0);
+
+                var pointDefaults = presets.defaults('point', 10).collection;
+                expect(pointDefaults.length).to.eql(1);
+                expect(pointDefaults[0].id).to.eql('bench');
+
+                var lineDefaults = presets.defaults('line', 10).collection;
+                expect(lineDefaults.length).to.eql(2);
+                expect(lineDefaults[0].id).to.eql('bench');
+                expect(lineDefaults[1].id).to.eql('residential');
+
                 done();
             });
         });

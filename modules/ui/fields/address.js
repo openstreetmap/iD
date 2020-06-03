@@ -11,23 +11,28 @@ import { t } from '../../core/localizer';
 
 
 export function uiFieldAddress(field, context) {
-    var dispatch = d3_dispatch('init', 'change');
-    var wrap = d3_select(null);
+    var dispatch = d3_dispatch('change');
+    var _selection = d3_select(null);
+    var _wrap = d3_select(null);
     var addrField = presetManager.field('address');   // needed for placeholder strings
 
-    var _isInitialized = false;
     var _entityIDs = [];
     var _tags;
     var _countryCode;
     var _addressFormats = [{
         format: [
-          ['housenumber', 'street'],
-          ['city', 'postcode']
+            ['housenumber', 'street'],
+            ['city', 'postcode']
         ]
       }];
 
     fileFetcher.get('address_formats')
-        .then(function(d) { _addressFormats = d; })
+        .then(function(d) {
+            _addressFormats = d;
+            if (!_selection.empty()) {
+                _selection.call(address);
+            }
+        })
         .catch(function() { /* ignore */ });
 
 
@@ -163,8 +168,15 @@ export function uiFieldAddress(field, context) {
             });
         }
 
-        wrap.selectAll('.addr-row')
-            .data(addressFormat.format)
+        var rows = _wrap.selectAll('.addr-row')
+            .data(addressFormat.format, function(d) {
+                return d.toString();
+            });
+
+        rows.exit()
+            .remove();
+
+        rows
             .enter()
             .append('div')
             .attr('class', 'addr-row')
@@ -198,28 +210,27 @@ export function uiFieldAddress(field, context) {
                 );
         }
 
-        wrap.selectAll('input')
+        _wrap.selectAll('input')
             .on('blur', change())
             .on('change', change());
 
-        wrap.selectAll('input:not(.combobox-input)')
+        _wrap.selectAll('input:not(.combobox-input)')
             .on('input', change(true));
 
-        dispatch.call('init');
-        _isInitialized = true;
+        if (_tags) updateTags(_tags);
     }
 
 
     function address(selection) {
-        _isInitialized = false;
+        _selection = selection;
 
-        wrap = selection.selectAll('.form-field-input-wrap')
+        _wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
-        wrap = wrap.enter()
+        _wrap = _wrap.enter()
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-' + field.type)
-            .merge(wrap);
+            .merge(_wrap);
 
         var extent = combinedEntityExtent();
 
@@ -244,7 +255,7 @@ export function uiFieldAddress(field, context) {
         return function() {
             var tags = {};
 
-            wrap.selectAll('input')
+            _wrap.selectAll('input')
                 .each(function (subfield) {
                     var key = field.key + ':' + subfield.id;
 
@@ -273,7 +284,7 @@ export function uiFieldAddress(field, context) {
 
 
     function updateTags(tags) {
-        utilGetSetValue(wrap.selectAll('input'), function (subfield) {
+        utilGetSetValue(_wrap.selectAll('input'), function (subfield) {
                 var val = tags[field.key + ':' + subfield.id];
                 return typeof val === 'string' ? val : '';
             })
@@ -305,19 +316,12 @@ export function uiFieldAddress(field, context) {
 
     address.tags = function(tags) {
         _tags = tags;
-        if (_isInitialized) {
-            updateTags(tags);
-        } else {
-            dispatch.on('init', function () {
-                dispatch.on('init', null);
-                updateTags(tags);
-            });
-        }
+        updateTags(tags);
     };
 
 
     address.focus = function() {
-        var node = wrap.selectAll('input').node();
+        var node = _wrap.selectAll('input').node();
         if (node) node.focus();
     };
 

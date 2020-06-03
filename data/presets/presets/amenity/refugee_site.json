@@ -1,0 +1,33 @@
+{
+    "icon": "tnp-2120771",
+    "fields": [
+        "name",
+        "operator",
+        "operator/type",
+        "informal",
+        "start_date",
+        "capacity",
+        "population"
+    ],
+    "moreFields": [
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "website"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "refugee_site"
+    },
+    "terms": [
+        "displaced people",
+        "evacuees",
+        "migrants",
+        "ngo",
+        "refugee site"
+    ],
+    "name": "Refugee Camp"
+}

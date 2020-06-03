@@ -1235,6 +1235,9 @@ en:
       label:
         # label=*
         label: Label
+      lamp_mount:
+        # lamp_mount=*
+        label: Mount
       lamp_type:
         # lamp_type=*
         label: Type
@@ -3648,6 +3651,11 @@ en:
         name: Recycling Container
         # 'terms: bin,can,bottle,glass,garbage,rubbish,scrap,trash'
         terms: '<translate with synonyms or related terms for ''Recycling Container'', separated by commas>'
+      amenity/refugee_site:
+        # amenity=refugee_site
+        name: Refugee Camp
+        # 'terms: displaced people,evacuees,migrants,ngo,refugee site'
+        terms: '<translate with synonyms or related terms for ''Refugee Camp'', separated by commas>'
       amenity/research_institute:
         # amenity=research_institute
         name: Research Institute Grounds
@@ -5123,7 +5131,7 @@ en:
       highway/cycleway/bicycle_foot:
         # 'highway=cycleway, foot=designated'
         name: Cycle & Foot Path
-        # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail'
+        # 'terms: bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,shared path,shared use path,rail trail'
         terms: '<translate with synonyms or related terms for ''Cycle & Foot Path'', separated by commas>'
       highway/cycleway/crossing:
         # cycleway=crossing
@@ -8366,6 +8374,11 @@ en:
         name: Travel Agency
         # 'terms: cruises,flights,hotels,tickets,travel packages'
         terms: '<translate with synonyms or related terms for ''Travel Agency'', separated by commas>'
+      shop/trophy:
+        # shop=trophy
+        name: Trophy Shop
+        # 'terms: awards,engravings,medals,plaques,trophy store'
+        terms: '<translate with synonyms or related terms for ''Trophy Shop'', separated by commas>'
       shop/tyres:
         # shop=tyres
         name: Tire Store

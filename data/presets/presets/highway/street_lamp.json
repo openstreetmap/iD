@@ -9,7 +9,9 @@
     },
     "fields": [
         "lamp_type",
+        "lamp_mount",
         "direction",
+        "height",
         "ref"
     ],
     "terms": [

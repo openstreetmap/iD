@@ -32,6 +32,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     var _headNodeID;
     var _annotation;
 
+    var _pointerHasMoved = false;
+
     // The osmNode to be placed.
     // This is temporary and just follows the mouse cursor until an "add" event occurs.
     var _drawNode;
@@ -244,6 +246,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             'operations.start.annotation.' :
             'operations.continue.annotation.') + _wayGeometry
         );
+        _pointerHasMoved = false;
 
         // Push an annotated state for undo to return back to.
         // We must make sure to replace or remove it later.
@@ -255,7 +258,16 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             .initialNodeID(_headNodeID);
 
         behavior
-            .on('move', move)
+            .on('move', function() {
+                _pointerHasMoved = true;
+                move.apply(this, arguments);
+            })
+            .on('down', function() {
+                move.apply(this, arguments);
+            })
+            .on('downcancel', function() {
+                if (_drawNode) removeDrawNode();
+            })
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
@@ -308,8 +320,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             .classed('nope-disabled', false);
 
         d3_select(window)
-            .on('keydown.hover', null)
-            .on('keyup.hover', null);
+            .on('keydown.drawWay', null)
+            .on('keyup.drawWay', null);
 
         context.history()
             .on('undone.draw', null);
@@ -318,7 +330,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     function attemptAdd(d, loc, doAdd) {
 
-        var didJustAddDrawNode = false;
         if (_drawNode) {
             // move the node to the final loc in case move wasn't called
             // consistently (e.g. on touch devices)
@@ -326,12 +337,11 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             _drawNode = context.entity(_drawNode.id);
         } else {
             createDrawNode(loc);
-            didJustAddDrawNode = true;
         }
 
         checkGeometry(true /* includeDrawNode */);
         if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
-            if (didJustAddDrawNode) {
+            if (!_pointerHasMoved) {
                 // prevent the temporary draw node from appearing on touch devices
                 removeDrawNode();
             }
@@ -374,7 +384,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         // finish drawing if the mapper targets the prior node
         if (node.id === _headNodeID ||
             // or the first node when drawing an area
-            (_wayGeometry === 'area' && node.id === _origWay.first())) {
+            (_origWay.isClosed() && node.id === _origWay.first())) {
             drawWay.finish();
             return;
         }

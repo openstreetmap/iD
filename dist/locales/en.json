@@ -3700,6 +3700,9 @@
                 "label": {
                     "label": "Label"
                 },
+                "lamp_mount": {
+                    "label": "Mount"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },
@@ -5754,6 +5757,10 @@
                     "name": "Green Waste Container",
                     "terms": "biodegradable,biological,compost,decomposable,garbage bin,garden waste,organic,rubbish,food scrap"
                 },
+                "amenity/refugee_site": {
+                    "name": "Refugee Camp",
+                    "terms": "displaced people,evacuees,migrants,ngo,refugee site"
+                },
                 "amenity/research_institute": {
                     "name": "Research Institute Grounds",
                     "terms": "applied research,experimentation,r&d,r & d,r and d,research and development,research institution,research laboratory,research labs"
@@ -7020,7 +7027,7 @@
                 },
                 "highway/cycleway/bicycle_foot": {
                     "name": "Cycle & Foot Path",
-                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,rail trail"
+                    "terms": "bicycle and foot path,bike and pedestrian path,green way,greenway,mixed-use trail,multi-use trail,segregated trail,shared path,shared use path,rail trail"
                 },
                 "highway/cycleway/crossing/bicycle_foot": {
                     "name": "Cycle & Foot Crossing",
@@ -9734,6 +9741,10 @@
                     "name": "Travel Agency",
                     "terms": "cruises,flights,hotels,tickets,travel packages"
                 },
+                "shop/trophy": {
+                    "name": "Trophy Shop",
+                    "terms": "awards,engravings,medals,plaques,trophy store"
+                },
                 "shop/tyres": {
                     "name": "Tire Store",
                     "terms": ""
@@ -10595,6 +10606,27 @@
                     "text": "© OpenStreetMap contributors, CC-BY-SA"
                 },
                 "name": "OpenPT Map (overlay)"
+            },
+            "openrailwaymap": {
+                "attribution": {
+                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
+                },
+                "description": "Overlay imagery showing railway infrastructure based on OpenStreetMap data",
+                "name": "OpenRailwayMap"
+            },
+            "openrailwaymap-maxspeeds": {
+                "attribution": {
+                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
+                },
+                "description": "Overlay imagery showing railway speed limits based on OpenStreetMap data",
+                "name": "OpenRailwayMap Maxspeeds"
+            },
+            "openrailwaymap-signalling": {
+                "attribution": {
+                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
+                },
+                "description": "Overlay imagery showing railway signals based on OpenStreetMap data",
+                "name": "OpenRailwayMap Signalling"
             },
             "osm-gps": {
                 "attribution": {

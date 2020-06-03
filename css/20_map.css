@@ -65,6 +65,17 @@
     stroke-linejoin: round;
 }
 
+.ideditor[pointer='pen'] .way.target {
+    stroke-width: 18;
+}
+.ideditor[pointer='touch'] .way.target {
+    stroke-width: 32;
+}
+.ideditor[pointer='touch'] .node.vertex.target {
+    pointer-events: painted;
+    stroke: currentColor;
+    stroke-width: 10;
+}
 
 /* `.target-nope` objects are explicitly forbidden to join to */
 .surface:not(.nope-disabled) .node.target.target-nope,

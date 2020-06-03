@@ -22,9 +22,9 @@
 
 .ideditor.mode-browse .vertex,
 .ideditor.mode-select .vertex,
-.ideditor.mode-select-data .point,
-.ideditor.mode-select-error .point,
-.ideditor.mode-select-note .point {
+.ideditor.mode-select-data .vertex,
+.ideditor.mode-select-error .vertex,
+.ideditor.mode-select-note .vertex {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-vertex.png), pointer; /* FF */
 }

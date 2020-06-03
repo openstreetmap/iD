@@ -37,23 +37,15 @@ export function modeSelect(context, selectedIDs) {
     };
 
     var keybinding = utilKeybinding('select');
-    var breatheBehavior = behaviorBreathe(context);
-    var behaviors = [
-        behaviorPaste(context),
-        breatheBehavior,
-        behaviorHover(context),
-        behaviorSelect(context),
-        behaviorLasso(context),
-        modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior,
-        modeDragNote(context).behavior
-    ];
-    var inspector;   // unused?
+
+    var _breatheBehavior = behaviorBreathe(context);
+    var _modeDragNode = modeDragNode(context);
+    var _selectBehavior;
+    var _behaviors = [];
+
+    var _operations = [];
     var _newFeature = false;
     var _follow = false;
-
-
-    var wrap = context.container()
-        .select('.inspector-wrap');
 
 
     function singular() {
@@ -142,8 +134,10 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
-    mode.selectedIDs = function() {
-        return selectedIDs;
+    mode.selectedIDs = function(val) {
+        if (!arguments.length) return selectedIDs;
+        selectedIDs = val;
+        return mode;
     };
 
 
@@ -159,23 +153,28 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
+    mode.selectBehavior = function(val) {
+        if (!arguments.length) return _selectBehavior;
+        _selectBehavior = val;
+        return mode;
+    };
+
+
     mode.follow = function(val) {
         if (!arguments.length) return _follow;
         _follow = val;
         return mode;
     };
 
-    var operations = [];
-
     function loadOperations() {
 
-        operations.forEach(function(operation) {
+        _operations.forEach(function(operation) {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);
             }
         });
 
-        operations = Object.values(Operations)
+        _operations = Object.values(Operations)
             .map(function(o) { return o(context, selectedIDs); })
             .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
 
@@ -183,9 +182,9 @@ export function modeSelect(context, selectedIDs) {
         // don't allow delete if downgrade is available
         var lastOperation = !context.inIntro() && downgradeOperation.available() ? downgradeOperation : Operations.operationDelete(context, selectedIDs);
 
-        operations.push(lastOperation);
+        _operations.push(lastOperation);
 
-        operations.forEach(function(operation) {
+        _operations.forEach(function(operation) {
             if (operation.behavior) {
                 context.install(operation.behavior);
             }
@@ -196,7 +195,7 @@ export function modeSelect(context, selectedIDs) {
     }
 
     mode.operations = function() {
-        return operations;
+        return _operations;
     };
 
 
@@ -205,9 +204,24 @@ export function modeSelect(context, selectedIDs) {
 
         context.features().forceVisible(selectedIDs);
 
+        _modeDragNode.restoreSelectedIDs(selectedIDs);
+
         loadOperations();
 
-        behaviors.forEach(context.install);
+        if (!_behaviors.length) {
+            if (!_selectBehavior) _selectBehavior = behaviorSelect(context);
+
+            _behaviors = [
+                behaviorPaste(context),
+                _breatheBehavior,
+                behaviorHover(context).on('hover', context.ui().sidebar.hoverModeSelect),
+                _selectBehavior,
+                behaviorLasso(context),
+                _modeDragNode.behavior,
+                modeDragNote(context).behavior
+            ];
+        }
+        _behaviors.forEach(context.install);
 
         keybinding
             .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
@@ -245,7 +259,7 @@ export function modeSelect(context, selectedIDs) {
             .on('drawn.select', selectElements)
             .on('crossEditableZoom.select', function() {
                 selectElements();
-                breatheBehavior.restartIfNeeded(context.surface());
+                _breatheBehavior.restartIfNeeded(context.surface());
             });
 
         context.map().doubleUpHandler()
@@ -468,15 +482,15 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.exit = function() {
-        if (inspector) wrap.call(inspector.close);
 
-        operations.forEach(function(operation) {
+        _operations.forEach(function(operation) {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);
             }
         });
+        _operations = [];
 
-        behaviors.forEach(context.uninstall);
+        _behaviors.forEach(context.uninstall);
 
         d3_select(document)
             .call(keybinding.unbind);

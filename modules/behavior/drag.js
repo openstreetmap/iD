@@ -83,7 +83,7 @@ export function behaviorDrag() {
 
         d3_select(window)
             .on(_pointerPrefix + 'move.drag', pointermove)
-            .on(_pointerPrefix + 'up.drag', pointerup, true);
+            .on(_pointerPrefix + 'up.drag pointercancel.drag', pointerup, true);
 
         if (_origin) {
             offset = _origin.apply(_target, arguments);
@@ -136,13 +136,12 @@ export function behaviorDrag() {
             if (started) {
                 _event({ type: 'end' });
 
-                d3_event.stopPropagation();
                 d3_event.preventDefault();
             }
 
             d3_select(window)
                 .on(_pointerPrefix + 'move.drag', null)
-                .on(_pointerPrefix + 'up.drag', null);
+                .on(_pointerPrefix + 'up.drag pointercancel.drag', null);
 
             selectEnable();
         }
@@ -199,7 +198,7 @@ export function behaviorDrag() {
     behavior.cancel = function() {
         d3_select(window)
             .on(_pointerPrefix + 'move.drag', null)
-            .on(_pointerPrefix + 'up.drag', null);
+            .on(_pointerPrefix + 'up.drag pointercancel.drag', null);
         return behavior;
     };
 
