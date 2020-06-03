@@ -246,15 +246,33 @@ en:
       restriction: "These features can't be connected because it would damage a \"{relation}\" relation."
     disconnect:
       title: Disconnect
-      description: Disconnect these lines/areas from each other.
-      line:
-        description: Disconnect this line from other features.
-      area:
-        description: Disconnect this area from other features.
+      description:
+        no_points:
+          single_way:
+            line: Disconnect this line from other features.
+            area: Disconnect this area from other features.
+          multiple_ways:
+            conjoined: Disconnect these features from each other.
+            separate: Disconnect these features from everything.
+        single_point:
+          no_ways: Disconnect the features at this point.
+          single_way:
+            line: Disconnect the selected line at this point.
+            area: Disconnect the selected area at this point.
+          multiple_ways: Disconnect the selected features at this point.
+        multiple_points:
+          no_ways: Disconnect the features at these points.
+          single_way:
+            line: Disconnect the selected line at these points.
+            area: Disconnect the selected area at these points.
+          multiple_ways: Disconnect the selected features at these points.
       key: D
-      annotation: Disconnected lines/areas.
+      annotation:
+        features: Disconnected features.
+        from_each_other: Disconnected features from each other.
       too_large:
         single: This can't be disconnected because not enough of it is currently visible.
+        multiple: These can't be disconnected because not enough of them are currently visible.
       not_connected: There aren't enough lines/areas here to disconnect.
       not_downloaded: This can't be disconnected because parts of it have not yet been downloaded.
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
