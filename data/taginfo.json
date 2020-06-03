@@ -51,7 +51,7 @@
     {"key": "aeroway", "value": "hangar", "description": "🄿 Hangar", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/hangar.svg"},
     {"key": "aeroway", "value": "helipad", "description": "🄿 Helipad", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/heliport-15.svg"},
     {"key": "aeroway", "value": "holding_position", "description": "🄿 Aircraft Holding Position", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/plane_taxiing.svg"},
-    {"key": "aeroway", "value": "jet_bridge", "description": "🄿 Jet Bridge", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian_walled.svg"},
+    {"key": "aeroway", "value": "jet_bridge", "description": "🄿 Jetway", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian_walled.svg"},
     {"key": "aeroway", "value": "parking_position", "description": "🄿 Aircraft Parking Position", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/plane_taxiing.svg"},
     {"key": "aeroway", "value": "runway", "description": "🄿 Runway", "object_types": ["way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-plane-departure.svg"},
     {"key": "aeroway", "value": "spaceport", "description": "🄿 Spaceport", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-space-shuttle.svg"},

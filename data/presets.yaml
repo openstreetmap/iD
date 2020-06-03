@@ -2968,9 +2968,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Aircraft Holding Position'', separated by commas>'
       aeroway/jet_bridge:
         # aeroway=jet_bridge
-        name: Jet Bridge
-        # 'terms: aerobridge,air jetty,airbridge,finger,gangway,jet way,jetway,passenger boarding bridge,PBB,portal,skybridge,terminal gate connector'
-        terms: '<translate with synonyms or related terms for ''Jet Bridge'', separated by commas>'
+        name: Jetway
+        # 'terms: aerobridge,air jetty,airbridge,airtube,finger,gangway,jet bridge,jetbridge,jet way,jetway,passenger boarding bridge,PBB,portal,skybridge,terminal gate connector'
+        terms: '<translate with synonyms or related terms for ''Jetway'', separated by commas>'
       aeroway/parking_position:
         # aeroway=parking_position
         name: Aircraft Parking Position

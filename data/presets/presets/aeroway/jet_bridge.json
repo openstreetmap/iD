@@ -23,8 +23,11 @@
         "aerobridge",
         "air jetty",
         "airbridge",
+        "airtube",
         "finger",
         "gangway",
+        "jet bridge",
+        "jetbridge",
         "jet way",
         "jetway",
         "passenger boarding bridge",
@@ -34,5 +37,5 @@
         "terminal gate connector"
     ],
     "matchScore": 1.05,
-    "name": "Jet Bridge"
+    "name": "Jetway"
 }
