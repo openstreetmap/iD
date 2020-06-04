@@ -48,7 +48,10 @@ export function svgMidpoints(projection, context) {
         var touchLayer = selection.selectAll('.layer-touch.points');
 
         var mode = context.mode();
-        if (/*(mode && mode.id !== 'select') || */!context.map().withinEditableZoom()) {
+
+        var highlightEdited = context.surface().classed('highlight-edited');
+
+        if ((mode && mode.id !== 'select' && !highlightEdited) || !context.map().withinEditableZoom()) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;
@@ -62,7 +65,7 @@ export function svgMidpoints(projection, context) {
 
             if (entity.type !== 'way') continue;
             if (!filter(entity)) continue;
-            //if (context.selectedIDs().indexOf(entity.id) < 0) continue;
+            if (!highlightEdited && context.selectedIDs().indexOf(entity.id) < 0) continue;
 
             var nodes = graph.childNodes(entity);
             for (var j = 0; j < nodes.length - 1; j++) {

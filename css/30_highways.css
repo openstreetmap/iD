@@ -828,7 +828,7 @@ path.line.over-stroke-2.tag-highway.tag-cycleway-right-lane {
 
 path.line.over-stroke-2.tag-highway.tag-cycleway-left-lane {
     visibility: visible;
-    stroke: rgb(119, 0, 255);
+    stroke: rgb(151, 61, 255);
     /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
     stroke-dasharray: 3 77;
     stroke-dashoffset: 17;
