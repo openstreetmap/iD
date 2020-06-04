@@ -3921,6 +3921,11 @@ en:
         name: University Grounds
         # 'terms: college,graduate school,PhD program,master''s degree program'
         terms: '<translate with synonyms or related terms for ''University Grounds'', separated by commas>'
+      amenity/vacuum_cleaner:
+        # amenity=vacuum_cleaner
+        name: Vacuum Cleaning Station
+        # 'terms: car vacuum cleaner,car wash,carvac,suction'
+        terms: '<translate with synonyms or related terms for ''Vacuum Cleaning Station'', separated by commas>'
       amenity/vehicle_inspection:
         # amenity=vehicle_inspection
         name: Vehicle Inspection

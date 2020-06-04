@@ -243,6 +243,7 @@
     {"key": "townhall:type", "value": "city", "description": "🄿 City Hall", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/capitol.svg"},
     {"key": "amenity", "value": "toy_library", "description": "🄿 Toy Library", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-chess-knight.svg"},
     {"key": "amenity", "value": "university", "description": "🄿 University Grounds", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/college-15.svg"},
+    {"key": "amenity", "value": "vacuum_cleaner", "description": "🄿 Vacuum Cleaning Station", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/vacuum_station.svg"},
     {"key": "amenity", "value": "vehicle_inspection", "description": "🄿 Vehicle Inspection", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-15.svg"},
     {"key": "amenity", "value": "vending_machine", "description": "🄿 Vending Machine", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/vending_machine.svg"},
     {"key": "vending", "value": "bottle_return", "description": "🄿 Bottle Return Machine", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/vending_machine.svg"},

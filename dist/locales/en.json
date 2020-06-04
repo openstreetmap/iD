@@ -6002,6 +6002,10 @@
                     "name": "University Grounds",
                     "terms": "college,graduate school,PhD program,master's degree program"
                 },
+                "amenity/vacuum_cleaner": {
+                    "name": "Vacuum Cleaning Station",
+                    "terms": "car vacuum cleaner,car wash,carvac,suction"
+                },
                 "amenity/vehicle_inspection": {
                     "name": "Vehicle Inspection",
                     "terms": "car inspection"

@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-vacuum_station",
+    "fields": [
+        "operator",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "covered",
+        "lit"
+    ],
+    "moreFields": [
+        "brand",
+        "manufacturer",
+        "opening_hours",
+        "ref"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "amenity": "vacuum_cleaner"
+    },
+    "terms": [
+        "car vacuum cleaner",
+        "car wash",
+        "carvac",
+        "suction"
+    ],
+    "name": "Vacuum Cleaning Station"
+}
