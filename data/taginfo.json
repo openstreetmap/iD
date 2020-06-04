@@ -151,7 +151,7 @@
     {"key": "amenity", "value": "money_transfer", "description": "🄿 Money Transfer Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/money_hand.svg"},
     {"key": "amenity", "value": "motorcycle_parking", "description": "🄿 Motorcycle Parking", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-motorcycle.svg"},
     {"key": "amenity", "value": "music_school", "description": "🄿 Music School", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-music.svg"},
-    {"key": "amenity", "value": "nightclub", "description": "🄿 Nightclub", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/bar-15.svg"},
+    {"key": "amenity", "value": "nightclub", "description": "🄿 Nightclub", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-cocktail.svg"},
     {"key": "amenity", "value": "parking_entrance", "description": "🄿 Parking Garage Entrance / Exit", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/entrance-alt1-15.svg"},
     {"key": "amenity", "value": "parking_space", "description": "🄿 Parking Space", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/parking_space.svg"},
     {"key": "parking_space", "value": "disabled", "description": "🄿 Accessible Parking Space", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/accessible_space.svg"},
