@@ -5347,6 +5347,10 @@
                     "name": "Cafe",
                     "terms": "bistro,coffee,tea"
                 },
+                "amenity/cafe/coffee_shop": {
+                    "name": "Coffeehouse",
+                    "terms": "americano,brew,cafe,café,caffe,caffè,cappuccino,cocoa,coffee shop,drip,espresso,hot drinks,latte,macchiato,tea"
+                },
                 "amenity/car_pooling": {
                     "name": "Car Pooling Station",
                     "terms": "car sharing,carpooling,lift sharing,ride sharing"

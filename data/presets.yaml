@@ -3106,6 +3106,11 @@ en:
         name: Cafe
         # 'terms: bistro,coffee,tea'
         terms: '<translate with synonyms or related terms for ''Cafe'', separated by commas>'
+      amenity/cafe/coffee_shop:
+        # 'amenity=cafe, cuisine=coffee_shop'
+        name: Coffeehouse
+        # 'terms: americano,brew,cafe,café,caffe,caffè,cappuccino,cocoa,coffee shop,drip,espresso,hot drinks,latte,macchiato,tea'
+        terms: '<translate with synonyms or related terms for ''Coffeehouse'', separated by commas>'
       amenity/car_pooling:
         # amenity=car_pooling
         name: Car Pooling Station
