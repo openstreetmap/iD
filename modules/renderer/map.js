@@ -451,12 +451,6 @@ export function rendererMap(context) {
         var y = eventTransform.y;
         var k = eventTransform.k;
 
-        if (_transformStart.x === x &&
-            _transformStart.y === y &&
-            _transformStart.k === k) {
-            return;  // no change
-        }
-
         // Special handling of 'wheel' events:
         // They might be triggered by the user scrolling the mouse wheel,
         // or 2-finger pinch/zoom gestures, the transform may need adjustment.
@@ -573,6 +567,12 @@ export function rendererMap(context) {
                 }
             }
 
+        }
+
+        if (_transformStart.x === x &&
+            _transformStart.y === y &&
+            _transformStart.k === k) {
+            return;  // no change
         }
 
         var withinEditableZoom = map.withinEditableZoom();

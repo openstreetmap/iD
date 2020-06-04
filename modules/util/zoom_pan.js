@@ -212,13 +212,9 @@ export function utilZoomPan() {
         g.mouse[1] = t.invert(g.mouse[0] = p);
       }
       clearTimeout(g.wheel);
-    }
-
-    // If this wheel event won’t trigger a transform change, ignore it.
-    else if (t.k === k) return;
 
     // Otherwise, capture the mouse point and location at the start.
-    else {
+    } else {
       g.mouse = [p, t.invert(p)];
       d3_interrupt(this);
       g.start();
