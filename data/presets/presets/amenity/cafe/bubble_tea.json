@@ -1,0 +1,23 @@
+{
+    "icon": "temaki-bubble_tea",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "cafe",
+        "cuisine": "bubble_tea"
+    },
+    "reference": {
+        "key": "cuisine",
+        "value": "bubble_tea"
+    },
+    "terms": [
+        "boba",
+        "bubble milk tea",
+        "pearl milk tea",
+        "taiwanese tea drink",
+        "tapioca"
+    ],
+    "name": "Bubble Tea Cafe"
+}

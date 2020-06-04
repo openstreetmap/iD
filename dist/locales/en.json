@@ -5347,6 +5347,10 @@
                     "name": "Cafe",
                     "terms": "bistro,coffee,tea"
                 },
+                "amenity/cafe/bubble_tea": {
+                    "name": "Bubble Tea Cafe",
+                    "terms": "boba,bubble milk tea,pearl milk tea,taiwanese tea drink,tapioca"
+                },
                 "amenity/cafe/coffee_shop": {
                     "name": "Coffeehouse",
                     "terms": "americano,brew,cafe,café,caffe,caffè,cappuccino,cocoa,coffee shop,drip,espresso,hot drinks,latte,macchiato,tea"

@@ -3106,6 +3106,11 @@ en:
         name: Cafe
         # 'terms: bistro,coffee,tea'
         terms: '<translate with synonyms or related terms for ''Cafe'', separated by commas>'
+      amenity/cafe/bubble_tea:
+        # 'amenity=cafe, cuisine=bubble_tea'
+        name: Bubble Tea Cafe
+        # 'terms: boba,bubble milk tea,pearl milk tea,taiwanese tea drink,tapioca'
+        terms: '<translate with synonyms or related terms for ''Bubble Tea Cafe'', separated by commas>'
       amenity/cafe/coffee_shop:
         # 'amenity=cafe, cuisine=coffee_shop'
         name: Coffeehouse

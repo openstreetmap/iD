@@ -85,6 +85,7 @@
     {"key": "amenity", "value": "boat_rental", "description": "🄿 Boat Rental", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/boat_rental.svg"},
     {"key": "amenity", "value": "bureau_de_change", "description": "🄿 Currency Exchange", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/money_hand.svg"},
     {"key": "amenity", "value": "cafe", "description": "🄿 Cafe", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/cafe-15.svg"},
+    {"key": "cuisine", "value": "bubble_tea", "description": "🄿 Bubble Tea Cafe", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/bubble_tea.svg"},
     {"key": "cuisine", "value": "coffee_shop", "description": "🄿 Coffeehouse", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/cafe-15.svg"},
     {"key": "amenity", "value": "car_pooling", "description": "🄿 Car Pooling Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/car_pool.svg"},
     {"key": "amenity", "value": "car_rental", "description": "🄿 Car Rental", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/car-rental-15.svg"},
