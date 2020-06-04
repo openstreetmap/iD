@@ -201,8 +201,7 @@ export function validationMismatchedGeometry() {
                     var entityId = this.entityIds[0];
 
                     var extractOnClick = null;
-                    if (!context.hasHiddenConnections(entityId) &&
-                        !actionExtract(entityId).disabled(context.graph())) {
+                    if (!context.hasHiddenConnections(entityId)) {
 
                         extractOnClick = function(context) {
                             var entityId = this.issue.entityIds[0];

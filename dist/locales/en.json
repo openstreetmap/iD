@@ -531,32 +531,32 @@
                 "key": "E",
                 "description": {
                     "vertex": {
-                        "single": "Extract this point from its parent lines/areas."
+                        "single": "Extract this point from its parent lines/areas.",
+                        "multiple": "Extract these points from their parent features."
                     },
                     "line": {
-                        "single": "Extract a point from this line."
+                        "single": "Extract a point from this line.",
+                        "multiple": "Extract points from these lines."
                     },
                     "area": {
-                        "single": "Extract a point from this area."
+                        "single": "Extract a point from this area.",
+                        "multiple": "Extract points from these areas."
+                    },
+                    "feature": {
+                        "multiple": "Extract points from these features."
                     }
                 },
                 "annotation": {
-                    "single": "Extracted a point."
+                    "single": "Extracted a point.",
+                    "multiple": "Extracted {n} points."
                 },
                 "too_large": {
-                    "area": {
-                        "single": "A point can't be extracted from this area because not enough of it is currently visible."
-                    }
-                },
-                "restriction": {
-                    "vertex": {
-                        "single": "This point can't be extracted because it would damage a \"{relation}\" relation."
-                    }
+                    "single": "A point can't be extracted because not enough of this feature is visible.",
+                    "multiple": "Points can't be extracted because not enough of these features are visible."
                 },
                 "connected_to_hidden": {
-                    "vertex": {
-                        "single": "This point can't be extracted because it is connected to a hidden feature."
-                    }
+                    "single": "This point can't be extracted because it is connected to a hidden feature.",
+                    "multiple": "Points can't be extracted from these features because some are connected to hidden features."
                 }
             }
         },

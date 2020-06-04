@@ -41,11 +41,6 @@ describe('iD.operationExtract', function () {
             expect(result).to.be.not.ok;
         });
 
-        it('is not available for two selected ids', function () {
-            var result = iD.operationExtract(fakeContext, ['a', 'b']).available();
-            expect(result).to.be.not.ok;
-        });
-
         it('is not available for unknown selected id', function () {
             var result = iD.operationExtract(fakeContext, ['z']).available();
             expect(result).to.be.not.ok;
@@ -85,6 +80,11 @@ describe('iD.operationExtract', function () {
             var result = iD.operationExtract(fakeContext, ['b']).available();
             expect(result).to.be.ok;
         });
+
+        it('is available for two selected nodes with tags and parent ways', function () {
+            var result = iD.operationExtract(fakeContext, ['a', 'b']).available();
+            expect(result).to.be.ok;
+        });
     });
 
 
@@ -112,7 +112,7 @@ describe('iD.operationExtract', function () {
             expect(result).to.be.not.ok;
         });
 
-        it('returns not-enabled for via node in restriction', function () {
+        it('returns enabled for via node in restriction', function () {
             // https://wiki.openstreetmap.org/wiki/Relation:restriction indicates that
             // from & to roles are only appropriate for Ways
             graph = iD.coreGraph([
@@ -134,10 +134,10 @@ describe('iD.operationExtract', function () {
                 })
             ]);
             var result = iD.operationExtract(fakeContext, ['d']).disabled();
-            expect(result).to.eql('restriction');
+            expect(result).to.be.not.ok;
         });
 
-        it('returns not-enabled for location_hint node in restriction', function () {
+        it('returns enabled for location_hint node in restriction', function () {
             // https://wiki.openstreetmap.org/wiki/Relation:restriction indicates that
             // from & to roles are only appropriate for Ways
             graph = iD.coreGraph([
@@ -160,7 +160,7 @@ describe('iD.operationExtract', function () {
                 })
             ]);
             var result = iD.operationExtract(fakeContext, ['d']).disabled();
-            expect(result).to.eql('restriction');
+            expect(result).to.be.not.ok;
         });
     });
 });

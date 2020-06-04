@@ -99,27 +99,5 @@ export function actionExtract(entityID) {
         return extractedNodeID;
     };
 
-    action.disabled = function(graph) {
-        var entity = graph.entity(entityID);
-
-        if (entity.type === 'node') {
-            var parentRels = graph.parentRelations(entity);
-            for (var i = 0; i < parentRels.length; i++) {
-                var relation = parentRels[i];
-                if (!relation.hasFromViaTo()) continue;
-
-                for (var j = 0; j < relation.members.length; j++) {
-                    var m = relation.members[j];
-                    if (m.id === entityID && (m.role === 'via' || m.role === 'location_hint')) {
-                        return 'restriction';
-                    }
-                }
-            }
-        }
-
-        return false;
-    };
-
-
     return action;
 }
