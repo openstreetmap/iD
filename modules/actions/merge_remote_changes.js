@@ -49,7 +49,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         var a = target.nodes || [];
         var b = remote.nodes || [];
         var nodes = [];
-        var hunks = diff3Merge(a, o, b, true);
+        var hunks = diff3Merge(a, o, b, { excludeFalseConflicts: true });
 
         for (var i = 0; i < hunks.length; i++) {
             var hunk = hunks[i];
