@@ -74,7 +74,7 @@
     "@rollup/plugin-buble": "^0.21.0",
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-json": "^4.0.1",
-    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
     "chai": "^4.1.0",
     "cldr-core": "36.0.0",
     "cldr-localenames-full": "36.0.0",
