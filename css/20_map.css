@@ -151,10 +151,10 @@ g.vertex.shared .stroke {
     fill: #bbb;
 }
 g.midpoint .fill {
-    fill: #eee;
-    stroke: #444;
-    stroke-opacity: .6;
-    opacity: .7;
+    fill: #fff;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    opacity: 0.5;
 }
 
 g.vertex .shadow,

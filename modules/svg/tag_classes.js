@@ -208,6 +208,7 @@ export function svgTagClasses() {
             var noMotorVehicle = false;
             var sidewalk = 'blank';
             var cycleway = 'blank';
+            var cyclewayType = 'none';
             var sidewalkLeft = false;
             var sidewalkRight = false;
             var sidewalkSeparate = false;
@@ -218,6 +219,7 @@ export function svgTagClasses() {
             var sidewalkSeparateLeftRightOrBoth = false;
             var cyclewayUseSidepath = false;
             var hasMaxSpeed = false;
+            var maxSpeed    = null;
             var hasLanes = false;
             var delivery = false;
 
@@ -234,6 +236,7 @@ export function svgTagClasses() {
                 if (k === 'maxspeed' && v >= 10 && v <= 100)
                 {
                     hasMaxSpeed = true;
+                    maxSpeed = v;
                 }
                 if (k === 'lanes' && v >= 1 && v <= 10)
                 {
@@ -264,6 +267,12 @@ export function svgTagClasses() {
                 }
                 if (k === 'motor_vehicle' && v === 'no') {
                     noMotorVehicle = true;
+                }
+                if (k === 'cycleway:right' && v === 'lane') {
+                    cyclewayType = 'cycleway-right-lane';
+                }
+                if (k === 'cycleway:left' && v === 'lane') {
+                    cyclewayType = 'cycleway-left-lane';
                 }
                 if (k in osmCyclewayTrack && !!osmCyclewayTrack[k][v]) {
                     cycleway = 'track';
@@ -383,6 +392,9 @@ export function svgTagClasses() {
             if (cycleway !== 'blank') {
                 classes.push('tag-cycleway-' + cycleway);
             }
+            if (cyclewayType !== 'none') {
+                classes.push('tag-' + cyclewayType);
+            }
             if (isCycleway && !cyclewayWithPedestrian)
             {
                 classes.push('tag-cycleway-no_pedestrian');
@@ -392,6 +404,11 @@ export function svgTagClasses() {
             }
             if (!ignoreMaxSpeed && !hasLanes) {
                 classes.push('tag-lanes-missing');
+            }
+
+            if (maxSpeed) {
+                var maxSpeedRoundedToNearest10 = Math.round(maxSpeed / 10) * 10;
+                classes.push('tag-maxspeed-' + maxSpeedRoundedToNearest10);
             }
 
         }

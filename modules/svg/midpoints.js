@@ -48,7 +48,7 @@ export function svgMidpoints(projection, context) {
         var touchLayer = selection.selectAll('.layer-touch.points');
 
         var mode = context.mode();
-        if ((mode && mode.id !== 'select') || !context.map().withinEditableZoom()) {
+        if (/*(mode && mode.id !== 'select') || */!context.map().withinEditableZoom()) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;
@@ -62,7 +62,7 @@ export function svgMidpoints(projection, context) {
 
             if (entity.type !== 'way') continue;
             if (!filter(entity)) continue;
-            if (context.selectedIDs().indexOf(entity.id) < 0) continue;
+            //if (context.selectedIDs().indexOf(entity.id) < 0) continue;
 
             var nodes = graph.childNodes(entity);
             for (var j = 0; j < nodes.length - 1; j++) {
@@ -137,7 +137,7 @@ export function svgMidpoints(projection, context) {
 
         enter
             .append('polygon')
-            .attr('points', '-3,4 5,0 -3,-4')
+            .attr('points', '-4.5,6 7.5,0 -4.5,-6')
             .attr('class', 'fill');
 
         groups = groups

@@ -16,11 +16,17 @@ path.line.stroke.tag-highway {
 path.line.shadow.tag-highway {
     stroke-width: 20;
 }
+path.line.over-stroke.tag-highway {
+    stroke-width: 8;
+}
+path.line.over-stroke-2.tag-highway {
+    stroke-width: 8;
+}
 path.line.casing.tag-highway {
-    stroke-width: 10;
+    stroke-width: 12;
 }
 path.line.stroke.tag-highway {
-    stroke-width: 8;
+    stroke-width: 10;
 }
 .low-zoom path.line.shadow.tag-highway {
     stroke-width: 16;
@@ -715,27 +721,27 @@ path.line.stroke.tag-highway.tag-footway-access_aisle.tag-destination {
 
 
 path.line.casing.tag-highway.tag-sidewalk-both, path.line.casing.tag-highway.tag-sidewalk-separate_both {
-    stroke-width: 12;
+    stroke-width: 16;
     stroke: #35972c;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-left, path.line.casing.tag-highway.tag-sidewalk-separate_left {
-    stroke-width: 12;
+    stroke-width: 16;
     stroke: #fffb00;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-right, path.line.casing.tag-highway.tag-sidewalk-separate_right {
-    stroke-width: 12;
+    stroke-width: 16;
     stroke: #a778ff;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-no {
-    stroke-width: 12;
+    stroke-width: 16;
     stroke: #ff9100;
 }
 
 path.line.casing.tag-highway.tag-sidewalk-shared {
-    stroke-width: 12;
+    stroke-width: 16;
     stroke: #f153ff;
 }
 
@@ -743,6 +749,29 @@ path.line.casing.tag-cycleway-track,
 path.line.casing.tag-cycleway-track.tag-unpaved {
     stroke: #91cdfd;
 }
+
+
+
+
+/* highway midpoints */
+/*g.midpoint.tag-highway-corridor .fill,
+g.midpoint.tag-highway-pedestrian .fill,
+g.midpoint.tag-highway-steps .fill,
+g.midpoint.tag-highway-path .fill,
+g.midpoint.tag-highway-footway .fill,
+g.midpoint.tag-highway-cycleway .fill,
+g.midpoint.tag-highway-bridleway .fill {
+    fill: #fff;
+    stroke: #333;
+    stroke-opacity: 1.0;
+    opacity: 0.5/*;
+}*/
+
+
+
+
+
+
 
 
 /* errors: */
@@ -781,19 +810,50 @@ path.line.stroke.tag-highway-cycleway.tag-cycleway-no_pedestrian, .low-zoom path
     stroke-dasharray: none;
 }
 
-/* highway midpoints */
-g.midpoint.tag-highway-corridor .fill,
-g.midpoint.tag-highway-pedestrian .fill,
-g.midpoint.tag-highway-steps .fill,
-g.midpoint.tag-highway-path .fill,
-g.midpoint.tag-highway-footway .fill,
-g.midpoint.tag-highway-cycleway .fill,
-g.midpoint.tag-highway-bridleway .fill {
-    fill: #fff;
-    stroke: #333;
-    stroke-opacity: .8;
-    opacity: .8;
+path.line.over-stroke {
+    visibility: hidden;
+}
+path.line.over-stroke-2 {
+    visibility: hidden;
 }
 
 
+path.line.over-stroke-2.tag-highway.tag-cycleway-right-lane {
+    visibility: visible;
+    stroke: rgb(0, 110, 255);
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+    stroke-dasharray: 3 77;
+    stroke-dashoffset: 17;
+}
 
+path.line.over-stroke-2.tag-highway.tag-cycleway-left-lane {
+    visibility: visible;
+    stroke: rgb(119, 0, 255);
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+    stroke-dasharray: 3 77;
+    stroke-dashoffset: 17;
+}
+
+path.line.over-stroke.tag-highway.tag-maxspeed-30 {
+    visibility: visible;
+    stroke: red;
+    stroke-opacity: 0.7;
+    stroke-dasharray: 10 30;
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+}
+
+path.line.over-stroke.tag-highway.tag-maxspeed-40 {
+    visibility: visible;
+    stroke: orange;
+    stroke-opacity: 0.7;
+    stroke-dasharray: 10 30;
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+}
+
+path.line.over-stroke.tag-highway.tag-maxspeed-50 {
+    visibility: visible;
+    stroke: green;
+    stroke-opacity: 0.7;
+    stroke-dasharray: 10 30;
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+}
