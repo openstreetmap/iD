@@ -245,7 +245,7 @@ path.line.casing.tag-highway-bus_guideway,
 path.line.casing.tag-highway-service,
 path.line.casing.tag-highway-track,
 path.line.casing.tag-highway-road {
-    stroke-width: 7;
+    stroke-width: 9;
 }
 path.line.stroke.tag-highway-living_street,
 path.line.stroke.tag-highway-bus_guideway,
@@ -429,7 +429,7 @@ path.line.casing.tag-service.tag-service.tag-private {
 }
 path.line.casing.tag-highway-service.tag-service.tag-customers,
 path.line.casing.tag-service.tag-service.tag-customers {
-    stroke: rgb(168, 94, 32);
+    stroke: rgb(219, 131, 30);
 }
 path.line.casing.tag-highway-service.tag-service.tag-destination,
 path.line.casing.tag-service.tag-service.tag-destination {
