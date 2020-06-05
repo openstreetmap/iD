@@ -327,6 +327,8 @@ export function uiFeatureList(context) {
 
 
         function mouseout(d) {
+            if (d.id === -1) return;
+
             utilHighlightEntities([d.id], false, context);
         }
 
@@ -334,12 +336,12 @@ export function uiFeatureList(context) {
         function click(d) {
             d3_event.preventDefault();
 
-            utilHighlightEntities([d.id], false, context);
-
             if (d.location) {
                 context.map().centerZoomEase([d.location[1], d.location[0]], 19);
-            }
-            else if (d.entity) {
+
+            } else if (d.entity) {
+                utilHighlightEntities([d.id], false, context);
+
                 if (d.entity.type === 'node') {
                     context.map().center(d.entity.loc);
                 } else if (d.entity.type === 'way') {
@@ -348,7 +350,9 @@ export function uiFeatureList(context) {
                     context.map().center(edge.loc);
                 }
                 context.enter(modeSelect(context, [d.entity.id]));
+
             } else {
+                // download, zoom to, and select the entity with the given ID
                 context.zoomToEntity(d.id);
             }
         }
