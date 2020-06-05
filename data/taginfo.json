@@ -735,6 +735,7 @@
     {"key": "man_made", "value": "embankment", "description": "🄿 Embankment", "object_types": ["way"]},
     {"key": "man_made", "value": "flagpole", "description": "🄿 Flagpole", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/embassy-15.svg"},
     {"key": "man_made", "value": "gasometer", "description": "🄿 Gasometer", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/storage_tank.svg"},
+    {"key": "man_made", "value": "goods_conveyor", "description": "🄿 Goods Conveyor", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/conveyor.svg"},
     {"key": "man_made", "value": "groyne", "description": "🄿 Groin", "object_types": ["way", "area"]},
     {"key": "man_made", "value": "lighthouse", "description": "🄿 Lighthouse", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/lighthouse-15.svg"},
     {"key": "manhole", "description": "🄿 Manhole, 🄵 Type", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/manhole.svg"},

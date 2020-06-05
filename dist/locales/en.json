@@ -8023,6 +8023,10 @@
                     "name": "Gasometer",
                     "terms": "gas holder"
                 },
+                "man_made/goods_conveyor": {
+                    "name": "Goods Conveyor",
+                    "terms": "belt conveyor,chain conveyor,conveyor belt,roller conveyor"
+                },
                 "man_made/groyne": {
                     "name": "Groin",
                     "terms": ""

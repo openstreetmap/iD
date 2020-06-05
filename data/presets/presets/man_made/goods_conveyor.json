@@ -1,0 +1,31 @@
+{
+    "icon": "temaki-conveyor",
+    "fields": [
+        "name",
+        "ref",
+        "operator",
+        "resource",
+        "width"
+    ],
+    "moreFields": [
+        "colour",
+        "covered",
+        "indoor",
+        "lit",
+        "manufacturer",
+        "material"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "belt conveyor",
+        "chain conveyor",
+        "conveyor belt",
+        "roller conveyor"
+    ],
+    "tags": {
+        "man_made": "goods_conveyor"
+    },
+    "name": "Goods Conveyor"
+}

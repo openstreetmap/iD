@@ -6290,6 +6290,11 @@ en:
         name: Gasometer
         # 'terms: gas holder'
         terms: '<translate with synonyms or related terms for ''Gasometer'', separated by commas>'
+      man_made/goods_conveyor:
+        # man_made=goods_conveyor
+        name: Goods Conveyor
+        # 'terms: belt conveyor,chain conveyor,conveyor belt,roller conveyor'
+        terms: '<translate with synonyms or related terms for ''Goods Conveyor'', separated by commas>'
       man_made/groyne:
         # man_made=groyne
         name: Groin
