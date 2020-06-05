@@ -113,7 +113,7 @@ export function operationCopy(context, selectedIDs) {
         var extent = nodes.reduce(function(extent, node) {
             return extent.extend(node.extent(context.graph()));
         }, geoExtent());
-        if (extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
+        if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         }
         return false;

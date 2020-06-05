@@ -57,7 +57,7 @@ export function operationExtract(context, selectedIDs) {
 
     operation.disabled = function () {
 
-        if (_extent && _extent.area() && _extent.percentContainedIn(context.map().extent()) < 0.8) {
+        if (_extent && _extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (selectedIDs.some(function(entityID) {
             return context.graph().geometry(entityID) === 'vertex' && context.hasHiddenConnections(entityID);

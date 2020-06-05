@@ -44,7 +44,7 @@ export function operationReflect(context, selectedIDs, axis) {
 
     // don't cache this because the visible extent could change
     operation.disabled = function() {
-        if (extent.area() && extent.percentContainedIn(context.map().extent()) < 0.8) {
+        if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';

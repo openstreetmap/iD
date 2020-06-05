@@ -89,7 +89,7 @@ export function operationOrthogonalize(context, selectedIDs) {
                 return 'multiple_blockers';
             }
             return actionDisableds[0];
-        } else if (_type !== 'corner' &&
+        } else if (_extent &&
                    _extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
