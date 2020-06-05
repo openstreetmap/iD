@@ -61,7 +61,7 @@
     "osm-auth": "1.0.2",
     "pannellum": "2.5.6",
     "rbush": "3.0.1",
-    "string.fromcodepoint": "0.2.1",
+    "string.fromcodepoint": "1.0.0",
     "which-polygon": "2.2.0"
   },
   "devDependencies": {
