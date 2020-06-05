@@ -1,4 +1,7 @@
 {
+    "countryCodes": [
+        "us", "ph"
+    ],
     "icon": "maki-bank",
     "moreFields": [
         "{office}",
