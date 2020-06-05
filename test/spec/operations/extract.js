@@ -6,14 +6,21 @@ describe('iD.operationExtract', function () {
     fakeContext = {};
     fakeContext.graph = function () { return graph; };
     fakeContext.hasHiddenConnections = function () { return false; };
+    fakeContext.map = function() {
+        return {
+            extent: function() {
+                return iD.geoExtent([-180, -90], [180, 90]);
+            }
+        };
+    };
 
     var fakeTags = { 'name': 'fake' };
 
     // Set up graph
     var createFakeNode = function (id, hasTags) {
         return hasTags
-            ? { id: id, type: 'node', tags: fakeTags }
-            : { id: id, type: 'node' };
+            ? { id: id, type: 'node', loc: [0, 0], tags: fakeTags }
+            : { id: id, type: 'node', loc: [0, 0] };
     };
 
     describe('available', function () {
