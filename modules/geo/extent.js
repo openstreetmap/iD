@@ -107,7 +107,12 @@ Object.assign(geoExtent.prototype, {
         var a1 = this.intersection(obj).area();
         var a2 = this.area();
 
-        if (a1 === Infinity || a2 === Infinity || a1 === 0 || a2 === 0) {
+        if (a1 === Infinity || a2 === Infinity || a2 === 0) {
+            return 0;
+        } else if (a1 === 0) {
+            if (obj.contains(this)) {
+                return 1;
+            }
             return 0;
         } else {
             return a1 / a2;

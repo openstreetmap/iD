@@ -6,68 +6,72 @@ import { utilGetAllNodes } from '../util/index';
 
 
 export function operationDisconnect(context, selectedIDs) {
-    var vertexIDs = [];
-    var wayIDs = [];
-    var otherIDs = [];
-    var actions = [];
+    var _vertexIDs = [];
+    var _wayIDs = [];
+    var _otherIDs = [];
+    var _actions = [];
 
     selectedIDs.forEach(function(id) {
         var entity = context.entity(id);
-        if (entity.geometry(context.graph()) === 'vertex') {
-            vertexIDs.push(id);
-        } else if (entity.type === 'way'){
-            wayIDs.push(id);
+        if (entity.type === 'way'){
+            _wayIDs.push(id);
+        } else if (entity.geometry(context.graph()) === 'vertex') {
+            _vertexIDs.push(id);
         } else {
-            otherIDs.push(id);
+            _otherIDs.push(id);
         }
     });
 
-    var extent, nodes, coords, descriptionID = '', annotationID = 'features';
+    var _extent, _nodes, _coords, _descriptionID = '', _annotationID = 'features';
 
-    if (vertexIDs.length > 0) {
+    if (_vertexIDs.length > 0) {
         // At the selected vertices, disconnect the selected ways, if any, else
         // disconnect all connected ways
 
-        vertexIDs.forEach(function(vertexID) {
+        _extent = _vertexIDs.reduce(function(extent, id) {
+            return extent.extend(context.entity(id).extent(context.graph()));
+        }, geoExtent());
+
+        _vertexIDs.forEach(function(vertexID) {
             var action = actionDisconnect(vertexID);
 
-            if (wayIDs.length > 0) {
-                var waysIDsForVertex = wayIDs.filter(function(wayID) {
+            if (_wayIDs.length > 0) {
+                var waysIDsForVertex = _wayIDs.filter(function(wayID) {
                     var way = context.entity(wayID);
                     return way.nodes.indexOf(vertexID) !== -1;
                 });
                 action.limitWays(waysIDsForVertex);
             }
-            actions.push(action);
+            _actions.push(action);
         });
 
-        descriptionID += actions.length === 1 ? 'single_point.' : 'multiple_points.';
-        if (wayIDs.length === 1) {
-            descriptionID += 'single_way.' + context.graph().geometry(wayIDs[0]);
+        _descriptionID += _actions.length === 1 ? 'single_point.' : 'multiple_points.';
+        if (_wayIDs.length === 1) {
+            _descriptionID += 'single_way.' + context.graph().geometry(_wayIDs[0]);
         } else {
-            descriptionID += wayIDs.length === 0 ? 'no_ways' : 'multiple_ways';
+            _descriptionID += _wayIDs.length === 0 ? 'no_ways' : 'multiple_ways';
         }
 
-    } else if (wayIDs.length > 0) {
+    } else if (_wayIDs.length > 0) {
         // Disconnect the selected ways from each other, if they're connected,
         // else disconnect them from all connected ways
 
-        var ways = wayIDs.map(function(id) {
+        var ways = _wayIDs.map(function(id) {
             return context.entity(id);
         });
-        extent = ways.reduce(function(extent, entity) {
+        _nodes = utilGetAllNodes(_wayIDs, context.graph());
+        _coords = _nodes.map(function(n) { return n.loc; });
+        _extent = ways.reduce(function(extent, entity) {
             return extent.extend(entity.extent(context.graph()));
         }, geoExtent());
-        nodes = utilGetAllNodes(wayIDs, context.graph());
-        coords = nodes.map(function(n) { return n.loc; });
 
         // actions for connected nodes shared by at least two selected ways
         var sharedActions = [];
         // actions for connected nodes
         var unsharedActions = [];
 
-        nodes.forEach(function(node) {
-            var action = actionDisconnect(node.id).limitWays(wayIDs);
+        _nodes.forEach(function(node) {
+            var action = actionDisconnect(node.id).limitWays(_wayIDs);
             if (action.disabled(context.graph()) !== 'not_connected') {
 
                 var count = 0;
@@ -87,21 +91,21 @@ export function operationDisconnect(context, selectedIDs) {
             }
         });
 
-        descriptionID += 'no_points.';
-        descriptionID += wayIDs.length === 1 ? 'single_way.' : 'multiple_ways.';
+        _descriptionID += 'no_points.';
+        _descriptionID += _wayIDs.length === 1 ? 'single_way.' : 'multiple_ways.';
 
         if (sharedActions.length) {
             // if any nodes are shared, only disconnect the selected ways from each other
-            actions = sharedActions;
-            descriptionID += 'conjoined';
-            annotationID = 'from_each_other';
+            _actions = sharedActions;
+            _descriptionID += 'conjoined';
+            _annotationID = 'from_each_other';
         } else {
             // if no nodes are shared, disconnect the selected ways from all connected ways
-            actions = unsharedActions;
-            if (wayIDs.length === 1) {
-                descriptionID += context.graph().geometry(wayIDs[0]);
+            _actions = unsharedActions;
+            if (_wayIDs.length === 1) {
+                _descriptionID += context.graph().geometry(_wayIDs[0]);
             } else {
-                descriptionID += 'separate';
+                _descriptionID += 'separate';
             }
         }
     }
@@ -109,7 +113,7 @@ export function operationDisconnect(context, selectedIDs) {
 
     var operation = function() {
         context.perform(function(graph) {
-            return actions.reduce(function(graph, action) { return action(graph); }, graph);
+            return _actions.reduce(function(graph, action) { return action(graph); }, graph);
         }, operation.annotation());
 
         context.validator().validate();
@@ -117,11 +121,11 @@ export function operationDisconnect(context, selectedIDs) {
 
 
     operation.available = function() {
-        if (actions.length === 0) return false;
-        if (otherIDs.length !== 0) return false;
+        if (_actions.length === 0) return false;
+        if (_otherIDs.length !== 0) return false;
 
-        if (vertexIDs.length !== 0 && wayIDs.length !== 0 && !wayIDs.every(function(wayID) {
-            return vertexIDs.some(function(vertexID) {
+        if (_vertexIDs.length !== 0 && _wayIDs.length !== 0 && !_wayIDs.every(function(wayID) {
+            return _vertexIDs.some(function(vertexID) {
                 var way = context.entity(wayID);
                 return way.nodes.indexOf(vertexID) !== -1;
             });
@@ -133,14 +137,14 @@ export function operationDisconnect(context, selectedIDs) {
 
     operation.disabled = function() {
         var reason;
-        for (var actionIndex in actions) {
-            reason = actions[actionIndex].disabled(context.graph());
+        for (var actionIndex in _actions) {
+            reason = _actions[actionIndex].disabled(context.graph());
             if (reason) return reason;
         }
 
-        if (extent && extent.percentContainedIn(context.map().extent()) < 0.8) {
-            return 'too_large.' + (wayIDs.length === 1 ? 'single' : 'multiple');
-        } else if (coords && someMissing()) {
+        if (_extent && _extent.percentContainedIn(context.map().extent()) < 0.8) {
+            return 'too_large.' + ((_vertexIDs.length ? _vertexIDs : _wayIDs).length === 1 ? 'single' : 'multiple');
+        } else if (_coords && someMissing()) {
             return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
             return 'connected_to_hidden';
@@ -153,7 +157,7 @@ export function operationDisconnect(context, selectedIDs) {
             if (context.inIntro()) return false;
             var osm = context.connection();
             if (osm) {
-                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                var missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -169,12 +173,12 @@ export function operationDisconnect(context, selectedIDs) {
         if (disable) {
             return t('operations.disconnect.' + disable);
         }
-        return t('operations.disconnect.description.' + descriptionID);
+        return t('operations.disconnect.description.' + _descriptionID);
     };
 
 
     operation.annotation = function() {
-        return t('operations.disconnect.annotation.' + annotationID);
+        return t('operations.disconnect.annotation.' + _annotationID);
     };
 
 
