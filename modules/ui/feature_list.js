@@ -9,7 +9,7 @@ import { t } from '../core/localizer';
 import { dmsCoordinatePair } from '../util/units';
 import { coreGraph } from '../core/graph';
 import { geoSphericalDistance } from '../geo/geo';
-import { geoExtent, geoChooseEdge } from '../geo';
+import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
 import { services } from '../services';
