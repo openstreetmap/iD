@@ -342,14 +342,8 @@ export function uiFeatureList(context) {
             } else if (d.entity) {
                 utilHighlightEntities([d.id], false, context);
 
-                if (d.entity.type === 'node') {
-                    context.map().center(d.entity.loc);
-                } else if (d.entity.type === 'way') {
-                    var center = context.projection(context.map().center());
-                    var edge = geoChooseEdge(context.graph().childNodes(d.entity), center, context.projection);
-                    context.map().center(edge.loc);
-                }
                 context.enter(modeSelect(context, [d.entity.id]));
+                context.map().zoomToEase(d.entity);
 
             } else {
                 // download, zoom to, and select the entity with the given ID
