@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { actionStraightenNodes } from '../actions/straighten_nodes';
 import { actionStraightenWay } from '../actions/straighten_way';
 import { behaviorOperation } from '../behavior/operation';
+import { geoExtent } from '../geo';
 import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
@@ -11,6 +12,9 @@ export function operationStraighten(context, selectedIDs) {
 
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
+    var extent = nodes.reduce(function(extent, node) {
+        return extent.extend(node.extent(context.graph()));
+    }, geoExtent());
     var action = chooseAction();
     var geometry;
 
@@ -31,7 +35,7 @@ export function operationStraighten(context, selectedIDs) {
                 if (entity.type === 'node') {
                     continue;
                 } else if (entity.type !== 'way' || entity.isClosed()) {
-                    return false;  // exit early, can't straighten these
+                    return null;  // exit early, can't straighten these
                 }
 
                 startNodeIDs.push(entity.first());
@@ -48,23 +52,23 @@ export function operationStraighten(context, selectedIDs) {
 
             // Ensure all ways are connected (i.e. only 2 unique endpoints/startpoints)
             if (utilArrayDifference(startNodeIDs, endNodeIDs).length +
-                utilArrayDifference(endNodeIDs, startNodeIDs).length !== 2) return false;
+                utilArrayDifference(endNodeIDs, startNodeIDs).length !== 2) return null;
 
             // Ensure path contains at least 3 unique nodes
             var wayNodeIDs = utilGetAllNodes(wayIDs, context.graph())
                 .map(function(node) { return node.id; });
-            if (wayNodeIDs.length <= 2) return false;
+            if (wayNodeIDs.length <= 2) return null;
 
             // If range of 2 selected nodes is supplied, ensure nodes lie on the selected path
             if (nodeIDs.length === 2 && (
                 wayNodeIDs.indexOf(nodeIDs[0]) === -1 || wayNodeIDs.indexOf(nodeIDs[1]) === -1
-            )) return false;
+            )) return null;
 
-            geometry = 'line';
+            geometry = wayIDs.length === 1 ? 'line' : 'lines';
             return actionStraightenWay(selectedIDs, context.projection);
         }
 
-        return false;
+        return null;
     }
 
 
@@ -88,6 +92,8 @@ export function operationStraighten(context, selectedIDs) {
         var reason = action.disabled(context.graph());
         if (reason) {
             return reason;
+        } else if (extent.percentContainedIn(context.map().extent()) < 0.8) {
+            return 'too_large.' + ((wayIDs.length ? wayIDs : nodeIDs).length === 1 ? 'single' : 'multiple');
         } else if (someMissing()) {
             return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {

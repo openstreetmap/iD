@@ -220,16 +220,22 @@
                 "title": "Straighten",
                 "description": {
                     "points": "Straighten these points.",
-                    "line": "Straighten this line."
+                    "line": "Straighten this line.",
+                    "lines": "Straighten these lines."
                 },
                 "key": "S",
                 "annotation": {
                     "points": "Straightened several points.",
-                    "line": "Straightened a line."
+                    "line": "Straightened a line.",
+                    "lines": "Straightened several lines."
                 },
                 "too_bendy": "This can't be straightened because it bends too much.",
                 "connected_to_hidden": "This can't be straightened because it is connected to a hidden feature.",
-                "not_downloaded": "This can't be straightened because parts of it have not yet been downloaded."
+                "not_downloaded": "This can't be straightened because parts of it have not yet been downloaded.",
+                "too_large": {
+                    "single": "This can't be straightened because not enough of it is currently visible.",
+                    "multiple": "These can't be straightened because not enough of them are currently visible."
+                }
             },
             "delete": {
                 "title": "Delete",
