@@ -1,5 +1,5 @@
 import 'browser-polyfills';
-import 'string.fromcodepoint';
+import 'string.fromcodepoint/auto';
 import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 
 // polyfill requestIdleCallback
