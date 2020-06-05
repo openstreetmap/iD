@@ -57,12 +57,12 @@ export function operationExtract(context, selectedIDs) {
 
     operation.disabled = function () {
 
-        if (selectedIDs.some(function(entityID) {
+        if (_extent && _extent.area() && _extent.percentContainedIn(context.map().extent()) < 0.8) {
+            return 'too_large';
+        } else if (selectedIDs.some(function(entityID) {
             return context.graph().geometry(entityID) === 'vertex' && context.hasHiddenConnections(entityID);
         })) {
             return 'connected_to_hidden';
-        } else if (_extent && _extent.area() && _extent.percentContainedIn(context.map().extent()) < 0.8) {
-            return 'too_large';
         }
 
         return false;
