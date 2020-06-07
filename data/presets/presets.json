@@ -750,7 +750,7 @@
   "man_made/clearcut": {"icon": "maki-logging", "geometry": ["area"], "tags": {"man_made": "clearcut"}, "terms": ["cut", "forest", "lumber", "tree", "wood"], "name": "Clearcut Forest"},
   "man_made/courtyard": {"icon": "maki-square-stroked", "fields": ["name"], "moreFields": [], "geometry": ["area"], "tags": {"man_made": "courtyard"}, "terms": ["court", "enclosed open air", "quadrangle", "yard"], "name": "Courtyard"},
   "man_made/crane": {"icon": "temaki-crane", "fields": ["operator", "manufacturer", "height", "crane/type"], "geometry": ["point", "line", "vertex", "area"], "tags": {"man_made": "crane"}, "name": "Crane"},
-  "man_made/cross": {"icon": "maki-religious-christian", "fields": ["name", "material", "height", "ele_node", "inscription", "direction"], "geometry": ["point", "vertex"], "tags": {"man_made": "cross"}, "name": "Summit Cross"},
+  "man_made/cross": {"icon": "maki-religious-christian", "fields": ["name", "material", "height", "ele_node", "inscription", "direction"], "geometry": ["point", "vertex"], "tags": {"man_made": "cross"}, "name": "Cross"},
   "man_made/cutline": {"icon": "maki-logging", "geometry": ["line"], "tags": {"man_made": "cutline"}, "name": "Cut line"},
   "man_made/dyke": {"geometry": ["line"], "tags": {"man_made": "dyke"}, "terms": ["Dike", "Dyke", "Floodbank", "Stopbank"], "name": "Levee"},
   "man_made/embankment": {"geometry": ["line"], "tags": {"man_made": "embankment"}, "name": "Embankment"},

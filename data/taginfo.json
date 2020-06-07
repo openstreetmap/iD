@@ -729,7 +729,7 @@
     {"key": "man_made", "value": "clearcut", "description": "🄿 Clearcut Forest", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/logging-15.svg"},
     {"key": "man_made", "value": "courtyard", "description": "🄿 Courtyard", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/square-stroked-15.svg"},
     {"key": "man_made", "value": "crane", "description": "🄿 Crane", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/crane.svg"},
-    {"key": "man_made", "value": "cross", "description": "🄿 Summit Cross", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/religious-christian-15.svg"},
+    {"key": "man_made", "value": "cross", "description": "🄿 Cross", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/religious-christian-15.svg"},
     {"key": "man_made", "value": "cutline", "description": "🄿 Cut line", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/logging-15.svg"},
     {"key": "man_made", "value": "dyke", "description": "🄿 Levee", "object_types": ["way"]},
     {"key": "man_made", "value": "embankment", "description": "🄿 Embankment", "object_types": ["way"]},

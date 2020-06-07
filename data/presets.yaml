@@ -6266,8 +6266,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Crane'', separated by commas>'
       man_made/cross:
         # man_made=cross
-        name: Summit Cross
-        terms: '<translate with synonyms or related terms for ''Summit Cross'', separated by commas>'
+        name: Cross
+        terms: '<translate with synonyms or related terms for ''Cross'', separated by commas>'
       man_made/cutline:
         # man_made=cutline
         name: Cut line
