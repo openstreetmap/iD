@@ -8,7 +8,13 @@
         "shop": "storage_rental"
     },
     "terms": [
-        "garages"
+        "device storage",
+        "garages",
+        "self storage",
+        "self-service storage",
+        "storage lockers",
+        "storage rental",
+        "storage units"
     ],
     "name": "Storage Rental"
 }

@@ -9738,7 +9738,7 @@
                 },
                 "shop/storage_rental": {
                     "name": "Storage Rental",
-                    "terms": "garages"
+                    "terms": "device storage,garages,self storage,self-service storage,storage lockers,storage rental,storage units"
                 },
                 "shop/supermarket": {
                     "name": "Supermarket",

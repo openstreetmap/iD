@@ -8335,7 +8335,7 @@ en:
       shop/storage_rental:
         # shop=storage_rental
         name: Storage Rental
-        # 'terms: garages'
+        # 'terms: device storage,garages,self storage,self-service storage,storage lockers,storage rental,storage units'
         terms: '<translate with synonyms or related terms for ''Storage Rental'', separated by commas>'
       shop/supermarket:
         # shop=supermarket
