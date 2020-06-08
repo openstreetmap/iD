@@ -31,6 +31,7 @@ export function uiNoteEditor(context) {
     // var formFields = uiFormFields(context);
 
     var _note;
+    var _newNote;
     // var _fieldsArr;
 
 
@@ -74,7 +75,6 @@ export function uiNoteEditor(context) {
             .call(noteHeader.note(_note))
             .call(noteComments.note(_note))
             .call(noteSaveSection);
-
 
         var footer = selection.selectAll('.footer')
             .data([0]);
@@ -152,7 +152,7 @@ export function uiNoteEditor(context) {
                 return _note.isNew() ? t('note.newDescription') : t('note.newComment');
             });
 
-        noteSaveEnter
+        var commentTextarea = noteSaveEnter
             .append('textarea')
             .attr('class', 'new-comment-input')
             .attr('placeholder', t('note.inputPlaceholder'))
@@ -162,6 +162,11 @@ export function uiNoteEditor(context) {
             .on('keydown.note-input', keydown)
             .on('input.note-input', changeInput)
             .on('blur.note-input', changeInput);
+
+        if (_newNote) {
+            // autofocus the comment field for new notes
+            commentTextarea.node().focus();
+        }
 
         // update
         noteSave = noteSaveEnter
@@ -427,6 +432,12 @@ export function uiNoteEditor(context) {
     noteEditor.note = function(val) {
         if (!arguments.length) return _note;
         _note = val;
+        return noteEditor;
+    };
+
+    noteEditor.newNote = function(val) {
+        if (!arguments.length) return _newNote;
+        _newNote = val;
         return noteEditor;
     };
 

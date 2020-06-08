@@ -117,7 +117,7 @@ export function modeSelectNote(context, selectedNoteID) {
         selectNote();
 
         var sidebar = context.ui().sidebar;
-        sidebar.show(_noteEditor.note(note));
+        sidebar.show(_noteEditor.note(note).newNote(_newFeature));
 
         // expand the sidebar, avoid obscuring the note if needed
         sidebar.expand(sidebar.intersects(note.extent()));
