@@ -303,6 +303,7 @@ en:
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
       conflicting_tags: These features can't be merged because some of their tags have conflicting values.
       paths_intersect: These features can't be merged because the resulting path would intersect itself.
+      too_many_vertices: These features can't be merged because the resulting path would have too many points.
     move:
       title: Move
       description:

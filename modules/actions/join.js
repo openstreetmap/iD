@@ -110,6 +110,13 @@ export function actionJoin(ids) {
         return graph;
     };
 
+    // Returns the number of nodes the resultant way is expected to have
+    action.resultingWayNodesLength = function(graph) {
+        return ids.reduce(function(count, id) {
+            return count + graph.entity(id).nodes.length;
+        }, 0) - ids.length - 1;
+    };
+
 
     action.disabled = function(graph) {
         var geometries = groupEntitiesByGeometry(graph);

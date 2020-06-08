@@ -11,28 +11,30 @@ import { presetManager } from '../presets';
 
 export function operationMerge(context, selectedIDs) {
 
-    var join = actionJoin(selectedIDs);
-    var merge = actionMerge(selectedIDs);
-    var mergePolygon = actionMergePolygon(selectedIDs);
-    var mergeNodes = actionMergeNodes(selectedIDs);
+    var _action = getAction();
 
     function getAction() {
-        if (!join.disabled(context.graph())) {
+        var join = actionJoin(selectedIDs);
+        if (join.disabled(context.graph()) !== 'not_eligible') {
             return join;
-
-        } else if (!merge.disabled(context.graph())) {
+        }
+        var merge = actionMerge(selectedIDs);
+        if (merge.disabled(context.graph()) !== 'not_eligible') {
             return merge;
-
-        } else if (!mergePolygon.disabled(context.graph())) {
+        }
+        var mergePolygon = actionMergePolygon(selectedIDs);
+        if (mergePolygon.disabled(context.graph()) !== 'not_eligible') {
             return mergePolygon;
         }
+        var mergeNodes = actionMergeNodes(selectedIDs);
         return mergeNodes;
     }
 
     var operation = function() {
-        var action = getAction();
 
-        context.perform(action, operation.annotation());
+        if (operation.disabled()) return;
+
+        context.perform(_action, operation.annotation());
 
         context.validator().validate();
 
@@ -51,37 +53,29 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.disabled = function() {
-        return join.disabled(context.graph()) &&
-            merge.disabled(context.graph()) &&
-            mergePolygon.disabled(context.graph()) &&
-            mergeNodes.disabled(context.graph());
+        var actionDisabled = _action.disabled(context.graph());
+        if (actionDisabled) return actionDisabled;
+
+        var osm = context.connection();
+        if (osm &&
+            _action.resultingWayNodesLength &&
+            _action.resultingWayNodesLength(context.graph()) > osm.maxWayNodes()) {
+            return 'too_many_vertices';
+        }
+
+        return false;
     };
 
     operation.tooltip = function() {
-        var j = join.disabled(context.graph());          // 'not_eligible', 'not_adjacent', 'restriction', 'conflicting_tags'
-        var m = merge.disabled(context.graph());         // 'not_eligible'
-        var p = mergePolygon.disabled(context.graph());  // 'not_eligible', 'incomplete_relation'
-        var n = mergeNodes.disabled(context.graph());    // 'not_eligible', 'relation', 'restriction'
-
-        // disabled for one of various reasons
-        if (j && m && p && n) {
-            if (j === 'restriction' || n === 'restriction') {
+        var disabled = operation.disabled();
+        if (disabled) {
+            if (disabled === 'restriction') {
                 return t('operations.merge.restriction',
                     { relation: presetManager.item('type/restriction').name() });
-
-            } else if (p === 'incomplete_relation') {
-                return t('operations.merge.incomplete_relation');
-
-            } else if (n === 'relation') {
-                return t('operations.merge.relation');
-
-            } else {
-                return t('operations.merge.' + j);
             }
-
-        } else {
-            return t('operations.merge.description');
+            return t('operations.merge.' + disabled);
         }
+        return t('operations.merge.description');
     };
 
     operation.annotation = function() {

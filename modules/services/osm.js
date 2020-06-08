@@ -40,6 +40,9 @@ var _userChangesets;
 var _userDetails;
 var _off;
 
+// set a default but also load this from the API status
+var _maxWayNodes = 2000;
+
 
 function authLoading() {
     dispatch.call('authLoading');
@@ -932,6 +935,10 @@ export default {
             if (_rateLimitError) {
                 return callback(_rateLimitError, 'rateLimited');
             } else {
+                var waynodes = xml.getElementsByTagName('waynodes');
+                var maxWayNodes = waynodes.length && parseInt(waynodes[0].getAttribute('maximum'), 10);
+                if (maxWayNodes && isFinite(maxWayNodes)) _maxWayNodes = maxWayNodes;
+
                 var apiStatus = xml.getElementsByTagName('status');
                 var val = apiStatus[0].getAttribute('api');
                 return callback(undefined, val);
@@ -955,6 +962,12 @@ export default {
             }, 500);
         }
         this.throttledReloadApiStatus();
+    },
+
+
+    // Returns the maximum number of nodes a single way can have
+    maxWayNodes: function() {
+        return _maxWayNodes;
     },
 
 
