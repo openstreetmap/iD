@@ -597,7 +597,11 @@ export default {
                     if (err) {
                         return callback(err);
                     } else {
-                        return parseJSON(payload, callback, options);
+                        if (path.indexOf('.json') !== -1) {
+                            return parseJSON(payload, callback, options);
+                        } else {
+                            return parseXML(payload, callback, options);
+                        }
                     }
                 }
             }
