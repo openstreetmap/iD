@@ -9,7 +9,7 @@ import { t, localizer } from '../../core/localizer';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { geoExtent } from '../../geo';
 import { services } from '../../services';
-
+import { utilGetAllNodes } from '../../util';
 
 export function uiPanelMeasurement(context) {
     var locale = localizer.localeCode();
@@ -41,12 +41,6 @@ export function uiPanelMeasurement(context) {
     }
 
 
-    function nodeCount(feature) {
-      if (feature.type === 'LineString') return feature.coordinates.length;
-      if (feature.type === 'Polygon') return feature.coordinates[0].length - 1;
-    }
-
-
     function redraw(selection) {
         var graph = context.graph();
         var selectedNoteID = context.selectedNoteID();
@@ -55,7 +49,7 @@ export function uiPanelMeasurement(context) {
         var heading;
         var center, location, centroid;
         var closed, geometry;
-        var totalNodeCount = 0, length = 0, area = 0;
+        var totalNodeCount, length = 0, area = 0;
 
         if (selectedNoteID && osm) {       // selected 1 note
 
@@ -65,9 +59,12 @@ export function uiPanelMeasurement(context) {
             geometry = 'note';
 
         } else {                           // selected 1..n entities
-            var selected = context.selectedIDs().map(function(id) {
+            var selectedIDs = context.selectedIDs().filter(function(id) {
                 return context.hasEntity(id);
-            }).filter(Boolean);
+            });
+            var selected = selectedIDs.map(function(id) {
+                return context.entity(id);
+            });
 
             heading = selected.length === 1 ? selected[0].id :
                 t('info_panels.measurement.selected', { n: selected.length.toLocaleString(locale) });
@@ -84,14 +81,9 @@ export function uiPanelMeasurement(context) {
                         var feature = entity.asGeoJSON(graph);
                         length += radiansToMeters(d3_geoLength(toLineString(feature)));
                         centroid = d3_geoCentroid(feature);
-                        if (entity.type !== 'relation') {
-                            totalNodeCount += nodeCount(feature);
-                        }
                         if (closed) {
                             area += steradiansToSqmeters(entity.area(graph));
                         }
-                    } else if (entity.type === 'node') {
-                        totalNodeCount += 1;
                     }
                 }
 
@@ -102,9 +94,12 @@ export function uiPanelMeasurement(context) {
                 }
 
                 if (selected.length === 1 && selected[0].type === 'node') {
-                    totalNodeCount = null;
                     location = selected[0].loc;
-                } else if (!centroid) {
+                } else {
+                    totalNodeCount = utilGetAllNodes(selectedIDs, context.graph()).length;
+                }
+
+                if (!location && !centroid) {
                     center = extent.center();
                 }
             }
