@@ -71,6 +71,9 @@ export function uiInspector(context) {
             // all existing features except vertices should default to inspector
             if (entity.geometry(context.graph()) !== 'vertex') return false;
 
+            // show vertex relations if any
+            if (context.graph().parentRelations(entity).length) return false;
+
             // show vertex issues if there are any
             if (context.validator().getEntityIssues(entityID).length) return false;
 
