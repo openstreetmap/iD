@@ -241,6 +241,10 @@
                     "single": "This can't be straightened because parts of it have not yet been downloaded.",
                     "multiple": "These can't be straightened because parts of them have not yet been downloaded."
                 },
+                "straight_enough": {
+                    "single": "This can't be made straighter than it already is.",
+                    "multiple": "These can't be made straighter than they already are."
+                },
                 "too_large": {
                     "single": "This can't be straightened because not enough of it is currently visible.",
                     "multiple": "These can't be straightened because not enough of them are currently visible."

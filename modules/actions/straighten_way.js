@@ -81,6 +81,12 @@ export function actionStraightenWay(selectedIDs, projection) {
         return nodes.map(function(n) { return graph.entity(n); });
     }
 
+    function shouldKeepNode(node, graph) {
+        return graph.parentWays(node).length > 1 ||
+            graph.parentRelations(node).length ||
+            node.hasInterestingTags();
+    }
+
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
@@ -97,10 +103,7 @@ export function actionStraightenWay(selectedIDs, projection) {
             var node = nodes[i];
             var point = points[i];
 
-            if (t < 1 || graph.parentWays(node).length > 1 ||
-                graph.parentRelations(node).length ||
-                node.hasInterestingTags()
-            ) {
+            if (t < 1 || shouldKeepNode(node, graph)) {
                 var u = positionAlongWay(point, startPoint, endPoint);
                 var p = geoVecInterp(startPoint, endPoint, u);
                 var loc2 = projection.invert(p);
@@ -135,6 +138,8 @@ export function actionStraightenWay(selectedIDs, projection) {
             return 'too_bendy';
         }
 
+        var maxDistance = 0;
+
         for (i = 1; i < points.length - 1; i++) {
             var point = points[i];
             var u = positionAlongWay(point, startPoint, endPoint);
@@ -144,7 +149,19 @@ export function actionStraightenWay(selectedIDs, projection) {
             // to bendy if point is off by 20% of total start/end distance in projected space
             if (isNaN(dist) || dist > threshold) {
                 return 'too_bendy';
+            } else if (dist > maxDistance) {
+                maxDistance = dist;
             }
+        }
+
+        var keepingAllNodes = nodes.every(function(node, i) {
+            return i === 0 || i === nodes.length - 1 || shouldKeepNode(node, graph);
+        });
+
+        if (maxDistance < 0.0001 &&
+            // Allow straightening even if already straight in order to remove extraneous nodes
+            keepingAllNodes) {
+            return 'straight_enough';
         }
     };
 
