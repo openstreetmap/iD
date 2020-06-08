@@ -174,9 +174,15 @@ en:
         points: Straightened several points.
         line: Straightened a line.
         lines: Straightened several lines.
-      too_bendy: This can't be straightened because it bends too much.
-      connected_to_hidden: This can't be straightened because it is connected to a hidden feature.
-      not_downloaded: This can't be straightened because parts of it have not yet been downloaded.
+      too_bendy:
+        single: This can't be straightened because it bends too much.
+        multiple: These can't be straighted because they bend too much.
+      connected_to_hidden:
+        single: This can't be straightened because it is connected to a hidden feature.
+        multiple: These can't be straightened because some are connected to hidden features.
+      not_downloaded:
+        single: This can't be straightened because parts of it have not yet been downloaded.
+        multiple: These can't be straightened because parts of them have not yet been downloaded.
       too_large:
         single: This can't be straightened because not enough of it is currently visible.
         multiple: These can't be straightened because not enough of them are currently visible.

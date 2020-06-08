@@ -7,26 +7,27 @@ import { utilArrayDifference, utilGetAllNodes } from '../util/index';
 
 
 export function operationStraighten(context, selectedIDs) {
-    var wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
-    var nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
+    var _wayIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'w'; });
+    var _nodeIDs = selectedIDs.filter(function(id) { return id.charAt(0) === 'n'; });
+    var _amount = ((_wayIDs.length ? _wayIDs : _nodeIDs).length === 1 ? 'single' : 'multiple');
 
-    var nodes = utilGetAllNodes(selectedIDs, context.graph());
-    var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
+    var _nodes = utilGetAllNodes(selectedIDs, context.graph());
+    var _coords = _nodes.map(function(n) { return n.loc; });
+    var _extent = _nodes.reduce(function(extent, node) {
         return extent.extend(node.extent(context.graph()));
     }, geoExtent());
-    var action = chooseAction();
-    var geometry;
+    var _action = chooseAction();
+    var _geometry;
 
 
     function chooseAction() {
         // straighten selected nodes
-        if (wayIDs.length === 0 && nodeIDs.length > 2) {
-            geometry = 'points';
-            return actionStraightenNodes(nodeIDs, context.projection);
+        if (_wayIDs.length === 0 && _nodeIDs.length > 2) {
+            _geometry = 'points';
+            return actionStraightenNodes(_nodeIDs, context.projection);
 
         // straighten selected ways (possibly between range of 2 selected nodes)
-        } else if (wayIDs.length > 0 && (nodeIDs.length === 0 || nodeIDs.length === 2)) {
+        } else if (_wayIDs.length > 0 && (_nodeIDs.length === 0 || _nodeIDs.length === 2)) {
             var startNodeIDs = [];
             var endNodeIDs = [];
 
@@ -55,23 +56,23 @@ export function operationStraighten(context, selectedIDs) {
                 utilArrayDifference(endNodeIDs, startNodeIDs).length !== 2) return null;
 
             // Ensure path contains at least 3 unique nodes
-            var wayNodeIDs = utilGetAllNodes(wayIDs, context.graph())
+            var wayNodeIDs = utilGetAllNodes(_wayIDs, context.graph())
                 .map(function(node) { return node.id; });
             if (wayNodeIDs.length <= 2) return null;
 
             // If range of 2 selected nodes is supplied, ensure nodes lie on the selected path
-            if (nodeIDs.length === 2 && (
-                wayNodeIDs.indexOf(nodeIDs[0]) === -1 || wayNodeIDs.indexOf(nodeIDs[1]) === -1
+            if (_nodeIDs.length === 2 && (
+                wayNodeIDs.indexOf(_nodeIDs[0]) === -1 || wayNodeIDs.indexOf(_nodeIDs[1]) === -1
             )) return null;
 
-            if (nodeIDs.length) {
+            if (_nodeIDs.length) {
                 // If we're only straightenting between two points, we only need that extent visible
-                extent = utilGetAllNodes(nodeIDs, context.graph()).reduce(function(extent, node) {
+                _extent = utilGetAllNodes(_nodeIDs, context.graph()).reduce(function(extent, node) {
                     return extent.extend(node.extent(context.graph()));
                 }, geoExtent());
             }
 
-            geometry = wayIDs.length === 1 ? 'line' : 'lines';
+            _geometry = _wayIDs.length === 1 ? 'line' : 'lines';
             return actionStraightenWay(selectedIDs, context.projection);
         }
 
@@ -80,9 +81,9 @@ export function operationStraighten(context, selectedIDs) {
 
 
     function operation() {
-        if (!action) return;
+        if (!_action) return;
 
-        context.perform(action, operation.annotation());
+        context.perform(_action, operation.annotation());
 
         window.setTimeout(function() {
             context.validator().validate();
@@ -91,16 +92,16 @@ export function operationStraighten(context, selectedIDs) {
 
 
     operation.available = function() {
-        return Boolean(action);
+        return Boolean(_action);
     };
 
 
     operation.disabled = function() {
-        var reason = action.disabled(context.graph());
+        var reason = _action.disabled(context.graph());
         if (reason) {
             return reason;
-        } else if (extent.percentContainedIn(context.map().extent()) < 0.8) {
-            return 'too_large.' + ((wayIDs.length ? wayIDs : nodeIDs).length === 1 ? 'single' : 'multiple');
+        } else if (_extent.percentContainedIn(context.map().extent()) < 0.8) {
+            return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
@@ -114,7 +115,7 @@ export function operationStraighten(context, selectedIDs) {
             if (context.inIntro()) return false;
             var osm = context.connection();
             if (osm) {
-                var missing = coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
+                var missing = _coords.filter(function(loc) { return !osm.isDataLoaded(loc); });
                 if (missing.length) {
                     missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
                     return true;
@@ -128,13 +129,13 @@ export function operationStraighten(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.straighten.' + disable) :
-            t('operations.straighten.description.' + geometry);
+            t('operations.straighten.' + disable + '.' + _amount) :
+            t('operations.straighten.description.' + _geometry);
     };
 
 
     operation.annotation = function() {
-        return t('operations.straighten.annotation.' + geometry);
+        return t('operations.straighten.annotation.' + _geometry);
     };
 
 
