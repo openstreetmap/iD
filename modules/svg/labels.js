@@ -63,7 +63,7 @@ export function svgLabels(projection, context) {
     ];
 
 
-    function blacklisted(preset) {
+    function shouldSkipIcon(preset) {
         var noIcons = ['building', 'landuse', 'natural'];
         return noIcons.some(function(s) {
             return preset.id.indexOf(s) >= 0;
@@ -313,7 +313,7 @@ export function svgLabels(projection, context) {
 
             // Determine which entities are label-able
             var preset = geometry === 'area' && presetManager.match(entity, graph);
-            var icon = preset && !blacklisted(preset) && preset.icon;
+            var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
             if (!icon && !utilDisplayName(entity))
                 continue;

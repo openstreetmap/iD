@@ -164,10 +164,10 @@ export default {
         var _lineKeys = this._lineKeys;
         var _areaKeys = this._areaKeys;
 
-        var isAreaKeyBlackList = function(key) {
+        var keyValueDoesNotImplyArea = function(key) {
             return utilArrayIntersection(tagMap[key], Object.keys(_areaKeys[key])).length > 0;
         };
-        var isLineKeysWhiteList = function(key) {
+        var keyValueImpliesLine = function(key) {
             return utilArrayIntersection(tagMap[key], Object.keys(_lineKeys[key])).length > 0;
         };
 
@@ -181,10 +181,10 @@ export default {
         }
 
         for (var key in tagMap) {
-            if (key in _areaKeys && !isAreaKeyBlackList(key)) {
+            if (key in _areaKeys && !keyValueDoesNotImplyArea(key)) {
                 return 'area';
             }
-            if (key in _lineKeys && isLineKeysWhiteList(key)) {
+            if (key in _lineKeys && keyValueImpliesLine(key)) {
                 return 'area';
             }
         }
