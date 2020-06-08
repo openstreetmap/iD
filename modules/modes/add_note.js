@@ -34,6 +34,10 @@ export function modeAddNote(context) {
         context
             .selectedNoteID(note.id)
             .enter(modeSelectNote(context, note.id).newFeature(true));
+
+        // autofocus the description field
+        context.container()
+            .select('.sidebar textarea.new-comment-input').node().focus();
     }
 
 
