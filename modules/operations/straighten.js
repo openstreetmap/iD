@@ -64,6 +64,13 @@ export function operationStraighten(context, selectedIDs) {
                 wayNodeIDs.indexOf(nodeIDs[0]) === -1 || wayNodeIDs.indexOf(nodeIDs[1]) === -1
             )) return null;
 
+            if (nodeIDs.length) {
+                // If we're only straightenting between two points, we only need that extent visible
+                extent = utilGetAllNodes(nodeIDs, context.graph()).reduce(function(extent, node) {
+                    return extent.extend(node.extent(context.graph()));
+                }, geoExtent());
+            }
+
             geometry = wayIDs.length === 1 ? 'line' : 'lines';
             return actionStraightenWay(selectedIDs, context.projection);
         }
