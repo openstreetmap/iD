@@ -339,6 +339,18 @@
     "replace": {"diet:vegetarian": "*"}
   },
   {
+    "old": {"culvert": "culvert"},
+    "replace": {"tunnel": "culvert"}
+  },
+  {
+    "old": {"culvert": "tunnel"},
+    "replace": {"tunnel": "culvert"}
+  },
+  {
+    "old": {"culvert": "yes"},
+    "replace": {"tunnel": "culvert"}
+  },
+  {
     "old": {"curb": "*"},
     "replace": {"kerb": "$1"}
   },
