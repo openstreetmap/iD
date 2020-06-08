@@ -4263,6 +4263,10 @@ img.tile-debug {
     position: relative;
 }
 
+.panel-content ul:empty {
+    display: none;
+}
+
 .panel-content li span {
     display: inline-block;
     white-space: nowrap;

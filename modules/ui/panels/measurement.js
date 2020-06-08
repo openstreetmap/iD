@@ -48,68 +48,82 @@ export function uiPanelMeasurement(context) {
 
 
     function redraw(selection) {
-        var resolver = context.graph();
+        var graph = context.graph();
         var selectedNoteID = context.selectedNoteID();
         var osm = services.osm;
 
-        var selected, center, entity, note, geometry;
+        var heading;
+        var center, location, centroid;
+        var closed, geometry;
+        var totalNodeCount = 0, length = 0, area = 0;
 
         if (selectedNoteID && osm) {       // selected 1 note
-            selected = [ t('note.note') + ' ' + selectedNoteID ];
-            note = osm.getNote(selectedNoteID);
-            center = note.loc;
+
+            var note = osm.getNote(selectedNoteID);
+            heading = t('note.note') + ' ' + selectedNoteID;
+            location = note.loc;
             geometry = 'note';
 
         } else {                           // selected 1..n entities
-            var extent = geoExtent();
-            selected = context.selectedIDs()
-                .filter(function(e) { return context.hasEntity(e); });
+            var selected = context.selectedIDs().map(function(id) {
+                return context.hasEntity(id);
+            }).filter(Boolean);
+
+            heading = selected.length === 1 ? selected[0].id :
+                t('info_panels.measurement.selected', { n: selected.length.toLocaleString(locale) });
+
             if (selected.length) {
-                for (var i = 0; i < selected.length; i++) {
-                    entity = context.entity(selected[i]);
-                    extent._extend(entity.extent(resolver));
+                var extent = geoExtent();
+                for (var i in selected) {
+                    var entity = selected[i];
+                    extent._extend(entity.extent(graph));
+
+                    geometry = entity.geometry(graph);
+                    if (geometry === 'line' || geometry === 'area') {
+                        closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
+                        var feature = entity.asGeoJSON(graph);
+                        length += radiansToMeters(d3_geoLength(toLineString(feature)));
+                        centroid = d3_geoCentroid(feature);
+                        if (entity.type !== 'relation') {
+                            totalNodeCount += nodeCount(feature);
+                        }
+                        if (closed) {
+                            area += steradiansToSqmeters(entity.area(graph));
+                        }
+                    } else if (entity.type === 'node') {
+                        totalNodeCount += 1;
+                    }
                 }
-                center = extent.center();
-                geometry = entity.geometry(resolver);
+
+                if (selected.length > 1) {
+                    geometry = null;
+                    closed = null;
+                    centroid = null;
+                }
+
+                if (selected.length === 1 && selected[0].type === 'node') {
+                    totalNodeCount = null;
+                    location = selected[0].loc;
+                } else if (!centroid) {
+                    center = extent.center();
+                }
             }
         }
 
-        var singular = selected.length === 1 ? selected[0] : null;
-
         selection.html('');
 
-        selection
-            .append('h4')
-            .attr('class', 'measurement-heading')
-            .text(singular || t('info_panels.measurement.selected', { n: selected.length.toLocaleString(locale) }));
-
-        if (!selected.length) return;
-
+        if (heading) {
+            selection
+                .append('h4')
+                .attr('class', 'measurement-heading')
+                .text(heading);
+        }
 
         var list = selection
             .append('ul');
         var coordItem;
 
-        // multiple selected features, just display extent center..
-        if (!singular) {
-            coordItem = list
-                .append('li')
-                .text(t('info_panels.measurement.center') + ':');
-            coordItem.append('span')
-                .text(dmsCoordinatePair(center));
-            coordItem.append('span')
-                .text(decimalCoordinatePair(center));
-            return;
-        }
-
-        // single selected feature, display details..
-        if (geometry === 'line' || geometry === 'area') {
-            var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
-            var feature = entity.asGeoJSON(resolver);
-            var length = radiansToMeters(d3_geoLength(toLineString(feature)));
-            var lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length'));
-            var centroid = d3_geoCentroid(feature);
-
+        if (geometry) {
             list
                 .append('li')
                 .text(t('info_panels.measurement.geometry') + ':')
@@ -117,31 +131,44 @@ export function uiPanelMeasurement(context) {
                 .text(
                     closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
                 );
+        }
 
-            if (entity.type !== 'relation') {
-                list
-                    .append('li')
-                    .text(t('info_panels.measurement.node_count') + ':')
-                    .append('span')
-                    .text(nodeCount(feature).toLocaleString(locale));
-            }
+        if (totalNodeCount) {
+            list
+                .append('li')
+                .text(t('info_panels.measurement.node_count') + ':')
+                .append('span')
+                .text(totalNodeCount.toLocaleString(locale));
+        }
 
-            if (closed) {
-                var area = steradiansToSqmeters(entity.area(resolver));
-                list
-                    .append('li')
-                    .text(t('info_panels.measurement.area') + ':')
-                    .append('span')
-                    .text(displayArea(area, isImperial));
-            }
+        if (area) {
+            list
+                .append('li')
+                .text(t('info_panels.measurement.area') + ':')
+                .append('span')
+                .text(displayArea(area, isImperial));
+        }
 
-
+        if (length) {
+            var lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length'));
             list
                 .append('li')
                 .text(lengthLabel + ':')
                 .append('span')
                 .text(displayLength(length, isImperial));
+        }
 
+        if (location) {
+            coordItem = list
+                .append('li')
+                .text(t('info_panels.measurement.location') + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(location));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(location));
+        }
+
+        if (centroid) {
             coordItem = list
                 .append('li')
                 .text(t('info_panels.measurement.centroid') + ':');
@@ -149,9 +176,20 @@ export function uiPanelMeasurement(context) {
                 .text(dmsCoordinatePair(centroid));
             coordItem.append('span')
                 .text(decimalCoordinatePair(centroid));
+        }
 
+        if (center) {
+            coordItem = list
+                .append('li')
+                .text(t('info_panels.measurement.center') + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(center));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(center));
+        }
+
+        if (length || area) {
             var toggle  = isImperial ? 'imperial' : 'metric';
-
             selection
                 .append('a')
                 .text(t('info_panels.measurement.' + toggle))
@@ -162,24 +200,6 @@ export function uiPanelMeasurement(context) {
                     isImperial = !isImperial;
                     selection.call(redraw);
                 });
-
-        } else {
-            var centerLabel = t('info_panels.measurement.' +
-                (note || entity.type === 'node' ? 'location' : 'center'));
-
-            list
-                .append('li')
-                .text(t('info_panels.measurement.geometry') + ':')
-                .append('span')
-                .text(t('geometry.' + geometry));
-
-            coordItem = list
-                .append('li')
-                .text(centerLabel + ':');
-            coordItem.append('span')
-                .text(dmsCoordinatePair(center));
-            coordItem.append('span')
-                .text(decimalCoordinatePair(center));
         }
     }
 
