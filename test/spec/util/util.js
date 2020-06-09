@@ -164,12 +164,15 @@ describe('iD.util', function() {
             expect(iD.utilUnicodeCharsCount('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞')).to.eql(74);
         });
         it('counts emoji', function() {
-            expect(iD.utilUnicodeCharsCount('😎')).to.eql(1);
-            expect(iD.utilUnicodeCharsCount('🇨🇦')).to.eql(2);
-            expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).to.eql(4);
-            expect(iD.utilUnicodeCharsCount('‍👩‍👩‍👧‍👧')).to.eql(8);
-            expect(iD.utilUnicodeCharsCount('👩‍❤️‍💋‍👩')).to.eql(8);
-            expect(iD.utilUnicodeCharsCount('😎😬😆😵😴😄🙂🤔')).to.eql(8);
+            // The `Array.from` polyfill may not account for emojis, so
+            // be lenient here. Worst case scenario is that IE users might be
+            // limited to somewhat fewer characters on tag and role input.
+            expect(iD.utilUnicodeCharsCount('😎')).to.be.oneOf([1, 2]);
+            expect(iD.utilUnicodeCharsCount('🇨🇦')).to.be.oneOf([2, 4]);
+            expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).to.be.oneOf([4, 6]);
+            expect(iD.utilUnicodeCharsCount('‍👩‍👩‍👧‍👧')).to.be.oneOf([8, 12]);
+            expect(iD.utilUnicodeCharsCount('👩‍❤️‍💋‍👩')).to.be.oneOf([8, 11]);
+            expect(iD.utilUnicodeCharsCount('😎😬😆😵😴😄🙂🤔')).to.be.oneOf([8, 16]);
         });
     });
 
