@@ -98,6 +98,7 @@ export var osmOneWayTags = {
         'roundabout': true
     },
     'man_made': {
+        'goods_conveyor': true,
         'piste:halfpipe': true
     },
     'piste:type': {
