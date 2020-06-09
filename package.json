@@ -114,7 +114,7 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
-    "uglify-js": "~3.8.0"
+    "uglify-js": "~3.9.4"
   },
   "engines": {
     "node": ">=10"
