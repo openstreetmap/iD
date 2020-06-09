@@ -46,5 +46,7 @@ export { utilTagDiff } from './util';
 export { utilTagText } from './util';
 export { utilTiler } from './tiler';
 export { utilTriggerEvent } from './trigger_event';
+export { utilUnicodeCharsCount } from './util';
+export { utilUnicodeCharsTruncated } from './util';
 export { utilUniqueDomId } from './util';
 export { utilWrap } from './util';

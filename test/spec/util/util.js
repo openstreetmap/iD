@@ -143,4 +143,82 @@ describe('iD.util', function() {
                 });
         });
     });
+
+    describe('utilUnicodeCharsCount', function() {
+        it('counts empty string', function() {
+            expect(iD.utilUnicodeCharsCount('')).to.eql(0);
+        });
+        it('counts latin text', function() {
+            expect(iD.utilUnicodeCharsCount('Lorem')).to.eql(5);
+        });
+        it('counts diacritics', function() {
+            expect(iD.utilUnicodeCharsCount('Ĺo͂řȩm̅')).to.eql(7);
+        });
+        it('counts Korean text', function() {
+            expect(iD.utilUnicodeCharsCount('뎌쉐')).to.eql(2);
+        });
+        it('counts Hindi text with combining marks', function() {
+            expect(iD.utilUnicodeCharsCount('अनुच्छेद')).to.eql(8);
+        });
+        it('counts demonic multiple combining marks', function() {
+            expect(iD.utilUnicodeCharsCount('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞')).to.eql(74);
+        });
+        it('counts emoji', function() {
+            expect(iD.utilUnicodeCharsCount('😎')).to.eql(1);
+            expect(iD.utilUnicodeCharsCount('🇨🇦')).to.eql(2);
+            expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).to.eql(4);
+            expect(iD.utilUnicodeCharsCount('‍👩‍👩‍👧‍👧')).to.eql(8);
+            expect(iD.utilUnicodeCharsCount('👩‍❤️‍💋‍👩')).to.eql(8);
+            expect(iD.utilUnicodeCharsCount('😎😬😆😵😴😄🙂🤔')).to.eql(8);
+        });
+    });
+
+    describe('utilUnicodeCharsTruncated', function() {
+        it('truncates empty string', function() {
+            expect(iD.utilUnicodeCharsTruncated('', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('', 255)).to.eql('');
+        });
+        it('truncates latin text', function() {
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 3)).to.eql('Lor');
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 5)).to.eql('Lorem');
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 255)).to.eql('Lorem');
+        });
+        it('truncates diacritics', function() {
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 3)).to.eql('Ĺo͂');
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 7)).to.eql('Ĺo͂řȩm̅');
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 255)).to.eql('Ĺo͂řȩm̅');
+        });
+        it('truncates Korean text', function() {
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 1)).to.eql('뎌');
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 2)).to.eql('뎌쉐');
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 255)).to.eql('뎌쉐');
+        });
+        it('truncates Hindi text with combining marks', function() {
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 3)).to.eql('अनु');
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 8)).to.eql('अनुच्छेद');
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 255)).to.eql('अनुच्छेद');
+        });
+        it('truncates demonic multiple combining marks', function() {
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖', 59)).to.eql('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖');
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞', 74)).to.eql('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞');
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞', 255)).to.eql('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞');
+        });
+        it('truncates emoji', function() {
+            expect(iD.utilUnicodeCharsTruncated('😎', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('😎', 1)).to.eql('😎');
+            expect(iD.utilUnicodeCharsTruncated('🇨🇦', 1)).to.eql('🇨');
+            expect(iD.utilUnicodeCharsTruncated('🏳️‍🌈', 2)).to.eql('🏳️');
+            expect(iD.utilUnicodeCharsTruncated('‍👩‍👩‍👧‍👧', 4)).to.eql('‍👩‍👩');
+            expect(iD.utilUnicodeCharsTruncated('👩‍❤️‍💋‍👩', 6)).to.eql('👩‍❤️‍💋');
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 4)).to.eql('😎😬😆😵');
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 8)).to.eql('😎😬😆😵😴😄🙂🤔');
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 255)).to.eql('😎😬😆😵😴😄🙂🤔');
+        });
+    });
 });

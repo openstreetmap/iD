@@ -9,7 +9,7 @@ import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff, utilUnicodeCharsTruncated } from '../../util';
 
 export function uiSectionRawTagEditor(id, context) {
 
@@ -343,8 +343,8 @@ export function uiSectionRawTagEditor(id, context) {
         newText.split('\n').forEach(function(row) {
             var m = row.match(/^\s*([^=]+)=(.*)$/);
             if (m !== null) {
-                var k = unstringify(m[1].trim()).substr(0, maxKeyLength);
-                var v = unstringify(m[2].trim()).substr(0, maxValueLength);
+                var k = utilUnicodeCharsTruncated(unstringify(m[1].trim()), maxKeyLength);
+                var v = utilUnicodeCharsTruncated(unstringify(m[2].trim()), maxValueLength);
                 newTags[k] = v;
             }
         });

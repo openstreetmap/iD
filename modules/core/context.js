@@ -191,11 +191,9 @@ export function coreContext() {
     return context;
   };
 
-
+  // String length limits in Unicode characters, not JavaScript UTF-16 code units
   context.maxCharsForTagKey = () => 255;
-
   context.maxCharsForTagValue = () => 255;
-
   context.maxCharsForRelationRole = () => 255;
 
 

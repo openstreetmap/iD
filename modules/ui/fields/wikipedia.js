@@ -7,7 +7,7 @@ import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilUnicodeCharsTruncated } from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
@@ -192,7 +192,7 @@ export function uiFieldWikipedia(field, context) {
     }
 
     if (value) {
-      syncTags.wikipedia = (language()[2] + ':' + value).substr(0, context.maxCharsForTagValue());
+      syncTags.wikipedia = utilUnicodeCharsTruncated(language()[2] + ':' + value, context.maxCharsForTagValue());
     } else {
       syncTags.wikipedia = undefined;
     }

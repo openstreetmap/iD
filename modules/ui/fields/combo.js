@@ -9,7 +9,7 @@ import { osmEntity } from '../../osm/entity';
 import { t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilUnicodeCharsCount } from '../../util';
 
 export {
     uiFieldCombo as uiFieldMultiCombo,
@@ -448,7 +448,7 @@ export function uiFieldCombo(field, context) {
                 field.keys = _multiData.map(function(d) { return d.key; });
 
                 // limit the input length so it fits after prepending the key prefix
-                maxLength = context.maxCharsForTagKey() - field.key.length;
+                maxLength = context.maxCharsForTagKey() - utilUnicodeCharsCount(field.key);
 
             } else if (isSemi) {
 
@@ -480,7 +480,7 @@ export function uiFieldCombo(field, context) {
                     };
                 });
 
-                var currLength = commonValues.join(';').length;
+                var currLength = utilUnicodeCharsCount(commonValues.join(';'));
 
                 // limit the input length to the remaining available characters
                 maxLength = context.maxCharsForTagValue() - currLength;

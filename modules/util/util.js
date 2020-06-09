@@ -513,3 +513,13 @@ export function utilSafeClassName(str) {
 export function utilUniqueDomId(str) {
     return 'ideditor-' + utilSafeClassName(str) + '-' + new Date().getTime().toString();
 }
+
+export function utilUnicodeCharsCount(str) {
+    // Converting to an array gives us unicode characters instead of JavaScript
+    // UTF-16 code units from `String.length()`
+    return Array.from(str).length;
+}
+
+export function utilUnicodeCharsTruncated(str, limit) {
+    return Array.from(str).slice(0, limit).join('');
+}

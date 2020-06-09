@@ -14,7 +14,8 @@ import { svgIcon } from '../../svg/icon';
 import {
     utilGetSetValue,
     utilNoAuto,
-    utilRebind
+    utilRebind,
+    utilUnicodeCharsTruncated
 } from '../../util';
 
 import { t } from '../../core/localizer';
@@ -236,7 +237,7 @@ export function uiFieldWikidata(field, context) {
             }
 
             if (newWikipediaValue) {
-                newWikipediaValue = newWikipediaValue.substr(0, context.maxCharsForTagValue());
+                newWikipediaValue = utilUnicodeCharsTruncated(newWikipediaValue, context.maxCharsForTagValue());
             }
 
             if (typeof newWikipediaValue === 'undefined') return;

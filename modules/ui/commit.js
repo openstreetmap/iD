@@ -12,7 +12,7 @@ import { uiChangesetEditor } from './changeset_editor';
 import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
-import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
+import { utilArrayGroupBy, utilRebind, utilUnicodeCharsTruncated, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -92,9 +92,9 @@ export function uiCommit(context) {
         var detected = utilDetect();
         var tags = {
             comment: prefs('comment') || '',
-            created_by: ('iD ' + context.version).substr(0, tagCharLimit),
-            host: detected.host.substr(0, tagCharLimit),
-            locale: localizer.localeCode().substr(0, tagCharLimit)
+            created_by: utilUnicodeCharsTruncated('iD ' + context.version, tagCharLimit),
+            host: utilUnicodeCharsTruncated(detected.host, tagCharLimit),
+            locale: utilUnicodeCharsTruncated(localizer.localeCode(), tagCharLimit)
         };
 
         // call findHashtags initially - this will remove stored
@@ -126,7 +126,7 @@ export function uiCommit(context) {
                 }
             });
 
-            tags.source = sources.join(';').substr(0, tagCharLimit);
+            tags.source = utilUnicodeCharsTruncated(sources.join(';'), tagCharLimit);
         }
 
         context.changeset = new osmChangeset({ tags: tags });
@@ -144,31 +144,31 @@ export function uiCommit(context) {
         var tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = context.history().imageryUsed().join(';').substr(0, tagCharLimit);
+        var imageryUsed = utilUnicodeCharsTruncated(context.history().imageryUsed().join(';'), tagCharLimit);
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
         var itemType;
         if (osmClosed.length) {
-            tags['closed:note'] = osmClosed.join(';').substr(0, tagCharLimit);
+            tags['closed:note'] = utilUnicodeCharsTruncated(osmClosed.join(';'), tagCharLimit);
         }
         if (services.keepRight) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
-                tags['closed:keepright'] = krClosed.join(';').substr(0, tagCharLimit);
+                tags['closed:keepright'] = utilUnicodeCharsTruncated(krClosed.join(';'), tagCharLimit);
             }
         }
         if (services.improveOSM) {
             var iOsmClosed = services.improveOSM.getClosedCounts();
             for (itemType in iOsmClosed) {
-                tags['closed:improveosm:' + itemType] = iOsmClosed[itemType].toString().substr(0, tagCharLimit);
+                tags['closed:improveosm:' + itemType] = utilUnicodeCharsTruncated(iOsmClosed[itemType].toString(), tagCharLimit);
             }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
             for (itemType in osmoseClosed) {
-                tags['closed:osmose:' + itemType] = osmoseClosed[itemType].toString().substr(0, tagCharLimit);
+                tags['closed:osmose:' + itemType] = utilUnicodeCharsTruncated(osmoseClosed[itemType].toString(), tagCharLimit);
             }
         }
 
@@ -187,10 +187,10 @@ export function uiCommit(context) {
                     var issuesBySubtype = utilArrayGroupBy(issuesOfType, 'subtype');
                     for (var issueSubtype in issuesBySubtype) {
                         var issuesOfSubtype = issuesBySubtype[issueSubtype];
-                        tags[prefix + ':' + issueType + ':' + issueSubtype] = issuesOfSubtype.length.toString().substr(0, tagCharLimit);
+                        tags[prefix + ':' + issueType + ':' + issueSubtype] = utilUnicodeCharsTruncated(issuesOfSubtype.length.toString(), tagCharLimit);
                     }
                 } else {
-                    tags[prefix + ':' + issueType] = issuesOfType.length.toString().substr(0, tagCharLimit);
+                    tags[prefix + ':' + issueType] = utilUnicodeCharsTruncated(issuesOfType.length.toString(), tagCharLimit);
                 }
             }
         }
@@ -550,14 +550,14 @@ export function uiCommit(context) {
 
         Object.keys(changed).forEach(function(k) {
             var v = changed[k];
-            k = k.trim().substr(0, tagCharLimit);
+            k = utilUnicodeCharsTruncated(k.trim(), tagCharLimit);
             if (readOnlyTags.indexOf(k) !== -1) return;
 
             if (k !== '' && v !== undefined) {
                 if (onInput) {
                     tags[k] = v;
                 } else {
-                    tags[k] = v.trim().substr(0, tagCharLimit);
+                    tags[k] = utilUnicodeCharsTruncated(v.trim(), tagCharLimit);
                 }
             } else {
                 delete tags[k];
@@ -569,7 +569,7 @@ export function uiCommit(context) {
             var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
             var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
-                tags.hashtags = arr.join(';').substr(0, tagCharLimit);
+                tags.hashtags = utilUnicodeCharsTruncated(arr.join(';'), tagCharLimit);
                 prefs('hashtags', tags.hashtags);
             } else {
                 delete tags.hashtags;
