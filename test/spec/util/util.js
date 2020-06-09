@@ -217,7 +217,7 @@ describe('iD.util', function() {
             expect(iD.utilUnicodeCharsTruncated('🇨🇦', 1)).to.be.oneOf(['🇨', '\ud83c']);
             expect(iD.utilUnicodeCharsTruncated('🏳️‍🌈', 2)).to.be.oneOf(['🏳️', '\ud83c\udff3']);
             expect(iD.utilUnicodeCharsTruncated('‍👩‍👩‍👧‍👧', 4)).to.be.oneOf(['‍👩‍👩', '‍👩‍']);
-            expect(iD.utilUnicodeCharsTruncated('👩‍❤️‍💋‍👩', 6)).to.be.oneOf(['👩‍❤️‍💋', '💋‍👩']);
+            expect(iD.utilUnicodeCharsTruncated('👩‍❤️‍💋‍👩', 6)).to.be.oneOf(['👩‍❤️‍💋', '👩‍❤️‍']);
             expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 0)).to.eql('');
             expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 4)).to.be.oneOf(['😎😬😆😵', '😎😬']);
             expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 8)).to.be.oneOf(['😎😬😆😵😴😄🙂🤔', '😎😬😆😵']);
