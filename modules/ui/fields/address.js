@@ -186,7 +186,6 @@ export function uiFieldAddress(field, context) {
             .append('input')
             .property('type', 'text')
             .call(updatePlaceholder)
-            .attr('maxlength', context.maxCharsForTagValue())
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
@@ -259,10 +258,12 @@ export function uiFieldAddress(field, context) {
                 .each(function (subfield) {
                     var key = field.key + ':' + subfield.id;
 
-                    // don't override multiple values with blank string
-                    if (Array.isArray(_tags[key]) && !this.value) return;
+                    var value = context.cleanTagValue(this.value);
 
-                    tags[key] = this.value || undefined;
+                    // don't override multiple values with blank string
+                    if (Array.isArray(_tags[key]) && !value) return;
+
+                    tags[key] = value || undefined;
                 });
 
             dispatch.call('change', this, tags, onInput);

@@ -47,7 +47,6 @@ export function uiFieldAccess(field, context) {
             .attr('class', 'preset-input-access-wrap')
             .append('input')
             .attr('type', 'text')
-            .attr('maxlength', context.maxCharsForTagValue())
             .attr('class', function(d) { return 'preset-input-access preset-input-access-' + d; })
             .call(utilNoAuto)
             .each(function(d) {
@@ -69,7 +68,7 @@ export function uiFieldAccess(field, context) {
 
     function change(d) {
         var tag = {};
-        var value = utilGetSetValue(d3_select(this));
+        var value = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 
         // don't override multiple values with blank string
         if (!value && typeof _tags[d] !== 'string') return;

@@ -56,7 +56,6 @@ export function uiFieldText(field, context) {
             .append('input')
             .attr('type', field.type === 'identifier' ? 'text' : field.type)
             .attr('id', field.domId)
-            .attr('maxlength', context.maxCharsForTagValue())
             .classed(field.type, true)
             .call(utilNoAuto)
             .merge(input);
@@ -167,13 +166,13 @@ export function uiFieldText(field, context) {
     function change(onInput) {
         return function() {
             var t = {};
-            var val = utilGetSetValue(input).trim() || undefined;
+            var val = context.cleanTagValue(utilGetSetValue(input));
 
             // don't override multiple values with blank string
             if (!val && Array.isArray(_tags[field.key])) return;
 
             if (!onInput) {
-                if (field.type === 'number' && val !== undefined) {
+                if (field.type === 'number' && val) {
                     var vals = val.split(';');
                     vals = vals.map(function(v) {
                         var num = parseFloat(v.trim(), 10);
@@ -181,9 +180,9 @@ export function uiFieldText(field, context) {
                     });
                     val = vals.join(';');
                 }
-                utilGetSetValue(input, val || '');
+                utilGetSetValue(input, val);
             }
-            t[field.key] = val;
+            t[field.key] = val || undefined;
             dispatch.call('change', this, t, onInput);
         };
     }

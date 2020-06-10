@@ -170,7 +170,6 @@ export function uiFieldLocalized(field, context) {
             .attr('type', 'text')
             .attr('id', field.domId)
             .attr('class', 'localized-main')
-            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .merge(input);
 
@@ -385,13 +384,15 @@ export function uiFieldLocalized(field, context) {
                     d3_event.preventDefault();
                     return;
                 }
-                var t = {};
-                var val = utilGetSetValue(d3_select(this)) || undefined;
+
+                var val = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 
                 // don't override multiple values with blank string
                 if (!val && Array.isArray(_tags[field.key])) return;
 
-                t[field.key] = val;
+                var t = {};
+
+                t[field.key] = val || undefined;
                 dispatch.call('change', this, t, onInput);
             };
         }
@@ -420,12 +421,14 @@ export function uiFieldLocalized(field, context) {
             tags[key(d.lang)] = undefined;
         }
 
+        var newKey = lang && context.cleanTagKey(key(lang));
+
         var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
 
-        if (lang && value) {
-            tags[key(lang)] = value;
-        } else if (lang && _wikiTitles && _wikiTitles[d.lang]) {
-            tags[key(lang)] = _wikiTitles[d.lang];
+        if (newKey && value) {
+            tags[newKey] = value;
+        } else if (newKey && _wikiTitles && _wikiTitles[d.lang]) {
+            tags[newKey] = _wikiTitles[d.lang];
         }
 
         d.lang = lang;
@@ -435,7 +438,7 @@ export function uiFieldLocalized(field, context) {
 
     function changeValue(d) {
         if (!d.lang) return;
-        var value = utilGetSetValue(d3_select(this)) || undefined;
+        var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
 
         // don't override multiple values with blank string
         if (!value && Array.isArray(d.value)) return;
@@ -549,7 +552,6 @@ export function uiFieldLocalized(field, context) {
                 wrap
                     .append('input')
                     .attr('type', 'text')
-                    .attr('maxlength', context.maxCharsForTagValue())
                     .attr('class', 'localized-value')
                     .on('blur', changeValue)
                     .on('change', changeValue);

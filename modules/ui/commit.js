@@ -12,7 +12,7 @@ import { uiChangesetEditor } from './changeset_editor';
 import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
-import { utilArrayGroupBy, utilRebind, utilUnicodeCharsTruncated, utilUniqueDomId } from '../util';
+import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 
 
@@ -63,8 +63,6 @@ export function uiCommit(context) {
 
     function initChangeset() {
 
-        var tagCharLimit = context.maxCharsForTagValue();
-
         // expire stored comment, hashtags, source after cutoff datetime - #3947 #4899
         var commentDate = +prefs('commentDate') || 0;
         var currDate = Date.now();
@@ -92,9 +90,9 @@ export function uiCommit(context) {
         var detected = utilDetect();
         var tags = {
             comment: prefs('comment') || '',
-            created_by: utilUnicodeCharsTruncated('iD ' + context.version, tagCharLimit),
-            host: utilUnicodeCharsTruncated(detected.host, tagCharLimit),
-            locale: utilUnicodeCharsTruncated(localizer.localeCode(), tagCharLimit)
+            created_by: context.cleanTagValue('iD ' + context.version),
+            host: context.cleanTagValue(detected.host),
+            locale: context.cleanTagValue(localizer.localeCode())
         };
 
         // call findHashtags initially - this will remove stored
@@ -126,7 +124,7 @@ export function uiCommit(context) {
                 }
             });
 
-            tags.source = utilUnicodeCharsTruncated(sources.join(';'), tagCharLimit);
+            tags.source = context.cleanTagValue(sources.join(';'));
         }
 
         context.changeset = new osmChangeset({ tags: tags });
@@ -139,36 +137,34 @@ export function uiCommit(context) {
         var osm = context.connection();
         if (!osm) return;
 
-        var tagCharLimit = context.maxCharsForTagValue();
-
         var tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = utilUnicodeCharsTruncated(context.history().imageryUsed().join(';'), tagCharLimit);
+        var imageryUsed = context.cleanTagValue(context.history().imageryUsed().join(';'));
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
         var itemType;
         if (osmClosed.length) {
-            tags['closed:note'] = utilUnicodeCharsTruncated(osmClosed.join(';'), tagCharLimit);
+            tags['closed:note'] = context.cleanTagValue(osmClosed.join(';'));
         }
         if (services.keepRight) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
-                tags['closed:keepright'] = utilUnicodeCharsTruncated(krClosed.join(';'), tagCharLimit);
+                tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
             }
         }
         if (services.improveOSM) {
             var iOsmClosed = services.improveOSM.getClosedCounts();
             for (itemType in iOsmClosed) {
-                tags['closed:improveosm:' + itemType] = utilUnicodeCharsTruncated(iOsmClosed[itemType].toString(), tagCharLimit);
+                tags['closed:improveosm:' + itemType] = context.cleanTagValue(iOsmClosed[itemType].toString());
             }
         }
         if (services.osmose) {
             var osmoseClosed = services.osmose.getClosedCounts();
             for (itemType in osmoseClosed) {
-                tags['closed:osmose:' + itemType] = utilUnicodeCharsTruncated(osmoseClosed[itemType].toString(), tagCharLimit);
+                tags['closed:osmose:' + itemType] = context.cleanTagValue(osmoseClosed[itemType].toString());
             }
         }
 
@@ -187,10 +183,10 @@ export function uiCommit(context) {
                     var issuesBySubtype = utilArrayGroupBy(issuesOfType, 'subtype');
                     for (var issueSubtype in issuesBySubtype) {
                         var issuesOfSubtype = issuesBySubtype[issueSubtype];
-                        tags[prefix + ':' + issueType + ':' + issueSubtype] = utilUnicodeCharsTruncated(issuesOfSubtype.length.toString(), tagCharLimit);
+                        tags[prefix + ':' + issueType + ':' + issueSubtype] = context.cleanTagValue(issuesOfSubtype.length.toString());
                     }
                 } else {
-                    tags[prefix + ':' + issueType] = utilUnicodeCharsTruncated(issuesOfType.length.toString(), tagCharLimit);
+                    tags[prefix + ':' + issueType] = context.cleanTagValue(issuesOfType.length.toString());
                 }
             }
         }
@@ -546,18 +542,16 @@ export function uiCommit(context) {
     function updateChangeset(changed, onInput) {
         var tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
-        var tagCharLimit = context.maxCharsForTagValue();
-
         Object.keys(changed).forEach(function(k) {
             var v = changed[k];
-            k = utilUnicodeCharsTruncated(k.trim(), tagCharLimit);
+            k = context.cleanTagKey(k);
             if (readOnlyTags.indexOf(k) !== -1) return;
 
             if (k !== '' && v !== undefined) {
                 if (onInput) {
                     tags[k] = v;
                 } else {
-                    tags[k] = utilUnicodeCharsTruncated(v.trim(), tagCharLimit);
+                    tags[k] = context.cleanTagValue(v);
                 }
             } else {
                 delete tags[k];
@@ -569,7 +563,7 @@ export function uiCommit(context) {
             var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
             var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
-                tags.hashtags = utilUnicodeCharsTruncated(arr.join(';'), tagCharLimit);
+                tags.hashtags = context.cleanTagValue(arr.join(';'));
                 prefs('hashtags', tags.hashtags);
             } else {
                 delete tags.hashtags;

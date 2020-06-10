@@ -30,7 +30,6 @@ export function uiFieldTextarea(field, context) {
         input = input.enter()
             .append('textarea')
             .attr('id', field.domId)
-            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('input', change(true))
             .on('blur', change())
@@ -42,13 +41,13 @@ export function uiFieldTextarea(field, context) {
     function change(onInput) {
         return function() {
 
-            var val = utilGetSetValue(input) || undefined;
+            var val = context.cleanTagValue(utilGetSetValue(input));
 
             // don't override multiple values with blank string
             if (!val && Array.isArray(_tags[field.key])) return;
 
             var t = {};
-            t[field.key] = val;
+            t[field.key] = val || undefined;
             dispatch.call('change', this, t, onInput);
         };
     }

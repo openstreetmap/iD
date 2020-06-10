@@ -67,7 +67,7 @@ export function uiSectionRawMembershipEditor(context) {
         if (_inChange) return;  // avoid accidental recursive call #5731
 
         var oldRole = d.member.role;
-        var newRole = d3_select(this).property('value');
+        var newRole = context.cleanRelationRole(d3_select(this).property('value'));
 
         if (oldRole !== newRole) {
             _inChange = true;
@@ -267,7 +267,6 @@ export function uiSectionRawMembershipEditor(context) {
                 return d.domId;
             })
             .property('type', 'text')
-            .attr('maxlength', context.maxCharsForRelationRole())
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto)
             .property('value', function(d) { return d.member.role; })
@@ -315,7 +314,6 @@ export function uiSectionRawMembershipEditor(context) {
             .append('input')
             .attr('class', 'member-role')
             .property('type', 'text')
-            .attr('maxlength', context.maxCharsForRelationRole())
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
 
@@ -387,7 +385,7 @@ export function uiSectionRawMembershipEditor(context) {
             // remove hover-higlighting
             if (d.relation) utilHighlightEntities([d.relation.id], false, context);
 
-            var role = list.selectAll('.member-row-new .member-role').property('value');
+            var role = context.cleanRelationRole(list.selectAll('.member-row-new .member-role').property('value'));
             addMembership(d, role);
         }
 

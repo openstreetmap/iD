@@ -18,7 +18,7 @@ import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
-import { utilKeybinding, utilRebind, utilStringQs } from '../util';
+import { utilKeybinding, utilRebind, utilStringQs, utilUnicodeCharsTruncated } from '../util';
 
 
 export function coreContext() {
@@ -195,6 +195,27 @@ export function coreContext() {
   context.maxCharsForTagKey = () => 255;
   context.maxCharsForTagValue = () => 255;
   context.maxCharsForRelationRole = () => 255;
+
+  function cleanOsmString(val, maxChars) {
+    // be lenient with input
+    if (val === undefined || val === null) {
+      val = '';
+    } else {
+      val = val.toString();
+    }
+
+    // remove whitespace
+    val = val.trim();
+
+    // use the canonical form of the string
+    if (val.normalize) val = val.normalize('NFC');
+
+    // trim to the number of allowed characters
+    return utilUnicodeCharsTruncated(val, maxChars);
+  }
+  context.cleanTagKey = (val) => cleanOsmString(val, context.maxCharsForTagKey());
+  context.cleanTagValue = (val) => cleanOsmString(val, context.maxCharsForTagValue());
+  context.cleanRelationRole = (val) => cleanOsmString(val, context.maxCharsForRelationRole());
 
 
   /* History */

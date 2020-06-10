@@ -290,6 +290,7 @@ export function uiFieldCombo(field, context) {
                         var old = _tags[key];
                         if (typeof old === 'string' && old.toLowerCase() !== 'no') return;
                     }
+                    key = context.cleanTagKey(key);
                     field.keys.push(key);
                     t[key] = 'yes';
                 });
@@ -297,7 +298,7 @@ export function uiFieldCombo(field, context) {
             } else if (isSemi) {
                 var arr = _multiData.map(function(d) { return d.key; });
                 arr = arr.concat(vals);
-                t[field.key] = utilArrayUniq(arr).filter(Boolean).join(';');
+                t[field.key] = context.cleanTagValue(utilArrayUniq(arr).filter(Boolean).join(';'));
             }
 
             window.setTimeout(function() { input.node().focus(); }, 10);
@@ -308,7 +309,7 @@ export function uiFieldCombo(field, context) {
             // don't override multiple values with blank string
             if (!rawValue && Array.isArray(_tags[field.key])) return;
 
-            val = tagValue(rawValue);
+            val = context.cleanTagValue(tagValue(rawValue));
             t[field.key] = val;
         }
 
@@ -383,7 +384,6 @@ export function uiFieldCombo(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('id', field.domId)
-            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .call(initCombo, selection)
             .merge(input);
@@ -456,8 +456,8 @@ export function uiFieldCombo(field, context) {
                 var commonValues;
                 if (Array.isArray(tags[field.key])) {
 
-                    tags[field.key].forEach(function(tagValue) {
-                        var thisVals = utilArrayUniq((tagValue || '').split(';')).filter(Boolean);
+                    tags[field.key].forEach(function(tagVal) {
+                        var thisVals = utilArrayUniq((tagVal || '').split(';')).filter(Boolean);
                         allValues = allValues.concat(thisVals);
                         if (!commonValues) {
                             commonValues = thisVals;
@@ -543,9 +543,6 @@ export function uiFieldCombo(field, context) {
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
                 .text('×');
-
-            container.selectAll('input[type="text"]')
-                .attr('maxlength', maxLength);
 
         } else {
             var isMixed = Array.isArray(tags[field.key]);

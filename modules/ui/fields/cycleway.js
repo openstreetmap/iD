@@ -56,7 +56,6 @@ export function uiFieldCycleway(field, context) {
             .attr('class', 'preset-input-cycleway-wrap')
             .append('input')
             .attr('type', 'text')
-            .attr('maxlength', context.maxCharsForTagValue())
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
             .call(utilNoAuto)
             .each(function(d) {
@@ -77,7 +76,7 @@ export function uiFieldCycleway(field, context) {
 
     function change(key) {
 
-        var newValue = utilGetSetValue(d3_select(this));
+        var newValue = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 
         // don't override multiple values with blank string
         if (!newValue && (Array.isArray(_tags.cycleway) || Array.isArray(_tags[key]))) return;

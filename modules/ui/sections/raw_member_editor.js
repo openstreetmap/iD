@@ -81,7 +81,7 @@ export function uiSectionRawMemberEditor(context) {
 
     function changeRole(d) {
         var oldRole = d.role;
-        var newRole = d3_select(this).property('value');
+        var newRole = context.cleanRelationRole(d3_select(this).property('value'));
 
         if (oldRole !== newRole) {
             var member = { id: d.id, type: d.type, role: newRole };
@@ -232,7 +232,6 @@ export function uiSectionRawMemberEditor(context) {
                 return d.domId;
             })
             .property('type', 'text')
-            .attr('maxlength', context.maxCharsForRelationRole())
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
 

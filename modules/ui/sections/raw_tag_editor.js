@@ -9,7 +9,7 @@ import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff, utilUnicodeCharsTruncated } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 
 export function uiSectionRawTagEditor(id, context) {
 
@@ -187,7 +187,6 @@ export function uiSectionRawTagEditor(id, context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'key')
-            .attr('maxlength', context.maxCharsForTagKey())
             .call(utilNoAuto)
             .on('blur', keyChange)
             .on('change', keyChange);
@@ -198,7 +197,6 @@ export function uiSectionRawTagEditor(id, context) {
             .append('input')
             .property('type', 'text')
             .attr('class', 'value')
-            .attr('maxlength', context.maxCharsForTagValue())
             .call(utilNoAuto)
             .on('blur', valueChange)
             .on('change', valueChange)
@@ -338,13 +336,11 @@ export function uiSectionRawTagEditor(id, context) {
     function textChanged() {
         var newText = this.value.trim();
         var newTags = {};
-        var maxKeyLength = context.maxCharsForTagKey();
-        var maxValueLength = context.maxCharsForTagValue();
         newText.split('\n').forEach(function(row) {
             var m = row.match(/^\s*([^=]+)=(.*)$/);
             if (m !== null) {
-                var k = utilUnicodeCharsTruncated(unstringify(m[1].trim()), maxKeyLength);
-                var v = utilUnicodeCharsTruncated(unstringify(m[2].trim()), maxValueLength);
+                var k = context.cleanTagKey(unstringify(m[1].trim()));
+                var v = context.cleanTagValue(unstringify(m[2].trim()));
                 newTags[k] = v;
             }
         });
@@ -461,10 +457,11 @@ export function uiSectionRawTagEditor(id, context) {
         if (d3_select(this).attr('readonly')) return;
 
         var kOld = d.key;
-        var kNew = this.value.trim();
-        var row = this.parentNode.parentNode;
-        var inputVal = d3_select(row).selectAll('input.value');
-        var vNew = utilGetSetValue(inputVal);
+
+        // exit if we are currently about to delete this row anyway - #6366
+        if (_pendingChange && _pendingChange.hasOwnProperty(kOld) && _pendingChange[kOld] === undefined) return;
+
+        var kNew = context.cleanTagKey(this.value.trim());
 
         // allow no change if the key should be readonly
         if (isReadOnly({ key: kNew })) {
@@ -472,26 +469,29 @@ export function uiSectionRawTagEditor(id, context) {
             return;
         }
 
-        // switch focus if key is already in use
-        if (kNew && kNew !== kOld) {
-            if (_tags[kNew] !== undefined) {      // new key is already in use
-                this.value = kOld;                // reset the key
-                section.selection().selectAll('.tag-list input.value')
-                    .each(function(d) {
-                        if (d.key === kNew) {     // send focus to that other value combo instead
-                            var input = d3_select(this).node();
-                            input.focus();
-                            input.select();
-                        }
-                    });
-                return;
-            }
+        if (kNew &&
+            kNew !== kOld &&
+            _tags[kNew] !== undefined) {
+            // new key is already in use, switch focus to the existing row
+
+            this.value = kOld;                // reset the key
+            section.selection().selectAll('.tag-list input.value')
+                .each(function(d) {
+                    if (d.key === kNew) {     // send focus to that other value combo instead
+                        var input = d3_select(this).node();
+                        input.focus();
+                        input.select();
+                    }
+                });
+            return;
         }
 
-        _pendingChange  = _pendingChange || {};
 
-        // exit if we are currently about to delete this row anyway - #6366
-        if (_pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
+        var row = this.parentNode.parentNode;
+        var inputVal = d3_select(row).selectAll('input.value');
+        var vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+
+        _pendingChange = _pendingChange || {};
 
         if (kOld) {
             _pendingChange[kOld] = undefined;
@@ -517,12 +517,12 @@ export function uiSectionRawTagEditor(id, context) {
         // exit if this is a multiselection and no value was entered
         if (typeof d.value !== 'string' && !this.value) return;
 
-        _pendingChange  = _pendingChange || {};
-
         // exit if we are currently about to delete this row anyway - #6366
-        if (_pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
+        if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
 
-        _pendingChange[d.key] = this.value;
+        _pendingChange = _pendingChange || {};
+
+        _pendingChange[d.key] = context.cleanTagValue(this.value);
         scheduleChange();
     }
 
