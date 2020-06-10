@@ -10,7 +10,7 @@ import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind, utilUniqueDomId } from '../../util';
 
 var _languagesArray = [];
 
@@ -493,12 +493,15 @@ export function uiFieldLocalized(field, context) {
         var entriesEnter = entries.enter()
             .append('div')
             .attr('class', 'entry')
-            .each(function() {
+            .each(function(_, index) {
                 var wrap = d3_select(this);
+
+                var domId = utilUniqueDomId(index);
 
                 var label = wrap
                     .append('label')
-                    .attr('class', 'field-label');
+                    .attr('class', 'field-label')
+                    .attr('for', domId);
 
                 var text = label
                     .append('span')
@@ -536,6 +539,7 @@ export function uiFieldLocalized(field, context) {
                 wrap
                     .append('input')
                     .attr('class', 'localized-lang')
+                    .attr('id', domId)
                     .attr('type', 'text')
                     .attr('placeholder', t('translate.localized_translation_language'))
                     .on('blur', changeLang)
@@ -569,6 +573,10 @@ export function uiFieldLocalized(field, context) {
         entries = entries.merge(entriesEnter);
 
         entries.order();
+
+        entries.classed('present', function(d) {
+            return d.lang && d.value;
+        });
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
             return localizer.languageName(d.lang);
