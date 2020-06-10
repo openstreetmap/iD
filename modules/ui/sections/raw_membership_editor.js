@@ -18,7 +18,7 @@ import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
-import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities } from '../../util';
+import { utilArrayGroupBy, utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -190,7 +190,12 @@ export function uiSectionRawMembershipEditor(context) {
         parents.slice(0, _maxMemberships).forEach(function(relation) {
             relation.members.forEach(function(member, index) {
                 if (member.id === entity.id) {
-                    memberships.push({ relation: relation, member: member, index: index });
+                    memberships.push({
+                        relation: relation,
+                        member: member,
+                        index: index,
+                        domId: utilUniqueDomId(entityID + '-membership-' + relation.id + '-' + index)
+                    });
                 }
             });
         });
@@ -229,6 +234,9 @@ export function uiSectionRawMembershipEditor(context) {
         var labelEnter = itemsEnter
             .append('label')
             .attr('class', 'field-label')
+            .attr('for', function(d) {
+                return d.domId;
+            })
             .append('span')
             .attr('class', 'label-text')
             .append('a')
@@ -255,6 +263,9 @@ export function uiSectionRawMembershipEditor(context) {
         wrapEnter
             .append('input')
             .attr('class', 'member-role')
+            .attr('id', function(d) {
+                return d.domId;
+            })
             .property('type', 'text')
             .attr('maxlength', context.maxCharsForRelationRole())
             .attr('placeholder', t('inspector.role'))

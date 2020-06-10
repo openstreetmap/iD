@@ -16,7 +16,7 @@ import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
-import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto } from '../../util';
+import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
 
 
 export function uiSectionRawMemberEditor(context) {
@@ -121,7 +121,8 @@ export function uiSectionRawMemberEditor(context) {
                 type: member.type,
                 role: member.role,
                 relation: entity,
-                member: context.hasEntity(member.id)
+                member: context.hasEntity(member.id),
+                domId: utilUniqueDomId(entityID + '-member-' + index)
             });
         });
 
@@ -155,7 +156,8 @@ export function uiSectionRawMemberEditor(context) {
 
                 var label = item
                     .append('label')
-                    .attr('class', 'field-label');
+                    .attr('class', 'field-label')
+                    .attr('for', d.domId);
 
                 if (d.member) {
                     // highlight the member feature in the map while hovering on the list item
@@ -226,6 +228,9 @@ export function uiSectionRawMemberEditor(context) {
         wrapEnter
             .append('input')
             .attr('class', 'member-role')
+            .attr('id', function(d) {
+                return d.domId;
+            })
             .property('type', 'text')
             .attr('maxlength', context.maxCharsForRelationRole())
             .attr('placeholder', t('inspector.role'))
