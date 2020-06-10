@@ -501,25 +501,29 @@ export function utilHashcode(str) {
     return hash;
 }
 
-// returns version of `str` with all runs of special characters replaced by `_`;
+// Returns version of `str` with all runs of special characters replaced by `_`;
 // suitable for HTML ids, classes, selectors, etc.
 export function utilSafeClassName(str) {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
 }
 
-// Returns string based on `str` that is highly unlikely to collide with an id
+// Returns string based on `val` that is highly unlikely to collide with an id
 // used previously or that's present elsewhere in the document. Useful for preventing
 // browser-provided autofills or when embedding iD on pages with unknown elements.
 export function utilUniqueDomId(val) {
     return 'ideditor-' + utilSafeClassName(val.toString()) + '-' + new Date().getTime().toString();
 }
 
+// Returns the length of `str` in unicode characters. This can be less than
+// `String.length()` since a single unicode character can be composed of multiple
+// JavaScript UTF-16 code units.
 export function utilUnicodeCharsCount(str) {
-    // Converting to an array gives us unicode characters instead of JavaScript
-    // UTF-16 code units from `String.length()`
+    // Native ES2015 implementations of `Array.from` split strings into unicode characters
     return Array.from(str).length;
 }
 
+// Returns a new string representing `str` cut from its start to `limit` length
+// in unicode characters. Note that this runs the risk of splitting graphemes. 
 export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
 }
