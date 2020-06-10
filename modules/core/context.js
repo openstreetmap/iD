@@ -58,6 +58,24 @@ export function coreContext() {
     return context;
   };
 
+  /* Document title */
+  /* (typically shown as the label for the browser window/tab) */
+
+  // If true, iD will update the title based on what the user is doing
+  let _setsDocumentTitle = true;
+  context.setsDocumentTitle = function(val) {
+    if (!arguments.length) return _setsDocumentTitle;
+    _setsDocumentTitle = val;
+    return context;
+  };
+  // The part of the title that is always the same
+  let _documentTitleBase = document.title;
+  context.documentTitleBase = function(val) {
+    if (!arguments.length) return _documentTitleBase;
+    _documentTitleBase = val;
+    return context;
+  };
+
 
   /* User interface and keybinding */
   let _ui;

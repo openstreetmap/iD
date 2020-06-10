@@ -49,7 +49,7 @@ export function behaviorHash(context) {
 
     function computedTitle(includeChangeCount) {
 
-        var baseTitle = 'iD';
+        var baseTitle = context.documentTitleBase() || 'iD';
         var contextual;
         var changeCount;
         var titleID;
@@ -89,6 +89,8 @@ export function behaviorHash(context) {
     }
 
     function updateTitle(includeChangeCount) {
+        if (!context.setsDocumentTitle()) return;
+
         var newTitle = computedTitle(includeChangeCount);
         if (document.title !== newTitle) {
             document.title = newTitle;
