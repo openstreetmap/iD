@@ -4669,9 +4669,9 @@ img.tile-debug {
     right: 0;
     margin: auto;
     z-index: 50;
-    width: 50%;
+    width: 80%;
     min-width: 200px;
-    max-width: 600px;
+    max-width: 550px;
 }
 
 .modal .loader {
