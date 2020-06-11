@@ -385,7 +385,8 @@ export function uiFieldLocalized(field, context) {
                     return;
                 }
 
-                var val = context.cleanTagValue(utilGetSetValue(d3_select(this)));
+                var val = utilGetSetValue(d3_select(this));
+                if (!onInput) val = context.cleanTagValue(val);
 
                 // don't override multiple values with blank string
                 if (!val && Array.isArray(_tags[field.key])) return;

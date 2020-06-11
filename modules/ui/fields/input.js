@@ -166,7 +166,8 @@ export function uiFieldText(field, context) {
     function change(onInput) {
         return function() {
             var t = {};
-            var val = context.cleanTagValue(utilGetSetValue(input));
+            var val = utilGetSetValue(input);
+            if (!onInput) val = context.cleanTagValue(val);
 
             // don't override multiple values with blank string
             if (!val && Array.isArray(_tags[field.key])) return;

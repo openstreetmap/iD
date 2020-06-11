@@ -258,7 +258,8 @@ export function uiFieldAddress(field, context) {
                 .each(function (subfield) {
                     var key = field.key + ':' + subfield.id;
 
-                    var value = context.cleanTagValue(this.value);
+                    var value = this.value;
+                    if (!onInput) value = context.cleanTagValue(value);
 
                     // don't override multiple values with blank string
                     if (Array.isArray(_tags[key]) && !value) return;
