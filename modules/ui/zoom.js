@@ -72,7 +72,7 @@ export function uiZoom(context) {
             .append('button')
             .attr('class', function(d) { return d.id; })
             .on('click.editor', function(d) {
-                if (!d3_select(this).classed('disabled')) {
+                if (!d.disabled()) {
                     d.action();
                 }
             })

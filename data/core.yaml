@@ -599,6 +599,7 @@ en:
     zoom_to:
       key: Z
       title: Zoom To Selection
+      no_selection: Nothing to zoom to.
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
