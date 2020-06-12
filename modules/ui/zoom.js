@@ -16,12 +16,20 @@ export function uiZoom(context) {
         icon: 'plus',
         title: t('zoom.in'),
         action: zoomIn,
+        disabled: function() {
+            return !context.map().canZoomIn();
+        },
+        disabledTitle: t('zoom.disabled.in'),
         key: '+'
     }, {
         id: 'zoom-out',
         icon: 'minus',
         title: t('zoom.out'),
         action: zoomOut,
+        disabled: function() {
+            return !context.map().canZoomOut();
+        },
+        disabledTitle: t('zoom.disabled.out'),
         key: '-'
     }];
 
@@ -46,7 +54,19 @@ export function uiZoom(context) {
     }
 
     return function(selection) {
-        var button = selection.selectAll('button')
+        var tooltipBehavior = uiTooltip()
+            .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            .title(function(d) {
+                if (d.disabled()) {
+                    return d.disabledTitle;
+                }
+                return d.title;
+            })
+            .keys(function(d) {
+                return [d.key];
+            });
+
+        var buttons = selection.selectAll('button')
             .data(zooms)
             .enter()
             .append('button')
@@ -56,17 +76,9 @@ export function uiZoom(context) {
                     d.action();
                 }
             })
-            .call(uiTooltip()
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-                .title(function(d) {
-                    return d.title;
-                })
-                .keys(function(d) {
-                    return [d.key];
-                })
-            );
+            .call(tooltipBehavior);
 
-        button.each(function(d) {
+        buttons.each(function(d) {
             d3_select(this)
                 .call(svgIcon('#iD-icon-' + d.icon, 'light'));
         });
@@ -82,13 +94,16 @@ export function uiZoom(context) {
         });
 
         function updateButtonStates() {
-            var canZoomIn = context.map().canZoomIn();
-            selection.select('button.zoom-in')
-                .classed('disabled', !canZoomIn);
-
-            var canZoomOut = context.map().canZoomOut();
-            selection.select('button.zoom-out')
-                .classed('disabled', !canZoomOut);
+            buttons
+                .classed('disabled', function(d) {
+                    return d.disabled();
+                })
+                .each(function() {
+                    var selection = d3_select(this);
+                    if (!selection.select('.tooltip.in').empty()) {
+                        selection.call(tooltipBehavior.updateContent);
+                    }
+                });
         }
 
         updateButtonStates();

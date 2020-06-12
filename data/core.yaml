@@ -891,6 +891,9 @@ en:
   zoom:
     in: Zoom In
     out: Zoom Out
+    disabled:
+      in: Cannot zoom in further.
+      out: Cannot zoom out further.
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   self_intersection:
