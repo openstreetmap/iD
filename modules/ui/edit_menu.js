@@ -81,6 +81,8 @@ export function uiEditMenu(context) {
             .style('width', _buttonWidth + 'px')
             .style('height', _buttonHeight + 'px')
             .on('click', click)
+            // don't listen for `mouseup` because we only care about non-mouse pointer types
+            .on('pointerup', pointerup)
             .on('pointerdown mousedown', pointerdown);
 
         var tooltipSide = tooltipPosition(viewport, menuLeft);
@@ -101,11 +103,30 @@ export function uiEditMenu(context) {
             .merge(buttons)
             .classed('disabled', function(d) { return d.disabled(); });
 
+
+        var lastPointerUpType;
+        // `pointerup` is always called before `click`
+        function pointerup() {
+            lastPointerUpType = d3_event.pointerType;
+        }
+
         function click(operation) {
             d3_event.stopPropagation();
-            if (operation.disabled()) return;
-            operation();
-            editMenu.close();
+            if (operation.disabled()) {
+                if (lastPointerUpType === 'touch' ||
+                    lastPointerUpType === 'pen') {
+                    // there are no tooltips for touch interactions so flash feedback instead
+                    context.ui().flash
+                        .duration(4000)
+                        .iconName('#iD-operation-' + operation.id)
+                        .iconClass('operation disabled')
+                        .text(operation.tooltip)();
+                }
+            } else {
+                operation();
+                editMenu.close();
+            }
+            lastPointerUpType = null;
         }
 
         function pointerdown() {
