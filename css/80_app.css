@@ -891,7 +891,8 @@ a.hide-toggle {
     font-weight: bold;
 }
 
-.section:not(:last-child) {
+.section:not(:last-child),
+.map-pane .section {
     margin-bottom: 30px;
 }
 
