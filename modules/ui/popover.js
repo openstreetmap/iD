@@ -161,7 +161,7 @@ export function uiPopover(klass) {
                         // only allow hover behavior for mouse input
                         return;
                     } else if (_lastNonMouseEnterTime &&
-                        d3_event.timeStamp - _lastNonMouseEnterTime < 800) {
+                        d3_event.timeStamp - _lastNonMouseEnterTime < 1500) {
                         // HACK: iOS 13.4 sends an erroneous `mouse` type pointerenter
                         // event for non-mouse interactions right after sending
                         // the correct type pointerenter event. Workaround by discarding
