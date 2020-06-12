@@ -73,7 +73,7 @@ export function uiZoom(context) {
             .enter()
             .append('button')
             .attr('class', function(d) { return d.id; })
-            .on('pointerup.editor', function(d) {
+            .on('pointerup.editor', function() {
                 lastPointerUpType = d3_event.pointerType;
             })
             .on('click.editor', function(d) {
