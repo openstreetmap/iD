@@ -15,7 +15,11 @@ export const output = {
   strict: false
 };
 
-const mapValues = (fn, obj) => Object.fromEntries(Object.entries(obj).map(([field, value], index) => [field, fn(value, field, index)]));
+const mapValues = (fn, obj) => Object.entries(obj)
+  .reduce((carry, [field, value], index) =>
+    Object.defineProperty(carry, field, { value: fn(value, field, index), enumerable: true }),
+    {}
+  );
 
 export const plugins = [
   replace({
