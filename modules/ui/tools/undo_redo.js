@@ -79,8 +79,10 @@ export function uiToolUndoRedo(context) {
                     d.action();
                 }
 
-                if (lastPointerUpType === 'touch' ||
-                    lastPointerUpType === 'pen') {
+                if (editable() && (
+                    lastPointerUpType === 'touch' ||
+                    lastPointerUpType === 'pen')
+                ) {
                     // there are no tooltips for touch interactions so flash feedback instead
 
                     var text = annotation ?

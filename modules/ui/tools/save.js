@@ -80,10 +80,32 @@ export function uiToolSave(context) {
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
+        var lastPointerUpType;
+
         button = selection
             .append('button')
             .attr('class', 'save disabled bar-button')
-            .on('click', save)
+            .on('pointerup', function() {
+                lastPointerUpType = d3_event.pointerType;
+            })
+            .on('click', function() {
+                d3_event.preventDefault();
+
+                save();
+
+                if (_numChanges === 0 && (
+                    lastPointerUpType === 'touch' ||
+                    lastPointerUpType === 'pen')
+                ) {
+                    // there are no tooltips for touch interactions so flash feedback instead
+                    context.ui().flash
+                        .duration(2000)
+                        .iconName('#iD-icon-save')
+                        .iconClass('disabled')
+                        .text(t('save.no_changes'))();
+                }
+                lastPointerUpType = null;
+            })
             .call(tooltipBehavior);
 
         button
