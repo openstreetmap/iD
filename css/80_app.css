@@ -4432,14 +4432,12 @@ img.tile-debug {
 .flash-icon use {
     color: #222;
 }
-.flash-icon.disabled use {
-    color: rgba(32,32,32,0.7);
-}
 
 .flash-icon.operation use {
     fill: #222;
     color: #79f;
 }
+.flash-icon.disabled use,
 .flash-icon.operation.disabled use {
     fill: rgba(32,32,32,0.7);
     color: rgba(40,40,40,0.7);

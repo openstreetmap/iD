@@ -11,15 +11,31 @@ export function uiZoomToSelection(context) {
         return !mode || !mode.zoomToSelected;
     }
 
+    var _lastPointerUpType;
+
+    function pointerup() {
+        _lastPointerUpType = d3_event.pointerType;
+    }
+
     function click() {
         d3_event.preventDefault();
 
-        if (isDisabled()) return;
-
-        var mode = context.mode();
-        if (mode && mode.zoomToSelected) {
-            mode.zoomToSelected();
+        if (isDisabled()) {
+            if (_lastPointerUpType === 'touch' || _lastPointerUpType === 'pen') {
+                context.ui().flash
+                    .duration(2000)
+                    .iconName('#iD-icon-framed-dot')
+                    .iconClass('disabled')
+                    .text(t('inspector.zoom_to.no_selection'))();
+            }
+        } else {
+            var mode = context.mode();
+            if (mode && mode.zoomToSelected) {
+                mode.zoomToSelected();
+            }
         }
+
+        _lastPointerUpType = null;
     }
 
     return function(selection) {
@@ -36,6 +52,7 @@ export function uiZoomToSelection(context) {
 
         var button = selection
             .append('button')
+            .on('pointerup', pointerup)
             .on('click', click)
             .call(svgIcon('#iD-icon-framed-dot', 'light'))
             .call(tooltipBehavior);
