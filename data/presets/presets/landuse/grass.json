@@ -14,5 +14,6 @@
         "mown grass",
         "turf"
     ],
-    "name": "Grass"
+    "name": "Grass",
+    "shortcut": ["⌃+g"]
 }

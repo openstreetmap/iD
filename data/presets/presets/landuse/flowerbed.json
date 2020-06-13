@@ -17,5 +17,6 @@
         "floral garden",
         "flower garden"
     ],
-    "name": "Flowerbed"
+    "name": "Flowerbed",
+    "shortcut": ["⌃+f"]
 }

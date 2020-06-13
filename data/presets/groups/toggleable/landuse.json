@@ -13,10 +13,8 @@
                 "college": true,
                 "university": true,
                 "park": true
-            }
-        },
-        "allGroups": {
-            "toggleable/buildings": false
+            },
+            "water": true
         }
         
     }

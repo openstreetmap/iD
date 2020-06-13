@@ -41,5 +41,9 @@
   {"pID": "highway/stop", "hidden" : true},
   {"pID": "traffic_calming/bump", "hidden" : true},
   {"pID": "barrier/gate", "hidden" : true},
-  {"pID": "barrier/private-gate", "hidden" : true}
+  {"pID": "barrier/private-gate", "hidden" : true},
+  {"pID": "highway/traffic_signals_forward", "hidden": true},
+  {"pID": "highway/traffic_signals_backward", "hidden": true},
+  {"pID": "highway/stop_forward", "hidden": true},
+  {"pID": "highway/stop_backward", "hidden": true}
 ]

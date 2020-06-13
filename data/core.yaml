@@ -118,7 +118,7 @@ en:
       search_placeholder: Search feature types
       description: "Browse features to add to the map."
       # The hotkey to open the Add Feature preset browser. Expect the key adjacent to the number row.
-      key: "`"
+      key: ";"
       result: "{count} result"
       results: "{count} results"
     add_area:

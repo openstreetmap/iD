@@ -51,10 +51,12 @@ export function svgMidpoints(projection, context) {
 
         var highlightEdited = context.surface().classed('highlight-edited');
 
-        if ((mode && mode.id !== 'select' && !highlightEdited) || !context.map().withinEditableZoom()) {
+        if ((mode && mode.id !== 'select' && mode.id !== 'add-point' && !highlightEdited) || !context.map().withinEditableZoom()) {
             drawLayer.selectAll('.midpoint').remove();
             touchLayer.selectAll('.midpoint.target').remove();
             return;
+        } else if (mode && mode.id === 'add-point') {
+            touchLayer.selectAll('.midpoint.target').remove();
         }
 
         var poly = extent.polygon();
@@ -65,7 +67,7 @@ export function svgMidpoints(projection, context) {
 
             if (entity.type !== 'way') continue;
             if (!filter(entity)) continue;
-            if (!highlightEdited && context.selectedIDs().indexOf(entity.id) < 0) continue;
+            //if (!highlightEdited && context.selectedIDs().indexOf(entity.id) < 0) continue;
 
             var nodes = graph.childNodes(entity);
             for (var j = 0; j < nodes.length - 1; j++) {

@@ -431,3 +431,12 @@ g.vertex.highlighted .shadow {
 .highlight-edited path.area.shadow.geometry-edited {
     stroke: rgb(255, 126, 46);
 }
+
+
+
+
+
+
+.mode-add-point .midpoint.target {
+    pointer-events: none !important;
+}

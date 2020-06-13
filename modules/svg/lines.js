@@ -287,7 +287,7 @@ export function svgLines(projection, context) {
 
             layergroup
                 .selectAll('g.linegroup')
-                .data(['shadow', 'casing', 'stroke', 'over-stroke', 'over-stroke-2', 'shadow-highlighted', 'casing-highlighted', 'stroke-highlighted'])
+                .data(['shadow', 'casing', 'stroke', 'over-stroke', 'shadow-highlighted', 'casing-highlighted', 'stroke-highlighted'])
                 .enter()
                 .append('g')
                 .attr('class', function(d) { return 'linegroup line-' + d; });
@@ -300,8 +300,6 @@ export function svgLines(projection, context) {
                 .call(drawLineGroup, 'stroke', false);
             layergroup.selectAll('g.line-over-stroke')
                 .call(drawLineGroup, 'over-stroke', false);
-            layergroup.selectAll('g.line-over-stroke-2')
-                .call(drawLineGroup, 'over-stroke-2', false);
             layergroup.selectAll('g.line-shadow-highlighted')
                 .call(drawLineGroup, 'shadow', true);
             layergroup.selectAll('g.line-casing-highlighted')

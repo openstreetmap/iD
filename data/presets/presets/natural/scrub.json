@@ -9,5 +9,6 @@
         "bush",
         "shrubs"
     ],
-    "name": "Scrub"
+    "name": "Scrub",
+    "shortcut": ["⌃+s"]
 }

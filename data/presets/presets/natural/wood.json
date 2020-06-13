@@ -22,5 +22,6 @@
         "woodlands",
         "woods"
     ],
-    "name": "Natural Wood"
+    "name": "Natural Wood",
+    "shortcut": ["⌃+w"]
 }

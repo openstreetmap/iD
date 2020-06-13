@@ -7,9 +7,12 @@
     "matches": {
         "geometry": ["point", "area", "relation"],
         "anyTags": {
+            "highway": {
+                "street_lamp": true
+            },
             "building": {
-                "*": true,
-                "no": false
+                "no": false,
+                "*": true
             },
             "parking": {
                 "multi-storey": true,
@@ -24,12 +27,15 @@
                 "parking": true
             },
             "amenity": {
-                "*": true,
                 "school": false,
                 "college": false,
                 "university": false,
-                "park": false
+                "park": false,
+                "*": true
             },
+            "addr:housenumber": true,
+            "addr:street": true,
+            "addr:city": true,
             "shop": true,
             "office": true,
             "craft": true,
@@ -42,6 +48,10 @@
             "telecom": true,
             "tourism": true,
             "healthcare": true
+        },
+        "allGroups": {
+            "toggleable/landuse": false
         }
     }
+
 }

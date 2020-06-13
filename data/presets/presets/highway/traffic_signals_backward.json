@@ -1,0 +1,21 @@
+{
+  "icon": "temaki-traffic_signals",
+  "geometry": [
+      "vertex"
+  ],
+  "tags": {
+      "highway": "traffic_signals",
+      "traffic_signals:direction": "backward"
+  },
+  "fields": [
+      "traffic_signals",
+      "traffic_signals/direction"
+  ],
+  "terms": [
+      "light",
+      "stoplight",
+      "traffic light"
+  ],
+  "name": "Traffic Signals Backward",
+  "shortcut": ["⌥+5"]
+}
