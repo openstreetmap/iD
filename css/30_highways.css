@@ -813,26 +813,6 @@ path.line.stroke.tag-highway-cycleway.tag-cycleway-no_pedestrian, .low-zoom path
 path.line.over-stroke {
     visibility: hidden;
 }
-path.line.over-stroke-2 {
-    visibility: hidden;
-}
-
-
-path.line.over-stroke-2.tag-highway.tag-cycleway-right-lane {
-    visibility: visible;
-    stroke: rgb(0, 110, 255);
-    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
-    stroke-dasharray: 3 77;
-    stroke-dashoffset: 17;
-}
-
-path.line.over-stroke-2.tag-highway.tag-cycleway-left-lane {
-    visibility: visible;
-    stroke: rgb(151, 61, 255);
-    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
-    stroke-dasharray: 3 77;
-    stroke-dashoffset: 17;
-}
 
 path.line.over-stroke.tag-highway.tag-maxspeed-30 {
     visibility: visible;
@@ -856,4 +836,25 @@ path.line.over-stroke.tag-highway.tag-maxspeed-50 {
     stroke-opacity: 0.7;
     stroke-dasharray: 10 30;
     /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+}
+
+path.line.over-stroke.tag-highway.tag-cycleway-right-lane {
+    visibility: visible;
+    stroke: rgb(0, 110, 255) !important;
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+    stroke-dasharray: 3 77;
+    stroke-dashoffset: 17;
+}
+
+path.line.over-stroke.tag-highway.tag-cycleway-left-lane {
+    visibility: visible;
+    stroke: rgb(151, 61, 255) !important;
+    /*filter: drop-shadow( -10px 10px 0 rgb(0, 183, 255));*/
+    stroke-dasharray: 3 77;
+    stroke-dashoffset: 17;
+}
+
+
+path.line.over-stroke.fill-wireframe {
+    visibility: hidden;
 }
