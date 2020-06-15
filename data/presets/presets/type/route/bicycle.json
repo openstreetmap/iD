@@ -10,8 +10,11 @@
         "to"
     ],
     "moreFields": [
+        "ascent",
         "colour",
-        "distance"
+        "descent",
+        "distance",
+        "roundtrip"
     ],
     "geometry": [
         "relation"

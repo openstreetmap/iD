@@ -229,6 +229,11 @@ en:
       artwork_type:
         # artwork_type=*
         label: Type
+      ascent:
+        # ascent=*
+        label: Total Ascent
+        # 'terms: ascent,climb,cumulative elevation gain'
+        terms: '[translate with synonyms or related terms for ''Total Ascent'', separated by commas]'
       atm:
         # atm=*
         label: ATM
@@ -646,6 +651,11 @@ en:
       depth:
         # depth=*
         label: Depth (Meters)
+      descent:
+        # descent=*
+        label: Total Descent
+        # 'terms: descent,cumulative elevation'
+        terms: '[translate with synonyms or related terms for ''Total Descent'', separated by commas]'
       description:
         # description=*
         label: Description
@@ -2044,6 +2054,11 @@ en:
       rooms:
         # rooms=*
         label: Rooms
+      roundtrip:
+        # roundtrip=*
+        label: Forms Loop
+        # 'terms: circular,closed,looping,roundtrip'
+        terms: '[translate with synonyms or related terms for ''Forms Loop'', separated by commas]'
       route:
         # route=*
         label: Type

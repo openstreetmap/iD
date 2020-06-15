@@ -10,7 +10,9 @@
         "to"
     ],
     "moreFields": [
+        "ascent",
         "colour",
+        "descent",
         "distance"
     ],
     "geometry": [

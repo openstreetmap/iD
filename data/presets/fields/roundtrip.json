@@ -1,0 +1,11 @@
+{
+    "key": "roundtrip",
+    "type": "check",
+    "label": "Forms Loop",
+    "terms": [
+        "circular",
+        "closed",
+        "looping",
+        "roundtrip"
+    ]
+}

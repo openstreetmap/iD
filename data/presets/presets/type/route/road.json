@@ -9,7 +9,8 @@
     ],
     "moreFields": [
         "colour",
-        "distance"
+        "distance",
+        "roundtrip"
     ],
     "geometry": [
         "relation"

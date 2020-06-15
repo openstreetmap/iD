@@ -1,0 +1,11 @@
+{
+    "key": "ascent",
+    "minValue": 0,
+    "type": "number",
+    "label": "Total Ascent",
+    "terms":[
+        "ascent",
+        "climb",
+        "cumulative elevation gain"
+    ]
+}

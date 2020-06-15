@@ -2862,6 +2862,10 @@
                 "artwork_type": {
                     "label": "Type"
                 },
+                "ascent": {
+                    "label": "Total Ascent",
+                    "terms": "ascent,climb,cumulative elevation gain"
+                },
                 "atm": {
                     "label": "ATM"
                 },
@@ -3237,6 +3241,10 @@
                 },
                 "depth": {
                     "label": "Depth (Meters)"
+                },
+                "descent": {
+                    "label": "Total Descent",
+                    "terms": "descent,cumulative elevation"
                 },
                 "description": {
                     "label": "Description",
@@ -4411,6 +4419,10 @@
                 },
                 "rooms": {
                     "label": "Rooms"
+                },
+                "roundtrip": {
+                    "label": "Forms Loop",
+                    "terms": "circular,closed,looping,roundtrip"
                 },
                 "route_master": {
                     "label": "Type"

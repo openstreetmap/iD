@@ -15,6 +15,7 @@
         "interval",
         "opening_hours",
         "opening_hours/covid19",
+        "roundtrip",
         "wheelchair"
     ],
     "geometry": [

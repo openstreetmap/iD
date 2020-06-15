@@ -23,6 +23,7 @@
         "opening_hours",
         "opening_hours/covid19",
         "ref_route",
+        "roundtrip",
         "wheelchair"
     ],
     "tags": {
