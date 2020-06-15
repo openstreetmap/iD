@@ -175,10 +175,6 @@ export function rendererMap(context) {
         surface
             .call(drawLabels.observe)
             .call(_doubleUpHandler)
-            .on('gesturestart.surface', function() {
-                _gestureTransformStart = projection.transform();
-            })
-            .on('gesturechange.surface', gestureChange)
             .on(_pointerPrefix + 'down.zoom', function() {
                 _lastPointerEvent = d3_event;
                 if (d3_event.button === 2) {
@@ -208,6 +204,24 @@ export function rendererMap(context) {
                     dispatch.call('drawn', this, { full: false });
                 }
             });
+
+        var detected = utilDetect();
+
+        // only WebKit supports gesture events
+        if ('GestureEvent' in window &&
+            // Listening for gesture events on iOS 13.4+ breaks double-tapping,
+            // but we only need to do this on desktop Safari anyway. – #7694
+            !detected.isMobileWebKit) {
+
+            // Desktop Safari sends gesture events for multitouch trackpad pinches.
+            // We can listen for these and translate them into map zooms.
+            surface
+                .on('gesturestart.surface', function() {
+                    d3_event.preventDefault();
+                    _gestureTransformStart = projection.transform();
+                })
+                .on('gesturechange.surface', gestureChange);
+        }
 
         // must call after surface init
         updateAreaFill();

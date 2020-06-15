@@ -25,6 +25,10 @@
     -ms-user-select: none;
     -ms-content-zooming: none;
 }
+.ideditor, .ideditor * {
+    /* disable pinch-to-zoom of the UI on touch devices */
+    touch-action: pan-x pan-y;
+}
 
 .main-content {
     position: relative;

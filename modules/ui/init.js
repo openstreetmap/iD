@@ -9,6 +9,7 @@ import { presetManager } from '../presets';
 import { behaviorHash } from '../behavior';
 import { modeBrowse } from '../modes/browse';
 import { svgDefs, svgIcon } from '../svg';
+import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
@@ -69,11 +70,24 @@ export function uiInit(context) {
 
                 // disable double-tap-to-zoom on touchscreens
                 d3_event.preventDefault();
-            })
-            // disable pinch-to-zoom in Safari
-            .on('gesturestart.ui gesturechange.ui gestureend.ui', function() {
+            });
+
+        var detected = utilDetect();
+
+        // only WebKit supports gesture events
+        if ('GestureEvent' in window &&
+            // Listening for gesture events on iOS 13.4+ breaks double-tapping,
+            // but we only need to do this on desktop Safari anyway. – #7694
+            !detected.isMobileWebKit) {
+
+            // On iOS we disable pinch-to-zoom of the UI via the `touch-action`
+            // CSS property, but on desktop Safari we need to manually cancel the
+            // default gesture events.
+            container.on('gesturestart.ui gesturechange.ui gestureend.ui', function() {
+                // disable pinch-to-zoom of the UI via multitouch trackpads on macOS Safari
                 d3_event.preventDefault();
             });
+        }
 
         if ('PointerEvent' in window) {
             d3_select(window)

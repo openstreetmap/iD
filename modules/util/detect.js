@@ -78,6 +78,14 @@ export function utilDetect(refresh) {
     _detected.platform = 'Unknown';
   }
 
+  _detected.isMobileWebKit = (/\b(iPad|iPhone|iPod)\b/.test(ua) ||
+    // HACK: iPadOS 13+ requests desktop sites by default by using a Mac user agent,
+    // so assume any "mac" with multitouch is actually iOS
+    (navigator.platform === 'MacIntel' && 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 1)) &&
+    /WebKit/.test(ua) &&
+    !/Edge/.test(ua) &&
+    !window.MSStream;
+
 
   /* Locale */
   // An array of locales requested by the browser in priority order.
