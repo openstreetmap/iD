@@ -1,6 +1,6 @@
 {
     "notCountryCodes": [
-        "fr", "lt", "pl"
+        "fr", "lt", "pl", "de"
     ],
     "icon": "temaki-pedestrian_and_cyclist",
     "fields": [
