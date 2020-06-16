@@ -4060,6 +4060,10 @@ img.tile-debug {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    touch-action: none;
+}
+.main-map * {
+    touch-action: none;
 }
 
 .supersurface {
