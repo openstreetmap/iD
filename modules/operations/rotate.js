@@ -1,17 +1,14 @@
 import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent } from '../geo';
 import { modeRotate } from '../modes/rotate';
-import { utilGetAllNodes } from '../util';
+import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
 export function operationRotate(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
     var operation = function() {

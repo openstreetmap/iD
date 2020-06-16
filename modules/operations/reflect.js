@@ -1,8 +1,7 @@
 import { t } from '../core/localizer';
 import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent } from '../geo';
-import { utilGetAllNodes } from '../util';
+import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
 export function operationReflectShort(context, selectedIDs) {
@@ -20,9 +19,7 @@ export function operationReflect(context, selectedIDs, axis) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
     var operation = function() {

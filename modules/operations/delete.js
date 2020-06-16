@@ -1,11 +1,11 @@
 import { t } from '../core/localizer';
 import { actionDeleteMultiple } from '../actions/delete_multiple';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent, geoSphericalDistance } from '../geo';
+import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { uiCmd } from '../ui/cmd';
-import { utilGetAllNodes } from '../util';
+import { utilGetAllNodes, utilTotalExtent } from '../util';
 
 
 export function operationDelete(context, selectedIDs) {
@@ -13,9 +13,7 @@ export function operationDelete(context, selectedIDs) {
     var action = actionDeleteMultiple(selectedIDs);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
     var operation = function() {

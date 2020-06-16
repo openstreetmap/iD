@@ -2,10 +2,9 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
-import { geoExtent } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { t } from '../../core/localizer';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 
 
 export function uiFieldMaxspeed(field, context) {
@@ -146,10 +145,7 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function combinedEntityExtent() {
-        return _entityIDs && _entityIDs.length && _entityIDs.reduce(function(extent, entityID) {
-            var entity = context.graph().entity(entityID);
-            return extent.extend(entity.extent(context.graph()));
-        }, geoExtent());
+        return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
     }
 
 

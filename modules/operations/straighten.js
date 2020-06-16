@@ -2,8 +2,7 @@ import { t } from '../core/localizer';
 import { actionStraightenNodes } from '../actions/straighten_nodes';
 import { actionStraightenWay } from '../actions/straighten_way';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent } from '../geo';
-import { utilArrayDifference, utilGetAllNodes } from '../util/index';
+import { utilArrayDifference, utilGetAllNodes, utilTotalExtent } from '../util/index';
 
 
 export function operationStraighten(context, selectedIDs) {
@@ -13,9 +12,7 @@ export function operationStraighten(context, selectedIDs) {
 
     var _nodes = utilGetAllNodes(selectedIDs, context.graph());
     var _coords = _nodes.map(function(n) { return n.loc; });
-    var _extent = _nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var _extent = utilTotalExtent(selectedIDs, context.graph());
     var _action = chooseAction();
     var _geometry;
 
@@ -67,9 +64,7 @@ export function operationStraighten(context, selectedIDs) {
 
             if (_nodeIDs.length) {
                 // If we're only straightenting between two points, we only need that extent visible
-                _extent = utilGetAllNodes(_nodeIDs, context.graph()).reduce(function(extent, node) {
-                    return extent.extend(node.extent(context.graph()));
-                }, geoExtent());
+                _extent = utilTotalExtent(_nodeIDs, context.graph());
             }
 
             _geometry = _wayIDs.length === 1 ? 'line' : 'lines';

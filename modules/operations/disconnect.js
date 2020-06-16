@@ -1,8 +1,7 @@
 import { t } from '../core/localizer';
 import { actionDisconnect } from '../actions/disconnect';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent } from '../geo';
-import { utilGetAllNodes } from '../util/index';
+import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
 export function operationDisconnect(context, selectedIDs) {
@@ -28,9 +27,7 @@ export function operationDisconnect(context, selectedIDs) {
         // At the selected vertices, disconnect the selected ways, if any, else
         // disconnect all connected ways
 
-        _extent = _vertexIDs.reduce(function(extent, id) {
-            return extent.extend(context.entity(id).extent(context.graph()));
-        }, geoExtent());
+        _extent = utilTotalExtent(_vertexIDs, context.graph());
 
         _vertexIDs.forEach(function(vertexID) {
             var action = actionDisconnect(vertexID);
@@ -61,9 +58,7 @@ export function operationDisconnect(context, selectedIDs) {
         });
         _nodes = utilGetAllNodes(_wayIDs, context.graph());
         _coords = _nodes.map(function(n) { return n.loc; });
-        _extent = ways.reduce(function(extent, entity) {
-            return extent.extend(entity.extent(context.graph()));
-        }, geoExtent());
+        _extent = utilTotalExtent(ways, context.graph());
 
         // actions for connected nodes shared by at least two selected ways
         var sharedActions = [];

@@ -5,12 +5,11 @@ import * as countryCoder from '@ideditor/country-coder';
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
-import { geoExtent } from '../../geo';
 import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind, utilUniqueDomId } from '../../util';
+import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
 
 var _languagesArray = [];
 
@@ -649,10 +648,7 @@ export function uiFieldLocalized(field, context) {
     }
 
     function combinedEntityExtent() {
-        return _entityIDs && _entityIDs.length && _entityIDs.reduce(function(extent, entityID) {
-            var entity = context.graph().entity(entityID);
-            return extent.extend(entity.extent(context.graph()));
-        }, geoExtent());
+        return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
     }
 
     return utilRebind(localized, dispatch, 'on');

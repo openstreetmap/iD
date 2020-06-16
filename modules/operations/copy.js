@@ -3,8 +3,7 @@ import { event as d3_event } from 'd3-selection';
 import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
 import { uiCmd } from '../ui/cmd';
-import { geoExtent } from '../geo';
-import { utilArrayGroupBy, utilGetAllNodes } from '../util';
+import { utilArrayGroupBy, utilTotalExtent } from '../util';
 
 export function operationCopy(context, selectedIDs) {
 
@@ -109,10 +108,7 @@ export function operationCopy(context, selectedIDs) {
 
 
     operation.disabled = function() {
-        var nodes = utilGetAllNodes(getFilteredIdsToCopy(), context.graph());
-        var extent = nodes.reduce(function(extent, node) {
-            return extent.extend(node.extent(context.graph()));
-        }, geoExtent());
+        var extent = utilTotalExtent(getFilteredIdsToCopy(), context.graph());
         if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         }

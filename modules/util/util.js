@@ -5,6 +5,7 @@ import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
+import { geoExtent } from '../geo/extent';
 
 
 export function utilTagText(entity) {
@@ -12,6 +13,20 @@ export function utilTagText(entity) {
     return Object.keys(obj)
         .map(function(k) { return k + '=' + obj[k]; })
         .join(', ');
+}
+
+
+export function utilTotalExtent(array, graph) {
+    var extent = geoExtent();
+    var val, entity;
+    for (var i = 0; i < array.length; i++) {
+        val = array[i];
+        entity = typeof val === 'string' ? graph.hasEntity(val) : val;
+        if (entity) {
+            extent._extend(entity.extent(graph));
+        }
+    }
+    return extent;
 }
 
 
@@ -523,7 +538,7 @@ export function utilUnicodeCharsCount(str) {
 }
 
 // Returns a new string representing `str` cut from its start to `limit` length
-// in unicode characters. Note that this runs the risk of splitting graphemes. 
+// in unicode characters. Note that this runs the risk of splitting graphemes.
 export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
 }
