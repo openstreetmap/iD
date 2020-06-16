@@ -10,7 +10,10 @@ let _discardNameRegexes = [];
 
 export function validationSuspiciousName() {
   const type = 'suspicious_name';
-  const keysToTestForGenericValues = ['amenity', 'building', 'leisure', 'man_made', 'shop', 'tourism'];
+  const keysToTestForGenericValues = [
+    'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
+    'leisure', 'railway', 'man_made', 'office', 'shop', 'tourism', 'waterway'
+  ];
 
   // A concern here in switching to async data means that `_nsiFilters` will not
   // be available at first, so the data on early tiles may not have tags validated fully.
