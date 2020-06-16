@@ -300,7 +300,14 @@ export function svgVertices(projection, context) {
     function getSiblingAndChildVertices(ids, graph, wireframe, zoom) {
         var results = {};
 
+        var seenIds = {};
+
         function addChildVertices(entity) {
+
+            // avoid redunant work and infinite recursion of circular relations
+            if (seenIds[entity.id]) return;
+            seenIds[entity.id] = true;
+
             var geometry = entity.geometry(graph);
             if (!context.features().isHiddenFeature(entity, graph, geometry)) {
                 var i;
