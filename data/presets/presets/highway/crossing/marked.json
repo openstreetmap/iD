@@ -14,8 +14,7 @@
     },
     "addTags": {
         "highway": "crossing",
-        "crossing": "marked",
-        "bicycle": "yes"
+        "crossing": "marked"
     },
     "reference": {
         "key": "highway",
