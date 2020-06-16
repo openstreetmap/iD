@@ -48,25 +48,31 @@ export function actionDisconnect(nodeId, newNodeId) {
         var candidates = [];
         var keeping = false;
         var parentWays = graph.parentWays(graph.entity(nodeId));
-
-        parentWays.forEach(function(way) {
+        var way, waynode;
+        for (var i = 0; i < parentWays.length; i++) {
+            way = parentWays[i];
             if (wayIds && wayIds.indexOf(way.id) === -1) {
                 keeping = true;
-                return;
+                continue;
             }
             if (way.isArea() && (way.nodes[0] === nodeId)) {
                 candidates.push({ wayID: way.id, index: 0 });
             } else {
-                way.nodes.forEach(function(waynode, index) {
+                for (var j = 0; j < way.nodes.length; j++) {
+                    waynode = way.nodes[j];
                     if (waynode === nodeId) {
-                        if (way.isClosed() && parentWays.length > 1 && wayIds && wayIds.indexOf(way.id) !== -1 && index === way.nodes.length-1) {
-                            return;
+                        if (way.isClosed() &&
+                            parentWays.length > 1 &&
+                            wayIds &&
+                            wayIds.indexOf(way.id) !== -1 &&
+                            j === way.nodes.length - 1) {
+                            continue;
                         }
-                        candidates.push({ wayID: way.id, index: index });
+                        candidates.push({ wayID: way.id, index: j });
                     }
-                });
+                }
             }
-        });
+        }
 
         return keeping ? candidates : candidates.slice(1);
     };
