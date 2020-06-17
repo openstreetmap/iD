@@ -1,0 +1,18 @@
+{
+    "icon": "maki-grocery",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "supermarket",
+        "organic": "only"
+    },
+    "reference": {
+        "key": "organic"
+    },
+    "terms": [
+        "natural foods"
+    ],
+    "name": "Organic Supermarket"
+}

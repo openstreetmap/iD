@@ -2,7 +2,8 @@
     "icon": "maki-grocery",
     "moreFields": [
         "{shop}",
-        "diet_multi"
+        "diet_multi",
+        "organic"
     ],
     "geometry": [
         "point",

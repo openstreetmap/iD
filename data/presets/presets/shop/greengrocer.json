@@ -1,5 +1,9 @@
 {
     "icon": "fas-carrot",
+    "fields": [
+        "{shop}",
+        "organic"
+    ],
     "geometry": [
         "point",
         "area"

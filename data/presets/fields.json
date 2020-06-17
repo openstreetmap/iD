@@ -299,6 +299,7 @@
   "opening_hours/covid19": {"key": "opening_hours:covid19", "type": "combo", "label": "COVID-19 Pandemic Hours", "terms": ["coronavirus", "lockdown", "opening hours", "SARS‑CoV‑2"], "snake_case": false},
   "operator": {"key": "operator", "type": "text", "label": "Operator"},
   "operator/type": {"key": "operator:type", "type": "combo", "label": "Operator Type", "prerequisiteTag": {"key": "operator"}},
+  "organic": {"key": "organic", "type": "combo", "label": "Organic Products", "strings": {"options": {"no": "None", "yes": "Some", "only": "Only"}}, "terms": ["natural", "non-gmo"]},
   "outdoor_seating": {"key": "outdoor_seating", "type": "check", "label": "Outdoor Seating"},
   "par": {"key": "par", "type": "number", "minValue": 1, "label": "Par", "placeholder": "3, 4, 5..."},
   "park_ride": {"key": "park_ride", "type": "check", "label": "Park and Ride"},

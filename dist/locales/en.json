@@ -4111,6 +4111,15 @@
                 "operator/type": {
                     "label": "Operator Type"
                 },
+                "organic": {
+                    "label": "Organic Products",
+                    "terms": "natural,non-gmo",
+                    "options": {
+                        "no": "None",
+                        "yes": "Some",
+                        "only": "Only"
+                    }
+                },
                 "outdoor_seating": {
                     "label": "Outdoor Seating",
                     "terms": ""
@@ -9681,10 +9690,6 @@
                     "name": "Optician",
                     "terms": "eye,glasses"
                 },
-                "shop/organic": {
-                    "name": "Organic Goods Store",
-                    "terms": ""
-                },
                 "shop/outdoor": {
                     "name": "Outdoors Store",
                     "terms": "camping,climbing,hiking,outfitter,outdoor equipment,outdoor supplies"
@@ -9796,6 +9801,10 @@
                 "shop/supermarket": {
                     "name": "Supermarket",
                     "terms": "grocery,store,shop"
+                },
+                "shop/supermarket/organic": {
+                    "name": "Organic Supermarket",
+                    "terms": "natural foods"
                 },
                 "shop/swimming_pool": {
                     "name": "Pool Supply Store",
