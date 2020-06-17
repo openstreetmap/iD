@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import marked from 'marked';
 
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
@@ -31,10 +32,29 @@ export function uiSettingsCustomBackground() {
 
         var textSection = modal.select('.modal-section.message-text');
 
+        var instructions =
+            `${t('settings.custom_background.instructions.info')}\n` +
+            `\n` +
+            `#### ${t('settings.custom_background.instructions.wms.tokens_label')}\n` +
+            `* ${t('settings.custom_background.instructions.wms.tokens.proj')}\n` +
+            `* ${t('settings.custom_background.instructions.wms.tokens.wkid')}\n` +
+            `* ${t('settings.custom_background.instructions.wms.tokens.dimensions')}\n` +
+            `* ${t('settings.custom_background.instructions.wms.tokens.bbox')}\n` +
+            `\n` +
+            `#### ${t('settings.custom_background.instructions.tms.tokens_label')}\n` +
+            `* ${t('settings.custom_background.instructions.tms.tokens.xyz')}\n` +
+            `* ${t('settings.custom_background.instructions.tms.tokens.flipped_y')}\n` +
+            `* ${t('settings.custom_background.instructions.tms.tokens.switch')}\n` +
+            `* ${t('settings.custom_background.instructions.tms.tokens.quadtile')}\n` +
+            `* ${t('settings.custom_background.instructions.tms.tokens.scale_factor')}\n` +
+            `\n` +
+            `#### ${t('settings.custom_background.instructions.example')}\n` +
+            `\`${example}\``;
+
         textSection
-            .append('pre')
+            .append('div')
             .attr('class', 'instructions-template')
-            .text(t('settings.custom_background.instructions', { example: example }));
+            .html(marked(instructions));
 
         textSection
             .append('textarea')

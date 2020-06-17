@@ -156,6 +156,12 @@ kbd {
     box-shadow: inset 0 -1px 0 #bbb;
 }
 
+code {
+    font-family: monospace, monospace;
+    background: #eee;
+    padding: 1px 2px;
+}
+
 /* Forms
 ------------------------------------------------------- */
 textarea  {
@@ -4708,8 +4714,12 @@ img.tile-debug {
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
-.modal-section p:not(:last-of-type) {
+.modal-section p:not(:last-of-type),
+.modal-section ul {
     padding-bottom: 20px;
+}
+.modal-section h4 {
+    padding-bottom: 0;
 }
 .modal-section.header h3 {
     padding: 0;
@@ -4994,6 +5004,13 @@ svg.mouseclick use.right {
 
 .settings-custom-background .instructions-template {
     margin-bottom: 20px;
+}
+.settings-custom-background .instructions-template p {
+    margin-bottom: 0;
+}
+.settings-custom-background .instructions-template ul li {
+    list-style-type: disc;
+    list-style-position: inside;
 }
 
 .settings-custom-data .instructions-url {

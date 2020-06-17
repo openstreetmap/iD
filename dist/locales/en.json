@@ -998,7 +998,29 @@
             "custom_background": {
                 "tooltip": "Edit custom background",
                 "header": "Custom Background Settings",
-                "instructions": "Enter a tile URL template below.\n\nSupported WMS tokens:\n  `{proj}`: requested projection (`EPSG:3857` only)\n  `{wkid}`: same as proj, but without the EPSG (`3857` only)\n  `{width}`, `{height}`: requested image dimensions (`256` only)\n  `{bbox}`: requested bounding box (e.g. `minX,minY,maxX,maxY`)\n\nSupported TMS tokens:\n  `{zoom}` or `{z}, `{x}`, `{y}`: Z/X/Y tile coordinates\n  `{-y}` or `{ty}`: flipped TMS-style Y coordinates\n  `{switch:a,b,c}`: DNS server multiplexing\n  `{u}`: quadtile (Bing) scheme\n\nExample:\n{example}",
+                "instructions": {
+                    "info": "Enter a tile URL template below.",
+                    "wms": {
+                        "tokens_label": "Supported WMS tokens:",
+                        "tokens": {
+                            "proj": "`{proj}`: requested projection (`EPSG:3857` only)",
+                            "wkid": "`{wkid}`: same as proj, but without the EPSG (`3857` only)",
+                            "dimensions": "`{width}`, `{height}`: requested image dimensions (`256` only)",
+                            "bbox": "`{bbox}`: requested bounding box (e.g. `minX,minY,maxX,maxY`)"
+                        }
+                    },
+                    "tms": {
+                        "tokens_label": "Supported TMS tokens:",
+                        "tokens": {
+                            "xyz": "`{zoom}` or `{z}`, `{x}`, `{y}`: Z/X/Y tile coordinates",
+                            "flipped_y": "`{-y}` or `{ty}`: flipped TMS-style Y coordinates",
+                            "switch": "`{switch:a,b,c}`: DNS server multiplexing",
+                            "quadtile": "`{u}`: quadtile (Bing) scheme",
+                            "scale_factor": "`{@2x}` or `{r}`: resolution scale factor"
+                        }
+                    },
+                    "example": "Example:"
+                },
                 "template": {
                     "placeholder": "Enter a url template"
                 }
