@@ -123,6 +123,8 @@ sources.concat(keep).forEach(source => {
     im.tileSize = 512;
   } else if (source.id === 'mtbmap-no') {
     im.tileSize = 512;
+  } else if (source.id === 'mapbox_locator_overlay') {
+    im.template = im.template.replace('{y}', '{y}{@2x}');
   }
 
   // Some WMS sources are supported, check projection

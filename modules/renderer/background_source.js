@@ -7,6 +7,19 @@ import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 
 
+var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
+
+// listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
+window.matchMedia(`
+        (-webkit-min-device-pixel-ratio: 2), /* Safari */
+        (min-resolution: 2dppx),             /* standard */
+        (min-resolution: 192dpi)             /* fallback */
+    `).addListener(function() {
+
+    isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
+});
+
+
 function localeDateString(s) {
     if (!s) return null;
     var options = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -172,7 +185,9 @@ export function rendererBackgroundSource(data) {
                 .replace('{y}', coord[1])
                 // TMS-flipped y coordinate
                 .replace(/\{[t-]y\}/, Math.pow(2, coord[2]) - coord[1] - 1)
-                .replace(/\{z(oom)?\}/, coord[2]);
+                .replace(/\{z(oom)?\}/, coord[2])
+                // only fetch retina tiles for retina screens
+                .replace(/\{@2x\}|\{r\}/, isRetina ? '@2x' : '');
 
         } else if (source.type === 'bing') {
             result = result

@@ -44311,7 +44311,7 @@
     "id": "mapbox_locator_overlay",
     "name": "Locator Overlay",
     "type": "tms",
-    "template": "https://api.mapbox.com/styles/v1/openstreetmap/ckasmteyi1tda1ipfis6wqhuq/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2JjaDZoMm8wMXU5MzJvMmZwOHY3ZHRyIn0.nzEnT3XUHOzDoZxawHYGxg",
+    "template": "https://api.mapbox.com/styles/v1/openstreetmap/ckasmteyi1tda1ipfis6wqhuq/tiles/256/{zoom}/{x}/{y}{@2x}?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2JjaDZoMm8wMXU5MzJvMmZwOHY3ZHRyIn0.nzEnT3XUHOzDoZxawHYGxg",
     "zoomExtent": [0, 16],
     "overzoom": false,
     "terms_url": "https://www.mapbox.com/about/maps",
