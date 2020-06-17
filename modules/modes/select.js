@@ -256,11 +256,7 @@ export function modeSelect(context, selectedIDs) {
             .on('redone.select', checkSelectedIDs);
 
         context.map()
-            .on('drawn.select', function(info) {
-                if (info.full !== false) {
-                    selectElements();
-                }
-            })
+            .on('drawn.select', selectElements)
             .on('crossEditableZoom.select', function() {
                 selectElements();
                 _breatheBehavior.restartIfNeeded(context.surface());
@@ -345,6 +341,7 @@ export function modeSelect(context, selectedIDs) {
             surface.selectAll('.related')
                 .classed('related', false);
 
+            singularParent();
             if (_relatedParent) {
                 surface.selectAll(utilEntitySelector([_relatedParent]))
                     .classed('related', true);
