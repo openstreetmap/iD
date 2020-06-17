@@ -12,17 +12,23 @@ const apiroot = 'https://www.transifex.com/api/2';
 const projectURL = `${apiroot}/project/id-editor`;
 
 
-/*
- * Transifex oddly doesn't allow anonymous downloading
- *
- * auth is stored in transifex.auth in a json object:
- *  {
- *      "user": "username",
- *      "pass": "password"
- *  }
- *  */
-
-const auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
+// Transifex doesn't allow anonymous downloading
+let auth;
+if (process.env.transifex_password) {
+  // Deployment scripts may prefer environment variables
+  auth = {
+    user: process.env.transifex_user || 'api',
+    password: process.env.transifex_password
+  };
+} else {
+  // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
+  // You can use an API key instead of your password: https://docs.transifex.com/api/introduction#authentication
+  // {
+  //   "user": "username",
+  //   "password": "password"
+  // }
+  auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
+}
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 
