@@ -34,20 +34,20 @@ export function uiSettingsCustomBackground() {
 
         var instructions =
             `${t('settings.custom_background.instructions.info')}\n` +
-            `\n` +
+            '\n' +
             `#### ${t('settings.custom_background.instructions.wms.tokens_label')}\n` +
             `* ${t('settings.custom_background.instructions.wms.tokens.proj')}\n` +
             `* ${t('settings.custom_background.instructions.wms.tokens.wkid')}\n` +
             `* ${t('settings.custom_background.instructions.wms.tokens.dimensions')}\n` +
             `* ${t('settings.custom_background.instructions.wms.tokens.bbox')}\n` +
-            `\n` +
+            '\n' +
             `#### ${t('settings.custom_background.instructions.tms.tokens_label')}\n` +
             `* ${t('settings.custom_background.instructions.tms.tokens.xyz')}\n` +
             `* ${t('settings.custom_background.instructions.tms.tokens.flipped_y')}\n` +
             `* ${t('settings.custom_background.instructions.tms.tokens.switch')}\n` +
             `* ${t('settings.custom_background.instructions.tms.tokens.quadtile')}\n` +
             `* ${t('settings.custom_background.instructions.tms.tokens.scale_factor')}\n` +
-            `\n` +
+            '\n' +
             `#### ${t('settings.custom_background.instructions.example')}\n` +
             `\`${example}\``;
 
