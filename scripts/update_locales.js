@@ -14,6 +14,7 @@ const projectURL = `${apiroot}/project/id-editor`;
 
 // Transifex doesn't allow anonymous downloading
 let auth;
+/* eslint-disable no-process-env */
 if (process.env.transifex_password) {
   // Deployment scripts may prefer environment variables
   auth = {
@@ -29,6 +30,7 @@ if (process.env.transifex_password) {
   // }
   auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 }
+/* eslint-enable no-process-env */
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 
