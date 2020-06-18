@@ -1,7 +1,8 @@
 {
     "icon": "maki-suitcase",
     "fields": [
-        "name"
+        "name",
+        "flats"
     ],
     "moreFields": [
         "address",

@@ -2,8 +2,7 @@
     "icon": "maki-suitcase",
     "fields": [
         "{building}",
-        "smoking",
-        "building/flats"
+        "smoking"
     ],
     "geometry": [
         "area"
