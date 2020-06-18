@@ -7,6 +7,8 @@
   {"pID": "highway/footway", "hidden" : true},
   {"pID": "entrance", "hidden" : true},
   {"pID": "entrance/main", "hidden" : true},
+  {"pID": "entrance/shop", "hidden" : true},
+  {"pID": "entrance/home", "hidden" : true},
   {"pID": "leisure/playground", "hidden" : true},
   {"pID": "amenity/parking", "hidden" : true},
   {"pID": "amenity/parking-private", "hidden" : true},

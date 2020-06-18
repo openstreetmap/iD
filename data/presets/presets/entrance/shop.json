@@ -1,0 +1,27 @@
+{
+  "icon": "maki-entrance-alt1",
+  "fields": [
+      "ref",
+      "entrance",
+      "door",
+      "access_simple",
+      "wheelchair",
+      "level",
+      "address"
+  ],
+  "geometry": [
+      "vertex"
+  ],
+  "tags": {
+      "entrance": "shop"
+  },
+  "terms": [
+      "entrance",
+      "exit",
+      "door",
+      "main"
+  ],
+  "matchScore": 0.8,
+  "name": "Shop Entrance / Exit",
+  "shortcut": ["⌥+s"]
+}
