@@ -1,4 +1,4 @@
-# Contributing to iD
+op# Contributing to iD
 
 Thinking of contributing to iD? High five! There are plenty of ways to get involved.
 You don't need to know the first thing about programming (though it's always a
@@ -427,7 +427,7 @@ If you did not use your copy of iD for some while, other Pull Request gets merge
 
 `git remote add upstream git@github.com:openstreetmap/iD.git`
 
-Then change to the `develop branch and get everything from upstream (the main repository)
+Then change to the `develop` branch and get everything from upstream (the main repository)
 
 `git checkout develop ; git fetch --all && git reset --hard upstream/develop`
 
