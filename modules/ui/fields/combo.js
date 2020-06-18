@@ -309,7 +309,7 @@ export function uiFieldCombo(field, context) {
             if (!rawValue && Array.isArray(_tags[field.key])) return;
 
             val = context.cleanTagValue(tagValue(rawValue));
-            t[field.key] = val;
+            t[field.key] = val || undefined;
         }
 
         dispatch.call('change', this, t);
