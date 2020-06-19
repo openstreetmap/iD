@@ -1,10 +1,10 @@
+import buble from '@rollup/plugin-buble';
 import commonjs from '@rollup/plugin-commonjs';
 import includePaths from 'rollup-plugin-includepaths';
 import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import progress from 'rollup-plugin-progress';
 import replace from 'rollup-plugin-replace';
-import buble from '@rollup/plugin-buble';
 
 import mapValues from 'lodash/mapValues';
 import onwarn from './onwarn';
