@@ -27,7 +27,7 @@ export default {
     replace({
       include: ['modules/config.js'],
       exclude: ['node_modules/**'],
-      values: mapValues(value => JSON.stringify(value), config)
+      values: mapValues(config, value => JSON.stringify(value))
     }),
     progress(),
     includePaths({
