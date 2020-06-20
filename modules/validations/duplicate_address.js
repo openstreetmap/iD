@@ -70,9 +70,8 @@ export function validationDuplicateAddress(context) {
     if (!hasAddress(entity)) return [];
 
     const tree = context.history().tree();
-    const extent = entity.extent(graph);
-    const searchExtent = (entity.type === 'node') ? extent.padByMeters(50) : extent;
-    const hits = tree.intersects(searchExtent, graph);
+    const extent = entity.extent(graph).padByMeters(50);
+    const hits = tree.intersects(extent, graph);
     const dupes = hits.map(hit => isDuplicate(hit, entity)).filter(Boolean);
 
     return dupes.map(dupe => {
