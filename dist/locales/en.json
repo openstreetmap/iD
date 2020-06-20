@@ -1985,6 +1985,12 @@
                     "message": "{highway} is disconnected from other roads and paths"
                 }
             },
+            "duplicate_address": {
+                "title": "Duplicate Addresses",
+                "message": "{entity1} and {entity2} contain similar address elements.",
+                "tip": "Find potentially duplicate addresses.",
+                "reference": "Addresses should not share the same housenumber, unless they differ in other attributes like floor or unit"
+            },
             "fixme_tag": {
                 "message": "{feature} has a \"Fix Me\" request",
                 "reference": "A \"fixme\" tag indicates that a mapper has requested help with a feature."
