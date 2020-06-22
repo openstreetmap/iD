@@ -16,7 +16,7 @@ Symbols used in this document:
 - 🟠 Partial support
 - ❌ No appreciable support
 
-## Cross-Browser Compatibility
+## Browser Compatibility
 
 As a web app, iD's browser support is fundamental. The user experience should be
 as equivalent as possible across the latest versions of all modern browsers on all
@@ -38,7 +38,7 @@ elsewhere in this document.
 
 [#7132]: https://github.com/openstreetmap/iD/issues/7132
 
-## Multilingual Support
+## Language Support
 
 English is the language of tags and relation roles in the OpenStreetMap database.
 It's also the source language of iD's interface, meaning English is the only language
@@ -52,7 +52,10 @@ for more info.
 
 |  | Localization Feature | Notes |
 |---|---|---|
-| ✅ | Detect the browser's locale | |
+| ✅ | Browser language preference | iD tries to use the language set in the browser |
+| ❌ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
+| ❌ | Custom fallback language | If the preferred language is incomplete, a user-specified one should be tried before `en` (e.g. `kk` → `ru`) |
+| ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
 | 🟩 | Right-to-left layouts | Infrequently tested. Used for languages like Hebrew and Arabic |
 
 ### Translatability
@@ -65,7 +68,7 @@ translated to one or more languages.
 |---|---|---|
 | ✅ | Labels and descriptions | |
 | ✅ | Help docs and walkthrough | |
-| ✅ | Letter hotkeys | e.g. <kbd>S</kbd> for Straighten makes sense in English, but not every language |
+| ✅ | Letter hotkeys | E.g. <kbd>S</kbd> for Straighten makes sense in English, but not every language |
 | ✅ | Preset names and search terms | |
 | 🟠 | Fields | Combo fields may show raw tag values. The Wikipedia field lists Wiki names in their native languages |
 | ❌ | Tags | OpenStreetMap tags are English-only as a limitation of the database |
@@ -77,6 +80,13 @@ translated to one or more languages.
 | ✅ | KeepRight issues | |
 | ✅ | ImproveOSM issues | |
 | ✅ | Osmose issues | Translated strings are [provided by Osmose](https://www.transifex.com/openstreetmap-france/osmose/) itself, not iD |
+
+### Language Coverage
+
+The completion percentages for iD translations constantly change, and so are not
+listed here. Visit the [Transifex project page](https://www.transifex.com/openstreetmap/id-editor/)
+to see the latest numbers. Typically a few languages (German, Spanish, Japanese…)
+are kept close to 100% coverage, while most languages have less than 50% coverage.
 
 ---
 
