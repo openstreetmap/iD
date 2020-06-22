@@ -263,6 +263,40 @@ Object.assign(osmWay.prototype, {
     },
 
 
+    // returns an array of objects representing the segments between the nodes in this way
+    segments: function(graph) {
+
+        function segmentExtent(graph) {
+            var n1 = graph.hasEntity(this.nodes[0]);
+            var n2 = graph.hasEntity(this.nodes[1]);
+            return n1 && n2 && geoExtent([
+                [
+                    Math.min(n1.loc[0], n2.loc[0]),
+                    Math.min(n1.loc[1], n2.loc[1])
+                ],
+                [
+                    Math.max(n1.loc[0], n2.loc[0]),
+                    Math.max(n1.loc[1], n2.loc[1])
+                ]
+            ]);
+        }
+
+        return graph.transient(this, 'segments', function() {
+            var segments = [];
+            for (var i = 0; i < this.nodes.length - 1; i++) {
+                segments.push({
+                    id: this.id + '-' + i,
+                    wayId: this.id,
+                    index: i,
+                    nodes: [this.nodes[i], this.nodes[i + 1]],
+                    extent: segmentExtent
+                });
+            }
+            return segments;
+        });
+    },
+
+
     // If this way is not closed, append the beginning node to the end of the nodelist to close it.
     close: function() {
         if (this.isClosed() || !this.nodes.length) return this;

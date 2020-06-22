@@ -207,12 +207,12 @@ export function validationCrossingWays(context) {
         var checkedSingleCrossingWays = {};
 
         // declare vars ahead of time to reduce garbage collection
-        var i, j, nodeIndex;
+        var i, j;
         var extent;
-        var n1, n2, nA, nB;
+        var n1, n2, nA, nB, nAId, nBId;
         var segment1, segment2;
         var oneOnly;
-        var intersected, way2, way2FeatureType, way2Nodes;
+        var segmentInfos, segment2Info, way2, way2FeatureType;
         var way1Nodes = graph.childNodes(way1);
         var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
@@ -229,20 +229,24 @@ export function validationCrossingWays(context) {
                 ]
             ]);
 
-            intersected = tree.intersects(extent, graph);
-            for (j = 0; j < intersected.length; j++) {
-                way2 = intersected[j];
+            // Optimize by only checking overlapping segments, not every segment
+            // of overlapping ways
+            segmentInfos = tree.waySegments(extent, graph);
 
-                if (way2.type !== 'way') continue;
+            for (j = 0; j < segmentInfos.length; j++) {
+                segment2Info = segmentInfos[j];
 
                 // don't check for self-intersection in this validation
-                if (way2.id === way1.id) continue;
+                if (segment2Info.wayId === way1.id) continue;
 
                 // skip if this way was already checked and only one issue is needed
-                if (checkedSingleCrossingWays[way2.id]) continue;
+                if (checkedSingleCrossingWays[segment2Info.wayId]) continue;
 
                 // mark this way as checked even if there are no crossings
-                comparedWays[way2.id] = true;
+                comparedWays[segment2Info.wayId] = true;
+
+                way2 = graph.hasEntity(segment2Info.wayId);
+                if (!way2) continue;
 
                 // only check crossing highway, waterway, building, and railway
                 way2FeatureType = getFeatureTypeForCrossingCheck(way2, graph);
@@ -253,39 +257,41 @@ export function validationCrossingWays(context) {
 
                 // create only one issue for building crossings
                 oneOnly = way1FeatureType === 'building' || way2FeatureType === 'building';
-                segment1 = [n1.loc, n2.loc];
 
-                way2Nodes = graph.childNodes(way2);
-                for (nodeIndex = 0; nodeIndex < way2Nodes.length - 1; nodeIndex++) {
-                    nA = way2Nodes[nodeIndex];
-                    nB = way2Nodes[nodeIndex + 1];
-                    if (nA.id === n1.id || nA.id === n2.id ||
-                        nB.id === n1.id || nB.id === n2.id) {
-                        // n1 or n2 is a connection node; skip
-                        continue;
-                    }
-                    segment2 = [nA.loc, nB.loc];
-                    var point = geoLineIntersection(segment1, segment2);
-                    if (point) {
-                        edgeCrossInfos.push({
-                            wayInfos: [
-                                {
-                                    way: way1,
-                                    featureType: way1FeatureType,
-                                    edge: [n1.id, n2.id]
-                                },
-                                {
-                                    way: way2,
-                                    featureType: way2FeatureType,
-                                    edge: [nA.id, nB.id]
-                                }
-                            ],
-                            crossPoint: point
-                        });
-                        if (oneOnly) {
-                            checkedSingleCrossingWays[way2.id] = true;
-                            break;
-                        }
+                nAId = segment2Info.nodes[0];
+                nBId = segment2Info.nodes[1];
+                if (nAId === n1.id || nAId === n2.id ||
+                    nBId === n1.id || nBId === n2.id) {
+                    // n1 or n2 is a connection node; skip
+                    continue;
+                }
+                nA = graph.hasEntity(nAId);
+                if (!nA) continue;
+                nB = graph.hasEntity(nBId);
+                if (!nB) continue;
+
+                segment1 = [n1.loc, n2.loc];
+                segment2 = [nA.loc, nB.loc];
+                var point = geoLineIntersection(segment1, segment2);
+                if (point) {
+                    edgeCrossInfos.push({
+                        wayInfos: [
+                            {
+                                way: way1,
+                                featureType: way1FeatureType,
+                                edge: [n1.id, n2.id]
+                            },
+                            {
+                                way: way2,
+                                featureType: way2FeatureType,
+                                edge: [nA.id, nB.id]
+                            }
+                        ],
+                        crossPoint: point
+                    });
+                    if (oneOnly) {
+                        checkedSingleCrossingWays[way2.id] = true;
+                        break;
                     }
                 }
             }
