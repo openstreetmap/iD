@@ -57,8 +57,8 @@ export function coreDifference(base, head) {
         }
     }
 
-    for (var id in head.entities) checkEntityID(id);
-    for (var id in base.entities) checkEntityID(id);
+    for (var headId in head.entities) checkEntityID(headId);
+    for (var baseId in base.entities) checkEntityID(baseId);
 
 
     _diff.length = function length() {
