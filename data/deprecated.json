@@ -319,6 +319,10 @@
     "replace": {"crossing:island": "yes"}
   },
   {
+    "old": {"crossing": "traffic_lights"},
+    "replace": {"crossing": "traffic_signals"}
+  },
+  {
     "old": {"cuisine": "gluten-free"},
     "replace": {"diet:gluten_free": "*"}
   },

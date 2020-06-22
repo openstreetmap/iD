@@ -2070,6 +2070,7 @@
     {"key": "craft", "value": "optician", "description": "🄳 ➜ shop=optician"},
     {"key": "craft", "value": "sculpter", "description": "🄳 ➜ craft=sculptor"},
     {"key": "crossing", "value": "island", "description": "🄳 ➜ crossing:island=yes"},
+    {"key": "crossing", "value": "traffic_lights", "description": "🄳 ➜ crossing=traffic_signals"},
     {"key": "cuisine", "value": "gluten-free", "description": "🄳 ➜ diet:gluten_free=*"},
     {"key": "cuisine", "value": "halal", "description": "🄳 ➜ diet:halal=*"},
     {"key": "cuisine", "value": "kosher", "description": "🄳 ➜ diet:kosher=*"},
