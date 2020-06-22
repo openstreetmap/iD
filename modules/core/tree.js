@@ -68,9 +68,10 @@ export function coreTree(head) {
             var diff = coreDifference(head, graph);
             var changed = diff.didChange;
 
+            head = graph;
+
             if (changed.addition || changed.deletion || changed.geometry) {
                 var insertions = {};
-                head = graph;
 
                 if (changed.deletion) {
                     diff.deleted().forEach(function(entity) {

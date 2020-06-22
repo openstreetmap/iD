@@ -156,15 +156,12 @@ Object.assign(osmNode.prototype, {
         return resolver.transient(this, 'isConnected', function() {
             var parents = resolver.parentWays(this);
 
-            function isLine(entity) {
-                return entity.geometry(resolver) === 'line' &&
-                    entity.hasInterestingTags();
-            }
-
-            // vertex is connected to multiple parent lines
-            if (parents.length > 1 && parents.some(isLine)) {
-                return true;
-
+            if (parents.length > 1) {
+                // vertex is connected to multiple parent ways
+                for (var i in parents) {
+                    if (parents[i].geometry(resolver) === 'line' &&
+                        parents[i].hasInterestingTags()) return true;
+                }
             } else if (parents.length === 1) {
                 var way = parents[0];
                 var nodes = way.nodes.slice();
