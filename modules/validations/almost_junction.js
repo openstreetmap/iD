@@ -292,32 +292,32 @@ export function validationAlmostJunction(context) {
       const extTipLoc = geoVecInterp(midNode.loc, tipNode.loc, t);
 
       // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
-      const intersected = tree.intersects(queryExtent, graph);
-      for (let i = 0; i < intersected.length; i++) {
-        let way2 = intersected[i];
+      const segmentInfos = tree.waySegments(queryExtent, graph);
+      for (let i = 0; i < segmentInfos.length; i++) {
+        let segmentInfo = segmentInfos[i];
+
+        let way2 = graph.entity(segmentInfo.wayId);
 
         if (!isHighway(way2)) continue;
 
         if (!canConnectWays(way, way2)) continue;
 
-        for (let j = 0; j < way2.nodes.length - 1; j++) {
-          let nAid = way2.nodes[j],
-            nBid = way2.nodes[j + 1];
+        let nAid = segmentInfo.nodes[0],
+          nBid = segmentInfo.nodes[1];
 
-          if (nAid === tipNid || nBid === tipNid) continue;
+        if (nAid === tipNid || nBid === tipNid) continue;
 
-          let nA = graph.entity(nAid),
-            nB = graph.entity(nBid);
-          let crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
-          if (crossLoc) {
-            return {
-              mid: midNode,
-              node: tipNode,
-              wid: way2.id,
-              edge: [nA.id, nB.id],
-              cross_loc: crossLoc
-            };
-          }
+        let nA = graph.entity(nAid),
+          nB = graph.entity(nBid);
+        let crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
+        if (crossLoc) {
+          return {
+            mid: midNode,
+            node: tipNode,
+            wid: way2.id,
+            edge: [nA.id, nB.id],
+            cross_loc: crossLoc
+          };
         }
       }
       return null;
