@@ -1,0 +1,9 @@
+{
+    "key": "real_fire",
+    "type": "check",
+    "label": "Real Fire",
+    "terms": [
+        "fire place",
+        "fire"
+    ]
+}

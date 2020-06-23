@@ -1765,6 +1765,7 @@
     {"key": "railway:signal:direction", "value": "both", "description": "🄵 Direction Affected"},
     {"key": "rating", "description": "🄵 Power Rating"},
     {"key": "rcn_ref", "description": "🄵 Cycling Code"},
+    {"key": "real_fire", "description": "🄵 Real Fire"},
     {"key": "recycling:", "description": "🄵 Accepts"},
     {"key": "ref", "description": "🄵 Gate Number, 🄵 Hole Number, 🄵 Junction Number, 🄵 Platform Number, 🄵 Road Number, 🄵 Room Number, 🄵 Route Number, 🄵 Runway Number, 🄵 Stop Number, 🄵 Taxiway Name, 🄵 Reference Code"},
     {"key": "ref:isil", "description": "🄵 ISIL Code"},

@@ -4352,6 +4352,10 @@
                 "rcn_ref": {
                     "label": "Cycling Code"
                 },
+                "real_fire": {
+                    "label": "Real Fire",
+                    "terms": "fire place,fire"
+                },
                 "recycling_accepts": {
                     "label": "Accepts"
                 },

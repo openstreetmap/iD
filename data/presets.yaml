@@ -1959,6 +1959,11 @@ en:
       rcn_ref:
         # rcn_ref=*
         label: Cycling Code
+      real_fire:
+        # real_fire=*
+        label: Real Fire
+        # 'terms: fire place,fire'
+        terms: '[translate with synonyms or related terms for ''Real Fire'', separated by commas]'
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
