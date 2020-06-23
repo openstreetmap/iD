@@ -1339,6 +1339,11 @@ en:
       line_attachment:
         # line_attachment=*
         label: Line Attachment
+      line_management:
+        # line_management=*
+        label: Line Management
+        # 'terms: branching,line topology,termination'
+        terms: '[translate with synonyms or related terms for ''Line Management'', separated by commas]'
       lit:
         # lit=*
         label: Lit

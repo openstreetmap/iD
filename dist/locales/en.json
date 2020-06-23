@@ -3858,6 +3858,10 @@
                 "line_attachment": {
                     "label": "Line Attachment"
                 },
+                "line_management": {
+                    "label": "Line Management",
+                    "terms": "branching,line topology,termination"
+                },
                 "lit": {
                     "label": "Lit",
                     "terms": "lamp,lighting"

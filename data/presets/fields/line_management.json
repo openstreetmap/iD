@@ -1,0 +1,10 @@
+{
+    "key": "line_management",
+    "type": "combo",
+    "label": "Line Management",
+    "terms": [
+        "branching",
+        "line topology",
+        "termination"
+    ]
+}

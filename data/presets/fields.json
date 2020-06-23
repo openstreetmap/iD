@@ -249,6 +249,7 @@
   "level": {"key": "level", "type": "combo", "label": "Level", "terms": ["building floor", "deck", "storey", "story"], "prerequisiteTag": {"keyNot": "building"}},
   "liaison": {"key": "liaison", "type": "combo", "label": "Type"},
   "line_attachment": {"key": "line_attachment", "type": "combo", "label": "Line Attachment"},
+  "line_management": {"key": "line_management", "type": "combo", "label": "Line Management", "terms": ["branching", "line topology", "termination"]},
   "lit": {"key": "lit", "type": "check", "label": "Lit", "terms": ["lamp", "lighting"]},
   "location_pool": {"key": "location", "type": "typeCombo", "label": "Location", "strings": {"options": {"outdoor": "Outdoor", "indoor": "Indoor", "roof": "Rooftop"}}},
   "location": {"key": "location", "type": "combo", "label": "Location"},

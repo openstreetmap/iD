@@ -9,6 +9,7 @@
         "line_attachment"
     ],
     "moreFields": [
+        "line_management",
         "manufacturer"
     ],
     "geometry": [

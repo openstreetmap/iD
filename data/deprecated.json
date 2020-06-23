@@ -1003,6 +1003,26 @@
     "replace": {"location:transition": "yes"}
   },
   {
+    "old": {"pole:type": "branch", "branch:type": "cross"},
+    "replace": {"line_management": "cross"}
+  },
+  {
+    "old": {"pole:type": "branch", "branch:type": "loop"},
+    "replace": {"line_management": "split"}
+  },
+  {
+    "old": {"pole:type": "branch", "branch:type": "split"},
+    "replace": {"line_management": "split"}
+  },
+  {
+    "old": {"pole:type": "branch", "branch:type": "tap"},
+    "replace": {"line_management": "branch"}
+  },
+  {
+    "old": {"pole:type": "termination"},
+    "replace": {"line_management": "termination"}
+  },
+  {
     "old": {"postcode": "*"},
     "replace": {"addr:postcode": "$1"}
   },
@@ -1379,8 +1399,32 @@
     "replace": {"line_attachment": "anchor"}
   },
   {
+    "old": {"tower:type": "branch", "branch:type": "cross"},
+    "replace": {"line_management": "cross"}
+  },
+  {
+    "old": {"tower:type": "branch", "branch:type": "loop"},
+    "replace": {"line_management": "split"}
+  },
+  {
+    "old": {"tower:type": "branch", "branch:type": "split"},
+    "replace": {"line_management": "split"}
+  },
+  {
+    "old": {"tower:type": "branch", "branch:type": "tap"},
+    "replace": {"line_management": "branch"}
+  },
+  {
     "old": {"tower:type": "suspension"},
     "replace": {"line_attachment": "suspension"}
+  },
+  {
+    "old": {"tower:type": "termination"},
+    "replace": {"line_management": "termination"}
+  },
+  {
+    "old": {"tower:type": "transposing"},
+    "replace": {"line_management": "transpose"}
   },
   {
     "old": {"townhall:village": "yes"},
