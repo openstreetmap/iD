@@ -1020,6 +1020,9 @@ en:
       government:
         # government=*
         label: Type
+      grades:
+        # grades=*
+        label: Grade Levels
       grape_variety:
         # grape_variety=*
         label: Grape Varieties

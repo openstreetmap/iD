@@ -188,6 +188,7 @@
   "geyser/height": {"key": "geyser:height", "type": "text", "label": "Eruption Height"},
   "gnis/feature_id": {"key": "gnis:feature_id", "type": "identifier", "label": "GNIS Feature ID", "urlFormat": "https://geonames.usgs.gov/apex/f?p=gnispq:3:::NO::P3_FID:{value}", "pattern": "^[0-9]{1,}$", "countryCodes": ["us"], "terms": ["Federal Geographic Names Information Service", "United States Board on Geographic Names", "USA"]},
   "government": {"key": "government", "type": "typeCombo", "label": "Type"},
+  "grades": {"key": "grades", "type": "combo", "label": "Grade Levels", "snake_case": false},
   "grape_variety": {"key": "grape_variety", "type": "semiCombo", "label": "Grape Varieties"},
   "group_only": {"key": "group_only", "type": "check", "label": "Groups Only"},
   "guest_house": {"key": "guest_house", "type": "combo", "label": "Type"},

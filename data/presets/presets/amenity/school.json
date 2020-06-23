@@ -5,6 +5,7 @@
         "operator",
         "operator/type",
         "address",
+        "grades",
         "religion",
         "denomination",
         "website"

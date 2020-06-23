@@ -3581,6 +3581,9 @@
                 "government": {
                     "label": "Type"
                 },
+                "grades": {
+                    "label": "Grade Levels"
+                },
                 "grape_variety": {
                     "label": "Grape Varieties"
                 },

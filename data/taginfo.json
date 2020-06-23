@@ -1555,6 +1555,7 @@
     {"key": "geyser:height", "description": "🄵 Eruption Height"},
     {"key": "gnis:feature_id", "description": "🄵 GNIS Feature ID"},
     {"key": "government", "description": "🄵 Type"},
+    {"key": "grades", "description": "🄵 Grade Levels"},
     {"key": "grape_variety", "description": "🄵 Grape Varieties"},
     {"key": "group_only", "description": "🄵 Groups Only"},
     {"key": "guest_house", "description": "🄵 Type"},

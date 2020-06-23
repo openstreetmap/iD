@@ -1,0 +1,9 @@
+{
+    "key": "grades",
+    "type": "combo",
+    "label": "Grade Levels",
+    "terms": [
+        "educational stages"
+    ],
+    "snake_case": false
+}
