@@ -1,4 +1,5 @@
 {
+    "countryCodes": ["gb", "ie"],
     "key": "real_fire",
     "type": "check",
     "label": "Real Fire",

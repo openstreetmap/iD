@@ -341,7 +341,7 @@
   "railway/signal/direction": {"key": "railway:signal:direction", "type": "combo", "label": "Direction Affected", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},
   "rating": {"key": "rating", "type": "combo", "label": "Power Rating", "snake_case": false},
   "rcn_ref": {"key": "rcn_ref", "type": "text", "label": "Cycling Code"},
-  "real_fire": {"key": "real_fire", "type": "check", "label": "Real Fire", "terms": ["fire place", "fire"]},
+  "real_fire": {"countryCodes": ["gb", "ie"], "key": "real_fire", "type": "check", "label": "Real Fire", "terms": ["fire place", "fire"]},
   "recycling_accepts": {"key": "recycling:", "type": "multiCombo", "label": "Accepts"},
   "recycling_type": {"key": "recycling_type", "type": "combo", "label": "Type", "placeholder": "Container, Center", "strings": {"options": {"container": "Container", "centre": "Center"}}},
   "ref_aeroway_gate": {"key": "ref", "type": "text", "label": "Gate Number"},
