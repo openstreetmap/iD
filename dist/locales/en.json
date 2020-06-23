@@ -3284,9 +3284,15 @@
                 "destination/ref_oneway": {
                     "label": "Destination Road Numbers"
                 },
+                "destination/ref": {
+                    "label": "Destination Road Numbers"
+                },
                 "destination/symbol_oneway": {
                     "label": "Destination Symbols",
                     "terms": ""
+                },
+                "destination/symbol": {
+                    "label": "Destination Symbols"
                 },
                 "devices": {
                     "label": "Devices",
@@ -10170,6 +10176,10 @@
                 "type/connectivity": {
                     "name": "Lane Connectivity",
                     "terms": ""
+                },
+                "type/destination_sign": {
+                    "name": "Destination Sign",
+                    "terms": "exit sign"
                 },
                 "type/enforcement": {
                     "name": "Enforcement",

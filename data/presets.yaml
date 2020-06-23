@@ -667,9 +667,15 @@ en:
       destination:
         # destination=*
         label: Destination
+      destination/ref:
+        # 'destination:ref=*'
+        label: Destination Road Numbers
       destination/ref_oneway:
         # 'destination:ref=*'
         label: Destination Road Numbers
+      destination/symbol:
+        # 'destination:symbol=*'
+        label: Destination Symbols
       destination/symbol_oneway:
         # 'destination:symbol=*'
         label: Destination Symbols
@@ -8802,6 +8808,11 @@ en:
         # type=connectivity
         name: Lane Connectivity
         terms: '<translate with synonyms or related terms for ''Lane Connectivity'', separated by commas>'
+      type/destination_sign:
+        # type=destination_sign
+        name: Destination Sign
+        # 'terms: exit sign'
+        terms: '<translate with synonyms or related terms for ''Destination Sign'', separated by commas>'
       type/enforcement:
         # type=enforcement
         name: Enforcement

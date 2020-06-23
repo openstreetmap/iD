@@ -1,0 +1,19 @@
+{
+    "icon": "iD-relation",
+    "fields": [
+        "destination",
+        "destination/ref",
+        "destination/symbol",
+        "distance"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "destination_sign"
+    },
+    "terms": [
+        "exit sign"
+    ],
+    "name": "Destination Sign"
+}

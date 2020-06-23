@@ -1,0 +1,6 @@
+{
+    "key": "destination:ref",
+    "type": "semiCombo",
+    "label": "Destination Road Numbers",
+    "snake_case": false
+}
