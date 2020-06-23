@@ -4,6 +4,7 @@ import { geoExtent, geoPointInPolygon } from '../geo';
 import { modeSelect } from '../modes/select';
 import { uiLasso } from '../ui/lasso';
 import { utilArrayIntersection } from '../util/array';
+import { utilGetAllNodes } from '../util/util';
 
 
 export function behaviorLasso(context) {
@@ -50,12 +51,22 @@ export function behaviorLasso(context) {
         function lassoed() {
             if (!lasso) return [];
 
+            if (!context.map().editableDataEnabled(true /* skipZoomCheck */)) return [];
+
             var graph = context.graph();
             var bounds = lasso.extent().map(context.projection.invert);
             var extent = geoExtent(normalize(bounds[0], bounds[1]));
 
+            var limitToNodes;
+
+            if (context.map().isInWideSelection()) {
+                // only select from the visible nodes
+                limitToNodes = new Set(utilGetAllNodes(context.selectedIDs(), context.graph()));
+            }
+
             var intersects = context.history().intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
+                    (!limitToNodes || limitToNodes.has(entity)) &&
                     geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
             });
