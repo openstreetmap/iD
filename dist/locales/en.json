@@ -3438,6 +3438,9 @@
                 "emergency_combo": {
                     "label": "Type"
                 },
+                "emergency_ward_entrance": {
+                    "label": "Type"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -6962,6 +6965,10 @@
                 "entrance": {
                     "name": "Entrance / Exit",
                     "terms": "entrance,exit,door"
+                },
+                "entrance/emergency_ward_entrance": {
+                    "name": "Emergency Room Entrance",
+                    "terms": "accident & emergency department,casualty department,ed,emergency department,emergency room,emergency ward,er,ew"
                 },
                 "entrance/emergency": {
                     "name": "Emergency Exit",

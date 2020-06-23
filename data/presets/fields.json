@@ -149,6 +149,7 @@
   "embankment": {"key": "embankment", "type": "typeCombo", "label": "Type", "placeholder": "Default"},
   "embassy": {"key": "embassy", "type": "combo", "label": "Type"},
   "emergency_combo": {"key": "emergency", "type": "combo", "label": "Type"},
+  "emergency_ward_entrance": {"key": "emergency_ward_entrance", "type": "combo", "label": "Type"},
   "emergency": {"key": "emergency", "type": "check", "label": "Emergency"},
   "enforcement": {"key": "enforcement", "type": "combo", "label": "Type"},
   "entrance": {"key": "entrance", "type": "typeCombo", "label": "Type"},

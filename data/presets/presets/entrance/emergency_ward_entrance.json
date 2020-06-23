@@ -1,0 +1,31 @@
+{
+    "icon": "maki-hospital",
+    "fields": [
+        "ref",
+        "emergency_ward_entrance",
+        "address",
+        "level",
+        "opening_hours"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "emergency": "emergency_ward_entrance"
+    },
+    "addTags": {
+        "emergency": "emergency_ward_entrance",
+        "entrance": "yes"
+    },
+    "terms": [
+        "accident & emergency department",
+        "casualty department",
+        "ed",
+        "emergency department",
+        "emergency room",
+        "emergency ward",
+        "er",
+        "ew"
+    ],
+    "name": "Emergency Room Entrance"
+}

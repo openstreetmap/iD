@@ -868,6 +868,9 @@ en:
       emergency_combo:
         # emergency=*
         label: Type
+      emergency_ward_entrance:
+        # emergency_ward_entrance=*
+        label: Type
       enforcement:
         # enforcement=*
         label: Type
@@ -4980,6 +4983,11 @@ en:
         name: Emergency Exit
         # 'terms: fire exit,door'
         terms: '<translate with synonyms or related terms for ''Emergency Exit'', separated by commas>'
+      entrance/emergency_ward_entrance:
+        # emergency=emergency_ward_entrance
+        name: Emergency Room Entrance
+        # 'terms: accident & emergency department,casualty department,ed,emergency department,emergency room,emergency ward,er,ew'
+        terms: '<translate with synonyms or related terms for ''Emergency Room Entrance'', separated by commas>'
       ford:
         # ford=yes
         name: Ford
