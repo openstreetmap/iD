@@ -351,7 +351,7 @@ export function uiFieldCombo(field, context) {
 
             // Use a separate line for each value in the Destinations field
             // to mimic highway exit signs
-            if (field.id === 'destination_oneway') {
+            if (field.key === 'destination') {
                 listClass += ' full-line-chips';
             }
 
@@ -584,7 +584,7 @@ export function uiFieldCombo(field, context) {
                 var targetIndexOffsetTop = null;
                 var draggedTagWidth = d3_select(this).node().offsetWidth;
 
-                if (field.id === 'destination_oneway') { // meaning tags are full width
+                if (field.key === 'destination') { // meaning tags are full width
                     container.selectAll('.chip')
                         .style('transform', function(d2, index2) {
                             var node = d3_select(this).node();

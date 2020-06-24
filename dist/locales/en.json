@@ -3290,8 +3290,11 @@
                 "destination_oneway": {
                     "label": "Destinations"
                 },
-                "destination": {
+                "destination_waterway": {
                     "label": "Destination"
+                },
+                "destination": {
+                    "label": "Destinations"
                 },
                 "destination/ref_oneway": {
                     "label": "Destination Road Numbers"

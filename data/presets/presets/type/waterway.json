@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "waterway",
-        "destination",
+        "destination_waterway",
         "ref"
     ],
     "geometry": [

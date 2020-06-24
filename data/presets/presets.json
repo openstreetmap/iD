@@ -1312,7 +1312,7 @@
   "type/route/tram": {"icon": "temaki-tram", "fields": ["{type/route/train}"], "moreFields": ["{type/route/train}"], "geometry": ["relation"], "tags": {"type": "route", "route": "tram"}, "name": "Tram Route"},
   "type/route/trolleybus": {"icon": "temaki-trolleybus", "fields": ["{type/route/train}"], "moreFields": ["{type/route/train}"], "geometry": ["relation"], "tags": {"type": "route", "route": "trolleybus"}, "name": "Trolleybus Route"},
   "type/site": {"icon": "iD-relation", "fields": ["name", "site"], "geometry": ["relation"], "tags": {"type": "site"}, "name": "Site"},
-  "type/waterway": {"icon": "iD-waterway-stream", "fields": ["name", "waterway", "destination", "ref"], "geometry": ["relation"], "tags": {"type": "waterway"}, "name": "Waterway"},
+  "type/waterway": {"icon": "iD-waterway-stream", "fields": ["name", "waterway", "destination_waterway", "ref"], "geometry": ["relation"], "tags": {"type": "waterway"}, "name": "Waterway"},
   "waterway/riverbank": {"icon": "maki-water", "geometry": ["area"], "tags": {"waterway": "riverbank"}, "name": "Riverbank", "searchable": false},
   "waterway/boatyard": {"icon": "temaki-boat", "fields": ["name", "operator"], "moreFields": ["address", "email", "fax", "gnis/feature_id", "phone", "website", "wheelchair"], "geometry": ["area", "vertex", "point"], "tags": {"waterway": "boatyard"}, "name": "Boatyard"},
   "waterway/canal": {"icon": "iD-waterway-canal", "fields": ["name", "structure_waterway", "width", "intermittent", "lock"], "moreFields": ["fishing", "gnis/feature_id", "salt", "tidal"], "geometry": ["line"], "tags": {"waterway": "canal"}, "name": "Canal"},

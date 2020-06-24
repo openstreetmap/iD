@@ -1,5 +1,5 @@
 {
     "key": "destination",
-    "type": "text",
-    "label": "Destination"
+    "type": "semiCombo",
+    "label": "Destinations"
 }

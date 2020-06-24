@@ -666,7 +666,7 @@ en:
         label: Design
       destination:
         # destination=*
-        label: Destination
+        label: Destinations
       destination/ref:
         # 'destination:ref=*'
         label: Destination Road Numbers
@@ -683,6 +683,9 @@ en:
       destination_oneway:
         # destination=*
         label: Destinations
+      destination_waterway:
+        # destination=*
+        label: Destination
       devices:
         # devices=*
         label: Devices
