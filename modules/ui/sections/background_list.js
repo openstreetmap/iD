@@ -96,6 +96,28 @@ export function uiSectionBackgroundList(context) {
             .append('span')
             .text(t('background.panel.description'));
 
+        var locPanelLabelEnter = bgExtrasListEnter
+            .append('li')
+            .attr('class', 'location-panel-toggle-item')
+            .append('label')
+            .call(uiTooltip()
+                .title(t('background.location_panel.tooltip'))
+                .keys([uiCmd('⌘⇧' + t('info_panels.location.key'))])
+                .placement('top')
+            );
+
+        locPanelLabelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                d3_event.preventDefault();
+                context.ui().info.toggle('location');
+            });
+
+        locPanelLabelEnter
+            .append('span')
+            .text(t('background.location_panel.description'));
+
 
         // "Info / Report a Problem" link
         selection.selectAll('.imagery-faq')

@@ -845,8 +845,12 @@
                 "key": "/"
             },
             "panel": {
-                "description": "Show Detail Panel",
+                "description": "Show Background Panel",
                 "tooltip": "Show advanced background information."
+            },
+            "location_panel": {
+                "description": "Show Location Panel",
+                "tooltip": "Show coordinate and regional details."
             },
             "fix_misalignment": "Imagery Offset",
             "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
