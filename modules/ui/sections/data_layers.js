@@ -348,7 +348,7 @@ export function uiSectionDataLayers(context) {
                 d3_event.stopPropagation();
                 dataLayer.fitZoom();
             })
-            .call(svgIcon('#iD-icon-search'));
+            .call(svgIcon('#iD-icon-framed-dot'));
 
         // Update
         ul = ul
