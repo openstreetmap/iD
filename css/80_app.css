@@ -4233,6 +4233,7 @@ img.tile-debug {
     z-index: 1;
     -ms-user-select: element;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .panel-container h1,
@@ -4257,6 +4258,7 @@ img.tile-debug {
     border: 1px solid rgba(0, 0, 0, 0.75);
     padding-bottom: 10px;
     width: 250px;
+    max-width: 100%;
     pointer-events: auto;
 }
 
