@@ -708,6 +708,12 @@ en:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
         zoom: Zoom to data
+    history_panel:
+      title: Show History Panel
+      tooltip: Show version details for the selection.
+    measurement_panel:
+      title: Show Measurement Panel
+      tooltip: Show geometry values for the selection.
     style_options: Style Options
     highlight_edits:
       key: G
