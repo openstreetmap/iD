@@ -1987,9 +1987,12 @@
             },
             "duplicate_address": {
                 "title": "Duplicate Addresses",
-                "message": "{entity1} and {entity2} contain similar address elements.",
+                "message": "{entity1} and {entity2} contain similar addresses",
                 "tip": "Find potentially duplicate addresses.",
-                "reference": "Addresses should not share the same housenumber, unless they differ in other attributes like floor or unit"
+                "reference": {
+                    "text": "Addresses should not share the same housenumber unless they differ in other attributes like floor or unit. Consider merging these addresses or adding additional attributes to make them unique.",
+                    "tags": "The duplicate address tags are listed below:"
+                }
             },
             "fixme_tag": {
                 "message": "{feature} has a \"Fix Me\" request",
