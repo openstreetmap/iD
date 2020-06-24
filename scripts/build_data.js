@@ -777,12 +777,32 @@ function writeEnJson(tstrings) {
   const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
   const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
+  const readManualImagery = fs.readFileSync('data/manual_imagery.json', 'utf8');
 
-  return Promise.all([readCoreYaml, readImagery, readCommunity])
+  return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(data => {
       let core = YAML.load(data[0]);
       let imagery = YAML.load(data[1]);
       let community = YAML.load(data[2]);
+      let manualImagery = JSON.parse(data[3]);
+
+      for (let i in manualImagery) {
+        let layer = manualImagery[i];
+        let id = layer.id;
+        for (let key in layer) {
+          if (key === 'attribution') {
+            for (let attrKey in layer[key]) {
+              if (attrKey !== 'text') {
+                delete layer[key][attrKey];
+              }
+            }
+          } else if (['name', 'description'].indexOf(key) === -1) {
+            delete layer[key];
+          }
+        }
+        // tack on strings for additional imagery not included in the index
+        imagery.en.imagery[id] = layer;
+      }
 
       let enjson = core;
       enjson.en.presets = tstrings;

@@ -1,0 +1,34 @@
+[
+ {
+  "id": "Maxar-Premium",
+  "name": "Maxar Premium Imagery (Beta)",
+  "type": "tms",
+  "default": true,
+  "attribution": {
+   "required": true,
+   "text": "Terms & Feedback",
+   "url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe"
+  },
+  "description": "Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates.",
+  "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png",
+  "max_zoom": 22,
+  "url": "7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f041cc9f8df06b0345600376663e7dc1cdbc7df16876d8b5d006ed5782e6af4bfe2ff5a292",
+  "encrypted": true
+ },
+ {
+  "id": "Maxar-Standard",
+  "name": "Maxar Standard Imagery (Beta)",
+  "type": "tms",
+  "default": true,
+  "attribution": {
+   "required": true,
+   "text": "Terms & Feedback",
+   "url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe"
+  },
+  "description": "Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year.",
+  "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Maxar.png",
+  "max_zoom": 22,
+  "url": "7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f010c8c9d7fb6b534560012461377dc1cdb672f16827dfe0d005bf5685b7ac4ea97cf5f795",
+  "encrypted": true
+ }
+]

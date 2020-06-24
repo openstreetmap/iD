@@ -10892,6 +10892,20 @@
                     "text": "Urząd Miasta Wrocław"
                 },
                 "name": "Wrocław: Orthophotomap 2018 (aerial image)"
+            },
+            "Maxar-Premium": {
+                "name": "Maxar Premium Imagery (Beta)",
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Maxar Premium is a mosaic composed of Maxar basemap with select regions filled with +Vivid or custom area of interest imagery, 50cm resolution or better, and refreshed more frequently with ongoing updates."
+            },
+            "Maxar-Standard": {
+                "name": "Maxar Standard Imagery (Beta)",
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Maxar Standard is a curated set of imagery covering 86% of the earth’s landmass, with 30-60cm resolution where available, backfilled by Landsat. Average age is 2.31 years, with some areas updated 2x per year."
             }
         },
         "community": {
