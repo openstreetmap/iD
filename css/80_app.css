@@ -4673,18 +4673,23 @@ img.tile-debug {
 /* Modals / Prompts
 ------------------------------------------------------- */
 .modal {
-    top: 40px;
-    display: inline-block;
-    position: absolute;
+    top: 5%;
+    max-height: 90%;
+    position: relative;
     border-radius: 3px;
     overflow: hidden;
-    left: 0;
-    right: 0;
     margin: auto;
     z-index: 50;
     width: 80%;
     min-width: 200px;
     max-width: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .content {
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .modal .loader {
