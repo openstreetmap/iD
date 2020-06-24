@@ -3755,13 +3755,13 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 .pane-content {
     height: 100%;
-    padding: 10px 40px 20px 20px;
+    padding: 10px 50px 20px 20px;
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
 }
 .ideditor[dir='rtl'] .pane-content {
-    padding: 10px 20px 20px 40px;
+    padding: 10px 20px 20px 50px;
 }
 
 .help-pane .pane-content > div {
