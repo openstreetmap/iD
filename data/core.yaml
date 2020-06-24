@@ -2112,9 +2112,9 @@ en:
         stop_line: "Finish drawing a line or area"
       operations:
         title: "Operations"
-        continue_line: "Continue a line at the selected node"
+        continue_line: "Continue a line at the selected endpoint"
         merge: "Combine (merge) selected features"
-        disconnect: "Disconnect features at the selected node"
+        disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
         split: "Split a line into two at the selected node"
         reverse: "Reverse selected features"
