@@ -3140,6 +3140,8 @@ div.full-screen > button:active {
     padding: 5px 10px;
     cursor: pointer;
     flex: 1 1 auto;
+    display: flex;
+    overflow: hidden;
 }
 
 .ideditor[dir='ltr'] .layer-list .indented label {
@@ -3154,6 +3156,7 @@ div.full-screen > button:active {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    flex-grow: 1;
 }
 
 .map-data-pane .layer-list button,
@@ -3568,6 +3571,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .display-control .display-option-input {
     height: 20px;
     width: 155px;
+    max-width: 100%;
 }
 
 .display-control button {
@@ -5688,13 +5692,4 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     height: 100px;
     width: 100px;
     color: #7092ff;
-}
-
-
-.list-item-photos.list-item-mapillary-map-features .request-data-link {
-    float: right;
-    margin-top: -20px;
-}
-.ideditor[dir='rtl'] .list-item-photos.list-item-mapillary-map-features .request-data-link {
-    float: left;
 }
