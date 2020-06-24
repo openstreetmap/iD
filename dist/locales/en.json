@@ -8817,8 +8817,8 @@
                     "terms": ""
                 },
                 "playground/climbing_frame": {
-                    "name": "Climbing Frame",
-                    "terms": ""
+                    "name": "Play Climbing Frame",
+                    "terms": "jungle gym,monkey bars"
                 },
                 "playground/cushion": {
                     "name": "Bouncy Cushion",
@@ -8837,8 +8837,8 @@
                     "terms": "merry-go-round"
                 },
                 "playground/sandpit": {
-                    "name": "Sandpit",
-                    "terms": "sandbox"
+                    "name": "Play Sandbox",
+                    "terms": "sandbox,sandpit"
                 },
                 "playground/seesaw": {
                     "name": "Seesaw",
@@ -8857,8 +8857,8 @@
                     "terms": ""
                 },
                 "playground/zipwire": {
-                    "name": "Zip Wire",
-                    "terms": ""
+                    "name": "Play Zip Line",
+                    "terms": "zipline,zip wire,zipwire"
                 },
                 "point": {
                     "name": "Point",

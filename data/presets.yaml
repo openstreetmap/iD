@@ -7190,8 +7190,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Basket Swing'', separated by commas>'
       playground/climbing_frame:
         # playground=climbingframe
-        name: Climbing Frame
-        terms: '<translate with synonyms or related terms for ''Climbing Frame'', separated by commas>'
+        name: Play Climbing Frame
+        # 'terms: jungle gym,monkey bars'
+        terms: '<translate with synonyms or related terms for ''Play Climbing Frame'', separated by commas>'
       playground/cushion:
         # playground=cushion
         name: Bouncy Cushion
@@ -7213,9 +7214,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Play Roundabout'', separated by commas>'
       playground/sandpit:
         # playground=sandpit
-        name: Sandpit
-        # 'terms: sandbox'
-        terms: '<translate with synonyms or related terms for ''Sandpit'', separated by commas>'
+        name: Play Sandbox
+        # 'terms: sandbox,sandpit'
+        terms: '<translate with synonyms or related terms for ''Play Sandbox'', separated by commas>'
       playground/seesaw:
         # playground=seesaw
         name: Seesaw
@@ -7235,8 +7236,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Swing'', separated by commas>'
       playground/zipwire:
         # playground=zipwire
-        name: Zip Wire
-        terms: '<translate with synonyms or related terms for ''Zip Wire'', separated by commas>'
+        name: Play Zip Line
+        # 'terms: zipline,zip wire,zipwire'
+        terms: '<translate with synonyms or related terms for ''Play Zip Line'', separated by commas>'
       point:
         name: Point
         # 'terms: node,other,vertex,vertices'
