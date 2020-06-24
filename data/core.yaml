@@ -691,10 +691,10 @@ en:
     layers:
       osm:
         tooltip: Map data from OpenStreetMap
-        title: OpenStreetMap data
+        title: OpenStreetMap Data
       notes:
         tooltip: Note data from OpenStreetMap
-        title: OpenStreetMap notes
+        title: OpenStreetMap Notes
       keepRight:
         tooltip: Data issues detected by keepright.at
         title: KeepRight Issues

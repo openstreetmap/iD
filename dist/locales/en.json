@@ -850,7 +850,7 @@
             },
             "location_panel": {
                 "description": "Show Location Panel",
-                "tooltip": "Show coordinate and regional details."
+                "tooltip": "Show coordinates and regional details."
             },
             "fix_misalignment": "Imagery Offset",
             "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
@@ -863,11 +863,11 @@
             "layers": {
                 "osm": {
                     "tooltip": "Map data from OpenStreetMap",
-                    "title": "OpenStreetMap data"
+                    "title": "OpenStreetMap Data"
                 },
                 "notes": {
                     "tooltip": "Note data from OpenStreetMap",
-                    "title": "OpenStreetMap notes"
+                    "title": "OpenStreetMap Notes"
                 },
                 "keepRight": {
                     "tooltip": "Data issues detected by keepright.at",
