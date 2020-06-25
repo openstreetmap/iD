@@ -39,16 +39,12 @@
 }
 
 .main-content.active {
-    -webkit-filter: none !important;
     filter: none !important;
-    -webkit-duration: 200ms;
     transition-duration: 200ms;
 }
 
 .main-content.inactive {
-    -webkit-filter: grayscale(80%) brightness(80%);
     filter: grayscale(80%) brightness(80%);
-    -webkit-duration: 200ms;
     transition-duration: 200ms;
 }
 
@@ -60,8 +56,6 @@
 }
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -107,15 +101,9 @@ h4, h5 {
     outline-style: none;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
     color: #aaa;
     opacity: 1; /* Firefox */
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #aaa;
-}
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: #aaa;
 }
 
 p {
@@ -606,9 +594,6 @@ button.add-note svg.icon {
     border-radius: 100%;
 }
 .ideditor[dir='rtl'] .spinner img {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
@@ -1363,10 +1348,7 @@ a.hide-toggle {
     flex-flow: row wrap;
     margin-bottom: 10px;
     width: 100%;
-    -webkit-transition: margin-bottom 200ms;
-       -moz-transition: margin-bottom 200ms;
-         -o-transition: margin-bottom 200ms;
-            transition: margin-bottom 200ms;
+    transition: margin-bottom 200ms;
 }
 
 .form-field.nowrap,
@@ -2051,9 +2033,6 @@ a.hide-toggle {
 
 .restriction-controls-container .restriction-controls {
     display: table;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -2106,10 +2085,6 @@ a.hide-toggle {
     color: #888;
     text-align: center;
     pointer-events: none;
-
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -2386,9 +2361,6 @@ button.raw-tag-option svg.icon {
     vertical-align: text-bottom;
 }
 .ideditor[dir='ltr'] button.raw-tag-option-list {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
@@ -2636,8 +2608,6 @@ img.tag-reference-wiki-image {
     opacity: 0.75;
     z-index: 3000;
     /*
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
     */
 }
@@ -4041,14 +4011,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 img.tile {
     position: absolute;
     transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
 
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 
     pointer-events: none;
@@ -4057,8 +4020,6 @@ img.tile {
 
     opacity: 0;
 
-    -webkit-transition: opacity 200ms linear;
-    -moz-transition: opacity 200ms linear;
     transition: opacity 200ms linear;
 }
 
@@ -4083,14 +4044,7 @@ img.tile-removing {
     margin-top: -20px;
 
     transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
 
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -4106,9 +4060,6 @@ img.tile-debug {
     overflow: hidden;
     height: 100%;
     background: #000;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     touch-action: none;
 }
@@ -4118,10 +4069,6 @@ img.tile-debug {
 
 .supersurface {
     transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
 }
 
 .supersurface, .layer {
@@ -4155,14 +4102,6 @@ img.tile-debug {
 
 .map-in-map-tiles {
     transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
-
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -4383,15 +4322,11 @@ img.tile-debug {
 .footer-show {
     bottom: 0px;
     transition: bottom 75ms linear;
-    -moz-transition: bottom 75ms linear;
-    -webkit-transition: bottom 75ms linear;
 }
 
 .footer-hide {
     bottom: -35px;
     transition: bottom 75ms linear;
-    -moz-transition: bottom 75ms linear;
-    -webkit-transition: bottom 75ms linear;
 }
 
 
@@ -4499,9 +4434,6 @@ img.tile-debug {
     width: 250px;
     max-height: 30px;
     flex: 0 0 250px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
@@ -5662,9 +5594,6 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 }
 
 .curtain-tooltip.intro-mouse {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 
