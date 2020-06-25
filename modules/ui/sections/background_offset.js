@@ -166,10 +166,6 @@ export function uiSectionBackgroundOffset(context) {
         var nudgeEnter = containerEnter
             .append('div')
             .attr('class', 'nudge-outer-rect')
-            .on('touchstart touchmove touchend', function() {
-                // prevent scrolling while dragging
-                d3_event.preventDefault();
-            })
             .on(_pointerPrefix + 'down', dragOffset);
 
         nudgeEnter

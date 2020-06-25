@@ -3614,6 +3614,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin: 0 auto;
     margin-top: 20px;
     cursor: move;
+    /* prevent scrolling pane while dragging on touchscreen */
+    touch-action: none;
 }
 
 .nudge-container .nudge-inner-rect {
