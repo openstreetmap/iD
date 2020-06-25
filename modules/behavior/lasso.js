@@ -51,18 +51,18 @@ export function behaviorLasso(context) {
         function lassoed() {
             if (!lasso) return [];
 
-            if (!context.map().editableDataEnabled(true /* skipZoomCheck */)) return [];
-
             var graph = context.graph();
-            var bounds = lasso.extent().map(context.projection.invert);
-            var extent = geoExtent(normalize(bounds[0], bounds[1]));
-
             var limitToNodes;
 
-            if (context.map().isInWideSelection()) {
+            if (context.map().editableDataEnabled(true /* skipZoomCheck */) && context.map().isInWideSelection()) {
                 // only select from the visible nodes
-                limitToNodes = new Set(utilGetAllNodes(context.selectedIDs(), context.graph()));
+                limitToNodes = new Set(utilGetAllNodes(context.selectedIDs(), graph));
+            } else if (!context.map().editableDataEnabled()) {
+                return [];
             }
+
+            var bounds = lasso.extent().map(context.projection.invert);
+            var extent = geoExtent(normalize(bounds[0], bounds[1]));
 
             var intersects = context.history().intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
