@@ -5,7 +5,7 @@ const glob = require('glob');
 const fs = require('fs');
 const postcss = require('postcss');
 const prepend = require('postcss-selector-prepend');
-const autoprefixer = require('autoprefixer')
+const autoprefixer = require('autoprefixer');
 
 let _currBuild = null;
 
