@@ -789,6 +789,8 @@ a.hide-toggle {
     height: 100%;
     width: 6px;
     cursor: col-resize;
+    /* disable drag-to-select */
+    user-select: none;
 }
 .ideditor[dir='rtl'] .sidebar-resizer {
     right: auto;
@@ -3616,6 +3618,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     cursor: move;
     /* prevent scrolling pane while dragging on touchscreen */
     touch-action: none;
+    /* disable drag-to-select */
+    user-select: none;
 }
 
 .nudge-container .nudge-inner-rect {
