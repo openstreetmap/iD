@@ -25,7 +25,11 @@ export function coreTree(head) {
 
 
     function segmentBBox(segment) {
-        var bbox = segment.extent(head).bbox();
+        var extent = segment.extent(head);
+        // extent can be null if the node entites aren't in the graph for some reason
+        if (!extent) return null;
+
+        var bbox = extent.bbox();
         bbox.segment = segment;
         _segmentsBBoxes[segment.id] = bbox;
         return bbox;
@@ -58,7 +62,7 @@ export function coreTree(head) {
                 segments = segments.concat(entitySegments);
             }
         });
-        if (segments.length) _segmentsRTree.load(segments.map(segmentBBox));
+        if (segments.length) _segmentsRTree.load(segments.map(segmentBBox).filter(Boolean));
     }
 
 
