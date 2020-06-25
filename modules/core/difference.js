@@ -1,7 +1,7 @@
 import deepEqual from 'fast-deep-equal';
 
 import { geoVecEqual } from '../geo';
-import { utilArrayDifference, utilArrayUnion } from '../util';
+import { utilArrayDifference, utilArrayUnion, utilArrayUniq } from '../util/array';
 
 
 /*
@@ -57,8 +57,16 @@ export function coreDifference(base, head) {
         }
     }
 
-    for (var headId in head.entities) checkEntityID(headId);
-    for (var baseId in base.entities) checkEntityID(baseId);
+    function load() {
+        // HOT CODE: there can be many thousands of downloaded entities, so looping
+        // through them all can become a performance bottleneck. Optimize by
+        // resolving duplicates and using a basic `for` loop
+        var ids = utilArrayUniq(Object.keys(head.entities).concat(Object.keys(base.entities)));
+        for (var i = 0; i < ids.length; i++) {
+            checkEntityID(ids[i]);
+        }
+    }
+    load();
 
 
     _diff.length = function length() {
