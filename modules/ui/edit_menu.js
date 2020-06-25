@@ -123,6 +123,15 @@ export function uiEditMenu(context) {
                         .text(operation.tooltip)();
                 }
             } else {
+                if (lastPointerUpType === 'touch' ||
+                    lastPointerUpType === 'pen') {
+                    context.ui().flash
+                        .duration(2000)
+                        .iconName('#iD-operation-' + operation.id)
+                        .iconClass('operation')
+                        .text(operation.annotation() || operation.title)();
+                }
+
                 operation();
                 editMenu.close();
             }

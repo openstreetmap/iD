@@ -11,25 +11,21 @@ export function behaviorOperation(context) {
 
         d3_event.preventDefault();
         var disabled = _operation.disabled();
-        var flash;
 
         if (disabled) {
-            flash = context.ui().flash
+            context.ui().flash
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
-                .text(_operation.tooltip);
-
-            flash();
+                .text(_operation.tooltip)();
 
         } else {
-            flash = context.ui().flash
+            context.ui().flash
                 .duration(2000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation')
-                .text(_operation.annotation() || _operation.title);
+                .text(_operation.annotation() || _operation.title)();
 
-            flash();
             if (_operation.point) _operation.point(null);
             _operation();
         }
