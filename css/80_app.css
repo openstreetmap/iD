@@ -22,6 +22,7 @@
         sans-serif;
     color: #333;
 
+    touch-action: none;
     -ms-user-select: none;
     -ms-content-zooming: none;
 }
@@ -34,6 +35,7 @@
     position: relative;
     overflow: hidden;
     height: 100%;
+    touch-action: none;
 }
 
 .main-content.active {
