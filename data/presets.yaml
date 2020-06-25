@@ -2748,6 +2748,11 @@ en:
       vending:
         # vending=*
         label: Types of Goods
+      vhf:
+        # vhf=*
+        label: VHF Channel
+        # 'terms: call sign,very high frequency'
+        terms: '[translate with synonyms or related terms for ''VHF Channel'', separated by commas]'
       video_calls:
         # video=*
         label: Video Calls
@@ -6036,7 +6041,7 @@ en:
       leisure/marina:
         # leisure=marina
         name: Marina
-        # 'terms: boat'
+        # 'terms: boats,docks,harbor,harbour,moorings,yachts'
         terms: '<translate with synonyms or related terms for ''Marina'', separated by commas>'
       leisure/miniature_golf:
         # leisure=miniature_golf

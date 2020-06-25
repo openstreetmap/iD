@@ -20,6 +20,7 @@
         "internet_access/ssid",
         "phone",
         "seamark/type",
+        "vhf",
         "website"
     ],
     "geometry": [
@@ -28,10 +29,20 @@
         "vertex"
     ],
     "terms": [
-        "boat"
+        "boats",
+        "docks",
+        "harbor",
+        "harbour",
+        "moorings",
+        "yachts"
     ],
     "tags": {
         "leisure": "marina"
+    },
+    "addTags": {
+        "leisure": "marina",
+        "seamark:type": "harbour",
+        "seamark:harbour:category": "marina"
     },
     "name": "Marina"
 }

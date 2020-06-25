@@ -481,6 +481,7 @@
   "utility": {"key": "utility", "type": "typeCombo", "label": "Utility"},
   "valve": {"key": "valve", "type": "combo", "label": "Type"},
   "vending": {"key": "vending", "type": "semiCombo", "label": "Types of Goods"},
+  "vhf": {"key": "vhf", "type": "text", "label": "VHF Channel", "terms": ["call sign", "very high frequency"]},
   "video_calls": {"key": "video", "type": "check", "label": "Video Calls"},
   "visibility": {"key": "visibility", "type": "combo", "label": "Visibility", "strings": {"options": {"house": "Up to 5m (16ft)", "street": "5 to 20m (16 to 65ft)", "area": "Over 20m (65ft)"}}},
   "volcano/status": {"key": "volcano:status", "type": "combo", "label": "Volcano Status", "strings": {"options": {"active": "Active", "dormant": "Dormant", "extinct": "Extinct"}}},

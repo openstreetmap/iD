@@ -1,0 +1,9 @@
+{
+    "key": "vhf",
+    "type": "text",
+    "label": "VHF Channel",
+    "terms": [
+        "call sign",
+        "very high frequency"
+    ]
+}

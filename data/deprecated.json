@@ -1515,6 +1515,10 @@
     "replace": {"noname": "$1"}
   },
   {
+    "old": {"vhf_channel": "*"},
+    "replace": {"vhf": "$1"}
+  },
+  {
     "old": {"volcano": "extinct"},
     "replace": {"volcano:status": "extinct"}
   },
@@ -1549,6 +1553,10 @@
   {
     "old": {"waterway": "riverbank"},
     "replace": {"natural": "water", "water": "river"}
+  },
+  {
+    "old": {"waterway:vhf_channel": "*"},
+    "replace": {"vhf": "$1"}
   },
   {
     "old": {"wifi": "yes"},

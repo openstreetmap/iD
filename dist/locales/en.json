@@ -5025,6 +5025,10 @@
                 "vending": {
                     "label": "Types of Goods"
                 },
+                "vhf": {
+                    "label": "VHF Channel",
+                    "terms": "call sign,very high frequency"
+                },
                 "video_calls": {
                     "label": "Video Calls",
                     "terms": ""
@@ -7858,7 +7862,7 @@
                 },
                 "leisure/marina": {
                     "name": "Marina",
-                    "terms": "boat"
+                    "terms": "boats,docks,harbor,harbour,moorings,yachts"
                 },
                 "leisure/miniature_golf": {
                     "name": "Miniature Golf",
