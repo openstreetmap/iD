@@ -19,7 +19,7 @@ export function validationDuplicateAddress(context) {
     let different = false;
 
     // if any of these tags don't match, *and both are present*, it's not a duplicate..
-    ['addr:street', 'addr:place', 'addr:block'].forEach(k => {
+    ['addr:street', 'addr:place', 'addr:block', 'addr:city', 'addr:postcode'].forEach(k => {
       const val1 = entity1.tags[k] || '';
       const val2 = entity2.tags[k] || '';
       if (val1 && val2) {     // both assigned
