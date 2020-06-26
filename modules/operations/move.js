@@ -76,5 +76,7 @@ export function operationMove(context, selectedIDs) {
     operation.title = t('operations.move.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
+    operation.mouseOnly = true;
+
     return operation;
 }

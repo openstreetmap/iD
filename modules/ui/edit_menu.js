@@ -28,12 +28,17 @@ export function uiEditMenu(context) {
     var _menuSideMargin = 10;
 
     var editMenu = function(selection) {
-        if (!_operations.length) return;
+
+        var isTouchMenu = _triggerType.includes('touch') || _triggerType.includes('pen');
+
+        var ops = _operations.filter(function(op) {
+            return !isTouchMenu || !op.mouseOnly;
+        });
+
+        if (!ops.length) return;
 
         var offset = [0, 0];
         var viewport = context.surfaceRect();
-
-        var isTouchMenu = _triggerType.includes('touch') || _triggerType.includes('pen');
 
         // Position the menu above the anchor for stylus and finger input
         // since the mapper's hand likely obscures the screen below the anchor
@@ -48,7 +53,7 @@ export function uiEditMenu(context) {
 
         offset[0] = menuLeft ? -1 * (_menuSideMargin + menuWidth) : _menuSideMargin;
 
-        var menuHeight = _verticalPadding * 2 + _operations.length * buttonHeight;
+        var menuHeight = _verticalPadding * 2 + ops.length * buttonHeight;
 
 
         if (menuTop) {
@@ -78,7 +83,7 @@ export function uiEditMenu(context) {
             .style('top', origin[1] + 'px');
 
         var buttons = _menu.selectAll('.edit-menu-item')
-            .data(_operations);
+            .data(ops);
 
         // enter
         var buttonsEnter = buttons.enter()
