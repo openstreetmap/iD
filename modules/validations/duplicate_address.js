@@ -23,7 +23,7 @@ export function validationDuplicateAddress(context) {
       const val1 = entity1.tags[k] || '';
       const val2 = entity2.tags[k] || '';
       if (val1 && val2) {     // both assigned
-        if (val1 !== val2) {
+        if (val1.toLowerCase() !== val2.toLowerCase()) {
           different = true;   // values don't match
         } else {
           dupe.tags[k] = val1;
@@ -37,7 +37,7 @@ export function validationDuplicateAddress(context) {
       const val1 = entity1.tags[k] || '';
       const val2 = entity2.tags[k] || '';
       if (val1 || val2) {     // one is assigned
-        if (val1 !== val2) {
+        if (val1.toLowerCase() !== val2.toLowerCase()) {
           different = true;   // values don't match
         } else {
           dupe.tags[k] = val1;
