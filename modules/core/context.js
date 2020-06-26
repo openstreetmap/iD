@@ -80,6 +80,7 @@ export function coreContext() {
   /* User interface and keybinding */
   let _ui;
   context.ui = () => _ui;
+  context.lastPointerType = () => _ui.lastPointerType();
 
   let _keybinding = utilKeybinding('context');
   context.keybinding = () => _keybinding;

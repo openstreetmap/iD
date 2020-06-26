@@ -52,6 +52,8 @@ export function uiInit(context) {
     var _initCounter = 0;
     var _needWidth = {};
 
+    var _lastPointerType;
+
 
     function render(container) {
 
@@ -92,13 +94,15 @@ export function uiInit(context) {
         if ('PointerEvent' in window) {
             d3_select(window)
                 .on('pointerdown.ui pointerup.ui', function() {
-                    var pointerType =  d3_event.pointerType || 'mouse';
-                    if (container.attr('pointer') !== pointerType) {
+                    var pointerType = d3_event.pointerType || 'mouse';
+                    if (_lastPointerType !== pointerType) {
+                        _lastPointerType = pointerType;
                         container
                             .attr('pointer', pointerType);
                     }
                 }, true);
         } else {
+            _lastPointerType = 'mouse';
             container
                 .attr('pointer', 'mouse');
         }
@@ -476,6 +480,10 @@ export function uiInit(context) {
         context.container().selectAll('*').remove();
 
         ui.ensureLoaded();
+    };
+
+    ui.lastPointerType = function() {
+        return _lastPointerType;
     };
 
     ui.flash = uiFlash(context);

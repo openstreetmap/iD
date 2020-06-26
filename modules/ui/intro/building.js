@@ -5,7 +5,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t, localizer } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilArrayUniq, utilRebind } from '../../util';
@@ -50,24 +50,6 @@ export function uiIntroBuilding(context, reveal) {
     function revealTank(center, text, options) {
         var padding = 190 * Math.pow(2, context.map().zoom() - 19.5);
         var box = pad(center, padding, context);
-        reveal(box, text, options);
-    }
-
-
-    function revealEditMenu(loc, text, options) {
-        var rect = context.surfaceRect();
-        var point = context.curtainProjection(loc);
-        var pad = 40;
-        var width = 250 + (2 * pad);
-        var height = 350;
-        var startX = rect.left + point[0];
-        var left = (localizer.textDirection() === 'rtl') ? (startX - width + pad) : (startX - pad);
-        var box = {
-            left: left,
-            top: point[1] + rect.top - 60,
-            width: width,
-            height: height
-        };
         reveal(box, text, options);
     }
 
@@ -372,10 +354,10 @@ export function uiIntroBuilding(context, reveal) {
         if (!node) { return continueTo(rightClickHouse); }
 
         var wasChanged = false;
-        var menuCoords = context.map().mouseCoordinates();
 
-        revealEditMenu(menuCoords,
-            t('intro.buildings.square_building', { button: icon('#iD-operation-orthogonalize', 'pre-text') })
+        reveal('.edit-menu',
+            t('intro.buildings.square_building', { button: icon('#iD-operation-orthogonalize', 'pre-text') }),
+            { padding: 50 }
         );
 
         context.on('enter.intro', function(mode) {
@@ -390,9 +372,9 @@ export function uiIntroBuilding(context, reveal) {
             var node = selectMenuItem(context, 'orthogonalize').node();
             if (!wasChanged && !node) { return continueTo(rightClickHouse); }
 
-            revealEditMenu(menuCoords,
+            reveal('.edit-menu',
                 t('intro.buildings.square_building', { button: icon('#iD-operation-orthogonalize', 'pre-text') }),
-                { duration: 0 }
+                { duration: 0, padding: 50 }
             );
         });
 
@@ -694,10 +676,10 @@ export function uiIntroBuilding(context, reveal) {
         if (!node) { return continueTo(rightClickTank); }
 
         var wasChanged = false;
-        var menuCoords = context.map().mouseCoordinates();
 
-        revealEditMenu(menuCoords,
-            t('intro.buildings.circle_tank', { button: icon('#iD-operation-circularize', 'pre-text') })
+        reveal('.edit-menu',
+            t('intro.buildings.circle_tank', { button: icon('#iD-operation-circularize', 'pre-text') }),
+            { padding: 50 }
         );
 
         context.on('enter.intro', function(mode) {
@@ -712,9 +694,9 @@ export function uiIntroBuilding(context, reveal) {
             var node = selectMenuItem(context, 'circularize').node();
             if (!wasChanged && !node) { return continueTo(rightClickTank); }
 
-            revealEditMenu(menuCoords,
+            reveal('.edit-menu',
                 t('intro.buildings.circle_tank', { button: icon('#iD-operation-circularize', 'pre-text') }),
-                { duration: 0 }
+                { duration: 0, padding: 50 }
             );
         });
 

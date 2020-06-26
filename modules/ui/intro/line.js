@@ -6,7 +6,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t, localizer } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -53,24 +53,6 @@ export function uiIntroLine(context, reveal) {
     function eventCancel() {
         d3_event.stopPropagation();
         d3_event.preventDefault();
-    }
-
-
-    function revealEditMenu(loc, text, options) {
-        var rect = context.surfaceRect();
-        var point = context.curtainProjection(loc);
-        var pad = 40;
-        var width = 250 + (2 * pad);
-        var height = 350;
-        var startX = rect.left + point[0];
-        var left = (localizer.textDirection() === 'rtl') ? (startX - width + pad) : (startX - pad);
-        var box = {
-            left: left,
-            top: point[1] + rect.top - 60,
-            width: width,
-            height: height
-        };
-        reveal(box, text, options);
     }
 
 
@@ -707,20 +689,20 @@ export function uiIntroLine(context, reveal) {
         if (!node) { return continueTo(rightClickIntersection); }
 
         var wasChanged = false;
-        var menuCoords = context.map().mouseCoordinates();
         _washingtonSegmentID = null;
 
-        revealEditMenu(menuCoords, t('intro.lines.split_intersection',
-            { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') })
+        reveal('.edit-menu', t('intro.lines.split_intersection',
+            { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') }),
+            { padding: 50 }
         );
 
         context.map().on('move.intro drawn.intro', function() {
             var node = selectMenuItem(context, 'split').node();
             if (!wasChanged && !node) { return continueTo(rightClickIntersection); }
 
-            revealEditMenu(menuCoords, t('intro.lines.split_intersection',
+            reveal('.edit-menu', t('intro.lines.split_intersection',
                 { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') }),
-                { duration: 0 }
+                { duration: 0, padding: 50 }
             );
         });
 
@@ -984,15 +966,15 @@ export function uiIntroLine(context, reveal) {
         var node = selectMenuItem(context, 'delete').node();
         if (!node) return continueTo(multiRightClick);
 
-        var menuCoords = context.map().mouseCoordinates();
-        revealEditMenu(menuCoords,
-            t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') })
+        reveal('.edit-menu',
+            t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') }),
+            { padding: 50 }
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            revealEditMenu(menuCoords,
+            reveal('.edit-menu',
                 t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') }),
-                { duration: 0 }
+                { duration: 0, padding: 50 }
             );
         });
 

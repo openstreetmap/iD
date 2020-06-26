@@ -58,9 +58,11 @@ export function uiIntroNavigation(context, reveal) {
         timeout(function() {
             var centerStart = context.map().center();
 
-            reveal('.surface', t('intro.navigation.drag'));
+            var textId = context.lastPointerType() === 'mouse' ? 'drag' : 'drag_touch';
+
+            reveal('.surface', t('intro.navigation.' + textId));
             context.map().on('drawn.intro', function() {
-                reveal('.surface', t('intro.navigation.drag'), { duration: 0 });
+                reveal('.surface', t('intro.navigation.' + textId), { duration: 0 });
             });
 
             context.map().on('move.intro', function() {
@@ -83,8 +85,10 @@ export function uiIntroNavigation(context, reveal) {
     function zoomMap() {
         var zoomStart = context.map().zoom();
 
+        var textId = context.lastPointerType() === 'mouse' ? 'zoom' : 'zoom_touch';
+
         reveal('.surface',
-            t('intro.navigation.zoom', {
+            t('intro.navigation.' + textId, {
                 plus: icon('#iD-icon-plus', 'pre-text'),
                 minus: icon('#iD-icon-minus', 'pre-text')
             })
@@ -92,7 +96,7 @@ export function uiIntroNavigation(context, reveal) {
 
         context.map().on('drawn.intro', function() {
             reveal('.surface',
-                t('intro.navigation.zoom', {
+                t('intro.navigation.' + textId, {
                     plus: icon('#iD-icon-plus', 'pre-text'),
                     minus: icon('#iD-icon-minus', 'pre-text')
                 }), { duration: 0 }
@@ -183,13 +187,14 @@ export function uiIntroNavigation(context, reveal) {
             var entity = context.hasEntity(hallId);
             if (!entity) return;
             var box = pointBox(entity.loc, context);
-            reveal(box, t('intro.navigation.click_townhall'));
+            var textId = context.lastPointerType() === 'mouse' ? 'click_townhall' : 'tap_townhall';
+            reveal(box, t('intro.navigation.' + textId));
 
             context.map().on('move.intro drawn.intro', function() {
                 var entity = context.hasEntity(hallId);
                 if (!entity) return;
                 var box = pointBox(entity.loc, context);
-                reveal(box, t('intro.navigation.click_townhall'), { duration: 0 });
+                reveal(box, t('intro.navigation.' + textId), { duration: 0 });
             });
 
             context.on('enter.intro', function() {

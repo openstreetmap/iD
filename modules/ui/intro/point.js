@@ -32,24 +32,6 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    function revealEditMenu(loc, text, options) {
-        var rect = context.surfaceRect();
-        var point = context.curtainProjection(loc);
-        var pad = 40;
-        var width = 250 + (2 * pad);
-        var height = 250;
-        var startX = rect.left + point[0];
-        var left = (localizer.textDirection() === 'rtl') ? (startX - width + pad) : (startX - pad);
-        var box = {
-            left: left,
-            top: point[1] + rect.top - 60,
-            width: width,
-            height: height
-        };
-        reveal(box, text, options);
-    }
-
-
     function eventCancel() {
         d3_event.stopPropagation();
         d3_event.preventDefault();
@@ -95,11 +77,12 @@ export function uiIntroPoint(context, reveal) {
         }
 
         var pointBox = pad(building, 150, context);
-        reveal(pointBox, t('intro.points.place_point'));
+        var textId = context.lastPointerType() === 'mouse' ? 'place_point' : 'place_point_touch';
+        reveal(pointBox, t('intro.points.' + textId));
 
         context.map().on('move.intro drawn.intro', function() {
             pointBox = pad(building, 150, context);
-            reveal(pointBox, t('intro.points.place_point'), { duration: 0 });
+            reveal(pointBox, t('intro.points.' + textId), { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -385,14 +368,15 @@ export function uiIntroPoint(context, reveal) {
         context.enter(modeBrowse(context));
 
         var box = pointBox(entity.loc, context);
-        reveal(box, t('intro.points.rightclick'), { duration: 600 });
+        var textId = context.lastPointerType() === 'mouse' ? 'rightclick' : 'edit_menu_touch';
+        reveal(box, t('intro.points.' + textId), { duration: 600 });
 
         timeout(function() {
             context.map().on('move.intro', function() {
                 var entity = context.hasEntity(_pointID);
                 if (!entity) return chapter.restart();
                 var box = pointBox(entity.loc, context);
-                reveal(box, t('intro.points.rightclick'), { duration: 0 });
+                reveal(box, t('intro.points.' + textId), { duration: 0 });
             });
         }, 600); // after reveal
 
@@ -424,15 +408,16 @@ export function uiIntroPoint(context, reveal) {
         var node = selectMenuItem(context, 'delete').node();
         if (!node) { return continueTo(rightClickPoint); }
 
-        revealEditMenu(entity.loc,
-            t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') })
+        reveal('.edit-menu',
+            t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') }),
+            { padding: 50 }
         );
 
         timeout(function() {
             context.map().on('move.intro', function() {
-                revealEditMenu(entity.loc,
+                reveal('.edit-menu',
                     t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') }),
-                    { duration: 0}
+                    { duration: 0,  padding: 50 }
                 );
             });
         }, 300); // after menu visible
