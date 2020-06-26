@@ -1431,7 +1431,7 @@ en:
       choosing: "To see which imagery sources are available for editing, click the {layers} **Background settings** button on the side of the map."
       sources: "By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is chosen as the background image. Depending on where you are editing, other imagery sources will be available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference."
       offsets_h: "Adjusting Imagery Offset"
-      offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"Adjust Imagery Offset\" section at the bottom of the Background Settings pane."
+      offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"Imagery Offset\" section at the bottom of the Background Settings pane."
       offset_change: "Click on the small triangles to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
