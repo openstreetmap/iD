@@ -5401,8 +5401,22 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 }
 
 .edit-menu-item {
+    display: flex;
+    align-items: center;
     border-radius: 0;
-    /* width and height are set in edit_menu.js */
+    padding: 0 12px;
+    /* height is set in edit_menu.js */
+}
+.edit-menu-item .label {
+    max-width: 120px;
+    text-align: initial;
+    line-height: 1.1em;
+}
+.ideditor[dir='ltr'] .edit-menu-item .label {
+    margin-left: 8px;
+}
+.ideditor[dir='rtl'] .edit-menu-item .label {
+    margin-right: 8px;
 }
 
 .edit-menu-item use {
