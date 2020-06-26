@@ -823,7 +823,7 @@
         },
         "background": {
             "title": "Background",
-            "description": "Background settings",
+            "description": "Background Settings",
             "key": "B",
             "backgrounds": "Backgrounds",
             "none": "None",
@@ -1771,7 +1771,7 @@
                 "title": "Background Imagery",
                 "intro": "The background imagery that appears beneath the map data is an important resource for mapping. This imagery can be aerial photos collected from satellites, airplanes, and drones, or it can be scanned historical maps or other freely available source data.",
                 "sources_h": "Imagery Sources",
-                "choosing": "To see which imagery sources are available for editing, click the {layers} **Background settings** button on the side of the map.",
+                "choosing": "To see which imagery sources are available for editing, click the {layers} **Background Settings** button on the side of the map.",
                 "sources": "By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is chosen as the background image. Depending on where you are editing, other imagery sources will be available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference.",
                 "offsets_h": "Adjusting Imagery Offset",
                 "offset": "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"Adjust Imagery Offset\" section at the bottom of the Background Settings pane.",
