@@ -52,7 +52,7 @@ export function uiIntroStartEditing(context, reveal) {
         modalSelection = uiModal(context.container());
 
         modalSelection.select('.modal')
-            .attr('class', 'modal-splash modal col6');
+            .attr('class', 'modal-splash modal');
 
         modalSelection.selectAll('.close').remove();
 
