@@ -27,22 +27,30 @@ should fallback gracefully without breaking other aspects of the app.
 This table covers high-level compatibility, with individual features to be detailed
 elsewhere in this document.
 
-|   | Browser | Notes |
-|---|---|---|
-| ✅ | Chrome | |
-| ✅* | Firefox | *Minor known issues ([#7132]) |
-| ✅ | Safari | |
-| 🟩 | Opera | |
-| 🟩 | Edge | |
-| 🟠 | Internet Explorer | Infrequently tested. IE has been discontinued, but IE 11 is still maintained. iD polyfills ES6 features on IE 11, with varying success. |
-| 🟠 | Mobile browsers | iD has not yet been fully optimized for mobile devices, but some editing is usually possible. |
+|   |   | Browser | Notes | Issues |
+|---|---|---|---|---|
+| ✅ | ![chrome logo] | Chrome | |
+| ✅* | ![firefox logo] | Firefox | *Minor known issues | [#7132] |
+| ✅ | ![safari logo] | Safari | |
+| 🟩 | ![opera logo] | Opera | |
+| 🟩 | ![edge logo] | Edge | |
+| 🟠 | ![ie logo] | Internet Explorer | IE has been discontinued, but IE 11 is still maintained. iD polyfills ES6 features on IE 11, with varying success. |
+| 🟩 | 🌐 | Others | iD should run without issue on any desktop browser implementing modern web standards. |
+| 🟠 | 📱 |  Mobile browsers | iD has not yet been fully optimized for mobile devices, but some editing is usually possible. |
+
+[safari logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/30px-Safari_browser_logo.svg.png
+[opera logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Opera_browser_logo_2013_vector.svg/30px-Opera_browser_logo_2013_vector.svg.png
+[chrome logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/30px-Google_Chrome_icon_%28September_2014%29.svg.png
+[firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/30px-Firefox_logo%2C_2019.svg.png
+[edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/30px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
+[ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/30px-Internet_Explorer_10%2B11_logo.svg.png
 
 [#7132]: https://github.com/openstreetmap/iD/issues/7132
 
 ## Input Device Support
 
 iD has traditionally assumed the mapper will be interacting via a mouse and keyboard,
-but realistically people want or need to use various other input devices.
+but realistically people want or need to use various other [input devices](https://en.wikipedia.org/wiki/Input_device).
 
 ### Setups
 
