@@ -1,0 +1,22 @@
+{
+    "keys": ["handrail:left", "handrail:center", "handrail:right"],
+    "type": "handrail",
+    "placeholder": "unknown",
+    "strings": {
+        "types": {
+            "handrail:left": "Left side",
+            "handrail:center": "In the center"
+            "handrail:right": "Right side"
+        },
+        "options": {
+            "no": {
+                "title": "None",
+                "description": "No handrail"
+            },
+            "yes": {
+                "title": "Yes",
+                "description": "There is a handrail"
+            }
+        }
+    }
+}
