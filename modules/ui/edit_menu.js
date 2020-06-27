@@ -48,7 +48,16 @@ export function uiEditMenu(context) {
         var showLabels = isTouchMenu;
 
         var buttonHeight = showLabels ? 32 : 34;
-        var menuWidth = showLabels ? 172 : 44;
+        var menuWidth;
+        if (showLabels) {
+            // Get a general idea of the width based on the length of the label
+            menuWidth = 52 + Math.min(120, 6 * Math.max.apply(Math, ops.map(function(op) {
+                return op.title.length;
+            })));
+        } else {
+            menuWidth = 44;
+        }
+
         var menuLeft = displayOnLeft(viewport);
 
         offset[0] = menuLeft ? -1 * (_menuSideMargin + menuWidth) : _menuSideMargin;
