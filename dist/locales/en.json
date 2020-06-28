@@ -411,6 +411,7 @@
                     "vertex": "Moved a node in a way.",
                     "line": "Moved a line.",
                     "area": "Moved an area.",
+                    "relation": "Moved a relation.",
                     "multiple": "Moved multiple features."
                 },
                 "incomplete_relation": {
@@ -486,7 +487,8 @@
                 "annotation": {
                     "line": "Rotated a line.",
                     "area": "Rotated an area.",
-                    "multiple": "Rotated multiple features."
+                    "multiple": "Rotated multiple features.",
+                    "relation": "Rotated a relation."
                 },
                 "incomplete_relation": {
                     "single": "This feature can't be rotated because it hasn't been fully downloaded.",
