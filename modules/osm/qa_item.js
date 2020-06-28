@@ -20,7 +20,7 @@ export class QAItem {
   }
 
   update(props) {
-    // You can't override this inital information
+    // You can't override this initial information
     const { loc, service, itemType, id } = this;
 
     Object.keys(props).forEach(prop => this[prop] = props[prop]);

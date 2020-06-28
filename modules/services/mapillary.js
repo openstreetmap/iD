@@ -518,7 +518,7 @@ export default {
         //
         // There is some logic here to batch up clicks into a _mlyClicks array
         // because the user might click on a lot of markers quickly and nodechanged
-        // may be called out of order asychronously.
+        // may be called out of order asynchronously.
         //
         // Clicks are added to the array in `selectedImage` and removed here.
         //

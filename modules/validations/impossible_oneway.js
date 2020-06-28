@@ -46,11 +46,11 @@ export function validationImpossibleOneway() {
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
-            var occurences = 0;
+            var occurrences = 0;
             for (var index in way.nodes) {
                 if (way.nodes[index] === nodeID) {
-                    occurences += 1;
-                    if (occurences > 1) return true;
+                    occurrences += 1;
+                    if (occurrences > 1) return true;
                 }
             }
             return false;

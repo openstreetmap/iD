@@ -64,7 +64,7 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ shop: 'supermarket', name: 'Foo' });
     });
 
-    it('upgrades a tag with a wildcard replacement and replaces the exisiting "no" value', function () {
+    it('upgrades a tag with a wildcard replacement and replaces the existing "no" value', function () {
         var oldTags = { amenity: 'shop' },
             newTags = { shop: '*' },
             entity = iD.osmEntity({ tags: { amenity: 'shop', shop: 'no', name: 'Foo' }}),

@@ -75,7 +75,7 @@ export function coreLocalizer() {
         if (_loadPromise) return _loadPromise;
 
         return _loadPromise = Promise.all([
-                // load the list of langauges
+                // load the list of languages
                 fileFetcher.get('languages'),
                 // load the list of supported locales
                 fileFetcher.get('locales')
@@ -245,7 +245,7 @@ export function coreLocalizer() {
 
     localizer.languageName = (code, options) => {
 
-        if (_languageNames[code]) {  // name in locale langauge
+        if (_languageNames[code]) {  // name in locale language
           // e.g. "German"
           return _languageNames[code];
         }
@@ -260,9 +260,9 @@ export function coreLocalizer() {
             return localizer.t('translate.language_and_code', { language: langInfo.nativeName, code: code });
 
           } else if (langInfo.base && langInfo.script) {
-            const base = langInfo.base;   // the code of the langauge this is based on
+            const base = langInfo.base;   // the code of the language this is based on
 
-            if (_languageNames[base]) {   // base language name in locale langauge
+            if (_languageNames[base]) {   // base language name in locale language
               const scriptCode = langInfo.script;
               const script = _scriptNames[scriptCode] || scriptCode;
               // e.g. "Serbian (Cyrillic)"

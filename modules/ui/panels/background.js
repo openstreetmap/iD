@@ -128,7 +128,7 @@ export function uiPanelBackground(context) {
                 .selectAll('.background-info-span-vintage')
                 .text(metadata.vintage);
 
-            // update other metdata
+            // update other metadata
             metadataKeys.forEach(function(k) {
                 if (k === 'zoom' || k === 'vintage') return;  // done already
                 var val = result[k];
