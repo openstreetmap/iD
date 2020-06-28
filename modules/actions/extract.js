@@ -45,7 +45,10 @@ export function actionExtract(entityID) {
         var keysToRetain = ['area'];
         var buildingKeysToRetain = ['architect', 'building', 'height', 'layer'];
 
-        var centroid = d3_geoCentroid(entity.asGeoJSON(graph));
+        var extractedLoc = d3_geoCentroid(entity.asGeoJSON(graph));
+        if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
+            extractedLoc = entity.extent(graph).center();
+        }
 
         var isBuilding = entity.tags.building && entity.tags.building !== 'no';
 
@@ -87,7 +90,7 @@ export function actionExtract(entityID) {
             entityTags.area = 'yes';
         }
 
-        var replacement = osmNode({ loc: centroid, tags: pointTags });
+        var replacement = osmNode({ loc: extractedLoc, tags: pointTags });
         graph = graph.replace(replacement);
 
         extractedNodeID = replacement.id;
