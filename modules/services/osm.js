@@ -949,7 +949,7 @@ export default {
     // Calls `status` and dispatches an `apiStatusChange` event if the returned
     // status differs from the cached status.
     reloadApiStatus: function() {
-        // throttle to avoid unncessary API calls
+        // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
             var that = this;
             this.throttledReloadApiStatus = _throttle(function() {

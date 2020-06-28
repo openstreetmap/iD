@@ -453,12 +453,12 @@ export function validationCrossingWays(context) {
                 } else if (context.graph().geometry(this.entityIds[0]) === 'line' &&
                     context.graph().geometry(this.entityIds[1]) === 'line') {
 
-                    // don't recommend adding bridges to waterways since they're uncommmon
+                    // don't recommend adding bridges to waterways since they're uncommon
                     if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge'));
                     }
 
-                    // don't recommend adding tunnels under waterways since they're uncommmon
+                    // don't recommend adding tunnels under waterways since they're uncommon
                     var skipTunnelFix = otherFeatureType === 'waterway' && selectedFeatureType !== 'waterway';
                     if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));

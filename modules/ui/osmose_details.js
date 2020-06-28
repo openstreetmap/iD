@@ -65,7 +65,7 @@ export function uiOsmoseDetails(context) {
       .append('div')
         .attr('class', 'qa-details-subsection');
 
-    // Suggested Fix (musn't exist for every issue type)
+    // Suggested Fix (mustn't exist for every issue type)
     if (issueString(_qaItem, 'fix')) {
       const div = detailsEnter
         .append('div')
@@ -83,7 +83,7 @@ export function uiOsmoseDetails(context) {
           .attr('target', '_blank');
     }
 
-    // Common Pitfalls (musn't exist for every issue type)
+    // Common Pitfalls (mustn't exist for every issue type)
     if (issueString(_qaItem, 'trap')) {
       const div = detailsEnter
         .append('div')

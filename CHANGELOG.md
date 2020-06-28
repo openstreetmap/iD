@@ -830,7 +830,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Fix error upon changing the Unsquare Building threshold ([#6690])
 * Don't hide all multilingual names upon deleting one ([#6491])
 * Correctly populate the Bike Lanes field with existing values ([#6141])
-* Show the correct location for coordinates in the `N DD° MM.MMM' W DD° MM.MMM'` format without a commma separator ([#6582])
+* Show the correct location for coordinates in the `N DD° MM.MMM' W DD° MM.MMM'` format without a comma separator ([#6582])
 * Don't treat platforms with a `kerb` tag as primarily curbs ([#6742])
 * Remove deleted features from the map immediately when undoing or redoing ([#6480])
 * Properly resize Mapillary and Bing Streetside photos when resizing the viewer ([#6286])
@@ -1433,7 +1433,7 @@ _Map all the branded businesses in your town!_
 [#5901]: https://github.com/openstreetmap/iD/issues/5901
 
 #### :mortar_board: Walkthrough / Help
-- Make the keyboard shorcuts viewable on narrow window sizes ([#6174])
+- Make the keyboard shortcuts viewable on narrow window sizes ([#6174])
 
 [#6174]: https://github.com/openstreetmap/iD/issues/6174
 
@@ -1607,7 +1607,7 @@ _Map all the branded businesses in your town!_
 [#5979]: https://github.com/openstreetmap/iD/issues/5979
 
 #### :rocket: Presets
-* Add Bar field to Restuarant, Cafe, and Hotel ([#5947], [#5970], thanks [@alphagamer7])
+* Add Bar field to Restaurant, Cafe, and Hotel ([#5947], [#5970], thanks [@alphagamer7])
 * Rename Jeweler to Jewelry Store ([#5948])
 * Add unsearchable generic Boundary preset ([#5975])
 * Don't render roads with a "footway" tag too thin ([#5936])
@@ -1932,7 +1932,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 #### :sparkles: Usability
 
 * Open the combobox when clicking anywhere in the text field ([#5596], [#5636], thanks [@maxgrossman])
-* Add close buttom to the save sidebar ([#5614], [#5622], thanks [@maxgrossman])
+* Add close button to the save sidebar ([#5614], [#5622], thanks [@maxgrossman])
 * Render reservoirs and fountains with the water fill pattern ([#5606], thanks [@RudyTheDev])
 * Render marine barriers with a blue stroke ([#5606], thanks [@RudyTheDev])
 * Press enter to submit values in combo fields without deselecting the feature ([#5725])
@@ -3488,7 +3488,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 * Add Retail Building to buildings, switch Commercial icon to suitcase ([#4590])
 * Change tourist attraction icon from monument to star ([#4563], [#4584], thanks [@lucymk])
 * Add preset for `man_made=monitoring_station` ([#4581], thanks [@abdeldjalil09])
-* Deprectate (i.e. make non-searchable) `office=administrative` ([#4578])
+* Deprecate (i.e. make non-searchable) `office=administrative` ([#4578])
 * Update transit-related presets for Public Transport v2 schema ([#3041], [#3508], [#4566], [#4585])
 * Changed Marketplace preset to not default to `building=yes` ([#4559], [#4568], thanks [@tastrax])
 * Add preset for `railway=miniature` ([#4555], thanks [@tastrax])
@@ -5025,7 +5025,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 ##### 2016-Mar-18
 * Avoid jumpiness when dragging node markers (#3003)
 * Rename "Dock" -> "Wet Dock / Dry Dock" (#3030)
-* Refresh lables when switching to a new GPX file (#3032)
+* Refresh labels when switching to a new GPX file (#3032)
 * Fix bug where adding a space to a name would undo a previous edit (#3035)
 * Display GPX tracks immediately when loaded or toggled (#3027)
 * Include "Local GPX" in imagery used list when GPX loaded via url parameter (#2804)
@@ -5077,13 +5077,13 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add 'building' combo field for ice rink and swim facility
 * Building field should be combo not typeCombo (because `building=yes` is a valid tag)
 * Link to wiki for guidance on good changeset comments (#2923, thanks @kepta)
-* Make preset fields section collapsable (#2894)
+* Make preset fields section collapsible (#2894)
 * Make sure DrawLine mode is called with a clean pre-operation graph (#2303, thanks @tyrasd)
 * Default to user's language when localizing names (#2882, thanks @kepta)
 * Autocomplete changeset comments from previous changeset comments (#2002, thanks @jfirebaugh)
 * Add universal multiline text field for description, fixme (#1518)
 * Fix crash when selecting a category preset with enter button
-* Remove overly agressive regexes for cleaning up websites and emails (#2892, thanks @kepta)
+* Remove overly aggressive regexes for cleaning up websites and emails (#2892, thanks @kepta)
 * Correct typo "Platic" -> "Plastic" (#2925, thanks @M1dgard)
 * Rename "Unclassified Road" to "Minor Road" (#2916)
 
@@ -5433,7 +5433,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 ##### 2014-Mar-28
 * Disable circularize and orthogonalize operations when way is <80% contained in the viewport
 * Add place=neighbourhood preset
-* Add denomination=* field for cemetary, graveyard, funeral home
+* Add denomination=* field for cemetery, graveyard, funeral home
 * Add preset for shop=funeral_directors
 * Add icon for public_transport=stop_position
 * Support quartile scheme for any imagery source (#2112)
@@ -5451,7 +5451,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 * Add amenity=nightclub
 * Add smoking field for many presets under amenity, building, office, tourism (#1990)
 * barrier=fence shouldn't be an area (fixes #2158)
-* Remove building_area from hospital, school, kindergarden
+* Remove building_area from hospital, school, kindergarten
 * Fix recycling field keys (#2140)
 
 

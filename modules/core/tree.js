@@ -26,7 +26,7 @@ export function coreTree(head) {
 
     function segmentBBox(segment) {
         var extent = segment.extent(head);
-        // extent can be null if the node entites aren't in the graph for some reason
+        // extent can be null if the node entities aren't in the graph for some reason
         if (!extent) return null;
 
         var bbox = extent.bbox();

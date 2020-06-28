@@ -49,7 +49,7 @@ function updateRtree(item, replace) {
   }
 }
 
-// Issues shouldn't obscure eachother
+// Issues shouldn't obscure each other
 function preventCoincident(loc) {
   let coincident = false;
   do {

@@ -63,7 +63,7 @@ export function uiSectionRawMembershipEditor(context) {
 
 
     function changeRole(d) {
-        if (d === 0) return;    // called on newrow (shoudn't happen)
+        if (d === 0) return;    // called on newrow (shouldn't happen)
         if (_inChange) return;  // avoid accidental recursive call #5731
 
         var oldRole = d.member.role;
@@ -107,7 +107,7 @@ export function uiSectionRawMembershipEditor(context) {
 
     function deleteMembership(d) {
         this.blur();           // avoid keeping focus on the button
-        if (d === 0) return;   // called on newrow (shoudn't happen)
+        if (d === 0) return;   // called on newrow (shouldn't happen)
 
         // remove the hover-highlight styling
         utilHighlightEntities([d.relation.id], false, context);

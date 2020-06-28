@@ -324,7 +324,7 @@ export function modeDragNode(context) {
                 for (k = 0; k < rings.length; k++) {
                     if (k === activeIndex) continue;
 
-                    // make sure active ring doesnt cross passive rings
+                    // make sure active ring doesn't cross passive rings
                     if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {
                         return 'multipolygonRing';
                     }

@@ -727,7 +727,7 @@ button.add-note svg.icon {
     justify-content: flex-end;
 }
 
-/* Hide/Toggle collapsable sections (aka Disclosure)
+/* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
 .hide-toggle .icon.pre-text {
     vertical-align: text-top;

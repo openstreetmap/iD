@@ -419,7 +419,7 @@ describe('iD.Lanes', function() {
         expect(bothways.length).to.eql(0);
 
       });
-      it('should have corrent number of direction elements', function() {
+      it('should have correct number of direction elements', function() {
         var lanes = iD.osmWay({tags: { highway: 'residential', lanes: 5, 'lanes:backward': 1, 'lanes:both_ways': 1 }}).lanes().lanes;
         var forward = lanes.filter(function(l) {
           return l.direction === 'forward';
@@ -1018,7 +1018,7 @@ describe('iD.Lanes', function() {
                     highway: 'residential',
                     lanes: 5,
                     maxspeed: '30kmh',
-                    'maxspeed:lanes': '30|40|fourty|40|40'
+                    'maxspeed:lanes': '30|40|forty|40|40'
                 }
             }).lanes().metadata.maxspeedLanes;
             expect(maxspeedLanes.unspecified).to.deep.equal([
@@ -1029,7 +1029,7 @@ describe('iD.Lanes', function() {
                     highway: 'residential',
                     lanes: 5,
                     maxspeed: '30kmh',
-                    'maxspeed:lanes': '30|40|fourty|40|random'
+                    'maxspeed:lanes': '30|40|forty|40|random'
                 }
             }).lanes().metadata.maxspeedLanes;
 
@@ -1057,7 +1057,7 @@ describe('iD.Lanes', function() {
                     highway: 'residential',
                     lanes: 5,
                     maxspeed: '30kmh',
-                    'maxspeed:lanes': '30|40|fourty|40|40'
+                    'maxspeed:lanes': '30|40|forty|40|40'
                 }
             }).lanes().lanes;
             var maxspeedLanes = lanes.unspecified.map(function (l) {

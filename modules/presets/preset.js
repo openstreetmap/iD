@@ -91,7 +91,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (_this.suggestion) {
       let path = presetID.split('/');
       path.pop();  // remove brand name
-      // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+      // NOTE: insert an en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
       return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
     }
     return _this.t('name', { 'default': _this.originalName });

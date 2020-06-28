@@ -210,7 +210,7 @@ describe('iD.actionDisconnect', function () {
     });
 
     it('replaces later occurrences in a self-intersecting way', function() {
-        // Situtation:
+        // Situation:
         //  a --- b
         //   \   /
         //    \ /
@@ -233,7 +233,7 @@ describe('iD.actionDisconnect', function () {
     });
 
     it('disconnects a way with multiple intersection points', function() {
-        // Situtation:
+        // Situation:
         //  a == b -- c
         //       |    |
         //       e -- d
@@ -264,7 +264,7 @@ describe('iD.actionDisconnect', function () {
     });
 
     it('disconnects a shared non-closing node in an area', function() {
-        // Situtation:
+        // Situation:
         //  a -- b -- c
         //       |    |
         //       e -- d
@@ -291,7 +291,7 @@ describe('iD.actionDisconnect', function () {
     });
 
     it('disconnects the closing node of an area without breaking the area', function() {
-        // Situtation:
+        // Situation:
         // a --- b --- d
         //  \   / \   /
         //   \ /   \ /
@@ -324,7 +324,7 @@ describe('iD.actionDisconnect', function () {
     });
 
     it('disconnects multiple closing nodes of multiple areas without breaking the areas', function() {
-        // Situtation:
+        // Situation:
         // a --- b --- d
         //  \   / \   /
         //   \ /   \ /

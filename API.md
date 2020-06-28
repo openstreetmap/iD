@@ -177,7 +177,7 @@ iD is written in a modular style and bundled with [rollup.js](http://rollupjs.or
 which makes hot code replacement tricky.  (ES6 module exports are
 [immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
 Because of this, the parts of iD which are designed for customization are exported
-as live bound objects that can be overriden at runtime _before initializing the iD context_.
+as live bound objects that can be overridden at runtime _before initializing the iD context_.
 
 ### Services
 
@@ -219,7 +219,7 @@ iD.fileFetcher.cache().imagery = [{
 ```
 
 Each imagery source should have the following properties:
-* `id` - Unique identifier for this source (also used as a url paramater)
+* `id` - Unique identifier for this source (also used as a url parameter)
 * `name` - Display name for the source
 * `type` - Source type, currently only `tms` is supported
 * `template` - Url template, valid replacement tokens include:
