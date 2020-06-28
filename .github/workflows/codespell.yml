@@ -12,4 +12,5 @@ jobs:
       - uses: codespell-project/actions-codespell@master
         with:
           check_filenames: true
-          skip: ./.git
+          skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/locales.json,./data/address_formats.json,./dist/locales/,./docs/img/,./dist/img/
+          ignore_words_list: "nd,chancel"
