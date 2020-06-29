@@ -255,6 +255,7 @@ export function uiPaneHelp(context) {
         shift: uiCmd.display('⇧'),
         alt: uiCmd.display('⌥'),
         return: uiCmd.display('↵'),
+        space: t('shortcuts.key.space'),
         version: context.version,
         shortcuts_key: t('shortcuts.toggle.key'),
         save: t('save.title'),
@@ -276,6 +277,7 @@ export function uiPaneHelp(context) {
         relations: t('inspector.relations'),
         new_relation: t('inspector.new_relation'),
         background_settings: t('background.description'),
+        imagery_offset: t('background.fix_misalignment'),
         start_the_walkthrough: t('splash.walkthrough')
     };
 
