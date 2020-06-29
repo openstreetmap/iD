@@ -280,6 +280,7 @@ export function uiPaneHelp(context) {
         tags: t('inspector.tags'),
         relations: t('inspector.relations'),
         new_relation: t('inspector.new_relation'),
+        turn_restrictions: t('presets.fields.restrictions.label'),
         background_settings: t('background.description'),
         imagery_offset: t('background.fix_misalignment'),
         start_the_walkthrough: t('splash.walkthrough'),
