@@ -271,6 +271,10 @@ export function uiPaneHelp(context) {
         merge: t('operations.merge.title'),
         disconnect: t('operations.disconnect.title'),
         map_data: t('map_data.title'),
+        fields: t('inspector.fields'),
+        tags: t('inspector.tags'),
+        relations: t('inspector.relations'),
+        new_relation: t('inspector.new_relation'),
         background_settings: t('background.description'),
         start_the_walkthrough: t('splash.walkthrough')
     };

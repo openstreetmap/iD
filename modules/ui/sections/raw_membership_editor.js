@@ -33,7 +33,8 @@ export function uiSectionRawMembershipEditor(context) {
 
             var parents = context.graph().parentRelations(entity);
             var gt = parents.length > _maxMemberships ? '>' : '';
-            return t('inspector.relations_count', { count: gt + parents.slice(0, _maxMemberships).length });
+            var count = gt + parents.slice(0, _maxMemberships).length;
+            return t('inspector.title_count', { title: t('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 

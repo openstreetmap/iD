@@ -610,10 +610,11 @@ en:
     view_on_keepRight: View on keepright.at
     feature_type: Feature Type
     fields: Fields
-    tags_count: "Tags ({count})"
-    members_count: "Members ({count})"
-    relations_count: "Relations ({count})"
-    features_count: "Features ({count})"
+    tags: Tags
+    members: Members
+    relations: Relations
+    features: Features
+    title_count: "{title} ({count})"
     add_to_relation: Add to a relation
     new_relation: New relation...
     choose_relation: Choose a parent relation
@@ -1337,11 +1338,11 @@ en:
       type: "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from."
       type_picker: "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also click the {inspect} **Info** icon next to the feature type to learn more about it."
       fields_h: "Fields"
-      fields_all_fields: "The \"Fields\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
+      fields_all_fields: "The \"{fields}\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
       fields_example: "Each feature type will display different fields. For example, a road may display fields for its surface and speed limit, but a restaurant may display fields for the type of food it serves and the hours it is open."
       fields_add_field: "You can also click the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more."
       tags_h: "Tags"
-      tags_all_tags: "Below the fields section, you can expand the \"Tags\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
+      tags_all_tags: "Below the fields section, you can expand the \"{tags}\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
       tags_resources: "Editing a feature's tags requires intermediate knowledge about OpenStreetMap. You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) or [Taginfo](https://taginfo.openstreetmap.org/) to learn more about accepted OpenStreetMap tagging practices."
     points:
       title: Points
@@ -1398,8 +1399,8 @@ en:
       title: Relations
       intro: "A *relation* is a special type of feature in OpenStreetMap that groups together other features. The features that belong to a relation are called *members*, and each member can have a *role* in the relation."
       edit_relation_h: "Editing Relations"
-      edit_relation: "At the bottom of the feature editor, you can expand the \"Relations\" section to see if the selected feature is a member of any relations. You can then click on the relation to select and edit it."
-      edit_relation_add: "To add a feature to a relation, select the feature, then click the {plus} add button in the \"Relations\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"New relation...\" option."
+      edit_relation: "At the bottom of the feature editor, you can expand the \"{relations}\" section to see if the selected feature is a member of any relations. You can then click on the relation to select and edit it."
+      edit_relation_add: "To add a feature to a relation, select the feature, then click the {plus} add button in the \"{relations}\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"{new_relation}\" option."
       edit_relation_delete: "You can also click the {delete_icon} **{delete}** button to remove the selected feature from the relation. If you remove all of the members from a relation, the relation will be deleted automatically."
       maintain_relation_h: "Maintaining Relations"
       maintain_relation: "For the most part, iD will maintain relations automatically as you edit. You should take care when replacing features that might be members of relations. For example if you delete a section of road and draw a new section of road to replace it, you should add the new section to the same relations (routes, turn restrictions, etc.) as the original."
@@ -1414,10 +1415,10 @@ en:
       turn_restriction_editing: "In the \"Turn Restrictions\" field, click to select a \"from\" road, and see whether turns are allowed or restricted to any of the \"to\" roads. You can click on the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices."
       route_h: "Routes"
       route: "A *route* relation is a group of one or more line features that together form a route network, like a bus route, train route, or highway route."
-      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"Relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
       boundary_h: "Boundaries"
       boundary: "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
-      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"Relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
     notes:
       title: Notes
       intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data_icon} **{map_data}** panel to enable the OpenStreetMap notes layer."

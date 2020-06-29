@@ -33,7 +33,8 @@ export function uiSectionRawMemberEditor(context) {
             if (!entity) return '';
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
-            return t('inspector.members_count', { count: gt + entity.members.slice(0, _maxMembers).length });
+            var count = gt + entity.members.slice(0, _maxMembers).length;
+            return t('inspector.title_count', { title: t('inspector.members'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
