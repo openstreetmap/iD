@@ -2583,19 +2583,7 @@ img.tag-reference-wiki-image {
 }
 
 .form-field-input-member > input.member-role {
-    border-radius: 0 0 0 4px;
-}
-.ideditor[dir='rtl'] .form-field-input-member > input.member-role {
-    border-radius: 0 0 4px 0;
-}
-
-.member-incomplete .form-field-input-member > input.member-role,
-.ideditor[dir='rtl'] .member-incomplete .form-field-input-member > input.member-role {
     border-radius: 0 0 4px 4px;
-}
-
-.member-incomplete .member-delete {
-    display: none;
 }
 
 .member-row-new .member-entity-input {

@@ -191,6 +191,13 @@ export function uiSectionRawMemberEditor(context) {
 
                     label
                         .append('button')
+                        .attr('tabindex', -1)
+                        .attr('title', t('icons.remove'))
+                        .attr('class', 'remove member-delete')
+                        .call(svgIcon('#iD-operation-delete'));
+
+                    label
+                        .append('button')
                         .attr('class', 'member-zoom')
                         .attr('title', t('icons.zoom_to'))
                         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
@@ -234,13 +241,6 @@ export function uiSectionRawMemberEditor(context) {
             .property('type', 'text')
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
-
-        wrapEnter
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('title', t('icons.remove'))
-            .attr('class', 'remove form-field-button member-delete')
-            .call(svgIcon('#iD-operation-delete'));
 
         if (taginfo) {
             wrapEnter.each(bindTypeahead);
