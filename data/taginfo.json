@@ -2060,6 +2060,7 @@
     {"key": "building", "value": "family_house", "description": "🄳 ➜ building=house"},
     {"key": "building", "value": "home", "description": "🄳 ➜ building=house"},
     {"key": "building", "value": "household", "description": "🄳 ➜ building=house"},
+    {"key": "building", "value": "pavillion", "description": "🄳 ➜ building=pavilion"},
     {"key": "building:color", "description": "🄳 ➜ building:colour=*"},
     {"key": "building:height", "description": "🄳 ➜ height=*"},
     {"key": "building:material", "value": "Brick", "description": "🄳 ➜ building:material=brick"},
