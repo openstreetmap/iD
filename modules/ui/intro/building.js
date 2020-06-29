@@ -404,7 +404,7 @@ export function uiIntroBuilding(context, reveal) {
     function retryClickSquare() {
         context.enter(modeBrowse(context));
 
-        revealHouse(house, t('intro.buildings.retry_square'), {
+        revealHouse(house, t('intro.buildings.retry_square', { button: icon('#iD-operation-orthogonalize', 'pre-text') }), {
             buttonText: t('intro.ok'),
             buttonCallback: function() { continueTo(rightClickHouse); }
         });

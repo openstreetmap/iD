@@ -2024,7 +2024,7 @@ en:
       close: "**Hit escape or click the {button} button to close the feature editor.**"
       rightclick_building: "**Right-click to select the building you created and show the edit menu.**"
       square_building: "The house that you just added will look even better with perfectly square corners. **Press the {button} button to square the building shape.**"
-      retry_square: "You didn't press the Square button. Try again."
+      retry_square: "You didn't press the {button} button. Try again."
       done_square: "See how the corners of the building moved into place? Let's learn another useful trick."
       add_tank: "Next we'll trace this circular storage tank. **Press the {button} Area button to add a new area.**"
       start_tank: "Don't worry, you won't need to draw a perfect circle. Just draw an area inside the tank that touches its edge. **Click or press spacebar to place a starting node on the edge of the tank.**"
