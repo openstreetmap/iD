@@ -3763,7 +3763,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 .help-pane .toc {
-    width: 40%;
+    width: 100%;
+    max-width: 200px;
     float: right;
     margin-left: 20px;
     margin-bottom: 20px;
