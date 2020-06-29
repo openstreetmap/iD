@@ -271,6 +271,8 @@ export function uiPaneHelp(context) {
         return {
             title: t(helpkey + '.title'),
             html: marked(text.trim())
+                .replace(/<code>/g, '<kbd>')
+                .replace(/<\/code>/g, '<\/kbd>')
         };
     });
 
