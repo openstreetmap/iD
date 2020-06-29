@@ -2524,7 +2524,7 @@
             }
         },
         "shortcuts": {
-            "title": "Keyboard shortcuts",
+            "title": "Keyboard Shortcuts",
             "tooltip": "Show the keyboard shortcuts screen.",
             "toggle": {
                 "key": "?"

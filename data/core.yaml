@@ -2042,7 +2042,7 @@ en:
       save: "Don't forget to regularly save your changes!"
       start: "Start mapping!"
   shortcuts:
-    title: "Keyboard shortcuts"
+    title: "Keyboard Shortcuts"
     tooltip: "Show the keyboard shortcuts screen."
     toggle:
       key: '?'
