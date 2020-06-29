@@ -4664,8 +4664,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Craft'', separated by commas>'
       craft/agricultural_engines:
         # craft=agricultural_engines
-        name: Argricultural Engines Mechanic
-        terms: '<translate with synonyms or related terms for ''Argricultural Engines Mechanic'', separated by commas>'
+        name: Agricultural Engines Mechanic
+        # 'terms: combines,farm equipment,harvesters,tractors'
+        terms: '<translate with synonyms or related terms for ''Agricultural Engines Mechanic'', separated by commas>'
       craft/basket_maker:
         # craft=basket_maker
         name: Basket Maker

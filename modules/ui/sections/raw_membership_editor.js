@@ -61,6 +61,16 @@ export function uiSectionRawMembershipEditor(context) {
         context.enter(modeSelect(context, [d.relation.id]));
     }
 
+    function zoomToRelation(d) {
+        d3_event.preventDefault();
+
+        var entity = context.entity(d.relation.id);
+        context.map().zoomToEase(entity);
+
+        // highlight the relation in case it wasn't previously on-screen
+        utilHighlightEntities([d.relation.id], true, context);
+    }
+
 
     function changeRole(d) {
         if (d === 0) return;    // called on newrow (shoudn't happen)
@@ -236,14 +246,16 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'field-label')
             .attr('for', function(d) {
                 return d.domId;
-            })
+            });
+
+        var labelLink = labelEnter
             .append('span')
             .attr('class', 'label-text')
             .append('a')
             .attr('href', '#')
             .on('click', selectRelation);
 
-        labelEnter
+        labelLink
             .append('span')
             .attr('class', 'member-entity-type')
             .text(function(d) {
@@ -251,10 +263,24 @@ export function uiSectionRawMembershipEditor(context) {
                 return (matched && matched.name()) || t('inspector.relation');
             });
 
-        labelEnter
+        labelLink
             .append('span')
             .attr('class', 'member-entity-name')
             .text(function(d) { return utilDisplayName(d.relation); });
+
+        labelEnter
+            .append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'remove member-delete')
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', deleteMembership);
+
+        labelEnter
+            .append('button')
+            .attr('class', 'member-zoom')
+            .attr('title', t('icons.zoom_to'))
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
+            .on('click', zoomToRelation);
 
         var wrapEnter = itemsEnter
             .append('div')
@@ -272,13 +298,6 @@ export function uiSectionRawMembershipEditor(context) {
             .property('value', function(d) { return d.member.role; })
             .on('blur', changeRole)
             .on('change', changeRole);
-
-        wrapEnter
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'remove form-field-button member-delete')
-            .call(svgIcon('#iD-operation-delete'))
-            .on('click', deleteMembership);
 
         if (taginfo) {
             wrapEnter.each(bindTypeahead);

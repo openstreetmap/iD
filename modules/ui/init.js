@@ -59,6 +59,9 @@ export function uiInit(context) {
 
         container
             .on('click.ui', function() {
+                // we're only concerned with the primary mouse button
+                if (d3_event.button !== 0) return;
+
                 if (!d3_event.composedPath) return;
 
                 // some targets have default click events we don't want to override

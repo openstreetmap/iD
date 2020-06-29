@@ -248,6 +248,10 @@
     "replace": {"building": "house"}
   },
   {
+    "old": {"building": "pavillion"},
+    "replace": {"building": "pavilion"}
+  },
+  {
     "old": {"building:color": "*"},
     "replace": {"building:colour": "$1"}
   },
