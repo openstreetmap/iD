@@ -6706,8 +6706,8 @@
                     "name": "Tailor"
                 },
                 "craft/agricultural_engines": {
-                    "name": "Argricultural Engines Mechanic",
-                    "terms": ""
+                    "name": "Agricultural Engines Mechanic",
+                    "terms": "combines,farm equipment,harvesters,tractors"
                 },
                 "craft/basket_maker": {
                     "name": "Basket Maker",
