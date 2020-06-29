@@ -232,31 +232,35 @@ export function uiPaneHelp(context) {
     };
 
     var replacements = {
+        // insert icons corresponding to various UI elements
         point_icon: icon('#iD-icon-point', 'pre-text'),
         line_icon: icon('#iD-icon-line', 'pre-text'),
         area_icon: icon('#iD-icon-area', 'pre-text'),
         note_icon: icon('#iD-icon-note', 'pre-text add-note'),
         plus: icon('#iD-icon-plus', 'pre-text'),
         minus: icon('#iD-icon-minus', 'pre-text'),
-        orthogonalize_icon: icon('#iD-operation-orthogonalize', 'pre-text'),
-        disconnect_icon: icon('#iD-operation-disconnect', 'pre-text'),
+        move_icon: icon('#iD-operation-move', 'pre-text operation'),
+        merge_icon: icon('#iD-operation-merge', 'pre-text operation'),
+        delete_icon: icon('#iD-operation-delete', 'pre-text operation'),
+        orthogonalize_icon: icon('#iD-operation-orthogonalize', 'pre-text operation'),
+        disconnect_icon: icon('#iD-operation-disconnect', 'pre-text operation'),
         layers_icon: icon('#iD-icon-layers', 'pre-text'),
         data_icon: icon('#iD-icon-data', 'pre-text'),
         inspect: icon('#iD-icon-inspect', 'pre-text'),
-        move_icon: icon('#iD-operation-move', 'pre-text'),
-        merge_icon: icon('#iD-operation-merge', 'pre-text'),
-        delete_icon: icon('#iD-operation-delete', 'pre-text'),
         close: icon('#iD-icon-close', 'pre-text'),
         undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
         redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
         save_icon: icon('#iD-icon-save', 'pre-text'),
         leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
         rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
+
+        // insert localized, platform-dependent keys
         shift: uiCmd.display('⇧'),
         alt: uiCmd.display('⌥'),
         return: uiCmd.display('↵'),
         space: t('shortcuts.key.space'),
-        version: context.version,
+
+        // reference localized UI labels directly so that they'll always match
         shortcuts_key: t('shortcuts.toggle.key'),
         save: t('save.title'),
         undo: t('undo.title'),
@@ -278,7 +282,10 @@ export function uiPaneHelp(context) {
         new_relation: t('inspector.new_relation'),
         background_settings: t('background.description'),
         imagery_offset: t('background.fix_misalignment'),
-        start_the_walkthrough: t('splash.walkthrough')
+        start_the_walkthrough: t('splash.walkthrough'),
+
+        // insert iD's version number
+        version: context.version
     };
 
     // For each section, squash all the texts into a single markdown document
@@ -294,6 +301,7 @@ export function uiPaneHelp(context) {
         return {
             title: t(helpkey + '.title'),
             html: marked(text.trim())
+                // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
                 .replace(/<\/code>/g, '<\/kbd>')
         };

@@ -406,6 +406,15 @@ button[disabled].action {
     height: 20px;
 }
 
+.icon.operation use {
+    fill: #222;
+    color: #79f;
+}
+.icon.operation.disabled use {
+    fill: rgba(32,32,32,.2);
+    color: rgba(40,40,40,.2);
+}
+
 .icon.monochrome use {
     fill: currentColor;
 }
@@ -4387,11 +4396,6 @@ img.tile-debug {
 .flash-icon use {
     color: #222;
 }
-
-.flash-icon.operation use {
-    fill: #222;
-    color: #79f;
-}
 .flash-icon.disabled use,
 .flash-icon.operation.disabled use {
     fill: rgba(32,32,32,0.7);
@@ -5395,15 +5399,8 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 }
 
 .edit-menu-item use {
-    fill: #222;
-    color: #79f;
     pointer-events: none;
 }
-.edit-menu-item.disabled use {
-    fill: rgba(32,32,32,.2);
-    color: rgba(40,40,40,.2);
-}
-
 
 /* Lasso
 ------------------------------------------------------- */

@@ -119,7 +119,7 @@ export function uiEditMenu(context) {
                 )
                 .append('div')
                 .attr('class', 'icon-wrap')
-                .call(svgIcon('#iD-operation-' + d.id, 'operation-icon'));
+                .call(svgIcon('#iD-operation-' + d.id, 'operation'));
         });
 
         if (showLabels) {

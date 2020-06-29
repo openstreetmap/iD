@@ -7,7 +7,7 @@ export function uiFlash(context) {
     var _iconName = '#iD-icon-no';
     var _iconClass = 'disabled';
     var _text = '';
-    var _textClass;    
+    var _textClass;
 
     function flash() {
         if (_flashTimer) {
@@ -31,7 +31,7 @@ export function uiFlash(context) {
 
         var iconEnter = contentEnter
             .append('svg')
-            .attr('class', 'flash-icon')
+            .attr('class', 'flash-icon icon')
             .append('g')
             .attr('transform', 'translate(10,10)');
 
@@ -56,7 +56,7 @@ export function uiFlash(context) {
 
         content
             .selectAll('.flash-icon')
-            .attr('class', 'flash-icon ' + (_iconClass || ''));
+            .attr('class', 'icon flash-icon ' + (_iconClass || ''));
 
         content
             .selectAll('.flash-icon use')
