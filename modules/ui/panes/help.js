@@ -259,9 +259,10 @@ export function uiPaneHelp(context) {
         alt: uiCmd.display('⌥'),
         return: uiCmd.display('↵'),
         space: t('shortcuts.key.space'),
+        add_note_key: t('modes.add_note.key'),
+        shortcuts_key: t('shortcuts.toggle.key'),
 
         // reference localized UI labels directly so that they'll always match
-        shortcuts_key: t('shortcuts.toggle.key'),
         save: t('save.title'),
         undo: t('undo.title'),
         redo: t('redo.title'),

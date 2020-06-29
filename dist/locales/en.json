@@ -1765,7 +1765,7 @@
                 "title": "Notes",
                 "intro": "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data_icon} **{map_data}** panel to enable the OpenStreetMap notes layer.",
                 "add_note_h": "Adding Notes",
-                "add_note": "To add a new note, click the {note_icon} **{note}** button on the toolbar above the map, or press the shortcut key `4`. This will change the mouse cursor to a cross symbol. To place the new note on the map, position the mouse cursor where the note should go, then {leftclick} left-click or press `{space}`.",
+                "add_note": "To add a new note, click the {note_icon} **{note}** button on the toolbar above the map, or press the shortcut key `{add_note_key}`. This will change the mouse cursor to a cross symbol. To place the new note on the map, position the mouse cursor where the note should go, then {leftclick} left-click or press `{space}`.",
                 "move_note": "Only new notes can be moved. To move a note, place the mouse cursor over the new note, then press and hold the {leftclick} left mouse button while dragging the note to its new location.",
                 "update_note_h": "Closing, Reopening, and Commenting",
                 "update_note": "An existing note can be updated by closing it, reopening it, or adding a comment to it. Closing a note indicates that the problem has been resolved. Reopening a note indicates that the original issue is not resolved.",
