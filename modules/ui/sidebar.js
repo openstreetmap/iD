@@ -38,7 +38,7 @@ export function uiSidebar(context) {
 
     function sidebar(selection) {
         var container = context.container();
-        var minWidth = 280;
+        var minWidth = 240;
         var sidebarWidth;
         var containerWidth;
         var dragOffset;

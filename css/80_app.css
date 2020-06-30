@@ -176,6 +176,7 @@ input[type=email] {
     height: 30px;
     border-radius: 4px;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 .ideditor[dir='rtl'] textarea,
 .ideditor[dir='rtl'] input[type=text],
@@ -902,7 +903,6 @@ a.hide-toggle {
     width: 100%;
 }
 .no-results-item,
-.geocode-item,
 .feature-list-item {
     width: 100%;
     position: relative;
@@ -911,11 +911,13 @@ a.hide-toggle {
 }
 
 .geocode-item {
-    width: 50%;
+    width: 100%;
+    max-width: 200px;
     background-color: #ccc;
-    left: 25%;
-    margin-top: 30px;
-    border-radius: 2px;
+    margin: 30px auto;
+    padding: 5px;
+    height: auto;
+    min-height: 40px;
 }
 
 .ideditor[dir='rtl'] .geocode-item {
@@ -2310,7 +2312,7 @@ div.combobox {
 
 .more-fields input {
     margin-left: 10px;
-    flex: 1 1 50%;
+    flex: 1 1 auto;
 }
 .ideditor[dir='rtl'] .more-fields input {
     margin-left: auto;
