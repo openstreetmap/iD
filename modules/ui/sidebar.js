@@ -59,6 +59,8 @@ export function uiSidebar(context) {
         function pointerdown() {
             if (downPointerId) return;
 
+            if ('button' in d3_event && d3_event.button !== 0) return;
+
             downPointerId = d3_event.pointerId || 'mouse';
 
             lastClientX = d3_event.clientX;
