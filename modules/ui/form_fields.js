@@ -76,11 +76,16 @@ export function uiFormFields(context) {
         more.exit()
             .remove();
 
-        more = more.enter()
+        var moreEnter = more.enter()
             .append('div')
             .attr('class', 'more-fields')
-            .append('label')
-            .text(t('inspector.add_fields'))
+            .append('label');
+
+        moreEnter
+            .append('span')
+            .text(t('inspector.add_fields'));
+
+        more = moreEnter
             .merge(more);
 
 

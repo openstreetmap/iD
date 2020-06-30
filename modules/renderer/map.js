@@ -641,7 +641,6 @@ export function rendererMap(context) {
     function resetTransform() {
         if (!_isTransformed) return false;
 
-        supersurface.selectAll('.edit-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         _isTransformed = false;
         if (context.inIntro()) {
