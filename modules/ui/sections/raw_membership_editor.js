@@ -316,14 +316,26 @@ export function uiSectionRawMembershipEditor(context) {
             .append('li')
             .attr('class', 'member-row member-row-new form-field');
 
-        newMembershipEnter
+        var newLabelEnter = newMembershipEnter
             .append('label')
-            .attr('class', 'field-label')
+            .attr('class', 'field-label');
+
+        newLabelEnter
             .append('input')
             .attr('placeholder', t('inspector.choose_relation'))
             .attr('type', 'text')
             .attr('class', 'member-entity-input')
             .call(utilNoAuto);
+
+        newLabelEnter
+            .append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'remove member-delete')
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', function() {
+                list.selectAll('.member-row-new')
+                    .remove();
+            });
 
         var newWrapEnter = newMembershipEnter
             .append('div')
@@ -335,16 +347,6 @@ export function uiSectionRawMembershipEditor(context) {
             .property('type', 'text')
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
-
-        newWrapEnter
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'remove form-field-button member-delete')
-            .call(svgIcon('#iD-operation-delete'))
-            .on('click', function() {
-                list.selectAll('.member-row-new')
-                    .remove();
-            });
 
         // Update
         newMembership = newMembership
