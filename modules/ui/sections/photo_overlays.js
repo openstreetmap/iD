@@ -4,7 +4,6 @@ import {
 
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 
 export function uiSectionPhotoOverlays(context) {
@@ -92,17 +91,6 @@ export function uiSectionPhotoOverlays(context) {
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
                 return t(id.replace(/-/g, '_') + '.title');
             });
-
-        labelEnter
-            .filter(function(d) { return d.id === 'mapillary-map-features'; })
-            .append('a')
-            .attr('class', 'request-data-link')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .call(svgIcon('#iD-icon-out-link', 'inline'))
-            .attr('href', 'https://mapillary.github.io/mapillary_solutions/data-request')
-            .append('span')
-            .text(t('mapillary_map_features.request_data'));
 
 
         // Update
