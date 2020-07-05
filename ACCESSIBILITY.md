@@ -28,7 +28,7 @@ should fallback gracefully without breaking other aspects of the app.
 This table covers high-level compatibility, with individual features to be detailed
 elsewhere in this document.
 
-|   |   | Browser | Notes | Issues |
+|   | Icon | Browser | Notes | Issues |
 |---|---|---|---|---|
 | ✅ | ![chrome logo] | [Chrome](https://en.wikipedia.org/wiki/Google_Chrome) | |
 | ✅* | ![firefox logo] | [Firefox](https://en.wikipedia.org/wiki/Firefox) | \*Minor known issues | [#7132] |
@@ -66,7 +66,7 @@ highest-functioning setup (generally mouse and keyboard).
 Certain functions may be accessed differently on different setups,
 such as opening the edit menu via long-pressing instead of right-clicking.
 
-|   |   | Input Setup | Notes |
+|   | Icon | Input Setup | Notes |
 |---|---|---|---|
 | ✅ | 🖱⌨️ | [Mouse](https://en.wikipedia.org/wiki/Computer_mouse) + [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | iD's original input paradigm. Any mouse-like device such as a [trackpad](https://en.wikipedia.org/wiki/Touchpad), [trackball](https://en.wikipedia.org/wiki/Trackball), or [pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) is grouped into "mouse" for this table |
 | ❌ | ⌨️   | Keyboard only | Not all elements can necessarily be keyed to. Key traps may exists. Geometry editing isn't possible |
@@ -86,7 +86,7 @@ This table details iD's support for specific classes of input devices.
 
 It's impractical to ensure every single input device works as expected, so the table only reflects the support status to the best of our knowledge.
 
-|   |   | Input Device | Notes | Issues |
+|   | Icon | Input Device | Notes | Issues |
 |---|---|---|---|---|
 | ✅ | ![apple adb mouse] | Single-button mouse | Primary click (e.g. left-click) can be used for all pointer interactions. Long-clicking on map features opens the edit menu |
 | ✅ | ![ibm mouse] | Multi-button mouse | Secondary click (e.g. right-click) can be used on map features to open the edit menu. Middle click, etc., are not needed by iD but are passed through to the browser |
