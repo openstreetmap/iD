@@ -8,7 +8,7 @@ follow [universal design](https://en.wikipedia.org/wiki/Universal_design) princi
 
 This is a living document that details the usability of iD across a number of dimensions,
 with the intent of identifying and addressing problem areas. Since there are always more
-factors to consider, no part of this document should be considered "complete".
+factors to consider, no part of this document should be considered complete.
 
 Symbols used in this document:
 
@@ -30,14 +30,14 @@ elsewhere in this document.
 
 |   |   | Browser | Notes | Issues |
 |---|---|---|---|---|
-| ✅ | ![chrome logo] | Chrome | |
-| ✅* | ![firefox logo] | Firefox | \*Minor known issues | [#7132] |
-| ✅ | ![safari logo] | Safari | |
-| 🟩 | ![opera logo] | Opera | |
-| 🟩 | ![edge logo] | Edge | |
-| 🟠 | ![ie logo] | Internet Explorer | IE has been discontinued, but IE 11 is still maintained. iD polyfills ES6 features on IE 11, with varying success. |
-| 🟩 | 🌐 | Others | iD should run without issue on any desktop browser implementing modern web standards. |
-| 🟠 | 📱 |  Mobile browsers | iD has not yet been fully optimized for mobile devices, but some editing is usually possible. |
+| ✅ | ![chrome logo] | [Chrome](https://en.wikipedia.org/wiki/Google_Chrome) | |
+| ✅* | ![firefox logo] | [Firefox](https://en.wikipedia.org/wiki/Firefox) | \*Minor known issues | [#7132] |
+| ✅ | ![safari logo] | [Safari](https://en.wikipedia.org/wiki/Safari_(web_browser)) | |
+| 🟩 | ![opera logo] | [Opera](https://en.wikipedia.org/wiki/Opera_(web_browser)) | |
+| 🟩 | ![edge logo] | [Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) | |
+| 🟠 | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD polyfills ES6 features on IE 11, with varying success |
+| 🟩 | 🌐 | Others | iD should run without issue on any desktop browser implementing [modern web standards](https://www.w3.org/standards/) |
+| 🟠 | 📱 |  [Mobile browsers](https://en.wikipedia.org/wiki/Mobile_browser) | iD has not yet been fully optimized for mobile devices, but some editing is usually possible |
 
 [safari logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/30px-Safari_browser_logo.svg.png
 [opera logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Opera_browser_logo_2013_vector.svg/30px-Opera_browser_logo_2013_vector.svg.png
@@ -71,8 +71,8 @@ such as opening the edit menu via long-pressing instead of right-clicking.
 | ✅ | 🖱⌨️ | [Mouse](https://en.wikipedia.org/wiki/Computer_mouse) + [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | iD's original input paradigm. Any mouse-like device such as a [trackpad](https://en.wikipedia.org/wiki/Touchpad), [trackball](https://en.wikipedia.org/wiki/Trackball), or [pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) is grouped into "mouse" for this table |
 | ❌ | ⌨️   | Keyboard only | Not all elements can necessarily be keyed to. Key traps may exists. Geometry editing isn't possible |
 | 🟠 | 🖱  | Mouse only | The primary [mouse button](https://en.wikipedia.org/wiki/Mouse_button) (e.g. left click) alone is sufficient. Multiselection and disabling of node-snapping aren't possible |
-| 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Move and rotate aren't possible |
-| 🟠 | ✍️   | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) on a touchscreen | Move, rotate, and multiselection aren't possible |
+| 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Moving and rotating selections isn't possible |
+| 🟠 | ✍️   | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) on a touchscreen | Moving and rotating selections isn't possible, nor is selecting multiple features |
 | 🤷 | ✍️🔲 | Stylus on a [graphics tablet](https://en.wikipedia.org/wiki/Graphics_tablet) | |
 | 🤷 | 🎮  | [Gamepad](https://en.wikipedia.org/wiki/Gamepad) | |
 | 🤷 | 🗣  | [Voice](https://en.wikipedia.org/wiki/Voice_user_interface) | Tools like [Voice Control on macOS](https://support.apple.com/en-us/HT210539) and [Windows Speech Recognition](https://en.wikipedia.org/wiki/Windows_Speech_Recognition) allow navigating webpages with voice commands to some degree |
@@ -82,23 +82,33 @@ such as opening the edit menu via long-pressing instead of right-clicking.
 
 This table details iD's support for specific classes of input devices.
 
-"Full support" for a device means that iD reasonably handles its entire range of input on supported platforms. But unlike the "setups" table above, a given device is not necessarily expected to perform all of iD's functions.
+"Full support" for a device means that iD reasonably handles its entire range of input on supported platforms. But unlike the "Setups" table above, a given device is not necessarily expected to perform all of iD's functions.
 
 It's impractical to ensure every single input device works as expected, so the table only reflects the support status to the best of our knowledge.
 
-|   | Input Device | Notes | Issues |
-|---|---|---|---|
-| ✅ | Single-button mouse | E.g. [Chester Mouse](https://duckduckgo.com/?q=chester+one+button+mouse&iar=images&iax=images&ia=images). Primary click (e.g. left-click) can be used for all pointer interactions. A long-click on map features opens the edit menu |
-| ✅ | Multi-button mouse | Secondary click (e.g. right-click) can be used on map features to open the edit menu. Middle click, etc., are not needed by iD but are passed through to the browser |
-| ✅ | Multi-touch mouse | E.g. [Magic Mouse](https://en.wikipedia.org/wiki/Magic_Mouse). 2D scrolling in the map is treated as panning, not zooming |
-| 🟠 | Vertical [scroll wheel](https://en.wikipedia.org/wiki/Scroll_wheel) | Should zoom the map in and out | [#5550](https://github.com/openstreetmap/iD/issues/5550) | 
-| ❌ | Horizontal scroll wheel | Currently does nothing in the map | [#7134](https://github.com/openstreetmap/iD/issues/7134) |
-| 🤷 | Scroll ball | E.g. in [Apple Mighty Mouse](https://en.wikipedia.org/wiki/Apple_Mighty_Mouse) |
-| 🟩 | Trackball | |
-| 🟩 | Trackpad | |
-| ✅ | Multi-touch trackpad | E.g. [Magic Trackpad](https://en.wikipedia.org/wiki/Magic_Trackpad). Pinch-to-zoom and scroll-to-pan are supported in the map |
-| 🟩 | Pointing stick | |
-| ✅ | Keyboard | |
+|   |   | Input Device | Notes | Issues |
+|---|---|---|---|---|
+| ✅ | ![apple adb mouse] | Single-button mouse | Primary click (e.g. left-click) can be used for all pointer interactions. Long-clicking on map features opens the edit menu |
+| ✅ | ![ibm mouse] | Multi-button mouse | Secondary click (e.g. right-click) can be used on map features to open the edit menu. Middle click, etc., are not needed by iD but are passed through to the browser |
+| ✅ | [![magic mouse]](https://en.wikipedia.org/wiki/Magic_Mouse) | Multi-touch mouse | 2D scrolling in the map is treated as panning, not zooming |
+| 🟠 | ![vertical scroll wheel] | Vertical [scroll wheel](https://en.wikipedia.org/wiki/Scroll_wheel) | Should zoom the map in and out | [#5550](https://github.com/openstreetmap/iD/issues/5550) | 
+| ❌ |  | Horizontal scroll wheel | Currently does nothing in the map | [#7134](https://github.com/openstreetmap/iD/issues/7134) |
+| 🤷 | [![apple mighty mouse]](https://en.wikipedia.org/wiki/Apple_Mighty_Mouse) | Scroll ball | |
+| 🟩 | 🖲 | Trackball | |
+| 🟩 | ![touchpad] | Trackpad | |
+| ✅ | [![macbook trackpad]](https://en.wikipedia.org/wiki/Magic_Trackpad) | Multi-touch trackpad | Pinch-to-zoom and scroll-to-pan are supported in the map |
+| 🟩 | ![pointing stick] | Pointing stick | |
+| ✅ | ⌨️ | Keyboard | |
+
+[ibm mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Myszka_IBM.jpg/40px-Myszka_IBM.jpg
+[apple adb mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Apple-ADB-mouse.jpg/70px-Apple-ADB-mouse.jpg
+[apple mighty mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Apple_Mighty_Mouse_top_viewo.jpg/35px-Apple_Mighty_Mouse_top_viewo.jpg
+[vertical scroll wheel]: https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Razer_DeathAdder_2013_Edition-mouse_wheel_PNr%C2%B00405.jpg/50px-Razer_DeathAdder_2013_Edition-mouse_wheel_PNr%C2%B00405.jpg
+[magic mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Magic_Mouse.jpg/70px-Magic_Mouse.jpg
+[pointing stick]: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Mouse_pointing_stick.jpeg/70px-Mouse_pointing_stick.jpeg
+[touchpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Touchpad_F3JA.jpg/70px-Touchpad_F3JA.jpg
+[macbook trackpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/MacBook_Pro%27s_trackpad.JPG/70px-MacBook_Pro%27s_trackpad.JPG
+
 
 ## Language Support
 
@@ -117,6 +127,7 @@ for more info.
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
 | ❌ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
 | ❌ | Custom fallback language | If the preferred language is incomplete, a user-specified one should be tried before `en` (e.g. `kk` → `ru`) |
+| ❌ | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages |
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
 | 🟩 | Right-to-left layouts | Used for languages like Hebrew and Arabic |
 
