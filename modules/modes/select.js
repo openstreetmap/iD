@@ -487,6 +487,8 @@ export function modeSelect(context, selectedIDs) {
 
     mode.exit = function() {
 
+        _newFeature = false;
+
         _operations.forEach(function(operation) {
             if (operation.behavior) {
                 context.uninstall(operation.behavior);

@@ -238,7 +238,8 @@ export function uiSidebar(context) {
                 if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
-                        .entityIDs([datum.id]);
+                        .entityIDs([datum.id])
+                        .newFeature(false);
 
                     inspectorWrap
                         .call(inspector);
@@ -300,7 +301,7 @@ export function uiSidebar(context) {
                         .newFeature(newFeature);
 
                     inspectorWrap
-                        .call(inspector, newFeature);
+                        .call(inspector);
                 }
 
             } else {
