@@ -261,7 +261,7 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
-        var selector = '.entity-editor-pane button.preset-close svg use';
+        var selector = '.entity-editor-pane button.close svg use';
         var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         context.on('exit.intro', function() {

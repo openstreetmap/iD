@@ -507,6 +507,14 @@ button[disabled].action {
 .ideditor[dir='rtl'] .top-toolbar .toolbar-item:last-child .item-content {
     margin-left: 10px;
 }
+.ideditor[dir='ltr'] .top-toolbar .toolbar-item:last-child .item-label,
+.ideditor[dir='rtl'] .top-toolbar .toolbar-item:first-child .item-label {
+    padding-right: 5px;
+}
+.ideditor[dir='ltr'] .top-toolbar .toolbar-item:first-child .item-label,
+.ideditor[dir='rtl'] .top-toolbar .toolbar-item:last-child .item-label {
+    padding-left: 5px;
+}
 .top-toolbar .toolbar-item .item-label {
     text-align: center;
     font-size: 11px;
@@ -623,15 +631,17 @@ button.add-note svg.icon {
     border-bottom: 1px solid #ccc;
     height: 60px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header h3 {
     text-align: center;
     margin-bottom: 0;
-    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    padding: 20px;
+    padding: 0;
 }
 
 .header button,
@@ -648,20 +658,14 @@ button.add-note svg.icon {
 }
 
 .field-help-title button.close,
-.sidebar-component .header button.data-editor-close,
-.sidebar-component .header button.note-editor-close,
-.sidebar-component .header button.qa-editor-close,
-.entity-editor-pane .header button.preset-close,
+.sidebar .header button.close,
 .preset-list-pane .header button.preset-choose {
     position: absolute;
     right: 0;
     top: 0;
 }
 .ideditor[dir='rtl'] .field-help-title button.close,
-.ideditor[dir='rtl'] .sidebar-component .header button.data-editor-close,
-.ideditor[dir='rtl'] .sidebar-component .header button.note-editor-close,
-.ideditor[dir='rtl'] .sidebar-component .header button.qa-editor-close,
-.ideditor[dir='rtl'] .entity-editor-pane .header button.preset-close,
+.ideditor[dir='rtl'] .sidebar .header button.close,
 .ideditor[dir='rtl'] .preset-list-pane .header button.preset-choose {
     left: 0;
     right: auto;
@@ -719,6 +723,10 @@ button.add-note svg.icon {
     justify-content: space-between;
 }
 
+.header-block {
+    display: flex;
+    align-items: center;
+}
 .header-block-outer {
     width: 20%;
 }
@@ -726,6 +734,7 @@ button.add-note svg.icon {
 .header-block-close {
     display: flex;
     justify-content: flex-end;
+    height: 100%;
 }
 
 /* Hide/Toggle collapsable sections (aka Disclosure)
@@ -1373,11 +1382,16 @@ a.hide-toggle {
     overflow: hidden;
 }
 .field-label .label-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
     flex: 1 1 auto;
     padding: 5px 0 5px 10px;
 }
 .ideditor[dir='rtl'] .field-label .label-text {
     padding: 5px 10px 5px 0;
+}
+.field-label .label-text span {
+    white-space: nowrap;
 }
 
 .label-text .label-textannotation svg.icon {
@@ -4672,15 +4686,11 @@ img.tile-debug {
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
-.modal-section p:not(:last-of-type),
-.modal-section ul {
+.modal-section p:not(:last-of-type) {
     padding-bottom: 20px;
 }
 .modal-section h4 {
     padding-bottom: 0;
-}
-.modal-section.header h3 {
-    padding: 0;
 }
 .modal-section.buttons {
     text-align: center;
@@ -4701,7 +4711,6 @@ img.tile-debug {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-bottom: 30px;
 }
 
 .save-section .buttons .action,
@@ -4965,6 +4974,9 @@ svg.mouseclick use.right {
 }
 .settings-custom-background .instructions-template p {
     margin-bottom: 0;
+}
+.settings-custom-background .instructions-template ul {
+    padding-bottom: 20px;
 }
 .settings-custom-background .instructions-template ul li {
     list-style-type: disc;

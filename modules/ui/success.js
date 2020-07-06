@@ -73,14 +73,14 @@ export function uiSuccess(context) {
       .attr('class', 'header fillL');
 
     header
-      .append('button')
-      .attr('class', 'fr')
-      .on('click', () => dispatch.call('cancel'))
-      .call(svgIcon('#iD-icon-close'));
-
-    header
       .append('h3')
       .text(t('success.just_edited'));
+
+    header
+      .append('button')
+      .attr('class', 'close')
+      .on('click', () => dispatch.call('cancel'))
+      .call(svgIcon('#iD-icon-close'));
 
     let body = selection
       .append('div')
