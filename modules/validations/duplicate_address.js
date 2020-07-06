@@ -19,10 +19,10 @@ export function validationDuplicateAddress(context) {
     let different = false;
 
     // if any of these tags don't match, *and both are present*, it's not a duplicate..
-    ['addr:street', 'addr:place', 'addr:block', 'addr:city', 'addr:postcode'].forEach(k => {
+    ['addr:block', 'addr:city', 'addr:postcode'].forEach(k => {
       const val1 = entity1.tags[k] || '';
       const val2 = entity2.tags[k] || '';
-      if (val1 && val2) {     // both assigned
+      if (val1 && val2) {     // both features have this tag assigned
         if (val1.toLowerCase() !== val2.toLowerCase()) {
           different = true;   // values don't match
         } else {
@@ -32,11 +32,31 @@ export function validationDuplicateAddress(context) {
     });
     if (different) return false;
 
+    // Same logic as above, but `addr:street` and `addr:place` can really be used interchangeably
+    // see comments on https://github.com/openstreetmap/iD/pull/7740
+    {
+      const street1 = entity1.tags['addr:street'];
+      const street2 = entity2.tags['addr:street'];
+      const place1 = entity1.tags['addr:place'];
+      const place2 = entity2.tags['addr:place'];
+      const val1 = street1 || place1 || '';
+      const val2 = street2 || place2 || '';
+      if (val1 && val2) {     // both features have a street or a place
+        if (val1.toLowerCase() !== val2.toLowerCase()) {
+          different = true;   // values don't match
+        } else {
+          if (val1 === street1)  dupe.tags['addr:street'] = val1;
+          if (val1 === place1)  dupe.tags['addr:place'] = val1;
+        }
+      }
+    }
+    if (different) return false;
+
     // if any of these tags don't match, *and one is present*, it's not a duplicate..
     ['addr:door', 'addr:unit', 'addr:flats', 'addr:floor'].forEach(k => {
       const val1 = entity1.tags[k] || '';
       const val2 = entity2.tags[k] || '';
-      if (val1 || val2) {     // one is assigned
+      if (val1 || val2) {     // one feature has this tag assigned
         if (val1.toLowerCase() !== val2.toLowerCase()) {
           different = true;   // values don't match
         } else {

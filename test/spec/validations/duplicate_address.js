@@ -140,6 +140,40 @@ describe('iD.validations.duplicate_address', function () {
         });
     });
 
+    describe('compares addr:street and addr:place interchangeably (both must be present)', function() {
+        it('raises no issues if different', function() {
+            var t1 = { 'name': 'Foo', 'addr:housenumber': '1', 'addr:street': 'Abbey Road' };
+            var t2 = { 'name': 'Bar', 'addr:housenumber': '1', 'addr:place': 'Penny Lane' };
+            var entities = createPair(t1, t2);
+            var issues = validate(entities);
+            expect(issues).to.have.lengthOf(0);
+        });
+
+        it('raises issue if identical street/place value with both present', function() {
+            var t1 = { 'name': 'Foo', 'addr:housenumber': '1', 'addr:street': 'Abbey Road' };
+            var t2 = { 'name': 'Bar', 'addr:housenumber': '1', 'addr:place': 'Abbey Road' };
+            var entities = createPair(t1, t2);
+            var issues = validate(entities);
+            expect(issues).to.have.lengthOf(2);
+            var issue = issues[0];
+            expect(issue.type).to.eql('duplicate_address');
+            expect(issue.severity).to.eql('warning');
+            expect(issue.entityIds).to.have.lengthOf(2);
+        });
+
+        it('raises issue if case-dissimilar street/place value with both present', function() {
+            var t1 = { 'name': 'Foo', 'addr:housenumber': '1', 'addr:street': 'Abbey Road' };
+            var t2 = { 'name': 'Bar', 'addr:housenumber': '1', 'addr:place': 'abbey road' };
+            var entities = createPair(t1, t2);
+            var issues = validate(entities);
+            expect(issues).to.have.lengthOf(2);
+            var issue = issues[0];
+            expect(issue.type).to.eql('duplicate_address');
+            expect(issue.severity).to.eql('warning');
+            expect(issue.entityIds).to.have.lengthOf(2);
+        });
+    });
+
     // one must be present for comparison
     ['addr:door', 'addr:unit', 'addr:flats', 'addr:floor'].forEach(function (k) {
         describe('compares ' + k + ' (one must be present)', function() {
