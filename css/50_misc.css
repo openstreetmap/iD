@@ -430,11 +430,11 @@ path.fill.tag-building {
 }
 
 
-path.stroke.tag-building-commercial {
+path.stroke.tag-building-commercial, path.stroke.tag-building-retail {
     stroke: rgb(0, 26, 255);
 }
 
-path.fill.tag-building-commercial {
+path.fill.tag-building-commercial, path.fill.tag-building-retail {
     stroke: rgba(0, 26, 255, 0.3);
 }
 
