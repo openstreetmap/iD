@@ -16,7 +16,7 @@
     position: relative;
     z-index: 0;
 
-    font: normal 12px/1.6667 "-apple-system", BlinkMacSystemFont,
+    font: normal 12px/1.6667 ui-sans-serif, "-apple-system", BlinkMacSystemFont,
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
         "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
         sans-serif;
@@ -147,8 +147,8 @@ kbd {
 }
 
 code {
-    font-family: monospace, monospace;
-    background: #eee;
+    font-family: ui-monospace, monospace, monospace;
+    background: rgba(174, 174, 174, 0.25);
     padding: 1px 2px;
 }
 
@@ -2812,14 +2812,6 @@ input.key-trap {
 }
 .qa-details-subsection:empty {
     display: none;
-}
-.qa-details-container code {
-    padding: .2em .4em;
-    margin: 0;
-    font-size: 85%;
-    font-family: monospace;
-    background-color: rgba(27,31,35,.05);
-    border-radius: 3px;
 }
 
 .note-save .new-comment-input,
