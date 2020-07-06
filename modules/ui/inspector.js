@@ -25,6 +25,7 @@ export function uiInspector(context) {
             .on('cancel', function() {
                 wrap.transition()
                     .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+                editorPane.call(entityEditor);
             });
 
         entityEditor
