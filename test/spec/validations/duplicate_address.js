@@ -2,14 +2,14 @@ describe('iD.validations.duplicate_address', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext();
+        context = iD.coreContext().init();
     });
 
     function createPair(tags1, tags2, loc1, loc2) {
         loc1 = loc1 || [0, 0];
         loc2 = loc2 || [0.000001, 0.000001];
 
-        entities = [
+        var entities = [
             iD.osmNode({ tags: tags1, loc: loc1 }),
             iD.osmNode({ tags: tags2, loc: loc2 })
         ];
@@ -56,7 +56,7 @@ describe('iD.validations.duplicate_address', function () {
     it('raises no issues if identical addresses, but far apart', function() {
         var entities = createPair(
             { 'name': 'Foo', 'addr:housenumber': '1' },
-            { 'name': 'Bar', 'addr:housenumber': '2' }
+            { 'name': 'Bar', 'addr:housenumber': '2' },
             [0, 0],
             [0.01, 0.01]
         );
