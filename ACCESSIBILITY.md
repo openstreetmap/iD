@@ -18,6 +18,7 @@ Symbols used in this document:
 - ❌ No appreciable support
 - 🤷 Unknown support, none is assumed
 
+
 ## Browser Compatibility
 
 As a web app, iD's browser support is fundamental. The user experience should be
@@ -47,6 +48,7 @@ elsewhere in this document.
 [ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/30px-Internet_Explorer_10%2B11_logo.svg.png
 
 [#7132]: https://github.com/openstreetmap/iD/issues/7132
+
 
 ## Input Device Support
 
@@ -122,7 +124,7 @@ platform. Some languages have region-specific variants, such as Brazilian Portug
 Translators are typically volunteers. See the [translation guide](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
 for more info.
 
-|  | Localization Feature | Notes |
+|   | Localization Feature | Notes |
 |---|---|---|
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
 | ❌ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
@@ -137,7 +139,7 @@ The following table details which interface elements can adapt to the mapper's
 language preferences. This doesn't account for whether they've actually been
 translated to one or more languages.
 
-|  | Interface Element | Notes | Issues |
+|   | Interface Element | Notes | Issues |
 |---|---|---|---|
 | ✅ | Labels and descriptions | | |
 | ✅ | Help docs and walkthrough | | |
@@ -160,6 +162,21 @@ The completion percentages for iD translations constantly change, and so are not
 listed here. Visit the [Transifex project page](https://www.transifex.com/openstreetmap/id-editor/)
 to see the latest numbers. Typically a few languages (German, Spanish, Japanese…)
 are kept close to 100% coverage, while most languages have less than 50% coverage.
+
+## Vision Accessbility
+
+|   | Vision-Access Feature | Notes | Issues |
+|---|---|---|---|
+| 🤷 | [Screen reader support](https://en.wikipedia.org/wiki/Screen_reader) | | |
+| 🟠 | [Browser zoom](https://support.mozilla.org/en-US/kb/accessibility-features-firefox-make-firefox-and-we#w_page-zoom) | Scrolling-to-pan the map may react oddly on some browsers | |
+| 🟠 | [Text-only browser zoom](https://support.mozilla.org/en-US/kb/accessibility-features-firefox-make-firefox-and-we#w_text-zoom) | Enlarged text can overflow containers that have fixed dimensions | |
+| 🟠 | [Don't rely on color alone](https://www.wuhcag.com/use-of-colour/) | Some classes of map data are indistinguishable except for their colors | |
+| 🤷 | [High-contrast text colors](https://www.wuhcag.com/contrast-enhanced/) | | |
+| ❌ | Dark mode | Many people find light-on-dark UIs easier to read under certain conditions | |
+
+## Hearing Accessibility
+
+iD itself currently has no audio, so hearing difficulties alone are not expected to impact usability.
 
 ---
 
