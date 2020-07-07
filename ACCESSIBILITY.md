@@ -32,13 +32,14 @@ elsewhere in this document.
 |   | Icon | Browser | Notes | Issues |
 |---|---|---|---|---|
 | ✅ | ![chrome logo] | [Chrome](https://en.wikipedia.org/wiki/Google_Chrome) | |
-| ✅* | ![firefox logo] | [Firefox](https://en.wikipedia.org/wiki/Firefox) | \*Minor known issues | [#7132] |
+| ✅* | ![firefox logo] | [Firefox](https://en.wikipedia.org/wiki/Firefox) | \*Minor known issues | [#7132](https://github.com/openstreetmap/iD/issues/7132) |
 | ✅ | ![safari logo] | [Safari](https://en.wikipedia.org/wiki/Safari_(web_browser)) | |
 | 🟩 | ![opera logo] | [Opera](https://en.wikipedia.org/wiki/Opera_(web_browser)) | |
 | 🟩 | ![edge logo] | [Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) | |
-| 🟠 | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD polyfills ES6 features on IE 11, with varying success |
-| 🟩 | 🌐 | Others | iD should run without issue on any desktop browser implementing [modern web standards](https://www.w3.org/standards/) |
-| 🟠 | 📱 |  [Mobile browsers](https://en.wikipedia.org/wiki/Mobile_browser) | iD has not yet been fully optimized for mobile devices, but some editing is usually possible |
+| 🟠 | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD [polyfills](https://en.wikipedia.org/wiki/Polyfill_(programming)) modern web features for IE 11 where possible, but full support should not be expected |
+| ✅ | 📱 | [iOS](https://en.wikipedia.org/wiki/IOS) browsers | All browsers on iOS (e.g. Safari, Chrome, Firefox, Edge) use the [WebKit](https://en.wikipedia.org/wiki/WebKit) engine and should thus have equivalent support |
+| 🟩 | 📱 | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
+| 🟩 | 🌐 | Others | iD should run on any browser implementing [modern web standards](https://www.w3.org/standards/). Hardware factors such as screen size may affect usability |
 
 [safari logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/30px-Safari_browser_logo.svg.png
 [opera logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Opera_browser_logo_2013_vector.svg/30px-Opera_browser_logo_2013_vector.svg.png
@@ -46,8 +47,6 @@ elsewhere in this document.
 [firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/30px-Firefox_logo%2C_2019.svg.png
 [edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/30px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
 [ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/30px-Internet_Explorer_10%2B11_logo.svg.png
-
-[#7132]: https://github.com/openstreetmap/iD/issues/7132
 
 
 ## Input Device Support
@@ -68,12 +67,12 @@ highest-functioning setup (generally mouse and keyboard).
 Certain functions may be accessed differently on different setups,
 such as opening the edit menu via long-pressing instead of right-clicking.
 
-|   | Icon | Input Setup | Notes |
-|---|---|---|---|
+|   | Icon | Input Setup | Notes | Issues |
+|---|---|---|---|---|
 | ✅ | 🖱⌨️ | [Mouse](https://en.wikipedia.org/wiki/Computer_mouse) + [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | iD's original input paradigm. Any mouse-like device such as a [trackpad](https://en.wikipedia.org/wiki/Touchpad), [trackball](https://en.wikipedia.org/wiki/Trackball), or [pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) is grouped into "mouse" for this table |
 | ❌ | ⌨️   | Keyboard only | Not all elements can necessarily be keyed to. Key traps may exists. Geometry editing isn't possible |
 | 🟠 | 🖱  | Mouse only | The primary [mouse button](https://en.wikipedia.org/wiki/Mouse_button) (e.g. left click) alone is sufficient. Multiselection and disabling of node-snapping aren't possible |
-| 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Moving and rotating selections isn't possible |
+| 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Moving and rotating selections isn't possible | [#7599](https://github.com/openstreetmap/iD/issues/7599) |
 | 🟠 | ✍️   | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) on a touchscreen | Moving and rotating selections isn't possible, nor is selecting multiple features |
 | 🤷 | ✍️🔲 | Stylus on a [graphics tablet](https://en.wikipedia.org/wiki/Graphics_tablet) | |
 | 🤷 | 🎮  | [Gamepad](https://en.wikipedia.org/wiki/Gamepad) | |
@@ -90,17 +89,22 @@ It's impractical to ensure every single input device works as expected, so the t
 
 |   | Icon | Input Device | Notes | Issues |
 |---|---|---|---|---|
-| ✅ | ![apple adb mouse] | Single-button mouse | Primary click (e.g. left-click) can be used for all pointer interactions. Long-clicking on map features opens the edit menu |
-| ✅ | ![ibm mouse] | Multi-button mouse | Secondary click (e.g. right-click) can be used on map features to open the edit menu. Middle click, etc., are not needed by iD but are passed through to the browser |
-| ✅ | [![magic mouse]](https://en.wikipedia.org/wiki/Magic_Mouse) | Multi-touch mouse | 2D scrolling in the map is treated as panning, not zooming |
+| 🟩 | ![apple adb mouse] | Single-button [mouse](https://en.wikipedia.org/wiki/Computer_mouse) | Primary click (e.g. left-click) can be used for all pointer interactions. Long-clicking on map features opens the edit menu |
+| 🟩 | ![ibm mouse] | Multi-button mouse | Secondary click (e.g. right-click) can be used on map features to open the edit menu. Middle click, etc., are not needed by iD but are passed through to the browser |
+| 🟩 | [![magic mouse]](https://en.wikipedia.org/wiki/Magic_Mouse) | Multi-touch mouse | 2D scrolling in the map is treated as panning, not zooming |
 | 🟠 | ![vertical scroll wheel] | Vertical [scroll wheel](https://en.wikipedia.org/wiki/Scroll_wheel) | Should zoom the map in and out | [#5550](https://github.com/openstreetmap/iD/issues/5550) | 
 | ❌ |  | Horizontal scroll wheel | Currently does nothing in the map | [#7134](https://github.com/openstreetmap/iD/issues/7134) |
-| 🤷 | [![apple mighty mouse]](https://en.wikipedia.org/wiki/Apple_Mighty_Mouse) | Scroll ball | |
-| 🟩 | 🖲 | Trackball | |
-| 🟩 | ![touchpad] | Trackpad | |
-| ✅ | [![macbook trackpad]](https://en.wikipedia.org/wiki/Magic_Trackpad) | Multi-touch trackpad | Pinch-to-zoom and scroll-to-pan are supported in the map |
-| 🟩 | ![pointing stick] | Pointing stick | |
-| ✅ | ⌨️ | Keyboard | |
+| 🤷 | [![apple mighty mouse]](https://en.wikipedia.org/wiki/Apple_Mighty_Mouse) | Scroll ball | Works like combined vertical/horizontal scroll wheels |
+| 🟩 | 🖲 | [Trackball](https://en.wikipedia.org/wiki/Trackball) | |
+| 🟩 | ![touchpad] | [Trackpad](https://en.wikipedia.org/wiki/Touchpad) | |
+| 🟩 | [![macbook trackpad]](https://en.wikipedia.org/wiki/Magic_Trackpad) | Multi-touch trackpad | Pinch-to-zoom and scroll-to-pan are supported in the map |
+| 🟩 | ![pointing stick] | [Pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) | |
+| 🟩 | ⌨️ | [Keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | Any keyboard can be used, but certain functionality may require certain keys |
+| 🤷 |  | [Touch bar](https://www.imore.com/touch-bar) | Generic, browser-provided controls should be shown |
+| 🟩 |  | Multi-touch screen | |
+| 🟩 | ✍️ | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) | Works like a single touch for tapping, dragging, scrolling, etc. |
+| 🤷 | 🔲 | [Graphics tablet](https://en.wikipedia.org/wiki/Graphics_tablet) | |
+| 🤷 | 🎮  | [Gamepad](https://en.wikipedia.org/wiki/Gamepad) | |
 
 [ibm mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Myszka_IBM.jpg/40px-Myszka_IBM.jpg
 [apple adb mouse]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Apple-ADB-mouse.jpg/70px-Apple-ADB-mouse.jpg
@@ -173,6 +177,7 @@ are kept close to 100% coverage, while most languages have less than 50% coverag
 | 🟠 | [Don't rely on color alone](https://www.wuhcag.com/use-of-colour/) | Some classes of map data are indistinguishable except for their colors | |
 | 🤷 | [High-contrast text colors](https://www.wuhcag.com/contrast-enhanced/) | | |
 | ❌ | Dark mode | Many people find light-on-dark UIs easier to read under certain conditions | |
+| ❌ | Audio feedback | This would need to be easy to disable or even disabled by default | [#5821](https://github.com/openstreetmap/iD/issues/5821) |
 
 ## Hearing Accessibility
 
