@@ -104,7 +104,7 @@
     "postcss": "^7.0.27",
     "postcss-selector-prepend": "^0.5.0",
     "request": "^2.88.0",
-    "rollup": "~2.18.0",
+    "rollup": "~2.20.0",
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-progress": "^1.1.1",
     "rollup-plugin-visualizer": "~4.0.4",
