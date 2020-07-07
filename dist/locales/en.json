@@ -1537,7 +1537,6 @@
         "mapillary_map_features": {
             "title": "Map Features",
             "tooltip": "Map features from Mapillary",
-            "request_data": "Request Data",
             "construction": {
                 "flat": {
                     "crosswalk_plain": "plain crosswalk"
