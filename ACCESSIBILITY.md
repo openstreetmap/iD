@@ -61,33 +61,11 @@ but realistically people want or need to use various other [input devices](https
 iD relies on modern [pointer events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) for some interactions, so
 some devices may see degraded functionality on older browsers.
 
-### Input Setups
-
-This table lists iD's usability for different setups. A setup is where
-a mapper is using only the device(s) given in the row.
-
-A setup with "full support" offers functionality equivalent to that of the
-highest-functioning setup (generally mouse and keyboard).
-Certain functions may be accessed differently on different setups,
-such as opening the edit menu via long-pressing instead of right-clicking.
-
-|   | Icon | Input Setup | Notes | Issues |
-|---|---|---|---|---|
-| ✅ | 🖱⌨️ | [Mouse](https://en.wikipedia.org/wiki/Computer_mouse) + [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | iD's original input paradigm. Any mouse-like device such as a [trackpad](https://en.wikipedia.org/wiki/Touchpad), [trackball](https://en.wikipedia.org/wiki/Trackball), or [pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) is grouped into "mouse" for this table |
-| ❌ | ⌨️   | Keyboard only | Not all elements can necessarily be keyed to. Key traps may exists. Geometry editing isn't possible |
-| 🟠 | 🖱  | Mouse only | The primary [mouse button](https://en.wikipedia.org/wiki/Mouse_button) (e.g. left click) alone is sufficient. Multiselection and disabling of node-snapping aren't possible |
-| 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Moving and rotating selections isn't possible | [#7599](https://github.com/openstreetmap/iD/issues/7599) |
-| 🟠 | ✍️   | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) on a touchscreen | Moving and rotating selections isn't possible, nor is selecting multiple features |
-| 🤷 | ✍️🔲 | Stylus on a [graphics tablet](https://en.wikipedia.org/wiki/Graphics_tablet) | |
-| 🤷 | 🎮  | [Gamepad](https://en.wikipedia.org/wiki/Gamepad) | |
-| 🤷 | 🗣  | [Voice](https://en.wikipedia.org/wiki/Voice_user_interface) | Tools like [Voice Control on macOS](https://support.apple.com/en-us/HT210539) and [Windows Speech Recognition](https://en.wikipedia.org/wiki/Windows_Speech_Recognition) allow navigating webpages with voice commands to some degree |
-| 🤷 | 🔘  | [Switch](https://en.wikipedia.org/wiki/Switch_access) | Tools like [Switch Control on macOS](https://support.apple.com/en-us/HT202865) can theoretically replicate mouse and keyboard interactions in most apps |
-
 ### Input Devices
 
 This table details iD's support for specific classes of input devices.
 
-"Full support" for a device means that iD reasonably handles its entire range of input on supported platforms. But unlike the input setups table, a given device is not necessarily expected to perform all of iD's functions.
+"Full support" for a device means that iD reasonably handles its entire range of input on supported platforms. Though the given device is not necessarily expected to perform all of iD's functions.
 
 It's impractical to ensure every single input device works as expected, so the table only reflects the support status to the best of our knowledge.
 
@@ -119,26 +97,53 @@ It's impractical to ensure every single input device works as expected, so the t
 [touchpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Touchpad_F3JA.jpg/70px-Touchpad_F3JA.jpg
 [macbook trackpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/MacBook_Pro%27s_trackpad.JPG/70px-MacBook_Pro%27s_trackpad.JPG
 
+### Input Setups
+
+This table lists iD's usability for different setups. A setup is where
+a mapper is using only the device(s) given in the row.
+
+A setup with "full support" offers functionality equivalent to that of the
+highest-functioning setup (generally mouse and keyboard).
+Certain functions may be accessed differently on different setups,
+such as opening the edit menu via long-pressing instead of right-clicking.
+
+|   | Icon | Input Setup | Notes | Issues |
+|---|---|---|---|---|
+| ✅ | 🖱⌨️ | [Mouse](https://en.wikipedia.org/wiki/Computer_mouse) + [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | iD's original input paradigm. Any mouse-like device such as a [trackpad](https://en.wikipedia.org/wiki/Touchpad), [trackball](https://en.wikipedia.org/wiki/Trackball), or [pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) is grouped into "mouse" for this table |
+| ❌ | ⌨️   | Keyboard only | Not all elements can necessarily be keyed to. Key traps may exists. Geometry editing isn't possible |
+| 🟠 | 🖱  | Mouse only | The primary [mouse button](https://en.wikipedia.org/wiki/Mouse_button) (e.g. left click) alone is sufficient. Multiselection and disabling of node-snapping aren't possible |
+| 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Moving and rotating selections isn't possible | [#7599](https://github.com/openstreetmap/iD/issues/7599) |
+| 🟠 | ✍️   | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) on a touchscreen | Moving and rotating selections isn't possible, nor is selecting multiple features |
+| 🤷 | ✍️🔲 | Stylus on a [graphics tablet](https://en.wikipedia.org/wiki/Graphics_tablet) | |
+| 🤷 | 🎮  | [Gamepad](https://en.wikipedia.org/wiki/Gamepad) | |
+| 🤷 | 🗣  | [Voice](https://en.wikipedia.org/wiki/Voice_user_interface) | Tools like [Voice Control on macOS](https://support.apple.com/en-us/HT210539) and [Windows Speech Recognition](https://en.wikipedia.org/wiki/Windows_Speech_Recognition) allow navigating webpages with voice commands to some degree |
+| 🤷 | 🔘  | [Switch](https://en.wikipedia.org/wiki/Switch_access) | Tools like [Switch Control on macOS](https://support.apple.com/en-us/HT202865) can theoretically replicate mouse and keyboard interactions in most apps |
+
 <br/>
 
 ## 📟 System Compatibility
 
-iD's hardware and software support mostly depends on the web browser and input devices. For instance, if a computer running Firefox is setup with a mouse and keyboard, it doesn't really matter to iD if the computer is a desktop Mac, laptop PC, Android tablet, or so on. But certain other aspects of the system can still affect iD's usability and functionality.
+iD is largely platform-independent, meaning it should work on any system that runs a modern web browser. However, certain hardware and software components can affect iD's usability and functionality.
 
-|   | Displays | Notes |
+### Display Support
+
+|   | Display | Notes |
 |---|---|---|
-| ✅ | Large display | The map expands to fill the entire browser window |
+| ❌ | No display | Non-graphical devices and "[headless](https://en.wikipedia.org/wiki/Headless_software)" use cases aren't supported. See also the [vision accessibility](#-vision-accessibility) section |
 | 🟠 | Small display | iD is not optimized for smartphone-sized screens or smaller, but some editing is usually possible |
-| ✅ | High [pixel density](https://en.wikipedia.org/wiki/Pixel_density) display | iD's vector graphics scale well to high-resolution screens (e.g. [Retina](https://en.wikipedia.org/wiki/Retina_display)) |
+| ✅ | Large display | The map expands to fill the entire browser window |
 | 🟠 | Low pixel density display | Some icons are not legible on low-res displays |
+| ✅ | High [pixel density](https://en.wikipedia.org/wiki/Pixel_density) display | iD's vector graphics scale well to high-resolution screens (e.g. [Retina](https://en.wikipedia.org/wiki/Retina_display)) |
 | ✅ | Multiple displays | iD responds accordingly when its browser window is moved between different types of external screens |
 
-|   | Internet | Notes |
+### Network Support
+
+|   | Connection | Notes |
 |---|---|---|
+| ❌ | No connection | iD isn't built for offline use out-of-the-box |
 | 🟠 | Slow connection | iD downloads a lot of data all throughout use, so slow connections can significantly slow down mapping |
 | ✅ | Intermittent connection | Downloaded data can be edited during temporary connection losses. A banner message is displayed. Reconnection is attempted automatically and a "Retry" button is also provided |
-| ❌ | Offline connection | iD isn't built for full offline use out of the box |
-| ✅ | Mobile phone connection | A suitably fast, reliable phone network can be used for mapping, with the risk of iD gobbling up data allowances |
+| ✅ | [Mobile phone connection](https://en.wikipedia.org/wiki/Cellular_network) | A suitably fast, reliable phone network can be used for mapping, with the risk of iD gobbling up data allowances |
 | 🤷 | [Tor](https://en.wikipedia.org/wiki/Tor_%28anonymity_network%29) connection | |
 
 <br/>
