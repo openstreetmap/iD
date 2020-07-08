@@ -160,14 +160,16 @@ platform. Some languages have region-specific variants, such as Brazilian Portug
 Translators are typically volunteers. See the [translation guide](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
 for more info.
 
-|   | Localization Feature | Notes |
+|   | Multilingual Feature | Notes |
 |---|---|---|
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
 | ❌ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
 | ❌ | Custom fallback language | If the preferred language is incomplete, a user-specified one should be tried before `en` (e.g. `kk` → `ru`) |
 | ❌ | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages |
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
-| 🟩 | Right-to-left layouts | Used for languages like Hebrew and Arabic |
+| ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages |
+| 🟩 | Right-to-left layouts | The [`dir` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) is properly set for languages like Hebrew and Arabic |
+| 🟠 | Label icons | Icons should accompany text labels to illustrate the meaning of untranslated terms |
 
 ### Translatability
 
@@ -201,7 +203,7 @@ are kept close to 100% coverage, while most languages have less than 50% coverag
 
 <br/>
 
-## 👁 Vision Accessbility
+## 👁 Vision Accessibility
 
 |   | Vision-Access Feature | Notes | Issues |
 |---|---|---|---|
