@@ -18,8 +18,9 @@ Symbols used in this document:
 - ❌ No appreciable support
 - 🤷 Unknown support, none is assumed
 
+<br/>
 
-## Browser Compatibility
+## 🔗 Browser Compatibility
 
 As a web app, iD's browser support is fundamental. The user experience should be
 as equivalent as possible across the latest versions of all modern browsers on all
@@ -37,8 +38,8 @@ elsewhere in this document.
 | 🟩 | ![opera logo] | [Opera](https://en.wikipedia.org/wiki/Opera_(web_browser)) | |
 | 🟩 | ![edge logo] | [Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) | |
 | 🟠 | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD [polyfills](https://en.wikipedia.org/wiki/Polyfill_(programming)) modern web features for IE 11 where possible, but full support should not be expected |
-| ✅ | 📱 | [iOS](https://en.wikipedia.org/wiki/IOS) browsers | All browsers on iOS (e.g. Safari, Chrome, Firefox, Edge) use the [WebKit](https://en.wikipedia.org/wiki/WebKit) engine and should thus have equivalent support |
-| 🟩 | 📱 | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
+| ✅ | ![webkit logo] | [iOS](https://en.wikipedia.org/wiki/IOS) browsers | All browsers on iOS (e.g. Safari, Chrome, Firefox, Edge) use the [WebKit](https://en.wikipedia.org/wiki/WebKit) engine and should thus have equivalent support |
+| 🟩 | ![android logo] | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
 | 🟩 | 🌐 | Others | iD should run on any browser implementing [modern web standards](https://www.w3.org/standards/). Hardware factors such as screen size may affect usability |
 
 [safari logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/30px-Safari_browser_logo.svg.png
@@ -47,9 +48,12 @@ elsewhere in this document.
 [firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/30px-Firefox_logo%2C_2019.svg.png
 [edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/30px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
 [ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/30px-Internet_Explorer_10%2B11_logo.svg.png
+[webkit logo]: https://upload.wikimedia.org/wikipedia/en/thumb/b/be/WebKit_logo_(2015).svg/35px-WebKit_logo_(2015).svg.png
+[android logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/28px-Android_robot.svg.png
 
+<br/>
 
-## Input Device Support
+## 🕹 Input Device Support
 
 iD has traditionally assumed the mapper will be interacting via a mouse and keyboard,
 but realistically people want or need to use various other [input devices](https://en.wikipedia.org/wiki/Input_device).
@@ -115,8 +119,9 @@ It's impractical to ensure every single input device works as expected, so the t
 [touchpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Touchpad_F3JA.jpg/70px-Touchpad_F3JA.jpg
 [macbook trackpad]: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/MacBook_Pro%27s_trackpad.JPG/70px-MacBook_Pro%27s_trackpad.JPG
 
+<br/>
 
-## Language Support
+## 📖 Language Support
 
 English is the language of tags and relation roles in the OpenStreetMap database.
 It's also the source language of iD's interface, meaning English is the only language
@@ -167,7 +172,9 @@ listed here. Visit the [Transifex project page](https://www.transifex.com/openst
 to see the latest numbers. Typically a few languages (German, Spanish, Japanese…)
 are kept close to 100% coverage, while most languages have less than 50% coverage.
 
-## Vision Accessbility
+<br/>
+
+## 👁 Vision Accessbility
 
 |   | Vision-Access Feature | Notes | Issues |
 |---|---|---|---|
@@ -179,9 +186,13 @@ are kept close to 100% coverage, while most languages have less than 50% coverag
 | ❌ | Dark mode | Many people find light-on-dark UIs easier to read under certain conditions | |
 | ❌ | Audio feedback | This would need to be easy to disable or even disabled by default | [#5821](https://github.com/openstreetmap/iD/issues/5821) |
 
-## Hearing Accessibility
+<br/>
+
+## 👂 Hearing Accessibility
 
 iD itself currently has no audio, so hearing difficulties alone are not expected to impact usability.
+
+<br/>
 
 ---
 
