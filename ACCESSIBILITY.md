@@ -53,7 +53,7 @@ elsewhere in this document.
 
 <br/>
 
-## 🕹 Input Device Support
+## 🕹 Interaction Support
 
 iD has traditionally assumed the mapper will be interacting via a mouse and keyboard,
 but realistically people want or need to use various other [input devices](https://en.wikipedia.org/wiki/Input_device).
@@ -61,9 +61,9 @@ but realistically people want or need to use various other [input devices](https
 iD relies on modern [pointer events](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) for some interactions, so
 some devices may see degraded functionality on older browsers.
 
-### Setups
+### Input Setups
 
-The following table lists iD's usability for different setups. A setup is where
+This table lists iD's usability for different setups. A setup is where
 a mapper is using only the device(s) given in the row.
 
 A setup with "full support" offers functionality equivalent to that of the
@@ -83,11 +83,11 @@ such as opening the edit menu via long-pressing instead of right-clicking.
 | 🤷 | 🗣  | [Voice](https://en.wikipedia.org/wiki/Voice_user_interface) | Tools like [Voice Control on macOS](https://support.apple.com/en-us/HT210539) and [Windows Speech Recognition](https://en.wikipedia.org/wiki/Windows_Speech_Recognition) allow navigating webpages with voice commands to some degree |
 | 🤷 | 🔘  | [Switch](https://en.wikipedia.org/wiki/Switch_access) | Tools like [Switch Control on macOS](https://support.apple.com/en-us/HT202865) can theoretically replicate mouse and keyboard interactions in most apps |
 
-### Devices
+### Input Devices
 
 This table details iD's support for specific classes of input devices.
 
-"Full support" for a device means that iD reasonably handles its entire range of input on supported platforms. But unlike the "Setups" table above, a given device is not necessarily expected to perform all of iD's functions.
+"Full support" for a device means that iD reasonably handles its entire range of input on supported platforms. But unlike the input setups table, a given device is not necessarily expected to perform all of iD's functions.
 
 It's impractical to ensure every single input device works as expected, so the table only reflects the support status to the best of our knowledge.
 
@@ -121,6 +121,28 @@ It's impractical to ensure every single input device works as expected, so the t
 
 <br/>
 
+## 📟 System Compatibility
+
+iD's hardware and software support mostly depends on the web browser and input devices. For instance, if a computer running Firefox is setup with a mouse and keyboard, it doesn't really matter to iD if the computer is a desktop Mac, laptop PC, Android tablet, or so on. But certain other aspects of the system can still affect iD's usability and functionality.
+
+|   | Displays | Notes |
+|---|---|---|
+| ✅ | Large display | The map expands to fill the entire browser window |
+| 🟠 | Small display | iD is not optimized for smartphone-sized screens or smaller, but some editing is usually possible |
+| ✅ | High [pixel density](https://en.wikipedia.org/wiki/Pixel_density) display | iD's vector graphics scale well to high-resolution screens (e.g. [Retina](https://en.wikipedia.org/wiki/Retina_display)) |
+| 🟠 | Low pixel density display | Some icons are not legible on low-res displays |
+| ✅ | Multiple displays | iD responds accordingly when its browser window is moved between different types of external screens |
+
+|   | Internet | Notes |
+|---|---|---|
+| 🟠 | Slow connection | iD downloads a lot of data all throughout use, so slow connections can significantly slow down mapping |
+| ✅ | Intermittent connection | Downloaded data can be edited during temporary connection losses. A banner message is displayed. Reconnection is attempted automatically and a "Retry" button is also provided |
+| ❌ | Offline connection | iD isn't built for full offline use out of the box |
+| ✅ | Mobile phone connection | A suitably fast, reliable phone network can be used for mapping, with the risk of iD gobbling up data allowances |
+| 🤷 | [Tor](https://en.wikipedia.org/wiki/Tor_%28anonymity_network%29) connection | |
+
+<br/>
+
 ## 📖 Language Support
 
 English is the language of tags and relation roles in the OpenStreetMap database.
@@ -144,7 +166,7 @@ for more info.
 
 ### Translatability
 
-The following table details which interface elements can adapt to the mapper's
+This table details which interface elements can adapt to the mapper's
 language preferences. This doesn't account for whether they've actually been
 translated to one or more languages.
 
