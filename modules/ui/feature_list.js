@@ -125,8 +125,8 @@ export function uiFeatureList(context) {
             var idMatch = q.match(/^(.*[^\w])?(node|n|way|w|relation|r)[^\w]?([0-9]+)([^\w].*)?$/i);
 
             if (idMatch) {
-				var elemType = idMatch[2][0];
-				var elemId = idMatch[3];
+                var elemType = idMatch[2][0];
+                var elemId = idMatch[3];
                 result.push({
                     id: elemType + elemId,
                     geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : 'relation',
