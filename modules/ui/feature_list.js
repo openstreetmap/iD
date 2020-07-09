@@ -122,14 +122,16 @@ export function uiFeatureList(context) {
 
             if (!q) return result;
 
-            var idMatch = q.match(/^([nwr])([0-9]+)$/);
+            var idMatch = q.match(/^(.*[^\w])?(node|n|way|w|relation|r)[^\w]?([0-9]+)([^\w].*)?$/i);
 
             if (idMatch) {
+				var elemType = idMatch[2][0];
+				var elemId = idMatch[3];
                 result.push({
-                    id: idMatch[0],
-                    geometry: idMatch[1] === 'n' ? 'point' : idMatch[1] === 'w' ? 'line' : 'relation',
-                    type: idMatch[1] === 'n' ? t('inspector.node') : idMatch[1] === 'w' ? t('inspector.way') : t('inspector.relation'),
-                    name: idMatch[2]
+                    id: elemType + elemId,
+                    geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : 'relation',
+                    type: elemType === 'n' ? t('inspector.node') : elemType === 'w' ? t('inspector.way') : t('inspector.relation'),
+                    name: elemId
                 });
             }
 
