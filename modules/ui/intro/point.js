@@ -5,12 +5,12 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t, localizer } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { actionChangePreset } from '../../actions/change_preset';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
-import { icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
+import { helpString, icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroPoint(context, reveal) {
@@ -48,7 +48,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-point',
-                t('intro.points.add_point', { button: icon('#iD-icon-point', 'pre-text') }));
+                helpString('intro.points.add_point'));
 
             _pointID = null;
 
@@ -78,11 +78,11 @@ export function uiIntroPoint(context, reveal) {
 
         var pointBox = pad(building, 150, context);
         var textId = context.lastPointerType() === 'mouse' ? 'place_point' : 'place_point_touch';
-        reveal(pointBox, t('intro.points.' + textId));
+        reveal(pointBox, helpString('intro.points.' + textId));
 
         context.map().on('move.intro drawn.intro', function() {
             pointBox = pad(building, 150, context);
-            reveal(pointBox, t('intro.points.' + textId), { duration: 0 });
+            reveal(pointBox, helpString('intro.points.' + textId), { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -112,7 +112,7 @@ export function uiIntroPoint(context, reveal) {
             .on('keyup.intro', checkPresetSearch);
 
         reveal('.preset-search-input',
-            t('intro.points.search_cafe', { preset: cafePreset.name() })
+            helpString('intro.points.search_cafe', { preset: cafePreset.name() })
         );
 
         context.on('enter.intro', function(mode) {
@@ -133,7 +133,7 @@ export function uiIntroPoint(context, reveal) {
                     .on('keyup.intro', checkPresetSearch);
 
                 reveal('.preset-search-input',
-                    t('intro.points.search_cafe', { preset: cafePreset.name() })
+                    helpString('intro.points.search_cafe', { preset: cafePreset.name() })
                 );
 
                 context.history().on('change.intro', null);
@@ -150,7 +150,7 @@ export function uiIntroPoint(context, reveal) {
                     .on('keyup.intro', null);
 
                 reveal(first.select('.preset-list-button').node(),
-                    t('intro.points.choose_cafe', { preset: cafePreset.name() }),
+                    helpString('intro.points.choose_cafe', { preset: cafePreset.name() }),
                     { duration: 300 }
                 );
 
@@ -176,7 +176,7 @@ export function uiIntroPoint(context, reveal) {
         }
 
         timeout(function() {
-            reveal('.entity-editor-pane', t('intro.points.feature_editor'), {
+            reveal('.entity-editor-pane', helpString('intro.points.feature_editor'), {
                 tooltipClass: 'intro-points-describe',
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { continueTo(addName); }
@@ -209,7 +209,7 @@ export function uiIntroPoint(context, reveal) {
             // Give them an OK button instead.
             var entity = context.entity(_pointID);
             if (entity.tags.name) {
-                var tooltip = reveal('.entity-editor-pane', t('intro.points.add_name'), {
+                var tooltip = reveal('.entity-editor-pane', helpString('intro.points.add_name'), {
                     tooltipClass: 'intro-points-describe',
                     buttonText: t('intro.ok'),
                     buttonCallback: function() { continueTo(addCloseEditor); }
@@ -217,7 +217,7 @@ export function uiIntroPoint(context, reveal) {
                 tooltip.select('.instruction').style('display', 'none');
 
             } else {
-                reveal('.entity-editor-pane', t('intro.points.add_name'),
+                reveal('.entity-editor-pane', helpString('intro.points.add_name'),
                     { tooltipClass: 'intro-points-describe' }
                 );
             }
@@ -252,7 +252,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         reveal('.entity-editor-pane',
-            t('intro.points.add_close', { button: icon(href, 'pre-text') })
+            helpString('intro.points.add_close', { button: icon(href, 'pre-text') })
         );
 
         function continueTo(nextStep) {
@@ -279,14 +279,14 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var box = pointBox(entity.loc, context);
-            reveal(box, t('intro.points.reselect'), { duration: 600 });
+            reveal(box, helpString('intro.points.reselect'), { duration: 600 });
 
             timeout(function() {
                 context.map().on('move.intro drawn.intro', function() {
                     var entity = context.hasEntity(_pointID);
                     if (!entity) return chapter.restart();
                     var box = pointBox(entity.loc, context);
-                    reveal(box, t('intro.points.reselect'), { duration: 0 });
+                    reveal(box, helpString('intro.points.reselect'), { duration: 0 });
                 });
             }, 600); // after reveal..
 
@@ -322,7 +322,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         timeout(function() {
-            reveal('.entity-editor-pane', t('intro.points.update'),
+            reveal('.entity-editor-pane', helpString('intro.points.update'),
                 { tooltipClass: 'intro-points-describe' }
             );
         }, 400);
@@ -349,7 +349,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.points.update_close', { button: icon('#iD-icon-apply', 'pre-text') })
+                helpString('intro.points.update_close', { button: icon('#iD-icon-apply', 'pre-text') })
             );
         }, 500);
 
@@ -369,14 +369,14 @@ export function uiIntroPoint(context, reveal) {
 
         var box = pointBox(entity.loc, context);
         var textId = context.lastPointerType() === 'mouse' ? 'rightclick' : 'edit_menu_touch';
-        reveal(box, t('intro.points.' + textId), { duration: 600 });
+        reveal(box, helpString('intro.points.' + textId), { duration: 600 });
 
         timeout(function() {
             context.map().on('move.intro', function() {
                 var entity = context.hasEntity(_pointID);
                 if (!entity) return chapter.restart();
                 var box = pointBox(entity.loc, context);
-                reveal(box, t('intro.points.' + textId), { duration: 0 });
+                reveal(box, helpString('intro.points.' + textId), { duration: 0 });
             });
         }, 600); // after reveal
 
@@ -409,14 +409,14 @@ export function uiIntroPoint(context, reveal) {
         if (!node) { return continueTo(rightClickPoint); }
 
         reveal('.edit-menu',
-            t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') }),
+            helpString('intro.points.delete'),
             { padding: 50 }
         );
 
         timeout(function() {
             context.map().on('move.intro', function() {
                 reveal('.edit-menu',
-                    t('intro.points.delete', { button: icon('#iD-operation-delete', 'pre-text') }),
+                    helpString('intro.points.delete'),
                     { duration: 0,  padding: 50 }
                 );
             });
@@ -448,9 +448,8 @@ export function uiIntroPoint(context, reveal) {
             continueTo(play);
         });
 
-        var iconName = '#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo');
         reveal('.top-toolbar button.undo-button',
-            t('intro.points.undo', { button: icon(iconName, 'pre-text') })
+            helpString('intro.points.undo')
         );
 
         function continueTo(nextStep) {
@@ -463,7 +462,7 @@ export function uiIntroPoint(context, reveal) {
     function play() {
         dispatch.call('done');
         reveal('.ideditor',
-            t('intro.points.play', { next: t('intro.areas.title') }), {
+            helpString('intro.points.play', { next: t('intro.areas.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-area',
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }

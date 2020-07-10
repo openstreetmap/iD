@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { t } from '../../core/localizer';
-import { icon } from './helper';
+import { helpString } from './helper';
 import { uiModal } from '../modal';
 import { utilRebind } from '../../util/rebind';
 
@@ -20,7 +20,7 @@ export function uiIntroStartEditing(context, reveal) {
 
     function showHelp() {
         reveal('.map-control.help-control',
-            t('intro.startediting.help', { button: icon('#iD-icon-help', 'pre-text'), key: t('help.key') }), {
+            helpString('intro.startediting.help'), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { shortcuts(); }
             }
@@ -29,7 +29,7 @@ export function uiIntroStartEditing(context, reveal) {
 
     function shortcuts() {
         reveal('.map-control.help-control',
-            t('intro.startediting.shortcuts', { key: t('shortcuts.toggle.key') }), {
+            helpString('intro.startediting.shortcuts'), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { showSave(); }
             }
@@ -39,7 +39,7 @@ export function uiIntroStartEditing(context, reveal) {
     function showSave() {
         context.container().selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
         reveal('.top-toolbar button.save',
-            t('intro.startediting.save'), {
+            helpString('intro.startediting.save'), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { showStart(); }
             }

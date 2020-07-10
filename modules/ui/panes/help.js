@@ -1,14 +1,13 @@
 
 import marked from 'marked';
 import { svgIcon } from '../../svg/icon';
-import { uiCmd } from '../cmd';
 import { uiIntro } from '../intro/intro';
 import { uiShortcuts } from '../shortcuts';
 import { uiPane } from '../pane';
 
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { icon } from '../intro/helper';
+import { helpString } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
@@ -231,73 +230,15 @@ export function uiPaneHelp(context) {
         'help.qa.issues_h': 3
     };
 
-    var replacements = {
-        // insert icons corresponding to various UI elements
-        point_icon: icon('#iD-icon-point', 'pre-text'),
-        line_icon: icon('#iD-icon-line', 'pre-text'),
-        area_icon: icon('#iD-icon-area', 'pre-text'),
-        note_icon: icon('#iD-icon-note', 'pre-text add-note'),
-        plus: icon('#iD-icon-plus', 'pre-text'),
-        minus: icon('#iD-icon-minus', 'pre-text'),
-        move_icon: icon('#iD-operation-move', 'pre-text operation'),
-        merge_icon: icon('#iD-operation-merge', 'pre-text operation'),
-        delete_icon: icon('#iD-operation-delete', 'pre-text operation'),
-        orthogonalize_icon: icon('#iD-operation-orthogonalize', 'pre-text operation'),
-        disconnect_icon: icon('#iD-operation-disconnect', 'pre-text operation'),
-        layers_icon: icon('#iD-icon-layers', 'pre-text'),
-        data_icon: icon('#iD-icon-data', 'pre-text'),
-        inspect: icon('#iD-icon-inspect', 'pre-text'),
-        close: icon('#iD-icon-close', 'pre-text'),
-        undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
-        redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
-        save_icon: icon('#iD-icon-save', 'pre-text'),
-        leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
-        rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
-
-        // insert localized, platform-dependent keys
-        shift: uiCmd.display('⇧'),
-        alt: uiCmd.display('⌥'),
-        return: uiCmd.display('↵'),
-        space: t('shortcuts.key.space'),
-        add_note_key: t('modes.add_note.key'),
-        shortcuts_key: t('shortcuts.toggle.key'),
-
-        // reference localized UI labels directly so that they'll always match
-        save: t('save.title'),
-        undo: t('undo.title'),
-        redo: t('redo.title'),
-        upload: t('commit.save'),
-        point: t('modes.add_point.title'),
-        line: t('modes.add_line.title'),
-        area: t('modes.add_area.title'),
-        note: t('modes.add_note.title'),
-        delete: t('operations.delete.title'),
-        move: t('operations.move.title'),
-        orthogonalize: t('operations.orthogonalize.title'),
-        merge: t('operations.merge.title'),
-        disconnect: t('operations.disconnect.title'),
-        map_data: t('map_data.title'),
-        fields: t('inspector.fields'),
-        tags: t('inspector.tags'),
-        relations: t('inspector.relations'),
-        new_relation: t('inspector.new_relation'),
-        turn_restrictions: t('presets.fields.restrictions.label'),
-        background_settings: t('background.description'),
-        imagery_offset: t('background.fix_misalignment'),
-        start_the_walkthrough: t('splash.walkthrough'),
-
-        // insert iD's version number
-        version: context.version
-    };
-
     // For each section, squash all the texts into a single markdown document
     var docs = docKeys.map(function(key) {
         var helpkey = 'help.' + key[0];
+        var helpPaneReplacements = { version: context.version };
         var text = key[1].reduce(function(all, part) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t(subkey, replacements) + '\n\n';
+            return all + hhh + helpString(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
         return {
