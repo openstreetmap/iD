@@ -70,7 +70,7 @@ en:
       title: Continue
       description: Continue this line.
       not_eligible: No line can be continued here.
-      multiple: Several lines can be continued here. To choose a line, press the Shift key and click on it to select it.
+      multiple: Several lines can be continued here. Add one to the selection to continue.
       annotation:
         line: Continued a line.
         area: Continued an area.
