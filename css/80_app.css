@@ -411,6 +411,7 @@ button[disabled].action {
     fill: #222;
     color: #79f;
 }
+button.disabled .icon.operation use,
 .icon.operation.disabled use {
     fill: rgba(32,32,32,.2);
     color: rgba(40,40,40,.2);
