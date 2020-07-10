@@ -168,8 +168,9 @@ export function uiIntroArea(context, reveal) {
         }
 
         _areaID = null;
-        var textId = context.lastPointerType() === 'mouse' ? 'finish_playground' : 'finish_playground_tap';
-        var finishString = helpString('intro.areas.' + textId) + helpString('intro.areas.finish_drawing');
+
+        var finishString = helpString('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
+            helpString('intro.areas.finish_playground');
         revealPlayground(playground,
             finishString, { duration: 250 }
         );

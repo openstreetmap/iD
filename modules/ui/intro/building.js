@@ -95,10 +95,12 @@ export function uiIntroBuilding(context, reveal) {
         context.map().zoomEase(20, 500);
 
         timeout(function() {
-            revealHouse(house, helpString('intro.buildings.start_building'));
+            var startString = helpString('intro.buildings.start_building') +
+                helpString('intro.buildings.building_corner_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap'));
+            revealHouse(house, startString);
 
             context.map().on('move.intro drawn.intro', function() {
-                revealHouse(house, helpString('intro.buildings.start_building'), { duration: 0 });
+                revealHouse(house, startString, { duration: 0 });
             });
 
             context.on('enter.intro', function(mode) {
@@ -123,10 +125,14 @@ export function uiIntroBuilding(context, reveal) {
 
         _houseID = null;
 
-        revealHouse(house, helpString('intro.buildings.continue_building'));
+        var continueString = helpString('intro.buildings.continue_building') + '{br}' +
+            helpString('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
+            helpString('intro.buildings.finish_building');
+
+        revealHouse(house, continueString);
 
         context.map().on('move.intro drawn.intro', function() {
-            revealHouse(house, helpString('intro.buildings.continue_building'), { duration: 0 });
+            revealHouse(house, continueString, { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -329,7 +335,8 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.map().on('move.intro drawn.intro', function() {
-            revealHouse(house, helpString('intro.buildings.rightclick_building'), { duration: 0 });
+            var rightclickString = helpString('intro.buildings.' + (context.lastPointerType() === 'mouse' ? 'rightclick_building' : 'edit_menu_building_touch'));
+            revealHouse(house, rightclickString, { duration: 0 });
         });
 
         context.history().on('change.intro', function() {
@@ -464,10 +471,12 @@ export function uiIntroBuilding(context, reveal) {
         _tankID = null;
 
         timeout(function() {
-            revealTank(tank, helpString('intro.buildings.start_tank'));
+            var startString = helpString('intro.buildings.start_tank') +
+                helpString('intro.buildings.tank_edge_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap'));
+            revealTank(tank, startString);
 
             context.map().on('move.intro drawn.intro', function() {
-                revealTank(tank, helpString('intro.buildings.start_tank'), { duration: 0 });
+                revealTank(tank, startString, { duration: 0 });
             });
 
             context.on('enter.intro', function(mode) {
@@ -492,10 +501,14 @@ export function uiIntroBuilding(context, reveal) {
 
         _tankID = null;
 
-        revealTank(tank, helpString('intro.buildings.continue_tank'));
+        var continueString = helpString('intro.buildings.continue_tank') + '{br}' +
+            helpString('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
+            helpString('intro.buildings.finish_tank');
+
+        revealTank(tank, continueString);
 
         context.map().on('move.intro drawn.intro', function() {
-            revealTank(tank, helpString('intro.buildings.continue_tank'), { duration: 0 });
+            revealTank(tank, continueString, { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -646,10 +659,12 @@ export function uiIntroBuilding(context, reveal) {
                 }, 50);  // after menu visible
             });
 
-            revealTank(tank, helpString('intro.buildings.rightclick_tank'));
+            var rightclickString = helpString('intro.buildings.' + (context.lastPointerType() === 'mouse' ? 'rightclick_tank' : 'edit_menu_tank_touch'));
+
+            revealTank(tank, rightclickString);
 
             context.map().on('move.intro drawn.intro', function() {
-                revealTank(tank, helpString('intro.buildings.rightclick_tank'), { duration: 0 });
+                revealTank(tank, rightclickString, { duration: 0 });
             });
 
             context.history().on('change.intro', function() {
