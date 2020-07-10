@@ -17,7 +17,7 @@ export function uiInspector(context) {
     var _newFeature = false;
 
 
-    function inspector(selection, newFeature) {
+    function inspector(selection) {
         presetList
             .entityIDs(_entityIDs)
             .autofocus(_newFeature)
@@ -25,6 +25,7 @@ export function uiInspector(context) {
             .on('cancel', function() {
                 wrap.transition()
                     .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+                editorPane.call(entityEditor);
             });
 
         entityEditor
@@ -66,7 +67,7 @@ export function uiInspector(context) {
             if (entity.hasNonGeometryTags()) return false;
 
             // prompt to select preset if feature is new and untagged
-            if (newFeature) return true;
+            if (_newFeature) return true;
 
             // all existing features except vertices should default to inspector
             if (entity.geometry(context.graph()) !== 'vertex') return false;

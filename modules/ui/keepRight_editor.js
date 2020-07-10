@@ -29,7 +29,7 @@ export function uiKeepRightEditor(context) {
 
     headerEnter
       .append('button')
-        .attr('class', 'fr qa-editor-close')
+        .attr('class', 'close')
         .on('click', () => context.enter(modeBrowse(context)))
         .call(svgIcon('#iD-icon-close'));
 

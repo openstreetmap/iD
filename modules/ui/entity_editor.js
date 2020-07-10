@@ -45,12 +45,12 @@ export function uiEntityEditor(context) {
 
         headerEnter
             .append('button')
-            .attr('class', 'fl preset-reset preset-choose')
+            .attr('class', 'preset-reset preset-choose')
             .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
 
         headerEnter
             .append('button')
-            .attr('class', 'fr preset-close')
+            .attr('class', 'close')
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 

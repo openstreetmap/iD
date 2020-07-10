@@ -1391,6 +1391,22 @@
     "replace": {"toilets:disposal": "pitlatrine"}
   },
   {
+    "old": {"toilets:type": "flush"},
+    "replace": {"toilets:disposal": "flush"}
+  },
+  {
+    "old": {"toilets:type": "pit"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "pitlatrine"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "pit latrine"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
     "old": {"tourism": "bed_and_breakfast"},
     "replace": {"tourism": "guest_house", "guest_house": "bed_and_breakfast"}
   },
