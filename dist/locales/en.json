@@ -4816,7 +4816,8 @@
                     "terms": "guarded,manned"
                 },
                 "support": {
-                    "label": "Support"
+                    "label": "Support",
+                    "terms": ""
                 },
                 "surface": {
                     "label": "Surface",

@@ -2499,6 +2499,7 @@ en:
       support:
         # support=*
         label: Support
+        terms: '[translate with synonyms or related terms for ''Support'', separated by commas]'
       surface:
         # surface=*
         label: Surface
