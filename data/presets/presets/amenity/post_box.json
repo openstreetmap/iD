@@ -9,12 +9,15 @@
     "moreFields": [
         "access_simple",
         "brand",
+        "colour",
         "covered",
         "gnis/feature_id",
         "height",
         "indoor",
         "level",
         "manufacturer",
+        "material",
+        "support",
         "wheelchair"
     ],
     "geometry": [
