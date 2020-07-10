@@ -48,7 +48,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-point',
-                helpString('intro.points.add_point'));
+                helpString('intro.points.points_info') + '{br}' + helpString('intro.points.add_point'));
 
             _pointID = null;
 
@@ -203,13 +203,15 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
+        var addNameString = helpString('intro.points.fields_info') + '{br}' + helpString('intro.points.add_name');
+
         timeout(function() {
             // It's possible for the user to add a name in a previous step..
             // If so, don't tell them to add the name in this step.
             // Give them an OK button instead.
             var entity = context.entity(_pointID);
             if (entity.tags.name) {
-                var tooltip = reveal('.entity-editor-pane', helpString('intro.points.add_name'), {
+                var tooltip = reveal('.entity-editor-pane', addNameString, {
                     tooltipClass: 'intro-points-describe',
                     buttonText: t('intro.ok'),
                     buttonCallback: function() { continueTo(addCloseEditor); }
@@ -217,7 +219,7 @@ export function uiIntroPoint(context, reveal) {
                 tooltip.select('.instruction').style('display', 'none');
 
             } else {
-                reveal('.entity-editor-pane', helpString('intro.points.add_name'),
+                reveal('.entity-editor-pane', addNameString,
                     { tooltipClass: 'intro-points-describe' }
                 );
             }

@@ -90,15 +90,16 @@ export function uiIntroArea(context, reveal) {
         context.map().zoomEase(19.5, 500);
 
         timeout(function() {
-            var textId = context.lastPointerType() === 'mouse' ? 'start_playground' : 'start_playground_touch';
+            var textId = context.lastPointerType() === 'mouse' ? 'starting_node_click' : 'starting_node_tap';
+            var startDrawString = helpString('intro.areas.start_playground') + helpString('intro.areas.' + textId);
             revealPlayground(playground,
-                helpString('intro.areas.' + textId), { duration: 250 }
+                startDrawString, { duration: 250 }
             );
 
             timeout(function() {
                 context.map().on('move.intro drawn.intro', function() {
                     revealPlayground(playground,
-                        helpString('intro.areas.' + textId), { duration: 0 }
+                        startDrawString, { duration: 0 }
                     );
                 });
                 context.on('enter.intro', function(mode) {
@@ -167,15 +168,16 @@ export function uiIntroArea(context, reveal) {
         }
 
         _areaID = null;
-        var textId = context.lastPointerType() === 'mouse' ? 'finish_playground' : 'finish_playground_touch';
+        var textId = context.lastPointerType() === 'mouse' ? 'finish_playground' : 'finish_playground_tap';
+        var finishString = helpString('intro.areas.' + textId) + helpString('intro.areas.finish_drawing');
         revealPlayground(playground,
-            helpString('intro.areas.' + textId), { duration: 250 }
+            finishString, { duration: 250 }
         );
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
                 revealPlayground(playground,
-                    helpString('intro.areas.' + textId), { duration: 0 }
+                    finishString, { duration: 0 }
                 );
             });
         }, 250);  // after reveal

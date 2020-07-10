@@ -59,10 +59,10 @@ export function uiIntroNavigation(context, reveal) {
             var centerStart = context.map().center();
 
             var textId = context.lastPointerType() === 'mouse' ? 'drag' : 'drag_touch';
-
-            reveal('.surface', helpString('intro.navigation.' + textId));
+            var dragString = helpString('intro.navigation.map_info') + '{br}' + helpString('intro.navigation.' + textId);
+            reveal('.surface', dragString);
             context.map().on('drawn.intro', function() {
-                reveal('.surface', helpString('intro.navigation.' + textId), { duration: 0 });
+                reveal('.surface', dragString, { duration: 0 });
             });
 
             context.map().on('move.intro', function() {
@@ -86,15 +86,12 @@ export function uiIntroNavigation(context, reveal) {
         var zoomStart = context.map().zoom();
 
         var textId = context.lastPointerType() === 'mouse' ? 'zoom' : 'zoom_touch';
+        var zoomString = helpString('intro.navigation.' + textId);
 
-        reveal('.surface',
-            helpString('intro.navigation.' + textId)
-        );
+        reveal('.surface', zoomString);
 
         context.map().on('drawn.intro', function() {
-            reveal('.surface',
-                helpString('intro.navigation.' + textId), { duration: 0 }
-            );
+            reveal('.surface', zoomString, { duration: 0 });
         });
 
         context.map().on('move.intro', function() {
@@ -494,13 +491,12 @@ export function uiIntroNavigation(context, reveal) {
         var selector = '.entity-editor-pane button.close svg use';
         var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
-        reveal('.entity-editor-pane',
+        reveal('.entity-editor-pane', helpString('intro.navigation.street_different_fields') + '{br}' +
             helpString('intro.navigation.editor_street', {
                 button: icon(href, 'pre-text'),
                 field1: onewayField.label(),
                 field2: maxspeedField.label()
-            })
-        );
+            }));
 
         context.on('exit.intro', function() {
             continueTo(play);
@@ -511,11 +507,11 @@ export function uiIntroNavigation(context, reveal) {
             var selector = '.entity-editor-pane button.close svg use';
             var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
-            reveal('.entity-editor-pane',
+            reveal('.entity-editor-pane', helpString('intro.navigation.street_different_fields') + '{br}' +
                 helpString('intro.navigation.editor_street', {
                     button: icon(href, 'pre-text'),
-                    field1: onewayField.label().toLowerCase(),
-                    field2: maxspeedField.label().toLowerCase()
+                    field1: onewayField.label(),
+                    field2: maxspeedField.label()
                 }), { duration: 0 }
             );
         });

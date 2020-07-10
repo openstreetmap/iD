@@ -595,7 +595,11 @@ export function uiInit(context) {
     };
 
 
-    var _editMenu; // uiEditMenu
+    var _editMenu = uiEditMenu(context);
+
+    ui.editMenu = function() {
+        return _editMenu;
+    };
 
     ui.showEditMenu = function(anchorPoint, triggerType, operations) {
 
@@ -613,9 +617,6 @@ export function uiInit(context) {
             // focus the surface or else clicking off the menu may not trigger modeBrowse
             surfaceNode.focus();
         }
-
-        // don't load the menu until it's needed
-        if (!_editMenu) _editMenu = uiEditMenu(context);
 
         operations.forEach(function(operation) {
             if (operation.point) operation.point(anchorPoint);
