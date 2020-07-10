@@ -103,6 +103,7 @@ export function helpString(id, replacements) {
         disconnect: t('operations.disconnect.title'),
         split: t('operations.split.title'),
         map_data: t('map_data.title'),
+        osm_notes: t('map_data.layers.notes.title'),
         fields: t('inspector.fields'),
         tags: t('inspector.tags'),
         relations: t('inspector.relations'),
