@@ -75,6 +75,8 @@ export function helpString(id, replacements) {
         save_icon: icon('#iD-icon-save', 'pre-text'),
         leftclick: icon('#iD-walkthrough-mouse-left', 'pre-text operation'),
         rightclick: icon('#iD-walkthrough-mouse-right', 'pre-text operation'),
+        tap_icon: icon('#iD-walkthrough-tap', 'pre-text operation'),
+        longpress_icon: icon('#iD-walkthrough-longpress', 'pre-text operation'),
 
         // insert keys; may be localized and platform-dependent
         shift: uiCmd.display('⇧'),
