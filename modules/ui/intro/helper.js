@@ -73,8 +73,8 @@ export function helpString(id, replacements) {
         undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
         redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
         save_icon: icon('#iD-icon-save', 'pre-text'),
-        leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
-        rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
+        leftclick: icon('#iD-walkthrough-mouse-left', 'pre-text operation'),
+        rightclick: icon('#iD-walkthrough-mouse-right', 'pre-text operation'),
 
         // insert keys; may be localized and platform-dependent
         shift: uiCmd.display('⇧'),

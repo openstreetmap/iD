@@ -4932,15 +4932,6 @@ img.tile-debug {
     color: #555;
 }
 
-svg.mouseclick use.left {
-    fill: rgba(112, 146, 255, 1);
-    color: rgba(112, 146, 255, 0);
-}
-svg.mouseclick use.right {
-    fill: rgba(112, 146, 255, 0);
-    color: rgba(112, 146, 255, 1);
-}
-
 .modal-shortcuts .shortcut-keys .gesture {
     color: #333;
     padding: 3px;
