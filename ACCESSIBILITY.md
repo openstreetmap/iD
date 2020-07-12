@@ -127,8 +127,8 @@ iD is largely platform-independent, meaning it should work on any system that ru
 
 ### Display Support
 
-|   | Display | Notes |
-|---|---|---|
+|   | Display | Notes | Issues |
+|---|---|---|---|
 | ❌ | No display | Non-graphical devices and "[headless](https://en.wikipedia.org/wiki/Headless_software)" use cases aren't supported. See also the [vision accessibility](#-vision-accessibility) section |
 | 🟠 | Small display | iD is not optimized for smartphone-sized screens or smaller, but some editing is usually possible |
 | ✅ | Large display | The map expands to fill the entire browser window |
@@ -138,8 +138,8 @@ iD is largely platform-independent, meaning it should work on any system that ru
 
 ### Network Support
 
-|   | Connection | Notes |
-|---|---|---|
+|   | Connection | Notes | Issues |
+|---|---|---|---|
 | ❌ | No connection | iD isn't built for offline use out-of-the-box |
 | 🟠 | Slow connection | iD downloads a lot of data all throughout use, so slow connections can significantly slow down mapping |
 | ✅ | Intermittent connection | Downloaded data can be edited during temporary connection losses. A banner message is displayed. Reconnection is attempted automatically and a "Retry" button is also provided |
@@ -160,14 +160,14 @@ platform. Some languages have region-specific variants, such as Brazilian Portug
 Translators are typically volunteers. See the [translation guide](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
 for more info.
 
-|   | Multilingual Feature | Notes |
-|---|---|---|
+|   | Multilingual Feature | Notes | Issues |
+|---|---|---|---|
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
 | ❌ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
 | ❌ | Custom fallback language | If the preferred language is incomplete, a user-specified one should be tried before `en` (e.g. `kk` → `ru`) |
 | ❌ | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages |
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
-| ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages |
+| ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages | [#3120](https://github.com/openstreetmap/iD/issues/3120) |
 | 🟩 | Right-to-left layouts | The [`dir` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) is properly set for languages like Hebrew and Arabic |
 | 🟠 | Label icons | Icons should accompany text labels to illustrate the meaning of untranslated terms |
 
@@ -186,7 +186,7 @@ translated to one or more languages.
 | 🟠 | Fields | Combo fields may show raw tag values. The Wikipedia field lists Wiki names in their native languages | [#2708](https://github.com/openstreetmap/iD/issues/2708) |
 | ❌ | Tags | OpenStreetMap tags are English-only as a limitation of the database | |
 | ❌ | Relation member roles | OpenStreetMap roles are also limited to English | |
-| ✅ | Imagery metadata | | |
+| 🟠 | Imagery metadata | | [#7724](https://github.com/openstreetmap/iD/issues/7724) |
 | 🟠 | Locator overlay | This layer shows feature labels in their local languages | [#7737](https://github.com/openstreetmap/iD/issues/7737) |
 | ✅ | OSM community index | | |
 | ✅ | iD validation issues | | |
@@ -212,7 +212,7 @@ are kept close to 100% coverage, while most languages have less than 50% coverag
 | 🟠 | [Text-only browser zoom](https://support.mozilla.org/en-US/kb/accessibility-features-firefox-make-firefox-and-we#w_text-zoom) | Enlarged text can overflow containers that have fixed dimensions | |
 | 🟠 | [Don't rely on color alone](https://www.wuhcag.com/use-of-colour/) | Some classes of map data are indistinguishable except for their colors | |
 | 🤷 | [High-contrast text colors](https://www.wuhcag.com/contrast-enhanced/) | | |
-| ❌ | Dark mode | Many people find light-on-dark UIs easier to read under certain conditions | |
+| ❌ | [Dark mode](https://en.wikipedia.org/wiki/Light-on-dark_color_scheme) | Many people find light-on-dark UIs easier to read under certain conditions | |
 | ❌ | Audio feedback | This would need to be easy to disable or even disabled by default | [#5821](https://github.com/openstreetmap/iD/issues/5821) |
 
 <br/>
