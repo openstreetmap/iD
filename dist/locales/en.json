@@ -9703,6 +9703,10 @@
                     "name": "Mobile Phone Store",
                     "terms": ""
                 },
+                "shop/model": {
+                    "name": "Model Shop",
+                    "terms": "manga,figurine,hobby"
+                },
                 "shop/money_lender": {
                     "name": "Money Lender",
                     "terms": ""

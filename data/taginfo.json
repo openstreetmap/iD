@@ -1100,6 +1100,7 @@
     {"key": "shop", "value": "medical_supply", "description": "🄿 Medical Supply Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-crutch.svg"},
     {"key": "shop", "value": "military_surplus", "description": "🄿 Military Surplus Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
     {"key": "shop", "value": "mobile_phone", "description": "🄿 Mobile Phone Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-mobile-alt.svg"},
+    {"key": "shop", "value": "model", "description": "🄿 Model Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-dragon.svg"},
     {"key": "shop", "value": "money_lender", "description": "🄿 Money Lender", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/money_hand.svg"},
     {"key": "shop", "value": "motorcycle_repair", "description": "🄿 Motorcycle Repair Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/motorcycle_repair.svg"},
     {"key": "shop", "value": "motorcycle", "description": "🄿 Motorcycle Dealership", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-motorcycle.svg"},

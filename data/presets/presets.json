@@ -1155,6 +1155,7 @@
   "shop/medical_supply": {"icon": "fas-crutch", "geometry": ["point", "area"], "tags": {"shop": "medical_supply"}, "name": "Medical Supply Store"},
   "shop/military_surplus": {"icon": "temaki-military", "geometry": ["point", "area"], "terms": ["armor", "army-navy store", "army surplus", "navy surplus", "tactical gear", "war surplus shop", "weapons"], "tags": {"shop": "military_surplus"}, "name": "Military Surplus Store"},
   "shop/mobile_phone": {"icon": "fas-mobile-alt", "geometry": ["point", "area"], "tags": {"shop": "mobile_phone"}, "name": "Mobile Phone Store"},
+  "shop/model": {"icon": "fas-dragon", "geometry": ["point", "area"], "tags": {"shop": "model"}, "terms": ["manga", "figurine", "hobby"], "name": "Model Shop"},
   "shop/money_lender": {"icon": "temaki-money_hand", "fields": ["{shop}", "currency_multi"], "geometry": ["point", "area"], "tags": {"shop": "money_lender"}, "name": "Money Lender"},
   "shop/motorcycle_repair": {"icon": "temaki-motorcycle_repair", "fields": ["{shop}", "service/vehicle"], "geometry": ["point", "area"], "terms": ["auto", "bike", "garage", "motorcycle", "repair", "service"], "tags": {"shop": "motorcycle_repair"}, "name": "Motorcycle Repair Shop"},
   "shop/motorcycle": {"icon": "fas-motorcycle", "fields": ["name", "brand", "{shop}"], "geometry": ["point", "area"], "terms": ["bike"], "tags": {"shop": "motorcycle"}, "name": "Motorcycle Dealership"},
