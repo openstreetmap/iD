@@ -34,6 +34,7 @@ export function uiPaneHelp(context) {
             'select_h',
             'select_left_click',
             'select_right_click',
+            'select_space',
             'multiselect_h',
             'multiselect_shift_click',
             'multiselect_lasso',
@@ -79,6 +80,7 @@ export function uiPaneHelp(context) {
             'add_line_h',
             'add_line',
             'add_line_draw',
+            'add_line_continue',
             'add_line_finish',
             'modify_line_h',
             'modify_line_dragnode',
@@ -104,6 +106,7 @@ export function uiPaneHelp(context) {
             'add_area_h',
             'add_area_command',
             'add_area_draw',
+            'add_area_continue',
             'add_area_finish',
             'square_area_h',
             'square_area_command',
@@ -142,13 +145,13 @@ export function uiPaneHelp(context) {
             'intro',
             'add_note_h',
             'add_note',
+            'place_note',
             'move_note',
             'update_note_h',
             'update_note',
             'save_note_h',
             'save_note'
         ]],
-
         ['imagery', [
             'intro',
             'sources_h',
