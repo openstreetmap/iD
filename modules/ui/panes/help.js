@@ -36,6 +36,7 @@ export function uiPaneHelp(context) {
             'select_right_click',
             'select_space',
             'multiselect_h',
+            'multiselect',
             'multiselect_shift_click',
             'multiselect_lasso',
             'undo_redo_h',
