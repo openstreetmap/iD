@@ -67,8 +67,6 @@ export function helpString(id, replacements) {
         layers_icon: icon('#iD-icon-layers', 'pre-text'),
         data_icon: icon('#iD-icon-data', 'pre-text'),
         inspect: icon('#iD-icon-inspect', 'pre-text'),
-        close: icon('#iD-icon-close', 'pre-text'),
-        apply: icon('#iD-icon-apply', 'pre-text'),
         help_icon: icon('#iD-icon-help', 'pre-text'),
         undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
         redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),

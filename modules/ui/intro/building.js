@@ -9,7 +9,7 @@ import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilArrayUniq, utilRebind } from '../../util';
-import { helpString, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
+import { helpString, icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroBuilding(context, reveal) {
@@ -300,7 +300,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.buildings.close')
+                helpString('intro.buildings.close', { button: icon('#iD-icon-close', 'pre-text') })
             );
         }, 500);
 
@@ -628,7 +628,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.buildings.close')
+                helpString('intro.buildings.close', { button: icon('#iD-icon-close', 'pre-text') })
             );
         }, 500);
 

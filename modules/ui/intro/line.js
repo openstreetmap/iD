@@ -338,7 +338,7 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.lines.name_road', { button: icon('#iD-icon-apply', 'pre-text') }),
+                helpString('intro.lines.name_road', { button: icon('#iD-icon-close', 'pre-text') }),
                 { tooltipClass: 'intro-lines-name_road' }
             );
         }, 500);

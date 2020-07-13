@@ -351,7 +351,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.points.update_close', { button: icon('#iD-icon-apply', 'pre-text') })
+                helpString('intro.points.update_close', { button: icon('#iD-icon-close', 'pre-text') })
             );
         }, 500);
 
