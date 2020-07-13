@@ -1,12 +1,16 @@
 import { event as d3_event, select as d3_select } from 'd3-selection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoVecAdd } from '../geo';
 import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
+import { utilRebind } from '../util/rebind';
 import { svgIcon } from '../svg/icon';
 
 
 export function uiEditMenu(context) {
+    var dispatch = d3_dispatch('toggled');
+
     var _menu = d3_select(null);
     var _operations = [];
     // the position the menu should be displayed relative to
@@ -99,7 +103,7 @@ export function uiEditMenu(context) {
                 .call(tooltip)
                 .append('div')
                 .attr('class', 'icon-wrap')
-                .call(svgIcon('#iD-operation-' + d.id, 'operation-icon'));
+                .call(svgIcon('#iD-operation-' + d.id, 'operation'));
         });
 
         if (showLabels) {
@@ -161,6 +165,8 @@ export function uiEditMenu(context) {
             }
             lastPointerUpType = null;
         }
+
+        dispatch.call('toggled', this, true);
     };
 
     function updatePosition() {
@@ -269,6 +275,8 @@ export function uiEditMenu(context) {
 
         _menu.remove();
         _tooltips = [];
+
+        dispatch.call('toggled', this, false);
     };
 
     editMenu.anchorLoc = function(val) {
@@ -290,5 +298,5 @@ export function uiEditMenu(context) {
         return editMenu;
     };
 
-    return editMenu;
+    return utilRebind(editMenu, dispatch, 'on');
 }

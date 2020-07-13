@@ -52,6 +52,8 @@ export function uiInit(context) {
     var _initCounter = 0;
     var _needWidth = {};
 
+    var _lastPointerType;
+
 
     function render(container) {
 
@@ -95,13 +97,15 @@ export function uiInit(context) {
         if ('PointerEvent' in window) {
             d3_select(window)
                 .on('pointerdown.ui pointerup.ui', function() {
-                    var pointerType =  d3_event.pointerType || 'mouse';
-                    if (container.attr('pointer') !== pointerType) {
+                    var pointerType = d3_event.pointerType || 'mouse';
+                    if (_lastPointerType !== pointerType) {
+                        _lastPointerType = pointerType;
                         container
                             .attr('pointer', pointerType);
                     }
                 }, true);
         } else {
+            _lastPointerType = 'mouse';
             container
                 .attr('pointer', 'mouse');
         }
@@ -481,6 +485,10 @@ export function uiInit(context) {
         ui.ensureLoaded();
     };
 
+    ui.lastPointerType = function() {
+        return _lastPointerType;
+    };
+
     ui.flash = uiFlash(context);
 
     ui.sidebar = uiSidebar(context);
@@ -587,7 +595,11 @@ export function uiInit(context) {
     };
 
 
-    var _editMenu; // uiEditMenu
+    var _editMenu = uiEditMenu(context);
+
+    ui.editMenu = function() {
+        return _editMenu;
+    };
 
     ui.showEditMenu = function(anchorPoint, triggerType, operations) {
 
@@ -605,9 +617,6 @@ export function uiInit(context) {
             // focus the surface or else clicking off the menu may not trigger modeBrowse
             surfaceNode.focus();
         }
-
-        // don't load the menu until it's needed
-        if (!_editMenu) _editMenu = uiEditMenu(context);
 
         operations.forEach(function(operation) {
             if (operation.point) operation.point(anchorPoint);

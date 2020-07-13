@@ -1,14 +1,13 @@
 
 import marked from 'marked';
 import { svgIcon } from '../../svg/icon';
-import { uiCmd } from '../cmd';
 import { uiIntro } from '../intro/intro';
 import { uiShortcuts } from '../shortcuts';
 import { uiPane } from '../pane';
 
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { icon } from '../intro/helper';
+import { helpString } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
@@ -35,7 +34,9 @@ export function uiPaneHelp(context) {
             'select_h',
             'select_left_click',
             'select_right_click',
+            'select_space',
             'multiselect_h',
+            'multiselect',
             'multiselect_shift_click',
             'multiselect_lasso',
             'undo_redo_h',
@@ -80,6 +81,7 @@ export function uiPaneHelp(context) {
             'add_line_h',
             'add_line',
             'add_line_draw',
+            'add_line_continue',
             'add_line_finish',
             'modify_line_h',
             'modify_line_dragnode',
@@ -105,6 +107,7 @@ export function uiPaneHelp(context) {
             'add_area_h',
             'add_area_command',
             'add_area_draw',
+            'add_area_continue',
             'add_area_finish',
             'square_area_h',
             'square_area_command',
@@ -143,13 +146,13 @@ export function uiPaneHelp(context) {
             'intro',
             'add_note_h',
             'add_note',
+            'place_note',
             'move_note',
             'update_note_h',
             'update_note',
             'save_note_h',
             'save_note'
         ]],
-
         ['imagery', [
             'intro',
             'sources_h',
@@ -231,46 +234,23 @@ export function uiPaneHelp(context) {
         'help.qa.issues_h': 3
     };
 
-    var replacements = {
-        point: icon('#iD-icon-point', 'pre-text'),
-        line: icon('#iD-icon-line', 'pre-text'),
-        area: icon('#iD-icon-area', 'pre-text'),
-        note: icon('#iD-icon-note', 'pre-text add-note'),
-        plus: icon('#iD-icon-plus', 'pre-text'),
-        minus: icon('#iD-icon-minus', 'pre-text'),
-        orthogonalize: icon('#iD-operation-orthogonalize', 'pre-text'),
-        disconnect: icon('#iD-operation-disconnect', 'pre-text'),
-        layers: icon('#iD-icon-layers', 'pre-text'),
-        data: icon('#iD-icon-data', 'pre-text'),
-        inspect: icon('#iD-icon-inspect', 'pre-text'),
-        move: icon('#iD-operation-move', 'pre-text'),
-        merge: icon('#iD-operation-merge', 'pre-text'),
-        delete: icon('#iD-operation-delete', 'pre-text'),
-        close: icon('#iD-icon-close', 'pre-text'),
-        undo: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
-        redo: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
-        save: icon('#iD-icon-save', 'pre-text'),
-        leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
-        rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
-        shift: uiCmd.display('⇧'),
-        alt: uiCmd.display('⌥'),
-        return: uiCmd.display('↵'),
-        version: context.version
-    };
-
     // For each section, squash all the texts into a single markdown document
     var docs = docKeys.map(function(key) {
         var helpkey = 'help.' + key[0];
+        var helpPaneReplacements = { version: context.version };
         var text = key[1].reduce(function(all, part) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t(subkey, replacements) + '\n\n';
+            return all + hhh + helpString(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
         return {
             title: t(helpkey + '.title'),
             html: marked(text.trim())
+                // use keyboard key styling for shortcuts
+                .replace(/<code>/g, '<kbd>')
+                .replace(/<\/code>/g, '<\/kbd>')
         };
     });
 

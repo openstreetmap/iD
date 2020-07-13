@@ -64,9 +64,12 @@ export function uiCurtain(containerNode) {
      * @param  {integer}   [options.duration]        transition time in milliseconds
      * @param  {string}    [options.buttonText]      if set, create a button with this text label
      * @param  {function}  [options.buttonCallback]  if set, the callback for the button
+     * @param  {function}  [options.padding]         extra margin in px to put around bbox
      * @param  {String|ClientRect} [options.tooltipBox]  box for tooltip position, if different from box for the curtain
      */
     curtain.reveal = function(box, text, options) {
+        options = options || {};
+
         if (typeof box === 'string') {
             box = d3_select(box).node();
         }
@@ -76,8 +79,14 @@ export function uiCurtain(containerNode) {
             box.top -= containerRect.top;
             box.left -= containerRect.left;
         }
-
-        options = options || {};
+        if (box && options.padding) {
+            box.top -= options.padding;
+            box.left -= options.padding;
+            box.bottom += options.padding;
+            box.right += options.padding;
+            box.height += options.padding * 2;
+            box.width += options.padding * 2;
+        }
 
         var tooltipBox;
         if (options.tooltipBox) {
