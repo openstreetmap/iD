@@ -80,6 +80,7 @@ export function helpString(id, replacements) {
         doubletap_icon: icon('#iD-walkthrough-doubletap', 'pre-text operation'),
         longpress_icon: icon('#iD-walkthrough-longpress', 'pre-text operation'),
         touchdrag_icon: icon('#iD-walkthrough-touchdrag', 'pre-text operation'),
+        pinch_icon: icon('#iD-walkthrough-pinch-apart', 'pre-text operation'),
 
         // insert keys; may be localized and platform-dependent
         shift: uiCmd.display('⇧'),
