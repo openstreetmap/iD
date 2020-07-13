@@ -1306,7 +1306,7 @@ en:
       title: Overview
       navigation_h: "Navigation"
       navigation_drag: "You can drag the map by holding down the {leftclick} left mouse button and moving the mouse around, or by {touchdrag_icon} dragging on a touchscreen. You can also use the `↓`, `↑`, `←`, `→` arrow keys on a keyboard."
-      navigation_zoom: "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by pinching with two fingers on a touchscreen. You can also press the {plus} / {minus} buttons along the side of the map or the `+`, `-` keys on a keyboard."
+      navigation_zoom: "You can zoom in or out by scrolling with a {mousewheel_icon} mouse wheel or trackpad, or by pinching with two fingers on a touchscreen. You can also press the {plus} / {minus} buttons along the side of the map or the `+`, `-` keys on a keyboard."
       features_h: "Map Features"
       features: "We use the word *features* to describe things that appear on the map, such as roads, buildings, or points of interest. Anything in the real world can be mapped as a feature on OpenStreetMap. Map features are represented on the map using *points*, *lines*, or *areas*."
       nodes_ways: "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
@@ -1934,7 +1934,7 @@ en:
       map_info: "The main map area shows OpenStreetMap data on top of a background."
       drag: "You can click-and-drag the map with the {leftclick} left mouse button to move it around. You can also use the arrow keys on a keyboard. **Drag the map!**"
       drag_touch: "You can {touchdrag_icon} tap-and-drag the map to move it around. You can also use the arrow keys on a keyboard. **Drag the map!**"
-      zoom: "You can zoom the map by scrolling with a mouse wheel or trackpad, or by pressing the {plus} / {minus} buttons. **Zoom the map!**"
+      zoom: "You can zoom the map by scrolling with a {mousewheel_icon} mouse wheel or trackpad, or by pressing the {plus} / {minus} buttons. **Zoom the map!**"
       zoom_touch: "You can zoom the map by pinching it with two fingers, {doubletap_icon} double-tapping a location, or pressing the {plus} / {minus} buttons. **Zoom the map!**"
       features: "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap."
       points_lines_areas: "Map features are represented using *points, lines, or areas.*"
