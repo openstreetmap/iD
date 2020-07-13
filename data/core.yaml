@@ -1943,7 +1943,7 @@ en:
       features: "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap."
       points_lines_areas: "Map features are represented using *points, lines, or areas.*"
       nodes_ways: "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
-      click_townhall: "All features on the map can be selected by clicking on them. **Click the point to select it.**"
+      click_townhall: "All features on the map can be selected by {leftclick} clicking on them. **Click the point to select it.**"
       tap_townhall: "All features on the map can be selected by {tap_icon} tapping on them. **Tap the point to select it.**"
       selected_townhall: "Great! The point is now selected. Selected features are drawn with a pulsing glow."
       editor_townhall: "When a feature is selected, the *feature editor* is displayed alongside the map."
