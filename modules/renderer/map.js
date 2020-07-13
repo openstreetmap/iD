@@ -593,7 +593,7 @@ export function rendererMap(context) {
         if (_lastWithinEditableZoom !== withinEditableZoom) {
             if (_lastWithinEditableZoom !== undefined) {
                 // notify that the map zoomed in or out over the editable zoom threshold
-                dispatch.call('crossEditableZoom', this, map);
+                dispatch.call('crossEditableZoom', this, withinEditableZoom);
             }
             _lastWithinEditableZoom = withinEditableZoom;
         }
