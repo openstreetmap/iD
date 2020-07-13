@@ -107,7 +107,7 @@
             "text": "shortcuts.browsing.selecting.title"
           },
           {
-            "shortcuts": ["Left-click", "shortcuts.key.space"],
+            "shortcuts": ["Left-click", "Tap", "shortcuts.key.space"],
             "text": "shortcuts.browsing.selecting.select_one"
           },
           {
@@ -131,7 +131,7 @@
             "text": "shortcuts.browsing.with_selected.title"
           },
           {
-            "shortcuts": ["Right-click", "☰"],
+            "shortcuts": ["Right-click", "Long-press", "☰"],
             "text": "shortcuts.browsing.with_selected.edit_menu"
           },
           {
@@ -193,7 +193,7 @@
             "text": "shortcuts.editing.drawing.add_note"
           },
           {
-            "shortcuts": ["Left-click", "shortcuts.key.space"],
+            "shortcuts": ["Left-click", "Tap", "shortcuts.key.space"],
             "text": "shortcuts.editing.drawing.place_point"
           },
           {
