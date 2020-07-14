@@ -1,9 +1,9 @@
 {
-    "icon": "fas-dragon",
+    "icon": "fas-dice",
     "geometry": ["point", "area"],
     "tags": {
         "shop": "model"
     },
-    "terms": ["manga", "figurine", "hobby"],
+    "terms": ["Toys", "Games", "Crafts"],
     "name": "Model Shop"
 }
