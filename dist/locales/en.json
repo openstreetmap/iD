@@ -9749,6 +9749,10 @@
                     "name": "Mobile Phone Store",
                     "terms": ""
                 },
+                "shop/model": {
+                    "name": "Model Shop",
+                    "terms": "Toys,Games,Crafts"
+                },
                 "shop/money_lender": {
                     "name": "Money Lender",
                     "terms": ""

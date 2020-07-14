@@ -8230,6 +8230,11 @@ en:
         # shop=mobile_phone
         name: Mobile Phone Store
         terms: '<translate with synonyms or related terms for ''Mobile Phone Store'', separated by commas>'
+      shop/model:
+        # shop=model
+        name: Model Shop
+        # 'terms: Toys,Games,Crafts'
+        terms: '<translate with synonyms or related terms for ''Model Shop'', separated by commas>'
       shop/money_lender:
         # shop=money_lender
         name: Money Lender
