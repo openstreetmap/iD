@@ -13,5 +13,5 @@
         "shop": "vacant"
     },
     "name": "Vacant Shop",
-    "searchable": false
+    "searchable": true
 }

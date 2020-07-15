@@ -21,7 +21,8 @@
                 "garage_boxes": true
             },
             "natural": {
-                "tree": true
+                "tree": true,
+                "tree_row": true
             },
             "landuse": {
                 "parking": true

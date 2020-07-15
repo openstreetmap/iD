@@ -1,0 +1,11 @@
+{
+  "name": "Address interpolations",
+  "description": "Address interpolations",
+  "toggleable": true,
+  "matches": {
+      "geometry": ["line"],
+      "anyTags": {
+          "addr:interpolation": true
+      }
+  }
+}
