@@ -1,14 +1,10 @@
 {
     "icon": "maki-hospital",
-    "fields": [ 
-        "kneipp_water_cure_multi",       
+    "fields": [
+        "kneipp_water_cure_multi",
         "opening_hours",
         "opening_hours/covid19",
         "fee"
-                                      
-        
-        
-        
     ],
     "geometry": [
         "point",
@@ -17,7 +13,6 @@
     "terms": [],
     "tags": {
         "amenity": "kneipp_water_cure"
-        
     },
     "reference": {
         "key": "amenity",
