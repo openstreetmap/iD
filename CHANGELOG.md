@@ -33,6 +33,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 # 2.18.0
 ##### Planned: 2020-Jul
 
+#### :mega: Release Highlights
+* :raised_hand_with_fingers_splayed: **Touchscreen support!** We've finally optimized iD for multi-touch and stylus mapping on devices like tablets and 2-in-1s.<br/>
+_Long-press on features to open the edit menu. Review the Help pane to see what else you can do._
+* :card_index_dividers: **Multiselection editing** has been supercharged, so you can update many features together instead of one at a time.<br/>
+_<kbd>⇧ Shift</kbd> + click to select multiple features. On touchscreens, tap-and-hold one feature, then tap others to select them too._
+* :ballot_box_with_check: **[Osmose](http://osmose.openstreetmap.fr)** data quality issues can now be browsed and resolved within iD. Thanks, [@SilentSpike], for this integration!<br/>
+_Press <kbd>F</kbd> to open the Map Data pane and toggle on Osmose Issues under Data Layers._
+
+[@SilentSpike]: https://github.com/SilentSpike
+
 #### :tada: New Features
 You can now:
 
@@ -120,7 +130,7 @@ You can now:
 * Wrap long feature type labels to multiple lines ([#7722])
 * Move the "Zoom to this" button to be with the other zoom buttons on the side of the map ([#6601], [#7391])
 * Change misleading "Translate" tooltip to "Add multilingual name" ([#7486])
-* Add `key=value` placeholder to the text tag editor
+* Add "key=value" placeholder to the text tag editor
 * Focus the relation role input when clicking its label ([#7690])
 * Autofocus Description field when adding a new OSM note ([#7680])
 * Prevent browsers from showing their own list of autocomplete values for fields ([#6444])
