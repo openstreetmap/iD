@@ -8233,7 +8233,7 @@ en:
       shop/model:
         # shop=model
         name: Model Shop
-        # 'terms: Toys,Games,Crafts'
+        # 'terms: hobby,model building,model figures,model kits,model store,scale models'
         terms: '<translate with synonyms or related terms for ''Model Shop'', separated by commas>'
       shop/money_lender:
         # shop=money_lender
