@@ -34,7 +34,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### Planned: 2020-Jul
 
 #### :mega: Release Highlights
-* :raised_hand_with_fingers_splayed: **Touchscreen support!** We've finally optimized iD for multi-touch and stylus mapping on devices like tablets and 2-in-1s.<br/>
+* :raised_hand_with_fingers_splayed: **Touchscreen support!** We've finally optimized iD for multi-touch mapping on tablets and 2-in-1 devices.<br/>
 _Long-press on features to open the edit menu. Review the Help pane to see what else you can do._
 * :card_index_dividers: **Multiselection editing** has been supercharged, so you can update many features together instead of one at a time.<br/>
 _<kbd>⇧ Shift</kbd> + click to select multiple features. On touchscreens, tap-and-hold one feature, then tap others to select them too._
@@ -85,6 +85,10 @@ You can now:
 [#4977]: https://github.com/openstreetmap/iD/issues/4977
 [#7510]: https://github.com/openstreetmap/iD/issues/7510
 [#4994]: https://github.com/openstreetmap/iD/issues/4994
+
+#### :boom: Breaking Changes
+* Pressing <kbd>Space</kbd> with features selected no longer opens the edit menu, since the spacebar can now be used to select and deselect things. You can use the [menu key](https://en.wikipedia.org/wiki/Menu_key) instead, or hold down <kbd>Space</kbd> with the cursor hovering over a feature
+* :warning: There are numerous under-the-hood code changes. See the **Development** section below for details
 
 #### :sparkles: Usability
 
