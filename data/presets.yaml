@@ -7961,7 +7961,7 @@ en:
       shop/craft:
         # shop=craft
         name: Arts & Crafts Store
-        # 'terms: art*,paint*,frame'
+        # 'terms: art*,paint*,frame,hobby'
         terms: '<translate with synonyms or related terms for ''Arts & Crafts Store'', separated by commas>'
       shop/curtain:
         # shop=curtain
