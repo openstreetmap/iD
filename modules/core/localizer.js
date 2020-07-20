@@ -147,7 +147,7 @@ export function coreLocalizer() {
         _languageNames = currentData && currentData.languageNames;
         _scriptNames = currentData && currentData.scriptNames;
 
-        _usesMetric = _localeCode.toLowerCase() !== 'en-us';
+        _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }
 
 
