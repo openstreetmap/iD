@@ -33,6 +33,12 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 # 2.18.1
 ##### 2020-Jul-20
 
+#### :rocket: Presets
+* Add search term to Arts & Crafts Store ([#7811], thanks [@nisargshh])
+
+[#7811]: https://github.com/openstreetmap/iD/issues/7811
+[@nisargshh]: https://github.com/nisargshh
+
 #### :hammer: Development
 * Re-add `coreContext.locale` endpoint
 
