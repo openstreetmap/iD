@@ -153,7 +153,7 @@ export function uiSidebar(context) {
 
         var inspectorWrap = selection
             .append('div')
-            .attr('class', 'inspector-hidden inspector-wrap fr');
+            .attr('class', 'inspector-hidden inspector-wrap');
 
         var hoverModeSelect = function(targets) {
             context.container().selectAll('.feature-list-item').classed('hover', false);

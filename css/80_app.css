@@ -713,13 +713,15 @@ button.add-note svg.icon {
     position: absolute;
     bottom: 0;
     margin: 0;
-    padding: 5px 20px 5px 20px;
+    padding: 0 15px;
     border-top: 1px solid #ccc;
     background-color: #f6f6f6;
     width: 100%;
+    height: 30px;
     z-index: 1;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     list-style: none;
     display: flex;
 }
@@ -1029,7 +1031,6 @@ a.hide-toggle {
 .preset-list  {
     width: 100%;
     padding: 20px 20px 10px 20px;
-    border-bottom: 1px solid #ccc;
 }
 
 .preset-list-item {
