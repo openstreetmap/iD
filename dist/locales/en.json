@@ -9523,7 +9523,7 @@
                 },
                 "shop/craft": {
                     "name": "Arts & Crafts Store",
-                    "terms": "art*,paint*,frame"
+                    "terms": "art*,paint*,frame,hobby"
                 },
                 "shop/curtain": {
                     "name": "Curtain Store",
