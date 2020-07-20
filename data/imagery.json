@@ -7838,7 +7838,7 @@
         [92.10238, 20.81356]
       ]
     ],
-    "terms_url": "http://www.osm-tools.org",
+    "terms_url": "https://www.osm-tools.org",
     "terms_text": "© osm-tools.org & OpenStreetMap contributors, CC-BY-SA"
   },
   {
@@ -35894,8 +35894,8 @@
     "id": "Bern-dsm-hillshade-2015",
     "name": "Kanton Bern, Digitales Oberflaechenmodell 50cm, Relief",
     "type": "wms",
-    "template": "https://www.geoservice.apps.be.ch/geoservice2/services/a42geo/a42geo_hoehenwms_d_fk/MapServer/WmsServer?LAYERS=GEODB.LDOM50CM_LORELIEF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "template": "https://www.geoservice.apps.be.ch/geoservice2/services/a42geo/a42geo_hoehenwms_d_fk/MapServer/WMSServer?LAYERS=GEODB.LDOM50CM_LORELIEF_STANDARD&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -35927,8 +35927,8 @@
     "id": "Bern-dtm-hillshade-2015",
     "name": "Kanton Bern, Digitales Terrainmodell 50cm, Relief",
     "type": "wms",
-    "template": "https://www.geoservice.apps.be.ch/geoservice2/services/a42geo/a42geo_hoehenwms_d_fk/MapServer/WmsServer?LAYERS=GEODB.LDTM50CM_LTRELIEF&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "template": "https://www.geoservice.apps.be.ch/geoservice2/services/a42geo/a42geo_hoehenwms_d_fk/MapServer/WMSServer?LAYERS=GEODB.LDTM50CM_LTRELIEF_STANDARD&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
