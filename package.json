@@ -58,7 +58,7 @@
     "lodash-es": "~4.17.15",
     "marked": "1.0.0",
     "martinez-polygon-clipping": "0.7.0",
-    "node-diff3": "2.0.1",
+    "node-diff3": "2.1.0",
     "osm-auth": "1.0.2",
     "pannellum": "2.5.6",
     "rbush": "3.0.1",
