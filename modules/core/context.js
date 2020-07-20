@@ -114,6 +114,14 @@ export function coreContext() {
   };
 
 
+  // A string or array or locale codes to prefer over the browser's settings
+  context.locale = function(locale) {
+    if (!arguments.length) return localizer.localeCode();
+    localizer.preferredLocaleCodes(locale);
+    return context;
+  };
+
+
   function afterLoad(cid, callback) {
     return (err, result) => {
       if (err) {
@@ -531,6 +539,10 @@ export function coreContext() {
 
       if (context.initialHashParams.presets) {
         presetManager.addablePresetIDs(new Set(context.initialHashParams.presets.split(',')));
+      }
+
+      if (context.initialHashParams.locale) {
+        localizer.preferredLocaleCodes(context.initialHashParams.locale);
       }
 
       // kick off some async work
