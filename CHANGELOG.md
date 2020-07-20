@@ -31,7 +31,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.18.0
-##### Planned: 2020-Jul
+##### 2020-Jul-20
 
 #### :mega: Release Highlights
 * :raised_hand_with_fingers_splayed: **Touchscreen support!** We've finally optimized iD for multi-touch mapping on tablets and 2-in-1 devices.<br/>
