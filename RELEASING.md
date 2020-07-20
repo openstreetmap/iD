@@ -1,8 +1,7 @@
 ## Release Checklist
 
 ### Prerelease (several days prior)
-- Notify translators of impending release
-  (https://www.transifex.com/projects/p/id-editor/announcements/)
+- [Notify translators](https://www.transifex.com/projects/p/id-editor/announcements/) of the impending release
 - Notify TomH
 
 ### Prep
@@ -56,6 +55,7 @@ $  git checkout develop
 
 ```bash
 $  git add . && git commit -m 'Set development version number'
+$  git push origin develop
 ```
 
 ### Update `openstreetmap-website`
@@ -66,7 +66,7 @@ $  git remote add osmlab git@github.com:osmlab/openstreetmap-website.git
 $  git remote add openstreetmap git@github.com:openstreetmap/openstreetmap-website.git
 ```
 
-#### Sync develop branches
+#### Sync `master` branches
 
 ```bash
 $  git fetch --all
