@@ -30,6 +30,12 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.18.1
+##### 2020-Jul-20
+
+#### :hammer: Development
+* Re-add `coreContext.locale` endpoint
+
 # 2.18.0
 ##### 2020-Jul-20
 
