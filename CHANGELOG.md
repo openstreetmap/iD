@@ -78,7 +78,6 @@ You can now:
 * View the issues shared by multiple selected features ([#7324])
 * Browse and resolve Osmose quality assurance issues ([#5682], [#7095], thanks [@SilentSpike])
 * Add basic WMS endpoints as custom background layers ([#4977], [#7510], thanks [@1ec5])
-* Get the latest brand presets and OSM community resources whenever you launch iD ([#4994])
 
 [@SilentSpike]: https://github.com/SilentSpike
 [@1ec5]: https://github.com/1ec5
@@ -102,7 +101,6 @@ You can now:
 [#7095]: https://github.com/openstreetmap/iD/issues/7095
 [#4977]: https://github.com/openstreetmap/iD/issues/4977
 [#7510]: https://github.com/openstreetmap/iD/issues/7510
-[#4994]: https://github.com/openstreetmap/iD/issues/4994
 
 #### :boom: Breaking Changes
 * Pressing <kbd>Space</kbd> with features selected no longer opens the edit menu, since the spacebar can now be used to select and deselect things. You can use the [menu key](https://en.wikipedia.org/wiki/Menu_key) instead, or hold down <kbd>Space</kbd> with the cursor hovering over a feature
@@ -113,7 +111,7 @@ You can now:
 ###### Interactions
 * Don't show tooltips for non-mouse interactions ([#6035])
 * Flash feedback when tapping some buttons on touchscreens ([#7699])
-* Use larger map targets for touch and stylus input to make interactions easier ([#7643])
+* Use larger targets for touch and stylus input to make interactions easier ([#7643])
 * Prevent browser page navigation when swiping with a multi-touch trackpad or mouse in the map ([#5552], [#7659])
 * Don't zoom the entire interface via double-tap or pinch-to-zoom on touchscreens ([#6049])
 * Disable elastic page bouncing on standalone iD ([#7576])
@@ -155,7 +153,7 @@ You can now:
 * Add "key=value" placeholder to the text tag editor
 * Focus the relation role input when clicking its label ([#7690])
 * Autofocus Description field when adding a new OSM note ([#7680])
-* Prevent browsers from showing their own list of autocomplete values for fields ([#6444])
+* Prevent browsers from showing their own lists of autocomplete values for fields ([#6444])
 
 [@blackboxlogic]: https://github.com/blackboxlogic
 [@jgscherber]: https://github.com/jgscherber
