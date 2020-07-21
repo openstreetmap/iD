@@ -88,7 +88,9 @@ export function coreContext() {
 
 
   /* Straight accessors. Avoid using these if you can. */
-  let _connection;
+  // Instantiate the connection here because it doesn't require passing in
+  // `context` and it's needed for pre-init calls like `preauth`
+  let _connection = services.osm;
   let _history;
   let _validator;
   let _uploader;
@@ -529,8 +531,6 @@ export function coreContext() {
       _photos = rendererPhotos(context);
 
       _ui = uiInit(context);
-
-      _connection = services.osm;
     }
 
     // Set up objects that might need to access properties of `context`. The order
