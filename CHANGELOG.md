@@ -30,6 +30,20 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.18.3
+##### 2020-Jul-22
+
+#### :bug: Bugfixes
+* Fix issue where selected features would auto-center after deleting or navigating nodes in ways ([#7820])
+* Fix some non-loading background imagery layers ([#7823])
+* Properly update the inspector when switching between features with generic presets ([#7827])
+* Fix broken Browse button for custom map data files ([#7828])
+
+[@7827]: https://github.com/7827
+[@7820]: https://github.com/7820
+[@7823]: https://github.com/7823
+[@7828]: https://github.com/7828
+
 # 2.18.2
 ##### 2020-Jul-21
 
