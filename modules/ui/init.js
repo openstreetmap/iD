@@ -66,10 +66,14 @@ export function uiInit(context) {
 
                 // some targets have default click events we don't want to override
                 var isOkayTarget = d3_event.composedPath().some(function(node) {
-                    // clicking <label> affects its <input> by default
-                    return node.nodeName === 'LABEL' ||
+                    // we only care about element nodes
+                    return node.nodeType === 1 &&
+                        // clicking <input> focuses it and/or changes a value
+                        (node.nodeName === 'INPUT' ||
+                        // clicking <label> affects its <input> by default
+                        node.nodeName === 'LABEL' ||
                         // clicking <a> opens a hyperlink by default
-                        node.nodeName === 'A';
+                        node.nodeName === 'A');
                 });
                 if (isOkayTarget) return;
 
