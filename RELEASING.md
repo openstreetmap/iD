@@ -84,4 +84,4 @@ $  rm -rf vendor/assets/iD/* && vendorer
 $  git add . && git commit -m 'Update to iD vA.B.C'
 $  git push osmlab
 ```
-- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/develop...osmlab:develop) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment
+- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:master) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment
