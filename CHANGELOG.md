@@ -39,10 +39,10 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Properly update the inspector when switching between features with generic presets ([#7827])
 * Fix broken Browse button for custom map data files ([#7828])
 
-[@7827]: https://github.com/7827
-[@7820]: https://github.com/7820
-[@7823]: https://github.com/7823
-[@7828]: https://github.com/7828
+[#7820]: https://github.com/openstreetmap/iD/issues/7820
+[#7823]: https://github.com/openstreetmap/iD/issues/7823
+[#7827]: https://github.com/openstreetmap/iD/issues/7827
+[#7828]: https://github.com/openstreetmap/iD/issues/7828
 
 # 2.18.2
 ##### 2020-Jul-21
