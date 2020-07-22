@@ -61,6 +61,8 @@ export function helpString(id, replacements) {
         merge_icon: icon('#iD-operation-merge', 'pre-text operation'),
         delete_icon: icon('#iD-operation-delete', 'pre-text operation'),
         circularize_icon: icon('#iD-operation-circularize', 'pre-text operation'),
+        split_icon: icon('#iD-operation-split', 'pre-text operation'),
+        orthogonalize_icon: icon('#iD-operation-orthogonalize', 'pre-text operation'),
         reverse_icon: icon('#iD-operation-reverse', 'pre-text operation'),
         extract_icon: icon('#iD-operation-extract', 'pre-text operation'),
         disconnect_icon: icon('#iD-operation-disconnect', 'pre-text operation'),
