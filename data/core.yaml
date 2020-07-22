@@ -1422,6 +1422,14 @@ en:
       boundary_h: "Boundaries"
       boundary: "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
       boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation."
+    edit_menu:
+      title: Edit Menu
+      intro: "{rightclick} Right-click or {longpress_icon} long-press a feature will display the edit menu. The commands shown are context-specific and some are explained here."
+      edit_menu_h: "Advanced Commands from Edit Menu"
+      command_reverse: "The {reverse_icon} **{reverse}** command will change objects like oneway streets or cliffs where the top is one the left and the bottom on the right side."
+      command_disconnect: "The {disconnect_icon} **{disconnect}** command separates a connected point into independent points which can be separated from each other."
+      command_merge: "The {merge_icon} **{merge}** command create a single object from all selected objects. In order to turn a point into a line or an area while keeping the tags, create a line or an area without tags and merge it with the existing point."
+      command_extract: "The {extract_icon} **{extract}** command seperates a point from a line or area."
     notes:
       title: Notes
       intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, open the {data_icon} **{map_data}** panel and enable the {osm_notes} layer."
