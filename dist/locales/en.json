@@ -6141,6 +6141,10 @@
                     "name": "Pit Latrine",
                     "terms": "head,lavatory,long drop,outhouse,pit toilet,privy"
                 },
+                "amenity/toilets/disposal/portapotty": {
+                    "name": "Porta Potty",
+                    "terms": "restroom,privy,portable toilet,chemical toilet"
+                },
                 "amenity/townhall": {
                     "name": "Town Hall",
                     "terms": "village,city,government,courthouse,municipal"

@@ -1,0 +1,31 @@
+{
+    "icon": "tnp-2009541",
+    "fields": [
+        "toilets/disposal",
+        "{amenity/toilets}"
+    ],
+    "moreFields": [
+        "{amenity/toilets}"
+    ],
+    "geometry": [
+        "point",
+        "area",
+        "vertex"
+    ],
+    "terms": [
+        "restroom",
+        "privy",
+        "portable toilet",
+        "chemical toilet"
+    ],
+    "tags": {
+        "amenity": "toilets",
+        "toilets:disposal": "chemical",
+        "portable": "yes"
+    },
+    "reference": {
+        "key": "toilets:disposal",
+        "value": "chemical"
+    },
+    "name": "Porta Potty"
+}
