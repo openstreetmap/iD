@@ -467,7 +467,7 @@
     "name": "AIV Digitaal Hoogtemodel Vlaanderen II, multidirectionale hillshade 0,25 m",
     "type": "wms",
     "template": "https://geoservices.informatievlaanderen.be/raadpleegdiensten/dhmv/wms?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=DHMV_II_HILL_25cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "polygon": [
@@ -583,7 +583,7 @@
     "name": "AIV Digitaal Hoogtemodel Vlaanderen II, Skyview factor 0,25 m",
     "type": "wms",
     "template": "https://geoservices.informatievlaanderen.be/raadpleegdiensten/dhmv/wms?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=DHMV_II_SVF_25cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "polygon": [
@@ -699,7 +699,7 @@
     "name": "AIV Flanders 2013-2015 aerial imagery 10cm",
     "type": "wms",
     "template": "https://geoservices.informatievlaanderen.be/raadpleegdiensten/OGW/wms?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=OGWRGB13_15VL&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "polygon": [
@@ -7970,7 +7970,7 @@
     "name": "Canton de Génève 5cm (SITG 2011)",
     "type": "wms",
     "template": "https://ge.ch/ags2/services/Orthophotos_2011/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2011-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
     "polygon": [
@@ -8619,7 +8619,7 @@
     "name": "Canvec - English",
     "type": "wms",
     "template": "https://maps.geogratis.gc.ca/wms/canvec_en?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=canvec&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-141.0678, 60.2442],
@@ -8878,7 +8878,7 @@
     "name": "Canvec - French",
     "type": "wms",
     "template": "https://maps.geogratis.gc.ca/wms/canvec_fr?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=canvec&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-141.0678, 60.2442],
@@ -9210,7 +9210,7 @@
     "name": "Carta de Uso do Solo 2010 (WMS)",
     "type": "wms",
     "template": "http://mapas.dgterritorio.pt/wms-inspire/cos2010v1?language=por&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=COS2010_v1.0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2010-01-01T00:00:00.000Z",
     "startDate": "2010-01-01T00:00:00.000Z",
     "zoomExtent": [14, 18],
@@ -10388,7 +10388,7 @@
     "name": "Catastro Spain",
     "type": "wms",
     "template": "https://ovc.catastro.meh.es/Cartografia/WMS/ServidorWMS.aspx?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=Catastro&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-17.88463, 28.44606],
@@ -11809,7 +11809,7 @@
     "name": "City of Zürich Orthophoto 2011",
     "type": "wms",
     "template": "https://www.gis.stadt-zuerich.ch/maps/services/wms/WMS-ZH-STZH-OGD/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Luftbild_2011&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2011-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
     "zoomExtent": [0, 21],
@@ -11829,7 +11829,7 @@
     "name": "City of Zürich Overview map (Steets, buildings, house numbers)",
     "type": "wms",
     "template": "https://www.gis.stadt-zuerich.ch/maps/services/wms/WMS-ZH-STZH-OGD/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Uebersichtsplan&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 21],
     "polygon": [
       [
@@ -11861,7 +11861,7 @@
     "name": "Czech CUZK:KM",
     "type": "wms",
     "template": "https://wms.cuzk.cz/wms.asp?service=WMS&VERSION=1.1.1&REQUEST=GetMap&SRS={proj}&LAYERS=parcelni_cisla_i,obrazy_parcel_i,RST_KMD_I,hranice_parcel_i,DEF_BUDOVY,RST_KN_I,dalsi_p_mapy_i,prehledka_kat_prac,prehledka_kat_uz,prehledka_kraju-linie&FORMAT=image/png&transparent=TRUE&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [15.00637, 49.01774],
@@ -15602,7 +15602,7 @@
     "name": "Erlangen Luftbild (2011 5,0 cm)",
     "type": "wms",
     "template": "https://secure.erlangen.de/arcgiser/services/Luftbilder2011/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Erlangen_ratio10_5cm_gk4.jp2&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2011-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
     "polygon": [
@@ -15639,7 +15639,7 @@
     "name": "Erlangen Luftbild (2013 6,25 cm)",
     "type": "wms",
     "template": "https://secure.erlangen.de/arcgiser/services/Luftbilder2013/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Erlangen_ratio5_6.25cm.jp2&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2013-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "polygon": [
@@ -20441,7 +20441,7 @@
     "name": "Frankfurt am Main Luftbild 2016",
     "type": "wms",
     "template": "https://geoportal.frankfurt.de/opendata/luftbild-2016.exe?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=luftbild_10m,luftbild_1m,luftbild_20cm,luftbild_2m,luftbild_50cm,luftbild_5m&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-05-06T00:00:00.000Z",
     "startDate": "2016-05-06T00:00:00.000Z",
     "polygon": [
@@ -20462,7 +20462,7 @@
     "name": "Frankfurt am Main Luftbild 2017",
     "type": "wms",
     "template": "https://geoportal.frankfurt.de/opendata/luftbild-2017.exe?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=wms_opendata_luftbilder_2017&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-05-06T00:00:00.000Z",
     "startDate": "2016-05-06T00:00:00.000Z",
     "polygon": [
@@ -20990,7 +20990,7 @@
     "name": "Geobase Hydrography - English",
     "type": "wms",
     "template": "https://maps.geogratis.gc.ca/wms/hydro_network_en?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=nhn:nhn&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-141.0678, 60.2442],
@@ -21250,7 +21250,7 @@
     "name": "Geobase Hydrography - French",
     "type": "wms",
     "template": "https://maps.geogratis.gc.ca/wms/hydro_network_fr?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=nhn:nhn&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-141.0678, 60.2442],
@@ -21510,7 +21510,7 @@
     "name": "Geobase Roads - English",
     "type": "wms",
     "template": "https://maps.geogratis.gc.ca/wms/roads_en?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=roads&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [4, 20],
     "polygon": [
       [
@@ -21770,7 +21770,7 @@
     "name": "Geobase Roads - French",
     "type": "wms",
     "template": "https://cartes.geogratis.gc.ca/wms/roads_fr?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=routes&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [4, 20],
     "polygon": [
       [
@@ -22235,7 +22235,7 @@
     "name": "Géolittoral - Sentiers",
     "type": "wms",
     "template": "http://geolittoral.din.developpement-durable.gouv.fr/wxs?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=n_sentier_littoral_l&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-0.98385, 46.18807],
@@ -22726,7 +22726,7 @@
     "name": "Géolittoral V2 - Orthophotos 2011-2014",
     "type": "wms",
     "template": "http://geolittoral.din.developpement-durable.gouv.fr/wxs?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortholittorale_v2_rvb&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
     "polygon": [
@@ -35961,7 +35961,7 @@
     "name": "Kanton Glarus Orthophoto 2013",
     "type": "wms",
     "template": "https://wms.geo.gl.ch?LAYERS=ch.gl.imagery.orthofoto2013&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2013-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -35992,7 +35992,7 @@
     "name": "Kanton Glarus Orthophoto 2015",
     "type": "wms",
     "template": "https://wms.geo.gl.ch?LAYERS=ch.gl.imagery.orthofoto2015&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -36023,7 +36023,7 @@
     "name": "Kanton Glarus Orthophoto 2017",
     "type": "wms",
     "template": "https://wms.geo.gl.ch?LAYERS=ch.gl.imagery.orthofoto2017&STYLES=default&FORMAT=image/jpeg&CRS={proj}&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2017-01-01T00:00:00.000Z",
     "startDate": "2017-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -36513,7 +36513,7 @@
     "name": "Kanton Solothurn, DOM Relief 2014 50cm",
     "type": "wms",
     "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2014.dom_relief&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -36690,7 +36690,7 @@
     "name": "Kanton Solothurn, DSM Relief 2018",
     "type": "wms",
     "template": "https://geo.so.ch/api/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/jpeg&TRANSPARENT=true&LAYERS=ch.bl.agi.lidar_2018.dsm_relief&STYLES=&SRS={proj}&CRS={proj}&TILED=false&DPI=96&OPACITIES=255&t=675&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -36931,7 +36931,7 @@
     "name": "Kanton Solothurn, DSM Relief 2019",
     "type": "wms",
     "template": "https://geo.so.ch/api/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/jpeg&TRANSPARENT=true&LAYERS=ch.so.agi.lidar_2019.dsm_relief&STYLES=&SRS={proj}&CRS={proj}&TILED=false&DPI=96&OPACITIES=255&t=675&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2019-01-01T00:00:00.000Z",
     "startDate": "2019-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -37229,7 +37229,7 @@
     "name": "Kanton Solothurn, DTM Relief 2014 50cm",
     "type": "wms",
     "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2014.dtm_relief&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -37406,7 +37406,7 @@
     "name": "Kanton Solothurn, DTM Relief 2019",
     "type": "wms",
     "template": "https://geo.so.ch/api/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/jpeg&TRANSPARENT=true&LAYERS=ch.so.agi.lidar_2019.dtm_relief&STYLES=&SRS={proj}&CRS={proj}&TILED=false&DPI=96&OPACITIES=255&t=675&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2019-01-01T00:00:00.000Z",
     "startDate": "2019-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -37704,7 +37704,7 @@
     "name": "Kanton Thurgau Relief DTM",
     "type": "wms",
     "template": "https://ows-raster.geo.tg.ch/geofy_access_proxy/reliefschattierung?LAYERS=DTMRelief&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [8, 21],
@@ -37788,7 +37788,7 @@
     "name": "Kanton Thurgau, Basisplan-AV",
     "type": "wms",
     "template": "https://ows.geo.tg.ch/geofy_access_proxy/basisplanf?LAYERS=Basisplan_farbig&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [8, 21],
     "polygon": [
       [
@@ -37870,7 +37870,7 @@
     "name": "Kanton Thurgau, Orthofoto2017 RGB",
     "type": "wms",
     "template": "https://ows-raster.geo.tg.ch/geofy_access_proxy/orthofoto2017?LAYERS=Orthofoto2017_RGB&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2017-01-01T00:00:00.000Z",
     "startDate": "2017-01-01T00:00:00.000Z",
     "zoomExtent": [8, 21],
@@ -37955,7 +37955,7 @@
     "name": "Kanton Thurgau, Rad-Routen",
     "type": "wms",
     "template": "https://ows.geo.tg.ch/geofy_access_proxy/radwege?LAYERS=Radwege&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [8, 21],
     "polygon": [
       [
@@ -38037,7 +38037,7 @@
     "name": "Kanton Thurgau, Wanderwege",
     "type": "wms",
     "template": "https://ows.geo.tg.ch/geofy_access_proxy/wanderwege?LAYERS=Wanderwege&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [8, 21],
     "polygon": [
       [
@@ -38228,7 +38228,7 @@
     "name": "Kanton Zurich, Oberflächenschummerung 50cm",
     "type": "wms",
     "template": "https://wms.zh.ch/OGDLidarZH?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=dom2014hillshade&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -38738,7 +38738,7 @@
     "name": "Kanton Zurich, Orthofoto ZH Frühjahr 2015/16 RGB 10cm",
     "type": "wms",
     "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ortho_w_15&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -39248,7 +39248,7 @@
     "name": "Kanton Zurich, Orthofoto ZH Sommer 2014/15 RGB 10cm",
     "type": "wms",
     "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ortho_s_14&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -39758,7 +39758,7 @@
     "name": "Kanton Zurich, Orthofoto ZH Sommer 2018 RGB 10cm",
     "type": "wms",
     "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ortho&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -40269,7 +40269,7 @@
     "name": "Kanton Zurich, Terrainschummerung 50cm",
     "type": "wms",
     "template": "https://wms.zh.ch/OGDLidarZH?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=dtm2014hillshade&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [8, 22],
@@ -40908,7 +40908,7 @@
     "name": "Kartverket Contour Lines overlay",
     "type": "wms",
     "template": "https://openwms.statkart.no/skwms1/wms.topo4?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=hoydetall5linje,hoydetall5punkt,hoydepunkt,vannpunkt,hoydekurver_1m,hoydekurver_5m,N50Hoydekurver,N250Hoydekurver,N500Hoydekurver,N1000Hoydekurver,N2000Hoydekurver&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [9, 22],
     "polygon": [
       [
@@ -42064,7 +42064,7 @@
     "name": "KyFromAbove",
     "type": "wms",
     "template": "https://kyraster.ky.gov/arcgis/services/ImageServices/Ky_KYAPED_Imagery_WGS84WM/ImageServer/WMSServer?FORMAT=image/jpeg&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2012-01-01T00:00:00.000Z",
     "zoomExtent": [3, 20],
@@ -42926,7 +42926,7 @@
     "name": "KyFromAbove 2019 6in",
     "type": "wms",
     "template": "https://kyraster.ky.gov/arcgis/services/ImageServices/Ky_KYAPED_2019_6IN_WGS84WM/ImageServer/WMSServer?FORMAT=image/jpeg&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2019-01-01T00:00:00.000Z",
     "startDate": "2019-01-01T00:00:00.000Z",
     "zoomExtent": [2, 20],
@@ -43489,7 +43489,7 @@
     "name": "Kystverket Navigational Aid overlay",
     "type": "wms",
     "template": "https://nfs.kystverket.no/arcgis/services/nfs/NFSSistOperativ/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=13,12,10,8,6,5,4,3&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [12, 19],
     "polygon": [
       [
@@ -44535,7 +44535,7 @@
     "name": "Loire-Atlantique - Orthophotos 2016 - 10 cm",
     "type": "wms",
     "template": "https://wms-vuduciel2.makina-corpus.net/geoserver/wms?SERVICE=WMS&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=cg44:ortho44-2016&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
     "zoomExtent": [0, 20],
@@ -45995,7 +45995,7 @@
     "name": "Lyon Orthophoto 2012-03 10cm",
     "type": "wms",
     "template": "https://download.data.grandlyon.com/wms/grandlyon?language=fre&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=1830_5150_10cm_CC46,1830_5155_10cm_CC46,1830_5160_10cm_CC46,1830_5165_10cm_CC46,1830_5170_10cm_CC46,1830_5175_10cm_CC46,1830_5180_10cm_CC46,1830_5185_10cm_CC46,1830_5190_10cm_CC46,1835_5150_10cm_CC46,1835_5155_10cm_CC46,1835_5160_10cm_CC46,1835_5165_10cm_CC46,1835_5170_10cm_CC46,1835_5175_10cm_CC46,1835_5180_10cm_CC46,1835_5185_10cm_CC46,1835_5190_10cm_CC46,1840_5150_10cm_CC46,1840_5155_10cm_CC46,1840_5160_10cm_CC46,1840_5165_10cm_CC46,1840_5170_10cm_CC46,1840_5175_10cm_CC46,1840_5180_10cm_CC46,1840_5185_10cm_CC46,1840_5190_10cm_CC46,1845_5150_10cm_CC46,1845_5155_10cm_CC46,1845_5160_10cm_CC46,1845_5165_10cm_CC46,1845_5170_10cm_CC46,1845_5175_10cm_CC46,1845_5180_10cm_CC46,1845_5185_10cm_CC46,1845_5190_10cm_CC46,1850_5155_10cm_CC46,1850_5160_10cm_CC46,1850_5165_10cm_CC46,1850_5170_10cm_CC46,1850_5175_10cm_CC46,1850_5180_10cm_CC46,1850_5185_10cm_CC46,1855_5155_10cm_CC46,1855_5165_10cm_CC46,1855_5170_10cm_CC46,1855_5175_10cm_CC46,1855_5180_10cm_CC46,1855_5185_10cm_CC46,1860_5155_10cm_CC46,1860_5160_10cm_CC46,1860_5165_10cm_CC46,1860_5170_10cm_CC46,1860_5175_10cm_CC46,1860_5180_10cm_CC46,1860_5185_10cm_CC46,1865_5155_10cm_CC46,1865_5160_10cm_CC46,1865_5165_10cm_CC46,1865_5170_10cm_CC46&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2012-03-01T00:00:00.000Z",
     "startDate": "2012-03-01T00:00:00.000Z",
     "polygon": [
@@ -46144,7 +46144,7 @@
     "name": "Maps4BW (LGL-BW, www.lgl-bw.de)",
     "type": "wms",
     "template": "https://owsproxy.lgl-bw.de/owsproxy/ows/WMS_Maps4BW?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=webatlasde&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [9.06954, 49.57679],
@@ -46660,7 +46660,7 @@
     "name": "MD Latest 6 Inch Aerial Imagery",
     "type": "wms",
     "template": "https://geodata.md.gov/imap/services/Imagery/MD_SixInchImagery/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=MD_SixInchImagery&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "zoomExtent": [0, 20],
@@ -46782,7 +46782,7 @@
     "name": "MD Transportation Basemap",
     "type": "wms",
     "template": "https://geodata.md.gov/imap/services/Transportation/MD_ColorBasemap/MapServer/WmsServer?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=MD_ColorBasemap&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [-76.23413, 37.92037],
@@ -47026,7 +47026,7 @@
     "name": "Metropole Ruhr: Luftbilder (10 cm)",
     "type": "wms",
     "template": "https://geodaten.metropoleruhr.de/dop/dop?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=DOP&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [6.51691, 51.81714],
@@ -47573,7 +47573,7 @@
     "name": "Miljødirektoratet Protected Areas overlay",
     "type": "wms",
     "template": "https://kart.miljodirektoratet.no/arcgis/services/vern/MapServer/WmsServer?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=naturvern_klasser_omrade&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 22],
     "polygon": [
       [
@@ -48311,7 +48311,7 @@
     "name": "National Agriculture Imagery Program",
     "type": "wms",
     "template": "https://gis.apfo.usda.gov/arcgis/services/NAIP/USDA_CONUS_PRIME/ImageServer/WMSServer?FORMAT=image/jpeg&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [12, 20],
     "polygon": [
       [
@@ -50052,7 +50052,7 @@
     "name": "NPD Offshore Installations overlay",
     "type": "wms",
     "template": "https://gis.npd.no/ogc/factmaps/2_0?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=fclFixed,pplAll,fldByStatus&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [6, 20],
     "polygon": [
       [
@@ -52413,7 +52413,7 @@
     "name": "Orthophoto 1st cycle (1994-1999) - Latvia",
     "type": "wms",
     "template": "https://services.lgia.gov.lv/arcfree/services/Ortofoto_v1/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [27.66415, 55.75354],
@@ -54364,7 +54364,7 @@
     "name": "PCN 2006 - Italy",
     "type": "wms",
     "template": "http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/raster/ortofoto_colore_06.map&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=OI.ORTOIMMAGINI.2006.33,OI.ORTOIMMAGINI.2006.32&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2006-01-01T00:00:00.000Z",
     "startDate": "2006-01-01T00:00:00.000Z",
     "polygon": [
@@ -54551,7 +54551,7 @@
     "name": "PCN 2008 - IT Lazio+Umbria",
     "type": "wms",
     "template": "http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/raster/ortofoto_colore_08.map&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=OI.ORTOIMMAGINI.2008.33&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2008-01-01T00:00:00.000Z",
     "startDate": "2008-01-01T00:00:00.000Z",
     "polygon": [
@@ -55698,7 +55698,7 @@
     "name": "polska.e-mapa.net: Buildings",
     "type": "wms",
     "template": "https://integracja02.gugik.gov.pl/cgi-bin/KrajowaIntegracjaEwidencjiGruntow?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 19],
     "polygon": [
       [
@@ -56103,7 +56103,7 @@
     "name": "Poznań: Buildings",
     "type": "wms",
     "template": "http://wms2.geopoz.poznan.pl:8080/geoserver/sip/wms?SERVICE=WMS&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=budynki_ewidencyjne_sql&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "zoomExtent": [0, 23],
@@ -56143,7 +56143,7 @@
     "name": "Poznań: Orthophotomap 2014 (aerial image)",
     "type": "wms",
     "template": "http://wms1.geopoz.poznan.pl:6080/arcgis/services/sip/ortofotomapa_2014/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortofotomapa_2014_image&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
     "zoomExtent": [0, 23],
@@ -56183,7 +56183,7 @@
     "name": "Poznań: Orthophotomap 2016 (aerial image)",
     "type": "wms",
     "template": "http://wms1.geopoz.poznan.pl:6080/arcgis/services/sip/ortofotomapy/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ortofotomapa_2016_image&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
     "zoomExtent": [0, 23],
@@ -56820,7 +56820,7 @@
     "name": "Rio Mosaic 2013",
     "type": "wms",
     "template": "http://geo.rio.rj.gov.br/ArcGIS/services/Imagens/Mosaico_2013/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=1&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2013-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "polygon": [
@@ -56982,7 +56982,7 @@
     "name": "Rio Mosaic 2015",
     "type": "wms",
     "template": "https://pgeo3.rio.rj.gov.br/arcgis/services/Imagens/Mosaico_2015_UTM/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "zoomExtent": [0, 13],
@@ -57834,7 +57834,7 @@
     "name": "Saxony historical aerial imagery 2005",
     "type": "wms",
     "template": "https://geodienste.sachsen.de/wms_geosn_dop-2005/guest?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=dop_2005&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2005-01-01T00:00:00.000Z",
     "startDate": "2005-01-01T00:00:00.000Z",
     "polygon": [
@@ -57980,7 +57980,7 @@
     "name": "Saxony historical aerial imagery 2012-2014",
     "type": "wms",
     "template": "https://geodienste.sachsen.de/wms_geosn_dop_2012_2014/guest?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=dop_2012_2014_rgb&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2012-01-01T00:00:00.000Z",
     "startDate": "2012-01-01T00:00:00.000Z",
     "polygon": [
@@ -58126,7 +58126,7 @@
     "name": "Saxony latest aerial imagery",
     "type": "wms",
     "template": "https://geodienste.sachsen.de/wms_geosn_dop-rgb/guest?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=sn_dop_020&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [13.54901, 50.69792],
@@ -58266,7 +58266,7 @@
     "name": "Saxony latest aerial imagery infrared",
     "type": "wms",
     "template": "https://geodienste.sachsen.de/wms_geosn_dop-cir/guest?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=sn_dop_020_cir&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [13.54901, 50.69792],
@@ -58405,7 +58405,7 @@
     "name": "Saxony topographic map",
     "type": "wms",
     "template": "https://geodienste.sachsen.de/wms_geosn_dtk-pg-color/guest?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=sn_dtk_pg_color&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [13.54901, 50.69792],
@@ -58544,7 +58544,7 @@
     "name": "Saxony WebAtlasSN",
     "type": "wms",
     "template": "https://geodienste.sachsen.de/wms_geosn_webatlas-sn/guest?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Vegetation,Siedlung,Gewaesser,Verkehr,Administrative_Einheiten,Beschriftung&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [13.54901, 50.69792],
@@ -58861,7 +58861,7 @@
     "name": "SDFE Cadastral Parcels INSPIRE View",
     "type": "wms",
     "template": "https://kortforsyningen.kms.dk/cp_inspire?login=OpenStreetMapDK2015&password=Gall4Peters&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=CP.CadastralParcel&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 20],
     "polygon": [
       [
@@ -59038,7 +59038,7 @@
     "name": "SDFE DTK Kort25",
     "type": "wms",
     "template": "https://kortforsyningen.kms.dk/topo25?FORMAT=image/png&VERSION=1.1.1&login=OpenStreetMapDK2015&password=Gall4Peters&SERVICE=WMS&REQUEST=GetMap&Layers=topo25_klassisk&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 19],
     "polygon": [
       [
@@ -59215,7 +59215,7 @@
     "name": "SDFE Skærmkort",
     "type": "wms",
     "template": "https://kortforsyningen.kms.dk/topo_skaermkort?FORMAT=image/png&VERSION=1.1.1&login=OpenStreetMapDK2015&password=Gall4Peters&SERVICE=WMS&REQUEST=GetMap&Layers=dtk_skaermkort&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 19],
     "polygon": [
       [
@@ -59392,7 +59392,7 @@
     "name": "SDFE Surface Shadow Map (40 cm)",
     "type": "wms",
     "template": "https://kortforsyningen.kms.dk/dhm?login=OpenStreetMapDK2015&password=Gall4Peters&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=dhm_overflade_skyggekort&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 20],
     "polygon": [
       [
@@ -59569,7 +59569,7 @@
     "name": "SDFE Terrain Shadow Map (40 cm)",
     "type": "wms",
     "template": "https://kortforsyningen.kms.dk/dhm?login=OpenStreetMapDK2015&password=Gall4Peters&FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=dhm_terraen_skyggekort&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "zoomExtent": [0, 20],
     "polygon": [
       [
@@ -59746,7 +59746,7 @@
     "name": "Sicily - Italy",
     "type": "wms",
     "template": "http://map.sitr.regione.sicilia.it/ArcGIS/services/WGS84_F33/Ortofoto_ATA20072008_f33/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&Layers=0&STYLES=default&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [15.71165, 38.25894],
@@ -62663,7 +62663,7 @@
     "name": "SPW(allonie) 2009-2010 aerial imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/IMAGERIE/ORTHO_2009_2010/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2010-01-01T00:00:00.000Z",
     "startDate": "2009-01-01T00:00:00.000Z",
     "polygon": [
@@ -62800,7 +62800,7 @@
     "name": "SPW(allonie) 2012-2013 aerial imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/IMAGERIE/ORTHO_2012_2013/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2013-01-01T00:00:00.000Z",
     "startDate": "2012-01-01T00:00:00.000Z",
     "polygon": [
@@ -62937,7 +62937,7 @@
     "name": "SPW(allonie) 2015 aerial imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/IMAGERIE/ORTHO_2015/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "polygon": [
@@ -63074,7 +63074,7 @@
     "name": "SPW(allonie) 2016 aerial imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/IMAGERIE/ORTHO_2016/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
     "polygon": [
@@ -63211,7 +63211,7 @@
     "name": "SPW(allonie) 2018 aerial imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/IMAGERIE/ORTHO_2018/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "polygon": [
@@ -63348,7 +63348,7 @@
     "name": "SPW(allonie) most recent aerial imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/IMAGERIE/ORTHO_LAST/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [5.78257, 49.87573],
@@ -63484,7 +63484,7 @@
     "name": "SPW(allonie) PICC numerical imagery",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/TOPOGRAPHIE/PICC_VDIFF/MapServer/WmsServer?SERVICE=WMS&VERSION=1.1.1&FORMAT=image/png8&TRANSPARENT=FALSE&REQUEST=GetMap&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&LAYERS=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [5.78257, 49.87573],
@@ -63619,7 +63619,7 @@
     "name": "SPW(allonie) shaded relief",
     "type": "wms",
     "template": "https://geoservices.wallonie.be/arcgis/services/RELIEF/WALLONIE_MNT_2013_2014_HILLSHADE/MapServer/WMSServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
     "polygon": [
@@ -67477,7 +67477,7 @@
     "name": "Törökbálint orthophoto 2013",
     "type": "wms",
     "template": "https://terkep.torokbalint.hu/mapproxy/service?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ORTO_2013_5CM_2013SZEPT_TAKARASSAL_512_512&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&TRANSPARENT=true",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2013-09-01T00:00:00.000Z",
     "startDate": "2013-09-01T00:00:00.000Z",
     "polygon": [
@@ -67645,7 +67645,7 @@
     "name": "Törökbálint orthophoto 2015",
     "type": "wms",
     "template": "https://terkep.torokbalint.hu/mapproxy/service?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=TBORTO_2015_20160218&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&TRANSPARENT=true",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "polygon": [
@@ -67813,7 +67813,7 @@
     "name": "Törökbálint orthophoto 2018",
     "type": "wms",
     "template": "https://terkep.torokbalint.hu/mapproxy/service?FORMAT=image/png&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=TBORTO_2018&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&TRANSPARENT=true",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "polygon": [
@@ -69902,7 +69902,7 @@
     "name": "UrbIS-Ortho 2016",
     "type": "wms",
     "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=Urbis:Ortho2016&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
     "polygon": [
@@ -69980,7 +69980,7 @@
     "name": "UrbIS-Ortho 2017",
     "type": "wms",
     "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=Urbis:Ortho2017&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2017-01-01T00:00:00.000Z",
     "startDate": "2017-01-01T00:00:00.000Z",
     "polygon": [
@@ -70058,7 +70058,7 @@
     "name": "UrbIS-Ortho 2018",
     "type": "wms",
     "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=Urbis:Ortho2018&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "polygon": [
@@ -70136,7 +70136,7 @@
     "name": "UrbIS-Ortho 2019",
     "type": "wms",
     "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=Urbis:Ortho2019&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2019-01-01T00:00:00.000Z",
     "startDate": "2019-01-01T00:00:00.000Z",
     "polygon": [
@@ -70215,7 +70215,7 @@
     "name": "UrbisAdm FR",
     "type": "wms",
     "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=urbisFR&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [4.4347, 50.77647],
@@ -70305,7 +70305,7 @@
     "name": "UrbisAdm NL",
     "type": "wms",
     "template": "https://geoservices-urbis.irisnet.be/geoserver/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&LAYERS=urbisNL&WIDTH={width}&HEIGHT={height}&CRS={proj}&STYLES=&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [4.4347, 50.77647],
@@ -71863,7 +71863,7 @@
     "name": "VoGIS: DGM (Terrain model)",
     "type": "wms",
     "template": "https://vogis.cnv.at/mapserver/mapserv?map=i_hoehen_und_gelaende_r_wms.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=schummerung_50cm_terrain&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [9.96805, 47.54631],
@@ -72126,7 +72126,7 @@
     "name": "VoGIS: DOM (Surface model)",
     "type": "wms",
     "template": "https://vogis.cnv.at/mapserver/mapserv?map=i_hoehen_und_gelaende_r_wms.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=schummerung_50cm_surface&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "polygon": [
       [
         [9.96805, 47.54631],
@@ -72389,7 +72389,7 @@
     "name": "VoGIS: Echtfarbenbild 2012 (12cm)",
     "type": "wms",
     "template": "https://vogis.cnv.at/mapserver/mapserv?map=i_luftbilder_r_wms.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ef2012_12cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2012-01-01T00:00:00.000Z",
     "startDate": "2012-01-01T00:00:00.000Z",
     "polygon": [
@@ -72435,7 +72435,7 @@
     "name": "VoGIS: Echtfarbenbild 2015 (10cm)",
     "type": "wms",
     "template": "https://vogis.cnv.at/mapserver/mapserv?map=i_luftbilder_r_wms.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ef2015_10cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "polygon": [
@@ -72481,7 +72481,7 @@
     "name": "VoGIS: Echtfarbenbild 2018 (10cm)",
     "type": "wms",
     "template": "https://vogis.cnv.at/mapserver/mapserv?map=i_luftbilder_r_wms.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=ef2018_10cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
     "polygon": [
@@ -72527,7 +72527,7 @@
     "name": "VoGIS: Echtfarbenbild Winter 2015 (20cm)",
     "type": "wms",
     "template": "https://vogis.cnv.at/mapserver/mapserv?map=i_luftbilder_r_wms.map&FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=wi2015_20cm&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "polygon": [
@@ -72607,7 +72607,7 @@
     "name": "Wrocław: Orthophotomap 2015 (aerial image)",
     "type": "wms",
     "template": "https://gis1.um.wroc.pl/arcgis/services/ogc/OGC_ortofoto_2015/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
     "zoomExtent": [0, 23],
@@ -72719,7 +72719,7 @@
     "name": "Wrocław: Orthophotomap 2018 (aerial image)",
     "type": "wms",
     "template": "https://gis1.um.wroc.pl/arcgis/services/ogc/OGC_ortofoto_2018/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:4326",
+    "projection": "EPSG:3857",
     "endDate": "2018-04-07T00:00:00.000Z",
     "startDate": "2018-04-06T00:00:00.000Z",
     "zoomExtent": [0, 23],
