@@ -124,10 +124,31 @@ export function svgMapillaryImages(projection, context, dispatch) {
     function filterImages(images) {
         var showsPano = context.photos().showsPanoramic();
         var showsFlat = context.photos().showsFlat();
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var username = context.photos().username();
+
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
                 if (image.pano) return showsPano;
                 return showsFlat;
+            });
+        }
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            images = images.filter(function(image) {
+                return new Date(image.captured_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            images = images.filter(function(image) {
+                return new Date(image.captured_at).getTime() <= toTimestamp;
+            });
+        }
+        if (username) {
+            images = images.filter(function(image) {
+                return image.captured_by === username;
             });
         }
         return images;
@@ -136,6 +157,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
     function filterSequences(sequences, service) {
         var showsPano = context.photos().showsPanoramic();
         var showsFlat = context.photos().showsFlat();
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var username = context.photos().username();
+
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
                 if (sequence.properties.hasOwnProperty('pano')) {
@@ -157,6 +182,23 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 }
             });
         }
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.captured_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.captured_at).getTime() <= toTimestamp;
+            });
+        }
+        if (username) {
+            sequences = sequences.filter(function(sequence) {
+                return sequence.captured_by === username;
+            });
+        }
         return sequences;
     }
 
@@ -173,6 +215,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);
+        service.filterViewer(context);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });

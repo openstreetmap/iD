@@ -9,6 +9,10 @@ export function rendererPhotos(context) {
     var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'openstreetcam'];
     var _allPhotoTypes = ['flat', 'panoramic'];
     var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
+    var _dateFilters = ['fromDate', 'toDate'];
+    var _fromDate;
+    var _toDate;
+    var _username;
 
     function photos() {}
 
@@ -37,14 +41,41 @@ export function rendererPhotos(context) {
         return _allPhotoTypes;
     };
 
+    photos.dateFilters = function() {
+        return _dateFilters;
+    };
+
+    photos.dateFilterValue = function(val) {
+        return val === _dateFilters[0] ? _fromDate : _toDate;
+    };
+
+    photos.setDateFilter = function(type, val) {
+        if (type === _dateFilters[0]) _fromDate = val;
+        if (type === _dateFilters[1]) _toDate = val;
+        dispatch.call('change', this);
+    };
+
+    photos.setUsernameFilter = function(val) {
+        _username = val;
+        dispatch.call('change', this);
+    };
+
     function showsLayer(id) {
         var layer = context.layers().layer(id);
         return layer && layer.supported() && layer.enabled();
     }
 
+    photos.shouldFilterByDate = function() {
+        return showsLayer('mapillary') || showsLayer('openstreetcam') || showsLayer('streetside');
+    };
+
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||
             (showsLayer('streetside') && showsLayer('openstreetcam'));
+    };
+
+    photos.shouldFilterByUsername = function() {
+        return showsLayer('mapillary') || showsLayer('openstreetcam');
     };
 
     photos.showsPhotoType = function(val) {
@@ -61,6 +92,14 @@ export function rendererPhotos(context) {
         return photos.showsPhotoType('panoramic');
     };
 
+    photos.fromDate = function() {
+        return _fromDate;
+    };
+
+    photos.toDate = function() {
+        return _toDate;
+    };
+    
     photos.togglePhotoType = function(val) {
         var index = _shownPhotoTypes.indexOf(val);
         if (index !== -1) {
@@ -70,6 +109,10 @@ export function rendererPhotos(context) {
         }
         dispatch.call('change', this);
         return photos;
+    };
+
+    photos.username = function() {
+        return _username;
     };
 
     photos.init = function() {
