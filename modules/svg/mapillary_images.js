@@ -185,20 +185,21 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.captured_at).getTime() >= fromTimestamp;
+                return new Date(sequence.properties.captured_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
             var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.captured_at).getTime() <= toTimestamp;
+                return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
             });
         }
         if (username) {
             sequences = sequences.filter(function(sequence) {
-                return sequence.captured_by === username;
+                return sequence.properties.username === username;
             });
         }
+
         return sequences;
     }
 
