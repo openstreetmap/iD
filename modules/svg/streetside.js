@@ -159,6 +159,26 @@ export function svgStreetside(projection, context, dispatch) {
 
     context.photos().on('change.streetside', update);
 
+    function filterBubbles(bubbles) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            bubbles = bubbles.filter(function(bubble) {
+                return new Date(bubble.captured_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            bubbles = bubbles.filter(function(bubble) {
+                return new Date(bubble.captured_at).getTime() <= toTimestamp;
+            });
+        }
+
+        return bubbles;
+    }
+
     /**
      * update().
      */
@@ -177,6 +197,8 @@ export function svgStreetside(projection, context, dispatch) {
             sequences = (service ? service.sequences(projection) : []);
             bubbles = (service && showMarkers ? service.bubbles(projection) : []);
         }
+
+        bubbles = filterBubbles(bubbles);
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });

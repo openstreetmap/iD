@@ -368,4 +368,19 @@ describe('iD.serviceMapillary', function() {
         });
     });
 
+    describe('#filterViewer', function() {
+        it('filters images by username', function() {
+            context.photos().setUsernameFilter('mapillary');
+            var filter = mapillary.filterViewer(context);
+            expect(filter.length).to.be.equal(2);
+        });
+
+        it('filters images by dates', function() {
+            context.photos().setDateFilter('fromDate', '2020-01-01');
+            context.photos().setDateFilter('toDate', '2021-01-01');
+            var filter = mapillary.filterViewer(context);
+            expect(filter.length).to.be.equal(3);
+        });
+    });
+
 });

@@ -168,7 +168,8 @@ input[type=search],
 input[type=number],
 input[type=url],
 input[type=tel],
-input[type=email] {
+input[type=email],
+input[type=date] {
     background-color: #fff;
     color: #333;
     border: 1px solid #ccc;
@@ -177,6 +178,11 @@ input[type=email] {
     border-radius: 4px;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+input.list-item-input {
+    height: 20px;
+    padding: 0px 4px;
+    width: 160px;
 }
 .ideditor[dir='rtl'] textarea,
 .ideditor[dir='rtl'] input[type=text],

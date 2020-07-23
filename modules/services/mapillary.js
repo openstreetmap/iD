@@ -46,6 +46,7 @@ var _mlyCache;
 var _mlyClicks;
 var _mlySelectedImageKey;
 var _mlyViewer;
+var _mlyViewerFilter = ['all'];
 
 
 function abortRequest(controller) {
@@ -417,6 +418,34 @@ export default {
         });
     },
 
+    filterViewer: function(context) {
+        var showsPano = context.photos().showsPanoramic();
+        var showsFlat = context.photos().showsFlat();
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var username = context.photos().username();
+        var filter = ['all'];
+        
+        if (!showsPano) filter.push(['==', 'pano', false]);
+        if (!showsFlat && showsPano) filter.push(['==', 'pano', true]);
+        if (username) filter.push(['==', 'username', username]);
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            filter.push(['>=', 'capturedAt', fromTimestamp]);
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            filter.push(['>=', 'capturedAt', toTimestamp]);
+        } 
+
+        if (_mlyViewer) {
+            _mlyViewer.setFilter(filter);
+        }
+        _mlyViewerFilter = filter;
+
+        return filter;
+    },
+
 
     showViewer: function(context) {
         var wrap = context.container().select('.photoviewer')
@@ -512,6 +541,9 @@ export default {
             _mlyViewer.on('bearingchanged', bearingChanged);
             _mlyViewer.moveToKey(imageKey)
                 .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
+            if (_mlyViewerFilter) {
+                _mlyViewer.setFilter(_mlyViewerFilter);
+            }
         }
 
         // nodeChanged: called after the viewer has changed images and is ready.
