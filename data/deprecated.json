@@ -8,6 +8,10 @@
     "replace": {"aeroway": "jet_bridge", "highway": "corridor"}
   },
   {
+    "old": {"access": "customer"},
+    "replace": {"access": "customers"}
+  },
+  {
     "old": {"access": "public"},
     "replace": {"access": "yes"}
   },
