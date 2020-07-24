@@ -2007,6 +2007,7 @@
     {"key": "aerialway", "value": "canopy", "description": "🄳 ➜ aerialway=zip_line"},
     {"key": "aeroway", "value": "aerobridge", "description": "🄳 ➜ aeroway=jet_bridge + highway=corridor"},
     {"key": "access", "value": "public", "description": "🄳 ➜ access=yes"},
+    {"key": "access", "value": "customer", "description": "🄳 ➜ access=customers"},
     {"key": "aerodrome", "value": "military", "description": "🄳 ➜ military=airfield"},
     {"key": "aerodrome:type", "value": "military", "description": "🄳 ➜ military=airfield"},
     {"key": "agrarian", "value": "agrcultural_machinry", "description": "🄳 ➜ agrarian=agricultural_machinery"},
