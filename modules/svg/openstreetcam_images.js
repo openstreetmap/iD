@@ -112,23 +112,49 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
-            images = images.filter(function(image) {
-                return new Date(image.captured_at).getTime() >= fromTimestamp;
+            images = images.filter(function(item) {
+                return new Date(item.captured_at).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
             var toTimestamp = new Date(toDate).getTime();
-            images = images.filter(function(image) {
-                return new Date(image.captured_at).getTime() <= toTimestamp;
+            images = images.filter(function(item) {
+                return new Date(item.captured_at).getTime() <= toTimestamp;
             });
         }
         if (username) {
-            images = images.filter(function(image) {
-                return image.captured_by === username;
+            images = images.filter(function(item) {
+                return item.captured_by === username;
             });
         }
 
         return images;
+    }
+
+    function filterSequences(sequences) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var username = context.photos().username();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            sequences = sequences.filter(function(image) {
+                return new Date(image.properties.captured_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            sequences = sequences.filter(function(image) {
+                return new Date(image.properties.captured_at).getTime() <= toTimestamp;
+            });
+        }
+        if (username) {
+            sequences = sequences.filter(function(image) {
+                return image.properties.captured_by === username;
+            });
+        }
+
+        return sequences;
     }
 
     function update() {
@@ -146,10 +172,10 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         if (context.photos().showsFlat()) {
             sequences = (service ? service.sequences(projection) : []);
             images = (service && showMarkers ? service.images(projection) : []);
+            sequences = filterSequences(sequences);
+            images = filterImages(images);
         }
         
-        images = filterImages(images);
-
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
