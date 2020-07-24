@@ -107,7 +107,7 @@ export function uiFeatureList(context) {
         }
 
         function stripWhitespace(val) {
-          return val.split('').filter(char => char !== ' ').join('');
+            return val.replace(/ /g, '');
         }
 
         function mapDrawn(e) {
