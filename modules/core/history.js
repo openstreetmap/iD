@@ -204,9 +204,8 @@ export function coreHistory(context) {
 
             var previousStack = _stack[_index];
             var previous = previousStack.graph;
-            while (_index > 0) {
+            if (_index > 0) {
                 _index--;
-                if (_stack[_index].annotation) break;
             }
 
             dispatch.call('undone', this, _stack[_index], previousStack);
