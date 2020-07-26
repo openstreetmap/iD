@@ -176,7 +176,7 @@ en:
         lines: Straightened several lines.
       too_bendy:
         single: This can't be straightened because it bends too much.
-        multiple: These can't be straighted because they bend too much.
+        multiple: These can't be straightened because they bend too much.
       connected_to_hidden:
         single: This can't be straightened because it is connected to a hidden feature.
         multiple: These can't be straightened because some are connected to hidden features.
