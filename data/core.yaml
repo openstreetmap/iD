@@ -176,7 +176,7 @@ en:
         lines: Straightened several lines.
       too_bendy:
         single: This can't be straightened because it bends too much.
-        multiple: These can't be straighted because they bend too much.
+        multiple: These can't be straightened because they bend too much.
       connected_to_hidden:
         single: This can't be straightened because it is connected to a hidden feature.
         multiple: These can't be straightened because some are connected to hidden features.
@@ -1429,10 +1429,10 @@ en:
       command_reverse: "The {reverse_icon} **{reverse}** command will change objects like oneway streets or cliffs where the top is one the left and the bottom on the right side."
       command_disconnect: "The {disconnect_icon} **{disconnect}** command separates a connected point into independent points which can be separated from each other."
       command_merge: "The {merge_icon} **{merge}** command create a single object from all selected objects. In order to turn a point into a line or an area while keeping the tags, create a line or an area without tags and merge it with the existing point."
-      command_extract: "The {extract_icon} **{extract}** command seperates a point from a line or area."
+      command_extract: "The {extract_icon} **{extract}** command separates a point from a line or area."
     notes:
       title: Notes
-      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, open the {data_icon} **{map_data}** panel and enable the {osm_notes} layer."
+      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, open the {data_icon} **{map_data}** pane and enable the {osm_notes} layer."
       add_note_h: "Adding Notes"
       add_note: "To add a new note, press the {note_icon} **{note}** button on the toolbar above the map, or press the shortcut key `{add_note_key}`."
       place_note: "Next, place the new note on the map. With a mouse, position the cursor where the note should go and {leftclick} left-click. On a touchscreen, {tap_icon} tap the location."
