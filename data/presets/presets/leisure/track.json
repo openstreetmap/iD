@@ -5,8 +5,9 @@
         "sport_racing_nonmotor",
         "lit",
         "width",
-        "lanes"
-    ],
+        "lanes",
+        "area"
+      ],
     "moreFields": [
         "access",
         "covered",
