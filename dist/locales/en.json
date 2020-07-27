@@ -231,7 +231,7 @@
                 },
                 "too_bendy": {
                     "single": "This can't be straightened because it bends too much.",
-                    "multiple": "These can't be straighted because they bend too much."
+                    "multiple": "These can't be straightened because they bend too much."
                 },
                 "connected_to_hidden": {
                     "single": "This can't be straightened because it is connected to a hidden feature.",
@@ -1096,7 +1096,7 @@
                 "delete": "Leave Deleted",
                 "download_changes": "Or download osmChange file",
                 "done": "All conflicts resolved!",
-                "help": "Another user changed some of the same map features you changed.\nClick on each feature below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
+                "help": "Another user changed some of the same map features you changed. Click on each feature below for more details about the conflict, and choose whether to keep your changes or the other user's changes."
             }
         },
         "merge_remote_changes": {
