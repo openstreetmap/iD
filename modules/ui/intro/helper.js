@@ -98,7 +98,7 @@ export function helpString(id, replacements) {
         point: t('modes.add_point.title'),
         line: t('modes.add_line.title'),
         area: t('modes.add_area.title'),
-        note: t('modes.add_note.title'),
+        note: t('modes.add_note.label'),
         delete: t('operations.delete.title'),
         move: t('operations.move.title'),
         orthogonalize: t('operations.orthogonalize.title'),
