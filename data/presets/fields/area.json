@@ -1,0 +1,9 @@
+{
+    "key": "area",
+    "type": "check",
+    "label": "Area (Object type)",
+    "terms": [
+        "object_area",
+        "area_object"
+    ]
+}
