@@ -1,0 +1,17 @@
+{
+    "name": "Irish Pub",
+    "icon": "maki-beer",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "pub",
+        "theme": "irish"
+    },
+    "terms": [
+        "irish pub",
+        "irish bar"
+    ],
+    "notCountryCodes": ["ie"]
+}
