@@ -6,7 +6,8 @@
         "sport_racing_nonmotor",
         "lit",
         "width",
-        "lanes"
+        "lanes",
+        "area"
     ],
     "geometry": [
         "point",
