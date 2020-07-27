@@ -870,10 +870,7 @@ en:
       delete: Leave Deleted
       download_changes: Or download osmChange file
       done: "All conflicts resolved!"
-      help: |
-        Another user changed some of the same map features you changed.
-        Click on each feature below for more details about the conflict, and choose whether to keep
-        your changes or the other user's changes.
+      help: "Another user changed some of the same map features you changed. Click on each feature below for more details about the conflict, and choose whether to keep your changes or the other user's changes."
   merge_remote_changes:
     conflict:
       deleted: 'This feature has been deleted by {user}.'
