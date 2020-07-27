@@ -21,6 +21,7 @@
   "animal_breeding": {"key": "animal_breeding", "type": "semiCombo", "label": "For Animals"},
   "animal_shelter": {"key": "animal_shelter", "type": "semiCombo", "label": "For Animals"},
   "architect": {"key": "architect", "type": "text", "label": "Architect", "terms": ["building designer"]},
+  "area": {"key": "area", "type": "check", "label": "Area (Object type)", "terms": ["object_area", "area_object"]},
   "area/highway": {"key": "area:highway", "type": "typeCombo", "label": "Type"},
   "artist": {"key": "artist_name", "type": "text", "label": "Artist"},
   "artwork_type": {"key": "artwork_type", "type": "combo", "label": "Type"},
