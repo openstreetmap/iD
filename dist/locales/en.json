@@ -1790,8 +1790,8 @@
                 "title": "Street Level Photos",
                 "intro": "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [OpenStreetCam](https://www.openstreetcam.org).",
                 "using_h": "Using Street Level Photos",
-                "using": "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo layers.",
-                "photos": "When enabled, the photo layer displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken.",
+                "using": "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays.",
+                "photos": "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken.",
                 "viewer": "When you select one of the photo locations, a photo viewer appears in the bottom corner of the map. The photo viewer contains controls to step forward and backward in the image sequence. It also shows the username of the person who captured the image, the date it was captured, and a link to view the image on the original site."
             },
             "gps": {
