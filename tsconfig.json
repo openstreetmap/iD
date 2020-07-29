@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "noEmit": true,
+        "target": "es5",
+        "module": "es6",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "baseUrl": "modules",
+        "outDir": "dist",
+        "sourceMap": true,
+        "jsx": "react",
+        "esModuleInterop": true,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "removeComments": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": false,
+        "noImplicitAny": false,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "include": [
+        "modules/**/*"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
+}

@@ -5,6 +5,8 @@ import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import progress from 'rollup-plugin-progress';
 import visualizer from 'rollup-plugin-visualizer';
+import replace from '@rollup/plugin-replace';
+import typescript from 'rollup-plugin-typescript2';
 
 
 // The "stats" build is just like the "dev" build,
@@ -25,6 +27,14 @@ export default {
       paths: ['node_modules/d3/node_modules']  // npm2 or windows
     }),
     nodeResolve({ dedupe: ['object-inspect'] }),
+    replace({
+      // The react sources include a reference to process.env.NODE_ENV so we need to replace it here with the actual value
+      include: [ 'node_modules/(react|react-dom|prop-types|scheduler)/**' ],
+      'process.env.NODE_ENV': '"development"',
+    }),
+    typescript({
+      include: [ 'modules/**/*.+(jsx|ts|tsx)' ]
+    }),
     commonjs(),
     json({ indent: '' }),
     visualizer({
