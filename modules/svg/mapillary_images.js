@@ -26,19 +26,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (services.mapillary && !_mapillary) {
             _mapillary = services.mapillary;
             _mapillary.event.on('loadedImages', throttledRedraw);
-            _mapillary.event.on('bearingChanged', function(e) {
-                viewerCompassAngle = e;
-
-                // avoid updating if the map is currently transformed
-                // e.g. during drags or easing.
-                if (context.map().isTransformed()) return;
-
-                layer.selectAll('.viewfield-group.currentView')
-                    .filter(function(d) {
-                        return d.pano;
-                    })
-                    .attr('transform', transform);
-            });
         } else if (!services.mapillary && _mapillary) {
             _mapillary = null;
         }
@@ -212,9 +199,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
-                return (a.key === selectedKey) ? 1
-                    : (b.key === selectedKey) ? -1
-                    : b.loc[1] - a.loc[1];  // sort Y
+                return b.loc[1] - a.loc[1];  // sort Y
             })
             .attr('transform', transform)
             .select('.viewfield-scale');

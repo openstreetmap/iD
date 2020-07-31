@@ -6,7 +6,7 @@ import RBush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { svgDefs } from '../svg/defs';
-import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
+import { utilArrayUnion, utilQsString, utilRebind, utilTiler, utilStringQs } from '../util';
 
 
 var apibase = 'https://a.mapillary.com/v3/';
@@ -40,28 +40,22 @@ var mapFeatureConfig = {
 var maxResults = 1000;
 var tileZoom = 14;
 var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
-var dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged');
+var dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'nodeChanged');
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
+var _mlySelectedImage;
 var _mlySelectedImageKey;
 var _mlyViewer;
+var _mlyViewerFilter = ['all'];
+var _mlyHighlightedDetection;
+var _mlyShowFeatureDetections = false;
+var _mlyShowSignDetections = false;
 
 
 function abortRequest(controller) {
     controller.abort();
 }
-
-
-function maxPageAtZoom(z) {
-    if (z < 15)   return 2;
-    if (z === 15) return 5;
-    if (z === 16) return 10;
-    if (z === 17) return 20;
-    if (z === 18) return 40;
-    if (z > 18)   return 80;
-}
-
 
 function loadTiles(which, url, projection) {
     var currZoom = Math.floor(geoScaleToZoom(projection.scale()));
@@ -161,26 +155,6 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     });
                     return false;    // because no `d` data worth loading into an rbush
 
-                // An image detection is a semantic pixel area on an image. The area could indicate
-                // sky, trees, sidewalk in the image. A detection can be a polygon, a bounding box, or a point.
-                // Each image_detection feature is a GeoJSON Point (located where the image was taken)
-                } else if (which === 'image_detections') {
-                    d = {
-                        key: feature.properties.key,
-                        image_key: feature.properties.image_key,
-                        value: feature.properties.value,
-                        package: feature.properties.package,
-                        shape: feature.properties.shape
-                    };
-
-                    // cache imageKey -> image_detections
-                    if (!cache.forImageKey[d.image_key]) {
-                        cache.forImageKey[d.image_key] = [];
-                    }
-                    cache.forImageKey[d.image_key].push(d);
-                    return false;    // because no `d` data worth loading into an rbush
-
-
                 // A map feature is a real world object that can be shown on a map. It could be any object
                 // recognized from images, manually added in images, or added on the map.
                 // Each map feature is a GeoJSON Point (located where the feature is)
@@ -224,6 +198,57 @@ function loadNextTilePage(which, currZoom, url, tile) {
             delete cache.inflight[id];
         });
 }
+
+
+function loadData(which, url) {
+    var cache = _mlyCache[which];
+    var options = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    };
+    var nextUrl = url + '&client_id=' + clientId;
+    return fetch(nextUrl, options)
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error(response.status + ' ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            if (!data || !data.features || !data.features.length) {
+                throw new Error('No Data');
+            }
+
+            data.features.forEach(function(feature) {
+                var d;
+
+                if (which === 'image_detections') {
+                    d = {
+                        key: feature.properties.key,
+                        image_key: feature.properties.image_key,
+                        value: feature.properties.value,
+                        package: feature.properties.package,
+                        shape: feature.properties.shape
+                    };
+
+                    if (!cache.forImageKey[d.image_key]) {
+                        cache.forImageKey[d.image_key] = [];
+                    }
+                    cache.forImageKey[d.image_key].push(d);
+                }
+            });
+        });
+}
+
+function maxPageAtZoom(z) {
+    if (z < 15)   return 2;
+    if (z === 15) return 5;
+    if (z === 16) return 10;
+    if (z === 17) return 20;
+    if (z === 18) return 40;
+    if (z > 18)   return 80;
+}
+
 
 // extract links to pages of API results
 function parsePagination(links) {
@@ -270,7 +295,6 @@ function searchLimited(limit, projection, rtree) {
 }
 
 
-
 export default {
 
     init: function() {
@@ -299,6 +323,7 @@ export default {
         };
 
         _mlySelectedImageKey = null;
+        _mlySelectedImage = null;
         _mlyClicks = [];
     },
 
@@ -361,18 +386,12 @@ export default {
 
 
     loadSigns: function(projection) {
-        // if we are looking at signs, we'll actually need to fetch images too
-        loadTiles('images', apibase + 'images?sort_by=key&', projection);
         loadTiles('map_features', apibase + 'map_features?layers=trafficsigns&min_nbr_image_detections=2&sort_by=key&', projection);
-        loadTiles('image_detections', apibase + 'image_detections?layers=trafficsigns&sort_by=key&', projection);
     },
 
 
     loadMapFeatures: function(projection) {
-        // if we are looking at signs, we'll actually need to fetch images too
-        loadTiles('images', apibase + 'images?sort_by=key', projection);
         loadTiles('points', apibase + 'map_features?layers=points&min_nbr_image_detections=2&sort_by=key&values=' + mapFeatureConfig.values + '&', projection);
-        loadTiles('image_detections', apibase + 'image_detections?layers=points&sort_by=key&values=' + mapFeatureConfig.values + '&', projection);
     },
 
 
@@ -415,6 +434,37 @@ export default {
                 _mlyViewer.resize();
             }
         });
+
+        var hash = utilStringQs(window.location.hash);
+        if (hash.photo) {
+            this.whenViewerAvailable()
+                .then(() => {
+                    this.updateViewer(context, hash.photo);
+                    this.showViewer(context);
+                }); 
+        }
+    },
+
+
+    whenViewerAvailable() {
+        return new Promise((resolve) => {
+            var intervalId = window.setInterval(() => {
+                if (window.Mapillary) {
+                    clearInterval(intervalId);
+                    resolve();
+                }
+            }, 1000);
+        });
+    },
+
+
+    showFeatureDetections: function(value) {
+        _mlyShowFeatureDetections = value;
+    },
+
+
+    showSignDetections: function(value) {
+        _mlyShowSignDetections = value;
     },
 
 
@@ -442,6 +492,7 @@ export default {
 
     hideViewer: function(context) {
         _mlySelectedImageKey = null;
+        _mlySelectedImage = null;
 
         if (!_mlyFallback && _mlyViewer) {
             _mlyViewer.getComponent('sequence').stop();
@@ -454,15 +505,29 @@ export default {
             .classed('hide', true)
             .selectAll('.photo-wrapper')
             .classed('hide', true);
+        
+        this.updateUrlImage(null);
 
-        context.container().selectAll('.viewfield-group, .sequence, .icon-detected')
-            .classed('currentView', false);
+        dispatch.call('nodeChanged');
 
         return this.setStyles(context, null, true);
     },
 
 
     parsePagination: parsePagination,
+
+
+    updateUrlImage: function(imageKey) {
+        if (!window.mocha) {
+            var hash = utilStringQs(window.location.hash);
+            if (imageKey) {
+                hash.photo = imageKey;
+            } else {
+                delete hash.photo
+            }
+            window.location.replace('#' + utilQsString(hash, true));
+        }
+    },
 
 
     updateViewer: function(context, imageKey) {
@@ -473,6 +538,15 @@ export default {
         } else {
             _mlyViewer.moveToKey(imageKey)
                 .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
+        }
+
+        return this;
+    },
+
+
+    highlightDetection: function(detection) {
+        if (detection) {
+            _mlyHighlightedDetection = detection.detection_key;
         }
 
         return this;
@@ -530,6 +604,7 @@ export default {
             var clicks = _mlyClicks;
             var index = clicks.indexOf(node.key);
             var selectedKey = _mlySelectedImageKey;
+            that.setSelectedImage(node);
 
             if (index > -1) {              // `nodechanged` initiated from clicking on a marker..
                 clicks.splice(index, 1);   // remove the click
@@ -543,6 +618,9 @@ export default {
                 context.map().centerEase(loc);
                 that.selectImage(context, node.key, true);
             }
+
+            that.updateUrlImage(node.key);
+            dispatch.call('nodeChanged');
         }
 
         function bearingChanged(e) {
@@ -558,8 +636,6 @@ export default {
 
         _mlySelectedImageKey = imageKey;
 
-        // Note the datum could be missing, but we'll try to carry on anyway.
-        // There just might be a delay before user sees detections, captured_at, etc.
         var d = _mlyCache.images.forImageKey[imageKey];
 
         var viewer = context.container().select('.photoviewer');
@@ -572,19 +648,20 @@ export default {
 
         this.setStyles(context, null, true);
 
-        // if signs signs are shown, highlight the ones that appear in this image
-        context.container().selectAll('.layer-mapillary-signs .icon-detected')
-            .classed('currentView', function(d) {
-                return d.detections.some(function(detection) {
-                    return detection.image_key === imageKey;
-                });
-            });
+        if (_mlyShowFeatureDetections) {
+            this.updateDetections(imageKey, apibase + 'image_detections?layers=points&values=' + mapFeatureConfig.values + '&image_keys=' + imageKey);
+        }
 
-        if (d) {
-            this.updateDetections(d);
+        if (_mlyShowSignDetections) {
+            this.updateDetections(imageKey, apibase + 'image_detections?layers=trafficsigns&image_keys=' + imageKey);
         }
 
         return this;
+    },
+
+
+    getSelectedImage: function() {
+        return _mlySelectedImage;
     },
 
 
@@ -598,6 +675,21 @@ export default {
     },
 
 
+    setSelectedImage: function(node) {
+        if (node) {
+            _mlySelectedImage = {
+                ca: node.originalCA,
+                key: node.key,
+                loc: [node.originalLatLon.lon, node.originalLatLon.lat],
+                pano: node.pano
+            };
+        } else {
+            _mlySelectedImage = null;
+        }
+        
+    },
+
+
     // Updates the currently highlighted sequence and selected bubble.
     // Reset is only necessary when interacting with the viewport because
     // this implicitly changes the currently selected bubble/sequence
@@ -605,8 +697,7 @@ export default {
         if (reset) {  // reset all layers
             context.container().selectAll('.viewfield-group')
                 .classed('highlighted', false)
-                .classed('hovered', false)
-                .classed('currentView', false);
+                .classed('hovered', false);
 
             context.container().selectAll('.sequence')
                 .classed('highlighted', false)
@@ -628,8 +719,7 @@ export default {
 
         context.container().selectAll('.layer-mapillary .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
-            .classed('hovered', function(d) { return d.key === hoveredImageKey; })
-            .classed('currentView', function(d) { return d.key === selectedImageKey; });
+            .classed('hovered', function(d) { return d.key === hoveredImageKey; });
 
         context.container().selectAll('.layer-mapillary .sequence')
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
@@ -652,29 +742,48 @@ export default {
     },
 
 
-    updateDetections: function(d) {
+    updateDetections: function(imageKey, url) {
         if (!_mlyViewer || _mlyFallback) return;
-
-        var imageKey = d && d.key;
         if (!imageKey) return;
 
-        var detections = _mlyCache.image_detections.forImageKey[imageKey] || [];
-        detections.forEach(function(data) {
-            var tag = makeTag(data);
-            if (tag) {
-                var tagComponent = _mlyViewer.getComponent('tag');
-                tagComponent.add([tag]);
-            }
-        });
+        if (!_mlyCache.image_detections.forImageKey[imageKey]) {
+            loadData('image_detections', url)
+                .then(() => {
+                    showDetections(_mlyCache.image_detections.forImageKey[imageKey] || []);
+            })
+        } else {
+            showDetections(_mlyCache.image_detections.forImageKey[imageKey]);
+        }
+
+        function showDetections(detections) {
+            detections.forEach(function(data) {
+                var tag = makeTag(data);
+                if (tag) {
+                    var tagComponent = _mlyViewer.getComponent('tag');
+                    tagComponent.add([tag]);
+                }
+            });
+        }
 
         function makeTag(data) {
             var valueParts = data.value.split('--');
-            if (valueParts.length !== 3) return;
+            if (!valueParts.length) return;
 
-            var text = valueParts[1].replace(/-/g, ' ');
+            var text = valueParts[1];
+            if (text === 'flat' || text === 'discrete' || text === 'sign' || text === 'traffic-light') {
+                text = valueParts[2];
+            }
+            text = text.replace(/-/g, ' ');
+            text = text.charAt(0).toUpperCase() + text.slice(1)
             var tag;
 
-            // Currently only two shapes <Polygon|Point>
+            var color = 0xffffff;
+
+            if (_mlyHighlightedDetection === data.key) {
+                color = 0xffff00;
+                _mlyHighlightedDetection = null;
+            }
+
             if (data.shape.type === 'Polygon') {
                 var polygonGeometry = new Mapillary
                     .TagComponent
@@ -685,10 +794,10 @@ export default {
                     polygonGeometry,
                     {
                         text: text,
-                        textColor: 0xffff00,
-                        lineColor: 0xffff00,
+                        textColor: color,
+                        lineColor: color,
                         lineWidth: 2,
-                        fillColor: 0xffff00,
+                        fillColor: color,
                         fillOpacity: 0.3,
                     }
                 );
@@ -703,8 +812,8 @@ export default {
                     pointGeometry,
                     {
                         text: text,
-                        color: 0xffff00,
-                        textColor: 0xffff00
+                        color: color,
+                        textColor: color
                     }
                 );
             }
@@ -712,7 +821,6 @@ export default {
             return tag;
         }
     },
-
 
     cache: function() {
         return _mlyCache;

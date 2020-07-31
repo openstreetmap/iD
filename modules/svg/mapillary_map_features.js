@@ -62,17 +62,18 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         var selectedImageKey = service.getSelectedImageKey();
         var imageKey;
-
+        var highlightedDetection;
         // Pick one of the images the map feature was detected in,
         // preference given to an image already selected.
         d.detections.forEach(function(detection) {
             if (!imageKey || selectedImageKey === detection.image_key) {
                 imageKey = detection.image_key;
+                highlightedDetection = detection
             }
         });
 
         service
-            .selectImage(context, imageKey)
+            .highlightDetection(highlightedDetection)
             .updateViewer(context, imageKey)
             .showViewer(context);
     }
@@ -176,6 +177,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                 editOff();
             }
         }
+        service.showFeatureDetections(enabled);
     }
 
 

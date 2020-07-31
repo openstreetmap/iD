@@ -72,7 +72,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         });
 
         service
-            .selectImage(context, imageKey)
+            .highlightDetection(d)
             .updateViewer(context, imageKey)
             .showViewer(context);
     }
@@ -163,6 +163,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
                 editOff();
             }
         }
+        service.showSignDetections(enabled);
     }
 
 
