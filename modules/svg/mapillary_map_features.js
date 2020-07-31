@@ -68,10 +68,15 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         d.detections.forEach(function(detection) {
             if (!imageKey || selectedImageKey === detection.image_key) {
                 imageKey = detection.image_key;
-                highlightedDetection = detection
+                highlightedDetection = detection;
             }
         });
 
+        if (imageKey === selectedImageKey) {
+            service
+                .highlightDetection(highlightedDetection)
+                .selectImage(context, imageKey);
+        }
         service
             .highlightDetection(highlightedDetection)
             .updateViewer(context, imageKey)

@@ -47,7 +47,6 @@ var _mlyClicks;
 var _mlySelectedImage;
 var _mlySelectedImageKey;
 var _mlyViewer;
-var _mlyViewerFilter = ['all'];
 var _mlyHighlightedDetection;
 var _mlyShowFeatureDetections = false;
 var _mlyShowSignDetections = false;
@@ -523,7 +522,7 @@ export default {
             if (imageKey) {
                 hash.photo = imageKey;
             } else {
-                delete hash.photo
+                delete hash.photo;
             }
             window.location.replace('#' + utilQsString(hash, true));
         }
@@ -750,7 +749,7 @@ export default {
             loadData('image_detections', url)
                 .then(() => {
                     showDetections(_mlyCache.image_detections.forImageKey[imageKey] || []);
-            })
+            });
         } else {
             showDetections(_mlyCache.image_detections.forImageKey[imageKey]);
         }
@@ -769,18 +768,19 @@ export default {
             var valueParts = data.value.split('--');
             if (!valueParts.length) return;
 
-            var text = valueParts[1];
-            if (text === 'flat' || text === 'discrete' || text === 'sign' || text === 'traffic-light') {
-                text = valueParts[2];
-            }
-            text = text.replace(/-/g, ' ');
-            text = text.charAt(0).toUpperCase() + text.slice(1)
+            
             var tag;
-
+            var text;
             var color = 0xffffff;
 
             if (_mlyHighlightedDetection === data.key) {
                 color = 0xffff00;
+                text = valueParts[1];
+                if (text === 'flat' || text === 'discrete' || text === 'sign' || text === 'traffic-light') {
+                    text = valueParts[2];
+                }
+                text = text.replace(/-/g, ' ');
+                text = text.charAt(0).toUpperCase() + text.slice(1);
                 _mlyHighlightedDetection = null;
             }
 

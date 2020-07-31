@@ -154,7 +154,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var showViewfields = (z >= minViewfieldZoom);
 
         var service = getService();
-        var selectedKey = service && service.getSelectedImageKey();
         var sequences = (service ? service.sequences(projection) : []);
         var images = (service && showMarkers ? service.images(projection) : []);
 

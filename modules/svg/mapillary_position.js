@@ -5,7 +5,7 @@ import { svgPointTransform } from './helpers';
 import { services } from '../services';
 
 
-export function svgMapillaryPosition(projection, context, dispatch) {
+export function svgMapillaryPosition(projection, context) {
     var throttledRedraw = _throttle(function () { update(); }, 1000);
     var minZoom = 12;
     var minViewfieldZoom = 18;
@@ -157,7 +157,7 @@ export function svgMapillaryPosition(projection, context, dispatch) {
     }
 
 
-    drawImages.enabled = function(_) {
+    drawImages.enabled = function() {
         update();
         return this;
     };
