@@ -30,6 +30,30 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.18.4
+##### 2020-Jul-31
+
+#### :white_check_mark: Validation
+* Offer to upgrade `access=customer` tag to `access=customers` ([#7831], [#7836], thanks [@sun-geo])
+
+[#7831]: https://github.com/openstreetmap/iD/issues/7831
+[#7836]: https://github.com/openstreetmap/iD/issues/7836
+
+[@sun-geo]: https://github.com/sun-geo
+
+#### :bug: Bugfixes
+* Fix critical bug where iD would be unusable in some places ([#7858])
+* Fix issue with background layers using `CRS=EPSG:4326` on WMS version 1.3.0 ([#7557])
+* Fix typo in message for multiple features that are too bendy to straighten ([#7845], thanks [@manfredbrandl])
+* Make sure the Add Note label in the Help pane matches the toolbar label ([#7841])
+
+[#7858]: https://github.com/openstreetmap/iD/issues/7858
+[#7557]: https://github.com/openstreetmap/iD/issues/7557
+[#7845]: https://github.com/openstreetmap/iD/issues/7845
+[#7841]: https://github.com/openstreetmap/iD/issues/7841
+
+[@manfredbrandl]: https://github.com/manfredbrandl
+
 # 2.18.3
 ##### 2020-Jul-22
 
