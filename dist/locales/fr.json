@@ -719,7 +719,6 @@
             "minimap": {
                 "description": "Afficher la petite carte",
                 "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée.",
-                "key": "/"
             },
             "panel": {
                 "description": "Afficher la barre des détails",

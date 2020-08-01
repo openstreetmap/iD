@@ -21,6 +21,7 @@
   {"pID": "landuse/farmland"},
   {"pID": "landuse/farmyard"},
   {"pID": "natural/wood"},
+  {"pID": "natural/tree"},
   {"pID": "highway/track"},
   {"pID": "highway/service/private-unpaved-driveway"},
   {"pID": "highway/service/private-unpaved-parking-aisle"},

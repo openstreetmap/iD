@@ -17,5 +17,6 @@
         "natural": "tree"
     },
     "terms": [],
-    "name": "Tree"
+    "name": "Tree",
+    "shortcut": ["/"]
 }

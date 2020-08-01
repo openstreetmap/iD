@@ -711,7 +711,6 @@ en:
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
-      key: '/'
     panel:
       description: Show Detail Panel
       tooltip: Show advanced background information.
