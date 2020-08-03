@@ -159,11 +159,13 @@ export function svgMapillarySigns(projection, context, dispatch) {
                 editOn();
                 update();
                 service.loadSigns(projection);
+                service.showSignDetections(true);
             } else {
                 editOff();
             }
+        } else if (service) {
+            service.showSignDetections(false);
         }
-        service.showSignDetections(enabled);
     }
 
 

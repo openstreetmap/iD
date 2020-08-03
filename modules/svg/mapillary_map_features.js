@@ -178,11 +178,13 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                 editOn();
                 update();
                 service.loadMapFeatures(projection);
+                service.showFeatureDetections(true);
             } else {
                 editOff();
             }
+        } else if (service) {
+            service.showFeatureDetections(false);
         }
-        service.showFeatureDetections(enabled);
     }
 
 
