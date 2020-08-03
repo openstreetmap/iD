@@ -76,11 +76,12 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             service
                 .highlightDetection(highlightedDetection)
                 .selectImage(context, imageKey);
+        } else {
+            service
+                .highlightDetection(highlightedDetection)
+                .updateViewer(context, imageKey)
+                .showViewer(context);
         }
-        service
-            .highlightDetection(highlightedDetection)
-            .updateViewer(context, imageKey)
-            .showViewer(context);
     }
 
 

@@ -776,7 +776,7 @@ export default {
             if (_mlyHighlightedDetection === data.key) {
                 color = 0xffff00;
                 text = valueParts[1];
-                if (text === 'flat' || text === 'discrete' || text === 'sign' || text === 'traffic-light') {
+                if (text === 'flat' || text === 'discrete' || text === 'sign') {
                     text = valueParts[2];
                 }
                 text = text.replace(/-/g, ' ');

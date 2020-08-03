@@ -62,19 +62,26 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         var selectedImageKey = service.getSelectedImageKey();
         var imageKey;
-
+        var highlightedDetection;
         // Pick one of the images the sign was detected in,
         // preference given to an image already selected.
         d.detections.forEach(function(detection) {
             if (!imageKey || selectedImageKey === detection.image_key) {
                 imageKey = detection.image_key;
+                highlightedDetection = detection;
             }
         });
 
-        service
-            .highlightDetection(d)
-            .updateViewer(context, imageKey)
-            .showViewer(context);
+        if (imageKey === selectedImageKey) {
+            service
+                .highlightDetection(highlightedDetection)
+                .selectImage(context, imageKey);
+        } else {
+            service
+                .highlightDetection(highlightedDetection)
+                .updateViewer(context, imageKey)
+                .showViewer(context);
+        }
     }
 
 
