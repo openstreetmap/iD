@@ -1181,7 +1181,7 @@
   "shop/radiotechnics": {"icon": "fas-microchip", "geometry": ["point", "area"], "tags": {"shop": "radiotechnics"}, "terms": ["antenna", "transistor"], "name": "Radio/Electronic Component Store"},
   "shop/religion": {"icon": "maki-shop", "fields": ["{shop}", "religion", "denomination"], "geometry": ["point", "area"], "tags": {"shop": "religion"}, "name": "Religious Store"},
   "shop/rental": {"icon": "fas-dolly", "geometry": ["point", "area"], "tags": {"shop": "rental"}, "name": "Rental Shop"},
-  "shop/scuba_diving": {"icon": "temaki-scuba_diving", "fields": ["{shop}", "scuba_diving"], "geometry": ["point", "area"], "terms": ["diving", "scuba"], "tags": {"shop": "scuba_diving"}, "name": "Scuba Diving Shop"},
+  "shop/scuba_diving": {"icon": "temaki-scuba_diving", "fields": ["{shop}", "scuba_diving"], "geometry": ["point", "area"], "terms": ["diving", "scuba", "snorkel"], "tags": {"shop": "scuba_diving"}, "name": "Scuba Diving Shop"},
   "shop/seafood": {"icon": "temaki-fish_cleaning", "geometry": ["point", "area"], "terms": ["fishmonger"], "tags": {"shop": "seafood"}, "name": "Seafood Shop"},
   "shop/second_hand": {"icon": "maki-shop", "fields": ["{shop}", "second_hand"], "geometry": ["point", "area"], "terms": ["secondhand", "second hand", "resale", "thrift", "used"], "tags": {"shop": "second_hand"}, "name": "Consignment/Thrift Store"},
   "shop/sewing": {"icon": "temaki-needle_and_spool", "geometry": ["point", "area"], "terms": ["haberdashery"], "tags": {"shop": "sewing"}, "name": "Sewing Supply Shop"},
