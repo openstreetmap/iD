@@ -69,7 +69,7 @@ export function svgMapillaryPosition(projection, context) {
         var showViewfields = (z >= minViewfieldZoom);
 
         var service = getService();
-        var node = service && service.getSelectedImage();
+        var node = service && service.getActiveImage();
 
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(node ? [node] : [], function(d) { return d.key; });

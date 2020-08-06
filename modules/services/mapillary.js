@@ -44,7 +44,7 @@ var dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFe
 var _mlyFallback = false;
 var _mlyCache;
 var _mlyClicks;
-var _mlySelectedImage;
+var _mlyActiveImage;
 var _mlySelectedImageKey;
 var _mlyViewer;
 var _mlyHighlightedDetection;
@@ -322,7 +322,7 @@ export default {
         };
 
         _mlySelectedImageKey = null;
-        _mlySelectedImage = null;
+        _mlyActiveImage = null;
         _mlyClicks = [];
     },
 
@@ -457,13 +457,26 @@ export default {
     },
 
 
+    resetTags: function() {
+        if (_mlyViewer && !_mlyFallback) {
+            _mlyViewer.getComponent('tag').removeAll();  // remove previous detections
+        }
+    },
+
+
     showFeatureDetections: function(value) {
         _mlyShowFeatureDetections = value;
+        if (!_mlyShowFeatureDetections && !_mlyShowSignDetections) {
+            this.resetTags();
+        }
     },
 
 
     showSignDetections: function(value) {
         _mlyShowSignDetections = value;
+        if (!_mlyShowFeatureDetections && !_mlyShowSignDetections) {
+            this.resetTags();
+        }
     },
 
 
@@ -490,8 +503,8 @@ export default {
 
 
     hideViewer: function(context) {
+        _mlyActiveImage = null;
         _mlySelectedImageKey = null;
-        _mlySelectedImage = null;
 
         if (!_mlyFallback && _mlyViewer) {
             _mlyViewer.getComponent('sequence').stop();
@@ -596,14 +609,11 @@ export default {
         // Clicks are added to the array in `selectedImage` and removed here.
         //
         function nodeChanged(node) {
-            if (!_mlyFallback) {
-                _mlyViewer.getComponent('tag').removeAll();  // remove previous detections
-            }
-
+            that.resetTags();
             var clicks = _mlyClicks;
             var index = clicks.indexOf(node.key);
             var selectedKey = _mlySelectedImageKey;
-            that.setSelectedImage(node);
+            that.setActiveImage(node);
 
             if (index > -1) {              // `nodechanged` initiated from clicking on a marker..
                 clicks.splice(index, 1);   // remove the click
@@ -659,8 +669,8 @@ export default {
     },
 
 
-    getSelectedImage: function() {
-        return _mlySelectedImage;
+    getActiveImage: function() {
+        return _mlyActiveImage;
     },
 
 
@@ -674,16 +684,16 @@ export default {
     },
 
 
-    setSelectedImage: function(node) {
+    setActiveImage: function(node) {
         if (node) {
-            _mlySelectedImage = {
+            _mlyActiveImage = {
                 ca: node.originalCA,
                 key: node.key,
                 loc: [node.originalLatLon.lon, node.originalLatLon.lat],
                 pano: node.pano
             };
         } else {
-            _mlySelectedImage = null;
+            _mlyActiveImage = null;
         }
         
     },
