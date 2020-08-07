@@ -54,11 +54,9 @@ describe('iD.serviceMapillary', function() {
     });
 
     describe('#loadImages', function() {
-        it.skip('fires loadedImages when images are loaded', function(done) {
-            mapillary.on('loadedImages', function() {
-                expect(server.requests().length).to.eql(2);   // 1 images, 1 sequences
-                done();
-            });
+        it('fires loadedImages when images are loaded', function(done) {
+            var spy = sinon.spy();
+            mapillary.on('loadedImages', spy);
 
             mapillary.loadImages(context.projection);
 
@@ -72,6 +70,11 @@ describe('iD.serviceMapillary', function() {
             server.respondWith('GET', /images/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
+            window.setTimeout(function() {
+                expect(spy).to.have.been.called;
+                expect(server.requests().length).to.eql(2);
+                done();
+            }, 500);
         });
 
         it('does not load images around null island', function(done) {
@@ -266,7 +269,7 @@ describe('iD.serviceMapillary', function() {
                 expect(spy).to.have.been.called;
                 expect(server.requests().length).to.eql(1);
                 done();
-            }, 200);
+            }, 500);
         });
     });
 
