@@ -170,11 +170,11 @@ export function validationAlmostJunction(context) {
         return false;
       }
 
-      let occurrences = 0;
+      let occurences = 0;
       for (const index in way.nodes) {
         if (way.nodes[index] === node.id) {
-          occurrences += 1;
-          if (occurrences > 1) {
+          occurences += 1;
+          if (occurences > 1) {
             return false;
           }
         }
