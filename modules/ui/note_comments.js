@@ -68,7 +68,12 @@ export function uiNoteComments() {
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .html(function(d) { return d.html; });
+            .html(function(d) { return d.html; })
+            .selectAll('a')
+                .filter(isExternalLink)
+                .attr('rel', 'noopener')
+                .attr('rel', 'nofollow')
+                .attr('target', '_blank');
 
         comments
             .call(replaceAvatars);
@@ -107,6 +112,22 @@ export function uiNoteComments() {
         var d = new Date(s);
         if (isNaN(d.getTime())) return null;
         return d.toLocaleDateString(localizer.localeCode(), options);
+    }
+
+
+    // A quick test for external links. 'this' is the node passed in by selection.filter()
+    function isExternalLink() {
+        try {
+            // Possibly more domains to be added
+            const internalDomains = ['.openstreetmap.org', '.osm.org']; 
+            const hostname = new URL(this.href).hostname;
+
+            // If the link's hostname comprises any internalDomains, return false
+            return internalDomains.findIndex((d) => hostname.includes(d)) === -1; 
+        } catch (error) {
+            // If anything goes wrong, bail and assume not external (original behaviour)
+            return false;
+        }   
     }
 
 
