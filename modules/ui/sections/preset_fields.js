@@ -34,7 +34,8 @@ export function uiSectionPresetFields(context) {
             var graph = context.graph();
 
             var geometries = Object.keys(_entityIDs.reduce(function(geoms, entityID) {
-                return geoms[graph.entity(entityID).geometry(graph)] = true;
+                geoms[graph.entity(entityID).geometry(graph)] = true;
+                return geoms;
             }, {}));
 
             var presetsManager = presetManager;
