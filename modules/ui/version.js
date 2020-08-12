@@ -18,7 +18,7 @@ export function uiVersion(context) {
     if (sawVersion === null && matchedVersion !== null) {
         if (prefs('sawVersion')) {
             isNewUser = false;
-            isNewVersion = prefs('sawVersion') !== currVersion;
+            isNewVersion = prefs('sawVersion') !== currVersion && currVersion.indexOf('-') === -1;
         } else {
             isNewUser = true;
             isNewVersion = true;

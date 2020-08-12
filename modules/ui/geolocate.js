@@ -23,7 +23,7 @@ export function uiGeolocate(context) {
 
     function click() {
         if (context.inIntro()) return;
-        if (!_layer.enabled()) {
+        if (!_layer.enabled() && !_locating.isShown()) {
 
             // This timeout ensures that we still call finish() even if
             // the user declines to share their location in Firefox
@@ -33,6 +33,7 @@ export function uiGeolocate(context) {
             // get the latest position even if we already have one
             navigator.geolocation.getCurrentPosition(success, error, _geolocationOptions);
         } else {
+            _locating.close();
             _layer.enabled(null, false);
             updateButtonState();
         }

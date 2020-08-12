@@ -197,11 +197,11 @@ var jsonparsers = {
         return new osmNode({
             id:  uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
-            version: obj.version.toString(),
-            changeset: obj.changeset.toString(),
+            version: obj.version && obj.version.toString(),
+            changeset: obj.changeset && obj.changeset.toString(),
             timestamp: obj.timestamp,
             user: obj.user,
-            uid: obj.uid.toString(),
+            uid: obj.uid && obj.uid.toString(),
             loc: [parseFloat(obj.lon), parseFloat(obj.lat)],
             tags: obj.tags
         });
@@ -211,11 +211,11 @@ var jsonparsers = {
         return new osmWay({
             id:  uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
-            version: obj.version.toString(),
-            changeset: obj.changeset.toString(),
+            version: obj.version && obj.version.toString(),
+            changeset: obj.changeset && obj.changeset.toString(),
             timestamp: obj.timestamp,
             user: obj.user,
-            uid: obj.uid.toString(),
+            uid: obj.uid && obj.uid.toString(),
             tags: obj.tags,
             nodes: getNodesJSON(obj)
         });
@@ -225,11 +225,11 @@ var jsonparsers = {
         return new osmRelation({
             id:  uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
-            version: obj.version.toString(),
-            changeset: obj.changeset.toString(),
+            version: obj.version && obj.version.toString(),
+            changeset: obj.changeset && obj.changeset.toString(),
             timestamp: obj.timestamp,
             user: obj.user,
-            uid: obj.uid.toString(),
+            uid: obj.uid && obj.uid.toString(),
             tags: obj.tags,
             members: getMembersJSON(obj)
         });

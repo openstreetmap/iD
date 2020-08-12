@@ -25,7 +25,7 @@ export function uiDataEditor(context) {
 
         headerEnter
             .append('button')
-            .attr('class', 'fr data-editor-close')
+            .attr('class', 'close')
             .on('click', function() {
                 context.enter(modeBrowse(context));
             })

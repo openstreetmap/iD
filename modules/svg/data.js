@@ -500,10 +500,13 @@ export function svgData(projection, context, dispatch) {
         var map = context.map();
         var viewport = map.trimmedExtent().polygon();
         var coords = features.reduce(function(coords, feature) {
-            var c = feature.geometry.coordinates;
+            var geom = feature.geometry;
+            if (!geom) return coords;
+
+            var c = geom.coordinates;
 
             /* eslint-disable no-fallthrough */
-            switch (feature.geometry.type) {
+            switch (geom.type) {
                 case 'Point':
                     c = [c];
                 case 'MultiPoint':

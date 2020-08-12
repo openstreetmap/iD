@@ -26,7 +26,7 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.17.3';
+  context.version = '2.18.5-dev';
   context.privacyVersion = '20200407';
 
   // iD will alter the hash so cache the parameters intended to setup the session
@@ -80,6 +80,7 @@ export function coreContext() {
   /* User interface and keybinding */
   let _ui;
   context.ui = () => _ui;
+  context.lastPointerType = () => _ui.lastPointerType();
 
   let _keybinding = utilKeybinding('context');
   context.keybinding = () => _keybinding;
@@ -87,7 +88,9 @@ export function coreContext() {
 
 
   /* Straight accessors. Avoid using these if you can. */
-  let _connection;
+  // Instantiate the connection here because it doesn't require passing in
+  // `context` and it's needed for pre-init calls like `preauth`
+  let _connection = services.osm;
   let _history;
   let _validator;
   let _uploader;
@@ -109,6 +112,14 @@ export function coreContext() {
   context.apiConnections = function(val) {
     if (!arguments.length) return _apiConnections;
     _apiConnections = val;
+    return context;
+  };
+
+
+  // A string or array or locale codes to prefer over the browser's settings
+  context.locale = function(locale) {
+    if (!arguments.length) return localizer.localeCode();
+    localizer.preferredLocaleCodes(locale);
     return context;
   };
 
@@ -520,8 +531,6 @@ export function coreContext() {
       _photos = rendererPhotos(context);
 
       _ui = uiInit(context);
-
-      _connection = services.osm;
     }
 
     // Set up objects that might need to access properties of `context`. The order
@@ -530,6 +539,10 @@ export function coreContext() {
 
       if (context.initialHashParams.presets) {
         presetManager.addablePresetIDs(new Set(context.initialHashParams.presets.split(',')));
+      }
+
+      if (context.initialHashParams.locale) {
+        localizer.preferredLocaleCodes(context.initialHashParams.locale);
       }
 
       // kick off some async work

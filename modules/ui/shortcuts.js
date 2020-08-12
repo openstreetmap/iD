@@ -198,7 +198,13 @@ export function uiShortcuts(context) {
 
                 if (click && click[1]) {   // replace "left_click", "right_click" with mouse icon
                     selection
-                        .call(svgIcon('#iD-walkthrough-mouse', 'mouseclick', click[1]));
+                        .call(svgIcon('#iD-walkthrough-mouse-' + click[1], 'operation'));
+                } else if (d.shortcut.toLowerCase() === 'long-press') {
+                    selection
+                        .call(svgIcon('#iD-walkthrough-longpress', 'longpress operation'));
+                } else if (d.shortcut.toLowerCase() === 'tap') {
+                    selection
+                        .call(svgIcon('#iD-walkthrough-tap', 'tap operation'));
                 } else {
                     selection
                         .append('kbd')

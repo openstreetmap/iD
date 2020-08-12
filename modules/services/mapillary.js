@@ -14,7 +14,6 @@ var viewercss = 'mapillary-js/mapillary.min.css';
 var viewerjs = 'mapillary-js/mapillary.min.js';
 var clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi';
 var mapFeatureConfig = {
-    organizationKey: 'FI3NAFfzQQgdF081TRdgTy',
     values: [
         'construction--flat--crosswalk-plain',
         'marking--discrete--crosswalk-zebra',
@@ -372,8 +371,8 @@ export default {
     loadMapFeatures: function(projection) {
         // if we are looking at signs, we'll actually need to fetch images too
         loadTiles('images', apibase + 'images?sort_by=key', projection);
-        loadTiles('points', apibase + 'map_features?layers=points&min_nbr_image_detections=2&sort_by=key&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
-        loadTiles('image_detections', apibase + 'image_detections?layers=points&sort_by=key&shapes_by_organization_keys=' + mapFeatureConfig.organizationKey + '&' + 'values=' + mapFeatureConfig.values + '&', projection);
+        loadTiles('points', apibase + 'map_features?layers=points&min_nbr_image_detections=2&sort_by=key&values=' + mapFeatureConfig.values + '&', projection);
+        loadTiles('image_detections', apibase + 'image_detections?layers=points&sort_by=key&values=' + mapFeatureConfig.values + '&', projection);
     },
 
 

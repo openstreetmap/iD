@@ -46,7 +46,7 @@ export function uiNoteEditor(context) {
 
         headerEnter
             .append('button')
-            .attr('class', 'fr note-editor-close')
+            .attr('class', 'close')
             .on('click', function() {
                 context.enter(modeBrowse(context));
             })

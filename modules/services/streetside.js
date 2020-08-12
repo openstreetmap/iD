@@ -469,26 +469,6 @@ export default {
     options.scenes[sceneID] = _sceneOptions;
 
     _pannellumViewer = window.pannellum.viewer('ideditor-viewer-streetside', options);
-
-    var pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
-
-    _pannellumViewer
-      .on(pointerPrefix + 'down', () => {
-        d3_select(window)
-          .on(pointerPrefix + 'move.pannellum', () => { dispatch.call('viewerChanged'); });
-      })
-      .on(pointerPrefix + 'up', () => {
-        d3_select(window)
-          .on(pointerPrefix + 'move.pannellum', null);
-
-        // continue dispatching events for a few seconds, in case viewer has inertia.
-        let t = d3_timer(elapsed => {
-          dispatch.call('viewerChanged');
-          if (elapsed > 2000) {
-            t.stop();
-          }
-        });
-      });
   },
 
 
@@ -497,6 +477,8 @@ export default {
    */
   loadViewer: function(context) {
     let that = this;
+
+    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     // create ms-wrapper, a photo wrapper class
     let wrap = context.container().select('.photoviewer').selectAll('.ms-wrapper')
@@ -513,6 +495,24 @@ export default {
     wrapEnter
       .append('div')
       .attr('id', 'ideditor-viewer-streetside')
+      .on(pointerPrefix + 'down.streetside', () => {
+        d3_select(window)
+          .on(pointerPrefix + 'move.streetside', () => {
+            dispatch.call('viewerChanged');
+          }, true);
+      })
+      .on(pointerPrefix + 'up.streetside pointercancel.streetside', () => {
+        d3_select(window)
+          .on(pointerPrefix + 'move.streetside', null);
+
+        // continue dispatching events for a few seconds, in case viewer has inertia.
+        let t = d3_timer(elapsed => {
+          dispatch.call('viewerChanged');
+          if (elapsed > 2000) {
+            t.stop();
+          }
+        });
+      })
       .append('div')
       .attr('class', 'photo-attribution fillD');
 

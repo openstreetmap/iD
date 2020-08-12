@@ -8,6 +8,10 @@
     "replace": {"aeroway": "jet_bridge", "highway": "corridor"}
   },
   {
+    "old": {"access": "customer"},
+    "replace": {"access": "customers"}
+  },
+  {
     "old": {"access": "public"},
     "replace": {"access": "yes"}
   },
@@ -246,6 +250,10 @@
   {
     "old": {"building": "household"},
     "replace": {"building": "house"}
+  },
+  {
+    "old": {"building": "pavillion"},
+    "replace": {"building": "pavilion"}
   },
   {
     "old": {"building:color": "*"},
@@ -1384,6 +1392,22 @@
   },
   {
     "old": {"toilets:disposal": "pit_latrine"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "flush"},
+    "replace": {"toilets:disposal": "flush"}
+  },
+  {
+    "old": {"toilets:type": "pit"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "pitlatrine"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "pit latrine"},
     "replace": {"toilets:disposal": "pitlatrine"}
   },
   {

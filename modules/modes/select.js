@@ -284,6 +284,8 @@ export function modeSelect(context, selectedIDs) {
 
             var loc = extent.center();
             context.map().centerEase(loc);
+            // we could enter the mode multiple times, so reset follow for next time
+            _follow = false;
         }
 
 
@@ -486,6 +488,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.exit = function() {
+
+        _newFeature = false;
 
         _operations.forEach(function(operation) {
             if (operation.behavior) {

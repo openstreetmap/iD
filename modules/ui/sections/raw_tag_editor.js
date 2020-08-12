@@ -17,7 +17,7 @@ export function uiSectionRawTagEditor(id, context) {
         .classes('raw-tag-editor')
         .title(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
-            return t('inspector.tags_count', { count: count });
+            return t('inspector.title_count', { title: t('inspector.tags'), count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);

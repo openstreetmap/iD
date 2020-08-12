@@ -30,8 +30,8 @@ export function svgStreetside(projection, context, dispatch) {
         if (services.streetside && !_streetside) {
             _streetside = services.streetside;
             _streetside.event
-                .on('viewerChanged', viewerChanged)
-                .on('loadedBubbles', throttledRedraw);
+                .on('viewerChanged.svgStreetside', viewerChanged)
+                .on('loadedBubbles.svgStreetside', throttledRedraw);
         } else if (!services.streetside && _streetside) {
             _streetside = null;
         }
