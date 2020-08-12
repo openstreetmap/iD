@@ -500,7 +500,7 @@ export function rendererMap(context) {
                 );
 
                 // On Firefox Windows and Linux we always get +/- the scroll line amount (default 3)
-                // There doesn't seem to be any scroll accelleration.
+                // There doesn't seem to be any scroll acceleration.
                 // This multiplier increases the speed a little bit - #5512
                 if (detected.os !== 'mac') {
                     dY *= 5;

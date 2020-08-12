@@ -304,7 +304,7 @@ export function uiFieldLocalized(field, context) {
         }
 
         // Remove whatever is after the last ' – '
-        // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+        // NOTE: split/join on en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
         function cleanName(name) {
             var parts = name.split(' – ');
             if (parts.length > 1) {

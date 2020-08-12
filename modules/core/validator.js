@@ -413,7 +413,7 @@ export function coreValidator(context) {
         .on('redone.validator', validator.validate);   // redo
         // but not on 'change' (e.g. while drawing)
 
-    // When user chages editing modes:
+    // When user changes editing modes:
     context
         .on('exit.validator', validator.validate);
 

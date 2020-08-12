@@ -262,7 +262,7 @@ export function svgStreetside(projection, context, dispatch) {
 
     /**
      * drawImages()
-     * drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
+     * drawImages is the method that is returned (and that runs) every time 'svgStreetside()' is called.
      * 'svgStreetside()' is called from index.js
      */
     function drawImages(selection) {

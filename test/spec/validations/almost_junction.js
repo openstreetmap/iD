@@ -17,7 +17,7 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(w1)
         );
 
-        // vertical road to the west of w1 by 0.00001 logitude degree
+        // vertical road to the west of w1 by 0.00001 longitude degree
         // 5th digit after decimal point has a resolution of ~1 meter
         var n3 = iD.osmNode({id: 'n-3', loc: [22.42356, 0.001]});
         var n4 = iD.osmNode({id: 'n-4', loc: [22.42356, -0.001]});
@@ -42,7 +42,7 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(w1)
         );
 
-        // tilted road to the west of w1 by 0.00001 logitude degree
+        // tilted road to the west of w1 by 0.00001 longitude degree
         var n3 = iD.osmNode({id: 'n-3', loc: [22.423555, 0.001]});
         var n4 = iD.osmNode({id: 'n-4', loc: [22.423565, -0.001]});
         var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
@@ -66,7 +66,7 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(w1)
         );
 
-        // vertical road to the west of w1 by 0.00007 logitude degree
+        // vertical road to the west of w1 by 0.00007 longitude degree
         var n3 = iD.osmNode({id: 'n-3', loc: [22.42350, 0.001]});
         var n4 = iD.osmNode({id: 'n-4', loc: [22.42350, -0.001]});
         var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
@@ -114,7 +114,7 @@ describe('iD.validations.almost_junction', function () {
             iD.actionAddEntity(w1)
         );
 
-        // vertical road to the west of w1 by 0.00001 logitude degree
+        // vertical road to the west of w1 by 0.00001 longitude degree
         var n3 = iD.osmNode({id: 'n-3', loc: [22.42356, 0.001]});
         var n4 = iD.osmNode({id: 'n-4', loc: [22.42356, -0.001]});
         var w2 = iD.osmWay({id: 'w-2', nodes: ['n-3', 'n-4'], tags: { highway: 'residential' }});
@@ -194,7 +194,7 @@ describe('iD.validations.almost_junction', function () {
     }
 
     function closeEndNodesBothSmallAngle() {
-        // Square path with both endpoints near eachother
+        // Square path with both endpoints near each other
         var n1 = iD.osmNode({id: 'n-1', loc: [0, 22.4427453]});
         var n2 = iD.osmNode({id: 'n-2', loc: [0, 22.4429810]});
         var n3 = iD.osmNode({id: 'n-3', loc: [0.0000063, 22.4429810]});

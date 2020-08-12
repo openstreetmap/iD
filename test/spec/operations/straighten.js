@@ -91,12 +91,12 @@ describe('iD.operationStraighten', function () {
             expect(result).to.be.ok;
         });
 
-        it('is available for 2 selected nodes in non-adjacent ways, providing inbetween ways are selected', function () {
+        it('is available for 2 selected nodes in non-adjacent ways, providing in between ways are selected', function () {
             var result = iD.operationStraighten(fakeContext, ['n2', 'n7', 'w4', 'w1', 'w3', 'w2']).available();
             expect(result).to.be.ok;
         });
 
-        it('is available for 2 selected nodes in non-adjacent, non-same-directional ways, providing inbetween ways are selected', function () {
+        it('is available for 2 selected nodes in non-adjacent, non-same-directional ways, providing in between ways are selected', function () {
             var result = iD.operationStraighten(fakeContext, ['n2', 'n7', 'w4', 'w1', 'w3', 'w2-2']).available();
             expect(result).to.be.ok;
         });

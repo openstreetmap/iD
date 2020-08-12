@@ -167,7 +167,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         if (includeDrawNode) {
             if (parentWay.isClosed()) {
                 // don't test the last segment for closed ways - #4655
-                // (still test the first segement)
+                // (still test the first segment)
                 nodes.pop();
             }
         } else { // discount the draw node

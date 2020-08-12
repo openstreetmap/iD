@@ -33,7 +33,7 @@ export default {
             type: 'item',
             // the language to search
             language: lang,
-            // the langauge for the label and description in the result
+            // the language for the label and description in the result
             uselang: lang,
             limit: 10,
             origin: '*'

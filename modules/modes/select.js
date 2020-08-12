@@ -92,7 +92,7 @@ export function modeSelect(context, selectedIDs) {
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = context.hasEntity(selectedIDs[i]);
             if (!entity || entity.geometry(graph) !== 'vertex') {
-                return [];  // selection includes some not vertexes
+                return [];  // selection includes some not vertices
             }
 
             var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
