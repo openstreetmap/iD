@@ -464,7 +464,7 @@ You can now:
 * :warning: Add dedicated initialization step to `coreContext` ([#7304])
 * :warning: Remove various convenience functions of `coreContext`
 * :warning: Fetch JSON resources asynchronously at runtime using `coreFileFetcher` instead of bundling them ([#4994])
-* :warning: Add `coreUploader` to manage programatic uploading of edits ([#7247], [#7333])
+* :warning: Add `coreUploader` to manage programmatic uploading of edits ([#7247], [#7333])
 * :warning: Wrap localization functionality into global `localizer` singleton of `coreLocalizer`
 * :warning: Replace `context.storage()` with global `prefs` singleton of `corePreferences`
 * Add optimized `coreTree.waySegments` endpoint to return edges overlapping an area
