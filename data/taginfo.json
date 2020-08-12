@@ -1537,6 +1537,7 @@
     {"key": "fitness_station", "description": "🄵 Equipment Type"},
     {"key": "fixme", "description": "🄵 Fix Me"},
     {"key": "flag:type", "description": "🄵 Flag Type"},
+    {"key": "flats", "description": "🄵 Flats"},
     {"key": "floating", "description": "🄵 Floating"},
     {"key": "flood_prone", "description": "🄵 Flood Prone"},
     {"key": "fountain", "description": "🄵 Type"},

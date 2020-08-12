@@ -949,6 +949,11 @@ en:
       flag/type:
         # 'flag:type=*'
         label: Flag Type
+      flats:
+        # flats=*
+        label: Flats
+        # flats field placeholder
+        placeholder: '2, 4, 6, 8...'
       floating:
         # floating=*
         label: Floating
