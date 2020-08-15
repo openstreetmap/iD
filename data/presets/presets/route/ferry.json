@@ -21,6 +21,7 @@
         "maxheight",
         "maxweight",
         "network",
+        "oneway",
         "opening_hours",
         "opening_hours/covid19",
         "phone",

@@ -4153,6 +4153,7 @@
                 },
                 "oneway": {
                     "label": "One Way",
+                    "terms": "bidirectional,oneway,unidirectional",
                     "options": {
                         "undefined": "Assumed to be No",
                         "yes": "Yes",

@@ -1623,6 +1623,8 @@ en:
           undefined: Assumed to be No
           # oneway=yes
           'yes': 'Yes'
+        # 'terms: bidirectional,oneway,unidirectional'
+        terms: '[translate with synonyms or related terms for ''One Way'', separated by commas]'
       oneway/bicycle:
         # 'oneway:bicycle=*'
         label: One Way (Bicycles)

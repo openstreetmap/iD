@@ -297,7 +297,7 @@
   "note": {"key": "note", "type": "textarea", "universal": true, "icon": "note", "label": "Note", "terms": ["comment"]},
   "office": {"key": "office", "type": "typeCombo", "label": "Type"},
   "oneway_yes": {"key": "oneway", "type": "onewayCheck", "label": "One Way", "strings": {"options": {"undefined": "Assumed to be Yes", "yes": "Yes", "no": "No", "reversible": "Reversible", "alternating": "Alternating"}}},
-  "oneway": {"key": "oneway", "type": "onewayCheck", "label": "One Way", "strings": {"options": {"undefined": "Assumed to be No", "yes": "Yes", "no": "No", "reversible": "Reversible", "alternating": "Alternating"}}},
+  "oneway": {"key": "oneway", "type": "onewayCheck", "label": "One Way", "strings": {"options": {"undefined": "Assumed to be No", "yes": "Yes", "no": "No", "reversible": "Reversible", "alternating": "Alternating"}}, "terms": ["bidirectional", "oneway", "unidirectional"]},
   "oneway/bicycle": {"key": "oneway:bicycle", "type": "check", "label": "One Way (Bicycles)", "prerequisiteTag": {"key": "oneway"}},
   "openfire": {"key": "openfire", "type": "check", "label": "Open Fires Allowed"},
   "opening_date": {"key": "opening_date", "type": "text", "label": "Expected Opening Date", "placeholder": "YYYY-MM-DD"},
