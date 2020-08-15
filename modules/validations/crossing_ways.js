@@ -169,13 +169,24 @@ export function validationCrossingWays(context) {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('railway') !== -1) {
+                    if (!bothLines) return {};
+
+                    var isTram = entity1.tags.railway === 'tram' || entity2.tags.railway === 'tram';
+
                     if (osmPathHighwayTagValues[entity1.tags.highway] ||
                         osmPathHighwayTagValues[entity2.tags.highway]) {
-                        // path-rail connections use this tag
-                        return bothLines ? { railway: 'crossing' } : {};
+
+                        // path-tram connections use this tag
+                        if (isTram) return { railway: 'tram_crossing' };
+
+                        // other path-rail connections use this tag
+                        return { railway: 'crossing' };
                     } else {
-                        // road-rail connections use this tag
-                        return bothLines ? { railway: 'level_crossing' } : {};
+                        // path-tram connections use this tag
+                        if (isTram) return { railway: 'tram_level_crossing' };
+
+                        // other road-rail connections use this tag
+                        return { railway: 'level_crossing' };
                     }
                 }
 
