@@ -9281,6 +9281,14 @@
                     "name": "Train Wash",
                     "terms": "wash,clean"
                 },
+                "railway/tram_crossing": {
+                    "name": "Tram Crossing (Path)",
+                    "terms": "crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing"
+                },
+                "railway/tram_level_crossing": {
+                    "name": "Tram Crossing (Road)",
+                    "terms": "crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing"
+                },
                 "railway/tram": {
                     "name": "Tram Track",
                     "terms": "electric street railway,light rail,streetcar,tramway,trolley"

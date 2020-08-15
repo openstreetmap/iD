@@ -7680,6 +7680,16 @@ en:
         name: Tram Track
         # 'terms: electric street railway,light rail,streetcar,tramway,trolley'
         terms: '<translate with synonyms or related terms for ''Tram Track'', separated by commas>'
+      railway/tram_crossing:
+        # railway=tram_crossing
+        name: Tram Crossing (Path)
+        # 'terms: crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing'
+        terms: '<translate with synonyms or related terms for ''Tram Crossing (Path)'', separated by commas>'
+      railway/tram_level_crossing:
+        # railway=tram_level_crossing
+        name: Tram Crossing (Road)
+        # 'terms: crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing'
+        terms: '<translate with synonyms or related terms for ''Tram Crossing (Road)'', separated by commas>'
       railway/tram_stop:
         # railway=tram_stop
         name: Tram Stopping Position

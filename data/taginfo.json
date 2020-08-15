@@ -985,6 +985,8 @@
     {"key": "railway", "value": "subway", "description": "🄿 Subway Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/subway.svg"},
     {"key": "railway", "value": "switch", "description": "🄿 Railway Switch", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/junction.svg"},
     {"key": "railway", "value": "wash", "description": "🄿 Train Wash", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/train_wash.svg"},
+    {"key": "railway", "value": "tram_crossing", "description": "🄿 Tram Crossing (Path)", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
+    {"key": "railway", "value": "tram_level_crossing", "description": "🄿 Tram Crossing (Road)", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-car-side.svg"},
     {"key": "railway", "value": "tram", "description": "🄿 Tram Track", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tram.svg"},
     {"key": "railway", "value": "yard", "description": "🄿 Rail Yard", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/freight_car.svg"},
     {"key": "route", "value": "ferry", "description": "🄿 Ferry Route", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/ferry.svg"},
