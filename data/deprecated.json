@@ -475,6 +475,14 @@
     "replace": {"highway": "steps", "conveying": "$1"}
   },
   {
+    "old": {"fast_food": "pizza"},
+    "replace": {"cuisine": "pizza"}
+  },
+  {
+    "old": {"fast_food": "shawarma"},
+    "replace": {"cuisine": "shawarma"}
+  },
+  {
     "old": {"fee": "0"},
     "replace": {"fee": "no"}
   },

@@ -2116,6 +2116,8 @@
     {"key": "entrance", "value": "main_entrance", "description": "🄳 ➜ entrance=main"},
     {"key": "entrance", "value": "private", "description": "🄳 ➜ entrance=yes + access=private"},
     {"key": "escalator", "description": "🄳 ➜ highway=steps + conveying=*"},
+    {"key": "fast_food", "value": "pizza", "description": "🄳 ➜ cuisine=pizza"},
+    {"key": "fast_food", "value": "shawarma", "description": "🄳 ➜ cuisine=shawarma"},
     {"key": "fee", "value": "0", "description": "🄳 ➜ fee=no"},
     {"key": "fee", "value": "free", "description": "🄳 ➜ fee=no"},
     {"key": "fee", "value": "Free", "description": "🄳 ➜ fee=no"},
