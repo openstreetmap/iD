@@ -57,6 +57,7 @@
   "bridge/support": {"key": "bridge:support", "type": "typeCombo", "label": "Type"},
   "building_area": {"key": "building", "type": "combo", "default": "yes", "geometry": ["area"], "label": "Building"},
   "building": {"key": "building", "type": "combo", "label": "Building", "terms": ["structure"]},
+  "building/flats": {"key": "building:flats", "type": "number", "minValue": 0, "label": "Units", "placeholder": "2, 4, 6, 8..."},
   "building/levels_building": {"key": "building:levels", "type": "number", "minValue": 0, "label": "Building Levels", "placeholder": "2, 4, 6...", "prerequisiteTag": {"key": "building", "valueNot": "no"}},
   "building/levels": {"key": "building:levels", "type": "number", "minValue": 0, "label": "Levels", "placeholder": "2, 4, 6..."},
   "building/levels/underground": {"key": "building:levels:underground", "type": "number", "minValue": 0, "label": "Underground Levels", "placeholder": "2, 4, 6...", "terms": ["basement levels"]},

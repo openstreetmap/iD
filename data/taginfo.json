@@ -1387,6 +1387,7 @@
     {"key": "boules", "description": "🄵 Type"},
     {"key": "brand", "description": "🄵 Brand"},
     {"key": "brewery", "description": "🄵 Draft Beers"},
+    {"key": "building:flats", "description": "🄵 Units"},
     {"key": "building:levels", "description": "🄵 Building Levels, 🄵 Levels"},
     {"key": "building:levels:underground", "description": "🄵 Underground Levels"},
     {"key": "building:material", "description": "🄵 Material"},
