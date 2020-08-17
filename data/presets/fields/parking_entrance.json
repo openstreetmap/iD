@@ -1,0 +1,11 @@
+{
+    "key": "parking",
+    "type": "combo",
+    "label": "Type",
+    "strings": {
+        "options": {
+            "underground": "Underground",
+            "multi-storey": "Multilevel"
+        }
+    }
+}

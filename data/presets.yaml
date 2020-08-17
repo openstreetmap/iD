@@ -1715,6 +1715,14 @@ en:
           surface: Surface
           # parking=underground
           underground: Underground
+      parking_entrance:
+        # parking=*
+        label: Type
+        options:
+          # parking=multi-storey
+          multi-storey: Multilevel
+          # parking=underground
+          underground: Underground
       parking_space:
         # parking_space=*
         label: Type
