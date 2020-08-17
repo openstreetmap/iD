@@ -10002,6 +10002,10 @@
                     "name": "Wholesale Store",
                     "terms": "warehouse club,cash and carry"
                 },
+                "shop/wigs": {
+                    "name": "Wig Shop",
+                    "terms": "hair extentions"
+                },
                 "shop/window_blind": {
                     "name": "Window Blind Store",
                     "terms": ""

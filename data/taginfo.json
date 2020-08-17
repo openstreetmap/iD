@@ -1163,6 +1163,7 @@
     {"key": "shop", "value": "water", "description": "🄿 Drinking Water Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/the-noun-project/2009234.svg"},
     {"key": "shop", "value": "weapons", "description": "🄿 Weapon Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/dagger.svg"},
     {"key": "shop", "value": "wholesale", "description": "🄿 Wholesale Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/warehouse-15.svg"},
+    {"key": "shop", "value": "wigs", "description": "🄿 Wig Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/shop-15.svg"},
     {"key": "shop", "value": "window_blind", "description": "🄿 Window Blind Store", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/window.svg"},
     {"key": "shop", "value": "wine", "description": "🄿 Wine Shop", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/alcohol-shop-15.svg"},
     {"key": "telecom", "value": "data_center", "description": "🄿 Data Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-server.svg"},

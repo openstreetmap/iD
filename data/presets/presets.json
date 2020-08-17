@@ -1218,6 +1218,7 @@
   "shop/water": {"icon": "tnp-2009234", "geometry": ["point", "area"], "tags": {"shop": "water"}, "name": "Drinking Water Shop"},
   "shop/weapons": {"icon": "temaki-dagger", "geometry": ["point", "area"], "terms": ["ammo", "gun", "knife", "knives"], "tags": {"shop": "weapons"}, "name": "Weapon Shop"},
   "shop/wholesale": {"icon": "maki-warehouse", "fields": ["{shop}", "wholesale"], "geometry": ["point", "area"], "terms": ["warehouse club", "cash and carry"], "tags": {"shop": "wholesale"}, "name": "Wholesale Store"},
+  "shop/wigs": {"icon": "maki-shop", "geometry": ["point", "area"], "terms": ["hair extentions"], "tags": {"shop": "wigs"}, "name": "Wig Shop"},
   "shop/window_blind": {"icon": "temaki-window", "geometry": ["point", "area"], "tags": {"shop": "window_blind"}, "name": "Window Blind Store"},
   "shop/wine": {"icon": "maki-alcohol-shop", "moreFields": ["{shop}", "min_age"], "geometry": ["point", "area"], "tags": {"shop": "wine"}, "name": "Wine Shop"},
   "telecom/data_center": {"icon": "fas-server", "fields": ["name", "ref", "operator", "building_area"], "moreFields": ["address", "gnis/feature_id", "phone", "website"], "geometry": ["point", "area"], "tags": {"telecom": "data_center"}, "terms": ["computer systems storage", "information technology", "server farm", "the cloud", "telecommunications"], "name": "Data Center"},

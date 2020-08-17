@@ -8533,6 +8533,11 @@ en:
         name: Wholesale Store
         # 'terms: warehouse club,cash and carry'
         terms: '<translate with synonyms or related terms for ''Wholesale Store'', separated by commas>'
+      shop/wigs:
+        # shop=wigs
+        name: Wig Shop
+        # 'terms: hair extentions'
+        terms: '<translate with synonyms or related terms for ''Wig Shop'', separated by commas>'
       shop/window_blind:
         # shop=window_blind
         name: Window Blind Store
