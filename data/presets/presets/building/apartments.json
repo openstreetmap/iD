@@ -1,6 +1,7 @@
 {
     "icon": "maki-building",
     "fields": [
+        "{building}",
         "building/flats"
     ],
     "geometry": [
