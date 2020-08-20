@@ -3070,6 +3070,10 @@
                     "label": "Building",
                     "terms": "structure"
                 },
+                "building/flats": {
+                    "label": "Units",
+                    "placeholder": "2, 4, 6, 8..."
+                },
                 "building/levels_building": {
                     "label": "Building Levels",
                     "terms": "",

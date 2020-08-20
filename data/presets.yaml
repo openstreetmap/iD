@@ -367,6 +367,11 @@ en:
         label: Building
         # 'terms: structure'
         terms: '[translate with synonyms or related terms for ''Building'', separated by commas]'
+      building/flats:
+        # 'building:flats=*'
+        label: Units
+        # building/flats field placeholder
+        placeholder: '2, 4, 6, 8...'
       building/levels:
         # 'building:levels=*'
         label: Levels
