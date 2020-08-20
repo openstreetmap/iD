@@ -339,7 +339,7 @@
   "building/bunker": {"icon": "temaki-bunker", "geometry": ["area"], "tags": {"building": "bunker"}, "matchScore": 0.5, "name": "Bunker", "searchable": false},
   "building/entrance": {"icon": "maki-entrance-alt1", "fields": [], "moreFields": [], "geometry": ["vertex"], "tags": {"building": "entrance"}, "name": "Entrance/Exit", "searchable": false},
   "building/train_station": {"icon": "maki-building", "geometry": ["point", "vertex", "area"], "tags": {"building": "train_station"}, "matchScore": 0.5, "name": "Train Station Building", "searchable": false},
-  "building/apartments": {"icon": "maki-building", "fields": ["{building}", "flats"], "geometry": ["area"], "tags": {"building": "apartments"}, "matchScore": 0.5, "name": "Apartment Building"},
+  "building/apartments": {"icon": "maki-building", "fields": ["building/flats"], "geometry": ["area"], "tags": {"building": "apartments"}, "matchScore": 0.5, "name": "Apartment Building"},
   "building/barn": {"icon": "temaki-barn", "geometry": ["area"], "tags": {"building": "barn"}, "matchScore": 0.5, "name": "Barn"},
   "building/boathouse": {"icon": "maki-harbor", "geometry": ["area"], "tags": {"building": "boathouse"}, "matchScore": 0.5, "terms": [], "name": "Boathouse"},
   "building/bungalow": {"icon": "maki-home", "geometry": ["area"], "tags": {"building": "bungalow"}, "terms": ["home", "detached"], "matchScore": 0.5, "name": "Bungalow"},

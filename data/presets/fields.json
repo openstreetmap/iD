@@ -172,7 +172,6 @@
   "fitness_station": {"key": "fitness_station", "type": "typeCombo", "label": "Equipment Type"},
   "fixme": {"key": "fixme", "type": "textarea", "label": "Fix Me", "universal": true, "terms": ["help request"]},
   "flag/type": {"key": "flag:type", "type": "combo", "label": "Flag Type"},
-  "flats": {"key": "flats", "type": "number", "minValue": 0, "label": "Flats", "placeholder": "2, 4, 6, 8..."},
   "floating": {"key": "floating", "type": "check", "label": "Floating"},
   "flood_prone": {"key": "flood_prone", "type": "check", "label": "Flood Prone"},
   "ford": {"key": "ford", "type": "typeCombo", "label": "Type", "placeholder": "Default"},

@@ -3580,10 +3580,6 @@
                 "flag/type": {
                     "label": "Flag Type"
                 },
-                "flats": {
-                    "label": "Flats",
-                    "placeholder": "2, 4, 6, 8..."
-                },
                 "floating": {
                     "label": "Floating"
                 },
