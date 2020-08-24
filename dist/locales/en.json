@@ -3304,6 +3304,9 @@
                 "date": {
                     "label": "Date"
                 },
+                "defibrillator_location": {
+                    "label": "Precise location of the defibrillator"
+                },
                 "delivery": {
                     "label": "Delivery",
                     "terms": ""
@@ -10711,6 +10714,20 @@
                 "description": "Annotation overlay provided by basemap.at.",
                 "name": "basemap.at Overlay"
             },
+            "basemap.at-surface": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Surface layer provided by basemap.at.",
+                "name": "basemap.at Surface"
+            },
+            "basemap.at-terrain": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Terrain layer provided by basemap.at.",
+                "name": "basemap.at Terrain"
+            },
             "eufar-balaton": {
                 "attribution": {
                     "text": "EUFAR Balaton ortofotó 2010"
@@ -10731,13 +10748,6 @@
                 },
                 "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
                 "name": "Gothenburg City map"
-            },
-            "gothenburg-ortho": {
-                "attribution": {
-                    "text": "© Gothenburg municipality, CC0"
-                },
-                "description": "Orthophoto for Gothenburg municipality",
-                "name": "Gothenburg Orthophoto"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -10836,27 +10846,6 @@
                 },
                 "name": "OpenPT Map (overlay)"
             },
-            "openrailwaymap": {
-                "attribution": {
-                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
-                },
-                "description": "Overlay imagery showing railway infrastructure based on OpenStreetMap data",
-                "name": "OpenRailwayMap"
-            },
-            "openrailwaymap-maxspeeds": {
-                "attribution": {
-                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
-                },
-                "description": "Overlay imagery showing railway speed limits based on OpenStreetMap data",
-                "name": "OpenRailwayMap Maxspeeds"
-            },
-            "openrailwaymap-signalling": {
-                "attribution": {
-                    "text": "Rendering: OpenRailwayMap, © Map data OpenStreetMap contributors"
-                },
-                "description": "Overlay imagery showing railway signals based on OpenStreetMap data",
-                "name": "OpenRailwayMap Signalling"
-            },
             "osm-gps": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors"
@@ -10927,12 +10916,6 @@
                 },
                 "name": "Thunderforest Landscape"
             },
-            "tf-outdoors": {
-                "attribution": {
-                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
-                },
-                "name": "Thunderforest Outdoors"
-            },
             "trafikverket-baninfo": {
                 "attribution": {
                     "text": "© Trafikverket, CC0"
@@ -10974,12 +10957,6 @@
                 },
                 "description": "Swedish NVDB road network with several options for map layers",
                 "name": "Trafikverket Road Network options"
-            },
-            "wroclaw-orto2018": {
-                "attribution": {
-                    "text": "Urząd Miasta Wrocław"
-                },
-                "name": "Wrocław: Orthophotomap 2018 (aerial image)"
             },
             "Maxar-Premium": {
                 "name": "Maxar Premium Imagery (Beta)",
