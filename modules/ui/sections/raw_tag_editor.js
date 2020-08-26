@@ -215,6 +215,7 @@ export function uiSectionRawTagEditor(id, context) {
             .merge(itemsEnter)
             .sort(function(a, b) { return a.index - b.index; });
 
+        var includesRelation = null;
         items
             .each(function(d) {
                 var row = d3_select(this);
@@ -230,10 +231,12 @@ export function uiSectionRawTagEditor(id, context) {
                 if (typeof d.value !== 'string') {
                     reference = uiTagReference({ key: d.key }, context);
                 } else {
-                    var isRelation = _entityIDs && _entityIDs.some(function(entityID) {
-                        return context.entity(entityID).type === 'relation';
-                    });
-                    if (isRelation && d.key === 'type') {
+                    if (includesRelation === null) {
+                        includesRelation = _entityIDs && _entityIDs.some(function(entityID) {
+                            return context.entity(entityID).type === 'relation';
+                        });
+                    }
+                    if (includesRelation && d.key === 'type') {
                         reference = uiTagReference({ rtype: d.value }, context);
                     } else {
                         reference = uiTagReference({ key: d.key, value: d.value }, context);
