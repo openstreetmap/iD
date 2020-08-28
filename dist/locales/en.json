@@ -4215,6 +4215,13 @@
                     "label": "Park and Ride",
                     "terms": ""
                 },
+                "parking_entrance": {
+                    "label": "Type",
+                    "options": {
+                        "underground": "Underground",
+                        "multi-storey": "Multilevel"
+                    }
+                },
                 "parking_space": {
                     "label": "Type"
                 },
