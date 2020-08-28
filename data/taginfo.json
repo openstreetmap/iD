@@ -23,6 +23,7 @@
     {"key": "power", "description": "🄿 Power Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/power.svg"},
     {"key": "railway", "description": "🄿 Railway Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/rail_profile.svg"},
     {"key": "seamark:type", "description": "🄿 Seamark (unsearchable), 🄵 Seamark", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/harbor-15.svg"},
+    {"key": "telecom", "description": "🄿 Telecom Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/cable.svg"},
     {"key": "tourism", "description": "🄿 Tourism Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/attraction-15.svg"},
     {"key": "waterway", "description": "🄿 Waterway Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"]},
     {"key": "addr:interpolation", "description": "🄿 Address Interpolation (unsearchable)", "object_types": ["way"]},

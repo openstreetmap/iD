@@ -2575,6 +2575,9 @@ en:
       target:
         # target=*
         label: Target
+      telecom:
+        # telecom=*
+        label: Type
       telecom/medium:
         # 'telecom:medium=*'
         label: Medium
@@ -8559,6 +8562,9 @@ en:
         # shop=wine
         name: Wine Shop
         terms: '<translate with synonyms or related terms for ''Wine Shop'', separated by commas>'
+      telecom:
+        # telecom=*
+        name: Telecom Feature
       telecom/data_center:
         # telecom=data_center
         name: Data Center

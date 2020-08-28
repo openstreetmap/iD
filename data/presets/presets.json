@@ -19,6 +19,7 @@
   "power": {"icon": "temaki-power", "geometry": ["point", "vertex", "line", "area"], "tags": {"power": "*"}, "fields": ["power"], "moreFields": ["material"], "searchable": false, "name": "Power Feature"},
   "railway": {"icon": "temaki-rail_profile", "fields": ["railway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"railway": "*"}, "searchable": false, "name": "Railway Feature"},
   "seamark": {"icon": "maki-harbor", "fields": ["seamark/type"], "geometry": ["point", "vertex", "line", "area"], "tags": {"seamark:type": "*"}, "searchable": false, "name": "Seamark"},
+  "telecom": {"icon": "temaki-cable", "fields": ["telecom", "operator"], "geometry": ["point", "vertex", "line", "area"], "tags": {"telecom": "*"}, "searchable": false, "name": "Telecom Feature"},
   "tourism": {"icon": "maki-attraction", "fields": ["name", "tourism"], "geometry": ["point", "vertex", "line", "area"], "tags": {"tourism": "*"}, "searchable": false, "name": "Tourism Feature"},
   "waterway": {"fields": ["name", "waterway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"waterway": "*"}, "searchable": false, "name": "Waterway Feature"},
   "addr/interpolation": {"fields": ["addr/interpolation"], "geometry": ["line"], "tags": {"addr:interpolation": "*"}, "name": "Address Interpolation", "searchable": false, "matchScore": 0.2},

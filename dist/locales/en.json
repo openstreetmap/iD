@@ -4928,6 +4928,9 @@
                 "target": {
                     "label": "Target"
                 },
+                "telecom": {
+                    "label": "Type"
+                },
                 "telecom/medium": {
                     "label": "Medium"
                 },
@@ -5274,6 +5277,9 @@
                 },
                 "seamark": {
                     "name": "Seamark"
+                },
+                "telecom": {
+                    "name": "Telecom Feature"
                 },
                 "tourism": {
                     "name": "Tourism Feature"
