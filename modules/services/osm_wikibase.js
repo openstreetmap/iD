@@ -124,7 +124,6 @@ export default {
     // {
     //   key: 'string',
     //   value: 'string',
-    //   rtype: 'string',
     //   langCode: 'string'
     // }
     //
@@ -133,7 +132,7 @@ export default {
         var that = this;
         var titles = [];
         var result = {};
-        var rtypeSitelink = params.rtype ? ('Relation:' + params.rtype).replace(/_/g, ' ').trim() : false;
+        var rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
         var keySitelink = params.key ? this.toSitelink(params.key) : false;
         var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
         var localeSitelink;
@@ -241,10 +240,6 @@ export default {
     // {
     //   key: 'string',     // required
     //   value: 'string'    // optional
-    // }
-    //   -or-
-    // {
-    //   rtype: 'rtype'     // relation type  (e.g. 'multipolygon')
     // }
     //
     // Get an result object used to display tag documentation

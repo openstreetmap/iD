@@ -8,14 +8,10 @@ import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 
 
-// Pass `which` object of the form:
+// Pass `what` object of the form:
 // {
 //   key: 'string',     // required
 //   value: 'string'    // optional
-// }
-//   -or-
-// {
-//   rtype: 'string'    // relation type  (e.g. 'multipolygon')
 // }
 //   -or-
 // {
