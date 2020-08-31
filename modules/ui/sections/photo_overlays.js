@@ -215,6 +215,9 @@ export function uiSectionPhotoOverlays(context) {
             .attr('type', 'date')
             .attr('class', 'list-item-input')
             .attr('placeholder', 'dd/mm/yyyy')
+            .property('value', function(d) {
+                return context.photos().dateFilterValue(d);
+            })
             .on('change', function(d) {
                 var value = d3_select(this).property('value');
                 context.photos().setDateFilter(d, value);
@@ -222,11 +225,7 @@ export function uiSectionPhotoOverlays(context) {
 
         li
             .merge(liEnter)
-            .classed('active', filterEnabled)
-            .selectAll('input')
-            .property('value', function(d) {
-                return context.photos().dateFilterValue(d);
-            });
+            .classed('active', filterEnabled);
     }
 
     function drawUsernameFilter(selection) {
@@ -273,6 +272,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('input')
             .attr('type', 'text')
             .attr('class', 'list-item-input')
+            .property('value', context.photos().username())
             .on('change', function() {
                 var value = d3_select(this).property('value');
                 context.photos().setUsernameFilter(value);
@@ -280,9 +280,7 @@ export function uiSectionPhotoOverlays(context) {
         
         li
             .merge(liEnter)
-            .classed('active', filterEnabled)
-            .selectAll('input')
-            .property('value', context.photos().username());
+            .classed('active', filterEnabled);
     }
 
     function toggleLayer(which) {
