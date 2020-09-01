@@ -5671,6 +5671,10 @@
                     "name": "Hot Dog Fast Food",
                     "terms": "ballpark,frankfurter,frank,hotdog stand,sandwich,sausage,wiener"
                 },
+                "amenity/fast_food/juice": {
+                    "name": "Juice Fast Food",
+                    "terms": "cafe,café,beverages,fruit drinks,juice bar,shakes,smoothies"
+                },
                 "amenity/fast_food/kebab": {
                     "name": "Kebab Fast Food",
                     "terms": "bar,breakfast,cafe,café,canteen,dine,dining,dinner,drive-in,eat,grill,lunch,table"

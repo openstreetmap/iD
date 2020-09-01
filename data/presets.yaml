@@ -3369,6 +3369,11 @@ en:
       amenity/fast_food/ice_cream:
         # 'amenity=fast_food, cuisine=ice_cream'
         name: Ice Cream Fast Food
+      amenity/fast_food/juice:
+        # 'amenity=fast_food, cuisine=juice'
+        name: Juice Fast Food
+        # 'terms: cafe,café,beverages,fruit drinks,juice bar,shakes,smoothies'
+        terms: '<translate with synonyms or related terms for ''Juice Fast Food'', separated by commas>'
       amenity/fast_food/kebab:
         # 'amenity=fast_food, cuisine=kebab'
         name: Kebab Fast Food

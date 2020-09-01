@@ -123,6 +123,7 @@
     {"key": "cuisine", "value": "donut", "description": "🄿 Donut Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/donut.svg"},
     {"key": "cuisine", "value": "fish_and_chips", "description": "🄿 Fish & Chips Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-fish.svg"},
     {"key": "cuisine", "value": "hot_dog", "description": "🄿 Hot Dog Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-hotdog.svg"},
+    {"key": "cuisine", "value": "juice", "description": "🄿 Juice Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/drink_cup.svg"},
     {"key": "cuisine", "value": "kebab", "description": "🄿 Kebab Fast Food", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/vertical_rotisserie.svg"},
     {"key": "cuisine", "value": "mexican", "description": "🄿 Mexican Fast Food, 🄿 Mexican Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-pepper-hot.svg"},
     {"key": "cuisine", "value": "pizza", "description": "🄿 Pizza Fast Food, 🄿 Pizza Restaurant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/restaurant-pizza-15.svg"},
