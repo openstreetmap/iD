@@ -5151,6 +5151,10 @@
                 "water_source": {
                     "label": "Water Source"
                 },
+                "water_tank/volume": {
+                    "label": "Volume (Liters)",
+                    "placeholder": "10000, 20000, 30000…"
+                },
                 "water_volume": {
                     "label": "Water Reserve Volume (m³)",
                     "terms": ""

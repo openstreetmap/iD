@@ -2840,6 +2840,11 @@ en:
       water_source:
         # water_source=*
         label: Water Source
+      water_tank/volume:
+        # 'water_tank:volume=*'
+        label: Volume (Liters)
+        # water_tank/volume field placeholder
+        placeholder: '10000, 20000, 30000…'
       water_volume:
         # water_volume=*
         label: Water Reserve Volume (m³)

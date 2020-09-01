@@ -498,6 +498,7 @@
   "waste": {"key": "waste", "type": "semiCombo", "label": "Waste"},
   "water_point": {"key": "water_point", "type": "check", "label": "Water Point"},
   "water_source": {"key": "water_source", "default": "main", "type": "combo", "label": "Water Source"},
+  "water_tank/volume": {"key": "water_tank:volume", "type": "text", "label": "Volume (Liters)", "placeholder": "10000, 20000, 30000…"},
   "water_volume": {"key": "water_volume", "type": "number", "label": "Water Reserve Volume (m³)", "snake_case": false},
   "water": {"key": "water", "type": "combo", "label": "Type"},
   "waterway": {"key": "waterway", "type": "typeCombo", "label": "Type"},
