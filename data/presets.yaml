@@ -6359,6 +6359,11 @@ en:
         # man_made=cutline
         name: Cut line
         terms: '<translate with synonyms or related terms for ''Cut line'', separated by commas>'
+      man_made/dovecote:
+        # man_made=dovecote
+        name: Dovecote
+        # 'terms: birds,doocot,dovecot,doves,pigeonholes,pigeons'
+        terms: '<translate with synonyms or related terms for ''Dovecote'', separated by commas>'
       man_made/dyke:
         # man_made=dyke
         name: Levee

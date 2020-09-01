@@ -755,6 +755,7 @@
   "man_made/crane": {"icon": "temaki-crane", "fields": ["operator", "manufacturer", "height", "crane/type"], "geometry": ["point", "line", "vertex", "area"], "tags": {"man_made": "crane"}, "name": "Crane"},
   "man_made/cross": {"icon": "maki-religious-christian", "fields": ["name", "material", "height", "ele_node", "inscription", "direction"], "geometry": ["point", "vertex"], "tags": {"man_made": "cross"}, "name": "Cross"},
   "man_made/cutline": {"icon": "maki-logging", "geometry": ["line"], "tags": {"man_made": "cutline"}, "name": "Cut line"},
+  "man_made/dovecote": {"icon": "fas-dove", "fields": ["operator", "building_area", "height", "capacity"], "moreFields": ["layer", "location"], "geometry": ["area", "point"], "terms": ["birds", "doocot", "dovecot", "doves", "pigeonholes", "pigeons"], "tags": {"man_made": "dovecote"}, "name": "Dovecote"},
   "man_made/dyke": {"geometry": ["line"], "tags": {"man_made": "dyke"}, "terms": ["Dike", "Dyke", "Floodbank", "Stopbank"], "name": "Levee"},
   "man_made/embankment": {"geometry": ["line"], "tags": {"man_made": "embankment"}, "name": "Embankment"},
   "man_made/flagpole": {"icon": "maki-embassy", "fields": ["operator", "flag/type", "country_flag", "lit", "height"], "moreFields": ["manufacturer", "material"], "geometry": ["point", "vertex"], "tags": {"man_made": "flagpole"}, "name": "Flagpole"},

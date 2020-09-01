@@ -8182,6 +8182,10 @@
                     "name": "Cut line",
                     "terms": ""
                 },
+                "man_made/dovecote": {
+                    "name": "Dovecote",
+                    "terms": "birds,doocot,dovecot,doves,pigeonholes,pigeons"
+                },
                 "man_made/dyke": {
                     "name": "Levee",
                     "terms": "Dike,Dyke,Floodbank,Stopbank"
