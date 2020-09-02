@@ -7464,6 +7464,10 @@
                     "name": "Tertiary Road",
                     "terms": "road,street"
                 },
+                "highway/toll_gantry": {
+                    "name": "Open Road Toll",
+                    "terms": "license plate camera toll,cashless toll,electronic toll,free-flow toll,toll gantry,transponder toll"
+                },
                 "highway/track": {
                     "name": "Unmaintained Track Road",
                     "terms": "woods road,forest road,logging road,fire road,farm road,agricultural road,ranch road,carriage road,primitive,unmaintained,rut,offroad,4wd,4x4,four wheel drive,atv,quad,jeep,double track,two track"

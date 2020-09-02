@@ -5499,6 +5499,11 @@ en:
         name: Tertiary Link
         # 'terms: on ramp,off ramp,ramp,road,street'
         terms: '<translate with synonyms or related terms for ''Tertiary Link'', separated by commas>'
+      highway/toll_gantry:
+        # highway=toll_gantry
+        name: Open Road Toll
+        # 'terms: license plate camera toll,cashless toll,electronic toll,free-flow toll,toll gantry,transponder toll'
+        terms: '<translate with synonyms or related terms for ''Open Road Toll'', separated by commas>'
       highway/track:
         # highway=track
         name: Unmaintained Track Road
