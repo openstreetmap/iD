@@ -11,6 +11,7 @@ import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler, utilQsString } from '../util';
+import { uiAuthenticationHint } from '../ui/authenticationHint';
 
 
 var tiler = utilTiler();
@@ -23,6 +24,9 @@ var oauth = osmAuth({
     loading: authLoading,
     done: authDone
 });
+
+var _runningAuth;
+var _authenticationNeededHint;
 
 var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
@@ -1297,27 +1301,79 @@ export default {
 
 
     authenticate: function(callback) {
-        var that = this;
-        var cid = _connectionID;
-        _userChangesets = undefined;
-        _userDetails = undefined;
+        if (!_runningAuth) {
+            var that = this;
+            var cid = _connectionID;
+            _userChangesets = undefined;
+            _userDetails = undefined;
 
-        function done(err, res) {
-            if (err) {
-                if (callback) callback(err);
-                return;
-            }
-            if (that.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
-                return;
-            }
-            _rateLimitError = undefined;
-            dispatch.call('change');
-            if (callback) callback(err, res);
-            that.userChangesets(function() {});  // eagerly load user details/changesets
+            _runningAuth = new Promise((resolve, reject) => {
+                function done(err, res) {
+                    try {
+                        if (err) {
+                            reject(err);
+                            return;
+                        }
+                        if (that.getConnectionId() !== cid) {
+                            var error = new Error('Connection Switched');
+                            error.status = -1;
+                            reject(error);
+                            return;
+                        }
+                        _rateLimitError = undefined;
+                        dispatch.call('change');
+                        resolve(res);
+                        that.userChangesets(function() {});  // eagerly load user details/changesets
+                    } catch (err2) {
+                        reject(err2);
+                    }
+                }
+
+                try {
+                    that._showAuthenticationNeeded(true);
+                    oauth.authenticate(done);
+                } catch (err) {
+                    reject(err);
+                }
+            })
+            .then(result => {
+                _runningAuth = null;
+                that._showAuthenticationNeeded(false);
+                return result;
+            })
+            .catch(error => {
+                _runningAuth = null;
+                if (error.status !== 'popup-blocked') {
+                    that._showAuthenticationNeeded(false);
+                }
+                throw error;
+            });
         }
+        if (callback) {
+            _runningAuth
+                .then(res => callback(null, res))
+                .catch(err => callback(err));
+        }
+        return _runningAuth;
+    },
 
-        return oauth.authenticate(done);
+
+    _showAuthenticationNeeded: function (show) {
+        var that = this;
+        if (show && !_authenticationNeededHint) {
+            _authenticationNeededHint = uiAuthenticationHint(
+                function onShowLogin() {
+                    var brougtPopupToFront = oauth.bringPopupWindowToFront();
+                    if (!brougtPopupToFront) {
+                        _runningAuth = null;
+                        that.authenticate();
+                    }
+                }
+            );
+        } else if (!show && _authenticationNeededHint) {
+            _authenticationNeededHint.remove();
+            _authenticationNeededHint = null;
+        }
     },
 
 

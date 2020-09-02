@@ -641,6 +641,10 @@
         "login": "Log In",
         "logout": "Log Out",
         "loading_auth": "Connecting to OpenStreetMap...",
+        "authentication_hint": {
+            "authentication_needed": "Please log in to OpenStreetMap.",
+            "show_login": "Show Login"
+        },
         "report_a_bug": "Report a bug",
         "help_translate": "Help translate",
         "sidebar": {
