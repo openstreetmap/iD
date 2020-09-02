@@ -68,7 +68,10 @@ export function uiNoteComments() {
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .html(function(d) { return d.html; });
+            .html(function(d) { return d.html; })
+            .selectAll('a')
+                .attr('rel', 'noopener nofollow')
+                .attr('target', '_blank');
 
         comments
             .call(replaceAvatars);
