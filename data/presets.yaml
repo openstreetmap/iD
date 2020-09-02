@@ -6250,6 +6250,11 @@ en:
         name: Swimming Pool Facility
         # 'terms: dive,water'
         terms: '<translate with synonyms or related terms for ''Swimming Pool Facility'', separated by commas>'
+      leisure/sports_hall:
+        # leisure=sports_hall
+        name: Gymnasium
+        # 'terms: athletic courts,gym,sports hall,sports venue'
+        terms: '<translate with synonyms or related terms for ''Gymnasium'', separated by commas>'
       leisure/stadium:
         # leisure=stadium
         name: Stadium

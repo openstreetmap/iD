@@ -8090,6 +8090,10 @@
                     "name": "Swimming Pool Facility",
                     "terms": "dive,water"
                 },
+                "leisure/sports_hall": {
+                    "name": "Gymnasium",
+                    "terms": "athletic courts,gym,sports hall,sports venue"
+                },
                 "leisure/stadium": {
                     "name": "Stadium",
                     "terms": ""

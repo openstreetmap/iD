@@ -711,6 +711,7 @@
     {"key": "leisure", "value": "sports_centre", "description": "🄿 Sports Center / Complex", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "sport", "value": "climbing", "description": "🄿 Climbing Gym", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/abseiling.svg"},
     {"key": "sport", "value": "swimming", "description": "🄿 Swimming Pool Facility", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-swimmer.svg"},
+    {"key": "leisure", "value": "sports_hall", "description": "🄿 Gymnasium", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "leisure", "value": "stadium", "description": "🄿 Stadium", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "leisure", "value": "swimming_area", "description": "🄿 Natural Swimming Area", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-swimmer.svg"},
     {"key": "leisure", "value": "swimming_pool", "description": "🄿 Swimming Pool", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-swimming-pool.svg"},
