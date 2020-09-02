@@ -141,7 +141,7 @@ export function uiFieldWikipedia(field, context) {
   }
 
 
-  function defaultLanguageInfo() {
+  function defaultLanguageInfo(skipEnglishFallback) {
     const langCode = localizer.languageCode().toLowerCase();
 
     for (let i in _dataWikipedia) {
@@ -151,11 +151,11 @@ export function uiFieldWikipedia(field, context) {
     }
 
     // fallback to English
-    return ['English', 'English', 'en'];
+    return skipEnglishFallback ? ['', '', ''] : ['English', 'English', 'en'];
   }
 
 
-  function language() {
+  function language(skipEnglishFallback) {
     const value = utilGetSetValue(_langInput).toLowerCase();
 
     for (let i in _dataWikipedia) {
@@ -167,7 +167,7 @@ export function uiFieldWikipedia(field, context) {
     }
 
     // fallback to English
-    return defaultLanguageInfo();
+    return defaultLanguageInfo(skipEnglishFallback);
   }
 
 
@@ -295,12 +295,13 @@ export function uiFieldWikipedia(field, context) {
     // unrecognized value format
     } else {
       utilGetSetValue(_titleInput, value);
-      const defaultLangInfo = defaultLanguageInfo();
       if (value && value !== '') {
         utilGetSetValue(_langInput, '');
+        const defaultLangInfo = defaultLanguageInfo();
         _wikiURL = `https://${defaultLangInfo[2]}.wikipedia.org/w/index.php?fulltext=1&search=${value}`;
       } else {
-        utilGetSetValue(_langInput, defaultLangInfo[1]);
+        const shownOrDefaultLangInfo = language(true /* skipEnglishFallback */);
+        utilGetSetValue(_langInput, shownOrDefaultLangInfo[1]);
         _wikiURL = '';
       }
     }
