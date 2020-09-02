@@ -176,7 +176,7 @@ input[type=email] {
     height: 30px;
     border-radius: 4px;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: auto;
 }
 .ideditor[dir='rtl'] textarea,
 .ideditor[dir='rtl'] input[type=text],
