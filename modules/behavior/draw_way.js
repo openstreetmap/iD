@@ -242,7 +242,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         _headNodeID = typeof _nodeIndex === 'number' ? _origWay.nodes[_nodeIndex] :
             (_origWay.isClosed() ? _origWay.nodes[_origWay.nodes.length - 2] : _origWay.nodes[_origWay.nodes.length - 1]);
         _wayGeometry = _origWay.geometry(context.graph());
-        _annotation = t((_origWay.isDegenerate() ?
+        _annotation = t((_origWay.nodes.length === (_origWay.isClosed() ? 2 : 1) ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + _wayGeometry
         );
