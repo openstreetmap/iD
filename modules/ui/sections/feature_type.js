@@ -125,9 +125,8 @@ export function uiSectionFeatureType(context) {
         if (!utilArrayIdentical(val, _presets)) {
             _presets = val;
 
-            var geometries = entityGeometries();
-            if (_presets.length === 1 && geometries.length) {
-                _tagReference = uiTagReference(_presets[0].reference(geometries[0]), context)
+            if (_presets.length === 1) {
+                _tagReference = uiTagReference(_presets[0].reference(), context)
                     .showing(false);
             }
         }

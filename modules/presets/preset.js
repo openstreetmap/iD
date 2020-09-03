@@ -115,7 +115,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.reference = (geom) => {
+  _this.reference = () => {
     // Lookup documentation on Wikidata...
     const qid = _this.tags.wikidata || _this.tags['brand:wikidata'] || _this.tags['operator:wikidata'];
     if (qid) {
@@ -125,15 +125,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     // Lookup documentation on OSM Wikibase...
     let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
     let value = _this.originalReference.value || _this.tags[key];
-
-    if (geom === 'relation' && key === 'type') {
-      if (value in _this.tags) {
-        key = value;
-        value = _this.tags[key];
-      } else {
-        return { rtype: value };
-      }
-    }
 
     if (value === '*') {
       return { key: key };

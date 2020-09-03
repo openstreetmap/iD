@@ -175,7 +175,7 @@ export function uiTagReference(what) {
 
 
     tagReference.body = function(selection) {
-        var itemID = what.qid || what.rtype || (what.key + '-' + what.value);
+        var itemID = what.qid || (what.key + '-' + (what.value || ''));
         _body = selection.selectAll('.tag-reference-body')
             .data([itemID], function(d) { return d; });
 

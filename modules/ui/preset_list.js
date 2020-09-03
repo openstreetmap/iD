@@ -425,7 +425,7 @@ export function uiPresetList(context) {
         };
 
         item.preset = preset;
-        item.reference = uiTagReference(preset.reference(entityGeometries()[0]), context);
+        item.reference = uiTagReference(preset.reference(), context);
 
         return item;
     }
