@@ -1460,7 +1460,7 @@
     {"key": "cycleway:right", "value": "opposite", "description": "🄵 Bike Lanes"},
     {"key": "dance:style", "description": "🄵 Dance Styles"},
     {"key": "date", "description": "🄵 Date"},
-    {"key": "defibrillator:location", "description": "🄵 Precise location of the defibrillator"},
+    {"key": "defibrillator:location", "description": "🄵 Location Description"},
     {"key": "delivery", "description": "🄵 Delivery"},
     {"key": "denomination", "description": "🄵 Denomination"},
     {"key": "denotation", "description": "🄵 Denotation"},

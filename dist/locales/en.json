@@ -3304,8 +3304,8 @@
                 "date": {
                     "label": "Date"
                 },
-                "defibrillator_location": {
-                    "label": "Precise location of the defibrillator"
+                "defibrillator/location": {
+                    "label": "Location Description"
                 },
                 "delivery": {
                     "label": "Delivery",

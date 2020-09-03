@@ -1,5 +1,5 @@
 {
     "key": "defibrillator:location",
     "type": "textarea",
-    "label": "Precise location of the defibrillator"
+    "label": "Location Description"
 }
