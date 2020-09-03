@@ -630,6 +630,9 @@ en:
       date:
         # date=*
         label: Date
+      defibrillator/location:
+        # 'defibrillator:location=*'
+        label: Location Description
       delivery:
         # delivery=*
         label: Delivery
