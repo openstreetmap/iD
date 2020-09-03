@@ -7,5 +7,9 @@
         "type": "restriction",
         "restriction": "only_straight_on"
     },
+    "reference": {
+        "key": "restriction",
+        "value": "only_straight_on"
+    },
     "name": "Only Straight On"
 }
