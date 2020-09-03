@@ -7691,6 +7691,11 @@ en:
         name: High-Speed Train Track
         # 'terms: bullet train,fast rail,high speed rail,highspeed rail,HSR'
         terms: '<translate with synonyms or related terms for ''High-Speed Train Track'', separated by commas>'
+      railway/railway_crossing:
+        # railway=railway_crossing
+        name: Railway-Railway Crossing
+        # 'terms: diamond crossing,flat crossing,level junction,railway railway crossing'
+        terms: '<translate with synonyms or related terms for ''Railway-Railway Crossing'', separated by commas>'
       railway/signal:
         # railway=signal
         name: Railway Signal
