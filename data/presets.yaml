@@ -7619,9 +7619,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Railway Under Construction'', separated by commas>'
       railway/crossing:
         # railway=crossing
-        name: Railway Crossing (Path)
-        # 'terms: crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing'
-        terms: '<translate with synonyms or related terms for ''Railway Crossing (Path)'', separated by commas>'
+        name: Railway-Path Crossing
+        # 'terms: crossing,path railway crossing,pedestrian crossing,level crossing,grade crossing,railroad crossing,railway path crossing,path through railroad,train crossing'
+        terms: '<translate with synonyms or related terms for ''Railway-Path Crossing'', separated by commas>'
       railway/derail:
         # railway=derail
         name: Railway Derailer
@@ -7641,9 +7641,9 @@ en:
         name: Train Station (Halt / Request)
       railway/level_crossing:
         # railway=level_crossing
-        name: Railway Crossing (Road)
-        # 'terms: crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing'
-        terms: '<translate with synonyms or related terms for ''Railway Crossing (Road)'', separated by commas>'
+        name: Railway-Road Crossing
+        # 'terms: crossing,level crossing,grade crossing,railroad crossing,railway road crossing,road railway crossing,road through railroad,train crossing'
+        terms: '<translate with synonyms or related terms for ''Railway-Road Crossing'', separated by commas>'
       railway/light_rail:
         # railway=light_rail
         name: Light Rail Track
@@ -7731,14 +7731,14 @@ en:
         terms: '<translate with synonyms or related terms for ''Tram Track'', separated by commas>'
       railway/tram_crossing:
         # railway=tram_crossing
-        name: Tram Crossing (Path)
-        # 'terms: crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing'
-        terms: '<translate with synonyms or related terms for ''Tram Crossing (Path)'', separated by commas>'
+        name: Tram-Path Crossing
+        # 'terms: crossing,grade crossing,level crossing,path tram crossing,pedestrian crossing,streetcar crossing,tram path crossing,tramway crossing,trolley crossing'
+        terms: '<translate with synonyms or related terms for ''Tram-Path Crossing'', separated by commas>'
       railway/tram_level_crossing:
         # railway=tram_level_crossing
-        name: Tram Crossing (Road)
-        # 'terms: crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing'
-        terms: '<translate with synonyms or related terms for ''Tram Crossing (Road)'', separated by commas>'
+        name: Tram-Road Crossing
+        # 'terms: crossing,grade crossing,level crossing,pedestrian crossing,road tram crossing,streetcar crossing,tram road crossing,tramway crossing,trolley crossing'
+        terms: '<translate with synonyms or related terms for ''Tram-Road Crossing'', separated by commas>'
       railway/tram_stop:
         # railway=tram_stop
         name: Tram Stopping Position

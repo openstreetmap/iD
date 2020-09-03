@@ -9246,8 +9246,8 @@
                     "terms": ""
                 },
                 "railway/crossing": {
-                    "name": "Railway Crossing (Path)",
-                    "terms": "crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing"
+                    "name": "Railway-Path Crossing",
+                    "terms": "crossing,path railway crossing,pedestrian crossing,level crossing,grade crossing,railroad crossing,railway path crossing,path through railroad,train crossing"
                 },
                 "railway/derail": {
                     "name": "Railway Derailer",
@@ -9262,8 +9262,8 @@
                     "terms": "venicular,cliff railway,cable car,cable railway,funicular railway"
                 },
                 "railway/level_crossing": {
-                    "name": "Railway Crossing (Road)",
-                    "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
+                    "name": "Railway-Road Crossing",
+                    "terms": "crossing,level crossing,grade crossing,railroad crossing,railway road crossing,road railway crossing,road through railroad,train crossing"
                 },
                 "railway/light_rail": {
                     "name": "Light Rail Track",
@@ -9326,12 +9326,12 @@
                     "terms": "wash,clean"
                 },
                 "railway/tram_crossing": {
-                    "name": "Tram Crossing (Path)",
-                    "terms": "crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing"
+                    "name": "Tram-Path Crossing",
+                    "terms": "crossing,grade crossing,level crossing,path tram crossing,pedestrian crossing,streetcar crossing,tram path crossing,tramway crossing,trolley crossing"
                 },
                 "railway/tram_level_crossing": {
-                    "name": "Tram Crossing (Road)",
-                    "terms": "crossing,grade crossing,level crossing,pedestrian crossing,streetcar crossing,tramway crossing,trolley crossing"
+                    "name": "Tram-Road Crossing",
+                    "terms": "crossing,grade crossing,level crossing,pedestrian crossing,road tram crossing,streetcar crossing,tram road crossing,tramway crossing,trolley crossing"
                 },
                 "railway/tram": {
                     "name": "Tram Track",

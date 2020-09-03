@@ -10,10 +10,12 @@
         "crossing",
         "grade crossing",
         "level crossing",
+        "path tram crossing",
         "pedestrian crossing",
         "streetcar crossing",
+        "tram path crossing",
         "tramway crossing",
         "trolley crossing"
     ],
-    "name": "Tram Crossing (Path)"
+    "name": "Tram-Path Crossing"
 }
