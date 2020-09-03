@@ -59,7 +59,7 @@
     "marked": "1.0.0",
     "martinez-polygon-clipping": "0.7.0",
     "node-diff3": "2.1.0",
-    "osm-auth": "1.0.2",
+    "osm-auth": "1.1.0",
     "pannellum": "2.5.6",
     "rbush": "3.0.1",
     "string.fromcodepoint": "1.0.0",
