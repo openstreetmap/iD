@@ -5938,6 +5938,10 @@
                     "name": "Pub",
                     "terms": "alcohol,drink,dive,beer,bier,booze"
                 },
+                "amenity/pub/irish": {
+                    "name": "Irish Pub",
+                    "terms": "irish pub,irish bar"
+                },
                 "amenity/pub/lgbtq": {
                     "name": "LGBTQ+ Pub",
                     "terms": "gay pub,lesbian pub,lgbtq pub,lgbt pub,lgb pub"

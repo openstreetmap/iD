@@ -187,6 +187,7 @@
     {"key": "amenity", "value": "prep_school", "description": "🄿 Test Prep / Tutoring School", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/school.svg"},
     {"key": "amenity", "value": "prison", "description": "🄿 Prison Grounds", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/prison-15.svg"},
     {"key": "amenity", "value": "pub", "description": "🄿 Pub", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/beer-15.svg"},
+    {"key": "theme", "value": "irish", "description": "🄿 Irish Pub", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/beer-15.svg"},
     {"key": "microbrewery", "value": "yes", "description": "🄿 Brewpub", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/beer-15.svg"},
     {"key": "amenity", "value": "public_bath", "description": "🄿 Public Bath", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "amenity", "value": "public_bookcase", "description": "🄿 Public Bookcase", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/library-15.svg"},

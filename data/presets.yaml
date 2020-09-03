@@ -3702,6 +3702,11 @@ en:
         name: Pub
         # 'terms: alcohol,drink,dive,beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Pub'', separated by commas>'
+      amenity/pub/irish:
+        # 'amenity=pub, theme=irish'
+        name: Irish Pub
+        # 'terms: irish pub,irish bar'
+        terms: '<translate with synonyms or related terms for ''Irish Pub'', separated by commas>'
       amenity/pub/lgbtq:
         # 'amenity=pub, lgbtq=primary'
         name: LGBTQ+ Pub
