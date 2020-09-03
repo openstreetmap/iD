@@ -556,7 +556,7 @@
     {"key": "highway", "value": "street_lamp", "description": "🄿 Street Lamp", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/street_lamp_arm.svg"},
     {"key": "highway", "value": "tertiary_link", "description": "🄿 Tertiary Link", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/highway-tertiary-link.svg"},
     {"key": "highway", "value": "tertiary", "description": "🄿 Tertiary Road", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/highway-tertiary.svg"},
-    {"key": "highway", "value": "toll_gantry", "description": "🄿 Open Road Toll", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/height_restrictor.svg"},
+    {"key": "highway", "value": "toll_gantry", "description": "🄿 Open Road Toll", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/toll_gantry.svg"},
     {"key": "highway", "value": "track", "description": "🄿 Unmaintained Track Road", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-truck-monster.svg"},
     {"key": "highway", "value": "traffic_mirror", "description": "🄿 Traffic Mirror", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/circle-stroked-15.svg"},
     {"key": "highway", "value": "traffic_signals", "description": "🄿 Traffic Signals", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/traffic_signals.svg"},
