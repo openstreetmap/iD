@@ -7767,7 +7767,7 @@
                 },
                 "landuse/quarry": {
                     "name": "Quarry",
-                    "terms": ""
+                    "terms": "aggregate quarry,open pit mine,sand mine,sand pit,sand quarry,sandpit"
                 },
                 "landuse/railway": {
                     "name": "Railway Corridor",

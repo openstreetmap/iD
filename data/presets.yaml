@@ -5859,6 +5859,7 @@ en:
       landuse/quarry:
         # landuse=quarry
         name: Quarry
+        # 'terms: aggregate quarry,open pit mine,sand mine,sand pit,sand quarry,sandpit'
         terms: '<translate with synonyms or related terms for ''Quarry'', separated by commas>'
       landuse/railway:
         # landuse=railway
