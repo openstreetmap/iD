@@ -225,20 +225,11 @@ export function uiSectionRawTagEditor(id, context) {
                     bindTypeahead(key, value);
                 }
 
-                var reference;
-
-                if (typeof d.value !== 'string') {
-                    reference = uiTagReference({ key: d.key }, context);
-                } else {
-                    var isRelation = _entityIDs && _entityIDs.some(function(entityID) {
-                        return context.entity(entityID).type === 'relation';
-                    });
-                    if (isRelation && d.key === 'type') {
-                        reference = uiTagReference({ rtype: d.value }, context);
-                    } else {
-                        reference = uiTagReference({ key: d.key, value: d.value }, context);
-                    }
+                var referenceOptions = { key: d.key };
+                if (typeof d.value === 'string') {
+                    referenceOptions.value = d.value;
                 }
+                var reference = uiTagReference(referenceOptions, context);
 
                 if (_state === 'hover') {
                     reference.showing(false);
