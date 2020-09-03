@@ -5617,7 +5617,7 @@
     "id": "Berlin-2011",
     "name": "Berlin aerial photography 2011",
     "type": "wms",
-    "template": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k_luftbild2011_20?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=0&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://fbinter.stadt-berlin.de/fb/wms/senstadt/k_luftbild2011_20?LAYERS=0&STYLES=default&FORMAT=image/png&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:4326",
     "endDate": "2011-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
@@ -5682,7 +5682,8 @@
         [13.48699, 52.68076]
       ]
     ],
-    "terms_text": "Geoportal Berlin/Digitale farbige Orthophotos 2011"
+    "terms_text": "Geoportal Berlin/Digitale farbige Orthophotos 2011",
+    "description": "Digitale Orthophotos für das gesamte Berliner Stadtgebiet mit einer Bodenauflösung von 0,20 m im Blattschnitt 2 km x 2 km."
   },
   {
     "id": "Berlin-2014",
@@ -8023,7 +8024,7 @@
   },
   {
     "id": "Geneve-dsm-2014",
-    "name": "Canton de Génève, MNA RELIEF OMBRE SURFACE 2014",
+    "name": "Canton de Génève, MNA RELIEF OMBRE SURFACE 2014 (SITG)",
     "type": "wms",
     "template": "https://ge.ch/sitgags2/services/RASTER/MNA_RELIEF_SURFACE/MapServer/WMSServer?LAYERS=0&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:4326",
@@ -8049,7 +8050,7 @@
   },
   {
     "id": "Geneve-dtm-2014",
-    "name": "Canton de Génève, MNA RELIEF OMBRE TERRAIN 2014",
+    "name": "Canton de Génève, MNA RELIEF OMBRE TERRAIN 2014 (SITG)",
     "type": "wms",
     "template": "https://ge.ch/sitgags2/services/RASTER/MNA_RELIEF_TERRAIN/MapServer/WMSServer?LAYERS=0&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:4326",
@@ -8075,7 +8076,7 @@
   },
   {
     "id": "Geneve-orthophoto-2016",
-    "name": "Canton de Génève, Orthophoto 2016 (5cm)",
+    "name": "Canton de Génève, Orthophoto 2016 (5cm) (SITG)",
     "type": "wms",
     "template": "https://ge.ch/sitgags2/services/RASTER/ORTHOPHOTOS_2016/MapServer/WMSServer?LAYERS=0&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:4326",
@@ -8129,7 +8130,7 @@
   },
   {
     "id": "Geneve-orthophoto-2018",
-    "name": "Canton de Génève, Orthophoto 2018 (20cm)",
+    "name": "Canton de Génève, Orthophoto 2018 (20cm) (SITG)",
     "type": "wms",
     "template": "https://ge.ch/sitgags2/services/RASTER/ORTHOPHOTOS_2018/MapServer/WMSServer?LAYERS=0&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
@@ -15507,83 +15508,6 @@
         [-74.41888, 18.57551]
       ]
     ]
-  },
-  {
-    "id": "Erlangen-2011",
-    "name": "Erlangen Luftbild (2011 5,0 cm)",
-    "type": "wms",
-    "template": "https://secure.erlangen.de/arcgiser/services/Luftbilder2011/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Erlangen_ratio10_5cm_gk4.jp2&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:3857",
-    "endDate": "2011-01-01T00:00:00.000Z",
-    "startDate": "2011-01-01T00:00:00.000Z",
-    "polygon": [
-      [
-        [10.92791, 49.53196],
-        [10.97194, 49.52969],
-        [10.97821, 49.53568],
-        [10.99934, 49.53589],
-        [11.03214, 49.53089],
-        [11.04425, 49.54317],
-        [11.03842, 49.55239],
-        [11.03663, 49.57167],
-        [11.04029, 49.58572],
-        [11.07287, 49.58587],
-        [11.07243, 49.63486],
-        [11.0054, 49.6344],
-        [11.00397, 49.62599],
-        [10.9748, 49.62541],
-        [10.94293, 49.64563],
-        [10.92532, 49.64876],
-        [10.91002, 49.63793],
-        [10.92235, 49.60463],
-        [10.91949, 49.57823],
-        [10.91135, 49.57095],
-        [10.91256, 49.5606],
-        [10.92907, 49.55674],
-        [10.92791, 49.53196]
-      ]
-    ],
-    "terms_text": "© Stadt Erlangen | © Aerowest GmbH"
-  },
-  {
-    "id": "Erlangen-2013",
-    "name": "Erlangen Luftbild (2013 6,25 cm)",
-    "type": "wms",
-    "template": "https://secure.erlangen.de/arcgiser/services/Luftbilder2013/MapServer/WmsServer?FORMAT=image/jpeg&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=Erlangen_ratio5_6.25cm.jp2&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
-    "projection": "EPSG:3857",
-    "endDate": "2013-01-01T00:00:00.000Z",
-    "startDate": "2013-01-01T00:00:00.000Z",
-    "polygon": [
-      [
-        [10.92791, 49.53196],
-        [10.9726, 49.52939],
-        [10.97909, 49.53475],
-        [10.99934, 49.53589],
-        [11.03214, 49.53089],
-        [11.04425, 49.54317],
-        [11.03842, 49.55239],
-        [11.03743, 49.57873],
-        [11.0568, 49.592],
-        [11.05748, 49.61358],
-        [11.04681, 49.61447],
-        [11.04788, 49.6187],
-        [11.00308, 49.62367],
-        [10.98107, 49.62339],
-        [10.98069, 49.62617],
-        [10.96737, 49.62781],
-        [10.96539, 49.63415],
-        [10.94293, 49.64563],
-        [10.92532, 49.64876],
-        [10.91002, 49.63793],
-        [10.92235, 49.60463],
-        [10.91949, 49.57823],
-        [10.91135, 49.57095],
-        [10.91256, 49.5606],
-        [10.92907, 49.55674],
-        [10.92791, 49.53196]
-      ]
-    ],
-    "terms_text": "© Stadt Erlangen | © Aerowest GmbH"
   },
   {
     "id": "Erlangen-2016",
@@ -23719,6 +23643,7 @@
     ],
     "terms_url": "https://geoportal.gov.pl/web/guest/regulamin",
     "terms_text": "Główny Urząd Geodezji i Kartografii",
+    "best": true,
     "icon": "https://wiki.openstreetmap.org/w/images/2/25/Geoportal-josm.png"
   },
   {
@@ -36333,11 +36258,11 @@
     "id": "Kanton-Schaffhausen-Luftbild-2013",
     "name": "Kanton Schaffhausen, Luftbild 2013",
     "type": "wms",
-    "template": "https://wms.geo.sh.ch/raster?LAYERS=Luftbild_2013&STYLES=default&FORMAT=image/jpeg&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://wms.geo.sh.ch/raster?LAYERS=Luftbild_2013&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:4326",
     "endDate": "2013-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.6, 47.56],
@@ -36371,17 +36296,18 @@
         [8.6, 47.56]
       ]
     ],
-    "terms_text": "Kanton Schaffhausen, Luftbild 2013"
+    "terms_text": "Kanton Schaffhausen, Luftbild 2013",
+    "best": true
   },
   {
     "id": "Kanton-Schaffhausen-DSM-2013",
     "name": "Kanton Schaffhausen, Relief 2013",
     "type": "wms",
-    "template": "https://wms.geo.sh.ch/raster?LAYERS=Relief_2013&STYLES=default&FORMAT=image/jpeg&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://wms.geo.sh.ch/raster?LAYERS=Relief_2013&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:4326",
     "endDate": "2013-01-01T00:00:00.000Z",
     "startDate": "2013-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.6, 47.56],
@@ -36421,11 +36347,11 @@
     "id": "Solothurn-sogis2014-dom-wms",
     "name": "Kanton Solothurn, DOM Relief 2014 50cm",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2014.dom_relief&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2014.dom_relief&FORMAT=image/jpeg&CRS={proj}&STYLES=&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.48, 47.1],
@@ -36551,11 +36477,11 @@
     "id": "Solothurn-sogis2018-dsm-wms",
     "name": "Kanton Solothurn, DSM Relief 2018",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/jpeg&TRANSPARENT=true&LAYERS=ch.bl.agi.lidar_2018.dsm_relief&STYLES=&SRS={proj}&CRS={proj}&TILED=false&DPI=96&OPACITIES=255&t=675&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.bl.agi.lidar_2018.dsm_relief&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.6909, 47.56247],
@@ -36792,11 +36718,11 @@
     "id": "Solothurn-sogis2019-dsm-wms",
     "name": "Kanton Solothurn, DSM Relief 2019",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/jpeg&TRANSPARENT=true&LAYERS=ch.so.agi.lidar_2019.dsm_relief&STYLES=&SRS={proj}&CRS={proj}&TILED=false&DPI=96&OPACITIES=255&t=675&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2019.dsm_relief&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2019-01-01T00:00:00.000Z",
     "startDate": "2019-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.96884, 47.4311],
@@ -37090,11 +37016,11 @@
     "id": "Solothurn-sogis2014-dtm-wms",
     "name": "Kanton Solothurn, DTM Relief 2014 50cm",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2014.dtm_relief&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2014.dtm_relief&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.48, 47.1],
@@ -37220,11 +37146,11 @@
     "id": "Solothurn-sogis2019-dtm-wms",
     "name": "Kanton Solothurn, DTM Relief 2019",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/jpeg&TRANSPARENT=true&LAYERS=ch.so.agi.lidar_2019.dtm_relief&STYLES=&SRS={proj}&CRS={proj}&TILED=false&DPI=96&OPACITIES=255&t=675&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.lidar_2019.dtm_relief&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2019-01-01T00:00:00.000Z",
     "startDate": "2019-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.96884, 47.4311],
@@ -37518,11 +37444,11 @@
     "id": "Solothurn-sogis-ortho2014-wms",
     "name": "Kanton Solothurn, Orthofoto 2014 RGB",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2014.rgb&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2014.rgb&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.44, 47.06],
@@ -37571,11 +37497,11 @@
     "id": "Solothurn-sogis-ortho2015-wms",
     "name": "Kanton Solothurn, Orthofoto 2015 RGB",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2015.rgb&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2015.rgb&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.84, 47.26],
@@ -37621,11 +37547,11 @@
     "id": "Solothurn-sogis-ortho2016-wms",
     "name": "Kanton Solothurn, Orthofoto 2016 RGB",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2016_rgb&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2016_rgb&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.48, 47.08],
@@ -37687,11 +37613,11 @@
     "id": "Solothurn-sogis-ortho2017-wms",
     "name": "Kanton Solothurn, Orthofoto 2017 RGB",
     "type": "wms",
-    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2017_rgb&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://geo.so.ch/api/wms?LAYERS=ch.so.agi.orthofoto_2017_rgb&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2017-01-01T00:00:00.000Z",
     "startDate": "2017-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [7.84, 47.26],
@@ -37738,11 +37664,11 @@
     "id": "kt_tg_dtm_hillshade",
     "name": "Kanton Thurgau Relief DTM",
     "type": "wms",
-    "template": "https://ows-raster.geo.tg.ch/geofy_access_proxy/reliefschattierung?LAYERS=DTMRelief&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://ows-raster.geo.tg.ch/geofy_access_proxy/reliefschattierung?LAYERS=DTMRelief&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.63768, 47.70041],
@@ -37822,9 +37748,9 @@
     "id": "kt_tg_av",
     "name": "Kanton Thurgau, Basisplan-AV",
     "type": "wms",
-    "template": "https://ows.geo.tg.ch/geofy_access_proxy/basisplanf?LAYERS=Basisplan_farbig&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://ows.geo.tg.ch/geofy_access_proxy/basisplanf?LAYERS=Basisplan_farbig&STYLES=&FORMAT=image/png&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
-    "zoomExtent": [8, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.63768, 47.70041],
@@ -37904,11 +37830,11 @@
     "id": "kt_tg_ortho_2017",
     "name": "Kanton Thurgau, Orthofoto2017 RGB",
     "type": "wms",
-    "template": "https://ows-raster.geo.tg.ch/geofy_access_proxy/orthofoto2017?LAYERS=Orthofoto2017_RGB&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://ows-raster.geo.tg.ch/geofy_access_proxy/orthofoto2017?LAYERS=Orthofoto2017_RGB&STYLES=&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2017-01-01T00:00:00.000Z",
     "startDate": "2017-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.63768, 47.70041],
@@ -37989,9 +37915,9 @@
     "id": "kt_tg_radrouten",
     "name": "Kanton Thurgau, Rad-Routen",
     "type": "wms",
-    "template": "https://ows.geo.tg.ch/geofy_access_proxy/radwege?LAYERS=Radwege&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://ows.geo.tg.ch/geofy_access_proxy/radwege?LAYERS=Radwege&STYLES=&FORMAT=image/png&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
-    "zoomExtent": [8, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.63768, 47.70041],
@@ -38071,9 +37997,9 @@
     "id": "kt_tg_ww",
     "name": "Kanton Thurgau, Wanderwege",
     "type": "wms",
-    "template": "https://ows.geo.tg.ch/geofy_access_proxy/wanderwege?LAYERS=Wanderwege&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "template": "https://ows.geo.tg.ch/geofy_access_proxy/wanderwege?LAYERS=Wanderwege&STYLES=&FORMAT=image/png&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
-    "zoomExtent": [8, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.63768, 47.70041],
@@ -38150,14 +38076,40 @@
     "description": "Langsamverkehr: Verlauf der Wanderwege mit symbolischer Darstellung der Wegweiser, Unterführungen, Treppen und Brücken. Informationen über die Wegoberfläche und Rollstuhlgängigkeit."
   },
   {
+    "id": "Zug-2019-wms",
+    "name": "Kanton Zug (Walchwil und Zug (Alpli)) 2019",
+    "type": "wms",
+    "template": "https://services.geo.zg.ch/ows/Orthofotos?LAYERS=zg.orthofoto_2019_kt_zg&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
+    "projection": "EPSG:3857",
+    "endDate": "2019-01-01T00:00:00.000Z",
+    "startDate": "2019-01-01T00:00:00.000Z",
+    "zoomExtent": [10, 22],
+    "polygon": [
+      [
+        [8.49387, 47.11529],
+        [8.5121, 47.13373],
+        [8.55582, 47.129],
+        [8.58655, 47.07954],
+        [8.57399, 47.07633],
+        [8.51862, 47.08507],
+        [8.51862, 47.08507],
+        [8.51839, 47.08532],
+        [8.49387, 47.11529]
+      ]
+    ],
+    "terms_text": "GIS Kanton Zug",
+    "best": true,
+    "description": "Orthofoto für das Gebiet von Walchwil und Zug (Alpli). Die Befliegung für das genannte Orthofoto fand am 29. März 2019 statt."
+  },
+  {
     "id": "Zug-2011",
     "name": "Kanton Zug 2011",
     "type": "wms",
-    "template": "https://services.geo.zg.ch:443/ows/Orthofotos?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=zg.orthofoto_2011_kt_zg&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://services.geo.zg.ch/ows/Orthofotos?LAYERS=zg.orthofoto_2011_kt_zg&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2011-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
-    "zoomExtent": [10, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.38726, 47.10908],
@@ -38194,17 +38146,17 @@
       ]
     ],
     "terms_text": "GIS Kanton Zug",
-    "best": true
+    "best": true,
+    "description": "Ausdehnung: ganzer Kanton Aufloesung: 10cm per Pixel Bildflug: 1.4.2011"
   },
   {
     "id": "Zug-2018",
     "name": "Kanton Zug Gemeinde Zug Süd 2018",
     "type": "wms",
-    "template": "https://services.geo.zg.ch:443/ows/Orthofotos?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=zg.orthofoto_2018_kt_zg&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://services.geo.zg.ch/ows/Orthofotos?LAYERS=zg.orthofoto_2018_kt_zg&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
-    "zoomExtent": [10, 21],
     "polygon": [
       [
         [8.50052, 47.11291],
@@ -38223,17 +38175,18 @@
       ]
     ],
     "terms_text": "GIS Kanton Zug",
-    "best": true
+    "best": true,
+    "description": "Orthofoto fuer den Suedteil der Gemeinde Zug. Geflogen per Drohne an mehreren Tagen Anfangs April 2018. 10cm Aufloesung per Pixel. Abdeckung: Suedteil der Gemeinde Zug Befliegung vor Laubaustrieb, ohne Schneeabdeckung."
   },
   {
     "id": "Zug-2016",
     "name": "Kanton Zug Nord 2016",
     "type": "wms",
-    "template": "https://services.geo.zg.ch:443/ows/Orthofotos?FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=zg.orthofoto_2016_kt_zg&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://services.geo.zg.ch/ows/Orthofotos?LAYERS=zg.orthofoto_2016_kt_zg&STYLES=default&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap",
     "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
-    "zoomExtent": [10, 21],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.41093, 47.16521],
@@ -38256,17 +38209,18 @@
       ]
     ],
     "terms_text": "GIS Kanton Zug",
-    "best": true
+    "best": true,
+    "description": "Orthofoto fuer den Nordteil des Kantons Zug. Geflogen am 20.04.2016. 10cm Aufloesung per Pixel. Abdeckung: Gemeinden Cham, Steinhausen und Baar, sowie Teile von Zug Befliegung vor Laubaustrieb, ohne Schneeabdeckung."
   },
   {
     "id": "OGDLidarZH-DOM",
     "name": "Kanton Zurich, Oberflächenschummerung 50cm",
     "type": "wms",
-    "template": "https://wms.zh.ch/OGDLidarZH?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=dom2014hillshade&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://wms.zh.ch/OGDLidarZH?FORMAT=image/jpeg&STYLES=&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=dom2014hillshade&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.71338, 47.21388],
@@ -38772,11 +38726,11 @@
     "id": "OGDOrthoZH2016",
     "name": "Kanton Zurich, Orthofoto ZH Frühjahr 2015/16 RGB 10cm",
     "type": "wms",
-    "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ortho_w_15&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&STYLES=&REQUEST=GetMap&LAYERS=ortho_w_15&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "projection": "EPSG:3857",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2015-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.71338, 47.21388],
@@ -39282,11 +39236,11 @@
     "id": "OGDOrthoZH2015",
     "name": "Kanton Zurich, Orthofoto ZH Sommer 2014/15 RGB 10cm",
     "type": "wms",
-    "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ortho_s_14&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&STYLES=&REQUEST=GetMap&LAYERS=ortho_s_14&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "projection": "EPSG:3857",
     "endDate": "2015-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.71338, 47.21388],
@@ -39792,11 +39746,11 @@
     "id": "OGDOrthoZH2018",
     "name": "Kanton Zurich, Orthofoto ZH Sommer 2018 RGB 10cm",
     "type": "wms",
-    "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=ortho&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://wms.zh.ch/OGDOrthoZH?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&STYLES=&LAYERS=ortho&FORMAT=image/jpeg&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "projection": "EPSG:3857",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.71338, 47.21388],
@@ -40303,11 +40257,11 @@
     "id": "OGDLidarZH-DTM",
     "name": "Kanton Zurich, Terrainschummerung 50cm",
     "type": "wms",
-    "template": "https://wms.zh.ch/OGDLidarZH?FORMAT=image/jpeg&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=dtm2014hillshade&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://wms.zh.ch/OGDLidarZH?FORMAT=image/jpeg&STYLES=&VERSION=1.3.0&SERVICE=WMS&REQUEST=GetMap&LAYERS=dtm2014hillshade&CRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "projection": "EPSG:3857",
     "endDate": "2014-01-01T00:00:00.000Z",
     "startDate": "2014-01-01T00:00:00.000Z",
-    "zoomExtent": [8, 22],
+    "zoomExtent": [10, 22],
     "polygon": [
       [
         [8.71338, 47.21388],
@@ -43979,7 +43933,7 @@
     "template": "https://osmdata.asitvd.ch/tiles/lausanne2016/{zoom}/{x}/{y}.png",
     "endDate": "2016-01-01T00:00:00.000Z",
     "startDate": "2016-01-01T00:00:00.000Z",
-    "zoomExtent": [10, 20],
+    "zoomExtent": [12, 20],
     "polygon": [
       [
         [6.66668, 46.49441],
@@ -64132,7 +64086,7 @@
     "id": "SG-2018-WMS",
     "name": "Stadt St. Gallen",
     "type": "wms",
-    "template": "https://map.stadt.sg.ch/cgi-bin/mapserv.exe?map=d:data/wms_op_stadt_sg.map&FORMAT=image/png&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=OP_SG&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
+    "template": "https://map.stadt.sg.ch/cgi-bin/mapserv.exe?map=d:data/wms_op_stadt_sg.map&STYLES=&FORMAT=image/jpeg&TRANSPARENT=TRUE&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetMap&LAYERS=OP_SG&STYLES=&SRS={proj}&WIDTH={width}&HEIGHT={height}&BBOX={bbox}",
     "projection": "EPSG:4326",
     "endDate": "2018-01-01T00:00:00.000Z",
     "startDate": "2018-01-01T00:00:00.000Z",
