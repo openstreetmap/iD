@@ -87,7 +87,7 @@ export function uiFeatureList(context) {
 
 
         function keypress() {
-            var q = search.property('value'),
+            var q = stripWhitespace(search.property('value')),
                 items = list.selectAll('.feature-list-item');
             if (d3_event.keyCode === 13 && q.length && items.size()) {  // return
                 click(items.datum());
@@ -106,6 +106,9 @@ export function uiFeatureList(context) {
             drawList();
         }
 
+        function stripWhitespace(val) {
+            return val.replace(/ /g, '');
+        }
 
         function mapDrawn(e) {
             if (e.full) {
@@ -118,7 +121,7 @@ export function uiFeatureList(context) {
             var result = [];
             var graph = context.graph();
             var visibleCenter = context.map().extent().center();
-            var q = search.property('value').toLowerCase();
+            var q = stripWhitespace(search.property('value')).toLowerCase();
 
             if (!q) return result;
 
@@ -236,7 +239,7 @@ export function uiFeatureList(context) {
 
 
         function drawList() {
-            var value = search.property('value');
+            var value = stripWhitespace(search.property('value'));
             var results = features();
 
             list.classed('filtered', value.length);
@@ -355,7 +358,7 @@ export function uiFeatureList(context) {
 
 
         function geocoderSearch() {
-            services.geocoder.search(search.property('value'), function (err, resp) {
+            services.geocoder.search(stripWhitespace(search.property('value')), function (err, resp) {
                 _geocodeResults = resp || [];
                 drawList();
             });
