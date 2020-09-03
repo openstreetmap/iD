@@ -379,17 +379,17 @@ export function svgData(projection, context, dispatch) {
     drawData.template = function(val, src) {
         if (!arguments.length) return _template;
 
-        // test source against OSM imagery blacklists..
+        // test source against OSM imagery blocklists..
         var osm = context.connection();
         if (osm) {
-            var blacklists = osm.imageryBlacklists();
+            var blocklists = osm.imageryBlocklists();
             var fail = false;
             var tested = 0;
             var regex;
 
-            for (var i = 0; i < blacklists.length; i++) {
+            for (var i = 0; i < blocklists.length; i++) {
                 try {
-                    regex = new RegExp(blacklists[i]);
+                    regex = new RegExp(blocklists[i]);
                     fail = regex.test(val);
                     tested++;
                     if (fail) break;

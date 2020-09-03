@@ -281,9 +281,18 @@ export function rendererBackground(context) {
 
     const currSource = baseLayer.source();
 
+    const osm = context.connection();
+    const blocklists = osm && osm.imageryBlocklists();
+    const isBlocked = blocklists && function(source) {
+      return blocklists.some(function(blocklist) {
+        return new RegExp(blocklist).test(source.template());
+      });
+    };
+
     return _imageryIndex.backgrounds.filter(source => {
-      if (!source.polygon) return true;                          // always include imagery with worldwide coverage
       if (includeCurrent && currSource === source) return true;  // optionally include the current imagery
+      if (isBlocked && isBlocked(source)) return false;          // even bundled sources may be blocked - #7905
+      if (!source.polygon) return true;                          // always include imagery with worldwide coverage
       if (zoom && zoom < 6) return false;                        // optionally exclude local imagery at low zooms
       return visible[source.id];                                 // include imagery visible in given extent
     });
@@ -300,19 +309,19 @@ export function rendererBackground(context) {
   background.baseLayerSource = function(d) {
     if (!arguments.length) return baseLayer.source();
 
-    // test source against OSM imagery blacklists..
+    // test source against OSM imagery blocklists..
     const osm = context.connection();
     if (!osm) return background;
 
-    const blacklists = osm.imageryBlacklists();
+    const blocklists = osm.imageryBlocklists();
     const template = d.template();
     let fail = false;
     let tested = 0;
     let regex;
 
-    for (let i = 0; i < blacklists.length; i++) {
+    for (let i = 0; i < blocklists.length; i++) {
       try {
-        regex = new RegExp(blacklists[i]);
+        regex = new RegExp(blocklists[i]);
         fail = regex.test(template);
         tested++;
         if (fail) break;

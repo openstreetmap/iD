@@ -23,8 +23,8 @@ var oauth = osmAuth({
     loading: authLoading,
     done: authDone
 });
-
-var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
+// hardcode default block of Google Maps
+var _imageryBlocklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
 var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
 var _userCache = { toLoad: {}, user: {} };
@@ -919,7 +919,7 @@ export default {
                 return callback(err, null);
             }
 
-            // update blacklists
+            // update blocklists
             var elements = xml.getElementsByTagName('blacklist');
             var regexes = [];
             for (var i = 0; i < elements.length; i++) {
@@ -929,7 +929,7 @@ export default {
                 }
             }
             if (regexes.length) {
-                _blacklists = regexes;
+                _imageryBlocklists = regexes;
             }
 
             if (_rateLimitError) {
@@ -1321,8 +1321,8 @@ export default {
     },
 
 
-    imageryBlacklists: function() {
-        return _blacklists;
+    imageryBlocklists: function() {
+        return _imageryBlocklists;
     },
 
 
