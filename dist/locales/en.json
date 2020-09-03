@@ -10163,8 +10163,8 @@
                     "terms": ""
                 },
                 "tourism/information/office": {
-                    "name": "Tourist Information Office",
-                    "terms": ""
+                    "name": "Visitor Center",
+                    "terms": "information office,tour guide,tourism office,tourist information center,visitors center,visitors information center,welcome center"
                 },
                 "tourism/information/route_marker": {
                     "name": "Trail Marker",

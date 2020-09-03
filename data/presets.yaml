@@ -8729,8 +8729,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Map'', separated by commas>'
       tourism/information/office:
         # 'tourism=information, information=office'
-        name: Tourist Information Office
-        terms: '<translate with synonyms or related terms for ''Tourist Information Office'', separated by commas>'
+        name: Visitor Center
+        # 'terms: information office,tour guide,tourism office,tourist information center,visitors center,visitors information center,welcome center'
+        terms: '<translate with synonyms or related terms for ''Visitor Center'', separated by commas>'
       tourism/information/route_marker:
         # 'tourism=information, information=route_marker'
         name: Trail Marker
