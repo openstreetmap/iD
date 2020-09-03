@@ -70,7 +70,7 @@
     "@fortawesome/free-brands-svg-icons": "~5.14.0",
     "@fortawesome/free-regular-svg-icons": "~5.14.0",
     "@fortawesome/free-solid-svg-icons": "~5.14.0",
-    "@ideditor/temaki": "~4.0.0",
+    "@ideditor/temaki": "~4.1.0",
     "@mapbox/maki": "^6.0.0",
     "@rollup/plugin-buble": "^0.21.0",
     "@rollup/plugin-commonjs": "^14.0.0",

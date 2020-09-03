@@ -2,7 +2,7 @@
     "notCountryCodes": [
         "de"
     ],
-    "icon": "temaki-height_restrictor",
+    "icon": "temaki-toll_gantry",
     "fields": [
         "ref",
         "operator",
