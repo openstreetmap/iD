@@ -73,7 +73,7 @@
     "@ideditor/temaki": "~4.1.0",
     "@mapbox/maki": "^6.0.0",
     "@rollup/plugin-buble": "^0.21.0",
-    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.0.1",
     "@rollup/plugin-node-resolve": "~8.1.0",
     "autoprefixer": "^9.8.4",
