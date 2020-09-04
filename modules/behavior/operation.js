@@ -9,7 +9,10 @@ export function behaviorOperation(context) {
         // prevent operations during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 
+        if (_operation.availableForKeypress && !_operation.availableForKeypress()) return;
+
         d3_event.preventDefault();
+
         var disabled = _operation.disabled();
 
         if (disabled) {
