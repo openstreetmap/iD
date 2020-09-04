@@ -24,7 +24,7 @@ var oauth = osmAuth({
     done: authDone
 });
 // hardcode default block of Google Maps
-var _imageryBlocklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
+var _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
 var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
 var _userCache = { toLoad: {}, user: {} };
@@ -923,9 +923,14 @@ export default {
             var elements = xml.getElementsByTagName('blacklist');
             var regexes = [];
             for (var i = 0; i < elements.length; i++) {
-                var regex = elements[i].getAttribute('regex');  // needs unencode?
-                if (regex) {
-                    regexes.push(regex);
+                var regexString = elements[i].getAttribute('regex');  // needs unencode?
+                if (regexString) {
+                    try {
+                        var regex = new RegExp(regexString);
+                        regexes.push(regex);
+                    } catch (e) {
+                        /* noop */
+                    }
                 }
             }
             if (regexes.length) {

@@ -732,7 +732,7 @@ describe('iD.serviceOsm', function () {
             it('updates imagery blocklists', function(done) {
                 connection.status(function() {
                     var blocklists = connection.imageryBlocklists();
-                    expect(blocklists).to.deep.equal(['\.foo\.com','\.bar\.org']);
+                    expect(blocklists).to.deep.equal([new RegExp('\.foo\.com'), new RegExp('\.bar\.org')]);
                     done();
                 });
 

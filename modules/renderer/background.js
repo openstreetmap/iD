@@ -271,6 +271,7 @@ export function rendererBackground(context) {
     context.history().photoOverlaysUsed(photoOverlaysUsed);
   };
 
+  let _checkedBlocklists;
 
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
@@ -283,15 +284,19 @@ export function rendererBackground(context) {
 
     const osm = context.connection();
     const blocklists = osm && osm.imageryBlocklists();
-    const isBlocked = blocklists && function(source) {
-      return blocklists.some(function(blocklist) {
-        return new RegExp(blocklist).test(source.template());
+
+    if (blocklists && blocklists !== _checkedBlocklists) {
+      _imageryIndex.backgrounds.forEach(source => {
+        source.isBlocked = blocklists.some(function(blocklist) {
+          return blocklist.test(source.template());
+        });
       });
-    };
+      _checkedBlocklists = blocklists;
+    }
 
     return _imageryIndex.backgrounds.filter(source => {
-      if (includeCurrent && currSource === source) return true;  // optionally include the current imagery
-      if (isBlocked && isBlocked(source)) return false;          // even bundled sources may be blocked - #7905
+      if (includeCurrent && currSource === source) return true;  // optionally always include the current imagery
+      if (source.isBlocked) return false;                        // even bundled sources may be blocked - #7905
       if (!source.polygon) return true;                          // always include imagery with worldwide coverage
       if (zoom && zoom < 6) return false;                        // optionally exclude local imagery at low zooms
       return visible[source.id];                                 // include imagery visible in given extent
@@ -320,19 +325,15 @@ export function rendererBackground(context) {
     let regex;
 
     for (let i = 0; i < blocklists.length; i++) {
-      try {
-        regex = new RegExp(blocklists[i]);
-        fail = regex.test(template);
-        tested++;
-        if (fail) break;
-      } catch (e) {
-        /* noop */
-      }
+      regex = blocklists[i];
+      fail = regex.test(template);
+      tested++;
+      if (fail) break;
     }
 
     // ensure at least one test was run.
     if (!tested) {
-      regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+      regex = /.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/;
       fail = regex.test(template);
     }
 

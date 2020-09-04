@@ -388,19 +388,15 @@ export function svgData(projection, context, dispatch) {
             var regex;
 
             for (var i = 0; i < blocklists.length; i++) {
-                try {
-                    regex = new RegExp(blocklists[i]);
-                    fail = regex.test(val);
-                    tested++;
-                    if (fail) break;
-                } catch (e) {
-                    /* noop */
-                }
+                regex = blocklists[i];
+                fail = regex.test(val);
+                tested++;
+                if (fail) break;
             }
 
             // ensure at least one test was run.
             if (!tested) {
-                regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+                regex = /.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/;
                 fail = regex.test(val);
             }
         }
