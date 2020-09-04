@@ -30,6 +30,130 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.18.5
+##### Planned: 2020-Sep
+
+#### :sparkles: Usability
+* Open links from OpenStreetMap Notes in new tabs ([#7883], [#7893], thanks [@JeeZeh])
+* Don't say a line or area isn' visible enough to disconnect when all the connected points are onscreen ([#7944])
+* Leave behind the area tags when extracting a point from a building part or indoor room ([#7862])
+* Hide sources from the Backgrounds list that are blocked by the OpenStreetMap API ([#7871], [#7905])
+
+[#7883]: https://github.com/openstreetmap/iD/issues/7883
+[#7893]: https://github.com/openstreetmap/iD/issues/7893
+[#7944]: https://github.com/openstreetmap/iD/issues/7944
+[#7862]: https://github.com/openstreetmap/iD/issues/7862
+[#7871]: https://github.com/openstreetmap/iD/issues/7871
+[#7905]: https://github.com/openstreetmap/iD/issues/7905
+
+[@JeeZeh]: https://github.com/JeeZeh
+
+#### :white_check_mark: Validation
+* Properly let tags on multipolygons fix crossing issues ([#7935])
+* Use tram crossings instead of railway crossings when connecting paths and roads to tram tracks ([#7902])
+* Deprecate `fast_food=pizza` and `fast_food=shawarma` tags
+
+[#7935]: https://github.com/openstreetmap/iD/issues/7935
+[#7902]: https://github.com/openstreetmap/iD/issues/7902
+
+#### :bug: Bugfixes
+* Fix problem where nodes could not be dragged after long-clicking if something was previously selected ([#7826])
+* Fix bug where undoing to the second-to-first node of a way would delete the whole way and exit drawing ([#7772])
+* Correct problem where selected text could not be copied via the keyboard shortcut while features were selected ([#7908])
+* Fix issue where adjusting a selected line or area could hide the quick fixes ([#7386])
+* Fix issue where the Wikipedia field would not default to the user's preferred language ([#7890])
+* Properly show scroll bars for overflowing text area inputs ([#7869])
+
+[#7826]: https://github.com/openstreetmap/iD/issues/7826
+[#7772]: https://github.com/openstreetmap/iD/issues/7772
+[#7908]: https://github.com/openstreetmap/iD/issues/7908
+[#7386]: https://github.com/openstreetmap/iD/issues/7386
+[#7890]: https://github.com/openstreetmap/iD/issues/7890
+[#7869]: https://github.com/openstreetmap/iD/issues/7869
+
+#### :mortar_board: Walkthrough / Help
+* Use a consistent term for photo overlays in the Help pane ([#7859], thanks [@mikini])
+
+[#7859]: https://github.com/openstreetmap/iD/issues/7859
+
+[@mikini]: https://github.com/mikini
+
+#### :rocket: Presets
+
+###### New Presets
+* Add Wig Shop preset ([#7878], [#7912], thanks [@fakeharahman])
+* Add Irish Pub preset ([#7852], thanks [@rory])
+* Add Tram-Road Crossing and Tram-Path Crossing presets ([#7902])
+* Add Open Road Toll preset ([#7408])
+* Add Juice Fast Food preset ([#7904])
+* Add Dovecote preset ([#7916])
+* Add generic Telecom Feature preset ([#7934])
+* Add Gymnasium preset ([#7818])
+* Add Railway-Railway Crossing preset
+
+###### Changed Presets
+* Add "snorkel" as search term of Scuba Shop ([#7857], [#7874], thanks [@fakeharahman])
+* Rename Tourist Information Office preset to Visitor Center and add search terms ([#7764])
+* Add search terms to the Quarry preset ([#7730])
+* Support Cave Entrance features as nodes that are part of ways ([#7945])
+* Support Emergency Water Tank features as areas and add more fields ([#7915])
+* Rename Railway Crossing (Road) preset to Railway-Road Crossing
+* Rename Railway Crossing (Path) preset to Railway-Path Crossing
+
+###### New and Changed Fields
+* Add Units field to Apartment Building ([#7856], [#7896], thanks [@ogbeche77])
+* Add additional fields to Defibrillator ([#7925], thanks [@nlehuby])
+* Add Type field to Parking Garage Entrance / Exit ([#7900], [#7909], thanks [@brokemyspoke])
+* Show Website and Telephone fields by default on office presets ([#7865], [#7875], thanks [@thibaultmol])
+* Add more fields to Ferry Route
+* Show Diet Types field by default on Restaurant ([#7918])
+
+[#7878]: https://github.com/openstreetmap/iD/issues/7878
+[#7912]: https://github.com/openstreetmap/iD/issues/7912
+[#7852]: https://github.com/openstreetmap/iD/issues/7852
+[#7902]: https://github.com/openstreetmap/iD/issues/7902
+[#7408]: https://github.com/openstreetmap/iD/issues/7408
+[#7904]: https://github.com/openstreetmap/iD/issues/7904
+[#7916]: https://github.com/openstreetmap/iD/issues/7916
+[#7934]: https://github.com/openstreetmap/iD/issues/7934
+[#7818]: https://github.com/openstreetmap/iD/issues/7818
+[#7764]: https://github.com/openstreetmap/iD/issues/7764
+[#7857]: https://github.com/openstreetmap/iD/issues/7857
+[#7874]: https://github.com/openstreetmap/iD/issues/7874
+[#7730]: https://github.com/openstreetmap/iD/issues/7730
+[#7945]: https://github.com/openstreetmap/iD/issues/7945
+[#7915]: https://github.com/openstreetmap/iD/issues/7915
+[#7856]: https://github.com/openstreetmap/iD/issues/7856
+[#7896]: https://github.com/openstreetmap/iD/issues/7896
+[#7925]: https://github.com/openstreetmap/iD/issues/7925
+[#7900]: https://github.com/openstreetmap/iD/issues/7900
+[#7909]: https://github.com/openstreetmap/iD/issues/7909
+[#7865]: https://github.com/openstreetmap/iD/issues/7865
+[#7875]: https://github.com/openstreetmap/iD/issues/7875
+[#7918]: https://github.com/openstreetmap/iD/issues/7918
+
+[@fakeharahman]: https://github.com/fakeharahman
+[@ogbeche77]: https://github.com/ogbeche77
+[@nlehuby]: https://github.com/nlehuby
+[@brokemyspoke]: https://github.com/brokemyspoke
+[@thibaultmol]: https://github.com/thibaultmol
+
+#### :hammer: Development
+* Replace unnecessary logic in the raw tag editor ([#7932], thanks [@til-schneider])
+* Fix export of `geoVecLengthSquare` ([#7894], thanks [@til-schneider])
+* Fix spelling mistakes in markdown files and code comments ([#7892], [#7897] thanks [@peternewman])
+* :warning: `serviceOsm.imageryBlacklists` has been renamed to `serviceOsm.imageryBlocklists` and now returns an array of `RegExp` objects rather than strings
+* Remove redundant `coreContext()` call ([#7926])
+
+[#7932]: https://github.com/openstreetmap/iD/issues/7932
+[#7894]: https://github.com/openstreetmap/iD/issues/7894
+[#7892]: https://github.com/openstreetmap/iD/issues/7892
+[#7926]: https://github.com/openstreetmap/iD/issues/7926
+[#7897]: https://github.com/openstreetmap/iD/issues/7897
+
+[@til-schneider]: https://github.com/til-schneider
+[@peternewman]: https://github.com/peternewman
+
 # 2.18.4
 ##### 2020-Jul-31
 
