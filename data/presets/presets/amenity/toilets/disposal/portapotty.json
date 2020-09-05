@@ -15,17 +15,21 @@
     "terms": [
         "restroom",
         "privy",
-        "portable toilet",
+        "porta potty",
         "chemical toilet"
     ],
-    "tags": {
+    "addTags": {
         "amenity": "toilets",
         "toilets:disposal": "chemical",
+        "portable": "yes"
+    },
+    "tags": {
+        "amenity": "toilets",
         "portable": "yes"
     },
     "reference": {
         "key": "toilets:disposal",
         "value": "chemical"
     },
-    "name": "Porta Potty"
+    "name": "Portable Toilet"
 }

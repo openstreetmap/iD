@@ -6142,8 +6142,8 @@
                     "terms": "head,lavatory,long drop,outhouse,pit toilet,privy"
                 },
                 "amenity/toilets/disposal/portapotty": {
-                    "name": "Porta Potty",
-                    "terms": "restroom,privy,portable toilet,chemical toilet"
+                    "name": "Portable Toilet",
+                    "terms": "restroom,privy,porta potty,chemical toilet"
                 },
                 "amenity/townhall": {
                     "name": "Town Hall",
