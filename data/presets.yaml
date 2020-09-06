@@ -261,7 +261,6 @@ en:
       backcountry:
         # backcountry=*
         label: Backcountry
-        terms: '[translate with synonyms or related terms for ''Backcountry'', separated by commas]'
       backrest:
         # backrest=*
         label: Backrest
@@ -441,6 +440,9 @@ en:
         label: Total Spaces
         # capacity_parking field placeholder
         placeholder: '10, 20, 30...'
+      caravans:
+        # caravans=*
+        label: Caravans
       cash_in:
         # cash_in=*
         label: Cash In
@@ -1046,7 +1048,6 @@ en:
       group_only:
         # group_only=*
         label: Groups Only
-        terms: '[translate with synonyms or related terms for ''Groups Only'', separated by commas]'
       guest_house:
         # guest_house=*
         label: Type
@@ -1614,6 +1615,9 @@ en:
         label: Note
         # 'terms: comment'
         terms: '[translate with synonyms or related terms for ''Note'', separated by commas]'
+      nudism:
+        # nudism=*
+        label: Nudism
       office:
         # office=*
         label: Type
@@ -2445,6 +2449,9 @@ en:
         placeholder: YYYY-MM-DD
         # 'terms: inception'
         terms: '[translate with synonyms or related terms for ''Start Date'', separated by commas]'
+      static_caravans:
+        # static_caravans=*
+        label: Static Caravans
       step_count:
         # step_count=*
         label: Number of Steps
@@ -2584,6 +2591,9 @@ en:
       telecom/medium:
         # 'telecom:medium=*'
         label: Medium
+      tents:
+        # tents=*
+        label: Tents
       tidal:
         # tidal=*
         label: Tidal

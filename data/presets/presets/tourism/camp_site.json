@@ -8,15 +8,19 @@
         "capacity",
         "fee",
         "payment_multi_fee",
-        "charge_fee"
+        "charge_fee",
+        "tents",
+        "caravans",
+        "static_caravans",
+        "nudism",
+        "backcountry",
+        "group_only"
     ],
     "moreFields": [
-        "backcountry",
         "dog",
         "email",
         "fax",
         "gnis/feature_id",
-        "group_only",
         "internet_access",
         "internet_access/fee",
         "internet_access/ssid",
@@ -34,11 +38,7 @@
         "website",
         "wheelchair"
     ],
-    "geometry": [
-        "point",
-        "vertex",
-        "area"
-    ],
+    "geometry": ["point", "vertex", "area"],
     "tags": {
         "tourism": "camp_site"
     },
