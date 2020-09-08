@@ -2,7 +2,8 @@
     "icon": "tnp-2009541",
     "fields": [
         "toilets/disposal",
-        "{amenity/toilets}"
+        "{amenity/toilets}",
+        "toilets/handwashing"
     ],
     "moreFields": [
         "{amenity/toilets}"
@@ -15,7 +16,9 @@
     "terms": [
         "restroom",
         "privy",
+        "porta john",
         "porta potty",
+        "portapot",
         "chemical toilet"
     ],
     "addTags": {

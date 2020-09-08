@@ -3995,10 +3995,10 @@ en:
         name: Pit Latrine
         # 'terms: head,lavatory,long drop,outhouse,pit toilet,privy'
         terms: '<translate with synonyms or related terms for ''Pit Latrine'', separated by commas>'
-      amenity/toilets/disposal/portapotty:
+      amenity/toilets/portable:
         # 'amenity=toilets, portable=yes'
         name: Portable Toilet
-        # 'terms: restroom,privy,porta potty,chemical toilet'
+        # 'terms: restroom,privy,porta john,porta potty,portapot,chemical toilet'
         terms: '<translate with synonyms or related terms for ''Portable Toilet'', separated by commas>'
       amenity/townhall:
         # amenity=townhall
