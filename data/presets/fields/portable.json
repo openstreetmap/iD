@@ -1,0 +1,10 @@
+{
+    "key": "portable",
+    "type": "check",
+    "label": "Portable",
+    "terms": [
+        "detached",
+        "mobile",
+        "moveable"
+    ]
+}

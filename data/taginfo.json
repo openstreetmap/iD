@@ -1749,6 +1749,7 @@
     {"key": "playground:theme", "description": "🄵 Theme"},
     {"key": "plots", "description": "🄵 Plots"},
     {"key": "population", "description": "🄵 Population"},
+    {"key": "portable", "description": "🄵 Portable"},
     {"key": "post:block_number", "description": "🄵 Delivery Address"},
     {"key": "post:city", "description": "🄵 Delivery Address"},
     {"key": "post:conscriptionnumber", "description": "🄵 Delivery Address"},

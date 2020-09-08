@@ -4392,6 +4392,10 @@
                 "population": {
                     "label": "Population"
                 },
+                "portable": {
+                    "label": "Portable",
+                    "terms": "detached,mobile,moveable"
+                },
                 "post": {
                     "label": "Delivery Address"
                 },
