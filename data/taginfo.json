@@ -1210,7 +1210,7 @@
     {"key": "tourism", "value": "picnic_site", "description": "🄿 Picnic Site", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/picnic-site-15.svg"},
     {"key": "tourism", "value": "theme_park", "description": "🄿 Theme Park", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/amusement-park-15.svg"},
     {"key": "tourism", "value": "trail_riding_station", "description": "🄿 Trail Riding Station", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/horse-riding-15.svg"},
-    {"key": "tourism", "value": "viewpoint", "description": "🄿 Viewpoint", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/binoculars.svg"},
+    {"key": "tourism", "value": "viewpoint", "description": "🄿 Viewpoint", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/spotting_scope.svg"},
     {"key": "tourism", "value": "wilderness_hut", "description": "🄿 Wilderness Hut", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/cabin.svg"},
     {"key": "tourism", "value": "zoo", "description": "🄿 Zoo", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/zoo.svg"},
     {"key": "zoo", "value": "petting_zoo", "description": "🄿 Petting Zoo", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-horse.svg"},

@@ -98,6 +98,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add search terms to the Quarry preset ([#7730])
 * Support Cave Entrance features as nodes that are part of ways ([#7945])
 * Support Emergency Water Tank features as areas and add more fields ([#7915])
+* Update icon for Viewpoint ([#7851])
 * Rename Railway Crossing (Road) preset to Railway-Road Crossing
 * Rename Railway Crossing (Path) preset to Railway-Path Crossing
 
@@ -109,6 +110,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add more fields to Ferry Route
 * Show Diet Types field by default on Restaurant ([#7918])
 
+[#7851]: https://github.com/openstreetmap/iD/issues/7851
 [#7878]: https://github.com/openstreetmap/iD/issues/7878
 [#7912]: https://github.com/openstreetmap/iD/issues/7912
 [#7852]: https://github.com/openstreetmap/iD/issues/7852
