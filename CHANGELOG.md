@@ -31,13 +31,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 # 2.18.5
-##### Planned: 2020-Sep
+##### 2020-Sep-08
+
+#### :newspaper: News
+* The OpenStreetMap Foundation is now [directly supporting](https://wiki.osmfoundation.org/wiki/Board/Minutes/2020-09#2020.2FRes42_Accept_contract_with_Quincy_Morgan) Quincy Morgan ([@quincylvania](https://github.com/quincylvania)) as a full-time maintainer of iD
 
 #### :sparkles: Usability
 * Open links from OpenStreetMap Notes in new tabs ([#7883], [#7893], thanks [@JeeZeh])
-* Don't say a line or area isn' visible enough to disconnect when all the connected points are onscreen ([#7944])
+* Don't say lines and areas aren't visible enough to disconnect when all their connected points are onscreen ([#7944])
 * Leave behind the area tags when extracting a point from a building part or indoor room ([#7862])
-* Hide sources from the Backgrounds list that are blocked by the OpenStreetMap API ([#7871], [#7905])
+* Hide background imagery sources that are blocked by the OpenStreetMap API ([#7871], [#7905])
 
 [#7883]: https://github.com/openstreetmap/iD/issues/7883
 [#7893]: https://github.com/openstreetmap/iD/issues/7893
@@ -110,6 +113,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add more fields to Ferry Route
 * Show Diet Types field by default on Restaurant ([#7918])
 
+[#7832]: https://github.com/openstreetmap/iD/issues/7832
+[#7783]: https://github.com/openstreetmap/iD/issues/7783
 [#7851]: https://github.com/openstreetmap/iD/issues/7851
 [#7878]: https://github.com/openstreetmap/iD/issues/7878
 [#7912]: https://github.com/openstreetmap/iD/issues/7912
