@@ -242,6 +242,7 @@
     {"key": "amenity", "value": "toilets", "description": "🄿 Toilets", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/toilet-15.svg"},
     {"key": "toilets:disposal", "value": "flush", "description": "🄿 Flush Toilets, 🄵 Disposal", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-toilet.svg"},
     {"key": "toilets:disposal", "value": "pitlatrine", "description": "🄿 Pit Latrine, 🄵 Disposal", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/the-noun-project/2009541.svg"},
+    {"key": "portable", "value": "yes", "description": "🄿 Portable Toilet", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/the-noun-project/2009541.svg"},
     {"key": "amenity", "value": "townhall", "description": "🄿 Town Hall", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/town_hall.svg"},
     {"key": "townhall:type", "value": "city", "description": "🄿 City Hall", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/capitol.svg"},
     {"key": "amenity", "value": "toy_library", "description": "🄿 Toy Library", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-chess-knight.svg"},
