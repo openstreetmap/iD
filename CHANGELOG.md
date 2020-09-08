@@ -83,6 +83,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ###### New Presets
 * Add Wig Shop preset ([#7878], [#7912], thanks [@fakeharahman])
 * Add Irish Pub preset ([#7852], thanks [@rory])
+* Add Portable Toilet preset ([#7832], [#7783], thanks [@Nimisha94])
 * Add Tram-Road Crossing and Tram-Path Crossing presets ([#7902])
 * Add Open Road Toll preset ([#7408])
 * Add Juice Fast Food preset ([#7904])
@@ -133,6 +134,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#7918]: https://github.com/openstreetmap/iD/issues/7918
 
 [@fakeharahman]: https://github.com/fakeharahman
+[@Nimisha94]: https://github.com/Nimisha94
+[@rory]: https://github.com/rory
 [@ogbeche77]: https://github.com/ogbeche77
 [@nlehuby]: https://github.com/nlehuby
 [@brokemyspoke]: https://github.com/brokemyspoke
