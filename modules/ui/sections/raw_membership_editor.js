@@ -86,6 +86,7 @@ export function uiSectionRawMembershipEditor(context) {
                 actionChangeMember(d.relation.id, Object.assign({}, d.member, { role: newRole }), d.index),
                 t('operations.change_role.annotation')
             );
+            context.validator().validate();
         }
         _inChange = false;
     }
@@ -102,6 +103,7 @@ export function uiSectionRawMembershipEditor(context) {
                 actionAddMember(d.relation.id, member),
                 t('operations.add_member.annotation')
             );
+            context.validator().validate();
 
         } else {
             var relation = osmRelation();
@@ -110,7 +112,7 @@ export function uiSectionRawMembershipEditor(context) {
                 actionAddMember(relation.id, member),
                 t('operations.add.annotation.relation')
             );
-
+            // changing the mode also runs `validate`
             context.enter(modeSelect(context, [relation.id]).newFeature(true));
         }
     }
@@ -127,6 +129,7 @@ export function uiSectionRawMembershipEditor(context) {
             actionDeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation')
         );
+        context.validator().validate();
     }
 
 

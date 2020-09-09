@@ -90,6 +90,7 @@ export function uiSectionRawMemberEditor(context) {
                 actionChangeMember(d.relation.id, member, d.index),
                 t('operations.change_role.annotation')
             );
+            context.validator().validate();
         }
     }
 
@@ -105,7 +106,13 @@ export function uiSectionRawMemberEditor(context) {
         );
 
         if (!context.hasEntity(d.relation.id)) {
+            // Removing the last member will also delete the relation.
+            // If this happens we need to exit the selection mode
             context.enter(modeBrowse(context));
+        } else {
+            // Changing the mode also runs `validate`, but otherwise we need to
+            // rerun it manually
+            context.validator().validate();
         }
     }
 
@@ -320,6 +327,7 @@ export function uiSectionRawMemberEditor(context) {
                         actionMoveMember(d.relation.id, index, targetIndex),
                         t('operations.reorder_members.annotation')
                     );
+                    context.validator().validate();
                 }
             })
         );
