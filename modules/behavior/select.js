@@ -95,6 +95,8 @@ export function behaviorSelect(context) {
 
         if (d3_event.buttons && d3_event.buttons !== 1) return;
 
+        context.ui().closeEditMenu();
+
         _longPressTimeout = window.setTimeout(didLongPress, 500, id, 'longdown-' + (d3_event.pointerType || 'mouse'));
 
         _downPointers[id] = {

@@ -10,5 +10,10 @@
             "reversible": "Reversible",
             "alternating": "Alternating"
         }
-    }
+    },
+    "terms": [
+        "bidirectional",
+        "oneway",
+        "unidirectional"
+    ]
 }

@@ -1,5 +1,3 @@
-import { event as d3_event } from 'd3-selection';
-
 import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
 import { uiCmd } from '../ui/cmd';
@@ -18,10 +16,6 @@ export function operationCopy(context, selectedIDs) {
     }
 
     var operation = function() {
-
-        if (!getSelectionText()) {
-            d3_event.preventDefault();
-        }
 
         var graph = context.graph();
         var selected = groupEntities(getFilteredIdsToCopy(), graph);
@@ -97,11 +91,6 @@ export function operationCopy(context, selectedIDs) {
     }
 
 
-    function getSelectionText() {
-        return window.getSelection().toString();
-    }
-
-
     operation.available = function() {
         return getFilteredIdsToCopy().length > 0;
     };
@@ -113,6 +102,13 @@ export function operationCopy(context, selectedIDs) {
             return 'too_large';
         }
         return false;
+    };
+
+
+    operation.availableForKeypress = function() {
+        var selection = window.getSelection && window.getSelection();
+        // if the user has text selected then let them copy that, not the selected feature
+        return !selection || !selection.toString();
     };
 
 

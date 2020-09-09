@@ -15,7 +15,8 @@
         "artwork_type": "installation"
     },
     "reference": {
-        "key": "artwork_type"
+        "key": "artwork_type",
+        "value": "installation"
     },
     "terms": [
         "interactive art",

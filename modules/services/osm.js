@@ -23,8 +23,8 @@ var oauth = osmAuth({
     loading: authLoading,
     done: authDone
 });
-
-var _blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'];
+// hardcode default block of Google Maps
+var _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
 var _tileCache = { toLoad: {}, loaded: {}, inflight: {}, seen: {}, rtree: new RBush() };
 var _noteCache = { toLoad: {}, loaded: {}, inflight: {}, inflightPost: {}, note: {}, closed: {}, rtree: new RBush() };
 var _userCache = { toLoad: {}, user: {} };
@@ -197,11 +197,11 @@ var jsonparsers = {
         return new osmNode({
             id:  uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
-            version: obj.version.toString(),
-            changeset: obj.changeset.toString(),
+            version: obj.version && obj.version.toString(),
+            changeset: obj.changeset && obj.changeset.toString(),
             timestamp: obj.timestamp,
             user: obj.user,
-            uid: obj.uid.toString(),
+            uid: obj.uid && obj.uid.toString(),
             loc: [parseFloat(obj.lon), parseFloat(obj.lat)],
             tags: obj.tags
         });
@@ -211,11 +211,11 @@ var jsonparsers = {
         return new osmWay({
             id:  uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
-            version: obj.version.toString(),
-            changeset: obj.changeset.toString(),
+            version: obj.version && obj.version.toString(),
+            changeset: obj.changeset && obj.changeset.toString(),
             timestamp: obj.timestamp,
             user: obj.user,
-            uid: obj.uid.toString(),
+            uid: obj.uid && obj.uid.toString(),
             tags: obj.tags,
             nodes: getNodesJSON(obj)
         });
@@ -225,11 +225,11 @@ var jsonparsers = {
         return new osmRelation({
             id:  uid,
             visible: typeof obj.visible === 'boolean' ? obj.visible : true,
-            version: obj.version.toString(),
-            changeset: obj.changeset.toString(),
+            version: obj.version && obj.version.toString(),
+            changeset: obj.changeset && obj.changeset.toString(),
             timestamp: obj.timestamp,
             user: obj.user,
-            uid: obj.uid.toString(),
+            uid: obj.uid && obj.uid.toString(),
             tags: obj.tags,
             members: getMembersJSON(obj)
         });
@@ -919,17 +919,22 @@ export default {
                 return callback(err, null);
             }
 
-            // update blacklists
+            // update blocklists
             var elements = xml.getElementsByTagName('blacklist');
             var regexes = [];
             for (var i = 0; i < elements.length; i++) {
-                var regex = elements[i].getAttribute('regex');  // needs unencode?
-                if (regex) {
-                    regexes.push(regex);
+                var regexString = elements[i].getAttribute('regex');  // needs unencode?
+                if (regexString) {
+                    try {
+                        var regex = new RegExp(regexString);
+                        regexes.push(regex);
+                    } catch (e) {
+                        /* noop */
+                    }
                 }
             }
             if (regexes.length) {
-                _blacklists = regexes;
+                _imageryBlocklists = regexes;
             }
 
             if (_rateLimitError) {
@@ -949,7 +954,7 @@ export default {
     // Calls `status` and dispatches an `apiStatusChange` event if the returned
     // status differs from the cached status.
     reloadApiStatus: function() {
-        // throttle to avoid unncessary API calls
+        // throttle to avoid unnecessary API calls
         if (!this.throttledReloadApiStatus) {
             var that = this;
             this.throttledReloadApiStatus = _throttle(function() {
@@ -1321,8 +1326,8 @@ export default {
     },
 
 
-    imageryBlacklists: function() {
-        return _blacklists;
+    imageryBlocklists: function() {
+        return _imageryBlocklists;
     },
 
 

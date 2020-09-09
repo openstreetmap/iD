@@ -15,7 +15,8 @@
         "artwork_type": "graffiti"
     },
     "reference": {
-        "key": "artwork_type"
+        "key": "artwork_type",
+        "value": "graffiti"
     },
     "terms": [
         "Street Artwork",

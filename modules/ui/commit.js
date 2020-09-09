@@ -270,7 +270,7 @@ export function uiCommit(context) {
 
         saveSection = saveSection.enter()
             .append('div')
-            .attr('class','modal-section save-section fillL cf')
+            .attr('class','modal-section save-section fillL')
             .merge(saveSection);
 
         var prose = saveSection.selectAll('.commit-info')
@@ -355,7 +355,7 @@ export function uiCommit(context) {
         // enter
         var buttonEnter = buttonSection.enter()
             .append('div')
-            .attr('class', 'buttons fillL cf');
+            .attr('class', 'buttons fillL');
 
         buttonEnter
             .append('button')

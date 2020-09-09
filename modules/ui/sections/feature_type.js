@@ -95,7 +95,7 @@ export function uiSectionFeatureType(context) {
                 .preset(_presets.length === 1 ? _presets[0] : presetManager.item('point'))
             );
 
-        // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
+        // NOTE: split on en-dash, not a hyphen (to avoid conflict with hyphenated names)
         var names = _presets.length === 1 ? _presets[0].name().split(' – ') : [t('inspector.multiple_types')];
 
         var label = selection.select('.label-inner');
@@ -125,9 +125,8 @@ export function uiSectionFeatureType(context) {
         if (!utilArrayIdentical(val, _presets)) {
             _presets = val;
 
-            var geometries = entityGeometries();
-            if (_presets.length === 1 && geometries.length) {
-                _tagReference = uiTagReference(_presets[0].reference(geometries[0]), context)
+            if (_presets.length === 1) {
+                _tagReference = uiTagReference(_presets[0].reference(), context)
                     .showing(false);
             }
         }

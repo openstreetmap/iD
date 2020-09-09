@@ -13,5 +13,9 @@
         "type": "route",
         "route": "light_rail"
     },
+    "reference": {
+        "key": "route",
+        "value": "light_rail"
+    },
     "name": "Light Rail Route"
 }

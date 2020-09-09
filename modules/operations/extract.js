@@ -21,10 +21,9 @@ export function operationExtract(context, selectedIDs) {
 
         if (entity.type === 'node' && graph.parentWays(entity).length === 0) return;
 
-        var geometry = graph.geometry(entityID);
-        if (geometry === 'area' || geometry === 'line') {
+        if (entity.type !== 'node') {
             var preset = presetManager.match(entity, graph);
-            // only allow extraction from ways/multipolygons if the preset supports points
+            // only allow extraction from ways/relations if the preset supports points
             if (preset.geometry.indexOf('point') === -1) return;
         }
 

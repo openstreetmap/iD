@@ -6,12 +6,12 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t, localizer } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
-import { icon, pad, selectMenuItem, transitionTime } from './helper';
+import { helpString, icon, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroLine(context, reveal) {
@@ -56,24 +56,6 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    function revealEditMenu(loc, text, options) {
-        var rect = context.surfaceRect();
-        var point = context.curtainProjection(loc);
-        var pad = 40;
-        var width = 250 + (2 * pad);
-        var height = 350;
-        var startX = rect.left + point[0];
-        var left = (localizer.textDirection() === 'rtl') ? (startX - width + pad) : (startX - pad);
-        var box = {
-            left: left,
-            top: point[1] + rect.top - 60,
-            width: width,
-            height: height
-        };
-        reveal(box, text, options);
-    }
-
-
     function addLine() {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
@@ -84,7 +66,7 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-line',
-                t('intro.lines.add_line', { button: icon('#iD-icon-line', 'pre-text') }));
+                helpString('intro.lines.add_line'));
 
             tooltip.selectAll('.popover-inner')
                 .insert('svg', 'span')
@@ -113,13 +95,18 @@ export function uiIntroLine(context, reveal) {
         var padding = 70 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(tulipRoadStart, padding, context);
         box.height = box.height + 100;
-        reveal(box, t('intro.lines.start_line'));
+
+        var textId = context.lastPointerType() === 'mouse' ? 'start_line' : 'start_line_tap';
+        var startLineString = helpString('intro.lines.missing_road') + '{br}' +
+            helpString('intro.lines.line_draw_info') +
+            helpString('intro.lines.' + textId);
+        reveal(box, startLineString);
 
         context.map().on('move.intro drawn.intro', function() {
             padding = 70 * Math.pow(2, context.map().zoom() - 18);
             box = pad(tulipRoadStart, padding, context);
             box.height = box.height + 100;
-            reveal(box, t('intro.lines.start_line'), { duration: 0 });
+            reveal(box, startLineString, { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -146,7 +133,7 @@ export function uiIntroLine(context, reveal) {
             var box = pad(tulipRoadMidpoint, padding, context);
             box.height = box.height * 2;
             reveal(box,
-                t('intro.lines.intersect', { name: t('intro.graph.name.flower-street') })
+                helpString('intro.lines.intersect', { name: t('intro.graph.name.flower-street') })
             );
 
             context.map().on('move.intro drawn.intro', function() {
@@ -154,7 +141,7 @@ export function uiIntroLine(context, reveal) {
                 box = pad(tulipRoadMidpoint, padding, context);
                 box.height = box.height * 2;
                 reveal(box,
-                    t('intro.lines.intersect', { name: t('intro.graph.name.flower-street') }),
+                    helpString('intro.lines.intersect', { name: t('intro.graph.name.flower-street') }),
                     { duration: 0 }
                 );
             });
@@ -204,7 +191,7 @@ export function uiIntroLine(context, reveal) {
 
         var box = pad(tulipRoadIntersection, 80, context);
         reveal(box,
-            t('intro.lines.retry_intersect', { name: t('intro.graph.name.flower-street') })
+            helpString('intro.lines.retry_intersect', { name: t('intro.graph.name.flower-street') })
         );
 
         timeout(chapter.restart, 3000);
@@ -218,7 +205,11 @@ export function uiIntroLine(context, reveal) {
 
         context.map().centerEase(tulipRoadIntersection, 500);
 
-        reveal('.surface', t('intro.lines.continue_line'));
+        var continueLineText = helpString('intro.lines.continue_line') + '{br}' +
+            helpString('intro.lines.finish_line_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
+            helpString('intro.lines.finish_road');
+
+        reveal('.surface', continueLineText);
 
         context.on('enter.intro', function(mode) {
             if (mode.id === 'draw-line')
@@ -254,7 +245,7 @@ export function uiIntroLine(context, reveal) {
             context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
 
             reveal(button.node(),
-                t('intro.lines.choose_category_road', { category: roadCategory.name() })
+                helpString('intro.lines.choose_category_road', { category: roadCategory.name() })
             );
 
             button.on('click.intro', function() {
@@ -294,7 +285,7 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             reveal(subgrid.node(),
-                t('intro.lines.choose_preset_residential', { preset: residentialPreset.name() }),
+                helpString('intro.lines.choose_preset_residential', { preset: residentialPreset.name() }),
                 { tooltipBox: '.preset-highway-residential .preset-list-button', duration: 300 }
             );
         }, 300);
@@ -322,7 +313,7 @@ export function uiIntroLine(context, reveal) {
             var button = context.container().select('.entity-editor-pane .preset-list-button');
 
             reveal(button.node(),
-                t('intro.lines.retry_preset_residential', { preset: residentialPreset.name() })
+                helpString('intro.lines.retry_preset_residential', { preset: residentialPreset.name() })
             );
 
             button.on('click.intro', function() {
@@ -347,7 +338,7 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.lines.name_road', { button: icon('#iD-icon-apply', 'pre-text') }),
+                helpString('intro.lines.name_road', { button: icon('#iD-icon-close', 'pre-text') }),
                 { tooltipClass: 'intro-lines-name_road' }
             );
         }, 500);
@@ -363,7 +354,7 @@ export function uiIntroLine(context, reveal) {
         context.history().checkpoint('doneAddLine');
 
         timeout(function() {
-            reveal('.surface', t('intro.lines.did_name_road'), {
+            reveal('.surface', helpString('intro.lines.did_name_road'), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { continueTo(updateLine); }
             });
@@ -390,14 +381,14 @@ export function uiIntroLine(context, reveal) {
             var box = pad(woodRoadDragMidpoint, padding, context);
             var advance = function() { continueTo(addNode); };
 
-            reveal(box, t('intro.lines.update_line'),
+            reveal(box, helpString('intro.lines.update_line'),
                 { buttonText: t('intro.ok'), buttonCallback: advance }
             );
 
             context.map().on('move.intro drawn.intro', function() {
                 var padding = 250 * Math.pow(2, context.map().zoom() - 19);
                 var box = pad(woodRoadDragMidpoint, padding, context);
-                reveal(box, t('intro.lines.update_line'),
+                reveal(box, helpString('intro.lines.update_line'),
                     { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
                 );
             });
@@ -418,12 +409,13 @@ export function uiIntroLine(context, reveal) {
 
         var padding = 40 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(woodRoadAddNode, padding, context);
-        reveal(box, t('intro.lines.add_node'));
+        var addNodeString = helpString('intro.lines.add_node' + (context.lastPointerType() === 'mouse' ? '' : '_touch'));
+        reveal(box, addNodeString);
 
         context.map().on('move.intro drawn.intro', function() {
             var padding = 40 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadAddNode, padding, context);
-            reveal(box, t('intro.lines.add_node'), { duration: 0 });
+            reveal(box, addNodeString, { duration: 0 });
         });
 
         context.history().on('change.intro', function(changed) {
@@ -456,7 +448,9 @@ export function uiIntroLine(context, reveal) {
         }
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(woodRoadDragEndpoint, padding, context);
-        reveal(box, t('intro.lines.start_drag_endpoint'));
+        var startDragString = helpString('intro.lines.start_drag_endpoint' + (context.lastPointerType() === 'mouse' ? '' : '_touch')) +
+            helpString('intro.lines.drag_to_intersection');
+        reveal(box, startDragString);
 
         context.map().on('move.intro drawn.intro', function() {
             if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
@@ -464,7 +458,7 @@ export function uiIntroLine(context, reveal) {
             }
             var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
-            reveal(box, t('intro.lines.start_drag_endpoint'), { duration: 0 });
+            reveal(box, startDragString, { duration: 0 });
 
             var entity = context.entity(woodRoadEndID);
             if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) <= 4) {
@@ -486,7 +480,9 @@ export function uiIntroLine(context, reveal) {
 
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(woodRoadDragEndpoint, padding, context);
-        reveal(box, t('intro.lines.finish_drag_endpoint'));
+        var finishDragString = helpString('intro.lines.spot_looks_good') +
+            helpString('intro.lines.finish_drag_endpoint' + (context.lastPointerType() === 'mouse' ? '' : '_touch'));
+        reveal(box, finishDragString);
 
         context.map().on('move.intro drawn.intro', function() {
             if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
@@ -494,7 +490,7 @@ export function uiIntroLine(context, reveal) {
             }
             var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
-            reveal(box, t('intro.lines.finish_drag_endpoint'), { duration: 0 });
+            reveal(box, finishDragString, { duration: 0 });
 
             var entity = context.entity(woodRoadEndID);
             if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) > 4) {
@@ -524,7 +520,7 @@ export function uiIntroLine(context, reveal) {
 
         var padding = 80 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(woodRoadDragMidpoint, padding, context);
-        reveal(box, t('intro.lines.start_drag_midpoint'));
+        reveal(box, helpString('intro.lines.start_drag_midpoint'));
 
         context.map().on('move.intro drawn.intro', function() {
             if (!context.hasEntity(woodRoadID) || !context.hasEntity(woodRoadEndID)) {
@@ -532,7 +528,7 @@ export function uiIntroLine(context, reveal) {
             }
             var padding = 80 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragMidpoint, padding, context);
-            reveal(box, t('intro.lines.start_drag_midpoint'), { duration: 0 });
+            reveal(box, helpString('intro.lines.start_drag_midpoint'), { duration: 0 });
         });
 
         context.history().on('change.intro', function(changed) {
@@ -571,7 +567,7 @@ export function uiIntroLine(context, reveal) {
             continueTo(deleteLines);
         };
 
-        reveal(box, t('intro.lines.continue_drag_midpoint'),
+        reveal(box, helpString('intro.lines.continue_drag_midpoint'),
             { buttonText: t('intro.ok'), buttonCallback: advance }
         );
 
@@ -582,7 +578,7 @@ export function uiIntroLine(context, reveal) {
             var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
             box.height += 400;
-            reveal(box, t('intro.lines.continue_drag_midpoint'),
+            reveal(box, helpString('intro.lines.continue_drag_midpoint'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
             );
         });
@@ -615,7 +611,7 @@ export function uiIntroLine(context, reveal) {
             box.height += 400;
             var advance = function() { continueTo(rightClickIntersection); };
 
-            reveal(box, t('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
+            reveal(box, helpString('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
                 { buttonText: t('intro.ok'), buttonCallback: advance }
             );
 
@@ -624,7 +620,7 @@ export function uiIntroLine(context, reveal) {
                 var box = pad(deleteLinesLoc, padding, context);
                 box.top -= 200;
                 box.height += 400;
-                reveal(box, t('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
+                reveal(box, helpString('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
                     { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
                 );
             });
@@ -651,18 +647,21 @@ export function uiIntroLine(context, reveal) {
 
         context.map().centerZoomEase(eleventhAvenueEnd, 18, 500);
 
+        var rightClickString = helpString('intro.lines.split_street', {
+                street1: t('intro.graph.name.11th-avenue'),
+                street2: t('intro.graph.name.washington-street')
+            }) +
+            helpString('intro.lines.' + (context.lastPointerType() === 'mouse' ? 'rightclick_intersection' : 'edit_menu_intersection_touch'));
+
         timeout(function() {
             var padding = 60 * Math.pow(2, context.map().zoom() - 18);
             var box = pad(eleventhAvenueEnd, padding, context);
-            reveal(box, t('intro.lines.rightclick_intersection',
-                { street1: t('intro.graph.name.11th-avenue'), street2: t('intro.graph.name.washington-street') })
-            );
+            reveal(box, rightClickString);
 
             context.map().on('move.intro drawn.intro', function() {
                 var padding = 60 * Math.pow(2, context.map().zoom() - 18);
                 var box = pad(eleventhAvenueEnd, padding, context);
-                reveal(box, t('intro.lines.rightclick_intersection',
-                    { street1: t('intro.graph.name.11th-avenue'), street2: t('intro.graph.name.washington-street') }),
+                reveal(box, rightClickString,
                     { duration: 0 }
                 );
             });
@@ -707,20 +706,20 @@ export function uiIntroLine(context, reveal) {
         if (!node) { return continueTo(rightClickIntersection); }
 
         var wasChanged = false;
-        var menuCoords = context.map().mouseCoordinates();
         _washingtonSegmentID = null;
 
-        revealEditMenu(menuCoords, t('intro.lines.split_intersection',
-            { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') })
+        reveal('.edit-menu', helpString('intro.lines.split_intersection',
+            { street: t('intro.graph.name.washington-street') }),
+            { padding: 50 }
         );
 
         context.map().on('move.intro drawn.intro', function() {
             var node = selectMenuItem(context, 'split').node();
             if (!wasChanged && !node) { return continueTo(rightClickIntersection); }
 
-            revealEditMenu(menuCoords, t('intro.lines.split_intersection',
-                { button: icon('#iD-operation-split', 'pre-text'), street: t('intro.graph.name.washington-street') }),
-                { duration: 0 }
+            reveal('.edit-menu', helpString('intro.lines.split_intersection',
+                { street: t('intro.graph.name.washington-street') }),
+                { duration: 0, padding: 50 }
             );
         });
 
@@ -752,14 +751,14 @@ export function uiIntroLine(context, reveal) {
 
         var padding = 60 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(eleventhAvenueEnd, padding, context);
-        reveal(box, t('intro.lines.retry_split'),
+        reveal(box, helpString('intro.lines.retry_split'),
             { buttonText: t('intro.ok'), buttonCallback: advance }
         );
 
         context.map().on('move.intro drawn.intro', function() {
             var padding = 60 * Math.pow(2, context.map().zoom() - 18);
             var box = pad(eleventhAvenueEnd, padding, context);
-            reveal(box, t('intro.lines.retry_split'),
+            reveal(box, helpString('intro.lines.retry_split'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
             );
         });
@@ -787,7 +786,7 @@ export function uiIntroLine(context, reveal) {
         var padding = 200 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(twelfthAvenue, padding, context);
         box.width = box.width / 2;
-        reveal(box, t(string, { street1: street, street2: street }),
+        reveal(box, helpString(string, { street1: street, street2: street }),
             { duration: 500 }
         );
 
@@ -798,7 +797,7 @@ export function uiIntroLine(context, reveal) {
                 var padding = 200 * Math.pow(2, context.map().zoom() - 18);
                 var box = pad(twelfthAvenue, padding, context);
                 box.width = box.width / 2;
-                reveal(box, t(string, { street1: street, street2: street }),
+                reveal(box, helpString(string, { street1: street, street2: street }),
                     { duration: 0 }
                 );
             });
@@ -868,7 +867,10 @@ export function uiIntroLine(context, reveal) {
             }
 
             reveal(box,
-                t('intro.lines.multi_select', { selected: selected, other1: other, other2: other })
+                helpString('intro.lines.multi_select',
+                    { selected: selected, other1: other }) + ' ' +
+                helpString('intro.lines.add_to_selection_' + (context.lastPointerType() === 'mouse' ? 'click' : 'touch'),
+                    { selected: selected, other2: other })
             );
 
             context.map().on('move.intro drawn.intro', function() {
@@ -887,7 +889,10 @@ export function uiIntroLine(context, reveal) {
                 }
 
                 reveal(box,
-                    t('intro.lines.multi_select', { selected: selected, other1: other, other2: other }),
+                    helpString('intro.lines.multi_select',
+                        { selected: selected, other1: other }) + ' ' +
+                    helpString('intro.lines.add_to_selection_' + (context.lastPointerType() === 'mouse' ? 'click' : 'touch'),
+                        { selected: selected, other2: other }),
                     { duration: 0 }
                 );
             });
@@ -927,15 +932,20 @@ export function uiIntroLine(context, reveal) {
 
         var padding = 200 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(twelfthAvenue, padding, context);
-        reveal(box, t('intro.lines.multi_rightclick'));
+
+        var rightClickString = helpString('intro.lines.multi_select_success') +
+            helpString('intro.lines.multi_' + (context.lastPointerType() === 'mouse' ? 'rightclick' : 'edit_menu_touch'));
+        reveal(box, rightClickString);
 
         context.map().on('move.intro drawn.intro', function() {
             var padding = 200 * Math.pow(2, context.map().zoom() - 18);
             var box = pad(twelfthAvenue, padding, context);
-            reveal(box, t('intro.lines.multi_rightclick'), { duration: 0 });
+            reveal(box, rightClickString, { duration: 0 });
         });
 
-        d3_select(window).on('click.intro contextmenu.intro', function() {
+        context.ui().editMenu().on('toggled.intro', function(open) {
+            if (!open) return;
+
             timeout(function() {
                 var ids = context.selectedIDs();
                 if (ids.length === 2 &&
@@ -951,7 +961,7 @@ export function uiIntroLine(context, reveal) {
                     return continueTo(didSplit);
                 }
             }, 300);  // after edit menu visible
-        }, true);
+        });
 
         context.history().on('change.intro', function() {
             if (!_washingtonSegmentID ||
@@ -965,7 +975,7 @@ export function uiIntroLine(context, reveal) {
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
-            d3_select(window).on('click.intro contextmenu.intro', null, true);
+            context.ui().editMenu().on('toggled.intro', null);
             context.history().on('change.intro', null);
             nextStep();
         }
@@ -984,15 +994,15 @@ export function uiIntroLine(context, reveal) {
         var node = selectMenuItem(context, 'delete').node();
         if (!node) return continueTo(multiRightClick);
 
-        var menuCoords = context.map().mouseCoordinates();
-        revealEditMenu(menuCoords,
-            t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') })
+        reveal('.edit-menu',
+            helpString('intro.lines.multi_delete'),
+            { padding: 50 }
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            revealEditMenu(menuCoords,
-                t('intro.lines.multi_delete', { button: icon('#iD-operation-delete', 'pre-text') }),
-                { duration: 0 }
+            reveal('.edit-menu',
+                helpString('intro.lines.multi_delete'),
+                { duration: 0, padding: 50 }
             );
         });
 
@@ -1024,7 +1034,7 @@ export function uiIntroLine(context, reveal) {
 
         var padding = 200 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(twelfthAvenue, padding, context);
-        reveal(box, t('intro.lines.retry_delete'), {
+        reveal(box, helpString('intro.lines.retry_delete'), {
             buttonText: t('intro.ok'),
             buttonCallback: function() { continueTo(multiSelect); }
         });
@@ -1038,7 +1048,7 @@ export function uiIntroLine(context, reveal) {
     function play() {
         dispatch.call('done');
         reveal('.ideditor',
-            t('intro.lines.play', { next: t('intro.buildings.title') }), {
+            helpString('intro.lines.play', { next: t('intro.buildings.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-building',
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }

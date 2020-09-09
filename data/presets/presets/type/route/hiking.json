@@ -23,5 +23,9 @@
         "type": "route",
         "route": "hiking"
     },
+    "reference": {
+        "key": "route",
+        "value": "hiking"
+    },
     "name": "Hiking Route"
 }

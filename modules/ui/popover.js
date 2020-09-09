@@ -146,9 +146,6 @@ export function uiPopover(klass) {
             popoverSelection.classed('fade', true);
         }
 
-        var placement = _placement.apply(this, arguments);
-        popoverSelection.classed(placement, true);
-
         var display = _displayType.apply(this, arguments);
 
         if (display === 'hover') {
@@ -251,6 +248,13 @@ export function uiPopover(klass) {
         var scrollTop = scrollNode ? scrollNode.scrollTop : 0;
 
         var placement = _placement.apply(this, arguments);
+        popoverSelection
+            .classed('left', false)
+            .classed('right', false)
+            .classed('top', false)
+            .classed('bottom', false)
+            .classed(placement, true);
+
         var alignment = _alignment.apply(this, arguments);
         var alignFactor = 0.5;
         if (alignment === 'leading') {

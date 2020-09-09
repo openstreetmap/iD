@@ -48,12 +48,6 @@ export function validationCrossingWays(context) {
         return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
     }
 
-
-    function getFeatureTypeForCrossingCheck(way, graph) {
-        var feature = getFeatureWithFeatureTypeTagsForWay(way, graph);
-        return getFeatureType(feature, graph);
-    }
-
     // discard
     var ignoredBuildings = {
         demolished: true, dismantled: true, proposed: true, razed: true
@@ -80,9 +74,7 @@ export function validationCrossingWays(context) {
     }
 
 
-    function isLegitCrossing(way1, featureType1, way2, featureType2) {
-        var tags1 = way1.tags;
-        var tags2 = way2.tags;
+    function isLegitCrossing(tags1, featureType1, tags2, featureType2) {
 
         // assume 0 by default
         var level1 = tags1.level || '0';
@@ -169,13 +161,24 @@ export function validationCrossingWays(context) {
             var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('railway') !== -1) {
+                    if (!bothLines) return {};
+
+                    var isTram = entity1.tags.railway === 'tram' || entity2.tags.railway === 'tram';
+
                     if (osmPathHighwayTagValues[entity1.tags.highway] ||
                         osmPathHighwayTagValues[entity2.tags.highway]) {
-                        // path-rail connections use this tag
-                        return bothLines ? { railway: 'crossing' } : {};
+
+                        // path-tram connections use this tag
+                        if (isTram) return { railway: 'tram_crossing' };
+
+                        // other path-rail connections use this tag
+                        return { railway: 'crossing' };
                     } else {
-                        // road-rail connections use this tag
-                        return bothLines ? { railway: 'level_crossing' } : {};
+                        // path-tram connections use this tag
+                        if (isTram) return { railway: 'tram_level_crossing' };
+
+                        // other road-rail connections use this tag
+                        return { railway: 'level_crossing' };
                     }
                 }
 
@@ -201,7 +204,8 @@ export function validationCrossingWays(context) {
         var edgeCrossInfos = [];
         if (way1.type !== 'way') return edgeCrossInfos;
 
-        var way1FeatureType = getFeatureTypeForCrossingCheck(way1, graph);
+        var taggedFeature1 = getFeatureWithFeatureTypeTagsForWay(way1, graph);
+        var way1FeatureType = getFeatureType(taggedFeature1, graph);
         if (way1FeatureType === null) return edgeCrossInfos;
 
         var checkedSingleCrossingWays = {};
@@ -212,7 +216,7 @@ export function validationCrossingWays(context) {
         var n1, n2, nA, nB, nAId, nBId;
         var segment1, segment2;
         var oneOnly;
-        var segmentInfos, segment2Info, way2, way2FeatureType;
+        var segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
         var way1Nodes = graph.childNodes(way1);
         var comparedWays = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
@@ -247,11 +251,12 @@ export function validationCrossingWays(context) {
 
                 way2 = graph.hasEntity(segment2Info.wayId);
                 if (!way2) continue;
-
+                taggedFeature2 = getFeatureWithFeatureTypeTagsForWay(way2, graph);
                 // only check crossing highway, waterway, building, and railway
-                way2FeatureType = getFeatureTypeForCrossingCheck(way2, graph);
+                way2FeatureType = getFeatureType(taggedFeature2, graph);
+
                 if (way2FeatureType === null ||
-                    isLegitCrossing(way1, way1FeatureType, way2, way2FeatureType)) {
+                    isLegitCrossing(taggedFeature1.tags, way1FeatureType, taggedFeature2.tags, way2FeatureType)) {
                     continue;
                 }
 
@@ -453,12 +458,12 @@ export function validationCrossingWays(context) {
                 } else if (context.graph().geometry(this.entityIds[0]) === 'line' &&
                     context.graph().geometry(this.entityIds[1]) === 'line') {
 
-                    // don't recommend adding bridges to waterways since they're uncommmon
+                    // don't recommend adding bridges to waterways since they're uncommon
                     if (allowsBridge(selectedFeatureType) && selectedFeatureType !== 'waterway') {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_bridge', 'temaki-bridge', 'bridge'));
                     }
 
-                    // don't recommend adding tunnels under waterways since they're uncommmon
+                    // don't recommend adding tunnels under waterways since they're uncommon
                     var skipTunnelFix = otherFeatureType === 'waterway' && selectedFeatureType !== 'waterway';
                     if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
                         fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));

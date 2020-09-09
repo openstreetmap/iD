@@ -30,7 +30,7 @@ A basic preset is of the form:
     ],
     // The geometry types for which this preset is valid.
     // options are point, area, line, and vertex.
-    // vertexes are points that are parts of lines, like the nodes in a road
+    // vertices are points that are parts of lines, like the nodes in a road
     // lines are unclosed ways, and areas are closed ways
     "geometry": [
         "point", "area"
@@ -197,7 +197,7 @@ By default, presets are available everywhere.
 
 ##### `notCountryCodes`
 
-An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blocklist.
 
 ##### `replacement`
 
@@ -379,7 +379,7 @@ For combo fields, spaces are replaced with underscores in the tag value if `snak
 
 ##### `caseSensitive`
 
-For combo fields, case-sensitve field values are allowed if `caseSensitive` is `true`. The default is `false`.
+For combo fields, case-sensitive field values are allowed if `caseSensitive` is `true`. The default is `false`.
 
 ##### `min_value`
 
@@ -423,7 +423,7 @@ By default, fields are available everywhere.
 
 ##### `notCountryCodes`
 
-An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blocklist.
 
 ##### `urlFormat`
 

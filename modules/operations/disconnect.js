@@ -58,12 +58,13 @@ export function operationDisconnect(context, selectedIDs) {
         });
         _nodes = utilGetAllNodes(_wayIDs, context.graph());
         _coords = _nodes.map(function(n) { return n.loc; });
-        _extent = utilTotalExtent(ways, context.graph());
 
         // actions for connected nodes shared by at least two selected ways
         var sharedActions = [];
+        var sharedNodes = [];
         // actions for connected nodes
         var unsharedActions = [];
+        var unsharedNodes = [];
 
         _nodes.forEach(function(node) {
             var action = actionDisconnect(node.id).limitWays(_wayIDs);
@@ -80,8 +81,10 @@ export function operationDisconnect(context, selectedIDs) {
 
                 if (count > 1) {
                     sharedActions.push(action);
+                    sharedNodes.push(node);
                 } else {
                     unsharedActions.push(action);
+                    unsharedNodes.push(node);
                 }
             }
         });
@@ -92,11 +95,13 @@ export function operationDisconnect(context, selectedIDs) {
         if (sharedActions.length) {
             // if any nodes are shared, only disconnect the selected ways from each other
             _actions = sharedActions;
+            _extent = utilTotalExtent(sharedNodes, context.graph());
             _descriptionID += 'conjoined';
             _annotationID = 'from_each_other';
         } else {
             // if no nodes are shared, disconnect the selected ways from all connected ways
             _actions = unsharedActions;
+            _extent = utilTotalExtent(unsharedNodes, context.graph());
             if (_wayIDs.length === 1) {
                 _descriptionID += context.graph().geometry(_wayIDs[0]);
             } else {

@@ -500,7 +500,7 @@ export function rendererMap(context) {
                 );
 
                 // On Firefox Windows and Linux we always get +/- the scroll line amount (default 3)
-                // There doesn't seem to be any scroll accelleration.
+                // There doesn't seem to be any scroll acceleration.
                 // This multiplier increases the speed a little bit - #5512
                 if (detected.os !== 'mac') {
                     dY *= 5;
@@ -593,7 +593,7 @@ export function rendererMap(context) {
         if (_lastWithinEditableZoom !== withinEditableZoom) {
             if (_lastWithinEditableZoom !== undefined) {
                 // notify that the map zoomed in or out over the editable zoom threshold
-                dispatch.call('crossEditableZoom', this, map);
+                dispatch.call('crossEditableZoom', this, withinEditableZoom);
             }
             _lastWithinEditableZoom = withinEditableZoom;
         }
@@ -641,7 +641,6 @@ export function rendererMap(context) {
     function resetTransform() {
         if (!_isTransformed) return false;
 
-        supersurface.selectAll('.edit-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         _isTransformed = false;
         if (context.inIntro()) {

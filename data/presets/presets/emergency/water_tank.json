@@ -3,11 +3,18 @@
     "fields": [
         "name",
         "ref",
-        "operator"
+        "operator",
+        "water_tank/volume",
+        "drinking_water"
+    ],
+    "moreFields": [
+        "height",
+        "material"
     ],
     "geometry": [
         "point",
-        "vertex"
+        "vertex",
+        "area"
     ],
     "terms": [
         "water tank",

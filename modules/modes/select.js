@@ -92,7 +92,7 @@ export function modeSelect(context, selectedIDs) {
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = context.hasEntity(selectedIDs[i]);
             if (!entity || entity.geometry(graph) !== 'vertex') {
-                return [];  // selection includes some not vertexes
+                return [];  // selection includes some not vertices
             }
 
             var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
@@ -176,7 +176,13 @@ export function modeSelect(context, selectedIDs) {
 
         _operations = Object.values(Operations)
             .map(function(o) { return o(context, selectedIDs); })
-            .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade'; });
+            .filter(function(o) { return o.available() && o.id !== 'delete' && o.id !== 'downgrade' && o.id !== 'copy'; });
+
+        var copyOperation = Operations.operationCopy(context, selectedIDs);
+        if (copyOperation.available()) {
+            // group copy operation with delete/downgrade
+            _operations.push(copyOperation);
+        }
 
         var downgradeOperation = Operations.operationDowngrade(context, selectedIDs);
         // don't allow delete if downgrade is available
@@ -278,6 +284,8 @@ export function modeSelect(context, selectedIDs) {
 
             var loc = extent.center();
             context.map().centerEase(loc);
+            // we could enter the mode multiple times, so reset follow for next time
+            _follow = false;
         }
 
 
@@ -480,6 +488,8 @@ export function modeSelect(context, selectedIDs) {
 
 
     mode.exit = function() {
+
+        _newFeature = false;
 
         _operations.forEach(function(operation) {
             if (operation.behavior) {

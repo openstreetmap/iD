@@ -5,6 +5,7 @@ const glob = require('glob');
 const fs = require('fs');
 const postcss = require('postcss');
 const prepend = require('postcss-selector-prepend');
+const autoprefixer = require('autoprefixer');
 
 let _currBuild = null;
 
@@ -32,7 +33,10 @@ function buildCSS() {
       .then(files => doConcat(files, 'dist/iD.css'))
       .then(() => {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
-        return postcss([prepend({ selector: '.ideditor ' })])
+        return postcss([
+            autoprefixer,
+            prepend({ selector: '.ideditor ' })
+          ])
           .process(css, { from: 'dist/iD.css', to: 'dist/iD.css' });
       })
       .then(result => fs.writeFileSync('dist/iD.css', result.css))

@@ -440,7 +440,7 @@ A one-way line does not have a valid connection at its first or last node.
 
 ##### `incompatible_source`
 
-The `source` tag of a feature references a data source known to have a license incompatiable with OpenStreetMap. This is very much not exhaustive and currently only flags sources containing "google".
+The `source` tag of a feature references a data source known to have a license incompatible with OpenStreetMap. This is very much not exhaustive and currently only flags sources containing "google".
 
 ##### `invalid_format`
 

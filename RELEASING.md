@@ -1,13 +1,12 @@
 ## Release Checklist
 
 ### Prerelease (several days prior)
-- Notify translators of impending release
-  (https://www.transifex.com/projects/p/id-editor/announcements/)
+- [Notify translators](https://www.transifex.com/projects/p/id-editor/announcements/) of the impending release
 - Notify TomH
 
 ### Prep
 - If you don't have a `transifex.auth` file in the root of your iD checkout,
-you'll need to create a Transifex account, ask @bhousel for admin rights
+you'll need to create a Transifex account, ask @quincylvania or @bhousel for admin rights
 on the iD project, and then create this file with contents like<br><pre>
      {"user": "yourusername", "password": "*******"}</pre>This file is not version-controlled and will not be checked in.
 
@@ -26,7 +25,7 @@ $  git add . && git commit -m 'npm run translations'
 ```
 
 - Update `CHANGELOG.md`
-- Update version number in `modules/core/context.js`, `package.json`
+- Set release version number in `modules/core/context.js` and `package.json`
 
 ```bash
 $  git add . && git commit -m 'vA.B.C'
@@ -44,23 +43,36 @@ $  git tag vA.B.C
 $  git push origin -f release vA.B.C
 ```
 - Open https://github.com/openstreetmap/iD/tags
-- Click `•••` –> `Create Release` and link to `CHANGELOG.md` in `Describe this release`
+- Click `•••` –> `Create Release` and link to [`CHANGELOG.md`](https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md) in `Describe this release`
+
+#### Prepare `develop` branch for further development
+
+```bash
+$  git checkout develop
+```
+
+- Increment version number and add `-dev` suffix in `modules/core/context.js` and `package.json`, e.g. `2.18.5-dev`
+
+```bash
+$  git add . && git commit -m 'Set development version number'
+$  git push origin develop
+```
 
 ### Update `openstreetmap-website`
 
 #### Setup remotes (first time only)
 ```bash
 $  git remote add osmlab git@github.com:osmlab/openstreetmap-website.git
-$  git remote add upstream git@github.com:openstreetmap/openstreetmap-website.git
+$  git remote add openstreetmap git@github.com:openstreetmap/openstreetmap-website.git
 ```
 
-#### Sync develop branches
+#### Sync `master` branches
 
 ```bash
 $  git fetch --all
-$  git checkout develop
-$  git reset --hard upstream/develop
-$  git push osmlab develop
+$  git checkout master
+$  git reset --hard openstreetmap/master
+$  git push osmlab master
 ```
 
 #### Create and push branch with the new iD version
@@ -72,4 +84,4 @@ $  rm -rf vendor/assets/iD/* && vendorer
 $  git add . && git commit -m 'Update to iD vA.B.C'
 $  git push osmlab
 ```
-- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/develop...osmlab:develop) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the description
+- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:master) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment

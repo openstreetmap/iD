@@ -167,7 +167,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         if (includeDrawNode) {
             if (parentWay.isClosed()) {
                 // don't test the last segment for closed ways - #4655
-                // (still test the first segement)
+                // (still test the first segment)
                 nodes.pop();
             }
         } else { // discount the draw node
@@ -195,23 +195,23 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
         var nextMode;
 
-        if (context.graph() === startGraph) { // we've undone back to the beginning
+        if (context.graph() === startGraph) {
+            // We've undone back to the initial state before we started drawing.
+            // Just exit the draw mode without undoing whatever we did before
+            // we entered the draw mode.
             nextMode = modeSelect(context, [wayID]);
         } else {
-            context.history()
-                .on('undone.draw', null);
-            // remove whatever segment was drawn previously
-            context.undo();
+            // The `undo` only removed the temporary edit, so here we have to
+            // manually undo to actually remove the last node we added. We can't
+            // use the `undo` function since the initial "add" graph doesn't have
+            // an annotation and so cannot be undone to.
+            context.pop(1);
 
-            if (context.graph() === startGraph) { // we've undone back to the beginning
-                nextMode = modeSelect(context, [wayID]);
-            } else {
-                // continue drawing
-                nextMode = mode;
-            }
+            // continue drawing
+            nextMode = mode;
         }
 
-        // clear the redo stack by adding and removing an edit
+        // clear the redo stack by adding and removing a blank edit
         context.perform(actionNoop());
         context.pop(1);
 
@@ -242,7 +242,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         _headNodeID = typeof _nodeIndex === 'number' ? _origWay.nodes[_nodeIndex] :
             (_origWay.isClosed() ? _origWay.nodes[_origWay.nodes.length - 2] : _origWay.nodes[_origWay.nodes.length - 1]);
         _wayGeometry = _origWay.geometry(context.graph());
-        _annotation = t((_origWay.isDegenerate() ?
+        _annotation = t((_origWay.nodes.length === (_origWay.isClosed() ? 2 : 1) ?
             'operations.start.annotation.' :
             'operations.continue.annotation.') + _wayGeometry
         );

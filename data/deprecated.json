@@ -8,6 +8,10 @@
     "replace": {"aeroway": "jet_bridge", "highway": "corridor"}
   },
   {
+    "old": {"access": "customer"},
+    "replace": {"access": "customers"}
+  },
+  {
     "old": {"access": "public"},
     "replace": {"access": "yes"}
   },
@@ -248,6 +252,10 @@
     "replace": {"building": "house"}
   },
   {
+    "old": {"building": "pavillion"},
+    "replace": {"building": "pavilion"}
+  },
+  {
     "old": {"building:color": "*"},
     "replace": {"building:colour": "$1"}
   },
@@ -465,6 +473,14 @@
   {
     "old": {"escalator": "*"},
     "replace": {"highway": "steps", "conveying": "$1"}
+  },
+  {
+    "old": {"fast_food": "pizza"},
+    "replace": {"cuisine": "pizza"}
+  },
+  {
+    "old": {"fast_food": "shawarma"},
+    "replace": {"cuisine": "shawarma"}
   },
   {
     "old": {"fee": "0"},
@@ -1384,6 +1400,22 @@
   },
   {
     "old": {"toilets:disposal": "pit_latrine"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "flush"},
+    "replace": {"toilets:disposal": "flush"}
+  },
+  {
+    "old": {"toilets:type": "pit"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "pitlatrine"},
+    "replace": {"toilets:disposal": "pitlatrine"}
+  },
+  {
+    "old": {"toilets:type": "pit latrine"},
     "replace": {"toilets:disposal": "pitlatrine"}
   },
   {

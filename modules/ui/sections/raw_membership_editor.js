@@ -33,7 +33,8 @@ export function uiSectionRawMembershipEditor(context) {
 
             var parents = context.graph().parentRelations(entity);
             var gt = parents.length > _maxMemberships ? '>' : '';
-            return t('inspector.relations_count', { count: gt + parents.slice(0, _maxMemberships).length });
+            var count = gt + parents.slice(0, _maxMemberships).length;
+            return t('inspector.title_count', { title: t('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -61,9 +62,19 @@ export function uiSectionRawMembershipEditor(context) {
         context.enter(modeSelect(context, [d.relation.id]));
     }
 
+    function zoomToRelation(d) {
+        d3_event.preventDefault();
+
+        var entity = context.entity(d.relation.id);
+        context.map().zoomToEase(entity);
+
+        // highlight the relation in case it wasn't previously on-screen
+        utilHighlightEntities([d.relation.id], true, context);
+    }
+
 
     function changeRole(d) {
-        if (d === 0) return;    // called on newrow (shoudn't happen)
+        if (d === 0) return;    // called on newrow (shouldn't happen)
         if (_inChange) return;  // avoid accidental recursive call #5731
 
         var oldRole = d.member.role;
@@ -107,7 +118,7 @@ export function uiSectionRawMembershipEditor(context) {
 
     function deleteMembership(d) {
         this.blur();           // avoid keeping focus on the button
-        if (d === 0) return;   // called on newrow (shoudn't happen)
+        if (d === 0) return;   // called on newrow (shouldn't happen)
 
         // remove the hover-highlight styling
         utilHighlightEntities([d.relation.id], false, context);
@@ -236,14 +247,16 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'field-label')
             .attr('for', function(d) {
                 return d.domId;
-            })
+            });
+
+        var labelLink = labelEnter
             .append('span')
             .attr('class', 'label-text')
             .append('a')
             .attr('href', '#')
             .on('click', selectRelation);
 
-        labelEnter
+        labelLink
             .append('span')
             .attr('class', 'member-entity-type')
             .text(function(d) {
@@ -251,10 +264,24 @@ export function uiSectionRawMembershipEditor(context) {
                 return (matched && matched.name()) || t('inspector.relation');
             });
 
-        labelEnter
+        labelLink
             .append('span')
             .attr('class', 'member-entity-name')
             .text(function(d) { return utilDisplayName(d.relation); });
+
+        labelEnter
+            .append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'remove member-delete')
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', deleteMembership);
+
+        labelEnter
+            .append('button')
+            .attr('class', 'member-zoom')
+            .attr('title', t('icons.zoom_to'))
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
+            .on('click', zoomToRelation);
 
         var wrapEnter = itemsEnter
             .append('div')
@@ -273,13 +300,6 @@ export function uiSectionRawMembershipEditor(context) {
             .on('blur', changeRole)
             .on('change', changeRole);
 
-        wrapEnter
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'remove form-field-button member-delete')
-            .call(svgIcon('#iD-operation-delete'))
-            .on('click', deleteMembership);
-
         if (taginfo) {
             wrapEnter.each(bindTypeahead);
         }
@@ -297,14 +317,26 @@ export function uiSectionRawMembershipEditor(context) {
             .append('li')
             .attr('class', 'member-row member-row-new form-field');
 
-        newMembershipEnter
+        var newLabelEnter = newMembershipEnter
             .append('label')
-            .attr('class', 'field-label')
+            .attr('class', 'field-label');
+
+        newLabelEnter
             .append('input')
             .attr('placeholder', t('inspector.choose_relation'))
             .attr('type', 'text')
             .attr('class', 'member-entity-input')
             .call(utilNoAuto);
+
+        newLabelEnter
+            .append('button')
+            .attr('tabindex', -1)
+            .attr('class', 'remove member-delete')
+            .call(svgIcon('#iD-operation-delete'))
+            .on('click', function() {
+                list.selectAll('.member-row-new')
+                    .remove();
+            });
 
         var newWrapEnter = newMembershipEnter
             .append('div')
@@ -316,16 +348,6 @@ export function uiSectionRawMembershipEditor(context) {
             .property('type', 'text')
             .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
-
-        newWrapEnter
-            .append('button')
-            .attr('tabindex', -1)
-            .attr('class', 'remove form-field-button member-delete')
-            .call(svgIcon('#iD-operation-delete'))
-            .on('click', function() {
-                list.selectAll('.member-row-new')
-                    .remove();
-            });
 
         // Update
         newMembership = newMembership

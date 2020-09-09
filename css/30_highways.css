@@ -390,10 +390,6 @@ path.line.casing.tag-road {
 }
 
 /* service roads */
-.preset-icon .icon.tag-highway-service {
-    color: #fff;
-    fill: #666;
-}
 path.line.stroke.tag-highway-service,
 path.line.stroke.tag-service {
     stroke: #fff;

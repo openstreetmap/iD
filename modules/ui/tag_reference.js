@@ -8,14 +8,10 @@ import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 
 
-// Pass `which` object of the form:
+// Pass `what` object of the form:
 // {
 //   key: 'string',     // required
 //   value: 'string'    // optional
-// }
-//   -or-
-// {
-//   rtype: 'string'    // relation type  (e.g. 'multipolygon')
 // }
 //   -or-
 // {
@@ -179,7 +175,7 @@ export function uiTagReference(what) {
 
 
     tagReference.body = function(selection) {
-        var itemID = what.qid || what.rtype || (what.key + '-' + what.value);
+        var itemID = what.qid || (what.key + '-' + (what.value || ''));
         _body = selection.selectAll('.tag-reference-body')
             .data([itemID], function(d) { return d; });
 

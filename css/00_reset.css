@@ -118,8 +118,6 @@ input[type="radio"] {
 
 input[type="search"] {
     -webkit-appearance: none; /* 1 */
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box; /* 2 */
     box-sizing: border-box;
 }
 

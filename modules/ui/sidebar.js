@@ -38,7 +38,7 @@ export function uiSidebar(context) {
 
     function sidebar(selection) {
         var container = context.container();
-        var minWidth = 280;
+        var minWidth = 240;
         var sidebarWidth;
         var containerWidth;
         var dragOffset;
@@ -58,6 +58,8 @@ export function uiSidebar(context) {
 
         function pointerdown() {
             if (downPointerId) return;
+
+            if ('button' in d3_event && d3_event.button !== 0) return;
 
             downPointerId = d3_event.pointerId || 'mouse';
 
@@ -151,7 +153,7 @@ export function uiSidebar(context) {
 
         var inspectorWrap = selection
             .append('div')
-            .attr('class', 'inspector-hidden inspector-wrap fr');
+            .attr('class', 'inspector-hidden inspector-wrap');
 
         var hoverModeSelect = function(targets) {
             context.container().selectAll('.feature-list-item').classed('hover', false);
@@ -236,7 +238,8 @@ export function uiSidebar(context) {
                 if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), [datum.id]) || inspector.state() !== 'hover') {
                     inspector
                         .state('hover')
-                        .entityIDs([datum.id]);
+                        .entityIDs([datum.id])
+                        .newFeature(false);
 
                     inspectorWrap
                         .call(inspector);
@@ -291,15 +294,15 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), ids) || inspector.state() !== 'select') {
-                    inspector
-                        .state('select')
-                        .entityIDs(ids)
-                        .newFeature(newFeature);
+                // reload the UI even if the ids are the same since the entities
+                // themselves may have changed
+                inspector
+                    .state('select')
+                    .entityIDs(ids)
+                    .newFeature(newFeature);
 
-                    inspectorWrap
-                        .call(inspector, newFeature);
-                }
+                inspectorWrap
+                    .call(inspector);
 
             } else {
                 inspector
@@ -409,6 +412,13 @@ export function uiSidebar(context) {
 
         // toggle the sidebar collapse when double-clicking the resizer
         resizer.on('dblclick', sidebar.toggle);
+
+        // ensure hover sidebar is closed when zooming out beyond editable zoom
+        context.map().on('crossEditableZoom.sidebar', function(within) {
+            if (!within && !selection.select('.inspector-hover').empty()) {
+                hover([]);
+            }
+        });
     }
 
     sidebar.showPresetList = function() {};

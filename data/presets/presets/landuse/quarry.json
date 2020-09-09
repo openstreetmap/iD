@@ -19,6 +19,13 @@
     "tags": {
         "landuse": "quarry"
     },
-    "terms": [],
+    "terms": [
+        "aggregate quarry",
+        "open pit mine",
+        "sand mine",
+        "sand pit",
+        "sand quarry",
+        "sandpit"
+    ],
     "name": "Quarry"
 }

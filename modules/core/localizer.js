@@ -53,6 +53,21 @@ export function coreLocalizer() {
     localizer.scriptNames = () => _scriptNames;
 
 
+    // The client app may want to manually set the locale, regardless of the
+    // settings provided by the browser
+    let _preferredLocaleCodes = [];
+    localizer.preferredLocaleCodes = function(codes) {
+        if (!arguments.length) return _preferredLocaleCodes;
+        if (typeof codes === 'string') {
+            // be generous and accept delimited strings as input
+            _preferredLocaleCodes = codes.split(/,|;| /gi).filter(Boolean);
+        } else {
+            _preferredLocaleCodes = codes;
+        }
+        return localizer;
+    };
+
+
     var _loadPromise;
 
     localizer.ensureLoaded = () => {
@@ -60,7 +75,7 @@ export function coreLocalizer() {
         if (_loadPromise) return _loadPromise;
 
         return _loadPromise = Promise.all([
-                // load the list of langauges
+                // load the list of languages
                 fileFetcher.get('languages'),
                 // load the list of supported locales
                 fileFetcher.get('locales')
@@ -70,15 +85,10 @@ export function coreLocalizer() {
                 _dataLocales = results[1];
             })
             .then(() => {
-                const hash = utilStringQs(window.location.hash);
-
-                if (hash.locale && _dataLocales[hash.locale]) {
-                    // the locale can be manually set in the URL hash
-                    _localeCode = hash.locale;
-                } else {
-                    // otherwise use the locale specified by the browser
-                    _localeCode = supportedBrowserLocale();
-                }
+                let requestedLocales = (_preferredLocaleCodes || [])
+                    // list of locales preferred by the browser in priority order
+                    .concat(utilDetect().browserLocales);
+                _localeCode = bestSupportedLocale(requestedLocales);
 
                 return Promise.all([
                     // always load the English locale strings as fallbacks
@@ -93,34 +103,32 @@ export function coreLocalizer() {
             .catch(err => console.error(err));  // eslint-disable-line
     };
 
-    // Returns the best locale requested by the browser supported by iD, if any
-    function supportedBrowserLocale() {
-        // list of locales preferred by the browser in priority order
-        let browserLocales = utilDetect().browserLocales;
+    // Returns the best locale from `locales` supported by iD, if any
+    function bestSupportedLocale(locales) {
         let supportedLocales = _dataLocales;
 
-        for (let i in browserLocales) {
-            let browserLocale = browserLocales[i];
-            if (browserLocale.includes('-')) { // full locale ('es-ES')
+        for (let i in locales) {
+            let locale = locales[i];
+            if (locale.includes('-')) { // full locale ('es-ES')
 
-                if (supportedLocales[browserLocale]) return browserLocale;
+                if (supportedLocales[locale]) return locale;
 
                 // If full locale not supported ('es-FAKE'), fallback to the base ('es')
-                let langPart = browserLocale.split('-')[0];
+                let langPart = locale.split('-')[0];
                 if (supportedLocales[langPart]) return langPart;
 
             } else { // base locale ('es')
 
                 // prefer a lower-priority full locale with this base ('es' < 'es-ES')
-                let fullLocale = browserLocales.find((locale, index) => {
+                let fullLocale = locales.find((locale2, index) => {
                     return index > i &&
-                        locale !== browserLocale &&
-                        locale.split('-')[0] === browserLocale &&
-                        supportedLocales[locale];
+                        locale2 !== locale &&
+                        locale2.split('-')[0] === locale &&
+                        supportedLocales[locale2];
                 });
                 if (fullLocale) return fullLocale;
 
-                if (supportedLocales[browserLocale]) return browserLocale;
+                if (supportedLocales[locale]) return locale;
             }
         }
 
@@ -147,7 +155,7 @@ export function coreLocalizer() {
         _languageNames = currentData && currentData.languageNames;
         _scriptNames = currentData && currentData.scriptNames;
 
-        _usesMetric = _localeCode.toLowerCase() !== 'en-us';
+        _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }
 
 
@@ -237,7 +245,7 @@ export function coreLocalizer() {
 
     localizer.languageName = (code, options) => {
 
-        if (_languageNames[code]) {  // name in locale langauge
+        if (_languageNames[code]) {  // name in locale language
           // e.g. "German"
           return _languageNames[code];
         }
@@ -252,9 +260,9 @@ export function coreLocalizer() {
             return localizer.t('translate.language_and_code', { language: langInfo.nativeName, code: code });
 
           } else if (langInfo.base && langInfo.script) {
-            const base = langInfo.base;   // the code of the langauge this is based on
+            const base = langInfo.base;   // the code of the language this is based on
 
-            if (_languageNames[base]) {   // base language name in locale langauge
+            if (_languageNames[base]) {   // base language name in locale language
               const scriptCode = langInfo.script;
               const script = _scriptNames[scriptCode] || scriptCode;
               // e.g. "Serbian (Cyrillic)"

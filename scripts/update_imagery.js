@@ -63,17 +63,20 @@ const discard = {
   'EOXAT2018CLOUDLESS': true
 };
 
-const supportedWMSProjections = {
-  'EPSG:4326': true,
-  'EPSG:3857': true,
-  'EPSG:900913': true,
-  'EPSG:3587': true,
-  'EPSG:54004': true,
-  'EPSG:41001': true,
-  'EPSG:102113': true,
-  'EPSG:102100': true,
-  'EPSG:3785': true
-};
+const supportedWMSProjections = [
+  // Web Mercator
+  'EPSG:3857',
+  // alternate codes used for Web Mercator
+  'EPSG:900913',
+  'EPSG:3587',
+  'EPSG:54004',
+  'EPSG:41001',
+  'EPSG:102113',
+  'EPSG:102100',
+  'EPSG:3785',
+  // WGS 84 (Equirectangular)
+  'EPSG:4326'
+];
 
 
 sources.forEach(source => {
@@ -99,7 +102,7 @@ sources.forEach(source => {
 
   // Some WMS sources are supported, check projection
   if (source.type === 'wms') {
-    const projection = (source.available_projections || []).find(p => supportedWMSProjections[p]);
+    const projection = source.available_projections && supportedWMSProjections.find(p => source.available_projections.indexOf(p) !== -1);
     if (!projection) return;
     if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
     im.projection = projection;

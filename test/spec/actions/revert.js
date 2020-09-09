@@ -28,7 +28,7 @@ describe('iD.actionRevert', function() {
 
     describe('reverting way child nodes', function () {
         it('removes new node, updates parent way nodelist', function() {
-            // note: test with a 3 node way so w1 doesnt go degenerate..
+            // note: test with a 3 node way so w1 doesn't go degenerate..
             var n1 = iD.osmNode({id: 'n1'}),
                 n2 = iD.osmNode({id: 'n2'}),
                 n3 = iD.osmNode({id: 'n-3'}),

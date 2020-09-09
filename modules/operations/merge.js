@@ -14,19 +14,24 @@ export function operationMerge(context, selectedIDs) {
     var _action = getAction();
 
     function getAction() {
+        // prefer a non-disabled action first
         var join = actionJoin(selectedIDs);
-        if (join.disabled(context.graph()) !== 'not_eligible') {
-            return join;
-        }
+        if (!join.disabled(context.graph())) return join;
+
         var merge = actionMerge(selectedIDs);
-        if (merge.disabled(context.graph()) !== 'not_eligible') {
-            return merge;
-        }
+        if (!merge.disabled(context.graph())) return merge;
+
         var mergePolygon = actionMergePolygon(selectedIDs);
-        if (mergePolygon.disabled(context.graph()) !== 'not_eligible') {
-            return mergePolygon;
-        }
+        if (!mergePolygon.disabled(context.graph())) return mergePolygon;
+
         var mergeNodes = actionMergeNodes(selectedIDs);
+        if (!mergeNodes.disabled(context.graph())) return mergeNodes;
+
+        // otherwise prefer an action with an interesting disabled reason
+        if (join.disabled(context.graph()) !== 'not_eligible') return join;
+        if (merge.disabled(context.graph()) !== 'not_eligible') return merge;
+        if (mergePolygon.disabled(context.graph()) !== 'not_eligible') return mergePolygon;
+
         return mergeNodes;
     }
 

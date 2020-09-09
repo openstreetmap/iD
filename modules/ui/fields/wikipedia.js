@@ -92,8 +92,6 @@ export function uiFieldWikipedia(field, context) {
       .call(langCombo)
       .merge(_langInput);
 
-    utilGetSetValue(_langInput, language()[1]);
-
     _langInput
       .on('blur', changeLang)
       .on('change', changeLang);
@@ -143,14 +141,33 @@ export function uiFieldWikipedia(field, context) {
   }
 
 
-  function language() {
+  function defaultLanguageInfo(skipEnglishFallback) {
+    const langCode = localizer.languageCode().toLowerCase();
+
+    for (let i in _dataWikipedia) {
+      let d = _dataWikipedia[i];
+      // default to the language of iD's current locale
+      if (d[2] === langCode) return d;
+    }
+
+    // fallback to English
+    return skipEnglishFallback ? ['', '', ''] : ['English', 'English', 'en'];
+  }
+
+
+  function language(skipEnglishFallback) {
     const value = utilGetSetValue(_langInput).toLowerCase();
-    const locale = localizer.localeCode().toLowerCase();
-    let localeLanguage;
-    return _dataWikipedia.find(d => {
-      if (d[2] === locale) localeLanguage = d;
-      return d[0].toLowerCase() === value || d[1].toLowerCase() === value || d[2] === value;
-    }) || localeLanguage || ['English', 'English', 'en'];
+
+    for (let i in _dataWikipedia) {
+      let d = _dataWikipedia[i];
+      // return the language already set in the UI, if supported
+      if (d[0].toLowerCase() === value ||
+        d[1].toLowerCase() === value ||
+        d[2] === value) return d;
+    }
+
+    // fallback to English
+    return defaultLanguageInfo(skipEnglishFallback);
   }
 
 
@@ -168,10 +185,11 @@ export function uiFieldWikipedia(field, context) {
   function change(skipWikidata) {
     let value = utilGetSetValue(_titleInput);
     const m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/);
-    const l = m && _dataWikipedia.find(d => m[1] === d[2]);
+    const langInfo = m && _dataWikipedia.find(d => m[1] === d[2]);
     let syncTags = {};
 
-    if (l) {
+    if (langInfo) {
+      const nativeLangName = langInfo[1];
       // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
       value = decodeURIComponent(m[2]).replace(/_/g, ' ');
       if (m[3]) {
@@ -186,7 +204,7 @@ export function uiFieldWikipedia(field, context) {
         value += '#' + anchor.replace(/_/g, ' ');
       }
       value = value.slice(0, 1).toUpperCase() + value.slice(1);
-      utilGetSetValue(_langInput, l[1]);
+      utilGetSetValue(_langInput, nativeLangName);
       utilGetSetValue(_titleInput, value);
     }
 
@@ -250,14 +268,19 @@ export function uiFieldWikipedia(field, context) {
   function updateForTags(tags) {
 
     const value = typeof tags[field.key] === 'string' ? tags[field.key] : '';
+    // Expect tag format of `tagLang:tagArticleTitle`, e.g. `fr:Paris`, with
+    // optional suffix of `#anchor`
     const m = value.match(/([^:]+):([^#]+)(?:#(.+))?/);
-    const l = m && _dataWikipedia.find(d => m[1] === d[2]);
+    const tagLang = m && m[1];
+    const tagArticleTitle = m && m[2];
     let anchor = m && m[3];
+    const tagLangInfo = tagLang && _dataWikipedia.find(d => tagLang === d[2]);
 
     // value in correct format
-    if (l) {
-      utilGetSetValue(_langInput, l[1]);
-      utilGetSetValue(_titleInput, m[2] + (anchor ? ('#' + anchor) : ''));
+    if (tagLangInfo) {
+      const nativeLangName = tagLangInfo[1];
+      utilGetSetValue(_langInput, nativeLangName);
+      utilGetSetValue(_titleInput, tagArticleTitle + (anchor ? ('#' + anchor) : ''));
       if (anchor) {
         try {
           // Best-effort `anchorencode:` implementation
@@ -266,16 +289,19 @@ export function uiFieldWikipedia(field, context) {
           anchor = anchor.replace(/ /g, '_');
         }
       }
-      _wikiURL = 'https://' + m[1] + '.wikipedia.org/wiki/' +
-        m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : '');
+      _wikiURL = 'https://' + tagLang + '.wikipedia.org/wiki/' +
+        tagArticleTitle.replace(/ /g, '_') + (anchor ? ('#' + anchor) : '');
 
     // unrecognized value format
     } else {
       utilGetSetValue(_titleInput, value);
       if (value && value !== '') {
         utilGetSetValue(_langInput, '');
-        _wikiURL = `https://en.wikipedia.org/wiki/Special:Search?search=${value}`;
+        const defaultLangInfo = defaultLanguageInfo();
+        _wikiURL = `https://${defaultLangInfo[2]}.wikipedia.org/w/index.php?fulltext=1&search=${value}`;
       } else {
+        const shownOrDefaultLangInfo = language(true /* skipEnglishFallback */);
+        utilGetSetValue(_langInput, shownOrDefaultLangInfo[1]);
         _wikiURL = '';
       }
     }

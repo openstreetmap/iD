@@ -1,0 +1,35 @@
+{
+    "icon": "maki-pitch",
+    "fields": [
+        "name",
+        "operator",
+        "sport",
+        "address",
+        "building_area",
+        "access_simple"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "level",
+        "opening_hours",
+        "opening_hours/covid19",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "athletic courts",
+        "gym",
+        "sports hall",
+        "sports venue"
+    ],
+    "tags": {
+        "leisure": "sports_hall"
+    },
+    "name": "Gymnasium"
+}

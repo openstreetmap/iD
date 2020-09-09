@@ -14,7 +14,8 @@
         "artwork_type": "bust"
     },
     "reference": {
-        "key": "artwork_type"
+        "key": "artwork_type",
+        "value": "bust"
     },
     "terms": [
         "figure"

@@ -91,7 +91,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (_this.suggestion) {
       let path = presetID.split('/');
       path.pop();  // remove brand name
-      // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+      // NOTE: insert an en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
       return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
     }
     return _this.t('name', { 'default': _this.originalName });
@@ -115,7 +115,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.reference = (geom) => {
+  _this.reference = () => {
     // Lookup documentation on Wikidata...
     const qid = _this.tags.wikidata || _this.tags['brand:wikidata'] || _this.tags['operator:wikidata'];
     if (qid) {
@@ -125,15 +125,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     // Lookup documentation on OSM Wikibase...
     let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
     let value = _this.originalReference.value || _this.tags[key];
-
-    if (geom === 'relation' && key === 'type') {
-      if (value in _this.tags) {
-        key = value;
-        value = _this.tags[key];
-      } else {
-        return { rtype: value };
-      }
-    }
 
     if (value === '*') {
       return { key: key };

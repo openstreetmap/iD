@@ -386,7 +386,7 @@ export function uiPresetList(context) {
                 .append('div')
                 .attr('class', 'label-inner');
 
-            // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+            // NOTE: split/join on en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
             label.selectAll('.namepart')
                 .data(preset.name().split(' – '))
                 .enter()
@@ -425,7 +425,7 @@ export function uiPresetList(context) {
         };
 
         item.preset = preset;
-        item.reference = uiTagReference(preset.reference(entityGeometries()[0]), context);
+        item.reference = uiTagReference(preset.reference(), context);
 
         return item;
     }
