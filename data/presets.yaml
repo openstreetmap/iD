@@ -7244,6 +7244,11 @@ en:
         # place=village
         name: Village
         terms: '<translate with synonyms or related terms for ''Village'', separated by commas>'
+      place/welcome_sign:
+        # 'description=A sign welcoming users to a place, place=welcome'
+        name: Welcome Sign
+        # 'terms: new location'
+        terms: '<translate with synonyms or related terms for ''Welcome Sign'', separated by commas>'
       playground:
         # playground=*
         name: Playground Equipment

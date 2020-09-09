@@ -8924,6 +8924,10 @@
                     "name": "Village",
                     "terms": ""
                 },
+                "place/welcome_sign": {
+                    "name": "Welcome Sign",
+                    "terms": "new location"
+                },
                 "playground/balance_beam": {
                     "name": "Play Balance Beam",
                     "terms": ""

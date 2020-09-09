@@ -1,0 +1,15 @@
+{
+  "icon": "maki-lighthouse",
+  "geometry": [
+    "point",
+    "area"
+  ],
+  "terms": [
+    "new location"
+  ],
+  "tags": {
+    "description": "A sign welcoming users to a place",
+    "place": "welcome"
+  },
+  "name": "Welcome Sign"
+}

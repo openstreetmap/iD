@@ -917,6 +917,7 @@
     {"key": "place", "value": "suburb", "description": "🄿 Borough / Suburb", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/triangle-stroked-15.svg"},
     {"key": "place", "value": "town", "description": "🄿 Town", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/town-15.svg"},
     {"key": "place", "value": "village", "description": "🄿 Village", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/village-15.svg"},
+    {"key": "place", "value": "welcome", "description": "🄿 Welcome Sign", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/lighthouse-15.svg"},
     {"key": "playground", "value": "balancebeam", "description": "🄿 Play Balance Beam", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "playground", "value": "basketrotator", "description": "🄿 Basket Spinner", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},
     {"key": "playground", "value": "basketswing", "description": "🄿 Basket Swing", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/playground-15.svg"},

@@ -939,6 +939,7 @@
   "place/suburb": {"icon": "maki-triangle-stroked", "fields": ["name", "population"], "moreFields": ["{place}", "website"], "geometry": ["point", "area"], "tags": {"place": "suburb"}, "terms": ["boro", "borough", "quarter"], "name": "Borough / Suburb"},
   "place/town": {"icon": "maki-town", "fields": ["name", "population"], "moreFields": ["{place}", "website"], "geometry": ["point", "area"], "tags": {"place": "town"}, "name": "Town"},
   "place/village": {"icon": "maki-village", "fields": ["name", "population"], "moreFields": ["{place}", "website"], "geometry": ["point", "area"], "tags": {"place": "village"}, "name": "Village"},
+  "place/welcome_sign": {"icon": "maki-lighthouse", "geometry": ["point", "area"], "terms": ["new location"], "tags": {"description": "A sign welcoming users to a place", "place": "welcome"}, "name": "Welcome Sign"},
   "playground/balance_beam": {"icon": "maki-playground", "geometry": ["point", "line"], "tags": {"playground": "balancebeam"}, "name": "Play Balance Beam"},
   "playground/basket_spinner": {"icon": "maki-playground", "geometry": ["point"], "terms": ["basket rotator"], "tags": {"playground": "basketrotator"}, "name": "Basket Spinner"},
   "playground/basket_swing": {"icon": "maki-playground", "geometry": ["point"], "tags": {"playground": "basketswing"}, "name": "Basket Swing"},
