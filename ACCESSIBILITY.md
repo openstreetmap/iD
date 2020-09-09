@@ -169,6 +169,7 @@ for more info.
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
 | ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages | [#3120](https://github.com/openstreetmap/iD/issues/3120) |
 | 🟩 | Right-to-left layouts | The [`dir` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) is properly set for languages like Hebrew and Arabic |
+| ❌ | [Language-specific plurals](https://docs.transifex.com/localization-tips-workflows/plurals-and-genders#how-pluralized-strings-are-handled-by-transifex) | English has two plural forms, but some languages need more to be grammatically correct | [#597](https://github.com/openstreetmap/iD/issues/597) |
 | 🟠 | Label icons | Icons should accompany text labels to illustrate the meaning of untranslated terms |
 
 ### Translatability
