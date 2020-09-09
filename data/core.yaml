@@ -331,37 +331,37 @@ en:
         multiple: These features can't be moved because parts of them have not yet been downloaded.
     reflect:
       title:
-        long: Reflect Long
-        short: Reflect Short
+        long: Flip Long
+        short: Flip Short
       description:
         long:
-          single: Reflect this feature across its long axis.
-          multiple: Reflect these features across their long axis.
+          single: Flip this feature across its long axis.
+          multiple: Flip these features across their long axis.
         short:
-          single: Reflect this feature across its short axis.
-          multiple: Reflect these features across their short axis.
+          single: Flip this feature across its short axis.
+          multiple: Flip these features across their short axis.
       key:
         long: T
         short: Y
       annotation:
         long:
-          single: Reflected a feature across its long axis.
-          multiple: Reflected multiple features across their long axis.
+          single: Flipped a feature across its long axis.
+          multiple: Flipped multiple features across their long axis.
         short:
-          single: Reflected a feature across its short axis.
-          multiple: Reflected multiple features across their short axis.
+          single: Flipped a feature across its short axis.
+          multiple: Flipped multiple features across their short axis.
       incomplete_relation:
-        single: This feature can't be reflected because it hasn't been fully downloaded.
-        multiple: These features can't be reflected because they haven't been fully downloaded.
+        single: This feature can't be flipped because it hasn't been fully downloaded.
+        multiple: These features can't be flipped because they haven't been fully downloaded.
       too_large:
-        single: This feature can't be reflected because not enough of it is currently visible.
-        multiple: These features can't be reflected because not enough of them are currently visible.
+        single: This feature can't be flipped because not enough of it is currently visible.
+        multiple: These features can't be flipped because not enough of them are currently visible.
       connected_to_hidden:
-        single: This feature can't be reflected because it is connected to a hidden feature.
-        multiple: These features can't be reflected because some are connected to hidden features.
+        single: This feature can't be flipped because it is connected to a hidden feature.
+        multiple: These features can't be flipped because some are connected to hidden features.
       not_downloaded:
-        single: This feature can't be reflected because parts of it have not yet been downloaded.
-        multiple: These features can't be reflected because parts of them have not yet been downloaded.
+        single: This feature can't be flipped because parts of it have not yet been downloaded.
+        multiple: These features can't be flipped because parts of them have not yet been downloaded.
     rotate:
       title: Rotate
       description:
@@ -2169,8 +2169,8 @@ en:
         orthogonalize: "Square corners of a line or area"
         straighten: "Straighten a line or points"
         circularize: "Circularize a closed line or area"
-        reflect_long: "Reflect features across the longer axis"
-        reflect_short: "Reflect features across the shorter axis"
+        reflect_long: "Flip features across the longer axis"
+        reflect_short: "Flip features across the shorter axis"
         delete: "Delete selected features"
       commands:
         title: "Commands"
