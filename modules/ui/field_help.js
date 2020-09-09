@@ -57,13 +57,13 @@ export function uiFieldHelp(context, fieldName) {
     var replacements = {
         distField: t('restriction.controls.distance'),
         viaField: t('restriction.controls.via'),
-        fromShadow: icon('#iD-turn-shadow', 'pre-text shadow from'),
-        allowShadow: icon('#iD-turn-shadow', 'pre-text shadow allow'),
-        restrictShadow: icon('#iD-turn-shadow', 'pre-text shadow restrict'),
-        onlyShadow: icon('#iD-turn-shadow', 'pre-text shadow only'),
-        allowTurn: icon('#iD-turn-yes', 'pre-text turn'),
-        restrictTurn: icon('#iD-turn-no', 'pre-text turn'),
-        onlyTurn: icon('#iD-turn-only', 'pre-text turn')
+        fromShadow: icon('#iD-turn-shadow', 'inline shadow from'),
+        allowShadow: icon('#iD-turn-shadow', 'inline shadow allow'),
+        restrictShadow: icon('#iD-turn-shadow', 'inline shadow restrict'),
+        onlyShadow: icon('#iD-turn-shadow', 'inline shadow only'),
+        allowTurn: icon('#iD-turn-yes', 'inline turn'),
+        restrictTurn: icon('#iD-turn-no', 'inline turn'),
+        onlyTurn: icon('#iD-turn-only', 'inline turn')
     };
 
 
