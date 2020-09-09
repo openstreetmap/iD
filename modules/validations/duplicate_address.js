@@ -100,11 +100,12 @@ export function validationDuplicateAddress(context) {
         severity: 'warning',
         entityIds: [ dupe.entity1.id, dupe.entity2.id ],
 
-        message: (context) => {
-          const entity1 = context.hasEntity(dupe.entity1.id);
-          const entity2 = context.hasEntity(dupe.entity2.id);
-          const entity1Display = entity1 ? utilDisplayLabel(entity1, context) : 'Entity1';
-          const entity2Display = entity2 ? utilDisplayLabel(entity2, context) : 'Entity2';
+        message: function(context) {
+          const graph = context.graph();
+          const entity1 = graph.hasEntity(this.entityIds[0]);
+          const entity2 = graph.hasEntity(this.entityIds[1]);
+          const entity1Display = entity1 ? utilDisplayLabel(entity1, graph) : 'Entity1';
+          const entity2Display = entity2 ? utilDisplayLabel(entity2, graph) : 'Entity2';
           return t('issues.duplicate_address.message', { entity1: entity1Display, entity2: entity2Display });
         },
 
