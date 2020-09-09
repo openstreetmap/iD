@@ -298,6 +298,10 @@
             "text": "shortcuts.editing.operations.circularize"
           },
           {
+            "shortcuts": ["operations.follow.key"],
+            "text": "shortcuts.editing.operations.follow"
+          },
+          {
             "shortcuts": ["operations.reflect.key.long"],
             "text": "shortcuts.editing.operations.reflect_long"
           },
