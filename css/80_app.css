@@ -33,6 +33,8 @@
 
 .main-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     height: 100%;
     touch-action: none;
@@ -467,10 +469,7 @@ button.disabled .icon.operation use,
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
 .top-toolbar-wrap {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
+    position: relative;
     z-index: 101;
 }
 .top-toolbar {
@@ -748,9 +747,10 @@ button.add-note svg.icon {
 /* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
 .hide-toggle .icon.pre-text {
-    vertical-align: text-top;
+    vertical-align: middle;
     width: 16px;
     height: 16px;
+    margin-top: -3px;
     margin-left: -3px;
 }
 .ideditor[dir='rtl'] .hide-toggle .icon.pre-text {
@@ -882,11 +882,15 @@ a.hide-toggle {
     margin-bottom: 150px;
 }
 
+.sidebar .search-header {
+    position: relative;
+    overflow: hidden;
+}
 .sidebar .search-header .icon {
-    display: block;
+    display: inline-block;
     position: absolute;
     left: 10px;
-    top: 80px;
+    height: 100%;
     pointer-events: none;
 }
 .ideditor[dir='rtl'] .sidebar .search-header .icon {
@@ -895,11 +899,8 @@ a.hide-toggle {
 }
 
 .sidebar .search-header input {
-    position: absolute;
-    top: 60px;
-    height: 60px;
     width: 100%;
-    padding: 5px 10px;
+    padding: 10px 10px;
     border-radius: 0;
     border-width: 0;
     border-bottom-width: 1px;
@@ -1034,7 +1035,7 @@ a.hide-toggle {
 }
 
 .preset-list-button-wrap {
-    height: 62px;
+    min-height: 62px;
     display: flex;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -1045,6 +1046,7 @@ a.hide-toggle {
     height: 100%;
     position: relative;
     display: flex;
+    align-items: center;
 }
 
 .preset-list.filtered .preset-list-item:first-child .preset-list-button {
@@ -1240,7 +1242,6 @@ a.hide-toggle {
 }
 
 .preset-list-button-wrap button.tag-reference-button {
-    height: 100%;
     width: 32px;
     flex: 0 0 auto;
     background: #f6f6f6;
@@ -1267,6 +1268,9 @@ a.hide-toggle {
 }
 .preset-list-button-wrap button.tag-reference-button .icon {
     opacity: .5;
+}
+.preset-list-button-wrap .accessory-buttons {
+    display: flex;
 }
 
 
@@ -1449,7 +1453,6 @@ a.hide-toggle {
     flex-flow: row nowrap;
     width: 100%;
     flex: 1 1 auto;
-    min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
 }
@@ -1463,17 +1466,14 @@ a.hide-toggle {
 .form-field-input-wrap > textarea,
 .form-field-input-wrap > ul.chiplist {
     flex: 1 1 auto;
-    min-height: 30px;
     border: 1px solid #ccc;
     border-top: 0;
     border-radius: 0;
-    overflow: hidden;
     position: relative;
 }
 .form-field-input-wrap > textarea {
     height: 65px;
     border-radius: 0 0 4px 4px;
-    overflow: auto;
 }
 
 /* Buttons inside fields */
@@ -1670,7 +1670,6 @@ a.hide-toggle {
 .form-field-input-multicombo .input-wrap {
     border: 1px solid #ddd;
     width: 100px;
-    height: 31px;
 }
 .form-field-input-multicombo input {
     border: none;
@@ -1757,7 +1756,6 @@ a.hide-toggle {
 }
 .form-field-input-check > input[type="checkbox"] {
     flex: 0 1 auto;
-    min-height: 20px;
     width: 20px;
     margin-top: 0;
 }
@@ -1959,7 +1957,6 @@ a.hide-toggle {
     flex: 1 1 auto;
     display: flex;
     width: 100%;
-    min-height: 30px;
 }
 
 .addr-row > input {
@@ -2888,11 +2885,8 @@ input.key-trap {
 
 
 .over-map {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 71px;
-    bottom: 30px;
+    position: relative;
+    height: 100%;
     pointer-events: none;
     display: flex;
     flex-direction: row-reverse;
@@ -3607,7 +3601,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 .nudge-container input {
     width: 100%;
-    height: 20px;
+    padding: 2px;
     text-align: center;
     border: 0;
 }
@@ -4038,9 +4032,14 @@ img.tile-debug {
 /* Map
 ------------------------------------------------------- */
 .main-map {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow: hidden;
     height: 100%;
+    width: 100%;
     background: #000;
     user-select: none;
     touch-action: none;
@@ -4273,14 +4272,13 @@ img.tile-debug {
 ------------------------------------------------------- */
 .map-footer {
     width: 100%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    position: relative;
     border-radius: 0;
     pointer-events: none;
     display: flex;
     flex-direction: column;
     -ms-user-select: element;
+    flex: 0 0 auto;
 }
 
 .map-footer-bar {
@@ -4316,8 +4314,9 @@ img.tile-debug {
 ------------------------------------------------------- */
 .attribution-wrap {
     width: 100%;
+    position: absolute;
     height: 20px;
-    margin-bottom: 5px;
+    top: -25px;
 }
 
 .attribution-wrap * { pointer-events: all; }
@@ -4409,7 +4408,6 @@ img.tile-debug {
 .map-footer-bar .scale-block {
     vertical-align: bottom;
     width: 250px;
-    max-height: 30px;
     flex: 0 0 250px;
     user-select: none;
 }
@@ -4443,7 +4441,6 @@ img.tile-debug {
 /* Footer - About, Source Switcher
 ------------------------------------------------------- */
 .map-footer-bar .info-block {
-    max-height: 30px;
     flex: 1 1 auto;
 }
 
@@ -4540,6 +4537,9 @@ img.tile-debug {
 }
 .ideditor[dir='rtl'] .api-status {
     text-align: left;
+}
+.api-status:empty {
+    display: none;
 }
 
 .api-status.offline,
@@ -5113,7 +5113,7 @@ img.tile-debug {
 .notice .zoom-to {
     margin: auto;
     width: 300px;
-    height: 70px;
+    padding: 20px 5px;
     font-size: 150%;
     border-radius: 8px;
 }

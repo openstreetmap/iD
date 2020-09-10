@@ -117,6 +117,9 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', 'search-header');
 
+        searchWrap
+            .call(svgIcon('#iD-icon-search', 'pre-text'));
+
         var search = searchWrap
             .append('input')
             .attr('class', 'preset-search-input')
@@ -126,9 +129,6 @@ export function uiPresetList(context) {
             .on('keydown', initialKeydown)
             .on('keypress', keypress)
             .on('input', inputevent);
-
-        searchWrap
-            .call(svgIcon('#iD-icon-search', 'pre-text'));
 
         if (_autofocus) {
             search.node().focus();

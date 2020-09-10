@@ -162,6 +162,72 @@ export function uiInit(context) {
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
+        var overMap = content
+            .append('div')
+            .attr('class', 'over-map');
+
+        // Map controls
+        var controls = overMap
+            .append('div')
+            .attr('class', 'map-controls');
+
+        controls
+            .append('div')
+            .attr('class', 'map-control zoombuttons')
+            .call(uiZoom(context));
+
+        controls
+            .append('div')
+            .attr('class', 'map-control zoom-to-selection-control')
+            .call(uiZoomToSelection(context));
+
+        controls
+            .append('div')
+            .attr('class', 'map-control geolocate-control')
+            .call(uiGeolocate(context));
+
+        // Add panes
+        // This should happen after map is initialized, as some require surface()
+        var panes = overMap
+            .append('div')
+            .attr('class', 'map-panes');
+
+        var uiPanes = [
+            uiPaneBackground(context),
+            uiPaneMapData(context),
+            uiPaneIssues(context),
+            uiPanePreferences(context),
+            uiPaneHelp(context)
+        ];
+
+        uiPanes.forEach(function(pane) {
+            controls
+                .append('div')
+                .attr('class', 'map-control map-pane-control ' + pane.id + '-control')
+                .call(pane.renderToggleButton);
+
+            panes
+                .call(pane.renderPane);
+        });
+
+        ui.info = uiInfo(context);
+
+        // Add absolutely-positioned elements that sit on top of the map
+        // This should happen after the map is ready (center/zoom)
+        overMap
+            .call(uiMapInMap(context))
+            .call(ui.info)
+            .call(uiNotice(context));
+
+
+        overMap
+            .append('div')
+            .attr('class', 'photoviewer')
+            .classed('al', true)       // 'al'=left,  'ar'=right
+            .classed('hide', true)
+            .call(ui.photoviewer);
+
+
         // Add attribution and footer
         var about = content
             .append('div')
@@ -269,73 +335,6 @@ export function uiInit(context) {
         if (!ui.hash.hadHash) {
             map.centerZoom([0, 0], 2);
         }
-
-
-        var overMap = content
-            .append('div')
-            .attr('class', 'over-map');
-
-        // Map controls
-        var controls = overMap
-            .append('div')
-            .attr('class', 'map-controls');
-
-        controls
-            .append('div')
-            .attr('class', 'map-control zoombuttons')
-            .call(uiZoom(context));
-
-        controls
-            .append('div')
-            .attr('class', 'map-control zoom-to-selection-control')
-            .call(uiZoomToSelection(context));
-
-        controls
-            .append('div')
-            .attr('class', 'map-control geolocate-control')
-            .call(uiGeolocate(context));
-
-        // Add panes
-        // This should happen after map is initialized, as some require surface()
-        var panes = overMap
-            .append('div')
-            .attr('class', 'map-panes');
-
-        var uiPanes = [
-            uiPaneBackground(context),
-            uiPaneMapData(context),
-            uiPaneIssues(context),
-            uiPanePreferences(context),
-            uiPaneHelp(context)
-        ];
-
-        uiPanes.forEach(function(pane) {
-            controls
-                .append('div')
-                .attr('class', 'map-control map-pane-control ' + pane.id + '-control')
-                .call(pane.renderToggleButton);
-
-            panes
-                .call(pane.renderPane);
-        });
-
-        ui.info = uiInfo(context);
-
-        // Add absolutely-positioned elements that sit on top of the map
-        // This should happen after the map is ready (center/zoom)
-        overMap
-            .call(uiMapInMap(context))
-            .call(ui.info)
-            .call(uiNotice(context));
-
-
-        overMap
-            .append('div')
-            .attr('class', 'photoviewer')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hide', true)
-            .call(ui.photoviewer);
-
 
         // Bind events
         window.onbeforeunload = function() {

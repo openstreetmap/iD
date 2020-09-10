@@ -41,6 +41,9 @@ export function uiFeatureList(context) {
             .append('div')
             .attr('class', 'search-header');
 
+        searchWrap
+            .call(svgIcon('#iD-icon-search', 'pre-text'));
+
         var search = searchWrap
             .append('input')
             .attr('placeholder', t('inspector.search'))
@@ -49,9 +52,6 @@ export function uiFeatureList(context) {
             .on('keypress', keypress)
             .on('keydown', keydown)
             .on('input', inputevent);
-
-        searchWrap
-            .call(svgIcon('#iD-icon-search', 'pre-text'));
 
         var listWrap = selection
             .append('div')
