@@ -156,14 +156,6 @@ code {
 
 /* Forms
 ------------------------------------------------------- */
-textarea  {
-    resize: vertical;
-    font:normal 12px/20px "-apple-system", BlinkMacSystemFont,
-        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-        "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
-        sans-serif;
-}
-
 textarea,
 input[type=text],
 input[type=search],
@@ -174,19 +166,20 @@ input[type=email] {
     background-color: #fff;
     color: #333;
     border: 1px solid #ccc;
-    padding: 0px 20px 0px 10px;
+    padding: 0px 10px 0px 10px;
     border-radius: 4px;
     text-overflow: ellipsis;
     overflow: auto;
 }
-.ideditor[dir='rtl'] textarea,
-.ideditor[dir='rtl'] input[type=text],
-.ideditor[dir='rtl'] input[type=search],
-.ideditor[dir='rtl'] input[type=number],
-.ideditor[dir='rtl'] input[type=url],
-.ideditor[dir='rtl'] input[type=tel],
-.ideditor[dir='rtl'] input[type=email] {
-    padding: 5px 10px 5px 20px;
+
+textarea  {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    resize: vertical;
+    font:normal 12px/20px "-apple-system", BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
+        sans-serif;
 }
 
 textarea:active,
@@ -378,6 +371,11 @@ button[disabled].action {
     background: #cccccc;
     color: #888;
     cursor: not-allowed;
+}
+
+button.action,
+button.secondary-action {
+    padding: 10px 5px;
 }
 
 @media (hover: hover) {
@@ -634,11 +632,12 @@ button.add-note svg.icon {
 ------------------------------------------------------- */
 .header {
     border-bottom: 1px solid #ccc;
-    height: 60px;
+    padding: 20px 40px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
 }
 
 .header h3 {
@@ -837,6 +836,8 @@ a.hide-toggle {
     width: 50%;
     top: 0;
     bottom: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .pane:first-child {
@@ -845,6 +846,11 @@ a.hide-toggle {
 
 .pane:last-child {
     right: 0;
+}
+.feature-list-pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .inspector-wrap {
@@ -861,18 +867,9 @@ a.hide-toggle {
 .inspector-body {
     overflow-y: scroll;
     overflow-x: hidden;
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.feature-list-pane .inspector-body,
-.preset-list-pane .inspector-body {
-    top: 120px;
-}
-.entity-editor-pane .inspector-body {
-    top: 60px;
+    position: relative;
+    height: 100%;
+    flex: 1 1 100%;
 }
 .entity-editor {
     padding: 20px;
@@ -885,6 +882,7 @@ a.hide-toggle {
 .sidebar .search-header {
     position: relative;
     overflow: hidden;
+    flex: 0 0 auto;
 }
 .sidebar .search-header .icon {
     display: inline-block;
@@ -952,8 +950,6 @@ a.hide-toggle {
 .feature-list-item {
     background-color: #fff;
     font-weight: bold;
-    height: 40px;
-    line-height: 20px;
     display: flex;
 }
 .feature-list-item:active {
@@ -1765,20 +1761,20 @@ a.hide-toggle {
 .form-field-input-check > span.mixed {
     font-style: italic;
 }
-.form-field-input-check > .reverser.button {
+.form-field-input-check > .reverser {
     flex: 0 1 auto;
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     border-radius: 2px;
     padding: 0px 8px;
 }
-.ideditor[dir='ltr'] .form-field-input-check > .reverser.button {
+.ideditor[dir='ltr'] .form-field-input-check > .reverser {
     padding-right: 2px;
 }
-.ideditor[dir='rtl'] .form-field-input-check > .reverser.button {
+.ideditor[dir='rtl'] .form-field-input-check > .reverser {
     padding-left: 2px;
 }
-.form-field-input-check > .reverser.button.hide {
+.form-field-input-check > .reverser.hide {
     display: none;
 }
 .form-field-input-check:active {
@@ -2140,6 +2136,16 @@ a.hide-toggle {
 
 /* Field - Combobox
 ------------------------------------------------------- */
+.ideditor[dir='ltr'] textarea.combobox-input,
+.ideditor[dir='ltr'] input.combobox-input {
+    /* leave room for the caret */
+    padding-right: 20px;
+}
+.ideditor[dir='rtl'] textarea.combobox-input,
+.ideditor[dir='rtl'] input.combobox-input {
+    padding-left: 20px;
+}
+
 div.combobox {
     z-index: 9999;
     display: none;
@@ -2926,6 +2932,8 @@ input.key-trap {
 
 .map-control {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .map-control > button {
     position: relative;
@@ -3746,7 +3754,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin-bottom: 20px;
 }
 
-.help-pane .left-content .icon.inline {
+.help-pane .left-content .icon.inline,
+.curtain-tooltip .icon.inline {
     margin-right: 0;
     margin-left: 0;
     height: 1.34em;
@@ -4200,11 +4209,12 @@ img.tile-debug {
 
 .panel-title {
     padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .panel-title button.close {
-    float: right;
-    height: 20px;
+    padding: 2px;
     background: none;
     color: #ddd;
 }
@@ -4284,7 +4294,8 @@ img.tile-debug {
 .map-footer-bar {
     pointer-events: all;
     display: block;
-    height: 30px;
+    height: 2.5em;
+    position: relative;
 }
 
 .main-footer-wrap,
@@ -4293,7 +4304,7 @@ img.tile-debug {
     flex: 0 0 100%;
     flex-flow: row nowrap;
     justify-content: space-between;
-    max-height: 30px;
+    height: 100%;
     position: absolute;
     right: 0;
     left: 0;
@@ -4305,7 +4316,7 @@ img.tile-debug {
 }
 
 .footer-hide {
-    bottom: -35px;
+    bottom: -100%;
     transition: bottom 75ms linear;
 }
 
@@ -4372,7 +4383,6 @@ img.tile-debug {
     flex-flow: row nowrap;
     align-items: center;
     padding: 2px;
-    height: 30px;
 }
 
 .flash-icon {
@@ -4447,21 +4457,23 @@ img.tile-debug {
 .map-footer-list {
     text-align: right;
     margin-right: 10px;
-    clear: right;
-    overflow: hidden;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    position: relative;
+    height: 100%;
 }
 .ideditor[dir='rtl'] .map-footer-list {
     text-align: left;
-    clear: left;
     margin-left: 10px;
     margin-right: 0;
 }
 
 .map-footer-list li {
-    float: right;
     border-left: 1px solid rgba(255,255,255,.5);
     padding: 5px 0 5px 5px;
     margin-left: 5px;
+    height: 100%;
 }
 .ideditor[dir='rtl'] .map-footer-list li {
     float: left;
@@ -4492,7 +4504,7 @@ img.tile-debug {
 .map-footer-list a.chip .icon {
     width: 14px;
     height: 14px;
-    margin-top: 3px;
+    margin-top: -2px;
 }
 .ideditor[dir='ltr'] .map-footer-list a.chip .icon,
 .ideditor[dir='ltr'] .map-footer-list a.chip span {
