@@ -436,7 +436,7 @@ export function uiIntroArea(context, reveal) {
         });
 
         reveal('.entity-editor-pane',
-            helpString('intro.areas.describe_playground', { button: icon('#iD-icon-close', 'pre-text') }),
+            helpString('intro.areas.describe_playground', { button: icon('#iD-icon-close', 'inline') }),
             { duration: 300 }
         );
 

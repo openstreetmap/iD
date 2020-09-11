@@ -53,10 +53,8 @@ export function uiScale(context) {
         selection.select('.scale-path')
             .attr('d', 'M0.5,0.5v' + tickHeight + 'h' + scale.px + 'v-' + tickHeight);
 
-        selection.select('.scale-textgroup')
-            .attr('transform', 'translate(' + (scale.px + 8) + ',' + tickHeight + ')');
-
         selection.select('.scale-text')
+            .style(localizer.textDirection() === 'ltr' ? 'left' : 'right', (scale.px + 16) + 'px')
             .text(scale.text);
     }
 
@@ -77,10 +75,8 @@ export function uiScale(context) {
             .append('path')
             .attr('class', 'scale-path');
 
-        scalegroup
-            .append('g')
-            .attr('class', 'scale-textgroup')
-            .append('text')
+        selection
+            .append('div')
             .attr('class', 'scale-text');
 
         selection.call(update);

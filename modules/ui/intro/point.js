@@ -254,7 +254,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         reveal('.entity-editor-pane',
-            helpString('intro.points.add_close', { button: icon(href, 'pre-text') })
+            helpString('intro.points.add_close', { button: icon(href, 'inline') })
         );
 
         function continueTo(nextStep) {
@@ -351,7 +351,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.points.update_close', { button: icon('#iD-icon-close', 'pre-text') })
+                helpString('intro.points.update_close', { button: icon('#iD-icon-close', 'inline') })
             );
         }, 500);
 

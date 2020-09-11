@@ -157,21 +157,87 @@ export function uiInit(context) {
             .attr('dir', 'ltr')
             .call(map);
 
-        content
+        var overMap = content
+            .append('div')
+            .attr('class', 'over-map');
+
+        overMap
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
-        // Add attribution and footer
-        var about = content
-            .append('div')
-            .attr('class', 'map-footer');
-
-        about
+        overMap
             .append('div')
             .attr('class', 'attribution-wrap')
             .attr('dir', 'ltr')
             .call(uiAttribution(context));
+
+        // Map controls
+        var controls = overMap
+            .append('div')
+            .attr('class', 'map-controls');
+
+        controls
+            .append('div')
+            .attr('class', 'map-control zoombuttons')
+            .call(uiZoom(context));
+
+        controls
+            .append('div')
+            .attr('class', 'map-control zoom-to-selection-control')
+            .call(uiZoomToSelection(context));
+
+        controls
+            .append('div')
+            .attr('class', 'map-control geolocate-control')
+            .call(uiGeolocate(context));
+
+        // Add panes
+        // This should happen after map is initialized, as some require surface()
+        var panes = overMap
+            .append('div')
+            .attr('class', 'map-panes');
+
+        var uiPanes = [
+            uiPaneBackground(context),
+            uiPaneMapData(context),
+            uiPaneIssues(context),
+            uiPanePreferences(context),
+            uiPaneHelp(context)
+        ];
+
+        uiPanes.forEach(function(pane) {
+            controls
+                .append('div')
+                .attr('class', 'map-control map-pane-control ' + pane.id + '-control')
+                .call(pane.renderToggleButton);
+
+            panes
+                .call(pane.renderPane);
+        });
+
+        ui.info = uiInfo(context);
+
+        // Add absolutely-positioned elements that sit on top of the map
+        // This should happen after the map is ready (center/zoom)
+        overMap
+            .call(uiMapInMap(context))
+            .call(ui.info)
+            .call(uiNotice(context));
+
+
+        overMap
+            .append('div')
+            .attr('class', 'photoviewer')
+            .classed('al', true)       // 'al'=left,  'ar'=right
+            .classed('hide', true)
+            .call(ui.photoviewer);
+
+
+        // Add footer
+        var about = content
+            .append('div')
+            .attr('class', 'map-footer');
 
         about
             .append('div')
@@ -269,73 +335,6 @@ export function uiInit(context) {
         if (!ui.hash.hadHash) {
             map.centerZoom([0, 0], 2);
         }
-
-
-        var overMap = content
-            .append('div')
-            .attr('class', 'over-map');
-
-        // Map controls
-        var controls = overMap
-            .append('div')
-            .attr('class', 'map-controls');
-
-        controls
-            .append('div')
-            .attr('class', 'map-control zoombuttons')
-            .call(uiZoom(context));
-
-        controls
-            .append('div')
-            .attr('class', 'map-control zoom-to-selection-control')
-            .call(uiZoomToSelection(context));
-
-        controls
-            .append('div')
-            .attr('class', 'map-control geolocate-control')
-            .call(uiGeolocate(context));
-
-        // Add panes
-        // This should happen after map is initialized, as some require surface()
-        var panes = overMap
-            .append('div')
-            .attr('class', 'map-panes');
-
-        var uiPanes = [
-            uiPaneBackground(context),
-            uiPaneMapData(context),
-            uiPaneIssues(context),
-            uiPanePreferences(context),
-            uiPaneHelp(context)
-        ];
-
-        uiPanes.forEach(function(pane) {
-            controls
-                .append('div')
-                .attr('class', 'map-control map-pane-control ' + pane.id + '-control')
-                .call(pane.renderToggleButton);
-
-            panes
-                .call(pane.renderPane);
-        });
-
-        ui.info = uiInfo(context);
-
-        // Add absolutely-positioned elements that sit on top of the map
-        // This should happen after the map is ready (center/zoom)
-        overMap
-            .call(uiMapInMap(context))
-            .call(ui.info)
-            .call(uiNotice(context));
-
-
-        overMap
-            .append('div')
-            .attr('class', 'photoviewer')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hide', true)
-            .call(ui.photoviewer);
-
 
         // Bind events
         window.onbeforeunload = function() {
@@ -553,19 +552,21 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var shownPanes = context.container().selectAll('.map-pane.shown');
+        var hidePanes = context.container().selectAll('.map-pane.shown');
 
         var side = localizer.textDirection() === 'ltr' ? 'right' : 'left';
 
-        shownPanes
-            .classed('shown', false);
+        hidePanes
+            .classed('shown', false)
+            .classed('hide', true);
 
         context.container().selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
-            shownPanes
-                .style('display', 'none')
+            hidePanes
+                .classed('shown', false)
+                .classed('hide', true)
                 .style(side, '-500px');
 
             context.container().selectAll('.' + showPane.attr('pane') + '-control button')
@@ -573,10 +574,9 @@ export function uiInit(context) {
 
             showPane
                 .classed('shown', true)
-                .style('display', 'block');
-            if (shownPanes.empty()) {
+                .classed('hide', false);
+            if (hidePanes.empty()) {
                 showPane
-                    .style('display', 'block')
                     .style(side, '-500px')
                     .transition()
                     .duration(200)
@@ -586,14 +586,17 @@ export function uiInit(context) {
                     .style(side, '0px');
             }
         } else {
-            shownPanes
-                .style('display', 'block')
+            hidePanes
+                .classed('shown', true)
+                .classed('hide', false)
                 .style(side, '0px')
                 .transition()
                 .duration(200)
                 .style(side, '-500px')
                 .on('end', function() {
-                    d3_select(this).style('display', 'none');
+                    d3_select(this)
+                        .classed('shown', false)
+                        .classed('hide', true);
                 });
         }
     };

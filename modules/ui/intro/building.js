@@ -300,7 +300,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.buildings.close', { button: icon('#iD-icon-close', 'pre-text') })
+                helpString('intro.buildings.close', { button: icon('#iD-icon-close', 'inline') })
             );
         }, 500);
 
@@ -628,7 +628,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.buildings.close', { button: icon('#iD-icon-close', 'pre-text') })
+                helpString('intro.buildings.close', { button: icon('#iD-icon-close', 'inline') })
             );
         }, 500);
 
