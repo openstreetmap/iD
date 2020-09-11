@@ -3546,10 +3546,14 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin: 5px;
 }
 
+.display-control .control-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
 .display-control .display-option-input {
     height: 20px;
-    width: 155px;
-    max-width: 100%;
+    flex: 1 1 100%;
 }
 
 .display-control button {
@@ -3559,6 +3563,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin-right: 0px;
     vertical-align: text-bottom;
     border-radius: 4px;
+    flex: 0 0 auto;
 }
 .ideditor[dir='rtl'] .display-control button {
     margin-left: 0px;
