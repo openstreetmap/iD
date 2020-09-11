@@ -4447,13 +4447,13 @@ img.tile-debug {
     transform: scaleX(-1);
 }
 
-.scale-block .scale text {
-    font: 12px sans-serif;
-    stroke: none;
-    fill: #ccc;
-    text-anchor: start;
+.scale-block .scale-text {
+    display: inline-block;
+    position: absolute;
+    color: #ccc;
+    top: 0.45em;
 }
-.ideditor[dir='rtl'] .scale-block .scale text {
+.ideditor[dir='rtl'] .scale-block .scale-text {
     transform: scaleX(-1);
 }
 
