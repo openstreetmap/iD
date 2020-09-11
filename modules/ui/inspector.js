@@ -147,7 +147,7 @@ export function uiInspector(context) {
                 });
 
             if (preset) {
-                entityEditor.presets([preset])
+                entityEditor.presets([preset]);
             }
             editorPane
                 .call(entityEditor);
