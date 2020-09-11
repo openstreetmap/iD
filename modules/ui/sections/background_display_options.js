@@ -18,8 +18,8 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
     var _detected = utilDetect();
     var _storedOpacity = prefs('background-opacity');
-    var _minVal = 0.25;
-    var _maxVal = _detected.cssfilters ? 2 : 1;
+    var _minVal = 0;
+    var _maxVal = _detected.cssfilters ? 3 : 1;
 
     var _sliders = _detected.cssfilters
         ? ['brightness', 'contrast', 'saturation', 'sharpness']
