@@ -157,14 +157,20 @@ export function uiInit(context) {
             .attr('dir', 'ltr')
             .call(map);
 
-        content
+        var overMap = content
+            .append('div')
+            .attr('class', 'over-map');
+
+        overMap
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
-        var overMap = content
+        overMap
             .append('div')
-            .attr('class', 'over-map');
+            .attr('class', 'attribution-wrap')
+            .attr('dir', 'ltr')
+            .call(uiAttribution(context));
 
         // Map controls
         var controls = overMap
@@ -228,16 +234,10 @@ export function uiInit(context) {
             .call(ui.photoviewer);
 
 
-        // Add attribution and footer
+        // Add footer
         var about = content
             .append('div')
             .attr('class', 'map-footer');
-
-        about
-            .append('div')
-            .attr('class', 'attribution-wrap')
-            .attr('dir', 'ltr')
-            .call(uiAttribution(context));
 
         about
             .append('div')
@@ -552,19 +552,21 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var shownPanes = context.container().selectAll('.map-pane.shown');
+        var hidePanes = context.container().selectAll('.map-pane.shown');
 
         var side = localizer.textDirection() === 'ltr' ? 'right' : 'left';
 
-        shownPanes
-            .classed('shown', false);
+        hidePanes
+            .classed('shown', false)
+            .classed('hide', true);
 
         context.container().selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
-            shownPanes
-                .style('display', 'none')
+            hidePanes
+                .classed('shown', false)
+                .classed('hide', true)
                 .style(side, '-500px');
 
             context.container().selectAll('.' + showPane.attr('pane') + '-control button')
@@ -572,10 +574,9 @@ export function uiInit(context) {
 
             showPane
                 .classed('shown', true)
-                .style('display', 'block');
-            if (shownPanes.empty()) {
+                .classed('hide', false);
+            if (hidePanes.empty()) {
                 showPane
-                    .style('display', 'block')
                     .style(side, '-500px')
                     .transition()
                     .duration(200)
@@ -585,14 +586,17 @@ export function uiInit(context) {
                     .style(side, '0px');
             }
         } else {
-            shownPanes
-                .style('display', 'block')
+            hidePanes
+                .classed('shown', true)
+                .classed('hide', false)
                 .style(side, '0px')
                 .transition()
                 .duration(200)
                 .style(side, '-500px')
                 .on('end', function() {
-                    d3_select(this).style('display', 'none');
+                    d3_select(this)
+                        .classed('shown', false)
+                        .classed('hide', true);
                 });
         }
     };

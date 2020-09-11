@@ -137,8 +137,8 @@ kbd {
     text-align: center;
     padding: 3px 5px;
     font-size: 11px;
-    line-height: 12px;
-    min-width: 12px;
+    line-height: 1.3;
+    min-width: 0.9em;
     vertical-align: baseline;
     background-color: #fcfcfc;
     border: solid 1px #ccc;
@@ -171,7 +171,15 @@ input[type=email] {
     text-overflow: ellipsis;
     overflow: auto;
 }
-
+input[type=text],
+input[type=search],
+input[type=number],
+input[type=url],
+input[type=tel],
+input[type=email] {
+    /* need this since line-height interpretation may vary by font or browser */
+    height: 2.585em;
+}
 textarea  {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -597,11 +605,13 @@ button.add-note svg.icon {
     opacity: .5;
     position: absolute;
     right: 4px;
-    bottom: 26px;
-}
-.spinner img {
+    bottom: 4px;
     height: 20px;
     width: 20px;
+}
+.spinner img {
+    height: 100%;
+    width: 100%;
     background: transparent;
     border-radius: 100%;
 }
@@ -711,7 +721,7 @@ button.add-note svg.icon {
     border-top: 1px solid #ccc;
     background-color: #f6f6f6;
     width: 100%;
-    height: 30px;
+    height: 2.5em;
     z-index: 1;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -814,14 +824,15 @@ a.hide-toggle {
     left: 0;
     bottom: 0;
     right: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar-component .body {
     width: 100%;
+    height: 100%;
     overflow: auto;
-    top: 60px;
-    bottom: 0;
-    position: absolute;
+    position: relative;
 }
 
 .panewrap {
@@ -835,7 +846,7 @@ a.hide-toggle {
     position: absolute;
     width: 50%;
     top: 0;
-    bottom: 30px;
+    bottom: 2.5em;
     display: flex;
     flex-direction: column;
 }
@@ -898,7 +909,8 @@ a.hide-toggle {
 
 .sidebar .search-header input {
     width: 100%;
-    padding: 10px 10px;
+    padding: 0 10px;
+    height: 3em;
     border-radius: 0;
     border-width: 0;
     border-bottom-width: 1px;
@@ -924,6 +936,9 @@ a.hide-toggle {
     position: relative;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
+}
+.no-results-item {
+    padding: 10px;
 }
 
 .geocode-item {
@@ -968,7 +983,7 @@ a.hide-toggle {
 }
 .feature-list-item .label {
     text-align: left;
-    padding: 10px 10px;
+    padding: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -1584,6 +1599,7 @@ a.hide-toggle {
 ------------------------------------------------------- */
 .form-field-input-combo > input:only-of-type {
     border-radius: 0 0 4px 4px;
+    width: 100%;
 }
 .form-field-input-combo.empty-combobox input,
 .form-field-input-multicombo .empty-combobox input {
@@ -1621,7 +1637,6 @@ a.hide-toggle {
 .form-field-input-multicombo li.chip {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
-    line-height: 25px;
     max-width: 100%;
 }
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
@@ -1670,7 +1685,6 @@ a.hide-toggle {
 .form-field-input-multicombo input {
     border: none;
     width: 100%;
-    height: 100%;
 }
 
 .form-field-input-multicombo input:focus {
@@ -1848,7 +1862,7 @@ a.hide-toggle {
     padding: 0;
     opacity: 0;
     width: 0;
-    line-height: 0;
+    height: 0;
     display: block;
     overflow: hidden;
 }
@@ -2352,12 +2366,11 @@ div.combobox {
     display: flex;
     flex-flow: row nowrap;
     flex-direction: row-reverse;
-    margin-top: -25px;
+    margin-top: -28px;
 }
 button.raw-tag-option {
-    flex: 0 0 20px;
-    height: 20px;
-    width: 20px;
+    flex: 0 0 auto;
+    padding: 3px;
     background: #aaa;
     color: #eee;
     margin: 0 3px;
@@ -2380,7 +2393,7 @@ button.raw-tag-option.selected {
 button.raw-tag-option svg.icon {
     width: 14px;
     height: 14px;
-    vertical-align: text-bottom;
+    display: block;
 }
 .ideditor[dir='ltr'] button.raw-tag-option-list {
     transform: scaleX(-1);
@@ -2682,7 +2695,7 @@ input.key-trap {
 .qa-header-icon {
     background-color: #fff;
     padding: 10px;
-    flex: 0 0 62px;
+    flex: 0 0 auto;
     position: relative;
     width: 60px;
     height: 60px;
@@ -2747,7 +2760,7 @@ input.key-trap {
 }
 .comment-avatar {
     padding: 10px;
-    flex: 0 0 62px;
+    flex: 0 0 auto;
 }
 .comment-avatar .icon.comment-avatar-icon {
     width: 40px;
@@ -2850,7 +2863,7 @@ input.key-trap {
 .data-header-icon {
     background-color: #fff;
     padding: 10px;
-    flex: 0 0 62px;
+    flex: 0 0 auto;
     position: relative;
     width: 60px;
     height: 60px;
@@ -2897,6 +2910,7 @@ input.key-trap {
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-end;
+    overflow: hidden;
 }
 .over-map > * {
     pointer-events: auto;
@@ -3369,6 +3383,7 @@ button.autofix.action.active {
 .issues-option label {
     display: table-cell;
     padding: 0 10px;
+    white-space: nowrap;
 }
 
 .layer-list.issues-list li.issue {
@@ -3405,8 +3420,8 @@ button.autofix.action.active {
 
 input.square-degrees-input {
     padding: 2px !important; /* important needed for rtl */
-    width: 40px;
-    height: unset;
+    width: 3em;
+    height: 2em;
     text-align: center;
     background: rgba(0,0,0,0);
     color: currentColor;
@@ -3706,9 +3721,9 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     width: 400px;
     max-width: 100%;
     height: 100%;
-    padding-bottom: 60px;
-    overflow: hidden;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
 }
 
 .map-pane.help-pane {
@@ -3720,6 +3735,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     flex-flow: row nowrap;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
+    flex: 0 0 auto;
 }
 
 .pane-heading h2 {
@@ -3982,8 +3998,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     opacity: 1;
     color: #666;
     padding: 5px 10px;
-    line-height: 20px;
     width: 100%;
+    height: auto;
     border: 0;
 }
 .inspector-hover .form-field-input-radio .structure-extras-wrap {
@@ -4324,27 +4340,24 @@ img.tile-debug {
 /* Attribution
 ------------------------------------------------------- */
 .attribution-wrap {
-    width: 100%;
     position: absolute;
-    height: 20px;
-    top: -25px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .attribution-wrap * { pointer-events: all; }
 
 .attribution-wrap .base-layer-attribution,
 .attribution-wrap .overlay-layer-attribution {
-    position: absolute;
     color: #ccc;
     font-size: 10px;
 }
-
-.attribution-wrap .base-layer-attribution {
-    left: 10px;
-}
-
 .attribution-wrap .overlay-layer-attribution {
-    right: 10px;
+    text-align: right;
 }
 
 .attribution-wrap .overlay-layer-attribution .attribution:not(:last-child):after {
@@ -4418,14 +4431,17 @@ img.tile-debug {
 .map-footer-bar .scale-block {
     vertical-align: bottom;
     width: 250px;
-    flex: 0 0 250px;
+    flex: 0 0 auto;
     user-select: none;
+    height: 30px;
+    align-self: center;
 }
 
 .scale-block .scale {
-    height: 30px;
+    height: 100%;
     width: 100%;
     cursor: pointer;
+    display: block;
 }
 .ideditor[dir='rtl'] .scale-block .scale {
     transform: scaleX(-1);
@@ -4474,9 +4490,10 @@ img.tile-debug {
     padding: 5px 0 5px 5px;
     margin-left: 5px;
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 .ideditor[dir='rtl'] .map-footer-list li {
-    float: left;
     border-left: none;
     border-right: 1px solid rgba(255,255,255,.5);
     margin-left: 0;
@@ -4497,7 +4514,7 @@ img.tile-debug {
 }
 
 .map-footer-list a.chip {
-    padding: 2px 4px 3px 4px;
+    padding: 1px 4px 1px 4px;
     border-radius: 2px;
     color: #eee;
 }
@@ -4717,7 +4734,7 @@ img.tile-debug {
     color: #7092ff;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
-    height: 160px;
+    min-height: 160px;
     text-align: center;
     width: 100%;
 }
@@ -4980,20 +4997,6 @@ img.tile-debug {
 
 .ideditor.mode-save .user-info img {
     float: left;
-}
-
-.ideditor.mode-save h3 small.count {
-    margin-right: 10px;
-    text-align: center;
-    float: left;
-    height: 12px;
-    min-width: 12px;
-    font-size: 12px;
-    line-height: 12px;
-    border-radius: 24px;
-    padding: 5px;
-    background: #7092ff;
-    color: #fff;
 }
 
 .note-save .field-warning,
