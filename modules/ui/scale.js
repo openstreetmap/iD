@@ -54,7 +54,7 @@ export function uiScale(context) {
             .attr('d', 'M0.5,0.5v' + tickHeight + 'h' + scale.px + 'v-' + tickHeight);
 
         selection.select('.scale-text')
-            .style('left', (scale.px + 16) + 'px')
+            .style(localizer.textDirection() === 'ltr' ? 'left' : 'right', (scale.px + 16) + 'px')
             .text(scale.text);
     }
 
