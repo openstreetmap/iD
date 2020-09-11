@@ -8329,7 +8329,7 @@ en:
       shop/music:
         # shop=music
         name: Music Store
-        # 'terms: tape casettes,CDs,compact discs,vinyl records'
+        # 'terms: tape cassettes,CDs,compact discs,vinyl records'
         terms: '<translate with synonyms or related terms for ''Music Store'', separated by commas>'
       shop/musical_instrument:
         # shop=musical_instrument

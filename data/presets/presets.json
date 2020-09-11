@@ -1169,7 +1169,7 @@
   "shop/money_lender": {"icon": "temaki-money_hand", "fields": ["{shop}", "currency_multi"], "geometry": ["point", "area"], "tags": {"shop": "money_lender"}, "name": "Money Lender"},
   "shop/motorcycle_repair": {"icon": "temaki-motorcycle_repair", "fields": ["{shop}", "service/vehicle"], "geometry": ["point", "area"], "terms": ["auto", "bike", "garage", "motorcycle", "repair", "service"], "tags": {"shop": "motorcycle_repair"}, "name": "Motorcycle Repair Shop"},
   "shop/motorcycle": {"icon": "fas-motorcycle", "fields": ["name", "brand", "{shop}"], "geometry": ["point", "area"], "terms": ["bike"], "tags": {"shop": "motorcycle"}, "name": "Motorcycle Dealership"},
-  "shop/music": {"icon": "fas-compact-disc", "geometry": ["point", "area"], "terms": ["tape casettes", "CDs", "compact discs", "vinyl records"], "tags": {"shop": "music"}, "name": "Music Store"},
+  "shop/music": {"icon": "fas-compact-disc", "geometry": ["point", "area"], "terms": ["tape cassettes", "CDs", "compact discs", "vinyl records"], "tags": {"shop": "music"}, "name": "Music Store"},
   "shop/musical_instrument": {"icon": "fas-guitar", "geometry": ["point", "area"], "terms": ["guitar"], "tags": {"shop": "musical_instrument"}, "name": "Musical Instrument Store"},
   "shop/newsagent": {"icon": "fas-newspaper", "geometry": ["point", "area"], "tags": {"shop": "newsagent"}, "name": "Newspaper/Magazine Shop"},
   "shop/nutrition_supplements": {"icon": "fas-pills", "geometry": ["point", "area"], "terms": ["health", "supplement", "vitamin"], "tags": {"shop": "nutrition_supplements"}, "name": "Nutrition Supplements Store"},

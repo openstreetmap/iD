@@ -9832,7 +9832,7 @@
                 },
                 "shop/music": {
                     "name": "Music Store",
-                    "terms": "tape casettes,CDs,compact discs,vinyl records"
+                    "terms": "tape cassettes,CDs,compact discs,vinyl records"
                 },
                 "shop/musical_instrument": {
                     "name": "Musical Instrument Store",
