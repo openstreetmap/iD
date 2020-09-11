@@ -2200,10 +2200,11 @@ div.combobox {
 .combobox-caret {
     display: inline-block;
     position: relative;
-    height: 100%;
+    height: 5px;
     width: 30px !important;
     margin-left: -30px;
-    vertical-align: top;
+    align-self: center;
+    vertical-align: middle;
     cursor: pointer;
 }
 .ideditor[dir='rtl'] .combobox-caret {
