@@ -172,9 +172,10 @@ export function uiSectionBackgroundOffset(context) {
             .append('div')
             .attr('class', 'nudge-inner-rect')
             .append('input')
+            .attr('type', 'text')
             .on('change', inputOffset);
 
-        containerEnter
+        nudgeEnter
             .append('div')
             .selectAll('button')
             .data(_directions).enter()
