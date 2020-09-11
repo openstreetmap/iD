@@ -2634,15 +2634,6 @@ img.tag-reference-wiki-image {
     */
 }
 
-/* hidden field to prevent user from tabbing out of the sidebar */
-input.key-trap {
-    height: 0px;
-    width: 0px;
-    padding: 0px;
-    border: 1px solid rgba(0,0,0,0);
-}
-
-
 /* add tag, add relation buttons */
 .add-row {
     display: flex;
