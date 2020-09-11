@@ -285,8 +285,11 @@ export function uiSectionRawTagEditor(id, context) {
         if (_tagView !== 'text') return;
 
         var selection = d3_select(this);
-        selection.style('height', null);
-        selection.style('height', selection.node().scrollHeight + 5 + 'px');
+        var matches = selection.node().value.match(/\n/g);
+        var lineCount = 2 + Number(matches && matches.length);
+        var lineHeight = 20;
+
+        selection.style('height', lineCount * lineHeight + 'px');
     }
 
     function stringify(s) {
