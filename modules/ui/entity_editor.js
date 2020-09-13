@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { presetManager } from '../presets';
