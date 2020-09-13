@@ -132,7 +132,7 @@ export function uiInit(context) {
         container
             .append('svg')
             .attr('id', 'ideditor-defs')
-            .call(svgDefs(context));
+            .call(ui.svgDefs);
 
         container
             .append('div')
@@ -491,6 +491,8 @@ export function uiInit(context) {
     ui.lastPointerType = function() {
         return _lastPointerType;
     };
+
+    ui.svgDefs = svgDefs(context);
 
     ui.flash = uiFlash(context);
 

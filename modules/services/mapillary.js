@@ -5,7 +5,6 @@ import { select as d3_select } from 'd3-selection';
 import RBush from 'rbush';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { svgDefs } from '../svg/defs';
 import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
 
 
@@ -46,7 +45,7 @@ var _mlyCache;
 var _mlyClicks;
 var _mlySelectedImageKey;
 var _mlyViewer;
-
+var _loadViewerPromise;
 
 function abortRequest(controller) {
     controller.abort();
@@ -376,7 +375,9 @@ export default {
     },
 
 
-    loadViewer: function(context) {
+    ensureViewerLoaded: function(context) {
+        if (_loadViewerPromise) return _loadViewerPromise;
+
         // add mly-wrapper
         var wrap = context.container().select('.photoviewer')
             .selectAll('.mly-wrapper')
@@ -388,33 +389,60 @@ export default {
             .attr('class', 'photo-wrapper mly-wrapper')
             .classed('hide', true);
 
-        // load mapillary-viewercss
-        d3_select('head').selectAll('#ideditor-mapillary-viewercss')
-            .data([0])
-            .enter()
-            .append('link')
-            .attr('id', 'ideditor-mapillary-viewercss')
-            .attr('rel', 'stylesheet')
-            .attr('href', context.asset(viewercss));
+        var that = this;
 
-        // load mapillary-viewerjs
-        d3_select('head').selectAll('#ideditor-mapillary-viewerjs')
-            .data([0])
-            .enter()
-            .append('script')
-            .attr('id', 'ideditor-mapillary-viewerjs')
-            .attr('src', context.asset(viewerjs));
+        _loadViewerPromise = new Promise((resolve, reject) => {
 
-        // load mapillary signs sprite
-        var defs = context.container().select('defs');
-        defs.call(svgDefs(context).addSprites, ['mapillary-sprite', 'mapillary-object-sprite'], false /* don't override colors */ );
-
-        // Register viewer resize handler
-        context.ui().photoviewer.on('resize.mapillary', function() {
-            if (_mlyViewer) {
-                _mlyViewer.resize();
+            var loadedCount = 0;
+            function loaded() {
+                loadedCount += 1;
+                // wait until both files are loaded
+                if (loadedCount === 2) resolve();
             }
+
+            var head = d3_select('head');
+
+            // load mapillary-viewercss
+            head.selectAll('#ideditor-mapillary-viewercss')
+                .data([0])
+                .enter()
+                .append('link')
+                .attr('id', 'ideditor-mapillary-viewercss')
+                .attr('rel', 'stylesheet')
+                .attr('crossorigin', 'anonymous')
+                .attr('href', context.asset(viewercss))
+                .on('load.serviceMapillary', loaded)
+                .on('error.serviceMapillary', reject);
+
+            // load mapillary-viewerjs
+            head.selectAll('#ideditor-mapillary-viewerjs')
+                .data([0])
+                .enter()
+                .append('script')
+                .attr('id', 'ideditor-mapillary-viewerjs')
+                .attr('crossorigin', 'anonymous')
+                .attr('src', context.asset(viewerjs))
+                .on('load.serviceMapillary', loaded)
+                .on('error.serviceMapillary', reject);
+        })
+        .catch(function() {
+            _loadViewerPromise = null;
+        })
+        .then(function() {
+            that.initViewer(context);
         });
+
+        return _loadViewerPromise;
+    },
+
+    loadSignResources: function(context) {
+        context.ui().svgDefs.addSprites(['mapillary-sprite'], false /* don't override colors */ );
+        return this;
+    },
+
+    loadObjectResources: function(context) {
+        context.ui().svgDefs.addSprites(['mapillary-object-sprite'], false /* don't override colors */ );
+        return this;
     },
 
 
@@ -466,53 +494,51 @@ export default {
 
 
     updateViewer: function(context, imageKey) {
-        if (!imageKey) return this;
-
-        if (!_mlyViewer) {
-            this.initViewer(context, imageKey);
-        } else {
+        if (_mlyViewer && imageKey) {
             _mlyViewer.moveToKey(imageKey)
                 .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
-
         return this;
     },
 
 
-    initViewer: function(context, imageKey) {
+    initViewer: function(context) {
         var that = this;
-        if (window.Mapillary && imageKey) {
-            var opts = {
-                baseImageSize: 320,
-                component: {
-                    cover: false,
-                    keyboard: false,
-                    tag: true
-                }
-            };
+        if (!window.Mapillary) return;
 
-            // Disable components requiring WebGL support
-            if (!Mapillary.isSupported() && Mapillary.isFallbackSupported()) {
-                _mlyFallback = true;
-                opts.component = {
-                    cover: false,
-                    direction: false,
-                    imagePlane: false,
-                    keyboard: false,
-                    mouse: false,
-                    sequence: false,
-                    tag: false,
-                    image: true,        // fallback
-                    navigation: true    // fallback
-                };
+        var opts = {
+            baseImageSize: 320,
+            component: {
+                cover: false,
+                keyboard: false,
+                tag: true
             }
+        };
 
-            _mlyViewer = new Mapillary.Viewer('ideditor-mly', clientId, null, opts);
-            _mlyViewer.on('nodechanged', nodeChanged);
-            _mlyViewer.on('bearingchanged', bearingChanged);
-            _mlyViewer.moveToKey(imageKey)
-                .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
+        // Disable components requiring WebGL support
+        if (!Mapillary.isSupported() && Mapillary.isFallbackSupported()) {
+            _mlyFallback = true;
+            opts.component = {
+                cover: false,
+                direction: false,
+                imagePlane: false,
+                keyboard: false,
+                mouse: false,
+                sequence: false,
+                tag: false,
+                image: true,        // fallback
+                navigation: true    // fallback
+            };
         }
+
+        _mlyViewer = new Mapillary.Viewer('ideditor-mly', clientId, null, opts);
+        _mlyViewer.on('nodechanged', nodeChanged);
+        _mlyViewer.on('bearingchanged', bearingChanged);
+
+        // Register viewer resize handler
+        context.ui().photoviewer.on('resize.mapillary', function() {
+            if (_mlyViewer) _mlyViewer.resize();
+        });
 
         // nodeChanged: called after the viewer has changed images and is ready.
         //

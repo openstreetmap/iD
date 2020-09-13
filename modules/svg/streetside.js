@@ -98,13 +98,16 @@ export function svgStreetside(projection, context, dispatch) {
         _selectedSequence = d.sequenceKey;
 
         service
-            .selectImage(context, d)
-            .then(response => {
-                if (response.status === 'ok'){
-                    service.showViewer(context, _viewerYaw);
-                }
+            .ensureViewerLoaded(context)
+            .then(function() {
+                service
+                    .selectImage(context, d)
+                    .then(response => {
+                        if (response.status === 'ok'){
+                            service.showViewer(context, _viewerYaw);
+                        }
+                    });
             });
-
 
         context.map().centerEase(d.loc);
     }

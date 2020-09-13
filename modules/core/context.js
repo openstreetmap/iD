@@ -559,7 +559,6 @@ export function coreContext() {
       _map.init();
       _validator.init();
       _features.init();
-      _photos.init();
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)
@@ -571,7 +570,11 @@ export function coreContext() {
       }
 
       // if the container isn't available, e.g. when testing, don't load the UI
-      if (!context.container().empty()) _ui.ensureLoaded();
+      if (!context.container().empty()) {
+        _ui.ensureLoaded().then(function() {
+          _photos.init();
+        });
+      }
     }
   };
 

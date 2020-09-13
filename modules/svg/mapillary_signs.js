@@ -33,6 +33,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
+        service.loadSignResources(context);
         editOn();
     }
 
@@ -71,10 +72,13 @@ export function svgMapillarySigns(projection, context, dispatch) {
             }
         });
 
-        service
-            .selectImage(context, imageKey)
-            .updateViewer(context, imageKey)
-            .showViewer(context);
+        service.ensureViewerLoaded(context)
+            .then(function() {
+                service
+                    .selectImage(context, imageKey)
+                    .updateViewer(context, imageKey)
+                    .showViewer(context);
+            });
     }
 
 

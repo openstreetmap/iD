@@ -89,9 +89,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .selectImage(context, d.key)
-            .updateViewer(context, d.key)
-            .showViewer(context);
+            .ensureViewerLoaded(context)
+            .then(function() {
+                service
+                    .selectImage(context, d.key)
+                    .updateViewer(context, d.key)
+                    .showViewer(context);
+            });
 
         context.map().centerEase(d.loc);
     }

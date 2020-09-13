@@ -33,6 +33,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
+        service.loadObjectResources(context);
         editOn();
     }
 
@@ -71,10 +72,13 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             }
         });
 
-        service
-            .selectImage(context, imageKey)
-            .updateViewer(context, imageKey)
-            .showViewer(context);
+        service.ensureViewerLoaded(context)
+            .then(function() {
+                service
+                    .selectImage(context, imageKey)
+                    .updateViewer(context, imageKey)
+                    .showViewer(context);
+            });
     }
 
 

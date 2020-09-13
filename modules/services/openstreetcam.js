@@ -236,11 +236,14 @@ export default {
 
 
     loadViewer: function(context) {
-        var that = this;
 
         // add osc-wrapper
         var wrap = context.container().select('.photoviewer').selectAll('.osc-wrapper')
             .data([0]);
+
+        if (wrap.enter().empty()) return this;
+
+        var that = this;
 
         var wrapEnter = wrap.enter()
             .append('div')
@@ -347,6 +350,8 @@ export default {
                     .updateViewer(context, nextImage);
             };
         }
+
+        return this;
     },
 
 
