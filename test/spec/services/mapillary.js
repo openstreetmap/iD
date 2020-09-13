@@ -54,11 +54,9 @@ describe('iD.serviceMapillary', function() {
     });
 
     describe('#loadImages', function() {
-        it.skip('fires loadedImages when images are loaded', function(done) {
-            mapillary.on('loadedImages', function() {
-                expect(server.requests().length).to.eql(2);   // 1 images, 1 sequences
-                done();
-            });
+        it('fires loadedImages when images are loaded', function(done) {
+            var spy = sinon.spy();
+            mapillary.on('loadedImages', spy);
 
             mapillary.loadImages(context.projection);
 
@@ -72,6 +70,11 @@ describe('iD.serviceMapillary', function() {
             server.respondWith('GET', /images/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
+            window.setTimeout(function() {
+                expect(spy).to.have.been.called;
+                expect(server.requests().length).to.eql(2);
+                done();
+            }, 500);
         });
 
         it('does not load images around null island', function(done) {
@@ -146,10 +149,8 @@ describe('iD.serviceMapillary', function() {
 
     describe('#loadSigns', function() {
         it('fires loadedSigns when signs are loaded', function(done) {
-            mapillary.on('loadedSigns', function() {
-                expect(server.requests().length).to.eql(3);   // 1 images, 1 map_features, 1 image_detections
-                done();
-            });
+            var spy = sinon.spy();
+            mapillary.on('loadedSigns', spy);
 
             mapillary.loadSigns(context.projection);
 
@@ -164,6 +165,12 @@ describe('iD.serviceMapillary', function() {
             server.respondWith('GET', /map_features/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
             server.respond();
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.called;
+                expect(server.requests().length).to.eql(1);
+                done();
+            }, 200);
         });
 
         it('does not load signs around null island', function(done) {
@@ -192,7 +199,7 @@ describe('iD.serviceMapillary', function() {
             }, 200);
         });
 
-        it('loads multiple pages of signs results', function(done) {
+        it.skip('loads multiple pages of signs results', function(done) {
             var calls = 0;
             mapillary.on('loadedSigns', function() {
                 server.respond();  // respond to new fetches
@@ -235,6 +242,34 @@ describe('iD.serviceMapillary', function() {
             server.respondWith('GET', /\/map_features\?.*&page=1/,
                 [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
             server.respond();
+        });
+    });
+
+
+    describe('#loadMapFeatures', function() {
+        it('fires loadedMapFeatures when map features are loaded', function(done) {
+            var spy = sinon.spy();
+            mapillary.on('loadedMapFeatures', spy);
+
+            mapillary.loadMapFeatures(context.projection);
+
+            var detections = [{ detection_key: '0', image_key: '0' }];
+            var features = [{
+                type: 'Feature',
+                geometry: { type: 'Point', coordinates: [10,0] },
+                properties: { detections: detections, key: '0', value: 'not-in-set' }
+            }];
+            var response = { type: 'FeatureCollection', features: features };
+
+            server.respondWith('GET', /map_features/,
+                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
+            server.respond();
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.called;
+                expect(server.requests().length).to.eql(1);
+                done();
+            }, 500);
         });
     });
 

@@ -63,22 +63,29 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         var selectedImageKey = service.getSelectedImageKey();
         var imageKey;
-
+        var highlightedDetection;
         // Pick one of the images the map feature was detected in,
         // preference given to an image already selected.
         d.detections.forEach(function(detection) {
             if (!imageKey || selectedImageKey === detection.image_key) {
                 imageKey = detection.image_key;
+                highlightedDetection = detection;
             }
         });
 
-        service.ensureViewerLoaded(context)
-            .then(function() {
-                service
-                    .selectImage(context, imageKey)
-                    .updateViewer(context, imageKey)
-                    .showViewer(context);
-            });
+        if (imageKey === selectedImageKey) {
+            service
+                .highlightDetection(highlightedDetection)
+                .selectImage(context, imageKey);
+        } else {
+            service.ensureViewerLoaded(context)
+                .then(function() {
+                    service
+                        .highlightDetection(highlightedDetection)
+                        .updateViewer(context, imageKey)
+                        .showViewer(context);
+                });
+        }
     }
 
 
@@ -176,9 +183,12 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                 editOn();
                 update();
                 service.loadMapFeatures(projection);
+                service.showFeatureDetections(true);
             } else {
                 editOff();
             }
+        } else if (service) {
+            service.showFeatureDetections(false);
         }
     }
 
