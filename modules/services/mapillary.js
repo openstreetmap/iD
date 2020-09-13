@@ -448,12 +448,6 @@ export default {
         })
         .then(function() {
             that.initViewer(context);
-
-            var hash = utilStringQs(window.location.hash);
-            if (hash.photo) {
-                that.updateViewer(context, hash.photo);
-                that.showViewer(context);
-            }
         });
 
         return _loadViewerPromise;
@@ -546,7 +540,7 @@ export default {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
-                hash.photo = imageKey;
+                hash.photo = 'mapillary-' + imageKey;
             } else {
                 delete hash.photo;
             }
