@@ -164,10 +164,10 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         // actions can be replayed on the main graph exactly in the same order.
         // (It is unintuitive, but the order of ways returned from graph.parentWays()
         // is arbitrary, depending on how the main graph and vgraph were built)
-        var splitAll = actionSplit(v.id);
+        var splitAll = actionSplit(v.id).keepHistoryOn('first');
         if (!splitAll.disabled(vgraph)) {
             splitAll.ways(vgraph).forEach(function(way) {
-                var splitOne = actionSplit(v.id).limitWays([way.id]);
+                var splitOne = actionSplit(v.id).limitWays([way.id]).keepHistoryOn('first');
                 actions.push(splitOne);
                 vgraph = splitOne(vgraph);
             });

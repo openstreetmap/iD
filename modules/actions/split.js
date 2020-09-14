@@ -22,6 +22,8 @@ import { utilArrayIntersection, utilWrap } from '../util';
 //
 export function actionSplit(nodeId, newWayIds) {
     var _wayIDs;
+    // the strategy for picking which way will have a new version and which way is newly created
+    var _keepHistoryOn = 'longest'; // 'longest', 'first'
 
     // The IDs of the ways actually created by running this action
     var createdWayIDs = [];
@@ -115,7 +117,8 @@ export function actionSplit(nodeId, newWayIds) {
             nodesB = wayA.nodes.slice(idx);
         }
 
-        if (totalLengthBetweenNodes(graph, nodesB) > totalLengthBetweenNodes(graph, nodesA)) {
+        if (_keepHistoryOn === 'longest' &&
+            totalLengthBetweenNodes(graph, nodesB) > totalLengthBetweenNodes(graph, nodesA)) {
             // keep the history on the longer way, regardless of the node count
             wayA = wayA.update({ nodes: nodesB });
             wayB = wayB.update({ nodes: nodesA });
@@ -275,6 +278,13 @@ export function actionSplit(nodeId, newWayIds) {
     action.limitWays = function(val) {
         if (!arguments.length) return _wayIDs;
         _wayIDs = val;
+        return action;
+    };
+
+
+    action.keepHistoryOn = function(val) {
+        if (!arguments.length) return _keepHistoryOn;
+        _keepHistoryOn = val;
         return action;
     };
 
