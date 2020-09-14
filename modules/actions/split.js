@@ -1,5 +1,5 @@
 import { actionAddMember } from './add_member';
-import { geoSphericalDistance } from '../geo';
+import { geoSphericalDistance } from '../geo/geo';
 import { osmIsOldMultipolygonOuterMember } from '../osm/multipolygon';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
@@ -26,6 +26,13 @@ export function actionSplit(nodeId, newWayIds) {
     // The IDs of the ways actually created by running this action
     var createdWayIDs = [];
 
+    function dist(graph, nA, nB) {
+        var locA = graph.entity(nA).loc;
+        var locB = graph.entity(nB).loc;
+        var epsilon = 1e-6;
+        return (locA && locB) ? geoSphericalDistance(locA, locB) : epsilon;
+    }
+
     // If the way is closed, we need to search for a partner node
     // to split the way at.
     //
@@ -47,23 +54,16 @@ export function actionSplit(nodeId, newWayIds) {
             return utilWrap(index, nodes.length);
         }
 
-        function dist(nA, nB) {
-            var locA = graph.entity(nA).loc;
-            var locB = graph.entity(nB).loc;
-            var epsilon = 1e-6;
-            return (locA && locB) ? geoSphericalDistance(locA, locB) : epsilon;
-        }
-
         // calculate lengths
         length = 0;
         for (i = wrap(idxA + 1); i !== idxA; i = wrap(i + 1)) {
-            length += dist(nodes[i], nodes[wrap(i - 1)]);
+            length += dist(graph, nodes[i], nodes[wrap(i - 1)]);
             lengths[i] = length;
         }
 
         length = 0;
         for (i = wrap(idxA - 1); i !== idxA; i = wrap(i - 1)) {
-            length += dist(nodes[i], nodes[wrap(i + 1)]);
+            length += dist(graph, nodes[i], nodes[wrap(i + 1)]);
             if (length < lengths[i]) {
                 lengths[i] = length;
             }
@@ -71,7 +71,7 @@ export function actionSplit(nodeId, newWayIds) {
 
         // determine best opposite node to split
         for (i = 0; i < nodes.length; i++) {
-            var cost = lengths[i] / dist(nodes[idxA], nodes[i]);
+            var cost = lengths[i] / dist(graph, nodes[idxA], nodes[i]);
             if (cost > best) {
                 idxB = i;
                 best = cost;
@@ -81,6 +81,13 @@ export function actionSplit(nodeId, newWayIds) {
         return idxB;
     }
 
+    function totalLengthBetweenNodes(graph, nodes) {
+        var totalLength = 0;
+        for (var i = 0; i < nodes.length - 1; i++) {
+            totalLength += dist(graph, nodes[i], nodes[i + 1]);
+        }
+        return totalLength;
+    }
 
     function split(graph, wayA, newWayId) {
         var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
@@ -108,8 +115,14 @@ export function actionSplit(nodeId, newWayIds) {
             nodesB = wayA.nodes.slice(idx);
         }
 
-        wayA = wayA.update({ nodes: nodesA });
-        wayB = wayB.update({ nodes: nodesB });
+        if (totalLengthBetweenNodes(graph, nodesB) > totalLengthBetweenNodes(graph, nodesA)) {
+            // keep the history on the longer way, regardless of the node count
+            wayA = wayA.update({ nodes: nodesB });
+            wayB = wayB.update({ nodes: nodesA });
+        } else {
+            wayA = wayA.update({ nodes: nodesA });
+            wayB = wayB.update({ nodes: nodesB });
+        }
 
         graph = graph.replace(wayA);
         graph = graph.replace(wayB);
