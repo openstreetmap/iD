@@ -5533,7 +5533,7 @@
                 },
                 "amenity/cafe/bubble_tea": {
                     "name": "Bubble Tea Cafe",
-                    "terms": "boba,bubble milk tea,pearl milk tea,taiwanese tea drink,tapioca"
+                    "terms": "boba,bubble milk tea,pearl milk tea,taiwanese tea drink,tapioca,pearl tea,boba drink"
                 },
                 "amenity/cafe/coffee_shop": {
                     "name": "Coffeehouse",
@@ -9960,7 +9960,7 @@
                 },
                 "shop/supermarket": {
                     "name": "Supermarket",
-                    "terms": "grocery,store,shop"
+                    "terms": "grocery,store,shop,grocery store,market,food market"
                 },
                 "shop/supermarket/organic": {
                     "name": "Organic Supermarket",

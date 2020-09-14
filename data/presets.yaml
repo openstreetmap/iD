@@ -3198,7 +3198,7 @@ en:
       amenity/cafe/bubble_tea:
         # 'amenity=cafe, cuisine=bubble_tea'
         name: Bubble Tea Cafe
-        # 'terms: boba,bubble milk tea,pearl milk tea,taiwanese tea drink,tapioca'
+        # 'terms: boba,bubble milk tea,pearl milk tea,taiwanese tea drink,tapioca,pearl tea,boba drink'
         terms: '<translate with synonyms or related terms for ''Bubble Tea Cafe'', separated by commas>'
       amenity/cafe/coffee_shop:
         # 'amenity=cafe, cuisine=coffee_shop'
@@ -8484,7 +8484,7 @@ en:
       shop/supermarket:
         # shop=supermarket
         name: Supermarket
-        # 'terms: grocery,store,shop'
+        # 'terms: grocery,store,shop,grocery store,market,food market'
         terms: '<translate with synonyms or related terms for ''Supermarket'', separated by commas>'
       shop/supermarket/organic:
         # 'shop=supermarket, organic=only'

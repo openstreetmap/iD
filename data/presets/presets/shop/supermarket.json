@@ -13,10 +13,9 @@
         "grocery",
         "store",
         "shop",
-        "grocery store"
-        "market"
+        "grocery store",
+        "market",
         "food market"
-        
     ],
     "tags": {
         "shop": "supermarket"
