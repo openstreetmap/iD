@@ -122,7 +122,7 @@ export function uiPanelHistory(context) {
         selection
             .append('h4')
             .attr('class', 'history-heading')
-            .text(singular || t('info_panels.history.selected', { n: selected.length }));
+            .text(singular || t('info_panels.selected', { n: selected.length }));
 
         if (!singular) return;
 

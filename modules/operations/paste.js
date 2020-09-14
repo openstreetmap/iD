@@ -78,16 +78,12 @@ export function operationPaste(context) {
         if (!ids.length) {
             return t('operations.paste.nothing_copied');
         }
-        return ids.length === 1 ?
-            t('operations.paste.description.single', { feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph) }) :
-            t('operations.paste.description.multiple', { n: ids.length.toString() });
+        return t('operations.paste.description', { feature: utilDisplayLabel(oldGraph.entity(ids[0]), oldGraph), n: ids.length });
     };
 
     operation.annotation = function() {
         var ids = context.copyIDs();
-        return ids.length === 1 ?
-            t('operations.paste.annotation.single') :
-            t('operations.paste.annotation.multiple', { n: ids.length.toString() });
+        return t('operations.paste.annotation', { n: ids.length });
     };
 
     operation.id = 'paste';

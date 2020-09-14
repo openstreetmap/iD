@@ -44,15 +44,17 @@ export function uiContributors(context) {
         if (u.length > limit) {
             var count = d3_select(document.createElement('span'));
 
+            var othersNum = u.length - limit + 1;
+
             count.append('a')
                 .attr('target', '_blank')
                 .attr('href', function() {
                     return osm.changesetsURL(context.map().center(), context.map().zoom());
                 })
-                .text(u.length - limit + 1);
+                .text(othersNum);
 
             wrap.append('span')
-                .html(t('contributors.truncated_list', { users: userList.html(), count: count.html() }));
+                .html(t('contributors.truncated_list', { n: othersNum, users: userList.html(), count: count.html() }));
 
         } else {
             wrap.append('span')

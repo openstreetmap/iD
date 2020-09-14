@@ -79,7 +79,7 @@ export function operationExtract(context, selectedIDs) {
 
 
     operation.annotation = function () {
-        return t('operations.extract.annotation.' + _amount, { n: selectedIDs.length });
+        return t('operations.extract.annotation', { n: selectedIDs.length });
     };
 
 

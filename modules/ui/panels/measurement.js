@@ -67,7 +67,7 @@ export function uiPanelMeasurement(context) {
             });
 
             heading = selected.length === 1 ? selected[0].id :
-                t('info_panels.measurement.selected', { n: selected.length.toLocaleString(locale) });
+                t('info_panels.selected', { n: selected.length });
 
             if (selected.length) {
                 var extent = geoExtent();

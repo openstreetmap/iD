@@ -58,7 +58,7 @@ export function operationSplit(context, selectedIDs) {
     operation.annotation = function() {
         return ways.length === 1 ?
             t('operations.split.annotation.' + context.graph().geometry(ways[0].id)) :
-            t('operations.split.annotation.multiple', { n: ways.length });
+            t('operations.split.annotation.feature', { n: ways.length });
     };
 
 
