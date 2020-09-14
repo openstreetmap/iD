@@ -78,8 +78,8 @@ export function rendererPhotos(context) {
         if (hash.photo_overlay) {
             var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
             hashOverlayIDs.forEach(function(id) {
-                var layer = context.layers().layer(id);
-                if (layer) layer.enabled(true);
+                var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
+                if (layer && !layer.enabled()) layer.enabled(true);
             });
         }
         if (hash.photo) {
@@ -90,7 +90,12 @@ export function rendererPhotos(context) {
                 var serviceId = results[1];
                 var photoKey = results[2];
                 var service = services[serviceId];
-                if (service.ensureViewerLoaded) {
+                if (service && service.ensureViewerLoaded) {
+
+                    // if we're showing a photo then make sure its layer is enabled too
+                    var layer = _layerIDs.indexOf(serviceId) !== -1 && context.layers().layer(serviceId);
+                    if (layer && !layer.enabled()) layer.enabled(true);
+
                     service.ensureViewerLoaded(context)
                         .then(function() {
                             service.updateViewer(context, photoKey);
