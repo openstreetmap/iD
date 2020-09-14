@@ -90,42 +90,60 @@ documentation, repository gardening, and other stuff that makes developers happy
 * <sub>[![chore][chore]][chore_link]
 [![chore-dependency][chore-dependency]][chore-dependency_link]
 [![chore-documentation][chore-documentation]][chore-documentation_link]
-[![chore-greenkeeper][chore-greenkeeper]][chore-greenkeeper_link]</sub>
+[![chore-dependabot][chore-dependabot]][chore-dependabot_link]</sub>
 
 [chore]: http://labl.es/svg?text=chore&bgcolor=fef2c0
 [chore-dependency]: http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0
 [chore-documentation]: http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0
-[chore-greenkeeper]: http://labl.es/svg?text=chore-greenkeeper&bgcolor=fef2c0
+[chore-dependabot]: http://labl.es/svg?text=chore-dependabot&bgcolor=fef2c0
 
 [chore_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore
 [chore-dependency_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependency
 [chore-documentation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-documentation
-[chore-greenkeeper_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-greenkeeper
+[chore-dependabot_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependabot
 
-Light blue labels are for **features**. We use labels to group them into categories.
+Light blue labels are for **components**, the specific parts of iD that concern the issue.
 
 * <sub>[![core][core]][core_link]
-[![localization][localization]][localization_link]
-[![performance][performance]][performance_link]
+[![operation][operation]][operation_link]
 [![preset][preset]][preset_link]
-[![renderer][renderer]][renderer_link]
+[![streetlevel][streetlevel]][streetlevel_link]
 [![validation][validation]][validation_link]</sub>
 
 [core]: http://labl.es/svg?text=core&bgcolor=c5def5
-[localization]: http://labl.es/svg?text=localization&bgcolor=c5def5
-[performance]: http://labl.es/svg?text=performance&bgcolor=c5def5
+[operation]: http://labl.es/svg?text=operation&bgcolor=c5def5
 [preset]: http://labl.es/svg?text=preset&bgcolor=c5def5
-[renderer]: http://labl.es/svg?text=renderer&bgcolor=c5def5
+[streetlevel]: http://labl.es/svg?text=streetlevel&bgcolor=c5def5
 [validation]: http://labl.es/svg?text=validation&bgcolor=c5def5
 
 [core_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acore
-[localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
-[performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
+[operation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%operation
 [preset_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apreset
-[renderer_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Arenderer
+[streetlevel_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Astreetlevel
 [validation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Avalidation
 
-Dark Grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
+Dark teal labels are for **categories**, the high-level concepts that the issue falls under.
+
+* <sub>[![accessibility][accessibility]][accessibility_link]
+[![compatibility][compatibility]][compatibility_link]
+[![localization][localization]][localization_link]
+[![performance][performance]][performance_link]
+[![usability][usability]][usability_link]</sub>
+
+[accessibility]: http://labl.es/svg?text=accessibility&bgcolor=007f99
+[compatibility]: http://labl.es/svg?text=compatibility&bgcolor=007f99
+[localization]: http://labl.es/svg?text=localization&bgcolor=007f99
+[performance]: http://labl.es/svg?text=performance&bgcolor=007f99
+[usability]: http://labl.es/svg?text=usability&bgcolor=007f99
+
+[accessibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aaccessibility
+[compatibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acompatibility
+[localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
+[performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
+[usability_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Ausability
+
+
+Dark grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
 open while we wait for something to happen.
 
 * <sub>[![waitfor][waitfor]][waitfor_link]
@@ -146,7 +164,7 @@ open while we wait for something to happen.
 [waitfor-info_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-info
 [waitfor-upstream_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-upstream
 
-Light Grey labels are for **wontfix items**. We've decided these doesn't belong in
+Light grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
 (ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
 
