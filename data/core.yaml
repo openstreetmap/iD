@@ -1600,6 +1600,13 @@ en:
         reference: "All roads, paths, and ferry routes should connect to form a single routing network."
       highway:
         message: "{highway} is disconnected from other roads and paths"
+    duplicate_address:
+      title: "Duplicate Addresses"
+      message: "{entity1} and {entity2} contain similar addresses"
+      tip: "Find potentially duplicate addresses."
+      reference:
+        text: "Addresses should not share the same housenumber unless they differ in other attributes like floor or unit. Consider merging these addresses or adding additional attributes to make them unique."
+        tags: "The duplicate address tags are listed below:"
     fixme_tag:
       message: '{feature} has a "Fix Me" request'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
