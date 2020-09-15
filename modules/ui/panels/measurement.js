@@ -12,9 +12,6 @@ import { services } from '../../services';
 import { utilGetAllNodes } from '../../util';
 
 export function uiPanelMeasurement(context) {
-    var locale = localizer.localeCode();
-    var isImperial = !localizer.usesMetric();
-
 
     function radiansToMeters(r) {
         // using WGS84 authalic radius (6371007.1809 m)
@@ -45,6 +42,8 @@ export function uiPanelMeasurement(context) {
         var graph = context.graph();
         var selectedNoteID = context.selectedNoteID();
         var osm = services.osm;
+        var isImperial = !localizer.usesMetric();
+        var localeCode = localizer.localeCode();
 
         var heading;
         var center, location, centroid;
@@ -133,7 +132,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .text(t('info_panels.measurement.node_count') + ':')
                 .append('span')
-                .text(totalNodeCount.toLocaleString(locale));
+                .text(totalNodeCount.toLocaleString(localeCode));
         }
 
         if (area) {
