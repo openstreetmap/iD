@@ -1,6 +1,7 @@
 import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';
 import { utilStringQs } from '../util';
+import { utilArrayUniq } from '../util/array';
 
 let _mainLocalizer = coreLocalizer(); // singleton
 let _t = _mainLocalizer.t;
@@ -39,8 +40,10 @@ export function coreLocalizer() {
     // }
     let _localeStrings = {};
 
-    // the current locale parameters
+    // the current locale
     let _localeCode = 'en-US';
+    // `_localeCodes` must contain `_localeCode` first, optionally followed by fallbacks
+    let _localeCodes = ['en-US', 'en'];
     let _languageCode = 'en';
     let _textDirection = 'ltr';
     let _usesMetric = false;
@@ -49,6 +52,7 @@ export function coreLocalizer() {
 
     // getters for the current locale parameters
     localizer.localeCode = () => _localeCode;
+    localizer.localeCodes = () => _localeCodes;
     localizer.languageCode = () => _languageCode;
     localizer.textDirection = () => _textDirection;
     localizer.usesMetric = () => _usesMetric;
@@ -89,25 +93,18 @@ export function coreLocalizer() {
             })
             .then(() => {
                 let requestedLocales = (_preferredLocaleCodes || [])
-                    // list of locales preferred by the browser in priority order
+                    // List of locales preferred by the browser in priority order.
+                    // This always includes an `en` fallback, so we know at least one is valid.
                     .concat(utilDetect().browserLocales);
-                _localeCode = bestSupportedLocale(requestedLocales);
 
-                // always try to load the preferred locale
-                let loadStringsPromise = localizer.loadLocale(_localeCode);
+                _localeCodes = localesToUseFrom(requestedLocales);
+                // run iD in the highest-priority locale; the rest are fallbacks
+                _localeCode = _localeCodes[0];
 
-                if (!_dataLocales[_localeCode] ||
-                    _dataLocales[_localeCode].pct !== 1) {
-
-                    loadStringsPromise = Promise.all([
-                        loadStringsPromise,
-                        // Load the English locale as a fallback if the preferred locale
-                        // isn't 100% complete
-                        localizer.loadLocale('en')
-                    ]);
-                }
-
-                return loadStringsPromise;
+                const loadStringsPromises = _localeCodes.map(function(code) {
+                    return localizer.loadLocale(code);
+                });
+                return Promise.all(loadStringsPromises);
             })
             .then(() => {
                 updateForCurrentLocale();
@@ -115,36 +112,36 @@ export function coreLocalizer() {
             .catch(err => console.error(err));  // eslint-disable-line
     };
 
-    // Returns the best locale from `locales` supported by iD, if any
-    function bestSupportedLocale(locales) {
+    // Returns the locales from `requestedLocales` supported by iD that we should use
+    function localesToUseFrom(requestedLocales) {
         let supportedLocales = _dataLocales;
 
-        for (let i in locales) {
-            let locale = locales[i];
-            if (locale.includes('-')) { // full locale ('es-ES')
+        let toLoad = [];
 
-                if (supportedLocales[locale]) return locale;
+        for (let i in requestedLocales) {
+            let locale = requestedLocales[i];
+            if (supportedLocales[locale]) {
+                toLoad.push(locale);
+            }
 
-                // If full locale not supported ('es-FAKE'), fallback to the base ('es')
+            if (locale.includes('-')) {
+                // Full locale ('es-ES'), add fallback to the base ('es')
                 let langPart = locale.split('-')[0];
-                if (supportedLocales[langPart]) return langPart;
-
-            } else { // base locale ('es')
-
-                // prefer a lower-priority full locale with this base ('es' < 'es-ES')
-                let fullLocale = locales.find((locale2, index) => {
-                    return index > i &&
-                        locale2 !== locale &&
-                        locale2.split('-')[0] === locale &&
-                        supportedLocales[locale2];
-                });
-                if (fullLocale) return fullLocale;
-
-                if (supportedLocales[locale]) return locale;
+                if (supportedLocales[langPart]) {
+                    toLoad.push(langPart);
+                }
             }
         }
 
-        return null;
+        toLoad = utilArrayUniq(toLoad);
+
+        // this is guaranteed to always return an index since `en` is always listed
+        // and `en` always has full coverage
+        let fullCoverageIndex = toLoad.findIndex(function(locale) {
+            return supportedLocales[locale].pct === 1;
+        });
+        // we only need to load locales up until we find one with full coverage
+        return toLoad.slice(0, fullCoverageIndex + 1);
     }
 
     function updateForCurrentLocale() {
@@ -242,7 +239,7 @@ export function coreLocalizer() {
 
         let path = stringId
           .split('.')
-          .map(stringId => stringId.replace(/<TX_DOT>/g, '.'))
+          .map(s => s.replace(/<TX_DOT>/g, '.'))
           .reverse();
 
         let result = _localeStrings[locale];
@@ -295,9 +292,12 @@ export function coreLocalizer() {
         }
         // no localized string found...
 
-        if (locale !== 'en') {
-          // Fallback to the English string since it's the only language with guaranteed 100% coverage
-          return localizer.t(stringId, replacements, 'en');
+        // attempt to fallback to a lower-priority langauge
+        let fallbackIndex = _localeCodes.indexOf(locale) + 1;
+        if (fallbackIndex < _localeCodes.length) {
+            // eventually this will be 'en' or another locale with 100% coverage
+            let fallback = _localeCodes[fallbackIndex];
+            return localizer.t(stringId, replacements, fallback);
         }
 
         if (replacements && 'default' in replacements) {
