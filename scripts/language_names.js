@@ -92,7 +92,7 @@ exports.languageNamesInLanguageOf = function(code) {
   }
 
   return translatedLangsByCode;
-}
+};
 
 
 exports.scriptNamesInLanguageOf = function(code) {
@@ -110,4 +110,4 @@ exports.scriptNamesInLanguageOf = function(code) {
   });
 
   return translatedScripts;
-}
+};
