@@ -20,10 +20,13 @@ export function coreLocalizer() {
 
     let _dataLanguages = {};
 
-    // `localeData` is an object containing all _supported_ locale codes -> language info.
+    // `_dataLocales` is an object containing all _supported_ locale codes -> language info.
+    // * `rtl` - right-to-left or left-to-right text direction
+    // * `pct` - the percent of strings translated; 1 = 100%, full coverage
+    //
     // {
-    // en: { rtl: false, languageNames: {…}, scriptNames: {…} },
-    // de: { rtl: false, languageNames: {…}, scriptNames: {…} },
+    // en: { rtl: false, pct: {…} },
+    // de: { rtl: false, pct: {…} },
     // …
     // }
     let _dataLocales = {};
@@ -90,12 +93,21 @@ export function coreLocalizer() {
                     .concat(utilDetect().browserLocales);
                 _localeCode = bestSupportedLocale(requestedLocales);
 
-                return Promise.all([
-                    // always load the English locale strings as fallbacks
-                    localizer.loadLocale('en'),
-                    // load the preferred locale
-                    localizer.loadLocale(_localeCode)
-                ]);
+                // always try to load the preferred locale
+                let loadStringsPromise = localizer.loadLocale(_localeCode);
+
+                if (!_dataLocales[_localeCode] ||
+                    _dataLocales[_localeCode].pct !== 1) {
+
+                    loadStringsPromise = Promise.all([
+                        loadStringsPromise,
+                        // Load the English locale as a fallback if the preferred locale
+                        // isn't 100% complete
+                        localizer.loadLocale('en')
+                    ]);
+                }
+
+                return loadStringsPromise;
             })
             .then(() => {
                 updateForCurrentLocale();

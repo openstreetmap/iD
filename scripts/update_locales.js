@@ -6,7 +6,7 @@ const request = require('request').defaults({ maxSockets: 1 });
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
 
-const resources = ['core', 'presets', 'imagery', 'community'];
+const resourceIds = ['core', 'presets', 'imagery', 'community'];
 const outdir = 'dist/locales/';
 const apiroot = 'https://www.transifex.com/api/2';
 const projectURL = `${apiroot}/project/id-editor`;
@@ -57,7 +57,36 @@ dataShortcuts.forEach(tab => {
   });
 });
 
-asyncMap(resources, getResource, (err, results) => {
+let coverageByLocaleCode = {};
+
+// There's a race condition here, but it's highly unlikely that the info will
+// return after the resources. There's an error check just in case.
+asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
+asyncMap(resourceIds, getResource, gotResource);
+
+function getResourceInfo(resourceId, callback) {
+  let url = 'https://api.transifex.com/organizations/openstreetmap/projects/id-editor/resources/' + resourceId;
+  request.get(url, { auth : auth }, (err, resp, body) => {
+    if (err) return callback(err);
+    console.log(`${resp.statusCode}: ${url}`);
+    let content = JSON.parse(body);
+    callback(null, content);
+  });
+}
+function gotResourceInfo(err, results) {
+  if (err) return console.log(err);
+  results.forEach(function(info) {
+    for (let code in info.stats) {
+      let coveragePart = info.stats[code].translated.percentage / results.length;
+
+      code = code.replace(/_/g, '-');
+      if (coverageByLocaleCode[code] === undefined) coverageByLocaleCode[code] = 0;
+      coverageByLocaleCode[code] += coveragePart;
+    }
+  });
+}
+
+function gotResource(err, results) {
   if (err) return console.log(err);
 
   // merge in strings fetched from transifex
@@ -73,7 +102,7 @@ asyncMap(resources, getResource, (err, results) => {
 
   // write files and fetch language info for each locale
   let dataLocales = {
-    en: { rtl: false }
+    en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
     (code, done) => {
@@ -94,8 +123,18 @@ asyncMap(resources, getResource, (err, results) => {
           } else if (code === 'ku') {
             rtl = false;
           }
+
+          let coverage = coverageByLocaleCode[code];
+          if (coverage === undefined) {
+            console.log('Could not get language coverage');
+            process.exit(1);
+          }
+          // we don't need high precision here, but we need to know if it's exactly 100% or not
+          coverage = Math.floor(coverage * 100) / 100;
+
           dataLocales[code] = {
-            rtl: rtl
+            rtl: rtl,
+            pct: coverage
           };
           done();
         });
@@ -113,11 +152,11 @@ asyncMap(resources, getResource, (err, results) => {
       }
     }
   );
-});
+}
 
 
-function getResource(resource, callback) {
-  let resourceURL = `${projectURL}/resource/${resource}`;
+function getResource(resourceId, callback) {
+  let resourceURL = `${projectURL}/resource/${resourceId}`;
   getLanguages(resourceURL, (err, codes) => {
     if (err) return callback(err);
 
@@ -126,11 +165,11 @@ function getResource(resource, callback) {
 
       let locale = {};
       results.forEach((result, i) => {
-        if (resource === 'community' && Object.keys(result).length) {
+        if (resourceId === 'community' && Object.keys(result).length) {
           locale[codes[i]] = { community: result };  // add namespace
 
         } else {
-          if (resource === 'presets') {
+          if (resourceId === 'presets') {
             // remove terms that were not really translated
             let presets = (result.presets && result.presets.presets) || {};
             for (const key of Object.keys(presets)) {
@@ -144,7 +183,7 @@ function getResource(resource, callback) {
                 }
               }
             }
-          } else if (resource === 'fields') {
+          } else if (resourceId === 'fields') {
             // remove terms that were not really translated
             let fields = (result.presets && result.presets.fields) || {};
             for (const key of Object.keys(fields)) {
@@ -158,7 +197,7 @@ function getResource(resource, callback) {
                 }
               }
             }
-          } else if (resource === 'core') {
+          } else if (resourceId === 'core') {
             checkForDuplicateShortcuts(codes[i], result);
           }
 
