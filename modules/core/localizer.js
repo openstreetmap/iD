@@ -293,10 +293,10 @@ export function coreLocalizer() {
         // no localized string found...
 
         // attempt to fallback to a lower-priority langauge
-        let fallbackIndex = _localeCodes.indexOf(locale) + 1;
-        if (fallbackIndex < _localeCodes.length) {
+        let index = _localeCodes.indexOf(locale);
+        if (index >= 0 && index < _localeCodes.length - 1) {
             // eventually this will be 'en' or another locale with 100% coverage
-            let fallback = _localeCodes[fallbackIndex];
+            let fallback = _localeCodes[index + 1];
             return localizer.t(stringId, replacements, fallback);
         }
 
