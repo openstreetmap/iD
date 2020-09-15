@@ -97,12 +97,12 @@ export function uiZoom(context) {
 
         ['plus', 'ffplus', '=', 'ffequals'].forEach(function(key) {
             context.keybinding().on([key], zoomIn);
-            context.keybinding().on([uiCmd('⌘' + key)], zoomInFurther);
+            context.keybinding().on([uiCmd('⌥' + key)], zoomInFurther);
         });
 
         ['_', '-', 'ffminus', 'dash'].forEach(function(key) {
             context.keybinding().on([key], zoomOut);
-            context.keybinding().on([uiCmd('⌘' + key)], zoomOutFurther);
+            context.keybinding().on([uiCmd('⌥' + key)], zoomOutFurther);
         });
 
         function updateButtonStates() {

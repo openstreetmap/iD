@@ -239,10 +239,10 @@ export function modeSelect(context, selectedIDs) {
             .on(uiCmd('⇧↑'), nudgeSelection([0, -10]))
             .on(uiCmd('⇧→'), nudgeSelection([10, 0]))
             .on(uiCmd('⇧↓'), nudgeSelection([0, 10]))
-            .on(uiCmd('⇧⌘←'), nudgeSelection([-100, 0]))
-            .on(uiCmd('⇧⌘↑'), nudgeSelection([0, -100]))
-            .on(uiCmd('⇧⌘→'), nudgeSelection([100, 0]))
-            .on(uiCmd('⇧⌘↓'), nudgeSelection([0, 100]))
+            .on(uiCmd('⇧⌥←'), nudgeSelection([-100, 0]))
+            .on(uiCmd('⇧⌥↑'), nudgeSelection([0, -100]))
+            .on(uiCmd('⇧⌥→'), nudgeSelection([100, 0]))
+            .on(uiCmd('⇧⌥↓'), nudgeSelection([0, 100]))
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true);
 
