@@ -23,11 +23,9 @@ export function validationDisconnectedWay() {
             subtype: 'highway',
             severity: 'warning',
             message: function(context) {
-                if (this.entityIds.length === 1) {
-                    var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.disconnected_way.highway.message', { highway: utilDisplayLabel(entity, context.graph()) }) : '';
-                }
-                return t('issues.disconnected_way.routable.message.multiple', { count: this.entityIds.length.toString() });
+                var entity = this.entityIds.length && context.hasEntity(this.entityIds[0]);
+                var label = entity && utilDisplayLabel(entity, context.graph());
+                return t('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
             },
             reference: showReference,
             entityIds: Array.from(routingIslandWays).map(function(way) { return way.id; }),

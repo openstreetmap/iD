@@ -5,8 +5,6 @@ import { utilArrayGroupBy, utilTotalExtent } from '../util';
 
 export function operationCopy(context, selectedIDs) {
 
-    var _multi = selectedIDs.length === 1 ? 'single' : 'multiple';
-
     function getFilteredIdsToCopy() {
         return selectedIDs.filter(function(selectedID) {
             var entity = context.graph().hasEntity(selectedID);
@@ -115,15 +113,13 @@ export function operationCopy(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.copy.' + disable + '.' + _multi) :
-            t('operations.copy.description' + '.' + _multi);
+            t('operations.copy.' + disable, { n: selectedIDs.length }) :
+            t('operations.copy.description', { n: selectedIDs.length });
     };
 
 
     operation.annotation = function() {
-        return selectedIDs.length === 1 ?
-            t('operations.copy.annotation.single') :
-            t('operations.copy.annotation.multiple', { n: selectedIDs.length.toString() });
+        return t('operations.copy.annotation', { n: selectedIDs.length });
     };
 
 

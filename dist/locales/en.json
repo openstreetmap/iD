@@ -29,13 +29,6 @@
             "labeled_and_more": "{labeled} and {count} more"
         },
         "modes": {
-            "add_feature": {
-                "title": "Add a feature",
-                "description": "Search for features to add to the map.",
-                "key": "Tab",
-                "result": "{count} result",
-                "results": "{count} results"
-            },
             "add_area": {
                 "title": "Area",
                 "description": "Add parks, buildings, lakes or other areas to the map.",
@@ -106,27 +99,27 @@
             "copy": {
                 "title": "Copy",
                 "description": {
-                    "single": "Set this feature for pasting.",
-                    "multiple": "Set these features for pasting."
+                    "one": "Set this feature for pasting.",
+                    "other": "Set these features for pasting."
                 },
                 "annotation": {
-                    "single": "Copied a feature.",
-                    "multiple": "Copied {n} features."
+                    "one": "Copied a feature.",
+                    "other": "Copied {n} features."
                 },
                 "too_large": {
-                    "single": "This can't be copied because not enough of it is currently visible.",
-                    "multiple": "These can't be copied because not enough of them are currently visible."
+                    "one": "This can't be copied because not enough of it is currently visible.",
+                    "other": "These can't be copied because not enough of them are currently visible."
                 }
             },
             "paste": {
                 "title": "Paste",
                 "description": {
-                    "single": "Add a duplicate {feature} here.",
-                    "multiple": "Add {n} duplicate features here."
+                    "one": "Add a duplicate {feature} here.",
+                    "other": "Add {n} duplicate features here."
                 },
                 "annotation": {
-                    "single": "Pasted a feature.",
-                    "multiple": "Pasted {n} features."
+                    "one": "Pasted a feature.",
+                    "other": "Pasted {n} features."
                 },
                 "nothing_copied": "No features have been copied."
             },
@@ -262,7 +255,10 @@
                     "line": "Deleted a line.",
                     "area": "Deleted an area.",
                     "relation": "Deleted a relation.",
-                    "multiple": "Deleted {n} features."
+                    "feature": {
+                        "one": "Deleted a feature.",
+                        "other": "Deleted {n} features."
+                    }
                 },
                 "too_large": {
                     "single": "This feature can't be deleted because not enough of it is currently visible.",
@@ -298,14 +294,17 @@
                 },
                 "annotation": {
                     "building": {
-                        "single": "Downgraded a feature to a basic building.",
-                        "multiple": "Downgraded {n} features to basic buildings."
+                        "one": "Downgraded a feature to a basic building.",
+                        "other": "Downgraded {n} features to basic buildings."
                     },
                     "address": {
-                        "single": "Downgraded a feature to an address.",
-                        "multiple": "Downgraded {n} features to addresses."
+                        "one": "Downgraded a feature to an address.",
+                        "other": "Downgraded {n} features to addresses."
                     },
-                    "multiple": "Downgraded {n} features."
+                    "generic": {
+                        "one": "Downgraded a feature.",
+                        "other": "Downgraded {n} features."
+                    }
                 },
                 "has_wikidata_tag": {
                     "single": "This feature can't be downgraded because it has a Wikidata tag.",
@@ -389,7 +388,10 @@
                 "title": "Merge",
                 "description": "Merge these features.",
                 "key": "C",
-                "annotation": "Merged {n} features.",
+                "annotation": {
+                    "one": "Merged a feature.",
+                    "other": "Merged {n} features."
+                },
                 "not_eligible": "These features can't be merged.",
                 "not_adjacent": "These features can't be merged because their endpoints aren't connected.",
                 "restriction": "These features can't be merged because it would damage a \"{relation}\" relation.",
@@ -536,7 +538,10 @@
                 "annotation": {
                     "line": "Split a line.",
                     "area": "Split an area boundary.",
-                    "multiple": "Split {n} lines/area boundaries."
+                    "feature": {
+                        "one": "Split a feature.",
+                        "other": "Split {n} features."
+                    }
                 },
                 "not_eligible": "Lines can't be split at their beginning or end.",
                 "multiple_ways": "There are too many lines here to split.",
@@ -569,8 +574,8 @@
                     }
                 },
                 "annotation": {
-                    "single": "Extracted a point.",
-                    "multiple": "Extracted {n} points."
+                    "one": "Extracted a point.",
+                    "other": "Extracted {n} points."
                 },
                 "too_large": {
                     "single": "A point can't be extracted because not enough of this feature is visible.",
@@ -648,8 +653,10 @@
             "tooltip": "Toggle the sidebar."
         },
         "feature_info": {
-            "hidden_warning": "{count} hidden features",
-            "hidden_details": "These features are currently hidden: {details}"
+            "hidden_warning": {
+                "one": "{count} hidden feature",
+                "other": "{count} hidden features"
+            }
         },
         "osm_api_status": {
             "message": {
@@ -667,7 +674,7 @@
             "request_review": "I would like someone to review my edits.",
             "save": "Upload",
             "cancel": "Cancel",
-            "changes": "Changes ({count})",
+            "changes": "Changes",
             "download_changes": "Download osmChange file",
             "errors": "Errors",
             "warnings": "Warnings",
@@ -683,10 +690,17 @@
         },
         "contributors": {
             "list": "Edits by {users}",
-            "truncated_list": "Edits by {users} and {count} others"
+            "truncated_list": {
+                "one": "Edits by {users} and {count} other",
+                "other": "Edits by {users} and {count} others"
+            }
         },
         "info_panels": {
             "key": "I",
+            "selected": {
+                "one": "{n} selected",
+                "other": "{n} selected"
+            },
             "background": {
                 "key": "B",
                 "title": "Background",
@@ -705,7 +719,6 @@
             "history": {
                 "key": "H",
                 "title": "History",
-                "selected": "{n} selected",
                 "no_history": "No History (New Feature)",
                 "version": "Version",
                 "last_edit": "Last Edit",
@@ -727,7 +740,6 @@
             "measurement": {
                 "key": "M",
                 "title": "Measurement",
-                "selected": "{n} selected",
                 "geometry": "Geometry",
                 "closed_line": "closed line",
                 "closed_area": "closed area",
@@ -782,7 +794,10 @@
             "choose_relation": "Choose a parent relation",
             "role": "Role",
             "choose": "Select feature type",
-            "results": "{n} results for {search}",
+            "results": {
+                "one": "{n} result for {search}",
+                "other": "{n} results for {search}"
+            },
             "no_documentation_key": "There is no documentation available.",
             "edit_reference": "edit/translate",
             "wiki_reference": "View documentation",
@@ -1853,12 +1868,12 @@
         "issues": {
             "title": "Issues",
             "key": "I",
-            "list_title": "Issues ({count})",
+            "list_title": "Issues",
             "errors": {
-                "list_title": "Errors ({count})"
+                "list_title": "Errors"
             },
             "warnings": {
-                "list_title": "Warnings ({count})"
+                "list_title": "Warnings"
             },
             "rules": {
                 "title": "Rules"
@@ -1986,12 +2001,10 @@
                 "tip": "Find unroutable roads, paths, and ferry routes",
                 "routable": {
                     "message": {
-                        "multiple": "{count} routable features are connected only to each other."
+                        "one": "{highway} is disconnected from other roads and paths",
+                        "other": "{count} routable features are connected only to each other"
                     },
                     "reference": "All roads, paths, and ferry routes should connect to form a single routing network."
-                },
-                "highway": {
-                    "message": "{highway} is disconnected from other roads and paths"
                 }
             },
             "fixme_tag": {

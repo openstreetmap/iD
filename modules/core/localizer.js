@@ -191,25 +191,44 @@ export function coreLocalizer() {
             });
     };
 
+    localizer.pluralRule = function(number) {
+      return pluralRule(number, _localeCode);
+    };
+
+    // Returns the plural rule for the given `number` with the given `localeCode`.
+    // One of: `zero`, `one`, `two`, `few`, `many`, `other`
+    function pluralRule(number, localeCode) {
+
+      // modern browsers have this functionality built-in
+      const rules = 'Intl' in window && Intl.PluralRules && new Intl.PluralRules(localeCode);
+      if (rules) {
+        return rules.select(number);
+      }
+
+      // fallback to basic one/other, as in English
+      if (number === 1) return 'one';
+      return 'other';
+    }
+
     /**
     * Given a string identifier, try to find that string in the current
     * language, and return it.  This function will be called recursively
     * with locale `en` if a string can not be found in the requested language.
     *
-    * @param  {string}   s             string identifier
+    * @param  {string}   stringId      string identifier
     * @param  {object?}  replacements  token replacements and default string
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
     * @return {string?}  localized string
     */
-    localizer.t = function(s, replacements, locale) {
+    localizer.t = function(stringId, replacements, locale) {
         locale = locale || _localeCode;
 
         // US English is the default
         if (locale.toLowerCase() === 'en-us') locale = 'en';
 
-        let path = s
+        let path = stringId
           .split('.')
-          .map(s => s.replace(/<TX_DOT>/g, '.'))
+          .map(stringId => stringId.replace(/<TX_DOT>/g, '.'))
           .reverse();
 
         let result = _localeStrings[locale];
@@ -220,24 +239,50 @@ export function coreLocalizer() {
 
         if (result !== undefined) {
           if (replacements) {
-            for (let k in replacements) {
-              const token = `{${k}}`;
-              const regex = new RegExp(token, 'g');
-              result = result.replace(regex, replacements[k]);
+            if (typeof result === 'object' && Object.keys(result).length) {
+                // If plural forms are provided, dig one level deeper based on the
+                // first numeric token replacement provided.
+                const number = Object.values(replacements).find(function(value) {
+                  return typeof value === 'number';
+                });
+                if (number !== undefined) {
+                  const rule = pluralRule(number, locale);
+                  if (result[rule]) {
+                    result = result[rule];
+                  } else {
+                    // We're pretty sure this should be a plural but no string
+                    // could be found for the given rule. Just pick the first
+                    // string and hope it makes sense.
+                    result = Object.values(result)[0];
+                  }
+                }
+            }
+            if (typeof result === 'string') {
+              for (let k in replacements) {
+                const token = `{${k}}`;
+                const regex = new RegExp(token, 'g');
+                result = result.replace(regex, replacements[k]);
+              }
             }
           }
-          return result;
+          if (typeof result === 'string') {
+            // found a localized string!
+            return result;
+          }
         }
+        // no localized string found...
 
         if (locale !== 'en') {
-          return localizer.t(s, replacements, 'en');  // fallback - recurse with 'en'
+          // Fallback to the English string since it's the only language with guaranteed 100% coverage
+          return localizer.t(stringId, replacements, 'en');
         }
 
         if (replacements && 'default' in replacements) {
-          return replacements.default;      // fallback - replacements.default
+          // Fallback to a default value if one is specified in `replacements`
+          return replacements.default;
         }
 
-        const missing = `Missing ${locale} translation: ${s}`;
+        const missing = `Missing ${locale} translation: ${stringId}`;
         if (typeof console !== 'undefined') console.error(missing);  // eslint-disable-line
 
         return missing;

@@ -29,7 +29,7 @@ export function uiSectionChanges(context) {
         .title(function() {
             var history = context.history();
             var summary = history.difference().summary();
-            return t('commit.changes', { count: summary.length });
+            return t('inspector.title_count', { title: t('commit.changes'), count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
