@@ -258,10 +258,19 @@ export function coreLocalizer() {
                 }
             }
             if (typeof result === 'string') {
-              for (let k in replacements) {
-                const token = `{${k}}`;
+              for (let key in replacements) {
+                let value = replacements[key];
+                if (typeof value === 'number' && value.toLocaleString) {
+                  // format numbers for the locale
+                  value = value.toLocaleString(locale, {
+                    style: 'decimal',
+                    useGrouping: true,
+                    minimumFractionDigits: 0
+                  });
+                }
+                const token = `{${key}}`;
                 const regex = new RegExp(token, 'g');
-                result = result.replace(regex, replacements[k]);
+                result = result.replace(regex, value);
               }
             }
           }
