@@ -11,6 +11,8 @@ const outdir = 'dist/locales/';
 const apiroot = 'https://www.transifex.com/api/2';
 const projectURL = `${apiroot}/project/id-editor`;
 
+const languageNames = require('./language_names.js');
+
 
 // Transifex doesn't allow anonymous downloading
 let auth;
@@ -32,11 +34,8 @@ if (process.env.transifex_password) {
 }
 /* eslint-enable no-process-env */
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
-const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 
-let referencedScripts = [];
-
-const languageInfo = getLangNamesInNativeLang();
+const languageInfo = languageNames.langNamesInNativeLang;
 fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
 fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
@@ -74,15 +73,17 @@ asyncMap(resources, getResource, (err, results) => {
 
   // write files and fetch language info for each locale
   let dataLocales = {
-    en: { rtl: false, languageNames: languageNamesInLanguageOf('en'), scriptNames: scriptNamesInLanguageOf('en') }
+    en: { rtl: false }
   };
   asyncMap(Object.keys(allStrings),
     (code, done) => {
-      if (code === 'en' || !Object.keys(allStrings[code]).length) {
+      if (code === 'en') {
         done();
       } else {
         let obj = {};
-        obj[code] = allStrings[code];
+        obj[code] = allStrings[code] || {};
+        obj[code].languageNames = languageNames.languageNamesInLanguageOf(code) || {};
+        obj[code].scriptNames = languageNames.scriptNamesInLanguageOf(code) || {};
         fs.writeFileSync(`${outdir}${code}.json`, JSON.stringify(obj));
 
         getLanguageInfo(code, (err, info) => {
@@ -94,9 +95,7 @@ asyncMap(resources, getResource, (err, results) => {
             rtl = false;
           }
           dataLocales[code] = {
-            rtl: rtl,
-            languageNames: languageNamesInLanguageOf(code) || {},
-            scriptNames: scriptNamesInLanguageOf(code) || {}
+            rtl: rtl
           };
           done();
         });
@@ -268,110 +267,4 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       }
     }
   });
-}
-
-function getLangNamesInNativeLang() {
-  // manually add languages we want that aren't in CLDR
-  let unordered = {
-    'oc': {
-      nativeName: 'Occitan'
-    },
-    'ja-Hira': {
-      base: 'ja',
-      script: 'Hira'
-    },
-    'ja-Latn': {
-      base: 'ja',
-      script: 'Latn'
-    },
-    'ko-Latn': {
-      base: 'ko',
-      script: 'Latn'
-    },
-    'zh_pinyin': {
-      base: 'zh',
-      script: 'Latn'
-    }
-  };
-
-  let langDirectoryPaths = fs.readdirSync(cldrMainDir);
-  langDirectoryPaths.forEach(code => {
-    let languagesPath = `${cldrMainDir}${code}/languages.json`;
-    //if (!fs.existsSync(languagesPath)) return;
-    let languageObj = JSON.parse(fs.readFileSync(languagesPath, 'utf8')).main[code];
-    let identity = languageObj.identity;
-
-    // skip locale-specific languages
-    if (identity.letiant || identity.territory) return;
-
-    let info = {};
-    const script = identity.script;
-    if (script) {
-      referencedScripts.push(script);
-      info.base = identity.language;
-      info.script = script;
-    }
-
-    const nativeName = languageObj.localeDisplayNames.languages[code];
-    if (nativeName) {
-      info.nativeName = nativeName;
-    }
-
-    unordered[code] = info;
-  });
-
-  let ordered = {};
-  Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);
-  return ordered;
-}
-
-
-const rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh-Hant', 'pt-BR': 'pt', 'pt': 'pt-PT' };
-
-function languageNamesInLanguageOf(code) {
-  if (rematchCodes[code]) code = rematchCodes[code];
-
-  let languageFilePath = `${cldrMainDir}${code}/languages.json`;
-  if (!fs.existsSync(languageFilePath)) return null;
-
-  let translatedLangsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.languages;
-
-  // ignore codes for non-languages
-  for (let nonLangCode in { mis: true, mul: true, und: true, zxx: true }) {
-    delete translatedLangsByCode[nonLangCode];
-  }
-
-  for (let langCode in translatedLangsByCode) {
-    let altLongIndex = langCode.indexOf('-alt-long');
-    if (altLongIndex !== -1) {    // prefer long names (e.g. Chinese -> Mandarin Chinese)
-      let base = langCode.substring(0, altLongIndex);
-      translatedLangsByCode[base] = translatedLangsByCode[langCode];
-    }
-
-    if (langCode.includes('-alt-')) {    // remove alternative names
-      delete translatedLangsByCode[langCode];
-    } else if (langCode === translatedLangsByCode[langCode]) {   // no localized value available
-      delete translatedLangsByCode[langCode];
-    }
-  }
-
-  return translatedLangsByCode;
-}
-
-
-function scriptNamesInLanguageOf(code) {
-  if (rematchCodes[code]) code = rematchCodes[code];
-
-  let languageFilePath = `${cldrMainDir}${code}/scripts.json`;
-  if (!fs.existsSync(languageFilePath)) return null;
-
-  let allTranslatedScriptsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.scripts;
-
-  let translatedScripts = {};
-  referencedScripts.forEach(script => {
-    if (!allTranslatedScriptsByCode[script] || script === allTranslatedScriptsByCode[script]) return;
-    translatedScripts[script] = allTranslatedScriptsByCode[script];
-  });
-
-  return translatedScripts;
 }

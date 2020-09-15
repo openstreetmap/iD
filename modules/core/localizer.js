@@ -152,8 +152,10 @@ export function coreLocalizer() {
             _textDirection = currentData && currentData.rtl ? 'rtl' : 'ltr';
         }
 
-        _languageNames = currentData && currentData.languageNames;
-        _scriptNames = currentData && currentData.scriptNames;
+        let locale = _localeCode;
+        if (locale.toLowerCase() === 'en-us') locale = 'en';
+        _languageNames = _localeStrings[locale].languageNames;
+        _scriptNames = _localeStrings[locale].scriptNames;
 
         _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }

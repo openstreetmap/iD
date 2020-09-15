@@ -10,6 +10,8 @@ const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 
+const languageNames = require('./language_names.js');
+
 const fieldSchema = require('../data/presets/schema/field.json');
 const presetSchema = require('../data/presets/schema/preset.json');
 const deprecated = require('../data/deprecated.json');
@@ -805,9 +807,18 @@ function writeEnJson(tstrings) {
       }
 
       let enjson = core;
+      ['presets', 'imagery', 'community', 'languageNames', 'scriptNames'].forEach(function(prop) {
+        if (enjson.en[prop]) {
+          console.error(`Error: Reserved property '${prop}' already exists in core strings`);
+          process.exit(1);
+        }
+      });
+
       enjson.en.presets = tstrings;
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;
+      enjson.en.languageNames = languageNames.languageNamesInLanguageOf('en');
+      enjson.en.scriptNames = languageNames.scriptNamesInLanguageOf('en');
 
       return fs.writeFileSync('dist/locales/en.json', JSON.stringify(enjson, null, 4));
     });
