@@ -163,8 +163,8 @@ for more info.
 |   | Multilingual Feature | Notes | Issues |
 |---|---|---|---|
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
-| ❌ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
-| ❌ | Custom fallback language | If the preferred language is incomplete, a user-specified one should be tried before `en` (e.g. `kk` → `ru`) |
+| ✅ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` |
+| ✅ | Custom fallback languages | If the preferred language is incomplete, user-specified ones should be tried before `en` (e.g. `kk` → `ru`) |
 | ❌ | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages | [#7963](https://github.com/openstreetmap/iD/issues/7963)
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
 | ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages | [#3120](https://github.com/openstreetmap/iD/issues/3120) |
