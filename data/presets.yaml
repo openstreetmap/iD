@@ -8884,17 +8884,7 @@ en:
         name: City Limit Sign
         # 'terms: town,village,hamlet,boundary,edge,border,road,highway'
         terms: '<translate with synonyms or related terms for ''City Limit Sign'', separated by commas>'
-      traffic_sign/city_limit_vertex:
-        # traffic_sign=city_limit
-        name: City Limit Sign
-        # 'terms: town,village,hamlet,boundary,edge,border,road,highway'
-        terms: '<translate with synonyms or related terms for ''City Limit Sign'', separated by commas>'
       traffic_sign/maxspeed:
-        # traffic_sign=maxspeed
-        name: Speed Limit Sign
-        # 'terms: max speed,maximum speed,road,highway'
-        terms: '<translate with synonyms or related terms for ''Speed Limit Sign'', separated by commas>'
-      traffic_sign/maxspeed_vertex:
         # traffic_sign=maxspeed
         name: Speed Limit Sign
         # 'terms: max speed,maximum speed,road,highway'

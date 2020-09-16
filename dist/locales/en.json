@@ -10299,17 +10299,9 @@
                     "name": "Traffic Sign",
                     "terms": "road,highway"
                 },
-                "traffic_sign/city_limit_vertex": {
-                    "name": "City Limit Sign",
-                    "terms": "town,village,hamlet,boundary,edge,border,road,highway"
-                },
                 "traffic_sign/city_limit": {
                     "name": "City Limit Sign",
                     "terms": "town,village,hamlet,boundary,edge,border,road,highway"
-                },
-                "traffic_sign/maxspeed_vertex": {
-                    "name": "Speed Limit Sign",
-                    "terms": "max speed,maximum speed,road,highway"
                 },
                 "traffic_sign/maxspeed": {
                     "name": "Speed Limit Sign",
