@@ -1426,7 +1426,6 @@ a.hide-toggle {
     flex: 0 0 32px;
     border-left: 1px solid #ccc;
     width: 32px;
-    height: 100%;
     border-radius: 0;
     background: #f6f6f6;
 }
