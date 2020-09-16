@@ -112,7 +112,7 @@ export function uiSectionEntityIssues(context) {
         var infoButton = labelsEnter
             .append('button')
             .attr('class', 'issue-info-button')
-            .attr('title', t('icons.information'))
+            .attr('title', t('icons.information', { html: false }))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-inspect'));
 
@@ -163,7 +163,7 @@ export function uiSectionEntityIssues(context) {
                         .call(d.reference);
                 } else {
                     d3_select(this)
-                        .text(t('inspector.no_documentation_key'));
+                        .html(t('inspector.no_documentation_key'));
                 }
             });
 
@@ -174,7 +174,7 @@ export function uiSectionEntityIssues(context) {
             .classed('active', function(d) { return d.id === _activeIssueID; });
 
         containers.selectAll('.issue-message')
-            .text(function(d) {
+            .html(function(d) {
                 return d.message(context);
             });
 
@@ -235,7 +235,7 @@ export function uiSectionEntityIssues(context) {
         fixesEnter
             .append('span')
             .attr('class', 'fix-message')
-            .text(function(d) { return d.title; });
+            .html(function(d) { return d.title; });
 
         fixesEnter.merge(fixes)
             .classed('actionable', function(d) {

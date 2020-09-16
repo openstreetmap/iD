@@ -149,7 +149,7 @@ export function uiFieldCombo(field, context) {
 
         if (optstrings) {
             _comboData = Object.keys(optstrings).map(function(k) {
-                var v = field.t('options.' + k, { 'default': optstrings[k] });
+                var v = field.t('options.' + k, { 'default': optstrings[k], html: false });
                 return {
                     key: k,
                     value: v,
@@ -242,7 +242,7 @@ export function uiFieldCombo(field, context) {
     function setPlaceholder(values) {
 
         if (isMulti || isSemi) {
-            _staticPlaceholder = field.placeholder() || t('inspector.add');
+            _staticPlaceholder = field.placeholder() || t('inspector.add', { html: false });
         } else {
             var vals = values
                 .map(function(d) { return d.value; })
@@ -258,7 +258,7 @@ export function uiFieldCombo(field, context) {
 
         var ph;
         if (!isMulti && !isSemi && _tags && Array.isArray(_tags[field.key])) {
-            ph = t('inspector.multiple_values');
+            ph = t('inspector.multiple_values', { html: false });
         } else {
             ph =  _staticPlaceholder;
         }
@@ -528,7 +528,7 @@ export function uiFieldCombo(field, context) {
                     return d.isMixed;
                 })
                 .attr('title', function(d) {
-                    return d.isMixed ? t('inspector.unshared_value_tooltip') : null;
+                    return d.isMixed ? t('inspector.unshared_value_tooltip', { html: false }) : null;
                 });
 
             if (allowDragAndDrop) {
@@ -536,12 +536,12 @@ export function uiFieldCombo(field, context) {
             }
 
             chips.select('span')
-                .text(function(d) { return d.value; });
+                .html(function(d) { return d.value; });
 
             chips.select('a')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
-                .text('×');
+                .html('×');
 
         } else {
             var isMixed = Array.isArray(tags[field.key]);
@@ -552,7 +552,7 @@ export function uiFieldCombo(field, context) {
 
             utilGetSetValue(input, !isMixed ? displayValue(tags[field.key]) : '')
                 .attr('title', isMixed ? mixedValues.join('\n') : undefined)
-                .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
+                .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : _staticPlaceholder || '')
                 .classed('mixed', isMixed);
         }
     };

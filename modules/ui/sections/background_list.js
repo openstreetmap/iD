@@ -57,7 +57,7 @@ export function uiSectionBackgroundList(context) {
             .append('label')
             .call(uiTooltip()
                 .title(t('background.minimap.tooltip'))
-                .keys([t('background.minimap.key')])
+                .keys([t('background.minimap.key', { html: false })])
                 .placement('top')
             );
 
@@ -71,7 +71,7 @@ export function uiSectionBackgroundList(context) {
 
         minimapLabelEnter
             .append('span')
-            .text(t('background.minimap.description'));
+            .html(t('background.minimap.description'));
 
 
         var panelLabelEnter = bgExtrasListEnter
@@ -80,7 +80,7 @@ export function uiSectionBackgroundList(context) {
             .append('label')
             .call(uiTooltip()
                 .title(t('background.panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.background.key'))])
+                .keys([uiCmd('⌘⇧' + t('info_panels.background.key', { html: false }))])
                 .placement('top')
             );
 
@@ -94,7 +94,7 @@ export function uiSectionBackgroundList(context) {
 
         panelLabelEnter
             .append('span')
-            .text(t('background.panel.description'));
+            .html(t('background.panel.description'));
 
         var locPanelLabelEnter = bgExtrasListEnter
             .append('li')
@@ -102,7 +102,7 @@ export function uiSectionBackgroundList(context) {
             .append('label')
             .call(uiTooltip()
                 .title(t('background.location_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.location.key'))])
+                .keys([uiCmd('⌘⇧' + t('info_panels.location.key', { html: false }))])
                 .placement('top')
             );
 
@@ -116,7 +116,7 @@ export function uiSectionBackgroundList(context) {
 
         locPanelLabelEnter
             .append('span')
-            .text(t('background.location_panel.description'));
+            .html(t('background.location_panel.description'));
 
 
         // "Info / Report a Problem" link
@@ -130,7 +130,7 @@ export function uiSectionBackgroundList(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
-            .text(t('background.imagery_problem_faq'));
+            .html(t('background.imagery_problem_faq'));
 
         _backgroundList
             .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
@@ -150,7 +150,7 @@ export function uiSectionBackgroundList(context) {
                 item.call(uiTooltip()
                     .placement(placement)
                     .title('<div>' + t('background.switch') + '</div>')
-                    .keys([uiCmd('⌘' + t('background.key'))])
+                    .keys([uiCmd('⌘' + t('background.key', { html: false }))])
                 );
             } else if (description || isOverflowing) {
                 item.call(uiTooltip()
@@ -188,7 +188,7 @@ export function uiSectionBackgroundList(context) {
 
         label
             .append('span')
-            .text(function(d) { return d.name(); });
+            .html(function(d) { return d.name(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')

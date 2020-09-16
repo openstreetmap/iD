@@ -36,7 +36,7 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .text(currSourceName);
+            .html(currSourceName);
 
         metadataKeys.forEach(function(k) {
             // DigitalGlobe vintage is available in raster layers for now.
@@ -46,10 +46,10 @@ export function uiPanelBackground(context) {
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
                 .classed('hide', !metadata[k])
-                .text(t('info_panels.background.' + k) + ':')
+                .html(t('info_panels.background.' + k) + ':')
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
-                .text(metadata[k]);
+                .html(metadata[k]);
         });
 
         debouncedGetMetadata(selection);
@@ -58,7 +58,7 @@ export function uiPanelBackground(context) {
 
         selection
             .append('a')
-            .text(t('info_panels.background.' + toggleTiles))
+            .html(t('info_panels.background.' + toggleTiles))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
@@ -74,7 +74,7 @@ export function uiPanelBackground(context) {
             var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
             selection
                 .append('a')
-                .text(t('info_panels.background.' + toggleVintage))
+                .html(t('info_panels.background.' + toggleVintage))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-vintage')
                 .on('click', function() {
@@ -113,7 +113,7 @@ export function uiPanelBackground(context) {
         selection.selectAll('.background-info-list-zoom')
             .classed('hide', false)
             .selectAll('.background-info-span-zoom')
-            .text(metadata.zoom);
+            .html(metadata.zoom);
 
         if (!d || !d.length >= 3) return;
 
@@ -126,7 +126,7 @@ export function uiPanelBackground(context) {
             selection.selectAll('.background-info-list-vintage')
                 .classed('hide', false)
                 .selectAll('.background-info-span-vintage')
-                .text(metadata.vintage);
+                .html(metadata.vintage);
 
             // update other metadata
             metadataKeys.forEach(function(k) {
@@ -136,7 +136,7 @@ export function uiPanelBackground(context) {
                 selection.selectAll('.background-info-list-' + k)
                     .classed('hide', !val)
                     .selectAll('.background-info-span-' + k)
-                    .text(val);
+                    .html(val);
             });
         });
     }
@@ -163,7 +163,7 @@ export function uiPanelBackground(context) {
 
     panel.id = 'background';
     panel.title = t('info_panels.background.title');
-    panel.key = t('info_panels.background.key');
+    panel.key = t('info_panels.background.key', { html: false });
 
 
     return panel;

@@ -107,7 +107,7 @@ export function operationCircularize(context, selectedIDs) {
 
 
     operation.id = 'circularize';
-    operation.keys = [t('operations.circularize.key')];
+    operation.keys = [t('operations.circularize.key', { html: false })];
     operation.title = t('operations.circularize.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

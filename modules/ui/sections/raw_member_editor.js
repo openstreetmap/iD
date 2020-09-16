@@ -187,7 +187,7 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .text(function(d) {
+                        .html(function(d) {
                             var matched = presetManager.match(d.member, context.graph());
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
@@ -195,19 +195,19 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .text(function(d) { return utilDisplayName(d.member); });
+                        .html(function(d) { return utilDisplayName(d.member); });
 
                     label
                         .append('button')
                         .attr('tabindex', -1)
-                        .attr('title', t('icons.remove'))
+                        .attr('title', t('icons.remove', { html: false }))
                         .attr('class', 'remove member-delete')
                         .call(svgIcon('#iD-operation-delete'));
 
                     label
                         .append('button')
                         .attr('class', 'member-zoom')
-                        .attr('title', t('icons.zoom_to'))
+                        .attr('title', t('icons.zoom_to', { html: false }))
                         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
                         .on('click', zoomToMember);
 
@@ -219,17 +219,17 @@ export function uiSectionRawMemberEditor(context) {
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .text(t('inspector.' + d.type, { id: d.id }));
+                        .html(t('inspector.' + d.type, { id: d.id }));
 
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .text(t('inspector.incomplete', { id: d.id }));
+                        .html(t('inspector.incomplete', { id: d.id }));
 
                     label
                         .append('button')
                         .attr('class', 'member-download')
-                        .attr('title', t('icons.download'))
+                        .attr('title', t('icons.download', { html: false }))
                         .attr('tabindex', -1)
                         .call(svgIcon('#iD-icon-load'))
                         .on('click', downloadMember);
@@ -247,7 +247,7 @@ export function uiSectionRawMemberEditor(context) {
                 return d.domId;
             })
             .property('type', 'text')
-            .attr('placeholder', t('inspector.role'))
+            .attr('placeholder', t('inspector.role', { html: false }))
             .call(utilNoAuto);
 
         if (taginfo) {

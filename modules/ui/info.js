@@ -59,7 +59,7 @@ export function uiInfo(context) {
 
             title
                 .append('h3')
-                .text(function(d) { return panels[d].title; });
+                .html(function(d) { return panels[d].title; });
 
             title
                 .append('button')
@@ -123,10 +123,10 @@ export function uiInfo(context) {
         redraw();
 
         context.keybinding()
-            .on(uiCmd('⌘' + t('info_panels.key')), info.toggle);
+            .on(uiCmd('⌘' + t('info_panels.key', { html: false })), info.toggle);
 
         ids.forEach(function(k) {
-            var key = t('info_panels.' + k + '.key', { default: null });
+            var key = t('info_panels.' + k + '.key', { default: null, html: false });
             if (!key) return;
             context.keybinding()
                 .on(uiCmd('⌘⇧' + key), function() { info.toggle(k); });

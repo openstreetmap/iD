@@ -108,7 +108,7 @@ export function uiChangesetEditor(context) {
             .call(svgIcon('#iD-icon-alert', 'inline'))
             .attr('href', t('commit.google_warning_link'))
             .append('span')
-            .text(t('commit.google_warning'));
+            .html(t('commit.google_warning'));
 
         commentEnter
             .transition()

@@ -44,7 +44,7 @@ export function validationHelpRequest(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.fixme_tag.reference'));
+                .html(t('issues.fixme_tag.reference'));
         }
     };
 

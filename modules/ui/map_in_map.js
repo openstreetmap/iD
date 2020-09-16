@@ -320,7 +320,7 @@ export function uiMapInMap(context) {
         redraw();
 
         context.keybinding()
-            .on(t('background.minimap.key'), toggle);
+            .on(t('background.minimap.key', { html: false }), toggle);
     }
 
     return mapInMap;

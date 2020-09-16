@@ -93,7 +93,7 @@ export function uiFieldWikidata(field, context) {
         searchRowEnter
             .append('button')
             .attr('class', 'form-field-button wiki-link')
-            .attr('title', t('icons.view_on', { domain: 'wikidata.org' }))
+            .attr('title', t('icons.view_on', { domain: 'wikidata.org', html: false }))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
             .on('click', function() {
@@ -118,7 +118,7 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('span')
             .attr('class', 'label')
-            .text(function(d) { return t('wikidata.' + d); });
+            .html(function(d) { return t('wikidata.' + d); });
 
         enter
             .append('input')
@@ -130,7 +130,7 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('button')
             .attr('class', 'form-field-button')
-            .attr('title', t('icons.copy'))
+            .attr('title', t('icons.copy', { html: false }))
             .attr('tabindex', -1)
             .call(svgIcon('#iD-operation-copy'))
             .on('click', function() {
@@ -292,7 +292,7 @@ export function uiFieldWikidata(field, context) {
         var isMixed = Array.isArray(tags[field.key]);
         _searchInput
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : null)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : '')
+            .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : '')
             .classed('mixed', isMixed);
 
         _qid = typeof tags[field.key] === 'string' && tags[field.key] || '';

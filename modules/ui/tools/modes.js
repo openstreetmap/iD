@@ -127,7 +127,7 @@ export function uiToolOldDrawModes(context) {
             buttonsEnter
                 .append('span')
                 .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
+                .html(function(mode) { return mode.title; });
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {

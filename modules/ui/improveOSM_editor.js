@@ -36,7 +36,7 @@ export function uiImproveOsmEditor(context) {
 
     headerEnter
       .append('h3')
-        .text(t('QA.improveOSM.title'));
+        .html(t('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')
       .data([0]);
@@ -80,12 +80,12 @@ export function uiImproveOsmEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .text(t('note.newComment'));
+        .html(t('note.newComment'));
 
     saveSectionEnter
       .append('textarea')
         .attr('class', 'new-comment-input')
-        .attr('placeholder', t('QA.keepRight.comment_placeholder'))
+        .attr('placeholder', t('QA.keepRight.comment_placeholder', { html: false }))
         .attr('maxlength', 1000)
         .property('value', d => d.newComment)
         .call(utilNoAuto)
@@ -135,7 +135,7 @@ export function uiImproveOsmEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .text(t('QA.keepRight.save_comment'));
+        .html(t('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')
@@ -160,7 +160,7 @@ export function uiImproveOsmEditor(context) {
       });
 
     buttonSection.select('.close-button')
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
         return t(`QA.keepRight.close${andComment}`);
       })
@@ -174,7 +174,7 @@ export function uiImproveOsmEditor(context) {
       });
 
     buttonSection.select('.ignore-button')
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
         return t(`QA.keepRight.ignore${andComment}`);
       })

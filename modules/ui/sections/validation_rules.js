@@ -46,7 +46,7 @@ export function uiSectionValidationRules(context) {
             .append('a')
             .attr('class', 'issue-rules-link')
             .attr('href', '#')
-            .text(t('issues.enable_all'))
+            .html(t('issues.enable_all'))
             .on('click', function() {
                 context.validator().disableRules([]);
             });
@@ -55,7 +55,7 @@ export function uiSectionValidationRules(context) {
             .append('a')
             .attr('class', 'issue-rules-link')
             .attr('href', '#')
-            .text(t('issues.disable_all'))
+            .html(t('issues.disable_all'))
             .on('click', function() {
                 context.validator().disableRules(_ruleKeys);
             });

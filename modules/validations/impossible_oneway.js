@@ -213,7 +213,7 @@ export function validationImpossibleOneway() {
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
-                        .text(t('issues.impossible_oneway.' + referenceID + '.reference'));
+                        .html(t('issues.impossible_oneway.' + referenceID + '.reference'));
                 };
             }
         }

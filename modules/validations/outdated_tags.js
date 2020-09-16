@@ -227,11 +227,11 @@ export function validationOutdatedTags() {
       enter
         .append('div')
         .attr('class', 'issue-reference')
-        .text(t(`issues.outdated_tags.${prefix}reference`));
+        .html(t(`issues.outdated_tags.${prefix}reference`));
 
       enter
         .append('strong')
-        .text(t('issues.suggested'));
+        .html(t('issues.suggested'));
 
       enter
         .append('table')
@@ -246,7 +246,7 @@ export function validationOutdatedTags() {
           let klass = d.type === '+' ? 'add' : 'remove';
           return `tagDiff-cell tagDiff-cell-${klass}`;
         })
-        .text(d => d.display);
+        .html(d => d.display);
     }
   }
 
@@ -313,7 +313,7 @@ export function validationOutdatedTags() {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .text(t('issues.old_multipolygon.reference'));
+        .html(t('issues.old_multipolygon.reference'));
     }
   }
 

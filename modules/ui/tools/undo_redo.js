@@ -92,7 +92,7 @@ export function uiToolUndoRedo(context) {
                         .duration(2000)
                         .iconName('#' + d.icon)
                         .iconClass(annotation ? '' : 'disabled')
-                        .text(text)();
+                        .html(text)();
                 }
                 lastPointerUpType = null;
             })

@@ -230,7 +230,7 @@ export function modeSelect(context, selectedIDs) {
         _behaviors.forEach(context.install);
 
         keybinding
-            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
+            .on(t('inspector.zoom_to.key', { html: false }), mode.zoomToSelected)
             .on(['[', 'pgup'], previousVertex)
             .on([']', 'pgdown'], nextVertex)
             .on(['{', uiCmd('⌘['), 'home'], firstVertex)

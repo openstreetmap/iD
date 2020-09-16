@@ -262,7 +262,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(function(d) {
+            .html(function(d) {
                 var matched = presetManager.match(d.relation, context.graph());
                 return (matched && matched.name()) || t('inspector.relation');
             });
@@ -270,7 +270,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .text(function(d) { return utilDisplayName(d.relation); });
+            .html(function(d) { return utilDisplayName(d.relation); });
 
         labelEnter
             .append('button')
@@ -282,7 +282,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelEnter
             .append('button')
             .attr('class', 'member-zoom')
-            .attr('title', t('icons.zoom_to'))
+            .attr('title', t('icons.zoom_to', { html: false }))
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
             .on('click', zoomToRelation);
 
@@ -297,7 +297,7 @@ export function uiSectionRawMembershipEditor(context) {
                 return d.domId;
             })
             .property('type', 'text')
-            .attr('placeholder', t('inspector.role'))
+            .attr('placeholder', t('inspector.role', { html: false }))
             .call(utilNoAuto)
             .property('value', function(d) { return d.member.role; })
             .on('blur', changeRole)
@@ -326,7 +326,7 @@ export function uiSectionRawMembershipEditor(context) {
 
         newLabelEnter
             .append('input')
-            .attr('placeholder', t('inspector.choose_relation'))
+            .attr('placeholder', t('inspector.choose_relation', { html: false }))
             .attr('type', 'text')
             .attr('class', 'member-entity-input')
             .call(utilNoAuto);
@@ -349,7 +349,7 @@ export function uiSectionRawMembershipEditor(context) {
             .append('input')
             .attr('class', 'member-role')
             .property('type', 'text')
-            .attr('placeholder', t('inspector.role'))
+            .attr('placeholder', t('inspector.role', { html: false }))
             .call(utilNoAuto);
 
         // Update

@@ -47,7 +47,7 @@ export function uiKeepRightHeader() {
     headerEnter
       .append('div')
         .attr('class', 'qa-header-label')
-        .text(issueTitle);
+        .html(issueTitle);
   }
 
 

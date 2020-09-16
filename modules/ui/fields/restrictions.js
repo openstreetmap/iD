@@ -124,7 +124,7 @@ export function uiFieldRestrictions(field, context) {
         distControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-distance-label')
-            .text(t('restriction.controls.distance') + ':');
+            .html(t('restriction.controls.distance') + ':');
 
         distControlEnter
             .append('input')
@@ -151,7 +151,7 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-distance-text')
-            .text(displayMaxDistance(_maxDistance));
+            .html(displayMaxDistance(_maxDistance));
 
 
         var viaControl = selection.selectAll('.restriction-via-way')
@@ -167,7 +167,7 @@ export function uiFieldRestrictions(field, context) {
         viaControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-via-way-label')
-            .text(t('restriction.controls.via') + ':');
+            .html(t('restriction.controls.via') + ':');
 
         viaControlEnter
             .append('input')
@@ -193,7 +193,7 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-via-way-text')
-            .text(displayMaxVia(_maxViaWay));
+            .html(displayMaxVia(_maxViaWay));
     }
 
 
@@ -517,7 +517,7 @@ export function uiFieldRestrictions(field, context) {
                 help
                     .append('div')      // "NO Right Turn (indirect)"
                     .attr('class', 'qualifier ' + klass)
-                    .text(turnText);
+                    .html(turnText);
 
                 help
                     .append('div')      // "FROM {fromName} TO {toName}"
@@ -548,7 +548,7 @@ export function uiFieldRestrictions(field, context) {
                 if (!indirect) {
                     help
                         .append('div')      // Click for "No Right Turn"
-                        .text(t('restriction.help.toggle', { turn: nextText.trim() }));
+                        .html(t('restriction.help.toggle', { turn: nextText.trim() }));
                 }
 
                 highlightPathsFrom(null);

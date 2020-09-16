@@ -72,7 +72,7 @@ export function operationMove(context, selectedIDs) {
 
 
     operation.id = 'move';
-    operation.keys = [t('operations.move.key')];
+    operation.keys = [t('operations.move.key', { html: false })];
     operation.title = t('operations.move.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

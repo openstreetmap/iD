@@ -83,7 +83,7 @@ export function uiFormFields(context) {
 
         moreEnter
             .append('span')
-            .text(t('inspector.add_fields'));
+            .html(t('inspector.add_fields'));
 
         more = moreEnter
             .merge(more);

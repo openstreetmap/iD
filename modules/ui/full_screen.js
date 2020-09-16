@@ -64,7 +64,7 @@ export function uiFullScreen(context) {
         if (!isSupported()) return;
 
         // button = selection.append('button')
-        //     .attr('title', t('full_screen'))
+        //     .attr('title', t('full_screen', { html: false }))
         //     .attr('tabindex', -1)
         //     .on('click', fullScreen)
         //     .call(tooltip);

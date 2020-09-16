@@ -40,7 +40,7 @@ export function uiFieldAccess(field, context) {
             .append('span')
             .attr('class', 'label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
-            .text(function(d) { return field.t('types.' + d); });
+            .html(function(d) { return field.t('types.' + d); });
 
         enter
             .append('div')
@@ -217,7 +217,7 @@ export function uiFieldAccess(field, context) {
             })
             .attr('placeholder', function(d) {
                 if (tags[d] && Array.isArray(tags[d])) {
-                    return t('inspector.multiple_values');
+                    return t('inspector.multiple_values', { html: false });
                 }
                 if (d === 'access') {
                     return 'yes';

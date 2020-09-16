@@ -49,7 +49,7 @@ export function uiDisclosure(context, key, expandedDefault) {
             .classed('expanded', _expanded);
 
         hideToggle.selectAll('.hide-toggle-text')
-            .text(_title());
+            .html(_title());
 
         hideToggle.selectAll('.hide-toggle-icon')
             .attr('xlink:href', _expanded ? '#iD-icon-down'

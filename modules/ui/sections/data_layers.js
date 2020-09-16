@@ -97,7 +97,7 @@ export function uiSectionDataLayers(context) {
                     d3_select(this)
                         .call(uiTooltip()
                             .title(t('map_data.layers.' + d.id + '.tooltip'))
-                            .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
+                            .keys([uiCmd('⌥' + t('area_fill.wireframe.key', { html: false }))])
                             .placement('bottom')
                         );
                 } else {
@@ -116,7 +116,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+            .html(function(d) { return t('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -167,7 +167,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+            .html(function(d) { return t('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -218,7 +218,7 @@ export function uiSectionDataLayers(context) {
         containerEnter
             .append('h4')
             .attr('class', 'vectortile-header')
-            .text('Detroit Vector Tiles (Beta)');
+            .html('Detroit Vector Tiles (Beta)');
 
         containerEnter
             .append('ul')
@@ -233,7 +233,7 @@ export function uiSectionDataLayers(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/osmus/detroit-mapping-challenge')
             .append('span')
-            .text('About these layers');
+            .html('About these layers');
 
         container = container
             .merge(containerEnter);
@@ -267,7 +267,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return d.name; });
+            .html(function(d) { return d.name; });
 
         // Update
         li
@@ -326,7 +326,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(t('map_data.layers.custom.title'));
+            .html(t('map_data.layers.custom.title'));
 
         liEnter
             .append('button')
@@ -394,7 +394,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .call(uiTooltip()
                 .title(t('map_data.history_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.history.key'))])
+                .keys([uiCmd('⌘⇧' + t('info_panels.history.key', { html: false }))])
                 .placement('top')
             );
 
@@ -408,7 +408,7 @@ export function uiSectionDataLayers(context) {
 
         historyPanelLabelEnter
             .append('span')
-            .text(t('map_data.history_panel.title'));
+            .html(t('map_data.history_panel.title'));
 
         var measurementPanelLabelEnter = panelsListEnter
             .append('li')
@@ -416,7 +416,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .call(uiTooltip()
                 .title(t('map_data.measurement_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.measurement.key'))])
+                .keys([uiCmd('⌘⇧' + t('info_panels.measurement.key', { html: false }))])
                 .placement('top')
             );
 
@@ -430,7 +430,7 @@ export function uiSectionDataLayers(context) {
 
         measurementPanelLabelEnter
             .append('span')
-            .text(t('map_data.measurement_panel.title'));
+            .html(t('map_data.measurement_panel.title'));
     }
 
     context.layers().on('change.uiSectionDataLayers', section.reRender);

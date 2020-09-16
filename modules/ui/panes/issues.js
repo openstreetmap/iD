@@ -10,7 +10,7 @@ import { uiSectionValidationStatus } from '../sections/validation_status';
 export function uiPaneIssues(context) {
 
     var issuesPane = uiPane('issues', context)
-        .key(t('issues.key'))
+        .key(t('issues.key', { html: false }))
         .title(t('issues.title'))
         .description(t('issues.title'))
         .iconName('iD-icon-alert')

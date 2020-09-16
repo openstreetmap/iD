@@ -123,7 +123,7 @@ export function validationUnsquareWay(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.unsquare_way.buildings.reference'));
+                .html(t('issues.unsquare_way.buildings.reference'));
         }
     };
 

@@ -61,7 +61,7 @@ export function uiFieldTextarea(field, context) {
 
         utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
+            .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : (field.placeholder() || t('inspector.unknown', { html: false })))
             .classed('mixed', isMixed);
     };
 

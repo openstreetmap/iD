@@ -27,7 +27,7 @@ export function uiSettingsCustomBackground() {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_background.header'));
+            .html(t('settings.custom_background.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
@@ -59,7 +59,7 @@ export function uiSettingsCustomBackground() {
         textSection
             .append('textarea')
             .attr('class', 'field-template')
-            .attr('placeholder', t('settings.custom_background.template.placeholder'))
+            .attr('placeholder', t('settings.custom_background.template.placeholder', { html: false }))
             .call(utilNoAuto)
             .property('value', _currSettings.template);
 
@@ -70,7 +70,7 @@ export function uiSettingsCustomBackground() {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .text(t('confirm.cancel'));
+            .html(t('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')

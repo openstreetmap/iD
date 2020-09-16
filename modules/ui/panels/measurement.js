@@ -110,7 +110,7 @@ export function uiPanelMeasurement(context) {
             selection
                 .append('h4')
                 .attr('class', 'measurement-heading')
-                .text(heading);
+                .html(heading);
         }
 
         var list = selection
@@ -120,9 +120,9 @@ export function uiPanelMeasurement(context) {
         if (geometry) {
             list
                 .append('li')
-                .text(t('info_panels.measurement.geometry') + ':')
+                .html(t('info_panels.measurement.geometry') + ':')
                 .append('span')
-                .text(
+                .html(
                     closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
                 );
         }
@@ -130,63 +130,63 @@ export function uiPanelMeasurement(context) {
         if (totalNodeCount) {
             list
                 .append('li')
-                .text(t('info_panels.measurement.node_count') + ':')
+                .html(t('info_panels.measurement.node_count') + ':')
                 .append('span')
-                .text(totalNodeCount.toLocaleString(localeCode));
+                .html(totalNodeCount.toLocaleString(localeCode));
         }
 
         if (area) {
             list
                 .append('li')
-                .text(t('info_panels.measurement.area') + ':')
+                .html(t('info_panels.measurement.area') + ':')
                 .append('span')
-                .text(displayArea(area, isImperial));
+                .html(displayArea(area, isImperial));
         }
 
         if (length) {
             var lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length'));
             list
                 .append('li')
-                .text(lengthLabel + ':')
+                .html(lengthLabel + ':')
                 .append('span')
-                .text(displayLength(length, isImperial));
+                .html(displayLength(length, isImperial));
         }
 
         if (location) {
             coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.location') + ':');
+                .html(t('info_panels.measurement.location') + ':');
             coordItem.append('span')
-                .text(dmsCoordinatePair(location));
+                .html(dmsCoordinatePair(location));
             coordItem.append('span')
-                .text(decimalCoordinatePair(location));
+                .html(decimalCoordinatePair(location));
         }
 
         if (centroid) {
             coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.centroid') + ':');
+                .html(t('info_panels.measurement.centroid') + ':');
             coordItem.append('span')
-                .text(dmsCoordinatePair(centroid));
+                .html(dmsCoordinatePair(centroid));
             coordItem.append('span')
-                .text(decimalCoordinatePair(centroid));
+                .html(decimalCoordinatePair(centroid));
         }
 
         if (center) {
             coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.center') + ':');
+                .html(t('info_panels.measurement.center') + ':');
             coordItem.append('span')
-                .text(dmsCoordinatePair(center));
+                .html(dmsCoordinatePair(center));
             coordItem.append('span')
-                .text(decimalCoordinatePair(center));
+                .html(decimalCoordinatePair(center));
         }
 
         if (length || area) {
             var toggle  = isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
-                .text(t('info_panels.measurement.' + toggle))
+                .html(t('info_panels.measurement.' + toggle))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-units')
                 .on('click', function() {
@@ -219,7 +219,7 @@ export function uiPanelMeasurement(context) {
 
     panel.id = 'measurement';
     panel.title = t('info_panels.measurement.title');
-    panel.key = t('info_panels.measurement.key');
+    panel.key = t('info_panels.measurement.key', { html: false });
 
 
     return panel;

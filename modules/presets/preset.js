@@ -79,11 +79,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  let _textCache = {};
   _this.t = (scope, options) => {
     const textID = `presets.presets.${presetID}.${scope}`;
-    if (_textCache[textID]) return _textCache[textID];
-    return _textCache[textID] = t(textID, options);
+    return t(textID, options);
   };
 
 
@@ -92,13 +90,13 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       let path = presetID.split('/');
       path.pop();  // remove brand name
       // NOTE: insert an en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
-      return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
+      return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name', { html: false });
     }
-    return _this.t('name', { 'default': _this.originalName });
+    return _this.t('name', { 'default': _this.originalName, html: false });
   };
 
 
-  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
+  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms, html: false })
     .toLowerCase().trim().split(/\s*,+\s*/);
 
 

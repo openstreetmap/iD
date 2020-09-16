@@ -47,12 +47,12 @@ export function uiAccount(context) {
             // Add user name
             userLink.append('span')
                 .attr('class', 'label')
-                .text(details.display_name);
+                .html(details.display_name);
 
             logoutLink.append('a')
                 .attr('class', 'logout')
                 .attr('href', '#')
-                .text(t('logout'))
+                .html(t('logout'))
                 .on('click.logout', function() {
                     d3_event.preventDefault();
                     osm.logout();

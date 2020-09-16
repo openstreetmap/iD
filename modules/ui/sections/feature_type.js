@@ -109,7 +109,7 @@ export function uiSectionFeatureType(context) {
             .enter()
             .append('div')
             .attr('class', 'namepart')
-            .text(function(d) { return d; });
+            .html(function(d) { return d; });
     }
 
     section.entityIDs = function(val) {

@@ -22,14 +22,14 @@ export function presetField(fieldID, field) {
 
   _this.t = (scope, options) => t(`presets.fields.${fieldID}.${scope}`, options);
 
-  _this.label = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
+  _this.label = () => _this.overrideLabel || _this.t('label', { 'default': fieldID, html: false });
 
   const _placeholder = _this.placeholder;
-  _this.placeholder = () => _this.t('placeholder', { 'default': _placeholder });
+  _this.placeholder = () => _this.t('placeholder', { 'default': _placeholder, html: false });
 
   _this.originalTerms = (_this.terms || []).join();
 
-  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
+  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms, html: false })
     .toLowerCase().trim().split(/\s*,+\s*/);
 
 

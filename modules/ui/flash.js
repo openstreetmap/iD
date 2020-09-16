@@ -65,7 +65,7 @@ export function uiFlash(context) {
         content
             .selectAll('.flash-text')
             .attr('class', 'flash-text ' + (_textClass || ''))
-            .text(_text);
+            .html(_text);
 
 
         _flashTimer = d3_timeout(function() {

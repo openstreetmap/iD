@@ -35,7 +35,7 @@ export function uiKeepRightEditor(context) {
 
     headerEnter
       .append('h3')
-        .text(t('QA.keepRight.title'));
+        .html(t('QA.keepRight.title'));
 
 
     let body = selection.selectAll('.body')
@@ -90,12 +90,12 @@ export function uiKeepRightEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .text(t('QA.keepRight.comment'));
+        .html(t('QA.keepRight.comment'));
 
     saveSectionEnter
       .append('textarea')
         .attr('class', 'new-comment-input')
-        .attr('placeholder', t('QA.keepRight.comment_placeholder'))
+        .attr('placeholder', t('QA.keepRight.comment_placeholder', { html: false }))
         .attr('maxlength', 1000)
         .property('value', d => d.newComment || d.comment)
         .call(utilNoAuto)
@@ -146,7 +146,7 @@ export function uiKeepRightEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .text(t('QA.keepRight.save_comment'));
+        .html(t('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')
@@ -171,7 +171,7 @@ export function uiKeepRightEditor(context) {
       });
 
     buttonSection.select('.close-button')   // select and propagate data
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
         return t(`QA.keepRight.close${andComment}`);
       })
@@ -185,7 +185,7 @@ export function uiKeepRightEditor(context) {
       });
 
     buttonSection.select('.ignore-button')   // select and propagate data
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
         return t(`QA.keepRight.ignore${andComment}`);
       })

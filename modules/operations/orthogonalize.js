@@ -130,7 +130,7 @@ export function operationOrthogonalize(context, selectedIDs) {
 
 
     operation.id = 'orthogonalize';
-    operation.keys = [t('operations.orthogonalize.key')];
+    operation.keys = [t('operations.orthogonalize.key', { html: false })];
     operation.title = t('operations.orthogonalize.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

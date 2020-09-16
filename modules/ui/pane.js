@@ -107,7 +107,7 @@ export function uiPane(id, context) {
 
         heading
             .append('h2')
-            .text(_title);
+            .html(_title);
 
         heading
             .append('button')

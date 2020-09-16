@@ -274,12 +274,12 @@ export function uiFieldAddress(field, context) {
     function updatePlaceholder(inputSelection) {
         return inputSelection.attr('placeholder', function(subfield) {
             if (_tags && Array.isArray(_tags[field.key + ':' + subfield.id])) {
-                return t('inspector.multiple_values');
+                return t('inspector.multiple_values', { html: false });
             }
             if (_countryCode) {
                 var localkey = subfield.id + '!' + _countryCode;
                 var tkey = addrField.strings.placeholders[localkey] ? localkey : subfield.id;
-                return addrField.t('placeholders.' + tkey);
+                return addrField.t('placeholders.' + tkey, { html: false });
             }
         });
     }

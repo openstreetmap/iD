@@ -62,7 +62,7 @@ export function uiGeolocate(context) {
             zoomTo();
         } else {
             context.ui().flash
-                .text(t('geolocate.location_unavailable'))
+                .html(t('geolocate.location_unavailable'))
                 .iconName('#iD-icon-geolocate')();
         }
 
@@ -92,6 +92,6 @@ export function uiGeolocate(context) {
                 .keys([t('geolocate.key')])
             );
 
-        context.keybinding().on(t('geolocate.key'), click);
+        context.keybinding().on(t('geolocate.key', { html: false }), click);
     };
 }

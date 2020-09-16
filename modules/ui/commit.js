@@ -223,7 +223,7 @@ export function uiCommit(context) {
             .append('div')
             .attr('class', 'header-block')
             .append('h3')
-            .text(t('commit.title'));
+            .html(t('commit.title'));
 
         headerTitle
             .append('div')
@@ -283,7 +283,7 @@ export function uiCommit(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
-            .text(t('commit.upload_explanation'))
+            .html(t('commit.upload_explanation'))
             .merge(prose);
 
         // always check if this has changed, but only update prose.html()
@@ -306,7 +306,7 @@ export function uiCommit(context) {
             userLink
                 .append('a')
                 .attr('class', 'user-info')
-                .text(user.display_name)
+                .html(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
                 .attr('target', '_blank');
 
@@ -337,7 +337,7 @@ export function uiCommit(context) {
 
         labelEnter
             .append('span')
-            .text(t('commit.request_review'));
+            .html(t('commit.request_review'));
 
         // Update
         requestReview = requestReview
@@ -362,7 +362,7 @@ export function uiCommit(context) {
             .attr('class', 'secondary-action button cancel-button')
             .append('span')
             .attr('class', 'label')
-            .text(t('commit.cancel'));
+            .html(t('commit.cancel'));
 
         var uploadButton = buttonEnter
             .append('button')
@@ -370,7 +370,7 @@ export function uiCommit(context) {
 
         uploadButton.append('span')
             .attr('class', 'label')
-            .text(t('commit.save'));
+            .html(t('commit.save'));
 
         var uploadBlockerTooltipText = getUploadBlockerMessage();
 

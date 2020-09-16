@@ -74,7 +74,7 @@ export function uiSuccess(context) {
 
     header
       .append('h3')
-      .text(t('success.just_edited'));
+      .html(t('success.just_edited'));
 
     header
       .append('button')
@@ -92,11 +92,11 @@ export function uiSuccess(context) {
 
     summary
       .append('h3')
-      .text(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
+      .html(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
     summary
       .append('p')
-      .text(t('success.help_html'))
+      .html(t('success.help_html'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
@@ -104,7 +104,7 @@ export function uiSuccess(context) {
       .attr('href', t('success.help_link_url'))
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .append('span')
-      .text(t('success.help_link_text'));
+      .html(t('success.help_link_text'));
 
     let osm = context.connection();
     if (!osm) return;
@@ -139,7 +139,7 @@ export function uiSuccess(context) {
       .attr('class', 'cell-detail summary-view-on-osm')
       .attr('target', '_blank')
       .attr('href', changesetURL)
-      .text(t('success.view_on_osm'));
+      .html(t('success.view_on_osm'));
 
     summaryDetail
       .append('div')
@@ -183,7 +183,7 @@ export function uiSuccess(context) {
 
     communityLinks
       .append('h3')
-      .text(t('success.like_osm'));
+      .html(t('success.like_osm'));
 
     let table = communityLinks
       .append('table')
@@ -217,7 +217,7 @@ export function uiSuccess(context) {
     communityLinks
       .append('div')
       .attr('class', 'community-missing')
-      .text(t('success.missing'))
+      .html(t('success.missing'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
@@ -225,7 +225,7 @@ export function uiSuccess(context) {
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .attr('href', 'https://github.com/osmlab/osm-community-index/issues')
       .append('span')
-      .text(t('success.tell_us'));
+      .html(t('success.tell_us'));
   }
 
 
@@ -243,7 +243,7 @@ export function uiSuccess(context) {
       .append('a')
       .attr('target', '_blank')
       .attr('href', d.url)
-      .text(t(`community.${d.id}.name`));
+      .html(t(`community.${d.id}.name`));
 
     let descriptionHTML = t(`community.${d.id}.description`, replacements);
 
@@ -295,7 +295,7 @@ export function uiSuccess(context) {
         .select('.hide-toggle')
         .append('span')
         .attr('class', 'badge-text')
-        .text(nextEvents.length);
+        .html(nextEvents.length);
     }
 
 
@@ -322,7 +322,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-languages')
-          .text(t('success.languages', { languages: languageList }));
+          .html(t('success.languages', { languages: languageList }));
       }
     }
 
@@ -345,7 +345,7 @@ export function uiSuccess(context) {
         .append('a')
         .attr('target', '_blank')
         .attr('href', d => d.url)
-        .text(d => {
+        .html(d => {
           let name = d.name;
           if (d.i18n && d.id) {
             name = t(`community.${communityID}.events.${d.id}.name`, { default: name });
@@ -356,7 +356,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-when')
-        .text(d => {
+        .html(d => {
           let options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
           if (d.date.getHours() || d.date.getMinutes()) {   // include time if it has one
             options.hour = 'numeric';
@@ -368,7 +368,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-where')
-        .text(d => {
+        .html(d => {
           let where = d.where;
           if (d.i18n && d.id) {
             where = t(`community.${communityID}.events.${d.id}.where`, { default: where });
@@ -379,7 +379,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-description')
-        .text(d => {
+        .html(d => {
           let description = d.description;
           if (d.i18n && d.id) {
             description = t(`community.${communityID}.events.${d.id}.description`, { default: description });

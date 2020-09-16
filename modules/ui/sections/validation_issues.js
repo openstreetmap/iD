@@ -124,7 +124,7 @@ export function uiSectionValidationIssues(id, severity, context) {
 
                 d3_select(this)
                     .append('button')
-                    .attr('title', t('issues.fix_one.title'))
+                    .attr('title', t('issues.fix_one.title', { html: false }))
                     .datum(d.autoFix)  // set button datum to the autofix
                     .attr('class', 'autofix action')
                     .on('click', function(d) {
@@ -147,7 +147,7 @@ export function uiSectionValidationIssues(id, severity, context) {
             .order();
 
         items.selectAll('.issue-message')
-            .text(function(d) {
+            .html(function(d) {
                 return d.message(context);
             });
 
@@ -175,7 +175,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         linkEnter
             .append('span')
             .attr('class', 'autofix-all-link-text')
-            .text(t('issues.fix_all.title'));
+            .html(t('issues.fix_all.title'));
 
         linkEnter
             .append('span')

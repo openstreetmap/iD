@@ -112,11 +112,11 @@ export function validationPrivateData() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.private_data.reference'));
+                .html(t('issues.private_data.reference'));
 
             enter
                 .append('strong')
-                .text(t('issues.suggested'));
+                .html(t('issues.suggested'));
 
             enter
                 .append('table')
@@ -131,7 +131,7 @@ export function validationPrivateData() {
                     var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .text(function(d) { return d.display; });
+                .html(function(d) { return d.display; });
         }
     };
 

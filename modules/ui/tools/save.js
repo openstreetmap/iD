@@ -68,7 +68,7 @@ export function uiToolSave(context) {
                 .style('background', bgColor(_numChanges));
 
             button.select('span.count')
-                .text(_numChanges);
+                .html(_numChanges);
         }
     }
 
@@ -102,7 +102,7 @@ export function uiToolSave(context) {
                         .duration(2000)
                         .iconName('#iD-icon-save')
                         .iconClass('disabled')
-                        .text(t('save.no_changes'))();
+                        .html(t('save.no_changes'))();
                 }
                 lastPointerUpType = null;
             })
@@ -115,7 +115,7 @@ export function uiToolSave(context) {
             .append('span')
             .attr('class', 'count')
             .attr('aria-hidden', 'true')
-            .text('0');
+            .html('0');
 
         updateCount();
 

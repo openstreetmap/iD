@@ -12,7 +12,7 @@ export function modeAddNote(context) {
         button: 'note',
         title: t('modes.add_note.title'),
         description: t('modes.add_note.description'),
-        key: t('modes.add_note.key')
+        key: t('modes.add_note.key', { html: false })
     };
 
     var behavior = behaviorDraw(context)

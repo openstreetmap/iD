@@ -86,9 +86,9 @@ export function helpString(id, replacements) {
         return: uiCmd.display('↵'),
         esc: t('shortcuts.key.esc'),
         space: t('shortcuts.key.space'),
-        add_note_key: t('modes.add_note.key'),
-        help_key: t('help.key'),
-        shortcuts_key: t('shortcuts.toggle.key'),
+        add_note_key: t('modes.add_note.key', { html: false }),
+        help_key: t('help.key', { html: false }),
+        shortcuts_key: t('shortcuts.toggle.key', { html: false }),
 
         // reference localized UI labels directly so that they'll always match
         save: t('save.title'),

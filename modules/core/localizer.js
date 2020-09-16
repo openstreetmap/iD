@@ -221,6 +221,8 @@ export function coreLocalizer() {
       return 'other';
     }
 
+    let _lastUsedTCode;
+
     /**
     * Given a string identifier, try to find that string in the current
     * language, and return it.  This function will be called recursively
@@ -232,17 +234,19 @@ export function coreLocalizer() {
     * @return {string?}  localized string
     */
     localizer.t = function(stringId, replacements, locale) {
-        locale = locale || _localeCode;
+        _lastUsedTCode = null;
 
-        // US English is the default
-        if (locale.toLowerCase() === 'en-us') locale = 'en';
+        locale = locale || _localeCode;
 
         let path = stringId
           .split('.')
           .map(s => s.replace(/<TX_DOT>/g, '.'))
           .reverse();
 
-        let result = _localeStrings[locale];
+        let stringsKey = locale;
+        // US English is the default
+        if (stringsKey.toLowerCase() === 'en-us') stringsKey = 'en';
+        let result = _localeStrings[stringsKey];
 
         while (result !== undefined && path.length) {
           result = result[path.pop()];
@@ -287,7 +291,11 @@ export function coreLocalizer() {
           }
           if (typeof result === 'string') {
             // found a localized string!
-            return result;
+            _lastUsedTCode = locale;
+            if (replacements && replacements.html === false) {
+                return result;
+            }
+            return `<span class="localized-text" lang="${locale}">${result}</span>`;
           }
         }
         // no localized string found...
@@ -310,6 +318,8 @@ export function coreLocalizer() {
 
         return missing;
     };
+
+    localizer.t.lastCode = () => _lastUsedTCode;
 
     localizer.languageName = (code, options) => {
 

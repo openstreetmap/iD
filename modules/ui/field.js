@@ -132,7 +132,7 @@ export function uiField(context, presetField, entityIDs, options) {
             textEnter
                 .append('span')
                 .attr('class', 'label-textvalue')
-                .text(function(d) { return d.label(); });
+                .html(function(d) { return d.label(); });
 
             textEnter
                 .append('span')
@@ -142,7 +142,7 @@ export function uiField(context, presetField, entityIDs, options) {
                 labelEnter
                     .append('button')
                     .attr('class', 'remove-icon')
-                    .attr('title', t('icons.remove'))
+                    .attr('title', t('icons.remove', { html: false }))
                     .attr('tabindex', -1)
                     .call(svgIcon('#iD-operation-delete'));
             }
@@ -151,7 +151,7 @@ export function uiField(context, presetField, entityIDs, options) {
                 labelEnter
                     .append('button')
                     .attr('class', 'modified-icon')
-                    .attr('title', t('icons.undo'))
+                    .attr('title', t('icons.undo', { html: false }))
                     .attr('tabindex', -1)
                     .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-redo' : '#iD-icon-undo'));
             }

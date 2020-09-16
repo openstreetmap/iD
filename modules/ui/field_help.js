@@ -198,7 +198,7 @@ export function uiFieldHelp(context, fieldName) {
         titleEnter
             .append('h2')
             .attr('class', ((localizer.textDirection() === 'rtl') ? 'fr' : 'fl'))
-            .text(t('help.field.' + fieldName + '.title'));
+            .html(t('help.field.' + fieldName + '.title'));
 
         titleEnter
             .append('button')
@@ -220,7 +220,7 @@ export function uiFieldHelp(context, fieldName) {
             .enter()
             .append('div')
             .attr('class', 'field-help-nav-item')
-            .text(function(d) { return d; })
+            .html(function(d) { return d; })
             .on('click', function(d, i) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();

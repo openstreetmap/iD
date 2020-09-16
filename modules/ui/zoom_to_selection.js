@@ -26,7 +26,7 @@ export function uiZoomToSelection(context) {
                     .duration(2000)
                     .iconName('#iD-icon-framed-dot')
                     .iconClass('disabled')
-                    .text(t('inspector.zoom_to.no_selection'))();
+                    .html(t('inspector.zoom_to.no_selection'))();
             }
         } else {
             var mode = context.mode();
@@ -48,7 +48,7 @@ export function uiZoomToSelection(context) {
                 }
                 return t('inspector.zoom_to.title');
             })
-            .keys([t('inspector.zoom_to.key')]);
+            .keys([t('inspector.zoom_to.key', { html: false })]);
 
         var button = selection
             .append('button')

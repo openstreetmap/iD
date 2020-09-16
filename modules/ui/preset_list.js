@@ -38,7 +38,7 @@ export function uiPresetList(context) {
 
         var message = messagewrap
             .append('h3')
-            .text(t('inspector.choose'));
+            .html(t('inspector.choose'));
 
         messagewrap
             .append('button')
@@ -110,7 +110,7 @@ export function uiPresetList(context) {
                 messageText = t('inspector.choose');
             }
             list.call(drawList, results);
-            message.text(messageText);
+            message.html(messageText);
         }
 
         var searchWrap = selection
@@ -123,7 +123,7 @@ export function uiPresetList(context) {
         var search = searchWrap
             .append('input')
             .attr('class', 'preset-search-input')
-            .attr('placeholder', t('inspector.search'))
+            .attr('placeholder', t('inspector.search', { html: false }))
             .attr('type', 'search')
             .call(utilNoAuto)
             .on('keydown', initialKeydown)
@@ -392,7 +392,7 @@ export function uiPresetList(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')
-                .text(function(d) { return d; });
+                .html(function(d) { return d; });
 
             wrap.call(item.reference.button);
             selection.call(item.reference.body);

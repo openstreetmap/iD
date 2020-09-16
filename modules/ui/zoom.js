@@ -84,7 +84,7 @@ export function uiZoom(context) {
                         .duration(2000)
                         .iconName('#' + d.icon)
                         .iconClass('disabled')
-                        .text(d.disabledTitle)();
+                        .html(d.disabledTitle)();
                 }
                 lastPointerUpType = null;
             })

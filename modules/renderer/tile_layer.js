@@ -238,7 +238,7 @@ export function rendererTileLayer(context) {
 
             debug
                 .selectAll('.tile-label-debug-coord')
-                .text(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; });
+                .html(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; });
 
             debug
                 .selectAll('.tile-label-debug-vintage')
@@ -246,7 +246,7 @@ export function rendererTileLayer(context) {
                     var span = d3_select(this);
                     var center = context.projection.invert(tileCenter(d));
                     _source.getMetadata(center, d, function(err, result) {
-                        span.text((result && result.vintage && result.vintage.range) ||
+                        span.html((result && result.vintage && result.vintage.range) ||
                             t('info_panels.background.vintage') + ': ' + t('info_panels.background.unknown')
                         );
                     });

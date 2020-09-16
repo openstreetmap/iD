@@ -255,7 +255,7 @@ export function uiPaneHelp(context) {
     });
 
     var helpPane = uiPane('help', context)
-        .key(t('help.key'))
+        .key(t('help.key', { html: false }))
         .title(t('help.title'))
         .description(t('help.title'))
         .iconName('iD-icon-help');
@@ -293,7 +293,7 @@ export function uiPaneHelp(context) {
 
                     nextLink
                         .append('span')
-                        .text(docs[i + 1].title)
+                        .html(docs[i + 1].title)
                         .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
@@ -311,7 +311,7 @@ export function uiPaneHelp(context) {
                     prevLink
                         .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
-                        .text(docs[i - 1].title);
+                        .html(docs[i - 1].title);
                 }
             }
         }
@@ -353,7 +353,7 @@ export function uiPaneHelp(context) {
 
         shortcuts
             .append('div')
-            .text(t('shortcuts.title'));
+            .html(t('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
@@ -369,7 +369,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .text(t('splash.walkthrough'));
+            .html(t('splash.walkthrough'));
 
 
         var helpContent = content

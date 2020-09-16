@@ -113,7 +113,7 @@ export function uiFieldText(field, context) {
                     var domainResults = /^https?:\/\/(.{1,}?)\//.exec(field.urlFormat);
                     if (domainResults.length >= 2 && domainResults[1]) {
                         var domain = domainResults[1];
-                        return t('icons.view_on', { domain: domain });
+                        return t('icons.view_on', { domain: domain, html: false });
                     }
                     return '';
                 })
@@ -202,7 +202,7 @@ export function uiFieldText(field, context) {
 
         utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
+            .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : (field.placeholder() || t('inspector.unknown', { html: false })))
             .classed('mixed', isMixed);
 
         if (outlinkButton && !outlinkButton.empty()) {

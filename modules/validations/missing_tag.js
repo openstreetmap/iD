@@ -138,7 +138,7 @@ export function validationMissingTag(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.' + referenceID + '.reference'));
+                .html(t('issues.' + referenceID + '.reference'));
         }
     };
 

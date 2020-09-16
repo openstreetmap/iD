@@ -55,7 +55,7 @@ export function uiScale(context) {
 
         selection.select('.scale-text')
             .style(localizer.textDirection() === 'ltr' ? 'left' : 'right', (scale.px + 16) + 'px')
-            .text(scale.text);
+            .html(scale.text);
     }
 
 

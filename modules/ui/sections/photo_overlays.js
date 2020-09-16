@@ -86,7 +86,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) {
+            .html(function(d) {
                 var id = d.id;
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
                 return t(id.replace(/-/g, '_') + '.title');
@@ -151,7 +151,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) {
+            .html(function(d) {
                 return t('photo_overlays.photo_type.' + d + '.title');
             });
 

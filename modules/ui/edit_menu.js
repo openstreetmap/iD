@@ -109,7 +109,7 @@ export function uiEditMenu(context) {
         if (showLabels) {
             buttonsEnter.append('span')
                 .attr('class', 'label')
-                .text(function(d) {
+                .html(function(d) {
                     return d.title;
                 });
         }
@@ -148,7 +148,7 @@ export function uiEditMenu(context) {
                         .duration(4000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation disabled')
-                        .text(operation.tooltip)();
+                        .html(operation.tooltip)();
                 }
             } else {
                 if (lastPointerUpType === 'touch' ||
@@ -157,7 +157,7 @@ export function uiEditMenu(context) {
                         .duration(2000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation')
-                        .text(operation.annotation() || operation.title)();
+                        .html(operation.annotation() || operation.title)();
                 }
 
                 operation();

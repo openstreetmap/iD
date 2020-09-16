@@ -68,7 +68,7 @@ export function operationReverse(context, selectedIDs) {
 
 
     operation.id = 'reverse';
-    operation.keys = [t('operations.reverse.key')];
+    operation.keys = [t('operations.reverse.key', { html: false })];
     operation.title = t('operations.reverse.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

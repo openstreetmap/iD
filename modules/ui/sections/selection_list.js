@@ -92,7 +92,7 @@ export function uiSectionSelectionList(context) {
         enter
             .append('button')
             .attr('class', 'close')
-            .attr('title', t('icons.deselect'))
+            .attr('title', t('icons.deselect', { html: false }))
             .on('click', deselectEntity)
             .call(svgIcon('#iD-icon-close'));
 
@@ -119,10 +119,10 @@ export function uiSectionSelectionList(context) {
             });
 
         items.selectAll('.entity-type')
-            .text(function(entity) { return presetManager.match(entity, context.graph()).name(); });
+            .html(function(entity) { return presetManager.match(entity, context.graph()).name(); });
 
         items.selectAll('.entity-name')
-            .text(function(d) {
+            .html(function(d) {
                 // fetch latest entity
                 var entity = context.entity(d.id);
                 return utilDisplayName(entity);
