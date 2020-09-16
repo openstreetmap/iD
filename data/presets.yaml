@@ -2777,6 +2777,26 @@ en:
       valve:
         # valve=*
         label: Type
+      vehicles:
+        # 'bus=*, trolleybus=*, tram=*, train=*, subway=*, light_rail=*, monorail=*, ferry=*'
+        label: Vehicles
+        options:
+          # bus=yes
+          bus: Bus
+          # ferry=yes
+          ferry: Ferry
+          # light_rail=yes
+          light_rail: Light Rail
+          # monorail=yes
+          monorail: Monorail
+          # subway=yes
+          subway: Subway
+          # train=yes
+          train: Train
+          # tram=yes
+          tram: Tram
+          # trolleybus=yes
+          trolleybus: Trolleybus
       vending:
         # vending=*
         label: Types of Goods

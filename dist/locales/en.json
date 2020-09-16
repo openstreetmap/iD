@@ -5109,6 +5109,19 @@
                 "valve": {
                     "label": "Type"
                 },
+                "vehicles": {
+                    "label": "Vehicles",
+                    "options": {
+                        "bus": "Bus",
+                        "trolleybus": "Trolleybus",
+                        "tram": "Tram",
+                        "train": "Train",
+                        "subway": "Subway",
+                        "light_rail": "Light Rail",
+                        "monorail": "Monorail",
+                        "ferry": "Ferry"
+                    }
+                },
                 "vending": {
                     "label": "Types of Goods"
                 },

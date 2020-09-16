@@ -4,7 +4,8 @@
         "name",
         "ref_stop_position",
         "network",
-        "operator"
+        "operator",
+        "vehicles"
     ],
     "moreFields": [],
     "geometry": [
