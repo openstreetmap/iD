@@ -238,6 +238,7 @@ Optional properties:
 * `terms_html` - Html content to display in the imagery terms
 * `terms_text` - Text content to display in the imagery terms
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
+* `offset` - If set, use for offset map in meters the first number it `x` second `у`,example:`[-6.59,6.18]`.  Defaults to `[0.00,0.00]`
 
 For more details about the `iD.fileFetcher.cache().imagery` structure, see
 [`update_imagery.js`](https://github.com/openstreetmap/iD/blob/develop/scripts/update_imagery.js).
