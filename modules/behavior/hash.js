@@ -62,7 +62,8 @@ export function behaviorHash(context) {
             if (selected.length > 1 ) {
                 contextual = t('title.labeled_and_more', {
                     labeled: firstLabel,
-                    count: (selected.length - 1).toString()
+                    count: (selected.length - 1).toString(),
+                    html: false
                 });
             } else {
                 contextual = firstLabel;
@@ -81,7 +82,8 @@ export function behaviorHash(context) {
             return t('title.format.' + titleID, {
                 changes: changeCount,
                 base: baseTitle,
-                context: contextual
+                context: contextual,
+                html: false
             });
         }
 
