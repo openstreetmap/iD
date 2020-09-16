@@ -3422,6 +3422,10 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "direction_point": {
+                    "label": "Direction (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
+                },
                 "direction_vertex_dual": {
                     "label": "Direction Affected",
                     "options": {
@@ -10290,10 +10294,6 @@
                 "traffic_calming/table": {
                     "name": "Speed Table",
                     "terms": "flat top,hump,speed,slow"
-                },
-                "traffic_sign_vertex": {
-                    "name": "Traffic Sign",
-                    "terms": "road,highway"
                 },
                 "traffic_sign": {
                     "name": "Traffic Sign",

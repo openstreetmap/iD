@@ -765,6 +765,11 @@ en:
           anticlockwise: Counterclockwise
           # direction=clockwise
           clockwise: Clockwise
+      direction_point:
+        # direction=*
+        label: Direction (Degrees Clockwise)
+        # direction_point field placeholder
+        placeholder: '45, 90, 180, 270'
       direction_vertex:
         # direction=*
         label: Direction Affected
@@ -8894,11 +8899,6 @@ en:
         name: Speed Limit Sign
         # 'terms: max speed,maximum speed,road,highway'
         terms: '<translate with synonyms or related terms for ''Speed Limit Sign'', separated by commas>'
-      traffic_sign_vertex:
-        # traffic_sign=*
-        name: Traffic Sign
-        # 'terms: road,highway'
-        terms: '<translate with synonyms or related terms for ''Traffic Sign'', separated by commas>'
       type/boundary:
         # type=boundary
         name: Boundary
