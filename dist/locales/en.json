@@ -8924,10 +8924,6 @@
                     "name": "Village",
                     "terms": ""
                 },
-                "place/welcome_sign": {
-                    "name": "Welcome Sign",
-                    "terms": "new location"
-                },
                 "playground/balance_beam": {
                     "name": "Play Balance Beam",
                     "terms": ""
@@ -10173,6 +10169,10 @@
                 "tourism/information/board": {
                     "name": "Information Board",
                     "terms": ""
+                },
+                "tourism/information/board/welcome_sign": {
+                    "name": "Welcome Sign",
+                    "terms": "new location"
                 },
                 "tourism/information/guidepost": {
                     "name": "Guidepost",
