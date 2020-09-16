@@ -19,6 +19,7 @@
     "build:dev": "rollup --config config/rollup.config.dev.js",
     "build:legacy": "rollup --config config/rollup.config.legacy.js",
     "build:stats": "rollup --config config/rollup.config.stats.js",
+    "watch:dev": "rollup --watch --config config/rollup.config.dev.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
@@ -62,6 +63,8 @@
     "osm-auth": "1.1.0",
     "pannellum": "2.5.6",
     "rbush": "3.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "string.fromcodepoint": "1.0.0",
     "which-polygon": "2.2.0"
   },
@@ -76,6 +79,9 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.0.1",
     "@rollup/plugin-node-resolve": "~8.1.0",
+    "@rollup/plugin-replace": "^2.3.3",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
     "autoprefixer": "^9.8.4",
     "chai": "^4.1.0",
     "cldr-core": "36.0.0",
@@ -107,6 +113,7 @@
     "rollup": "~2.23.0",
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-progress": "^1.1.1",
+    "rollup-plugin-typescript2": "^0.27.1",
     "rollup-plugin-visualizer": "~4.0.4",
     "shelljs": "^0.8.0",
     "shx": "^0.3.0",
@@ -115,6 +122,7 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
+    "typescript": "^3.9.7",
     "uglify-js": "~3.10.0"
   },
   "engines": {
