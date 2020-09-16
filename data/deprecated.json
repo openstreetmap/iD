@@ -228,6 +228,10 @@
     "replace": {"barrier": "fence", "fence_type": "wood"}
   },
   {
+    "old": {"bench": "capacity"},
+    "replace": {"bench": "seats"}
+  },
+  {
     "old": {"bicycle:oneway": "*"},
     "replace": {"oneway:bicycle": "$1"}
   },

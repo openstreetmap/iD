@@ -2080,6 +2080,7 @@
     {"key": "barrier", "value": "railing", "description": "🄳 ➜ barrier=fence + fence_type=railing"},
     {"key": "barrier", "value": "wire_fence", "description": "🄳 ➜ barrier=fence + fence_type=wire"},
     {"key": "barrier", "value": "wood_fence", "description": "🄳 ➜ barrier=fence + fence_type=wood"},
+    {"key": "bench", "value": "capacity", "description": "🄳 ➜ bench=seats"},
     {"key": "bicycle:oneway", "description": "🄳 ➜ oneway:bicycle=*"},
     {"key": "bridge", "value": "1", "description": "🄳 ➜ bridge=yes"},
     {"key": "bridge", "value": "true", "description": "🄳 ➜ bridge=yes"},
