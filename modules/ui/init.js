@@ -115,6 +115,7 @@ export function uiInit(context) {
         }
 
         container
+            .attr('lang', localizer.localeCode())
             .attr('dir', localizer.textDirection());
 
         // setup fullscreen keybindings (no button shown at this time)
