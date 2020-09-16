@@ -2046,6 +2046,7 @@
     {"key": "amenity", "value": "gym", "description": "🄳 ➜ leisure=fitness_centre"},
     {"key": "amenity", "value": "hotel", "description": "🄳 ➜ tourism=hotel"},
     {"key": "amenity", "value": "kiosk", "description": "🄳 ➜ shop=kiosk"},
+    {"key": "amenity", "value": "notice_board", "description": "🄳 ➜ advertising=board"},
     {"key": "amenity", "value": "nursery", "description": "🄳 ➜ amenity=kindergarten"},
     {"key": "amenity", "value": "preschool", "description": "🄳 ➜ amenity=kindergarten + preschool=yes"},
     {"key": "amenity", "value": "public_building", "description": "🄳 ➜ building=public"},

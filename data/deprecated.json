@@ -116,6 +116,10 @@
     "replace": {"shop": "kiosk"}
   },
   {
+    "old": {"amenity": "notice_board"},
+    "replace": {"advertising": "board"}
+  },
+  {
     "old": {"amenity": "nursery"},
     "replace": {"amenity": "kindergarten"}
   },
