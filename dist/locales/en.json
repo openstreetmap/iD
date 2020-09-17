@@ -3422,6 +3422,10 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "direction_point": {
+                    "label": "Direction (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
+                },
                 "direction_vertex_dual": {
                     "label": "Direction Affected",
                     "options": {
@@ -5104,6 +5108,19 @@
                 },
                 "valve": {
                     "label": "Type"
+                },
+                "vehicles": {
+                    "label": "Vehicles",
+                    "options": {
+                        "bus": "Bus",
+                        "trolleybus": "Trolleybus",
+                        "tram": "Tram",
+                        "train": "Train",
+                        "subway": "Subway",
+                        "light_rail": "Light Rail",
+                        "monorail": "Monorail",
+                        "ferry": "Ferry"
+                    }
                 },
                 "vending": {
                     "label": "Types of Goods"
@@ -10183,6 +10200,10 @@
                     "name": "Information Board",
                     "terms": ""
                 },
+                "tourism/information/board/welcome_sign": {
+                    "name": "Welcome Sign",
+                    "terms": "new location"
+                },
                 "tourism/information/guidepost": {
                     "name": "Guidepost",
                     "terms": "signpost"
@@ -10291,25 +10312,13 @@
                     "name": "Speed Table",
                     "terms": "flat top,hump,speed,slow"
                 },
-                "traffic_sign_vertex": {
-                    "name": "Traffic Sign",
-                    "terms": "road,highway"
-                },
                 "traffic_sign": {
                     "name": "Traffic Sign",
                     "terms": "road,highway"
                 },
-                "traffic_sign/city_limit_vertex": {
-                    "name": "City Limit Sign",
-                    "terms": "town,village,hamlet,boundary,edge,border,road,highway"
-                },
                 "traffic_sign/city_limit": {
                     "name": "City Limit Sign",
                     "terms": "town,village,hamlet,boundary,edge,border,road,highway"
-                },
-                "traffic_sign/maxspeed_vertex": {
-                    "name": "Speed Limit Sign",
-                    "terms": "max speed,maximum speed,road,highway"
                 },
                 "traffic_sign/maxspeed": {
                     "name": "Speed Limit Sign",

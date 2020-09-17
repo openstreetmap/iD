@@ -1,0 +1,32 @@
+{
+    "keys": [
+        "bus",
+        "trolleybus",
+        "tram",
+        "train",
+        "subway",
+        "light_rail",
+        "monorail",
+        "ferry"
+    ],
+    "type": "multiCombo",
+    "label": "Vehicles",
+    "strings": {
+        "options": {
+            "bus": "Bus",
+            "trolleybus": "Trolleybus",
+            "tram": "Tram",
+            "train": "Train",
+            "subway": "Subway",
+            "light_rail": "Light Rail",
+            "monorail": "Monorail",
+            "ferry": "Ferry"
+        }
+    },
+    "reference": {
+        "key": "public_transport"
+    },
+    "prerequisiteTag": {
+        "keyNot": "aerialway"
+    }
+}

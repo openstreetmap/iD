@@ -765,6 +765,11 @@ en:
           anticlockwise: Counterclockwise
           # direction=clockwise
           clockwise: Clockwise
+      direction_point:
+        # direction=*
+        label: Direction (Degrees Clockwise)
+        # direction_point field placeholder
+        placeholder: '45, 90, 180, 270'
       direction_vertex:
         # direction=*
         label: Direction Affected
@@ -2772,6 +2777,26 @@ en:
       valve:
         # valve=*
         label: Type
+      vehicles:
+        # 'bus=*, trolleybus=*, tram=*, train=*, subway=*, light_rail=*, monorail=*, ferry=*'
+        label: Vehicles
+        options:
+          # bus=yes
+          bus: Bus
+          # ferry=yes
+          ferry: Ferry
+          # light_rail=yes
+          light_rail: Light Rail
+          # monorail=yes
+          monorail: Monorail
+          # subway=yes
+          subway: Subway
+          # train=yes
+          train: Train
+          # tram=yes
+          tram: Tram
+          # trolleybus=yes
+          trolleybus: Trolleybus
       vending:
         # vending=*
         label: Types of Goods
@@ -8739,6 +8764,11 @@ en:
         # 'tourism=information, information=board'
         name: Information Board
         terms: '<translate with synonyms or related terms for ''Information Board'', separated by commas>'
+      tourism/information/board/welcome_sign:
+        # 'tourism=information, information=board, board_type=welcome_sign'
+        name: Welcome Sign
+        # 'terms: new location'
+        terms: '<translate with synonyms or related terms for ''Welcome Sign'', separated by commas>'
       tourism/information/guidepost:
         # 'tourism=information, information=guidepost'
         name: Guidepost
@@ -8879,26 +8909,11 @@ en:
         name: City Limit Sign
         # 'terms: town,village,hamlet,boundary,edge,border,road,highway'
         terms: '<translate with synonyms or related terms for ''City Limit Sign'', separated by commas>'
-      traffic_sign/city_limit_vertex:
-        # traffic_sign=city_limit
-        name: City Limit Sign
-        # 'terms: town,village,hamlet,boundary,edge,border,road,highway'
-        terms: '<translate with synonyms or related terms for ''City Limit Sign'', separated by commas>'
       traffic_sign/maxspeed:
         # traffic_sign=maxspeed
         name: Speed Limit Sign
         # 'terms: max speed,maximum speed,road,highway'
         terms: '<translate with synonyms or related terms for ''Speed Limit Sign'', separated by commas>'
-      traffic_sign/maxspeed_vertex:
-        # traffic_sign=maxspeed
-        name: Speed Limit Sign
-        # 'terms: max speed,maximum speed,road,highway'
-        terms: '<translate with synonyms or related terms for ''Speed Limit Sign'', separated by commas>'
-      traffic_sign_vertex:
-        # traffic_sign=*
-        name: Traffic Sign
-        # 'terms: road,highway'
-        terms: '<translate with synonyms or related terms for ''Traffic Sign'', separated by commas>'
       type/boundary:
         # type=boundary
         name: Boundary

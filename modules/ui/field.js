@@ -185,7 +185,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
                 // instantiate tag reference
                 if (options.wrap && options.info) {
-                    var referenceKey = d.key;
+                    var referenceKey = d.key || '';
                     if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
                         referenceKey = referenceKey.replace(/:$/, '');
                     }

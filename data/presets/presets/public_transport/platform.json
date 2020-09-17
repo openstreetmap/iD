@@ -4,6 +4,7 @@
         "ref_platform",
         "network",
         "operator",
+        "vehicles",
         "departures_board",
         "surface"
     ],
