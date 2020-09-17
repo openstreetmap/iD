@@ -956,7 +956,8 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .geocode-item {
     left: -25%;
 }
-.geocode-item:active {
+.geocode-item:active,
+.geocode-item:focus {
     background-color: #aaa;
 }
 @media (hover: hover) {
@@ -970,7 +971,8 @@ a.hide-toggle {
     font-weight: bold;
     display: flex;
 }
-.feature-list-item:active {
+.feature-list-item:active,
+.feature-list-item:focus {
     background-color: #ececec;
 }
 @media (hover: hover) {
@@ -1009,7 +1011,8 @@ a.hide-toggle {
 .feature-list-item .entity-type {
     color: #7092ff;
 }
-.feature-list-item:active .entity-type {
+.feature-list-item:active .entity-type,
+.feature-list-item:focus .entity-type {
     color: #597be7;
 }
 @media (hover: hover) {
@@ -1272,7 +1275,8 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .preset-list-button-wrap:not(.category) button:last-child {
     border-radius: 4px 0 0 4px;
 }
-.preset-list-button-wrap button.tag-reference-button:active {
+.preset-list-button-wrap button.tag-reference-button:active,
+.preset-list-button-wrap button.tag-reference-button:hover {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -1436,7 +1440,8 @@ a.hide-toggle {
     border-left: none;
     border-right: 1px solid #ccc;
 }
-.field-label button:active {
+.field-label button:active,
+.field-label button:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -1505,7 +1510,8 @@ a.hide-toggle {
     border-left-width: 1px;
     border-right-width: 0;
 }
-.form-field-button:active {
+.form-field-button:active,
+.form-field-button:focus {
     background-color: #f1f1f1;
 }
 @media (hover: hover) {
@@ -1793,7 +1799,8 @@ a.hide-toggle {
 .form-field-input-check > .reverser.hide {
     display: none;
 }
-.form-field-input-check:active {
+.form-field-input-check:active,
+.form-field-input-check:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -1833,7 +1840,8 @@ a.hide-toggle {
 .form-field-input-radio > label:last-child {
     border-radius: 0 0 4px 4px;
 }
-.form-field-input-radio > label:active {
+.form-field-input-radio > label:active,
+.form-field-input-radio > label:focus {
     background-color: #ececec;
 }
 @media (hover: hover) {
@@ -2185,7 +2193,8 @@ div.combobox {
 }
 
 .combobox a.selected,
-.combobox a:active {
+.combobox a:active,
+.combobox a:focus {
     background: #ececec;
 }
 @media (hover: hover) {
@@ -2270,7 +2279,8 @@ div.combobox {
     color: #7092ff;
     border-bottom: 2px solid;
 }
-.field-help-nav-item:active {
+.field-help-nav-item:active,
+.field-help-nav-item:focus {
     color: #597be7;
     background-color: #efefef;
 }
@@ -2491,7 +2501,8 @@ button.raw-tag-option svg.icon {
     border-right-width: 0;
 }
 
-.tag-row button:active {
+.tag-row button:active,
+.tag-row button:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -2992,7 +3003,8 @@ div.full-screen > button, div.full-screen > button.active {
     height: 40px;
     background: transparent;
 }
-div.full-screen > button:active {
+div.full-screen > button:active,
+div.full-screen > button:focus {
     background-color: rgba(0, 0, 0, .8);
 }
 @media (hover: hover) {
@@ -3084,7 +3096,8 @@ div.full-screen > button:active {
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
-.layer-list li:active {
+.layer-list li:active,
+.layer-list li:focus {
     background-color: #ececec;
 }
 @media (hover: hover) {
@@ -3289,11 +3302,15 @@ button.autofix.action.active {
     fill: #b15500;
 }
 .warnings-list .issue.severity-warning .issue-label:active,
-.issue.severity-warning .issue-fix-item.actionable:active {
+.warnings-list .issue.severity-warning .issue-label:focus,
+.issue.severity-warning .issue-fix-item.actionable:active,
+.issue.severity-warning .issue-fix-item.actionable:focus {
     background: #ff8;
 }
 .issue.severity-warning .issue-fix-item.actionable:active,
-.issue-container.active .issue.severity-warning .issue-info-button:active {
+.issue.severity-warning .issue-fix-item.actionable:focus,
+.issue-container.active .issue.severity-warning .issue-info-button:active,
+.issue-container.active .issue.severity-warning .issue-info-button:focus {
     color: #7f3d00;
     fill: #7f3d00;
 }
@@ -3337,11 +3354,15 @@ button.autofix.action.active {
     color: #dd1400;
 }
 .errors-list .issue.severity-error .issue-label:active,
-.issue.severity-error .issue-fix-item.actionable:active {
+.errors-list .issue.severity-error .issue-label:focus,
+.issue.severity-error .issue-fix-item.actionable:active,
+.issue.severity-error .issue-fix-item.actionable:focus {
     background: #ffb6b6;
 }
 .issue.severity-error .issue-fix-item.actionable:active,
-.issue-container.active .issue.severity-error .issue-info-button:active {
+.issue.severity-error .issue-fix-item.actionable:focus,
+.issue-container.active .issue.severity-error .issue-info-button:active,
+.issue-container.active .issue.severity-error .issue-info-button:focus {
     color: #840c00;
     fill: #840c00;
 }
@@ -3429,7 +3450,9 @@ input.square-degrees-input {
     background: #f6f6f6;
 }
 .section-entity-issues .issue-container:not(.active) .issue-text:active,
-.section-entity-issues .issue-container:not(.active) .issue-info-button:active {
+.section-entity-issues .issue-container:not(.active) .issue-text:focus,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:active,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -3800,6 +3823,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .help-pane .toc li a {
     border-bottom: 0;
 }
+.help-pane .toc li a:focus,
+.help-pane .nav a:focus,
 .help-pane .toc li a:active,
 .help-pane .nav a:active {
     background: #ececec;
@@ -4240,6 +4265,7 @@ img.tile-debug {
 .ideditor[dir='rtl'] .panel-title button.close {
     float: left;
 }
+.panel-title button.close:focus,
 .panel-title button.close:active {
     color: #fff;
 }
@@ -4371,6 +4397,7 @@ img.tile-debug {
 .attribution-wrap .attribution a:visited {
     color: #ccf;
 }
+.attribution-wrap .attribution a:focus,
 .attribution-wrap .attribution a:hover {
     color: #aaf;
 }
@@ -4565,6 +4592,7 @@ img.tile-debug {
     color: #ccc;
     pointer-events: all;
 }
+.api-status a:focus,
 .api-status a:active {
     color: inherit;
 }
@@ -4884,6 +4912,7 @@ img.tile-debug {
     color: #7092ff;
     border-bottom: 2px solid;
 }
+.modal-shortcuts .tab:focus,
 .modal-shortcuts .tab:active {
     color: #597be7;
     background-color: #efefef;
@@ -5023,6 +5052,7 @@ img.tile-debug {
     padding: 5px 10px;
     cursor: pointer;
 }
+.ideditor.mode-save .changeset-list li:focus,
 .ideditor.mode-save .changeset-list li:active {
     background-color: #ececec;
 }
