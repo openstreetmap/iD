@@ -164,10 +164,18 @@ export function uiSectionBackgroundList(context) {
     function drawListItems(layerList, type, change, filter) {
         var sources = context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
-            .filter(filter);
+            .filter(filter)
+            .sort(function(a, b) {
+                return a.best() && !b.best() ? -1
+                    : b.best() && !a.best() ? 1
+                    : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+            });
 
         var layerLinks = layerList.selectAll('li')
-            .data(sources, function(d) { return d.name(); });
+            // We have to be a bit inefficient about reordering the list since
+            // arrow key navigation of radio values likes to work in the order
+            // they were added, not the display document order.
+            .data(sources, function(d, i) { return d.id + '---' + i; });
 
         layerLinks.exit()
             .remove();
@@ -183,7 +191,10 @@ export function uiSectionBackgroundList(context) {
         label
             .append('input')
             .attr('type', type)
-            .attr('name', 'layers')
+            .attr('name', 'background-layer')
+            .attr('value', function(d) {
+                return d.id;
+            })
             .on('change', change);
 
         label
@@ -210,19 +221,8 @@ export function uiSectionBackgroundList(context) {
             .append('span')
             .html('&#9733;');
 
-
-        layerList.selectAll('li')
-            .sort(sortSources);
-
         layerList
             .call(updateLayerSelections);
-
-
-        function sortSources(a, b) {
-            return a.best() && !b.best() ? -1
-                : b.best() && !a.best() ? 1
-                : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
-        }
     }
 
     function updateLayerSelections(selection) {
@@ -244,12 +244,10 @@ export function uiSectionBackgroundList(context) {
             return editCustom();
         }
 
-        d3_event.preventDefault();
         var previousBackground = context.background().baseLayerSource();
         prefs('background-last-used-toggle', previousBackground.id);
         prefs('background-last-used', d.id);
         context.background().baseLayerSource(d);
-        document.activeElement.blur();
     }
 
 
