@@ -128,7 +128,6 @@ export function uiFieldWikipedia(field, context) {
     link = link.enter()
       .append('button')
       .attr('class', 'form-field-button wiki-link')
-      .attr('tabindex', -1)
       .attr('title', t('icons.view_on', { domain: 'wikipedia.org' }))
       .call(svgIcon('#iD-icon-out-link'))
       .merge(link);

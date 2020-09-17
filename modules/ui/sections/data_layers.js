@@ -229,7 +229,6 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'vectortile-footer')
             .append('a')
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/osmus/detroit-mapping-challenge')
             .append('span')

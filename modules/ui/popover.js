@@ -189,6 +189,7 @@ export function uiPopover(klass) {
                 .on('click.popover', toggle);
 
             popoverSelection
+                // This attribute lets the popover take focus
                 .attr('tabindex', 0)
                 .on('blur.popover', function() {
                     anchor.each(function() {

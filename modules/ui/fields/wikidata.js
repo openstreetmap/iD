@@ -94,7 +94,6 @@ export function uiFieldWikidata(field, context) {
             .append('button')
             .attr('class', 'form-field-button wiki-link')
             .attr('title', t('icons.view_on', { domain: 'wikidata.org' }))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
             .on('click', function() {
                 d3_event.preventDefault();
@@ -131,7 +130,6 @@ export function uiFieldWikidata(field, context) {
             .append('button')
             .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-operation-copy'))
             .on('click', function() {
                 d3_event.preventDefault();

@@ -219,7 +219,6 @@ export function uiFieldLocalized(field, context) {
         translateButton = translateButton.enter()
             .append('button')
             .attr('class', 'localized-add form-field-button')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-plus'))
             .merge(translateButton);
 

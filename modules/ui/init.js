@@ -298,13 +298,11 @@ export function uiInit(context) {
         aboutList
             .append('li')
             .attr('class', 'feature-warning')
-            .attr('tabindex', -1)
             .call(uiFeatureInfo(context));
 
         aboutList
             .append('li')
             .attr('class', 'issues-info')
-            .attr('tabindex', -1)
             .call(uiIssuesInfo(context));
 
         var apiConnections = context.apiConnections();
@@ -312,7 +310,6 @@ export function uiInit(context) {
             aboutList
                 .append('li')
                 .attr('class', 'source-switch')
-                .attr('tabindex', -1)
                 .call(uiSourceSwitch(context)
                     .keys(apiConnections)
                 );
@@ -321,7 +318,6 @@ export function uiInit(context) {
         aboutList
             .append('li')
             .attr('class', 'user-list')
-            .attr('tabindex', -1)
             .call(uiContributors(context));
 
 

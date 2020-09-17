@@ -113,7 +113,6 @@ export function uiSectionEntityIssues(context) {
             .append('button')
             .attr('class', 'issue-info-button')
             .attr('title', t('icons.information'))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-inspect'));
 
         infoButton

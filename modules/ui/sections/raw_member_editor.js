@@ -199,7 +199,6 @@ export function uiSectionRawMemberEditor(context) {
 
                     label
                         .append('button')
-                        .attr('tabindex', -1)
                         .attr('title', t('icons.remove'))
                         .attr('class', 'remove member-delete')
                         .call(svgIcon('#iD-operation-delete'));
@@ -230,7 +229,6 @@ export function uiSectionRawMemberEditor(context) {
                         .append('button')
                         .attr('class', 'member-download')
                         .attr('title', t('icons.download'))
-                        .attr('tabindex', -1)
                         .call(svgIcon('#iD-icon-load'))
                         .on('click', downloadMember);
                 }

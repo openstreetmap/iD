@@ -56,7 +56,6 @@ export function uiIssuesInfo(context) {
                 return 'chip ' + d.id + '-count';
             })
             .attr('href', '#')
-            .attr('tabindex', -1)
             .each(function(d) {
 
                 var chipSelection = d3_select(this);

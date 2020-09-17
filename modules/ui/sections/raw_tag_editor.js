@@ -204,7 +204,6 @@ export function uiSectionRawTagEditor(id, context) {
 
         innerWrap
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'form-field-button remove')
             .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'));

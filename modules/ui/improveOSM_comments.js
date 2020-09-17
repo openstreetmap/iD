@@ -52,7 +52,6 @@ export function uiImproveOsmComments() {
                   .append('a')
                   .attr('class', 'comment-author-link')
                   .attr('href', osm.userURL(d.username))
-                  .attr('tabindex', -1)
                   .attr('target', '_blank');
               }
               selection

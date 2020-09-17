@@ -68,7 +68,6 @@ export function uiTagReference(what) {
             .append('a')
             .attr('class', 'tag-reference-edit')
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .attr('title', t('inspector.edit_reference'))
             .attr('href', docs.editURL)
             .call(svgIcon('#iD-icon-edit', 'inline'));
@@ -78,7 +77,6 @@ export function uiTagReference(what) {
               .append('a')
               .attr('class', 'tag-reference-link')
               .attr('target', '_blank')
-              .attr('tabindex', -1)
               .attr('href', docs.wiki.url)
               .call(svgIcon('#iD-icon-out-link', 'inline'))
               .append('span')
@@ -91,7 +89,6 @@ export function uiTagReference(what) {
                 .append('a')
                 .attr('class', 'tag-reference-comment-link')
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .attr('href', t('commit.about_changeset_comments_link'))
                 .append('span')
@@ -154,7 +151,6 @@ export function uiTagReference(what) {
             .append('button')
             .attr('class', 'tag-reference-button ' + (klass || ''))
             .attr('title', t('icons.information'))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-' + (iconName || 'inspect')))
             .merge(_button);
 

@@ -149,7 +149,6 @@ export function uiFieldHelp(context, fieldName) {
         button.enter()
             .append('button')
             .attr('class', 'field-help-button')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-help'))
             .merge(button)
             .on('click', function () {

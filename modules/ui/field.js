@@ -143,7 +143,6 @@ export function uiField(context, presetField, entityIDs, options) {
                     .append('button')
                     .attr('class', 'remove-icon')
                     .attr('title', t('icons.remove'))
-                    .attr('tabindex', -1)
                     .call(svgIcon('#iD-operation-delete'));
             }
 
@@ -152,7 +151,6 @@ export function uiField(context, presetField, entityIDs, options) {
                     .append('button')
                     .attr('class', 'modified-icon')
                     .attr('title', t('icons.undo'))
-                    .attr('tabindex', -1)
                     .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-redo' : '#iD-icon-undo'));
             }
         }

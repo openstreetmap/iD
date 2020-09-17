@@ -40,7 +40,6 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .text('OSM');
         }
 
@@ -49,7 +48,6 @@ export function uiPanelHistory(context) {
             .attr('class', 'user-hdyc-link')
             .attr('href', 'https://hdyc.neis-one.org/?' + userName)
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .text('HDYC');
     }
 
@@ -77,7 +75,6 @@ export function uiPanelHistory(context) {
                 .attr('class', 'changeset-osm-link')
                 .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .text('OSM');
         }
 
@@ -86,7 +83,6 @@ export function uiPanelHistory(context) {
             .attr('class', 'changeset-osmcha-link')
             .attr('href', 'https://osmcha.org/changesets/' + changeset)
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .text('OSMCha');
 
         links
@@ -94,7 +90,6 @@ export function uiPanelHistory(context) {
             .attr('class', 'changeset-achavi-link')
             .attr('href', 'https://overpass-api.de/achavi/?changeset=' + changeset)
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .text('Achavi');
     }
 
@@ -169,7 +164,6 @@ export function uiPanelHistory(context) {
                 .append('a')
                 .attr('class', 'view-history-on-osm')
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .attr('href', osm.noteURL(note))
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
@@ -196,7 +190,6 @@ export function uiPanelHistory(context) {
                 .attr('class', 'view-history-on-osm')
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .attr('title', t('info_panels.history.link_text'))
                 .text('OSM');
         }
@@ -205,7 +198,6 @@ export function uiPanelHistory(context) {
             .attr('class', 'pewu-history-viewer-link')
             .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .text('PeWu');
 
         var list = selection

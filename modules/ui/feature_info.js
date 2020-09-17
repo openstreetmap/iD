@@ -28,7 +28,6 @@ export function uiFeatureInfo(context) {
             selection.append('a')
                 .attr('class', 'chip')
                 .attr('href', '#')
-                .attr('tabindex', -1)
                 .html(t('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
                 .on('click', function() {
