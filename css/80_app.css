@@ -4464,50 +4464,33 @@ img.tile-debug {
 /* Footer - About, Source Switcher
 ------------------------------------------------------- */
 .map-footer-bar .info-block {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
+    overflow: hidden;
 }
 
 .map-footer-list {
-    text-align: right;
-    margin-right: 10px;
     display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
+    flex-flow: row nowrap;
     position: relative;
     height: 100%;
-}
-.ideditor[dir='rtl'] .map-footer-list {
-    text-align: left;
-    margin-left: 10px;
-    margin-right: 0;
+    justify-content: flex-end;
 }
 
 .map-footer-list li {
-    border-left: 1px solid rgba(255,255,255,.5);
-    padding: 5px 0 5px 5px;
-    margin-left: 5px;
     height: 100%;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+    padding: 5px;
 }
-.ideditor[dir='rtl'] .map-footer-list li {
-    border-left: none;
+.ideditor[dir='ltr'] .map-footer-list li:not(:last-child) {
     border-right: 1px solid rgba(255,255,255,.5);
-    margin-left: 0;
-    margin-right: 5px;
-    padding: 5px 5px 5px 0;
+}
+.ideditor[dir='rtl'] .map-footer-list li:not(:last-child) {
+    border-left: 1px solid rgba(255,255,255,.5);
 }
 .map-footer-list li:empty {
     display: none;
-}
-
-.map-footer-list li:last-child {
-    border-left: 0;
-    margin-left: 0;
-    padding-left: 0;
-}
-.ideditor[dir='rtl'] .map-footer-list li:last-child {
-    border-right: none;
 }
 
 .map-footer-list a.chip {

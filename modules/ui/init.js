@@ -268,15 +268,30 @@ export function uiInit(context) {
             .append('ul')
             .attr('class', 'map-footer-list');
 
-        if (!context.embed()) {
+        aboutList
+            .append('li')
+            .attr('class', 'user-list')
+            .call(uiContributors(context));
+
+        var apiConnections = context.apiConnections();
+        if (apiConnections && apiConnections.length > 1) {
             aboutList
-                .call(uiAccount(context));
+                .append('li')
+                .attr('class', 'source-switch')
+                .call(uiSourceSwitch(context)
+                    .keys(apiConnections)
+                );
         }
 
         aboutList
             .append('li')
-            .attr('class', 'version')
-            .call(uiVersion(context));
+            .attr('class', 'issues-info')
+            .call(uiIssuesInfo(context));
+
+        aboutList
+            .append('li')
+            .attr('class', 'feature-warning')
+            .call(uiFeatureInfo(context));
 
         var issueLinks = aboutList
             .append('li');
@@ -297,28 +312,13 @@ export function uiInit(context) {
 
         aboutList
             .append('li')
-            .attr('class', 'feature-warning')
-            .call(uiFeatureInfo(context));
+            .attr('class', 'version')
+            .call(uiVersion(context));
 
-        aboutList
-            .append('li')
-            .attr('class', 'issues-info')
-            .call(uiIssuesInfo(context));
-
-        var apiConnections = context.apiConnections();
-        if (apiConnections && apiConnections.length > 1) {
+        if (!context.embed()) {
             aboutList
-                .append('li')
-                .attr('class', 'source-switch')
-                .call(uiSourceSwitch(context)
-                    .keys(apiConnections)
-                );
+                .call(uiAccount(context));
         }
-
-        aboutList
-            .append('li')
-            .attr('class', 'user-list')
-            .call(uiContributors(context));
 
 
         // Setup map dimensions and move map to initial center/zoom.

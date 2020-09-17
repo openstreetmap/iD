@@ -62,12 +62,13 @@ export function uiAccount(context) {
 
 
     return function(selection) {
-        selection.append('li')
-            .attr('class', 'logoutLink')
-            .classed('hide', true);
 
         selection.append('li')
             .attr('class', 'userLink')
+            .classed('hide', true);
+
+        selection.append('li')
+            .attr('class', 'logoutLink')
             .classed('hide', true);
 
         if (osm) {
