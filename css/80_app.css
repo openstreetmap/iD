@@ -127,6 +127,9 @@ a:visited,
 a:active {
     color: #7092ff;
 }
+a:focus {
+    color: #597be7;
+}
 @media (hover: hover) {
     a:hover {
         color: #597be7;
