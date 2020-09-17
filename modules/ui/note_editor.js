@@ -177,7 +177,8 @@ export function uiNoteEditor(context) {
 
         // fast submit if user presses cmd+enter
         function keydown() {
-            if (!(d3_event.keyCode === 13 && d3_event.metaKey)) return;
+            if (!(d3_event.keyCode === 13 && // ↩ Return
+                d3_event.metaKey)) return;
 
             var osm = services.osm;
             if (!osm) return;

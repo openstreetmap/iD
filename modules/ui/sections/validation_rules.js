@@ -144,7 +144,7 @@ export function uiSectionValidationRules(context) {
                 this.select();
             })
             .on('keyup', function () {
-                if (d3_event.keyCode === 13) { // enter
+                if (d3_event.keyCode === 13) { // ↩ Return
                     this.blur();
                     this.select();
                 }

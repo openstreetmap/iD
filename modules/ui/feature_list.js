@@ -89,7 +89,9 @@ export function uiFeatureList(context) {
         function keypress() {
             var q = search.property('value'),
                 items = list.selectAll('.feature-list-item');
-            if (d3_event.keyCode === 13 && q.length && items.size()) {  // return
+            if (d3_event.keyCode === 13 && // ↩ Return
+                q.length &&
+                items.size()) {
                 click(items.datum());
             }
         }

@@ -127,7 +127,9 @@ export function uiSectionPresetFields(context) {
         selection.selectAll('.wrap-form-field input')
             .on('keydown', function() {
                 // if user presses enter, and combobox is not active, accept edits..
-                if (d3_event.keyCode === 13 && context.container().select('.combobox').empty()) {
+                if (d3_event.keyCode === 13 && // ↩ Return
+                    context.container().select('.combobox').empty()) {
+
                     context.enter(modeBrowse(context));
                 }
             });
