@@ -10200,6 +10200,10 @@
                     "name": "Information Board",
                     "terms": ""
                 },
+                "tourism/information/board/welcome_sign": {
+                    "name": "Welcome Sign",
+                    "terms": "new location"
+                },
                 "tourism/information/guidepost": {
                     "name": "Guidepost",
                     "terms": "signpost"

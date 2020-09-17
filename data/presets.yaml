@@ -8764,6 +8764,11 @@ en:
         # 'tourism=information, information=board'
         name: Information Board
         terms: '<translate with synonyms or related terms for ''Information Board'', separated by commas>'
+      tourism/information/board/welcome_sign:
+        # 'tourism=information, information=board, board_type=welcome_sign'
+        name: Welcome Sign
+        # 'terms: new location'
+        terms: '<translate with synonyms or related terms for ''Welcome Sign'', separated by commas>'
       tourism/information/guidepost:
         # 'tourism=information, information=guidepost'
         name: Guidepost

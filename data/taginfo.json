@@ -1199,6 +1199,7 @@
     {"key": "tourism", "value": "hotel", "description": "🄿 Hotel", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-concierge-bell.svg"},
     {"key": "tourism", "value": "information", "description": "🄿 Information", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/information-15.svg"},
     {"key": "information", "value": "board", "description": "🄿 Information Board", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/info_board.svg"},
+    {"key": "board_type", "value": "welcome_sign", "description": "🄿 Welcome Sign", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/embassy-15.svg"},
     {"key": "information", "value": "guidepost", "description": "🄿 Guidepost", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-map-signs.svg"},
     {"key": "information", "value": "map", "description": "🄿 Map", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-map.svg"},
     {"key": "information", "value": "office", "description": "🄿 Visitor Center", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/information-15.svg"},
