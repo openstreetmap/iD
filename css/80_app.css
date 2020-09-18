@@ -98,7 +98,14 @@ h4, h5 {
     padding-bottom: 10px;
 }
 
-:focus {
+button:focus,
+textarea:focus,
+input[type=text]:focus,
+input[type=search]:focus,
+input[type=number]:focus,
+input[type=url]:focus,
+input[type=tel]:focus,
+input[type=email]:focus {
     outline-color: transparent;
     outline-style: none;
 }
@@ -763,11 +770,6 @@ button.add-note svg.icon {
     width: 16px;
     height: 16px;
     margin-top: -3px;
-    margin-left: -3px;
-}
-.ideditor[dir='rtl'] .hide-toggle .icon.pre-text {
-    margin-left: 0;
-    margin-right: -3px;
 }
 
 a:visited.hide-toggle,
@@ -775,7 +777,7 @@ a.hide-toggle {
     display: inline-block;
     font-size: 14px;
     font-weight: bold;
-    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 
