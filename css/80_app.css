@@ -3198,6 +3198,9 @@ div.full-screen > button:focus {
     display: flex;
     flex-flow: row nowrap;
     cursor: pointer;
+    text-align: initial;
+    background: none;
+    font-weight: initial;
 }
 
 .issue-text .issue-icon {
@@ -3296,19 +3299,19 @@ button.autofix.action.active {
     color: #f90;
 }
 
-.issue.severity-warning .issue-fix-item.actionable,
+.issue.severity-warning .issue-fix-item button.actionable,
 .issue-container.active .issue.severity-warning .issue-info-button {
     color: #b15500;
     fill: #b15500;
 }
 .warnings-list .issue.severity-warning .issue-label:active,
 .warnings-list .issue.severity-warning .issue-label:focus,
-.issue.severity-warning .issue-fix-item.actionable:active,
-.issue.severity-warning .issue-fix-item.actionable:focus {
+.issue.severity-warning .issue-fix-item button.actionable:active,
+.issue.severity-warning .issue-fix-item button.actionable:focus {
     background: #ff8;
 }
-.issue.severity-warning .issue-fix-item.actionable:active,
-.issue.severity-warning .issue-fix-item.actionable:focus,
+.issue.severity-warning .issue-fix-item button.actionable:active,
+.issue.severity-warning .issue-fix-item button.actionable:focus,
 .issue-container.active .issue.severity-warning .issue-info-button:active,
 .issue-container.active .issue.severity-warning .issue-info-button:focus {
     color: #7f3d00;
@@ -3316,10 +3319,10 @@ button.autofix.action.active {
 }
 @media (hover: hover) {
     .warnings-list .issue.severity-warning .issue-label:hover,
-    .issue.severity-warning .issue-fix-item.actionable:hover {
+    .issue.severity-warning .issue-fix-item button.actionable:hover {
         background: #ff8;
     }
-    .issue.severity-warning .issue-fix-item.actionable:hover,
+    .issue.severity-warning .issue-fix-item button.actionable:hover,
     .issue-container.active .issue.severity-warning .issue-info-button:hover {
         color: #7f3d00;
         fill: #7f3d00;
@@ -3345,7 +3348,7 @@ button.autofix.action.active {
     background: #ffc6c6;
 }
 
-.issue.severity-error .issue-fix-item.actionable,
+.issue.severity-error .issue-fix-item button.actionable,
 .issue-container.active .issue.severity-error .issue-info-button {
     color: #b91201;
     fill: #b91201;
@@ -3355,12 +3358,12 @@ button.autofix.action.active {
 }
 .errors-list .issue.severity-error .issue-label:active,
 .errors-list .issue.severity-error .issue-label:focus,
-.issue.severity-error .issue-fix-item.actionable:active,
-.issue.severity-error .issue-fix-item.actionable:focus {
+.issue.severity-error .issue-fix-item button.actionable:active,
+.issue.severity-error .issue-fix-item button.actionable:focus {
     background: #ffb6b6;
 }
-.issue.severity-error .issue-fix-item.actionable:active,
-.issue.severity-error .issue-fix-item.actionable:focus,
+.issue.severity-error .issue-fix-item button.actionable:active,
+.issue.severity-error .issue-fix-item button.actionable:focus,
 .issue-container.active .issue.severity-error .issue-info-button:active,
 .issue-container.active .issue.severity-error .issue-info-button:focus {
     color: #840c00;
@@ -3368,10 +3371,10 @@ button.autofix.action.active {
 }
 @media (hover: hover) {
     .errors-list .issue.severity-error .issue-label:hover,
-    .issue.severity-error .issue-fix-item.actionable:hover {
+    .issue.severity-error .issue-fix-item button.actionable:hover {
         background: #ffb6b6;
     }
-    .issue.severity-error .issue-fix-item.actionable:hover,
+    .issue.severity-error .issue-fix-item button.actionable:hover,
     .issue-container.active .issue.severity-error .issue-info-button:hover {
         color: #840c00;
         fill: #840c00;
@@ -3469,7 +3472,7 @@ input.square-degrees-input {
     padding-left: 10px;
 }
 
-.section-entity-issues .issue-container.active .issue-label .issue-text {
+.section-entity-issues .issue-container.active .issue-label button.issue-text {
     font-weight: bold;
 }
 .section-entity-issues .issue-container:not(:last-of-type) {
@@ -3491,27 +3494,32 @@ input.square-degrees-input {
     display: none;
 }
 
-li.issue-fix-item {
+li.issue-fix-item button {
     padding: 2px 10px 2px 20px;
+    background: transparent;
+    width: 100%;
+    text-align: initial;
+    font-weight: initial;
 }
-.ideditor[dir='rtl'] li.issue-fix-item {
+.ideditor[dir='rtl'] li.issue-fix-item button {
     padding: 2px 20px 2px 10px;
 }
-li.issue-fix-item:first-of-type {
+li.issue-fix-item:first-of-type button {
     padding-top: 5px;
 }
-li.issue-fix-item:last-of-type {
+li.issue-fix-item:last-of-type button {
     padding-bottom: 5px;
 }
 
-li.issue-fix-item .fix-message {
+li.issue-fix-item button .fix-message {
     padding: 0 10px;
+    vertical-align: middle;
 }
 
-li.issue-fix-item.actionable {
+li.issue-fix-item button.actionable {
     cursor: pointer;
 }
-li.issue-fix-item:not(.actionable) .fix-icon {
+li.issue-fix-item button:not(.actionable) .fix-icon {
     color: #555;
     fill: #555;
 }
@@ -3963,7 +3971,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .section-entity-issues .issue-container.active .issue-label {
     border-bottom: 0;
 }
-.inspector-hover .section-entity-issues .issue-container.active .issue-label .issue-text {
+.inspector-hover .section-entity-issues .issue-container .issue-label button.issue-text {
     font-weight: normal;
 }
 

@@ -79,7 +79,11 @@ export function uiSectionEntityIssues(context) {
 
         var labelsEnter = itemsEnter
             .append('div')
-            .attr('class', 'issue-label')
+            .attr('class', 'issue-label');
+
+        var textEnter = labelsEnter
+            .append('button')
+            .attr('class', 'issue-text')
             .on('click', function(d) {
 
                 makeActiveIssue(d.id); // expand only the clicked item
@@ -91,17 +95,11 @@ export function uiSectionEntityIssues(context) {
                 }
             });
 
-        var textEnter = labelsEnter
-            .append('span')
-            .attr('class', 'issue-text');
-
         textEnter
-            .append('span')
-            .attr('class', 'issue-icon')
             .each(function(d) {
                 var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
-                    .call(svgIcon(iconName));
+                    .call(svgIcon(iconName, 'issue-icon'));
             });
 
         textEnter
@@ -188,10 +186,13 @@ export function uiSectionEntityIssues(context) {
 
         var fixesEnter = fixes.enter()
             .append('li')
-            .attr('class', 'issue-fix-item')
+            .attr('class', 'issue-fix-item');
+
+        var buttons = fixesEnter
+            .append('button')
             .on('click', function(d) {
                 // not all fixes are actionable
-                if (!d3_select(this).classed('actionable') || !d.onClick) return;
+                if (d3_select(this).attr('disabled') || !d.onClick) return;
 
                 // Don't run another fix for this issue within a second of running one
                 // (Necessary for "Select a feature type" fix. Most fixes should only ever run once)
@@ -220,25 +221,27 @@ export function uiSectionEntityIssues(context) {
                 utilHighlightEntities(d.entityIds, false, context);
             });
 
-        fixesEnter
-            .append('span')
-            .attr('class', 'fix-icon')
+        buttons
             .each(function(d) {
                 var iconName = d.icon || 'iD-icon-wrench';
                 if (iconName.startsWith('maki')) {
                     iconName += '-15';
                 }
-                d3_select(this).call(svgIcon('#' + iconName));
+                d3_select(this).call(svgIcon('#' + iconName, 'fix-icon'));
             });
 
-        fixesEnter
+        buttons
             .append('span')
             .attr('class', 'fix-message')
             .text(function(d) { return d.title; });
 
         fixesEnter.merge(fixes)
+            .selectAll('button')
             .classed('actionable', function(d) {
                 return d.onClick;
+            })
+            .attr('disabled', function(d) {
+                return d.onClick ? null : 'true';
             })
             .attr('title', function(d) {
                 if (d.disabledReason) {
