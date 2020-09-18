@@ -59,18 +59,24 @@ export function uiSectionChanges(context) {
             .append('li')
             .attr('class', 'change-item');
 
-        itemsEnter
+        var buttons = itemsEnter
+            .append('button')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', click);
+
+        buttons
             .each(function(d) {
                 d3_select(this)
                     .call(svgIcon('#iD-icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
             });
 
-        itemsEnter
+        buttons
             .append('span')
             .attr('class', 'change-type')
             .text(function(d) { return t('commit.' + d.changeType) + ' '; });
 
-        itemsEnter
+        buttons
             .append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
@@ -78,7 +84,7 @@ export function uiSectionChanges(context) {
                 return (matched && matched.name()) || utilDisplayType(d.entity.id);
             });
 
-        itemsEnter
+        buttons
             .append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
@@ -90,18 +96,8 @@ export function uiSectionChanges(context) {
                 return string += ' ' + name;
             });
 
-        itemsEnter
-            .style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
-
         items = itemsEnter
             .merge(items);
-
-        items
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', click);
 
 
         // Download changeset link

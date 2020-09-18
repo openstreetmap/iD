@@ -3101,8 +3101,7 @@ div.full-screen > button:focus {
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid #ccc;
 }
-.layer-list li:active,
-.layer-list li:focus {
+.layer-list li:active {
     background-color: #ececec;
 }
 @media (hover: hover) {
@@ -3291,7 +3290,7 @@ button.autofix.action.active {
 
 .warnings-list .issue.severity-warning .issue-label,
 .issue.severity-warning .issue-fix-list,
-.ideditor.mode-save .warning-section {
+.warning-section {
     background: #ffc;
 }
 
@@ -3344,7 +3343,7 @@ button.autofix.action.active {
 
 .errors-list .issue.severity-error .issue-label,
 .issue.severity-error .issue-fix-list,
-.ideditor.mode-save .error-section {
+.error-section {
     background: #ffd6d6;
 }
 
@@ -5006,20 +5005,20 @@ img.tile-debug {
 
 /* Save Mode
 ------------------------------------------------------- */
-.ideditor.mode-save a.user-info {
+a.user-info {
     display: inline-block;
 }
 
-.ideditor.mode-save .commit-form {
+.commit-form {
     margin-bottom: 0;
 }
 
-.ideditor.mode-save .user-info img {
+.user-info img {
     float: left;
 }
 
 .note-save .field-warning,
-.ideditor.mode-save .field-warning {
+.field-warning {
     background: #ffb;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -5027,62 +5026,44 @@ img.tile-debug {
 }
 
 .note-save .field-warning:empty,
-.ideditor.mode-save .field-warning:empty {
+.field-warning:empty {
     display: none;
 }
 
-.ideditor.mode-save .field-warning,
-.ideditor.mode-save .changeset-info,
-.ideditor.mode-save .request-review,
-.ideditor.mode-save .commit-info {
+.field-warning,
+.changeset-info,
+.request-review,
+.commit-info {
     margin-bottom: 10px;
 }
 
-.ideditor.mode-save .request-review label {
+.request-review label {
     cursor: pointer;
 }
 
-.ideditor.mode-save .changeset-list {
+.changeset-list {
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #fff;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
-.ideditor.mode-save .warning-section .changeset-list button {
-    border-left: 1px solid #ccc;
-}
-
-.ideditor.mode-save .changeset-list li {
-    position: relative;
-    border-top: 1px solid #ccc;
+.changeset-list li button {
     padding: 5px 10px;
-    cursor: pointer;
+    width: 100%;
+    border-radius: 0;
+    text-align: initial;
 }
-.ideditor.mode-save .changeset-list li:focus,
-.ideditor.mode-save .changeset-list li:active {
-    background-color: #ececec;
+.changeset-list li {
+    border-top: 1px solid #ccc;
 }
-@media (hover: hover) {
-    .ideditor.mode-save .changeset-list li:hover {
-        background-color: #ececec;
-    }
+.changeset-list li:first-child {
+    border-top: 0;
 }
-
-.ideditor.mode-save .changeset-list .alert {
+.changeset-list .alert {
     opacity: 0.5;
 }
-
-.changeset-list li span.count {
-    font-size: 10px;
-    color: #555;
-}
-
-.changeset-list li span.count:before { content: '('; }
-
-.changeset-list li span.count:after { content: ')'; }
-
-.changeset-list li:first-child { border-top: 0;}
 
 
 /* Conflict resolution
@@ -5097,7 +5078,7 @@ img.tile-debug {
     padding: 20px;
 }
 
-.ideditor.mode-save button.conflicts-button {
+button.conflicts-button {
     float: left;
 }
 
