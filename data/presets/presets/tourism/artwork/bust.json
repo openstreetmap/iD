@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "artist",
-        "material"
+        "material",
+        "inscription"
     ],
     "geometry": [
         "point",
