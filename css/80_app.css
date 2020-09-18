@@ -3264,7 +3264,7 @@ button.autofix.action.active {
 .autofix-all {
     display: flex;
     flex-flow: row nowrap;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
     margin-top: -25px;
     padding-bottom: 5px;
 }
@@ -3421,7 +3421,7 @@ button.autofix.action.active {
 .section-footer {
     display: flex;
     flex-flow: row nowrap;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
     height: 30px;
 }
 .section-footer a {
@@ -4220,7 +4220,8 @@ img.tile-debug {
 ------------------------------------------------------- */
 .info-panels {
     display: flex;
-    flex-flow: row-reverse wrap-reverse;
+    flex-flow: row wrap-reverse;
+    justify-content: flex-end;
     width: 100%;
     z-index: 1;
     -ms-user-select: element;
