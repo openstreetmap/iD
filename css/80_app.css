@@ -2383,7 +2383,7 @@ div.combobox {
 .raw-tag-options {
     display: flex;
     flex-flow: row nowrap;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
     margin-top: -28px;
 }
 button.raw-tag-option {
