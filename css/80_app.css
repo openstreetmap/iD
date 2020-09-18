@@ -315,7 +315,6 @@ button {
     text-align: center;
     border: 0;
     background: #fff;
-    font-weight: bold;
     color: #333;
     font-size: 12px;
     display: inline-block;
@@ -371,6 +370,7 @@ button.disabled {
 button.action {
     background: #7092ff;
     color: #fff;
+    font-weight: bold;
 }
 button.action:focus,
 button.action:active {
@@ -378,6 +378,7 @@ button.action:active {
 }
 button.secondary-action {
     background: #ececec;
+    font-weight: bold;
 }
 button.secondary-action:focus,
 button.secondary-action:active {
@@ -563,6 +564,7 @@ button.bar-button {
     min-width: 30px;
     white-space: nowrap;
     display: flex;
+    font-weight: bold;
 }
 button.bar-button .icon {
     flex: 0 0 20px;
@@ -1244,8 +1246,8 @@ a.hide-toggle {
 .preset-list-button .label-inner .namepart {
     text-overflow: ellipsis;
 }
-.preset-list-button .label-inner .namepart:nth-child(2) {
-    font-weight: normal;
+.preset-list-button .label-inner .namepart:nth-child(1) {
+    font-weight: bold;
 }
 
 .preset-list-button:focus .label,
@@ -1791,6 +1793,7 @@ a.hide-toggle {
     border: 1px solid #ccd5e3;
     border-radius: 2px;
     padding: 0px 8px;
+    color: inherit;
 }
 .ideditor[dir='ltr'] .form-field-input-check > .reverser {
     padding-right: 2px;
@@ -3202,7 +3205,6 @@ div.full-screen > button:focus {
     cursor: pointer;
     text-align: initial;
     background: none;
-    font-weight: initial;
 }
 
 .issue-text .issue-icon {
@@ -3501,7 +3503,6 @@ li.issue-fix-item button {
     background: transparent;
     width: 100%;
     text-align: initial;
-    font-weight: initial;
 }
 .ideditor[dir='rtl'] li.issue-fix-item button {
     padding: 2px 20px 2px 10px;
@@ -3972,9 +3973,6 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 .inspector-hover .section-entity-issues .issue-container.active .issue-label {
     border-bottom: 0;
-}
-.inspector-hover .section-entity-issues .issue-container .issue-label button.issue-text {
-    font-weight: normal;
 }
 
 
@@ -4751,7 +4749,6 @@ img.tile-debug {
     display: flex;
 }
 .modal-actions button {
-    font-weight: normal;
     color: #7092ff;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
@@ -5154,6 +5151,7 @@ img.tile-debug {
     padding: 20px 5px;
     font-size: 150%;
     border-radius: 8px;
+    font-weight: bold;
 }
 
 .notice .zoom-to:focus,

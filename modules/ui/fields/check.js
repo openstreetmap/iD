@@ -113,7 +113,7 @@ export function uiFieldCheck(field, context) {
 
         if (field.type === 'onewayCheck') {
             enter
-                .append('a')
+                .append('button')
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
                 .attr('href', '#')
                 .append('span')
