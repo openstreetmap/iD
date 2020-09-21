@@ -35,21 +35,25 @@ export function uiZoom(context) {
     }];
 
     function zoomIn() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomIn();
     }
 
     function zoomOut() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOut();
     }
 
     function zoomInFurther() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomInFurther();
     }
 
     function zoomOutFurther() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOutFurther();
     }

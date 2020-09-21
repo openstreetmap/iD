@@ -527,6 +527,38 @@
                     "features": "Reversed multiple features."
                 }
             },
+            "scale": {
+                "annotation": {
+                    "down": {
+                        "feature": {
+                            "one": "Scaled down a feature.",
+                            "other": "Scaled down {n} features."
+                        }
+                    },
+                    "up": {
+                        "feature": {
+                            "one": "Scaled up a feature.",
+                            "other": "Scaled up {n} features."
+                        }
+                    }
+                },
+                "too_small": {
+                    "single": "This feature can't be scaled down because it would become too small.",
+                    "multiple": "These features can't be scaled down because they would become too small."
+                },
+                "too_large": {
+                    "single": "This feature can't be scaled because not enough of it is currently visible.",
+                    "multiple": "These features can't be scaled because not enough of them are currently visible."
+                },
+                "connected_to_hidden": {
+                    "single": "This feature can't be scaled because it is connected to a hidden feature.",
+                    "multiple": "These features can't be scaled because some are connected to hidden features."
+                },
+                "not_downloaded": {
+                    "single": "This feature can't be scaled because parts of it have not yet been downloaded.",
+                    "multiple": "These features can't be scaled because parts of them have not yet been downloaded."
+                }
+            },
             "split": {
                 "title": "Split",
                 "description": {
@@ -2674,6 +2706,8 @@
                     "move": "Move selected features",
                     "nudge": "Nudge selected features",
                     "nudge_more": "Nudge selected features by a lot",
+                    "scale": "Scale selected features",
+                    "scale_more": "Scale selected features by a lot",
                     "rotate": "Rotate selected features",
                     "orthogonalize": "Square corners of a line or area",
                     "straighten": "Straighten a line or points",
