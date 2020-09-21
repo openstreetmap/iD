@@ -214,6 +214,9 @@ utilKeybinding.modifierProperties = {
     91: 'metaKey'
 };
 
+utilKeybinding.plusKeys = ['plus', 'ffplus', '=', 'ffequals'];
+utilKeybinding.minusKeys = ['_', '-', 'ffminus', 'dash'];
+
 utilKeybinding.keys = {
     // Backspace key, on Mac: ⌫ (Backspace)
     '⌫': 'Backspace', backspace: 'Backspace',
