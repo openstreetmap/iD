@@ -223,7 +223,7 @@ utilKeybinding.keys = {
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
     '⇥': 'Tab', '⇆': 'Tab', tab: 'Tab',
     // Return key, ↩
-    '↩': 'Enter', 'return': 'Enter', enter: 'Enter', '⌅': 'Enter',
+    '↩': 'Enter', '↵': 'Enter', '⏎': 'Enter', 'return': 'Enter', enter: 'Enter', '⌅': 'Enter',
     // Pause/Break key
     'pause': 'Pause', 'pause-break': 'Pause',
     // Caps Lock key, ⇪
@@ -324,7 +324,7 @@ utilKeybinding.keyCodes = {
     // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
     '⇥': 9, '⇆': 9, tab: 9,
     // Return key, ↩
-    '↩': 13, 'return': 13, enter: 13, '⌅': 13,
+    '↩': 13, '↵': 13, '⏎': 13, 'return': 13, enter: 13, '⌅': 13,
     // Pause/Break key
     'pause': 19, 'pause-break': 19,
     // Caps Lock key, ⇪
