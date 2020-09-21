@@ -3203,6 +3203,11 @@ en:
         name: Biergarten
         # 'terms: beer,bier,booze'
         terms: '<translate with synonyms or related terms for ''Biergarten'', separated by commas>'
+      amenity/binoculars:
+        # amenity=binoculars
+        name: Mounted Binoculars
+        # 'terms: observation viewer,optical ranger,spotting scope,sight,spyglass,telescope,tower viewer,viewfinder,viewing stand'
+        terms: '<translate with synonyms or related terms for ''Mounted Binoculars'', separated by commas>'
       amenity/boat_rental:
         # amenity=boat_rental
         name: Boat Rental

@@ -5583,6 +5583,10 @@
                     "name": "Biergarten",
                     "terms": "beer,bier,booze"
                 },
+                "amenity/binoculars": {
+                    "name": "Mounted Binoculars",
+                    "terms": "observation viewer,optical ranger,spotting scope,sight,spyglass,telescope,tower viewer,viewfinder,viewing stand"
+                },
                 "amenity/boat_rental": {
                     "name": "Boat Rental",
                     "terms": ""
