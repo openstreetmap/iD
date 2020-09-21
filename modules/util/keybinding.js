@@ -28,17 +28,22 @@ export function utilKeybinding(namespace) {
             if (matches(binding, true)) {
                 binding.callback();
                 didMatch = true;
+
+                // match a max of one binding per event
+                break;
             }
         }
 
-        // then unshifted keybindings
         if (didMatch) return;
+
+        // then unshifted keybindings
         for (i = 0; i < bindings.length; i++) {
             binding = bindings[i];
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(binding, false)) {
                 binding.callback();
+                break;
             }
         }
 
@@ -214,8 +219,8 @@ utilKeybinding.modifierProperties = {
     91: 'metaKey'
 };
 
-utilKeybinding.plusKeys = ['plus', 'ffplus', '=', 'ffequals'];
-utilKeybinding.minusKeys = ['_', '-', 'ffminus', 'dash'];
+utilKeybinding.plusKeys = ['plus', 'ffplus', '=', 'ffequals', '≠', '±'];
+utilKeybinding.minusKeys = ['_', '-', 'ffminus', 'dash', '–', '—'];
 
 utilKeybinding.keys = {
     // Backspace key, on Mac: ⌫ (Backspace)

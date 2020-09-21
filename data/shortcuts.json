@@ -282,6 +282,18 @@
             "separator": ","
           },
           {
+            "modifiers": ["⇧"],
+            "shortcuts": ["+", "-"],
+            "text": "shortcuts.editing.operations.scale",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⌥", "⇧"],
+            "shortcuts": ["+", "-"],
+            "text": "shortcuts.editing.operations.scale_more",
+            "separator": ","
+          },
+          {
             "shortcuts": ["operations.rotate.key"],
             "text": "shortcuts.editing.operations.rotate"
           },
