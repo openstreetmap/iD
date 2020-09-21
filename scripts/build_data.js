@@ -710,22 +710,37 @@ function validatePresetFields(presets, fields) {
       if (!preset[fieldsKey]) continue; // no fields are referenced, okay
 
       for (let fieldIndex in preset[fieldsKey]) {
-        let field = preset[fieldsKey][fieldIndex];
-        if (fields[field] !== undefined) continue; // field found, okay
+        let fieldID = preset[fieldsKey][fieldIndex];
+        let field = fields[fieldID];
+        if (field) {
+          if (field.geometry) {
+            let sharedGeometry = field.geometry.filter(value => preset.geometry.includes(value));
+            if (!sharedGeometry.length) {
+              console.error('The preset "' + presetID + '" (' + preset.name + ') will never display the field "' + fieldID + '" since they don\'t share geometry types.');
+              console.log('');
+              process.exit(1);
+            }
+          }
 
-        let regexResult = betweenBracketsRegex.exec(field);
-        if (regexResult) {
-          let foreignPresetID = regexResult[0];
-          if (presets[foreignPresetID] === undefined) {
-            console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
+        } else {
+          // no field found with this ID...
+
+          let regexResult = betweenBracketsRegex.exec(fieldID);
+          if (regexResult) {
+            let foreignPresetID = regexResult[0];
+            if (presets[foreignPresetID] === undefined) {
+              console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
+              console.log('');
+              process.exit(1);
+            }
+          } else {
+            console.error('Unknown preset field "' + fieldID + '" in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
             console.log('');
             process.exit(1);
           }
-        } else {
-          console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
-          console.log('');
-          process.exit(1);
         }
+
+
       }
     }
 
