@@ -683,8 +683,7 @@ function validateCategoryPresets(categories, presets) {
 
 function validatePresetFields(presets, fields) {
   const betweenBracketsRegex = /([^{]*?)(?=\})/;
-  const maxFieldsBeforeError = 12;
-  const maxFieldsBeforeWarning = 8;
+  const maxFieldsBeforeError = 10;
 
   for (let presetID in presets) {
     let preset = presets[presetID];
@@ -734,22 +733,19 @@ function validatePresetFields(presets, fields) {
       // since `moreFields` is available, check that `fields` doesn't get too cluttered
       let fieldCount = preset.fields.length;
 
-      if (fieldCount > maxFieldsBeforeWarning) {
-        // Fields with `prerequisiteTag` probably won't show up initially,
+      if (fieldCount > maxFieldsBeforeError) {
+        // Fields with `prerequisiteTag` or `geometry` may not always be shown,
         // so don't count them against the limits.
-        const fieldsWithoutPrerequisites = preset.fields.filter(fieldID => {
-          if (fields[fieldID] && fields[fieldID].prerequisiteTag) return false;
+        const alwaysShownFields = preset.fields.filter(fieldID => {
+          if (fields[fieldID] && fields[fieldID].prerequisiteTag || fields[fieldID].geometry) return false;
           return true;
         });
-        fieldCount = fieldsWithoutPrerequisites.length;
+        fieldCount = alwaysShownFields.length;
       }
       if (fieldCount > maxFieldsBeforeError) {
         console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
         console.log('');
         process.exit(1);
-      }
-      else if (fieldCount > maxFieldsBeforeWarning) {
-        console.log('Warning: ' + fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Recommended: ' + maxFieldsBeforeWarning + ' or fewer. Consider moving lower-priority fields to "moreFields".');
       }
     }
   }
