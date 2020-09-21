@@ -9896,7 +9896,7 @@
                 },
                 "shop/music": {
                     "name": "Music Store",
-                    "terms": "tape cassettes,CDs,compact discs,vinyl records"
+                    "terms": "tape cassettes,CDs,compact discs,vinyl records,CD store,casette,casette store"
                 },
                 "shop/musical_instrument": {
                     "name": "Musical Instrument Store",
