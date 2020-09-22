@@ -946,33 +946,18 @@ a.hide-toggle {
 }
 .no-results-item {
     padding: 10px;
+    font-weight: bold;
 }
 
 .geocode-item {
     width: 100%;
     max-width: 200px;
-    background-color: #ccc;
     margin: 30px auto;
-    padding: 5px;
     min-height: 40px;
-}
-
-.ideditor[dir='rtl'] .geocode-item {
-    left: -25%;
-}
-.geocode-item:active,
-.geocode-item:focus {
-    background-color: #aaa;
-}
-@media (hover: hover) {
-    .geocode-item:hover {
-        background-color: #aaa;
-    }
 }
 
 .feature-list-item {
     background-color: #fff;
-    font-weight: bold;
     display: flex;
 }
 .feature-list-item:active,
@@ -1014,6 +999,7 @@ a.hide-toggle {
 }
 .feature-list-item .entity-type {
     color: #7092ff;
+    font-weight: bold;
 }
 .feature-list-item:active .entity-type,
 .feature-list-item:focus .entity-type {
@@ -1025,7 +1011,6 @@ a.hide-toggle {
     }
 }
 .feature-list-item .entity-name {
-    font-weight: normal;
     color: #666;
     padding-left: 10px;
 }
@@ -5495,6 +5480,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 .intro-nav-wrap button.chapter {
     flex: 1 1 100%;
     padding: 0px 5px;
+    font-weight: bold;
 }
 
 .intro-nav-wrap button.chapter.next {

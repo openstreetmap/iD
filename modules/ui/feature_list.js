@@ -263,7 +263,7 @@ export function uiFeatureList(context) {
                   .data([0])
                   .enter()
                   .append('button')
-                  .attr('class', 'geocode-item')
+                  .attr('class', 'geocode-item secondary-action')
                   .on('click', geocoderSearch)
                   .append('div')
                   .attr('class', 'label')
