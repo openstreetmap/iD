@@ -243,7 +243,7 @@ export function uiSuccess(context) {
       .attr('href', d.url)
       .html(t.html(`community.${d.id}.name`));
 
-    let descriptionHTML = t(`community.${d.id}.description`, replacements);
+    let descriptionHTML = t.html(`community.${d.id}.description`, replacements);
 
     if (d.type === 'reddit') {   // linkify subreddits  #4997
       descriptionHTML = descriptionHTML

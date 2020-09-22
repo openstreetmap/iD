@@ -4284,7 +4284,7 @@ img.tile-debug {
     display: none;
 }
 
-.panel-content li span {
+.panel-content li span:not(.localized-text) {
     display: inline-block;
     white-space: nowrap;
     margin: 0 8px;

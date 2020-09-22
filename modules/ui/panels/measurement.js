@@ -144,10 +144,9 @@ export function uiPanelMeasurement(context) {
         }
 
         if (length) {
-            var lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length'));
             list
                 .append('li')
-                .html(lengthLabel + ':')
+                .html(t.html('info_panels.measurement.' + (closed ? 'perimeter' : 'length')) + ':')
                 .append('span')
                 .html(displayLength(length, isImperial));
         }
