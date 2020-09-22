@@ -43,7 +43,7 @@ export function modeRotate(context, entityIDs) {
     ];
     var annotation = entityIDs.length === 1 ?
         t('operations.rotate.annotation.' + context.graph().geometry(entityIDs[0])) :
-        t('operations.rotate.annotation.multiple');
+        t('operations.rotate.annotation.feature', { n: entityIDs.length });
 
     var _prevGraph;
     var _prevAngle;

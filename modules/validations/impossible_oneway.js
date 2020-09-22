@@ -180,7 +180,7 @@ export function validationImpossibleOneway() {
                             entityIds: [way.id],
                             onClick: function(context) {
                                 var id = this.issue.entityIds[0];
-                                context.perform(actionReverse(id), t('operations.reverse.annotation'));
+                                context.perform(actionReverse(id), t('operations.reverse.annotation.line', { n: 1 }));
                             }
                         }));
                     }

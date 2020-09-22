@@ -131,8 +131,10 @@
                 },
                 "key": "O",
                 "annotation": {
-                    "single": "Made a feature circular.",
-                    "multiple": "Made features circular."
+                    "feature": {
+                        "one": "Made a feature circular.",
+                        "other": "Made {n} features circular."
+                    }
                 },
                 "multiple_blockers": {
                     "multiple": "These can't be made circular for multiple reasons."
@@ -173,12 +175,12 @@
                 "key": "Q",
                 "annotation": {
                     "corner": {
-                        "single": "Squared a corner.",
-                        "multiple": "Squared several corners."
+                        "one": "Squared a corner.",
+                        "other": "Squared {n} corners."
                     },
                     "feature": {
-                        "single": "Squared the corners of a feature.",
-                        "multiple": "Squared the corners of several features."
+                        "one": "Squared the corners of a feature.",
+                        "other": "Squared the corners of {n} features."
                     }
                 },
                 "multiple_blockers": {
@@ -218,9 +220,14 @@
                 },
                 "key": "S",
                 "annotation": {
-                    "points": "Straightened several points.",
-                    "line": "Straightened a line.",
-                    "lines": "Straightened several lines."
+                    "point": {
+                        "one": "Straightened a point.",
+                        "other": "Straightened {n} points."
+                    },
+                    "line": {
+                        "one": "Straightened a line.",
+                        "other": "Straightened {n} lines."
+                    }
                 },
                 "too_bendy": {
                     "single": "This can't be straightened because it bends too much.",
@@ -414,7 +421,10 @@
                     "line": "Moved a line.",
                     "area": "Moved an area.",
                     "relation": "Moved a relation.",
-                    "multiple": "Moved multiple features."
+                    "feature": {
+                        "one": "Moved a feature.",
+                        "other": "Moved {n} features."
+                    }
                 },
                 "incomplete_relation": {
                     "single": "This feature can't be moved because it hasn't been fully downloaded.",
@@ -454,12 +464,16 @@
                 },
                 "annotation": {
                     "long": {
-                        "single": "Flipped a feature across its long axis.",
-                        "multiple": "Flipped multiple features across their long axis."
+                        "feature": {
+                            "one": "Flipped a feature across its long axis.",
+                            "other": "Flipped {n} features across their long axis."
+                        }
                     },
                     "short": {
-                        "single": "Flipped a feature across its short axis.",
-                        "multiple": "Flipped multiple features across their short axis."
+                        "feature": {
+                            "one": "Flipped a feature across its short axis.",
+                            "other": "Flipped {n} features across their short axis."
+                        }
                     }
                 },
                 "incomplete_relation": {
@@ -489,8 +503,11 @@
                 "annotation": {
                     "line": "Rotated a line.",
                     "area": "Rotated an area.",
-                    "multiple": "Rotated multiple features.",
-                    "relation": "Rotated a relation."
+                    "relation": "Rotated a relation.",
+                    "feature": {
+                        "one": "Rotated a feature.",
+                        "other": "Rotated {n} features."
+                    }
                 },
                 "incomplete_relation": {
                     "single": "This feature can't be rotated because it hasn't been fully downloaded.",
@@ -520,11 +537,18 @@
                 },
                 "key": "V",
                 "annotation": {
-                    "point": "Reversed a point.",
-                    "points": "Reversed multiple points.",
-                    "line": "Reversed a line.",
-                    "lines": "Reversed multiple lines.",
-                    "features": "Reversed multiple features."
+                    "point": {
+                        "one": "Reversed a point.",
+                        "other": "Reversed {n} points."
+                    },
+                    "line": {
+                        "one": "Reversed a line.",
+                        "other": "Reversed {n} lines."
+                    },
+                    "feature": {
+                        "one": "Reversed a feature.",
+                        "other": "Reversed {n} features."
+                    }
                 }
             },
             "scale": {
