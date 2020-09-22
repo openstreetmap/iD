@@ -148,7 +148,7 @@ export function uiEditMenu(context) {
                         .duration(4000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation disabled')
-                        .html(operation.tooltip)();
+                        .label(operation.tooltip)();
                 }
             } else {
                 if (lastPointerUpType === 'touch' ||
@@ -157,7 +157,7 @@ export function uiEditMenu(context) {
                         .duration(2000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation')
-                        .html(operation.annotation() || operation.title)();
+                        .label(operation.annotation() || operation.title)();
                 }
 
                 operation();

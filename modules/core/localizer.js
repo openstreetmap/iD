@@ -8,7 +8,7 @@ let _t = _mainLocalizer.t;
 
 export {
     _mainLocalizer as localizer,
-    // export `t` functions for ease-of-use
+    // export `t` function for ease-of-use
     _t as t
 };
 

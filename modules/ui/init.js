@@ -127,7 +127,9 @@ export function uiInit(context) {
 
         map
             .on('hitMinZoom.ui', function() {
-                ui.flash.html(t.html('cannot_zoom'))();
+                ui.flash
+                    .iconName('#iD-icon-no')
+                    .label(t.html('cannot_zoom'))();
             });
 
         container

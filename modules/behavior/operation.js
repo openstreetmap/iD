@@ -20,14 +20,14 @@ export function behaviorOperation(context) {
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
-                .text(_operation.tooltip)();
+                .label(_operation.tooltip)();
 
         } else {
             context.ui().flash
                 .duration(2000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation')
-                .text(_operation.annotation() || _operation.title)();
+                .label(_operation.annotation() || _operation.title)();
 
             if (_operation.point) _operation.point(null);
             _operation();

@@ -102,7 +102,7 @@ export function uiToolSave(context) {
                         .duration(2000)
                         .iconName('#iD-icon-save')
                         .iconClass('disabled')
-                        .html(t.html('save.no_changes'))();
+                        .label(t.html('save.no_changes'))();
                 }
                 lastPointerUpType = null;
             })

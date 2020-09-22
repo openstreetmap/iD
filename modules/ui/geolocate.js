@@ -62,7 +62,7 @@ export function uiGeolocate(context) {
             zoomTo();
         } else {
             context.ui().flash
-                .html(t.html('geolocate.location_unavailable'))
+                .label(t.html('geolocate.location_unavailable'))
                 .iconName('#iD-icon-geolocate')();
         }
 
