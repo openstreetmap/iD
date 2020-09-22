@@ -248,8 +248,8 @@ export function uiPaneHelp(context) {
         }, '');
 
         return {
-            title: t(helpkey + '.title'),
-            html: marked(text.trim())
+            title: t.html(helpkey + '.title'),
+            content: marked(text.trim())
                 // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
                 .replace(/<\/code>/g, '<\/kbd>')
@@ -270,7 +270,7 @@ export function uiPaneHelp(context) {
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
 
-            body.html(d.html);
+            body.html(d.content);
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
