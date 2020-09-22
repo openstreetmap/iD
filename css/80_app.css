@@ -3958,6 +3958,9 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .inspector-hover .section-entity-issues .issue-container.active .issue-label {
     border-bottom: 0;
 }
+.inspector-hover .section-entity-issues .issue-container.active .issue-label button.issue-text {
+    font-weight: normal;
+}
 
 
 /* Styles for raw tag inspector on hover */
