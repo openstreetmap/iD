@@ -31,7 +31,7 @@ export function uiSettingsCustomData(context) {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .html(t('settings.custom_data.header'));
+            .html(t.html('settings.custom_data.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
@@ -39,7 +39,7 @@ export function uiSettingsCustomData(context) {
         textSection
             .append('pre')
             .attr('class', 'instructions-file')
-            .html(t('settings.custom_data.file.instructions'));
+            .html(t.html('settings.custom_data.file.instructions'));
 
         textSection
             .append('input')
@@ -59,17 +59,17 @@ export function uiSettingsCustomData(context) {
 
         textSection
             .append('h4')
-            .html(t('settings.custom_data.or'));
+            .html(t.html('settings.custom_data.or'));
 
         textSection
             .append('pre')
             .attr('class', 'instructions-url')
-            .html(t('settings.custom_data.url.instructions'));
+            .html(t.html('settings.custom_data.url.instructions'));
 
         textSection
             .append('textarea')
             .attr('class', 'field-url')
-            .attr('placeholder', t('settings.custom_data.url.placeholder', { html: false }))
+            .attr('placeholder', t('settings.custom_data.url.placeholder'))
             .call(utilNoAuto)
             .property('value', _currSettings.url);
 
@@ -80,7 +80,7 @@ export function uiSettingsCustomData(context) {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .html(t('confirm.cancel'));
+            .html(t.html('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')

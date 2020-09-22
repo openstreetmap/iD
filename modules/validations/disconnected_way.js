@@ -85,7 +85,7 @@ export function validationDisconnectedWay() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t('issues.disconnected_way.routable.reference'));
+                .html(t.html('issues.disconnected_way.routable.reference'));
         }
 
         function routingIslandForEntity(entity) {

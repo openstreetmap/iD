@@ -74,7 +74,7 @@ export function uiSuccess(context) {
 
     header
       .append('h3')
-      .html(t('success.just_edited'));
+      .html(t.html('success.just_edited'));
 
     header
       .append('button')
@@ -92,18 +92,18 @@ export function uiSuccess(context) {
 
     summary
       .append('h3')
-      .html(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
+      .html(t.html('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
     summary
       .append('p')
-      .html(t('success.help_html'))
+      .html(t.html('success.help_html'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
       .attr('href', t('success.help_link_url'))
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .append('span')
-      .html(t('success.help_link_text'));
+      .html(t.html('success.help_link_text'));
 
     let osm = context.connection();
     if (!osm) return;
@@ -138,11 +138,11 @@ export function uiSuccess(context) {
       .attr('class', 'cell-detail summary-view-on-osm')
       .attr('target', '_blank')
       .attr('href', changesetURL)
-      .html(t('success.view_on_osm'));
+      .html(t.html('success.view_on_osm'));
 
     summaryDetail
       .append('div')
-      .html(t('success.changeset_id', {
+      .html(t.html('success.changeset_id', {
         changeset_id: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>`
       }));
 
@@ -182,7 +182,7 @@ export function uiSuccess(context) {
 
     communityLinks
       .append('h3')
-      .html(t('success.like_osm'));
+      .html(t.html('success.like_osm'));
 
     let table = communityLinks
       .append('table')
@@ -216,14 +216,14 @@ export function uiSuccess(context) {
     communityLinks
       .append('div')
       .attr('class', 'community-missing')
-      .html(t('success.missing'))
+      .html(t.html('success.missing'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .attr('href', 'https://github.com/osmlab/osm-community-index/issues')
       .append('span')
-      .html(t('success.tell_us'));
+      .html(t.html('success.tell_us'));
   }
 
 
@@ -241,7 +241,7 @@ export function uiSuccess(context) {
       .append('a')
       .attr('target', '_blank')
       .attr('href', d.url)
-      .html(t(`community.${d.id}.name`));
+      .html(t.html(`community.${d.id}.name`));
 
     let descriptionHTML = t(`community.${d.id}.description`, replacements);
 
@@ -309,7 +309,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(t(`community.${d.id}.extendedDescription`, replacements));
+          .html(t.html(`community.${d.id}.extendedDescription`, replacements));
       }
 
       if (d.languageCodes && d.languageCodes.length) {
@@ -320,7 +320,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-languages')
-          .html(t('success.languages', { languages: languageList }));
+          .html(t.html('success.languages', { languages: languageList }));
       }
     }
 

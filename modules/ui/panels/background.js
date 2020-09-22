@@ -46,7 +46,7 @@ export function uiPanelBackground(context) {
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
                 .classed('hide', !metadata[k])
-                .html(t('info_panels.background.' + k) + ':')
+                .html(t.html('info_panels.background.' + k) + ':')
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
                 .html(metadata[k]);
@@ -58,7 +58,7 @@ export function uiPanelBackground(context) {
 
         selection
             .append('a')
-            .html(t('info_panels.background.' + toggleTiles))
+            .html(t.html('info_panels.background.' + toggleTiles))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
@@ -74,7 +74,7 @@ export function uiPanelBackground(context) {
             var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
             selection
                 .append('a')
-                .html(t('info_panels.background.' + toggleVintage))
+                .html(t.html('info_panels.background.' + toggleVintage))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-vintage')
                 .on('click', function() {
@@ -163,7 +163,7 @@ export function uiPanelBackground(context) {
 
     panel.id = 'background';
     panel.title = t('info_panels.background.title');
-    panel.key = t('info_panels.background.key', { html: false });
+    panel.key = t('info_panels.background.key');
 
 
     return panel;

@@ -135,7 +135,7 @@ export function validationMismatchedGeometry() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t('issues.tag_suggests_area.reference'));
+                .html(t.html('issues.tag_suggests_area.reference'));
         }
     }
 
@@ -170,7 +170,7 @@ export function validationMismatchedGeometry() {
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
-                        .html(t('issues.vertex_as_point.reference'));
+                        .html(t.html('issues.vertex_as_point.reference'));
                 },
                 entityIds: [entity.id]
             });
@@ -193,7 +193,7 @@ export function validationMismatchedGeometry() {
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
-                        .html(t('issues.point_as_vertex.reference'));
+                        .html(t.html('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
                 dynamicFixes: function(context) {
@@ -280,7 +280,7 @@ export function validationMismatchedGeometry() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t('issues.unclosed_multipolygon_part.reference'));
+                .html(t.html('issues.unclosed_multipolygon_part.reference'));
         }
     }
 

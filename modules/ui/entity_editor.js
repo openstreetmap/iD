@@ -61,7 +61,7 @@ export function uiEntityEditor(context) {
             .merge(headerEnter);
 
         header.selectAll('h3')
-            .html(_entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'));
+            .html(_entityIDs.length === 1 ? t.html('inspector.edit') : t.html('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
             .on('click', function() {

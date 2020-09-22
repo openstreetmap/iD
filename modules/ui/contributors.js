@@ -54,11 +54,11 @@ export function uiContributors(context) {
                 .html(othersNum);
 
             wrap.append('span')
-                .html(t('contributors.truncated_list', { n: othersNum, users: userList.html(), count: count.html() }));
+                .html(t.html('contributors.truncated_list', { n: othersNum, users: userList.html(), count: count.html() }));
 
         } else {
             wrap.append('span')
-                .html(t('contributors.list', { users: userList.html() }));
+                .html(t.html('contributors.list', { users: userList.html() }));
         }
 
         if (!u.length) {

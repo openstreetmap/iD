@@ -36,7 +36,7 @@ export function uiImproveOsmEditor(context) {
 
     headerEnter
       .append('h3')
-        .html(t('QA.improveOSM.title'));
+        .html(t.html('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')
       .data([0]);
@@ -80,12 +80,12 @@ export function uiImproveOsmEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .html(t('note.newComment'));
+        .html(t.html('note.newComment'));
 
     saveSectionEnter
       .append('textarea')
         .attr('class', 'new-comment-input')
-        .attr('placeholder', t('QA.keepRight.comment_placeholder', { html: false }))
+        .attr('placeholder', t('QA.keepRight.comment_placeholder'))
         .attr('maxlength', 1000)
         .property('value', d => d.newComment)
         .call(utilNoAuto)
@@ -135,7 +135,7 @@ export function uiImproveOsmEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .html(t('QA.keepRight.save_comment'));
+        .html(t.html('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')

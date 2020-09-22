@@ -61,7 +61,7 @@ export function uiImproveOsmComments() {
         metadataEnter
           .append('div')
             .attr('class', 'comment-date')
-            .html(d => t('note.status.commented', { when: localeDateString(d.timestamp) }));
+            .html(d => t.html('note.status.commented', { when: localeDateString(d.timestamp) }));
 
         mainEnter
           .append('div')

@@ -10,7 +10,7 @@ import { uiSectionPhotoOverlays } from '../sections/photo_overlays';
 export function uiPaneMapData(context) {
 
     var mapDataPane = uiPane('map-data', context)
-        .key(t('map_data.key', { html: false }))
+        .key(t('map_data.key'))
         .title(t('map_data.title'))
         .description(t('map_data.description'))
         .iconName('iD-icon-data')

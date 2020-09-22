@@ -281,7 +281,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelEnter
             .append('button')
             .attr('class', 'member-zoom')
-            .attr('title', t('icons.zoom_to', { html: false }))
+            .attr('title', t('icons.zoom_to'))
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
             .on('click', zoomToRelation);
 
@@ -296,7 +296,7 @@ export function uiSectionRawMembershipEditor(context) {
                 return d.domId;
             })
             .property('type', 'text')
-            .attr('placeholder', t('inspector.role', { html: false }))
+            .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto)
             .property('value', function(d) { return d.member.role; })
             .on('blur', changeRole)
@@ -325,7 +325,7 @@ export function uiSectionRawMembershipEditor(context) {
 
         newLabelEnter
             .append('input')
-            .attr('placeholder', t('inspector.choose_relation', { html: false }))
+            .attr('placeholder', t('inspector.choose_relation'))
             .attr('type', 'text')
             .attr('class', 'member-entity-input')
             .call(utilNoAuto);
@@ -347,7 +347,7 @@ export function uiSectionRawMembershipEditor(context) {
             .append('input')
             .attr('class', 'member-role')
             .property('type', 'text')
-            .attr('placeholder', t('inspector.role', { html: false }))
+            .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
 
         // Update

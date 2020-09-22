@@ -183,7 +183,7 @@ export function operationDisconnect(context, selectedIDs) {
 
 
     operation.id = 'disconnect';
-    operation.keys = [t('operations.disconnect.key', { html: false })];
+    operation.keys = [t('operations.disconnect.key')];
     operation.title = t('operations.disconnect.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

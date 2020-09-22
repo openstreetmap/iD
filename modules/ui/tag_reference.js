@@ -45,7 +45,7 @@ export function uiTagReference(what) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-description')
-                .html(t('inspector.no_documentation_key'));
+                .html(t.html('inspector.no_documentation_key'));
             done();
             return;
         }
@@ -64,11 +64,11 @@ export function uiTagReference(what) {
         _body
             .append('p')
             .attr('class', 'tag-reference-description')
-            .html(docs.description || t('inspector.no_documentation_key'))
+            .html(docs.description || t.html('inspector.no_documentation_key'))
             .append('a')
             .attr('class', 'tag-reference-edit')
             .attr('target', '_blank')
-            .attr('title', t('inspector.edit_reference', { html: false }))
+            .attr('title', t('inspector.edit_reference'))
             .attr('href', docs.editURL)
             .call(svgIcon('#iD-icon-edit', 'inline'));
 
@@ -80,7 +80,7 @@ export function uiTagReference(what) {
               .attr('href', docs.wiki.url)
               .call(svgIcon('#iD-icon-out-link', 'inline'))
               .append('span')
-              .html(t(docs.wiki.text));
+              .html(t.html(docs.wiki.text));
         }
 
         // Add link to info about "good changeset comments" - #2923
@@ -92,7 +92,7 @@ export function uiTagReference(what) {
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .attr('href', t('commit.about_changeset_comments_link'))
                 .append('span')
-                .html(t('commit.about_changeset_comments'));
+                .html(t.html('commit.about_changeset_comments'));
         }
     }
 
@@ -150,7 +150,7 @@ export function uiTagReference(what) {
         _button = _button.enter()
             .append('button')
             .attr('class', 'tag-reference-button ' + (klass || ''))
-            .attr('title', t('icons.information', { html: false }))
+            .attr('title', t('icons.information'))
             .call(svgIcon('#iD-icon-' + (iconName || 'inspect')))
             .merge(_button);
 

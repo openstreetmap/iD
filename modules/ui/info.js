@@ -123,10 +123,10 @@ export function uiInfo(context) {
         redraw();
 
         context.keybinding()
-            .on(uiCmd('⌘' + t('info_panels.key', { html: false })), info.toggle);
+            .on(uiCmd('⌘' + t('info_panels.key')), info.toggle);
 
         ids.forEach(function(k) {
-            var key = t('info_panels.' + k + '.key', { default: null, html: false });
+            var key = t('info_panels.' + k + '.key', { default: null });
             if (!key) return;
             context.keybinding()
                 .on(uiCmd('⌘⇧' + key), function() { info.toggle(k); });

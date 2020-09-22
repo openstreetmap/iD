@@ -161,7 +161,7 @@ export function uiSectionBackgroundOffset(context) {
         containerEnter
             .append('div')
             .attr('class', 'nudge-instructions')
-            .html(t('background.offset'));
+            .html(t.html('background.offset'));
 
         var nudgeEnter = containerEnter
             .append('div')
@@ -189,7 +189,7 @@ export function uiSectionBackgroundOffset(context) {
 
         containerEnter
             .append('button')
-            .attr('title', t('background.reset', { html: false }))
+            .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('contextmenu', cancelEvent)
             .on('click', function() {

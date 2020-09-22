@@ -199,14 +199,14 @@ export function uiSectionRawMemberEditor(context) {
 
                     label
                         .append('button')
-                        .attr('title', t('icons.remove', { html: false }))
+                        .attr('title', t('icons.remove'))
                         .attr('class', 'remove member-delete')
                         .call(svgIcon('#iD-operation-delete'));
 
                     label
                         .append('button')
                         .attr('class', 'member-zoom')
-                        .attr('title', t('icons.zoom_to', { html: false }))
+                        .attr('title', t('icons.zoom_to'))
                         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
                         .on('click', zoomToMember);
 
@@ -218,17 +218,17 @@ export function uiSectionRawMemberEditor(context) {
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .html(t('inspector.' + d.type, { id: d.id }));
+                        .html(t.html('inspector.' + d.type, { id: d.id }));
 
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .html(t('inspector.incomplete', { id: d.id }));
+                        .html(t.html('inspector.incomplete', { id: d.id }));
 
                     label
                         .append('button')
                         .attr('class', 'member-download')
-                        .attr('title', t('icons.download', { html: false }))
+                        .attr('title', t('icons.download'))
                         .call(svgIcon('#iD-icon-load'))
                         .on('click', downloadMember);
                 }
@@ -245,7 +245,7 @@ export function uiSectionRawMemberEditor(context) {
                 return d.domId;
             })
             .property('type', 'text')
-            .attr('placeholder', t('inspector.role', { html: false }))
+            .attr('placeholder', t('inspector.role'))
             .call(utilNoAuto);
 
         if (taginfo) {

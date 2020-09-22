@@ -21,15 +21,16 @@ export function presetField(fieldID, field) {
   };
 
   _this.t = (scope, options) => t(`presets.fields.${fieldID}.${scope}`, options);
+  _this.t.html = (scope, options) => t.html(`presets.fields.${fieldID}.${scope}`, options);
 
-  _this.label = () => _this.overrideLabel || _this.t('label', { 'default': fieldID, html: false });
+  _this.label = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
 
   const _placeholder = _this.placeholder;
-  _this.placeholder = () => _this.t('placeholder', { 'default': _placeholder, html: false });
+  _this.placeholder = () => _this.t('placeholder', { 'default': _placeholder });
 
   _this.originalTerms = (_this.terms || []).join();
 
-  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms, html: false })
+  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
     .toLowerCase().trim().split(/\s*,+\s*/);
 
 

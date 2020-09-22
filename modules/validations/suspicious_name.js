@@ -96,7 +96,7 @@ export function validationSuspiciousName() {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .html(t('issues.generic_name.reference'));
+        .html(t.html('issues.generic_name.reference'));
     }
   }
 
@@ -142,7 +142,7 @@ export function validationSuspiciousName() {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .html(t('issues.generic_name.reference'));
+        .html(t.html('issues.generic_name.reference'));
     }
   }
 

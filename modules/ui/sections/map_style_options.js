@@ -51,8 +51,8 @@ export function uiSectionMapStyleOptions(context) {
                     return t(name + '.' + d + '.tooltip');
                 })
                 .keys(function(d) {
-                    var key = (d === 'wireframe' ? t('area_fill.wireframe.key', { html: false }) : null);
-                    if (d === 'highlight_edits') key = t('map_data.highlight_edits.key', { html: false });
+                    var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
+                    if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
                     return key ? [key] : null;
                 })
                 .placement('top')
@@ -69,7 +69,7 @@ export function uiSectionMapStyleOptions(context) {
 
         label
             .append('span')
-            .html(function(d) { return t(name + '.' + d + '.description'); });
+            .html(function(d) { return t.html(name + '.' + d + '.description'); });
 
         // Update
         items = items

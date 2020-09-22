@@ -92,7 +92,7 @@ export function uiSectionSelectionList(context) {
         enter
             .append('button')
             .attr('class', 'close')
-            .attr('title', t('icons.deselect', { html: false }))
+            .attr('title', t('icons.deselect'))
             .on('click', deselectEntity)
             .call(svgIcon('#iD-icon-close'));
 

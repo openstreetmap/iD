@@ -10,7 +10,7 @@ import { uiSectionOverlayList } from '../sections/overlay_list';
 export function uiPaneBackground(context) {
 
     var backgroundPane = uiPane('background', context)
-        .key(t('background.key', { html: false }))
+        .key(t('background.key'))
         .title(t('background.title'))
         .description(t('background.description'))
         .iconName('iD-icon-layers')

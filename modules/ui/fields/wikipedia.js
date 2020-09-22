@@ -87,7 +87,7 @@ export function uiFieldWikipedia(field, context) {
       .append('input')
       .attr('type', 'text')
       .attr('class', 'wiki-lang')
-      .attr('placeholder', t('translate.localized_translation_language', { html: false }))
+      .attr('placeholder', t('translate.localized_translation_language'))
       .call(utilNoAuto)
       .call(langCombo)
       .merge(_langInput);
@@ -128,7 +128,7 @@ export function uiFieldWikipedia(field, context) {
     link = link.enter()
       .append('button')
       .attr('class', 'form-field-button wiki-link')
-      .attr('title', t('icons.view_on', { domain: 'wikipedia.org', html: false }))
+      .attr('title', t('icons.view_on', { domain: 'wikipedia.org' }))
       .call(svgIcon('#iD-icon-out-link'))
       .merge(link);
 

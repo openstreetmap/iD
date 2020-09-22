@@ -45,7 +45,7 @@ export function uiSectionPrivacy(context) {
 
       thirdPartyIconsEnter
         .append('span')
-        .html(t('preferences.privacy.third_party_icons.description'));
+        .html(t.html('preferences.privacy.third_party_icons.description'));
 
 
       // Privacy Policy link
@@ -59,7 +59,7 @@ export function uiSectionPrivacy(context) {
         .call(svgIcon('#iD-icon-out-link', 'inline'))
         .attr('href', 'https://github.com/openstreetmap/iD/blob/release/PRIVACY.md')
         .append('span')
-        .html(t('preferences.privacy.privacy_link'));
+        .html(t.html('preferences.privacy.privacy_link'));
 
       update();
 

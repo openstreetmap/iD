@@ -84,7 +84,7 @@ export function operationExtract(context, selectedIDs) {
 
 
     operation.id = 'extract';
-    operation.keys = [t('operations.extract.key', { html: false })];
+    operation.keys = [t('operations.extract.key')];
     operation.title = t('operations.extract.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

@@ -88,7 +88,7 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.id = 'merge';
-    operation.keys = [t('operations.merge.key', { html: false })];
+    operation.keys = [t('operations.merge.key')];
     operation.title = t('operations.merge.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

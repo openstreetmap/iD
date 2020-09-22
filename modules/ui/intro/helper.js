@@ -44,10 +44,10 @@ export function icon(name, svgklass, useklass) {
 
 var helpStringReplacements;
 
-// Returns the localized string for `id` with a standardized set of icon, key, and
+// Returns the localized HTML element for `id` with a standardized set of icon, key, and
 // label replacements suitable for tutorials and documentation. Optionally supplemented
 // with custom `replacements`
-export function helpString(id, replacements) {
+export function helpHtml(id, replacements) {
     // only load these the first time
     if (!helpStringReplacements) helpStringReplacements = {
         // insert icons corresponding to various UI elements
@@ -84,40 +84,40 @@ export function helpString(id, replacements) {
         shift: uiCmd.display('⇧'),
         alt: uiCmd.display('⌥'),
         return: uiCmd.display('↵'),
-        esc: t('shortcuts.key.esc'),
-        space: t('shortcuts.key.space'),
-        add_note_key: t('modes.add_note.key', { html: false }),
-        help_key: t('help.key', { html: false }),
-        shortcuts_key: t('shortcuts.toggle.key', { html: false }),
+        esc: t.html('shortcuts.key.esc'),
+        space: t.html('shortcuts.key.space'),
+        add_note_key: t.html('modes.add_note.key'),
+        help_key: t.html('help.key'),
+        shortcuts_key: t.html('shortcuts.toggle.key'),
 
         // reference localized UI labels directly so that they'll always match
-        save: t('save.title'),
-        undo: t('undo.title'),
-        redo: t('redo.title'),
-        upload: t('commit.save'),
-        point: t('modes.add_point.title'),
-        line: t('modes.add_line.title'),
-        area: t('modes.add_area.title'),
-        note: t('modes.add_note.label'),
-        delete: t('operations.delete.title'),
-        move: t('operations.move.title'),
-        orthogonalize: t('operations.orthogonalize.title'),
-        circularize: t('operations.circularize.title'),
-        merge: t('operations.merge.title'),
-        disconnect: t('operations.disconnect.title'),
-        split: t('operations.split.title'),
-        map_data: t('map_data.title'),
-        osm_notes: t('map_data.layers.notes.title'),
-        fields: t('inspector.fields'),
-        tags: t('inspector.tags'),
-        relations: t('inspector.relations'),
-        new_relation: t('inspector.new_relation'),
-        turn_restrictions: t('presets.fields.restrictions.label'),
-        background_settings: t('background.description'),
-        imagery_offset: t('background.fix_misalignment'),
-        start_the_walkthrough: t('splash.walkthrough'),
-        help: t('help.title'),
-        ok: t('intro.ok')
+        save: t.html('save.title'),
+        undo: t.html('undo.title'),
+        redo: t.html('redo.title'),
+        upload: t.html('commit.save'),
+        point: t.html('modes.add_point.title'),
+        line: t.html('modes.add_line.title'),
+        area: t.html('modes.add_area.title'),
+        note: t.html('modes.add_note.label'),
+        delete: t.html('operations.delete.title'),
+        move: t.html('operations.move.title'),
+        orthogonalize: t.html('operations.orthogonalize.title'),
+        circularize: t.html('operations.circularize.title'),
+        merge: t.html('operations.merge.title'),
+        disconnect: t.html('operations.disconnect.title'),
+        split: t.html('operations.split.title'),
+        map_data: t.html('map_data.title'),
+        osm_notes: t.html('map_data.layers.notes.title'),
+        fields: t.html('inspector.fields'),
+        tags: t.html('inspector.tags'),
+        relations: t.html('inspector.relations'),
+        new_relation: t.html('inspector.new_relation'),
+        turn_restrictions: t.html('presets.fields.restrictions.label'),
+        background_settings: t.html('background.description'),
+        imagery_offset: t.html('background.fix_misalignment'),
+        start_the_walkthrough: t.html('splash.walkthrough'),
+        help: t.html('help.title'),
+        ok: t.html('intro.ok')
     };
 
     var reps;
@@ -127,7 +127,7 @@ export function helpString(id, replacements) {
         reps = helpStringReplacements;
     }
 
-    return t(id, reps)
+    return t.html(id, reps)
          // use keyboard key styling for shortcuts
         .replace(/\`(.*?)\`/g, '<kbd>$1</kbd>');
 }

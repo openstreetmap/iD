@@ -72,7 +72,7 @@ export function operationRotate(context, selectedIDs) {
 
 
     operation.id = 'rotate';
-    operation.keys = [t('operations.rotate.key', { html: false })];
+    operation.keys = [t('operations.rotate.key')];
     operation.title = t('operations.rotate.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

@@ -48,7 +48,7 @@ export function uiKeepRightDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .html(() => t('QA.keepRight.detail_description'));
+        .html(t.html('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')

@@ -59,12 +59,12 @@ export function uiFieldRadio(field, context) {
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return field.t('options.' + d, { 'default': d, html: false }); })
+            .attr('value', function(d) { return field.t('options.' + d, { 'default': d }); })
             .attr('checked', false);
 
         enter
             .append('span')
-            .html(function(d) { return field.t('options.' + d, { 'default': d }); });
+            .html(function(d) { return field.t.html('options.' + d, { 'default': d }); });
 
         labels = labels
             .merge(enter);
@@ -129,7 +129,7 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
-            .html(t('inspector.radio.structure.type'));
+            .html(t.html('inspector.radio.structure.type'));
 
         typeEnter
             .append('div')
@@ -174,7 +174,7 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
-            .html(t('inspector.radio.structure.layer'));
+            .html(t.html('inspector.radio.structure.layer'));
 
         layerEnter
             .append('div')
@@ -290,14 +290,14 @@ export function uiFieldRadio(field, context) {
             })
             .classed('mixed', isMixed)
             .attr('title', function(d) {
-                return isMixed(d) ? t('inspector.unshared_value_tooltip', { html: false }) : null;
+                return isMixed(d) ? t('inspector.unshared_value_tooltip') : null;
             });
 
 
         var selection = radios.filter(function() { return this.checked; });
 
         if (selection.empty()) {
-            placeholder.html(t('inspector.none'));
+            placeholder.html(t.html('inspector.none'));
         } else {
             placeholder.html(selection.attr('value'));
             _oldType[selection.datum()] = tags[selection.datum()];

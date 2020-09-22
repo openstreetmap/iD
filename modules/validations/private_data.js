@@ -112,11 +112,11 @@ export function validationPrivateData() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t('issues.private_data.reference'));
+                .html(t.html('issues.private_data.reference'));
 
             enter
                 .append('strong')
-                .html(t('issues.suggested'));
+                .html(t.html('issues.suggested'));
 
             enter
                 .append('table')

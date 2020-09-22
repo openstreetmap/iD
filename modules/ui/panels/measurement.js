@@ -120,7 +120,7 @@ export function uiPanelMeasurement(context) {
         if (geometry) {
             list
                 .append('li')
-                .html(t('info_panels.measurement.geometry') + ':')
+                .html(t.html('info_panels.measurement.geometry') + ':')
                 .append('span')
                 .html(
                     closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
@@ -130,7 +130,7 @@ export function uiPanelMeasurement(context) {
         if (totalNodeCount) {
             list
                 .append('li')
-                .html(t('info_panels.measurement.node_count') + ':')
+                .html(t.html('info_panels.measurement.node_count') + ':')
                 .append('span')
                 .html(totalNodeCount.toLocaleString(localeCode));
         }
@@ -138,7 +138,7 @@ export function uiPanelMeasurement(context) {
         if (area) {
             list
                 .append('li')
-                .html(t('info_panels.measurement.area') + ':')
+                .html(t.html('info_panels.measurement.area') + ':')
                 .append('span')
                 .html(displayArea(area, isImperial));
         }
@@ -155,7 +155,7 @@ export function uiPanelMeasurement(context) {
         if (location) {
             coordItem = list
                 .append('li')
-                .html(t('info_panels.measurement.location') + ':');
+                .html(t.html('info_panels.measurement.location') + ':');
             coordItem.append('span')
                 .html(dmsCoordinatePair(location));
             coordItem.append('span')
@@ -165,7 +165,7 @@ export function uiPanelMeasurement(context) {
         if (centroid) {
             coordItem = list
                 .append('li')
-                .html(t('info_panels.measurement.centroid') + ':');
+                .html(t.html('info_panels.measurement.centroid') + ':');
             coordItem.append('span')
                 .html(dmsCoordinatePair(centroid));
             coordItem.append('span')
@@ -175,7 +175,7 @@ export function uiPanelMeasurement(context) {
         if (center) {
             coordItem = list
                 .append('li')
-                .html(t('info_panels.measurement.center') + ':');
+                .html(t.html('info_panels.measurement.center') + ':');
             coordItem.append('span')
                 .html(dmsCoordinatePair(center));
             coordItem.append('span')
@@ -186,7 +186,7 @@ export function uiPanelMeasurement(context) {
             var toggle  = isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
-                .html(t('info_panels.measurement.' + toggle))
+                .html(t.html('info_panels.measurement.' + toggle))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-units')
                 .on('click', function() {
@@ -219,7 +219,7 @@ export function uiPanelMeasurement(context) {
 
     panel.id = 'measurement';
     panel.title = t('info_panels.measurement.title');
-    panel.key = t('info_panels.measurement.key', { html: false });
+    panel.key = t('info_panels.measurement.key');
 
 
     return panel;

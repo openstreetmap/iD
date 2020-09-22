@@ -32,7 +32,7 @@ export function uiSectionMapFeatures(context) {
             .append('a')
             .attr('class', 'feature-list-link')
             .attr('href', '#')
-            .html(t('issues.disable_all'))
+            .html(t.html('issues.disable_all'))
             .on('click', function() {
                 context.features().disableAll();
             });
@@ -41,7 +41,7 @@ export function uiSectionMapFeatures(context) {
             .append('a')
             .attr('class', 'feature-list-link')
             .attr('href', '#')
-            .html(t('issues.enable_all'))
+            .html(t.html('issues.enable_all'))
             .on('click', function() {
                 context.features().enableAll();
             });
@@ -88,7 +88,7 @@ export function uiSectionMapFeatures(context) {
 
         label
             .append('span')
-            .html(function(d) { return t(name + '.' + d + '.description'); });
+            .html(function(d) { return t.html(name + '.' + d + '.description'); });
 
         // Update
         items = items

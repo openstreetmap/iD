@@ -83,7 +83,7 @@ export function uiFieldCheck(field, context) {
         var icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
         selection.selectAll('.reverser-span')
-            .html(t('inspector.check.reverser'))
+            .html(t.html('inspector.check.reverser'))
             .call(svgIcon(icon, 'inline'));
 
         return selection;
@@ -212,7 +212,7 @@ export function uiFieldCheck(field, context) {
             .property('checked', isChecked(_value));
 
         text
-            .html(isMixed ? t('inspector.multiple_values') : textFor(_value))
+            .html(isMixed ? t.html('inspector.multiple_values') : textFor(_value))
             .classed('mixed', isMixed);
 
         label

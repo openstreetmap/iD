@@ -789,7 +789,7 @@ export default {
 
     label
       .append('span')
-      .html(t('streetside.hires'));
+      .html(t.html('streetside.hires'));
 
 
     let captureInfo = line1
@@ -830,7 +830,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
         '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .html(t('streetside.view_on_bing'));
+      .html(t.html('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -838,7 +838,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-      .html(t('streetside.report'));
+      .html(t.html('streetside.report'));
 
 
     let bubbleIdQuadKey = d.key.toString(4);

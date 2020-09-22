@@ -129,7 +129,7 @@ export function uiFieldMaxspeed(field, context) {
 
         utilGetSetValue(input, typeof value === 'string' ? value : '')
             .attr('title', isMixed ? value.filter(Boolean).join('\n') : null)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : field.placeholder())
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : field.placeholder())
             .classed('mixed', isMixed);
     };
 

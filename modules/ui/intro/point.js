@@ -10,7 +10,7 @@ import { actionChangePreset } from '../../actions/change_preset';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
-import { helpString, icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
+import { helpHtml, icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroPoint(context, reveal) {
@@ -48,7 +48,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-point',
-                helpString('intro.points.points_info') + '{br}' + helpString('intro.points.add_point'));
+                helpHtml('intro.points.points_info') + '{br}' + helpHtml('intro.points.add_point'));
 
             _pointID = null;
 
@@ -78,11 +78,11 @@ export function uiIntroPoint(context, reveal) {
 
         var pointBox = pad(building, 150, context);
         var textId = context.lastPointerType() === 'mouse' ? 'place_point' : 'place_point_touch';
-        reveal(pointBox, helpString('intro.points.' + textId));
+        reveal(pointBox, helpHtml('intro.points.' + textId));
 
         context.map().on('move.intro drawn.intro', function() {
             pointBox = pad(building, 150, context);
-            reveal(pointBox, helpString('intro.points.' + textId), { duration: 0 });
+            reveal(pointBox, helpHtml('intro.points.' + textId), { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -112,7 +112,7 @@ export function uiIntroPoint(context, reveal) {
             .on('keyup.intro', checkPresetSearch);
 
         reveal('.preset-search-input',
-            helpString('intro.points.search_cafe', { preset: cafePreset.name() })
+            helpHtml('intro.points.search_cafe', { preset: cafePreset.name() })
         );
 
         context.on('enter.intro', function(mode) {
@@ -133,7 +133,7 @@ export function uiIntroPoint(context, reveal) {
                     .on('keyup.intro', checkPresetSearch);
 
                 reveal('.preset-search-input',
-                    helpString('intro.points.search_cafe', { preset: cafePreset.name() })
+                    helpHtml('intro.points.search_cafe', { preset: cafePreset.name() })
                 );
 
                 context.history().on('change.intro', null);
@@ -150,7 +150,7 @@ export function uiIntroPoint(context, reveal) {
                     .on('keyup.intro', null);
 
                 reveal(first.select('.preset-list-button').node(),
-                    helpString('intro.points.choose_cafe', { preset: cafePreset.name() }),
+                    helpHtml('intro.points.choose_cafe', { preset: cafePreset.name() }),
                     { duration: 300 }
                 );
 
@@ -176,9 +176,9 @@ export function uiIntroPoint(context, reveal) {
         }
 
         timeout(function() {
-            reveal('.entity-editor-pane', helpString('intro.points.feature_editor'), {
+            reveal('.entity-editor-pane', helpHtml('intro.points.feature_editor'), {
                 tooltipClass: 'intro-points-describe',
-                buttonText: t('intro.ok'),
+                buttonText: t.html('intro.ok'),
                 buttonCallback: function() { continueTo(addName); }
             });
         }, 400);
@@ -203,7 +203,7 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
-        var addNameString = helpString('intro.points.fields_info') + '{br}' + helpString('intro.points.add_name');
+        var addNameString = helpHtml('intro.points.fields_info') + '{br}' + helpHtml('intro.points.add_name');
 
         timeout(function() {
             // It's possible for the user to add a name in a previous step..
@@ -213,7 +213,7 @@ export function uiIntroPoint(context, reveal) {
             if (entity.tags.name) {
                 var tooltip = reveal('.entity-editor-pane', addNameString, {
                     tooltipClass: 'intro-points-describe',
-                    buttonText: t('intro.ok'),
+                    buttonText: t.html('intro.ok'),
                     buttonCallback: function() { continueTo(addCloseEditor); }
                 });
                 tooltip.select('.instruction').style('display', 'none');
@@ -254,7 +254,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         reveal('.entity-editor-pane',
-            helpString('intro.points.add_close', { button: icon(href, 'inline') })
+            helpHtml('intro.points.add_close', { button: icon(href, 'inline') })
         );
 
         function continueTo(nextStep) {
@@ -281,14 +281,14 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var box = pointBox(entity.loc, context);
-            reveal(box, helpString('intro.points.reselect'), { duration: 600 });
+            reveal(box, helpHtml('intro.points.reselect'), { duration: 600 });
 
             timeout(function() {
                 context.map().on('move.intro drawn.intro', function() {
                     var entity = context.hasEntity(_pointID);
                     if (!entity) return chapter.restart();
                     var box = pointBox(entity.loc, context);
-                    reveal(box, helpString('intro.points.reselect'), { duration: 0 });
+                    reveal(box, helpHtml('intro.points.reselect'), { duration: 0 });
                 });
             }, 600); // after reveal..
 
@@ -324,7 +324,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         timeout(function() {
-            reveal('.entity-editor-pane', helpString('intro.points.update'),
+            reveal('.entity-editor-pane', helpHtml('intro.points.update'),
                 { tooltipClass: 'intro-points-describe' }
             );
         }, 400);
@@ -351,7 +351,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                helpString('intro.points.update_close', { button: icon('#iD-icon-close', 'inline') })
+                helpHtml('intro.points.update_close', { button: icon('#iD-icon-close', 'inline') })
             );
         }, 500);
 
@@ -371,14 +371,14 @@ export function uiIntroPoint(context, reveal) {
 
         var box = pointBox(entity.loc, context);
         var textId = context.lastPointerType() === 'mouse' ? 'rightclick' : 'edit_menu_touch';
-        reveal(box, helpString('intro.points.' + textId), { duration: 600 });
+        reveal(box, helpHtml('intro.points.' + textId), { duration: 600 });
 
         timeout(function() {
             context.map().on('move.intro', function() {
                 var entity = context.hasEntity(_pointID);
                 if (!entity) return chapter.restart();
                 var box = pointBox(entity.loc, context);
-                reveal(box, helpString('intro.points.' + textId), { duration: 0 });
+                reveal(box, helpHtml('intro.points.' + textId), { duration: 0 });
             });
         }, 600); // after reveal
 
@@ -411,14 +411,14 @@ export function uiIntroPoint(context, reveal) {
         if (!node) { return continueTo(rightClickPoint); }
 
         reveal('.edit-menu',
-            helpString('intro.points.delete'),
+            helpHtml('intro.points.delete'),
             { padding: 50 }
         );
 
         timeout(function() {
             context.map().on('move.intro', function() {
                 reveal('.edit-menu',
-                    helpString('intro.points.delete'),
+                    helpHtml('intro.points.delete'),
                     { duration: 0,  padding: 50 }
                 );
             });
@@ -451,7 +451,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         reveal('.top-toolbar button.undo-button',
-            helpString('intro.points.undo')
+            helpHtml('intro.points.undo')
         );
 
         function continueTo(nextStep) {
@@ -464,9 +464,9 @@ export function uiIntroPoint(context, reveal) {
     function play() {
         dispatch.call('done');
         reveal('.ideditor',
-            helpString('intro.points.play', { next: t('intro.areas.title') }), {
+            helpHtml('intro.points.play', { next: t('intro.areas.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-area',
-                buttonText: t('intro.ok'),
+                buttonText: t.html('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }
             }
         );

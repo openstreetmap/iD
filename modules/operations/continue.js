@@ -65,7 +65,7 @@ export function operationContinue(context, selectedIDs) {
 
 
     operation.id = 'continue';
-    operation.keys = [t('operations.continue.key', { html: false })];
+    operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

@@ -49,7 +49,7 @@ export function uiFieldCycleway(field, context) {
             .append('span')
             .attr('class', 'label preset-label-cycleway')
             .attr('for', function(d) { return 'preset-input-cycleway-' + stripcolon(d); })
-            .html(function(d) { return field.t('types.' + d); });
+            .html(function(d) { return field.t.html('types.' + d); });
 
         enter
             .append('div')
@@ -149,7 +149,7 @@ export function uiFieldCycleway(field, context) {
             })
             .attr('placeholder', function(d) {
                 if (Array.isArray(tags.cycleway) || Array.isArray(tags[d])) {
-                    return t('inspector.multiple_values', { html: false });
+                    return t('inspector.multiple_values');
                 }
                 return field.placeholder();
             })

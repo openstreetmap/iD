@@ -17,7 +17,7 @@ export function uiShortcuts(context) {
 
 
     context.keybinding()
-        .on([t('shortcuts.toggle.key', { html: false }), '?'], function () {
+        .on([t('shortcuts.toggle.key'), '?'], function () {
             if (context.container().selectAll('.modal-shortcuts').size()) {  // already showing
                 if (_modalSelection) {
                     _modalSelection.close();
@@ -40,7 +40,7 @@ export function uiShortcuts(context) {
             .append('div')
             .attr('class', 'modal-section')
             .append('h3')
-            .html(t('shortcuts.title'));
+            .html(t.html('shortcuts.title'));
 
         fileFetcher.get('shortcuts')
             .then(function(data) { content.call(render, data); })
@@ -85,7 +85,7 @@ export function uiShortcuts(context) {
 
         tabsEnter
             .append('span')
-            .html(function (d) { return t(d.text); });
+            .html(function (d) { return t.html(d.text); });
 
         tabs = tabs
             .merge(tabsEnter);
@@ -131,7 +131,7 @@ export function uiShortcuts(context) {
             .append('td')
             .attr('class', 'shortcut-section')
             .append('h3')
-            .html(function (d) { return t(d.text); });
+            .html(function (d) { return t.html(d.text); });
 
 
         var shortcutRows = rowsEnter
@@ -217,7 +217,7 @@ export function uiShortcuts(context) {
                 if (i < nodes.length - 1) {
                     selection
                         .append('span')
-                        .html(d.separator || '\u00a0' + t('shortcuts.or') + '\u00a0');
+                        .html(d.separator || '\u00a0' + t.html('shortcuts.or') + '\u00a0');
                 } else if (i === nodes.length - 1 && d.suffix) {
                     selection
                         .append('span')
@@ -238,14 +238,14 @@ export function uiShortcuts(context) {
                 selection
                     .append('span')
                     .attr('class', 'gesture')
-                    .html(function (d) { return t(d.gesture); });
+                    .html(function (d) { return t.html(d.gesture); });
             });
 
 
         shortcutRows
             .append('td')
             .attr('class', 'shortcut-desc')
-            .html(function (d) { return d.text ? t(d.text) : '\u00a0'; });
+            .html(function (d) { return d.text ? t.html(d.text) : '\u00a0'; });
 
 
         shortcuts = shortcuts

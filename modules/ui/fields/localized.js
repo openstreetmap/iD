@@ -512,7 +512,7 @@ export function uiFieldLocalized(field, context) {
                 text
                     .append('span')
                     .attr('class', 'label-textvalue')
-                    .html(t('translate.localized_translation_label'));
+                    .html(t.html('translate.localized_translation_label'));
 
                 text
                     .append('span')
@@ -543,7 +543,7 @@ export function uiFieldLocalized(field, context) {
                     .attr('class', 'localized-lang')
                     .attr('id', domId)
                     .attr('type', 'text')
-                    .attr('placeholder', t('translate.localized_translation_language', { html: false }))
+                    .attr('placeholder', t('translate.localized_translation_language'))
                     .on('blur', changeLang)
                     .on('change', changeLang)
                     .call(langCombo);
@@ -590,7 +590,7 @@ export function uiFieldLocalized(field, context) {
                 return Array.isArray(d.value) ? d.value.filter(Boolean).join('\n') : null;
             })
             .attr('placeholder', function(d) {
-                return Array.isArray(d.value) ? t('inspector.multiple_values', { html: false }) : t('translate.localized_translation_name', { html: false });
+                return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
             })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);
@@ -617,7 +617,7 @@ export function uiFieldLocalized(field, context) {
 
         utilGetSetValue(input, typeof tags[field.key] === 'string' ? tags[field.key] : '')
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : field.placeholder())
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : field.placeholder())
             .classed('mixed', isMixed);
 
         calcMultilingual(tags);

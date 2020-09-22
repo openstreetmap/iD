@@ -147,7 +147,7 @@ export function uiFieldCombo(field, context) {
 
         if (_optstrings) {
             _comboData = Object.keys(_optstrings).map(function(k) {
-                var v = field.t('options.' + k, { 'default': _optstrings[k], html: false });
+                var v = field.t('options.' + k, { 'default': _optstrings[k] });
                 return {
                     key: k,
                     value: v,
@@ -240,7 +240,7 @@ export function uiFieldCombo(field, context) {
     function setPlaceholder(values) {
 
         if (_isMulti || _isSemi) {
-            _staticPlaceholder = field.placeholder() || t('inspector.add', { html: false });
+            _staticPlaceholder = field.placeholder() || t('inspector.add');
         } else {
             var vals = values
                 .map(function(d) { return d.value; })
@@ -256,7 +256,7 @@ export function uiFieldCombo(field, context) {
 
         var ph;
         if (!_isMulti && !_isSemi && _tags && Array.isArray(_tags[field.key])) {
-            ph = t('inspector.multiple_values', { html: false });
+            ph = t('inspector.multiple_values');
         } else {
             ph =  _staticPlaceholder;
         }
@@ -530,7 +530,7 @@ export function uiFieldCombo(field, context) {
                     return d.isMixed;
                 })
                 .attr('title', function(d) {
-                    return d.isMixed ? t('inspector.unshared_value_tooltip', { html: false }) : null;
+                    return d.isMixed ? t('inspector.unshared_value_tooltip') : null;
                 });
 
             if (allowDragAndDrop) {
@@ -554,7 +554,7 @@ export function uiFieldCombo(field, context) {
 
             utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
                 .attr('title', isMixed ? mixedValues.join('\n') : undefined)
-                .attr('placeholder', isMixed ? t('inspector.multiple_values', { html: false }) : _staticPlaceholder || '')
+                .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
                 .classed('mixed', isMixed);
         }
     };

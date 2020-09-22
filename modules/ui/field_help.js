@@ -197,7 +197,7 @@ export function uiFieldHelp(context, fieldName) {
         titleEnter
             .append('h2')
             .attr('class', ((localizer.textDirection() === 'rtl') ? 'fr' : 'fl'))
-            .html(t('help.field.' + fieldName + '.title'));
+            .html(t.html('help.field.' + fieldName + '.title'));
 
         titleEnter
             .append('button')

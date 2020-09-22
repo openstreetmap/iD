@@ -54,7 +54,7 @@ export function uiNoteComments() {
                         .attr('target', '_blank');
                 }
                 selection
-                    .html(function(d) { return d.user || t('note.anonymous'); });
+                    .html(function(d) { return d.user || t.html('note.anonymous'); });
             });
 
         metadataEnter

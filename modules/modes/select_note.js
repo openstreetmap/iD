@@ -108,7 +108,7 @@ export function modeSelectNote(context, selectedNoteID) {
         _behaviors.forEach(context.install);
 
         _keybinding
-            .on(t('inspector.zoom_to.key', { html: false }), mode.zoomToSelected)
+            .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
             .on('⎋', esc, true);
 
         d3_select(document)

@@ -9,7 +9,7 @@ import { uiPane } from '../pane';
 
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { helpString } from '../intro/helper';
+import { helpHtml } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
@@ -244,7 +244,7 @@ export function uiPaneHelp(context) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + helpString(subkey, helpPaneReplacements) + '\n\n';
+            return all + hhh + helpHtml(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
         return {
@@ -257,7 +257,7 @@ export function uiPaneHelp(context) {
     });
 
     var helpPane = uiPane('help', context)
-        .key(t('help.key', { html: false }))
+        .key(t('help.key'))
         .title(t('help.title'))
         .description(t('help.title'))
         .iconName('iD-icon-help');
@@ -364,7 +364,7 @@ export function uiPaneHelp(context) {
 
         shortcuts
             .append('div')
-            .html(t('shortcuts.title'));
+            .html(t.html('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
@@ -381,7 +381,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .html(t('splash.walkthrough'));
+            .html(t.html('splash.walkthrough'));
 
 
         var helpContent = content

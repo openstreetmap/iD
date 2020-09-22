@@ -135,7 +135,7 @@ export function operationStraighten(context, selectedIDs) {
 
 
     operation.id = 'straighten';
-    operation.keys = [t('operations.straighten.key', { html: false })];
+    operation.keys = [t('operations.straighten.key')];
     operation.title = t('operations.straighten.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

@@ -89,7 +89,7 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', function(d) {
                 return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
-            .attr('title', function(d) { return t('icons.' + d.id, { html: false }); })
+            .attr('title', function(d) { return t('icons.' + d.id); })
             .on('click', function(d) {
                 _tagView = d.id;
                 prefs('raw-tag-editor-view', d.id);
@@ -119,7 +119,7 @@ export function uiSectionRawTagEditor(id, context) {
             .append('textarea')
             .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
             .call(utilNoAuto)
-            .attr('placeholder', t('inspector.key_value', { html: false }))
+            .attr('placeholder', t('inspector.key_value'))
             .attr('spellcheck', 'false')
             .merge(textarea);
 
@@ -205,7 +205,7 @@ export function uiSectionRawTagEditor(id, context) {
         innerWrap
             .append('button')
             .attr('class', 'form-field-button remove')
-            .attr('title', t('icons.remove', { html: false }))
+            .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'));
 
 
@@ -257,7 +257,7 @@ export function uiSectionRawTagEditor(id, context) {
                 return Array.isArray(d.value);
             })
             .attr('placeholder', function(d) {
-                return typeof d.value === 'string' ? null : t('inspector.multiple_values', { html: false });
+                return typeof d.value === 'string' ? null : t('inspector.multiple_values');
             })
             .call(utilGetSetValue, function(d) {
                 return typeof d.value === 'string' ? d.value : '';

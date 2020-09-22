@@ -21,7 +21,7 @@ export function uiPanelHistory(context) {
         if (!userName) {
             selection
                 .append('span')
-                .html(t('info_panels.history.unknown'));
+                .html(t.html('info_panels.history.unknown'));
             return;
         }
 
@@ -57,7 +57,7 @@ export function uiPanelHistory(context) {
         if (!changeset) {
             selection
                 .append('span')
-                .html(t('info_panels.history.unknown'));
+                .html(t.html('info_panels.history.unknown'));
             return;
         }
 
@@ -118,7 +118,7 @@ export function uiPanelHistory(context) {
         selection
             .append('h4')
             .attr('class', 'history-heading')
-            .html(singular || t('info_panels.selected', { n: selected.length }));
+            .html(singular || t.html('info_panels.selected', { n: selected.length }));
 
         if (!singular) return;
 
@@ -134,7 +134,7 @@ export function uiPanelHistory(context) {
         if (!note || note.isNew()) {
             selection
                 .append('div')
-                .html(t('info_panels.history.note_no_history'));
+                .html(t.html('info_panels.history.note_no_history'));
             return;
         }
 
@@ -143,20 +143,20 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .html(t('info_panels.history.note_comments') + ':')
+            .html(t.html('info_panels.history.note_comments') + ':')
             .append('span')
             .html(note.comments.length);
 
         if (note.comments.length) {
             list
                 .append('li')
-                .html(t('info_panels.history.note_created_date') + ':')
+                .html(t.html('info_panels.history.note_created_date') + ':')
                 .append('span')
                 .html(displayTimestamp(note.comments[0].date));
 
             list
                 .append('li')
-                .html(t('info_panels.history.note_created_user') + ':')
+                .html(t.html('info_panels.history.note_created_user') + ':')
                 .call(displayUser, note.comments[0].user);
         }
 
@@ -168,7 +168,7 @@ export function uiPanelHistory(context) {
                 .attr('href', osm.noteURL(note))
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
-                .html(t('info_panels.history.note_link_text'));
+                .html(t.html('info_panels.history.note_link_text'));
         }
     }
 
@@ -177,7 +177,7 @@ export function uiPanelHistory(context) {
         if (!entity || entity.isNew()) {
             selection
                 .append('div')
-                .html(t('info_panels.history.no_history'));
+                .html(t.html('info_panels.history.no_history'));
             return;
         }
 
@@ -191,7 +191,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'view-history-on-osm')
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
-                .attr('title', t('info_panels.history.link_text', { html: false }))
+                .attr('title', t('info_panels.history.link_text'))
                 .html('OSM');
         }
         links
@@ -207,24 +207,24 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .html(t('info_panels.history.version') + ':')
+            .html(t.html('info_panels.history.version') + ':')
             .append('span')
             .html(entity.version);
 
         list
             .append('li')
-            .html(t('info_panels.history.last_edit') + ':')
+            .html(t.html('info_panels.history.last_edit') + ':')
             .append('span')
             .html(displayTimestamp(entity.timestamp));
 
         list
             .append('li')
-            .html(t('info_panels.history.edited_by') + ':')
+            .html(t.html('info_panels.history.edited_by') + ':')
             .call(displayUser, entity.user);
 
         list
             .append('li')
-            .html(t('info_panels.history.changeset') + ':')
+            .html(t.html('info_panels.history.changeset') + ':')
             .call(displayChangeset, entity.changeset);
     }
 
@@ -250,7 +250,7 @@ export function uiPanelHistory(context) {
 
     panel.id = 'history';
     panel.title = t('info_panels.history.title');
-    panel.key = t('info_panels.history.key', { html: false });
+    panel.key = t('info_panels.history.key');
 
 
     return panel;

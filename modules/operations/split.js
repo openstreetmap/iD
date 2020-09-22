@@ -63,7 +63,7 @@ export function operationSplit(context, selectedIDs) {
 
 
     operation.id = 'split';
-    operation.keys = [t('operations.split.key', { html: false })];
+    operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');
     operation.behavior = behaviorOperation(context).which(operation);
 

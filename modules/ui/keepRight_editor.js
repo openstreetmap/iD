@@ -35,7 +35,7 @@ export function uiKeepRightEditor(context) {
 
     headerEnter
       .append('h3')
-        .html(t('QA.keepRight.title'));
+        .html(t.html('QA.keepRight.title'));
 
 
     let body = selection.selectAll('.body')
@@ -90,12 +90,12 @@ export function uiKeepRightEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .html(t('QA.keepRight.comment'));
+        .html(t.html('QA.keepRight.comment'));
 
     saveSectionEnter
       .append('textarea')
         .attr('class', 'new-comment-input')
-        .attr('placeholder', t('QA.keepRight.comment_placeholder', { html: false }))
+        .attr('placeholder', t('QA.keepRight.comment_placeholder'))
         .attr('maxlength', 1000)
         .property('value', d => d.newComment || d.comment)
         .call(utilNoAuto)
@@ -146,7 +146,7 @@ export function uiKeepRightEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .html(t('QA.keepRight.save_comment'));
+        .html(t.html('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')

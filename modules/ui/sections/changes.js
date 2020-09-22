@@ -74,7 +74,7 @@ export function uiSectionChanges(context) {
         buttons
             .append('span')
             .attr('class', 'change-type')
-            .html(function(d) { return t('commit.' + d.changeType) + ' '; });
+            .html(function(d) { return t.html('commit.' + d.changeType) + ' '; });
 
         buttons
             .append('strong')
@@ -132,7 +132,7 @@ export function uiSectionChanges(context) {
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .html(t('commit.download_changes'));
+            .html(t.html('commit.download_changes'));
 
 
         function mouseover(d) {

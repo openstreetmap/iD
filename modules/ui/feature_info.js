@@ -28,7 +28,7 @@ export function uiFeatureInfo(context) {
             selection.append('a')
                 .attr('class', 'chip')
                 .attr('href', '#')
-                .html(t('feature_info.hidden_warning', { count: count }))
+                .html(t.html('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
                 .on('click', function() {
                     tooltipBehavior.hide();

@@ -60,7 +60,7 @@ export function validationIncompatibleSource() {
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .html(t('issues.incompatible_source.' + id + '.reference'));
+                    .html(t.html('issues.incompatible_source.' + id + '.reference'));
             };
         }
     };

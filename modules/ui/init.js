@@ -127,7 +127,7 @@ export function uiInit(context) {
 
         map
             .on('hitMinZoom.ui', function() {
-                ui.flash.html(t('cannot_zoom'))();
+                ui.flash.html(t.html('cannot_zoom'))();
             });
 
         container
@@ -348,7 +348,7 @@ export function uiInit(context) {
         var panPixels = 80;
         context.keybinding()
             .on('⌫', function() { d3_event.preventDefault(); })
-            .on([t('sidebar.key', { html: false }), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
+            .on([t('sidebar.key'), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
@@ -357,7 +357,7 @@ export function uiInit(context) {
             .on(uiCmd('⌥↑'), pan([0, map.dimensions()[1]]))
             .on(uiCmd('⌥→'), pan([-map.dimensions()[0], 0]))
             .on(uiCmd('⌥↓'), pan([0, -map.dimensions()[1]]))
-            .on(uiCmd('⌘' + t('background.key', { html: false })), function quickSwitch() {
+            .on(uiCmd('⌘' + t('background.key')), function quickSwitch() {
                 if (d3_event) {
                     d3_event.stopImmediatePropagation();
                     d3_event.preventDefault();
@@ -370,12 +370,12 @@ export function uiInit(context) {
                     context.background().baseLayerSource(previousBackground);
                 }
             })
-            .on(t('area_fill.wireframe.key', { html: false }), function toggleWireframe() {
+            .on(t('area_fill.wireframe.key'), function toggleWireframe() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 context.map().toggleWireframe();
             })
-            .on(uiCmd('⌥' + t('area_fill.wireframe.key', { html: false })), function toggleOsmData() {
+            .on(uiCmd('⌥' + t('area_fill.wireframe.key')), function toggleOsmData() {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
 
@@ -391,7 +391,7 @@ export function uiInit(context) {
                     }
                 }
             })
-            .on(t('map_data.highlight_edits.key', { html: false }), function toggleHighlightEdited() {
+            .on(t('map_data.highlight_edits.key'), function toggleHighlightEdited() {
                 d3_event.preventDefault();
                 context.map().toggleHighlightEdited();
             });

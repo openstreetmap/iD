@@ -38,7 +38,7 @@ export function uiPresetList(context) {
 
         var message = messagewrap
             .append('h3')
-            .html(t('inspector.choose'));
+            .html(t.html('inspector.choose'));
 
         messagewrap
             .append('button')
@@ -124,7 +124,7 @@ export function uiPresetList(context) {
         var search = searchWrap
             .append('input')
             .attr('class', 'preset-search-input')
-            .attr('placeholder', t('inspector.search', { html: false }))
+            .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
             .call(utilNoAuto)
             .on('keydown', initialKeydown)

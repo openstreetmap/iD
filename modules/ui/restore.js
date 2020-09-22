@@ -17,13 +17,13 @@ export function uiRestore(context) {
       .append('div')
       .attr('class', 'modal-section')
       .append('h3')
-      .html(t('restore.heading'));
+      .html(t.html('restore.heading'));
 
     introModal
       .append('div')
       .attr('class','modal-section')
       .append('p')
-      .html(t('restore.description'));
+      .html(t.html('restore.description'));
 
     let buttonWrap = introModal
       .append('div')
@@ -45,7 +45,7 @@ export function uiRestore(context) {
 
     restore
       .append('div')
-      .html(t('restore.restore'));
+      .html(t.html('restore.restore'));
 
     let reset = buttonWrap
       .append('button')
@@ -63,7 +63,7 @@ export function uiRestore(context) {
 
     reset
       .append('div')
-      .html(t('restore.reset'));
+      .html(t.html('restore.reset'));
 
     restore.node().focus();
   };

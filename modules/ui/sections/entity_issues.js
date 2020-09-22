@@ -110,7 +110,7 @@ export function uiSectionEntityIssues(context) {
         var infoButton = labelsEnter
             .append('button')
             .attr('class', 'issue-info-button')
-            .attr('title', t('icons.information', { html: false }))
+            .attr('title', t('icons.information'))
             .call(svgIcon('#iD-icon-inspect'));
 
         infoButton
@@ -160,7 +160,7 @@ export function uiSectionEntityIssues(context) {
                         .call(d.reference);
                 } else {
                     d3_select(this)
-                        .html(t('inspector.no_documentation_key'));
+                        .html(t.html('inspector.no_documentation_key'));
                 }
             });
 
