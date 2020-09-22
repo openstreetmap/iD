@@ -23,7 +23,7 @@ export function uiSectionFeatureType(context) {
     var _tagReference;
 
     var section = uiSection('feature-type', context)
-        .title(t('inspector.feature_type'))
+        .label(t.html('inspector.feature_type'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {

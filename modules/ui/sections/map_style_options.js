@@ -9,7 +9,7 @@ import { uiSection } from '../section';
 export function uiSectionMapStyleOptions(context) {
 
     var section = uiSection('fill-area', context)
-        .title(t('map_data.style_options'))
+        .label(t.html('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 

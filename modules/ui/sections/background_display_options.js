@@ -13,7 +13,7 @@ import { utilDetect } from '../../util/detect';
 export function uiSectionBackgroundDisplayOptions(context) {
 
     var section = uiSection('background-display-options', context)
-        .title(t('background.display_options'))
+        .label(t.html('background.display_options'))
         .disclosureContent(renderDisclosureContent);
 
     var _detected = utilDetect();

@@ -261,7 +261,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .title(t('success.more'))
+          .label(t.html('success.more'))
           .content(showMore)
         );
     }
@@ -287,7 +287,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-events-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .title(t('success.events'))
+          .label(t.html('success.events'))
           .content(showNextEvents)
         )
         .select('.hide-toggle')

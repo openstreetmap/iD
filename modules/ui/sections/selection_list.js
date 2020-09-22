@@ -16,8 +16,8 @@ export function uiSectionSelectionList(context) {
         .shouldDisplay(function() {
             return _selectedIDs.length > 1;
         })
-        .title(function() {
-            return t('inspector.title_count', { title: t('inspector.features'), count: _selectedIDs.length });
+        .label(function() {
+            return t('inspector.title_count', { title: t.html('inspector.features'), count: _selectedIDs.length });
         })
         .disclosureContent(renderDisclosureContent);
 

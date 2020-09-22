@@ -18,7 +18,7 @@ export function uiToolOldDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
-        label: t('toolbar.add_feature')
+        label: t.html('toolbar.add_feature')
     };
 
     var modes = [

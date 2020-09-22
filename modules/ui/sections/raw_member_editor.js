@@ -28,13 +28,13 @@ export function uiSectionRawMemberEditor(context) {
             var entity = context.hasEntity(_entityIDs[0]);
             return entity && entity.type === 'relation';
         })
-        .title(function() {
+        .label(function() {
             var entity = context.hasEntity(_entityIDs[0]);
             if (!entity) return '';
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t('inspector.title_count', { title: t('inspector.members'), count: count });
+            return t('inspector.title_count', { title: t.html('inspector.members'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 

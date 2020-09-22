@@ -16,10 +16,10 @@ export function uiSectionValidationIssues(id, severity, context) {
     var _issues = [];
 
     var section = uiSection(id, context)
-        .title(function() {
+        .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
+            return t('inspector.title_count', { title: t.html('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {

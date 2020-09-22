@@ -11,7 +11,7 @@ import { uiSection } from '../section';
 export function uiSectionPrivacy(context) {
 
     let section = uiSection('preferences-third-party', context)
-      .title(t('preferences.privacy.title'))
+      .label(t.html('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
     let _showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';

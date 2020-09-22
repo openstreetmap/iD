@@ -27,14 +27,14 @@ export function uiSectionRawMembershipEditor(context) {
         .shouldDisplay(function() {
             return _entityIDs && _entityIDs.length === 1;
         })
-        .title(function() {
+        .label(function() {
             var entity = context.hasEntity(_entityIDs[0]);
             if (!entity) return '';
 
             var parents = context.graph().parentRelations(entity);
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t('inspector.title_count', { title: t('inspector.relations'), count: count });
+            return t('inspector.title_count', { title: t.html('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 

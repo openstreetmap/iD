@@ -22,7 +22,7 @@ export function uiSectionDataLayers(context) {
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
-        .title(t('map_data.data_layers'))
+        .label(t.html('map_data.data_layers'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {

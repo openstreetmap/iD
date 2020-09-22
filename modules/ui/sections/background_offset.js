@@ -12,7 +12,7 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundOffset(context) {
 
     var section = uiSection('background-offset', context)
-        .title(t('background.fix_misalignment'))
+        .label(t.html('background.fix_misalignment'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 

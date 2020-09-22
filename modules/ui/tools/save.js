@@ -12,7 +12,7 @@ export function uiToolSave(context) {
 
     var tool = {
         id: 'save',
-        label: t('save.title')
+        label: t.html('save.title')
     };
 
     var button = null;

@@ -11,7 +11,7 @@ export function uiSectionPhotoOverlays(context) {
     var layers = context.layers();
 
     var section = uiSection('photo-overlays', context)
-        .title(t('photo_overlays.title'))
+        .label(t.html('photo_overlays.title'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 

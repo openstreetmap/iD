@@ -26,10 +26,10 @@ export function uiSectionChanges(context) {
         .catch(function() { /* ignore */ });
 
     var section = uiSection('changes-list', context)
-        .title(function() {
+        .label(function() {
             var history = context.history();
             var summary = history.difference().summary();
-            return t('inspector.title_count', { title: t('commit.changes'), count: summary.length });
+            return t('inspector.title_count', { title: t.html('commit.changes'), count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
