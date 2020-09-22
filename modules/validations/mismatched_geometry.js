@@ -208,7 +208,7 @@ export function validationMismatchedGeometry() {
                             var action = actionExtract(entityId);
                             context.perform(
                                 action,
-                                t('operations.extract.annotation.single')
+                                t('operations.extract.annotation', { n: 1 })
                             );
                             // re-enter mode to trigger updates
                             context.enter(modeSelect(context, [action.getExtractedNodeID()]));
