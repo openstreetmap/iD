@@ -73301,5 +73301,46 @@
       ]
     ],
     "terms_text": "Urząd Miasta Zabrza"
+  },
+  {
+    "id": "OSMSrbijaCyr",
+    "name": "OpenStreetMap Srbija Cyrillic",
+    "type": "tms",
+    "template": "http://tileserver.osmsrbija.iz.rs:2280/cir/{z}/{x}/{y}.png",
+    "terms_url": "https://www.openstreetmap.rs",
+    "terms_text": "© OpenStreetMap contributors, OpenStreetMap Serbia, CC-BY-SA 2.0",
+    "icon": "http://ue.cache.osmsrbija.iz.rs/osm-serbia-icon.png",
+    "description": "OpenStreetMap Serbian Cyrilic",
+    "default": true,
+    "best": false,
+    "polygon": [
+      [
+        [16.8, 47.2],
+        [25.5, 47.2],
+        [25.5, 40.1],
+        [16.8, 40.1]
+      ]    
+    ],
+    "zoomExtent": [7, 18]
+  },
+  {
+    "id": "OSMSrbijaLat",
+    "name": "OpenStreetMap Srbija Latin",
+    "type": "tms",
+    "template": "http://tileserver.osmsrbija.iz.rs:2280/lat/{z}/{x}/{y}.png",
+    "terms_text": "© OpenStreetMap contributors, OpenStreetMap Serbia, CC-BY-SA 2.0",
+    "icon": "http://ue.cache.osmsrbija.iz.rs/osm-serbia-icon.png",
+    "description": "OpenStreetMap Serbian Latin",
+    "default": true,
+    "best": false,
+    "polygon": [
+        [
+          [16.8, 47.2],
+          [25.5, 47.2],
+          [25.5, 40.1],
+          [16.8, 40.1]
+        ]    
+      ],
+    "zoomExtent": [7, 18]
   }
 ]
