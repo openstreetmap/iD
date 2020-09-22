@@ -286,6 +286,7 @@ export function uiPaneHelp(context) {
                 if (i < docs.length - 1) {
                     var nextLink = selection
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'next')
                         .on('click', function() {
                             clickHelp(docs[i + 1], i + 1);
@@ -303,6 +304,7 @@ export function uiPaneHelp(context) {
                 if (i > 0) {
                     var prevLink = selection
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'previous')
                         .on('click', function() {
                             clickHelp(docs[i - 1], i - 1);
@@ -337,6 +339,7 @@ export function uiPaneHelp(context) {
             .enter()
             .append('li')
             .append('a')
+            .attr('href', '#')
             .html(function(d) { return d.title; })
             .on('click', clickHelp);
 
@@ -349,6 +352,7 @@ export function uiPaneHelp(context) {
                 .placement('top')
             )
             .append('a')
+            .attr('href', '#')
             .on('click', clickShortcuts);
 
         shortcuts
@@ -359,6 +363,7 @@ export function uiPaneHelp(context) {
             .append('li')
             .attr('class', 'walkthrough')
             .append('a')
+            .attr('href', '#')
             .on('click', clickWalkthrough);
 
         walkthrough
