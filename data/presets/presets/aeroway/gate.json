@@ -4,7 +4,8 @@
         "ref_aeroway_gate"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "aeroway": "gate"
