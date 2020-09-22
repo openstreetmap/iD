@@ -4890,30 +4890,30 @@ img.tile-debug {
 }
 
 .modal-shortcuts .tabs-bar {
-    text-align: center;
     padding-bottom: 5px;
-    font-size: 16px;
-    font-weight: bold;
+    text-align: center;
 }
 
-.modal-shortcuts .tab {
+.modal-shortcuts a.tab {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 5px;
     cursor: pointer;
     color: #666;
+    font-size: 16px;
+    font-weight: bold;
 }
-.modal-shortcuts .tab.active {
+.modal-shortcuts a.tab.active {
     color: #7092ff;
     border-bottom: 2px solid;
 }
-.modal-shortcuts .tab:focus,
-.modal-shortcuts .tab:active {
+.modal-shortcuts a.tab:focus,
+.modal-shortcuts a.tab:active {
     color: #597be7;
     background-color: #efefef;
 }
 @media (hover: hover) {
-    .modal-shortcuts .tab:hover {
+    .modal-shortcuts a.tab:hover {
         color: #597be7;
         background-color: #efefef;
     }
