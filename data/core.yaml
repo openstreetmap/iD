@@ -1577,7 +1577,7 @@ en:
     suggested: "Suggested updates:"
     enable_all: Enable All
     disable_all: Disable All
-    reset_ignored: Reset Ignored ({count})
+    reset_ignored: Reset Ignored
     fix_one:
       title: fix
     fix_all:
