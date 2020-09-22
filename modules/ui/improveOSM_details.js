@@ -16,8 +16,8 @@ export function uiImproveOsmDetails(context) {
     if (d.desc) return d.desc;
     const issueKey = d.issueKey;
     d.replacements = d.replacements || {};
-    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
-    return t(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
+    d.replacements.default = t.html('inspector.unknown');  // special key `default` works as a fallback string
+    return t.html(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
   }
 
 

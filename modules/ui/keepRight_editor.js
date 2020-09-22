@@ -173,7 +173,7 @@ export function uiKeepRightEditor(context) {
     buttonSection.select('.close-button')   // select and propagate data
       .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.close${andComment}`);
+        return t.html(`QA.keepRight.close${andComment}`);
       })
       .on('click.close', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -187,7 +187,7 @@ export function uiKeepRightEditor(context) {
     buttonSection.select('.ignore-button')   // select and propagate data
       .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.ignore${andComment}`);
+        return t.html(`QA.keepRight.ignore${andComment}`);
       })
       .on('click.ignore', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641

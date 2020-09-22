@@ -162,7 +162,7 @@ export function uiImproveOsmEditor(context) {
     buttonSection.select('.close-button')
       .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.close${andComment}`);
+        return t.html(`QA.keepRight.close${andComment}`);
       })
       .on('click.close', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -176,7 +176,7 @@ export function uiImproveOsmEditor(context) {
     buttonSection.select('.ignore-button')
       .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.ignore${andComment}`);
+        return t.html(`QA.keepRight.ignore${andComment}`);
       })
       .on('click.ignore', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641
