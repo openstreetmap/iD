@@ -163,7 +163,7 @@ export function validationImpossibleOneway() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.impossible_oneway.' + messageID + '.message', {
+                    return entity ? t.html('issues.impossible_oneway.' + messageID + '.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },

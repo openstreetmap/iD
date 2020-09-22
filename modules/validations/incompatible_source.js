@@ -34,7 +34,7 @@ export function validationIncompatibleSource() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
+                    return entity ? t.html('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },

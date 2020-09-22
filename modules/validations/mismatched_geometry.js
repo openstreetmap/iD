@@ -87,7 +87,7 @@ export function validationMismatchedGeometry() {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.tag_suggests_area.message', {
+                return entity ? t.html('issues.tag_suggests_area.message', {
                     feature: utilDisplayLabel(entity, context.graph()),
                     tag: utilTagText({ tags: tagSuggestingArea })
                 }) : '';
@@ -160,7 +160,7 @@ export function validationMismatchedGeometry() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.vertex_as_point.message', {
+                    return entity ? t.html('issues.vertex_as_point.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
@@ -183,7 +183,7 @@ export function validationMismatchedGeometry() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.point_as_vertex.message', {
+                    return entity ? t.html('issues.point_as_vertex.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
@@ -258,7 +258,7 @@ export function validationMismatchedGeometry() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.unclosed_multipolygon_part.message', {
+                    return entity ? t.html('issues.unclosed_multipolygon_part.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },

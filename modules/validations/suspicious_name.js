@@ -64,7 +64,7 @@ export function validationSuspiciousName() {
         if (!entity) return '';
         let preset = presetManager.match(entity, context.graph());
         let langName = langCode && localizer.languageName(langCode);
-        return t('issues.generic_name.message' + (langName ? '_language' : ''),
+        return t.html('issues.generic_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: genericName, language: langName }
         );
       },
@@ -110,7 +110,7 @@ export function validationSuspiciousName() {
         if (!entity) return '';
         const preset = presetManager.match(entity, context.graph());
         const langName = langCode && localizer.languageName(langCode);
-        return t('issues.incorrect_name.message' + (langName ? '_language' : ''),
+        return t.html('issues.incorrect_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: incorrectName, language: langName }
         );
       },

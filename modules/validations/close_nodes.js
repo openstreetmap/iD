@@ -168,7 +168,7 @@ export function validationCloseNodes(context) {
                         message: function(context) {
                             var entity = context.hasEntity(this.entityIds[0]),
                                 entity2 = context.hasEntity(this.entityIds[1]);
-                            return (entity && entity2) ? t('issues.close_nodes.detached.message', {
+                            return (entity && entity2) ? t.html('issues.close_nodes.detached.message', {
                                 feature: utilDisplayLabel(entity, context.graph()),
                                 feature2: utilDisplayLabel(entity2, context.graph())
                             }) : '';
@@ -233,7 +233,7 @@ export function validationCloseNodes(context) {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.close_nodes.message', { way: utilDisplayLabel(entity, context.graph()) }) : '';
+                    return entity ? t.html('issues.close_nodes.message', { way: utilDisplayLabel(entity, context.graph()) }) : '';
                 },
                 reference: showReference,
                 entityIds: [way.id, node1.id, node2.id],

@@ -98,7 +98,7 @@ export function validationPrivateData() {
             var currEntity = context.hasEntity(this.entityIds[0]);
             if (!currEntity) return '';
 
-            return t('issues.private_data.contact.message',
+            return t.html('issues.private_data.contact.message',
                 { feature: utilDisplayLabel(currEntity, context.graph()) }
             );
         }

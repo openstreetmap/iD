@@ -403,7 +403,7 @@ export function validationCrossingWays(context) {
                 var graph = context.graph();
                 var entity1 = graph.hasEntity(this.entityIds[0]),
                     entity2 = graph.hasEntity(this.entityIds[1]);
-                return (entity1 && entity2) ? t('issues.crossing_ways.message', {
+                return (entity1 && entity2) ? t.html('issues.crossing_ways.message', {
                     feature: utilDisplayLabel(entity1, graph),
                     feature2: utilDisplayLabel(entity2, graph)
                 }) : '';

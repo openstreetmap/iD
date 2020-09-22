@@ -52,15 +52,15 @@ export function validationAlmostJunction(context) {
         type,
         subtype: 'highway-highway',
         severity: 'warning',
-        message(context) {
+        message: function(context) {
           const entity1 = context.hasEntity(this.entityIds[0]);
           if (this.entityIds[0] === this.entityIds[2]) {
-            return entity1 ? t('issues.almost_junction.self.message', {
+            return entity1 ? t.html('issues.almost_junction.self.message', {
               feature: utilDisplayLabel(entity1, context.graph())
             }) : '';
           } else {
             const entity2 = context.hasEntity(this.entityIds[2]);
-            return (entity1 && entity2) ? t('issues.almost_junction.message', {
+            return (entity1 && entity2) ? t.html('issues.almost_junction.message', {
               feature: utilDisplayLabel(entity1, context.graph()),
               feature2: utilDisplayLabel(entity2, context.graph())
             }) : '';

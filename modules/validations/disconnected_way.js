@@ -25,7 +25,7 @@ export function validationDisconnectedWay() {
             message: function(context) {
                 var entity = this.entityIds.length && context.hasEntity(this.entityIds[0]);
                 var label = entity && utilDisplayLabel(entity, context.graph());
-                return t('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
+                return t.html('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
             },
             reference: showReference,
             entityIds: Array.from(routingIslandWays).map(function(way) { return way.id; }),

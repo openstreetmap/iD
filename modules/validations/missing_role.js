@@ -44,7 +44,7 @@ export function validationMissingRole() {
             message: function(context) {
                 var member = context.hasEntity(this.entityIds[1]),
                     relation = context.hasEntity(this.entityIds[0]);
-                return (member && relation) ? t('issues.missing_role.message', {
+                return (member && relation) ? t.html('issues.missing_role.message', {
                     member: utilDisplayLabel(member, context.graph()),
                     relation: utilDisplayLabel(relation, context.graph())
                 }) : '';
