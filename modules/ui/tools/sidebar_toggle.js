@@ -6,7 +6,7 @@ export function uiToolSidebarToggle(context) {
 
     var tool = {
         id: 'sidebar_toggle',
-        label: t('toolbar.inspect')
+        label: t.html('toolbar.inspect')
     };
 
     tool.render = function(selection) {

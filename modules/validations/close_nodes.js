@@ -200,7 +200,7 @@ export function validationCloseNodes(context) {
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .text(referenceText);
+                    .html(referenceText);
             }
         }
 
@@ -264,7 +264,7 @@ export function validationCloseNodes(context) {
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .text(referenceText);
+                    .html(referenceText);
             }
         }
 

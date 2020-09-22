@@ -79,11 +79,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  let _textCache = {};
   _this.t = (scope, options) => {
     const textID = `presets.presets.${presetID}.${scope}`;
-    if (_textCache[textID]) return _textCache[textID];
-    return _textCache[textID] = t(textID, options);
+    return t(textID, options);
+  };
+
+  _this.t.html = (scope, options) => {
+    const textID = `presets.presets.${presetID}.${scope}`;
+    return t.html(textID, options);
   };
 
 

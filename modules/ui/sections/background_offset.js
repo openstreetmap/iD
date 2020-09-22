@@ -12,7 +12,7 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundOffset(context) {
 
     var section = uiSection('background-offset', context)
-        .title(t('background.fix_misalignment'))
+        .label(t.html('background.fix_misalignment'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -161,7 +161,7 @@ export function uiSectionBackgroundOffset(context) {
         containerEnter
             .append('div')
             .attr('class', 'nudge-instructions')
-            .text(t('background.offset'));
+            .html(t.html('background.offset'));
 
         var nudgeEnter = containerEnter
             .append('div')

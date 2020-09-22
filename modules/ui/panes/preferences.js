@@ -7,7 +7,7 @@ export function uiPanePreferences(context) {
 
   let preferencesPane = uiPane('preferences', context)
     .key(t('preferences.key'))
-    .title(t('preferences.title'))
+    .label(t.html('preferences.title'))
     .description(t('preferences.description'))
     .iconName('fas-user-cog')
     .sections([

@@ -42,7 +42,7 @@ export function uiSplash(context) {
       .append('div')
       .attr('class','modal-section')
       .append('h3')
-      .text(t('splash.welcome'));
+      .html(t.html('splash.welcome'));
 
     let modalSection = introModal
       .append('div')
@@ -50,7 +50,7 @@ export function uiSplash(context) {
 
     modalSection
       .append('p')
-      .html(t('splash.text', {
+      .html(t.html('splash.text', {
         version: context.version,
         website: '<a target="_blank" href="http://ideditor.blog/">ideditor.blog</a>',
         github: '<a target="_blank" href="https://github.com/openstreetmap/iD">github.com</a>'
@@ -58,7 +58,7 @@ export function uiSplash(context) {
 
     modalSection
       .append('p')
-      .html(t('splash.privacy', {
+      .html(t.html('splash.privacy', {
         updateMessage: updateMessage,
         privacyLink: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/release/PRIVACY.md">' +
           t('splash.privacy_policy') + '</a>'
@@ -84,7 +84,7 @@ export function uiSplash(context) {
 
     walkthrough
       .append('div')
-      .text(t('splash.walkthrough'));
+      .html(t.html('splash.walkthrough'));
 
     let startEditing = buttonWrap
       .append('button')
@@ -99,7 +99,7 @@ export function uiSplash(context) {
 
     startEditing
       .append('div')
-      .text(t('splash.start'));
+      .html(t.html('splash.start'));
 
     modalSelection.select('button.close')
       .attr('class','hide');

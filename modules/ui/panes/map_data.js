@@ -11,7 +11,7 @@ export function uiPaneMapData(context) {
 
     var mapDataPane = uiPane('map-data', context)
         .key(t('map_data.key'))
-        .title(t('map_data.title'))
+        .label(t.html('map_data.title'))
         .description(t('map_data.description'))
         .iconName('iD-icon-data')
         .sections([

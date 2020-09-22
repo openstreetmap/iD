@@ -18,7 +18,7 @@ export function uiToolOldDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
-        label: t('toolbar.add_feature')
+        label: t.html('toolbar.add_feature')
     };
 
     var modes = [
@@ -127,7 +127,7 @@ export function uiToolOldDrawModes(context) {
             buttonsEnter
                 .append('span')
                 .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
+                .html(function(mode) { return mode.title; });
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {

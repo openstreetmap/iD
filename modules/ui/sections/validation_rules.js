@@ -17,7 +17,7 @@ export function uiSectionValidationRules(context) {
 
     var section = uiSection('issues-rules', context)
         .disclosureContent(renderDisclosureContent)
-        .title(t('issues.rules.title'));
+        .label(t.html('issues.rules.title'));
 
     var _ruleKeys = context.validator().getRuleKeys()
         .filter(function(key) { return key !== 'maprules'; })
@@ -46,7 +46,7 @@ export function uiSectionValidationRules(context) {
             .append('a')
             .attr('class', 'issue-rules-link')
             .attr('href', '#')
-            .text(t('issues.disable_all'))
+            .html(t.html('issues.disable_all'))
             .on('click', function() {
                 context.validator().disableRules(_ruleKeys);
             });
@@ -55,7 +55,7 @@ export function uiSectionValidationRules(context) {
             .append('a')
             .attr('class', 'issue-rules-link')
             .attr('href', '#')
-            .text(t('issues.enable_all'))
+            .html(t.html('issues.enable_all'))
             .on('click', function() {
                 context.validator().disableRules([]);
             });

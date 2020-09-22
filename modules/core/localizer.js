@@ -222,27 +222,28 @@ export function coreLocalizer() {
     }
 
     /**
-    * Given a string identifier, try to find that string in the current
-    * language, and return it.  This function will be called recursively
-    * with locale `en` if a string can not be found in the requested language.
+    * Try to find that string in `locale` or the current `_localeCode` matching
+    * the given `stringId`. If no string can be found in the requested locale,
+    * we'll recurse down all the `_localeCodes` until one is found.
     *
     * @param  {string}   stringId      string identifier
     * @param  {object?}  replacements  token replacements and default string
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
     * @return {string?}  localized string
     */
-    localizer.t = function(stringId, replacements, locale) {
-        locale = locale || _localeCode;
+    localizer.tInfo = function(stringId, replacements, locale) {
 
-        // US English is the default
-        if (locale.toLowerCase() === 'en-us') locale = 'en';
+        locale = locale || _localeCode;
 
         let path = stringId
           .split('.')
           .map(s => s.replace(/<TX_DOT>/g, '.'))
           .reverse();
 
-        let result = _localeStrings[locale];
+        let stringsKey = locale;
+        // US English is the default
+        if (stringsKey.toLowerCase() === 'en-us') stringsKey = 'en';
+        let result = _localeStrings[stringsKey];
 
         while (result !== undefined && path.length) {
           result = result[path.pop()];
@@ -287,7 +288,10 @@ export function coreLocalizer() {
           }
           if (typeof result === 'string') {
             // found a localized string!
-            return result;
+            return {
+                text: result,
+                locale: locale
+            };
           }
         }
         // no localized string found...
@@ -297,18 +301,35 @@ export function coreLocalizer() {
         if (index >= 0 && index < _localeCodes.length - 1) {
             // eventually this will be 'en' or another locale with 100% coverage
             let fallback = _localeCodes[index + 1];
-            return localizer.t(stringId, replacements, fallback);
+            return localizer.tInfo(stringId, replacements, fallback);
         }
 
         if (replacements && 'default' in replacements) {
           // Fallback to a default value if one is specified in `replacements`
-          return replacements.default;
+          return {
+              text: replacements.default,
+              locale: null
+          };
         }
 
         const missing = `Missing ${locale} translation: ${stringId}`;
         if (typeof console !== 'undefined') console.error(missing);  // eslint-disable-line
 
-        return missing;
+        return {
+            text: missing,
+            locale: 'en'
+        };
+    };
+
+    // Returns only the localized text, discarding the locale info
+    localizer.t = function(stringId, replacements, locale) {
+        return localizer.tInfo(stringId, replacements, locale).text;
+    };
+
+    // Returns the localized text wrapped in an HTML element encoding the locale info
+    localizer.t.html = function(stringId, replacements, locale) {
+        const info = localizer.tInfo(stringId, replacements, locale);
+        return `<span class="localized-text" lang="${info.locale || 'unknown'}">${info.text}</span>`;
     };
 
     localizer.languageName = (code, options) => {

@@ -305,7 +305,7 @@ export function modeSelect(context, selectedIDs) {
                         .duration(4000)
                         .iconName('#iD-operation-' + moveOp.id)
                         .iconClass('operation disabled')
-                        .text(moveOp.tooltip)();
+                        .label(moveOp.tooltip)();
                 } else {
                     context.perform(actionMove(selectedIDs, delta, context.projection), moveOp.annotation());
                     context.validator().validate();
@@ -378,7 +378,7 @@ export function modeSelect(context, selectedIDs) {
                         .duration(4000)
                         .iconName('#iD-icon-no')
                         .iconClass('operation disabled')
-                        .text(t('operations.scale.' + disabled + '.' + multi))();
+                        .label(t('operations.scale.' + disabled + '.' + multi))();
                 } else {
                     const pivot = context.projection(extent.center());
                     const annotation = t('operations.scale.annotation.' + (isUp ? 'up' : 'down') + '.feature', { n: selectedIDs.length });

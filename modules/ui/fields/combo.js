@@ -538,12 +538,12 @@ export function uiFieldCombo(field, context) {
             }
 
             chips.select('span')
-                .text(function(d) { return d.value; });
+                .html(function(d) { return d.value; });
 
             chips.select('a')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
-                .text('×');
+                .html('×');
 
         } else {
             var isMixed = Array.isArray(tags[field.key]);

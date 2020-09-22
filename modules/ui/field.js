@@ -132,7 +132,7 @@ export function uiField(context, presetField, entityIDs, options) {
             textEnter
                 .append('span')
                 .attr('class', 'label-textvalue')
-                .text(function(d) { return d.label(); });
+                .html(function(d) { return d.label(); });
 
             textEnter
                 .append('span')

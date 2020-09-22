@@ -27,7 +27,7 @@ export function uiCommitWarnings(context) {
 
             containerEnter
                 .append('h3')
-                .text(severity === 'warning' ? t('commit.warnings') : t('commit.errors'));
+                .html(severity === 'warning' ? t.html('commit.warnings') : t.html('commit.errors'));
 
             containerEnter
                 .append('ul')
@@ -84,7 +84,7 @@ export function uiCommitWarnings(context) {
                 .merge(items);
 
             items.selectAll('.issue-message')
-                .text(function(d) {
+                .html(function(d) {
                     return d.message(context);
                 });
         }

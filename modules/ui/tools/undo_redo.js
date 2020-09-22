@@ -15,7 +15,7 @@ export function uiToolUndoRedo(context) {
 
     var tool = {
         id: 'undo_redo',
-        label: t('toolbar.undo_redo')
+        label: t.html('toolbar.undo_redo')
     };
 
     var commands = [{
@@ -92,7 +92,7 @@ export function uiToolUndoRedo(context) {
                         .duration(2000)
                         .iconName('#' + d.icon)
                         .iconClass(annotation ? '' : 'disabled')
-                        .text(text)();
+                        .label(text)();
                 }
                 lastPointerUpType = null;
             })

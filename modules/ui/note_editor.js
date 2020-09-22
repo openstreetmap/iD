@@ -54,7 +54,7 @@ export function uiNoteEditor(context) {
 
         headerEnter
             .append('h3')
-            .text(t('note.title'));
+            .html(t.html('note.title'));
 
 
         var body = selection.selectAll('.body')
@@ -148,7 +148,7 @@ export function uiNoteEditor(context) {
         noteSaveEnter
             .append('h4')
             .attr('class', '.note-save-header')
-            .text(function() {
+            .html(function() {
                 return _note.isNew() ? t('note.newDescription') : t('note.newComment');
             });
 
@@ -257,14 +257,14 @@ export function uiNoteEditor(context) {
 
         authEnter
             .append('span')
-            .text(t('note.login'));
+            .html(t.html('note.login'));
 
         authEnter
             .append('a')
             .attr('target', '_blank')
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .append('span')
-            .text(t('login'))
+            .html(t.html('login'))
             .on('click.note-login', function() {
                 d3_event.preventDefault();
                 osm.authenticate();
@@ -285,7 +285,7 @@ export function uiNoteEditor(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'note-save-prose')
-            .text(t('note.upload_explanation'))
+            .html(t.html('note.upload_explanation'))
             .merge(prose);
 
         osm.userDetails(function(err, user) {
@@ -303,12 +303,12 @@ export function uiNoteEditor(context) {
             userLink
                 .append('a')
                 .attr('class', 'user-info')
-                .text(user.display_name)
+                .html(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
                 .attr('target', '_blank');
 
             prose
-                .html(t('note.upload_explanation_with_user', { user: userLink.html() }));
+                .html(t.html('note.upload_explanation_with_user', { user: userLink.html() }));
         });
     }
 
@@ -334,12 +334,12 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button cancel-button secondary-action')
-                .text(t('confirm.cancel'));
+                .html(t.html('confirm.cancel'));
 
             buttonEnter
                 .append('button')
                 .attr('class', 'button save-button action')
-                .text(t('note.save'));
+                .html(t.html('note.save'));
 
         } else {
             buttonEnter
@@ -349,7 +349,7 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button comment-button action')
-                .text(t('note.comment'));
+                .html(t.html('note.comment'));
         }
 
 
@@ -366,7 +366,7 @@ export function uiNoteEditor(context) {
 
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
-            .text(function(d) {
+            .html(function(d) {
                 var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
                 return t('note.' + action + andComment);

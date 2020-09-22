@@ -56,7 +56,7 @@ export function uiAttribution(context) {
         attribution
           .append('span')
           .attr('class', 'attribution-text')
-          .text(terms_text);
+          .html(terms_text);
       })
       .merge(attributions);
 
@@ -76,7 +76,7 @@ export function uiAttribution(context) {
       .merge(copyright);
 
     copyright
-      .text(String);
+      .html(String);
   }
 
 

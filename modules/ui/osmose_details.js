@@ -45,7 +45,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.keepRight.detail_description'));
+          .html(t.html('QA.keepRight.detail_description'));
 
       div
         .append('p')
@@ -73,7 +73,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.osmose.fix_title'));
+          .html(t.html('QA.osmose.fix_title'));
 
       div
         .append('p')
@@ -91,7 +91,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.osmose.trap_title'));
+          .html(t.html('QA.osmose.trap_title'));
 
       div
         .append('p')
@@ -118,7 +118,7 @@ export function uiOsmoseDetails(context) {
         if (d.detail) {
           detailsDiv
             .append('h4')
-              .text(() => t('QA.osmose.detail_title'));
+              .html(t.html('QA.osmose.detail_title'));
 
           detailsDiv
             .append('p')
@@ -131,7 +131,7 @@ export function uiOsmoseDetails(context) {
         // Create list of linked issue elements
         elemsDiv
           .append('h4')
-            .text(() => t('QA.osmose.elems_title'));
+            .html(t.html('QA.osmose.elems_title'));
 
         elemsDiv
           .append('ul').selectAll('li')
@@ -140,7 +140,7 @@ export function uiOsmoseDetails(context) {
           .append('li')
           .append('a')
             .attr('class', 'error_entity_link')
-            .text(d => d)
+            .html(d => d)
             .each(function() {
               const link = d3_select(this);
               const entityID = this.textContent;

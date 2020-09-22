@@ -24,7 +24,7 @@ export function uiSectionBackgroundList(context) {
         .on('change', customChanged);
 
     var section = uiSection('background-list', context)
-        .title(t('background.backgrounds'))
+        .label(t.html('background.backgrounds'))
         .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {
@@ -71,7 +71,7 @@ export function uiSectionBackgroundList(context) {
 
         minimapLabelEnter
             .append('span')
-            .text(t('background.minimap.description'));
+            .html(t.html('background.minimap.description'));
 
 
         var panelLabelEnter = bgExtrasListEnter
@@ -94,7 +94,7 @@ export function uiSectionBackgroundList(context) {
 
         panelLabelEnter
             .append('span')
-            .text(t('background.panel.description'));
+            .html(t.html('background.panel.description'));
 
         var locPanelLabelEnter = bgExtrasListEnter
             .append('li')
@@ -116,7 +116,7 @@ export function uiSectionBackgroundList(context) {
 
         locPanelLabelEnter
             .append('span')
-            .text(t('background.location_panel.description'));
+            .html(t.html('background.location_panel.description'));
 
 
         // "Info / Report a Problem" link
@@ -130,7 +130,7 @@ export function uiSectionBackgroundList(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
-            .text(t('background.imagery_problem_faq'));
+            .html(t.html('background.imagery_problem_faq'));
 
         _backgroundList
             .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
@@ -199,7 +199,7 @@ export function uiSectionBackgroundList(context) {
 
         label
             .append('span')
-            .text(function(d) { return d.name(); });
+            .html(function(d) { return d.name(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')

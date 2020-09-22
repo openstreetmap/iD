@@ -13,7 +13,7 @@ import { utilDetect } from '../../util/detect';
 export function uiSectionBackgroundDisplayOptions(context) {
 
     var section = uiSection('background-display-options', context)
-        .title(t('background.display_options'))
+        .label(t.html('background.display_options'))
         .disclosureContent(renderDisclosureContent);
 
     var _detected = utilDetect();
@@ -70,7 +70,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
         slidersEnter
             .append('h5')
-            .text(function(d) { return t('background.' + d); })
+            .html(function(d) { return t.html('background.' + d); })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
 
@@ -105,7 +105,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .append('a')
             .attr('class', 'display-option-resetlink')
             .attr('href', '#')
-            .text(t('background.reset_all'))
+            .html(t.html('background.reset_all'))
             .on('click', function() {
                 for (var i = 0; i < _sliders.length; i++) {
                     updateValue(_sliders[i],1);
@@ -120,7 +120,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .property('value', function(d) { return _options[d]; });
 
         container.selectAll('.display-option-value')
-            .text(function(d) { return Math.floor(_options[d] * 100) + '%'; });
+            .html(function(d) { return Math.floor(_options[d] * 100) + '%'; });
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });

@@ -115,6 +115,7 @@ export function uiInit(context) {
         }
 
         container
+            .attr('lang', localizer.localeCode())
             .attr('dir', localizer.textDirection());
 
         // setup fullscreen keybindings (no button shown at this time)
@@ -126,7 +127,9 @@ export function uiInit(context) {
 
         map
             .on('hitMinZoom.ui', function() {
-                ui.flash.text(t('cannot_zoom'))();
+                ui.flash
+                    .iconName('#iD-icon-no')
+                    .label(t.html('cannot_zoom'))();
             });
 
         container

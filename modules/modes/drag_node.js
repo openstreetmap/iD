@@ -138,7 +138,8 @@ export function modeDragNode(context) {
             if (hasHidden) {
                 context.ui().flash
                     .duration(4000)
-                    .text(t('modes.drag_node.connected_to_hidden'))();
+                    .iconName('#iD-icon-no')
+                    .label(t('modes.drag_node.connected_to_hidden'))();
             }
             return drag.cancel();
         }
@@ -237,7 +238,8 @@ export function modeDragNode(context) {
             if (!nope) {   // about to nope - show hint
                 context.ui().flash
                     .duration(4000)
-                    .text(t('operations.connect.' + isInvalid,
+                    .iconName('#iD-icon-no')
+                    .label(t('operations.connect.' + isInvalid,
                         { relation: presetManager.item('type/restriction').name() }
                     ))();
             }
@@ -245,12 +247,13 @@ export function modeDragNode(context) {
             var errorID = isInvalid === 'line' ? 'lines' : 'areas';
             context.ui().flash
                 .duration(3000)
-                .text(t('self_intersection.error.' + errorID))();
+                .iconName('#iD-icon-no')
+                .label(t('self_intersection.error.' + errorID))();
         } else {
             if (nope) {   // about to un-nope, remove hint
                 context.ui().flash
                     .duration(1)
-                    .text('')();
+                    .label('')();
             }
         }
 

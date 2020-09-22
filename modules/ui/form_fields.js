@@ -52,16 +52,16 @@ export function uiFormFields(context) {
 
         var titles = [];
         var moreFields = notShown.map(function(field) {
-            var label = field.label();
-            titles.push(label);
+            var title = field.title();
+            titles.push(title);
 
             var terms = field.terms();
             if (field.key) terms.push(field.key);
             if (field.keys) terms = terms.concat(field.keys);
 
             return {
-                title: label,
-                value: label,
+                title: title,
+                value: title,
                 field: field,
                 terms: terms
             };
@@ -83,7 +83,7 @@ export function uiFormFields(context) {
 
         moreEnter
             .append('span')
-            .text(t('inspector.add_fields'));
+            .html(t.html('inspector.add_fields'));
 
         more = moreEnter
             .merge(more);

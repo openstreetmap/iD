@@ -54,13 +54,13 @@ export function uiNoteComments() {
                         .attr('target', '_blank');
                 }
                 selection
-                    .text(function(d) { return d.user || t('note.anonymous'); });
+                    .html(function(d) { return d.user || t.html('note.anonymous'); });
             });
 
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
-            .text(function(d) {
+            .html(function(d) {
                 return t('note.status.' + d.action, { when: localeDateString(d.date) });
             });
 

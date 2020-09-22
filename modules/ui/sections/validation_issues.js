@@ -16,10 +16,10 @@ export function uiSectionValidationIssues(id, severity, context) {
     var _issues = [];
 
     var section = uiSection(id, context)
-        .title(function() {
+        .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
+            return t('inspector.title_count', { title: t.html('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {
@@ -147,7 +147,7 @@ export function uiSectionValidationIssues(id, severity, context) {
             .order();
 
         items.selectAll('.issue-message')
-            .text(function(d) {
+            .html(function(d) {
                 return d.message(context);
             });
 
@@ -175,7 +175,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         linkEnter
             .append('span')
             .attr('class', 'autofix-all-link-text')
-            .text(t('issues.fix_all.title'));
+            .html(t.html('issues.fix_all.title'));
 
         linkEnter
             .append('span')

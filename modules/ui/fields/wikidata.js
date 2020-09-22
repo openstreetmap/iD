@@ -117,7 +117,7 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('span')
             .attr('class', 'label')
-            .text(function(d) { return t('wikidata.' + d); });
+            .html(function(d) { return t.html('wikidata.' + d); });
 
         enter
             .append('input')

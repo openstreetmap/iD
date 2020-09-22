@@ -526,12 +526,12 @@ export default {
     controlsEnter
       .append('button')
       .on('click.back', step(-1))
-      .text('◄');
+      .html('◄');
 
     controlsEnter
       .append('button')
       .on('click.forward', step(1))
-      .text('►');
+      .html('►');
 
 
     // create working canvas for stitching together images
@@ -789,7 +789,7 @@ export default {
 
     label
       .append('span')
-      .text(t('streetside.hires'));
+      .html(t.html('streetside.hires'));
 
 
     let captureInfo = line1
@@ -805,18 +805,18 @@ export default {
         .attr('class', 'captured_by')
         .attr('target', '_blank')
         .attr('href', 'https://www.microsoft.com/en-us/maps/streetside')
-        .text('©' + yyyy + ' Microsoft');
+        .html('©' + yyyy + ' Microsoft');
 
       captureInfo
         .append('span')
-        .text('|');
+        .html('|');
     }
 
     if (d.captured_at) {
       captureInfo
         .append('span')
         .attr('class', 'captured_at')
-        .text(localeTimestamp(d.captured_at));
+        .html(localeTimestamp(d.captured_at));
     }
 
     // Add image links
@@ -830,7 +830,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
         '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .text(t('streetside.view_on_bing'));
+      .html(t.html('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -838,7 +838,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-      .text(t('streetside.report'));
+      .html(t.html('streetside.report'));
 
 
     let bubbleIdQuadKey = d.key.toString(4);

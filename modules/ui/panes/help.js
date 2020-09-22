@@ -9,7 +9,7 @@ import { uiPane } from '../pane';
 
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { helpString } from '../intro/helper';
+import { helpHtml } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
@@ -244,12 +244,12 @@ export function uiPaneHelp(context) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + helpString(subkey, helpPaneReplacements) + '\n\n';
+            return all + hhh + helpHtml(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
         return {
-            title: t(helpkey + '.title'),
-            html: marked(text.trim())
+            title: t.html(helpkey + '.title'),
+            content: marked(text.trim())
                 // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
                 .replace(/<\/code>/g, '<\/kbd>')
@@ -258,7 +258,7 @@ export function uiPaneHelp(context) {
 
     var helpPane = uiPane('help', context)
         .key(t('help.key'))
-        .title(t('help.title'))
+        .label(t.html('help.title'))
         .description(t('help.title'))
         .iconName('iD-icon-help');
 
@@ -270,7 +270,7 @@ export function uiPaneHelp(context) {
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
 
-            body.html(d.html);
+            body.html(d.content);
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
@@ -298,7 +298,7 @@ export function uiPaneHelp(context) {
 
                     nextLink
                         .append('span')
-                        .text(docs[i + 1].title)
+                        .html(docs[i + 1].title)
                         .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
@@ -318,7 +318,7 @@ export function uiPaneHelp(context) {
                     prevLink
                         .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
-                        .text(docs[i - 1].title);
+                        .html(docs[i - 1].title);
                 }
             }
         }
@@ -364,7 +364,7 @@ export function uiPaneHelp(context) {
 
         shortcuts
             .append('div')
-            .text(t('shortcuts.title'));
+            .html(t.html('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
@@ -381,7 +381,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .text(t('splash.walkthrough'));
+            .html(t.html('splash.walkthrough'));
 
 
         var helpContent = content

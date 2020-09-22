@@ -40,7 +40,7 @@ export function uiShortcuts(context) {
             .append('div')
             .attr('class', 'modal-section')
             .append('h3')
-            .text(t('shortcuts.title'));
+            .html(t.html('shortcuts.title'));
 
         fileFetcher.get('shortcuts')
             .then(function(data) { content.call(render, data); })
@@ -85,7 +85,7 @@ export function uiShortcuts(context) {
 
         tabsEnter
             .append('span')
-            .text(function (d) { return t(d.text); });
+            .html(function (d) { return t.html(d.text); });
 
         tabs = tabs
             .merge(tabsEnter);
@@ -131,7 +131,7 @@ export function uiShortcuts(context) {
             .append('td')
             .attr('class', 'shortcut-section')
             .append('h3')
-            .text(function (d) { return t(d.text); });
+            .html(function (d) { return t.html(d.text); });
 
 
         var shortcutRows = rowsEnter
@@ -162,11 +162,11 @@ export function uiShortcuts(context) {
                 selection
                     .append('kbd')
                     .attr('class', 'modifier')
-                    .text(function (d) { return uiCmd.display(d); });
+                    .html(function (d) { return uiCmd.display(d); });
 
                 selection
                     .append('span')
-                    .text('+');
+                    .html('+');
             });
 
 
@@ -211,17 +211,17 @@ export function uiShortcuts(context) {
                     selection
                         .append('kbd')
                         .attr('class', 'shortcut')
-                        .text(function (d) { return d.shortcut; });
+                        .html(function (d) { return d.shortcut; });
                 }
 
                 if (i < nodes.length - 1) {
                     selection
                         .append('span')
-                        .text(d.separator || '\u00a0' + t('shortcuts.or') + '\u00a0');
+                        .html(d.separator || '\u00a0' + t.html('shortcuts.or') + '\u00a0');
                 } else if (i === nodes.length - 1 && d.suffix) {
                     selection
                         .append('span')
-                        .text(d.suffix);
+                        .html(d.suffix);
                 }
             });
 
@@ -233,19 +233,19 @@ export function uiShortcuts(context) {
 
                 selection
                     .append('span')
-                    .text('+');
+                    .html('+');
 
                 selection
                     .append('span')
                     .attr('class', 'gesture')
-                    .text(function (d) { return t(d.gesture); });
+                    .html(function (d) { return t.html(d.gesture); });
             });
 
 
         shortcutRows
             .append('td')
             .attr('class', 'shortcut-desc')
-            .text(function (d) { return d.text ? t(d.text) : '\u00a0'; });
+            .html(function (d) { return d.text ? t.html(d.text) : '\u00a0'; });
 
 
         shortcuts = shortcuts

@@ -26,7 +26,7 @@ export function uiZoomToSelection(context) {
                     .duration(2000)
                     .iconName('#iD-icon-framed-dot')
                     .iconClass('disabled')
-                    .text(t('inspector.zoom_to.no_selection'))();
+                    .label(t.html('inspector.zoom_to.no_selection'))();
             }
         } else {
             var mode = context.mode();

@@ -22,7 +22,7 @@ export function uiSectionDataLayers(context) {
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
-        .title(t('map_data.data_layers'))
+        .label(t.html('map_data.data_layers'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -116,7 +116,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -167,7 +167,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -218,7 +218,7 @@ export function uiSectionDataLayers(context) {
         containerEnter
             .append('h4')
             .attr('class', 'vectortile-header')
-            .text('Detroit Vector Tiles (Beta)');
+            .html('Detroit Vector Tiles (Beta)');
 
         containerEnter
             .append('ul')
@@ -232,7 +232,7 @@ export function uiSectionDataLayers(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/osmus/detroit-mapping-challenge')
             .append('span')
-            .text('About these layers');
+            .html('About these layers');
 
         container = container
             .merge(containerEnter);
@@ -266,7 +266,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return d.name; });
+            .html(function(d) { return d.name; });
 
         // Update
         li
@@ -325,7 +325,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(t('map_data.layers.custom.title'));
+            .html(t.html('map_data.layers.custom.title'));
 
         liEnter
             .append('button')
@@ -414,7 +414,7 @@ export function uiSectionDataLayers(context) {
 
         historyPanelLabelEnter
             .append('span')
-            .text(t('map_data.history_panel.title'));
+            .html(t.html('map_data.history_panel.title'));
 
         var measurementPanelLabelEnter = panelsListEnter
             .append('li')
@@ -436,7 +436,7 @@ export function uiSectionDataLayers(context) {
 
         measurementPanelLabelEnter
             .append('span')
-            .text(t('map_data.measurement_panel.title'));
+            .html(t.html('map_data.measurement_panel.title'));
     }
 
     context.layers().on('change.uiSectionDataLayers', section.reRender);

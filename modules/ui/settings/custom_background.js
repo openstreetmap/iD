@@ -27,28 +27,28 @@ export function uiSettingsCustomBackground() {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_background.header'));
+            .html(t.html('settings.custom_background.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
 
         var instructions =
-            `${t('settings.custom_background.instructions.info')}\n` +
+            `${t.html('settings.custom_background.instructions.info')}\n` +
             '\n' +
-            `#### ${t('settings.custom_background.instructions.wms.tokens_label')}\n` +
-            `* ${t('settings.custom_background.instructions.wms.tokens.proj')}\n` +
-            `* ${t('settings.custom_background.instructions.wms.tokens.wkid')}\n` +
-            `* ${t('settings.custom_background.instructions.wms.tokens.dimensions')}\n` +
-            `* ${t('settings.custom_background.instructions.wms.tokens.bbox')}\n` +
+            `#### ${t.html('settings.custom_background.instructions.wms.tokens_label')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.proj')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.wkid')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.dimensions')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.bbox')}\n` +
             '\n' +
-            `#### ${t('settings.custom_background.instructions.tms.tokens_label')}\n` +
-            `* ${t('settings.custom_background.instructions.tms.tokens.xyz')}\n` +
-            `* ${t('settings.custom_background.instructions.tms.tokens.flipped_y')}\n` +
-            `* ${t('settings.custom_background.instructions.tms.tokens.switch')}\n` +
-            `* ${t('settings.custom_background.instructions.tms.tokens.quadtile')}\n` +
-            `* ${t('settings.custom_background.instructions.tms.tokens.scale_factor')}\n` +
+            `#### ${t.html('settings.custom_background.instructions.tms.tokens_label')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.xyz')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.flipped_y')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.switch')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.quadtile')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.scale_factor')}\n` +
             '\n' +
-            `#### ${t('settings.custom_background.instructions.example')}\n` +
+            `#### ${t.html('settings.custom_background.instructions.example')}\n` +
             `\`${example}\``;
 
         textSection
@@ -70,7 +70,7 @@ export function uiSettingsCustomBackground() {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .text(t('confirm.cancel'));
+            .html(t.html('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')
