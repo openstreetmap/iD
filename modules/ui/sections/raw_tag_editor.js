@@ -25,8 +25,8 @@ export function uiSectionRawTagEditor(id, context) {
     var taginfo = services.taginfo;
     var dispatch = d3_dispatch('change');
     var availableViews = [
-        { id: 'text', icon: '#fas-i-cursor' },
-        { id: 'list', icon: '#fas-th-list' }
+        { id: 'list', icon: '#fas-th-list' },
+        { id: 'text', icon: '#fas-i-cursor' }
     ];
 
     var _tagView = (prefs('raw-tag-editor-view') || 'list');   // 'list, 'text'
@@ -204,7 +204,6 @@ export function uiSectionRawTagEditor(id, context) {
 
         innerWrap
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'form-field-button remove')
             .attr('title', t('icons.remove', { html: false }))
             .call(svgIcon('#iD-operation-delete'));

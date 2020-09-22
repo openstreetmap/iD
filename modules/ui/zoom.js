@@ -7,6 +7,7 @@ import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
 import { uiTooltip } from './tooltip';
+import { utilKeybinding } from '../util/keybinding';
 
 
 export function uiZoom(context) {
@@ -34,21 +35,25 @@ export function uiZoom(context) {
     }];
 
     function zoomIn() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomIn();
     }
 
     function zoomOut() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOut();
     }
 
     function zoomInFurther() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomInFurther();
     }
 
     function zoomOutFurther() {
+        if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOutFurther();
     }
@@ -95,12 +100,12 @@ export function uiZoom(context) {
                 .call(svgIcon('#' + d.icon, 'light'));
         });
 
-        ['plus', 'ffplus', '=', 'ffequals'].forEach(function(key) {
+        utilKeybinding.plusKeys.forEach(function(key) {
             context.keybinding().on([key], zoomIn);
             context.keybinding().on([uiCmd('⌥' + key)], zoomInFurther);
         });
 
-        ['_', '-', 'ffminus', 'dash'].forEach(function(key) {
+        utilKeybinding.minusKeys.forEach(function(key) {
             context.keybinding().on([key], zoomOut);
             context.keybinding().on([uiCmd('⌥' + key)], zoomOutFurther);
         });

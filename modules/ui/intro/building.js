@@ -391,7 +391,7 @@ export function uiIntroBuilding(context, reveal) {
 
             // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.orthogonalize.annotation.feature.single')) {
+                if (context.history().undoAnnotation() === t('operations.orthogonalize.annotation.feature', { n: 1 })) {
                     continueTo(doneSquare);
                 } else {
                     continueTo(retryClickSquare);
@@ -721,7 +721,7 @@ export function uiIntroBuilding(context, reveal) {
 
             // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.circularize.annotation.single')) {
+                if (context.history().undoAnnotation() === t('operations.circularize.annotation.feature', { n: 1 })) {
                     continueTo(play);
                 } else {
                     continueTo(retryClickCircle);

@@ -46,18 +46,18 @@ export function uiSectionValidationRules(context) {
             .append('a')
             .attr('class', 'issue-rules-link')
             .attr('href', '#')
-            .html(t('issues.enable_all'))
+            .html(t('issues.disable_all'))
             .on('click', function() {
-                context.validator().disableRules([]);
+                context.validator().disableRules(_ruleKeys);
             });
 
         ruleLinks
             .append('a')
             .attr('class', 'issue-rules-link')
             .attr('href', '#')
-            .html(t('issues.disable_all'))
+            .html(t('issues.enable_all'))
             .on('click', function() {
-                context.validator().disableRules(_ruleKeys);
+                context.validator().disableRules([]);
             });
 
 
@@ -144,7 +144,7 @@ export function uiSectionValidationRules(context) {
                 this.select();
             })
             .on('keyup', function () {
-                if (d3_event.keyCode === 13) { // enter
+                if (d3_event.keyCode === 13) { // ↩ Return
                     this.blur();
                     this.select();
                 }

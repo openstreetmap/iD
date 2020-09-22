@@ -1,0 +1,39 @@
+{
+    "icon": "temaki-binoculars",
+    "fields": [
+        "operator",
+        "access_simple",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "direction",
+        "height",
+        "ele_node"
+    ],
+    "moreFields": [
+        "colour",
+        "covered",
+        "indoor",
+        "lit",
+        "manufacturer",
+        "ref"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "observation viewer",
+        "optical ranger",
+        "spotting scope",
+        "sight",
+        "spyglass",
+        "telescope",
+        "tower viewer",
+        "viewfinder",
+        "viewing stand"
+    ],
+    "tags": {
+        "amenity": "binoculars"
+    },
+    "name": "Mounted Binoculars"
+}

@@ -388,6 +388,12 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
+
+                    for (var key in context.changeset.tags) {
+                        // remove any empty keys before upload
+                        if (!key) delete context.changeset.tags[key];
+                    }
+
                     context.uploader().save(context.changeset);
                 }
             });
@@ -547,14 +553,12 @@ export function uiCommit(context) {
             k = context.cleanTagKey(k);
             if (readOnlyTags.indexOf(k) !== -1) return;
 
-            if (k !== '' && v !== undefined) {
-                if (onInput) {
-                    tags[k] = v;
-                } else {
-                    tags[k] = context.cleanTagValue(v);
-                }
-            } else {
+            if (v === undefined) {
                 delete tags[k];
+            } else if (onInput) {
+                tags[k] = v;
+            } else {
+                tags[k] = context.cleanTagValue(v);
             }
         });
 

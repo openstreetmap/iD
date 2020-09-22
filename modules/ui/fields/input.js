@@ -80,7 +80,6 @@ export function uiFieldText(field, context) {
 
             buttons.enter()
                 .append('button')
-                .attr('tabindex', -1)
                 .attr('class', function(d) {
                     var which = (d === 1 ? 'increment' : 'decrement');
                     return 'form-field-button ' + which;
@@ -106,7 +105,6 @@ export function uiFieldText(field, context) {
 
             outlinkButton.enter()
                 .append('button')
-                .attr('tabindex', -1)
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
                 .attr('title', function() {

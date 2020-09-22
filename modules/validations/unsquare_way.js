@@ -67,7 +67,7 @@ export function validationUnsquareWay(context) {
             // use same degree threshold as for detection
             var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
             autoAction.transitionable = false;  // when autofixing, do it instantly
-            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature.single')];
+            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature', { n: 1 })];
         }
 
         return [new validationIssue({
@@ -92,7 +92,7 @@ export function validationUnsquareWay(context) {
                             // use same degree threshold as for detection
                             context.perform(
                                 actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
-                                t('operations.orthogonalize.annotation.feature.single')
+                                t('operations.orthogonalize.annotation.feature', { n: 1 })
                             );
                             // run after the squaring transition (currently 150ms)
                             window.setTimeout(function() { completionHandler(); }, 175);

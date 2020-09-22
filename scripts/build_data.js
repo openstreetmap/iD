@@ -683,8 +683,7 @@ function validateCategoryPresets(categories, presets) {
 
 function validatePresetFields(presets, fields) {
   const betweenBracketsRegex = /([^{]*?)(?=\})/;
-  const maxFieldsBeforeError = 12;
-  const maxFieldsBeforeWarning = 8;
+  const maxFieldsBeforeError = 10;
 
   for (let presetID in presets) {
     let preset = presets[presetID];
@@ -711,22 +710,37 @@ function validatePresetFields(presets, fields) {
       if (!preset[fieldsKey]) continue; // no fields are referenced, okay
 
       for (let fieldIndex in preset[fieldsKey]) {
-        let field = preset[fieldsKey][fieldIndex];
-        if (fields[field] !== undefined) continue; // field found, okay
+        let fieldID = preset[fieldsKey][fieldIndex];
+        let field = fields[fieldID];
+        if (field) {
+          if (field.geometry) {
+            let sharedGeometry = field.geometry.filter(value => preset.geometry.includes(value));
+            if (!sharedGeometry.length) {
+              console.error('The preset "' + presetID + '" (' + preset.name + ') will never display the field "' + fieldID + '" since they don\'t share geometry types.');
+              console.log('');
+              process.exit(1);
+            }
+          }
 
-        let regexResult = betweenBracketsRegex.exec(field);
-        if (regexResult) {
-          let foreignPresetID = regexResult[0];
-          if (presets[foreignPresetID] === undefined) {
-            console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
+        } else {
+          // no field found with this ID...
+
+          let regexResult = betweenBracketsRegex.exec(fieldID);
+          if (regexResult) {
+            let foreignPresetID = regexResult[0];
+            if (presets[foreignPresetID] === undefined) {
+              console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
+              console.log('');
+              process.exit(1);
+            }
+          } else {
+            console.error('Unknown preset field "' + fieldID + '" in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
             console.log('');
             process.exit(1);
           }
-        } else {
-          console.error('Unknown preset field "' + field + '" in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
-          console.log('');
-          process.exit(1);
         }
+
+
       }
     }
 
@@ -734,22 +748,19 @@ function validatePresetFields(presets, fields) {
       // since `moreFields` is available, check that `fields` doesn't get too cluttered
       let fieldCount = preset.fields.length;
 
-      if (fieldCount > maxFieldsBeforeWarning) {
-        // Fields with `prerequisiteTag` probably won't show up initially,
+      if (fieldCount > maxFieldsBeforeError) {
+        // Fields with `prerequisiteTag` or `geometry` may not always be shown,
         // so don't count them against the limits.
-        const fieldsWithoutPrerequisites = preset.fields.filter(fieldID => {
-          if (fields[fieldID] && fields[fieldID].prerequisiteTag) return false;
+        const alwaysShownFields = preset.fields.filter(fieldID => {
+          if (fields[fieldID] && fields[fieldID].prerequisiteTag || fields[fieldID].geometry) return false;
           return true;
         });
-        fieldCount = fieldsWithoutPrerequisites.length;
+        fieldCount = alwaysShownFields.length;
       }
       if (fieldCount > maxFieldsBeforeError) {
         console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
         console.log('');
         process.exit(1);
-      }
-      else if (fieldCount > maxFieldsBeforeWarning) {
-        console.log('Warning: ' + fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Recommended: ' + maxFieldsBeforeWarning + ' or fewer. Consider moving lower-priority fields to "moreFields".');
       }
     }
   }

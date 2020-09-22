@@ -274,7 +274,6 @@ export function uiSectionRawMembershipEditor(context) {
 
         labelEnter
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'remove member-delete')
             .call(svgIcon('#iD-operation-delete'))
             .on('click', deleteMembership);
@@ -333,7 +332,6 @@ export function uiSectionRawMembershipEditor(context) {
 
         newLabelEnter
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'remove member-delete')
             .call(svgIcon('#iD-operation-delete'))
             .on('click', function() {

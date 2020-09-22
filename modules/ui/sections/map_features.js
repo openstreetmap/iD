@@ -32,18 +32,18 @@ export function uiSectionMapFeatures(context) {
             .append('a')
             .attr('class', 'feature-list-link')
             .attr('href', '#')
-            .html(t('issues.enable_all'))
+            .html(t('issues.disable_all'))
             .on('click', function() {
-                context.features().enableAll();
+                context.features().disableAll();
             });
 
         footer
             .append('a')
             .attr('class', 'feature-list-link')
             .attr('href', '#')
-            .html(t('issues.disable_all'))
+            .html(t('issues.enable_all'))
             .on('click', function() {
-                context.features().disableAll();
+                context.features().enableAll();
             });
 
         // Update

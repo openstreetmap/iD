@@ -125,7 +125,7 @@ export function operationOrthogonalize(context, selectedIDs) {
 
 
     operation.annotation = function() {
-        return t('operations.orthogonalize.annotation.' + _type + '.' + _amount);
+        return t('operations.orthogonalize.annotation.' + _type, { n: _actions.length });
     };
 
 

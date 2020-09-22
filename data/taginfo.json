@@ -83,6 +83,7 @@
     {"key": "amenity", "value": "bicycle_rental", "description": "🄿 Bicycle Rental", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/bicycle_rental.svg"},
     {"key": "amenity", "value": "bicycle_repair_station", "description": "🄿 Bicycle Repair Tool Stand", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/bicycle_repair.svg"},
     {"key": "amenity", "value": "biergarten", "description": "🄿 Biergarten", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-beer.svg"},
+    {"key": "amenity", "value": "binoculars", "description": "🄿 Mounted Binoculars", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/binoculars.svg"},
     {"key": "amenity", "value": "boat_rental", "description": "🄿 Boat Rental", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/boat_rental.svg"},
     {"key": "amenity", "value": "bureau_de_change", "description": "🄿 Currency Exchange", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/money_hand.svg"},
     {"key": "amenity", "value": "cafe", "description": "🄿 Cafe", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/cafe-15.svg"},

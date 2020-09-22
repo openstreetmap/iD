@@ -113,7 +113,7 @@ export function uiFieldCheck(field, context) {
 
         if (field.type === 'onewayCheck') {
             enter
-                .append('a')
+                .append('button')
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
                 .attr('href', '#')
                 .append('span')
@@ -163,7 +163,7 @@ export function uiFieldCheck(field, context) {
                             }
                             return graph;
                         },
-                        t('operations.reverse.annotation')
+                        t('operations.reverse.annotation.line', { n: 1 })
                     );
 
                     // must manually revalidate since no 'change' event was called
