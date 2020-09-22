@@ -67,7 +67,7 @@ export function validationPrivateData() {
                 return [
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.' + fixID + '.title'),
+                        title: t.html('issues.fix.' + fixID + '.title'),
                         onClick: function(context) {
                             context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                         }

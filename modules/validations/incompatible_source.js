@@ -43,7 +43,7 @@ export function validationIncompatibleSource() {
                 dynamicFixes: function() {
                     return [
                         new validationIssueFix({
-                            title: t('issues.fix.remove_proprietary_data.title')
+                            title: t.html('issues.fix.remove_proprietary_data.title')
                         })
                     ];
                 }

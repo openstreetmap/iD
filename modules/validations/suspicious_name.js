@@ -75,7 +75,7 @@ export function validationSuspiciousName() {
         return [
           new validationIssueFix({
             icon: 'iD-operation-delete',
-            title: t('issues.fix.remove_the_name.title'),
+            title: t.html('issues.fix.remove_the_name.title'),
             onClick: function(context) {
               let entityId = this.issue.entityIds[0];
               let entity = context.entity(entityId);
@@ -121,7 +121,7 @@ export function validationSuspiciousName() {
         return [
           new validationIssueFix({
             icon: 'iD-operation-delete',
-            title: t('issues.fix.remove_the_name.title'),
+            title: t.html('issues.fix.remove_the_name.title'),
             onClick: function(context) {
               const entityId = this.issue.entityIds[0];
               const entity = context.entity(entityId);

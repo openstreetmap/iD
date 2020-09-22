@@ -30,7 +30,7 @@ export function validationHelpRequest(context) {
             dynamicFixes: function() {
                 return [
                     new validationIssueFix({
-                        title: t('issues.fix.address_the_concern.title')
+                        title: t.html('issues.fix.address_the_concern.title')
                     })
                 ];
             },

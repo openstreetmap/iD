@@ -176,7 +176,7 @@ export function validationImpossibleOneway() {
                     if (attachedOneways.length) {
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-reverse',
-                            title: t('issues.fix.reverse_feature.title'),
+                            title: t.html('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
                                 var id = this.issue.entityIds[0];
@@ -190,7 +190,7 @@ export function validationImpossibleOneway() {
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                            title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
+                            title: t.html('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
                                 var entityID = this.issue.entityIds[0];
                                 var vertexID = this.issue.entityIds[1];

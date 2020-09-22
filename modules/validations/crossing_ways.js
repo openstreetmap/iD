@@ -444,7 +444,7 @@ export function validationCrossingWays(context) {
                 if (isCrossingIndoors) {
                     fixes.push(new validationIssueFix({
                         icon: 'iD-icon-layers',
-                        title: t('issues.fix.use_different_levels.title')
+                        title: t.html('issues.fix.use_different_levels.title')
                     }));
                 } else if (isCrossingTunnels ||
                     isCrossingBridges ||
@@ -473,7 +473,7 @@ export function validationCrossingWays(context) {
                 // repositioning the features is always an option
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-move',
-                    title: t('issues.fix.reposition_features.title')
+                    title: t.html('issues.fix.reposition_features.title')
                 }));
 
                 return fixes;
@@ -493,7 +493,7 @@ export function validationCrossingWays(context) {
     function makeAddBridgeOrTunnelFix(fixTitleID, iconName, bridgeOrTunnel){
         return new validationIssueFix({
             icon: iconName,
-            title: t('issues.fix.' + fixTitleID + '.title'),
+            title: t.html('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
                 var mode = context.mode();
                 if (!mode || mode.id !== 'select') return;
@@ -702,7 +702,7 @@ export function validationCrossingWays(context) {
 
         return new validationIssueFix({
             icon: 'iD-icon-crossing',
-            title: t('issues.fix.' + fixTitleID + '.title'),
+            title: t.html('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
                 var loc = this.issue.loc;
                 var connectionTags = this.issue.data.connectionTags;
@@ -745,7 +745,7 @@ export function validationCrossingWays(context) {
     function makeChangeLayerFix(higherOrLower) {
         return new validationIssueFix({
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
-            title: t('issues.fix.tag_this_as_' + higherOrLower + '.title'),
+            title: t.html('issues.fix.tag_this_as_' + higherOrLower + '.title'),
             onClick: function(context) {
 
                 var mode = context.mode();

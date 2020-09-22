@@ -88,8 +88,8 @@ export function validationAlmostJunction(context) {
     function makeFixes(context) {
       let fixes = [new validationIssueFix({
         icon: 'iD-icon-abutment',
-        title: t('issues.fix.connect_features.title'),
-        onClick(context) {
+        title: t.html('issues.fix.connect_features.title'),
+        onClick: function(context) {
           const annotation = t('issues.fix.connect_almost_junction.annotation');
           const [, endNodeId, crossWayId] = this.issue.entityIds;
           const midNode = context.entity(this.issue.data.midId);
@@ -135,8 +135,8 @@ export function validationAlmostJunction(context) {
         // node has no descriptive tags, suggest noexit fix
         fixes.push(new validationIssueFix({
           icon: 'maki-barrier',
-          title: t('issues.fix.tag_as_disconnected.title'),
-          onClick(context) {
+          title: t.html('issues.fix.tag_as_disconnected.title'),
+          onClick: function(context) {
             const nodeID = this.issue.entityIds[1];
             const tags = Object.assign({}, context.entity(nodeID).tags);
             tags.noexit = 'yes';

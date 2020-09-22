@@ -180,7 +180,7 @@ export function validationOutdatedTags() {
         return [
           new validationIssueFix({
             autoArgs: autoArgs,
-            title: t('issues.fix.upgrade_tags.title'),
+            title: t.html('issues.fix.upgrade_tags.title'),
             onClick: (context) => {
               context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
             }
@@ -276,7 +276,7 @@ export function validationOutdatedTags() {
         return [
           new validationIssueFix({
             autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
-            title: t('issues.fix.move_tags.title'),
+            title: t.html('issues.fix.move_tags.title'),
             onClick: (context) => {
               context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
             }

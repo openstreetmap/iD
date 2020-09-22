@@ -103,13 +103,13 @@ export function validationMismatchedGeometry() {
                 var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
 
                 fixes.push(new validationIssueFix({
-                    title: t('issues.fix.connect_endpoints.title'),
+                    title: t.html('issues.fix.connect_endpoints.title'),
                     onClick: connectEndsOnClick
                 }));
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',
-                    title: t('issues.fix.remove_tag.title'),
+                    title: t.html('issues.fix.remove_tag.title'),
                     onClick: function(context) {
                         var entityId = this.issue.entityIds[0];
                         var entity = context.entity(entityId);
@@ -218,7 +218,7 @@ export function validationMismatchedGeometry() {
                     return [
                         new validationIssueFix({
                             icon: 'iD-operation-extract',
-                            title: t('issues.fix.extract_point.title'),
+                            title: t.html('issues.fix.extract_point.title'),
                             onClick: extractOnClick
                         })
                     ];

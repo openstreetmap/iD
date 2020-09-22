@@ -98,7 +98,7 @@ export function validationMissingTag(context) {
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-icon-search',
-                    title: t('issues.fix.' + selectFixType + '.title'),
+                    title: t.html('issues.fix.' + selectFixType + '.title'),
                     onClick: function(context) {
                         context.ui().sidebar.showPresetList();
                     }
@@ -122,7 +122,7 @@ export function validationMissingTag(context) {
                 fixes.push(
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.delete_feature.title'),
+                        title: t.html('issues.fix.delete_feature.title'),
                         disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
                         onClick: deleteOnClick
                     })

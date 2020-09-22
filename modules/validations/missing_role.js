@@ -61,7 +61,7 @@ export function validationMissingRole() {
                     makeAddRoleFix('outer'),
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.remove_from_relation.title'),
+                        title: t.html('issues.fix.remove_from_relation.title'),
                         onClick: function(context) {
                             context.perform(
                                 actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
@@ -87,7 +87,7 @@ export function validationMissingRole() {
 
     function makeAddRoleFix(role) {
         return new validationIssueFix({
-            title: t('issues.fix.set_as_' + role + '.title'),
+            title: t.html('issues.fix.set_as_' + role + '.title'),
             onClick: function(context) {
                 var oldMember = this.issue.data.member;
                 var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
