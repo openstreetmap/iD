@@ -60,8 +60,9 @@ export function uiFormFields(context) {
             if (field.keys) terms = terms.concat(field.keys);
 
             return {
-                title: title,
+                display: field.label(),
                 value: title,
+                title: title,
                 field: field,
                 terms: terms
             };

@@ -89,7 +89,7 @@ export function uiSectionPhotoOverlays(context) {
             .html(function(d) {
                 var id = d.id;
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
-                return t(id.replace(/-/g, '_') + '.title');
+                return t.html(id.replace(/-/g, '_') + '.title');
             });
 
 

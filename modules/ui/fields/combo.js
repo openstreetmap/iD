@@ -151,7 +151,8 @@ export function uiFieldCombo(field, context) {
                 return {
                     key: k,
                     value: v,
-                    title: v
+                    title: v,
+                    display: field.t.html('options.' + k, { 'default': _optstrings[k] })
                 };
             });
 

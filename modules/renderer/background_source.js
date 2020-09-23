@@ -72,6 +72,12 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    source.label = function() {
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        return t.html('imagery.' + id_safe + '.name', { default: _name });
+    };
+
+
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t('imagery.' + id_safe + '.description', { default: _description });
@@ -538,6 +544,11 @@ rendererBackgroundSource.None = function() {
     };
 
 
+    source.label = function() {
+        return t.html('background.none');
+    };
+
+
     source.imageryUsed = function() {
         return null;
     };
@@ -558,6 +569,10 @@ rendererBackgroundSource.Custom = function(template) {
 
     source.name = function() {
         return t('background.custom');
+    };
+
+    source.label = function() {
+        return t.html('background.custom');
     };
 
 

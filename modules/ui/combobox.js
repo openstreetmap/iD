@@ -6,8 +6,10 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 // This code assumes that the combobox values will not have duplicate entries.
 // It is keyed on the `value` of the entry. Data should be an array of objects like:
 //   [{
-//       value:  'display text',  // required
-//       title:  'hover text'     // optional
+//       value:   'string value',  // required
+//       display: 'label html'     // optional
+//       title:   'hover text'     // optional
+//       terms:   ['search terms'] // optional
 //   }, ...]
 
 var _comboHideTimerID;

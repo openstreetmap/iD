@@ -4529,13 +4529,8 @@ img.tile-debug {
     height: 14px;
     margin-top: -2px;
 }
-.ideditor[dir='ltr'] .map-footer-list a.chip .icon,
-.ideditor[dir='ltr'] .map-footer-list a.chip span {
-    margin-right: 3px;
-}
-.ideditor[dir='rtl'] .map-footer-list a.chip .icon,
-.ideditor[dir='rtl'] .map-footer-list a.chip span {
-    margin-left: 3px;
+.map-footer-list a.chip span.count {
+    margin: 0 3px;
 }
 
 .source-switch a.chip.live {

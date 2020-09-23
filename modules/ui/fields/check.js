@@ -36,14 +36,14 @@ export function uiFieldCheck(field, context) {
     if (options) {
         for (var k in options) {
             values.push(k === 'undefined' ? undefined : k);
-            texts.push(field.t('options.' + k, { 'default': options[k] }));
+            texts.push(field.t.html('options.' + k, { 'default': options[k] }));
         }
     } else {
         values = [undefined, 'yes'];
-        texts = [t('inspector.unknown'), t('inspector.check.yes')];
+        texts = [t.html('inspector.unknown'), t.html('inspector.check.yes')];
         if (field.type !== 'defaultCheck') {
             values.push('no');
-            texts.push(t('inspector.check.no'));
+            texts.push(t.html('inspector.check.no'));
         }
     }
 
@@ -59,7 +59,7 @@ export function uiFieldCheck(field, context) {
             for (var key in entity.tags) {
                 if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
                     _impliedYes = true;
-                    texts[0] = t('presets.fields.oneway_yes.options.undefined');
+                    texts[0] = t.html('presets.fields.oneway_yes.options.undefined');
                     break;
                 }
             }

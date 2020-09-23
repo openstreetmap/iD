@@ -81,7 +81,7 @@ export function uiSectionOverlayList(context) {
 
         label
             .append('span')
-            .html(function(d) { return d.name(); });
+            .html(function(d) { return d.label(); });
 
 
         layerList.selectAll('li')

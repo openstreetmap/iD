@@ -199,7 +199,7 @@ export function uiSectionBackgroundList(context) {
 
         label
             .append('span')
-            .html(function(d) { return d.name(); });
+            .html(function(d) { return d.label(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
