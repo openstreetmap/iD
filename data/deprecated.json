@@ -1159,6 +1159,10 @@
     "replace": {"expected_rwn_route_relations": "$1"}
   },
   {
+    "old": {"service": "drive_through"},
+    "replace": {"service": "drive-through"}
+  },
+  {
     "old": {"shop": "adult"},
     "replace": {"shop": "erotic"}
   },

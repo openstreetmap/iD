@@ -2284,6 +2284,7 @@
     {"key": "roof:shape", "value": "half_hipped", "description": "🄳 ➜ roof:shape=half-hipped"},
     {"key": "route", "value": "ncn", "description": "🄳 ➜ route=bicycle + network=ncn"},
     {"key": "rwn_expected_route_relations", "description": "🄳 ➜ expected_rwn_route_relations=*"},
+    {"key": "service", "value": "drive_through", "description": "🄳 ➜ service=drive-through"},
     {"key": "shop", "value": "adult", "description": "🄳 ➜ shop=erotic"},
     {"key": "shop", "value": "antique", "description": "🄳 ➜ shop=antiques"},
     {"key": "shop", "value": "army_surplus", "description": "🄳 ➜ shop=military_surplus"},
