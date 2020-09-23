@@ -149,13 +149,13 @@ export function uiSectionBackgroundList(context) {
             if (d.id === previousBackgroundID()) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title('<div>' + t('background.switch') + '</div>')
+                    .title('<div>' + t.html('background.switch') + '</div>')
                     .keys([uiCmd('⌘' + t('background.key'))])
                 );
             } else if (description || isOverflowing) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title(description || d.name())
+                    .title(description || d.label())
                 );
             }
         });

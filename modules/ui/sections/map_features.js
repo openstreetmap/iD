@@ -67,9 +67,9 @@ export function uiSectionMapFeatures(context) {
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip');
+                    var tip = t.html(name + '.' + d + '.tooltip');
                     if (autoHiddenFeature(d)) {
-                        var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
+                        var msg = showsLayer('osm') ? t.html('map_data.autohidden') : t.html('map_data.osmhidden');
                         tip += '<div>' + msg + '</div>';
                     }
                     return tip;

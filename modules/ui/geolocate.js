@@ -14,7 +14,7 @@ export function uiGeolocate(context) {
         // don't hang indefinitely getting the location
         timeout: 6000 // 6sec
     };
-    var _locating = uiLoading(context).message(t('geolocate.locating')).blocking(true);
+    var _locating = uiLoading(context).message(t.html('geolocate.locating')).blocking(true);
     var _layer = context.layers().layer('geolocate');
     var _position;
     var _extent;

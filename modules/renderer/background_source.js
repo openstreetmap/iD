@@ -80,7 +80,7 @@ export function rendererBackgroundSource(data) {
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.description', { default: _description });
+        return t.html('imagery.' + id_safe + '.description', { default: _description });
     };
 
 
