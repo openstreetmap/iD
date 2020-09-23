@@ -304,14 +304,14 @@ export function uiInit(context) {
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
             .call(svgIcon('#iD-icon-bug', 'light'))
-            .call(uiTooltip().title(t('report_a_bug')).placement('top'));
+            .call(uiTooltip().title(t.html('report_a_bug')).placement('top'));
 
         issueLinks
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
             .call(svgIcon('#iD-icon-translate', 'light'))
-            .call(uiTooltip().title(t('help_translate')).placement('top'));
+            .call(uiTooltip().title(t.html('help_translate')).placement('top'));
 
         aboutList
             .append('li')

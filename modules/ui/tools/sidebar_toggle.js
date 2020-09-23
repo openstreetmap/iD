@@ -18,7 +18,7 @@ export function uiToolSidebarToggle(context) {
             })
             .call(uiTooltip()
                 .placement('bottom')
-                .title(t('sidebar.tooltip'))
+                .title(t.html('sidebar.tooltip'))
                 .keys([t('sidebar.key')])
                 .scrollContainer(context.container().select('.top-toolbar'))
             )

@@ -42,7 +42,7 @@ export function uiSectionFeatureType(context) {
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
             .call(uiTooltip()
-                .title(t('inspector.back_tooltip'))
+                .title(t.html('inspector.back_tooltip'))
                 .placement('bottom')
             );
 

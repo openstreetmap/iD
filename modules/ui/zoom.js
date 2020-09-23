@@ -15,22 +15,22 @@ export function uiZoom(context) {
     var zooms = [{
         id: 'zoom-in',
         icon: 'iD-icon-plus',
-        title: t('zoom.in'),
+        title: t.html('zoom.in'),
         action: zoomIn,
         disabled: function() {
             return !context.map().canZoomIn();
         },
-        disabledTitle: t('zoom.disabled.in'),
+        disabledTitle: t.html('zoom.disabled.in'),
         key: '+'
     }, {
         id: 'zoom-out',
         icon: 'iD-icon-minus',
-        title: t('zoom.out'),
+        title: t.html('zoom.out'),
         action: zoomOut,
         disabled: function() {
             return !context.map().canZoomOut();
         },
-        disabledTitle: t('zoom.disabled.out'),
+        disabledTitle: t.html('zoom.disabled.out'),
         key: '-'
     }];
 

@@ -44,9 +44,9 @@ export function uiZoomToSelection(context) {
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function() {
                 if (isDisabled()) {
-                    return t('inspector.zoom_to.no_selection');
+                    return t.html('inspector.zoom_to.no_selection');
                 }
-                return t('inspector.zoom_to.title');
+                return t.html('inspector.zoom_to.title');
             })
             .keys([t('inspector.zoom_to.key')]);
 

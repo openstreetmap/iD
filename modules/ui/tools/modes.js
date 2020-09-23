@@ -23,23 +23,23 @@ export function uiToolOldDrawModes(context) {
 
     var modes = [
         modeAddPoint(context, {
-            title: t('modes.add_point.title'),
+            title: t.html('modes.add_point.title'),
             button: 'point',
-            description: t('modes.add_point.description'),
+            description: t.html('modes.add_point.description'),
             preset: presetManager.item('point'),
             key: '1'
         }),
         modeAddLine(context, {
-            title: t('modes.add_line.title'),
+            title: t.html('modes.add_line.title'),
             button: 'line',
-            description: t('modes.add_line.description'),
+            description: t.html('modes.add_line.description'),
             preset: presetManager.item('line'),
             key: '2'
         }),
         modeAddArea(context, {
-            title: t('modes.add_area.title'),
+            title: t.html('modes.add_area.title'),
             button: 'area',
-            description: t('modes.add_area.description'),
+            description: t.html('modes.add_area.description'),
             preset: presetManager.item('area'),
             key: '3'
         })

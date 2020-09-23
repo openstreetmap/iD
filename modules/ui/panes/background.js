@@ -12,7 +12,7 @@ export function uiPaneBackground(context) {
     var backgroundPane = uiPane('background', context)
         .key(t('background.key'))
         .label(t.html('background.title'))
-        .description(t('background.description'))
+        .description(t.html('background.description'))
         .iconName('iD-icon-layers')
         .sections([
             uiSectionBackgroundList(context),

@@ -74,7 +74,7 @@ export function uiSectionPhotoOverlays(context) {
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t(titleID))
+                        .title(t.html(titleID))
                         .placement('top')
                     );
             });
@@ -137,7 +137,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t('photo_overlays.photo_type.' + d + '.tooltip'))
+                        .title(t.html('photo_overlays.photo_type.' + d + '.tooltip'))
                         .placement('top')
                     );
             });

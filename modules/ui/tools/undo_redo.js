@@ -51,8 +51,8 @@ export function uiToolUndoRedo(context) {
             .placement('bottom')
             .title(function (d) {
                 return d.annotation() ?
-                    t(d.id + '.tooltip', { action: d.annotation() }) :
-                    t(d.id + '.nothing');
+                    t.html(d.id + '.tooltip', { action: d.annotation() }) :
+                    t.html(d.id + '.nothing');
             })
             .keys(function(d) {
                 return [d.cmd];

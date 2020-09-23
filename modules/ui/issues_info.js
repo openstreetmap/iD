@@ -62,7 +62,7 @@ export function uiIssuesInfo(context) {
 
                 var tooltipBehavior = uiTooltip()
                     .placement('top')
-                    .title(t(d.descriptionID));
+                    .title(t.html(d.descriptionID));
 
                 chipSelection
                     .call(tooltipBehavior)

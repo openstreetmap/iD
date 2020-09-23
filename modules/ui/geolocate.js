@@ -88,7 +88,7 @@ export function uiGeolocate(context) {
             .call(svgIcon('#iD-icon-geolocate', 'light'))
             .call(uiTooltip()
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-                .title(t('geolocate.title'))
+                .title(t.html('geolocate.title'))
                 .keys([t('geolocate.key')])
             );
 

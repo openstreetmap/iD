@@ -134,7 +134,11 @@ export function uiSectionRawMembershipEditor(context) {
 
 
     function fetchNearbyRelations(q, callback) {
-        var newRelation = { relation: null, value: t('inspector.new_relation') };
+        var newRelation = {
+            relation: null,
+            value: t('inspector.new_relation'),
+            display: t.html('inspector.new_relation')
+        };
 
         var entityID = _entityIDs[0];
 
@@ -378,7 +382,7 @@ export function uiSectionRawMembershipEditor(context) {
         addRelationButton
             .call(svgIcon('#iD-icon-plus', 'light'));
         addRelationButton
-            .call(uiTooltip().title(t('inspector.add_to_relation')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
+            .call(uiTooltip().title(t.html('inspector.add_to_relation')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
 
         addRowEnter
             .append('div')

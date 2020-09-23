@@ -259,7 +259,7 @@ export function uiPaneHelp(context) {
     var helpPane = uiPane('help', context)
         .key(t('help.key'))
         .label(t.html('help.title'))
-        .description(t('help.title'))
+        .description(t.html('help.title'))
         .iconName('iD-icon-help');
 
     helpPane.renderContent = function(content) {
@@ -354,7 +354,7 @@ export function uiPaneHelp(context) {
             .append('li')
             .attr('class', 'shortcuts')
             .call(uiTooltip()
-                .title(t('shortcuts.tooltip'))
+                .title(t.html('shortcuts.tooltip'))
                 .keys(['?'])
                 .placement('top')
             )

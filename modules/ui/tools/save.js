@@ -58,7 +58,7 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(t(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
+                .title(t.html(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
                 .keys([key]);
         }
 
@@ -76,7 +76,7 @@ export function uiToolSave(context) {
     tool.render = function(selection) {
         tooltipBehavior = uiTooltip()
             .placement('bottom')
-            .title(t('save.no_changes'))
+            .title(t.html('save.no_changes'))
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
