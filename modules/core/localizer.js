@@ -94,14 +94,20 @@ export function coreLocalizer() {
             .then(() => {
                 let requestedLocales = (_preferredLocaleCodes || [])
                     // List of locales preferred by the browser in priority order.
-                    // This always includes an `en` fallback, so we know at least one is valid.
-                    .concat(utilDetect().browserLocales);
+                    .concat(utilDetect().browserLocales)
+                    // fallback to English since it's the only guaranteed complete language
+                    .concat(['en']);
 
                 _localeCodes = localesToUseFrom(requestedLocales);
-                // run iD in the highest-priority locale; the rest are fallbacks
+                // Run iD in the highest-priority locale; the rest are fallbacks
                 _localeCode = _localeCodes[0];
 
-                const loadStringsPromises = _localeCodes.map(function(code) {
+                // Will always return the index for `en` if nothing else
+                const fullCoverageIndex = _localeCodes.findIndex(function(locale) {
+                    return _dataLocales[locale].pct === 1;
+                });
+                // We only need to load locales up until we find one with full coverage
+                const loadStringsPromises = _localeCodes.slice(0, fullCoverageIndex + 1).map(function(code) {
                     return localizer.loadLocale(code);
                 });
                 return Promise.all(loadStringsPromises);
@@ -116,32 +122,19 @@ export function coreLocalizer() {
     function localesToUseFrom(requestedLocales) {
         let supportedLocales = _dataLocales;
 
-        let toLoad = [];
-
+        let toUse = [];
         for (let i in requestedLocales) {
             let locale = requestedLocales[i];
-            if (supportedLocales[locale]) {
-                toLoad.push(locale);
-            }
+            if (supportedLocales[locale]) toUse.push(locale);
 
             if (locale.includes('-')) {
                 // Full locale ('es-ES'), add fallback to the base ('es')
                 let langPart = locale.split('-')[0];
-                if (supportedLocales[langPart]) {
-                    toLoad.push(langPart);
-                }
+                if (supportedLocales[langPart]) toUse.push(langPart);
             }
         }
-
-        toLoad = utilArrayUniq(toLoad);
-
-        // this is guaranteed to always return an index since `en` is always listed
-        // and `en` always has full coverage
-        let fullCoverageIndex = toLoad.findIndex(function(locale) {
-            return supportedLocales[locale].pct === 1;
-        });
-        // we only need to load locales up until we find one with full coverage
-        return toLoad.slice(0, fullCoverageIndex + 1);
+        // remove duplicates
+        return utilArrayUniq(toUse);
     }
 
     function updateForCurrentLocale() {
@@ -329,7 +322,11 @@ export function coreLocalizer() {
     // Returns the localized text wrapped in an HTML element encoding the locale info
     localizer.t.html = function(stringId, replacements, locale) {
         const info = localizer.tInfo(stringId, replacements, locale);
-        return `<span class="localized-text" lang="${info.locale || 'unknown'}">${info.text}</span>`;
+        return localizer.htmlForLocalizedText(info.text, info.locale);
+    };
+
+    localizer.htmlForLocalizedText = function(text, localeCode) {
+        return `<span class="localized-text" lang="${localeCode || 'unknown'}">${text}</span>`;
     };
 
     localizer.languageName = (code, options) => {

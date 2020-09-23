@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 
@@ -64,7 +64,7 @@ export function uiTagReference(what) {
         _body
             .append('p')
             .attr('class', 'tag-reference-description')
-            .html(docs.description || t.html('inspector.no_documentation_key'))
+            .html(docs.description ? localizer.htmlForLocalizedText(docs.description, docs.descriptionLocaleCode) : t.html('inspector.no_documentation_key'))
             .append('a')
             .attr('class', 'tag-reference-edit')
             .attr('target', '_blank')
