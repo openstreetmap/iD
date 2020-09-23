@@ -4497,7 +4497,6 @@ img.tile-debug {
 .map-footer-list {
     display: flex;
     flex-flow: row nowrap;
-    position: relative;
     height: 100%;
     justify-content: flex-end;
 }
