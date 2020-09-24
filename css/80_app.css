@@ -4826,11 +4826,11 @@ img.tile-debug {
 ------------------------------------------------------- */
 .modal-shortcuts {
     width: 90%;
-    max-width: 950px;
+    max-width: 1050px;
 }
 
 .modal-shortcuts .modal-section:last-child {
-    padding-top: 10px;
+    padding: 10px 15px 20px 15px;
     min-height: 275px;
 }
 
