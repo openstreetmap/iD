@@ -95,14 +95,14 @@ export function uiSectionFeatureType(context) {
                 .preset(_presets.length === 1 ? _presets[0] : presetManager.item('point'))
             );
 
-        var nameparts = _presets.length === 1 ? [
+        var names = _presets.length === 1 ? [
             _presets[0].nameLabel(),
             _presets[0].subtitleLabel()
         ].filter(Boolean) : [t('inspector.multiple_types')];
 
         var label = selection.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
-            .data(nameparts, function(d) { return d; });
+            .data(names, function(d) { return d; });
 
         nameparts.exit()
             .remove();
