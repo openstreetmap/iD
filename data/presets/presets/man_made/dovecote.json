@@ -1,0 +1,29 @@
+{
+    "icon": "fas-dove",
+    "fields": [
+        "operator",
+        "building_area",
+        "height",
+        "capacity"
+    ],
+    "moreFields": [
+        "layer",
+        "location"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "terms": [
+        "birds",
+        "doocot",
+        "dovecot",
+        "doves",
+        "pigeonholes",
+        "pigeons"
+    ],
+    "tags": {
+        "man_made": "dovecote"
+    },
+    "name": "Dovecote"
+}

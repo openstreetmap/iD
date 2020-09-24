@@ -1,4 +1,6 @@
 
+import { event as d3_event } from 'd3-selection';
+
 import marked from 'marked';
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
@@ -7,7 +9,7 @@ import { uiPane } from '../pane';
 
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { helpString } from '../intro/helper';
+import { helpHtml } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
@@ -251,12 +253,12 @@ export function uiPaneHelp(context) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + helpString(subkey, helpPaneReplacements) + '\n\n';
+            return all + hhh + helpHtml(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
         return {
-            title: t(helpkey + '.title'),
-            html: marked(text.trim())
+            title: t.html(helpkey + '.title'),
+            content: marked(text.trim())
                 // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
                 .replace(/<\/code>/g, '<\/kbd>')
@@ -265,18 +267,19 @@ export function uiPaneHelp(context) {
 
     var helpPane = uiPane('help', context)
         .key(t('help.key'))
-        .title(t('help.title'))
-        .description(t('help.title'))
+        .label(t.html('help.title'))
+        .description(t.html('help.title'))
         .iconName('iD-icon-help');
 
     helpPane.renderContent = function(content) {
 
         function clickHelp(d, i) {
+            if (d3_event) d3_event.preventDefault();
             var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
 
-            body.html(d.html);
+            body.html(d.content);
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
@@ -295,14 +298,16 @@ export function uiPaneHelp(context) {
                 if (i < docs.length - 1) {
                     var nextLink = selection
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'next')
                         .on('click', function() {
+                            d3_event.preventDefault();
                             clickHelp(docs[i + 1], i + 1);
                         });
 
                     nextLink
                         .append('span')
-                        .text(docs[i + 1].title)
+                        .html(docs[i + 1].title)
                         .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
@@ -312,21 +317,24 @@ export function uiPaneHelp(context) {
                 if (i > 0) {
                     var prevLink = selection
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'previous')
                         .on('click', function() {
+                            d3_event.preventDefault();
                             clickHelp(docs[i - 1], i - 1);
                         });
 
                     prevLink
                         .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
-                        .text(docs[i - 1].title);
+                        .html(docs[i - 1].title);
                 }
             }
         }
 
 
         function clickWalkthrough() {
+            d3_event.preventDefault();
             if (context.inIntro()) return;
             context.container().call(uiIntro(context));
             context.ui().togglePanes();
@@ -334,6 +342,7 @@ export function uiPaneHelp(context) {
 
 
         function clickShortcuts() {
+            d3_event.preventDefault();
             context.container().call(uiShortcuts(context), true);
         }
 
@@ -346,6 +355,7 @@ export function uiPaneHelp(context) {
             .enter()
             .append('li')
             .append('a')
+            .attr('href', '#')
             .html(function(d) { return d.title; })
             .on('click', clickHelp);
 
@@ -353,21 +363,23 @@ export function uiPaneHelp(context) {
             .append('li')
             .attr('class', 'shortcuts')
             .call(uiTooltip()
-                .title(t('shortcuts.tooltip'))
+                .title(t.html('shortcuts.tooltip'))
                 .keys(['?'])
                 .placement('top')
             )
             .append('a')
+            .attr('href', '#')
             .on('click', clickShortcuts);
 
         shortcuts
             .append('div')
-            .text(t('shortcuts.title'));
+            .html(t.html('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
             .attr('class', 'walkthrough')
             .append('a')
+            .attr('href', '#')
             .on('click', clickWalkthrough);
 
         walkthrough
@@ -378,7 +390,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .text(t('splash.walkthrough'));
+            .html(t.html('splash.walkthrough'));
 
 
         var helpContent = content

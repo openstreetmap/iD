@@ -6,10 +6,12 @@ const request = require('request').defaults({ maxSockets: 1 });
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
 
-const resources = ['core', 'presets', 'imagery', 'community'];
+const resourceIds = ['core', 'presets', 'imagery', 'community'];
 const outdir = 'dist/locales/';
 const apiroot = 'https://www.transifex.com/api/2';
 const projectURL = `${apiroot}/project/id-editor`;
+
+const languageNames = require('./language_names.js');
 
 
 // Transifex doesn't allow anonymous downloading
@@ -32,11 +34,8 @@ if (process.env.transifex_password) {
 }
 /* eslint-enable no-process-env */
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
-const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 
-let referencedScripts = [];
-
-const languageInfo = getLangNamesInNativeLang();
+const languageInfo = languageNames.langNamesInNativeLang;
 fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
 fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
@@ -58,7 +57,36 @@ dataShortcuts.forEach(tab => {
   });
 });
 
-asyncMap(resources, getResource, (err, results) => {
+let coverageByLocaleCode = {};
+
+// There's a race condition here, but it's highly unlikely that the info will
+// return after the resources. There's an error check just in case.
+asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
+asyncMap(resourceIds, getResource, gotResource);
+
+function getResourceInfo(resourceId, callback) {
+  let url = 'https://api.transifex.com/organizations/openstreetmap/projects/id-editor/resources/' + resourceId;
+  request.get(url, { auth : auth }, (err, resp, body) => {
+    if (err) return callback(err);
+    console.log(`${resp.statusCode}: ${url}`);
+    let content = JSON.parse(body);
+    callback(null, content);
+  });
+}
+function gotResourceInfo(err, results) {
+  if (err) return console.log(err);
+  results.forEach(function(info) {
+    for (let code in info.stats) {
+      let coveragePart = info.stats[code].translated.percentage / results.length;
+
+      code = code.replace(/_/g, '-');
+      if (coverageByLocaleCode[code] === undefined) coverageByLocaleCode[code] = 0;
+      coverageByLocaleCode[code] += coveragePart;
+    }
+  });
+}
+
+function gotResource(err, results) {
   if (err) return console.log(err);
 
   // merge in strings fetched from transifex
@@ -74,15 +102,17 @@ asyncMap(resources, getResource, (err, results) => {
 
   // write files and fetch language info for each locale
   let dataLocales = {
-    en: { rtl: false, languageNames: languageNamesInLanguageOf('en'), scriptNames: scriptNamesInLanguageOf('en') }
+    en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
     (code, done) => {
-      if (code === 'en' || !Object.keys(allStrings[code]).length) {
+      if (code === 'en') {
         done();
       } else {
         let obj = {};
-        obj[code] = allStrings[code];
+        obj[code] = allStrings[code] || {};
+        obj[code].languageNames = languageNames.languageNamesInLanguageOf(code) || {};
+        obj[code].scriptNames = languageNames.scriptNamesInLanguageOf(code) || {};
         fs.writeFileSync(`${outdir}${code}.json`, JSON.stringify(obj));
 
         getLanguageInfo(code, (err, info) => {
@@ -93,10 +123,18 @@ asyncMap(resources, getResource, (err, results) => {
           } else if (code === 'ku') {
             rtl = false;
           }
+
+          let coverage = coverageByLocaleCode[code];
+          if (coverage === undefined) {
+            console.log('Could not get language coverage');
+            process.exit(1);
+          }
+          // we don't need high precision here, but we need to know if it's exactly 100% or not
+          coverage = Math.floor(coverage * 100) / 100;
+
           dataLocales[code] = {
             rtl: rtl,
-            languageNames: languageNamesInLanguageOf(code) || {},
-            scriptNames: scriptNamesInLanguageOf(code) || {}
+            pct: coverage
           };
           done();
         });
@@ -114,11 +152,11 @@ asyncMap(resources, getResource, (err, results) => {
       }
     }
   );
-});
+}
 
 
-function getResource(resource, callback) {
-  let resourceURL = `${projectURL}/resource/${resource}`;
+function getResource(resourceId, callback) {
+  let resourceURL = `${projectURL}/resource/${resourceId}`;
   getLanguages(resourceURL, (err, codes) => {
     if (err) return callback(err);
 
@@ -127,11 +165,11 @@ function getResource(resource, callback) {
 
       let locale = {};
       results.forEach((result, i) => {
-        if (resource === 'community' && Object.keys(result).length) {
+        if (resourceId === 'community' && Object.keys(result).length) {
           locale[codes[i]] = { community: result };  // add namespace
 
         } else {
-          if (resource === 'presets') {
+          if (resourceId === 'presets') {
             // remove terms that were not really translated
             let presets = (result.presets && result.presets.presets) || {};
             for (const key of Object.keys(presets)) {
@@ -145,7 +183,7 @@ function getResource(resource, callback) {
                 }
               }
             }
-          } else if (resource === 'fields') {
+          } else if (resourceId === 'fields') {
             // remove terms that were not really translated
             let fields = (result.presets && result.presets.fields) || {};
             for (const key of Object.keys(fields)) {
@@ -159,7 +197,7 @@ function getResource(resource, callback) {
                 }
               }
             }
-          } else if (resource === 'core') {
+          } else if (resourceId === 'core') {
             checkForDuplicateShortcuts(codes[i], result);
           }
 
@@ -268,110 +306,4 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       }
     }
   });
-}
-
-function getLangNamesInNativeLang() {
-  // manually add languages we want that aren't in CLDR
-  let unordered = {
-    'oc': {
-      nativeName: 'Occitan'
-    },
-    'ja-Hira': {
-      base: 'ja',
-      script: 'Hira'
-    },
-    'ja-Latn': {
-      base: 'ja',
-      script: 'Latn'
-    },
-    'ko-Latn': {
-      base: 'ko',
-      script: 'Latn'
-    },
-    'zh_pinyin': {
-      base: 'zh',
-      script: 'Latn'
-    }
-  };
-
-  let langDirectoryPaths = fs.readdirSync(cldrMainDir);
-  langDirectoryPaths.forEach(code => {
-    let languagesPath = `${cldrMainDir}${code}/languages.json`;
-    //if (!fs.existsSync(languagesPath)) return;
-    let languageObj = JSON.parse(fs.readFileSync(languagesPath, 'utf8')).main[code];
-    let identity = languageObj.identity;
-
-    // skip locale-specific languages
-    if (identity.letiant || identity.territory) return;
-
-    let info = {};
-    const script = identity.script;
-    if (script) {
-      referencedScripts.push(script);
-      info.base = identity.language;
-      info.script = script;
-    }
-
-    const nativeName = languageObj.localeDisplayNames.languages[code];
-    if (nativeName) {
-      info.nativeName = nativeName;
-    }
-
-    unordered[code] = info;
-  });
-
-  let ordered = {};
-  Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);
-  return ordered;
-}
-
-
-const rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh-Hant', 'pt-BR': 'pt', 'pt': 'pt-PT' };
-
-function languageNamesInLanguageOf(code) {
-  if (rematchCodes[code]) code = rematchCodes[code];
-
-  let languageFilePath = `${cldrMainDir}${code}/languages.json`;
-  if (!fs.existsSync(languageFilePath)) return null;
-
-  let translatedLangsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.languages;
-
-  // ignore codes for non-languages
-  for (let nonLangCode in { mis: true, mul: true, und: true, zxx: true }) {
-    delete translatedLangsByCode[nonLangCode];
-  }
-
-  for (let langCode in translatedLangsByCode) {
-    let altLongIndex = langCode.indexOf('-alt-long');
-    if (altLongIndex !== -1) {    // prefer long names (e.g. Chinese -> Mandarin Chinese)
-      let base = langCode.substring(0, altLongIndex);
-      translatedLangsByCode[base] = translatedLangsByCode[langCode];
-    }
-
-    if (langCode.includes('-alt-')) {    // remove alternative names
-      delete translatedLangsByCode[langCode];
-    } else if (langCode === translatedLangsByCode[langCode]) {   // no localized value available
-      delete translatedLangsByCode[langCode];
-    }
-  }
-
-  return translatedLangsByCode;
-}
-
-
-function scriptNamesInLanguageOf(code) {
-  if (rematchCodes[code]) code = rematchCodes[code];
-
-  let languageFilePath = `${cldrMainDir}${code}/scripts.json`;
-  if (!fs.existsSync(languageFilePath)) return null;
-
-  let allTranslatedScriptsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.scripts;
-
-  let translatedScripts = {};
-  referencedScripts.forEach(script => {
-    if (!allTranslatedScriptsByCode[script] || script === allTranslatedScriptsByCode[script]) return;
-    translatedScripts[script] = allTranslatedScriptsByCode[script];
-  });
-
-  return translatedScripts;
 }

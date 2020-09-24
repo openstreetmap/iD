@@ -7,5 +7,9 @@
         "type": "restriction",
         "restriction": "no_right_turn"
     },
+    "reference": {
+        "key": "restriction",
+        "value": "no_right_turn"
+    },
     "name": "No Right Turn"
 }

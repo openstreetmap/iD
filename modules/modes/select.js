@@ -5,6 +5,7 @@ import { t } from '../core/localizer';
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionDeleteRelation } from '../actions/delete_relation';
 import { actionMove } from '../actions/move';
+import { actionScale } from '../actions/scale';
 
 import { behaviorBreathe } from '../behavior/breathe';
 import { behaviorHover } from '../behavior/hover';
@@ -14,7 +15,7 @@ import { behaviorSelect } from '../behavior/select';
 
 import { operationMove } from '../operations/move';
 
-import { geoExtent, geoChooseEdge } from '../geo';
+import { geoExtent, geoChooseEdge, geoMetersToLat, geoMetersToLon } from '../geo';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
@@ -23,7 +24,7 @@ import * as Operations from '../operations/index';
 import { uiCmd } from '../ui/cmd';
 import {
     utilArrayIntersection, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
-    utilEntitySelector, utilKeybinding
+    utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
 } from '../util';
 
 
@@ -92,7 +93,7 @@ export function modeSelect(context, selectedIDs) {
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = context.hasEntity(selectedIDs[i]);
             if (!entity || entity.geometry(graph) !== 'vertex') {
-                return [];  // selection includes some not vertexes
+                return [];  // selection includes some not vertices
             }
 
             var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
@@ -239,10 +240,14 @@ export function modeSelect(context, selectedIDs) {
             .on(uiCmd('⇧↑'), nudgeSelection([0, -10]))
             .on(uiCmd('⇧→'), nudgeSelection([10, 0]))
             .on(uiCmd('⇧↓'), nudgeSelection([0, 10]))
-            .on(uiCmd('⇧⌘←'), nudgeSelection([-100, 0]))
-            .on(uiCmd('⇧⌘↑'), nudgeSelection([0, -100]))
-            .on(uiCmd('⇧⌘→'), nudgeSelection([100, 0]))
-            .on(uiCmd('⇧⌘↓'), nudgeSelection([0, 100]))
+            .on(uiCmd('⇧⌥←'), nudgeSelection([-100, 0]))
+            .on(uiCmd('⇧⌥↑'), nudgeSelection([0, -100]))
+            .on(uiCmd('⇧⌥→'), nudgeSelection([100, 0]))
+            .on(uiCmd('⇧⌥↓'), nudgeSelection([0, 100]))
+            .on(utilKeybinding.plusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1.05))
+            .on(utilKeybinding.plusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(Math.pow(1.05, 5)))
+            .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1/1.05))
+            .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(1/Math.pow(1.05, 5)))
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true);
 
@@ -284,6 +289,8 @@ export function modeSelect(context, selectedIDs) {
 
             var loc = extent.center();
             context.map().centerEase(loc);
+            // we could enter the mode multiple times, so reset follow for next time
+            _follow = false;
         }
 
 
@@ -298,9 +305,85 @@ export function modeSelect(context, selectedIDs) {
                         .duration(4000)
                         .iconName('#iD-operation-' + moveOp.id)
                         .iconClass('operation disabled')
-                        .text(moveOp.tooltip)();
+                        .label(moveOp.tooltip)();
                 } else {
                     context.perform(actionMove(selectedIDs, delta, context.projection), moveOp.annotation());
+                    context.validator().validate();
+                }
+            };
+        }
+
+        function scaleSelection(factor) {
+            return function() {
+                // prevent scaling during low zoom selection
+                if (!context.map().withinEditableZoom()) return;
+
+                let nodes = utilGetAllNodes(selectedIDs, context.graph());
+
+                let isUp = factor > 1;
+
+                // can only scale if multiple nodes are selected
+                if (nodes.length <= 1) return;
+
+                let extent = utilTotalExtent(selectedIDs, context.graph());
+
+                // These disabled checks would normally be handled by an operation
+                // object, but we don't want an actual scale operation at this point.
+                function scalingDisabled() {
+
+                    if (tooSmall()) {
+                        return 'too_small';
+                    } else if (extent.percentContainedIn(context.map().extent()) < 0.8) {
+                        return 'too_large';
+                    } else if (someMissing() || selectedIDs.some(incompleteRelation)) {
+                        return 'not_downloaded';
+                    } else if (selectedIDs.some(context.hasHiddenConnections)) {
+                        return 'connected_to_hidden';
+                    }
+
+                    return false;
+
+                    function tooSmall() {
+                        if (isUp) return false;
+                        let dLon = Math.abs(extent[1][0] - extent[0][0]);
+                        let dLat = Math.abs(extent[1][1] - extent[0][1]);
+                        return dLon < geoMetersToLon(1, extent[1][1]) &&
+                            dLat < geoMetersToLat(1);
+                    }
+
+                    function someMissing() {
+                        if (context.inIntro()) return false;
+                        let osm = context.connection();
+                        if (osm) {
+                            let missing = nodes.filter(function(n) { return !osm.isDataLoaded(n.loc); });
+                            if (missing.length) {
+                                missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+
+                    function incompleteRelation(id) {
+                        let entity = context.entity(id);
+                        return entity.type === 'relation' && !entity.isComplete(context.graph());
+                    }
+                }
+
+                const disabled = scalingDisabled();
+
+                if (disabled) {
+                    let multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
+                    context.ui().flash
+                        .duration(4000)
+                        .iconName('#iD-icon-no')
+                        .iconClass('operation disabled')
+                        .label(t('operations.scale.' + disabled + '.' + multi))();
+                } else {
+                    const pivot = context.projection(extent.center());
+                    const annotation = t('operations.scale.annotation.' + (isUp ? 'up' : 'down') + '.feature', { n: selectedIDs.length });
+                    context.perform(actionScale(selectedIDs, pivot, factor, context.projection), annotation);
+                    context.validator().validate();
                 }
             };
         }

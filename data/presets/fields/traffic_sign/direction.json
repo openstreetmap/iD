@@ -8,5 +8,8 @@
           "backward": "Backward",
           "both": "Both / All"
         }
-    }
+    },
+    "geometry": [
+        "vertex"
+    ]
 }

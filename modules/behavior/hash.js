@@ -156,7 +156,7 @@ export function behaviorHash(context) {
             var maxdist = 500;
 
             // Don't allow the hash location to change too much while drawing
-            // This can happen if the user accidently hit the back button.  #3996
+            // This can happen if the user accidentally hit the back button.  #3996
             if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
                 context.enter(modeBrowse(context));
                 return;

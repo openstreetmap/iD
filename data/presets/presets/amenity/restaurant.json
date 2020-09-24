@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "cuisine",
+        "diet_multi",
         "address",
         "building_area",
         "opening_hours",
@@ -17,7 +18,6 @@
         "brewery",
         "capacity",
         "delivery",
-        "diet_multi",
         "email",
         "fax",
         "gnis/feature_id",

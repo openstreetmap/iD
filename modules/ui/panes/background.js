@@ -11,8 +11,8 @@ export function uiPaneBackground(context) {
 
     var backgroundPane = uiPane('background', context)
         .key(t('background.key'))
-        .title(t('background.title'))
-        .description(t('background.description'))
+        .label(t.html('background.title'))
+        .description(t.html('background.description'))
         .iconName('iD-icon-layers')
         .sections([
             uiSectionBackgroundList(context),

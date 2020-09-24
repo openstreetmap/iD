@@ -94,9 +94,7 @@ export function utilDetect(refresh) {
         .concat(navigator.languages || [])
         .concat([
             // old property for backwards compatibility
-            navigator.userLanguage,
-            // fallback to English
-            'en'
+            navigator.userLanguage
         ])
         // remove any undefined values
         .filter(Boolean)

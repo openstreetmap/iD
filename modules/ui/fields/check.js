@@ -36,14 +36,14 @@ export function uiFieldCheck(field, context) {
     if (options) {
         for (var k in options) {
             values.push(k === 'undefined' ? undefined : k);
-            texts.push(field.t('options.' + k, { 'default': options[k] }));
+            texts.push(field.t.html('options.' + k, { 'default': options[k] }));
         }
     } else {
         values = [undefined, 'yes'];
-        texts = [t('inspector.unknown'), t('inspector.check.yes')];
+        texts = [t.html('inspector.unknown'), t.html('inspector.check.yes')];
         if (field.type !== 'defaultCheck') {
             values.push('no');
-            texts.push(t('inspector.check.no'));
+            texts.push(t.html('inspector.check.no'));
         }
     }
 
@@ -59,7 +59,7 @@ export function uiFieldCheck(field, context) {
             for (var key in entity.tags) {
                 if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
                     _impliedYes = true;
-                    texts[0] = t('presets.fields.oneway_yes.options.undefined');
+                    texts[0] = t.html('presets.fields.oneway_yes.options.undefined');
                     break;
                 }
             }
@@ -83,7 +83,7 @@ export function uiFieldCheck(field, context) {
         var icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
         selection.selectAll('.reverser-span')
-            .text(t('inspector.check.reverser'))
+            .html(t.html('inspector.check.reverser'))
             .call(svgIcon(icon, 'inline'));
 
         return selection;
@@ -108,13 +108,13 @@ export function uiFieldCheck(field, context) {
 
         enter
             .append('span')
-            .text(texts[0])
+            .html(texts[0])
             .attr('class', 'value');
 
         if (field.type === 'onewayCheck') {
             enter
-                .append('a')
-                .attr('class', 'reverser button' + (reverserHidden() ? ' hide' : ''))
+                .append('button')
+                .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
                 .attr('href', '#')
                 .append('span')
                 .attr('class', 'reverser-span');
@@ -163,7 +163,7 @@ export function uiFieldCheck(field, context) {
                             }
                             return graph;
                         },
-                        t('operations.reverse.annotation')
+                        t('operations.reverse.annotation.line', { n: 1 })
                     );
 
                     // must manually revalidate since no 'change' event was called
@@ -212,7 +212,7 @@ export function uiFieldCheck(field, context) {
             .property('checked', isChecked(_value));
 
         text
-            .text(isMixed ? t('inspector.multiple_values') : textFor(_value))
+            .html(isMixed ? t.html('inspector.multiple_values') : textFor(_value))
             .classed('mixed', isMixed);
 
         label

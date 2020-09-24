@@ -7,7 +7,9 @@
         "address",
         "opening_hours",
         "opening_hours/covid19",
-        "building_area"
+        "building_area",
+        "phone",
+        "website"
     ],
     "moreFields": [
         "air_conditioning",
@@ -17,8 +19,6 @@
         "internet_access/fee",
         "internet_access/ssid",
         "level",
-        "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

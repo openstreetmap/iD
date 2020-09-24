@@ -13,5 +13,9 @@
         "type": "route",
         "route": "subway"
     },
+    "reference": {
+        "key": "route",
+        "value": "subway"
+    },
     "name": "Subway Route"
 }

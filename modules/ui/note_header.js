@@ -41,7 +41,7 @@ export function uiNoteHeader() {
         headerEnter
             .append('div')
             .attr('class', 'note-header-label')
-            .text(function(d) {
+            .html(function(d) {
                 if (_note.isNew()) { return t('note.new'); }
                 return t('note.note') + ' ' + d.id + ' ' +
                     (d.status === 'closed' ? t('note.closed') : '');

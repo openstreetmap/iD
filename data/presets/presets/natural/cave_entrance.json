@@ -2,6 +2,7 @@
     "icon": "maki-triangle",
     "geometry": [
         "point",
+        "vertex",
         "area"
     ],
     "fields": [

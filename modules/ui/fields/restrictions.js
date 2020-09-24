@@ -124,7 +124,7 @@ export function uiFieldRestrictions(field, context) {
         distControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-distance-label')
-            .text(t('restriction.controls.distance') + ':');
+            .html(t.html('restriction.controls.distance') + ':');
 
         distControlEnter
             .append('input')
@@ -151,7 +151,7 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-distance-text')
-            .text(displayMaxDistance(_maxDistance));
+            .html(displayMaxDistance(_maxDistance));
 
 
         var viaControl = selection.selectAll('.restriction-via-way')
@@ -167,7 +167,7 @@ export function uiFieldRestrictions(field, context) {
         viaControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-via-way-label')
-            .text(t('restriction.controls.via') + ':');
+            .html(t.html('restriction.controls.via') + ':');
 
         viaControlEnter
             .append('input')
@@ -193,7 +193,7 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-via-way-text')
-            .text(displayMaxVia(_maxViaWay));
+            .html(displayMaxVia(_maxViaWay));
     }
 
 
@@ -487,7 +487,7 @@ export function uiFieldRestrictions(field, context) {
                 var clickSelect = (!_fromWayID || _fromWayID !== way.id);
                 help
                     .append('div')      // "Click to select FROM {fromName}." / "FROM {fromName}"
-                    .html(t('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
+                    .html(t.html('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
                         from: placeholders.from,
                         fromName: displayName(way.id, vgraph)
                     }));
@@ -517,11 +517,11 @@ export function uiFieldRestrictions(field, context) {
                 help
                     .append('div')      // "NO Right Turn (indirect)"
                     .attr('class', 'qualifier ' + klass)
-                    .text(turnText);
+                    .html(turnText);
 
                 help
                     .append('div')      // "FROM {fromName} TO {toName}"
-                    .html(t('restriction.help.from_name_to_name', {
+                    .html(t.html('restriction.help.from_name_to_name', {
                         from: placeholders.from,
                         fromName: displayName(datum.from.way, vgraph),
                         to: placeholders.to,
@@ -539,7 +539,7 @@ export function uiFieldRestrictions(field, context) {
 
                     help
                         .append('div')      // "VIA {viaNames}"
-                        .html(t('restriction.help.via_names', {
+                        .html(t.html('restriction.help.via_names', {
                             via: placeholders.via,
                             viaNames: names.join(', ')
                         }));
@@ -548,7 +548,7 @@ export function uiFieldRestrictions(field, context) {
                 if (!indirect) {
                     help
                         .append('div')      // Click for "No Right Turn"
-                        .text(t('restriction.help.toggle', { turn: nextText.trim() }));
+                        .html(t.html('restriction.help.toggle', { turn: nextText.trim() }));
                 }
 
                 highlightPathsFrom(null);
@@ -566,7 +566,7 @@ export function uiFieldRestrictions(field, context) {
                 if (_fromWayID) {
                     help
                         .append('div')      // "FROM {fromName}"
-                        .html(t('restriction.help.from_name', {
+                        .html(t.html('restriction.help.from_name', {
                             from: placeholders.from,
                             fromName: displayName(_fromWayID, vgraph)
                         }));
@@ -574,7 +574,7 @@ export function uiFieldRestrictions(field, context) {
                 } else {
                     help
                         .append('div')      // "Click to select a FROM segment."
-                        .html(t('restriction.help.select_from', {
+                        .html(t.html('restriction.help.select_from', {
                             from: placeholders.from
                         }));
                 }

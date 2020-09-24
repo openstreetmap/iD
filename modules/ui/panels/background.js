@@ -9,9 +9,9 @@ import { t } from '../../core/localizer';
 
 export function uiPanelBackground(context) {
     var background = context.background();
-    var currSourceName = null;
-    var metadata = {};
-    var metadataKeys = [
+    var _currSourceName = null;
+    var _metadata = {};
+    var _metadataKeys = [
         'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
     ];
 
@@ -23,9 +23,10 @@ export function uiPanelBackground(context) {
 
         var isDG = (source.id.match(/^DigitalGlobe/i) !== null);
 
-        if (currSourceName !== source.name()) {
-            currSourceName = source.name();
-            metadata = {};
+        var sourceLabel = source.label();
+        if (_currSourceName !== sourceLabel) {
+            _currSourceName = sourceLabel;
+            _metadata = {};
         }
 
         selection.html('');
@@ -36,20 +37,20 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .text(currSourceName);
+            .html(_currSourceName);
 
-        metadataKeys.forEach(function(k) {
+        _metadataKeys.forEach(function(k) {
             // DigitalGlobe vintage is available in raster layers for now.
             if (isDG && k === 'vintage') return;
 
             list
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
-                .classed('hide', !metadata[k])
-                .text(t('info_panels.background.' + k) + ':')
+                .classed('hide', !_metadata[k])
+                .html(t.html('info_panels.background.' + k) + ':')
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
-                .text(metadata[k]);
+                .html(_metadata[k]);
         });
 
         debouncedGetMetadata(selection);
@@ -58,7 +59,7 @@ export function uiPanelBackground(context) {
 
         selection
             .append('a')
-            .text(t('info_panels.background.' + toggleTiles))
+            .html(t.html('info_panels.background.' + toggleTiles))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
@@ -74,7 +75,7 @@ export function uiPanelBackground(context) {
             var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
             selection
                 .append('a')
-                .text(t('info_panels.background.' + toggleVintage))
+                .html(t.html('info_panels.background.' + toggleVintage))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-vintage')
                 .on('click', function() {
@@ -103,40 +104,40 @@ export function uiPanelBackground(context) {
         var tile = context.container().select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var sourceName = currSourceName;
+        var sourceName = _currSourceName;
         var d = tile.datum();
         var zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom());
         var center = context.map().center();
 
         // update zoom
-        metadata.zoom = String(zoom);
+        _metadata.zoom = String(zoom);
         selection.selectAll('.background-info-list-zoom')
             .classed('hide', false)
             .selectAll('.background-info-span-zoom')
-            .text(metadata.zoom);
+            .html(_metadata.zoom);
 
         if (!d || !d.length >= 3) return;
 
         background.baseLayerSource().getMetadata(center, d, function(err, result) {
-            if (err || currSourceName !== sourceName) return;
+            if (err || _currSourceName !== sourceName) return;
 
             // update vintage
             var vintage = result.vintage;
-            metadata.vintage = (vintage && vintage.range) || t('info_panels.background.unknown');
+            _metadata.vintage = (vintage && vintage.range) || t('info_panels.background.unknown');
             selection.selectAll('.background-info-list-vintage')
                 .classed('hide', false)
                 .selectAll('.background-info-span-vintage')
-                .text(metadata.vintage);
+                .html(_metadata.vintage);
 
-            // update other metdata
-            metadataKeys.forEach(function(k) {
+            // update other _metadata
+            _metadataKeys.forEach(function(k) {
                 if (k === 'zoom' || k === 'vintage') return;  // done already
                 var val = result[k];
-                metadata[k] = val;
+                _metadata[k] = val;
                 selection.selectAll('.background-info-list-' + k)
                     .classed('hide', !val)
                     .selectAll('.background-info-span-' + k)
-                    .text(val);
+                    .html(val);
             });
         });
     }
@@ -162,7 +163,7 @@ export function uiPanelBackground(context) {
     };
 
     panel.id = 'background';
-    panel.title = t('info_panels.background.title');
+    panel.label = t.html('info_panels.background.title');
     panel.key = t('info_panels.background.key');
 
 

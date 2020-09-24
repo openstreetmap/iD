@@ -2,7 +2,7 @@
     "icon": "temaki-picnic_shelter",
     "fields": [
         "name",
-        "shelter_type",
+        "operator",
         "building_area",
         "lit",
         "bin"

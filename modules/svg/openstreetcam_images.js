@@ -74,6 +74,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         if (!service) return;
 
         service
+            .loadViewer(context)
             .selectImage(context, d)
             .updateViewer(context, d)
             .showViewer(context);

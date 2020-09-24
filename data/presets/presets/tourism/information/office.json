@@ -32,5 +32,14 @@
         "key": "information",
         "value": "office"
     },
-    "name": "Tourist Information Office"
+    "terms": [
+        "information office",
+        "tour guide",
+        "tourism office",
+        "tourist information center",
+        "visitors center",
+        "visitors information center",
+        "welcome center"
+    ],
+    "name": "Visitor Center"
 }

@@ -2,6 +2,7 @@
     "icon": "maki-shelter",
     "fields": [
         "name",
+        "operator",
         "shelter_type",
         "building_area",
         "bench",

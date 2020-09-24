@@ -38,6 +38,7 @@ let _ssCache;
 let _pannellumViewer;
 let _sceneOptions;
 let _dataUrlArray = [];
+let _loadViewerPromise;
 
 
 /**
@@ -472,13 +473,9 @@ export default {
   },
 
 
-  /**
-   * loadViewer() create the streeside viewer.
-   */
-  loadViewer: function(context) {
-    let that = this;
+  ensureViewerLoaded: function(context) {
 
-    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    if (_loadViewerPromise) return _loadViewerPromise;
 
     // create ms-wrapper, a photo wrapper class
     let wrap = context.container().select('.photoviewer').selectAll('.ms-wrapper')
@@ -490,6 +487,10 @@ export default {
       .append('div')
       .attr('class', 'photo-wrapper ms-wrapper')
       .classed('hide', true);
+
+    let that = this;
+
+    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     // inject div to support streetside viewer (pannellum) and attribution line
     wrapEnter
@@ -525,36 +526,18 @@ export default {
     controlsEnter
       .append('button')
       .on('click.back', step(-1))
-      .text('◄');
+      .html('◄');
 
     controlsEnter
       .append('button')
       .on('click.forward', step(1))
-      .text('►');
+      .html('►');
 
 
     // create working canvas for stitching together images
     wrap = wrap
       .merge(wrapEnter)
       .call(setupCanvas, true);
-
-    // load streetside pannellum viewer css
-    d3_select('head').selectAll('#ideditor-streetside-viewercss')
-      .data([0])
-      .enter()
-      .append('link')
-      .attr('id', 'ideditor-streetside-viewercss')
-      .attr('rel', 'stylesheet')
-      .attr('href', context.asset(pannellumViewerCSS));
-
-    // load streetside pannellum viewer js
-    d3_select('head').selectAll('#ideditor-streetside-viewerjs')
-      .data([0])
-      .enter()
-      .append('script')
-      .attr('id', 'ideditor-streetside-viewerjs')
-      .attr('src', context.asset(pannellumViewerJS));
-
 
     // Register viewer resize handler
     context.ui().photoviewer.on('resize.streetside', () => {
@@ -563,6 +546,45 @@ export default {
       }
     });
 
+    _loadViewerPromise = new Promise((resolve, reject) => {
+
+      let loadedCount = 0;
+      function loaded() {
+        loadedCount += 1;
+        // wait until both files are loaded
+        if (loadedCount === 2) resolve();
+      }
+
+      const head = d3_select('head');
+
+      // load streetside pannellum viewer css
+      head.selectAll('#ideditor-streetside-viewercss')
+        .data([0])
+        .enter()
+        .append('link')
+        .attr('id', 'ideditor-streetside-viewercss')
+        .attr('rel', 'stylesheet')
+        .attr('crossorigin', 'anonymous')
+        .attr('href', context.asset(pannellumViewerCSS))
+        .on('load.serviceStreetside', loaded)
+        .on('error.serviceStreetside', reject);
+
+      // load streetside pannellum viewer js
+      head.selectAll('#ideditor-streetside-viewerjs')
+        .data([0])
+        .enter()
+        .append('script')
+        .attr('id', 'ideditor-streetside-viewerjs')
+        .attr('crossorigin', 'anonymous')
+        .attr('src', context.asset(pannellumViewerJS))
+        .on('load.serviceStreetside', loaded)
+        .on('error.serviceStreetside', reject);
+      })
+      .catch(function() {
+        _loadViewerPromise = null;
+      });
+
+    return _loadViewerPromise;
 
     function step(stepBy) {
       return () => {
@@ -767,7 +789,7 @@ export default {
 
     label
       .append('span')
-      .text(t('streetside.hires'));
+      .html(t.html('streetside.hires'));
 
 
     let captureInfo = line1
@@ -783,18 +805,18 @@ export default {
         .attr('class', 'captured_by')
         .attr('target', '_blank')
         .attr('href', 'https://www.microsoft.com/en-us/maps/streetside')
-        .text('©' + yyyy + ' Microsoft');
+        .html('©' + yyyy + ' Microsoft');
 
       captureInfo
         .append('span')
-        .text('|');
+        .html('|');
     }
 
     if (d.captured_at) {
       captureInfo
         .append('span')
         .attr('class', 'captured_at')
-        .text(localeTimestamp(d.captured_at));
+        .html(localeTimestamp(d.captured_at));
     }
 
     // Add image links
@@ -808,7 +830,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
         '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .text(t('streetside.view_on_bing'));
+      .html(t.html('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -816,7 +838,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-      .text(t('streetside.report'));
+      .html(t.html('streetside.report'));
 
 
     let bubbleIdQuadKey = d.key.toString(4);

@@ -13,5 +13,9 @@
         "type": "route",
         "route": "trolleybus"
     },
+    "reference": {
+        "key": "route",
+        "value": "trolleybus"
+    },
     "name": "Trolleybus Route"
 }

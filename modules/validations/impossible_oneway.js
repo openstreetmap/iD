@@ -163,7 +163,7 @@ export function validationImpossibleOneway() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.impossible_oneway.' + messageID + '.message', {
+                    return entity ? t.html('issues.impossible_oneway.' + messageID + '.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
@@ -176,11 +176,11 @@ export function validationImpossibleOneway() {
                     if (attachedOneways.length) {
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-reverse',
-                            title: t('issues.fix.reverse_feature.title'),
+                            title: t.html('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
                                 var id = this.issue.entityIds[0];
-                                context.perform(actionReverse(id), t('operations.reverse.annotation'));
+                                context.perform(actionReverse(id), t('operations.reverse.annotation.line', { n: 1 }));
                             }
                         }));
                     }
@@ -190,7 +190,7 @@ export function validationImpossibleOneway() {
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                            title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
+                            title: t.html('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
                                 var entityID = this.issue.entityIds[0];
                                 var vertexID = this.issue.entityIds[1];
@@ -213,7 +213,7 @@ export function validationImpossibleOneway() {
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
-                        .text(t('issues.impossible_oneway.' + referenceID + '.reference'));
+                        .html(t.html('issues.impossible_oneway.' + referenceID + '.reference'));
                 };
             }
         }

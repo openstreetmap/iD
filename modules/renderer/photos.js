@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
+import { services } from '../services';
 import { utilRebind } from '../util/rebind';
 import { utilQsString, utilStringQs } from '../util';
 
@@ -77,9 +78,31 @@ export function rendererPhotos(context) {
         if (hash.photo_overlay) {
             var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
             hashOverlayIDs.forEach(function(id) {
-                var layer = context.layers().layer(id);
-                if (layer) layer.enabled(true);
+                var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
+                if (layer && !layer.enabled()) layer.enabled(true);
             });
+        }
+        if (hash.photo) {
+            var photoIds = hash.photo.replace(/;/g, ',').split(',');
+            var photoId = photoIds.length && photoIds[0].trim();
+            var results = /(.*)-(.*)/g.exec(photoId);
+            if (results && results.length >= 3) {
+                var serviceId = results[1];
+                var photoKey = results[2];
+                var service = services[serviceId];
+                if (service && service.ensureViewerLoaded) {
+
+                    // if we're showing a photo then make sure its layer is enabled too
+                    var layer = _layerIDs.indexOf(serviceId) !== -1 && context.layers().layer(serviceId);
+                    if (layer && !layer.enabled()) layer.enabled(true);
+
+                    service.ensureViewerLoaded(context)
+                        .then(function() {
+                            service.updateViewer(context, photoKey);
+                            service.showViewer(context);
+                        });
+                }
+            }
         }
 
         context.layers().on('change.rendererPhotos', updateStorage);

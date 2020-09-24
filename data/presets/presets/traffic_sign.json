@@ -2,10 +2,12 @@
     "icon": "fas-directions",
     "fields": [
         "traffic_sign",
-        "direction"
+        "traffic_sign/direction",
+        "direction_point"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "traffic_sign": "*"

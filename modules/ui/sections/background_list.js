@@ -24,7 +24,7 @@ export function uiSectionBackgroundList(context) {
         .on('change', customChanged);
 
     var section = uiSection('background-list', context)
-        .title(t('background.backgrounds'))
+        .label(t.html('background.backgrounds'))
         .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {
@@ -56,7 +56,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'minimap-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t('background.minimap.tooltip'))
+                .title(t.html('background.minimap.tooltip'))
                 .keys([t('background.minimap.key')])
                 .placement('top')
             );
@@ -71,7 +71,7 @@ export function uiSectionBackgroundList(context) {
 
         minimapLabelEnter
             .append('span')
-            .text(t('background.minimap.description'));
+            .html(t.html('background.minimap.description'));
 
 
         var panelLabelEnter = bgExtrasListEnter
@@ -79,7 +79,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'background-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t('background.panel.tooltip'))
+                .title(t.html('background.panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.background.key'))])
                 .placement('top')
             );
@@ -94,14 +94,14 @@ export function uiSectionBackgroundList(context) {
 
         panelLabelEnter
             .append('span')
-            .text(t('background.panel.description'));
+            .html(t.html('background.panel.description'));
 
         var locPanelLabelEnter = bgExtrasListEnter
             .append('li')
             .attr('class', 'location-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t('background.location_panel.tooltip'))
+                .title(t.html('background.location_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.location.key'))])
                 .placement('top')
             );
@@ -116,7 +116,7 @@ export function uiSectionBackgroundList(context) {
 
         locPanelLabelEnter
             .append('span')
-            .text(t('background.location_panel.description'));
+            .html(t.html('background.location_panel.description'));
 
 
         // "Info / Report a Problem" link
@@ -130,7 +130,7 @@ export function uiSectionBackgroundList(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
-            .text(t('background.imagery_problem_faq'));
+            .html(t.html('background.imagery_problem_faq'));
 
         _backgroundList
             .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
@@ -149,13 +149,13 @@ export function uiSectionBackgroundList(context) {
             if (d.id === previousBackgroundID()) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title('<div>' + t('background.switch') + '</div>')
+                    .title('<div>' + t.html('background.switch') + '</div>')
                     .keys([uiCmd('⌘' + t('background.key'))])
                 );
             } else if (description || isOverflowing) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title(description || d.name())
+                    .title(description || d.label())
                 );
             }
         });
@@ -164,10 +164,18 @@ export function uiSectionBackgroundList(context) {
     function drawListItems(layerList, type, change, filter) {
         var sources = context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
-            .filter(filter);
+            .filter(filter)
+            .sort(function(a, b) {
+                return a.best() && !b.best() ? -1
+                    : b.best() && !a.best() ? 1
+                    : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+            });
 
         var layerLinks = layerList.selectAll('li')
-            .data(sources, function(d) { return d.name(); });
+            // We have to be a bit inefficient about reordering the list since
+            // arrow key navigation of radio values likes to work in the order
+            // they were added, not the display document order.
+            .data(sources, function(d, i) { return d.id + '---' + i; });
 
         layerLinks.exit()
             .remove();
@@ -183,18 +191,21 @@ export function uiSectionBackgroundList(context) {
         label
             .append('input')
             .attr('type', type)
-            .attr('name', 'layers')
+            .attr('name', 'background-layer')
+            .attr('value', function(d) {
+                return d.id;
+            })
             .on('change', change);
 
         label
             .append('span')
-            .text(function(d) { return d.name(); });
+            .html(function(d) { return d.label(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
             .attr('class', 'layer-browse')
             .call(uiTooltip()
-                .title(t('settings.custom_background.tooltip'))
+                .title(t.html('settings.custom_background.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
@@ -204,25 +215,14 @@ export function uiSectionBackgroundList(context) {
             .append('div')
             .attr('class', 'best')
             .call(uiTooltip()
-                .title(t('background.best_imagery'))
+                .title(t.html('background.best_imagery'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .append('span')
             .html('&#9733;');
 
-
-        layerList.selectAll('li')
-            .sort(sortSources);
-
         layerList
             .call(updateLayerSelections);
-
-
-        function sortSources(a, b) {
-            return a.best() && !b.best() ? -1
-                : b.best() && !a.best() ? 1
-                : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
-        }
     }
 
     function updateLayerSelections(selection) {
@@ -244,12 +244,10 @@ export function uiSectionBackgroundList(context) {
             return editCustom();
         }
 
-        d3_event.preventDefault();
         var previousBackground = context.background().baseLayerSource();
         prefs('background-last-used-toggle', previousBackground.id);
         prefs('background-last-used', d.id);
         context.background().baseLayerSource(d);
-        document.activeElement.blur();
     }
 
 

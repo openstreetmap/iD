@@ -28,13 +28,13 @@ export function uiSectionRawMemberEditor(context) {
             var entity = context.hasEntity(_entityIDs[0]);
             return entity && entity.type === 'relation';
         })
-        .title(function() {
+        .label(function() {
             var entity = context.hasEntity(_entityIDs[0]);
             if (!entity) return '';
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t('inspector.title_count', { title: t('inspector.members'), count: count });
+            return t('inspector.title_count', { title: t.html('inspector.members'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -90,6 +90,7 @@ export function uiSectionRawMemberEditor(context) {
                 actionChangeMember(d.relation.id, member, d.index),
                 t('operations.change_role.annotation')
             );
+            context.validator().validate();
         }
     }
 
@@ -105,7 +106,13 @@ export function uiSectionRawMemberEditor(context) {
         );
 
         if (!context.hasEntity(d.relation.id)) {
+            // Removing the last member will also delete the relation.
+            // If this happens we need to exit the selection mode
             context.enter(modeBrowse(context));
+        } else {
+            // Changing the mode also runs `validate`, but otherwise we need to
+            // rerun it manually
+            context.validator().validate();
         }
     }
 
@@ -180,7 +187,7 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .text(function(d) {
+                        .html(function(d) {
                             var matched = presetManager.match(d.member, context.graph());
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
@@ -188,11 +195,10 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .text(function(d) { return utilDisplayName(d.member); });
+                        .html(function(d) { return utilDisplayName(d.member); });
 
                     label
                         .append('button')
-                        .attr('tabindex', -1)
                         .attr('title', t('icons.remove'))
                         .attr('class', 'remove member-delete')
                         .call(svgIcon('#iD-operation-delete'));
@@ -212,18 +218,17 @@ export function uiSectionRawMemberEditor(context) {
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .text(t('inspector.' + d.type, { id: d.id }));
+                        .html(t.html('inspector.' + d.type, { id: d.id }));
 
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .text(t('inspector.incomplete', { id: d.id }));
+                        .html(t.html('inspector.incomplete', { id: d.id }));
 
                     label
                         .append('button')
                         .attr('class', 'member-download')
                         .attr('title', t('icons.download'))
-                        .attr('tabindex', -1)
                         .call(svgIcon('#iD-icon-load'))
                         .on('click', downloadMember);
                 }
@@ -320,6 +325,7 @@ export function uiSectionRawMemberEditor(context) {
                         actionMoveMember(d.relation.id, index, targetIndex),
                         t('operations.reorder_members.annotation')
                     );
+                    context.validator().validate();
                 }
             })
         );

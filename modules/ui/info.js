@@ -59,7 +59,7 @@ export function uiInfo(context) {
 
             title
                 .append('h3')
-                .text(function(d) { return panels[d].title; });
+                .html(function(d) { return panels[d].label; });
 
             title
                 .append('button')

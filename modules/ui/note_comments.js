@@ -51,24 +51,26 @@ export function uiNoteComments() {
                         .append('a')
                         .attr('class', 'comment-author-link')
                         .attr('href', osm.userURL(d.user))
-                        .attr('tabindex', -1)
                         .attr('target', '_blank');
                 }
                 selection
-                    .text(function(d) { return d.user || t('note.anonymous'); });
+                    .html(function(d) { return d.user || t.html('note.anonymous'); });
             });
 
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
-            .text(function(d) {
+            .html(function(d) {
                 return t('note.status.' + d.action, { when: localeDateString(d.date) });
             });
 
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .html(function(d) { return d.html; });
+            .html(function(d) { return d.html; })
+            .selectAll('a')
+                .attr('rel', 'noopener nofollow')
+                .attr('target', '_blank');
 
         comments
             .call(replaceAvatars);

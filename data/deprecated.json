@@ -8,6 +8,10 @@
     "replace": {"aeroway": "jet_bridge", "highway": "corridor"}
   },
   {
+    "old": {"access": "customer"},
+    "replace": {"access": "customers"}
+  },
+  {
     "old": {"access": "public"},
     "replace": {"access": "yes"}
   },
@@ -110,6 +114,10 @@
   {
     "old": {"amenity": "kiosk"},
     "replace": {"shop": "kiosk"}
+  },
+  {
+    "old": {"amenity": "notice_board"},
+    "replace": {"advertising": "board"}
   },
   {
     "old": {"amenity": "nursery"},
@@ -218,6 +226,10 @@
   {
     "old": {"barrier": "wood_fence"},
     "replace": {"barrier": "fence", "fence_type": "wood"}
+  },
+  {
+    "old": {"amenity": "bench", "capacity": "*"},
+    "replace": {"amenity": "bench", "seats": "$1"}
   },
   {
     "old": {"bicycle:oneway": "*"},
@@ -469,6 +481,14 @@
   {
     "old": {"escalator": "*"},
     "replace": {"highway": "steps", "conveying": "$1"}
+  },
+  {
+    "old": {"fast_food": "pizza"},
+    "replace": {"cuisine": "pizza"}
+  },
+  {
+    "old": {"fast_food": "shawarma"},
+    "replace": {"cuisine": "shawarma"}
   },
   {
     "old": {"fee": "0"},
@@ -1137,6 +1157,10 @@
   {
     "old": {"rwn_expected_route_relations": "*"},
     "replace": {"expected_rwn_route_relations": "$1"}
+  },
+  {
+    "old": {"service": "drive_through"},
+    "replace": {"service": "drive-through"}
   },
   {
     "old": {"shop": "adult"},

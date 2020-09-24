@@ -58,6 +58,7 @@
                 "lanes",
                 "identifier",
                 "localized",
+                "manyCombo",
                 "maxspeed",
                 "multiCombo",
                 "networkCombo",

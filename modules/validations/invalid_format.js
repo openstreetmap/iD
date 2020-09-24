@@ -28,7 +28,7 @@ export function validationFormatting() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.invalid_format.email.reference'));
+                .html(t.html('issues.invalid_format.email.reference'));
         }
         /*
         function showReferenceWebsite(selection) {
@@ -37,7 +37,7 @@ export function validationFormatting() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.invalid_format.website.reference'));
+                .html(t.html('issues.invalid_format.website.reference'));
         }
 
         if (entity.tags.website) {
@@ -55,7 +55,7 @@ export function validationFormatting() {
                     severity: 'warning',
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t('issues.invalid_format.website.message' + this.data,
+                        return entity ? t.html('issues.invalid_format.website.message' + this.data,
                             { feature: utilDisplayLabel(entity, context.graph()), site: websites.join(', ') }) : '';
                     },
                     reference: showReferenceWebsite,
@@ -80,7 +80,7 @@ export function validationFormatting() {
                     severity: 'warning',
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t('issues.invalid_format.email.message' + this.data,
+                        return entity ? t.html('issues.invalid_format.email.message' + this.data,
                             { feature: utilDisplayLabel(entity, context.graph()), email: emails.join(', ') }) : '';
                     },
                     reference: showReferenceEmail,

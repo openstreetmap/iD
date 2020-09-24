@@ -11,7 +11,7 @@ export function uiSectionPhotoOverlays(context) {
     var layers = context.layers();
 
     var section = uiSection('photo-overlays', context)
-        .title(t('photo_overlays.title'))
+        .label(t.html('photo_overlays.title'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -74,7 +74,7 @@ export function uiSectionPhotoOverlays(context) {
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t(titleID))
+                        .title(t.html(titleID))
                         .placement('top')
                     );
             });
@@ -86,10 +86,10 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) {
+            .html(function(d) {
                 var id = d.id;
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
-                return t(id.replace(/-/g, '_') + '.title');
+                return t.html(id.replace(/-/g, '_') + '.title');
             });
 
 
@@ -137,7 +137,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t('photo_overlays.photo_type.' + d + '.tooltip'))
+                        .title(t.html('photo_overlays.photo_type.' + d + '.tooltip'))
                         .placement('top')
                     );
             });
@@ -151,7 +151,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) {
+            .html(function(d) {
                 return t('photo_overlays.photo_type.' + d + '.title');
             });
 

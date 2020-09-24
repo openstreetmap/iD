@@ -1,0 +1,38 @@
+{
+    "icon": "tnp-2009541",
+    "fields": [
+        "toilets/disposal",
+        "{amenity/toilets}",
+        "toilets/handwashing"
+    ],
+    "moreFields": [
+        "{amenity/toilets}"
+    ],
+    "geometry": [
+        "point",
+        "area",
+        "vertex"
+    ],
+    "terms": [
+        "restroom",
+        "privy",
+        "porta john",
+        "porta potty",
+        "portapot",
+        "chemical toilet"
+    ],
+    "addTags": {
+        "amenity": "toilets",
+        "toilets:disposal": "chemical",
+        "portable": "yes"
+    },
+    "tags": {
+        "amenity": "toilets",
+        "portable": "yes"
+    },
+    "reference": {
+        "key": "toilets:disposal",
+        "value": "chemical"
+    },
+    "name": "Portable Toilet"
+}

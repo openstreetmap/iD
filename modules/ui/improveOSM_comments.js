@@ -52,23 +52,22 @@ export function uiImproveOsmComments() {
                   .append('a')
                   .attr('class', 'comment-author-link')
                   .attr('href', osm.userURL(d.username))
-                  .attr('tabindex', -1)
                   .attr('target', '_blank');
               }
               selection
-                .text(d => d.username);
+                .html(d => d.username);
             });
 
         metadataEnter
           .append('div')
             .attr('class', 'comment-date')
-            .text(d => t('note.status.commented', { when: localeDateString(d.timestamp) }));
+            .html(d => t.html('note.status.commented', { when: localeDateString(d.timestamp) }));
 
         mainEnter
           .append('div')
             .attr('class', 'comment-text')
           .append('p')
-            .text(d => d.text);
+            .html(d => d.text);
     })
     .catch(err => {
       console.log(err); // eslint-disable-line no-console

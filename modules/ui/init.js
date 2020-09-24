@@ -66,10 +66,14 @@ export function uiInit(context) {
 
                 // some targets have default click events we don't want to override
                 var isOkayTarget = d3_event.composedPath().some(function(node) {
-                    // clicking <label> affects its <input> by default
-                    return node.nodeName === 'LABEL' ||
+                    // we only care about element nodes
+                    return node.nodeType === 1 &&
+                        // clicking <input> focuses it and/or changes a value
+                        (node.nodeName === 'INPUT' ||
+                        // clicking <label> affects its <input> by default
+                        node.nodeName === 'LABEL' ||
                         // clicking <a> opens a hyperlink by default
-                        node.nodeName === 'A';
+                        node.nodeName === 'A');
                 });
                 if (isOkayTarget) return;
 
@@ -111,6 +115,7 @@ export function uiInit(context) {
         }
 
         container
+            .attr('lang', localizer.localeCode())
             .attr('dir', localizer.textDirection());
 
         // setup fullscreen keybindings (no button shown at this time)
@@ -122,13 +127,15 @@ export function uiInit(context) {
 
         map
             .on('hitMinZoom.ui', function() {
-                ui.flash.text(t('cannot_zoom'))();
+                ui.flash
+                    .iconName('#iD-icon-no')
+                    .label(t.html('cannot_zoom'))();
             });
 
         container
             .append('svg')
             .attr('id', 'ideditor-defs')
-            .call(svgDefs(context));
+            .call(ui.svgDefs);
 
         container
             .append('div')
@@ -153,123 +160,20 @@ export function uiInit(context) {
             .attr('dir', 'ltr')
             .call(map);
 
-        content
+        var overMap = content
+            .append('div')
+            .attr('class', 'over-map');
+
+        overMap
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
 
-        // Add attribution and footer
-        var about = content
-            .append('div')
-            .attr('class', 'map-footer');
-
-        about
+        overMap
             .append('div')
             .attr('class', 'attribution-wrap')
             .attr('dir', 'ltr')
             .call(uiAttribution(context));
-
-        about
-            .append('div')
-            .attr('class', 'api-status')
-            .call(uiStatus(context));
-
-
-        var footer = about
-            .append('div')
-            .attr('class', 'map-footer-bar fillD');
-
-        footer
-            .append('div')
-            .attr('class', 'flash-wrap footer-hide');
-
-        var footerWrap = footer
-            .append('div')
-            .attr('class', 'main-footer-wrap footer-show');
-
-        footerWrap
-            .append('div')
-            .attr('class', 'scale-block')
-            .call(uiScale(context));
-
-        var aboutList = footerWrap
-            .append('div')
-            .attr('class', 'info-block')
-            .append('ul')
-            .attr('class', 'map-footer-list');
-
-        if (!context.embed()) {
-            aboutList
-                .call(uiAccount(context));
-        }
-
-        aboutList
-            .append('li')
-            .attr('class', 'version')
-            .call(uiVersion(context));
-
-        var issueLinks = aboutList
-            .append('li');
-
-        issueLinks
-            .append('a')
-            .attr('target', '_blank')
-            .attr('href', 'https://github.com/openstreetmap/iD/issues')
-            .call(svgIcon('#iD-icon-bug', 'light'))
-            .call(uiTooltip().title(t('report_a_bug')).placement('top'));
-
-        issueLinks
-            .append('a')
-            .attr('target', '_blank')
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
-            .call(svgIcon('#iD-icon-translate', 'light'))
-            .call(uiTooltip().title(t('help_translate')).placement('top'));
-
-        aboutList
-            .append('li')
-            .attr('class', 'feature-warning')
-            .attr('tabindex', -1)
-            .call(uiFeatureInfo(context));
-
-        aboutList
-            .append('li')
-            .attr('class', 'issues-info')
-            .attr('tabindex', -1)
-            .call(uiIssuesInfo(context));
-
-        var apiConnections = context.apiConnections();
-        if (apiConnections && apiConnections.length > 1) {
-            aboutList
-                .append('li')
-                .attr('class', 'source-switch')
-                .attr('tabindex', -1)
-                .call(uiSourceSwitch(context)
-                    .keys(apiConnections)
-                );
-        }
-
-        aboutList
-            .append('li')
-            .attr('class', 'user-list')
-            .attr('tabindex', -1)
-            .call(uiContributors(context));
-
-
-        // Setup map dimensions and move map to initial center/zoom.
-        // This should happen after .main-content and toolbars exist.
-        ui.onResize();
-        map.redrawEnable(true);
-
-        ui.hash = behaviorHash(context);
-        ui.hash();
-        if (!ui.hash.hadHash) {
-            map.centerZoom([0, 0], 2);
-        }
-
-
-        var overMap = content
-            .append('div')
-            .attr('class', 'over-map');
 
         // Map controls
         var controls = overMap
@@ -333,6 +237,104 @@ export function uiInit(context) {
             .call(ui.photoviewer);
 
 
+        // Add footer
+        var about = content
+            .append('div')
+            .attr('class', 'map-footer');
+
+        about
+            .append('div')
+            .attr('class', 'api-status')
+            .call(uiStatus(context));
+
+
+        var footer = about
+            .append('div')
+            .attr('class', 'map-footer-bar fillD');
+
+        footer
+            .append('div')
+            .attr('class', 'flash-wrap footer-hide');
+
+        var footerWrap = footer
+            .append('div')
+            .attr('class', 'main-footer-wrap footer-show');
+
+        footerWrap
+            .append('div')
+            .attr('class', 'scale-block')
+            .call(uiScale(context));
+
+        var aboutList = footerWrap
+            .append('div')
+            .attr('class', 'info-block')
+            .append('ul')
+            .attr('class', 'map-footer-list');
+
+        aboutList
+            .append('li')
+            .attr('class', 'user-list')
+            .call(uiContributors(context));
+
+        var apiConnections = context.apiConnections();
+        if (apiConnections && apiConnections.length > 1) {
+            aboutList
+                .append('li')
+                .attr('class', 'source-switch')
+                .call(uiSourceSwitch(context)
+                    .keys(apiConnections)
+                );
+        }
+
+        aboutList
+            .append('li')
+            .attr('class', 'issues-info')
+            .call(uiIssuesInfo(context));
+
+        aboutList
+            .append('li')
+            .attr('class', 'feature-warning')
+            .call(uiFeatureInfo(context));
+
+        var issueLinks = aboutList
+            .append('li');
+
+        issueLinks
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', 'https://github.com/openstreetmap/iD/issues')
+            .call(svgIcon('#iD-icon-bug', 'light'))
+            .call(uiTooltip().title(t.html('report_a_bug')).placement('top'));
+
+        issueLinks
+            .append('a')
+            .attr('target', '_blank')
+            .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
+            .call(svgIcon('#iD-icon-translate', 'light'))
+            .call(uiTooltip().title(t.html('help_translate')).placement('top'));
+
+        aboutList
+            .append('li')
+            .attr('class', 'version')
+            .call(uiVersion(context));
+
+        if (!context.embed()) {
+            aboutList
+                .call(uiAccount(context));
+        }
+
+
+        // Setup map dimensions and move map to initial center/zoom.
+        // This should happen after .main-content and toolbars exist.
+        ui.onResize();
+        map.redrawEnable(true);
+
+        ui.hash = behaviorHash(context);
+        ui.hash();
+        if (!ui.hash.hadHash) {
+            map.centerZoom([0, 0], 2);
+        }
+
         // Bind events
         window.onbeforeunload = function() {
             return context.save();
@@ -353,10 +355,10 @@ export function uiInit(context) {
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
             .on('↓', pan([0, -panPixels]))
-            .on(uiCmd('⌘←'), pan([map.dimensions()[0], 0]))
-            .on(uiCmd('⌘↑'), pan([0, map.dimensions()[1]]))
-            .on(uiCmd('⌘→'), pan([-map.dimensions()[0], 0]))
-            .on(uiCmd('⌘↓'), pan([0, -map.dimensions()[1]]))
+            .on(uiCmd('⌥←'), pan([map.dimensions()[0], 0]))
+            .on(uiCmd('⌥↑'), pan([0, map.dimensions()[1]]))
+            .on(uiCmd('⌥→'), pan([-map.dimensions()[0], 0]))
+            .on(uiCmd('⌥↓'), pan([0, -map.dimensions()[1]]))
             .on(uiCmd('⌘' + t('background.key')), function quickSwitch() {
                 if (d3_event) {
                     d3_event.stopImmediatePropagation();
@@ -420,7 +422,7 @@ export function uiInit(context) {
         }
 
         var osm = context.connection();
-        var auth = uiLoading(context).message(t('loading_auth')).blocking(true);
+        var auth = uiLoading(context).message(t.html('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -489,6 +491,8 @@ export function uiInit(context) {
         return _lastPointerType;
     };
 
+    ui.svgDefs = svgDefs(context);
+
     ui.flash = uiFlash(context);
 
     ui.sidebar = uiSidebar(context);
@@ -549,19 +553,21 @@ export function uiInit(context) {
     };
 
     ui.togglePanes = function(showPane) {
-        var shownPanes = context.container().selectAll('.map-pane.shown');
+        var hidePanes = context.container().selectAll('.map-pane.shown');
 
         var side = localizer.textDirection() === 'ltr' ? 'right' : 'left';
 
-        shownPanes
-            .classed('shown', false);
+        hidePanes
+            .classed('shown', false)
+            .classed('hide', true);
 
         context.container().selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
-            shownPanes
-                .style('display', 'none')
+            hidePanes
+                .classed('shown', false)
+                .classed('hide', true)
                 .style(side, '-500px');
 
             context.container().selectAll('.' + showPane.attr('pane') + '-control button')
@@ -569,10 +575,9 @@ export function uiInit(context) {
 
             showPane
                 .classed('shown', true)
-                .style('display', 'block');
-            if (shownPanes.empty()) {
+                .classed('hide', false);
+            if (hidePanes.empty()) {
                 showPane
-                    .style('display', 'block')
                     .style(side, '-500px')
                     .transition()
                     .duration(200)
@@ -582,14 +587,17 @@ export function uiInit(context) {
                     .style(side, '0px');
             }
         } else {
-            shownPanes
-                .style('display', 'block')
+            hidePanes
+                .classed('shown', true)
+                .classed('hide', false)
                 .style(side, '0px')
                 .transition()
                 .duration(200)
                 .style(side, '-500px')
                 .on('end', function() {
-                    d3_select(this).style('display', 'none');
+                    d3_select(this)
+                        .classed('shown', false)
+                        .classed('hide', true);
                 });
         }
     };
@@ -643,7 +651,7 @@ export function uiInit(context) {
     context.uploader()
         .on('saveStarted.ui', function() {
             _saveLoading = uiLoading(context)
-                .message(t('save.uploading'))
+                .message(t.html('save.uploading'))
                 .blocking(true);
             context.container().call(_saveLoading);  // block input during upload
         })

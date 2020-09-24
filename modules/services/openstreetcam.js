@@ -236,11 +236,14 @@ export default {
 
 
     loadViewer: function(context) {
-        var that = this;
 
         // add osc-wrapper
         var wrap = context.container().select('.photoviewer').selectAll('.osc-wrapper')
             .data([0]);
+
+        if (wrap.enter().empty()) return this;
+
+        var that = this;
 
         var wrapEnter = wrap.enter()
             .append('div')
@@ -262,22 +265,22 @@ export default {
         controlsEnter
             .append('button')
             .on('click.back', step(-1))
-            .text('◄');
+            .html('◄');
 
         controlsEnter
             .append('button')
             .on('click.rotate-ccw', rotate(-90))
-            .text('⤿');
+            .html('⤿');
 
         controlsEnter
             .append('button')
             .on('click.rotate-cw', rotate(90))
-            .text('⤾');
+            .html('⤾');
 
         controlsEnter
             .append('button')
             .on('click.forward', step(1))
-            .text('►');
+            .html('►');
 
         wrapEnter
             .append('div')
@@ -347,6 +350,8 @@ export default {
                     .updateViewer(context, nextImage);
             };
         }
+
+        return this;
     },
 
 
@@ -418,22 +423,22 @@ export default {
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
                     .attr('href', 'https://openstreetcam.org/user/' + encodeURIComponent(d.captured_by))
-                    .text('@' + d.captured_by);
+                    .html('@' + d.captured_by);
 
                 attribution
                     .append('span')
-                    .text('|');
+                    .html('|');
             }
 
             if (d.captured_at) {
                 attribution
                     .append('span')
                     .attr('class', 'captured_at')
-                    .text(localeDateString(d.captured_at));
+                    .html(localeDateString(d.captured_at));
 
                 attribution
                     .append('span')
-                    .text('|');
+                    .html('|');
             }
 
             attribution
@@ -441,7 +446,7 @@ export default {
                 .attr('class', 'image-link')
                 .attr('target', '_blank')
                 .attr('href', 'https://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
-                .text('openstreetcam.org');
+                .html('openstreetcam.org');
         }
 
         return this;

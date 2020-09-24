@@ -118,9 +118,9 @@ export function operationDowngrade(context, selectedIDs) {
     operation.annotation = function () {
         var suffix;
         if (downgradeType === 'building_address') {
-            suffix = 'multiple';
+            suffix = 'generic';
         } else {
-            suffix = downgradeType + '.' + multi;
+            suffix = downgradeType;
         }
         return t('operations.downgrade.annotation.' + suffix, { n: affectedFeatureCount});
     };

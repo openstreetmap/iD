@@ -3,10 +3,13 @@
     "fields": [
         "indoor",
         "ref",
-        "operator"
+        "operator",
+        "defibrillator/location"
     ],
     "moreFields": [
-        "level"
+        "level",
+        "opening_hours",
+        "access_simple"
     ],
     "geometry": [
         "point",

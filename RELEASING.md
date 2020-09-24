@@ -43,7 +43,7 @@ $  git tag vA.B.C
 $  git push origin -f release vA.B.C
 ```
 - Open https://github.com/openstreetmap/iD/tags
-- Click `•••` –> `Create Release` and link to `CHANGELOG.md` in `Describe this release`
+- Click `•••` –> `Create Release` and link to [`CHANGELOG.md`](https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md) in `Describe this release`
 
 #### Prepare `develop` branch for further development
 
@@ -51,7 +51,7 @@ $  git push origin -f release vA.B.C
 $  git checkout develop
 ```
 
-- Increment version number and add `-dev` suffix in `modules/core/context.js` and `package.json`
+- Increment version number and add `-dev` suffix in `modules/core/context.js` and `package.json`, e.g. `2.18.5-dev`
 
 ```bash
 $  git add . && git commit -m 'Set development version number'
@@ -84,4 +84,4 @@ $  rm -rf vendor/assets/iD/* && vendorer
 $  git add . && git commit -m 'Update to iD vA.B.C'
 $  git push osmlab
 ```
-- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/develop...osmlab:develop) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment
+- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:master) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment

@@ -72,9 +72,15 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    source.label = function() {
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        return t.html('imagery.' + id_safe + '.name', { default: _name });
+    };
+
+
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.description', { default: _description });
+        return t.html('imagery.' + id_safe + '.description', { default: _description });
     };
 
 
@@ -112,7 +118,7 @@ export function rendererBackgroundSource(data) {
         // Guess a type based on the tokens present in the template
         // (This is for 'custom' source, where we don't know)
         if (!source.type) {
-            if (/\{(proj|wkid|bbox)\}/.test(_template)) {
+            if (/SERVICE=WMS|\{(proj|wkid|bbox)\}/.test(_template)) {
                 source.type = 'wms';
                 source.projection = 'EPSG:3857';  // guess
             } else if (/\{(x|y)\}/.test(_template)) {
@@ -159,23 +165,30 @@ export function rendererBackgroundSource(data) {
               switch (key) {
                 case 'width':
                 case 'height':
-                  return tileSize;
+                    return tileSize;
                 case 'proj':
-                  return projection;
+                    return projection;
                 case 'wkid':
-                  return projection.replace(/^EPSG:/, '');
+                    return projection.replace(/^EPSG:/, '');
                 case 'bbox':
-                  return minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y;
+                    // WMS 1.3 flips x/y for some coordinate systems including EPSG:4326 - #7557
+                    if (projection === 'EPSG:4326' &&
+                        // The CRS parameter implies version 1.3 (prior versions use SRS)
+                        /VERSION=1.3|CRS={proj}/.test(source.template())) {
+                        return maxXminY.y + ',' + minXmaxY.x + ',' + minXmaxY.y + ',' + maxXminY.x;
+                    } else {
+                        return minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y;
+                    }
                 case 'w':
-                  return minXmaxY.x;
+                    return minXmaxY.x;
                 case 's':
-                  return maxXminY.y;
+                    return maxXminY.y;
                 case 'n':
-                  return maxXminY.x;
+                    return maxXminY.x;
                 case 'e':
-                  return minXmaxY.y;
+                    return minXmaxY.y;
                 default:
-                  return token;
+                    return token;
               }
             });
 
@@ -531,6 +544,11 @@ rendererBackgroundSource.None = function() {
     };
 
 
+    source.label = function() {
+        return t.html('background.none');
+    };
+
+
     source.imageryUsed = function() {
         return null;
     };
@@ -551,6 +569,10 @@ rendererBackgroundSource.Custom = function(template) {
 
     source.name = function() {
         return t('background.custom');
+    };
+
+    source.label = function() {
+        return t.html('background.custom');
     };
 
 

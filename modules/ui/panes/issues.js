@@ -11,8 +11,8 @@ export function uiPaneIssues(context) {
 
     var issuesPane = uiPane('issues', context)
         .key(t('issues.key'))
-        .title(t('issues.title'))
-        .description(t('issues.title'))
+        .label(t.html('issues.title'))
+        .description(t.html('issues.title'))
         .iconName('iD-icon-alert')
         .sections([
             uiSectionValidationOptions(context),

@@ -1,0 +1,15 @@
+{
+  "icon": "maki-embassy",
+  "geometry": [
+    "point"
+  ],
+  "terms": [
+    "new location"
+  ],
+  "tags": {
+    "tourism": "information",
+    "information": "board",
+    "board_type": "welcome_sign"
+  },
+  "name": "Welcome Sign"
+}

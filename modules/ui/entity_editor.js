@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
 import { presetManager } from '../presets';
@@ -41,7 +40,7 @@ export function uiEntityEditor(context) {
         // Enter
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
 
         headerEnter
             .append('button')
@@ -62,7 +61,7 @@ export function uiEntityEditor(context) {
             .merge(headerEnter);
 
         header.selectAll('h3')
-            .text(_entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'));
+            .html(_entityIDs.length === 1 ? t.html('inspector.edit') : t.html('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
             .on('click', function() {
@@ -111,24 +110,6 @@ export function uiEntityEditor(context) {
             }
             body.call(section.render);
         });
-
-        body
-            .selectAll('.key-trap-wrap')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'key-trap-wrap')
-            .append('input')
-            .attr('type', 'text')
-            .attr('class', 'key-trap')
-            .on('keydown.key-trap', function() {
-                // On tabbing, send focus back to the first field on the inspector-body
-                // (probably the `name` field) #4159
-                if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
-                    d3_event.preventDefault();
-                    body.select('input').node().focus();
-                }
-            });
 
         context.history()
             .on('change.entity-editor', historyChanged);
@@ -295,7 +276,7 @@ export function uiEntityEditor(context) {
         _base = context.graph();
         _coalesceChanges = false;
 
-        loadActivePresets();
+        loadActivePresets(true);
 
         return entityEditor
             .modified(false);
@@ -309,7 +290,7 @@ export function uiEntityEditor(context) {
     };
 
 
-    function loadActivePresets() {
+    function loadActivePresets(isForNewSelection) {
 
         var graph = context.graph();
 
@@ -331,11 +312,14 @@ export function uiEntityEditor(context) {
             return presetManager.item(pID);
         });
 
-        // A "weak" preset doesn't set any tags. (e.g. "Address")
-        var weakPreset = _activePresets.length === 1 &&
-            Object.keys(_activePresets[0].addTags || {}).length === 0;
-        // Don't replace a weak preset with a fallback preset (e.g. "Point")
-        if (weakPreset && matches.length === 1 && matches[0].isFallback()) return;
+        if (!isForNewSelection) {
+            // A "weak" preset doesn't set any tags. (e.g. "Address")
+            var weakPreset = _activePresets.length === 1 &&
+                !_activePresets[0].isFallback() &&
+                Object.keys(_activePresets[0].addTags || {}).length === 0;
+            // Don't replace a weak preset with a fallback preset (e.g. "Point")
+            if (weakPreset && matches.length === 1 && matches[0].isFallback()) return;
+        }
 
         entityEditor.presets(matches);
     }

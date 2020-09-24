@@ -56,14 +56,13 @@ export function uiIssuesInfo(context) {
                 return 'chip ' + d.id + '-count';
             })
             .attr('href', '#')
-            .attr('tabindex', -1)
             .each(function(d) {
 
                 var chipSelection = d3_select(this);
 
                 var tooltipBehavior = uiTooltip()
                     .placement('top')
-                    .title(t(d.descriptionID));
+                    .title(t.html(d.descriptionID));
 
                 chipSelection
                     .call(tooltipBehavior)
@@ -84,7 +83,7 @@ export function uiIssuesInfo(context) {
 
         enter.merge(chips)
             .selectAll('span.count')
-            .text(function(d) {
+            .html(function(d) {
                 return d.count.toString();
             });
     }

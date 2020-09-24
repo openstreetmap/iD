@@ -23,13 +23,13 @@ export function uiStatus(context) {
 
                 } else if (apiStatus === 'rateLimited') {
                     selection
-                        .text(t('osm_api_status.message.rateLimit'))
+                        .html(t.html('osm_api_status.message.rateLimit'))
                         .append('a')
                         .attr('class', 'api-status-login')
                         .attr('target', '_blank')
                         .call(svgIcon('#iD-icon-out-link', 'inline'))
                         .append('span')
-                        .text(t('login'))
+                        .html(t.html('login'))
                         .on('click.login', function() {
                             d3_event.preventDefault();
                             osm.authenticate();
@@ -47,10 +47,10 @@ export function uiStatus(context) {
                     // eslint-disable-next-line no-warning-comments
                     // TODO: nice messages for different error types
                     selection
-                        .text(t('osm_api_status.message.error') + ' ')
+                        .html(t.html('osm_api_status.message.error') + ' ')
                         .append('a')
                         // let the user manually retry their connection directly
-                        .text(t('osm_api_status.retry'))
+                        .html(t.html('osm_api_status.retry'))
                         .on('click.retry', function() {
                             d3_event.preventDefault();
                             throttledRetry();
@@ -58,9 +58,9 @@ export function uiStatus(context) {
                 }
 
             } else if (apiStatus === 'readonly') {
-                selection.text(t('osm_api_status.message.readonly'));
+                selection.html(t.html('osm_api_status.message.readonly'));
             } else if (apiStatus === 'offline') {
-                selection.text(t('osm_api_status.message.offline'));
+                selection.html(t.html('osm_api_status.message.offline'));
             }
 
             selection.attr('class', 'api-status ' + (err ? 'error' : apiStatus));

@@ -23,9 +23,7 @@ export function uiInspector(context) {
             .autofocus(_newFeature)
             .on('choose', inspector.setPreset)
             .on('cancel', function() {
-                wrap.transition()
-                    .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
-                editorPane.call(entityEditor);
+                inspector.setPreset();
             });
 
         entityEditor
@@ -87,10 +85,14 @@ export function uiInspector(context) {
 
         if (shouldDefaultToPresetList()) {
             wrap.style('right', '-100%');
-            presetPane.call(presetList);
+            editorPane.classed('hide', true);
+            presetPane.classed('hide', false)
+                .call(presetList);
         } else {
             wrap.style('right', '0%');
-            editorPane.call(entityEditor);
+            presetPane.classed('hide', true);
+            editorPane.classed('hide', false)
+                .call(entityEditor);
         }
 
         var footer = selection.selectAll('.footer')
@@ -109,8 +111,15 @@ export function uiInspector(context) {
 
     inspector.showList = function(presets) {
 
+        presetPane.classed('hide', false);
+
         wrap.transition()
-            .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
+            .styleTween('right', function() {
+                return d3_interpolate('0%', '-100%');
+            })
+            .on('end', function () {
+                editorPane.classed('hide', true);
+            });
 
         if (presets) {
             presetList.presets(presets);
@@ -123,16 +132,25 @@ export function uiInspector(context) {
     inspector.setPreset = function(preset) {
 
         // upon setting multipolygon, go to the area preset list instead of the editor
-        if (preset.id === 'type/multipolygon') {
+        if (preset && preset.id === 'type/multipolygon') {
             presetPane
                 .call(presetList.autofocus(true));
 
         } else {
+            editorPane.classed('hide', false);
             wrap.transition()
-                .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+                .styleTween('right', function() {
+                    return d3_interpolate('-100%', '0%');
+                })
+                .on('end', function () {
+                    presetPane.classed('hide', true);
+                });
 
+            if (preset) {
+                entityEditor.presets([preset]);
+            }
             editorPane
-                .call(entityEditor.presets([preset]));
+                .call(entityEditor);
         }
 
     };

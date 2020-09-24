@@ -17,5 +17,9 @@
         "type": "route",
         "route": "power"
     },
+    "reference": {
+        "key": "route",
+        "value": "power"
+    },
     "name": "Power Route"
 }

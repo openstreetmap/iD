@@ -2,10 +2,6 @@
 
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=develop)](https://travis-ci.org/openstreetmap/iD)
 
-
-:warning: _We've recently changed our branch names. [`develop`](https://github.com/openstreetmap/iD/tree/develop) is now the default branch, replacing `2.x`. [`v3-prototype`](https://github.com/openstreetmap/iD/tree/v3-prototype) is now the alpha version of iD v3, replacing `master`. [`release`](https://github.com/openstreetmap/iD/tree/release) is still `release`._
-
-
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
@@ -28,7 +24,7 @@ if you're looking for something to do.
   * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.com
   * Development mirror of `v3-prototype` branch:  https://preview.ideditor.com/master
 
-Come on in, the water's lovely. More help? Ping `bhousel` or `quincylvania` on:
+Come on in, the water's lovely. More help? Ping `quincylvania` or `bhousel` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/)
 (`#id` or `#general` channels)
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC)

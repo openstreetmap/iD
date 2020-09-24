@@ -307,8 +307,8 @@ describe('iD.actionSplit', function () {
             ]);
 
             var g1 = iD.actionSplit('a', ['='])(graph);
-            expect(g1.entity('-').nodes).to.eql(['a', 'b', 'c']);
-            expect(g1.entity('=').nodes).to.eql(['c', 'd', 'a']);
+            expect(g1.entity('-').nodes).to.eql(['c', 'd', 'a']);
+            expect(g1.entity('=').nodes).to.eql(['a', 'b', 'c']);
 
             var g2 = iD.actionSplit('b', ['='])(graph);
             expect(g2.entity('-').nodes).to.eql(['b', 'c', 'd']);
@@ -319,8 +319,8 @@ describe('iD.actionSplit', function () {
             expect(g3.entity('=').nodes).to.eql(['a', 'b', 'c']);
 
             var g4 = iD.actionSplit('d', ['='])(graph);
-            expect(g4.entity('-').nodes).to.eql(['d', 'a', 'b']);
-            expect(g4.entity('=').nodes).to.eql(['b', 'c', 'd']);
+            expect(g4.entity('-').nodes).to.eql(['b', 'c', 'd']);
+            expect(g4.entity('=').nodes).to.eql(['d', 'a', 'b']);
         });
     });
 
@@ -957,17 +957,17 @@ describe('iD.actionSplit', function () {
             it('splits spoon2 route at d', function () {
                 //
                 // Expected result:
-                //    b <-- c
-                //    ‖     |
-                //    a ==> d ~~~> e ~~~> f
+                //    b <== c
+                //    |     ‖
+                //    a --> d ~~~> e ~~~> f
                 //
                 //    Relation: ['~', '-', '=', '~']
                 //
                 var graph = spoon2;
                 graph = iD.actionSplit('d', ['='])(graph);
 
-                expect(graph.entity('-').nodes).to.eql(['d', 'c', 'b']);
-                expect(graph.entity('=').nodes).to.eql(['b', 'a', 'd']);
+                expect(graph.entity('-').nodes).to.eql(['b', 'a', 'd']);
+                expect(graph.entity('=').nodes).to.eql(['d', 'c', 'b']);
                 expect(graph.entity('~').nodes).to.eql(['d', 'e', 'f']);
                 expect(members(graph)).to.eql(['~', '-', '=', '~']);
             });
@@ -993,17 +993,17 @@ describe('iD.actionSplit', function () {
             it('splits spoon4 route at d', function () {
                 //
                 // Expected result:
-                //    b <-- c
-                //    ‖     |
-                //    a ==> d <~~~ e <~~~ f
+                //    b <== c
+                //    |     ‖
+                //    a --> d <~~~ e <~~~ f
                 //
                 //    Relation: ['~', '-', '=', '~']
                 //
                 var graph = spoon4;
                 graph = iD.actionSplit('d', ['='])(graph);
 
-                expect(graph.entity('-').nodes).to.eql(['d', 'c', 'b']);
-                expect(graph.entity('=').nodes).to.eql(['b', 'a', 'd']);
+                expect(graph.entity('-').nodes).to.eql(['b', 'a', 'd']);
+                expect(graph.entity('=').nodes).to.eql(['d', 'c', 'b']);
                 expect(graph.entity('~').nodes).to.eql(['f', 'e', 'd']);
                 expect(members(graph)).to.eql(['~', '-', '=', '~']);
             });
@@ -1130,8 +1130,8 @@ describe('iD.actionSplit', function () {
 
                 graph = iD.actionSplit('b', ['~'])(graph);
 
-                expect(graph.entity('-').nodes).to.eql(['a', 'b']);
-                expect(graph.entity('~').nodes).to.eql(['b', 'c']);
+                expect(graph.entity('-').nodes).to.eql(['b', 'c']);
+                expect(graph.entity('~').nodes).to.eql(['a', 'b']);
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
             });

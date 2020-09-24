@@ -10,11 +10,17 @@ import { utilArrayUniq } from '../util';
 */
 export function svgDefs(context) {
 
+    var _defsSelection = d3_select(null);
+
+    var _spritesheetIds = [
+        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'tnp-sprite', 'community-sprite'
+    ];
+
     function drawDefs(selection) {
-        var defs = selection.append('defs');
+        _defsSelection = selection.append('defs');
 
         // add markers
-        defs
+        _defsSelection
             .append('marker')
             .attr('id', 'ideditor-oneway-marker')
             .attr('viewBox', '0 0 10 5')
@@ -37,7 +43,7 @@ export function svgDefs(context) {
         // (also, it's slightly nicer if we can control the
         // positioning for different tags)
         function addSidedMarker(name, color, offset) {
-            defs
+            _defsSelection
                 .append('marker')
                 .attr('id', 'ideditor-sided-marker-' + name)
                 .attr('viewBox', '0 0 2 2')
@@ -64,7 +70,7 @@ export function svgDefs(context) {
         addSidedMarker('barrier', '#ddd', 1);
         addSidedMarker('man_made', '#fff', 0);
 
-        defs
+        _defsSelection
             .append('marker')
             .attr('id', 'ideditor-viewfield-marker')
             .attr('viewBox', '0 0 16 16')
@@ -83,7 +89,7 @@ export function svgDefs(context) {
             .attr('stroke-width', '0.5px')
             .attr('stroke-opacity', '0.75');
 
-        defs
+        _defsSelection
             .append('marker')
             .attr('id', 'ideditor-viewfield-marker-wireframe')
             .attr('viewBox', '0 0 16 16')
@@ -102,7 +108,7 @@ export function svgDefs(context) {
             .attr('stroke-opacity', '0.75');
 
         // add patterns
-        var patterns = defs.selectAll('pattern')
+        var patterns = _defsSelection.selectAll('pattern')
             .data([
                 // pattern name, pattern image name
                 ['beach', 'dots'],
@@ -161,7 +167,7 @@ export function svgDefs(context) {
             });
 
         // add clip paths
-        defs.selectAll('clipPath')
+        _defsSelection.selectAll('clipPath')
             .data([12, 18, 20, 32, 45])
             .enter()
             .append('clipPath')
@@ -173,20 +179,17 @@ export function svgDefs(context) {
             .attr('height', function (d) { return d; });
 
         // add symbol spritesheets
-        defs
-            .call(drawDefs.addSprites, [
-                'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'tnp-sprite', 'community-sprite'
-            ], true);
+        addSprites(_spritesheetIds, true);
     }
 
+    function addSprites(ids, overrideColors) {
+        _spritesheetIds = utilArrayUniq(_spritesheetIds.concat(ids));
 
-    drawDefs.addSprites = function(selection, ids, overrideColors) {
-        var spritesheets = selection.selectAll('.spritesheet');
-        var currData = spritesheets.data();
-        var data = utilArrayUniq(currData.concat(ids));
+        var spritesheets = _defsSelection
+            .selectAll('.spritesheet')
+            .data(_spritesheetIds);
 
         spritesheets
-            .data(data)
             .enter()
             .append('g')
             .attr('class', function(d) { return 'spritesheet spritesheet-' + d; })
@@ -208,8 +211,13 @@ export function svgDefs(context) {
                         /* ignore */
                     });
             });
-    };
 
+        spritesheets
+            .exit()
+            .remove();
+    }
+
+    drawDefs.addSprites = addSprites;
 
     return drawDefs;
 }

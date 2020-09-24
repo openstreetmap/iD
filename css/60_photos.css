@@ -304,22 +304,16 @@ label.streetside-hires {
     border-radius: 4px;
     top: -25px;
 }
-#ideditor-mly .domRenderer .Attribution {
-    /* we will roll our own to avoid async update issues like #4526 */
-    display: none;
+
+.mly-wrapper .AttributionContainer .AttributionIconContainer .AttributionMapillaryLogo {
+    margin-top: 3px;
 }
 
-.mly-wrapper .photo-attribution a:active {
-    color: #35af6d;
-}
-@media (hover: hover) {
-    .mly-wrapper .photo-attribution a:hover {
-        color: #35af6d;
-    }
-}
-
-.mly-wrapper .mapillary-js-dom {
-    z-index: 9;
+.mly-wrapper .AttributionContainer .AttributionImageContainer {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 300;
+    overflow: hidden;
 }
 
 

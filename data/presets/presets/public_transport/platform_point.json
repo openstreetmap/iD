@@ -5,6 +5,7 @@
         "ref_stop_position",
         "network",
         "operator",
+        "vehicles",
         "departures_board",
         "shelter"
     ],

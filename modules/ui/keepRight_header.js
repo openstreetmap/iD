@@ -8,13 +8,13 @@ export function uiKeepRightHeader() {
 
   function issueTitle(d) {
     const { itemType, parentIssueType } = d;
-    const unknown = t('inspector.unknown');
+    const unknown = t.html('inspector.unknown');
     let replacements = d.replacements || {};
     replacements.default = unknown;  // special key `default` works as a fallback string
 
-    let title = t(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    let title = t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
     if (title === unknown) {
-      title = t(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
+      title = t.html(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
     }
     return title;
   }
@@ -47,7 +47,7 @@ export function uiKeepRightHeader() {
     headerEnter
       .append('div')
         .attr('class', 'qa-header-label')
-        .text(issueTitle);
+        .html(issueTitle);
   }
 
 

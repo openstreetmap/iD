@@ -7,5 +7,9 @@
         "type": "restriction",
         "restriction": "only_left_turn"
     },
+    "reference": {
+        "key": "restriction",
+        "value": "only_left_turn"
+    },
     "name": "Only Left Turn"
 }
