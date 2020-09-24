@@ -88,7 +88,7 @@ export function validationMismatchedGeometry() {
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.html('issues.tag_suggests_area.message', {
-                    feature: utilDisplayLabel(entity, context.graph()),
+                    feature: utilDisplayLabel(entity, 'area'),
                     tag: utilTagText({ tags: tagSuggestingArea })
                 }) : '';
             },
@@ -161,7 +161,7 @@ export function validationMismatchedGeometry() {
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.html('issues.vertex_as_point.message', {
-                        feature: utilDisplayLabel(entity, context.graph())
+                        feature: utilDisplayLabel(entity, 'vertex')
                     }) : '';
                 },
                 reference: function showReference(selection) {
@@ -184,7 +184,7 @@ export function validationMismatchedGeometry() {
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
                     return entity ? t.html('issues.point_as_vertex.message', {
-                        feature: utilDisplayLabel(entity, context.graph())
+                        feature: utilDisplayLabel(entity, 'point')
                     }) : '';
                 },
                 reference: function showReference(selection) {
