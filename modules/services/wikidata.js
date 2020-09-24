@@ -87,6 +87,10 @@ export default {
     languagesToQuery: function() {
         return localizer.localeCodes().map(function(code) {
             return code.toLowerCase();
+        }).filter(function(code) {
+            // HACK: en-us isn't a wikidata language. We should really be filtering by
+            // the languages known to be supported by wikidata.
+            return code !== 'en-us';
         });
     },
 
