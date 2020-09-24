@@ -957,23 +957,7 @@ a.hide-toggle {
 }
 
 .feature-list-item {
-    background-color: #fff;
     display: flex;
-}
-.feature-list-item:active,
-.feature-list-item:focus {
-    background-color: #ececec;
-}
-@media (hover: hover) {
-    .feature-list-item:hover {
-        background-color: #ececec;
-    }
-}
-.feature-list-item.hover {
-    background-color: #ececec;
-}
-.feature-list-item button {
-    background: transparent;
 }
 .feature-list-item .label {
     text-align: left;
@@ -1193,7 +1177,7 @@ a.hide-toggle {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    background-color: #f6f6f6;
+    background: #f6f6f6;
     text-align: left;
     padding: 5px 10px;
     border-left: 1px solid rgba(0, 0, 0, .1);
@@ -1250,6 +1234,8 @@ a.hide-toggle {
 .preset-list-button-wrap button.tag-reference-button {
     width: 32px;
     flex: 0 0 auto;
+}
+.preset-list-button-wrap button.tag-reference-button:not(:hover):not(:active):not(:focus) {
     background: #f6f6f6;
 }
 .ideditor[dir='ltr'] .preset-list-button-wrap button.tag-reference-button {
@@ -1263,15 +1249,6 @@ a.hide-toggle {
 }
 .ideditor[dir='rtl'] .preset-list-button-wrap:not(.category) button:last-child {
     border-radius: 4px 0 0 4px;
-}
-.preset-list-button-wrap button.tag-reference-button:active,
-.preset-list-button-wrap button.tag-reference-button:hover {
-    background: #f1f1f1;
-}
-@media (hover: hover) {
-    .preset-list-button-wrap button.tag-reference-button:hover {
-        background: #f1f1f1;
-    }
 }
 .preset-list-button-wrap button.tag-reference-button .icon {
     opacity: .5;
@@ -1419,24 +1396,17 @@ a.hide-toggle {
 }
 
 .field-label button {
-    flex: 0 0 32px;
+    flex: 0 0 auto;
     border-left: 1px solid #ccc;
     width: 32px;
     border-radius: 0;
-    background: #f6f6f6;
 }
 .ideditor[dir='rtl'] .field-label button {
     border-left: none;
     border-right: 1px solid #ccc;
 }
-.field-label button:active,
-.field-label button:focus {
-    background: #f1f1f1;
-}
-@media (hover: hover) {
-    .field-label button:hover {
-        background: #f1f1f1;
-    }
+.field-label button:not(:hover):not(:active):not(:focus) {
+    background: none;
 }
 .field-label .icon {
     opacity: .5;

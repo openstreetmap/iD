@@ -71,7 +71,7 @@ export function uiSectionSelectionList(context) {
 
         // Enter
         var enter = items.enter()
-            .append('div')
+            .append('button')
             .attr('class', 'feature-list-item')
             .on('click', selectEntity);
 
@@ -86,7 +86,7 @@ export function uiSectionSelectionList(context) {
             });
 
         var label = enter
-            .append('button')
+            .append('div')
             .attr('class', 'label');
 
         enter
