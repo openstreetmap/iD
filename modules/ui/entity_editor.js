@@ -40,7 +40,7 @@ export function uiEntityEditor(context) {
         // Enter
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
 
         headerEnter
             .append('button')

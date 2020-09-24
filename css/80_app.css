@@ -191,6 +191,7 @@ input[type=email] {
     height: 2.585em;
 }
 textarea  {
+    min-height: 2em;
     padding-top: 5px;
     padding-bottom: 5px;
     resize: vertical;
@@ -4657,8 +4658,6 @@ img.tile-debug {
 .modal-section.buttons .action {
     display: inline-block;
     margin: 0 10px;
-    text-align: center;
-    vertical-align: middle;
 }
 
 .save-section .buttons {
