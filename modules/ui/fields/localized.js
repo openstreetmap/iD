@@ -332,7 +332,9 @@ export function uiFieldLocalized(field, context) {
                         var sTag = s.id.split('/', 2);
                         var sKey = sTag[0];
                         var sValue = sTag[1];
+                        var subtitle = s.subtitle()
                         var name = s.name();
+                        if (subtitle) name += ' – ' + subtitle;
                         var dist = utilEditDistance(value, name.substring(0, value.length));
                         var matchesPreset = (pKey === sKey && (!pValue || pValue === sValue));
 

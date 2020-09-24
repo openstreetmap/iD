@@ -330,7 +330,7 @@ export function uiPresetList(context) {
                 .attr('class', 'namepart')
                 .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
-                .html(function() { return preset.name() + '&hellip;'; });
+                .html(function() { return preset.nameLabel() + '&hellip;'; });
 
             box = selection.append('div')
                 .attr('class', 'subgrid')
@@ -393,9 +393,13 @@ export function uiPresetList(context) {
                 .append('div')
                 .attr('class', 'label-inner');
 
-            // NOTE: split/join on en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
+            var nameparts = [
+                preset.nameLabel(),
+                preset.subtitleLabel()
+            ].filter(Boolean);
+
             label.selectAll('.namepart')
-                .data(preset.name().split(' – '))
+                .data(nameparts)
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')
@@ -462,10 +466,10 @@ export function uiPresetList(context) {
 
             if (isHiddenPreset) {
                 var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
-                var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-                var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
                 d3_select(this).call(uiTooltip()
-                    .title(t.html('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
+                    .title(t.html('inspector.hidden_preset.' + (isAutoHidden ? 'zoom' : 'manual'), {
+                        features: t.html('feature.' + hiddenPresetFeaturesId + '.description')
+                    }))
                     .placement(index < 2 ? 'bottom' : 'top')
                 );
             }

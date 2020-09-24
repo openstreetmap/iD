@@ -95,12 +95,14 @@ export function uiSectionFeatureType(context) {
                 .preset(_presets.length === 1 ? _presets[0] : presetManager.item('point'))
             );
 
-        // NOTE: split on en-dash, not a hyphen (to avoid conflict with hyphenated names)
-        var names = _presets.length === 1 ? _presets[0].name().split(' – ') : [t('inspector.multiple_types')];
+        var nameparts = _presets.length === 1 ? [
+            _presets[0].nameLabel(),
+            _presets[0].subtitleLabel()
+        ].filter(Boolean) : [t('inspector.multiple_types')];
 
         var label = selection.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
-            .data(names, function(d) { return d; });
+            .data(nameparts, function(d) { return d; });
 
         nameparts.exit()
             .remove();

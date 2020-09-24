@@ -91,13 +91,29 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
 
   _this.name = () => {
-    if (_this.suggestion) {
-      let path = presetID.split('/');
-      path.pop();  // remove brand name
-      // NOTE: insert an en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
-      return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
-    }
     return _this.t('name', { 'default': _this.originalName });
+  };
+
+  _this.nameLabel = () => {
+    return _this.t.html('name', { 'default': _this.originalName });
+  };
+
+  _this.subtitle = () => {
+      if (_this.suggestion) {
+        let path = presetID.split('/');
+        path.pop();  // remove brand name
+        return t('presets.presets.' + path.join('/') + '.name');
+      }
+      return null;
+  };
+
+  _this.subtitleLabel = () => {
+      if (_this.suggestion) {
+        let path = presetID.split('/');
+        path.pop();  // remove brand name
+        return t.html('presets.presets.' + path.join('/') + '.name');
+      }
+      return null;
   };
 
 
