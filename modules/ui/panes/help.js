@@ -144,13 +144,14 @@ export function uiPaneHelp(context) {
             'boundary',
             'boundary_add'
         ]],
-        ['edit_menu', [
+        ['operations', [
             'intro',
-            'edit_menu_h',
-            'command_reverse',
-            'command_disconnect',
-            'command_merge',
-            'command_extract'
+            'intro_2',
+            'reverse',
+            'disconnect',
+            'merge',
+            'split',
+            'extract'
         ]],
         ['notes', [
             'intro',
@@ -233,7 +234,6 @@ export function uiPaneHelp(context) {
         'help.relations.turn_restriction_h': 3,
         'help.relations.route_h': 3,
         'help.relations.boundary_h': 3,
-        'help.edit_menu.edit_menu_h': 3,
         'help.notes.add_note_h': 3,
         'help.notes.update_note_h': 3,
         'help.notes.save_note_h': 3,

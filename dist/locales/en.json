@@ -1835,6 +1835,16 @@
                 "boundary": "A *boundary* relation is a group of one or more line features that together form an administrative boundary.",
                 "boundary_add": "To add a feature to a boundary relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation."
             },
+            "operations": {
+                "title": "Operations",
+                "intro": "*Operations* are special commands you can use to edit features. {rightclick} Right-click or {longpress_icon} long-press any feature to view the available operations.",
+                "intro_2": "Each operation has its own keyboard shortcut. Most operations can be applied to multiple features at once.",
+                "reverse": "The {reverse_icon} **{reverse}** operation changes the direction of features like one-way roads, traffic signs, streams, and cliffs.",
+                "disconnect": "The {disconnect_icon} **{disconnect}** operation separates connected features from each other.",
+                "merge": "The {merge_icon} **{merge}** operation combines multiple features into one.",
+                "split": "The {split_icon} **{split}** operation divides lines at the selected point. This is useful when you want to set different attributes on different parts of a line.",
+                "extract": "The {extract_icon} **{extract}** operation creates a point out of a line or area. This can be used to separate points of interest from buildings."
+            },
             "notes": {
                 "title": "Notes",
                 "intro": "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, open the {data_icon} **{map_data}** panel and enable the {osm_notes} layer.",
