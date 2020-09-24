@@ -746,25 +746,6 @@ button.add-note svg.icon {
     justify-content: center;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.header-block {
-    display: flex;
-    align-items: center;
-}
-.header-block-outer {
-    width: 20%;
-}
-
-.header-block-close {
-    display: flex;
-    justify-content: flex-end;
-    height: 100%;
-}
-
 /* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
 .hide-toggle .icon.pre-text {

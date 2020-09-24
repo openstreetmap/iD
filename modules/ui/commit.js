@@ -213,21 +213,14 @@ export function uiCommit(context) {
 
         var headerTitle = header.enter()
             .append('div')
-            .attr('class', 'header fillL header-container');
+            .attr('class', 'header fillL');
 
         headerTitle
             .append('div')
-            .attr('class', 'header-block header-block-outer');
-
-        headerTitle
-            .append('div')
-            .attr('class', 'header-block')
             .append('h3')
             .html(t.html('commit.title'));
 
         headerTitle
-            .append('div')
-            .attr('class', 'header-block header-block-outer header-block-close')
             .append('button')
             .attr('class', 'close')
             .on('click', function() {
