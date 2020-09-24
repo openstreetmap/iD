@@ -2603,7 +2603,7 @@ img.tag-reference-wiki-image {
     flex: 0 0 62px;
 }
 .add-row button {
-    height: 30px;
+    padding: 5px;
     background: rgba(0,0,0,.5);
 }
 .add-row button:focus,
