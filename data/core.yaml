@@ -2203,7 +2203,7 @@ en:
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
-        split: "Split a line into two at the selected node"
+        split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"
         nudge: "Nudge selected features"

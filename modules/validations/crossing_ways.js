@@ -647,7 +647,7 @@ export function validationCrossingWays(context) {
                         // just bound the structure at the existing end node
                         if (!newNode) newNode = endNode;
 
-                        var splitAction = actionSplit(newNode.id)
+                        var splitAction = actionSplit([newNode.id])
                             .limitWays(resultWayIDs); // only split selected or created ways
 
                         // do the split

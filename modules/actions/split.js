@@ -3,7 +3,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { osmIsOldMultipolygonOuterMember } from '../osm/multipolygon';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
-import { utilArrayIntersection, utilWrap } from '../util';
+import { utilArrayIntersection, utilWrap, utilArrayUniq } from '../util';
 
 
 // Split a way at the given node.
@@ -20,13 +20,16 @@ import { utilArrayIntersection, utilWrap } from '../util';
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-export function actionSplit(nodeId, newWayIds) {
+export function actionSplit(nodeIds, newWayIds) {
+    // accept single ID for backwards-compatiblity
+    if (typeof nodeIds === 'string') nodeIds = [nodeIds];
+
     var _wayIDs;
     // the strategy for picking which way will have a new version and which way is newly created
     var _keepHistoryOn = 'longest'; // 'longest', 'first'
 
     // The IDs of the ways actually created by running this action
-    var createdWayIDs = [];
+    var _createdWayIDs = [];
 
     function dist(graph, nA, nB) {
         var locA = graph.entity(nA).loc;
@@ -91,7 +94,7 @@ export function actionSplit(nodeId, newWayIds) {
         return totalLength;
     }
 
-    function split(graph, wayA, newWayId) {
+    function split(graph, nodeId, wayA, newWayId) {
         var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var origNodes = wayA.nodes.slice();
         var nodesA;
@@ -220,25 +223,30 @@ export function actionSplit(nodeId, newWayIds) {
             graph = graph.replace(wayB.update({ tags: {} }));
         }
 
-        createdWayIDs.push(wayB.id);
+        _createdWayIDs.push(wayB.id);
 
         return graph;
     }
 
     var action = function(graph) {
-        var candidates = action.ways(graph);
-        createdWayIDs = [];
-        for (var i = 0; i < candidates.length; i++) {
-            graph = split(graph, candidates[i], newWayIds && newWayIds[i]);
+        _createdWayIDs = [];
+        var newWayIndex = 0;
+        for (var i = 0; i < nodeIds.length; i++) {
+            var nodeId = nodeIds[i];
+            var candidates = action.waysForNode(nodeId, graph);
+            for (var j = 0; j < candidates.length; j++) {
+                graph = split(graph, nodeId, candidates[j], newWayIds && newWayIds[newWayIndex]);
+                newWayIndex += 1;
+            }
         }
         return graph;
     };
 
     action.getCreatedWayIDs = function() {
-        return createdWayIDs;
+        return _createdWayIDs;
     };
 
-    action.ways = function(graph) {
+    action.waysForNode = function(nodeId, graph) {
         var node = graph.entity(nodeId);
         var parents = graph.parentWays(node);
         var hasLines = parents.some(function(parent) {
@@ -266,11 +274,20 @@ export function actionSplit(nodeId, newWayIds) {
         });
     };
 
+    action.ways = function(graph) {
+        return utilArrayUniq([].concat.apply([], nodeIds.map(function(nodeId) {
+            return action.waysForNode(nodeId, graph);
+        })));
+    };
+
 
     action.disabled = function(graph) {
-        var candidates = action.ways(graph);
-        if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length)) {
-            return 'not_eligible';
+        for (var i = 0; i < nodeIds.length; i++) {
+            var nodeId = nodeIds[i];
+            var candidates = action.waysForNode(nodeId, graph);
+            if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length)) {
+                return 'not_eligible';
+            }
         }
     };
 
