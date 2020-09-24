@@ -11,6 +11,7 @@ import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 
 export {
+    uiFieldCombo as uiFieldManyCombo,
     uiFieldCombo as uiFieldMultiCombo,
     uiFieldCombo as uiFieldNetworkCombo,
     uiFieldCombo as uiFieldSemiCombo,
@@ -20,7 +21,7 @@ export {
 
 export function uiFieldCombo(field, context) {
     var dispatch = d3_dispatch('change');
-    var _isMulti = (field.type === 'multiCombo');
+    var _isMulti = (field.type === 'multiCombo' || field.type === 'manyCombo');
     var _isNetwork = (field.type === 'networkCombo');
     var _isSemi = (field.type === 'semiCombo');
     var _optstrings = field.strings && field.strings.options;

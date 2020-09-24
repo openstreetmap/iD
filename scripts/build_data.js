@@ -537,15 +537,14 @@ function generateTaginfo(presets, fields) {
     const field = fields[id];
     const keys = field.keys || [ field.key ] || [];
     const isRadio = (field.type === 'radio' || field.type === 'structureRadio');
-    const isMulticombo = field.type === 'multiCombo';
 
     keys.forEach(key => {
-      if (field.strings && field.strings.options && !isRadio && (!isMulticombo || field.key)) {
+      if (field.strings && field.strings.options && !isRadio && field.type !== 'manyCombo') {
         let values = Object.keys(field.strings.options);
         values.forEach(value => {
           if (value === 'undefined' || value === '*' || value === '') return;
           let tag;
-          if (isMulticombo) {
+          if (field.type === 'multiCombo') {
             tag = { key: key + value };
           } else {
             tag = { key: key, value: value };

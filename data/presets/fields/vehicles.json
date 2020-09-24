@@ -9,7 +9,7 @@
         "monorail",
         "ferry"
     ],
-    "type": "multiCombo",
+    "type": "manyCombo",
     "label": "Vehicles",
     "strings": {
         "options": {

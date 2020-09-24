@@ -248,7 +248,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     function shouldInherit(f) {
       if (f.key && _this.tags[f.key] !== undefined &&
         // inherit anyway if multiple values are allowed or just a checkbox
-        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check'
+        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'manyCombo' && f.type !== 'check'
       ) return false;
 
       return true;
