@@ -1251,7 +1251,7 @@
     {"key": "route", "value": "bicycle", "description": "🄿 Cycle Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/bicycle-15.svg"},
     {"key": "route", "value": "bus", "description": "🄿 Bus Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/bus.svg"},
     {"key": "route", "value": "detour", "description": "🄿 Detour Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/route-detour.svg"},
-    {"key": "route", "value": "foot", "description": "🄿 Foot Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
+    {"key": "route", "value": "foot", "description": "🄿 Walking Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/pedestrian.svg"},
     {"key": "route", "value": "hiking", "description": "🄿 Hiking Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-hiking.svg"},
     {"key": "route", "value": "horse", "description": "🄿 Riding Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/horse-riding-15.svg"},
     {"key": "route", "value": "light_rail", "description": "🄿 Light Rail Route", "object_types": ["relation"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/light_rail.svg"},
