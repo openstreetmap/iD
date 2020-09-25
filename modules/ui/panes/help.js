@@ -147,11 +147,21 @@ export function uiPaneHelp(context) {
         ['operations', [
             'intro',
             'intro_2',
+            'straighten',
+            'orthogonalize',
+            'circularize',
+            'move',
+            'rotate',
+            'reflect',
+            'continue',
             'reverse',
             'disconnect',
-            'merge',
             'split',
-            'extract'
+            'extract',
+            'merge',
+            'delete',
+            'downgrade',
+            'copy_paste'
         ]],
         ['notes', [
             'intro',
