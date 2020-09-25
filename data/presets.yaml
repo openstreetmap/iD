@@ -9010,8 +9010,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Ferry Route'', separated by commas>'
       type/route/foot:
         # 'type=route, route=foot'
-        name: Foot Route
-        terms: '<translate with synonyms or related terms for ''Foot Route'', separated by commas>'
+        name: Walking Route
+        terms: '<translate with synonyms or related terms for ''Walking Route'', separated by commas>'
       type/route/hiking:
         # 'type=route, route=hiking'
         name: Hiking Route
