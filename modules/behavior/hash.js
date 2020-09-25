@@ -140,12 +140,12 @@ export function behaviorHash(context) {
 
             context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
 
-            if (q.id) {
+            if (q.id && mode) {
                 var ids = q.id.split(',').filter(function(id) {
                     return context.hasEntity(id);
                 });
-                var skip = mode && mode.id === 'select' && utilArrayIdentical(mode.selectedIDs(), ids);
-                if (ids.length && !skip) {
+                if (ids.length &&
+                    (mode.id === 'browse' || (mode.id === 'select' && !utilArrayIdentical(mode.selectedIDs(), ids)))) {
                     context.enter(modeSelect(context, ids));
                     return;
                 }
