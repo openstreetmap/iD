@@ -62,7 +62,7 @@ export function behaviorHash(context) {
             if (selected.length > 1 ) {
                 contextual = t('title.labeled_and_more', {
                     labeled: firstLabel,
-                    count: (selected.length - 1).toString()
+                    count: selected.length - 1
                 });
             } else {
                 contextual = firstLabel;

@@ -22,7 +22,9 @@ en:
       context: "{base} – {context}"
       changes: "({changes}) {base}"
       changes_context: "({changes}) {base} – {context}"
-    labeled_and_more: "{labeled} and {count} more"
+    labeled_and_more:
+      one: "{labeled} and {count} more"
+      other: "{labeled} and {count} more"
   modes:
     add_area:
       title: Area
