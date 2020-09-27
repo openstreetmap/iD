@@ -1724,7 +1724,7 @@
                 "title": "Editing & Saving",
                 "select_h": "Select",
                 "select_left_click": "{leftclick} Left-click or {tap_icon} tap a feature to select it. This will highlight it with a pulsing glow and display further details about it in the sidebar.",
-                "select_right_click": "{rightclick} Right-click or {longpress_icon} long-press a feature to display the edit menu, which provides commands such as copy, rotate, and delete.",
+                "select_right_click": "{rightclick} Right-click or {longpress_icon} long-press a feature to display the edit menu, which provides operations such as copy, rotate, and delete.",
                 "select_space": "The `{space}` key can also be used instead of left-click when selecting and drawing.",
                 "multiselect_h": "Multiselect",
                 "multiselect": "Selecting multiple features together lets you quickly edit them all at once.",
@@ -1767,7 +1767,7 @@
                 "move_point": "To move a point, {leftclick} left-click and drag it with a mouse or {touchdrag_icon} tap-and-drag it on a touchscreen.",
                 "delete_point_h": "Deleting Points",
                 "delete_point": "It's OK to delete features that don't exist in the real world. Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it.",
-                "delete_point_command": "To delete a point, {rightclick} right-click or {longpress_icon} long-press the point to show the edit menu, then use the {delete_icon} **{delete}** command."
+                "delete_point_command": "To delete a point, {rightclick} right-click or {longpress_icon} long-press the point to show the edit menu, then use the {delete_icon} **{delete}** operation."
             },
             "lines": {
                 "title": "Lines",
@@ -1786,13 +1786,13 @@
                 "connect_line_drag": "To connect a line to another feature, drag one of the line's nodes onto the other feature until both features snap together. Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features.",
                 "connect_line_tag": "If you know that the connection has traffic lights or crosswalks, you can add them by selecting the connecting node and using the feature editor to select the correct feature's type.",
                 "disconnect_line_h": "Disconnecting Lines",
-                "disconnect_line_command": "To disconnect a road from another feature, {rightclick} right-click or {longpress_icon} long-press the connecting node and select the {disconnect_icon} **{disconnect}** command from the edit menu.",
+                "disconnect_line_command": "To disconnect a road from another feature, {rightclick} right-click or {longpress_icon} long-press the connecting node and choose the {disconnect_icon} **{disconnect}** operation from the edit menu.",
                 "move_line_h": "Moving Lines",
-                "move_line_command": "To move an entire line, {rightclick} right-click the line and select the {move_icon} **{move}** command from the edit menu. Then move the mouse, and {leftclick} left-click to place the line in a new location.",
+                "move_line_command": "To move an entire line, {rightclick} right-click the line and choose the {move_icon} **{move}** operation from the edit menu. Then move the mouse, and {leftclick} left-click to place the line in a new location.",
                 "move_line_connected": "Lines that are connected to other features will stay connected as you move the line to a new location. iD may prevent you from moving a line across another connected line.",
                 "delete_line_h": "Deleting Lines",
                 "delete_line": "If a line is entirely incorrect, for example a road that doesn't exist in the real world, it's OK to delete it. Be careful when deleting features: the background imagery you are using might be outdated, and a road that looks wrong could simply be newly built.",
-                "delete_line_command": "To delete a line, {rightclick} right-click or {longpress_icon} long-press the line to show the edit menu, then use the {delete_icon} **{delete}** command."
+                "delete_line_command": "To delete a line, {rightclick} right-click or {longpress_icon} long-press the line to show the edit menu, then use the {delete_icon} **{delete}** operation."
             },
             "areas": {
                 "title": "Areas",
@@ -1805,13 +1805,13 @@
                 "add_area_continue": "Continue placing nodes by {leftclick} clicking or {tap_icon} tapping along the edge of the area. While drawing, you can zoom in or drag the map in order to add more detail.",
                 "add_area_finish": "To finish an area, click or tap on the first or last node again or press `{return}`.",
                 "square_area_h": "Square Corners",
-                "square_area_command": "Many area features like buildings have square corners. To square the corners of an area, {rightclick} right-click or {longpress_icon} long-press the edge of the area and select the {orthogonalize_icon} **{orthogonalize}** command from the edit menu.",
+                "square_area_command": "Many area features like buildings have square corners. To square the corners of an area, {rightclick} right-click or {longpress_icon} long-press the edge of the area and choose the {orthogonalize_icon} **{orthogonalize}** operation from the edit menu.",
                 "modify_area_h": "Modifying Areas",
                 "modify_area_dragnode": "Often you'll see areas that aren't shaped correctly, for example a building that does not match up with the background imagery. To adjust the shape of an area, first select it. All nodes of the area will be drawn as small circles. You can then drag the nodes to better locations.",
                 "modify_area_addnode": "You can also create new nodes along an area by {leftclick}**x2** double-clicking or {doubletap_icon} double-tapping an edge, or by dragging the small triangles at the midpoints between nodes.",
                 "delete_area_h": "Deleting Areas",
                 "delete_area": "If an area is entirely incorrect, for example a building that doesn't exist in the real world, it's OK to delete it. Be cautious when deleting features - the background imagery you are using might be outdated, and a building that looks wrong could simply be newly built.",
-                "delete_area_command": "To delete an area, {rightclick} right-click or {longpress_icon} long-press the area to show the edit menu, then use the {delete_icon} **{delete}** command."
+                "delete_area_command": "To delete an area, {rightclick} right-click or {longpress_icon} long-press the area to show the edit menu, then use the {delete_icon} **{delete}** operation."
             },
             "relations": {
                 "title": "Relations",
@@ -1825,7 +1825,7 @@
                 "relation_types_h": "Relation Types",
                 "multipolygon_h": "Multipolygons",
                 "multipolygon": "A *multipolygon* relation is a group of one or more *outer* features and one or more inner features. The outer features define the outer edges of the multipolygon, and the inner features define sub-areas or holes cut out from the inside of the multipolygon.",
-                "multipolygon_create": "To create a multipolygon, for example a building with a hole in it, draw the outer edge as an area and the inner edge as a line or different kind of area. Then `{shift}`+{leftclick} left-click to select both features, {rightclick} right-click to show the edit menu, and select the {merge_icon} **{merge}** command.",
+                "multipolygon_create": "To create a multipolygon, for example a building with a hole in it, draw the outer edge as an area and the inner edge as a line or different kind of area. Then `{shift}`+{leftclick} left-click to select both features, {rightclick} right-click to show the edit menu, and choose the {merge_icon} **{merge}** operation.",
                 "multipolygon_merge": "Merging several lines or areas will create a new multipolygon relation with all selected areas as members. iD will choose the inner and outer roles automatically, based on which features are contained inside other features.",
                 "turn_restriction_h": "Turn restrictions",
                 "turn_restriction": "A *turn restriction* relation is a group of several road segments in an intersection. Turn restrictions consist of a *from* road, *via* node or roads, and a *to* road.",
@@ -2640,7 +2640,7 @@
                 "edit_menu_tank_touch": "**{longpress_icon} Long-press the storage tank you created to show the edit menu.**",
                 "circle_tank": "**Press the {circularize_icon} {circularize} button to make the tank a circle.**",
                 "retry_circle": "You didn't press the {circularize_icon} {circularize} button. Try again.",
-                "play": "Great Job! Practice tracing a few more buildings, and try some of the other commands on the edit menu. **When you are ready to continue to the next chapter, press '{next}'.**"
+                "play": "Great Job! Practice tracing a few more buildings, and try some of the other operations in the edit menu. **When you are ready to continue to the next chapter, press '{next}'.**"
             },
             "startediting": {
                 "title": "Start Editing",
