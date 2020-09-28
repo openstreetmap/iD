@@ -259,7 +259,6 @@ export function uiFieldLocalized(field, context) {
             var preset = presetManager.match(latest, context.graph());
             if (preset && preset.suggestion) return;   // already accepted
 
-            // note: here we are testing against "decorated" names, i.e. 'Starbucks – Cafe'
             var name = utilGetSetValue(input).trim();
             var matched = allSuggestions.filter(function(s) { return name === s.name(); });
 
@@ -292,25 +291,10 @@ export function uiFieldLocalized(field, context) {
         }
 
 
-        // user hit escape, clean whatever preset name appears after the last ' – '
+        // user hit escape
         function cancelBrand() {
             var name = utilGetSetValue(input);
-            var clean = cleanName(name);
-            if (clean !== name) {
-                utilGetSetValue(input, clean);
-                dispatch.call('change', this, { name: clean });
-            }
-        }
-
-        // Remove whatever is after the last ' – '
-        // NOTE: split/join on en-dash, not a hyphen (to avoid conflict with fr - nl names in Brussels etc)
-        function cleanName(name) {
-            var parts = name.split(' – ');
-            if (parts.length > 1) {
-                parts.pop();
-                name = parts.join(' – ');
-            }
-            return name;
+            dispatch.call('change', this, { name: name });
         }
 
 
@@ -340,8 +324,9 @@ export function uiFieldLocalized(field, context) {
 
                         if (dist < 1 || (matchesPreset && dist < 3)) {
                             var obj = {
+                                value: s.name(),
                                 title: name,
-                                value: name,
+                                display: s.nameLabel() + (subtitle ? ' – ' + s.subtitleLabel() : ''),
                                 suggestion: s,
                                 dist: dist + (matchesPreset ? 0 : 1)  // penalize if not matched preset
                             };
