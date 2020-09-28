@@ -2366,6 +2366,7 @@
     {"key": "type", "value": "shield", "description": "🄳 ➜ volcano:type=shield"},
     {"key": "type", "value": "strato", "description": "🄳 ➜ volcano:type=stratovolcano"},
     {"key": "unnamed", "description": "🄳 ➜ noname=*"},
+    {"key": "vending", "value": "parcel_mail_in;parcel_pickup", "description": "🄳 ➜ vending=parcel_pickup;parcel_mail_in"},
     {"key": "vhf_channel", "description": "🄳 ➜ vhf=*"},
     {"key": "volcano", "value": "extinct", "description": "🄳 ➜ volcano:status=extinct"},
     {"key": "wall_type", "value": "noise_barrier", "description": "🄳 ➜ wall=noise_barrier"},

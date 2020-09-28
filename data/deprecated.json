@@ -1559,6 +1559,10 @@
     "replace": {"noname": "$1"}
   },
   {
+    "old": {"vending": "parcel_mail_in;parcel_pickup"},
+    "replace": {"vending": "parcel_pickup;parcel_mail_in"}
+  },
+  {
     "old": {"vhf_channel": "*"},
     "replace": {"vhf": "$1"}
   },

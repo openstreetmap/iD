@@ -96,4 +96,12 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ leisure: 'ice_rink', sport: 'curling;ice_hockey;multi', name: 'Foo' });
     });
 
+    it('upgrades an entire semicolon-delimited tag value', function () {
+        var oldTags = { vending: 'parcel_mail_in;parcel_pickup' },
+            newTags = { vending: 'parcel_pickup;parcel_mail_in' },
+            entity = iD.osmEntity({ tags: { vending: 'parcel_mail_in;parcel_pickup', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ vending: 'parcel_pickup;parcel_mail_in', name: 'Foo' });
+    });
+
 });

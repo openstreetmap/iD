@@ -7,9 +7,15 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
         var semiIndex;
 
         for (var oldTagKey in oldTags) {
+            // wildcard match
             if (oldTags[oldTagKey] === '*') {
+                // note the value since we might need to transfer it
                 transferValue = tags[oldTagKey];
                 delete tags[oldTagKey];
+            // exact match
+            } else if (oldTags[oldTagKey] === tags[oldTagKey]) {
+                delete tags[oldTagKey];
+            // match is within semicolon-delimited values
             } else {
                 var vals = tags[oldTagKey].split(';').filter(Boolean);
                 var oldIndex = vals.indexOf(oldTags[oldTagKey]);
