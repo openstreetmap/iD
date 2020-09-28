@@ -2,7 +2,8 @@
 /* Downloads the latest translations from Transifex */
 const fs = require('fs');
 const prettyStringify = require('json-stringify-pretty-compact');
-const request = require('request').defaults({ maxSockets: 1 });
+const fetch = require('node-fetch');
+const btoa = require('btoa');
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
 
@@ -33,6 +34,13 @@ if (process.env.transifex_password) {
   auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 }
 /* eslint-enable no-process-env */
+
+const fetchOpts = {
+  headers: {
+    'Authorization': 'Basic ' + btoa(auth.user + ':' + auth.password),
+  }
+};
+
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 
 const languageInfo = languageNames.langNamesInNativeLang;
@@ -66,12 +74,15 @@ asyncMap(resourceIds, getResource, gotResource);
 
 function getResourceInfo(resourceId, callback) {
   let url = 'https://api.transifex.com/organizations/openstreetmap/projects/id-editor/resources/' + resourceId;
-  request.get(url, { auth : auth }, (err, resp, body) => {
-    if (err) return callback(err);
-    console.log(`${resp.statusCode}: ${url}`);
-    let content = JSON.parse(body);
-    callback(null, content);
-  });
+  fetch(url, fetchOpts)
+    .then(res => {
+      console.log(`${res.status}: ${url}`);
+      return res.json();
+    })
+    .then(json => {
+      callback(null, json);
+    })
+    .catch(err => callback(err));
 }
 function gotResourceInfo(err, results) {
   if (err) return console.log(err);
@@ -216,13 +227,15 @@ function getLanguage(resourceURL) {
     code = code.replace(/-/g, '_');
     let url = `${resourceURL}/translation/${code}`;
     if (code === 'vi') { url += '?mode=reviewed'; }
-
-    request.get(url, { auth : auth }, (err, resp, body) => {
-      if (err) return callback(err);
-      console.log(`${resp.statusCode}: ${url}`);
-      let content = JSON.parse(body).content;
-      callback(null, YAML.safeLoad(content)[code]);
-    });
+    fetch(url, fetchOpts)
+      .then(res => {
+        console.log(`${res.status}: ${url}`);
+        return res.json();
+      })
+      .then(json => {
+        callback(null, YAML.safeLoad(json.content)[code]);
+      })
+      .catch(err => callback(err));
   };
 }
 
@@ -230,24 +243,32 @@ function getLanguage(resourceURL) {
 function getLanguageInfo(code, callback) {
   code = code.replace(/-/g, '_');
   let url = `${apiroot}/language/${code}`;
-  request.get(url, { auth : auth }, (err, resp, body) => {
-    if (err) return callback(err);
-    console.log(`${resp.statusCode}: ${url}`);
-    callback(null, JSON.parse(body));
-  });
+  fetch(url, fetchOpts)
+    .then(res => {
+      console.log(`${res.status}: ${url}`);
+      return res.json();
+    })
+    .then(json => {
+      callback(null, json);
+    })
+    .catch(err => callback(err));
 }
 
 
 function getLanguages(resourceURL, callback) {
   let url = `${resourceURL}?details`;
-  request.get(url, { auth: auth }, (err, resp, body) => {
-    if (err) return callback(err);
-    console.log(`${resp.statusCode}: ${url}`);
-    callback(null, JSON.parse(body).available_languages
-      .map(d => d.code.replace(/_/g, '-'))
-      .filter(d => d !== 'en')
-    );
-  });
+  fetch(url, fetchOpts)
+    .then(res => {
+      console.log(`${res.status}: ${url}`);
+      return res.json();
+    })
+    .then(json => {
+      callback(null, json.available_languages
+        .map(d => d.code.replace(/_/g, '-'))
+        .filter(d => d !== 'en')
+      );
+    })
+    .catch(err => callback(err));
 }
 
 
