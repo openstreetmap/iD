@@ -227,6 +227,7 @@ en:
         building_address: Remove all non-address and non-building tags.
         building: Remove all non-building tags.
         address: Remove all non-address tags.
+        generic: Remove tags.
       annotation:
         building:
           one: Downgraded a feature to a basic building.
