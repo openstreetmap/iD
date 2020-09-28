@@ -322,7 +322,8 @@ export function coreLocalizer() {
     // Returns the localized text wrapped in an HTML element encoding the locale info
     localizer.t.html = function(stringId, replacements, locale) {
         const info = localizer.tInfo(stringId, replacements, locale);
-        return localizer.htmlForLocalizedText(info.text, info.locale);
+        // text may be empty or undefined if `replacements.default` is 
+        return info.text ? localizer.htmlForLocalizedText(info.text, info.locale) : '';
     };
 
     localizer.htmlForLocalizedText = function(text, localeCode) {
