@@ -127,7 +127,7 @@ export function operationDowngrade(context, selectedIDs) {
 
 
     operation.id = 'downgrade';
-    operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
+    operation.keys = [uiCmd('⌫')];
     operation.title = t('operations.downgrade.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
