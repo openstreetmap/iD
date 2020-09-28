@@ -23,8 +23,6 @@ const far = require('@fortawesome/free-regular-svg-icons').far;
 const fab = require('@fortawesome/free-brands-svg-icons').fab;
 fontawesome.library.add(fas, far, fab);
 
-const request = require('request').defaults({ maxSockets: 1 });
-
 let _currBuild = null;
 
 
