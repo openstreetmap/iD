@@ -622,6 +622,7 @@ en:
       center: Center
       perimeter: Perimeter
       length: Length
+      distance: Distance
       area: Area
       centroid: Centroid
       location: Location

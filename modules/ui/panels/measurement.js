@@ -7,7 +7,7 @@ import {
 
 import { t, localizer } from '../../core/localizer';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
-import { geoExtent } from '../../geo';
+import { geoExtent, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
 import { utilGetAllNodes } from '../../util';
 
@@ -48,7 +48,7 @@ export function uiPanelMeasurement(context) {
         var heading;
         var center, location, centroid;
         var closed, geometry;
-        var totalNodeCount, length = 0, area = 0;
+        var totalNodeCount, length = 0, area = 0, distance;
 
         if (selectedNoteID && osm) {       // selected 1 note
 
@@ -90,6 +90,12 @@ export function uiPanelMeasurement(context) {
                     geometry = null;
                     closed = null;
                     centroid = null;
+                }
+
+                if (selected.length === 2 &&
+                    selected[0].type === 'node' &&
+                    selected[1].type === 'node') {
+                    distance = geoSphericalDistance(selected[0].loc, selected[1].loc);
                 }
 
                 if (selected.length === 1 && selected[0].type === 'node') {
@@ -151,6 +157,14 @@ export function uiPanelMeasurement(context) {
                 .html(displayLength(length, isImperial));
         }
 
+        if (typeof distance === 'number') {
+            list
+                .append('li')
+                .html(t.html('info_panels.measurement.distance') + ':')
+                .append('span')
+                .html(displayLength(distance, isImperial));
+        }
+
         if (location) {
             coordItem = list
                 .append('li')
@@ -181,7 +195,7 @@ export function uiPanelMeasurement(context) {
                 .html(decimalCoordinatePair(center));
         }
 
-        if (length || area) {
+        if (length || area || typeof distance === 'number') {
             var toggle  = isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
