@@ -317,6 +317,7 @@ export function uiFieldCombo(field, context) {
 
 
     function removeMultikey(d) {
+        d3_event.preventDefault();
         d3_event.stopPropagation();
         var t = {};
         if (_isMulti) {
@@ -543,6 +544,7 @@ export function uiFieldCombo(field, context) {
                 .html(function(d) { return d.value; });
 
             chips.select('a')
+                .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
                 .html('×');
