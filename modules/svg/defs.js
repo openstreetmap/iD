@@ -13,7 +13,7 @@ export function svgDefs(context) {
     var _defsSelection = d3_select(null);
 
     var _spritesheetIds = [
-        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'tnp-sprite', 'community-sprite'
+        'iD-sprite', 'maki-sprite', 'temaki-sprite', 'fa-sprite', 'community-sprite'
     ];
 
     function drawDefs(selection) {

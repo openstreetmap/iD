@@ -147,7 +147,7 @@ preset are generally not inherited. E.g. the `shop` field is not inherited by `s
 
 ##### `icon`
 
-The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"` or `"icon": "tnp-2009223"`.
+The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
 
 * [iD's spritesheet](https://github.com/openstreetmap/iD/tree/develop/svg/iD-sprite/presets) (`iD-`)
 * [Maki](https://labs.mapbox.com/maki-icons/) (`maki-`), map-specific icons from Mapbox
@@ -158,11 +158,6 @@ The name of a local SVG icon file. You can use icons from any of the following i
         * [Solid](https://fontawesome.com/icons?d=gallery&s=solid&m=free) (`fas-`)
         * [Regular](https://fontawesome.com/icons?d=gallery&s=regular&m=free) (`far-`)
         * [Brands](https://fontawesome.com/icons?d=gallery&s=brands&m=free) (`fab-`)
-* [The Noun Project](https://thenounproject.com) (`tnp-`), millions of general-purpose icons
-    * The licenses vary. You can only use the public-domain icons in iD, such as those from [OCHA Visual](https://thenounproject.com/ochavisual/).
-    * The icon styles vary. Avoid thin or overly-detailed icons since they will not look good at small sizes.
-    * Use the numeric ID of the icon (e.g. `2009223`). This is shown in the URL when you select an icon on their site.
-    * Unfortunately, you must [sign up for a free API key](https://thenounproject.com/developers/) in order to download new icons (even for public-domain icons). Add a file called `the_noun_project.auth` to the root of your local iD instance containing your credentials like `{"consumer_key": "xxxxxx", "consumer_secret": "xxxxxx"}`. This file is not version-controlled.
 
 ##### `imageURL`
 

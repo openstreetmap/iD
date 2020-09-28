@@ -74,9 +74,6 @@ function buildData() {
     'fas-user-cog': {}
   };
 
-  // The Noun Project icons used
-  let tnpIcons = {};
-
   // all fields searchable under "add field"
   let searchableFieldIDs = {};
 
@@ -93,10 +90,10 @@ function buildData() {
     'svg/fontawesome/*.svg',
   ]);
 
-  readQAIssueIcons(faIcons, tnpIcons);
-  let categories = generateCategories(tstrings, faIcons, tnpIcons);
-  let fields = generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs);
-  let presets = generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs);
+  readQAIssueIcons(faIcons);
+  let categories = generateCategories(tstrings, faIcons);
+  let fields = generateFields(tstrings, faIcons, searchableFieldIDs);
+  let presets = generatePresets(tstrings, faIcons, searchableFieldIDs);
   let defaults = read('data/presets/defaults.json');
   let translations = generateTranslations(fields, presets, tstrings, searchableFieldIDs);
   let taginfo = generateTaginfo(presets, fields);
@@ -115,7 +112,6 @@ function buildData() {
   fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
   writeEnJson(tstrings);
   writeFaIcons(faIcons);
-  writeTnpIcons(tnpIcons);
 
   // Save individual data files
   let tasks = [
@@ -177,7 +173,7 @@ function validate(file, instance, schema) {
 }
 
 
-function readQAIssueIcons(faIcons, tnpIcons) {
+function readQAIssueIcons(faIcons) {
   const qa = read('data/qa_data.json');
 
   for (const service in qa) {
@@ -188,16 +184,12 @@ function readQAIssueIcons(faIcons, tnpIcons) {
       if (/^fa[srb]-/.test(icon)) {
         faIcons[icon] = {};
       }
-      // noun project icon, remember for later
-      if (/^tnp-/.test(icon)) {
-        tnpIcons[icon] = {};
-      }
     }
   }
 }
 
 
-function generateCategories(tstrings, faIcons, tnpIcons) {
+function generateCategories(tstrings, faIcons) {
   let categories = {};
 
   glob.sync('data/presets/categories/*.json').forEach(file => {
@@ -210,17 +202,13 @@ function generateCategories(tstrings, faIcons, tnpIcons) {
     if (/^fa[srb]-/.test(category.icon)) {
       faIcons[category.icon] = {};
     }
-    // noun project icon, remember for later
-    if (/^tnp-/.test(category.icon)) {
-      tnpIcons[category.icon] = {};
-    }
   });
 
   return categories;
 }
 
 
-function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
+function generateFields(tstrings, faIcons, searchableFieldIDs) {
   let fields = {};
 
   glob.sync('data/presets/fields/**/*.json').forEach(file => {
@@ -253,10 +241,6 @@ function generateFields(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
     // fontawesome icon, remember for later
     if (/^fa[srb]-/.test(field.icon)) {
       faIcons[field.icon] = {};
-    }
-    // noun project icon, remember for later
-    if (/^tnp-/.test(field.icon)) {
-      tnpIcons[field.icon] = {};
     }
   });
 
@@ -373,7 +357,7 @@ function stripLeadingUnderscores(str) {
 }
 
 
-function generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
+function generatePresets(tstrings, faIcons, searchableFieldIDs) {
   let presets = {};
 
   glob.sync('data/presets/presets/**/*.json').forEach(file => {
@@ -396,10 +380,6 @@ function generatePresets(tstrings, faIcons, tnpIcons, searchableFieldIDs) {
     // fontawesome icon, remember for later
     if (/^fa[srb]-/.test(preset.icon)) {
       faIcons[preset.icon] = {};
-    }
-    // noun project icon, remember for later
-    if (/^tnp-/.test(preset.icon)) {
-      tnpIcons[preset.icon] = {};
     }
   });
 
@@ -525,9 +505,6 @@ function generateTaginfo(presets, fields) {
     } else if (/^iD-/.test(preset.icon)) {
       tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/' +
         preset.icon.replace(/^iD-/, '') + '.svg';
-    } else if (/^tnp-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/the-noun-project/' +
-        preset.icon.replace(/^tnp-/, '') + '.svg';
     }
 
     coalesceTags(taginfo, tag);
@@ -854,89 +831,6 @@ function writeFaIcons(faIcons) {
     }
   }
 }
-
-
-function writeTnpIcons(tnpIcons) {
-  /*
-   * The Noun Project doesn't allow anonymous API access. New "tnp-" icons will
-   * not be downloaded without a "the_noun_project.auth" file with a json object:
-   *  {
-   *    "consumer_key": "xxxxxx",
-   *    "consumer_secret": "xxxxxx"
-   *  }
-   */
-  let nounAuth;
-  if (fs.existsSync('the_noun_project.auth')) {
-    nounAuth = JSON.parse(fs.readFileSync('the_noun_project.auth', 'utf8'));
-  }
-  const baseURL = 'http://api.thenounproject.com/icon/';
-
-  let unusedSvgFiles = fs.readdirSync('svg/the-noun-project', 'utf8')
-    .reduce((obj, name) => {
-      if (name.endsWith('.svg')) {
-        obj[name] = true;
-      }
-      return obj;
-    }, {});
-
-  for (const key in tnpIcons) {
-    const id = key.substring(4);
-    const fileName = `${id}.svg`;
-
-    if (unusedSvgFiles[fileName]) {
-      delete unusedSvgFiles[fileName];
-    }
-
-    const localPath = `svg/the-noun-project/${fileName}`;
-
-    // don't redownload existing icons
-    if (fs.existsSync(localPath)) continue;
-
-    if (!nounAuth) {
-      console.error(`No authentication file for The Noun Project. Cannot download icon: ${key}`);
-      continue;
-    }
-
-    const url = baseURL + id;
-    request.get(url, { oauth : nounAuth }, handleTheNounProjectResponse);
-  }
-
-  // remove icons that are not needed
-  for (const unusedFileName in unusedSvgFiles) {
-    shell.rm('-f', [`svg/the-noun-project/${unusedFileName}`]);
-  }
-}
-
-
-function handleTheNounProjectResponse(err, resp, body) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  let icon = JSON.parse(body).icon;
-  if (icon.license_description !== 'public-domain') {
-    console.error('The icon "' + icon.term + '" (tnp-' + icon.id + ') from The Noun Project cannot be used in iD because it is not in the public domain.');
-    return;
-  }
-  let iconURL = icon.icon_url;
-  if (!iconURL) {
-    console.error('The Noun Project has not provided a URL to download the icon "' + icon.term + '" (tnp-' + icon.id + ').');
-    return;
-  }
-  request.get(iconURL, (err2, resp2, svg) => {
-    if (err2) {
-      console.error(err2);
-      return;
-    }
-    try {
-      fs.writeFileSync(`svg/the-noun-project/${icon.id}.svg`, svg);
-    } catch (error) {
-      console.error(error);
-      throw (error);
-    }
-  });
-}
-
 
 function minifyJSON(inPath, outPath) {
   return new Promise((resolve, reject) => {
