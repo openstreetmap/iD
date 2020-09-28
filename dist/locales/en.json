@@ -5640,6 +5640,10 @@
                     "name": "Boat Rental",
                     "terms": ""
                 },
+                "amenity/boat_storage": {
+                    "name": "Boat Storage",
+                    "terms": ""
+                },
                 "amenity/bureau_de_change": {
                     "name": "Currency Exchange",
                     "terms": "bureau de change,money changer"

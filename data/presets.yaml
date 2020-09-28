@@ -3212,6 +3212,10 @@ en:
         # amenity=boat_rental
         name: Boat Rental
         terms: '<translate with synonyms or related terms for ''Boat Rental'', separated by commas>'
+      amenity/boat_storage:
+        # amenity=boat_storage
+        name: Boat Storage
+        terms: '<translate with synonyms or related terms for ''Boat Storage'', separated by commas>'
       amenity/bureau_de_change:
         # amenity=bureau_de_change
         name: Currency Exchange
