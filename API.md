@@ -5,7 +5,7 @@ This file documents efforts toward establishing a public API for iD.
 ##### iD Standalone
 
 iD supports several URL parameters. When constructing a URL to a standalone instance
-of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters are available
+of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters are available
 **in the hash portion of the URL**:
 
 * __`background`__ - The value from a `sourcetag` property in iD's

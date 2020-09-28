@@ -203,7 +203,7 @@ You can use the [development preview site](https://ideditor.netlify.app) to test
 unreleased features and verify bug fixes, all without building iD yourself. This site
 is updated with the latest code and translations every time we change the `develop` branch.
 
-The deployments on https://openstreetmap.org and https://preview.ideditor.com/release
+The deployments on https://openstreetmap.org and https://ideditor-release.netlify.app
 are updated only with [stable releases](https://github.com/openstreetmap/iD/releases).
 Recently fixed issues may still be present on these sites until the next version of iD
 is released.
