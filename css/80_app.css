@@ -323,7 +323,9 @@ button {
 }
 
 button:focus,
-button:active {
+button:active,
+/* we want to fake hovering sometimes */
+button.hover {
     background-color: #ececec;
 }
 @media (hover: hover) {
