@@ -497,21 +497,21 @@ export function uiFieldRestrictions(field, context) {
             } else if (datum instanceof osmTurn) {
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
                 var turnType = restrictionType.replace(/^(only|no)\_/, '');
-                var indirect = (datum.direct === false ? t('restriction.help.indirect') : '');
+                var indirect = (datum.direct === false ? t.html('restriction.help.indirect') : '');
                 var klass, turnText, nextText;
 
                 if (datum.no) {
                     klass = 'restrict';
-                    turnText = t('restriction.help.turn.no_' + turnType, { indirect: indirect });
-                    nextText = t('restriction.help.turn.only_' + turnType, { indirect: '' });
+                    turnText = t.html('restriction.help.turn.no_' + turnType, { indirect: indirect });
+                    nextText = t.html('restriction.help.turn.only_' + turnType, { indirect: '' });
                 } else if (datum.only) {
                     klass = 'only';
-                    turnText = t('restriction.help.turn.only_' + turnType, { indirect: indirect });
-                    nextText = t('restriction.help.turn.allowed_' + turnType, { indirect: '' });
+                    turnText = t.html('restriction.help.turn.only_' + turnType, { indirect: indirect });
+                    nextText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: '' });
                 } else {
                     klass = 'allow';
-                    turnText = t('restriction.help.turn.allowed_' + turnType, { indirect: indirect });
-                    nextText = t('restriction.help.turn.no_' + turnType, { indirect: '' });
+                    turnText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: indirect });
+                    nextText = t.html('restriction.help.turn.no_' + turnType, { indirect: '' });
                 }
 
                 help
@@ -596,14 +596,14 @@ export function uiFieldRestrictions(field, context) {
             opts = { distance: t('units.meters', { quantity: maxDist }) };
         }
 
-        return t('restriction.controls.distance_up_to', opts);
+        return t.html('restriction.controls.distance_up_to', opts);
     }
 
 
     function displayMaxVia(maxVia) {
-        return maxVia === 0 ? t('restriction.controls.via_node_only')
-            : maxVia === 1 ? t('restriction.controls.via_up_to_one')
-            : t('restriction.controls.via_up_to_two');
+        return maxVia === 0 ? t.html('restriction.controls.via_node_only')
+            : maxVia === 1 ? t.html('restriction.controls.via_up_to_one')
+            : t.html('restriction.controls.via_up_to_two');
     }
 
 
