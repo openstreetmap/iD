@@ -248,30 +248,36 @@ export function actionSplit(nodeIds, newWayIds) {
 
     action.waysForNode = function(nodeId, graph) {
         var node = graph.entity(nodeId);
-        var parents = graph.parentWays(node);
-        var hasLines = parents.some(function(parent) {
-            return parent.geometry(graph) === 'line';
-        });
+        var splittableParents = graph.parentWays(node).filter(isSplittable);
 
-        return parents.filter(function(parent) {
-            if (_wayIDs && _wayIDs.indexOf(parent.id) === -1)
-                return false;
+        if (!_wayIDs) {
+            // If the ways to split aren't specified, only split the lines.
+            // If there are no lines to split, split the areas.
 
-            if (!_wayIDs && hasLines && parent.geometry(graph) !== 'line')
-                return false;
-
-            if (parent.isClosed()) {
-                return true;
+            var hasLine = splittableParents.some(function(parent) {
+                return parent.geometry(graph) === 'line';
+            });
+            if (hasLine) {
+                return splittableParents.filter(function(parent) {
+                    return parent.geometry(graph) === 'line';
+                });
             }
+        }
+        return splittableParents;
 
+        function isSplittable(parent) {
+            // If the ways to split are specified, ignore everything else.
+            if (_wayIDs && _wayIDs.indexOf(parent.id) === -1) return false;
+
+            // We can fake splitting closed ways at their endpoints...
+            if (parent.isClosed()) return true;
+
+            // otherwise, we can't split nodes at their endpoints.
             for (var i = 1; i < parent.nodes.length - 1; i++) {
-                if (parent.nodes[i] === nodeId) {
-                    return true;
-                }
+                if (parent.nodes[i] === nodeId) return true;
             }
-
             return false;
-        });
+        }
     };
 
     action.ways = function(graph) {
