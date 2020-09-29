@@ -612,6 +612,7 @@
                     },
                     "feature": {
                         "multiple": {
+                            "single_node": "Divide these features at this point.",
                             "multiple_node": "Divide these features at these points."
                         }
                     }

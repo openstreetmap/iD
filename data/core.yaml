@@ -458,6 +458,7 @@ en:
             multiple_node: Divide the edges of these areas at these points.
         feature:
           multiple:
+            single_node: Divide these features at this point.
             multiple_node: Divide these features at these points.
       key: X
       annotation:
