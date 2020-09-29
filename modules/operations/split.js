@@ -36,7 +36,12 @@ export function operationSplit(context, selectedIDs) {
 
     var operation = function() {
         var difference = context.perform(_action, operation.annotation());
-        context.enter(modeSelect(context, difference.extantIDs()));
+        // select both the nodes and the ways so the mapper can immediately disconnect them if desired
+        var idsToSelect = _vertexIds.concat(difference.extantIDs().filter(function(id) {
+            // filter out relations that may have had member additions
+            return context.entity(id).type === 'way';
+        }));
+        context.enter(modeSelect(context, idsToSelect));
     };
 
 
