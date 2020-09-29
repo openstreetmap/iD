@@ -16,10 +16,21 @@ export function operationSplit(context, selectedIDs) {
         _vertexIds.length + _selectedWayIds.length === selectedIDs.length;
     var _action = actionSplit(_vertexIds);
     var _ways = [];
+    var _geometry = 'feature';
+    var _waysAmount = 'single';
+    var _nodesAmount = _vertexIds.length === 1 ? 'single' : 'multiple';
 
     if (_isAvailable) {
         if (_selectedWayIds.length) _action.limitWays(_selectedWayIds);
         _ways = _action.ways(context.graph());
+        var geometries = {};
+        _ways.forEach(function(way) {
+            geometries[way.geometry(context.graph())] = true;
+        });
+        if (Object.keys(geometries).length === 1) {
+            _geometry = Object.keys(geometries)[0];
+        }
+        _waysAmount = _ways.length === 1 ? 'single' : 'multiple';
     }
 
 
@@ -47,19 +58,13 @@ export function operationSplit(context, selectedIDs) {
 
     operation.tooltip = function() {
         var disable = operation.disabled();
-        if (disable) {
-            return t('operations.split.' + disable);
-        } else if (_ways.length === 1) {
-            return t('operations.split.description.' + context.graph().geometry(_ways[0].id));
-        }
-        return t('operations.split.description.multiple');
+        if (disable) return t('operations.split.' + disable);
+        return t('operations.split.description.' + _geometry + '.' + _waysAmount + '.' + _nodesAmount + '_node');
     };
 
 
     operation.annotation = function() {
-        return _ways.length === 1 ?
-            t('operations.split.annotation.' + context.graph().geometry(_ways[0].id)) :
-            t('operations.split.annotation.feature', { n: _ways.length });
+        return t('operations.split.annotation.' + _geometry, { n: _ways.length });
     };
 
 

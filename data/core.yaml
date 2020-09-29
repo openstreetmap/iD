@@ -442,18 +442,35 @@ en:
     split:
       title: Split
       description:
-        line: Split this line into two at this node.
-        area: Split the boundary of this area into two.
-        multiple: Split the lines/area boundaries at this node into two.
+        line:
+          single:
+            single_node: Divide this line into two at this point.
+            multiple_node: Divide this line at these points.
+          multiple:
+            single_node: Divide these lines at this point.
+            multiple_node: Divide these lines at these points.
+        area:
+          single:
+            single_node: Divide the edge of this area into two at this point.
+            multiple_node: Divide the edge of this area at these points.
+          multiple:
+            single_node: Divide the edges of these areas at this point.
+            multiple_node: Divide the edges of these areas at these points.
+        feature:
+          multiple:
+            multiple_node: Divide these features at these points.
       key: X
       annotation:
-        line: Split a line.
-        area: Split an area boundary.
+        line:
+          one: "Split a line."
+          other: "Split {n} lines."
+        area:
+          one: "Split the edge of an area."
+          other: "Split {n} areas."
         feature:
           one: "Split a feature."
           other: "Split {n} features."
       not_eligible: Lines can't be split at their beginning or end.
-      multiple_ways: There are too many lines here to split.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
       annotation:
