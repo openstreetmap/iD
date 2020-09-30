@@ -802,6 +802,7 @@
     {"key": "military", "value": "nuclear_explosion_site", "description": "🄿 Nuclear Explosion Site", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/danger-15.svg"},
     {"key": "military", "value": "office", "description": "🄿 Military Office", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/military.svg"},
     {"key": "military", "value": "trench", "description": "🄿 Military Trench", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/trench.svg"},
+    {"key": "amenity", "value": "morgue", "description": "🄿 Morgue", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/cemetery-15.svg"},
     {"key": "natural", "value": "bare_rock", "description": "🄿 Bare Rock", "object_types": ["area"]},
     {"key": "natural", "value": "bay", "description": "🄿 Bay", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/beach.svg"},
     {"key": "natural", "value": "beach", "description": "🄿 Beach", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/beach.svg"},

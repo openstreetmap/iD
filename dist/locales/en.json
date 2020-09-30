@@ -8610,6 +8610,10 @@
                     "name": "Military Trench",
                     "terms": "dugout,firestep,fox hole,infantry trench,war trench"
                 },
+                "morgue": {
+                    "name": "Morgue",
+                    "terms": "memorial home"
+                },
                 "natural/bare_rock": {
                     "name": "Bare Rock",
                     "terms": "rock"
