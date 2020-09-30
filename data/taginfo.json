@@ -589,6 +589,7 @@
     {"key": "historic", "value": "wayside_cross", "description": "🄿 Wayside Cross", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/religious-christian-15.svg"},
     {"key": "historic", "value": "wayside_shrine", "description": "🄿 Wayside Shrine", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/landmark-15.svg"},
     {"key": "historic", "value": "wreck", "description": "🄿 Shipwreck", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/ruins.svg"},
+    {"key": "natural", "value": "hot_spring", "description": "🄿 Hot Spring", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/water-15.svg"},
     {"key": "indoor", "value": "corridor", "description": "🄿 Indoor Corridor (unsearchable), 🄿 Indoor Corridor", "object_types": ["way"]},
     {"key": "indoor", "value": "area", "description": "🄿 Indoor Area", "object_types": ["area"]},
     {"key": "indoor", "value": "door", "description": "🄿 Indoor Door", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/entrance-alt1-15.svg"},

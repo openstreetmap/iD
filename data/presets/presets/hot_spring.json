@@ -1,0 +1,23 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "water",
+        "hot_water",
+        "intermittent"
+    ],
+    "moreFields": [
+        "fishing",
+        "gnis/feature_id",
+        "salt",
+        "tidal"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "natural": "hot_spring"
+    },
+    "name": "Hot Spring"
+}
+
