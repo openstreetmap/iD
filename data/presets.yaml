@@ -6357,6 +6357,11 @@ en:
         name: Line
         # 'terms: polyline'
         terms: '<translate with synonyms or related terms for ''Line'', separated by commas>'
+      lounger:
+        # amenity=lounger
+        name: Lounger
+        # 'terms: seat,chair,bench'
+        terms: '<translate with synonyms or related terms for ''Lounger'', separated by commas>'
       man_made:
         # man_made=*
         name: Man Made Feature
