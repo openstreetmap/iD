@@ -5,6 +5,7 @@ import { geoVecAdd } from '../geo';
 import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { utilRebind } from '../util/rebind';
+import { utilHighlightEntities } from '../util/util';
 import { svgIcon } from '../svg/icon';
 
 
@@ -89,6 +90,16 @@ export function uiEditMenu(context) {
             .on('pointerdown mousedown', function pointerdown() {
                 // don't let button presses also act as map input - #1869
                 d3_event.stopPropagation();
+            })
+            .on('mouseenter.highlight', function(d) {
+                if (!d.relatedEntityIds || d3_select(this).classed('disabled')) return;
+
+                utilHighlightEntities(d.relatedEntityIds(), true, context);
+            })
+            .on('mouseleave.highlight', function(d) {
+                if (!d.relatedEntityIds) return;
+
+                utilHighlightEntities(d.relatedEntityIds(), false, context);
             });
 
         buttonsEnter.each(function(d) {
@@ -140,6 +151,11 @@ export function uiEditMenu(context) {
 
         function click(operation) {
             d3_event.stopPropagation();
+
+            if (operation.relatedEntityIds) {
+                utilHighlightEntities(operation.relatedEntityIds(), false, context);
+            }
+
             if (operation.disabled()) {
                 if (lastPointerUpType === 'touch' ||
                     lastPointerUpType === 'pen') {

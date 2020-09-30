@@ -45,6 +45,11 @@ export function operationSplit(context, selectedIDs) {
     };
 
 
+    operation.relatedEntityIds = function() {
+        return _selectedWayIds.length ? [] : _ways.map(way => way.id);
+    };
+
+
     operation.available = function() {
         return _isAvailable;
     };
