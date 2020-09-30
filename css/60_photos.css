@@ -349,11 +349,13 @@ label.streetside-hires {
     top: 10px;
     width: 100%;
     z-index: 10;
+    pointer-events: none;
 }
 
 .photo-controls {
     display: inline-block;
     z-index: 10;
+    pointer-events: initial;
 }
 
 .photo-controls button,
