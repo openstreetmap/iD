@@ -113,9 +113,7 @@ export function uiFormFields(context) {
                     var field = d.field;
                     field.show();
                     selection.call(formFields);  // rerender
-                    if (field.type !== 'semiCombo' && field.type !== 'multiCombo' && field.type !== 'manyCombo') {
-                        field.focus();
-                    }
+                    field.focus();
                 })
             );
 
