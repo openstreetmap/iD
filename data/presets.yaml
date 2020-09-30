@@ -5068,6 +5068,10 @@ en:
       emergency/yes:
         # emergency=yes
         name: Emergency Access Yes
+      emergency_access_point:
+        # 'highway=road, bridge=*'
+        name: Emergency Access Point
+        terms: '<translate with synonyms or related terms for ''Emergency Access Point'', separated by commas>'
       entrance:
         # entrance=*
         name: Entrance / Exit

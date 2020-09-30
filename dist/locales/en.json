@@ -7150,6 +7150,10 @@
                 "disused/shop": {
                     "name": "Disused Shop"
                 },
+                "emergency_access_point": {
+                    "name": "Emergency Access Point",
+                    "terms": ""
+                },
                 "emergency/designated": {
                     "name": "Emergency Access Designated"
                 },
