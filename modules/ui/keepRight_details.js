@@ -58,6 +58,7 @@ export function uiKeepRightDetails(context) {
     // If there are entity links in the error message..
     let relatedEntities = [];
     descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+      .attr('href', '#')
       .each(function() {
         const link = d3_select(this);
         const isObjectLink = link.classed('error_object_link');

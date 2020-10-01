@@ -139,6 +139,7 @@ export function uiOsmoseDetails(context) {
           .enter()
           .append('li')
           .append('a')
+            .attr('href', '#')
             .attr('class', 'error_entity_link')
             .html(d => d)
             .each(function() {
