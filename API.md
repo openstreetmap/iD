@@ -38,6 +38,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Example:_ `map=20.00/38.90085/-77.02271`
 * __`maprules`__ - A path to a [MapRules](https://github.com/radiant-maxar/maprules) service endpoint for enhanced tag validation.<br/>
   _Example:_ `maprules=https://path/to/file.json`
+* __`notes`__ - Enables the notes layer by default.<br/>
+  _Example:_ `notes=1`
 * __`offset`__ - Background imagery alignment offset in meters, formatted as `east,north`.<br/>
   _Example:_ `offset=-10,5`
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
@@ -77,6 +79,7 @@ _Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.github
 * __`hashtags`__
 * __`locale`__
 * __`maprules`__
+* __`notes`__
 * __`offset`__
 * __`photo`__
 * __`photo_dates`__
