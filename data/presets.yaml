@@ -5691,6 +5691,10 @@ en:
         name: Shipwreck
         # 'terms: hull,mast,maritime,remains,ship,boat'
         terms: '<translate with synonyms or related terms for ''Shipwreck'', separated by commas>'
+      hot_spring:
+        # natural=hot_spring
+        name: Hot Spring
+        terms: '<translate with synonyms or related terms for ''Hot Spring'', separated by commas>'
       indoor:
         # indoor=*
         name: Indoor Feature

@@ -7748,6 +7748,10 @@
                     "name": "Shipwreck",
                     "terms": "hull,mast,maritime,remains,ship,boat"
                 },
+                "hot_spring": {
+                    "name": "Hot Spring",
+                    "terms": ""
+                },
                 "indoor/corridor_line": {
                     "name": "Indoor Corridor"
                 },
