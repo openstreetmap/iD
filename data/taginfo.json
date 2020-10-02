@@ -2077,6 +2077,7 @@
     {"key": "artwork", "description": "🄳 ➜ artwork_type=*"},
     {"key": "artwork:type", "description": "🄳 ➜ artwork_type=*"},
     {"key": "attraction", "value": "ferris_wheel", "description": "🄳 ➜ attraction=big_wheel"},
+    {"key": "barrier", "value": "chicane", "description": "🄳 ➜ barrier=cycle_barrier"},
     {"key": "barrier", "value": "curb", "description": "🄳 ➜ barrier=kerb"},
     {"key": "barrier", "value": "embankment", "description": "🄳 ➜ man_made=embankment"},
     {"key": "barrier", "value": "railing", "description": "🄳 ➜ barrier=fence + fence_type=railing"},

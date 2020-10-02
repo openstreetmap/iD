@@ -204,6 +204,10 @@
     "replace": {"attraction": "big_wheel"}
   },
   {
+    "old": {"barrier": "chicane"},
+    "replace": {"barrier": "cycle_barrier"}
+  },
+  {
     "old": {"barrier": "curb"},
     "replace": {"barrier": "kerb"}
   },
