@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-boat_rental",
+    "fields": [
+        "name",
+        "building_area",
+        "start_date"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "boat_storage"
+    },
+    "name": "Boat Storage"
+}
