@@ -1,0 +1,32 @@
+{
+    "icon": "temaki-bench",
+    "fields": [
+        "backrest",
+        "material",
+        "seats",
+        "colour"
+    ],
+    "moreFields": [
+        "access_simple",
+        "height",
+        "inscription",
+        "level",
+        "lit",
+        "manufacturer",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "line"
+    ],
+    "terms": [
+        "seat",
+        "chair",
+        "bench"
+    ],
+    "tags": {
+        "amenity": "lounger"
+    },
+    "name": "Lounger"
+}

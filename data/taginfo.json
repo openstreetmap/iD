@@ -727,6 +727,7 @@
     {"key": "sport", "value": "running", "description": "🄿 Running Track", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
     {"key": "leisure", "value": "trampoline_park", "description": "🄿 Trampoline Park", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-chevron-circle-up.svg"},
     {"key": "leisure", "value": "water_park", "description": "🄿 Water Park", "object_types": ["area", "node"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-swimmer.svg"},
+    {"key": "amenity", "value": "lounger", "description": "🄿 Lounger", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/bench.svg"},
     {"key": "man_made", "value": "adit", "description": "🄿 Adit", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/adit_profile.svg"},
     {"key": "man_made", "value": "antenna", "description": "🄿 Antenna", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/antenna.svg"},
     {"key": "man_made", "value": "beacon", "description": "🄿 Beacon", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/communications-tower-15.svg"},

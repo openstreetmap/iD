@@ -8306,6 +8306,10 @@
                     "name": "Line",
                     "terms": "polyline"
                 },
+                "lounger": {
+                    "name": "Lounger",
+                    "terms": "seat,chair,bench"
+                },
                 "man_made/adit": {
                     "name": "Adit",
                     "terms": "cave,horizontal mine entrance,tunnel,underground"
