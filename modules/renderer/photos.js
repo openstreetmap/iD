@@ -76,6 +76,8 @@ export function rendererPhotos(context) {
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
         if (hash.photo_overlay) {
+            // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=openstreetcam;mapillary;streetside`
+
             var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
             hashOverlayIDs.forEach(function(id) {
                 var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
@@ -83,6 +85,8 @@ export function rendererPhotos(context) {
             });
         }
         if (hash.photo) {
+            // support opening a photo via a URL parameter, e.g. `photo=mapillary-fztgSDtLpa08ohPZFZjeRQ`
+
             var photoIds = hash.photo.replace(/;/g, ',').split(',');
             var photoId = photoIds.length && photoIds[0].trim();
             var results = /(.*)-(.*)/g.exec(photoId);
@@ -96,11 +100,25 @@ export function rendererPhotos(context) {
                     var layer = _layerIDs.indexOf(serviceId) !== -1 && context.layers().layer(serviceId);
                     if (layer && !layer.enabled()) layer.enabled(true);
 
-                    service.ensureViewerLoaded(context)
-                        .then(function() {
-                            service.updateViewer(context, photoKey);
-                            service.showViewer(context);
-                        });
+                    var baselineTime = Date.now();
+
+                    service.on('loadedImages.rendererPhotos', function() {
+                        // don't open the viewer if too much time has elapsed
+                        if (Date.now() - baselineTime > 45000) {
+                            service.on('loadedImages.rendererPhotos', null);
+                            return;
+                        }
+
+                        if (!service.cachedImage(photoKey)) return;
+
+                        service.on('loadedImages.rendererPhotos', null);
+                        service.ensureViewerLoaded(context)
+                            .then(function() {
+                                service
+                                    .selectImage(context, photoKey)
+                                    .showViewer(context);
+                            });
+                    });
                 }
             }
         }

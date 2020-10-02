@@ -49,7 +49,7 @@ describe('iD.serviceStreetside', function() {
     });
 
     describe('#loadBubbles', function() {
-        it('fires loadedBubbles when bubbles are loaded', function(done) {
+        it('fires loadedImages when bubbles are loaded', function(done) {
             // adjust projection so that only one tile is fetched
             // (JSONP hack will return the same data for every fetch)
             context.projection
@@ -58,7 +58,7 @@ describe('iD.serviceStreetside', function() {
                 .clipExtent([[0,0], dimensions]);
 
             var spy = sinon.spy();
-            streetside.on('loadedBubbles', spy);
+            streetside.on('loadedImages', spy);
 
             window.JSONP_DELAY = 0;
             window.JSONP_FIX = [{
@@ -93,7 +93,7 @@ describe('iD.serviceStreetside', function() {
                 .clipExtent([[0,0], dimensions]);
 
             var spy = sinon.spy();
-            streetside.on('loadedBubbles', spy);
+            streetside.on('loadedImages', spy);
 
             window.JSONP_DELAY = 0;
             window.JSONP_FIX = [{
