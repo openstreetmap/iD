@@ -73,7 +73,7 @@ asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
 asyncMap(resourceIds, getResource, gotResource);
 
 function getResourceInfo(resourceId, callback) {
-  let url = 'https://api.transifex.com/organizations/openstreetmap/projects/id-editor/resources/' + resourceId;
+  const url = `https://api.transifex.com/organizations/openstreetmap/projects/id-editor/resources/${resourceId}`;
   fetch(url, fetchOpts)
     .then(res => {
       console.log(`${res.status}: ${url}`);
@@ -86,6 +86,7 @@ function getResourceInfo(resourceId, callback) {
 }
 function gotResourceInfo(err, results) {
   if (err) return console.log(err);
+
   results.forEach(function(info) {
     for (let code in info.stats) {
       let coveragePart = info.stats[code].translated.percentage / results.length;
@@ -320,7 +321,7 @@ function checkForDuplicateShortcuts(code, coreStrings) {
     if (rep !== undefined) {
       let shortcut = modifier + rep;
       if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
-        let message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
+        let message = `${code}: duplicate shortcut "${shortcut}" for "${usedShortcuts[shortcut]}" and "${shortcutPathString}"`;
         console.warn(colors.yellow(message));
       } else {
         usedShortcuts[shortcut] = shortcutPathString;

@@ -163,7 +163,8 @@ sources.forEach(source => {
     im.terms_html = attribution.html;
   }
 
-  ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'].forEach(prop => {
+  const props = ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize']
+  props.forEach(prop => {
     if (source[prop]) {
       im[prop] = source[prop];
     }
