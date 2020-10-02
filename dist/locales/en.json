@@ -5670,7 +5670,7 @@
                 },
                 "amenity/boat_storage": {
                     "name": "Boat Storage",
-                    "terms": ""
+                    "terms": "boathouse,dry dock,marina"
                 },
                 "amenity/bureau_de_change": {
                     "name": "Currency Exchange",
@@ -5930,6 +5930,10 @@
                 "amenity/loading_dock": {
                     "name": "Loading Dock",
                     "terms": "door,loading bay,shipping,unloading,warehouse"
+                },
+                "amenity/lounger": {
+                    "name": "Lounger",
+                    "terms": "seat,chair,bench"
                 },
                 "amenity/love_hotel": {
                     "name": "Love Hotel",
@@ -7748,10 +7752,6 @@
                     "name": "Shipwreck",
                     "terms": "hull,mast,maritime,remains,ship,boat"
                 },
-                "hot_spring": {
-                    "name": "Hot Spring",
-                    "terms": ""
-                },
                 "indoor/corridor_line": {
                     "name": "Indoor Corridor"
                 },
@@ -8306,10 +8306,6 @@
                     "name": "Line",
                     "terms": "polyline"
                 },
-                "lounger": {
-                    "name": "Lounger",
-                    "terms": "seat,chair,bench"
-                },
                 "man_made/adit": {
                     "name": "Adit",
                     "terms": "cave,horizontal mine entrance,tunnel,underground"
@@ -8669,6 +8665,10 @@
                 "natural/heath": {
                     "name": "Heath",
                     "terms": ""
+                },
+                "natural/hot_spring": {
+                    "name": "Hot Spring",
+                    "terms": "geothermal spring,thermal pool"
                 },
                 "natural/mud": {
                     "name": "Mud",

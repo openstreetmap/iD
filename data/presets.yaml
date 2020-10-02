@@ -3215,6 +3215,7 @@ en:
       amenity/boat_storage:
         # amenity=boat_storage
         name: Boat Storage
+        # 'terms: boathouse,dry dock,marina'
         terms: '<translate with synonyms or related terms for ''Boat Storage'', separated by commas>'
       amenity/bureau_de_change:
         # amenity=bureau_de_change
@@ -3542,6 +3543,11 @@ en:
         name: Loading Dock
         # 'terms: door,loading bay,shipping,unloading,warehouse'
         terms: '<translate with synonyms or related terms for ''Loading Dock'', separated by commas>'
+      amenity/lounger:
+        # amenity=lounger
+        name: Lounger
+        # 'terms: seat,chair,bench'
+        terms: '<translate with synonyms or related terms for ''Lounger'', separated by commas>'
       amenity/love_hotel:
         # amenity=love_hotel
         name: Love Hotel
@@ -5691,10 +5697,6 @@ en:
         name: Shipwreck
         # 'terms: hull,mast,maritime,remains,ship,boat'
         terms: '<translate with synonyms or related terms for ''Shipwreck'', separated by commas>'
-      hot_spring:
-        # natural=hot_spring
-        name: Hot Spring
-        terms: '<translate with synonyms or related terms for ''Hot Spring'', separated by commas>'
       indoor:
         # indoor=*
         name: Indoor Feature
@@ -6365,11 +6367,6 @@ en:
         name: Line
         # 'terms: polyline'
         terms: '<translate with synonyms or related terms for ''Line'', separated by commas>'
-      lounger:
-        # amenity=lounger
-        name: Lounger
-        # 'terms: seat,chair,bench'
-        terms: '<translate with synonyms or related terms for ''Lounger'', separated by commas>'
       man_made:
         # man_made=*
         name: Man Made Feature
@@ -6806,6 +6803,11 @@ en:
         # natural=heath
         name: Heath
         terms: '<translate with synonyms or related terms for ''Heath'', separated by commas>'
+      natural/hot_spring:
+        # natural=hot_spring
+        name: Hot Spring
+        # 'terms: geothermal spring,thermal pool'
+        terms: '<translate with synonyms or related terms for ''Hot Spring'', separated by commas>'
       natural/mud:
         # natural=mud
         name: Mud

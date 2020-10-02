@@ -2,22 +2,20 @@
     "icon": "maki-water",
     "fields": [
         "name",
-        "water",
-        "hot_water",
         "intermittent"
     ],
     "moreFields": [
-        "fishing",
-        "gnis/feature_id",
-        "salt",
-        "tidal"
+        "gnis/feature_id"
     ],
     "geometry": [
-        "area"
+        "point"
     ],
     "tags": {
         "natural": "hot_spring"
     },
+    "terms": [
+        "geothermal spring",
+        "thermal pool"
+    ],
     "name": "Hot Spring"
 }
-
