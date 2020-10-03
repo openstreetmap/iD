@@ -6733,8 +6733,8 @@ en:
         name: Military Trench
         # 'terms: dugout,firestep,fox hole,infantry trench,war trench'
         terms: '<translate with synonyms or related terms for ''Military Trench'', separated by commas>'
-      morgue:
-        # amenity=morgue
+      mortuary:
+        # amenity=mortuary
         name: Morgue
         # 'terms: memorial home'
         terms: '<translate with synonyms or related terms for ''Morgue'', separated by commas>'

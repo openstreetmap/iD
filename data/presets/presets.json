@@ -824,7 +824,7 @@
   "military/nuclear_explosion_site": {"icon": "maki-danger", "fields": ["name"], "moreFields": ["gnis/feature_id"], "geometry": ["point", "vertex", "area"], "tags": {"military": "nuclear_explosion_site"}, "terms": ["atom", "blast", "bomb", "detonat*", "nuke", "site", "test"], "name": "Nuclear Explosion Site"},
   "military/office": {"icon": "temaki-military", "fields": ["name", "building_area"], "moreFields": ["gnis/feature_id", "level"], "geometry": ["point", "area"], "tags": {"military": "office"}, "terms": ["air force", "army", "base", "enlist", "fight", "force", "guard", "marine", "navy", "recruit", "troop", "war"], "name": "Military Office"},
   "military/trench": {"icon": "temaki-trench", "fields": ["name", "trench"], "geometry": ["point", "line"], "tags": {"military": "trench"}, "terms": ["dugout", "firestep", "fox hole", "infantry trench", "war trench"], "name": "Military Trench"},
-  "morgue": {"icon": "maki-cemetery", "fields": ["religion", "denomination"], "geometry": ["point", "area"], "terms": ["memorial home"], "tags": {"amenity": "morgue"}, "name": "Morgue"},
+  "mortuary": {"icon": "maki-cemetery", "fields": ["religion", "denomination"], "geometry": ["point", "area"], "terms": ["memorial home"], "tags": {"amenity": "mortuary"}, "name": "Morgue"},
   "natural/bare_rock": {"geometry": ["area"], "tags": {"natural": "bare_rock"}, "terms": ["rock"], "name": "Bare Rock"},
   "natural/bay": {"icon": "temaki-beach", "geometry": ["point", "line", "area"], "fields": ["name"], "tags": {"natural": "bay"}, "terms": [], "name": "Bay"},
   "natural/beach": {"icon": "temaki-beach", "fields": ["surface"], "geometry": ["point", "area"], "tags": {"natural": "beach"}, "terms": ["shore"], "name": "Beach"},
