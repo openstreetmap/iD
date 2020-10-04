@@ -799,6 +799,9 @@ en:
         label: Distance
         # 'terms: length,mileage'
         terms: '[translate with synonyms or related terms for ''Distance'', separated by commas]'
+      disused/amenity:
+        # 'disused:amenity=*'
+        label: Type
       disused/railway:
         # 'disused:railway=*'
         label: Type
@@ -4982,6 +4985,9 @@ en:
       demolished/building:
         # 'demolished:building=*'
         name: Recently Demolished Building
+      disused/amenity:
+        # 'disused:amenity=*'
+        name: Disused Amenity
       disused/railway:
         # 'disused:railway=*'
         name: Disused Railway Feature

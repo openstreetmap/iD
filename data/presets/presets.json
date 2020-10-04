@@ -454,6 +454,7 @@
   "craft/winery": {"icon": "maki-alcohol-shop", "moreFields": ["{craft}", "min_age"], "geometry": ["point", "area"], "tags": {"craft": "winery"}, "name": "Winery"},
   "cycleway/asl": {"icon": "maki-bicycle", "fields": ["ref", "direction_vertex", "width"], "geometry": ["vertex"], "tags": {"cycleway": "asl"}, "terms": ["advanced stop box", "asl", "bicycle box", "bike box", "bikebox", "cycle box", "cycle stop marking"], "name": "Advanced Stop Line"},
   "demolished/building": {"icon": "fas-house-damage", "fields": ["name", "address"], "geometry": ["area"], "tags": {"demolished:building": "*"}, "name": "Recently Demolished Building", "searchable": false},
+  "disused/amenity": {"fields": ["disused/amenity"], "geometry": ["point", "vertex", "area"], "tags": {"disused:amenity": "*"}, "matchScore": 0.05, "searchable": false, "name": "Disused Amenity"},
   "disused/railway": {"icon": "temaki-rail_profile", "fields": ["disused/railway"], "geometry": ["point", "vertex", "line", "area"], "tags": {"disused:railway": "*"}, "matchScore": 0.05, "searchable": false, "name": "Disused Railway Feature"},
   "disused/shop": {"icon": "fas-store-alt-slash", "fields": ["disused/shop"], "geometry": ["point", "area"], "tags": {"disused:shop": "*"}, "matchScore": 0.05, "searchable": false, "name": "Disused Shop"},
   "emergency/designated": {"fields": ["emergency_combo"], "geometry": ["line"], "tags": {"emergency": "designated"}, "name": "Emergency Access Designated", "searchable": false, "matchScore": 0.01},

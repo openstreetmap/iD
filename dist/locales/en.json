@@ -3567,6 +3567,9 @@
                     "label": "Distance",
                     "terms": "length,mileage"
                 },
+                "disused/amenity": {
+                    "label": "Type"
+                },
                 "disused/railway": {
                     "label": "Type"
                 },
@@ -7151,6 +7154,9 @@
                 },
                 "demolished/building": {
                     "name": "Recently Demolished Building"
+                },
+                "disused/amenity": {
+                    "name": "Disused Amenity"
                 },
                 "disused/railway": {
                     "name": "Disused Railway Feature"

@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "disused/amenity"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "disused:amenity": "*"
+    },
+    "matchScore": 0.05,
+    "searchable": false,
+    "name": "Disused Amenity"
+}

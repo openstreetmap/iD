@@ -450,6 +450,7 @@
     {"key": "craft", "value": "winery", "description": "🄿 Winery", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/alcohol-shop-15.svg"},
     {"key": "cycleway", "value": "asl", "description": "🄿 Advanced Stop Line", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/bicycle-15.svg"},
     {"key": "demolished:building", "description": "🄿 Recently Demolished Building (unsearchable)", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-house-damage.svg"},
+    {"key": "disused:amenity", "description": "🄿 Disused Amenity (unsearchable), 🄵 Type", "object_types": ["node", "area"]},
     {"key": "disused:railway", "description": "🄿 Disused Railway Feature (unsearchable), 🄵 Type", "object_types": ["node", "way", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/rail_profile.svg"},
     {"key": "disused:shop", "description": "🄿 Disused Shop (unsearchable), 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-store-alt-slash.svg"},
     {"key": "emergency", "value": "designated", "description": "🄿 Emergency Access Designated (unsearchable)", "object_types": ["way"]},
