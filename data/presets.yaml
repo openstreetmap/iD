@@ -7499,6 +7499,11 @@ en:
         name: Bus Stop
         # 'terms: bus,platform,public transit,public transportation,transit,transportation'
         terms: '<translate with synonyms or related terms for ''Bus Stop'', separated by commas>'
+      public_transport/platform/bus_tram_point:
+        # 'public_transport=platform, bus=yes, tram=yes'
+        name: Tram & Bus Stop
+        # 'terms: bus,platform,public transit,public transportation,transit,transportation'
+        terms: '<translate with synonyms or related terms for ''Tram & Bus Stop'', separated by commas>'
       public_transport/platform/ferry:
         # 'public_transport=platform, ferry=yes'
         name: Ferry Platform

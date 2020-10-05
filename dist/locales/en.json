@@ -9272,6 +9272,10 @@
                     "name": "Bus Stop",
                     "terms": "bus,platform,public transit,public transportation,transit,transportation"
                 },
+                "public_transport/platform/bus_tram_point": {
+                    "name": "Tram & Bus Stop",
+                    "terms": "bus,platform,public transit,public transportation,transit,transportation"
+                },
                 "public_transport/platform/bus": {
                     "name": "Bus Platform",
                     "terms": "bus,platform,public transit,public transportation,transit,transportation"
