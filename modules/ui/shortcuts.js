@@ -16,20 +16,6 @@ export function uiShortcuts(context) {
     var _selection = d3_select(null);
 
 
-    context.keybinding()
-        .on([t('shortcuts.toggle.key'), '?'], function () {
-            if (context.container().selectAll('.modal-shortcuts').size()) {  // already showing
-                if (_modalSelection) {
-                    _modalSelection.close();
-                    _modalSelection = null;
-                }
-            } else {
-                _modalSelection = uiModal(_selection);
-                _modalSelection.call(shortcutsModal);
-            }
-        });
-
-
     function shortcutsModal(_modalSelection) {
         _modalSelection.select('.modal')
             .classed('modal-shortcuts', true);
@@ -264,6 +250,19 @@ export function uiShortcuts(context) {
         if (show) {
             _modalSelection = uiModal(selection);
             _modalSelection.call(shortcutsModal);
+        } else {
+            context.keybinding()
+                .on([t('shortcuts.toggle.key'), '?'], function () {
+                    if (context.container().selectAll('.modal-shortcuts').size()) {  // already showing
+                        if (_modalSelection) {
+                            _modalSelection.close();
+                            _modalSelection = null;
+                        }
+                    } else {
+                        _modalSelection = uiModal(_selection);
+                        _modalSelection.call(shortcutsModal);
+                    }
+                });
         }
     };
 }

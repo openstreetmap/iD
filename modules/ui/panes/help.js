@@ -4,7 +4,6 @@ import { event as d3_event } from 'd3-selection';
 import marked from 'marked';
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
-import { uiShortcuts } from '../shortcuts';
 import { uiPane } from '../pane';
 
 import { t, localizer } from '../../core/localizer';
@@ -353,7 +352,7 @@ export function uiPaneHelp(context) {
 
         function clickShortcuts() {
             d3_event.preventDefault();
-            context.container().call(uiShortcuts(context), true);
+            context.container().call(context.ui().shortcuts, true);
         }
 
         var toc = content
