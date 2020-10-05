@@ -2004,6 +2004,10 @@ en:
           both: Both / All
           # 'railway:signal:direction=forward'
           forward: Forward
+      ramp:
+        # ramp=*
+        label: Embedded Ramp
+        terms: '[translate with synonyms or related terms for ''Embedded Ramp'', separated by commas]'
       rating:
         # rating=*
         label: Power Rating

@@ -351,6 +351,7 @@
   "railway": {"key": "railway", "type": "typeCombo", "label": "Type"},
   "railway/position": {"key": "railway:position", "type": "text", "placeholder": "Distance to one decimal (123.4)", "label": "Milestone Position"},
   "railway/signal/direction": {"key": "railway:signal:direction", "type": "combo", "label": "Direction Affected", "strings": {"options": {"forward": "Forward", "backward": "Backward", "both": "Both / All"}}},
+  "ramp": {"key": "ramp", "type": "check", "label": "Embedded Ramp"},
   "rating": {"key": "rating", "type": "combo", "label": "Power Rating", "snake_case": false},
   "rcn_ref": {"key": "rcn_ref", "type": "text", "label": "Cycling Code"},
   "real_fire": {"countryCodes": ["gb", "ie"], "key": "real_fire", "type": "check", "label": "Real Fire", "terms": ["fire place", "fire"]},

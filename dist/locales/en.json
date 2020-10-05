@@ -4574,6 +4574,10 @@
                         "both": "Both / All"
                     }
                 },
+                "ramp": {
+                    "label": "Embedded Ramp",
+                    "terms": ""
+                },
                 "rating": {
                     "label": "Power Rating"
                 },

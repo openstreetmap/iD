@@ -1790,6 +1790,7 @@
     {"key": "railway:signal:direction", "value": "forward", "description": "🄵 Direction Affected"},
     {"key": "railway:signal:direction", "value": "backward", "description": "🄵 Direction Affected"},
     {"key": "railway:signal:direction", "value": "both", "description": "🄵 Direction Affected"},
+    {"key": "ramp", "description": "🄵 Embedded Ramp"},
     {"key": "rating", "description": "🄵 Power Rating"},
     {"key": "rcn_ref", "description": "🄵 Cycling Code"},
     {"key": "real_fire", "description": "🄵 Real Fire"},
