@@ -540,7 +540,7 @@ export default {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
-                hash.photo = 'mapillary-' + imageKey;
+                hash.photo = 'mapillary/' + imageKey;
             } else {
                 delete hash.photo;
             }

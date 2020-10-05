@@ -44,8 +44,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Example:_ `photo_overlay=streetside,mapillary,openstreetcam`<br/>
   _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `mapillary-map-features`, `openstreetcam`
 * __`photo`__ - The service and ID of the street-level photo to show.<br/>
-  _Example:_ `photo=streetside-718514589`<br/>
-  _Available prefixes:_ `streetside-`, `mapillary-`, `openstreetcam-`
+  _Example:_ `photo=streetside/718514589`<br/>
+  _Available prefixes:_ `streetside/`, `mapillary/`, `openstreetcam/`
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).

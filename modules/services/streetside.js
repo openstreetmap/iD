@@ -953,7 +953,7 @@ export default {
       if (!window.mocha) {
           var hash = utilStringQs(window.location.hash);
           if (imageKey) {
-              hash.photo = 'streetside-' + imageKey;
+              hash.photo = 'streetside/' + imageKey;
           } else {
               delete hash.photo;
           }

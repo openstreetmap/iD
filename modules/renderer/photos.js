@@ -89,7 +89,7 @@ export function rendererPhotos(context) {
 
             var photoIds = hash.photo.replace(/;/g, ',').split(',');
             var photoId = photoIds.length && photoIds[0].trim();
-            var results = /(.*)-(.*)/g.exec(photoId);
+            var results = /(.*)\/(.*)/g.exec(photoId);
             if (results && results.length >= 3) {
                 var serviceId = results[1];
                 var photoKey = results[2];

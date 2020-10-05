@@ -560,7 +560,7 @@ export default {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
-                hash.photo = 'openstreetcam-' + imageKey;
+                hash.photo = 'openstreetcam/' + imageKey;
             } else {
                 delete hash.photo;
             }
