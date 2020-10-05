@@ -5,6 +5,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { easeCubicInOut as d3_easeCubicInOut } from 'd3-ease';
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
@@ -27,9 +28,14 @@ export function uiSectionBackgroundList(context) {
         .label(t.html('background.backgrounds'))
         .disclosureContent(renderDisclosureContent);
 
+    var favoriteBackgroundsJSON = prefs('background-favorites');
+    var _favoriteBackgrounds = favoriteBackgroundsJSON ? JSON.parse(favoriteBackgroundsJSON) : {};
+
+
     function previousBackgroundID() {
         return prefs('background-last-used-toggle');
     }
+
 
     function renderDisclosureContent(selection) {
 
@@ -161,15 +167,58 @@ export function uiSectionBackgroundList(context) {
         });
     }
 
+
+    function sortSources(a, b) {
+        return _favoriteBackgrounds[a.id] && !_favoriteBackgrounds[b.id] ? -1
+            : _favoriteBackgrounds[b.id] && !_favoriteBackgrounds[a.id] ? 1
+            : a.best() && !b.best() ? -1
+            : b.best() && !a.best() ? 1
+            : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+    }
+
+
+    function getBackgrounds(filter) {
+        return context.background()
+            .sources(context.map().extent(), context.map().zoom(), true)
+            .filter(filter);
+    }
+
+
+    function chooseBackgroundAtOffset(offset) {
+        const backgrounds = getBackgrounds(function(d) { return !d.isHidden() && !d.overlay; });
+        backgrounds.sort(sortSources);
+        const currentBackground = context.background().baseLayerSource();
+        const foundIndex = backgrounds.indexOf(currentBackground);
+        if (foundIndex === -1) {
+            // Can't find the current background, so just do nothing
+            return;
+        }
+
+        let nextBackgroundIndex = (foundIndex + offset + backgrounds.length) % backgrounds.length;
+        let nextBackground = backgrounds[nextBackgroundIndex];
+        if (nextBackground.id === 'custom' && !nextBackground.template()) {
+            nextBackgroundIndex = (nextBackgroundIndex + offset + backgrounds.length) % backgrounds.length;
+            nextBackground = backgrounds[nextBackgroundIndex];
+        }
+        chooseBackground(nextBackground);
+    }
+
+
+    function nextBackground() {
+        chooseBackgroundAtOffset(1);
+    }
+
+
+    function previousBackground() {
+        chooseBackgroundAtOffset(-1);
+    }
+
+
     function drawListItems(layerList, type, change, filter) {
         var sources = context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
-            .sort(function(a, b) {
-                return a.best() && !b.best() ? -1
-                    : b.best() && !a.best() ? 1
-                    : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
-            });
+            .sort(sortSources);
 
         var layerLinks = layerList.selectAll('li')
             // We have to be a bit inefficient about reordering the list since
@@ -180,12 +229,12 @@ export function uiSectionBackgroundList(context) {
         layerLinks.exit()
             .remove();
 
-        var enter = layerLinks.enter()
+        var layerLinksEnter = layerLinks.enter()
             .append('li')
             .classed('layer-custom', function(d) { return d.id === 'custom'; })
             .classed('best', function(d) { return d.best(); });
 
-        var label = enter
+        var label = layerLinksEnter
             .append('label');
 
         label
@@ -201,7 +250,40 @@ export function uiSectionBackgroundList(context) {
             .append('span')
             .html(function(d) { return d.label(); });
 
-        enter.filter(function(d) { return d.id === 'custom'; })
+        layerLinksEnter
+            .append('button')
+            .attr('class', 'background-favorite-button')
+            .classed('active', function(d) { return !!_favoriteBackgrounds[d.id]; })
+            .attr('tabindex', -1)
+            .call(svgIcon('#iD-icon-favorite'))
+            .on('click', function(d) {
+                if (_favoriteBackgrounds[d.id]) {
+                    d3_select(this).classed('active', false);
+                    delete _favoriteBackgrounds[d.id];
+                } else {
+                    d3_select(this).classed('active', true);
+                    _favoriteBackgrounds[d.id] = true;
+                }
+                prefs('background-favorites', JSON.stringify(_favoriteBackgrounds));
+
+                d3_select(this.parentElement)
+                    .transition()
+                    .duration(300)
+                    .ease(d3_easeCubicInOut)
+                    .style('background-color', 'orange')
+                        .transition()
+                        .duration(300)
+                        .ease(d3_easeCubicInOut)
+                        .style('background-color', null);
+
+                layerList.selectAll('li')
+                    .sort(sortSources);
+                layerList
+                    .call(updateLayerSelections);
+                this.blur(); // Stop old de-stars from having grey background
+            });
+
+        layerLinksEnter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
             .attr('class', 'layer-browse')
             .call(uiTooltip()
@@ -211,15 +293,15 @@ export function uiSectionBackgroundList(context) {
             .on('click', editCustom)
             .call(svgIcon('#iD-icon-more'));
 
-        enter.filter(function(d) { return d.best(); })
-            .append('div')
+        layerLinksEnter.filter(function(d) { return d.best(); })
+            .selectAll('label')
+            .append('span')
             .attr('class', 'best')
             .call(uiTooltip()
                 .title(t.html('background.best_imagery'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .append('span')
-            .html('&#9733;');
+            .call(svgIcon('#iD-icon-best-background'));
 
         layerList
             .call(updateLayerSelections);
@@ -281,6 +363,10 @@ export function uiSectionBackgroundList(context) {
                 window.requestIdleCallback(section.reRender);
             }, 1000)
         );
+
+    context.keybinding()
+        .on(t('background.next_background.key'), nextBackground)
+        .on(t('background.previous_background.key'), previousBackground);
 
     return section;
 }
