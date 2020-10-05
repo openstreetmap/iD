@@ -540,21 +540,12 @@ export default {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
-                hash.photo = 'mapillary-' + imageKey;
+                hash.photo = 'mapillary/' + imageKey;
             } else {
                 delete hash.photo;
             }
             window.location.replace('#' + utilQsString(hash, true));
         }
-    },
-
-
-    updateViewer: function(context, imageKey) {
-        if (_mlyViewer && imageKey) {
-            _mlyViewer.moveToKey(imageKey)
-                .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
-        }
-        return this;
     },
 
 
@@ -632,8 +623,6 @@ export default {
                 context.map().centerEase(loc);
                 that.selectImage(context, node.key, true);
             }
-
-            that.updateUrlImage(node.key);
             dispatch.call('nodeChanged');
         }
 
@@ -649,6 +638,8 @@ export default {
     selectImage: function(context, imageKey, fromViewer) {
 
         _mlySelectedImageKey = imageKey;
+
+        this.updateUrlImage(imageKey);
 
         var d = _mlyCache.images.forImageKey[imageKey];
 
@@ -668,6 +659,11 @@ export default {
 
         if (_mlyShowSignDetections) {
             this.updateDetections(imageKey, apibase + 'image_detections?layers=trafficsigns&image_keys=' + imageKey);
+        }
+
+        if (_mlyViewer && imageKey) {
+            _mlyViewer.moveToKey(imageKey)
+                .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
 
         return this;

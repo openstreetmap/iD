@@ -799,6 +799,9 @@ en:
         label: Distance
         # 'terms: length,mileage'
         terms: '[translate with synonyms or related terms for ''Distance'', separated by commas]'
+      disused/amenity:
+        # 'disused:amenity=*'
+        label: Type
       disused/railway:
         # 'disused:railway=*'
         label: Type
@@ -3212,6 +3215,11 @@ en:
         # amenity=boat_rental
         name: Boat Rental
         terms: '<translate with synonyms or related terms for ''Boat Rental'', separated by commas>'
+      amenity/boat_storage:
+        # amenity=boat_storage
+        name: Boat Storage
+        # 'terms: boathouse,dry dock,marina'
+        terms: '<translate with synonyms or related terms for ''Boat Storage'', separated by commas>'
       amenity/bureau_de_change:
         # amenity=bureau_de_change
         name: Currency Exchange
@@ -3538,6 +3546,11 @@ en:
         name: Loading Dock
         # 'terms: door,loading bay,shipping,unloading,warehouse'
         terms: '<translate with synonyms or related terms for ''Loading Dock'', separated by commas>'
+      amenity/lounger:
+        # amenity=lounger
+        name: Lounger
+        # 'terms: seat,chair,bench'
+        terms: '<translate with synonyms or related terms for ''Lounger'', separated by commas>'
       amenity/love_hotel:
         # amenity=love_hotel
         name: Love Hotel
@@ -4972,6 +4985,9 @@ en:
       demolished/building:
         # 'demolished:building=*'
         name: Recently Demolished Building
+      disused/amenity:
+        # 'disused:amenity=*'
+        name: Disused Amenity
       disused/railway:
         # 'disused:railway=*'
         name: Disused Railway Feature
@@ -6793,6 +6809,11 @@ en:
         # natural=heath
         name: Heath
         terms: '<translate with synonyms or related terms for ''Heath'', separated by commas>'
+      natural/hot_spring:
+        # natural=hot_spring
+        name: Hot Spring
+        # 'terms: geothermal spring,thermal pool'
+        terms: '<translate with synonyms or related terms for ''Hot Spring'', separated by commas>'
       natural/mud:
         # natural=mud
         name: Mud

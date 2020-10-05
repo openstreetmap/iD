@@ -82,7 +82,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
                 .then(function() {
                     service
                         .highlightDetection(highlightedDetection)
-                        .updateViewer(context, imageKey)
+                        .selectImage(context, imageKey)
                         .showViewer(context);
                 });
 

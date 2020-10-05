@@ -260,8 +260,10 @@ describe('iD.serviceOpenstreetcam', function() {
 
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
+            var d = { key: 'foo' };
+            openstreetcam.cache().images = { forImageKey: { foo: d }};
             openstreetcam.selectImage(context, 'foo');
-            expect(openstreetcam.getSelectedImage()).to.eql('foo');
+            expect(openstreetcam.getSelectedImage()).to.eql(d);
         });
     });
 

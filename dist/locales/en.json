@@ -3567,6 +3567,9 @@
                     "label": "Distance",
                     "terms": "length,mileage"
                 },
+                "disused/amenity": {
+                    "label": "Type"
+                },
                 "disused/railway": {
                     "label": "Type"
                 },
@@ -5668,6 +5671,10 @@
                     "name": "Boat Rental",
                     "terms": ""
                 },
+                "amenity/boat_storage": {
+                    "name": "Boat Storage",
+                    "terms": "boathouse,dry dock,marina"
+                },
                 "amenity/bureau_de_change": {
                     "name": "Currency Exchange",
                     "terms": "bureau de change,money changer"
@@ -5926,6 +5933,10 @@
                 "amenity/loading_dock": {
                     "name": "Loading Dock",
                     "terms": "door,loading bay,shipping,unloading,warehouse"
+                },
+                "amenity/lounger": {
+                    "name": "Lounger",
+                    "terms": "seat,chair,bench"
                 },
                 "amenity/love_hotel": {
                     "name": "Love Hotel",
@@ -7143,6 +7154,9 @@
                 },
                 "demolished/building": {
                     "name": "Recently Demolished Building"
+                },
+                "disused/amenity": {
+                    "name": "Disused Amenity"
                 },
                 "disused/railway": {
                     "name": "Disused Railway Feature"
@@ -8657,6 +8671,10 @@
                 "natural/heath": {
                     "name": "Heath",
                     "terms": ""
+                },
+                "natural/hot_spring": {
+                    "name": "Hot Spring",
+                    "terms": "geothermal spring,thermal pool"
                 },
                 "natural/mud": {
                     "name": "Mud",

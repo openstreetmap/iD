@@ -39,6 +39,11 @@ export function uiSectionRawTagEditor(id, context) {
     var _presets;
     var _tags;
     var _entityIDs;
+    var _didInteract = false;
+
+    function interacted() {
+        _didInteract = true;
+    }
 
     function renderDisclosureContent(wrap) {
 
@@ -127,6 +132,7 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilGetSetValue, textData)
             .each(setTextareaHeight)
             .on('input', setTextareaHeight)
+            .on('focus', interacted)
             .on('blur', textChanged)
             .on('change', textChanged);
 
@@ -188,6 +194,7 @@ export function uiSectionRawTagEditor(id, context) {
             .property('type', 'text')
             .attr('class', 'key')
             .call(utilNoAuto)
+            .on('focus', interacted)
             .on('blur', keyChange)
             .on('change', keyChange);
 
@@ -198,6 +205,7 @@ export function uiSectionRawTagEditor(id, context) {
             .property('type', 'text')
             .attr('class', 'value')
             .call(utilNoAuto)
+            .on('focus', interacted)
             .on('blur', valueChange)
             .on('change', valueChange)
             .on('keydown.push-more', pushMore);
@@ -575,7 +583,9 @@ export function uiSectionRawTagEditor(id, context) {
         _presets = val;
         if (_presets && _presets.length && _presets[0].isFallback()) {
             section.disclosureExpanded(true);
-        } else {
+
+        // don't collapse the disclosure if the mapper used the raw tag editor - #1881
+        } else if (!_didInteract) {
             section.disclosureExpanded(null);
         }
         return section;

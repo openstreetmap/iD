@@ -138,6 +138,7 @@
   "dispensing": {"key": "dispensing", "type": "check", "label": "Dispenses Prescriptions", "default": "yes"},
   "display": {"key": "display", "type": "combo", "label": "Display", "options": ["analog", "digital", "sundial", "unorthodox"]},
   "distance": {"key": "distance", "type": "text", "label": "Distance", "terms": ["length", "mileage"]},
+  "disused/amenity": {"key": "disused:amenity", "type": "typeCombo", "label": "Type"},
   "disused/railway": {"key": "disused:railway", "type": "typeCombo", "label": "Type"},
   "disused/shop": {"key": "disused:shop", "type": "typeCombo", "label": "Type"},
   "dock": {"key": "dock", "type": "combo", "label": "Type"},
