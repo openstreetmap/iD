@@ -3515,7 +3515,7 @@ en:
       amenity/kindergarten:
         # amenity=kindergarten
         name: Preschool / Kindergarten Grounds
-        # 'terms: kindergarden,pre-school'
+        # 'terms: kindergarten,kindergarden,pre-school'
         terms: '<translate with synonyms or related terms for ''Preschool / Kindergarten Grounds'', separated by commas>'
       amenity/kneipp_water_cure:
         # amenity=kneipp_water_cure
@@ -4584,7 +4584,7 @@ en:
       building/farm_auxiliary:
         # building=farm_auxiliary
         name: Farm Building
-        # 'terms: agriculture,auxilary,chicken coop,farm auxiliary,pigsty,sty'
+        # 'terms: agriculture,auxiliary,auxilary,chicken coop,farm auxiliary,pigsty,sty'
         terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
         # building=garage
@@ -4636,7 +4636,7 @@ en:
       building/kindergarten:
         # building=kindergarten
         name: Preschool / Kindergarten Building
-        # 'terms: kindergarden,pre-school'
+        # 'terms: kindergarten,kindergarden,pre-school'
         terms: '<translate with synonyms or related terms for ''Preschool / Kindergarten Building'', separated by commas>'
       building/mosque:
         # building=mosque
@@ -7502,7 +7502,7 @@ en:
       public_transport/platform/bus_tram_point:
         # 'public_transport=platform, bus=yes, tram=yes'
         name: Tram & Bus Stop
-        # 'terms: bus,platform,public transit,public transportation,transit,transportation'
+        # 'terms: bus,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,transit,transportation,trolley'
         terms: '<translate with synonyms or related terms for ''Tram & Bus Stop'', separated by commas>'
       public_transport/platform/ferry:
         # 'public_transport=platform, ferry=yes'
@@ -8631,7 +8631,7 @@ en:
       shop/video:
         # shop=video
         name: Video Store
-        # 'terms: DVD,VHS,video casette'
+        # 'terms: DVD,VHS,video cassette,video casette'
         terms: '<translate with synonyms or related terms for ''Video Store'', separated by commas>'
       shop/video_games:
         # shop=video_games
@@ -8716,7 +8716,7 @@ en:
       tourism/artwork/graffiti:
         # 'tourism=artwork, artwork_type=graffiti'
         name: Graffiti
-        # 'terms: Street Artwork,Guerilla Artwork,Graffiti Artwork'
+        # 'terms: Street Artwork,Guerrilla Artwork,Guerilla Artwork,Graffiti Artwork'
         terms: '<translate with synonyms or related terms for ''Graffiti'', separated by commas>'
       tourism/artwork/installation:
         # 'tourism=artwork, artwork_type=installation'

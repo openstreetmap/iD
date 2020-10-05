@@ -27,11 +27,17 @@
     },
     "terms": [
         "bus",
+        "light rail",
         "platform",
         "public transit",
         "public transportation",
+        "rail",
+        "streetcar",
+        "track",
+        "tram",
         "transit",
-        "transportation"
+        "transportation",
+        "trolley"
     ],
     "name": "Tram & Bus Stop"
 }
