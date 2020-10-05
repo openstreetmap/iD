@@ -5954,6 +5954,10 @@
                     "name": "Money Transfer Station",
                     "terms": "money order,check,bill,currency,finance,wire transfer,cable,person to person,cash to cash,exchange"
                 },
+                "amenity/mortuary": {
+                    "name": "Morgue",
+                    "terms": "crematorium,funeral home,memorial home,morgue,mortuary,undertaker"
+                },
                 "amenity/motorcycle_parking": {
                     "name": "Motorcycle Parking",
                     "terms": ""
@@ -8623,10 +8627,6 @@
                 "military/trench": {
                     "name": "Military Trench",
                     "terms": "dugout,firestep,fox hole,infantry trench,war trench"
-                },
-                "mortuary": {
-                    "name": "Morgue",
-                    "terms": "memorial home"
                 },
                 "natural/bare_rock": {
                     "name": "Bare Rock",

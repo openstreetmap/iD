@@ -3569,6 +3569,11 @@ en:
         name: Money Transfer Station
         # 'terms: money order,check,bill,currency,finance,wire transfer,cable,person to person,cash to cash,exchange'
         terms: '<translate with synonyms or related terms for ''Money Transfer Station'', separated by commas>'
+      amenity/mortuary:
+        # amenity=mortuary
+        name: Morgue
+        # 'terms: crematorium,funeral home,memorial home,morgue,mortuary,undertaker'
+        terms: '<translate with synonyms or related terms for ''Morgue'', separated by commas>'
       amenity/motorcycle_parking:
         # amenity=motorcycle_parking
         name: Motorcycle Parking
@@ -6749,11 +6754,6 @@ en:
         name: Military Trench
         # 'terms: dugout,firestep,fox hole,infantry trench,war trench'
         terms: '<translate with synonyms or related terms for ''Military Trench'', separated by commas>'
-      mortuary:
-        # amenity=mortuary
-        name: Morgue
-        # 'terms: memorial home'
-        terms: '<translate with synonyms or related terms for ''Morgue'', separated by commas>'
       natural:
         # natural=*
         name: Natural Feature
