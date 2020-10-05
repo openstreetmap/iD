@@ -47,7 +47,7 @@ const languageInfo = languageNames.langNamesInNativeLang;
 fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
 fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
-let shortcuts = [];
+const shortcuts = [];
 dataShortcuts.forEach(tab => {
   tab.columns.forEach(col => {
     col.rows.forEach(row => {

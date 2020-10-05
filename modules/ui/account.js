@@ -17,7 +17,7 @@ export function uiAccount(context) {
             return;
         }
 
-        osm.userDetails(function(err, details) {
+        osm.userDetails((err, details) => {
             var userLink = selection.select('.userLink'),
                 logoutLink = selection.select('.logoutLink');
 
@@ -61,7 +61,7 @@ export function uiAccount(context) {
     }
 
 
-    return function(selection) {
+    return (selection) => {
 
         selection.append('li')
             .attr('class', 'userLink')
@@ -72,7 +72,7 @@ export function uiAccount(context) {
             .classed('hide', true);
 
         if (osm) {
-            osm.on('change.account', function() { update(selection); });
+            osm.on('change.account', () => { update(selection); });
             update(selection);
         }
     };
