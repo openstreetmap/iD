@@ -1,0 +1,17 @@
+# GitHub Action to automate the identification of common misspellings in text files.
+# https://github.com/codespell-project/actions-codespell
+# https://github.com/codespell-project/codespell
+name: codespell
+on: [push, pull_request]
+jobs:
+  codespell:
+    name: Check for spelling errors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: codespell-project/actions-codespell@master
+        with:
+          check_filenames: true
+          skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/locales.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img,./data/presets/categories.json,./data/presets/fields.json,./data/presets/presets.json,./data/presets.yaml,./data/taginfo.json,./data/deprecated.json
+          ignore_words_list: "auxilary,casette,cemetary,chancel,childs,files',froms,generat,guerilla,kindergarden,nd,specialties,vias,visibles,tos"
+          only_warn: 1
