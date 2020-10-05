@@ -289,7 +289,7 @@ export function coreLocalizer() {
         }
         // no localized string found...
 
-        // attempt to fallback to a lower-priority langauge
+        // attempt to fallback to a lower-priority language
         let index = _localeCodes.indexOf(locale);
         if (index >= 0 && index < _localeCodes.length - 1) {
             // eventually this will be 'en' or another locale with 100% coverage
