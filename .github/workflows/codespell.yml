@@ -13,5 +13,5 @@ jobs:
         with:
           check_filenames: true
           skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/locales.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img,./data/presets/categories.json,./data/presets/fields.json,./data/presets/presets.json,./data/presets.yaml,./data/taginfo.json,./data/deprecated.json
-          ignore_words_list: "chancel,nd,specialties"
+          ignore_words_list: "casette,cemetary,chancel,guerilla,nd,specialties"
           only_warn: 1
