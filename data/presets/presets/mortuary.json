@@ -1,0 +1,18 @@
+{
+    "icon": "maki-cemetery",
+    "fields": [
+        "religion",
+        "denomination"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "memorial home"
+    ],
+    "tags": {
+        "amenity": "mortuary"
+    },
+    "name": "Morgue"
+}
