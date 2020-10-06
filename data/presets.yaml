@@ -5124,6 +5124,11 @@ en:
         # golf=cartpath
         name: Golf Cartpath
         terms: '<translate with synonyms or related terms for ''Golf Cartpath'', separated by commas>'
+      golf/clubhouse:
+        # golf=clubhouse
+        name: Golf Clubhouse
+        # 'terms: club house,golf clubhouse,golf house,pro shop'
+        terms: '<translate with synonyms or related terms for ''Golf Clubhouse'', separated by commas>'
       golf/driving_range:
         # golf=driving_range
         name: Driving Range
@@ -8666,7 +8671,7 @@ en:
       shop/wigs:
         # shop=wigs
         name: Wig Shop
-        # 'terms: hair extentions'
+        # 'terms: hair extensions,hair extentions'
         terms: '<translate with synonyms or related terms for ''Wig Shop'', separated by commas>'
       shop/window_blind:
         # shop=window_blind

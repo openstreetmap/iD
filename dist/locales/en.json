@@ -7270,6 +7270,10 @@
                     "name": "Golf Cartpath",
                     "terms": ""
                 },
+                "golf/clubhouse": {
+                    "name": "Golf Clubhouse",
+                    "terms": "club house,golf clubhouse,golf house,pro shop"
+                },
                 "golf/driving_range": {
                     "name": "Driving Range",
                     "terms": ""
@@ -10235,7 +10239,7 @@
                 },
                 "shop/wigs": {
                     "name": "Wig Shop",
-                    "terms": "hair extentions"
+                    "terms": "hair extensions,hair extentions"
                 },
                 "shop/window_blind": {
                     "name": "Window Blind Store",
