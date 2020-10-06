@@ -28,7 +28,11 @@ export default {
     nodeResolve({ dedupe: ['object-inspect'] }),
     commonjs(),
     json({ indent: '' }),
-    buble()
+    buble({
+      transforms: {
+        dangerousForOf: true
+      }
+    })
   ]
 };
 
