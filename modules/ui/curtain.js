@@ -1,7 +1,6 @@
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -126,7 +125,7 @@ export function uiCurtain(containerNode) {
             if (options.buttonText && options.buttonCallback) {
                 var button = tooltip.selectAll('.button-section .button.action');
                 button
-                    .on('click', function() {
+                    .on('click', function(d3_event) {
                         d3_event.preventDefault();
                         options.buttonCallback();
                     });

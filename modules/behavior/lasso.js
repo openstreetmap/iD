@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { geoExtent, geoPointInPolygon } from '../geo';
 import { modeSelect } from '../modes/select';
@@ -16,7 +16,7 @@ export function behaviorLasso(context) {
         var lasso;
 
 
-        function pointerdown() {
+        function pointerdown(d3_event) {
             var button = 0;  // left
             if (d3_event.button === button && d3_event.shiftKey === true) {
                 lasso = null;

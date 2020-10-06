@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -114,7 +113,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
 
         // class the error as selected, or return to browse mode if the error is gone
-        function selectError(drawn) {
+        function selectError(d3_event, drawn) {
             if (!checkSelectedID()) return;
 
             var selection = context.surface()

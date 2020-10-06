@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -36,7 +35,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
         return Math.max(min, Math.min(x, max));
     }
 
-    function updateValue(d, val) {
+    function updateValue(d3_event, d, val) {
         if (!val && d3_event && d3_event.target) {
             val = d3_event.target.value;
         }
@@ -85,7 +84,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('min', _minVal)
             .attr('max', _maxVal)
             .attr('step', '0.05')
-            .on('input', function(d) {
+            .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
                 updateValue(d, val);
             });
@@ -94,7 +93,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .append('button')
             .attr('title', t('background.reset'))
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
                 updateValue(d, 1);
             })

@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
 
 import { utilFastMouse } from './util';
 import { utilRebind } from './rebind';
@@ -22,7 +21,7 @@ export function utilDoubleUp() {
             geoVecLength(_pointer.startLoc, loc) <= _maxDistance;
     }
 
-    function pointerdown() {
+    function pointerdown(d3_event) {
 
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
@@ -48,7 +47,7 @@ export function utilDoubleUp() {
         }
     }
 
-    function pointerup() {
+    function pointerup(d3_event) {
 
         // ignore right-click
         if (d3_event.ctrlKey || d3_event.button === 2) return;
@@ -61,7 +60,7 @@ export function utilDoubleUp() {
             var loc = [d3_event.clientX, d3_event.clientY];
             if (pointerIsValidFor(loc)) {
                 var locInThis = utilFastMouse(this)(d3_event);
-                dispatch.call('doubleUp', this, locInThis);
+                dispatch.call('doubleUp', this, d3_event, locInThis);
             }
             // clear the pointer info in any case
             _pointer = undefined;
@@ -78,8 +77,8 @@ export function utilDoubleUp() {
         } else {
             // fallback to dblclick
             selection
-                .on('dblclick.doubleUp', function() {
-                    dispatch.call('doubleUp', this, utilFastMouse(this)(d3_event));
+                .on('dblclick.doubleUp', function(d3_event) {
+                    dispatch.call('doubleUp', this, d3_event, utilFastMouse(this)(d3_event));
                 });
         }
     }

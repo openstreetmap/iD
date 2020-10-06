@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../core/localizer';
 
@@ -385,7 +385,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function didDoubleUp(loc) {
+        function didDoubleUp(d3_event, loc) {
             if (!context.map().withinEditableZoom()) return;
 
             var target = d3_select(d3_event.target);
@@ -452,7 +452,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function firstVertex() {
+        function firstVertex(d3_event) {
             d3_event.preventDefault();
             var entity = singular();
             var parent = singularParent();
@@ -472,7 +472,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function lastVertex() {
+        function lastVertex(d3_event) {
             d3_event.preventDefault();
             var entity = singular();
             var parent = singularParent();
@@ -492,7 +492,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function previousVertex() {
+        function previousVertex(d3_event) {
             d3_event.preventDefault();
             var parent = singularParent();
             if (!parent) return;
@@ -516,7 +516,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function nextVertex() {
+        function nextVertex(d3_event) {
             d3_event.preventDefault();
             var parent = singularParent();
             if (!parent) return;
@@ -540,7 +540,7 @@ export function modeSelect(context, selectedIDs) {
         }
 
 
-        function nextParent() {
+        function nextParent(d3_event) {
             d3_event.preventDefault();
             var parents = commonParents();
             if (!parents || parents.length < 2) return;

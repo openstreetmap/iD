@@ -1,5 +1,4 @@
 import _throttle from 'lodash-es/throttle';
-import { event as d3_event } from 'd3-selection';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
@@ -30,7 +29,7 @@ export function uiStatus(context) {
                         .call(svgIcon('#iD-icon-out-link', 'inline'))
                         .append('span')
                         .html(t.html('login'))
-                        .on('click.login', function() {
+                        .on('click.login', function(d3_event) {
                             d3_event.preventDefault();
                             osm.authenticate();
                         });
@@ -51,7 +50,7 @@ export function uiStatus(context) {
                         .append('a')
                         // let the user manually retry their connection directly
                         .html(t.html('osm_api_status.retry'))
-                        .on('click.retry', function() {
+                        .on('click.retry', function(d3_event) {
                             d3_event.preventDefault();
                             throttledRetry();
                         });

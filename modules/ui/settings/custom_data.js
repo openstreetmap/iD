@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
 
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
@@ -46,7 +45,7 @@ export function uiSettingsCustomData(context) {
             .attr('class', 'field-file')
             .attr('type', 'file')
             .property('files', _currSettings.fileList)  // works for all except IE11
-            .on('change', function() {
+            .on('change', function(d3_event) {
                 var files = d3_event.target.files;
                 if (files && files.length) {
                     _currSettings.url = '';

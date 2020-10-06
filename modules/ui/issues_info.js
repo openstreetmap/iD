@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
@@ -66,7 +66,7 @@ export function uiIssuesInfo(context) {
 
                 chipSelection
                     .call(tooltipBehavior)
-                    .on('click', function() {
+                    .on('click', function(d3_event) {
                         d3_event.preventDefault();
 
                         tooltipBehavior.hide(d3_select(this));

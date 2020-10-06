@@ -1,8 +1,5 @@
-import { event as d3_event } from 'd3-selection';
-
 import { t } from '../core/localizer';
 import { uiTooltip } from './tooltip';
-
 
 export function uiFeatureInfo(context) {
     function update(selection) {
@@ -30,7 +27,7 @@ export function uiFeatureInfo(context) {
                 .attr('href', '#')
                 .html(t.html('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
-                .on('click', function() {
+                .on('click', function(d3_event) {
                     tooltipBehavior.hide();
                     d3_event.preventDefault();
                     // open the Map Data pane

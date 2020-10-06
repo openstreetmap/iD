@@ -1,5 +1,4 @@
 import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
-import { event as d3_event } from 'd3-selection';
 
 import { t } from '../../core/localizer';
 import { modeSave } from '../../modes';
@@ -30,7 +29,7 @@ export function uiToolSave(context) {
         return _numChanges === 0 || isSaving();
     }
 
-    function save() {
+    function save(d3_event) {
         d3_event.preventDefault();
         if (!context.inIntro() && !isSaving() && history.hasChanges()) {
             context.enter(modeSave(context));
@@ -85,13 +84,11 @@ export function uiToolSave(context) {
         button = selection
             .append('button')
             .attr('class', 'save disabled bar-button')
-            .on('pointerup', function() {
+            .on('pointerup', function(d3_event) {
                 lastPointerUpType = d3_event.pointerType;
             })
-            .on('click', function() {
-                d3_event.preventDefault();
-
-                save();
+            .on('click', function(d3_event) {
+                save(d3_event);
 
                 if (_numChanges === 0 && (
                     lastPointerUpType === 'touch' ||

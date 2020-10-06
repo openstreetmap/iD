@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
@@ -46,7 +46,7 @@ export function uiModal(selection, blocking) {
     .on('focus.keytrap', moveFocusToLast);
 
   if (!blocking) {
-    shaded.on('click.remove-modal', () => {
+    shaded.on('click.remove-modal', (d3_event) => {
       if (d3_event.target === this) {
         shaded.close();
       }

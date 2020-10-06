@@ -1,7 +1,3 @@
-import {
-    event as d3_event
-} from 'd3-selection';
-
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiSection } from '../section';
@@ -51,7 +47,7 @@ export function uiSectionValidationOptions(context) {
             .attr('name', function(d) { return 'issues-option-' + d.key; })
             .attr('value', function(d) { return d.value; })
             .property('checked', function(d) { return getOptions()[d.key] === d.value; })
-            .on('change', function(d) { updateOptionValue(d.key, d.value); });
+            .on('change', function(d3_event, d) { updateOptionValue(d3_event, d.key, d.value); });
 
         valuesEnter
             .append('span')
@@ -65,7 +61,7 @@ export function uiSectionValidationOptions(context) {
         };
     }
 
-    function updateOptionValue(d, val) {
+    function updateOptionValue(d3_event, d, val) {
         if (!val && d3_event && d3_event.target) {
             val = d3_event.target.value;
         }

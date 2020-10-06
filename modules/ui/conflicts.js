@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -184,7 +183,7 @@ export function uiConflicts(context) {
             .attr('class', 'conflict-description')
             .attr('href', '#')
             .html(function(d) { return d.name; })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
                 zoomToEntity(d.id);
             });
@@ -221,7 +220,7 @@ export function uiConflicts(context) {
                 return (i === 0 && index === 0) ||
                     (i === 1 && index === _conflictList.length - 1) || null;
             })
-            .on('click', function(d, i) {
+            .on('click', function(d3_event, d, i) {
                 d3_event.preventDefault();
 
                 var container = parent.selectAll('.conflict-container');
@@ -257,10 +256,10 @@ export function uiConflicts(context) {
             .append('input')
             .attr('type', 'radio')
             .attr('name', function(d) { return d.id; })
-            .on('change', function(d, i) {
+            .on('change', function(d3_event, d, i) {
                 var ul = this.parentNode.parentNode.parentNode;
                 ul.__data__.chosen = i;
-                choose(ul, d);
+                choose(d3_event, ul, d);
             });
 
         labelEnter
@@ -273,13 +272,13 @@ export function uiConflicts(context) {
             .each(function(d, i) {
                 var ul = this.parentNode;
                 if (ul.__data__.chosen === i) {
-                    choose(ul, d);
+                    choose(null, ul, d);
                 }
             });
     }
 
 
-    function choose(ul, datum) {
+    function choose(d3_event, ul, datum) {
         if (d3_event) d3_event.preventDefault();
 
         d3_select(ul)

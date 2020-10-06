@@ -1,6 +1,3 @@
-
-import { event as d3_event } from 'd3-selection';
-
 import marked from 'marked';
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
@@ -282,7 +279,7 @@ export function uiPaneHelp(context) {
 
     helpPane.renderContent = function(content) {
 
-        function clickHelp(d, i) {
+        function clickHelp(d3_event, d, i) {
             if (d3_event) d3_event.preventDefault();
             var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
@@ -309,9 +306,9 @@ export function uiPaneHelp(context) {
                         .append('a')
                         .attr('href', '#')
                         .attr('class', 'next')
-                        .on('click', function() {
+                        .on('click', function(d3_event) {
                             d3_event.preventDefault();
-                            clickHelp(docs[i + 1], i + 1);
+                            clickHelp(null, docs[i + 1], i + 1);
                         });
 
                     nextLink
@@ -328,9 +325,9 @@ export function uiPaneHelp(context) {
                         .append('a')
                         .attr('href', '#')
                         .attr('class', 'previous')
-                        .on('click', function() {
+                        .on('click', function(d3_event) {
                             d3_event.preventDefault();
-                            clickHelp(docs[i - 1], i - 1);
+                            clickHelp(null, docs[i - 1], i - 1);
                         });
 
                     prevLink
@@ -342,7 +339,7 @@ export function uiPaneHelp(context) {
         }
 
 
-        function clickWalkthrough() {
+        function clickWalkthrough(d3_event) {
             d3_event.preventDefault();
             if (context.inIntro()) return;
             context.container().call(uiIntro(context));
@@ -350,7 +347,7 @@ export function uiPaneHelp(context) {
         }
 
 
-        function clickShortcuts() {
+        function clickShortcuts(d3_event) {
             d3_event.preventDefault();
             context.container().call(context.ui().shortcuts, true);
         }
@@ -414,7 +411,7 @@ export function uiPaneHelp(context) {
             .append('div')
             .attr('class', 'nav');
 
-        clickHelp(docs[0], 0);
+        clickHelp(null, docs[0], 0);
 
     };
 

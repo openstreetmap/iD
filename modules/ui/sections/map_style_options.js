@@ -1,7 +1,3 @@
-import {
-    event as d3_event
-} from 'd3-selection';
-
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
@@ -86,12 +82,12 @@ export function uiSectionMapStyleOptions(context) {
         return context.map().activeAreaFill() === d;
     }
 
-    function toggleHighlightEdited() {
+    function toggleHighlightEdited(d3_event) {
         d3_event.preventDefault();
         context.map().toggleHighlightEdited();
     }
 
-    function setFill(d) {
+    function setFill(d3_event, d) {
         context.map().activeAreaFill(d);
     }
 

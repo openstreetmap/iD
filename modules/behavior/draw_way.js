@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -74,7 +73,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     }
 
 
-    function keydown() {
+    function keydown(d3_event) {
         if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope')) {
                 context.surface()
@@ -87,7 +86,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     }
 
 
-    function keyup() {
+    function keyup(d3_event) {
         if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope-suppressed')) {
                 context.surface()
@@ -109,7 +108,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     // - `mode/drag_node.js`     `doMove()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
-    function move(datum) {
+    function move(d3_event, datum) {
 
         var loc = context.map().mouseCoordinates();
 

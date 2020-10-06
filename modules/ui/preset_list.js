@@ -2,7 +2,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import * as countryCoder from '@ideditor/country-coder';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -46,7 +45,7 @@ export function uiPresetList(context) {
             .on('click', function() { dispatch.call('cancel', this); })
             .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
 
-        function initialKeydown() {
+        function initialKeydown(d3_event) {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
                 (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
@@ -65,11 +64,11 @@ export function uiPresetList(context) {
             } else if (!d3_event.ctrlKey && !d3_event.metaKey) {
                 // don't check for delete/undo hack on future keydown events
                 d3_select(this).on('keydown', keydown);
-                keydown.call(this);
+                keydown.call(this, d3_event);
             }
         }
 
-        function keydown() {
+        function keydown(d3_event) {
             // down arrow
             if (d3_event.keyCode === utilKeybinding.keyCodes['↓'] &&
                 // if insertion point is at the end of the string
@@ -82,7 +81,7 @@ export function uiPresetList(context) {
             }
         }
 
-        function keypress() {
+        function keypress(d3_event) {
             // enter
             var value = search.property('value');
             if (d3_event.keyCode === 13 && // ↩ Return
@@ -191,7 +190,7 @@ export function uiPresetList(context) {
         updateForFeatureHiddenState();
     }
 
-    function itemKeydown(){
+    function itemKeydown(d3_event) {
         // the actively focused item
         var item = d3_select(this.closest('.preset-list-item'));
         var parentItem = d3_select(item.node().parentNode.closest('.preset-list-item'));
@@ -295,7 +294,7 @@ export function uiPresetList(context) {
                     .geometry(geometries.length === 1 && geometries[0])
                     .preset(preset))
                 .on('click', click)
-                .on('keydown', function() {
+                .on('keydown', function(d3_event) {
                     // right arrow, expand the focused item
                     if (d3_event.keyCode === utilKeybinding.keyCodes[(localizer.textDirection() === 'rtl') ? '←' : '→']) {
                         d3_event.preventDefault();
@@ -303,7 +302,7 @@ export function uiPresetList(context) {
                         // if the item isn't expanded
                         if (!d3_select(this).classed('expanded')) {
                             // toggle expansion (expand the item)
-                            click.call(this);
+                            click.call(this, d3_event);
                         }
                     // left arrow, collapse the focused item
                     } else if (d3_event.keyCode === utilKeybinding.keyCodes[(localizer.textDirection() === 'rtl') ? '→' : '←']) {
@@ -312,10 +311,10 @@ export function uiPresetList(context) {
                         // if the item is expanded
                         if (d3_select(this).classed('expanded')) {
                             // toggle expansion (collapse the item)
-                            click.call(this);
+                            click.call(this, d3_event);
                         }
                     } else {
-                        itemKeydown.call(this);
+                        itemKeydown.call(this, d3_event);
                     }
                 });
 
@@ -430,7 +429,7 @@ export function uiPresetList(context) {
             dispatch.call('choose', this, preset);
         };
 
-        item.help = function() {
+        item.help = function(d3_event) {
             d3_event.stopPropagation();
             item.reference.toggle();
         };

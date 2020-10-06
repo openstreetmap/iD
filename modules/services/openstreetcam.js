@@ -1,6 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
-import { event as d3_event } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import RBush from 'rbush';
@@ -304,7 +303,7 @@ export default {
         });
 
 
-        function zoomPan() {
+        function zoomPan(d3_event) {
             var t = d3_event.transform;
             context.container().select('.photoviewer .osc-image-wrap')
                 .call(utilSetTransform, t.x, t.y, t.k);

@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -26,7 +25,7 @@ export function uiSectionBackgroundOffset(context) {
     ];
 
 
-    function cancelEvent() {
+    function cancelEvent(d3_event) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
     }
@@ -104,7 +103,7 @@ export function uiSectionBackgroundOffset(context) {
     }
 
 
-    function dragOffset() {
+    function dragOffset(d3_event) {
         if (d3_event.button !== 0) return;
 
         var origin = [d3_event.clientX, d3_event.clientY];
@@ -124,7 +123,7 @@ export function uiSectionBackgroundOffset(context) {
                 .on('pointercancel.drag-bg-offset', pointerup);
         }
 
-        function pointermove() {
+        function pointermove(d3_event) {
             if (pointerId !== (d3_event.pointerId || 'mouse')) return;
 
             var latest = [d3_event.clientX, d3_event.clientY];
@@ -137,7 +136,7 @@ export function uiSectionBackgroundOffset(context) {
             nudge(d);
         }
 
-        function pointerup() {
+        function pointerup(d3_event) {
             if (pointerId !== (d3_event.pointerId || 'mouse')) return;
             if (d3_event.button !== 0) return;
 
@@ -182,7 +181,7 @@ export function uiSectionBackgroundOffset(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('contextmenu', cancelEvent)
-            .on(_pointerPrefix + 'down', function(d) {
+            .on(_pointerPrefix + 'down', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
                 pointerdownNudgeButton(d[1]);
             });
@@ -192,7 +191,7 @@ export function uiSectionBackgroundOffset(context) {
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
             .on('contextmenu', cancelEvent)
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 if (d3_event.button !== 0) return;
                 resetOffset();

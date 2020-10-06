@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import { utilFunctor } from '../util/util';
 
 var _popoverID = 0;
@@ -150,7 +150,7 @@ export function uiPopover(klass) {
 
         if (display === 'hover') {
             var _lastNonMouseEnterTime;
-            anchor.on(_pointerPrefix + 'enter.popover', function() {
+            anchor.on(_pointerPrefix + 'enter.popover', function(d3_event) {
 
                 if (d3_event.pointerType) {
                     if (d3_event.pointerType !== 'mouse') {
@@ -185,11 +185,11 @@ export function uiPopover(klass) {
 
         } else if (display === 'clickFocus') {
             anchor
-                .on(_pointerPrefix + 'down.popover', function() {
+                .on(_pointerPrefix + 'down.popover', function(d3_event) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 })
-                .on(_pointerPrefix + 'up.popover', function() {
+                .on(_pointerPrefix + 'up.popover', function(d3_event) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                 })

@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import { drag as d3_drag } from 'd3-drag';
 import * as countryCoder from '@ideditor/country-coder';
 
@@ -316,7 +316,7 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function removeMultikey(d) {
+    function removeMultikey(d3_event, d) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
         var t = {};
@@ -399,7 +399,7 @@ export function uiFieldCombo(field, context) {
             .on('blur', change);
 
         _input
-            .on('keydown.field', function() {
+            .on('keydown.field', function(d3_event) {
                 switch (d3_event.keyCode) {
                     case 13: // ↩ Return
                         _input.node().blur(); // blurring also enters the value
@@ -568,14 +568,14 @@ export function uiFieldCombo(field, context) {
         // allow drag and drop re-ordering of chips
         var dragOrigin, targetIndex;
         selection.call(d3_drag()
-            .on('start', function() {
+            .on('start', function(d3_event) {
                 dragOrigin = {
                     x: d3_event.x,
                     y: d3_event.y
                 };
                 targetIndex = null;
             })
-            .on('drag', function(d, index) {
+            .on('drag', function(d3_event, d, index) {
                 var x = d3_event.x - dragOrigin.x,
                     y = d3_event.y - dragOrigin.y;
 

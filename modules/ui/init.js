@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -58,7 +57,7 @@ export function uiInit(context) {
     function render(container) {
 
         container
-            .on('click.ui', function() {
+            .on('click.ui', function(d3_event) {
                 // we're only concerned with the primary mouse button
                 if (d3_event.button !== 0) return;
 
@@ -92,7 +91,7 @@ export function uiInit(context) {
             // On iOS we disable pinch-to-zoom of the UI via the `touch-action`
             // CSS property, but on desktop Safari we need to manually cancel the
             // default gesture events.
-            container.on('gesturestart.ui gesturechange.ui gestureend.ui', function() {
+            container.on('gesturestart.ui gesturechange.ui gestureend.ui', function(d3_event) {
                 // disable pinch-to-zoom of the UI via multitouch trackpads on macOS Safari
                 d3_event.preventDefault();
             });
@@ -100,7 +99,7 @@ export function uiInit(context) {
 
         if ('PointerEvent' in window) {
             d3_select(window)
-                .on('pointerdown.ui pointerup.ui', function() {
+                .on('pointerdown.ui pointerup.ui', function(d3_event) {
                     var pointerType = d3_event.pointerType || 'mouse';
                     if (_lastPointerType !== pointerType) {
                         _lastPointerType = pointerType;
@@ -349,7 +348,7 @@ export function uiInit(context) {
 
         var panPixels = 80;
         context.keybinding()
-            .on('⌫', function() { d3_event.preventDefault(); })
+            .on('⌫', function(d3_event) { d3_event.preventDefault(); })
             .on([t('sidebar.key'), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
@@ -359,7 +358,7 @@ export function uiInit(context) {
             .on(uiCmd('⌥↑'), pan([0, map.dimensions()[1]]))
             .on(uiCmd('⌥→'), pan([-map.dimensions()[0], 0]))
             .on(uiCmd('⌥↓'), pan([0, -map.dimensions()[1]]))
-            .on(uiCmd('⌘' + t('background.key')), function quickSwitch() {
+            .on(uiCmd('⌘' + t('background.key')), function quickSwitch(d3_event) {
                 if (d3_event) {
                     d3_event.stopImmediatePropagation();
                     d3_event.preventDefault();
@@ -372,12 +371,12 @@ export function uiInit(context) {
                     context.background().baseLayerSource(previousBackground);
                 }
             })
-            .on(t('area_fill.wireframe.key'), function toggleWireframe() {
+            .on(t('area_fill.wireframe.key'), function toggleWireframe(d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 context.map().toggleWireframe();
             })
-            .on(uiCmd('⌥' + t('area_fill.wireframe.key')), function toggleOsmData() {
+            .on(uiCmd('⌥' + t('area_fill.wireframe.key')), function toggleOsmData(d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
 
@@ -393,7 +392,7 @@ export function uiInit(context) {
                     }
                 }
             })
-            .on(t('map_data.highlight_edits.key'), function toggleHighlightEdited() {
+            .on(t('map_data.highlight_edits.key'), function toggleHighlightEdited(d3_event) {
                 d3_event.preventDefault();
                 context.map().toggleHighlightEdited();
             });
@@ -444,7 +443,7 @@ export function uiInit(context) {
 
 
         function pan(d) {
-            return function() {
+            return function(d3_event) {
                 if (d3_event.shiftKey) return;
                 if (context.container().select('.combobox').size()) return;
                 d3_event.preventDefault();

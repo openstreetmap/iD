@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select, event as d3_event } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -341,7 +341,7 @@ export function uiFieldLocalized(field, context) {
         }
 
 
-        function addNew() {
+        function addNew(d3_event) {
             d3_event.preventDefault();
             if (field.locked()) return;
 
@@ -364,7 +364,7 @@ export function uiFieldLocalized(field, context) {
 
 
         function change(onInput) {
-            return function() {
+            return function(d3_event) {
                 if (field.locked()) {
                     d3_event.preventDefault();
                     return;
@@ -508,7 +508,7 @@ export function uiFieldLocalized(field, context) {
                 label
                     .append('button')
                     .attr('class', 'remove-icon-multilingual')
-                    .on('click', function(d, index) {
+                    .on('click', function(d3_event, d, index) {
                         if (field.locked()) return;
                         d3_event.preventDefault();
 

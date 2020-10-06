@@ -15,11 +15,6 @@ describe('uiCombobox', function() {
         var start = input.property('selectionStart');
         var finis = input.property('selectionEnd');
 
-        d3.customEvent(happen.makeEvent({
-            type: 'keydown',
-            keyCode: keyCode
-        }), input.on('keydown.combo-input'));
-
         switch (key) {
             case '⇥':
                 break;
@@ -80,7 +75,6 @@ describe('uiCombobox', function() {
 
     function focusTypeahead(input) {
         input.node().focus();
-        d3.customEvent(happen.makeEvent('focus'), input.on('focus.combo-input'));
     }
 
     it('adds the combobox-input class', function() {

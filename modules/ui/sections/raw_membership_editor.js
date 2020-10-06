@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -53,7 +52,7 @@ export function uiSectionRawMembershipEditor(context) {
     var _showBlank;
     var _maxMemberships = 1000;
 
-    function selectRelation(d) {
+    function selectRelation(d3_event, d) {
         d3_event.preventDefault();
 
         // remove the hover-highlight styling
@@ -62,7 +61,7 @@ export function uiSectionRawMembershipEditor(context) {
         context.enter(modeSelect(context, [d.relation.id]));
     }
 
-    function zoomToRelation(d) {
+    function zoomToRelation(d3_event, d) {
         d3_event.preventDefault();
 
         var entity = context.entity(d.relation.id);
@@ -73,7 +72,7 @@ export function uiSectionRawMembershipEditor(context) {
     }
 
 
-    function changeRole(d) {
+    function changeRole(d3_event, d) {
         if (d === 0) return;    // called on newrow (shouldn't happen)
         if (_inChange) return;  // avoid accidental recursive call #5731
 
@@ -118,7 +117,7 @@ export function uiSectionRawMembershipEditor(context) {
     }
 
 
-    function deleteMembership(d) {
+    function deleteMembership(d3_event, d) {
         this.blur();           // avoid keeping focus on the button
         if (d === 0) return;   // called on newrow (shouldn't happen)
 
@@ -242,10 +241,10 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'member-row member-row-normal form-field');
 
         // highlight the relation in the map while hovering on the list item
-        itemsEnter.on('mouseover', function(d) {
+        itemsEnter.on('mouseover', function(d3_event, d) {
                 utilHighlightEntities([d.relation.id], true, context);
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function(d3_event, d) {
                 utilHighlightEntities([d.relation.id], false, context);
             });
 

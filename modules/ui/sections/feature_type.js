@@ -1,7 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    event as d3_event
-} from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
@@ -83,7 +80,7 @@ export function uiSectionFeatureType(context) {
             .on('click', function() {
                  dispatch.call('choose', this, _presets);
             })
-            .on('pointerdown pointerup mousedown mouseup', function() {
+            .on('pointerdown pointerup mousedown mouseup', function(d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             });

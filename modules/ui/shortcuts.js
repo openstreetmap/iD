@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { t } from '../core/localizer';
@@ -63,8 +63,9 @@ export function uiShortcuts(context) {
             .append('a')
             .attr('class', 'tab')
             .attr('href', '#')
-            .on('click', function (d, i) {
+            .on('click', function (d3_event) {
                 d3_event.preventDefault();
+                var i = tabs.nodes().indexOf(this);
                 _activeTab = i;
                 render(selection, dataShortcuts);
             });
