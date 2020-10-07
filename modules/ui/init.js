@@ -343,7 +343,9 @@ export function uiInit(context) {
         };
 
         d3_select(window)
-            .on('resize.editor', ui.onResize);
+            .on('resize.editor', function() {
+                ui.onResize();
+            });
 
 
         var panPixels = 80;

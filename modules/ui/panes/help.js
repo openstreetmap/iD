@@ -279,8 +279,8 @@ export function uiPaneHelp(context) {
 
     helpPane.renderContent = function(content) {
 
-        function clickHelp(d3_event, d, i) {
-            if (d3_event) d3_event.preventDefault();
+        function clickHelp(d, i) {
+
             var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
@@ -308,7 +308,7 @@ export function uiPaneHelp(context) {
                         .attr('class', 'next')
                         .on('click', function(d3_event) {
                             d3_event.preventDefault();
-                            clickHelp(null, docs[i + 1], i + 1);
+                            clickHelp(docs[i + 1], i + 1);
                         });
 
                     nextLink
@@ -327,7 +327,7 @@ export function uiPaneHelp(context) {
                         .attr('class', 'previous')
                         .on('click', function(d3_event) {
                             d3_event.preventDefault();
-                            clickHelp(null, docs[i - 1], i - 1);
+                            clickHelp(docs[i - 1], i - 1);
                         });
 
                     prevLink
@@ -363,7 +363,10 @@ export function uiPaneHelp(context) {
             .append('a')
             .attr('href', '#')
             .html(function(d) { return d.title; })
-            .on('click', clickHelp);
+            .on('click', function(d3_event, d) {
+                d3_event.preventDefault();
+                clickHelp(d, docs.indexOf(d));
+            });
 
         var shortcuts = toc
             .append('li')
@@ -411,8 +414,7 @@ export function uiPaneHelp(context) {
             .append('div')
             .attr('class', 'nav');
 
-        clickHelp(null, docs[0], 0);
-
+        clickHelp(docs[0], 0);
     };
 
     return helpPane;

@@ -35,11 +35,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
         return Math.max(min, Math.min(x, max));
     }
 
-    function updateValue(d3_event, d, val) {
-        if (!val && d3_event && d3_event.target) {
-            val = d3_event.target.value;
-        }
-
+    function updateValue(d, val) {
         val = clamp(val, _minVal, _maxVal);
 
         _options[d] = val;
@@ -86,6 +82,9 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('step', '0.05')
             .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
+                if (!val && d3_event && d3_event.target) {
+                    val = d3_event.target.value;
+                }
                 updateValue(d, val);
             });
 
@@ -107,7 +106,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .html(t.html('background.reset_all'))
             .on('click', function() {
                 for (var i = 0; i < _sliders.length; i++) {
-                    updateValue(_sliders[i],1);
+                    updateValue(_sliders[i], 1);
                 }
             });
 

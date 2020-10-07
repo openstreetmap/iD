@@ -274,13 +274,15 @@ export function uiSectionRawMemberEditor(context) {
                 };
                 targetIndex = null;
             })
-            .on('drag', function(d3_event, d, index) {
+            .on('drag', function(d3_event) {
                 var x = d3_event.x - dragOrigin.x,
                     y = d3_event.y - dragOrigin.y;
 
                 if (!d3_select(this).classed('dragging') &&
                     // don't display drag until dragging beyond a distance threshold
                     Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+
+                var index = items.nodes().indexOf(this);
 
                 d3_select(this)
                     .classed('dragging', true);
@@ -306,11 +308,11 @@ export function uiSectionRawMemberEditor(context) {
                         return null;
                     });
             })
-            .on('end', function(d3_event, d, index) {
+            .on('end', function(d3_event, d) {
 
-                if (!d3_select(this).classed('dragging')) {
-                    return;
-                }
+                if (!d3_select(this).classed('dragging')) return;
+
+                var index = items.nodes().indexOf(this);
 
                 d3_select(this)
                     .classed('dragging', false);

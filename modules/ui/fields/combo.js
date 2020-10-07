@@ -575,13 +575,15 @@ export function uiFieldCombo(field, context) {
                 };
                 targetIndex = null;
             })
-            .on('drag', function(d3_event, d, index) {
+            .on('drag', function(d3_event) {
                 var x = d3_event.x - dragOrigin.x,
                     y = d3_event.y - dragOrigin.y;
 
                 if (!d3_select(this).classed('dragging') &&
                     // don't display drag until dragging beyond a distance threshold
                     Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+
+                var index = selection.nodes().indexOf(this);
 
                 d3_select(this)
                     .classed('dragging', true);
@@ -648,10 +650,11 @@ export function uiFieldCombo(field, context) {
                         });
                     }
             })
-            .on('end', function(d, index) {
+            .on('end', function() {
                 if (!d3_select(this).classed('dragging')) {
                     return;
                 }
+                var index = selection.nodes().indexOf(this);
 
                 d3_select(this)
                     .classed('dragging', false);

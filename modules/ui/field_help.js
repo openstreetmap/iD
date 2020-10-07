@@ -219,10 +219,10 @@ export function uiFieldHelp(context, fieldName) {
             .append('div')
             .attr('class', 'field-help-nav-item')
             .html(function(d) { return d; })
-            .on('click', function(d3_event, d, i) {
+            .on('click', function(d3_event, d) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
-                clickHelp(i);
+                clickHelp(titles.indexOf(d));
             });
 
         enter

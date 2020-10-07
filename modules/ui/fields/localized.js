@@ -390,7 +390,7 @@ export function uiFieldLocalized(field, context) {
     }
 
 
-    function changeLang(d) {
+    function changeLang(d3_event, d) {
         var tags = {};
 
         // make sure unrecognized suffixes are lowercase - #7156
@@ -422,7 +422,7 @@ export function uiFieldLocalized(field, context) {
     }
 
 
-    function changeValue(d) {
+    function changeValue(d3_event, d) {
         if (!d.lang) return;
         var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
 
@@ -508,7 +508,7 @@ export function uiFieldLocalized(field, context) {
                 label
                     .append('button')
                     .attr('class', 'remove-icon-multilingual')
-                    .on('click', function(d3_event, d, index) {
+                    .on('click', function(d3_event, d) {
                         if (field.locked()) return;
                         d3_event.preventDefault();
 
