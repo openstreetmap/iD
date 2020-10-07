@@ -8132,6 +8132,7 @@ en:
       shop/doityourself:
         # shop=doityourself
         name: DIY Store
+        # 'terms: craft,diy,do it yourself,hardware,home improvement,tools'
         terms: '<translate with synonyms or related terms for ''DIY Store'', separated by commas>'
       shop/doors:
         # shop=doors
@@ -8270,6 +8271,7 @@ en:
       shop/hardware:
         # shop=hardware
         name: Hardware Store
+        # 'terms: craft,diy,do it yourself,hardware,home improvement,tools'
         terms: '<translate with synonyms or related terms for ''Hardware Store'', separated by commas>'
       shop/health_food:
         # shop=health_food
