@@ -9787,7 +9787,7 @@
                 },
                 "shop/doityourself": {
                     "name": "DIY Store",
-                    "terms": ""
+                    "terms": "craft,diy,do it yourself,hardware,home improvement,tools"
                 },
                 "shop/doors": {
                     "name": "Door Shop",
@@ -9899,7 +9899,7 @@
                 },
                 "shop/hardware": {
                     "name": "Hardware Store",
-                    "terms": ""
+                    "terms": "craft,diy,do it yourself,hardware,home improvement,tools"
                 },
                 "shop/health_food": {
                     "name": "Health Food Shop",
