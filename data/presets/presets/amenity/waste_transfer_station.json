@@ -1,5 +1,5 @@
 {
-    "icon": "maki-waste-basket",
+    "icon": "fas-trash-restore",
     "fields": [
         "name",
         "operator",
