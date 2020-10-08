@@ -1,4 +1,6 @@
 import 'browser-polyfills';
+import 'es6-symbol/implement';
+import 'regenerator-runtime/runtime';
 import 'string.fromcodepoint/auto';
 import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 
