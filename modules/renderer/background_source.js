@@ -97,7 +97,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.imageryUsed = function() {
-        return name || source.id;
+        return _name || source.id;
     };
 
 
