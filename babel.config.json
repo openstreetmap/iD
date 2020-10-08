@@ -1,7 +1,9 @@
 {
   "presets": [
     [
-      "@babel/env"
+      "@babel/preset-env", {
+        "modules": false
+      }
     ]
   ],
   "compact": false
