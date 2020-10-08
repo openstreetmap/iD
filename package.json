@@ -123,6 +123,6 @@
     "node": ">=10"
   },
   "browserslist": [
-    "> 0.2%, last 6 major versions, Firefox ESR, maintained node versions"
+    "> 0.2%, last 6 major versions, Firefox ESR, IE 11, maintained node versions"
   ]
 }
