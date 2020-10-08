@@ -65,13 +65,15 @@
     "which-polygon": "2.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "~5.15.1",
     "@fortawesome/free-regular-svg-icons": "~5.15.1",
     "@fortawesome/free-solid-svg-icons": "~5.15.1",
     "@ideditor/temaki": "~4.2.0",
     "@mapbox/maki": "^6.0.0",
-    "@rollup/plugin-buble": "^0.21.0",
+    "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.0.1",
     "@rollup/plugin-node-resolve": "~8.1.0",
