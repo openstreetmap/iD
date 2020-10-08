@@ -91,7 +91,7 @@
     "js-yaml": "^3.14.0",
     "json-stringify-pretty-compact": "^2.0.0",
     "jsonschema": "^1.1.0",
-    "mapillary-js": "~2.20.0",
+    "mapillary-js": "~2.21.0",
     "mapillary_sprite_source": "^1.8.0",
     "minimist": "^1.2.3",
     "mocha": "^7.0.1",
