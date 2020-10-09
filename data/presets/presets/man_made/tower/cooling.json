@@ -1,0 +1,28 @@
+{
+    "icon": "temaki-cooling_tower",
+    "fields": [
+        "ref",
+        "operator",
+        "material",
+        "building_area",
+        "height"
+    ],
+    "moreFields": [
+        "layer"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "terms": [
+        "power plant"
+    ],
+    "tags": {
+        "man_made": "tower",
+        "tower:type": "cooling"
+    },
+    "reference": {
+        "key": "tower:type",
+        "value": "cooling"
+    },
+    "name": "Cooling Tower"
+}
