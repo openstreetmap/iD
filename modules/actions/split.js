@@ -120,15 +120,48 @@ export function actionSplit(nodeIds, newWayIds) {
             nodesB = wayA.nodes.slice(idx);
         }
 
+        var lengthA = totalLengthBetweenNodes(graph, nodesA);
+        var lengthB = totalLengthBetweenNodes(graph, nodesB);
+
         if (_keepHistoryOn === 'longest' &&
-            totalLengthBetweenNodes(graph, nodesB) > totalLengthBetweenNodes(graph, nodesA)) {
+            lengthB > lengthA) {
             // keep the history on the longer way, regardless of the node count
             wayA = wayA.update({ nodes: nodesB });
             wayB = wayB.update({ nodes: nodesA });
+
+            var temp = lengthA;
+            lengthA = lengthB;
+            lengthB = temp;
         } else {
             wayA = wayA.update({ nodes: nodesA });
             wayB = wayB.update({ nodes: nodesB });
         }
+
+        if (wayA.tags.step_count) {
+            // divide up the the step count proportionally between the two ways
+
+            var stepCount = parseFloat(wayA.tags.step_count);
+            if (stepCount &&
+                // ensure a number
+                isFinite(stepCount) &&
+                // ensure positive
+                stepCount > 0 &&
+                // ensure integer
+                Math.round(stepCount) === stepCount) {
+
+                var tagsA = Object.assign({}, wayA.tags);
+                var tagsB = Object.assign({}, wayB.tags);
+
+                var ratioA = lengthA / (lengthA + lengthB);
+                var countA = Math.round(stepCount * ratioA);
+                tagsA.step_count = countA.toString();
+                tagsB.step_count = (stepCount - countA).toString();
+
+                wayA = wayA.update({ tags: tagsA });
+                wayB = wayB.update({ tags: tagsB });
+            }
+        }
+
 
         graph = graph.replace(wayA);
         graph = graph.replace(wayB);
