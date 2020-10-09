@@ -77,7 +77,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.0.1",
     "@rollup/plugin-node-resolve": "~8.1.0",
-    "autoprefixer": "^9.8.4",
+    "autoprefixer": "^10.0.1",
     "btoa": "^1.2.1",
     "chai": "^4.1.0",
     "cldr-core": "36.0.0",
