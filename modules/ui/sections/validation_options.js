@@ -36,7 +36,7 @@ export function uiSectionValidationOptions(context) {
         optionsEnter
             .append('div')
             .attr('class', 'issues-option-title')
-            .text(function(d) { return t('issues.options.' + d.key + '.title'); });
+            .html(function(d) { return t.html('issues.options.' + d.key + '.title'); });
 
         var valuesEnter = optionsEnter.selectAll('label')
             .data(function(d) {
@@ -55,7 +55,7 @@ export function uiSectionValidationOptions(context) {
 
         valuesEnter
             .append('span')
-            .text(function(d) { return t('issues.options.' + d.key + '.' + d.value); });
+            .html(function(d) { return t.html('issues.options.' + d.key + '.' + d.value); });
     }
 
     function getOptions() {

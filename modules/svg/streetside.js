@@ -31,7 +31,7 @@ export function svgStreetside(projection, context, dispatch) {
             _streetside = services.streetside;
             _streetside.event
                 .on('viewerChanged.svgStreetside', viewerChanged)
-                .on('loadedBubbles.svgStreetside', throttledRedraw);
+                .on('loadedImages.svgStreetside', throttledRedraw);
         } else if (!services.streetside && _streetside) {
             _streetside = null;
         }
@@ -98,13 +98,13 @@ export function svgStreetside(projection, context, dispatch) {
         _selectedSequence = d.sequenceKey;
 
         service
-            .selectImage(context, d)
-            .then(response => {
-                if (response.status === 'ok'){
-                    service.showViewer(context, _viewerYaw);
-                }
+            .ensureViewerLoaded(context)
+            .then(function() {
+                service
+                    .selectImage(context, d.key)
+                    .yaw(_viewerYaw)
+                    .showViewer(context);
             });
-
 
         context.map().centerEase(d.loc);
     }
@@ -316,7 +316,7 @@ export function svgStreetside(projection, context, dispatch) {
 
     /**
      * drawImages()
-     * drawImages is the method that is returned (and that runs) everytime 'svgStreetside()' is called.
+     * drawImages is the method that is returned (and that runs) every time 'svgStreetside()' is called.
      * 'svgStreetside()' is called from index.js
      */
     function drawImages(selection) {

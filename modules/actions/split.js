@@ -1,9 +1,9 @@
 import { actionAddMember } from './add_member';
-import { geoSphericalDistance } from '../geo';
+import { geoSphericalDistance } from '../geo/geo';
 import { osmIsOldMultipolygonOuterMember } from '../osm/multipolygon';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
-import { utilArrayIntersection, utilWrap } from '../util';
+import { utilArrayIntersection, utilWrap, utilArrayUniq } from '../util';
 
 
 // Split a way at the given node.
@@ -20,11 +20,23 @@ import { utilArrayIntersection, utilWrap } from '../util';
 // Reference:
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
-export function actionSplit(nodeId, newWayIds) {
+export function actionSplit(nodeIds, newWayIds) {
+    // accept single ID for backwards-compatiblity
+    if (typeof nodeIds === 'string') nodeIds = [nodeIds];
+
     var _wayIDs;
+    // the strategy for picking which way will have a new version and which way is newly created
+    var _keepHistoryOn = 'longest'; // 'longest', 'first'
 
     // The IDs of the ways actually created by running this action
-    var createdWayIDs = [];
+    var _createdWayIDs = [];
+
+    function dist(graph, nA, nB) {
+        var locA = graph.entity(nA).loc;
+        var locB = graph.entity(nB).loc;
+        var epsilon = 1e-6;
+        return (locA && locB) ? geoSphericalDistance(locA, locB) : epsilon;
+    }
 
     // If the way is closed, we need to search for a partner node
     // to split the way at.
@@ -47,23 +59,16 @@ export function actionSplit(nodeId, newWayIds) {
             return utilWrap(index, nodes.length);
         }
 
-        function dist(nA, nB) {
-            var locA = graph.entity(nA).loc;
-            var locB = graph.entity(nB).loc;
-            var epsilon = 1e-6;
-            return (locA && locB) ? geoSphericalDistance(locA, locB) : epsilon;
-        }
-
         // calculate lengths
         length = 0;
         for (i = wrap(idxA + 1); i !== idxA; i = wrap(i + 1)) {
-            length += dist(nodes[i], nodes[wrap(i - 1)]);
+            length += dist(graph, nodes[i], nodes[wrap(i - 1)]);
             lengths[i] = length;
         }
 
         length = 0;
         for (i = wrap(idxA - 1); i !== idxA; i = wrap(i - 1)) {
-            length += dist(nodes[i], nodes[wrap(i + 1)]);
+            length += dist(graph, nodes[i], nodes[wrap(i + 1)]);
             if (length < lengths[i]) {
                 lengths[i] = length;
             }
@@ -71,7 +76,7 @@ export function actionSplit(nodeId, newWayIds) {
 
         // determine best opposite node to split
         for (i = 0; i < nodes.length; i++) {
-            var cost = lengths[i] / dist(nodes[idxA], nodes[i]);
+            var cost = lengths[i] / dist(graph, nodes[idxA], nodes[i]);
             if (cost > best) {
                 idxB = i;
                 best = cost;
@@ -81,8 +86,15 @@ export function actionSplit(nodeId, newWayIds) {
         return idxB;
     }
 
+    function totalLengthBetweenNodes(graph, nodes) {
+        var totalLength = 0;
+        for (var i = 0; i < nodes.length - 1; i++) {
+            totalLength += dist(graph, nodes[i], nodes[i + 1]);
+        }
+        return totalLength;
+    }
 
-    function split(graph, wayA, newWayId) {
+    function split(graph, nodeId, wayA, newWayId) {
         var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var origNodes = wayA.nodes.slice();
         var nodesA;
@@ -108,8 +120,48 @@ export function actionSplit(nodeId, newWayIds) {
             nodesB = wayA.nodes.slice(idx);
         }
 
-        wayA = wayA.update({ nodes: nodesA });
-        wayB = wayB.update({ nodes: nodesB });
+        var lengthA = totalLengthBetweenNodes(graph, nodesA);
+        var lengthB = totalLengthBetweenNodes(graph, nodesB);
+
+        if (_keepHistoryOn === 'longest' &&
+            lengthB > lengthA) {
+            // keep the history on the longer way, regardless of the node count
+            wayA = wayA.update({ nodes: nodesB });
+            wayB = wayB.update({ nodes: nodesA });
+
+            var temp = lengthA;
+            lengthA = lengthB;
+            lengthB = temp;
+        } else {
+            wayA = wayA.update({ nodes: nodesA });
+            wayB = wayB.update({ nodes: nodesB });
+        }
+
+        if (wayA.tags.step_count) {
+            // divide up the the step count proportionally between the two ways
+
+            var stepCount = parseFloat(wayA.tags.step_count);
+            if (stepCount &&
+                // ensure a number
+                isFinite(stepCount) &&
+                // ensure positive
+                stepCount > 0 &&
+                // ensure integer
+                Math.round(stepCount) === stepCount) {
+
+                var tagsA = Object.assign({}, wayA.tags);
+                var tagsB = Object.assign({}, wayB.tags);
+
+                var ratioA = lengthA / (lengthA + lengthB);
+                var countA = Math.round(stepCount * ratioA);
+                tagsA.step_count = countA.toString();
+                tagsB.step_count = (stepCount - countA).toString();
+
+                wayA = wayA.update({ tags: tagsA });
+                wayB = wayB.update({ tags: tagsB });
+            }
+        }
+
 
         graph = graph.replace(wayA);
         graph = graph.replace(wayB);
@@ -204,57 +256,77 @@ export function actionSplit(nodeId, newWayIds) {
             graph = graph.replace(wayB.update({ tags: {} }));
         }
 
-        createdWayIDs.push(wayB.id);
+        _createdWayIDs.push(wayB.id);
 
         return graph;
     }
 
     var action = function(graph) {
-        var candidates = action.ways(graph);
-        createdWayIDs = [];
-        for (var i = 0; i < candidates.length; i++) {
-            graph = split(graph, candidates[i], newWayIds && newWayIds[i]);
+        _createdWayIDs = [];
+        var newWayIndex = 0;
+        for (var i = 0; i < nodeIds.length; i++) {
+            var nodeId = nodeIds[i];
+            var candidates = action.waysForNode(nodeId, graph);
+            for (var j = 0; j < candidates.length; j++) {
+                graph = split(graph, nodeId, candidates[j], newWayIds && newWayIds[newWayIndex]);
+                newWayIndex += 1;
+            }
         }
         return graph;
     };
 
     action.getCreatedWayIDs = function() {
-        return createdWayIDs;
+        return _createdWayIDs;
+    };
+
+    action.waysForNode = function(nodeId, graph) {
+        var node = graph.entity(nodeId);
+        var splittableParents = graph.parentWays(node).filter(isSplittable);
+
+        if (!_wayIDs) {
+            // If the ways to split aren't specified, only split the lines.
+            // If there are no lines to split, split the areas.
+
+            var hasLine = splittableParents.some(function(parent) {
+                return parent.geometry(graph) === 'line';
+            });
+            if (hasLine) {
+                return splittableParents.filter(function(parent) {
+                    return parent.geometry(graph) === 'line';
+                });
+            }
+        }
+        return splittableParents;
+
+        function isSplittable(parent) {
+            // If the ways to split are specified, ignore everything else.
+            if (_wayIDs && _wayIDs.indexOf(parent.id) === -1) return false;
+
+            // We can fake splitting closed ways at their endpoints...
+            if (parent.isClosed()) return true;
+
+            // otherwise, we can't split nodes at their endpoints.
+            for (var i = 1; i < parent.nodes.length - 1; i++) {
+                if (parent.nodes[i] === nodeId) return true;
+            }
+            return false;
+        }
     };
 
     action.ways = function(graph) {
-        var node = graph.entity(nodeId);
-        var parents = graph.parentWays(node);
-        var hasLines = parents.some(function(parent) {
-            return parent.geometry(graph) === 'line';
-        });
-
-        return parents.filter(function(parent) {
-            if (_wayIDs && _wayIDs.indexOf(parent.id) === -1)
-                return false;
-
-            if (!_wayIDs && hasLines && parent.geometry(graph) !== 'line')
-                return false;
-
-            if (parent.isClosed()) {
-                return true;
-            }
-
-            for (var i = 1; i < parent.nodes.length - 1; i++) {
-                if (parent.nodes[i] === nodeId) {
-                    return true;
-                }
-            }
-
-            return false;
-        });
+        return utilArrayUniq([].concat.apply([], nodeIds.map(function(nodeId) {
+            return action.waysForNode(nodeId, graph);
+        })));
     };
 
 
     action.disabled = function(graph) {
-        var candidates = action.ways(graph);
-        if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length)) {
-            return 'not_eligible';
+        for (var i = 0; i < nodeIds.length; i++) {
+            var nodeId = nodeIds[i];
+            var candidates = action.waysForNode(nodeId, graph);
+            if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length)) {
+                return 'not_eligible';
+            }
         }
     };
 
@@ -262,6 +334,13 @@ export function actionSplit(nodeId, newWayIds) {
     action.limitWays = function(val) {
         if (!arguments.length) return _wayIDs;
         _wayIDs = val;
+        return action;
+    };
+
+
+    action.keepHistoryOn = function(val) {
+        if (!arguments.length) return _keepHistoryOn;
+        _keepHistoryOn = val;
         return action;
     };
 

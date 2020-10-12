@@ -27,7 +27,7 @@ export function uiCommitWarnings(context) {
 
             containerEnter
                 .append('h3')
-                .text(severity === 'warning' ? t('commit.warnings') : t('commit.errors'));
+                .html(severity === 'warning' ? t.html('commit.warnings') : t.html('commit.errors'));
 
             containerEnter
                 .append('ul')
@@ -47,28 +47,8 @@ export function uiCommitWarnings(context) {
                 .append('li')
                 .attr('class', issueItem);
 
-            itemsEnter
-                .call(svgIcon('#iD-icon-alert', 'pre-text'));
-
-            itemsEnter
-                .append('strong')
-                .attr('class', 'issue-message');
-
-            itemsEnter.filter(function(d) { return d.tooltip; })
-                .call(uiTooltip()
-                    .title(function(d) { return d.tooltip; })
-                    .placement('top')
-                );
-
-            items = itemsEnter
-                .merge(items);
-
-            items.selectAll('.issue-message')
-                .text(function(d) {
-                    return d.message(context);
-                });
-
-            items
+            var buttons = itemsEnter
+                .append('button')
                 .on('mouseover', function(d) {
                     if (d.entityIds) {
                         context.surface().selectAll(
@@ -85,6 +65,27 @@ export function uiCommitWarnings(context) {
                 })
                 .on('click', function(d) {
                     context.validator().focusIssue(d);
+                });
+
+            buttons
+                .call(svgIcon('#iD-icon-alert', 'pre-text'));
+
+            buttons
+                .append('strong')
+                .attr('class', 'issue-message');
+
+            buttons.filter(function(d) { return d.tooltip; })
+                .call(uiTooltip()
+                    .title(function(d) { return d.tooltip; })
+                    .placement('top')
+                );
+
+            items = itemsEnter
+                .merge(items);
+
+            items.selectAll('.issue-message')
+                .html(function(d) {
+                    return d.message(context);
                 });
         }
     }

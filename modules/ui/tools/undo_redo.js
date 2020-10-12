@@ -15,7 +15,7 @@ export function uiToolUndoRedo(context) {
 
     var tool = {
         id: 'undo_redo',
-        label: t('toolbar.undo_redo')
+        label: t.html('toolbar.undo_redo')
     };
 
     var commands = [{
@@ -51,8 +51,8 @@ export function uiToolUndoRedo(context) {
             .placement('bottom')
             .title(function (d) {
                 return d.annotation() ?
-                    t(d.id + '.tooltip', { action: d.annotation() }) :
-                    t(d.id + '.nothing');
+                    t.html(d.id + '.tooltip', { action: d.annotation() }) :
+                    t.html(d.id + '.nothing');
             })
             .keys(function(d) {
                 return [d.cmd];
@@ -92,7 +92,7 @@ export function uiToolUndoRedo(context) {
                         .duration(2000)
                         .iconName('#' + d.icon)
                         .iconClass(annotation ? '' : 'disabled')
-                        .text(text)();
+                        .label(text)();
                 }
                 lastPointerUpType = null;
             })

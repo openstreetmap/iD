@@ -1,6 +1,7 @@
 {
     "icon": "maki-entrance-alt1",
     "fields": [
+	"parking_entrance",
         "ref",
         "access_simple",
         "address",

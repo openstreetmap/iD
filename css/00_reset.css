@@ -67,13 +67,17 @@ textarea {
 
 button,
 input {
-    line-height: normal;
+    line-height: inherit;
+	letter-spacing: inherit;
 }
 
 /* Hide default number spinner controls */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-display: none;
+	display: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 /*

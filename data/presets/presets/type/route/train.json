@@ -25,5 +25,9 @@
         "type": "route",
         "route": "train"
     },
+    "reference": {
+        "key": "route",
+        "value": "train"
+    },
     "name": "Train Route"
 }

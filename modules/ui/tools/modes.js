@@ -18,28 +18,28 @@ export function uiToolOldDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
-        label: t('toolbar.add_feature')
+        label: t.html('toolbar.add_feature')
     };
 
     var modes = [
         modeAddPoint(context, {
-            title: t('modes.add_point.title'),
+            title: t.html('modes.add_point.title'),
             button: 'point',
-            description: t('modes.add_point.description'),
+            description: t.html('modes.add_point.description'),
             preset: presetManager.item('point'),
             key: '1'
         }),
         modeAddLine(context, {
-            title: t('modes.add_line.title'),
+            title: t.html('modes.add_line.title'),
             button: 'line',
-            description: t('modes.add_line.description'),
+            description: t.html('modes.add_line.description'),
             preset: presetManager.item('line'),
             key: '2'
         }),
         modeAddArea(context, {
-            title: t('modes.add_area.title'),
+            title: t.html('modes.add_area.title'),
             button: 'area',
-            description: t('modes.add_area.description'),
+            description: t.html('modes.add_area.description'),
             preset: presetManager.item('area'),
             key: '3'
         })
@@ -127,7 +127,7 @@ export function uiToolOldDrawModes(context) {
             buttonsEnter
                 .append('span')
                 .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
+                .html(function(mode) { return mode.title; });
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {

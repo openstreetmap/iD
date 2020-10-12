@@ -12,7 +12,7 @@ export function uiToolSave(context) {
 
     var tool = {
         id: 'save',
-        label: t('save.title')
+        label: t.html('save.title')
     };
 
     var button = null;
@@ -58,7 +58,7 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(t(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
+                .title(t.html(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
                 .keys([key]);
         }
 
@@ -68,7 +68,7 @@ export function uiToolSave(context) {
                 .style('background', bgColor(_numChanges));
 
             button.select('span.count')
-                .text(_numChanges);
+                .html(_numChanges);
         }
     }
 
@@ -76,7 +76,7 @@ export function uiToolSave(context) {
     tool.render = function(selection) {
         tooltipBehavior = uiTooltip()
             .placement('bottom')
-            .title(t('save.no_changes'))
+            .title(t.html('save.no_changes'))
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
@@ -102,7 +102,7 @@ export function uiToolSave(context) {
                         .duration(2000)
                         .iconName('#iD-icon-save')
                         .iconClass('disabled')
-                        .text(t('save.no_changes'))();
+                        .label(t.html('save.no_changes'))();
                 }
                 lastPointerUpType = null;
             })
@@ -115,7 +115,7 @@ export function uiToolSave(context) {
             .append('span')
             .attr('class', 'count')
             .attr('aria-hidden', 'true')
-            .text('0');
+            .html('0');
 
         updateCount();
 

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import buble from '@rollup/plugin-buble';
+import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import includePaths from 'rollup-plugin-includepaths';
 import json from '@rollup/plugin-json';
@@ -28,7 +28,9 @@ export default {
     nodeResolve({ dedupe: ['object-inspect'] }),
     commonjs(),
     json({ indent: '' }),
-    buble()
+    babel({
+      babelHelpers: 'bundled'
+    })
   ]
 };
 

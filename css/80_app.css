@@ -33,6 +33,8 @@
 
 .main-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     height: 100%;
     touch-action: none;
@@ -96,7 +98,14 @@ h4, h5 {
     padding-bottom: 10px;
 }
 
-:focus {
+button:focus,
+textarea:focus,
+input[type=text]:focus,
+input[type=search]:focus,
+input[type=number]:focus,
+input[type=url]:focus,
+input[type=tel]:focus,
+input[type=email]:focus {
     outline-color: transparent;
     outline-style: none;
 }
@@ -125,6 +134,9 @@ a:visited,
 a:active {
     color: #7092ff;
 }
+a:focus {
+    color: #597be7;
+}
 @media (hover: hover) {
     a:hover {
         color: #597be7;
@@ -135,8 +147,8 @@ kbd {
     text-align: center;
     padding: 3px 5px;
     font-size: 11px;
-    line-height: 12px;
-    min-width: 12px;
+    line-height: 1.3;
+    min-width: 0.9em;
     vertical-align: baseline;
     background-color: #fcfcfc;
     border: solid 1px #ccc;
@@ -154,14 +166,6 @@ code {
 
 /* Forms
 ------------------------------------------------------- */
-textarea  {
-    resize: vertical;
-    font:normal 12px/20px "-apple-system", BlinkMacSystemFont,
-        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-        "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
-        sans-serif;
-}
-
 textarea,
 input[type=text],
 input[type=search],
@@ -173,25 +177,34 @@ input[type=date] {
     background-color: #fff;
     color: #333;
     border: 1px solid #ccc;
-    padding: 5px 20px 5px 10px;
-    height: 30px;
+    padding: 0px 10px 0px 10px;
     border-radius: 4px;
     text-overflow: ellipsis;
-    overflow: hidden;
+    overflow: auto;
 }
 input.list-item-input {
     height: 20px;
     padding: 0px 4px;
     width: 160px;
 }
-.ideditor[dir='rtl'] textarea,
-.ideditor[dir='rtl'] input[type=text],
-.ideditor[dir='rtl'] input[type=search],
-.ideditor[dir='rtl'] input[type=number],
-.ideditor[dir='rtl'] input[type=url],
-.ideditor[dir='rtl'] input[type=tel],
-.ideditor[dir='rtl'] input[type=email] {
-    padding: 5px 10px 5px 20px;
+input[type=text],
+input[type=search],
+input[type=number],
+input[type=url],
+input[type=tel],
+input[type=email] {
+    /* need this since line-height interpretation may vary by font or browser */
+    height: 2.585em;
+}
+textarea  {
+    min-height: 2em;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    resize: vertical;
+    font:normal 12px/20px "-apple-system", BlinkMacSystemFont,
+        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
+        sans-serif;
 }
 
 textarea:active,
@@ -210,16 +223,14 @@ input.disabled {
 
 input[type="checkbox"],
 input[type="radio"] {
-    float: left;
     width: 14px;
     height: 14px;
     margin-right: 5px;
-    margin-top: 3px;
     cursor: pointer;
+    vertical-align: middle;
 }
 .ideditor[dir='rtl'] input[type="checkbox"],
 .ideditor[dir='rtl'] input[type="radio"] {
-    float: right;
     margin-left: 5px;
     margin-right: 0;
 }
@@ -227,6 +238,15 @@ input[type="radio"] {
 input.mixed::placeholder,
 textarea.mixed::placeholder {
     font-style: italic;
+}
+
+/* keytraps need to be invisible yet not be display:none or visibility:hidden */
+.keytrap {
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
 /* tables */
@@ -309,19 +329,18 @@ li.hide {
 ------------------------------------------------------- */
 button {
     text-align: center;
-    line-height: 20px;
     border: 0;
     background: #fff;
-    font-weight: bold;
     color: #333;
     font-size: 12px;
     display: inline-block;
-    height: 40px;
     border-radius: 4px;
 }
 
 button:focus,
-button:active {
+button:active,
+/* we want to fake hovering sometimes */
+button.hover {
     background-color: #ececec;
 }
 @media (hover: hover) {
@@ -369,6 +388,7 @@ button.disabled {
 button.action {
     background: #7092ff;
     color: #fff;
+    font-weight: bold;
 }
 button.action:focus,
 button.action:active {
@@ -376,6 +396,7 @@ button.action:active {
 }
 button.secondary-action {
     background: #ececec;
+    font-weight: bold;
 }
 button.secondary-action:focus,
 button.secondary-action:active {
@@ -387,6 +408,11 @@ button[disabled].action {
     background: #cccccc;
     color: #888;
     cursor: not-allowed;
+}
+
+button.action,
+button.secondary-action {
+    padding: 10px 5px;
 }
 
 @media (hover: hover) {
@@ -408,7 +434,7 @@ button[disabled].action {
 /* Icons
 ------------------------------------------------------- */
 .icon {
-    vertical-align: top;
+    vertical-align: middle;
     width: 20px;
     height: 20px;
 }
@@ -429,8 +455,9 @@ button.disabled .icon.operation use,
 
 .icon.inline {
     vertical-align: text-top;
-    width: 14px;
-    height: 14px;
+    display: inline-block;
+    width: 1.17em;
+    height: 1.17em;
     margin: 0px 3px;
 }
 
@@ -477,10 +504,7 @@ button.disabled .icon.operation use,
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
 .top-toolbar-wrap {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
+    position: relative;
     z-index: 101;
 }
 .top-toolbar {
@@ -558,6 +582,7 @@ button.bar-button {
     min-width: 30px;
     white-space: nowrap;
     display: flex;
+    font-weight: bold;
 }
 button.bar-button .icon {
     flex: 0 0 20px;
@@ -584,7 +609,7 @@ button.save .count {
     text-align: center;
 }
 
-.help-pane svg.icon.pre-text.add-note,
+.help-pane svg.icon.inline.add-note,
 button.add-note svg.icon {
     height: 15px;
     width: 15px;
@@ -601,7 +626,7 @@ button.add-note svg.icon {
     margin-left: 4px;
     margin-right: unset;
 }
-.help-pane svg.icon.pre-text.add-note {
+.help-pane svg.icon.inline.add-note {
     margin-left: 3px;
     margin-right: 3px;
 }
@@ -610,11 +635,13 @@ button.add-note svg.icon {
     opacity: .5;
     position: absolute;
     right: 4px;
-    bottom: 26px;
-}
-.spinner img {
+    bottom: 4px;
     height: 20px;
     width: 20px;
+}
+.spinner img {
+    height: 100%;
+    width: 100%;
     background: transparent;
     border-radius: 100%;
 }
@@ -645,11 +672,12 @@ button.add-note svg.icon {
 ------------------------------------------------------- */
 .header {
     border-bottom: 1px solid #ccc;
-    height: 60px;
+    padding: 20px 40px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
 }
 
 .header h3 {
@@ -723,7 +751,7 @@ button.add-note svg.icon {
     border-top: 1px solid #ccc;
     background-color: #f6f6f6;
     width: 100%;
-    height: 30px;
+    height: 2.5em;
     z-index: 1;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -736,36 +764,13 @@ button.add-note svg.icon {
     justify-content: center;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.header-block {
-    display: flex;
-    align-items: center;
-}
-.header-block-outer {
-    width: 20%;
-}
-
-.header-block-close {
-    display: flex;
-    justify-content: flex-end;
-    height: 100%;
-}
-
-/* Hide/Toggle collapsable sections (aka Disclosure)
+/* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
 .hide-toggle .icon.pre-text {
-    vertical-align: text-top;
+    vertical-align: middle;
     width: 16px;
     height: 16px;
-    margin-left: -3px;
-}
-.ideditor[dir='rtl'] .hide-toggle .icon.pre-text {
-    margin-left: 0;
-    margin-right: -3px;
+    margin-top: -3px;
 }
 
 a:visited.hide-toggle,
@@ -773,7 +778,7 @@ a.hide-toggle {
     display: inline-block;
     font-size: 14px;
     font-weight: bold;
-    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 
@@ -825,14 +830,15 @@ a.hide-toggle {
     left: 0;
     bottom: 0;
     right: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar-component .body {
     width: 100%;
+    height: 100%;
     overflow: auto;
-    top: 60px;
-    bottom: 0;
-    position: absolute;
+    position: relative;
 }
 
 .panewrap {
@@ -846,7 +852,9 @@ a.hide-toggle {
     position: absolute;
     width: 50%;
     top: 0;
-    bottom: 30px;
+    bottom: 2.5em;
+    display: flex;
+    flex-direction: column;
 }
 
 .pane:first-child {
@@ -855,6 +863,11 @@ a.hide-toggle {
 
 .pane:last-child {
     right: 0;
+}
+.feature-list-pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .inspector-wrap {
@@ -871,18 +884,9 @@ a.hide-toggle {
 .inspector-body {
     overflow-y: scroll;
     overflow-x: hidden;
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.feature-list-pane .inspector-body,
-.preset-list-pane .inspector-body {
-    top: 120px;
-}
-.entity-editor-pane .inspector-body {
-    top: 60px;
+    position: relative;
+    height: 100%;
+    flex: 1 1 100%;
 }
 .entity-editor {
     padding: 20px;
@@ -892,11 +896,16 @@ a.hide-toggle {
     margin-bottom: 150px;
 }
 
+.sidebar .search-header {
+    position: relative;
+    overflow: hidden;
+    flex: 0 0 auto;
+}
 .sidebar .search-header .icon {
-    display: block;
+    display: inline-block;
     position: absolute;
     left: 10px;
-    top: 80px;
+    height: 100%;
     pointer-events: none;
 }
 .ideditor[dir='rtl'] .sidebar .search-header .icon {
@@ -905,11 +914,9 @@ a.hide-toggle {
 }
 
 .sidebar .search-header input {
-    position: absolute;
-    top: 60px;
-    height: 60px;
     width: 100%;
-    padding: 5px 10px;
+    padding: 0 10px;
+    height: 3em;
     border-radius: 0;
     border-width: 0;
     border-bottom-width: 1px;
@@ -936,53 +943,24 @@ a.hide-toggle {
     border-bottom: 1px solid #ccc;
     border-radius: 0;
 }
+.no-results-item {
+    padding: 10px;
+    font-weight: bold;
+}
 
 .geocode-item {
     width: 100%;
     max-width: 200px;
-    background-color: #ccc;
     margin: 30px auto;
-    padding: 5px;
-    height: auto;
     min-height: 40px;
 }
 
-.ideditor[dir='rtl'] .geocode-item {
-    left: -25%;
-}
-.geocode-item:active {
-    background-color: #aaa;
-}
-@media (hover: hover) {
-    .geocode-item:hover {
-        background-color: #aaa;
-    }
-}
-
 .feature-list-item {
-    background-color: #fff;
-    font-weight: bold;
-    height: 40px;
-    line-height: 20px;
     display: flex;
-}
-.feature-list-item:active {
-    background-color: #ececec;
-}
-@media (hover: hover) {
-    .feature-list-item:hover {
-        background-color: #ececec;
-    }
-}
-.feature-list-item.hover {
-    background-color: #ececec;
-}
-.feature-list-item button {
-    background: transparent;
 }
 .feature-list-item .label {
     text-align: left;
-    padding: 10px 10px;
+    padding: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -1004,8 +982,10 @@ a.hide-toggle {
 }
 .feature-list-item .entity-type {
     color: #7092ff;
+    font-weight: bold;
 }
-.feature-list-item:active .entity-type {
+.feature-list-item:active .entity-type,
+.feature-list-item:focus .entity-type {
     color: #597be7;
 }
 @media (hover: hover) {
@@ -1014,7 +994,6 @@ a.hide-toggle {
     }
 }
 .feature-list-item .entity-name {
-    font-weight: normal;
     color: #666;
     padding-left: 10px;
 }
@@ -1045,7 +1024,7 @@ a.hide-toggle {
 }
 
 .preset-list-button-wrap {
-    height: 62px;
+    min-height: 62px;
     display: flex;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -1056,6 +1035,7 @@ a.hide-toggle {
     height: 100%;
     position: relative;
     display: flex;
+    align-items: center;
 }
 
 .preset-list.filtered .preset-list-item:first-child .preset-list-button {
@@ -1196,7 +1176,7 @@ a.hide-toggle {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    background-color: #f6f6f6;
+    background: #f6f6f6;
     text-align: left;
     padding: 5px 10px;
     border-left: 1px solid rgba(0, 0, 0, .1);
@@ -1234,8 +1214,8 @@ a.hide-toggle {
 .preset-list-button .label-inner .namepart {
     text-overflow: ellipsis;
 }
-.preset-list-button .label-inner .namepart:nth-child(2) {
-    font-weight: normal;
+.preset-list-button .label-inner .namepart:nth-child(1) {
+    font-weight: bold;
 }
 
 .preset-list-button:focus .label,
@@ -1251,9 +1231,10 @@ a.hide-toggle {
 }
 
 .preset-list-button-wrap button.tag-reference-button {
-    height: 100%;
     width: 32px;
     flex: 0 0 auto;
+}
+.preset-list-button-wrap button.tag-reference-button:not(:hover):not(:active):not(:focus) {
     background: #f6f6f6;
 }
 .ideditor[dir='ltr'] .preset-list-button-wrap button.tag-reference-button {
@@ -1268,16 +1249,11 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .preset-list-button-wrap:not(.category) button:last-child {
     border-radius: 4px 0 0 4px;
 }
-.preset-list-button-wrap button.tag-reference-button:active {
-    background: #f1f1f1;
-}
-@media (hover: hover) {
-    .preset-list-button-wrap button.tag-reference-button:hover {
-        background: #f1f1f1;
-    }
-}
 .preset-list-button-wrap button.tag-reference-button .icon {
     opacity: .5;
+}
+.preset-list-button-wrap .accessory-buttons {
+    display: flex;
 }
 
 
@@ -1388,7 +1364,6 @@ a.hide-toggle {
     display: flex;
     flex-flow: row nowrap;
     flex: 1 1 100%;
-    height: 30px;
     position: relative;
     font-weight: bold;
     color: #333;
@@ -1401,10 +1376,10 @@ a.hide-toggle {
     overflow: hidden;
     text-overflow: ellipsis;
     flex: 1 1 auto;
-    padding: 5px 0 5px 10px;
+    padding: 5px 0 4px 10px;
 }
 .ideditor[dir='rtl'] .field-label .label-text {
-    padding: 5px 10px 5px 0;
+    padding: 5px 10px 4px 0;
 }
 .field-label .label-text span {
     white-space: nowrap;
@@ -1420,27 +1395,21 @@ a.hide-toggle {
 }
 
 .field-label button {
-    flex: 0 0 32px;
+    flex: 0 0 auto;
     border-left: 1px solid #ccc;
     width: 32px;
-    height: 100%;
     border-radius: 0;
-    background: #f6f6f6;
 }
 .ideditor[dir='rtl'] .field-label button {
     border-left: none;
     border-right: 1px solid #ccc;
 }
-.field-label button:active {
-    background: #f1f1f1;
-}
-@media (hover: hover) {
-    .field-label button:hover {
-        background: #f1f1f1;
-    }
+.field-label button:not(:hover):not(:active):not(:focus) {
+    background: none;
 }
 .field-label .icon {
     opacity: .5;
+
 }
 
 .field-label .modified-icon,
@@ -1460,7 +1429,6 @@ a.hide-toggle {
     flex-flow: row nowrap;
     width: 100%;
     flex: 1 1 auto;
-    min-height: 30px;
     border-top: 0;
     border-radius: 0 0 4px 4px;
 }
@@ -1474,23 +1442,19 @@ a.hide-toggle {
 .form-field-input-wrap > textarea,
 .form-field-input-wrap > ul.chiplist {
     flex: 1 1 auto;
-    min-height: 30px;
     border: 1px solid #ccc;
     border-top: 0;
     border-radius: 0;
-    overflow: hidden;
     position: relative;
 }
 .form-field-input-wrap > textarea {
     height: 65px;
     border-radius: 0 0 4px 4px;
-    overflow: auto;
 }
 
 /* Buttons inside fields */
 .form-field-button {
     flex: 0 0 auto;
-    height: 30px;
     width: 32px;
     position: relative;
     background-color: #fff;
@@ -1504,7 +1468,8 @@ a.hide-toggle {
     border-left-width: 1px;
     border-right-width: 0;
 }
-.form-field-button:active {
+.form-field-button:active,
+.form-field-button:focus {
     background-color: #f1f1f1;
 }
 @media (hover: hover) {
@@ -1600,6 +1565,7 @@ a.hide-toggle {
 ------------------------------------------------------- */
 .form-field-input-combo > input:only-of-type {
     border-radius: 0 0 4px 4px;
+    width: 100%;
 }
 .form-field-input-combo.empty-combobox input,
 .form-field-input-multicombo .empty-combobox input {
@@ -1637,7 +1603,6 @@ a.hide-toggle {
 .form-field-input-multicombo li.chip {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
-    line-height: 25px;
     max-width: 100%;
 }
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
@@ -1682,12 +1647,10 @@ a.hide-toggle {
 .form-field-input-multicombo .input-wrap {
     border: 1px solid #ddd;
     width: 100px;
-    height: 31px;
 }
 .form-field-input-multicombo input {
     border: none;
     width: 100%;
-    height: 100%;
 }
 
 .form-field-input-multicombo input:focus {
@@ -1769,7 +1732,6 @@ a.hide-toggle {
 }
 .form-field-input-check > input[type="checkbox"] {
     flex: 0 1 auto;
-    min-height: 20px;
     width: 20px;
     margin-top: 0;
 }
@@ -1779,23 +1741,25 @@ a.hide-toggle {
 .form-field-input-check > span.mixed {
     font-style: italic;
 }
-.form-field-input-check > .reverser.button {
+.form-field-input-check > .reverser {
     flex: 0 1 auto;
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     border-radius: 2px;
     padding: 0px 8px;
+    color: inherit;
 }
-.ideditor[dir='ltr'] .form-field-input-check > .reverser.button {
+.ideditor[dir='ltr'] .form-field-input-check > .reverser {
     padding-right: 2px;
 }
-.ideditor[dir='rtl'] .form-field-input-check > .reverser.button {
+.ideditor[dir='rtl'] .form-field-input-check > .reverser {
     padding-left: 2px;
 }
-.form-field-input-check > .reverser.button.hide {
+.form-field-input-check > .reverser.hide {
     display: none;
 }
-.form-field-input-check:active {
+.form-field-input-check:active,
+.form-field-input-check:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -1822,9 +1786,9 @@ a.hide-toggle {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
     width: 100%;
     padding: 5px 10px;
-    height: 30px;
     background-color: #fff;
     color: #7092ff;
     cursor: pointer;
@@ -1835,7 +1799,8 @@ a.hide-toggle {
 .form-field-input-radio > label:last-child {
     border-radius: 0 0 4px 4px;
 }
-.form-field-input-radio > label:active {
+.form-field-input-radio > label:active,
+.form-field-input-radio > label:focus {
     background-color: #ececec;
 }
 @media (hover: hover) {
@@ -1866,7 +1831,7 @@ a.hide-toggle {
     padding: 0;
     opacity: 0;
     width: 0;
-    line-height: 0;
+    height: 0;
     display: block;
     overflow: hidden;
 }
@@ -1881,13 +1846,13 @@ a.hide-toggle {
     flex: 0 1 auto;
     width: 80px;
 }
-.form-field-input-maxspeed > input:first-of-type {
+.ideditor[dir='ltr'] .form-field-input-maxspeed > input:first-of-type {
     border-radius: 0 0 0 4px;
 }
 .ideditor[dir='rtl'] .form-field-input-maxspeed > input:first-of-type {
     border-radius: 0 0 4px 0;
 }
-.form-field-input-maxspeed > input:last-of-type {
+.ideditor[dir='ltr'] .form-field-input-maxspeed > input:last-of-type {
     border-left: 0;
     border-radius: 0 0 4px 0;
 }
@@ -1971,7 +1936,6 @@ a.hide-toggle {
     flex: 1 1 auto;
     display: flex;
     width: 100%;
-    min-height: 30px;
 }
 
 .addr-row > input {
@@ -2075,13 +2039,13 @@ a.hide-toggle {
 }
 
 .restriction-control input,
-.restriction-control span {
+.restriction-control > span {
     display: table-cell;
     text-align: start;
     padding: 0px 5px;
 }
 
-.restriction-control span.restriction-control-label {
+.restriction-control > span.restriction-control-label {
     text-align: end;
 }
 
@@ -2155,6 +2119,16 @@ a.hide-toggle {
 
 /* Field - Combobox
 ------------------------------------------------------- */
+.ideditor[dir='ltr'] textarea.combobox-input,
+.ideditor[dir='ltr'] input.combobox-input {
+    /* leave room for the caret */
+    padding-right: 20px;
+}
+.ideditor[dir='rtl'] textarea.combobox-input,
+.ideditor[dir='rtl'] input.combobox-input {
+    padding-left: 20px;
+}
+
 div.combobox {
     z-index: 9999;
     display: none;
@@ -2178,7 +2152,8 @@ div.combobox {
 }
 
 .combobox a.selected,
-.combobox a:active {
+.combobox a:active,
+.combobox a:focus {
     background: #ececec;
 }
 @media (hover: hover) {
@@ -2195,10 +2170,11 @@ div.combobox {
 .combobox-caret {
     display: inline-block;
     position: relative;
-    height: 30px;
+    height: 5px;
     width: 30px !important;
     margin-left: -30px;
-    vertical-align: top;
+    align-self: center;
+    vertical-align: middle;
     cursor: pointer;
 }
 .ideditor[dir='rtl'] .combobox-caret {
@@ -2262,7 +2238,8 @@ div.combobox {
     color: #7092ff;
     border-bottom: 2px solid;
 }
-.field-help-nav-item:active {
+.field-help-nav-item:active,
+.field-help-nav-item:focus {
     color: #597be7;
     background-color: #efefef;
 }
@@ -2350,7 +2327,6 @@ div.combobox {
 }
 
 .form-field-input-wrap .label {
-    height: 30px;
     background: #f6f6f6;
     padding: 5px 10px;
 }
@@ -2361,13 +2337,12 @@ div.combobox {
 .raw-tag-options {
     display: flex;
     flex-flow: row nowrap;
-    flex-direction: row-reverse;
-    margin-top: -25px;
+    justify-content: flex-end;
+    margin-top: -28px;
 }
 button.raw-tag-option {
-    flex: 0 0 20px;
-    height: 20px;
-    width: 20px;
+    flex: 0 0 auto;
+    padding: 3px;
     background: #aaa;
     color: #eee;
     margin: 0 3px;
@@ -2390,7 +2365,7 @@ button.raw-tag-option.selected {
 button.raw-tag-option svg.icon {
     width: 14px;
     height: 14px;
-    vertical-align: text-bottom;
+    display: block;
 }
 .ideditor[dir='ltr'] button.raw-tag-option-list {
     transform: scaleX(-1);
@@ -2437,7 +2412,6 @@ button.raw-tag-option svg.icon {
 }
 
 .tag-row input {
-    height: 31px;
     border: 0;
     border-radius: 0;
     border-bottom: 1px solid #ccc;
@@ -2475,8 +2449,7 @@ button.raw-tag-option svg.icon {
     border-top: 1px solid #ccc;
 }
 .tag-row button {
-    flex: 0 0 32px;
-    height: 31px;
+    flex: 0 0 auto;
     width: 32px;
     border: 1px solid #ccc;
     border-top-width: 0;
@@ -2487,7 +2460,8 @@ button.raw-tag-option svg.icon {
     border-right-width: 0;
 }
 
-.tag-row button:active {
+.tag-row button:active,
+.tag-row button:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -2632,15 +2606,6 @@ img.tag-reference-wiki-image {
     */
 }
 
-/* hidden field to prevent user from tabbing out of the sidebar */
-input.key-trap {
-    height: 0px;
-    width: 0px;
-    padding: 0px;
-    border: 1px solid rgba(0,0,0,0);
-}
-
-
 /* add tag, add relation buttons */
 .add-row {
     display: flex;
@@ -2656,7 +2621,7 @@ input.key-trap {
     flex: 0 0 62px;
 }
 .add-row button {
-    height: 30px;
+    padding: 5px;
     background: rgba(0,0,0,.5);
 }
 .add-row button:focus,
@@ -2694,7 +2659,7 @@ input.key-trap {
 .qa-header-icon {
     background-color: #fff;
     padding: 10px;
-    flex: 0 0 62px;
+    flex: 0 0 auto;
     position: relative;
     width: 60px;
     height: 60px;
@@ -2759,7 +2724,7 @@ input.key-trap {
 }
 .comment-avatar {
     padding: 10px;
-    flex: 0 0 62px;
+    flex: 0 0 auto;
 }
 .comment-avatar .icon.comment-avatar-icon {
     width: 40px;
@@ -2862,7 +2827,7 @@ input.key-trap {
 .data-header-icon {
     background-color: #fff;
     padding: 10px;
-    flex: 0 0 62px;
+    flex: 0 0 auto;
     position: relative;
     width: 60px;
     height: 60px;
@@ -2903,15 +2868,13 @@ input.key-trap {
 
 
 .over-map {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 71px;
-    bottom: 30px;
+    position: relative;
+    height: 100%;
     pointer-events: none;
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-end;
+    overflow: hidden;
 }
 .over-map > * {
     pointer-events: auto;
@@ -2945,9 +2908,15 @@ input.key-trap {
     right: auto;
 }
 
+.map-control {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 .map-control > button {
     position: relative;
     width: 40px;
+    height: 40px;
     background: rgba(0,0,0,.5);
     border-radius: 0;
     pointer-events: auto;
@@ -2993,7 +2962,8 @@ div.full-screen > button, div.full-screen > button.active {
     height: 40px;
     background: transparent;
 }
-div.full-screen > button:active {
+div.full-screen > button:active,
+div.full-screen > button:focus {
     background-color: rgba(0, 0, 0, .8);
 }
 @media (hover: hover) {
@@ -3051,11 +3021,6 @@ div.full-screen > button:active {
 
 /* Background / Map Data Settings
 ------------------------------------------------------- */
-.map-data-control,
-.background-control {
-    position: relative;
-}
-
 .imagery-faq {
     margin-bottom: 10px;
     white-space: nowrap;
@@ -3068,7 +3033,6 @@ div.full-screen > button:active {
 }
 
 .layer-list > li {
-    height: 30px;
     background-color: #fff;
     color: #7092ff;
     position: relative;
@@ -3127,6 +3091,7 @@ div.full-screen > button:active {
     cursor: pointer;
     flex: 1 1 auto;
     display: flex;
+    align-items: center;
     overflow: hidden;
 }
 
@@ -3147,7 +3112,6 @@ div.full-screen > button:active {
 
 .map-data-pane .layer-list button,
 .background-pane .layer-list button {
-    height: 100%;
     border-left: 1px solid #ccc;
     border-radius: 0;
     padding-left: 4px;
@@ -3192,6 +3156,8 @@ div.full-screen > button:active {
     display: flex;
     flex-flow: row nowrap;
     cursor: pointer;
+    text-align: initial;
+    background: none;
 }
 
 .issue-text .issue-icon {
@@ -3252,7 +3218,7 @@ button.autofix.action.active {
 .autofix-all {
     display: flex;
     flex-flow: row nowrap;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
     margin-top: -25px;
     padding-bottom: 5px;
 }
@@ -3278,7 +3244,7 @@ button.autofix.action.active {
 
 .warnings-list .issue.severity-warning .issue-label,
 .issue.severity-warning .issue-fix-list,
-.ideditor.mode-save .warning-section {
+.warning-section {
     background: #ffc;
 }
 
@@ -3290,26 +3256,30 @@ button.autofix.action.active {
     color: #f90;
 }
 
-.issue.severity-warning .issue-fix-item.actionable,
+.issue.severity-warning .issue-fix-item button.actionable,
 .issue-container.active .issue.severity-warning .issue-info-button {
     color: #b15500;
     fill: #b15500;
 }
 .warnings-list .issue.severity-warning .issue-label:active,
-.issue.severity-warning .issue-fix-item.actionable:active {
+.warnings-list .issue.severity-warning .issue-label:focus,
+.issue.severity-warning .issue-fix-item button.actionable:active,
+.issue.severity-warning .issue-fix-item button.actionable:focus {
     background: #ff8;
 }
-.issue.severity-warning .issue-fix-item.actionable:active,
-.issue-container.active .issue.severity-warning .issue-info-button:active {
+.issue.severity-warning .issue-fix-item button.actionable:active,
+.issue.severity-warning .issue-fix-item button.actionable:focus,
+.issue-container.active .issue.severity-warning .issue-info-button:active,
+.issue-container.active .issue.severity-warning .issue-info-button:focus {
     color: #7f3d00;
     fill: #7f3d00;
 }
 @media (hover: hover) {
     .warnings-list .issue.severity-warning .issue-label:hover,
-    .issue.severity-warning .issue-fix-item.actionable:hover {
+    .issue.severity-warning .issue-fix-item button.actionable:hover {
         background: #ff8;
     }
-    .issue.severity-warning .issue-fix-item.actionable:hover,
+    .issue.severity-warning .issue-fix-item button.actionable:hover,
     .issue-container.active .issue.severity-warning .issue-info-button:hover {
         color: #7f3d00;
         fill: #7f3d00;
@@ -3327,7 +3297,7 @@ button.autofix.action.active {
 
 .errors-list .issue.severity-error .issue-label,
 .issue.severity-error .issue-fix-list,
-.ideditor.mode-save .error-section {
+.error-section {
     background: #ffd6d6;
 }
 
@@ -3335,7 +3305,7 @@ button.autofix.action.active {
     background: #ffc6c6;
 }
 
-.issue.severity-error .issue-fix-item.actionable,
+.issue.severity-error .issue-fix-item button.actionable,
 .issue-container.active .issue.severity-error .issue-info-button {
     color: #b91201;
     fill: #b91201;
@@ -3344,20 +3314,24 @@ button.autofix.action.active {
     color: #dd1400;
 }
 .errors-list .issue.severity-error .issue-label:active,
-.issue.severity-error .issue-fix-item.actionable:active {
+.errors-list .issue.severity-error .issue-label:focus,
+.issue.severity-error .issue-fix-item button.actionable:active,
+.issue.severity-error .issue-fix-item button.actionable:focus {
     background: #ffb6b6;
 }
-.issue.severity-error .issue-fix-item.actionable:active,
-.issue-container.active .issue.severity-error .issue-info-button:active {
+.issue.severity-error .issue-fix-item button.actionable:active,
+.issue.severity-error .issue-fix-item button.actionable:focus,
+.issue-container.active .issue.severity-error .issue-info-button:active,
+.issue-container.active .issue.severity-error .issue-info-button:focus {
     color: #840c00;
     fill: #840c00;
 }
 @media (hover: hover) {
     .errors-list .issue.severity-error .issue-label:hover,
-    .issue.severity-error .issue-fix-item.actionable:hover {
+    .issue.severity-error .issue-fix-item button.actionable:hover {
         background: #ffb6b6;
     }
-    .issue.severity-error .issue-fix-item.actionable:hover,
+    .issue.severity-error .issue-fix-item button.actionable:hover,
     .issue-container.active .issue.severity-error .issue-info-button:hover {
         color: #840c00;
         fill: #840c00;
@@ -3384,6 +3358,7 @@ button.autofix.action.active {
 .issues-option label {
     display: table-cell;
     padding: 0 10px;
+    white-space: nowrap;
 }
 
 .layer-list.issues-list li.issue {
@@ -3400,7 +3375,7 @@ button.autofix.action.active {
 .section-footer {
     display: flex;
     flex-flow: row nowrap;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
     height: 30px;
 }
 .section-footer a {
@@ -3420,8 +3395,8 @@ button.autofix.action.active {
 
 input.square-degrees-input {
     padding: 2px !important; /* important needed for rtl */
-    width: 40px;
-    height: unset;
+    width: 3em;
+    height: 2em;
     text-align: center;
     background: rgba(0,0,0,0);
     color: currentColor;
@@ -3435,7 +3410,9 @@ input.square-degrees-input {
     background: #f6f6f6;
 }
 .section-entity-issues .issue-container:not(.active) .issue-text:active,
-.section-entity-issues .issue-container:not(.active) .issue-info-button:active {
+.section-entity-issues .issue-container:not(.active) .issue-text:focus,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:active,
+.section-entity-issues .issue-container:not(.active) .issue-info-button:focus {
     background: #f1f1f1;
 }
 @media (hover: hover) {
@@ -3452,7 +3429,7 @@ input.square-degrees-input {
     padding-left: 10px;
 }
 
-.section-entity-issues .issue-container.active .issue-label .issue-text {
+.section-entity-issues .issue-container.active .issue-label button.issue-text {
     font-weight: bold;
 }
 .section-entity-issues .issue-container:not(:last-of-type) {
@@ -3474,27 +3451,31 @@ input.square-degrees-input {
     display: none;
 }
 
-li.issue-fix-item {
+li.issue-fix-item button {
     padding: 2px 10px 2px 20px;
+    background: transparent;
+    width: 100%;
+    text-align: initial;
 }
-.ideditor[dir='rtl'] li.issue-fix-item {
+.ideditor[dir='rtl'] li.issue-fix-item button {
     padding: 2px 20px 2px 10px;
 }
-li.issue-fix-item:first-of-type {
+li.issue-fix-item:first-of-type button {
     padding-top: 5px;
 }
-li.issue-fix-item:last-of-type {
+li.issue-fix-item:last-of-type button {
     padding-bottom: 5px;
 }
 
-li.issue-fix-item .fix-message {
+li.issue-fix-item button .fix-message {
     padding: 0 10px;
+    vertical-align: middle;
 }
 
-li.issue-fix-item.actionable {
+li.issue-fix-item button.actionable {
     cursor: pointer;
 }
-li.issue-fix-item:not(.actionable) .fix-icon {
+li.issue-fix-item button:not(.actionable) .fix-icon {
     color: #555;
     fill: #555;
 }
@@ -3554,10 +3535,14 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin: 5px;
 }
 
+.display-control .control-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
 .display-control .display-option-input {
     height: 20px;
-    width: 155px;
-    max-width: 100%;
+    flex: 1 1 100%;
 }
 
 .display-control button {
@@ -3567,6 +3552,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin-right: 0px;
     vertical-align: text-bottom;
     border-radius: 4px;
+    flex: 0 0 auto;
 }
 .ideditor[dir='rtl'] .display-control button {
     margin-left: 0px;
@@ -3579,7 +3565,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .background-pane .nudge-container {
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 10px 40px 10px;
+    position: relative;
 }
 
 .nudge-container .nudge-instructions {
@@ -3602,6 +3589,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     touch-action: none;
     /* disable drag-to-select */
     user-select: none;
+    position: relative;
 }
 
 .nudge-container .nudge-inner-rect {
@@ -3624,7 +3612,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 .nudge-container input {
     width: 100%;
-    height: 20px;
+    padding: 2px;
     text-align: center;
     border: 0;
 }
@@ -3640,34 +3628,37 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 }
 
 .nudge-container button {
-    float: left;
-    display: block;
-    width: 20%;
-    position: relative;
+    position: absolute;
     background-color: transparent;
 }
-
-.nudge-container button.right {
-    top: -50px;
-    right: -85%;
-}
-
+.nudge-container button.right,
 .nudge-container button.left {
-    top: -50px;
-    right: 45%;
+    width: 40px;
+    height: 40%;
+    top: 30%;
 }
-
-.nudge-container button.top {
-    left: 20%;
-    top: -104px;
+.nudge-container button.right {
+    left: 100%;
 }
-
+.nudge-container button.left {
+    right: 100%;
+}
+.nudge-container button.top,
 .nudge-container button.bottom {
-    left: -20%;
+    width: 20%;
+    height: 40px;
+    left: 40%;
+}
+.nudge-container button.top {
+    bottom: 100%;
+}
+.nudge-container button.bottom {
+    top: 100%;
 }
 
 .nudge-container button.nudge-reset {
-    right: -10px;
+    right: 15px;
+    bottom: 15px;
 }
 
 .nudge-surface {
@@ -3720,9 +3711,9 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     width: 400px;
     max-width: 100%;
     height: 100%;
-    padding-bottom: 60px;
-    overflow: hidden;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
 }
 
 .map-pane.help-pane {
@@ -3734,7 +3725,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     flex-flow: row nowrap;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
-    height: 60px;
+    flex: 0 0 auto;
 }
 
 .pane-heading h2 {
@@ -3743,7 +3734,6 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 
 .pane-heading button {
     width: 40px;
-    height: 100%;
     border-radius: 0;
 }
 
@@ -3770,11 +3760,12 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     margin-bottom: 20px;
 }
 
-.help-pane .left-content .icon.pre-text {
-    vertical-align: text-top;
+.help-pane .left-content .icon.inline,
+.curtain-tooltip .icon.inline {
     margin-right: 0;
     margin-left: 0;
-    display: inline-block;
+    height: 1.34em;
+    width: 1.34em;
 }
 
 .help-pane .toc {
@@ -3796,6 +3787,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .help-pane .toc li a {
     border-bottom: 0;
 }
+.help-pane .toc li a:focus,
+.help-pane .nav a:focus,
 .help-pane .toc li a:active,
 .help-pane .nav a:active {
     background: #ececec;
@@ -3934,7 +3927,7 @@ li.issue-fix-item:not(.actionable) .fix-icon {
 .inspector-hover .section-entity-issues .issue-container.active .issue-label {
     border-bottom: 0;
 }
-.inspector-hover .section-entity-issues .issue-container.active .issue-label .issue-text {
+.inspector-hover .section-entity-issues .issue-container.active .issue-label button.issue-text {
     font-weight: normal;
 }
 
@@ -3997,8 +3990,8 @@ li.issue-fix-item:not(.actionable) .fix-icon {
     opacity: 1;
     color: #666;
     padding: 5px 10px;
-    line-height: 20px;
     width: 100%;
+    height: auto;
     border: 0;
 }
 .inspector-hover .form-field-input-radio .structure-extras-wrap {
@@ -4056,9 +4049,14 @@ img.tile-debug {
 /* Map
 ------------------------------------------------------- */
 .main-map {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow: hidden;
     height: 100%;
+    width: 100%;
     background: #000;
     user-select: none;
     touch-action: none;
@@ -4179,7 +4177,8 @@ img.tile-debug {
 ------------------------------------------------------- */
 .info-panels {
     display: flex;
-    flex-flow: row-reverse wrap-reverse;
+    flex-flow: row wrap-reverse;
+    justify-content: flex-end;
     width: 100%;
     z-index: 1;
     -ms-user-select: element;
@@ -4219,17 +4218,19 @@ img.tile-debug {
 
 .panel-title {
     padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .panel-title button.close {
-    float: right;
-    height: 20px;
+    padding: 2px;
     background: none;
     color: #ddd;
 }
 .ideditor[dir='rtl'] .panel-title button.close {
     float: left;
 }
+.panel-title button.close:focus,
 .panel-title button.close:active {
     color: #fff;
 }
@@ -4252,7 +4253,7 @@ img.tile-debug {
     display: none;
 }
 
-.panel-content li span {
+.panel-content li span:not(.localized-text) {
     display: inline-block;
     white-space: nowrap;
     margin: 0 8px;
@@ -4291,20 +4292,20 @@ img.tile-debug {
 ------------------------------------------------------- */
 .map-footer {
     width: 100%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    position: relative;
     border-radius: 0;
     pointer-events: none;
     display: flex;
     flex-direction: column;
     -ms-user-select: element;
+    flex: 0 0 auto;
 }
 
 .map-footer-bar {
     pointer-events: all;
     display: block;
-    height: 30px;
+    height: 2.5em;
+    position: relative;
 }
 
 .main-footer-wrap,
@@ -4313,7 +4314,7 @@ img.tile-debug {
     flex: 0 0 100%;
     flex-flow: row nowrap;
     justify-content: space-between;
-    max-height: 30px;
+    height: 100%;
     position: absolute;
     right: 0;
     left: 0;
@@ -4325,7 +4326,7 @@ img.tile-debug {
 }
 
 .footer-hide {
-    bottom: -35px;
+    bottom: -100%;
     transition: bottom 75ms linear;
 }
 
@@ -4333,26 +4334,24 @@ img.tile-debug {
 /* Attribution
 ------------------------------------------------------- */
 .attribution-wrap {
-    width: 100%;
-    height: 20px;
-    margin-bottom: 5px;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .attribution-wrap * { pointer-events: all; }
 
 .attribution-wrap .base-layer-attribution,
 .attribution-wrap .overlay-layer-attribution {
-    position: absolute;
     color: #ccc;
     font-size: 10px;
 }
-
-.attribution-wrap .base-layer-attribution {
-    left: 10px;
-}
-
 .attribution-wrap .overlay-layer-attribution {
-    right: 10px;
+    text-align: right;
 }
 
 .attribution-wrap .overlay-layer-attribution .attribution:not(:last-child):after {
@@ -4363,6 +4362,7 @@ img.tile-debug {
 .attribution-wrap .attribution a:visited {
     color: #ccf;
 }
+.attribution-wrap .attribution a:focus,
 .attribution-wrap .attribution a:hover {
     color: #aaf;
 }
@@ -4391,7 +4391,6 @@ img.tile-debug {
     flex-flow: row nowrap;
     align-items: center;
     padding: 2px;
-    height: 30px;
 }
 
 .flash-icon {
@@ -4427,28 +4426,27 @@ img.tile-debug {
 .map-footer-bar .scale-block {
     vertical-align: bottom;
     width: 250px;
-    max-height: 30px;
-    flex: 0 0 250px;
+    flex: 0 0 auto;
     user-select: none;
+    height: 30px;
+    align-self: center;
 }
 
 .scale-block .scale {
-    height: 30px;
+    height: 100%;
     width: 100%;
     cursor: pointer;
+    display: block;
 }
 .ideditor[dir='rtl'] .scale-block .scale {
     transform: scaleX(-1);
 }
 
-.scale-block .scale text {
-    font: 12px sans-serif;
-    stroke: none;
-    fill: #ccc;
-    text-anchor: start;
-}
-.ideditor[dir='rtl'] .scale-block .scale text {
-    transform: scaleX(-1);
+.scale-block .scale-text {
+    display: inline-block;
+    position: absolute;
+    color: #ccc;
+    top: 0.45em;
 }
 
 .scale-block .scale path {
@@ -4461,67 +4459,46 @@ img.tile-debug {
 /* Footer - About, Source Switcher
 ------------------------------------------------------- */
 .map-footer-bar .info-block {
-    max-height: 30px;
-    flex: 1 1 auto;
+    flex: 1 1 100%;
+    overflow: hidden;
 }
 
 .map-footer-list {
-    text-align: right;
-    margin-right: 10px;
-    clear: right;
-    overflow: hidden;
-}
-.ideditor[dir='rtl'] .map-footer-list {
-    text-align: left;
-    clear: left;
-    margin-left: 10px;
-    margin-right: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    height: 100%;
+    justify-content: flex-end;
 }
 
 .map-footer-list li {
-    float: right;
-    border-left: 1px solid rgba(255,255,255,.5);
-    padding: 5px 0 5px 5px;
-    margin-left: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 5px;
 }
-.ideditor[dir='rtl'] .map-footer-list li {
-    float: left;
-    border-left: none;
+.ideditor[dir='ltr'] .map-footer-list li:not(:last-child) {
     border-right: 1px solid rgba(255,255,255,.5);
-    margin-left: 0;
-    margin-right: 5px;
-    padding: 5px 5px 5px 0;
+}
+.ideditor[dir='rtl'] .map-footer-list li:not(:last-child) {
+    border-left: 1px solid rgba(255,255,255,.5);
 }
 .map-footer-list li:empty {
     display: none;
 }
 
-.map-footer-list li:last-child {
-    border-left: 0;
-    margin-left: 0;
-    padding-left: 0;
-}
-.ideditor[dir='rtl'] .map-footer-list li:last-child {
-    border-right: none;
-}
-
 .map-footer-list a.chip {
-    padding: 2px 4px 3px 4px;
+    padding: 1px 4px 1px 4px;
     border-radius: 2px;
     color: #eee;
 }
 .map-footer-list a.chip .icon {
     width: 14px;
     height: 14px;
-    margin-top: 3px;
+    margin-top: -2px;
 }
-.ideditor[dir='ltr'] .map-footer-list a.chip .icon,
-.ideditor[dir='ltr'] .map-footer-list a.chip span {
-    margin-right: 3px;
-}
-.ideditor[dir='rtl'] .map-footer-list a.chip .icon,
-.ideditor[dir='rtl'] .map-footer-list a.chip span {
-    margin-left: 3px;
+.map-footer-list a.chip span.count {
+    margin: 0 3px;
 }
 
 .source-switch a.chip.live {
@@ -4559,6 +4536,9 @@ img.tile-debug {
 .ideditor[dir='rtl'] .api-status {
     text-align: left;
 }
+.api-status:empty {
+    display: none;
+}
 
 .api-status.offline,
 .api-status.readonly,
@@ -4571,6 +4551,7 @@ img.tile-debug {
     color: #ccc;
     pointer-events: all;
 }
+.api-status a:focus,
 .api-status a:active {
     color: inherit;
 }
@@ -4694,8 +4675,6 @@ img.tile-debug {
 .modal-section.buttons .action {
     display: inline-block;
     margin: 0 10px;
-    text-align: center;
-    vertical-align: middle;
 }
 
 .save-section .buttons {
@@ -4719,11 +4698,10 @@ img.tile-debug {
     display: flex;
 }
 .modal-actions button {
-    font-weight: normal;
     color: #7092ff;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
-    height: 160px;
+    min-height: 160px;
     text-align: center;
     width: 100%;
 }
@@ -4864,38 +4842,39 @@ img.tile-debug {
 ------------------------------------------------------- */
 .modal-shortcuts {
     width: 90%;
-    max-width: 950px;
+    max-width: 1050px;
 }
 
 .modal-shortcuts .modal-section:last-child {
-    padding-top: 10px;
+    padding: 10px 15px 20px 15px;
     min-height: 275px;
 }
 
 .modal-shortcuts .tabs-bar {
-    text-align: center;
     padding-bottom: 5px;
-    font-size: 16px;
-    font-weight: bold;
+    text-align: center;
 }
 
-.modal-shortcuts .tab {
+.modal-shortcuts a.tab {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 5px;
     cursor: pointer;
     color: #666;
+    font-size: 16px;
+    font-weight: bold;
 }
-.modal-shortcuts .tab.active {
+.modal-shortcuts a.tab.active {
     color: #7092ff;
     border-bottom: 2px solid;
 }
-.modal-shortcuts .tab:active {
+.modal-shortcuts a.tab:focus,
+.modal-shortcuts a.tab:active {
     color: #597be7;
     background-color: #efefef;
 }
 @media (hover: hover) {
-    .modal-shortcuts .tab:hover {
+    .modal-shortcuts a.tab:hover {
         color: #597be7;
         background-color: #efefef;
     }
@@ -4976,34 +4955,20 @@ img.tile-debug {
 
 /* Save Mode
 ------------------------------------------------------- */
-.ideditor.mode-save a.user-info {
+a.user-info {
     display: inline-block;
 }
 
-.ideditor.mode-save .commit-form {
+.commit-form {
     margin-bottom: 0;
 }
 
-.ideditor.mode-save .user-info img {
+.user-info img {
     float: left;
-}
-
-.ideditor.mode-save h3 small.count {
-    margin-right: 10px;
-    text-align: center;
-    float: left;
-    height: 12px;
-    min-width: 12px;
-    font-size: 12px;
-    line-height: 12px;
-    border-radius: 24px;
-    padding: 5px;
-    background: #7092ff;
-    color: #fff;
 }
 
 .note-save .field-warning,
-.ideditor.mode-save .field-warning {
+.field-warning {
     background: #ffb;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -5011,61 +4976,44 @@ img.tile-debug {
 }
 
 .note-save .field-warning:empty,
-.ideditor.mode-save .field-warning:empty {
+.field-warning:empty {
     display: none;
 }
 
-.ideditor.mode-save .field-warning,
-.ideditor.mode-save .changeset-info,
-.ideditor.mode-save .request-review,
-.ideditor.mode-save .commit-info {
+.field-warning,
+.changeset-info,
+.request-review,
+.commit-info {
     margin-bottom: 10px;
 }
 
-.ideditor.mode-save .request-review label {
+.request-review label {
     cursor: pointer;
 }
 
-.ideditor.mode-save .changeset-list {
+.changeset-list {
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #fff;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
-.ideditor.mode-save .warning-section .changeset-list button {
-    border-left: 1px solid #ccc;
-}
-
-.ideditor.mode-save .changeset-list li {
-    position: relative;
-    border-top: 1px solid #ccc;
+.changeset-list li button {
     padding: 5px 10px;
-    cursor: pointer;
+    width: 100%;
+    border-radius: 0;
+    text-align: initial;
 }
-.ideditor.mode-save .changeset-list li:active {
-    background-color: #ececec;
+.changeset-list li {
+    border-top: 1px solid #ccc;
 }
-@media (hover: hover) {
-    .ideditor.mode-save .changeset-list li:hover {
-        background-color: #ececec;
-    }
+.changeset-list li:first-child {
+    border-top: 0;
 }
-
-.ideditor.mode-save .changeset-list .alert {
+.changeset-list .alert {
     opacity: 0.5;
 }
-
-.changeset-list li span.count {
-    font-size: 10px;
-    color: #555;
-}
-
-.changeset-list li span.count:before { content: '('; }
-
-.changeset-list li span.count:after { content: ')'; }
-
-.changeset-list li:first-child { border-top: 0;}
 
 
 /* Conflict resolution
@@ -5080,7 +5028,7 @@ img.tile-debug {
     padding: 20px;
 }
 
-.ideditor.mode-save button.conflicts-button {
+button.conflicts-button {
     float: left;
 }
 
@@ -5131,9 +5079,10 @@ img.tile-debug {
 .notice .zoom-to {
     margin: auto;
     width: 300px;
-    height: 70px;
+    padding: 20px 5px;
     font-size: 150%;
     border-radius: 8px;
+    font-weight: bold;
 }
 
 .notice .zoom-to:focus,
@@ -5495,6 +5444,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 .intro-nav-wrap button.chapter {
     flex: 1 1 100%;
     padding: 0px 5px;
+    font-weight: bold;
 }
 
 .intro-nav-wrap button.chapter.next {
@@ -5612,7 +5562,6 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 
 .huge-modal-button {
     width: 100%;
-    height: auto;
     padding: 20px;
 }
 

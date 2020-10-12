@@ -40,7 +40,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
         var sign = d3_polygonArea(points) > 0 ? 1 : -1;
         var ids, i, j, k;
 
-        // we need atleast two key nodes for the algorithm to work
+        // we need at least two key nodes for the algorithm to work
         if (!keyNodes.length) {
             keyNodes = [nodes[0]];
             keyPoints = [points[0]];
@@ -55,8 +55,8 @@ export function actionCircularize(wayId, projection, maxAngle) {
         }
 
         // key points and nodes are those connected to the ways,
-        // they are projected onto the circle, inbetween nodes are moved
-        // to constant intervals between key nodes, extra inbetween nodes are
+        // they are projected onto the circle, in between nodes are moved
+        // to constant intervals between key nodes, extra in between nodes are
         // added if necessary.
         for (i = 0; i < keyPoints.length; i++) {
             var nextKeyNodeIndex = (i + 1) % keyNodes.length;
@@ -119,7 +119,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 graph = graph.replace(node);
             }
 
-            // add new inbetween nodes if necessary
+            // add new in between nodes if necessary
             for (j = 0; j < numberNewPoints; j++) {
                 angle = startAngle + (indexRange + j) * eachAngle;
                 loc = projection.invert([
@@ -147,7 +147,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
             // Check for other ways that share these keyNodes..
             // If keyNodes are adjacent in both ways,
-            // we can add inBetween nodes to that shared way too..
+            // we can add inBetweenNodes to that shared way too..
             if (indexRange === 1 && inBetweenNodes.length) {
                 var startIndex1 = way.nodes.lastIndexOf(startNode.id);
                 var endIndex1 = way.nodes.lastIndexOf(endNode.id);

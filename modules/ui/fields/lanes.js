@@ -77,7 +77,7 @@ export function uiFieldLanes(field, context) {
             .append('text')
             .attr('y', 40)
             .attr('x', 14)
-            .text('▲');
+            .html('▲');
 
         enter
             .append('g')
@@ -85,7 +85,7 @@ export function uiFieldLanes(field, context) {
             .append('text')
             .attr('y', 40)
             .attr('x', 14)
-            .text('▲▼');
+            .html('▲▼');
 
         enter
             .append('g')
@@ -93,7 +93,7 @@ export function uiFieldLanes(field, context) {
             .append('text')
             .attr('y', 40)
             .attr('x', 14)
-            .text('▼');
+            .html('▼');
 
 
         lane = lane

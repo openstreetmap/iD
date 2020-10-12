@@ -21,8 +21,10 @@ export function presetField(fieldID, field) {
   };
 
   _this.t = (scope, options) => t(`presets.fields.${fieldID}.${scope}`, options);
+  _this.t.html = (scope, options) => t.html(`presets.fields.${fieldID}.${scope}`, options);
 
-  _this.label = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
+  _this.title = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
+  _this.label = () => _this.overrideLabel || _this.t.html('label', { 'default': fieldID });
 
   const _placeholder = _this.placeholder;
   _this.placeholder = () => _this.t('placeholder', { 'default': _placeholder });

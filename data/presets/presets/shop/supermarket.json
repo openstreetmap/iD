@@ -12,7 +12,10 @@
     "terms": [
         "grocery",
         "store",
-        "shop"
+        "shop",
+        "grocery store",
+        "market",
+        "food market"
     ],
     "tags": {
         "shop": "supermarket"

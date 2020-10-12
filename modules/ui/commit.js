@@ -213,21 +213,14 @@ export function uiCommit(context) {
 
         var headerTitle = header.enter()
             .append('div')
-            .attr('class', 'header fillL header-container');
+            .attr('class', 'header fillL');
 
         headerTitle
             .append('div')
-            .attr('class', 'header-block header-block-outer');
-
-        headerTitle
-            .append('div')
-            .attr('class', 'header-block')
             .append('h3')
-            .text(t('commit.title'));
+            .html(t.html('commit.title'));
 
         headerTitle
-            .append('div')
-            .attr('class', 'header-block header-block-outer header-block-close')
             .append('button')
             .attr('class', 'close')
             .on('click', function() {
@@ -283,7 +276,7 @@ export function uiCommit(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
-            .text(t('commit.upload_explanation'))
+            .html(t.html('commit.upload_explanation'))
             .merge(prose);
 
         // always check if this has changed, but only update prose.html()
@@ -306,12 +299,12 @@ export function uiCommit(context) {
             userLink
                 .append('a')
                 .attr('class', 'user-info')
-                .text(user.display_name)
+                .html(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
                 .attr('target', '_blank');
 
             prose
-                .html(t('commit.upload_explanation_with_user', { user: userLink.html() }));
+                .html(t.html('commit.upload_explanation_with_user', { user: userLink.html() }));
         });
 
 
@@ -337,7 +330,7 @@ export function uiCommit(context) {
 
         labelEnter
             .append('span')
-            .text(t('commit.request_review'));
+            .html(t.html('commit.request_review'));
 
         // Update
         requestReview = requestReview
@@ -362,7 +355,7 @@ export function uiCommit(context) {
             .attr('class', 'secondary-action button cancel-button')
             .append('span')
             .attr('class', 'label')
-            .text(t('commit.cancel'));
+            .html(t.html('commit.cancel'));
 
         var uploadButton = buttonEnter
             .append('button')
@@ -370,7 +363,7 @@ export function uiCommit(context) {
 
         uploadButton.append('span')
             .attr('class', 'label')
-            .text(t('commit.save'));
+            .html(t.html('commit.save'));
 
         var uploadBlockerTooltipText = getUploadBlockerMessage();
 
@@ -388,6 +381,12 @@ export function uiCommit(context) {
             .on('click.save', function() {
                 if (!d3_select(this).classed('disabled')) {
                     this.blur();    // avoid keeping focus on the button - #4641
+
+                    for (var key in context.changeset.tags) {
+                        // remove any empty keys before upload
+                        if (!key) delete context.changeset.tags[key];
+                    }
+
                     context.uploader().save(context.changeset);
                 }
             });
@@ -547,14 +546,12 @@ export function uiCommit(context) {
             k = context.cleanTagKey(k);
             if (readOnlyTags.indexOf(k) !== -1) return;
 
-            if (k !== '' && v !== undefined) {
-                if (onInput) {
-                    tags[k] = v;
-                } else {
-                    tags[k] = context.cleanTagValue(v);
-                }
-            } else {
+            if (v === undefined) {
                 delete tags[k];
+            } else if (onInput) {
+                tags[k] = v;
+            } else {
+                tags[k] = context.cleanTagValue(v);
             }
         });
 

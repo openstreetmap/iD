@@ -12,7 +12,7 @@ import { localizer } from '../core/localizer';
 export function uiDisclosure(context, key, expandedDefault) {
     var dispatch = d3_dispatch('toggled');
     var _expanded;
-    var _title = utilFunctor('');
+    var _label = utilFunctor('');
     var _updatePreference = true;
     var _content = function () {};
 
@@ -49,7 +49,7 @@ export function uiDisclosure(context, key, expandedDefault) {
             .classed('expanded', _expanded);
 
         hideToggle.selectAll('.hide-toggle-text')
-            .text(_title());
+            .html(_label());
 
         hideToggle.selectAll('.hide-toggle-icon')
             .attr('xlink:href', _expanded ? '#iD-icon-down'
@@ -103,9 +103,9 @@ export function uiDisclosure(context, key, expandedDefault) {
     };
 
 
-    disclosure.title = function(val) {
-        if (!arguments.length) return _title;
-        _title = utilFunctor(val);
+    disclosure.label = function(val) {
+        if (!arguments.length) return _label;
+        _label = utilFunctor(val);
         return disclosure;
     };
 

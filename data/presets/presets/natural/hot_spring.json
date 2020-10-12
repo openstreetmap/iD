@@ -1,0 +1,21 @@
+{
+    "icon": "maki-water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
+    "moreFields": [
+        "gnis/feature_id"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "natural": "hot_spring"
+    },
+    "terms": [
+        "geothermal spring",
+        "thermal pool"
+    ],
+    "name": "Hot Spring"
+}

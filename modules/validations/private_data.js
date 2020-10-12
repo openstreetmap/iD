@@ -67,7 +67,7 @@ export function validationPrivateData() {
                 return [
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.' + fixID + '.title'),
+                        title: t.html('issues.fix.' + fixID + '.title'),
                         onClick: function(context) {
                             context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
                         }
@@ -98,7 +98,7 @@ export function validationPrivateData() {
             var currEntity = context.hasEntity(this.entityIds[0]);
             if (!currEntity) return '';
 
-            return t('issues.private_data.contact.message',
+            return t.html('issues.private_data.contact.message',
                 { feature: utilDisplayLabel(currEntity, context.graph()) }
             );
         }
@@ -112,11 +112,11 @@ export function validationPrivateData() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.private_data.reference'));
+                .html(t.html('issues.private_data.reference'));
 
             enter
                 .append('strong')
-                .text(t('issues.suggested'));
+                .html(t.html('issues.suggested'));
 
             enter
                 .append('table')
@@ -131,7 +131,7 @@ export function validationPrivateData() {
                     var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .text(function(d) { return d.display; });
+                .html(function(d) { return d.display; });
         }
     };
 

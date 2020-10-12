@@ -16,8 +16,8 @@ export function uiImproveOsmDetails(context) {
     if (d.desc) return d.desc;
     const issueKey = d.issueKey;
     d.replacements = d.replacements || {};
-    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
-    return t(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
+    d.replacements.default = t.html('inspector.unknown');  // special key `default` works as a fallback string
+    return t.html(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
   }
 
 
@@ -43,7 +43,7 @@ export function uiImproveOsmDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .text(() => t('QA.keepRight.detail_description'));
+        .html(t.html('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')
@@ -53,6 +53,7 @@ export function uiImproveOsmDetails(context) {
     // If there are entity links in the error message..
     let relatedEntities = [];
     descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+      .attr('href', '#')
       .each(function() {
         const link = d3_select(this);
         const isObjectLink = link.classed('error_object_link');

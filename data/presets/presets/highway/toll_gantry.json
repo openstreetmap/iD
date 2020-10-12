@@ -1,0 +1,33 @@
+{
+    "notCountryCodes": [
+        "de"
+    ],
+    "icon": "temaki-toll_gantry",
+    "fields": [
+        "ref",
+        "operator",
+        "access",
+        "maxheight",
+        "opening_hours",
+        "opening_hours/covid19",
+        "payment_multi"
+    ],
+    "moreFields": [
+        "website"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "toll_gantry"
+    },
+    "terms": [
+        "license plate camera toll",
+        "cashless toll",
+        "electronic toll",
+        "free-flow toll",
+        "toll gantry",
+        "transponder toll"
+    ],
+    "name": "Open Road Toll"
+}

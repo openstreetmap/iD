@@ -6,7 +6,9 @@
         "operator",
         "healthcare/speciality",
         "address",
-        "building_area"
+        "building_area",
+        "phone",
+        "website"
     ],
     "moreFields": [
         "brand",
@@ -19,8 +21,6 @@
         "opening_hours",
         "opening_hours/covid19",
         "payment_multi",
-        "phone",
-        "website",
         "wheelchair"
     ],
     "geometry": [

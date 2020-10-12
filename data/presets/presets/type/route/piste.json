@@ -22,5 +22,9 @@
         "type": "route",
         "route": "piste"
     },
+    "reference": {
+        "key": "route",
+        "value": "piste"
+    },
     "name": "Piste/Ski Route"
 }

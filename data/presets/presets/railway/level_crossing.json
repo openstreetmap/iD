@@ -8,11 +8,13 @@
     },
     "terms": [
         "crossing",
-        "railroad crossing",
         "level crossing",
         "grade crossing",
+        "railroad crossing",
+        "railway road crossing",
+        "road railway crossing",
         "road through railroad",
         "train crossing"
     ],
-    "name": "Railway Crossing (Road)"
+    "name": "Railway-Road Crossing"
 }

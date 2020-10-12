@@ -35,7 +35,7 @@ export function uiKeepRightEditor(context) {
 
     headerEnter
       .append('h3')
-        .text(t('QA.keepRight.title'));
+        .html(t.html('QA.keepRight.title'));
 
 
     let body = selection.selectAll('.body')
@@ -90,7 +90,7 @@ export function uiKeepRightEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .text(t('QA.keepRight.comment'));
+        .html(t.html('QA.keepRight.comment'));
 
     saveSectionEnter
       .append('textarea')
@@ -146,7 +146,7 @@ export function uiKeepRightEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .text(t('QA.keepRight.save_comment'));
+        .html(t.html('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')
@@ -171,9 +171,9 @@ export function uiKeepRightEditor(context) {
       });
 
     buttonSection.select('.close-button')   // select and propagate data
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.close${andComment}`);
+        return t.html(`QA.keepRight.close${andComment}`);
       })
       .on('click.close', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -185,9 +185,9 @@ export function uiKeepRightEditor(context) {
       });
 
     buttonSection.select('.ignore-button')   // select and propagate data
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.ignore${andComment}`);
+        return t.html(`QA.keepRight.ignore${andComment}`);
       })
       .on('click.ignore', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641

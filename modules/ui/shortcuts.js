@@ -1,4 +1,4 @@
-import { select as d3_select } from 'd3-selection';
+import { event as d3_event, select as d3_select } from 'd3-selection';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { t } from '../core/localizer';
@@ -16,20 +16,6 @@ export function uiShortcuts(context) {
     var _selection = d3_select(null);
 
 
-    context.keybinding()
-        .on([t('shortcuts.toggle.key'), '?'], function () {
-            if (context.container().selectAll('.modal-shortcuts').size()) {  // already showing
-                if (_modalSelection) {
-                    _modalSelection.close();
-                    _modalSelection = null;
-                }
-            } else {
-                _modalSelection = uiModal(_selection);
-                _modalSelection.call(shortcutsModal);
-            }
-        });
-
-
     function shortcutsModal(_modalSelection) {
         _modalSelection.select('.modal')
             .classed('modal-shortcuts', true);
@@ -40,7 +26,7 @@ export function uiShortcuts(context) {
             .append('div')
             .attr('class', 'modal-section')
             .append('h3')
-            .text(t('shortcuts.title'));
+            .html(t.html('shortcuts.title'));
 
         fileFetcher.get('shortcuts')
             .then(function(data) { content.call(render, data); })
@@ -74,16 +60,18 @@ export function uiShortcuts(context) {
 
         var tabsEnter = tabs
             .enter()
-            .append('div')
+            .append('a')
             .attr('class', 'tab')
+            .attr('href', '#')
             .on('click', function (d, i) {
+                d3_event.preventDefault();
                 _activeTab = i;
                 render(selection, dataShortcuts);
             });
 
         tabsEnter
             .append('span')
-            .text(function (d) { return t(d.text); });
+            .html(function (d) { return t.html(d.text); });
 
         tabs = tabs
             .merge(tabsEnter);
@@ -129,7 +117,7 @@ export function uiShortcuts(context) {
             .append('td')
             .attr('class', 'shortcut-section')
             .append('h3')
-            .text(function (d) { return t(d.text); });
+            .html(function (d) { return t.html(d.text); });
 
 
         var shortcutRows = rowsEnter
@@ -160,11 +148,11 @@ export function uiShortcuts(context) {
                 selection
                     .append('kbd')
                     .attr('class', 'modifier')
-                    .text(function (d) { return uiCmd.display(d); });
+                    .html(function (d) { return uiCmd.display(d); });
 
                 selection
                     .append('span')
-                    .text('+');
+                    .html('+');
             });
 
 
@@ -209,17 +197,17 @@ export function uiShortcuts(context) {
                     selection
                         .append('kbd')
                         .attr('class', 'shortcut')
-                        .text(function (d) { return d.shortcut; });
+                        .html(function (d) { return d.shortcut; });
                 }
 
                 if (i < nodes.length - 1) {
                     selection
                         .append('span')
-                        .text(d.separator || '\u00a0' + t('shortcuts.or') + '\u00a0');
+                        .html(d.separator || '\u00a0' + t.html('shortcuts.or') + '\u00a0');
                 } else if (i === nodes.length - 1 && d.suffix) {
                     selection
                         .append('span')
-                        .text(d.suffix);
+                        .html(d.suffix);
                 }
             });
 
@@ -231,19 +219,19 @@ export function uiShortcuts(context) {
 
                 selection
                     .append('span')
-                    .text('+');
+                    .html('+');
 
                 selection
                     .append('span')
                     .attr('class', 'gesture')
-                    .text(function (d) { return t(d.gesture); });
+                    .html(function (d) { return t.html(d.gesture); });
             });
 
 
         shortcutRows
             .append('td')
             .attr('class', 'shortcut-desc')
-            .text(function (d) { return d.text ? t(d.text) : '\u00a0'; });
+            .html(function (d) { return d.text ? t.html(d.text) : '\u00a0'; });
 
 
         shortcuts = shortcuts
@@ -262,6 +250,19 @@ export function uiShortcuts(context) {
         if (show) {
             _modalSelection = uiModal(selection);
             _modalSelection.call(shortcutsModal);
+        } else {
+            context.keybinding()
+                .on([t('shortcuts.toggle.key'), '?'], function () {
+                    if (context.container().selectAll('.modal-shortcuts').size()) {  // already showing
+                        if (_modalSelection) {
+                            _modalSelection.close();
+                            _modalSelection = null;
+                        }
+                    } else {
+                        _modalSelection = uiModal(_selection);
+                        _modalSelection.call(shortcutsModal);
+                    }
+                });
         }
     };
 }

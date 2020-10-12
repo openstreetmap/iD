@@ -32,7 +32,7 @@ export function uiSuccess(context) {
         let ociFeatures = {};
 
         Object.values(ociResources).forEach(resource => {
-          const feature = loco.resolveLocationSet(resource.locationSet);
+          const feature = loco.resolveLocationSet(resource.locationSet).feature;
           let ociFeature = ociFeatures[feature.id];
           if (!ociFeature) {
             ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
@@ -74,7 +74,7 @@ export function uiSuccess(context) {
 
     header
       .append('h3')
-      .text(t('success.just_edited'));
+      .html(t.html('success.just_edited'));
 
     header
       .append('button')
@@ -92,19 +92,18 @@ export function uiSuccess(context) {
 
     summary
       .append('h3')
-      .text(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
+      .html(t.html('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
     summary
       .append('p')
-      .text(t('success.help_html'))
+      .html(t.html('success.help_html'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
-      .attr('tabindex', -1)
       .attr('href', t('success.help_link_url'))
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .append('span')
-      .text(t('success.help_link_text'));
+      .html(t.html('success.help_link_text'));
 
     let osm = context.connection();
     if (!osm) return;
@@ -139,11 +138,11 @@ export function uiSuccess(context) {
       .attr('class', 'cell-detail summary-view-on-osm')
       .attr('target', '_blank')
       .attr('href', changesetURL)
-      .text(t('success.view_on_osm'));
+      .html(t.html('success.view_on_osm'));
 
     summaryDetail
       .append('div')
-      .html(t('success.changeset_id', {
+      .html(t.html('success.changeset_id', {
         changeset_id: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>`
       }));
 
@@ -183,7 +182,7 @@ export function uiSuccess(context) {
 
     communityLinks
       .append('h3')
-      .text(t('success.like_osm'));
+      .html(t.html('success.like_osm'));
 
     let table = communityLinks
       .append('table')
@@ -217,15 +216,14 @@ export function uiSuccess(context) {
     communityLinks
       .append('div')
       .attr('class', 'community-missing')
-      .text(t('success.missing'))
+      .html(t.html('success.missing'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
-      .attr('tabindex', -1)
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .attr('href', 'https://github.com/osmlab/osm-community-index/issues')
       .append('span')
-      .text(t('success.tell_us'));
+      .html(t.html('success.tell_us'));
   }
 
 
@@ -243,9 +241,9 @@ export function uiSuccess(context) {
       .append('a')
       .attr('target', '_blank')
       .attr('href', d.url)
-      .text(t(`community.${d.id}.name`));
+      .html(t.html(`community.${d.id}.name`));
 
-    let descriptionHTML = t(`community.${d.id}.description`, replacements);
+    let descriptionHTML = t.html(`community.${d.id}.description`, replacements);
 
     if (d.type === 'reddit') {   // linkify subreddits  #4997
       descriptionHTML = descriptionHTML
@@ -263,7 +261,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .title(t('success.more'))
+          .label(t.html('success.more'))
           .content(showMore)
         );
     }
@@ -289,13 +287,13 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-events-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .title(t('success.events'))
+          .label(t.html('success.events'))
           .content(showNextEvents)
         )
         .select('.hide-toggle')
         .append('span')
         .attr('class', 'badge-text')
-        .text(nextEvents.length);
+        .html(nextEvents.length);
     }
 
 
@@ -311,7 +309,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(t(`community.${d.id}.extendedDescription`, replacements));
+          .html(t.html(`community.${d.id}.extendedDescription`, replacements));
       }
 
       if (d.languageCodes && d.languageCodes.length) {
@@ -322,7 +320,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-languages')
-          .text(t('success.languages', { languages: languageList }));
+          .html(t.html('success.languages', { languages: languageList }));
       }
     }
 
@@ -345,7 +343,7 @@ export function uiSuccess(context) {
         .append('a')
         .attr('target', '_blank')
         .attr('href', d => d.url)
-        .text(d => {
+        .html(d => {
           let name = d.name;
           if (d.i18n && d.id) {
             name = t(`community.${communityID}.events.${d.id}.name`, { default: name });
@@ -356,7 +354,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-when')
-        .text(d => {
+        .html(d => {
           let options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
           if (d.date.getHours() || d.date.getMinutes()) {   // include time if it has one
             options.hour = 'numeric';
@@ -368,7 +366,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-where')
-        .text(d => {
+        .html(d => {
           let where = d.where;
           if (d.i18n && d.id) {
             where = t(`community.${communityID}.events.${d.id}.where`, { default: where });
@@ -379,7 +377,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-description')
-        .text(d => {
+        .html(d => {
           let description = d.description;
           if (d.i18n && d.id) {
             description = t(`community.${communityID}.events.${d.id}.description`, { default: description });

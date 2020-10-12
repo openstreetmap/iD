@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "artist",
-        "material"
+        "material",
+        "inscription"
     ],
     "geometry": [
         "point",
@@ -14,7 +15,8 @@
         "artwork_type": "bust"
     },
     "reference": {
-        "key": "artwork_type"
+        "key": "artwork_type",
+        "value": "bust"
     },
     "terms": [
         "figure"

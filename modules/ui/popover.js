@@ -171,8 +171,15 @@ export function uiPopover(klass) {
                 if (d3_event.buttons !== 0) return;
 
                 show.apply(this, arguments);
-            });
-            anchor.on(_pointerPrefix + 'leave.popover', function() {
+            })
+            .on(_pointerPrefix + 'leave.popover', function() {
+                hide.apply(this, arguments);
+            })
+            // show on focus too for better keyboard navigation support
+            .on('focus.popover', function() {
+                show.apply(this, arguments);
+            })
+            .on('blur.popover', function() {
                 hide.apply(this, arguments);
             });
 
@@ -189,6 +196,7 @@ export function uiPopover(klass) {
                 .on('click.popover', toggle);
 
             popoverSelection
+                // This attribute lets the popover take focus
                 .attr('tabindex', 0)
                 .on('blur.popover', function() {
                     anchor.each(function() {

@@ -30,29 +30,29 @@ export function uiAccount(context) {
                 .classed('hide', false);
 
             // Link
-            userLink.append('a')
+            var userLinkA = userLink.append('a')
                 .attr('href', osm.userURL(details.display_name))
                 .attr('target', '_blank');
 
             // Add thumbnail or dont
             if (details.image_url) {
-                userLink.append('img')
+                userLinkA.append('img')
                     .attr('class', 'icon pre-text user-icon')
                     .attr('src', details.image_url);
             } else {
-                userLink
+                userLinkA
                     .call(svgIcon('#iD-icon-avatar', 'pre-text light'));
             }
 
             // Add user name
-            userLink.append('span')
+            userLinkA.append('span')
                 .attr('class', 'label')
-                .text(details.display_name);
+                .html(details.display_name);
 
             logoutLink.append('a')
                 .attr('class', 'logout')
                 .attr('href', '#')
-                .text(t('logout'))
+                .html(t.html('logout'))
                 .on('click.logout', function() {
                     d3_event.preventDefault();
                     osm.logout();
@@ -62,12 +62,13 @@ export function uiAccount(context) {
 
 
     return function(selection) {
-        selection.append('li')
-            .attr('class', 'logoutLink')
-            .classed('hide', true);
 
         selection.append('li')
             .attr('class', 'userLink')
+            .classed('hide', true);
+
+        selection.append('li')
+            .attr('class', 'logoutLink')
             .classed('hide', true);
 
         if (osm) {

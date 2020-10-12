@@ -22,5 +22,9 @@
         "type": "route",
         "route": "horse"
     },
+    "reference": {
+        "key": "route",
+        "value": "horse"
+    },
     "name": "Riding Route"
 }

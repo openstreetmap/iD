@@ -31,7 +31,7 @@ export function uiSourceSwitch(context) {
         context.flush();                         // remove stored data
 
         d3_select(this)
-            .text(isLive ? t('source_switch.live') : t('source_switch.dev'))
+            .html(isLive ? t.html('source_switch.live') : t.html('source_switch.dev'))
             .classed('live', isLive)
             .classed('chip', isLive);
 
@@ -42,7 +42,7 @@ export function uiSourceSwitch(context) {
         selection
             .append('a')
             .attr('href', '#')
-            .text(t('source_switch.live'))
+            .html(t.html('source_switch.live'))
             .attr('class', 'live chip')
             .on('click', click);
     };

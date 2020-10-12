@@ -216,13 +216,15 @@ export function utilDisplayType(id) {
 }
 
 
-export function utilDisplayLabel(entity, graph) {
+export function utilDisplayLabel(entity, graphOrGeometry) {
     var displayName = utilDisplayName(entity);
     if (displayName) {
         // use the display name if there is one
         return displayName;
     }
-    var preset = presetManager.match(entity, graph);
+    var preset = typeof graphOrGeometry === 'string' ?
+        presetManager.matchTags(entity.tags, graphOrGeometry) :
+        presetManager.match(entity, graphOrGeometry);
     if (preset && preset.name()) {
         // use the preset name if there is a match
         return preset.name();

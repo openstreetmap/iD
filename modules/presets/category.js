@@ -34,6 +34,7 @@ export function presetCategory(categoryID, category, all) {
   _this.matchScore = () => -1;
 
   _this.name = () => t(`presets.categories.${categoryID}.name`, { 'default': categoryID });
+  _this.nameLabel = () => t.html(`presets.categories.${categoryID}.name`, { 'default': categoryID });
 
   _this.terms = () => [];
 

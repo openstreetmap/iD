@@ -139,7 +139,7 @@ export function operationDelete(context, selectedIDs) {
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
             t('operations.delete.annotation.' + context.graph().geometry(selectedIDs[0])) :
-            t('operations.delete.annotation.multiple', { n: selectedIDs.length });
+            t('operations.delete.annotation.feature', { n: selectedIDs.length });
     };
 
 

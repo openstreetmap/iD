@@ -19,5 +19,9 @@
         "type": "route",
         "route": "road"
     },
+    "reference": {
+        "key": "route",
+        "value": "road"
+    },
     "name": "Road Route"
 }

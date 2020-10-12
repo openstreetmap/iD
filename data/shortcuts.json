@@ -15,7 +15,7 @@
             "separator": ","
           },
           {
-            "modifiers": ["⌘"],
+            "modifiers": ["⌥"],
             "shortcuts": ["↓", "↑", "←", "→"],
             "text": "shortcuts.browsing.navigation.pan_more",
             "separator": ","
@@ -26,7 +26,7 @@
             "separator": ","
           },
           {
-            "modifiers": ["⌘"],
+            "modifiers": ["⌥"],
             "shortcuts": ["+", "-"],
             "text": "shortcuts.browsing.navigation.zoom_more",
             "separator": ","
@@ -276,9 +276,21 @@
             "separator": ","
           },
           {
-            "modifiers": ["⌘", "⇧"],
+            "modifiers": ["⌥", "⇧"],
             "shortcuts": ["↓", "↑", "←", "→"],
             "text": "shortcuts.editing.operations.nudge_more",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⇧"],
+            "shortcuts": ["+", "-"],
+            "text": "shortcuts.editing.operations.scale",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⌥", "⇧"],
+            "shortcuts": ["+", "-"],
+            "text": "shortcuts.editing.operations.scale_more",
             "separator": ","
           },
           {

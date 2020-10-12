@@ -26,7 +26,7 @@ export function uiZoomToSelection(context) {
                     .duration(2000)
                     .iconName('#iD-icon-framed-dot')
                     .iconClass('disabled')
-                    .text(t('inspector.zoom_to.no_selection'))();
+                    .label(t.html('inspector.zoom_to.no_selection'))();
             }
         } else {
             var mode = context.mode();
@@ -44,9 +44,9 @@ export function uiZoomToSelection(context) {
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function() {
                 if (isDisabled()) {
-                    return t('inspector.zoom_to.no_selection');
+                    return t.html('inspector.zoom_to.no_selection');
                 }
-                return t('inspector.zoom_to.title');
+                return t.html('inspector.zoom_to.title');
             })
             .keys([t('inspector.zoom_to.key')]);
 

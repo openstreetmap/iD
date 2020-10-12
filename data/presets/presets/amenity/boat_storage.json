@@ -1,0 +1,22 @@
+{
+    "icon": "temaki-boat_rental",
+    "fields": [
+        "name",
+        "operator",
+        "access_simple",
+        "capacity"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "boat_storage"
+    },
+    "terms": [
+        "boathouse",
+        "dry dock",
+        "marina"
+    ],
+    "name": "Boat Storage"
+}

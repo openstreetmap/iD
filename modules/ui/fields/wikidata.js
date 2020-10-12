@@ -84,8 +84,10 @@ export function uiFieldWikidata(field, context) {
             .call(combobox.fetcher(fetchWikidataItems));
 
         combobox.on('accept', function(d) {
-            _qid = d.id;
-            change();
+            if (d) {
+                _qid = d.id;
+                change();
+            }
         }).on('cancel', function() {
             setLabelForEntity();
         });
@@ -94,7 +96,6 @@ export function uiFieldWikidata(field, context) {
             .append('button')
             .attr('class', 'form-field-button wiki-link')
             .attr('title', t('icons.view_on', { domain: 'wikidata.org' }))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
             .on('click', function() {
                 d3_event.preventDefault();
@@ -118,7 +119,7 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('span')
             .attr('class', 'label')
-            .text(function(d) { return t('wikidata.' + d); });
+            .html(function(d) { return t.html('wikidata.' + d); });
 
         enter
             .append('input')
@@ -131,7 +132,6 @@ export function uiFieldWikidata(field, context) {
             .append('button')
             .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-operation-copy'))
             .on('click', function() {
                 d3_event.preventDefault();

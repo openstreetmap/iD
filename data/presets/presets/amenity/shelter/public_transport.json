@@ -2,10 +2,11 @@
     "icon": "temaki-transit_shelter",
     "fields": [
         "name",
-        "shelter_type",
+        "operator",
         "building_area",
         "bench",
-        "lit"
+        "lit",
+        "bin"
     ],
     "geometry": [
         "point",

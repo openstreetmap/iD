@@ -30,6 +30,7 @@ export { actionRestrictTurn } from './restrict_turn';
 export { actionReverse } from './reverse';
 export { actionRevert } from './revert';
 export { actionRotate } from './rotate';
+export { actionScale } from './scale';
 export { actionSplit } from './split';
 export { actionStraightenNodes } from './straighten_nodes';
 export { actionStraightenWay } from './straighten_way';

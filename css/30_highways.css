@@ -241,6 +241,12 @@ path.line.stroke.tag-highway-track,
 path.line.stroke.tag-highway-road {
     stroke-width: 5;
 }
+path.line.casing.tag-highway-service.tag-service-driveway {
+    stroke-width: 6.25;
+}
+path.line.stroke.tag-highway-service.tag-service-driveway {
+    stroke-width: 4.25;
+}
 
 path.line.shadow.tag-highway-path,
 path.line.shadow.tag-highway-footway,
@@ -287,6 +293,12 @@ path.line.stroke.tag-highway-steps {
 .low-zoom path.line.stroke.tag-highway-track,
 .low-zoom path.line.stroke.tag-highway-road {
     stroke-width: 3;
+}
+.low-zoom  path.line.casing.tag-highway-service.tag-service-driveway {
+    stroke-width: 4.25;
+}
+.low-zoom  path.line.stroke.tag-highway-service.tag-service-driveway {
+    stroke-width: 2.25;
 }
 
 .low-zoom path.line.shadow.tag-highway-path,
@@ -410,6 +422,16 @@ path.line.casing.tag-highway-bus_guideway,
 path.line.casing.tag-highway-service.tag-service,
 path.line.casing.tag-service.tag-service {
     stroke: #666;
+}
+
+path.line.stroke.tag-highway-service.tag-service-parking_aisle {
+    stroke: #cccac7;
+}
+path.line.stroke.tag-highway-service.tag-service-driveway {
+    stroke: #fff6e4;
+}
+path.line.stroke.tag-highway-service.tag-service-emergency_access {
+    stroke: #ddb2aa;
 }
 
 /* unmaintained track roads */

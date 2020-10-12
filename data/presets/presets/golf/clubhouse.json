@@ -1,0 +1,39 @@
+{
+    "icon": "maki-golf",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "access_simple"
+    ],
+    "moreFields": [
+        "air_conditioning",
+        "fee",
+        "payment_multi_fee",
+        "charge_fee",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid",
+        "level",
+        "opening_hours",
+        "opening_hours/covid19",
+        "phone",
+        "website",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "club house",
+        "golf clubhouse",
+        "golf house",
+        "pro shop"
+    ],
+    "tags": {
+        "golf": "clubhouse"
+    },
+    "name": "Golf Clubhouse"
+}

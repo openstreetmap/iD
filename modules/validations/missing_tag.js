@@ -84,7 +84,7 @@ export function validationMissingTag(context) {
             severity: severity,
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.' + messageID + '.message', {
+                return entity ? t.html('issues.' + messageID + '.message', {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
             },
@@ -98,7 +98,7 @@ export function validationMissingTag(context) {
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-icon-search',
-                    title: t('issues.fix.' + selectFixType + '.title'),
+                    title: t.html('issues.fix.' + selectFixType + '.title'),
                     onClick: function(context) {
                         context.ui().sidebar.showPresetList();
                     }
@@ -122,7 +122,7 @@ export function validationMissingTag(context) {
                 fixes.push(
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.delete_feature.title'),
+                        title: t.html('issues.fix.delete_feature.title'),
                         disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
                         onClick: deleteOnClick
                     })
@@ -138,7 +138,7 @@ export function validationMissingTag(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.' + referenceID + '.reference'));
+                .html(t.html('issues.' + referenceID + '.reference'));
         }
     };
 

@@ -26,7 +26,7 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.18.4';
+  context.version = '2.19.0-dev';
   context.privacyVersion = '20200407';
 
   // iD will alter the hash so cache the parameters intended to setup the session
@@ -559,7 +559,6 @@ export function coreContext() {
       _map.init();
       _validator.init();
       _features.init();
-      _photos.init();
 
       if (services.maprules && context.initialHashParams.maprules) {
         d3_json(context.initialHashParams.maprules)
@@ -571,7 +570,11 @@ export function coreContext() {
       }
 
       // if the container isn't available, e.g. when testing, don't load the UI
-      if (!context.container().empty()) _ui.ensureLoaded();
+      if (!context.container().empty()) {
+        _ui.ensureLoaded().then(function() {
+          _photos.init();
+        });
+      }
     }
   };
 

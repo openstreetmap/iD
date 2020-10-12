@@ -15,7 +15,7 @@ export function uiToolNotes(context) {
 
     var tool = {
         id: 'notes',
-        label: t('modes.add_note.label')
+        label: t.html('modes.add_note.label')
     };
 
     var mode = modeAddNote(context);
@@ -73,7 +73,6 @@ export function uiToolNotes(context) {
             // enter
             var buttonsEnter = buttons.enter()
                 .append('button')
-                .attr('tabindex', -1)
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
                 .on('click.notes', function(d) {
                     if (!enabled(d)) return;

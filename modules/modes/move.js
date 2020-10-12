@@ -39,7 +39,7 @@ export function modeMove(context, entityIDs, baseGraph) {
     ];
     var annotation = entityIDs.length === 1 ?
         t('operations.move.annotation.' + context.graph().geometry(entityIDs[0])) :
-        t('operations.move.annotation.multiple');
+        t('operations.move.annotation.feature', { n: entityIDs.length });
 
     var _prevGraph;
     var _cache;

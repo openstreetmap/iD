@@ -102,7 +102,7 @@ export function operationCircularize(context, selectedIDs) {
 
 
     operation.annotation = function() {
-        return t('operations.circularize.annotation.' + _amount);
+        return t('operations.circularize.annotation.feature', { n: _actions.length });
     };
 
 

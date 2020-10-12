@@ -149,7 +149,6 @@ export function behaviorDrag() {
 
 
     function behavior(selection) {
-        _pointerId = null;
         var matchesSelector = utilPrefixDOMProperty('matchesSelector');
         var delegate = pointerdown;
 

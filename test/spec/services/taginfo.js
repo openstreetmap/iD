@@ -261,7 +261,7 @@ describe('iD.serviceTaginfo', function() {
             server.respondWith('GET', /\/key\/values/,
                 [200, { 'Content-Type': 'application/json' },
                     '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.2},'
-                            + '{"value":"PArking","description":"A common mispelling", "fraction":0.2},'
+                            + '{"value":"PArking","description":"A common misspelling", "fraction":0.2},'
                             + '{"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
                             + '{"value":"parking, partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
                             + '{"value":"*","description":"", "fraction":0.2}]}']

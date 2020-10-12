@@ -6,7 +6,9 @@
         "address",
         "building_area",
         "opening_hours",
-        "opening_hours/covid19"
+        "opening_hours/covid19",
+        "phone",
+        "website"
     ],
     "moreFields": [
         "air_conditioning",
@@ -23,10 +25,8 @@
         "level",
         "not/name",
         "operator",
-        "phone",
         "ref/vatin",
         "smoking",
-        "website",
         "wheelchair"
     ],
     "geometry": [

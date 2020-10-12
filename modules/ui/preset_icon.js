@@ -242,8 +242,7 @@ export function uiPresetIcon() {
     const isMaki = picon && /^maki-/.test(picon);
     const isTemaki = picon && /^temaki-/.test(picon);
     const isFa = picon && /^fa[srb]-/.test(picon);
-    const isTnp = picon && /^tnp-/.test(picon);
-    const isiDIcon = picon && !(isMaki || isTemaki || isFa || isTnp);
+    const isiDIcon = picon && !(isMaki || isTemaki || isFa);
     const isCategory = !p.setTags;
     const drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
     const drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);

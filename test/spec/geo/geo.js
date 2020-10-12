@@ -104,7 +104,7 @@ describe('iD.geo - geography', function() {
             var b = [0, 0];
             expect(iD.geoSphericalDistance(a, b)).to.eql(0);
         });
-        it('a straight 1 degree line at the equator is aproximately 111 km', function() {
+        it('a straight 1 degree line at the equator is approximately 111 km', function() {
             var a = [0, 0];
             var b = [1, 0];
             expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(110946, 10);

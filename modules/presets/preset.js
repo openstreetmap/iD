@@ -79,22 +79,41 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  let _textCache = {};
   _this.t = (scope, options) => {
     const textID = `presets.presets.${presetID}.${scope}`;
-    if (_textCache[textID]) return _textCache[textID];
-    return _textCache[textID] = t(textID, options);
+    return t(textID, options);
+  };
+
+  _this.t.html = (scope, options) => {
+    const textID = `presets.presets.${presetID}.${scope}`;
+    return t.html(textID, options);
   };
 
 
   _this.name = () => {
-    if (_this.suggestion) {
-      let path = presetID.split('/');
-      path.pop();  // remove brand name
-      // NOTE: insert an en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
-      return _this.originalName + ' – ' + t('presets.presets.' + path.join('/') + '.name');
-    }
     return _this.t('name', { 'default': _this.originalName });
+  };
+
+  _this.nameLabel = () => {
+    return _this.t.html('name', { 'default': _this.originalName });
+  };
+
+  _this.subtitle = () => {
+      if (_this.suggestion) {
+        let path = presetID.split('/');
+        path.pop();  // remove brand name
+        return t('presets.presets.' + path.join('/') + '.name');
+      }
+      return null;
+  };
+
+  _this.subtitleLabel = () => {
+      if (_this.suggestion) {
+        let path = presetID.split('/');
+        path.pop();  // remove brand name
+        return t.html('presets.presets.' + path.join('/') + '.name');
+      }
+      return null;
   };
 
 
@@ -115,7 +134,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.reference = (geom) => {
+  _this.reference = () => {
     // Lookup documentation on Wikidata...
     const qid = _this.tags.wikidata || _this.tags['brand:wikidata'] || _this.tags['operator:wikidata'];
     if (qid) {
@@ -125,15 +144,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     // Lookup documentation on OSM Wikibase...
     let key = _this.originalReference.key || Object.keys(utilObjectOmit(_this.tags, 'name'))[0];
     let value = _this.originalReference.value || _this.tags[key];
-
-    if (geom === 'relation' && key === 'type') {
-      if (value in _this.tags) {
-        key = value;
-        value = _this.tags[key];
-      } else {
-        return { rtype: value };
-      }
-    }
 
     if (value === '*') {
       return { key: key };
@@ -254,7 +264,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     function shouldInherit(f) {
       if (f.key && _this.tags[f.key] !== undefined &&
         // inherit anyway if multiple values are allowed or just a checkbox
-        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'check'
+        f.type !== 'multiCombo' && f.type !== 'semiCombo' && f.type !== 'manyCombo' && f.type !== 'check'
       ) return false;
 
       return true;

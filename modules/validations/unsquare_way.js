@@ -67,7 +67,7 @@ export function validationUnsquareWay(context) {
             // use same degree threshold as for detection
             var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
             autoAction.transitionable = false;  // when autofixing, do it instantly
-            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature.single')];
+            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature', { n: 1 })];
         }
 
         return [new validationIssue({
@@ -76,7 +76,7 @@ export function validationUnsquareWay(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context.graph()) }) : '';
+                return entity ? t.html('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context.graph()) }) : '';
             },
             reference: showReference,
             entityIds: [entity.id],
@@ -85,14 +85,14 @@ export function validationUnsquareWay(context) {
                 return [
                     new validationIssueFix({
                         icon: 'iD-operation-orthogonalize',
-                        title: t('issues.fix.square_feature.title'),
+                        title: t.html('issues.fix.square_feature.title'),
                         autoArgs: autoArgs,
                         onClick: function(context, completionHandler) {
                             var entityId = this.issue.entityIds[0];
                             // use same degree threshold as for detection
                             context.perform(
                                 actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
-                                t('operations.orthogonalize.annotation.feature.single')
+                                t('operations.orthogonalize.annotation.feature', { n: 1 })
                             );
                             // run after the squaring transition (currently 150ms)
                             window.setTimeout(function() { completionHandler(); }, 175);
@@ -100,7 +100,7 @@ export function validationUnsquareWay(context) {
                     }),
                     /*
                     new validationIssueFix({
-                        title: t('issues.fix.tag_as_unsquare.title'),
+                        title: t.html('issues.fix.tag_as_unsquare.title'),
                         onClick: function(context) {
                             var entityId = this.issue.entityIds[0];
                             var entity = context.entity(entityId);
@@ -123,7 +123,7 @@ export function validationUnsquareWay(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.unsquare_way.buildings.reference'));
+                .html(t.html('issues.unsquare_way.buildings.reference'));
         }
     };
 

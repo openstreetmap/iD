@@ -26,10 +26,10 @@ export function uiSectionChanges(context) {
         .catch(function() { /* ignore */ });
 
     var section = uiSection('changes-list', context)
-        .title(function() {
+        .label(function() {
             var history = context.history();
             var summary = history.difference().summary();
-            return t('commit.changes', { count: summary.length });
+            return t('inspector.title_count', { title: t.html('commit.changes'), count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -59,29 +59,35 @@ export function uiSectionChanges(context) {
             .append('li')
             .attr('class', 'change-item');
 
-        itemsEnter
+        var buttons = itemsEnter
+            .append('button')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', click);
+
+        buttons
             .each(function(d) {
                 d3_select(this)
                     .call(svgIcon('#iD-icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
             });
 
-        itemsEnter
+        buttons
             .append('span')
             .attr('class', 'change-type')
-            .text(function(d) { return t('commit.' + d.changeType) + ' '; });
+            .html(function(d) { return t.html('commit.' + d.changeType) + ' '; });
 
-        itemsEnter
+        buttons
             .append('strong')
             .attr('class', 'entity-type')
-            .text(function(d) {
+            .html(function(d) {
                 var matched = presetManager.match(d.entity, d.graph);
                 return (matched && matched.name()) || utilDisplayType(d.entity.id);
             });
 
-        itemsEnter
+        buttons
             .append('span')
             .attr('class', 'entity-name')
-            .text(function(d) {
+            .html(function(d) {
                 var name = utilDisplayName(d.entity) || '',
                     string = '';
                 if (name !== '') {
@@ -90,18 +96,8 @@ export function uiSectionChanges(context) {
                 return string += ' ' + name;
             });
 
-        itemsEnter
-            .style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
-
         items = itemsEnter
             .merge(items);
-
-        items
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', click);
 
 
         // Download changeset link
@@ -136,7 +132,7 @@ export function uiSectionChanges(context) {
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .text(t('commit.download_changes'));
+            .html(t.html('commit.download_changes'));
 
 
         function mouseover(d) {
