@@ -25,6 +25,7 @@ export function uiStatus(context) {
                     selection
                         .html(t.html('osm_api_status.message.rateLimit'))
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'api-status-login')
                         .attr('target', '_blank')
                         .call(svgIcon('#iD-icon-out-link', 'inline'))
@@ -49,6 +50,7 @@ export function uiStatus(context) {
                     selection
                         .html(t.html('osm_api_status.message.error') + ' ')
                         .append('a')
+                        .attr('href', '#')
                         // let the user manually retry their connection directly
                         .html(t.html('osm_api_status.retry'))
                         .on('click.retry', function() {
