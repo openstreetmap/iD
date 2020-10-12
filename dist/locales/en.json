@@ -928,6 +928,20 @@
                     "title": "Panoramic Photos",
                     "tooltip": "360° photos"
                 }
+            },
+            "date_filter": {
+                "fromDate": {
+                    "title": "From",
+                    "tooltip": "Show photos taken after this date"
+                },
+                "toDate": {
+                    "title": "To",
+                    "tooltip": "Show photos taken before this date"
+                }
+            },
+            "username_filter": {
+                "title": "Username",
+                "tooltip": "Show only photos by this user"
             }
         },
         "feature": {

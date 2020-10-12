@@ -253,7 +253,11 @@ describe('iD.serviceOpenstreetcam', function() {
             expect(res).to.deep.eql([{
                 type: 'LineString',
                 coordinates: [[10,0], [10,0], [10,1]],
-                properties: { key: '100' }
+                properties: {
+                    captured_at: undefined,
+                    captured_by: undefined,
+                    key: '100' 
+                }
             }]);
         });
     });

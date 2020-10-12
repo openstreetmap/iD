@@ -24,7 +24,9 @@ export function uiSectionPhotoOverlays(context) {
             .attr('class', 'photo-overlay-container')
             .merge(container)
             .call(drawPhotoItems)
-            .call(drawPhotoTypeItems);
+            .call(drawPhotoTypeItems)
+            .call(drawDateFilter)
+            .call(drawUsernameFilter);
     }
 
     function drawPhotoItems(selection) {
@@ -91,7 +93,6 @@ export function uiSectionPhotoOverlays(context) {
                 if (id === 'mapillary-signs') id = 'photo_overlays.traffic_signs';
                 return t(id.replace(/-/g, '_') + '.title');
             });
-
 
         // Update
         li
@@ -162,6 +163,124 @@ export function uiSectionPhotoOverlays(context) {
             .classed('active', typeEnabled)
             .selectAll('input')
             .property('checked', typeEnabled);
+    }
+
+    function drawDateFilter(selection) {
+        var data = context.photos().dateFilters();
+
+        function filterEnabled(d) {
+            return context.photos().dateFilterValue(d); 
+        }
+
+        var ul = selection
+            .selectAll('.layer-list-date-filter')
+            .data(context.photos().shouldFilterByDate() ? [0] : []);
+
+        ul.exit()
+            .remove();
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-date-filter')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item-date-filter')
+            .data(data);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', 'list-item-date-filter');
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function(d) {
+                d3_select(this)
+                    .call(uiTooltip()
+                        .title(t('photo_overlays.date_filter.' + d + '.tooltip'))
+                        .placement('top')
+                    );
+            });
+
+        labelEnter
+            .append('span')
+            .text(function(d) {
+                return t('photo_overlays.date_filter.' + d + '.title');
+            });
+
+        labelEnter
+            .append('input')
+            .attr('type', 'date')
+            .attr('class', 'list-item-input')
+            .attr('placeholder', 'dd/mm/yyyy')
+            .property('value', function(d) {
+                return context.photos().dateFilterValue(d);
+            })
+            .on('change', function(d) {
+                var value = d3_select(this).property('value');
+                context.photos().setDateFilter(d, value);
+            });
+
+        li
+            .merge(liEnter)
+            .classed('active', filterEnabled);
+    }
+
+    function drawUsernameFilter(selection) {
+        function filterEnabled() {
+            return context.photos().username(); 
+        }
+        var ul = selection
+            .selectAll('.layer-list-username-filter')
+            .data(context.photos().shouldFilterByUsername() ? [0] : []);
+
+        ul.exit()
+            .remove();
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-username-filter')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item-username-filter')
+            .data(['username-filter']);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', 'list-item-username-filter');
+
+        var labelEnter = liEnter
+            .append('label')
+            .each(function() {
+                d3_select(this)
+                    .call(uiTooltip()
+                        .title(t('photo_overlays.username_filter.tooltip'))
+                        .placement('top')
+                    );
+            });
+
+        labelEnter
+            .append('span')
+            .text(t('photo_overlays.username_filter.title'));
+
+        labelEnter
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'list-item-input')
+            .property('value', context.photos().username())
+            .on('change', function() {
+                var value = d3_select(this).property('value');
+                context.photos().setUsernameFilter(value);
+            });
+        
+        li
+            .merge(liEnter)
+            .classed('active', filterEnabled);
     }
 
     function toggleLayer(which) {
