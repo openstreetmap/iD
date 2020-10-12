@@ -105,7 +105,8 @@ input[type=search]:focus,
 input[type=number]:focus,
 input[type=url]:focus,
 input[type=tel]:focus,
-input[type=email]:focus {
+input[type=email]:focus,
+input[type=date]:focus {
     outline-color: transparent;
     outline-style: none;
 }
@@ -192,7 +193,8 @@ input[type=search],
 input[type=number],
 input[type=url],
 input[type=tel],
-input[type=email] {
+input[type=email],
+input[type=date] {
     /* need this since line-height interpretation may vary by font or browser */
     height: 2.585em;
 }
