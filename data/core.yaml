@@ -764,6 +764,13 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+    roadheight:
+      # symbol for meters
+      meter: m
+      # abbreviation of feet
+      foot: ft
+      # abbreviation of inches
+      inch: in
   background:
     title: Background
     description: Background Settings
