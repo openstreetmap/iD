@@ -1885,25 +1885,36 @@ a.hide-toggle {
 }
 
 
-/* Field - roadspeed
+/* Field - roadheight and roadspeed
 ------------------------------------------------------- */
+.form-field-input-roadheight input.roadheight-number,
+.form-field-input-roadheight input.roadheight-secondary-number,
 .form-field-input-roadspeed input.roadspeed-number {
     flex-basis: 0;
+}
+.form-field-input-roadheight input.roadheight-unit,
+.form-field-input-roadheight input.roadheight-secondary-unit {
+    flex: 0 1 auto;
+    width: 60px;
 }
 .form-field-input-roadspeed input.roadspeed-unit {
     flex: 0 1 auto;
     width: 80px;
 }
+.ideditor[dir='ltr'] .form-field-input-roadheight > input:first-of-type,
 .ideditor[dir='ltr'] .form-field-input-roadspeed > input:first-of-type {
     border-radius: 0 0 0 4px;
 }
+.ideditor[dir='rtl'] .form-field-input-roadheight > input:first-of-type,
 .ideditor[dir='rtl'] .form-field-input-roadspeed > input:first-of-type {
     border-radius: 0 0 4px 0;
 }
+.ideditor[dir='ltr'] .form-field-input-roadheight > input:last-of-type,
 .ideditor[dir='ltr'] .form-field-input-roadspeed > input:last-of-type {
     border-left: 0;
     border-radius: 0 0 4px 0;
 }
+.ideditor[dir='rtl'] .form-field-input-roadheight > input:last-of-type,
 .ideditor[dir='rtl'] .form-field-input-roadspeed > input:last-of-type {
     border-right: 0;
     border-radius: 0 0 0 4px;
