@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select, event as d3_event } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
@@ -133,7 +133,7 @@ export function uiFieldWikipedia(field, context) {
       .merge(link);
 
     link
-      .on('click', () => {
+      .on('click', (d3_event) => {
         d3_event.preventDefault();
         if (_wikiURL) window.open(_wikiURL, '_blank');
       });

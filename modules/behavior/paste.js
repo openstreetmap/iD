@@ -1,5 +1,3 @@
-import { event as d3_event } from 'd3-selection';
-
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
@@ -9,7 +7,7 @@ import { uiCmd } from '../ui/cmd';
 // see also `operationPaste`
 export function behaviorPaste(context) {
 
-    function doPaste() {
+    function doPaste(d3_event) {
         // prevent paste during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 

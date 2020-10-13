@@ -2,7 +2,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { timer as d3_timer } from 'd3-timer';
 
 import {
-  event as d3_event,
   select as d3_select
 } from 'd3-selection';
 
@@ -766,7 +765,7 @@ export default {
       .attr('type', 'checkbox')
       .attr('id', hiresDomId)
       .property('checked', _hires)
-      .on('click', () => {
+      .on('click', (d3_event) => {
         d3_event.stopPropagation();
 
         _hires = !_hires;

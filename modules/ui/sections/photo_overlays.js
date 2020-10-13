@@ -82,7 +82,7 @@ export function uiSectionPhotoOverlays(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d) { toggleLayer(d.id); });
+            .on('change', function(d3_event, d) { toggleLayer(d.id); });
 
         labelEnter
             .append('span')
@@ -145,7 +145,7 @@ export function uiSectionPhotoOverlays(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d) {
+            .on('change', function(d3_event, d) {
                 context.photos().togglePhotoType(d);
             });
 

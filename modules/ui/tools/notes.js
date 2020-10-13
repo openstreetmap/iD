@@ -46,7 +46,6 @@ export function uiToolNotes(context) {
 
     tool.render = function(selection) {
 
-
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
@@ -74,7 +73,7 @@ export function uiToolNotes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
-                .on('click.notes', function(d) {
+                .on('click.notes', function(d3_event, d) {
                     if (!enabled(d)) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042

@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -31,7 +30,7 @@ export function behaviorHover(context) {
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
-    function keydown() {
+    function keydown(d3_event) {
         if (_altDisables && d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             _selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
@@ -45,7 +44,7 @@ export function behaviorHover(context) {
     }
 
 
-    function keyup() {
+    function keyup(d3_event) {
         if (_altDisables && d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
@@ -83,7 +82,7 @@ export function behaviorHover(context) {
             .on('keyup.hover', keyup);
 
 
-        function eventTarget() {
+        function eventTarget(d3_event) {
             var datum = d3_event.target && d3_event.target.__data__;
             if (typeof datum !== 'object') return null;
             if (!(datum instanceof osmEntity) && datum.properties && (datum.properties.entity instanceof osmEntity)) {
@@ -92,26 +91,26 @@ export function behaviorHover(context) {
             return datum;
         }
 
-        function pointerover() {
+        function pointerover(d3_event) {
             // ignore mouse hovers with buttons pressed unless dragging
             if (context.mode().id.indexOf('drag') === -1 &&
                 (!d3_event.pointerType || d3_event.pointerType === 'mouse') &&
                 d3_event.buttons) return;
 
-            var target = eventTarget();
+            var target = eventTarget(d3_event);
             if (target && _targets.indexOf(target) === -1) {
                 _targets.push(target);
-                updateHover(_targets);
+                updateHover(d3_event, _targets);
             }
         }
 
-        function pointerout() {
+        function pointerout(d3_event) {
 
-            var target = eventTarget();
+            var target = eventTarget(d3_event);
             var index = _targets.indexOf(target);
             if (index !== -1) {
                 _targets.splice(index);
-                updateHover(_targets);
+                updateHover(d3_event, _targets);
             }
         }
 
@@ -128,7 +127,7 @@ export function behaviorHover(context) {
             return true;
         }
 
-        function updateHover(targets) {
+        function updateHover(d3_event, targets) {
 
             _selection.selectAll('.hover')
                 .classed('hover', false);

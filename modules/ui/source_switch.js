@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -11,7 +10,7 @@ export function uiSourceSwitch(context) {
     var keys;
 
 
-    function click() {
+    function click(d3_event) {
         d3_event.preventDefault();
 
         var osm = context.connection();

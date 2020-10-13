@@ -150,7 +150,7 @@ export function uiSectionChanges(context) {
         }
 
 
-        function click(change) {
+        function click(d3_event, change) {
             if (change.changeType !== 'deleted') {
                 var entity = change.entity;
                 context.map().zoomToEase(entity);

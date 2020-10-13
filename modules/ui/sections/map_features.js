@@ -109,7 +109,7 @@ export function uiSectionMapFeatures(context) {
         return context.features().enabled(d);
     }
 
-    function clickFeature(d) {
+    function clickFeature(d3_event, d) {
         context.features().toggle(d);
     }
 

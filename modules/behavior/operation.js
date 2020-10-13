@@ -1,11 +1,10 @@
-import { event as d3_event } from 'd3-selection';
 
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation(context) {
     var _operation;
 
-    function keypress() {
+    function keypress(d3_event) {
         // prevent operations during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 

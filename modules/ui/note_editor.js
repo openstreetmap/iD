@@ -1,6 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -163,7 +162,7 @@ export function uiNoteEditor(context) {
             .on('input.note-input', changeInput)
             .on('blur.note-input', changeInput);
 
-        if (_newNote) {
+        if (!commentTextarea.empty() && _newNote) {
             // autofocus the comment field for new notes
             commentTextarea.node().focus();
         }
@@ -176,7 +175,7 @@ export function uiNoteEditor(context) {
 
 
         // fast submit if user presses cmd+enter
-        function keydown() {
+        function keydown(d3_event) {
             if (!(d3_event.keyCode === 13 && // ↩ Return
                 d3_event.metaKey)) return;
 
@@ -265,7 +264,7 @@ export function uiNoteEditor(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .append('span')
             .html(t.html('login'))
-            .on('click.note-login', function() {
+            .on('click.note-login', function(d3_event) {
                 d3_event.preventDefault();
                 osm.authenticate();
             });
@@ -385,7 +384,7 @@ export function uiNoteEditor(context) {
 
 
 
-    function clickCancel(d) {
+    function clickCancel(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
@@ -396,7 +395,7 @@ export function uiNoteEditor(context) {
     }
 
 
-    function clickSave(d) {
+    function clickSave(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
@@ -407,7 +406,7 @@ export function uiNoteEditor(context) {
     }
 
 
-    function clickStatus(d) {
+    function clickStatus(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
@@ -418,7 +417,7 @@ export function uiNoteEditor(context) {
         }
     }
 
-    function clickComment(d) {
+    function clickComment(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {

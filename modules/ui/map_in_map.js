@@ -1,5 +1,5 @@
 import { geoPath as d3_geoPath } from 'd3-geo';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../core/localizer';
@@ -47,7 +47,7 @@ export function uiMapInMap(context) {
         }
 
 
-        function zoomed() {
+        function zoomed(d3_event) {
             if (_skipEvents) return;
 
             var x = d3_event.transform.x;
@@ -258,7 +258,7 @@ export function uiMapInMap(context) {
         }
 
 
-        function toggle() {
+        function toggle(d3_event) {
             if (d3_event) d3_event.preventDefault();
 
             _isHidden = !_isHidden;

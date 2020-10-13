@@ -162,7 +162,7 @@ export function uiKeepRightEditor(context) {
 
     buttonSection.select('.comment-button')   // select and propagate data
       .attr('disabled', d => d.newComment ? null : true)
-      .on('click.comment', function(d) {
+      .on('click.comment', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.keepRight;
         if (qaService) {
@@ -175,7 +175,7 @@ export function uiKeepRightEditor(context) {
         const andComment = (d.newComment ? '_comment' : '');
         return t.html(`QA.keepRight.close${andComment}`);
       })
-      .on('click.close', function(d) {
+      .on('click.close', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.keepRight;
         if (qaService) {
@@ -189,7 +189,7 @@ export function uiKeepRightEditor(context) {
         const andComment = (d.newComment ? '_comment' : '');
         return t.html(`QA.keepRight.ignore${andComment}`);
       })
-      .on('click.ignore', function(d) {
+      .on('click.ignore', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.keepRight;
         if (qaService) {

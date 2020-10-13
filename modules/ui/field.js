@@ -1,6 +1,6 @@
 import * as countryCoder from '@ideditor/country-coder';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
@@ -86,7 +86,7 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function revert(d) {
+    function revert(d3_event, d) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
         if (!entityIDs || _locked) return;
@@ -95,7 +95,7 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
-    function remove(d) {
+    function remove(d3_event, d) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
         if (_locked) return;

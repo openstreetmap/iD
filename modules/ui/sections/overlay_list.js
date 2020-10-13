@@ -1,7 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -49,7 +48,7 @@ export function uiSectionOverlayList(context) {
     }
 
 
-    function chooseOverlay(d) {
+    function chooseOverlay(d3_event, d) {
         d3_event.preventDefault();
         context.background().toggleOverlayLayer(d);
         _overlayList.call(updateLayerSelections);

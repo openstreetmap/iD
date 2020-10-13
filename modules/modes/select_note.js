@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -57,7 +56,7 @@ export function modeSelectNote(context, selectedNoteID) {
 
 
     // class the note as selected, or return to browse mode if the note is gone
-    function selectNote(drawn) {
+    function selectNote(d3_event, drawn) {
         if (!checkSelectedID()) return;
 
         var selection = context.surface().selectAll('.layer-notes .note-' + selectedNoteID);

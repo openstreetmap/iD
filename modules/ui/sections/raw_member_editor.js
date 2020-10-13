@@ -1,6 +1,5 @@
 import { drag as d3_drag } from 'd3-drag';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -42,7 +41,7 @@ export function uiSectionRawMemberEditor(context) {
     var _entityIDs;
     var _maxMembers = 1000;
 
-    function downloadMember(d) {
+    function downloadMember(d3_event, d) {
         d3_event.preventDefault();
 
         // display the loading indicator
@@ -52,7 +51,7 @@ export function uiSectionRawMemberEditor(context) {
         });
     }
 
-    function zoomToMember(d) {
+    function zoomToMember(d3_event, d) {
         d3_event.preventDefault();
 
         var entity = context.entity(d.id);
@@ -63,7 +62,7 @@ export function uiSectionRawMemberEditor(context) {
     }
 
 
-    function selectMember(d) {
+    function selectMember(d3_event, d) {
         d3_event.preventDefault();
 
         // remove the hover-highlight styling
@@ -80,7 +79,7 @@ export function uiSectionRawMemberEditor(context) {
     }
 
 
-    function changeRole(d) {
+    function changeRole(d3_event, d) {
         var oldRole = d.role;
         var newRole = context.cleanRelationRole(d3_select(this).property('value'));
 
@@ -95,7 +94,7 @@ export function uiSectionRawMemberEditor(context) {
     }
 
 
-    function deleteMember(d) {
+    function deleteMember(d3_event, d) {
 
         // remove the hover-highlight styling
         utilHighlightEntities([d.id], false, context);
@@ -268,20 +267,22 @@ export function uiSectionRawMemberEditor(context) {
         var dragOrigin, targetIndex;
 
         items.call(d3_drag()
-            .on('start', function() {
+            .on('start', function(d3_event) {
                 dragOrigin = {
                     x: d3_event.x,
                     y: d3_event.y
                 };
                 targetIndex = null;
             })
-            .on('drag', function(d, index) {
+            .on('drag', function(d3_event) {
                 var x = d3_event.x - dragOrigin.x,
                     y = d3_event.y - dragOrigin.y;
 
                 if (!d3_select(this).classed('dragging') &&
                     // don't display drag until dragging beyond a distance threshold
                     Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)) <= 5) return;
+
+                var index = items.nodes().indexOf(this);
 
                 d3_select(this)
                     .classed('dragging', true);
@@ -307,11 +308,11 @@ export function uiSectionRawMemberEditor(context) {
                         return null;
                     });
             })
-            .on('end', function(d, index) {
+            .on('end', function(d3_event, d) {
 
-                if (!d3_select(this).classed('dragging')) {
-                    return;
-                }
+                if (!d3_select(this).classed('dragging')) return;
+
+                var index = items.nodes().indexOf(this);
 
                 d3_select(this)
                     .classed('dragging', false);

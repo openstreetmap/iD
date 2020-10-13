@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
@@ -95,7 +95,7 @@ export function uiSectionRawTagEditor(id, context) {
                 return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
             .attr('title', function(d) { return t('icons.' + d.id); })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 _tagView = d.id;
                 prefs('raw-tag-editor-view', d.id);
 
@@ -372,7 +372,7 @@ export function uiSectionRawTagEditor(id, context) {
         scheduleChange();
     }
 
-    function pushMore() {
+    function pushMore(d3_event) {
         // if pressing Tab on the last value field with content, add a blank row
         if (d3_event.keyCode === 9 && !d3_event.shiftKey &&
             section.selection().selectAll('.tag-list li:last-child input.value').node() === this &&
@@ -454,7 +454,7 @@ export function uiSectionRawTagEditor(id, context) {
             .call(uiCombobox.off, context);
     }
 
-    function keyChange(d) {
+    function keyChange(d3_event, d) {
         if (d3_select(this).attr('readonly')) return;
 
         var kOld = d.key;
@@ -512,7 +512,7 @@ export function uiSectionRawTagEditor(id, context) {
         scheduleChange();
     }
 
-    function valueChange(d) {
+    function valueChange(d3_event, d) {
         if (isReadOnly(d)) return;
 
         // exit if this is a multiselection and no value was entered
@@ -527,7 +527,7 @@ export function uiSectionRawTagEditor(id, context) {
         scheduleChange();
     }
 
-    function removeTag(d) {
+    function removeTag(d3_event, d) {
         if (isReadOnly(d)) return;
 
         if (d.key === '') {    // removing the blank row

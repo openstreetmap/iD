@@ -2,7 +2,6 @@ import _throttle from 'lodash-es/throttle';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -56,7 +55,7 @@ export function uiSidebar(context) {
 
         var downPointerId, lastClientX, containerLocGetter;
 
-        function pointerdown() {
+        function pointerdown(d3_event) {
             if (downPointerId) return;
 
             if ('button' in d3_event && d3_event.button !== 0) return;
@@ -80,7 +79,7 @@ export function uiSidebar(context) {
             resizer.classed('dragging', true);
 
             d3_select(window)
-                .on('touchmove.sidebar-resizer', function() {
+                .on('touchmove.sidebar-resizer', function(d3_event) {
                     // disable page scrolling while resizing on touch input
                     d3_event.preventDefault();
                 }, { passive: false })
@@ -88,7 +87,7 @@ export function uiSidebar(context) {
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', pointerup);
         }
 
-        function pointermove() {
+        function pointermove(d3_event) {
 
             if (downPointerId !== (d3_event.pointerId || 'mouse')) return;
 
@@ -133,7 +132,7 @@ export function uiSidebar(context) {
             }
         }
 
-        function pointerup() {
+        function pointerup(d3_event) {
             if (downPointerId !== (d3_event.pointerId || 'mouse')) return;
 
             downPointerId = null;
@@ -355,7 +354,7 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.toggle = function(moveMap) {
+        sidebar.toggle = function(d3_event, moveMap) {
             var e = d3_event;
             if (e && e.sourceEvent) {
                 e.sourceEvent.preventDefault();

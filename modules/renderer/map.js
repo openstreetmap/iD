@@ -3,7 +3,7 @@ import _throttle from 'lodash-es/throttle';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
 import { scaleLinear as d3_scaleLinear } from 'd3-scale';
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { prefs } from '../core/preferences';
@@ -77,8 +77,9 @@ export function rendererMap(context) {
         .interpolate(d3_interpolate)
         .filter(zoomEventFilter)
         .on('zoom.map', zoomPan)
-        .on('start.map', function() {
-            _pointerDown = d3_event.sourceEvent && d3_event.sourceEvent.type === 'pointerdown';
+        .on('start.map', function(d3_event) {
+            _pointerDown = d3_event && (d3_event.type === 'pointerdown' ||
+                (d3_event.sourceEvent && d3_event.sourceEvent.type === 'pointerdown'));
         })
         .on('end.map', function() {
             _pointerDown = false;
@@ -150,7 +151,7 @@ export function rendererMap(context) {
             });
 
         selection
-            .on('wheel.map mousewheel.map', function() {
+            .on('wheel.map mousewheel.map', function(d3_event) {
                 // disable swipe-to-navigate browser pages on trackpad/magic mouse – #5552
                 d3_event.preventDefault();
             })
@@ -175,29 +176,29 @@ export function rendererMap(context) {
         surface
             .call(drawLabels.observe)
             .call(_doubleUpHandler)
-            .on(_pointerPrefix + 'down.zoom', function() {
+            .on(_pointerPrefix + 'down.zoom', function(d3_event) {
                 _lastPointerEvent = d3_event;
                 if (d3_event.button === 2) {
                     d3_event.stopPropagation();
                 }
             }, true)
-            .on(_pointerPrefix + 'up.zoom', function() {
+            .on(_pointerPrefix + 'up.zoom', function(d3_event) {
                 _lastPointerEvent = d3_event;
                 if (resetTransform()) {
                     immediateRedraw();
                 }
             })
-            .on(_pointerPrefix + 'move.map', function() {
+            .on(_pointerPrefix + 'move.map', function(d3_event) {
                 _lastPointerEvent = d3_event;
             })
-            .on(_pointerPrefix + 'over.vertices', function() {
+            .on(_pointerPrefix + 'over.vertices', function(d3_event) {
                 if (map.editableDataEnabled() && !_isTransformed) {
                     var hover = d3_event.target.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, { full: false });
                 }
             })
-            .on(_pointerPrefix + 'out.vertices', function() {
+            .on(_pointerPrefix + 'out.vertices', function(d3_event) {
                 if (map.editableDataEnabled() && !_isTransformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.call(drawVertices.drawHover, context.graph(), hover, map.extent());
@@ -216,7 +217,7 @@ export function rendererMap(context) {
             // Desktop Safari sends gesture events for multitouch trackpad pinches.
             // We can listen for these and translate them into map zooms.
             surface
-                .on('gesturestart.surface', function() {
+                .on('gesturestart.surface', function(d3_event) {
                     d3_event.preventDefault();
                     _gestureTransformStart = projection.transform();
                 })
@@ -226,7 +227,7 @@ export function rendererMap(context) {
         // must call after surface init
         updateAreaFill();
 
-        _doubleUpHandler.on('doubleUp.map', function(p0) {
+        _doubleUpHandler.on('doubleUp.map', function(d3_event, p0) {
             if (!_dblClickZoomEnabled) return;
 
             // don't zoom if targeting something other than the map itself
@@ -286,7 +287,7 @@ export function rendererMap(context) {
     }
 
 
-    function zoomEventFilter() {
+    function zoomEventFilter(d3_event) {
         // Fix for #2151, (see also d3/d3-zoom#60, d3/d3-brush#18)
         // Intercept `mousedown` and check if there is an orphaned zoom gesture.
         // This can happen if a previous `mousedown` occurred without a `mouseup`.
@@ -431,7 +432,7 @@ export function rendererMap(context) {
 
 
 
-    function gestureChange() {
+    function gestureChange(d3_event) {
         // Remap Safari gesture events to wheel events - #5492
         // We want these disabled most places, but enabled for zoom/unzoom on map surface
         // https://developer.mozilla.org/en-US/docs/Web/API/GestureEvent
@@ -457,10 +458,9 @@ export function rendererMap(context) {
     }
 
 
-    function zoomPan(manualEvent) {
-        var event = (manualEvent || d3_event);
-        var source = event.sourceEvent;
-        var eventTransform = event.transform;
+    function zoomPan(event, key, transform) {
+        var source = event && event.sourceEvent || event;
+        var eventTransform = transform || (event && event.transform);
         var x = eventTransform.x;
         var y = eventTransform.y;
         var k = eventTransform.k;
@@ -709,7 +709,7 @@ export function rendererMap(context) {
     };
 
 
-    map.mouse = function() {
+    map.mouse = function(d3_event) {
         var event = _lastPointerEvent || d3_event;
         if (event) {
             var s;

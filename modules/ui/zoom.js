@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -34,25 +33,25 @@ export function uiZoom(context) {
         key: '-'
     }];
 
-    function zoomIn() {
+    function zoomIn(d3_event) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomIn();
     }
 
-    function zoomOut() {
+    function zoomOut(d3_event) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOut();
     }
 
-    function zoomInFurther() {
+    function zoomInFurther(d3_event) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomInFurther();
     }
 
-    function zoomOutFurther() {
+    function zoomOutFurther(d3_event) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
         context.map().zoomOutFurther();
@@ -78,12 +77,12 @@ export function uiZoom(context) {
             .enter()
             .append('button')
             .attr('class', function(d) { return d.id; })
-            .on('pointerup.editor', function() {
+            .on('pointerup.editor', function(d3_event) {
                 lastPointerUpType = d3_event.pointerType;
             })
-            .on('click.editor', function(d) {
+            .on('click.editor', function(d3_event, d) {
                 if (!d.disabled()) {
-                    d.action();
+                    d.action(d3_event);
                 } else if (lastPointerUpType === 'touch' || lastPointerUpType === 'pen') {
                     context.ui().flash
                         .duration(2000)

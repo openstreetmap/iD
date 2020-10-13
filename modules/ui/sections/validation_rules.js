@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -138,12 +137,12 @@ export function uiSectionValidationRules(context) {
             .attr('step', '0.5')
             .attr('class', 'square-degrees-input')
             .call(utilNoAuto)
-            .on('click', function () {
+            .on('click', function (d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 this.select();
             })
-            .on('keyup', function () {
+            .on('keyup', function (d3_event) {
                 if (d3_event.keyCode === 13) { // ↩ Return
                     this.blur();
                     this.select();
@@ -181,7 +180,7 @@ export function uiSectionValidationRules(context) {
         return context.validator().isRuleEnabled(d);
     }
 
-    function toggleRule(d) {
+    function toggleRule(d3_event, d) {
         context.validator().toggleRule(d);
     }
 

@@ -15,10 +15,7 @@ describe('uiCombobox', function() {
         var start = input.property('selectionStart');
         var finis = input.property('selectionEnd');
 
-        d3.customEvent(happen.makeEvent({
-            type: 'keydown',
-            keyCode: keyCode
-        }), input.on('keydown.combo-input'));
+        happen.keydown(input.node(), {keyCode: keyCode});
 
         switch (key) {
             case '⇥':
@@ -80,7 +77,6 @@ describe('uiCombobox', function() {
 
     function focusTypeahead(input) {
         input.node().focus();
-        d3.customEvent(happen.makeEvent('focus'), input.on('focus.combo-input'));
     }
 
     it('adds the combobox-input class', function() {
@@ -92,7 +88,7 @@ describe('uiCombobox', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
-        expect(d3.select('.ideditor > div.combobox').nodes().length).to.equal(1);
+        expect(d3.selectAll('.ideditor > div.combobox').size()).to.equal(1);
     });
 
     it('filters entries to those matching the value', function() {

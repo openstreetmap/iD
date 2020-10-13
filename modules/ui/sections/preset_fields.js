@@ -1,7 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    event as d3_event
-} from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
@@ -123,7 +120,7 @@ export function uiSectionPresetFields(context) {
 
 
         selection.selectAll('.wrap-form-field input')
-            .on('keydown', function() {
+            .on('keydown', function(d3_event) {
                 // if user presses enter, and combobox is not active, accept edits..
                 if (d3_event.keyCode === 13 && // ↩ Return
                     context.container().select('.combobox').empty()) {

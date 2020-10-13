@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -10,7 +9,7 @@ export function utilKeybinding(namespace) {
     var _keybindings = {};
 
 
-    function testBindings(isCapturing) {
+    function testBindings(d3_event, isCapturing) {
         var didMatch = false;
         var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
         var i, binding;
@@ -25,8 +24,8 @@ export function utilKeybinding(namespace) {
             binding = bindings[i];
             if (!binding.event.modifiers.shiftKey) continue;  // no shift
             if (!!binding.capture !== isCapturing) continue;
-            if (matches(binding, true)) {
-                binding.callback();
+            if (matches(d3_event, binding, true)) {
+                binding.callback(d3_event);
                 didMatch = true;
 
                 // match a max of one binding per event
@@ -41,14 +40,14 @@ export function utilKeybinding(namespace) {
             binding = bindings[i];
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
-            if (matches(binding, false)) {
-                binding.callback();
+            if (matches(d3_event, binding, false)) {
+                binding.callback(d3_event);
                 break;
             }
         }
 
 
-        function matches(binding, testShift) {
+        function matches(d3_event, binding, testShift) {
             var event = d3_event;
             var isMatch = false;
             var tryKeyCode = true;
@@ -91,17 +90,17 @@ export function utilKeybinding(namespace) {
     }
 
 
-    function capture() {
-        testBindings(true);
+    function capture(d3_event) {
+        testBindings(d3_event, true);
     }
 
 
-    function bubble() {
+    function bubble(d3_event) {
         var tagName = d3_select(d3_event.target).node().tagName;
         if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
             return;
         }
-        testBindings(false);
+        testBindings(d3_event, false);
     }
 
 
