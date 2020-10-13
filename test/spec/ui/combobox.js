@@ -15,6 +15,8 @@ describe('uiCombobox', function() {
         var start = input.property('selectionStart');
         var finis = input.property('selectionEnd');
 
+        happen.keydown(input.node(), {keyCode: keyCode});
+
         switch (key) {
             case '⇥':
                 break;
@@ -86,7 +88,7 @@ describe('uiCombobox', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
-        expect(d3.select('.ideditor > div.combobox').nodes().length).to.equal(1);
+        expect(d3.selectAll('.ideditor > div.combobox').size()).to.equal(1);
     });
 
     it('filters entries to those matching the value', function() {
