@@ -162,7 +162,7 @@ export function uiNoteEditor(context) {
             .on('input.note-input', changeInput)
             .on('blur.note-input', changeInput);
 
-        if (_newNote) {
+        if (!commentTextarea.empty() && _newNote) {
             // autofocus the comment field for new notes
             commentTextarea.node().focus();
         }
