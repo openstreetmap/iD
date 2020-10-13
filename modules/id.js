@@ -1,10 +1,12 @@
-import 'browser-polyfills';
-import 'es6-symbol/implement';
+// polyfills newer JS functionality for older browsers
+import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import 'string.fromcodepoint/auto';
+
+// polyfill window.fetch and AbortController (not included in core-js)
+import 'whatwg-fetch';
 import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 
-// polyfill requestIdleCallback
+// polyfill idle callback functions (not included in core-js)
 window.requestIdleCallback = window.requestIdleCallback ||
     function(cb) {
         var start = Date.now();
@@ -17,7 +19,6 @@ window.requestIdleCallback = window.requestIdleCallback ||
             });
         });
     };
-
 window.cancelIdleCallback = window.cancelIdleCallback ||
     function(id) {
         window.cancelAnimationFrame(id);
