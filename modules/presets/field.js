@@ -34,6 +34,7 @@ export function presetField(fieldID, field) {
   _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
     .toLowerCase().trim().split(/\s*,+\s*/);
 
+  _this.increment = _this.type === 'number' ? (_this.increment || 1) : undefined;
 
   return _this;
 }
