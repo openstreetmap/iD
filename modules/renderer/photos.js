@@ -49,16 +49,34 @@ export function rendererPhotos(context) {
         return val === _dateFilters[0] ? _fromDate : _toDate;
     };
 
-    photos.setDateFilter = function(type, val) {
+    photos.setDateFilter = function(type, val, updateUrl) {
         if (type === _dateFilters[0]) _fromDate = val;
         if (type === _dateFilters[1]) _toDate = val;
         dispatch.call('change', this);
+        if (updateUrl) {
+            setUrlFilterValue(type, val);
+        }
     };
 
-    photos.setUsernameFilter = function(val) {
+    photos.setUsernameFilter = function(val, updateUrl) {
         _username = val;
         dispatch.call('change', this);
+        if (updateUrl) {
+            setUrlFilterValue('username', val);
+        }
     };
+
+    function setUrlFilterValue(type, val) {
+        if (!window.mocha) {
+            var hash = utilStringQs(window.location.hash);
+            if (val) {
+                hash[type] = val;
+            } else {
+                delete hash[type];
+            }
+            window.location.replace('#' + utilQsString(hash, true));
+        }
+    }
 
     function showsLayer(id) {
         var layer = context.layers().layer(id);
@@ -123,6 +141,15 @@ export function rendererPhotos(context) {
                 var layer = context.layers().layer(id);
                 if (layer) layer.enabled(true);
             });
+        }
+        if (hash.fromDate) {
+            this.setDateFilter('fromDate', hash.fromDate, false);
+        }
+        if (hash.toDate) {
+            this.setDateFilter('toDate', hash.toDate, false);
+        }
+        if (hash.username) {
+            this.setUsernameFilter(hash.username, false);
         }
 
         context.layers().on('change.rendererPhotos', updateStorage);
