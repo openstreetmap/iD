@@ -1,7 +1,3 @@
-// polyfills newer JS functionality for older browsers
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-
 // polyfill window.fetch and AbortController (not included in core-js)
 import 'whatwg-fetch';
 import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
