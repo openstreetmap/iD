@@ -75,13 +75,15 @@ export function uiFieldText(field, context) {
 
             input.attr('type', 'text');
 
+            var inc = field.increment;
+
             var buttons = wrap.selectAll('.increment, .decrement')
-                .data(rtl ? [1, -1] : [-1, 1]);
+                .data(rtl ? [inc, -inc] : [-inc, inc]);
 
             buttons.enter()
                 .append('button')
                 .attr('class', function(d) {
-                    var which = (d === 1 ? 'increment' : 'decrement');
+                    var which = (d > 0 ? 'increment' : 'decrement');
                     return 'form-field-button ' + which;
                 })
                 .merge(buttons)

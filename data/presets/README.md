@@ -378,13 +378,17 @@ For combo fields, spaces are replaced with underscores in the tag value if `snak
 
 For combo fields, case-sensitive field values are allowed if `caseSensitive` is `true`. The default is `false`.
 
-##### `min_value`
+##### `minValue`
 
 For number fields, the lowest valid value. There is no default.
 
-##### `max_value`
+##### `maxValue`
 
 For number fields, the greatest valid value. There is no default.
+
+##### `increment`
+
+For number fields, the amount the stepper control increases or decreases the value. The default is `1`.
 
 ##### `prerequisiteTag`
 

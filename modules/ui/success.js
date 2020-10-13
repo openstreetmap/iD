@@ -32,7 +32,7 @@ export function uiSuccess(context) {
         let ociFeatures = {};
 
         Object.values(ociResources).forEach(resource => {
-          const feature = loco.resolveLocationSet(resource.locationSet);
+          const feature = loco.resolveLocationSet(resource.locationSet).feature;
           let ociFeature = ociFeatures[feature.id];
           if (!ociFeature) {
             ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone

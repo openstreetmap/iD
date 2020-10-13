@@ -7,6 +7,7 @@ export function actionUpgradeTags(entityId, oldTags, replaceTags) {
         var semiIndex;
 
         for (var oldTagKey in oldTags) {
+            if (!(oldTagKey in tags)) continue;
             // wildcard match
             if (oldTags[oldTagKey] === '*') {
                 // note the value since we might need to transfer it

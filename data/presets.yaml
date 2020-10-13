@@ -6661,6 +6661,11 @@ en:
         name: Communication Tower
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Communication Tower'', separated by commas>'
+      man_made/tower/cooling:
+        # 'man_made=tower, tower:type=cooling'
+        name: Cooling Tower
+        # 'terms: power plant'
+        terms: '<translate with synonyms or related terms for ''Cooling Tower'', separated by commas>'
       man_made/tower/defensive:
         # 'man_made=tower, tower:type=defensive'
         name: Fortified Tower

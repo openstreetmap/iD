@@ -786,6 +786,7 @@
     {"key": "man_made", "value": "torii", "description": "🄿 Torii", "object_types": ["node", "way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/shinto.svg"},
     {"key": "man_made", "value": "tower", "description": "🄿 Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tower.svg"},
     {"key": "tower:type", "value": "bell_tower", "description": "🄿 Bell Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-bell.svg"},
+    {"key": "tower:type", "value": "cooling", "description": "🄿 Cooling Tower", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/cooling_tower.svg"},
     {"key": "tower:type", "value": "defensive", "description": "🄿 Fortified Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/castle-15.svg"},
     {"key": "tower:type", "value": "minaret", "description": "🄿 Minaret", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/domed_tower.svg"},
     {"key": "tower:type", "value": "observation", "description": "🄿 Observation Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tower.svg"},

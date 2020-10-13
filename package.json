@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@ideditor/country-coder": "^3.2.0",
-    "@ideditor/location-conflation": "~0.3.0",
+    "@ideditor/location-conflation": "~0.5.0",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/togeojson": "0.16.0",
     "@mapbox/vector-tile": "^1.3.1",
@@ -79,7 +79,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-json": "^4.0.1",
     "@rollup/plugin-node-resolve": "~8.1.0",
-    "autoprefixer": "^9.8.4",
+    "autoprefixer": "^10.0.1",
     "btoa": "^1.2.1",
     "chai": "^4.1.0",
     "cldr-core": "36.0.0",
@@ -108,7 +108,7 @@
     "phantomjs-prebuilt": "~2.1.11",
     "postcss": "^8.1.1",
     "postcss-selector-prepend": "^0.5.0",
-    "rollup": "~2.23.0",
+    "rollup": "~2.29.0",
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-progress": "^1.1.1",
     "rollup-plugin-visualizer": "~4.1.1",
@@ -119,7 +119,7 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
-    "uglify-js": "~3.10.0"
+    "uglify-js": "~3.11.2"
   },
   "engines": {
     "node": ">=10"
