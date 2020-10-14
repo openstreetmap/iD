@@ -1,15 +1,15 @@
-import { median as d3_median } from 'd3-array';
+import {median as d3_median} from 'd3-array';
 
 import {
     polygonArea as d3_polygonArea,
-    polygonHull as d3_polygonHull,
-    polygonCentroid as d3_polygonCentroid
+    polygonCentroid as d3_polygonCentroid,
+    polygonHull as d3_polygonHull
 } from 'd3-polygon';
 
-import { geoVecInterp, geoVecLength } from '../geo';
-import { osmNode } from '../osm/node';
-import { utilArrayUniq } from '../util';
-import { geoVecLengthSquare } from '../geo/vector';
+import {geoVecInterp, geoVecLength} from '../geo';
+import {osmNode} from '../osm/node';
+import {utilArrayUniq} from '../util';
+import {geoVecLengthSquare} from '../geo/vector';
 
 
 export function actionCircularize(wayId, projection, maxAngle) {
@@ -128,11 +128,10 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 ]);
 
                 // choose a nearnode to use as the original
-                var min = Infinity;
                 for (var nodeId in nearNodes) {
                     var nearAngle = nearNodes[nodeId];
                     var dist = Math.abs(nearAngle - angle);
-                    if (dist < min) {
+                    if (dist < Infinity) {
                         origNode = origNodes[nodeId];
                     }
                 }
