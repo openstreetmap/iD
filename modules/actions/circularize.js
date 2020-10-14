@@ -128,10 +128,12 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 ]);
 
                 // choose a nearnode to use as the original
+                var min = Infinity;
                 for (var nodeId in nearNodes) {
                     var nearAngle = nearNodes[nodeId];
                     var dist = Math.abs(nearAngle - angle);
-                    if (dist < Infinity) {
+                    if (dist < min) {
+                        min = dist;
                         origNode = origNodes[nodeId];
                     }
                 }
