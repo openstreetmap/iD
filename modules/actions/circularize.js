@@ -133,7 +133,6 @@ export function actionCircularize(wayId, projection, maxAngle) {
                     var nearAngle = nearNodes[nodeId];
                     var dist = Math.abs(nearAngle - angle);
                     if (dist < min) {
-                        dist = min;
                         origNode = origNodes[nodeId];
                     }
                 }
@@ -252,7 +251,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 return false;
             }
         }
-        
+
         //check if central angles are smaller than maxAngle
         for (i = 0; i<hull.length; i++){
             actualPoint = hull[i];
@@ -266,7 +265,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             if (angle > Math.PI){
                 angle = (2*Math.PI - angle);
             }
- 
+
             if (angle > maxAngle + epsilonAngle) {
                 return false;
             }

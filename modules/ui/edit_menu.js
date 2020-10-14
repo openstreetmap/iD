@@ -126,7 +126,7 @@ export function uiEditMenu(context) {
         }
 
         // update
-        buttons = buttonsEnter
+        buttonsEnter
             .merge(buttons)
             .classed('disabled', function(d) { return d.disabled(); });
 
