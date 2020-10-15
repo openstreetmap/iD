@@ -94,7 +94,10 @@
                 "annotation": "Canceled drawing."
             },
             "change_role": {
-                "annotation": "Changed the role of a relation member."
+                "annotation": {
+                    "one": "Changed the role of a relation member.",
+                    "other": "Changed the roles of {n} relation members."
+                }
             },
             "change_tags": {
                 "annotation": "Changed tags."
@@ -323,10 +326,16 @@
                 }
             },
             "add_member": {
-                "annotation": "Added a member to a relation."
+                "annotation": {
+                    "one": "Added a member to a relation.",
+                    "other": "Added {n} members to a relation."
+                }
             },
             "delete_member": {
-                "annotation": "Removed a member from a relation."
+                "annotation": {
+                    "one": "Removed a member from a relation.",
+                    "other": "Removed {n} members from a relation."
+                }
             },
             "reorder_members": {
                 "annotation": "Reordered a relation's members."
@@ -882,6 +891,7 @@
             "new_relation": "New relation...",
             "choose_relation": "Choose a parent relation",
             "role": "Role",
+            "multiple_roles": "Multiple Roles",
             "choose": "Select feature type",
             "results": {
                 "one": "{n} result for {search}",

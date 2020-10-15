@@ -87,7 +87,9 @@ export function uiSectionRawMemberEditor(context) {
             var member = { id: d.id, type: d.type, role: newRole };
             context.perform(
                 actionChangeMember(d.relation.id, member, d.index),
-                t('operations.change_role.annotation')
+                t('operations.change_role.annotation', {
+                    n: 1
+                })
             );
             context.validator().validate();
         }
@@ -101,7 +103,9 @@ export function uiSectionRawMemberEditor(context) {
 
         context.perform(
             actionDeleteMember(d.relation.id, d.index),
-            t('operations.delete_member.annotation')
+            t('operations.delete_member.annotation', {
+                n: 1
+            })
         );
 
         if (!context.hasEntity(d.relation.id)) {
