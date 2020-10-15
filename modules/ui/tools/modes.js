@@ -98,7 +98,7 @@ export function uiToolOldDrawModes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
-                .on('click.mode-buttons', function(d) {
+                .on('click.mode-buttons', function(d3_event, d) {
                     if (!enabled(d)) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042

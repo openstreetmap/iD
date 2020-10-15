@@ -1484,7 +1484,7 @@
   },
   {
     "old": {"type": "audio", "amenity": "studio"},
-    "replace": {"studio": "audio"}
+    "replace": {"studio": "audio", "amenity": "studio"}
   },
   {
     "old": {"type": "broad_leaved"},
@@ -1544,7 +1544,7 @@
   },
   {
     "old": {"type": "video", "amenity": "studio"},
-    "replace": {"studio": "video"}
+    "replace": {"studio": "video", "amenity": "studio"}
   },
   {
     "old": {"type": "water", "man_made": "pipeline"},

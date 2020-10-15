@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { modeSelect } from '../../modes/select';
@@ -34,11 +34,11 @@ export function uiSectionSelectionList(context) {
         return section;
     };
 
-    function selectEntity(entity) {
+    function selectEntity(d3_event, entity) {
         context.enter(modeSelect(context, [entity.id]));
     }
 
-    function deselectEntity(entity) {
+    function deselectEntity(d3_event, entity) {
         d3_event.stopPropagation();
 
         var selectedIDs = _selectedIDs.slice();

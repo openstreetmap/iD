@@ -1,4 +1,4 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { geoVecAdd } from '../geo';
@@ -87,16 +87,16 @@ export function uiEditMenu(context) {
             .on('click', click)
             // don't listen for `mouseup` because we only care about non-mouse pointer types
             .on('pointerup', pointerup)
-            .on('pointerdown mousedown', function pointerdown() {
+            .on('pointerdown mousedown', function pointerdown(d3_event) {
                 // don't let button presses also act as map input - #1869
                 d3_event.stopPropagation();
             })
-            .on('mouseenter.highlight', function(d) {
+            .on('mouseenter.highlight', function(d3_event, d) {
                 if (!d.relatedEntityIds || d3_select(this).classed('disabled')) return;
 
                 utilHighlightEntities(d.relatedEntityIds(), true, context);
             })
-            .on('mouseleave.highlight', function(d) {
+            .on('mouseleave.highlight', function(d3_event, d) {
                 if (!d.relatedEntityIds) return;
 
                 utilHighlightEntities(d.relatedEntityIds(), false, context);
@@ -145,11 +145,11 @@ export function uiEditMenu(context) {
 
         var lastPointerUpType;
         // `pointerup` is always called before `click`
-        function pointerup() {
+        function pointerup(d3_event) {
             lastPointerUpType = d3_event.pointerType;
         }
 
-        function click(operation) {
+        function click(d3_event, operation) {
             d3_event.stopPropagation();
 
             if (operation.relatedEntityIds) {

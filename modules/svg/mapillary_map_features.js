@@ -55,7 +55,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
-    function click(d) {
+    function click(d3_event, d) {
         var service = getService();
         if (!service) return;
 

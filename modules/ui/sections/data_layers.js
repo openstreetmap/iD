@@ -1,6 +1,5 @@
 import _debounce from 'lodash-es/debounce';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -112,7 +111,7 @@ export function uiSectionDataLayers(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d) { toggleLayer(d.id); });
+            .on('change', function(d3_event, d) { toggleLayer(d.id); });
 
         labelEnter
             .append('span')
@@ -163,7 +162,7 @@ export function uiSectionDataLayers(context) {
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function(d) { toggleLayer(d.id); });
+            .on('change', function(d3_event, d) { toggleLayer(d.id); });
 
         labelEnter
             .append('span')
@@ -280,7 +279,7 @@ export function uiSectionDataLayers(context) {
             return dataLayer && dataLayer.template() === d.template;
         }
 
-        function selectVTLayer(d) {
+        function selectVTLayer(d3_event, d) {
             prefs('settings-custom-data-url', d.template);
             if (dataLayer) {
                 dataLayer.template(d.template, d.src);
@@ -344,7 +343,7 @@ export function uiSectionDataLayers(context) {
                 .title(t.html('map_data.layers.custom.zoom'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 if (d3_select(this).classed('disabled')) return;
 
                 d3_event.preventDefault();
@@ -369,7 +368,7 @@ export function uiSectionDataLayers(context) {
             .classed('disabled', !hasData);
     }
 
-    function editCustom() {
+    function editCustom(d3_event) {
         d3_event.preventDefault();
         context.container()
             .call(settingsCustomData);
@@ -407,7 +406,7 @@ export function uiSectionDataLayers(context) {
         historyPanelLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() {
+            .on('change', function(d3_event) {
                 d3_event.preventDefault();
                 context.ui().info.toggle('history');
             });
@@ -429,7 +428,7 @@ export function uiSectionDataLayers(context) {
         measurementPanelLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() {
+            .on('change', function(d3_event) {
                 d3_event.preventDefault();
                 context.ui().info.toggle('measurement');
             });

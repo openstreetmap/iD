@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event } from 'd3-selection';
 
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
@@ -73,7 +72,7 @@ export function uiDisclosure(context, key, expandedDefault) {
         }
 
 
-        function toggle() {
+        function toggle(d3_event) {
             d3_event.preventDefault();
 
             _expanded = !_expanded;

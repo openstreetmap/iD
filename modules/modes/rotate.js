@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -105,7 +104,7 @@ export function modeRotate(context, entityIDs) {
     }
 
 
-    function finish() {
+    function finish(d3_event) {
         d3_event.stopPropagation();
         context.replace(actionNoop(), annotation);
         context.enter(modeSelect(context, entityIDs));

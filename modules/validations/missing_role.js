@@ -65,7 +65,9 @@ export function validationMissingRole() {
                         onClick: function(context) {
                             context.perform(
                                 actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
-                                t('operations.delete_member.annotation')
+                                t('operations.delete_member.annotation', {
+                                    n: 1
+                                })
                             );
                         }
                     })
@@ -93,7 +95,9 @@ export function validationMissingRole() {
                 var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
                 context.perform(
                     actionChangeMember(this.issue.entityIds[0], member, oldMember.index),
-                    t('operations.change_role.annotation')
+                    t('operations.change_role.annotation', {
+                        n: 1
+                    })
                 );
             }
         });

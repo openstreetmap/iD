@@ -1,7 +1,3 @@
-import {
-    event as d3_event
-} from 'd3-selection';
-
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
@@ -36,7 +32,7 @@ export function uiSectionPrivacy(context) {
       thirdPartyIconsEnter
         .append('input')
         .attr('type', 'checkbox')
-        .on('change', () => {
+        .on('change', (d3_event) => {
           d3_event.preventDefault();
           _showThirdPartyIcons = (_showThirdPartyIcons === 'true') ? 'false' : 'true';
           prefs('preferences.privacy.thirdpartyicons', _showThirdPartyIcons);

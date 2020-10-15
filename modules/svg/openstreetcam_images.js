@@ -69,7 +69,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     }
 
 
-    function click(d) {
+    function click(d3_event, d) {
         var service = getService();
         if (!service) return;
 
@@ -84,7 +84,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     }
 
 
-    function mouseover(d) {
+    function mouseover(d3_event, d) {
         var service = getService();
         if (service) service.setStyles(context, d);
     }

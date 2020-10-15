@@ -31,9 +31,5 @@
     "tags": {
         "waterway": "tidal_channel"
     },
-    "addTags": {
-        "waterway": "tidal_channel",
-        "tidal": "yes"
-    },
     "name": "Tidal Channel"
 }

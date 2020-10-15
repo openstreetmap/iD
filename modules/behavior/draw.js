@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -42,7 +41,7 @@ export function behaviorDraw(context) {
 
     // related code
     // - `mode/drag_node.js` `datum()`
-    function datum() {
+    function datum(d3_event) {
         var mode = context.mode();
         var isNote = mode && (mode.id.indexOf('note') !== -1);
         if (d3_event.altKey || isNote) return {};
@@ -60,7 +59,7 @@ export function behaviorDraw(context) {
         return (d && d.properties && d.properties.target) ? d : {};
     }
 
-    function pointerdown() {
+    function pointerdown(d3_event) {
 
         if (_downPointer) return;
 
@@ -72,10 +71,10 @@ export function behaviorDraw(context) {
             downLoc: pointerLocGetter(d3_event)
         };
 
-        dispatch.call('down', this, datum());
+        dispatch.call('down', this, datum(d3_event));
     }
 
-    function pointerup() {
+    function pointerup(d3_event) {
 
         if (!_downPointer || _downPointer.id !== (d3_event.pointerId || 'mouse')) return;
 
@@ -103,11 +102,11 @@ export function behaviorDraw(context) {
                 d3_select(window).on('click.draw-block', null);
             }, 500);
 
-            click(p2);
+            click(d3_event, p2);
         }
     }
 
-    function pointermove() {
+    function pointermove(d3_event) {
         if (_downPointer &&
             _downPointer.id === (d3_event.pointerId || 'mouse') &&
             !_downPointer.isCancelled) {
@@ -130,10 +129,10 @@ export function behaviorDraw(context) {
             d3_event.timeStamp - _lastPointerUpEvent.timeStamp < 100) return;
 
         _lastMouse = d3_event;
-        dispatch.call('move', this, datum());
+        dispatch.call('move', this, datum(d3_event));
     }
 
-    function pointercancel() {
+    function pointercancel(d3_event) {
         if (_downPointer &&
             _downPointer.id === (d3_event.pointerId || 'mouse')) {
 
@@ -160,8 +159,8 @@ export function behaviorDraw(context) {
     // - `mode/drag_node.js`     `doMove()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
-    function click(loc) {
-        var d = datum();
+    function click(d3_event, loc) {
+        var d = datum(d3_event);
         var target = d && d.properties && d.properties.entity;
 
         var mode = context.mode();
@@ -187,7 +186,7 @@ export function behaviorDraw(context) {
     }
 
     // treat a spacebar press like a click
-    function space() {
+    function space(d3_event) {
         d3_event.preventDefault();
         d3_event.stopPropagation();
 
@@ -216,23 +215,23 @@ export function behaviorDraw(context) {
         var loc = context.map().mouse() ||
             // or the map center if the mouse has never entered the map
             context.projection(context.map().center());
-        click(loc);
+        click(d3_event, loc);
     }
 
 
-    function backspace() {
+    function backspace(d3_event) {
         d3_event.preventDefault();
         dispatch.call('undo');
     }
 
 
-    function del() {
+    function del(d3_event) {
         d3_event.preventDefault();
         dispatch.call('cancel');
     }
 
 
-    function ret() {
+    function ret(d3_event) {
         d3_event.preventDefault();
         dispatch.call('finish');
     }

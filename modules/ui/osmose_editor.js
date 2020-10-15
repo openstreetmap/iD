@@ -118,7 +118,7 @@ export function uiOsmoseEditor(context) {
 
     buttonSection.select('.close-button')
       .html(t.html('QA.keepRight.close'))
-      .on('click.close', function(d) {
+      .on('click.close', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.osmose;
         if (qaService) {
@@ -129,7 +129,7 @@ export function uiOsmoseEditor(context) {
 
     buttonSection.select('.ignore-button')
       .html(t.html('QA.keepRight.ignore'))
-      .on('click.ignore', function(d) {
+      .on('click.ignore', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.osmose;
         if (qaService) {

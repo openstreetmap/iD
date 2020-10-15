@@ -148,6 +148,11 @@
             "description": "Maximum field value (number fields only)",
             "type": "integer"
         },
+        "increment": {
+            "description": "The amount the stepper control should add or subtract (number fields only)",
+            "minimum": 1,
+            "type": "integer"
+        },
         "prerequisiteTag": {
             "description": "Tagging constraint for showing this field in the editor",
             "type": {

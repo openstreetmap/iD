@@ -1,5 +1,4 @@
 import {
-  event as d3_event,
   select as d3_select
 } from 'd3-selection';
 
@@ -77,7 +76,7 @@ export function uiKeepRightDetails(context) {
           .on('mouseleave', () => {
             utilHighlightEntities([entityID], false, context);
           })
-          .on('click', () => {
+          .on('click', (d3_event) => {
             d3_event.preventDefault();
 
             utilHighlightEntities([entityID], false, context);

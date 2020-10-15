@@ -29,7 +29,9 @@ export default {
     commonjs(),
     json({ indent: '' }),
     babel({
-      babelHelpers: 'bundled'
+      babelHelpers: 'bundled',
+      // avoid circular dependencies due to `useBuiltIns: usage` option
+      exclude: [/\/core-js\//]
     })
   ]
 };

@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -62,7 +61,7 @@ export function uiPane(id, context) {
         context.ui().togglePanes();
     }
 
-    pane.togglePane = function() {
+    pane.togglePane = function(d3_event) {
         if (d3_event) d3_event.preventDefault();
         _paneTooltip.hide();
         context.ui().togglePanes(!_paneSelection.classed('shown') ? _paneSelection : undefined);

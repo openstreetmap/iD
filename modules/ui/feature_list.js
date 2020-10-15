@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 import * as sexagesimal from '@mapbox/sexagesimal';
@@ -70,7 +69,7 @@ export function uiFeatureList(context) {
             .on(uiCmd('⌘F'), focusSearch);
 
 
-        function focusSearch() {
+        function focusSearch(d3_event) {
             var mode = context.mode() && context.mode().id;
             if (mode !== 'browse') return;
 
@@ -79,14 +78,14 @@ export function uiFeatureList(context) {
         }
 
 
-        function keydown() {
+        function keydown(d3_event) {
             if (d3_event.keyCode === 27) {  // escape
                 search.node().blur();
             }
         }
 
 
-        function keypress() {
+        function keypress(d3_event) {
             var q = search.property('value'),
                 items = list.selectAll('.feature-list-item');
             if (d3_event.keyCode === 13 && // ↩ Return
@@ -338,7 +337,7 @@ export function uiFeatureList(context) {
         }
 
 
-        function click(d) {
+        function click(d3_event, d) {
             d3_event.preventDefault();
 
             if (d.location) {

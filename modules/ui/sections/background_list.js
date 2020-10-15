@@ -1,7 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -64,7 +63,7 @@ export function uiSectionBackgroundList(context) {
         minimapLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() {
+            .on('change', function(d3_event) {
                 d3_event.preventDefault();
                 uiMapInMap.toggle();
             });
@@ -87,7 +86,7 @@ export function uiSectionBackgroundList(context) {
         panelLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() {
+            .on('change', function(d3_event) {
                 d3_event.preventDefault();
                 context.ui().info.toggle('background');
             });
@@ -109,7 +108,7 @@ export function uiSectionBackgroundList(context) {
         locPanelLabelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .on('change', function() {
+            .on('change', function(d3_event) {
                 d3_event.preventDefault();
                 context.ui().info.toggle('location');
             });
@@ -133,7 +132,11 @@ export function uiSectionBackgroundList(context) {
             .html(t.html('background.imagery_problem_faq'));
 
         _backgroundList
-            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
+            .call(drawListItems, 'radio', function(d3_event, d) {
+                chooseBackground(d);
+            }, function(d) {
+                return !d.isHidden() && !d.overlay;
+            });
     }
 
     function setTooltips(selection) {
@@ -262,7 +265,7 @@ export function uiSectionBackgroundList(context) {
     }
 
 
-    function editCustom() {
+    function editCustom(d3_event) {
         d3_event.preventDefault();
         context.container()
             .call(_settingsCustomBackground);

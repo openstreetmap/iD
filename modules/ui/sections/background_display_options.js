@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -37,10 +36,6 @@ export function uiSectionBackgroundDisplayOptions(context) {
     }
 
     function updateValue(d, val) {
-        if (!val && d3_event && d3_event.target) {
-            val = d3_event.target.value;
-        }
-
         val = clamp(val, _minVal, _maxVal);
 
         _options[d] = val;
@@ -85,8 +80,11 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('min', _minVal)
             .attr('max', _maxVal)
             .attr('step', '0.05')
-            .on('input', function(d) {
+            .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
+                if (!val && d3_event && d3_event.target) {
+                    val = d3_event.target.value;
+                }
                 updateValue(d, val);
             });
 
@@ -94,7 +92,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .append('button')
             .attr('title', t('background.reset'))
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
                 updateValue(d, 1);
             })
@@ -108,7 +106,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .html(t.html('background.reset_all'))
             .on('click', function() {
                 for (var i = 0; i < _sliders.length; i++) {
-                    updateValue(_sliders[i],1);
+                    updateValue(_sliders[i], 1);
                 }
             });
 

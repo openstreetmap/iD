@@ -127,7 +127,7 @@ export function uiSectionValidationIssues(id, severity, context) {
                     .attr('title', t('issues.fix_one.title'))
                     .datum(d.autoFix)  // set button datum to the autofix
                     .attr('class', 'autofix action')
-                    .on('click', function(d) {
+                    .on('click', function(d3_event, d) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
 

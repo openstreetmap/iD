@@ -1,8 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    select as d3_select,
-    event as d3_event
+    select as d3_select
 } from 'd3-selection';
 
 import { uiCombobox } from '../combobox';
@@ -97,7 +96,7 @@ export function uiFieldWikidata(field, context) {
             .attr('class', 'form-field-button wiki-link')
             .attr('title', t('icons.view_on', { domain: 'wikidata.org' }))
             .call(svgIcon('#iD-icon-out-link'))
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 if (_wikiURL) window.open(_wikiURL, '_blank');
             });
@@ -133,7 +132,7 @@ export function uiFieldWikidata(field, context) {
             .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
             .call(svgIcon('#iD-operation-copy'))
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 d3_select(this.parentNode)
                     .select('input')

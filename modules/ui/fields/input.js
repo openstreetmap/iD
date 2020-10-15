@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select, event as d3_event } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -75,17 +75,19 @@ export function uiFieldText(field, context) {
 
             input.attr('type', 'text');
 
+            var inc = field.increment;
+
             var buttons = wrap.selectAll('.increment, .decrement')
-                .data(rtl ? [1, -1] : [-1, 1]);
+                .data(rtl ? [inc, -inc] : [-inc, inc]);
 
             buttons.enter()
                 .append('button')
                 .attr('class', function(d) {
-                    var which = (d === 1 ? 'increment' : 'decrement');
+                    var which = (d > 0 ? 'increment' : 'decrement');
                     return 'form-field-button ' + which;
                 })
                 .merge(buttons)
-                .on('click', function(d) {
+                .on('click', function(d3_event, d) {
                     d3_event.preventDefault();
                     var raw_vals = input.node().value || '0';
                     var vals = raw_vals.split(';');
@@ -115,7 +117,7 @@ export function uiFieldText(field, context) {
                     }
                     return '';
                 })
-                .on('click', function() {
+                .on('click', function(d3_event) {
                     d3_event.preventDefault();
 
                     var value = validIdentifierValueForLink();
