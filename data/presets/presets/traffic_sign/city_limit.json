@@ -1,12 +1,12 @@
 {
     "icon": "maki-square-stroked",
     "fields": [
-        "traffic_sign",
-        "direction",
+        "{traffic_sign}",
         "name"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "traffic_sign": "city_limit"

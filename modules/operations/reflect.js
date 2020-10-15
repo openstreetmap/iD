@@ -83,7 +83,7 @@ export function operationReflect(context, selectedIDs, axis) {
 
 
     operation.annotation = function() {
-        return t('operations.reflect.annotation.' + axis + '.' + multi);
+        return t('operations.reflect.annotation.' + axis + '.feature', { n: selectedIDs.length });
     };
 
 

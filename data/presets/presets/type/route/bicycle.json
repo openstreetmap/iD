@@ -23,5 +23,9 @@
         "type": "route",
         "route": "bicycle"
     },
+    "reference": {
+        "key": "route",
+        "value": "bicycle"
+    },
     "name": "Cycle Route"
 }

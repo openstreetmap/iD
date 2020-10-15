@@ -55,15 +55,15 @@ export function uiFieldHelp(context, fieldName) {
     var fieldHelpHeadings = {};
 
     var replacements = {
-        distField: t('restriction.controls.distance'),
-        viaField: t('restriction.controls.via'),
-        fromShadow: icon('#iD-turn-shadow', 'pre-text shadow from'),
-        allowShadow: icon('#iD-turn-shadow', 'pre-text shadow allow'),
-        restrictShadow: icon('#iD-turn-shadow', 'pre-text shadow restrict'),
-        onlyShadow: icon('#iD-turn-shadow', 'pre-text shadow only'),
-        allowTurn: icon('#iD-turn-yes', 'pre-text turn'),
-        restrictTurn: icon('#iD-turn-no', 'pre-text turn'),
-        onlyTurn: icon('#iD-turn-only', 'pre-text turn')
+        distField: t.html('restriction.controls.distance'),
+        viaField: t.html('restriction.controls.via'),
+        fromShadow: icon('#iD-turn-shadow', 'inline shadow from'),
+        allowShadow: icon('#iD-turn-shadow', 'inline shadow allow'),
+        restrictShadow: icon('#iD-turn-shadow', 'inline shadow restrict'),
+        onlyShadow: icon('#iD-turn-shadow', 'inline shadow only'),
+        allowTurn: icon('#iD-turn-yes', 'inline turn'),
+        restrictTurn: icon('#iD-turn-no', 'inline turn'),
+        onlyTurn: icon('#iD-turn-only', 'inline turn')
     };
 
 
@@ -74,12 +74,12 @@ export function uiFieldHelp(context, fieldName) {
             var subkey = helpkey + '.' + part;
             var depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t(subkey, replacements) + '\n\n';
+            return all + hhh + t.html(subkey, replacements) + '\n\n';
         }, '');
 
         return {
             key: helpkey,
-            title: t(helpkey + '.title'),
+            title: t.html(helpkey + '.title'),
             html: marked(text.trim())
         };
     });
@@ -149,7 +149,6 @@ export function uiFieldHelp(context, fieldName) {
         button.enter()
             .append('button')
             .attr('class', 'field-help-button')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-help'))
             .merge(button)
             .on('click', function () {
@@ -198,7 +197,7 @@ export function uiFieldHelp(context, fieldName) {
         titleEnter
             .append('h2')
             .attr('class', ((localizer.textDirection() === 'rtl') ? 'fr' : 'fl'))
-            .text(t('help.field.' + fieldName + '.title'));
+            .html(t.html('help.field.' + fieldName + '.title'));
 
         titleEnter
             .append('button')
@@ -220,7 +219,7 @@ export function uiFieldHelp(context, fieldName) {
             .enter()
             .append('div')
             .attr('class', 'field-help-nav-item')
-            .text(function(d) { return d; })
+            .html(function(d) { return d; })
             .on('click', function(d, i) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();

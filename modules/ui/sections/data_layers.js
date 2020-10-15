@@ -22,7 +22,7 @@ export function uiSectionDataLayers(context) {
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
-        .title(t('map_data.data_layers'))
+        .label(t.html('map_data.data_layers'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -96,14 +96,14 @@ export function uiSectionDataLayers(context) {
                 if (d.id === 'osm') {
                     d3_select(this)
                         .call(uiTooltip()
-                            .title(t('map_data.layers.' + d.id + '.tooltip'))
+                            .title(t.html('map_data.layers.' + d.id + '.tooltip'))
                             .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
                             .placement('bottom')
                         );
                 } else {
                     d3_select(this)
                         .call(uiTooltip()
-                            .title(t('map_data.layers.' + d.id + '.tooltip'))
+                            .title(t.html('map_data.layers.' + d.id + '.tooltip'))
                             .placement('bottom')
                         );
                 }
@@ -116,7 +116,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -155,7 +155,7 @@ export function uiSectionDataLayers(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t('map_data.layers.' + d.id + '.tooltip'))
+                        .title(t.html('map_data.layers.' + d.id + '.tooltip'))
                         .placement('bottom')
                     );
             });
@@ -167,7 +167,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return t('map_data.layers.' + d.id + '.title'); });
+            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -218,7 +218,7 @@ export function uiSectionDataLayers(context) {
         containerEnter
             .append('h4')
             .attr('class', 'vectortile-header')
-            .text('Detroit Vector Tiles (Beta)');
+            .html('Detroit Vector Tiles (Beta)');
 
         containerEnter
             .append('ul')
@@ -229,11 +229,10 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'vectortile-footer')
             .append('a')
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/osmus/detroit-mapping-challenge')
             .append('span')
-            .text('About these layers');
+            .html('About these layers');
 
         container = container
             .merge(containerEnter);
@@ -267,7 +266,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(function(d) { return d.name; });
+            .html(function(d) { return d.name; });
 
         // Update
         li
@@ -315,7 +314,7 @@ export function uiSectionDataLayers(context) {
         var labelEnter = liEnter
             .append('label')
             .call(uiTooltip()
-                .title(t('map_data.layers.custom.tooltip'))
+                .title(t.html('map_data.layers.custom.tooltip'))
                 .placement('top')
             );
 
@@ -326,12 +325,13 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .text(t('map_data.layers.custom.title'));
+            .html(t.html('map_data.layers.custom.title'));
 
         liEnter
             .append('button')
+            .attr('class', 'open-data-options')
             .call(uiTooltip()
-                .title(t('settings.custom_data.tooltip'))
+                .title(t.html('settings.custom_data.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', editCustom)
@@ -339,16 +339,19 @@ export function uiSectionDataLayers(context) {
 
         liEnter
             .append('button')
+            .attr('class', 'zoom-to-data')
             .call(uiTooltip()
-                .title(t('map_data.layers.custom.zoom'))
+                .title(t.html('map_data.layers.custom.zoom'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function() {
+                if (d3_select(this).classed('disabled')) return;
+
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 dataLayer.fitZoom();
             })
-            .call(svgIcon('#iD-icon-framed-dot'));
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
 
         // Update
         ul = ul
@@ -361,6 +364,9 @@ export function uiSectionDataLayers(context) {
             .selectAll('input')
             .property('disabled', !hasData)
             .property('checked', showsData);
+
+        ul.selectAll('button.zoom-to-data')
+            .classed('disabled', !hasData);
     }
 
     function editCustom() {
@@ -393,7 +399,7 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'history-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t('map_data.history_panel.tooltip'))
+                .title(t.html('map_data.history_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.history.key'))])
                 .placement('top')
             );
@@ -408,14 +414,14 @@ export function uiSectionDataLayers(context) {
 
         historyPanelLabelEnter
             .append('span')
-            .text(t('map_data.history_panel.title'));
+            .html(t.html('map_data.history_panel.title'));
 
         var measurementPanelLabelEnter = panelsListEnter
             .append('li')
             .attr('class', 'measurement-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t('map_data.measurement_panel.tooltip'))
+                .title(t.html('map_data.measurement_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.measurement.key'))])
                 .placement('top')
             );
@@ -430,7 +436,7 @@ export function uiSectionDataLayers(context) {
 
         measurementPanelLabelEnter
             .append('span')
-            .text(t('map_data.measurement_panel.title'));
+            .html(t.html('map_data.measurement_panel.title'));
     }
 
     context.layers().on('change.uiSectionDataLayers', section.reRender);

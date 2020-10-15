@@ -5,7 +5,7 @@ This file documents efforts toward establishing a public API for iD.
 ##### iD Standalone
 
 iD supports several URL parameters. When constructing a URL to a standalone instance
-of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters are available
+of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters are available
 **in the hash portion of the URL**:
 
 * __`background`__ - The value from a `sourcetag` property in iD's
@@ -31,8 +31,8 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
 * __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity, and, unless a `map` parameter is also provided, centers the map on it.<br/>
   _Example:_ `id=n1207480649`
-* __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. The default locale is set by the browser.<br/>
-  _Example:_ `locale=en-US`, `locale=de`<br/>
+* __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Multiple codes may be specified in order of preference. The first valid code will be the locale, while the rest will be used as fallbacks if certain text hasn't been translated. The default locale preferences are set by the browser.<br/>
+  _Example:_ `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>
   _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/develop/dist/locales).
 * __`map`__ - A slash-separated `zoom/latitude/longitude`.<br/>
   _Example:_ `map=20.00/38.90085/-77.02271`
@@ -43,6 +43,9 @@ of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters ar
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
   _Example:_ `photo_overlay=streetside,mapillary,openstreetcam`<br/>
   _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `mapillary-map-features`, `openstreetcam`
+* __`photo`__ - The service and ID of the street-level photo to show.<br/>
+  _Example:_ `photo=streetside/718514589`<br/>
+  _Available prefixes:_ `streetside/`, `mapillary/`, `openstreetcam/`
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
@@ -177,7 +180,7 @@ iD is written in a modular style and bundled with [rollup.js](http://rollupjs.or
 which makes hot code replacement tricky.  (ES6 module exports are
 [immutable live bindings](http://www.2ality.com/2015/07/es6-module-exports.html)).
 Because of this, the parts of iD which are designed for customization are exported
-as live bound objects that can be overriden at runtime _before initializing the iD context_.
+as live bound objects that can be overridden at runtime _before initializing the iD context_.
 
 ### Services
 
@@ -219,7 +222,7 @@ iD.fileFetcher.cache().imagery = [{
 ```
 
 Each imagery source should have the following properties:
-* `id` - Unique identifier for this source (also used as a url paramater)
+* `id` - Unique identifier for this source (also used as a url parameter)
 * `name` - Display name for the source
 * `type` - Source type, currently only `tms` is supported
 * `template` - Url template, valid replacement tokens include:

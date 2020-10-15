@@ -5,10 +5,13 @@
         "area"
     ],
     "terms": [
-        "tape casettes",
+        "tape cassettes",
         "CDs",
         "compact discs",
-        "vinyl records"
+        "vinyl records",
+        "CD store",
+        "casette",
+        "casette store"
     ],
     "tags": {
         "shop": "music"

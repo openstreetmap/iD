@@ -13,6 +13,7 @@
         "email",
         "fax",
         "gnis/feature_id",
+        "level",
         "opening_hours",
         "opening_hours/covid19",
         "phone",

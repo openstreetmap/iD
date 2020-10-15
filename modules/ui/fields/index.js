@@ -21,6 +21,7 @@ import {
 
 import {
     uiFieldCombo,
+    uiFieldManyCombo,
     uiFieldMultiCombo,
     uiFieldNetworkCombo,
     uiFieldSemiCombo,
@@ -64,6 +65,7 @@ export var uiFields = {
     lanes: uiFieldLanes,
     localized: uiFieldLocalized,
     maxspeed: uiFieldMaxspeed,
+    manyCombo: uiFieldManyCombo,
     multiCombo: uiFieldMultiCombo,
     networkCombo: uiFieldNetworkCombo,
     number: uiFieldNumber,

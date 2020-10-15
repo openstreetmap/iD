@@ -3,19 +3,15 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 
 
-// Pass `which` object of the form:
+// Pass `what` object of the form:
 // {
 //   key: 'string',     // required
 //   value: 'string'    // optional
-// }
-//   -or-
-// {
-//   rtype: 'string'    // relation type  (e.g. 'multipolygon')
 // }
 //   -or-
 // {
@@ -49,7 +45,7 @@ export function uiTagReference(what) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-description')
-                .text(t('inspector.no_documentation_key'));
+                .html(t.html('inspector.no_documentation_key'));
             done();
             return;
         }
@@ -68,11 +64,10 @@ export function uiTagReference(what) {
         _body
             .append('p')
             .attr('class', 'tag-reference-description')
-            .text(docs.description || t('inspector.no_documentation_key'))
+            .html(docs.description ? localizer.htmlForLocalizedText(docs.description, docs.descriptionLocaleCode) : t.html('inspector.no_documentation_key'))
             .append('a')
             .attr('class', 'tag-reference-edit')
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .attr('title', t('inspector.edit_reference'))
             .attr('href', docs.editURL)
             .call(svgIcon('#iD-icon-edit', 'inline'));
@@ -82,11 +77,10 @@ export function uiTagReference(what) {
               .append('a')
               .attr('class', 'tag-reference-link')
               .attr('target', '_blank')
-              .attr('tabindex', -1)
               .attr('href', docs.wiki.url)
               .call(svgIcon('#iD-icon-out-link', 'inline'))
               .append('span')
-              .text(t(docs.wiki.text));
+              .html(t.html(docs.wiki.text));
         }
 
         // Add link to info about "good changeset comments" - #2923
@@ -95,11 +89,10 @@ export function uiTagReference(what) {
                 .append('a')
                 .attr('class', 'tag-reference-comment-link')
                 .attr('target', '_blank')
-                .attr('tabindex', -1)
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .attr('href', t('commit.about_changeset_comments_link'))
                 .append('span')
-                .text(t('commit.about_changeset_comments'));
+                .html(t.html('commit.about_changeset_comments'));
         }
     }
 
@@ -156,9 +149,8 @@ export function uiTagReference(what) {
 
         _button = _button.enter()
             .append('button')
-            .attr('class', 'tag-reference-button ' + klass)
+            .attr('class', 'tag-reference-button ' + (klass || ''))
             .attr('title', t('icons.information'))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-' + (iconName || 'inspect')))
             .merge(_button);
 
@@ -179,7 +171,7 @@ export function uiTagReference(what) {
 
 
     tagReference.body = function(selection) {
-        var itemID = what.qid || what.rtype || (what.key + '-' + what.value);
+        var itemID = what.qid || (what.key + '-' + (what.value || ''));
         _body = selection.selectAll('.tag-reference-body')
             .data([itemID], function(d) { return d; });
 

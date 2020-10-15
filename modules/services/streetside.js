@@ -15,7 +15,7 @@ import {
   geoRotate, geoScaleToZoom, geoVecLength
 } from '../geo';
 
-import { utilArrayUnion, utilQsString, utilRebind, utilTiler, utilUniqueDomId } from '../util';
+import { utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
 
 const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
@@ -26,7 +26,7 @@ const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
 const maxResults = 2000;
 const tileZoom = 16.5;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
-const dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
+const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
 const minHfov = 10;         // zoom in degrees:  20, 10, 5
 const maxHfov = 90;         // zoom out degrees
 const defaultHfov = 45;
@@ -36,8 +36,18 @@ let _resolution = 512;    // higher numbers are slower - 512, 1024, 2048, 4096
 let _currScene = 0;
 let _ssCache;
 let _pannellumViewer;
-let _sceneOptions;
-let _dataUrlArray = [];
+let _sceneOptions = {
+  showFullscreenCtrl: false,
+  autoLoad: true,
+  compass: true,
+  yaw: 0,
+  minHfov: minHfov,
+  maxHfov: maxHfov,
+  hfov: defaultHfov,
+  type: 'cubemap',
+  cubeMap: []
+};
+let _loadViewerPromise;
 
 
 /**
@@ -135,7 +145,7 @@ function loadNextTilePage(which, url, tile) {
     connectSequences();
 
     if (which === 'bubbles') {
-      dispatch.call('loadedBubbles');
+      dispatch.call('loadedImages');
     }
   });
 }
@@ -276,7 +286,7 @@ function loadCanvas(imageGroup) {
       let canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face);
       const which = { '01': 0, '02': 1, '03': 2, '10': 3, '11': 4, '12': 5 };
       let face = data[0].imgInfo.face;
-      _dataUrlArray[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
+      _sceneOptions.cubeMap[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
       return { status: 'loadCanvas for face ' + data[0].imgInfo.face + 'ok'};
     });
 }
@@ -423,6 +433,11 @@ export default {
   },
 
 
+  cachedImage: function(imageKey) {
+      return _ssCache.bubbles.points[imageKey];
+  },
+
+
   sequences: function(projection) {
     const viewport = projection.clipExtent();
     const min = [viewport[0][0], viewport[1][1]];
@@ -476,13 +491,9 @@ export default {
   },
 
 
-  /**
-   * loadViewer() create the streeside viewer.
-   */
-  loadViewer: function(context) {
-    let that = this;
+  ensureViewerLoaded: function(context) {
 
-    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+    if (_loadViewerPromise) return _loadViewerPromise;
 
     // create ms-wrapper, a photo wrapper class
     let wrap = context.container().select('.photoviewer').selectAll('.ms-wrapper')
@@ -494,6 +505,10 @@ export default {
       .append('div')
       .attr('class', 'photo-wrapper ms-wrapper')
       .classed('hide', true);
+
+    let that = this;
+
+    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     // inject div to support streetside viewer (pannellum) and attribution line
     wrapEnter
@@ -529,36 +544,18 @@ export default {
     controlsEnter
       .append('button')
       .on('click.back', step(-1))
-      .text('◄');
+      .html('◄');
 
     controlsEnter
       .append('button')
       .on('click.forward', step(1))
-      .text('►');
+      .html('►');
 
 
     // create working canvas for stitching together images
     wrap = wrap
       .merge(wrapEnter)
       .call(setupCanvas, true);
-
-    // load streetside pannellum viewer css
-    d3_select('head').selectAll('#ideditor-streetside-viewercss')
-      .data([0])
-      .enter()
-      .append('link')
-      .attr('id', 'ideditor-streetside-viewercss')
-      .attr('rel', 'stylesheet')
-      .attr('href', context.asset(pannellumViewerCSS));
-
-    // load streetside pannellum viewer js
-    d3_select('head').selectAll('#ideditor-streetside-viewerjs')
-      .data([0])
-      .enter()
-      .append('script')
-      .attr('id', 'ideditor-streetside-viewerjs')
-      .attr('src', context.asset(pannellumViewerJS));
-
 
     // Register viewer resize handler
     context.ui().photoviewer.on('resize.streetside', () => {
@@ -567,6 +564,45 @@ export default {
       }
     });
 
+    _loadViewerPromise = new Promise((resolve, reject) => {
+
+      let loadedCount = 0;
+      function loaded() {
+        loadedCount += 1;
+        // wait until both files are loaded
+        if (loadedCount === 2) resolve();
+      }
+
+      const head = d3_select('head');
+
+      // load streetside pannellum viewer css
+      head.selectAll('#ideditor-streetside-viewercss')
+        .data([0])
+        .enter()
+        .append('link')
+        .attr('id', 'ideditor-streetside-viewercss')
+        .attr('rel', 'stylesheet')
+        .attr('crossorigin', 'anonymous')
+        .attr('href', context.asset(pannellumViewerCSS))
+        .on('load.serviceStreetside', loaded)
+        .on('error.serviceStreetside', reject);
+
+      // load streetside pannellum viewer js
+      head.selectAll('#ideditor-streetside-viewerjs')
+        .data([0])
+        .enter()
+        .append('script')
+        .attr('id', 'ideditor-streetside-viewerjs')
+        .attr('crossorigin', 'anonymous')
+        .attr('src', context.asset(pannellumViewerJS))
+        .on('load.serviceStreetside', loaded)
+        .on('error.serviceStreetside', reject);
+      })
+      .catch(function() {
+        _loadViewerPromise = null;
+      });
+
+    return _loadViewerPromise;
 
     function step(stepBy) {
       return () => {
@@ -628,49 +664,29 @@ export default {
             }
           });
 
-        let nextBubble = nextID && _ssCache.bubbles.points[nextID];
+        let nextBubble = nextID && that.cachedImage(nextID);
         if (!nextBubble) return;
 
         context.map().centerEase(nextBubble.loc);
 
-        that.selectImage(context, nextBubble)
-          .then(response => {
-            if (response.status === 'ok') {
-              _sceneOptions.yaw = yaw;
-              that.showViewer(context);
-            }
-          });
+        that.selectImage(context, nextBubble.key)
+          .yaw(yaw)
+          .showViewer(context);
       };
     }
   },
 
 
+  yaw: function(yaw) {
+    if (typeof yaw !== 'number') return yaw;
+    _sceneOptions.yaw = yaw;
+    return this;
+  },
+
   /**
    * showViewer()
    */
-  showViewer: function(context, yaw) {
-    if (!_sceneOptions) return;
-
-    if (yaw !== undefined) {
-      _sceneOptions.yaw = yaw;
-    }
-
-    if (!_pannellumViewer) {
-      this.initViewer();
-    } else {
-      // make a new scene
-      let sceneID = ++_currScene + '';
-      _pannellumViewer
-        .addScene(sceneID, _sceneOptions)
-        .loadScene(sceneID);
-
-      // remove previous scene
-      if (_currScene > 2) {
-        sceneID = (_currScene - 1) + '';
-        _pannellumViewer
-          .removeScene(sceneID);
-      }
-    }
+  showViewer: function(context) {
 
     let wrap = context.container().select('.photoviewer')
       .classed('hide', false);
@@ -706,6 +722,8 @@ export default {
     context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
+    this.updateUrlImage(null);
+
     return this.setStyles(context, null, true);
   },
 
@@ -713,8 +731,11 @@ export default {
   /**
    * selectImage().
    */
-  selectImage: function (context, d) {
+  selectImage: function (context, key) {
     let that = this;
+
+    let d = this.cachedImage(key);
+
     let viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(d);
 
@@ -726,9 +747,11 @@ export default {
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
       .style('display', 'block');
 
-    if (!d) {
-      return Promise.resolve({ status: 'ok' });
-    }
+    if (!d) return this;
+
+    this.updateUrlImage(key);
+
+    _sceneOptions.northOffset = d.ca;
 
     let line1 = attribution
       .append('div')
@@ -760,18 +783,14 @@ export default {
           hfov: _pannellumViewer.getHfov()
         };
 
-        that.selectImage(context, d)
-          .then(response => {
-            if (response.status === 'ok') {
-              _sceneOptions = Object.assign(_sceneOptions, viewstate);
-              that.showViewer(context);
-            }
-          });
+        _sceneOptions = Object.assign(_sceneOptions, viewstate);
+        that.selectImage(context, d.key)
+          .showViewer(context);
       });
 
     label
       .append('span')
-      .text(t('streetside.hires'));
+      .html(t.html('streetside.hires'));
 
 
     let captureInfo = line1
@@ -787,18 +806,18 @@ export default {
         .attr('class', 'captured_by')
         .attr('target', '_blank')
         .attr('href', 'https://www.microsoft.com/en-us/maps/streetside')
-        .text('©' + yyyy + ' Microsoft');
+        .html('©' + yyyy + ' Microsoft');
 
       captureInfo
         .append('span')
-        .text('|');
+        .html('|');
     }
 
     if (d.captured_at) {
       captureInfo
         .append('span')
         .attr('class', 'captured_at')
-        .text(localeTimestamp(d.captured_at));
+        .html(localeTimestamp(d.captured_at));
     }
 
     // Add image links
@@ -812,7 +831,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
         '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .text(t('streetside.view_on_bing'));
+      .html(t.html('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -820,7 +839,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-      .text(t('streetside.report'));
+      .html(t.html('streetside.report'));
 
 
     let bubbleIdQuadKey = d.key.toString(4);
@@ -848,29 +867,28 @@ export default {
       });
     });
 
-    return loadFaces(faces)
-      .then(() => {
-        _sceneOptions = {
-          showFullscreenCtrl: false,
-          autoLoad: true,
-          compass: true,
-          northOffset: d.ca,
-          yaw: 0,
-          minHfov: minHfov,
-          maxHfov: maxHfov,
-          hfov: defaultHfov,
-          type: 'cubemap',
-          cubeMap: [
-            _dataUrlArray[0],
-            _dataUrlArray[1],
-            _dataUrlArray[2],
-            _dataUrlArray[3],
-            _dataUrlArray[4],
-            _dataUrlArray[5]
-          ]
-        };
-        return { status: 'ok' };
+    loadFaces(faces)
+      .then(function() {
+
+        if (!_pannellumViewer) {
+          that.initViewer();
+        } else {
+          // make a new scene
+          let sceneID = ++_currScene + '';
+          _pannellumViewer
+            .addScene(sceneID, _sceneOptions)
+            .loadScene(sceneID);
+
+          // remove previous scene
+          if (_currScene > 2) {
+            sceneID = (_currScene - 1) + '';
+            _pannellumViewer
+              .removeScene(sceneID);
+          }
+        }
       });
+
+    return this;
   },
 
 
@@ -932,6 +950,19 @@ export default {
     }
 
     return this;
+  },
+
+
+  updateUrlImage: function(imageKey) {
+      if (!window.mocha) {
+          var hash = utilStringQs(window.location.hash);
+          if (imageKey) {
+              hash.photo = 'streetside/' + imageKey;
+          } else {
+              delete hash.photo;
+          }
+          window.location.replace('#' + utilQsString(hash, true));
+      }
   },
 
 

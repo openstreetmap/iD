@@ -86,7 +86,7 @@ export function uiTooltip(klass) {
 
             keyhintWrapEnter
                 .append('span')
-                .html(t('tooltip_keyhint'));
+                .html(t.html('tooltip_keyhint'));
 
             keyhintWrap = keyhintWrapEnter.merge(keyhintWrap);
 

@@ -20,7 +20,7 @@ export function operationStraighten(context, selectedIDs) {
     function chooseAction() {
         // straighten selected nodes
         if (_wayIDs.length === 0 && _nodeIDs.length > 2) {
-            _geometry = 'points';
+            _geometry = 'point';
             return actionStraightenNodes(_nodeIDs, context.projection);
 
         // straighten selected ways (possibly between range of 2 selected nodes)
@@ -67,7 +67,7 @@ export function operationStraighten(context, selectedIDs) {
                 _extent = utilTotalExtent(_nodeIDs, context.graph());
             }
 
-            _geometry = _wayIDs.length === 1 ? 'line' : 'lines';
+            _geometry = 'line';
             return actionStraightenWay(selectedIDs, context.projection);
         }
 
@@ -125,12 +125,12 @@ export function operationStraighten(context, selectedIDs) {
         var disable = operation.disabled();
         return disable ?
             t('operations.straighten.' + disable + '.' + _amount) :
-            t('operations.straighten.description.' + _geometry);
+            t('operations.straighten.description.' + _geometry + (_wayIDs.length === 1 ? '' : 's'));
     };
 
 
     operation.annotation = function() {
-        return t('operations.straighten.annotation.' + _geometry);
+        return t('operations.straighten.annotation.' + _geometry, { n: _wayIDs.length ? _wayIDs.length : _nodeIDs.length });
     };
 
 

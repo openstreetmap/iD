@@ -104,7 +104,7 @@ function cardinalDirection(bearing) {
   return t(`QA.improveOSM.directions.${compass[dir]}`);
 }
 
-// Errors shouldn't obscure eachother
+// Errors shouldn't obscure each other
 function preventCoincident(loc, bumpUp) {
   let coincident = false;
   do {

@@ -74,9 +74,11 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .selectImage(context, d)
-            .updateViewer(context, d)
-            .showViewer(context);
+            .ensureViewerLoaded(context)
+            .then(function() {
+                service.selectImage(context, d.key)
+                    .showViewer(context);
+            });
 
         context.map().centerEase(d.loc);
     }

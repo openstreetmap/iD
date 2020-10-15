@@ -15,13 +15,13 @@ export function uiKeepRightDetails(context) {
 
   function issueDetail(d) {
     const { itemType, parentIssueType } = d;
-    const unknown = t('inspector.unknown');
+    const unknown = t.html('inspector.unknown');
     let replacements = d.replacements || {};
     replacements.default = unknown;  // special key `default` works as a fallback string
 
-    let detail = t(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
+    let detail = t.html(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
     if (detail === unknown) {
-      detail = t(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
+      detail = t.html(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
     }
     return detail;
   }
@@ -48,7 +48,7 @@ export function uiKeepRightDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .text(() => t('QA.keepRight.detail_description'));
+        .html(t.html('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')
@@ -58,6 +58,7 @@ export function uiKeepRightDetails(context) {
     // If there are entity links in the error message..
     let relatedEntities = [];
     descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+      .attr('href', '#')
       .each(function() {
         const link = d3_select(this);
         const isObjectLink = link.classed('error_object_link');

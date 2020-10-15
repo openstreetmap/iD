@@ -104,11 +104,10 @@ export function uiChangesetEditor(context) {
         commentEnter
             .append('a')
             .attr('target', '_blank')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-alert', 'inline'))
             .attr('href', t('commit.google_warning_link'))
             .append('span')
-            .text(t('commit.google_warning'));
+            .html(t.html('commit.google_warning'));
 
         commentEnter
             .transition()

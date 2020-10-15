@@ -4,6 +4,7 @@
         "name",
         "network",
         "operator",
+        "vehicles",
         "address",
         "building_area",
         "internet_access"

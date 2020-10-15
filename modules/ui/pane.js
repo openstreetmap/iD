@@ -11,7 +11,7 @@ import { uiTooltip } from './tooltip';
 export function uiPane(id, context) {
 
     var _key;
-    var _title = '';
+    var _label = '';
     var _description = '';
     var _iconName = '';
     var _sections; // array of uiSection objects
@@ -24,9 +24,9 @@ export function uiPane(id, context) {
         id: id
     };
 
-    pane.title = function(val) {
-        if (!arguments.length) return _title;
-        _title = val;
+    pane.label = function(val) {
+        if (!arguments.length) return _label;
+        _label = val;
         return pane;
     };
 
@@ -107,7 +107,7 @@ export function uiPane(id, context) {
 
         heading
             .append('h2')
-            .text(_title);
+            .html(_label);
 
         heading
             .append('button')

@@ -58,10 +58,6 @@ export function uiPhotoviewer(context) {
                 buildResizeListener(selection, 'resize', dispatch, { resizeOnY: true })
             );
 
-        services.streetside.loadViewer(context);
-        services.mapillary.loadViewer(context);
-        services.openstreetcam.loadViewer(context);
-
         function buildResizeListener(target, eventName, dispatch, options) {
 
             var resizeOnX = !!options.resizeOnX;

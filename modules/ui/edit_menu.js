@@ -5,6 +5,7 @@ import { geoVecAdd } from '../geo';
 import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { utilRebind } from '../util/rebind';
+import { utilHighlightEntities } from '../util/util';
 import { svgIcon } from '../svg/icon';
 
 
@@ -89,6 +90,16 @@ export function uiEditMenu(context) {
             .on('pointerdown mousedown', function pointerdown() {
                 // don't let button presses also act as map input - #1869
                 d3_event.stopPropagation();
+            })
+            .on('mouseenter.highlight', function(d) {
+                if (!d.relatedEntityIds || d3_select(this).classed('disabled')) return;
+
+                utilHighlightEntities(d.relatedEntityIds(), true, context);
+            })
+            .on('mouseleave.highlight', function(d) {
+                if (!d.relatedEntityIds) return;
+
+                utilHighlightEntities(d.relatedEntityIds(), false, context);
             });
 
         buttonsEnter.each(function(d) {
@@ -109,7 +120,7 @@ export function uiEditMenu(context) {
         if (showLabels) {
             buttonsEnter.append('span')
                 .attr('class', 'label')
-                .text(function(d) {
+                .html(function(d) {
                     return d.title;
                 });
         }
@@ -140,6 +151,11 @@ export function uiEditMenu(context) {
 
         function click(operation) {
             d3_event.stopPropagation();
+
+            if (operation.relatedEntityIds) {
+                utilHighlightEntities(operation.relatedEntityIds(), false, context);
+            }
+
             if (operation.disabled()) {
                 if (lastPointerUpType === 'touch' ||
                     lastPointerUpType === 'pen') {
@@ -148,7 +164,7 @@ export function uiEditMenu(context) {
                         .duration(4000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation disabled')
-                        .text(operation.tooltip)();
+                        .label(operation.tooltip)();
                 }
             } else {
                 if (lastPointerUpType === 'touch' ||
@@ -157,7 +173,7 @@ export function uiEditMenu(context) {
                         .duration(2000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation')
-                        .text(operation.annotation() || operation.title)();
+                        .label(operation.annotation() || operation.title)();
                 }
 
                 operation();

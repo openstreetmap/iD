@@ -27,14 +27,14 @@ export function uiSectionRawMembershipEditor(context) {
         .shouldDisplay(function() {
             return _entityIDs && _entityIDs.length === 1;
         })
-        .title(function() {
+        .label(function() {
             var entity = context.hasEntity(_entityIDs[0]);
             if (!entity) return '';
 
             var parents = context.graph().parentRelations(entity);
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t('inspector.title_count', { title: t('inspector.relations'), count: count });
+            return t('inspector.title_count', { title: t.html('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -74,7 +74,7 @@ export function uiSectionRawMembershipEditor(context) {
 
 
     function changeRole(d) {
-        if (d === 0) return;    // called on newrow (shoudn't happen)
+        if (d === 0) return;    // called on newrow (shouldn't happen)
         if (_inChange) return;  // avoid accidental recursive call #5731
 
         var oldRole = d.member.role;
@@ -86,6 +86,7 @@ export function uiSectionRawMembershipEditor(context) {
                 actionChangeMember(d.relation.id, Object.assign({}, d.member, { role: newRole }), d.index),
                 t('operations.change_role.annotation')
             );
+            context.validator().validate();
         }
         _inChange = false;
     }
@@ -102,6 +103,7 @@ export function uiSectionRawMembershipEditor(context) {
                 actionAddMember(d.relation.id, member),
                 t('operations.add_member.annotation')
             );
+            context.validator().validate();
 
         } else {
             var relation = osmRelation();
@@ -110,7 +112,7 @@ export function uiSectionRawMembershipEditor(context) {
                 actionAddMember(relation.id, member),
                 t('operations.add.annotation.relation')
             );
-
+            // changing the mode also runs `validate`
             context.enter(modeSelect(context, [relation.id]).newFeature(true));
         }
     }
@@ -118,7 +120,7 @@ export function uiSectionRawMembershipEditor(context) {
 
     function deleteMembership(d) {
         this.blur();           // avoid keeping focus on the button
-        if (d === 0) return;   // called on newrow (shoudn't happen)
+        if (d === 0) return;   // called on newrow (shouldn't happen)
 
         // remove the hover-highlight styling
         utilHighlightEntities([d.relation.id], false, context);
@@ -127,11 +129,16 @@ export function uiSectionRawMembershipEditor(context) {
             actionDeleteMember(d.relation.id, d.index),
             t('operations.delete_member.annotation')
         );
+        context.validator().validate();
     }
 
 
     function fetchNearbyRelations(q, callback) {
-        var newRelation = { relation: null, value: t('inspector.new_relation') };
+        var newRelation = {
+            relation: null,
+            value: t('inspector.new_relation'),
+            display: t.html('inspector.new_relation')
+        };
 
         var entityID = _entityIDs[0];
 
@@ -259,7 +266,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(function(d) {
+            .html(function(d) {
                 var matched = presetManager.match(d.relation, context.graph());
                 return (matched && matched.name()) || t('inspector.relation');
             });
@@ -267,11 +274,10 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .text(function(d) { return utilDisplayName(d.relation); });
+            .html(function(d) { return utilDisplayName(d.relation); });
 
         labelEnter
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'remove member-delete')
             .call(svgIcon('#iD-operation-delete'))
             .on('click', deleteMembership);
@@ -330,7 +336,6 @@ export function uiSectionRawMembershipEditor(context) {
 
         newLabelEnter
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'remove member-delete')
             .call(svgIcon('#iD-operation-delete'))
             .on('click', function() {
@@ -377,7 +382,7 @@ export function uiSectionRawMembershipEditor(context) {
         addRelationButton
             .call(svgIcon('#iD-icon-plus', 'light'));
         addRelationButton
-            .call(uiTooltip().title(t('inspector.add_to_relation')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
+            .call(uiTooltip().title(t.html('inspector.add_to_relation')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
 
         addRowEnter
             .append('div')

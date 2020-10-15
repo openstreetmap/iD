@@ -38,7 +38,7 @@ export function uiPresetList(context) {
 
         var message = messagewrap
             .append('h3')
-            .text(t('inspector.choose'));
+            .html(t.html('inspector.choose'));
 
         messagewrap
             .append('button')
@@ -85,7 +85,8 @@ export function uiPresetList(context) {
         function keypress() {
             // enter
             var value = search.property('value');
-            if (d3_event.keyCode === 13 && value.length) {
+            if (d3_event.keyCode === 13 && // ↩ Return
+                value.length) {
                 list.selectAll('.preset-list-item:first-child')
                     .each(function(d) { d.choose.call(this); });
             }
@@ -110,12 +111,15 @@ export function uiPresetList(context) {
                 messageText = t('inspector.choose');
             }
             list.call(drawList, results);
-            message.text(messageText);
+            message.html(messageText);
         }
 
         var searchWrap = selection
             .append('div')
             .attr('class', 'search-header');
+
+        searchWrap
+            .call(svgIcon('#iD-icon-search', 'pre-text'));
 
         var search = searchWrap
             .append('input')
@@ -127,11 +131,14 @@ export function uiPresetList(context) {
             .on('keypress', keypress)
             .on('input', inputevent);
 
-        searchWrap
-            .call(svgIcon('#iD-icon-search', 'pre-text'));
-
         if (_autofocus) {
             search.node().focus();
+
+            // Safari 14 doesn't always like to focus immediately,
+            // so try again on the next pass
+            setTimeout(function() {
+                search.node().focus();
+            }, 0);
         }
 
         var listWrap = selection
@@ -323,7 +330,7 @@ export function uiPresetList(context) {
                 .attr('class', 'namepart')
                 .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
-                .html(function() { return preset.name() + '&hellip;'; });
+                .html(function() { return preset.nameLabel() + '&hellip;'; });
 
             box = selection.append('div')
                 .attr('class', 'subgrid')
@@ -386,13 +393,17 @@ export function uiPresetList(context) {
                 .append('div')
                 .attr('class', 'label-inner');
 
-            // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
+            var nameparts = [
+                preset.nameLabel(),
+                preset.subtitleLabel()
+            ].filter(Boolean);
+
             label.selectAll('.namepart')
-                .data(preset.name().split(' – '))
+                .data(nameparts)
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')
-                .text(function(d) { return d; });
+                .html(function(d) { return d; });
 
             wrap.call(item.reference.button);
             selection.call(item.reference.body);
@@ -425,7 +436,7 @@ export function uiPresetList(context) {
         };
 
         item.preset = preset;
-        item.reference = uiTagReference(preset.reference(entityGeometries()[0]), context);
+        item.reference = uiTagReference(preset.reference(), context);
 
         return item;
     }
@@ -455,10 +466,10 @@ export function uiPresetList(context) {
 
             if (isHiddenPreset) {
                 var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
-                var tooltipIdSuffix = isAutoHidden ? 'zoom' : 'manual';
-                var tooltipObj = { features: t('feature.' + hiddenPresetFeaturesId + '.description') };
                 d3_select(this).call(uiTooltip()
-                    .title(t('inspector.hidden_preset.' + tooltipIdSuffix, tooltipObj))
+                    .title(t.html('inspector.hidden_preset.' + (isAutoHidden ? 'zoom' : 'manual'), {
+                        features: t.html('feature.' + hiddenPresetFeaturesId + '.description')
+                    }))
                     .placement(index < 2 ? 'bottom' : 'top')
                 );
             }

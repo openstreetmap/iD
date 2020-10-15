@@ -36,7 +36,7 @@ export function uiImproveOsmEditor(context) {
 
     headerEnter
       .append('h3')
-        .text(t('QA.improveOSM.title'));
+        .html(t.html('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')
       .data([0]);
@@ -80,7 +80,7 @@ export function uiImproveOsmEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .text(t('note.newComment'));
+        .html(t.html('note.newComment'));
 
     saveSectionEnter
       .append('textarea')
@@ -135,7 +135,7 @@ export function uiImproveOsmEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .text(t('QA.keepRight.save_comment'));
+        .html(t.html('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')
@@ -160,9 +160,9 @@ export function uiImproveOsmEditor(context) {
       });
 
     buttonSection.select('.close-button')
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.close${andComment}`);
+        return t.html(`QA.keepRight.close${andComment}`);
       })
       .on('click.close', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -174,9 +174,9 @@ export function uiImproveOsmEditor(context) {
       });
 
     buttonSection.select('.ignore-button')
-      .text(d => {
+      .html(d => {
         const andComment = (d.newComment ? '_comment' : '');
-        return t(`QA.keepRight.ignore${andComment}`);
+        return t.html(`QA.keepRight.ignore${andComment}`);
       })
       .on('click.ignore', function(d) {
         this.blur();    // avoid keeping focus on the button - #4641

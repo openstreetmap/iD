@@ -1,6 +1,6 @@
 import { json as d3_json } from 'd3-fetch';
 
-import { utilArrayUniq, utilQsString } from '../util';
+import { utilQsString } from '../util';
 import { localizer } from '../core/localizer';
 
 var apibase = 'https://www.wikidata.org/w/api.php?';
@@ -33,7 +33,7 @@ export default {
             type: 'item',
             // the language to search
             language: lang,
-            // the langauge for the label and description in the result
+            // the language for the label and description in the result
             uselang: lang,
             limit: 10,
             origin: '*'
@@ -85,15 +85,13 @@ export default {
 
 
     languagesToQuery: function() {
-        var localeCode = localizer.localeCode().toLowerCase();
-        // HACK: en-us isn't a wikidata language. We should really be filtering by
-        // the languages known to be supported by wikidata.
-        if (localeCode === 'en-us') localeCode = 'en';
-        return utilArrayUniq([
-            localeCode,
-            localizer.languageCode().toLowerCase(),
-            'en'
-        ]);
+        return localizer.localeCodes().map(function(code) {
+            return code.toLowerCase();
+        }).filter(function(code) {
+            // HACK: en-us isn't a wikidata language. We should really be filtering by
+            // the languages known to be supported by wikidata.
+            return code !== 'en-us';
+        });
     },
 
 
@@ -157,14 +155,20 @@ export default {
 
             var i;
             var description;
-            if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
-                description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
+            for (i in langs) {
+                let code = langs[i];
+                if (entity.descriptions[code] && entity.descriptions[code].language === code) {
+                    description = entity.descriptions[code];
+                    break;
+                }
             }
+            if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
 
             // prepare result
             var result = {
                 title: entity.id,
-                description: description,
+                description: description ? description.value : '',
+                descriptionLocaleCode: description ? description.language : '',
                 editURL: 'https://www.wikidata.org/wiki/' + entity.id
             };
 

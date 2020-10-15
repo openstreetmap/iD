@@ -30,7 +30,7 @@ export function uiViewOnKeepRight() {
 
     linkEnter
       .append('span')
-        .text(t('inspector.view_on_keepRight'));
+        .html(t.html('inspector.view_on_keepRight'));
   }
 
   viewOnKeepRight.what = function(val) {

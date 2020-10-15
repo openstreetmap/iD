@@ -13,5 +13,9 @@
         "type": "route",
         "route": "foot"
     },
-    "name": "Foot Route"
+    "reference": {
+        "key": "route",
+        "value": "foot"
+    },
+    "name": "Walking Route"
 }

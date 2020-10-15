@@ -294,15 +294,15 @@ export function uiSidebar(context) {
                     .classed('inspector-hidden', false)
                     .classed('inspector-hover', false);
 
-                if (!inspector.entityIDs() || !utilArrayIdentical(inspector.entityIDs(), ids) || inspector.state() !== 'select') {
-                    inspector
-                        .state('select')
-                        .entityIDs(ids)
-                        .newFeature(newFeature);
+                // reload the UI even if the ids are the same since the entities
+                // themselves may have changed
+                inspector
+                    .state('select')
+                    .entityIDs(ids)
+                    .newFeature(newFeature);
 
-                    inspectorWrap
-                        .call(inspector);
-                }
+                inspectorWrap
+                    .call(inspector);
 
             } else {
                 inspector

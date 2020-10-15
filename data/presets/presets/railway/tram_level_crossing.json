@@ -1,0 +1,21 @@
+{
+    "icon": "temaki-crossing_tram_solid",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "railway": "tram_level_crossing"
+    },
+    "terms": [
+        "crossing",
+        "grade crossing",
+        "level crossing",
+        "pedestrian crossing",
+        "road tram crossing",
+        "streetcar crossing",
+        "tram road crossing",
+        "tramway crossing",
+        "trolley crossing"
+    ],
+    "name": "Tram-Road Crossing"
+}

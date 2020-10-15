@@ -201,6 +201,7 @@ osmEntity.prototype = {
             var matchesDeprecatedTags = oldKeys.every(function(oldKey) {
                 if (!tags[oldKey]) return false;
                 if (d.old[oldKey] === '*') return true;
+                if (d.old[oldKey] === tags[oldKey]) return true;
 
                 var vals = tags[oldKey].split(';').filter(Boolean);
                 if (vals.length === 0) {

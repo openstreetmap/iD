@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { helpString } from './helper';
+import { helpHtml } from './helper';
 import { t } from '../../core/localizer';
 import { utilRebind } from '../../util/rebind';
 
@@ -16,22 +16,22 @@ export function uiIntroWelcome(context, reveal) {
     function welcome() {
         context.map().centerZoom([-85.63591, 41.94285], 19);
         reveal('.intro-nav-wrap .chapter-welcome',
-            helpString('intro.welcome.welcome'),
-            { buttonText: t('intro.ok'), buttonCallback: practice }
+            helpHtml('intro.welcome.welcome'),
+            { buttonText: t.html('intro.ok'), buttonCallback: practice }
         );
     }
 
     function practice() {
         reveal('.intro-nav-wrap .chapter-welcome',
-            helpString('intro.welcome.practice'),
-            { buttonText: t('intro.ok'), buttonCallback: words }
+            helpHtml('intro.welcome.practice'),
+            { buttonText: t.html('intro.ok'), buttonCallback: words }
         );
     }
 
     function words() {
         reveal('.intro-nav-wrap .chapter-welcome',
-            helpString('intro.welcome.words'),
-            { buttonText: t('intro.ok'), buttonCallback: chapters }
+            helpHtml('intro.welcome.words'),
+            { buttonText: t.html('intro.ok'), buttonCallback: chapters }
         );
     }
 
@@ -39,7 +39,7 @@ export function uiIntroWelcome(context, reveal) {
     function chapters() {
         dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-navigation',
-            helpString('intro.welcome.chapters', { next: t('intro.navigation.title') })
+            helpHtml('intro.welcome.chapters', { next: t('intro.navigation.title') })
         );
     }
 

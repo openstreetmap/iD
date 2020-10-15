@@ -9,7 +9,7 @@ import { uiSection } from '../section';
 export function uiSectionMapStyleOptions(context) {
 
     var section = uiSection('fill-area', context)
-        .title(t('map_data.style_options'))
+        .label(t.html('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -48,7 +48,7 @@ export function uiSectionMapStyleOptions(context) {
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
-                    return t(name + '.' + d + '.tooltip');
+                    return t.html(name + '.' + d + '.tooltip');
                 })
                 .keys(function(d) {
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
@@ -69,7 +69,7 @@ export function uiSectionMapStyleOptions(context) {
 
         label
             .append('span')
-            .text(function(d) { return t(name + '.' + d + '.description'); });
+            .html(function(d) { return t.html(name + '.' + d + '.description'); });
 
         // Update
         items = items

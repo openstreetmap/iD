@@ -1,0 +1,15 @@
+{
+    "icon": "maki-shop",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "hair extensions",
+        "hair extentions"
+    ],
+    "tags": {
+        "shop": "wigs"
+    },
+    "name": "Wig Shop"
+}

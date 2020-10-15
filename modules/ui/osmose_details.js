@@ -45,7 +45,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.keepRight.detail_description'));
+          .html(t.html('QA.keepRight.detail_description'));
 
       div
         .append('p')
@@ -65,7 +65,7 @@ export function uiOsmoseDetails(context) {
       .append('div')
         .attr('class', 'qa-details-subsection');
 
-    // Suggested Fix (musn't exist for every issue type)
+    // Suggested Fix (mustn't exist for every issue type)
     if (issueString(_qaItem, 'fix')) {
       const div = detailsEnter
         .append('div')
@@ -73,7 +73,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.osmose.fix_title'));
+          .html(t.html('QA.osmose.fix_title'));
 
       div
         .append('p')
@@ -83,7 +83,7 @@ export function uiOsmoseDetails(context) {
           .attr('target', '_blank');
     }
 
-    // Common Pitfalls (musn't exist for every issue type)
+    // Common Pitfalls (mustn't exist for every issue type)
     if (issueString(_qaItem, 'trap')) {
       const div = detailsEnter
         .append('div')
@@ -91,7 +91,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.osmose.trap_title'));
+          .html(t.html('QA.osmose.trap_title'));
 
       div
         .append('p')
@@ -118,7 +118,7 @@ export function uiOsmoseDetails(context) {
         if (d.detail) {
           detailsDiv
             .append('h4')
-              .text(() => t('QA.osmose.detail_title'));
+              .html(t.html('QA.osmose.detail_title'));
 
           detailsDiv
             .append('p')
@@ -131,7 +131,7 @@ export function uiOsmoseDetails(context) {
         // Create list of linked issue elements
         elemsDiv
           .append('h4')
-            .text(() => t('QA.osmose.elems_title'));
+            .html(t.html('QA.osmose.elems_title'));
 
         elemsDiv
           .append('ul').selectAll('li')
@@ -139,8 +139,9 @@ export function uiOsmoseDetails(context) {
           .enter()
           .append('li')
           .append('a')
+            .attr('href', '#')
             .attr('class', 'error_entity_link')
-            .text(d => d)
+            .html(d => d)
             .each(function() {
               const link = d3_select(this);
               const entityID = this.textContent;

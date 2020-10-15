@@ -41,9 +41,9 @@ export function operationReverse(context, selectedIDs) {
             var entity = context.hasEntity(act.entityID());
             return entity && entity.type === 'node';
         }).length;
-        var typeID = nodeActionCount === 0 ? 'line' : (nodeActionCount === acts.length ? 'point' : 'features');
-        if (typeID !== 'features' && acts.length > 1) typeID += 's';
-        return typeID;
+        if (nodeActionCount === 0) return 'line';
+        if (nodeActionCount === acts.length) return 'point';
+        return 'feature';
     }
 
 
@@ -63,7 +63,8 @@ export function operationReverse(context, selectedIDs) {
 
 
     operation.annotation = function() {
-        return t('operations.reverse.annotation.' + reverseTypeID());
+        var acts = actions();
+        return t('operations.reverse.annotation.' + reverseTypeID(), { n: acts.length });
     };
 
 

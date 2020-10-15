@@ -11,7 +11,8 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, continui
     var behavior = behaviorDrawWay(context, wayID, mode, startGraph)
         .on('rejectedSelfIntersection.modeDrawLine', function() {
             context.ui().flash
-                .text(t('self_intersection.error.lines'))();
+                .iconName('#iD-icon-no')
+                .label(t('self_intersection.error.lines'))();
         });
 
     mode.wayID = wayID;

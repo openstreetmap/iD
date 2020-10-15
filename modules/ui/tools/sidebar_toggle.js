@@ -6,7 +6,7 @@ export function uiToolSidebarToggle(context) {
 
     var tool = {
         id: 'sidebar_toggle',
-        label: t('toolbar.inspect')
+        label: t.html('toolbar.inspect')
     };
 
     tool.render = function(selection) {
@@ -18,7 +18,7 @@ export function uiToolSidebarToggle(context) {
             })
             .call(uiTooltip()
                 .placement('bottom')
-                .title(t('sidebar.tooltip'))
+                .title(t.html('sidebar.tooltip'))
                 .keys([t('sidebar.key')])
                 .scrollContainer(context.container().select('.top-toolbar'))
             )

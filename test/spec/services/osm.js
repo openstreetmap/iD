@@ -728,11 +728,11 @@ describe('iD.serviceOsm', function () {
             });
         });
 
-        describe('#imageryBlacklists', function() {
-            it('updates imagery blacklists', function(done) {
+        describe('#imageryBlocklists', function() {
+            it('updates imagery blocklists', function(done) {
                 connection.status(function() {
-                    var blacklists = connection.imageryBlacklists();
-                    expect(blacklists).to.deep.equal(['\.foo\.com','\.bar\.org']);
+                    var blocklists = connection.imageryBlocklists();
+                    expect(blocklists).to.deep.equal([new RegExp('\.foo\.com'), new RegExp('\.bar\.org')]);
                     done();
                 });
 

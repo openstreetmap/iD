@@ -8,7 +8,9 @@
         "building_area",
         "internet_access",
         "internet_access/fee",
-        "internet_access/ssid"
+        "internet_access/ssid",
+        "phone",
+        "website"
     ],
     "moreFields": [
         "air_conditioning",
@@ -21,10 +23,8 @@
         "opening_hours/covid19",
         "outdoor_seating",
         "payment_multi",
-        "phone",
         "ref/vatin",
         "smoking",
-        "website",
         "wheelchair"
     ],
     "geometry": [

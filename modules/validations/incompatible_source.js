@@ -34,7 +34,7 @@ export function validationIncompatibleSource() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
+                    return entity ? t.html('issues.incompatible_source.' + invalidSource.id + '.feature.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
@@ -43,7 +43,7 @@ export function validationIncompatibleSource() {
                 dynamicFixes: function() {
                     return [
                         new validationIssueFix({
-                            title: t('issues.fix.remove_proprietary_data.title')
+                            title: t.html('issues.fix.remove_proprietary_data.title')
                         })
                     ];
                 }
@@ -60,7 +60,7 @@ export function validationIncompatibleSource() {
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .text(t('issues.incompatible_source.' + id + '.reference'));
+                    .html(t.html('issues.incompatible_source.' + id + '.reference'));
             };
         }
     };

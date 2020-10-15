@@ -12,7 +12,7 @@ export function uiFeatureInfo(context) {
         var hiddenList = features.hidden().map(function(k) {
             if (stats[k]) {
                 count += stats[k];
-                return String(stats[k]) + ' ' + t('feature.' + k + '.description');
+                return t('inspector.title_count', { title: t.html('feature.' + k + '.description'), count: stats[k] });
             }
         }).filter(Boolean);
 
@@ -28,8 +28,7 @@ export function uiFeatureInfo(context) {
             selection.append('a')
                 .attr('class', 'chip')
                 .attr('href', '#')
-                .attr('tabindex', -1)
-                .html(t('feature_info.hidden_warning', { count: count }))
+                .html(t.html('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
                 .on('click', function() {
                     tooltipBehavior.hide();

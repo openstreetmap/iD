@@ -16,8 +16,8 @@ export function uiSectionSelectionList(context) {
         .shouldDisplay(function() {
             return _selectedIDs.length > 1;
         })
-        .title(function() {
-            return t('inspector.title_count', { title: t('inspector.features'), count: _selectedIDs.length });
+        .label(function() {
+            return t('inspector.title_count', { title: t.html('inspector.features'), count: _selectedIDs.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -71,7 +71,7 @@ export function uiSectionSelectionList(context) {
 
         // Enter
         var enter = items.enter()
-            .append('div')
+            .append('button')
             .attr('class', 'feature-list-item')
             .on('click', selectEntity);
 
@@ -86,7 +86,7 @@ export function uiSectionSelectionList(context) {
             });
 
         var label = enter
-            .append('button')
+            .append('div')
             .attr('class', 'label');
 
         enter
@@ -119,10 +119,10 @@ export function uiSectionSelectionList(context) {
             });
 
         items.selectAll('.entity-type')
-            .text(function(entity) { return presetManager.match(entity, context.graph()).name(); });
+            .html(function(entity) { return presetManager.match(entity, context.graph()).name(); });
 
         items.selectAll('.entity-name')
-            .text(function(d) {
+            .html(function(d) {
                 // fetch latest entity
                 var entity = context.entity(d.id);
                 return utilDisplayName(entity);

@@ -1,5 +1,18 @@
 {
     "icon": "temaki-cairn",
+    "fields": [
+        "height",
+        "ele",
+        "ele_node",
+        "check_date"
+    ],
+    "moreFields": [
+        "colour",
+        "material",
+        "name",
+        "operator",
+        "ref"
+    ],
     "geometry": [
         "point",
         "area"

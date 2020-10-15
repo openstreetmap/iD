@@ -33,7 +33,7 @@ export function uiViewOnOSM(context) {
 
         linkEnter
             .append('span')
-            .text(t('inspector.view_on_osm'));
+            .html(t.html('inspector.view_on_osm'));
     }
 
 

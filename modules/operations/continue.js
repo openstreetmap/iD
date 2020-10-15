@@ -5,45 +5,51 @@ import { utilArrayGroupBy } from '../util';
 
 
 export function operationContinue(context, selectedIDs) {
-    var graph = context.graph();
-    var entities = selectedIDs.map(function(id) { return graph.entity(id); });
-    var geometries = Object.assign(
+
+    var _entities = selectedIDs.map(function(id) { return context.graph().entity(id); });
+    var _geometries = Object.assign(
         { line: [], vertex: [] },
-        utilArrayGroupBy(entities, function(entity) { return entity.geometry(graph); })
+        utilArrayGroupBy(_entities, function(entity) { return entity.geometry(context.graph()); })
     );
-    var vertex = geometries.vertex[0];
+    var _vertex = _geometries.vertex.length && _geometries.vertex[0];
 
 
     function candidateWays() {
-        return graph.parentWays(vertex).filter(function(parent) {
-            return parent.geometry(graph) === 'line' &&
+        return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
+            return parent.geometry(context.graph()) === 'line' &&
                 !parent.isClosed() &&
-                parent.affix(vertex.id) &&
-                (geometries.line.length === 0 || geometries.line[0] === parent);
-        });
+                parent.affix(_vertex.id) &&
+                (_geometries.line.length === 0 || _geometries.line[0] === parent);
+        }) : [];
     }
+
+    var _candidates = candidateWays();
 
 
     var operation = function() {
-        var candidate = candidateWays()[0];
+        var candidate = _candidates[0];
         context.enter(
-            modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(vertex.id), true)
+            modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(_vertex.id), true)
         );
     };
 
 
+    operation.relatedEntityIds = function() {
+        return _candidates.length ? [_candidates[0].id] : [];
+    };
+
+
     operation.available = function() {
-        return geometries.vertex.length === 1 &&
-            geometries.line.length <= 1 &&
-            !context.features().hasHiddenConnections(vertex, context.graph());
+        return _geometries.vertex.length === 1 &&
+            _geometries.line.length <= 1 &&
+            !context.features().hasHiddenConnections(_vertex, context.graph());
     };
 
 
     operation.disabled = function() {
-        var candidates = candidateWays();
-        if (candidates.length === 0) {
+        if (_candidates.length === 0) {
             return 'not_eligible';
-        } else if (candidates.length > 1) {
+        } else if (_candidates.length > 1) {
             return 'multiple';
         }
 

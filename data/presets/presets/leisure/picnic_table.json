@@ -3,10 +3,14 @@
     "fields": [
         "material",
         "lit",
-        "bench"
+        "bench",
+        "colour"
     ],
     "moreFields": [
-        "level"
+        "height",
+        "level",
+        "manufacturer",
+        "operator"
     ],
     "geometry": [
         "point"

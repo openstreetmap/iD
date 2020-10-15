@@ -1,7 +1,7 @@
 import { osmNode } from '../osm/node';
 
 
-// Disconect the ways at the given node.
+// Disconnect the ways at the given node.
 //
 // Optionally, disconnect only the given ways.
 //

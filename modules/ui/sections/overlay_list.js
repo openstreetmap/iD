@@ -12,7 +12,7 @@ import { uiSection } from '../section';
 export function uiSectionOverlayList(context) {
 
     var section = uiSection('overlay-list', context)
-        .title(t('background.overlays'))
+        .label(t.html('background.overlays'))
         .disclosureContent(renderDisclosureContent);
 
     var _overlayList = d3_select(null);
@@ -81,7 +81,7 @@ export function uiSectionOverlayList(context) {
 
         label
             .append('span')
-            .text(function(d) { return d.name(); });
+            .html(function(d) { return d.label(); });
 
 
         layerList.selectAll('li')

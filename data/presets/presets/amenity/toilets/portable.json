@@ -1,0 +1,29 @@
+{
+    "icon": "temaki-latrine",
+    "fields": [
+        "toilets/disposal",
+        "{amenity/toilets}",
+        "toilets/handwashing"
+    ],
+    "moreFields": [
+        "{amenity/toilets}"
+    ],
+    "geometry": [
+        "point",
+        "area",
+        "vertex"
+    ],
+    "terms": [
+        "restroom",
+        "privy",
+        "porta john",
+        "porta potty",
+        "portapot",
+        "chemical toilet"
+    ],
+    "tags": {
+        "amenity": "toilets",
+        "portable": "yes"
+    },
+    "name": "Portable Toilet"
+}

@@ -65,7 +65,7 @@ export function uiOsmoseHeader() {
     headerEnter
       .append('div')
         .attr('class', 'qa-header-label')
-        .text(issueTitle);
+        .html(issueTitle);
   }
 
   osmoseHeader.issue = function(val) {

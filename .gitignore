@@ -6,7 +6,6 @@
 npm-debug.log
 package-lock.json
 
-the_noun_project.auth
 transifex.auth
 
 /dist/*.js

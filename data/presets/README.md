@@ -30,7 +30,7 @@ A basic preset is of the form:
     ],
     // The geometry types for which this preset is valid.
     // options are point, area, line, and vertex.
-    // vertexes are points that are parts of lines, like the nodes in a road
+    // vertices are points that are parts of lines, like the nodes in a road
     // lines are unclosed ways, and areas are closed ways
     "geometry": [
         "point", "area"
@@ -147,7 +147,7 @@ preset are generally not inherited. E.g. the `shop` field is not inherited by `s
 
 ##### `icon`
 
-The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"` or `"icon": "tnp-2009223"`.
+The name of a local SVG icon file. You can use icons from any of the following icon sets. When specifying an icon, use the prefixed version of the name, for example `"icon": "maki-park"`.
 
 * [iD's spritesheet](https://github.com/openstreetmap/iD/tree/develop/svg/iD-sprite/presets) (`iD-`)
 * [Maki](https://labs.mapbox.com/maki-icons/) (`maki-`), map-specific icons from Mapbox
@@ -158,11 +158,6 @@ The name of a local SVG icon file. You can use icons from any of the following i
         * [Solid](https://fontawesome.com/icons?d=gallery&s=solid&m=free) (`fas-`)
         * [Regular](https://fontawesome.com/icons?d=gallery&s=regular&m=free) (`far-`)
         * [Brands](https://fontawesome.com/icons?d=gallery&s=brands&m=free) (`fab-`)
-* [The Noun Project](https://thenounproject.com) (`tnp-`), millions of general-purpose icons
-    * The licenses vary. You can only use the public-domain icons in iD, such as those from [OCHA Visual](https://thenounproject.com/ochavisual/).
-    * The icon styles vary. Avoid thin or overly-detailed icons since they will not look good at small sizes.
-    * Use the numeric ID of the icon (e.g. `2009223`). This is shown in the URL when you select an icon on their site.
-    * Unfortunately, you must [sign up for a free API key](https://thenounproject.com/developers/) in order to download new icons (even for public-domain icons). Add a file called `the_noun_project.auth` to the root of your local iD instance containing your credentials like `{"consumer_key": "xxxxxx", "consumer_secret": "xxxxxx"}`. This file is not version-controlled.
 
 ##### `imageURL`
 
@@ -197,7 +192,7 @@ By default, presets are available everywhere.
 
 ##### `notCountryCodes`
 
-An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blocklist.
 
 ##### `replacement`
 
@@ -270,8 +265,10 @@ A string specifying the UI and behavior of the field. Must be one of the followi
 * `combo` - Dropdown field for picking one option out of many (e.g. `surface=*`)
 * `typeCombo` - Dropdown field picking a specific type from a generic category key<br/>
 (e.g. `waterway=*`.  If unset, tag will be `waterway=yes`, but dropdown contains options like `stream`, `ditch`, `river`)
-* `multiCombo` - Dropdown field for adding `yes` values to a common multikey<br/>
+* `multiCombo` - Dropdown field for adding `yes` values to multiple keys with the same prefix (a common multikey)<br/>
 (e.g. `recycling:*` -> `recycling:glass=yes`, `recycling:paper=yes`, etc.)
+* `manyCombo` - Dropdown field for adding `yes` values to many different keys<br/>
+(e.g. `bus`, `tram`, `train` -> `bus=yes`, `tram=yes`, etc.)
 * `networkCombo` - Dropdown field that helps users pick a route `network` tag (localized for editing location)
 * `semiCombo` - Dropdown field for adding multiple values to a semicolon-delimited list<br/>
 (e.g. `sport=*` -> `soccer;lacrosse;athletics;field_hockey`)
@@ -379,7 +376,7 @@ For combo fields, spaces are replaced with underscores in the tag value if `snak
 
 ##### `caseSensitive`
 
-For combo fields, case-sensitve field values are allowed if `caseSensitive` is `true`. The default is `false`.
+For combo fields, case-sensitive field values are allowed if `caseSensitive` is `true`. The default is `false`.
 
 ##### `min_value`
 
@@ -423,7 +420,7 @@ By default, fields are available everywhere.
 
 ##### `notCountryCodes`
 
-An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blacklist instead of a whitelist.
+An array of two-letter, lowercase [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes. Similar to `countryCodes` except a blocklist.
 
 ##### `urlFormat`
 

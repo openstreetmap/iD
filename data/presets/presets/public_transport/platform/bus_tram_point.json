@@ -1,0 +1,43 @@
+{
+    "icon": "temaki-tram",
+    "fields": [
+        "{public_transport/platform_point}"
+    ],
+    "moreFields": [
+        "{public_transport/platform_point}"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "bus": "yes",
+        "tram": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "bus": "yes",
+        "tram": "yes",
+        "highway": "bus_stop"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "bus",
+        "light rail",
+        "platform",
+        "public transit",
+        "public transportation",
+        "rail",
+        "streetcar",
+        "track",
+        "tram",
+        "transit",
+        "transportation",
+        "trolley"
+    ],
+    "name": "Tram & Bus Stop"
+}

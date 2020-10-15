@@ -52,7 +52,7 @@ export function uiFieldLocalized(field, context) {
     var _selection = d3_select(null);
     var _multilingual = [];
     var _buttonTip = uiTooltip()
-        .title(t('translate.translate'))
+        .title(t.html('translate.translate'))
         .placement('left');
     var _wikiTitles;
     var _entityIDs = [];
@@ -219,7 +219,6 @@ export function uiFieldLocalized(field, context) {
         translateButton = translateButton.enter()
             .append('button')
             .attr('class', 'localized-add form-field-button')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-plus'))
             .merge(translateButton);
 
@@ -260,7 +259,6 @@ export function uiFieldLocalized(field, context) {
             var preset = presetManager.match(latest, context.graph());
             if (preset && preset.suggestion) return;   // already accepted
 
-            // note: here we are testing against "decorated" names, i.e. 'Starbucks – Cafe'
             var name = utilGetSetValue(input).trim();
             var matched = allSuggestions.filter(function(s) { return name === s.name(); });
 
@@ -293,25 +291,10 @@ export function uiFieldLocalized(field, context) {
         }
 
 
-        // user hit escape, clean whatever preset name appears after the last ' – '
+        // user hit escape
         function cancelBrand() {
             var name = utilGetSetValue(input);
-            var clean = cleanName(name);
-            if (clean !== name) {
-                utilGetSetValue(input, clean);
-                dispatch.call('change', this, { name: clean });
-            }
-        }
-
-        // Remove whatever is after the last ' – '
-        // NOTE: split/join on en-dash, not a hypen (to avoid conflict with fr - nl names in Brussels etc)
-        function cleanName(name) {
-            var parts = name.split(' – ');
-            if (parts.length > 1) {
-                parts.pop();
-                name = parts.join(' – ');
-            }
-            return name;
+            dispatch.call('change', this, { name: name });
         }
 
 
@@ -333,14 +316,17 @@ export function uiFieldLocalized(field, context) {
                         var sTag = s.id.split('/', 2);
                         var sKey = sTag[0];
                         var sValue = sTag[1];
+                        var subtitle = s.subtitle();
                         var name = s.name();
+                        if (subtitle) name += ' – ' + subtitle;
                         var dist = utilEditDistance(value, name.substring(0, value.length));
                         var matchesPreset = (pKey === sKey && (!pValue || pValue === sValue));
 
                         if (dist < 1 || (matchesPreset && dist < 3)) {
                             var obj = {
+                                value: s.name(),
                                 title: name,
-                                value: name,
+                                display: s.nameLabel() + (subtitle ? ' – ' + s.subtitleLabel() : ''),
                                 suggestion: s,
                                 dist: dist + (matchesPreset ? 0 : 1)  // penalize if not matched preset
                             };
@@ -513,7 +499,7 @@ export function uiFieldLocalized(field, context) {
                 text
                     .append('span')
                     .attr('class', 'label-textvalue')
-                    .text(t('translate.localized_translation_label'));
+                    .html(t.html('translate.localized_translation_label'));
 
                 text
                     .append('span')
