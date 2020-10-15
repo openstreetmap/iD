@@ -5,6 +5,7 @@ import {
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
+import { utilGetSetValue } from '../../util';
 
 export function uiSectionPhotoOverlays(context) {
 
@@ -214,9 +215,9 @@ export function uiSectionPhotoOverlays(context) {
             .append('input')
             .attr('type', 'date')
             .attr('class', 'list-item-input')
-            .attr('placeholder', 'dd/mm/yyyy')
-            .property('value', function(d) {
-                return context.photos().dateFilterValue(d);
+            .attr('placeholder', t('units.year_month_day'))
+            .each(function(d) {
+                utilGetSetValue(d3_select(this), context.photos().dateFilterValue(d) || '');
             })
             .on('change', function(d3_event, d) {
                 var value = d3_select(this).property('value');

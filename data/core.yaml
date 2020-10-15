@@ -2312,6 +2312,8 @@ en:
     west: "W"
     coordinate: "{coordinate}{direction}"
     coordinate_pair: "{latitude}, {longitude}"
+    # translate the letters but leave the format the same
+    year_month_day: "YYYY-MM-DD"
   wikidata:
     identifier: "Identifier"
     label: "Label"

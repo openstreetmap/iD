@@ -2858,7 +2858,8 @@
             "east": "E",
             "west": "W",
             "coordinate": "{coordinate}{direction}",
-            "coordinate_pair": "{latitude}, {longitude}"
+            "coordinate_pair": "{latitude}, {longitude}",
+            "year_month_day": "YYYY-MM-DD"
         },
         "wikidata": {
             "identifier": "Identifier",
