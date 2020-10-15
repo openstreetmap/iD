@@ -51,8 +51,25 @@ export function rendererPhotos(context) {
     };
 
     photos.setDateFilter = function(type, val, updateUrl) {
-        if (type === _dateFilters[0]) _fromDate = val;
-        if (type === _dateFilters[1]) _toDate = val;
+        // validate the date
+        var date = val && new Date(val);
+        if (date && !isNaN(date)) {
+            val = date.toISOString().substr(0, 10);
+        } else {
+            val = null;
+        }
+        if (type === _dateFilters[0]) {
+            _fromDate = val;
+            if (_fromDate && _toDate && new Date(_toDate) < new Date(_fromDate)) {
+                _toDate = _fromDate;
+            }
+        }
+        if (type === _dateFilters[1]) {
+            _toDate = val;
+            if (_fromDate && _toDate && new Date(_toDate) < new Date(_fromDate)) {
+                _fromDate = _toDate;
+            }
+        }
         dispatch.call('change', this);
         if (updateUrl) {
             setUrlFilterValue(type, val);
@@ -118,7 +135,7 @@ export function rendererPhotos(context) {
     photos.toDate = function() {
         return _toDate;
     };
-    
+
     photos.togglePhotoType = function(val) {
         var index = _shownPhotoTypes.indexOf(val);
         if (index !== -1) {
