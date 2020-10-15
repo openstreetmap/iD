@@ -220,7 +220,7 @@ export function uiSectionPhotoOverlays(context) {
             })
             .on('change', function(d) {
                 var value = d3_select(this).property('value');
-                context.photos().setDateFilter(d, value);
+                context.photos().setDateFilter(d, value, true);
             });
 
         li
@@ -275,7 +275,7 @@ export function uiSectionPhotoOverlays(context) {
             .property('value', context.photos().username())
             .on('change', function() {
                 var value = d3_select(this).property('value');
-                context.photos().setUsernameFilter(value);
+                context.photos().setUsernameFilter(value, true);
             });
         
         li
