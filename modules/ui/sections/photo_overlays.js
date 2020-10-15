@@ -220,11 +220,16 @@ export function uiSectionPhotoOverlays(context) {
                 utilGetSetValue(d3_select(this), context.photos().dateFilterValue(d) || '');
             })
             .on('change', function(d3_event, d) {
-                var value = d3_select(this).property('value');
+                var value = utilGetSetValue(d3_select(this)).trim();
                 context.photos().setDateFilter(d, value, true);
+                // reload the displayed dates
+                li.selectAll('input')
+                    .each(function(d) {
+                        utilGetSetValue(d3_select(this), context.photos().dateFilterValue(d) || '');
+                    });
             });
 
-        li
+        li = li
             .merge(liEnter)
             .classed('active', filterEnabled);
     }
