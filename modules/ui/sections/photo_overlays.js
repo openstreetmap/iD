@@ -169,7 +169,7 @@ export function uiSectionPhotoOverlays(context) {
         var data = context.photos().dateFilters();
 
         function filterEnabled(d) {
-            return context.photos().dateFilterValue(d); 
+            return context.photos().dateFilterValue(d);
         }
 
         var ul = selection
@@ -218,7 +218,7 @@ export function uiSectionPhotoOverlays(context) {
             .property('value', function(d) {
                 return context.photos().dateFilterValue(d);
             })
-            .on('change', function(d) {
+            .on('change', function(d3_event, d) {
                 var value = d3_select(this).property('value');
                 context.photos().setDateFilter(d, value, true);
             });
@@ -230,7 +230,7 @@ export function uiSectionPhotoOverlays(context) {
 
     function drawUsernameFilter(selection) {
         function filterEnabled() {
-            return context.photos().username(); 
+            return context.photos().username();
         }
         var ul = selection
             .selectAll('.layer-list-username-filter')
@@ -277,7 +277,7 @@ export function uiSectionPhotoOverlays(context) {
                 var value = d3_select(this).property('value');
                 context.photos().setUsernameFilter(value, true);
             });
-        
+
         li
             .merge(liEnter)
             .classed('active', filterEnabled);
