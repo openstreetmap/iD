@@ -153,7 +153,7 @@ export function uiSectionPhotoOverlays(context) {
         labelEnter
             .append('span')
             .html(function(d) {
-                return t('photo_overlays.photo_type.' + d + '.title');
+                return t.html('photo_overlays.photo_type.' + d + '.title');
             });
 
 
@@ -199,15 +199,15 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t('photo_overlays.date_filter.' + d + '.tooltip'))
+                        .title(t.html('photo_overlays.date_filter.' + d + '.tooltip'))
                         .placement('top')
                     );
             });
 
         labelEnter
             .append('span')
-            .text(function(d) {
-                return t('photo_overlays.date_filter.' + d + '.title');
+            .html(function(d) {
+                return t.html('photo_overlays.date_filter.' + d + '.title');
             });
 
         labelEnter
@@ -259,14 +259,14 @@ export function uiSectionPhotoOverlays(context) {
             .each(function() {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t('photo_overlays.username_filter.tooltip'))
+                        .title(t.html('photo_overlays.username_filter.tooltip'))
                         .placement('top')
                     );
             });
 
         labelEnter
             .append('span')
-            .text(t('photo_overlays.username_filter.title'));
+            .html(t.html('photo_overlays.username_filter.title'));
 
         labelEnter
             .append('input')
