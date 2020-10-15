@@ -136,15 +136,6 @@ export function rendererPhotos(context) {
 
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
-        if (hash.photo_overlay) {
-            // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=openstreetcam;mapillary;streetside`
-
-            var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
-            hashOverlayIDs.forEach(function(id) {
-                var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
-                if (layer && !layer.enabled()) layer.enabled(true);
-            });
-        }
         if (hash.fromDate) {
             this.setDateFilter('fromDate', hash.fromDate, false);
         }
@@ -153,6 +144,15 @@ export function rendererPhotos(context) {
         }
         if (hash.username) {
             this.setUsernameFilter(hash.username, false);
+        }
+        if (hash.photo_overlay) {
+            // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=openstreetcam;mapillary;streetside`
+
+            var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
+            hashOverlayIDs.forEach(function(id) {
+                var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
+                if (layer && !layer.enabled()) layer.enabled(true);
+            });
         }
         if (hash.photo) {
             // support opening a photo via a URL parameter, e.g. `photo=mapillary-fztgSDtLpa08ohPZFZjeRQ`
