@@ -1,4 +1,4 @@
-import {median as d3_median} from 'd3-array';
+import { median as d3_median } from 'd3-array';
 
 import {
     polygonArea as d3_polygonArea,
