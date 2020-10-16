@@ -74,8 +74,6 @@ export function uiShortcuts(context) {
             .append('span')
             .html(function (d) { return t.html(d.text); });
 
-        tabs.merge(tabsEnter);
-
         // Update
         wrapper.selectAll('.tab')
             .classed('active', function (d, i) {
@@ -233,8 +231,6 @@ export function uiShortcuts(context) {
             .attr('class', 'shortcut-desc')
             .html(function (d) { return d.text ? t.html(d.text) : '\u00a0'; });
 
-
-        shortcuts.merge(shortcutsEnter);
 
         // Update
         wrapper.selectAll('.shortcut-tab')

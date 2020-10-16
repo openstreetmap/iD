@@ -2,14 +2,14 @@ import {median as d3_median} from 'd3-array';
 
 import {
     polygonArea as d3_polygonArea,
-    polygonCentroid as d3_polygonCentroid,
-    polygonHull as d3_polygonHull
+    polygonHull as d3_polygonHull,
+    polygonCentroid as d3_polygonCentroid
 } from 'd3-polygon';
 
-import {geoVecInterp, geoVecLength} from '../geo';
-import {osmNode} from '../osm/node';
-import {utilArrayUniq} from '../util';
-import {geoVecLengthSquare} from '../geo/vector';
+import { geoVecInterp, geoVecLength } from '../geo';
+import { osmNode } from '../osm/node';
+import { utilArrayUniq } from '../util';
+import { geoVecLengthSquare } from '../geo/vector';
 
 
 export function actionCircularize(wayId, projection, maxAngle) {
