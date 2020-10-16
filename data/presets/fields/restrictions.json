@@ -2,6 +2,7 @@
     "type": "restrictions",
     "geometry": ["vertex"],
     "icon": "iD-restrictions",
+    "usage": "manual",
     "reference": {
         "rtype": "restriction"
     },

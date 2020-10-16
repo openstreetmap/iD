@@ -2,5 +2,6 @@
     "key": "comment",
     "type": "textarea",
     "label": "Changeset Comment",
+    "usage": "changeset",
     "placeholder": "Brief description of your contributions (required)"
 }
