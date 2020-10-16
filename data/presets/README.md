@@ -294,6 +294,15 @@ A string specifying the UI and behavior of the field. Must be one of the followi
 * `wikidata` - Search field for selecting a Wikidata entity
 * `wikipedia` - Block of fields for selecting a wiki language and Wikipedia page
 
+##### `usage`
+
+A string specifying how iD uses the field. Must be one of the following values.
+
+* `preset` - The field is listed in one or more preset files (default and most common value)
+* `changeset` - The field is only used for changeset tags when uploading, e.g. `comment`
+* `group` - The field is only used within another field such as `structure`, e.g. `cutting`
+* `manual` - The field is only added by iD programmatically as needed, e.g. `restrictions`
+
 ##### `key`/`keys`
 
 The `key` property names the OSM key that the field will edit.

@@ -1587,6 +1587,7 @@
     {"key": "handrail", "description": "🄵 Handrail"},
     {"key": "hashtags", "description": "🄵 Hashtags"},
     {"key": "healthcare:speciality", "description": "🄵 Specialties"},
+    {"key": "heating", "description": "🄵 Heating"},
     {"key": "height", "description": "🄵 Building Height (Meters), 🄵 Height (Meters)"},
     {"key": "highspeed", "description": "🄵 High-Speed"},
     {"key": "historic:civilization", "description": "🄵 Historic Civilization"},

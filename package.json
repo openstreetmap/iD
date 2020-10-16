@@ -106,7 +106,7 @@
     "phantomjs-prebuilt": "~2.1.11",
     "postcss": "^8.1.1",
     "postcss-selector-prepend": "^0.5.0",
-    "rollup": "~2.30.0",
+    "rollup": "~2.31.0",
     "rollup-plugin-includepaths": "~0.2.3",
     "rollup-plugin-progress": "^1.1.1",
     "rollup-plugin-visualizer": "~4.1.1",

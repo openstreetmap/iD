@@ -222,6 +222,11 @@
         "pattern":  {
             "description": "Regular expression that a valid `identifier` value is expected to match",
             "type": "string"
+        },
+        "usage": {
+            "description": "The manner and context in which the field is used",
+            "type": "string",
+            "enum": ["preset", "changeset", "manual", "group"]
         }
     },
     "additionalProperties": false

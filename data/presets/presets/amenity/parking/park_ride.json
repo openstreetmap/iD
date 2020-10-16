@@ -1,5 +1,9 @@
 {
     "icon": "temaki-sign_and_car",
+    "fields": [
+        "name",
+        "{amenity/parking}"
+    ],
     "geometry": [
         "area",
         "point",

@@ -659,6 +659,8 @@ function validatePresetFields(presets, fields) {
   const betweenBracketsRegex = /([^{]*?)(?=\})/;
   const maxFieldsBeforeError = 10;
 
+  let usedFieldIDs = new Set();
+
   for (let presetID in presets) {
     let preset = presets[presetID];
 
@@ -685,6 +687,7 @@ function validatePresetFields(presets, fields) {
 
       for (let fieldIndex in preset[fieldsKey]) {
         let fieldID = preset[fieldsKey][fieldIndex];
+        usedFieldIDs.add(fieldID);
         let field = fields[fieldID];
         if (field) {
           if (field.geometry) {
@@ -738,6 +741,15 @@ function validatePresetFields(presets, fields) {
       }
     }
   }
+
+  for (var fieldID in fields) {
+    if (!usedFieldIDs.has(fieldID) &&
+        fields[fieldID].universal !== true &&
+        (fields[fieldID].usage || 'preset') === 'preset') {
+      console.log('Field "' + fields[fieldID].label + '" (' + fieldID + ') isn\'t used by any presets.');
+    }
+  }
+
 }
 
 function validateDefaults(defaults, categories, presets) {

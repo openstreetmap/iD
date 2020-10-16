@@ -1,0 +1,10 @@
+{
+    "key": "heating",
+    "type": "check",
+    "label": "Heating",
+    "terms": [
+        "firepit",
+        "fireplace",
+        "heater"
+    ]
+}

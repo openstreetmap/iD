@@ -1078,6 +1078,9 @@ en:
       healthcare/speciality:
         # 'healthcare:speciality=*'
         label: Specialties
+      heating:
+        # heating=*
+        label: Heating
       height:
         # height=*
         label: Height (Meters)
