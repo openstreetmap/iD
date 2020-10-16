@@ -204,6 +204,7 @@
   "hashtags": {"key": "hashtags", "type": "semiCombo", "label": "Hashtags", "usage": "changeset", "placeholder": "#example"},
   "healthcare": {"key": "healthcare", "type": "typeCombo", "label": "Type"},
   "healthcare/speciality": {"key": "healthcare:speciality", "type": "semiCombo", "reference": {"key": "healthcare"}, "label": "Specialties"},
+  "heating": {"key": "heating", "type": "check", "label": "Heating"},
   "height_building": {"key": "height", "minValue": 0, "type": "number", "label": "Building Height (Meters)", "prerequisiteTag": {"key": "building", "valueNot": "no"}},
   "height": {"key": "height", "minValue": 0, "type": "number", "label": "Height (Meters)"},
   "highspeed": {"key": "highspeed", "type": "check", "label": "High-Speed"},

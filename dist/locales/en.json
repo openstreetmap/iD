@@ -3828,6 +3828,9 @@
                 "healthcare/speciality": {
                     "label": "Specialties"
                 },
+                "heating": {
+                    "label": "Heating"
+                },
                 "height_building": {
                     "label": "Building Height (Meters)",
                     "terms": ""

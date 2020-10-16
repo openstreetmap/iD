@@ -6,10 +6,15 @@
     ],
     "fields": [
         "name",
-        "operator"
+        "operator",
+        "capacity",
+        "lit",
+        "seasonal",
+        "heating"
     ],
     "moreFields": [
-        "level"
+        "level",
+        "wheelchair"
     ],
     "terms": [
         "al fresco",
