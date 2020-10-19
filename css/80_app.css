@@ -183,11 +183,6 @@ input[type=date] {
     text-overflow: ellipsis;
     overflow: auto;
 }
-input.list-item-input {
-    height: 20px;
-    padding: 0px 4px;
-    width: 160px;
-}
 input[type=text],
 input[type=search],
 input[type=number],
@@ -3110,6 +3105,13 @@ div.full-screen > button:focus {
     white-space: nowrap;
     text-overflow: ellipsis;
     flex-grow: 1;
+}
+
+.layer-list input.list-item-input {
+    height: 2.2em;
+    padding: 0px 4px;
+    width: 50%;
+    min-width: 160px;
 }
 
 .map-data-pane .layer-list button,
