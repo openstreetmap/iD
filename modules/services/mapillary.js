@@ -492,12 +492,12 @@ export default {
         var showsFlat = context.photos().showsFlat();
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
         var filter = ['all'];
 
         if (!showsPano) filter.push(['==', 'pano', false]);
         if (!showsFlat && showsPano) filter.push(['==', 'pano', true]);
-        if (username) filter.push(['==', 'username', username]);
+        if (usernames && usernames.length) filter.push(['==', 'username', usernames[0]]);
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
             filter.push(['>=', 'capturedAt', fromTimestamp]);

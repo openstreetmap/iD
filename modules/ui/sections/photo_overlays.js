@@ -237,7 +237,7 @@ export function uiSectionPhotoOverlays(context) {
 
     function drawUsernameFilter(selection) {
         function filterEnabled() {
-            return context.photos().username();
+            return context.photos().usernames();
         }
         var ul = selection
             .selectAll('.layer-list-username-filter')
@@ -280,15 +280,22 @@ export function uiSectionPhotoOverlays(context) {
             .attr('type', 'text')
             .attr('class', 'list-item-input')
             .call(utilNoAuto)
-            .property('value', context.photos().username())
+            .property('value', usernameValue)
             .on('change', function() {
                 var value = d3_select(this).property('value');
                 context.photos().setUsernameFilter(value, true);
+                d3_select(this).property('value', usernameValue);
             });
 
         li
             .merge(liEnter)
             .classed('active', filterEnabled);
+
+        function usernameValue() {
+            var usernames = context.photos().usernames();
+            if (usernames) return usernames.join('; ');
+            return usernames;
+        }
     }
 
     function toggleLayer(which) {

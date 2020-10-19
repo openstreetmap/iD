@@ -116,7 +116,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var showsFlat = context.photos().showsFlat();
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
@@ -136,9 +136,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return new Date(image.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (username) {
+        if (usernames) {
             images = images.filter(function(image) {
-                return image.captured_by === username;
+                return usernames.indexOf(image.captured_by) !== -1;
             });
         }
         return images;
@@ -149,7 +149,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var showsFlat = context.photos().showsFlat();
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
@@ -184,9 +184,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (username) {
+        if (usernames) {
             sequences = sequences.filter(function(sequence) {
-                return sequence.properties.username === username;
+                return usernames.indexOf(sequence.properties.username) !== -1;
             });
         }
 

@@ -110,7 +110,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     function filterImages(images) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
@@ -124,9 +124,9 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
                 return new Date(item.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (username) {
+        if (usernames) {
             images = images.filter(function(item) {
-                return item.captured_by === username;
+                return usernames.indexOf(item.captured_by) !== -1;
             });
         }
 
@@ -136,7 +136,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     function filterSequences(sequences) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
@@ -150,9 +150,9 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
                 return new Date(image.properties.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (username) {
+        if (usernames) {
             sequences = sequences.filter(function(image) {
-                return image.properties.captured_by === username;
+                return usernames.indexOf(image.properties.captured_by) !== -1;
             });
         }
 
@@ -177,7 +177,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
             sequences = filterSequences(sequences);
             images = filterImages(images);
         }
-        
+
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 

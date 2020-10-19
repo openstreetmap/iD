@@ -162,7 +162,7 @@ export function svgStreetside(projection, context, dispatch) {
     function filterBubbles(bubbles) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
@@ -176,9 +176,9 @@ export function svgStreetside(projection, context, dispatch) {
                 return new Date(bubble.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (username) {
+        if (usernames) {
             bubbles = bubbles.filter(function(bubble) {
-                return bubble.captured_by === username;
+                return usernames.indexOf(bubble.captured_by) !== -1;
             });
         }
 
@@ -188,7 +188,7 @@ export function svgStreetside(projection, context, dispatch) {
     function filterSequences(sequences) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var username = context.photos().username();
+        var usernames = context.photos().usernames();
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
@@ -202,9 +202,9 @@ export function svgStreetside(projection, context, dispatch) {
                 return new Date(sequences.properties.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (username) {
+        if (usernames) {
             sequences = sequences.filter(function(sequences) {
-                return sequences.properties.captured_by === username;
+                return usernames.indexOf(sequences.properties.captured_by) !== -1;
             });
         }
 

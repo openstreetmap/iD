@@ -13,7 +13,7 @@ export function rendererPhotos(context) {
     var _dateFilters = ['fromDate', 'toDate'];
     var _fromDate;
     var _toDate;
-    var _username;
+    var _usernames;
 
     function photos() {}
 
@@ -81,10 +81,21 @@ export function rendererPhotos(context) {
     };
 
     photos.setUsernameFilter = function(val, updateUrl) {
-        _username = val;
+        if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
+        if (val) {
+            val = val.map(d => d.trim()).filter(Boolean);
+            if (!val.length) {
+                val = null;
+            }
+        }
+        _usernames = val;
         dispatch.call('change', this);
         if (updateUrl) {
-            setUrlFilterValue('photo_username', val);
+            var hashString;
+            if (_usernames) {
+                hashString = _usernames.join(',');
+            }
+            setUrlFilterValue('photo_username', hashString);
         }
     };
 
@@ -117,7 +128,7 @@ export function rendererPhotos(context) {
     };
 
     photos.shouldFilterByUsername = function() {
-        return showsLayer('mapillary') || showsLayer('openstreetcam');
+        return showsLayer('mapillary') || showsLayer('openstreetcam') || showsLayer('streetside');
     };
 
     photos.showsPhotoType = function(val) {
@@ -153,8 +164,8 @@ export function rendererPhotos(context) {
         return photos;
     };
 
-    photos.username = function() {
-        return _username;
+    photos.usernames = function() {
+        return _usernames;
     };
 
     photos.init = function() {
