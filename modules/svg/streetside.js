@@ -159,6 +159,58 @@ export function svgStreetside(projection, context, dispatch) {
 
     context.photos().on('change.streetside', update);
 
+    function filterBubbles(bubbles) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var usernames = context.photos().usernames();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            bubbles = bubbles.filter(function(bubble) {
+                return new Date(bubble.captured_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            bubbles = bubbles.filter(function(bubble) {
+                return new Date(bubble.captured_at).getTime() <= toTimestamp;
+            });
+        }
+        if (usernames) {
+            bubbles = bubbles.filter(function(bubble) {
+                return usernames.indexOf(bubble.captured_by) !== -1;
+            });
+        }
+
+        return bubbles;
+    }
+
+    function filterSequences(sequences) {
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var usernames = context.photos().usernames();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            sequences = sequences.filter(function(sequences) {
+                return new Date(sequences.properties.captured_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            sequences = sequences.filter(function(sequences) {
+                return new Date(sequences.properties.captured_at).getTime() <= toTimestamp;
+            });
+        }
+        if (usernames) {
+            sequences = sequences.filter(function(sequences) {
+                return usernames.indexOf(sequences.properties.captured_by) !== -1;
+            });
+        }
+
+        return sequences;
+    }
+
     /**
      * update().
      */
@@ -176,6 +228,8 @@ export function svgStreetside(projection, context, dispatch) {
         if (context.photos().showsPanoramic()) {
             sequences = (service ? service.sequences(projection) : []);
             bubbles = (service && showMarkers ? service.bubbles(projection) : []);
+            sequences = filterSequences(sequences);
+            bubbles = filterBubbles(bubbles);
         }
 
         var traces = layer.selectAll('.sequences').selectAll('.sequence')

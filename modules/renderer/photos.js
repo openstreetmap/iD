@@ -10,6 +10,10 @@ export function rendererPhotos(context) {
     var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'openstreetcam'];
     var _allPhotoTypes = ['flat', 'panoramic'];
     var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
+    var _dateFilters = ['fromDate', 'toDate'];
+    var _fromDate;
+    var _toDate;
+    var _usernames;
 
     function photos() {}
 
@@ -38,14 +42,93 @@ export function rendererPhotos(context) {
         return _allPhotoTypes;
     };
 
+    photos.dateFilters = function() {
+        return _dateFilters;
+    };
+
+    photos.dateFilterValue = function(val) {
+        return val === _dateFilters[0] ? _fromDate : _toDate;
+    };
+
+    photos.setDateFilter = function(type, val, updateUrl) {
+        // validate the date
+        var date = val && new Date(val);
+        if (date && !isNaN(date)) {
+            val = date.toISOString().substr(0, 10);
+        } else {
+            val = null;
+        }
+        if (type === _dateFilters[0]) {
+            _fromDate = val;
+            if (_fromDate && _toDate && new Date(_toDate) < new Date(_fromDate)) {
+                _toDate = _fromDate;
+            }
+        }
+        if (type === _dateFilters[1]) {
+            _toDate = val;
+            if (_fromDate && _toDate && new Date(_toDate) < new Date(_fromDate)) {
+                _fromDate = _toDate;
+            }
+        }
+        dispatch.call('change', this);
+        if (updateUrl) {
+            var rangeString;
+            if (_fromDate || _toDate) {
+                rangeString = (_fromDate || '') + '_' + (_toDate || '');
+            }
+            setUrlFilterValue('photo_dates', rangeString);
+        }
+    };
+
+    photos.setUsernameFilter = function(val, updateUrl) {
+        if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
+        if (val) {
+            val = val.map(d => d.trim()).filter(Boolean);
+            if (!val.length) {
+                val = null;
+            }
+        }
+        _usernames = val;
+        dispatch.call('change', this);
+        if (updateUrl) {
+            var hashString;
+            if (_usernames) {
+                hashString = _usernames.join(',');
+            }
+            setUrlFilterValue('photo_username', hashString);
+        }
+    };
+
+    function setUrlFilterValue(property, val) {
+        if (!window.mocha) {
+            var hash = utilStringQs(window.location.hash);
+            if (val) {
+                if (hash[property] === val) return;
+                hash[property] = val;
+            } else {
+                if (!(property in hash)) return;
+                delete hash[property];
+            }
+            window.location.replace('#' + utilQsString(hash, true));
+        }
+    }
+
     function showsLayer(id) {
         var layer = context.layers().layer(id);
         return layer && layer.supported() && layer.enabled();
     }
 
+    photos.shouldFilterByDate = function() {
+        return showsLayer('mapillary') || showsLayer('openstreetcam') || showsLayer('streetside');
+    };
+
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||
             (showsLayer('streetside') && showsLayer('openstreetcam'));
+    };
+
+    photos.shouldFilterByUsername = function() {
+        return showsLayer('mapillary') || showsLayer('openstreetcam') || showsLayer('streetside');
     };
 
     photos.showsPhotoType = function(val) {
@@ -62,6 +145,14 @@ export function rendererPhotos(context) {
         return photos.showsPhotoType('panoramic');
     };
 
+    photos.fromDate = function() {
+        return _fromDate;
+    };
+
+    photos.toDate = function() {
+        return _toDate;
+    };
+
     photos.togglePhotoType = function(val) {
         var index = _shownPhotoTypes.indexOf(val);
         if (index !== -1) {
@@ -73,8 +164,21 @@ export function rendererPhotos(context) {
         return photos;
     };
 
+    photos.usernames = function() {
+        return _usernames;
+    };
+
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
+        if (hash.photo_dates) {
+            // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a couple different separators
+            var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
+            this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
+            this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
+        }
+        if (hash.photo_username) {
+            this.setUsernameFilter(hash.photo_username, false);
+        }
         if (hash.photo_overlay) {
             // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=openstreetcam;mapillary;streetside`
 

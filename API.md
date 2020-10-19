@@ -43,6 +43,10 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
   _Example:_ `photo_overlay=streetside,mapillary,openstreetcam`<br/>
   _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `mapillary-map-features`, `openstreetcam`
+* __`photo_dates`__ - The range of capture dates by which to filter street-level photos. Dates are given in YYYY-MM-DD format and separated by `_`. One-sided ranges are supported.<br/>
+  _Example:_ `photo_dates=2019-01-01_2020-12-31`, `photo_dates=2019-01-01_`, `photo_dates=_2020-12-31`<br/>
+* __`photo_username`__ - The Mapillary or OpenStreetCam username by which to filter street-level photos. Multiple comma-separated usernames are supported.<br/>
+  _Example:_ `photo_user=quincylvania`, `photo_user=quincylvania,chrisbeddow`<br/>
 * __`photo`__ - The service and ID of the street-level photo to show.<br/>
   _Example:_ `photo=streetside/718514589`<br/>
   _Available prefixes:_ `streetside/`, `mapillary/`, `openstreetcam/`

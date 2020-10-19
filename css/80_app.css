@@ -105,7 +105,8 @@ input[type=search]:focus,
 input[type=number]:focus,
 input[type=url]:focus,
 input[type=tel]:focus,
-input[type=email]:focus {
+input[type=email]:focus,
+input[type=date]:focus {
     outline-color: transparent;
     outline-style: none;
 }
@@ -172,7 +173,8 @@ input[type=search],
 input[type=number],
 input[type=url],
 input[type=tel],
-input[type=email] {
+input[type=email],
+input[type=date] {
     background-color: #fff;
     color: #333;
     border: 1px solid #ccc;
@@ -186,7 +188,8 @@ input[type=search],
 input[type=number],
 input[type=url],
 input[type=tel],
-input[type=email] {
+input[type=email],
+input[type=date] {
     /* need this since line-height interpretation may vary by font or browser */
     height: 2.585em;
 }
@@ -3102,6 +3105,13 @@ div.full-screen > button:focus {
     white-space: nowrap;
     text-overflow: ellipsis;
     flex-grow: 1;
+}
+
+.layer-list input.list-item-input {
+    height: 2.2em;
+    padding: 0px 4px;
+    width: 50%;
+    min-width: 160px;
 }
 
 .map-data-pane .layer-list button,

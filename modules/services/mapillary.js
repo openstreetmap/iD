@@ -46,6 +46,7 @@ var _mlyClicks;
 var _mlyActiveImage;
 var _mlySelectedImageKey;
 var _mlyViewer;
+var _mlyViewerFilter = ['all'];
 var _loadViewerPromise;
 var _mlyHighlightedDetection;
 var _mlyShowFeatureDetections = false;
@@ -486,6 +487,34 @@ export default {
         }
     },
 
+    filterViewer: function(context) {
+        var showsPano = context.photos().showsPanoramic();
+        var showsFlat = context.photos().showsFlat();
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var usernames = context.photos().usernames();
+        var filter = ['all'];
+
+        if (!showsPano) filter.push(['==', 'pano', false]);
+        if (!showsFlat && showsPano) filter.push(['==', 'pano', true]);
+        if (usernames && usernames.length) filter.push(['==', 'username', usernames[0]]);
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            filter.push(['>=', 'capturedAt', fromTimestamp]);
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            filter.push(['>=', 'capturedAt', toTimestamp]);
+        }
+
+        if (_mlyViewer) {
+            _mlyViewer.setFilter(filter);
+        }
+        _mlyViewerFilter = filter;
+
+        return filter;
+    },
+
 
     showViewer: function(context) {
         var wrap = context.container().select('.photoviewer')
@@ -590,6 +619,9 @@ export default {
         _mlyViewer = new Mapillary.Viewer('ideditor-mly', clientId, null, opts);
         _mlyViewer.on('nodechanged', nodeChanged);
         _mlyViewer.on('bearingchanged', bearingChanged);
+        if (_mlyViewerFilter) {
+            _mlyViewer.setFilter(_mlyViewerFilter);
+        }
 
         // Register viewer resize handler
         context.ui().photoviewer.on('resize.mapillary', function() {

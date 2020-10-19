@@ -186,7 +186,11 @@ function connectSequences() {
       // create a GeoJSON LineString
       sequence.geojson = {
         type: 'LineString',
-        properties: { key: sequence.key },
+        properties: { 
+          captured_at: sequence.bubbles[0] ? sequence.bubbles[0].captured_at : null,
+          captured_by: sequence.bubbles[0] ? sequence.bubbles[0].captured_by : null,
+          key: sequence.key 
+        },
         coordinates: sequence.bubbles.map(d => d.loc)
       };
 
