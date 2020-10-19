@@ -112,7 +112,7 @@ export function uiSectionPhotoOverlays(context) {
 
         var ul = selection
             .selectAll('.layer-list-photo-types')
-            .data(context.photos().shouldFilterByPhotoType() ? [0] : []);
+            .data([0]);
 
         ul.exit()
             .remove();
@@ -123,7 +123,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(ul);
 
         var li = ul.selectAll('.list-item-photo-types')
-            .data(data);
+            .data(context.photos().shouldFilterByPhotoType() ? data : []);
 
         li.exit()
             .remove();
@@ -175,7 +175,7 @@ export function uiSectionPhotoOverlays(context) {
 
         var ul = selection
             .selectAll('.layer-list-date-filter')
-            .data(context.photos().shouldFilterByDate() ? [0] : []);
+            .data([0]);
 
         ul.exit()
             .remove();
@@ -186,7 +186,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(ul);
 
         var li = ul.selectAll('.list-item-date-filter')
-            .data(data);
+            .data(context.photos().shouldFilterByDate() ? data : []);
 
         li.exit()
             .remove();
@@ -241,7 +241,7 @@ export function uiSectionPhotoOverlays(context) {
         }
         var ul = selection
             .selectAll('.layer-list-username-filter')
-            .data(context.photos().shouldFilterByUsername() ? [0] : []);
+            .data([0]);
 
         ul.exit()
             .remove();
@@ -252,7 +252,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(ul);
 
         var li = ul.selectAll('.list-item-username-filter')
-            .data(['username-filter']);
+            .data(context.photos().shouldFilterByUsername() ? ['username-filter'] : []);
 
         li.exit()
             .remove();
