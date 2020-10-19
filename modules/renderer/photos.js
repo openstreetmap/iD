@@ -72,7 +72,11 @@ export function rendererPhotos(context) {
         }
         dispatch.call('change', this);
         if (updateUrl) {
-            setUrlFilterValue(type, val);
+            var rangeString;
+            if (_fromDate || _toDate) {
+                rangeString = (_fromDate || '') + '_' + (_toDate || '');
+            }
+            setUrlFilterValue('photo_dates', rangeString);
         }
     };
 
@@ -80,17 +84,19 @@ export function rendererPhotos(context) {
         _username = val;
         dispatch.call('change', this);
         if (updateUrl) {
-            setUrlFilterValue('username', val);
+            setUrlFilterValue('photo_username', val);
         }
     };
 
-    function setUrlFilterValue(type, val) {
+    function setUrlFilterValue(property, val) {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (val) {
-                hash[type] = val;
+                if (hash[property] === val) return;
+                hash[property] = val;
             } else {
-                delete hash[type];
+                if (!(property in hash)) return;
+                delete hash[property];
             }
             window.location.replace('#' + utilQsString(hash, true));
         }
@@ -153,14 +159,14 @@ export function rendererPhotos(context) {
 
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
-        if (hash.fromDate) {
-            this.setDateFilter('fromDate', hash.fromDate, false);
+        if (hash.photo_dates) {
+            // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a few different separators
+            var parts = /^(.*)[–\/_+:](.*)$/g.exec(hash.photo_dates.trim());
+            this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
+            this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
         }
-        if (hash.toDate) {
-            this.setDateFilter('toDate', hash.toDate, false);
-        }
-        if (hash.username) {
-            this.setUsernameFilter(hash.username, false);
+        if (hash.photo_username) {
+            this.setUsernameFilter(hash.photo_username, false);
         }
         if (hash.photo_overlay) {
             // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=openstreetcam;mapillary;streetside`
