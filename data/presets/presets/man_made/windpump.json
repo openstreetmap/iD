@@ -1,0 +1,24 @@
+{
+    "icon": "temaki-windpump",
+    "fields": [
+        "ref",
+        "operator",
+        "height",
+        "material",
+        "manufacturer",
+        "lit"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "aerorotor",
+        "water pump",
+        "windmill",
+        "wind pump"
+    ],
+    "tags": {
+        "man_made": "windpump"
+    },
+    "name": "Windpump"
+}

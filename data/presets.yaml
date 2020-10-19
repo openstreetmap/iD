@@ -6726,6 +6726,11 @@ en:
         name: Windmill
         # 'terms: wind,wheel,mill'
         terms: '<translate with synonyms or related terms for ''Windmill'', separated by commas>'
+      man_made/windpump:
+        # man_made=windpump
+        name: Windpump
+        # 'terms: aerorotor,water pump,windmill,wind pump'
+        terms: '<translate with synonyms or related terms for ''Windpump'', separated by commas>'
       man_made/works:
         # man_made=works
         name: Factory
