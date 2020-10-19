@@ -81,7 +81,13 @@ $  git push osmlab master
 $  git checkout -b iD-A.B.C
 $  bundle install
 $  rm -rf vendor/assets/iD/* && vendorer
+```
+
+- If there have been any changes to iD's [URL parameters](https://github.com/openstreetmap/iD/blob/develop/API.md#url-parameters), make sure they're reflected in [app/assets/javascripts/edit/id.js.erb](https://github.com/osmlab/openstreetmap-website/blob/master/app/assets/javascripts/edit/id.js.erb).
+
+```bash
 $  git add . && git commit -m 'Update to iD vA.B.C'
 $  git push osmlab
 ```
+
 - [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:master) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment
