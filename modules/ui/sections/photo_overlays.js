@@ -5,7 +5,7 @@ import {
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
-import { utilGetSetValue } from '../../util';
+import { utilGetSetValue, utilNoAuto } from '../../util';
 
 export function uiSectionPhotoOverlays(context) {
 
@@ -216,6 +216,7 @@ export function uiSectionPhotoOverlays(context) {
             .attr('type', 'date')
             .attr('class', 'list-item-input')
             .attr('placeholder', t('units.year_month_day'))
+            .call(utilNoAuto)
             .each(function(d) {
                 utilGetSetValue(d3_select(this), context.photos().dateFilterValue(d) || '');
             })
@@ -278,6 +279,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('input')
             .attr('type', 'text')
             .attr('class', 'list-item-input')
+            .call(utilNoAuto)
             .property('value', context.photos().username())
             .on('change', function() {
                 var value = d3_select(this).property('value');
