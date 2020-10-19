@@ -160,8 +160,8 @@ export function rendererPhotos(context) {
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
         if (hash.photo_dates) {
-            // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a few different separators
-            var parts = /^(.*)[–\/_+:](.*)$/g.exec(hash.photo_dates.trim());
+            // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a couple different separators
+            var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
         }
