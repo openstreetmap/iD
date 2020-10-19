@@ -799,6 +799,7 @@
     {"key": "man_made", "value": "water_works", "description": "🄿 Water Works", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/powered_pump.svg"},
     {"key": "man_made", "value": "watermill", "description": "🄿 Watermill", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/watermill-15.svg"},
     {"key": "man_made", "value": "windmill", "description": "🄿 Windmill", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/windmill-15.svg"},
+    {"key": "man_made", "value": "windpump", "description": "🄿 Windpump", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/windpump.svg"},
     {"key": "man_made", "value": "works", "description": "🄿 Factory", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/industry-15.svg"},
     {"key": "marker", "description": "🄿 Marker, 🄵 Type", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},
     {"key": "utility", "description": "🄿 Utility Marker, 🄵 Utilities, 🄵 Utility", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/silo.svg"},

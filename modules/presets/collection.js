@@ -1,4 +1,5 @@
-import { utilArrayUniq, utilEditDistance } from '../util';
+import { utilArrayIntersection, utilArrayUniq } from '../util/array';
+import { utilEditDistance } from '../util';
 
 
 //
@@ -45,7 +46,7 @@ export function presetCollection(collection) {
     return _this.item(id);
   };
 
-  _this.search = (value, geometry, countryCode) => {
+  _this.search = (value, geometry, countryCodes) => {
     if (!value) return _this;
 
     value = value.toLowerCase().trim();
@@ -83,10 +84,13 @@ export function presetCollection(collection) {
     }
 
     let pool = _this.collection;
-    if (countryCode) {
+    if (countryCodes) {
+      if (typeof countryCodes === 'string') countryCodes = [countryCodes];
+      countryCodes = countryCodes.map(code => code.toLowerCase());
+
       pool = pool.filter(a => {
-        if (a.countryCodes && a.countryCodes.indexOf(countryCode) === -1) return false;
-        if (a.notCountryCodes && a.notCountryCodes.indexOf(countryCode) !== -1) return false;
+        if (a.countryCodes && !utilArrayIntersection(a.countryCodes, countryCodes).length) return false;
+        if (a.notCountryCodes && utilArrayIntersection(a.notCountryCodes, countryCodes).length) return false;
         return true;
       });
     }
