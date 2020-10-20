@@ -17,18 +17,262 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :mega: Release Highlights
 #### :boom: Breaking Changes
 #### :tada: New Features
-#### :sparkles: Usability
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+###### New Presets
+###### Changed Presets
+###### New and Changed Fields
 #### :hammer: Development
+* ([#])
 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
 [@xxxx]: https://github.com/xxxx
 -->
+
+# 2.19.0
+##### Planned: 2020-Oct
+
+#### :boom: Breaking Changes
+* The modifier key to zoom and move the map or selection by a lot has changed from <kbd>Cmd</kbd>(or <kbd>Ctrl</kbd>) to <kbd>Opt</kbd>(or <kbd>Alt</kbd>) ([#7976])
+
+[#7976]: https://github.com/openstreetmap/iD/issues/7976
+
+#### :sparkles: Usability & Accessibility
+* Make the interface navigable using only a keyboard ([#7770], [#8004])
+* Enable the Relations section of the sidebar when multiple features are selected ([#7753])
+* Support text-only page zoom, a vision accessibility feature in most web browsers ([#7965], [#7979])
+* Support common browser shortcuts for zooming the page size: <kbd>Cmd</kbd>(or <kbd>Ctrl</kbd>)<kbd>+</kbd> and <kbd>Cmd</kbd>(or <kbd>Ctrl</kbd>)<kbd>–</kbd> ([#7976])
+* Show the distance between any two selected points in the Measurement panel ([#7952])
+* Style driveways, parking aisles, and emergency access roads uniquely in the map ([#7961])
+* Make the custom data labels white instead of pink, for better readability ([#8055])
+* Reduce times when the Keyboard Shortcuts list becomes one big column ([#8021])
+
+[#7770]: https://github.com/openstreetmap/iD/issues/7770
+[#8004]: https://github.com/openstreetmap/iD/issues/8004
+[#7753]: https://github.com/openstreetmap/iD/issues/7753
+[#7965]: https://github.com/openstreetmap/iD/issues/7965
+[#7979]: https://github.com/openstreetmap/iD/issues/7979
+[#7976]: https://github.com/openstreetmap/iD/issues/7976
+[#7952]: https://github.com/openstreetmap/iD/issues/7952
+[#7961]: https://github.com/openstreetmap/iD/issues/7961
+[#8055]: https://github.com/openstreetmap/iD/issues/8055
+[#8021]: https://github.com/openstreetmap/iD/issues/8021
+
+#### :scissors: Operations
+* Add shortcuts for scaling the size of selected features: <kbd>Shift</kbd><kbd>+</kbd> and <kbd>Shift</kbd><kbd>–</kbd> ([#3372], [#8012])
+* Rename the Reflect Short and Reflect Long operations to Flip Short and Flip Long ([#7824])
+* Support splitting lines and areas at multiple selected points at once ([#7990])
+* Keep the history on the longer segment when splitting a line or area ([#7795])
+* Distribute the `step_count` value proportionally when splitting steps ([#8069])
+* Don't disable splitting areas just because there are lines that can't be split ([#6047])
+* Select the connection point as well as the resultant features after splitting something, to enable quickly disconnecting them ([#5174])
+* Highlight the affected features when hovering over an operation button in the edit menu ([#8034])
+* Make Delete and Downgrade separate operations with different shortcuts ([#7682])
+* Enable the removal of all tags from selected vertices with the Downgrade operation ([#6756])
+
+[#3372]: https://github.com/openstreetmap/iD/issues/3372
+[#8012]: https://github.com/openstreetmap/iD/issues/8012
+[#7824]: https://github.com/openstreetmap/iD/issues/7824
+[#7990]: https://github.com/openstreetmap/iD/issues/7990
+[#7795]: https://github.com/openstreetmap/iD/issues/7795
+[#8069]: https://github.com/openstreetmap/iD/issues/8069
+[#6047]: https://github.com/openstreetmap/iD/issues/6047
+[#5174]: https://github.com/openstreetmap/iD/issues/5174
+[#8034]: https://github.com/openstreetmap/iD/issues/8034
+[#7682]: https://github.com/openstreetmap/iD/issues/7682
+[#6756]: https://github.com/openstreetmap/iD/issues/6756
+
+#### :camera: Street-Level
+* Support filtering photos by capture date and contributor ([#4518], [#7342], [#5307], [#7847], [#8076], thanks [@nickplesha])
+* Enable launching iD with a specific street-level photo and persisting the open photo through reloads ([#6398], [#7885], thanks [@nickplesha])
+* Fix selection and highlighting issues with Mapillary detections ([#7048], [#7177], [#7885], thanks [@nickplesha])
+* Load auxiliary photo overlay resources only when needed, not upon startup ([#7982], [#8061])
+* Fix issue where some photo viewer controls could not be clicked ([#7974])
+
+[@nickplesha]: https://github.com/nickplesha
+
+[#4518]: https://github.com/openstreetmap/iD/issues/4518
+[#7342]: https://github.com/openstreetmap/iD/issues/7342
+[#5307]: https://github.com/openstreetmap/iD/issues/5307
+[#7847]: https://github.com/openstreetmap/iD/issues/7847
+[#8076]: https://github.com/openstreetmap/iD/issues/8076
+[#6398]: https://github.com/openstreetmap/iD/issues/6398
+[#7885]: https://github.com/openstreetmap/iD/issues/7885
+[#7048]: https://github.com/openstreetmap/iD/issues/7048
+[#7177]: https://github.com/openstreetmap/iD/issues/7177
+[#7885]: https://github.com/openstreetmap/iD/issues/7885
+[#7982]: https://github.com/openstreetmap/iD/issues/7982
+[#8061]: https://github.com/openstreetmap/iD/issues/8061
+[#7974]: https://github.com/openstreetmap/iD/issues/7974
+
+#### :white_check_mark: Validation
+* Offer to upgrade `capacity` to `seats` on `amenity=bench` ([#8002], [#7886], thanks [@mikenath223])
+* Improve feature labels in mismatched geometry warnings ([#8018])
+* Offer to fix the order of values in `vending=parcel_mail_in;parcel_pickup` ([#7988])
+* Offer to upgrade `barrier=chicane` to `barrier=cycle_barrier` ([#8045])
+* Fix unexpected tag removal when upgrading `type=audio` and `type=video` on `amenity=studio` ([#8089])
+* Don't add `tidal=yes` with `waterway=tidal_channel` ([#8072])
+
+[@mikenath223]: https://github.com/mikenath223
+
+[#8002]: https://github.com/openstreetmap/iD/issues/8002
+[#7886]: https://github.com/openstreetmap/iD/issues/7886
+[#8018]: https://github.com/openstreetmap/iD/issues/8018
+[#7988]: https://github.com/openstreetmap/iD/issues/7988
+[#8045]: https://github.com/openstreetmap/iD/issues/8045
+[#8089]: https://github.com/openstreetmap/iD/issues/8089
+[#8072]: https://github.com/openstreetmap/iD/issues/8072
+
+#### :bug: Bugfixes
+* Don't return entity IDs when searching by geographic coordinates ([#7995], thanks [@SilentSpike])
+* Fix issue where iD could discard the pending line or area when navigating the map while drawing ([#7999])
+* Properly update validation issues when editing relations in the sidebar ([#7962])
+* Fix issue where the preset search field might not autofocus after adding a new feature in Safari 14 ([#8003])
+* Fix issues with using en dashes (`–`) in feature names ([#7536])
+* Don't collapse the Tags section while adding tags to a fallback preset for the first time ([#1881])
+* Fix regression where the imagery layer IDs were used instead of the layer names in the `imagery_used` changeset tag ([#7842])
+* Fix issue where double-clicking a midpoint might not add a new node ([#7972])
+
+[@SilentSpike]: https://github.com/SilentSpike
+
+[#7995]: https://github.com/openstreetmap/iD/issues/7995
+[#7999]: https://github.com/openstreetmap/iD/issues/7999
+[#7962]: https://github.com/openstreetmap/iD/issues/7962
+[#8003]: https://github.com/openstreetmap/iD/issues/8003
+[#7536]: https://github.com/openstreetmap/iD/issues/7536
+[#1881]: https://github.com/openstreetmap/iD/issues/1881
+[#7842]: https://github.com/openstreetmap/iD/issues/7842
+[#7972]: https://github.com/openstreetmap/iD/issues/7972
+
+#### :earth_asia: Localization
+* If the user's requested language isn't fully translated, fallback to their other preferred languages before English ([#7996])
+* Support language-dependent plural forms for numeric labels ([#597], [#7991], [#8026])
+* Use local number formats in labels ([#7993])
+* Add `lang` attribute to labels to help with formatting, transliteration, and text-to-speech when using iD with mixed languages ([#7963], [#7998])
+
+[#7996]: https://github.com/openstreetmap/iD/issues/7996
+[#597]: https://github.com/openstreetmap/iD/issues/597
+[#7991]: https://github.com/openstreetmap/iD/issues/7991
+[#8026]: https://github.com/openstreetmap/iD/issues/8026
+[#7993]: https://github.com/openstreetmap/iD/issues/7993
+[#7963]: https://github.com/openstreetmap/iD/issues/7963
+[#7998]: https://github.com/openstreetmap/iD/issues/7998
+
+#### :hourglass: Performance
+* Avoid costly calculation when using iD with the text tag editor open ([#7980], thanks [@bjornstar])
+* Don't load the English locale file if one of the user's preferred languages is fully translated ([#7994])
+
+[@bjornstar]: https://github.com/bjornstar
+
+[#7980]: https://github.com/openstreetmap/iD/issues/7980
+[#7994]: https://github.com/openstreetmap/iD/issues/7994
+
+#### :mortar_board: Walkthrough / Help
+* Add Operations section to the Help pane to detail commands from the edit menu ([#7803], [#7992], [#7829], thanks [@manfredbrandl])
+* Clarify in the Help pane that the Bing aerial imagery may not always be the default ([#7840])
+
+[@manfredbrandl]: https://github.com/manfredbrandl
+
+[#7803]: https://github.com/openstreetmap/iD/issues/7803
+[#7992]: https://github.com/openstreetmap/iD/issues/7992
+[#7829]: https://github.com/openstreetmap/iD/issues/7829
+[#7840]: https://github.com/openstreetmap/iD/issues/7840
+
+#### :rocket: Presets
+
+###### New Presets
+* Add Welcome Sign preset ([#7846], [#7960], thanks [@mikenath223])
+* Add Boat Storage preset ([#8000], [#8031], thanks [@animesh-007])
+* Add Hot Spring preset ([#7914], [#8040], thanks [@animesh-007])
+* Add Lounger preset ([#7947], [#8039], thanks [@animesh-007])
+* Add Morgue preset ([#7958], [#8038], thanks [@animesh-007])
+* Add Golf Clubhouse preset ([#8013], thanks [@TheAdventurer64])
+* Add Mounted Binoculars preset ([#7985])
+* Add Windpump preset ([#7709])
+* Add Tram & Bus Stop preset ([#7970])
+* Add unsearchable Disused Amenity preset ([#8051])
+
+###### Changed  Presets
+* Rename Foot Route preset to Waking Route ([#8019], [#8023], thanks [@irevenko])
+* Add search terms to Music Store, Supermarket and Bubble Tea Cafe ([#8008], [#7986], [#7987], thanks [@TheAdventurer64])
+
+###### New and Changed Fields
+* Show Name field by default on Park & Ride Lot ([#8093], thanks [@evansiroky])
+* Add Embedded Ramp field to Steps ([#7977])
+* Add Level field to Sports Center / Complex and Gym / Fitness Center ([#7968])
+* Add Vehicles field to public transport presets ([#6142])
+* Add Inscription field to Bust ([#8007])
+* Add additional fields to Picnic Table ([#8009])
+* Show Telephone and Website fields by default on more presets ([#7877])
+* Make the Direction field stepper use 5° increments ([#7867])
+
+[@mikenath223]: https://github.com/mikenath223
+[@animesh-007]: https://github.com/animesh-007
+[@irevenko]: https://github.com/irevenko
+[@TheAdventurer64]: https://github.com/TheAdventurer64
+[@evansiroky]: https://github.com/evansiroky
+
+[#7846]: https://github.com/openstreetmap/iD/issues/7846
+[#7960]: https://github.com/openstreetmap/iD/issues/7960
+[#8000]: https://github.com/openstreetmap/iD/issues/8000
+[#8031]: https://github.com/openstreetmap/iD/issues/8031
+[#7914]: https://github.com/openstreetmap/iD/issues/7914
+[#8040]: https://github.com/openstreetmap/iD/issues/8040
+[#7947]: https://github.com/openstreetmap/iD/issues/7947
+[#8039]: https://github.com/openstreetmap/iD/issues/8039
+[#7958]: https://github.com/openstreetmap/iD/issues/7958
+[#8038]: https://github.com/openstreetmap/iD/issues/8038
+[#8013]: https://github.com/openstreetmap/iD/issues/8013
+[#7985]: https://github.com/openstreetmap/iD/issues/7985
+[#7709]: https://github.com/openstreetmap/iD/issues/7709
+[#7970]: https://github.com/openstreetmap/iD/issues/7970
+[#8051]: https://github.com/openstreetmap/iD/issues/8051
+[#8019]: https://github.com/openstreetmap/iD/issues/8019
+[#8023]: https://github.com/openstreetmap/iD/issues/8023
+[#8008]: https://github.com/openstreetmap/iD/issues/8008
+[#7986]: https://github.com/openstreetmap/iD/issues/7986
+[#7987]: https://github.com/openstreetmap/iD/issues/7987
+[#8093]: https://github.com/openstreetmap/iD/issues/8093
+[#7977]: https://github.com/openstreetmap/iD/issues/7977
+[#7968]: https://github.com/openstreetmap/iD/issues/7968
+[#6142]: https://github.com/openstreetmap/iD/issues/6142
+[#8007]: https://github.com/openstreetmap/iD/issues/8007
+[#8009]: https://github.com/openstreetmap/iD/issues/8009
+[#7877]: https://github.com/openstreetmap/iD/issues/7877
+[#7867]: https://github.com/openstreetmap/iD/issues/7867
+
+#### :hammer: Development
+* :warning: Update to D3 v6 ([#8056])
+* Switch from buble to babel for richer transpiling of ES6 code for legacy browsers ([#8065])
+* Switch from to core-js for more comprehensive polyfilling of modern JavaScript features for legacy browsers
+* Add Codespell integration and fix existing spelling errors ([#7752], [#8054] thanks [@peternewman])
+* Add `t.html` function for getting localized text wrapped in an HTML element with the proper `lang` attribute ([#7963], [#7998])
+* Add `subtitle` function to presets to hold supplementary display text, e.g. the base preset name of brand presets ([#7536])
+* Replace the deprecated `request` dependency ([#7959])
+* Drop The Noun Project as an icon source ([#8030])
+* Add `increment` property to numeric field data to set the amount the stepper should add and subtract ([#7867])
+* Add `usage` property to field data to indicate how iD uses each field
+* Remove unused `direction_cardinal` field and its translations ([#8096])
+
+[@peternewman]: https://github.com/peternewman
+
+[#8056]: https://github.com/openstreetmap/iD/issues/8056
+[#8065]: https://github.com/openstreetmap/iD/issues/8065
+[#8054]: https://github.com/openstreetmap/iD/issues/8054
+[#7963]: https://github.com/openstreetmap/iD/issues/7963
+[#7998]: https://github.com/openstreetmap/iD/issues/7998
+[#7536]: https://github.com/openstreetmap/iD/issues/7536
+[#7959]: https://github.com/openstreetmap/iD/issues/7959
+[#8030]: https://github.com/openstreetmap/iD/issues/8030
+[#7867]: https://github.com/openstreetmap/iD/issues/7867
+[#8096]: https://github.com/openstreetmap/iD/issues/8096
 
 # 2.18.5
 ##### 2020-Sep-08
