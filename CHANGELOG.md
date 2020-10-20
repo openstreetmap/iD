@@ -118,7 +118,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Offer to fix the order of values in `vending=parcel_mail_in;parcel_pickup` ([#7988])
 * Offer to upgrade `barrier=chicane` to `barrier=cycle_barrier` ([#8045])
 * Fix unexpected tag removal when upgrading `type=audio` and `type=video` on `amenity=studio` ([#8089])
-* Don't add `tidal=yes` with `waterway=tidal_channel` ([#8072])
+* Don't offer to add `tidal=yes` with `waterway=tidal_channel` ([#8072])
+* Don't offer to add `toilets:disposal=chemical` with Portable Toilet preset ([#8044])
 
 [@mikenath223]: https://github.com/mikenath223
 
@@ -129,6 +130,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#8045]: https://github.com/openstreetmap/iD/issues/8045
 [#8089]: https://github.com/openstreetmap/iD/issues/8089
 [#8072]: https://github.com/openstreetmap/iD/issues/8072
+[#8044]: https://github.com/openstreetmap/iD/issues/8044
 
 #### :bug: Bugfixes
 * Don't return entity IDs when searching by geographic coordinates ([#7995], thanks [@SilentSpike])
@@ -197,11 +199,14 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Mounted Binoculars preset ([#7985])
 * Add Windpump preset ([#7709])
 * Add Tram & Bus Stop preset ([#7970])
+* Add Cooling Tower preset
 * Add unsearchable Disused Amenity preset ([#8051])
 
 ###### Changed  Presets
 * Rename Foot Route preset to Waking Route ([#8019], [#8023], thanks [@irevenko])
 * Add search terms to Music Store, Supermarket and Bubble Tea Cafe ([#8008], [#7986], [#7987], thanks [@TheAdventurer64])
+* Update icons for presets: Agricultural Engines Mechanic, Carpenter, Electronics Repair Shop, Joiner, Roofer, Room, Indoor Area, Surveyor Office, Mooring, Secondhand Clothing Store, Hunting Stand, Hunting Shop, Waste Transfer Station
+* Allow Airport Gate features as vertices
 
 ###### New and Changed Fields
 * Show Name field by default on Park & Ride Lot ([#8093], thanks [@evansiroky])
@@ -210,6 +215,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add Vehicles field to public transport presets ([#6142])
 * Add Inscription field to Bust ([#8007])
 * Add additional fields to Picnic Table ([#8009])
+* Add Capacity, Lit, Seasonal, and Heating fields to Outdoor Seating Area
+* Add fields to Cairn
 * Show Telephone and Website fields by default on more presets ([#7877])
 * Make the Direction field stepper use 5° increments ([#7867])
 
