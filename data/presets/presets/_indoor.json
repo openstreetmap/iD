@@ -1,4 +1,5 @@
 {
+    "icon": "temaki-room",
     "fields": [
         "level",
         "indoor_type"
