@@ -1,0 +1,42 @@
+{
+  "icon": "iD-highway-service",
+  "fields": [
+      "name",
+      "service",
+      "oneway",
+      "sidewalk",
+      "sidewalk/separate-left",
+      "sidewalk/separate-right",
+      "lanes",
+      "maxspeed",
+      "access",
+      "surface",
+      "structure"
+  ],
+  "moreFields": [
+      "flood_prone",
+      "incline",
+      "lanes",
+      "lit",
+      "maxheight",
+      "maxspeed/advisory",
+      "maxweight_bridge",
+      "oneway/bicycle",
+      "trolley_wire"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "service",
+      "access": "private",
+      "surface": "unpaved"
+  },
+  "terms": [
+      "road",
+      "street"
+  ],
+  "matchScore": 0.9,
+  "name": "Private Unpaved Service Road",
+  "shortcut": ["⌃+v"]
+}

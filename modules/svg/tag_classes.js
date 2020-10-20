@@ -7,7 +7,7 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'building:part', 'indoor', 'entrance'
+        'building:part', 'indoor'
     ];
     var statuses = [
         'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
@@ -135,18 +135,6 @@ export function svgTagClasses() {
             classes.push('tag-' + k + '-' + v);
         }
 
-        /*if (primary === 'entrance')
-        {
-            for (k in t) {
-                v = t[k];
-                if (k === 'entrance' && v === 'main')
-                {
-                    classes.push('tag-entrance-main');
-                    break;
-                }
-            }
-        }*/
-
         // check for number of flats in building or landuse residential:
         if (primary === 'building' || (primary === 'landuse' && t.landuse === 'residential'))
         {
@@ -218,10 +206,15 @@ export function svgTagClasses() {
             var sidewalkUseSidepath = false;
             var sidewalkSeparateLeftRightOrBoth = false;
             var cyclewayUseSidepath = false;
+            var cyclewayHasSegregatedTag = false;
             var hasMaxSpeed = false;
             var maxSpeed    = null;
             var hasLanes = false;
             var delivery = false;
+            var isSidewalk = false;
+            var isCrossing = false;
+            var hasName = false;
+            var bicycleTag = null;
 
             for (k in t) {
                 v = t[k];
@@ -229,10 +222,44 @@ export function svgTagClasses() {
                 {
                     sidewalkUseSidepath = true;
                 }
+                if (k === 'footway' && v === 'sidewalk')
+                {
+                    isSidewalk = true;
+                }
+                if (k === 'footway' && v === 'crossing')
+                {
+                    isCrossing = true;
+                }
+                if (k === 'name' && v !== '' && v !== undefined && v !== null)
+                {
+                    hasName = true;
+                }
+                
                 if ((k === 'bicycle' || k === 'routing:bicycle') && v === 'use_sidepath')
                 {
                     cyclewayUseSidepath = true;
                 }
+                if (k === 'bicycle')
+                {
+                    bicycleTag = v;
+                }
+                if (t.highway === 'cycleway' && k === 'segregated')
+                {
+                    if (v === 'no')
+                    {
+                        classes.push('tag-cycleway-segregated-no');
+                    }
+                    else if (v === 'yes')
+                    {
+                        classes.push('tag-cycleway-segregated-yes');
+                    }
+                    else
+                    {
+                        classes.push('tag-cycleway-segregated-undefined');
+                    }
+                    cyclewayHasSegregatedTag = true;
+                }
+                
                 if (k === 'maxspeed' && v >= 10 && v <= 100)
                 {
                     hasMaxSpeed = true;
@@ -391,10 +418,15 @@ export function svgTagClasses() {
             }
             if (cycleway !== 'blank') {
                 classes.push('tag-cycleway-' + cycleway);
+                if (cyclewayHasSegregatedTag === false && cyclewayWithPedestrian)
+                {
+                    classes.push('tag-cycleway-segregated-undefined');
+                }
             }
             if (cyclewayType !== 'none') {
                 classes.push('tag-' + cyclewayType);
             }
+            
             if (isCycleway && !cyclewayWithPedestrian)
             {
                 classes.push('tag-cycleway-no_pedestrian');
@@ -404,6 +436,47 @@ export function svgTagClasses() {
             }
             if (!ignoreMaxSpeed && !hasLanes) {
                 classes.push('tag-lanes-missing');
+            }
+            if (isSidewalk)
+            {
+                if (!hasName)
+                {
+                    classes.push('tag-footway-sidewalk-no-name');
+                }
+                if (bicycleTag === 'yes') {
+                    classes.push('tag-footway-sidewalk-bicycle-yes');
+                }
+                else if (bicycleTag === 'no') {
+                    classes.push('tag-footway-sidewalk-bicycle-no');
+                }
+                else if (bicycleTag === 'dismount') {
+                    classes.push('tag-footway-sidewalk-bicycle-dismount');
+                }
+                else
+                {
+                    classes.push('tag-footway-sidewalk-bicycle-undefined');
+                }
+            }
+
+            if (isCrossing)
+            {
+                if (!hasName)
+                {
+                    classes.push('tag-footway-crossing-no-name');
+                }
+                if (bicycleTag === 'yes') {
+                    classes.push('tag-footway-crossing-bicycle-yes');
+                }
+                else if (bicycleTag === 'no') {
+                    classes.push('tag-footway-crossing-bicycle-no');
+                }
+                else if (bicycleTag === 'dismount') {
+                    classes.push('tag-footway-crossing-bicycle-dismount');
+                }
+                else
+                {
+                    classes.push('tag-footway-crossing-bicycle-undefined');
+                }
             }
 
             if (maxSpeed) {

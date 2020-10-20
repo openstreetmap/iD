@@ -45,7 +45,7 @@ export function svgVertices(projection, context) {
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
         var activeID = context.activeID();
         var base = context.history().base();
-
+        
 
         function getIcon(d) {
             // always check latest entity, as fastEntityKey avoids enter/exit now
@@ -123,6 +123,7 @@ export function svgVertices(projection, context) {
             .append('circle')
             .attr('class', 'fill');
 
+        
         // update
         groups = groups
             .merge(enter)

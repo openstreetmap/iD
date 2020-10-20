@@ -19,9 +19,6 @@ path.line.shadow.tag-highway {
 path.line.over-stroke.tag-highway {
     stroke-width: 8;
 }
-path.line.over-stroke-2.tag-highway {
-    stroke-width: 8;
-}
 path.line.casing.tag-highway {
     stroke-width: 12;
 }
@@ -750,7 +747,68 @@ path.line.casing.tag-cycleway-track.tag-unpaved {
     stroke: #91cdfd;
 }
 
+path.line.casing.tag-cycleway-segregated-undefined {
+    stroke: #ff7e29;
+}
 
+path.line.casing.tag-cycleway-segregated-yes {
+    stroke: #ee97ff;
+}
+
+path.line.casing.tag-cycleway-segregated-no {
+    stroke: #91cdfd;
+}
+
+path.line.casing.tag-footway-sidewalk-bicycle-undefined {
+    stroke: #ffef92;
+}
+
+path.line.casing.tag-footway-sidewalk-bicycle-yes {
+    stroke: #96e6ff;
+}
+
+path.line.casing.tag-footway-sidewalk-bicycle-dismount {
+    stroke: #a3ffe0;
+}
+
+path.line.casing.tag-footway-sidewalk-no-name, 
+path.line.casing.tag-footway-sidewalk-bicycle-undefined.tag-footway-sidewalk-no-name, 
+path.line.casing.tag-footway-sidewalk-bicycle-dismount.tag-footway-sidewalk-no-name,
+path.line.casing.tag-footway-sidewalk-bicycle-yes.tag-footway-sidewalk-no-name,
+path.line.casing.tag-footway-sidewalk-bicycle-no.tag-footway-sidewalk-no-name {
+    stroke: #ffdbc3;
+}
+
+
+/*path.line.casing.tag-footway-crossing-bicycle-undefined {
+    stroke: #d1c061;
+}*/
+
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-bicycle-yes, path.line.casing.tag-crossing-marked.tag-footway-crossing-bicycle-yes {
+    stroke: #6cbad1;
+}
+
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-bicycle-dismount, path.line.casing.tag-crossing-marked.tag-footway-crossing-bicycle-dismount {
+    stroke: #72c9ac;
+}
+
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-no-name, 
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-bicycle-undefined.tag-footway-crossing-no-name, 
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-bicycle-dismount.tag-footway-crossing-no-name,
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-bicycle-yes.tag-footway-crossing-no-name,
+path.line.casing.tag-crossing-unmarked.tag-footway-crossing-bicycle-no.tag-footway-crossing-no-name,
+path.line.casing.tag-crossing-marked.tag-footway-crossing-no-name, 
+path.line.casing.tag-crossing-marked.tag-footway-crossing-bicycle-undefined.tag-footway-crossing-no-name, 
+path.line.casing.tag-crossing-marked.tag-footway-crossing-bicycle-dismount.tag-footway-crossing-no-name,
+path.line.casing.tag-crossing-marked.tag-footway-crossing-bicycle-yes.tag-footway-crossing-no-name,
+path.line.casing.tag-crossing-marked.tag-footway-crossing-bicycle-no.tag-footway-crossing-no-name {
+    stroke: rgb(207, 152, 115);
+}
+
+
+/*path.line.casing.tag-footway-sidewalk-bicycle-no {
+    stroke: #ffdf29;
+}*/
 
 
 /* highway midpoints */

@@ -1,0 +1,21 @@
+{
+  "icon": "iD-entrance-secondary",
+  "fields": [
+      "ref",
+      "door",
+      "access_simple",
+      "level"
+  ],
+  "geometry": [
+      "vertex"
+  ],
+  "tags": {
+      "entrance": "secondary"
+  },
+  "terms": [
+      "secondary exit",
+      "door"
+  ],
+  "matchScore": 0.8,
+  "name": "Secondary Exit"
+}

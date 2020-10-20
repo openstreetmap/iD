@@ -13,5 +13,6 @@
       "key": "service",
       "value": "parking_aisle"
   },
-  "name": "Private Unpaved Parking Aisle"
+  "name": "Private Unpaved Parking Aisle",
+  "shortcut": ["⌃+a"]
 }
