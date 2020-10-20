@@ -266,6 +266,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#8056]: https://github.com/openstreetmap/iD/issues/8056
 [#8065]: https://github.com/openstreetmap/iD/issues/8065
 [#8054]: https://github.com/openstreetmap/iD/issues/8054
+[#7752]: https://github.com/openstreetmap/iD/issues/7752
 [#7963]: https://github.com/openstreetmap/iD/issues/7963
 [#7998]: https://github.com/openstreetmap/iD/issues/7998
 [#7536]: https://github.com/openstreetmap/iD/issues/7536
