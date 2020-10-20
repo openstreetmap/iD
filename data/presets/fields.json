@@ -129,7 +129,6 @@
   "diet_multi": {"key": "diet:", "type": "multiCombo", "label": "Diet Types", "terms": ["gluten free", "fruitarian", "halal", "kosher", "lactose free", "meat", "pescatarian", "raw", "vegan", "vegetarian"]},
   "diplomatic": {"key": "diplomatic", "type": "combo", "label": "Type"},
   "diplomatic/services": {"key": "diplomatic:services:", "type": "multiCombo", "label": "Services"},
-  "direction_cardinal": {"key": "direction", "type": "combo", "label": "Direction", "strings": {"options": {"N": "North", "E": "East", "S": "South", "W": "West", "NE": "Northeast", "SE": "Southeast", "SW": "Southwest", "NW": "Northwest", "NNE": "North-northeast", "ENE": "East-northeast", "ESE": "East-southeast", "SSE": "South-southeast", "SSW": "South-southwest", "WSW": "West-southwest", "WNW": "West-northwest", "NNW": "North-northwest"}}},
   "direction_clock": {"key": "direction", "type": "combo", "label": "Direction", "strings": {"options": {"clockwise": "Clockwise", "anticlockwise": "Counterclockwise"}}},
   "direction_point": {"key": "direction", "type": "number", "label": "Direction (Degrees Clockwise)", "placeholder": "45, 90, 180, 270", "increment": 5, "geometry": ["point"]},
   "direction_vertex_dual": {"key": "direction", "type": "combo", "label": "Direction Affected", "strings": {"options": {"forward": "Forward", "backward": "Backward"}}},

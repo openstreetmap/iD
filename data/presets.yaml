@@ -721,42 +721,6 @@ en:
         # direction field placeholder
         placeholder: '45, 90, 180, 270'
         terms: '[translate with synonyms or related terms for ''Direction (Degrees Clockwise)'', separated by commas]'
-      direction_cardinal:
-        # direction=*
-        label: Direction
-        options:
-          # direction=E
-          E: East
-          # direction=ENE
-          ENE: East-northeast
-          # direction=ESE
-          ESE: East-southeast
-          # direction=N
-          'N': North
-          # direction=NE
-          NE: Northeast
-          # direction=NNE
-          NNE: North-northeast
-          # direction=NNW
-          NNW: North-northwest
-          # direction=NW
-          NW: Northwest
-          # direction=S
-          S: South
-          # direction=SE
-          SE: Southeast
-          # direction=SSE
-          SSE: South-southeast
-          # direction=SSW
-          SSW: South-southwest
-          # direction=SW
-          SW: Southwest
-          # direction=W
-          W: West
-          # direction=WNW
-          WNW: West-northwest
-          # direction=WSW
-          WSW: West-southwest
       direction_clock:
         # direction=*
         label: Direction

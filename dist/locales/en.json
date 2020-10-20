@@ -3530,27 +3530,6 @@
                 "diplomatic/services": {
                     "label": "Services"
                 },
-                "direction_cardinal": {
-                    "label": "Direction",
-                    "options": {
-                        "N": "North",
-                        "E": "East",
-                        "S": "South",
-                        "W": "West",
-                        "NE": "Northeast",
-                        "SE": "Southeast",
-                        "SW": "Southwest",
-                        "NW": "Northwest",
-                        "NNE": "North-northeast",
-                        "ENE": "East-northeast",
-                        "ESE": "East-southeast",
-                        "SSE": "South-southeast",
-                        "SSW": "South-southwest",
-                        "WSW": "West-southwest",
-                        "WNW": "West-northwest",
-                        "NNW": "North-northwest"
-                    }
-                },
                 "direction_clock": {
                     "label": "Direction",
                     "options": {
