@@ -5348,6 +5348,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     max-width: 120px;
     text-align: initial;
     line-height: 1.1em;
+    font-weight: bold;
 }
 .ideditor[dir='ltr'] .edit-menu-item .label {
     margin-left: 8px;
