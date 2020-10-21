@@ -157,10 +157,9 @@ export function osmJoinWays(toJoin, graph) {
         var item = toJoin.shift();
         var currWays = [item];
         var currNodes = resolve(item).slice();
-        var doneSequence = false;
 
         // add to it
-        while (toJoin.length && !doneSequence) {
+        while (toJoin.length) {
             var start = currNodes[0];
             var end = currNodes[currNodes.length - 1];
             var fn = null;
