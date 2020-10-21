@@ -198,6 +198,17 @@ osmEntity.prototype = {
         var deprecated = [];
         dataDeprecated.forEach(function(d) {
             var oldKeys = Object.keys(d.old);
+            if (d.replace) {
+                var hasExistingValues = Object.keys(d.replace).some(function(replaceKey) {
+                    if (!tags[replaceKey] || d.old[replaceKey]) return false;
+                    var replaceValue = d.replace[replaceKey];
+                    if (replaceValue === '*') return false;
+                    if (replaceValue === tags[replaceKey]) return false;
+                    return true;
+                });
+                // don't flag deprecated tags if the upgrade path would overwrite existing data - #7843
+                if (hasExistingValues) return;
+            }
             var matchesDeprecatedTags = oldKeys.every(function(oldKey) {
                 if (!tags[oldKey]) return false;
                 if (d.old[oldKey] === '*') return true;
