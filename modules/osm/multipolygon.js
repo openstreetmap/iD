@@ -210,7 +210,6 @@ export function osmJoinWays(toJoin, graph) {
             }
 
             if (!nodes) {     // couldn't find a joinable way/member
-                doneSequence = true;
                 break;
             }
 
