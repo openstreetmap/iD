@@ -323,14 +323,14 @@ export function uiFeatureList(context) {
         }
 
 
-        function mouseover(d) {
+        function mouseover(d3_event, d) {
             if (d.id === -1) return;
 
             utilHighlightEntities([d.id], true, context);
         }
 
 
-        function mouseout(d) {
+        function mouseout(d3_event, d) {
             if (d.id === -1) return;
 
             utilHighlightEntities([d.id], false, context);

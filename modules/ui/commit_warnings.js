@@ -49,7 +49,7 @@ export function uiCommitWarnings(context) {
 
             var buttons = itemsEnter
                 .append('button')
-                .on('mouseover', function(d) {
+                .on('mouseover', function(d3_event, d) {
                     if (d.entityIds) {
                         context.surface().selectAll(
                             utilEntityOrMemberSelector(
@@ -63,7 +63,7 @@ export function uiCommitWarnings(context) {
                     context.surface().selectAll('.hover')
                         .classed('hover', false);
                 })
-                .on('click', function(d) {
+                .on('click', function(d3_event, d) {
                     context.validator().focusIssue(d);
                 });
 

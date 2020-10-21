@@ -83,13 +83,13 @@ export function uiSectionValidationIssues(id, severity, context) {
         var itemsEnter = items.enter()
             .append('li')
             .attr('class', function (d) { return 'issue severity-' + d.severity; })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 context.validator().focusIssue(d);
             })
-            .on('mouseover', function(d) {
+            .on('mouseover', function(d3_event, d) {
                 utilHighlightEntities(d.entityIds, true, context);
             })
-            .on('mouseout', function(d) {
+            .on('mouseout', function(d3_event, d) {
                 utilHighlightEntities(d.entityIds, false, context);
             });
 
