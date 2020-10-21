@@ -40,7 +40,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### Planned: 2020-Oct
 
 #### :boom: Breaking Changes
-* The modifier key to zoom and move the map or selection by a lot has changed from <kbd>Cmd</kbd>(or <kbd>Ctrl</kbd>) to <kbd>Opt</kbd>(or <kbd>Alt</kbd>) ([#7976])
+* The modifier key to zoom and move the map or selection by a lot has changed from <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> to <kbd>Opt</kbd> / <kbd>Alt</kbd> ([#7976])
 
 [#7976]: https://github.com/openstreetmap/iD/issues/7976
 
@@ -48,7 +48,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Make the interface navigable using only a keyboard ([#7770], [#8004])
 * Enable the Relations section of the sidebar when multiple features are selected ([#7753])
 * Support text-only page zoom, a vision accessibility feature in most web browsers ([#7965], [#7979])
-* Support common browser shortcuts for zooming the page size: <kbd>Cmd</kbd>(or <kbd>Ctrl</kbd>)<kbd>+</kbd> and <kbd>Cmd</kbd>(or <kbd>Ctrl</kbd>)<kbd>–</kbd> ([#7976])
+* Support common browser shortcuts for zooming the page size: <kbd>Cmd</kbd><kbd>+</kbd> / <kbd>Ctrl</kbd><kbd>+</kbd> and <kbd>Cmd</kbd><kbd>–</kbd> / <kbd>Ctrl</kbd><kbd>–</kbd> ([#7976])
 * Show the distance between any two selected points in the Measurement panel ([#7952])
 * Style driveways, parking aisles, and emergency access roads uniquely in the map ([#7961])
 * Make the custom data labels white instead of pink, for better readability ([#8055])
@@ -66,6 +66,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#8021]: https://github.com/openstreetmap/iD/issues/8021
 
 #### :scissors: Operations
+* Improve the Circularize animation ([#8083], thanks [@teymour-aldridge])
 * Add shortcuts for scaling the size of selected features: <kbd>Shift</kbd><kbd>+</kbd> and <kbd>Shift</kbd><kbd>–</kbd> ([#3372], [#8012])
 * Rename the Reflect Short and Reflect Long operations to Flip Short and Flip Long ([#7824])
 * Support splitting lines and areas at multiple selected points at once ([#7990])
@@ -77,6 +78,9 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Make Delete and Downgrade separate operations with different shortcuts ([#7682])
 * Enable the removal of all tags from selected vertices with the Downgrade operation ([#6756])
 
+[@teymour-aldridge]: https://github.com/teymour-aldridge
+
+[#8083]: https://github.com/openstreetmap/iD/issues/8083
 [#3372]: https://github.com/openstreetmap/iD/issues/3372
 [#8012]: https://github.com/openstreetmap/iD/issues/8012
 [#7824]: https://github.com/openstreetmap/iD/issues/7824
@@ -90,8 +94,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#6756]: https://github.com/openstreetmap/iD/issues/6756
 
 #### :camera: Street-Level
-* Support filtering photos by capture date and contributor ([#4518], [#7342], [#5307], [#7847], [#8076], thanks [@nickplesha])
-* Enable launching iD with a specific street-level photo and persisting the open photo through reloads ([#6398], [#7885], thanks [@nickplesha])
+* Add controls to filter photos by capture date and contributor ([#4518], [#7342], [#5307], [#7847], [#8076], thanks [@nickplesha])
+* Support linking to iD with a specific photo open and persisting the photo when reloading ([#6398], [#7885], thanks [@nickplesha])
 * Fix selection and highlighting issues with Mapillary detections ([#7048], [#7177], [#7885], thanks [@nickplesha])
 * Load auxiliary photo overlay resources only when needed, not upon startup ([#7982], [#8061])
 * Fix issue where some photo viewer controls could not be clicked ([#7974])
@@ -120,6 +124,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Fix unexpected tag removal when upgrading `type=audio` and `type=video` on `amenity=studio` ([#8089])
 * Don't offer to add `tidal=yes` with `waterway=tidal_channel` ([#8072])
 * Don't offer to add `toilets:disposal=chemical` with Portable Toilet preset ([#8044])
+* Offer to upgrade nonstandard tags `amenity=notice_board` and `service=drive_through`
 
 [@mikenath223]: https://github.com/mikenath223
 
@@ -157,7 +162,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * If the user's requested language isn't fully translated, fallback to their other preferred languages before English ([#7996])
 * Support language-dependent plural forms for numeric labels ([#597], [#7991], [#8026])
 * Use local number formats in labels ([#7993])
-* Add `lang` attribute to labels to help with formatting, transliteration, and text-to-speech when using iD with mixed languages ([#7963], [#7998])
+* Add `lang` attribute to labels to help with formatting, transliteration, and text-to-speech ([#7963], [#7998])
 
 [#7996]: https://github.com/openstreetmap/iD/issues/7996
 [#597]: https://github.com/openstreetmap/iD/issues/597
@@ -259,6 +264,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * :warning: Update to D3 v6 ([#8056])
 * Switch from buble to babel for richer transpiling of ES6 code for legacy browsers ([#8065])
 * Switch from to core-js for more comprehensive polyfilling of modern JavaScript features for legacy browsers
+* Add URL parameters: `photo`, `photo_dates`, `photo_username`
+* Accept multiple comma-separated codes in the `locale` URL parameter
 * Add Codespell integration and fix existing spelling errors ([#7752], [#8054] thanks [@peternewman])
 * Add `t.html` function for getting localized text wrapped in an HTML element with the proper `lang` attribute ([#7963], [#7998])
 * Add `subtitle` function to presets to hold supplementary display text, e.g. the base preset name of brand presets ([#7536])
@@ -267,6 +274,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add `increment` property to numeric field data to set the amount the stepper should add and subtract ([#7867])
 * Add `usage` property to field data to indicate how iD uses each field
 * Remove unused `direction_cardinal` field and its translations ([#8096])
+* Rename functions that now accept HTML instead of plaintext: `uiFlash.text` to `uiFlash.label`, `uiDisclosure.title` to `uiDisclosure.label`, `uiSection.title` to `uiSection.label`, `uiPane.title` to `uiPane.label`
 
 [@peternewman]: https://github.com/peternewman
 
