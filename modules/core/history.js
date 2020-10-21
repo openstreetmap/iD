@@ -15,7 +15,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('change', 'merge', 'restore', 'undone', 'redone');
+    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone');
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
@@ -362,6 +362,7 @@ export function coreHistory(context) {
                 _tree = coreTree(_stack[0].graph);
                 _checkpoints = {};
             }
+            dispatch.call('reset');
             dispatch.call('change');
             return history;
         },
