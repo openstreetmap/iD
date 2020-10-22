@@ -7,7 +7,7 @@ or learn more by visiting our project page on GitHub:  :octocat: https://github.
 
 If you love iD, please star our project on GitHub to show your support! :star:
 
-_Breaking changes, which may affect downstream projects or sites that embed iD, are marked with a_ :warning:
+_Breaking developer changes, which may affect downstream projects or sites that embed iD, are marked with a_ :warning:
 
 <!--
 # A.B.C
@@ -118,6 +118,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :white_check_mark: Validation
 * Offer to upgrade `capacity` to `seats` on `amenity=bench` ([#8002], [#7886], thanks [@mikenath223])
+* Don't offer tag upgrades that would overwrite existing data ([#7843])
 * Improve feature labels in mismatched geometry warnings ([#8018])
 * Offer to fix the order of values in `vending=parcel_mail_in;parcel_pickup` ([#7988])
 * Offer to upgrade `barrier=chicane` to `barrier=cycle_barrier` ([#8045])
@@ -128,6 +129,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 [@mikenath223]: https://github.com/mikenath223
 
+[#7843]: https://github.com/openstreetmap/iD/issues/7843
 [#8002]: https://github.com/openstreetmap/iD/issues/8002
 [#7886]: https://github.com/openstreetmap/iD/issues/7886
 [#8018]: https://github.com/openstreetmap/iD/issues/8018
@@ -274,7 +276,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Add `increment` property to numeric field data to set the amount the stepper should add and subtract ([#7867])
 * Add `usage` property to field data to indicate how iD uses each field
 * Remove unused `direction_cardinal` field and its translations ([#8096])
-* Rename functions that now accept HTML instead of plaintext: `uiFlash.text` to `uiFlash.label`, `uiDisclosure.title` to `uiDisclosure.label`, `uiSection.title` to `uiSection.label`, `uiPane.title` to `uiPane.label`
+* :warning: Rename functions that now accept HTML instead of plaintext: `uiFlash.text` to `uiFlash.label`, `uiDisclosure.title` to `uiDisclosure.label`, `uiSection.title` to `uiSection.label`, `uiPane.title` to `uiPane.label`
 
 [@peternewman]: https://github.com/peternewman
 

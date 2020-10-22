@@ -11304,8 +11304,8 @@
                 "description": "Mappers and OpenStreetMap enthusiasts in the Twin Cities area",
                 "extendedDescription": "Connecting OpenStreetMap enthusiasts in Minnesota and the Twin Cities!"
             },
-            "Mapping-DC-meetup": {
-                "name": "Mapping DC",
+            "MappingDC-meetup": {
+                "name": "MappingDC",
                 "description": "Improve OpenStreetMap in the DC area",
                 "extendedDescription": "We are a group of volunteer mappers who aim to improve the OpenStreetMap in the DC area. We also aim to teach others about the OSM ecosystem, data analytics, cartography, and GIS. We gather every other month at meetups to focus on one area of our city."
             },
@@ -11454,10 +11454,6 @@
                 "name": "OSM Cuba on Telegram",
                 "description": "OpenStreetMap Cuba Telegram chat"
             },
-            "OSM-CZ-telegram": {
-                "name": "OpenStreetMap CZ Telegram",
-                "description": "A Telegram group for the OSM Czech community: {url}"
-            },
             "OSM-Central-Salish-Sea": {
                 "name": "OpenStreetMap Central Salish Sea",
                 "description": "Mappers and OpenStreetMap users around Mount Vernon, WA",
@@ -11553,7 +11549,7 @@
             },
             "OSM-MY-matrix": {
                 "name": "OpenStreetMap Malaysia Riot channel",
-                "description": "All mappers are welcome! Sign up at {signupUrl}"
+                "description": "All mappers are welcome! Sign up at {url}"
             },
             "OSM-Nepal-facebook": {
                 "name": "OpenStreetMap Nepal",
@@ -11611,6 +11607,10 @@
             "OSM-PL-forum": {
                 "name": "OpenStreetMap Poland Forum",
                 "description": "Forum of Polish OpenStreetMap community"
+            },
+            "OSM-PL-github": {
+                "name": "OpenStreetMap Polska on GitHub",
+                "description": "GitHub organization for Polish OpenStreetMap community"
             },
             "OSM-PY-telegram": {
                 "name": "OSM Paraguay on Telegram",
@@ -11953,6 +11953,10 @@
                 "name": "OpenStreetMap Berlin Twitter",
                 "description": "Follow us on Twitter: {url}"
             },
+            "de-berlin-xmpp": {
+                "name": "OpenStreetMap Berlin-Brandenburg XMPP",
+                "description": "Join our XMPP Multi-User Chat: {url}"
+            },
             "de-forum": {
                 "name": "OpenStreetMap DE forum",
                 "description": "OpenStreetMap Germany web forum"
@@ -11965,13 +11969,21 @@
                 "name": "OpenStreetMap Germany IRC",
                 "description": "Join #osm-de on irc.oftc.net (port 6667)"
             },
+            "de-karlsruhe-mailinglist": {
+                "name": "Karlsruhe Mailing List",
+                "description": "This is the mailing list for the OSM community of Karlsruhe area"
+            },
+            "de-karlsruhe-meetup": {
+                "name": "OpenStreetMap Karlsruhe Meetup",
+                "description": "Mappers and OpenStreetMap users in the Karlsruhe area"
+            },
             "de-mailinglist": {
                 "name": "Talk-de Mailing List",
                 "description": "Talk-de is the official mailing list for the German OSM community"
             },
             "de-matrix": {
                 "name": "OpenStreetMap Germany Matrix",
-                "description": "Join #osm-de:matrix.org at https://riot.im/app/#/room/%23osm-de:matrix.org"
+                "description": "Join #osm-de:matrix.org at {url}"
             },
             "de-mv-mailinglist": {
                 "name": "Mecklenburg-Vorpommern Mailing List",
@@ -11985,9 +11997,25 @@
                 "name": "OWL Mailing List",
                 "description": "This is the mailing list for the Ostwestfalen-Lippe OSM community"
             },
+            "de-stuttgart-mailinglist": {
+                "name": "Stuttgart and Baden-Wuerttemberg Mailing List",
+                "description": "This is the mailing list for the OSM community of Stuttgart and whole Baden-Wuerttemberg"
+            },
+            "de-stuttgart-meetup": {
+                "name": "OpenStreetMap Stuttgart Meetup",
+                "description": "Mappers and OpenStreetMap users in the Stuttgart area"
+            },
             "de-telegram": {
                 "name": "OpenStreetMap Germany Telegram",
                 "description": "Join the OpenStreetMap Germany Telegram supergroup at {url}"
+            },
+            "de-ulm_neuulm-meetup": {
+                "name": "OpenStreetMap Ulm Neu-Ulm Meetup",
+                "description": "Mappers and OpenStreetMap users in the Ulm and Neu-Ulm area"
+            },
+            "de-ulmeralb-meetup": {
+                "name": "OpenStreetMap Ulmer Alb Meetup",
+                "description": "Mappers and OpenStreetMap users in the Ulmer Alb area"
             },
             "de-viersen-meetup": {
                 "name": "OpenStreetMap Viersen Meetup",
@@ -12029,6 +12057,10 @@
                 "name": "OpenStreetMap Rennes Wiki page",
                 "description": "Wiki page of Rennes OSM local group"
             },
+            "fr-38-wiki": {
+                "name": "OpenStreetMap Grenoble Wiki page",
+                "description": "Wiki page of Grenoble OSM local group"
+            },
             "fr-bzh-mailinglist": {
                 "name": "Talk-fr-bzh Mailing List",
                 "description": "Talk-fr-bzh mailing list"
@@ -12069,6 +12101,10 @@
                 "name": "OpenStreetMap France on Twitter",
                 "description": "OpenStreetMap France on Twitter: {url}"
             },
+            "fr-xmpp": {
+                "name": "OpenStreetMap France on XMPP",
+                "description": "Join osm-fr@chat.jabberfr.org"
+            },
             "galicia-wiki": {
                 "name": "OpenStreetMap Wikiproject Galicia",
                 "description": "Everything you need to know about mapping in Galicia: {url}"
@@ -12096,7 +12132,7 @@
             },
             "gr-matrix": {
                 "name": "OpenStreetMap Greece Matrix",
-                "description": "Join #osm-gr:matrix.org at https://riot.im/app/#/room/%23osm-gr:matrix.org"
+                "description": "Join #osm-gr:matrix.org at {url}"
             },
             "guatemala-telegram": {
                 "name": "OSM Guatemala on Telegram",
@@ -12107,7 +12143,7 @@
                 "description": "OpenStreetMap Croatia Facebook group"
             },
             "hr-forum": {
-                "name": "OSM Croaria Forum",
+                "name": "OSM Croatia Forum",
                 "description": "OpenStreetMap Croatia Forum"
             },
             "hr-irc": {
@@ -12249,9 +12285,28 @@
                 "name": "OpenStreetMap Wikiproject Latin America",
                 "description": "Everything you need to know about mapping in Latin America"
             },
+            "lombardia-telegram": {
+                "name": "OpenStreetMap Lombardia Mappers",
+                "description": "OpenStreetMap Lombardia Telegram chat"
+            },
+            "lu-github": {
+                "name": "OpenStreetMap LU on GitHub",
+                "description": "Everyone is welcome!",
+                "extendedDescription": "OSM Luxembourg on GitHub"
+            },
+            "lu-irc": {
+                "name": "OpenStreetMap LU IRC channel",
+                "description": "Join #osm-lu on irc.oftc.net (port 6667).",
+                "extendedDescription": "Feel free to join our IRC Room, it is bridged with Matrix. Let's bring the community together."
+            },
             "lu-mailinglist": {
                 "name": "Talk-lu Mailing List",
                 "description": "Official mailing list for the Luxembourgish OSM community"
+            },
+            "lu-matrix": {
+                "name": "OpenStreetMap LU Matrix channel",
+                "description": "Everyone is welcome!",
+                "extendedDescription": "Feel free to join our Matrix Chat Room! Let's bring the community together."
             },
             "mailinglist-sk-googlegroups": {
                 "name": "Slovak mailing list on google groups",
@@ -12274,6 +12329,11 @@
             "md-telegram": {
                 "name": "@OSMMoldova on Telegram",
                 "description": "OpenStreetMap Moldova Telegram chat"
+            },
+            "mt-irc": {
+                "name": "OpenStreetMap Malta IRC",
+                "description": "Join #osm-mt on irc.oftc.net (port 6667)",
+                "extendedDescription": "Join #osm-mt on irc.oftc.net (port 6667), please be patient and wait for a few minutes if you ask a question"
             },
             "ni-facebook": {
                 "name": "OpenStreetMap NI Community",
@@ -12539,6 +12599,11 @@
                 "name": "OpenStreetMap IT Lazio",
                 "description": "All are welcome! Sign up at {signupUrl}",
                 "extendedDescription": "Mailinglist for Rome and Lazio area."
+            },
+            "talk-it-lombardia_mailinglist": {
+                "name": "OSM Italy regional talk list for Lombardia",
+                "description": "All are welcome! Sign up at {signupUrl}",
+                "extendedDescription": "Mailinglist for Lombardia region."
             },
             "talk-it-piemonte_mailinglist": {
                 "name": "OSM Italy regional talk list for Piemonte",

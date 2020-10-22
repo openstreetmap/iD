@@ -40,21 +40,24 @@ export function coreValidator(context) {
         }
     };
 
-
-    //
-    // clear caches, called whenever iD resets after a save
-    //
-    validator.reset = function() {
+    function reset(resetIgnored) {
         Array.from(_deferred).forEach(function(handle) {
             window.cancelIdleCallback(handle);
             _deferred.delete(handle);
         });
 
         // clear caches
-        _ignoredIssueIDs = {};
+        if (resetIgnored) _ignoredIssueIDs = {};
         _baseCache = validationCache();
         _headCache = validationCache();
         _validatedGraph = null;
+    }
+
+    //
+    // clear caches, called whenever iD resets after a save
+    //
+    validator.reset = function() {
+        reset(true);
     };
 
     validator.resetIgnoredIssues = function() {
@@ -404,6 +407,12 @@ export function coreValidator(context) {
         dispatch.call('validated');
     };
 
+    context.history()
+        .on('reset.validator', function() {
+            // cached issues aren't valid any longer if the history has been reset
+            reset(false);
+            validator.validate();
+        });
 
     // WHEN TO RUN VALIDATION:
     // When graph changes:

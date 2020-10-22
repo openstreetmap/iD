@@ -98,9 +98,9 @@ export function uiPresetList(context) {
             var results, messageText;
             if (value.length && extent) {
                 var center = extent.center();
-                var countryCodes = countryCoder.iso1A2Codes(center);
+                var countryCode = countryCoder.iso1A2Code(center);
 
-                results = presets.search(value, entityGeometries()[0], countryCodes);
+                results = presets.search(value, entityGeometries()[0], countryCode && countryCode.toLowerCase());
                 messageText = t('inspector.results', {
                     n: results.collection.length,
                     search: value
