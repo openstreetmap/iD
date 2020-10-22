@@ -11153,6 +11153,13 @@
                 "description": "Orthophotos from the municipality of Stockholm 2016, CC0 license",
                 "name": "Stockholm Orthophoto"
             },
+            "susono_shizuoka_jp_orthophoto": {
+                "attribution": {
+                    "text": "Susono city orthophoto"
+                },
+                "description": "The aerial photos released by Susono City as open data.",
+                "name": "Susono city orthophoto"
+            },
             "tf-cycle": {
                 "attribution": {
                     "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
