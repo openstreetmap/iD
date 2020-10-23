@@ -15,6 +15,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "arrow-spacing": "warn",
         "class-methods-use-this": "error",
         "complexity": ["warn", 50],
         "default-case-last": "error",

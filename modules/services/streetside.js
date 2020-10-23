@@ -186,10 +186,10 @@ function connectSequences() {
       // create a GeoJSON LineString
       sequence.geojson = {
         type: 'LineString',
-        properties: { 
+        properties: {
           captured_at: sequence.bubbles[0] ? sequence.bubbles[0].captured_at : null,
           captured_by: sequence.bubbles[0] ? sequence.bubbles[0].captured_by : null,
-          key: sequence.key 
+          key: sequence.key
         },
         coordinates: sequence.bubbles.map(d => d.loc)
       };
@@ -855,7 +855,7 @@ export default {
     // Map images to cube faces
     let quadKeys = getQuadKeys();
     let faces = faceKeys.map((faceKey) => {
-      return quadKeys.map((quadKey) =>{
+      return quadKeys.map((quadKey) => {
         const xy = qkToXY(quadKey);
         return {
           face: faceKey,
