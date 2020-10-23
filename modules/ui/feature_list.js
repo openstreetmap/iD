@@ -142,10 +142,23 @@ export function uiFeatureList(context) {
             if (idMatch) {
                 var elemType = idMatch[1].charAt(0);
                 var elemId = idMatch[2];
+                var geometry;
+                var label;
+                if (elemType === 'n') {
+                    geometry = 'point';
+                    label = t('inspector.node');
+                } else if (elemType === 'w') {
+                    geometry = 'line';
+                    label = t('inspector.way');
+                } else {
+                    geometry = 'relation';
+                    label = t('inspector.relation');
+                }
+
                 result.push({
                     id: elemType + elemId,
-                    geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : 'relation',
-                    type: elemType === 'n' ? t('inspector.node') : elemType === 'w' ? t('inspector.way') : t('inspector.relation'),
+                    geometry: geometry,
+                    type: label,
                     name: elemId
                 });
             }

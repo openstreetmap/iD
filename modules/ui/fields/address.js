@@ -195,9 +195,12 @@ export function uiFieldAddress(field, context) {
         function addDropdown(d) {
             if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
 
-            var nearValues = (d.id === 'street') ? getNearStreets
-                : (d.id === 'city') ? getNearCities
-                : getNearValues;
+            var nearValues = getNearValues;
+            if (d.id === 'street') {
+                nearValues = getNearStreets;
+            } else if (d.id === 'city') {
+                nearValues = getNearCities;
+            }
 
             d3_select(this)
                 .call(uiCombobox(context, 'address-' + d.id)

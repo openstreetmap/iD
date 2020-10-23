@@ -34,9 +34,9 @@ export function actionJoin(ids) {
         ways.sort(function(a, b) {
             var aSided = a.isSided();
             var bSided = b.isSided();
-            return (aSided && !bSided) ? -1
-                : (bSided && !aSided) ? 1
-                : 0;
+            if (aSided && !bSided) return -1;
+            if (bSided && !aSided) return 1;
+            return 0;
         });
 
         // Prefer to keep an existing way.

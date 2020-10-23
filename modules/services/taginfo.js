@@ -133,9 +133,9 @@ function roleKey(d) {
 
 // sort keys with ':' lower than keys without ':'
 function sortKeys(a, b) {
-    return (a.key.indexOf(':') === -1 && b.key.indexOf(':') !== -1) ? -1
-        : (a.key.indexOf(':') !== -1 && b.key.indexOf(':') === -1) ? 1
-        : 0;
+    if (a.key.indexOf(':') === -1 && b.key.indexOf(':') !== -1) return -1;
+    if (a.key.indexOf(':') !== -1 && b.key.indexOf(':') === -1) return 1;
+    return 0;
 }
 
 

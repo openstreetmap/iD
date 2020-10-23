@@ -108,8 +108,13 @@ function cardinalDirection(bearing) {
 function preventCoincident(loc, bumpUp) {
   let coincident = false;
   do {
+    let delta = [0, 0];
     // first time, move marker up. after that, move marker right.
-    let delta = coincident ? [0.00001, 0] : (bumpUp ? [0, 0.00001] : [0, 0]);
+    if (coincident) {
+      delta = [0.00001, 0];
+    } else if (bumpUp) {
+      delta = [0, 0.00001];
+    }
     loc = geoVecAdd(loc, delta);
     let bbox = geoExtent(loc).bbox();
     coincident = _cache.rtree.search(bbox).length;

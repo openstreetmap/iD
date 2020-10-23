@@ -16,7 +16,9 @@ export var JXON = new (function () {
   EmptyTree.prototype.valueOf = function () { return null; };
 
   function objectify (vValue) {
-    return vValue === null ? new EmptyTree() : vValue instanceof Object ? vValue : new vValue.constructor(vValue);
+    if (vValue === null) return new EmptyTree();
+    if (vValue instanceof Object) return vValue;
+    return new vValue.constructor(vValue);
   }
 
   function createObjTree (oParentNode, nVerb, bFreeze, bNesteAttr) {

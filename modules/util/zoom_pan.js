@@ -30,7 +30,13 @@ function defaultExtent() {
 }
 
 function defaultWheelDelta(d3_event) {
-  return -d3_event.deltaY * (d3_event.deltaMode === 1 ? 0.05 : d3_event.deltaMode ? 1 : 0.002);
+  var factor = 1;
+  if (d3_event.deltaMode === 1) {
+    factor = 0.05;
+  } else if (!d3_event.deltaMode) {
+    factor = 0.002;
+  }
+  return -d3_event.deltaY * factor;
 }
 
 function defaultConstrain(transform, extent, translateExtent) {
@@ -93,11 +99,16 @@ export function utilZoomPan() {
 
   zoom.scaleTo = function(selection, k, p) {
     zoom.transform(selection, function() {
-      var e = extent.apply(this, arguments),
-          t0 = _transform,
-          p0 = !p ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p,
-          p1 = t0.invert(p0),
-          k1 = typeof k === 'function' ? k.apply(this, arguments) : k;
+      var e = extent.apply(this, arguments);
+      var t0 = _transform;
+      var p0;
+      if (p) {
+        p0 = typeof p === 'function' ? p.apply(this, arguments) : p;
+      } else {
+        p0 = centroid(e);
+      }
+      var p1 = t0.invert(p0);
+      var k1 = typeof k === 'function' ? k.apply(this, arguments) : k;
       return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
     }, p);
   };
@@ -113,9 +124,14 @@ export function utilZoomPan() {
 
   zoom.translateTo = function(selection, x, y, p) {
     zoom.transform(selection, function() {
-      var e = extent.apply(this, arguments),
-          t = _transform,
-          p0 = !p ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p;
+      var e = extent.apply(this, arguments);
+      var t = _transform;
+      var p0;
+      if (p) {
+        p0 = typeof p === 'function' ? p.apply(this, arguments) : p;
+      } else {
+        p0 = centroid(e);
+      }
       return constrain(d3_zoomIdentity.translate(p0[0], p0[1]).scale(t.k).translate(
         typeof x === 'function' ? -x.apply(this, arguments) : -x,
         typeof y === 'function' ? -y.apply(this, arguments) : -y
@@ -142,15 +158,20 @@ export function utilZoomPan() {
         .on('start.zoom', function() { gesture(this, arguments).start(null); })
         .on('interrupt.zoom end.zoom', function() { gesture(this, arguments).end(null); })
         .tween('zoom', function() {
-          var that = this,
-              args = arguments,
-              g = gesture(that, args),
-              e = extent.apply(that, args),
-              p = !point ? centroid(e) : typeof point === 'function' ? point.apply(that, args) : point,
-              w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]),
-              a = _transform,
-              b = typeof transform === 'function' ? transform.apply(that, args) : transform,
-              i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
+          var that = this;
+          var args = arguments;
+          var g = gesture(that, args);
+          var e = extent.apply(that, args);
+          var p;
+          if (point) {
+            p = typeof point === 'function' ? point.apply(that, args) : point;
+          } else {
+            p = centroid(e);
+          }
+          var w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]);
+          var a = _transform;
+          var b = typeof transform === 'function' ? transform.apply(that, args) : transform;
+          var i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
           return function(t) {
             if (t === 1) t = b; // Avoid rounding error on end.
             else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }

@@ -277,7 +277,9 @@ export function uiSuccess(context) {
         return !isNaN(t) && t >= now;
       })
       .sort((a, b) => {       // sort by date ascending
-        return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+        if (a.date < b.date) return -1;
+        if (a.date > b.date) return 1;
+        return 0;
       })
       .slice(0, MAXEVENTS);   // limit number of events shown
 

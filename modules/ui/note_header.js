@@ -31,7 +31,15 @@ export function uiNoteHeader() {
             .call(svgIcon('#iD-icon-note', 'note-fill'));
 
         iconEnter.each(function(d) {
-            var statusIcon = '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
+            var statusIcon;
+            if (d.id < 0) {
+                statusIcon = '#iD-icon-plus';
+            } else if (d.status === 'open') {
+                statusIcon = '#iD-icon-close';
+            } else {
+                statusIcon = '#iD-icon-apply';
+            }
+
             iconEnter
                 .append('div')
                 .attr('class', 'note-icon-annotation')

@@ -50,10 +50,13 @@ export function uiDisclosure(context, key, expandedDefault) {
         hideToggle.selectAll('.hide-toggle-text')
             .html(_label());
 
+        var icon = '#iD-icon-down';
+        if (!_expanded) {
+            icon = localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward';
+        }
+
         hideToggle.selectAll('.hide-toggle-icon')
-            .attr('xlink:href', _expanded ? '#iD-icon-down'
-                : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
-            );
+            .attr('xlink:href', icon);
 
 
         var wrap = selection.selectAll('.disclosure-wrap')
@@ -84,10 +87,13 @@ export function uiDisclosure(context, key, expandedDefault) {
             hideToggle
                 .classed('expanded', _expanded);
 
+            var icon = '#iD-icon-down';
+            if (!_expanded) {
+                icon = localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward';
+            }
+
             hideToggle.selectAll('.hide-toggle-icon')
-                .attr('xlink:href', _expanded ? '#iD-icon-down'
-                    : (localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'
-                );
+                .attr('xlink:href', icon);
 
             wrap
                 .call(uiToggle(_expanded));

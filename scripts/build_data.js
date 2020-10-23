@@ -768,9 +768,11 @@ function validateDefaults(defaults, categories, presets) {
 function translationsToYAML(translations) {
   // comment keys end with '#' and should sort immediately before their related key.
   function commentFirst(a, b) {
-    return (a === b + '#') ? -1
-      : (b === a + '#') ? 1
-      : (a > b ? 1 : a < b ? -1 : 0);
+    if (a === b + '#') return -1;
+    if (b === a + '#') return 1;
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
   }
 
   return YAML.safeDump({ en: { presets: translations }}, { sortKeys: commentFirst, lineWidth: -1 })

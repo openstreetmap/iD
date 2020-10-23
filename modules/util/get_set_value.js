@@ -21,9 +21,9 @@ export function utilGetSetValue(selection, value) {
             }
         }
 
-        return (value === null || value === undefined)
-            ? valueNull : (typeof value === 'function'
-            ? valueFunction : valueConstant);
+        if (value === null || value === undefined) return valueNull;
+        if (typeof value === 'function') return valueFunction;
+        return valueConstant;
     }
 
     if (arguments.length === 1) {

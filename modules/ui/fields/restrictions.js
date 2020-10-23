@@ -436,7 +436,6 @@ export function uiFieldRestrictions(field, context) {
                 for (var i = 0; i < turns.length; i++) {
                     var turn = turns[i];
                     var ids = [turn.to.way];
-                    var klass = (turn.no ? 'restrict' : (turn.only ? 'only' : 'allow'));
 
                     if (turn.only || turns.length === 1) {
                         if (turn.via.ways) {
@@ -448,9 +447,9 @@ export function uiFieldRestrictions(field, context) {
 
                     surface.selectAll(utilEntitySelector(ids))
                         .classed('related', true)
-                        .classed('allow', (klass === 'allow'))
-                        .classed('restrict', (klass === 'restrict'))
-                        .classed('only', (klass === 'only'));
+                        .classed('restrict', turn.no)
+                        .classed('only', !turn.no && turn.only)
+                        .classed('allow', !turn.no && !turn.only);
                 }
             }
         }
@@ -602,9 +601,9 @@ export function uiFieldRestrictions(field, context) {
 
 
     function displayMaxVia(maxVia) {
-        return maxVia === 0 ? t.html('restriction.controls.via_node_only')
-            : maxVia === 1 ? t.html('restriction.controls.via_up_to_one')
-            : t.html('restriction.controls.via_up_to_two');
+        if (maxVia === 0) return t.html('restriction.controls.via_node_only');
+        if (maxVia === 1) return t.html('restriction.controls.via_up_to_one');
+        return t.html('restriction.controls.via_up_to_two');
     }
 
 

@@ -273,9 +273,9 @@ export function svgStreetside(projection, context, dispatch) {
         var markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
-                return (a === selected) ? 1
-                    : (b === selected) ? -1
-                    : b.loc[1] - a.loc[1];
+                if (a === selected) return 1;
+                if (b === selected) return -1;
+                return b.loc[1] - a.loc[1];
             })
             .attr('transform', transform)
             .select('.viewfield-scale');

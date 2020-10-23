@@ -169,9 +169,11 @@ export function uiSectionBackgroundList(context) {
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
             .sort(function(a, b) {
-                return a.best() && !b.best() ? -1
-                    : b.best() && !a.best() ? 1
-                    : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+                if (a.best() && !b.best()) return -1;
+                if (b.best() && !a.best()) return 1;
+                return d3_descending(a.area(), b.area()) ||
+                    d3_ascending(a.name(), b.name()) ||
+                    0;
             });
 
         var layerLinks = layerList.selectAll('li')

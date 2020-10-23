@@ -215,7 +215,14 @@ Object.assign(osmWay.prototype, {
             var b = coords[(i+2) % coords.length];
             var res = geoVecCross(a, b, o);
 
-            curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
+            if (res > 0) {
+                curr = 1;
+            } else if (res < 0) {
+                curr = -1;
+            } else {
+                curr = 0;
+            }
+
             if (curr === 0) {
                 continue;
             } else if (prev && curr !== prev) {

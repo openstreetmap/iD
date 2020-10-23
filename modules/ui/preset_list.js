@@ -275,8 +275,10 @@ export function uiPresetList(context) {
 
             function click() {
                 var isExpanded = d3_select(this).classed('expanded');
-                var iconName = isExpanded ?
-                    (localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
+                var iconName = '#iD-icon-down';
+                if (isExpanded) {
+                    iconName = localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward';
+                }
                 d3_select(this)
                     .classed('expanded', !isExpanded);
                 d3_select(this).selectAll('div.label-inner svg.icon use')

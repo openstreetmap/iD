@@ -53,6 +53,7 @@
         "no-loop-func": "error",
         "no-loss-of-precision": "error",
         "no-multi-str": "error",
+        "no-nested-ternary": "warn",
         "no-new": "error",
         "no-new-func": "error",
         "no-new-wrappers": "error",
