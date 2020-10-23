@@ -34,7 +34,7 @@ describe('iD.actionUpgradeTags', function () {
 
     it('upgrades a tag with no replacement tags', function () {
         var oldTags = { highway: 'no' },
-            newTags = undefined,
+            newTags,
             entity = iD.osmEntity({ tags: { highway: 'no', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
         expect(graph.entity(entity.id).tags).to.eql({ name: 'Foo' });
