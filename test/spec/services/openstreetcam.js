@@ -256,7 +256,7 @@ describe('iD.serviceOpenstreetcam', function() {
                 properties: {
                     captured_at: undefined,
                     captured_by: undefined,
-                    key: '100' 
+                    key: '100'
                 }
             }]);
         });

@@ -223,10 +223,10 @@ export default {
                     lineStrings.push({
                         type: 'LineString',
                         coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
-                        properties: { 
+                        properties: {
                             captured_at: images[0] ? images[0].captured_at: null,
                             captured_by: images[0] ? images[0].captured_by: null,
-                            key: sequenceKey 
+                            key: sequenceKey
                         }
                     });
                 }

@@ -33,6 +33,7 @@
     "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/@ideditor/temaki/icons/*.svg",
     "imagery": "node scripts/update_imagery.js",
     "lint": "eslint scripts test/spec modules",
+    "lint:fix": "eslint scripts test/spec modules --fix",
     "start": "npm-run-all -s build start:server",
     "quickstart": "npm-run-all -s build:dev start:server",
     "start:server": "node scripts/server.js",

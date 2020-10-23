@@ -69,6 +69,7 @@
         "no-shadow-restricted-names": "error",
         "no-template-curly-in-string": "warn",
         "no-throw-literal": "error",
+        "no-trailing-spaces": "warn",
         "no-undef": "error",
         "no-undef-init": "warn",
         "no-unexpected-multiline": "error",
