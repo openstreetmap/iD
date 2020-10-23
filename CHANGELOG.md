@@ -99,9 +99,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix selection and highlighting issues with Mapillary detections ([#7048], [#7177], [#7885], thanks [@nickplesha])
 * Load auxiliary photo overlay resources only when needed, not upon startup ([#7982], [#8061])
 * Fix issue where some photo viewer controls could not be clicked ([#7974])
+* Fix issue where some button icons wouldn't appear in the Mapillary viewer ([#7920], [#8063])
 
 [@nickplesha]: https://github.com/nickplesha
 
+[#8063]: https://github.com/openstreetmap/iD/issues/8063
+[#7920]: https://github.com/openstreetmap/iD/issues/7920
 [#4518]: https://github.com/openstreetmap/iD/issues/4518
 [#7342]: https://github.com/openstreetmap/iD/issues/7342
 [#5307]: https://github.com/openstreetmap/iD/issues/5307
