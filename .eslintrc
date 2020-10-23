@@ -43,6 +43,7 @@
         "no-extra-label": "error",
         "no-floating-decimal": "error",
         "no-global-assign": "error",
+        "no-implicit-coercion": ["warn", { "boolean": false, "number": false }],
         "no-implied-eval": "error",
         "no-invalid-this": "off",
         "no-iterator": "error",

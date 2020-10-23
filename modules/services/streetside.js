@@ -479,7 +479,8 @@ export default {
     if (!window.pannellum) return;
     if (_pannellumViewer) return;
 
-    const sceneID = ++_currScene + '';
+    _currScene += 1;
+    const sceneID = _currScene.toString();
     const options = {
       'default': { firstScene: sceneID },
       scenes: {}
@@ -873,14 +874,15 @@ export default {
           that.initViewer();
         } else {
           // make a new scene
-          let sceneID = ++_currScene + '';
+          _currScene += 1;
+          let sceneID = _currScene.toString();
           _pannellumViewer
             .addScene(sceneID, _sceneOptions)
             .loadScene(sceneID);
 
           // remove previous scene
           if (_currScene > 2) {
-            sceneID = (_currScene - 1) + '';
+            sceneID = (_currScene - 1).toString();
             _pannellumViewer
               .removeScene(sceneID);
           }
