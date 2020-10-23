@@ -17,6 +17,7 @@
     "rules": {
         "accessor-pairs": "error",
         "arrow-spacing": "warn",
+        "block-scoped-var": "error",
         "class-methods-use-this": "error",
         "complexity": ["warn", 50],
         "default-case-last": "error",
