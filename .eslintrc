@@ -29,6 +29,7 @@
         "no-console": "warn",
         "no-constructor-return": "error",
         "no-div-regex": "error",
+        "no-eq-null": "error",
         "no-eval": "error",
         "no-extend-native": "error",
         "no-extra-bind": "error",
