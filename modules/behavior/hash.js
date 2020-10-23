@@ -2,11 +2,10 @@ import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
 
-import { utilDisplayLabel } from '../util';
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
-import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { utilDisplayLabel, utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { t } from '../core/localizer';
 

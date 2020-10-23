@@ -1,6 +1,5 @@
 import { fileFetcher } from '../core/file_fetcher';
-import { localizer } from '../core/localizer';
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { presetManager } from '../presets';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
