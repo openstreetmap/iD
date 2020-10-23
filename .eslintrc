@@ -15,6 +15,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "accessor-pairs": "error",
         "arrow-spacing": "warn",
         "class-methods-use-this": "error",
         "complexity": ["warn", 50],
@@ -80,8 +81,11 @@
         "no-use-before-define": ["off", "nofunc"],
         "no-useless-backreference": "warn",
         "no-useless-call": "warn",
+        "no-useless-computed-key": "warn",
         "no-useless-concat": "warn",
+        "no-useless-constructor": "warn",
         "no-useless-escape": "off",
+        "no-useless-rename": "warn",
         "no-void": "error",
         "no-warning-comments": "warn",
         "no-with": "error",
