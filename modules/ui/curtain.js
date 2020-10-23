@@ -66,7 +66,7 @@ export function uiCurtain(containerNode) {
      * @param  {function}  [options.padding]         extra margin in px to put around bbox
      * @param  {String|ClientRect} [options.tooltipBox]  box for tooltip position, if different from box for the curtain
      */
-    curtain.reveal = function(box, text, options) {
+    curtain.reveal = function(box, html, options) {
         options = options || {};
 
         if (typeof box === 'string') {
@@ -100,12 +100,16 @@ export function uiCurtain(containerNode) {
             tooltipBox = box;
         }
 
-        if (tooltipBox && text) {
-            // pseudo markdown bold text for the instruction section..
-            var parts = text.split('**');
-            var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
-            if (parts[1]) {
-                html += '<span class="instruction">' + parts[1] + '</span>';
+        if (tooltipBox && html) {
+
+            if (html.indexOf('**') !== -1) {
+                if (html.indexOf('<span') === 0) {
+                    html = html.replace(/^(<span.*?>)(.+?)(\*\*)/, '$1<span>$2</span>$3');
+                } else {
+                    html = html.replace(/^(.+?)(\*\*)/, '<span>$1</span>$2');
+                }
+                // pseudo markdown bold text for the instruction section..
+                html = html.replace(/\*\*(.*?)\*\*/g, '<span class="instruction">$1</span>');
             }
 
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');   // emphasis
