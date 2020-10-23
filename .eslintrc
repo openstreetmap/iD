@@ -16,6 +16,7 @@
     },
     "rules": {
         "class-methods-use-this": "error",
+        "complexity": ["warn", 50],
         "default-case-last": "error",
         "default-param-last": "error",
         "dot-notation": "error",
