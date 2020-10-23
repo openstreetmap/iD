@@ -242,11 +242,11 @@ export function uiFieldWikidata(field, context) {
 
             var actions = initEntityIDs.map(function(entityID) {
                 var entity = context.hasEntity(entityID);
-                if (!entity) return;
+                if (!entity) return null;
 
                 var currTags = Object.assign({}, entity.tags);  // shallow copy
                 if (newWikipediaValue === null) {
-                    if (!currTags[_wikipediaKey]) return;
+                    if (!currTags[_wikipediaKey]) return null;
 
                     delete currTags[_wikipediaKey];
                 } else {

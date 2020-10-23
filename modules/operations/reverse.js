@@ -18,18 +18,18 @@ export function operationReverse(context, selectedIDs) {
     function actions(situation) {
         return selectedIDs.map(function(entityID) {
             var entity = context.hasEntity(entityID);
-            if (!entity) return;
+            if (!entity) return null;
 
             if (situation === 'toolbar') {
                 if (entity.type === 'way' &&
-                    (!entity.isOneWay() && !entity.isSided())) return;
+                    (!entity.isOneWay() && !entity.isSided())) return null;
             }
 
             var geometry = entity.geometry(context.graph());
-            if (entity.type !== 'node' && geometry !== 'line') return;
+            if (entity.type !== 'node' && geometry !== 'line') return null;
 
             var action = actionReverse(entityID);
-            if (action.disabled(context.graph())) return;
+            if (action.disabled(context.graph())) return null;
 
             return action;
         }).filter(Boolean);

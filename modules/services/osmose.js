@@ -207,7 +207,7 @@ export default {
     // Using multiple individual item + class requests to reduce fetched data size
     const allRequests = items.map(itemType => {
       // No need to request data we already have
-      if (itemType in _cache.strings[locale]) return;
+      if (itemType in _cache.strings[locale]) return null;
 
       const cacheData = data => {
         // Bunch of nested single value arrays of objects
@@ -249,7 +249,7 @@ export default {
       const url = `${_osmoseUrlRoot}/items/${item}/class/${cl}?langs=${locale}`;
 
       return d3_json(url).then(cacheData);
-    });
+    }).filter(Boolean);
 
     return Promise.all(allRequests).then(() => _cache.strings[locale]);
   },

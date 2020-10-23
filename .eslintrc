@@ -16,6 +16,7 @@
     },
     "rules": {
         "accessor-pairs": "error",
+        "array-callback-return": "warn",
         "arrow-spacing": "warn",
         "block-scoped-var": "error",
         "class-methods-use-this": "error",

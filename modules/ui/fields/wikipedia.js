@@ -238,6 +238,7 @@ export function uiFieldWikipedia(field, context) {
             currTags.wikidata = value;
             return actionChangeTags(entityID, currTags);
         }
+        return null;
       }).filter(Boolean);
 
       if (!actions.length) return;

@@ -170,6 +170,8 @@ export function validationDisconnectedWay() {
                 if (parentRelation.isMultipolygon() &&
                     isTaggedAsHighway(parentRelation) &&
                     (!ignoreInnerWays || parentRelation.memberById(way.id).role !== 'inner')) return true;
+
+                return false;
             });
         }
 

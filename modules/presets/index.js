@@ -398,9 +398,8 @@ export function presetIndex() {
 
       return _addablePresetIDs.map((id) => {
         const preset = _this.item(id);
-        if (preset) {
-          return RibbonItem(preset, 'addable');
-        }
+        if (preset) return RibbonItem(preset, 'addable');
+        return null;
       }).filter(Boolean);
   };
 
