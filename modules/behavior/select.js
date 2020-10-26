@@ -72,7 +72,7 @@ export function behaviorSelect(context) {
         if (d3_event.keyCode === 93) {  // context menu key
             d3_event.preventDefault();
             _lastInteractionType = 'menukey';
-            contextmenu();
+            contextmenu(d3_event);
         } else if (d3_event.keyCode === 32) {  // spacebar
             var pointer = _downPointers.spacebar;
             if (pointer) {
@@ -168,12 +168,11 @@ export function behaviorSelect(context) {
 
 
     function contextmenu(d3_event) {
-        var e = d3_event;
-        e.preventDefault();
+        d3_event.preventDefault();
 
-        if (!+e.clientX && !+e.clientY) {
+        if (!+d3_event.clientX && !+d3_event.clientY) {
             if (_lastMouseEvent) {
-                e.sourceEvent = _lastMouseEvent;
+                d3_event.sourceEvent = _lastMouseEvent;
             } else {
                 return;
             }
