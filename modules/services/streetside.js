@@ -585,7 +585,9 @@ export default {
         .attr('crossorigin', 'anonymous')
         .attr('href', context.asset(pannellumViewerCSS))
         .on('load.serviceStreetside', loaded)
-        .on('error.serviceStreetside', reject);
+        .on('error.serviceStreetside', function() {
+            reject();
+        });
 
       // load streetside pannellum viewer js
       head.selectAll('#ideditor-streetside-viewerjs')
@@ -596,7 +598,9 @@ export default {
         .attr('crossorigin', 'anonymous')
         .attr('src', context.asset(pannellumViewerJS))
         .on('load.serviceStreetside', loaded)
-        .on('error.serviceStreetside', reject);
+        .on('error.serviceStreetside', function() {
+            reject();
+        });
       })
       .catch(function() {
         _loadViewerPromise = null;
