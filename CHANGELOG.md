@@ -37,7 +37,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 # 2.19.0
-##### Planned: 2020-Oct
+##### 2020-Oct-27
+
+#### :mega: Release Highlights
+* :car: **Street-level photo filtering** now lets you limit photos to a given timeframe or user. Shoutout to [@nickplesha] for this!<br/>
+_To reveal filters, enable one or more Photo Overlays in the Map Data pane (shortcut <kbd>F</kbd>)._
+* :signal_strength: **Scaling features** is now possible via keyboard shortcuts.<br/>
+_Press <kbd>Shift</kbd><kbd>+</kbd> or <kbd>Shift</kbd><kbd>–</kbd> to make the selected features bigger or smaller._
+* :keyboard: **Keyboard navigation** has been expanded significantly.<br/>
+_Use <kbd>Tab</kbd> and <kbd>Shift</kbd><kbd>Tab</kbd> to zip around iD without a mouse._
+* :capital_abcd: **Text-only zoom** is now fully supported.<br/>
+_Most browsers let you increase the text size of pages without making everything else bigger._
+* :book: If you speak **multiple non-English languages**, iD will now prefer any of them for before defaulting to English.<br/>
+_For best results, make sure that every language you understand is listed in your [browser settings](https://www.computerhope.com/issues/ch001904.htm)._
 
 #### :boom: Breaking Changes
 * The modifier key to zoom and move the map or selection by a lot has changed from <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> to <kbd>Opt</kbd> / <kbd>Alt</kbd> ([#7976])
