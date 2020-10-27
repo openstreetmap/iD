@@ -3569,12 +3569,14 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .background-pane .nudge-container {
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 10px 10px 40px 10px;
+    padding: 10px;
     position: relative;
 }
 
-.nudge-container .nudge-instructions {
-    padding-bottom: 15px;
+.nudge-container .nudge-controls-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 .nudge-container .nudge-outer-rect {
@@ -3582,12 +3584,10 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border: 1px solid #ccc;
     border-radius: 2px;
     padding: 20px 0;
-    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    margin-top: 20px;
+    margin: 45px;
     cursor: move;
     /* prevent scrolling pane while dragging on touchscreen */
     touch-action: none;
@@ -3627,42 +3627,42 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     background: #ffb;
 }
 
-.nudge-container input:focus {
-    background-color: transparent;
-}
-
 .nudge-container button {
     position: absolute;
-    background-color: transparent;
+    height: 40px;
+    width: 40px;
 }
 .nudge-container button.right,
 .nudge-container button.left {
-    width: 40px;
-    height: 40%;
-    top: 30%;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
 }
 .nudge-container button.right {
-    left: 100%;
+    right: 0;
 }
 .nudge-container button.left {
-    right: 100%;
+    left: 0;
 }
 .nudge-container button.top,
 .nudge-container button.bottom {
-    width: 20%;
-    height: 40px;
-    left: 40%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 .nudge-container button.top {
-    bottom: 100%;
+    top: 0;
 }
 .nudge-container button.bottom {
-    top: 100%;
+    bottom: 0;
 }
 
 .nudge-container button.nudge-reset {
-    right: 15px;
-    bottom: 15px;
+    right: 0;
+    bottom: 0;
 }
 
 .nudge-surface {
