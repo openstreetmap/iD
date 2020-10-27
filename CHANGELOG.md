@@ -48,7 +48,7 @@ _Press <kbd>Shift</kbd><kbd>+</kbd> or <kbd>Shift</kbd><kbd>–</kbd> to make th
 _Use <kbd>Tab</kbd> and <kbd>Shift</kbd><kbd>Tab</kbd> to zip around iD without a mouse._
 * :capital_abcd: **Text-only zoom** is now fully supported.<br/>
 _Most browsers let you increase the text size of pages without making everything else bigger._
-* :book: If you speak **multiple non-English languages**, iD will now prefer any of them for before defaulting to English.<br/>
+* :book: If you speak **multiple non-English languages**, iD will now prefer any of them before defaulting to English.<br/>
 _For best results, make sure that every language you understand is listed in your [browser settings](https://www.computerhope.com/issues/ch001904.htm)._
 
 #### :boom: Breaking Changes
