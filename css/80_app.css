@@ -2876,6 +2876,12 @@ img.tag-reference-wiki-image {
 .over-map > * {
     pointer-events: auto;
 }
+/* offscreen this without hiding it */
+.over-map .select-trap {
+    position: absolute;
+    right: -1000%;
+    opacity: 0;
+}
 
 /* Map Controls
 ------------------------------------------------------- */
@@ -4064,6 +4070,7 @@ img.tile-debug {
     background: #000;
     user-select: none;
     touch-action: none;
+    -webkit-touch-callout: none;
 }
 .main-map * {
     touch-action: none;

@@ -163,6 +163,15 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'over-map');
 
+        // HACK: Mobile Safari 14 likes to select anything selectable when long-
+        // pressing, even if it's not targeted. This conflicts with long-pressing
+        // to show the edit menu. We add a selectable offscreen element as the first
+        // child to trick Safari into not showing the selection UI.  
+        overMap
+            .append('div')
+            .attr('class', 'select-trap')
+            .text('t');
+
         overMap
             .append('div')
             .attr('class', 'spinner')
