@@ -45,14 +45,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#7976]: https://github.com/openstreetmap/iD/issues/7976
 
 #### :sparkles: Usability & Accessibility
-* Make the interface navigable using only a keyboard ([#7770], [#8004])
+* Make the interface (except map elements) navigable using only a keyboard ([#7770], [#8004])
 * Enable the Relations section of the sidebar when multiple features are selected ([#7753])
 * Support text-only page zoom, a vision accessibility feature in most web browsers ([#7965], [#7979])
 * Support common browser shortcuts for zooming the page size: <kbd>Cmd</kbd><kbd>+</kbd> / <kbd>Ctrl</kbd><kbd>+</kbd> and <kbd>Cmd</kbd><kbd>–</kbd> / <kbd>Ctrl</kbd><kbd>–</kbd> ([#7976])
 * Show the distance between any two selected points in the Measurement panel ([#7952])
 * Style driveways, parking aisles, and emergency access roads uniquely in the map ([#7961])
 * Make the custom data labels white instead of pink, for better readability ([#8055])
-* Reduce times when the Keyboard Shortcuts list becomes one big column ([#8021])
+* Reduce situations where the Keyboard Shortcuts list becomes one big column ([#8021])
+* Increase the possible range of background imagery Brightness, Contrast, Saturation, and Sharpness from 25-200% to 0-300%
 
 [#7770]: https://github.com/openstreetmap/iD/issues/7770
 [#8004]: https://github.com/openstreetmap/iD/issues/8004
