@@ -80,7 +80,8 @@ export function uiSectionValidationStatus(context) {
         resetIgnored.select('a')
             .html(t('inspector.title_count', { title: t.html('issues.reset_ignored'), count: ignoredIssues.length }));
 
-        resetIgnored.on('click', function() {
+        resetIgnored.on('click', function(d3_event) {
+            d3_event.preventDefault();
             context.validator().resetIgnoredIssues();
         });
     }
