@@ -4581,18 +4581,13 @@ img.tile-debug {
     width: 21px;
     height: 20px;
     border-radius: 11px;
+    text-align: center;
+}
+.ideditor[dir='ltr'] .badge {
     margin-left: 6px;
 }
 .ideditor[dir='rtl'] .badge {
-    margin-left: 0;
     margin-right: 6px;
-}
-.badge a {
-    margin-right: 5px;
-}
-.ideditor[dir='rtl'] .badge a {
-    margin-right: 0;
-    margin-left: 5px;
 }
 .badge .icon {
     vertical-align: baseline;
