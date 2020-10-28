@@ -36,6 +36,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.2
+##### 2020-Oct-28
+
+#### :bug: Bugfixes
+* Fix an issue where the Lines chapter of the walkthrough could not be completed ([#8128], thanks [@ricloy])
+
+[#8128]: https://github.com/openstreetmap/iD/issues/8128
+
+[@ricloy]: https://github.com/ricloy
+
 # 2.19.1
 ##### 2020-Oct-27
 
