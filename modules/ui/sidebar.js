@@ -354,13 +354,7 @@ export function uiSidebar(context) {
         };
 
 
-        sidebar.toggle = function(d3_event, moveMap) {
-            var e = d3_event;
-            if (e && e.sourceEvent) {
-                e.sourceEvent.preventDefault();
-            } else if (e) {
-                e.preventDefault();
-            }
+        sidebar.toggle = function(moveMap) {
 
             // Don't allow sidebar to toggle when the user is in the walkthrough.
             if (context.inIntro()) return;
@@ -410,7 +404,13 @@ export function uiSidebar(context) {
         };
 
         // toggle the sidebar collapse when double-clicking the resizer
-        resizer.on('dblclick', sidebar.toggle);
+        resizer.on('dblclick', function(d3_event) {
+            d3_event.preventDefault();
+            if (d3_event.sourceEvent) {
+                e.sourceEvent.preventDefault();
+            }
+            sidebar.toggle();
+        });
 
         // ensure hover sidebar is closed when zooming out beyond editable zoom
         context.map().on('crossEditableZoom.sidebar', function(within) {
