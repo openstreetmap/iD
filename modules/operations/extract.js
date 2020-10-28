@@ -17,14 +17,14 @@ export function operationExtract(context, selectedIDs) {
     var _actions = selectedIDs.map(function(entityID) {
         var graph = context.graph();
         var entity = graph.hasEntity(entityID);
-        if (!entity || !entity.hasInterestingTags()) return;
+        if (!entity || !entity.hasInterestingTags()) return null;
 
-        if (entity.type === 'node' && graph.parentWays(entity).length === 0) return;
+        if (entity.type === 'node' && graph.parentWays(entity).length === 0) return null;
 
         if (entity.type !== 'node') {
             var preset = presetManager.match(entity, graph);
             // only allow extraction from ways/relations if the preset supports points
-            if (preset.geometry.indexOf('point') === -1) return;
+            if (preset.geometry.indexOf('point') === -1) return null;
         }
 
         _extent = _extent ? _extent.extend(entity.extent(graph)) : entity.extent(graph);

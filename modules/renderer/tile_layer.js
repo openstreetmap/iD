@@ -121,7 +121,7 @@ export function rendererTileLayer(context) {
             });
         }
 
-        function load(d) {
+        function load(d3_event, d) {
             _cache[d[3]] = true;
             d3_select(this)
                 .on('error', null)
@@ -130,7 +130,7 @@ export function rendererTileLayer(context) {
             render(selection);
         }
 
-        function error(d) {
+        function error(d3_event, d) {
             _cache[d[3]] = false;
             d3_select(this)
                 .on('error', null)

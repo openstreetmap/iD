@@ -11,6 +11,7 @@ export function uiFeatureInfo(context) {
                 count += stats[k];
                 return t('inspector.title_count', { title: t.html('feature.' + k + '.description'), count: stats[k] });
             }
+            return null;
         }).filter(Boolean);
 
         selection.html('');

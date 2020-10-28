@@ -71,7 +71,7 @@ export function behaviorDraw(context) {
             downLoc: pointerLocGetter(d3_event)
         };
 
-        dispatch.call('down', this, datum(d3_event));
+        dispatch.call('down', this, d3_event, datum(d3_event));
     }
 
     function pointerup(d3_event) {
@@ -129,7 +129,7 @@ export function behaviorDraw(context) {
             d3_event.timeStamp - _lastPointerUpEvent.timeStamp < 100) return;
 
         _lastMouse = d3_event;
-        dispatch.call('move', this, datum(d3_event));
+        dispatch.call('move', this, d3_event, datum(d3_event));
     }
 
     function pointercancel(d3_event) {

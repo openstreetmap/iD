@@ -242,9 +242,11 @@ export function actionCircularize(wayId, projection, maxAngle) {
         var centroid = d3_polygonCentroid(points);
         var radius = geoVecLengthSquare(centroid, points[0]);
 
+        var i, actualPoint;
+
         // compare distances between centroid and points
-        for (var i = 0; i<hull.length; i++){
-            var actualPoint = hull[i];
+        for (i = 0; i < hull.length; i++){
+            actualPoint = hull[i];
             var actualDist = geoVecLengthSquare(actualPoint, centroid);
             var diff = Math.abs(actualDist - radius);
             //compare distances with epsilon-error (5%)
@@ -254,7 +256,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
         }
 
         //check if central angles are smaller than maxAngle
-        for (i = 0; i<hull.length; i++){
+        for (i = 0; i < hull.length; i++){
             actualPoint = hull[i];
             var nextPoint = hull[(i+1)%hull.length];
             var startAngle = Math.atan2(actualPoint[1] - centroid[1], actualPoint[0] - centroid[0]);

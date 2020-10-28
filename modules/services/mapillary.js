@@ -431,7 +431,9 @@ export default {
                 .attr('crossorigin', 'anonymous')
                 .attr('href', context.asset(viewercss))
                 .on('load.serviceMapillary', loaded)
-                .on('error.serviceMapillary', reject);
+                .on('error.serviceMapillary', function() {
+                    reject();
+                });
 
             // load mapillary-viewerjs
             head.selectAll('#ideditor-mapillary-viewerjs')
@@ -442,7 +444,9 @@ export default {
                 .attr('crossorigin', 'anonymous')
                 .attr('src', context.asset(viewerjs))
                 .on('load.serviceMapillary', loaded)
-                .on('error.serviceMapillary', reject);
+                .on('error.serviceMapillary', function() {
+                    reject();
+                });
         })
         .catch(function() {
             _loadViewerPromise = null;

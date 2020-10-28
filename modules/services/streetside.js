@@ -186,10 +186,10 @@ function connectSequences() {
       // create a GeoJSON LineString
       sequence.geojson = {
         type: 'LineString',
-        properties: { 
+        properties: {
           captured_at: sequence.bubbles[0] ? sequence.bubbles[0].captured_at : null,
           captured_by: sequence.bubbles[0] ? sequence.bubbles[0].captured_by : null,
-          key: sequence.key 
+          key: sequence.key
         },
         coordinates: sequence.bubbles.map(d => d.loc)
       };
@@ -479,7 +479,8 @@ export default {
     if (!window.pannellum) return;
     if (_pannellumViewer) return;
 
-    const sceneID = ++_currScene + '';
+    _currScene += 1;
+    const sceneID = _currScene.toString();
     const options = {
       'default': { firstScene: sceneID },
       scenes: {}
@@ -584,7 +585,9 @@ export default {
         .attr('crossorigin', 'anonymous')
         .attr('href', context.asset(pannellumViewerCSS))
         .on('load.serviceStreetside', loaded)
-        .on('error.serviceStreetside', reject);
+        .on('error.serviceStreetside', function() {
+            reject();
+        });
 
       // load streetside pannellum viewer js
       head.selectAll('#ideditor-streetside-viewerjs')
@@ -595,7 +598,9 @@ export default {
         .attr('crossorigin', 'anonymous')
         .attr('src', context.asset(pannellumViewerJS))
         .on('load.serviceStreetside', loaded)
-        .on('error.serviceStreetside', reject);
+        .on('error.serviceStreetside', function() {
+            reject();
+        });
       })
       .catch(function() {
         _loadViewerPromise = null;
@@ -855,7 +860,7 @@ export default {
     // Map images to cube faces
     let quadKeys = getQuadKeys();
     let faces = faceKeys.map((faceKey) => {
-      return quadKeys.map((quadKey) =>{
+      return quadKeys.map((quadKey) => {
         const xy = qkToXY(quadKey);
         return {
           face: faceKey,
@@ -873,14 +878,15 @@ export default {
           that.initViewer();
         } else {
           // make a new scene
-          let sceneID = ++_currScene + '';
+          _currScene += 1;
+          let sceneID = _currScene.toString();
           _pannellumViewer
             .addScene(sceneID, _sceneOptions)
             .loadScene(sceneID);
 
           // remove previous scene
           if (_currScene > 2) {
-            sceneID = (_currScene - 1) + '';
+            sceneID = (_currScene - 1).toString();
             _pannellumViewer
               .removeScene(sceneID);
           }

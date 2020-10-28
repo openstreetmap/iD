@@ -1,8 +1,7 @@
 import _throttle from 'lodash-es/throttle';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { xml as d3_xml } from 'd3-fetch';
-import { json as d3_json } from 'd3-fetch';
+import { json as d3_json, xml as d3_xml } from 'd3-fetch';
 
 import osmAuth from 'osm-auth';
 import RBush from 'rbush';

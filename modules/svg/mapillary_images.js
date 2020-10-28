@@ -170,6 +170,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                         }
                     }
                 }
+                return false;
             });
         }
         if (fromDate) {

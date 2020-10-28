@@ -114,7 +114,6 @@ export function uiFieldCheck(field, context) {
             enter
                 .append('button')
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
-                .attr('href', '#')
                 .append('span')
                 .attr('class', 'reverser-span');
         }

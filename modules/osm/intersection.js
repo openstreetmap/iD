@@ -380,7 +380,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                     if (currPath.indexOf(way.id) !== -1 && currPath.length >= 3) continue;
 
                     // Check all "current" restrictions (where we've already walked the `FROM`)
-                    var restrict = undefined;
+                    var restrict = null;
                     for (j = 0; j < currRestrictions.length; j++) {
                         var restriction = currRestrictions[j];
                         var f = restriction.memberByRole('from');

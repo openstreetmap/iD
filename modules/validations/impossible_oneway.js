@@ -1,5 +1,4 @@
-import { localizer } from '../core/localizer';
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { actionReverse } from '../actions/reverse';
 import { utilDisplayLabel } from '../util';

@@ -38,11 +38,20 @@ export function uiPresetIcon() {
   }
 
 
-  function renderPointBorder(enter) {
+  function renderPointBorder(container, drawPoint) {
+
+    let pointBorder = container.selectAll('.preset-icon-point-border')
+      .data(drawPoint ? [0] : []);
+
+    pointBorder.exit()
+      .remove();
+
+    let pointBorderEnter = pointBorder.enter();
+
     const w = 40;
     const h = 40;
 
-    enter
+    pointBorderEnter
       .append('svg')
       .attr('class', 'preset-icon-fill preset-icon-point-border')
       .attr('width', w)
@@ -51,15 +60,25 @@ export function uiPresetIcon() {
       .append('path')
       .attr('transform', 'translate(11.5, 8)')
       .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
+
+    pointBorder = pointBorderEnter.merge(pointBorder);
   }
 
 
-  function renderCircleFill(fillEnter) {
+  function renderCircleFill(container, drawVertex) {
+    let vertexFill = container.selectAll('.preset-icon-fill-vertex')
+      .data(drawVertex ? [0] : []);
+
+    vertexFill.exit()
+      .remove();
+
+    let vertexFillEnter = vertexFill.enter();
+
     const w = 60;
     const h = 60;
     const d = 40;
 
-    fillEnter
+    vertexFillEnter
       .append('svg')
       .attr('class', 'preset-icon-fill preset-icon-fill-vertex')
       .attr('width', w)
@@ -69,10 +88,21 @@ export function uiPresetIcon() {
       .attr('cx', w / 2)
       .attr('cy', h / 2)
       .attr('r', d / 2);
+
+    vertexFill = vertexFillEnter.merge(vertexFill);
   }
 
 
-  function renderSquareFill(fillEnter) {
+  function renderSquareFill(container, drawArea, tagClasses) {
+
+    let fill = container.selectAll('.preset-icon-fill-area')
+      .data(drawArea ? [0] : []);
+
+    fill.exit()
+      .remove();
+
+    let fillEnter = fill.enter();
+
     const d = isSmall() ? 40 : 60;
     const w = d;
     const h = d;
@@ -115,10 +145,26 @@ export function uiPresetIcon() {
           .attr('r', rMidpoint);
       });
     }
+
+    fill = fillEnter.merge(fill);
+
+    fill.selectAll('path.stroke')
+      .attr('class', `area stroke ${tagClasses}`);
+    fill.selectAll('path.fill')
+      .attr('class', `area fill ${tagClasses}`);
   }
 
 
-  function renderLine(lineEnter) {
+  function renderLine(container, drawLine, tagClasses) {
+
+    let line = container.selectAll('.preset-icon-line')
+      .data(drawLine ? [0] : []);
+
+    line.exit()
+      .remove();
+
+    let lineEnter = line.enter();
+
     const d = isSmall() ? 40 : 60;
     // draw the line parametrically
     const w = d;
@@ -151,10 +197,26 @@ export function uiPresetIcon() {
         .attr('cy', point[1])
         .attr('r', r);
     });
+
+    line = lineEnter.merge(line);
+
+    line.selectAll('path.stroke')
+      .attr('class', `line stroke ${tagClasses}`);
+    line.selectAll('path.casing')
+      .attr('class', `line casing ${tagClasses}`);
   }
 
 
-  function renderRoute(routeEnter) {
+  function renderRoute(container, drawRoute, p) {
+
+    let route = container.selectAll('.preset-icon-route')
+      .data(drawRoute ? [0] : []);
+
+    route.exit()
+      .remove();
+
+    let routeEnter = route.enter();
+
     const d = isSmall() ? 40 : 60;
     // draw the route parametrically
     const w = d;
@@ -198,6 +260,21 @@ export function uiPresetIcon() {
         .attr('cy', point[1])
         .attr('r', r);
     });
+
+    route = routeEnter.merge(route);
+
+    if (drawRoute) {
+      let routeType = p.tags.type === 'waterway' ? 'waterway' : p.tags.route;
+      const segmentPresetIDs = routeSegments[routeType];
+      for (let i in segmentPresetIDs) {
+        const segmentPreset = presetManager.item(segmentPresetIDs[i]);
+        const segmentTagClasses = svgTagClasses().getClassesString(segmentPreset.tags, '');
+        route.selectAll(`path.stroke.segment${i}`)
+          .attr('class', `segment${i} line stroke ${segmentTagClasses}`);
+        route.selectAll(`path.casing.segment${i}`)
+          .attr('class', `segment${i} line casing ${segmentTagClasses}`);
+      }
+    }
   }
 
 
@@ -273,84 +350,11 @@ export function uiPresetIcon() {
       .classed('showing-img', !!imageURL)
       .classed('fallback', isFallback);
 
-
-    let pointBorder = container.selectAll('.preset-icon-point-border')
-      .data(drawPoint ? [0] : []);
-
-    pointBorder.exit()
-      .remove();
-
-    let pointBorderEnter = pointBorder.enter();
-    renderPointBorder(pointBorderEnter);
-    pointBorder = pointBorderEnter.merge(pointBorder);
-
-
-    let vertexFill = container.selectAll('.preset-icon-fill-vertex')
-      .data(drawVertex ? [0] : []);
-
-    vertexFill.exit()
-      .remove();
-
-    let vertexFillEnter = vertexFill.enter();
-    renderCircleFill(vertexFillEnter);
-    vertexFill = vertexFillEnter.merge(vertexFill);
-
-
-    let fill = container.selectAll('.preset-icon-fill-area')
-      .data(drawArea ? [0] : []);
-
-    fill.exit()
-      .remove();
-
-    let fillEnter = fill.enter();
-    renderSquareFill(fillEnter);
-    fill = fillEnter.merge(fill);
-
-    fill.selectAll('path.stroke')
-      .attr('class', `area stroke ${tagClasses}`);
-    fill.selectAll('path.fill')
-      .attr('class', `area fill ${tagClasses}`);
-
-
-    let line = container.selectAll('.preset-icon-line')
-      .data(drawLine ? [0] : []);
-
-    line.exit()
-      .remove();
-
-    let lineEnter = line.enter();
-    renderLine(lineEnter);
-    line = lineEnter.merge(line);
-
-    line.selectAll('path.stroke')
-      .attr('class', `line stroke ${tagClasses}`);
-    line.selectAll('path.casing')
-      .attr('class', `line casing ${tagClasses}`);
-
-
-    let route = container.selectAll('.preset-icon-route')
-      .data(drawRoute ? [0] : []);
-
-    route.exit()
-      .remove();
-
-    let routeEnter = route.enter();
-    renderRoute(routeEnter);
-    route = routeEnter.merge(route);
-
-    if (drawRoute) {
-      let routeType = p.tags.type === 'waterway' ? 'waterway' : p.tags.route;
-      const segmentPresetIDs = routeSegments[routeType];
-      for (let i in segmentPresetIDs) {
-        const segmentPreset = presetManager.item(segmentPresetIDs[i]);
-        const segmentTagClasses = svgTagClasses().getClassesString(segmentPreset.tags, '');
-        route.selectAll(`path.stroke.segment${i}`)
-          .attr('class', `segment${i} line stroke ${segmentTagClasses}`);
-        route.selectAll(`path.casing.segment${i}`)
-          .attr('class', `segment${i} line casing ${segmentTagClasses}`);
-      }
-    }
-
+    renderPointBorder(container, drawPoint);
+    renderCircleFill(container, drawVertex);
+    renderSquareFill(container, drawArea, tagClasses);
+    renderLine(container, drawLine, tagClasses);
+    renderRoute(container, drawRoute, p);
 
     let icon = container.selectAll('.preset-icon')
       .data(picon ? [0] : []);

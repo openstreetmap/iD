@@ -169,7 +169,8 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         // members       0 1 2 3 x 5 4 7 6 x 8 9    keep 6 in j+k
         //
         function moveMember(arr, findIndex, toIndex) {
-            for (var i = 0; i < arr.length; i++) {
+            var i;
+            for (i = 0; i < arr.length; i++) {
                 if (arr[i].index === findIndex) {
                     break;
                 }

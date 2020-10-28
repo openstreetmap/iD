@@ -36,8 +36,30 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.1
+##### 2020-Oct-27
+
+#### :bug: Bugfixes
+* Fix a critical bug where changing Allowed Access or Bike Lanes fields could add invalid tags ([#8126])
+* Fix an issue with automatically opening the sidebar after drawing a new feature
+* Correct the alignment of the new update badge icon
+
+[#8126]: https://github.com/openstreetmap/iD/issues/8126
+
 # 2.19.0
-##### Planned: 2020-Oct
+##### 2020-Oct-27
+
+#### :mega: Release Highlights
+* :car: **Street-level photo filtering** now lets you limit photos to a given timeframe or user. Shoutout to [@nickplesha] for this!<br/>
+_To reveal filters, enable one or more Photo Overlays in the Map Data pane (shortcut <kbd>F</kbd>)._
+* :signal_strength: **Scaling features** is now possible via keyboard shortcuts.<br/>
+_Press <kbd>Shift</kbd><kbd>+</kbd> or <kbd>Shift</kbd><kbd>–</kbd> to make the selected features bigger or smaller._
+* :keyboard: **Keyboard navigation** has been expanded significantly.<br/>
+_Use <kbd>Tab</kbd> and <kbd>Shift</kbd><kbd>Tab</kbd> to zip around iD without a mouse._
+* :capital_abcd: **Text-only zoom** is now fully supported.<br/>
+_Most browsers let you increase the text size of pages without making everything else bigger._
+* :book: If you speak **multiple non-English languages**, iD will now prefer any of them before defaulting to English.<br/>
+_For best results, make sure that every language you understand is listed in your [browser settings](https://www.computerhope.com/issues/ch001904.htm)._
 
 #### :boom: Breaking Changes
 * The modifier key to zoom and move the map or selection by a lot has changed from <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> to <kbd>Opt</kbd> / <kbd>Alt</kbd> ([#7976])
@@ -45,14 +67,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#7976]: https://github.com/openstreetmap/iD/issues/7976
 
 #### :sparkles: Usability & Accessibility
-* Make the interface navigable using only a keyboard ([#7770], [#8004])
+* Make the interface (except map elements) navigable using only a keyboard ([#7770], [#8004])
 * Enable the Relations section of the sidebar when multiple features are selected ([#7753])
 * Support text-only page zoom, a vision accessibility feature in most web browsers ([#7965], [#7979])
 * Support common browser shortcuts for zooming the page size: <kbd>Cmd</kbd><kbd>+</kbd> / <kbd>Ctrl</kbd><kbd>+</kbd> and <kbd>Cmd</kbd><kbd>–</kbd> / <kbd>Ctrl</kbd><kbd>–</kbd> ([#7976])
 * Show the distance between any two selected points in the Measurement panel ([#7952])
 * Style driveways, parking aisles, and emergency access roads uniquely in the map ([#7961])
 * Make the custom data labels white instead of pink, for better readability ([#8055])
-* Reduce times when the Keyboard Shortcuts list becomes one big column ([#8021])
+* Reduce situations where the Keyboard Shortcuts list becomes one big column ([#8021])
+* Increase the possible range of background imagery Brightness, Contrast, Saturation, and Sharpness from 25-200% to 0-300%
 
 [#7770]: https://github.com/openstreetmap/iD/issues/7770
 [#8004]: https://github.com/openstreetmap/iD/issues/8004
@@ -99,9 +122,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix selection and highlighting issues with Mapillary detections ([#7048], [#7177], [#7885], thanks [@nickplesha])
 * Load auxiliary photo overlay resources only when needed, not upon startup ([#7982], [#8061])
 * Fix issue where some photo viewer controls could not be clicked ([#7974])
+* Fix issue where some button icons wouldn't appear in the Mapillary viewer ([#7920], [#8063])
 
 [@nickplesha]: https://github.com/nickplesha
 
+[#8063]: https://github.com/openstreetmap/iD/issues/8063
+[#7920]: https://github.com/openstreetmap/iD/issues/7920
 [#4518]: https://github.com/openstreetmap/iD/issues/4518
 [#7342]: https://github.com/openstreetmap/iD/issues/7342
 [#5307]: https://github.com/openstreetmap/iD/issues/5307

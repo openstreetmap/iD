@@ -289,8 +289,9 @@ export function uiFieldRestrictions(field, context) {
             .selectAll('.related')
             .classed('related', false);
 
+        var way;
         if (_fromWayID) {
-            var way = vgraph.entity(_fromWayID);
+            way = vgraph.entity(_fromWayID);
             surface
                 .selectAll('.' + _fromWayID)
                 .classed('selected', true)
