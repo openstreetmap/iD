@@ -25,12 +25,6 @@ export function uiSectionBackgroundOffset(context) {
     ];
 
 
-    function cancelEvent(d3_event) {
-        d3_event.stopPropagation();
-        d3_event.preventDefault();
-    }
-
-
     function updateValue() {
         var meters = geoOffsetToMeters(context.background().offset());
         var x = +meters[0].toFixed(2);

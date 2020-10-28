@@ -407,7 +407,7 @@ export function uiSidebar(context) {
         resizer.on('dblclick', function(d3_event) {
             d3_event.preventDefault();
             if (d3_event.sourceEvent) {
-                e.sourceEvent.preventDefault();
+                d3_event.sourceEvent.preventDefault();
             }
             sidebar.toggle();
         });
