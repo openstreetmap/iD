@@ -725,7 +725,7 @@ export function uiIntroLine(context, reveal) {
         context.history().on('change.intro', function(changed) {
             wasChanged = true;
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.split.annotation.line')) {
+                if (context.history().undoAnnotation() === t('operations.split.annotation.line', { n: 1 })) {
                     _washingtonSegmentID = changed.created()[0].id;
                     continueTo(didSplit);
                 } else {
