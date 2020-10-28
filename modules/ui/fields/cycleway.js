@@ -74,7 +74,7 @@ export function uiFieldCycleway(field, context) {
     }
 
 
-    function change(key) {
+    function change(d3_event, key) {
 
         var newValue = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 
