@@ -80015,7 +80015,7 @@
     "template": "http://geo.rv.ua/map/rtile/carto_1850678323655476854/ua/{zoom}/{x}/{y}.png",
     "endDate": "2011-01-01T00:00:00.000Z",
     "startDate": "2011-01-01T00:00:00.000Z",
-    "zoomExtent": [14, 18],
+    "zoomExtent": [14, 19],
     "polygon": [
       [
         [26.3431, 50.612],
