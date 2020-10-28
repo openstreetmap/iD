@@ -35,12 +35,13 @@ export function uiPanelMeasurement(context) {
         return result;
     }
 
+    var _isImperial = !localizer.usesMetric();
 
     function redraw(selection) {
         var graph = context.graph();
         var selectedNoteID = context.selectedNoteID();
         var osm = services.osm;
-        var isImperial = !localizer.usesMetric();
+
         var localeCode = localizer.localeCode();
 
         var heading;
@@ -144,7 +145,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.area') + ':')
                 .append('span')
-                .html(displayArea(area, isImperial));
+                .html(displayArea(area, _isImperial));
         }
 
         if (length) {
@@ -152,7 +153,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.' + (closed ? 'perimeter' : 'length')) + ':')
                 .append('span')
-                .html(displayLength(length, isImperial));
+                .html(displayLength(length, _isImperial));
         }
 
         if (typeof distance === 'number') {
@@ -160,7 +161,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.distance') + ':')
                 .append('span')
-                .html(displayLength(distance, isImperial));
+                .html(displayLength(distance, _isImperial));
         }
 
         if (location) {
@@ -194,7 +195,7 @@ export function uiPanelMeasurement(context) {
         }
 
         if (length || area || typeof distance === 'number') {
-            var toggle  = isImperial ? 'imperial' : 'metric';
+            var toggle  = _isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
                 .html(t.html('info_panels.measurement.' + toggle))
@@ -202,7 +203,7 @@ export function uiPanelMeasurement(context) {
                 .attr('class', 'button button-toggle-units')
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-                    isImperial = !isImperial;
+                    _isImperial = !_isImperial;
                     selection.call(redraw);
                 });
         }
