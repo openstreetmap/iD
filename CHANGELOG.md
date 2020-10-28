@@ -36,6 +36,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.1
+##### 2020-Oct-27
+
+#### :bug: Bugfixes
+* Fix a critical bug where changing Allowed Access or Bike Lanes fields could add invalid tags ([#8126])
+* Fix en issue with automatically opening the sidebar after drawing a new feature
+* Correct the alignment of the new update badge icon
+
+[#8126]: https://github.com/openstreetmap/iD/issues/8126
+
 # 2.19.0
 ##### 2020-Oct-27
 
