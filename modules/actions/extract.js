@@ -1,5 +1,7 @@
 
 import { geoCentroid as d3_geoCentroid } from 'd3-geo';
+import geojsonRewind from '@mapbox/geojson-rewind';
+
 import { osmNode } from '../osm/node';
 
 export function actionExtract(entityID) {
@@ -45,7 +47,8 @@ export function actionExtract(entityID) {
         var keysToRetain = ['area'];
         var buildingKeysToRetain = ['architect', 'building', 'height', 'layer'];
 
-        var extractedLoc = d3_geoCentroid(entity.asGeoJSON(graph));
+        // d3_geoCentroid is wrong for counterclockwise-wound polygons, so wind them clockwise
+        var extractedLoc = d3_geoCentroid(geojsonRewind(Object.assign({}, entity.asGeoJSON(graph)), true));
         if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
             extractedLoc = entity.extent(graph).center();
         }
