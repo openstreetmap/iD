@@ -114,7 +114,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
                 return feature.detections.some(function(detection) {
                     var imageKey = detection.image_key;
                     var image = service.cachedImage(imageKey);
-                    return usernames.indexOf(image.captured_by) !== -1;
+                    return image && usernames.indexOf(image.captured_by) !== -1;
                 });
             });
         }
