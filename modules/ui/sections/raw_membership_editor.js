@@ -39,10 +39,10 @@ export function uiSectionRawMembershipEditor(context) {
     var nearbyCombo = uiCombobox(context, 'parent-relation')
         .minItems(1)
         .fetcher(fetchNearbyRelations)
-        .itemsMouseEnter(function(d) {
+        .itemsMouseEnter(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], true, context);
         })
-        .itemsMouseLeave(function(d) {
+        .itemsMouseLeave(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], false, context);
         });
     var _inChange = false;
