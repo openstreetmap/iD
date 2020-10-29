@@ -2878,6 +2878,7 @@ img.tag-reference-wiki-image {
 }
 .over-map > * {
     pointer-events: auto;
+    z-index: 5;
 }
 /* offscreen this without hiding it */
 .over-map .select-trap {
@@ -4100,7 +4101,7 @@ img.tile-debug {
     top: 10px;
     width: 200px;
     height: 150px;
-    z-index: 5;
+    z-index: 2;
     background: #000;
     border: #aaa 1px solid;
     box-shadow: 0 0 2em black;
@@ -4355,6 +4356,7 @@ img.tile-debug {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    z-index: 0;
 }
 
 .attribution-wrap * { pointer-events: all; }
