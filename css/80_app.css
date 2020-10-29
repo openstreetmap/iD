@@ -812,6 +812,9 @@ a.hide-toggle {
     left: -6px;
 }
 
+.sidebar.collapsed > *:not(.sidebar-resizer) {
+    display: none;
+}
 .sidebar.collapsed .sidebar-resizer {
     /* make target wider to avoid the user accidentally resizing window */
     width: 10px;
