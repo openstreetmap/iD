@@ -36,6 +36,37 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.3
+##### 2020-Oct-29
+
+#### :sparkles: Usability & Accessibility
+* Make the Warnings and Errors lists in the Issues pane navigable with a keyboard
+* Add hover and focus styling to the Change Direction button in the One Way field
+* Disable keyboard-navigation in the sidebar when it's collapsed and hidden
+* Use a more logical keyboard focus order for the "Zoom in to edit" button and the map attribution links
+* Improve the alignment of the new version badge during text-only zoom and keep its tooltip from going offscreen
+
+#### :scissors: Operations
+* Don't remove `source:date` or other `source:` tags when downgrading features to basic buildings or addresses ([#8097])
+
+[#8097]: https://github.com/openstreetmap/iD/issues/8097
+
+#### :camera: Street-Level
+* Apply the date and username filters to the Map Features and Traffic Signs layers as well as photo layers ([#8133])
+
+[#8133]: https://github.com/openstreetmap/iD/issues/8133
+
+#### :bug: Bugfixes
+* Fix an issue where setting the Wikidata field value wouldn't update the `wikidata` tag ([#8132])
+* Fix the functionality where hovering over items in the Relations dropdown highlights those features in the map ([#8134])
+* Fix a problem where attempting to toggle between metric and imperial units in the Measurement panel wouldn't do anything
+* Fix cases where the Centroid value in the Measurement panel could be incorrect
+* Fix a bug where a point extracted from an area could be placed very far from away from the expected location
+* Avoid a potential error due to resizing the sidebar when iD is embedded in Tasking Manager
+
+[#8132]: https://github.com/openstreetmap/iD/issues/8132
+[#8134]: https://github.com/openstreetmap/iD/issues/8134
+
 # 2.19.2
 ##### 2020-Oct-28
 
