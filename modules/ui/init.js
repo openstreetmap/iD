@@ -548,19 +548,21 @@ export function uiInit(context) {
             delete _needWidth[selector];
         }
 
-        var element = d3_select(selector);
-        var scrollWidth = element.property('scrollWidth');
-        var clientWidth = element.property('clientWidth');
+        var selection = context.container().select(selector);
+        if (selection.empty()) return;
+
+        var scrollWidth = selection.property('scrollWidth');
+        var clientWidth = selection.property('clientWidth');
         var needed = _needWidth[selector] || scrollWidth;
 
         if (scrollWidth > clientWidth) {    // overflow happening
-            element.classed('narrow', true);
+            selection.classed('narrow', true);
             if (!_needWidth[selector]) {
                 _needWidth[selector] = scrollWidth;
             }
 
         } else if (scrollWidth >= needed) {
-            element.classed('narrow', false);
+            selection.classed('narrow', false);
         }
     };
 
