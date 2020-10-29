@@ -1755,6 +1755,15 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .form-field-input-check > .reverser {
     padding-left: 2px;
 }
+.form-field-input-check > .reverser:active,
+.form-field-input-check > .reverser:focus {
+    background: #e3e8ef;
+}
+@media (hover: hover) {
+    .form-field-input-check > .reverser:hover {
+        background: #e3e8ef;
+    }
+}
 .form-field-input-check > .reverser.hide {
     display: none;
 }
