@@ -162,8 +162,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         loc: loc,
                         key: feature.properties.key,
                         value: feature.properties.value,
-                        package: feature.properties.package,
-                        detections: feature.properties.detections
+                        detections: feature.properties.detections,
+                        direction: feature.properties.direction,
+                        accuracy: feature.properties.accuracy,
+                        first_seen_at: feature.properties.first_seen_at,
+                        last_seen_at: feature.properties.last_seen_at
                     };
                 }
 
@@ -226,7 +229,6 @@ function loadData(which, url) {
                         key: feature.properties.key,
                         image_key: feature.properties.image_key,
                         value: feature.properties.value,
-                        package: feature.properties.package,
                         shape: feature.properties.shape
                     };
 

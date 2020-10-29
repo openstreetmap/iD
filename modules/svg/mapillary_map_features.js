@@ -89,9 +89,43 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
+    function filterData(detectedFeatures) {
+        var service = getService();
+
+        var fromDate = context.photos().fromDate();
+        var toDate = context.photos().toDate();
+        var usernames = context.photos().usernames();
+
+        if (fromDate) {
+            var fromTimestamp = new Date(fromDate).getTime();
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return new Date(feature.last_seen_at).getTime() >= fromTimestamp;
+            });
+        }
+        if (toDate) {
+            var toTimestamp = new Date(toDate).getTime();
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return new Date(feature.first_seen_at).getTime() <= toTimestamp;
+            });
+        }
+        if (usernames && service) {
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return feature.detections.some(function(detection) {
+                    var imageKey = detection.image_key;
+                    var image = service.cachedImage(imageKey);
+                    return usernames.indexOf(image.captured_by) !== -1;
+                });
+            });
+        }
+        return detectedFeatures;
+    }
+
+
     function update() {
         var service = getService();
         var data = (service ? service.mapFeatures(projection) : []);
+        data = filterData(data);
+
         var selectedImageKey = service && service.getSelectedImageKey();
         var transform = svgPointTransform(projection);
 
@@ -198,8 +232,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         svgMapillaryMapFeatures.enabled = _;
         if (svgMapillaryMapFeatures.enabled) {
             showLayer();
+            context.photos().on('change.mapillary_map_features', update);
         } else {
             hideLayer();
+            context.photos().on('change.mapillary_map_features', null);
         }
         dispatch.call('change');
         return this;
