@@ -4579,12 +4579,13 @@ img.tile-debug {
 ------------------------------------------------------- */
 /* For an icon (e.g. new version) */
 .badge {
-    display: inline-block;
+    display: inline-flex;
     background: #d32232;
     width: 21px;
-    height: 20px;
-    border-radius: 11px;
-    text-align: center;
+    height: 21px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
 }
 .ideditor[dir='ltr'] .badge {
     margin-left: 6px;
@@ -4597,6 +4598,7 @@ img.tile-debug {
     width: 11px;
     height: 11px;
     color: #fff;
+    flex: 0 0 auto;
 }
 
 /* For text (e.g. upcoming events) */
