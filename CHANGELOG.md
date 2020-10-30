@@ -1670,6 +1670,8 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Rename Construction to Construction Area and render it with a yellow icon
 * Improve searchability of cycle presets in English ([#6825])
 
+[#6866]: https://github.com/openstreetmap/iD/issues/6866
+[#6955]: https://github.com/openstreetmap/iD/issues/6955
 [#6949]: https://github.com/openstreetmap/iD/issues/6949
 [#6863]: https://github.com/openstreetmap/iD/issues/6863
 [#6849]: https://github.com/openstreetmap/iD/issues/6849
