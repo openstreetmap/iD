@@ -266,7 +266,7 @@ export function uiSectionBackgroundList(context) {
 
 
     function editCustom(d3_event) {
-        d3_event.preventDefault();
+        if (d3_event !== undefined) d3_event.preventDefault();
         context.container()
             .call(_settingsCustomBackground);
     }
