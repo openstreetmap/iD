@@ -207,7 +207,7 @@ _For best results, make sure that every language you understand is listed in you
 [#8044]: https://github.com/openstreetmap/iD/issues/8044
 
 #### :bug: Bugfixes
-* Don't return entity IDs when searching by geographic coordinates ([#7995], thanks [@SilentSpike])
+* Don't return entity IDs when searching by geographic coordinates ([#7995], thanks [@kymckay])
 * Fix issue where iD could discard the pending line or area when navigating the map while drawing ([#7999])
 * Properly update validation issues when editing relations in the sidebar ([#7962])
 * Fix issue where the preset search field might not autofocus after adding a new feature in Safari 14 ([#8003])
@@ -216,7 +216,7 @@ _For best results, make sure that every language you understand is listed in you
 * Fix regression where the imagery layer IDs were used instead of the layer names in the `imagery_used` changeset tag ([#7842])
 * Fix issue where double-clicking a midpoint might not add a new node ([#7972])
 
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 [#7995]: https://github.com/openstreetmap/iD/issues/7995
 [#7999]: https://github.com/openstreetmap/iD/issues/7999
@@ -557,10 +557,10 @@ _For best results, make sure that every language you understand is listed in you
 _Long-press on features to open the edit menu. Review the Help pane to see what else you can do._
 * :card_index_dividers: **Multiselection editing** has been supercharged, so you can update many features together instead of one at a time.<br/>
 _<kbd>⇧ Shift</kbd> + click to select multiple features. On touchscreens, tap-and-hold one feature, then tap others to select them too._
-* :ballot_box_with_check: **[Osmose](http://osmose.openstreetmap.fr)** data quality issues can now be browsed and resolved within iD. Thanks, [@SilentSpike], for this integration!<br/>
+* :ballot_box_with_check: **[Osmose](http://osmose.openstreetmap.fr)** data quality issues can now be browsed and resolved within iD. Thanks, [@kymckay], for this integration!<br/>
 _Press <kbd>F</kbd> to open the Map Data pane and toggle on Osmose Issues under Data Layers._
 
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 #### :tada: New Features
 You can now:
@@ -577,10 +577,10 @@ You can now:
 * Copy and paste features via the edit menu, including on touchscreens ([#2508])
 * Edit the fields and tags of multiple selected features all at once ([#1761], [#7262], [#7306])
 * View the issues shared by multiple selected features ([#7324])
-* Browse and resolve Osmose quality assurance issues ([#5682], [#7095], thanks [@SilentSpike])
+* Browse and resolve Osmose quality assurance issues ([#5682], [#7095], thanks [@kymckay])
 * Add basic WMS endpoints as custom background layers ([#4977], [#7510], thanks [@1ec5])
 
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 [@1ec5]: https://github.com/1ec5
 
 [#7577]: https://github.com/openstreetmap/iD/issues/7577
@@ -725,7 +725,7 @@ You can now:
 [#6801]: https://github.com/openstreetmap/iD/issues/6801
 
 #### :white_check_mark: Validation
-* Improve connection of "Almost Junctions" when the lines are nearly co-linear ([#7201], [#7309], thanks [@SilentSpike])
+* Improve connection of "Almost Junctions" when the lines are nearly co-linear ([#7201], [#7309], thanks [@kymckay])
 * Deprecate various `type` tag values related to utilities ([#7514], thanks [@guylamar2006])
 * Deprecate `building=pavillion` misspelling ([#7749], thanks [@peternewman])
 * Disable copy and paste of features that aren't mostly visible ([#7603])
@@ -739,7 +739,7 @@ You can now:
 * Deprecate various `parking` tag values ([#7578])
 * Deprecate various `tower:type` values for newly-approved `line_management` tag ([#7726])
 
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 [@guylamar2006]: https://github.com/guylamar2006
 [@peternewman]: https://github.com/peternewman
 
@@ -1724,7 +1724,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 [@Abbe98]: https://github.com/Abbe98
 
 #### :white_check_mark: Validation
-* Don't flag known brands for having generic names ([#6761], [#6754], thanks [@SilentSpike])
+* Don't flag known brands for having generic names ([#6761], [#6754], thanks [@kymckay])
 * Clarify that connecting a waterway crossing a highway will add a ford ([#6734])
 * Lock the Name field of features with a `name:etymology:wikidata` tag ([#6683])
 * Don't offer to add `highway=service` to demolished roads with `service` tags ([#6775])
@@ -1747,7 +1747,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 [#6762]: https://github.com/openstreetmap/iD/issues/6762
 [#6775]: https://github.com/openstreetmap/iD/issues/6775
 
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 #### :bug: Bugfixes
 * Boost preset matching score if match occurs in addTags ([#6802])
@@ -1905,7 +1905,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 #### :rocket: Presets
 * Update camera icon on surveillance presets
 * Add preset for `shop=hobby`
-* Add Cairn preset ([#6587], thanks [@SilentSpike])
+* Add Cairn preset ([#6587], thanks [@kymckay])
 * Add field for `operator:type` to various presets ([#6566])
 * Render `waterway=dam` as lines as grey ([#6555])
 * Add Karaoke Box preset ([#6538])
@@ -1921,7 +1921,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 [#6542]: https://github.com/openstreetmap/iD/issues/6542
 [#6538]: https://github.com/openstreetmap/iD/issues/6538
 [#6537]: https://github.com/openstreetmap/iD/issues/6537
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 
 # 2.15.2
@@ -1940,7 +1940,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 * Avoid stale "connect endpoints" fix for "tags imply area" that could cause invalid areas ([#6525])
 * Remove `barrier=entrance` deprecation ([#6506])
 * Improve warning message when updating brand tags ([#6443])
-* Improve checks for valid email and website values ([#6494], thanks [@SilentSpike])
+* Improve checks for valid email and website values ([#6494], thanks [@kymckay])
 * Fix issue where crossings with kerb tags were treated primarily as kerbs ([#6440])
 * Fix issue where upgrading `office=administrative` could also remove `building=yes` ([#6466])
 * Fix issue where cuisine -> diet upgrades could overwrite existing values ([#6462])
@@ -1957,7 +1957,7 @@ _Press <kbd>G</kbd> to toggle change highlighting._
 [#6332]: https://github.com/openstreetmap/iD/issues/6332
 [#6229]: https://github.com/openstreetmap/iD/issues/6229
 [#6042]: https://github.com/openstreetmap/iD/issues/6042
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 
 #### :bug: Bugfixes
@@ -2592,7 +2592,7 @@ _Map all the branded businesses in your town!_
 #### :mega: Release Highlights
 * :exclamation: iD now validates features while you edit! Select a feature to see its issues and access quick fixes.<br/>
 _Open the new Issues pane (shortcut <kbd>I</kbd>) to browse all errors and warnings._
-* :detective: You can now browse missing road data detected by [ImproveOSM](https://improveosm.org) from Telenav. Shoutout to [@SilentSpike] for working on this!<br/>
+* :detective: You can now browse missing road data detected by [ImproveOSM](https://improveosm.org) from Telenav. Shoutout to [@kymckay] for working on this!<br/>
 _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" to view detected data._
 
 #### :tada: New Features
@@ -2602,7 +2602,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
     * List issues in the feature sidebar
     * Recommend fixes
     * View more details below in the new :white_check_mark: **Validation** section of this changelog
-* Integrate ImproveOSM data detection tools ([#5683], [#5739], thanks [@SilentSpike])
+* Integrate ImproveOSM data detection tools ([#5683], [#5739], thanks [@kymckay])
 
 [#5830]: https://github.com/openstreetmap/iD/issues/5830
 [#5683]: https://github.com/openstreetmap/iD/issues/5683
@@ -2616,7 +2616,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 [@abalosc1]: https://github.com/abalosc1
 [@maxgrossman]: https://github.com/maxgrossman
 [@brianhatchl]: https://github.com/brianhatchl
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 #### :sparkles: Usability
 * Don't close the open photo when toggling the photo overlay ([#5829], [#5836], thanks [@maxgrossman])
@@ -2687,8 +2687,8 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 [@gaoxm]: https://github.com/gaoxm
 
 #### :bug: Bugfixes
-* Fix reversal of turn lanes when reversing a way ([#5674], [#5826], thanks [@SilentSpike])
-* Fix photo overlay selection styling behavior ([#5494], [#5816], thanks [@SilentSpike])
+* Fix reversal of turn lanes when reversing a way ([#5674], [#5826], thanks [@kymckay])
+* Fix photo overlay selection styling behavior ([#5494], [#5816], thanks [@kymckay])
 * Add Junction field to highway presets ([#1264])
 * Fix transit platforms drawn as areas turning into lines upon completion ([#5837])
 * Don't replace spaces with underscores in Destinations and Destination Road Numbers fields ([#5842])
@@ -2709,7 +2709,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 [#5601]: https://github.com/openstreetmap/iD/issues/5601
 [#5830]: https://github.com/openstreetmap/iD/issues/5830
 
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 
 #### :earth_asia: Localization
 * Update the Museum and Planetarium preset icons to not include the letter "M" ([#5751])
@@ -3291,7 +3291,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
   * Fields: Category, Colour, Shape, and System, also universal Seamark field
 * Add preset for `leisure=bandstand` ([#5259], [#5262], thanks [@AndreasHae])
 * Add preset for `amenity=language_school` ([#5245], [#5261], thanks [@AndreasHae])
-* Add preset for `shop=sewing` ([#5244], [#5267], thanks [@SilentSpike])
+* Add preset for `shop=sewing` ([#5244], [#5267], thanks [@kymckay])
 * Add presets for `highway=milestone` and `waterway=milestone` ([#5284])
 * Add the Lit field to the Swimming Pool preset ([#5287], [#5288], thanks [@quincylvania])
 * Add Advertising Column preset ([#5270], thanks [@tordans])
@@ -3400,7 +3400,7 @@ _Check out the "All Relations" and "All Members" sections of the sidebar to try 
 [@Raubraupe]: https://github.com/Raubraupe
 [@RudyTheDev]: https://github.com/RudyTheDev
 [@s-Hale]: https://github.com/s-Hale
-[@SilentSpike]: https://github.com/SilentSpike
+[@kymckay]: https://github.com/kymckay
 [@simonbilskyrollins]: https://github.com/simonbilskyrollins
 [@Stormheg]: https://github.com/Stormheg
 [@thefifthisa]: https://github.com/thefifthisa
