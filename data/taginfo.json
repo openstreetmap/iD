@@ -396,6 +396,7 @@
     {"key": "building", "value": "warehouse", "description": "🄿 Warehouse", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/warehouse-15.svg"},
     {"key": "club", "description": "🄿 Club, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-handshake.svg"},
     {"key": "club", "value": "sport", "description": "🄿 Sports Club", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/pitch-15.svg"},
+    {"key": "communication", "value": "line", "description": "🄿 Communications Cable", "object_types": ["way"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/cable.svg"},
     {"key": "craft", "description": "🄿 Craft, 🄵 Type", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tools.svg"},
     {"key": "craft", "value": "locksmith", "description": "🄿 Locksmith (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/marker-stroked-15.svg"},
     {"key": "craft", "value": "tailor", "description": "🄿 Tailor (unsearchable)", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/needle_and_spool.svg"},

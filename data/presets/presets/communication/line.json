@@ -1,0 +1,20 @@
+{
+    "icon": "temaki-cable",
+    "fields": [
+          "name",
+          "location",
+          "operator",
+          "ref",
+          "telecom/medium"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "data cable"
+    ],
+    "tags": {
+        "communication": "line"
+    },
+    "name": "Communications Cable"
+}

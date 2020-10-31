@@ -4724,6 +4724,11 @@ en:
         name: Sports Club
         # 'terms: athletics club,sporting club,sports association,sports society'
         terms: '<translate with synonyms or related terms for ''Sports Club'', separated by commas>'
+      communication/line:
+        # communication=line
+        name: Communications Cable
+        # 'terms: data cable'
+        terms: '<translate with synonyms or related terms for ''Communications Cable'', separated by commas>'
       craft:
         # craft=*
         name: Craft

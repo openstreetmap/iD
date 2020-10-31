@@ -6953,6 +6953,10 @@
                     "name": "Sports Club",
                     "terms": "athletics club,sporting club,sports association,sports society"
                 },
+                "communication/line": {
+                    "name": "Communications Cable",
+                    "terms": "data cable"
+                },
                 "craft": {
                     "name": "Craft",
                     "terms": ""
