@@ -6,7 +6,7 @@
         "material",
         "building_area",
         "height",
-        "capacity"
+        "capacity_volume"
     ],
     "moreFields": [
         "layer",

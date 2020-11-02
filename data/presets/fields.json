@@ -68,6 +68,7 @@
   "camera/mount": {"key": "camera:mount", "type": "combo", "label": "Camera Mount"},
   "camera/type": {"key": "camera:type", "type": "combo", "label": "Camera Type", "strings": {"options": {"fixed": "Fixed", "panning": "Panning", "dome": "Dome"}}},
   "capacity_parking": {"key": "capacity", "type": "number", "minValue": 0, "label": "Total Spaces", "placeholder": "10, 20, 30..."},
+  "capacity_volume": {"key": "capacity", "type": "number", "minValue": 0, "label": "Capacity (Cubic Meters)", "placeholder": "50, 100, 200..."},
   "capacity": {"key": "capacity", "type": "number", "minValue": 0, "label": "Capacity", "placeholder": "50, 100, 200..."},
   "capacity/disabled_parking": {"key": "capacity:disabled", "type": "number", "minValue": 0, "label": "Accessible Spaces", "placeholder": "1, 2, 3..."},
   "cash_in": {"key": "cash_in", "type": "check", "label": "Cash In"},

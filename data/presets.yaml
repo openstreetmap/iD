@@ -441,6 +441,11 @@ en:
         label: Total Spaces
         # capacity_parking field placeholder
         placeholder: '10, 20, 30...'
+      capacity_volume:
+        # capacity=*
+        label: Capacity (Cubic Meters)
+        # capacity_volume field placeholder
+        placeholder: '50, 100, 200...'
       cash_in:
         # cash_in=*
         label: Cash In
