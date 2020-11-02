@@ -36,6 +36,24 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.4
+##### 2020-Nov-2
+
+#### :bug: Bugfixes
+* Fix an issue with missing data in the Keyboard Shortcuts screen ([#8137])
+* Fix a bug where deselecting items in the selected features list would instead select them in some browsers ([#8151])
+* Properly open the Custom Background screen when a custom layer is requested but not set ([#8141], thanks [@willemarcel])
+
+[#8137]: https://github.com/openstreetmap/iD/issues/8137
+[#8151]: https://github.com/openstreetmap/iD/issues/8151
+[#8141]: https://github.com/openstreetmap/iD/issues/8141
+[@willemarcel]: https://github.com/willemarcel
+
+#### :rocket: Presets
+* Add Telephone field to Warehouse preset ([#8150])
+
+[#8150]: https://github.com/openstreetmap/iD/issues/8150
+
 # 2.19.3
 ##### 2020-Oct-29
 
