@@ -155,12 +155,12 @@ export function uiSidebar(context) {
             .attr('class', 'inspector-hidden inspector-wrap');
 
         var hoverModeSelect = function(targets) {
-            context.container().selectAll('.feature-list-item').classed('hover', false);
+            context.container().selectAll('.feature-list-item button').classed('hover', false);
 
             if (context.selectedIDs().length > 1 &&
                 targets && targets.length) {
 
-                var elements = context.container().selectAll('.feature-list-item')
+                var elements = context.container().selectAll('.feature-list-item button')
                     .filter(function (node) {
                         return targets.indexOf(node) !== -1;
                     });

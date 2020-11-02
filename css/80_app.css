@@ -1010,6 +1010,22 @@ a.hide-toggle {
 .section-selected-features .feature-list-item:last-child {
     border: none;
 }
+.ideditor[dir='ltr'] .section-selected-features .feature-list-item > button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.ideditor[dir='rtl'] .section-selected-features .feature-list-item > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.ideditor[dir='ltr'] .section-selected-features .feature-list-item > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.ideditor[dir='rtl'] .section-selected-features .feature-list-item > button:not(:last-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 /* Preset List and Icons
 ------------------------------------------------------- */

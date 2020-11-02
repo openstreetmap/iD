@@ -39,8 +39,6 @@ export function uiSectionSelectionList(context) {
     }
 
     function deselectEntity(d3_event, entity) {
-        d3_event.stopPropagation();
-
         var selectedIDs = _selectedIDs.slice();
         var index = selectedIDs.indexOf(entity.id);
         if (index > -1) {
@@ -55,7 +53,7 @@ export function uiSectionSelectionList(context) {
             .data([0]);
 
         list = list.enter()
-            .append('div')
+            .append('ul')
             .attr('class', 'feature-list')
             .merge(list);
 
@@ -71,30 +69,22 @@ export function uiSectionSelectionList(context) {
 
         // Enter
         var enter = items.enter()
-            .append('button')
+            .append('li')
             .attr('class', 'feature-list-item')
-            .on('click', selectEntity);
-
-        enter
             .each(function(d) {
-                d3_select(this).on('mouseover', function() {
-                    utilHighlightEntities([d.id], true, context);
-                });
-                d3_select(this).on('mouseout', function() {
-                    utilHighlightEntities([d.id], false, context);
-                });
+                d3_select(this)
+                    .on('mouseover', function() {
+                        utilHighlightEntities([d.id], true, context);
+                    })
+                    .on('mouseout', function() {
+                        utilHighlightEntities([d.id], false, context);
+                    });
             });
 
         var label = enter
-            .append('div')
-            .attr('class', 'label');
-
-        enter
             .append('button')
-            .attr('class', 'close')
-            .attr('title', t('icons.deselect'))
-            .on('click', deselectEntity)
-            .call(svgIcon('#iD-icon-close'));
+            .attr('class', 'label')
+            .on('click', selectEntity);
 
         label
             .append('span')
@@ -108,6 +98,13 @@ export function uiSectionSelectionList(context) {
         label
             .append('span')
             .attr('class', 'entity-name');
+
+        enter
+            .append('button')
+            .attr('class', 'close')
+            .attr('title', t('icons.deselect'))
+            .on('click', deselectEntity)
+            .call(svgIcon('#iD-icon-close'));
 
         // Update
         items = items.merge(enter);
