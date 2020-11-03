@@ -4,17 +4,17 @@ import {
 } from 'd3-selection';
 import * as sexagesimal from '@mapbox/sexagesimal';
 
-import { presetManager } from '../presets';
-import { t } from '../core/localizer';
-import { dmsCoordinatePair } from '../util/units';
-import { coreGraph } from '../core/graph';
-import { geoSphericalDistance } from '../geo/geo';
-import { geoExtent } from '../geo';
-import { modeSelect } from '../modes/select';
-import { osmEntity } from '../osm/entity';
-import { services } from '../services';
-import { svgIcon } from '../svg/icon';
-import { uiCmd } from './cmd';
+import {presetManager} from '../presets';
+import {t} from '../core/localizer';
+import {dmsCoordinatePair} from '../util/units';
+import {coreGraph} from '../core/graph';
+import {geoSphericalDistance} from '../geo/geo';
+import {geoExtent} from '../geo';
+import {modeSelect} from '../modes/select';
+import {osmEntity} from '../osm/entity';
+import {services} from '../services';
+import {svgIcon} from '../svg/icon';
+import {uiCmd} from './cmd';
 
 import {
     utilDisplayName,
@@ -93,6 +93,9 @@ export function uiFeatureList(context) {
                 q.length &&
                 items.size()) {
                 click(items.datum());
+            }
+            if (d3_event.keyCode === 13 && services.geocoder && !items.size()) {
+                geocoderSearch();
             }
         }
 
@@ -181,7 +184,7 @@ export function uiFeatureList(context) {
             });
             result = result.concat(localResults);
 
-            (_geocodeResults || []).forEach(function(d) {
+            (_geocodeResults || []).forEach(function (d) {
                 if (d.osm_type && d.osm_id) {    // some results may be missing these - #1890
 
                     // Make a temporary osmEntity so we can preset match
@@ -190,9 +193,9 @@ export function uiFeatureList(context) {
                     var tags = {};
                     tags[d.class] = d.type;
 
-                    var attrs = { id: id, type: d.osm_type, tags: tags };
+                    var attrs = {id: id, type: d.osm_type, tags: tags};
                     if (d.osm_type === 'way') {   // for ways, add some fake closed nodes
-                        attrs.nodes = ['a','a'];  // so that geometry area is possible
+                        attrs.nodes = ['a', 'a'];  // so that geometry area is possible
                     }
 
                     var tempEntity = osmEntity(attrs);
@@ -259,17 +262,18 @@ export function uiFeatureList(context) {
                 .html(t.html('geocoder.no_results_worldwide'));
 
             if (services.geocoder) {
-              list.selectAll('.geocode-item')
-                  .data([0])
-                  .enter()
-                  .append('button')
-                  .attr('class', 'geocode-item secondary-action')
-                  .on('click', geocoderSearch)
-                  .append('div')
-                  .attr('class', 'label')
-                  .append('span')
-                  .attr('class', 'entity-name')
-                  .html(t.html('geocoder.search'));
+                list.selectAll('.geocode-item')
+                    .data([0])
+                    .enter()
+                    .append('button')
+                    .attr('class', 'geocode-item secondary-action')
+                    .on('click', geocoderSearch)
+                    .on('keypress', keypress)
+                    .append('div')
+                    .attr('class', 'label')
+                    .append('span')
+                    .attr('class', 'entity-name')
+                    .html(t.html('geocoder.search'));
             }
 
             list.selectAll('.no-results-item')
@@ -283,7 +287,9 @@ export function uiFeatureList(context) {
                 .remove();
 
             var items = list.selectAll('.feature-list-item')
-                .data(results, function(d) { return d.id; });
+                .data(results, function (d) {
+                    return d.id;
+                });
 
             var enter = items.enter()
                 .insert('button', '.geocode-item')
@@ -297,7 +303,7 @@ export function uiFeatureList(context) {
                 .attr('class', 'label');
 
             label
-                .each(function(d) {
+                .each(function (d) {
                     d3_select(this)
                         .call(svgIcon('#iD-icon-' + d.geometry, 'pre-text'));
                 });
@@ -305,12 +311,16 @@ export function uiFeatureList(context) {
             label
                 .append('span')
                 .attr('class', 'entity-type')
-                .html(function(d) { return d.type; });
+                .html(function (d) {
+                    return d.type;
+                });
 
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .html(function(d) { return d.name; });
+                .html(function (d) {
+                    return d.name;
+                });
 
             enter
                 .style('opacity', 0)
