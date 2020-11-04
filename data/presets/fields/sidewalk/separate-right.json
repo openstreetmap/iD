@@ -5,6 +5,7 @@
   "strings": {
       "options": {
           "separate": "Separate",
+          "shared": "Shared",
           "no": "No"
       }
   },

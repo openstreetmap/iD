@@ -1,0 +1,47 @@
+{
+  "icon": "maki-car",
+  "fields": [
+      "operator",
+      "operator/type",
+      "parking",
+      "capacity",
+      "access_simple",
+      "fee",
+      "payment_multi_fee",
+      "charge_fee",
+      "surface"
+  ],
+  "moreFields": [
+      "address",
+      "covered",
+      "email",
+      "fax",
+      "maxstay",
+      "name",
+      "opening_hours",
+      "park_ride",
+      "phone",
+      "ref",
+      "supervised",
+      "website",
+      "wheelchair"
+  ],
+  "geometry": [
+      "area"
+  ],
+  "tags": {
+      "amenity": "parking",
+      "access": "private",
+      "surface": "unpaved"
+  },
+  "terms": [
+      "automobile parking",
+      "car lot",
+      "car parking",
+      "rv parking",
+      "truck parking",
+      "vehicle parking"
+  ],
+  "name": "Private Unpaved Parking Lot",
+  "shortcut": ["⌃+o"]
+}

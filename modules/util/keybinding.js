@@ -12,6 +12,7 @@ export function utilKeybinding(namespace) {
 
     function testBindings(isCapturing) {
         var didMatch = false;
+
         var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
         var i, binding;
 
@@ -69,6 +70,8 @@ export function utilKeybinding(namespace) {
             // Fallback match on `KeyboardEvent.keyCode`, can happen if:
             // - browser doesn't support `KeyboardEvent.key`
             // - `KeyboardEvent.key` is outside ISO-Latin-1 range (cyrillic?)
+
+
             if ((!isMatch) && tryKeyCode) {
                 isMatch = (event.keyCode === binding.event.keyCode);
             }

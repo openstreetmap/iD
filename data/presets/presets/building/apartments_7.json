@@ -1,0 +1,16 @@
+{
+  "icon": "maki-building",
+  "geometry": [
+      "area"
+  ],
+  "fields": [
+      "building/flats"
+  ],
+  "tags": {
+      "building": "apartments",
+      "building:flats": "7"
+  },
+  "matchScore": 0.5,
+  "name": "Apartment Building 7 flats",
+  "shortcut": ["⌃+7"]
+}

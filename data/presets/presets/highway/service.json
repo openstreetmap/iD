@@ -7,10 +7,10 @@
         "sidewalk",
         "sidewalk/separate-left",
         "sidewalk/separate-right",
+        "surface",
         "lanes",
         "maxspeed",
         "access",
-        "surface",
         "structure"
     ],
     "moreFields": [

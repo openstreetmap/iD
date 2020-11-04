@@ -709,6 +709,7 @@ en:
     saturation: Saturation
     sharpness: Sharpness
     minimap:
+      key: À
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
     panel:
