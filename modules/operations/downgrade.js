@@ -81,8 +81,10 @@ export function operationDowngrade(context, selectedIDs) {
                             key.match(/^building:.{1,}/) ||
                             key.match(/^roof:.{1,}/)) continue;
                     }
-                    if (type !== 'generic' && key.match(/^addr:.{1,}/)) continue;
-
+                    if (type !== 'generic') {
+                        if (key.match(/^addr:.{1,}/) ||
+                            key.match(/^source:.{1,}/)) continue;
+                    }
                     delete tags[key];
                 }
                 graph = actionChangeTags(entityID, tags)(graph);

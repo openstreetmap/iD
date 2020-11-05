@@ -2,6 +2,7 @@ import {
     geoLength as d3_geoLength,
     geoCentroid as d3_geoCentroid
 } from 'd3-geo';
+import geojsonRewind from '@mapbox/geojson-rewind';
 
 import { t, localizer } from '../../core/localizer';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
@@ -35,12 +36,13 @@ export function uiPanelMeasurement(context) {
         return result;
     }
 
+    var _isImperial = !localizer.usesMetric();
 
     function redraw(selection) {
         var graph = context.graph();
         var selectedNoteID = context.selectedNoteID();
         var osm = services.osm;
-        var isImperial = !localizer.usesMetric();
+
         var localeCode = localizer.localeCode();
 
         var heading;
@@ -77,7 +79,8 @@ export function uiPanelMeasurement(context) {
                         closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
                         var feature = entity.asGeoJSON(graph);
                         length += radiansToMeters(d3_geoLength(toLineString(feature)));
-                        centroid = d3_geoCentroid(feature);
+                        // d3_geoCentroid is wrong for counterclockwise-wound polygons, so wind them clockwise
+                        centroid = d3_geoCentroid(geojsonRewind(Object.assign({}, feature), true));
                         if (closed) {
                             area += steradiansToSqmeters(entity.area(graph));
                         }
@@ -144,7 +147,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.area') + ':')
                 .append('span')
-                .html(displayArea(area, isImperial));
+                .html(displayArea(area, _isImperial));
         }
 
         if (length) {
@@ -152,7 +155,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.' + (closed ? 'perimeter' : 'length')) + ':')
                 .append('span')
-                .html(displayLength(length, isImperial));
+                .html(displayLength(length, _isImperial));
         }
 
         if (typeof distance === 'number') {
@@ -160,7 +163,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.distance') + ':')
                 .append('span')
-                .html(displayLength(distance, isImperial));
+                .html(displayLength(distance, _isImperial));
         }
 
         if (location) {
@@ -194,7 +197,7 @@ export function uiPanelMeasurement(context) {
         }
 
         if (length || area || typeof distance === 'number') {
-            var toggle  = isImperial ? 'imperial' : 'metric';
+            var toggle  = _isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
                 .html(t.html('info_panels.measurement.' + toggle))
@@ -202,7 +205,7 @@ export function uiPanelMeasurement(context) {
                 .attr('class', 'button button-toggle-units')
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-                    isImperial = !isImperial;
+                    _isImperial = !_isImperial;
                     selection.call(redraw);
                 });
         }

@@ -82,7 +82,11 @@ export function uiSectionValidationIssues(id, severity, context) {
         // Enter
         var itemsEnter = items.enter()
             .append('li')
-            .attr('class', function (d) { return 'issue severity-' + d.severity; })
+            .attr('class', function (d) { return 'issue severity-' + d.severity; });
+
+        var labelsEnter = itemsEnter
+            .append('button')
+            .attr('class', 'issue-label')
             .on('click', function(d3_event, d) {
                 context.validator().focusIssue(d);
             })
@@ -92,11 +96,6 @@ export function uiSectionValidationIssues(id, severity, context) {
             .on('mouseout', function(d3_event, d) {
                 utilHighlightEntities(d.entityIds, false, context);
             });
-
-
-        var labelsEnter = itemsEnter
-            .append('div')
-            .attr('class', 'issue-label');
 
         var textEnter = labelsEnter
             .append('span')

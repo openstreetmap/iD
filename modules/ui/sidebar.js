@@ -155,12 +155,12 @@ export function uiSidebar(context) {
             .attr('class', 'inspector-hidden inspector-wrap');
 
         var hoverModeSelect = function(targets) {
-            context.container().selectAll('.feature-list-item').classed('hover', false);
+            context.container().selectAll('.feature-list-item button').classed('hover', false);
 
             if (context.selectedIDs().length > 1 &&
                 targets && targets.length) {
 
-                var elements = context.container().selectAll('.feature-list-item')
+                var elements = context.container().selectAll('.feature-list-item button')
                     .filter(function (node) {
                         return targets.indexOf(node) !== -1;
                     });
@@ -379,7 +379,13 @@ export function uiSidebar(context) {
                 endMargin = 0;
             }
 
-            selection.transition()
+            if (!isCollapsing) {
+                // unhide the sidebar's content before it transitions onscreen
+                selection.classed('collapsed', isCollapsing);
+            }
+
+            selection
+                .transition()
                 .style(xMarginProperty, endMargin + 'px')
                 .tween('panner', function() {
                     var i = d3_interpolateNumber(startMargin, endMargin);
@@ -390,7 +396,10 @@ export function uiSidebar(context) {
                     };
                 })
                 .on('end', function() {
-                    selection.classed('collapsed', isCollapsing);
+                    if (isCollapsing) {
+                        // hide the sidebar's content after it transitions offscreen
+                        selection.classed('collapsed', isCollapsing);
+                    }
 
                     // switch back from px to %
                     if (!isCollapsing) {

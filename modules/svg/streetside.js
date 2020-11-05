@@ -157,8 +157,6 @@ export function svgStreetside(projection, context, dispatch) {
     }
 
 
-    context.photos().on('change.streetside', update);
-
     function filterBubbles(bubbles) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
@@ -365,8 +363,10 @@ export function svgStreetside(projection, context, dispatch) {
         svgStreetside.enabled = _;
         if (svgStreetside.enabled) {
             showLayer();
+            context.photos().on('change.streetside', update);
         } else {
             hideLayer();
+            context.photos().on('change.streetside', null);
         }
         dispatch.call('change');
         return this;

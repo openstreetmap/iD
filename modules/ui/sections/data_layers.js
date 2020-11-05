@@ -333,7 +333,10 @@ export function uiSectionDataLayers(context) {
                 .title(t.html('settings.custom_data.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .on('click', editCustom)
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                editCustom();
+            })
             .call(svgIcon('#iD-icon-more'));
 
         liEnter
@@ -368,8 +371,7 @@ export function uiSectionDataLayers(context) {
             .classed('disabled', !hasData);
     }
 
-    function editCustom(d3_event) {
-        d3_event.preventDefault();
+    function editCustom() {
         context.container()
             .call(settingsCustomData);
     }

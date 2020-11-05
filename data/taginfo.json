@@ -1419,7 +1419,7 @@
     {"key": "camera:type", "value": "fixed", "description": "🄵 Camera Type"},
     {"key": "camera:type", "value": "panning", "description": "🄵 Camera Type"},
     {"key": "camera:type", "value": "dome", "description": "🄵 Camera Type"},
-    {"key": "capacity", "description": "🄵 Total Spaces, 🄵 Capacity"},
+    {"key": "capacity", "description": "🄵 Total Spaces, 🄵 Capacity (Cubic Meters), 🄵 Capacity"},
     {"key": "capacity:disabled", "description": "🄵 Accessible Spaces"},
     {"key": "cash_in", "description": "🄵 Cash In"},
     {"key": "castle_type", "description": "🄵 Type"},

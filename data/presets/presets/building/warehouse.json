@@ -1,5 +1,9 @@
 {
     "icon": "maki-warehouse",
+    "fields": [
+        "{building}",
+        "phone"
+    ],
     "geometry": [
         "area"
     ],

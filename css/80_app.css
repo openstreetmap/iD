@@ -812,6 +812,9 @@ a.hide-toggle {
     left: -6px;
 }
 
+.sidebar.collapsed > *:not(.sidebar-resizer) {
+    display: none;
+}
 .sidebar.collapsed .sidebar-resizer {
     /* make target wider to avoid the user accidentally resizing window */
     width: 10px;
@@ -1006,6 +1009,22 @@ a.hide-toggle {
 }
 .section-selected-features .feature-list-item:last-child {
     border: none;
+}
+.ideditor[dir='ltr'] .section-selected-features .feature-list-item > button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.ideditor[dir='rtl'] .section-selected-features .feature-list-item > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.ideditor[dir='ltr'] .section-selected-features .feature-list-item > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.ideditor[dir='rtl'] .section-selected-features .feature-list-item > button:not(:last-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 /* Preset List and Icons
@@ -1751,6 +1770,15 @@ a.hide-toggle {
 }
 .ideditor[dir='rtl'] .form-field-input-check > .reverser {
     padding-left: 2px;
+}
+.form-field-input-check > .reverser:active,
+.form-field-input-check > .reverser:focus {
+    background: #e3e8ef;
+}
+@media (hover: hover) {
+    .form-field-input-check > .reverser:hover {
+        background: #e3e8ef;
+    }
 }
 .form-field-input-check > .reverser.hide {
     display: none;
@@ -2875,6 +2903,7 @@ img.tag-reference-wiki-image {
 }
 .over-map > * {
     pointer-events: auto;
+    z-index: 5;
 }
 /* offscreen this without hiding it */
 .over-map .select-trap {
@@ -4097,7 +4126,7 @@ img.tile-debug {
     top: 10px;
     width: 200px;
     height: 150px;
-    z-index: 5;
+    z-index: 2;
     background: #000;
     border: #aaa 1px solid;
     box-shadow: 0 0 2em black;
@@ -4352,6 +4381,7 @@ img.tile-debug {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    z-index: 0;
 }
 
 .attribution-wrap * { pointer-events: all; }
@@ -4576,12 +4606,13 @@ img.tile-debug {
 ------------------------------------------------------- */
 /* For an icon (e.g. new version) */
 .badge {
-    display: inline-block;
+    display: inline-flex;
     background: #d32232;
     width: 21px;
-    height: 20px;
-    border-radius: 11px;
-    text-align: center;
+    height: 21px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
 }
 .ideditor[dir='ltr'] .badge {
     margin-left: 6px;
@@ -4594,6 +4625,7 @@ img.tile-debug {
     width: 11px;
     height: 11px;
     color: #fff;
+    flex: 0 0 auto;
 }
 
 /* For text (e.g. upcoming events) */

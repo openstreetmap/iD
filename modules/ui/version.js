@@ -37,15 +37,15 @@ export function uiVersion(context) {
         // only show new version indicator to users that have used iD before
         if (isNewVersion && !isNewUser) {
             selection
-                .append('div')
-                .attr('class', 'badge')
                 .append('a')
+                .attr('class', 'badge')
                 .attr('target', '_blank')
                 .attr('href', 'https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md#whats-new')
                 .call(svgIcon('#maki-gift-11'))
                 .call(uiTooltip()
                     .title(t.html('version.whats_new', { version: currVersion }))
                     .placement('top')
+                    .scrollContainer(context.container().select('.main-footer-wrap'))
                 );
         }
     };

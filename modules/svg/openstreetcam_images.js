@@ -105,8 +105,6 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     }
 
 
-    context.photos().on('change.openstreetcam_images', update);
-
     function filterImages(images) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
@@ -289,8 +287,10 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         svgOpenstreetcamImages.enabled = _;
         if (svgOpenstreetcamImages.enabled) {
             showLayer();
+            context.photos().on('change.openstreetcam_images', update);
         } else {
             hideLayer();
+            context.photos().on('change.openstreetcam_images', null);
         }
         dispatch.call('change');
         return this;
