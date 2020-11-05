@@ -6653,6 +6653,11 @@ en:
         name: Observation Tower
         # 'terms: lookout tower,fire tower'
         terms: '<translate with synonyms or related terms for ''Observation Tower'', separated by commas>'
+      man_made/tower/pagoda:
+        # 'man_made=tower, tower:type=pagoda'
+        name: Pagoda
+        # 'terms: buddhist tower,tiered tower,chinese pagodas'
+        terms: '<translate with synonyms or related terms for ''Pagoda'', separated by commas>'
       man_made/tunnel:
         # man_made=tunnel
         name: Tunnel Area

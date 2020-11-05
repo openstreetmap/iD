@@ -790,6 +790,7 @@
     {"key": "tower:type", "value": "defensive", "description": "🄿 Fortified Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/mapbox/maki/icons/castle-15.svg"},
     {"key": "tower:type", "value": "minaret", "description": "🄿 Minaret", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/domed_tower.svg"},
     {"key": "tower:type", "value": "observation", "description": "🄿 Observation Tower", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tower.svg"},
+    {"key": "tower:type", "value": "pagoda", "description": "🄿 Pagoda", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/fas-vihara.svg"},
     {"key": "man_made", "value": "tunnel", "description": "🄿 Tunnel Area", "object_types": ["area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/tunnel.svg"},
     {"key": "man_made", "value": "utility_pole", "description": "🄿 Utility Pole", "object_types": ["node"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/utility_pole.svg"},
     {"key": "man_made", "value": "wastewater_plant", "description": "🄿 Wastewater Plant", "object_types": ["node", "area"], "icon_url": "https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/waste.svg"},

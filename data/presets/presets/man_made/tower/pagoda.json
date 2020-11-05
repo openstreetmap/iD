@@ -1,0 +1,26 @@
+{
+    "icon": "fas-vihara",
+    "moreFields": [
+        "{man_made/tower}",
+        "opening_hours",
+        "opening_hours/covid19"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "buddhist tower",
+        "tiered tower",
+        "chinese pagodas"
+    ],
+    "tags": {
+        "man_made": "tower",
+        "tower:type": "pagoda"
+    },
+    "reference": {
+        "key": "tower:type",
+        "value": "pagoda"
+    },
+    "name": "Pagoda"
+}
