@@ -1,6 +1,0 @@
-{
-    "key": "water_tank:volume",
-    "type": "text",
-    "label": "Volume (Liters)",
-    "placeholder": "10000, 20000, 30000…"
-}

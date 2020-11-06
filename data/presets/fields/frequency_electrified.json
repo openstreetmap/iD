@@ -1,9 +1,0 @@
-{
-    "key": "frequency",
-    "type": "combo",
-    "label": "Operating Frequency",
-    "prerequisiteTag": {
-        "key": "electrified",
-        "valueNot": "no"
-    }
-}

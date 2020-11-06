@@ -1,10 +1,6 @@
 /* eslint-disable no-console */
 const colors = require('colors/safe');
 const fs = require('fs');
-const glob = require('glob');
-const jsonschema = require('jsonschema');
-const nsiBrands = require('name-suggestion-index/dist/brands.json').brands;
-const nsiWikidata = require('name-suggestion-index/dist/wikidata.json').wikidata;
 const path = require('path');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
@@ -12,9 +8,13 @@ const YAML = require('js-yaml');
 
 const languageNames = require('./language_names.js');
 
-const fieldSchema = require('../data/presets/schema/field.json');
-const presetSchema = require('../data/presets/schema/preset.json');
-const deprecated = require('../data/deprecated.json');
+const presets = require('@openstreetmap/id-tagging-schema/dist/presets.min.json');
+const fields = require('@openstreetmap/id-tagging-schema/dist/fields.min.json');
+const categories = require('@openstreetmap/id-tagging-schema/dist/preset_categories.min.json');
+const defaults = require('@openstreetmap/id-tagging-schema/dist/preset_defaults.min.json');
+const discarded = require('@openstreetmap/id-tagging-schema/dist/discarded.min.json');
+const deprecated = require('@openstreetmap/id-tagging-schema/dist/deprecated.min.json');
+const taginfo = require('@openstreetmap/id-tagging-schema/dist/taginfo.min.json');
 
 // fontawesome icons
 const fontawesome = require('@fortawesome/fontawesome-svg-core');
@@ -57,69 +57,56 @@ function buildData() {
     }
   }
 
-  // Translation strings
-  let tstrings = {
-    categories: {},
-    fields: {},
-    presets: {}
-  };
-
-  // Font Awesome icons used
-  let faIcons = {
-    'fas-i-cursor': {},
-    'fas-lock': {},
-    'fas-th-list': {},
-    'fas-user-cog': {}
-  };
-
-  // all fields searchable under "add field"
-  let searchableFieldIDs = {};
-
   // Start clean
   shell.rm('-f', [
-    'data/presets/categories.json',
-    'data/presets/fields.json',
-    'data/presets/presets.json',
     'data/presets.yaml',
-    'data/taginfo.json',
     'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
     'svg/fontawesome/*.svg',
   ]);
 
+  // compile Font Awesome icons
+  let faIcons = new Set([
+    // list here the icons we want to use in the UI that aren't tied to other data
+    'fas-i-cursor',
+    'fas-lock',
+    'fas-th-list',
+    'fas-user-cog'
+  ]);
+  // add icons for QA integrations
   readQAIssueIcons(faIcons);
-  let categories = generateCategories(tstrings, faIcons);
-  let fields = generateFields(tstrings, faIcons, searchableFieldIDs);
-  let presets = generatePresets(tstrings, faIcons, searchableFieldIDs);
-  let defaults = read('data/presets/defaults.json');
-  let translations = generateTranslations(fields, presets, tstrings, searchableFieldIDs);
-  let taginfo = generateTaginfo(presets, fields);
-  let territoryLanguages = generateTerritoryLanguages();
-
-  // Additional consistency checks
-  validateCategoryPresets(categories, presets);
-  validatePresetFields(presets, fields);
-  validateDefaults(defaults, categories, presets);
-
-  fs.writeFileSync('data/presets/categories.json', prettyStringify(categories, { maxLength: 9999 }) );
-  fs.writeFileSync('data/presets/fields.json', prettyStringify(fields, { maxLength: 9999 }) );
-  fs.writeFileSync('data/presets/presets.json', prettyStringify(presets, { maxLength: 9999 }) );
-  fs.writeFileSync('data/presets.yaml', translationsToYAML(translations) );
-  fs.writeFileSync('data/taginfo.json', prettyStringify(taginfo, { maxLength: 9999 }) );
-  fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
-  writeEnJson(tstrings);
+  // add icons for presets
+  [categories, fields, presets].forEach(function(data) {
+    for (var key in data) {
+      var datum  = data[key];
+      // fontawesome icon
+      if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
+        faIcons.add(datum.icon);
+      }
+    }
+  });
+  // copy over only those Font Awesome icons that we need
   writeFaIcons(faIcons);
+
+  let territoryLanguages = generateTerritoryLanguages();
+  fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
+  writeEnJson();
+
+  // put preset translations file where Transifex currently expects it
+  fs.copyFileSync(path.dirname(require.resolve('@openstreetmap/id-tagging-schema')) + '/dist/translations/en.yaml', 'data/presets.yaml');
+
+  fs.writeFileSync('dist/data/preset_presets.min.json', JSON.stringify(presets));
+  fs.writeFileSync('dist/data/preset_fields.min.json', JSON.stringify(fields));
+  fs.writeFileSync('dist/data/preset_categories.min.json', JSON.stringify(categories));
+  fs.writeFileSync('dist/data/preset_defaults.min.json', JSON.stringify(defaults));
+  fs.writeFileSync('dist/data/discarded.min.json', JSON.stringify(discarded));
+  fs.writeFileSync('dist/data/deprecated.min.json', JSON.stringify(deprecated));
+  fs.writeFileSync('dist/data/taginfo.min.json', JSON.stringify(taginfo));
 
   // Save individual data files
   let tasks = [
-    minifyJSON('data/presets/categories.json', 'dist/data/preset_categories.min.json'),
-    minifyJSON('data/presets/defaults.json', 'dist/data/preset_defaults.min.json'),
-    minifyJSON('data/presets/fields.json', 'dist/data/preset_fields.min.json'),
-    minifyJSON('data/presets/presets.json', 'dist/data/preset_presets.min.json'),
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
-    minifyJSON('data/deprecated.json', 'dist/data/deprecated.min.json'),
-    minifyJSON('data/discarded.json', 'dist/data/discarded.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
     minifyJSON('data/keepRight.json', 'dist/data/keepRight.min.json'),
@@ -128,7 +115,6 @@ function buildData() {
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
-    minifyJSON('data/taginfo.json', 'dist/data/taginfo.min.json'),
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json')
   ];
 
@@ -148,31 +134,8 @@ function buildData() {
 }
 
 
-function read(f) {
-  return JSON.parse(fs.readFileSync(f, 'utf8'));
-}
-
-
-function validate(file, instance, schema) {
-  let validationErrors = jsonschema.validate(instance, schema).errors;
-
-  if (validationErrors.length) {
-    console.error(`${file}: `);
-    validationErrors.forEach(error => {
-      if (error.property) {
-        console.error(error.property + ' ' + error.message);
-      } else {
-        console.error(error);
-      }
-    });
-    console.log('');
-    process.exit(1);
-  }
-}
-
-
 function readQAIssueIcons(faIcons) {
-  const qa = read('data/qa_data.json');
+  const qa = JSON.parse(fs.readFileSync('data/qa_data.json', 'utf8'));
 
   for (const service in qa) {
     for (const item in qa[service].icons) {
@@ -180,441 +143,10 @@ function readQAIssueIcons(faIcons) {
 
       // fontawesome icon, remember for later
       if (/^fa[srb]-/.test(icon)) {
-        faIcons[icon] = {};
+        faIcons.add(icon);
       }
     }
   }
-}
-
-
-function generateCategories(tstrings, faIcons) {
-  let categories = {};
-
-  glob.sync('data/presets/categories/*.json').forEach(file => {
-    let category = read(file);
-    let id = 'category-' + path.basename(file, '.json');
-    tstrings.categories[id] = { name: category.name };
-    categories[id] = category;
-
-    // fontawesome icon, remember for later
-    if (/^fa[srb]-/.test(category.icon)) {
-      faIcons[category.icon] = {};
-    }
-  });
-
-  return categories;
-}
-
-
-function generateFields(tstrings, faIcons, searchableFieldIDs) {
-  let fields = {};
-
-  glob.sync('data/presets/fields/**/*.json').forEach(file => {
-    let field = read(file);
-    let id = stripLeadingUnderscores(file.match(/presets\/fields\/([^.]*)\.json/)[1]);
-
-    validate(file, field, fieldSchema);
-
-    let t = tstrings.fields[id] = {
-      label: field.label,
-      terms: (field.terms || []).join(',')
-    };
-
-    if (field.universal) {
-      searchableFieldIDs[id] = true;
-    }
-
-    if (field.placeholder) {
-      t.placeholder = field.placeholder;
-    }
-
-    if (field.strings) {
-      for (let i in field.strings) {
-        t[i] = field.strings[i];
-      }
-    }
-
-    fields[id] = field;
-
-    // fontawesome icon, remember for later
-    if (/^fa[srb]-/.test(field.icon)) {
-      faIcons[field.icon] = {};
-    }
-  });
-
-  return fields;
-}
-
-
-function suggestionsToPresets(presets) {
-  Object.keys(nsiBrands).forEach(kvnd => {
-    const suggestion = nsiBrands[kvnd];
-    const qid = suggestion.tags['brand:wikidata'];
-    if (!qid || !/^Q\d+$/.test(qid)) return;   // wikidata tag missing or looks wrong..
-
-    const parts = kvnd.split('|', 2);
-    const kv = parts[0];
-    const name = parts[1].replace('~', ' ');
-
-    let presetID, preset;
-
-    // sometimes we can choose a more specific preset then key/value..
-    if (suggestion.tags.cuisine) {
-      // cuisine can contain multiple values, so try them all in order
-      let cuisines = suggestion.tags.cuisine.split(';');
-      for (let i = 0; i < cuisines.length; i++) {
-        presetID = kv + '/' + cuisines[i].trim();
-        preset = presets[presetID];
-        if (preset) break;  // we matched one
-      }
-
-    } else if (suggestion.tags.vending) {
-      if (suggestion.tags.vending === 'parcel_pickup;parcel_mail_in') {
-        presetID = kv + '/parcel_pickup_dropoff';
-      } else {
-        presetID = kv + '/' + suggestion.tags.vending;
-      }
-      preset = presets[presetID];
-    }
-
-    // A few exceptions where the NSI tagging doesn't exactly match iD tagging..
-    if (kv === 'healthcare/clinic') {
-      presetID = 'amenity/clinic';
-      preset = presets[presetID];
-    } else if (kv === 'leisure/tanning_salon') {
-      presetID = 'shop/beauty/tanning';
-      preset = presets[presetID];
-    }
-
-    // fallback to key/value
-    if (!preset) {
-      presetID = kv;
-      preset = presets[presetID];
-    }
-
-    // still no match?
-    if (!preset) {
-      console.log(`Warning:  No preset "${presetID}" for name-suggestion "${name}"`);
-      return;
-    }
-
-    let suggestionID = presetID + '/' + name.replace('/', '');
-
-    let tags = { 'brand:wikidata': qid };
-    for (let k in preset.tags) {
-      // prioritize suggestion tags over preset tags (for `vending`,`cuisine`, etc)
-      tags[k] = suggestion.tags[k] || preset.tags[k];
-    }
-
-    // Prefer a wiki commons logo sometimes.. #6361
-    const preferCommons = {
-      Q177054: true,    // Burger King
-      Q524757: true,    // KFC
-      Q779845: true,    // CBA
-      Q1205312: true,   // In-N-Out
-      Q10443115: true   // Carlings
-    };
-
-    let logoURL;
-    let logoURLs = nsiWikidata[qid] && nsiWikidata[qid].logos;
-    if (logoURLs) {
-      if (logoURLs.wikidata && preferCommons[qid]) {
-        logoURL = logoURLs.wikidata;
-      } else if (logoURLs.facebook) {
-        logoURL = logoURLs.facebook;
-      } else if (logoURLs.twitter) {
-        logoURL = logoURLs.twitter;
-      } else {
-        logoURL = logoURLs.wikidata;
-      }
-    }
-
-    presets[suggestionID] = {
-      name: name,
-      icon: preset.icon,
-      imageURL: logoURL,
-      geometry: preset.geometry,
-      tags: tags,
-      addTags: suggestion.tags,
-      reference: preset.reference,
-      countryCodes: suggestion.countryCodes,
-      terms: (suggestion.matchNames || []),
-      matchScore: 2,
-      suggestion: true
-    };
-  });
-
-  return presets;
-}
-
-
-function stripLeadingUnderscores(str) {
-  return str.split('/')
-    .map(s => s.replace(/^_/,''))
-    .join('/');
-}
-
-
-function generatePresets(tstrings, faIcons, searchableFieldIDs) {
-  let presets = {};
-
-  glob.sync('data/presets/presets/**/*.json').forEach(file => {
-    let preset = read(file);
-    let id = stripLeadingUnderscores(file.match(/presets\/presets\/([^.]*)\.json/)[1]);
-
-    validate(file, preset, presetSchema);
-
-    tstrings.presets[id] = {
-      name: preset.name,
-      terms: (preset.terms || []).join(',')
-    };
-
-    if (preset.moreFields) {
-      preset.moreFields.forEach(fieldID => { searchableFieldIDs[fieldID] = true; });
-    }
-
-    presets[id] = preset;
-
-    // fontawesome icon, remember for later
-    if (/^fa[srb]-/.test(preset.icon)) {
-      faIcons[preset.icon] = {};
-    }
-  });
-
-  presets = Object.assign(presets, suggestionsToPresets(presets));
-  return presets;
-}
-
-
-function generateTranslations(fields, presets, tstrings, searchableFieldIDs) {
-  let translations = JSON.parse(JSON.stringify(tstrings));  // deep clone
-
-  Object.keys(translations.fields).forEach(id => {
-    let field = translations.fields[id];
-    let f = fields[id];
-    let options = field.options || {};
-    let optkeys = Object.keys(options);
-
-    if (f.keys) {
-      field['label#'] = f.keys.map(k => `${k}=*`).join(', ');
-      optkeys.forEach(k => {
-        if (id === 'access') {
-          options[k]['title#'] = options[k]['description#'] = `access=${k}`;
-        } else {
-          options[k + '#'] = `${k}=yes`;
-        }
-      });
-    } else if (f.key) {
-      field['label#'] = `${f.key}=*`;
-      optkeys.forEach(k => {
-        options[k + '#'] = `${f.key}=${k}`;
-      });
-    }
-
-    if (f.placeholder) {
-      field['placeholder#'] = `${id} field placeholder`;
-    }
-
-    if (searchableFieldIDs[id]) {
-      if (f.terms && f.terms.length) {
-        field['terms#'] = 'terms: ' + f.terms.join();
-      }
-      field.terms = '[translate with synonyms or related terms for \'' + field.label + '\', separated by commas]';
-    } else {
-      delete tstrings.fields[id].terms;
-      delete f.terms;
-      delete field.terms;
-    }
-  });
-
-  Object.keys(translations.presets).forEach(id => {
-    let preset = translations.presets[id];
-    let p = presets[id];
-    let tags = p.tags || {};
-    let keys = Object.keys(tags);
-
-    if (keys.length) {
-      preset['name#'] = keys.map(k => `${k}=${tags[k]}`).join(', ');
-    }
-
-    if (p.searchable !== false) {
-      if (p.terms && p.terms.length) {
-        preset['terms#'] = 'terms: ' + p.terms.join();
-      }
-      preset.terms = `<translate with synonyms or related terms for '${preset.name}', separated by commas>`;
-    } else {
-      delete tstrings.presets[id].terms;
-      delete p.terms;
-      delete preset.terms;
-    }
-  });
-
-  return translations;
-}
-
-
-function generateTaginfo(presets, fields) {
-  let taginfo = {
-    'data_format': 1,
-    'data_url': 'https://raw.githubusercontent.com/openstreetmap/iD/develop/data/taginfo.json',
-    'project': {
-      'name': 'iD Editor',
-      'description': 'Online editor for OSM data.',
-      'project_url': 'https://github.com/openstreetmap/iD',
-      'doc_url': 'https://github.com/openstreetmap/iD/blob/develop/data/presets/README.md',
-      'icon_url': 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@release/dist/img/logo.png',
-      'contact_name': 'Quincy Morgan',
-      'contact_email': 'q@quincylvania.com'
-    },
-    'tags': []
-  };
-
-  Object.keys(presets).forEach(id => {
-    let preset = presets[id];
-    if (preset.suggestion) return;
-
-    let keys = Object.keys(preset.tags);
-    let last = keys[keys.length - 1];
-    let tag = { key: last };
-
-    if (!last) return;
-
-    if (preset.tags[last] !== '*') {
-      tag.value = preset.tags[last];
-    }
-    if (preset.name) {
-      let legacy = (preset.searchable === false) ? ' (unsearchable)' : '';
-      tag.description = [ `🄿 ${preset.name}${legacy}` ];
-    }
-    if (preset.geometry) {
-      setObjectType(tag, preset);
-    }
-
-    // add icon
-    if (/^maki-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/mapbox/maki/icons/' +
-        preset.icon.replace(/^maki-/, '') + '-15.svg';
-    } else if (/^temaki-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/ideditor/temaki/icons/' +
-        preset.icon.replace(/^temaki-/, '') + '.svg';
-    } else if (/^fa[srb]-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/fontawesome/' +
-        preset.icon + '.svg';
-    } else if (/^iD-/.test(preset.icon)) {
-      tag.icon_url = 'https://cdn.jsdelivr.net/gh/openstreetmap/iD@develop/svg/iD-sprite/presets/' +
-        preset.icon.replace(/^iD-/, '') + '.svg';
-    }
-
-    coalesceTags(taginfo, tag);
-  });
-
-  Object.keys(fields).forEach(id => {
-    const field = fields[id];
-    const keys = field.keys || [ field.key ] || [];
-    const isRadio = (field.type === 'radio' || field.type === 'structureRadio');
-
-    keys.forEach(key => {
-      if (field.strings && field.strings.options && !isRadio && field.type !== 'manyCombo') {
-        let values = Object.keys(field.strings.options);
-        values.forEach(value => {
-          if (value === 'undefined' || value === '*' || value === '') return;
-          let tag;
-          if (field.type === 'multiCombo') {
-            tag = { key: key + value };
-          } else {
-            tag = { key: key, value: value };
-          }
-          if (field.label) {
-            tag.description = [ `🄵 ${field.label}` ];
-          }
-          coalesceTags(taginfo, tag);
-        });
-      } else {
-        let tag = { key: key };
-        if (field.label) {
-          tag.description = [ `🄵 ${field.label}` ];
-        }
-        coalesceTags(taginfo, tag);
-      }
-    });
-  });
-
-  deprecated.forEach(elem => {
-    let old = elem.old;
-    let oldKeys = Object.keys(old);
-    if (oldKeys.length === 1) {
-      let oldKey = oldKeys[0];
-      let tag = { key: oldKey };
-
-      let oldValue = old[oldKey];
-      if (oldValue !== '*') tag.value = oldValue;
-      let replacementStrings = [];
-      for (let replaceKey in elem.replace) {
-        let replaceValue = elem.replace[replaceKey];
-        if (replaceValue === '$1') replaceValue = '*';
-        replacementStrings.push(`${replaceKey}=${replaceValue}`);
-      }
-      let description = '🄳';
-      if (replacementStrings.length > 0) {
-        description += ' ➜ ' + replacementStrings.join(' + ');
-      }
-      tag.description = [description];
-      coalesceTags(taginfo, tag);
-    }
-  });
-
-  taginfo.tags.forEach(elem => {
-    if (elem.description) {
-      elem.description = elem.description.join(', ');
-    }
-  });
-
-
-  function coalesceTags(taginfo, tag) {
-    if (!tag.key) return;
-
-    let currentTaginfoEntries = taginfo.tags
-      .filter(t => (t.key === tag.key && t.value === tag.value));
-
-    if (currentTaginfoEntries.length === 0) {
-      taginfo.tags.push(tag);
-      return;
-    }
-
-    if (!tag.description) return;
-
-    if (!currentTaginfoEntries[0].description) {
-      currentTaginfoEntries[0].description = tag.description;
-      return;
-    }
-
-    let isNewDescription = currentTaginfoEntries[0].description
-      .indexOf(tag.description[0]) === -1;
-
-    if (isNewDescription) {
-      currentTaginfoEntries[0].description.push(tag.description[0]);
-    }
-  }
-
-
-  function setObjectType(tag, input) {
-    tag.object_types = [];
-    const mapping = {
-      'point'    : 'node',
-      'vertex'   : 'node',
-      'line'     : 'way',
-      'relation' : 'relation',
-      'area'     : 'area'
-    };
-
-    input.geometry.forEach(geom => {
-      if (tag.object_types.indexOf(mapping[geom]) === -1) {
-        tag.object_types.push(mapping[geom]);
-      }
-    });
-  }
-
-  return taginfo;
 }
 
 
@@ -641,144 +173,8 @@ function generateTerritoryLanguages() {
 }
 
 
-function validateCategoryPresets(categories, presets) {
-  Object.keys(categories).forEach(id => {
-    const category = categories[id];
-    if (!category.members) return;
-    category.members.forEach(preset => {
-      if (presets[preset] === undefined) {
-        console.error('Unknown preset: ' + preset + ' in category ' + category.name);
-        console.log('');
-        process.exit(1);
-      }
-    });
-  });
-}
-
-function validatePresetFields(presets, fields) {
-  const betweenBracketsRegex = /([^{]*?)(?=\})/;
-  const maxFieldsBeforeError = 10;
-
-  let usedFieldIDs = new Set();
-
-  for (let presetID in presets) {
-    let preset = presets[presetID];
-
-    if (preset.replacement) {
-      let replacementPreset = presets[preset.replacement];
-      let p1geometry = preset.geometry.slice().sort.toString();
-      let p2geometry = replacementPreset.geometry.slice().sort.toString();
-      if (replacementPreset === undefined) {
-        console.error('Unknown preset "' + preset.replacement + '" referenced as replacement of preset "' + presetID + '" (' + preset.name + ')');
-        console.log('');
-        process.exit(1);
-      } else if (p1geometry !== p2geometry) {
-        console.error('The preset "' + presetID + '" has different geometry than its replacement preset, "' + preset.replacement + '". They must match for tag upgrades to work.');
-        console.log('');
-        process.exit(1);
-      }
-    }
-
-    // the keys for properties that contain arrays of field ids
-    let fieldKeys = ['fields', 'moreFields'];
-    for (let fieldsKeyIndex in fieldKeys) {
-      let fieldsKey = fieldKeys[fieldsKeyIndex];
-      if (!preset[fieldsKey]) continue; // no fields are referenced, okay
-
-      for (let fieldIndex in preset[fieldsKey]) {
-        let fieldID = preset[fieldsKey][fieldIndex];
-        usedFieldIDs.add(fieldID);
-        let field = fields[fieldID];
-        if (field) {
-          if (field.geometry) {
-            let sharedGeometry = field.geometry.filter(value => preset.geometry.includes(value));
-            if (!sharedGeometry.length) {
-              console.error('The preset "' + presetID + '" (' + preset.name + ') will never display the field "' + fieldID + '" since they don\'t share geometry types.');
-              console.log('');
-              process.exit(1);
-            }
-          }
-
-        } else {
-          // no field found with this ID...
-
-          let regexResult = betweenBracketsRegex.exec(fieldID);
-          if (regexResult) {
-            let foreignPresetID = regexResult[0];
-            if (presets[foreignPresetID] === undefined) {
-              console.error('Unknown preset "' + foreignPresetID + '" referenced in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
-              console.log('');
-              process.exit(1);
-            }
-          } else {
-            console.error('Unknown preset field "' + fieldID + '" in "' + fieldsKey + '" array of preset "' + presetID + '" (' + preset.name + ')');
-            console.log('');
-            process.exit(1);
-          }
-        }
-
-
-      }
-    }
-
-    if (preset.fields) {
-      // since `moreFields` is available, check that `fields` doesn't get too cluttered
-      let fieldCount = preset.fields.length;
-
-      if (fieldCount > maxFieldsBeforeError) {
-        // Fields with `prerequisiteTag` or `geometry` may not always be shown,
-        // so don't count them against the limits.
-        const alwaysShownFields = preset.fields.filter(fieldID => {
-          if (fields[fieldID] && fields[fieldID].prerequisiteTag || fields[fieldID].geometry) return false;
-          return true;
-        });
-        fieldCount = alwaysShownFields.length;
-      }
-      if (fieldCount > maxFieldsBeforeError) {
-        console.error(fieldCount + ' values in "fields" of "' + preset.name + '" (' + presetID + '). Limit: ' + maxFieldsBeforeError + '. Please move lower-priority fields to "moreFields".');
-        console.log('');
-        process.exit(1);
-      }
-    }
-  }
-
-  for (var fieldID in fields) {
-    if (!usedFieldIDs.has(fieldID) &&
-        fields[fieldID].universal !== true &&
-        (fields[fieldID].usage || 'preset') === 'preset') {
-      console.log('Field "' + fields[fieldID].label + '" (' + fieldID + ') isn\'t used by any presets.');
-    }
-  }
-
-}
-
-function validateDefaults(defaults, categories, presets) {
-  Object.keys(defaults).forEach(name => {
-    const members = defaults[name];
-    members.forEach(id => {
-      if (!presets[id] && !categories[id]) {
-        console.error(`Unknown category or preset: ${id} in default ${name}`);
-        console.log('');
-        process.exit(1);
-      }
-    });
-  });
-}
-
-function translationsToYAML(translations) {
-  // comment keys end with '#' and should sort immediately before their related key.
-  function commentFirst(a, b) {
-    return (a === b + '#') ? -1
-      : (b === a + '#') ? 1
-      : (a > b ? 1 : a < b ? -1 : 0);
-  }
-
-  return YAML.safeDump({ en: { presets: translations }}, { sortKeys: commentFirst, lineWidth: -1 })
-    .replace(/[^\s]+#'?:/g, '#');
-}
-
-
-function writeEnJson(tstrings) {
+function writeEnJson() {
+  const schemaTranslations = require('@openstreetmap/id-tagging-schema/dist/translations/en.json').en;
   const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
   const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
@@ -810,14 +206,18 @@ function writeEnJson(tstrings) {
       }
 
       let enjson = core;
-      ['presets', 'imagery', 'community', 'languageNames', 'scriptNames'].forEach(function(prop) {
+      let props = Object.keys(schemaTranslations).concat(['imagery', 'community', 'languageNames', 'scriptNames']);
+      props.forEach(function(prop) {
         if (enjson.en[prop]) {
           console.error(`Error: Reserved property '${prop}' already exists in core strings`);
           process.exit(1);
         }
       });
 
-      enjson.en.presets = tstrings;
+      for (var key in schemaTranslations) {
+        enjson.en[key] = schemaTranslations[key];
+      }
+
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;
       enjson.en.languageNames = languageNames.languageNamesInLanguageOf('en');
@@ -829,7 +229,7 @@ function writeEnJson(tstrings) {
 
 
 function writeFaIcons(faIcons) {
-  for (const key in faIcons) {
+  Array.from(faIcons).forEach(function(key) {
     const prefix = key.substring(0, 3);   // `fas`, `far`, `fab`
     const name = key.substring(4);
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
@@ -839,8 +239,9 @@ function writeFaIcons(faIcons) {
       console.error(`Error: No FontAwesome icon for ${key}`);
       throw (error);
     }
-  }
+  });
 }
+
 
 function minifyJSON(inPath, outPath) {
   return new Promise((resolve, reject) => {
