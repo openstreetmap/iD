@@ -125,7 +125,7 @@ export function uiFieldLocalized(field, context) {
         var existingLangs = new Set(existingLangsOrdered.filter(Boolean));
 
         for (var k in tags) {
-            var m = k.match(/^(.*):([a-zA-Z_-]+)$/);
+            var m = k.match(/^(.*):(.+)$/);
             if (m && m[1] === field.key && m[2]) {
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
@@ -567,7 +567,11 @@ export function uiFieldLocalized(field, context) {
         });
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
-            return localizer.languageName(d.lang);
+            var langItem = _languagesArray.find(function(item) {
+                return item.code === d.lang;
+            });
+            if (langItem) return langItem.label;
+            return d.lang;
         });
 
         utilGetSetValue(entries.select('.localized-value'), function(d) {

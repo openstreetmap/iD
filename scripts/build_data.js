@@ -104,6 +104,10 @@ function buildData() {
   fs.writeFileSync('dist/data/deprecated.min.json', JSON.stringify(deprecated));
   fs.writeFileSync('dist/data/taginfo.min.json', JSON.stringify(taginfo));
 
+  const languageInfo = languageNames.langNamesInNativeLang;
+  fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
+  fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
+
   // Save individual data files
   let tasks = [
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),

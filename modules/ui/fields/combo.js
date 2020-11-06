@@ -432,11 +432,13 @@ export function uiFieldCombo(field, context) {
             if (_isMulti) {
                 // Build _multiData array containing keys already set..
                 for (var k in tags) {
-                    if ((field.key && k.indexOf(field.key) !== 0) || field.keys.indexOf(k) === -1) continue;
+                    if (field.key && k.indexOf(field.key) !== 0) continue;
+                    if (!field.key && field.keys.indexOf(k) === -1) continue;
+
                     var v = tags[k];
                     if (!v || (typeof v === 'string' && v.toLowerCase() === 'no')) continue;
 
-                    var suffix = field.key ? k.substring(field.key.length) : k;
+                    var suffix = field.key ? k.substr(field.key.length) : k;
                     _multiData.push({
                         key: k,
                         value: displayValue(suffix),

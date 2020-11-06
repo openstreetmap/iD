@@ -185,15 +185,17 @@ export function coreContext() {
   };
 
   context.zoomToEntity = (entityID, zoomTo) => {
-    if (zoomTo !== false) {
-      context.loadEntity(entityID, (err, result) => {
-        if (err) return;
-        const entity = result.data.find(e => e.id === entityID);
-        if (entity) {
-          _map.zoomTo(entity);
-        }
-      });
-    }
+
+    // be sure to load the entity even if we're not going to zoom to it
+    context.loadEntity(entityID, (err, result) => {
+      if (err) return;
+      if (zoomTo !== false) {
+          const entity = result.data.find(e => e.id === entityID);
+          if (entity) {
+            _map.zoomTo(entity);
+          }
+      }
+    });
 
     _map.on('drawn.zoomToEntity', () => {
       if (!context.hasEntity(entityID)) return;
