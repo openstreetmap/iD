@@ -567,7 +567,11 @@ export function uiFieldLocalized(field, context) {
         });
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
-            return localizer.languageName(d.lang);
+            var langItem = _languagesArray.find(function(item) {
+                return item.code === d.lang;
+            });
+            if (langItem) return langItem.label;
+            return d.lang;
         });
 
         utilGetSetValue(entries.select('.localized-value'), function(d) {
