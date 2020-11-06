@@ -111,6 +111,10 @@ function buildData() {
   writeEnJson(tstrings);
   writeFaIcons(faIcons);
 
+  const languageInfo = languageNames.langNamesInNativeLang;
+  fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
+  fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
+
   // Save individual data files
   let tasks = [
     minifyJSON('data/presets/categories.json', 'dist/data/preset_categories.min.json'),

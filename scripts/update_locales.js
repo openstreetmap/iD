@@ -43,10 +43,6 @@ const fetchOpts = {
 
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 
-const languageInfo = languageNames.langNamesInNativeLang;
-fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
-fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
-
 let shortcuts = [];
 dataShortcuts.forEach(tab => {
   tab.columns.forEach(col => {
