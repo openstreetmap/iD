@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "@ideditor/country-coder": "^3.2.0",
-    "@openstreetmap/id-tagging-schema": "1.0.0",
     "@ideditor/location-conflation": "~0.5.0",
     "@mapbox/geojson-rewind": "^0.5.0",
     "@mapbox/sexagesimal": "1.2.0",
@@ -76,6 +75,7 @@
     "@fortawesome/free-solid-svg-icons": "~5.15.1",
     "@ideditor/temaki": "~4.3.0",
     "@mapbox/maki": "^6.0.0",
+    "@openstreetmap/id-tagging-schema": "1.0.0",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-json": "^4.0.1",
