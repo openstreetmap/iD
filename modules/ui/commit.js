@@ -124,12 +124,26 @@ export function uiCommit(context) {
         tags = Object.assign({}, _changeset.tags);   // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = context.history().imageryUsed().join(';').substr(0, 255);
-        if (imageryUsed.match(/(google)/) || imageryUsed.match(/(Google)/))
+        var imageryUsedArray    = context.history().imageryUsed();
+        var newImageryUsedArray = [];
+        for (let i = 0, count = imageryUsedArray.length; i < count; i++)
         {
-            imageryUsed = 'Bing aerial imagery';
+            var imageryUsed = imageryUsedArray[i];
+            if (imageryUsed.match(/(google)/) || imageryUsed.match(/(Google)/) || imageryUsed.match(/(here)/) || imageryUsed.match(/(Here)/))
+            {
+                // ignore
+            }
+            else
+            {
+                newImageryUsedArray.push(imageryUsed);
+            }
         }
-        tags.imagery_used = imageryUsed;
+        if (newImageryUsedArray.length === 0)
+        {
+            newImageryUsedArray = ['Bing aerial imagery'];
+        }
+
+        tags.imagery_used = newImageryUsedArray.join(';').substr(0, 255);
         
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();

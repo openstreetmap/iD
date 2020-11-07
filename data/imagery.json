@@ -2,12 +2,21 @@
   "dataImagery": [
     {
       "id": "CMM2018",
-      "name": "CMM 2018 Montreal aerial imagery / Drummondville 2019 aerial imagery / Gatineau Imagery 2017",
+      "name": "CMM Montreal 2018/Drummondville 2018/Gatineau 2017",
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/cmm2018tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
       "default": true,
-      "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2019 Aerial imagery."
+      "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018 Aerial imagery."
+    },
+    {
+      "id": "HereTest",
+      "name": "Here Satellite Test only for alignment verification",
+      "type": "tms",
+      "default": false,
+      "template": "http://2.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png8?app_id=J8eSHWWbV2geKuBkFk8W&app_code=c688Wo2sYhT-x3yeD0i_6Q",
+      "zoomExtent": [8, 22],
+      "description": "Here Satellite Test only for alignment verification."
     },
     {
       "id": "GoogleTest",
