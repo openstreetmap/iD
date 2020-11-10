@@ -36,6 +36,35 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.5
+##### 2020-Nov-9
+
+#### :sparkles: Usability & Accessibility
+* Enable loading iD with a feature selected even when zoomed out ([#8122])
+
+[#8122]: https://github.com/openstreetmap/iD/issues/8122
+
+#### :bug: Bugfixes
+* Fix an issue where some fields that allow multiple values would not show existing tags ([#8155])
+* Fix a bug where points could move back unexpectedly when changing their tags after dragging them ([#7606])
+* Fix rare instances where iD could add an invalid localized name tag ([#8165])
+
+[#8155]: https://github.com/openstreetmap/iD/issues/8155
+[#7606]: https://github.com/openstreetmap/iD/issues/7606
+[#8165]: https://github.com/openstreetmap/iD/issues/8165
+
+#### :earth_asia: Localization
+* Support dozens of additional languages in the Multilingual Name field ([#8165])
+
+[#8165]: https://github.com/openstreetmap/iD/issues/8165
+
+#### :rocket: Presets
+* Indicate the units for the Capacity field on storage tank presets ([#8078], [#8112], thanks [@karmanya007])
+
+[#8078]: https://github.com/openstreetmap/iD/issues/8078
+[#8112]: https://github.com/openstreetmap/iD/issues/8112
+[@karmanya007]: https://github.com/karmanya007
+
 # 2.19.4
 ##### 2020-Nov-2
 

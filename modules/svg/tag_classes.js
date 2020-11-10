@@ -118,8 +118,7 @@ export function svgTagClasses() {
 
                 if (v === 'yes') {   // e.g. `railway=rail + abandoned=yes`
                     status = k;
-                }
-                else if (primary && primary === v) {  // e.g. `railway=rail + abandoned=railway`
+                } else if (primary && primary === v) {  // e.g. `railway=rail + abandoned=railway`
                     status = k;
                 } else if (!primary && primaries.indexOf(v) !== -1) {  // e.g. `abandoned=railway`
                     status = k;

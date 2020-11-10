@@ -91,16 +91,12 @@ export function uiFieldAddress(field, context) {
 
         function isAddressable(d) {
             if (d.tags.name) {
-                if (d.tags.admin_level === '8' && d.tags.boundary === 'administrative')
-                    return true;
-                if (d.tags.border_type === 'city')
-                    return true;
-                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village')
-                    return true;
+                if (d.tags.admin_level === '8' && d.tags.boundary === 'administrative') return true;
+                if (d.tags.border_type === 'city') return true;
+                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village') return true;
             }
 
-            if (d.tags['addr:city'])
-                return true;
+            if (d.tags['addr:city']) return true;
 
             return false;
         }

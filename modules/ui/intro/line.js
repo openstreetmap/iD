@@ -211,12 +211,13 @@ export function uiIntroLine(context, reveal) {
         reveal('.surface', continueLineText);
 
         context.on('enter.intro', function(mode) {
-            if (mode.id === 'draw-line')
+            if (mode.id === 'draw-line') {
                 return;
-            else if (mode.id === 'select')
+            } else if (mode.id === 'select') {
                 return continueTo(chooseCategoryRoad);
-            else
+            } else {
                 return chapter.restart();
+            }
         });
 
         function continueTo(nextStep) {

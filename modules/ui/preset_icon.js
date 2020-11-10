@@ -23,18 +23,12 @@ export function uiPresetIcon() {
 
 
   function getIcon(p, geom) {
-    if (isSmall() && p.isFallback && p.isFallback())
-      return 'iD-icon-' + p.id;
-    else if (p.icon)
-      return p.icon;
-    else if (geom === 'line')
-      return 'iD-other-line';
-    else if (geom === 'vertex')
-      return p.isFallback() ? '' : 'temaki-vertex';
-    else if (isSmall() && geom === 'point')
-      return '';
-    else
-      return 'maki-marker-stroked';
+    if (isSmall() && p.isFallback && p.isFallback()) return 'iD-icon-' + p.id;
+    if (p.icon) return p.icon;
+    if (geom === 'line') return 'iD-other-line';
+    if (geom === 'vertex') return p.isFallback() ? '' : 'temaki-vertex';
+    if (isSmall() && geom === 'point') return '';
+    return 'maki-marker-stroked';
   }
 
 

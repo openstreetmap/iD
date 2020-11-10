@@ -256,11 +256,13 @@ export function behaviorSelect(context) {
 
                 var datum = pointerInfo.firstEvent.target.__data__;
                 var entity = (datum && datum.properties && datum.properties.entity) || datum;
-                if (context.graph().hasEntity(entity.id)) return {
-                    pointerId: pointerId,
-                    entityId: entity.id,
-                    selected: selectedIDs.indexOf(entity.id) !== -1
-                };
+                if (context.graph().hasEntity(entity.id)) {
+                    return {
+                        pointerId: pointerId,
+                        entityId: entity.id,
+                        selected: selectedIDs.indexOf(entity.id) !== -1
+                    };
+                }
             }
             return null;
         }

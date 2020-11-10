@@ -330,14 +330,16 @@ Object.assign(osmRelation.prototype, {
 
             for (o = 0; o < outers.length; o++) {
                 outer = outers[o];
-                if (geoPolygonContainsPolygon(outer, inner))
+                if (geoPolygonContainsPolygon(outer, inner)) {
                     return o;
+                }
             }
 
             for (o = 0; o < outers.length; o++) {
                 outer = outers[o];
-                if (geoPolygonIntersectsPolygon(outer, inner, false))
+                if (geoPolygonIntersectsPolygon(outer, inner, false)) {
                     return o;
+                }
             }
         }
 

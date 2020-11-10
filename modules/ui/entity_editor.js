@@ -270,11 +270,15 @@ export function uiEntityEditor(context) {
 
     entityEditor.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
+
+        // always reload these even if the entityIDs are unchanged, since we
+        // could be reselecting after something like dragging a node
+        _base = context.graph();
+        _coalesceChanges = false;
+
         if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
         _entityIDs = val;
-        _base = context.graph();
-        _coalesceChanges = false;
 
         loadActivePresets(true);
 

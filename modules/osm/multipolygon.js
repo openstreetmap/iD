@@ -40,24 +40,31 @@ export function osmOldMultipolygonOuterMemberOfRelation(entity, graph) {
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
 export function osmIsOldMultipolygonOuterMember(entity, graph) {
-    if (entity.type !== 'way' || Object.keys(entity.tags).filter(osmIsInterestingTag).length === 0)
+    if (entity.type !== 'way' ||
+        Object.keys(entity.tags).filter(osmIsInterestingTag).length === 0) {
         return false;
+    }
 
     var parents = graph.parentRelations(entity);
-    if (parents.length !== 1)
-        return false;
+    if (parents.length !== 1) return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1)
+    if (!parent.isMultipolygon() ||
+        Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1) {
         return false;
+    }
 
     var members = parent.members, member;
     for (var i = 0; i < members.length; i++) {
         member = members[i];
-        if (member.id === entity.id && member.role && member.role !== 'outer')
-            return false; // Not outer member
-        if (member.id !== entity.id && (!member.role || member.role === 'outer'))
-            return false; // Not a simple multipolygon
+        if (member.id === entity.id && member.role && member.role !== 'outer') {
+            // Not outer member
+            return false;
+        }
+        if (member.id !== entity.id && (!member.role || member.role === 'outer')) {
+            // Not a simple multipolygon
+            return false;
+        }
     }
 
     return parent;
@@ -65,33 +72,33 @@ export function osmIsOldMultipolygonOuterMember(entity, graph) {
 
 
 export function osmOldMultipolygonOuterMember(entity, graph) {
-    if (entity.type !== 'way')
-        return false;
+    if (entity.type !== 'way') return false;
 
     var parents = graph.parentRelations(entity);
-    if (parents.length !== 1)
-        return false;
+    if (parents.length !== 1) return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1)
+    if (!parent.isMultipolygon() ||
+        Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1) {
         return false;
+    }
 
     var members = parent.members, member, outerMember;
     for (var i = 0; i < members.length; i++) {
         member = members[i];
         if (!member.role || member.role === 'outer') {
-            if (outerMember)
-                return false; // Not a simple multipolygon
+            if (outerMember) return false; // Not a simple multipolygon
             outerMember = member;
         }
     }
 
-    if (!outerMember)
-        return false;
+    if (!outerMember) return false;
 
     var outerEntity = graph.hasEntity(outerMember.id);
-    if (!outerEntity || !Object.keys(outerEntity.tags).filter(osmIsInterestingTag).length)
+    if (!outerEntity ||
+        !Object.keys(outerEntity.tags).filter(osmIsInterestingTag).length) {
         return false;
+    }
 
     return outerEntity;
 }

@@ -534,8 +534,10 @@ export function uiFieldRestrictions(field, context) {
                     for (var i = 0; i < datum.via.ways.length; i++) {
                         var prev = names[names.length - 1];
                         var curr = displayName(datum.via.ways[i], vgraph);
-                        if (!prev || curr !== prev)   // collapse identical names
+                        if (!prev || curr !== prev) {
+                            // collapse identical names
                             names.push(curr);
+                        }
                     }
 
                     help

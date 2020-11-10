@@ -80,8 +80,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
     action.disabled = function(graph) {
         var connections = action.connections(graph);
-        if (connections.length === 0)
-            return 'not_connected';
+        if (connections.length === 0) return 'not_connected';
 
         var parentWays = graph.parentWays(graph.entity(nodeId));
         var seenRelationIds = {};
@@ -105,8 +104,7 @@ export function actionDisconnect(nodeId, newNodeId) {
             });
         });
 
-        if (sharedRelation)
-            return 'relation';
+        if (sharedRelation) return 'relation';
     };
 
 

@@ -213,8 +213,9 @@ export function coreDifference(base, head) {
 
             if (extent &&
                 (!h || !h.intersects(extent, head)) &&
-                (!b || !b.intersects(extent, base)))
+                (!b || !b.intersects(extent, base))) {
                 continue;
+            }
 
             result[id] = h;
 
