@@ -308,11 +308,10 @@ same format as the rest, include your new corresponding `docKey` in
 [/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
 
 
-## Adding or Refining Presets
+## Editing Presets or Tagging
 
-Presets save time for iD users by automatically showing them the tags they are
-likely to add for a given feature. They are stored in `data/presets/presets`. If
-you're going to update the presets, [review the Presets README](/data/presets/README.md).
+iD's knowledge of OpenStreetMap tags is mostly handled by the [iD Tagging Schema](https://github.com/openstreetmap/id-tagging-schema)
+project, which has its own opportunities to contribute.
 
 
 ## Contributing Code

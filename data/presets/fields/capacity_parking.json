@@ -1,7 +1,0 @@
-{
-    "key": "capacity",
-    "type": "number",
-    "minValue": 0,
-    "label": "Total Spaces",
-    "placeholder": "10, 20, 30..."
-}

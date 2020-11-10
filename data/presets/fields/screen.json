@@ -1,7 +1,0 @@
-{
-    "key": "screen",
-    "type": "number",
-    "label": "Screens",
-    "placeholder": "1, 4, 8…",
-    "minValue": 0
-}

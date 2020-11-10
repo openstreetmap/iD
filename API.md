@@ -319,3 +319,62 @@ var id = iD.coreContext()
 ```
 
 This should be set with caution for performance reasons. The OpenStreetMap API has a limitation of 50000 nodes per request.
+
+
+### Custom Presets
+
+iD supports deployments which use a custom set of presets. You can supply presets via
+the `presets` accessor:
+
+```js
+var id = iD.coreContext().presets({
+    presets: { ... },
+    fields: { ... },
+    defaults: { ... },
+    categories: { ... }
+});
+```
+
+All four parts (presets, fields, defaults, and categories) must be supplied. In addition,
+several base presets and fields must be included.
+
+Basic geometric presets must be included so that every feature matches at least one preset.
+For example:
+
+```js
+"area": {
+    "name": "Area",
+    "tags": {},
+    "geometry": ["area"],
+    "matchScore": 0.1
+},
+"line": {
+    "name": "Line",
+    "tags": {},
+    "geometry": ["line"],
+    "matchScore": 0.1
+},
+"point": {
+    "name": "Point",
+    "tags": {},
+    "geometry": ["point", "vertex"],
+    "matchScore": 0.1
+},
+"relation": {
+    "name": "Relation",
+    "tags": {},
+    "geometry": ["relation"],
+    "matchScore": 0.1
+}
+```
+
+A "name" field must be included:
+
+```js
+"name": {
+    "key": "name",
+    "type": "localized",
+    "label": "Name",
+    "placeholder": "Common name (if any)"
+}
+```

@@ -1,8 +1,0 @@
-{
-    "key": "brewery",
-    "type": "semiCombo",
-    "label": "Draft Beers",
-    "terms": [
-        "on tap"
-    ]
-}
