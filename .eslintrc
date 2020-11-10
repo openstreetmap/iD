@@ -28,6 +28,7 @@
         "default-param-last": "error",
         "dot-notation": "error",
         "eqeqeq": ["error", "smart"],
+        "func-call-spacing": ["warn", "never"],
         "grouped-accessor-pairs": "error",
         "indent": ["off", 4],
         "keyword-spacing": "error",

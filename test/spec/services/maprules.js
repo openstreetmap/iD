@@ -234,12 +234,12 @@ describe('maprules', function() {
             });
         });
         describe('greaterThan', function() {
-            it ('is true when a tag value is greater than the selector value', function() {
+            it('is true when a tag value is greater than the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 var tags = { lanes : 6 };
                 expect(_ruleChecks.greaterThan(selectorTags)(tags)).to.be.true;
             });
-            it ('is false when a tag value is less than or equal to the selector value', function() {
+            it('is false when a tag value is less than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [4, 5].forEach(function(val) {
                     expect(_ruleChecks.greaterThan(selectorTags)({ lanes: val })).to.be.false;
@@ -247,25 +247,25 @@ describe('maprules', function() {
             });
         });
         describe('greaterThanEqual', function() {
-            it ('is true when a tag value is greater than or equal to the selector value', function() {
+            it('is true when a tag value is greater than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [5, 6].forEach(function(val) {
                     expect(_ruleChecks.greaterThanEqual(selectorTags)({ lanes: val })).to.be.true;
                 });
             });
-            it ('is false when a tag value is less than the selector value', function () {
+            it('is false when a tag value is less than the selector value', function () {
                 var selectorTags = { lanes: 5 };
                 var tags = { lanes: 4 };
                 expect(_ruleChecks.greaterThanEqual(selectorTags)(tags)).to.be.false;
             });
         });
         describe('lessThan', function() {
-            it ('is true when a tag value is less than the selector value', function() {
+            it('is true when a tag value is less than the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 var tags = { lanes: 4 };
                 expect(_ruleChecks.lessThan(selectorTags)(tags)).to.be.true;
             });
-            it ('is false when a tag value is greater than or equal to the selector value', function() {
+            it('is false when a tag value is greater than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [6, 7].forEach(function(val) {
 					expect(_ruleChecks.lessThan(selectorTags)({ lanes: val })).to.be.false;
@@ -273,13 +273,13 @@ describe('maprules', function() {
             });
         });
         describe('lessThanEqual', function() {
-            it ('is true when a tag value  is less than or equal to the selector value', function() {
+            it('is true when a tag value  is less than or equal to the selector value', function() {
                 var selectorTags = { lanes: 5 };
                 [4, 5].forEach(function(val) {
                     expect(_ruleChecks.lessThanEqual(selectorTags)({ lanes: val })).to.be.true;
                 });
             });
-            it ('is false when a tag value is greater than the selector value', function() {
+            it('is false when a tag value is greater than the selector value', function() {
                var selectorTags = { lanes: 5 };
                var tags = { lanes: 6 };
                expect(_ruleChecks.lessThanEqual(selectorTags)(tags)).to.be.false;
@@ -287,22 +287,22 @@ describe('maprules', function() {
         });
         describe('positiveRegex', function() {
             var positiveRegex = { amenity: ['^hospital$','^clinic$']};
-            it ('is true when tag value matches positiveRegex', function() {
+            it('is true when tag value matches positiveRegex', function() {
                 var tags = { amenity: 'hospital' };
                 expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).to.be.true;
             });
-            it ('is false when tag value does not match negative regex', function() {
+            it('is false when tag value does not match negative regex', function() {
                 var tags = { amenity: 'school' };
                 expect(_ruleChecks.positiveRegex(positiveRegex)(tags)).to.be.false;
             });
         });
         describe('negativeRegex', function() {
             var negativeRegex = { bicycle: [ 'use_path', 'designated' ] };
-            it ('is true when tag value does not match negativeRegex', function() {
+            it('is true when tag value does not match negativeRegex', function() {
                 var tags = { bicycle: 'yes' };
                 expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).to.be.true;
             });
-            it ('is false when tag value matches negativeRegex', function() {
+            it('is false when tag value matches negativeRegex', function() {
                 var tags = { bicycle: 'designated' };
                 expect(_ruleChecks.negativeRegex(negativeRegex)(tags)).to.be.false;
             });
@@ -450,7 +450,7 @@ describe('maprules', function() {
                     expect(rule.matches(entities[i])).to.be.true;
                 });
             });
-            it ('is true when at least one rule check is \'false\'', function() {
+            it('is true when at least one rule check is \'false\'', function() {
                 var selector = {
                     geometry: 'way',
                     equals: { highway: 'residential' },
