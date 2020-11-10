@@ -177,10 +177,13 @@ export function coreContext() {
     _deferred.add(handle);
   };
 
+  // Download the full entity and its parent relations. The callback may be called multiple times.
   context.loadEntity = (entityID, callback) => {
     if (_connection) {
       const cid = _connection.getConnectionId();
       _connection.loadEntity(entityID, afterLoad(cid, callback));
+      // We need to fetch the parent relations separately.
+      _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
     }
   };
 

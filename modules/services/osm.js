@@ -635,7 +635,8 @@ export default {
     },
 
 
-    // Load a single entity by id (ways and relations use the `/full` call)
+    // Load a single entity by id (ways and relations use the `/full` call to include
+    // nodes and members). Parent relations are not included, see `loadEntityRelations`.
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
@@ -662,6 +663,23 @@ export default {
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version + '.json',
+            function(err, entities) {
+                if (callback) callback(err, { data: entities });
+            },
+            options
+        );
+    },
+
+
+    // Load the relations of a single entity with the given.
+    // GET /api/0.6/[node|way|relation]/#id/relations
+    loadEntityRelations: function(id, callback) {
+        var type = osmEntity.id.type(id);
+        var osmID = osmEntity.id.toOSM(id);
+        var options = { skipSeen: false };
+
+        this.loadFromAPI(
+            '/api/0.6/' + type + '/' + osmID + '/relations.json',
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
             },

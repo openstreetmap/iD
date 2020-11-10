@@ -169,8 +169,10 @@ export function uiOsmoseDetails(context) {
                   if (entity) {
                     context.enter(modeSelect(context, [entityID]));
                   } else {
-                    context.loadEntity(entityID, () => {
-                      context.enter(modeSelect(context, [entityID]));
+                    context.loadEntity(entityID, (err, result) => {
+                      if (err) return;
+                      const entity = result.data.find(e => e.id === entityID);
+                      if (entity) context.enter(modeSelect(context, [entityID]));
                     });
                   }
                 });
