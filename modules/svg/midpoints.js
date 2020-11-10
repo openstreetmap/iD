@@ -105,8 +105,7 @@ export function svgMidpoints(projection, context) {
 
 
         function midpointFilter(d) {
-            if (midpoints[d.id])
-                return true;
+            if (midpoints[d.id]) return true;
 
             for (var i = 0; i < d.parents.length; i++) {
                 if (filter(d.parents[i])) {

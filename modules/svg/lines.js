@@ -185,10 +185,11 @@ export function svgLines(projection, context) {
                 var layer = this.parentNode.__data__;
                 var data = pathdata[layer] || [];
                 return data.filter(function(d) {
-                    if (isSelected)
+                    if (isSelected) {
                         return context.selectedIDs().indexOf(d.id) !== -1;
-                    else
+                    } else {
                         return context.selectedIDs().indexOf(d.id) === -1;
+                    }
                 });
             };
         }

@@ -225,16 +225,22 @@ function parseBicycleWay(tag) {
 
 
 function mapToLanesObj(lanesObj, data, key) {
-    if (data.forward) data.forward.forEach(function(l, i) {
-        if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
-        lanesObj.forward[i][key] = l;
-    });
-    if (data.backward) data.backward.forEach(function(l, i) {
-        if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
-        lanesObj.backward[i][key] = l;
-    });
-    if (data.unspecified) data.unspecified.forEach(function(l, i) {
-        if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
-        lanesObj.unspecified[i][key] = l;
-    });
+    if (data.forward) {
+        data.forward.forEach(function(l, i) {
+            if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
+            lanesObj.forward[i][key] = l;
+        });
+    }
+    if (data.backward) {
+        data.backward.forEach(function(l, i) {
+            if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
+            lanesObj.backward[i][key] = l;
+        });
+    }
+    if (data.unspecified) {
+        data.unspecified.forEach(function(l, i) {
+            if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
+            lanesObj.unspecified[i][key] = l;
+        });
+    }
 }

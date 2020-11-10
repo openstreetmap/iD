@@ -365,8 +365,7 @@ export function utilPrefixDOMProperty(property) {
     var n = prefixes.length;
     var s = document.body;
 
-    if (property in s)
-        return property;
+    if (property in s) return property;
 
     property = property.substr(0, 1).toUpperCase() + property.substr(1);
 

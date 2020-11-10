@@ -152,8 +152,14 @@ export function utilZoomPan() {
               b = typeof transform === 'function' ? transform.apply(that, args) : transform,
               i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
           return function(t) {
-            if (t === 1) t = b; // Avoid rounding error on end.
-            else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }
+            if (t === 1) {
+              // Avoid rounding error on end.
+              t = b;
+            } else {
+              var l = i(t);
+              var k = w / l[2];
+              t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k);
+            }
             g.zoom(null, null, t);
           };
         });
@@ -321,8 +327,9 @@ export function utilZoomPan() {
       g.pointer0 = g.pointer1;
       delete g.pointer1;
     }
-    if (g.pointer0) g.pointer0[1] = _transform.invert(g.pointer0[0]);
-    else {
+    if (g.pointer0) {
+      g.pointer0[1] = _transform.invert(g.pointer0[0]);
+    } else {
       g.end(d3_event);
     }
   }

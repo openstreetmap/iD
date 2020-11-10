@@ -441,8 +441,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         }
 
                         // stop looking if we find a "direct" restriction (matching FROM, VIA, TO)
-                        if (restrict && restrict.direct)
-                            break;
+                        if (restrict && restrict.direct) break;
                     }
 
                     nextWays.push({ way: way, restrict: restrict });
@@ -607,19 +606,25 @@ export function osmInferRestriction(graph, turn, projection) {
     var angle = (geoAngle(fromVertex, fromNode, projection) -
                 geoAngle(toVertex, toNode, projection)) * 180 / Math.PI;
 
-    while (angle < 0)
+    while (angle < 0) {
         angle += 360;
+    }
 
-    if (fromNode === toNode)
+    if (fromNode === toNode) {
         return 'no_u_turn';
-    if ((angle < 23 || angle > 336) && fromOneWay && toOneWay)
+    }
+    if ((angle < 23 || angle > 336) && fromOneWay && toOneWay) {
         return 'no_u_turn';   // wider tolerance for u-turn if both ways are oneway
-    if ((angle < 40 || angle > 319) && fromOneWay && toOneWay && turn.from.vertex !== turn.to.vertex)
+    }
+    if ((angle < 40 || angle > 319) && fromOneWay && toOneWay && turn.from.vertex !== turn.to.vertex) {
         return 'no_u_turn';   // even wider tolerance for u-turn if there is a via way (from !== to)
-    if (angle < 158)
+    }
+    if (angle < 158) {
         return 'no_right_turn';
-    if (angle > 202)
+    }
+    if (angle > 202) {
         return 'no_left_turn';
+    }
 
     return 'no_straight_on';
 }

@@ -114,8 +114,7 @@ osmEntity.prototype = {
 
 
     copy: function(resolver, copies) {
-        if (copies[this.id])
-            return copies[this.id];
+        if (copies[this.id]) return copies[this.id];
 
         var copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
         copies[this.id] = copy;

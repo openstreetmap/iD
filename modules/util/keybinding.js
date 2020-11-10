@@ -60,11 +60,15 @@ export function utilKeybinding(namespace) {
                 if (binding.event.key === undefined) {
                     isMatch = false;
                 } else if (Array.isArray(binding.event.key)) {
-                    if (binding.event.key.map(function(s) { return s.toLowerCase(); }).indexOf(event.key.toLowerCase()) === -1)
+                    if (binding.event.key.map(function(s) {
+                        return s.toLowerCase();
+                    }).indexOf(event.key.toLowerCase()) === -1) {
                         isMatch = false;
+                    }
                 } else {
-                    if (event.key.toLowerCase() !== binding.event.key.toLowerCase())
+                    if (event.key.toLowerCase() !== binding.event.key.toLowerCase()) {
                         isMatch = false;
+                    }
                 }
             }
 

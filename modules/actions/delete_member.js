@@ -8,8 +8,9 @@ export function actionDeleteMember(relationId, memberIndex) {
 
         graph = graph.replace(relation);
 
-        if (relation.isDegenerate())
+        if (relation.isDegenerate()) {
             graph = actionDeleteRelation(relation.id)(graph);
+        }
 
         return graph;
     };

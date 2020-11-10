@@ -155,8 +155,10 @@ Object.assign(osmWay.prototype, {
 
         // implied oneway tag..
         for (var key in this.tags) {
-            if (key in osmOneWayTags && (this.tags[key] in osmOneWayTags[key]))
+            if (key in osmOneWayTags &&
+                (this.tags[key] in osmOneWayTags[key])) {
                 return true;
+            }
         }
         return false;
     },
@@ -232,10 +234,8 @@ Object.assign(osmWay.prototype, {
     },
 
     isArea: function() {
-        if (this.tags.area === 'yes')
-            return true;
-        if (!this.isClosed() || this.tags.area === 'no')
-            return false;
+        if (this.tags.area === 'yes') return true;
+        if (!this.isClosed() || this.tags.area === 'no') return false;
         return this.tagSuggestingArea() !== null;
     },
 
