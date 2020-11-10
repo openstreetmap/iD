@@ -19,6 +19,7 @@
         "array-callback-return": "warn",
         "arrow-spacing": "warn",
         "block-scoped-var": "error",
+        "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
         "class-methods-use-this": "error",
         "complexity": ["warn", 50],
         "default-case-last": "error",

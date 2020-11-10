@@ -193,8 +193,7 @@ export function uiCurtain(containerNode) {
                     if (tooltipBox.left + tooltipBox.width + tooltipArrow + tooltipWidth > w - 70) {
                         side = 'left';
                         pos = [tooltipBox.left - tooltipWidth - tooltipArrow, tipY];
-                    }
-                    else {
+                    } else {
                         side = 'right';
                         pos = [tooltipBox.left + tooltipBox.width + tooltipArrow, tipY];
                     }
@@ -217,8 +216,7 @@ export function uiCurtain(containerNode) {
             if (side === 'left' || side === 'right') {
                 if (pos[1] < 60) {
                     shiftY = 60 - pos[1];
-                }
-                else if (pos[1] + tip.height > h - 100) {
+                } else if (pos[1] + tip.height > h - 100) {
                     shiftY = h - pos[1] - tip.height - 100;
                 }
             }

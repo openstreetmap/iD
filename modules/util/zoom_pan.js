@@ -297,8 +297,9 @@ export function utilZoomPan() {
     } else if (g.pointer0) {
       p = g.pointer0[0];
       l = g.pointer0[1];
+    } else {
+      return;
     }
-    else return;
     g.zoom(d3_event, 'touch', constrain(translate(t, p, l), g.extent, translateExtent));
   }
 
