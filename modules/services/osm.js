@@ -232,6 +232,17 @@ var jsonparsers = {
             tags: obj.tags,
             members: getMembersJSON(obj)
         });
+    },
+
+    user: function parseUser(obj, uid) {
+        return {
+            id: uid,
+            display_name: obj.display_name,
+            account_created: obj.account_created,
+            image_url: obj.img && obj.img.href,
+            changesets_count: obj.changesets && obj.changesets.count && obj.changesets.count.toString() || '0',
+            active_blocks: obj.blocks && obj.blocks.received && obj.blocks.received.active && obj.blocks.received.active.toString() || '0'
+        };
     }
 };
 
@@ -242,11 +253,9 @@ function parseJSON(payload, callback, options) {
     }
 
     var json = payload;
-    if (typeof json !== 'object')
-       json = JSON.parse(payload);
+    if (typeof json !== 'object') json = JSON.parse(payload);
 
-    if (!json.elements)
-        return callback({ message: 'No JSON', status: -1 });
+    if (!json.elements) return callback({ message: 'No JSON', status: -1 });
 
     var children = json.elements;
 
@@ -275,6 +284,46 @@ function parseJSON(payload, callback, options) {
         }
 
         return parser(child, uid);
+    }
+}
+
+function parseUserJSON(payload, callback, options) {
+    options = Object.assign({ skipSeen: true }, options);
+    if (!payload)  {
+        return callback({ message: 'No JSON', status: -1 });
+    }
+
+    var json = payload;
+    if (typeof json !== 'object') json = JSON.parse(payload);
+
+    if (!json.elements) return callback({ message: 'No JSON', status: -1 });
+
+    if (!json.users && !json.user) return callback({ message: 'No JSON', status: -1 });
+
+    var objs = json.users || [json];
+
+    var handle = window.requestIdleCallback(function() {
+        var results = [];
+        var result;
+        for (var i = 0; i < objs.length; i++) {
+            result = parseObj(objs[i]);
+            if (result) results.push(result);
+        }
+        callback(null, results);
+    });
+
+    _deferred.add(handle);
+
+    function parseObj(obj) {
+        var uid = obj.user.id && obj.user.id.toString();
+        if (options.skipSeen && _userCache.user[uid]) {
+            delete _userCache.toLoad[uid];
+            return null;
+        }
+        var user = jsonparsers.user(obj.user, uid);
+        _userCache.user[uid] = user;
+        delete _userCache.toLoad[uid];
+        return user;
     }
 }
 
@@ -808,21 +857,18 @@ export default {
 
         utilArrayChunk(toLoad, 150).forEach(function(arr) {
             oauth.xhr(
-                { method: 'GET', path: '/api/0.6/users?users=' + arr.join() },
+                { method: 'GET', path: '/api/0.6/users.json?users=' + arr.join() },
                 wrapcb(this, done, _connectionID)
             );
         }.bind(this));
 
-        function done(err, xml) {
-            if (err) { return callback(err); }
+        function done(err, payload) {
+            if (err) return callback(err);
 
             var options = { skipSeen: true };
-            return parseXML(xml, function(err, results) {
-                if (err) {
-                    return callback(err);
-                } else {
-                    return callback(undefined, results);
-                }
+            return parseUserJSON(payload, function(err, results) {
+                if (err) return callback(err);
+                return callback(undefined, results);
             }, options);
         }
     },
@@ -837,20 +883,17 @@ export default {
         }
 
         oauth.xhr(
-            { method: 'GET', path: '/api/0.6/user/' + uid },
+            { method: 'GET', path: '/api/0.6/user/' + uid + '.json' },
             wrapcb(this, done, _connectionID)
         );
 
-        function done(err, xml) {
-            if (err) { return callback(err); }
+        function done(err, payload) {
+            if (err) return callback(err);
 
             var options = { skipSeen: true };
-            return parseXML(xml, function(err, results) {
-                if (err) {
-                    return callback(err);
-                } else {
-                    return callback(undefined, results[0]);
-                }
+            return parseUserJSON(payload, function(err, results) {
+                if (err) return callback(err);
+                return callback(undefined, results[0]);
             }, options);
         }
     },
@@ -864,21 +907,18 @@ export default {
         }
 
         oauth.xhr(
-            { method: 'GET', path: '/api/0.6/user/details' },
+            { method: 'GET', path: '/api/0.6/user/details.json' },
             wrapcb(this, done, _connectionID)
         );
 
-        function done(err, xml) {
-            if (err) { return callback(err); }
+        function done(err, payload) {
+            if (err) return callback(err);
 
             var options = { skipSeen: false };
-            return parseXML(xml, function(err, results) {
-                if (err) {
-                    return callback(err);
-                } else {
-                    _userDetails = results[0];
-                    return callback(undefined, _userDetails);
-                }
+            return parseUserJSON(payload, function(err, results) {
+                if (err) return callback(err);
+                _userDetails = results[0];
+                return callback(undefined, _userDetails);
             }, options);
         }
     },
