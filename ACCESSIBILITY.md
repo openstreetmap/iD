@@ -110,8 +110,8 @@ such as opening the edit menu via long-pressing instead of right-clicking.
 |   | Icon | Input Setup | Notes | Issues |
 |---|---|---|---|---|
 | ✅ | 🖱⌨️ | [Mouse](https://en.wikipedia.org/wiki/Computer_mouse) + [keyboard](https://en.wikipedia.org/wiki/Computer_keyboard) | iD's original input paradigm. Any mouse-like device such as a [trackpad](https://en.wikipedia.org/wiki/Touchpad), [trackball](https://en.wikipedia.org/wiki/Trackball), or [pointing stick](https://en.wikipedia.org/wiki/Pointing_stick) is grouped into "mouse" for this table |
-| 🟠 | ⌨️   | Keyboard only | iD hasn't been optimized for keyboard-only navigation, but some is possible. Geometry editing isn't possible | [#8004](https://github.com/openstreetmap/iD/issues/8004) |
-| 🟠 | 🖱  | Mouse only | The primary [mouse button](https://en.wikipedia.org/wiki/Mouse_button) (e.g. left click) alone is sufficient. Multiselection and disabling of node-snapping aren't possible |
+| 🟠 | ⌨️   | Keyboard only | A keyboard can be used to access all of iD's screens and controls, but not for interacting with data in the map | [#8004](https://github.com/openstreetmap/iD/issues/8004) |
+| 🟠 | 🖱  | Mouse only | The primary [mouse button](https://en.wikipedia.org/wiki/Mouse_button) (e.g. left click) alone is sufficient. Multiselection and disabling of node-snapping aren't possible. Text input requires something like a [virtual keyboard](https://en.wikipedia.org/wiki/Virtual_keyboard) |
 | 🟠 | 🖐  | [Multi-touch](https://en.wikipedia.org/wiki/Multi-touch) on a [touchscreen](https://en.wikipedia.org/wiki/Touchscreen) | Moving and rotating selections isn't possible | [#7599](https://github.com/openstreetmap/iD/issues/7599) |
 | 🟠 | ✍️   | [Stylus](https://en.wikipedia.org/wiki/Stylus_(computing)) on a touchscreen | Moving and rotating selections isn't possible, nor is selecting multiple features |
 | 🤷 | ✍️🔲 | Stylus on a [graphics tablet](https://en.wikipedia.org/wiki/Graphics_tablet) | |
