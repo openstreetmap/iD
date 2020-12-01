@@ -1,20 +1,12 @@
 /* eslint-disable no-console */
 const colors = require('colors/safe');
 const fs = require('fs');
-const path = require('path');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
+const fetch = require('node-fetch');
 
 const languageNames = require('./language_names.js');
-
-const presets = require('@openstreetmap/id-tagging-schema/dist/presets.min.json');
-const fields = require('@openstreetmap/id-tagging-schema/dist/fields.min.json');
-const categories = require('@openstreetmap/id-tagging-schema/dist/preset_categories.min.json');
-const defaults = require('@openstreetmap/id-tagging-schema/dist/preset_defaults.min.json');
-const discarded = require('@openstreetmap/id-tagging-schema/dist/discarded.min.json');
-const deprecated = require('@openstreetmap/id-tagging-schema/dist/deprecated.min.json');
-const taginfo = require('@openstreetmap/id-tagging-schema/dist/taginfo.min.json');
 
 // fontawesome icons
 const fontawesome = require('@fortawesome/fontawesome-svg-core');
@@ -59,7 +51,6 @@ function buildData() {
 
   // Start clean
   shell.rm('-f', [
-    'data/presets.yaml',
     'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
@@ -76,33 +67,10 @@ function buildData() {
   ]);
   // add icons for QA integrations
   readQAIssueIcons(faIcons);
-  // add icons for presets
-  [categories, fields, presets].forEach(function(data) {
-    for (var key in data) {
-      var datum  = data[key];
-      // fontawesome icon
-      if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
-        faIcons.add(datum.icon);
-      }
-    }
-  });
-  // copy over only those Font Awesome icons that we need
-  writeFaIcons(faIcons);
 
   let territoryLanguages = generateTerritoryLanguages();
   fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
   writeEnJson();
-
-  // put preset translations file where Transifex currently expects it
-  fs.copyFileSync(path.dirname(require.resolve('@openstreetmap/id-tagging-schema')) + '/dist/translations/en.yaml', 'data/presets.yaml');
-
-  fs.writeFileSync('dist/data/preset_presets.min.json', JSON.stringify(presets));
-  fs.writeFileSync('dist/data/preset_fields.min.json', JSON.stringify(fields));
-  fs.writeFileSync('dist/data/preset_categories.min.json', JSON.stringify(categories));
-  fs.writeFileSync('dist/data/preset_defaults.min.json', JSON.stringify(defaults));
-  fs.writeFileSync('dist/data/discarded.min.json', JSON.stringify(discarded));
-  fs.writeFileSync('dist/data/deprecated.min.json', JSON.stringify(deprecated));
-  fs.writeFileSync('dist/data/taginfo.min.json', JSON.stringify(taginfo));
 
   const languageInfo = languageNames.langNamesInNativeLang;
   fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
@@ -115,11 +83,34 @@ function buildData() {
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
     minifyJSON('data/keepRight.json', 'dist/data/keepRight.min.json'),
     minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
-    minifyJSON('data/locales.json', 'dist/data/locales.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
-    minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json')
+    minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
+    Promise.all([
+      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@2/dist/presets.min.json'),
+      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@2/dist/preset_categories.min.json'),
+      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@2/dist/fields.min.json')
+    ])
+    .then(responses => Promise.all(responses.map(response => response.json())))
+    .then((results) => {
+      const presets = results[0];
+      const categories = results[1];
+      const fields = results[2];
+
+      // add icons for presets
+      [categories, fields, presets].forEach(function(data) {
+        for (var key in data) {
+          var datum  = data[key];
+          // fontawesome icon
+          if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
+            faIcons.add(datum.icon);
+          }
+        }
+      });
+      // copy over only those Font Awesome icons that we need
+      writeFaIcons(faIcons);
+    })
   ];
 
   return _currBuild =
@@ -178,7 +169,6 @@ function generateTerritoryLanguages() {
 
 
 function writeEnJson() {
-  const schemaTranslations = require('@openstreetmap/id-tagging-schema/dist/translations/en.json').en;
   const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
   const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
@@ -210,7 +200,7 @@ function writeEnJson() {
       }
 
       let enjson = core;
-      let props = Object.keys(schemaTranslations).concat(['imagery', 'community', 'languageNames', 'scriptNames']);
+      let props = ['imagery', 'community', 'languageNames', 'scriptNames'];
       props.forEach(function(prop) {
         if (enjson.en[prop]) {
           console.error(`Error: Reserved property '${prop}' already exists in core strings`);
@@ -218,16 +208,12 @@ function writeEnJson() {
         }
       });
 
-      for (var key in schemaTranslations) {
-        enjson.en[key] = schemaTranslations[key];
-      }
-
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;
       enjson.en.languageNames = languageNames.languageNamesInLanguageOf('en');
       enjson.en.scriptNames = languageNames.scriptNamesInLanguageOf('en');
 
-      return fs.writeFileSync('dist/locales/en.json', JSON.stringify(enjson, null, 4));
+      fs.writeFileSync('dist/locales/en.min.json', JSON.stringify(enjson));
     });
 }
 

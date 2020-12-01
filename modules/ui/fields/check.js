@@ -58,7 +58,7 @@ export function uiFieldCheck(field, context) {
             for (var key in entity.tags) {
                 if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
                     _impliedYes = true;
-                    texts[0] = t.html('presets.fields.oneway_yes.options.undefined');
+                    texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
                     break;
                 }
             }

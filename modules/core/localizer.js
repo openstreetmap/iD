@@ -81,17 +81,32 @@ export function coreLocalizer() {
 
         if (_loadPromise) return _loadPromise;
 
-        return _loadPromise = Promise.all([
-                // load the list of languages
-                fileFetcher.get('languages'),
-                // load the list of supported locales
-                fileFetcher.get('locales')
-            ])
+        let filesToFetch = [
+            // load the list of languages
+            'languages',
+            // load the list of supported locales
+            'locales'
+        ];
+
+        const localeDirs = {
+            general: 'locales',
+            tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@2/dist/translations'
+        };
+
+        let fileMap = fileFetcher.fileMap();
+        for (let id in localeDirs) {
+            let key = `locales_index_${id}`;
+            fileMap[key] = localeDirs[id] + '/index.min.json';
+            filesToFetch.push(key);
+        }
+
+        return _loadPromise = Promise.all(filesToFetch.map(key => fileFetcher.get(key)))
             .then(results => {
                 _dataLanguages = results[0];
                 _dataLocales = results[1];
-            })
-            .then(() => {
+
+                let indexes = results.slice(2);
+
                 let requestedLocales = (_preferredLocaleCodes || [])
                     // List of locales preferred by the browser in priority order.
                     .concat(utilDetect().browserLocales)
@@ -102,14 +117,21 @@ export function coreLocalizer() {
                 // Run iD in the highest-priority locale; the rest are fallbacks
                 _localeCode = _localeCodes[0];
 
-                // Will always return the index for `en` if nothing else
-                const fullCoverageIndex = _localeCodes.findIndex(function(locale) {
-                    return _dataLocales[locale].pct === 1;
+                let loadStringsPromises = [];
+
+                indexes.forEach((index, i) => {
+                    // Will always return the index for `en` if nothing else
+                    const fullCoverageIndex = _localeCodes.findIndex(function(locale) {
+                        return index[locale] && index[locale].pct === 1;
+                    });
+                    // We only need to load locales up until we find one with full coverage
+                    _localeCodes.slice(0, fullCoverageIndex + 1).forEach(function(code) {
+                        let id = Object.keys(localeDirs)[i];
+                        let dir = Object.values(localeDirs)[i];
+                        if (index[code]) loadStringsPromises.push(localizer.loadLocale(code, id, dir));
+                    });
                 });
-                // We only need to load locales up until we find one with full coverage
-                const loadStringsPromises = _localeCodes.slice(0, fullCoverageIndex + 1).map(function(code) {
-                    return localizer.loadLocale(code);
-                });
+
                 return Promise.all(loadStringsPromises);
             })
             .then(() => {
@@ -156,8 +178,8 @@ export function coreLocalizer() {
 
         let locale = _localeCode;
         if (locale.toLowerCase() === 'en-us') locale = 'en';
-        _languageNames = _localeStrings[locale].languageNames;
-        _scriptNames = _localeStrings[locale].scriptNames;
+        _languageNames = _localeStrings.general[locale].languageNames;
+        _scriptNames = _localeStrings.general[locale].scriptNames;
 
         _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }
@@ -165,32 +187,25 @@ export function coreLocalizer() {
 
     /* Locales */
     // Returns a Promise to load the strings for the requested locale
-    localizer.loadLocale = (requested) => {
-
-        if (!_dataLocales) {
-            return Promise.reject('loadLocale called before init');
-        }
+    localizer.loadLocale = (requested, id, dir) => {
 
         let locale = requested;
 
         // US English is the default
         if (locale.toLowerCase() === 'en-us') locale = 'en';
 
-        if (!_dataLocales[locale]) {
-            return Promise.reject(`Unsupported locale: ${requested}`);
-        }
-
-        if (_localeStrings[locale]) {    // already loaded
+        if (_localeStrings[id] && _localeStrings[id][locale]) {    // already loaded
             return Promise.resolve(locale);
         }
 
         let fileMap = fileFetcher.fileMap();
-        const key = `locale_${locale}`;
-        fileMap[key] = `locales/${locale}.json`;
+        const key = `locale_${id}_${locale}`;
+        fileMap[key] = `${dir}/${locale}.min.json`;
 
         return fileFetcher.get(key)
             .then(d => {
-                _localeStrings[locale] = d[locale];
+                if (!_localeStrings[id]) _localeStrings[id] = {};
+                _localeStrings[id][locale] = d[locale];
                 return locale;
             });
     };
@@ -226,6 +241,14 @@ export function coreLocalizer() {
     */
     localizer.tInfo = function(stringId, replacements, locale) {
 
+        let scopeId = 'general';
+
+        if (stringId[0] === '_') {
+            let split = stringId.split('.');
+            scopeId = split[0].slice(1);
+            stringId = split.slice(1).join('.');
+        }
+
         locale = locale || _localeCode;
 
         let path = stringId
@@ -236,7 +259,7 @@ export function coreLocalizer() {
         let stringsKey = locale;
         // US English is the default
         if (stringsKey.toLowerCase() === 'en-us') stringsKey = 'en';
-        let result = _localeStrings[stringsKey];
+        let result = _localeStrings[scopeId][stringsKey];
 
         while (result !== undefined && path.length) {
           result = result[path.pop()];

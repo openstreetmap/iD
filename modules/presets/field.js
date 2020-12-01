@@ -20,8 +20,8 @@ export function presetField(fieldID, field) {
     return !_this.geometry || geometries.every(geom => _this.geometry.indexOf(geom) !== -1);
   };
 
-  _this.t = (scope, options) => t(`presets.fields.${fieldID}.${scope}`, options);
-  _this.t.html = (scope, options) => t.html(`presets.fields.${fieldID}.${scope}`, options);
+  _this.t = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
+  _this.t.html = (scope, options) => t.html(`_tagging.presets.fields.${fieldID}.${scope}`, options);
 
   _this.title = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
   _this.label = () => _this.overrideLabel || _this.t.html('label', { 'default': fieldID });

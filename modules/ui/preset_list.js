@@ -100,7 +100,7 @@ export function uiPresetList(context) {
                 var center = extent.center();
                 var countryCode = countryCoder.iso1A2Code(center);
 
-                results = presets.search(value, entityGeometries()[0], countryCode && countryCode.toLowerCase());
+                results = presets.search(value, entityGeometries()[0], countryCode);
                 messageText = t('inspector.results', {
                     n: results.collection.length,
                     search: value

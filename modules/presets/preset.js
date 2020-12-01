@@ -80,12 +80,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
 
   _this.t = (scope, options) => {
-    const textID = `presets.presets.${presetID}.${scope}`;
+    const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t(textID, options);
   };
 
   _this.t.html = (scope, options) => {
-    const textID = `presets.presets.${presetID}.${scope}`;
+    const textID = `_tagging.presets.presets.${presetID}.${scope}`;
     return t.html(textID, options);
   };
 
@@ -102,7 +102,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t('presets.presets.' + path.join('/') + '.name');
+        return t('_tagging.presets.presets.' + path.join('/') + '.name');
       }
       return null;
   };
@@ -111,7 +111,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t.html('presets.presets.' + path.join('/') + '.name');
+        return t.html('_tagging.presets.presets.' + path.join('/') + '.name');
       }
       return null;
   };
