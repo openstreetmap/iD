@@ -239,7 +239,8 @@ export function coreLocalizer() {
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
     * @return {string?}  localized string
     */
-    localizer.tInfo = function(stringId, replacements, locale) {
+    localizer.tInfo = function(origStringId, replacements, locale) {
+        let stringId = origStringId;
 
         let scopeId = 'general';
 
@@ -317,7 +318,7 @@ export function coreLocalizer() {
         if (index >= 0 && index < _localeCodes.length - 1) {
             // eventually this will be 'en' or another locale with 100% coverage
             let fallback = _localeCodes[index + 1];
-            return localizer.tInfo(stringId, replacements, fallback);
+            return localizer.tInfo(origStringId, replacements, fallback);
         }
 
         if (replacements && 'default' in replacements) {
@@ -328,7 +329,7 @@ export function coreLocalizer() {
           };
         }
 
-        const missing = `Missing ${locale} translation: ${stringId}`;
+        const missing = `Missing ${locale} translation: ${origStringId}`;
         if (typeof console !== 'undefined') console.error(missing);  // eslint-disable-line
 
         return {
