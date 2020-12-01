@@ -232,7 +232,7 @@ function getLanguage(resourceURL) {
   return (code, callback) => {
     code = code.replace(/-/g, '_');
     let url = `${resourceURL}/translation/${code}`;
-    // fetch only reviewed strings for some langauges
+    // fetch only reviewed strings for some languages
     if (reviewedOnlyLangs.indexOf(code) !== -1) {
       url += '?mode=reviewed';
     }
