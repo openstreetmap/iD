@@ -260,7 +260,7 @@ export function coreLocalizer() {
         let stringsKey = locale;
         // US English is the default
         if (stringsKey.toLowerCase() === 'en-us') stringsKey = 'en';
-        let result = _localeStrings[scopeId][stringsKey];
+        let result = _localeStrings && _localeStrings[scopeId] && _localeStrings[scopeId][stringsKey];
 
         while (result !== undefined && path.length) {
           result = result[path.pop()];
