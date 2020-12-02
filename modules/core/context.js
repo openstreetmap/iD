@@ -27,7 +27,7 @@ export function coreContext() {
   let _deferred = new Set();
 
   context.version = '2.20.0-dev';
-  context.privacyVersion = '20200407';
+  context.privacyVersion = '20201202';
 
   // iD will alter the hash so cache the parameters intended to setup the session
   context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
