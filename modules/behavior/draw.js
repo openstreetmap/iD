@@ -89,7 +89,8 @@ export function behaviorDraw(context) {
         var p2 = downPointer.pointerLocGetter(d3_event);
         var dist = geoVecLength(downPointer.downLoc, p2);
 
-        if (dist < _closeTolerance || (dist < _tolerance && (t2 - downPointer.downTime) < 500)) {
+        if (dist < _closeTolerance ||
+            (dist < _tolerance && (t2 - downPointer.downTime) < 500)) {
             // Prevent a quick second click
             d3_select(window).on('click.draw-block', function() {
                 d3_event.stopPropagation();

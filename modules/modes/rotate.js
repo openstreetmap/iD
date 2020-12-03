@@ -11,7 +11,7 @@ import { t } from '../core/localizer';
 import { actionRotate } from '../actions/rotate';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
-import { geoVecInterp } from '../geo';
+import { geoVecInterp, geoVecLength } from '../geo/vector';
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
 
@@ -21,10 +21,14 @@ import { operationMove } from '../operations/move';
 import { operationOrthogonalize } from '../operations/orthogonalize';
 import { operationReflectLong, operationReflectShort } from '../operations/reflect';
 
-import { utilGetAllNodes, utilKeybinding } from '../util';
+import { utilKeybinding } from '../util/keybinding';
+import { utilFastMouse, utilGetAllNodes } from '../util/util';
 
 
 export function modeRotate(context, entityIDs) {
+
+    var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeMove
+
     var mode = {
         id: 'rotate',
         button: 'browse'
@@ -48,6 +52,9 @@ export function modeRotate(context, entityIDs) {
     var _prevAngle;
     var _prevTransform;
     var _pivot;
+
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
     function doRotate(d3_event) {
@@ -127,12 +134,29 @@ export function modeRotate(context, entityIDs) {
 
         behaviors.forEach(context.install);
 
+        var downEvent;
+
         context.surface()
-            .on('mousemove.rotate', doRotate)
-            .on('click.rotate', finish);
+            .on(_pointerPrefix + 'down.modeRotate', function(d3_event) {
+                downEvent = d3_event;
+            });
+
+        d3_select(window)
+            .on(_pointerPrefix + 'move.modeRotate', doRotate, true)
+            .on(_pointerPrefix + 'up.modeRotate', function(d3_event) {
+                if (!downEvent) return;
+                var mapNode = context.container().select('.main-map').node();
+                var pointGetter = utilFastMouse(mapNode);
+                var p1 = pointGetter(downEvent);
+                var p2 = pointGetter(d3_event);
+                var dist = geoVecLength(p1, p2);
+
+                if (dist <= _tolerancePx) finish(d3_event);
+                downEvent = null;
+            }, true);
 
         context.history()
-            .on('undone.rotate', undone);
+            .on('undone.modeRotate', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -147,11 +171,14 @@ export function modeRotate(context, entityIDs) {
         behaviors.forEach(context.uninstall);
 
         context.surface()
-            .on('mousemove.rotate', null)
-            .on('click.rotate', null);
+            .on(_pointerPrefix + 'down.modeRotate', null);
+
+        d3_select(window)
+            .on(_pointerPrefix + 'move.modeRotate', null, true)
+            .on(_pointerPrefix + 'up.modeRotate', null, true);
 
         context.history()
-            .on('undone.rotate', null);
+            .on('undone.modeRotate', null);
 
         d3_select(document)
             .call(keybinding.unbind);
