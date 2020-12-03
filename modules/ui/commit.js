@@ -323,6 +323,11 @@ export function uiCommit(context) {
             .append('label')
             .attr('for', requestReviewDomId);
 
+        if (!labelEnter.empty()) {
+            labelEnter
+                .call(uiTooltip().title(t.html('commit.request_review_info')).placement('top'));
+        }
+
         labelEnter
             .append('input')
             .attr('type', 'checkbox')
