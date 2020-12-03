@@ -401,6 +401,7 @@ export function uiFieldLocalized(field, context) {
                 (d.localName && d.localName.toLowerCase() === lang) ||
                 (d.nativeName && d.nativeName.toLowerCase() === lang);
         });
+
         if (language) lang = language.code;
 
         if (d.lang && d.lang !== lang) {
@@ -456,12 +457,10 @@ export function uiFieldLocalized(field, context) {
         langItems = utilArrayUniq(langItems.concat(_languagesArray));
 
         cb(langItems.filter(function(d) {
-            return d.label.toLowerCase().indexOf(v) >= 0 ||
-                (d.localName && d.localName.toLowerCase().indexOf(v) >= 0) ||
-                (d.nativeName && d.nativeName.toLowerCase().indexOf(v) >= 0) ||
-                d.code.toLowerCase().indexOf(v) >= 0;
+            return d.label.toLowerCase().indexOf(v) >= 0 &&
+                (d.nativeName && d.nativeName.toLowerCase().indexOf(v) >= 0);
         }).map(function(d) {
-            return { value: d.label };
+            return { value: d.label+'-'+d.nativeName };//#8015 print multilangial fix
         }));
     }
 
@@ -563,15 +562,17 @@ export function uiFieldLocalized(field, context) {
         entries.order();
 
         entries.classed('present', function(d) {
-            return d.lang && d.value;
+            return (d.lang && d.value);
+
         });
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
             var langItem = _languagesArray.find(function(item) {
                 return item.code === d.lang;
             });
-            if (langItem) return langItem.label;
+            if (langItem) return (langItem.label +'-'+ langItem.nativeName);//#8015 startup print fix
             return d.lang;
+
         });
 
         utilGetSetValue(entries.select('.localized-value'), function(d) {

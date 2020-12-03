@@ -318,7 +318,7 @@ export function uiCombobox(context, klass) {
                 if (_cancelFetch) return;
 
                 _suggestions = results;
-                results.forEach(function(d) { _fetched[d.value] = d; });
+                results.forEach(function(d) {_fetched[d.value] = d;});
 
                 if (cb) {
                     cb();
