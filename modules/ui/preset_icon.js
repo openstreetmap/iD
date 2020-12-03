@@ -59,6 +59,30 @@ export function uiPresetIcon() {
   }
 
 
+  function renderCategoryBorder(container, drawBorder) {
+    let categoryBorder = container.selectAll('.preset-icon-category-border')
+      .data(drawBorder ? [0] : []);
+
+    categoryBorder.exit()
+      .remove();
+
+    let categoryBorderEnter = categoryBorder.enter();
+
+    const d = 60;
+
+    categoryBorderEnter
+      .append('svg')
+      .attr('class', 'preset-icon-fill preset-icon-category-border')
+      .attr('width', d)
+      .attr('height', d)
+      .attr('viewBox', `0 0 ${d} ${d}`)
+      .append('path')
+      .attr('d', 'M9.5,7.5 L25.5,7.5 L28.5,12.5 L49.5,12.5 C51.709139,12.5 53.5,14.290861 53.5,16.5 L53.5,43.5 C53.5,45.709139 51.709139,47.5 49.5,47.5 L10.5,47.5 C8.290861,47.5 6.5,45.709139 6.5,43.5 L6.5,12.5 L9.5,7.5 Z');
+
+    categoryBorder = categoryBorderEnter.merge(categoryBorder);
+ }
+
+
   function renderCircleFill(container, drawVertex) {
     let vertexFill = container.selectAll('.preset-icon-fill-vertex')
       .data(drawVertex ? [0] : []);
@@ -271,7 +295,7 @@ export function uiPresetIcon() {
     }
   }
 
-  function renderSvgIcon(container, picon, geom, isFramed, tagClasses) {
+  function renderSvgIcon(container, picon, geom, isFramed, category, tagClasses) {
     const isMaki = picon && /^maki-/.test(picon);
     const isTemaki = picon && /^temaki-/.test(picon);
     const isFa = picon && /^fa[srb]-/.test(picon);
@@ -291,6 +315,7 @@ export function uiPresetIcon() {
 
     icon
       .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
+      .classed('category', category)
       .classed('framed', isFramed)
       .classed('preset-icon-iD', isiDIcon);
 
@@ -367,9 +392,9 @@ export function uiPresetIcon() {
     const drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
     const drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
     const drawLine = picon && geom === 'line' && !isFallback && !isCategory;
-    const drawArea = picon && geom === 'area' && !isFallback;
+    const drawArea = picon && geom === 'area' && !isFallback && !isCategory;
     const drawRoute = picon && geom === 'route';
-    const isFramed = (drawVertex || drawArea || drawLine || drawRoute);
+    const isFramed = drawVertex || drawArea || drawLine || drawRoute || isCategory;
 
     let tags = !isCategory ? p.setTags({}, geom) : {};
     for (let k in tags) {
@@ -393,12 +418,13 @@ export function uiPresetIcon() {
       .classed('showing-img', !!imageURL)
       .classed('fallback', isFallback);
 
+    renderCategoryBorder(container, isCategory);
     renderPointBorder(container, drawPoint);
     renderCircleFill(container, drawVertex);
     renderSquareFill(container, drawArea, tagClasses);
     renderLine(container, drawLine, tagClasses);
     renderRoute(container, drawRoute, p);
-    renderSvgIcon(container, picon, geom, isFramed, tagClasses);
+    renderSvgIcon(container, picon, geom, isFramed, isCategory, tagClasses);
     renderImageIcon(container, imageURL);
   }
 

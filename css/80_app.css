@@ -1094,6 +1094,14 @@ a.hide-toggle {
     fill: transparent;
 }
 
+.preset-icon-category-border path {
+    stroke: #999;
+    stroke-width: 1px;
+    fill: transparent;
+    backface-visibility: hidden;
+    vector-effect: non-scaling-stroke;
+}
+
 .preset-icon-line {
     margin: auto;
     position: absolute;
@@ -1169,7 +1177,7 @@ a.hide-toggle {
 .preset-icon.framed .icon {
     transform: scale(0.4);
 }
-.preset-icon.framed.line-geom .icon,
+.preset-icon.framed.line-geom:not(.category) .icon,
 .preset-icon.framed.route-geom .icon {
     top: 20%;
     transform: translateY(-30%) scale(0.4);
@@ -1180,7 +1188,7 @@ a.hide-toggle {
 .preset-icon-iD.framed .icon {
     transform: scale(0.74);
 }
-.preset-icon-iD.framed.line-geom .icon,
+.preset-icon-iD.framed.line-geom:not(.category) .icon,
 .preset-icon-iD.framed.route-geom .icon {
     transform: translateY(-30%) scale(0.74);
 }
