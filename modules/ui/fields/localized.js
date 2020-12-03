@@ -125,7 +125,7 @@ export function uiFieldLocalized(field, context) {
         var existingLangs = new Set(existingLangsOrdered.filter(Boolean));
 
         for (var k in tags) {
-            var m = k.match(/^(.*):(.+)$/);
+            var m = k.match(/^(.*):(.*)$/);
             if (m && m[1] === field.key && m[2]) {
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
@@ -424,7 +424,7 @@ export function uiFieldLocalized(field, context) {
 
     function changeValue(d3_event, d) {
         if (!d.lang) return;
-        var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
+        var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || '';
 
         // don't override multiple values with blank string
         if (!value && Array.isArray(d.value)) return;
@@ -512,16 +512,19 @@ export function uiFieldLocalized(field, context) {
                         if (field.locked()) return;
                         d3_event.preventDefault();
 
-                        if (!d.lang || !d.value) {
-                            _multilingual.splice(index, 1);
-                            renderMultilingual(selection);
-                        } else {
-                            // remove from entity tags
-                            var t = {};
-                            t[key(d.lang)] = undefined;
-                            dispatch.call('change', this, t);
+                        if (d.lang) {
+                            var langKey = key(d.lang);
+                            if (langKey in _tags) {
+                                // remove from entity tags
+                                var t = {};
+                                t[langKey] = undefined;
+                                dispatch.call('change', this, t);
+                                return;
+                            }
                         }
 
+                        _multilingual.splice(index, 1);
+                        renderMultilingual(selection);
                     })
                     .call(svgIcon('#iD-operation-delete'));
 
@@ -562,9 +565,8 @@ export function uiFieldLocalized(field, context) {
 
         entries.order();
 
-        entries.classed('present', function(d) {
-            return d.lang && d.value;
-        });
+        // allow removing the entry UIs even if there isn't a tag to remove
+        entries.classed('present', true);
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
             var langItem = _languagesArray.find(function(item) {
