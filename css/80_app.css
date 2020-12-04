@@ -4390,9 +4390,12 @@ img.tile-debug {
     justify-content: space-between;
     align-items: flex-end;
     z-index: 0;
+    pointer-events: none;
 }
 
-.attribution-wrap * { pointer-events: all; }
+.attribution-wrap > * {
+    pointer-events: auto;
+}
 
 .attribution-wrap .base-layer-attribution,
 .attribution-wrap .overlay-layer-attribution {
