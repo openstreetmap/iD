@@ -2067,6 +2067,9 @@
                     "reference": "Intersecting highways should share a junction vertex."
                 }
             },
+            "area_as_point": {
+                "message": "{feature} should be an area, not a point"
+            },
             "close_nodes": {
                 "title": "Very Close Points",
                 "tip": "Find redundant and crowded points",
@@ -2177,9 +2180,16 @@
                     "reference": "Email addresses must look like \"user@example.com\"."
                 }
             },
+            "line_as_area": {
+                "message": "{feature} should be a line, not an area"
+            },
+            "line_as_point": {
+                "message": "{feature} should be a line, not a point"
+            },
             "mismatched_geometry": {
                 "title": "Mismatched Geometry",
-                "tip": "Find features with conflicting tags and geometry"
+                "tip": "Find features with conflicting tags and geometry",
+                "reference": "Most features are limited to certain geometry types."
             },
             "missing_role": {
                 "title": "Missing Roles",
@@ -2221,6 +2231,12 @@
                     "message_incomplete": "{feature} looks like a brand with incomplete tags",
                     "reference": "All features of the same brand should be tagged the same way."
                 }
+            },
+            "point_as_area": {
+                "message": "{feature} should be a point, not an area"
+            },
+            "point_as_line": {
+                "message": "{feature} should be a point, not a line"
             },
             "point_as_vertex": {
                 "message": "{feature} should be a standalone point based on its tags",
