@@ -138,8 +138,12 @@ export function uiFieldLocalized(field, context) {
             }
         }
 
-        _multilingual = _multilingual.filter(function(item) {
-            return !item.lang || !existingLangs.has(item.lang);
+        // Don't remove items based on deleted tags, since this makes the UI
+        // disappear unexpectedly when clearing values - #8164
+        _multilingual.forEach(function(item) {
+            if (item.lang && existingLangs.has(item.lang)) {
+                item.value = '';
+            }
         });
     }
 
@@ -424,7 +428,7 @@ export function uiFieldLocalized(field, context) {
 
     function changeValue(d3_event, d) {
         if (!d.lang) return;
-        var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || '';
+        var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
 
         // don't override multiple values with blank string
         if (!value && Array.isArray(d.value)) return;
@@ -512,6 +516,9 @@ export function uiFieldLocalized(field, context) {
                         if (field.locked()) return;
                         d3_event.preventDefault();
 
+                        // remove the UI item manually
+                        _multilingual.splice(_multilingual.indexOf(d), 1);
+
                         if (d.lang) {
                             var langKey = key(d.lang);
                             if (langKey in _tags) {
@@ -519,11 +526,9 @@ export function uiFieldLocalized(field, context) {
                                 var t = {};
                                 t[langKey] = undefined;
                                 dispatch.call('change', this, t);
-                                return;
                             }
                         }
 
-                        _multilingual.splice(index, 1);
                         renderMultilingual(selection);
                     })
                     .call(svgIcon('#iD-operation-delete'));
