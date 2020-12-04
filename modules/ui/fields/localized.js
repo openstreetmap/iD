@@ -519,14 +519,14 @@ export function uiFieldLocalized(field, context) {
                         // remove the UI item manually
                         _multilingual.splice(_multilingual.indexOf(d), 1);
 
-                        if (d.lang) {
-                            var langKey = key(d.lang);
-                            if (langKey in _tags) {
-                                // remove from entity tags
-                                var t = {};
-                                t[langKey] = undefined;
-                                dispatch.call('change', this, t);
-                            }
+                        var langKey = d.lang && key(d.lang);
+                        if (langKey && langKey in _tags) {
+                            delete _tags[langKey];
+                            // remove from entity tags
+                            var t = {};
+                            t[langKey] = undefined;
+                            dispatch.call('change', this, t);
+                            return;
                         }
 
                         renderMultilingual(selection);
