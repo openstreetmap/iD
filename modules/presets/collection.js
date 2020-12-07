@@ -85,8 +85,10 @@ export function presetCollection(collection) {
     let pool = _this.collection;
     if (countryCode) {
       pool = pool.filter(a => {
-        if (a.countryCodes && a.countryCodes.indexOf(countryCode) === -1) return false;
-        if (a.notCountryCodes && a.notCountryCodes.indexOf(countryCode) !== -1) return false;
+        if (a.locationSet) {
+          if (a.locationSet.include && a.locationSet.include.indexOf(countryCode) === -1) return false;
+          if (a.locationSet.exclude && a.locationSet.exclude.indexOf(countryCode) !== -1) return false;
+        }
         return true;
       });
     }

@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
 const fs = require('fs');
-const prettyStringify = require('json-stringify-pretty-compact');
 const fetch = require('node-fetch');
 const btoa = require('btoa');
 const YAML = require('js-yaml');
 const colors = require('colors/safe');
 
-const resourceIds = ['core', 'presets', 'imagery', 'community'];
+const resourceIds = ['core', 'imagery', 'community'];
+const reviewedOnlyLangs = ['vi'];
 const outdir = 'dist/locales/';
 const apiroot = 'https://www.transifex.com/api/2';
 const projectURL = `${apiroot}/project/id-editor`;
@@ -84,7 +84,12 @@ function gotResourceInfo(err, results) {
   if (err) return console.log(err);
   results.forEach(function(info) {
     for (let code in info.stats) {
-      let coveragePart = info.stats[code].translated.percentage / results.length;
+      let type = 'translated';
+      if (reviewedOnlyLangs.indexOf(code) !== -1) {
+        // reviewed_1 = reviewed, reviewed_2 = proofread
+        type = 'reviewed_1';
+      }
+      let coveragePart = info.stats[code][type].percentage / results.length;
 
       code = code.replace(/_/g, '-');
       if (coverageByLocaleCode[code] === undefined) coverageByLocaleCode[code] = 0;
@@ -118,9 +123,15 @@ function gotResource(err, results) {
       } else {
         let obj = {};
         obj[code] = allStrings[code] || {};
-        obj[code].languageNames = languageNames.languageNamesInLanguageOf(code) || {};
-        obj[code].scriptNames = languageNames.scriptNamesInLanguageOf(code) || {};
-        fs.writeFileSync(`${outdir}${code}.json`, JSON.stringify(obj));
+        let lNames = languageNames.languageNamesInLanguageOf(code) || {};
+        if (Object.keys(lNames).length) {
+          obj[code].languageNames = lNames;
+        }
+        let sNames = languageNames.scriptNamesInLanguageOf(code) || {};
+        if (Object.keys(sNames).length) {
+          obj[code].scriptNames = sNames;
+        }
+        fs.writeFileSync(`${outdir}${code}.min.json`, JSON.stringify(obj));
 
         getLanguageInfo(code, (err, info) => {
           let rtl = info && info.rtl;
@@ -154,8 +165,7 @@ function gotResource(err, results) {
         const keys = Object.keys(dataLocales).sort();
         let sortedLocales = {};
         keys.forEach(k => sortedLocales[k] = dataLocales[k]);
-        fs.writeFileSync('data/locales.json', prettyStringify(sortedLocales, { maxLength: 99999 }));
-        fs.writeFileSync('dist/data/locales.min.json', JSON.stringify(sortedLocales));
+        fs.writeFileSync('dist/locales/index.min.json', JSON.stringify(sortedLocales));
       }
     }
   );
@@ -222,7 +232,10 @@ function getLanguage(resourceURL) {
   return (code, callback) => {
     code = code.replace(/-/g, '_');
     let url = `${resourceURL}/translation/${code}`;
-    if (code === 'vi') { url += '?mode=reviewed'; }
+    // fetch only reviewed strings for some languages
+    if (reviewedOnlyLangs.indexOf(code) !== -1) {
+      url += '?mode=reviewed';
+    }
     fetch(url, fetchOpts)
       .then(res => {
         console.log(`${res.status}: ${url}`);

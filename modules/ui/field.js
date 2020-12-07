@@ -301,7 +301,7 @@ export function uiField(context, presetField, entityIDs, options) {
             return field.matchGeometry(context.graph().geometry(entityID));
         })) return false;
 
-        if (field.countryCodes || field.notCountryCodes) {
+        if (field.locationSet) {
             var extent = combinedEntityExtent();
             if (!extent) return true;
 
@@ -312,10 +312,10 @@ export function uiField(context, presetField, entityIDs, options) {
 
             countryCode = countryCode.toLowerCase();
 
-            if (field.countryCodes && field.countryCodes.indexOf(countryCode) === -1) {
+            if (field.locationSet.include && field.locationSet.include.indexOf(countryCode) === -1) {
                 return false;
             }
-            if (field.notCountryCodes && field.notCountryCodes.indexOf(countryCode) !== -1) {
+            if (field.locationSet.exclude && field.locationSet.exclude.indexOf(countryCode) !== -1) {
                 return false;
             }
         }

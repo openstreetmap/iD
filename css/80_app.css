@@ -1870,26 +1870,26 @@ a.hide-toggle {
 }
 
 
-/* Field - Maxspeed
+/* Field - roadspeed
 ------------------------------------------------------- */
-.form-field-input-maxspeed input.maxspeed-number {
+.form-field-input-roadspeed input.roadspeed-number {
     flex-basis: 0;
 }
-.form-field-input-maxspeed input.maxspeed-unit {
+.form-field-input-roadspeed input.roadspeed-unit {
     flex: 0 1 auto;
     width: 80px;
 }
-.ideditor[dir='ltr'] .form-field-input-maxspeed > input:first-of-type {
+.ideditor[dir='ltr'] .form-field-input-roadspeed > input:first-of-type {
     border-radius: 0 0 0 4px;
 }
-.ideditor[dir='rtl'] .form-field-input-maxspeed > input:first-of-type {
+.ideditor[dir='rtl'] .form-field-input-roadspeed > input:first-of-type {
     border-radius: 0 0 4px 0;
 }
-.ideditor[dir='ltr'] .form-field-input-maxspeed > input:last-of-type {
+.ideditor[dir='ltr'] .form-field-input-roadspeed > input:last-of-type {
     border-left: 0;
     border-radius: 0 0 4px 0;
 }
-.ideditor[dir='rtl'] .form-field-input-maxspeed > input:last-of-type {
+.ideditor[dir='rtl'] .form-field-input-roadspeed > input:last-of-type {
     border-right: 0;
     border-radius: 0 0 0 4px;
 }
