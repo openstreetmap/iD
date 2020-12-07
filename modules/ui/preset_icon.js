@@ -87,7 +87,7 @@ export function uiPresetIcon() {
     categoryBorder = categoryBorderEnter.merge(categoryBorder);
 
     if (category) {
-      const tagClasses = svgTagClasses().getClassesString(category.members.collection[0].tags, '');
+      const tagClasses = svgTagClasses().getClassesString(category.members.collection[0].addTags, '');
       categoryBorder.selectAll('path.stroke')
         .attr('class', `area stroke ${tagClasses}`);
       categoryBorder.selectAll('path.fill')
