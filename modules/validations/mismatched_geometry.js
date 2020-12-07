@@ -254,7 +254,7 @@ export function validationMismatchedGeometry() {
             dynamicFixes = extractPointDynamicFixes;
 
         } else if (sourceGeom === 'area' && targetGeom === 'line') {
-            dynamicFixes = lintToAreaDynamicFixes;
+            dynamicFixes = lineToAreaDynamicFixes;
         }
 
         return new validationIssue({
@@ -280,7 +280,7 @@ export function validationMismatchedGeometry() {
         });
     }
 
-    function lintToAreaDynamicFixes(context) {
+    function lineToAreaDynamicFixes(context) {
 
         var convertOnClick;
 
