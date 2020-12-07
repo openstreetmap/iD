@@ -59,9 +59,9 @@ export function uiPresetIcon() {
   }
 
 
-  function renderCategoryBorder(container, drawBorder) {
+  function renderCategoryBorder(container, category) {
     let categoryBorder = container.selectAll('.preset-icon-category-border')
-      .data(drawBorder ? [0] : []);
+      .data(category ? [0] : []);
 
     categoryBorder.exit()
       .remove();
@@ -70,16 +70,29 @@ export function uiPresetIcon() {
 
     const d = 60;
 
-    categoryBorderEnter
+    let svgEnter = categoryBorderEnter
       .append('svg')
       .attr('class', 'preset-icon-fill preset-icon-category-border')
       .attr('width', d)
       .attr('height', d)
-      .attr('viewBox', `0 0 ${d} ${d}`)
-      .append('path')
-      .attr('d', 'M9.5,7.5 L25.5,7.5 L28.5,12.5 L49.5,12.5 C51.709139,12.5 53.5,14.290861 53.5,16.5 L53.5,43.5 C53.5,45.709139 51.709139,47.5 49.5,47.5 L10.5,47.5 C8.290861,47.5 6.5,45.709139 6.5,43.5 L6.5,12.5 L9.5,7.5 Z');
+      .attr('viewBox', `0 0 ${d} ${d}`);
+
+    ['fill', 'stroke'].forEach(klass => {
+      svgEnter
+        .append('path')
+        .attr('class', `area ${klass}`)
+        .attr('d', 'M9.5,7.5 L25.5,7.5 L28.5,12.5 L49.5,12.5 C51.709139,12.5 53.5,14.290861 53.5,16.5 L53.5,43.5 C53.5,45.709139 51.709139,47.5 49.5,47.5 L10.5,47.5 C8.290861,47.5 6.5,45.709139 6.5,43.5 L6.5,12.5 L9.5,7.5 Z');
+    });
 
     categoryBorder = categoryBorderEnter.merge(categoryBorder);
+
+    if (category) {
+      const tagClasses = svgTagClasses().getClassesString(category.members.collection[0].tags, '');
+      categoryBorder.selectAll('path.stroke')
+        .attr('class', `area stroke ${tagClasses}`);
+      categoryBorder.selectAll('path.fill')
+        .attr('class', `area fill ${tagClasses}`);
+    }
  }
 
 
@@ -139,7 +152,7 @@ export function uiPresetIcon() {
       fillEnter
         .append('path')
         .attr('d', `M${c1} ${c1} L${c1} ${c2} L${c2} ${c2} L${c2} ${c1} Z`)
-        .attr('class', `line area ${klass}`);
+        .attr('class', `area ${klass}`);
     });
 
     const rVertex = 2.5;
@@ -380,7 +393,9 @@ export function uiPresetIcon() {
   function render() {
     let p = _preset.apply(this, arguments);
     let geom = _geometry ? _geometry.apply(this, arguments) : null;
-    if (geom === 'relation' && p.tags && ((p.tags.type === 'route' && p.tags.route && routeSegments[p.tags.route]) || p.tags.type === 'waterway')) {
+    if (geom === 'relation' &&
+      p.tags &&
+      ((p.tags.type === 'route' && p.tags.route && routeSegments[p.tags.route]) || p.tags.type === 'waterway')) {
       geom = 'route';
     }
 
@@ -418,7 +433,7 @@ export function uiPresetIcon() {
       .classed('showing-img', !!imageURL)
       .classed('fallback', isFallback);
 
-    renderCategoryBorder(container, isCategory);
+    renderCategoryBorder(container, isCategory && p);
     renderPointBorder(container, drawPoint);
     renderCircleFill(container, drawVertex);
     renderSquareFill(container, drawArea, tagClasses);
