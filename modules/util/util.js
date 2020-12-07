@@ -447,7 +447,8 @@ export function utilFastMouse(container) {
     return function(e) {
         return [
             e.clientX - rectLeft - clientLeft,
-            e.clientY - rectTop - clientTop];
+            e.clientY - rectTop - clientTop
+        ];
     };
 }
 

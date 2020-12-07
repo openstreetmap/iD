@@ -238,8 +238,15 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         _drawNode = undefined;
         _didResolveTempEdit = false;
         _origWay = context.entity(wayID);
-        _headNodeID = typeof _nodeIndex === 'number' ? _origWay.nodes[_nodeIndex] :
-            (_origWay.isClosed() ? _origWay.nodes[_origWay.nodes.length - 2] : _origWay.nodes[_origWay.nodes.length - 1]);
+
+        if (typeof _nodeIndex === 'number') {
+            _headNodeID = _origWay.nodes[_nodeIndex];
+        } else if (_origWay.isClosed()) {
+            _headNodeID = _origWay.nodes[_origWay.nodes.length - 2];
+        } else {
+            _headNodeID = _origWay.nodes[_origWay.nodes.length - 1];
+        }
+
         _wayGeometry = _origWay.geometry(context.graph());
         _annotation = t((_origWay.nodes.length === (_origWay.isClosed() ? 2 : 1) ?
             'operations.start.annotation.' :

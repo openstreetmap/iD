@@ -710,7 +710,7 @@ export function rendererMap(context) {
 
 
     map.mouse = function(d3_event) {
-        var event = _lastPointerEvent || d3_event;
+        var event = d3_event || _lastPointerEvent;
         if (event) {
             var s;
             while ((s = event.sourceEvent)) { event = s; }

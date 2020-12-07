@@ -15,7 +15,6 @@ type = YAML
 
 [id-editor.presets]
 file_filter = .tx/tmp/presets/<lang>.yaml
-source_file = data/presets.yaml
 source_lang = en
 type = YAML
 
