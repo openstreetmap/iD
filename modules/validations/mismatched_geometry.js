@@ -211,6 +211,9 @@ export function validationMismatchedGeometry() {
 
         if (entity.type !== 'node' && entity.type !== 'way') return null;
 
+        // address lines are special so just ignore them
+        if (entity.type === 'node' && entity.isOnAddressLine(graph)) return null;
+
         var sourceGeom = entity.geometry(graph);
 
         var targetGeoms = entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
