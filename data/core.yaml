@@ -1847,6 +1847,9 @@ en:
         title: Continue drawing from start
       continue_from_end:
         title: Continue drawing from end
+      convert_to_line:
+        title: Convert this to a line
+        annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
       extract_point:

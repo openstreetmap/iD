@@ -5,7 +5,7 @@ import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionExtract } from '../actions/extract';
 import { modeSelect } from '../modes/select';
 import { osmJoinWays } from '../osm/multipolygon';
-import { osmNodeGeometriesForTags } from '../osm/tags';
+import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
 import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
@@ -197,7 +197,7 @@ export function validationMismatchedGeometry() {
                         .html(t.html('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
-                dynamicFixes: dynamicExtractFixes
+                dynamicFixes: extractPointDynamicFixes
             });
         }
 
@@ -249,7 +249,13 @@ export function validationMismatchedGeometry() {
 
         var referenceId = targetGeom + '_as_' + sourceGeom;
 
-        var dynamicFixes = targetGeom === 'point' ? dynamicExtractFixes : null;
+        var dynamicFixes;
+        if (targetGeom === 'point') {
+            dynamicFixes = extractPointDynamicFixes;
+
+        } else if (sourceGeom === 'area' && targetGeom === 'line') {
+            dynamicFixes = lintToAreaDynamicFixes;
+        }
 
         return new validationIssue({
             type: type,
@@ -274,7 +280,40 @@ export function validationMismatchedGeometry() {
         });
     }
 
-    function dynamicExtractFixes(context) {
+    function lintToAreaDynamicFixes(context) {
+
+        var convertOnClick;
+
+        var entityId = this.entityIds[0];
+        var entity = context.entity(entityId);
+        var tags = Object.assign({}, entity.tags);  // shallow copy
+        delete tags.area;
+        if (!osmTagSuggestingArea(tags)) {
+            // if removing the area tag would make this a line, offer that as a quick fix
+            convertOnClick = function(context) {
+                var entityId = this.issue.entityIds[0];
+                var entity = context.entity(entityId);
+                var tags = Object.assign({}, entity.tags);  // shallow copy
+                if (tags.area) {
+                    delete tags.area;
+                }
+                context.perform(
+                    actionChangeTags(entityId, tags),
+                    t('issues.fix.convert_to_line.annotation')
+                );
+            };
+        }
+
+        return [
+            new validationIssueFix({
+                icon: 'iD-icon-line',
+                title: t.html('issues.fix.convert_to_line.title'),
+                onClick: convertOnClick
+            })
+        ];
+    }
+
+    function extractPointDynamicFixes(context) {
 
         var entityId = this.entityIds[0];
 
