@@ -1601,6 +1601,13 @@ a.hide-toggle {
     display: none;
 }
 
+.form-field-input-combo input.raw-value {
+    font-family: monospace;
+}
+.form-field-input-combo input.known-value {
+    color: #7092ff;
+}
+
 .form-field-input-multicombo ul.chiplist {
     padding: 5px 8px 5px 8px;
     background: #fff;
@@ -1628,6 +1635,7 @@ a.hide-toggle {
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     max-width: 100%;
+    color: #7092ff;
 }
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
@@ -1642,6 +1650,10 @@ a.hide-toggle {
     opacity: 0.75;
     z-index: 3000;
     cursor: grabbing;
+}
+.form-field-input-multicombo li.chip.raw-value {
+    font-family: monospace;
+    color: #333;
 }
 .form-field-input-multicombo li.mixed {
     border-color: #eff2f7;
@@ -2224,6 +2236,11 @@ div.combobox {
     border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
+}
+
+.combobox .combobox-option.raw-option {
+    font-family: monospace;
+    color: #333;
 }
 
 

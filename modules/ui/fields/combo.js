@@ -24,8 +24,9 @@ export function uiFieldCombo(field, context) {
     var _isMulti = (field.type === 'multiCombo' || field.type === 'manyCombo');
     var _isNetwork = (field.type === 'networkCombo');
     var _isSemi = (field.type === 'semiCombo');
-    var _optstrings = field.strings && field.strings.options;
     var _optarray = field.options;
+    var _showTagInfoSuggestions = field.type !== 'manyCombo' && field.autoSuggestions !== false;
+    var _allowCustomValues = field.type !== 'manyCombo' && field.customValues !== false;
     var _snake_case = (field.snake_case || (field.snake_case === undefined));
     var _combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(field.caseSensitive)
@@ -57,10 +58,6 @@ export function uiFieldCombo(field, context) {
         return s.replace(/\s+/g, '_');
     }
 
-    function unsnake(s) {
-        return s.replace(/_+/g, ' ');
-    }
-
     function clean(s) {
         return s.split(';')
             .map(function(s) { return s.trim(); })
@@ -73,14 +70,10 @@ export function uiFieldCombo(field, context) {
     function tagValue(dval) {
         dval = clean(dval || '');
 
-        if (_optstrings) {
-            var found = _comboData.find(function(o) {
-                return o.key && clean(o.value) === dval;
-            });
-            if (found) {
-                return found.key;
-            }
-        }
+        var found = _comboData.find(function(o) {
+            return o.key && clean(o.value) === dval;
+        });
+        if (found) return found.key;
 
         if (field.type === 'typeCombo' && !dval) {
             return 'yes';
@@ -95,20 +88,15 @@ export function uiFieldCombo(field, context) {
     function displayValue(tval) {
         tval = tval || '';
 
-        if (_optstrings) {
-            var found = _comboData.find(function(o) {
-                return o.key === tval && o.value;
-            });
-            if (found) {
-                return found.value;
-            }
+        if (field.hasTextForStringId('options.' + tval)) {
+            return field.t('options.' + tval, { default: tval });
         }
 
         if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
             return '';
         }
 
-        return _snake_case ? unsnake(tval) : tval;
+        return tval;
     }
 
 
@@ -127,46 +115,33 @@ export function uiFieldCombo(field, context) {
 
 
     function initCombo(selection, attachTo) {
-        if (_optstrings) {
+        if (!_allowCustomValues) {
             selection.attr('readonly', 'readonly');
-            selection.call(_combobox, attachTo);
-            setStaticValues(setPlaceholder);
+        }
 
-        } else if (_optarray) {
-            selection.call(_combobox, attachTo);
-            setStaticValues(setPlaceholder);
-
-        } else if (services.taginfo) {
+        if (_showTagInfoSuggestions && services.taginfo) {
             selection.call(_combobox.fetcher(setTaginfoValues), attachTo);
             setTaginfoValues('', setPlaceholder);
+
+        } else {
+            selection.call(_combobox, attachTo);
+            setStaticValues(setPlaceholder);
         }
     }
 
 
     function setStaticValues(callback) {
-        if (!(_optstrings || _optarray)) return;
+        if (!_optarray) return;
 
-        if (_optstrings) {
-            _comboData = Object.keys(_optstrings).map(function(k) {
-                var v = field.t('options.' + k, { 'default': _optstrings[k] });
-                return {
-                    key: k,
-                    value: v,
-                    title: v,
-                    display: field.t.html('options.' + k, { 'default': _optstrings[k] })
-                };
-            });
-
-        } else if (_optarray) {
-            _comboData = _optarray.map(function(k) {
-                var v = _snake_case ? unsnake(k) : k;
-                return {
-                    key: k,
-                    value: v,
-                    title: v
-                };
-            });
-        }
+        _comboData = _optarray.map(function(v) {
+            return {
+                key: v,
+                value: field.t('options.' + v, { default: v }),
+                title: v,
+                display: field.t.html('options.' + v, { default: v }),
+                klass: field.hasTextForStringId('options.' + v) ? '' : 'raw-option'
+            };
+        });
 
         _combobox.data(objectDifference(_comboData, _multiData));
         if (callback) callback(_comboData);
@@ -225,11 +200,13 @@ export function uiFieldCombo(field, context) {
             _comboData = data.map(function(d) {
                 var k = d.value;
                 if (_isMulti) k = k.replace(field.key, '');
-                var v = _snake_case ? unsnake(k) : k;
+                var label = field.t('options.' + k, { default: k });
                 return {
                     key: k,
-                    value: v,
-                    title: _isMulti ? v : d.title
+                    value: label,
+                    display: field.t.html('options.' + k, { default: k }),
+                    title: d.title || label,
+                    klass: field.hasTextForStringId('options.' + k) ? '' : 'raw-option'
                 };
             });
 
@@ -507,9 +484,9 @@ export function uiFieldCombo(field, context) {
             _combobox.data(available);
 
             // Hide 'Add' button if this field uses fixed set of
-            // translateable _optstrings and they're all currently used,
+            // options and they're all currently used,
             // or if the field is already at its character limit
-            var hideAdd = (_optstrings && !available.length) || maxLength <= 0;
+            var hideAdd = (!_allowCustomValues && !available.length) || maxLength <= 0;
             _container.selectAll('.chiplist .input-wrap')
                 .style('display', hideAdd ? 'none' : null);
 
@@ -530,6 +507,11 @@ export function uiFieldCombo(field, context) {
 
             chips = chips.merge(enter)
                 .order()
+                .classed('raw-value', function(d) {
+                    var k = d.key;
+                    if (_isMulti) k = k.replace(field.key, '');
+                    return !field.hasTextForStringId('options.' + k);
+                })
                 .classed('draggable', allowDragAndDrop)
                 .classed('mixed', function(d) {
                     return d.isMixed;
@@ -558,7 +540,14 @@ export function uiFieldCombo(field, context) {
                 return displayValue(val);
             }).filter(Boolean);
 
+            var showsValue = !isMixed && tags[field.key] && !(field.type === 'typeCombo' && tags[field.key] === 'yes');
+            var isRawValue = showsValue && !field.hasTextForStringId('options.' + tags[field.key]);
+            var isKnownValue = showsValue && !isRawValue;
+
             utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
+                .classed('raw-value', isRawValue)
+                .classed('known-value', isKnownValue)
+                .attr('readonly', (!_allowCustomValues || isKnownValue) ? 'readonly' : undefined)
                 .attr('title', isMixed ? mixedValues.join('\n') : undefined)
                 .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
                 .classed('mixed', isMixed);

@@ -65,6 +65,7 @@ export var uiFields = {
     lanes: uiFieldLanes,
     localized: uiFieldLocalized,
     roadspeed: uiFieldRoadspeed,
+    roadheight: uiFieldText,
     manyCombo: uiFieldManyCombo,
     multiCombo: uiFieldMultiCombo,
     networkCombo: uiFieldNetworkCombo,

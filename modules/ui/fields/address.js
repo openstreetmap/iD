@@ -274,7 +274,7 @@ export function uiFieldAddress(field, context) {
             }
             if (_countryCode) {
                 var localkey = subfield.id + '!' + _countryCode;
-                var tkey = addrField.strings.placeholders[localkey] ? localkey : subfield.id;
+                var tkey = addrField.hasTextForStringId('placeholders.' + localkey) ? localkey : subfield.id;
                 return addrField.t('placeholders.' + tkey);
             }
         });

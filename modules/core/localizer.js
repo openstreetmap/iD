@@ -90,7 +90,7 @@ export function coreLocalizer() {
 
         const localeDirs = {
             general: 'locales',
-            tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@2/dist/translations'
+            tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/translations'
         };
 
         let fileMap = fileFetcher.fileMap();
@@ -336,6 +336,10 @@ export function coreLocalizer() {
             text: missing,
             locale: 'en'
         };
+    };
+
+    localizer.hasTextForStringId = function(stringId) {
+        return !!localizer.tInfo(stringId, { default: 'nothing found'}).locale;
     };
 
     // Returns only the localized text, discarding the locale info
