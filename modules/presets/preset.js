@@ -15,6 +15,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   let _addable = addable || false;
   let _resolvedFields;      // cache
   let _resolvedMoreFields;  // cache
+  let _searchName; // cache
 
   _this.id = presetID;
 
@@ -120,6 +121,16 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
     .toLowerCase().trim().split(/\s*,+\s*/);
 
+  _this.searchName = () => {
+    if (!_searchName) {
+      _searchName = (_this.suggestion ? _this.originalName : _this.name()).toLowerCase();
+      // split combined diacritical characters into their parts
+      if (_searchName.normalize) _searchName = _searchName.normalize('NFD');
+      // remove diacritics
+      _searchName = _searchName.replace(/[\u0300-\u036f]/g, '');
+    }
+    return _searchName;
+  };
 
   _this.isFallback = () => {
     const tagCount = Object.keys(_this.tags).length;
