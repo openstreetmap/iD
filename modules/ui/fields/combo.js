@@ -8,6 +8,8 @@ import { osmEntity } from '../../osm/entity';
 import { t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
+
+import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 
 export {
@@ -55,7 +57,7 @@ export function uiFieldCombo(field, context) {
 
 
     function snake(s) {
-        return s.replace(/\s+/g, '_');
+        return s.replace(/\s+/g, '_').toLowerCase();
     }
 
     function clean(s) {
@@ -544,13 +546,29 @@ export function uiFieldCombo(field, context) {
             var isRawValue = showsValue && !field.hasTextForStringId('options.' + tags[field.key]);
             var isKnownValue = showsValue && !isRawValue;
 
+            var isReadOnly = !_allowCustomValues || isKnownValue;
+
             utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
                 .classed('raw-value', isRawValue)
                 .classed('known-value', isKnownValue)
-                .attr('readonly', (!_allowCustomValues || isKnownValue) ? 'readonly' : undefined)
+                .attr('readonly', isReadOnly ? 'readonly' : undefined)
                 .attr('title', isMixed ? mixedValues.join('\n') : undefined)
                 .attr('placeholder', isMixed ? t('inspector.multiple_values') : _staticPlaceholder || '')
-                .classed('mixed', isMixed);
+                .classed('mixed', isMixed)
+                .on('keydown.deleteCapture', function(d3_event) {
+                    if (isReadOnly &&
+                        isKnownValue &&
+                        (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
+                        d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
+
+                        d3_event.preventDefault();
+                        d3_event.stopPropagation();
+
+                        var t = {};
+                        t[field.key] = undefined;
+                        dispatch.call('change', this, t);
+                    }
+                });
         }
     };
 
