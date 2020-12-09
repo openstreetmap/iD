@@ -16,7 +16,7 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 
 export function uiFieldCheck(field, context) {
     var dispatch = d3_dispatch('change');
-    var options = field.strings && field.strings.options;
+    var options = field.options;
     var values = [];
     var texts = [];
 
@@ -33,9 +33,10 @@ export function uiFieldCheck(field, context) {
 
 
     if (options) {
-        for (var k in options) {
-            values.push(k === 'undefined' ? undefined : k);
-            texts.push(field.t.html('options.' + k, { 'default': options[k] }));
+        for (var i in options) {
+            var v = options[i];
+            values.push(v === 'undefined' ? undefined : v);
+            texts.push(field.t.html('options.' + v, { 'default': v }));
         }
     } else {
         values = [undefined, 'yes'];

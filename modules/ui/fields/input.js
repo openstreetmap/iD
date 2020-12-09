@@ -53,7 +53,7 @@ export function uiFieldText(field, context) {
 
         input = input.enter()
             .append('input')
-            .attr('type', field.type === 'identifier' ? 'text' : field.type)
+            .attr('type', field.type === 'identifier' || field.type === 'roadheight' ? 'text' : field.type)
             .attr('id', field.domId)
             .classed(field.type, true)
             .call(utilNoAuto)
