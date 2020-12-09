@@ -13,5 +13,5 @@ jobs:
         with:
           check_filenames: true
           skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img
-          ignore_words_list: "auxilary,casette,cemetary,chancel,childs,extentions,files',froms,generat,guerilla,kindergarden,nd,specialties,vias,visibles,tos"
+          ignore_words_list: "auxilary,casette,cemetary,chancel,childs,extentions,files',froms,generat,guerilla,kindergarden,nd,specialties,vias,visibles,tos,sculpter"
           only_warn: 1
