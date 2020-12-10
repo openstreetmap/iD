@@ -21,6 +21,41 @@ export function coreValidator(context) {
     var _validatedGraph = null;
     var _deferred = new Set();
 
+    // Allow validation severity to be overridden by url queryparams...
+    // Each param should contain a urlencoded comma separated list of
+    // `type/subtype` rules.  `*` may be used as a wildcard..
+    // Examples:
+    //  `validationError=disconnected_way/*`
+    //  `validationError=disconnected_way/highway`
+    //  `validationError=crossing_ways/bridge*`
+    //  `validationError=crossing_ways/bridge*,crossing_ways/tunnel*`
+
+    var _errorOverrides = parseHashParam(context.initialHashParams.validationError);
+    var _warningOverrides = parseHashParam(context.initialHashParams.validationWarning);
+    var _disableOverrides = parseHashParam(context.initialHashParams.validationDisable);
+
+    function parseHashParam(param) {
+        var result = [];
+        var rules = (param || '').split(',');
+        rules.forEach(function(rule) {
+            rule = rule.trim();
+            var parts = rule.split('/', 2);  // "type/subtype"
+            var type = parts[0];
+            var subtype = parts[1] || '*';
+            if (!type || !subtype) return;
+
+            result.push({ type: makeRegExp(type), subtype: makeRegExp(subtype) });
+        });
+        return result;
+    }
+
+    function makeRegExp(str) {
+        var escaped = str
+            .replace(/[-\/\\^$+?.()|[\]{}]/g, '\\$&')   // escape all reserved chars except for the '*'
+            .replace(/\*/g, '.*');                      // treat a '*' like '.*'
+        return new RegExp('^' + escaped + '$');
+    }
+
     //
     // initialize the validator rulesets
     //
@@ -296,7 +331,7 @@ export function coreValidator(context) {
                 return;
             }
 
-            var detected = fn(entity, graph);
+            var detected = fn(entity, graph).filter(applySeverityOverrides);
             entityIssues = entityIssues.concat(detected);
         }
 
@@ -305,6 +340,35 @@ export function coreValidator(context) {
 
         return entityIssues;
     }
+
+
+    // If there are any override rules that match the issue type/subtype,
+    // adjust severity (or disable it) and keep/discard as quickly as possible.
+    function applySeverityOverrides(issue) {
+        var type = issue.type;
+        var subtype = issue.subtype || '';
+        var i;
+
+        for (i = 0; i < _errorOverrides.length; i++) {
+            if (_errorOverrides[i].type.test(type) && _errorOverrides[i].subtype.test(subtype)) {
+                issue.severity = 'error';
+                return true;
+            }
+        }
+        for (i = 0; i < _warningOverrides.length; i++) {
+            if (_warningOverrides[i].type.test(type) && _warningOverrides[i].subtype.test(subtype)) {
+                issue.severity = 'warning';
+                return true;
+            }
+        }
+        for (i = 0; i < _disableOverrides.length; i++) {
+            if (_disableOverrides[i].type.test(type) && _disableOverrides[i].subtype.test(subtype)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     function entityIDsToValidate(entityIDs, graph) {
         var processedIDs = new Set();
