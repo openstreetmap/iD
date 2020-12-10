@@ -88,9 +88,9 @@ export function operationDisconnect(selectedIDs, context) {
             if (reason) return reason;
         }
 
-        if (disconnectingWayID && extent.percentContainedIn(context.extent()) < 0.8) {
+        /*if (disconnectingWayID && extent.percentContainedIn(context.extent()) < 0.8) {
             return 'too_large.single';
-        } else if (disconnectingWayID && someMissing()) {
+        } else */if (disconnectingWayID && someMissing()) {
             return 'not_downloaded';
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
             return 'connected_to_hidden';
