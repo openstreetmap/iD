@@ -322,7 +322,7 @@ export function validationMismatchedGeometry() {
 
             extractOnClick = function(context) {
                 var entityId = this.issue.entityIds[0];
-                var action = actionExtract(entityId);
+                var action = actionExtract(entityId, context.projection);
                 context.perform(
                     action,
                     t('operations.extract.annotation', { n: 1 })

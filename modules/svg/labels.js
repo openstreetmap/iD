@@ -550,7 +550,7 @@ export function svgLabels(projection, context) {
 
 
         function getAreaLabel(entity, width, height) {
-            var centroid = path.centroid(entity.asGeoJSON(graph, true));
+            var centroid = path.centroid(entity.asGeoJSON(graph));
             var extent = entity.extent(graph);
             var areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
 
