@@ -271,7 +271,7 @@ describe('iD.coreHistory', function () {
         });
 
         it('does not redo into an invalid annotated state', function() {
-            const invalidState = iD.t('operations.start.annotation.area');
+            var invalidState = iD.t('operations.start.annotation.area');
 
             history.perform(actionNoop, invalidState);
             history.on('redone', spy);
