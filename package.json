@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@ideditor/country-coder": "^3.2.0",
-    "@ideditor/location-conflation": "~0.5.0",
+    "@ideditor/location-conflation": "~0.6.0",
     "@mapbox/geojson-rewind": "^0.5.0",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/togeojson": "0.16.0",
@@ -103,7 +103,7 @@
     "node-fetch": "^2.6.1",
     "npm-run-all": "^4.0.0",
     "object-inspect": "1.9.0",
-    "osm-community-index": "2.1.2",
+    "osm-community-index": "3.0.1",
     "phantomjs-prebuilt": "~2.1.11",
     "postcss": "^8.1.1",
     "postcss-selector-prepend": "^0.5.0",

@@ -32,14 +32,20 @@ export function uiSuccess(context) {
         let ociFeatures = {};
 
         Object.values(ociResources).forEach(resource => {
-          const feature = loco.resolveLocationSet(resource.locationSet).feature;
-          let ociFeature = ociFeatures[feature.id];
-          if (!ociFeature) {
-            ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
-            ociFeature.properties.resourceIDs = new Set();
-            ociFeatures[feature.id] = ociFeature;
+          let feature;
+          try {
+            feature = loco.resolveLocationSet(resource.locationSet).feature;
+            let ociFeature = ociFeatures[feature.id];
+            if (!ociFeature) {
+              ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
+              ociFeature.properties.resourceIDs = new Set();
+              ociFeatures[feature.id] = ociFeature;
+            }
+            ociFeature.properties.resourceIDs.add(resource.id);
+          } catch (err) {
+            /* ignore communities with an unresolvable locationSet */
+            console.warn(`warning: skipping community resource ${resource.id}: ${err.message}`); // eslint-disable-line no-console
           }
-          ociFeature.properties.resourceIDs.add(resource.id);
         });
 
         return _oci = {
