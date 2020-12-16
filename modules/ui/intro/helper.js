@@ -49,7 +49,8 @@ var helpStringReplacements;
 // with custom `replacements`
 export function helpHtml(id, replacements) {
     // only load these the first time
-    if (!helpStringReplacements) helpStringReplacements = {
+    if (!helpStringReplacements) {
+        helpStringReplacements = {
         // insert icons corresponding to various UI elements
         point_icon: icon('#iD-icon-point', 'inline'),
         line_icon: icon('#iD-icon-line', 'inline'),
@@ -138,13 +139,14 @@ export function helpHtml(id, replacements) {
         tags: t.html('inspector.tags'),
         relations: t.html('inspector.relations'),
         new_relation: t.html('inspector.new_relation'),
-        turn_restrictions: t.html('presets.fields.restrictions.label'),
+        turn_restrictions: t.html('_tagging.presets.fields.restrictions.label'),
         background_settings: t.html('background.description'),
         imagery_offset: t.html('background.fix_misalignment'),
         start_the_walkthrough: t.html('splash.walkthrough'),
         help: t.html('help.title'),
         ok: t.html('intro.ok')
-    };
+        };
+    }
 
     var reps;
     if (replacements) {
@@ -255,10 +257,11 @@ export function selectMenuItem(context, operation) {
 
 export function transitionTime(point1, point2) {
     var distance = geoSphericalDistance(point1, point2);
-    if (distance === 0)
+    if (distance === 0) {
         return 0;
-    else if (distance < 80)
+    } else if (distance < 80) {
         return 500;
-    else
+    } else {
         return 1000;
+    }
 }

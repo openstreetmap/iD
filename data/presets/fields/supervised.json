@@ -1,9 +1,0 @@
-{
-    "key": "supervised",
-    "type": "check",
-    "label": "Supervised",
-    "terms": [
-        "guarded",
-        "manned"
-    ]
-}

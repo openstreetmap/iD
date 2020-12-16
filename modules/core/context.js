@@ -26,8 +26,8 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.19.0-dev';
-  context.privacyVersion = '20200407';
+  context.version = '2.20.0-dev';
+  context.privacyVersion = '20201202';
 
   // iD will alter the hash so cache the parameters intended to setup the session
   context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
@@ -177,23 +177,28 @@ export function coreContext() {
     _deferred.add(handle);
   };
 
+  // Download the full entity and its parent relations. The callback may be called multiple times.
   context.loadEntity = (entityID, callback) => {
     if (_connection) {
       const cid = _connection.getConnectionId();
       _connection.loadEntity(entityID, afterLoad(cid, callback));
+      // We need to fetch the parent relations separately.
+      _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
     }
   };
 
   context.zoomToEntity = (entityID, zoomTo) => {
-    if (zoomTo !== false) {
-      context.loadEntity(entityID, (err, result) => {
-        if (err) return;
-        const entity = result.data.find(e => e.id === entityID);
-        if (entity) {
-          _map.zoomTo(entity);
-        }
-      });
-    }
+
+    // be sure to load the entity even if we're not going to zoom to it
+    context.loadEntity(entityID, (err, result) => {
+      if (err) return;
+      if (zoomTo !== false) {
+          const entity = result.data.find(e => e.id === entityID);
+          if (entity) {
+            _map.zoomTo(entity);
+          }
+      }
+    });
 
     _map.on('drawn.zoomToEntity', () => {
       if (!context.hasEntity(entityID)) return;

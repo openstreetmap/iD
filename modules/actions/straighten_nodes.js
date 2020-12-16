@@ -8,7 +8,7 @@ export function actionStraightenNodes(nodeIDs, projection) {
         return geoVecDot(a, b, o) / geoVecDot(b, b, o);
     }
 
-    // returns the endpoints of the long axis of symmetry of the `points` bounding rect 
+    // returns the endpoints of the long axis of symmetry of the `points` bounding rect
     function getEndpoints(points) {
         var ssr = geoGetSmallestSurroundingRectangle(points);
 

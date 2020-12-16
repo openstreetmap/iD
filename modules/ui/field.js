@@ -302,7 +302,7 @@ export function uiField(context, presetField, entityIDs, options) {
             return field.matchGeometry(context.graph().geometry(entityID));
         })) return false;
 
-        if (field.countryCodes || field.notCountryCodes) {
+        if (field.locationSet) {
             var extent = combinedEntityExtent();
             if (!extent) return true;
 
@@ -311,10 +311,10 @@ export function uiField(context, presetField, entityIDs, options) {
                 return code.toLowerCase();
             });
 
-            if (field.countryCodes && !utilArrayIntersection(codes, field.countryCodes).length) {
+            if (field.locationSet.include && !utilArrayIntersection(codes, field.locationSet.include).length) {
                 return false;
             }
-            if (field.notCountryCodes && utilArrayIntersection(codes, field.notCountryCodes).length) {
+            if (field.locationSet.exclude && utilArrayIntersection(codes, field.locationSet.exclude).length) {
                 return false;
             }
         }

@@ -7,10 +7,12 @@ import { t } from '../core/localizer';
 import { actionMove } from '../actions/move';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
-import { geoViewportEdge, geoVecSubtract } from '../geo';
+import { geoVecLength, geoVecSubtract } from '../geo/vector';
+import { geoViewportEdge } from '../geo/geom';
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
 import { utilKeybinding } from '../util';
+import { utilFastMouse } from '../util/util';
 
 
 import { operationCircularize } from '../operations/circularize';
@@ -21,6 +23,9 @@ import { operationRotate } from '../operations/rotate';
 
 
 export function modeMove(context, entityIDs, baseGraph) {
+
+    var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeRotate
+
     var mode = {
         id: 'move',
         button: 'browse'
@@ -44,6 +49,9 @@ export function modeMove(context, entityIDs, baseGraph) {
     var _cache;
     var _origin;
     var _nudgeInterval;
+
+    // use pointer events on supported platforms; fallback to mouse events
+    var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
 
     function doMove(nudge) {
@@ -129,12 +137,29 @@ export function modeMove(context, entityIDs, baseGraph) {
 
         behaviors.forEach(context.install);
 
+        var downEvent;
+
         context.surface()
-            .on('mousemove.move', move)
-            .on('click.move', finish);
+            .on(_pointerPrefix + 'down.modeMove', function(d3_event) {
+                downEvent = d3_event;
+            });
+
+        d3_select(window)
+            .on(_pointerPrefix + 'move.modeMove', move, true)
+            .on(_pointerPrefix + 'up.modeMove', function(d3_event) {
+                if (!downEvent) return;
+                var mapNode = context.container().select('.main-map').node();
+                var pointGetter = utilFastMouse(mapNode);
+                var p1 = pointGetter(downEvent);
+                var p2 = pointGetter(d3_event);
+                var dist = geoVecLength(p1, p2);
+
+                if (dist <= _tolerancePx) finish(d3_event);
+                downEvent = null;
+            }, true);
 
         context.history()
-            .on('undone.move', undone);
+            .on('undone.modeMove', undone);
 
         keybinding
             .on('⎋', cancel)
@@ -153,11 +178,14 @@ export function modeMove(context, entityIDs, baseGraph) {
         });
 
         context.surface()
-            .on('mousemove.move', null)
-            .on('click.move', null);
+            .on(_pointerPrefix + 'down.modeMove', null);
+
+        d3_select(window)
+            .on(_pointerPrefix + 'move.modeMove', null, true)
+            .on(_pointerPrefix + 'up.modeMove', null, true);
 
         context.history()
-            .on('undone.move', null);
+            .on('undone.modeMove', null);
 
         d3_select(document)
             .call(keybinding.unbind);

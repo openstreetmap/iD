@@ -82,21 +82,20 @@ export function uiSectionValidationIssues(id, severity, context) {
         // Enter
         var itemsEnter = items.enter()
             .append('li')
-            .attr('class', function (d) { return 'issue severity-' + d.severity; })
-            .on('click', function(d) {
-                context.validator().focusIssue(d);
-            })
-            .on('mouseover', function(d) {
-                utilHighlightEntities(d.entityIds, true, context);
-            })
-            .on('mouseout', function(d) {
-                utilHighlightEntities(d.entityIds, false, context);
-            });
-
+            .attr('class', function (d) { return 'issue severity-' + d.severity; });
 
         var labelsEnter = itemsEnter
-            .append('div')
-            .attr('class', 'issue-label');
+            .append('button')
+            .attr('class', 'issue-label')
+            .on('click', function(d3_event, d) {
+                context.validator().focusIssue(d);
+            })
+            .on('mouseover', function(d3_event, d) {
+                utilHighlightEntities(d.entityIds, true, context);
+            })
+            .on('mouseout', function(d3_event, d) {
+                utilHighlightEntities(d.entityIds, false, context);
+            });
 
         var textEnter = labelsEnter
             .append('span')

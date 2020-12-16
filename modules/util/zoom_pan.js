@@ -95,7 +95,7 @@ export function utilZoomPan() {
     zoom.transform(selection, function() {
       var e = extent.apply(this, arguments),
           t0 = _transform,
-          p0 = p == null ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p,
+          p0 = !p ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p,
           p1 = t0.invert(p0),
           k1 = typeof k === 'function' ? k.apply(this, arguments) : k;
       return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
@@ -115,7 +115,7 @@ export function utilZoomPan() {
     zoom.transform(selection, function() {
       var e = extent.apply(this, arguments),
           t = _transform,
-          p0 = p == null ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p;
+          p0 = !p ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p;
       return constrain(d3_zoomIdentity.translate(p0[0], p0[1]).scale(t.k).translate(
         typeof x === 'function' ? -x.apply(this, arguments) : -x,
         typeof y === 'function' ? -y.apply(this, arguments) : -y
@@ -146,14 +146,20 @@ export function utilZoomPan() {
               args = arguments,
               g = gesture(that, args),
               e = extent.apply(that, args),
-              p = point == null ? centroid(e) : typeof point === 'function' ? point.apply(that, args) : point,
+              p = !point ? centroid(e) : typeof point === 'function' ? point.apply(that, args) : point,
               w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]),
               a = _transform,
               b = typeof transform === 'function' ? transform.apply(that, args) : transform,
               i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
           return function(t) {
-            if (t === 1) t = b; // Avoid rounding error on end.
-            else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }
+            if (t === 1) {
+              // Avoid rounding error on end.
+              t = b;
+            } else {
+              var l = i(t);
+              var k = w / l[2];
+              t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k);
+            }
             g.zoom(null, null, t);
           };
         });
@@ -297,8 +303,9 @@ export function utilZoomPan() {
     } else if (g.pointer0) {
       p = g.pointer0[0];
       l = g.pointer0[1];
+    } else {
+      return;
     }
-    else return;
     g.zoom(d3_event, 'touch', constrain(translate(t, p, l), g.extent, translateExtent));
   }
 
@@ -320,8 +327,9 @@ export function utilZoomPan() {
       g.pointer0 = g.pointer1;
       delete g.pointer1;
     }
-    if (g.pointer0) g.pointer0[1] = _transform.invert(g.pointer0[0]);
-    else {
+    if (g.pointer0) {
+      g.pointer0[1] = _transform.invert(g.pointer0[0]);
+    } else {
       g.end(d3_event);
     }
   }

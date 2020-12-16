@@ -66,7 +66,7 @@ export function uiFieldAccess(field, context) {
     }
 
 
-    function change(d) {
+    function change(d3_event, d) {
         var tag = {};
         var value = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 

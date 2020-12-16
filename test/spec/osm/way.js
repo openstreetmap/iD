@@ -1019,7 +1019,7 @@ describe('iD.osmWay', function() {
                 c = iD.osmNode({loc: [3, 4]}),
                 w = iD.osmWay({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
                 graph = iD.coreGraph([a, b, c, w]),
-                json = w.asGeoJSON(graph, true);
+                json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('Polygon');
             expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
@@ -1031,7 +1031,7 @@ describe('iD.osmWay', function() {
                 c = iD.osmNode({loc: [3, 4]}),
                 w = iD.osmWay({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id]}),
                 graph = iD.coreGraph([a, b, c, w]),
-                json = w.asGeoJSON(graph, true);
+                json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('LineString');
             expect(json.coordinates).to.eql([a.loc, b.loc, c.loc]);

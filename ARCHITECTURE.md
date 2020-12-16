@@ -457,8 +457,17 @@ An issue with the active [MapRules](https://github.com/radiant-maxar/maprules) v
 A feature's tags indicate it should have a different geometry than it currently does.
 
 * `area_as_line`: an unclosed way has tags implying it should be a closed area (e.g. `area=yes` or `building=yes`)
-* `vertex_as_point`: a detached node has tags implying it should be part of a way (e.g. `highway=stop`)
+* `area_as_point`
+* `area_as_vertex`
+* `line_as_area`
+* `line_as_point`
+* `line_as_vertex`: a detached node has tags implying it should be a line (e.g. `highway=motorway`)
+* `point_as_area`
+* `point_as_line`
 * `point_as_vertex`: a vertex node has tags implying it should be detached from ways (e.g. `amenity=cafe`)
+* `vertex_as_area`
+* `vertex_as_line`
+* `vertex_as_point`: a detached node has tags implying it should be part of a way (e.g. `highway=stop`)
 * `unclosed_multipolygon_part`: a relation is tagged as a multipolygon but not all of its member ways form closed rings
 
 ##### `missing_role`

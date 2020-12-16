@@ -190,16 +190,17 @@ export function modeDragNode(context) {
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
+        var target, edge;
+
         if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
             // related code
             // - `mode/drag_node.js`     `doMove()`
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum(d3_event);
-            var target = d && d.properties && d.properties.entity;
+            target = d && d.properties && d.properties.entity;
             var targetLoc = target && target.loc;
             var targetNodes = d && d.properties && d.properties.nodes;
-            var edge;
 
             if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
                 if (shouldSnapToNode(target)) {

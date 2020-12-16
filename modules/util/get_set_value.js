@@ -14,14 +14,14 @@ export function utilGetSetValue(selection, value) {
 
         function valueFunction() {
             var x = value.apply(this, arguments);
-            if (x == null) {
+            if (x === null || x === undefined) {
                 delete this.value;
             } else if (this.value !== x) {
                 this.value = x;
             }
         }
 
-        return value == null
+        return (value === null || value === undefined)
             ? valueNull : (typeof value === 'function'
             ? valueFunction : valueConstant);
     }

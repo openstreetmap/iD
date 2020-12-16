@@ -5,6 +5,8 @@ const fs = require('fs');
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
 const rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh-Hant', 'pt-BR': 'pt', 'pt': 'pt-PT' };
 
+const codesToSkip = ['ase', 'mis', 'mul', 'und', 'zxx'];
+
 let referencedScripts = [];
 
 function getLangNamesInNativeLang() {
@@ -57,12 +59,24 @@ function getLangNamesInNativeLang() {
     unordered[code] = info;
   });
 
+  // CLDR locales don't cover all the languages people might want to use for iD tags,
+  // so also add the language names that we have English translations for
+  let englishNamesByCode = JSON.parse(fs.readFileSync(`${cldrMainDir}en/languages.json`, 'utf8')).main.en.localeDisplayNames.languages;
+  Object.keys(englishNamesByCode).forEach(code => {
+    if (code in unordered) return;
+    if (code.indexOf('-') !== -1) return;
+    if (codesToSkip.indexOf(code) !== -1) return;
+    unordered[code] = {};
+  });
+
   let ordered = {};
   Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);
   return ordered;
 }
 
-exports.langNamesInNativeLang = getLangNamesInNativeLang();
+const langNamesInNativeLang = getLangNamesInNativeLang();
+
+exports.langNamesInNativeLang = langNamesInNativeLang;
 
 exports.languageNamesInLanguageOf = function(code) {
   if (rematchCodes[code]) code = rematchCodes[code];
@@ -73,9 +87,9 @@ exports.languageNamesInLanguageOf = function(code) {
   let translatedLangsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.languages;
 
   // ignore codes for non-languages
-  for (let nonLangCode in { mis: true, mul: true, und: true, zxx: true }) {
-    delete translatedLangsByCode[nonLangCode];
-  }
+  codesToSkip.forEach(skipCode => {
+    delete translatedLangsByCode[skipCode];
+  });
 
   for (let langCode in translatedLangsByCode) {
     let altLongIndex = langCode.indexOf('-alt-long');
@@ -84,9 +98,14 @@ exports.languageNamesInLanguageOf = function(code) {
       translatedLangsByCode[base] = translatedLangsByCode[langCode];
     }
 
-    if (langCode.includes('-alt-')) {    // remove alternative names
+    if (langCode.includes('-alt-')) {
+      // remove alternative names
       delete translatedLangsByCode[langCode];
-    } else if (langCode === translatedLangsByCode[langCode]) {   // no localized value available
+    } else if (langCode === translatedLangsByCode[langCode]) {
+      // no localized value available
+      delete translatedLangsByCode[langCode];
+    } else if (!langNamesInNativeLang[langCode]){
+      // we don't need to include language names that we probably won't be showing in the UI
       delete translatedLangsByCode[langCode];
     }
   }

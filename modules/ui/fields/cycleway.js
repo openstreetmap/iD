@@ -74,7 +74,7 @@ export function uiFieldCycleway(field, context) {
     }
 
 
-    function change(key) {
+    function change(d3_event, key) {
 
         var newValue = context.cleanTagValue(utilGetSetValue(d3_select(this)));
 
@@ -115,7 +115,7 @@ export function uiFieldCycleway(field, context) {
 
 
     cycleway.options = function() {
-        return Object.keys(field.strings.options).map(function(option) {
+        return field.options.map(function(option) {
             return {
                 title: field.t('options.' + option + '.description'),
                 value: option

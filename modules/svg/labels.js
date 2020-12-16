@@ -315,8 +315,7 @@ export function svgLabels(projection, context) {
             var preset = geometry === 'area' && presetManager.match(entity, graph);
             var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity))
-                continue;
+            if (!icon && !utilDisplayName(entity)) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -551,7 +550,7 @@ export function svgLabels(projection, context) {
 
 
         function getAreaLabel(entity, width, height) {
-            var centroid = path.centroid(entity.asGeoJSON(graph, true));
+            var centroid = path.centroid(entity.asGeoJSON(graph));
             var extent = entity.extent(graph);
             var areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
 

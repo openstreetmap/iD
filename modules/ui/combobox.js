@@ -380,7 +380,9 @@ export function uiCombobox(context, klass) {
             // enter/update
             options.enter()
                 .append('a')
-                .attr('class', 'combobox-option')
+                .attr('class', function(d) {
+                    return 'combobox-option ' + (d.klass || '');
+                })
                 .attr('title', function(d) { return d.title; })
                 .html(function(d) { return d.display || d.value; })
                 .on('mouseenter', _mouseEnterHandler)

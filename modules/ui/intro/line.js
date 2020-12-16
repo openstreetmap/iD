@@ -211,12 +211,13 @@ export function uiIntroLine(context, reveal) {
         reveal('.surface', continueLineText);
 
         context.on('enter.intro', function(mode) {
-            if (mode.id === 'draw-line')
+            if (mode.id === 'draw-line') {
                 return;
-            else if (mode.id === 'select')
+            } else if (mode.id === 'select') {
                 return continueTo(chooseCategoryRoad);
-            else
+            } else {
                 return chapter.restart();
+            }
         });
 
         function continueTo(nextStep) {
@@ -725,7 +726,7 @@ export function uiIntroLine(context, reveal) {
         context.history().on('change.intro', function(changed) {
             wasChanged = true;
             timeout(function() {
-                if (context.history().undoAnnotation() === t('operations.split.annotation.line')) {
+                if (context.history().undoAnnotation() === t('operations.split.annotation.line', { n: 1 })) {
                     _washingtonSegmentID = changed.created()[0].id;
                     continueTo(didSplit);
                 } else {

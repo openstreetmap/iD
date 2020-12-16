@@ -1,8 +1,0 @@
-{
-    "key": "bench",
-    "type": "check",
-    "label": "Bench",
-    "terms": [
-        "seating"
-    ]
-}

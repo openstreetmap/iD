@@ -6,7 +6,7 @@ export * from './address';
 export * from './cycleway';
 export * from './lanes';
 export * from './localized';
-export * from './maxspeed';
+export * from './roadspeed';
 export * from './radio';
 export * from './restrictions';
 export * from './textarea';
@@ -47,7 +47,7 @@ import { uiFieldAddress } from './address';
 import { uiFieldCycleway } from './cycleway';
 import { uiFieldLanes } from './lanes';
 import { uiFieldLocalized } from './localized';
-import { uiFieldMaxspeed } from './maxspeed';
+import { uiFieldRoadspeed } from './roadspeed';
 import { uiFieldRestrictions } from './restrictions';
 import { uiFieldTextarea } from './textarea';
 import { uiFieldWikidata } from './wikidata';
@@ -64,7 +64,8 @@ export var uiFields = {
     identifier: uiFieldIdentifier,
     lanes: uiFieldLanes,
     localized: uiFieldLocalized,
-    maxspeed: uiFieldMaxspeed,
+    roadspeed: uiFieldRoadspeed,
+    roadheight: uiFieldText,
     manyCombo: uiFieldManyCombo,
     multiCombo: uiFieldMultiCombo,
     networkCombo: uiFieldNetworkCombo,

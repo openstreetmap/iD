@@ -17,8 +17,7 @@ export function operationMove(context, selectedIDs) {
 
 
     operation.available = function() {
-        return selectedIDs.length > 1 ||
-            context.entity(selectedIDs[0]).type !== 'node';
+        return selectedIDs.length > 0;
     };
 
 

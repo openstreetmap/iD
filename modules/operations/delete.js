@@ -132,7 +132,7 @@ export function operationDelete(context, selectedIDs) {
         var disable = operation.disabled();
         return disable ?
             t('operations.delete.' + disable + '.' + multi) :
-            t('operations.delete.description' + '.' + multi);
+            t('operations.delete.description.' + multi);
     };
 
 

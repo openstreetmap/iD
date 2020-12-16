@@ -211,7 +211,10 @@ export function uiSectionBackgroundList(context) {
                 .title(t.html('settings.custom_background.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
-            .on('click', editCustom)
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                editCustom();
+            })
             .call(svgIcon('#iD-icon-more'));
 
         enter.filter(function(d) { return d.best(); })
@@ -265,8 +268,7 @@ export function uiSectionBackgroundList(context) {
     }
 
 
-    function editCustom(d3_event) {
-        d3_event.preventDefault();
+    function editCustom() {
         context.container()
             .call(_settingsCustomBackground);
     }

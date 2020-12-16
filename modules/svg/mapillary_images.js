@@ -109,7 +109,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return t;
     }
 
-    context.photos().on('change.mapillary_images', update);
 
     function filterImages(images) {
         var showsPano = context.photos().showsPanoramic();
@@ -170,6 +169,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                         }
                     }
                 }
+                return false;
             });
         }
         if (fromDate) {
@@ -326,8 +326,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
         svgMapillaryImages.enabled = _;
         if (svgMapillaryImages.enabled) {
             showLayer();
+            context.photos().on('change.mapillary_images', update);
         } else {
             hideLayer();
+            context.photos().on('change.mapillary_images', null);
         }
         dispatch.call('change');
         return this;

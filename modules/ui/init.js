@@ -163,16 +163,23 @@ export function uiInit(context) {
             .append('div')
             .attr('class', 'over-map');
 
+        // HACK: Mobile Safari 14 likes to select anything selectable when long-
+        // pressing, even if it's not targeted. This conflicts with long-pressing
+        // to show the edit menu. We add a selectable offscreen element as the first
+        // child to trick Safari into not showing the selection UI.
+        overMap
+            .append('div')
+            .attr('class', 'select-trap')
+            .text('t');
+
+        overMap
+            .call(uiMapInMap(context))
+            .call(uiNotice(context));
+
         overMap
             .append('div')
             .attr('class', 'spinner')
             .call(uiSpinner(context));
-
-        overMap
-            .append('div')
-            .attr('class', 'attribution-wrap')
-            .attr('dir', 'ltr')
-            .call(uiAttribution(context));
 
         // Map controls
         var controls = overMap
@@ -220,13 +227,8 @@ export function uiInit(context) {
 
         ui.info = uiInfo(context);
 
-        // Add absolutely-positioned elements that sit on top of the map
-        // This should happen after the map is ready (center/zoom)
         overMap
-            .call(uiMapInMap(context))
-            .call(ui.info)
-            .call(uiNotice(context));
-
+            .call(ui.info);
 
         overMap
             .append('div')
@@ -234,6 +236,12 @@ export function uiInit(context) {
             .classed('al', true)       // 'al'=left,  'ar'=right
             .classed('hide', true)
             .call(ui.photoviewer);
+
+        overMap
+            .append('div')
+            .attr('class', 'attribution-wrap')
+            .attr('dir', 'ltr')
+            .call(uiAttribution(context));
 
 
         // Add footer
@@ -539,19 +547,21 @@ export function uiInit(context) {
             delete _needWidth[selector];
         }
 
-        var element = d3_select(selector);
-        var scrollWidth = element.property('scrollWidth');
-        var clientWidth = element.property('clientWidth');
+        var selection = context.container().select(selector);
+        if (selection.empty()) return;
+
+        var scrollWidth = selection.property('scrollWidth');
+        var clientWidth = selection.property('clientWidth');
         var needed = _needWidth[selector] || scrollWidth;
 
         if (scrollWidth > clientWidth) {    // overflow happening
-            element.classed('narrow', true);
+            selection.classed('narrow', true);
             if (!_needWidth[selector]) {
                 _needWidth[selector] = scrollWidth;
             }
 
         } else if (scrollWidth >= needed) {
-            element.classed('narrow', false);
+            selection.classed('narrow', false);
         }
     };
 

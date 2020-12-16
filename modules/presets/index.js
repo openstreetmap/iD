@@ -240,8 +240,8 @@ export function presetIndex() {
 
     // keeplist
     presets.forEach(p => {
-      let key;
-      for (key in p.tags) break;  // pick the first tag
+      const keys = p.tags && Object.keys(p.tags);
+      const key = keys && keys.length && keys[0];  // pick the first tag
       if (!key) return;
       if (ignore.indexOf(key) !== -1) return;
 
@@ -274,8 +274,8 @@ export function presetIndex() {
       if (d.suggestion || d.replacement || d.searchable === false) return pointTags;
 
       // only care about the primary tag
-      let key;
-      for (key in d.tags) break;  // pick the first tag
+      const keys = d.tags && Object.keys(d.tags);
+      const key = keys && keys.length && keys[0];  // pick the first tag
       if (!key) return pointTags;
 
       // if this can be a point
@@ -294,8 +294,8 @@ export function presetIndex() {
       if (d.suggestion || d.replacement || d.searchable === false) return vertexTags;
 
       // only care about the primary tag
-      let key;
-      for (key in d.tags) break;   // pick the first tag
+      const keys = d.tags && Object.keys(d.tags);
+      const key = keys && keys.length && keys[0];  // pick the first tag
       if (!key) return vertexTags;
 
       // if this can be a vertex
@@ -398,9 +398,8 @@ export function presetIndex() {
 
       return _addablePresetIDs.map((id) => {
         const preset = _this.item(id);
-        if (preset) {
-          return RibbonItem(preset, 'addable');
-        }
+        if (preset) return RibbonItem(preset, 'addable');
+        return null;
       }).filter(Boolean);
   };
 

@@ -118,8 +118,12 @@ export function uiFieldWikipedia(field, context) {
       .merge(_titleInput);
 
     _titleInput
-      .on('blur', blur)
-      .on('change', change);
+      .on('blur', function() {
+        change(true);
+      })
+      .on('change', function() {
+        change(false);
+      });
 
 
     let link = titleContainer.selectAll('.wiki-link')
@@ -172,11 +176,6 @@ export function uiFieldWikipedia(field, context) {
 
   function changeLang() {
     utilGetSetValue(_langInput, language()[1]);
-    change(true);
-  }
-
-
-  function blur() {
     change(true);
   }
 
@@ -238,6 +237,7 @@ export function uiFieldWikipedia(field, context) {
             currTags.wikidata = value;
             return actionChangeTags(entityID, currTags);
         }
+        return null;
       }).filter(Boolean);
 
       if (!actions.length) return;

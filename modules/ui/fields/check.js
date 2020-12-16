@@ -16,7 +16,7 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 
 export function uiFieldCheck(field, context) {
     var dispatch = d3_dispatch('change');
-    var options = field.strings && field.strings.options;
+    var options = field.options;
     var values = [];
     var texts = [];
 
@@ -33,9 +33,10 @@ export function uiFieldCheck(field, context) {
 
 
     if (options) {
-        for (var k in options) {
-            values.push(k === 'undefined' ? undefined : k);
-            texts.push(field.t.html('options.' + k, { 'default': options[k] }));
+        for (var i in options) {
+            var v = options[i];
+            values.push(v === 'undefined' ? undefined : v);
+            texts.push(field.t.html('options.' + v, { 'default': v }));
         }
     } else {
         values = [undefined, 'yes'];
@@ -58,7 +59,7 @@ export function uiFieldCheck(field, context) {
             for (var key in entity.tags) {
                 if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
                     _impliedYes = true;
-                    texts[0] = t.html('presets.fields.oneway_yes.options.undefined');
+                    texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
                     break;
                 }
             }
@@ -114,7 +115,6 @@ export function uiFieldCheck(field, context) {
             enter
                 .append('button')
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
-                .attr('href', '#')
                 .append('span')
                 .attr('class', 'reverser-span');
         }

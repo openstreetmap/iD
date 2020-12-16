@@ -14,6 +14,7 @@ export function uiShortcuts(context) {
     var _activeTab = 0;
     var _modalSelection;
     var _selection = d3_select(null);
+    var _dataShortcuts;
 
 
     function shortcutsModal(_modalSelection) {
@@ -29,12 +30,17 @@ export function uiShortcuts(context) {
             .html(t.html('shortcuts.title'));
 
         fileFetcher.get('shortcuts')
-            .then(function(data) { content.call(render, data); })
+            .then(function(data) {
+                _dataShortcuts = data;
+                content.call(render);
+            })
             .catch(function() { /* ignore */ });
     }
 
 
-    function render(selection, dataShortcuts) {
+    function render(selection) {
+        if (!_dataShortcuts) return;
+
         var wrapper = selection
             .selectAll('.wrapper')
             .data([0]);
@@ -56,18 +62,18 @@ export function uiShortcuts(context) {
 
         var tabs = tabsBar
             .selectAll('.tab')
-            .data(dataShortcuts);
+            .data(_dataShortcuts);
 
         var tabsEnter = tabs
             .enter()
             .append('a')
             .attr('class', 'tab')
             .attr('href', '#')
-            .on('click', function (d3_event) {
+            .on('click', function (d3_event, d) {
                 d3_event.preventDefault();
-                var i = tabs.nodes().indexOf(this);
+                var i = _dataShortcuts.indexOf(d);
                 _activeTab = i;
-                render(selection, dataShortcuts);
+                render(selection);
             });
 
         tabsEnter
@@ -83,7 +89,7 @@ export function uiShortcuts(context) {
 
         var shortcuts = shortcutsList
             .selectAll('.shortcut-tab')
-            .data(dataShortcuts);
+            .data(_dataShortcuts);
 
         var shortcutsEnter = shortcuts
             .enter()

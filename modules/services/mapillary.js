@@ -162,8 +162,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         loc: loc,
                         key: feature.properties.key,
                         value: feature.properties.value,
-                        package: feature.properties.package,
-                        detections: feature.properties.detections
+                        detections: feature.properties.detections,
+                        direction: feature.properties.direction,
+                        accuracy: feature.properties.accuracy,
+                        first_seen_at: feature.properties.first_seen_at,
+                        last_seen_at: feature.properties.last_seen_at
                     };
                 }
 
@@ -226,7 +229,6 @@ function loadData(which, url) {
                         key: feature.properties.key,
                         image_key: feature.properties.image_key,
                         value: feature.properties.value,
-                        package: feature.properties.package,
                         shape: feature.properties.shape
                     };
 
@@ -431,7 +433,9 @@ export default {
                 .attr('crossorigin', 'anonymous')
                 .attr('href', context.asset(viewercss))
                 .on('load.serviceMapillary', loaded)
-                .on('error.serviceMapillary', reject);
+                .on('error.serviceMapillary', function() {
+                    reject();
+                });
 
             // load mapillary-viewerjs
             head.selectAll('#ideditor-mapillary-viewerjs')
@@ -442,7 +446,9 @@ export default {
                 .attr('crossorigin', 'anonymous')
                 .attr('src', context.asset(viewerjs))
                 .on('load.serviceMapillary', loaded)
-                .on('error.serviceMapillary', reject);
+                .on('error.serviceMapillary', function() {
+                    reject();
+                });
         })
         .catch(function() {
             _loadViewerPromise = null;

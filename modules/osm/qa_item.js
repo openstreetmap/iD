@@ -15,8 +15,6 @@ export class QAItem {
     if (service && typeof service.getIcon === 'function') {
       this.icon = service.getIcon(itemType);
     }
-
-    return this;
   }
 
   update(props) {

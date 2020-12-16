@@ -1,8 +1,9 @@
 
-import { geoCentroid as d3_geoCentroid } from 'd3-geo';
+import { geoPath as d3_geoPath } from 'd3-geo';
+
 import { osmNode } from '../osm/node';
 
-export function actionExtract(entityID) {
+export function actionExtract(entityID, projection) {
 
     var extractedNodeID;
 
@@ -45,7 +46,8 @@ export function actionExtract(entityID) {
         var keysToRetain = ['area'];
         var buildingKeysToRetain = ['architect', 'building', 'height', 'layer'];
 
-        var extractedLoc = d3_geoCentroid(entity.asGeoJSON(graph));
+        var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
+        extractedLoc = extractedLoc && projection.invert(extractedLoc);
         if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
             extractedLoc = entity.extent(graph).center();
         }

@@ -18,17 +18,11 @@ export function uiSectionBackgroundOffset(context) {
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
     var _directions = [
-        ['right', [0.5, 0]],
         ['top', [0, -0.5]],
         ['left', [-0.5, 0]],
+        ['right', [0.5, 0]],
         ['bottom', [0, 0.5]]
     ];
-
-
-    function cancelEvent(d3_event) {
-        d3_event.stopPropagation();
-        d3_event.preventDefault();
-    }
 
 
     function updateValue() {
@@ -57,28 +51,6 @@ export function uiSectionBackgroundOffset(context) {
     function nudge(d) {
         context.background().nudge(d, context.map().zoom());
         updateValue();
-    }
-
-
-    function pointerdownNudgeButton(d) {
-        var interval;
-        var timeout = window.setTimeout(function() {
-                interval = window.setInterval(nudge.bind(null, d), 100);
-            }, 500);
-
-        function doneNudge() {
-            window.clearTimeout(timeout);
-            window.clearInterval(interval);
-            d3_select(window)
-                .on(_pointerPrefix + 'up.buttonoffset', null, true)
-                .on(_pointerPrefix + 'down.buttonoffset', null, true);
-        }
-
-        d3_select(window)
-            .on(_pointerPrefix + 'up.buttonoffset', doneNudge, true)
-            .on(_pointerPrefix + 'down.buttonoffset', doneNudge, true);
-
-        nudge(d);
     }
 
 
@@ -155,14 +127,18 @@ export function uiSectionBackgroundOffset(context) {
 
         var containerEnter = container.enter()
             .append('div')
-            .attr('class', 'nudge-container cf');
+            .attr('class', 'nudge-container');
 
         containerEnter
             .append('div')
             .attr('class', 'nudge-instructions')
             .html(t.html('background.offset'));
 
-        var nudgeEnter = containerEnter
+        var nudgeWrapEnter = containerEnter
+            .append('div')
+            .attr('class', 'nudge-controls-wrap');
+
+        var nudgeEnter = nudgeWrapEnter
             .append('div')
             .attr('class', 'nudge-outer-rect')
             .on(_pointerPrefix + 'down', dragOffset);
@@ -174,26 +150,22 @@ export function uiSectionBackgroundOffset(context) {
             .attr('type', 'text')
             .on('change', inputOffset);
 
-        nudgeEnter
+        nudgeWrapEnter
             .append('div')
             .selectAll('button')
             .data(_directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
-            .on('contextmenu', cancelEvent)
-            .on(_pointerPrefix + 'down', function(d3_event, d) {
-                if (d3_event.button !== 0) return;
-                pointerdownNudgeButton(d[1]);
+            .on('click', function(d3_event, d) {
+                nudge(d[1]);
             });
 
-        containerEnter
+        nudgeWrapEnter
             .append('button')
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
-            .on('contextmenu', cancelEvent)
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
-                if (d3_event.button !== 0) return;
                 resetOffset();
             })
             .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));

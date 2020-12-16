@@ -104,7 +104,8 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', 'display-option-resetlink')
             .attr('href', '#')
             .html(t.html('background.reset_all'))
-            .on('click', function() {
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
                 for (var i = 0; i < _sliders.length; i++) {
                     updateValue(_sliders[i], 1);
                 }

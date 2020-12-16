@@ -289,8 +289,9 @@ export function uiFieldRestrictions(field, context) {
             .selectAll('.related')
             .classed('related', false);
 
+        var way;
         if (_fromWayID) {
-            var way = vgraph.entity(_fromWayID);
+            way = vgraph.entity(_fromWayID);
             surface
                 .selectAll('.' + _fromWayID)
                 .classed('selected', true)
@@ -533,8 +534,10 @@ export function uiFieldRestrictions(field, context) {
                     for (var i = 0; i < datum.via.ways.length; i++) {
                         var prev = names[names.length - 1];
                         var curr = displayName(datum.via.ways[i], vgraph);
-                        if (!prev || curr !== prev)   // collapse identical names
+                        if (!prev || curr !== prev) {
+                            // collapse identical names
                             names.push(curr);
+                        }
                     }
 
                     help

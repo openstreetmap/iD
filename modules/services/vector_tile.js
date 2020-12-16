@@ -40,9 +40,10 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     geometry.coordinates = [geometry.coordinates];
                 }
 
+                var isClipped = false;
+
                 // Clip to tile bounds
                 if (geometry.type === 'MultiPolygon') {
-                    var isClipped = false;
                     var featureClip = turf_bboxClip(feature, tile.extent.rectangle());
                     if (!deepEqual(feature.geometry, featureClip.geometry)) {
                         // feature = featureClip;

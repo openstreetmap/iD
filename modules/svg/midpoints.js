@@ -83,8 +83,7 @@ export function svgMidpoints(projection, context) {
                             point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
                             if (point &&
                                 geoVecLength(projection(a.loc), projection(point)) > 20 &&
-                                geoVecLength(projection(b.loc), projection(point)) > 20)
-                            {
+                                geoVecLength(projection(b.loc), projection(point)) > 20) {
                                 loc = point;
                                 break;
                             }
@@ -106,8 +105,7 @@ export function svgMidpoints(projection, context) {
 
 
         function midpointFilter(d) {
-            if (midpoints[d.id])
-                return true;
+            if (midpoints[d.id]) return true;
 
             for (var i = 0; i < d.parents.length; i++) {
                 if (filter(d.parents[i])) {

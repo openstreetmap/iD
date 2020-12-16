@@ -1,10 +1,11 @@
+import deepEqual from 'fast-deep-equal';
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionExtract } from '../actions/extract';
 import { modeSelect } from '../modes/select';
 import { osmJoinWays } from '../osm/multipolygon';
-import { osmNodeGeometriesForTags } from '../osm/tags';
+import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
 import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
@@ -139,7 +140,7 @@ export function validationMismatchedGeometry() {
         }
     }
 
-    function vertexTaggedAsPointIssue(entity, graph) {
+    function vertexPointIssue(entity, graph) {
         // we only care about nodes
         if (entity.type !== 'node') return null;
 
@@ -196,37 +197,148 @@ export function validationMismatchedGeometry() {
                         .html(t.html('issues.point_as_vertex.reference'));
                 },
                 entityIds: [entity.id],
-                dynamicFixes: function(context) {
-
-                    var entityId = this.entityIds[0];
-
-                    var extractOnClick = null;
-                    if (!context.hasHiddenConnections(entityId)) {
-
-                        extractOnClick = function(context) {
-                            var entityId = this.issue.entityIds[0];
-                            var action = actionExtract(entityId);
-                            context.perform(
-                                action,
-                                t('operations.extract.annotation', { n: 1 })
-                            );
-                            // re-enter mode to trigger updates
-                            context.enter(modeSelect(context, [action.getExtractedNodeID()]));
-                        };
-                    }
-
-                    return [
-                        new validationIssueFix({
-                            icon: 'iD-operation-extract',
-                            title: t.html('issues.fix.extract_point.title'),
-                            onClick: extractOnClick
-                        })
-                    ];
-                }
+                dynamicFixes: extractPointDynamicFixes
             });
         }
 
         return null;
+    }
+
+
+    function otherMismatchIssue(entity, graph) {
+        // ignore boring features
+        if (!entity.hasInterestingTags()) return null;
+
+        if (entity.type !== 'node' && entity.type !== 'way') return null;
+
+        // address lines are special so just ignore them
+        if (entity.type === 'node' && entity.isOnAddressLine(graph)) return null;
+
+        var sourceGeom = entity.geometry(graph);
+
+        var targetGeoms = entity.type === 'way' ? ['point', 'vertex'] : ['line', 'area'];
+
+        if (sourceGeom === 'area') targetGeoms.unshift('line');
+
+        var targetGeom = targetGeoms.find(nodeGeom => {
+            var asSource = presetManager.matchTags(entity.tags, sourceGeom);
+            var asTarget = presetManager.matchTags(entity.tags, nodeGeom);
+            if (!asSource || !asTarget ||
+                asSource === asTarget ||
+                // sometimes there are two presets with the same tags for different geometries
+                deepEqual(asSource.tags, asTarget.tags)) return false;
+
+            if (asTarget.isFallback()) return false;
+
+            var primaryKey = Object.keys(asTarget.tags)[0];
+
+            // special case: buildings-as-points are discouraged by iD, but common in OSM, so ignore them
+            if (primaryKey === 'building') return false;
+
+            if (asTarget.tags[primaryKey] === '*') return false;
+
+            return asSource.isFallback() || asSource.tags[primaryKey] === '*';
+        });
+
+        if (!targetGeom) return null;
+
+        var subtype = targetGeom + '_as_' + sourceGeom;
+
+        if (targetGeom === 'vertex') targetGeom = 'point';
+        if (sourceGeom === 'vertex') sourceGeom = 'point';
+
+        var referenceId = targetGeom + '_as_' + sourceGeom;
+
+        var dynamicFixes;
+        if (targetGeom === 'point') {
+            dynamicFixes = extractPointDynamicFixes;
+
+        } else if (sourceGeom === 'area' && targetGeom === 'line') {
+            dynamicFixes = lineToAreaDynamicFixes;
+        }
+
+        return new validationIssue({
+            type: type,
+            subtype: subtype,
+            severity: 'warning',
+            message: function(context) {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t.html('issues.' + referenceId + '.message', {
+                    feature: utilDisplayLabel(entity, targetGeom)
+                }) : '';
+            },
+            reference: function showReference(selection) {
+                selection.selectAll('.issue-reference')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .attr('class', 'issue-reference')
+                    .html(t.html('issues.mismatched_geometry.reference'));
+            },
+            entityIds: [entity.id],
+            dynamicFixes: dynamicFixes
+        });
+    }
+
+    function lineToAreaDynamicFixes(context) {
+
+        var convertOnClick;
+
+        var entityId = this.entityIds[0];
+        var entity = context.entity(entityId);
+        var tags = Object.assign({}, entity.tags);  // shallow copy
+        delete tags.area;
+        if (!osmTagSuggestingArea(tags)) {
+            // if removing the area tag would make this a line, offer that as a quick fix
+            convertOnClick = function(context) {
+                var entityId = this.issue.entityIds[0];
+                var entity = context.entity(entityId);
+                var tags = Object.assign({}, entity.tags);  // shallow copy
+                if (tags.area) {
+                    delete tags.area;
+                }
+                context.perform(
+                    actionChangeTags(entityId, tags),
+                    t('issues.fix.convert_to_line.annotation')
+                );
+            };
+        }
+
+        return [
+            new validationIssueFix({
+                icon: 'iD-icon-line',
+                title: t.html('issues.fix.convert_to_line.title'),
+                onClick: convertOnClick
+            })
+        ];
+    }
+
+    function extractPointDynamicFixes(context) {
+
+        var entityId = this.entityIds[0];
+
+        var extractOnClick = null;
+        if (!context.hasHiddenConnections(entityId)) {
+
+            extractOnClick = function(context) {
+                var entityId = this.issue.entityIds[0];
+                var action = actionExtract(entityId, context.projection);
+                context.perform(
+                    action,
+                    t('operations.extract.annotation', { n: 1 })
+                );
+                // re-enter mode to trigger updates
+                context.enter(modeSelect(context, [action.getExtractedNodeID()]));
+            };
+        }
+
+        return [
+            new validationIssueFix({
+                icon: 'iD-operation-extract',
+                title: t.html('issues.fix.extract_point.title'),
+                onClick: extractOnClick
+            })
+        ];
     }
 
     function unclosedMultipolygonPartIssues(entity, graph) {
@@ -235,7 +347,7 @@ export function validationMismatchedGeometry() {
             !entity.isMultipolygon() ||
             entity.isDegenerate() ||
             // cannot determine issues for incompletely-downloaded relations
-            !entity.isComplete(graph)) return null;
+            !entity.isComplete(graph)) return [];
 
         var sequences = osmJoinWays(entity.members, graph);
 
@@ -285,12 +397,16 @@ export function validationMismatchedGeometry() {
     }
 
     var validation = function checkMismatchedGeometry(entity, graph) {
-        var issues = [
-            vertexTaggedAsPointIssue(entity, graph),
-            lineTaggedAsAreaIssue(entity)
-        ];
-        issues = issues.concat(unclosedMultipolygonPartIssues(entity, graph));
-        return issues.filter(Boolean);
+        var vertexPoint = vertexPointIssue(entity, graph);
+        if (vertexPoint) return [vertexPoint];
+
+        var lineAsArea = lineTaggedAsAreaIssue(entity);
+        if (lineAsArea) return [lineAsArea];
+
+        var mismatch = otherMismatchIssue(entity, graph);
+        if (mismatch) return [mismatch];
+
+        return unclosedMultipolygonPartIssues(entity, graph);
     };
 
     validation.type = type;

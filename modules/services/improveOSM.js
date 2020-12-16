@@ -109,7 +109,9 @@ function preventCoincident(loc, bumpUp) {
   let coincident = false;
   do {
     // first time, move marker up. after that, move marker right.
-    let delta = coincident ? [0.00001, 0] : (bumpUp ? [0, 0.00001] : [0, 0]);
+    let delta = coincident ? [0.00001, 0] :
+        bumpUp ? [0, 0.00001] :
+        [0, 0];
     loc = geoVecAdd(loc, delta);
     let bbox = geoExtent(loc).bbox();
     coincident = _cache.rtree.search(bbox).length;
