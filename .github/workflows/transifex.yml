@@ -28,7 +28,7 @@ jobs:
     - name: Create .transifexrc
       uses: DamianReeves/write-file-action@e19fd875ed54f16fc583a3486e62547ce4a5dde8
       with:
-        path: ${{env.home}}/.transifexrc
+        path: .transifexrc
         write-mode: overwrite
         contents: |
           [https://www.transifex.com]
