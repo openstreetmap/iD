@@ -172,8 +172,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.unsetTags = (tags, geometry, skipFieldDefaults) => {
-    tags = utilObjectOmit(tags, Object.keys(_this.removeTags));
+  _this.unsetTags = (tags, geometry, ignoringKeys, skipFieldDefaults) => {
+    // allow manually keeping some tags
+    let removeTags = ignoringKeys ? utilObjectOmit(_this.removeTags, ignoringKeys) : _this.removeTags;
+    tags = utilObjectOmit(tags, Object.keys(removeTags));
 
     if (geometry && !skipFieldDefaults) {
       _this.fields().forEach(field => {
@@ -194,7 +196,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     for (let k in addTags) {
       if (addTags[k] === '*') {
-        tags[k] = 'yes';
+        // if this tag is ancillary, don't override an existing value since any value is okay
+        if (_this.tags[k] || !tags[k] || tags[k] === 'no') {
+          tags[k] = 'yes';
+        }
       } else {
         tags[k] = addTags[k];
       }
