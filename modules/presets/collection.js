@@ -65,7 +65,7 @@ export function presetCollection(collection) {
     }
 
     function sortPresets(nameProp) {
-      function sortNames(a, b) {
+      return function sortNames(a, b) {
         let aCompare = a[nameProp]();
         let bCompare = b[nameProp]();
 
@@ -83,7 +83,7 @@ export function presetCollection(collection) {
 
         // priority for shorter preset names
         return aCompare.length - bCompare.length;
-      }
+      };
     }
 
     let pool = _this.collection;
