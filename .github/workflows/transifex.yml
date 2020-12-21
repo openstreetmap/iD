@@ -26,7 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install transifex-client
     - name: Create .transifexrc
-      uses: DamianReeves/write-file-action@v1
+      uses: DamianReeves/write-file-action@e19fd875ed54f16fc583a3486e62547ce4a5dde8
       with:
         path: ${{env.home}}/.transifexrc
         write-mode: overwrite
