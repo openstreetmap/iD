@@ -23,7 +23,7 @@ import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiCmd } from '../ui/cmd';
 import {
-    utilArrayIntersection, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
+    utilArrayIntersection, utilArrayUnion, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
     utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
 } from '../util';
 
@@ -82,6 +82,33 @@ export function modeSelect(context, selectedIDs) {
 
         selectedIDs = ids;
         return true;
+    }
+
+
+    // find the common parent ways for nextVertex, previousVertex
+    function allParents() {
+        var graph = context.graph();
+        var allParents = [];
+
+        for (var i = 0; i < selectedIDs.length; i++) {
+            var entity = context.hasEntity(selectedIDs[i]);
+            if (!entity || entity.geometry(graph) !== 'vertex') {
+                return [];  // selection includes some not vertices
+            }
+
+            var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
+            if (!allParents.length) {
+                allParents = currParents;
+                continue;
+            }
+
+            allParents = utilArrayUnion(allParents, currParents);
+            if (!allParents.length) {
+                return [];
+            }
+        }
+
+        return allParents;
     }
 
 
@@ -565,7 +592,7 @@ export function modeSelect(context, selectedIDs) {
 
         function selectParent(d3_event) {
             d3_event.preventDefault();
-            var parents = _relatedParent ? [_relatedParent] : commonParents();
+            var parents = _relatedParent ? [_relatedParent] : allParents();
             if (!parents) return;
 
             context.enter(
