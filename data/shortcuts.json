@@ -159,6 +159,10 @@
             "text": "shortcuts.browsing.vertex_selected.last"
           },
           {
+            "shortcuts": [">"],
+            "text": "shortcuts.browsing.vertex_selected.parent"
+          },
+          {
             "shortcuts": ["\\", "shortcuts.key.pause"],
             "text": "shortcuts.browsing.vertex_selected.change_parent"
           }

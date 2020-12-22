@@ -2258,6 +2258,7 @@ en:
         next: "Jump to next node"
         first: "Jump to first node"
         last: "Jump to last node"
+        parent: "Select parent way"
         change_parent: "Switch parent way"
     editing:
       title: "Editing"

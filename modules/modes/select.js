@@ -245,6 +245,7 @@ export function modeSelect(context, selectedIDs) {
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1/1.05))
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(1/Math.pow(1.05, 5)))
             .on(['\\', 'pause'], nextParent)
+            .on('>', selectParent)
             .on('⎋', esc, true);
 
         d3_select(document)
@@ -559,6 +560,15 @@ export function modeSelect(context, selectedIDs) {
             if (_relatedParent) {
                 surface.selectAll(utilEntitySelector([_relatedParent]))
                     .classed('related', true);
+            }
+        }
+
+        function selectParent(d3_event) {
+            d3_event.preventDefault();
+            if (_relatedParent) {
+                context.enter(
+                    modeSelect(context, [_relatedParent])
+                );
             }
         }
     };
