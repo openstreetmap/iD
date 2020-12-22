@@ -565,11 +565,12 @@ export function modeSelect(context, selectedIDs) {
 
         function selectParent(d3_event) {
             d3_event.preventDefault();
-            if (_relatedParent) {
-                context.enter(
-                    modeSelect(context, [_relatedParent])
-                );
-            }
+            var parents = _relatedParent ? [_relatedParent] : commonParents();
+            if (!parents) return;
+
+            context.enter(
+                modeSelect(context, parents)
+            );
         }
     };
 
