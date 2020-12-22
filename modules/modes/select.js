@@ -566,7 +566,7 @@ export function modeSelect(context, selectedIDs) {
         function selectParent(d3_event) {
             d3_event.preventDefault();
             var parents = _relatedParent ? [_relatedParent] : multipleParents(false);
-            if (!parents) return;
+            if (!parents || parents.length === 0) return;
 
             context.enter(
                 modeSelect(context, parents)
