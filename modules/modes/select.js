@@ -85,10 +85,10 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
-    // find the common parent ways for nextVertex, previousVertex
-    function allParents() {
+    // find the parent ways for nextVertex, previousVertex, and selectParent
+    function multipleParents(onlyCommonParents) {
         var graph = context.graph();
-        var allParents = [];
+        var parents = [];
 
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = context.hasEntity(selectedIDs[i]);
@@ -97,50 +97,23 @@ export function modeSelect(context, selectedIDs) {
             }
 
             var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
-            if (!allParents.length) {
-                allParents = currParents;
+            if (!parents.length) {
+                parents = currParents;
                 continue;
             }
 
-            allParents = utilArrayUnion(allParents, currParents);
-            if (!allParents.length) {
+            parents = (onlyCommonParents ? utilArrayIntersection : utilArrayUnion)(parents, currParents);
+            if (!parents.length) {
                 return [];
             }
         }
 
-        return allParents;
-    }
-
-
-    // find the common parent ways for nextVertex, previousVertex
-    function commonParents() {
-        var graph = context.graph();
-        var commonParents = [];
-
-        for (var i = 0; i < selectedIDs.length; i++) {
-            var entity = context.hasEntity(selectedIDs[i]);
-            if (!entity || entity.geometry(graph) !== 'vertex') {
-                return [];  // selection includes some not vertices
-            }
-
-            var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
-            if (!commonParents.length) {
-                commonParents = currParents;
-                continue;
-            }
-
-            commonParents = utilArrayIntersection(commonParents, currParents);
-            if (!commonParents.length) {
-                return [];
-            }
-        }
-
-        return commonParents;
+        return parents;
     }
 
 
     function singularParent() {
-        var parents = commonParents();
+        var parents = multipleParents(true);
         if (!parents || parents.length === 0) {
             _relatedParent = null;
             return null;
@@ -570,7 +543,7 @@ export function modeSelect(context, selectedIDs) {
 
         function nextParent(d3_event) {
             d3_event.preventDefault();
-            var parents = commonParents();
+            var parents = multipleParents(true);
             if (!parents || parents.length < 2) return;
 
             var index = parents.indexOf(_relatedParent);
@@ -592,7 +565,7 @@ export function modeSelect(context, selectedIDs) {
 
         function selectParent(d3_event) {
             d3_event.preventDefault();
-            var parents = _relatedParent ? [_relatedParent] : allParents();
+            var parents = _relatedParent ? [_relatedParent] : multipleParents(false);
             if (!parents) return;
 
             context.enter(
