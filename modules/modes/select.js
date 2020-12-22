@@ -245,7 +245,7 @@ export function modeSelect(context, selectedIDs) {
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1/1.05))
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(1/Math.pow(1.05, 5)))
             .on(['\\', 'pause'], nextParent)
-            .on('<', selectParent)
+            .on(uiCmd('⌘↑'), selectParent)
             .on('⎋', esc, true);
 
         d3_select(document)
