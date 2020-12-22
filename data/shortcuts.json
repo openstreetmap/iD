@@ -159,7 +159,7 @@
             "text": "shortcuts.browsing.vertex_selected.last"
           },
           {
-            "shortcuts": [">"],
+            "shortcuts": ["<"],
             "text": "shortcuts.browsing.vertex_selected.parent"
           },
           {
