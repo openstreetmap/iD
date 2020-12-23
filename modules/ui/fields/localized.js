@@ -323,7 +323,8 @@ export function uiFieldLocalized(field, context) {
                         var subtitle = s.subtitle();
                         var name = s.name();
                         if (subtitle) name += ' – ' + subtitle;
-                        var dist = utilEditDistance(value, name.substring(0, value.length));
+                        var dist = utilEditDistance(removeDiacritics(value.toLowerCase()),
+                                                    removeDiacritics(name.substring(0, value.length).toLowerCase()));
                         var matchesPreset = (pKey === sKey && (!pValue || pValue === sValue));
 
                         if (dist < 1 || (matchesPreset && dist < 3)) {

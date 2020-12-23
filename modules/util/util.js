@@ -1,4 +1,3 @@
-import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 import { presetManager } from '../presets';
@@ -412,8 +411,6 @@ export function utilSetTransform(el, x, y, scale) {
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
 // first converts the strings to lowercase and replaces diacritic marks with ascii equivalents.
 export function utilEditDistance(a, b) {
-    a = removeDiacritics(a.toLowerCase());
-    b = removeDiacritics(b.toLowerCase());
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
     var matrix = [];

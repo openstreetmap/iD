@@ -1,4 +1,4 @@
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { presetCollection } from './collection';
 
 
@@ -52,8 +52,14 @@ export function presetCategory(categoryID, category, all) {
       _searchNameStripped = _this.searchName();
       // split combined diacritical characters into their parts
       if (_searchNameStripped.normalize) _searchNameStripped = _searchNameStripped.normalize('NFD');
-      // remove diacritics
-      _searchNameStripped = _searchNameStripped.replace(/[\u0300-\u036f]/g, '');
+      if (localizer.languageCode() === 'vi') {
+        // don't remove diacritics in Vietnamese (short words, two levels of diacritics, many minimal pairs)
+        // move tone marks to end of word
+        _searchNameStripped = _searchNameStripped.replace(/([\u0300\u0309\u0303\u0301\u0323])(\w+)/g, '$2$1');
+      } else {
+        // remove diacritics
+        _searchNameStripped = _searchNameStripped.replace(/[\u0300-\u036f]/g, '');
+      }
     }
     return _searchNameStripped;
   };

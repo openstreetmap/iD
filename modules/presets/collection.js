@@ -1,3 +1,4 @@
+import { localizer } from '../core/localizer';
 import { utilArrayIntersection, utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
 
@@ -49,8 +50,15 @@ export function presetCollection(collection) {
   _this.search = (value, geometry, countryCodes) => {
     if (!value) return _this;
 
-    // don't remove diacritical characters since we're assuming the user is being intentional
     value = value.toLowerCase().trim();
+    // don't remove diacritical characters since we're assuming the user is being intentional
+    // except in Vietnamese (short words, two levels of diacritics, many minimal pairs)
+    if (localizer.languageCode() === 'vi') {
+      // split combined diacritical characters into their parts
+      if (value.normalize) value = value.normalize('NFD');
+      // move tone marks to end of word
+      value = value.replace(/([\u0300\u0309\u0303\u0301\u0323])(\w+)/g, '$2$1');
+    }
 
     // match at name beginning or just after a space (e.g. "office" -> match "Law Office")
     function leading(a) {
