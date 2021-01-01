@@ -182,13 +182,40 @@ export function utilGetAllNodes(ids, graph) {
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
-    var network = entity.tags.cycle_network || entity.tags.network;
+    if (name) return name;
 
-    if (!name && entity.tags.ref) {
-        name = entity.tags.ref;
-        if (network) {
-            name = network + ' ' + name;
+    var tags = {
+        direction: entity.tags.direction,
+        from: entity.tags.from,
+        network: entity.tags.cycle_network || entity.tags.network,
+        ref: entity.tags.ref,
+        to: entity.tags.to,
+        via: entity.tags.via
+    };
+    var keyComponents = [];
+
+    if (tags.network) {
+        keyComponents.push('network');
+    }
+    if (tags.ref) {
+        keyComponents.push('ref');
+    }
+
+    // Routes may need more disambiguation based on direction or destination
+    if (entity.tags.route) {
+        if (tags.direction) {
+            keyComponents.push('direction');
+        } else if (tags.from && tags.to) {
+            keyComponents.push('from');
+            keyComponents.push('to');
+            if (tags.via) {
+                keyComponents.push('via');
+            }
         }
+    }
+
+    if (keyComponents.length) {
+        name = t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
 
     return name;
