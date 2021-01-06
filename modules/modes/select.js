@@ -48,6 +48,7 @@ export function modeSelect(context, selectedIDs) {
     // `_focusedParentWayId` is used when we visit a vertex with multiple
     // parents, and we want to remember which parent line we started on.
     var _focusedParentWayId;
+    var _focusedVertexIds;
 
 
     function singular() {
@@ -243,7 +244,7 @@ export function modeSelect(context, selectedIDs) {
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1/1.05))
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(1/Math.pow(1.05, 5)))
             .on(['\\', 'pause'], focusNextParent)
-            .on(uiCmd('⌘↑'), selectParent)
+            .on('|', selectParent)
             .on('⎋', esc, true);
 
         d3_select(document)
@@ -572,12 +573,27 @@ export function modeSelect(context, selectedIDs) {
 
         function selectParent(d3_event) {
             d3_event.preventDefault();
-            var parents = _focusedParentWayId ? [_focusedParentWayId] : parentWaysIdsOfSelection(false);
-            if (!parents || parents.length === 0) return;
 
-            context.enter(
-                modeSelect(context, parents)
-            );
+            var currentSelectedIds = mode.selectedIDs();
+            var parentIds = _focusedParentWayId ? [_focusedParentWayId] : parentWaysIdsOfSelection(false);
+
+            if (!parentIds.length) {
+                var reselectIds = _focusedVertexIds && _focusedVertexIds.filter(id => context.hasEntity(id));
+
+                if (reselectIds && reselectIds.length) {
+                    if (currentSelectedIds.length === 1) _focusedParentWayId = currentSelectedIds[0];
+                    context.enter(
+                        mode.selectedIDs(_focusedVertexIds)
+                    );
+                }
+            } else {
+
+                context.enter(
+                    mode.selectedIDs(parentIds)
+                );
+                // set this after re-entering the selection since we normally want it cleared on exit
+                _focusedVertexIds = currentSelectedIds;
+            }
         }
     };
 
@@ -586,6 +602,8 @@ export function modeSelect(context, selectedIDs) {
 
         // we could enter the mode multiple times but it's only new the first time
         _newFeature = false;
+
+        _focusedVertexIds = null;
 
         _operations.forEach(function(operation) {
             if (operation.behavior) {
