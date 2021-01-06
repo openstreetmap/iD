@@ -586,12 +586,19 @@ export function coreContext() {
 
 
     function loadNSIPresets() {
-      return fileFetcher.get('nsi_presets')
-        .then(d => {
+      return Promise.all([
+          fileFetcher.get('nsi_presets'),
+          fileFetcher.get('nsi_features')
+        ])
+        .then(vals => {
           // Add `suggestion=true` to all the nsi presets
           // The preset json schema doesn't include it, but the iD code still uses it
-          Object.values(d.presets).forEach(preset => preset.suggestion = true);
-          presetManager.merge({ presets: d.presets });
+          Object.values(vals[0].presets).forEach(preset => preset.suggestion = true);
+
+          presetManager.merge({
+            presets: vals[0].presets,
+            featureCollection: vals[1]
+          });
         })
         .catch(() => { /* ignore */ });
     }
