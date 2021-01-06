@@ -23,7 +23,7 @@ import { osmNode, osmWay } from '../osm';
 import * as Operations from '../operations/index';
 import { uiCmd } from '../ui/cmd';
 import {
-    utilArrayIntersection, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
+    utilArrayIntersection, utilArrayUnion, utilDeepMemberSelector, utilEntityOrDeepMemberSelector,
     utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes
 } from '../util';
 
@@ -85,10 +85,10 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
-    // find the common parent ways for nextVertex, previousVertex
-    function commonParents() {
+    // find the parent ways for nextVertex, previousVertex, and selectParent
+    function multipleParents(onlyCommonParents) {
         var graph = context.graph();
-        var commonParents = [];
+        var parents = [];
 
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = context.hasEntity(selectedIDs[i]);
@@ -97,23 +97,23 @@ export function modeSelect(context, selectedIDs) {
             }
 
             var currParents = graph.parentWays(entity).map(function(w) { return w.id; });
-            if (!commonParents.length) {
-                commonParents = currParents;
+            if (!parents.length) {
+                parents = currParents;
                 continue;
             }
 
-            commonParents = utilArrayIntersection(commonParents, currParents);
-            if (!commonParents.length) {
+            parents = (onlyCommonParents ? utilArrayIntersection : utilArrayUnion)(parents, currParents);
+            if (!parents.length) {
                 return [];
             }
         }
 
-        return commonParents;
+        return parents;
     }
 
 
     function singularParent() {
-        var parents = commonParents();
+        var parents = multipleParents(true);
         if (!parents || parents.length === 0) {
             _relatedParent = null;
             return null;
@@ -245,6 +245,7 @@ export function modeSelect(context, selectedIDs) {
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1/1.05))
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(1/Math.pow(1.05, 5)))
             .on(['\\', 'pause'], nextParent)
+            .on(uiCmd('⌘↑'), selectParent)
             .on('⎋', esc, true);
 
         d3_select(document)
@@ -542,7 +543,7 @@ export function modeSelect(context, selectedIDs) {
 
         function nextParent(d3_event) {
             d3_event.preventDefault();
-            var parents = commonParents();
+            var parents = multipleParents(true);
             if (!parents || parents.length < 2) return;
 
             var index = parents.indexOf(_relatedParent);
@@ -560,6 +561,16 @@ export function modeSelect(context, selectedIDs) {
                 surface.selectAll(utilEntitySelector([_relatedParent]))
                     .classed('related', true);
             }
+        }
+
+        function selectParent(d3_event) {
+            d3_event.preventDefault();
+            var parents = _relatedParent ? [_relatedParent] : multipleParents(false);
+            if (!parents || parents.length === 0) return;
+
+            context.enter(
+                modeSelect(context, parents)
+            );
         }
     };
 
