@@ -732,6 +732,21 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name:
+      direction: "{direction}"
+      from_to: "from {from} to {to}"
+      from_to_via: "from {from} to {to} via {via}"
+      network_direction: "{network} {direction}"
+      network_from_to: "{network} from {from} to {to}"
+      network_from_to_via: "{network} from {from} to {to} via {via}"
+      ref: "{ref}"
+      ref_direction: "{ref} {direction}"
+      ref_from_to: "{ref} from {from} to {to}"
+      ref_from_to_via: "{ref} from {from} to {to} via {via}"
+      network_ref: "{network} {ref}"
+      network_ref_direction: "{network} {ref} {direction}"
+      network_ref_from_to: "{network} {ref} from {from} to {to}"
+      network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
   background:
     title: Background
     description: Background Settings
