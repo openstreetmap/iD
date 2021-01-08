@@ -24,11 +24,54 @@ export function coreLocations() {
   let _this = {};
   let _resolvedFeatures = {};                 // cache of *resolved* locationSet features
   let _loco = new LocationConflation();       // instance of a location-conflation resolver
-  let _wp = whichPolygon({ features: [] });   // instance of a which-polygon index
+  let _wp;                                    // instance of a which-polygon index
+
+  resolveLocationSet({ include: ['Q2'] });    // pre-resolve the worldwide locationSet
+  rebuildIndex();
 
   let _queue = [];
   let _deferred = new Set();
   let _inProcess;
+
+
+  function processQueue() {
+    if (!_queue.length) return Promise.resolve();
+
+    // console.log(`queue length ${_queue.length}`);
+    const chunk = _queue.pop();
+    return new Promise(resolvePromise => {
+        const handle = window.requestIdleCallback(() => {
+          _deferred.delete(handle);
+          // const t0 = performance.now();
+          chunk.forEach(resolveLocationSet);
+          // const t1 = performance.now();
+          // console.log('chunk processed in ' + (t1 - t0) + ' ms');
+          resolvePromise();
+        });
+        _deferred.add(handle);
+      })
+      .then(() => processQueue());
+  }
+
+  function resolveLocationSet(locationSet) {
+    try {
+      const resolved = _loco.resolveLocationSet(locationSet);
+      const locationSetID = resolved.id;
+      if (!resolved.feature.geometry.coordinates.length || !resolved.feature.properties.area) {
+        throw new Error(`locationSet ${locationSetID} resolves to an empty feature.`);
+      }
+      if (!_resolvedFeatures[locationSetID]) {  // First time seeing this locationSet feature
+        let feature = JSON.parse(JSON.stringify(resolved.feature));   // deep clone
+        feature.id = locationSetID;      // Important: always use the locationSet `id` (`+[Q30]`), not the feature `id` (`Q30`)
+        feature.properties.id = locationSetID;
+        _resolvedFeatures[locationSetID] = feature;  // insert into cache
+      }
+    } catch (err) { /* ignore? */ }
+  }
+
+  function rebuildIndex() {
+    _wp = whichPolygon({ features: Object.values(_resolvedFeatures) });
+  }
 
   //
   // `mergeCustomGeoJSON`
@@ -98,49 +141,12 @@ export function coreLocations() {
     // Everything after here will be deferred.
     if (!_inProcess) {
       _inProcess = processQueue()
-        .then(() => {  // rebuild the which-polygon index
-          _wp = whichPolygon({ features: Object.values(_resolvedFeatures) });
+        .then(() => {
+          rebuildIndex();
           _inProcess = null;
         });
     }
     return _inProcess;
-
-
-    function processQueue() {
-      if (!_queue.length) return Promise.resolve();
-
-      // console.log(`queue length ${_queue.length}`);
-      const chunk = _queue.pop();
-      return new Promise(resolvePromise => {
-          const handle = window.requestIdleCallback(() => {
-            _deferred.delete(handle);
-            // const t0 = performance.now();
-            chunk.forEach(resolveLocationSet);
-            // const t1 = performance.now();
-            // console.log('chunk processed in ' + (t1 - t0) + ' ms');
-            resolvePromise();
-          });
-          _deferred.add(handle);
-        })
-        .then(() => processQueue());
-    }
-
-
-    function resolveLocationSet(locationSet) {
-      try {
-        const resolved = _loco.resolveLocationSet(locationSet);
-        const locationSetID = resolved.id;
-        if (!resolved.feature.geometry.coordinates.length || !resolved.feature.properties.area) {
-          throw new Error(`locationSet ${locationSetID} resolves to an empty feature.`);
-        }
-        if (!_resolvedFeatures[locationSetID]) {  // First time seeing this locationSet feature
-          let feature = JSON.parse(JSON.stringify(resolved.feature));   // deep clone
-          feature.id = locationSetID;      // Important: always use the locationSet `id` (`+[Q30]`), not the feature `id` (`Q30`)
-          feature.properties.id = locationSetID;
-          _resolvedFeatures[locationSetID] = feature;  // insert into cache
-        }
-      } catch (err) { /* ignore? */ }
-    }
   };
 
 
