@@ -1,6 +1,7 @@
 import { t } from '../core/localizer';
-import { matcher } from 'name-suggestion-index';
 import * as countryCoder from '@ideditor/country-coder';
+import LocationConflation from '@ideditor/location-conflation';
+import { matcher as Matcher } from 'name-suggestion-index';
 
 import { presetManager } from '../presets';
 import { fileFetcher } from '../core/file_fetcher';
@@ -23,35 +24,55 @@ export function validationOutdatedTags() {
   // and `_nsi` will not be available at first, so the data on early tiles
   // may not have tags validated fully.
 
-  // initialize deprecated tags array
+  // fetch deprecated tags
   fileFetcher.get('deprecated')
     .then(d => _dataDeprecated = d)
     .catch(() => { /* ignore */ });
 
-  fileFetcher.get('nsi_brands')
-    .then(d => {
-      _nsi = {
-        brands: d.brands,
-        matcher: matcher(),
-        wikidata: {},
-        wikipedia: {}
-      };
 
-      // initialize name-suggestion-index matcher
-      _nsi.matcher.buildMatchIndex(d.brands);
+// console.log('NSI: start fetching..');
+//   // fetch the name-suggestion-index data
+//   Promise.all([
+//       fileFetcher.get('nsi_data'),
+//       fileFetcher.get('nsi_features'),
+//       fileFetcher.get('nsi_generics'),
+//       fileFetcher.get('nsi_replacements'),
+//       fileFetcher.get('nsi_trees')
+//     ])
+//     .then(vals => {
+//       _nsi = {
+//         data:          vals[0].nsi,
+//         features:      vals[1],
+//         generics:      vals[2].genericWords,
+//         replacements:  vals[3].replacements,
+//         trees:         vals[4].trees
+//       };
 
-      // index all known wikipedia and wikidata tags
-      Object.keys(d.brands).forEach(kvnd => {
-        const brand = d.brands[kvnd];
-        const wd = brand.tags['brand:wikidata'];
-        const wp = brand.tags['brand:wikipedia'];
-        if (wd) { _nsi.wikidata[wd] = kvnd; }
-        if (wp) { _nsi.wikipedia[wp] = kvnd; }
-      });
+// console.log('NSI: done fetching..');
+// console.log('NSI: start indexing..');
 
-      return _nsi;
-    })
-    .catch(() => { /* ignore */ });
+//       _nsi.loco = new LocationConflation(_nsi.features);
+//       _nsi.matcher = Matcher();
+//       _nsi.matcher.buildMatchIndex(_nsi.data);
+//       _nsi.matcher.buildLocationIndex(_nsi.data, _nsi.loco);
+
+// console.log('NSI: done indexing..');
+
+//       // initialize name-suggestion-index matcher
+//       // _nsi.matcher.buildMatchIndex(d.brands);
+
+//       // index all known wikipedia and wikidata tags
+//       // Object.keys(d.brands).forEach(kvnd => {
+//       //   const brand = d.brands[kvnd];
+//       //   const wd = brand.tags['brand:wikidata'];
+//       //   const wp = brand.tags['brand:wikipedia'];
+//       //   if (wd) { _nsi.wikidata[wd] = kvnd; }
+//       //   if (wp) { _nsi.wikipedia[wp] = kvnd; }
+//       // });
+
+//       return _nsi;
+//     })
+//     .catch(() => { /* ignore */ });
 
 
   function oldTagIssues(entity, graph) {

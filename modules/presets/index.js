@@ -1,16 +1,15 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import LocationConflation from '@ideditor/location-conflation';
-import whichPolygon from 'which-polygon';
-
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
+import { locationManager } from '../core/locations';
+
 import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilArrayChunk, utilArrayUniq, utilRebind } from '../util';
+import { utilArrayUniq, utilRebind } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -48,21 +47,14 @@ export function presetIndex() {
   let _fields = {};
   let _categories = {};
   let _universal = [];
-  let _customFeatures = {};
-  let _resolvedFeatures = {};     // cache of all locationSet Features
   let _addablePresetIDs = null;   // Set of preset IDs that the user can add
   let _recents;
   let _favorites;
 
-  let _deferred = new Set();
-  let _queue = [];
-
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-
-  let _loco;
-  let _featureIndex;
   let _loadPromise;
+
 
   _this.ensureLoaded = () => {
     if (_loadPromise) return _loadPromise;
@@ -96,24 +88,26 @@ export function presetIndex() {
   //   featureCollection: {}
   //}
   _this.merge = (d) => {
-
-    // Cancel any existing deferred work - we'll end up redoing it after this merge
-    _queue = [];
-    Array.from(_deferred).forEach(handle => {
-      window.cancelIdleCallback(handle);
-      _deferred.delete(handle);
-    });
+    let newFields = [];
+    let newPresets = [];
+    let newLocationSets = [];
 
     // Merge Fields
     if (d.fields) {
       Object.keys(d.fields).forEach(fieldID => {
-        const f = d.fields[fieldID];
+        let f = d.fields[fieldID];
+
         if (f) {   // add or replace
-          _fields[fieldID] = presetField(fieldID, f);
-          if (!_fields[fieldID].locationSet) {
-            _fields[fieldID].locationSet = { include: ['Q2'] };  // default worldwide
-            _fields[fieldID].locationSetID = '+[Q2]';
+          f = presetField(fieldID, f);
+          if (f.locationSet) {
+            newFields.push(f);
+            newLocationSets.push(f.locationSet);
+          } else {
+            f.locationSet = { include: ['Q2'] };  // default worldwide
+            f.locationSetID = '+[Q2]';
           }
+          _fields[fieldID] = f;
+
         } else {   // remove
           delete _fields[fieldID];
         }
@@ -123,14 +117,20 @@ export function presetIndex() {
     // Merge Presets
     if (d.presets) {
       Object.keys(d.presets).forEach(presetID => {
-        const p = d.presets[presetID];
+        let p = d.presets[presetID];
+
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
-          _presets[presetID] = presetPreset(presetID, p, isAddable, _fields, _presets);
-          if (!_presets[presetID].locationSet) {
-            _presets[presetID].locationSet = { include: ['Q2'] };  // default worldwide
-            _presets[presetID].locationSetID = '+[Q2]';
+          p = presetPreset(presetID, p, isAddable, _fields, _presets);
+          if (p.locationSet) {
+            newPresets.push(p);
+            newLocationSets.push(p.locationSet);
+          } else {
+            p.locationSet = { include: ['Q2'] };  // default worldwide
+            p.locationSetID = '+[Q2]';
           }
+          _presets[presetID] = p;
+
         } else {   // remove (but not if it's a fallback)
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
@@ -191,85 +191,20 @@ export function presetIndex() {
 
     // Merge Custom Features
     if (d.featureCollection && Array.isArray(d.featureCollection.features)) {
-      d.featureCollection.features.forEach(feature => {
-        const featureID = feature.id || (feature.properties && feature.properties.id);
-        if (featureID) {   // add or replace
-          _customFeatures[featureID] = feature;
-        }
-      });
+      locationManager.mergeCustomGeoJSON(d.featureCollection);
     }
 
-    // Replace LocationConflation resolver if new customFeatures have been added
-    // (Would be nice in a future version to be able to add new custom features to it, rather than replacing entirely)
-    if (!_loco || d.featureCollection) {
-      _loco = new LocationConflation({ type: 'FeatureCollection', features: Object.values(_customFeatures) });
-      resolveLocationSet({ include: ['Q2'] });    // resolve the default "world" feature
+    // Resolve all locationSet features.
+    // When done, assign the locationSetIDs (we use these to quickly test where the preset/field is valid).
+    if (newLocationSets.length) {
+      locationManager.mergeLocationSets(newLocationSets)
+        .then(() => {
+          newFields.forEach(f => f.locationSetID = locationManager.locationSetID(f.locationSet));
+          newPresets.forEach(p => p.locationSetID = locationManager.locationSetID(p.locationSet));
+        });
     }
-
-    // Resolve all features -> geojson, processing data in chunks
-    let toResolve = Object.values(_presets).concat(Object.values(_fields))
-      .filter(d => !d.locationSetID);
-
-    _queue = utilArrayChunk(toResolve, 250);
-
-    // Everything after here will be deferred.
-    processQueue()
-      .then(() => { // Rebuild feature index
-        _featureIndex = whichPolygon({ type: 'FeatureCollection', features: Object.values(_resolvedFeatures) });
-      });
 
     return _this;
-
-
-    function processQueue() {
-      if (!_queue.length) return Promise.resolve();
-
-      const chunk = _queue.pop();
-      return new Promise(resolvePromise => {
-          const handle = window.requestIdleCallback(() => {
-            _deferred.delete(handle);
-            resolveLocationSets(chunk);
-            resolvePromise();
-          });
-          _deferred.add(handle);
-        })
-        .then(() => processQueue());
-    }
-
-
-    function resolveLocationSets(items) {
-      if (!Array.isArray(items)) return;
-      items.forEach(item => {
-        let locationSet = item.locationSet || { include: ['Q2'] };  // fallback to world
-        let locationSetID;
-
-        try {
-          locationSetID = resolveLocationSet(locationSet);
-        } catch (err) {
-          locationSet = { include: ['Q2'] };  // fallback to world
-          locationSetID = '+[Q2]';
-        }
-        // store this info with the preset/field
-        item.locationSet = locationSet;
-        item.locationSetID = locationSetID;
-      });
-    }
-
-    function resolveLocationSet(locationSet) {
-      const resolved = _loco.resolveLocationSet(locationSet);
-      const locationSetID = resolved.id;
-      if (!resolved.feature.geometry.coordinates.length || !resolved.feature.properties.area) {
-        throw new Error(`locationSet ${locationSetID} resolves to an empty feature.`);
-      }
-      if (!_resolvedFeatures[locationSetID]) {  // First time seeing this locationSet feature
-        let feature = JSON.parse(JSON.stringify(resolved.feature));   // deep clone
-        feature.id = locationSetID;      // Important: always use the locationSet `id` (`+[Q30]`), not the feature `id` (`Q30`)
-        feature.properties.id = locationSetID;
-        _resolvedFeatures[locationSetID] = feature;  // insert into cache
-      }
-      return locationSetID;
-    }
-
   };
 
 
