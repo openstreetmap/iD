@@ -362,11 +362,12 @@ export function presetIndex() {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n, startWithRecents) => {
+  _this.defaults = (geometry, n, startWithRecents, loc) => {
     let recents = [];
     if (startWithRecents) {
       recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
     }
+
     let defaults;
     if (_addablePresetIDs) {
       defaults = Array.from(_addablePresetIDs).map(function(id) {
@@ -378,9 +379,16 @@ export function presetIndex() {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
     }
 
-    return presetCollection(
+    let result = presetCollection(
       utilArrayUniq(recents.concat(defaults)).slice(0, n - 1)
     );
+
+    if (Array.isArray(loc)) {
+      const validLocations = locationManager.locationsAt(loc);
+      result.collection = result.collection.filter(a => validLocations[a.locationSetID]);
+    }
+
+    return result;
   };
 
   // pass a Set of addable preset ids

@@ -185,7 +185,7 @@ export function coreLocations() {
   _this.query = (loc, multi) => _wp(loc, multi);
 
   //
-  // `locationsHere`
+  // `locationsAt`
   // Convenience method to find all the locationSets valid at the given location.
   // Arguments
   //   `loc`: the [lon,lat] location to query
