@@ -88,8 +88,6 @@ export function presetIndex() {
   //   featureCollection: {}
   //}
   _this.merge = (d) => {
-    let newFields = [];
-    let newPresets = [];
     let newLocationSets = [];
 
     // Merge Fields
@@ -100,8 +98,7 @@ export function presetIndex() {
         if (f) {   // add or replace
           f = presetField(fieldID, f);
           if (f.locationSet) {
-            newFields.push(f);
-            newLocationSets.push(f.locationSet);
+            newLocationSets.push(f);
           } else {
             f.locationSet = { include: ['Q2'] };  // default worldwide
             f.locationSetID = '+[Q2]';
@@ -123,8 +120,7 @@ export function presetIndex() {
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
           p = presetPreset(presetID, p, isAddable, _fields, _presets);
           if (p.locationSet) {
-            newPresets.push(p);
-            newLocationSets.push(p.locationSet);
+            newLocationSets.push(p);
           } else {
             p.locationSet = { include: ['Q2'] };  // default worldwide
             p.locationSetID = '+[Q2]';
@@ -195,13 +191,8 @@ export function presetIndex() {
     }
 
     // Resolve all locationSet features.
-    // When done, assign the locationSetIDs (we use these to quickly test where the preset/field is valid).
     if (newLocationSets.length) {
-      locationManager.mergeLocationSets(newLocationSets)
-        .then(() => {
-          newFields.forEach(f => f.locationSetID = locationManager.locationSetID(f.locationSet));
-          newPresets.forEach(p => p.locationSetID = locationManager.locationSetID(p.locationSet));
-        });
+      locationManager.mergeLocationSets(newLocationSets);
     }
 
     return _this;

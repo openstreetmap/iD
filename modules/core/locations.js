@@ -26,7 +26,9 @@ export function coreLocations() {
   let _loco = new LocationConflation();       // instance of a location-conflation resolver
   let _wp;                                    // instance of a which-polygon index
 
-  resolveLocationSet({ include: ['Q2'] });    // pre-resolve the worldwide locationSet
+  // pre-resolve the worldwide locationSet
+  const world = { locationSet: { include: ['Q2'] } };
+  resolveLocationSet(world);
   rebuildIndex();
 
   let _queue = [];
@@ -53,8 +55,14 @@ export function coreLocations() {
       .then(() => processQueue());
   }
 
-  function resolveLocationSet(locationSet) {
+  function resolveLocationSet(obj) {
+    if (obj.locationSetID) return;  // work was done already
+
     try {
+      const locationSet = obj.locationSet;
+      if (!locationSet) {
+        throw new Error('object missing locationSet property');
+      }
       const resolved = _loco.resolveLocationSet(locationSet);
       const locationSetID = resolved.id;
       if (!resolved.feature.geometry.coordinates.length || !resolved.feature.properties.area) {
@@ -66,7 +74,10 @@ export function coreLocations() {
         feature.properties.id = locationSetID;
         _resolvedFeatures[locationSetID] = feature;  // insert into cache
       }
-    } catch (err) { /* ignore? */ }
+    } catch (err) {
+      obj.locationSet = { include: ['Q2'] };  // default worldwide
+      obj.locationSetID = '+[Q2]';
+    }
   }
 
   function rebuildIndex() {
@@ -119,12 +130,28 @@ export function coreLocations() {
 
   //
   // `mergeLocationSets`
-  //  Accepts an Array of locationSets to merge into the index
+  //  Accepts an Array of Objects containing `locationSet` properties.
+  //  The locationSets will be resolved and indexed in the background.
+  //  [
+  //   { id: 'preset1', locationSet: {…} },
+  //   { id: 'preset2', locationSet: {…} },
+  //   { id: 'preset3', locationSet: {…} },
+  //   …
+  //  ]
+  //  After resolving and indexing, the Objects will be decorated with a
+  //  `locationSetID` property.
+  //  [
+  //   { id: 'preset1', locationSet: {…}, locationSetID: '+[Q2]' },
+  //   { id: 'preset2', locationSet: {…}, locationSetID: '+[Q30]' },
+  //   { id: 'preset3', locationSet: {…}, locationSetID: '+[Q2]' },
+  //   …
+  //  ]
+  //
   //  Returns a Promise fullfilled when the resolving/indexing has been completed
   //  This will take some seconds but happen in the background during browser idle time
   //
-  _this.mergeLocationSets = (locationSets) => {
-    if (!Array.isArray(locationSets)) return Promise.reject('nothing to do');
+  _this.mergeLocationSets = (objects) => {
+    if (!Array.isArray(objects)) return Promise.reject('nothing to do');
 
     // Resolve all locationSets -> geojson, processing data in chunks
     //
@@ -136,7 +163,7 @@ export function coreLocations() {
     // Some discussion and performance results on these tickets:
     // https://github.com/ideditor/location-conflation/issues/26
     // https://github.com/osmlab/name-suggestion-index/issues/4784#issuecomment-742003434
-    _queue = _queue.concat(utilArrayChunk(locationSets, 200));
+    _queue = _queue.concat(utilArrayChunk(objects, 200));
 
     // Everything after here will be deferred.
     if (!_inProcess) {

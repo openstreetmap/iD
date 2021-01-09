@@ -34,15 +34,11 @@ export function uiSuccess(context) {
           locationManager.mergeCustomGeoJSON(vals[0]);
         }
 
-        const ociResources = Object.values(vals[1].resources);
-        const locationSets = ociResources.map(r => r.locationSet);
-
-        // Resolve all locationSet features.
-        // When done, assign the locationSetIDs (we use these to quickly test where each community is valid).
-        if (locationSets.length) {
-          return locationManager.mergeLocationSets(locationSets)
+        let ociResources = Object.values(vals[1].resources);
+        if (ociResources.length) {
+          // Resolve all locationSet features.
+          return locationManager.mergeLocationSets(ociResources)
             .then(() => {
-              ociResources.forEach(r => r.locationSetID = locationManager.locationSetID(r.locationSet));
               _oci = { resources: ociResources };
               return _oci;
             });
