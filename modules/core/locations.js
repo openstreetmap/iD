@@ -22,9 +22,9 @@ export { _mainLocations as locationManager };
 //
 export function coreLocations() {
   let _this = {};
-  let _resolvedFeatures = {};                 // cache of *resolved* locationSet features
-  let _loco = new LocationConflation();       // instance of a location-conflation resolver
-  let _wp;                                    // instance of a which-polygon index
+  let _resolvedFeatures = {};              // cache of *resolved* locationSet features
+  let _loco = new LocationConflation();    // instance of a location-conflation resolver
+  let _wp;                                 // instance of a which-polygon index
 
   // pre-resolve the worldwide locationSet
   const world = { locationSet: { include: ['Q2'] } };
@@ -36,6 +36,7 @@ export function coreLocations() {
   let _inProcess;
 
 
+  // Returns a Promise to process the queue
   function processQueue() {
     if (!_queue.length) return Promise.resolve();
 
@@ -55,6 +56,8 @@ export function coreLocations() {
       .then(() => processQueue());
   }
 
+  // Pass an Object with a `locationSet` property,
+  // Performs the locationSet resolution, caches the result, and sets a `locationSetID` property on the object.
   function resolveLocationSet(obj) {
     if (obj.locationSetID) return;  // work was done already
 
@@ -80,6 +83,7 @@ export function coreLocations() {
     }
   }
 
+  // Rebuilds the whichPolygon index with whatever features have been resolved.
   function rebuildIndex() {
     _wp = whichPolygon({ features: Object.values(_resolvedFeatures) });
   }
@@ -148,7 +152,7 @@ export function coreLocations() {
   //  ]
   //
   //  Returns a Promise fullfilled when the resolving/indexing has been completed
-  //  This will take some seconds but happen in the background during browser idle time
+  //  This will take some seconds but happen in the background during browser idle time.
   //
   _this.mergeLocationSets = (objects) => {
     if (!Array.isArray(objects)) return Promise.reject('nothing to do');
@@ -165,12 +169,12 @@ export function coreLocations() {
     // https://github.com/osmlab/name-suggestion-index/issues/4784#issuecomment-742003434
     _queue = _queue.concat(utilArrayChunk(objects, 200));
 
-    // Everything after here will be deferred.
     if (!_inProcess) {
       _inProcess = processQueue()
         .then(() => {
           rebuildIndex();
           _inProcess = null;
+          return objects;
         });
     }
     return _inProcess;
@@ -179,7 +183,13 @@ export function coreLocations() {
 
   //
   // `locationSetID`
-  // Return a locationSetID for a given locationSet (fallback to the 'world')
+  // Returns a locationSetID for a given locationSet (fallback to `+[Q2]`, world)
+  // (The locationset doesn't necessarily need to be resolved to compute its `id`)
+  //
+  // Arguments
+  //   `locationSet`: A locationSet, e.g. `{ include: ['us'] }`
+  // Returns
+  //   The locationSetID, e.g. `+[Q30]`
   //
   _this.locationSetID = (locationSet) => {
     let locationSetID;
@@ -194,42 +204,55 @@ export function coreLocations() {
 
   //
   // `feature`
-  // Return the GeoJSON feature for a given locationSetID (fallback to 'world')
+  // Returns the resolved GeoJSON feature for a given locationSetID (fallback to 'world')
   //
+  // Arguments
+  //   `locationSetID`: id of the form like `+[Q30]`  (United States)
+  // Returns
+  //   A GeoJSON feature:
+  //   {
+  //     type: 'Feature',
+  //     id: '+[Q30]',
+  //     properties: { id: '+[Q30]', area: 21817019.17, … },
+  //     geometry: { … }
+  //   }
   _this.feature = (locationSetID) => _resolvedFeatures[locationSetID] || _resolvedFeatures['+[Q2]'];
 
 
   //
-  // `query`
-  // Execute a query directly against which-polygon
-  // https://github.com/mapbox/which-polygon
-  // Arguments
-  //   `loc`: the [lon,lat] location to query,
-  //   `multi`= true to return all results, `false` to return first result
-  // Returns
-  //   Array of GeoJSON *properties* for the locationSet features that exist at `loc`
-  //
-  _this.query = (loc, multi) => _wp(loc, multi);
-
-  //
   // `locationsAt`
-  // Convenience method to find all the locationSets valid at the given location.
+  // Find all the resolved locationSets valid at the given location.
+  // Results include the area (in km²) to facilitate sorting.
+  //
   // Arguments
-  //   `loc`: the [lon,lat] location to query
+  //   `loc`: the [lon,lat] location to query, e.g. `[-74.4813, 40.7967]`
   // Returns
-  //   A result Object of ids to areas
-  //  {
-  //    "+[Q2]": 511207893.3958111,
-  //    "+[Q30]": 21817019.17,
-  //    "+[new_jersey.geojson]": 22390.77,
-  //    …
-  //  }
+  //   Object of locationSetIDs to areas (in km²)
+  //   {
+  //     "+[Q2]": 511207893.3958111,
+  //     "+[Q30]": 21817019.17,
+  //     "+[new_jersey.geojson]": 22390.77,
+  //     …
+  //   }
   //
   _this.locationsAt = (loc) => {
     let result = {};
     _wp(loc, true).forEach(prop => result[prop.id] = prop.area);
     return result;
   };
+
+  //
+  // `query`
+  // Execute a query directly against which-polygon
+  // https://github.com/mapbox/which-polygon
+  //
+  // Arguments
+  //   `loc`: the [lon,lat] location to query,
+  //   `multi`: `true` to return all results, `false` to return first result
+  // Returns
+  //   Array of GeoJSON *properties* for the locationSet features that exist at `loc`
+  //
+  _this.query = (loc, multi) => _wp(loc, multi);
 
   // Direct access to the location-conflation resolver
   _this.loco = () => _loco;
