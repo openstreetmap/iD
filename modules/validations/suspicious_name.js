@@ -17,11 +17,10 @@ export function validationSuspiciousName() {
   // A concern here in switching to async data means that `_nsiFilters` will not
   // be available at first, so the data on early tiles may not have tags validated fully.
 
-  fileFetcher.get('nsi_filters')
-    .then(filters => {
+  fileFetcher.get('nsi_generics')
+    .then(data => {
       // known list of generic names (e.g. "bar")
-      _discardNameRegexes = filters.discardNames
-        .map(discardName => new RegExp(discardName, 'i'));
+      _discardNameRegexes = data.genericWords.map(pattern => new RegExp(pattern, 'i'));
     })
     .catch(() => { /* ignore */ });
 

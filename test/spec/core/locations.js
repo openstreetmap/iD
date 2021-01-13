@@ -1,5 +1,5 @@
 describe('iD.coreLocations', function() {
-    var locationManager, loco, wp;
+    var locationManager, loco;
 
     var colorado = {
       type: 'Feature',
@@ -27,7 +27,6 @@ describe('iD.coreLocations', function() {
         // make a new one each time, so we aren't accidently testing the "global" locationManager
         locationManager = iD.coreLocations();
         loco = locationManager.loco();
-        wp = locationManager.wp();
     });
 
 

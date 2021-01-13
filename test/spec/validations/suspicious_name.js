@@ -2,11 +2,11 @@ describe('iD.validations.suspicious_name', function () {
     var context;
 
     before(function() {
-        iD.fileFetcher.cache().nsi_filters = { discardNames: ['^stores?$'] };
+        iD.fileFetcher.cache().nsi_generics = { genericWords: ['^stores?$'] };
     });
 
     after(function() {
-        iD.fileFetcher.cache().nsi_filters = { discardNames: [] };
+        iD.fileFetcher.cache().nsi_generics = { genericWords: [] };
     });
 
     beforeEach(function() {
