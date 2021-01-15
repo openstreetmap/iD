@@ -232,7 +232,8 @@ export function validationOutdatedTags() {
           // If we get here, there was a match..
           // A match may contain multiple results, the first one is the best one for this location
           // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
-          const item = _nsi.ids.get(match[0]);
+          const itemID = match[0].itemID;
+          const item = _nsi.ids.get(itemID);
           const mainTag = item.mainTag;               // e.g. `brand:wikidata`
           const itemQID = item.tags[mainTag];         // e.g. `brand:wikidata` qid
           const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
