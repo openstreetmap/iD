@@ -20,7 +20,7 @@
       "cycleway": "crossing",
       "crossing": "unmarked",
       "foot": "designated",
-      "segregated": "segregated"
+      "segregated": "yes"
   },
   "reference": {
       "key": "cycleway",
