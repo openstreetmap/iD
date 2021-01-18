@@ -83,34 +83,43 @@ export function uiFieldLocalized(field, context) {
 
 
     function calcLocked() {
-
-        // only lock the Name field
-        var isLocked = field.id === 'name' &&
+        // Protect name field for suggestion presets that don't display a brand/operator field
+        var isLocked = (field.id === 'name') &&
             _entityIDs.length &&
-            // lock the field if any feature needs it
             _entityIDs.some(function(entityID) {
-
                 var entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
-                var original = context.graph().base().entities[_entityIDs[0]];
-                var hasOriginalName = original && entity.tags.name && entity.tags.name === original.tags.name;
-                // if the name was already edited manually then allow further editing
-                if (!hasOriginalName) return false;
+                // If the value was already edited manually then unlock and allow further editing
+                var base = context.graph().base().entities[_entityIDs[0]];
+                if (base) {
+                    var hasOriginalValue = entity.tags.name && entity.tags.name === base.tags.name;
+                    if (!hasOriginalValue) return false;
+                }
 
-                // features linked to Wikidata are likely important and should be protected
+                // Features linked to Wikidata are likely important and should be protected
                 if (entity.tags.wikidata) return true;
 
-                // assume the name has already been confirmed if its source has been researched
+                // Assume the name has already been confirmed if its source has been researched
                 if (entity.tags['name:etymology:wikidata']) return true;
 
+                // Lock the name if this is a suggestion preset that assigns the name
                 var preset = presetManager.match(entity, context.graph());
-                var isSuggestion = preset && preset.suggestion;
-                var showsBrand = preset && preset.originalFields.filter(function(d) {
-                    return d.id === 'brand';
-                }).length;
-                // protect standardized brand names
-                return isSuggestion && !showsBrand;
+                if (preset) {
+                    var isSuggestion = preset.suggestion;
+                    var showsBrandField = preset.originalFields.some(function(d) { return d.id === 'brand'; });
+                    var showsOperatorField = preset.originalFields.some(function(d) { return d.id === 'operator'; });
+                    var setsName = preset.addTags.name;
+                    var setsBrandWikidata = preset.addTags['brand:wikidata'];
+                    var setsOperatorWikidata = preset.addTags['operator:wikidata'];
+
+                    return isSuggestion && setsName && (
+                        (setsBrandWikidata && !showsBrandField) ||
+                        (setsOperatorWikidata && !showsOperatorField)
+                    );
+                }
+
+                return false;
             });
 
         field.locked(isLocked);

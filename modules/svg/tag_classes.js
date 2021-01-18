@@ -160,7 +160,15 @@ export function svgTagClasses() {
         }
 
         // If this is a wikidata-tagged item, add a class for that..
-        if (t.wikidata || t['brand:wikidata']) {
+        var qid = (
+            t.wikidata ||
+            t['flag:wikidata'] ||
+            t['brand:wikidata'] ||
+            t['network:wikidata'] ||
+            t['operator:wikidata']
+        );
+
+        if (qid) {
             classes.push('tag-wikidata');
         }
 

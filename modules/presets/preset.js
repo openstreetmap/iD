@@ -155,7 +155,13 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.reference = () => {
     // Lookup documentation on Wikidata...
-    const qid = _this.tags.wikidata || _this.tags['brand:wikidata'] || _this.tags['operator:wikidata'];
+    const qid = (
+      _this.tags.wikidata ||
+      _this.tags['flag:wikidata'] ||
+      _this.tags['brand:wikidata'] ||
+      _this.tags['network:wikidata'] ||
+      _this.tags['operator:wikidata']
+    );
     if (qid) {
       return { qid: qid };
     }
