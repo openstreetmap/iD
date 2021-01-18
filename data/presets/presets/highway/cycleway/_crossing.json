@@ -12,8 +12,7 @@
     ],
     "tags": {
         "cycleway": "crossing",
-        "foot": "designated",
-        "bicycle": "designated"
+        "foot": "designated"
     },
     "addTags": {
         "highway": "cycleway",

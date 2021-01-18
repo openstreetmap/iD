@@ -3,6 +3,7 @@
     "fields": [
         "crossing",
         "access",
+        "segregated",
         "surface",
         "tactile_paving",
         "crossing/island"
@@ -18,7 +19,8 @@
         "highway": "cycleway",
         "cycleway": "crossing",
         "crossing": "unmarked",
-        "foot": "designated"
+        "foot": "designated",
+        "segregated": "no"
     },
     "reference": {
         "key": "cycleway",

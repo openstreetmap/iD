@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags, osmSidewalkBoth, osmSidewalkShared, osmSidewalkSeparate, osmSidewalkSeparateRight, osmSidewalkSeparateLeft, osmSidewalkRight, osmSidewalkLeft, osmSidewalkNo, osmCyclewayTrack, osmCyclewayLane, osmCyclewayLaneNotOneway } from '../osm/tags';
+import { osmPavedTags } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -156,7 +156,7 @@ export function svgTagClasses() {
 
         // For highways, look for surface tagging..
         if (primary === 'highway' || primary === 'aeroway') {
-            var paved = (t.highway !== 'track');
+            //var paved = (t.highway !== 'track');
             var ignoreSidewalk = (
                t.highway === 'motorway'
             || t.highway === 'motorway_link'
@@ -172,14 +172,11 @@ export function svgTagClasses() {
             || t.highway === 'steps'
             || t.highway === 'path'
             || t.highway === 'corridor'
-            || t.highway === 'proposed'
-            || t.highway === 'construction'
             );
             var ignoreMaxSpeed = (
                t.highway === 'track'
             || t.highway === 'footway'
             || t.highway === 'cycleway'
-            || t.highway === 'service'
             || t.highway === 'pedestrian'
             || t.highway === 'escape'
             || t.highway === 'raceway'
@@ -187,301 +184,179 @@ export function svgTagClasses() {
             || t.highway === 'steps'
             || t.highway === 'path'
             || t.highway === 'corridor'
-            || t.highway === 'proposed'
-            || t.highway === 'construction'
             );
-            var _private = false;
-            var customers = false;
-            var destination = false;
-            var noMotorVehicle = false;
-            var sidewalk = 'blank';
-            var cycleway = 'blank';
-            var cyclewayType = 'none';
-            var sidewalkLeft = false;
-            var sidewalkRight = false;
-            var sidewalkSeparate = false;
-            var sidewalkBoth = false;
-            var cyclewayWithPedestrian = true;
-            var isCycleway = (t.highway === 'cycleway');
-            var sidewalkUseSidepath = false;
-            var sidewalkSeparateLeftRightOrBoth = false;
-            var cyclewayUseSidepath = false;
-            var cyclewayHasSegregatedTag = false;
-            var hasMaxSpeed = false;
-            var maxSpeed    = null;
-            var hasLanes = false;
-            var delivery = false;
-            var isSidewalk = false;
-            var isCrossing = false;
+
+            var sidewalk      = null;
+            var sidewalkLeft  = null;
+            var sidewalkRight = null;
+            var cycleway      = null;
+            var crossing      = null;
+            var segregated    = null;
+            var foot          = null;
+            var bicycle       = null;
+            var motor_vehicle = null;
+            var bus           = null;
+            var footway       = null;
+            var maxSpeed      = null;
+            var access        = null;
+
             var hasName = false;
-            var bicycleTag = null;
+            var hasLanes = false;
+            var isSidewalk = false;
+            var isCycleway = false;
+            var isCrossing = false;
 
             for (k in t) {
                 v = t[k];
-                if ((k === 'foot' || k === 'routing:foot') && v === 'use_sidepath')
-                {
-                    sidewalkUseSidepath = true;
+
+                if (k === 'access') {
+                    access = v;
+                    classes.push('tag-access-' + access);
                 }
-                if (k === 'footway' && v === 'sidewalk')
-                {
-                    isSidewalk = true;
+                if (k === 'foot' || k === 'routing:foot') {
+                    foot = v;
+                    classes.push('tag-foot-' + foot);
                 }
-                if (k === 'footway' && v === 'crossing')
-                {
+                if (k === 'bicycle' || k === 'routing:bicycle') {
+                    bicycle = v;
+                    classes.push('tag-bicycle-' + bicycle);
+                }
+                if (k === 'motor_vehicle' || k === 'routing:motor_vehicle') {
+                    motor_vehicle = v;
+                    classes.push('tag-motor_vehicle-' + motor_vehicle);
+                }
+                if (k === 'bus' || k === 'routing:bus') {
+                    bus = v;
+                    classes.push('tag-bus-' + bus);
+                }
+                if (k === 'cycleway') {
+                    cycleway = v;
+                    isCycleway = true;
+                    classes.push('tag-cycleway-' + cycleway);
+                }
+                if (k === 'cycleway:left') {
+                    cycleway = v;
+                    classes.push('tag-cycleway_left-' + cycleway);
+                }
+                if (k === 'cycleway:right') {
+                    cycleway = v;
+                    classes.push('tag-cycleway_right-' + cycleway);
+                }
+                if (k === 'cycleway:both') {
+                    cycleway = v;
+                    classes.push('tag-cycleway_both-' + cycleway);
+                }
+                if (k === 'crossing') {
+                    crossing = v;
                     isCrossing = true;
+                    classes.push('tag-crossing-' + crossing);
                 }
-                if (k === 'name' && v !== '' && v !== undefined && v !== null)
-                {
+                if (k === 'segregated') {
+                    segregated = v;
+                    classes.push('tag-segregated-' + segregated);
+                }
+                if (k === 'footway') {
+                    footway = v;
+                    isSidewalk = true;
+                    classes.push('tag-footway-' + footway);
+                }
+                if (!ignoreSidewalk && k === 'sidewalk') {
+                    sidewalk = v;
+                    classes.push('tag-sidewalk-' + sidewalk);
+                }
+                if (!ignoreSidewalk && k === 'sidewalk:left') {
+                    sidewalkLeft = v;
+                    classes.push('tag-sidewalk_left-' + sidewalkLeft);
+                }
+                if (!ignoreSidewalk && k === 'sidewalk:right') {
+                    sidewalkRight = v;
+                    classes.push('tag-sidewalk_right-' + sidewalkRight);
+                }
+                if (k === 'lcn') {
+                    classes.push('tag-lcn' + v);
+                }
+                /*if ((k === 'footway' || k === 'cycleway') && v === 'crossing') {
+                    isCrossing = true;
+                }*/
+                if (k === 'name' && v !== '' && v !== undefined && v !== null) {
                     hasName = true;
+                    classes.push('tag-name-yes');
                 }
-                
-                if ((k === 'bicycle' || k === 'routing:bicycle') && v === 'use_sidepath')
-                {
-                    cyclewayUseSidepath = true;
-                }
-                if (k === 'bicycle')
-                {
-                    bicycleTag = v;
-                }
-                if (t.highway === 'cycleway' && k === 'segregated')
-                {
-                    if (v === 'no')
-                    {
-                        classes.push('tag-cycleway-segregated-no');
-                    }
-                    else if (v === 'yes')
-                    {
-                        classes.push('tag-cycleway-segregated-yes');
-                    }
-                    else
-                    {
-                        classes.push('tag-cycleway-segregated-undefined');
-                    }
-                    cyclewayHasSegregatedTag = true;
-                }
-                
-                if (k === 'maxspeed' && v >= 10 && v <= 100)
-                {
-                    hasMaxSpeed = true;
+                if (!ignoreMaxSpeed && k === 'maxspeed' && v >= 10 && v <= 130) {
                     maxSpeed = v;
                 }
-                if (k === 'lanes' && v >= 1 && v <= 10)
-                {
+                if (k === 'lanes' && v >= 1 && v <= 8) {
+                    lanes = v;
                     hasLanes = true;
                 }
-                if (isCycleway && k === 'foot' && v === 'no')
-                {
-                    cyclewayWithPedestrian = false;
+                if (k === 'turn:lanes' || k === 'turn:lanes:forward' || k === 'turn:lanes:backward' || k === 'turn:lanes:both_ways') {
+                    classes.push('tag-turn_lanes-yes');
                 }
+                /* unpaved */
                 if (k in osmPavedTags) {
-                    paved = !!osmPavedTags[k][v];
-                    //break;
-                }
-                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'private') {
-                    _private = true;
-                }
-                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'customers') {
-                    customers = true;
-                }
-                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'destination') {
-                    destination = true;
-                }
-                if ((k === 'routing:bicycle' || k === 'routing:foot' || k === 'routing:motor_vehicle' || k === 'access:routing') && v === 'destination') {
-                    destination = true;
-                }
-                if ((k === 'bicycle' || k === 'foot' || k === 'motor_vehicle' || k === 'access') && v === 'delivery') {
-                    delivery = true;
-                }
-                if (k === 'motor_vehicle' && v === 'no') {
-                    noMotorVehicle = true;
-                }
-                if (k === 'cycleway:right' && v === 'lane') {
-                    cyclewayType = 'cycleway-right-lane';
-                }
-                if (k === 'cycleway:left' && v === 'lane') {
-                    cyclewayType = 'cycleway-left-lane';
-                }
-                if (k in osmCyclewayTrack && !!osmCyclewayTrack[k][v]) {
-                    cycleway = 'track';
-                }
-                if (k in osmCyclewayLane && !!osmCyclewayLane[k][v]) {
-                    cycleway = 'lane';
-                }
-                if (k in osmCyclewayLaneNotOneway && !!osmCyclewayLaneNotOneway[k][v]) {
-                    cycleway = 'not_one_way';
-                }
-                if (k in osmSidewalkBoth && !!osmSidewalkBoth[k][v]) {
-                    sidewalk = 'both';
-                }
-                if (k in osmSidewalkNo && !!osmSidewalkNo[k][v]) {
-                    sidewalk = 'no';
-                }
-                if (k in osmSidewalkShared && !!osmSidewalkShared[k][v]) {
-                    sidewalk = 'shared';
-                }
-                if (k in osmSidewalkSeparate && !!osmSidewalkSeparate[k][v]) {
-                    sidewalkSeparate = true;
-                }
-                if (k in osmSidewalkRight && !!osmSidewalkRight[k][v]) {
-                    sidewalkRight;
-                }
-                if (k in osmSidewalkLeft && !!osmSidewalkLeft[k][v]) {
-                    sidewalkLeft;
-                }
-                if (k in osmSidewalkSeparateLeft && !!osmSidewalkSeparateLeft[k][v]) {
-                    sidewalkSeparate = true;
-                    sidewalkLeft = true;
-                }
-                if (k in osmSidewalkSeparateRight && !!osmSidewalkSeparateRight[k][v]) {
-                    sidewalkSeparate = true;
-                    sidewalkRight = true;
+                    var isPaved = !!osmPavedTags[k][v];
+                    if (!isPaved) {
+                        classes.push('tag-unpaved');
+                    }
                 }
                 
             }
-            if (!paved) {
-                classes.push('tag-unpaved');
+
+
+
+            /* undefined and reverses */
+            if (t.highway === 'cycleway' && !segregated) {
+                classes.push('tag-segregated-undefined');
             }
-            if (_private) {
-                classes.push('tag-private');
-            }
-            if (customers) {
-                classes.push('tag-customers');
-            }
-            if (noMotorVehicle) {
-                classes.push('tag-no-motor_vehicle');
-            }
-            if (delivery) {
-                classes.push('tag-delivery');
-            }
-            if (destination) {
-                classes.push('tag-destination');
-            }
-            if (sidewalk === 'shared') {
-                classes.push('tag-sidewalk-shared');
-            }
-            if (sidewalkSeparate) {
-                sidewalk = 'separate';
-                classes.push('tag-sidewalk-separate');
-            }
-            if (sidewalkLeft && sidewalkRight)
-            {
-                sidewalkBoth = true;
-                sidewalkSeparateLeftRightOrBoth = sidewalkSeparate;
-                classes.push('tag-sidewalk-both');
-            }
-            if (!sidewalkBoth && sidewalkLeft)
-            {
-                classes.push('tag-sidewalk-left');
-            }
-            if (!sidewalkBoth && sidewalkRight)
-            {
-                classes.push('tag-sidewalk-right');
-            }
-            if (!sidewalkBoth && (sidewalkLeft || sidewalkRight))
-            {
-                sidewalkSeparateLeftRightOrBoth = sidewalkSeparate;
-                classes.push('tag-sidewalk-oneside');
-            }
-            if (sidewalkBoth)
-            {
-                classes.push('tag-sidewalk-both');
-            }
-            if (!ignoreSidewalk && sidewalk === 'blank' && !sidewalkBoth && !sidewalkLeft && !sidewalkRight)
-            {
-                classes.push('tag-sidewalk-missing');
+            if (!hasName && (isSidewalk || isCycleway || isCrossing)) {
+                classes.push('tag-name-no');
             }
 
-            if (sidewalkSeparate && !sidewalkSeparateLeftRightOrBoth)
-            {
-                classes.push('tag-sidewalk-missing_separate_specify');
-            }
+            /* maxspeeds */
+            if (!ignoreMaxSpeed) {
+                if (maxSpeed) {
+                    var maxSpeedRoundedToNearest10 = Math.round(maxSpeed / 10) * 10;
+                    if (maxSpeedRoundedToNearest10 > 60) {
+                        classes.push('tag-maxspeed-more_than_60');
+                    }
+                    classes.push('tag-maxspeed-' + maxSpeedRoundedToNearest10);
+                } else if (t.highway !== 'service') {
+                    classes.push('tag-maxspeed-undefined');
+                }
+                if (!hasLanes && t.highway !== 'service') {
+                    classes.push('tag-lanes-undefined');
+                }
+                if (foot !== 'use_sidepath') {
+                    classes.push('tag-foot-not-use_sidepath');
+                }
 
-            if (sidewalkUseSidepath)
-            {
-                classes.push('tag-sidewalk-use_sidepath');
             }
-            if (cyclewayUseSidepath)
-            {
-                classes.push('tag-cycleway-use_sidepath');
-            }
-
-            if (sidewalk !== 'blank') {
-                classes.push('tag-sidewalk-' + sidewalk);
-                if (sidewalkUseSidepath)
+           
+            /* separate sidewalks check */
+            if (!ignoreSidewalk && (!sidewalk || (sidewalk === 'separate' && (sidewalkRight !== 'separate' || sidewalkLeft !== 'separate')))) {
+                if (!sidewalk) {
+                    classes.push('tag-sidewalk-undefined');
+                }
+                else if (sidewalk === 'separate' && sidewalkRight === 'separate' && (sidewalkLeft === 'no' || sidewalkLeft === 'none'))
                 {
-                    classes.push('tag-sidewalk-use_sidepath');
+                    classes.push('tag-sidewalk-separate-right');
                 }
-                if (cyclewayUseSidepath)
+                else if (sidewalk === 'separate' && sidewalkLeft === 'separate' && (sidewalkRight === 'no' || sidewalkRight === 'none'))
                 {
-                    classes.push('tag-cycleway-use_sidepath');
+                    classes.push('tag-sidewalk-separate-left');
                 }
-            }
-            if (cycleway !== 'blank') {
-                classes.push('tag-cycleway-' + cycleway);
-                if (cyclewayHasSegregatedTag === false && cyclewayWithPedestrian)
+                else if (sidewalk === 'separate' && sidewalkRight === 'shared' && (sidewalkLeft === 'no' || sidewalkLeft === 'none'))
                 {
-                    classes.push('tag-cycleway-segregated-undefined');
+                    classes.push('tag-sidewalk-shared-right');
                 }
-            }
-            if (cyclewayType !== 'none') {
-                classes.push('tag-' + cyclewayType);
-            }
-            
-            if (isCycleway && !cyclewayWithPedestrian)
-            {
-                classes.push('tag-cycleway-no_pedestrian');
-            }
-            if (!ignoreMaxSpeed && !hasMaxSpeed) {
-                classes.push('tag-maxspeed-missing');
-            }
-            if (!ignoreMaxSpeed && !hasLanes) {
-                classes.push('tag-lanes-missing');
-            }
-            if (isSidewalk)
-            {
-                if (!hasName)
+                else if (sidewalk === 'separate' && sidewalkLeft === 'shared' && (sidewalkRight === 'no' || sidewalkRight === 'none'))
                 {
-                    classes.push('tag-footway-sidewalk-no-name');
+                    classes.push('tag-sidewalk-shared-left');
                 }
-                if (bicycleTag === 'yes') {
-                    classes.push('tag-footway-sidewalk-bicycle-yes');
-                }
-                else if (bicycleTag === 'no') {
-                    classes.push('tag-footway-sidewalk-bicycle-no');
-                }
-                else if (bicycleTag === 'dismount') {
-                    classes.push('tag-footway-sidewalk-bicycle-dismount');
-                }
-                else
+                else if (sidewalk === 'separate' && sidewalkLeft === 'separate' && sidewalkRight === 'separate')
                 {
-                    classes.push('tag-footway-sidewalk-bicycle-undefined');
+                    classes.push('tag-sidewalk-separate-both');
                 }
-            }
-
-            if (isCrossing)
-            {
-                if (!hasName)
-                {
-                    classes.push('tag-footway-crossing-no-name');
-                }
-                if (bicycleTag === 'yes') {
-                    classes.push('tag-footway-crossing-bicycle-yes');
-                }
-                else if (bicycleTag === 'no') {
-                    classes.push('tag-footway-crossing-bicycle-no');
-                }
-                else if (bicycleTag === 'dismount') {
-                    classes.push('tag-footway-crossing-bicycle-dismount');
-                }
-                else
-                {
-                    classes.push('tag-footway-crossing-bicycle-undefined');
-                }
-            }
-
-            if (maxSpeed) {
-                var maxSpeedRoundedToNearest10 = Math.round(maxSpeed / 10) * 10;
-                classes.push('tag-maxspeed-' + maxSpeedRoundedToNearest10);
             }
 
         }

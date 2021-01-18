@@ -1,0 +1,40 @@
+{
+  "notCountryCodes": [
+      "fr", "lt", "pl"
+  ],
+  "icon": "temaki-pedestrian_and_cyclist",
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "cycleway",
+      "foot": "designated"
+  },
+  "addTags": {
+      "highway": "cycleway",
+      "foot": "designated",
+      "segregated": "yes"
+  },
+  "terms": [
+      "bicycle and foot path",
+      "bike and pedestrian path",
+      "green way",
+      "greenway",
+      "mixed-use trail",
+      "multi-use trail",
+      "segregated trail",
+      "rail trail"
+  ],
+  "fields": [
+      "name",
+      "segregated",
+      "oneway",
+      "surface",
+      "width",
+      "structure",
+      "access",
+      "incline"
+  ],
+  "matchScore": 0.9,
+  "name": "Segregated Cycle & Foot Path"
+}

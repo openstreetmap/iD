@@ -1,0 +1,37 @@
+{
+  "icon": "fas-biking",
+  "fields": [
+      "crossing",
+      "access",
+      "segregated",
+      "surface",
+      "tactile_paving",
+      "crossing/island"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "cycleway": "crossing",
+      "crossing": "unmarked"
+  },
+  "addTags": {
+      "highway": "cycleway",
+      "cycleway": "crossing",
+      "crossing": "unmarked",
+      "foot": "designated",
+      "segregated": "segregated"
+  },
+  "reference": {
+      "key": "cycleway",
+      "value": "crossing"
+  },
+  "terms": [
+      "cycle path crossing",
+      "cycleway crossing",
+      "bicycle crossing",
+      "bike crossing"
+  ],
+  "matchScore": 0.95,
+  "name": "Segregated Unmarked Cycle Crossing"
+}
