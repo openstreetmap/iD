@@ -68,6 +68,8 @@ export function coreLocations() {
       }
       const resolved = _loco.resolveLocationSet(locationSet);
       const locationSetID = resolved.id;
+      obj.locationSetID = locationSetID;
+
       if (!resolved.feature.geometry.coordinates.length || !resolved.feature.properties.area) {
         throw new Error(`locationSet ${locationSetID} resolves to an empty feature.`);
       }
