@@ -118,6 +118,9 @@ export function presetCollection(collection) {
     const leadingTerms = searchable
       .filter(a => (a.terms() || []).some(leading));
 
+    const leadingSuggestionTerms = suggestions
+      .filter(a => (a.terms() || []).some(leading));
+
     // matches value to preset.tags values
     const leadingTagValues = searchable
       .filter(a => Object.values(a.tags || {}).filter(val => val !== '*').some(leading));
@@ -149,6 +152,7 @@ export function presetCollection(collection) {
       leadingNamesStripped,
       leadingSuggestionsStripped,
       leadingTerms,
+      leadingSuggestionTerms,
       leadingTagValues,
       similarName,
       similarSuggestions,
