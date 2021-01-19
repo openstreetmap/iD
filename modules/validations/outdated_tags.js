@@ -114,7 +114,7 @@ export function validationOutdatedTags() {
       // There are a few exceptions to the namelike regexes.
       // Usually a tag suffix contains a language code like `name:en`, `name:ru`
       // but we want to exclude things like `operator:type`, `name:etymology`, etc..
-      if (/:(colour|type|left|right|etymology|wikipedia)$/.test(k)) return false;
+      if (/:(colour|type|left|right|etymology|pronunciation|wikipedia)$/.test(k)) return false;
 
       return true;
     });
