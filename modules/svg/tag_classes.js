@@ -172,6 +172,8 @@ export function svgTagClasses() {
             || t.highway === 'steps'
             || t.highway === 'path'
             || t.highway === 'corridor'
+            || t.highway === 'construction'
+            || t.highway === 'proposed'
             );
             var ignoreMaxSpeed = (
                t.highway === 'track'
@@ -184,6 +186,8 @@ export function svgTagClasses() {
             || t.highway === 'steps'
             || t.highway === 'path'
             || t.highway === 'corridor'
+            || t.highway === 'construction'
+            || t.highway === 'proposed'
             );
 
             var sidewalk      = null;

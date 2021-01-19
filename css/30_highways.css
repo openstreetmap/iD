@@ -173,6 +173,37 @@ path.line.stroke.tag-highway-track {
 }
 
 
+/* construction */
+.preset-icon .icon.tag-highway-construction {
+    color: #ff3300;
+    fill: #fff;
+}
+
+path.line.stroke.tag-highway-construction {
+    stroke: #ffff;
+}
+path.line.casing.tag-highway-construction {
+    stroke: #ff3300;
+    stroke-linecap: butt;
+    stroke-dasharray: 10, 10;
+}
+
+/* proposed */
+.preset-icon .icon.tag-highway-proposed {
+  color: #707070;
+  fill: #fff;
+}
+
+path.line.stroke.tag-highway-proposed {
+  stroke: none;
+}
+path.line.casing.tag-highway-proposed {
+  stroke: #707070;
+  stroke-linecap: butt;
+  stroke-dasharray: 10, 10;
+}
+
+
 
 /* motorways */
 .preset-icon .icon.tag-highway-motorway,
@@ -551,20 +582,36 @@ path.line.stroke.tag-highway-cycleway.tag-foot-designated, path.line.stroke.tag-
 path.line.casing.tag-highway-footway, 
 path.line.casing.tag-highway-footway.tag-unpaved {
   stroke: rgb(141, 101, 40);
-  stroke-linecap: butt;
-  stroke-dasharray: none;
 }
 path.line.stroke.tag-highway-footway, 
 path.line.stroke.tag-highway-footway.tag-unpaved {
   stroke:rgb(255, 241, 202);
+  stroke-linecap: butt;
+  stroke-dasharray: 6, 6;
 }
 
 /* access aisles */
 path.line.casing.tag-highway-footway.tag-footway-access_aisle, 
 path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved {
-  stroke: rgb(141, 101, 40);
-  stroke-linecap: butt;
-  stroke-dasharray: 4 4;
+  stroke: rgb(83, 77, 65);
+}
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-access-customers, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved.tag-access-customers,
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-foot-customers, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved.tag-foot-customers {
+  stroke: rgb(148, 86, 34) !important;
+}
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-access-private, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved.tag-access-private,
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-foot-private, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved.tag-foot-private {
+  stroke: rgb(134, 36, 36) !important;
+}
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-access-permissive, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved.tag-access-permissive,
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-foot-permissive, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved.tag-foot-permissive {
+  stroke: rgb(134, 64, 36) !important;
 }
 path.line.stroke.tag-highway-footway.tag-footway-access_aisle, 
 path.line.stroke.tag-highway-footway.tag-footway-access_aisle.tag-unpaved {
