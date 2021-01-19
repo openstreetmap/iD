@@ -250,8 +250,8 @@ export function validationOutdatedTags() {
           // We are keeping the match at this point
           subtype = 'noncanonical_brand';
 
-          // Preserve some tags values that we don't want NSI to overwrite.
-          const keepTags = ['takeaway', 'building']
+          // Preserve some tag values that we don't want NSI to overwrite.
+          const keepTags = ['building', 'flag:name', 'takeaway']
             .reduce((acc, k) => {
               if (newTags[k]) acc[k] = newTags[k];
               return acc;
