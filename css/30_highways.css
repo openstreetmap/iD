@@ -559,6 +559,21 @@ path.line.stroke.tag-highway-footway.tag-unpaved {
   stroke:rgb(255, 241, 202);
 }
 
+/* access aisles */
+path.line.casing.tag-highway-footway.tag-footway-access_aisle, 
+path.line.casing.tag-highway-footway.tag-footway-access_aisle.tag-unpaved {
+  stroke: rgb(141, 101, 40);
+  stroke-linecap: butt;
+  stroke-dasharray: 4 4;
+}
+path.line.stroke.tag-highway-footway.tag-footway-access_aisle, 
+path.line.stroke.tag-highway-footway.tag-footway-access_aisle.tag-unpaved {
+  stroke:rgb(255, 241, 202);
+  stroke-linecap: butt;
+  stroke-dasharray: 4 4;
+}
+
+
 /* sidewalks */
 path.line.casing.tag-highway-footway.tag-footway-sidewalk, 
 path.line.casing.tag-highway-footway.tag-footway-sidewalk.tag-unpaved {
