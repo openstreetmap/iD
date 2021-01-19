@@ -153,7 +153,7 @@ export function coreLocations() {
   //   …
   //  ]
   //
-  //  Returns a Promise fullfilled when the resolving/indexing has been completed
+  //  Returns a Promise fulfilled when the resolving/indexing has been completed
   //  This will take some seconds but happen in the background during browser idle time.
   //
   _this.mergeLocationSets = (objects) => {

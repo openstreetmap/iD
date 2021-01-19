@@ -24,7 +24,7 @@ describe('iD.coreLocations', function() {
 
 
     beforeEach(function() {
-        // make a new one each time, so we aren't accidently testing the "global" locationManager
+        // make a new one each time, so we aren't accidentally testing the "global" locationManager
         locationManager = iD.coreLocations();
         loco = locationManager.loco();
     });

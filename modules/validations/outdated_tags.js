@@ -33,7 +33,7 @@ export function validationOutdatedTags() {
     });
   }
 
-  // This Promise will fullfill after NSI presets are loaded and locations merged into the locationManager.
+  // This Promise will fulfill after NSI presets are loaded and locations merged into the locationManager.
   function waitForNSIPresets() {
     return Promise.all([
       fileFetcher.get('nsi_presets'),
