@@ -8,11 +8,14 @@
     ],
     "tags": {
         "highway": "cycleway",
-        "foot": "designated"
+        "foot": "designated",
+        "bicycle": "designated",
+        "segregated": "no"
     },
     "addTags": {
         "highway": "cycleway",
         "foot": "designated",
+        "bicycle": "designated",
         "segregated": "no"
     },
     "terms": [
@@ -36,6 +39,6 @@
         "incline"
     ],
     "matchScore": 0.9,
-    "name": "Cycle & Foot Path",
+    "name": "Cycle & Foot Path (not segregated)",
     "shortcut": ["c"]
 }

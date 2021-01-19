@@ -20,6 +20,7 @@
       "cycleway": "crossing",
       "crossing": "marked",
       "foot": "designated",
+      "bicycle": "designated",
       "segregated": "yes"
   },
   "reference": {
@@ -33,6 +34,6 @@
       "bicycle crossing",
       "bike crossing"
   ],
-  "matchScore": 0.95,
-  "name": "Segregated Marked Cycle Crossing"
+  "matchScore": 0.85,
+  "name": "Marked Cycle & Foot Crossing (segregated)"
 }

@@ -33,8 +33,7 @@
   "tags": {
       "highway": "footway",
       "access": "private",
-      "motor_vehicle": "no",
-      "bicycle": "private"
+      "motor_vehicle": "no"
   },
   "matchScore": 0.9,
   "name": "Private Foot Path",

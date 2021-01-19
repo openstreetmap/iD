@@ -19,6 +19,7 @@
         "highway": "cycleway",
         "cycleway": "crossing",
         "crossing": "unmarked",
+        "bicycle": "designated",
         "foot": "designated",
         "segregated": "no"
     },
@@ -33,6 +34,6 @@
         "bike crossing"
     ],
     "matchScore": 0.95,
-    "name": "Unmarked Cycle Crossing",
+    "name": "Unmarked Cycle & Foot Crossing (not segregated)",
     "shortcut": ["⌥+c"]
 }

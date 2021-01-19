@@ -31,6 +31,6 @@
       "bicycle crossing",
       "bike crossing"
   ],
-  "matchScore": 0.95,
-  "name": "No foot Unmarked Cycle Crossing"
+  "matchScore": 0.80,
+  "name": "Unmarked Cycle Crossing (no foot)"
 }

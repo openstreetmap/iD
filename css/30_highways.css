@@ -831,8 +831,17 @@ path.over-stroke.tag-crossing.tag-crossing-unmarked.tag-highway-cycleway.tag-nam
   stroke-width: 1 !important;
   stroke-dasharray: 6, 6 !important;
   stroke:  rgb(255, 81, 0) !important;
+  stroke-linecap: butt !important;
 }
 
+
+/* turn lanes */
+path.over-stroke.tag-turn_lanes-yes {
+  stroke-width: 2 !important;
+  stroke-dasharray: none;
+  stroke:  rgb(110, 65, 168) !important;
+  stroke-linecap: butt !important;
+}
 
 /* errors */
 path.casing.tag-highway-cycleway.tag-segregated-undefined.tag-foot-designated, 

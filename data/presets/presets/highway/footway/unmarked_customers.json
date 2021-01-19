@@ -1,0 +1,36 @@
+{
+    "icon": "temaki-pedestrian",
+    "fields": [
+        "crossing",
+        "access",
+        "surface",
+        "tactile_paving",
+        "crossing/island"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "footway": "crossing",
+        "crossing": "unmarked"
+    },
+    "addTags": {
+        "highway": "footway",
+        "footway": "crossing",
+        "crossing": "unmarked",
+        "access": "customers",
+        "motor_vehicle": "no"
+    },
+    "reference": {
+        "key": "footway",
+        "value": "crossing"
+    },
+    "terms": [
+        "unmarked foot path crossing",
+        "unmarked crossing",
+        "unmarked pedestrian crosswalk",
+        "zebra crossing"
+    ],
+    "name": "Unmarked Customers Crosswalk",
+    "shortcut": ["⌥+u"]
+}

@@ -41,8 +41,7 @@
       "highway": "path",
       "informal": "yes",
       "access": "customers",
-      "motor_vehicle": "no",
-      "bicycle": "customers"
+      "motor_vehicle": "no"
   },
   "name": "Customers InformalPath"
 }
