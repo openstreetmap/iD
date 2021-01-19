@@ -748,14 +748,7 @@ path.over-stroke.tag-cycleway_right-shared_lane {
   /*stroke-dasharray: 8, 4;*/
   stroke:  rgb(0, 174, 255);
 }
-path.over-stroke.tag-cycleway-track,
-path.over-stroke.tag-cycleway_left-track,
-path.over-stroke.tag-cycleway_right-track,
-path.over-stroke.tag-cycleway_both-track {
-  stroke-width: 1 !important;
-  /*stroke-dasharray: 8, 4;*/
-  stroke:  rgb(255, 0, 0);
-}
+
 
 /* foot/bicycle shared */
 path.over-stroke.tag-sidewalk-shared,
@@ -819,7 +812,7 @@ path.over-stroke.tag-cycleway-track,
 path.over-stroke.tag-cycleway_left-track,
 path.over-stroke.tag-cycleway_right-track,
 path.over-stroke.tag-cycleway_both-track {
-  stroke-width: 2 !important;
+  stroke-width: 1 !important;
   /*stroke-dasharray: 8, 4;*/
-  stroke:  rgb(255, 0, 0);
+  stroke:  rgb(255, 0, 0) !important;
 }
