@@ -90,33 +90,30 @@ export function uiFieldLocalized(field, context) {
                 var entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
-                // If the value was already edited manually then unlock and allow further editing
-                var base = context.graph().base().entities[_entityIDs[0]];
-                if (base) {
-                    var hasOriginalValue = entity.tags.name && entity.tags.name === base.tags.name;
-                    if (!hasOriginalValue) return false;
-                }
-
                 // Features linked to Wikidata are likely important and should be protected
                 if (entity.tags.wikidata) return true;
 
                 // Assume the name has already been confirmed if its source has been researched
                 if (entity.tags['name:etymology:wikidata']) return true;
 
-                // Lock the name if this is a suggestion preset that assigns the name
+                // Lock the `name` if this is a suggestion preset that assigns the name,
+                // and the preset does not display a `brand` or `operator` field.
+                // (For presets like hotels, car dealerships, post offices, the `name` should remain editable)
+                // see also similar logic in `outdated_tags.js`
                 var preset = presetManager.match(entity, context.graph());
                 if (preset) {
                     var isSuggestion = preset.suggestion;
-                    var showsBrandField = preset.originalFields.some(function(d) { return d.id === 'brand'; });
-                    var showsOperatorField = preset.originalFields.some(function(d) { return d.id === 'operator'; });
+                    var fields = preset.fields();
+                    var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
+                    var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
                     var setsName = preset.addTags.name;
                     var setsBrandWikidata = preset.addTags['brand:wikidata'];
                     var setsOperatorWikidata = preset.addTags['operator:wikidata'];
 
-                    return isSuggestion && setsName && (
+                    return (isSuggestion && setsName && (
                         (setsBrandWikidata && !showsBrandField) ||
                         (setsOperatorWikidata && !showsOperatorField)
-                    );
+                    ));
                 }
 
                 return false;

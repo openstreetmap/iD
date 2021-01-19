@@ -99,25 +99,23 @@ export function validationOutdatedTags() {
 
 
   // Returns true if this tag key is a "namelike" tag that the NSI matcher would have indexed..
-  function isNamelike(k) {
-    const namePatterns = [
-      /^(flag:)?name$/i,                                             // e.g. `name`, `flag:name`
-      /^(brand|country|flag|operator|network|subject)$/i,
-      /^\w+_name$/i,                                                 // e.g. `alt_name`, `short_name`
-      /^(name|brand|country|flag|operator|network|subject):\w+$/i,   // e.g. `name:en`, `name:ru`
-      /^\w+_name:\w+$/i                                              // e.g. `alt_name:en`, `short_name:ru`
-    ];
+  function isNamelike(osmkey, which) {
+    // There are a few exceptions to the namelike regexes.
+    // Usually a tag suffix contains a language code like `name:en`, `name:ru`
+    // but we want to exclude things like `operator:type`, `name:etymology`, etc..
+    const notNames = /:(colour|type|left|right|etymology|pronunciation|wikipedia)$/i;
 
-    return namePatterns.some(pattern => {
-      if (!pattern.test(k)) return false;    // k is not a name tag, skip
+    let namePatterns;
+    if (which === 'primary') {
+      namePatterns = [ /^(flag:)?name(:\w+)?$/i ];                   // `name`, `flag:name` (poss. w/ `:lang` suffix)
+    } else {
+      namePatterns = [
+        /^(brand|country|flag|operator|network|subject)(:\w+)?$/i,   // `brand`, `operator` (poss. w/ `:lang` suffix)
+        /^\w+_name(:\w+)?$/i,                                        // `alt_name`, `short_name` (poss. w/ `:lang` suffix)
+      ];
+    }
 
-      // There are a few exceptions to the namelike regexes.
-      // Usually a tag suffix contains a language code like `name:en`, `name:ru`
-      // but we want to exclude things like `operator:type`, `name:etymology`, etc..
-      if (/:(colour|type|left|right|etymology|pronunciation|wikipedia)$/.test(k)) return false;
-
-      return true;
-    });
+    return namePatterns.some(regex => regex.test(osmkey) && !notNames.test(osmkey));
   }
 
 
@@ -216,12 +214,16 @@ export function validationOutdatedTags() {
           loc = entity.extent(graph).center();
         }
         if (!names) {   // collect names for this feature only once
-          names = Object.keys(newTags)
-            .map(k => isNamelike(k) ? newTags[k] : null)
-            .filter(Boolean);
+          names = [];
+          let osmkeys = Object.keys(newTags);
+          for (let j = 0; j < osmkeys.length; j++) {
+            const k = osmkeys[j];
+            if (isNamelike(k, 'primary'))    names.unshift(newTags[k]);  // primary names first
+            if (isNamelike(k, 'alternate'))  names.push(newTags[k]);     // alternate names last
+          }
+          if (foundQID) names.push(foundQID);  // matcher will recognize the QID as an alternate name too
 
-          if (foundQID) names.unshift(foundQID);  // matcher will recognize the QID as a name too
-          names = utilArrayUniq(names);
+          names = utilArrayUniq(names).filter(Boolean);
         }
 
         // Try each namelike value
@@ -250,12 +252,36 @@ export function validationOutdatedTags() {
           // We are keeping the match at this point
           subtype = 'noncanonical_brand';
 
+          // Keys that we don't want NSI to overwrite.
+          let keepKeys = [/^building$/i, /^flag:name$/i, /^takeaway$/i];
+
+          // Don't overwrite a `name` tag if this preset shows a `brand` or `operator` field.
+          // (For presets like hotels, car dealerships, post offices, the `name` should be left alone)
+          // see also similar logic in `localized.js`
+          const nsiPreset = presetManager.matchTags(item.tags, 'point');  // (the actual geometry doesn't matter)
+          if (nsiPreset) {
+            const fields = nsiPreset.fields();
+            const showsBrandField = fields.some(d => d.id === 'brand');
+            const showsOperatorField = fields.some(d => d.id === 'operator');
+            const setsName = item.tags.name;
+            const setsBrandWikidata = item.tags['brand:wikidata'];
+            const setsOperatorWikidata = item.tags['operator:wikidata'];
+
+            if (setsName && (
+              (setsBrandWikidata && showsBrandField) ||
+              (setsOperatorWikidata && showsOperatorField)
+            )) {
+              keepKeys.push(/^name(:\w+)?$/i);   // `name`, `name:en`, etc
+            }
+          }
+
           // Preserve some tag values that we don't want NSI to overwrite.
-          const keepTags = ['building', 'flag:name', 'takeaway']
-            .reduce((acc, k) => {
-              if (newTags[k]) acc[k] = newTags[k];
-              return acc;
-            }, {});
+          let keepTags = {};
+          Object.keys(newTags).forEach(k => {
+            if (keepKeys.some(pattern => pattern.test(k))) {
+              keepTags[k] = newTags[k];
+            }
+          });
 
           // Replace the primary tags with what's in NSI ("amenity", "craft", "shop", "man_made", "route", etc)
           nsiKeys.forEach(k => delete newTags[k]);

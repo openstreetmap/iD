@@ -43,15 +43,6 @@ export function uiFieldText(field, context) {
                 var entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
-                var which = field.id;   // 'brand', 'network', 'operator', 'flag'
-
-                // If the value was already edited manually then unlock and allow further editing
-                var base = context.graph().base().entities[_entityIDs[0]];
-                if (base) {
-                    var hasOriginalValue = entity.tags[which] && entity.tags[which] === base.tags[which];
-                    if (!hasOriginalValue) return false;
-                }
-
                 // Features linked to Wikidata are likely important and should be protected
                 if (entity.tags.wikidata) return true;
 
@@ -59,6 +50,7 @@ export function uiFieldText(field, context) {
                 var isSuggestion = preset && preset.suggestion;
 
                 // Lock the field if there is a value and a companion `*:wikidata` value
+                var which = field.id;   // 'brand', 'network', 'operator', 'flag'
                 return isSuggestion && !!entity.tags[which] && !!entity.tags[which + ':wikidata'];
             });
 
