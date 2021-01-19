@@ -11,10 +11,6 @@
         "line"
     ],
     "tags": {
-        "footway": "crossing",
-        "crossing": "unmarked"
-    },
-    "addTags": {
         "highway": "footway",
         "footway": "crossing",
         "crossing": "unmarked",

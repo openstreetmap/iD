@@ -11,10 +11,6 @@
         "line"
     ],
     "tags": {
-        "footway": "crossing",
-        "crossing": "unmarked"
-    },
-    "addTags": {
         "highway": "footway",
         "footway": "crossing",
         "crossing": "unmarked",
@@ -23,7 +19,7 @@
     },
     "reference": {
         "key": "footway",
-        "value": "crossing"
+        "value": "unmarked_customer_crossing"
     },
     "terms": [
         "unmarked foot path crossing",
