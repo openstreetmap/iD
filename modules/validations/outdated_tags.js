@@ -7,24 +7,22 @@ import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { presetManager } from '../presets';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
-import { utilArrayUniq, utilDisplayLabel, utilTagDiff } from '../util';
+import { utilArrayUniq, utilDisplayLabel, utilHashcode, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-let _dataDeprecated;
-let _nsi;
-
 export function validationOutdatedTags() {
   const type = 'outdated_tags';
-
-  // A concern here in switching to async data means that `_dataDeprecated`
-  // and `_nsi` will not be available at first, so the data on early tiles
-  // may not have tags validated fully.
+  let _waitingForDeprecated = true;
+  let _waitingForNSI = true;
+  let _dataDeprecated;
+  let _nsi;
 
   // fetch deprecated tags
   fileFetcher.get('deprecated')
     .then(d => _dataDeprecated = d)
-    .catch(() => { /* ignore */ });
+    .catch(() => { /* ignore */ })
+    .finally(() => _waitingForDeprecated = false);
 
 
   function delay(msec) {
@@ -92,10 +90,10 @@ export function validationOutdatedTags() {
       });
 
       _nsi.keys.add('building');  // fallback can match building=* for some categories
-
       return _nsi;
     })
-    .catch(() => { /* ignore */ });
+    .catch(() => { /* ignore */ })
+    .finally(() => _waitingForNSI = false);
 
 
   // Returns true if this tag key is a "namelike" tag that the NSI matcher would have indexed..
@@ -124,6 +122,7 @@ export function validationOutdatedTags() {
     let preset = presetManager.match(entity, graph);
     let subtype = 'deprecated_tags';
     if (!preset) return [];
+    if (!entity.hasInterestingTags()) return [];
 
     // Upgrade preset, if a replacement is available..
     if (preset.replacement) {
@@ -301,9 +300,12 @@ export function validationOutdatedTags() {
 
     }   // end if _nsi
 
+    let issues = [];
+    issues.provisional = (_waitingForDeprecated || _waitingForNSI);
+
     // determine diff
     const tagDiff = utilTagDiff(oldTags, newTags);
-    if (!tagDiff.length) return [];
+    if (!tagDiff.length) return issues;
 
     const isOnlyAddingTags = tagDiff.every(d => d.type === '+');
 
@@ -318,14 +320,14 @@ export function validationOutdatedTags() {
     // don't allow autofixing brand tags
     let autoArgs = subtype !== 'noncanonical_brand' ? [doUpgrade, t('issues.fix.upgrade_tags.annotation')] : null;
 
-    return [new validationIssue({
+    issues.push(new validationIssue({
       type: type,
       subtype: subtype,
       severity: 'warning',
       message: showMessage,
       reference: showReference,
       entityIds: [entity.id],
-      hash: JSON.stringify(tagDiff),
+      hash: utilHashcode(JSON.stringify(tagDiff)),
       dynamicFixes: () => {
         return [
           new validationIssueFix({
@@ -337,7 +339,8 @@ export function validationOutdatedTags() {
           })
         ];
       }
-    })];
+    }));
+    return issues;
 
 
     function doUpgrade(graph) {
