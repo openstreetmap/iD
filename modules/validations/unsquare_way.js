@@ -80,7 +80,7 @@ export function validationUnsquareWay(context) {
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(autoArgs !== undefined) + degreeThreshold,
+            hash: degreeThreshold,
             dynamicFixes: function() {
                 return [
                     new validationIssueFix({

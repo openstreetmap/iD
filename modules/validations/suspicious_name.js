@@ -5,28 +5,30 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
 
 
-let _discardNameRegexes = [];
-
 export function validationSuspiciousName() {
   const type = 'suspicious_name';
   const keysToTestForGenericValues = [
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
     'leisure', 'railway', 'man_made', 'office', 'shop', 'tourism', 'waterway'
   ];
-
-  // A concern here in switching to async data means that `_nsiFilters` will not
-  // be available at first, so the data on early tiles may not have tags validated fully.
+  let _dataGenerics;
+  let _waitingForGenerics = true;
 
   fileFetcher.get('nsi_generics')
     .then(data => {
+      if (_dataGenerics) return _dataGenerics;
+
       // known list of generic names (e.g. "bar")
-      _discardNameRegexes = data.genericWords.map(pattern => new RegExp(pattern, 'i'));
+      _dataGenerics = data.genericWords.map(pattern => new RegExp(pattern, 'i'));
+      return _dataGenerics;
     })
-    .catch(() => { /* ignore */ });
+    .catch(() => { /* ignore */ })
+    .finally(() => _waitingForGenerics = false);
 
 
   function isDiscardedSuggestionName(lowercaseName) {
-    return _discardNameRegexes.some(regex => regex.test(lowercaseName));
+    if (!_dataGenerics) return false;
+    return _dataGenerics.some(regex => regex.test(lowercaseName));
   }
 
   // test if the name is just the key or tag value (e.g. "park")
@@ -68,7 +70,7 @@ export function validationSuspiciousName() {
       },
       reference: showReference,
       entityIds: [entityId],
-      hash: nameKey + '=' + genericName,
+      hash: `${nameKey}=${genericName}`,
       dynamicFixes: function() {
         return [
           new validationIssueFix({
@@ -114,7 +116,7 @@ export function validationSuspiciousName() {
       },
       reference: showReference,
       entityIds: [entityId],
-      hash: nameKey + '=' + incorrectName,
+      hash: `${nameKey}=${incorrectName}`,
       dynamicFixes: function() {
         return [
           new validationIssueFix({
@@ -168,6 +170,7 @@ export function validationSuspiciousName() {
         }
       }
       if (isGenericName(value, entity.tags)) {
+        issues.provisional = _waitingForGenerics;  // retry later if we don't have the generics yet
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }
     }

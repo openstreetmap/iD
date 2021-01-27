@@ -175,7 +175,7 @@ export function uiSectionValidationRules(context) {
             .property('value', degStr);
 
         prefs('validate-square-degrees', degStr);
-        context.validator().reloadUnsquareIssues();
+        context.validator().revalidateUnsquare();
     }
 
     function isRuleEnabled(d) {

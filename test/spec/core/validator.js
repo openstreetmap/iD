@@ -24,20 +24,27 @@ describe('iD.coreValidator', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
-    it('populates issues on validate', function() {
+    it('validate returns a promise, fulfilled when the validation has completed', function(done) {
         createInvalidWay();
         var validator = new iD.coreValidator(context);
         validator.init();
         var issues = validator.getIssues();
         expect(issues).to.have.lengthOf(0);
 
-        validator.validate();
-        issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(1);
-        var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        var prom = validator.validate();
+        prom
+            .then(function() {
+                issues = validator.getIssues();
+                expect(issues).to.have.lengthOf(1);
+                var issue = issues[0];
+                expect(issue.type).to.eql('missing_tag');
+                expect(issue.entityIds).to.have.lengthOf(1);
+                expect(issue.entityIds[0]).to.eql('w-1');
+
+            })
+            .finally(done);
+
+        window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
     });
 
 });
