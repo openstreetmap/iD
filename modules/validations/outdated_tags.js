@@ -242,7 +242,7 @@ export function validationOutdatedTags() {
           // Exceptions, throw out the match
           if (
             (!itemQID || itemQID === notQID) ||       // no `*:wikidata` or matched a `not:*:wikidata`
-            (newTags.office && !item.tags.office)     // feature may be a coprorate office for a brand? - #6416
+            (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
           ) {
             match = null;   // forget match and keep looking
             continue;       // (it might make sense to stop looking, not sure)
