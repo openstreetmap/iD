@@ -96,24 +96,90 @@ export function validationOutdatedTags() {
     .finally(() => _waitingForNSI = false);
 
 
-  // Returns true if this tag key is a "namelike" tag that the NSI matcher would have indexed..
-  function isNamelike(osmkey, which) {
-    // There are a few exceptions to the namelike regexes.
-    // Usually a tag suffix contains a language code like `name:en`, `name:ru`
-    // but we want to exclude things like `operator:type`, `name:etymology`, etc..
-    const notNames = /:(colour|type|left|right|etymology|pronunciation|wikipedia)$/i;
+  // Patterns for matching OSM keys that might contain namelike values.
+  // These roughly correspond to the "trees" concept in name-suggestion-index,
+  // but they can't be trees because there is overlap between different trees
+  // (e.g. 'amenity/yes' could match something from the "brands" tree or the "operators" tree)
+  const namePatterns = {
+    transit: {
+      primary: [
+        /^network$/i
+      ],
+      alternate: [
+        /^(operator|network)(:\\w+)?$/i,    // `network:guid`, `network:short`, etc.
+        /^(\\w+)_name(:\\w+)?$/i
+      ]
+    },
+    flags: {
+      primary: [
+        /^flag:name(:\\w+)?$/i          // `flag:name`, poss. w/ lang suffix
+      ],
+      alternate: [
+        /^(flag|subject)(:\\w+)?$/i     // note: no `country`, we special-case it in gatherNames
+      ]
+    },
+    pois: {
+      primary: [
+        /^name(:\\w+)?$/i               // `name`, poss. w/ lang suffix
+      ],
+      alternate: [
+        /^(brand|operator)(:\\w+)?$/i,  // `brand` or `operator`, poss. w/ lang suffix
+        /^(\\w+)_name(:\\w+)?$/i        // `alt_name`, `short_name`, `official_name`, poss. w/ lang suffix
+      ]
+    },
+  };
 
-    let namePatterns;
-    if (which === 'primary') {
-      namePatterns = [ /^(flag:)?name(:\w+)?$/i ];                   // `name`, `flag:name` (poss. w/ `:lang` suffix)
+  // There are a few exceptions to the namelike regexes.
+  // Usually a tag suffix contains a language code like `name:en`, `name:ru`
+  // but we want to exclude things like `operator:type`, `name:etymology`, etc..
+  const notNames = /:(colour|type|left|right|etymology|pronunciation|wikipedia)$/i;
+
+
+  // Gather all the namelike values that we will run through the NSI matcher
+  function gatherNames(tags) {
+    let names = [];
+    let patterns;
+
+    if (tags.route) {
+      patterns = namePatterns.transit;
+    } else if (tags.man_made === 'flagpole') {
+      patterns = namePatterns.flags;
     } else {
-      namePatterns = [
-        /^(brand|country|flag|operator|network|subject)(:\w+)?$/i,   // `brand`, `operator` (poss. w/ `:lang` suffix)
-        /^\w+_name(:\w+)?$/i,                                        // `alt_name`, `short_name` (poss. w/ `:lang` suffix)
-      ];
+      patterns = namePatterns.pois;
     }
 
-    return namePatterns.some(regex => regex.test(osmkey) && !notNames.test(osmkey));
+    let osmkeys = Object.keys(tags);
+    for (let j = 0; j < osmkeys.length; j++) {
+      const k = osmkeys[j];
+      const v = tags[k];
+      if (!v) continue;
+
+      if (isNamelike(k, 'primary')) {
+        if (/;/.test(v))  return [];   // bail out if any namelike value contains a semicolon
+        names.unshift(v);              // primary names at the beginning of the list
+      }
+      else if (isNamelike(k, 'alternate')) {
+        if (/;/.test(v))  return [];   // bail out if any namelike value contains a semicolon
+        names.push(v);                 // alternate names at the end of the list
+      }
+    }
+
+    names = utilArrayUniq(names);
+
+    // For flags only, fallback to `country` tag only if no other namelike values were found.
+    // See https://github.com/openstreetmap/iD/pull/8305#issuecomment-769174070
+    if (tags.man_made === 'flagpole' && !names.length && !!tags.country) {
+      const v = tags.country;
+      if (/;/.test(v))  return [];   // bail out if any namelike value contains a semicolon
+      names = [v];
+    }
+
+    return names;
+
+
+    function isNamelike(osmkey, which) {
+      return patterns[which].some(regex => regex.test(osmkey) && !notNames.test(osmkey));
+    }
   }
 
 
@@ -212,17 +278,10 @@ export function validationOutdatedTags() {
         if (!loc) {     // collect location for this feature only once
           loc = entity.extent(graph).center();
         }
-        if (!names) {   // collect names for this feature only once
-          names = [];
-          let osmkeys = Object.keys(newTags);
-          for (let j = 0; j < osmkeys.length; j++) {
-            const k = osmkeys[j];
-            if (isNamelike(k, 'primary'))    names.unshift(newTags[k]);  // primary names first
-            if (isNamelike(k, 'alternate'))  names.push(newTags[k]);     // alternate names last
-          }
-          if (foundQID) names.push(foundQID);  // matcher will recognize the QID as an alternate name too
 
-          names = utilArrayUniq(names).filter(Boolean);
+        if (!names) {   // collect names for this feature only once
+          names = gatherNames(newTags);
+          if (foundQID) names.push(foundQID);  // matcher will recognize the QID as an alternate name too
         }
 
         // Try each namelike value
