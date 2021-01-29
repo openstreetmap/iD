@@ -148,18 +148,21 @@ export function validationSuspiciousName() {
 
 
   let validation = function checkGenericName(entity) {
-    // a generic name is okay if it's a known brand or entity
-    if (entity.hasWikidata()) return [];
+    const tags = entity.tags;
+
+    // a generic name is allowed if it's a known brand or entity
+    const hasWikidata = (!!tags.wikidata || !!tags['brand:wikidata'] || !!tags['operator:wikidata']);
+    if (hasWikidata) return [];
 
     let issues = [];
-    const notNames = (entity.tags['not:name'] || '').split(';');
+    const notNames = (tags['not:name'] || '').split(';');
 
-    for (let key in entity.tags) {
+    for (let key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
       if (!m) continue;
 
       const langCode = m.length >= 2 ? m[1] : null;
-      const value = entity.tags[key];
+      const value = tags[key];
       if (notNames.length) {
         for (let i in notNames) {
           const notName = notNames[i];
@@ -169,7 +172,7 @@ export function validationSuspiciousName() {
           }
         }
       }
-      if (isGenericName(value, entity.tags)) {
+      if (isGenericName(value, tags)) {
         issues.provisional = _waitingForGenerics;  // retry later if we don't have the generics yet
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }

@@ -176,10 +176,6 @@ osmEntity.prototype = {
         return Object.keys(this.tags).some(osmIsInterestingTag);
     },
 
-    hasWikidata: function() {
-        return !!this.tags.wikidata || !!this.tags['brand:wikidata'];
-    },
-
     isHighwayIntersection: function() {
         return false;
     },
