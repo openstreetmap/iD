@@ -18,7 +18,10 @@
     "foot": "no"
   },
   "addTags": {
-      
+    "highway": "cycleway",
+    "cycleway": "crossing",
+    "crossing": "marked",
+    "foot": "no"
   },
   "reference": {
       "key": "cycleway",

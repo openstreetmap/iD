@@ -20,7 +20,12 @@
     "segregated": "yes"
   },
   "addTags": {
-      
+    "highway": "cycleway",
+    "cycleway": "crossing",
+    "crossing": "marked",
+    "foot": "designated",
+    "bicycle": "designated",
+    "segregated": "yes"
   },
   "reference": {
       "key": "cycleway",

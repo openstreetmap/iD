@@ -13,6 +13,9 @@
         "crossing": "unmarked",
         "traffic_calming": "table"
     },
+    "addTags": {
+        "traffic_calming": "table"
+    },
     "reference": {
         "key": "traffic_calming",
         "value": "table"
