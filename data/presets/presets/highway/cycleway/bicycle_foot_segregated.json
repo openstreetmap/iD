@@ -7,16 +7,13 @@
       "line"
   ],
   "tags": {
-      "highway": "cycleway",
-      "foot": "designated",
-      "bicycle": "designated",
-      "segregated": "yes"
+    "highway": "cycleway",
+    "foot": "designated",
+    "bicycle": "designated",
+    "segregated": "yes"
   },
   "addTags": {
-      "highway": "cycleway",
-      "foot": "designated",
-      "bicycle": "designated",
-      "segregated": "yes"
+      
   },
   "terms": [
       "bicycle and foot path",

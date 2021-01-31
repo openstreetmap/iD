@@ -12,16 +12,15 @@
         "line"
     ],
     "tags": {
-        "cycleway": "crossing",
-        "crossing": "unmarked"
-    },
-    "addTags": {
         "highway": "cycleway",
         "cycleway": "crossing",
         "crossing": "unmarked",
         "bicycle": "designated",
         "foot": "designated",
         "segregated": "no"
+    },
+    "addTags": {
+        
     },
     "reference": {
         "key": "cycleway",
