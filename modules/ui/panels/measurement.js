@@ -1,8 +1,7 @@
 import {
     geoLength as d3_geoLength,
-    geoCentroid as d3_geoCentroid
+    geoPath as d3_geoPath
 } from 'd3-geo';
-import geojsonRewind from '@mapbox/geojson-rewind';
 
 import { t, localizer } from '../../core/localizer';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
@@ -79,8 +78,11 @@ export function uiPanelMeasurement(context) {
                         closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
                         var feature = entity.asGeoJSON(graph);
                         length += radiansToMeters(d3_geoLength(toLineString(feature)));
-                        // d3_geoCentroid is wrong for counterclockwise-wound polygons, so wind them clockwise
-                        centroid = d3_geoCentroid(geojsonRewind(Object.assign({}, feature), true));
+                        centroid = d3_geoPath(context.projection).centroid(entity.asGeoJSON(graph));
+                        centroid = centroid && context.projection.invert(centroid);
+                        if (!centroid  || !isFinite(centroid[0]) || !isFinite(centroid[1])) {
+                            centroid = entity.extent(graph).center();
+                        }
                         if (closed) {
                             area += steradiansToSqmeters(entity.area(graph));
                         }
