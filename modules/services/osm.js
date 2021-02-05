@@ -260,6 +260,7 @@ function parseJSON(payload, callback, options) {
     var children = json.elements;
 
     var handle = window.requestIdleCallback(function() {
+        _deferred.delete(handle);
         var results = [];
         var result;
         for (var i = 0; i < children.length; i++) {
@@ -268,7 +269,6 @@ function parseJSON(payload, callback, options) {
         }
         callback(null, results);
     });
-
     _deferred.add(handle);
 
     function parseChild(child) {
@@ -296,13 +296,12 @@ function parseUserJSON(payload, callback, options) {
     var json = payload;
     if (typeof json !== 'object') json = JSON.parse(payload);
 
-    if (!json.elements) return callback({ message: 'No JSON', status: -1 });
-
     if (!json.users && !json.user) return callback({ message: 'No JSON', status: -1 });
 
     var objs = json.users || [json];
 
     var handle = window.requestIdleCallback(function() {
+        _deferred.delete(handle);
         var results = [];
         var result;
         for (var i = 0; i < objs.length; i++) {
@@ -311,7 +310,6 @@ function parseUserJSON(payload, callback, options) {
         }
         callback(null, results);
     });
-
     _deferred.add(handle);
 
     function parseObj(obj) {
@@ -459,6 +457,7 @@ function parseXML(xml, callback, options) {
     var children = root.childNodes;
 
     var handle = window.requestIdleCallback(function() {
+        _deferred.delete(handle);
         var results = [];
         var result;
         for (var i = 0; i < children.length; i++) {
@@ -467,7 +466,6 @@ function parseXML(xml, callback, options) {
         }
         callback(null, results);
     });
-
     _deferred.add(handle);
 
 
@@ -663,7 +661,14 @@ export default {
         } else {
             var url = urlroot + path;
             var controller = new AbortController();
-            d3_json(url, { signal: controller.signal })
+            var fn;
+            if (path.indexOf('.json') !== -1) {
+                fn = d3_json;
+            } else {
+                fn = d3_xml;
+            }
+
+            fn(url, { signal: controller.signal })
                 .then(function(data) {
                     done(null, data);
                 })
