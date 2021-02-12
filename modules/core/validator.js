@@ -19,11 +19,12 @@ export function coreValidator(context) {
   let _resolvedIssueIDs = new Set();
   let _baseCache = validationCache();  // issues before any user edits
   let _headCache = validationCache();  // issues after all user edits
-  let _previousGraph = null;
+  let _headGraph = null;
+  let _headIsCurrent = false;
 
   let _deferredRIC = new Set();   // Set( RequestIdleCallback handles )
   let _deferredST = new Set();    // Set( SetTimeout handles )
-  let _inProcess;                 // Promise fulfilled when validation complete
+  let _headPromise;               // Promise fulfilled when validation is performed up to headGraph snapshot
 
   const RETRY = 5000;             // wait 5sec before revalidating provisional entities
 
@@ -62,15 +63,16 @@ export function coreValidator(context) {
     // empty queues and resolve any pending promise
     _baseCache.queue = [];
     _headCache.queue = [];
-    processQueue();
-    _inProcess = null;
+    processQueue(_headCache);
+    processQueue(_baseCache);
 
     // clear caches
     if (resetIgnored) _ignoredIssueIDs.clear();
     _resolvedIssueIDs.clear();
     _baseCache = validationCache();
     _headCache = validationCache();
-    _previousGraph = null;
+    _headGraph = null;
+    _headIsCurrent = false;
   }
 
 
@@ -97,14 +99,14 @@ export function coreValidator(context) {
   // It reruns just the "unsquare_way" validation on all buildings.
   //
   validator.revalidateUnsquare = () => {
-    revalidateUnsquare(_headCache, context.graph());
+    revalidateUnsquare(_headCache, _headGraph);
     revalidateUnsquare(_baseCache, context.history().base());
     dispatch.call('validated');
   };
 
   function revalidateUnsquare(cache, graph) {
     const checkUnsquareWay = _rules.unsquare_way;
-    if (typeof checkUnsquareWay !== 'function') return;
+    if (!graph || typeof checkUnsquareWay !== 'function') return;
 
     // uncache existing
     cache.uncacheIssuesOfType('unsquare_way');
@@ -145,19 +147,19 @@ export function coreValidator(context) {
 
     // collect head issues - caused by user edits
     let cache = _headCache;
-    let graph = context.graph();
-    Object.values(cache.issuesByIssueID).forEach(issue => {
-      if (!filter(issue, graph, cache)) return;
-      seen.add(issue.id);
-      issues.push(issue);
-    });
+    if (_headGraph) {
+      Object.values(cache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, _headGraph, cache)) return;
+        seen.add(issue.id);
+        issues.push(issue);
+      });
+    }
 
     // collect base issues - not caused by user edits
     if (opts.what === 'all') {
       cache = _baseCache;
-      graph = context.history().base();
       Object.values(cache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, graph, cache)) return;
+        if (!filter(issue, context.history().base(), cache)) return;
         seen.add(issue.id);
         issues.push(issue);
       });
@@ -403,47 +405,62 @@ export function coreValidator(context) {
   //
   validator.validate = () => {
     const currGraph = context.graph();
-    _previousGraph = _previousGraph || context.history().base();
-    if (currGraph === _previousGraph) {
+    const prevGraph = _headGraph || context.history().base();
+
+    if (currGraph === prevGraph) {   // _headGraph is current - we are caught up
+      _headIsCurrent = true;
       dispatch.call('validated');
       return Promise.resolve();
     }
 
-    const oldGraph = _previousGraph;
-    const difference = coreDifference(oldGraph, currGraph);
-    _previousGraph = currGraph;
+    if (_headPromise) {         // Validation already in process, but we aren't caught up to current
+      _headIsCurrent = false;   // We will need to catch up after the validation promise fulfills
+      return _headPromise;
+    }
 
-    const createdAndModifiedEntityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
-    let entityIDsToCheck = entityIDsToValidate(createdAndModifiedEntityIDs, currGraph);
+    _headGraph = currGraph;  // take snapshot
+    const difference = coreDifference(prevGraph, _headGraph);
 
-    // check modified and deleted entities against the old graph in order to update their related entities
+    // Gather all entities related to this difference..
+    // For created/modified, use the head graph
+    let entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
+    entityIDs = entityIDsToValidate(entityIDs, _headGraph);
+
+    // For modified/deleted, use the previous graph
     // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-    const changedEntities = difference.deleted().concat(difference.modified());
-    const modifiedAndDeletedEntityIDs = changedEntities.map(entity => entity.id);
-    const entityIDsToCheckForOldGraph = entityIDsToValidate(modifiedAndDeletedEntityIDs, oldGraph);
+    let previousEntityIDs = difference.deleted().concat(difference.modified()).map(entity => entity.id);
+    previousEntityIDs = entityIDsToValidate(previousEntityIDs, prevGraph);
+    previousEntityIDs.forEach(entityIDs.add, entityIDs);   // concat the sets
 
-    // concat the sets
-    entityIDsToCheckForOldGraph.forEach(entityIDsToCheck.add, entityIDsToCheck);
-    if (!entityIDsToCheck.size) {
+    if (!entityIDs.size) {
       dispatch.call('validated');
       return Promise.resolve();
     }
 
-    return validateEntitiesAsync(entityIDsToCheck, currGraph, _headCache)
-      .then(() => updateResolvedIssues(entityIDsToCheck))
-      .then(() => dispatch.call('validated'));
+    _headPromise = validateEntitiesAsync(entityIDs, _headGraph, _headCache)
+      .then(() => updateResolvedIssues(entityIDs))
+      .then(() => dispatch.call('validated'))
+      .catch(() => { /* ignore */ })
+      .then(() => {
+        _headPromise = null;
+        if (!_headIsCurrent) {
+          validator.validate();   // run it again to catch up to current graph
+        }
+      });
+
+    return _headPromise;
   };
 
 
   // register event handlers:
 
   // WHEN TO RUN VALIDATION:
-  // When graph changes:
+  // When history changes:
   context.history()
-    .on('restore.validator', validator.validate)   // restore saved history
-    .on('undone.validator', validator.validate)    // undo
-    .on('redone.validator', validator.validate)    // redo
-    .on('reset.validator', () => {
+    .on('restore.validator', validator.validate)   // on restore saved history
+    .on('undone.validator', validator.validate)    // on undo
+    .on('redone.validator', validator.validate)    // on redo
+    .on('reset.validator', () => {                 // on history reset - happens after save, or enter/exit walkthrough
       reset(false);   // cached issues aren't valid any longer if the history has been reset
       validator.validate();
     });
@@ -457,10 +474,10 @@ export function coreValidator(context) {
   context.history()
     .on('merge.validator', entities => {
       if (!entities) return;
-      const entityIDs = entities.map(entity => entity.id);
       const baseGraph = context.history().base();
-      const baseIDs = entityIDsToValidate(entityIDs, baseGraph);
-      validateEntitiesAsync(baseIDs, baseGraph, _baseCache);
+      let entityIDs = entities.map(entity => entity.id);
+      entityIDs = entityIDsToValidate(entityIDs, baseGraph);
+      validateEntitiesAsync(entityIDs, baseGraph, _baseCache);
     });
 
 
@@ -631,14 +648,14 @@ export function coreValidator(context) {
     cache.queue = cache.queue.concat(utilArrayChunk(jobs, 100));
 
     // Perform the work
-    if (_inProcess) return _inProcess;
+    if (cache.queuePromise) return cache.queuePromise;
 
-    _inProcess = processQueue()
+    cache.queuePromise = processQueue(cache)
       .then(() => revalidateProvisionalEntities(cache))
       .catch(() => { /* ignore */ })
-      .finally(() => _inProcess = null);
+      .finally(() => cache.queuePromise = null);
 
-    return _inProcess;
+    return cache.queuePromise;
   }
 
 
@@ -657,7 +674,7 @@ export function coreValidator(context) {
       _deferredST.delete(handle);
       if (!cache.provisionalEntityIDs.size) return;  // nothing to do
 
-      const graph = (cache === _headCache ? context.graph() : context.history().base());
+      const graph = (cache === _headCache ? _headGraph : context.history().base());
       validateEntitiesAsync(cache.provisionalEntityIDs, graph, cache);
     }, RETRY);
 
@@ -665,24 +682,22 @@ export function coreValidator(context) {
   }
 
 
-  // `processQueue()`   (private)
+  // `processQueue(queue)`   (private)
   // Process the next chunk of deferred validation work
+  //
+  // Arguments
+  //   `cache` - The cache (_headCache or _baseCache)
   //
   // Returns
   //   A Promise fulfilled when the validation has completed.
   //   This may take time but happen in the background during browser idle time.
   //
-  function processQueue() {
-    // console.log(`head queue length ${_headCache.queue.length}`);
-    // console.log(`base queue length ${_baseCache.queue.length}`);
-    let chunk;
-    if (_baseCache.queue.length) {
-      chunk = _baseCache.queue.pop();
-    } else if (_headCache.queue.length) {
-      chunk = _headCache.queue.pop();
-    }
+  function processQueue(cache) {
+    // const which = (cache === _headCache) ? 'head' : 'base';
+    // console.log(`${which} queue length ${cache.queue.length}`);
 
-    if (!chunk) return Promise.resolve();  // we're done
+    if (!cache.queue.length) return Promise.resolve();  // we're done
+    const chunk = cache.queue.pop();
 
     return new Promise(resolvePromise => {
         const handle = window.requestIdleCallback(() => {
@@ -696,10 +711,9 @@ export function coreValidator(context) {
         _deferredRIC.add(handle);
       })
       .then(() => { // dispatch an event sometimes to redraw various UI things
-        const count = _headCache.queue.length + _baseCache.queue.length;
-        if (count % 25 === 0) dispatch.call('validated');
+        if (cache.queue.length % 25 === 0) dispatch.call('validated');
       })
-      .then(() => processQueue());
+      .then(() => processQueue(cache));
   }
 
 
@@ -716,6 +730,7 @@ export function coreValidator(context) {
 function validationCache() {
   let cache = {
     queue: [],
+    queuePromise: null,
     queuedEntityIDs: new Set(),
     provisionalEntityIDs: new Set(),
     issuesByIssueID: {},  // issue.id -> issue
