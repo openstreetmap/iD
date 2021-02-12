@@ -9,7 +9,7 @@ import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
+import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
 
 var _languagesArray = [];
 
@@ -35,19 +35,10 @@ export function uiFieldLocalized(field, context) {
         .then(function(d) { _territoryLanguages = d; })
         .catch(function() { /* ignore */ });
 
-
-    var allSuggestions = presetManager.collection.filter(function(p) {
-        return p.suggestion === true;
-    });
-
     // reuse these combos
     var langCombo = uiCombobox(context, 'localized-lang')
         .fetcher(fetchLanguages)
         .minItems(0);
-
-    var brandCombo = uiCombobox(context, 'localized-brand')
-        .canAutocomplete(false)
-        .minItems(1);
 
     var _selection = d3_select(null);
     var _multilingual = [];
@@ -158,8 +149,6 @@ export function uiFieldLocalized(field, context) {
         _selection = selection;
         calcLocked();
         var isLocked = field.locked();
-        var singularEntity = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-        var preset = singularEntity && presetManager.match(singularEntity, context.graph());
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -181,39 +170,6 @@ export function uiFieldLocalized(field, context) {
             .attr('class', 'localized-main')
             .call(utilNoAuto)
             .merge(input);
-
-        if (preset && field.id === 'name') {
-            var pTag = preset.id.split('/', 2);
-            var pKey = pTag[0];
-            var pValue = pTag[1];
-
-            if (!preset.suggestion) {
-                // Not a suggestion preset - Add a suggestions dropdown if it makes sense to.
-                // This code attempts to determine if the matched preset is the
-                // kind of preset that even can benefit from name suggestions..
-                // - true = shops, cafes, hotels, etc. (also generic and fallback presets)
-                // - false = churches, parks, hospitals, etc. (things not in the index)
-                var isFallback = preset.isFallback();
-                var goodSuggestions = allSuggestions.filter(function(s) {
-                    if (isFallback) return true;
-                    var sTag = s.id.split('/', 2);
-                    var sKey = sTag[0];
-                    var sValue = sTag[1];
-                    return pKey === sKey && (!pValue || pValue === sValue);
-                });
-
-                // Show the suggestions.. If the user picks one, change the tags..
-                if (allSuggestions.length && goodSuggestions.length) {
-                    input
-                        .on('blur.localized', checkBrandOnBlur)
-                        .call(brandCombo
-                            .fetcher(fetchBrandNames(preset, allSuggestions))
-                            .on('accept', acceptBrand)
-                            .on('cancel', cancelBrand)
-                        );
-                }
-            }
-        }
 
         input
             .classed('disabled', !!isLocked)
@@ -257,98 +213,6 @@ export function uiFieldLocalized(field, context) {
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
 
-
-
-        // We are not guaranteed to get an `accept` or `cancel` when blurring the field.
-        // (This can happen if the user actives the combo, arrows down, and then clicks off to blur)
-        // So compare the current field value against the suggestions one last time.
-        function checkBrandOnBlur() {
-            var latest = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-            if (!latest) return;   // deleting the entity blurred the field?
-
-            var preset = presetManager.match(latest, context.graph());
-            if (preset && preset.suggestion) return;   // already accepted
-
-            var name = utilGetSetValue(input).trim();
-            var matched = allSuggestions.filter(function(s) { return name === s.name(); });
-
-            if (matched.length === 1) {
-                acceptBrand({ suggestion: matched[0] });
-            } else {
-                cancelBrand();
-            }
-        }
-
-
-        function acceptBrand(d) {
-
-            var entity = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-
-            if (!d || !entity) {
-                cancelBrand();
-                return;
-            }
-
-            var tags = entity.tags;
-            var geometry = entity.geometry(context.graph());
-            var removed = preset.unsetTags(tags, geometry);
-            for (var k in tags) {
-                tags[k] = removed[k];  // set removed tags to `undefined`
-            }
-            tags = d.suggestion.setTags(tags, geometry);
-            utilGetSetValue(input, tags.name);
-            dispatch.call('change', this, tags);
-        }
-
-
-        // user hit escape
-        function cancelBrand() {
-            var name = utilGetSetValue(input);
-            dispatch.call('change', this, { name: name });
-        }
-
-
-        function fetchBrandNames(preset, suggestions) {
-            var pTag = preset.id.split('/', 2);
-            var pKey = pTag[0];
-            var pValue = pTag[1];
-
-            return function(value, callback) {
-                var results = [];
-                if (value && value.length > 2) {
-                    for (var i = 0; i < suggestions.length; i++) {
-                        var s = suggestions[i];
-
-                        // don't suggest brands from incompatible countries
-                        if (_countryCode && s.countryCodes &&
-                            s.countryCodes.indexOf(_countryCode) === -1) continue;
-
-                        var sTag = s.id.split('/', 2);
-                        var sKey = sTag[0];
-                        var sValue = sTag[1];
-                        var subtitle = s.subtitle();
-                        var name = s.name();
-                        if (subtitle) name += ' – ' + subtitle;
-                        var dist = utilEditDistance(value, name.substring(0, value.length));
-                        var matchesPreset = (pKey === sKey && (!pValue || pValue === sValue));
-
-                        if (dist < 1 || (matchesPreset && dist < 3)) {
-                            var obj = {
-                                value: s.name(),
-                                title: name,
-                                display: s.nameLabel() + (subtitle ? ' – ' + s.subtitleLabel() : ''),
-                                suggestion: s,
-                                dist: dist + (matchesPreset ? 0 : 1)  // penalize if not matched preset
-                            };
-                            results.push(obj);
-                        }
-                    }
-                    results.sort(function(a, b) { return a.dist - b.dist; });
-                }
-                results = results.slice(0, 10);
-                callback(results);
-            };
-        }
 
 
         function addNew(d3_event) {
