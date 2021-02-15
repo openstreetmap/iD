@@ -289,13 +289,17 @@ export function coreLocalizer() {
             if (typeof result === 'string') {
               for (let key in replacements) {
                 let value = replacements[key];
-                if (typeof value === 'number' && value.toLocaleString) {
-                  // format numbers for the locale
-                  value = value.toLocaleString(locale, {
-                    style: 'decimal',
-                    useGrouping: true,
-                    minimumFractionDigits: 0
-                  });
+                if (typeof value === 'number') {
+                  if (value.toLocaleString) {
+                    // format numbers for the locale
+                    value = value.toLocaleString(locale, {
+                      style: 'decimal',
+                      useGrouping: true,
+                      minimumFractionDigits: 0
+                    });
+                  } else {
+                    value = value.toString();
+                  }
                 }
                 const token = `{${key}}`;
                 const regex = new RegExp(token, 'g');
