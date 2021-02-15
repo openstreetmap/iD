@@ -240,7 +240,7 @@ export function coreLocalizer() {
     * @return {string?}  localized string
     */
     localizer.tInfo = function(origStringId, replacements, locale) {
-        let stringId = origStringId;
+        let stringId = origStringId.trim();
 
         let scopeId = 'general';
 
