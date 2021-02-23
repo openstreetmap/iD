@@ -93,7 +93,7 @@
     "glob": "^7.1.0",
     "happen": "^0.3.1",
     "js-yaml": "^4.0.0",
-    "json-stringify-pretty-compact": "^2.0.0",
+    "json-stringify-pretty-compact": "^3.0.0",
     "mapillary-js": "~3.0.0",
     "mapillary_sprite_source": "^1.8.0",
     "minimist": "^1.2.3",
