@@ -598,6 +598,8 @@ export default {
         if (!window.Mapillary) return;
 
         var opts = {
+            apiClient: clientId,
+            container: 'ideditor-mly',
             baseImageSize: 320,
             component: {
                 cover: false,
@@ -622,7 +624,7 @@ export default {
             };
         }
 
-        _mlyViewer = new Mapillary.Viewer('ideditor-mly', clientId, null, opts);
+        _mlyViewer = new Mapillary.Viewer(opts);
         _mlyViewer.on('nodechanged', nodeChanged);
         _mlyViewer.on('bearingchanged', bearingChanged);
         if (_mlyViewerFilter) {
