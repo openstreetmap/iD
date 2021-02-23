@@ -572,3 +572,14 @@ export function utilUnicodeCharsCount(str) {
 export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
 }
+
+// Variation of d3.json (https://github.com/d3/d3-fetch/blob/master/src/json.js)
+export function utilFetchJson(resourse, init) {
+    return fetch(resourse, init)
+        .then((response) => {
+            // fetch in PhantomJS tests may return ok=false and status=0 even if it's okay
+            if ((!response.ok && response.status !== 0) || !response.json) throw new Error(response.status + ' ' + response.statusText);
+            if (response.status === 204 || response.status === 205) return;
+            return response.json();
+        });
+}

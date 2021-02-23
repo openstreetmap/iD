@@ -1,4 +1,4 @@
-import { json as d3_json } from 'd3-fetch';
+import { utilFetchJson } from '../util/util';
 
 let _mainFileFetcher = coreFileFetcher(); // singleton
 
@@ -54,7 +54,7 @@ export function coreFileFetcher() {
 
     let prom = _inflight[url];
     if (!prom) {
-      _inflight[url] = prom = d3_json(url)
+      _inflight[url] = prom = utilFetchJson(url)
         .then(result => {
           delete _inflight[url];
           if (!result) {
