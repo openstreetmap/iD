@@ -1,5 +1,5 @@
 {
-  "icon": "iD-entrance-shop",
+  "icon": "iD-entrance-garage",
   "fields": [
       "ref",
       "entrance",
@@ -13,16 +13,16 @@
       "vertex"
   ],
   "tags": {
-      "entrance": "shop"
+      "entrance": "garage"
   },
   "terms": [
       "entrance",
       "exit",
       "door",
       "main",
-      "shop"
+      "garage"
   ],
   "matchScore": 0.8,
-  "name": "Shop Entrance / Exit",
-  "shortcut": ["⌥+s"]
+  "name": "Garage Entrance / Exit",
+  "shortcut": ["⌥+g"]
 }
