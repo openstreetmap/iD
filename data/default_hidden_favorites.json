@@ -11,6 +11,7 @@
   {"pID": "entrance/main", "hidden" : true},
   {"pID": "entrance/shop", "hidden" : true},
   {"pID": "entrance/home", "hidden" : true},
+  {"pID": "entrance/garage", "hidden" : true},
   {"pID": "leisure/playground", "hidden" : true},
   {"pID": "amenity/parking", "hidden" : true},
   {"pID": "amenity/parking-private", "hidden" : true},
