@@ -87,8 +87,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
 
-    function mouseover(d) {
+    function mouseover(d3_event, d) {
         var service = getService();
+
         if (service) service.setStyles(context, d);
     }
 
@@ -115,7 +116,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var showsFlat = context.photos().showsFlat();
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
@@ -135,11 +135,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return new Date(image.captured_at).getTime() <= toTimestamp;
             });
         }
-        if (usernames) {
-            images = images.filter(function(image) {
-                return usernames.indexOf(image.captured_by) !== -1;
-            });
-        }
+
         return images;
     }
 
@@ -148,7 +144,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var showsFlat = context.photos().showsFlat();
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
@@ -182,11 +177,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
             var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
-            });
-        }
-        if (usernames) {
-            sequences = sequences.filter(function(sequence) {
-                return usernames.indexOf(sequence.properties.username) !== -1;
             });
         }
 
