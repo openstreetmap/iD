@@ -544,15 +544,15 @@ export default {
         const that = this;
         if (!window.Mapillary) return;
 
-        const opts = {
+        var opts = {
             apiClient: clientId,
+            container: 'ideditor-mly',
             baseImageSize: 320,
             component: {
                 cover: false,
                 keyboard: false,
                 tag: true
-            },
-            container: 'ideditor-mly'
+            }
         };
 
         // Disable components requiring WebGL support
