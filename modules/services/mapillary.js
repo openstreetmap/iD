@@ -70,9 +70,10 @@ function loadTiles(which, url, maxZoom, projection) {
 
 function loadTile(which, url, tile) {
     const cache = _mlyCache.requests;
-    if (cache.loaded[tile.id] || cache.inflight[tile.id]) return;
+    const tileId = `${tile.id}-${which}`;
+    if (cache.loaded[tileId] || cache.inflight[tileId]) return;
     const controller = new AbortController();
-    cache.inflight[tile.id] = controller;
+    cache.inflight[tileId] = controller;
     const requestUrl = url.replace('{x}', tile.xyz[0])
         .replace('{y}', tile.xyz[1])
         .replace('{z}', tile.xyz[2]);
@@ -82,8 +83,8 @@ function loadTile(which, url, tile) {
             if (!response.ok) {
                 throw new Error(response.status + ' ' + response.statusText);
             }
-            cache.loaded[tile.id] = true;
-            delete cache.inflight[tile.id];
+            cache.loaded[tileId] = true;
+            delete cache.inflight[tileId];
             return response.arrayBuffer();
         })
         .then(function(data) {
@@ -101,8 +102,8 @@ function loadTile(which, url, tile) {
             }
         })
         .catch(function() {
-            cache.loaded[tile.id] = true;
-            delete cache.inflight[tile.id];
+            cache.loaded[tileId] = true;
+            delete cache.inflight[tileId];
         });
 }
 
