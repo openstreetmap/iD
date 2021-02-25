@@ -94,9 +94,9 @@ export function coreLocalizer() {
         };
 
         let fileMap = fileFetcher.fileMap();
-        for (let scopeId in localeDirs) {
-            let key = `locales_index_${scopeId}`;
-            fileMap[key] = localeDirs[scopeId] + '/index.min.json';
+        for (let id in localeDirs) {
+            let key = `locales_index_${id}`;
+            fileMap[key] = localeDirs[id] + '/index.min.json';
             filesToFetch.push(key);
         }
 
@@ -126,9 +126,9 @@ export function coreLocalizer() {
                     });
                     // We only need to load locales up until we find one with full coverage
                     _localeCodes.slice(0, fullCoverageIndex + 1).forEach(function(code) {
-                        let scopeId = Object.keys(localeDirs)[i];
-                        let directory = Object.values(localeDirs)[i];
-                        if (index[code]) loadStringsPromises.push(localizer.loadLocale(code, scopeId, directory));
+                        let id = Object.keys(localeDirs)[i];
+                        let dir = Object.values(localeDirs)[i];
+                        if (index[code]) loadStringsPromises.push(localizer.loadLocale(code, id, dir));
                     });
                 });
 
@@ -187,23 +187,25 @@ export function coreLocalizer() {
 
     /* Locales */
     // Returns a Promise to load the strings for the requested locale
-    localizer.loadLocale = (locale, scopeId, directory) => {
+    localizer.loadLocale = (requested, id, dir) => {
+
+        let locale = requested;
 
         // US English is the default
         if (locale.toLowerCase() === 'en-us') locale = 'en';
 
-        if (_localeStrings[scopeId] && _localeStrings[scopeId][locale]) {    // already loaded
+        if (_localeStrings[id] && _localeStrings[id][locale]) {    // already loaded
             return Promise.resolve(locale);
         }
 
         let fileMap = fileFetcher.fileMap();
-        const key = `locale_${scopeId}_${locale}`;
-        fileMap[key] = `${directory}/${locale}.min.json`;
+        const key = `locale_${id}_${locale}`;
+        fileMap[key] = `${dir}/${locale}.min.json`;
 
         return fileFetcher.get(key)
             .then(d => {
-                if (!_localeStrings[scopeId]) _localeStrings[scopeId] = {};
-                _localeStrings[scopeId][locale] = d[locale];
+                if (!_localeStrings[id]) _localeStrings[id] = {};
+                _localeStrings[id][locale] = d[locale];
                 return locale;
             });
     };

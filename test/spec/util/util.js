@@ -227,29 +227,48 @@ describe('iD.util', function() {
     });
 
     describe('utilDisplayName', function() {
+        before(function() {
+            iD.fileFetcher.assetPath('dist/');
+        });
+        after(function() {
+            iD.fileFetcher.assetPath('');
+        });
+
         it('returns the name if tagged with a name', function() {
             expect(iD.utilDisplayName({tags: {name: 'East Coast Greenway'}})).to.eql('East Coast Greenway');
         });
-        it('distinguishes unnamed features by ref', function() {
-            expect(iD.utilDisplayName({tags: {ref: '66'}})).to.eql('66');
+        it('distinguishes unnamed features by ref', function(done) {
+            iD.localizer.loadLocale('en', 'general', 'locales').then(function() {
+                expect(iD.utilDisplayName({tags: {ref: '66'}})).to.eql('66');
+                done();
+            });
         });
-        it('distinguishes unnamed features by network or cycle_network', function() {
-            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X'}})).to.eql('SORTA 3X');
-            expect(iD.utilDisplayName({tags: {network: 'ncn', cycle_network: 'US:US', ref: '76'}})).to.eql('US:US 76');
+        it('distinguishes unnamed features by network or cycle_network', function(done) {
+            iD.localizer.loadLocale('en', 'general', 'locales').then(function() {
+                expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X'}})).to.eql('SORTA 3X');
+                expect(iD.utilDisplayName({tags: {network: 'ncn', cycle_network: 'US:US', ref: '76'}})).to.eql('US:US 76');
+                done();
+            });
         });
-        it('distinguishes unnamed routes by direction', function() {
-            expect(iD.utilDisplayName({tags: {network: 'US:US', ref: '66', direction: 'west', route: 'road'}})).to.eql('US:US 66 west');
-            // Marguerite X: Counter-Clockwise
-            expect(iD.utilDisplayName({tags: {network: 'Marguerite', ref: 'X', direction: 'anticlockwise', route: 'bus'}})).to.eql('Marguerite X anticlockwise');
+        it('distinguishes unnamed routes by direction', function(done) {
+            iD.localizer.loadLocale('en', 'general', 'locales').then(function() {
+                expect(iD.utilDisplayName({tags: {network: 'US:US', ref: '66', direction: 'west', route: 'road'}})).to.eql('US:US 66 west');
+                // Marguerite X: Counter-Clockwise
+                expect(iD.utilDisplayName({tags: {network: 'Marguerite', ref: 'X', direction: 'anticlockwise', route: 'bus'}})).to.eql('Marguerite X anticlockwise');
+                done();
+            });
         });
-        it('distinguishes unnamed routes by waypoints', function() {
-            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', from: 'Downtown', route: 'bus'}})).to.eql('SORTA 3X');
-            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', to: 'Kings Island', route: 'bus'}})).to.eql('SORTA 3X');
-            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', via: 'Montgomery', route: 'bus'}})).to.eql('SORTA 3X');
-            // Green Line: Old Ironsides => Winchester
-            expect(iD.utilDisplayName({tags: {network: 'VTA', ref: 'Green', from: 'Old Ironsides', to: 'Winchester', route: 'bus'}})).to.eql('VTA Green from Old Ironsides to Winchester');
-            // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
-            expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
+        it('distinguishes unnamed routes by waypoints', function(done) {
+            iD.localizer.loadLocale('en', 'general', 'locales').then(function() {
+                expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', from: 'Downtown', route: 'bus'}})).to.eql('SORTA 3X');
+                expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', to: 'Kings Island', route: 'bus'}})).to.eql('SORTA 3X');
+                expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', via: 'Montgomery', route: 'bus'}})).to.eql('SORTA 3X');
+                // Green Line: Old Ironsides => Winchester
+                expect(iD.utilDisplayName({tags: {network: 'VTA', ref: 'Green', from: 'Old Ironsides', to: 'Winchester', route: 'bus'}})).to.eql('VTA Green from Old Ironsides to Winchester');
+                // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
+                expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
+                done();
+            });
         });
     });
 });
