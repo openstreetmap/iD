@@ -42,6 +42,7 @@ describe('iD.serviceMapillary', function() {
         });
     });
 
+
     describe('#reset', function() {
         it('resets cache and image', function() {
             mapillary.cache().foo = 'bar';
@@ -49,227 +50,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.reset();
             expect(mapillary.cache()).to.not.have.property('foo');
-            expect(mapillary.getSelectedImageKey()).to.be.null;
-        });
-    });
-
-    describe('#loadImages', function() {
-        it('fires loadedImages when images are loaded', function(done) {
-            var spy = sinon.spy();
-            mapillary.on('loadedImages', spy);
-
-            mapillary.loadImages(context.projection);
-
-            var features = [{
-                type: 'Feature',
-                geometry: { type: 'Point', coordinates: [10,0] },
-                properties: { ca: 90, key: '0' }
-            }];
-            var response = { type: 'FeatureCollection', features: features };
-
-            server.respondWith('GET', /images/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
-            server.respond();
-            window.setTimeout(function() {
-                expect(spy).to.have.been.called;
-                expect(server.requests().length).to.eql(2);
-                done();
-            }, 500);
-        });
-
-        it('does not load images around null island', function(done) {
-            var spy = sinon.spy();
-            context.projection.translate([0,0]);
-
-            mapillary.on('loadedImages', spy);
-            mapillary.loadImages(context.projection);
-
-            var features = [{
-                type: 'Feature',
-                geometry: { type: 'Point', coordinates: [0,0] },
-                properties: { ca: 90, key: '0' }
-            }];
-            var response = { type: 'FeatureCollection', features: features };
-
-            server.respondWith('GET', /images/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
-            server.respond();
-
-            window.setTimeout(function() {
-                expect(spy).to.have.been.not.called;
-                expect(server.requests().length).to.eql(0);   // no tile requests of any kind
-                done();
-            }, 200);
-        });
-
-        it('loads multiple pages of image results', function(done) {
-            var calls = 0;
-            mapillary.on('loadedImages', function() {
-                server.respond();  // respond to new fetches
-                if (++calls === 2) {
-                    expect(server.requests().length).to.eql(3);   // 2 images, 1 sequences
-                    done();
-                }
-            });
-
-            mapillary.loadImages(context.projection);
-
-            var features0 = [];
-            var features1 = [];
-            var i, key;
-
-            for (i = 0; i < 1000; i++) {
-                key = String(i);
-                features0.push({
-                    type: 'Feature',
-                    geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { ca: 90, key: key }
-                });
-            }
-            for (i = 0; i < 500; i++) {
-                key = String(1000 + i);
-                features1.push({
-                    type: 'Feature',
-                    geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { ca: 90, key: key }
-                });
-            }
-
-            var response0 = { type: 'FeatureCollection', features: features0 };
-            var response1 = { type: 'FeatureCollection', features: features1 };
-
-            server.respondWith('GET', /\/images\?.*&page=0/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
-            server.respondWith('GET', /\/images\?.*&page=1/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
-            server.respond();
-        });
-    });
-
-
-    describe('#loadSigns', function() {
-        it('fires loadedSigns when signs are loaded', function(done) {
-            var spy = sinon.spy();
-            mapillary.on('loadedSigns', spy);
-
-            mapillary.loadSigns(context.projection);
-
-            var detections = [{ detection_key: '0', image_key: '0' }];
-            var features = [{
-                type: 'Feature',
-                geometry: { type: 'Point', coordinates: [10,0] },
-                properties: { detections: detections, key: '0', value: 'not-in-set' }
-            }];
-            var response = { type: 'FeatureCollection', features: features };
-
-            server.respondWith('GET', /map_features/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
-            server.respond();
-
-            window.setTimeout(function() {
-                expect(spy).to.have.been.called;
-                expect(server.requests().length).to.eql(1);
-                done();
-            }, 200);
-        });
-
-        it('does not load signs around null island', function(done) {
-            var spy = sinon.spy();
-            context.projection.translate([0,0]);
-
-            mapillary.on('loadedSigns', spy);
-            mapillary.loadSigns(context.projection);
-
-            var detections = [{ detection_key: '0', image_key: '0' }];
-            var features = [{
-                type: 'Feature',
-                geometry: { type: 'Point', coordinates: [0,0] },
-                properties: { detections: detections, key: '0', value: 'not-in-set' }
-            }];
-            var response = { type: 'FeatureCollection', features: features };
-
-            server.respondWith('GET', /map_features/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
-            server.respond();
-
-            window.setTimeout(function() {
-                expect(spy).to.have.been.not.called;
-                expect(server.requests().length).to.eql(0);   // no tile requests of any kind
-                done();
-            }, 200);
-        });
-
-        it.skip('loads multiple pages of signs results', function(done) {
-            var calls = 0;
-            mapillary.on('loadedSigns', function() {
-                server.respond();  // respond to new fetches
-                if (++calls === 2) {
-                    expect(server.requests().length).to.eql(4);   // 2 images, 1 map_features, 1 image_detections
-                    done();
-                }
-            });
-
-            mapillary.loadSigns(context.projection);
-
-            var features0 = [];
-            var features1 = [];
-            var i, key, detections;
-
-            for (i = 0; i < 1000; i++) {
-                key = String(i);
-                detections = [{ detection_key: key, image_key: key }];
-                features0.push({
-                    type: 'Feature',
-                    geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { detections: detections, key: key, value: 'not-in-set' }
-                });
-            }
-            for (i = 0; i < 500; i++) {
-                key = String(1000 + i);
-                detections = [{ detection_key: key, image_key: key }];
-                features1.push({
-                    type: 'Feature',
-                    geometry: { type: 'Point', coordinates: [10,0] },
-                    properties: { detections: detections, key: key, value: 'not-in-set' }
-                });
-            }
-
-            var response0 = { type: 'FeatureCollection', features: features0 };
-            var response1 = { type: 'FeatureCollection', features: features1 };
-
-            server.respondWith('GET', /\/map_features\?.*&page=0/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response0) ]);
-            server.respondWith('GET', /\/map_features\?.*&page=1/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response1) ]);
-            server.respond();
-        });
-    });
-
-
-    describe('#loadMapFeatures', function() {
-        it('fires loadedMapFeatures when map features are loaded', function(done) {
-            var spy = sinon.spy();
-            mapillary.on('loadedMapFeatures', spy);
-
-            mapillary.loadMapFeatures(context.projection);
-
-            var detections = [{ detection_key: '0', image_key: '0' }];
-            var features = [{
-                type: 'Feature',
-                geometry: { type: 'Point', coordinates: [10,0] },
-                properties: { detections: detections, key: '0', value: 'not-in-set' }
-            }];
-            var response = { type: 'FeatureCollection', features: features };
-
-            server.respondWith('GET', /map_features/,
-                [200, { 'Content-Type': 'application/json' }, JSON.stringify(response) ]);
-            server.respond();
-
-            window.setTimeout(function() {
-                expect(spy).to.have.been.called;
-                expect(server.requests().length).to.eql(1);
-                done();
-            }, 500);
+            expect(mapillary.getActiveImage()).to.be.null;
         });
     });
 
@@ -353,9 +134,9 @@ describe('iD.serviceMapillary', function() {
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, skey: '-' } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, skey: '-' } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, skey: '-' } }
             ];
 
             mapillary.cache().images.rtree.load(features);
@@ -376,40 +157,24 @@ describe('iD.serviceMapillary', function() {
                 }
             };
 
-            mapillary.cache().sequences.lineString['-'] = gj;
-            mapillary.cache().sequences.forImageKey['0'] = '-';
-            mapillary.cache().sequences.forImageKey['1'] = '-';
-            mapillary.cache().sequences.forImageKey['2'] = '-';
+            mapillary.cache().sequences.lineString['-'] = [gj];
 
             var res = mapillary.sequences(context.projection);
             expect(res).to.deep.eql([gj]);
         });
     });
 
-    describe('#selectImage', function() {
+
+    describe('#setActiveImage', function() {
         it('gets and sets the selected image', function() {
-            var d = { key: 'baz', loc: [10,0] };
-            mapillary.selectImage(context, d.key);
-            expect(mapillary.getSelectedImageKey()).to.eql(d.key);
+            var node = { key: 'baz', originalLatLon: [10,0] };
+            mapillary.setActiveImage(node);
+            expect(mapillary.getActiveImage().key).to.eql(node.key);
         });
     });
 
-    describe('#parsePagination', function() {
-        it('gets URL for next page of results from API', function() {
-            var linkHeader = '<https://a.mapillary.com/v3/images?per_page=1000>; rel="first", <https://a.mapillary.com/v3/images?per_page=1000&_start_key_time=1476610926080>; rel="next"';
-            var pagination = mapillary.parsePagination(linkHeader);
-            expect(pagination.first).to.eql('https://a.mapillary.com/v3/images?per_page=1000');
-            expect(pagination.next).to.eql('https://a.mapillary.com/v3/images?per_page=1000&_start_key_time=1476610926080');
-        });
-    });
 
     describe('#filterViewer', function() {
-        it('filters images by username', function() {
-            context.photos().setUsernameFilter('mapillary');
-            var filter = mapillary.filterViewer(context);
-            expect(filter.length).to.be.equal(2);
-        });
-
         it('filters images by dates', function() {
             context.photos().setDateFilter('fromDate', '2020-01-01');
             context.photos().setDateFilter('toDate', '2021-01-01');
@@ -417,5 +182,4 @@ describe('iD.serviceMapillary', function() {
             expect(filter.length).to.be.equal(3);
         });
     });
-
 });
