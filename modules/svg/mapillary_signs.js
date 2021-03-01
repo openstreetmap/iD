@@ -61,7 +61,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        const selectedImageKey = service.getSelectedImageKey();
+        const selectedImageKey = service.getActiveImage() && service.getActiveImage().key;
         let imageKey;
         let highlightedDetection;
 
@@ -90,7 +90,6 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function filterData(detectedFeatures) {
-        var service = getService();
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
 
@@ -116,7 +115,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         let data = (service ? service.signs(projection) : []);
         data = filterData(data);
 
-        const selectedImageKey = service.getSelectedImageKey();
+        const selectedImageKey = service.getActiveImage() && service.getActiveImage().key;
         const transform = svgPointTransform(projection);
 
         const signs = layer.selectAll('.icon-sign')

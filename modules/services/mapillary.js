@@ -47,7 +47,6 @@ let _mlyCache;
 let _mlyClicks;
 let _mlyFallback = false;
 let _mlyHighlightedDetection;
-let _mlySelectedImageKey;
 let _mlyShowFeatureDetections = false;
 let _mlyShowSignDetections = false;
 let _mlyViewer;
@@ -136,7 +135,6 @@ function loadTileDataToCache(data, tile, which) {
                 skey: feature.properties.skey,
             };
             cache.forImageKey[d.key] = d;
-            _mlyCache.sequences.forImageKey[d.key] = feature.properties.skey;
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             });
@@ -153,7 +151,11 @@ function loadTileDataToCache(data, tile, which) {
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            cache.lineString[feature.properties.key] = feature;
+            if (cache.lineString[feature.properties.key]) {
+                cache.lineString[feature.properties.key].push(feature);
+            } else {
+                cache.lineString[feature.properties.key] = [feature];
+            }
         }
     }
 
@@ -268,11 +270,10 @@ export default {
             image_detections: { forImageKey: {} },
             map_features: { rtree: new RBush() },
             points: { rtree: new RBush() },
-            sequences: { rtree: new RBush(), forImageKey: {}, lineString: {} },
+            sequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
 
-        _mlySelectedImageKey = null;
         _mlyActiveImage = null;
         _mlyClicks = [];
     },
@@ -309,19 +310,20 @@ export default {
         const max = [viewport[1][0], viewport[0][1]];
         const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
         const sequenceKeys = {};
-
+        let lineStrings = [];
         // find sequences for images in viewport
         _mlyCache.images.rtree.search(bbox)
             .forEach(function(d) {
-                const sequenceKey = _mlyCache.sequences.forImageKey[d.data.key];
-                if (sequenceKey) {
-                    sequenceKeys[sequenceKey] = true;
+                if (d.data.skey) {
+                    sequenceKeys[d.data.skey] = true;
                 }
             });
 
-        return Object.keys(sequenceKeys).map(function(sequenceKey) {
-            return _mlyCache.sequences.lineString[sequenceKey];
+        Object.keys(sequenceKeys).forEach(function(sequenceKey) {
+            lineStrings = lineStrings.concat(_mlyCache.sequences.lineString[sequenceKey]);
         });
+
+        return lineStrings;
     },
 
 
@@ -492,7 +494,6 @@ export default {
 
     hideViewer: function(context) {
         _mlyActiveImage = null;
-        _mlySelectedImageKey = null;
 
         if (!_mlyFallback && _mlyViewer) {
             _mlyViewer.getComponent('sequence').stop();
@@ -596,6 +597,7 @@ export default {
             const clicks = _mlyClicks;
             const index = clicks.indexOf(node.key);
             that.setActiveImage(node);
+            that.setStyles(context, null, true);
 
             if (index > -1) {              // `nodechanged` initiated from clicking on a marker..
                 clicks.splice(index, 1);   // remove the click
@@ -617,8 +619,6 @@ export default {
     // This allows images to be selected from places that dont have access
     // to the full image datum (like the street signs layer or the js viewer)
     selectImage: function(context, imageKey, fromViewer) {
-        _mlySelectedImageKey = imageKey;
-
         this.updateUrlImage(imageKey);
 
         const d = _mlyCache.images.forImageKey[imageKey];
@@ -630,8 +630,6 @@ export default {
         if (!fromViewer && imageKey) {
             _mlyClicks.push(imageKey);
         }
-
-        this.setStyles(context, null, true);
 
         if (_mlyShowFeatureDetections) {
             this.updateDetections(imageKey, `${imageDetectionUrl}?layers=points&values=${mapFeatureValues}&image_keys=${imageKey}&client_id=${clientId}`);
@@ -655,23 +653,14 @@ export default {
     },
 
 
-    getSelectedImageKey: function() {
-        return _mlySelectedImageKey;
-    },
-
-
-    getSequenceKeyForImageKey: function(imageKey) {
-        return _mlyCache.sequences.forImageKey[imageKey];
-    },
-
-
     setActiveImage: function(node) {
         if (node) {
             _mlyActiveImage = {
                 ca: node.originalCA,
                 key: node.key,
                 loc: [node.originalLatLon.lon, node.originalLatLon.lat],
-                pano: node.pano
+                pano: node.pano,
+                sequenceKey: node.sequenceKey
             };
         } else {
             _mlyActiveImage = null;
@@ -695,10 +684,10 @@ export default {
         }
 
         const hoveredImageKey = hovered && hovered.key;
-        const hoveredSequenceKey = hoveredImageKey && this.getSequenceKeyForImageKey(hoveredImageKey);
+        const hoveredSequenceKey = hovered && hovered.skey;
 
-        const selectedImageKey = _mlySelectedImageKey;
-        const selectedSequenceKey = selectedImageKey && this.getSequenceKeyForImageKey(selectedImageKey);
+        const selectedImageKey = _mlyActiveImage && _mlyActiveImage.key;
+        const selectedSequenceKey = _mlyActiveImage && _mlyActiveImage.sequenceKey;
 
         context.container().selectAll('.layer-mapillary .viewfield-group')
             .classed('highlighted', function(d) { return d.skey === selectedSequenceKey; })

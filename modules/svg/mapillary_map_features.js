@@ -61,7 +61,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        const selectedImageKey = service.getSelectedImageKey();
+        const selectedImageKey = service.getActiveImage() && service.getActiveImage().key;
         let imageKey;
         let highlightedDetection;
 
@@ -112,7 +112,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         let data = (service ? service.mapFeatures(projection) : []);
         data = filterData(data);
 
-        const selectedImageKey = service && service.getSelectedImageKey();
+        const selectedImageKey = service && service.getActiveImage() && service.getActiveImage().key;
         const transform = svgPointTransform(projection);
 
         const mapFeatures = layer.selectAll('.icon-map-feature')

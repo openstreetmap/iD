@@ -50,7 +50,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.reset();
             expect(mapillary.cache()).to.not.have.property('foo');
-            expect(mapillary.getSelectedImageKey()).to.be.null;
+            expect(mapillary.getActiveImage()).to.be.null;
         });
     });
 
@@ -134,9 +134,9 @@ describe('iD.serviceMapillary', function() {
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, skey: '-' } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, skey: '-' } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, skey: '-' } }
             ];
 
             mapillary.cache().images.rtree.load(features);
@@ -157,21 +157,19 @@ describe('iD.serviceMapillary', function() {
                 }
             };
 
-            mapillary.cache().sequences.lineString['-'] = gj;
-            mapillary.cache().sequences.forImageKey['0'] = '-';
-            mapillary.cache().sequences.forImageKey['1'] = '-';
-            mapillary.cache().sequences.forImageKey['2'] = '-';
+            mapillary.cache().sequences.lineString['-'] = [gj];
 
             var res = mapillary.sequences(context.projection);
             expect(res).to.deep.eql([gj]);
         });
     });
 
-    describe('#selectImage', function() {
+
+    describe('#setActiveImage', function() {
         it('gets and sets the selected image', function() {
-            var d = { key: 'baz', loc: [10,0] };
-            mapillary.selectImage(context, d.key);
-            expect(mapillary.getSelectedImageKey()).to.eql(d.key);
+            var node = { key: 'baz', originalLatLon: [10,0] };
+            mapillary.setActiveImage(node);
+            expect(mapillary.getActiveImage().key).to.eql(node.key);
         });
     });
 
