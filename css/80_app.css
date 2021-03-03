@@ -1085,7 +1085,7 @@ a.hide-toggle {
     visibility: visible;
 }
 .preset-icon-container.showing-img *:not(.image-icon) {
-    visibility: hidden;
+    display: none;
 }
 
 .preset-icon-point-border path {
