@@ -10780,6 +10780,41 @@
                 "description": "Esri archive imagery that may be clearer and more accurate than the default layer.",
                 "name": "Esri World Imagery (Clarity) Beta"
             },
+            "Geoportal2-PL-HighResolution-aerial_image_WMS": {
+                "attribution": {
+                    "text": "Główny Urząd Geodezji i Kartografii"
+                },
+                "description": "Ortofotomapa o rozdzielczości 10 cm lub większej. Dane posortowane są wg rozdzielczości a następnie wg aktualności, np. arkusz z 2012 roku o rozdzielczości 8 cm przysłania arkusz z 2019 roku o rozdzielczości 10 cm.",
+                "name": "Geoportal 2: High Resolution Orthophotomap (aerial image)"
+            },
+            "Geoportal2-PL-Streets_WMS": {
+                "attribution": {
+                    "text": "Główny Urząd Geodezji i Kartografii"
+                },
+                "description": "Usługa przeglądania WMS Krajowa Integracja Numeracji Adresowej umożliwiająca pobieranie obrazów mapowych utworzonych na podstawie danych przestrzennych z Państwowego Rejestru Granic w zakresie ewidencji ulic i adresów.",
+                "name": "Geoportal 2 Nazwy ulic"
+            },
+            "Geoportal2-PL-addres_points_WMS": {
+                "attribution": {
+                    "text": "Główny Urząd Geodezji i Kartografii"
+                },
+                "description": "Usługa przeglądania WMS Krajowa Integracja Numeracji Adresowej umożliwiająca pobieranie obrazów mapowych utworzonych na podstawie danych przestrzennych z Państwowego Rejestru Granic w zakresie ewidencji ulic i adresów.",
+                "name": "Geoportal 2: Punkty adresowe"
+            },
+            "Geoportal2-PL-aerial_image_WMS": {
+                "attribution": {
+                    "text": "Główny Urząd Geodezji i Kartografii"
+                },
+                "description": "Usługa przeglądania (Web Map Service,WMS) umożliwiająca przeglądanie ortofotomap dla obszaru Polski. Dane udostępniane za pomocą tej usługi stanowią ortofotomapę wykonaną ze zdjęć lotniczych. Usługa oferuje wsparcie dla interfejsu WMS 1.3.0.",
+                "name": "Geoportal 2: Orthophotomap (aerial image)"
+            },
+            "Geoportal2-PL-buildings_WMS": {
+                "attribution": {
+                    "text": "Główny Urząd Geodezji i Kartografii"
+                },
+                "description": "Usługa Krajowa Integracja Ewidencji Gruntów jest usługą zbiorczą prezentacji danych ewidencyjnych pochodzących bezpośrednio z jednostek szczebla powiatowego. Usługa zawiera jedynie dane tych jednostek, które dysponują usługą WMS o odpowiednich parametrach i zdecydowały się włączyć swoją usługę WMS do usługi zbiorczej KrajowaIntegracjaEwidencjiGruntow.",
+                "name": "Geoportal 2: Ewidencja budynków WMS"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors, CC-BY-SA 2.0"
@@ -10793,6 +10828,13 @@
                 },
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
+            },
+            "OSMUK-Cadastral-Parcels": {
+                "attribution": {
+                    "text": "Contains public sector information licensed under the Open Government Licence v3.0."
+                },
+                "description": "Perfectly aligned cadastral (land registry) parcels in Great Britain",
+                "name": "OSMUK Cadastral Parcels"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -10842,10 +10884,6 @@
             "SPW_PICC": {
                 "name": "SPW(allonie) PICC numerical imagery"
             },
-            "US-TIGER-Roads-2014": {
-                "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
-                "name": "TIGER Roads 2014"
-            },
             "US-TIGER-Roads-2017": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2017"
@@ -10857,6 +10895,10 @@
             "US-TIGER-Roads-2019": {
                 "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
                 "name": "TIGER Roads 2019"
+            },
+            "US-TIGER-Roads-2020": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2020"
             },
             "USDA-NAIP": {
                 "description": "The most recent year of DOQQs from the National Agriculture Imagery Program (NAIP) for each state in the contiguous United States.",
@@ -10974,12 +11016,33 @@
                 "description": "The city map is an overview map that describes Gothenburg. It contains general information about land, communications, hydrography, buildings, address numbers and street names, administrative division and other orientation text.",
                 "name": "Gothenburg City map"
             },
+            "gothenburg-dtm-2017": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "Web map service presenting hillshade and slope based on the 2017 elevation model for City of Gothenburg. Resolution 0.5 meters per pixel.",
+                "name": "Gothenburg Hillshade"
+            },
             "gothenburg-ortho": {
                 "attribution": {
                     "text": "© Gothenburg municipality, CC0"
                 },
                 "description": "Orthophoto for Gothenburg municipality",
-                "name": "Gothenburg Orthophoto"
+                "name": "Gothenburg Orthophoto 2015"
+            },
+            "gothenburg-ortho_2017": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "Orthophoto for Gothenburg municipality",
+                "name": "Gothenburg Orthophoto 2017"
+            },
+            "gothenburg-ortho_2019": {
+                "attribution": {
+                    "text": "© Gothenburg municipality, CC0"
+                },
+                "description": "Orthophoto for Gothenburg municipality",
+                "name": "Gothenburg Orthophoto 2019"
             },
             "gsi.go.jp_airphoto": {
                 "attribution": {
@@ -11029,6 +11092,13 @@
                 },
                 "description": "Orthophotos for urban areas of the municipality of Kalmar 2018",
                 "name": "Kalmar Urban Orthophoto 2018"
+            },
+            "kalmar-orto-2020": {
+                "attribution": {
+                    "text": "© Kalmar municipality"
+                },
+                "description": "Orthophotos for urban areas of the municipality of Kalmar 2020",
+                "name": "Kalmar Urban Orthophoto 2020"
             },
             "kelkkareitit": {
                 "attribution": {

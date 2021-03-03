@@ -36,6 +36,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.19.6
+##### 2020-Mar-3
+
+#### :sparkles: Usability & Accessibility
+* Update lists of Backgrounds and Overlays
+
 # 2.19.5
 ##### 2020-Nov-9
 

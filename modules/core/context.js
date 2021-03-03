@@ -26,7 +26,7 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.19.5';
+  context.version = '2.19.6';
   context.privacyVersion = '20200407';
 
   // iD will alter the hash so cache the parameters intended to setup the session
