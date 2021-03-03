@@ -1,186 +1,26 @@
 import { t } from '../core/localizer';
-import { matcher as Matcher } from 'name-suggestion-index';
 
-import { fileFetcher, locationManager } from '../core';
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
+import { fileFetcher } from '../core';
 import { presetManager } from '../presets';
+import { services } from '../services';
 import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
-import { utilArrayUniq, utilDisplayLabel, utilHashcode, utilTagDiff } from '../util';
+import { utilDisplayLabel, utilHashcode, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationOutdatedTags() {
   const type = 'outdated_tags';
   let _waitingForDeprecated = true;
-  let _waitingForNSI = true;
   let _dataDeprecated;
-  let _nsi;
 
   // fetch deprecated tags
   fileFetcher.get('deprecated')
     .then(d => _dataDeprecated = d)
     .catch(() => { /* ignore */ })
     .finally(() => _waitingForDeprecated = false);
-
-
-  function delay(msec) {
-    return new Promise(resolve => {
-      window.setTimeout(resolve, msec);
-    });
-  }
-
-  // This Promise will fulfill after NSI presets are loaded and locations merged into the locationManager.
-  function waitForNSIPresets() {
-    return Promise.all([
-      fileFetcher.get('nsi_presets'),
-      fileFetcher.get('nsi_features')
-    ])
-    .then(() => delay(1000))  // wait 1 sec for locationSets to enter the locationManager queue
-    .then(() => locationManager.mergeLocationSets([]) );
-  }
-
-  // Fetch the name-suggestion-index data
-  waitForNSIPresets()
-    .then(() => Promise.all([
-      fileFetcher.get('nsi_data'),
-      fileFetcher.get('nsi_replacements'),
-      fileFetcher.get('nsi_trees')
-    ]))
-    .then(vals => {
-      if (_nsi) return _nsi;
-
-      _nsi = {
-        data:          vals[0].nsi,            // the raw name-suggestion-index data
-        replacements:  vals[1].replacements,   // trivial old->new qid replacements
-        trees:         vals[2].trees,          // metadata about trees, main tags
-        keys:          new Set(),              // primary osm keys to check for a NSI match
-        qids:          new Map(),              // Map wd/wp tag values -> qids
-        ids:           new Map()               // Map id -> NSI item
-      };
-
-      _nsi.matcher = Matcher();
-      _nsi.matcher.buildMatchIndex(_nsi.data);
-      _nsi.matcher.buildLocationIndex(_nsi.data, locationManager.loco());
-
-      Object.keys(_nsi.data).forEach(tkv => {
-        const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
-        const t = parts[0];
-        const k = parts[1];
-
-        // Collect primary keys  (e.g. "amenity", "craft", "shop", "man_made", "route", etc)
-        _nsi.keys.add(k);
-
-        const tree = _nsi.trees[t];     // e.g. "brands", "operators"
-        const mainTag = tree.mainTag;   // e.g. "brand:wikidata", "operator:wikidata", etc
-
-        const items = _nsi.data[tkv] || [];
-        items.forEach(item => {
-          // Cache NSI ids and main tags
-          item.mainTag = mainTag;
-          _nsi.ids.set(item.id, item);
-
-          // Cache Wikidata/Wikipedia values, for #6416
-          const wd = item.tags[mainTag];
-          const wp = item.tags[mainTag.replace('wikidata', 'wikipedia')];
-          if (wd)         _nsi.qids.set(wd, wd);
-          if (wp && wd)   _nsi.qids.set(wp, wd);
-        });
-      });
-
-      _nsi.keys.add('building');  // fallback can match building=* for some categories
-      return _nsi;
-    })
-    .catch(() => { /* ignore */ })
-    .finally(() => _waitingForNSI = false);
-
-
-  // Patterns for matching OSM keys that might contain namelike values.
-  // These roughly correspond to the "trees" concept in name-suggestion-index,
-  // but they can't be trees because there is overlap between different trees
-  // (e.g. 'amenity/yes' could match something from the "brands" tree or the "operators" tree)
-  const namePatterns = {
-    transit: {
-      primary: [
-        /^network$/i
-      ],
-      alternate: [
-        /^(operator|network)(:\\w+)?$/i,    // `network:guid`, `network:short`, etc.
-        /^(\\w+)_name(:\\w+)?$/i
-      ]
-    },
-    flags: {
-      primary: [
-        /^flag:name(:\\w+)?$/i          // `flag:name`, poss. w/ lang suffix
-      ],
-      alternate: [
-        /^(flag|subject)(:\\w+)?$/i     // note: no `country`, we special-case it in gatherNames
-      ]
-    },
-    pois: {
-      primary: [
-        /^name(:\\w+)?$/i               // `name`, poss. w/ lang suffix
-      ],
-      alternate: [
-        /^(brand|operator)(:\\w+)?$/i,  // `brand` or `operator`, poss. w/ lang suffix
-        /^(\\w+)_name(:\\w+)?$/i        // `alt_name`, `short_name`, `official_name`, poss. w/ lang suffix
-      ]
-    },
-  };
-
-  // There are a few exceptions to the namelike regexes.
-  // Usually a tag suffix contains a language code like `name:en`, `name:ru`
-  // but we want to exclude things like `operator:type`, `name:etymology`, etc..
-  const notNames = /:(colour|type|left|right|etymology|pronunciation|wikipedia)$/i;
-
-
-  // Gather all the namelike values that we will run through the NSI matcher
-  function gatherNames(tags) {
-    let names = [];
-    let patterns;
-
-    if (tags.route) {
-      patterns = namePatterns.transit;
-    } else if (tags.man_made === 'flagpole') {
-      patterns = namePatterns.flags;
-    } else {
-      patterns = namePatterns.pois;
-    }
-
-    let osmkeys = Object.keys(tags);
-    for (let j = 0; j < osmkeys.length; j++) {
-      const k = osmkeys[j];
-      const v = tags[k];
-      if (!v) continue;
-
-      if (isNamelike(k, 'primary')) {
-        if (/;/.test(v))  return [];   // bail out if any namelike value contains a semicolon
-        names.unshift(v);              // primary names at the beginning of the list
-      }
-      else if (isNamelike(k, 'alternate')) {
-        if (/;/.test(v))  return [];   // bail out if any namelike value contains a semicolon
-        names.push(v);                 // alternate names at the end of the list
-      }
-    }
-
-    names = utilArrayUniq(names);
-
-    // For flags only, fallback to `country` tag only if no other namelike values were found.
-    // See https://github.com/openstreetmap/iD/pull/8305#issuecomment-769174070
-    if (tags.man_made === 'flagpole' && !names.length && !!tags.country) {
-      const v = tags.country;
-      if (/;/.test(v))  return [];   // bail out if any namelike value contains a semicolon
-      names = [v];
-    }
-
-    return names;
-
-
-    function isNamelike(osmkey, which) {
-      return patterns[which].some(regex => regex.test(osmkey) && !notNames.test(osmkey));
-    }
-  }
 
 
   function oldTagIssues(entity, graph) {
@@ -224,143 +64,22 @@ export function validationOutdatedTags() {
     }
 
     // Attempt to match a canonical record in the name-suggestion-index.
-    // This index contains the most correct tagging for many commonly mapped features.
-    // See https://github.com/osmlab/name-suggestion-index  and https://nsi.guide
-    if (_nsi) {
-
-      // Perform trivial Wikipedia/Wikidata replacements
-      Object.keys(newTags).forEach(osmkey => {
-        const matchTag = osmkey.match(/^(\w+:)?wikidata$/);
-        if (matchTag) {                         // Look at '*:wikidata' tags
-          const prefix = (matchTag[1] || '');
-          const wd = newTags[osmkey];
-          const replace = _nsi.replacements[wd];    // If it matches a QID in the replacement list...
-
-          if (replace && replace.wikidata !== undefined) {   // replace or delete `*:wikidata` tag
-            if (replace.wikidata) {
-              newTags[osmkey] = replace.wikidata;
-            } else {
-              delete newTags[osmkey];
-            }
-          }
-          if (replace && replace.wikipedia !== undefined) {  // replace or delete `*:wikipedia` tag
-            const wpkey = `${prefix}wikipedia`;
-            if (replace.wikipedia) {
-              newTags[wpkey] = replace.wikipedia;
-            } else {
-              delete newTags[wpkey];
-            }
-          }
-        }
-      });
-
-      // Do `wikidata` or `wikipedia` tags identify this entity as a chain?  #6416
-      // If so, these tags can be swapped to e.g. `brand:wikidata`/`brand:wikipedia` below.
-      let foundQID = _nsi.qids.get(newTags.wikidata) || _nsi.qids.get(newTags.wikipedia);
-
-      // We will only spend time to compute these things if it's necessary
-      let names, loc, match;
-
-      // Try each primary key ("amenity", "craft", "shop", "man_made", "route", etc)
-      const nsiKeys = Array.from(_nsi.keys);
-      for (let i = 0; i < nsiKeys.length; i++) {
-        if (match) break;  // matched already, stop looking
-        let k = nsiKeys[i];
-        let v = newTags[k];
-        if (!v) continue;
-
-        // Only attempt a match on building/yes if there is nothing else remarkable about that building.
-        if (k === 'building') {
-          v = 'yes';
-          if (preset.id !== 'building/yes') continue;  // the feature matched a better preset
-        }
-
-        if (!loc) {     // collect location for this feature only once
-          loc = entity.extent(graph).center();
-        }
-
-        if (!names) {   // collect names for this feature only once
-          names = gatherNames(newTags);
-          if (foundQID) names.push(foundQID);  // matcher will recognize the QID as an alternate name too
-        }
-
-        // Try each namelike value
-        for (let n = 0; n < names.length; n++) {
-          match = _nsi.matcher.match(k, v, names[n], loc);   // Attempt to match an item in NSI
-          if (!match) continue;  // keep looking
-
-          // If we get here, there was a match..
-          // A match may contain multiple results, the first one is the best one for this location
-          // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
-          const itemID = match[0].itemID;
-          const item = _nsi.ids.get(itemID);
-          const mainTag = item.mainTag;               // e.g. `brand:wikidata`
-          const itemQID = item.tags[mainTag];         // e.g. `brand:wikidata` qid
-          const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
-
-          // Exceptions, throw out the match
-          if (
-            (!itemQID || itemQID === notQID) ||       // no `*:wikidata` or matched a `not:*:wikidata`
-            (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
-          ) {
-            match = null;   // forget match and keep looking
-            continue;       // (it might make sense to stop looking, not sure)
-          }
-
-          // We are keeping the match at this point
+    const nsi = services.nsi;
+    let waitingForNsi = false;
+    if (nsi) {
+      waitingForNsi = (nsi.status() === 'loading');
+      if (!waitingForNsi) {
+        const loc = entity.extent(graph).center();
+        const result = nsi.upgradeTags(newTags, loc);
+        if (result) {
+          newTags = result;
           subtype = 'noncanonical_brand';
-
-          // Keys that we don't want NSI to overwrite.
-          let keepKeys = [/^building$/i, /^flag:name$/i, /^takeaway$/i];
-
-          // Don't overwrite a `name` tag if this preset shows a `brand` or `operator` field.
-          // (For presets like hotels, car dealerships, post offices, the `name` should be left alone)
-          // see also similar logic in `localized.js`
-          const nsiPreset = presetManager.matchTags(item.tags, 'point');  // (the actual geometry doesn't matter)
-          if (nsiPreset) {
-            const fields = nsiPreset.fields();
-            const showsBrandField = fields.some(d => d.id === 'brand');
-            const showsOperatorField = fields.some(d => d.id === 'operator');
-            const setsName = item.tags.name;
-            const setsBrandWikidata = item.tags['brand:wikidata'];
-            const setsOperatorWikidata = item.tags['operator:wikidata'];
-
-            if (setsName && (
-              (setsBrandWikidata && showsBrandField) ||
-              (setsOperatorWikidata && showsOperatorField)
-            )) {
-              keepKeys.push(/^name(:\w+)?$/i);   // `name`, `name:en`, etc
-            }
-          }
-
-          // Preserve some tag values that we don't want NSI to overwrite.
-          let keepTags = {};
-          Object.keys(newTags).forEach(k => {
-            if (keepKeys.some(pattern => pattern.test(k))) {
-              keepTags[k] = newTags[k];
-            }
-          });
-
-          // Replace the primary tags with what's in NSI ("amenity", "craft", "shop", "man_made", "route", etc)
-          nsiKeys.forEach(k => delete newTags[k]);
-          // Replace `wikidata`/`wikipedia` with e.g. `brand:wikidata`/`brand:wikipedia`
-          if (foundQID) {
-            delete newTags.wikipedia;
-            delete newTags.wikidata;
-          }
-
-          Object.assign(newTags, item.tags, keepTags);
-          break;  // stop looking
         }
       }
-
-      // maybe someday: match features without the location to determine
-      // if a feature appears somewhere in the world that it shouldn't.
-
-    }   // end if _nsi
+    }
 
     let issues = [];
-    issues.provisional = (_waitingForDeprecated || _waitingForNSI);
+    issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
     // determine diff
     const tagDiff = utilTagDiff(oldTags, newTags);

@@ -2,11 +2,38 @@ describe('iD.validations.suspicious_name', function () {
     var context;
 
     before(function() {
-        iD.fileFetcher.cache().nsi_generics = { genericWords: ['^stores?$'] };
+        iD.services.nsi = iD.serviceNsi;
+        iD.fileFetcher.cache().nsi_presets = { presets: {} };
+        iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
+        iD.fileFetcher.cache().nsi_replacements = { replacements: {} };
+
+        iD.fileFetcher.cache().nsi_trees = {
+          trees: {
+            brands: {
+              mainTag: 'brand:wikidata'
+            }
+          }
+        };
+        iD.fileFetcher.cache().nsi_data = {
+          nsi: {
+            'brands/shop/supermarket': {
+              properties: {
+                path: 'brands/shop/supermarket',
+                exclude: {
+                  generic: ['^(mini|super)?\\s?(market|mart|mercado)( municipal)?$' ],
+                  named: ['^(famiglia cooperativa|семейный)$']
+                }
+              }
+            }
+          }
+        };
+        iD.fileFetcher.cache().nsi_generics = {
+          genericWords: ['^stores?$']
+        };
     });
 
     after(function() {
-        iD.fileFetcher.cache().nsi_generics = { genericWords: [] };
+        delete iD.services.nsi;
     });
 
     beforeEach(function() {
@@ -86,8 +113,33 @@ describe('iD.validations.suspicious_name', function () {
         }, 20);
     });
 
-    it('flags feature with a known generic name', function(done) {
-        createWay({ shop: 'supermarket', name: 'Store' });
+    it('ignores feature matching excludeNamed pattern in name-suggestion-index', function(done) {
+        createWay({ shop: 'supermarket', name: 'famiglia cooperativa' });
+        var validator = iD.validationSuspiciousName(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
+    });
+
+    it('flags feature matching a excludeGeneric pattern in name-suggestion-index', function(done) {
+        createWay({ shop: 'supermarket', name: 'super mercado' });
+        var validator = iD.validationSuspiciousName(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(1);
+            var issue = issues[0];
+            expect(issue.type).to.eql('suspicious_name');
+            expect(issue.subtype).to.eql('generic_name');
+            expect(issue.entityIds).to.have.lengthOf(1);
+            expect(issue.entityIds[0]).to.eql('w-1');
+            done();
+        }, 20);
+    });
+
+    it('flags feature matching a global exclude pattern in name-suggestion-index', function(done) {
+        createWay({ shop: 'supermarket', name: 'store' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
             var issues = validate(validator);

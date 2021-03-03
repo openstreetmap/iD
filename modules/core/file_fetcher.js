@@ -19,14 +19,6 @@ export function coreFileFetcher() {
     'keepRight': 'data/keepRight.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',
-
-    'nsi_presets': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.min.json',
-    'nsi_data': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/nsi.min.json',
-    'nsi_features': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/featureCollection.min.json',
-    'nsi_generics': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/genericWords.min.json',
-    'nsi_replacements': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/replacements.min.json',
-    'nsi_trees': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/trees.min.json',
-
     'oci_features': 'https://cdn.jsdelivr.net/npm/osm-community-index@3/dist/featureCollection.min.json',
     'oci_resources': 'https://cdn.jsdelivr.net/npm/osm-community-index@3/dist/resources.min.json',
     'preset_categories': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json',

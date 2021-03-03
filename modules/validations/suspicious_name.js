@@ -1,8 +1,8 @@
-import { fileFetcher } from '../core/file_fetcher';
-import { t, localizer } from '../core/localizer';
-import { presetManager } from '../presets';
-import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
+import { presetManager } from '../presets';
+import { services } from '../services';
+import { t, localizer } from '../core/localizer';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationSuspiciousName() {
@@ -11,27 +11,23 @@ export function validationSuspiciousName() {
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
     'leisure', 'railway', 'man_made', 'office', 'shop', 'tourism', 'waterway'
   ];
-  let _dataGenerics;
-  let _waitingForGenerics = true;
-
-  fileFetcher.get('nsi_generics')
-    .then(data => {
-      if (_dataGenerics) return _dataGenerics;
-
-      // known list of generic names (e.g. "bar")
-      _dataGenerics = data.genericWords.map(pattern => new RegExp(pattern, 'i'));
-      return _dataGenerics;
-    })
-    .catch(() => { /* ignore */ })
-    .finally(() => _waitingForGenerics = false);
+  let _waitingForNsi = false;
 
 
-  function isDiscardedSuggestionName(lowercaseName) {
-    if (!_dataGenerics) return false;
-    return _dataGenerics.some(regex => regex.test(lowercaseName));
+  // Attempt to match a generic record in the name-suggestion-index.
+  function isGenericMatchInNsi(tags) {
+    const nsi = services.nsi;
+    if (nsi) {
+      _waitingForNsi = (nsi.status() === 'loading');
+      if (!_waitingForNsi) {
+        return nsi.isGenericName(tags);
+      }
+    }
+    return false;
   }
 
-  // test if the name is just the key or tag value (e.g. "park")
+
+  // Test if the name is just the key or tag value (e.g. "park")
   function nameMatchesRawTag(lowercaseName, tags) {
     for (let i = 0; i < keysToTestForGenericValues.length; i++) {
       let key = keysToTestForGenericValues[i];
@@ -51,7 +47,7 @@ export function validationSuspiciousName() {
 
   function isGenericName(name, tags) {
     name = name.toLowerCase();
-    return nameMatchesRawTag(name, tags) || isDiscardedSuggestionName(name);
+    return nameMatchesRawTag(name, tags) || isGenericMatchInNsi(tags);
   }
 
   function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
@@ -173,7 +169,7 @@ export function validationSuspiciousName() {
         }
       }
       if (isGenericName(value, tags)) {
-        issues.provisional = _waitingForGenerics;  // retry later if we don't have the generics yet
+        issues.provisional = _waitingForNsi;  // retry later if we are waiting on NSI to finish loading
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }
     }

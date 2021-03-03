@@ -20,12 +20,6 @@ iD.fileFetcher.cache().preset_presets = {};
 
 // Initializing `coreContext` initializes `_validator`, which tries loading:
 iD.fileFetcher.cache().deprecated = [];
-iD.fileFetcher.cache().nsi_presets = { presets: {} };
-iD.fileFetcher.cache().nsi_data = { nsi: {} };
-iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
-iD.fileFetcher.cache().nsi_generics = { genericWords: [] };
-iD.fileFetcher.cache().nsi_replacements = { replacements: {} };
-iD.fileFetcher.cache().nsi_trees = { trees: {} };
 
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
 iD.fileFetcher.cache().discarded = {};
