@@ -37,7 +37,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 # 2.19.6
-##### 2020-Mar-3
+##### 2021-Mar-3
 
 #### :sparkles: Usability & Accessibility
 * Update lists of Backgrounds and Overlays
