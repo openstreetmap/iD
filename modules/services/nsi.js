@@ -32,6 +32,10 @@ const notNames = /:(colou?r|type|forward|backward|left|right|etymology|pronuncia
 
 // PRIVATE FUNCTIONS
 
+function escapeRegex(s) {
+  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
 // `setNsiSources()`
 // Adds the sources to iD's filemap so we can start downloading data.
 //
@@ -410,6 +414,37 @@ function _upgradeTags(tags, loc) {
     }
 
     Object.assign(newTags, item.tags, keepTags);
+
+    // Special `branch` splitting rule - IF..
+    // - we are suggesting to replace `name`, AND
+    // - `branch` doesn't already contain something, AND
+    // - original name has not moved to an alternate name (e.g. "Dunkin' Donuts" -> "Dunkin'"), AND
+    // - original name is just "some name" + "some stuff", THEN
+    // consider splitting `name` into `name` and `branch`..
+    const origName = tags.name;
+    const newName = newTags.name;
+    if (newName && origName && newName !== origName && !newTags.branch) {
+      const newNames = gatherNames(newTags);
+      const newSet = new Set([...newNames.primary, ...newNames.alternate]);
+      const isMoved = newSet.has(origName);
+      if (!isMoved) {
+        // Try the new names, longest to shortest, to match them into a "Name Branch" pattern.
+        const candidates = Array.from(newSet).sort((a, b) => b.length - a.length);
+        for (let j = 0; j < candidates.length; j++) {
+          const n = escapeRegex(candidates[j]);
+          const re = new RegExp(`^${n}\\s(.+)$`, 'i');  // e.g. "Tesco Canary Wharf"
+          const captured = origName.match(re);
+          if (captured) {
+            const branch = captured[1].trim();
+            if (branch) {
+              newTags.branch = captured[1];
+              break;
+            }
+          }
+        }
+      }
+    }
+
     return newTags;
   }
 
