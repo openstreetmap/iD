@@ -178,8 +178,11 @@ function gatherKVs(tags) {
     const vmap = _nsi.kvt.get(osmkey);
     if (!vmap) return;
 
-    primary.add(`${osmkey}/${osmvalue}`);
-    alternate.add(`${osmkey}/yes`);
+    if (osmvalue !== 'yes') {
+      primary.add(`${osmkey}/${osmvalue}`);
+    } else {
+      alternate.add(`${osmkey}/${osmvalue}`);
+    }
   });
 
   // Can we try a generic building fallback match? - See #6122, #7197
@@ -187,7 +190,9 @@ function gatherKVs(tags) {
   // For example, a way with `building=yes` + `name=Westfield` may be a Westfield department store.
   // But a way with `building=yes` + `name=Westfield` + `public_transport=station` is a train station for a town named "Westfield"
   const preset = presetManager.matchTags(tags, 'area');
-  if (buildingPreset[preset.id])  alternate.add('building/yes');
+  if (buildingPreset[preset.id]) {
+    alternate.add('building/yes');
+  }
 
   return { primary: primary, alternate: alternate };
 }
@@ -213,23 +218,6 @@ function gatherNames(tags) {
   let alternate = new Set();
   let foundSemi = false;
   let patterns;
-
-  // Canonical `*:wikidata` tags insert first and take priority over everything
-  // e.g. "brand:wikidata", "operator:wikidata", etc
-  const mainTags = Object.values(_nsi.trees).map(tree => tree.mainTag);
-  mainTags.forEach(osmkey => {
-    const osmvalue = tags[osmkey];
-    if (!osmvalue) return;
-
-    if (/;/.test(osmvalue)) {
-      foundSemi = true;
-    } else {
-      primary.add(osmvalue);
-    }
-  });
-  // If any namelike value contained a semicolon, return empty set and don't try matching anything.
-  if (foundSemi) return empty;
-
 
   // Patterns for matching OSM keys that might contain namelike values.
   // These roughly correspond to the "trees" concept in name-suggestion-index,
