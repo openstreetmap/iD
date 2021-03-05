@@ -41,10 +41,11 @@ function escapeRegex(s) {
 //
 function setNsiSources() {
   const sources = {
-    'nsi_presets': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.min.json',
     'nsi_data': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/nsi.min.json',
+    'nsi_dissolved': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/dissolved.min.json',
     'nsi_features': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/featureCollection.min.json',
     'nsi_generics': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/genericWords.min.json',
+    'nsi_presets': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.min.json',
     'nsi_replacements': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/replacements.min.json',
     'nsi_trees': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/trees.min.json'
   };
@@ -86,14 +87,16 @@ function loadNsiData() {
   return (
     Promise.all([
       fileFetcher.get('nsi_data'),
+      fileFetcher.get('nsi_dissolved'),
       fileFetcher.get('nsi_replacements'),
       fileFetcher.get('nsi_trees')
     ])
     .then(vals => {
       _nsi = {
         data:          vals[0].nsi,            // the raw name-suggestion-index data
-        replacements:  vals[1].replacements,   // trivial old->new qid replacements
-        trees:         vals[2].trees,          // metadata about trees, main tags
+        dissolved:     vals[1].dissolved,      // list of dissolved items
+        replacements:  vals[2].replacements,   // trivial old->new qid replacements
+        trees:         vals[3].trees,          // metadata about trees, main tags
         kvt:           new Map(),              // Map (k -> Map (v -> t) )
         qids:          new Map(),              // Map (wd/wp tag values -> qids)
         ids:           new Map()               // Map (id -> NSI item)
@@ -367,6 +370,8 @@ function _upgradeTags(tags, loc) {
     for (let j = 0; j < hits.length; j++) {
       const hit = hits[j];
       itemID = hit.itemID;
+      if (_nsi.dissolved[itemID]) continue;       // don't upgrade to a dissolved item
+
       item = _nsi.ids.get(itemID);
       if (!item) continue;
       const mainTag = item.mainTag;               // e.g. `brand:wikidata`
