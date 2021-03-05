@@ -189,10 +189,7 @@ function gatherKVs(tags) {
   const preset = presetManager.matchTags(tags, 'area');
   if (buildingPreset[preset.id])  alternate.add('building/yes');
 
-  return {
-    primary: primary,
-    alternate: alternate
-  };
+  return { primary: primary, alternate: alternate };
 }
 
 
@@ -214,7 +211,25 @@ function gatherNames(tags) {
   const empty = { primary: new Set(), alternate: new Set() };
   let primary = new Set();
   let alternate = new Set();
+  let foundSemi = false;
   let patterns;
+
+  // Canonical `*:wikidata` tags insert first and take priority over everything
+  // e.g. "brand:wikidata", "operator:wikidata", etc
+  const mainTags = Object.values(_nsi.trees).map(tree => tree.mainTag);
+  mainTags.forEach(osmkey => {
+    const osmvalue = tags[osmkey];
+    if (!osmvalue) return;
+
+    if (/;/.test(osmvalue)) {
+      foundSemi = true;
+    } else {
+      primary.add(osmvalue);
+    }
+  });
+  // If any namelike value contained a semicolon, return empty set and don't try matching anything.
+  if (foundSemi) return empty;
+
 
   // Patterns for matching OSM keys that might contain namelike values.
   // These roughly correspond to the "trees" concept in name-suggestion-index,
@@ -237,16 +252,23 @@ function gatherNames(tags) {
     };
   }
 
+  // Check other tags
   Object.keys(tags).forEach(osmkey => {
     const osmvalue = tags[osmkey];
     if (!osmvalue) return;
 
     if (isNamelike(osmkey, 'primary')) {
-      if (/;/.test(osmvalue))  return empty;   // bail out if any namelike value contains a semicolon
-      primary.add(osmvalue);
-    } else if (isNamelike(osmkey, 'alternate')) {
-      if (/;/.test(osmvalue))  return empty;   // bail out if any namelike value contains a semicolon
-      alternate.add(osmvalue);
+      if (/;/.test(osmvalue)) {
+        foundSemi = true;
+      } else {
+        primary.add(osmvalue);
+      }
+    } else if (!primary.has(osmvalue) && isNamelike(osmkey, 'alternate')) {
+      if (/;/.test(osmvalue)) {
+        foundSemi = true;
+      } else {
+        alternate.add(osmvalue);
+      }
     }
   });
 
@@ -254,14 +276,19 @@ function gatherNames(tags) {
   // See https://github.com/openstreetmap/iD/pull/8305#issuecomment-769174070
   if (tags.man_made === 'flagpole' && !primary.size && !alternate.size && !!tags.country) {
     const osmvalue = tags.country;
-    if (/;/.test(osmvalue))  return empty;   // bail out if any namelike value contains a semicolon
-    alternate.add(osmvalue);
+    if (/;/.test(osmvalue)) {
+      foundSemi = true;
+    } else {
+      alternate.add(osmvalue);
+    }
   }
 
-  return {
-    primary: primary,
-    alternate: alternate
-  };
+  // If any namelike value contained a semicolon, return empty set and don't try matching anything.
+  if (foundSemi) {
+    return empty;
+  } else {
+    return { primary: primary, alternate: alternate };
+  }
 
   function isNamelike(osmkey, which) {
     return patterns[which].test(osmkey) && !notNames.test(osmkey);
@@ -270,7 +297,7 @@ function gatherNames(tags) {
 
 
 // `gatherTuples()`
-// Generate all combinations of key,value,name that we want to test.
+// Generate all combinations of [key,value,name] that we want to test.
 // This prioritizes them so that the primary name and k/v pairs go first
 //
 // Arguments
@@ -425,7 +452,7 @@ function _upgradeTags(tags, loc) {
     // - `branch` doesn't already contain something, AND
     // - original name has not moved to an alternate name (e.g. "Dunkin' Donuts" -> "Dunkin'"), AND
     // - original name is just "some name" + "some stuff", THEN
-    // consider splitting `name` into `name` and `branch`..
+    // consider splitting `name` into `name`/`branch`..
     const origName = tags.name;
     const newName = newTags.name;
     if (newName && origName && newName !== origName && !newTags.branch) {
