@@ -5,6 +5,7 @@ describe('iD.validations.suspicious_name', function () {
         iD.services.nsi = iD.serviceNsi;
         iD.fileFetcher.cache().nsi_presets = { presets: {} };
         iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
+        iD.fileFetcher.cache().nsi_dissolved = { dissolved: {} };
         iD.fileFetcher.cache().nsi_replacements = { replacements: {} };
 
         iD.fileFetcher.cache().nsi_trees = {
