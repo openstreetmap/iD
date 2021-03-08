@@ -385,7 +385,7 @@ function _upgradeTags(tags, loc) {
     for (let j = 0; j < hits.length; j++) {
       const hit = hits[j];
       itemID = hit.itemID;
-      if (_nsi.dissolved[itemID]) continue;       // don't upgrade to a dissolved item
+      if (_nsi.dissolved[itemID]) continue;       // Don't upgrade to a dissolved item
 
       item = _nsi.ids.get(itemID);
       if (!item) continue;
@@ -394,7 +394,7 @@ function _upgradeTags(tags, loc) {
       const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
 
       if (                                        // Exceptions, skip this hit
-        (!itemQID || itemQID === notQID) ||       // no `*:wikidata` or matched a `not:*:wikidata`
+        (!itemQID || itemQID === notQID) ||       // No `*:wikidata` or matched a `not:*:wikidata`
         (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
       ) {
         item = null;
@@ -404,7 +404,7 @@ function _upgradeTags(tags, loc) {
       }
     }
 
-    // can't use any of these hits, try next tuple
+    // Can't use any of these hits, try next tuple..
     if (!item) continue;
 
     // At this point we have matched a canonical item and can suggest tag upgrades..
@@ -412,7 +412,7 @@ function _upgradeTags(tags, loc) {
     const category = _nsi.data[tkv];
     const properties = category.properties || {};
 
-    // Preserve some tags that we specifally don't want NSI to overwrite. ('^name', sometimes)
+    // Preserve some tags that we specifically don't want NSI to overwrite. ('^name', sometimes)
     const preserveTags = item.preserveTags || properties.preserveTags || [];
     let regexes = preserveTags.map(s => new RegExp(s, 'i'));
     regexes.push(/^building$/i, /^takeaway$/i);
@@ -425,7 +425,10 @@ function _upgradeTags(tags, loc) {
     });
 
     // Remove any primary tags ("amenity", "craft", "shop", "man_made", "route", etc)
-    _nsi.kvt.forEach((v, k) => delete newTags[k]);
+    // with a value like `amenity=yes` or `shop=yes`
+    _nsi.kvt.forEach((vmap, k) => {
+      if (newTags[k] === 'yes') delete newTags[k];
+    });
 
     // Replace mistagged `wikidata`/`wikipedia` with e.g. `brand:wikidata`/`brand:wikipedia`
     if (foundQID) {
@@ -433,6 +436,7 @@ function _upgradeTags(tags, loc) {
       delete newTags.wikidata;
     }
 
+    // Do the tag upgrade
     Object.assign(newTags, item.tags, keepTags);
 
     // Special `branch` splitting rule - IF..
