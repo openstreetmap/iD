@@ -146,7 +146,9 @@ export function validationOutdatedTags() {
       if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
         messageID += '_incomplete';
       }
-      return t.html(messageID, { feature: utilDisplayLabel(currEntity, context.graph()) });
+      return t.html(messageID, {
+        feature: utilDisplayLabel(currEntity, context.graph(), true /* verbose */)
+      });
     }
 
 
