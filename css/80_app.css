@@ -3547,6 +3547,9 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .issue-container:not(.active) ul.issue-fix-list {
     display: none;
 }
+.issue-container:not(.active) .issue-info {
+    display: none;
+}
 
 .issue-info {
     flex: 1 1 auto;
