@@ -235,7 +235,7 @@ export function validationOutdatedTags() {
       if (!currMultipolygon) return '';
 
       return t.html('issues.old_multipolygon.message',
-          { multipolygon: utilDisplayLabel(currMultipolygon, context.graph()) }
+          { multipolygon: utilDisplayLabel(currMultipolygon, context.graph(), true /* verbose */) }
       );
     }
 
