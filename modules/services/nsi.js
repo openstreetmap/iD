@@ -198,6 +198,43 @@ function gatherKVs(tags) {
 }
 
 
+// `identifyTree()`
+// NSI has a concept of trees: "brands", "operators", "flags", "transit".
+// The tree determines things like which tags are namelike, and which tags hold important wikidata.
+// This takes an Object of tags and tries to identify what tree to use.
+//
+// Arguments
+//   `tags`: `Object` containing the feature's OSM tags
+// Returns
+//   `string` the name of the tree if known
+//   or 'unknown' if it could match several trees (e.g. amenity/yes)
+//   or null if no match
+//
+function identifyTree(tags) {
+  let unknown;
+  let t;
+
+  // Check all tags
+  Object.keys(tags).forEach(osmkey => {
+    if (t) return;  // found already
+
+    const osmvalue = tags[osmkey];
+    if (!osmvalue) return;
+
+    const vmap = _nsi.kvt.get(osmkey);
+    if (!vmap) return;  // this key is not in nsi
+
+    if (osmvalue === 'yes') {
+      unknown = 'unknown';
+    } else {
+      t = vmap.get(osmvalue);
+    }
+  });
+
+  return t || unknown || null;
+}
+
+
 // `gatherNames()`
 // Gather all the namelike values that we will run through the NSI matcher.
 // It will gather values primarily from tags `name`, `name:ru`, `flag:name`
@@ -221,26 +258,37 @@ function gatherNames(tags) {
 
   // Patterns for matching OSM keys that might contain namelike values.
   // These roughly correspond to the "trees" concept in name-suggestion-index,
-  // but they can't be trees because there is overlap between different trees
-  // (e.g. 'amenity/yes' could match something from the "brands" tree or the "operators" tree)
-  if (tags.route) {
+  let t = identifyTree(tags);
+  if (!t) return empty;
+
+  if (t === 'transit') {
     patterns = {
       primary: /^network$/i,
       alternate: /^(operator|operator:\w+|network:\w+|\w+_name|\w+_name:\w+)$/i
     };
-  } else if (tags.man_made === 'flagpole') {
+  } else if (t === 'flags') {
     patterns = {
       primary: /^(flag:name|flag:name:\w+)$/i,
       alternate: /^(flag|flag:\w+|subject|subject:\w+)$/i   // note: no `country`, we special-case it below
     };
-  } else {
+  } else if (t === 'brands') {
     patterns = {
       primary: /^(name|name:\w+)$/i,
       alternate: /^(brand|brand:\w+|operator|operator:\w+|\w+_name|\w+_name:\w+)/i,
     };
+  } else if (t === 'operators') {
+    patterns = {
+      primary: /^(name|name:\w+|operator|operator:\w+)$/i,
+      alternate: /^(brand|brand:\w+|\w+_name|\w+_name:\w+)/i,
+    };
+  } else {  // unknown/multiple
+    patterns = {
+      primary: /^(name|name:\w+)$/i,
+      alternate: /^(brand|brand:\w+|network|network:\w+|operator|operator:\w+|\w+_name|\w+_name:\w+)/i,
+    };
   }
 
-  // Check other tags
+  // Check all tags
   Object.keys(tags).forEach(osmkey => {
     const osmvalue = tags[osmkey];
     if (!osmvalue) return;
