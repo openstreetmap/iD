@@ -298,6 +298,7 @@ function gatherNames(tags) {
         foundSemi = true;
       } else {
         primary.add(osmvalue);
+        alternate.delete(osmvalue);
       }
     } else if (!primary.has(osmvalue) && isNamelike(osmkey, 'alternate')) {
       if (/;/.test(osmvalue)) {
