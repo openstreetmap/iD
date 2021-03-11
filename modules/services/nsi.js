@@ -426,7 +426,7 @@ function _upgradeTags(tags, loc) {
     const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
 
     if (!hits || !hits.length) continue;  // no match, try next tuple
-    if (hits[0].match !== 'primary' && hits[0].match !== 'alternate') continue;  // a generic match, try next tuple
+    if (hits[0].match !== 'primary' && hits[0].match !== 'alternate') break;  // a generic match, stop looking
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
