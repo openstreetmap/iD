@@ -136,15 +136,21 @@ export function presetIndex() {
       });
     }
 
-    // Need to rebuild _this.collection before loading categories
-    _this.collection = Object.values(_presets).concat(Object.values(_categories));
-
     // Merge Categories
     if (d.categories) {
       Object.keys(d.categories).forEach(categoryID => {
-        const c = d.categories[categoryID];
+        let c = d.categories[categoryID];
+
         if (c) {   // add or replace
-          _categories[categoryID] = presetCategory(categoryID, c, _this);
+          c = presetCategory(categoryID, c, _presets);
+          if (c.locationSet) {
+            newLocationSets.push(c);
+          } else {
+            c.locationSet = { include: ['Q2'] };  // default worldwide
+            c.locationSetID = '+[Q2]';
+          }
+          _categories[categoryID] = c;
+
         } else {   // remove
           delete _categories[categoryID];
         }
