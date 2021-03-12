@@ -97,12 +97,7 @@ export function presetIndex() {
 
         if (f) {   // add or replace
           f = presetField(fieldID, f);
-          if (f.locationSet) {
-            newLocationSets.push(f);
-          } else {
-            f.locationSet = { include: ['Q2'] };  // default worldwide
-            f.locationSetID = '+[Q2]';
-          }
+          if (f.locationSet) newLocationSets.push(f);
           _fields[fieldID] = f;
 
         } else {   // remove
@@ -119,12 +114,7 @@ export function presetIndex() {
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
           p = presetPreset(presetID, p, isAddable, _fields, _presets);
-          if (p.locationSet) {
-            newLocationSets.push(p);
-          } else {
-            p.locationSet = { include: ['Q2'] };  // default worldwide
-            p.locationSetID = '+[Q2]';
-          }
+          if (p.locationSet) newLocationSets.push(p);
           _presets[presetID] = p;
 
         } else {   // remove (but not if it's a fallback)
@@ -143,12 +133,7 @@ export function presetIndex() {
 
         if (c) {   // add or replace
           c = presetCategory(categoryID, c, _presets);
-          if (c.locationSet) {
-            newLocationSets.push(c);
-          } else {
-            c.locationSet = { include: ['Q2'] };  // default worldwide
-            c.locationSetID = '+[Q2]';
-          }
+          if (c.locationSet) newLocationSets.push(c);
           _categories[categoryID] = c;
 
         } else {   // remove
@@ -157,7 +142,7 @@ export function presetIndex() {
       });
     }
 
-    // Rebuild _this.collection after loading categories
+    // Rebuild _this.collection after changing presets and categories
     _this.collection = Object.values(_presets).concat(Object.values(_categories));
 
     // Merge Defaults
@@ -382,7 +367,7 @@ export function presetIndex() {
 
     if (Array.isArray(loc)) {
       const validLocations = locationManager.locationsAt(loc);
-      result.collection = result.collection.filter(a => validLocations[a.locationSetID]);
+      result.collection = result.collection.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
     }
 
     return result;

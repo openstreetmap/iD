@@ -90,7 +90,7 @@ export function presetCollection(collection) {
     let pool = _this.collection;
     if (Array.isArray(loc)) {
       const validLocations = locationManager.locationsAt(loc);
-      pool = pool.filter(a => validLocations[a.locationSetID]);
+      pool = pool.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
     }
 
     const searchable = pool.filter(a => a.searchable !== false && a.suggestion !== true);
