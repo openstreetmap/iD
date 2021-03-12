@@ -458,6 +458,10 @@ function _upgradeTags(tags, loc) {
 
     // At this point we have matched a canonical item and can suggest tag upgrades..
     const tkv = item.tkv;
+    const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
+    const t = parts[0];
+    const k = parts[1];
+    const v = parts[2];
     const category = _nsi.data[tkv];
     const properties = category.properties || {};
 
@@ -488,31 +492,31 @@ function _upgradeTags(tags, loc) {
     // Do the tag upgrade
     Object.assign(newTags, item.tags, keepTags);
 
-    // Special `branch` splitting rule - IF..
-    // - we are suggesting to replace `name`, AND
+    // Special `branch` splitting rules - IF..
+    // - NSI is suggesting to replace `name`, AND
     // - `branch` doesn't already contain something, AND
     // - original name has not moved to an alternate name (e.g. "Dunkin' Donuts" -> "Dunkin'"), AND
-    // - original name is just "some name" + "some stuff", THEN
+    // - original name is "some name" + "some stuff", THEN
     // consider splitting `name` into `name`/`branch`..
     const origName = tags.name;
     const newName = newTags.name;
     if (newName && origName && newName !== origName && !newTags.branch) {
       const newNames = gatherNames(newTags);
       const newSet = new Set([...newNames.primary, ...newNames.alternate]);
-      const isMoved = newSet.has(origName);
+      const isMoved = newSet.has(origName);   // another tag holds the original name now
+
       if (!isMoved) {
-        // Try the new names, longest to shortest, to match them into a "Name Branch" pattern.
-        const candidates = Array.from(newSet).sort((a, b) => b.length - a.length);
-        for (let j = 0; j < candidates.length; j++) {
-          const n = escapeRegex(candidates[j]);
-          const re = new RegExp(`^${n}\\s(.+)$`, 'i');  // e.g. "Tesco Canary Wharf"
-          const captured = origName.match(re);
-          if (captured) {
-            const branch = captured[1].trim();
-            if (branch) {
-              newTags.branch = captured[1];
-              break;
-            }
+        // Test name fragments, longest to shortest, to match them into a "Name Branch" pattern.
+        // e.g. "TUI ReiseCenter - Neuss Innenstadt" -> ["TUI", "ReiseCenter", "Neuss", "Innenstadt"]
+        const nameParts = origName.split(/[\s\-,.]/);
+        for (let split = nameParts.length - 1; split > 0; split--) {
+          const name = nameParts.slice(0, split).join(' ');  // e.g. "TUI ReiseCenter"
+          const branch = nameParts.slice(split).join(' ');   // e.g. "Neuss Innenstadt"
+          const hits = _nsi.matcher.match(k, v, name, loc);
+          if (!hits || !hits.length) continue;             // no match, try next name fragment
+          if (hits.some(hit => hit.itemID === itemID)) {   // matched the same item as above to a name fragment
+            newTags.branch = branch;
+            break;
           }
         }
       }
