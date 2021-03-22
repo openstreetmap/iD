@@ -41,13 +41,13 @@ function escapeRegex(s) {
 //
 function setNsiSources() {
   const sources = {
-    'nsi_data': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/nsi.min.json',
-    'nsi_dissolved': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/dissolved.min.json',
-    'nsi_features': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/featureCollection.min.json',
-    'nsi_generics': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/genericWords.min.json',
-    'nsi_presets': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/replacements.min.json',
-    'nsi_trees': 'https://raw.githubusercontent.com/osmlab/name-suggestion-index/main/dist/trees.min.json'
+    'nsi_data': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/nsi.min.json',
+    'nsi_dissolved': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/dissolved.min.json',
+    'nsi_features': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/featureCollection.min.json',
+    'nsi_generics': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/genericWords.min.json',
+    'nsi_presets': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/presets/nsi-id-presets.min.json',
+    'nsi_replacements': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/replacements.min.json',
+    'nsi_trees': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/trees.min.json'
   };
 
   let fileMap = fileFetcher.fileMap();
