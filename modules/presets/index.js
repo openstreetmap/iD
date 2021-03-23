@@ -197,16 +197,22 @@ export function presetIndex() {
       if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
         geometry = 'point';
       }
-      return _this.matchTags(entity.tags, geometry);
+      const entityExtent = entity.extent(resolver);
+      return _this.matchTags(entity.tags, geometry, entityExtent.center());
     });
   };
 
 
-  _this.matchTags = (tags, geometry) => {
+  _this.matchTags = (tags, geometry, loc) => {
     const geometryMatches = _geometryIndex[geometry];
     let address;
     let best = -1;
     let match;
+
+    let validLocations;
+    if (Array.isArray(loc)) {
+      validLocations = locationManager.locationsAt(loc);
+    }
 
     for (let k in tags) {
       // If any part of an address is present, allow fallback to "Address" preset - #4353
@@ -218,10 +224,17 @@ export function presetIndex() {
       if (!keyMatches) continue;
 
       for (let i = 0; i < keyMatches.length; i++) {
-        const score = keyMatches[i].matchScore(tags);
+        const candidate = keyMatches[i];
+
+        // discard candidate preset if location is not valid at `loc`
+        if (validLocations && candidate.locationSetID) {
+          if (!validLocations[candidate.locationSetID]) continue;
+        }
+
+        const score = candidate.matchScore(tags);
         if (score > best) {
           best = score;
-          match = keyMatches[i];
+          match = candidate;
         }
       }
     }
