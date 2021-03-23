@@ -239,7 +239,7 @@ export function coreLocations() {
   //
   _this.locationsAt = (loc) => {
     let result = {};
-    _wp(loc, true).forEach(prop => result[prop.id] = prop.area);
+    (_wp(loc, true) || []).forEach(prop => result[prop.id] = prop.area);
     return result;
   };
 
