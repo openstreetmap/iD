@@ -32,10 +32,6 @@ const notNames = /:(colou?r|type|forward|backward|left|right|etymology|pronuncia
 
 // PRIVATE FUNCTIONS
 
-function escapeRegex(s) {
-  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
-
 // `setNsiSources()`
 // Adds the sources to iD's filemap so we can start downloading data.
 //
@@ -254,6 +250,7 @@ function gatherNames(tags) {
   let primary = new Set();
   let alternate = new Set();
   let foundSemi = false;
+  let testNameFragments = false;
   let patterns;
 
   // Patterns for matching OSM keys that might contain namelike values.
@@ -272,20 +269,33 @@ function gatherNames(tags) {
       alternate: /^(flag|flag:\w+|subject|subject:\w+)$/i   // note: no `country`, we special-case it below
     };
   } else if (t === 'brands') {
+    testNameFragments = true;
     patterns = {
       primary: /^(name|name:\w+)$/i,
       alternate: /^(brand|brand:\w+|operator|operator:\w+|\w+_name|\w+_name:\w+)/i,
     };
   } else if (t === 'operators') {
+    testNameFragments = true;
     patterns = {
       primary: /^(name|name:\w+|operator|operator:\w+)$/i,
       alternate: /^(brand|brand:\w+|\w+_name|\w+_name:\w+)/i,
     };
   } else {  // unknown/multiple
+    testNameFragments = true;
     patterns = {
       primary: /^(name|name:\w+)$/i,
       alternate: /^(brand|brand:\w+|network|network:\w+|operator|operator:\w+|\w+_name|\w+_name:\w+)/i,
     };
+  }
+
+  // Test `name` fragments, longest to shortest, to fit them into a "Name Branch" pattern.
+  // e.g. "TUI ReiseCenter - Neuss Innenstadt" -> ["TUI", "ReiseCenter", "Neuss", "Innenstadt"]
+  if (tags.name && testNameFragments) {
+    const nameParts = tags.name.split(/[\s\-,.]/);
+    for (let split = nameParts.length; split > 0; split--) {
+      const name = nameParts.slice(0, split).join(' ');  // e.g. "TUI ReiseCenter"
+      primary.add(name);
+    }
   }
 
   // Check all tags
@@ -346,7 +356,9 @@ function gatherNames(tags) {
 function gatherTuples(tryKVs, tryNames) {
   let tuples = [];
   ['primary', 'alternate'].forEach(whichName => {
-    tryNames[whichName].forEach(n => {
+    // test names longest to shortest
+    const arr = Array.from(tryNames[whichName]).sort((a, b) => b.length - a.length);
+    arr.forEach(n => {
       ['primary', 'alternate'].forEach(whichKV => {
         tryKVs[whichKV].forEach(kv => {
           const parts = kv.split('/', 2);
@@ -506,16 +518,18 @@ function _upgradeTags(tags, loc) {
       const isMoved = newSet.has(origName);   // another tag holds the original name now
 
       if (!isMoved) {
-        // Test name fragments, longest to shortest, to match them into a "Name Branch" pattern.
+        // Test name fragments, longest to shortest, to fit them into a "Name Branch" pattern.
         // e.g. "TUI ReiseCenter - Neuss Innenstadt" -> ["TUI", "ReiseCenter", "Neuss", "Innenstadt"]
         const nameParts = origName.split(/[\s\-,.]/);
-        for (let split = nameParts.length - 1; split > 0; split--) {
+        for (let split = nameParts.length; split > 0; split--) {
           const name = nameParts.slice(0, split).join(' ');  // e.g. "TUI ReiseCenter"
           const branch = nameParts.slice(split).join(' ');   // e.g. "Neuss Innenstadt"
           const hits = _nsi.matcher.match(k, v, name, loc);
           if (!hits || !hits.length) continue;             // no match, try next name fragment
-          if (hits.some(hit => hit.itemID === itemID)) {   // matched the same item as above to a name fragment
-            newTags.branch = branch;
+          if (hits.some(hit => hit.itemID === itemID)) {   // matched the name fragment to the same itemID above
+            if (branch) {
+              newTags.branch = branch;   // if there is a branch fragment, use it
+            }
             break;
           }
         }
