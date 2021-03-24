@@ -24,10 +24,13 @@ const buildingPreset = {
   'building/yes': true
 };
 
-// There are a few exceptions to the namelike regexes.
+// Exceptions to the namelike regexes.
 // Usually a tag suffix contains a language code like `name:en`, `name:ru`
 // but we want to exclude things like `operator:type`, `name:etymology`, etc..
 const notNames = /:(colou?r|type|forward|backward|left|right|etymology|pronunciation|wikipedia)$/i;
+
+// Exceptions to the branchlike regexes
+const notBranches = /(coop|express|wireless|factory|outlet)/i;
 
 
 // PRIVATE FUNCTIONS
@@ -291,7 +294,7 @@ function gatherNames(tags) {
   // Test `name` fragments, longest to shortest, to fit them into a "Name Branch" pattern.
   // e.g. "TUI ReiseCenter - Neuss Innenstadt" -> ["TUI", "ReiseCenter", "Neuss", "Innenstadt"]
   if (tags.name && testNameFragments) {
-    const nameParts = tags.name.split(/[\s\-,.]/);
+    const nameParts = tags.name.split(/[\s\-\/,.]/);
     for (let split = nameParts.length; split > 0; split--) {
       const name = nameParts.slice(0, split).join(' ');  // e.g. "TUI ReiseCenter"
       primary.add(name);
@@ -471,7 +474,6 @@ function _upgradeTags(tags, loc) {
     // At this point we have matched a canonical item and can suggest tag upgrades..
     const tkv = item.tkv;
     const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
-    const t = parts[0];
     const k = parts[1];
     const v = parts[2];
     const category = _nsi.data[tkv];
@@ -520,15 +522,27 @@ function _upgradeTags(tags, loc) {
       if (!isMoved) {
         // Test name fragments, longest to shortest, to fit them into a "Name Branch" pattern.
         // e.g. "TUI ReiseCenter - Neuss Innenstadt" -> ["TUI", "ReiseCenter", "Neuss", "Innenstadt"]
-        const nameParts = origName.split(/[\s\-,.]/);
+        const nameParts = origName.split(/[\s\-\/,.]/);
         for (let split = nameParts.length; split > 0; split--) {
           const name = nameParts.slice(0, split).join(' ');  // e.g. "TUI ReiseCenter"
           const branch = nameParts.slice(split).join(' ');   // e.g. "Neuss Innenstadt"
-          const hits = _nsi.matcher.match(k, v, name, loc);
-          if (!hits || !hits.length) continue;             // no match, try next name fragment
-          if (hits.some(hit => hit.itemID === itemID)) {   // matched the name fragment to the same itemID above
+          const nameHits = _nsi.matcher.match(k, v, name, loc);
+          if (!nameHits || !nameHits.length) continue;    // no match, try next name fragment
+
+          if (nameHits.some(hit => hit.itemID === itemID)) {   // matched the name fragment to the same itemID above
             if (branch) {
-              newTags.branch = branch;   // if there is a branch fragment, use it
+              if (notBranches.test(branch)) {   // "branch" was detected but is noise ("factory outlet", etc)
+                newTags.name = origName;        // Leave `name` alone, this part of the name may be significant..
+              } else {
+                const branchHits = _nsi.matcher.match(k, v, branch, loc);
+                if (branchHits && branchHits.length) {                                             // if "branch" matched something else in NSI..
+                  if (branchHits[0].match === 'primary' || branchHits[0].match === 'alternate') {  // if another brand! (e.g. "KFC - Taco Bell"?)
+                    return null;                                                                   //   bail out - can't suggest tags in this case
+                  }                                                                                // else a generic (e.g. "gas", "cafe") - ignore
+                } else {                     // "branch" is not noise and not something in NSI
+                  newTags.branch = branch;   // Stick it in the `branch` tag..
+                }
+              }
             }
             break;
           }
