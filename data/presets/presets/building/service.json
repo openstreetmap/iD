@@ -3,6 +3,10 @@
     "geometry": [
         "area"
     ],
+    "fields": [
+        "building/flats",
+        "address"
+    ],
     "tags": {
         "building": "service"
     },

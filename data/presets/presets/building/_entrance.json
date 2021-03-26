@@ -1,6 +1,8 @@
 {
     "icon": "maki-entrance-alt1",
-    "fields": [],
+    "fields": [
+        "address"
+    ],
     "moreFields": [],
     "geometry": [
         "vertex"

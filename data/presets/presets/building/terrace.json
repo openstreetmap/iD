@@ -4,7 +4,8 @@
         "area"
     ],
     "fields": [
-        "building/flats"
+        "building/flats",
+        "address"
     ],
     "tags": {
         "building": "terrace"
