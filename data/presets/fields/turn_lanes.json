@@ -1,0 +1,31 @@
+{
+  "key": "turn:lanes",
+  "type": "combo",
+  "label": "Turn lanes",
+  "strings": {
+    "options": {
+      "left|left": "left|left",
+      "left;through;right": "left;through;right",
+      "left|through|through": "left|through|through",
+      "left|through": "left|through",
+      "through|through|right": "through|through|right",
+      "through|right": "through|right",
+      "left|right": "left|right",
+      "through|through": "through|through",
+      "left|through;right": "left|through;right",
+      "left|through|through;right": "left|through|through;right",
+      "left;through|through": "left;through|through",
+      "left|through|right": "left|through|right",
+      "left;through|through;right": "left;through|through;right",
+      "left;through|right": "left;through|right",
+      "left;through|through|right": "left;through|through|right",
+      "left;through|through|through": "left;through|through|through",
+      "through|through|through;right": "through|through|through;right",
+      "left|through|through|through": "left|through|through|through",
+      "through|through|through|right": "through|through|through|right",
+      "left|through|through|right": "left|through|through|right",
+      "left|through|through|through;right": "left|through|through|through;right",
+      "left|left|through|through": "left|left|through|through"
+    }
+  }
+}

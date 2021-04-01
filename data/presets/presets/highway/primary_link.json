@@ -9,9 +9,15 @@
         "sidewalk/separate-right",
         "lanes",
         "maxspeed",
+        "lanes_forward",
+        "lanes_backward",
         "access",
         "surface",
-        "structure"
+        "structure",
+        "turn_lanes",
+        "turn_lanes_forward",
+        "turn_lanes_backward",
+        "oneway/bicycle"
     ],
     "moreFields": [
         "charge_toll",
@@ -27,7 +33,6 @@
         "maxspeed/advisory",
         "maxweight_bridge",
         "name",
-        "oneway/bicycle",
         "ref_road_number",
         "smoothness",
         "toll",

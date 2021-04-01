@@ -8,14 +8,21 @@
         "sidewalk/separate-right",
         "lanes",
         "maxspeed",
+        "lanes_forward",
+        "lanes_backward",
         "access",
         "surface",
-        "structure"
-        
+        "structure",
+        "cycleway",
+        "cycleway_left_oneway",
+        "cycleway_right_oneway",
+        "oneway/bicycle"
     ],
     "moreFields": [
+        "turn_lanes",
+        "turn_lanes_forward",
+        "turn_lanes_backward",
         "covered",
-        "cycleway",
         "flood_prone",
         "incline",
         "junction_line",
@@ -24,7 +31,6 @@
         "maxspeed/advisory",
         "maxweight_bridge",
         "not/name",
-        "oneway/bicycle",
         "smoothness",
         "trolley_wire",
         "width"

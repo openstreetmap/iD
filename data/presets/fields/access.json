@@ -16,25 +16,29 @@
             "routing:bus": "Bus Routing"
         },
         "options": {
+            "use_sidepath": {
+                "title": "Use sidepath",
+                "description": "use sidepath (for foot and/or bicycle)"
+            },
+            "designated": {
+                "title": "Designated",
+                "description": "Access allowed according to signs or specific local laws"
+            },
             "private": {
                 "title": "Private",
                 "description": "Access allowed only with permission of the owner on an individual basis"
+            },
+            "customers": {
+                "title": "Customers",
+                "description": "Access only allowed to customers"
             },
             "destination": {
                 "title": "Destination",
                 "description": "Access allowed only to reach a destination"
             },
-            "use_sidepath": {
-                "title": "Use sidepath",
-                "description": "use sidepath (for foot and/or bicycle)"
-            },
             "delivery": {
                 "title": "Delivery",
                 "description": "Access allowed only for delivery"
-            },
-            "designated": {
-                "title": "Designated",
-                "description": "Access allowed according to signs or specific local laws"
             },
             "dismount": {
                 "title": "Dismount",
