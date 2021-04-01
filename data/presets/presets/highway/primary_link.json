@@ -14,12 +14,12 @@
         "access",
         "surface",
         "structure",
-        "turn_lanes",
-        "turn_lanes_forward",
-        "turn_lanes_backward",
         "oneway/bicycle"
     ],
     "moreFields": [
+        "turn_lanes",
+        "turn_lanes_forward",
+        "turn_lanes_backward",
         "charge_toll",
         "covered",
         "cycleway",

@@ -17,7 +17,9 @@
     ],
     "moreFields": [
         "{highway/motorway_link}",
-        "sidewalk"
+        "turn_lanes",
+        "turn_lanes_forward",
+        "turn_lanes_backward"
     ],
     "geometry": [
         "line"

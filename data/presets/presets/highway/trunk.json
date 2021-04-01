@@ -1,19 +1,28 @@
 {
     "icon": "iD-highway-trunk",
     "fields": [
-        "name",
         "ref_road_number",
+        "name",
         "oneway",
         "sidewalk",
         "sidewalk/separate-left",
         "sidewalk/separate-right",
         "lanes",
         "maxspeed",
+        "lanes_forward",
+        "lanes_backward",
         "access",
         "surface",
-        "structure"
+        "structure",
+        "cycleway",
+        "cycleway_left_oneway",
+        "cycleway_right_oneway",
+        "oneway/bicycle"
     ],
     "moreFields": [
+        "turn_lanes",
+        "turn_lanes_forward",
+        "turn_lanes_backward",
         "charge_toll",
         "covered",
         "incline",
