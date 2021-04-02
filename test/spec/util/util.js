@@ -251,5 +251,11 @@ describe('iD.util', function() {
             // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
             expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
         });
+        it('uses the housename if there is no better name', function() {
+            expect(iD.utilDisplayName({tags: {'addr:housename': 'Pembridge House', 'addr:housenumber': '31', 'addr:street': 'Princes Street' }})).to.eql('Pembridge House');
+        });
+        it('uses the street address as a last resort', function() {
+            expect(iD.utilDisplayName({tags: {'addr:housenumber': '31', 'addr:street': 'Princes Street' }})).to.eql('31 Princes Street');
+        });
     });
 });

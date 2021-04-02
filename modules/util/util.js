@@ -218,6 +218,16 @@ export function utilDisplayName(entity) {
         name = t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
 
+    // if there's still no name found, try addr:housename
+    if (!name && entity.tags['addr:housename']) {
+        name = entity.tags['addr:housename'];
+    }
+
+    // as a last resort, use the street address as a name
+    if (!name && entity.tags['addr:housenumber'] && entity.tags['addr:street']) {
+        name = entity.tags['addr:housenumber'] + ' ' + entity.tags['addr:street'];
+    }
+
     return name;
 }
 
