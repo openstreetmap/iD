@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.36.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* use `addr:` tags to label features with no name ([#8440], thanks [@k-yle])
 * The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
 * Show "add new key" placeholder text for blank row in raw tag editor ([#11211], thanks [@bhavyaKhatri2703])
 * Consider other name-like tags for labelling features, such as `lock_name` ([#9588], thanks [@k-yle])
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#8440]: https://github.com/openstreetmap/iD/pull/8440
 [#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9511]: https://github.com/openstreetmap/iD/pull/9511
 [#9588]: https://github.com/openstreetmap/iD/pull/9588
