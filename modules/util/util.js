@@ -225,7 +225,10 @@ export function utilDisplayName(entity) {
 
     // as a last resort, use the street address as a name
     if (!name && entity.tags['addr:housenumber'] && entity.tags['addr:street']) {
-        name = entity.tags['addr:housenumber'] + ' ' + entity.tags['addr:street'];
+        name = t('inspector.display_name_addr', {
+            housenumber: entity.tags['addr:housenumber'],
+            street: entity.tags['addr:street']
+        });
     }
 
     return name;
