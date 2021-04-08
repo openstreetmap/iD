@@ -257,5 +257,8 @@ describe('iD.util', function() {
         it('uses the street address as a last resort', function() {
             expect(iD.utilDisplayName({tags: {'addr:housenumber': '31', 'addr:street': 'Princes Street' }})).to.eql('31 Princes Street');
         });
+        it('uses addr:unit if present', function() {
+            expect(iD.utilDisplayName({tags: {'addr:unit': 'Flat 1', 'addr:housenumber': '30', 'addr:street': 'Madden Street' }})).to.eql('Flat 1, 30 Madden Street');
+        });
     });
 });
