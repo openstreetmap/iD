@@ -239,6 +239,12 @@ export function utilDisplayName(entity) {
         });
     }
 
+    if (!name && entity.tags['addr:housenumber']) {
+        name = t('inspector.display_name_addr_housenumber_only', {
+            housenumber: entity.tags['addr:housenumber'],
+        });
+    }
+
     return name;
 }
 

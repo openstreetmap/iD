@@ -260,5 +260,8 @@ describe('iD.util', function() {
         it('uses addr:unit if present', function() {
             expect(iD.utilDisplayName({tags: {'addr:unit': 'Flat 1', 'addr:housenumber': '30', 'addr:street': 'Madden Street' }})).to.eql('Flat 1, 30 Madden Street');
         });
+        it('uses just addr:housenumber if it is the only addr: tag present', function() {
+            expect(iD.utilDisplayName({tags: {'addr:housenumber': '32' }})).to.eql('32');
+        });
     });
 });
