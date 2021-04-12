@@ -2,6 +2,6 @@
   "key": "lanes:backward",
   "type": "number",
   "minValue": 0,
-  "label": "Lanes forward",
+  "label": "Lanes backward",
   "placeholder": "1, 2, 3..."
 }
