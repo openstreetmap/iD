@@ -589,15 +589,6 @@ export function rendererMap(context) {
             return;  // no change
         }
 
-        var withinEditableZoom = map.withinEditableZoom();
-        if (_lastWithinEditableZoom !== withinEditableZoom) {
-            if (_lastWithinEditableZoom !== undefined) {
-                // notify that the map zoomed in or out over the editable zoom threshold
-                dispatch.call('crossEditableZoom', this, withinEditableZoom);
-            }
-            _lastWithinEditableZoom = withinEditableZoom;
-        }
-
         if (geoScaleToZoom(k, TILESIZE) < _minzoom) {
             surface.interrupt();
             dispatch.call('hitMinZoom', this, map);
@@ -608,6 +599,15 @@ export function rendererMap(context) {
         }
 
         projection.transform(eventTransform);
+    
+        var withinEditableZoom = map.withinEditableZoom();
+        if (_lastWithinEditableZoom !== withinEditableZoom) {
+            if (_lastWithinEditableZoom !== undefined) {
+                // notify that the map zoomed in or out over the editable zoom threshold
+                dispatch.call('crossEditableZoom', this, withinEditableZoom);
+            }
+            _lastWithinEditableZoom = withinEditableZoom;
+        }
 
         var scale = k / _transformStart.k;
         var tX = (x / scale - _transformStart.x) * scale;
