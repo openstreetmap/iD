@@ -3,6 +3,7 @@ import { select as d3_select } from 'd3-selection';
 
 import LocationConflation from '@ideditor/location-conflation';
 import whichPolygon from 'which-polygon';
+import { resolveStrings } from 'osm-community-index';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { t, localizer } from '../core/localizer';
@@ -23,7 +24,11 @@ export function uiSuccess(context) {
 
   function ensureOSMCommunityIndex() {
     const data = fileFetcher;
-    return Promise.all([ data.get('oci_resources'), data.get('oci_features') ])
+    return Promise.all([
+        data.get('oci_resources'),
+        data.get('oci_features'),
+        data.get('oci_defaults')
+      ])
       .then(vals => {
         if (_oci) return _oci;
 
@@ -49,6 +54,7 @@ export function uiSuccess(context) {
         });
 
         return _oci = {
+          defaults: vals[2].defaults,
           features: ociFeatures,
           resources: ociResources,
           query: whichPolygon({ type: 'FeatureCollection', features: Object.values(ociFeatures) })
@@ -163,7 +169,12 @@ export function uiSuccess(context) {
         properties.forEach(props => {
           const resourceIDs = Array.from(props.resourceIDs);
           resourceIDs.forEach(resourceID => {
-            const resource = oci.resources[resourceID];
+            let resource = oci.resources[resourceID];
+
+            // Resolve strings
+            const localizer = (stringID) => t.html(`community.${stringID}`);
+            resource.resolved = resolveStrings(resource, oci.defaults, localizer);
+
             communities.push({
               area: props.area || Infinity,
               order: resource.order || 0,
@@ -206,7 +217,7 @@ export function uiSuccess(context) {
       .attr('class', 'cell-icon community-icon')
       .append('a')
       .attr('target', '_blank')
-      .attr('href', d => d.url)
+      .attr('href', d => d.resolved.url)
       .append('svg')
       .attr('class', 'logo-small')
       .append('use')
@@ -236,24 +247,57 @@ export function uiSuccess(context) {
   function showCommunityDetails(d) {
     let selection = d3_select(this);
     let communityID = d.id;
-    let replacements = {
-      url: linkify(d.url),
-      signupUrl: linkify(d.signupUrl || d.url)
-    };
 
     selection
       .append('div')
       .attr('class', 'community-name')
       .append('a')
       .attr('target', '_blank')
-      .attr('href', d.url)
-      .html(t.html(`community.${d.id}.name`));
+      .attr('href', d.resolved.url)
+      .html(d.resolved.name);
 
-    let descriptionHTML = t.html(`community.${d.id}.description`, replacements);
+    let descriptionHTML = d.resolved.description || '';
+    let extendedDescriptionHTML = d.resolved.extendedDescription || '';
+
+    // Linkify urls in description, extendedDescription
+    // This gets a bit complicated because we:
+    // - string replace *back* to the tokens {url} and {signupUrl},
+    // - then string replace *those* tokens with the linkified versions.
+    // This way we avoid accidently clobbering a url fragment,
+    // For example if {url} = "openstreetmap.us" and {signupUrl} = "openstreetmap.us/join"
+    // we don't want "<a>openstreetmap.us</a>/join"
+    const url = d.resolved.url;
+    const signupUrl = d.resolved.signupUrl || '';
+
+    // do the longest one first
+    if (url.length > signupUrl.length) {
+      descriptionHTML = descriptionHTML.replace(url, '{url}');
+      extendedDescriptionHTML = extendedDescriptionHTML.replace(url, '{url}');
+      if (signupUrl) {
+        descriptionHTML = descriptionHTML.replace(signupUrl, '{signupUrl}');
+        extendedDescriptionHTML = extendedDescriptionHTML.replace(signupUrl, '{signupUrl}');
+      }
+    } else {
+      if (signupUrl) {
+        descriptionHTML = descriptionHTML.replace(signupUrl, '{signupUrl}');
+        extendedDescriptionHTML = extendedDescriptionHTML.replace(signupUrl, '{signupUrl}');
+      }
+      descriptionHTML = descriptionHTML.replace(url, '{url}');
+      extendedDescriptionHTML = extendedDescriptionHTML.replace(url, '{url}');
+    }
+
+    if (url) {
+      descriptionHTML = descriptionHTML.replace('{url}', linkify(url));
+      extendedDescriptionHTML = extendedDescriptionHTML.replace('{url}', linkify(url));
+    }
+    if (signupUrl) {
+      descriptionHTML = descriptionHTML.replace('{signupUrl}', linkify(signupUrl));
+      extendedDescriptionHTML = extendedDescriptionHTML.replace('{signupUrl}', linkify(signupUrl));
+    }
 
     if (d.type === 'reddit') {   // linkify subreddits  #4997
-      descriptionHTML = descriptionHTML
-        .replace(/(\/r\/\w*\/*)/i, match => linkify(d.url, match));
+      descriptionHTML = descriptionHTML.replace(/(\/r\/\w*\/*)/i, match => linkify(d.resolved.url, match));
+      extendedDescriptionHTML = extendedDescriptionHTML.replace(/(\/r\/\w*\/*)/i, match => linkify(d.resolved.url, match));
     }
 
     selection
@@ -261,7 +305,8 @@ export function uiSuccess(context) {
       .attr('class', 'community-description')
       .html(descriptionHTML);
 
-    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
+    // Create an expanding section if any of these are present..
+    if (extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
@@ -311,11 +356,11 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-more');
 
-      if (d.extendedDescription) {
+      if (extendedDescriptionHTML) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(t.html(`community.${d.id}.extendedDescription`, replacements));
+          .html(extendedDescriptionHTML);
       }
 
       if (d.languageCodes && d.languageCodes.length) {
