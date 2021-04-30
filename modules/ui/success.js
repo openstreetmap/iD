@@ -251,62 +251,15 @@ export function uiSuccess(context) {
     selection
       .append('div')
       .attr('class', 'community-name')
-      .append('a')
-      .attr('target', '_blank')
-      .attr('href', d.resolved.url)
-      .html(d.resolved.name);
-
-    let descriptionHTML = d.resolved.description || '';
-    let extendedDescriptionHTML = d.resolved.extendedDescription || '';
-
-    // Linkify urls in description, extendedDescription
-    // This gets a bit complicated because we:
-    // - string replace *back* to the tokens {url} and {signupUrl},
-    // - then string replace *those* tokens with the linkified versions.
-    // This way we avoid accidently clobbering a url fragment,
-    // For example if {url} = "openstreetmap.us" and {signupUrl} = "openstreetmap.us/join"
-    // we don't want "<a>openstreetmap.us</a>/join"
-    const url = d.resolved.url;
-    const signupUrl = d.resolved.signupUrl || '';
-
-    // do the longest one first
-    if (url.length > signupUrl.length) {
-      descriptionHTML = descriptionHTML.replace(url, '{url}');
-      extendedDescriptionHTML = extendedDescriptionHTML.replace(url, '{url}');
-      if (signupUrl) {
-        descriptionHTML = descriptionHTML.replace(signupUrl, '{signupUrl}');
-        extendedDescriptionHTML = extendedDescriptionHTML.replace(signupUrl, '{signupUrl}');
-      }
-    } else {
-      if (signupUrl) {
-        descriptionHTML = descriptionHTML.replace(signupUrl, '{signupUrl}');
-        extendedDescriptionHTML = extendedDescriptionHTML.replace(signupUrl, '{signupUrl}');
-      }
-      descriptionHTML = descriptionHTML.replace(url, '{url}');
-      extendedDescriptionHTML = extendedDescriptionHTML.replace(url, '{url}');
-    }
-
-    if (url) {
-      descriptionHTML = descriptionHTML.replace('{url}', linkify(url));
-      extendedDescriptionHTML = extendedDescriptionHTML.replace('{url}', linkify(url));
-    }
-    if (signupUrl) {
-      descriptionHTML = descriptionHTML.replace('{signupUrl}', linkify(signupUrl));
-      extendedDescriptionHTML = extendedDescriptionHTML.replace('{signupUrl}', linkify(signupUrl));
-    }
-
-    if (d.type === 'reddit') {   // linkify subreddits  #4997
-      descriptionHTML = descriptionHTML.replace(/(\/r\/\w*\/*)/i, match => linkify(d.resolved.url, match));
-      extendedDescriptionHTML = extendedDescriptionHTML.replace(/(\/r\/\w*\/*)/i, match => linkify(d.resolved.url, match));
-    }
+      .html(d.resolved.nameHTML);
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(descriptionHTML);
+      .html(d.resolved.descriptionHTML);
 
     // Create an expanding section if any of these are present..
-    if (extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
+    if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
@@ -356,11 +309,11 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-more');
 
-      if (extendedDescriptionHTML) {
+      if (d.resolved.extendedDescriptionHTML) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(extendedDescriptionHTML);
+          .html(d.resolved.extendedDescriptionHTML);
       }
 
       if (d.languageCodes && d.languageCodes.length) {
@@ -435,12 +388,6 @@ export function uiSuccess(context) {
           }
           return description;
         });
-    }
-
-
-    function linkify(url, text) {
-      text = text || url;
-      return `<a target="_blank" href="${url}">${text}</a>`;
     }
   }
 
