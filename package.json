@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@ideditor/country-coder": "^4.0.0",
-    "@ideditor/location-conflation": "~0.7.0",
+    "@ideditor/location-conflation": "~0.8.0",
     "@mapbox/geojson-rewind": "^0.5.0",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/togeojson": "0.16.0",
