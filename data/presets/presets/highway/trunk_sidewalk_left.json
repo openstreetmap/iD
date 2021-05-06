@@ -1,0 +1,28 @@
+{
+  "icon": "iD-highway-trunk",
+  "fields": [
+      "{highway/trunk}"
+  ],
+  "moreFields": [
+      "{highway/trunk}"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "trunk",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "separate",
+      "sidewalk:right": "no"
+  },
+  "terms": [
+      "road",
+      "street",
+      "separate",
+      "sidewalk",
+      "sidepath",
+      "left"
+  ],
+  "name": "Trunk Road Sidewalk Left Separate"
+}

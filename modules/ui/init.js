@@ -231,7 +231,7 @@ export function uiInit(context) {
         ui.hash = behaviorHash(context);
         ui.hash();
         if (!ui.hash.hadHash) {
-            map.centerZoom([0, 0], 2);
+            map.centerZoom([-73.6, 45.5], 11);
         }
 
 

@@ -1,0 +1,28 @@
+{
+  "icon": "iD-highway-unclassified",
+  "fields": [
+      "{highway/residential}"
+  ],
+  "moreFields": [
+      "{highway/residential}"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "unclassified",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "separate",
+      "sidewalk:right": "separate"
+  },
+  "terms": [
+      "road",
+      "street",
+      "separate",
+      "sidewalk",
+      "sidepath",
+      "both"
+  ],
+  "name": "Unclassified Road Sidewalk Both Separate"
+}

@@ -1,0 +1,28 @@
+{
+  "icon": "iD-highway-tertiary",
+  "fields": [
+      "{highway/primary}"
+  ],
+  "moreFields": [
+      "{highway/primary}"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "tertiary",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "separate",
+      "sidewalk:right": "no"
+  },
+  "terms": [
+      "road",
+      "street",
+      "separate",
+      "sidewalk",
+      "sidepath",
+      "left"
+  ],
+  "name": "Tertiary Road Sidewalk Left Separate"
+}

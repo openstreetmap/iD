@@ -1,0 +1,18 @@
+{
+  "key": "parking:condition",
+  "type": "combo",
+  "label": "Parking condition",
+  "strings": {
+    "options": {
+        "residents": "Residents",
+        "employee": "Employee",
+        "customers": "Customers",
+        "private": "Private",
+        "free": "Free",
+        "ticket": "Ticket",
+        "disc": "Disc",
+        "disabled": "Disabled"
+        
+    }
+  }
+}

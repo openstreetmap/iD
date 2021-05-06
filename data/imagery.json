@@ -15,7 +15,7 @@
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/drummondville2020tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
-      "default": true,
+      "default": false,
       "description": "Drummondville 2020 Aerial imagery (20cm/pixel)."
     },
     {

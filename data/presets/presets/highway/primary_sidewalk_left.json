@@ -1,0 +1,28 @@
+{
+  "icon": "iD-highway-primary",
+  "fields": [
+      "{highway/primary}"
+  ],
+  "moreFields": [
+      "{highway/primary}"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "primary",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "separate",
+      "sidewalk:right": "no"
+  },
+  "terms": [
+      "road",
+      "street",
+      "separate",
+      "sidewalk",
+      "sidepath",
+      "left"
+  ],
+  "name": "Primary Road Sidewalk Left Separate"
+}

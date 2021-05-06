@@ -7,12 +7,13 @@
         "capacity",
         "access_simple",
         "fee",
-        "payment_multi_fee",
-        "charge_fee",
-        "surface"
+        "surface",
+        "parking/condition"
     ],
     "moreFields": [
         "address",
+        "payment_multi_fee",
+        "charge_fee",
         "covered",
         "email",
         "fax",

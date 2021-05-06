@@ -221,7 +221,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     var cache = {};
     var inflight = {};
     var providers = [];
-
+/*
     d3_json(url)
         .then(function(json) {
             providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
@@ -237,9 +237,9 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             });
             dispatch.call('change');
         })
-        .catch(function() {
+        .catch(function() {*/
             /* ignore */
-        });
+        /*});*/
 
 
     bing.copyrightNotices = function(zoom, extent) {
@@ -256,7 +256,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getMetadata = function(center, tileCoord, callback) {
+    /*bing.getMetadata = function(center, tileCoord, callback) {
         var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
@@ -293,7 +293,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 delete inflight[tileID];
                 if (callback) callback(err.message);
             });
-    };
+    };*/
 
 
     bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';

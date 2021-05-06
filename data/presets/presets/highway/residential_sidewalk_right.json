@@ -1,0 +1,28 @@
+{
+  "icon": "iD-highway-residential",
+  "fields": [
+      "{highway/residential}"
+  ],
+  "moreFields": [
+      "{highway/residential}"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "residential",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "no",
+      "sidewalk:right": "separate"
+  },
+  "terms": [
+      "road",
+      "street",
+      "separate",
+      "sidewalk",
+      "sidepath",
+      "right"
+  ],
+  "name": "Residential Road Sidewalk Left Separate"
+}
