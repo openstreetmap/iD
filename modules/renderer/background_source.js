@@ -29,7 +29,7 @@ function vintageRange(vintage) {
 
 export function rendererBackgroundSource(data) {
     var source = Object.assign({}, data);   // shallow copy
-    var offset = [0, 0];
+    var offset = source.offsetXY || [0, 0];
     var name = source.name;
     var description = source.description;
     var best = !!source.best;
