@@ -6,6 +6,7 @@
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/cmm2018tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
+      "offsetXY": [0,0],
       "default": true,
       "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018 Aerial imagery."
     },
@@ -15,6 +16,7 @@
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/drummondville2020tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
+      "offsetXY": [0,0],
       "default": false,
       "description": "Drummondville 2020 Aerial imagery (20cm/pixel)."
     },
@@ -25,6 +27,7 @@
       "default": false,
       "template": "http://2.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png8?app_id=J8eSHWWbV2geKuBkFk8W&app_code=c688Wo2sYhT-x3yeD0i_6Q",
       "zoomExtent": [8, 22],
+      "offsetXY": [0,0],
       "description": "Here Satellite Test only for alignment verification."
     },
     {
@@ -34,6 +37,7 @@
       "default": false,
       "template": "http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga",
       "zoomExtent": [8, 22],
+      "offsetXY": [0,0],
       "description": "Google Test only for alignment verification."
     },
     {
@@ -53,6 +57,7 @@
       "type": "tms",
       "template": "https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png",
       "zoomExtent": [0, 19],
+      "offsetXY": [0,0],
       "terms_url": "https://www.openstreetmap.org",
       "terms_text": "© OpenStreetMap contributors, CC-BY-SA",
       "default": false,
@@ -65,6 +70,7 @@
       "type": "tms",
       "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/mapbox.satellite/{zoom}/{x}/{y}@2x.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJjaml5MjVyb3MwMWV0M3hxYmUzdGdwbzE4In0.q548FjhsSJzvXsGlPsFxAQ",
       "tileSize": 512,
+      "offsetXY": [0,0],
       "zoomExtent": [0, 22],
       "terms_url": "https://www.mapbox.com/about/maps",
       "terms_text": "Terms & Feedback",
@@ -90,6 +96,7 @@
       "type": "tms",
       "template": "https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{zoom}/{y}/{x}",
       "zoomExtent": [0, 22],
+      "offsetXY": [0,0],
       "terms_url": "https://wiki.openstreetmap.org/wiki/Esri",
       "terms_text": "Terms & Feedback",
       "default": false,
