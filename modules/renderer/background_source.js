@@ -2,7 +2,8 @@ import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-g
 import { json as d3_json } from 'd3-fetch';
 
 import { t } from '../util/locale';
-import { geoExtent, geoSphericalDistance } from '../geo';
+import { geoExtent, geoSphericalDistance, geoMetersToOffset } from '../geo';
+
 import { utilDetect } from '../util/detect';
 
 
@@ -29,7 +30,7 @@ function vintageRange(vintage) {
 
 export function rendererBackgroundSource(data) {
     var source = Object.assign({}, data);   // shallow copy
-    var offset = source.offsetXY || [0, 0];
+    var offset = geoMetersToOffset(source.offsetXY) || [0, 0];
     var name = source.name;
     var description = source.description;
     var best = !!source.best;

@@ -11,7 +11,7 @@
       "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018 Aerial imagery."
     },
     {
-      "id": "Drummodnville2020",
+      "id": "Drummondville2020",
       "name": "Drummondville 2020",
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/drummondville2020tiles/{zoom}/{x}/{y}",
