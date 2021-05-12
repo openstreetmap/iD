@@ -1,0 +1,11 @@
+{
+  "key": "note:chaire_mobilite",
+  "type": "textarea",
+  "universal": true,
+  "icon": "note",
+  "label": "Note Chaire Mobilité",
+  "terms": [
+      "comment",
+      "note"
+  ]
+}
