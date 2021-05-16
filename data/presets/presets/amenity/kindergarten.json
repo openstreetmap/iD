@@ -5,7 +5,8 @@
         "operator",
         "address",
         "phone",
-        "preschool"
+        "preschool",
+        "capacity"
     ],
     "moreFields": [
         "email",
