@@ -13,7 +13,8 @@
             "bicycle": "Bicycles",
             "routing:bicycle": "Bicycles Routing",
             "bus": "Bus",
-            "routing:bus": "Bus Routing"
+            "routing:bus": "Bus Routing",
+            "psv": "Public Service Veh."
         },
         "options": {
             "use_sidepath": {
