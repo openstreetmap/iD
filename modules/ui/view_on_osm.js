@@ -51,7 +51,9 @@ export function uiViewOnOSM(context) {
                 .append('p')
                 .text(_what.loc[1]+','+_what.loc[0])
                 .append('p')
-                .text('['+_what.loc[0]+','+_what.loc[1]+']');
+                .text('['+_what.loc[0]+','+_what.loc[1]+']')
+                .append('p')
+                .text(id+','+_what.loc[1]+','+_what.loc[0]);
         }
     }
 
