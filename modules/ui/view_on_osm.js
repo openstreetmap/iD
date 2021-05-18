@@ -9,6 +9,8 @@ export function uiViewOnOSM(context) {
 
     function viewOnOSM(selection) {
         var url;
+        var type = context.connection().entityType(_what);
+        var id = context.connection().entityID(_what);
         if (_what instanceof osmEntity) {
             url = context.connection().entityURL(_what);
         } else if (_what instanceof osmNote) {
@@ -34,6 +36,23 @@ export function uiViewOnOSM(context) {
         linkEnter
             .append('span')
             .text(t('inspector.view_on_osm'));
+
+
+        
+
+        var typeAndId = link.enter()
+            .append('p')
+            .text(type + '/' + id)
+            .append('p')
+            .text(id);
+
+        if (type === 'node') {
+            typeAndId
+                .append('p')
+                .text(_what.loc[1]+','+_what.loc[0])
+                .append('p')
+                .text('['+_what.loc[0]+','+_what.loc[1]+']');
+        }
     }
 
 

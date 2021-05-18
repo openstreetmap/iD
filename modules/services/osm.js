@@ -533,6 +533,14 @@ export default {
         return urlroot + '/' + entity.type + '/' + entity.osmId();
     },
 
+    entityID: function(entity) {
+        return entity.osmId();
+    },
+    
+    entityType: function(entity) {
+        return entity.type;
+    },
+
 
     historyURL: function(entity) {
         return urlroot + '/' + entity.type + '/' + entity.osmId() + '/history';
