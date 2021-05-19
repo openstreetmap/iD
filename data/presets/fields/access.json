@@ -1,5 +1,5 @@
 {
-    "keys": ["access", "foot", "motor_vehicle", "routing:motor_vehicle", "bicycle", "routing:bicycle", "bus", "routing:bus"],
+    "keys": ["access", "foot", "motor_vehicle", "routing:motor_vehicle", "bicycle", "routing:bicycle", "bus", "routing:bus", "psv"],
     "reference": {"key": "access"},
     "type": "access",
     "label": "Allowed Access",
