@@ -8,13 +8,15 @@ export function uiViewOnOSM(context) {
 
 
     function viewOnOSM(selection) {
-        var url;
-        var type = context.connection().entityType(_what);
-        var id = context.connection().entityID(_what);
+        var url, type, id;
         if (_what instanceof osmEntity) {
             url = context.connection().entityURL(_what);
+            type = context.connection().entityType(_what);
+            id = context.connection().entityID(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);
+            type = null;
+            id = null;
         }
 
         var data = ((!_what || _what.isNew()) ? [] : [_what]);
@@ -39,21 +41,23 @@ export function uiViewOnOSM(context) {
 
 
         
+        if (id && type)
+        {
+            var typeAndId = link.enter()
+                .append('p')
+                .text(type + '/' + id)
+                .append('p')
+                .text(id);
 
-        var typeAndId = link.enter()
-            .append('p')
-            .text(type + '/' + id)
-            .append('p')
-            .text(id);
-
-        if (type === 'node') {
-            typeAndId
-                .append('p')
-                .text(_what.loc[1]+','+_what.loc[0])
-                .append('p')
-                .text('['+_what.loc[0]+','+_what.loc[1]+']')
-                .append('p')
-                .text(id+','+_what.loc[1]+','+_what.loc[0]);
+            if (type === 'node') {
+                typeAndId
+                    .append('p')
+                    .text(_what.loc[1]+','+_what.loc[0])
+                    .append('p')
+                    .text('['+_what.loc[0]+','+_what.loc[1]+']')
+                    .append('p')
+                    .text(id+','+_what.loc[1]+','+_what.loc[0]);
+            }
         }
     }
 
