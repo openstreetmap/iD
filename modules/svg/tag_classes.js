@@ -229,7 +229,7 @@ export function svgTagClasses() {
                     motor_vehicle = v;
                     classes.push('tag-motor_vehicle-' + motor_vehicle);
                 }
-                if (k === 'bus' || k === 'routing:bus') {
+                if (k === 'bus' || k === 'routing:bus' || k === 'psv') {
                     bus = v;
                     classes.push('tag-bus-' + bus);
                 }
