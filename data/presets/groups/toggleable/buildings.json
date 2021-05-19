@@ -20,10 +20,6 @@
                 "carports": true,
                 "garage_boxes": true
             },
-            "natural": {
-                "tree": true,
-                "tree_row": true
-            },
             "landuse": {
                 "parking": true
             },

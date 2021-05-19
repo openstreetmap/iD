@@ -1,0 +1,17 @@
+{
+  "name": "Trees",
+  "description": "Trees and tree rows",
+  "toggleable": {
+      "maxShown": 500
+  },
+  "matches": {
+      "geometry": ["point"],
+      "anyTags": {
+          "natural": {
+              "tree": true,
+              "tree_row": true
+          }
+      }
+  }
+
+}
