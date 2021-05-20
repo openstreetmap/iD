@@ -498,6 +498,8 @@ export function coreContext() {
     };
 
     context.loadLocale = function(callback) {
+        // force locale: 
+        locale = 'en';
         if (locale && locale !== 'en' && dataLocales.hasOwnProperty(locale)) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
             d3_json(localePath)
