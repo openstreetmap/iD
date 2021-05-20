@@ -60,11 +60,16 @@ export function utilDetect(force) {
     // Added due to incomplete svg style support. See #715
     detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
+    // force english:
+    detected.locale = 'en-US';
+    detected.language = 'en';
+
     // Set locale based on url param (format 'en-US') or browser lang (default)
-    if (q.hasOwnProperty('locale')) {
+    /*if (q.hasOwnProperty('locale')) {
         detected.locale = q.locale;
         detected.language = q.locale.split('-')[0];
     } else {
+        
         detected.locale = (navigator.language || navigator.userLanguage || 'en-US');
         detected.language = detected.locale.split('-')[0];
 
@@ -86,15 +91,15 @@ export function utilDetect(force) {
                 }
             }
         }
-    }
+    }*/
 
     // Loaded locale is stored in currentLocale
     // return that instead (except in the situation where 'en' might override 'en-US')
-    var loadedLocale = currentLocale || 'en';
+    /*var loadedLocale = currentLocale || 'en';
     if (loadedLocale !== 'en') {
         detected.locale = loadedLocale;
         detected.language = detected.locale.split('-')[0];
-    }
+    }*/
 
     // detect text direction
     var lang = dataLocales[detected.locale] || dataLocales[detected.language];

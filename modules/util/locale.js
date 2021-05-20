@@ -8,11 +8,12 @@ export var languageNames = {};
 export var scriptNames = {};
 
 export function setLocale(val) {
-    if (translations[val] !== undefined) {
+    currentLocale = 'en';
+    /*if (translations[val] !== undefined) {
         currentLocale = val;
     } else if (translations[val.split('-')[0]]) {
         currentLocale = val.split('-')[0];
-    }
+    }*/
 }
 
 export function addTranslation(id, value) {
