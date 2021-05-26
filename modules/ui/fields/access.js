@@ -74,7 +74,7 @@ export function uiFieldAccess(field, context) {
 
     access.options = function(type) {
         /* kaligrafy START */
-        var options = ["private", "destination", "use_sidepath", "delivery", "no", "yes", "designated", "dismount", "emergency", "permissive", "permit"];
+        var options = ["private", "destination", "use_sidepath", "customers", "delivery", "no", "yes", "designated", "dismount", "emergency", "permissive", "permit"];
 
         /*if (type !== 'access') {
             options.push('yes');

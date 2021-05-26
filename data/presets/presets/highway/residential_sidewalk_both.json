@@ -22,7 +22,8 @@
       "separate",
       "sidewalk",
       "sidepath",
-      "both"
+      "both",
+      "rb"
   ],
   "name": "Residential Road Sidewalk Both Separate"
 }
