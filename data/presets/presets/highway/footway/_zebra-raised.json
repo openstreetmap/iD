@@ -21,6 +21,7 @@
         "value": "table"
     },
     "terms": [
+        "zebra",
         "zebra crossing",
         "marked crossing",
         "crosswalk",
@@ -29,6 +30,6 @@
         "speed",
         "slow"
     ],
-    "name": "Marked Crosswalk (Raised)",
-    "searchable": false
+    "name": "Marked zebra Crosswalk (Raised)",
+    "searchable": true
 }

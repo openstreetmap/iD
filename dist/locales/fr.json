@@ -639,7 +639,6 @@
         },
         "inspector": {
             "zoom_to": {
-                "key": "Z",
                 "title": "Zoomer dessus",
                 "tooltip_feature": "Centrer et zoomer la carte sur cet élément.",
                 "tooltip_note": "Centrer et zoomer la carte sur cette note.",

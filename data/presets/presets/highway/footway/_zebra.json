@@ -20,10 +20,12 @@
         "value": "crossing"
     },
     "terms": [
+        "zebra",
         "zebra crossing",
         "marked crossing",
         "crosswalk"
     ],
-    "name": "Marked Crosswalk",
-    "searchable": false
+    "name": "Marked zebra Crosswalk",
+    "searchable": true,
+    "shortcut": ["z"]
 }
