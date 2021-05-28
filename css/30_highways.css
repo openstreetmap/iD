@@ -469,21 +469,21 @@ path.line.casing.tag-track {
 
 
 /* footways and cycleways */
-path.line.stroke.tag-highway-path,
+/*path.line.stroke.tag-highway-path,
 path.line.stroke.tag-highway-footway,
 path.line.stroke.tag-highway-cycleway,
 path.line.stroke.tag-highway-bridleway {
-    /*stroke-linecap: butt;
-    stroke-dasharray: 8, 2;*/
-}
+    stroke-linecap: butt;
+    stroke-dasharray: 8, 2;
+}*/
 
-.low-zoom path.line.stroke.tag-highway-path,
+/*.low-zoom path.line.stroke.tag-highway-path,
 .low-zoom path.line.stroke.tag-highway-footway,
 .low-zoom path.line.stroke.tag-highway-cycleway,
 .low-zoom path.line.stroke.tag-highway-bridleway {
-    /*stroke-linecap: butt;
-    stroke-dasharray: 4, 1;*/
-}
+    stroke-linecap: butt;
+    stroke-dasharray: 4, 1;
+}*/
 
 
 /* footway, etc. */
@@ -516,20 +516,20 @@ path.line.casing.tag-highway-bridleway.tag-unpaved {
 
 
 /* crossings */
-path.line.casing.tag-crossing-unmarked, path.line.casing.tag-crossing-marked {
+path.line.casing.tag-crossing-unmarked, path.line.casing.tag-crossing-marked, path.line.casing.tag-crossing-zebra {
   opacity: 0.5;
 }
-path.line.stroke.tag-crossing-unmarked, path.line.stroke.tag-crossing-marked {
+path.line.stroke.tag-crossing-unmarked, path.line.stroke.tag-crossing-marked, path.line.stroke.tag-crossing-zebra {
   opacity: 0.5;
 }
-path.line.stroke.tag-crossing-marked {
+path.line.stroke.tag-crossing-marked, path.line.stroke.tag-crossing-zebra {
   stroke-linecap: butt;
   stroke-dasharray: 2, 2 !important;
   stroke-width: 6;
 }
 
 /* cycleway marked crossing with no foot */
-path.line.over-stroke.tag-crossing-marked.tag-highway-cycleway {
+path.line.over-stroke.tag-crossing-marked.tag-highway-cycleway, path.line.over-stroke.tag-crossing-zebra.tag-highway-cycleway {
   stroke:rgb(182, 232, 255);
   stroke-width: 2;
 }
@@ -565,7 +565,7 @@ path.line.casing.tag-highway-cycleway.tag-lcn-yes {
 path.line.stroke.tag-highway-cycleway.tag-segregated-yes {
   stroke-dasharray: 12, 3, 2, 3 !important;
 }
-path.line.stroke.tag-crossing-marked.tag-highway-cycleway.tag-segregated-yes {
+path.line.stroke.tag-crossing-marked.tag-highway-cycleway.tag-segregated-yes , path.line.stroke.tag-crossing-zebra.tag-highway-cycleway.tag-segregated-yes {
   stroke-dasharray: 6, 2, 2, 2 !important;
 }
 
@@ -827,6 +827,7 @@ path.over-stroke.tag-sidewalk_both-shared
 path.over-stroke.tag-footway-sidewalk.tag-name-no,
 path.over-stroke.tag-crossing.tag-name-no,
 path.over-stroke.tag-crossing.tag-crossing-marked.tag-highway-cycleway.tag-name-no,
+path.over-stroke.tag-crossing.tag-crossing-zebra.tag-highway-cycleway.tag-name-no,
 path.over-stroke.tag-crossing.tag-crossing-unmarked.tag-highway-cycleway.tag-name-no {
   stroke-width: 1 !important;
   stroke-dasharray: 6, 6 !important;
