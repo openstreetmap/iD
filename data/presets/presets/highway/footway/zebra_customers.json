@@ -1,0 +1,32 @@
+{
+  "icon": "temaki-pedestrian_crosswalk",
+  "fields": [
+      "crossing",
+      "access",
+      "surface",
+      "tactile_paving",
+      "crossing/island"
+  ],
+  "geometry": [
+      "line"
+  ],
+  "tags": {
+      "highway": "footway",
+      "footway": "crossing",
+      "crossing": "zebra",
+      "access": "customers",
+      "motor_vehicle": "no"
+  },
+  "reference": {
+      "key": "footway",
+      "value": "marked_zebra_customers_crossing"
+  },
+  "terms": [
+      "marked zebra foot path crossing",
+      "marked zebra crossing",
+      "marked zebra pedestrian crosswalk",
+      "zebra crossing"
+  ],
+  "name": "Marked Zebra Customers Crosswalk",
+  "shortcut": ["⌥+z"]
+}

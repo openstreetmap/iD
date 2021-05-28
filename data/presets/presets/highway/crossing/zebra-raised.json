@@ -17,6 +17,5 @@
         "key": "traffic_calming",
         "value": "table"
     },
-    "name": "Marked Crosswalk (Raised)",
-    "searchable": false
+    "name": "Marked Zebra Crosswalk (Raised)"
 }

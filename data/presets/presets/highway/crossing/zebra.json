@@ -12,10 +12,19 @@
         "highway": "crossing",
         "crossing": "zebra"
     },
+    "addTags": {
+        "highway": "crossing",
+        "crossing": "zebra"
+    },
     "reference": {
         "key": "highway",
         "value": "crossing"
     },
-    "name": "Marked Crosswalk",
-    "searchable": false
+    "terms": [
+        "zebra crossing",
+        "marked zebra crossing",
+        "crosswalk"
+    ],
+    "name": "Marked Zebra Crosswalk",
+    "shortcut": ["⇧+z"]
 }
