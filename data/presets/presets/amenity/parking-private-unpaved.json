@@ -5,7 +5,7 @@
     "operator/type",
     "parking",
     "capacity",
-    "capacity:disabled",
+    "capacity_disabled",
     "access_simple",
     "fee",
     "surface",
