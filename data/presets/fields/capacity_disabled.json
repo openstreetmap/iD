@@ -1,0 +1,7 @@
+{
+  "key": "capacity:disabled",
+  "type": "number",
+  "minValue": 0,
+  "label": "Capacity for disabled",
+  "placeholder": "1, 5, 10..."
+}
