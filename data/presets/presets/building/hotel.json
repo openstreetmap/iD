@@ -1,8 +1,7 @@
 {
     "icon": "fas-hotel",
     "fields": [
-        "{building}",
-        "smoking"
+        "{building}"
     ],
     "geometry": [
         "area"

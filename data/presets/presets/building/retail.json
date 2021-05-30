@@ -1,8 +1,7 @@
 {
     "icon": "maki-commercial",
     "fields": [
-        "{building}",
-        "smoking"
+        "{building}"
     ],
     "geometry": [
         "area"

@@ -2,7 +2,8 @@
     "icon": "fas-warehouse",
     "fields": [
         "{building}",
-        "capacity"
+        "capacity",
+        "capacity:disabled"
     ],
     "geometry": [
         "area"

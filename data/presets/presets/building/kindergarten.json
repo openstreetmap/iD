@@ -3,6 +3,9 @@
     "geometry": [
         "area"
     ],
+    "fields": [
+        "{building}"
+    ],
     "terms": [
         "kindergarden",
         "pre-school"

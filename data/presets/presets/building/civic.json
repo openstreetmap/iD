@@ -1,8 +1,7 @@
 {
     "icon": "maki-building",
     "fields": [
-        "{building}",
-        "smoking"
+        "{building}"
     ],
     "moreFields": [
         "{building}",

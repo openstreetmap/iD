@@ -1,8 +1,7 @@
 {
     "icon": "maki-stadium",
     "fields": [
-        "{building}",
-        "smoking"
+        "{building}"
     ],
     "geometry": [
         "area"
