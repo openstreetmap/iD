@@ -46,7 +46,7 @@
       "type": "bing",
       "template": "https://www.bing.com/maps",
       "zoomExtent": [1, 22],
-      "offsetXY": [0.6,-1.54],
+      "offsetXY": [0,0],
       "default": false,
       "description": "Satellite and aerial imagery.",
       "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"
