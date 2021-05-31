@@ -6,7 +6,7 @@
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/cmm2018tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
-      "offsetXY": [0,0],
+      "offsetXY": [-0.6,1.54],
       "default": true,
       "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018 Aerial imagery."
     },
