@@ -2,13 +2,13 @@
   "dataImagery": [
     {
       "id": "CMM2018",
-      "name": "CMM Montreal 2018/Drummondville 2018/Gatineau 2017",
+      "name": "CMM Montreal 2018/Drummondville 2018/Gatineau 2017/Saint-Hyacinthe et Sorel 2020",
       "type": "tms",
       "template": "https://chaire-mobilite.civil.polymtl.ca/cmm2018tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
       "offsetXY": [0,0],
       "default": true,
-      "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018 Aerial imagery."
+      "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018/Saint-Hyacinthe Sorel 2020 Aerial imagery."
     },
     {
       "id": "Drummondville2020",
