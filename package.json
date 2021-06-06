@@ -42,8 +42,8 @@
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
-    "@ideditor/country-coder": "^4.0.0",
-    "@ideditor/location-conflation": "~0.8.0",
+    "@ideditor/country-coder": "^4.1.0",
+    "@ideditor/location-conflation": "~0.9.0",
     "@mapbox/geojson-area": "^0.2.2",
     "@mapbox/geojson-rewind": "^0.5.0",
     "@mapbox/sexagesimal": "1.2.0",
