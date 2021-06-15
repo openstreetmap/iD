@@ -2,7 +2,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import base64 from 'base64-js';
 import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
@@ -165,7 +164,7 @@ function loadTileDataToCache(data, tile, which) {
     if (vectorTile.layers.hasOwnProperty('traffic_sign')) {
         features = [];
         cache = _mlyCache[which];
-        layer = vectorTile.layers.point;
+        layer = vectorTile.layers.traffic_sign;
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
@@ -719,8 +718,12 @@ export default {
                 _mlyHighlightedDetection = null;
             }
 
-            const geometry = base64.toByteArray(data.geometry);
-            const tile = new VectorTile(new Protobuf(geometry));
+            var decodedGeometry = window.atob(data.geometry);
+            var uintArray = new Uint8Array(decodedGeometry.length);
+            for (var i = 0; i < decodedGeometry.length; i++) {
+                uintArray[i] = decodedGeometry.charCodeAt(i);
+            }
+            const tile = new VectorTile(new Protobuf(uintArray.buffer));
             const layer = tile.layers['mpy-or'];
 
             const geometries = layer.feature(0).loadGeometry();
