@@ -33,7 +33,8 @@ describe('iD.serviceMapillary', function() {
             var cache = mapillary.cache();
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('image_detections');
-            expect(cache).to.have.property('map_features');
+            expect(cache).to.have.property('points');
+            expect(cache).to.have.property('signs');
             expect(cache).to.have.property('sequences');
 
             mapillary.init();
@@ -91,26 +92,56 @@ describe('iD.serviceMapillary', function() {
 
     describe('#signs', function() {
         it('returns signs in the visible map area', function() {
-            var detections = [{
-                detection_key: '78vqha63gs1upg15s823qckcmn',
-                image_key: 'bwYs-uXLDvm_meo_EC5Nzw'
-            }];
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], detections: detections } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], detections: detections } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], detections: detections } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0] } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1] } }
             ];
 
-            mapillary.cache().map_features.rtree.load(features);
+            mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
 
             expect(res).to.deep.eql([
-                { key: '0', loc: [10,0], detections: detections },
-                { key: '1', loc: [10,0], detections: detections }
+                { key: '0', loc: [10,0] },
+                { key: '1', loc: [10,0] }
             ]);
         });
 
         it('limits results no more than 5 stacked signs in one spot', function() {
+            var features = [
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '5', loc: [10,0] } }
+            ];
+
+            mapillary.cache().signs.rtree.load(features);
+            var res = mapillary.signs(context.projection);
+            expect(res).to.have.length.of.at.most(5);
+        });
+    });
+
+
+    describe('#mapFeatures', function() {
+        it('returns map features in the visible map area', function() {
+            var features = [
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0] } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0] } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1] } }
+            ];
+
+            mapillary.cache().points.rtree.load(features);
+            var res = mapillary.mapFeatures(context.projection);
+
+            expect(res).to.deep.eql([
+                { key: '0', loc: [10,0] },
+                { key: '1', loc: [10,0] }
+            ]);
+        });
+
+        it('limits results no more than 5 stacked map features in one spot', function() {
             var detections = [{
                 detection_key: '78vqha63gs1upg15s823qckcmn',
                 image_key: 'bwYs-uXLDvm_meo_EC5Nzw'
@@ -124,8 +155,8 @@ describe('iD.serviceMapillary', function() {
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '5', loc: [10,0], detections: detections } }
             ];
 
-            mapillary.cache().map_features.rtree.load(features);
-            var res = mapillary.signs(context.projection);
+            mapillary.cache().points.rtree.load(features);
+            var res = mapillary.mapFeatures(context.projection);
             expect(res).to.have.length.of.at.most(5);
         });
     });
@@ -134,9 +165,9 @@ describe('iD.serviceMapillary', function() {
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, skey: '-' } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, skey: '-' } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, skey: '-' } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '-' } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '-' } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '-' } }
             ];
 
             mapillary.cache().images.rtree.load(features);
@@ -167,9 +198,9 @@ describe('iD.serviceMapillary', function() {
 
     describe('#setActiveImage', function() {
         it('gets and sets the selected image', function() {
-            var node = { key: 'baz', originalLatLon: [10,0] };
+            var node = { id: 'baz', originalLngLat: {lng: 10, lat: 0}};
             mapillary.setActiveImage(node);
-            expect(mapillary.getActiveImage().key).to.eql(node.key);
+            expect(mapillary.getActiveImage().id).to.eql(node.id);
         });
     });
 

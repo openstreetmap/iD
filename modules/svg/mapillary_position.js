@@ -23,15 +23,15 @@ export function svgMapillaryPosition(projection, context) {
     function getService() {
         if (services.mapillary && !_mapillary) {
             _mapillary = services.mapillary;
-            _mapillary.event.on('nodeChanged', throttledRedraw);
+            _mapillary.event.on('imageChanged', throttledRedraw);
             _mapillary.event.on('bearingChanged', function(e) {
-                viewerCompassAngle = e;
+                viewerCompassAngle = e.bearing;
 
                 if (context.map().isTransformed()) return;
 
                 layer.selectAll('.viewfield-group.currentView')
                     .filter(function(d) {
-                        return d.pano;
+                        return d.is_pano;
                     })
                     .attr('transform', transform);
             });
@@ -55,7 +55,7 @@ export function svgMapillaryPosition(projection, context) {
 
     function transform(d) {
         let t = svgPointTransform(projection)(d);
-        if (d.pano && viewerCompassAngle !== null && isFinite(viewerCompassAngle)) {
+        if (d.is_pano && viewerCompassAngle !== null && isFinite(viewerCompassAngle)) {
             t += ' rotate(' + Math.floor(viewerCompassAngle) + ',0,0)';
         } else if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
@@ -69,10 +69,10 @@ export function svgMapillaryPosition(projection, context) {
         const showViewfields = (z >= minViewfieldZoom);
 
         const service = getService();
-        const node = service && service.getActiveImage();
+        const image = service && service.getActiveImage();
 
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(node ? [node] : [], function(d) { return d.key; });
+            .data(image ? [image] : [], function(d) { return d.id; });
 
         // exit
         groups.exit()
@@ -112,18 +112,8 @@ export function svgMapillaryPosition(projection, context) {
         viewfields.enter()
             .insert('path', 'circle')
             .attr('class', 'viewfield')
-            .classed('pano', function() { return this.parentNode.__data__.pano; })
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
-            .attr('d', viewfieldPath);
-
-        function viewfieldPath() {
-            const d = this.parentNode.__data__;
-            if (d.pano) {
-                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
-            } else {
-                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
-            }
-        }
+            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
     }
 
 

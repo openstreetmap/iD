@@ -19,9 +19,9 @@ export function uiPhotoviewer(context) {
             .append('button')
             .attr('class', 'thumb-hide')
             .on('click', function () {
-                if (services.streetside) { services.streetside.hideViewer(context); }
+                //if (services.streetside) { services.streetside.hideViewer(context); }
                 if (services.mapillary) { services.mapillary.hideViewer(context); }
-                if (services.openstreetcam) { services.openstreetcam.hideViewer(context); }
+                //if (services.openstreetcam) { services.openstreetcam.hideViewer(context); }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));

@@ -61,30 +61,26 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        const selectedImageKey = service.getActiveImage() && service.getActiveImage().key;
-        let imageKey;
-        let highlightedDetection;
+        const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
 
-        d.detections.forEach(function(detection) {
-            if (!imageKey || selectedImageKey === detection.image_key) {
-                imageKey = detection.image_key;
-                highlightedDetection = detection;
+        service.getDetections(d.id).then(detections => {
+            if (detections.length) {
+                const imageId = detections[0].image.id;
+                if (imageId === selectedImageId) {
+                    service
+                        .highlightDetection(detections[0])
+                        .selectImage(context, imageId);
+                } else {
+                    service.ensureViewerLoaded(context)
+                        .then(function() {
+                            service
+                                .highlightDetection(detections[0])
+                                .selectImage(context, imageId)
+                                .showViewer(context);
+                        });
+                }
             }
         });
-
-        if (imageKey === selectedImageKey) {
-            service
-                .highlightDetection(highlightedDetection)
-                .selectImage(context, imageKey);
-        } else {
-            service.ensureViewerLoaded(context)
-                .then(function() {
-                    service
-                        .highlightDetection(highlightedDetection)
-                        .selectImage(context, imageKey)
-                        .showViewer(context);
-                });
-        }
     }
 
 
@@ -112,11 +108,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         let data = (service ? service.mapFeatures(projection) : []);
         data = filterData(data);
 
-        const selectedImageKey = service && service.getActiveImage() && service.getActiveImage().key;
         const transform = svgPointTransform(projection);
 
         const mapFeatures = layer.selectAll('.icon-map-feature')
-            .data(data, function(d) { return d.key; });
+            .data(data, function(d) { return d.id; });
 
         // exit
         mapFeatures.exit()
@@ -159,26 +154,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         // update
         mapFeatures
             .merge(enter)
-            .attr('transform', transform)
-            .classed('currentView', function(d) {
-                return d.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-            })
-            .sort(function(a, b) {
-                const aSelected = a.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-                const bSelected = b.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-                if (aSelected === bSelected) {
-                    return b.loc[1] - a.loc[1]; // sort Y
-                } else if (aSelected) {
-                    return 1;
-                }
-                return -1;
-            });
+            .attr('transform', transform);
     }
 
 

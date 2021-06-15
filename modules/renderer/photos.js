@@ -128,7 +128,7 @@ export function rendererPhotos(context) {
     };
 
     photos.shouldFilterByUsername = function() {
-        return showsLayer('mapillary') || showsLayer('openstreetcam') || showsLayer('streetside');
+        return !showsLayer('mapillary') && showsLayer('openstreetcam') && !showsLayer('streetside');
     };
 
     photos.showsPhotoType = function(val) {

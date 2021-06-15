@@ -70,7 +70,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
 
-    function click(d3_event, d) {
+    function click(d3_event, image) {
         const service = getService();
         if (!service) return;
 
@@ -78,18 +78,18 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .ensureViewerLoaded(context)
             .then(function() {
                 service
-                    .selectImage(context, d.key)
+                    .selectImage(context, image.id)
                     .showViewer(context);
             });
 
-        context.map().centerEase(d.loc);
+        context.map().centerEase(image.loc);
     }
 
 
-    function mouseover(d3_event, d) {
+    function mouseover(d3_event, image) {
         const service = getService();
 
-        if (service) service.setStyles(context, d);
+        if (service) service.setStyles(context, image);
     }
 
 
@@ -116,7 +116,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
-                if (image.pano) return showsPano;
+                if (image.is_pano) return showsPano;
                 return showsFlat;
             });
         }
@@ -142,8 +142,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                if (sequence.properties.hasOwnProperty('pano')) {
-                    if (sequence.properties.pano) return showsPano;
+                if (sequence.properties.hasOwnProperty('is_pano')) {
+                    if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
                 }
                 return false;
@@ -151,12 +151,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
         }
         if (fromDate) {
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() >= new Date(fromDate).getTime();
+                return new Date(sequence.properties.captured_at).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
         if (toDate) {
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime();
+                return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime().toString();
             });
         }
 
@@ -175,10 +175,11 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);
+
         service.filterViewer(context);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.properties.key; });
+            .data(sequences, function(d) { return d.properties.id; });
 
         // exit
         traces.exit()
@@ -193,7 +194,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(images, function(d) { return d.key; });
+            .data(images, function(d) { return d.id; });
 
         // exit
         groups.exit()
@@ -238,13 +239,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
         viewfields.enter()               // viewfields may or may not be drawn...
             .insert('path', 'circle')    // but if they are, draw below the circles
             .attr('class', 'viewfield')
-            .classed('pano', function() { return this.parentNode.__data__.pano; })
+            .classed('pano', function() { return this.parentNode.__data__.is_pano; })
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
-            const d = this.parentNode.__data__;
-            if (d.pano) {
+            if (this.parentNode.__data__.is_pano) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
