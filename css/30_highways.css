@@ -784,16 +784,13 @@ path.stroke.tag-highway-tertiary_link.tag-maxspeed-70 {
 path.stroke.tag-sidewalk-separate {
   stroke-width: 8 !important;
 }
-path.casing.tag-sidewalk-separate.tag-sidewalk_left-separate.tag-sidewalk_right-separate,
-path.casing.tag-sidewalk-both {
+path.casing.tag-sidewalk-separate.tag-sidewalk_left-separate.tag-sidewalk_right-separate {
   stroke: rgb(0, 121, 16) !important;
 }
-path.casing.tag-sidewalk-separate.tag-sidewalk_left-no.tag-sidewalk_right-separate,
-path.casing.tag-sidewalk-right {
+path.casing.tag-sidewalk-separate.tag-sidewalk_left-no.tag-sidewalk_right-separate {
   stroke: rgb(190, 139, 255) !important;
 }
-path.casing.tag-sidewalk-separate.tag-sidewalk_left-separate.tag-sidewalk_right-no, 
-path.casing.tag-sidewalk-left {
+path.casing.tag-sidewalk-separate.tag-sidewalk_left-separate.tag-sidewalk_right-no {
   stroke: rgb(152, 179, 31) !important;
 }
 
