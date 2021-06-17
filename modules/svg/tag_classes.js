@@ -264,15 +264,15 @@ export function svgTagClasses() {
                     isSidewalk = true;
                     classes.push('tag-footway-' + footway);
                 }
-                if (!ignoreSidewalk && k === 'sidewalk') {
+                if (!ignoreSidewalk && k === 'sidewalk' && ['shared', 'separate','no'].includes(v)) {
                     sidewalk = v;
                     classes.push('tag-sidewalk-' + sidewalk);
                 }
-                if (!ignoreSidewalk && k === 'sidewalk:left') {
+                if (!ignoreSidewalk && k === 'sidewalk:left' && (sidewalk === 'separate' || sidewalk === 'shared')) {
                     sidewalkLeft = v;
                     classes.push('tag-sidewalk_left-' + sidewalkLeft);
                 }
-                if (!ignoreSidewalk && k === 'sidewalk:right') {
+                if (!ignoreSidewalk && k === 'sidewalk:right' && (sidewalk === 'separate' || sidewalk === 'shared')) {
                     sidewalkRight = v;
                     classes.push('tag-sidewalk_right-' + sidewalkRight);
                 }
