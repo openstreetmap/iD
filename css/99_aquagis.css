@@ -1,0 +1,459 @@
+.ideditor .inspector-body,
+.ideditor .header,
+.ideditor .sidebar .search-header,
+.ideditor .feature-list-item {
+    background-color: #263238;
+    color: #fff;
+}
+
+.ideditor ::-webkit-scrollbar {
+    background-color: #263238;
+    border: 0;
+}
+
+.ideditor ::-webkit-scrollbar-thumb {
+    background-color: #BEC8C8;
+}
+
+
+.ideditor .header {
+    border-bottom-color: #00ABB5;
+    background-image: url('img/aquagis/logo@2x.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    text-indent: -9999px;
+}
+
+.ideditor .sidebar .search-header input {
+    border: 0;
+    border-bottom: 1px solid #BEC8C8;
+    color: #BEC8C8;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+    padding-bottom: 5px;
+}
+
+.ideditor .sidebar .search-header .icon {
+    color: #BEC8C8;
+}
+
+.ideditor .feature-list-item:hover {
+    background-color: #00ABB5;
+}
+
+.ideditor .feature-list-item:hover .entity-type,
+.ideditor .feature-list-item .entity-type {
+    color: #8FF9FF;
+}
+
+.ideditor .feature-list-item .entity-name {
+    color: #fff;
+}
+
+.ideditor .entity-editor-pane .header button.preset-choose,
+.ideditor .field-help-title button.close, 
+.ideditor .sidebar .header button.close, 
+.ideditor .preset-list-pane .header button.preset-choos,
+.ideditor[dir='ltr'] button.raw-tag-option,
+.ideditor button.secondary-action,
+.ideditor .map-control > button.active:hover  {
+    background-color: #8FF9FF;
+    color: #263238;
+    fill: #263238;
+}
+
+.ideditor .entity-editor-pane .header button.preset-choose:hover,
+.ideditor .field-help-title button.close:hover, 
+.ideditor .sidebar .header button.close:hover, 
+.ideditor .preset-list-pane .header button.preset-choos:hover,
+.ideditor[dir='ltr'] button.raw-tag-option:hover,
+.ideditor[dir='ltr'] button.raw-tag-option.selected,
+.ideditor button.secondary-actio:hover,
+.ideditor .map-control > button.active, 
+.ideditor .map-control > button.active:active,
+.ideditor .map-control > button:hover {
+    background-color: #00ABB5;
+}
+
+.ideditor a:visited.hide-toggle, .ideditor a.hide-toggle,
+.ideditor a, .ideditor a:visited, .ideditor a:active,
+.ideditor .form-field-input-check,
+.ideditor .form-field-input-radio > label {
+    color: #00ABB5;
+}
+
+
+.ideditor button,
+.ideditor button.action {
+    background-color: #263238;
+    color: #8FF9FF;
+}
+
+.ideditor button:hover,
+.ideditor button.tag-reference-button:hover,
+.ideditor button.action:hover {
+    background-color: #697171;
+    color: #8FF9FF;
+}
+
+.ideditor button.save.bar-button:not(.disabled) {
+    background-color: #8FF9FF !important;
+    color: #263238;
+}
+
+.ideditor button.tag-reference-button {
+    color: #8FF9FF;
+    background-color: #fff;
+}
+
+.ideditor .preset-list-button .label,
+.ideditor .preset-list-button-wrap button.tag-reference-button:not(:hover):not(:active):not(:focus),
+.ideditor .preset-list-button {
+    background-color: #697171;
+    border-color: #8FF9FF;
+}
+
+.ideditor .preset-list-button-wrap {
+    border-color: #8FF9FF;
+}
+
+.ideditor .section .grouped-items-area {
+    background-color: #fff;
+}
+
+.ideditor .field-label {
+    background-color: #020202;
+    color: #fff;
+}
+
+.ideditor .field-label .remove-icon-multilingual,
+.ideditor .field-label .remove-icon,
+.ideditor button.remove .icon {
+    fill: #EF0C4A;
+    color: #EF0C4A;
+}
+
+.ideditor .field-label .icon,
+.ideditor .form-field-button .icon,
+.ideditor .tag-row button .icon {
+    opacity: 1;
+}
+
+.ideditor .form-field-button {
+    color: #020202;
+    border: 0;
+    border-bottom: 1px solid #BEC8C8;
+}
+
+.ideditor .form-field-button:hover {
+    color: #697171;
+}
+
+.ideditor input[type=text], 
+.ideditor input[type=search], 
+.ideditor input[type=number], 
+.ideditor input[type=url], 
+.ideditor input[type=tel], 
+.ideditor input[type=email], 
+.ideditor input[type=date],
+.ideditor .form-field-input-localized > input.localized-main,
+.ideditor[dir='ltr'] .form-field-input-roadspeed > input:first-of-type {
+    border: 0;
+    border-bottom: 1px solid #BEC8C8;
+    color: #BEC8C8;
+    border-radius: 0;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.ideditor .layer-list > li {
+    color: #020202;
+}
+
+.ideditor .layer-list li.active button, 
+.ideditor .layer-list li.switch button, 
+.ideditor .layer-list li.active, 
+.ideditor .layer-list li.switch {
+    background-color: #8FF9FF;
+}
+
+/* CHECKBOX  START */
+
+[type=checkbox]:not(:checked),
+[type=checkbox]:checked {
+  position: relative;
+  left: 0;
+  opacity: 0.01;
+  width: 0;
+  height: 0;
+}
+
+[type=checkbox]:not(:checked) + span,
+[type=checkbox]:checked + span {
+  position: relative;
+  padding-left: 2em;
+  font-size: 1.05em;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+[type=checkbox]:not(:checked) + span:before,
+[type=checkbox]:checked + span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  background: #697171;
+  border: 1px solid #697171;
+  border-radius: 4px;
+  -webkit-transition: all 0.275s;
+  transition: all 0.275s;
+}
+
+[type=checkbox]:checked + span:before {
+  background-color: #00ABB5;
+  border: 1px solid #00ABB5;
+}
+
+[type=checkbox]:not(:checked) + span:after,
+[type=checkbox]:checked + span:after {
+  content: "✓";
+  position: absolute;
+  top: 0.525em;
+  left: 0.18em;
+  font-size: 1.2em;
+  color: #fff;
+  line-height: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+/* checked mark aspect changes */
+[type=checkbox]:not(:checked) + span:after {
+  opacity: 0;
+  -webkit-transform: scale(0) rotate(45deg);
+  transform: scale(0) rotate(45deg);
+}
+
+[type=checkbox]:checked + span:after {
+  opacity: 1;
+  -webkit-transform: scale(1) rotate(0);
+  transform: scale(1) rotate(0);
+}
+
+
+/* CHECKBOX  end */
+
+/* RADIO BUTTON  start */
+
+[type=radio]:not(:checked),
+[type=radio]:checked {
+  position: relative;
+  left: 0;
+  opacity: 0.01;
+  width: 0;
+  height: 0;
+}
+
+[type=radio]:not(:checked) + span,
+[type=radio]:checked + span {
+  position: relative;
+  padding-left: 2em;
+  font-size: 1.05em;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+[type=radio]:not(:checked) + span:before,
+[type=radio]:checked + span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  background: #697171;
+  border: 1px solid #697171;
+  border-radius: 15px;
+  -webkit-transition: all 0.275s;
+  transition: all 0.275s;
+}
+
+[type=radio]:not(:checked) + span:after,
+[type=radio]:checked + span:after {
+  content: "";
+  position: absolute;
+  top: 0.36em;
+  left: 0.43em;
+  width: 7px;
+  height: 7px;
+  border-radius: 8px;
+  background-color: #00ABB5;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+/* checked mark aspect changes */
+[type=radio]:not(:checked) + span:after {
+  opacity: 0;
+  -webkit-transform: scale(0) rotate(45deg);
+  transform: scale(0) rotate(45deg);
+}
+
+[type=radio]:checked + span:after {
+  opacity: 1;
+  -webkit-transform: scale(1) rotate(0);
+  transform: scale(1) rotate(0);
+}
+
+/* RADIO BUTTON  end */
+
+
+/* INPUT RANGE start */
+/* base CSS Style */
+input[type=range] {
+    -webkit-appearance: none;
+    /* Hides the slider so that custom slider can be made */
+    width: 100%;
+    /* Specific width is required for Firefox. */
+    background: transparent;
+    /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+    outline: none;
+    /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+/* Styling the Thumb */
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid #020202;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #00ABB5;
+    cursor: pointer;
+    margin-top: -7px;
+    /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+    /* Add cool effects to your sliders! */
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+    border: 1px solid #020202;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #00ABB5;
+    cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+    border: 1px solid #020202;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #00ABB5;
+    cursor: pointer;
+}
+
+/* Styling the Track */
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+    background: #00ABB5;
+    /*border-radius: 1.3px;
+    border: 0.2px solid #010101;*/
+  }
+  
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #8FF9FF;
+  }
+  
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+    background: #00ABB5;
+    /*border-radius: 1.3px;
+    border: 0.2px solid #010101;*/
+  }
+  
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #00ABB5;
+    /*border: 0.2px solid #010101;
+    border-radius: 2.6px;*
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    */
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: #3071a9;
+  }
+  input[type=range]::-ms-fill-upper {
+    background: #3071a9;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #367ebd;
+  }
+
+
+
+
+/* INPUT RANGE end */
+
+@media (hover: hover) {
+    .ideditor .preset-list-button:hover .label,
+    .ideditor .preset-list-button:hover {
+        background-color: #8FF9FF;
+        color: #697171;
+        border-color: #697171;
+    }
+
+    .ideditor a:hover {
+        color: #BEC8C8;
+    }
+
+    .ideditor .map-control > button:not(.disabled):hover {
+        background-color: #00ABB5;
+    }
+    
+}
