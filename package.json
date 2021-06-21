@@ -103,7 +103,7 @@
     "node-fetch": "^2.6.1",
     "npm-run-all": "^4.0.0",
     "object-inspect": "1.9.0",
-    "osm-community-index": "~4.0.2",
+    "osm-community-index": "~5.0.0",
     "phantomjs-prebuilt": "~2.1.16",
     "postcss": "^8.1.1",
     "postcss-selector-prepend": "^0.5.0",
