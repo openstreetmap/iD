@@ -119,7 +119,7 @@ export function modeRotate(context, entityIDs) {
 
 
     function cancel() {
-        context.pop();
+        if (_prevGraph) context.pop();   // remove the rotate
         context.enter(modeSelect(context, entityIDs));
     }
 
@@ -130,6 +130,7 @@ export function modeRotate(context, entityIDs) {
 
 
     mode.enter = function() {
+        _prevGraph = null;
         context.features().forceVisible(entityIDs);
 
         behaviors.forEach(context.install);
