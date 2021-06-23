@@ -1,3 +1,7 @@
+export { addressFormatsHolder } from './addressFormats';
+export { utilDisplayNameForAddress } from './addressFormats';
+export { utilEntityToAddressFormat } from './addressFormats';
+
 export { utilAesEncrypt } from './aes';
 export { utilAesDecrypt } from './aes';
 

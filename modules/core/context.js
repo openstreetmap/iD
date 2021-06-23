@@ -18,7 +18,7 @@ import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
-import { utilKeybinding, utilRebind, utilStringQs, utilUnicodeCharsTruncated } from '../util';
+import { utilKeybinding, utilRebind, utilStringQs, utilUnicodeCharsTruncated, addressFormatsHolder } from '../util';
 
 
 export function coreContext() {
@@ -554,6 +554,7 @@ export function coreContext() {
       localizer.ensureLoaded();
       _background.ensureLoaded();
       presetManager.ensureLoaded();
+      addressFormatsHolder.ensureLoaded();
 
       Object.values(services).forEach(service => {
         if (service && typeof service.init === 'function') {

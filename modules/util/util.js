@@ -6,6 +6,7 @@ import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 import { geoExtent } from '../geo/extent';
+import { utilDisplayNameForAddress } from './addressFormats';
 
 
 export function utilTagText(entity) {
@@ -216,6 +217,11 @@ export function utilDisplayName(entity) {
 
     if (keyComponents.length) {
         name = t('inspector.display_name.' + keyComponents.join('_'), tags);
+    }
+
+    //address handling
+    if (entity.type === 'node'){
+        name = utilDisplayNameForAddress(entity);
     }
 
     return name;
