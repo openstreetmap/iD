@@ -1,4 +1,4 @@
-import { matcher as Matcher } from 'name-suggestion-index';
+import { Matcher } from 'name-suggestion-index';
 
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
@@ -40,13 +40,13 @@ const notBranches = /(coop|express|wireless|factory|outlet)/i;
 //
 function setNsiSources() {
   const sources = {
-    'nsi_data': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/nsi.min.json',
-    'nsi_dissolved': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/dissolved.min.json',
-    'nsi_features': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/featureCollection.min.json',
-    'nsi_generics': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/genericWords.min.json',
-    'nsi_presets': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/replacements.min.json',
-    'nsi_trees': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@5.0/dist/trees.min.json'
+    'nsi_data': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/nsi.min.json',
+    'nsi_dissolved': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/dissolved.min.json',
+    'nsi_features': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/featureCollection.min.json',
+    'nsi_generics': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/genericWords.min.json',
+    'nsi_presets': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/presets/nsi-id-presets.min.json',
+    'nsi_replacements': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/replacements.min.json',
+    'nsi_trees': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/trees.min.json'
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -101,7 +101,7 @@ function loadNsiData() {
         ids:           new Map()               // Map (id -> NSI item)
       };
 
-      _nsi.matcher = Matcher();
+      _nsi.matcher = new Matcher();
       _nsi.matcher.buildMatchIndex(_nsi.data);
       _nsi.matcher.buildLocationIndex(_nsi.data, locationManager.loco());
 
