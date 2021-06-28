@@ -124,13 +124,6 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
             .on('click', click);
 
         enter
-            .append('title')
-            .text(function(d) {
-                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
-                return t('mapillary_map_features.' + id);
-            });
-
-        enter
             .append('use')
             .attr('width', '24px')
             .attr('height', '24px')
