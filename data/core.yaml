@@ -1322,7 +1322,20 @@ en:
         crosswalk_plain: plain crosswalk
     marking:
       discrete:
-        crosswalk_zebra: zebra crosswalk
+        arrow:
+          left: lane marking - arrow (left)
+          right: lane marking - arrow (right)
+          split_left_or_straight: lane marking - arrow (split left or straight)
+          split_right_or_straight: lane marking - arrow (split right or straight)
+          straight: lane marking - arrow (straight)
+        crosswalk_zebra: lane marking - crosswalk
+        give_way_row: lane marking - give way (row)
+        give_way_single: lane marking - give way (single)
+        other_marking: lane marking - other
+        stop_line: lane marking - stop line
+        symbol:
+          bicycle: lane marking - symbol (bicycle)
+        text: lane marking - text
     object:
       banner: banner
       bench: bench
@@ -1331,8 +1344,10 @@ en:
       catch_basin: catch basin
       cctv_camera: CCTV camera
       fire_hydrant: fire hydrant
+      junction_box: junction box
       mailbox: mailbox
       manhole: manhole
+      parking_meter: parking meter
       phone_booth: phone booth
       sign:
         advertisement: advertisement
@@ -1340,6 +1355,8 @@ en:
         store: shop sign
       street_light: street light
       support:
+        pole: pole
+        traffic_sign_frame: traffic sign frame
         utility_pole: utility pole
       traffic_cone: traffic cone
       traffic_light:
@@ -1350,6 +1367,7 @@ en:
         other: traffic light
         pedestrians: pedestrian traffic light
       trash_can: trash can
+      water_valve: water valve
   mapillary:
     title: Mapillary
     signs:
