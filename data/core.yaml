@@ -1318,8 +1318,11 @@ en:
     title: "Map Features"
     tooltip: "Map features from Mapillary"
     construction:
+      barrier:
+        temporary: temporary barrier
       flat:
         crosswalk_plain: plain crosswalk
+        driveway: driveway
     marking:
       discrete:
         arrow:
@@ -1352,7 +1355,12 @@ en:
       sign:
         advertisement: advertisement
         information: information sign
+        other: other sign
         store: shop sign
+        traffic_sign:
+          back: traffic sign - back
+          direction_front: traffic sign - front
+          front: traffic sign - front
       street_light: street light
       support:
         pole: pole
