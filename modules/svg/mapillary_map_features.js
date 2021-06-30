@@ -5,10 +5,10 @@ import { services } from '../services';
 import { t } from '../core/localizer';
 
 export function svgMapillaryMapFeatures(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
-    var layer = d3_select(null);
-    var _mapillary;
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const minZoom = 12;
+    let layer = d3_select(null);
+    let _mapillary;
 
 
     function init() {
@@ -30,7 +30,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
 
     function showLayer() {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
         service.loadObjectResources(context);
@@ -56,88 +56,69 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
 
     function click(d3_event, d) {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
         context.map().centerEase(d.loc);
 
-        var selectedImageKey = service.getSelectedImageKey();
-        var imageKey;
-        var highlightedDetection;
-        // Pick one of the images the map feature was detected in,
-        // preference given to an image already selected.
-        d.detections.forEach(function(detection) {
-            if (!imageKey || selectedImageKey === detection.image_key) {
-                imageKey = detection.image_key;
-                highlightedDetection = detection;
+        const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
+
+        service.getDetections(d.id).then(detections => {
+            if (detections.length) {
+                const imageId = detections[0].image.id;
+                if (imageId === selectedImageId) {
+                    service
+                        .highlightDetection(detections[0])
+                        .selectImage(context, imageId);
+                } else {
+                    service.ensureViewerLoaded(context)
+                        .then(function() {
+                            service
+                                .highlightDetection(detections[0])
+                                .selectImage(context, imageId)
+                                .showViewer(context);
+                        });
+                }
             }
         });
-
-        if (imageKey === selectedImageKey) {
-            service
-                .highlightDetection(highlightedDetection)
-                .selectImage(context, imageKey);
-        } else {
-            service.ensureViewerLoaded(context)
-                .then(function() {
-                    service
-                        .highlightDetection(highlightedDetection)
-                        .selectImage(context, imageKey)
-                        .showViewer(context);
-                });
-        }
     }
 
 
     function filterData(detectedFeatures) {
-        var service = getService();
-
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
 
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.last_seen_at).getTime() >= fromTimestamp;
+                return new Date(feature.last_seen_at).getTime() >= new Date(fromDate).getTime();
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.first_seen_at).getTime() <= toTimestamp;
+                return new Date(feature.first_seen_at).getTime() <= new Date(toDate).getTime();
             });
         }
-        if (usernames && service) {
-            detectedFeatures = detectedFeatures.filter(function(feature) {
-                return feature.detections.some(function(detection) {
-                    var imageKey = detection.image_key;
-                    var image = service.cachedImage(imageKey);
-                    return image && usernames.indexOf(image.captured_by) !== -1;
-                });
-            });
-        }
+
         return detectedFeatures;
     }
 
 
     function update() {
-        var service = getService();
-        var data = (service ? service.mapFeatures(projection) : []);
+        const service = getService();
+        let data = (service ? service.mapFeatures(projection) : []);
         data = filterData(data);
 
-        var selectedImageKey = service && service.getSelectedImageKey();
-        var transform = svgPointTransform(projection);
+        const transform = svgPointTransform(projection);
 
-        var mapFeatures = layer.selectAll('.icon-map-feature')
-            .data(data, function(d) { return d.key; });
+        const mapFeatures = layer.selectAll('.icon-map-feature')
+            .data(data, function(d) { return d.id; });
 
         // exit
         mapFeatures.exit()
             .remove();
 
         // enter
-        var enter = mapFeatures.enter()
+        const enter = mapFeatures.enter()
             .append('g')
             .attr('class', 'icon-map-feature icon-detected')
             .on('click', click);
@@ -173,32 +154,13 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         // update
         mapFeatures
             .merge(enter)
-            .attr('transform', transform)
-            .classed('currentView', function(d) {
-                return d.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-            })
-            .sort(function(a, b) {
-                var aSelected = a.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-                var bSelected = b.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-                if (aSelected === bSelected) {
-                    return b.loc[1] - a.loc[1]; // sort Y
-                } else if (aSelected) {
-                    return 1;
-                }
-                return -1;
-            });
+            .attr('transform', transform);
     }
 
 
     function drawMapFeatures(selection) {
-        var enabled = svgMapillaryMapFeatures.enabled;
-        var service = getService();
+        const enabled = svgMapillaryMapFeatures.enabled;
+        const service = getService();
 
         layer = selection.selectAll('.layer-mapillary-map-features')
             .data(service ? [0] : []);

@@ -305,17 +305,23 @@ label.streetside-hires {
     top: -25px;
 }
 
-.mly-wrapper .AttributionContainer .AttributionIconContainer .AttributionMapillaryLogo {
-    margin-top: 3px;
+.mly-wrapper .mapillary-attribution-container {
+    display: flex;
+    align-items: center;
 }
 
-.mly-wrapper .AttributionContainer .AttributionImageContainer {
-    color: #fff;
-    font-size: 10px;
-    font-weight: 300;
-    overflow: hidden;
+.mly-wrapper .mapillary-attribution-container .mapillary-attribution-icon-container {
+    display: flex;
+    align-items: center;
 }
 
+.mly-wrapper .mapillary-attribution-container .mapillary-attribution-username {
+    display: none;
+}
+
+.mly-wrapper .mapillary-attribution-container .mapillary-attribution-date {
+    margin-right: 6px;
+}
 
 /* OpenStreetCam viewer */
 .osc-wrapper {
