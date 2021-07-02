@@ -62,9 +62,12 @@ export function coreLocations() {
     if (obj.locationSetID) return;  // work was done already
 
     try {
-      const locationSet = obj.locationSet;
+      let locationSet = obj.locationSet;
       if (!locationSet) {
         throw new Error('object missing locationSet property');
+      }
+      if (!locationSet.include) {      // missing `include`, default to worldwide include
+        locationSet.include = ['Q2'];  // https://github.com/openstreetmap/iD/pull/8305#discussion_r662344647
       }
       const resolved = _loco.resolveLocationSet(locationSet);
       const locationSetID = resolved.id;
