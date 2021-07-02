@@ -103,7 +103,7 @@ export function rendererBackgroundSource(data) {
 
     source.template = function(val) {
         if (!arguments.length) return _template;
-        if (source.id === 'custom') {
+        if (source.id === 'custom' || source.id === 'Bing') {
             _template = val;
         }
         return source;
@@ -266,14 +266,14 @@ export function rendererBackgroundSource(data) {
 
 
 rendererBackgroundSource.Bing = function(data, dispatch) {
-    // http://msdn.microsoft.com/en-us/library/ff701716.aspx
-    // http://msdn.microsoft.com/en-us/library/ff701701.aspx
+    // https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata
 
+    //fallback url template
     data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z';
 
     var bing = rendererBackgroundSource(data);
-    // var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // P2, JOSM, etc
-    var key = 'Ak5oTE46TUbjRp08OFVcGpkARErDobfpuyNKa-W2mQ8wbt1K1KL8p1bIRwWwcF-Q';    // iD
+    var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // P2, JOSM, etc
+    //var key = 'Ak5oTE46TUbjRp08OFVcGpkARErDobfpuyNKa-W2mQ8wbt1K1KL8p1bIRwWwcF-Q';    // iD
 
 
     var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key;
@@ -283,7 +283,15 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
     d3_json(url)
         .then(function(json) {
-            providers = json.resourceSets[0].resources[0].imageryProviders.map(function(provider) {
+            let imageryResource = json.resourceSets[0].resources[0];
+            let template = imageryResource.imageUrl; //http://ecn.{subdomain}.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=10339
+            let subDomains = imageryResource.imageUrlSubdomains; //["t0, t1, t2, t3"]
+            let subDomainNumbers = subDomains.map((subDomain) => {
+                return subDomain.substring(1);
+            } ).join(',');
+            template = template.replace('{subdomain}', `t{switch:${subDomainNumbers}}`).replace('{quadkey}', '{u}');
+            bing.template(template);
+            providers = imageryResource.imageryProviders.map(function(provider) {
                 return {
                     attribution: provider.attribution,
                     areas: provider.coverageAreas.map(function(area) {
