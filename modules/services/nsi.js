@@ -1,7 +1,12 @@
 import { Matcher } from 'name-suggestion-index';
+import parseVersion from 'vparse';
 
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
+
+// Make very sure this resolves to iD's `package.json`
+// If you mess up the `../`s, the resolver may import another random package.json from somewhere else.
+import packageJSON from '../../package.json';
 
 // This service contains all the code related to the **name-suggestion-index** (aka NSI)
 // NSI contains the most correct tagging for many commonly mapped features.
@@ -39,14 +44,17 @@ const notBranches = /(coop|express|wireless|factory|outlet)/i;
 // Adds the sources to iD's filemap so we can start downloading data.
 //
 function setNsiSources() {
+  const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
+  const v = parseVersion(nsiVersion);
+  const vMinor = `${v.major}.${v.minor}`;
   const sources = {
-    'nsi_data': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/nsi.min.json',
-    'nsi_dissolved': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/dissolved.min.json',
-    'nsi_features': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/featureCollection.min.json',
-    'nsi_generics': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/genericWords.min.json',
-    'nsi_presets': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/presets/nsi-id-presets.min.json',
-    'nsi_replacements': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/replacements.min.json',
-    'nsi_trees': 'https://cdn.jsdelivr.net/npm/name-suggestion-index@6.0/dist/trees.min.json'
+    'nsi_data': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/nsi.min.json`,
+    'nsi_dissolved': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/dissolved.min.json`,
+    'nsi_features': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/featureCollection.min.json`,
+    'nsi_generics': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/genericWords.min.json`,
+    'nsi_presets': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/presets/nsi-id-presets.min.json`,
+    'nsi_replacements': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/replacements.min.json`,
+    'nsi_trees': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/trees.min.json`
   };
 
   let fileMap = fileFetcher.fileMap();
