@@ -557,7 +557,7 @@ export function coreContext() {
 
       Object.values(services).forEach(service => {
         if (service && typeof service.init === 'function') {
-          service.init(context);
+          service.init();
         }
       });
 
