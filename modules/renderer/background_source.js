@@ -269,12 +269,12 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     // https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata
 
     //fallback url template
-    data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&mkt=en-gb&n=z';
+    data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=10555&n=z';
 
     var bing = rendererBackgroundSource(data);
     var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // P2, JOSM, etc
     //var key = 'Ak5oTE46TUbjRp08OFVcGpkARErDobfpuyNKa-W2mQ8wbt1K1KL8p1bIRwWwcF-Q';    // iD
-
+    const strictParam = 'n';
 
     var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key;
     var cache = {};
@@ -289,7 +289,11 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             let subDomainNumbers = subDomains.map((subDomain) => {
                 return subDomain.substring(1);
             } ).join(',');
+
             template = template.replace('{subdomain}', `t{switch:${subDomainNumbers}}`).replace('{quadkey}', '{u}');
+            if (!new URLSearchParams(template).has(strictParam)){
+                template += `&${strictParam}=z`;
+            }
             bing.template(template);
             providers = imageryResource.imageryProviders.map(function(provider) {
                 return {
@@ -304,8 +308,9 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             });
             dispatch.call('change');
         })
-        .catch(function() {
+        .catch(function(e) {
             /* ignore */
+            console.log(e);
         });
 
 
