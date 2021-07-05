@@ -1,4 +1,4 @@
-import { json as d3_json } from 'd3-fetch';
+import { utilFetchJson } from '../util/util';
 
 let _mainFileFetcher = coreFileFetcher(); // singleton
 
@@ -19,8 +19,9 @@ export function coreFileFetcher() {
     'keepRight': 'data/keepRight.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',
-    'oci_features': 'https://cdn.jsdelivr.net/npm/osm-community-index@3/dist/featureCollection.min.json',
-    'oci_resources': 'https://cdn.jsdelivr.net/npm/osm-community-index@3/dist/resources.min.json',
+    'oci_defaults': 'https://cdn.jsdelivr.net/npm/osm-community-index@4/dist/defaults.min.json',
+    'oci_features': 'https://cdn.jsdelivr.net/npm/osm-community-index@4/dist/featureCollection.min.json',
+    'oci_resources': 'https://cdn.jsdelivr.net/npm/osm-community-index@4/dist/resources.min.json',
     'preset_categories': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json',
     'preset_defaults': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_defaults.min.json',
     'preset_fields': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json',
@@ -52,7 +53,7 @@ export function coreFileFetcher() {
 
     let prom = _inflight[url];
     if (!prom) {
-      _inflight[url] = prom = d3_json(url)
+      _inflight[url] = prom = utilFetchJson(url)
         .then(result => {
           delete _inflight[url];
           if (!result) {

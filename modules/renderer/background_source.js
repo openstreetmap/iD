@@ -174,7 +174,7 @@ export function rendererBackgroundSource(data) {
                     // WMS 1.3 flips x/y for some coordinate systems including EPSG:4326 - #7557
                     if (projection === 'EPSG:4326' &&
                         // The CRS parameter implies version 1.3 (prior versions use SRS)
-                        /VERSION=1.3|CRS={proj}/.test(source.template())) {
+                        /VERSION=1.3|CRS={proj}/.test(source.template().toUpperCase())) {
                         return maxXminY.y + ',' + minXmaxY.x + ',' + minXmaxY.y + ',' + maxXminY.x;
                     } else {
                         return minXmaxY.x + ',' + maxXminY.y + ',' + maxXminY.x + ',' + minXmaxY.y;

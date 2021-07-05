@@ -10,13 +10,13 @@ export function validationMissingTag(context) {
     var type = 'missing_tag';
 
     function hasDescriptiveTags(entity, graph) {
-        var onlyDescriptiveKeys = ['description', 'name', 'note', 'start_date'];
+        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
         var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
                 if (k === 'area' || !osmIsInterestingTag(k)) return false;
 
-                return !onlyDescriptiveKeys.some(function(desciptiveKey) {
-                    return k === desciptiveKey || k.indexOf(desciptiveKey + ':') === 0;
+                return !onlyAttributeKeys.some(function(attributeKey) {
+                    return k === attributeKey || k.indexOf(attributeKey + ':') === 0;
                 });
             });
 

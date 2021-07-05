@@ -732,6 +732,21 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name:
+      direction: "{direction}"
+      from_to: "from {from} to {to}"
+      from_to_via: "from {from} to {to} via {via}"
+      network_direction: "{network} {direction}"
+      network_from_to: "{network} from {from} to {to}"
+      network_from_to_via: "{network} from {from} to {to} via {via}"
+      ref: "{ref}"
+      ref_direction: "{ref} {direction}"
+      ref_from_to: "{ref} from {from} to {to}"
+      ref_from_to_via: "{ref} from {from} to {to} via {via}"
+      network_ref: "{network} {ref}"
+      network_ref_direction: "{network} {ref} {direction}"
+      network_ref_from_to: "{network} {ref} from {from} to {to}"
+      network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
   background:
     title: Background
     description: Background Settings
@@ -1303,11 +1318,27 @@ en:
     title: "Map Features"
     tooltip: "Map features from Mapillary"
     construction:
+      barrier:
+        temporary: temporary barrier
       flat:
         crosswalk_plain: plain crosswalk
+        driveway: driveway
     marking:
       discrete:
-        crosswalk_zebra: zebra crosswalk
+        arrow:
+          left: lane marking - arrow (left)
+          right: lane marking - arrow (right)
+          split_left_or_straight: lane marking - arrow (split left or straight)
+          split_right_or_straight: lane marking - arrow (split right or straight)
+          straight: lane marking - arrow (straight)
+        crosswalk_zebra: lane marking - crosswalk
+        give_way_row: lane marking - give way (row)
+        give_way_single: lane marking - give way (single)
+        other_marking: lane marking - other
+        stop_line: lane marking - stop line
+        symbol:
+          bicycle: lane marking - symbol (bicycle)
+        text: lane marking - text
     object:
       banner: banner
       bench: bench
@@ -1316,15 +1347,24 @@ en:
       catch_basin: catch basin
       cctv_camera: CCTV camera
       fire_hydrant: fire hydrant
+      junction_box: junction box
       mailbox: mailbox
       manhole: manhole
+      parking_meter: parking meter
       phone_booth: phone booth
       sign:
         advertisement: advertisement
         information: information sign
+        other: other sign
         store: shop sign
+        traffic_sign:
+          back: traffic sign - back
+          direction_front: traffic sign - front
+          front: traffic sign - front
       street_light: street light
       support:
+        pole: pole
+        traffic_sign_frame: traffic sign frame
         utility_pole: utility pole
       traffic_cone: traffic cone
       traffic_light:
@@ -1335,6 +1375,7 @@ en:
         other: traffic light
         pedestrians: pedestrian traffic light
       trash_can: trash can
+      water_valve: water valve
   mapillary:
     title: Mapillary
     signs:
@@ -2258,6 +2299,7 @@ en:
         next: "Jump to next node"
         first: "Jump to first node"
         last: "Jump to last node"
+        parent: "Select parent way"
         change_parent: "Switch parent way"
     editing:
       title: "Editing"

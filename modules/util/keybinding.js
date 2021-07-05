@@ -370,6 +370,8 @@ utilKeybinding.keyCodes = {
     '+': 107, 'plus': 107,
     // Num-Subtract, or -
     '-': 109, subtract: 109,
+    // Vertical Bar / Pipe
+    '|': 124,
     // Firefox Plus
     'ffplus': 171,
     // Firefox Minus

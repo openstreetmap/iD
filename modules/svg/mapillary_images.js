@@ -6,13 +6,12 @@ import { services } from '../services';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
-    var minMarkerZoom = 16;
-    var minViewfieldZoom = 18;
-    var layer = d3_select(null);
-    var _mapillary;
-    var viewerCompassAngle;
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const minZoom = 12;
+    const minMarkerZoom = 16;
+    const minViewfieldZoom = 18;
+    let layer = d3_select(null);
+    let _mapillary;
 
 
     function init() {
@@ -35,7 +34,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function showLayer() {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
         editOn();
@@ -71,39 +70,38 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
 
-    function click(d3_event, d) {
-        var service = getService();
+    function click(d3_event, image) {
+        const service = getService();
         if (!service) return;
 
         service
             .ensureViewerLoaded(context)
             .then(function() {
                 service
-                    .selectImage(context, d.key)
+                    .selectImage(context, image.id)
                     .showViewer(context);
             });
 
-        context.map().centerEase(d.loc);
+        context.map().centerEase(image.loc);
     }
 
 
-    function mouseover(d) {
-        var service = getService();
-        if (service) service.setStyles(context, d);
+    function mouseover(d3_event, image) {
+        const service = getService();
+
+        if (service) service.setStyles(context, image);
     }
 
 
     function mouseout() {
-        var service = getService();
+        const service = getService();
         if (service) service.setStyles(context, null);
     }
 
 
     function transform(d) {
-        var t = svgPointTransform(projection)(d);
-        if (d.pano && viewerCompassAngle !== null && isFinite(viewerCompassAngle)) {
-            t += ' rotate(' + Math.floor(viewerCompassAngle) + ',0,0)';
-        } else if (d.ca) {
+        let t = svgPointTransform(projection)(d);
+        if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         }
         return t;
@@ -111,82 +109,54 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function filterImages(images) {
-        var showsPano = context.photos().showsPanoramic();
-        var showsFlat = context.photos().showsFlat();
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+        const showsPano = context.photos().showsPanoramic();
+        const showsFlat = context.photos().showsFlat();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
 
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
-                if (image.pano) return showsPano;
+                if (image.is_pano) return showsPano;
                 return showsFlat;
             });
         }
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
             images = images.filter(function(image) {
-                return new Date(image.captured_at).getTime() >= fromTimestamp;
+                return new Date(image.captured_at).getTime() >= new Date(fromDate).getTime();
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
             images = images.filter(function(image) {
-                return new Date(image.captured_at).getTime() <= toTimestamp;
+                return new Date(image.captured_at).getTime() <= new Date(toDate).getTime();
             });
         }
-        if (usernames) {
-            images = images.filter(function(image) {
-                return usernames.indexOf(image.captured_by) !== -1;
-            });
-        }
+
         return images;
     }
 
-    function filterSequences(sequences, service) {
-        var showsPano = context.photos().showsPanoramic();
-        var showsFlat = context.photos().showsFlat();
-        var fromDate = context.photos().fromDate();
-        var toDate = context.photos().toDate();
-        var usernames = context.photos().usernames();
+    function filterSequences(sequences) {
+        const showsPano = context.photos().showsPanoramic();
+        const showsFlat = context.photos().showsFlat();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                if (sequence.properties.hasOwnProperty('pano')) {
-                    if (sequence.properties.pano) return showsPano;
+                if (sequence.properties.hasOwnProperty('is_pano')) {
+                    if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
-                } else {
-                    // if the sequence doesn't specify pano or not, search its images
-                    var cProps = sequence.properties.coordinateProperties;
-                    if (cProps && cProps.image_keys && cProps.image_keys.length > 0) {
-                        for (var index in cProps.image_keys) {
-                            var imageKey = cProps.image_keys[index];
-                            var image = service.cachedImage(imageKey);
-                            if (image && image.hasOwnProperty('pano')) {
-                                if (image.pano) return showsPano;
-                                return showsFlat;
-                            }
-                        }
-                    }
                 }
                 return false;
             });
         }
         if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() >= fromTimestamp;
+                return new Date(sequence.properties.captured_at).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
         if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.captured_at).getTime() <= toTimestamp;
-            });
-        }
-        if (usernames) {
-            sequences = sequences.filter(function(sequence) {
-                return usernames.indexOf(sequence.properties.username) !== -1;
+                return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime().toString();
             });
         }
 
@@ -195,20 +165,21 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function update() {
 
-        var z = ~~context.map().zoom();
-        var showMarkers = (z >= minMarkerZoom);
-        var showViewfields = (z >= minViewfieldZoom);
+        const z = ~~context.map().zoom();
+        const showMarkers = (z >= minMarkerZoom);
+        const showViewfields = (z >= minViewfieldZoom);
 
-        var service = getService();
-        var sequences = (service ? service.sequences(projection) : []);
-        var images = (service && showMarkers ? service.images(projection) : []);
+        const service = getService();
+        let sequences = (service ? service.sequences(projection) : []);
+        let images = (service && showMarkers ? service.images(projection) : []);
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);
+
         service.filterViewer(context);
 
-        var traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.properties.key; });
+        let traces = layer.selectAll('.sequences').selectAll('.sequence')
+            .data(sequences, function(d) { return d.properties.id; });
 
         // exit
         traces.exit()
@@ -222,15 +193,15 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('d', svgPath(projection).geojson);
 
 
-        var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
-            .data(images, function(d) { return d.key; });
+        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+            .data(images, function(d) { return d.id; });
 
         // exit
         groups.exit()
             .remove();
 
         // enter
-        var groupsEnter = groups.enter()
+        const groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
             .on('mouseenter', mouseover)
@@ -242,7 +213,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('class', 'viewfield-scale');
 
         // update
-        var markers = groups
+        const markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
                 return b.loc[1] - a.loc[1];  // sort Y
@@ -259,7 +230,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('dy', '0')
             .attr('r', '6');
 
-        var viewfields = markers.selectAll('.viewfield')
+        const viewfields = markers.selectAll('.viewfield')
             .data(showViewfields ? [0] : []);
 
         viewfields.exit()
@@ -268,13 +239,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
         viewfields.enter()               // viewfields may or may not be drawn...
             .insert('path', 'circle')    // but if they are, draw below the circles
             .attr('class', 'viewfield')
-            .classed('pano', function() { return this.parentNode.__data__.pano; })
+            .classed('pano', function() { return this.parentNode.__data__.is_pano; })
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
-            var d = this.parentNode.__data__;
-            if (d.pano) {
+            if (this.parentNode.__data__.is_pano) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
@@ -284,8 +254,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        var enabled = svgMapillaryImages.enabled;
-        var service = getService();
+        const enabled = svgMapillaryImages.enabled;
+        const service = getService();
 
         layer = selection.selectAll('.layer-mapillary')
             .data(service ? [0] : []);
@@ -293,7 +263,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         layer.exit()
             .remove();
 
-        var layerEnter = layer.enter()
+        const layerEnter = layer.enter()
             .append('g')
             .attr('class', 'layer-mapillary')
             .style('display', enabled ? 'block' : 'none');

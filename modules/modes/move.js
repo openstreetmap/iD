@@ -113,10 +113,10 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     function cancel() {
         if (baseGraph) {
-            while (context.graph() !== baseGraph) context.pop();
+            while (context.graph() !== baseGraph) context.pop();  // reset to baseGraph
             context.enter(modeBrowse(context));
         } else {
-            context.pop();
+            if (_prevGraph) context.pop();   // remove the move
             context.enter(modeSelect(context, entityIDs));
         }
         stopNudge();

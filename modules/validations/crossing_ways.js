@@ -719,10 +719,10 @@ export function validationCrossingWays(context) {
 
                         edges.forEach(function(edge) {
                             var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
-                            var closestNodeInfo = geoSphericalClosestNode(edgeNodes, loc);
-                            // if there is already a point nearby, use that
-                            if (closestNodeInfo.distance < mergeThresholdInMeters) {
-                                nodesToMerge.push(closestNodeInfo.node.id);
+                            var nearby = geoSphericalClosestNode(edgeNodes, loc);
+                            // if there is already a suitable node nearby, use that
+                            if (!nearby.node.hasInterestingTags() && nearby.distance < mergeThresholdInMeters) {
+                                nodesToMerge.push(nearby.node.id);
                             // else add the new node to the way
                             } else {
                                 graph = actionAddMidpoint({loc: loc, edge: edge}, node)(graph);

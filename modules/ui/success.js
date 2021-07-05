@@ -1,6 +1,8 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
+import { resolveStrings } from 'osm-community-index';
+
 import { fileFetcher } from '../core/file_fetcher';
 import { locationManager } from '../core/locations';
 import { t, localizer } from '../core/localizer';
@@ -24,7 +26,8 @@ export function uiSuccess(context) {
     const data = fileFetcher;
     return Promise.all([
         data.get('oci_features'),
-        data.get('oci_resources')
+        data.get('oci_resources'),
+        data.get('oci_defaults')
       ])
       .then(vals => {
         if (_oci) return _oci;
@@ -39,11 +42,17 @@ export function uiSuccess(context) {
           // Resolve all locationSet features.
           return locationManager.mergeLocationSets(ociResources)
             .then(() => {
-              _oci = { resources: ociResources };
+              _oci = {
+                resources: ociResources,
+                defaults: vals[2].defaults
+              };
               return _oci;
             });
         } else {
-          _oci = { resources: [] };  // no resources?
+          _oci = {
+            resources: [],  // no resources?
+            defaults: vals[2].defaults
+          };
           return _oci;
         }
       });
@@ -158,6 +167,10 @@ export function uiSuccess(context) {
           let area = validLocations[resource.locationSetID];
           if (!area) return;
 
+          // Resolve strings
+          const localizer = (stringID) => t.html(`community.${stringID}`);
+          resource.resolved = resolveStrings(resource, oci.defaults, localizer);
+          
           communities.push({
             area: area,
             order: resource.order || 0,
@@ -199,7 +212,7 @@ export function uiSuccess(context) {
       .attr('class', 'cell-icon community-icon')
       .append('a')
       .attr('target', '_blank')
-      .attr('href', d => d.url)
+      .attr('href', d => d.resolved.url)
       .append('svg')
       .attr('class', 'logo-small')
       .append('use')
@@ -229,32 +242,19 @@ export function uiSuccess(context) {
   function showCommunityDetails(d) {
     let selection = d3_select(this);
     let communityID = d.id;
-    let replacements = {
-      url: linkify(d.url),
-      signupUrl: linkify(d.signupUrl || d.url)
-    };
 
     selection
       .append('div')
       .attr('class', 'community-name')
-      .append('a')
-      .attr('target', '_blank')
-      .attr('href', d.url)
-      .html(t.html(`community.${d.id}.name`));
-
-    let descriptionHTML = t.html(`community.${d.id}.description`, replacements);
-
-    if (d.type === 'reddit') {   // linkify subreddits  #4997
-      descriptionHTML = descriptionHTML
-        .replace(/(\/r\/\w*\/*)/i, match => linkify(d.url, match));
-    }
+      .html(d.resolved.nameHTML);
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(descriptionHTML);
+      .html(d.resolved.descriptionHTML);
 
-    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
+    // Create an expanding section if any of these are present..
+    if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
@@ -304,11 +304,11 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-more');
 
-      if (d.extendedDescription) {
+      if (d.resolved.extendedDescriptionHTML) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(t.html(`community.${d.id}.extendedDescription`, replacements));
+          .html(d.resolved.extendedDescriptionHTML);
       }
 
       if (d.languageCodes && d.languageCodes.length) {
@@ -383,12 +383,6 @@ export function uiSuccess(context) {
           }
           return description;
         });
-    }
-
-
-    function linkify(url, text) {
-      text = text || url;
-      return `<a target="_blank" href="${url}">${text}</a>`;
     }
   }
 

@@ -197,6 +197,9 @@
       var newScript;
       newScript = document.createElement('script');
       newScript.type = 'text/javascript';
+      if (src.substr(0, 5) === 'spec/') {
+        src = '../test/' + src;
+      }
       newScript.src = src;
       newScript.onload = nextScript;
       document.getElementsByTagName('body')[0].appendChild(newScript);
