@@ -1,11 +1,9 @@
-import { fileFetcher } from '../core/file_fetcher';
-import { t, localizer } from '../core/localizer';
-import { presetManager } from '../presets';
-import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
+import { presetManager } from '../presets';
+import { services } from '../services';
+import { t, localizer } from '../core/localizer';
+import { validationIssue, validationIssueFix } from '../core/validation';
 
-
-let _discardNameRegexes = [];
 
 export function validationSuspiciousName() {
   const type = 'suspicious_name';
@@ -13,24 +11,23 @@ export function validationSuspiciousName() {
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
     'leisure', 'railway', 'man_made', 'office', 'shop', 'tourism', 'waterway'
   ];
-
-  // A concern here in switching to async data means that `_nsiFilters` will not
-  // be available at first, so the data on early tiles may not have tags validated fully.
-
-  fileFetcher.get('nsi_filters')
-    .then(filters => {
-      // known list of generic names (e.g. "bar")
-      _discardNameRegexes = filters.discardNames
-        .map(discardName => new RegExp(discardName, 'i'));
-    })
-    .catch(() => { /* ignore */ });
+  let _waitingForNsi = false;
 
 
-  function isDiscardedSuggestionName(lowercaseName) {
-    return _discardNameRegexes.some(regex => regex.test(lowercaseName));
+  // Attempt to match a generic record in the name-suggestion-index.
+  function isGenericMatchInNsi(tags) {
+    const nsi = services.nsi;
+    if (nsi) {
+      _waitingForNsi = (nsi.status() === 'loading');
+      if (!_waitingForNsi) {
+        return nsi.isGenericName(tags);
+      }
+    }
+    return false;
   }
 
-  // test if the name is just the key or tag value (e.g. "park")
+
+  // Test if the name is just the key or tag value (e.g. "park")
   function nameMatchesRawTag(lowercaseName, tags) {
     for (let i = 0; i < keysToTestForGenericValues.length; i++) {
       let key = keysToTestForGenericValues[i];
@@ -50,7 +47,7 @@ export function validationSuspiciousName() {
 
   function isGenericName(name, tags) {
     name = name.toLowerCase();
-    return nameMatchesRawTag(name, tags) || isDiscardedSuggestionName(name);
+    return nameMatchesRawTag(name, tags) || isGenericMatchInNsi(tags);
   }
 
   function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
@@ -69,7 +66,7 @@ export function validationSuspiciousName() {
       },
       reference: showReference,
       entityIds: [entityId],
-      hash: nameKey + '=' + genericName,
+      hash: `${nameKey}=${genericName}`,
       dynamicFixes: function() {
         return [
           new validationIssueFix({
@@ -115,7 +112,7 @@ export function validationSuspiciousName() {
       },
       reference: showReference,
       entityIds: [entityId],
-      hash: nameKey + '=' + incorrectName,
+      hash: `${nameKey}=${incorrectName}`,
       dynamicFixes: function() {
         return [
           new validationIssueFix({
@@ -147,18 +144,21 @@ export function validationSuspiciousName() {
 
 
   let validation = function checkGenericName(entity) {
-    // a generic name is okay if it's a known brand or entity
-    if (entity.hasWikidata()) return [];
+    const tags = entity.tags;
+
+    // a generic name is allowed if it's a known brand or entity
+    const hasWikidata = (!!tags.wikidata || !!tags['brand:wikidata'] || !!tags['operator:wikidata']);
+    if (hasWikidata) return [];
 
     let issues = [];
-    const notNames = (entity.tags['not:name'] || '').split(';');
+    const notNames = (tags['not:name'] || '').split(';');
 
-    for (let key in entity.tags) {
+    for (let key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
       if (!m) continue;
 
       const langCode = m.length >= 2 ? m[1] : null;
-      const value = entity.tags[key];
+      const value = tags[key];
       if (notNames.length) {
         for (let i in notNames) {
           const notName = notNames[i];
@@ -168,7 +168,8 @@ export function validationSuspiciousName() {
           }
         }
       }
-      if (isGenericName(value, entity.tags)) {
+      if (isGenericName(value, tags)) {
+        issues.provisional = _waitingForNsi;  // retry later if we are waiting on NSI to finish loading
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }
     }

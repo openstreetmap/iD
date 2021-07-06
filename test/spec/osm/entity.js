@@ -275,20 +275,6 @@ describe('iD.osmEntity', function () {
         });
     });
 
-    describe('#hasWikidata', function () {
-        it('returns false if entity has no tags', function () {
-            expect(iD.osmEntity().hasWikidata()).to.be.not.ok;
-        });
-
-        it('returns true if entity has a wikidata tag', function () {
-            expect(iD.osmEntity({ tags: { wikidata: 'Q18275868' } }).hasWikidata()).to.be.ok;
-        });
-
-        it('returns true if entity has a brand:wikidata tag', function () {
-            expect(iD.osmEntity({ tags: { 'brand:wikidata': 'Q18275868' } }).hasWikidata()).to.be.ok;
-        });
-    });
-
     describe('#hasInterestingTags', function () {
         it('returns false if the entity has no tags', function () {
             expect(iD.osmEntity().hasInterestingTags()).to.equal(false);

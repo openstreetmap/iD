@@ -1,4 +1,5 @@
-import { utilArrayIntersection, utilArrayUniq } from '../util/array';
+import { locationManager } from '../core/locations';
+import { utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
 
 
@@ -46,7 +47,7 @@ export function presetCollection(collection) {
     return _this.item(id);
   };
 
-  _this.search = (value, geometry, countryCodes) => {
+  _this.search = (value, geometry, loc) => {
     if (!value) return _this;
 
     // don't remove diacritical characters since we're assuming the user is being intentional
@@ -87,18 +88,11 @@ export function presetCollection(collection) {
     }
 
     let pool = _this.collection;
-    if (countryCodes) {
-      if (typeof countryCodes === 'string') countryCodes = [countryCodes];
-      countryCodes = countryCodes.map(code => code.toLowerCase());
-
-      pool = pool.filter(a => {
-        if (a.locationSet) {
-          if (a.locationSet.include && !utilArrayIntersection(a.locationSet.include, countryCodes).length) return false;
-          if (a.locationSet.exclude && utilArrayIntersection(a.locationSet.exclude, countryCodes).length) return false;
-        }
-        return true;
-      });
+    if (Array.isArray(loc)) {
+      const validLocations = locationManager.locationsAt(loc);
+      pool = pool.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
     }
+
     const searchable = pool.filter(a => a.searchable !== false && a.suggestion !== true);
     const suggestions = pool.filter(a => a.suggestion === true);
 
@@ -122,6 +116,9 @@ export function presetCollection(collection) {
 
     // matches value to preset.terms values
     const leadingTerms = searchable
+      .filter(a => (a.terms() || []).some(leading));
+
+    const leadingSuggestionTerms = suggestions
       .filter(a => (a.terms() || []).some(leading));
 
     // matches value to preset.tags values
@@ -155,6 +152,7 @@ export function presetCollection(collection) {
       leadingNamesStripped,
       leadingSuggestionsStripped,
       leadingTerms,
+      leadingSuggestionTerms,
       leadingTagValues,
       similarName,
       similarSuggestions,

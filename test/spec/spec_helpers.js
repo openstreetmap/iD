@@ -24,10 +24,10 @@ iD.fileFetcher.cache().preset_categories = {};
 iD.fileFetcher.cache().preset_defaults = {};
 iD.fileFetcher.cache().preset_fields = {};
 iD.fileFetcher.cache().preset_presets = {};
+
 // Initializing `coreContext` initializes `_validator`, which tries loading:
 iD.fileFetcher.cache().deprecated = [];
-iD.fileFetcher.cache().nsi_brands = [];
-iD.fileFetcher.cache().nsi_filters = { discardNames: [] };
+
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
 iD.fileFetcher.cache().discarded = {};
 

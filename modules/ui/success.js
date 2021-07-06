@@ -1,12 +1,12 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import LocationConflation from '@ideditor/location-conflation';
-import whichPolygon from 'which-polygon';
 import { resolveStrings } from 'osm-community-index';
 
 import { fileFetcher } from '../core/file_fetcher';
+import { locationManager } from '../core/locations';
 import { t, localizer } from '../core/localizer';
+
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
@@ -25,40 +25,36 @@ export function uiSuccess(context) {
   function ensureOSMCommunityIndex() {
     const data = fileFetcher;
     return Promise.all([
-        data.get('oci_resources'),
         data.get('oci_features'),
+        data.get('oci_resources'),
         data.get('oci_defaults')
       ])
       .then(vals => {
         if (_oci) return _oci;
 
-        const ociResources = vals[0].resources;
-        const loco = new LocationConflation(vals[1]);
-        let ociFeatures = {};
+        // Merge Custom Features
+        if (vals[0] && Array.isArray(vals[0].features)) {
+          locationManager.mergeCustomGeoJSON(vals[0]);
+        }
 
-        Object.values(ociResources).forEach(resource => {
-          let feature;
-          try {
-            feature = loco.resolveLocationSet(resource.locationSet).feature;
-            let ociFeature = ociFeatures[feature.id];
-            if (!ociFeature) {
-              ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
-              ociFeature.properties.resourceIDs = new Set();
-              ociFeatures[feature.id] = ociFeature;
-            }
-            ociFeature.properties.resourceIDs.add(resource.id);
-          } catch (err) {
-            /* ignore communities with an unresolvable locationSet */
-            console.warn(`warning: skipping community resource ${resource.id}: ${err.message}`); // eslint-disable-line no-console
-          }
-        });
-
-        return _oci = {
-          defaults: vals[2].defaults,
-          features: ociFeatures,
-          resources: ociResources,
-          query: whichPolygon({ type: 'FeatureCollection', features: Object.values(ociFeatures) })
-        };
+        let ociResources = Object.values(vals[1].resources);
+        if (ociResources.length) {
+          // Resolve all locationSet features.
+          return locationManager.mergeLocationSets(ociResources)
+            .then(() => {
+              _oci = {
+                resources: ociResources,
+                defaults: vals[2].defaults
+              };
+              return _oci;
+            });
+        } else {
+          _oci = {
+            resources: [],  // no resources?
+            defaults: vals[2].defaults
+          };
+          return _oci;
+        }
       });
   }
 
@@ -162,24 +158,23 @@ export function uiSuccess(context) {
     // Get OSM community index features intersecting the map..
     ensureOSMCommunityIndex()
       .then(oci => {
+        const loc = context.map().center();
+        const validLocations = locationManager.locationsAt(loc);
+
+        // Gather the communities
         let communities = [];
-        const properties = oci.query(context.map().center(), true) || [];
+        oci.resources.forEach(resource => {
+          let area = validLocations[resource.locationSetID];
+          if (!area) return;
 
-        // Gather the communities from the result
-        properties.forEach(props => {
-          const resourceIDs = Array.from(props.resourceIDs);
-          resourceIDs.forEach(resourceID => {
-            let resource = oci.resources[resourceID];
-
-            // Resolve strings
-            const localizer = (stringID) => t.html(`community.${stringID}`);
-            resource.resolved = resolveStrings(resource, oci.defaults, localizer);
-
-            communities.push({
-              area: props.area || Infinity,
-              order: resource.order || 0,
-              resource: resource
-            });
+          // Resolve strings
+          const localizer = (stringID) => t.html(`community.${stringID}`);
+          resource.resolved = resolveStrings(resource, oci.defaults, localizer);
+          
+          communities.push({
+            area: area,
+            order: resource.order || 0,
+            resource: resource
           });
         });
 

@@ -42,8 +42,9 @@
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
-    "@ideditor/country-coder": "^4.1.0",
-    "@ideditor/location-conflation": "~0.9.0",
+    "@ideditor/country-coder": "~5.0.3",
+    "@ideditor/location-conflation": "~1.0.2",
+    "@mapbox/geojson-area": "^0.2.2",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/togeojson": "0.16.0",
     "@mapbox/vector-tile": "^1.3.1",
@@ -98,7 +99,7 @@
     "minimist": "^1.2.3",
     "mocha": "^7.0.1",
     "mocha-phantomjs-core": "^2.1.0",
-    "name-suggestion-index": "4.0.2",
+    "name-suggestion-index": "~6.0",
     "node-fetch": "^2.6.1",
     "npm-run-all": "^4.0.0",
     "object-inspect": "1.9.0",
@@ -117,7 +118,8 @@
     "smash": "0.0",
     "static-server": "^2.2.1",
     "svg-sprite": "1.5.0",
-    "uglify-js": "~3.13.0"
+    "uglify-js": "~3.13.0",
+    "vparse": "~1.1.0"
   },
   "engines": {
     "node": ">=10"

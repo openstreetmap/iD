@@ -4,510 +4,792 @@ import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
-import { utilArrayGroupBy, utilRebind } from '../util';
+import { utilArrayChunk, utilArrayGroupBy, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
 export function coreValidator(context) {
-    var dispatch = d3_dispatch('validated', 'focusedIssue');
-    var validator = utilRebind({}, dispatch, 'on');
+  let dispatch = d3_dispatch('validated', 'focusedIssue');
+  let validator = utilRebind({}, dispatch, 'on');
 
-    var _rules = {};
-    var _disabledRules = {};
+  let _rules = {};
+  let _disabledRules = {};
 
-    var _ignoredIssueIDs = {};          // issue.id -> true
-    var _baseCache = validationCache(); // issues before any user edits
-    var _headCache = validationCache(); // issues after all user edits
-    var _validatedGraph = null;
-    var _deferred = new Set();
+  let _ignoredIssueIDs = new Set();
+  let _resolvedIssueIDs = new Set();
+  let _baseCache = validationCache();  // issues before any user edits
+  let _headCache = validationCache();  // issues after all user edits
+  let _headGraph = null;
+  let _headIsCurrent = false;
 
-    //
-    // initialize the validator rulesets
-    //
-    validator.init = function() {
-        Object.values(Validations).forEach(function(validation) {
-            if (typeof validation !== 'function') return;
+  let _deferredRIC = new Set();   // Set( RequestIdleCallback handles )
+  let _deferredST = new Set();    // Set( SetTimeout handles )
+  let _headPromise;               // Promise fulfilled when validation is performed up to headGraph snapshot
 
-            var fn = validation(context);
-            var key = fn.type;
-            _rules[key] = fn;
-        });
+  const RETRY = 5000;             // wait 5sec before revalidating provisional entities
 
-        var disabledRules = prefs('validate-disabledRules');
-        if (disabledRules) {
-            disabledRules.split(',')
-                .forEach(function(key) { _disabledRules[key] = true; });
-        }
-    };
 
-    function reset(resetIgnored) {
-        Array.from(_deferred).forEach(function(handle) {
-            window.cancelIdleCallback(handle);
-            _deferred.delete(handle);
-        });
+  // `init()`
+  // Initialize the validator, called once on iD startup
+  //
+  validator.init = () => {
+    Object.values(Validations).forEach(validation => {
+      if (typeof validation !== 'function') return;
+      const fn = validation(context);
+      const key = fn.type;
+      _rules[key] = fn;
+    });
 
-        // clear caches
-        if (resetIgnored) _ignoredIssueIDs = {};
-        _baseCache = validationCache();
-        _headCache = validationCache();
-        _validatedGraph = null;
+    let disabledRules = prefs('validate-disabledRules');
+    if (disabledRules) {
+      disabledRules.split(',').forEach(k => _disabledRules[k] = true);
+    }
+  };
+
+
+  // `reset()`   (private)
+  // Cancels deferred work and resets all caches
+  //
+  // Arguments
+  //   `resetIgnored` - `true` to clear the list of user-ignored issues
+  //
+  function reset(resetIgnored) {
+    // cancel deferred work
+    _deferredRIC.forEach(window.cancelIdleCallback);
+    _deferredRIC.clear();
+    _deferredST.forEach(window.clearTimeout);
+    _deferredST.clear();
+
+    // empty queues and resolve any pending promise
+    _baseCache.queue = [];
+    _headCache.queue = [];
+    processQueue(_headCache);
+    processQueue(_baseCache);
+
+    // clear caches
+    if (resetIgnored) _ignoredIssueIDs.clear();
+    _resolvedIssueIDs.clear();
+    _baseCache = validationCache();
+    _headCache = validationCache();
+    _headGraph = null;
+    _headIsCurrent = false;
+  }
+
+
+  // `reset()`
+  // clear caches, called whenever iD resets after a save or switches sources
+  // (clears out the _ignoredIssueIDs set also)
+  //
+  validator.reset = () => {
+    reset(true);
+  };
+
+
+  // `resetIgnoredIssues()`
+  // clears out the _ignoredIssueIDs Set
+  //
+  validator.resetIgnoredIssues = () => {
+    _ignoredIssueIDs.clear();
+    dispatch.call('validated');   // redraw UI
+  };
+
+
+  // `revalidateUnsquare()`
+  // Called whenever the user changes the unsquare threshold
+  // It reruns just the "unsquare_way" validation on all buildings.
+  //
+  validator.revalidateUnsquare = () => {
+    revalidateUnsquare(_headCache, _headGraph);
+    revalidateUnsquare(_baseCache, context.history().base());
+    dispatch.call('validated');
+  };
+
+  function revalidateUnsquare(cache, graph) {
+    const checkUnsquareWay = _rules.unsquare_way;
+    if (!graph || typeof checkUnsquareWay !== 'function') return;
+
+    // uncache existing
+    cache.uncacheIssuesOfType('unsquare_way');
+
+    const buildings = context.history().tree().intersects(geoExtent([-180,-90],[180, 90]), graph)  // everywhere
+      .filter(entity => (entity.type === 'way' && entity.tags.building && entity.tags.building !== 'no'));
+
+    // rerun for all buildings
+    buildings.forEach(entity => {
+      const detected = checkUnsquareWay(entity, graph);
+      if (!detected.length) return;
+      cache.cacheIssues(detected);
+    });
+  }
+
+
+  // `getIssues()`
+  // Gets all issues that match the given options
+  // This is called by many other places
+  //
+  // Arguments
+  //   `options` Object like:
+  //   {
+  //     what: 'all',                  // 'all' or 'edited'
+  //     where: 'all',                 // 'all' or 'visible'
+  //     includeIgnored: false,        // true, false, or 'only'
+  //     includeDisabledRules: false   // true, false, or 'only'
+  //   }
+  //
+  // Returns
+  //   An Array containing the issues
+  //
+  validator.getIssues = (options) => {
+    const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
+    const view = context.map().extent();
+    let issues = [];
+    let seen = new Set();
+
+    // collect head issues - caused by user edits
+    let cache = _headCache;
+    if (_headGraph) {
+      Object.values(cache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, _headGraph, cache)) return;
+        seen.add(issue.id);
+        issues.push(issue);
+      });
     }
 
-    //
-    // clear caches, called whenever iD resets after a save
-    //
-    validator.reset = function() {
-        reset(true);
-    };
-
-    validator.resetIgnoredIssues = function() {
-        _ignoredIssueIDs = {};
-        // reload UI
-        dispatch.call('validated');
-    };
-
-
-    // must update issues when the user changes the unsquare thereshold
-    validator.reloadUnsquareIssues = function() {
-
-        reloadUnsquareIssues(_headCache, context.graph());
-        reloadUnsquareIssues(_baseCache, context.history().base());
-
-        dispatch.call('validated');
-    };
-
-    function reloadUnsquareIssues(cache, graph) {
-
-        var checkUnsquareWay = _rules.unsquare_way;
-        if (typeof checkUnsquareWay !== 'function') return;
-
-        // uncache existing
-        cache.uncacheIssuesOfType('unsquare_way');
-
-        var buildings = context.history().tree().intersects(geoExtent([-180,-90],[180, 90]), graph)  // everywhere
-            .filter(function(entity) {
-                return entity.type === 'way' && entity.tags.building && entity.tags.building !== 'no';
-            });
-
-        // rerun for all buildings
-        buildings.forEach(function(entity) {
-            var detected = checkUnsquareWay(entity, graph);
-            if (detected.length !== 1) return;
-            var issue = detected[0];
-            if (!cache.issuesByEntityID[entity.id]) {
-                cache.issuesByEntityID[entity.id] = new Set();
-            }
-            cache.issuesByEntityID[entity.id].add(issue.id);
-            cache.issuesByIssueID[issue.id] = issue;
-        });
+    // collect base issues - not caused by user edits
+    if (opts.what === 'all') {
+      cache = _baseCache;
+      Object.values(cache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, context.history().base(), cache)) return;
+        seen.add(issue.id);
+        issues.push(issue);
+      });
     }
 
-    // options = {
-    //     what: 'all',     // 'all' or 'edited'
-    //     where: 'all',   // 'all' or 'visible'
-    //     includeIgnored: false   // true, false, or 'only'
-    //     includeDisabledRules: false   // true, false, or 'only'
-    // };
-    validator.getIssues = function(options) {
-        var opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
-        var issues = Object.values(_headCache.issuesByIssueID);
-        var view = context.map().extent();
+    return issues;
 
-        return issues.filter(function(issue) {
-            if (!issue) return false;
-            if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
-            if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
 
-            if (opts.includeIgnored === 'only' && !_ignoredIssueIDs[issue.id]) return false;
-            if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
+    function filter(issue, resolver, cache) {
+      if (!issue) return false;
+      if (seen.has(issue.id)) return false;
+      if (_resolvedIssueIDs.has(issue.id)) return false;
+      if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
+      if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
 
-            // Sanity check:  This issue may be for an entity that not longer exists.
-            // If we detect this, uncache and return false so it is not included..
-            var entityIds = issue.entityIds || [];
-            for (var i = 0; i < entityIds.length; i++) {
-                var entityId = entityIds[i];
-                if (!context.hasEntity(entityId)) {
-                    delete _headCache.issuesByEntityID[entityId];
-                    delete _headCache.issuesByIssueID[issue.id];
-                    return false;
-                }
-            }
+      if (opts.includeIgnored === 'only' && !_ignoredIssueIDs.has(issue.id)) return false;
+      if (!opts.includeIgnored && _ignoredIssueIDs.has(issue.id)) return false;
 
-            if (opts.what === 'edited' && _baseCache.issuesByIssueID[issue.id]) return false;
-
-            if (opts.where === 'visible') {
-                var extent = issue.extent(context.graph());
-                if (!view.intersects(extent)) return false;
-            }
-
-            return true;
-        });
-    };
-
-    validator.getResolvedIssues = function() {
-        var baseIssues = Object.values(_baseCache.issuesByIssueID);
-        return baseIssues.filter(function(issue) {
-            return !_headCache.issuesByIssueID[issue.id];
-        });
-    };
-
-    validator.focusIssue = function(issue) {
-        var extent = issue.extent(context.graph());
-
-        if (extent) {
-            var setZoom = Math.max(context.map().zoom(), 19);
-            context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
-
-            // select the first entity
-            if (issue.entityIds && issue.entityIds.length) {
-                window.setTimeout(function() {
-                    var ids = issue.entityIds;
-                    context.enter(modeSelect(context, [ids[0]]));
-                    dispatch.call('focusedIssue', this, issue);
-                }, 250);  // after ease
-            }
+      // Sanity check:  This issue may be for an entity that not longer exists.
+      // If we detect this, uncache and return false so it is not included..
+      const entityIDs = issue.entityIds || [];
+      for (let i = 0; i < entityIDs.length; i++) {
+        const entityID = entityIDs[i];
+        if (!resolver.hasEntity(entityID)) {
+          cache.uncacheEntityID(entityID);
+          return false;
         }
-    };
+      }
+
+      if (opts.where === 'visible') {
+        const extent = issue.extent(resolver);
+        if (!view.intersects(extent)) return false;
+      }
+
+      return true;
+    }
+  };
 
 
-    validator.getIssuesBySeverity = function(options) {
-        var groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
-        groups.error = groups.error || [];
-        groups.warning = groups.warning || [];
-        return groups;
-    };
+  // `getResolvedIssues()`
+  // Gets the issues that have been fixed by the user.
+  // Resolved issues are tracked in the `_resolvedIssueIDs` Set
+  //
+  // Returns
+  //   An Array containing the issues
+  //
+  validator.getResolvedIssues = () => {
+    let collected = new Set();
 
+    Object.values(_baseCache.issuesByIssueID).forEach(issue => {
+      if (_resolvedIssueIDs.has(issue.id)) collected.add(issue);
+    });
+    Object.values(_headCache.issuesByIssueID).forEach(issue => {
+      if (_resolvedIssueIDs.has(issue.id)) collected.add(issue);
+    });
+
+    return Array.from(collected);
+  };
+
+
+  // `focusIssue()`
+  // Adjusts the map to focus on the given issue.
+  // (requires the issue to have a reasonable extent defined)
+  //
+  // Arguments
+  //   `issue` - the issue to focus on
+  //
+  validator.focusIssue = (issue) => {
+    const extent = issue.extent(context.graph());
+    if (!extent) return;
+
+    const setZoom = Math.max(context.map().zoom(), 19);
+    context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
+
+    // select the first entity
+    if (issue.entityIds && issue.entityIds.length) {
+      window.setTimeout(() => {
+        let ids = issue.entityIds;
+        context.enter(modeSelect(context, [ids[0]]));
+        dispatch.call('focusedIssue', this, issue);
+      }, 250);  // after ease
+    }
+  };
+
+
+  // `getIssuesBySeverity()`
+  // Gets the issues then groups them by error/warning
+  // (This just calls getIssues, then puts issues in groups)
+  //
+  // Arguments
+  //   `options` - (see `getIssues`)
+  // Returns
+  //   Object result like:
+  //   {
+  //     error:    Array of errors,
+  //     warning:  Array of warnings
+  //   }
+  //
+  validator.getIssuesBySeverity = (options) => {
+    let groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
+    groups.error = groups.error || [];
+    groups.warning = groups.warning || [];
+    return groups;
+  };
+
+
+  // `getEntityIssues()`
+  // Gets the issues that the given entity IDs have in common, matching the given options
+  // (This just calls getIssues, then filters for the given entity IDs)
+  // The issues are sorted for relevance
+  //
+  // Arguments
+  //   `entityIDs` - Array or Set of entityIDs to get issues for
+  //   `options` - (see `getIssues`)
+  // Returns
+  //   An Array containing the issues
+  //
+  validator.getSharedEntityIssues = (entityIDs, options) => {
     // show some issue types in a particular order
-    var orderedIssueTypes = [
-        // flag missing data first
-        'missing_tag', 'missing_role',
-        // then flag identity issues
-        'outdated_tags', 'mismatched_geometry',
-        // flag geometry issues where fixing them might solve connectivity issues
-        'crossing_ways', 'almost_junction',
-        // then flag connectivity issues
-        'disconnected_way', 'impossible_oneway'
+    const orderedIssueTypes = [
+      // flag missing data first
+      'missing_tag', 'missing_role',
+      // then flag identity issues
+      'outdated_tags', 'mismatched_geometry',
+      // flag geometry issues where fixing them might solve connectivity issues
+      'crossing_ways', 'almost_junction',
+      // then flag connectivity issues
+      'disconnected_way', 'impossible_oneway'
     ];
 
-    // returns the issues that the given entity IDs have in common, matching the given options
-    validator.getSharedEntityIssues = function(entityIDs, options) {
-        var cache = _headCache;
+    const allIssues = validator.getIssues(options);
+    const forEntityIDs = new Set(entityIDs);
 
-        // gather the issues that are common to all the entities
-        var issueIDs = entityIDs.reduce(function(acc, entityID) {
-            var entityIssueIDs = cache.issuesByEntityID[entityID] || new Set();
-            if (!acc) {
-                return new Set(entityIssueIDs);
-            }
-            return new Set([...acc].filter(function(elem) {
-                return entityIssueIDs.has(elem);
-            }));
-        }, null) || [];
-
-        var opts = options || {};
-
-        return Array.from(issueIDs)
-            .map(function(id) { return cache.issuesByIssueID[id]; })
-            .filter(function(issue) {
-                if (!issue) return false;
-                if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
-                if (!opts.includeDisabledRules && _disabledRules[issue.type]) return false;
-
-                if (opts.includeIgnored === 'only' && !_ignoredIssueIDs[issue.id]) return false;
-                if (!opts.includeIgnored && _ignoredIssueIDs[issue.id]) return false;
-
-                return true;
-            }).sort(function(issue1, issue2) {
-                if (issue1.type === issue2.type) {
-                    // issues of the same type, sort deterministically
-                    return issue1.id < issue2.id ? -1 : 1;
-                }
-                var index1 = orderedIssueTypes.indexOf(issue1.type);
-                var index2 = orderedIssueTypes.indexOf(issue2.type);
-                if (index1 !== -1 && index2 !== -1) {
-                    // both issue types have explicit sort orders
-                    return index1 - index2;
-                } else if (index1 === -1 && index2 === -1) {
-                    // neither issue type has an explicit sort order, sort by type
-                    return issue1.type < issue2.type ? -1 : 1;
-                } else {
-                    // order explicit types before everything else
-                    return index1 !== -1 ? -1 : 1;
-                }
-            });
-    };
-
-
-    validator.getEntityIssues = function(entityID, options) {
-        return validator.getSharedEntityIssues([entityID], options);
-    };
-
-
-    validator.getRuleKeys = function() {
-        return Object.keys(_rules);
-    };
-
-
-    validator.isRuleEnabled = function(key) {
-        return !_disabledRules[key];
-    };
-
-
-    validator.toggleRule = function(key) {
-        if (_disabledRules[key]) {
-            delete _disabledRules[key];
-        } else {
-            _disabledRules[key] = true;
+    return allIssues
+      .filter(issue => (issue.entityIds || []).some(entityID => forEntityIDs.has(entityID)))
+      .sort((issue1, issue2) => {
+        if (issue1.type === issue2.type) {             // issues of the same type, sort deterministically
+          return issue1.id < issue2.id ? -1 : 1;
         }
+        const index1 = orderedIssueTypes.indexOf(issue1.type);
+        const index2 = orderedIssueTypes.indexOf(issue2.type);
+        if (index1 !== -1 && index2 !== -1) {          // both issue types have explicit sort orders
+          return index1 - index2;
+        } else if (index1 === -1 && index2 === -1) {   // neither issue type has an explicit sort order, sort by type
+          return issue1.type < issue2.type ? -1 : 1;
+        } else {                                       // order explicit types before everything else
+          return index1 !== -1 ? -1 : 1;
+        }
+      });
+  };
 
-        prefs('validate-disabledRules', Object.keys(_disabledRules).join(','));
-        validator.validate();
-    };
+
+  // `getEntityIssues()`
+  // Get an array of detected issues for the given entityID.
+  // (This just calls getSharedEntityIssues for a single entity)
+  //
+  // Arguments
+  //   `entityID` - the entity ID to get the issues for
+  //   `options` - (see `getIssues`)
+  // Returns
+  //   An Array containing the issues
+  //
+  validator.getEntityIssues = (entityID, options) => {
+    return validator.getSharedEntityIssues([entityID], options);
+  };
 
 
-    validator.disableRules = function(keys) {
-        _disabledRules = {};
-        keys.forEach(function(k) {
-            _disabledRules[k] = true;
+  // `getRuleKeys()`
+  //
+  // Returns
+  //   An Array containing the rule keys
+  //
+  validator.getRuleKeys = () => {
+    return Object.keys(_rules);
+  };
+
+
+  // `isRuleEnabled()`
+  //
+  // Arguments
+  //   `key` - the rule to check (e.g. 'crossing_ways')
+  // Returns
+  //   `true`/`false`
+  //
+  validator.isRuleEnabled = (key) => {
+    return !_disabledRules[key];
+  };
+
+
+  // `toggleRule()`
+  // Toggles a single validation rule,
+  // then reruns the validation so that the user sees something happen in the UI
+  //
+  // Arguments
+  //   `key` - the rule to toggle (e.g. 'crossing_ways')
+  //
+  validator.toggleRule = (key) => {
+    if (_disabledRules[key]) {
+      delete _disabledRules[key];
+    } else {
+      _disabledRules[key] = true;
+    }
+
+    prefs('validate-disabledRules', Object.keys(_disabledRules).join(','));
+    validator.validate();
+  };
+
+
+  // `disableRules()`
+  // Disables given validation rules,
+  // then reruns the validation so that the user sees something happen in the UI
+  //
+  // Arguments
+  //   `keys` - Array or Set containing rule keys to disable
+  //
+  validator.disableRules = (keys) => {
+    _disabledRules = {};
+    keys.forEach(k => _disabledRules[k] = true);
+
+    prefs('validate-disabledRules', Object.keys(_disabledRules).join(','));
+    validator.validate();
+  };
+
+
+  // `ignoreIssue()`
+  // Don't show the given issue in lists
+  //
+  // Arguments
+  //   `issueID` - the issueID
+  //
+  validator.ignoreIssue = (issueID) => {
+    _ignoredIssueIDs.add(issueID);
+  };
+
+
+  // `validate()`
+  // Validates anything that has changed in the head graph since the last time it was run.
+  // (head graph contains user's edits)
+  //
+  // Returns
+  //   A Promise fulfilled when the validation has completed and then dispatches a `validated` event.
+  //   This may take time but happen in the background during browser idle time.
+  //
+  validator.validate = () => {
+    const currGraph = context.graph();
+    const prevGraph = _headGraph || context.history().base();
+
+    if (currGraph === prevGraph) {   // _headGraph is current - we are caught up
+      _headIsCurrent = true;
+      dispatch.call('validated');
+      return Promise.resolve();
+    }
+
+    if (_headPromise) {         // Validation already in process, but we aren't caught up to current
+      _headIsCurrent = false;   // We will need to catch up after the validation promise fulfills
+      return _headPromise;
+    }
+
+    _headGraph = currGraph;  // take snapshot
+    const difference = coreDifference(prevGraph, _headGraph);
+
+    // Gather all entities related to this difference..
+    // For created/modified, use the head graph
+    let entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
+    entityIDs = entityIDsToValidate(entityIDs, _headGraph);
+
+    // For modified/deleted, use the previous graph
+    // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
+    let previousEntityIDs = difference.deleted().concat(difference.modified()).map(entity => entity.id);
+    previousEntityIDs = entityIDsToValidate(previousEntityIDs, prevGraph);
+    previousEntityIDs.forEach(entityIDs.add, entityIDs);   // concat the sets
+
+    if (!entityIDs.size) {
+      dispatch.call('validated');
+      return Promise.resolve();
+    }
+
+    _headPromise = validateEntitiesAsync(entityIDs, _headGraph, _headCache)
+      .then(() => updateResolvedIssues(entityIDs))
+      .then(() => dispatch.call('validated'))
+      .catch(() => { /* ignore */ })
+      .then(() => {
+        _headPromise = null;
+        if (!_headIsCurrent) {
+          validator.validate();   // run it again to catch up to current graph
+        }
+      });
+
+    return _headPromise;
+  };
+
+
+  // register event handlers:
+
+  // WHEN TO RUN VALIDATION:
+  // When history changes:
+  context.history()
+    .on('restore.validator', validator.validate)   // on restore saved history
+    .on('undone.validator', validator.validate)    // on undo
+    .on('redone.validator', validator.validate)    // on redo
+    .on('reset.validator', () => {                 // on history reset - happens after save, or enter/exit walkthrough
+      reset(false);   // cached issues aren't valid any longer if the history has been reset
+      validator.validate();
+    });
+    // but not on 'change' (e.g. while drawing)
+
+  // When user changes editing modes (to catch recent changes e.g. drawing)
+  context
+    .on('exit.validator', validator.validate);
+
+  // When merging fetched data, validate base graph:
+  context.history()
+    .on('merge.validator', entities => {
+      if (!entities) return;
+      const baseGraph = context.history().base();
+      let entityIDs = entities.map(entity => entity.id);
+      entityIDs = entityIDsToValidate(entityIDs, baseGraph);
+      validateEntitiesAsync(entityIDs, baseGraph, _baseCache);
+    });
+
+
+
+  // `validateEntity()`   (private)
+  // Runs all validation rules on a single entity.
+  // Some things to note:
+  //  - Graph is passed in from whenever the validation was started.  Validators shouldn't use
+  //   `context.graph()` because this all happens async, and the graph might have changed
+  //   (for example, nodes getting deleted before the validation can run)
+  //  - Validator functions may still be waiting on something and return a "provisional" result.
+  //    In this situation, we will schedule to revalidate the entity sometime later.
+  //
+  // Arguments
+  //   `entity` - The entity
+  //   `graph` - graph containing the entity
+  //
+  // Returns
+  //   Object result like:
+  //   {
+  //     issues:       Array of detected issues
+  //     provisional:  `true` if provisional result, `false` if final result
+  //   }
+  //
+  function validateEntity(entity, graph) {
+    let result = { issues: [], provisional: false };
+
+    // runs validation and appends resulting issues
+    function runValidation(key) {
+      const fn = _rules[key];
+      if (typeof fn !== 'function') {
+        console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
+        return;
+      }
+
+      const detected = fn(entity, graph);
+      if (detected.provisional) {  // this validation should be run again later
+        result.provisional = true;
+      }
+      result.issues = result.issues.concat(detected);
+    }
+
+    // run all rules
+    Object.keys(_rules).forEach(runValidation);
+
+    return result;
+  }
+
+
+  // `entityIDsToValidate()`   (private)
+  // Collects the complete list of entityIDs related to the input entityIDs.
+  //
+  // Arguments
+  //   `entityIDs` - Set or Array containing entityIDs.
+  //   `graph` - graph containing the entities
+  //
+  // Returns
+  //   Set containing entityIDs
+  //
+  function entityIDsToValidate(entityIDs, graph) {
+    let seen = new Set();
+    let collected = new Set();
+
+    entityIDs.forEach(entityID => {
+      // keep `seen` separate from `collected` because an `entityID`
+      // could have been added to `collected` as a related entity through an earlier pass
+      if (seen.has(entityID)) return;
+      seen.add(entityID);
+
+      const entity = graph.hasEntity(entityID);
+      if (!entity) return;
+
+      collected.add(entityID);   // collect self
+
+      let checkParentRels = [entity];
+
+      if (entity.type === 'node') {
+        graph.parentWays(entity).forEach(parentWay => {
+          collected.add(parentWay.id);    // collect parent ways
+          checkParentRels.push(parentWay);
         });
 
-        prefs('validate-disabledRules', Object.keys(_disabledRules).join(','));
-        validator.validate();
-    };
+      } else if (entity.type === 'relation') {
+        entity.members.forEach(member => collected.add(member.id));  // collect members
 
+      } else if (entity.type === 'way') {
+        entity.nodes.forEach(nodeID => {
+          collected.add(nodeID);    // collect child nodes
+          graph._parentWays[nodeID].forEach(wayID => collected.add(wayID));  // collect connected ways
+        });
+      }
 
-    validator.ignoreIssue = function(id) {
-        _ignoredIssueIDs[id] = true;
-    };
-
-
-    //
-    // Run validation on a single entity for the given graph
-    //
-    function validateEntity(entity, graph) {
-        var entityIssues = [];
-
-        // runs validation and appends resulting issues
-        function runValidation(key) {
-
-            var fn = _rules[key];
-            if (typeof fn !== 'function') {
-                console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
-                return;
-            }
-
-            var detected = fn(entity, graph);
-            entityIssues = entityIssues.concat(detected);
+      checkParentRels.forEach(entity => {    // collect parent relations
+        if (entity.type !== 'relation') {    // but not super-relations
+          graph.parentRelations(entity).forEach(parentRelation => collected.add(parentRelation.id));
         }
+      });
+    });
 
-        // run all rules
-        Object.keys(_rules).forEach(runValidation);
+    return collected;
+  }
 
-        return entityIssues;
-    }
 
-    function entityIDsToValidate(entityIDs, graph) {
-        var processedIDs = new Set();
-        return entityIDs.reduce(function(acc, entityID) {
-            // keep redundancy check separate from `acc` because an `entityID`
-            // could have been added to `acc` as a related entity through an earlier pass
-            if (processedIDs.has(entityID)) return acc;
-            processedIDs.add(entityID);
+  // `updateResolvedIssues()`   (private)
+  // Determine if any issues were resolved for the given entities.
+  // This is called by `validate()` after validation of the head graph
+  //
+  // Arguments
+  //   `entityIDs` - Set containing entity IDs.
+  //
+  function updateResolvedIssues(entityIDs) {
+    entityIDs.forEach(entityID => {
+      const headIssues = _headCache.issuesByEntityID[entityID];
+      const baseIssues = _baseCache.issuesByEntityID[entityID];
+      if (!baseIssues) return;
 
-            var entity = graph.hasEntity(entityID);
-            if (!entity) return acc;
+      baseIssues.forEach(issueID => {
+        if (headIssues && headIssues.has(issueID)) {   // issue still not resolved
+          _resolvedIssueIDs.delete(issueID);           // (did undo, or possibly fixed and then re-caused the issue)
+        } else {
+          _resolvedIssueIDs.add(issueID);
+        }
+      });
+    });
+  }
 
-            acc.add(entityID);
 
-            var checkParentRels = [entity];
+  // `validateEntitiesAsync()`   (private)
+  // Schedule validation for many entities.
+  //
+  // Arguments
+  //   `entityIDs` - Set containing entity IDs.
+  //   `graph` - the graph to validate that contains those entities
+  //   `cache` - the cache to store results in (_headCache or _baseCache)
+  //
+  // Returns
+  //   A Promise fulfilled when the validation has completed.
+  //   This may take time but happen in the background during browser idle time.
+  //
+  function validateEntitiesAsync(entityIDs, graph, cache) {
+    // Enqueue the work
+    const jobs = Array.from(entityIDs).map(entityID => {
+      if (cache.queuedEntityIDs.has(entityID)) return null;  // queued already
+      cache.queuedEntityIDs.add(entityID);
 
-            if (entity.type === 'node') {
-                graph.parentWays(entity).forEach(function(parentWay) {
-                    acc.add(parentWay.id); // include parent ways
-                    checkParentRels.push(parentWay);
-                });
-            } else if (entity.type === 'relation') {
-                entity.members.forEach(function(member) {
-                    acc.add(member.id); // include members
-                });
-            } else if (entity.type === 'way') {
-                entity.nodes.forEach(function(nodeID) {
-                    acc.add(nodeID); // include child nodes
-                    graph._parentWays[nodeID].forEach(function(wayID) {
-                        acc.add(wayID); // include connected ways
-                    });
-                });
-            }
-
-            checkParentRels.forEach(function(entity) {   // include parent relations
-                if (entity.type !== 'relation') {        // but not super-relations
-                    graph.parentRelations(entity).forEach(function(parentRelation) {
-                        acc.add(parentRelation.id);
-                    });
-                }
-            });
-
-            return acc;
-
-        }, new Set());
-    }
-
-    //
-    // Run validation for several entities, supplied `entityIDs`,
-    // against `graph` for the given `cache`
-    //
-    function validateEntities(entityIDs, graph, cache) {
-
-        // clear caches for existing issues related to these entities
-        entityIDs.forEach(cache.uncacheEntityID);
+      return () => {
+        // clear caches for existing issues related to this entity
+        cache.uncacheEntityID(entityID);
+        cache.queuedEntityIDs.delete(entityID);
 
         // detect new issues and update caches
-        entityIDs.forEach(function(entityID) {
-            var entity = graph.hasEntity(entityID);
-            // don't validate deleted entities
-            if (!entity) return;
-
-            var issues = validateEntity(entity, graph);
-            cache.cacheIssues(issues);
-        });
-    }
-
-
-    //
-    // Validates anything that has changed since the last time it was run.
-    // Also updates the "validatedGraph" to be the current graph
-    // and dispatches a `validated` event when finished.
-    //
-    validator.validate = function() {
-
-        var currGraph = context.graph();
-        _validatedGraph = _validatedGraph || context.history().base();
-        if (currGraph === _validatedGraph) {
-            dispatch.call('validated');
-            return;
+        const entity = graph.hasEntity(entityID);       // Sanity check: don't validate deleted entities
+        if (entity) {
+          const result = validateEntity(entity, graph);
+          if (result.provisional) {                     // provisional result
+            cache.provisionalEntityIDs.add(entityID);   // we'll need to revalidate this entity again later
+          }
+          cache.cacheIssues(result.issues);   // update cache
         }
-        var oldGraph = _validatedGraph;
-        var difference = coreDifference(oldGraph, currGraph);
-        _validatedGraph = currGraph;
+      };
 
-        var createdAndModifiedEntityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
-        var entityIDsToCheck = entityIDsToValidate(createdAndModifiedEntityIDs, currGraph);
+    }).filter(Boolean);
 
-        // check modified and deleted entities against the old graph in order to update their related entities
-        // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-        var modifiedAndDeletedEntityIDs = difference.deleted().concat(difference.modified())
-            .map(function(entity) { return entity.id; });
-        var entityIDsToCheckForOldGraph = entityIDsToValidate(modifiedAndDeletedEntityIDs, oldGraph);
 
-        // concat the sets
-        entityIDsToCheckForOldGraph.forEach(entityIDsToCheck.add, entityIDsToCheck);
+    // Perform the work in chunks.
+    // Because this will happen during idle callbacks, we want to choose a chunk size
+    // that won't make the browser stutter too badly.
+    cache.queue = cache.queue.concat(utilArrayChunk(jobs, 100));
 
-        validateEntities(entityIDsToCheck, context.graph(), _headCache);
+    // Perform the work
+    if (cache.queuePromise) return cache.queuePromise;
 
-        dispatch.call('validated');
-    };
+    cache.queuePromise = processQueue(cache)
+      .then(() => revalidateProvisionalEntities(cache))
+      .catch(() => { /* ignore */ })
+      .finally(() => cache.queuePromise = null);
 
-    context.history()
-        .on('reset.validator', function() {
-            // cached issues aren't valid any longer if the history has been reset
-            reset(false);
-            validator.validate();
+    return cache.queuePromise;
+  }
+
+
+  // `revalidateProvisionalEntities()`   (private)
+  // Sometimes a validator will return a "provisional" result.
+  // In this situation, we'll need to revalidate the entity later.
+  // This function waits a delay, then places them back into the validation queue.
+  //
+  // Arguments
+  //   `cache` - The cache (_headCache or _baseCache)
+  //
+  function revalidateProvisionalEntities(cache) {
+    if (!cache.provisionalEntityIDs.size) return;  // nothing to do
+
+    const handle = window.setTimeout(() => {
+      _deferredST.delete(handle);
+      if (!cache.provisionalEntityIDs.size) return;  // nothing to do
+
+      const graph = (cache === _headCache ? _headGraph : context.history().base());
+      validateEntitiesAsync(cache.provisionalEntityIDs, graph, cache);
+    }, RETRY);
+
+    _deferredST.add(handle);
+  }
+
+
+  // `processQueue(queue)`   (private)
+  // Process the next chunk of deferred validation work
+  //
+  // Arguments
+  //   `cache` - The cache (_headCache or _baseCache)
+  //
+  // Returns
+  //   A Promise fulfilled when the validation has completed.
+  //   This may take time but happen in the background during browser idle time.
+  //
+  function processQueue(cache) {
+    // const which = (cache === _headCache) ? 'head' : 'base';
+    // console.log(`${which} queue length ${cache.queue.length}`);
+
+    if (!cache.queue.length) return Promise.resolve();  // we're done
+    const chunk = cache.queue.pop();
+
+    return new Promise(resolvePromise => {
+        const handle = window.requestIdleCallback(() => {
+          _deferredRIC.delete(handle);
+          // const t0 = performance.now();
+          chunk.forEach(job => job());
+          // const t1 = performance.now();
+          // console.log('chunk processed in ' + (t1 - t0) + ' ms');
+          resolvePromise();
         });
-
-    // WHEN TO RUN VALIDATION:
-    // When graph changes:
-    context.history()
-        .on('restore.validator', validator.validate)   // restore saved history
-        .on('undone.validator', validator.validate)    // undo
-        .on('redone.validator', validator.validate);   // redo
-        // but not on 'change' (e.g. while drawing)
-
-    // When user changes editing modes:
-    context
-        .on('exit.validator', validator.validate);
-
-    // When merging fetched data:
-    context.history()
-        .on('merge.validator', function(entities) {
-            if (!entities) return;
-            var handle = window.requestIdleCallback(function() {
-                var entityIDs = entities.map(function(entity) { return entity.id; });
-                var headGraph = context.graph();
-                validateEntities(entityIDsToValidate(entityIDs, headGraph), headGraph, _headCache);
-
-                var baseGraph = context.history().base();
-                validateEntities(entityIDsToValidate(entityIDs, baseGraph), baseGraph, _baseCache);
-
-                dispatch.call('validated');
-            });
-            _deferred.add(handle);
-        });
+        _deferredRIC.add(handle);
+      })
+      .then(() => { // dispatch an event sometimes to redraw various UI things
+        if (cache.queue.length % 25 === 0) dispatch.call('validated');
+      })
+      .then(() => processQueue(cache));
+  }
 
 
-    return validator;
+  return validator;
 }
 
 
+// `validationCache()`   (private)
+// Creates a cache to store validation state
+// We create 2 of these:
+//   `_baseCache` for validation on the base graph (unedited)
+//   `_headCache` for validation on the head graph (user edits applied)
+//
 function validationCache() {
+  let cache = {
+    queue: [],
+    queuePromise: null,
+    queuedEntityIDs: new Set(),
+    provisionalEntityIDs: new Set(),
+    issuesByIssueID: {},  // issue.id -> issue
+    issuesByEntityID: {}  // entity.id -> set(issue.id)
+  };
 
-    var cache = {
-        issuesByIssueID: {},  // issue.id -> issue
-        issuesByEntityID: {} // entity.id -> set(issue.id)
-    };
+  cache.cacheIssues = (issues) => {
+    issues.forEach(issue => {
+      const entityIDs = issue.entityIds || [];
+      entityIDs.forEach(entityID => {
+        if (!cache.issuesByEntityID[entityID]) {
+          cache.issuesByEntityID[entityID] = new Set();
+        }
+        cache.issuesByEntityID[entityID].add(issue.id);
+      });
+      cache.issuesByIssueID[issue.id] = issue;
+    });
+  };
 
-    cache.cacheIssues = function(issues) {
-        issues.forEach(function(issue) {
-            var entityIds = issue.entityIds || [];
-            entityIds.forEach(function(entityId) {
-                if (!cache.issuesByEntityID[entityId]) {
-                    cache.issuesByEntityID[entityId] = new Set();
-                }
-                cache.issuesByEntityID[entityId].add(issue.id);
-            });
-            cache.issuesByIssueID[issue.id] = issue;
-        });
-    };
+  cache.uncacheIssue = (issue) => {
+    // When multiple entities are involved (e.g. crossing_ways),
+    // remove this issue from the other entity caches too..
+    const entityIDs = issue.entityIds || [];
+    entityIDs.forEach(entityID => {
+      if (cache.issuesByEntityID[entityID]) {
+        cache.issuesByEntityID[entityID].delete(issue.id);
+      }
+    });
+    delete cache.issuesByIssueID[issue.id];
+  };
 
-    cache.uncacheIssue = function(issue) {
-        // When multiple entities are involved (e.g. crossing_ways),
-        // remove this issue from the other entity caches too..
-        var entityIds = issue.entityIds || [];
-        entityIds.forEach(function(entityId) {
-            if (cache.issuesByEntityID[entityId]) {
-                cache.issuesByEntityID[entityId].delete(issue.id);
-            }
-        });
-        delete cache.issuesByIssueID[issue.id];
-    };
+  cache.uncacheIssues = (issues) => {
+    issues.forEach(cache.uncacheIssue);
+  };
 
-    cache.uncacheIssues = function(issues) {
-        issues.forEach(cache.uncacheIssue);
-    };
+  cache.uncacheIssuesOfType = (type) => {
+    const issuesOfType = Object.values(cache.issuesByIssueID)
+      .filter(issue => issue.type === type);
+    cache.uncacheIssues(issuesOfType);
+  };
 
-    cache.uncacheIssuesOfType = function(type) {
-        var issuesOfType = Object.values(cache.issuesByIssueID)
-            .filter(function(issue) { return issue.type === type; });
-        cache.uncacheIssues(issuesOfType);
-    };
+  // Remove a single entity and all its related issues from the caches
+  cache.uncacheEntityID = (entityID) => {
+    const issueIDs = cache.issuesByEntityID[entityID];
+    if (issueIDs) {
+      issueIDs.forEach(issueID => {
+        const issue = cache.issuesByIssueID[issueID];
+        if (issue) {
+          cache.uncacheIssue(issue);
+        } else {
+          delete cache.issuesByIssueID[issueID];
+        }
+      });
+    }
 
-    //
-    // Remove a single entity and all its related issues from the caches
-    //
-    cache.uncacheEntityID = function(entityID) {
-        var issueIDs = cache.issuesByEntityID[entityID];
-        if (!issueIDs) return;
+    delete cache.issuesByEntityID[entityID];
+    cache.provisionalEntityIDs.delete(entityID);
+  };
 
-        issueIDs.forEach(function(issueID) {
-            var issue = cache.issuesByIssueID[issueID];
-            if (issue) {
-                cache.uncacheIssue(issue);
-            } else {
-                delete cache.issuesByIssueID[issueID];
-            }
-        });
 
-        delete cache.issuesByEntityID[entityID];
-    };
-
-    return cache;
+  return cache;
 }

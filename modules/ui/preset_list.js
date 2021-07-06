@@ -1,9 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import * as countryCoder from '@ideditor/country-coder';
-
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
@@ -20,6 +16,7 @@ import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
 export function uiPresetList(context) {
     var dispatch = d3_dispatch('cancel', 'choose');
     var _entityIDs;
+    var _currLoc;
     var _currentPresets;
     var _autofocus = false;
 
@@ -94,19 +91,16 @@ export function uiPresetList(context) {
         function inputevent() {
             var value = search.property('value');
             list.classed('filtered', value.length);
-            var extent = combinedEntityExtent();
-            var results, messageText;
-            if (value.length && extent) {
-                var center = extent.center();
-                var countryCodes = countryCoder.iso1A2Codes(center);
 
-                results = presets.search(value, entityGeometries()[0], countryCodes);
+            var results, messageText;
+            if (value.length) {
+                results = presets.search(value, entityGeometries()[0], _currLoc);
                 messageText = t('inspector.results', {
                     n: results.collection.length,
                     search: value
                 });
             } else {
-                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro());
+                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc);
                 messageText = t('inspector.choose');
             }
             list.call(drawList, results);
@@ -147,7 +141,7 @@ export function uiPresetList(context) {
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro()));
+            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
@@ -483,13 +477,25 @@ export function uiPresetList(context) {
 
     presetList.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
+
         _entityIDs = val;
+        _currLoc = null;
+
         if (_entityIDs && _entityIDs.length) {
+            // calculate current location
+            const extent = _entityIDs.reduce(function(extent, entityID) {
+                var entity = context.graph().entity(entityID);
+                return extent.extend(entity.extent(context.graph()));
+            }, geoExtent());
+            _currLoc = extent.center();
+
+            // match presets
             var presets = _entityIDs.map(function(entityID) {
                 return presetManager.match(context.entity(entityID), context.graph());
             });
             presetList.presets(presets);
         }
+
         return presetList;
     };
 
@@ -520,13 +526,6 @@ export function uiPresetList(context) {
         return Object.keys(counts).sort(function(geom1, geom2) {
             return counts[geom2] - counts[geom1];
         });
-    }
-
-    function combinedEntityExtent() {
-        return _entityIDs.reduce(function(extent, entityID) {
-            var entity = context.graph().entity(entityID);
-            return extent.extend(entity.extent(context.graph()));
-        }, geoExtent());
     }
 
     return utilRebind(presetList, dispatch, 'on');
