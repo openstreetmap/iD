@@ -2,6 +2,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
+import { locationManager } from '../core/locations';
+
 import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
@@ -51,8 +53,8 @@ export function presetIndex() {
 
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-
   let _loadPromise;
+
 
   _this.ensureLoaded = () => {
     if (_loadPromise) return _loadPromise;
@@ -77,13 +79,27 @@ export function presetIndex() {
   };
 
 
+  // `merge` accepts an object containing new preset data (all properties optional):
+  // {
+  //   fields: {},
+  //   presets: {},
+  //   categories: {},
+  //   defaults: {},
+  //   featureCollection: {}
+  //}
   _this.merge = (d) => {
+    let newLocationSets = [];
+
     // Merge Fields
     if (d.fields) {
       Object.keys(d.fields).forEach(fieldID => {
-        const f = d.fields[fieldID];
+        let f = d.fields[fieldID];
+
         if (f) {   // add or replace
-          _fields[fieldID] = presetField(fieldID, f);
+          f = presetField(fieldID, f);
+          if (f.locationSet) newLocationSets.push(f);
+          _fields[fieldID] = f;
+
         } else {   // remove
           delete _fields[fieldID];
         }
@@ -93,10 +109,14 @@ export function presetIndex() {
     // Merge Presets
     if (d.presets) {
       Object.keys(d.presets).forEach(presetID => {
-        const p = d.presets[presetID];
+        let p = d.presets[presetID];
+
         if (p) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
-          _presets[presetID] = presetPreset(presetID, p, isAddable, _fields, _presets);
+          p = presetPreset(presetID, p, isAddable, _fields, _presets);
+          if (p.locationSet) newLocationSets.push(p);
+          _presets[presetID] = p;
+
         } else {   // remove (but not if it's a fallback)
           const existing = _presets[presetID];
           if (existing && !existing.isFallback()) {
@@ -106,22 +126,23 @@ export function presetIndex() {
       });
     }
 
-    // Need to rebuild _this.collection before loading categories
-    _this.collection = Object.values(_presets).concat(Object.values(_categories));
-
     // Merge Categories
     if (d.categories) {
       Object.keys(d.categories).forEach(categoryID => {
-        const c = d.categories[categoryID];
+        let c = d.categories[categoryID];
+
         if (c) {   // add or replace
-          _categories[categoryID] = presetCategory(categoryID, c, _this);
+          c = presetCategory(categoryID, c, _presets);
+          if (c.locationSet) newLocationSets.push(c);
+          _categories[categoryID] = c;
+
         } else {   // remove
           delete _categories[categoryID];
         }
       });
     }
 
-    // Rebuild _this.collection after loading categories
+    // Rebuild _this.collection after changing presets and categories
     _this.collection = Object.values(_presets).concat(Object.values(_categories));
 
     // Merge Defaults
@@ -155,6 +176,16 @@ export function presetIndex() {
       });
     });
 
+    // Merge Custom Features
+    if (d.featureCollection && Array.isArray(d.featureCollection.features)) {
+      locationManager.mergeCustomGeoJSON(d.featureCollection);
+    }
+
+    // Resolve all locationSet features.
+    if (newLocationSets.length) {
+      locationManager.mergeLocationSets(newLocationSets);
+    }
+
     return _this;
   };
 
@@ -166,16 +197,22 @@ export function presetIndex() {
       if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
         geometry = 'point';
       }
-      return _this.matchTags(entity.tags, geometry);
+      const entityExtent = entity.extent(resolver);
+      return _this.matchTags(entity.tags, geometry, entityExtent.center());
     });
   };
 
 
-  _this.matchTags = (tags, geometry) => {
+  _this.matchTags = (tags, geometry, loc) => {
     const geometryMatches = _geometryIndex[geometry];
     let address;
     let best = -1;
     let match;
+
+    let validLocations;
+    if (Array.isArray(loc)) {
+      validLocations = locationManager.locationsAt(loc);
+    }
 
     for (let k in tags) {
       // If any part of an address is present, allow fallback to "Address" preset - #4353
@@ -187,10 +224,17 @@ export function presetIndex() {
       if (!keyMatches) continue;
 
       for (let i = 0; i < keyMatches.length; i++) {
-        const score = keyMatches[i].matchScore(tags);
+        const candidate = keyMatches[i];
+
+        // discard candidate preset if location is not valid at `loc`
+        if (validLocations && candidate.locationSetID) {
+          if (!validLocations[candidate.locationSetID]) continue;
+        }
+
+        const score = candidate.matchScore(tags);
         if (score > best) {
           best = score;
-          match = keyMatches[i];
+          match = candidate;
         }
       }
     }
@@ -313,11 +357,12 @@ export function presetIndex() {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n, startWithRecents) => {
+  _this.defaults = (geometry, n, startWithRecents, loc) => {
     let recents = [];
     if (startWithRecents) {
       recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
     }
+
     let defaults;
     if (_addablePresetIDs) {
       defaults = Array.from(_addablePresetIDs).map(function(id) {
@@ -329,9 +374,16 @@ export function presetIndex() {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
     }
 
-    return presetCollection(
+    let result = presetCollection(
       utilArrayUniq(recents.concat(defaults)).slice(0, n - 1)
     );
+
+    if (Array.isArray(loc)) {
+      const validLocations = locationManager.locationsAt(loc);
+      result.collection = result.collection.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
+    }
+
+    return result;
   };
 
   // pass a Set of addable preset ids

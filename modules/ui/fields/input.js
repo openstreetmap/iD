@@ -34,11 +34,33 @@ export function uiFieldText(field, context) {
             .catch(function() { /* ignore */ });
     }
 
-    function i(selection) {
-        var entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
-        var preset = entity && presetManager.match(entity, context.graph());
-        var isLocked = preset && preset.suggestion && field.id === 'brand';
+
+    function calcLocked() {
+        // Protect certain fields that have a companion `*:wikidata` value
+        var isLocked = (field.id === 'brand' || field.id === 'network' || field.id === 'operator' || field.id === 'flag') &&
+            _entityIDs.length &&
+            _entityIDs.some(function(entityID) {
+                var entity = context.graph().hasEntity(entityID);
+                if (!entity) return false;
+
+                // Features linked to Wikidata are likely important and should be protected
+                if (entity.tags.wikidata) return true;
+
+                var preset = presetManager.match(entity, context.graph());
+                var isSuggestion = preset && preset.suggestion;
+
+                // Lock the field if there is a value and a companion `*:wikidata` value
+                var which = field.id;   // 'brand', 'network', 'operator', 'flag'
+                return isSuggestion && !!entity.tags[which] && !!entity.tags[which + ':wikidata'];
+            });
+
         field.locked(isLocked);
+    }
+
+
+    function i(selection) {
+        calcLocked();
+        var isLocked = field.locked();
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);

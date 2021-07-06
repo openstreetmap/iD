@@ -26,6 +26,7 @@ export { utilEntitySelector } from './util';
 export { utilEntityOrMemberSelector } from './util';
 export { utilEntityOrDeepMemberSelector } from './util';
 export { utilFastMouse } from './util';
+export { utilFetchJson } from './util';
 export { utilFunctor } from './util';
 export { utilGetAllNodes } from './util';
 export { utilGetSetValue } from './get_set_value';

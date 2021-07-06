@@ -91,7 +91,7 @@ export function uiFeatureList(context) {
             if (d3_event.keyCode === 13 && // ↩ Return
                 q.length &&
                 items.size()) {
-                click(items.datum());
+                click(d3_event, items.datum());
             }
         }
 

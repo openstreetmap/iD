@@ -1,4 +1,6 @@
-import { utilArrayUniq, utilEditDistance } from '../util';
+import { locationManager } from '../core/locations';
+import { utilArrayUniq } from '../util/array';
+import { utilEditDistance } from '../util';
 
 
 //
@@ -45,14 +47,11 @@ export function presetCollection(collection) {
     return _this.item(id);
   };
 
-  _this.search = (value, geometry, countryCode) => {
+  _this.search = (value, geometry, loc) => {
     if (!value) return _this;
 
+    // don't remove diacritical characters since we're assuming the user is being intentional
     value = value.toLowerCase().trim();
-    // split combined diacritical characters into their parts
-    if (value.normalize) value = value.normalize('NFD');
-    // remove diacritics
-    value = value.replace(/[\u0300-\u036f]/g, '');
 
     // match at name beginning or just after a space (e.g. "office" -> match "Law Office")
     function leading(a) {
@@ -66,51 +65,60 @@ export function presetCollection(collection) {
       return index === 0;
     }
 
-    function sortNames(a, b) {
-      let aCompare = a.searchName();
-      let bCompare = b.searchName();
+    function sortPresets(nameProp) {
+      return function sortNames(a, b) {
+        let aCompare = a[nameProp]();
+        let bCompare = b[nameProp]();
 
-      // priority if search string matches preset name exactly - #4325
-      if (value === aCompare) return -1;
-      if (value === bCompare) return 1;
+        // priority if search string matches preset name exactly - #4325
+        if (value === aCompare) return -1;
+        if (value === bCompare) return 1;
 
-      // priority for higher matchScore
-      let i = b.originalScore - a.originalScore;
-      if (i !== 0) return i;
+        // priority for higher matchScore
+        let i = b.originalScore - a.originalScore;
+        if (i !== 0) return i;
 
-      // priority if search string appears earlier in preset name
-      i = aCompare.indexOf(value) - bCompare.indexOf(value);
-      if (i !== 0) return i;
+        // priority if search string appears earlier in preset name
+        i = aCompare.indexOf(value) - bCompare.indexOf(value);
+        if (i !== 0) return i;
 
-      // priority for shorter preset names
-      return aCompare.length - bCompare.length;
+        // priority for shorter preset names
+        return aCompare.length - bCompare.length;
+      };
     }
 
     let pool = _this.collection;
-    if (countryCode) {
-      pool = pool.filter(a => {
-        if (a.locationSet) {
-          if (a.locationSet.include && a.locationSet.include.indexOf(countryCode) === -1) return false;
-          if (a.locationSet.exclude && a.locationSet.exclude.indexOf(countryCode) !== -1) return false;
-        }
-        return true;
-      });
+    if (Array.isArray(loc)) {
+      const validLocations = locationManager.locationsAt(loc);
+      pool = pool.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
     }
+
     const searchable = pool.filter(a => a.searchable !== false && a.suggestion !== true);
     const suggestions = pool.filter(a => a.suggestion === true);
 
     // matches value to preset.name
-    const leadingName = searchable
+    const leadingNames = searchable
       .filter(a => leading(a.searchName()))
-      .sort(sortNames);
+      .sort(sortPresets('searchName'));
 
     // matches value to preset suggestion name
     const leadingSuggestions = suggestions
       .filter(a => leadingStrict(a.searchName()))
-      .sort(sortNames);
+      .sort(sortPresets('searchName'));
+
+    const leadingNamesStripped = searchable
+      .filter(a => leading(a.searchNameStripped()))
+      .sort(sortPresets('searchNameStripped'));
+
+    const leadingSuggestionsStripped = suggestions
+      .filter(a => leadingStrict(a.searchNameStripped()))
+      .sort(sortPresets('searchNameStripped'));
 
     // matches value to preset.terms values
     const leadingTerms = searchable
+      .filter(a => (a.terms() || []).some(leading));
+
+    const leadingSuggestionTerms = suggestions
       .filter(a => (a.terms() || []).some(leading));
 
     // matches value to preset.tags values
@@ -139,9 +147,12 @@ export function presetCollection(collection) {
         });
       });
 
-    let results = leadingName.concat(
+    let results = leadingNames.concat(
       leadingSuggestions,
+      leadingNamesStripped,
+      leadingSuggestionsStripped,
       leadingTerms,
+      leadingSuggestionTerms,
       leadingTagValues,
       similarName,
       similarSuggestions,

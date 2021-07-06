@@ -182,13 +182,40 @@ export function utilGetAllNodes(ids, graph) {
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
-    var network = entity.tags.cycle_network || entity.tags.network;
+    if (name) return name;
 
-    if (!name && entity.tags.ref) {
-        name = entity.tags.ref;
-        if (network) {
-            name = network + ' ' + name;
+    var tags = {
+        direction: entity.tags.direction,
+        from: entity.tags.from,
+        network: entity.tags.cycle_network || entity.tags.network,
+        ref: entity.tags.ref,
+        to: entity.tags.to,
+        via: entity.tags.via
+    };
+    var keyComponents = [];
+
+    if (tags.network) {
+        keyComponents.push('network');
+    }
+    if (tags.ref) {
+        keyComponents.push('ref');
+    }
+
+    // Routes may need more disambiguation based on direction or destination
+    if (entity.tags.route) {
+        if (tags.direction) {
+            keyComponents.push('direction');
+        } else if (tags.from && tags.to) {
+            keyComponents.push('from');
+            keyComponents.push('to');
+            if (tags.via) {
+                keyComponents.push('via');
+            }
         }
+    }
+
+    if (keyComponents.length) {
+        name = t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
 
     return name;
@@ -216,21 +243,29 @@ export function utilDisplayType(id) {
 }
 
 
-export function utilDisplayLabel(entity, graphOrGeometry) {
+// `utilDisplayLabel`
+// Returns a string suitable for display
+// By default returns something like name/ref, fallback to preset type, fallback to OSM type
+//   "Main Street" or "Tertiary Road"
+// If `verbose=true`, include both preset name and feature name.
+//   "Tertiary Road Main Street"
+//
+export function utilDisplayLabel(entity, graphOrGeometry, verbose) {
+    var result;
     var displayName = utilDisplayName(entity);
-    if (displayName) {
-        // use the display name if there is one
-        return displayName;
-    }
     var preset = typeof graphOrGeometry === 'string' ?
         presetManager.matchTags(entity.tags, graphOrGeometry) :
         presetManager.match(entity, graphOrGeometry);
-    if (preset && preset.name()) {
-        // use the preset name if there is a match
-        return preset.name();
+    var presetName = preset && (preset.suggestion ? preset.subtitle() : preset.name());
+
+    if (verbose) {
+        result = [presetName, displayName].filter(Boolean).join(' ');
+    } else {
+        result = displayName || presetName;
     }
-    // fallback to the display type (node/way/relation)
-    return utilDisplayType(entity.id);
+
+    // Fallback to the OSM type (node/way/relation)
+    return result || utilDisplayType(entity.id);
 }
 
 
@@ -544,4 +579,15 @@ export function utilUnicodeCharsCount(str) {
 // in unicode characters. Note that this runs the risk of splitting graphemes.
 export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
+}
+
+// Variation of d3.json (https://github.com/d3/d3-fetch/blob/master/src/json.js)
+export function utilFetchJson(resourse, init) {
+    return fetch(resourse, init)
+        .then((response) => {
+            // fetch in PhantomJS tests may return ok=false and status=0 even if it's okay
+            if ((!response.ok && response.status !== 0) || !response.json) throw new Error(response.status + ' ' + response.statusText);
+            if (response.status === 204 || response.status === 205) return;
+            return response.json();
+        });
 }

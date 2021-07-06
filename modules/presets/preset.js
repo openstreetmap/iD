@@ -16,6 +16,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   let _resolvedFields;      // cache
   let _resolvedMoreFields;  // cache
   let _searchName; // cache
+  let _searchNameStripped; // cache
 
   _this.id = presetID;
 
@@ -124,12 +125,19 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   _this.searchName = () => {
     if (!_searchName) {
       _searchName = (_this.suggestion ? _this.originalName : _this.name()).toLowerCase();
-      // split combined diacritical characters into their parts
-      if (_searchName.normalize) _searchName = _searchName.normalize('NFD');
-      // remove diacritics
-      _searchName = _searchName.replace(/[\u0300-\u036f]/g, '');
     }
     return _searchName;
+  };
+
+  _this.searchNameStripped = () => {
+    if (!_searchNameStripped) {
+      _searchNameStripped = _this.searchName();
+      // split combined diacritical characters into their parts
+      if (_searchNameStripped.normalize) _searchNameStripped = _searchNameStripped.normalize('NFD');
+      // remove diacritics
+      _searchNameStripped = _searchNameStripped.replace(/[\u0300-\u036f]/g, '');
+    }
+    return _searchNameStripped;
   };
 
   _this.isFallback = () => {
@@ -147,7 +155,13 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.reference = () => {
     // Lookup documentation on Wikidata...
-    const qid = _this.tags.wikidata || _this.tags['brand:wikidata'] || _this.tags['operator:wikidata'];
+    const qid = (
+      _this.tags.wikidata ||
+      _this.tags['flag:wikidata'] ||
+      _this.tags['brand:wikidata'] ||
+      _this.tags['network:wikidata'] ||
+      _this.tags['operator:wikidata']
+    );
     if (qid) {
       return { qid: qid };
     }
@@ -164,8 +178,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.unsetTags = (tags, geometry, skipFieldDefaults) => {
-    tags = utilObjectOmit(tags, Object.keys(_this.removeTags));
+  _this.unsetTags = (tags, geometry, ignoringKeys, skipFieldDefaults) => {
+    // allow manually keeping some tags
+    let removeTags = ignoringKeys ? utilObjectOmit(_this.removeTags, ignoringKeys) : _this.removeTags;
+    tags = utilObjectOmit(tags, Object.keys(removeTags));
 
     if (geometry && !skipFieldDefaults) {
       _this.fields().forEach(field => {
@@ -186,7 +202,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     for (let k in addTags) {
       if (addTags[k] === '*') {
-        tags[k] = 'yes';
+        // if this tag is ancillary, don't override an existing value since any value is okay
+        if (_this.tags[k] || !tags[k] || tags[k] === 'no') {
+          tags[k] = 'yes';
+        }
       } else {
         tags[k] = addTags[k];
       }

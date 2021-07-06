@@ -29,7 +29,7 @@ export function operationExtract(context, selectedIDs) {
 
         _extent = _extent ? _extent.extend(entity.extent(graph)) : entity.extent(graph);
 
-        return actionExtract(entityID);
+        return actionExtract(entityID, context.projection);
     }).filter(Boolean);
 
 

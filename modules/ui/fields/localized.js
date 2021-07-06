@@ -9,7 +9,7 @@ import { services } from '../../services';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniq, utilEditDistance, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
+import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
 
 var _languagesArray = [];
 
@@ -35,19 +35,10 @@ export function uiFieldLocalized(field, context) {
         .then(function(d) { _territoryLanguages = d; })
         .catch(function() { /* ignore */ });
 
-
-    var allSuggestions = presetManager.collection.filter(function(p) {
-        return p.suggestion === true;
-    });
-
     // reuse these combos
     var langCombo = uiCombobox(context, 'localized-lang')
         .fetcher(fetchLanguages)
         .minItems(0);
-
-    var brandCombo = uiCombobox(context, 'localized-brand')
-        .canAutocomplete(false)
-        .minItems(1);
 
     var _selection = d3_select(null);
     var _multilingual = [];
@@ -83,34 +74,40 @@ export function uiFieldLocalized(field, context) {
 
 
     function calcLocked() {
-
-        // only lock the Name field
-        var isLocked = field.id === 'name' &&
+        // Protect name field for suggestion presets that don't display a brand/operator field
+        var isLocked = (field.id === 'name') &&
             _entityIDs.length &&
-            // lock the field if any feature needs it
             _entityIDs.some(function(entityID) {
-
                 var entity = context.graph().hasEntity(entityID);
                 if (!entity) return false;
 
-                var original = context.graph().base().entities[_entityIDs[0]];
-                var hasOriginalName = original && entity.tags.name && entity.tags.name === original.tags.name;
-                // if the name was already edited manually then allow further editing
-                if (!hasOriginalName) return false;
-
-                // features linked to Wikidata are likely important and should be protected
+                // Features linked to Wikidata are likely important and should be protected
                 if (entity.tags.wikidata) return true;
 
-                // assume the name has already been confirmed if its source has been researched
+                // Assume the name has already been confirmed if its source has been researched
                 if (entity.tags['name:etymology:wikidata']) return true;
 
+                // Lock the `name` if this is a suggestion preset that assigns the name,
+                // and the preset does not display a `brand` or `operator` field.
+                // (For presets like hotels, car dealerships, post offices, the `name` should remain editable)
+                // see also similar logic in `outdated_tags.js`
                 var preset = presetManager.match(entity, context.graph());
-                var isSuggestion = preset && preset.suggestion;
-                var showsBrand = preset && preset.originalFields.filter(function(d) {
-                    return d.id === 'brand';
-                }).length;
-                // protect standardized brand names
-                return isSuggestion && !showsBrand;
+                if (preset) {
+                    var isSuggestion = preset.suggestion;
+                    var fields = preset.fields();
+                    var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
+                    var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
+                    var setsName = preset.addTags.name;
+                    var setsBrandWikidata = preset.addTags['brand:wikidata'];
+                    var setsOperatorWikidata = preset.addTags['operator:wikidata'];
+
+                    return (isSuggestion && setsName && (
+                        (setsBrandWikidata && !showsBrandField) ||
+                        (setsOperatorWikidata && !showsOperatorField)
+                    ));
+                }
+
+                return false;
             });
 
         field.locked(isLocked);
@@ -152,8 +149,6 @@ export function uiFieldLocalized(field, context) {
         _selection = selection;
         calcLocked();
         var isLocked = field.locked();
-        var singularEntity = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-        var preset = singularEntity && presetManager.match(singularEntity, context.graph());
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -175,39 +170,6 @@ export function uiFieldLocalized(field, context) {
             .attr('class', 'localized-main')
             .call(utilNoAuto)
             .merge(input);
-
-        if (preset && field.id === 'name') {
-            var pTag = preset.id.split('/', 2);
-            var pKey = pTag[0];
-            var pValue = pTag[1];
-
-            if (!preset.suggestion) {
-                // Not a suggestion preset - Add a suggestions dropdown if it makes sense to.
-                // This code attempts to determine if the matched preset is the
-                // kind of preset that even can benefit from name suggestions..
-                // - true = shops, cafes, hotels, etc. (also generic and fallback presets)
-                // - false = churches, parks, hospitals, etc. (things not in the index)
-                var isFallback = preset.isFallback();
-                var goodSuggestions = allSuggestions.filter(function(s) {
-                    if (isFallback) return true;
-                    var sTag = s.id.split('/', 2);
-                    var sKey = sTag[0];
-                    var sValue = sTag[1];
-                    return pKey === sKey && (!pValue || pValue === sValue);
-                });
-
-                // Show the suggestions.. If the user picks one, change the tags..
-                if (allSuggestions.length && goodSuggestions.length) {
-                    input
-                        .on('blur.localized', checkBrandOnBlur)
-                        .call(brandCombo
-                            .fetcher(fetchBrandNames(preset, allSuggestions))
-                            .on('accept', acceptBrand)
-                            .on('cancel', cancelBrand)
-                        );
-                }
-            }
-        }
 
         input
             .classed('disabled', !!isLocked)
@@ -251,98 +213,6 @@ export function uiFieldLocalized(field, context) {
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
 
-
-
-        // We are not guaranteed to get an `accept` or `cancel` when blurring the field.
-        // (This can happen if the user actives the combo, arrows down, and then clicks off to blur)
-        // So compare the current field value against the suggestions one last time.
-        function checkBrandOnBlur() {
-            var latest = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-            if (!latest) return;   // deleting the entity blurred the field?
-
-            var preset = presetManager.match(latest, context.graph());
-            if (preset && preset.suggestion) return;   // already accepted
-
-            var name = utilGetSetValue(input).trim();
-            var matched = allSuggestions.filter(function(s) { return name === s.name(); });
-
-            if (matched.length === 1) {
-                acceptBrand({ suggestion: matched[0] });
-            } else {
-                cancelBrand();
-            }
-        }
-
-
-        function acceptBrand(d) {
-
-            var entity = _entityIDs.length === 1 && context.hasEntity(_entityIDs[0]);
-
-            if (!d || !entity) {
-                cancelBrand();
-                return;
-            }
-
-            var tags = entity.tags;
-            var geometry = entity.geometry(context.graph());
-            var removed = preset.unsetTags(tags, geometry);
-            for (var k in tags) {
-                tags[k] = removed[k];  // set removed tags to `undefined`
-            }
-            tags = d.suggestion.setTags(tags, geometry);
-            utilGetSetValue(input, tags.name);
-            dispatch.call('change', this, tags);
-        }
-
-
-        // user hit escape
-        function cancelBrand() {
-            var name = utilGetSetValue(input);
-            dispatch.call('change', this, { name: name });
-        }
-
-
-        function fetchBrandNames(preset, suggestions) {
-            var pTag = preset.id.split('/', 2);
-            var pKey = pTag[0];
-            var pValue = pTag[1];
-
-            return function(value, callback) {
-                var results = [];
-                if (value && value.length > 2) {
-                    for (var i = 0; i < suggestions.length; i++) {
-                        var s = suggestions[i];
-
-                        // don't suggest brands from incompatible countries
-                        if (_countryCode && s.countryCodes &&
-                            s.countryCodes.indexOf(_countryCode) === -1) continue;
-
-                        var sTag = s.id.split('/', 2);
-                        var sKey = sTag[0];
-                        var sValue = sTag[1];
-                        var subtitle = s.subtitle();
-                        var name = s.name();
-                        if (subtitle) name += ' – ' + subtitle;
-                        var dist = utilEditDistance(value, name.substring(0, value.length));
-                        var matchesPreset = (pKey === sKey && (!pValue || pValue === sValue));
-
-                        if (dist < 1 || (matchesPreset && dist < 3)) {
-                            var obj = {
-                                value: s.name(),
-                                title: name,
-                                display: s.nameLabel() + (subtitle ? ' – ' + s.subtitleLabel() : ''),
-                                suggestion: s,
-                                dist: dist + (matchesPreset ? 0 : 1)  // penalize if not matched preset
-                            };
-                            results.push(obj);
-                        }
-                    }
-                    results.sort(function(a, b) { return a.dist - b.dist; });
-                }
-                results = results.slice(0, 10);
-                callback(results);
-            };
-        }
 
 
         function addNew(d3_event) {

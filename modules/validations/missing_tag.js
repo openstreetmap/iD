@@ -10,17 +10,18 @@ export function validationMissingTag(context) {
     var type = 'missing_tag';
 
     function hasDescriptiveTags(entity, graph) {
-        var keys = Object.keys(entity.tags)
+        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
+        var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
-                if (k === 'area' || k === 'name') {
-                    return false;
-                } else {
-                    return osmIsInterestingTag(k);
-                }
+                if (k === 'area' || !osmIsInterestingTag(k)) return false;
+
+                return !onlyAttributeKeys.some(function(attributeKey) {
+                    return k === attributeKey || k.indexOf(attributeKey + ':') === 0;
+                });
             });
 
         if (entity.type === 'relation' &&
-            keys.length === 1 &&
+            entityDescriptiveKeys.length === 1 &&
             entity.tags.type === 'multipolygon') {
             // this relation's only interesting tag just says its a multipolygon,
             // which is not descriptive enough
@@ -30,7 +31,7 @@ export function validationMissingTag(context) {
             return osmOldMultipolygonOuterMemberOfRelation(entity, graph);
         }
 
-        return keys.length > 0;
+        return entityDescriptiveKeys.length > 0;
     }
 
     function isUnknownRoad(entity) {

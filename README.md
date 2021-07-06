@@ -1,6 +1,6 @@
 # iD - friendly JavaScript editor for [OpenStreetMap](https://www.openstreetmap.org/)
 
-[![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=develop)](https://travis-ci.org/openstreetmap/iD)
+[![build](https://github.com/openstreetmap/iD/workflows/build/badge.svg)](https://github.com/openstreetmap/iD/actions?query=workflow%3A%22build%22)
 
 ## Basics
 

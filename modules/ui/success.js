@@ -1,11 +1,12 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import LocationConflation from '@ideditor/location-conflation';
-import whichPolygon from 'which-polygon';
+import { resolveStrings } from 'osm-community-index';
 
 import { fileFetcher } from '../core/file_fetcher';
+import { locationManager } from '../core/locations';
 import { t, localizer } from '../core/localizer';
+
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
@@ -23,30 +24,37 @@ export function uiSuccess(context) {
 
   function ensureOSMCommunityIndex() {
     const data = fileFetcher;
-    return Promise.all([ data.get('oci_resources'), data.get('oci_features') ])
+    return Promise.all([
+        data.get('oci_features'),
+        data.get('oci_resources'),
+        data.get('oci_defaults')
+      ])
       .then(vals => {
         if (_oci) return _oci;
 
-        const ociResources = vals[0].resources;
-        const loco = new LocationConflation(vals[1]);
-        let ociFeatures = {};
+        // Merge Custom Features
+        if (vals[0] && Array.isArray(vals[0].features)) {
+          locationManager.mergeCustomGeoJSON(vals[0]);
+        }
 
-        Object.values(ociResources).forEach(resource => {
-          const feature = loco.resolveLocationSet(resource.locationSet).feature;
-          let ociFeature = ociFeatures[feature.id];
-          if (!ociFeature) {
-            ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
-            ociFeature.properties.resourceIDs = new Set();
-            ociFeatures[feature.id] = ociFeature;
-          }
-          ociFeature.properties.resourceIDs.add(resource.id);
-        });
-
-        return _oci = {
-          features: ociFeatures,
-          resources: ociResources,
-          query: whichPolygon({ type: 'FeatureCollection', features: Object.values(ociFeatures) })
-        };
+        let ociResources = Object.values(vals[1].resources);
+        if (ociResources.length) {
+          // Resolve all locationSet features.
+          return locationManager.mergeLocationSets(ociResources)
+            .then(() => {
+              _oci = {
+                resources: ociResources,
+                defaults: vals[2].defaults
+              };
+              return _oci;
+            });
+        } else {
+          _oci = {
+            resources: [],  // no resources?
+            defaults: vals[2].defaults
+          };
+          return _oci;
+        }
       });
   }
 
@@ -150,19 +158,23 @@ export function uiSuccess(context) {
     // Get OSM community index features intersecting the map..
     ensureOSMCommunityIndex()
       .then(oci => {
-        let communities = [];
-        const properties = oci.query(context.map().center(), true) || [];
+        const loc = context.map().center();
+        const validLocations = locationManager.locationsAt(loc);
 
-        // Gather the communities from the result
-        properties.forEach(props => {
-          const resourceIDs = Array.from(props.resourceIDs);
-          resourceIDs.forEach(resourceID => {
-            const resource = oci.resources[resourceID];
-            communities.push({
-              area: props.area || Infinity,
-              order: resource.order || 0,
-              resource: resource
-            });
+        // Gather the communities
+        let communities = [];
+        oci.resources.forEach(resource => {
+          let area = validLocations[resource.locationSetID];
+          if (!area) return;
+
+          // Resolve strings
+          const localizer = (stringID) => t.html(`community.${stringID}`);
+          resource.resolved = resolveStrings(resource, oci.defaults, localizer);
+          
+          communities.push({
+            area: area,
+            order: resource.order || 0,
+            resource: resource
           });
         });
 
@@ -200,7 +212,7 @@ export function uiSuccess(context) {
       .attr('class', 'cell-icon community-icon')
       .append('a')
       .attr('target', '_blank')
-      .attr('href', d => d.url)
+      .attr('href', d => d.resolved.url)
       .append('svg')
       .attr('class', 'logo-small')
       .append('use')
@@ -230,32 +242,19 @@ export function uiSuccess(context) {
   function showCommunityDetails(d) {
     let selection = d3_select(this);
     let communityID = d.id;
-    let replacements = {
-      url: linkify(d.url),
-      signupUrl: linkify(d.signupUrl || d.url)
-    };
 
     selection
       .append('div')
       .attr('class', 'community-name')
-      .append('a')
-      .attr('target', '_blank')
-      .attr('href', d.url)
-      .html(t.html(`community.${d.id}.name`));
-
-    let descriptionHTML = t.html(`community.${d.id}.description`, replacements);
-
-    if (d.type === 'reddit') {   // linkify subreddits  #4997
-      descriptionHTML = descriptionHTML
-        .replace(/(\/r\/\w*\/*)/i, match => linkify(d.url, match));
-    }
+      .html(d.resolved.nameHTML);
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(descriptionHTML);
+      .html(d.resolved.descriptionHTML);
 
-    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
+    // Create an expanding section if any of these are present..
+    if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
@@ -305,11 +304,11 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-more');
 
-      if (d.extendedDescription) {
+      if (d.resolved.extendedDescriptionHTML) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(t.html(`community.${d.id}.extendedDescription`, replacements));
+          .html(d.resolved.extendedDescriptionHTML);
       }
 
       if (d.languageCodes && d.languageCodes.length) {
@@ -384,12 +383,6 @@ export function uiSuccess(context) {
           }
           return description;
         });
-    }
-
-
-    function linkify(url, text) {
-      text = text || url;
-      return `<a target="_blank" href="${url}">${text}</a>`;
     }
   }
 

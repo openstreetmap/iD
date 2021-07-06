@@ -1085,7 +1085,7 @@ a.hide-toggle {
     visibility: visible;
 }
 .preset-icon-container.showing-img *:not(.image-icon) {
-    visibility: hidden;
+    display: none;
 }
 
 .preset-icon-point-border path {
@@ -3226,11 +3226,11 @@ div.full-screen > button:focus {
 
 .issue-text .issue-icon {
     flex: 0 0 auto;
-    padding: 5px 7px;
+    padding: 2px 3px;
 }
 .issue-text .issue-message {
     flex: 1 1 auto;
-    padding: 5px 0;
+    padding: 4px 5px;
 }
 .issue-label .issue-autofix {
     flex: 0 0 auto;
@@ -3545,6 +3545,9 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 
 .issue-container:not(.active) ul.issue-fix-list {
+    display: none;
+}
+.issue-container:not(.active) .issue-info {
     display: none;
 }
 

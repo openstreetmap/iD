@@ -25,7 +25,9 @@ export function validationHelpRequest(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.html('issues.fixme_tag.message', { feature: utilDisplayLabel(entity, context.graph()) }) : '';
+                return entity ? t.html('issues.fixme_tag.message', {
+                    feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
+                }) : '';
             },
             dynamicFixes: function() {
                 return [
