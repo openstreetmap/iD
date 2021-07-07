@@ -267,6 +267,7 @@ export function rendererBackgroundSource(data) {
 
 rendererBackgroundSource.Bing = function(data, dispatch) {
     // https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata
+    // https://docs.microsoft.com/en-us/bingmaps/rest-services/directly-accessing-the-bing-maps-tiles
 
     //fallback url template
     data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=10555&n=z';
@@ -274,6 +275,13 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     var bing = rendererBackgroundSource(data);
     var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // P2, JOSM, etc
     //var key = 'Ak5oTE46TUbjRp08OFVcGpkARErDobfpuyNKa-W2mQ8wbt1K1KL8p1bIRwWwcF-Q';    // iD
+
+    /*
+    missing tile image strictness param (n=)
+    •	n=f -> (Fail) returns a 404 
+    •	n=z -> (Empty) returns a 200 with 0 bytes (no content) 
+    •	n=t -> (Transparant) returns a 200 with a transparent (png) tile
+    */
     const strictParam = 'n';
 
     var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' + key;
@@ -284,6 +292,8 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     d3_json(url)
         .then(function(json) {
             let imageryResource = json.resourceSets[0].resources[0];
+
+            //retrieve and prepare up to date imagery template
             let template = imageryResource.imageUrl; //http://ecn.{subdomain}.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=10339
             let subDomains = imageryResource.imageUrlSubdomains; //["t0, t1, t2, t3"]
             let subDomainNumbers = subDomains.map((subDomain) => {
@@ -295,6 +305,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 template += `&${strictParam}=z`;
             }
             bing.template(template);
+
             providers = imageryResource.imageryProviders.map(function(provider) {
                 return {
                     attribution: provider.attribution,
