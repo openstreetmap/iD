@@ -280,7 +280,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     missing tile image strictness param (n=)
     •	n=f -> (Fail) returns a 404 
     •	n=z -> (Empty) returns a 200 with 0 bytes (no content) 
-    •	n=t -> (Transparant) returns a 200 with a transparent (png) tile
+    •	n=t -> (Transparent) returns a 200 with a transparent (png) tile
     */
     const strictParam = 'n';
 
