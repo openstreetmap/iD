@@ -308,9 +308,8 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             });
             dispatch.call('change');
         })
-        .catch(function(e) {
+        .catch(function() {
             /* ignore */
-            console.log(e);
         });
 
 
