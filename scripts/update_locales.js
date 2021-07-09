@@ -27,6 +27,7 @@ if (process.env.transifex_password) {
 } else {
   // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
   // You can use an API key instead of your password: https://docs.transifex.com/api/introduction#authentication
+  // in which case for user parameter value should be: "api"
   // {
   //   "user": "username",
   //   "password": "password"
@@ -242,7 +243,7 @@ function getLanguage(resourceURL) {
         return res.json();
       })
       .then(json => {
-        callback(null, YAML.safeLoad(json.content)[code]);
+        callback(null, YAML.load(json.content)[code]);
       })
       .catch(err => callback(err));
   };
