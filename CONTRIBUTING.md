@@ -379,6 +379,22 @@ You can rebuild iD completely with the command `npm run all`.
 iD will be built to the `dist` directory. This directory is self-contained; you can copy it
 into the public directory of your webserver to deploy iD.
 
+### Build Troubleshooting
+
+**`npm install` fails with "PhantomJS not found on PATH … Try to install
+PhantomJS globally".**
+Then you should do exactly that, such as `apt install phantomjs`.
+
+**`npm install` fails with "Command failed: /usr/bin/phantomjs --version
+qt.qpa.screen: QXcbConnection: Could not connect to display".**
+Add `QT_QPA_PLATFORM=offscreen` to your environment. (This will unblock
+installation but running the tests on a Raspberry Pi has not been attempted.)
+
+**`npm run all` fails at some point with "JavaScript heap out of memory".**
+Ask V8 to use more heap by adding `NODE_OPTIONS=--max-old-space-size=768` to
+your environment.  You might also like to use any www server instead of the
+server bundled with iD — it's only serving static files anyway.
+
 
 ### Licensing
 
