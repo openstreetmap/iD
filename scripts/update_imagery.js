@@ -75,7 +75,8 @@ const supportedWMSProjections = [
   'EPSG:102100',
   'EPSG:3785',
   // WGS 84 (Equirectangular)
-  'EPSG:4326'
+  'EPSG:4326',
+  'CRS:84'
 ];
 
 
