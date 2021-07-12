@@ -86,7 +86,7 @@
     "cldr-localenames-full": "37.0.0",
     "colors": "^1.1.2",
     "concat-files": "^0.1.1",
-    "d3": "~6.6.0",
+    "d3": "~7.0.0",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
     "eslint": "^7.1.0",
     "gaze": "^1.1.3",
