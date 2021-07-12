@@ -12,11 +12,13 @@
     ],
     "tags": {
         "cycleway": "crossing",
-        "foot": "designated"
+        "foot": "designated",
+        "lcn": "yes"
     },
     "addTags": {
         "highway": "cycleway",
-        "cycleway": "crossing"
+        "cycleway": "crossing",
+        "lcn": "yes"
     },
     "reference": {
         "key": "cycleway",

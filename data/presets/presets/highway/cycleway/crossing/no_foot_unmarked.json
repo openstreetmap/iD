@@ -15,13 +15,15 @@
     "highway": "cycleway",
     "cycleway": "crossing",
     "crossing": "unmarked",
-    "foot": "no"
+    "foot": "no",
+    "lcn": "yes"
   },
   "addTags": {
     "highway": "cycleway",
     "cycleway": "crossing",
     "crossing": "unmarked",
-    "foot": "no"
+    "foot": "no",
+    "lcn": "yes"
   },
   "reference": {
       "key": "cycleway",

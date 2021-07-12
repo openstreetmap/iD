@@ -10,13 +10,15 @@
         "highway": "cycleway",
         "foot": "designated",
         "bicycle": "designated",
-        "segregated": "no"
+        "segregated": "no",
+        "lcn": "yes"
     },
     "addTags": {
         "highway": "cycleway",
         "foot": "designated",
         "bicycle": "designated",
-        "segregated": "no"
+        "segregated": "no",
+        "lcn": "yes"
     },
     "terms": [
         "bicycle and foot path",
