@@ -97,7 +97,7 @@
     "mapillary_sprite_source": "^1.8.0",
     "mapillary-js": "4.0.0",
     "minimist": "^1.2.3",
-    "mocha": "^7.0.1",
+    "mocha": "^9.0.2",
     "mocha-phantomjs-core": "^2.1.0",
     "name-suggestion-index": "~6.0",
     "node-fetch": "^2.6.1",
