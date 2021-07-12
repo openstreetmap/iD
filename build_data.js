@@ -891,7 +891,7 @@ function handleTheNounProjectResponse(err, resp, body) {
 
 function writeFileProm(path, content) {
   return new Promise((resolve, reject) => {
-    fs.writeFile(path, content, (err) => {
+    fs.writeFile(path, content.toString(), (err) => {
       if (err) return reject(err);
       resolve();
     });
