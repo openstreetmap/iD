@@ -73,7 +73,7 @@
     "@fortawesome/free-brands-svg-icons": "~5.15.1",
     "@fortawesome/free-regular-svg-icons": "~5.15.1",
     "@fortawesome/free-solid-svg-icons": "~5.15.1",
-    "@ideditor/temaki": "~4.4.0",
+    "@ideditor/temaki": "~5.0.0",
     "@mapbox/maki": "^6.0.0",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^17.0.0",
