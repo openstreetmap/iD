@@ -438,6 +438,14 @@ path.fill.tag-building-commercial, path.fill.tag-building-retail {
     stroke: rgba(0, 26, 255, 0.3);
 }
 
+path.stroke.tag-building-office {
+    stroke: rgb(206, 0, 65);
+}
+
+path.fill.tag-building-office {
+    stroke: rgba(255, 0, 81, 0.3);
+}
+
 path.stroke.tag-building-industrial {
     stroke: rgb(183, 0, 255);
 }
