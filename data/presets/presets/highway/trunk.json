@@ -14,9 +14,11 @@
         "access",
         "surface",
         "structure",
-        "cycleway",
+        "cycleway_buffer",
         "cycleway_left_oneway",
+        "cycleway_left_buffer",
         "cycleway_right_oneway",
+        "cycleway_right_buffer",
         "oneway/bicycle"
     ],
     "moreFields": [

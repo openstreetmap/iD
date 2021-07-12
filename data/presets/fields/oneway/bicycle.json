@@ -1,5 +1,11 @@
 {
     "key": "oneway:bicycle",
-    "type": "check",
+    "type": "radio",
+    "strings": {
+        "options": {
+            "yes": "Yes",
+            "no": "No"
+        }
+    },
     "label": "One Way (Bicycles)"
 }

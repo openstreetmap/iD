@@ -1,0 +1,10 @@
+{
+  "key": "cycleway:right:buffer",
+  "type": "number",
+  "minValue": 0,
+  "label": "Cycleway right buffer width (m)",
+  "prerequisiteTag": {
+    "key": "cycleway:right",
+    "value": "lane"
+  }
+}
