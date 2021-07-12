@@ -25,7 +25,8 @@
     ],
     "tags": {
         "highway": "cycleway",
-        "foot": "no"
+        "foot": "no",
+        "lcn": "yes"
     },
     "terms": [
         "bicyle path",
