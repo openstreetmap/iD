@@ -159,8 +159,14 @@
             "text": "shortcuts.browsing.vertex_selected.last"
           },
           {
-            "shortcuts": ["|"],
+            "modifiers": ["⌘"],
+            "shortcuts": ["↑"],
             "text": "shortcuts.browsing.vertex_selected.parent"
+          },
+          {
+            "modifiers": ["⌘"],
+            "shortcuts": ["↓"],
+            "text": "shortcuts.browsing.vertex_selected.child"
           },
           {
             "shortcuts": ["\\", "shortcuts.key.pause"],
