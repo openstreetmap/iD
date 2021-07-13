@@ -732,6 +732,9 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name_addr: "{housenumber} {street}"
+    display_name_addr_with_unit: "{unit}, {housenumber} {street}"
+    display_name_addr_housenumber_only: "{housenumber}"
     display_name:
       direction: "{direction}"
       from_to: "from {from} to {to}"

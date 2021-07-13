@@ -251,5 +251,17 @@ describe('iD.util', function() {
             // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
             expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
         });
+        it('uses the housename if there is no better name', function() {
+            expect(iD.utilDisplayName({tags: {'addr:housename': 'Pembridge House', 'addr:housenumber': '31', 'addr:street': 'Princes Street' }})).to.eql('Pembridge House');
+        });
+        it('uses the street address as a last resort', function() {
+            expect(iD.utilDisplayName({tags: {'addr:housenumber': '31', 'addr:street': 'Princes Street' }})).to.eql('31 Princes Street');
+        });
+        it('uses addr:unit if present', function() {
+            expect(iD.utilDisplayName({tags: {'addr:unit': 'Flat 1', 'addr:housenumber': '30', 'addr:street': 'Madden Street' }})).to.eql('Flat 1, 30 Madden Street');
+        });
+        it('uses just addr:housenumber if it is the only addr: tag present', function() {
+            expect(iD.utilDisplayName({tags: {'addr:housenumber': '32' }})).to.eql('32');
+        });
     });
 });
