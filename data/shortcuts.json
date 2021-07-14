@@ -85,11 +85,7 @@
           {
             "shortcuts": ["map_data.highlight_edits.key"],
             "text": "shortcuts.browsing.display_options.highlight_edits"
-          }
-        ]
-      },
-      {
-        "rows": [
+          },
           {
             "section": "help",
             "text": "shortcuts.browsing.help.title"
@@ -101,7 +97,11 @@
           {
             "shortcuts": ["shortcuts.toggle.key", "?"],
             "text": "shortcuts.browsing.help.keyboard"
-          },
+          }
+        ]
+      },
+      {
+        "rows": [
           {
             "section": "selecting",
             "text": "shortcuts.browsing.selecting.title"
@@ -164,13 +164,17 @@
             "text": "shortcuts.browsing.vertex_selected.parent"
           },
           {
-            "modifiers": ["⌘"],
-            "shortcuts": ["↓"],
-            "text": "shortcuts.browsing.vertex_selected.child"
-          },
-          {
             "shortcuts": ["\\", "shortcuts.key.pause"],
             "text": "shortcuts.browsing.vertex_selected.change_parent"
+          },
+          {
+            "section": "way_selected",
+            "text": "shortcuts.browsing.way_selected.title"
+          },
+          {
+            "modifiers": ["⌘"],
+            "shortcuts": ["↓"],
+            "text": "shortcuts.browsing.way_selected.child"
           }
         ]
       }

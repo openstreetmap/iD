@@ -2300,8 +2300,10 @@ en:
         first: "Jump to first node"
         last: "Jump to last node"
         parent: "Select parent way"
-        child: "Select child node"
         change_parent: "Switch parent way"
+      way_selected:
+        title: "With way selected"
+        child: "Select child node"
     editing:
       title: "Editing"
       drawing:
