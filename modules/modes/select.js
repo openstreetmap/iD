@@ -113,6 +113,31 @@ export function modeSelect(context, selectedIDs) {
         return parents;
     }
 
+    // find the child nodes for selected ways
+    function childNodeIdsOfSelection(onlyCommon) {
+        var graph = context.graph();
+        var childs = [];
+
+        for (var i = 0; i < selectedIDs.length; i++) {
+            var entity = context.hasEntity(selectedIDs[i]);
+
+            if (!entity || !['area', 'line'].includes(entity.geometry(graph))){
+                return [];  // selection includes non-area/non-line
+            }
+            var currChilds = graph.childNodes(entity).map(function(node) { return node.id; });
+            if (!childs.length) {
+                childs = currChilds;
+                continue;
+            }
+
+            childs = (onlyCommon ? utilArrayIntersection : utilArrayUnion)(childs, currChilds);
+            if (!childs.length) {
+                return [];
+            }
+        }
+
+        return childs;
+    }
 
     function checkFocusedParent() {
         if (_focusedParentWayId) {
@@ -244,7 +269,8 @@ export function modeSelect(context, selectedIDs) {
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧' + key)), scaleSelection(1/1.05))
             .on(utilKeybinding.minusKeys.map((key) => uiCmd('⇧⌥' + key)), scaleSelection(1/Math.pow(1.05, 5)))
             .on(['\\', 'pause'], focusNextParent)
-            .on('|', selectParent)
+            .on(uiCmd('⌘↑'), selectParent)
+            .on(uiCmd('⌘↓'), selectChild)
             .on('⎋', esc, true);
 
         d3_select(document)
@@ -576,24 +602,28 @@ export function modeSelect(context, selectedIDs) {
 
             var currentSelectedIds = mode.selectedIDs();
             var parentIds = _focusedParentWayId ? [_focusedParentWayId] : parentWaysIdsOfSelection(false);
+            if (!parentIds.length) return;
 
-            if (!parentIds.length) {
-                var reselectIds = _focusedVertexIds && _focusedVertexIds.filter(id => context.hasEntity(id));
+            context.enter(
+                mode.selectedIDs(parentIds)
+            );
+            // set this after re-entering the selection since we normally want it cleared on exit
+            _focusedVertexIds = currentSelectedIds;
+        }
 
-                if (reselectIds && reselectIds.length) {
-                    if (currentSelectedIds.length === 1) _focusedParentWayId = currentSelectedIds[0];
-                    context.enter(
-                        mode.selectedIDs(_focusedVertexIds)
-                    );
-                }
-            } else {
+        function selectChild(d3_event) {
+            d3_event.preventDefault();
 
-                context.enter(
-                    mode.selectedIDs(parentIds)
-                );
-                // set this after re-entering the selection since we normally want it cleared on exit
-                _focusedVertexIds = currentSelectedIds;
-            }
+            var currentSelectedIds = mode.selectedIDs();
+
+            var childIds = _focusedVertexIds ? _focusedVertexIds.filter(id => context.hasEntity(id)) : childNodeIdsOfSelection(true);
+            if (!childIds || !childIds.length) return;
+
+            if (currentSelectedIds.length === 1) _focusedParentWayId = currentSelectedIds[0];
+
+            context.enter(
+                mode.selectedIDs(childIds)
+            );
         }
     };
 
