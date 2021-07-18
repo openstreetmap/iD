@@ -74,5 +74,6 @@
   {"pID": "natural/scrub", "hidden" : true},
   {"pID": "landuse/brownfield", "hidden" : true},
   {"pID": "landuse/flowerbed", "hidden" : true},
-  {"pID": "building/farm_auxiliary", "hidden" : true}
+  {"pID": "building/farm_auxiliary", "hidden" : true},
+  {"pId": "routing_entrance_main", "hidden" : true}
 ]
