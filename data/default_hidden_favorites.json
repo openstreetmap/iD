@@ -56,6 +56,8 @@
   {"pID": "highway/footway/unmarked_customers", "hidden" : true},
   {"pID": "highway/footway/unmarked_private", "hidden" : true},
   {"pID": "highway/service/private-driveway", "hidden" : true},
+  {"pID": "highway/service/private-unpaved-driveway", "hidden" : true},
+  {"pID": "highway/service/private-unpaved-parking-aisle", "hidden" : true},
   {"pID": "highway/traffic_signals", "hidden" : true},
   {"pID": "highway/footway/sidewalk", "hidden" : true},
   {"pID": "barrier/fence", "hidden" : true},
@@ -67,5 +69,10 @@
   {"pID": "highway/traffic_signals_forward", "hidden": true},
   {"pID": "highway/traffic_signals_backward", "hidden": true},
   {"pID": "highway/stop_forward", "hidden": true},
-  {"pID": "highway/stop_backward", "hidden": true}
+  {"pID": "highway/stop_backward", "hidden": true},
+  {"pID": "landuse/grass", "hidden" : true},
+  {"pID": "natural/scrub", "hidden" : true},
+  {"pID": "landuse/brownfield", "hidden" : true},
+  {"pID": "landuse/flowerbed", "hidden" : true},
+  {"pID": "building/farm_auxiliary", "hidden" : true}
 ]

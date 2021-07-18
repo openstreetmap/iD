@@ -1,0 +1,19 @@
+{
+  "icon": "iD-entrance",
+  "fields": [
+      "routing_entrance"
+  ],
+  "geometry": [
+      "vertex"
+  ],
+  "tags": {
+      "routing:entrance": "main"
+  },
+  "terms": [
+      "routing",
+      "entrance"
+  ],
+  "matchScore": 0.8,
+  "name": "Routing Entrance / Exit",
+  "shortcut": ["⌥+e"]
+}

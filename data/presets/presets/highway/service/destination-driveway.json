@@ -12,6 +12,5 @@
       "key": "service",
       "value": "driveway"
   },
-  "name": "Destination Driveway",
-  "shortcut": ["⌥+e"]
+  "name": "Destination Driveway"
 }
