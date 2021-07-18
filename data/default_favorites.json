@@ -18,10 +18,11 @@
   {"pID": "leisure/pitch/basketball"},
   {"pID": "leisure/pitch/baseball"},
   {"pID": "noexit/yes"},
-  {"pId": "highway/give_way"},
-  {"pId": "amenity/parking/underground"},
-  {"pId": "highway/cycleway"},
-  {"pId": "highway/cycleway/crossing/no_foot_unmarked"},
-  {"pId": "highway/cycleway/crossing/no_foot_marked"},
-  {"pId": "barrier/lift_gate"}
+  {"pID": "highway/give_way"},
+  {"pID": "amenity/parking/underground"},
+  {"pID": "highway/cycleway"},
+  {"pID": "highway/cycleway/crossing/no_foot_unmarked"},
+  {"pID": "highway/cycleway/crossing/no_foot_marked"},
+  {"pID": "barrier/lift_gate"},
+  {"pID": "building/service"}
 ]
