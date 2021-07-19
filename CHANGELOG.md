@@ -34,7 +34,97 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
 [@xxxx]: https://github.com/xxxx
+[#prxxxx]: https://github.com/openstreetmap/iD/pull/xxxx
 -->
+
+# 2.20.0
+##### 2021-Jul-20
+
+#### :mega: Release Highlights
+* :boom: **Presets got their own [repo](https://github.com/openstreetmap/id-tagging-schema)!** Shoutout to [@quincylvania] for this! ([#pr8229]) <br/>
+_In iD, this data is being fetched during runtime now, meaning **the presets can be updated independently of iD versioning**._ <br/>
+_For any discussions and issues regarding presets please use the above linked repo._
+* :vertical_traffic_light: **Mapillary v4 api** now enables much faster data load and more objects. Big thanks to [@nickplesha]! ([#pr8372]) <br/>
+_Be sure to check it out in MapData -> Photo Overlays -> Mapillary._
+* :fries: Thanks to great improvements ([#pr8305]) done by [@bhousel], iD now **supports newest versions of [name suggestion index](https://github.com/osmlab/name-suggestion-index)**<br/>
+_Additionally, presets now :handshake: [location set constraints](https://github.com/ideditor/schema-builder#locationset)._
+* :book: **Combo field now supports translatable options**. Thanks [@quincylvania]! ([#pr8238]) <br/>
+_The text styling indicates which values are raw tags and which are translated labels. It works for semiCombo and multiCombo as well as single-value combos._
+* :artificial_satellite: **Bing aerial imagery** is now always **fresh and up to date** ([#pr8570]). <br/>
+_This also means load performance improvement._
+
+[#pr8229]: https://github.com/openstreetmap/iD/pull/8229
+[#pr8372]: https://github.com/openstreetmap/iD/pull/8372
+[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+[#pr8238]: https://github.com/openstreetmap/iD/pull/8238
+[#pr8570]: https://github.com/openstreetmap/iD/pull/8570
+
+#### :sparkles: Usability & Accessibility
+* Enable node dragging at the bottom of the screen ([#8233])
+* Preset search is now more diacritics friendly ([#8242])
+* Improve sidebar Fields behavior for multilingual names ([#8164]) 
+* Improved distinction between preset categories and presets icons in sidebar ([#6085]) 
+
+[#8233]: https://github.com/openstreetmap/iD/issues/8233
+[#8242]: https://github.com/openstreetmap/iD/issues/8242
+[#8164]: https://github.com/openstreetmap/iD/issues/8164
+[#6085]: https://github.com/openstreetmap/iD/issues/6085
+
+#### :scissors: Operations
+* New operations: Select parent way operation (<kbd>Ctrl</kbd><kbd>↑</kbd>)/ select child nodes operation (<kbd>Ctrl</kbd><kbd>↓</kbd>) ([#pr8264], [#pr8577]). Thanks [@1ec5]
+* Move (<kbd>M</kbd>) now works for nodes ([#8225])
+* Move does not exit while moving the map ([#8187])
+
+[@1ec5]: https://github.com/1ec5
+
+[#pr8264]: https://github.com/openstreetmap/iD/pull/8264
+[#pr8577]: https://github.com/openstreetmap/iD/pull/8577
+[#8225]: https://github.com/openstreetmap/iD/issues/8225
+[#8187]: https://github.com/openstreetmap/iD/issues/8187
+
+#### :white_check_mark: Validation
+* Several rules added for case when tagging is used with wrong geometry ([#8231])
+* Missing tag validation improvement ([#8273])
+* Smarter suspicious tag and outdated tag validators (thanks to the new nsi matcher) ([#pr8305]]) 
+
+[#8231]: https://github.com/openstreetmap/iD/issues/8231
+[#8273]: https://github.com/openstreetmap/iD/issues/8273
+[#pr8305]: https://github.com/openstreetmap/iD/pull/8305
+
+#### :bug: Bugfixes
+* Extract POI node now ends up in expected center ([#8246])
+* Ensure features relations are always available when selected ([#6731])
+* Notes processing serialization works correctly now ([#pr8310])
+* Wms detection axis ordering fix ([#pr8322]). Thanks to ([@rbuffat])
+* Ensure consistent behaviour near zooming in/out on cross editable zoom (lod16) ([#pr8473])
+* Fixed Centroid calculation in measurement panel ([#pr8341]). Thanks to ([@jleedev])
+* Disabled edge case no-op move/rotate (move/rotate + esc) to pop previous edit of history ([#pr8442])
+
+[@rbuffat]: https://github.com/rbuffat
+[@jleedev]: https://github.com/jleedev
+
+[#8246]: https://github.com/openstreetmap/iD/issues/8246
+[#6731]: https://github.com/openstreetmap/iD/issues/6731
+[#pr8310]: https://github.com/openstreetmap/iD/pull/8310
+[#pr8322]: https://github.com/openstreetmap/iD/pull/8322
+[#pr8473]: https://github.com/openstreetmap/iD/pull/8473
+[#pr8341]: https://github.com/openstreetmap/iD/pull/8341
+[#pr8442]: https://github.com/openstreetmap/iD/pull/8442
+
+#### :mortar_board: Walkthrough / Help
+* Tooltip added on 'Review my edits' ([#7227])
+
+[#7227]: https://github.com/openstreetmap/iD/issues/7227
+
+#### :rocket: Presets
+* For preset changes please follow [id-tagging-schema repo](https://github.com/openstreetmap/id-tagging-schema).
+
+#### :hammer: Development
+* Use json endpoints for user osm api ([#8188])
+* Migrated from Travis CI to Github Actions ([#pr8258])
+
+[#8188]: https://github.com/openstreetmap/iD/issues/8188
+[#pr8258]: https://github.com/openstreetmap/iD/pull/8258
 
 # 2.19.6
 ##### 2021-Mar-3
