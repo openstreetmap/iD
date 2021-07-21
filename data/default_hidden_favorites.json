@@ -6,6 +6,7 @@
   {"pID": "highway/service-private-unpaved", "hidden" : true},
   {"pID": "highway/service-private", "hidden" : true},
   {"pID": "highway/service-destination", "hidden" : true},
+  {"pID": "highway/service/destination-parking-aisle", "hidden" : true},
   {"pID": "highway/footway", "hidden" : true},
   {"pID": "entrance", "hidden" : true},
   {"pID": "entrance/main", "hidden" : true},

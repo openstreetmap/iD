@@ -3,7 +3,7 @@
     "description": "Sidewalks, Foot Paths, Cycle Paths, etc.",
     "toggleable": true,
     "matches": {
-        "geometry": ["line"],
+        "geometry": ["line", "point"],
         "anyTags": {
             "highway": {
                 "path": true,
@@ -14,8 +14,13 @@
                 "corridor": true,
                 "steps": true,
                 "service": true,
-                "track": true
+                "track": true,
+                "bus_stop": true
+            },
+            "routing:entrance": {
+                "main": true
             }
+
         }
     }
 }
