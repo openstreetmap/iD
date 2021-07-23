@@ -43,7 +43,7 @@ $  git tag vA.B.C
 $  git push origin -f release vA.B.C
 ```
 - Open https://github.com/openstreetmap/iD/tags
-- Click `•••` –> `Create Release` and link to [`CHANGELOG.md`](https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md) in `Describe this release`
+- Click `•••` –> `Create Release`, paste version(vA.B.C) to `Release title` and link to [`CHANGELOG.md`](https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md) in `Describe this release`
 
 #### Prepare `develop` branch for further development
 
