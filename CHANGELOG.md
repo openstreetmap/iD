@@ -45,7 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 _In iD, this data is being fetched during runtime now, meaning **the presets can be updated independently of iD versioning**_ <br/>
 _For any discussions and issues regarding presets please use the above linked repo_
 * :vertical_traffic_light: **Mapillary v4 API** now enables much faster data load and more objects. Big thanks to [@nickplesha]! ([#pr8372]) <br/>
-_Be sure to check it out in MapData -> Photo Overlays -> Mapillar._
+_Be sure to check it out in MapData -> Photo Overlays -> Mapillary._
 * :fries: Thanks to great improvements ([#pr8305]) done by [@bhousel], iD now **supports newest versions of [name suggestion index](https://github.com/osmlab/name-suggestion-index)**<br/>
 _Additionally, presets now support [location set constraints](https://github.com/ideditor/schema-builder#locationset)_
 * :book: **Combo field now supports translatable options**. Thanks [@quincylvania]! ([#pr8238]) <br/>
@@ -82,7 +82,7 @@ _The text styling indicates which values are raw tags and which are translated l
 #### :white_check_mark: Validation
 * Several rules added for the case when tagging is used with wrong geometry ([#8231])
 * Missing tag validation improvement ([#8273])
-* Smarter suspicious tag and outdated tag validators (thanks to the new NSI matcher) ([#pr8305]]) 
+* Smarter suspicious tag and outdated tag validators (thanks to the new NSI matcher) ([#pr8305]) 
 
 [#8231]: https://github.com/openstreetmap/iD/issues/8231
 [#8273]: https://github.com/openstreetmap/iD/issues/8273
