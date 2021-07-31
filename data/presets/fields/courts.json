@@ -1,0 +1,7 @@
+{
+  "key": "courts",
+  "type": "number",
+  "minValue": 0,
+  "label": "Courts (capacity)",
+  "placeholder": "1, 2, 3..."
+}

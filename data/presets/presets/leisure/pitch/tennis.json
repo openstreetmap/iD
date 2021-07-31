@@ -2,7 +2,9 @@
     "icon": "maki-tennis",
     "fields": [
         "{leisure/pitch}",
-        "access_simple"
+        "access_simple",
+        "capacity",
+        "courts"
     ],
     "geometry": [
         "area",

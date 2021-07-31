@@ -4,6 +4,12 @@
         "area",
         "point"
     ],
+    "fields": [
+        "{leisure/pitch}",
+        "access_simple",
+        "capacity",
+        "courts"
+    ],
     "tags": {
         "leisure": "pitch",
         "sport": "volleyball"
