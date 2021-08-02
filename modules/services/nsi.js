@@ -349,6 +349,7 @@ function gatherNames(tags) {
   }
 
   function isNamelike(osmkey, which) {
+    if (osmkey === 'old_name') return false;
     return patterns[which].test(osmkey) && !notNames.test(osmkey);
   }
 }
