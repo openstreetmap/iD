@@ -547,10 +547,11 @@ export function coreValidator(context) {
         return;
       }
 
-      const detected = fn(entity, graph).filter(applySeverityOverrides);
+      let detected = fn(entity, graph);
       if (detected.provisional) {  // this validation should be run again later
         result.provisional = true;
       }
+      detected = detected.filter(applySeverityOverrides);
       result.issues = result.issues.concat(detected);
     }
 
