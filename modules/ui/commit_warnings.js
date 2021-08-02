@@ -12,6 +12,11 @@ export function uiCommitWarnings(context) {
 
         for (var severity in issuesBySeverity) {
             var issues = issuesBySeverity[severity];
+
+            if (severity !== 'error') {      // exclude 'fixme' and similar - #8603
+                issues = issues.filter(function(issue) { return issue.type !== 'help_request'; });
+            }
+
             var section = severity + '-section';
             var issueItem = severity + '-item';
 
