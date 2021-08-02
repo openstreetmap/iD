@@ -488,9 +488,15 @@ function _upgradeTags(tags, loc) {
     const properties = category.properties || {};
 
     // Preserve some tags that we specifically don't want NSI to overwrite. ('^name', sometimes)
-    const preserveTags = item.preserveTags || properties.preserveTags || [];
-    let regexes = preserveTags.map(s => new RegExp(s, 'i'));
-    regexes.push(/^building$/i, /^takeaway$/i);
+    let preserveTags = item.preserveTags || properties.preserveTags || [];
+
+    // These tags can be toplevel tags -or- attributes - so we generally want to preserve existing values - #8615
+    // We'll only _replace_ the tag value if this tag is the toplevel/defining tag for the matched item (`k`)
+    ['building', 'emergency', 'internet_access', 'takeaway'].forEach(osmkey => {
+      if (k !== osmkey) preserveTags.push(`^${osmkey}$`);
+    });
+
+    const regexes = preserveTags.map(s => new RegExp(s, 'i'));
 
     let keepTags = {};
     Object.keys(newTags).forEach(osmkey => {
@@ -499,8 +505,8 @@ function _upgradeTags(tags, loc) {
       }
     });
 
-    // Remove any primary tags ("amenity", "craft", "shop", "man_made", "route", etc)
-    // with a value like `amenity=yes` or `shop=yes`
+    // Remove any primary tags ("amenity", "craft", "shop", "man_made", "route", etc) that have a
+    // value like `amenity=yes` or `shop=yes` (exceptions have already been added to `keepTags` above)
     _nsi.kvt.forEach((vmap, k) => {
       if (newTags[k] === 'yes') delete newTags[k];
     });
