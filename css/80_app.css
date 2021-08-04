@@ -2606,8 +2606,8 @@ button.preset-favorite-button.active .icon {
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
-    padding: 5px 10px;
-    height: 20px;
+    padding: 2px 5px;
+    height: 25px;
     background-color: #fff;
     color: #7092ff;
     cursor: pointer;
