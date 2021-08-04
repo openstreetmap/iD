@@ -17,13 +17,15 @@
       "sidewalk:right": "separate"
   },
   "terms": [
+      "pb",
+      "pri",
+      "primary",
       "road",
       "street",
       "separate",
       "sidewalk",
       "sidepath",
-      "both",
-      "pb"
+      "both"
   ],
-  "name": "Primary Road Sidewalk Both Separate"
+  "name": "PB-Primary Road Sidewalk Both Separate"
 }

@@ -17,13 +17,14 @@
       "sidewalk:right": "separate"
   },
   "terms": [
+      "rb",
+      "res",
       "road",
       "street",
       "separate",
       "sidewalk",
       "sidepath",
-      "both",
-      "rb"
+      "both"
   ],
-  "name": "Residential Road Sidewalk Both Separate"
+  "name": "RB-Residential Road Sidewalk Both Separate"
 }

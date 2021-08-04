@@ -17,13 +17,14 @@
       "sidewalk:right": "separate"
   },
   "terms": [
+      "ur",
+      "unc",
       "road",
       "street",
       "separate",
       "sidewalk",
       "sidepath",
-      "right",
-      "ur"
+      "right"
   ],
-  "name": "Unclassified Road Sidewalk Right Separate"
+  "name": "UR-Unclassified Road Sidewalk Right Separate"
 }

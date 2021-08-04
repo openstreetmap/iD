@@ -17,13 +17,14 @@
       "sidewalk:right": "no"
   },
   "terms": [
+      "sl",
+      "sec",
       "road",
       "street",
       "separate",
       "sidewalk",
       "sidepath",
-      "left",
-      "sl"
+      "left"
   ],
-  "name": "Secondary Road Sidewalk Left Separate"
+  "name": "SL-Secondary Road Sidewalk Left Separate"
 }

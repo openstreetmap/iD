@@ -17,6 +17,8 @@
       "sidewalk:right": "separate"
   },
   "terms": [
+      "trr",
+      "trunk",
       "road",
       "street",
       "separate",
@@ -24,5 +26,5 @@
       "sidepath",
       "right"
   ],
-  "name": "Trunk Road Sidewalk Right Separate"
+  "name": "TRR-Trunk Road Sidewalk Right Separate"
 }

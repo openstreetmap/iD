@@ -8,6 +8,8 @@
       "sidewalk/separate-left",
       "sidewalk/separate-right",
       "lanes",
+      "lanes_forward",
+      "lanes_backward",
       "maxspeed",
       "access",
       "surface",
