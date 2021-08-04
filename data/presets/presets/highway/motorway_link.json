@@ -10,7 +10,7 @@
         "access",
         "destination_oneway",
         "destination/ref_oneway",
-        "junction/ref_oneway",
+        "junction/ref_oneway"
     ],
     "moreFields": [
         "charge_toll",
