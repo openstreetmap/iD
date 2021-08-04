@@ -52,8 +52,8 @@ export function uiSplash(context) {
       .append('p')
       .html(t.html('splash.text', {
         version: context.version,
-        website: '<a target="_blank" href="http://ideditor.blog/">ideditor.blog</a>',
-        github: '<a target="_blank" href="https://github.com/openstreetmap/iD">github.com</a>'
+        website: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new">changelog</a>',
+        github: '<a target="_blank" href="https://github.com/openstreetmap/iD/issues">github.com</a>'
       }));
 
     modalSection
