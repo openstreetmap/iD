@@ -720,7 +720,7 @@ en:
   map_data:
     title: Map Data
     description: Map Data
-    key: F
+    key: J
     data_layers: Data Layers
     layers:
       osm:
