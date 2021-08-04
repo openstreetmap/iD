@@ -729,7 +729,7 @@
         "map_data": {
             "title": "Données cartographiques",
             "description": "Données cartographiques",
-            "key": "F",
+            "key": "J",
             "data_layers": "Calques de données",
             "layers": {
                 "osm": {
