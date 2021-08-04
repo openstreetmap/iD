@@ -15,7 +15,7 @@ import { uiCmd } from './cmd';
 
 
 export function uiMapData(context) {
-    var key = '___';//t('map_data.key');
+    var key = t('map_data.key');
     var osmDataToggleKey = uiCmd('⌥' + t('area_fill.wireframe.key'));
     var features = context.features().featuresArray();
     var layers = context.layers();

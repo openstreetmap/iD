@@ -135,7 +135,8 @@ export function svgTagClasses() {
             classes.push('tag-' + k + '-' + v);
         }
 
-        // check for number of flats in building or landuse residential:
+
+        // check for number of flats in building or landuse residential and office tag:
         if (primary === 'building' || (primary === 'landuse' && t.landuse === 'residential'))
         {
             var numberOfFlats = 0;
@@ -145,6 +146,10 @@ export function svgTagClasses() {
                 {
                     numberOfFlats = v;
                     break;
+                }
+                if (k === 'office' && v === 'yes')
+                {
+                    classes.push('tag-building-office-yes');
                 }
             }
             if (numberOfFlats > 0)
@@ -233,6 +238,9 @@ export function svgTagClasses() {
                     bus = v;
                     classes.push('tag-bus-' + bus);
                 }
+                if (k === 'busway:right' || k === 'busway:left' || k === 'busway' || k === 'bus:lanes' || k === 'bus:lanes:forward' || k === 'bus:lanes:backward') {
+                    classes.push('tag-busway');
+                }
                 if (k === 'cycleway') {
                     cycleway = v;
                     isCycleway = true;
@@ -276,9 +284,6 @@ export function svgTagClasses() {
                     sidewalkRight = v;
                     classes.push('tag-sidewalk_right-' + sidewalkRight);
                 }
-                if (k === 'lcn') {
-                    classes.push('tag-lcn' + v);
-                }
                 /*if ((k === 'footway' || k === 'cycleway') && v === 'crossing') {
                     isCrossing = true;
                 }*/
@@ -286,7 +291,7 @@ export function svgTagClasses() {
                     hasName = true;
                     classes.push('tag-name-yes');
                 }
-                if (!ignoreMaxSpeed && k === 'maxspeed' && v >= 10 && v <= 130) {
+                if (!ignoreMaxSpeed && (k === 'maxspeed' || k === 'maxspeed:advisory') && v >= 10 && v <= 130) {
                     maxSpeed = v;
                 }
                 if (k === 'lanes' && v >= 1 && v <= 8) {

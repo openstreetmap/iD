@@ -76,5 +76,7 @@
   {"pID": "landuse/brownfield", "hidden" : true},
   {"pID": "landuse/flowerbed", "hidden" : true},
   {"pID": "building/farm_auxiliary", "hidden" : true},
-  {"pID": "routing_entrance_main", "hidden" : true}
+  {"pID": "routing_entrance_main", "hidden" : true},
+  {"pID": "natural/wood", "hidden" : true},
+  {"pID": "natural/tree", "hidden" : true}
 ]

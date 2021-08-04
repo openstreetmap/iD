@@ -13,7 +13,7 @@ export function uiToolAddFavorite(context) {
 
         var items = context.presets().getFavorites();
 
-        var precedingCount = context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
+        var precedingCount = 0; // custom kaligrafy: disable shortcuts for generics: context.storage('tool.add_generic.toggledOn') === 'true' ? 3 : 0;
 
         var indexModified = precedingCount;
         var usedKeyCodesWithoutModifier = [];

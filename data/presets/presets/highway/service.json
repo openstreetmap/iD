@@ -9,6 +9,8 @@
         "sidewalk/separate-right",
         "surface",
         "lanes",
+        "lanes_forward",
+        "lanes_backward",
         "maxspeed",
         "access",
         "structure"

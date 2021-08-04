@@ -22,9 +22,10 @@ export function uiToolAddGeneric(context) {
     tool.itemsToDraw = function() {
         if (context.presets().getAddable().length) return [];
         var items = context.presets().getGenericRibbonItems();
-        for (var i in items) {
+        // custom kaligrafy: disable shortcuts:
+        /*for (var i in items) {
             items[i].key = (parseInt(i, 10) + 1).toString();
-        }
+        }*/
         return items;
     };
 

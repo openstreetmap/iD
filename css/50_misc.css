@@ -327,13 +327,13 @@ path.line.stroke.tag-location-underwater {
 /* embankments / cuttings */
 path.line.shadow.tag-embankment,
 path.line.shadow.tag-cutting {
-    stroke-width: 28;
+    stroke-width: 20;
 }
 path.line.casing.tag-embankment,
 path.line.casing.tag-cutting {
     stroke-opacity: 0.5;
     stroke: #000;
-    stroke-width: 22;
+    stroke-width: 18;
     stroke-dasharray: 2, 4;
     stroke-linecap: butt;
 }
@@ -429,7 +429,6 @@ path.fill.tag-building {
     fill: rgba(224, 110, 95, 0.3);
 }
 
-
 path.stroke.tag-building-commercial, path.stroke.tag-building-retail {
     stroke: rgb(0, 26, 255);
 }
@@ -438,12 +437,36 @@ path.fill.tag-building-commercial, path.fill.tag-building-retail {
     stroke: rgba(0, 26, 255, 0.3);
 }
 
-path.stroke.tag-building-office {
+path.stroke.tag-building-office, path.stroke.tag-building-office-yes {
     stroke: rgb(206, 0, 65);
 }
 
-path.fill.tag-building-office {
+path.stroke.tag-building-public, path.stroke.tag-building-civic, path.stroke.tag-building-pavilion {
+    stroke: rgb(255, 89, 0);
+}
+
+path.stroke.tag-building-farm_auxiliary, path.stroke.tag-building-barn {
+    stroke: rgb(255, 196, 79);
+}
+
+path.stroke.tag-building-service {
+    stroke: rgb(75, 140, 150);
+}
+
+path.fill.tag-building-office, path.fill.tag-building-office-yes {
     stroke: rgba(255, 0, 81, 0.3);
+}
+
+path.fill.tag-building-public, path.fill.tag-building-civic, path.fill.tag-building-pavilion {
+    stroke: rgba(255, 89, 0, 0.3);
+}
+
+path.fill.tag-building-farm_auxiliary, path.fill.tag-building-barn {
+    stroke: rgba(255, 196, 79, 0.3);
+}
+
+path.fill.tag-building-service {
+    stroke: rgba(36, 97, 106, 0.3);
 }
 
 path.stroke.tag-building-industrial {

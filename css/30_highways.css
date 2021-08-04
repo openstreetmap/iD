@@ -560,6 +560,10 @@ path.line.casing.tag-highway-cycleway.tag-lcn-yes {
   /*stroke: rgb(146, 106, 255) !important;*/
 }
 
+/* cycleway marked crossing with foot */
+path.line.over-stroke.tag-highway-cycleway.tag-foot-designated, path.line.over-stroke.tag-highway-cycleway.tag-foot-yes {
+  stroke: none;
+}
 
 /* cycleways segregated and not segregated */
 path.line.stroke.tag-highway-cycleway.tag-segregated-yes {
@@ -808,6 +812,21 @@ path.over-stroke.tag-cycleway_right-shared_lane {
   stroke:  rgb(0, 174, 255);
 }
 
+/* bus designated/yes */
+path.over-stroke.tag-bus-designated,
+path.over-stroke.tag-bus-yes {
+  stroke-width: 2 !important;
+  stroke-dasharray: 4, 4;
+  stroke:  rgb(0, 106, 255);
+}
+
+
+/* busway/bus:lanes */
+path.over-stroke.tag-busway {
+  stroke-width: 2 !important;
+  stroke-dasharray: 10, 10;
+  stroke:  rgb(0, 106, 255);
+}
 
 /* foot/bicycle shared */
 path.over-stroke.tag-sidewalk-shared,
