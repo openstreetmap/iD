@@ -141,6 +141,10 @@ Object.assign(osmNode.prototype, {
         return utilArrayUniq(results);
     },
 
+    isCrossing: function(){
+        return this.tags.highway === 'crossing' ||
+               this.tags.railway && this.tags.railway.indexOf('crossing') !== -1;
+    },
 
     isEndpoint: function(resolver) {
         return resolver.transient(this, 'isEndpoint', function() {

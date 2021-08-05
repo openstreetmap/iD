@@ -721,7 +721,8 @@ export function validationCrossingWays(context) {
                             var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
                             var nearby = geoSphericalClosestNode(edgeNodes, loc);
                             // if there is already a suitable node nearby, use that
-                            if (!nearby.node.hasInterestingTags() && nearby.distance < mergeThresholdInMeters) {
+                            // use the node if node has no interesting tags or if it is a crossing node #8326
+                            if ((!nearby.node.hasInterestingTags() || nearby.node.isCrossing()) && nearby.distance < mergeThresholdInMeters) {
                                 nodesToMerge.push(nearby.node.id);
                             // else add the new node to the way
                             } else {
