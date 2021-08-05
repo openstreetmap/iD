@@ -170,7 +170,7 @@ export function uiSuccess(context) {
           // Resolve strings
           const localizer = (stringID) => t.html(`community.${stringID}`);
           resource.resolved = resolveStrings(resource, oci.defaults, localizer);
-          
+
           communities.push({
             area: area,
             order: resource.order || 0,
