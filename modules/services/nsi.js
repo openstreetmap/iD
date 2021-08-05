@@ -163,7 +163,7 @@ function loadNsiData() {
 // and fallbacks like
 //   "amenity/yes"
 // excluding things like
-//   "highway", "surface", "ref", etc.
+//   "tiger:reviewed", "surface", "ref", etc.
 //
 // Arguments
 //   `tags`: `Object` containing the feature's OSM tags
@@ -183,12 +183,12 @@ function gatherKVs(tags) {
     if (!osmvalue) return;
 
     const vmap = _nsi.kvt.get(osmkey);
-    if (!vmap) return;
+    if (!vmap) return;  // not an interesting key
 
-    if (osmvalue !== 'yes') {
-      primary.add(`${osmkey}/${osmvalue}`);
-    } else {
-      alternate.add(`${osmkey}/${osmvalue}`);
+    if (vmap.get(osmvalue)) {     // Matched a category in NSI
+      primary.add(`${osmkey}/${osmvalue}`);     // interesting key/value
+    } else if (osmvalue === 'yes') {
+      alternate.add(`${osmkey}/${osmvalue}`);   // fallback key/yes
     }
   });
 
