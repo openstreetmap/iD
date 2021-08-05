@@ -4,7 +4,7 @@ import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
-import { utilArrayChunk, utilArrayGroupBy, utilRebind } from '../util';
+import { utilArrayChunk, utilArrayGroupBy, utilEntityAndDeepMemberIDs, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
@@ -262,17 +262,47 @@ export function coreValidator(context) {
   //   `issue` - the issue to focus on
   //
   validator.focusIssue = (issue) => {
-    const extent = issue.extent(context.graph());
-    if (!extent) return;
+    const graph = context.graph();
+    let selectID;
+    let focusCenter;
 
-    const setZoom = Math.max(context.map().zoom(), 19);
-    context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
+    // Try to focus the map at the center of the issue..
+    const issueExtent = issue.extent(graph);
+    if (issueExtent) {
+      focusCenter = issueExtent.center();
+    }
 
-    // select the first entity
+    // Try to select the first entity in the issue..
     if (issue.entityIds && issue.entityIds.length) {
+      selectID = issue.entityIds[0];
+
+      // If a relation, focus on one of its members instead.
+      // Otherwise we might be focusing on a part of map where the relation is not visible.
+      if (selectID && selectID.charAt(0) === 'r') {   // relation
+        const ids = utilEntityAndDeepMemberIDs([selectID], graph);
+        let nodeID = ids.find(id => id.charAt(0) === 'n' && graph.hasEntity(id));
+
+        if (!nodeID) {  // relation has no downloaded nodes to focus on
+          const wayID = ids.find(id => id.charAt(0) === 'w' && graph.hasEntity(id));
+          if (wayID) {
+            nodeID = graph.entity(wayID).first();   // focus on the first node of this way
+          }
+        }
+
+        if (nodeID) {
+          focusCenter = graph.entity(nodeID).loc;
+        }
+      }
+    }
+
+    if (focusCenter) {  // Adjust the view
+      const setZoom = Math.max(context.map().zoom(), 19);
+      context.map().unobscuredCenterZoomEase(focusCenter, setZoom);
+    }
+
+    if (selectID) {  // Enter select mode
       window.setTimeout(() => {
-        let ids = issue.entityIds;
-        context.enter(modeSelect(context, [ids[0]]));
+        context.enter(modeSelect(context, [selectID]));
         dispatch.call('focusedIssue', this, issue);
       }, 250);  // after ease
     }
