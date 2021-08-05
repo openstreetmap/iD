@@ -176,14 +176,14 @@ export function coreValidator(context) {
   validator.getIssues = (options) => {
     const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
     const view = context.map().extent();
+    const baseGraph = context.history().base();
     let issues = [];
     let seen = new Set();
 
     // collect head issues - caused by user edits
-    let cache = _headCache;
-    if (_headGraph) {
-      Object.values(cache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, _headGraph, cache)) return;
+    if (_headGraph && _headGraph !== baseGraph) {
+      Object.values(_headCache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, _headGraph, _headCache)) return;
         seen.add(issue.id);
         issues.push(issue);
       });
@@ -191,9 +191,8 @@ export function coreValidator(context) {
 
     // collect base issues - not caused by user edits
     if (opts.what === 'all') {
-      cache = _baseCache;
-      Object.values(cache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, context.history().base(), cache)) return;
+      Object.values(_baseCache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, baseGraph, _baseCache)) return;
         seen.add(issue.id);
         issues.push(issue);
       });
