@@ -650,7 +650,7 @@ export function coreValidator(context) {
           checkParentRels.push(parentWay);
         });
 
-      } else if (entity.type === 'relation') {
+      } else if (entity.type === 'relation' && entity.isMultipolygon()) {
         entity.members.forEach(member => collected.add(member.id));  // collect members
 
       } else if (entity.type === 'way') {
@@ -662,7 +662,11 @@ export function coreValidator(context) {
 
       checkParentRels.forEach(entity => {    // collect parent relations
         if (entity.type !== 'relation') {    // but not super-relations
-          graph.parentRelations(entity).forEach(parentRelation => collected.add(parentRelation.id));
+          graph.parentRelations(entity).forEach(parentRelation => {
+            if (parentRelation.isMultipolygon()) {
+              collected.add(parentRelation.id);
+            }
+          });
         }
       });
     });
