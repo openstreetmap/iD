@@ -182,6 +182,9 @@ function gatherKVs(tags) {
     const osmvalue = tags[osmkey];
     if (!osmvalue) return;
 
+    // Match a 'route_master' as if it were a 'route' - name-suggestion-index#5184
+    if (osmkey === 'route_master') osmkey = 'route';
+
     const vmap = _nsi.kvt.get(osmkey);
     if (!vmap) return;  // not an interesting key
 
@@ -227,6 +230,9 @@ function identifyTree(tags) {
 
     const osmvalue = tags[osmkey];
     if (!osmvalue) return;
+
+    // Match a 'route_master' as if it were a 'route' - name-suggestion-index#5184
+    if (osmkey === 'route_master') osmkey = 'route';
 
     const vmap = _nsi.kvt.get(osmkey);
     if (!vmap) return;  // this key is not in nsi
@@ -427,6 +433,8 @@ function _upgradeTags(tags, loc) {
     }
   });
 
+  // Match a 'route_master' as if it were a 'route' - name-suggestion-index#5184
+  const isRouteMaster = (tags.type === 'route_master');
 
   // Gather key/value tag pairs to try to match
   const tryKVs = gatherKVs(tags);
@@ -520,6 +528,12 @@ function _upgradeTags(tags, loc) {
 
     // Do the tag upgrade
     Object.assign(newTags, item.tags, keepTags);
+
+    // Swap `route` back to `route_master` - name-suggestion-index#5184
+    if (isRouteMaster) {
+      newTags.route_master = newTags.route;
+      delete newTags.route;
+    }
 
     // Special `branch` splitting rules - IF..
     // - NSI is suggesting to replace `name`, AND
