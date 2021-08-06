@@ -118,10 +118,11 @@ export function validationOutdatedTags() {
           })
         ];
 
-        if (nsiResult && nsiResult.matched) {
+        const item = nsiResult && nsiResult.matched;
+        if (item) {
           fixes.push(
             new validationIssueFix({
-              title: t.html('issues.fix.tag_as_not.title', { name: nsiResult.matched.displayName }),
+              title: t.html('issues.fix.tag_as_not.title', { name: item.displayName }),
               onClick: (context) => {
                 context.perform(addNotTag, t('issues.fix.tag_as_not.annotation'));
               }
