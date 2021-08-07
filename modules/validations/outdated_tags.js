@@ -161,8 +161,16 @@ export function validationOutdatedTags() {
       if (!item) return graph;
 
       let newTags = Object.assign({}, currEntity.tags);  // shallow copy
-      const k = `not:${item.mainTag}`;
-      newTags[k] = item.tags[item.mainTag];
+      const wd = item.mainTag;     // e.g. `brand:wikidata`
+      const notwd = `not:${wd}`;   // e.g. `not:brand:wikidata`
+      const qid = item.tags[wd];
+      newTags[notwd] = qid;
+
+      if (newTags[wd] === qid) {   // if `brand:wikidata` was set to that qid
+        const wp = item.mainTag.replace('wikidata', 'wikipedia');
+        delete newTags[wd];        // remove `brand:wikidata`
+        delete newTags[wp];        // remove `brand:wikipedia`
+      }
 
       return actionChangeTags(currEntity.id, newTags)(graph);
     }
