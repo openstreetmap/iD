@@ -4,7 +4,7 @@ import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
-import { utilArrayChunk, utilArrayGroupBy, utilRebind } from '../util';
+import { utilArrayChunk, utilArrayGroupBy, utilEntityAndDeepMemberIDs, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
@@ -176,14 +176,14 @@ export function coreValidator(context) {
   validator.getIssues = (options) => {
     const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
     const view = context.map().extent();
+    const baseGraph = context.history().base();
     let issues = [];
     let seen = new Set();
 
     // collect head issues - caused by user edits
-    let cache = _headCache;
-    if (_headGraph) {
-      Object.values(cache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, _headGraph, cache)) return;
+    if (_headGraph && _headGraph !== baseGraph) {
+      Object.values(_headCache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, _headGraph, _headCache)) return;
         seen.add(issue.id);
         issues.push(issue);
       });
@@ -191,9 +191,8 @@ export function coreValidator(context) {
 
     // collect base issues - not caused by user edits
     if (opts.what === 'all') {
-      cache = _baseCache;
-      Object.values(cache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, context.history().base(), cache)) return;
+      Object.values(_baseCache.issuesByIssueID).forEach(issue => {
+        if (!filter(issue, baseGraph, _baseCache)) return;
         seen.add(issue.id);
         issues.push(issue);
       });
@@ -262,17 +261,47 @@ export function coreValidator(context) {
   //   `issue` - the issue to focus on
   //
   validator.focusIssue = (issue) => {
-    const extent = issue.extent(context.graph());
-    if (!extent) return;
+    const graph = context.graph();
+    let selectID;
+    let focusCenter;
 
-    const setZoom = Math.max(context.map().zoom(), 19);
-    context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
+    // Try to focus the map at the center of the issue..
+    const issueExtent = issue.extent(graph);
+    if (issueExtent) {
+      focusCenter = issueExtent.center();
+    }
 
-    // select the first entity
+    // Try to select the first entity in the issue..
     if (issue.entityIds && issue.entityIds.length) {
+      selectID = issue.entityIds[0];
+
+      // If a relation, focus on one of its members instead.
+      // Otherwise we might be focusing on a part of map where the relation is not visible.
+      if (selectID && selectID.charAt(0) === 'r') {   // relation
+        const ids = utilEntityAndDeepMemberIDs([selectID], graph);
+        let nodeID = ids.find(id => id.charAt(0) === 'n' && graph.hasEntity(id));
+
+        if (!nodeID) {  // relation has no downloaded nodes to focus on
+          const wayID = ids.find(id => id.charAt(0) === 'w' && graph.hasEntity(id));
+          if (wayID) {
+            nodeID = graph.entity(wayID).first();   // focus on the first node of this way
+          }
+        }
+
+        if (nodeID) {
+          focusCenter = graph.entity(nodeID).loc;
+        }
+      }
+    }
+
+    if (focusCenter) {  // Adjust the view
+      const setZoom = Math.max(context.map().zoom(), 19);
+      context.map().unobscuredCenterZoomEase(focusCenter, setZoom);
+    }
+
+    if (selectID) {  // Enter select mode
       window.setTimeout(() => {
-        let ids = issue.entityIds;
-        context.enter(modeSelect(context, [ids[0]]));
+        context.enter(modeSelect(context, [selectID]));
         dispatch.call('focusedIssue', this, issue);
       }, 250);  // after ease
     }
@@ -547,10 +576,11 @@ export function coreValidator(context) {
         return;
       }
 
-      const detected = fn(entity, graph).filter(applySeverityOverrides);
+      let detected = fn(entity, graph);
       if (detected.provisional) {  // this validation should be run again later
         result.provisional = true;
       }
+      detected = detected.filter(applySeverityOverrides);
       result.issues = result.issues.concat(detected);
     }
 
@@ -620,7 +650,7 @@ export function coreValidator(context) {
           checkParentRels.push(parentWay);
         });
 
-      } else if (entity.type === 'relation') {
+      } else if (entity.type === 'relation' && entity.isMultipolygon()) {
         entity.members.forEach(member => collected.add(member.id));  // collect members
 
       } else if (entity.type === 'way') {
@@ -632,7 +662,11 @@ export function coreValidator(context) {
 
       checkParentRels.forEach(entity => {    // collect parent relations
         if (entity.type !== 'relation') {    // but not super-relations
-          graph.parentRelations(entity).forEach(parentRelation => collected.add(parentRelation.id));
+          graph.parentRelations(entity).forEach(parentRelation => {
+            if (parentRelation.isMultipolygon()) {
+              collected.add(parentRelation.id);
+            }
+          });
         }
       });
     });
