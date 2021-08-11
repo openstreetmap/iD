@@ -40,7 +40,7 @@ describe('iD.modeAddNote', function() {
                 expect(iD.services.osm.caches().note.note[-1]).to.eql(note);
                 context.mode().exit();
                 d3.select('window').on('click.draw-block', null);
-                done()
+                done();
             }, 50);
         });
 
