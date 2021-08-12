@@ -5,7 +5,7 @@ import { text as d3_text } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import stringify from 'fast-json-stable-stringify';
-import toGeoJSON from '@mapbox/togeojson';
+import { gpx, kml } from '@tmcw/togeojson';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
@@ -324,10 +324,10 @@ export function svgData(projection, context, dispatch) {
         var gj;
         switch (extension) {
             case '.gpx':
-                gj = toGeoJSON.gpx(xmlToDom(data));
+                gj = gpx(xmlToDom(data));
                 break;
             case '.kml':
-                gj = toGeoJSON.kml(xmlToDom(data));
+                gj = kml(xmlToDom(data));
                 break;
             case '.geojson':
             case '.json':
