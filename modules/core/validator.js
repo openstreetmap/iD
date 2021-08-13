@@ -492,20 +492,24 @@ export function coreValidator(context) {
 
     // If we get here, its time to start validating stuff.
     _headCache.graph = currGraph;  // take snapshot
-    const difference = coreDifference(prevGraph, currGraph);
+    const incrementalDiff = coreDifference(prevGraph, currGraph);
+    const entityIDs = Object.keys(incrementalDiff.complete());
 
-    // Gather all entities related to this difference..
-    // For created/modified, use the head graph
-    let entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
-    entityIDs = entityIDsToValidate(entityIDs, currGraph);  // expand set
+    // const difference = coreDifference(prevGraph, currGraph);
 
-    // For modified/deleted, use the previous graph
-    // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-    let previousEntityIDs = difference.deleted().concat(difference.modified()).map(entity => entity.id);
-    previousEntityIDs = entityIDsToValidate(previousEntityIDs, prevGraph);
-    previousEntityIDs.forEach(entityIDs.add, entityIDs);   // concat the sets
+    // // Gather all entities related to this difference..
+    // // For created/modified, use the head graph
+    // let entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
+    // entityIDs = entityIDsToValidate(entityIDs, currGraph);  // expand set
 
-    if (!entityIDs.size) {
+    // // For modified/deleted, use the previous graph
+    // // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
+    // let previousEntityIDs = difference.deleted().concat(difference.modified()).map(entity => entity.id);
+    // previousEntityIDs = entityIDsToValidate(previousEntityIDs, prevGraph);
+    // previousEntityIDs.forEach(entityIDs.add, entityIDs);   // concat the sets
+
+    // if (!entityIDs.size) {
+    if (!entityIDs.length) {
       dispatch.call('validated');
       return Promise.resolve();
     }
@@ -554,8 +558,8 @@ export function coreValidator(context) {
       if (!_headCache.graph) _headCache.graph = baseGraph;
       if (!_baseCache.graph) _baseCache.graph = baseGraph;
 
-      let entityIDs = entities.map(entity => entity.id);
-      entityIDs = entityIDsToValidate(entityIDs, baseGraph);  // expand set
+      const entityIDs = entities.map(entity => entity.id);
+      // entityIDs = entityIDsToValidate(entityIDs, baseGraph);  // expand set
       validateEntitiesAsync(entityIDs, _baseCache);
     });
 
@@ -633,62 +637,62 @@ export function coreValidator(context) {
   }
 
 
-  // `entityIDsToValidate()`   (private)
-  // Collects the complete list of entityIDs related to the input entityIDs.
-  //
-  // Arguments
-  //   `entityIDs` - Set or Array containing entityIDs.
-  //   `graph` - graph containing the entities
-  //
-  // Returns
-  //   Set containing entityIDs
-  //
-  function entityIDsToValidate(entityIDs, graph) {
-    let seen = new Set();
-    let collected = new Set();
+  // // `entityIDsToValidate()`   (private)
+  // // Collects the complete list of entityIDs related to the input entityIDs.
+  // //
+  // // Arguments
+  // //   `entityIDs` - Set or Array containing entityIDs.
+  // //   `graph` - graph containing the entities
+  // //
+  // // Returns
+  // //   Set containing entityIDs
+  // //
+  // function entityIDsToValidate(entityIDs, graph) {
+  //   let seen = new Set();
+  //   let collected = new Set();
 
-    entityIDs.forEach(entityID => {
-      // keep `seen` separate from `collected` because an `entityID`
-      // could have been added to `collected` as a related entity through an earlier pass
-      if (seen.has(entityID)) return;
-      seen.add(entityID);
+  //   entityIDs.forEach(entityID => {
+  //     // keep `seen` separate from `collected` because an `entityID`
+  //     // could have been added to `collected` as a related entity through an earlier pass
+  //     if (seen.has(entityID)) return;
+  //     seen.add(entityID);
 
-      const entity = graph.hasEntity(entityID);
-      if (!entity) return;
+  //     const entity = graph.hasEntity(entityID);
+  //     if (!entity) return;
 
-      collected.add(entityID);   // collect self
+  //     collected.add(entityID);   // collect self
 
-      let checkParentRels = [entity];
+  //     let checkParentRels = [entity];
 
-      if (entity.type === 'node') {
-        graph.parentWays(entity).forEach(parentWay => {
-          collected.add(parentWay.id);    // collect parent ways
-          checkParentRels.push(parentWay);
-        });
+  //     if (entity.type === 'node') {
+  //       graph.parentWays(entity).forEach(parentWay => {
+  //         collected.add(parentWay.id);    // collect parent ways
+  //         checkParentRels.push(parentWay);
+  //       });
 
-      } else if (entity.type === 'relation' && entity.isMultipolygon()) {
-        entity.members.forEach(member => collected.add(member.id));  // collect members
+  //     } else if (entity.type === 'relation' && entity.isMultipolygon()) {
+  //       entity.members.forEach(member => collected.add(member.id));  // collect members
 
-      } else if (entity.type === 'way') {
-        entity.nodes.forEach(nodeID => {
-          collected.add(nodeID);    // collect child nodes
-          graph._parentWays[nodeID].forEach(wayID => collected.add(wayID));  // collect connected ways
-        });
-      }
+  //     } else if (entity.type === 'way') {
+  //       entity.nodes.forEach(nodeID => {
+  //         collected.add(nodeID);    // collect child nodes
+  //         graph._parentWays[nodeID].forEach(wayID => collected.add(wayID));  // collect connected ways
+  //       });
+  //     }
 
-      checkParentRels.forEach(entity => {    // collect parent relations
-        if (entity.type !== 'relation') {    // but not super-relations
-          graph.parentRelations(entity).forEach(parentRelation => {
-            if (parentRelation.isMultipolygon()) {
-              collected.add(parentRelation.id);
-            }
-          });
-        }
-      });
-    });
+  //     checkParentRels.forEach(entity => {    // collect parent relations
+  //       if (entity.type !== 'relation') {    // but not super-relations
+  //         graph.parentRelations(entity).forEach(parentRelation => {
+  //           if (parentRelation.isMultipolygon()) {
+  //             collected.add(parentRelation.id);
+  //           }
+  //         });
+  //       }
+  //     });
+  //   });
 
-    return collected;
-  }
+  //   return collected;
+  // }
 
 
   // `updateResolvedIssues()`   (private)
@@ -696,9 +700,10 @@ export function coreValidator(context) {
   // This is called by `validate()` after validation of the head graph
   //
   // Arguments
-  //   `entityIDs` - Set containing entity IDs.
+  //   `entityIDs` - Array containing entity IDs.
   //
   function updateResolvedIssues(entityIDs) {
+    // If the issue is in the base and not in the head, we give the user credit for fixing it.
     entityIDs.forEach(entityID => {
       const headIssues = _headCache.issuesByEntityID[entityID];
       const baseIssues = _baseCache.issuesByEntityID[entityID];
@@ -719,7 +724,7 @@ export function coreValidator(context) {
   // Schedule validation for many entities.
   //
   // Arguments
-  //   `entityIDs` - Set containing entity IDs.
+  //   `entityIDs` - Array containing entity IDs.
   //   `graph` - the graph to validate that contains those entities
   //   `cache` - the cache to store results in (_headCache or _baseCache)
   //
@@ -729,7 +734,7 @@ export function coreValidator(context) {
   //
   function validateEntitiesAsync(entityIDs, cache) {
     // Enqueue the work
-    const jobs = Array.from(entityIDs).map(entityID => {
+    const jobs = entityIDs.map(entityID => {
       if (cache.queuedEntityIDs.has(entityID)) return null;  // queued already
       cache.queuedEntityIDs.add(entityID);
 
@@ -786,7 +791,7 @@ export function coreValidator(context) {
     const handle = window.setTimeout(() => {
       _deferredST.delete(handle);
       if (!cache.provisionalEntityIDs.size) return;  // nothing to do
-      validateEntitiesAsync(cache.provisionalEntityIDs, cache);
+      validateEntitiesAsync(Array.from(cache.provisionalEntityIDs), cache);
     }, RETRY);
 
     _deferredST.add(handle);
