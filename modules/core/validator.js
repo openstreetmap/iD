@@ -239,22 +239,17 @@ export function coreValidator(context) {
 
   // `getResolvedIssues()`
   // Gets the issues that have been fixed by the user.
-  // Resolved issues are tracked in the `_resolvedIssueIDs` Set
+  //
+  // Resolved issues are tracked in the `_resolvedIssueIDs` Set,
+  // and they should all be issues that exist in the _baseCache.
   //
   // Returns
   //   An Array containing the issues
   //
   validator.getResolvedIssues = () => {
-    let collected = new Set();
-
-    Object.values(_baseCache.issuesByIssueID).forEach(issue => {
-      if (_resolvedIssueIDs.has(issue.id)) collected.add(issue);
-    });
-    Object.values(_headCache.issuesByIssueID).forEach(issue => {
-      if (_resolvedIssueIDs.has(issue.id)) collected.add(issue);
-    });
-
-    return Array.from(collected);
+    return Array.from(_resolvedIssueIDs)
+      .map(issueID => _baseCache.issuesByIssueID[issueID])
+      .filter(Boolean);
   };
 
 
@@ -627,22 +622,25 @@ export function coreValidator(context) {
   // `updateResolvedIssues()`   (private)
   // Determine if any issues were resolved for the given entities.
   // This is called by `validate()` after validation of the head graph
+  // Give the user credit for fixing an issue if:
+  // - the issue is in the base cache
+  // - the issue is not in the head cache
+  // - the user did something to that entity
   //
   // Arguments
   //   `entityIDs` - Array containing entity IDs.
   //
   function updateResolvedIssues(entityIDs) {
-    // If the issue is in the base and not in the head, we give the user credit for fixing it.
     entityIDs.forEach(entityID => {
-      const headIssues = _headCache.issuesByEntityID[entityID];
       const baseIssues = _baseCache.issuesByEntityID[entityID];
       if (!baseIssues) return;
 
+      const userModified = _completeDiff.hasOwnProperty(entityID);
       baseIssues.forEach(issueID => {
-        if (headIssues && headIssues.has(issueID)) {   // issue still not resolved
-          _resolvedIssueIDs.delete(issueID);           // (did undo, or possibly fixed and then re-caused the issue)
-        } else {
+        if (userModified && !_headCache.issuesByIssueID[issueID]) {
           _resolvedIssueIDs.add(issueID);
+        } else {                              // issue still not resolved
+          _resolvedIssueIDs.delete(issueID);  // (did undo, or possibly fixed and then re-caused the issue)
         }
       });
     });
@@ -789,7 +787,7 @@ function validationCache(which) {
     queuedEntityIDs: new Set(),
     provisionalEntityIDs: new Set(),
     issuesByIssueID: {},  // issue.id -> issue
-    issuesByEntityID: {}  // entity.id -> set(issue.id)
+    issuesByEntityID: {}  // entity.id -> Set(issue.id)
   };
 
   cache.cacheIssues = (issues) => {
