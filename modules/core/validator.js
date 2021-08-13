@@ -19,6 +19,7 @@ export function coreValidator(context) {
   let _resolvedIssueIDs = new Set();
   let _baseCache = validationCache('base');   // issues before any user edits
   let _headCache = validationCache('head');   // issues after all user edits
+  let _completeDiff = {};                     // complete diff base -> head of what the user changed
   let _headIsCurrent = false;
 
   let _deferredRIC = new Set();   // Set( RequestIdleCallback handles )
@@ -114,6 +115,7 @@ export function coreValidator(context) {
     _resolvedIssueIDs.clear();
     _baseCache = validationCache('base');
     _headCache = validationCache('head');
+    _completeDiff = {};
     _headIsCurrent = false;
   }
 
@@ -492,6 +494,7 @@ export function coreValidator(context) {
 
     // If we get here, its time to start validating stuff.
     _headCache.graph = currGraph;  // take snapshot
+    _completeDiff = context.history().difference().complete();
     const incrementalDiff = coreDifference(prevGraph, currGraph);
     const entityIDs = Object.keys(incrementalDiff.complete());
 
@@ -749,11 +752,17 @@ export function coreValidator(context) {
         const entity = graph.hasEntity(entityID);   // Sanity check: don't validate deleted entities
         if (!entity) return;
 
+        // In the head cache, only validate features that the user is responsible for - #8632
+        // For example, a user can undo some work and an issue will still present in the
+        // head graph, but we don't want to credit the user for causing that issue.
+        if (cache.which === 'head' && !_completeDiff.hasOwnProperty(entityID)) return;
+
         // detect new issues and update caches
         const result = validateEntity(entity, graph);
         if (result.provisional) {                       // provisional result
           cache.provisionalEntityIDs.add(entityID);     // we'll need to revalidate this entity again later
         }
+
         cache.cacheIssues(result.issues);   // update cache
       };
 
