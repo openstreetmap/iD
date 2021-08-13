@@ -8,7 +8,7 @@ import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersectio
 import { osmNode } from '../osm/node';
 import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel, utilHashcode } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -395,6 +395,11 @@ export function validationCrossingWays(context) {
             crossingTypeID += '_connectable';
         }
 
+        // include crossing point, edges (sorted for determinism), and connection tags
+        var uniqueID = crossing.crossPoint.toString() +
+            edges.slice().sort(function(edge1, edge2) { return edge1[0] < edge2[0] ? -1 : 1; }).toString() +
+            JSON.stringify(connectionTags);
+
         return new validationIssue({
             type: type,
             subtype: subtype,
@@ -418,14 +423,7 @@ export function validationCrossingWays(context) {
                 connectionTags: connectionTags
             },
             // differentiate based on the loc since two ways can cross multiple times
-            hash: crossing.crossPoint.toString() +
-                // if the edges change then so does the fix
-                edges.slice().sort(function(edge1, edge2) {
-                    // order to assure hash is deterministic
-                    return edge1[0] < edge2[0] ? -1 : 1;
-                }).toString() +
-                // ensure the correct connection tags are added in the fix
-                JSON.stringify(connectionTags),
+            hash: utilHashcode(uniqueID),
             loc: crossing.crossPoint,
             dynamicFixes: function(context) {
                 var mode = context.mode();
