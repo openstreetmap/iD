@@ -622,10 +622,11 @@ export function coreValidator(context) {
   // `updateResolvedIssues()`   (private)
   // Determine if any issues were resolved for the given entities.
   // This is called by `validate()` after validation of the head graph
+  //
   // Give the user credit for fixing an issue if:
   // - the issue is in the base cache
   // - the issue is not in the head cache
-  // - the user did something to that entity
+  // - the user did something to one of the entities involved in the issue
   //
   // Arguments
   //   `entityIDs` - Array containing entity IDs.
@@ -635,9 +636,13 @@ export function coreValidator(context) {
       const baseIssues = _baseCache.issuesByEntityID[entityID];
       if (!baseIssues) return;
 
-      const userModified = _completeDiff.hasOwnProperty(entityID);
       baseIssues.forEach(issueID => {
-        if (userModified && !_headCache.issuesByIssueID[issueID]) {
+        // Check if the user did something to one of the entities involved in this issue.
+        // (This issue could involve multiple entities, e.g. disconnected routable features)
+        const issue = _baseCache.issuesByIssueID[issueID];
+        const userModified = (issue.entityIds || []).some(id => _completeDiff.hasOwnProperty(id));
+
+        if (userModified && !_headCache.issuesByIssueID[issueID]) {  // issue seems fixed
           _resolvedIssueIDs.add(issueID);
         } else {                              // issue still not resolved
           _resolvedIssueIDs.delete(issueID);  // (did undo, or possibly fixed and then re-caused the issue)
