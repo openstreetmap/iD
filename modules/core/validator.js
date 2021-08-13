@@ -186,33 +186,35 @@ export function coreValidator(context) {
   validator.getIssues = (options) => {
     const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
     const view = context.map().extent();
-    let issues = [];
     let seen = new Set();
+    let results = [];
 
     // collect head issues - caused by user edits
     if (_headCache.graph && _headCache.graph !== _baseCache.graph) {
       Object.values(_headCache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, _headCache)) return;
+        if (!filter(issue)) return;
         seen.add(issue.id);
-        issues.push(issue);
+        results.push(issue);
       });
     }
 
     // collect base issues - not caused by user edits
     if (opts.what === 'all') {
       Object.values(_baseCache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, _baseCache)) return;
+        if (!filter(issue)) return;
         seen.add(issue.id);
-        issues.push(issue);
+        results.push(issue);
       });
     }
 
-    return issues;
+    return results;
 
 
-    function filter(issue, cache) {
+    // Filter the issue set to include only what the calling code wants to see.
+    // Note that we use `context.graph()`/`context.hasEntity()` here, not `cache.graph`,
+    // because that is the graph that the calling code will be using.
+    function filter(issue) {
       if (!issue) return false;
-      if (!cache.graph) return false;
       if (seen.has(issue.id)) return false;
       if (_resolvedIssueIDs.has(issue.id)) return false;
       if (opts.includeDisabledRules === 'only' && !_disabledRules[issue.type]) return false;
@@ -221,19 +223,12 @@ export function coreValidator(context) {
       if (opts.includeIgnored === 'only' && !_ignoredIssueIDs.has(issue.id)) return false;
       if (!opts.includeIgnored && _ignoredIssueIDs.has(issue.id)) return false;
 
-      // Sanity check:  This issue may be for an entity that not longer exists.
-      // If we detect this, uncache and return false so it is not included..
-      const entityIDs = issue.entityIds || [];
-      for (let i = 0; i < entityIDs.length; i++) {
-        const entityID = entityIDs[i];
-        if (!cache.graph.hasEntity(entityID)) {
-          cache.uncacheEntityID(entityID);
-          return false;
-        }
-      }
+      // This issue may involve an entity that doesn't exist in context.graph()
+      // This can happen because validation is async and rendering the issue lists is async.
+      if ((issue.entityIds || []).some(id => !context.hasEntity(id))) return false;
 
       if (opts.where === 'visible') {
-        const extent = issue.extent(cache.graph);
+        const extent = issue.extent(context.graph());
         if (!view.intersects(extent)) return false;
       }
 
@@ -271,6 +266,8 @@ export function coreValidator(context) {
   //   `issue` - the issue to focus on
   //
   validator.focusIssue = (issue) => {
+    // Note that we use `context.graph()`/`context.hasEntity()` here, not `cache.graph`,
+    // because that is the graph that the calling code will be using.
     const graph = context.graph();
     let selectID;
     let focusCenter;
