@@ -495,19 +495,6 @@ export function coreValidator(context) {
     const incrementalDiff = coreDifference(prevGraph, currGraph);
     const entityIDs = Object.keys(incrementalDiff.complete());
 
-    // const difference = coreDifference(prevGraph, currGraph);
-
-    // // Gather all entities related to this difference..
-    // // For created/modified, use the head graph
-    // let entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
-    // entityIDs = entityIDsToValidate(entityIDs, currGraph);  // expand set
-
-    // // For modified/deleted, use the previous graph
-    // // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-    // let previousEntityIDs = difference.deleted().concat(difference.modified()).map(entity => entity.id);
-    // previousEntityIDs = entityIDsToValidate(previousEntityIDs, prevGraph);
-    // previousEntityIDs.forEach(entityIDs.add, entityIDs);   // concat the sets
-
     // if (!entityIDs.size) {
     if (!entityIDs.length) {
       dispatch.call('validated');
@@ -635,64 +622,6 @@ export function coreValidator(context) {
       }
     }
   }
-
-
-  // // `entityIDsToValidate()`   (private)
-  // // Collects the complete list of entityIDs related to the input entityIDs.
-  // //
-  // // Arguments
-  // //   `entityIDs` - Set or Array containing entityIDs.
-  // //   `graph` - graph containing the entities
-  // //
-  // // Returns
-  // //   Set containing entityIDs
-  // //
-  // function entityIDsToValidate(entityIDs, graph) {
-  //   let seen = new Set();
-  //   let collected = new Set();
-
-  //   entityIDs.forEach(entityID => {
-  //     // keep `seen` separate from `collected` because an `entityID`
-  //     // could have been added to `collected` as a related entity through an earlier pass
-  //     if (seen.has(entityID)) return;
-  //     seen.add(entityID);
-
-  //     const entity = graph.hasEntity(entityID);
-  //     if (!entity) return;
-
-  //     collected.add(entityID);   // collect self
-
-  //     let checkParentRels = [entity];
-
-  //     if (entity.type === 'node') {
-  //       graph.parentWays(entity).forEach(parentWay => {
-  //         collected.add(parentWay.id);    // collect parent ways
-  //         checkParentRels.push(parentWay);
-  //       });
-
-  //     } else if (entity.type === 'relation' && entity.isMultipolygon()) {
-  //       entity.members.forEach(member => collected.add(member.id));  // collect members
-
-  //     } else if (entity.type === 'way') {
-  //       entity.nodes.forEach(nodeID => {
-  //         collected.add(nodeID);    // collect child nodes
-  //         graph._parentWays[nodeID].forEach(wayID => collected.add(wayID));  // collect connected ways
-  //       });
-  //     }
-
-  //     checkParentRels.forEach(entity => {    // collect parent relations
-  //       if (entity.type !== 'relation') {    // but not super-relations
-  //         graph.parentRelations(entity).forEach(parentRelation => {
-  //           if (parentRelation.isMultipolygon()) {
-  //             collected.add(parentRelation.id);
-  //           }
-  //         });
-  //       }
-  //     });
-  //   });
-
-  //   return collected;
-  // }
 
 
   // `updateResolvedIssues()`   (private)
