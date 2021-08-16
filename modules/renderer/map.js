@@ -587,8 +587,15 @@ export function rendererMap(context) {
             .range([17, 18.5, 17])
             .clamp(true);
 
+        var highzoom = d3_scaleLinear()
+            .domain([-60, 0, 60])
+            .range([19.5, 19.5, 19.5])
+            .clamp(true);
+
         surface
             .classed('low-zoom', zoom <= lowzoom(lat));
+        surface
+            .classed('high-zoom', zoom >= highzoom(lat));
 
 
         if (!difference) {
