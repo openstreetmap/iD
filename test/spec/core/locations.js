@@ -62,8 +62,8 @@ describe('iD.coreLocations', function() {
             prom
                 .then(function(data) {
                     expect(data).to.be.a('array');
-                    expect(data[0]).locationSetID.to.eql('+[Q2]');
-                    expect(data[1]).locationSetID.to.eql('+[Q30]');
+                    expect(data[0].locationSetID).to.eql('+[Q2]');
+                    expect(data[1].locationSetID).to.eql('+[Q30]');
                 })
                 .finally(done);
 
@@ -79,8 +79,8 @@ describe('iD.coreLocations', function() {
             prom
                 .then(function(data) {
                     expect(data).to.be.a('array');
-                    expect(data[0]).locationSetID.to.eql('+[Q2]');
-                    expect(data[1]).locationSetID.to.eql('+[Q2]');
+                    expect(data[0].locationSetID).to.eql('+[Q2]');
+                    expect(data[1].locationSetID).to.eql('+[Q2]');
                 })
                 .finally(done);
 
