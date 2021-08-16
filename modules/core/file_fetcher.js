@@ -1,4 +1,3 @@
-import { utilFetchJson } from '../util/util';
 import parseVersion from 'vparse';
 // Double check this resolves to iD's `package.json`
 import packageJSON from '../../package.json';
@@ -60,7 +59,15 @@ export function coreFileFetcher() {
 
     let prom = _inflight[url];
     if (!prom) {
-      _inflight[url] = prom = utilFetchJson(url)
+      _inflight[url] = prom = fetch(url)
+        .then(response => {
+          // fetch in PhantomJS tests may return ok=false and status=0 even if it's okay
+          if ((!response.ok && response.status !== 0) || !response.json) {
+            throw new Error(response.status + ' ' + response.statusText);
+          }
+          if (response.status === 204 || response.status === 205) return;  // No Content, Reset Content
+          return response.json();
+        })
         .then(result => {
           delete _inflight[url];
           if (!result) {
