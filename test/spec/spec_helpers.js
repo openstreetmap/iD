@@ -6,30 +6,90 @@ iD.debug = true;
 for (var k in iD.services) { delete iD.services[k]; }
 
 // Run without data for speed (tests which need data can set it up themselves)
-
 iD.fileFetcher.assetPath('../dist/');
+var cached = iD.fileFetcher.cache();
 
 // Initializing `coreContext` will try loading the locale data and English locale strings:
-iD.fileFetcher.cache().locales = { en: { rtl: false, pct: 1}};
-iD.fileFetcher.cache().locales_index_tagging = { en: { rtl: false, pct: 1 } };
-iD.fileFetcher.cache().locale_tagging_en = { en: {} };
-iD.fileFetcher.cache().locales_index_general = { en: { rtl: false, pct: 1 } };
-// load the actual data for `iD.fileFetcher.cache().locale_general_en`
+cached.locales = { en: { rtl: false, pct: 1 } };
+cached.locales_index_general = { en: { rtl: false, pct: 1 } };
+cached.locales_index_tagging = { en: { rtl: false, pct: 1 } };
+
+// Use fake data for the 'tagging' scope
+cached.locale_tagging_en = {
+  en: {
+    presets: {
+      fields: {
+        restrictions: {
+          label: 'Turn Restrictions'
+        },
+        access: {
+          label: 'Allowed Access',
+          placeholder: 'Not Specified',
+          types: {
+            access: 'All',
+            foot: 'Foot',
+            motor_vehicle: 'Motor Vehicles',
+            bicycle: 'Bicycles',
+            horse: 'Horses'
+          },
+          options: {
+            yes: {
+              title: 'Allowed',
+              description: 'Access allowed by law; a right of way'
+            },
+            no: {
+              title: 'Prohibited',
+              description: 'Access not allowed to the general public'
+            },
+            permissive: {
+              title: 'Permissive',
+              description: 'Access allowed until such time as the owner revokes the permission'
+            },
+            private: {
+              title: 'Private',
+              description: 'Access allowed only with permission of the owner on an individual basis'
+            },
+            designated: {
+              title: 'Designated',
+              description: 'Access allowed according to signs or specific local laws'
+            },
+            destination: {
+              title: 'Destination',
+              description: 'Access allowed only to reach a destination'
+            },
+            dismount: {
+              title: 'Dismount',
+              description: 'Access allowed but rider must dismount'
+            },
+            permit: {
+              title: 'Permit',
+              description: 'Access allowed only with a valid permit or license'
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+// Load the actual data from `dist/locales/` for the 'general' scope
 iD.localizer.loadLocale('en', 'general', 'locales');
+// Load the fake data seeded above for the 'tagging' scope
+iD.localizer.loadLocale('en', 'tagging');
+
 
 // Initializing `coreContext` initializes `_background`, which tries loading:
-iD.fileFetcher.cache().imagery = [];
+cached.imagery = [];
 // Initializing `coreContext` initializes `_presets`, which tries loading:
-iD.fileFetcher.cache().preset_categories = {};
-iD.fileFetcher.cache().preset_defaults = {};
-iD.fileFetcher.cache().preset_fields = {};
-iD.fileFetcher.cache().preset_presets = {};
-
+cached.preset_categories = {};
+cached.preset_defaults = {};
+cached.preset_fields = {};
+cached.preset_presets = {};
 // Initializing `coreContext` initializes `_validator`, which tries loading:
-iD.fileFetcher.cache().deprecated = [];
-
+cached.deprecated = [];
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
-iD.fileFetcher.cache().discarded = {};
+cached.discarded = {};
+
 
 mocha.setup({
     timeout: 5000,  // 5 sec
