@@ -17,9 +17,9 @@ export function coreValidator(context) {
 
   let _ignoredIssueIDs = new Set();
   let _resolvedIssueIDs = new Set();
-  let _baseCache = validationCache();  // issues before any user edits
-  let _headCache = validationCache();  // issues after all user edits
-  let _headGraph = null;
+  let _baseCache = validationCache('base');   // issues before any user edits
+  let _headCache = validationCache('head');   // issues after all user edits
+  let _completeDiff = {};                     // complete diff base -> head of what the user changed
   let _headIsCurrent = false;
 
   let _deferredRIC = new Set();   // Set( RequestIdleCallback handles )
@@ -28,7 +28,10 @@ export function coreValidator(context) {
 
   const RETRY = 5000;             // wait 5sec before revalidating provisional entities
 
+
   // Allow validation severity to be overridden by url queryparams...
+  // See: https://github.com/openstreetmap/iD/pull/8243
+  //
   // Each param should contain a urlencoded comma separated list of
   // `type/subtype` rules.  `*` may be used as a wildcard..
   // Examples:
@@ -37,31 +40,38 @@ export function coreValidator(context) {
   //  `validationError=crossing_ways/bridge*`
   //  `validationError=crossing_ways/bridge*,crossing_ways/tunnel*`
 
-  var _errorOverrides = parseHashParam(context.initialHashParams.validationError);
-  var _warningOverrides = parseHashParam(context.initialHashParams.validationWarning);
-  var _disableOverrides = parseHashParam(context.initialHashParams.validationDisable);
+  const _errorOverrides = parseHashParam(context.initialHashParams.validationError);
+  const _warningOverrides = parseHashParam(context.initialHashParams.validationWarning);
+  const _disableOverrides = parseHashParam(context.initialHashParams.validationDisable);
 
+  // `parseHashParam()`   (private)
+  // Checks hash parameters for severity overrides
+  // Arguments
+  //   `param` - a url hash parameter (`validationError`, `validationWarning`, or `validationDisable`)
+  // Returns
+  //   Array of Objects like { type: RegExp, subtype: RegExp }
+  //
   function parseHashParam(param) {
-    var result = [];
-    var rules = (param || '').split(',');
-    rules.forEach(function (rule) {
+    let result = [];
+    let rules = (param || '').split(',');
+    rules.forEach(rule => {
       rule = rule.trim();
-      var parts = rule.split('/', 2);  // "type/subtype"
-      var type = parts[0];
-      var subtype = parts[1] || '*';
+      const parts = rule.split('/', 2);  // "type/subtype"
+      const type = parts[0];
+      const subtype = parts[1] || '*';
       if (!type || !subtype) return;
-
       result.push({ type: makeRegExp(type), subtype: makeRegExp(subtype) });
     });
     return result;
+
+    function makeRegExp(str) {
+      const escaped = str
+        .replace(/[-\/\\^$+?.()|[\]{}]/g, '\\$&')   // escape all reserved chars except for the '*'
+        .replace(/\*/g, '.*');                      // treat a '*' like '.*'
+      return new RegExp('^' + escaped + '$');
+    }
   }
 
-  function makeRegExp(str) {
-    var escaped = str
-      .replace(/[-\/\\^$+?.()|[\]{}]/g, '\\$&')   // escape all reserved chars except for the '*'
-      .replace(/\*/g, '.*');                      // treat a '*' like '.*'
-    return new RegExp('^' + escaped + '$');
-  }
 
   // `init()`
   // Initialize the validator, called once on iD startup
@@ -103,9 +113,9 @@ export function coreValidator(context) {
     // clear caches
     if (resetIgnored) _ignoredIssueIDs.clear();
     _resolvedIssueIDs.clear();
-    _baseCache = validationCache();
-    _headCache = validationCache();
-    _headGraph = null;
+    _baseCache = validationCache('base');
+    _headCache = validationCache('head');
+    _completeDiff = {};
     _headIsCurrent = false;
   }
 
@@ -133,24 +143,24 @@ export function coreValidator(context) {
   // It reruns just the "unsquare_way" validation on all buildings.
   //
   validator.revalidateUnsquare = () => {
-    revalidateUnsquare(_headCache, _headGraph);
-    revalidateUnsquare(_baseCache, context.history().base());
+    revalidateUnsquare(_headCache);
+    revalidateUnsquare(_baseCache);
     dispatch.call('validated');
   };
 
-  function revalidateUnsquare(cache, graph) {
+  function revalidateUnsquare(cache) {
     const checkUnsquareWay = _rules.unsquare_way;
-    if (!graph || typeof checkUnsquareWay !== 'function') return;
+    if (!cache.graph || typeof checkUnsquareWay !== 'function') return;
 
     // uncache existing
     cache.uncacheIssuesOfType('unsquare_way');
 
-    const buildings = context.history().tree().intersects(geoExtent([-180,-90],[180, 90]), graph)  // everywhere
+    const buildings = context.history().tree().intersects(geoExtent([-180,-90],[180, 90]), cache.graph)  // everywhere
       .filter(entity => (entity.type === 'way' && entity.tags.building && entity.tags.building !== 'no'));
 
     // rerun for all buildings
     buildings.forEach(entity => {
-      const detected = checkUnsquareWay(entity, graph);
+      const detected = checkUnsquareWay(entity, cache.graph);
       if (!detected.length) return;
       cache.cacheIssues(detected);
     });
@@ -176,32 +186,34 @@ export function coreValidator(context) {
   validator.getIssues = (options) => {
     const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
     const view = context.map().extent();
-    const baseGraph = context.history().base();
-    let issues = [];
     let seen = new Set();
+    let results = [];
 
     // collect head issues - caused by user edits
-    if (_headGraph && _headGraph !== baseGraph) {
+    if (_headCache.graph && _headCache.graph !== _baseCache.graph) {
       Object.values(_headCache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, _headGraph, _headCache)) return;
+        if (!filter(issue)) return;
         seen.add(issue.id);
-        issues.push(issue);
+        results.push(issue);
       });
     }
 
     // collect base issues - not caused by user edits
     if (opts.what === 'all') {
       Object.values(_baseCache.issuesByIssueID).forEach(issue => {
-        if (!filter(issue, baseGraph, _baseCache)) return;
+        if (!filter(issue)) return;
         seen.add(issue.id);
-        issues.push(issue);
+        results.push(issue);
       });
     }
 
-    return issues;
+    return results;
 
 
-    function filter(issue, resolver, cache) {
+    // Filter the issue set to include only what the calling code wants to see.
+    // Note that we use `context.graph()`/`context.hasEntity()` here, not `cache.graph`,
+    // because that is the graph that the calling code will be using.
+    function filter(issue) {
       if (!issue) return false;
       if (seen.has(issue.id)) return false;
       if (_resolvedIssueIDs.has(issue.id)) return false;
@@ -211,19 +223,12 @@ export function coreValidator(context) {
       if (opts.includeIgnored === 'only' && !_ignoredIssueIDs.has(issue.id)) return false;
       if (!opts.includeIgnored && _ignoredIssueIDs.has(issue.id)) return false;
 
-      // Sanity check:  This issue may be for an entity that not longer exists.
-      // If we detect this, uncache and return false so it is not included..
-      const entityIDs = issue.entityIds || [];
-      for (let i = 0; i < entityIDs.length; i++) {
-        const entityID = entityIDs[i];
-        if (!resolver.hasEntity(entityID)) {
-          cache.uncacheEntityID(entityID);
-          return false;
-        }
-      }
+      // This issue may involve an entity that doesn't exist in context.graph()
+      // This can happen because validation is async and rendering the issue lists is async.
+      if ((issue.entityIds || []).some(id => !context.hasEntity(id))) return false;
 
       if (opts.where === 'visible') {
-        const extent = issue.extent(resolver);
+        const extent = issue.extent(context.graph());
         if (!view.intersects(extent)) return false;
       }
 
@@ -234,22 +239,17 @@ export function coreValidator(context) {
 
   // `getResolvedIssues()`
   // Gets the issues that have been fixed by the user.
-  // Resolved issues are tracked in the `_resolvedIssueIDs` Set
+  //
+  // Resolved issues are tracked in the `_resolvedIssueIDs` Set,
+  // and they should all be issues that exist in the _baseCache.
   //
   // Returns
   //   An Array containing the issues
   //
   validator.getResolvedIssues = () => {
-    let collected = new Set();
-
-    Object.values(_baseCache.issuesByIssueID).forEach(issue => {
-      if (_resolvedIssueIDs.has(issue.id)) collected.add(issue);
-    });
-    Object.values(_headCache.issuesByIssueID).forEach(issue => {
-      if (_resolvedIssueIDs.has(issue.id)) collected.add(issue);
-    });
-
-    return Array.from(collected);
+    return Array.from(_resolvedIssueIDs)
+      .map(issueID => _baseCache.issuesByIssueID[issueID])
+      .filter(Boolean);
   };
 
 
@@ -261,6 +261,8 @@ export function coreValidator(context) {
   //   `issue` - the issue to focus on
   //
   validator.focusIssue = (issue) => {
+    // Note that we use `context.graph()`/`context.hasEntity()` here, not `cache.graph`,
+    // because that is the graph that the calling code will be using.
     const graph = context.graph();
     let selectID;
     let focusCenter;
@@ -341,16 +343,11 @@ export function coreValidator(context) {
   //   An Array containing the issues
   //
   validator.getSharedEntityIssues = (entityIDs, options) => {
-    // show some issue types in a particular order
-    const orderedIssueTypes = [
-      // flag missing data first
-      'missing_tag', 'missing_role',
-      // then flag identity issues
-      'outdated_tags', 'mismatched_geometry',
-      // flag geometry issues where fixing them might solve connectivity issues
-      'crossing_ways', 'almost_junction',
-      // then flag connectivity issues
-      'disconnected_way', 'impossible_oneway'
+    const orderedIssueTypes = [                 // Show some issue types in a particular order:
+      'missing_tag', 'missing_role',            // - missing data first
+      'outdated_tags', 'mismatched_geometry',   // - identity issues
+      'crossing_ways', 'almost_junction',       // - geometry issues where fixing them might solve connectivity issues
+      'disconnected_way', 'impossible_oneway'   // - finally connectivity issues
     ];
 
     const allIssues = validator.getIssues(options);
@@ -467,10 +464,16 @@ export function coreValidator(context) {
   //   This may take time but happen in the background during browser idle time.
   //
   validator.validate = () => {
-    const currGraph = context.graph();
-    const prevGraph = _headGraph || context.history().base();
+    // Make sure the caches have graphs assigned to them.
+    // (we don't do this in `reset` because context is still resetting things and `history.base()` is unstable then)
+    const baseGraph = context.history().base();
+    if (!_headCache.graph) _headCache.graph = baseGraph;
+    if (!_baseCache.graph) _baseCache.graph = baseGraph;
 
-    if (currGraph === prevGraph) {   // _headGraph is current - we are caught up
+    const prevGraph = _headCache.graph;
+    const currGraph = context.graph();
+
+    if (currGraph === prevGraph) {   // _headCache.graph is current - we are caught up
       _headIsCurrent = true;
       dispatch.call('validated');
       return Promise.resolve();
@@ -481,26 +484,19 @@ export function coreValidator(context) {
       return _headPromise;
     }
 
-    _headGraph = currGraph;  // take snapshot
-    const difference = coreDifference(prevGraph, _headGraph);
+    // If we get here, its time to start validating stuff.
+    _headCache.graph = currGraph;  // take snapshot
+    _completeDiff = context.history().difference().complete();
+    const incrementalDiff = coreDifference(prevGraph, currGraph);
+    const entityIDs = Object.keys(incrementalDiff.complete());
 
-    // Gather all entities related to this difference..
-    // For created/modified, use the head graph
-    let entityIDs = difference.extantIDs(true);   // created/modified (true = w/relation members)
-    entityIDs = entityIDsToValidate(entityIDs, _headGraph);
-
-    // For modified/deleted, use the previous graph
-    // (e.g. deleting the only highway connected to a road should create a disconnected highway issue)
-    let previousEntityIDs = difference.deleted().concat(difference.modified()).map(entity => entity.id);
-    previousEntityIDs = entityIDsToValidate(previousEntityIDs, prevGraph);
-    previousEntityIDs.forEach(entityIDs.add, entityIDs);   // concat the sets
-
-    if (!entityIDs.size) {
+    // if (!entityIDs.size) {
+    if (!entityIDs.length) {
       dispatch.call('validated');
       return Promise.resolve();
     }
 
-    _headPromise = validateEntitiesAsync(entityIDs, _headGraph, _headCache)
+    _headPromise = validateEntitiesAsync(entityIDs, _headCache)
       .then(() => updateResolvedIssues(entityIDs))
       .then(() => dispatch.call('validated'))
       .catch(() => { /* ignore */ })
@@ -537,10 +533,16 @@ export function coreValidator(context) {
   context.history()
     .on('merge.validator', entities => {
       if (!entities) return;
+
+      // Make sure the caches have graphs assigned to them.
+      // (we don't do this in `reset` because context is still resetting things and `history.base()` is unstable then)
       const baseGraph = context.history().base();
-      let entityIDs = entities.map(entity => entity.id);
-      entityIDs = entityIDsToValidate(entityIDs, baseGraph);
-      validateEntitiesAsync(entityIDs, baseGraph, _baseCache);
+      if (!_headCache.graph) _headCache.graph = baseGraph;
+      if (!_baseCache.graph) _baseCache.graph = baseGraph;
+
+      const entityIDs = entities.map(entity => entity.id);
+      // entityIDs = entityIDsToValidate(entityIDs, baseGraph);  // expand set
+      validateEntitiesAsync(entityIDs, _baseCache);
     });
 
 
@@ -567,6 +569,9 @@ export function coreValidator(context) {
   //
   function validateEntity(entity, graph) {
     let result = { issues: [], provisional: false };
+    Object.keys(_rules).forEach(runValidation);   // run all rules
+    return result;
+
 
     // runs validation and appends resulting issues
     function runValidation(key) {
@@ -582,96 +587,35 @@ export function coreValidator(context) {
       }
       detected = detected.filter(applySeverityOverrides);
       result.issues = result.issues.concat(detected);
-    }
 
-    // run all rules
-    Object.keys(_rules).forEach(runValidation);
 
-    return result;
-  }
+      // If there are any override rules that match the issue type/subtype,
+      // adjust severity (or disable it) and keep/discard as quickly as possible.
+      function applySeverityOverrides(issue) {
+        const type = issue.type;
+        const subtype = issue.subtype || '';
+        let i;
 
-  // If there are any override rules that match the issue type/subtype,
-  // adjust severity (or disable it) and keep/discard as quickly as possible.
-  function applySeverityOverrides(issue) {
-    var type = issue.type;
-    var subtype = issue.subtype || '';
-    var i;
-
-    for (i = 0; i < _errorOverrides.length; i++) {
-      if (_errorOverrides[i].type.test(type) && _errorOverrides[i].subtype.test(subtype)) {
-        issue.severity = 'error';
-        return true;
-      }
-    }
-    for (i = 0; i < _warningOverrides.length; i++) {
-      if (_warningOverrides[i].type.test(type) && _warningOverrides[i].subtype.test(subtype)) {
-        issue.severity = 'warning';
-        return true;
-      }
-    }
-    for (i = 0; i < _disableOverrides.length; i++) {
-      if (_disableOverrides[i].type.test(type) && _disableOverrides[i].subtype.test(subtype)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  // `entityIDsToValidate()`   (private)
-  // Collects the complete list of entityIDs related to the input entityIDs.
-  //
-  // Arguments
-  //   `entityIDs` - Set or Array containing entityIDs.
-  //   `graph` - graph containing the entities
-  //
-  // Returns
-  //   Set containing entityIDs
-  //
-  function entityIDsToValidate(entityIDs, graph) {
-    let seen = new Set();
-    let collected = new Set();
-
-    entityIDs.forEach(entityID => {
-      // keep `seen` separate from `collected` because an `entityID`
-      // could have been added to `collected` as a related entity through an earlier pass
-      if (seen.has(entityID)) return;
-      seen.add(entityID);
-
-      const entity = graph.hasEntity(entityID);
-      if (!entity) return;
-
-      collected.add(entityID);   // collect self
-
-      let checkParentRels = [entity];
-
-      if (entity.type === 'node') {
-        graph.parentWays(entity).forEach(parentWay => {
-          collected.add(parentWay.id);    // collect parent ways
-          checkParentRels.push(parentWay);
-        });
-
-      } else if (entity.type === 'relation' && entity.isMultipolygon()) {
-        entity.members.forEach(member => collected.add(member.id));  // collect members
-
-      } else if (entity.type === 'way') {
-        entity.nodes.forEach(nodeID => {
-          collected.add(nodeID);    // collect child nodes
-          graph._parentWays[nodeID].forEach(wayID => collected.add(wayID));  // collect connected ways
-        });
-      }
-
-      checkParentRels.forEach(entity => {    // collect parent relations
-        if (entity.type !== 'relation') {    // but not super-relations
-          graph.parentRelations(entity).forEach(parentRelation => {
-            if (parentRelation.isMultipolygon()) {
-              collected.add(parentRelation.id);
-            }
-          });
+        for (i = 0; i < _errorOverrides.length; i++) {
+          if (_errorOverrides[i].type.test(type) && _errorOverrides[i].subtype.test(subtype)) {
+            issue.severity = 'error';
+            return true;
+          }
         }
-      });
-    });
-
-    return collected;
+        for (i = 0; i < _warningOverrides.length; i++) {
+          if (_warningOverrides[i].type.test(type) && _warningOverrides[i].subtype.test(subtype)) {
+            issue.severity = 'warning';
+            return true;
+          }
+        }
+        for (i = 0; i < _disableOverrides.length; i++) {
+          if (_disableOverrides[i].type.test(type) && _disableOverrides[i].subtype.test(subtype)) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
   }
 
 
@@ -679,20 +623,29 @@ export function coreValidator(context) {
   // Determine if any issues were resolved for the given entities.
   // This is called by `validate()` after validation of the head graph
   //
+  // Give the user credit for fixing an issue if:
+  // - the issue is in the base cache
+  // - the issue is not in the head cache
+  // - the user did something to one of the entities involved in the issue
+  //
   // Arguments
-  //   `entityIDs` - Set containing entity IDs.
+  //   `entityIDs` - Array containing entity IDs.
   //
   function updateResolvedIssues(entityIDs) {
     entityIDs.forEach(entityID => {
-      const headIssues = _headCache.issuesByEntityID[entityID];
       const baseIssues = _baseCache.issuesByEntityID[entityID];
       if (!baseIssues) return;
 
       baseIssues.forEach(issueID => {
-        if (headIssues && headIssues.has(issueID)) {   // issue still not resolved
-          _resolvedIssueIDs.delete(issueID);           // (did undo, or possibly fixed and then re-caused the issue)
-        } else {
+        // Check if the user did something to one of the entities involved in this issue.
+        // (This issue could involve multiple entities, e.g. disconnected routable features)
+        const issue = _baseCache.issuesByIssueID[issueID];
+        const userModified = (issue.entityIds || []).some(id => _completeDiff.hasOwnProperty(id));
+
+        if (userModified && !_headCache.issuesByIssueID[issueID]) {  // issue seems fixed
           _resolvedIssueIDs.add(issueID);
+        } else {                              // issue still not resolved
+          _resolvedIssueIDs.delete(issueID);  // (did undo, or possibly fixed and then re-caused the issue)
         }
       });
     });
@@ -703,7 +656,7 @@ export function coreValidator(context) {
   // Schedule validation for many entities.
   //
   // Arguments
-  //   `entityIDs` - Set containing entity IDs.
+  //   `entityIDs` - Array containing entity IDs.
   //   `graph` - the graph to validate that contains those entities
   //   `cache` - the cache to store results in (_headCache or _baseCache)
   //
@@ -711,26 +664,35 @@ export function coreValidator(context) {
   //   A Promise fulfilled when the validation has completed.
   //   This may take time but happen in the background during browser idle time.
   //
-  function validateEntitiesAsync(entityIDs, graph, cache) {
+  function validateEntitiesAsync(entityIDs, cache) {
     // Enqueue the work
-    const jobs = Array.from(entityIDs).map(entityID => {
+    const jobs = entityIDs.map(entityID => {
       if (cache.queuedEntityIDs.has(entityID)) return null;  // queued already
       cache.queuedEntityIDs.add(entityID);
 
       return () => {
-        // clear caches for existing issues related to this entity
+        // Clear caches for existing issues related to this entity
         cache.uncacheEntityID(entityID);
         cache.queuedEntityIDs.delete(entityID);
 
+        const graph = cache.graph;
+        if (!graph) return;  // was reset?
+
+        const entity = graph.hasEntity(entityID);   // Sanity check: don't validate deleted entities
+        if (!entity) return;
+
+        // In the head cache, only validate features that the user is responsible for - #8632
+        // For example, a user can undo some work and an issue will still present in the
+        // head graph, but we don't want to credit the user for causing that issue.
+        if (cache.which === 'head' && !_completeDiff.hasOwnProperty(entityID)) return;
+
         // detect new issues and update caches
-        const entity = graph.hasEntity(entityID);       // Sanity check: don't validate deleted entities
-        if (entity) {
-          const result = validateEntity(entity, graph);
-          if (result.provisional) {                     // provisional result
-            cache.provisionalEntityIDs.add(entityID);   // we'll need to revalidate this entity again later
-          }
-          cache.cacheIssues(result.issues);   // update cache
+        const result = validateEntity(entity, graph);
+        if (result.provisional) {                       // provisional result
+          cache.provisionalEntityIDs.add(entityID);     // we'll need to revalidate this entity again later
         }
+
+        cache.cacheIssues(result.issues);   // update cache
       };
 
     }).filter(Boolean);
@@ -767,9 +729,7 @@ export function coreValidator(context) {
     const handle = window.setTimeout(() => {
       _deferredST.delete(handle);
       if (!cache.provisionalEntityIDs.size) return;  // nothing to do
-
-      const graph = (cache === _headCache ? _headGraph : context.history().base());
-      validateEntitiesAsync(cache.provisionalEntityIDs, graph, cache);
+      validateEntitiesAsync(Array.from(cache.provisionalEntityIDs), cache);
     }, RETRY);
 
     _deferredST.add(handle);
@@ -787,8 +747,7 @@ export function coreValidator(context) {
   //   This may take time but happen in the background during browser idle time.
   //
   function processQueue(cache) {
-    // const which = (cache === _headCache) ? 'head' : 'base';
-    // console.log(`${which} queue length ${cache.queue.length}`);
+    // console.log(`${cache.which} queue length ${cache.queue.length}`);
 
     if (!cache.queue.length) return Promise.resolve();  // we're done
     const chunk = cache.queue.pop();
@@ -821,14 +780,19 @@ export function coreValidator(context) {
 //   `_baseCache` for validation on the base graph (unedited)
 //   `_headCache` for validation on the head graph (user edits applied)
 //
-function validationCache() {
+// Arguments
+//   `which` - just a String 'base' or 'head' to keep track of it
+//
+function validationCache(which) {
   let cache = {
+    which: which,
+    graph: null,
     queue: [],
     queuePromise: null,
     queuedEntityIDs: new Set(),
     provisionalEntityIDs: new Set(),
     issuesByIssueID: {},  // issue.id -> issue
-    issuesByEntityID: {}  // entity.id -> set(issue.id)
+    issuesByEntityID: {}  // entity.id -> Set(issue.id)
   };
 
   cache.cacheIssues = (issues) => {
