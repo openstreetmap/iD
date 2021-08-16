@@ -251,6 +251,7 @@ export function rendererMap(context) {
 
         context.on('enter.map',  function() {
             if (!map.editableDataEnabled(true /* skip zoom check */)) return;
+            if (_isTransformed) return;
 
             // redraw immediately any objects affected by a change in selectedIDs.
             var graph = context.graph();
