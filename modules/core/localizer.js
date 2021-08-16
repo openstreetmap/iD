@@ -78,14 +78,11 @@ export function coreLocalizer() {
     var _loadPromise;
 
     localizer.ensureLoaded = () => {
-
         if (_loadPromise) return _loadPromise;
 
         let filesToFetch = [
-            // load the list of languages
-            'languages',
-            // load the list of supported locales
-            'locales'
+            'languages',  // load the list of languages
+            'locales'     // load the list of supported locales
         ];
 
         const localeDirs = {
@@ -95,8 +92,10 @@ export function coreLocalizer() {
 
         let fileMap = fileFetcher.fileMap();
         for (let scopeId in localeDirs) {
-            let key = `locales_index_${scopeId}`;
-            fileMap[key] = localeDirs[scopeId] + '/index.min.json';
+            const key = `locales_index_${scopeId}`;
+            if (!fileMap[key]) {
+                fileMap[key] = localeDirs[scopeId] + '/index.min.json';
+            }
             filesToFetch.push(key);
         }
 
@@ -106,16 +105,12 @@ export function coreLocalizer() {
                 _dataLocales = results[1];
 
                 let indexes = results.slice(2);
-
                 let requestedLocales = (_preferredLocaleCodes || [])
-                    // List of locales preferred by the browser in priority order.
-                    .concat(utilDetect().browserLocales)
-                    // fallback to English since it's the only guaranteed complete language
-                    .concat(['en']);
+                    .concat(utilDetect().browserLocales)   // List of locales preferred by the browser in priority order.
+                    .concat(['en']);   // fallback to English since it's the only guaranteed complete language
 
                 _localeCodes = localesToUseFrom(requestedLocales);
-                // Run iD in the highest-priority locale; the rest are fallbacks
-                _localeCode = _localeCodes[0];
+                _localeCode = _localeCodes[0];   // Run iD in the highest-priority locale; the rest are fallbacks
 
                 let loadStringsPromises = [];
 
@@ -198,7 +193,9 @@ export function coreLocalizer() {
 
         let fileMap = fileFetcher.fileMap();
         const key = `locale_${scopeId}_${locale}`;
-        fileMap[key] = `${directory}/${locale}.min.json`;
+        if (!fileMap[key]) {
+            fileMap[key] = `${directory}/${locale}.min.json`;
+        }
 
         return fileFetcher.get(key)
             .then(d => {
