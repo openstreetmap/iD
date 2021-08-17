@@ -48,11 +48,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#pr8623]: https://github.com/openstreetmap/iD/pull/8623
 
 #### :bug: Bugfixes
-* Fix a NSI issue where tagging warning recommended removing some tags considered as 'primary' ([#8615])
-* Fix a NSI issue where matching was done based on 'old_name' tag ([#8617])
-* Fix a NSI issue where route master was not included in validation ([#pr8627])
-* Fix a Validation issue where pre-existing issues were treated as current/edited issues ([#8613], [#8632])
-* Fix a Validation issue where 'fix-me' requests were being treated as outstanding issues ([#8603])
+* Fix NSI (name suggestion index) bug where tagging warning recommended removing tags considered as 'primary' ([#8615])
+* Fix NSI bug where matching was done based on 'old_name' tag ([#8617])
+* Fix NSI bug where route master was not included in certain validations ([#pr8627])
+* Fix Validator bug where pre-existing issues were treated as current/edited issues ([#8613], [#8632])
+* Fix Validator bug where 'fix-me' requests were being treated as outstanding issues ([#8603])
 
 [#8615]: https://github.com/openstreetmap/iD/issues/8615
 [#8617]: https://github.com/openstreetmap/iD/issues/8617
