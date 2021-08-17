@@ -3,7 +3,7 @@ describe('iD.behaviorSelect', function() {
 
     beforeEach(function() {
         container = d3.select('body').append('div');
-        context = iD.coreContext().init().container(container);
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
 
         a = iD.osmNode({loc: [0, 0]});
         b = iD.osmNode({loc: [0, 0]});

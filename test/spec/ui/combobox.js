@@ -63,7 +63,7 @@ describe('uiCombobox', function() {
     beforeEach(function() {
         body = d3.select('body');
         container = body.append('div').attr('class', 'ideditor');
-        context = iD.coreContext().init().container(container);
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
         content = container.append('div');
         input = content.append('input');
         combobox = iD.uiCombobox(context);

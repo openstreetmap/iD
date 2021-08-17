@@ -5,7 +5,7 @@ describe('iD.behaviorHash', function () {
 
     beforeEach(function () {
         var container = d3.select(document.createElement('div'));
-        context = iD.coreContext().init().container(container);
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
         container.call(context.map());
         hash = iD.behaviorHash(context);
     });

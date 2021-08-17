@@ -2,7 +2,7 @@ describe('iD.coreValidator', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
     });
 
     function createInvalidWay() {

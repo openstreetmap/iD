@@ -38,7 +38,7 @@ describe('iD.validations.suspicious_name', function () {
     });
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
     });
 
     function createWay(tags) {

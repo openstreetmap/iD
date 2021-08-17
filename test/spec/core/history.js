@@ -8,7 +8,7 @@ describe('iD.coreHistory', function () {
     };
 
     beforeEach(function () {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         history = context.history();
         spy = sinon.spy();
         // clear lock
