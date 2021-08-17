@@ -5,6 +5,9 @@ iD.debug = true;
 // Disable things that use the network
 for (var k in iD.services) { delete iD.services[k]; }
 
+// Try not to load imagery
+window.location.hash = '#background=none';
+
 // Run without data for speed (tests which need data can set it up themselves)
 iD.fileFetcher.assetPath('../dist/');
 var cached = iD.fileFetcher.cache();
