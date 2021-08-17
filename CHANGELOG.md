@@ -37,6 +37,43 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#prxxxx]: https://github.com/openstreetmap/iD/pull/xxxx
 -->
 
+# 2.20.1
+##### 2021-Aug-17
+
+#### :sparkles: Usability & Accessibility
+* Splash message now links to changelog instead of inactive ideditor.blog ([#8604])
+* Maxar Premium imagery - new url ([#pr8623])
+
+[#8604]: https://github.com/openstreetmap/iD/issues/8604
+[#pr8623]: https://github.com/openstreetmap/iD/pull/8623
+
+#### :bug: Bugfixes
+* Fix a NSI issue where tagging warning recommended removing some tags considered as 'primary' ([#8615])
+* Fix a NSI issue where matching was done based on 'old_name' tag ([#8617])
+* Fix a NSI issue where route master was not included in validation ([#pr8627])
+* Fix a Validation issue where pre-existing issues were treated as current/edited issues ([#8613], [#8632])
+* Fix a Validation issue where 'fix-me' requests were being treated as outstanding issues ([#8603])
+
+[#8615]: https://github.com/openstreetmap/iD/issues/8615
+[#8617]: https://github.com/openstreetmap/iD/issues/8617
+[#pr8627]: https://github.com/openstreetmap/iD/pull/8627
+[#8613]: https://github.com/openstreetmap/iD/issues/8613
+[#8632]: https://github.com/openstreetmap/iD/issues/8632
+[#8603]: https://github.com/openstreetmap/iD/issues/8603
+
+#### :white_check_mark: Validation
+* Crossing ways - Smarter node repurposing ([#pr8625])
+* Improve focusing on an issue ([#pr8626], [#pr8638])
+
+[#pr8625]: https://github.com/openstreetmap/iD/pull/8625
+[#pr8626]: https://github.com/openstreetmap/iD/pull/8626
+[#pr8638]: https://github.com/openstreetmap/iD/pull/8638
+
+#### :hammer: Development
+* Switch from @mapbox/togeojson to more maintained @tmcw/togeojson ([#pr8636])
+
+[#pr8636]: https://github.com/openstreetmap/iD/pull/8636
+
 # 2.20.0
 ##### 2021-Jul-20
 
