@@ -110,6 +110,7 @@ mocha.setup({
 expect = chai.expect;
 
 window.d3 = iD.d3;   // Remove this if we can avoid exporting all of d3.js
+delete window.PointerEvent;  // force the brower to use mouse events
 
 // Workaround for `Array.from` polyfill in PhantomJS
 // https://github.com/openstreetmap/iD/issues/6087#issuecomment-476219308

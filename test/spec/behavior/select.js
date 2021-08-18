@@ -1,6 +1,15 @@
 describe('iD.behaviorSelect', function() {
     var a, b, context, behavior, container;
 
+    function simulateClick(el, o) {
+        // clicks need to appear wherever the map is
+        var mapNode = context.container().select('.main-map').node();
+        var rect = mapNode.getBoundingClientRect();
+        var click = { clientX: rect.left, clientY: rect.top };
+        happen.mousedown(el, Object.assign({}, click, o));
+        happen.mouseup(el, Object.assign({}, click, o));
+    }
+
     beforeEach(function() {
         container = d3.select('body').append('div');
         context = iD.coreContext().assetPath('../dist/').init().container(container);
@@ -34,77 +43,71 @@ describe('iD.behaviorSelect', function() {
         container.remove();
     });
 
-    specify('refuse to enter select mode with no ids', function() {
+    it('refuses to enter select mode with no ids', function() {
         context.enter(iD.modeSelect(context, []));
         expect(context.mode().id, 'empty array').to.eql('browse');
         context.enter(iD.modeSelect(context, undefined));
         expect(context.mode().id, 'undefined').to.eql('browse');
     });
 
-    specify('refuse to enter select mode with nonexistent ids', function() {
+    it('refuses to enter select mode with nonexistent ids', function() {
         context.enter(iD.modeSelect(context, ['w-1']));
         expect(context.mode().id).to.eql('browse');
     });
 
-    specify('click on entity selects the entity', function(done) {
+    it('click on entity selects the entity', function(done) {
         var el = context.surface().selectAll('.' + a.id).node();
-        happen.mousedown(el, { clientX: 100, clientY: 100 });
-        happen.mouseup(el, { clientX: 100, clientY: 100 });
+        simulateClick(el, {});
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id]);
             done();
         }, 50);
     });
 
-    specify('click on empty space clears the selection', function(done) {
+    it('click on empty space clears the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().node();
-        happen.mousedown(el, { clientX: 100, clientY: 100 });
-        happen.mouseup(el, { clientX: 100, clientY: 100 });
+        simulateClick(el, {});
         window.setTimeout(function() {
             expect(context.mode().id).to.eql('browse');
             done();
         }, 50);
     });
 
-    specify('shift-click on unselected entity adds it to the selection', function(done) {
+    it('shift-click on unselected entity adds it to the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().selectAll('.' + b.id).node();
-        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
-        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
+        simulateClick(el, { shiftKey: true });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id, b.id]);
             done();
         }, 50);
     });
 
-    specify('shift-click on selected entity removes it from the selection', function(done) {
+    it('shift-click on selected entity removes it from the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id, b.id]));
         var el = context.surface().selectAll('.' + b.id).node();
-        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
-        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
+        simulateClick(el, { shiftKey: true });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id]);
             done();
         }, 50);
     });
 
-    specify('shift-click on last selected entity clears the selection', function(done) {
+    it('shift-click on last selected entity clears the selection', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().selectAll('.' + a.id).node();
-        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
-        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
+        simulateClick(el, { shiftKey: true });
         window.setTimeout(function() {
             expect(context.mode().id).to.eql('browse');
             done();
         }, 50);
     });
 
-    specify('shift-click on empty space leaves the selection unchanged', function(done) {
+    it('shift-click on empty space leaves the selection unchanged', function(done) {
         context.enter(iD.modeSelect(context, [a.id]));
         var el = context.surface().node();
-        happen.mousedown(el, { clientX: 100, clientY: 100, shiftKey: true });
-        happen.mouseup(el, { clientX: 100, clientY: 100, shiftKey: true });
+        simulateClick(el, { shiftKey: true });
         window.setTimeout(function() {
             expect(context.selectedIDs()).to.eql([a.id]);
             done();
