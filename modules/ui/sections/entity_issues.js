@@ -55,7 +55,7 @@ export function uiSectionEntityIssues(context) {
         _activeIssueID = _issues.length > 0 ? _issues[0].id : null;
 
         var containers = selection.selectAll('.issue-container')
-            .data(_issues, function(d) { return d.id; });
+            .data(_issues, function(d) { return d.key; });
 
         // Exit
         containers.exit()

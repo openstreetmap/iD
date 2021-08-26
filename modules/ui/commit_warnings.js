@@ -43,7 +43,7 @@ export function uiCommitWarnings(context) {
 
 
             var items = container.select('ul').selectAll('li')
-                .data(issues, function(d) { return d.id; });
+                .data(issues, function(d) { return d.key; });
 
             items.exit()
                 .remove();
