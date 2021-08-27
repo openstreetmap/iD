@@ -670,9 +670,10 @@ export function coreValidator(context) {
       if (cache.queuedEntityIDs.has(entityID)) return null;  // queued already
       cache.queuedEntityIDs.add(entityID);
 
+      // Clear caches for existing issues related to this entity
+      cache.uncacheEntityID(entityID);
+
       return () => {
-        // Clear caches for existing issues related to this entity
-        cache.uncacheEntityID(entityID);
         cache.queuedEntityIDs.delete(entityID);
 
         const graph = cache.graph;
