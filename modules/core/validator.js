@@ -189,16 +189,22 @@ export function coreValidator(context) {
     let seen = new Set();
     let results = [];
 
-    // collect head issues - caused by user edits
+    // collect head issues - present in the user edits
     if (_headCache.graph && _headCache.graph !== _baseCache.graph) {
       Object.values(_headCache.issuesByIssueID).forEach(issue => {
+        // In the head cache, only count features that the user is responsible for - #8632
+        // For example, a user can undo some work and an issue will still present in the
+        // head graph, but we don't want to credit the user for causing that issue.
+        const userModified = (issue.entityIds || []).some(id => _completeDiff.hasOwnProperty(id));
+        if (opts.what === 'edited' && !userModified) return;   // present in head but user didn't touch it
+
         if (!filter(issue)) return;
         seen.add(issue.id);
         results.push(issue);
       });
     }
 
-    // collect base issues - not caused by user edits
+    // collect base issues - present before user edits
     if (opts.what === 'all') {
       Object.values(_baseCache.issuesByIssueID).forEach(issue => {
         if (!filter(issue)) return;
@@ -682,11 +688,6 @@ export function coreValidator(context) {
         const entity = graph.hasEntity(entityID);   // Sanity check: don't validate deleted entities
         if (!entity) return;
 
-        // In the head cache, only validate features that the user is responsible for - #8632
-        // For example, a user can undo some work and an issue will still present in the
-        // head graph, but we don't want to credit the user for causing that issue.
-        if (cache.which === 'head' && !_completeDiff.hasOwnProperty(entityID)) return;
-
         // detect new issues and update caches
         const result = validateEntity(entity, graph);
         if (result.provisional) {                       // provisional result
@@ -869,7 +870,7 @@ function validationCache(which) {
         entityIssueIDs.forEach(issueID => {
           const issue = cache.issuesByIssueID[issueID];
           if (issue) {
-            (issue.entityIds || []).forEach(relatedID => result.add(relatedID))
+            (issue.entityIds || []).forEach(relatedID => result.add(relatedID));
           } else {  // shouldnt happen, clean up
             delete cache.issuesByIssueID[issueID];
           }
@@ -878,7 +879,7 @@ function validationCache(which) {
     });
 
     return result;
-  }
+  };
 
 
   return cache;
