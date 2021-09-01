@@ -149,6 +149,24 @@ export function uiFieldText(field, context) {
                     }
                 })
                 .merge(outlinkButton);
+        } else if (field.type === 'url') {
+            input.attr('type', 'text');
+
+            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+                .data([0]);
+
+            outlinkButton.enter()
+                .append('button')
+                .call(svgIcon('#iD-icon-out-link'))
+                .attr('class', 'form-field-button foreign-id-permalink')
+                .attr('title', () => t('icons.visit_website'))
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+
+                    const value = validIdentifierValueForLink();
+                    if (value) window.open(value, '_blank');
+                })
+                .merge(outlinkButton);
         }
     }
 
@@ -164,8 +182,10 @@ export function uiFieldText(field, context) {
 
 
     function validIdentifierValueForLink() {
+        const value = utilGetSetValue(input).trim().split(';')[0];
+
+        if (field.type === 'url' && value) return value;
         if (field.type === 'identifier' && field.pattern) {
-            var value = utilGetSetValue(input).trim().split(';')[0];
             return value && value.match(new RegExp(field.pattern));
         }
         return null;
