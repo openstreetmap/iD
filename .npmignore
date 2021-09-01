@@ -12,3 +12,5 @@ transifex.auth
 
 /docs/
 /test/
+
+/coverage/
