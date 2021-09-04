@@ -142,6 +142,47 @@ describe('iD.actionJoin', function () {
             expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('restriction');
         });
 
+        it('returns \'conflicting_relations\' when a relation would be extended', function () {
+            // a --> b ==> c
+            // members: -
+            // not member: =
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0,0]}),
+                iD.osmNode({id: 'b', loc: [2,0]}),
+                iD.osmNode({id: 'c', loc: [4,0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                iD.osmRelation({id: 'r', tags: {}, members: [
+                        {type: 'way', id: '-'},
+                    ]})
+            ]);
+
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_relations');
+        });
+
+        it('returns \'conflicting_relations\' when a relation would be forked', function () {
+            // a --> b ==> c
+            //       |
+            //       d
+            // members: -, =
+            // not member: |
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0,0]}),
+                iD.osmNode({id: 'b', loc: [2,0]}),
+                iD.osmNode({id: 'c', loc: [4,0]}),
+                iD.osmNode({id: 'd', loc: [2,2]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                iD.osmWay({id: '|', nodes: ['b', 'd']}),
+                iD.osmRelation({id: 'r', tags: {}, members: [
+                    {type: 'way', id: '-'},
+                    {type: 'way', id: '='},
+                ]})
+            ]);
+
+            expect(iD.actionJoin(['-', '|']).disabled(graph)).to.equal('conflicting_relations');
+        });
+
         it('returns \'paths_intersect\' if resulting way intersects itself', function () {
             //   d
             //   |

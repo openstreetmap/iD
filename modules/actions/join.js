@@ -3,7 +3,7 @@ import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
-import { utilArrayGroupBy, utilArrayIntersection } from '../util';
+import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection } from '../util';
 
 
 // Join ways at the end node they share.
@@ -129,9 +129,27 @@ export function actionJoin(ids) {
             return 'not_adjacent';
         }
 
+        var i;
+
+        // All joined ways must belong to the same set of (non-restriction) relations.
+        // Restriction relations have different logic, below, which allows some cases
+        // this prohibits, and prohibits some cases this allows.
+        var sortedParentRelations = function (id) {
+            return graph.parentRelations(graph.entity(id))
+                .filter((rel) => !rel.isRestriction())
+                .sort((a, b) => a.id - b.id);
+        };
+        var relsA = sortedParentRelations(ids[0]);
+        for (i = 1; i < ids.length; i++) {
+            var relsB = sortedParentRelations(ids[i]);
+            if (!utilArrayIdentical(relsA, relsB)) {
+                return 'conflicting_relations';
+            }
+        }
+
         // Loop through all combinations of path-pairs
         // to check potential intersections between all pairs
-        for (var i = 0; i < ids.length - 1; i++) {
+        for (i = 0; i < ids.length - 1; i++) {
             for (var j = i + 1; j < ids.length; j++) {
                 var path1 = graph.childNodes(graph.entity(ids[i]))
                     .map(function(e) { return e.loc; });

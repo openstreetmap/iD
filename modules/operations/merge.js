@@ -74,6 +74,9 @@ export function operationMerge(context, selectedIDs) {
     operation.tooltip = function() {
         var disabled = operation.disabled();
         if (disabled) {
+            if (disabled === 'conflicting_relations') {
+                return t('operations.merge.conflicting_relations');
+            }
             if (disabled === 'restriction') {
                 return t('operations.merge.restriction',
                     { relation: presetManager.item('type/restriction').name() });
