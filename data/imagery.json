@@ -4,7 +4,7 @@
       "id": "CMM2018",
       "name": "CMM Montreal 2018/Drummondville 2018/Gatineau 2017/Saint-Hyacinthe et Sorel 2020",
       "type": "tms",
-      "template": "https://chaire-mobilite.civil.polymtl.ca/cmm2018tiles/{zoom}/{x}/{y}",
+      "template": "https://projets.chaire.transition.city/cmm2018tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
       "offsetXY": [0,0],
       "default": true,
