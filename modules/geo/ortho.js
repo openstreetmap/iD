@@ -1,11 +1,11 @@
-import { geoVecEqual, geoVecNormalizedDot } from './vector';
+import { vecEqual, vecNormalizedDot } from '@id-sdk/math';
 
 
 export function geoOrthoNormalizedDotProduct(a, b, origin) {
-    if (geoVecEqual(origin, a) || geoVecEqual(origin, b)) {
+    if (vecEqual(origin, a) || vecEqual(origin, b)) {
         return 1;  // coincident points, treat as straight and try to remove
     }
-    return geoVecNormalizedDot(a, b, origin);
+    return vecNormalizedDot(a, b, origin);
 }
 
 

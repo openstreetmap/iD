@@ -4,12 +4,12 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
 import { fileFetcher } from '../core/file_fetcher';
-import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
+import { geoExtent } from '../geo';
 import { QAItem } from '../osm';
 import { serviceOsm } from './index';
 import { t } from '../core/localizer';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-
+import { vecAdd, vecScale } from '@id-sdk/math';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
@@ -67,10 +67,10 @@ function linkEntity(d) {
 function pointAverage(points) {
   if (points.length) {
     const sum = points.reduce(
-      (acc, point) => geoVecAdd(acc, [point.lon, point.lat]),
+      (acc, point) => vecAdd(acc, [point.lon, point.lat]),
       [0,0]
     );
-    return geoVecScale(sum, 1 / points.length);
+    return vecScale(sum, 1 / points.length);
   } else {
     return [0,0];
   }
@@ -112,7 +112,7 @@ function preventCoincident(loc, bumpUp) {
     let delta = coincident ? [0.00001, 0] :
         bumpUp ? [0, 0.00001] :
         [0, 0];
-    loc = geoVecAdd(loc, delta);
+    loc = vecAdd(loc, delta);
     let bbox = geoExtent(loc).bbox();
     coincident = _cache.rtree.search(bbox).length;
   } while (coincident);

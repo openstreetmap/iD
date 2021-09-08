@@ -1,9 +1,9 @@
 import { select as d3_select } from 'd3-selection';
 import { t } from '../core/localizer';
 
-import { geoScaleToZoom, geoVecLength } from '../geo';
+import { geoScaleToZoom } from '../geo';
 import { utilPrefixCSSProperty, utilTiler } from '../util';
-
+import { vecLength } from '@id-sdk/math';
 
 export function rendererTileLayer(context) {
     var transformProp = utilPrefixCSSProperty('Transform');
@@ -171,7 +171,7 @@ export function rendererTileLayer(context) {
 
         requests.forEach(function(d) {
             var c = tileCenter(d);
-            var dist = geoVecLength(c, mapCenter);
+            var dist = vecLength(c, mapCenter);
             if (dist < minDist) {
                 minDist = dist;
                 nearCenter = d;

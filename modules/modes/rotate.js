@@ -11,7 +11,7 @@ import { t } from '../core/localizer';
 import { actionRotate } from '../actions/rotate';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
-import { geoVecInterp, geoVecLength } from '../geo/vector';
+import { vecInterp, vecLength } from '@id-sdk/math';
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
 
@@ -98,11 +98,11 @@ export function modeRotate(context, entityIDs) {
         if (points.length === 1) {
             _pivot = points[0];
         } else if (points.length === 2) {
-            _pivot = geoVecInterp(points[0], points[1], 0.5);
+            _pivot = vecInterp(points[0], points[1], 0.5);
         } else {
             var polygonHull = d3_polygonHull(points);
             if (polygonHull.length === 2) {
-                _pivot = geoVecInterp(points[0], points[1], 0.5);
+                _pivot = vecInterp(points[0], points[1], 0.5);
             } else {
                 _pivot = d3_polygonCentroid(d3_polygonHull(points));
             }
@@ -150,7 +150,7 @@ export function modeRotate(context, entityIDs) {
                 var pointGetter = utilFastMouse(mapNode);
                 var p1 = pointGetter(downEvent);
                 var p2 = pointGetter(d3_event);
-                var dist = geoVecLength(p1, p2);
+                var dist = vecLength(p1, p2);
 
                 if (dist <= _tolerancePx) finish(d3_event);
                 downEvent = null;

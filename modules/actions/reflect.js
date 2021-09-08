@@ -1,6 +1,6 @@
-import { geoGetSmallestSurroundingRectangle, geoVecInterp, geoVecLength } from '../geo';
+import { geoGetSmallestSurroundingRectangle } from '../geo';
 import { utilGetAllNodes } from '../util';
-
+import { vecInterp, vecLength } from '@id-sdk/math';
 
 /* Reflect the given area around its axis of symmetry */
 export function actionReflect(reflectIds, projection) {
@@ -24,7 +24,7 @@ export function actionReflect(reflectIds, projection) {
         var q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
         var p, q;
 
-        var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
+        var isLong = (vecLength(p1, q1) > vecLength(p2, q2));
         if ((_useLongAxis && isLong) || (!_useLongAxis && !isLong)) {
             p = p1;
             q = q1;
@@ -47,7 +47,7 @@ export function actionReflect(reflectIds, projection) {
                 b * (c[0] - p[0]) - a * (c[1] - p[1]) + p[1]
             ];
             var loc2 = projection.invert(c2);
-            node = node.move(geoVecInterp(node.loc, loc2, t));
+            node = node.move(vecInterp(node.loc, loc2, t));
             graph = graph.replace(node);
         }
 

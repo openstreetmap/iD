@@ -1,4 +1,4 @@
-import { geoVecInterp } from '../geo';
+import { vecInterp } from '@id-sdk/math';
 
 export function actionMoveNode(nodeID, toLoc) {
 
@@ -8,7 +8,7 @@ export function actionMoveNode(nodeID, toLoc) {
 
         var node = graph.entity(nodeID);
         return graph.replace(
-            node.move(geoVecInterp(node.loc, toLoc, t))
+            node.move(vecInterp(node.loc, toLoc, t))
         );
     };
 

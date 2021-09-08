@@ -6,13 +6,13 @@ import { localizer } from '../core/localizer';
 
 import {
     geoExtent, geoPolygonIntersectsPolygon, geoPathLength,
-    geoScaleToZoom, geoVecInterp, geoVecLength
+    geoScaleToZoom
 } from '../geo';
 import { presetManager } from '../presets';
 import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
 import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
-
+import { vecInterp, vecLength } from '@id-sdk/math';
 
 
 export function svgLabels(projection, context) {
@@ -477,10 +477,10 @@ export function svgLabels(projection, context) {
                     var b = sub[j + 1];
 
                     // split up the text into small collision boxes
-                    var num = Math.max(1, Math.floor(geoVecLength(a, b) / boxsize / 2));
+                    var num = Math.max(1, Math.floor(vecLength(a, b) / boxsize / 2));
 
                     for (var box = 0; box < num; box++) {
-                        var p = geoVecInterp(a, b, box / num);
+                        var p = vecInterp(a, b, box / num);
                         var x0 = p[0] - boxsize - padding;
                         var y0 = p[1] - boxsize - padding;
                         var x1 = p[0] + boxsize + padding;
@@ -520,7 +520,7 @@ export function svgLabels(projection, context) {
                 for (var i = 0; i < points.length - 1; i++) {
                     var a = points[i];
                     var b = points[i + 1];
-                    var current = geoVecLength(a, b);
+                    var current = vecLength(a, b);
                     var portion;
                     if (!start && sofar + current >= from) {
                         portion = (from - sofar) / current;

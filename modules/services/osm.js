@@ -7,10 +7,10 @@ import osmAuth from 'osm-auth';
 import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
-import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
+import { geoExtent, geoRawMercator, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler, utilQsString } from '../util';
-
+import { vecAdd } from '@id-sdk/math';
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
@@ -384,7 +384,7 @@ var parsers = {
         var epsilon = 0.00001;
         do {
             if (coincident) {
-                props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
+                props.loc = vecAdd(props.loc, [epsilon, epsilon]);
             }
             var bbox = geoExtent(props.loc).bbox();
             coincident = _noteCache.rtree.search(bbox).length;

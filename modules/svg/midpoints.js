@@ -1,7 +1,7 @@
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
-import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength } from '../geo';
-
+import { geoAngle, geoLineIntersection} from '../geo';
+import { vecInterp, vecLength } from '@id-sdk/math';
 
 export function svgMidpoints(projection, context) {
     var targetRadius = 8;
@@ -72,8 +72,8 @@ export function svgMidpoints(projection, context) {
 
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
-                } else if (geoVecLength(projection(a.loc), projection(b.loc)) > 40) {
-                    var point = geoVecInterp(a.loc, b.loc, 0.5);
+                } else if (vecLength(projection(a.loc), projection(b.loc)) > 40) {
+                    var point = vecInterp(a.loc, b.loc, 0.5);
                     var loc = null;
 
                     if (extent.intersects(point)) {
@@ -82,8 +82,8 @@ export function svgMidpoints(projection, context) {
                         for (var k = 0; k < 4; k++) {
                             point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
                             if (point &&
-                                geoVecLength(projection(a.loc), projection(point)) > 20 &&
-                                geoVecLength(projection(b.loc), projection(point)) > 20) {
+                                vecLength(projection(a.loc), projection(point)) > 20 &&
+                                vecLength(projection(b.loc), projection(point)) > 20) {
                                 loc = point;
                                 break;
                             }

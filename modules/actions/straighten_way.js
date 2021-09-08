@@ -1,5 +1,5 @@
 import { actionDeleteNode } from './delete_node';
-import { geoVecDot, geoVecInterp, geoVecLength } from '../geo';
+import { vecDot, vecInterp, vecLength } from '@id-sdk/math';
 import { utilArrayDifference } from '../util';
 
 
@@ -9,7 +9,7 @@ import { utilArrayDifference } from '../util';
 export function actionStraightenWay(selectedIDs, projection) {
 
     function positionAlongWay(a, o, b) {
-        return geoVecDot(a, b, o) / geoVecDot(b, b, o);
+        return vecDot(a, b, o) / vecDot(b, b, o);
     }
 
     // Return all selected ways as a continuous, ordered array of nodes
@@ -105,9 +105,9 @@ export function actionStraightenWay(selectedIDs, projection) {
 
             if (t < 1 || shouldKeepNode(node, graph)) {
                 var u = positionAlongWay(point, startPoint, endPoint);
-                var p = geoVecInterp(startPoint, endPoint, u);
+                var p = vecInterp(startPoint, endPoint, u);
                 var loc2 = projection.invert(p);
-                graph = graph.replace(node.move(geoVecInterp(node.loc, loc2, t)));
+                graph = graph.replace(node.move(vecInterp(node.loc, loc2, t)));
 
             } else {
                 // safe to delete
@@ -131,7 +131,7 @@ export function actionStraightenWay(selectedIDs, projection) {
         var points = nodes.map(function(n) { return projection(n.loc); });
         var startPoint = points[0];
         var endPoint = points[points.length-1];
-        var threshold = 0.2 * geoVecLength(startPoint, endPoint);
+        var threshold = 0.2 * vecLength(startPoint, endPoint);
         var i;
 
         if (threshold === 0) {
@@ -143,8 +143,8 @@ export function actionStraightenWay(selectedIDs, projection) {
         for (i = 1; i < points.length - 1; i++) {
             var point = points[i];
             var u = positionAlongWay(point, startPoint, endPoint);
-            var p = geoVecInterp(startPoint, endPoint, u);
-            var dist = geoVecLength(p, point);
+            var p = vecInterp(startPoint, endPoint, u);
+            var dist = vecLength(p, point);
 
             // to bendy if point is off by 20% of total start/end distance in projected space
             if (isNaN(dist) || dist > threshold) {

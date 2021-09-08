@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { geoVecAdd } from '../geo';
+import { vecAdd } from '@id-sdk/math';
 import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { utilRebind } from '../util/rebind';
@@ -225,7 +225,7 @@ export function uiEditMenu(context) {
             }
         }
 
-        var origin = geoVecAdd(anchorLoc, offset);
+        var origin = vecAdd(anchorLoc, offset);
 
         _menu
             .style('left', origin[0] + 'px')

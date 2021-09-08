@@ -11,11 +11,11 @@ import { jsonpRequest } from '../util/jsonp_request';
 
 import {
   geoExtent, geoMetersToLat, geoMetersToLon, geoPointInPolygon,
-  geoRotate, geoScaleToZoom, geoVecLength
+  geoRotate, geoScaleToZoom
 } from '../geo';
 
 import { utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
-
+import { vecLength } from '@id-sdk/math';
 
 const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 const streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
@@ -655,7 +655,7 @@ export default {
             if (d.data.key === selected.key) return;
             if (!geoPointInPolygon(d.data.loc, poly)) return;
 
-            let dist = geoVecLength(d.data.loc, selected.loc);
+            let dist = vecLength(d.data.loc, selected.loc);
             let theta = selected.ca - d.data.ca;
             let minTheta = Math.min(Math.abs(theta), 360 - Math.abs(theta));
             if (minTheta > 20) {

@@ -4,11 +4,11 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
 import { fileFetcher } from '../core/file_fetcher';
-import { geoExtent, geoVecAdd } from '../geo';
+import { geoExtent } from '../geo';
 import { QAItem } from '../osm';
 import { t } from '../core/localizer';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-
+import { vecAdd } from '@id-sdk/math';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
@@ -379,7 +379,7 @@ export default {
             do {
               // first time, move marker up. after that, move marker right.
               let delta = coincident ? [0.00001, 0] : [0, 0.00001];
-              loc = geoVecAdd(loc, delta);
+              loc = vecAdd(loc, delta);
               let bbox = geoExtent(loc).bbox();
               coincident = _cache.rtree.search(bbox).length;
             } while (coincident);

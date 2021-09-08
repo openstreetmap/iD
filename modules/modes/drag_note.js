@@ -3,9 +3,9 @@ import { services } from '../services';
 import { actionNoop } from '../actions/noop';
 import { behaviorDrag } from '../behavior/drag';
 import { behaviorEdit } from '../behavior/edit';
-import { geoVecSubtract, geoViewportEdge } from '../geo';
+import { geoViewportEdge } from '../geo';
 import { modeSelectNote } from './select_note';
-
+import { vecSubtract } from '@id-sdk/math';
 
 export function modeDragNote(context) {
     var mode = {
@@ -78,7 +78,7 @@ export function modeDragNote(context) {
         nudge = nudge || [0, 0];
 
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
-        var currMouse = geoVecSubtract(currPoint, nudge);
+        var currMouse = vecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
         _note = _note.move(loc);

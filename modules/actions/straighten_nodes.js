@@ -1,11 +1,11 @@
-import { geoGetSmallestSurroundingRectangle, geoVecDot, geoVecLength, geoVecInterp } from '../geo';
-
+import { geoGetSmallestSurroundingRectangle } from '../geo';
+import { vecDot, vecLength, vecInterp } from '@id-sdk/math';
 
 /* Align nodes along their common axis */
 export function actionStraightenNodes(nodeIDs, projection) {
 
     function positionAlongWay(a, o, b) {
-        return geoVecDot(a, b, o) / geoVecDot(b, b, o);
+        return vecDot(a, b, o) / vecDot(b, b, o);
     }
 
     // returns the endpoints of the long axis of symmetry of the `points` bounding rect
@@ -20,7 +20,7 @@ export function actionStraightenNodes(nodeIDs, projection) {
         var p2 = [(ssr.poly[3][0] + ssr.poly[4][0]) / 2, (ssr.poly[3][1] + ssr.poly[4][1]) / 2 ];
         var q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ];
 
-        var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
+        var isLong = (vecLength(p1, q1) > vecLength(p2, q2));
         if (isLong) {
             return [p1, q1];
         }
@@ -43,9 +43,9 @@ export function actionStraightenNodes(nodeIDs, projection) {
             var node = nodes[i];
             var point = points[i];
             var u = positionAlongWay(point, startPoint, endPoint);
-            var point2 = geoVecInterp(startPoint, endPoint, u);
+            var point2 = vecInterp(startPoint, endPoint, u);
             var loc2 = projection.invert(point2);
-            graph = graph.replace(node.move(geoVecInterp(node.loc, loc2, t)));
+            graph = graph.replace(node.move(vecInterp(node.loc, loc2, t)));
         }
 
         return graph;
@@ -65,8 +65,8 @@ export function actionStraightenNodes(nodeIDs, projection) {
         for (var i = 0; i < points.length; i++) {
             var point = points[i];
             var u = positionAlongWay(point, startPoint, endPoint);
-            var p = geoVecInterp(startPoint, endPoint, u);
-            var dist = geoVecLength(p, point);
+            var p = vecInterp(startPoint, endPoint, u);
+            var dist = vecLength(p, point);
 
             if (!isNaN(dist) && dist > maxDistance) {
                 maxDistance = dist;

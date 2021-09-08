@@ -1,10 +1,12 @@
 import { actionDeleteNode } from './delete_node';
 import {
-    geoVecAdd, geoVecEqual, geoVecInterp, geoVecLength, geoVecNormalize,
-    geoVecProject, geoVecScale, geoVecSubtract,
     geoOrthoNormalizedDotProduct, geoOrthoCalcScore, geoOrthoCanOrthogonalize
 } from '../geo';
 
+import {
+    vecAdd, vecEqual, vecInterp, vecLength, vecNormalize,
+    vecProject, vecScale, vecSubtract
+} from '@id-sdk/math';
 
 export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) {
     var epsilon = ep || 1e-4;
@@ -58,7 +60,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             for (i = 0; i < 1000; i++) {
                 motions = points.map(calcMotion);
 
-                points[corner.i].coord = geoVecAdd(points[corner.i].coord, motions[corner.i]);
+                points[corner.i].coord = vecAdd(points[corner.i].coord, motions[corner.i]);
                 score = corner.dotp;
                 if (score < epsilon) {
                     break;
@@ -67,7 +69,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
             node = graph.entity(nodes[corner.i].id);
             loc = projection.invert(points[corner.i].coord);
-            graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
+            graph = graph.replace(node.move(vecInterp(node.loc, loc, t)));
 
         } else {
             var straights = [];
@@ -100,7 +102,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
                 motions = simplified.map(calcMotion);
 
                 for (j = 0; j < motions.length; j++) {
-                    simplified[j].coord = geoVecAdd(simplified[j].coord, motions[j]);
+                    simplified[j].coord = vecAdd(simplified[j].coord, motions[j]);
                 }
                 var newScore = geoOrthoCalcScore(simplified, isClosed, epsilon, threshold);
                 if (newScore < score) {
@@ -118,10 +120,10 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             // move the nodes that should move
             for (i = 0; i < bestPoints.length; i++) {
                 point = bestPoints[i];
-                if (!geoVecEqual(originalPoints[i].coord, point.coord)) {
+                if (!vecEqual(originalPoints[i].coord, point.coord)) {
                     node = graph.entity(point.id);
                     loc = projection.invert(point.coord);
-                    graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
+                    graph = graph.replace(node.move(vecInterp(node.loc, loc, t)));
                 }
             }
 
@@ -142,10 +144,10 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
 
                 } else {
                     // move interesting points to the nearest edge..
-                    var choice = geoVecProject(point.coord, bestCoords);
+                    var choice = vecProject(point.coord, bestCoords);
                     if (choice) {
                         loc = projection.invert(choice.target);
-                        graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
+                        graph = graph.replace(node.move(vecInterp(node.loc, loc, t)));
                     }
                 }
             }
@@ -170,12 +172,12 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             var a = array[(i - 1 + array.length) % array.length].coord;
             var origin = point.coord;
             var b = array[(i + 1) % array.length].coord;
-            var p = geoVecSubtract(a, origin);
-            var q = geoVecSubtract(b, origin);
+            var p = vecSubtract(a, origin);
+            var q = vecSubtract(b, origin);
 
-            var scale = 2 * Math.min(geoVecLength(p), geoVecLength(q));
-            p = geoVecNormalize(p);
-            q = geoVecNormalize(q);
+            var scale = 2 * Math.min(vecLength(p), vecLength(q));
+            p = vecNormalize(p);
+            q = vecNormalize(q);
 
             var dotp = (p[0] * q[0] + p[1] * q[1]);
             var val = Math.abs(dotp);
@@ -183,8 +185,8 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             if (val < lowerThreshold) {  // nearly orthogonal
                 corner.i = i;
                 corner.dotp = val;
-                var vec = geoVecNormalize(geoVecAdd(p, q));
-                return geoVecScale(vec, 0.1 * dotp * scale);
+                var vec = vecNormalize(vecAdd(p, q));
+                return vecScale(vec, 0.1 * dotp * scale);
             }
 
             return [0, 0];   // do nothing

@@ -3,12 +3,12 @@ import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { t } from '../core/localizer';
-import { geoRawMercator, geoScaleToZoom, geoVecSubtract, geoVecScale, geoZoomToScale } from '../geo';
+import { geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
 // import { utilGetDimensions } from '../util/dimensions';
-
+import { vecSubtract, vecScale } from '@id-sdk/math';
 
 export function uiMapInMap(context) {
 
@@ -115,7 +115,7 @@ export function uiMapInMap(context) {
                 .scale(kMini);
 
             var point = projection(loc);
-            var mouse = (_gesture === 'pan') ? geoVecSubtract([_tCurr.x, _tCurr.y], [_tStart.x, _tStart.y]) : [0, 0];
+            var mouse = (_gesture === 'pan') ? vecSubtract([_tCurr.x, _tCurr.y], [_tStart.x, _tStart.y]) : [0, 0];
             var xMini = _cMini[0] - point[0] + tMain.x + mouse[0];
             var yMini = _cMini[1] - point[1] + tMain.y + mouse[1];
 
@@ -308,7 +308,7 @@ export function uiMapInMap(context) {
 
         // reflow warning: Hardcode dimensions - currently can't resize it anyway..
         _dMini = [200,150]; //utilGetDimensions(wrap);
-        _cMini = geoVecScale(_dMini, 0.5);
+        _cMini = vecScale(_dMini, 0.5);
 
         context.map()
             .on('drawn.map-in-map', function(drawn) {

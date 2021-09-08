@@ -2,10 +2,11 @@
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { modeSelect } from '../modes/select';
-import { geoExtent, geoVecSubtract } from '../geo';
+import { geoExtent } from '../geo';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 import { utilDisplayLabel } from '../util/util';
+import { vecSubtract } from '@id-sdk/math';
 
 // see also `behaviorPaste`
 export function operationPaste(context) {
@@ -52,7 +53,7 @@ export function operationPaste(context) {
         // or else use the center of the pasted extent
         var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) ||
             projection(extent.center());
-        var delta = geoVecSubtract(_pastePoint, copyPoint);
+        var delta = vecSubtract(_pastePoint, copyPoint);
 
         // Move the pasted objects to be anchored at the paste location
         context.replace(actionMove(newIDs, delta, projection), operation.annotation());

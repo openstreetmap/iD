@@ -4,7 +4,7 @@ import {
     geoStream as d3_geoStream
 } from 'd3-geo';
 
-import { geoVecAdd, geoVecAngle, geoVecLength } from '../geo';
+import { vecAdd, vecAngle, vecLength } from '@id-sdk/math';
 
 
 // Touch targets control which other vertices we can drag a vertex onto.
@@ -84,10 +84,10 @@ export function svgMarkerSegments(projection, graph, dt,
                 b = [x, y];
 
                 if (a) {
-                    var span = geoVecLength(a, b) - offset;
+                    var span = vecLength(a, b) - offset;
 
                     if (span >= 0) {
-                        var heading = geoVecAngle(a, b);
+                        var heading = vecAngle(a, b);
                         var dx = dt * Math.cos(heading);
                         var dy = dt * Math.sin(heading);
                         var p = [
@@ -98,7 +98,7 @@ export function svgMarkerSegments(projection, graph, dt,
                         // gather coordinates
                         var coord = [a, p];
                         for (span -= dt; span >= 0; span -= dt) {
-                            p = geoVecAdd(p, [dx, dy]);
+                            p = vecAdd(p, [dx, dy]);
                             coord.push(p);
                         }
                         coord.push(b);

@@ -35,3 +35,9 @@ export let d3 = {
   selectAll: D3.selectAll,
   timerFlush: D3.timerFlush
 };
+
+// Reexport the sdk things that our tests use too
+import * as SDK from '@id-sdk/math';
+export const sdk = {
+  vecLength: SDK.vecLength
+};

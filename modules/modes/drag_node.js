@@ -18,9 +18,10 @@ import {
     geoChooseEdge,
     geoHasLineIntersections,
     geoHasSelfIntersections,
-    geoVecSubtract,
     geoViewportEdge
 } from '../geo';
+
+import { vecSubtract } from '@id-sdk/math';
 
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
@@ -187,7 +188,7 @@ export function modeDragNode(context) {
         nudge = nudge || [0, 0];
 
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
-        var currMouse = geoVecSubtract(currPoint, nudge);
+        var currMouse = vecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
         var target, edge;

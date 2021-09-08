@@ -7,8 +7,9 @@ import {
 import { presetManager } from '../presets';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
-import { geoChooseEdge, geoVecLength } from '../geo';
+import { geoChooseEdge} from '../geo';
 import { utilFastMouse, utilKeybinding, utilRebind } from '../util';
+import { vecLength } from '@id-sdk/math';
 
 var _disableSpace = false;
 var _lastSpace = null;
@@ -87,7 +88,7 @@ export function behaviorDraw(context) {
 
         var t2 = +new Date();
         var p2 = downPointer.pointerLocGetter(d3_event);
-        var dist = geoVecLength(downPointer.downLoc, p2);
+        var dist = vecLength(downPointer.downLoc, p2);
 
         if (dist < _closeTolerance ||
             (dist < _tolerance && (t2 - downPointer.downTime) < 500)) {
@@ -112,7 +113,7 @@ export function behaviorDraw(context) {
             _downPointer.id === (d3_event.pointerId || 'mouse') &&
             !_downPointer.isCancelled) {
             var p2 = _downPointer.pointerLocGetter(d3_event);
-            var dist = geoVecLength(_downPointer.downLoc, p2);
+            var dist = vecLength(_downPointer.downLoc, p2);
             if (dist >= _closeTolerance) {
                 _downPointer.isCancelled = true;
                 dispatch.call('downcancel', this);
@@ -193,7 +194,7 @@ export function behaviorDraw(context) {
 
         var currSpace = context.map().mouse();
         if (_disableSpace && _lastSpace) {
-            var dist = geoVecLength(_lastSpace, currSpace);
+            var dist = vecLength(_lastSpace, currSpace);
             if (dist > _tolerance) {
                 _disableSpace = false;
             }

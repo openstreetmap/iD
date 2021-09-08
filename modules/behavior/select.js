@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
-import { geoVecLength } from '../geo';
+import { vecLength } from '@id-sdk/math';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { modeSelectData } from '../modes/select_data';
@@ -196,7 +196,7 @@ export function behaviorSelect(context) {
         var pointGetter = utilFastMouse(mapNode);
         var p1 = pointGetter(firstEvent);
         var p2 = pointGetter(lastEvent);
-        var dist = geoVecLength(p1, p2);
+        var dist = vecLength(p1, p2);
 
         if (dist > _tolerancePx ||
             !mapContains(lastEvent)) {
@@ -252,7 +252,7 @@ export function behaviorSelect(context) {
 
                 var p1 = pointGetter(pointerInfo.firstEvent);
                 var p2 = pointGetter(pointerInfo.lastEvent);
-                if (geoVecLength(p1, p2) > _tolerancePx) continue;
+                if (vecLength(p1, p2) > _tolerancePx) continue;
 
                 var datum = pointerInfo.firstEvent.target.__data__;
                 var entity = (datum && datum.properties && datum.properties.entity) || datum;

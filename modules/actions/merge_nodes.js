@@ -1,5 +1,5 @@
 import { actionConnect } from './connect';
-import { geoVecAdd, geoVecScale } from '../geo';
+import { vecAdd, vecScale } from '@id-sdk/math';
 
 
 // `actionMergeNodes` is just a combination of:
@@ -22,10 +22,10 @@ export function actionMergeNodes(nodeIDs, loc) {
             if (node.hasInterestingTags()) {
                 interestingLoc = (++interestingCount === 1) ? node.loc : null;
             }
-            sum = geoVecAdd(sum, node.loc);
+            sum = vecAdd(sum, node.loc);
         }
 
-        return interestingLoc || geoVecScale(sum, 1 / nodeIDs.length);
+        return interestingLoc || vecScale(sum, 1 / nodeIDs.length);
     }
 
 

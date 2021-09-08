@@ -5,7 +5,7 @@ import {
     selection as d3_selection
 } from 'd3-selection';
 
-import { geoVecLength } from '../geo';
+import { vecLength } from '@id-sdk/math';
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
@@ -90,7 +90,7 @@ export function behaviorDrag() {
             var p = pointerLocGetter(d3_event);
 
             if (!started) {
-                var dist = geoVecLength(startOrigin,  p);
+                var dist = vecLength(startOrigin,  p);
                 var tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
                 // don't start until the drag has actually moved somewhat
                 if (dist < tolerance) return;

@@ -7,7 +7,7 @@ import { t } from '../core/localizer';
 import { actionMove } from '../actions/move';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
-import { geoVecLength, geoVecSubtract } from '../geo/vector';
+import { vecLength, vecSubtract } from '@id-sdk/math';
 import { geoViewportEdge } from '../geo/geom';
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
@@ -68,7 +68,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
         var currMouse = context.map().mouse();
         var origMouse = context.projection(_origin);
-        var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
+        var delta = vecSubtract(vecSubtract(currMouse, origMouse), nudge);
 
         fn(actionMove(entityIDs, delta, context.projection, _cache));
         _prevGraph = context.graph();
@@ -152,7 +152,7 @@ export function modeMove(context, entityIDs, baseGraph) {
                 var pointGetter = utilFastMouse(mapNode);
                 var p1 = pointGetter(downEvent);
                 var p2 = pointGetter(d3_event);
-                var dist = geoVecLength(p1, p2);
+                var dist = vecLength(p1, p2);
 
                 if (dist <= _tolerancePx) finish(d3_event);
                 downEvent = null;

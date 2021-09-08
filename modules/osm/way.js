@@ -1,6 +1,7 @@
 import { geoArea as d3_geoArea } from 'd3-geo';
 
-import { geoExtent, geoVecCross } from '../geo';
+import { vecCross } from '@id-sdk/math';
+import { geoExtent } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
@@ -215,7 +216,7 @@ Object.assign(osmWay.prototype, {
             var o = coords[(i+1) % coords.length];
             var a = coords[i];
             var b = coords[(i+2) % coords.length];
-            var res = geoVecCross(a, b, o);
+            var res = vecCross(a, b, o);
 
             curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {

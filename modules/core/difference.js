@@ -1,6 +1,6 @@
 import deepEqual from 'fast-deep-equal';
 
-import { geoVecEqual } from '../geo';
+import { vecEqual } from '@id-sdk/math';
 import { utilArrayDifference, utilArrayUnion, utilArrayUniq } from '../util/array';
 
 
@@ -42,7 +42,7 @@ export function coreDifference(base, head) {
                 _didChange.properties = true;
                 return;
             }
-            if (h.loc && b.loc && !geoVecEqual(h.loc, b.loc)) {
+            if (h.loc && b.loc && !vecEqual(h.loc, b.loc)) {
                 _changes[id] = { base: b, head: h };
                 _didChange.geometry = true;
             }

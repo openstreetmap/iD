@@ -1,8 +1,9 @@
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
-import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
+import { geoExtent, geoPointInPolygon } from '../geo';
 import { modeMove } from '../modes/move';
 import { uiCmd } from '../ui/cmd';
+import { vecSubtract } from '@id-sdk/math';
 
 // see also `operationPaste`
 export function behaviorPaste(context) {
@@ -53,7 +54,7 @@ export function behaviorPaste(context) {
 
         // Put pasted objects where mouse pointer is..
         var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) || projection(extent.center());
-        var delta = geoVecSubtract(mouse, copyPoint);
+        var delta = vecSubtract(mouse, copyPoint);
 
         context.perform(actionMove(newIDs, delta, projection));
         context.enter(modeMove(context, newIDs, baseGraph));

@@ -6,10 +6,9 @@ import {
     polygonCentroid as d3_polygonCentroid
 } from 'd3-polygon';
 
-import { geoVecInterp, geoVecLength } from '../geo';
+import { vecInterp, vecLength, vecLengthSquare} from '@id-sdk/math';
 import { osmNode } from '../osm/node';
 import { utilArrayUniq } from '../util';
-import { geoVecLengthSquare } from '../geo/vector';
 
 
 export function actionCircularize(wayId, projection, maxAngle) {
@@ -35,8 +34,8 @@ export function actionCircularize(wayId, projection, maxAngle) {
         var keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; });
         var points = nodes.map(function(n) { return projection(n.loc); });
         var keyPoints = keyNodes.map(function(n) { return projection(n.loc); });
-        var centroid = (points.length === 2) ? geoVecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points);
-        var radius = d3_median(points, function(p) { return geoVecLength(centroid, p); });
+        var centroid = (points.length === 2) ? vecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points);
+        var radius = d3_median(points, function(p) { return vecLength(centroid, p); });
         var sign = d3_polygonArea(points) > 0 ? 1 : -1;
         var ids, i, j, k;
 
@@ -76,7 +75,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             }
 
             // position this key node
-            var distance = geoVecLength(centroid, keyPoints[i]) || 1e-4;
+            var distance = vecLength(centroid, keyPoints[i]) || 1e-4;
             keyPoints[i] = [
                 centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
                 centroid[1] + (keyPoints[i][1] - centroid[1]) / distance * radius
@@ -84,7 +83,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             loc = projection.invert(keyPoints[i]);
             node = keyNodes[i];
             origNode = origNodes[node.id];
-            node = node.move(geoVecInterp(origNode.loc, loc, t));
+            node = node.move(vecInterp(origNode.loc, loc, t));
             graph = graph.replace(node);
 
             // figure out the between delta angle we want to match to
@@ -115,7 +114,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 origNode = origNodes[node.id];
                 nearNodes[node.id] = angle;
 
-                node = node.move(geoVecInterp(origNode.loc, loc, t));
+                node = node.move(vecInterp(origNode.loc, loc, t));
                 graph = graph.replace(node);
             }
 
@@ -138,7 +137,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                     }
                 }
 
-                node = osmNode({ loc: geoVecInterp(origNode.loc, loc, t) });
+                node = osmNode({ loc: vecInterp(origNode.loc, loc, t) });
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);
@@ -216,7 +215,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
             // move interior nodes to the surface of the convex hull..
             for (j = 1; j < indexRange; j++) {
-                var point = geoVecInterp(hull[i], hull[i+1], j / indexRange);
+                var point = vecInterp(hull[i], hull[i+1], j / indexRange);
                 var node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
                 graph = graph.replace(node);
             }
@@ -240,14 +239,14 @@ export function actionCircularize(wayId, projection, maxAngle) {
             return false;
         }
         var centroid = d3_polygonCentroid(points);
-        var radius = geoVecLengthSquare(centroid, points[0]);
+        var radius = vecLengthSquare(centroid, points[0]);
 
         var i, actualPoint;
 
         // compare distances between centroid and points
         for (i = 0; i < hull.length; i++){
             actualPoint = hull[i];
-            var actualDist = geoVecLengthSquare(actualPoint, centroid);
+            var actualDist = vecLengthSquare(actualPoint, centroid);
             var diff = Math.abs(actualDist - radius);
             //compare distances with epsilon-error (5%)
             if (diff > 0.05*radius) {

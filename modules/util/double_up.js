@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { utilFastMouse } from './util';
 import { utilRebind } from './rebind';
-import { geoVecLength } from '../geo/vector';
+import { vecLength } from '@id-sdk/math';
 
 // A custom double-click / double-tap event detector that works on touch devices
 // if pointer events are supported. Falls back to default `dblclick` event.
@@ -18,7 +18,7 @@ export function utilDoubleUp() {
         // second pointerup must occur within a small timeframe after the first pointerdown
         return new Date().getTime() - _pointer.startTime <= _maxTimespan &&
             // all pointer events must occur within a small distance of the first pointerdown
-            geoVecLength(_pointer.startLoc, loc) <= _maxDistance;
+            vecLength(_pointer.startLoc, loc) <= _maxDistance;
     }
 
     function pointerdown(d3_event) {
