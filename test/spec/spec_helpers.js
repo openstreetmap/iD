@@ -113,9 +113,7 @@ window.d3 = iD.d3;   // Remove this if we can avoid exporting all of d3.js
 delete window.PointerEvent;  // force the brower to use mouse events
 
 // some sticky fallbacks
-
-fetchMock.mock('https://www.openstreetmap.org/api/capabilities', `
-<?xml version="1.0" encoding="UTF-8"?>
+const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
   <api>
     <version minimum="0.6" maximum="0.6"/>
@@ -134,7 +132,10 @@ fetchMock.mock('https://www.openstreetmap.org/api/capabilities', `
       <blacklist regex=".*\.here\.com[/:].*"/>
     </imagery>
   </policy>
-</osm>
-`, {sticky: true});
+</osm>`;
+
+fetchMock.sticky('https://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
+fetchMock.sticky('http://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
 
 fetchMock.config.fallbackToNetwork = true;
+fetchMock.config.overwriteRoutes = false;

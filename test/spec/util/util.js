@@ -78,7 +78,7 @@ describe('iD.util', function() {
         expect(iD.utilTagText({tags:{foo:'bar',two:'three'}})).to.eql('foo=bar, two=three');
     });
 
-    it('utilStringQs', function() {
+    describe('utilStringQs', function() {
         it('splits a parameter string into k=v pairs', function() {
             expect(iD.utilStringQs('foo=bar')).to.eql({foo: 'bar'});
             expect(iD.utilStringQs('foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });

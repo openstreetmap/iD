@@ -34,7 +34,8 @@ describe('iD.serviceOsm', function () {
     });
 
     afterEach(function () {
-        fetchMock.resetBehavior();
+        fetchMock.reset();
+        serverXHR.restore();
     });
 
 
@@ -151,8 +152,8 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('returns an object', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, , {
-                body: nodeResponse,
+            fetchMock.mock('http://www.openstreetmap.org' + path, {
+                body: response,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -165,63 +166,80 @@ describe('iD.serviceOsm', function () {
         });
 
         it('retries an authenticated call unauthenticated if 400 Bad Request', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, )
+            fetchMock.mock('http://www.openstreetmap.org' + path, {
+                body: response,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                [400, { 'Content-Type': 'text/plain' }, 'Bad Request']);
+
             login();
 
             connection.loadFromAPI(path, function (err, xml) {
                 expect(err).to.be.not.ok;
                 expect(typeof xml).to.eql('object');
                 expect(connection.authenticated()).to.be.not.ok;
+                expect(fetchMock.called()).to.be.true;
+
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [400, { 'Content-Type': 'text/plain' }, 'Bad Request']);
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'application/json' }, response]);
-
             serverXHR.respond();
-            serverFetch.respond();
         });
 
         it('retries an authenticated call unauthenticated if 401 Unauthorized', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org' + path, {
+                body: response,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
+
             login();
             connection.loadFromAPI(path, function (err, xml) {
                 expect(err).to.be.not.ok;
                 expect(typeof xml).to.eql('object');
                 expect(connection.authenticated()).to.be.not.ok;
+                expect(fetchMock.called()).to.be.true;
+
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'application/json' }, response]);
-
             serverXHR.respond();
-            serverFetch.respond();
         });
 
         it('retries an authenticated call unauthenticated if 403 Forbidden', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org' + path, {
+                body: response,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+                [403, { 'Content-Type': 'text/plain' }, 'Forbidden']);
+
             login();
             connection.loadFromAPI(path, function (err, xml) {
                 expect(err).to.be.not.ok;
                 expect(typeof xml).to.eql('object');
                 expect(connection.authenticated()).to.be.not.ok;
+                expect(fetchMock.called()).to.be.true;
+
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [403, { 'Content-Type': 'text/plain' }, 'Forbidden']);
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [200, { 'Content-Type': 'application/json' }, response]);
-
             serverXHR.respond();
-            serverFetch.respond();
         });
 
 
         it('dispatches change event if 509 Bandwidth Limit Exceeded', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org' + path, {
+                body: 'Bandwidth Limit Exceeded',
+                status: 509,
+                headers: { 'Content-Type': 'text/plain' }
+            });
+
             logout();
             connection.on('change', spy);
             connection.loadFromAPI(path, function (err) {
@@ -229,13 +247,15 @@ describe('iD.serviceOsm', function () {
                 expect(spy).to.have.been.calledOnce;
                 done();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [509, { 'Content-Type': 'text/plain' }, 'Bandwidth Limit Exceeded']);
-            serverFetch.respond();
         });
 
         it('dispatches change event if 429 Too Many Requests', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org' + path, {
+                body: '429 Too Many Requests',
+                status: 429,
+                headers: { 'Content-Type': 'text/plain' }
+            });
+
             logout();
             connection.on('change', spy);
             connection.loadFromAPI(path, function (err) {
@@ -243,10 +263,6 @@ describe('iD.serviceOsm', function () {
                 expect(spy).to.have.been.calledOnce;
                 done();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
-                [429, { 'Content-Type': 'text/plain' }, '429 Too Many Requests']);
-            serverFetch.respond();
         });
     });
 
@@ -270,12 +286,14 @@ describe('iD.serviceOsm', function () {
         });
 
         it('calls callback when data tiles are loaded', function (done) {
+            fetchMock.mock(/map.json\?bbox/, {
+                body: tileResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
             var spy = sinon.spy();
             connection.loadTiles(context.projection, spy);
-
-            serverFetch.respondWith('GET', /map.json\?bbox/,
-                [200, { 'Content-Type': 'application/json' }, tileResponse]);
-            serverFetch.respond();
 
             window.setTimeout(function () {
                 expect(spy).to.have.been.calledOnce;
@@ -284,15 +302,27 @@ describe('iD.serviceOsm', function () {
         });
 
         it('#isDataLoaded', function (done) {
-            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.not.ok;
+            fetchMock.mock(/map.json\?bbox/, {
+                body: tileResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            // resetting the cache
+            const caches = connection.caches('get');
+            caches.tile.toLoad = {};
+            caches.tile.loaded = {};
+            caches.tile.inflight = {};
+            caches.tile.seen = {};
+            caches.tile.rtree.clear();
+
+            expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.false;
 
             connection.loadTiles(context.projection);
-            serverFetch.respondWith('GET', /map.json\?bbox/,
-                [200, { 'Content-Type': 'application/json' }, tileResponse]);
-            serverFetch.respond();
 
             window.setTimeout(function () {
-                expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.ok;
+                expect(fetchMock.called()).to.be.true;
+                expect(connection.isDataLoaded([-74.0444216, 40.6694299])).to.be.true;
                 done();
             }, 500);
         });
@@ -332,34 +362,38 @@ describe('iD.serviceOsm', function () {
         });
 
         it('loads a way', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org/api/0.6/way/1/full.json', {
+                body: wayResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
             var id = 'w1';
             connection.loadEntity(id, function (err, result) {
                 var entity = result.data.find(function (e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.osmWay);
                 done();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/full.json',
-                [200, { 'Content-Type': 'application/json' }, wayResponse]);
-            serverFetch.respond();
         });
 
         it('does not ignore repeat requests', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1.json', {
+                body: wayResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
             var id = 'n1';
             connection.loadEntity(id, function (err1, result1) {
                 var entity1 = result1.data.find(function (e1) { return e1.id === id; });
                 expect(entity1).to.be.an.instanceOf(iD.osmNode);
+
                 connection.loadEntity(id, function (err2, result2) {
                     var entity2 = result2.data.find(function (e2) { return e2.id === id; });
                     expect(entity2).to.be.an.instanceOf(iD.osmNode);
                     done();
                 });
-                serverFetch.respond();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1.json',
-                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
-            serverFetch.respond();
         });
     });
 
@@ -382,32 +416,42 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('loads a node', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1/1.json', {
+                body: nodeResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
             var id = 'n1';
             connection.loadEntityVersion(id, 1, function (err, result) {
                 var entity = result.data.find(function (e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.osmNode);
                 done();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1.json',
-                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
-            serverFetch.respond();
         });
 
         it('loads a way', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org/api/0.6/way/1/1.json', {
+                body: wayResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
             var id = 'w1';
             connection.loadEntityVersion(id, 1, function (err, result) {
                 var entity = result.data.find(function (e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.osmWay);
                 done();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/1.json',
-                [200, { 'Content-Type': 'application/json' }, wayResponse]);
-            serverFetch.respond();
         });
 
         it('does not ignore repeat requests', function (done) {
+            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1/1.json', {
+                body: nodeResponse,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
             var id = 'n1';
             connection.loadEntityVersion(id, 1, function (err1, result1) {
                 var entity1 = result1.data.find(function (e1) { return e1.id === id; });
@@ -417,12 +461,7 @@ describe('iD.serviceOsm', function () {
                     expect(entity2).to.be.an.instanceOf(iD.osmNode);
                     done();
                 });
-                serverFetch.respond();
             });
-
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1.json',
-                [200, { 'Content-Type': 'application/json' }, nodeResponse]);
-            serverFetch.respond();
         });
     });
 
@@ -611,12 +650,14 @@ describe('iD.serviceOsm', function () {
         });
 
         it('fires loadedNotes when notes are loaded', function (done) {
+            fetchMock.mock(/notes\?/, {
+                body: notesXML,
+                status: 200,
+                headers: { 'Content-Type': 'text/xml' }
+            });
+
             connection.on('loadedNotes', spy);
             connection.loadNotes(context.projection, {});
-
-            serverFetch.respondWith('GET', /notes\?/,
-                [200, { 'Content-Type': 'text/xml' }, notesXML]);
-            serverFetch.respond();
 
             window.setTimeout(function () {
                 expect(spy).to.have.been.calledOnce;
@@ -704,47 +745,58 @@ describe('iD.serviceOsm', function () {
 
 
     describe('API capabilities', function () {
-        var capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?>' +
-            '<osm>' +
-            '<api>' +
-            '<version minimum="0.6" maximum="0.6"/>' +
-            '<area maximum="0.25"/>' +
-            '<tracepoints per_page="5000"/>' +
-            '<waynodes maximum="2000"/>' +
-            '<changesets maximum_elements="50000"/>' +
-            '<timeout seconds="300"/>' +
-            '<status database="online" api="online" gpx="online"/>' +
-            '</api>' +
-            '<policy><imagery>' +
-            '<blacklist regex="\.foo\.com"/>' +
-            '<blacklist regex="\.bar\.org"/>' +
-            '</imagery></policy>' +
-            '</osm>';
+        var capabilitiesXML = `<?xml version="1.0" encoding="UTF-8"?>
+        <osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+            <api>
+                <version minimum="0.6" maximum="0.6"/>
+                <area maximum="0.25"/>
+                <note_area maximum="25"/>
+                <tracepoints per_page="5000"/>
+                <waynodes maximum="2000"/>
+                <changesets maximum_elements="50000"/>
+                <timeout seconds="300"/>
+                <status database="online" api="online" gpx="online"/>
+            </api>
+            <policy>
+                <imagery>
+                    <blacklist regex="\.foo\.com"/>
+                    <blacklist regex="\.bar\.org"/>
+                </imagery>
+            </policy>
+        </osm>`;
 
         describe('#status', function () {
             it('gets API status', function (done) {
+                fetchMock.mock('http://www.openstreetmap.org/api/capabilities', {
+                    body: capabilitiesXML,
+                    status: 200,
+                    headers: { 'Content-Type': 'text/xml' }
+                }, {
+                    overwriteRoutes: true
+                });
+
                 connection.status(function (err, val) {
                     expect(val).to.eql('online');
                     done();
                 });
-
-                serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/capabilities',
-                    [200, { 'Content-Type': 'text/xml' }, capabilitiesXML]);
-                serverFetch.respond();
             });
         });
 
         describe('#imageryBlocklists', function () {
             it('updates imagery blocklists', function (done) {
+                fetchMock.mock('http://www.openstreetmap.org/api/capabilities', {
+                    body: capabilitiesXML,
+                    status: 200,
+                    headers: { 'Content-Type': 'text/xml' }
+                }, {
+                    overwriteRoutes: true
+                });
+
                 connection.status(function () {
                     var blocklists = connection.imageryBlocklists();
                     expect(blocklists).to.deep.equal([new RegExp('\.foo\.com'), new RegExp('\.bar\.org')]);
                     done();
                 });
-
-                serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/capabilities',
-                    [200, { 'Content-Type': 'text/xml' }, capabilitiesXML]);
-                serverFetch.respond();
             });
         });
 

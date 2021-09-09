@@ -38,7 +38,7 @@
     "quickstart": "npm-run-all -s build:dev start:server",
     "start:server": "node scripts/server.js",
     "test": "npm-run-all -s lint build:css build:data build:legacy test:spec",
-    "test:spec": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
+    "test:spec": "karma start my.conf.js",
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {

@@ -17,14 +17,11 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'node_modules/mocha/mocha.css',
-      'node_modules/mocha/mocha.js',
       'node_modules/chai/chai.js',
       'node_modules/sinon/pkg/sinon.js',
       'node_modules/sinon-chai/lib/sinon-chai.js',
       'node_modules/happen/happen.js',
       'node_modules/fetch-mock/es5/client-bundle.js',
-      { pattern: 'dist/iD.js.map', included: false },
       { pattern: 'dist/iD.js', included: true },
       { pattern: 'dist/iD.css', included: true },
       { pattern: 'dist/**/*', included: false },
