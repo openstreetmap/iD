@@ -1,4 +1,4 @@
-describe('iD.behaviorSelect', function() {
+describe.only('iD.behaviorSelect', function () {
     var a, b, context, behavior, container;
 
     function simulateClick(el, o) {
@@ -14,8 +14,8 @@ describe('iD.behaviorSelect', function() {
         container = d3.select('body').append('div');
         context = iD.coreContext().assetPath('../dist/').init().container(container);
 
-        a = iD.osmNode({loc: [0, 0]});
-        b = iD.osmNode({loc: [0, 0]});
+        a = iD.osmNode({ loc: [0, 0] });
+        b = iD.osmNode({ loc: [0, 0] });
 
         context.perform(iD.actionAddEntity(a), iD.actionAddEntity(b));
 
@@ -29,7 +29,7 @@ describe('iD.behaviorSelect', function() {
         context.surface().select('.data-layer.osm').selectAll('circle')
             .data([a, b])
             .enter().append('circle')
-            .attr('class', function(d) { return d.id; });
+            .attr('class', function (d) { return d.id; });
 
         context.enter(iD.modeBrowse(context));
 
@@ -37,7 +37,7 @@ describe('iD.behaviorSelect', function() {
         context.install(behavior);
     });
 
-    afterEach(function() {
+    afterEach(function () {
         context.uninstall(behavior);
         context.mode().exit();
         container.remove();

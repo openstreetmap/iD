@@ -3,6 +3,7 @@ describe('iD.serviceNominatim', function () {
 
     before(function () {
         iD.services.geocoder = iD.serviceNominatim;
+        fetchMock.reset();
     });
 
     after(function () {

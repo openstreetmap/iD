@@ -1,5 +1,5 @@
 describe('iD.serviceOsmWikibase', function () {
-  var server, wikibase;
+  var wikibase;
 
   before(function () {
     iD.services.osmWikibase = iD.serviceOsmWikibase;
@@ -10,17 +10,16 @@ describe('iD.serviceOsmWikibase', function () {
   });
 
   beforeEach(function () {
-    server = window.fakeFetch().create();
     wikibase = iD.services.osmWikibase;
     wikibase.init();
   });
 
   afterEach(function () {
-    server.restore();
+    fetchMock.reset();
   });
 
 
-  function query(url) {
+  function parseQueryString(url) {
     return iD.utilStringQs(url.substring(url.indexOf('?')));
   }
 
@@ -34,10 +33,10 @@ describe('iD.serviceOsmWikibase', function () {
       type: 'item',
       id: 'Q42',
       labels: {
-        fr: {language: 'en', value: 'amenity', 'for-language': 'fr'}
+        fr: { language: 'en', value: 'amenity', 'for-language': 'fr' }
       },
       descriptions: {
-        fr: {language: 'en', value: 'English description', 'for-language': 'fr'}
+        fr: { language: 'en', value: 'English description', 'for-language': 'fr' }
       },
       aliases: {},
       claims: {
@@ -46,7 +45,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q7'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q7' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'normal'
@@ -57,7 +56,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'string',
-              datavalue: {value: 'amenity', type: 'string'}
+              datavalue: { value: 'amenity', type: 'string' }
             },
             type: 'statement',
             rank: 'normal'
@@ -68,7 +67,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q4679'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q4679' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'normal'
@@ -79,7 +78,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q8'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q8' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'normal'
@@ -90,7 +89,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q15'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q15' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'preferred'
@@ -99,7 +98,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q14'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q14' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             qualifiers: {
@@ -107,7 +106,7 @@ describe('iD.serviceOsmWikibase', function () {
                 {
                   snaktype: 'value',
                   datatype: 'wikibase-item',
-                  datavalue: {value: {'entity-type': 'item', id: 'Q6994'}, type: 'wikibase-entityid'}
+                  datavalue: { value: { 'entity-type': 'item', id: 'Q6994' }, type: 'wikibase-entityid' }
                 }
               ]
             },
@@ -119,7 +118,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'string',
-              datavalue: {value: 'Mapping-Features-Parking-Lot.png', type: 'string'}
+              datavalue: { value: 'Mapping-Features-Parking-Lot.png', type: 'string' }
             },
             type: 'statement',
             rank: 'normal'
@@ -146,10 +145,10 @@ describe('iD.serviceOsmWikibase', function () {
       type: 'item',
       id: 'Q13',
       labels: {
-        fr: {language: 'en', value: 'amenity=parking', 'for-language': 'fr'}
+        fr: { language: 'en', value: 'amenity=parking', 'for-language': 'fr' }
       },
       descriptions: {
-        fr: {language: 'fr', value: 'French description'}
+        fr: { language: 'fr', value: 'French description' }
       },
       aliases: {},
       claims: {
@@ -158,7 +157,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q2'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q2' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'normal'
@@ -169,7 +168,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'string',
-              datavalue: {value: 'amenity=parking', type: 'string'}
+              datavalue: { value: 'amenity=parking', type: 'string' }
             },
             type: 'statement',
             rank: 'normal'
@@ -180,7 +179,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q42'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q42' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'normal'
@@ -191,7 +190,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'commonsMedia',
-              datavalue: {value: 'Primary image.jpg', type: 'string'}
+              datavalue: { value: 'Primary image.jpg', type: 'string' }
             },
             type: 'statement',
             rank: 'preferred'
@@ -202,7 +201,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q14'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q14' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'preferred'
@@ -211,7 +210,7 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q13'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q13' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             qualifiers: {
@@ -219,7 +218,7 @@ describe('iD.serviceOsmWikibase', function () {
                 {
                   snaktype: 'value',
                   datatype: 'wikibase-item',
-                  datavalue: {value: {'entity-type': 'item', id: 'Q6994'}, type: 'wikibase-entityid'}
+                  datavalue: { value: { 'entity-type': 'item', id: 'Q6994' }, type: 'wikibase-entityid' }
                 }
               ]
             },
@@ -231,19 +230,19 @@ describe('iD.serviceOsmWikibase', function () {
             mainsnak: {
               snaktype: 'value',
               datatype: 'wikibase-item',
-              datavalue: {value: {'entity-type': 'item', id: 'Q4679'}, type: 'wikibase-entityid'}
+              datavalue: { value: { 'entity-type': 'item', id: 'Q4679' }, type: 'wikibase-entityid' }
             },
             type: 'statement',
             rank: 'normal'
           }
         ],
         P31: [
-          {mainsnak: {datavalue: {value: {text: 'Cs:Key:bridge:movable', language: 'cs'}}}},
-          {mainsnak: {datavalue: {value: {text: 'DE:Key:bridge:movable', language: 'de'}}}},
-          {mainsnak: {datavalue: {value: {text: 'FR:Key:bridge:movable', language: 'fr'}}}},
-          {mainsnak: {datavalue: {value: {text: 'JA:Key:bridge:movable', language: 'ja'}}}},
-          {mainsnak: {datavalue: {value: {text: 'Pl:Key:bridge:movable', language: 'pl'}}}},
-          {mainsnak: {datavalue: {value: {text: 'Key:bridge:movable', language: 'en'}}}},
+          { mainsnak: { datavalue: { value: { text: 'Cs:Key:bridge:movable', language: 'cs' } } } },
+          { mainsnak: { datavalue: { value: { text: 'DE:Key:bridge:movable', language: 'de' } } } },
+          { mainsnak: { datavalue: { value: { text: 'FR:Key:bridge:movable', language: 'fr' } } } },
+          { mainsnak: { datavalue: { value: { text: 'JA:Key:bridge:movable', language: 'ja' } } } },
+          { mainsnak: { datavalue: { value: { text: 'Pl:Key:bridge:movable', language: 'pl' } } } },
+          { mainsnak: { datavalue: { value: { text: 'Key:bridge:movable', language: 'en' } } } },
         ],
       },
       sitelinks: {
@@ -259,28 +258,29 @@ describe('iD.serviceOsmWikibase', function () {
 
   var localeData = {
     id: 'Q7792',
-    sitelinks: {wiki: {site: 'wiki', title: 'Locale:fr'}}
+    sitelinks: { wiki: { site: 'wiki', title: 'Locale:fr' } }
   };
 
   describe('#getEntity', function () {
     it('calls the given callback with the results of the getEntity data item query', function (done) {
       var callback = sinon.spy();
-      wikibase.getEntity({key: 'amenity', value: 'parking', langCodes: ['fr']}, callback);
-
-      server.respondWith('GET', /action=wbgetentities/,
-        [200, {'Content-Type': 'application/json'}, JSON.stringify({
+      fetchMock.mock(/action=wbgetentities/, {
+        body: JSON.stringify({
           entities: {
             Q42: keyData(),
             Q13: tagData(),
             Q7792: localeData,
           },
           success: 1
-        })]
-      );
-      server.respond();
+        }),
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+    });
 
-      window.setTimeout(function() {
-        expect(query(server.requests()[0].url)).to.eql(
+      wikibase.getEntity({ key: 'amenity', value: 'parking', langCodes: ['fr'] }, callback);
+
+      window.setTimeout(function () {
+        expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
           {
             action: 'wbgetentities',
             sites: 'wiki',
