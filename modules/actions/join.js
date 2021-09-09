@@ -136,7 +136,7 @@ export function actionJoin(ids) {
         // this prohibits, and prohibits some cases this allows.
         var sortedParentRelations = function (id) {
             return graph.parentRelations(graph.entity(id))
-                .filter((rel) => !rel.isRestriction())
+                .filter((rel) => !rel.isRestriction() && !rel.isConnectivity())
                 .sort((a, b) => a.id - b.id);
         };
         var relsA = sortedParentRelations(ids[0]);
@@ -177,7 +177,7 @@ export function actionJoin(ids) {
         joined[0].forEach(function(way) {
             var parents = graph.parentRelations(way);
             parents.forEach(function(parent) {
-                if (parent.isRestriction() && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; })) {
+                if ((parent.isRestriction() || parent.isConnectivity()) && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; })) {
                     relation = parent;
                 }
             });
@@ -192,7 +192,7 @@ export function actionJoin(ids) {
         });
 
         if (relation) {
-            return 'restriction';
+            return relation.isRestriction() ? 'restriction' : 'connectivity';
         }
 
         if (conflicting) {

@@ -77,9 +77,9 @@ export function operationMerge(context, selectedIDs) {
             if (disabled === 'conflicting_relations') {
                 return t('operations.merge.conflicting_relations');
             }
-            if (disabled === 'restriction') {
-                return t('operations.merge.restriction',
-                    { relation: presetManager.item('type/restriction').name() });
+            if (disabled === 'restriction' || disabled === 'connectivity') {
+                return t('operations.merge.damage_relation',
+                    { relation: presetManager.item('type/' + disabled).name() });
             }
             return t('operations.merge.' + disabled);
         }
