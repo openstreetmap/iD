@@ -2950,6 +2950,11 @@ img.tag-reference-wiki-image {
     flex-direction: column;
     padding: 5px 0;
     pointer-events: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.map-controls::-webkit-scrollbar {
+    display: none;
 }
 .map-controls:before {
     content: '';
