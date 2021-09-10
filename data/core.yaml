@@ -312,10 +312,11 @@ en:
         other: "Merged {n} features."
       not_eligible: These features can't be merged.
       not_adjacent: These features can't be merged because their endpoints aren't connected.
-      restriction: "These features can't be merged because it would damage a \"{relation}\" relation."
+      damage_relation: "These features can't be merged because it would damage a \"{relation}\" relation."
       relation: These features can't be merged because they have conflicting relation roles.
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
       conflicting_tags: These features can't be merged because some of their tags have conflicting values.
+      conflicting_relations: These features can't be merged because they belong to conflicting relations.
       paths_intersect: These features can't be merged because the resulting path would intersect itself.
       too_many_vertices: These features can't be merged because the resulting path would have too many points.
     move:
