@@ -14,6 +14,7 @@ export function validationIssue(attrs) {
     this.hash = attrs.hash;                // optional - string to further differentiate the issue
 
     this.id = generateID.apply(this);      // generated - see below
+    this.key = generateKey.apply(this);    // generated - see below (call after generating this.id)
     this.autoFix = null;                   // generated - if autofix exists, will be set below
 
     // A unique, deterministic string hash.
@@ -38,6 +39,13 @@ export function validationIssue(attrs) {
 
         return parts.join(':');
     }
+
+    // An identifier suitable for use as the second argument to d3.selection#data().
+    // (i.e. this should change whenever the data needs to be refreshed)
+    function generateKey() {
+        return this.id + ':' + Date.now().toString();  // include time of creation
+    }
+
 
     this.extent = function(resolver) {
         if (this.loc) {
