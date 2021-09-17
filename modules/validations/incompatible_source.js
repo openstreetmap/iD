@@ -8,11 +8,11 @@ export function validationIncompatibleSource() {
   const incompatibleRules = [
     {
       id: 'amap',
-      regex: /(amap|autonavi|mapabc|高德(软件|地|淘金))/i
+      regex: /(amap|autonavi|mapabc|高德)/i
     },
     {
       id: 'baidu',
-      regex: /(baidu|百度)/i
+      regex: /(baidu|mapbar|百度)/i
     },
     {
       id: 'google',
