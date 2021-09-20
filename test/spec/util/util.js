@@ -230,6 +230,13 @@ describe('iD.util', function() {
         it('returns the name if tagged with a name', function() {
             expect(iD.utilDisplayName({tags: {name: 'East Coast Greenway'}})).to.eql('East Coast Greenway');
         });
+        it('returns just the name for non-routes', function() {
+            expect(iD.utilDisplayName({tags: { name: 'Abyssinian Room', ref: '260-115' }})).to.eql('Abyssinian Room');
+        });
+        it('returns the name and the ref for routes', function() {
+            expect(iD.utilDisplayName({tags: { name: 'Lynfield to Midtown', ref: '25L', route: 'bus' }})).to.eql('25L: Lynfield to Midtown');
+            expect(iD.utilDisplayName({tags: { name: 'Kāpiti Expressway', ref: 'SH1', route: 'road' }})).to.eql('SH1: Kāpiti Expressway');
+        });
         it('distinguishes unnamed features by ref', function() {
             expect(iD.utilDisplayName({tags: {ref: '66'}})).to.eql('66');
         });

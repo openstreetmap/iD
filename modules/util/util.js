@@ -182,6 +182,10 @@ export function utilGetAllNodes(ids, graph) {
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
+
+    if (name && entity.tags.ref && entity.tags.route) {
+        return t('inspector.display_name.ref_name', entity.tags);
+    }
     if (name) return name;
 
     var tags = {

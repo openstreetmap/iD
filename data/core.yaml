@@ -735,6 +735,7 @@ en:
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
     display_name:
+      ref_name: "{ref}: {name}"
       direction: "{direction}"
       network: "{network}"
       from_to: "from {from} to {to}"
