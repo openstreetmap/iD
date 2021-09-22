@@ -234,8 +234,15 @@ describe('iD.util', function() {
             expect(iD.utilDisplayName({tags: { name: 'Abyssinian Room', ref: '260-115' }})).to.eql('Abyssinian Room');
         });
         it('returns the name and the ref for routes', function() {
-            expect(iD.utilDisplayName({tags: { name: 'Lynfield to Midtown', ref: '25L', route: 'bus' }})).to.eql('25L: Lynfield to Midtown');
+            expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', route: 'bus' }})).to.eql('25L: Lynfield Express');
             expect(iD.utilDisplayName({tags: { name: 'Kāpiti Expressway', ref: 'SH1', route: 'road' }})).to.eql('SH1: Kāpiti Expressway');
+        });
+        it('returns the name, ref, and network for routes', function() {
+            expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', network: 'AT', route: 'bus' }})).to.eql('AT 25L: Lynfield Express');
+        });
+        it('does not use the network tag if the hideNetwork argument is true', function() {
+            expect(iD.utilDisplayName({tags: { name: 'Lynfield Express', ref: '25L', network: 'AT', route: 'bus' }}, true)).to.eql('25L: Lynfield Express');
+            expect(iD.utilDisplayName({tags: { network: 'SORTA', ref: '3X' }}, true)).to.eql('3X');
         });
         it('distinguishes unnamed features by ref', function() {
             expect(iD.utilDisplayName({tags: {ref: '66'}})).to.eql('66');

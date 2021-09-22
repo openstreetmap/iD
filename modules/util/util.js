@@ -178,24 +178,32 @@ export function utilGetAllNodes(ids, graph) {
     }
 }
 
-
-export function utilDisplayName(entity) {
+/**
+ * @param {boolean} hideNetwork If true, the `network` tag will not be used in the name to prevent
+ *                              it being shown twice (see PR #8707#discussion_r712658175)
+ */
+export function utilDisplayName(entity, hideNetwork) {
     var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
-    if (name && entity.tags.ref && entity.tags.route) {
-        return t('inspector.display_name.ref_name', entity.tags);
-    }
-    if (name) return name;
-
     var tags = {
+        name,
         direction: entity.tags.direction,
         from: entity.tags.from,
-        network: entity.tags.cycle_network || entity.tags.network,
+        network: hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
         ref: entity.tags.ref,
         to: entity.tags.to,
         via: entity.tags.via
     };
+
+    // for routes, prefer `network+ref+name` or `ref+name` over `name`
+    if (name && tags.ref && entity.tags.route) {
+        return tags.network
+            ? t('inspector.display_name.network_ref_name', tags)
+            : t('inspector.display_name.ref_name', tags);
+    }
+    if (name) return name;
+
     var keyComponents = [];
 
     if (tags.network) {

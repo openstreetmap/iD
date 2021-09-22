@@ -349,7 +349,11 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .html(function(d) { return utilDisplayName(d.relation); });
+            .html(function(d) {
+                const matched = presetManager.match(d.relation, context.graph());
+                // hide the network from the name if there is NSI match
+                return utilDisplayName(d.relation, matched.suggestion);
+            });
 
         labelEnter
             .append('button')
