@@ -24,7 +24,7 @@ if you're looking for something to do.
   * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.com
   * Development mirror of `v3-prototype` branch: https://preview.ideditor.com/master
 
-Come on in, the water's lovely. More help? Ping `quincylvania` or `bhousel` on:
+Come on in, the water's lovely. More help? Ping `Ninoslav Petrovic` or `mbrzakovic` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/)
 (`#id` or `#general` channels)
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC)
