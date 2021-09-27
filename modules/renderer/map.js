@@ -251,6 +251,7 @@ export function rendererMap(context) {
 
         context.on('enter.map',  function() {
             if (!map.editableDataEnabled(true /* skip zoom check */)) return;
+            if (_isTransformed) return;
 
             // redraw immediately any objects affected by a change in selectedIDs.
             var graph = context.graph();
@@ -554,11 +555,11 @@ export function rendererMap(context) {
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
 
-            // 2 finger map panning (Mac only, all browsers) - #5492, #5512
+            // 2 finger map panning (Mac only, all browsers except Firefox #8595) - #5492, #5512
             // Panning via the `wheel` event will always have:
             // - `ctrlKey = false`
             // - `deltaX`,`deltaY` are round integer pixels
-            } else if (detected.os === 'mac' && !source.ctrlKey && isInteger(dX) && isInteger(dY)) {
+            } else if (detected.os === 'mac' && detected.browser !== 'Firefox' && !source.ctrlKey && isInteger(dX) && isInteger(dY)) {
                 p1 = projection.translate();
                 x2 = p1[0] - dX;
                 y2 = p1[1] - dY;

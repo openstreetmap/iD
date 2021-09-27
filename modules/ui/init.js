@@ -201,6 +201,12 @@ export function uiInit(context) {
             .attr('class', 'map-control geolocate-control')
             .call(uiGeolocate(context));
 
+        controls.on('wheel.mapControls', function(d3_event) {
+            if (!d3_event.deltaX) {
+                controls.node().scrollTop += d3_event.deltaY;
+            }
+        });
+
         // Add panes
         // This should happen after map is initialized, as some require surface()
         var panes = overMap

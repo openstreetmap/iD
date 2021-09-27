@@ -163,7 +163,7 @@ function loadNsiData() {
 // and fallbacks like
 //   "amenity/yes"
 // excluding things like
-//   "highway", "surface", "ref", etc.
+//   "tiger:reviewed", "surface", "ref", etc.
 //
 // Arguments
 //   `tags`: `Object` containing the feature's OSM tags
@@ -182,13 +182,16 @@ function gatherKVs(tags) {
     const osmvalue = tags[osmkey];
     if (!osmvalue) return;
 
-    const vmap = _nsi.kvt.get(osmkey);
-    if (!vmap) return;
+    // Match a 'route_master' as if it were a 'route' - name-suggestion-index#5184
+    if (osmkey === 'route_master') osmkey = 'route';
 
-    if (osmvalue !== 'yes') {
-      primary.add(`${osmkey}/${osmvalue}`);
-    } else {
-      alternate.add(`${osmkey}/${osmvalue}`);
+    const vmap = _nsi.kvt.get(osmkey);
+    if (!vmap) return;  // not an interesting key
+
+    if (vmap.get(osmvalue)) {     // Matched a category in NSI
+      primary.add(`${osmkey}/${osmvalue}`);     // interesting key/value
+    } else if (osmvalue === 'yes') {
+      alternate.add(`${osmkey}/${osmvalue}`);   // fallback key/yes
     }
   });
 
@@ -227,6 +230,9 @@ function identifyTree(tags) {
 
     const osmvalue = tags[osmkey];
     if (!osmvalue) return;
+
+    // Match a 'route_master' as if it were a 'route' - name-suggestion-index#5184
+    if (osmkey === 'route_master') osmkey = 'route';
 
     const vmap = _nsi.kvt.get(osmkey);
     if (!vmap) return;  // this key is not in nsi
@@ -431,6 +437,8 @@ function _upgradeTags(tags, loc) {
     }
   });
 
+  // Match a 'route_master' as if it were a 'route' - name-suggestion-index#5184
+  const isRouteMaster = (tags.type === 'route_master');
 
   // Gather key/value tag pairs to try to match
   const tryKVs = gatherKVs(tags);
@@ -529,6 +537,12 @@ function _upgradeTags(tags, loc) {
 
     // Do the tag upgrade
     Object.assign(newTags, item.tags, keepTags);
+
+    // Swap `route` back to `route_master` - name-suggestion-index#5184
+    if (isRouteMaster) {
+      newTags.route_master = newTags.route;
+      delete newTags.route;
+    }
 
     // Special `branch` splitting rules - IF..
     // - NSI is suggesting to replace `name`, AND

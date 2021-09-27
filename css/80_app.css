@@ -1706,8 +1706,11 @@ a.hide-toggle {
 .form-field-input-text > input:only-of-type,
 .form-field-input-tel > input:only-of-type,
 .form-field-input-email > input:only-of-type,
-.form-field-input-url > input:only-of-type {
+.form-field-input-url > input:only-child {
     border-radius: 0 0 4px 4px;
+}
+.form-field-input-url > input:not(:only-child) {
+    border-radius: 0 0 0 4px;
 }
 .form-field-input-number > input:only-of-type {
     border-radius: 0 0 0 4px;
@@ -2950,6 +2953,11 @@ img.tag-reference-wiki-image {
     flex-direction: column;
     padding: 5px 0;
     pointer-events: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.map-controls::-webkit-scrollbar {
+    display: none;
 }
 .map-controls:before {
     content: '';

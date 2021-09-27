@@ -289,6 +289,9 @@ Object.assign(osmRelation.prototype, {
         return true;
     },
 
+    isConnectivity: function() {
+        return !!(this.tags.type && this.tags.type.match(/^connectivity:?/));
+    },
 
     // Returns an array [A0, ... An], each Ai being an array of node arrays [Nds0, ... Ndsm],
     // where Nds0 is an outer ring and subsequent Ndsi's (if any i > 0) being inner rings.

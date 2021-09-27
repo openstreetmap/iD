@@ -73,7 +73,7 @@ export function uiSectionValidationIssues(id, severity, context) {
 
 
         var items = list.selectAll('li')
-            .data(issues, function(d) { return d.id; });
+            .data(issues, function(d) { return d.key; });
 
         // Exit
         items.exit()
