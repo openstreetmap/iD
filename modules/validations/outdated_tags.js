@@ -66,13 +66,14 @@ export function validationOutdatedTags() {
     // Attempt to match a canonical record in the name-suggestion-index.
     const nsi = services.nsi;
     let waitingForNsi = false;
+    let nsiResult;
     if (nsi) {
       waitingForNsi = (nsi.status() === 'loading');
       if (!waitingForNsi) {
         const loc = entity.extent(graph).center();
-        const result = nsi.upgradeTags(newTags, loc);
-        if (result) {
-          newTags = result;
+        nsiResult = nsi.upgradeTags(newTags, loc);
+        if (nsiResult) {
+          newTags = nsiResult.newTags;
           subtype = 'noncanonical_brand';
         }
       }
@@ -88,7 +89,7 @@ export function validationOutdatedTags() {
     const isOnlyAddingTags = tagDiff.every(d => d.type === '+');
 
     let prefix = '';
-    if (subtype === 'noncanonical_brand') {
+    if (nsiResult) {
       prefix = 'noncanonical_brand.';
     } else if (subtype === 'deprecated_tags' && isOnlyAddingTags) {
       subtype = 'incomplete_tags';
@@ -107,7 +108,7 @@ export function validationOutdatedTags() {
       entityIds: [entity.id],
       hash: utilHashcode(JSON.stringify(tagDiff)),
       dynamicFixes: () => {
-        return [
+        let fixes = [
           new validationIssueFix({
             autoArgs: autoArgs,
             title: t.html('issues.fix.upgrade_tags.title'),
@@ -116,6 +117,20 @@ export function validationOutdatedTags() {
             }
           })
         ];
+
+        const item = nsiResult && nsiResult.matched;
+        if (item) {
+          fixes.push(
+            new validationIssueFix({
+              title: t.html('issues.fix.tag_as_not.title', { name: item.displayName }),
+              onClick: (context) => {
+                context.perform(addNotTag, t('issues.fix.tag_as_not.annotation'));
+              }
+            })
+          );
+        }
+        return fixes;
+
       }
     }));
     return issues;
@@ -133,6 +148,29 @@ export function validationOutdatedTags() {
           newTags[diff.key] = diff.newVal;
         }
       });
+
+      return actionChangeTags(currEntity.id, newTags)(graph);
+    }
+
+
+    function addNotTag(graph) {
+      const currEntity = graph.hasEntity(entity.id);
+      if (!currEntity) return graph;
+
+      const item = nsiResult && nsiResult.matched;
+      if (!item) return graph;
+
+      let newTags = Object.assign({}, currEntity.tags);  // shallow copy
+      const wd = item.mainTag;     // e.g. `brand:wikidata`
+      const notwd = `not:${wd}`;   // e.g. `not:brand:wikidata`
+      const qid = item.tags[wd];
+      newTags[notwd] = qid;
+
+      if (newTags[wd] === qid) {   // if `brand:wikidata` was set to that qid
+        const wp = item.mainTag.replace('wikidata', 'wikipedia');
+        delete newTags[wd];        // remove `brand:wikidata`
+        delete newTags[wp];        // remove `brand:wikipedia`
+      }
 
       return actionChangeTags(currEntity.id, newTags)(graph);
     }

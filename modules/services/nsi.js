@@ -399,7 +399,11 @@ function gatherTuples(tryKVs, tryNames) {
 //   `tags`: `Object` containing the feature's OSM tags
 //   `loc`: Location where this feature exists, as a [lon, lat]
 // Returns
-//   `Object`: The tags the the feature should have, or `null` if no changes needed
+//   `Object` containing the result, or `null` if no changes needed:
+//   {
+//     'newTags': `Object` - The tags the the feature should have
+//     'matched': `Object` - The matched item
+//   }
 //
 function _upgradeTags(tags, loc) {
   let newTags = Object.assign({}, tags);  // shallow copy
@@ -438,7 +442,9 @@ function _upgradeTags(tags, loc) {
 
   // Gather key/value tag pairs to try to match
   const tryKVs = gatherKVs(tags);
-  if (!tryKVs.primary.size && !tryKVs.alternate.size)  return changed ? newTags : null;
+  if (!tryKVs.primary.size && !tryKVs.alternate.size) {
+    return changed ? { newTags: newTags, matched: null } : null;
+  }
 
   // Gather namelike tag values to try to match
   const tryNames = gatherNames(tags);
@@ -448,7 +454,9 @@ function _upgradeTags(tags, loc) {
   const foundQID = _nsi.qids.get(tags.wikidata) || _nsi.qids.get(tags.wikipedia);
   if (foundQID) tryNames.primary.add(foundQID);  // matcher will recognize the Wikidata QID as name too
 
-  if (!tryNames.primary.size && !tryNames.alternate.size)  return changed ? newTags : null;
+  if (!tryNames.primary.size && !tryNames.alternate.size) {
+    return changed ? { newTags: newTags, matched: null } : null;
+  }
 
   // Order the [key,value,name] tuples - test primary before alternate
   const tuples = gatherTuples(tryKVs, tryNames);
@@ -489,6 +497,7 @@ function _upgradeTags(tags, loc) {
     if (!item) continue;
 
     // At this point we have matched a canonical item and can suggest tag upgrades..
+    item = JSON.parse(JSON.stringify(item));   // deep copy
     const tkv = item.tkv;
     const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
     const k = parts[1];
@@ -579,10 +588,10 @@ function _upgradeTags(tags, loc) {
       }
     }
 
-    return newTags;
+    return { newTags: newTags, matched: item };
   }
 
-  return changed ? newTags : null;
+  return changed ? { newTags: newTags, matched: null } : null;
 }
 
 
@@ -682,7 +691,11 @@ export default {
   //   `tags`: `Object` containing the feature's OSM tags
   //   `loc`: Location where this feature exists, as a [lon, lat]
   // Returns
-  //   `Object`: The tags the the feature should have, or `null` if no change
+  //   `Object` containing the result, or `null` if no changes needed:
+  //   {
+  //     'newTags': `Object` - The tags the the feature should have
+  //     'matched': `Object` - The matched item
+  //   }
   //
   upgradeTags: (tags, loc) => _upgradeTags(tags, loc),
 
