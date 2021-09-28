@@ -15,7 +15,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         selection = d3.select(document.createElement('div'));
         field = iD.presetField('name', { key: 'name', type: 'localized' });
         field.locked = function() { return false; };

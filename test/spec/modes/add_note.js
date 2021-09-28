@@ -2,6 +2,7 @@ describe('iD.modeAddNote', function() {
     var context;
 
     before(function() {
+        window.location.hash = '#background=none';  // Try not to load imagery
         iD.services.osm = iD.serviceOsm;
     });
 
@@ -11,9 +12,7 @@ describe('iD.modeAddNote', function() {
 
     beforeEach(function() {
         var container = d3.select(document.createElement('div'));
-        context = iD.coreContext()
-            .container(container)
-            .init();
+        context = iD.coreContext().assetPath('../dist/').container(container).init();
 
         context.loadTiles = function () {};
 

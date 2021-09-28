@@ -9,7 +9,7 @@ describe('iD.svgMidpoints', function () {
 
 
     beforeEach(function () {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         context.enter({
             id: 'select',
             enter: function() { },

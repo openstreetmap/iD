@@ -59,7 +59,7 @@ function setNsiSources() {
 
   let fileMap = fileFetcher.fileMap();
   for (const k in sources) {
-    fileMap[k] = sources[k];
+    if (!fileMap[k]) fileMap[k] = sources[k];
   }
 }
 

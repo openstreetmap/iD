@@ -2,7 +2,7 @@ describe('iD.validations.crossing_ways', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
     });
 
     function createWaysWithOneCrossingPoint(tags1, tags2) {

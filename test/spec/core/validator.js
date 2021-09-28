@@ -2,7 +2,7 @@ describe('iD.coreValidator', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
     });
 
     function createInvalidWay() {
@@ -40,9 +40,11 @@ describe('iD.coreValidator', function () {
                 expect(issue.type).to.eql('missing_tag');
                 expect(issue.entityIds).to.have.lengthOf(1);
                 expect(issue.entityIds[0]).to.eql('w-1');
-
+                done();
             })
-            .finally(done);
+            .catch(function(err) {
+                done(err);
+            });
 
         window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
     });

@@ -6,7 +6,7 @@ describe('iD.svgLayers', function () {
         .clipExtent([[0, 0], [Infinity, Infinity]]);
 
     beforeEach(function () {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         container = d3.select(document.createElement('div'));
     });
 

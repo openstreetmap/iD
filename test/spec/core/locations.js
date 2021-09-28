@@ -43,12 +43,12 @@ describe('iD.coreLocations', function() {
             var prom = locationManager.mergeLocationSets({});
             prom
                 .then(function() {
-                    throw new Error('This was supposed to fail, but somehow succeeded.');
+                    done(new Error('This was supposed to fail, but somehow succeeded.'));
                 })
                 .catch(function(err) {
                     expect(/^nothing to do/.test(err)).to.be.true;
-                })
-                .finally(done);
+                    done();
+                });
 
             window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
@@ -62,10 +62,13 @@ describe('iD.coreLocations', function() {
             prom
                 .then(function(data) {
                     expect(data).to.be.a('array');
-                    expect(data[0]).locationSetID.to.eql('+[Q2]');
-                    expect(data[1]).locationSetID.to.eql('+[Q30]');
+                    expect(data[0].locationSetID).to.eql('+[Q2]');
+                    expect(data[1].locationSetID).to.eql('+[Q30]');
+                    done();
                 })
-                .finally(done);
+                .catch(function(err) {
+                    done(err);
+                });
 
             window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
         });
@@ -79,10 +82,13 @@ describe('iD.coreLocations', function() {
             prom
                 .then(function(data) {
                     expect(data).to.be.a('array');
-                    expect(data[0]).locationSetID.to.eql('+[Q2]');
-                    expect(data[1]).locationSetID.to.eql('+[Q2]');
+                    expect(data[0].locationSetID).to.eql('+[Q2]');
+                    expect(data[1].locationSetID).to.eql('+[Q2]');
+                    done();
                 })
-                .finally(done);
+                .catch(function(err) {
+                    done(err);
+                });
 
             window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
         });
@@ -139,8 +145,11 @@ describe('iD.coreLocations', function() {
                     expect(result2).to.be.an('object').that.has.all.keys('+[Q2]', '+[Q30]');
                     var result3 = locationManager.locationsAt([13.575, 41.207,]);   // Gaeta
                     expect(result3).to.be.an('object').that.has.all.keys('+[Q2]');
+                    done();
                 })
-                .finally(done);
+                .catch(function(err) {
+                    done(err);
+                });
 
             window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
