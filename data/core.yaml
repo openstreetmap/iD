@@ -1761,10 +1761,12 @@ en:
     incompatible_source:
       title: Suspicious Sources
       tip: "Find features with suspicious source tags"
-      google:
-        feature:
-          message: '{feature} lists Google as a data source'
-        reference: "Google products are proprietary and must not be used as references."
+      feature:
+        message: '{feature} lists "{value}" as a data source'
+      reference:
+        amap: "Amap products are proprietary and must not be used as references."
+        baidu: "Baidu products are proprietary and must not be used as references."
+        google: "Google products are proprietary and must not be used as references."
     incorrect_name:
       message: '{feature} has the mistaken name "{name}"'
       message_language: '{feature} has the mistaken name "{name}" in {language}'
