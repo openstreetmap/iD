@@ -21,6 +21,7 @@ export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
     var outlinkButton = d3_select(null);
+    var wrap = d3_select(null);
     var _entityIDs = [];
     var _tags;
     var _phoneFormats = {};
@@ -62,7 +63,7 @@ export function uiFieldText(field, context) {
         calcLocked();
         var isLocked = field.locked();
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -167,7 +168,35 @@ export function uiFieldText(field, context) {
                     if (value) window.open(value, '_blank');
                 })
                 .merge(outlinkButton);
+        } else if (field.key.includes('colour')) {
+            input.attr('type', 'text');
+
+            updateColourPreview();
         }
+    }
+
+    function updateColourPreview() {
+        wrap.selectAll('.foreign-id-permalink')
+            .remove();
+
+        const colour = utilGetSetValue(input);
+
+        // see https://github.com/openstreetmap/openstreetmap-website/blob/08e2a0/app/helpers/browse_tags_helper.rb#L173
+        // we use the same logic to validate colours, except we don't need to check whether named colours
+        // are valid, since the browser does this natively when we set the background-colour
+        const isColourValid = !!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/);
+        if (!isColourValid) return;
+
+        outlinkButton = wrap.selectAll('.foreign-id-permalink')
+            .data([colour], d => d);
+
+        outlinkButton
+            .enter()
+            .append('div')
+            .attr('class', 'form-field-button foreign-id-permalink colour-preview')
+            .append('div')
+            .style('background-color', d => d)
+            .merge(outlinkButton);
     }
 
 
@@ -246,6 +275,8 @@ export function uiFieldText(field, context) {
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
+
+        if (field.key.includes('colour')) updateColourPreview();
 
         if (outlinkButton && !outlinkButton.empty()) {
             var disabled = !validIdentifierValueForLink();

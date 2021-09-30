@@ -1505,6 +1505,15 @@ a.hide-toggle {
     fill: #333;
     opacity: .5;
 }
+.form-field-button.colour-preview {
+    background-color: #fff;
+    border-radius: 0 0 4px 0;
+}
+.form-field-button.colour-preview > div {
+    border: 3px solid #fff;
+    height: 100%;
+    border-radius: 8px;
+}
 
 
 /* round corners of first/last child elements */
@@ -1703,12 +1712,13 @@ a.hide-toggle {
 
 /* Field - Text / Numeric
 ------------------------------------------------------- */
-.form-field-input-text > input:only-of-type,
+.form-field-input-text > input:only-child,
 .form-field-input-tel > input:only-of-type,
 .form-field-input-email > input:only-of-type,
 .form-field-input-url > input:only-child {
     border-radius: 0 0 4px 4px;
 }
+.form-field-input-text > input:not(:only-child),
 .form-field-input-url > input:not(:only-child) {
     border-radius: 0 0 0 4px;
 }
