@@ -16,18 +16,25 @@ _storage = _storage || (() => {
 // corePreferences is an interface for persisting basic key-value strings
 // within and between iD sessions on the same site.
 //
+/**
+ * @param {string} k
+ * @param {string?} v
+ * @returns {boolean} true if the action succeeded
+ */
 function corePreferences(k, v) {
 
   try {
     if (arguments.length === 1) return _storage.getItem(k);
     else if (v === null) _storage.removeItem(k);
     else _storage.setItem(k, v);
+    return true;
   } catch (e) {
     /* eslint-disable no-console */
     if (typeof console !== 'undefined') {
       console.error('localStorage quota exceeded');
     }
     /* eslint-enable no-console */
+    return false;
   }
 
 }
