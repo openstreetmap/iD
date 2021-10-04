@@ -1,13 +1,13 @@
 {
   "icon": "iD-entrance-shop",
   "fields": [
-      "ref",
+      "address",
       "entrance",
+      "ref",
       "door",
       "access_simple",
       "wheelchair",
-      "level",
-      "address"
+      "level"
   ],
   "geometry": [
       "vertex"

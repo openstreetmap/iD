@@ -1,13 +1,13 @@
 {
   "icon": "iD-entrance-home",
   "fields": [
-      "ref",
       "entrance",
+      "address",
+      "ref",
       "door",
       "access_simple",
       "wheelchair",
-      "level",
-      "address"
+      "level"
   ],
   "geometry": [
       "vertex"
