@@ -284,6 +284,10 @@
             "text": "shortcuts.editing.operations.move"
           },
           {
+            "shortcuts": ["operations.follow.key"],
+            "text": "shortcuts.editing.operations.follow"
+          },
+          {
             "modifiers": ["⇧"],
             "shortcuts": ["↓", "↑", "←", "→"],
             "text": "shortcuts.editing.operations.nudge",
