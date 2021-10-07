@@ -11,6 +11,7 @@
         "line"
     ],
     "tags": {
+        "highway": "cycleway",
         "cycleway": "crossing",
         "foot": "designated",
         "lcn": "yes"
@@ -18,7 +19,9 @@
     "addTags": {
         "highway": "cycleway",
         "cycleway": "crossing",
-        "lcn": "yes"
+        "foot": "designated",
+        "lcn": "yes",
+        "surface": "asphalt"
     },
     "reference": {
         "key": "cycleway",

@@ -1,0 +1,43 @@
+{
+  "icon": "fas-skating",
+  "fields": [
+      "name",
+      "seasonal",
+      "sport_ice",
+      "operator",
+      "address",
+      "building"
+  ],
+  "moreFields": [
+      "email",
+      "fax",
+      "gnis/feature_id",
+      "internet_access",
+      "internet_access/fee",
+      "internet_access/ssid",
+      "level",
+      "opening_hours",
+      "payment_multi",
+      "phone",
+      "website"
+  ],
+  "geometry": [
+      "area",
+      "point"
+  ],
+  "terms": [
+      "hockey",
+      "skating",
+      "curling",
+      "outdoor",
+      "rink",
+      "ice"
+  ],
+  "tags": {
+      "leisure": "ice_rink",
+      "covered": "no",
+      "seasonal": "winter",
+      "sport": "ice_hockey"
+  },
+  "name": "Outdoor Ice Rink"
+}

@@ -27,7 +27,8 @@
         "bicycle": "designated",
         "foot": "designated",
         "segregated": "no",
-        "lcn": "yes"
+        "lcn": "yes",
+        "surface": "asphalt"
     },
     "reference": {
         "key": "cycleway",

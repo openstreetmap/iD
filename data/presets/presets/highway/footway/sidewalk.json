@@ -4,6 +4,7 @@
         "line"
     ],
     "tags": {
+        "highway": "footway",
         "footway": "sidewalk",
         "bicycle": "no"
     },

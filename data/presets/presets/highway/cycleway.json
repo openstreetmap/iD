@@ -28,6 +28,9 @@
         "foot": "no",
         "lcn": "yes"
     },
+    "addTags": {
+        "surface": "asphalt"
+    },
     "terms": [
         "bicyle path",
         "bike path",

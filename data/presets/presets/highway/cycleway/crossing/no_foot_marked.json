@@ -23,7 +23,8 @@
     "cycleway": "crossing",
     "crossing": "marked",
     "foot": "no",
-    "lcn": "yes"
+    "lcn": "yes",
+    "surface": "asphalt"
   },
   "reference": {
       "key": "cycleway",
