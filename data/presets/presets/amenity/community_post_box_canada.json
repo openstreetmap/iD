@@ -1,0 +1,52 @@
+{
+  "icon": "temaki-post_box",
+  "fields": [
+      "operator",
+      "collection_times",
+      "drive_through",
+      "ref"
+  ],
+  "moreFields": [
+      "access_simple",
+      "brand",
+      "covered",
+      "gnis/feature_id",
+      "height",
+      "indoor",
+      "level",
+      "manufacturer",
+      "wheelchair"
+  ],
+  "geometry": [
+      "point",
+      "vertex"
+  ],
+  "tags": {
+      "amenity": "post_box",
+      "operator": "Canada Post",
+      "operator:en": "Canada Post",
+      "operator:fr": "Postes Canada",
+      "operator:wikidata": "Q1032001",
+      "post_box:type": "community"
+  },
+  "terms": [
+      "canada",
+      "community",
+      "community mail",
+      "drop box",
+      "dropbox",
+      "letter drop",
+      "mail box",
+      "mail collection box",
+      "mail drop",
+      "mail dropoff",
+      "mailbox",
+      "package drop",
+      "pillar box",
+      "pillarbox",
+      "post box",
+      "postal box",
+      "postbox"
+  ],
+  "name": "Community Canada Mail Drop Box"
+}
