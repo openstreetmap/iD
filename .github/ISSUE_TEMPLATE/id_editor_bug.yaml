@@ -1,0 +1,57 @@
+name: 'iD Editor: Bug'
+description: You found an issue with iD Editor on openstreetmap.org/edit.
+# title:
+# labels:
+# assignees:
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: Please share the URL where the issue can be seen.
+      placeholder: https://www.openstreetmap.org/edit#map=…
+    validations:
+      required: false
+  - type: textarea
+    id: steps-reproduce
+    attributes:
+      label: How to reproduce the issue?
+      description: Please share the steps to reproduce the issue.
+      placeholder: 1. …, 2. …, 3. …
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Screenshot(s) or anything else?
+      description: Please add screenshots or additional information to help us understand your issue.
+      placeholder:
+    validations:
+      required: false
+  - type: dropdown
+    id: environment-variant
+    attributes:
+      label: Which iD Editor versions do you see the issue on?
+      description: Please test your issue on the development version as well (if possible) so make sure it is not fixed already.
+      multiple: true
+      options:
+        - Released version at openstreetmap.org/edit
+        - Development version at ideditor.netlify.com
+        - RapiD version at mapwith.ai/rapid
+    validations:
+      required: false
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: Which browsers are you seeing this problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+    validations:
+      required: false
