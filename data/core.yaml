@@ -346,6 +346,19 @@ en:
       not_downloaded:
         single: This feature can't be moved because parts of it have not yet been downloaded.
         multiple: These features can't be moved because parts of them have not yet been downloaded.
+    follow:
+      key: F
+      error:
+        needs_more_initial_nodes: This line can't follow a way because it isn't connected to enough consecutive points along a way. Add another point manually to continue.
+        intersection_of_mutiple_ways:
+          line: This line can't follow a way because multiple lines are connected to the line's last two points. Add another vertex manually to continue.
+          area: This line can't follow a way because multiple areas are connected to the line's last two points. Add another vertex manually to continue.
+          generic: This line can't follow a way because multiple features are connected to the line's last two points. Add another vertex manually to continue.
+        intersection_of_different_ways:
+          line: This line can't follow a way because the line is only connected to the line at a single point. Add another point manually to continue.
+          area: This line can't follow a way because the line is only connected to the area at a single point. Add another point manually to continue.
+          generic: This line can't follow a way because the line is only connected to the way at a single point. Add another point manually to continue.
+        unknown: This line can't follow a way.
     reflect:
       title:
         long: Flip Long
@@ -783,7 +796,7 @@ en:
   map_data:
     title: Map Data
     description: Map Data
-    key: F
+    key: U
     data_layers: Data Layers
     layers:
       osm:
@@ -2332,6 +2345,7 @@ en:
         split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"
+        follow: "Follow a line or area"
         nudge: "Nudge selected features"
         nudge_more: "Nudge selected features by a lot"
         scale: "Scale selected features"
