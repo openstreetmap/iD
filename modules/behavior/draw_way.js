@@ -457,7 +457,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t(`operations.follow.error.intersection_of_mutiple_ways.${featureType}`))();
+                    .label(t(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
                 return;
             }
 
