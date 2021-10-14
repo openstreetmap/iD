@@ -92,11 +92,6 @@ exports.languageNamesInLanguageOf = function(code) {
   });
 
   for (let langCode in translatedLangsByCode) {
-    let altLongIndex = langCode.indexOf('-alt-long');
-    if (altLongIndex !== -1) {    // prefer long names (e.g. Chinese -> Mandarin Chinese)
-      let base = langCode.substring(0, altLongIndex);
-      translatedLangsByCode[base] = translatedLangsByCode[langCode];
-    }
 
     if (langCode.includes('-alt-')) {
       // remove alternative names
