@@ -349,16 +349,16 @@ en:
     follow:
       key: F
       error:
-        needs_more_initial_nodes: This line can't follow a way because it isn't connected to enough consecutive points along a way. Add another point manually to continue.
-        intersection_of_mutiple_ways:
-          line: This line can't follow a way because multiple lines are connected to the line's last two points. Add another vertex manually to continue.
-          area: This line can't follow a way because multiple areas are connected to the line's last two points. Add another vertex manually to continue.
-          generic: This line can't follow a way because multiple features are connected to the line's last two points. Add another vertex manually to continue.
+        needs_more_initial_nodes: This feature can't follow another feature because it isn't connected to enough consecutive points along another feature. Add another point manually to continue.
+        intersection_of_multiple_ways:
+          line: This feature can't follow a line because multiple lines are connected to the last two points. Add another point manually to continue.
+          area: This feature can't follow an area because multiple areas are connected to the last two points. Add another point manually to continue.
+          generic: This feature can't follow another feature because multiple features are connected to the last two points. Add another point manually to continue.
         intersection_of_different_ways:
-          line: This line can't follow a way because the line is only connected to the line at a single point. Add another point manually to continue.
-          area: This line can't follow a way because the line is only connected to the area at a single point. Add another point manually to continue.
-          generic: This line can't follow a way because the line is only connected to the way at a single point. Add another point manually to continue.
-        unknown: This line can't follow a way.
+          line: This feature can't follow the line because it is only connected at a single point. Add another point manually to continue.
+          area: This feature can't follow the area because it is only connected at a single point. Add another point manually to continue.
+          generic: This feature can't follow the other feature because they are only connected at a single point. Add another point manually to continue.
+        unknown: This feature can't follow another feature.
     reflect:
       title:
         long: Flip Long
