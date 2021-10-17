@@ -225,8 +225,9 @@ export function utilDisplayName(entity) {
 export function utilDisplayNameForPath(entity) {
     var name = utilDisplayName(entity);
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+    var isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
 
-    if (!isFirefox && name && rtlRegex.test(name)) {
+    if (!isFirefox && !isNewChromium && name && rtlRegex.test(name)) {
         name = fixRTLTextForSvg(name);
     }
 
