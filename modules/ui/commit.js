@@ -124,7 +124,7 @@ export function uiCommit(context) {
                 }
             });
 
-            tags.source = context.cleanTagValue(sources.join(';'));
+            tags.source = context.cleanTagValue(sources.join('; '));
         }
 
         context.changeset = new osmChangeset({ tags: tags });
@@ -140,19 +140,19 @@ export function uiCommit(context) {
         var tags = Object.assign({}, context.changeset.tags);   // shallow copy
 
         // assign tags for imagery used
-        var imageryUsed = context.cleanTagValue(context.history().imageryUsed().join(';'));
+        var imageryUsed = context.cleanTagValue(context.history().imageryUsed().join('; '));
         tags.imagery_used = imageryUsed || 'None';
 
         // assign tags for closed issues and notes
         var osmClosed = osm.getClosedIDs();
         var itemType;
         if (osmClosed.length) {
-            tags['closed:note'] = context.cleanTagValue(osmClosed.join(';'));
+            tags['closed:note'] = context.cleanTagValue(osmClosed.join('; '));
         }
         if (services.keepRight) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
-                tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
+                tags['closed:keepright'] = context.cleanTagValue(krClosed.join('; '));
             }
         }
         if (services.improveOSM) {
