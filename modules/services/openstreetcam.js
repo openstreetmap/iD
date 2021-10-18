@@ -29,12 +29,12 @@ function abortRequest(controller) {
 
 
 function maxPageAtZoom(z) {
-    if (z < 15)   return 2;
+    if (z < 15) return 2;
     if (z === 15) return 5;
     if (z === 16) return 10;
     if (z === 17) return 20;
     if (z === 18) return 40;
-    if (z > 18)   return 80;
+    if (z > 18) return 80;
 }
 
 
@@ -44,15 +44,15 @@ function loadTiles(which, url, projection) {
 
     // abort inflight requests that are no longer needed
     var cache = _oscCache[which];
-    Object.keys(cache.inflight).forEach(function(k) {
-        var wanted = tiles.find(function(tile) { return k.indexOf(tile.id + ',') === 0; });
+    Object.keys(cache.inflight).forEach(function (k) {
+        var wanted = tiles.find(function (tile) { return k.indexOf(tile.id + ',') === 0; });
         if (!wanted) {
             abortRequest(cache.inflight[k]);
             delete cache.inflight[k];
         }
     });
 
-    tiles.forEach(function(tile) {
+    tiles.forEach(function (tile) {
         loadNextTilePage(which, currZoom, url, tile);
     });
 }
@@ -87,14 +87,14 @@ function loadNextTilePage(which, currZoom, url, tile) {
     };
 
     d3_json(url, options)
-        .then(function(data) {
+        .then(function (data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
             if (!data || !data.currentPageItems || !data.currentPageItems.length) {
                 throw new Error('No Data');
             }
 
-            var features = data.currentPageItems.map(function(item) {
+            var features = data.currentPageItems.map(function (item) {
                 var loc = [+item.lng, +item.lat];
                 var d;
 
@@ -138,7 +138,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 dispatch.call('loadedImages');
             }
         })
-        .catch(function() {
+        .catch(function () {
             cache.loaded[id] = true;
             delete cache.inflight[id];
         });
@@ -152,7 +152,7 @@ function partitionViewport(projection) {
     var tiler = utilTiler().zoomExtent([z2, z2]);
 
     return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
+        .map(function (tile) { return tile.extent; });
 }
 
 
@@ -161,10 +161,10 @@ function searchLimited(limit, projection, rtree) {
     limit = limit || 5;
 
     return partitionViewport(projection)
-        .reduce(function(result, extent) {
+        .reduce(function (result, extent) {
             var found = rtree.search(extent.bbox())
                 .slice(0, limit)
-                .map(function(d) { return d.data; });
+                .map(function (d) { return d.data; });
 
             return (found.length ? result.concat(found) : result);
         }, []);
@@ -173,7 +173,7 @@ function searchLimited(limit, projection, rtree) {
 
 export default {
 
-    init: function() {
+    init: function () {
         if (!_oscCache) {
             this.reset();
         }
@@ -181,7 +181,7 @@ export default {
         this.event = utilRebind(this, dispatch, 'on');
     },
 
-    reset: function() {
+    reset: function () {
         if (_oscCache) {
             Object.values(_oscCache.images.inflight).forEach(abortRequest);
         }
@@ -195,13 +195,13 @@ export default {
     },
 
 
-    images: function(projection) {
+    images: function (projection) {
         var limit = 5;
         return searchLimited(limit, projection, _oscCache.images.rtree);
     },
 
 
-    sequences: function(projection) {
+    sequences: function (projection) {
         var viewport = projection.clipExtent();
         var min = [viewport[0][0], viewport[1][1]];
         var max = [viewport[1][0], viewport[0][1]];
@@ -210,12 +210,12 @@ export default {
 
         // all sequences for images in viewport
         _oscCache.images.rtree.search(bbox)
-            .forEach(function(d) { sequenceKeys[d.data.sequence_id] = true; });
+            .forEach(function (d) { sequenceKeys[d.data.sequence_id] = true; });
 
         // make linestrings from those sequences
         var lineStrings = [];
         Object.keys(sequenceKeys)
-            .forEach(function(sequenceKey) {
+            .forEach(function (sequenceKey) {
                 var seq = _oscCache.sequences[sequenceKey];
                 var images = seq && seq.images;
 
@@ -224,8 +224,8 @@ export default {
                         type: 'LineString',
                         coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
                         properties: {
-                            captured_at: images[0] ? images[0].captured_at: null,
-                            captured_by: images[0] ? images[0].captured_by: null,
+                            captured_at: images[0] ? images[0].captured_at : null,
+                            captured_by: images[0] ? images[0].captured_by : null,
                             key: sequenceKey
                         }
                     });
@@ -235,18 +235,18 @@ export default {
     },
 
 
-    cachedImage: function(imageKey) {
+    cachedImage: function (imageKey) {
         return _oscCache.images.forImageKey[imageKey];
     },
 
 
-    loadImages: function(projection) {
+    loadImages: function (projection) {
         var url = apibase + '/1.0/list/nearby-photos/';
         loadTiles('images', url, projection);
     },
 
 
-    ensureViewerLoaded: function(context) {
+    ensureViewerLoaded: function (context) {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
@@ -299,7 +299,7 @@ export default {
 
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize.openstreetcam', function(dimensions) {
+        context.ui().photoviewer.on('resize.openstreetcam', function (dimensions) {
             imgZoom = d3_zoom()
                 .extent([[0, 0], dimensions])
                 .translateExtent([[0, 0], dimensions])
@@ -316,7 +316,7 @@ export default {
 
 
         function rotate(deg) {
-            return function() {
+            return function () {
                 if (!_oscSelectedImage) return;
                 var sequenceKey = _oscSelectedImage.sequence_id;
                 var sequence = _oscCache.sequences[sequenceKey];
@@ -344,7 +344,7 @@ export default {
         }
 
         function step(stepBy) {
-            return function() {
+            return function () {
                 if (!_oscSelectedImage) return;
                 var sequenceKey = _oscSelectedImage.sequence_id;
                 var sequence = _oscCache.sequences[sequenceKey];
@@ -368,7 +368,7 @@ export default {
     },
 
 
-    showViewer: function(context) {
+    showViewer: function (context) {
         var viewer = context.container().select('.photoviewer')
             .classed('hide', false);
 
@@ -388,7 +388,7 @@ export default {
     },
 
 
-    hideViewer: function(context) {
+    hideViewer: function (context) {
         _oscSelectedImage = null;
 
         this.updateUrlImage(null);
@@ -408,7 +408,7 @@ export default {
     },
 
 
-    selectImage: function(context, imageKey) {
+    selectImage: function (context, imageKey) {
 
         var d = this.cachedImage(imageKey);
 
@@ -494,12 +494,12 @@ export default {
     },
 
 
-    getSelectedImage: function() {
+    getSelectedImage: function () {
         return _oscSelectedImage;
     },
 
 
-    getSequenceKeyForImage: function(d) {
+    getSequenceKeyForImage: function (d) {
         return d && d.sequence_id;
     },
 
@@ -507,7 +507,7 @@ export default {
     // Updates the currently highlighted sequence and selected bubble.
     // Reset is only necessary when interacting with the viewport because
     // this implicitly changes the currently selected bubble/sequence
-    setStyles: function(context, hovered, reset) {
+    setStyles: function (context, hovered, reset) {
         if (reset) {  // reset all layers
             context.container().selectAll('.viewfield-group')
                 .classed('highlighted', false)
@@ -535,13 +535,13 @@ export default {
         var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
 
         context.container().selectAll('.layer-openstreetcam .viewfield-group')
-            .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
-            .classed('hovered', function(d) { return d.key === hoveredImageKey; })
-            .classed('currentView', function(d) { return d.key === selectedImageKey; });
+            .classed('highlighted', function (d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
+            .classed('hovered', function (d) { return d.key === hoveredImageKey; })
+            .classed('currentView', function (d) { return d.key === selectedImageKey; });
 
         context.container().selectAll('.layer-openstreetcam .sequence')
-            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
-            .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
+            .classed('highlighted', function (d) { return d.properties.key === hoveredSequenceKey; })
+            .classed('currentView', function (d) { return d.properties.key === selectedSequenceKey; });
 
         // update viewfields if needed
         context.container().selectAll('.layer-openstreetcam .viewfield-group .viewfield')
@@ -560,7 +560,7 @@ export default {
     },
 
 
-    updateUrlImage: function(imageKey) {
+    updateUrlImage: function (imageKey) {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
@@ -573,7 +573,7 @@ export default {
     },
 
 
-    cache: function() {
+    cache: function () {
         return _oscCache;
     }
 
