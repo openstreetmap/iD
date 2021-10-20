@@ -208,11 +208,8 @@ export function presetIndex() {
     let address;
     let best = -1;
     let match;
-
+    let matchCandidates = [];
     let validLocations;
-    if (Array.isArray(loc)) {
-      validLocations = locationManager.locationsAt(loc);
-    }
 
     for (let k in tags) {
       // If any part of an address is present, allow fallback to "Address" preset - #4353
@@ -225,16 +222,29 @@ export function presetIndex() {
 
       for (let i = 0; i < keyMatches.length; i++) {
         const candidate = keyMatches[i];
-
-        // discard candidate preset if location is not valid at `loc`
-        if (validLocations && candidate.locationSetID) {
-          if (!validLocations[candidate.locationSetID]) continue;
-        }
-
         const score = candidate.matchScore(tags);
+        if (score === -1){
+          continue;
+        }
+        matchCandidates.push({score, candidate});
         if (score > best) {
           best = score;
           match = candidate;
+        }
+      }
+    }
+
+    if (match && match.locationSetID && Array.isArray(loc)){
+      validLocations = locationManager.locationsAt(loc);
+      if (!validLocations[match.locationSetID]){
+        matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
+        for (let i = 0; i < matchCandidates.length; i++){
+          const candidateScore = matchCandidates[i];
+          if (!candidateScore.candidate.locationSetID || validLocations[candidateScore.candidate.locationSetID]){
+            match = candidateScore.candidate;
+            best = candidateScore.score;
+            break;
+          }
         }
       }
     }
