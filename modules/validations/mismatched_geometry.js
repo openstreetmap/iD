@@ -220,8 +220,9 @@ export function validationMismatchedGeometry() {
 
         if (sourceGeom === 'area') targetGeoms.unshift('line');
 
+        var asSource = presetManager.match(entity, graph);
+
         var targetGeom = targetGeoms.find(nodeGeom => {
-            var asSource = presetManager.matchTags(entity.tags, sourceGeom);
             var asTarget = presetManager.matchTags(entity.tags, nodeGeom);
             if (!asSource || !asTarget ||
                 asSource === asTarget ||
