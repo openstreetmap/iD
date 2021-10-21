@@ -15,7 +15,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone');
+    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
@@ -659,8 +659,9 @@ export function coreHistory(context) {
             if (lock.locked() &&
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
+                const success = prefs(getKey('saved_history'), history.toJSON() || null);
 
-                prefs(getKey('saved_history'), history.toJSON() || null);
+                if (!success) dispatch.call('storage_error');
             }
             return history;
         },

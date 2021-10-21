@@ -69,6 +69,11 @@ export function uiStatus(context) {
 
         osm.on('apiStatusChange.uiStatus', update);
 
+        context.history().on('storage_error', () => {
+            selection.html(t.html('osm_api_status.message.local_storage_full'));
+            selection.attr('class', 'api-status error');
+        });
+
         // reload the status periodically regardless of other factors
         window.setInterval(function() {
             osm.reloadApiStatus();
