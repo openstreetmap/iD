@@ -234,7 +234,7 @@ export function presetIndex() {
       }
     }
 
-    if (match && match.locationSetID && Array.isArray(loc)){
+    if (match && match.locationSetID && match.locationSetID !== '+[Q2]' && Array.isArray(loc)){
       validLocations = locationManager.locationsAt(loc);
       if (!validLocations[match.locationSetID]){
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
