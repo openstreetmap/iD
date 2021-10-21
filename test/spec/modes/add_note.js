@@ -32,15 +32,19 @@ describe('iD.modeAddNote', function() {
                 loc: [-77.02271, 38.90085],
                 status: 'open'
             });
+
+            context.on('enter.addNoteTest', function(mode) {
+                if (mode.id === 'select-note') {
+                    expect(iD.services.osm.caches().note.note[-1]).to.eql(note);
+                    context.mode().exit();
+                    d3.select('window').on('click.draw-block', null);
+                    context.on('enter.addNoteTest', null);
+                    done();
+                }
+            });
+
             happen.mousedown(context.surface().node(), {});
             happen.mouseup(window, {});
-
-            window.setTimeout(function() {
-                expect(iD.services.osm.caches().note.note[-1]).to.eql(note);
-                context.mode().exit();
-                d3.select('window').on('click.draw-block', null);
-                done();
-            }, 50);
         });
 
         // this won't work because draw behavior can only snap to entities, not notes
