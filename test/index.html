@@ -172,6 +172,12 @@
       'spec/validations/suspicious_name.js'
     ];
 
+    window.executionErrors = [];
+
+    window.onerror = function (message, source, line, col) {
+      window.executionErrors.push("message" + message + " source" + source + " line" + line + " col" + col);
+    };
+
     var isPhantomJS = !!(navigator.userAgent.match(/PhantomJS/));
     var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
 
@@ -191,6 +197,15 @@
     (function nextScript() {
       if (!scripts.length) {
         window.mocha.run();
+
+        if (window.executionErrors.length > 0){
+          console.log('\n\n[Execution errors exist] Please resolve the following: \n');
+          for (var i = 0; i < window.executionErrors.length; i++){
+            console.log('[Execution error] ' + window.executionErrors[i]);
+          }
+          console.log('\n Disposing mocha. Expect mocha dispose log like: \'Uncaught error outside test suite\'... \n');
+          window.mocha.dispose();
+        }
         return;
       }
       var src = scripts.shift();
