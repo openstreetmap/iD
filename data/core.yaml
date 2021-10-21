@@ -346,6 +346,19 @@ en:
       not_downloaded:
         single: This feature can't be moved because parts of it have not yet been downloaded.
         multiple: These features can't be moved because parts of them have not yet been downloaded.
+    follow:
+      key: F
+      error:
+        needs_more_initial_nodes: This feature can't follow another feature because it isn't connected to enough consecutive points along another feature. Add another point manually to continue.
+        intersection_of_multiple_ways:
+          line: This feature can't follow a line because multiple lines are connected to the last two points. Add another point manually to continue.
+          area: This feature can't follow an area because multiple areas are connected to the last two points. Add another point manually to continue.
+          generic: This feature can't follow another feature because multiple features are connected to the last two points. Add another point manually to continue.
+        intersection_of_different_ways:
+          line: This feature can't follow the line because it is only connected at a single point. Add another point manually to continue.
+          area: This feature can't follow the area because it is only connected at a single point. Add another point manually to continue.
+          generic: This feature can't follow the other feature because they are only connected at a single point. Add another point manually to continue.
+        unknown: This feature can't follow another feature.
     reflect:
       title:
         long: Flip Long
@@ -784,7 +797,7 @@ en:
   map_data:
     title: Map Data
     description: Map Data
-    key: F
+    key: U
     data_layers: Data Layers
     layers:
       osm:
@@ -1762,10 +1775,12 @@ en:
     incompatible_source:
       title: Suspicious Sources
       tip: "Find features with suspicious source tags"
-      google:
-        feature:
-          message: '{feature} lists Google as a data source'
-        reference: "Google products are proprietary and must not be used as references."
+      feature:
+        message: '{feature} lists "{value}" as a data source'
+      reference:
+        amap: "Amap products are proprietary and must not be used as references."
+        baidu: "Baidu products are proprietary and must not be used as references."
+        google: "Google products are proprietary and must not be used as references."
     incorrect_name:
       message: '{feature} has the mistaken name "{name}"'
       message_language: '{feature} has the mistaken name "{name}" in {language}'
@@ -2331,6 +2346,7 @@ en:
         split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"
+        follow: "Follow a line or area"
         nudge: "Nudge selected features"
         nudge_more: "Nudge selected features by a lot"
         scale: "Scale selected features"

@@ -424,6 +424,29 @@ describe('iD.actionJoin', function () {
         expect(graph.hasEntity('w-2')).to.be.undefined;
     });
 
+    it('prefers to keep the oldest way', function () {
+        // n1 ==> n2 ++> n3 --> n4
+        // ==> is existing, ++> is existing, --> is new
+        // Expected result:
+        // n1 ==> n2 ==> n3 ==> n4
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'n1', loc: [0,0] }),
+            iD.osmNode({ id: 'n2', loc: [2,0] }),
+            iD.osmNode({ id: 'n3', loc: [4,0] }),
+            iD.osmNode({ id: 'n4', loc: [6,0] }),
+            iD.osmWay({ id: 'w1', nodes: ['n2', 'n3'] }),
+            iD.osmWay({ id: 'w2', nodes: ['n1', 'n2'] }),
+            iD.osmWay({ id: 'w-1', nodes: ['n3', 'n4'] })
+        ]);
+
+        graph = iD.actionJoin(['w1', 'w2', 'w-1'])(graph);
+
+        // way 1 is the oldest (it has the lower id) so it kept that one
+        expect(graph.entity('w1').nodes).to.eql(['n1', 'n2', 'n3', 'n4']);
+        expect(graph.hasEntity('w2')).to.be.undefined;
+        expect(graph.hasEntity('w-1')).to.be.undefined;
+    });
+
     it('merges tags', function () {
         var graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
