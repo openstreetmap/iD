@@ -97,7 +97,7 @@ describe('iD.actionJoin', function () {
         });
 
         ['restriction', 'connectivity'].forEach(function (type) {
-            it(`returns '${type}' in situations where a ${type} relation would be damaged (a)`, function () {
+            it('returns ' + type + ' in situations where a ' + type + 'relation would be damaged (a)', function () {
                 // a --> b ==> c
                 // from: -
                 // to: =
@@ -108,7 +108,7 @@ describe('iD.actionJoin', function () {
                     iD.osmNode({id: 'c', loc: [4,0]}),
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '=', nodes: ['b', 'c']}),
-                    iD.osmRelation({id: 'r', tags: {type}, members: [
+                    iD.osmRelation({id: 'r', tags: {'type': type}, members: [
                         {type: 'way', id: '-', role: 'from'},
                         {type: 'way', id: '=', role: 'to'},
                         {type: 'node', id: 'b', role: 'via'}
@@ -118,7 +118,7 @@ describe('iD.actionJoin', function () {
                 expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal(type);
             });
 
-            it(`returns '${type}' in situations where a ${type} relation would be damaged (b)`, function () {
+            it('returns ' + type + ' in situations where a ' + type + 'relation would be damaged (b)', function () {
                 // a --> b ==> c
                 //       |
                 //       d
@@ -133,7 +133,7 @@ describe('iD.actionJoin', function () {
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '=', nodes: ['b', 'c']}),
                     iD.osmWay({id: '|', nodes: ['b', 'd']}),
-                    iD.osmRelation({id: 'r', tags: {type}, members: [
+                    iD.osmRelation({id: 'r', tags: {'type': type}, members: [
                         {type: 'way', id: '-', role: 'from'},
                         {type: 'way', id: '|', role: 'to'},
                         {type: 'node', id: 'b', role: 'via'}
@@ -143,7 +143,7 @@ describe('iD.actionJoin', function () {
                 expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal(type);
             });
 
-            it(`returns falsy in situations where a ${type} relation wouldn't be damaged (a)`, function () {
+            it('returns falsy in situations where a '+ type + 'relation wouldn\'t be damaged (a)', function () {
                 // a --> b ==> c
                 // |
                 // d
@@ -158,7 +158,7 @@ describe('iD.actionJoin', function () {
                     iD.osmWay({id: '-', nodes: ['a', 'b']}),
                     iD.osmWay({id: '=', nodes: ['b', 'c']}),
                     iD.osmWay({id: '|', nodes: ['a', 'd']}),
-                    iD.osmRelation({id: 'r', tags: {type}, members: [
+                    iD.osmRelation({id: 'r', tags: {'type': type}, members: [
                         {type: 'way', id: '-', role: 'from'},
                         {type: 'way', id: '|', role: 'to'},
                         {type: 'node', id: 'a', role: 'via'}
@@ -168,7 +168,7 @@ describe('iD.actionJoin', function () {
                 expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
             });
 
-            it(`returns falsy in situations where a ${type} restriction wouldn't be damaged (b)`, function () {
+            it('returns falsy in situations where a ' + type + 'restriction wouldn\'t be damaged (b)', function () {
                 //       d
                 //       |
                 // a --> b ==> c
@@ -187,7 +187,7 @@ describe('iD.actionJoin', function () {
                     iD.osmWay({id: '=', nodes: ['b', 'c']}),
                     iD.osmWay({id: '|', nodes: ['d', 'b']}),
                     iD.osmWay({id: '\\', nodes: ['b', 'e']}),
-                    iD.osmRelation({id: 'r', tags: {type}, members: [
+                    iD.osmRelation({id: 'r', tags: {'type': type}, members: [
                         {type: 'way', id: '|', role: 'from'},
                         {type: 'way', id: '\\', role: 'to'},
                         {type: 'node', id: 'b', role: 'via'}
