@@ -1,35 +1,35 @@
-describe('iD.serviceOpenstreetcam', function () {
+describe('iD.serviceOpenstreetcam', function() {
     var dimensions = [64, 64];
     var context, openstreetcam;
 
-    before(function () {
+    before(function() {
         iD.services.openstreetcam = iD.serviceOpenstreetcam;
         fetchMock.reset();
     });
 
-    after(function () {
+    after(function() {
         delete iD.services.openstreetcam;
     });
 
-    beforeEach(function () {
+    beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
         context.projection
             .scale(iD.geoZoomToScale(14))
             .translate([-116508, 0])  // 10,0
-            .clipExtent([[0, 0], dimensions]);
+            .clipExtent([[0,0], dimensions]);
 
         openstreetcam = iD.services.openstreetcam;
         openstreetcam.reset();
         fetchMock.reset();
     });
 
-    afterEach(function () {
+    afterEach(function() {
         fetchMock.reset();
     });
 
 
-    describe('#init', function () {
-        it('Initializes cache one time', function () {
+    describe('#init', function() {
+        it('Initializes cache one time', function() {
             var cache = openstreetcam.cache();
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('sequences');
@@ -40,10 +40,10 @@ describe('iD.serviceOpenstreetcam', function () {
         });
     });
 
-    describe('#reset', function () {
-        it('resets cache and image', function () {
+    describe('#reset', function() {
+        it('resets cache and image', function() {
             openstreetcam.cache().foo = 'bar';
-            openstreetcam.selectImage(context, { key: 'baz' });
+            openstreetcam.selectImage(context, {key: 'baz'});
 
             openstreetcam.reset();
             expect(openstreetcam.cache()).to.not.have.property('foo');
@@ -51,11 +51,11 @@ describe('iD.serviceOpenstreetcam', function () {
         });
     });
 
-    describe('#loadImages', function () {
-        it('fires loadedImages when images are loaded', function (done) {
+    describe('#loadImages', function() {
+        it('fires loadedImages when images are loaded', function(done) {
             var data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
-                currentPageItems: [{
+                currentPageItems:[{
                     id: '1',
                     sequence_id: '100',
                     sequence_index: '1',
@@ -101,7 +101,7 @@ describe('iD.serviceOpenstreetcam', function () {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            openstreetcam.on('loadedImages', function () {
+            openstreetcam.on('loadedImages', function() {
                 expect(fetchMock.calls().length).to.eql(1);  // 1 nearby-photos
                 done();
             });
@@ -112,7 +112,7 @@ describe('iD.serviceOpenstreetcam', function () {
         it('does not load images around null island', function (done) {
             var data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
-                currentPageItems: [{
+                currentPageItems:[{
                     id: '1',
                     sequence_id: '100',
                     sequence_index: '1',
@@ -164,14 +164,14 @@ describe('iD.serviceOpenstreetcam', function () {
             openstreetcam.on('loadedImages', spy);
             openstreetcam.loadImages(context.projection);
 
-            window.setTimeout(function () {
+            window.setTimeout(function() {
                 expect(spy).to.have.been.not.called;
                 expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
                 done();
             }, 200);
         });
 
-        it('loads multiple pages of image results', function (done) {
+        it('loads multiple pages of image results', function(done) {
             var features = [];
             for (var i = 0; i < 1000; i++) {
                 var key = String(i);
@@ -202,7 +202,7 @@ describe('iD.serviceOpenstreetcam', function () {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            openstreetcam.on('loadedImages', function () {
+            openstreetcam.on('loadedImages', function() {
                 expect(fetchMock.calls().length).to.eql(2);   // 2 nearby-photos
                 done();
             });
@@ -212,31 +212,31 @@ describe('iD.serviceOpenstreetcam', function () {
     });
 
 
-    describe('#images', function () {
-        it('returns images in the visible map area', function () {
+    describe('#images', function() {
+        it('returns images in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 0 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 1 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10, 1], ca: 90, sequence_id: '100', sequence_index: 2 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
             openstreetcam.cache().images.rtree.load(features);
             var res = openstreetcam.images(context.projection);
 
             expect(res).to.deep.eql([
-                { key: '0', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 0 },
-                { key: '1', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 1 }
+                { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 },
+                { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 }
             ]);
         });
 
-        it('limits results no more than 5 stacked images in one spot', function () {
+        it('limits results no more than 5 stacked images in one spot', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 0 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 2 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 3 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 4 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '5', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 5 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 2 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 3 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 4 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '5', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 5 } }
             ];
 
             openstreetcam.cache().images.rtree.load(features);
@@ -246,21 +246,21 @@ describe('iD.serviceOpenstreetcam', function () {
     });
 
 
-    describe('#sequences', function () {
-        it('returns sequence linestrings in the visible map area', function () {
+    describe('#sequences', function() {
+        it('returns sequence linestrings in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 0 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10, 0], ca: 90, sequence_id: '100', sequence_index: 1 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10, 1], ca: 90, sequence_id: '100', sequence_index: 2 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
             openstreetcam.cache().images.rtree.load(features);
-            openstreetcam.cache().sequences['100'] = { rotation: 0, images: [features[0].data, features[1].data, features[2].data] };
+            openstreetcam.cache().sequences['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
             var res = openstreetcam.sequences(context.projection);
             expect(res).to.deep.eql([{
                 type: 'LineString',
-                coordinates: [[10, 0], [10, 0], [10, 1]],
+                coordinates: [[10,0], [10,0], [10,1]],
                 properties: {
                     captured_at: undefined,
                     captured_by: undefined,
@@ -270,10 +270,10 @@ describe('iD.serviceOpenstreetcam', function () {
         });
     });
 
-    describe('#selectedImage', function () {
-        it('sets and gets selected image', function () {
+    describe('#selectedImage', function() {
+        it('sets and gets selected image', function() {
             var d = { key: 'foo' };
-            openstreetcam.cache().images = { forImageKey: { foo: d } };
+            openstreetcam.cache().images = { forImageKey: { foo: d }};
             openstreetcam.selectImage(context, 'foo');
             expect(openstreetcam.getSelectedImage()).to.eql(d);
         });

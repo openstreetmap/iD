@@ -1,23 +1,23 @@
-describe('iD.uiFieldWikipedia', function () {
+describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field;
 
-    before(function () {
+    before(function() {
         iD.fileFetcher.cache().wmf_sitematrix = [
-            ['German', 'Deutsch', 'de'],
-            ['English', 'English', 'en']
+          ['German','Deutsch','de'],
+          ['English','English','en']
         ];
         iD.services.wikipedia = iD.serviceWikipedia;
         iD.services.wikidata = iD.serviceWikidata;
     });
 
-    after(function () {
+    after(function() {
         delete iD.fileFetcher.cache().wmf_sitematrix;
         delete iD.services.wikipedia;
         delete iD.services.wikidata;
     });
 
-    beforeEach(function () {
-        entity = iD.osmNode({ id: 'n12345' });
+    beforeEach(function() {
+        entity = iD.osmNode({id: 'n12345'});
         context = iD.coreContext().assetPath('../dist/').init();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
@@ -34,7 +34,7 @@ describe('iD.uiFieldWikipedia', function () {
         });
     });
 
-    afterEach(function () {
+    afterEach(function() {
         fetchMock.reset();
     });
 
@@ -60,11 +60,11 @@ describe('iD.uiFieldWikipedia', function () {
         }
     }
 
-    it('recognizes lang:title format', function (done) {
+    it('recognizes lang:title format', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context);
-        window.setTimeout(function () {   // async, so data will be available
+        window.setTimeout(function() {   // async, so data will be available
             selection.call(wikipedia);
-            wikipedia.tags({ wikipedia: 'en:Title' });
+            wikipedia.tags({wikipedia: 'en:Title'});
 
             expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('English');
             expect(iD.utilGetSetValue(selection.selectAll('.wiki-title'))).to.equal('Title');
@@ -72,9 +72,9 @@ describe('iD.uiFieldWikipedia', function () {
         }, 20);
     });
 
-    it('sets language, value', function (done) {
+    it('sets language, value', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-        window.setTimeout(function () {   // async, so data will be available
+        window.setTimeout(function() {   // async, so data will be available
             wikipedia.on('change', changeTags);
             selection.call(wikipedia);
 
@@ -90,17 +90,17 @@ describe('iD.uiFieldWikipedia', function () {
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
 
             expect(spy.callCount).to.equal(4);
-            expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: undefined });  // lang on change
-            expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: undefined });  // lang on blur
+            expect(spy.getCall(0)).to.have.been.calledWith({ wikipedia: undefined});  // lang on change
+            expect(spy.getCall(1)).to.have.been.calledWith({ wikipedia: undefined});  // lang on blur
             expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on change
             expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });   // title on blur
             done();
         }, 20);
     });
 
-    it('recognizes pasted URLs', function (done) {
+    it('recognizes pasted URLs', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-        window.setTimeout(function () {   // async, so data will be available
+        window.setTimeout(function() {   // async, so data will be available
             wikipedia.on('change', changeTags);
             selection.call(wikipedia);
 
@@ -114,14 +114,14 @@ describe('iD.uiFieldWikipedia', function () {
     });
 
     // note - currently skipping the tests that use `options` to delay responses
-    it('preserves existing language', function (done) {
+    it('preserves existing language', function(done) {
         var wikipedia1 = iD.uiFieldWikipedia(field, context);
-        window.setTimeout(function () {   // async, so data will be available
+        window.setTimeout(function() {   // async, so data will be available
             selection.call(wikipedia1);
             iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
 
             var wikipedia2 = iD.uiFieldWikipedia(field, context);
-            window.setTimeout(function () {   // async, so data will be available
+            window.setTimeout(function() {   // async, so data will be available
                 selection.call(wikipedia2);
                 wikipedia2.tags({});
                 expect(iD.utilGetSetValue(selection.selectAll('.wiki-lang'))).to.equal('Deutsch');
@@ -130,7 +130,7 @@ describe('iD.uiFieldWikipedia', function () {
         }, 20);
     });
 
-    it.skip('does not set delayed wikidata tag if graph has changed', function (done) {
+    it.skip('does not set delayed wikidata tag if graph has changed', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
@@ -169,7 +169,7 @@ describe('iD.uiFieldWikipedia', function () {
         });
 
         // t30:  graph change - Set title to "Title"
-        window.setTimeout(function () {
+        window.setTimeout(function() {
             iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
@@ -178,14 +178,14 @@ describe('iD.uiFieldWikipedia', function () {
         // t60:  at t0 + 60ms (delay), wikidata SHOULD NOT be set because graph has changed.
 
         // t70:  check that wikidata unchanged
-        window.setTimeout(function () {
+        window.setTimeout(function() {
             expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
         }, 70);
 
         // t90:  at t30 + 60ms (delay), wikidata SHOULD be set because graph is unchanged.
 
         // t100:  check that wikidata has changed
-        window.setTimeout(function () {
+        window.setTimeout(function() {
             expect(context.entity(entity.id).tags.wikidata).to.equal('Q216353');
 
             expect(spy.callCount).to.equal(4);
