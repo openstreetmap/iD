@@ -7,7 +7,12 @@ module.exports = function (config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
 
-    plugins: ['karma-remap-istanbul', 'karma-coverage', 'karma-mocha', 'karma-phantomjs-launcher', 'karma-chrome-launcher'],
+    plugins: [
+      'karma-remap-istanbul',
+      'karma-coverage',
+      'karma-mocha',
+      'karma-chrome-launcher'
+    ],
 
     // frameworks to use
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
@@ -74,14 +79,13 @@ module.exports = function (config) {
     // start these browsers
     // available browser launchers: https://www.npmjs.com/search?q=keywords:karma-launcher
     browsers: [
-      'Chrome',
-      'PhantomJS'
+      'ChromeHeadless'
     ],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser instances should be started simultaneously
