@@ -871,7 +871,7 @@ function validationCache(which) {
           const issue = cache.issuesByIssueID[issueID];
           if (issue) {
             (issue.entityIds || []).forEach(relatedID => result.add(relatedID));
-          } else {  // shouldnt happen, clean up
+          } else {  // shouldn't happen, clean up
             delete cache.issuesByIssueID[issueID];
           }
         });

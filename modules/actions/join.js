@@ -39,7 +39,7 @@ export function actionJoin(ids) {
         });
 
         // Prefer to keep an existing way.
-        // if there are mulitple existing ways, keep the oldest one
+        // if there are multiple existing ways, keep the oldest one
         // the oldest way is determined by the ID of the way
         const survivorID = (
             ways

@@ -478,7 +478,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             const indexOfSecondLast = way.nodes.indexOf(secondLastNodeId);
 
             // for a closed way, the first/last node is the same so it appears twice in the array,
-            // but indexOf always finds the first occurance. This is only an issue when following a way
+            // but indexOf always finds the first occurrence. This is only an issue when following a way
             // in descending order
             const isDescendingPastZero = indexOfLast === way.nodes.length - 2 && indexOfSecondLast === 0;
 
