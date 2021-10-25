@@ -8,7 +8,7 @@ iD supports several URL parameters. When constructing a URL to a standalone inst
 of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters are available
 **in the hash portion of the URL**:
 
-* __`background`__ - The value from a `sourcetag` property in iD's
+* __`background`__ - The value of the `id` property of the source in iD's
   [imagery list](https://github.com/openstreetmap/iD/blob/develop/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
