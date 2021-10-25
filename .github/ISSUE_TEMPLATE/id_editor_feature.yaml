@@ -1,0 +1,21 @@
+name: 'iD Editor: Feature, Idea, Question'
+description: You want to request a feature, share an idea or have a question.
+# title:
+# labels:
+# assignees:
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Description
+      description: Please describe you feature request, idea or question.
+      placeholder:
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: Please add screenshots if they can help us understand your request/idea/question.
+      placeholder:
+    validations:
+      required: false
