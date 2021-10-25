@@ -53,6 +53,7 @@ export function presetIndex() {
 
   // Index of presets by (geometry, tag key).
   let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+  let _geometryIndexFast = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
   let _loadPromise;
 
 
@@ -176,6 +177,19 @@ export function presetIndex() {
       });
     });
 
+    // Rebuild geometry index fast
+    _geometryIndexFast = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+    _this.collection.forEach(preset => {
+      (preset.geometry || []).forEach(geometry => {
+        let g = _geometryIndexFast[geometry];
+        for (let key in preset.tags) {
+          g[key] = g[key] || {};
+          let value = preset.tags[key];
+          (g[key][value] = g[key][value] || []).push(preset);
+        }
+      });
+    });
+
     // Merge Custom Features
     if (d.featureCollection && Array.isArray(d.featureCollection.features)) {
       locationManager.mergeCustomGeoJSON(d.featureCollection);
@@ -201,9 +215,99 @@ export function presetIndex() {
       return _this.matchTags(entity.tags, geometry, entityExtent.center());
     });
   };
+  let timeFastest = 0;
+  let timeFast = 0;
+  let timeSlow = 0;
+  let countMatch = 0;
 
+  function getTime(){
+    return window.performance.now();
+  }
 
   _this.matchTags = (tags, geometry, loc) => {
+    if (++countMatch % 5000 === 0){
+      console.log(`Count: ${countMatch} TimeFastest: ${timeFastest} timeFast: ${timeFast} timeSlow: ${timeSlow}`);
+    }
+    let timeStart = getTime();
+    let resultFast = matchTagsInnerFast(tags, geometry, loc);
+    timeFast = timeFast + (getTime() - timeStart);
+    
+    timeStart = getTime();
+    let resultSlow = matchTagsInnerSlow(tags, geometry, loc);
+    timeSlow = timeSlow + (getTime() - timeStart);
+
+    if (resultFast !== resultSlow){
+      console.log('Different!');
+      console.log(resultFast, resultSlow);
+      throw Error('Different');
+    }
+
+    return resultFast;
+
+  function matchTagsInnerFast(tags, geometry, loc){
+    const keyIndex = _geometryIndexFast[geometry];
+    let bestScore = -1;
+    let bestMatch;
+    let matchCandidates = [];
+
+    for (let k in tags) {
+      let indexMatches = [];
+
+      let valueIndex = keyIndex[k];
+      if (!valueIndex) continue;
+
+      let keyValueMatches = valueIndex[tags[k]];
+      if (keyValueMatches) indexMatches.push(...keyValueMatches);
+      let keyStarMatches = valueIndex['*'];
+      if (keyStarMatches) indexMatches.push(...keyStarMatches);
+
+      if (indexMatches.length === 0) continue;
+
+      for (let i = 0; i < indexMatches.length; i++) {
+        const candidate = indexMatches[i];
+        const score = candidate.matchScore(tags);
+
+        if (score === -1){
+          continue;
+        }
+        matchCandidates.push({score, candidate});
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = candidate;
+        }
+      }
+    }
+
+    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
+      let validLocations = locationManager.locationsAt(loc);
+      if (!validLocations[bestMatch.locationSetID]){
+        matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
+        for (let i = 0; i < matchCandidates.length; i++){
+          const candidateScore = matchCandidates[i];
+          if (!candidateScore.candidate.locationSetID || validLocations[candidateScore.candidate.locationSetID]){
+            bestMatch = candidateScore.candidate;
+            bestScore = candidateScore.score;
+            break;
+          }
+        }
+      }
+    }
+
+    // If any part of an address is present, allow fallback to "Address" preset - #4353
+    if (!bestMatch || bestMatch.isFallback()) {
+      for (let k in tags){
+          if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
+            bestMatch = keyIndex['addr:*']['*'][0];
+            break;
+          }
+      }
+    }
+
+    return bestMatch || _this.fallback(geometry);
+  }
+
+  function matchTagsInnerSlow(tags, geometry, loc){
     const geometryMatches = _geometryIndex[geometry];
     let address;
     let best = -1;
@@ -253,6 +357,8 @@ export function presetIndex() {
       match = address;
     }
     return match || _this.fallback(geometry);
+  }
+
   };
 
 
