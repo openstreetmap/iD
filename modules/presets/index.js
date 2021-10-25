@@ -171,7 +171,9 @@ export function presetIndex() {
       (preset.geometry || []).forEach(geometry => {
         let g = _geometryIndex[geometry];
         for (let key in preset.tags) {
-          (g[key] = g[key] || []).push(preset);
+          g[key] = g[key] || {};
+          let value = preset.tags[key];
+          (g[key][value] = g[key][value] || []).push(preset);
         }
       });
     });
@@ -204,57 +206,67 @@ export function presetIndex() {
 
 
   _this.matchTags = (tags, geometry, loc) => {
-    const geometryMatches = _geometryIndex[geometry];
-    let address;
-    let best = -1;
-    let match;
+    const keyIndex = _geometryIndex[geometry];
+    let bestScore = -1;
+    let bestMatch;
     let matchCandidates = [];
-    let validLocations;
 
     for (let k in tags) {
-      // If any part of an address is present, allow fallback to "Address" preset - #4353
-      if (/^addr:/.test(k) && geometryMatches['addr:*']) {
-        address = geometryMatches['addr:*'][0];
-      }
+      let indexMatches = [];
 
-      const keyMatches = geometryMatches[k];
-      if (!keyMatches) continue;
+      let valueIndex = keyIndex[k];
+      if (!valueIndex) continue;
 
-      for (let i = 0; i < keyMatches.length; i++) {
-        const candidate = keyMatches[i];
+      let keyValueMatches = valueIndex[tags[k]];
+      if (keyValueMatches) indexMatches.push(...keyValueMatches);
+      let keyStarMatches = valueIndex['*'];
+      if (keyStarMatches) indexMatches.push(...keyStarMatches);
+
+      if (indexMatches.length === 0) continue;
+
+      for (let i = 0; i < indexMatches.length; i++) {
+        const candidate = indexMatches[i];
         const score = candidate.matchScore(tags);
+
         if (score === -1){
           continue;
         }
         matchCandidates.push({score, candidate});
-        if (score > best) {
-          best = score;
-          match = candidate;
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestMatch = candidate;
         }
       }
     }
 
-    if (match && match.locationSetID && match.locationSetID !== '+[Q2]' && Array.isArray(loc)){
-      validLocations = locationManager.locationsAt(loc);
-      if (!validLocations[match.locationSetID]){
+    if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
+      let validLocations = locationManager.locationsAt(loc);
+      if (!validLocations[bestMatch.locationSetID]){
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
         for (let i = 0; i < matchCandidates.length; i++){
           const candidateScore = matchCandidates[i];
           if (!candidateScore.candidate.locationSetID || validLocations[candidateScore.candidate.locationSetID]){
-            match = candidateScore.candidate;
-            best = candidateScore.score;
+            bestMatch = candidateScore.candidate;
+            bestScore = candidateScore.score;
             break;
           }
         }
       }
     }
 
-    if (address && (!match || match.isFallback())) {
-      match = address;
+    // If any part of an address is present, allow fallback to "Address" preset - #4353
+    if (!bestMatch || bestMatch.isFallback()) {
+      for (let k in tags){
+          if (/^addr:/.test(k) && keyIndex['addr:*'] && keyIndex['addr:*']['*']) {
+            bestMatch = keyIndex['addr:*']['*'][0];
+            break;
+          }
+      }
     }
-    return match || _this.fallback(geometry);
-  };
 
+    return bestMatch || _this.fallback(geometry);
+  };
 
   _this.allowsVertex = (entity, resolver) => {
     if (entity.type !== 'node') return false;
