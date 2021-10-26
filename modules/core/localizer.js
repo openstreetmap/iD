@@ -424,5 +424,24 @@ export function coreLocalizer() {
         return code;  // if not found, use the code
     };
 
+    localizer.floatParser = (locale) => {
+        // https://stackoverflow.com/a/55366435/4585461
+        const format = new Intl.NumberFormat(locale);
+        const parts = format.formatToParts(12345.6);
+        const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
+        const index = new Map(numerals.map((d, i) => [d, i]));
+        const group = new RegExp(`[${parts.find(d => d.type === 'group').value}]`, 'g');
+        const decimal = new RegExp(`[${parts.find(d => d.type === 'decimal').value}]`);
+        const numeral = new RegExp(`[${numerals.join('')}]`, 'g');
+        const getIndex = d => index.get(d);
+        return (string) => {
+            string = string.trim()
+                .replace(group, '')
+                .replace(decimal, '.')
+                .replace(numeral, getIndex);
+            return string ? +string : NaN;
+        };
+    };
+
     return localizer;
 }

@@ -3,7 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { uiCombobox } from '../combobox';
-import { t } from '../../core/localizer';
+import { t, localizer } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 
 
@@ -16,6 +16,7 @@ export function uiFieldRoadheight(field, context) {
     var _entityIDs = [];
     var _tags;
     var _isImperial;
+    var parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
     var primaryUnits = [
         {
@@ -129,16 +130,23 @@ export function uiFieldRoadheight(field, context) {
 
         if (!primaryValue && !secondaryValue) {
             tag[field.key] = undefined;
-        } else if (isNaN(primaryValue) || isNaN(secondaryValue) || !_isImperial) {
-            tag[field.key] = context.cleanTagValue(primaryValue);
         } else {
-            if (primaryValue !== '') {
-                primaryValue = context.cleanTagValue(primaryValue + '\'');
+            var rawPrimaryValue = parseLocaleFloat(primaryValue);
+            if (isNaN(rawPrimaryValue)) rawPrimaryValue = primaryValue;
+            var rawSecondaryValue = parseLocaleFloat(secondaryValue);
+            if (isNaN(rawSecondaryValue)) rawSecondaryValue = secondaryValue;
+
+            if (isNaN(rawPrimaryValue) || isNaN(rawSecondaryValue) || !_isImperial) {
+                tag[field.key] = context.cleanTagValue(rawPrimaryValue);
+            } else {
+                if (rawPrimaryValue !== '') {
+                    rawPrimaryValue = context.cleanTagValue(rawPrimaryValue + '\'');
+                }
+                if (rawSecondaryValue !== '') {
+                    rawSecondaryValue = context.cleanTagValue(rawSecondaryValue + '"');
+                }
+                tag[field.key] = rawPrimaryValue + rawSecondaryValue;
             }
-            if (secondaryValue !== '') {
-                secondaryValue = context.cleanTagValue(secondaryValue + '"');
-            }
-            tag[field.key] = primaryValue + secondaryValue;
         }
 
         dispatch.call('change', this, tag);
@@ -156,26 +164,33 @@ export function uiFieldRoadheight(field, context) {
             if (primaryValue && (primaryValue.indexOf('\'') >= 0 || primaryValue.indexOf('"') >= 0)) {
                 secondaryValue = primaryValue.match(/(-?[\d.]+)"/);
                 if (secondaryValue !== null) {
-                    secondaryValue = secondaryValue[1];
+                    secondaryValue = parseFloat(secondaryValue[1], 10).toLocaleString(localizer.languageCode());
                 }
                 primaryValue = primaryValue.match(/(-?[\d.]+)'/);
                 if (primaryValue !== null) {
-                    primaryValue = primaryValue[1];
+                    primaryValue = parseFloat(primaryValue[1], 10).toLocaleString(localizer.languageCode());
                 }
                 _isImperial = true;
             } else if (primaryValue) {
+                var rawValue = primaryValue;
+                primaryValue = parseFloat(rawValue, 10);
+                if (isNaN(primaryValue)) primaryValue = rawValue;
+                primaryValue = primaryValue.toLocaleString(localizer.languageCode());
                 _isImperial = false;
             }
         }
 
         setUnitSuggestions();
 
+        // If feet are specified but inches are omitted, assume zero inches.
+        var inchesPlaceholder = (0).toLocaleString(localizer.languageCode());
+
         utilGetSetValue(primaryInput, typeof primaryValue === 'string' ? primaryValue : '')
             .attr('title', isMixed ? primaryValue.filter(Boolean).join('\n') : null)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : t('inspector.unknown'))
             .classed('mixed', isMixed);
         utilGetSetValue(secondaryInput, typeof secondaryValue === 'string' ? secondaryValue : '')
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (_isImperial ? '0' : null))
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (_isImperial ? inchesPlaceholder : null))
             .classed('mixed', isMixed)
             .classed('disabled', !_isImperial)
             .attr('readonly', _isImperial ? null : 'readonly');

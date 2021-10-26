@@ -32,6 +32,7 @@ export function uiFieldText(field, context) {
     var _tags;
     var _phoneFormats = {};
     const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
+    const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
@@ -132,7 +133,8 @@ export function uiFieldText(field, context) {
                     var raw_vals = input.node().value || '0';
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
-                        var num = Number(v);
+                        v = v.trim();
+                        var num = parseLocaleFloat(v);
                         if (isDirectionField) {
                             const compassDir = cardinal[v.trim().toLowerCase()];
                             if (compassDir !== undefined) {
@@ -140,10 +142,10 @@ export function uiFieldText(field, context) {
                             }
                         }
 
-                        if (!isFinite(num)) {
-                            // do nothing if the value is neither a number, nor a cardinal direction
-                            return v.trim();
-                        }
+                        // do nothing if the value is neither a number, nor a cardinal direction
+                        if (!isFinite(num)) return v;
+                        num = parseFloat(num, 10);
+                        if (!isFinite(num)) return v;
 
                         num += d;
                         // clamp to 0..359 degree range if it's a direction field
@@ -153,7 +155,7 @@ export function uiFieldText(field, context) {
                         }
                         // make sure no extra decimals are introduced
                         const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
-                        return clamped(num).toFixed(numDecimals);
+                        return clamped(num).toFixed(numDecimals).toLocaleString(localizer.languageCode());
                     });
                     input.node().value = vals.join(';');
                     change()();
@@ -393,17 +395,20 @@ export function uiFieldText(field, context) {
             // don't override multiple values with blank string
             if (!val && Array.isArray(_tags[field.key])) return;
 
-            if (!onInput) {
-                if (field.type === 'number' && val) {
-                    var vals = val.split(';');
-                    vals = vals.map(function(v) {
-                        var num = Number(v);
-                        return isFinite(num) ? clamped(num) : v.trim();
-                    });
-                    val = vals.join(';');
-                }
-                utilGetSetValue(input, val);
+            var displayVal = val;
+            if (field.type === 'number' && val) {
+                var vals = val.split(';');
+                vals = vals.map(function(v) {
+                    v = v.trim();
+                    var num = parseLocaleFloat(v);
+                    if (!isFinite(num)) return v;
+                    num = parseFloat(num, 10);
+                    if (!isFinite(num)) return v;
+                    return clamped(num);
+                });
+                val = vals.join(';');
             }
+            if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
             dispatch.call('change', this, t, onInput);
         };
@@ -422,7 +427,18 @@ export function uiFieldText(field, context) {
 
         var isMixed = Array.isArray(tags[field.key]);
 
-        utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
+        var val = !isMixed && tags[field.key] ? tags[field.key] : '';
+        if (field.type === 'number' && val) {
+            var vals = val.split(';');
+            vals = vals.map(function(v) {
+                v = v.trim();
+                var num = parseFloat(v, 10);
+                if (!isFinite(num)) return v;
+                return clamped(num).toLocaleString(localizer.languageCode());
+            });
+            val = vals.join(';');
+        }
+        utilGetSetValue(input, val)
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
