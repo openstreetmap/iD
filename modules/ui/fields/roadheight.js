@@ -167,10 +167,10 @@ export function uiFieldRoadheight(field, context) {
 
         utilGetSetValue(primaryInput, typeof primaryValue === 'string' ? primaryValue : '')
             .attr('title', isMixed ? primaryValue.filter(Boolean).join('\n') : null)
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : field.placeholder())
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : t('inspector.unknown'))
             .classed('mixed', isMixed);
         utilGetSetValue(secondaryInput, typeof secondaryValue === 'string' ? secondaryValue : '')
-            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (_isImperial ? field.placeholder() : null))
+            .attr('placeholder', isMixed ? t('inspector.multiple_values') : (_isImperial ? '0' : null))
             .classed('mixed', isMixed)
             .classed('disabled', !_isImperial)
             .attr('readonly', _isImperial ? null : 'readonly');
