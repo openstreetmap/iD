@@ -32,6 +32,7 @@ export function uiFieldText(field, context) {
     var _tags;
     var _phoneFormats = {};
     const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
+    const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
     if (field.type === 'tel') {
@@ -155,7 +156,7 @@ export function uiFieldText(field, context) {
                         }
                         // make sure no extra decimals are introduced
                         const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
-                        return clamped(num).toFixed(numDecimals).toLocaleString(localizer.languageCode());
+                        return formatFloat(clamped(num).toFixed(numDecimals));
                     });
                     input.node().value = vals.join(';');
                     change()();
@@ -434,7 +435,7 @@ export function uiFieldText(field, context) {
                 v = v.trim();
                 var num = parseFloat(v, 10);
                 if (!isFinite(num)) return v;
-                return clamped(num).toLocaleString(localizer.languageCode());
+                return formatFloat(clamped(num));
             });
             val = vals.join(';');
         }

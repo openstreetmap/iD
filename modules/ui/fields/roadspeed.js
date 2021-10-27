@@ -14,6 +14,7 @@ export function uiFieldRoadspeed(field, context) {
     var _entityIDs = [];
     var _tags;
     var _isImperial;
+    var formatFloat = localizer.floatFormatter(localizer.languageCode());
     var parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
     var speedCombo = uiCombobox(context, 'roadspeed');
@@ -92,8 +93,8 @@ export function uiFieldRoadspeed(field, context) {
 
     function comboValues(d) {
         return {
-            value: d.toLocaleString(localizer.languageCode()),
-            title: d.toLocaleString(localizer.languageCode())
+            value: formatFloat(d),
+            title: formatFloat(d)
         };
     }
 
@@ -137,7 +138,7 @@ export function uiFieldRoadspeed(field, context) {
 
             value = parseInt(value, 10);
             if (isNaN(value)) value = rawValue;
-            value = value.toLocaleString(localizer.languageCode());
+            value = formatFloat(value);
         }
 
         setUnitSuggestions();

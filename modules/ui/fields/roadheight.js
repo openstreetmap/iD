@@ -16,6 +16,7 @@ export function uiFieldRoadheight(field, context) {
     var _entityIDs = [];
     var _tags;
     var _isImperial;
+    var formatFloat = localizer.floatFormatter(localizer.languageCode());
     var parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
     var primaryUnits = [
@@ -164,18 +165,18 @@ export function uiFieldRoadheight(field, context) {
             if (primaryValue && (primaryValue.indexOf('\'') >= 0 || primaryValue.indexOf('"') >= 0)) {
                 secondaryValue = primaryValue.match(/(-?[\d.]+)"/);
                 if (secondaryValue !== null) {
-                    secondaryValue = parseFloat(secondaryValue[1], 10).toLocaleString(localizer.languageCode());
+                    secondaryValue = formatFloat(parseFloat(secondaryValue[1], 10));
                 }
                 primaryValue = primaryValue.match(/(-?[\d.]+)'/);
                 if (primaryValue !== null) {
-                    primaryValue = parseFloat(primaryValue[1], 10).toLocaleString(localizer.languageCode());
+                    primaryValue = formatFloat(parseFloat(primaryValue[1], 10));
                 }
                 _isImperial = true;
             } else if (primaryValue) {
                 var rawValue = primaryValue;
                 primaryValue = parseFloat(rawValue, 10);
                 if (isNaN(primaryValue)) primaryValue = rawValue;
-                primaryValue = primaryValue.toLocaleString(localizer.languageCode());
+                primaryValue = formatFloat(primaryValue);
                 _isImperial = false;
             }
         }
@@ -183,7 +184,7 @@ export function uiFieldRoadheight(field, context) {
         setUnitSuggestions();
 
         // If feet are specified but inches are omitted, assume zero inches.
-        var inchesPlaceholder = (0).toLocaleString(localizer.languageCode());
+        var inchesPlaceholder = formatFloat(0);
 
         utilGetSetValue(primaryInput, typeof primaryValue === 'string' ? primaryValue : '')
             .attr('title', isMixed ? primaryValue.filter(Boolean).join('\n') : null)

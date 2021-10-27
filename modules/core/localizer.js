@@ -424,9 +424,20 @@ export function coreLocalizer() {
         return code;  // if not found, use the code
     };
 
+    localizer.floatFormatter = (locale) => {
+        if (!('Intl' in window && 'NumberFormat' in Intl &&
+              'formatToParts' in Intl.NumberFormat.prototype)) {
+            return (number) => number.toString();
+        } else {
+            return (number) => number.toLocaleString(locale);
+        }
+    };
     localizer.floatParser = (locale) => {
         // https://stackoverflow.com/a/55366435/4585461
+        const polyfill = (string) => parseFloat(string, 10);
+        if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
         const format = new Intl.NumberFormat(locale);
+        if (!('formatToParts' in format)) return polyfill;
         const parts = format.formatToParts(12345.6);
         const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
         const index = new Map(numerals.map((d, i) => [d, i]));
