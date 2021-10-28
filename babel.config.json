@@ -2,11 +2,22 @@
   "presets": [
     [
       "@babel/preset-env", {
-        "useBuiltIns": "usage",
+        "useBuiltIns": "entry",
         "corejs": 3,
-        "modules": false
+        "modules": false,
+        "targets": {
+          "chrome": "58",
+          "ie": 11
+        }
       }
-    ]
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "inline-json-import",
+    ["@babel/transform-runtime", {
+      "regenerator": true
+    }]
   ],
   "compact": false
 }
