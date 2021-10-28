@@ -440,7 +440,10 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
             const [secondLastNodeId, lastNodeId] = _origWay.nodes.slice(isDrawingArea ? -3 : -2);
 
-            if (!lastNodeId || !secondLastNodeId || !startGraph.hasEntity(lastNodeId) || !startGraph.hasEntity(secondLastNodeId)) {
+            // Unlike startGraph, the full history graph may contain unsaved vertices to follow.
+            // https://github.com/openstreetmap/iD/issues/8749
+            const historyGraph = context.history().graph();
+            if (!lastNodeId || !secondLastNodeId || !historyGraph.hasEntity(lastNodeId) || !historyGraph.hasEntity(secondLastNodeId)) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
@@ -448,8 +451,9 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 return;
             }
 
-            const lastNodesParents = startGraph.parentWays(startGraph.entity(lastNodeId));
-            const secondLastNodesParents = startGraph.parentWays(startGraph.entity(secondLastNodeId));
+            // If the way has looped over itself, follow some other way.
+            const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
+            const secondLastNodesParents = historyGraph.parentWays(historyGraph.entity(secondLastNodeId)).filter(w => w.id !== wayID);
 
             const featureType = getFeatureType(lastNodesParents);
 
@@ -486,7 +490,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // if we're following a closed way and we pass the first/last node, the  next index will be -1
             if (nextNodeIndex === -1) nextNodeIndex = indexOfSecondLast === 1 ? way.nodes.length - 2 : 1;
 
-            const nextNode = startGraph.entity(way.nodes[nextNodeIndex]);
+            const nextNode = historyGraph.entity(way.nodes[nextNodeIndex]);
 
             drawWay.addNode(nextNode, {
                 geometry: { type: 'Point', coordinates: nextNode.loc },
