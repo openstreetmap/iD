@@ -37,6 +37,51 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#prxxxx]: https://github.com/openstreetmap/iD/pull/xxxx
 -->
 
+# 2.20.2
+##### 2021-Oct-28
+#### :sparkles: Usability & Accessibility
+* Decomission Maxar Standard legacy imagery layer ([#8647])
+* Show an error if localStorage is full ([#8727])
+* Keep the oldest way when merging ([#8708])
+* Enable ui map control toolbar scrolling on small devices or high zoom levels ([#pr8685])
+* Add link button next to website field ([#pr8650])
+#### :bug: Bugfixes
+* Various fixes for validator involving stale state and detections ([#pr8663])
+#### :scissors: Operations
+* Follow (<kbd>F</kbd>) - new method for quick drawing of ways on top of existing ways ([#pr8671], [#pr8773])
+* Disable merge operation when it could damage relations ([#pr8675])
+#### :white_check_mark: Validation
+* Add warning for some commercial mapservice in China ([#pr8701])
+* Add outdated tags validation fix option to tag as 'not' a matched item ([#pr8628])
+#### :earth_asia: Localization
+* Turn off RTL text patch on Chromium >=96 ([#pr8741])
+#### :hourglass: Performance
+* Significantly improved iD performance by speeding up preset matching ([#pr8768], [#pr8761], [#8612])
+* Debounce input events in the preset list ([#8288])
+#### :hammer: Development
+* Introduced github issue templates ([#pr8746])
+* Few unit tests improvements ([#pr8642], [#pr8762])
+
+[#8647]: https://github.com/openstreetmap/iD/issues/8647
+[#8727]: https://github.com/openstreetmap/iD/issues/8727
+[#8708]: https://github.com/openstreetmap/iD/issues/8708
+[#pr8685]: https://github.com/openstreetmap/iD/pull/8685
+[#pr8650]: https://github.com/openstreetmap/iD/pull/8650
+[#pr8663]: https://github.com/openstreetmap/iD/pull/8663
+[#pr8671]: https://github.com/openstreetmap/iD/pull/8671
+[#pr8773]: https://github.com/openstreetmap/iD/pull/8773
+[#pr8675]: https://github.com/openstreetmap/iD/pull/8675
+[#pr8701]: https://github.com/openstreetmap/iD/pull/8701
+[#pr8628]: https://github.com/openstreetmap/iD/pull/8628
+[#pr8741]: https://github.com/openstreetmap/iD/pull/8741
+[#pr8768]: https://github.com/openstreetmap/iD/pull/8768
+[#pr8761]: https://github.com/openstreetmap/iD/pull/8761
+[#8612]: https://github.com/openstreetmap/iD/issues/8612
+[#8288]: https://github.com/openstreetmap/iD/issues/8288
+[#pr8746]: https://github.com/openstreetmap/iD/pull/8746
+[#pr8642]: https://github.com/openstreetmap/iD/pull/8642
+[#pr8762]: https://github.com/openstreetmap/iD/pull/8762
+
 # 2.20.1
 ##### 2021-Aug-17
 
