@@ -5,7 +5,7 @@ esbuild
   .build({
     bundle: true,
     sourcemap: true,
-    entryPoints: ['./modules/id.js'],
+    entryPoints: ['./modules/id.modern.js'],
     legalComments: 'none',
     logLevel: 'info',
     metafile: true,

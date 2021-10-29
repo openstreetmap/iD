@@ -5,18 +5,11 @@ esbuild
   .build({
     bundle: true,
     sourcemap: true,
-    entryPoints: ['./modules/id.js'],
+    entryPoints: ['./modules/id.legacy.js'],
     legalComments: 'none',
     logLevel: 'info',
     outfile: 'dist/iD.legacy.js',
     target: 'es5',
-    plugins: [babel({
-      filter: /.*/,
-      namespace: '',
-      babelHelpers: 'bundled',
-      // avoid circular dependencies due to `useBuiltIns: usage` option
-      exclude: [/\/core-js\//],
-      sourceType: 'unambiguous',
-    })],
+    plugins: [babel()]
   })
   .catch(() => process.exit(1));
