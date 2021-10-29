@@ -10,8 +10,7 @@
           "ie": 11
         }
       }
-    ],
-    "@babel/preset-react"
+    ]
   ],
   "plugins": [
     "inline-json-import",
