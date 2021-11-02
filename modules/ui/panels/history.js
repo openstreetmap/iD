@@ -49,7 +49,7 @@ export function uiPanelHistory(context) {
             .attr('href', 'https://hdyc.neis-one.org/?' + userName)
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .html('HDYC');
+            .html('Profile');
     }
 
 
@@ -200,7 +200,7 @@ export function uiPanelHistory(context) {
             .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .html('PeWu');
+            .html('History');
 
         var list = selection
             .append('ul');
