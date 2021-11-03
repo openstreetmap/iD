@@ -141,12 +141,12 @@ export function uiFieldRoadheight(field, context) {
                 tag[field.key] = context.cleanTagValue(rawPrimaryValue);
             } else {
                 if (rawPrimaryValue !== '') {
-                    rawPrimaryValue = context.cleanTagValue(rawPrimaryValue + '\'');
+                    rawPrimaryValue = rawPrimaryValue + '\'';
                 }
                 if (rawSecondaryValue !== '') {
-                    rawSecondaryValue = context.cleanTagValue(rawSecondaryValue + '"');
+                    rawSecondaryValue = rawSecondaryValue + '"';
                 }
-                tag[field.key] = rawPrimaryValue + rawSecondaryValue;
+                tag[field.key] = context.cleanTagValue(rawPrimaryValue + rawSecondaryValue);
             }
         }
 
