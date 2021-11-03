@@ -184,6 +184,8 @@ export function uiInit(context) {
         // Map controls
         var controls = overMap
             .append('div')
+            .attr('class', 'map-controls-wrap')
+            .append('div')
             .attr('class', 'map-controls');
 
         controls

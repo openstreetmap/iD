@@ -2953,6 +2953,21 @@ img.tag-reference-wiki-image {
 
 /* Map Controls
 ------------------------------------------------------- */
+.map-controls-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    pointer-events: none;
+}
+.map-controls-wrap::-webkit-scrollbar {
+    display: none;
+}
 .map-controls {
     right: 0;
     top: 0;
@@ -2964,11 +2979,6 @@ img.tag-reference-wiki-image {
     flex-direction: column;
     padding: 5px 0;
     pointer-events: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-.map-controls::-webkit-scrollbar {
-    display: none;
 }
 .map-controls:before {
     content: '';
