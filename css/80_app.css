@@ -2958,11 +2958,10 @@ img.tag-reference-wiki-image {
     left: 0;
     right: 0;
     height: 100%;
+    z-index: 100;
     display: block;
     overflow-x: hidden;
     overflow-y: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
     pointer-events: none;
 }
 .map-controls-wrap::-webkit-scrollbar {
@@ -2973,7 +2972,6 @@ img.tag-reference-wiki-image {
     top: 0;
     width: 40px;
     position: absolute;
-    z-index: 100;
     bottom: 0;
     display: flex;
     flex-direction: column;
