@@ -2963,6 +2963,8 @@ img.tag-reference-wiki-image {
     overflow-x: hidden;
     overflow-y: auto;
     pointer-events: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .map-controls-wrap::-webkit-scrollbar {
     display: none;
