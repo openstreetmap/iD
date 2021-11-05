@@ -223,22 +223,24 @@ export function uiFieldRestrictions(field, context) {
             extent._extend(_intersection.vertices[i].extent());
         }
 
+        var padTop = 35; // reserve top space for hint text
+
         // If this is a large intersection, adjust zoom to fit extent
         if (_intersection.vertices.length > 1) {
-            var padding = 180;   // in z22 pixels
+            var hPadding = Math.min(160, Math.max(110, d[0] * 0.4));
+            var vPadding = 160;
             var tl = projection([extent[0][0], extent[1][1]]);
             var br = projection([extent[1][0], extent[0][1]]);
-            var hFactor = (br[0] - tl[0]) / (d[0] - padding);
-            var vFactor = (br[1] - tl[1]) / (d[1] - padding);
+            var hFactor = (br[0] - tl[0]) / (d[0] - hPadding);
+            var vFactor = (br[1] - tl[1]) / (d[1] - vPadding - padTop);
             var hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
             var vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
             z = z - Math.max(hZoomDiff, vZoomDiff);
             projection.scale(geoZoomToScale(z));
         }
 
-        var padTop = 35;   // reserve top space for hint text
         var extentCenter = projection(extent.center());
-        extentCenter[1] = extentCenter[1] - padTop;
+        extentCenter[1] = extentCenter[1] - padTop / 2;
 
         projection
             .translate(geoVecSubtract(c, extentCenter))
