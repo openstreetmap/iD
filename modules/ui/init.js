@@ -182,7 +182,11 @@ export function uiInit(context) {
             .call(uiSpinner(context));
 
         // Map controls
-        var controls = overMap
+        var controlsWrap = overMap
+            .append('div')
+            .attr('class', 'map-controls-wrap');
+
+        var controls = controlsWrap
             .append('div')
             .attr('class', 'map-controls');
 
@@ -201,9 +205,9 @@ export function uiInit(context) {
             .attr('class', 'map-control geolocate-control')
             .call(uiGeolocate(context));
 
-        controls.on('wheel.mapControls', function(d3_event) {
+        controlsWrap.on('wheel.mapControls', function(d3_event) {
             if (!d3_event.deltaX) {
-                controls.node().scrollTop += d3_event.deltaY;
+                controlsWrap.node().scrollTop += d3_event.deltaY;
             }
         });
 
