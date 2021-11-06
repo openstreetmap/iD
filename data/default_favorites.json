@@ -11,7 +11,7 @@
   {"pID": "amenity/parking_entrance"},
   {"pID": "landuse/industrial"},
   {"pID": "landuse/commercial"},
-  {"pID": "landuse/meadow"},
+  {"pID": "landuse/institutional"},
   {"pID": "landuse/farmland"},
   {"pID": "landuse/farmyard"},
   {"pID": "highway/track"},

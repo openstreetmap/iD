@@ -1,0 +1,23 @@
+{
+  "icon": "maki-suitcase",
+  "fields": [
+      "name",
+      "flats"
+  ],
+  "moreFields": [
+      "address",
+      "email",
+      "fax",
+      "phone",
+      "website"
+  ],
+  "geometry": [
+      "area"
+  ],
+  "tags": {
+      "landuse": "institutional"
+  },
+  "terms": [],
+  "matchScore": 0.9,
+  "name": "Institutional Area"
+}

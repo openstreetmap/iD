@@ -202,6 +202,13 @@ path.fill.tag-power-plant {
 }
 
 
+path.stroke.tag-landuse-institutional {
+    stroke: rgb(0, 157, 255);
+}
+path.fill.tag-landuse-institutional {
+    stroke: rgba(0, 157, 255, 0.3);
+    fill: rgba(0, 157, 255, 0.3);
+}
 /* Teal things */
 path.stroke.tag-natural-wetland {
     stroke: rgb(153, 225, 170);
