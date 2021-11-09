@@ -1766,9 +1766,9 @@ en:
       tip: "Find unroutable roads, paths, and ferry routes"
       routable:
         message:
-          one: "{highway} is disconnected from other roads and paths"
-          other: "{count} routable features are connected only to each other"
-        reference: "All roads, paths, and ferry routes should connect to form a single routing network."
+          one: "{highway} is disconnected from other commonly routable features"
+          other: "{count} commonly routable features are connected only to each other"
+        reference: "Ways consistently considered routable by data users (including roads, paths and ferry routes) should connect to form a single routing network."
     fixme_tag:
       message: '{feature} has a "Fix Me" request'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
