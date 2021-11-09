@@ -265,13 +265,12 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
-
-        radios.property('checked', function(d) {
+        function isOptionChecked(d) {
             if (field.key) {
                 return tags[field.key] === d;
             }
             return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
-        });
+        }
 
         function isMixed(d) {
             if (field.key) {
@@ -280,13 +279,19 @@ export function uiFieldRadio(field, context) {
             return Array.isArray(tags[d]);
         }
 
+        radios.property('checked', function(d) {
+            return isOptionChecked(d) &&
+                (field.key || field.options.filter(isOptionChecked).length === 1);
+        });
+
         labels
             .classed('active', function(d) {
                 if (field.key) {
                     return (Array.isArray(tags[field.key]) && tags[field.key].includes(d))
                         || tags[field.key] === d;
                 }
-                return Array.isArray(tags[d]) || !!(tags[d] && tags[d].toLowerCase() !== 'no');
+                return Array.isArray(tags[d]) && tags[d].some(v => typeof v === 'string' && v.toLowerCase() !== 'no') ||
+                    !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
             })
             .classed('mixed', isMixed)
             .attr('title', function(d) {
