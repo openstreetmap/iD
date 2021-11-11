@@ -1,13 +1,44 @@
 {
   "dataImagery": [
     {
+      "id": "GeodesieQuebec",
+      "name": "Géodésie Québec",
+      "type": "tms",
+      "template": "https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wmts/Imagerie_Continue/Imagerie_GQ/default/GoogleMapsCompatibleExt2:epsg:3857/{zoom}/{y}/{x}.jpg",
+      "zoomExtent": [8, 22],
+      "offsetXY": [0,0],
+      "default": true,
+      "description": "Portail cartographique Québec"
+    },
+    {
+      "id": "Bing",
+      "name": "Bing aerial imagery",
+      "type": "bing",
+      "template": "https://www.bing.com/maps",
+      "zoomExtent": [1, 22],
+      "offsetXY": [0.6,-1.54],
+      "default": false,
+      "description": "Satellite and aerial imagery.",
+      "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"
+    },
+    {
+      "id": "HereSatellite",
+      "name": "Here Satellite",
+      "type": "tms",
+      "default": false,
+      "template": "http://2.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png8?app_id=J8eSHWWbV2geKuBkFk8W&app_code=c688Wo2sYhT-x3yeD0i_6Q",
+      "zoomExtent": [8, 22],
+      "offsetXY": [0,0],
+      "description": "Here Satellite"
+    },
+    {
       "id": "CMM2018",
       "name": "CMM Montreal 2018/Drummondville 2018/Gatineau 2017/Saint-Hyacinthe et Sorel 2020",
       "type": "tms",
       "template": "https://projets.chaire.transition.city/cmm2018tiles/{zoom}/{x}/{y}",
       "zoomExtent": [8, 22],
       "offsetXY": [0,0],
-      "default": true,
+      "default": false,
       "description": "CMM (Montreal)/Drummondville/Gatineau 2017-2018/Saint-Hyacinthe Sorel 2020 Aerial imagery."
     },
     {
@@ -21,16 +52,6 @@
       "description": "Drummondville 2020 Aerial imagery (20cm/pixel)."
     },
     {
-      "id": "HereTest",
-      "name": "Here Satellite Test only for alignment verification",
-      "type": "tms",
-      "default": false,
-      "template": "http://2.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png8?app_id=J8eSHWWbV2geKuBkFk8W&app_code=c688Wo2sYhT-x3yeD0i_6Q",
-      "zoomExtent": [8, 22],
-      "offsetXY": [0,0],
-      "description": "Here Satellite Test only for alignment verification."
-    },
-    {
       "id": "GoogleTest",
       "name": "Google Test only for alignment verification",
       "type": "tms",
@@ -39,17 +60,6 @@
       "zoomExtent": [8, 22],
       "offsetXY": [0,0],
       "description": "Google Test only for alignment verification."
-    },
-    {
-      "id": "Bing",
-      "name": "Bing aerial imagery",
-      "type": "bing",
-      "template": "https://www.bing.com/maps",
-      "zoomExtent": [1, 22],
-      "offsetXY": [0.6,-1.54],
-      "default": false,
-      "description": "Satellite and aerial imagery.",
-      "icon": "https://osmlab.github.io/editor-layer-index/sources/world/Bing.png"
     },
     {
       "id": "MAPNIK",
