@@ -57,11 +57,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
+* Add colours for preset categories ([#8799])
 #### :hammer: Development
 
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
 [#8792]: https://github.com/openstreetmap/iD/pull/8792
 [#8796]: https://github.com/openstreetmap/iD/issues/8796
+[#8799]: https://github.com/openstreetmap/iD/issues/8799
 [#8800]: https://github.com/openstreetmap/iD/pull/8800
 [#8805]: https://github.com/openstreetmap/iD/issues/8805
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
