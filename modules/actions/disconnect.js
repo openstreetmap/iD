@@ -18,6 +18,10 @@ import { osmNode } from '../osm/node';
 export function actionDisconnect(nodeId, newNodeId) {
     var wayIds;
 
+    var disconnectableRelationTypes = {
+        'site': true,
+        'assosciatedStreet': true
+    };
 
     var action = function(graph) {
         var node = graph.entity(nodeId);
@@ -88,7 +92,9 @@ export function actionDisconnect(nodeId, newNodeId) {
 
         parentWays.forEach(function(way) {
             var relations = graph.parentRelations(way);
-            relations.forEach(function(relation) {
+            relations
+            .filter(relation => !disconnectableRelationTypes[relation.tags.type])
+            .forEach(function(relation) {
                 if (relation.id in seenRelationIds) {
                     if (wayIds) {
                         if (wayIds.indexOf(way.id) !== -1 ||
