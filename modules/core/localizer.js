@@ -434,7 +434,7 @@ export function coreLocalizer() {
     };
     localizer.floatParser = (locale) => {
         // https://stackoverflow.com/a/55366435/4585461
-        const polyfill = (string) => parseFloat(string, 10);
+        const polyfill = (string) => parseFloat(string.trim());
         if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
         const format = new Intl.NumberFormat(locale);
         if (!('formatToParts' in format)) return polyfill;

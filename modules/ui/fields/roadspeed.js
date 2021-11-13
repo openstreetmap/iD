@@ -131,7 +131,7 @@ export function uiFieldRoadspeed(field, context) {
 
         if (!isMixed) {
             if (rawValue && rawValue.indexOf('mph') >= 0) {
-                _isImperial = rawValue && rawValue.indexOf('mph') >= 0;
+                _isImperial = true;
             } else if (rawValue) {
                 _isImperial = false;
             }

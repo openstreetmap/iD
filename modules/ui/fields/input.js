@@ -400,12 +400,8 @@ export function uiFieldText(field, context) {
             if (field.type === 'number' && val) {
                 var vals = val.split(';');
                 vals = vals.map(function(v) {
-                    v = v.trim();
                     var num = parseLocaleFloat(v);
-                    if (!isFinite(num)) return v;
-                    num = parseFloat(num, 10);
-                    if (!isFinite(num)) return v;
-                    return clamped(num);
+                    return isFinite(num)) ? clamped(num) : v;
                 });
                 val = vals.join(';');
             }
@@ -433,7 +429,7 @@ export function uiFieldText(field, context) {
             var vals = val.split(';');
             vals = vals.map(function(v) {
                 v = v.trim();
-                var num = parseFloat(v, 10);
+                var num = parseFloat(v);
                 if (!isFinite(num)) return v;
                 return formatFloat(clamped(num));
             });
