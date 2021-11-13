@@ -165,16 +165,16 @@ export function uiFieldRoadheight(field, context) {
             if (primaryValue && (primaryValue.indexOf('\'') >= 0 || primaryValue.indexOf('"') >= 0)) {
                 secondaryValue = primaryValue.match(/(-?[\d.]+)"/);
                 if (secondaryValue !== null) {
-                    secondaryValue = formatFloat(parseFloat(secondaryValue[1], 10));
+                    secondaryValue = formatFloat(parseFloat(secondaryValue[1]));
                 }
                 primaryValue = primaryValue.match(/(-?[\d.]+)'/);
                 if (primaryValue !== null) {
-                    primaryValue = formatFloat(parseFloat(primaryValue[1], 10));
+                    primaryValue = formatFloat(parseFloat(primaryValue[1]));
                 }
                 _isImperial = true;
             } else if (primaryValue) {
                 var rawValue = primaryValue;
-                primaryValue = parseFloat(rawValue, 10);
+                primaryValue = parseFloat(rawValue);
                 if (isNaN(primaryValue)) primaryValue = rawValue;
                 primaryValue = formatFloat(primaryValue);
                 _isImperial = false;

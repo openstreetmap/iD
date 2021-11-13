@@ -137,7 +137,7 @@ export function uiFieldText(field, context) {
                         v = v.trim();
                         var num = parseLocaleFloat(v);
                         if (isDirectionField) {
-                            const compassDir = cardinal[v.trim().toLowerCase()];
+                            const compassDir = cardinal[v.toLowerCase()];
                             if (compassDir !== undefined) {
                                 num = compassDir;
                             }
@@ -145,7 +145,7 @@ export function uiFieldText(field, context) {
 
                         // do nothing if the value is neither a number, nor a cardinal direction
                         if (!isFinite(num)) return v;
-                        num = parseFloat(num, 10);
+                        num = parseFloat(num);
                         if (!isFinite(num)) return v;
 
                         num += d;
@@ -401,7 +401,7 @@ export function uiFieldText(field, context) {
                 var vals = val.split(';');
                 vals = vals.map(function(v) {
                     var num = parseLocaleFloat(v);
-                    return isFinite(num)) ? clamped(num) : v;
+                    return isFinite(num) ? clamped(num) : v;
                 });
                 val = vals.join(';');
             }

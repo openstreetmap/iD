@@ -432,6 +432,7 @@ export function coreLocalizer() {
             return (number) => number.toLocaleString(locale);
         }
     };
+
     localizer.floatParser = (locale) => {
         // https://stackoverflow.com/a/55366435/4585461
         const polyfill = (string) => parseFloat(string.trim());
