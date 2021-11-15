@@ -20,7 +20,7 @@ export function actionDisconnect(nodeId, newNodeId) {
 
     var disconnectableRelationTypes = {
         'site': true,
-        'assosciatedStreet': true
+        'associatedStreet': true
     };
 
     var action = function(graph) {
