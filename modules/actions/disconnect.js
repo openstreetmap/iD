@@ -19,8 +19,9 @@ export function actionDisconnect(nodeId, newNodeId) {
     var wayIds;
 
     var disconnectableRelationTypes = {
+        'associatedStreet': true,
+        'enforcement': true,
         'site': true,
-        'associatedStreet': true
     };
 
     var action = function(graph) {
