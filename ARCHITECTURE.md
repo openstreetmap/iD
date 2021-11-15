@@ -483,6 +483,10 @@ A feature does not have enough tags to define what it is.
 * `relation_type`: the OSM entity type is `relation` but there is no `type` tag
 * `highway_classification`: the OSM entity type is `way` and the feature is tagged as `highway=road`
 
+##### `osm_api_limits`
+
+A feature does not conform to the limits and rules imposed by the OSM API, such as a way with too many nodes for example.
+
 ##### `outdated_tags`
 
 A feature has nonstandard tags.
