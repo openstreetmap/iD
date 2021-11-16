@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 #### :camera: Street-Level
+* Rename OpenStreetCam layers to KartaView ([#8807])
 #### :white_check_mark: Validation
 * Clarify description of "disconnected way" validation rule ([#8800])
 #### :bug: Bugfixes
@@ -63,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8796]: https://github.com/openstreetmap/iD/issues/8796
 [#8800]: https://github.com/openstreetmap/iD/pull/8800
 [#8805]: https://github.com/openstreetmap/iD/issues/8805
+[#8807]: https://github.com/openstreetmap/iD/issues/8807
 
 # 2.20.2
 ##### 2021-Oct-28

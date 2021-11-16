@@ -256,7 +256,7 @@ export function rendererBackground(context) {
       mapillary: 'Mapillary Images',
       'mapillary-map-features': 'Mapillary Map Features',
       'mapillary-signs': 'Mapillary Signs',
-      openstreetcam: 'OpenStreetCam Images'
+      kartaview: 'KartaView Images'
     };
 
     for (let layerID in photoOverlayLayers) {

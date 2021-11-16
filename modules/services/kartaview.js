@@ -9,7 +9,7 @@ import { geoExtent, geoScaleToZoom } from '../geo';
 import { utilArrayUnion, utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
 
 
-var apibase = 'https://openstreetcam.org';
+var apibase = 'https://kartaview.org';
 var maxResults = 1000;
 var tileZoom = 14;
 var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
@@ -250,15 +250,15 @@ export default {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
-        // add osc-wrapper
-        var wrap = context.container().select('.photoviewer').selectAll('.osc-wrapper')
+        // add kartaview-wrapper
+        var wrap = context.container().select('.photoviewer').selectAll('.kartaview-wrapper')
             .data([0]);
 
         var that = this;
 
         var wrapEnter = wrap.enter()
             .append('div')
-            .attr('class', 'photo-wrapper osc-wrapper')
+            .attr('class', 'photo-wrapper kartaview-wrapper')
             .classed('hide', true)
             .call(imgZoom.on('zoom', zoomPan))
             .on('dblclick.zoom', null);
@@ -295,11 +295,11 @@ export default {
 
         wrapEnter
             .append('div')
-            .attr('class', 'osc-image-wrap');
+            .attr('class', 'kartaview-image-wrap');
 
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize.openstreetcam', function(dimensions) {
+        context.ui().photoviewer.on('resize.kartaview', function(dimensions) {
             imgZoom = d3_zoom()
                 .extent([[0, 0], dimensions])
                 .translateExtent([[0, 0], dimensions])
@@ -310,7 +310,7 @@ export default {
 
         function zoomPan(d3_event) {
             var t = d3_event.transform;
-            context.container().select('.photoviewer .osc-image-wrap')
+            context.container().select('.photoviewer .kartaview-image-wrap')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
 
@@ -329,14 +329,14 @@ export default {
                 if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                var wrap = context.container().select('.photoviewer .osc-wrapper');
+                var wrap = context.container().select('.photoviewer .kartaview-wrapper');
 
                 wrap
                     .transition()
                     .duration(100)
                     .call(imgZoom.transform, d3_zoomIdentity);
 
-                wrap.selectAll('.osc-image')
+                wrap.selectAll('.kartaview-image')
                     .transition()
                     .duration(100)
                     .style('transform', 'rotate(' + r + 'deg)');
@@ -372,15 +372,15 @@ export default {
         var viewer = context.container().select('.photoviewer')
             .classed('hide', false);
 
-        var isHidden = viewer.selectAll('.photo-wrapper.osc-wrapper.hide').size();
+        var isHidden = viewer.selectAll('.photo-wrapper.kartaview-wrapper.hide').size();
 
         if (isHidden) {
             viewer
-                .selectAll('.photo-wrapper:not(.osc-wrapper)')
+                .selectAll('.photo-wrapper:not(.kartaview-wrapper)')
                 .classed('hide', true);
 
             viewer
-                .selectAll('.photo-wrapper.osc-wrapper')
+                .selectAll('.photo-wrapper.kartaview-wrapper')
                 .classed('hide', false);
         }
 
@@ -426,8 +426,8 @@ export default {
 
         if (!d) return this;
 
-        var wrap = context.container().select('.photoviewer .osc-wrapper');
-        var imageWrap = wrap.selectAll('.osc-image-wrap');
+        var wrap = context.container().select('.photoviewer .kartaview-wrapper');
+        var imageWrap = wrap.selectAll('.kartaview-image-wrap');
         var attribution = wrap.selectAll('.photo-attribution').html('');
 
         wrap
@@ -436,7 +436,7 @@ export default {
             .call(imgZoom.transform, d3_zoomIdentity);
 
         imageWrap
-            .selectAll('.osc-image')
+            .selectAll('.kartaview-image')
             .remove();
 
         if (d) {
@@ -445,7 +445,7 @@ export default {
 
             imageWrap
                 .append('img')
-                .attr('class', 'osc-image')
+                .attr('class', 'kartaview-image')
                 .attr('src', apibase + '/' + d.imagePath)
                 .style('transform', 'rotate(' + r + 'deg)');
 
@@ -454,7 +454,7 @@ export default {
                     .append('a')
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
-                    .attr('href', 'https://openstreetcam.org/user/' + encodeURIComponent(d.captured_by))
+                    .attr('href', 'https://kartaview.org/user/' + encodeURIComponent(d.captured_by))
                     .html('@' + d.captured_by);
 
                 attribution
@@ -477,8 +477,8 @@ export default {
                 .append('a')
                 .attr('class', 'image-link')
                 .attr('target', '_blank')
-                .attr('href', 'https://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
-                .html('openstreetcam.org');
+                .attr('href', 'https://kartaview.org/details/' + d.sequence_id + '/' + d.sequence_index)
+                .html('kartaview.org');
         }
 
         return this;
@@ -534,17 +534,17 @@ export default {
         // highlight sibling viewfields on either the selected or the hovered sequences
         var highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
 
-        context.container().selectAll('.layer-openstreetcam .viewfield-group')
+        context.container().selectAll('.layer-kartaview .viewfield-group')
             .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
             .classed('hovered', function(d) { return d.key === hoveredImageKey; })
             .classed('currentView', function(d) { return d.key === selectedImageKey; });
 
-        context.container().selectAll('.layer-openstreetcam .sequence')
+        context.container().selectAll('.layer-kartaview .sequence')
             .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
             .classed('currentView', function(d) { return d.properties.key === selectedSequenceKey; });
 
         // update viewfields if needed
-        context.container().selectAll('.layer-openstreetcam .viewfield-group .viewfield')
+        context.container().selectAll('.layer-kartaview .viewfield-group .viewfield')
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
@@ -564,7 +564,7 @@ export default {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
-                hash.photo = 'openstreetcam/' + imageKey;
+                hash.photo = 'kartaview/' + imageKey;
             } else {
                 delete hash.photo;
             }

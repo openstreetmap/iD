@@ -21,7 +21,7 @@ export function uiPhotoviewer(context) {
             .on('click', function () {
                 if (services.streetside) { services.streetside.hideViewer(context); }
                 if (services.mapillary) { services.mapillary.hideViewer(context); }
-                if (services.openstreetcam) { services.openstreetcam.hideViewer(context); }
+                if (services.kartaview) { services.kartaview.hideViewer(context); }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));

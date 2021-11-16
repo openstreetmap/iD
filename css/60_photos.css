@@ -233,14 +233,14 @@
 }
 
 
-/* OpenStreetCam Image Layer */
-.layer-openstreetcam {
+/* KartaView Image Layer */
+.layer-kartaview {
     pointer-events: none;
 }
-.layer-openstreetcam .viewfield-group * {
+.layer-kartaview .viewfield-group * {
     fill: #20c4ff;
 }
-.layer-openstreetcam .sequence {
+.layer-kartaview .sequence {
     stroke: #20c4ff;
 }
 
@@ -323,8 +323,8 @@ label.streetside-hires {
     margin-right: 6px;
 }
 
-/* OpenStreetCam viewer */
-.osc-wrapper {
+/* KartaView viewer */
+.kartaview-wrapper {
     position: relative;
     background-color: #000;
     background-image: url(img/loader-black.gif);
@@ -332,16 +332,16 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
-.osc-wrapper .photo-attribution a:active {
+.kartaview-wrapper .photo-attribution a:active {
     color: #20c4ff;
 }
 @media (hover: hover) {
-    .osc-wrapper .photo-attribution a:hover {
+    .kartaview-wrapper .photo-attribution a:hover {
         color: #20c4ff;
     }
 }
 
-.osc-image-wrap {
+.kartaview-image-wrap {
     width: 100%;
     height: 100%;
     transform-origin:0 0;

@@ -7,7 +7,7 @@ import { utilQsString, utilStringQs } from '../util';
 
 export function rendererPhotos(context) {
     var dispatch = d3_dispatch('change');
-    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'openstreetcam'];
+    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview'];
     var _allPhotoTypes = ['flat', 'panoramic'];
     var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
     var _dateFilters = ['fromDate', 'toDate'];
@@ -119,16 +119,16 @@ export function rendererPhotos(context) {
     }
 
     photos.shouldFilterByDate = function() {
-        return showsLayer('mapillary') || showsLayer('openstreetcam') || showsLayer('streetside');
+        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside');
     };
 
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||
-            (showsLayer('streetside') && showsLayer('openstreetcam'));
+            (showsLayer('streetside') && showsLayer('kartaview'));
     };
 
     photos.shouldFilterByUsername = function() {
-        return !showsLayer('mapillary') && showsLayer('openstreetcam') && !showsLayer('streetside');
+        return !showsLayer('mapillary') && showsLayer('kartaview') && !showsLayer('streetside');
     };
 
     photos.showsPhotoType = function(val) {
@@ -180,22 +180,22 @@ export function rendererPhotos(context) {
             this.setUsernameFilter(hash.photo_username, false);
         }
         if (hash.photo_overlay) {
-            // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=openstreetcam;mapillary;streetside`
-
+            // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=kartaview;mapillary;streetside`
             var hashOverlayIDs = hash.photo_overlay.replace(/;/g, ',').split(',');
             hashOverlayIDs.forEach(function(id) {
+                if (id === 'openstreetcam') id = 'kartaview'; // legacy alias
                 var layer = _layerIDs.indexOf(id) !== -1 && context.layers().layer(id);
                 if (layer && !layer.enabled()) layer.enabled(true);
             });
         }
         if (hash.photo) {
             // support opening a photo via a URL parameter, e.g. `photo=mapillary-fztgSDtLpa08ohPZFZjeRQ`
-
             var photoIds = hash.photo.replace(/;/g, ',').split(',');
             var photoId = photoIds.length && photoIds[0].trim();
             var results = /(.*)\/(.*)/g.exec(photoId);
             if (results && results.length >= 3) {
                 var serviceId = results[1];
+                if (serviceId === 'openstreetcam') serviceId = 'kartaview'; // legacy alias
                 var photoKey = results[2];
                 var service = services[serviceId];
                 if (service && service.ensureViewerLoaded) {

@@ -1,13 +1,13 @@
-describe('iD.serviceOpenstreetcam', function() {
+describe('iD.serviceKartaview', function() {
     var dimensions = [64, 64];
-    var context, server, openstreetcam;
+    var context, server, kartaview;
 
     before(function() {
-        iD.services.openstreetcam = iD.serviceOpenstreetcam;
+        iD.services.kartaview = iD.serviceKartaview;
     });
 
     after(function() {
-        delete iD.services.openstreetcam;
+        delete iD.services.kartaview;
     });
 
     beforeEach(function() {
@@ -18,8 +18,8 @@ describe('iD.serviceOpenstreetcam', function() {
             .clipExtent([[0,0], dimensions]);
 
         server = window.fakeFetch().create();
-        openstreetcam = iD.services.openstreetcam;
-        openstreetcam.reset();
+        kartaview = iD.services.kartaview;
+        kartaview.reset();
     });
 
     afterEach(function() {
@@ -29,35 +29,35 @@ describe('iD.serviceOpenstreetcam', function() {
 
     describe('#init', function() {
         it('Initializes cache one time', function() {
-            var cache = openstreetcam.cache();
+            var cache = kartaview.cache();
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('sequences');
 
-            openstreetcam.init();
-            var cache2 = openstreetcam.cache();
+            kartaview.init();
+            var cache2 = kartaview.cache();
             expect(cache).to.equal(cache2);
         });
     });
 
     describe('#reset', function() {
         it('resets cache and image', function() {
-            openstreetcam.cache().foo = 'bar';
-            openstreetcam.selectImage(context, {key: 'baz'});
+            kartaview.cache().foo = 'bar';
+            kartaview.selectImage(context, {key: 'baz'});
 
-            openstreetcam.reset();
-            expect(openstreetcam.cache()).to.not.have.property('foo');
-            expect(openstreetcam.getSelectedImage()).to.be.null;
+            kartaview.reset();
+            expect(kartaview.cache()).to.not.have.property('foo');
+            expect(kartaview.getSelectedImage()).to.be.null;
         });
     });
 
     describe('#loadImages', function() {
         it('fires loadedImages when images are loaded', function(done) {
-            openstreetcam.on('loadedImages', function() {
+            kartaview.on('loadedImages', function() {
                 expect(server.requests().length).to.eql(1);  // 1 nearby-photos
                 done();
             });
 
-            openstreetcam.loadImages(context.projection);
+            kartaview.loadImages(context.projection);
 
             var data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
@@ -110,8 +110,8 @@ describe('iD.serviceOpenstreetcam', function() {
             var spy = sinon.spy();
             context.projection.translate([0,0]);
 
-            openstreetcam.on('loadedImages', spy);
-            openstreetcam.loadImages(context.projection);
+            kartaview.on('loadedImages', spy);
+            kartaview.loadImages(context.projection);
 
             var data = {
                 status: { apiCode: '600', httpCode: 200, httpMessage: 'Success' },
@@ -167,12 +167,12 @@ describe('iD.serviceOpenstreetcam', function() {
         });
 
         it('loads multiple pages of image results', function(done) {
-            openstreetcam.on('loadedImages', function() {
+            kartaview.on('loadedImages', function() {
                 expect(server.requests().length).to.eql(2);   // 2 nearby-photos
                 done();
             });
 
-            openstreetcam.loadImages(context.projection);
+            kartaview.loadImages(context.projection);
 
             var features = [];
             for (var i = 0; i < 1000; i++) {
@@ -212,8 +212,8 @@ describe('iD.serviceOpenstreetcam', function() {
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
-            openstreetcam.cache().images.rtree.load(features);
-            var res = openstreetcam.images(context.projection);
+            kartaview.cache().images.rtree.load(features);
+            var res = kartaview.images(context.projection);
 
             expect(res).to.deep.eql([
                 { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 },
@@ -231,8 +231,8 @@ describe('iD.serviceOpenstreetcam', function() {
                 { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '5', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 5 } }
             ];
 
-            openstreetcam.cache().images.rtree.load(features);
-            var res = openstreetcam.images(context.projection);
+            kartaview.cache().images.rtree.load(features);
+            var res = kartaview.images(context.projection);
             expect(res).to.have.length.of.at.most(5);
         });
     });
@@ -246,10 +246,10 @@ describe('iD.serviceOpenstreetcam', function() {
                 { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
-            openstreetcam.cache().images.rtree.load(features);
-            openstreetcam.cache().sequences['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
+            kartaview.cache().images.rtree.load(features);
+            kartaview.cache().sequences['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
-            var res = openstreetcam.sequences(context.projection);
+            var res = kartaview.sequences(context.projection);
             expect(res).to.deep.eql([{
                 type: 'LineString',
                 coordinates: [[10,0], [10,0], [10,1]],
@@ -265,9 +265,9 @@ describe('iD.serviceOpenstreetcam', function() {
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
             var d = { key: 'foo' };
-            openstreetcam.cache().images = { forImageKey: { foo: d }};
-            openstreetcam.selectImage(context, 'foo');
-            expect(openstreetcam.getSelectedImage()).to.eql(d);
+            kartaview.cache().images = { forImageKey: { foo: d }};
+            kartaview.selectImage(context, 'foo');
+            expect(kartaview.getSelectedImage()).to.eql(d);
         });
     });
 

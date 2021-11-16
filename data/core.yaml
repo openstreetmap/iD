@@ -1405,11 +1405,11 @@ en:
     signs:
       tooltip: "Traffic signs from Mapillary"
     view_on_mapillary: "View this image on Mapillary"
-  openstreetcam_images:
-    tooltip: "Street-level photos from OpenStreetCam"
-  openstreetcam:
-    title: OpenStreetCam
-    view_on_openstreetcam: "View this image on OpenStreetCam"
+  kartaview_images:
+    tooltip: "Street-level photos from KartaView"
+  kartaview:
+    title: KartaView
+    view_on_kartaview: "View this image on KartaView"
   note:
     note: Note
     title: Edit note
@@ -1609,7 +1609,7 @@ en:
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [OpenStreetCam](https://www.openstreetcam.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [KartaView](https://www.kartaview.org)."
       using_h: "Using Street Level Photos"
       using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
       photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."

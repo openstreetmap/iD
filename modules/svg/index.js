@@ -13,7 +13,7 @@ export { svgMapillarySigns } from './mapillary_signs.js';
 export { svgMidpoints } from './midpoints.js';
 export { svgNotes } from './notes.js';
 export { svgMarkerSegments } from './helpers.js';
-export { svgOpenstreetcamImages } from './openstreetcam_images.js';
+export { svgKartaviewImages } from './kartaview_images.js';
 export { svgOsm } from './osm.js';
 export { svgPassiveVertex } from './helpers.js';
 export { svgPath } from './helpers.js';

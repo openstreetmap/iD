@@ -4,31 +4,31 @@ import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
 
 
-export function svgOpenstreetcamImages(projection, context, dispatch) {
+export function svgKartaviewImages(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var minZoom = 12;
     var minMarkerZoom = 16;
     var minViewfieldZoom = 18;
     var layer = d3_select(null);
-    var _openstreetcam;
+    var _kartaview;
 
 
     function init() {
-        if (svgOpenstreetcamImages.initialized) return;  // run once
-        svgOpenstreetcamImages.enabled = false;
-        svgOpenstreetcamImages.initialized = true;
+        if (svgKartaviewImages.initialized) return;  // run once
+        svgKartaviewImages.enabled = false;
+        svgKartaviewImages.initialized = true;
     }
 
 
     function getService() {
-        if (services.openstreetcam && !_openstreetcam) {
-            _openstreetcam = services.openstreetcam;
-            _openstreetcam.event.on('loadedImages', throttledRedraw);
-        } else if (!services.openstreetcam && _openstreetcam) {
-            _openstreetcam = null;
+        if (services.kartaview && !_kartaview) {
+            _kartaview = services.kartaview;
+            _kartaview.event.on('loadedImages', throttledRedraw);
+        } else if (!services.kartaview && _kartaview) {
+            _kartaview = null;
         }
 
-        return _openstreetcam;
+        return _kartaview;
     }
 
 
@@ -245,10 +245,10 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        var enabled = svgOpenstreetcamImages.enabled,
+        var enabled = svgKartaviewImages.enabled,
             service = getService();
 
-        layer = selection.selectAll('.layer-openstreetcam')
+        layer = selection.selectAll('.layer-kartaview')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -256,7 +256,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
         var layerEnter = layer.enter()
             .append('g')
-            .attr('class', 'layer-openstreetcam')
+            .attr('class', 'layer-kartaview')
             .style('display', enabled ? 'block' : 'none');
 
         layerEnter
@@ -283,14 +283,14 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
 
     drawImages.enabled = function(_) {
-        if (!arguments.length) return svgOpenstreetcamImages.enabled;
-        svgOpenstreetcamImages.enabled = _;
-        if (svgOpenstreetcamImages.enabled) {
+        if (!arguments.length) return svgKartaviewImages.enabled;
+        svgKartaviewImages.enabled = _;
+        if (svgKartaviewImages.enabled) {
             showLayer();
-            context.photos().on('change.openstreetcam_images', update);
+            context.photos().on('change.kartaview_images', update);
         } else {
             hideLayer();
-            context.photos().on('change.openstreetcam_images', null);
+            context.photos().on('change.kartaview_images', null);
         }
         dispatch.call('change');
         return this;
