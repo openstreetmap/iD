@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
+* Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
 * Allow disconnecting members of certain "grouping" types of relation ([#8771])
 * Clarify description of "disconnected way" validation rule ([#8800])
 #### :bug: Bugfixes
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add colours for preset categories ([#8799])
 #### :hammer: Development
 
+[#7381]: https://github.com/openstreetmap/iD/issues/7381
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
 [#8792]: https://github.com/openstreetmap/iD/pull/8792
