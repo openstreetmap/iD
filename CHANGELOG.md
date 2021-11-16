@@ -141,13 +141,15 @@ _The text styling indicates which values are raw tags and which are translated l
 #### :sparkles: Usability & Accessibility
 * Enabled node dragging at the bottom of the screen ([#8233])
 * Preset search is now more diacritics friendly ([#8242])
-* Improve sidebar Fields behavior for multilingual names ([#8164]) 
-* Improved distinction between preset categories and presets icons in sidebar ([#6085]) 
+* Improve sidebar Fields behavior for multilingual names ([#8164])
+* Improved distinction between preset categories and presets icons in sidebar ([#6085])
+* Enhance labels for route relations to include direction and via points ([#8276], thanks [@1ec5])
 
 [#8233]: https://github.com/openstreetmap/iD/issues/8233
 [#8242]: https://github.com/openstreetmap/iD/issues/8242
 [#8164]: https://github.com/openstreetmap/iD/issues/8164
 [#6085]: https://github.com/openstreetmap/iD/issues/6085
+[#8276]: https://github.com/openstreetmap/iD/pull/8276
 
 #### :scissors: Operations
 * New operations: Select parent way operation (<kbd>Ctrl</kbd><kbd>↑</kbd>)/ select child nodes operation (<kbd>Ctrl</kbd><kbd>↓</kbd>) ([#pr8264], [#pr8577]) Thanks [@1ec5]
@@ -164,7 +166,7 @@ _The text styling indicates which values are raw tags and which are translated l
 #### :white_check_mark: Validation
 * Several rules added for the case when tagging is used with wrong geometry ([#8231])
 * Missing tag validation improvement ([#8273])
-* Smarter suspicious tag and outdated tag validators (thanks to the new NSI matcher) ([#pr8305]) 
+* Smarter suspicious tag and outdated tag validators (thanks to the new NSI matcher) ([#pr8305])
 
 [#8231]: https://github.com/openstreetmap/iD/issues/8231
 [#8273]: https://github.com/openstreetmap/iD/issues/8273
