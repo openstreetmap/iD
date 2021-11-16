@@ -6,7 +6,7 @@
 
 ### Prep
 - If you don't have a `transifex.auth` file in the root of your iD checkout,
-you'll need to create a Transifex account, ask @quincylvania or @bhousel for admin rights
+you'll need to create a Transifex account, ask @tyr_asd or @bhousel for admin rights
 on the iD project, and then create this file with contents like<br><pre>
      {"user": "yourusername", "password": "*******"}</pre>This file is not version-controlled and will not be checked in.
 
@@ -24,7 +24,7 @@ $  npm run translations
 $  git add . && git commit -m 'npm run translations'
 ```
 
-- Update `CHANGELOG.md`
+- Check and finalize `CHANGELOG.md`
 - Set release version number in `modules/core/context.js` and `package.json`
 
 ```bash
