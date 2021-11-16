@@ -1888,6 +1888,12 @@ en:
     vertex_as_point:
       message: '{feature} should be part of a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
+    osm_api_limits:
+      title: OSM Feature Restrictions
+      tip: Limits and rules imposed by the OSM API on uploaded features
+      max_way_nodes:
+        message: Way has too many vertices
+        reference: "The maximum number of vertices on a way is {maxWayNodes}. Split the feature or otherwise reduce number the nodes of the affected way to fix this."
     fix:
       add_a_bridge:
         title: Add a bridge
@@ -1961,6 +1967,8 @@ en:
         title: Set as inner
       set_as_outer:
         title: Set as outer
+      split_way:
+        title: Split the way into smaller pieces.
       square_feature:
         title: Square this feature
       tag_as_disconnected:
