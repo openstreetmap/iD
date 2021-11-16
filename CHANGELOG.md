@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
+* Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 
+[#7381]: https://github.com/openstreetmap/iD/issues/7381
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
