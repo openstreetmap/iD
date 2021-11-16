@@ -46,7 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 #### :camera: Street-Level
-* Rename OpenStreetCam layers to KartaView ([#8807])
+* Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
 * Clarify description of "disconnected way" validation rule ([#8800])
 #### :bug: Bugfixes
