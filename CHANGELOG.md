@@ -33,14 +33,41 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * ([#])
 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
+[#xxxx]: https://github.com/openstreetmap/iD/pull/xxxx
 [@xxxx]: https://github.com/xxxx
-[#prxxxx]: https://github.com/openstreetmap/iD/pull/xxxx
 -->
+
+# Unreleased
+
+#### :newspaper: News
+* We maintain a running changelog now! Upcoming changes will be added to the _[Unreleased](#Unreleased)_ section of this changelog as soon as they are ready in the [development version](https://ideditor.netlify.app/) of the iD editor. ([#8805])
+#### :boom: Breaking Changes
+#### :tada: New Features
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+* Clarify description of "disconnected way" validation rule ([#8800])
+#### :bug: Bugfixes
+* Fix hidden tooltips on map control toolbar ([#8781])
+* Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
+#### :hammer: Development
+
+[#8781]: https://github.com/openstreetmap/iD/issues/8781
+[#8792]: https://github.com/openstreetmap/iD/pull/8792
+[#8796]: https://github.com/openstreetmap/iD/issues/8796
+[#8800]: https://github.com/openstreetmap/iD/pull/8800
+[#8805]: https://github.com/openstreetmap/iD/issues/8805
 
 # 2.20.2
 ##### 2021-Oct-28
 #### :sparkles: Usability & Accessibility
-* Decomission Maxar Standard legacy imagery layer ([#8647])
+* Decommission Maxar Standard legacy imagery layer ([#8647])
 * Show an error if localStorage is full ([#8727])
 * Keep the oldest way when merging ([#8708])
 * Enable ui map control toolbar scrolling on small devices or high zoom levels ([#pr8685])
