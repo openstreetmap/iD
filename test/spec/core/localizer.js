@@ -27,6 +27,16 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(1234.56))).to.eql(1234.56);
             expect(parseFloat(formatFloat(3.14159))).to.eql(3.14159);
         });
+        it('roundtrips Hebrew numbers', function () {
+            var localizer = iD.coreLocalizer();
+            var formatFloat = localizer.floatFormatter('he');
+            var parseFloat = localizer.floatParser('he');
+            expect(parseFloat(formatFloat(-0.1))).to.eql(-0.1);
+            expect(parseFloat(formatFloat(1.234))).to.eql(1.234);
+            expect(parseFloat(formatFloat(1234))).to.eql(1234);
+            expect(parseFloat(formatFloat(1234.56))).to.eql(1234.56);
+            expect(parseFloat(formatFloat(3.14159))).to.eql(3.14159);
+        });
         it('roundtrips Arabic numbers', function () {
             var localizer = iD.coreLocalizer();
             var formatFloat = localizer.floatFormatter('ar-EG');

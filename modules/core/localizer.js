@@ -439,15 +439,17 @@ export function coreLocalizer() {
         if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
         const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
         if (!('formatToParts' in format)) return polyfill;
-        const parts = format.formatToParts(12345.6);
+        const parts = format.formatToParts(-12345.6);
         const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
         const index = new Map(numerals.map((d, i) => [d, i]));
+        const literal = new RegExp(`[${parts.find(d => d.type === 'literal').value}]`, 'g');
         const group = new RegExp(`[${parts.find(d => d.type === 'group').value}]`, 'g');
         const decimal = new RegExp(`[${parts.find(d => d.type === 'decimal').value}]`);
         const numeral = new RegExp(`[${numerals.join('')}]`, 'g');
         const getIndex = d => index.get(d);
         return (string) => {
             string = string.trim()
+                .replace(literal, '')
                 .replace(group, '')
                 .replace(decimal, '.')
                 .replace(numeral, getIndex);
