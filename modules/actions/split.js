@@ -95,7 +95,7 @@ export function actionSplit(nodeIds, newWayIds) {
         return totalLength;
     }
 
-    function split(graph, nodeId, wayA, newWayId) {
+    function split(graph, nodeId, wayA, newWayId, otherNodeIds) {
         var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
         var nodesA;
         var nodesB;
@@ -104,7 +104,7 @@ export function actionSplit(nodeIds, newWayIds) {
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1);
             var idxA = nodes.indexOf(nodeId);
-            var idxB = splitArea(nodes, idxA, graph);
+            var idxB = otherNodeIds.length > 0 ? nodes.indexOf(otherNodeIds[0]) : splitArea(nodes, idxA, graph);
 
             if (idxB < idxA) {
                 nodesA = nodes.slice(idxA).concat(nodes.slice(0, idxB + 1));
@@ -398,7 +398,7 @@ export function actionSplit(nodeIds, newWayIds) {
             var nodeId = nodeIds[i];
             var candidates = action.waysForNode(nodeId, graph);
             for (var j = 0; j < candidates.length; j++) {
-                graph = split(graph, nodeId, candidates[j], newWayIds && newWayIds[newWayIndex]);
+                graph = split(graph, nodeId, candidates[j], newWayIds && newWayIds[newWayIndex], nodeIds.slice(j + 1));
                 newWayIndex += 1;
             }
         }
