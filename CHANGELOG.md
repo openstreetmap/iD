@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
+* Fix splitting of closed ways (or areas) when two or more split-points are selected
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
