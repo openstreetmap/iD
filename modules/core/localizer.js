@@ -429,7 +429,7 @@ export function coreLocalizer() {
               'formatToParts' in Intl.NumberFormat.prototype)) {
             return (number) => number.toString();
         } else {
-            return (number) => number.toLocaleString(locale);
+            return (number) => number.toLocaleString(locale, { maximumFractionDigits: 20 });
         }
     };
 
@@ -437,7 +437,7 @@ export function coreLocalizer() {
         // https://stackoverflow.com/a/55366435/4585461
         const polyfill = (string) => parseFloat(string.trim());
         if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
-        const format = new Intl.NumberFormat(locale);
+        const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
         if (!('formatToParts' in format)) return polyfill;
         const parts = format.formatToParts(12345.6);
         const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
