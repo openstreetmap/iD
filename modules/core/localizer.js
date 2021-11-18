@@ -1,3 +1,5 @@
+import { escape } from 'lodash-es';
+
 import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';
 import { utilStringQs } from '../util';
@@ -348,13 +350,24 @@ export function coreLocalizer() {
 
     // Returns the localized text wrapped in an HTML element encoding the locale info
     localizer.t.html = function(stringId, replacements, locale) {
-        const info = localizer.tInfo(stringId, replacements, locale);
-        // text may be empty or undefined if `replacements.default` is
-        return info.text ? localizer.htmlForLocalizedText(info.text, info.locale) : '';
-    };
+      // replacement string might be html unsafe, so we need to escape it except if it is explicitly marked as html code
+      replacements = Object.assign({}, replacements);
+      for (var k in replacements) {
+        if (typeof replacements[k] === 'string') {
+          replacements[k] = escape(replacements[k]);
+        }
+        if (typeof replacements[k] === 'object' && typeof replacements[k].html === 'string') {
+          replacements[k] = replacements[k].html;
+        }
+      }
 
-    localizer.htmlForLocalizedText = function(text, localeCode) {
-        return `<span class="localized-text" lang="${localeCode || 'und'}">${text}</span>`;
+      const info = localizer.tInfo(stringId, replacements, locale);
+      // text may be empty or undefined if `replacements.default` is
+      if (info.text) {
+        return `<span class="localized-text" lang="${info.locale || 'und'}">${info.text}</span>`;
+      } else {
+        return '';
+      }
     };
 
     localizer.languageName = (code, options) => {

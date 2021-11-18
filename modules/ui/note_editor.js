@@ -302,12 +302,12 @@ export function uiNoteEditor(context) {
             userLink
                 .append('a')
                 .attr('class', 'user-info')
-                .html(user.display_name)
+                .text(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
                 .attr('target', '_blank');
 
             prose
-                .html(t.html('note.upload_explanation_with_user', { user: userLink.html() }));
+                .html(t.html('note.upload_explanation_with_user', { user: { html: userLink.html() } }));
         });
     }
 

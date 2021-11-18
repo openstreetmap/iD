@@ -60,10 +60,20 @@ export function uiTagReference(what) {
             done();
         }
 
-        _body
+        var tagReferenceDescription = _body
             .append('p')
             .attr('class', 'tag-reference-description')
-            .html(docs.description ? localizer.htmlForLocalizedText(docs.description, docs.descriptionLocaleCode) : t.html('inspector.no_documentation_key'))
+            .append('span');
+        if (docs.description) {
+            tagReferenceDescription = tagReferenceDescription
+                .attr('class', 'localized-text')
+                .attr('lang', docs.descriptionLocaleCode || 'und')
+                .text(docs.description);
+        } else {
+            tagReferenceDescription = tagReferenceDescription
+                .html(t.html('inspector.no_documentation_key'));
+        }
+        tagReferenceDescription
             .append('a')
             .attr('class', 'tag-reference-edit')
             .attr('target', '_blank')
