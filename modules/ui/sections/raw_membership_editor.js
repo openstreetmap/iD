@@ -341,15 +341,15 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .html(function(d) {
+            .text(function(d) {
                 var matched = presetManager.match(d.relation, context.graph());
-                return (matched && matched.name()) || t('inspector.relation');
+                return (matched && matched.name()) || t.html('inspector.relation');
             });
 
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .html(function(d) { return utilDisplayName(d.relation); });
+            .text(function(d) { return utilDisplayName(d.relation); });
 
         labelEnter
             .append('button')

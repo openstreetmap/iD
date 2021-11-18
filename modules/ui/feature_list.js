@@ -304,12 +304,12 @@ export function uiFeatureList(context) {
             label
                 .append('span')
                 .attr('class', 'entity-type')
-                .html(function(d) { return d.type; });
+                .text(function(d) { return d.type; });
 
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .html(function(d) { return d.name; });
+                .text(function(d) { return d.name; });
 
             enter
                 .style('opacity', 0)

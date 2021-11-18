@@ -119,7 +119,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .property('value', function(d) { return _options[d]; });
 
         container.selectAll('.display-option-value')
-            .html(function(d) { return Math.floor(_options[d] * 100) + '%'; });
+            .text(function(d) { return Math.floor(_options[d] * 100) + '%'; });
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });

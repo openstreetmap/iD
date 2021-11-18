@@ -182,7 +182,7 @@ export function uiConflicts(context) {
             .append('a')
             .attr('class', 'conflict-description')
             .attr('href', '#')
-            .html(function(d) { return d.name; })
+            .text(function(d) { return d.name; })
             .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
                 zoomToEntity(d.id);
@@ -264,7 +264,7 @@ export function uiConflicts(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) { return d.text; });
+            .text(function(d) { return d.text; });
 
         // update
         choicesEnter

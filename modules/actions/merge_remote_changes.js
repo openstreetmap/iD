@@ -179,7 +179,6 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
                 if (o[k] !== a[k]) {      // changed locally..
                     _conflicts.push(t.html('merge_remote_changes.conflict.tags',
                         { tag: k, local: a[k], remote: b[k], user: { html: user(remote.user) } }));
-
                 } else {                  // unchanged locally, accept remote change..
                     if (b.hasOwnProperty(k)) {
                         tags[k] = b[k];

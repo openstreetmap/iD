@@ -140,7 +140,7 @@ export function uiOsmoseDetails(context) {
           .append('a')
             .attr('href', '#')
             .attr('class', 'error_entity_link')
-            .html(d => d)
+            .text(d => d)
             .each(function() {
               const link = d3_select(this);
               const entityID = this.textContent;

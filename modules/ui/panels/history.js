@@ -40,7 +40,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
-                .html('OSM');
+                .text('OSM');
         }
 
         links
@@ -49,7 +49,7 @@ export function uiPanelHistory(context) {
             .attr('href', 'https://hdyc.neis-one.org/?' + userName)
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .html('HDYC');
+            .text('HDYC');
     }
 
 
@@ -64,7 +64,7 @@ export function uiPanelHistory(context) {
         selection
             .append('span')
             .attr('class', 'changeset-id')
-            .html(changeset);
+            .text(changeset);
 
         var links = selection
             .append('div')
@@ -76,7 +76,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'changeset-osm-link')
                 .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
-                .html('OSM');
+                .text('OSM');
         }
 
         links
@@ -84,14 +84,14 @@ export function uiPanelHistory(context) {
             .attr('class', 'changeset-osmcha-link')
             .attr('href', 'https://osmcha.org/changesets/' + changeset)
             .attr('target', '_blank')
-            .html('OSMCha');
+            .text('OSMCha');
 
         links
             .append('a')
             .attr('class', 'changeset-achavi-link')
             .attr('href', 'https://overpass-api.de/achavi/?changeset=' + changeset)
             .attr('target', '_blank')
-            .html('Achavi');
+            .text('Achavi');
     }
 
 
@@ -101,7 +101,7 @@ export function uiPanelHistory(context) {
 
         var selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
-            selected = [ t('note.note') + ' ' + selectedNoteID ];
+            selected = [ t.html('note.note') + ' ' + selectedNoteID ];
             note = osm.getNote(selectedNoteID);
         } else {                           // selected 1..n entities
             selected = context.selectedIDs()
@@ -145,14 +145,14 @@ export function uiPanelHistory(context) {
             .append('li')
             .html(t.html('info_panels.history.note_comments') + ':')
             .append('span')
-            .html(note.comments.length);
+            .text(note.comments.length);
 
         if (note.comments.length) {
             list
                 .append('li')
                 .html(t.html('info_panels.history.note_created_date') + ':')
                 .append('span')
-                .html(displayTimestamp(note.comments[0].date));
+                .text(displayTimestamp(note.comments[0].date));
 
             list
                 .append('li')
@@ -192,7 +192,7 @@ export function uiPanelHistory(context) {
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
                 .attr('title', t('info_panels.history.link_text'))
-                .html('OSM');
+                .text('OSM');
         }
         links
             .append('a')
@@ -200,7 +200,7 @@ export function uiPanelHistory(context) {
             .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .html('PeWu');
+            .text('PeWu');
 
         var list = selection
             .append('ul');
@@ -209,13 +209,13 @@ export function uiPanelHistory(context) {
             .append('li')
             .html(t.html('info_panels.history.version') + ':')
             .append('span')
-            .html(entity.version);
+            .text(entity.version);
 
         list
             .append('li')
             .html(t.html('info_panels.history.last_edit') + ':')
             .append('span')
-            .html(displayTimestamp(entity.timestamp));
+            .text(displayTimestamp(entity.timestamp));
 
         list
             .append('li')

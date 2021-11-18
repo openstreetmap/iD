@@ -544,12 +544,12 @@ export default {
     controlsEnter
       .append('button')
       .on('click.back', step(-1))
-      .html('◄');
+      .text('◄');
 
     controlsEnter
       .append('button')
       .on('click.forward', step(1))
-      .html('►');
+      .text('►');
 
 
     // create working canvas for stitching together images
@@ -810,18 +810,18 @@ export default {
         .attr('class', 'captured_by')
         .attr('target', '_blank')
         .attr('href', 'https://www.microsoft.com/en-us/maps/streetside')
-        .html('©' + yyyy + ' Microsoft');
+        .text('©' + yyyy + ' Microsoft');
 
       captureInfo
         .append('span')
-        .html('|');
+        .text('|');
     }
 
     if (d.captured_at) {
       captureInfo
         .append('span')
         .attr('class', 'captured_at')
-        .html(localeTimestamp(d.captured_at));
+        .text(localeTimestamp(d.captured_at));
     }
 
     // Add image links

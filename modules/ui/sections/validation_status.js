@@ -78,7 +78,7 @@ export function uiSectionValidationStatus(context) {
             .merge(resetIgnoredEnter);
 
         resetIgnored.select('a')
-            .html(t('inspector.title_count', { title: t.html('issues.reset_ignored'), count: ignoredIssues.length }));
+            .html(t.html('inspector.title_count', { title: t('issues.reset_ignored'), count: ignoredIssues.length }));
 
         resetIgnored.on('click', function(d3_event) {
             d3_event.preventDefault();

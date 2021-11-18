@@ -51,7 +51,7 @@ export function uiContributors(context) {
                 .attr('href', function() {
                     return osm.changesetsURL(context.map().center(), context.map().zoom());
                 })
-                .html(othersNum);
+                .text(othersNum);
 
             wrap.append('span')
                 .html(t.html('contributors.truncated_list', { n: othersNum, users: { html: userList.html() }, count: { html: count.html() } }));

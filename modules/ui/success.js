@@ -292,7 +292,7 @@ export function uiSuccess(context) {
         .select('.hide-toggle')
         .append('span')
         .attr('class', 'badge-text')
-        .html(nextEvents.length);
+        .text(nextEvents.length);
     }
 
 
@@ -342,7 +342,7 @@ export function uiSuccess(context) {
         .append('a')
         .attr('target', '_blank')
         .attr('href', d => d.url)
-        .html(d => {
+        .text(d => {
           let name = d.name;
           if (d.i18n && d.id) {
             name = t(`community.${communityID}.events.${d.id}.name`, { default: name });
@@ -353,7 +353,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-when')
-        .html(d => {
+        .text(d => {
           let options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
           if (d.date.getHours() || d.date.getMinutes()) {   // include time if it has one
             options.hour = 'numeric';
@@ -365,7 +365,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-where')
-        .html(d => {
+        .text(d => {
           let where = d.where;
           if (d.i18n && d.id) {
             where = t(`community.${communityID}.events.${d.id}.where`, { default: where });
@@ -376,7 +376,7 @@ export function uiSuccess(context) {
       itemEnter
         .append('div')
         .attr('class', 'community-event-description')
-        .html(d => {
+        .text(d => {
           let description = d.description;
           if (d.i18n && d.id) {
             description = t(`community.${communityID}.events.${d.id}.description`, { default: description });

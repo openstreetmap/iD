@@ -52,7 +52,7 @@ export function uiPanelMeasurement(context) {
         if (selectedNoteID && osm) {       // selected 1 note
 
             var note = osm.getNote(selectedNoteID);
-            heading = t('note.note') + ' ' + selectedNoteID;
+            heading = t.html('note.note') + ' ' + selectedNoteID;
             location = note.loc;
             geometry = 'note';
 
@@ -65,7 +65,7 @@ export function uiPanelMeasurement(context) {
             });
 
             heading = selected.length === 1 ? selected[0].id :
-                t('info_panels.selected', { n: selected.length });
+                t.html('info_panels.selected', { n: selected.length });
 
             if (selected.length) {
                 var extent = geoExtent();
@@ -132,7 +132,7 @@ export function uiPanelMeasurement(context) {
                 .html(t.html('info_panels.measurement.geometry') + ':')
                 .append('span')
                 .html(
-                    closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
+                    closed ? t('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
                 );
         }
 
@@ -141,7 +141,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.node_count') + ':')
                 .append('span')
-                .html(totalNodeCount.toLocaleString(localeCode));
+                .text(totalNodeCount.toLocaleString(localeCode));
         }
 
         if (area) {
@@ -149,7 +149,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.area') + ':')
                 .append('span')
-                .html(displayArea(area, _isImperial));
+                .text(displayArea(area, _isImperial));
         }
 
         if (length) {
@@ -157,7 +157,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.' + (closed ? 'perimeter' : 'length')) + ':')
                 .append('span')
-                .html(displayLength(length, _isImperial));
+                .text(displayLength(length, _isImperial));
         }
 
         if (typeof distance === 'number') {
@@ -165,7 +165,7 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.distance') + ':')
                 .append('span')
-                .html(displayLength(distance, _isImperial));
+                .text(displayLength(distance, _isImperial));
         }
 
         if (location) {
@@ -173,9 +173,9 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.location') + ':');
             coordItem.append('span')
-                .html(dmsCoordinatePair(location));
+                .text(dmsCoordinatePair(location));
             coordItem.append('span')
-                .html(decimalCoordinatePair(location));
+                .text(decimalCoordinatePair(location));
         }
 
         if (centroid) {
@@ -183,9 +183,9 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.centroid') + ':');
             coordItem.append('span')
-                .html(dmsCoordinatePair(centroid));
+                .text(dmsCoordinatePair(centroid));
             coordItem.append('span')
-                .html(decimalCoordinatePair(centroid));
+                .text(decimalCoordinatePair(centroid));
         }
 
         if (center) {
@@ -193,9 +193,9 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .html(t.html('info_panels.measurement.center') + ':');
             coordItem.append('span')
-                .html(dmsCoordinatePair(center));
+                .text(dmsCoordinatePair(center));
             coordItem.append('span')
-                .html(decimalCoordinatePair(center));
+                .text(decimalCoordinatePair(center));
         }
 
         if (length || area || typeof distance === 'number') {

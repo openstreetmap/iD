@@ -116,10 +116,10 @@ export function uiSectionSelectionList(context) {
             });
 
         items.selectAll('.entity-type')
-            .html(function(entity) { return presetManager.match(entity, context.graph()).name(); });
+            .text(function(entity) { return presetManager.match(entity, context.graph()).name(); });
 
         items.selectAll('.entity-name')
-            .html(function(d) {
+            .text(function(d) {
                 // fetch latest entity
                 var entity = context.entity(d.id);
                 return utilDisplayName(entity);

@@ -104,7 +104,7 @@ export function uiSectionValidationRules(context) {
             .html(function(d) {
                 var params = {};
                 if (d === 'unsquare_way') {
-                    params.val = '<span class="square-degrees"></span>';
+                    params.val = { html: '<span class="square-degrees"></span>' };
                 }
                 return t.html('issues.' + d + '.title', params);
             });

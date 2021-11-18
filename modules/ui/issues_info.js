@@ -83,7 +83,7 @@ export function uiIssuesInfo(context) {
 
         enter.merge(chips)
             .selectAll('span.count')
-            .html(function(d) {
+            .text(function(d) {
                 return d.count.toString();
             });
     }

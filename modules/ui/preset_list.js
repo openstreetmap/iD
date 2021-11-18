@@ -96,13 +96,13 @@ export function uiPresetList(context) {
             var results, messageText;
             if (value.length) {
                 results = presets.search(value, entityGeometries()[0], _currLoc);
-                messageText = t('inspector.results', {
+                messageText = t.html('inspector.results', {
                     n: results.collection.length,
                     search: value
                 });
             } else {
                 results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc);
-                messageText = t('inspector.choose');
+                messageText = t.html('inspector.choose');
             }
             list.call(drawList, results);
             message.html(messageText);

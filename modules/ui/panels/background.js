@@ -46,7 +46,7 @@ export function uiPanelBackground(context) {
                 .html(t.html('info_panels.background.' + k) + ':')
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
-                .html(_metadata[k]);
+                .text(_metadata[k]);
         });
 
         debouncedGetMetadata(selection);
@@ -110,7 +110,7 @@ export function uiPanelBackground(context) {
         selection.selectAll('.background-info-list-zoom')
             .classed('hide', false)
             .selectAll('.background-info-span-zoom')
-            .html(_metadata.zoom);
+            .text(_metadata.zoom);
 
         if (!d || !d.length >= 3) return;
 
@@ -123,7 +123,7 @@ export function uiPanelBackground(context) {
             selection.selectAll('.background-info-list-vintage')
                 .classed('hide', false)
                 .selectAll('.background-info-span-vintage')
-                .html(_metadata.vintage);
+                .text(_metadata.vintage);
 
             // update other _metadata
             _metadataKeys.forEach(function(k) {
@@ -133,7 +133,7 @@ export function uiPanelBackground(context) {
                 selection.selectAll('.background-info-list-' + k)
                     .classed('hide', !val)
                     .selectAll('.background-info-span-' + k)
-                    .html(val);
+                    .text(val);
             });
         });
     }

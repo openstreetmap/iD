@@ -148,7 +148,7 @@ export function uiNoteEditor(context) {
             .append('h4')
             .attr('class', '.note-save-header')
             .html(function() {
-                return _note.isNew() ? t('note.newDescription') : t('note.newComment');
+                return _note.isNew() ? t.html('note.newDescription') : t.html('note.newComment');
             });
 
         var commentTextarea = noteSaveEnter
@@ -368,7 +368,7 @@ export function uiNoteEditor(context) {
             .html(function(d) {
                 var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('note.' + action + andComment);
+                return t.html('note.' + action + andComment);
             })
             .on('click.status', clickStatus);
 

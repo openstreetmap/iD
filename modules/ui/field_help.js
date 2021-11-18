@@ -54,15 +54,15 @@ export function uiFieldHelp(context, fieldName) {
     var fieldHelpHeadings = {};
 
     var replacements = {
-        distField: t.html('restriction.controls.distance'),
-        viaField: t.html('restriction.controls.via'),
-        fromShadow: icon('#iD-turn-shadow', 'inline shadow from'),
-        allowShadow: icon('#iD-turn-shadow', 'inline shadow allow'),
-        restrictShadow: icon('#iD-turn-shadow', 'inline shadow restrict'),
-        onlyShadow: icon('#iD-turn-shadow', 'inline shadow only'),
-        allowTurn: icon('#iD-turn-yes', 'inline turn'),
-        restrictTurn: icon('#iD-turn-no', 'inline turn'),
-        onlyTurn: icon('#iD-turn-only', 'inline turn')
+        distField: { html: t.html('restriction.controls.distance') },
+        viaField: { html: t.html('restriction.controls.via') },
+        fromShadow: { html: icon('#iD-turn-shadow', 'inline shadow from') },
+        allowShadow: { html: icon('#iD-turn-shadow', 'inline shadow allow') },
+        restrictShadow: { html: icon('#iD-turn-shadow', 'inline shadow restrict') },
+        onlyShadow: { html: icon('#iD-turn-shadow', 'inline shadow only') },
+        allowTurn: { html: icon('#iD-turn-yes', 'inline turn') },
+        restrictTurn: { html: icon('#iD-turn-no', 'inline turn') },
+        onlyTurn: { html: icon('#iD-turn-only', 'inline turn') }
     };
 
 
