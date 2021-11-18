@@ -354,7 +354,7 @@ export function coreLocalizer() {
     };
 
     localizer.htmlForLocalizedText = function(text, localeCode) {
-        return `<span class="localized-text" lang="${localeCode || 'unknown'}">${text}</span>`;
+        return `<span class="localized-text" lang="${localeCode || 'und'}">${text}</span>`;
     };
 
     localizer.languageName = (code, options) => {
