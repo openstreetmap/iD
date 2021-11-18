@@ -28,7 +28,7 @@ export function uiPanelHistory(context) {
         selection
             .append('span')
             .attr('class', 'user-name')
-            .html(userName);
+            .text(userName);
 
         var links = selection
             .append('div')
