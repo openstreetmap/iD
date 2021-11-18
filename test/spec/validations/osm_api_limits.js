@@ -3,8 +3,15 @@ describe('iD.validations.osm_api_limits', function () {
 
     beforeEach(function() {
         iD.services.osm = { maxWayNodes: function() { return 10; } };
-        context = iD.coreContext().assetPath('../dist/').init();
-        context.surface = function() {}; // mock with NOP
+        var container = d3.select('body').append('div');
+        var context = iD.coreContext().assetPath('../dist/').init().container(container);
+        /*// mock some stuff with a bunch of NOPs
+        context.surface = function() { return {
+            call: function() {},
+            selectAll: function() { return { classed: function() {} }; }
+        }; };
+        context.ui().closeEditMenu = function() {};*/
+        // cleanup
         delete iD.services.osm;
     });
 
