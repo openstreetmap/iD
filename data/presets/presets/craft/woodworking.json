@@ -1,0 +1,16 @@
+{
+    "icon": "temaki-tools",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "woodworking",
+        "woodworker",
+        "woodwork",
+        "wood"
+    ],
+    "tags": {
+        "craft": "woodworking"
+    },
+    "name": "Woodworker"
+}

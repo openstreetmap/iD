@@ -1,0 +1,13 @@
+{
+    "icon": "temaki-tools",
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "construction"
+    ],
+    "tags": {
+        "craft": "construction"
+    },
+    "name": "Construction"
+}
