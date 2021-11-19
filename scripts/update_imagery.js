@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 const fs = require('fs');
-let sources = require('editor-layer-index/imagery.json');
+let sources = JSON.parse(fs.readFileSync('node_modules/editor-layer-index/imagery.geojson'));
 const prettyStringify = require('json-stringify-pretty-compact');
 
-if (fs.existsSync('./data/manual_imagery.json')) {
+if (fs.existsSync('./data/manual_imagery.geojson')) {
   // we can include additional imagery sources that aren't in the index
-  sources = sources.concat(JSON.parse(fs.readFileSync('./data/manual_imagery.json')));
+  sources.features = sources.features.concat(
+    JSON.parse(fs.readFileSync('./data/manual_imagery.geojson')).features);
 }
 
 let imagery = [];
@@ -79,7 +80,9 @@ const supportedWMSProjections = [
 ];
 
 
-sources.forEach(source => {
+sources.features.forEach(_source => {
+  var source = _source.properties;
+  
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (source.id in discard) return;
 
@@ -87,6 +90,7 @@ sources.forEach(source => {
     id: source.id,
     name: source.name,
     type: source.type,
+    category: source.category,
     template: source.url
   };
 
@@ -104,7 +108,7 @@ sources.forEach(source => {
   if (source.type === 'wms') {
     const projection = source.available_projections && supportedWMSProjections.find(p => source.available_projections.indexOf(p) !== -1);
     if (!projection) return;
-    if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
+    if (sources.features.some(other => other.properties.name === source.name && other.properties.type !== source.type)) return;
     im.projection = projection;
   }
 
@@ -128,23 +132,22 @@ sources.forEach(source => {
     }
   }
 
-  let extent = source.extent || {};
-  if (extent.min_zoom || extent.max_zoom) {
+  if (source.min_zoom || source.max_zoom) {
     im.zoomExtent = [
-      extent.min_zoom || 0,
-      extent.max_zoom || 22
+      source.min_zoom || 0,
+      source.max_zoom || 22
     ];
   }
 
-  if (extent.polygon) {
-    im.polygon = extent.polygon;
-  } else if (extent.bbox) {
+  if (_source.geometry !== null) {
+    im.polygon = _source.geometry.coordinates;
+  } else if (_source.bbox) {
     im.polygon = [[
-      [extent.bbox.min_lon, extent.bbox.min_lat],
-      [extent.bbox.min_lon, extent.bbox.max_lat],
-      [extent.bbox.max_lon, extent.bbox.max_lat],
-      [extent.bbox.max_lon, extent.bbox.min_lat],
-      [extent.bbox.min_lon, extent.bbox.min_lat]
+      [_source.bbox.min_lon, _source.bbox.min_lat],
+      [_source.bbox.min_lon, _source.bbox.max_lat],
+      [_source.bbox.max_lon, _source.bbox.max_lat],
+      [_source.bbox.max_lon, _source.bbox.min_lat],
+      [_source.bbox.min_lon, _source.bbox.min_lat]
     ]];
   }
 
