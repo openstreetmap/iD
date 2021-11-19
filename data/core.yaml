@@ -1000,7 +1000,7 @@ en:
       location: 'This feature was moved by both you and {user}.'
       nodelist: 'Nodes were changed by both you and {user}.'
       memberlist: 'Relation members were changed by both you and {user}.'
-      tags: 'You changed the {tag} tag to "{local}" and {user} changed it to "{remote}".'
+      tags: 'You changed the "{tag}" tag to "{local}" and {user} changed it to "{remote}".'
   success:
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
