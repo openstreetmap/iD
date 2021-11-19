@@ -1,11 +1,11 @@
 
 import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
+import { uiSectionBackgroundExtras } from '../sections/background-extras';
 
 import { uiSectionBackgroundDisplayOptions } from '../sections/background_display_options';
 import { uiSectionBackgroundList } from '../sections/background_list';
 import { uiSectionBackgroundOffset } from '../sections/background_offset';
-import { uiSectionOverlayList } from '../sections/overlay_list';
 
 export function uiPaneBackground(context) {
 
@@ -14,12 +14,12 @@ export function uiPaneBackground(context) {
         .label(t.html('background.title'))
         .description(t.html('background.description'))
         .iconName('iD-icon-layers')
-        .sections([
-            uiSectionBackgroundList(context),
-            uiSectionOverlayList(context),
+        .sections(
+            uiSectionBackgroundList(context).concat([
+            uiSectionBackgroundExtras(context),
             uiSectionBackgroundDisplayOptions(context),
             uiSectionBackgroundOffset(context)
-        ]);
+        ]));
 
     return backgroundPane;
 }

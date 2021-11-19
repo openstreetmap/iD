@@ -1,4 +1,5 @@
-import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
+import { geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
+import { geometry as polygonArea } from '@mapbox/geojson-area';
 import { json as d3_json } from 'd3-fetch';
 
 import { t, localizer } from '../core/localizer';
@@ -91,7 +92,9 @@ export function rendererBackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        var area = data.polygon.reduce((acc, outerRing) => {
+            return acc + Math.abs(polygonArea({ type: 'Polygon', coordinates: [outerRing] }));
+        }, 0);
         return isNaN(area) ? 0 : area;
     };
 

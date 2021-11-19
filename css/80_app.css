@@ -3157,7 +3157,7 @@ div.full-screen > button:focus {
     background: #e8ebff;
 }
 
-.layer-list li.best > div.best {
+.layer-list li > div.stamp {
     padding: 5px;
     flex: 0 0 auto;
 }
@@ -3792,6 +3792,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border-top: 5px solid #222;
 }
 
+.map-pane.background-pane .section.background-list {
+    margin-bottom: 0;
+}
+
+.map-pane.background-pane .section-background-extras {
+    margin-top: 30px;
+}
 
 /* Side Panes - Background / Map Data / Help
 ------------------------------------------------------- */

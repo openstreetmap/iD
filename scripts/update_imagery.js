@@ -17,52 +17,48 @@ cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 
 const discard = {
-  'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
-  'osmfr': true,                        // 'OpenStreetMap (French Style)'
-  'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
-  'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
-  'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
-  'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
-  'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
+  //'osmfr': true,                        // 'OpenStreetMap (French Style)'
+  //'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
+  //'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
+  //'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
+  //'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
 
-  'hike_n_bike': true,                  // 'Hike & Bike'
-  'landsat': true,                      // 'Landsat'
-  'skobbler': true,                     // 'Skobbler'
-  'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
-  'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-  'tf-landscape': true,                 // 'Thunderforest Landscape'
-  'tf-outdoors': true,                  // 'Thunderforest Outdoors'
-  'qa_no_address': true,                // 'QA No Address'
-  'wikimedia-map': true,                // 'Wikimedia Map'
+  //'skobbler': true,                     // 'Skobbler'
+  //'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
+  //'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
+  //'tf-landscape': true,                 // 'Thunderforest Landscape'
+  //'tf-outdoors': true,                  // 'Thunderforest Outdoors'
+  //'qa_no_address': true,                // 'QA No Address'
+  //'wikimedia-map': true,                // 'Wikimedia Map'
 
-  'openinframap-petroleum': true,
-  'openinframap-power': true,
-  'openinframap-telecoms': true,
-  'openpt_map': true,
-  'openrailwaymap': true,
-  'openseamap': true,
-  'opensnowmap-overlay': true,
+  //'openpt_map': true,                     // 'OpenPU Map (overlay)'
+  //'openrailwaymap': true,
+  //'openseamap': true,
+  //'opensnowmap-overlay': true,
 
-  'US-TIGER-Roads-2012': true,
-  'US-TIGER-Roads-2014': true,
+  'US-TIGER-Roads-2017': true,
+  'US-TIGER-Roads-2018': true,
+  'US-TIGER-Roads-2019': true,
 
-  'Waymarked_Trails-Cycling': true,
-  'Waymarked_Trails-Hiking': true,
-  'Waymarked_Trails-Horse_Riding': true,
-  'Waymarked_Trails-MTB': true,
-  'Waymarked_Trails-Skating': true,
-  'Waymarked_Trails-Winter_Sports': true,
+  //'Waymarked_Trails-Cycling': true,
+  //'Waymarked_Trails-Hiking': true,
+  //'Waymarked_Trails-Horse_Riding': true,
+  //'Waymarked_Trails-MTB': true,
+  //'Waymarked_Trails-Skating': true,
+  //'Waymarked_Trails-Winter_Sports': true,
 
-  'OSM_Inspector-Addresses': true,
-  'OSM_Inspector-Geometry': true,
-  'OSM_Inspector-Highways': true,
-  'OSM_Inspector-Multipolygon': true,
-  'OSM_Inspector-Places': true,
-  'OSM_Inspector-Routing': true,
-  'OSM_Inspector-Tagging': true,
+  //'OSM_Inspector-Addresses': true,
+  //'OSM_Inspector-Geometry': true,
+  //'OSM_Inspector-Highways': true,
+  //'OSM_Inspector-Multipolygon': true,
+  //'OSM_Inspector-Places': true,
+  //'OSM_Inspector-Routing': true,
+  //'OSM_Inspector-Tagging': true,
 
   'EOXAT2018CLOUDLESS': true
 };
+
+
 
 const supportedWMSProjections = [
   // Web Mercator
@@ -153,6 +149,9 @@ sources.features.forEach(_source => {
 
   if (source.id === 'mapbox_locator_overlay') {
     im.overzoom = false;
+    // override category to "other imagery"
+    // (such that this overlay is displayed alongside OSM's GPS traces overlay)
+    im.category = 'other';
   }
 
   const attribution = source.attribution || {};
