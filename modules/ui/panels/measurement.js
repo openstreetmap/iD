@@ -132,7 +132,7 @@ export function uiPanelMeasurement(context) {
                 .html(t.html('info_panels.measurement.geometry') + ':')
                 .append('span')
                 .html(
-                    closed ? t('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
+                    closed ? t.html('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
                 );
         }
 

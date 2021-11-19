@@ -19,7 +19,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t('inspector.title_count', { title: t.html('issues.' + severity + 's.list_title'), count: issueCountText });
+            return t.html('inspector.title_count', { title: { html: t.html('issues.' + severity + 's.list_title') }, count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {

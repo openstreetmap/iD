@@ -31,7 +31,7 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t('inspector.title_count', { title: t.html('inspector.relations'), count: count });
+            return t.html('inspector.title_count', { title: { html: t.html('inspector.relations') }, count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
