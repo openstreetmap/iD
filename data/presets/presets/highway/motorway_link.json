@@ -5,12 +5,12 @@
         "maxspeed",
         "maxspeed/advisory",
         "lanes",
+        "placement",
+        "lane_width_start",
+        "lane_width_end",
         "surface",
         "structure",
-        "access",
-        "destination_oneway",
-        "destination/ref_oneway",
-        "junction/ref_oneway"
+        "access"
     ],
     "moreFields": [
         "charge_toll",
@@ -25,7 +25,10 @@
         "ref_road_number",
         "smoothness",
         "toll",
-        "width"
+        "width",
+        "destination_oneway",
+        "destination/ref_oneway",
+        "junction/ref_oneway"
     ],
     "geometry": [
         "line"
