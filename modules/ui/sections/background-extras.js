@@ -82,7 +82,7 @@ export function uiSectionBackgroundExtras(context) {
             .append('span')
             .html(t.html('background.location_panel.description'));
 
-        
+
         // "Info / Report a Problem" link
         selection.selectAll('.imagery-faq')
             .data([0])

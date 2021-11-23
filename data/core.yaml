@@ -775,7 +775,7 @@ en:
     description: Background Settings
     key: B
     backgrounds:
-      photo: Aerial and Sattelite Imagery
+      photo: Aerial and Satellite Imagery
       map: Maps and Terrain Cartography
       osm: Maps based on OpenStreetMap
       other: Other Imagery

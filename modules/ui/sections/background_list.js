@@ -65,7 +65,7 @@ export function uiSectionBackgroundList(context) {
             .merge(container);
 
         _backgroundList.call(drawListItems, function(d3_event, d) {
-            d3_event.preventDefault(); // todo: needed?
+            d3_event.preventDefault();
             chooseBackground(d);
         }, function(d) {
             return categoryMapping(d).id === group.id;
@@ -220,7 +220,6 @@ export function uiSectionBackgroundList(context) {
 
         if (d.overlay) {
             context.background().toggleOverlayLayer(d);
-            //_overlayList.call(updateLayerSelections); // todo: needed?
             document.activeElement.blur();
         } else {
             var previousBackground = context.background().baseLayerSource();

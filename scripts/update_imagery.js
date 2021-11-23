@@ -17,43 +17,9 @@ cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 
 const discard = {
-  //'osmfr': true,                        // 'OpenStreetMap (French Style)'
-  //'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
-  //'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
-  //'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
-  //'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
-
-  //'skobbler': true,                     // 'Skobbler'
-  //'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
-  //'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-  //'tf-landscape': true,                 // 'Thunderforest Landscape'
-  //'tf-outdoors': true,                  // 'Thunderforest Outdoors'
-  //'qa_no_address': true,                // 'QA No Address'
-  //'wikimedia-map': true,                // 'Wikimedia Map'
-
-  //'openpt_map': true,                     // 'OpenPU Map (overlay)'
-  //'openrailwaymap': true,
-  //'openseamap': true,
-  //'opensnowmap-overlay': true,
-
   'US-TIGER-Roads-2017': true,
   'US-TIGER-Roads-2018': true,
   'US-TIGER-Roads-2019': true,
-
-  //'Waymarked_Trails-Cycling': true,
-  //'Waymarked_Trails-Hiking': true,
-  //'Waymarked_Trails-Horse_Riding': true,
-  //'Waymarked_Trails-MTB': true,
-  //'Waymarked_Trails-Skating': true,
-  //'Waymarked_Trails-Winter_Sports': true,
-
-  //'OSM_Inspector-Addresses': true,
-  //'OSM_Inspector-Geometry': true,
-  //'OSM_Inspector-Highways': true,
-  //'OSM_Inspector-Multipolygon': true,
-  //'OSM_Inspector-Places': true,
-  //'OSM_Inspector-Routing': true,
-  //'OSM_Inspector-Tagging': true,
 
   'EOXAT2018CLOUDLESS': true
 };
@@ -78,7 +44,7 @@ const supportedWMSProjections = [
 
 sources.features.forEach(_source => {
   var source = _source.properties;
-  
+
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (source.id in discard) return;
 
