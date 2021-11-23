@@ -11,6 +11,21 @@ import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 
+/**
+ * This component is also used for custom map data,
+ * and geojson can contain numbers as values.
+ * We convert numbers to strings to avoid unexpected bugs.
+ * @param {{ [key: string]: any }} tags
+ */
+function stringifyNumbers(tags) {
+    for (const key in tags) {
+        if (typeof tags[key] === 'number') {
+            tags[key] = tags[key].toString();
+        }
+    }
+    return tags;
+}
+
 export function uiSectionRawTagEditor(id, context) {
 
     var section = uiSection(id, context)
@@ -594,7 +609,7 @@ export function uiSectionRawTagEditor(id, context) {
 
     section.tags = function(val) {
         if (!arguments.length) return _tags;
-        _tags = val;
+        _tags = stringifyNumbers(val);
         return section;
     };
 
