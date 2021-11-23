@@ -39,7 +39,6 @@ const discard = {
   'openinframap-telecoms': true,
   'openpt_map': true,
   'openrailwaymap': true,
-  'openseamap': true,
   'opensnowmap-overlay': true,
 
   'US-TIGER-Roads-2012': true,
