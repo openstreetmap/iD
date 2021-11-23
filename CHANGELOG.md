@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
+* Fix non-string properties of GeoJSON custom map data not being displayed correctly ([#8825], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -60,6 +61,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
 #### :hammer: Development
+
+[@k-yle]: https://github.com/k-yle
 
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
@@ -69,6 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8800]: https://github.com/openstreetmap/iD/pull/8800
 [#8805]: https://github.com/openstreetmap/iD/issues/8805
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
+[#8825]: https://github.com/openstreetmap/iD/pull/8825
 
 # 2.20.2
 ##### 2021-Oct-28
