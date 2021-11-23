@@ -124,7 +124,7 @@ export function uiFieldRestrictions(field, context) {
         distControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-distance-label')
-            .html(t.html('restriction.controls.distance') + ':');
+            .call(t.htmlDom('restriction.controls.distance', { suffix: ':' }));
 
         distControlEnter
             .append('input')
@@ -151,7 +151,7 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-distance-text')
-            .html(displayMaxDistance(_maxDistance));
+            .call(displayMaxDistance(_maxDistance));
 
 
         var viaControl = selection.selectAll('.restriction-via-way')
@@ -167,7 +167,7 @@ export function uiFieldRestrictions(field, context) {
         viaControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-via-way-label')
-            .html(t.html('restriction.controls.via') + ':');
+            .call(t.htmlDom('restriction.controls.via', { suffix: ':' }));
 
         viaControlEnter
             .append('input')
@@ -193,7 +193,7 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-via-way-text')
-            .html(displayMaxVia(_maxViaWay));
+            .call(displayMaxVia(_maxViaWay));
     }
 
 
@@ -490,7 +490,7 @@ export function uiFieldRestrictions(field, context) {
                 var clickSelect = (!_fromWayID || _fromWayID !== way.id);
                 help
                     .append('div')      // "Click to select FROM {fromName}." / "FROM {fromName}"
-                    .html(t.html('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
+                    .call(t.htmlDom('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
                         from: placeholders.from,
                         fromName: displayName(way.id, vgraph)
                     }));
@@ -524,7 +524,7 @@ export function uiFieldRestrictions(field, context) {
 
                 help
                     .append('div')      // "FROM {fromName} TO {toName}"
-                    .html(t.html('restriction.help.from_name_to_name', {
+                    .call(t.htmlDom('restriction.help.from_name_to_name', {
                         from: placeholders.from,
                         fromName: displayName(datum.from.way, vgraph),
                         to: placeholders.to,
@@ -544,7 +544,7 @@ export function uiFieldRestrictions(field, context) {
 
                     help
                         .append('div')      // "VIA {viaNames}"
-                        .html(t.html('restriction.help.via_names', {
+                        .call(t.htmlDom('restriction.help.via_names', {
                             via: placeholders.via,
                             viaNames: names.join(', ')
                         }));
@@ -553,7 +553,7 @@ export function uiFieldRestrictions(field, context) {
                 if (!indirect) {
                     help
                         .append('div')      // Click for "No Right Turn"
-                        .html(t.html('restriction.help.toggle', { turn: nextText.trim() }));
+                        .call(t.htmlDom('restriction.help.toggle', { turn: nextText.trim() }));
                 }
 
                 highlightPathsFrom(null);
@@ -571,7 +571,7 @@ export function uiFieldRestrictions(field, context) {
                 if (_fromWayID) {
                     help
                         .append('div')      // "FROM {fromName}"
-                        .html(t.html('restriction.help.from_name', {
+                        .call(t.htmlDom('restriction.help.from_name', {
                             from: placeholders.from,
                             fromName: displayName(_fromWayID, vgraph)
                         }));
@@ -579,7 +579,7 @@ export function uiFieldRestrictions(field, context) {
                 } else {
                     help
                         .append('div')      // "Click to select a FROM segment."
-                        .html(t.html('restriction.help.select_from', {
+                        .call(t.htmlDom('restriction.help.select_from', {
                             from: placeholders.from
                         }));
                 }
@@ -589,26 +589,30 @@ export function uiFieldRestrictions(field, context) {
 
 
     function displayMaxDistance(maxDist) {
-        var isImperial = !localizer.usesMetric();
-        var opts;
+        return selection => {
+            var isImperial = !localizer.usesMetric();
+            var opts;
 
-        if (isImperial) {
-            var distToFeet = {   // imprecise conversion for prettier display
-                20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
-            }[maxDist];
-            opts = { distance: t('units.feet', { quantity: distToFeet }) };
-        } else {
-            opts = { distance: t('units.meters', { quantity: maxDist }) };
+            if (isImperial) {
+                var distToFeet = {   // imprecise conversion for prettier display
+                    20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
+                }[maxDist];
+                opts = { distance: t('units.feet', { quantity: distToFeet }) };
+            } else {
+                opts = { distance: t('units.meters', { quantity: maxDist }) };
+            }
+
+            return selection.call(t.htmlDom('restriction.controls.distance_up_to', opts));
         }
-
-        return t.html('restriction.controls.distance_up_to', opts);
     }
 
 
     function displayMaxVia(maxVia) {
-        return maxVia === 0 ? t.html('restriction.controls.via_node_only')
-            : maxVia === 1 ? t.html('restriction.controls.via_up_to_one')
-            : t.html('restriction.controls.via_up_to_two');
+        return selection => {
+            return maxVia === 0 ? selection.call(t.htmlDom('restriction.controls.via_node_only'))
+                : maxVia === 1 ? selection.call(t.htmlDom('restriction.controls.via_up_to_one'))
+                : selection.call(t.htmlDom('restriction.controls.via_up_to_two'));
+        }
     }
 
 

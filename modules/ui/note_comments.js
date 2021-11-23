@@ -56,7 +56,7 @@ export function uiNoteComments() {
                 if (d.user) {
                     selection.text(d.user);
                 } else {
-                    selection.html(t.html('note.anonymous'));
+                    selection.call(t.htmlDom('note.anonymous'));
                 }
             });
 

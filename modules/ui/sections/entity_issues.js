@@ -169,7 +169,7 @@ export function uiSectionEntityIssues(context) {
                         .call(d.reference);
                 } else {
                     d3_select(this)
-                        .html(t.html('inspector.no_documentation_key'));
+                        .call(t.htmlDom('inspector.no_documentation_key'));
                 }
             });
 

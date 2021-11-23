@@ -28,7 +28,7 @@ export function validationFormatting() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t.html('issues.invalid_format.email.reference'));
+                .call(t.htmlDom('issues.invalid_format.email.reference'));
         }
         /*
         function showReferenceWebsite(selection) {
@@ -37,7 +37,7 @@ export function validationFormatting() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t.html('issues.invalid_format.website.reference'));
+                .call(t.htmlDom('issues.invalid_format.website.reference'));
         }
 
         if (entity.tags.website) {

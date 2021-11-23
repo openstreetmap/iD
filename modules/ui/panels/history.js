@@ -21,7 +21,7 @@ export function uiPanelHistory(context) {
         if (!userName) {
             selection
                 .append('span')
-                .html(t.html('info_panels.history.unknown'));
+                .call(t.htmlDom('info_panels.history.unknown'));
             return;
         }
 
@@ -57,7 +57,7 @@ export function uiPanelHistory(context) {
         if (!changeset) {
             selection
                 .append('span')
-                .html(t.html('info_panels.history.unknown'));
+                .call(t.htmlDom('info_panels.history.unknown'));
             return;
         }
 
@@ -115,10 +115,17 @@ export function uiPanelHistory(context) {
 
         selection.html('');
 
-        selection
-            .append('h4')
-            .attr('class', 'history-heading')
-            .html(singular || t.html('info_panels.selected', { n: selected.length }));
+        if (singular) {
+            selection
+                .append('h4')
+                .attr('class', 'history-heading')
+                .html(singular);
+        } else {
+            selection
+                .append('h4')
+                .attr('class', 'history-heading')
+                .call(t.htmlDom('info_panels.selected', { n: selected.length }));
+        }
 
         if (!singular) return;
 
@@ -134,7 +141,7 @@ export function uiPanelHistory(context) {
         if (!note || note.isNew()) {
             selection
                 .append('div')
-                .html(t.html('info_panels.history.note_no_history'));
+                .call(t.htmlDom('info_panels.history.note_no_history'));
             return;
         }
 
@@ -143,20 +150,20 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .html(t.html('info_panels.history.note_comments') + ':')
+            .call(t.htmlDom('info_panels.history.note_comments', { suffix: ':' }))
             .append('span')
             .text(note.comments.length);
 
         if (note.comments.length) {
             list
                 .append('li')
-                .html(t.html('info_panels.history.note_created_date') + ':')
+                .call(t.htmlDom('info_panels.history.note_created_date', { suffix: ':' }))
                 .append('span')
                 .text(displayTimestamp(note.comments[0].date));
 
             list
                 .append('li')
-                .html(t.html('info_panels.history.note_created_user') + ':')
+                .call(t.htmlDom('info_panels.history.note_created_user', { suffix: ':' }))
                 .call(displayUser, note.comments[0].user);
         }
 
@@ -168,7 +175,7 @@ export function uiPanelHistory(context) {
                 .attr('href', osm.noteURL(note))
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
-                .html(t.html('info_panels.history.note_link_text'));
+                .call(t.htmlDom('info_panels.history.note_link_text'));
         }
     }
 
@@ -177,7 +184,7 @@ export function uiPanelHistory(context) {
         if (!entity || entity.isNew()) {
             selection
                 .append('div')
-                .html(t.html('info_panels.history.no_history'));
+                .call(t.htmlDom('info_panels.history.no_history'));
             return;
         }
 
@@ -207,24 +214,24 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .html(t.html('info_panels.history.version') + ':')
+            .call(t.htmlDom('info_panels.history.version', { suffix: ':' }))
             .append('span')
             .text(entity.version);
 
         list
             .append('li')
-            .html(t.html('info_panels.history.last_edit') + ':')
+            .call(t.htmlDom('info_panels.history.last_edit', { suffix: ':' }))
             .append('span')
             .text(displayTimestamp(entity.timestamp));
 
         list
             .append('li')
-            .html(t.html('info_panels.history.edited_by') + ':')
+            .call(t.htmlDom('info_panels.history.edited_by', { suffix: ':' }))
             .call(displayUser, entity.user);
 
         list
             .append('li')
-            .html(t.html('info_panels.history.changeset') + ':')
+            .call(t.htmlDom('info_panels.history.changeset', { suffix: ':' }))
             .call(displayChangeset, entity.changeset);
     }
 

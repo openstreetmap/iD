@@ -221,12 +221,12 @@ export function uiSectionRawMemberEditor(context) {
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .html(t.html('inspector.' + d.type, { id: d.id }));
+                        .call(t.htmlDom('inspector.' + d.type, { id: d.id }));
 
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .html(t.html('inspector.incomplete', { id: d.id }));
+                        .call(t.htmlDom('inspector.incomplete', { id: d.id }));
 
                     label
                         .append('button')

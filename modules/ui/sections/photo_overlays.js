@@ -273,7 +273,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .html(t.html('photo_overlays.username_filter.title'));
+            .call(t.htmlDom('photo_overlays.username_filter.title'));
 
         labelEnter
             .append('input')

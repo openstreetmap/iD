@@ -43,7 +43,7 @@ export function uiPanelBackground(context) {
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
                 .classed('hide', !_metadata[k])
-                .html(t.html('info_panels.background.' + k) + ':')
+                .call(t.htmlDom('info_panels.background.' + k, { suffix: ':' }))
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
                 .text(_metadata[k]);
@@ -55,7 +55,7 @@ export function uiPanelBackground(context) {
 
         selection
             .append('a')
-            .html(t.html('info_panels.background.' + toggleTiles))
+            .call(t.htmlDom('info_panels.background.' + toggleTiles))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function(d3_event) {
@@ -71,7 +71,7 @@ export function uiPanelBackground(context) {
             var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
             selection
                 .append('a')
-                .html(t.html('info_panels.background.' + toggleVintage))
+                .call(t.htmlDom('info_panels.background.' + toggleVintage))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-vintage')
                 .on('click', function(d3_event) {

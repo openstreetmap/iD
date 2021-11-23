@@ -324,7 +324,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .html(t.html('map_data.layers.custom.title'));
+            .call(t.htmlDom('map_data.layers.custom.title'));
 
         liEnter
             .append('button')
@@ -415,7 +415,7 @@ export function uiSectionDataLayers(context) {
 
         historyPanelLabelEnter
             .append('span')
-            .html(t.html('map_data.history_panel.title'));
+            .call(t.htmlDom('map_data.history_panel.title'));
 
         var measurementPanelLabelEnter = panelsListEnter
             .append('li')
@@ -437,7 +437,7 @@ export function uiSectionDataLayers(context) {
 
         measurementPanelLabelEnter
             .append('span')
-            .html(t.html('map_data.measurement_panel.title'));
+            .call(t.htmlDom('map_data.measurement_panel.title'));
     }
 
     context.layers().on('change.uiSectionDataLayers', section.reRender);

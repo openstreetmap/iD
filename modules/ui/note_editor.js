@@ -53,7 +53,7 @@ export function uiNoteEditor(context) {
 
         headerEnter
             .append('h3')
-            .html(t.html('note.title'));
+            .call(t.htmlDom('note.title'));
 
 
         var body = selection.selectAll('.body')
@@ -256,14 +256,14 @@ export function uiNoteEditor(context) {
 
         authEnter
             .append('span')
-            .html(t.html('note.login'));
+            .call(t.htmlDom('note.login'));
 
         authEnter
             .append('a')
             .attr('target', '_blank')
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .append('span')
-            .html(t.html('login'))
+            .call(t.htmlDom('login'))
             .on('click.note-login', function(d3_event) {
                 d3_event.preventDefault();
                 osm.authenticate();
@@ -284,7 +284,7 @@ export function uiNoteEditor(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'note-save-prose')
-            .html(t.html('note.upload_explanation'))
+            .call(t.htmlDom('note.upload_explanation'))
             .merge(prose);
 
         osm.userDetails(function(err, user) {
@@ -333,12 +333,12 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button cancel-button secondary-action')
-                .html(t.html('confirm.cancel'));
+                .call(t.htmlDom('confirm.cancel'));
 
             buttonEnter
                 .append('button')
                 .attr('class', 'button save-button action')
-                .html(t.html('note.save'));
+                .call(t.htmlDom('note.save'));
 
         } else {
             buttonEnter
@@ -348,7 +348,7 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button comment-button action')
-                .html(t.html('note.comment'));
+                .call(t.htmlDom('note.comment'));
         }
 
 

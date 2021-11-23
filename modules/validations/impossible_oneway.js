@@ -212,7 +212,7 @@ export function validationImpossibleOneway() {
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
-                        .html(t.html('issues.impossible_oneway.' + referenceID + '.reference'));
+                        .call(t.htmlDom('issues.impossible_oneway.' + referenceID + '.reference'));
                 };
             }
         }

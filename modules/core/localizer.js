@@ -370,6 +370,19 @@ export function coreLocalizer() {
       }
     };
 
+    // Adds localized text wrapped as an HTML element with locale info to the DOM
+    localizer.t.htmlDom = function(stringId, replacements, locale) {
+      return function(selection) {
+        const info = localizer.tInfo(stringId, replacements, locale);
+        return selection.append('span')
+            .attr('class', 'localized-text')
+            .attr('lang', info.locale || 'und')
+            .text((replacements && replacements.prefix || '')
+                + info.text
+                + (replacements &&replacements.suffix || ''));
+      };
+    };
+
     localizer.languageName = (code, options) => {
 
         if (_languageNames[code]) {  // name in locale language

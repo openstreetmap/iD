@@ -132,7 +132,7 @@ export function uiSectionBackgroundOffset(context) {
         containerEnter
             .append('div')
             .attr('class', 'nudge-instructions')
-            .html(t.html('background.offset'));
+            .call(t.htmlDom('background.offset'));
 
         var nudgeWrapEnter = containerEnter
             .append('div')

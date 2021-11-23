@@ -198,11 +198,11 @@ export function validationOutdatedTags() {
       enter
         .append('div')
         .attr('class', 'issue-reference')
-        .html(t.html(`issues.outdated_tags.${prefix}reference`));
+        .call(t.htmlDom(`issues.outdated_tags.${prefix}reference`));
 
       enter
         .append('strong')
-        .html(t.html('issues.suggested'));
+        .call(t.htmlDom('issues.suggested'));
 
       enter
         .append('table')
@@ -284,7 +284,7 @@ export function validationOutdatedTags() {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .html(t.html('issues.old_multipolygon.reference'));
+        .call(t.htmlDom('issues.old_multipolygon.reference'));
     }
   }
 

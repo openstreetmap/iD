@@ -481,7 +481,7 @@ export function validationCrossingWays(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .html(t.html('issues.crossing_ways.' + crossingTypeID + '.reference'));
+                .call(t.htmlDom('issues.crossing_ways.' + crossingTypeID + '.reference'));
         }
     }
 

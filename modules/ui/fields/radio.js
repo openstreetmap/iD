@@ -129,7 +129,7 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
-            .html(t.html('inspector.radio.structure.type'));
+            .call(t.htmlDom('inspector.radio.structure.type'));
 
         typeEnter
             .append('div')
@@ -174,7 +174,7 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
-            .html(t.html('inspector.radio.structure.layer'));
+            .call(t.htmlDom('inspector.radio.structure.layer'));
 
         layerEnter
             .append('div')
@@ -302,9 +302,9 @@ export function uiFieldRadio(field, context) {
         var selection = radios.filter(function() { return this.checked; });
 
         if (selection.empty()) {
-            placeholder.html(t.html('inspector.none'));
+            placeholder.call(t.htmlDom('inspector.none'));
         } else {
-            placeholder.html(selection.attr('value'));
+            placeholder.text(selection.attr('value'));
             _oldType[selection.datum()] = tags[selection.datum()];
         }
 

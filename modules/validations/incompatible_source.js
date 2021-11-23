@@ -68,7 +68,7 @@ export function validationIncompatibleSource() {
             .enter()
             .append('div')
             .attr('class', 'issue-reference')
-            .html(t.html(`issues.incompatible_source.reference.${id}`));
+            .call(t.htmlDom(`issues.incompatible_source.reference.${id}`));
         };
       }
     };

@@ -22,14 +22,14 @@ export function uiStatus(context) {
 
                 } else if (apiStatus === 'rateLimited') {
                     selection
-                        .html(t.html('osm_api_status.message.rateLimit'))
+                        .call(t.htmlDom('osm_api_status.message.rateLimit'))
                         .append('a')
                         .attr('href', '#')
                         .attr('class', 'api-status-login')
                         .attr('target', '_blank')
                         .call(svgIcon('#iD-icon-out-link', 'inline'))
                         .append('span')
-                        .html(t.html('login'))
+                        .call(t.htmlDom('login'))
                         .on('click.login', function(d3_event) {
                             d3_event.preventDefault();
                             osm.authenticate();
@@ -47,11 +47,11 @@ export function uiStatus(context) {
                     // eslint-disable-next-line no-warning-comments
                     // TODO: nice messages for different error types
                     selection
-                        .html(t.html('osm_api_status.message.error') + ' ')
+                        .call(t.htmlDom('osm_api_status.message.error', { suffix: ' ' }))
                         .append('a')
                         .attr('href', '#')
                         // let the user manually retry their connection directly
-                        .html(t.html('osm_api_status.retry'))
+                        .call(t.htmlDom('osm_api_status.retry'))
                         .on('click.retry', function(d3_event) {
                             d3_event.preventDefault();
                             throttledRetry();
@@ -59,9 +59,9 @@ export function uiStatus(context) {
                 }
 
             } else if (apiStatus === 'readonly') {
-                selection.html(t.html('osm_api_status.message.readonly'));
+                selection.call(t.htmlDom('osm_api_status.message.readonly'));
             } else if (apiStatus === 'offline') {
-                selection.html(t.html('osm_api_status.message.offline'));
+                selection.call(t.htmlDom('osm_api_status.message.offline'));
             }
 
             selection.attr('class', 'api-status ' + (err ? 'error' : apiStatus));
@@ -70,7 +70,7 @@ export function uiStatus(context) {
         osm.on('apiStatusChange.uiStatus', update);
 
         context.history().on('storage_error', () => {
-            selection.html(t.html('osm_api_status.message.local_storage_full'));
+            selection.call(t.htmlDom('osm_api_status.message.local_storage_full'));
             selection.attr('class', 'api-status error');
         });
 
