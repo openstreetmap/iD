@@ -19,15 +19,19 @@
         "cycleway_left_buffer",
         "cycleway_right_oneway",
         "cycleway_right_buffer",
-        "oneway/bicycle"
+        "oneway/bicycle",
+        "placement",
+        "lane_width_start",
+        "lane_width_end",
+        "lane_width_start_forward",
+        "lane_width_end_forward",
+        "lane_width_start_backward",
+        "lane_width_end_backward"
     ],
     "moreFields": [
         "turn_lanes",
         "turn_lanes_forward",
         "turn_lanes_backward",
-        "placement",
-        "lane_width_start",
-        "lane_width_end",
         "covered",
         "flood_prone",
         "incline",

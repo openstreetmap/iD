@@ -892,17 +892,24 @@ path.casing.tag-highway.tag-lanes-undefined {
 
 path.stroke.tag-highway-cycleway.tag-segregated-undefined.tag-foot-designated,
 path.stroke.tag-highway-cycleway.tag-segregated-undefined.tag-foot-yes {
-  stroke: rgb(255, 0, 0) !important;
+  stroke: rgb(255, 0, 0);
   stroke-dasharray: 2, 2 !important;
   stroke-linecap: butt !important;
 }
 path.stroke.tag-highway.tag-sidewalk-undefined {
-  stroke: rgb(255, 102, 0) !important;
+  stroke: rgb(255, 102, 0);
   stroke-dasharray: 2, 2 !important;
   stroke-linecap: butt !important;
 }
+
+path.stroke.tag-highway.tag-sidewalk-undefined:not(.tag-maxspeed-undefined):not(.tag-lanes-undefined) {
+  stroke: rgb(101, 179, 12) !important;
+  stroke-dasharray: 2, 2 !important;
+  stroke-linecap: butt !important;
+}
+
 path.stroke.tag-highway.tag-sidewalk-separate.tag-foot-not-use_sidepath:not(.tag-sidewalk-shared):not(.tag-sidewalk_left-shared):not(.tag-sidewalk_right-shared):not(.tag-sidewalk_both-shared) {
-  stroke: rgb(255, 72, 0) !important;
+  stroke: rgb(255, 72, 0);
   stroke-dasharray: 2, 2 !important;
   stroke-linecap: butt !important;
 }

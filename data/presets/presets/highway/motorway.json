@@ -9,7 +9,10 @@
         "lanes",
         "surface",
         "structure",
-        "access"
+        "access",
+        "placement",
+        "lane_width_start",
+        "lane_width_end"
     ],
     "moreFields": [
         "charge_toll",
