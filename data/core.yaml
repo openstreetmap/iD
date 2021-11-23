@@ -563,7 +563,6 @@ en:
     tooltip: "Redo: {action}"
     nothing: Nothing to redo.
   tooltip_keyhint: "Shortcut:"
-  browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
   translate:
     translate: Add multilingual name
     localized_translation_label: Multilingual Name
@@ -1886,7 +1885,7 @@ en:
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
     vertex_as_point:
-      message: '{feature} should be part of a line or area based on its tags'
+      message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     fix:
       add_a_bridge:

@@ -118,7 +118,7 @@ export function rendererBackgroundSource(data) {
 
         // Guess a type based on the tokens present in the template
         // (This is for 'custom' source, where we don't know)
-        if (!source.type) {
+        if (!source.type || source.id === 'custom') {
             if (/SERVICE=WMS|\{(proj|wkid|bbox)\}/.test(_template)) {
                 source.type = 'wms';
                 source.projection = 'EPSG:3857';  // guess
