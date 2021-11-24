@@ -1,5 +1,5 @@
 {
-  "key": "width:lanes:start:backward",
+  "key": "width:lanes:backward:start",
   "type": "typeCombo",
   "label": "Lane width start backward"
 }
