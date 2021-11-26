@@ -3112,7 +3112,11 @@ div.full-screen > button:focus {
     white-space: nowrap;
 }
 
-.layer-list, .controls-list {
+.layer-list {
+    border: 1px solid #ccc;
+}
+
+.controls-list {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -3130,13 +3134,13 @@ div.full-screen > button:focus {
 }
 
 .layer-list > li:first-child {
-    border-radius: 3px 3px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 .layer-list > li:last-child {
-    border-radius: 0 0 3px 3px;
+    border-radius: 0 0 4px 4px;
 }
 .layer-list > li:only-child {
-    border-radius: 3px;
+    border-radius: 4px;
 }
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid #ccc;
@@ -3799,6 +3803,45 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .map-pane.background-pane .section-background-extras {
     margin-top: 30px;
 }
+
+/* Background - Adjust borders to make it appear as a single list
+----------------------------------------------------------------- */
+
+.map-pane.background-pane .section.background-list a.hide-toggle {
+    border: 1px solid #ccc;
+    border-top: none;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 0;
+    padding: 3px 3px 5px 9px;
+}
+
+.map-pane.background-pane .section.background-list a.hide-toggle + .disclosure-wrap > ul.layer-list {
+    border-top: none;
+}
+
+.section-imagery-list .layer-list > li {
+    border-radius: 0;
+}
+
+.map-pane.background-pane .section.background-list:first-child a.hide-toggle {
+    border-top: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+}
+
+.map-pane.background-pane .section.background-list:last-child ul.layer-list {
+    border-bottom: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+}
+
+.map-pane.background-pane .section.background-list:last-child ul.layer-list > li:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
+.map-pane.background-pane .section-background-extras ul.bg-extras-list {
+    border-radius: 4px;
+}
+
 
 /* Side Panes - Background / Map Data / Help
 ------------------------------------------------------- */

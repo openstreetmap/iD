@@ -15,13 +15,36 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundList(context) {
 
     const categoryGroups = [
-        { id: 'photo', weight: 1, label: 'photo', expanded: true },
-        { id: 'map', weight: 3, label: 'map', expanded: true },
-        { id: 'osm', weight: 7, label: 'osm' },
-        { id: 'other', weight: 5, label: 'other', expanded: true }
+        { id: 'photo', label: 'photo', disclosureExpanded: true },
+        { id: 'map', label: 'map', disclosureExpanded: true },
+        { id: 'osm', label: 'osm' },
+        { id: 'other', label: 'other', disclosureExpanded: false },
+        { id: 'builtin', disclosure: false }
     ].reduce((acc, cur) => { acc[cur.id] = cur; return acc; }, {});
 
-    var _backgroundList = d3_select(null);
+    function categoryMapping(layer) {
+        const eliCategoryMappings = {
+            'photo': categoryGroups.photo,
+            'historicphoto': categoryGroups.photo,
+            'map': categoryGroups.map,
+            'historicmap': categoryGroups.map,
+            'elevation': categoryGroups.map,
+            'osmbasedmap': categoryGroups.osm,
+            'qa': categoryGroups.osm,
+            'other': categoryGroups.other
+        };
+        const layerIdMappings = {
+            'none': categoryGroups.builtin,
+            'custom': categoryGroups.builtin,
+            'mapbox_locator_overlay': categoryGroups.builtin,
+            'osm-gps': categoryGroups.builtin
+        };
+        return layerIdMappings[layer && layer.id] ||
+               eliCategoryMappings[layer && layer.category] ||
+               categoryGroups.photo; // default = photo
+    }
+
+    var _backgroundLists = {};
 
     var _customSource = context.background().findSource('custom');
 
@@ -32,14 +55,22 @@ export function uiSectionBackgroundList(context) {
 
     var sections = (function() {
         var groupCounts = getGroupCounts();
-        return Object.keys(categoryGroups).map(groupId => categoryGroups[groupId]).map(group =>
-            uiSection('background-list-' + group.id, context)
-                .classes('background-list')
-                .label(sectionLabelHtml(group, groupCounts[group.id]))
-                .disclosureContent(selection => renderDisclosureContent(selection, group))
-                .disclosureExpanded(group.expanded || categoryMapping(context.background().baseLayerSource()).id === group.id)
-        );
+        return Object.keys(categoryGroups).map(groupId => categoryGroups[groupId]).map(group => {
+            var section = uiSection('background-list-' + group.id, context)
+                .classes('background-list');
+            if (group.disclosure !== false) {
+                return section
+                    .label(sectionLabelHtml(group, groupCounts[group.id]))
+                    .disclosureContent(selection => renderContent(selection, group))
+                    .disclosureExpanded(group.disclosureExpanded || categoryMapping(context.background().baseLayerSource()).id === group.id);
+            } else {
+                return section.content(selection => renderContent(selection, group));
+            }
+        });
     })();
+
+    var section = uiSection('imagery-list', context).content(selection =>
+        sections.forEach(section => section.render(selection)));
 
     function previousBackgroundID() {
         return prefs('background-last-used-toggle');
@@ -53,18 +84,18 @@ export function uiSectionBackgroundList(context) {
         return html;
     }
 
-    function renderDisclosureContent(selection, group) {
+    function renderContent(selection, group) {
         // the background list
         var container = selection.selectAll('.layer-background-list')
             .data([0]);
 
-        _backgroundList = container.enter()
+        _backgroundLists[group.id] = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-background-list')
             .attr('dir', 'auto')
             .merge(container);
 
-        _backgroundList.call(drawListItems, function(d3_event, d) {
+        _backgroundLists[group.id].call(drawListItems, function(d3_event, d) {
             d3_event.preventDefault();
             chooseBackground(d);
         }, function(d) {
@@ -95,26 +126,6 @@ export function uiSectionBackgroundList(context) {
                 );
             }
         });
-    }
-
-    function categoryMapping(layer) {
-        var categoryWeights = {
-            'photo': categoryGroups.photo,
-            'historicphoto': categoryGroups.photo,
-            'map': categoryGroups.map,
-            'historicmap': categoryGroups.map,
-            'elevation': categoryGroups.map,
-            'osmbasedmap': categoryGroups.osm,
-            'qa': categoryGroups.osm,
-            'other': categoryGroups.other
-        };
-        var layerIdWeights = {
-            'none': categoryGroups.other,
-            'custom': categoryGroups.other
-        };
-        return layerIdWeights[layer && layer.id] ||
-               categoryWeights[layer && layer.category] ||
-               categoryGroups.photo; // default = photo
     }
 
     function updateSources() {
@@ -258,7 +269,9 @@ export function uiSectionBackgroundList(context) {
 
     context.background()
         .on('change.background_list', function() {
-            _backgroundList.call(updateLayerSelections);
+            Object.keys(_backgroundLists)
+                .map(groupId => _backgroundLists[groupId])
+                .map(backgroundList => backgroundList.call(updateLayerSelections));
         });
 
     context.map()
@@ -271,6 +284,7 @@ export function uiSectionBackgroundList(context) {
                     section.reRender();
                     Object.keys(categoryGroups)
                         .filter(groupId => section.id === 'background-list-' + groupId)
+                        .filter(groupId => categoryGroups[groupId].disclosure !== false)
                         .forEach(groupId => {
                             var count = groupCounts[groupId];
                             section.shouldDisplay(count > 0);
@@ -280,5 +294,5 @@ export function uiSectionBackgroundList(context) {
             }), 1000)
         );
 
-    return sections;
+    return section;
 }

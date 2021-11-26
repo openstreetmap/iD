@@ -1,4 +1,5 @@
 export { uiSectionBackgroundDisplayOptions } from './background_display_options';
+export { uiSectionBackgroundExtras } from '../sections/background_extras';
 export { uiSectionBackgroundList } from './background_list';
 export { uiSectionBackgroundOffset } from './background_offset';
 export { uiSectionChanges } from './changes';
