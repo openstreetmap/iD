@@ -151,7 +151,7 @@ export function uiSuccess(context) {
     summaryDetail
       .append('div')
       .html(t.html('success.changeset_id', {
-        changeset_id: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>`
+        changeset_id: { html: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>` }
       }));
 
 

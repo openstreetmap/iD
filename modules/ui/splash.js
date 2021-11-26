@@ -42,7 +42,7 @@ export function uiSplash(context) {
       .append('div')
       .attr('class','modal-section')
       .append('h3')
-      .html(t.html('splash.welcome'));
+      .call(t.html('splash.welcome'));
 
     let modalSection = introModal
       .append('div')
@@ -52,16 +52,16 @@ export function uiSplash(context) {
       .append('p')
       .html(t.html('splash.text', {
         version: context.version,
-        website: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new">changelog</a>',
-        github: '<a target="_blank" href="https://github.com/openstreetmap/iD/issues">github.com</a>'
+        website: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new">changelog</a>' },
+        github: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/issues">github.com</a>' }
       }));
 
     modalSection
       .append('p')
       .html(t.html('splash.privacy', {
         updateMessage: updateMessage,
-        privacyLink: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/release/PRIVACY.md">' +
-          t('splash.privacy_policy') + '</a>'
+        privacyLink: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/release/PRIVACY.md">' +
+          t('splash.privacy_policy') + '</a>' }
       }));
 
     let buttonWrap = introModal
