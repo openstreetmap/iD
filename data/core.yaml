@@ -745,6 +745,8 @@ en:
         type: Type
         default: Default
         layer: Layer
+    increment: increment
+    decrement: decrement
     add: Add
     none: None
     node: Node
