@@ -146,7 +146,7 @@ export function uiSectionBackgroundList(context) {
                        d3_ascending(a.overlay ? 1 : 0, b.overlay ? 1 : 0) ||
                        d3_ascending(Math.floor(Math.log(Math.abs(a.area()))/3), Math.floor(Math.log(Math.abs(b.area()))/3)) ||
                        d3_descending(a.endDate || a.startDate, b.endDate || b.startDate) ||
-                       d3_ascending(a.name(), b.name()) || 0;
+                       d3_ascending(a.name().toLowerCase(), b.name().toLowerCase()) || 0;
             });
 
         var layerLinks = layerList.selectAll('li')
