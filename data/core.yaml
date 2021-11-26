@@ -17,6 +17,7 @@ en:
     backward: backward
     expand: expand
     collapse: collapse
+    plus: add
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
@@ -707,6 +708,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_to_tag: Add a tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role

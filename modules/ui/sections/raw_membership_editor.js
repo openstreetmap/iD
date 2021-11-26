@@ -461,7 +461,8 @@ export function uiSectionRawMembershipEditor(context) {
 
         var addRelationButton = addRowEnter
             .append('button')
-            .attr('class', 'add-relation');
+            .attr('class', 'add-relation')
+            .attr('aria-label', t('inspector.add_to_relation'));
 
         addRelationButton
             .call(svgIcon('#iD-icon-plus', 'light'));

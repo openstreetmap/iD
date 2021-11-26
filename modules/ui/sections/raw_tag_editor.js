@@ -7,9 +7,10 @@ import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { uiTooltip } from '..';
 
 export function uiSectionRawTagEditor(id, context) {
 
@@ -157,7 +158,9 @@ export function uiSectionRawTagEditor(id, context) {
         addRowEnter
             .append('button')
             .attr('class', 'add-tag')
+            .attr('aria-label', t('inspector.add_to_tag'))
             .call(svgIcon('#iD-icon-plus', 'light'))
+            .call(uiTooltip().title(t.html('inspector.add_to_tag')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
             .on('click', addTag);
 
         addRowEnter

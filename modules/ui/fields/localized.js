@@ -185,6 +185,7 @@ export function uiFieldLocalized(field, context) {
         translateButton = translateButton.enter()
             .append('button')
             .attr('class', 'localized-add form-field-button')
+            .attr('aria-label', t('icons.plus'))
             .call(svgIcon('#iD-icon-plus'))
             .merge(translateButton);
 
