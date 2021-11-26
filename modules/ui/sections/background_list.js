@@ -170,8 +170,11 @@ export function uiSectionBackgroundList(context) {
             })
             .on('change', change);
 
+        var showIcons = prefs('preferences.privacy.thirdpartyicons') === 'true';
         label
             .append('span')
+            .style('background-image', d => showIcons && d.icon !== undefined ? 'url(' + d.icon + ')' : undefined)
+            .classed('imagery-with-icon', d => showIcons && d.icon !== undefined)
             .html(function(d) { return d.label(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
