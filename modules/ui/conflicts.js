@@ -60,6 +60,7 @@ export function uiConflicts(context) {
         headerEnter
             .append('button')
             .attr('class', 'fr')
+            .attr('title', t('icons.close'))
             .on('click', cancel)
             .call(svgIcon('#iD-icon-close'));
 

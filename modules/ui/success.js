@@ -87,6 +87,7 @@ export function uiSuccess(context) {
     header
       .append('button')
       .attr('class', 'close')
+      .attr('title', t('icons.close'))
       .on('click', () => dispatch.call('cancel'))
       .call(svgIcon('#iD-icon-close'));
 

@@ -12,6 +12,7 @@ en:
     list: list
     text: text
     deselect: deselect
+    close: close
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo

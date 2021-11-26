@@ -31,6 +31,7 @@ export function uiImproveOsmEditor(context) {
     headerEnter
       .append('button')
         .attr('class', 'close')
+        .attr('title', t('icons.close'))
         .on('click', () => context.enter(modeBrowse(context)))
         .call(svgIcon('#iD-icon-close'));
 

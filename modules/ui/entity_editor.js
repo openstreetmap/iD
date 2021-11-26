@@ -50,6 +50,7 @@ export function uiEntityEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'close')
+            .attr('title', t('icons.close'))
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 

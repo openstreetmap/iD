@@ -226,6 +226,7 @@ export function uiCommit(context) {
         headerTitle
             .append('button')
             .attr('class', 'close')
+            .attr('title', t('icons.close'))
             .on('click', function() {
                 dispatch.call('cancel', this);
             })

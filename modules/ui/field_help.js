@@ -201,6 +201,7 @@ export function uiFieldHelp(context, fieldName) {
         titleEnter
             .append('button')
             .attr('class', 'fr close')
+            .attr('title', t('icons.close'))
             .on('click', function(d3_event) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
