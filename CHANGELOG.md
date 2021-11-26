@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
+* Fix a bug which made it impossible to switch to a custom TMS imagery layer after using a custom WMS source and vice versa ([#8057])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add colours for preset categories ([#8799])
 #### :hammer: Development
 
+[#8057]: https://github.com/openstreetmap/iD/issues/8057
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
 [#8792]: https://github.com/openstreetmap/iD/pull/8792
