@@ -44,6 +44,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :boom: Breaking Changes
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
+* Overhauled the background imagery selector menu: ([#8826])
+  * List layers grouped by categories (see [ELI#733]) instead of the distinction between backgrounds and overlays
+  * New more focussed sorting of background layers: by "best" flag, then by rough layer extent size, then by vintage, then alphabetically – locally relevant and recent layers are now on the top!
+  * Show many previously excluded background layers: mostly quality assurance layers and OSM-based maps
+  * Display the imagery layer icons, if present and the third party icons are enabled in the preferences
 #### :scissors: Operations
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
@@ -71,6 +76,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8800]: https://github.com/openstreetmap/iD/pull/8800
 [#8805]: https://github.com/openstreetmap/iD/issues/8805
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
+[#8826]: https://github.com/openstreetmap/iD/pull/8826
+[ELI#733]: https://github.com/osmlab/editor-layer-index/pull/733
 
 # 2.20.2
 ##### 2021-Oct-28

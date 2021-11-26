@@ -581,7 +581,7 @@ rendererBackgroundSource.None = function() {
 
 
     source.area = function() {
-        return -1;  // sources in background pane are sorted by area
+        return -1;  // sources in background pane are reverse sorted by area
     };
 
 
@@ -627,7 +627,7 @@ rendererBackgroundSource.Custom = function(template) {
 
 
     source.area = function() {
-        return -2;  // sources in background pane are sorted by area
+        return -1000;  // sources in background pane are reverse sorted by area
     };
 
 
