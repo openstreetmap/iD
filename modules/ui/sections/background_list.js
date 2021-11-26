@@ -63,7 +63,9 @@ export function uiSectionBackgroundList(context) {
                 return section
                     .label(sectionLabelHtml(group, groupCounts[group.id]))
                     .disclosureContent(selection => renderContent(selection, group))
-                    .disclosureExpanded(group.disclosureExpanded || categoryMapping(context.background().baseLayerSource()).id === group.id);
+                    .disclosureExpanded(group.disclosureExpanded
+                        || categoryMapping(context.background().baseLayerSource()).id === group.id
+                        || context.background().overlayLayerSources().map(categoryMapping).some(overlayGroup => overlayGroup.id === group.id));
             } else {
                 return section.content(selection => renderContent(selection, group));
             }
