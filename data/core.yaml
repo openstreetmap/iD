@@ -807,6 +807,7 @@ en:
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset_label: "Adjust Imagery Offset"
   map_data:
     title: Map Data
     description: Map Data
