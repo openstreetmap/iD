@@ -138,7 +138,7 @@ export function uiSectionBackgroundList(context) {
         var sources = _sources
             .filter(filter)
             .sort(function(a, b) {
-                return d3_descending(a.best ? 1 : 0, b.best ? 1 : 0) ||
+                return d3_descending(a.best() ? 1 : 0, b.best() ? 1 : 0) ||
                        d3_ascending(a.overlay ? 1 : 0, b.overlay ? 1 : 0) ||
                        d3_ascending(Math.floor(Math.log(a.area())/3), Math.floor(Math.log(b.area())/3)) ||
                        d3_descending(a.endDate, b.endDate) ||
