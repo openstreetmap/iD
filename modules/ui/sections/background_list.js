@@ -59,6 +59,7 @@ export function uiSectionBackgroundList(context) {
         return Object.keys(categoryGroups).map(groupId => categoryGroups[groupId]).map(group => {
             var section = uiSection('background-list-' + group.id, context)
                 .classes('background-list');
+            section._categoryGroup = group;
             if (group.disclosure !== false) {
                 return section
                     .label(sectionLabelHtml(group, groupCounts[group.id]))
@@ -144,7 +145,7 @@ export function uiSectionBackgroundList(context) {
                 return d3_descending(a.best() ? 1 : 0, b.best() ? 1 : 0) ||
                        d3_ascending(a.overlay ? 1 : 0, b.overlay ? 1 : 0) ||
                        d3_ascending(Math.floor(Math.log(a.area())/3), Math.floor(Math.log(b.area())/3)) ||
-                       d3_descending(a.endDate, b.endDate) ||
+                       d3_descending(a.endDate || a.startDate, b.endDate || b.startDate) ||
                        d3_ascending(a.name(), b.name()) || 0;
             });
 
@@ -275,6 +276,16 @@ export function uiSectionBackgroundList(context) {
 
     context.background()
         .on('change.background_list', function() {
+            // update headings
+            var groupCounts = getGroupCounts();
+            sections.forEach(section => {
+                var count = groupCounts[section._categoryGroup.id];
+                section.shouldDisplay(count > 0);
+                if (section._categoryGroup.disclosure !== false) {
+                    (section.disclosure() || section).label(sectionLabelHtml(section._categoryGroup, count));
+                }
+            });
+            // update content
             Object.keys(_backgroundLists)
                 .map(groupId => _backgroundLists[groupId])
                 .map(backgroundList => backgroundList.call(updateLayerSelections));
@@ -287,15 +298,12 @@ export function uiSectionBackgroundList(context) {
                 _sources = updateSources();
                 var groupCounts = getGroupCounts();
                 sections.forEach(section => {
+                    var count = groupCounts[section._categoryGroup.id];
+                    section.shouldDisplay(count > 0);
+                    if (section._categoryGroup.disclosure !== false) {
+                        (section.disclosure() || section).label(sectionLabelHtml(section._categoryGroup, count));
+                    }
                     section.reRender();
-                    Object.keys(categoryGroups)
-                        .filter(groupId => section.id === 'background-list-' + groupId)
-                        .filter(groupId => categoryGroups[groupId].disclosure !== false)
-                        .forEach(groupId => {
-                            var count = groupCounts[groupId];
-                            section.shouldDisplay(count > 0);
-                            section.disclosure().label(sectionLabelHtml(categoryGroups[groupId], count));
-                        });
                 });
             }), 1000)
         );
