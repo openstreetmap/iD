@@ -354,6 +354,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelEnter
             .append('button')
             .attr('class', 'remove member-delete')
+            .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'))
             .on('click', deleteMembership);
 
@@ -421,6 +422,7 @@ export function uiSectionRawMembershipEditor(context) {
         newLabelEnter
             .append('button')
             .attr('class', 'remove member-delete')
+            .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'))
             .on('click', function() {
                 list.selectAll('.member-row-new')

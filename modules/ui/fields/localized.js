@@ -383,6 +383,7 @@ export function uiFieldLocalized(field, context) {
                 label
                     .append('button')
                     .attr('class', 'remove-icon-multilingual')
+                    .attr('title', t('icons.remove'))
                     .on('click', function(d3_event, d) {
                         if (field.locked()) return;
                         d3_event.preventDefault();
