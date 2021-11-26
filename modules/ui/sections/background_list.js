@@ -17,8 +17,9 @@ export function uiSectionBackgroundList(context) {
     const categoryGroups = [
         { id: 'photo', label: 'photo', disclosureExpanded: true },
         { id: 'map', label: 'map', disclosureExpanded: true },
+        { id: 'qa', label: 'qa' },
         { id: 'osm', label: 'osm' },
-        { id: 'other', label: 'other', disclosureExpanded: false },
+        { id: 'other', label: 'other' },
         { id: 'builtin', disclosure: false }
     ].reduce((acc, cur) => { acc[cur.id] = cur; return acc; }, {});
 
@@ -30,7 +31,7 @@ export function uiSectionBackgroundList(context) {
             'historicmap': categoryGroups.map,
             'elevation': categoryGroups.map,
             'osmbasedmap': categoryGroups.osm,
-            'qa': categoryGroups.osm,
+            'qa': categoryGroups.qa,
             'other': categoryGroups.other
         };
         const layerIdMappings = {
