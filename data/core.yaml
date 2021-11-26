@@ -13,6 +13,10 @@ en:
     text: text
     deselect: deselect
     close: close
+    forward: forward
+    backward: backward
+    expand: expand
+    collapse: collapse
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo

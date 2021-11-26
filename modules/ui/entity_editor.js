@@ -42,10 +42,13 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'header fillL');
 
+        var direction = (localizer.textDirection() === 'rtl') ? 'forward' : 'backward';
+
         headerEnter
             .append('button')
             .attr('class', 'preset-reset preset-choose')
-            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
+            .attr('title', t(`icons.${direction}`))
+            .call(svgIcon(`#iD-icon-${direction}`));
 
         headerEnter
             .append('button')

@@ -37,11 +37,14 @@ export function uiPresetList(context) {
             .append('h3')
             .html(t.html('inspector.choose'));
 
+        var direction = (localizer.textDirection() === 'rtl') ? 'backward' : 'forward';
+
         messagewrap
             .append('button')
             .attr('class', 'preset-choose')
+            .attr('title', direction)
             .on('click', function() { dispatch.call('cancel', this); })
-            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-backward' : '#iD-icon-forward'));
+            .call(svgIcon(`#iD-icon-${direction}`));
 
         function initialKeydown(d3_event) {
             // hack to let delete shortcut work when search is autofocused
@@ -273,7 +276,8 @@ export function uiPresetList(context) {
                 var iconName = isExpanded ?
                     (localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward') : '#iD-icon-down';
                 d3_select(this)
-                    .classed('expanded', !isExpanded);
+                    .classed('expanded', !isExpanded)
+                    .attr('title', !isExpanded ? t('icons.collapse') : t('icons.expand'));
                 d3_select(this).selectAll('div.label-inner svg.icon use')
                     .attr('href', iconName);
                 item.choose();
@@ -284,6 +288,7 @@ export function uiPresetList(context) {
             var button = wrap
                 .append('button')
                 .attr('class', 'preset-list-button')
+                .attr('title', t('icons.expand'))
                 .classed('expanded', false)
                 .call(uiPresetIcon()
                     .geometry(geometries.length === 1 && geometries[0])
