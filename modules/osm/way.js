@@ -65,11 +65,98 @@ Object.assign(osmWay.prototype, {
         return this.nodes[this.nodes.length - 1];
     },
 
+    indexIsFirstOrLastOfClosed(nodeIdx) {
+        return this.isClosed() && (nodeIdx === 0 || nodeIdx === this.nodes.length - 1);
+    },
 
     contains: function(node) {
         return this.nodes.indexOf(node) >= 0;
     },
 
+    getNodesBefore: function(beforeNodeIdx) {
+        if (this.nodes.length < 2 || beforeNodeIdx < 0 || beforeNodeIdx === 0) {
+            return [];
+        }
+        let nodeIdx = 0;
+        const beforeNodes = [this.nodes[nodeIdx]];
+        while (nodeIdx != beforeNodeIdx) {
+            nodeIdx = this.nextNodeIdx(nodeIdx);
+            beforeNodes.push(this.nodes[nodeIdx]);
+        }
+        return beforeNodes;
+    },
+
+    getNodesAfter: function(afterNodeIdx) {
+        if (this.nodes.length < 2 || afterNodeIdx < 0 || beforeNodeIdx === 0) {
+            return [];
+        }
+        let nodeIdx = afterNodeIdx;
+        const afterNodes = [];
+        while (nodeIdx < this.nodes.length - 1) {
+            nodeIdx = this.nextNodeIdx(nodeIdx);
+            afterNodes.push(this.nodes[nodeIdx]);
+        }
+        return afterNodes;
+    },
+
+    getNodesBetween: function(startNodeIdx, endNodeIdx) {
+        if (this.nodes.length < 2 || startNodeIdx < 0 || endNodeIdx < 0 || startNodeIdx === endNodeIdx || (this.indexIsFirstOrLastOfClosed(startNodeIdx) && this.indexIsFirstOrLastOfClosed(endNodeIdx))) {
+            return [];
+        }
+        const isClosed = this.isClosed();
+        let nodeIdx = startNodeIdx;
+        const nodesBetween = [this.nodes[startNodeIdx]];
+        const endNodeIsFirstOrLastOfClosed = this.indexIsFirstOrLastOfClosed(endNodeIdx);
+        while (nodeIdx != endNodeIdx) {
+            nodeIdx = this.nextNodeIdx(nodeIdx);
+            nodesBetween.push(this.nodes[nodeIdx]);
+            if (!this.nodes[nodeIdx]) {
+                nodesBetween.splice(0, nodesBetween.length); // empty array
+                break;
+            }
+            // if closed and we have reach first or last node, make sure we stop if this is the end node:
+            if (endNodeIsFirstOrLastOfClosed && (nodeIdx === 0 || nodeIdx === this.nodes.length - 1)) {
+                break;
+            }
+        }
+        return nodesBetween;
+    },
+
+    nextNodeIdx: function(nodeIdx) {
+        if (this.isClosed()) {
+            if (this.nodes.length < 3) { // should not happen, it would mean the closed line has only 2 nodes
+                return null;
+            } else if (nodeIdx === this.nodes.length - 1) {
+                return 1; // ignore index 0 since it will be identical to the last node (closed: first = last node)
+            } else {
+                return nodeIdx + 1;
+            }
+        } else {
+            if (nodeIdx === this.nodes.length - 1) {
+                return null;
+            } else {
+                return nodeIdx + 1;
+            }
+        }
+    },
+
+    prevNodeIdx: function(nodeIdx) {
+        if (this.isClosed()) {
+            if (this.nodes.length < 3) { // should not happen, it would mean the closed line has only 2 nodes
+                return null;
+            } else if (nodeIdx === 0) {
+                return this.nodes.length - 2; // ignore last index since it will be identical to the first node (closed: first = last node)
+            } else {
+                return nodeIdx - 1;
+            }
+        } else {
+            if (nodeIdx === 0) {
+                return null;
+            } else {
+                return nodeIdx - 1;
+            }
+        }
+    },
 
     affix: function(node) {
         if (this.nodes[0] === node) return 'prefix';

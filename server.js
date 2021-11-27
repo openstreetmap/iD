@@ -23,6 +23,8 @@ const DATAFILES = [
   '!dist/locales/en.json'
 ];
 
+const port = process.argv[2] ? parseInt(process.argv[2]) : 8080;
+
 
 buildAll()
   .then(() => startServer());
@@ -44,7 +46,7 @@ function startServer() {
     watcher.on('all', () => buildSrc());
   });
 
-  const server = new StaticServer({ rootPath: __dirname, port: 8081, followSymlink: true });
+  const server = new StaticServer({ rootPath: __dirname, port: port, followSymlink: true });
   server.start(() => {
     console.log(colors.yellow('Listening on ' + server.port));
   });

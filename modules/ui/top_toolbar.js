@@ -7,7 +7,7 @@ import { t } from '../util/locale';
 import { utilFunctor } from '../util/util';
 import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
-import { operationCircularize, operationFollow, operationContinue, operationDelete, operationDisconnect,
+import { operationCircularize, operationFollow, operationFollowReverse, operationContinue, operationDelete, operationDisconnect,
     operationDowngrade, operationExtract, operationMerge, operationOrthogonalize,
     operationReverse, operationSplit, operationStraighten } from '../operations';
 import { uiToolAddFavorite, uiToolAddFeature, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolUndoRedo } from './tools';
@@ -27,6 +27,7 @@ export function uiTopToolbar(context) {
 
     var circularize = uiToolOperation(context, operationCircularize),
         follow = uiToolOperation(context, operationFollow),
+        followReverse = uiToolOperation(context, operationFollowReverse),
         continueTool = uiToolOperation(context, operationContinue),
         deleteTool = uiToolOperation(context, operationDelete),
         disconnect = uiToolOperation(context, operationDisconnect),
@@ -115,6 +116,7 @@ export function uiTopToolbar(context) {
                 orthogonalize,
                 circularize,
                 follow,
+                followReverse,
                 reverse,
                 split,
                 disconnect,
