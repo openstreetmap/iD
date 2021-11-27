@@ -104,7 +104,7 @@ Object.assign(osmWay.prototype, {
             return [];
         }
         let reverse = false;
-        if (startNodeIdx > endNodeIdx) {
+        if (!this.isClosed() && startNodeIdx > endNodeIdx) {
             [startNodeIdx, endNodeIdx] = [endNodeIdx, startNodeIdx];
             reverse = true;
         }

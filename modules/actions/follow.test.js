@@ -106,7 +106,7 @@ export function test() {
         }),
         iD.osmWay({ // closed
             id: 'w5',
-            nodes: ['e', 'b', 'f', 'j', 'k', 'g', 'c','e'],
+            nodes: ['a', 'b', 'c', 'd', 'h', 'g', 'f', 'e', 'a'],
             tags: {
                 foo: 'bar'
             }
@@ -126,18 +126,25 @@ export function test() {
             }
         }),
         iD.osmWay({ // closed
-          id: 'w8',
-          nodes: ['b', 'c', 'b'],
-          tags: {
-              foo: 'bar'
-          }
+            id: 'w8',
+            nodes: ['b', 'c', 'b'],
+            tags: {
+                foo: 'bar'
+            }
         }),
         iD.osmWay({ // closed
-          id: 'w9',
-          nodes: ['d', 'c', 'j', 'f', 'a', 'b', 'd'],
-          tags: {
-              foo: 'bar'
-          }
+            id: 'w9',
+            nodes: ['a', 'c', 'f', 'a'],
+            tags: {
+                foo: 'bar'
+            }
+        }),
+        iD.osmWay({ // closed
+            id: 'w10',
+            nodes: ['c', 'g', 'h', 'l', 'o', 'n', 'j', 'f', 'b', 'c'],
+            tags: {
+                foo: 'bar'
+            }
         })
     ];
     graph = iD.coreGraph(entities);
@@ -209,9 +216,45 @@ export function test() {
         console.error('Error nodesBetween 2', graph.entity('w1').getNodesBetween(3, 0));
     }
     // test nodesBetween 3
-    if (JSON.stringify(['f', 'j', 'k', 'g']) === JSON.stringify(graph.entity('w6').getNodesBetween(2,5))) {
-      console.log('OK nodesBetween 3');
-  } else {
-      console.error('Error nodesBetween 3', graph.entity('w6').getNodesBetween(2,5));
-  }
+    if (JSON.stringify(['f', 'j', 'k', 'g']) === JSON.stringify(graph.entity('w6').getNodesBetween(2, 5))) {
+        console.log('OK nodesBetween 3');
+    } else {
+        console.error('Error nodesBetween 3', graph.entity('w6').getNodesBetween(2, 5));
+    }
+    // test nodesBetween 1 closed
+    if (JSON.stringify(['c', 'f']) === JSON.stringify(graph.entity('w9').getNodesBetween(1, 2))) {
+        console.log('OK nodesBetween 1 closed');
+    } else {
+        console.error('Error nodesBetween 1 closed', graph.entity('w9').getNodesBetween(1, 2));
+    }
+    // test nodesBetween 2 closed
+    if (JSON.stringify(['a', 'c', 'f']) === JSON.stringify(graph.entity('w9').getNodesBetween(0, 2))) {
+        console.log('OK nodesBetween 2 closed');
+    } else {
+        console.error('Error nodesBetween 2 closed', graph.entity('w9').getNodesBetween(0, 2));
+    }
+    // test nodesBetween 3 closed
+    if (JSON.stringify(['f', 'a']) === JSON.stringify(graph.entity('w9').getNodesBetween(2, 0))) {
+        console.log('OK nodesBetween 3 closed');
+    } else {
+        console.error('Error nodesBetween 3 closed', graph.entity('w9').getNodesBetween(2, 0));
+    }
+    // test nodesBetween 4 closed
+    if (JSON.stringify(['f', 'a', 'c']) === JSON.stringify(graph.entity('w9').getNodesBetween(2, 1))) {
+        console.log('OK nodesBetween 4 closed');
+    } else {
+        console.error('Error nodesBetween 4 closed', graph.entity('w9').getNodesBetween(2, 1));
+    }
+    // test nodesBetween 5 closed
+    if (JSON.stringify(['h','l','o','n','j','f']) === JSON.stringify(graph.entity('w10').getNodesBetween(2, 7))) {
+        console.log('OK nodesBetween 5 closed');
+    } else {
+        console.error('Error nodesBetween 5 closed', graph.entity('w9').getNodesBetween(2, 7));
+    }
+    // test nodesBetween 6 closed
+    if (JSON.stringify(['h','l','o','n','j','f']) === JSON.stringify(graph.entity('w10').getNodesBetween(2, 7))) {
+        console.log('OK nodesBetween 6 closed');
+    } else {
+        console.error('Error nodesBetween 6 closed', graph.entity('w9').getNodesBetween(2, 7));
+    }
 }
