@@ -103,7 +103,11 @@ Object.assign(osmWay.prototype, {
         if (this.nodes.length < 2 || startNodeIdx < 0 || endNodeIdx < 0 || startNodeIdx === endNodeIdx || (this.indexIsFirstOrLastOfClosed(startNodeIdx) && this.indexIsFirstOrLastOfClosed(endNodeIdx))) {
             return [];
         }
-        const isClosed = this.isClosed();
+        let reverse = false;
+        if (startNodeIdx > endNodeIdx) {
+            [startNodeIdx, endNodeIdx] = [endNodeIdx, startNodeIdx];
+            reverse = true;
+        }
         let nodeIdx = startNodeIdx;
         const nodesBetween = [this.nodes[startNodeIdx]];
         const endNodeIsFirstOrLastOfClosed = this.indexIsFirstOrLastOfClosed(endNodeIdx);
@@ -119,7 +123,7 @@ Object.assign(osmWay.prototype, {
                 break;
             }
         }
-        return nodesBetween;
+        return reverse ? nodesBetween.reverse() : nodesBetween;
     },
 
     nextNodeIdx: function(nodeIdx) {

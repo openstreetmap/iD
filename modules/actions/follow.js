@@ -45,7 +45,7 @@ export function actionFollow(selectedIDs, projection, reverse = false, customGra
     };
 
     var action = function (graph) {
-
+        window.graph = graph;
         window.entities = graph.entities;
 
         var tgtWay = graph.entity(selectedIDs[0]);
@@ -66,10 +66,12 @@ export function actionFollow(selectedIDs, projection, reverse = false, customGra
         var startNodeIdxInTgt = tgtNodes.indexOf(startNodeId);
         var endNodeIdxInTgt = tgtNodes.indexOf(endNodeId);
 
-        if (startNodeIdxInTgt > endNodeIdxInTgt) { // make sure the start index in target is before the end target so we can use the next node index in the loop
-            var tmpEndNodeIdxInTgt = endNodeIdxInTgt;
-            startNodeIdxInTgt = endNodeIdxInTgt;
-            endNodeIdxInTgt = tmpEndNodeIdxInTgt;
+        if (startNodeIdxInTgt > endNodeIdxInTgt) { // make sure the start index in target is before the end so we can use the next node index in the loop
+            [startNodeIdxInTgt, endNodeIdxInTgt] = [endNodeIdxInTgt, startNodeIdxInTgt];
+        }
+
+        if (startNodeIdxInSrc > endNodeIdxInSrc) { // make sure the start index in source is before the end so we can use the next node index in the loop
+            [startNodeIdxInSrc, endNodeIdxInSrc] = [endNodeIdxInSrc, startNodeIdxInSrc];
         }
 
         //console.log('srcIsClosed', srcWay.isClosed());
@@ -86,14 +88,12 @@ export function actionFollow(selectedIDs, projection, reverse = false, customGra
         //console.log('tgtNodesBetweenB', tgtNodesBetweenBackward);
         let srcNodesUsed = srcWay.getNodesBetween(startNodeIdxInSrc, endNodeIdxInSrc);
         if (srcNodesUsed.length === 0) {
-            srcNodesUsed = srcWay.getNodesBetween(endNodeIdxInSrc, startNodeIdxInSrc);
-        }
-        if (srcNodesUsed.length === 0) {
+            console.error('no suitable nodes in source');
             return graph;
         }
         const srcNodesUsedReversed = [...srcNodesUsed].reverse(); // need to clone because reverse modifies the original array
 
-        console.log('srcNodesUsed', srcNodesUsed);
+        console.log('srcNodesUsed and reversed', srcNodesUsed, srcNodesUsedReversed);
 
         const updatedTgtWayNodes = [];
         if (!tgtWayIsClosed) {
@@ -117,17 +117,18 @@ export function actionFollow(selectedIDs, projection, reverse = false, customGra
             graph  = graph.replace(tgtWay);
             // remove unconnected tagless nodes in between:
             nodeIdx = startNodeIdxInTgt + 1;
-            /*while(nodeIdx < endNodeIdxInTgt) {
+            while(nodeIdx < endNodeIdxInTgt) {
                 const node = graph.entity(tgtNodes[nodeIdx]);
-                if (!node.hasNonGeometryTags() && !node.isConnected(graph)) {
+                //console.log('checking node: ', node.id, graph.isShared(node), node.hasNonGeometryTags(), graph.parentWays(node).length);
+                if (!node.hasNonGeometryTags() && !graph.isShared(node) && graph.parentWays(node).length === 0) {
                     console.log('removing node: ', node.id);
                     const deleteAction = iD.actionDeleteNode(node.id);
                     graph = deleteAction(graph);
                 }
                 nodeIdx++;
-            }*/
+            }
         }
-        console.log('updatedTgtWayNodes', updatedTgtWayNodes);
+        //console.log('updatedTgtWayNodes', updatedTgtWayNodes);
 
         return graph;
         //const tgtNodesBetweenForwardCnt = tgtNodesBetweenForward.length;
