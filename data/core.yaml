@@ -193,6 +193,16 @@ en:
       connected_to_hidden: This can't be made circular because it is connected to a hidden feature.
       not_downloaded: This can't be made circular because parts of it have not yet been downloaded.
       already_circular: This can't be made circular because it's already circular.
+    curverize:
+      title: Curverize
+      description:
+        points: Create a curve using the previous 4 nodes of the line at selected node as tangents.
+      key: $
+      annotation:
+        points: Curverize a line.
+      too_large: This can't be followed because not enough of it is currently visible.
+      connected_to_hidden: This can't be followed because it is connected to a hidden feature.
+      not_downloaded: This can't be followed because parts of it have not yet been downloaded.
     follow:
       title: Follow
       description:
