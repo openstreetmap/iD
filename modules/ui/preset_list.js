@@ -35,7 +35,7 @@ export function uiPresetList(context) {
 
         var message = messagewrap
             .append('h3')
-            .call(t.htmlDom('inspector.choose'));
+            .call(t.append('inspector.choose'));
 
         messagewrap
             .append('button')

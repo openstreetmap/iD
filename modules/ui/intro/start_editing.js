@@ -72,7 +72,7 @@ export function uiIntroStartEditing(context, reveal) {
 
             startbutton
                 .append('h2')
-                .call(t.htmlDom('intro.startediting.start'));
+                .call(t.append('intro.startediting.start'));
 
         dispatch.call('startEditing');
     }

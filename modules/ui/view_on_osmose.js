@@ -30,7 +30,7 @@ export function uiViewOnOsmose() {
 
     linkEnter
       .append('span')
-        .call(t.htmlDom('inspector.view_on_osmose'));
+        .call(t.append('inspector.view_on_osmose'));
   }
 
   viewOnOsmose.what = function(val) {

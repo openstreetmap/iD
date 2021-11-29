@@ -125,7 +125,7 @@ export function validationUnsquareWay(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .call(t.htmlDom('issues.unsquare_way.buildings.reference'));
+                .call(t.append('issues.unsquare_way.buildings.reference'));
         }
     };
 

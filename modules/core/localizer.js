@@ -370,8 +370,8 @@ export function coreLocalizer() {
       }
     };
 
-    // Adds localized text wrapped as an HTML element with locale info to the DOM
-    localizer.t.htmlDom = function(stringId, replacements, locale) {
+    // Adds localized text wrapped as an HTML span element with locale info to the DOM
+    localizer.t.append = function(stringId, replacements, locale) {
       return function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
         return selection.append('span')

@@ -83,7 +83,7 @@ export function uiFieldCheck(field, context) {
         var icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
         selection.selectAll('.reverser-span')
-            .call(t.htmlDom('inspector.check.reverser'))
+            .call(t.append('inspector.check.reverser'))
             .call(svgIcon(icon, 'inline'));
 
         return selection;

@@ -27,7 +27,7 @@ export function uiShortcuts(context) {
             .append('div')
             .attr('class', 'modal-section')
             .append('h3')
-            .call(t.htmlDom('shortcuts.title'));
+            .call(t.append('shortcuts.title'));
 
         fileFetcher.get('shortcuts')
             .then(function(data) {

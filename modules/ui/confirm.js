@@ -27,7 +27,7 @@ export function uiConfirm(selection) {
             .on('click.confirm', function() {
                 modalSelection.remove();
             })
-            .call(t.htmlDom('confirm.okay'))
+            .call(t.append('confirm.okay'))
             .node()
             .focus();
 

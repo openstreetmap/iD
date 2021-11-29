@@ -124,7 +124,7 @@ export function uiFieldRestrictions(field, context) {
         distControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-distance-label')
-            .call(t.htmlDom('restriction.controls.distance', { suffix: ':' }));
+            .call(t.append('restriction.controls.distance', { suffix: ':' }));
 
         distControlEnter
             .append('input')
@@ -167,7 +167,7 @@ export function uiFieldRestrictions(field, context) {
         viaControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-via-way-label')
-            .call(t.htmlDom('restriction.controls.via', { suffix: ':' }));
+            .call(t.append('restriction.controls.via', { suffix: ':' }));
 
         viaControlEnter
             .append('input')
@@ -604,7 +604,7 @@ export function uiFieldRestrictions(field, context) {
 
             return selection
                 .html('')
-                .call(t.htmlDom('restriction.controls.distance_up_to', opts));
+                .call(t.append('restriction.controls.distance_up_to', opts));
         };
     }
 
@@ -612,9 +612,9 @@ export function uiFieldRestrictions(field, context) {
     function displayMaxVia(maxVia) {
         return selection => {
             selection = selection.html('');
-            return maxVia === 0 ? selection.call(t.htmlDom('restriction.controls.via_node_only'))
-                : maxVia === 1 ? selection.call(t.htmlDom('restriction.controls.via_up_to_one'))
-                : selection.call(t.htmlDom('restriction.controls.via_up_to_two'));
+            return maxVia === 0 ? selection.call(t.append('restriction.controls.via_node_only'))
+                : maxVia === 1 ? selection.call(t.append('restriction.controls.via_up_to_one'))
+                : selection.call(t.append('restriction.controls.via_up_to_two'));
         };
     }
 

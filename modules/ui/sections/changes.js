@@ -132,7 +132,7 @@ export function uiSectionChanges(context) {
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .call(t.htmlDom('commit.download_changes'));
+            .call(t.append('commit.download_changes'));
 
 
         function mouseover(d) {

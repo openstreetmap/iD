@@ -44,7 +44,7 @@ export function uiTagReference(what) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-description')
-                .call(t.htmlDom('inspector.no_documentation_key'));
+                .call(t.append('inspector.no_documentation_key'));
             done();
             return;
         }
@@ -71,7 +71,7 @@ export function uiTagReference(what) {
                 .text(docs.description);
         } else {
             tagReferenceDescription = tagReferenceDescription
-                .call(t.htmlDom('inspector.no_documentation_key'));
+                .call(t.append('inspector.no_documentation_key'));
         }
         tagReferenceDescription
             .append('a')
@@ -89,7 +89,7 @@ export function uiTagReference(what) {
               .attr('href', docs.wiki.url)
               .call(svgIcon('#iD-icon-out-link', 'inline'))
               .append('span')
-              .call(t.htmlDom(docs.wiki.text));
+              .call(t.append(docs.wiki.text));
         }
 
         // Add link to info about "good changeset comments" - #2923
@@ -101,7 +101,7 @@ export function uiTagReference(what) {
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .attr('href', t('commit.about_changeset_comments_link'))
                 .append('span')
-                .call(t.htmlDom('commit.about_changeset_comments'));
+                .call(t.append('commit.about_changeset_comments'));
         }
     }
 

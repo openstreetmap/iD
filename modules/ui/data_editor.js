@@ -33,7 +33,7 @@ export function uiDataEditor(context) {
 
         headerEnter
             .append('h3')
-            .call(t.htmlDom('map_data.title'));
+            .call(t.append('map_data.title'));
 
 
         var body = selection.selectAll('.body')

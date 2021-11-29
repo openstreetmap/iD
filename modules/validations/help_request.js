@@ -46,7 +46,7 @@ export function validationHelpRequest(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .call(t.htmlDom('issues.fixme_tag.reference'));
+                .call(t.append('issues.fixme_tag.reference'));
         }
     };
 

@@ -26,7 +26,7 @@ export function uiNotice(context) {
             .call(svgIcon('#iD-icon-plus', 'pre-text'))
             .append('span')
             .attr('class', 'label')
-            .call(t.htmlDom('zoom_in_edit'));
+            .call(t.append('zoom_in_edit'));
 
 
         function disableTooHigh() {

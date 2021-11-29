@@ -34,7 +34,7 @@ export function uiFeatureList(context) {
 
         header
             .append('h3')
-            .call(t.htmlDom('inspector.feature_list'));
+            .call(t.append('inspector.feature_list'));
 
         var searchWrap = selection
             .append('div')
@@ -256,7 +256,7 @@ export function uiFeatureList(context) {
 
             list.selectAll('.no-results-item .entity-name')
                 .html('')
-                .call(t.htmlDom('geocoder.no_results_worldwide'));
+                .call(t.append('geocoder.no_results_worldwide'));
 
             if (services.geocoder) {
               list.selectAll('.geocode-item')
@@ -269,7 +269,7 @@ export function uiFeatureList(context) {
                   .attr('class', 'label')
                   .append('span')
                   .attr('class', 'entity-name')
-                  .call(t.htmlDom('geocoder.search'));
+                  .call(t.append('geocoder.search'));
             }
 
             list.selectAll('.no-results-item')

@@ -82,7 +82,7 @@ export function uiSuccess(context) {
 
     header
       .append('h3')
-      .call(t.htmlDom('success.just_edited'));
+      .call(t.append('success.just_edited'));
 
     header
       .append('button')
@@ -100,18 +100,18 @@ export function uiSuccess(context) {
 
     summary
       .append('h3')
-      .call(t.htmlDom('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
+      .call(t.append('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
     summary
       .append('p')
-      .call(t.htmlDom('success.help_html'))
+      .call(t.append('success.help_html'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
       .attr('href', t('success.help_link_url'))
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .append('span')
-      .call(t.htmlDom('success.help_link_text'));
+      .call(t.append('success.help_link_text'));
 
     let osm = context.connection();
     if (!osm) return;
@@ -146,7 +146,7 @@ export function uiSuccess(context) {
       .attr('class', 'cell-detail summary-view-on-osm')
       .attr('target', '_blank')
       .attr('href', changesetURL)
-      .call(t.htmlDom('success.view_on_osm'));
+      .call(t.append('success.view_on_osm'));
 
     summaryDetail
       .append('div')
@@ -194,7 +194,7 @@ export function uiSuccess(context) {
 
     communityLinks
       .append('h3')
-      .call(t.htmlDom('success.like_osm'));
+      .call(t.append('success.like_osm'));
 
     let table = communityLinks
       .append('table')
@@ -228,14 +228,14 @@ export function uiSuccess(context) {
     communityLinks
       .append('div')
       .attr('class', 'community-missing')
-      .call(t.htmlDom('success.missing'))
+      .call(t.append('success.missing'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .attr('href', 'https://github.com/osmlab/osm-community-index/issues')
       .append('span')
-      .call(t.htmlDom('success.tell_us'));
+      .call(t.append('success.tell_us'));
   }
 
 
@@ -319,7 +319,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-languages')
-          .call(t.htmlDom('success.languages', { languages: languageList }));
+          .call(t.append('success.languages', { languages: languageList }));
       }
     }
 

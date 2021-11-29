@@ -32,7 +32,7 @@ export function uiSectionMapFeatures(context) {
             .append('a')
             .attr('class', 'feature-list-link')
             .attr('href', '#')
-            .call(t.htmlDom('issues.disable_all'))
+            .call(t.append('issues.disable_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 context.features().disableAll();
@@ -42,7 +42,7 @@ export function uiSectionMapFeatures(context) {
             .append('a')
             .attr('class', 'feature-list-link')
             .attr('href', '#')
-            .call(t.htmlDom('issues.enable_all'))
+            .call(t.append('issues.enable_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 context.features().enableAll();

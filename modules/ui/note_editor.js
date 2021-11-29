@@ -53,7 +53,7 @@ export function uiNoteEditor(context) {
 
         headerEnter
             .append('h3')
-            .call(t.htmlDom('note.title'));
+            .call(t.append('note.title'));
 
 
         var body = selection.selectAll('.body')
@@ -256,14 +256,14 @@ export function uiNoteEditor(context) {
 
         authEnter
             .append('span')
-            .call(t.htmlDom('note.login'));
+            .call(t.append('note.login'));
 
         authEnter
             .append('a')
             .attr('target', '_blank')
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .append('span')
-            .call(t.htmlDom('login'))
+            .call(t.append('login'))
             .on('click.note-login', function(d3_event) {
                 d3_event.preventDefault();
                 osm.authenticate();
@@ -284,7 +284,7 @@ export function uiNoteEditor(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'note-save-prose')
-            .call(t.htmlDom('note.upload_explanation'))
+            .call(t.append('note.upload_explanation'))
             .merge(prose);
 
         osm.userDetails(function(err, user) {
@@ -333,12 +333,12 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button cancel-button secondary-action')
-                .call(t.htmlDom('confirm.cancel'));
+                .call(t.append('confirm.cancel'));
 
             buttonEnter
                 .append('button')
                 .attr('class', 'button save-button action')
-                .call(t.htmlDom('note.save'));
+                .call(t.append('note.save'));
 
         } else {
             buttonEnter
@@ -348,7 +348,7 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button comment-button action')
-                .call(t.htmlDom('note.comment'));
+                .call(t.append('note.comment'));
         }
 
 

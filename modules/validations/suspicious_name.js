@@ -92,7 +92,7 @@ export function validationSuspiciousName() {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .call(t.htmlDom('issues.generic_name.reference'));
+        .call(t.append('issues.generic_name.reference'));
     }
   }
 
@@ -138,7 +138,7 @@ export function validationSuspiciousName() {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .call(t.htmlDom('issues.generic_name.reference'));
+        .call(t.append('issues.generic_name.reference'));
     }
   }
 

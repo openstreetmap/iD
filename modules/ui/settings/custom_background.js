@@ -27,7 +27,7 @@ export function uiSettingsCustomBackground() {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .call(t.htmlDom('settings.custom_background.header'));
+            .call(t.append('settings.custom_background.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
@@ -70,7 +70,7 @@ export function uiSettingsCustomBackground() {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .call(t.htmlDom('confirm.cancel'));
+            .call(t.append('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')

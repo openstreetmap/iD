@@ -42,7 +42,7 @@ export function uiSplash(context) {
       .append('div')
       .attr('class','modal-section')
       .append('h3')
-      .call(t.htmlDom('splash.welcome'));
+      .call(t.append('splash.welcome'));
 
     let modalSection = introModal
       .append('div')
@@ -84,7 +84,7 @@ export function uiSplash(context) {
 
     walkthrough
       .append('div')
-      .call(t.htmlDom('splash.walkthrough'));
+      .call(t.append('splash.walkthrough'));
 
     let startEditing = buttonWrap
       .append('button')
@@ -99,7 +99,7 @@ export function uiSplash(context) {
 
     startEditing
       .append('div')
-      .call(t.htmlDom('splash.start'));
+      .call(t.append('splash.start'));
 
     modalSelection.select('button.close')
       .attr('class','hide');

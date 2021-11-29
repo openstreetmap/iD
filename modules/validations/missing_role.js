@@ -82,7 +82,7 @@ export function validationMissingRole() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .call(t.htmlDom('issues.missing_role.multipolygon.reference'));
+                .call(t.append('issues.missing_role.multipolygon.reference'));
         }
     }
 

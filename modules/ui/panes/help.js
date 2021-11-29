@@ -382,7 +382,7 @@ export function uiPaneHelp(context) {
 
         shortcuts
             .append('div')
-            .call(t.htmlDom('shortcuts.title'));
+            .call(t.append('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
@@ -399,7 +399,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .call(t.htmlDom('splash.walkthrough'));
+            .call(t.append('splash.walkthrough'));
 
 
         var helpContent = content

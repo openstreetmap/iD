@@ -42,7 +42,7 @@ export function uiImproveOsmDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .call(t.htmlDom('QA.keepRight.detail_description'));
+        .call(t.append('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')
