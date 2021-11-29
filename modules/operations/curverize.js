@@ -40,13 +40,17 @@ export function operationCurverize(selectedIDs, context) {
         });
 
         if (selectedIDs.length === 2 && entities[0].type === 'way' && entities[1].type === 'node') {
-            if (entities[0].contains(entities[1]) && entities[0].nodes.length >= 4) {
-                return true;
+            if (entities[0].contains(entities[1].id) && entities[0].nodes.length >= 4) {
+                if (entities[0].nodes.indexOf(entities[1].id) === 0 || entities[0].nodes.indexOf(entities[1].id) === entities[0].nodes.length - 1) {
+                    return true;
+                }
             }
         } else if (selectedIDs.length === 1 && entities[0].type === 'node') {
             var nodeParentWays = context.graph().parentWays(entities[0]);
-            if (nodeParentWays.length === 1 && context.graph().entity(nodeParentWays[0]) && context.graph().entity(nodeParentWays[0]).type === 'way' && context.graph().entity(nodeParentWays[0]).nodes.length >= 4) {
-                return true;
+            if (nodeParentWays.length === 1 && nodeParentWays[0] && nodeParentWays[0].type === 'way' && nodeParentWays[0].nodes.length >= 4) {
+                if (nodeParentWays[0].nodes.indexOf(entities[0].id) === 0 || nodeParentWays[0].nodes.indexOf(entities[0].id) === nodeParentWays[0].nodes.length - 1) {
+                    return true;
+                }
             }
         }
         return false;

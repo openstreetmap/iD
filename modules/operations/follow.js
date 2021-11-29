@@ -3,16 +3,16 @@ import { geoExtent } from '../geo';
 import { actionFollow } from '../actions/follow';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
-import { test } from '../actions/follow.test';
+//import { test } from '../actions/follow.test';
 
-window.tested = false;
+//window.tested = false;
 
 export function operationFollow(selectedIDs, context) {
 
-    if (!window.tested) {
+    /*if (!window.tested) {
         test();
         window.tested = true;
-    }
+    }*/
 
     var action = actionFollow(selectedIDs, context.projection);
     
