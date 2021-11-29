@@ -22,6 +22,7 @@ export { utilDisplayType } from './util';
 export { utilDisplayLabel } from './util';
 export { utilEntityRoot } from './util';
 export { utilEditDistance } from './util';
+export { utilSortString } from './util';
 export { utilEntityAndDeepMemberIDs } from './util';
 export { utilEntityOrMemberSelector } from './util';
 export { utilEntityOrDeepMemberSelector } from './util';
