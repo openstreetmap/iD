@@ -7,11 +7,7 @@ import { t } from '../util/locale';
 import { utilFunctor } from '../util/util';
 import { modeBrowse } from '../modes/browse';
 import _debounce from 'lodash-es/debounce';
-<<<<<<< HEAD
-import { operationCircularize, operationFollow, operationFollowReverse, operationContinue, operationDelete, operationDisconnect,
-=======
 import { operationCircularize, operationFollow, operationContinue, operationCurverize, operationDelete, operationDisconnect,
->>>>>>> 3932c2fe6 (add curverize operation and action 0.1)
     operationDowngrade, operationExtract, operationMerge, operationOrthogonalize,
     operationReverse, operationSplit, operationStraighten } from '../operations';
 import { uiToolAddFavorite, uiToolAddFeature, uiToolAddRecent, uiToolNotes, uiToolOperation, uiToolSave, uiToolUndoRedo } from './tools';
