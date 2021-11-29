@@ -151,7 +151,6 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-distance-text')
-            .html('')
             .call(displayMaxDistance(_maxDistance));
 
 
@@ -194,7 +193,6 @@ export function uiFieldRestrictions(field, context) {
             });
 
         selection.selectAll('.restriction-via-way-text')
-            .html('')
             .call(displayMaxVia(_maxViaWay));
     }
 
@@ -604,17 +602,20 @@ export function uiFieldRestrictions(field, context) {
                 opts = { distance: t('units.meters', { quantity: maxDist }) };
             }
 
-            return selection.call(t.htmlDom('restriction.controls.distance_up_to', opts));
-        }
+            return selection
+                .html('')
+                .call(t.htmlDom('restriction.controls.distance_up_to', opts));
+        };
     }
 
 
     function displayMaxVia(maxVia) {
         return selection => {
+            selection = selection.html('');
             return maxVia === 0 ? selection.call(t.htmlDom('restriction.controls.via_node_only'))
                 : maxVia === 1 ? selection.call(t.htmlDom('restriction.controls.via_up_to_one'))
                 : selection.call(t.htmlDom('restriction.controls.via_up_to_two'));
-        }
+        };
     }
 
 
