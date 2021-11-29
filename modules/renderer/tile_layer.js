@@ -198,6 +198,7 @@ export function rendererTileLayer(context) {
         image.enter()
           .append('img')
             .attr('class', 'tile')
+            .attr('alt', '')
             .attr('draggable', 'false')
             .style('width', _tileSize + 'px')
             .style('height', _tileSize + 'px')
