@@ -718,7 +718,7 @@ en:
       one: "{n} result for {search}"
       other: "{n} results for {search}"
     no_documentation_key: "There is no documentation available."
-    edit_reference: "edit/translate"
+    edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
