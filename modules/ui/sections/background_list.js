@@ -196,24 +196,30 @@ export function uiSectionBackgroundList(context) {
             })
             .call(svgIcon('#iD-icon-more'));
 
+        enter.filter(function(d) { return d.category && d.category.match(/^historic/); })
+            .append('div')
+            .attr('class', 'stamp')
+            .call(svgIcon('#iD-icon-info'))
+            .call(uiTooltip()
+                .title(t.html('background.historic_imagery'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            );
         enter.filter(function(d) { return d.best(); })
             .append('div')
             .attr('class', 'stamp')
+            .call(svgIcon('#maki-star-stroked-11'))
             .call(uiTooltip()
                 .title(t.html('background.best_imagery'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .append('span')
-            .html('&#9733;'); // ★
+            );
         enter.filter(function(d) { return d.area() > 1E14; })
             .append('div')
             .attr('class', 'stamp')
+            .call(svgIcon('#maki-globe-11'))
             .call(uiTooltip()
                 .title(t.html('background.global_imagery'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .append('span')
-            .html('&#127760;'); // 🌐
+            );
 
         layerList
             .call(updateLayerSelections);

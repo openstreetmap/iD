@@ -3166,6 +3166,11 @@ div.full-screen > button:focus {
     flex: 0 0 auto;
 }
 
+.layer-list li > div.stamp svg.icon {
+    height: 16px;
+    width: 16px;
+}
+
 .ideditor[dir='rtl'] .list-item-data-browse svg {
     transform: rotateY(180deg);
 }
