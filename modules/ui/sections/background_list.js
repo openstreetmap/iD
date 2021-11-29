@@ -174,11 +174,12 @@ export function uiSectionBackgroundList(context) {
             })
             .on('change', change);
 
-        var showIcons = prefs('preferences.privacy.thirdpartyicons') === 'true';
+        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        var showIcons = showThirdPartyIcons === 'true';
         label
             .append('span')
             .style('background-image', d => showIcons && d.icon !== undefined ? 'url(' + d.icon + ')' : undefined)
-            .classed('imagery-with-icon', d => showIcons && d.icon !== undefined)
+            .classed('imagery-show-icons', d => showIcons)
             .html(function(d) { return d.label(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })

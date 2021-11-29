@@ -3166,19 +3166,6 @@ div.full-screen > button:focus {
     flex: 0 0 auto;
 }
 
-.layer-list li > div.imagery-icon {
-    margin: 5px;
-    max-width: 20px;
-    overflow: hidden;
-    flex: 0 0 auto;
-}
-
-.layer-list li > div.imagery-icon > img {
-    height: 14px;
-    width: auto;
-    vertical-align: middle;
-}
-
 .ideditor[dir='rtl'] .list-item-data-browse svg {
     transform: rotateY(180deg);
 }
@@ -3213,11 +3200,11 @@ div.full-screen > button:focus {
     flex-grow: 1;
 }
 
-.layer-list label > span.imagery-with-icon {
+.layer-list label > span.imagery-show-icons {
     background-repeat: no-repeat;
-    background-size: 14px auto;
+    background-size: 20px auto;
     background-position: left center;
-    padding-left: 18px;
+    padding-left: 25px;
 }
 
 .layer-list input.list-item-input {
