@@ -289,10 +289,6 @@
               "text": "shortcuts.editing.operations.follow"
             },
             {
-              "shortcuts": ["operations.follow_reverse.key"],
-              "text": "shortcuts.editing.operations.follow_reverse"
-            },
-            {
               "shortcuts": ["operations.reflect.key.short"],
               "text": "shortcuts.editing.operations.reflect_short"
             },
