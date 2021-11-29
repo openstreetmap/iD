@@ -60,11 +60,10 @@ export function uiSectionBackgroundDisplayOptions(context) {
         var slidersEnter = containerEnter.selectAll('.display-control')
             .data(_sliders)
             .enter()
-            .append('div')
+            .append('label')
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .append('h5')
             .html(function(d) { return t.html('background.' + d); })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });

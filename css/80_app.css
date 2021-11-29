@@ -3622,12 +3622,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     padding: 10px;
 }
 
-.display-control h5 {
+.display-options-container label {
     padding-bottom: 0;
     padding-top: 10px;
 }
 
-.display-control h5 span {
+.display-options-container label span {
+    font-weight: bold;
     margin: 5px;
 }
 
