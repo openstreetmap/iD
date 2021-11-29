@@ -772,6 +772,7 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+    speed_unit: "Speed unit"
     roadheight:
       # symbol for meters
       meter: m
