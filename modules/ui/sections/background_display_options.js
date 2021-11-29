@@ -89,7 +89,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
         sildersControlEnter
             .append('button')
-            .attr('title', t('background.reset'))
+            .attr('title', function(d) { return `${t('background.reset')} ${t('background.' + d)}`; })
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
             .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
