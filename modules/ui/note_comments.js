@@ -53,15 +53,18 @@ export function uiNoteComments() {
                         .attr('href', osm.userURL(d.user))
                         .attr('target', '_blank');
                 }
-                selection
-                    .html(function(d) { return d.user || t.html('note.anonymous'); });
+                if (d.user) {
+                    selection.text(d.user);
+                } else {
+                    selection.call(t.append('note.anonymous'));
+                }
             });
 
         metadataEnter
             .append('div')
             .attr('class', 'comment-date')
             .html(function(d) {
-                return t('note.status.' + d.action, { when: localeDateString(d.date) });
+                return t.html('note.status.' + d.action, { when: localeDateString(d.date) });
             });
 
         mainEnter

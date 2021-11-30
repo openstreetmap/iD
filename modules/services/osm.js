@@ -589,7 +589,7 @@ export default {
 
 
     userURL: function(username) {
-        return urlroot + '/user/' + username;
+        return urlroot + '/user/' + encodeURIComponent(username);
     },
 
 

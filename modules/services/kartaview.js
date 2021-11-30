@@ -276,22 +276,22 @@ export default {
         controlsEnter
             .append('button')
             .on('click.back', step(-1))
-            .html('◄');
+            .text('◄');
 
         controlsEnter
             .append('button')
             .on('click.rotate-ccw', rotate(-90))
-            .html('⤿');
+            .text('⤿');
 
         controlsEnter
             .append('button')
             .on('click.rotate-cw', rotate(90))
-            .html('⤾');
+            .text('⤾');
 
         controlsEnter
             .append('button')
             .on('click.forward', step(1))
-            .html('►');
+            .text('►');
 
         wrapEnter
             .append('div')
@@ -428,7 +428,7 @@ export default {
 
         var wrap = context.container().select('.photoviewer .kartaview-wrapper');
         var imageWrap = wrap.selectAll('.kartaview-image-wrap');
-        var attribution = wrap.selectAll('.photo-attribution').html('');
+        var attribution = wrap.selectAll('.photo-attribution').text('');
 
         wrap
             .transition()
@@ -455,22 +455,22 @@ export default {
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
                     .attr('href', 'https://kartaview.org/user/' + encodeURIComponent(d.captured_by))
-                    .html('@' + d.captured_by);
+                    .text('@' + d.captured_by);
 
                 attribution
                     .append('span')
-                    .html('|');
+                    .text('|');
             }
 
             if (d.captured_at) {
                 attribution
                     .append('span')
                     .attr('class', 'captured_at')
-                    .html(localeDateString(d.captured_at));
+                    .text(localeDateString(d.captured_at));
 
                 attribution
                     .append('span')
-                    .html('|');
+                    .text('|');
             }
 
             attribution
@@ -478,7 +478,7 @@ export default {
                 .attr('class', 'image-link')
                 .attr('target', '_blank')
                 .attr('href', 'https://kartaview.org/details/' + d.sequence_id + '/' + d.sequence_index)
-                .html('kartaview.org');
+                .text('kartaview.org');
         }
 
         return this;

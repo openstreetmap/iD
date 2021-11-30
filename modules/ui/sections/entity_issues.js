@@ -24,7 +24,7 @@ export function uiSectionEntityIssues(context) {
             return _issues.length > 0;
         })
         .label(function() {
-            return t('inspector.title_count', { title: t.html('issues.list_title'), count: _issues.length });
+            return t.html('inspector.title_count', { title: { html: t.html('issues.list_title') }, count: _issues.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -169,7 +169,7 @@ export function uiSectionEntityIssues(context) {
                         .call(d.reference);
                 } else {
                     d3_select(this)
-                        .html(t.html('inspector.no_documentation_key'));
+                        .call(t.append('inspector.no_documentation_key'));
                 }
             });
 

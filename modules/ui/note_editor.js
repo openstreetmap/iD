@@ -53,7 +53,7 @@ export function uiNoteEditor(context) {
 
         headerEnter
             .append('h3')
-            .html(t.html('note.title'));
+            .call(t.append('note.title'));
 
 
         var body = selection.selectAll('.body')
@@ -148,7 +148,7 @@ export function uiNoteEditor(context) {
             .append('h4')
             .attr('class', '.note-save-header')
             .html(function() {
-                return _note.isNew() ? t('note.newDescription') : t('note.newComment');
+                return _note.isNew() ? t.html('note.newDescription') : t.html('note.newComment');
             });
 
         var commentTextarea = noteSaveEnter
@@ -256,14 +256,14 @@ export function uiNoteEditor(context) {
 
         authEnter
             .append('span')
-            .html(t.html('note.login'));
+            .call(t.append('note.login'));
 
         authEnter
             .append('a')
             .attr('target', '_blank')
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .append('span')
-            .html(t.html('login'))
+            .call(t.append('login'))
             .on('click.note-login', function(d3_event) {
                 d3_event.preventDefault();
                 osm.authenticate();
@@ -284,7 +284,7 @@ export function uiNoteEditor(context) {
         prose = prose.enter()
             .append('p')
             .attr('class', 'note-save-prose')
-            .html(t.html('note.upload_explanation'))
+            .call(t.append('note.upload_explanation'))
             .merge(prose);
 
         osm.userDetails(function(err, user) {
@@ -302,12 +302,12 @@ export function uiNoteEditor(context) {
             userLink
                 .append('a')
                 .attr('class', 'user-info')
-                .html(user.display_name)
+                .text(user.display_name)
                 .attr('href', osm.userURL(user.display_name))
                 .attr('target', '_blank');
 
             prose
-                .html(t.html('note.upload_explanation_with_user', { user: userLink.html() }));
+                .html(t.html('note.upload_explanation_with_user', { user: { html: userLink.html() } }));
         });
     }
 
@@ -333,12 +333,12 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button cancel-button secondary-action')
-                .html(t.html('confirm.cancel'));
+                .call(t.append('confirm.cancel'));
 
             buttonEnter
                 .append('button')
                 .attr('class', 'button save-button action')
-                .html(t.html('note.save'));
+                .call(t.append('note.save'));
 
         } else {
             buttonEnter
@@ -348,7 +348,7 @@ export function uiNoteEditor(context) {
             buttonEnter
                 .append('button')
                 .attr('class', 'button comment-button action')
-                .html(t.html('note.comment'));
+                .call(t.append('note.comment'));
         }
 
 
@@ -368,7 +368,7 @@ export function uiNoteEditor(context) {
             .html(function(d) {
                 var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
-                return t('note.' + action + andComment);
+                return t.html('note.' + action + andComment);
             })
             .on('click.status', clickStatus);
 

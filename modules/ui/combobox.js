@@ -384,7 +384,7 @@ export function uiCombobox(context, klass) {
                     return 'combobox-option ' + (d.klass || '');
                 })
                 .attr('title', function(d) { return d.title; })
-                .html(function(d) { return d.display || d.value; })
+                .text(function(d) { return d.display || d.value; })
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)

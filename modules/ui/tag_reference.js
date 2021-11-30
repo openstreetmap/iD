@@ -2,7 +2,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { t, localizer } from '../core/localizer';
+import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 
@@ -44,7 +44,7 @@ export function uiTagReference(what) {
             _body
                 .append('p')
                 .attr('class', 'tag-reference-description')
-                .html(t.html('inspector.no_documentation_key'));
+                .call(t.append('inspector.no_documentation_key'));
             done();
             return;
         }
@@ -60,10 +60,20 @@ export function uiTagReference(what) {
             done();
         }
 
-        _body
+        var tagReferenceDescription = _body
             .append('p')
             .attr('class', 'tag-reference-description')
-            .html(docs.description ? localizer.htmlForLocalizedText(docs.description, docs.descriptionLocaleCode) : t.html('inspector.no_documentation_key'))
+            .append('span');
+        if (docs.description) {
+            tagReferenceDescription = tagReferenceDescription
+                .attr('class', 'localized-text')
+                .attr('lang', docs.descriptionLocaleCode || 'und')
+                .text(docs.description);
+        } else {
+            tagReferenceDescription = tagReferenceDescription
+                .call(t.append('inspector.no_documentation_key'));
+        }
+        tagReferenceDescription
             .append('a')
             .attr('class', 'tag-reference-edit')
             .attr('target', '_blank')
@@ -79,7 +89,7 @@ export function uiTagReference(what) {
               .attr('href', docs.wiki.url)
               .call(svgIcon('#iD-icon-out-link', 'inline'))
               .append('span')
-              .html(t.html(docs.wiki.text));
+              .call(t.append(docs.wiki.text));
         }
 
         // Add link to info about "good changeset comments" - #2923
@@ -91,7 +101,7 @@ export function uiTagReference(what) {
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .attr('href', t('commit.about_changeset_comments_link'))
                 .append('span')
-                .html(t.html('commit.about_changeset_comments'));
+                .call(t.append('commit.about_changeset_comments'));
         }
     }
 

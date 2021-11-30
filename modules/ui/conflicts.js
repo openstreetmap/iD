@@ -65,7 +65,7 @@ export function uiConflicts(context) {
 
         headerEnter
             .append('h3')
-            .html(t.html('save.conflict.header'));
+            .call(t.append('save.conflict.header'));
 
         var bodyEnter = selection.selectAll('.body')
             .data([0])
@@ -76,7 +76,7 @@ export function uiConflicts(context) {
         var conflictsHelpEnter = bodyEnter
             .append('div')
             .attr('class', 'conflicts-help')
-            .html(t.html('save.conflict.help'));
+            .call(t.append('save.conflict.help'));
 
 
         // Download changes link
@@ -109,7 +109,7 @@ export function uiConflicts(context) {
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .html(t.html('save.conflict.download_changes'));
+            .call(t.append('save.conflict.download_changes'));
 
 
         bodyEnter
@@ -122,7 +122,7 @@ export function uiConflicts(context) {
             .attr('class', 'conflicts-done')
             .attr('opacity', 0)
             .style('display', 'none')
-            .html(t.html('save.conflict.done'));
+            .call(t.append('save.conflict.done'));
 
         var buttonsEnter = bodyEnter
             .append('div')
@@ -132,13 +132,13 @@ export function uiConflicts(context) {
             .append('button')
             .attr('disabled', _conflictList.length > 1)
             .attr('class', 'action conflicts-button col6')
-            .html(t.html('save.title'))
+            .call(t.append('save.title'))
             .on('click.try_again', tryAgain);
 
         buttonsEnter
             .append('button')
             .attr('class', 'secondary-action conflicts-button col6')
-            .html(t.html('confirm.cancel'))
+            .call(t.append('confirm.cancel'))
             .on('click.cancel', cancel);
     }
 
@@ -176,13 +176,13 @@ export function uiConflicts(context) {
         conflictEnter
             .append('h4')
             .attr('class', 'conflict-count')
-            .html(t.html('save.conflict.count', { num: index + 1, total: _conflictList.length }));
+            .call(t.append('save.conflict.count', { num: index + 1, total: _conflictList.length }));
 
         conflictEnter
             .append('a')
             .attr('class', 'conflict-description')
             .attr('href', '#')
-            .html(function(d) { return d.name; })
+            .text(function(d) { return d.name; })
             .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
                 zoomToEntity(d.id);
@@ -264,7 +264,7 @@ export function uiConflicts(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) { return d.text; });
+            .text(function(d) { return d.text; });
 
         // update
         choicesEnter

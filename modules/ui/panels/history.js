@@ -21,14 +21,14 @@ export function uiPanelHistory(context) {
         if (!userName) {
             selection
                 .append('span')
-                .html(t.html('info_panels.history.unknown'));
+                .call(t.append('info_panels.history.unknown'));
             return;
         }
 
         selection
             .append('span')
             .attr('class', 'user-name')
-            .html(userName);
+            .text(userName);
 
         var links = selection
             .append('div')
@@ -40,7 +40,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
-                .html('OSM');
+                .text('OSM');
         }
 
         links
@@ -49,7 +49,7 @@ export function uiPanelHistory(context) {
             .attr('href', 'https://hdyc.neis-one.org/?' + userName)
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .html('HDYC');
+            .text('HDYC');
     }
 
 
@@ -57,14 +57,14 @@ export function uiPanelHistory(context) {
         if (!changeset) {
             selection
                 .append('span')
-                .html(t.html('info_panels.history.unknown'));
+                .call(t.append('info_panels.history.unknown'));
             return;
         }
 
         selection
             .append('span')
             .attr('class', 'changeset-id')
-            .html(changeset);
+            .text(changeset);
 
         var links = selection
             .append('div')
@@ -76,7 +76,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'changeset-osm-link')
                 .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
-                .html('OSM');
+                .text('OSM');
         }
 
         links
@@ -84,14 +84,14 @@ export function uiPanelHistory(context) {
             .attr('class', 'changeset-osmcha-link')
             .attr('href', 'https://osmcha.org/changesets/' + changeset)
             .attr('target', '_blank')
-            .html('OSMCha');
+            .text('OSMCha');
 
         links
             .append('a')
             .attr('class', 'changeset-achavi-link')
             .attr('href', 'https://overpass-api.de/achavi/?changeset=' + changeset)
             .attr('target', '_blank')
-            .html('Achavi');
+            .text('Achavi');
     }
 
 
@@ -101,7 +101,7 @@ export function uiPanelHistory(context) {
 
         var selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
-            selected = [ t('note.note') + ' ' + selectedNoteID ];
+            selected = [ t.html('note.note') + ' ' + selectedNoteID ];
             note = osm.getNote(selectedNoteID);
         } else {                           // selected 1..n entities
             selected = context.selectedIDs()
@@ -115,10 +115,17 @@ export function uiPanelHistory(context) {
 
         selection.html('');
 
-        selection
-            .append('h4')
-            .attr('class', 'history-heading')
-            .html(singular || t.html('info_panels.selected', { n: selected.length }));
+        if (singular) {
+            selection
+                .append('h4')
+                .attr('class', 'history-heading')
+                .html(singular);
+        } else {
+            selection
+                .append('h4')
+                .attr('class', 'history-heading')
+                .call(t.append('info_panels.selected', { n: selected.length }));
+        }
 
         if (!singular) return;
 
@@ -134,7 +141,7 @@ export function uiPanelHistory(context) {
         if (!note || note.isNew()) {
             selection
                 .append('div')
-                .html(t.html('info_panels.history.note_no_history'));
+                .call(t.append('info_panels.history.note_no_history'));
             return;
         }
 
@@ -143,20 +150,20 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .html(t.html('info_panels.history.note_comments') + ':')
+            .call(t.append('info_panels.history.note_comments', { suffix: ':' }))
             .append('span')
-            .html(note.comments.length);
+            .text(note.comments.length);
 
         if (note.comments.length) {
             list
                 .append('li')
-                .html(t.html('info_panels.history.note_created_date') + ':')
+                .call(t.append('info_panels.history.note_created_date', { suffix: ':' }))
                 .append('span')
-                .html(displayTimestamp(note.comments[0].date));
+                .text(displayTimestamp(note.comments[0].date));
 
             list
                 .append('li')
-                .html(t.html('info_panels.history.note_created_user') + ':')
+                .call(t.append('info_panels.history.note_created_user', { suffix: ':' }))
                 .call(displayUser, note.comments[0].user);
         }
 
@@ -168,7 +175,7 @@ export function uiPanelHistory(context) {
                 .attr('href', osm.noteURL(note))
                 .call(svgIcon('#iD-icon-out-link', 'inline'))
                 .append('span')
-                .html(t.html('info_panels.history.note_link_text'));
+                .call(t.append('info_panels.history.note_link_text'));
         }
     }
 
@@ -177,7 +184,7 @@ export function uiPanelHistory(context) {
         if (!entity || entity.isNew()) {
             selection
                 .append('div')
-                .html(t.html('info_panels.history.no_history'));
+                .call(t.append('info_panels.history.no_history'));
             return;
         }
 
@@ -192,7 +199,7 @@ export function uiPanelHistory(context) {
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
                 .attr('title', t('info_panels.history.link_text'))
-                .html('OSM');
+                .text('OSM');
         }
         links
             .append('a')
@@ -200,31 +207,31 @@ export function uiPanelHistory(context) {
             .attr('href', 'https://pewu.github.io/osm-history/#/' + entity.type + '/' + entity.osmId())
             .attr('target', '_blank')
             .attr('tabindex', -1)
-            .html('PeWu');
+            .text('PeWu');
 
         var list = selection
             .append('ul');
 
         list
             .append('li')
-            .html(t.html('info_panels.history.version') + ':')
+            .call(t.append('info_panels.history.version', { suffix: ':' }))
             .append('span')
-            .html(entity.version);
+            .text(entity.version);
 
         list
             .append('li')
-            .html(t.html('info_panels.history.last_edit') + ':')
+            .call(t.append('info_panels.history.last_edit', { suffix: ':' }))
             .append('span')
-            .html(displayTimestamp(entity.timestamp));
+            .text(displayTimestamp(entity.timestamp));
 
         list
             .append('li')
-            .html(t.html('info_panels.history.edited_by') + ':')
+            .call(t.append('info_panels.history.edited_by', { suffix: ':' }))
             .call(displayUser, entity.user);
 
         list
             .append('li')
-            .html(t.html('info_panels.history.changeset') + ':')
+            .call(t.append('info_panels.history.changeset', { suffix: ':' }))
             .call(displayChangeset, entity.changeset);
     }
 

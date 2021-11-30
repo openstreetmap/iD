@@ -49,7 +49,7 @@ export function uiAccount(context) {
             logoutLink.append('a')
                 .attr('class', 'logout')
                 .attr('href', '#')
-                .html(t.html('logout'))
+                .call(t.append('logout'))
                 .on('click.logout', function(d3_event) {
                     d3_event.preventDefault();
                     osm.logout();
