@@ -96,6 +96,7 @@ export function uiSectionValidationStatus(context) {
                 var hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     selection.select('.box .details')
+                        .html('')
                         .call(t.append(
                             'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
@@ -104,6 +105,7 @@ export function uiSectionValidationStatus(context) {
                 }
             }
             selection.select('.box .details')
+                .html('')
                 .call(t.append('issues.no_issues.hidden_issues.none'));
         }
 
@@ -159,6 +161,7 @@ export function uiSectionValidationStatus(context) {
         }
 
         selection.select('.box .message')
+            .html('')
             .call(t.append('issues.no_issues.message.' + messageType));
 
     }
