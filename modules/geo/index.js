@@ -19,6 +19,7 @@ export { geoHasLineIntersections } from './geom.js';
 export { geoHasSelfIntersections } from './geom.js';
 export { geoRotate } from './geom.js';
 export { geoLineIntersection } from './geom.js';
+export { geoInfiniteLineIntersection } from './geom.js';
 export { geoPathHasIntersections } from './geom.js';
 export { geoPathIntersections } from './geom.js';
 export { geoPathLength } from './geom.js';
@@ -31,6 +32,7 @@ export { geoRawMercator } from './raw_mercator.js';
 
 export { geoVecAdd } from './vector.js';
 export { geoVecAngle } from './vector.js';
+export { geoVecAngleBetween } from './vector.js';
 export { geoVecCross } from './vector.js';
 export { geoVecDot } from './vector.js';
 export { geoVecEqual } from './vector.js';
