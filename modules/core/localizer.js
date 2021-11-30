@@ -349,6 +349,10 @@ export function coreLocalizer() {
     };
 
     // Returns the localized text wrapped in an HTML element encoding the locale info
+    /**
+     * @deprecated This method is considered deprecated. Instead, use the direct DOM manipulating
+     *             method `t.append`.
+     */
     localizer.t.html = function(stringId, replacements, locale) {
       // replacement string might be html unsafe, so we need to escape it except if it is explicitly marked as html code
       replacements = Object.assign({}, replacements);
