@@ -77,6 +77,14 @@ export function operationSplit(context, selectedIDs) {
         return t('operations.split.annotation.' + _geometry, { n: _ways.length });
     };
 
+    operation.icon = function() {
+        if (_waysAmount === 'multiple') {
+            return '#iD-operation-split-multiple';
+        } else {
+            return '#iD-operation-split';
+        }
+    }
+
 
     operation.id = 'split';
     operation.keys = [t('operations.split.key')];

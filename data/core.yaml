@@ -468,8 +468,8 @@ en:
             single_node: Divide this line into two at this point.
             multiple_node: Divide this line at these points.
           multiple:
-            single_node: Divide these lines at this point.
-            multiple_node: Divide these lines at these points.
+            single_node: "Divide all lines at this point. Tip: To limit this operation to a specific line, select both the line and point before performing the split."
+            multiple_node: "Divide all lines at these points. Tip: To limit this operation to a specific line, select the line as well as the points before performing the split."
         area:
           single:
             single_node: Divide the edge of this area into two at this point.
