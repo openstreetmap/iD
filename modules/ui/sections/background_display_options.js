@@ -101,6 +101,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
         containerEnter
             .append('a')
             .attr('class', 'display-option-resetlink')
+            .attr('role', 'button')
             .attr('href', '#')
             .html(t.html('background.reset_all'))
             .on('click', function(d3_event) {
