@@ -62,7 +62,7 @@ export function uiImproveOsmHeader() {
     headerEnter
       .append('div')
         .attr('class', 'qa-header-label')
-        .html(issueTitle);
+        .text(issueTitle);
   }
 
   improveOsmHeader.issue = function(val) {

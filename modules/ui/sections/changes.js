@@ -29,7 +29,7 @@ export function uiSectionChanges(context) {
         .label(function() {
             var history = context.history();
             var summary = history.difference().summary();
-            return t('inspector.title_count', { title: t.html('commit.changes'), count: summary.length });
+            return t.html('inspector.title_count', { title: { html: t.html('commit.changes') }, count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -79,7 +79,7 @@ export function uiSectionChanges(context) {
         buttons
             .append('strong')
             .attr('class', 'entity-type')
-            .html(function(d) {
+            .text(function(d) {
                 var matched = presetManager.match(d.entity, d.graph);
                 return (matched && matched.name()) || utilDisplayType(d.entity.id);
             });
@@ -87,7 +87,7 @@ export function uiSectionChanges(context) {
         buttons
             .append('span')
             .attr('class', 'entity-name')
-            .html(function(d) {
+            .text(function(d) {
                 var name = utilDisplayName(d.entity) || '',
                     string = '';
                 if (name !== '') {
@@ -132,7 +132,7 @@ export function uiSectionChanges(context) {
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .html(t.html('commit.download_changes'));
+            .call(t.append('commit.download_changes'));
 
 
         function mouseover(d) {

@@ -52,7 +52,7 @@ export function uiPanelMeasurement(context) {
         if (selectedNoteID && osm) {       // selected 1 note
 
             var note = osm.getNote(selectedNoteID);
-            heading = t('note.note') + ' ' + selectedNoteID;
+            heading = t.html('note.note') + ' ' + selectedNoteID;
             location = note.loc;
             geometry = 'note';
 
@@ -65,7 +65,7 @@ export function uiPanelMeasurement(context) {
             });
 
             heading = selected.length === 1 ? selected[0].id :
-                t('info_panels.selected', { n: selected.length });
+                t.html('info_panels.selected', { n: selected.length });
 
             if (selected.length) {
                 var extent = geoExtent();
@@ -129,80 +129,80 @@ export function uiPanelMeasurement(context) {
         if (geometry) {
             list
                 .append('li')
-                .html(t.html('info_panels.measurement.geometry') + ':')
+                .call(t.append('info_panels.measurement.geometry', { suffix: ':' }))
                 .append('span')
                 .html(
-                    closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
+                    closed ? t.html('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
                 );
         }
 
         if (totalNodeCount) {
             list
                 .append('li')
-                .html(t.html('info_panels.measurement.node_count') + ':')
+                .call(t.append('info_panels.measurement.node_count', { suffix: ':' }))
                 .append('span')
-                .html(totalNodeCount.toLocaleString(localeCode));
+                .text(totalNodeCount.toLocaleString(localeCode));
         }
 
         if (area) {
             list
                 .append('li')
-                .html(t.html('info_panels.measurement.area') + ':')
+                .call(t.append('info_panels.measurement.area', { suffix: ':' }))
                 .append('span')
-                .html(displayArea(area, _isImperial));
+                .text(displayArea(area, _isImperial));
         }
 
         if (length) {
             list
                 .append('li')
-                .html(t.html('info_panels.measurement.' + (closed ? 'perimeter' : 'length')) + ':')
+                .call(t.append('info_panels.measurement.' + (closed ? 'perimeter' : 'length'), { suffix: ':' }))
                 .append('span')
-                .html(displayLength(length, _isImperial));
+                .text(displayLength(length, _isImperial));
         }
 
         if (typeof distance === 'number') {
             list
                 .append('li')
-                .html(t.html('info_panels.measurement.distance') + ':')
+                .call(t.append('info_panels.measurement.distance', { suffix: ':' }))
                 .append('span')
-                .html(displayLength(distance, _isImperial));
+                .text(displayLength(distance, _isImperial));
         }
 
         if (location) {
             coordItem = list
                 .append('li')
-                .html(t.html('info_panels.measurement.location') + ':');
+                .call(t.append('info_panels.measurement.location', { suffix: ':' }));
             coordItem.append('span')
-                .html(dmsCoordinatePair(location));
+                .text(dmsCoordinatePair(location));
             coordItem.append('span')
-                .html(decimalCoordinatePair(location));
+                .text(decimalCoordinatePair(location));
         }
 
         if (centroid) {
             coordItem = list
                 .append('li')
-                .html(t.html('info_panels.measurement.centroid') + ':');
+                .call(t.append('info_panels.measurement.centroid', { suffix: ':' }));
             coordItem.append('span')
-                .html(dmsCoordinatePair(centroid));
+                .text(dmsCoordinatePair(centroid));
             coordItem.append('span')
-                .html(decimalCoordinatePair(centroid));
+                .text(decimalCoordinatePair(centroid));
         }
 
         if (center) {
             coordItem = list
                 .append('li')
-                .html(t.html('info_panels.measurement.center') + ':');
+                .call(t.append('info_panels.measurement.center', { suffix: ':' }));
             coordItem.append('span')
-                .html(dmsCoordinatePair(center));
+                .text(dmsCoordinatePair(center));
             coordItem.append('span')
-                .html(decimalCoordinatePair(center));
+                .text(decimalCoordinatePair(center));
         }
 
         if (length || area || typeof distance === 'number') {
             var toggle  = _isImperial ? 'imperial' : 'metric';
             selection
                 .append('a')
-                .html(t.html('info_panels.measurement.' + toggle))
+                .call(t.append('info_panels.measurement.' + toggle))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-units')
                 .on('click', function(d3_event) {

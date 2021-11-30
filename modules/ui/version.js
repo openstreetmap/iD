@@ -32,7 +32,7 @@ export function uiVersion(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD')
-            .html(currVersion);
+            .text(currVersion);
 
         // only show new version indicator to users that have used iD before
         if (isNewVersion && !isNewUser) {

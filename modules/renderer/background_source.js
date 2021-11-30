@@ -1,6 +1,7 @@
 import { geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { geometry as polygonArea } from '@mapbox/geojson-area';
 import { json as d3_json } from 'd3-fetch';
+import { escape } from 'lodash';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -69,19 +70,19 @@ export function rendererBackgroundSource(data) {
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: _name });
+        return t('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.name', { default: _name });
+        return t.html('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.description', { default: _description });
+        return t.html('imagery.' + id_safe + '.description', { default: escape(_description) });
     };
 
 
