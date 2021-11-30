@@ -475,7 +475,7 @@ export function utilEditDistance(a, b) {
 // If supported, will use the browser's language sensitive string comparison, see:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator
 export function utilSortString(locale) {
-    if ('Intl' in window && 'Collator' in Intl) {
+    if (typeof Intl === 'object' && 'Collator' in Intl) {
         return (new Intl.Collator(locale || 'en', {
             sensitivity: 'base',
             numeric: true
