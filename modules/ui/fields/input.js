@@ -182,11 +182,17 @@ export function uiFieldText(field, context) {
 
 
     function validIdentifierValueForLink() {
-        const value = utilGetSetValue(input).trim().split(';')[0];
+        const value = utilGetSetValue(input).trim();
 
-        if (field.type === 'url' && value) return value;
+        if (field.type === 'url' && value) {
+            try {
+                return (new URL(value)).href;
+            } catch (e) {
+                return null;
+            }
+        }
         if (field.type === 'identifier' && field.pattern) {
-            return value && value.match(new RegExp(field.pattern));
+            return value && value.match(new RegExp(field.pattern))[0];
         }
         return null;
     }
