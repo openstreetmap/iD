@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
+* Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the opertion to a single line ([#8818])
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
@@ -78,6 +79,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
 [#8813]: https://github.com/openstreetmap/iD/issues/8813
 [#8817]: https://github.com/openstreetmap/iD/pull/8817
+[#8818]: https://github.com/openstreetmap/iD/issues/8818
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
 
 # 2.20.2
