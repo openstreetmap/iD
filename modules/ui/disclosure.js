@@ -31,6 +31,7 @@ export function uiDisclosure(context, key, expandedDefault) {
         // enter
         var hideToggleEnter = hideToggle.enter()
             .append('a')
+            .attr('role', 'button')
             .attr('href', '#')
             .attr('class', 'hide-toggle hide-toggle-' + key)
             .call(svgIcon('', 'pre-text', 'hide-toggle-icon'));
