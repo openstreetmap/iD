@@ -361,6 +361,7 @@ export function uiPaneHelp(context) {
             .enter()
             .append('li')
             .append('a')
+            .attr('role', 'button')
             .attr('href', '#')
             .html(function(d) { return d.title; })
             .on('click', function(d3_event, d) {
