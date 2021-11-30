@@ -95,13 +95,15 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', function(d) {
                 return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
+            .attr('aria-selected', function(d) { return _tagView === d.id; })
             .attr('title', function(d) { return t('icons.' + d.id); })
             .on('click', function(d3_event, d) {
                 _tagView = d.id;
                 prefs('raw-tag-editor-view', d.id);
 
                 wrap.selectAll('.raw-tag-option')
-                    .classed('selected', function(datum) { return datum === d; });
+                    .classed('selected', function(datum) { return datum === d; })
+                    .attr('aria-selected', function(datum) { return datum === d; });
 
                 wrap.selectAll('.tag-text')
                     .classed('hide', (d.id !== 'text'))

@@ -47,6 +47,7 @@ export function uiDisclosure(context, key, expandedDefault) {
         hideToggle
             .on('click', toggle)
             .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`))
+            .attr('aria-expanded', _expanded)
             .classed('expanded', _expanded);
 
         hideToggle.selectAll('.hide-toggle-text')
@@ -85,6 +86,7 @@ export function uiDisclosure(context, key, expandedDefault) {
 
             hideToggle
                 .classed('expanded', _expanded)
+                .attr('aria-expanded', _expanded)
                 .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`));
 
             hideToggle.selectAll('.hide-toggle-icon')

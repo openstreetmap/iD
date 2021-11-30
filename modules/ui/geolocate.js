@@ -77,6 +77,7 @@ export function uiGeolocate(context) {
 
     function updateButtonState() {
         _button.classed('active', _layer.enabled());
+        _button.attr('aria-selected', _layer.enabled());
     }
 
     return function(selection) {
@@ -85,6 +86,7 @@ export function uiGeolocate(context) {
         _button = selection
             .append('button')
             .on('click', click)
+            .attr('aria-selected', false)
             .call(svgIcon('#iD-icon-geolocate', 'light'))
             .call(uiTooltip()
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
