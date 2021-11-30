@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
 * Fix a bug which made it impossible to switch to a custom TMS imagery layer after using a custom WMS source and vice versa ([#8057])
+* Fix a bug where the validator might show wrong tagging suggestions for a preset if another preset has a partial match ([#8828], thanks [@bhousel])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -71,6 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8800]: https://github.com/openstreetmap/iD/pull/8800
 [#8805]: https://github.com/openstreetmap/iD/issues/8805
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
+[#8828]: https://github.com/openstreetmap/iD/pull/8828
 
 # 2.20.2
 ##### 2021-Oct-28
