@@ -3191,12 +3191,12 @@ div.full-screen > button:focus {
     background: #e8ebff;
 }
 
-.layer-list li > div.stamp {
+.layer-list li > .stamp {
     padding: 5px;
     flex: 0 0 auto;
 }
 
-.layer-list li > div.stamp svg.icon {
+.layer-list li > .stamp svg.icon {
     height: 16px;
     width: 16px;
 }
@@ -3281,6 +3281,34 @@ div.full-screen > button:focus {
 }
 .map-data-pane .vectortile-container .vectortile-footer {
     padding-bottom: 10px;
+}
+
+.layer-list.layer-background-list li button.background-favorite-button {
+    background-color: inherit;
+}
+
+button.background-favorite-button .icon {
+    fill-opacity: 0;
+    stroke-width: 1;
+    stroke: #7092ff;
+    color: #7092ff;
+}
+
+.section-background-list-favs button.background-favorite-button .icon {
+    fill-opacity: inherit;
+}
+
+.background-pane .layer-list button.background-favorite-button {
+    border: 0;
+}
+
+.layer-list li .background-favorite-button {
+    display: none;
+}
+
+.layer-list li:hover .background-favorite-button,
+.section-background-list-favs .layer-list li .background-favorite-button {
+    display: block;
 }
 
 
@@ -3849,34 +3877,33 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 /* Background - Adjust borders to make it appear as a single list
 ----------------------------------------------------------------- */
 
-.map-pane.background-pane .section.background-list a.hide-toggle {
+.map-pane.background-pane .section-imagery-list {
     border: 1px solid #ccc;
-    border-top: none;
+    border-radius: 4px;
+}
+
+.map-pane.background-pane .section.background-list a.hide-toggle {
+    border-bottom: 1px solid #ccc;
     width: 100%;
     height: 30px;
     margin-bottom: 0;
     padding: 3px 3px 5px 9px;
 }
 
-.map-pane.background-pane .section.background-list a.hide-toggle + .disclosure-wrap > ul.layer-list {
-    border-top: none;
+.section-imagery-list .layer-list {
+    border: none;
+    border-bottom: 1px solid #ccc;
 }
 
 .section-imagery-list .layer-list > li {
     border-radius: 0;
 }
 
-.map-pane.background-pane .section.background-list:first-child a.hide-toggle {
-    border-top: 1px solid #ccc;
-    border-radius: 4px 4px 0 0;
-}
-
 .map-pane.background-pane .section.background-list:last-child ul.layer-list {
-    border-bottom: 1px solid #ccc;
-    border-radius: 0 0 4px 4px;
+    border-bottom: none;
 }
 
-.map-pane.background-pane .section.background-list:last-child ul.layer-list > li:last-child {
+.map-pane.background-pane .section.background-list:last-child ul.layer-list li:last-child {
     border-radius: 0 0 4px 4px;
 }
 

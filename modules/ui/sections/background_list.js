@@ -1,8 +1,7 @@
 import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { easeCubicInOut as d3_easeCubicInOut } from 'd3-ease';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
@@ -16,6 +15,7 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundList(context) {
 
     const categoryGroups = [
+        { id: 'favs', sort: 0, label: 'favs', disclosureExpanded: true },
         { id: 'photo', sort: 1, label: 'photo', disclosureExpanded: true },
         { id: 'map', sort: 3, label: 'map', disclosureExpanded: true },
         { id: 'qa', sort: 5, label: 'qa' },
@@ -41,9 +41,12 @@ export function uiSectionBackgroundList(context) {
         'mapbox_locator_overlay': categoryGroups.builtin,
         'osm-gps': categoryGroups.builtin
     };
+    const _favouriteLayerIdMappings = !prefs('background-favorites') ? {} :
+        JSON.parse(prefs('background-favorites')).reduce((acc, cur) => { acc[cur] = categoryGroups.favs; return acc; }, {});
 
     function categoryMapping(layer) {
-        return _layerIdMappings[layer && layer.id] ||
+        return _favouriteLayerIdMappings[layer && layer.id] ||
+               _layerIdMappings[layer && layer.id] ||
                _eliCategoryMappings[layer && layer.category] ||
                categoryGroups.photo; // default = photo
     }
@@ -160,7 +163,7 @@ export function uiSectionBackgroundList(context) {
             // We have to be a bit inefficient about reordering the list since
             // arrow key navigation of radio values likes to work in the order
             // they were added, not the display document order.
-            .data(sources, function(d, i) { return d.id + '---' + i; });
+            .data(sources, function(d, i) { return d.id + '---' + categoryMapping(d).sort + '---' + i; });
 
         layerLinks.exit()
             .remove();
@@ -188,6 +191,36 @@ export function uiSectionBackgroundList(context) {
             .style('background-image', d => showIcons && d.icon !== undefined ? 'url(' + d.icon + ')' : undefined)
             .classed('imagery-show-icons', showIcons)
             .html(function(d) { return d.label(); });
+
+        enter
+            .append('button')
+            .attr('class', 'stamp background-favorite-button')
+            .classed('active', d => categoryMapping(d).id === 'favs')
+            .on('click', (_, d) => {
+                var group = categoryMapping(d);
+                if (group.id === 'favs') {
+                    delete _favouriteLayerIdMappings[d.id];
+                } else {
+                    _favouriteLayerIdMappings[d.id] = categoryGroups.favs;
+                }
+                prefs('background-favorites', JSON.stringify(Object.keys(_favouriteLayerIdMappings)));
+                _sources = updateSources();
+                reRender();
+                d3_selectAll('.layer-background-list li').filter(item => item === d)
+                    .transition()
+                    .duration(300)
+                    .ease(d3_easeCubicInOut)
+                    .style('background-color', '#ccc')
+                    .transition()
+                    .duration(300)
+                    .ease(d3_easeCubicInOut)
+                    .style('background-color', null);
+            })
+            .call(svgIcon('#maki-heart-11'))
+            .call(uiTooltip()
+                .title(t.html('background.add_remove_favorite'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            );
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
@@ -287,38 +320,27 @@ export function uiSectionBackgroundList(context) {
         return groupCounts;
     }
 
+    function reRender() {
+        var groupCounts = getGroupCounts();
+        sections.forEach(section => {
+            var count = groupCounts[section._categoryGroup.id];
+            section.shouldDisplay(count > 0);
+            if (section._categoryGroup.disclosure !== false) {
+                (section.disclosure() || section).label(sectionLabelHtml(section._categoryGroup, count));
+            }
+            section.reRender();
+        });
+    }
 
     context.background()
-        .on('change.background_list', function() {
-            // update headings
-            var groupCounts = getGroupCounts();
-            sections.forEach(section => {
-                var count = groupCounts[section._categoryGroup.id];
-                section.shouldDisplay(count > 0);
-                if (section._categoryGroup.disclosure !== false) {
-                    (section.disclosure() || section).label(sectionLabelHtml(section._categoryGroup, count));
-                }
-            });
-            // update content
-            Object.keys(_backgroundLists)
-                .map(groupId => _backgroundLists[groupId])
-                .map(backgroundList => backgroundList.call(updateLayerSelections));
-        });
+        .on('change.background_list', reRender);
 
     context.map()
         .on('move.background_list',
             _debounce(() => window.requestIdleCallback(() => {
                 // layers in-view may have changed due to map move
                 _sources = updateSources();
-                var groupCounts = getGroupCounts();
-                sections.forEach(section => {
-                    var count = groupCounts[section._categoryGroup.id];
-                    section.shouldDisplay(count > 0);
-                    if (section._categoryGroup.disclosure !== false) {
-                        (section.disclosure() || section).label(sectionLabelHtml(section._categoryGroup, count));
-                    }
-                    section.reRender();
-                });
+                reRender();
             }), 1000)
         );
 
