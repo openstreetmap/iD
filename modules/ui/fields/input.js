@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
+import _debounce from 'lodash-es/debounce';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -21,6 +22,7 @@ export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
     var outlinkButton = d3_select(null);
+    var wrap = d3_select(null);
     var _entityIDs = [];
     var _tags;
     var _phoneFormats = {};
@@ -62,7 +64,7 @@ export function uiFieldText(field, context) {
         calcLocked();
         var isLocked = field.locked();
 
-        var wrap = selection.selectAll('.form-field-input-wrap')
+        wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
         wrap = wrap.enter()
@@ -167,7 +169,63 @@ export function uiFieldText(field, context) {
                     if (value) window.open(value, '_blank');
                 })
                 .merge(outlinkButton);
+        } else if (field.key.split(':').includes('colour')) {
+            input.attr('type', 'text');
+
+            updateColourPreview();
         }
+    }
+
+    function isColourValid(colour) {
+        if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
+            // OSM only supports hex or named colors
+            return false;
+        } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
+            // see https://stackoverflow.com/a/68217760/1627467
+            return false;
+        }
+        return true;
+    }
+    function updateColourPreview() {
+        wrap.selectAll('.colour-preview')
+            .remove();
+
+        const colour = utilGetSetValue(input);
+
+        if (!isColourValid(colour) && colour !== '') return;
+
+        var colourSelector = wrap.selectAll('.colour-selector')
+            .data([0]);
+        outlinkButton = wrap.selectAll('.colour-preview')
+            .data([colour]);
+
+        colourSelector
+            .enter()
+            .append('input')
+            .attr('type', 'color')
+            .attr('class', 'form-field-button colour-selector')
+            .attr('value', colour)
+            .on('input', _debounce(function(d3_event) {
+                d3_event.preventDefault();
+                var colour = this.value;
+                if (!isColourValid(colour)) return;
+                utilGetSetValue(input, this.value);
+                change()();
+                updateColourPreview();
+            }, 100));
+
+        outlinkButton = outlinkButton
+            .enter()
+            .append('div')
+            .attr('class', 'form-field-button colour-preview')
+            .append('div')
+            .style('background-color', d => d)
+            .attr('class', 'colour-box');
+        if (colour === '') outlinkButton = outlinkButton
+            .call(svgIcon('#iD-icon-edit'));
+        outlinkButton
+            .on('click', () => wrap.select('.colour-selector').node().click())
+            .merge(outlinkButton);
     }
 
 
@@ -252,6 +310,8 @@ export function uiFieldText(field, context) {
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
+
+        if (field.key.split(':').includes('colour')) updateColourPreview();
 
         if (outlinkButton && !outlinkButton.empty()) {
             var disabled = !validIdentifierValueForLink();
