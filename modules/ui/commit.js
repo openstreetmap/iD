@@ -220,7 +220,7 @@ export function uiCommit(context) {
 
         headerTitle
             .append('div')
-            .append('h3')
+            .append('h2')
             .html(t.html('commit.title'));
 
         headerTitle

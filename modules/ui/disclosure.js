@@ -30,6 +30,7 @@ export function uiDisclosure(context, key, expandedDefault) {
 
         // enter
         var hideToggleEnter = hideToggle.enter()
+            .append('h3')
             .append('a')
             .attr('role', 'button')
             .attr('href', '#')

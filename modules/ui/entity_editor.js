@@ -58,13 +58,13 @@ export function uiEntityEditor(context) {
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
         headerEnter
-            .append('h3');
+            .append('h2');
 
         // Update
         header = header
             .merge(headerEnter);
 
-        header.selectAll('h3')
+        header.selectAll('h2')
             .html(_entityIDs.length === 1 ? t.html('inspector.edit') : t.html('inspector.edit_features'));
 
         header.selectAll('.preset-reset')

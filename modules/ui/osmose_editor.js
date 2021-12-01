@@ -35,7 +35,7 @@ export function uiOsmoseEditor(context) {
         .call(svgIcon('#iD-icon-close'));
 
     headerEnter
-      .append('h3')
+      .append('h2')
         .html(t.html('QA.osmose.title'));
 
     let body = selection.selectAll('.body')

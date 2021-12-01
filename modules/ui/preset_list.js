@@ -34,7 +34,7 @@ export function uiPresetList(context) {
             .attr('class', 'header fillL');
 
         var message = messagewrap
-            .append('h3')
+            .append('h2')
             .html(t.html('inspector.choose'));
 
         var direction = (localizer.textDirection() === 'rtl') ? 'backward' : 'forward';

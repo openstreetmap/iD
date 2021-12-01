@@ -36,7 +36,7 @@ export function uiImproveOsmEditor(context) {
         .call(svgIcon('#iD-icon-close'));
 
     headerEnter
-      .append('h3')
+      .append('h2')
         .html(t.html('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')

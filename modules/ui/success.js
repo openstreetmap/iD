@@ -81,7 +81,7 @@ export function uiSuccess(context) {
       .attr('class', 'header fillL');
 
     header
-      .append('h3')
+      .append('h2')
       .html(t.html('success.just_edited'));
 
     header

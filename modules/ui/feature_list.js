@@ -33,7 +33,7 @@ export function uiFeatureList(context) {
             .attr('class', 'header fillL');
 
         header
-            .append('h3')
+            .append('h2')
             .html(t.html('inspector.feature_list'));
 
         var searchWrap = selection

@@ -81,6 +81,13 @@ h2 {
     font-weight: bold;
     margin-bottom: 20px;
 }
+.header h2,
+.modal-section h2 {
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
 h3:last-child,
 h2:last-child,

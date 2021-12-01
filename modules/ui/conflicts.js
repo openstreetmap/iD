@@ -65,7 +65,7 @@ export function uiConflicts(context) {
             .call(svgIcon('#iD-icon-close'));
 
         headerEnter
-            .append('h3')
+            .append('h2')
             .html(t.html('save.conflict.header'));
 
         var bodyEnter = selection.selectAll('.body')
