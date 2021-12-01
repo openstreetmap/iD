@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
+import _debounce from 'lodash-es/debounce';
 import * as countryCoder from '@ideditor/country-coder';
 
 import { presetManager } from '../../presets';
@@ -168,34 +169,62 @@ export function uiFieldText(field, context) {
                     if (value) window.open(value, '_blank');
                 })
                 .merge(outlinkButton);
-        } else if (field.key.includes('colour')) {
+        } else if (field.key.split(':').includes('colour')) {
             input.attr('type', 'text');
 
             updateColourPreview();
         }
     }
 
+    function isColourValid(colour) {
+        if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
+            // OSM only supports hex or named colors
+            return false;
+        } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
+            // see https://stackoverflow.com/a/68217760/1627467
+            return false;
+        }
+        return true;
+    }
     function updateColourPreview() {
-        wrap.selectAll('.foreign-id-permalink')
+        wrap.selectAll('.colour-preview')
             .remove();
 
         const colour = utilGetSetValue(input);
 
-        // see https://github.com/openstreetmap/openstreetmap-website/blob/08e2a0/app/helpers/browse_tags_helper.rb#L173
-        // we use the same logic to validate colours, except we don't need to check whether named colours
-        // are valid, since the browser does this natively when we set the background-colour
-        const isColourValid = !!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/);
-        if (!isColourValid) return;
+        if (!isColourValid(colour) && colour !== '') return;
 
-        outlinkButton = wrap.selectAll('.foreign-id-permalink')
-            .data([colour], d => d);
+        var colourSelector = wrap.selectAll('.colour-selector')
+            .data([0]);
+        outlinkButton = wrap.selectAll('.colour-preview')
+            .data([colour]);
 
-        outlinkButton
+        colourSelector
+            .enter()
+            .append('input')
+            .attr('type', 'color')
+            .attr('class', 'form-field-button colour-selector')
+            .attr('value', colour)
+            .on('input', _debounce(function(d3_event) {
+                d3_event.preventDefault();
+                var colour = this.value;
+                if (!isColourValid(colour)) return;
+                utilGetSetValue(input, this.value);
+                change()();
+                updateColourPreview();
+            }, 100));
+
+        outlinkButton = outlinkButton
             .enter()
             .append('div')
-            .attr('class', 'form-field-button foreign-id-permalink colour-preview')
+            .attr('class', 'form-field-button colour-preview')
             .append('div')
             .style('background-color', d => d)
+            .attr('class', 'colour-box');
+        if (colour === '') outlinkButton = outlinkButton
+            .call(svgIcon('#iD-icon-edit'));
+        outlinkButton
+            .on('click', () => wrap.select('.colour-selector').node().click())
             .merge(outlinkButton);
     }
 
@@ -276,7 +305,7 @@ export function uiFieldText(field, context) {
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 
-        if (field.key.includes('colour')) updateColourPreview();
+        if (field.key.split(':').includes('colour')) updateColourPreview();
 
         if (outlinkButton && !outlinkButton.empty()) {
             var disabled = !validIdentifierValueForLink();
