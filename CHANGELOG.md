@@ -52,7 +52,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
   * New more focused sorting of background layers: by "best" flag, then by rough layer extent size, then by vintage, then alphabetically – locally relevant and recent layers are now on the top!
   * Show many previously excluded background layers: mostly quality assurance layers and OSM-based maps
   * Display the imagery layer icons, if present and the third party icons are enabled in the preferences
+* Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
 #### :scissors: Operations
+* Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the operation to a single line ([#8818])
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
@@ -75,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8057]: https://github.com/openstreetmap/iD/issues/8057
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
+[#8782]: https://github.com/openstreetmap/iD/pull/8782
 [#8792]: https://github.com/openstreetmap/iD/pull/8792
 [#8796]: https://github.com/openstreetmap/iD/issues/8796
 [#8799]: https://github.com/openstreetmap/iD/issues/8799
@@ -83,9 +86,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
 [#8813]: https://github.com/openstreetmap/iD/issues/8813
 [#8817]: https://github.com/openstreetmap/iD/pull/8817
+[#8818]: https://github.com/openstreetmap/iD/issues/8818
 [#8826]: https://github.com/openstreetmap/iD/pull/8826
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
 [ELI#733]: https://github.com/osmlab/editor-layer-index/pull/733
+[@k-yle]: https://github.com/k-yle
 
 # 2.20.2
 ##### 2021-Oct-28

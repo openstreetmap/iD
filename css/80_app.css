@@ -189,7 +189,8 @@ input[type=number],
 input[type=url],
 input[type=tel],
 input[type=email],
-input[type=date] {
+input[type=date],
+input[type=color] {
     /* need this since line-height interpretation may vary by font or browser */
     height: 2.585em;
 }
@@ -1505,6 +1506,34 @@ a.hide-toggle {
     fill: #333;
     opacity: .5;
 }
+.form-field-button.colour-preview {
+    border-radius: 0 0 4px 0;
+}
+.form-field-button.colour-preview > div.colour-box {
+    border: 3px solid #fff;
+    height: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+    padding: 1px 0 0 1px;
+}
+.inspector-hover .form-field-button.colour-preview > div.colour-box {
+    border-color: #ececec;
+}
+.form-field-button.colour-preview:active > div.colour-box,
+.form-field-button.colour-preview:focus > div.colour-box {
+    border-color: #f1f1f1;
+}
+@media (hover: hover) {
+    .form-field-button.colour-preview:hover > div.colour-box {
+        border-color: #f1f1f1;
+    }
+}
+.form-field-button.colour-selector {
+    visibility: hidden;
+    position: absolute;
+}
 
 
 /* round corners of first/last child elements */
@@ -1703,12 +1732,13 @@ a.hide-toggle {
 
 /* Field - Text / Numeric
 ------------------------------------------------------- */
-.form-field-input-text > input:only-of-type,
+.form-field-input-text > input:only-child,
 .form-field-input-tel > input:only-of-type,
 .form-field-input-email > input:only-of-type,
 .form-field-input-url > input:only-child {
     border-radius: 0 0 4px 4px;
 }
+.form-field-input-text > input:not(:only-child),
 .form-field-input-url > input:not(:only-child) {
     border-radius: 0 0 0 4px;
 }
