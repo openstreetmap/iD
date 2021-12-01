@@ -808,6 +808,10 @@ en:
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    next_background:
+      key: '.'
+    previous_background:
+      key: ','
   map_data:
     title: Map Data
     description: Map Data
@@ -2309,7 +2313,9 @@ en:
       display_options:
         title: "Display options"
         background: "Toggle background imagery pane"
-        background_switch: "Switch back to last background"
+        background_switch: "Switch back to last background"      
+        background_previous: "Switch to previous background in list"
+        background_next: "Switch to next background in list"
         map_data: "Toggle map data pane"
         issues: "Toggle validation issues pane"
         preferences: "Toggle user preferences pane"

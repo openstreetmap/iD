@@ -16,33 +16,35 @@ import { uiSection } from '../section';
 export function uiSectionBackgroundList(context) {
 
     const categoryGroups = [
-        { id: 'photo', label: 'photo', disclosureExpanded: true },
-        { id: 'map', label: 'map', disclosureExpanded: true },
-        { id: 'qa', label: 'qa' },
-        { id: 'osm', label: 'osm' },
-        { id: 'other', label: 'other' },
-        { id: 'builtin', disclosure: false }
+        { id: 'photo', sort: 1, label: 'photo', disclosureExpanded: true },
+        { id: 'map', sort: 3, label: 'map', disclosureExpanded: true },
+        { id: 'qa', sort: 5, label: 'qa' },
+        { id: 'osm', sort: 6, label: 'osm' },
+        { id: 'other', sort: 8, label: 'other' },
+        { id: 'builtin', sort: 9, disclosure: false }
     ].reduce((acc, cur) => { acc[cur.id] = cur; return acc; }, {});
 
+    const _eliCategoryMappings = {
+        'photo': categoryGroups.photo,
+        'historicphoto': categoryGroups.photo,
+        'map': categoryGroups.map,
+        'historicmap': categoryGroups.map,
+        'elevation': categoryGroups.map,
+        'osmbasedmap': categoryGroups.osm,
+        'qa': categoryGroups.qa,
+        'other': categoryGroups.other
+    };
+
+    const _layerIdMappings = {
+        'none': categoryGroups.builtin,
+        'custom': categoryGroups.builtin,
+        'mapbox_locator_overlay': categoryGroups.builtin,
+        'osm-gps': categoryGroups.builtin
+    };
+
     function categoryMapping(layer) {
-        const eliCategoryMappings = {
-            'photo': categoryGroups.photo,
-            'historicphoto': categoryGroups.photo,
-            'map': categoryGroups.map,
-            'historicmap': categoryGroups.map,
-            'elevation': categoryGroups.map,
-            'osmbasedmap': categoryGroups.osm,
-            'qa': categoryGroups.qa,
-            'other': categoryGroups.other
-        };
-        const layerIdMappings = {
-            'none': categoryGroups.builtin,
-            'custom': categoryGroups.builtin,
-            'mapbox_locator_overlay': categoryGroups.builtin,
-            'osm-gps': categoryGroups.builtin
-        };
-        return layerIdMappings[layer && layer.id] ||
-               eliCategoryMappings[layer && layer.category] ||
+        return _layerIdMappings[layer && layer.id] ||
+               _eliCategoryMappings[layer && layer.category] ||
                categoryGroups.photo; // default = photo
     }
 
@@ -57,21 +59,24 @@ export function uiSectionBackgroundList(context) {
 
     var sections = (function() {
         var groupCounts = getGroupCounts();
-        return Object.keys(categoryGroups).map(groupId => categoryGroups[groupId]).map(group => {
-            var section = uiSection('background-list-' + group.id, context)
-                .classes('background-list');
-            section._categoryGroup = group;
-            if (group.disclosure !== false) {
-                return section
-                    .label(sectionLabelHtml(group, groupCounts[group.id]))
-                    .disclosureContent(selection => renderContent(selection, group))
-                    .disclosureExpanded(group.disclosureExpanded
-                        || categoryMapping(context.background().baseLayerSource()).id === group.id
-                        || context.background().overlayLayerSources().map(categoryMapping).some(overlayGroup => overlayGroup.id === group.id));
-            } else {
-                return section.content(selection => renderContent(selection, group));
-            }
-        });
+        return Object.keys(categoryGroups)
+            .map(groupId => categoryGroups[groupId])
+            .sort((a,b) => d3_ascending(a.sort, b.sort))
+            .map(group => {
+                var section = uiSection('background-list-' + group.id, context)
+                    .classes('background-list');
+                section._categoryGroup = group;
+                if (group.disclosure !== false) {
+                    return group.section = section
+                        .label(sectionLabelHtml(group, groupCounts[group.id]))
+                        .disclosureContent(selection => renderContent(selection, group))
+                        .disclosureExpanded(group.disclosureExpanded
+                            || categoryMapping(context.background().baseLayerSource()).id === group.id
+                            || context.background().overlayLayerSources().map(categoryMapping).some(overlayGroup => overlayGroup.id === group.id));
+                } else {
+                    return group.section = section.content(selection => renderContent(selection, group));
+                }
+            });
     })();
 
     var section = uiSection('imagery-list', context).content(selection =>
@@ -136,19 +141,20 @@ export function uiSectionBackgroundList(context) {
     function updateSources() {
         return context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
-            .filter(source => !source.isHidden());
-    }
-
-    function drawListItems(layerList, change, filter) {
-        var sources = _sources
-            .filter(filter)
+            .filter(source => !source.isHidden())
             .sort(function(a, b) {
-                return d3_descending(a.best() ? 1 : 0, b.best() ? 1 : 0) ||
+                return d3_ascending(categoryMapping(a).sort, categoryMapping(b).sort) ||
+                       d3_descending(a.best() ? 1 : 0, b.best() ? 1 : 0) ||
                        d3_ascending(a.overlay ? 1 : 0, b.overlay ? 1 : 0) ||
                        d3_ascending(Math.floor(Math.log(Math.abs(a.area()))/3), Math.floor(Math.log(Math.abs(b.area()))/3)) ||
                        d3_descending(a.endDate || a.startDate, b.endDate || b.startDate) ||
                        utilSortString(localizer.localeCode()) || 0;
             });
+    }
+
+    function drawListItems(layerList, change, filter) {
+        var sources = _sources
+            .filter(filter);
 
         var layerLinks = layerList.selectAll('li')
             // We have to be a bit inefficient about reordering the list since
@@ -315,6 +321,29 @@ export function uiSectionBackgroundList(context) {
                 });
             }), 1000)
         );
+
+    function chooseBackgroundAtOffset(offset) {
+        const backgrounds = _sources.filter(d => {
+            var group = categoryMapping(d);
+            return !d.overlay &&
+                d.id !== 'custom' &&
+                (group.disclosure === false || group.section.disclosure().expanded())
+        });
+        const currentBackground = context.background().baseLayerSource();
+        const foundIndex = backgrounds.indexOf(currentBackground);
+        if (foundIndex === -1) {
+            // Can't find the current background, so just do nothing
+            return;
+        }
+    
+        let nextBackgroundIndex = (foundIndex + offset + backgrounds.length) % backgrounds.length;
+        let nextBackground = backgrounds[nextBackgroundIndex];
+        chooseBackground(nextBackground);
+    }
+
+    context.keybinding()
+        .on(t('background.next_background.key'), () => chooseBackgroundAtOffset(1))
+        .on(t('background.previous_background.key'), () => chooseBackgroundAtOffset(-1));
 
     return section;
 }
