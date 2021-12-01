@@ -52,6 +52,11 @@ export function operationCurverize(selectedIDs, context) {
                     return true;
                 }
             }
+        } else if (selectedIDs.length === 1 && entities[0].type === 'way') {
+            var way = entities[0];
+            if (way.nodes && way.nodes.length >= 4) {
+                return true;
+            }
         }
 
 

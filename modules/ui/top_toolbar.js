@@ -25,7 +25,6 @@ import { uiToolPowerSupport } from './tools/power_support';
 
 export function uiTopToolbar(context) {
 
-    console.log('uiTopToolbar');
     var circularize = uiToolOperation(context, operationCircularize),
         follow = uiToolOperation(context, operationFollow),
         curverize = uiToolOperation(context, operationCurverize),
@@ -172,7 +171,7 @@ export function uiTopToolbar(context) {
         tools = tools.filter(function(tool) {
             return !tool.allowed || tool.allowed();
         });
-        console.log('tools!!!');
+
         return tools;
     }
 

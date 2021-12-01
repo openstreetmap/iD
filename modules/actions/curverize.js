@@ -6,9 +6,13 @@ export function actionCurverize(selectedIds, projection) {
 
     var action = function (graph) {
 
+        console.log('graph before', graph.entities);
+
         const entities = selectedIds.map(function (selectedID) {
             return graph.entity(selectedID);
         });
+
+        console.log('entities', entities);
 
         // get the way and its last node to curverize:
         let way = null;
@@ -20,8 +24,13 @@ export function actionCurverize(selectedIds, projection) {
             const nodeParentWays = graph.parentWays(entities[0]);
             way = nodeParentWays[0];
             lastNode = entities[0];
+        } else if (selectedIds.length === 1 && entities[0].type === 'way') {
+            way = entities[0];
+            lastNode = graph.entity(entities[0].nodes[entities[0].nodes.length - 1]);
         }
         const lastNodeIdx = way.nodes.indexOf(lastNode.id);
+
+        console.log('lastNodeIdx', lastNodeIdx);
 
         // get four last nodes of way (the nodes to use for the curve):
         let lastFourNodesIds = [];
@@ -33,6 +42,8 @@ export function actionCurverize(selectedIds, projection) {
         } else if (lastNodeIdx === way.nodes.length - 1) {
             lastFourNodesIds = [way.nodes[way.nodes.length - 4], way.nodes[way.nodes.length - 3], way.nodes[way.nodes.length - 2], way.nodes[way.nodes.length - 1]];
             lastFourNodes = [graph.entity(way.nodes[way.nodes.length - 4]), graph.entity(way.nodes[way.nodes.length - 3]), graph.entity(way.nodes[way.nodes.length - 2]), graph.entity(way.nodes[way.nodes.length - 1])];
+            lastFourNodesIds = lastFourNodesIds.reverse();
+            lastFourNodes = lastFourNodes.reverse();
             direction = 'backward';
         }
         const lastFourPoints = lastFourNodes.map(function(n) { return projection(n.loc); });
@@ -114,7 +125,7 @@ export function actionCurverize(selectedIds, projection) {
         const arcAngleDeg = arcAngleRad * 180.0 / Math.PI;
         console.log('arcAngle', arcAngleRad, arcAngleDeg);
 
-        const numberOfSegments = Math.max(2, Math.ceil(arcAngleDeg / 10.0));
+        const numberOfSegments = Math.max(2, Math.ceil(arcAngleDeg / 5.0));
 
         const radiusNodes = [];
 
@@ -125,12 +136,6 @@ export function actionCurverize(selectedIds, projection) {
             radiusNodes.push(osmNode({ loc: projection.invert(arcPoint) }));
         }
         console.log('radiusNodes', radiusNodes);
-        /*const radiusNodes = [
-            osmNode({ loc: projection.invert(radiusLineStart[0]) }),
-            osmNode({ loc: projection.invert(radiusLineStart[1]) }),
-            osmNode({ loc: projection.invert(radiusLineEnd[0]) }),
-            osmNode({ loc: projection.invert(radiusLineEnd[1]) })
-        ];*/
         for (let i = 0; i < radiusNodes.length; i++) {
             graph = graph.replace(radiusNodes[i]);
         }
@@ -138,142 +143,20 @@ export function actionCurverize(selectedIds, projection) {
         console.log('graph', graph);
 
         const radiusNodesIds = radiusNodes.map(function(node) { return node.id });
+        const wayNodes = [...(way.nodes)];
         console.log('radiusNodesIds', radiusNodesIds);
         if (direction === 'forward') {
-            way.nodes.splice(2, 0, ...radiusNodesIds);
+            wayNodes.splice(2, 0, ...(radiusNodesIds.reverse()));
             console.log('way forward', way);
         } else if (direction === 'backward') {
-            way.nodes.splice(way.nodes.length - 3, 0, ...(radiusNodesIds.reverse()));
+            wayNodes.splice(wayNodes.length - 2, 0, ...(radiusNodesIds.reverse()));
             console.log('way backward', way);
         }
+        way = way.update({nodes: wayNodes});
         graph = graph.replace(way);
 
-        /*const radiusWays = [
-            osmWay({nodes: radiusNodes})
-        ];
-        for (let i = 0; i < radiusWays.length; i++) {
-            graph = graph.replace(radiusWays[i]);
-        }*/
+        console.log('end curverize');
 
-
-
-        /*const tangent1LineNode1 = osmNode({ loc: projection.invert(tangent1Line[0]) });
-        const tangent1LineNode2 = osmNode({ loc: projection.invert(tangent1Line[1]) });
-        const tangent2LineNode1 = osmNode({ loc: projection.invert(tangent2Line[0]) });
-        const tangent2LineNode2 = osmNode({ loc: projection.invert(tangent2Line[1]) });
-       
-        graph = graph.replace(tangent1LineNode1);
-        graph = graph.replace(tangent1LineNode2);
-        graph = graph.replace(tangent2LineNode1);
-        graph = graph.replace(tangent2LineNode2);
-
-        const tangentLine1Way = osmWay({nodes: [tangent1LineNode1.id, tangent1LineNode2.id]});
-        const tangentLine2Way = osmWay({nodes: [tangent2LineNode1.id, tangent2LineNode2.id]});
-
-        graph = graph.replace(tangentLine1Way);
-        graph = graph.replace(tangentLine2Way);*/
-
-        /*const tangent1MinifiedLineNode1 = osmNode({ loc: projection.invert(tangent1MinifiedLine[0]) });
-        const tangent1MinifiedLineNode2 = osmNode({ loc: projection.invert(tangent1MinifiedLine[1]) });
-        const tangent2MinifiedLineNode1 = osmNode({ loc: projection.invert(tangent2MinifiedLine[0]) });
-        const tangent2MinifiedLineNode2 = osmNode({ loc: projection.invert(tangent2MinifiedLine[1]) });
-
-        console.log('tangent1MinifiedLineNode1', tangent1MinifiedLineNode1);
-        console.log('tangent1MinifiedLineNode2', tangent1MinifiedLineNode2);
-        console.log('tangent2MinifiedLineNode1', tangent2MinifiedLineNode1);
-        console.log('tangent2MinifiedLineNode2', tangent2MinifiedLineNode2);
-
-        graph = graph.replace(tangent1MinifiedLineNode1);
-        graph = graph.replace(tangent1MinifiedLineNode2);
-        graph = graph.replace(tangent2MinifiedLineNode1);
-        graph = graph.replace(tangent2MinifiedLineNode2);
-
-        const tangent1MinifiedLineWay = osmWay({nodes: [tangent1MinifiedLineNode1.id, tangent1MinifiedLineNode2.id]});
-        const tangent2MinifiedLineWay = osmWay({nodes: [tangent2MinifiedLineNode1.id, tangent2MinifiedLineNode2.id]});
-        console.log('tangent1MinifiedLineWay', tangent1MinifiedLineWay);
-        console.log('tangent2MinifiedLineWay', tangent2MinifiedLineWay);
-
-        graph = graph.replace(tangent1MinifiedLineWay);
-        graph = graph.replace(tangent2MinifiedLineWay);*/
-
-
-
-
-        /*const tangent1PerpendicularMinifiedLineNode1 = osmNode({ loc: projection.invert(tangent1PerpendicularMinifiedLine[0]) });
-        const tangent1PerpendicularMinifiedLineNode2 = osmNode({ loc: projection.invert(tangent1PerpendicularMinifiedLine[1]) });
-        const tangent2PerpendicularMinifiedLineNode1 = osmNode({ loc: projection.invert(tangent2PerpendicularMinifiedLine[0]) });
-        const tangent2PerpendicularMinifiedLineNode2 = osmNode({ loc: projection.invert(tangent2PerpendicularMinifiedLine[1]) });
-
-        console.log('tangent1PerpendicularMinifiedLineNode1', tangent1PerpendicularMinifiedLineNode1);
-        console.log('tangent1PerpendicularMinifiedLineNode2', tangent1PerpendicularMinifiedLineNode2);
-        console.log('tangent2PerpendicularMinifiedLineNode1', tangent2PerpendicularMinifiedLineNode1);
-        console.log('tangent2PerpendicularMinifiedLineNode2', tangent2PerpendicularMinifiedLineNode2);
-
-        graph = graph.replace(tangent1PerpendicularMinifiedLineNode1);
-        graph = graph.replace(tangent1PerpendicularMinifiedLineNode2);
-        graph = graph.replace(tangent2PerpendicularMinifiedLineNode1);
-        graph = graph.replace(tangent2PerpendicularMinifiedLineNode2);
-
-        const tangent1PerpendicularMinifiedLineWay = osmWay({nodes: [tangent1PerpendicularMinifiedLineNode1.id, tangent1PerpendicularMinifiedLineNode2.id]});
-        const tangent2PerpendicularMinifiedLineWay = osmWay({nodes: [tangent2PerpendicularMinifiedLineNode1.id, tangent2PerpendicularMinifiedLineNode2.id]});
-        console.log('tangent1PerpendicularMinifiedLineWay', tangent1PerpendicularMinifiedLineWay);
-        console.log('tangent2PerpendicularMinifiedLineWay', tangent2PerpendicularMinifiedLineWay);
-
-        graph = graph.replace(tangent1PerpendicularMinifiedLineWay);
-        graph = graph.replace(tangent2PerpendicularMinifiedLineWay);*/
-
-        //graph = graph.replace(nodeA);
-        //graph = graph.replace(nodeB);
-        //graph = graph.replace(wayA);
-        //let inverseTangent1 = [lastFourPoints[1], tangentsIntersection];
-        //let inverseTangent2 = [lastFourPoints[2], tangentsIntersection];
-        //const inverseTangent1Length = geoVecLength(inverseTangent1[0], inverseTangent1[1]);
-        //const inverseTangent2Length = geoVecLength(inverseTangent2[0], inverseTangent2[1]);
-
-        //const minTangentLength = Math.min(inverseTangent1Length, inverseTangent2Length);
-        //const circleRadius = minTangentLength;
-
-
-
-        /*let test1Line = [];
-        if (inverseTangent1Length < inverseTangent2Length) {
-            inverseTangent2 = geoVecAdd(inverseTangent1[1], geoVecScale(geoVecNormalize(geoVecSubtract(inverseTangent2[1], inverseTangent2[0])), inverseTangent1Length);
-            test1Line = geoRotate(inverseTangent1, Math.PI/2, inverseTangent1[0]);
-        } else {
-            test1Line = geoRotate(inverseTangent2, Math.PI/2, inverseTangent2[0]);
-        }*/
-
-        //const nodeA = osmNode({ loc: projection.invert(test1Line[0]) });
-        //const nodeB = osmNode({ loc: projection.invert(test1Line[1]) });
-        //const wayA = osmWay({nodes: [nodeA.id, nodeB.id]});
-        //graph = graph.replace(nodeA);
-        //graph = graph.replace(nodeB);
-        //graph = graph.replace(wayA);
-        
-        //const circleCenter = [];
-//
-        //const node1 = osmNode({ loc: projection.invert(inverseTangent1[0]) });
-        //const node2 = osmNode({ loc: projection.invert(inverseTangent1[1]) });
-        //const node3 = osmNode({ loc: projection.invert(inverseTangent2[0]) });
-        //const node4 = osmNode({ loc: projection.invert(inverseTangent2[1]) });
-
-        //graph = graph.replace(node1);
-        //graph = graph.replace(node2);
-        //graph = graph.replace(node3);
-        //graph = graph.replace(node4);
-
-        //const way1 = osmWay({nodes: [node1.id, node2.id]});
-        //const way2 = osmWay({nodes: [node3.id, node4.id]});
-        //graph = graph.replace(way1);
-        //graph = graph.replace(way2);
-
-
-
-        //const tangentsIntersection = geoLineIntersection(tangent1Scaled, tangent2Scaled);
-        //const tangent1UnitVector = geoVecNormalize([lastFourNodes[0].loc, lastFourNodes[1].loc]);
-        //const tangent2UnitVector = geoVecNormalize([lastFourNodes[2].loc, lastFourNodes[3].loc]);
-        //console.log('tangent1UnitVector', tangent1UnitVector);
-        //console.log('tangent2UnitVector', tangent2UnitVector);
         return graph;
     };
 
