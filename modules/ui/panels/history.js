@@ -40,7 +40,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
-                .text('OSM');
+                .text('OSM Profile');
         }
 
         links
@@ -68,7 +68,7 @@ export function uiPanelHistory(context) {
 
         var links = selection
             .append('div')
-            .attr('class', 'links');
+            .attr('class', 'links')
 
         if (osm) {
             links
@@ -98,6 +98,7 @@ export function uiPanelHistory(context) {
     function redraw(selection) {
         var selectedNoteID = context.selectedNoteID();
         osm = context.connection();
+        
 
         var selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
@@ -199,7 +200,7 @@ export function uiPanelHistory(context) {
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
                 .attr('title', t('info_panels.history.link_text'))
-                .text('OSM');
+                .text('OSM History');
         }
         links
             .append('a')
