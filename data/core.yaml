@@ -774,9 +774,19 @@ en:
     title: Background
     description: Background Settings
     key: B
-    backgrounds: Backgrounds
+    backgrounds:
+      favs: Your Favorites
+      photo: Aerial and Satellite Imagery
+      map: Maps and Terrain Cartography
+      osm: OpenStreetMap-Based Maps
+      qa: Quality Assurance Layers
+      other: Other Imagery
+    extras: Background Extras
     none: None
     best_imagery: Best known imagery source for this location
+    global_imagery: This imagery source is available globally
+    historic_imagery: This imagery is either considered outdated or there exists a more recent version from this provider
+    add_remove_favorite: Add or remove this imagery source to your list of favourites
     switch: Switch back to this background
     custom: Custom
     overlays: Overlays
@@ -800,6 +810,10 @@ en:
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    next_background:
+      key: '.'
+    previous_background:
+      key: ','
   map_data:
     title: Map Data
     description: Map Data
@@ -2302,6 +2316,8 @@ en:
         title: "Display options"
         background: "Toggle background imagery pane"
         background_switch: "Switch back to last background"
+        background_previous: "Switch to previous background in list"
+        background_next: "Switch to next background in list"
         map_data: "Toggle map data pane"
         issues: "Toggle validation issues pane"
         preferences: "Toggle user preferences pane"

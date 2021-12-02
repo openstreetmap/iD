@@ -3142,7 +3142,11 @@ div.full-screen > button:focus {
     white-space: nowrap;
 }
 
-.layer-list, .controls-list {
+.layer-list {
+    border: 1px solid #ccc;
+}
+
+.controls-list {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -3160,13 +3164,13 @@ div.full-screen > button:focus {
 }
 
 .layer-list > li:first-child {
-    border-radius: 3px 3px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 .layer-list > li:last-child {
-    border-radius: 0 0 3px 3px;
+    border-radius: 0 0 4px 4px;
 }
 .layer-list > li:only-child {
-    border-radius: 3px;
+    border-radius: 4px;
 }
 .layer-list li:not(:last-child) {
     border-bottom: 1px solid #ccc;
@@ -3187,9 +3191,14 @@ div.full-screen > button:focus {
     background: #e8ebff;
 }
 
-.layer-list li.best > div.best {
+.layer-list li > .stamp {
     padding: 5px;
     flex: 0 0 auto;
+}
+
+.layer-list li > .stamp svg.icon {
+    height: 16px;
+    width: 16px;
 }
 
 .ideditor[dir='rtl'] .list-item-data-browse svg {
@@ -3224,6 +3233,13 @@ div.full-screen > button:focus {
     white-space: nowrap;
     text-overflow: ellipsis;
     flex-grow: 1;
+}
+
+.layer-list label > span.imagery-show-icons {
+    background-repeat: no-repeat;
+    background-size: 20px auto;
+    background-position: left center;
+    padding-left: 25px;
 }
 
 .layer-list input.list-item-input {
@@ -3265,6 +3281,34 @@ div.full-screen > button:focus {
 }
 .map-data-pane .vectortile-container .vectortile-footer {
     padding-bottom: 10px;
+}
+
+.layer-list.layer-background-list li button.background-favorite-button {
+    background-color: inherit;
+}
+
+button.background-favorite-button .icon {
+    fill-opacity: 0;
+    stroke-width: 1;
+    stroke: #7092ff;
+    color: #7092ff;
+}
+
+.section-background-list-favs button.background-favorite-button .icon {
+    fill-opacity: inherit;
+}
+
+.background-pane .layer-list button.background-favorite-button {
+    border: 0;
+}
+
+.layer-list li .background-favorite-button {
+    display: none;
+}
+
+.layer-list li:hover .background-favorite-button,
+.section-background-list-favs .layer-list li .background-favorite-button {
+    display: block;
 }
 
 
@@ -3820,6 +3864,51 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
     border-top: 5px solid #222;
+}
+
+.map-pane.background-pane .section.background-list {
+    margin-bottom: 0;
+}
+
+.map-pane.background-pane .section-background-extras {
+    margin-top: 30px;
+}
+
+/* Background - Adjust borders to make it appear as a single list
+----------------------------------------------------------------- */
+
+.map-pane.background-pane .section-imagery-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.map-pane.background-pane .section.background-list a.hide-toggle {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 0;
+    padding: 3px 3px 5px 9px;
+}
+
+.section-imagery-list .layer-list {
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.section-imagery-list .layer-list > li {
+    border-radius: 0;
+}
+
+.map-pane.background-pane .section.background-list:last-child ul.layer-list {
+    border-bottom: none;
+}
+
+.map-pane.background-pane .section.background-list:last-child ul.layer-list li:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
+.map-pane.background-pane .section-background-extras ul.bg-extras-list {
+    border-radius: 4px;
 }
 
 

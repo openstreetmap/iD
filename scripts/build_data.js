@@ -174,7 +174,7 @@ function writeEnJson() {
   const readCoreYaml = fs.readFileSync('data/core.yaml', 'utf8');
   const readImagery = fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8');
   const readCommunity = fs.readFileSync('node_modules/osm-community-index/i18n/en.yaml', 'utf8');
-  const readManualImagery = fs.readFileSync('data/manual_imagery.json', 'utf8');
+  const readManualImagery = fs.readFileSync('data/manual_imagery.geojson', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(data => {
@@ -183,8 +183,8 @@ function writeEnJson() {
       let community = YAML.load(data[2]);
       let manualImagery = JSON.parse(data[3]);
 
-      for (let i in manualImagery) {
-        let layer = manualImagery[i];
+      for (let i in manualImagery.features) {
+        let layer = manualImagery.features[i].properties;
         let id = layer.id;
         for (let key in layer) {
           if (key === 'attribution') {

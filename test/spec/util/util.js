@@ -252,4 +252,30 @@ describe('iD.util', function() {
             expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
         });
     });
+
+    describe('utilSortString', function() {
+        function testCases(cmp) {
+            it('sorts strings', function() {
+                expect(cmp('a', 'b')).to.be.below(0);
+                expect(cmp('b', 'a')).to.be.above(0);
+                expect(cmp('a', 'a')).to.equal(0);
+            });
+            it('sorts strings case insentitively', function() {
+                expect(cmp('a', 'A')).to.equal(0);
+            });
+            it('sorts strings not regarding diacritics insentitively', function() {
+                expect(cmp('a', 'à')).to.equal(0);
+            });
+        }
+        testCases(iD.utilSortString('en'));
+        var _Intl = typeof Intl === 'object' ? Intl : undefined;
+        // eslint-disable-next-line no-global-assign
+        Intl = undefined;
+        testCases(iD.utilSortString('en'));
+        // eslint-disable-next-line no-global-assign
+        Intl = {};
+        testCases(iD.utilSortString('en'));
+        // eslint-disable-next-line no-global-assign
+        Intl = _Intl;
+    });
 });

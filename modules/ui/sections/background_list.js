@@ -1,142 +1,119 @@
 import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { easeCubicInOut as d3_easeCubicInOut } from 'd3-ease';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
+import { utilSortString } from '../../util/util';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg/icon';
 import { uiCmd } from '../cmd';
 import { uiSettingsCustomBackground } from '../settings/custom_background';
-import { uiMapInMap } from '../map_in_map';
 import { uiSection } from '../section';
 
 export function uiSectionBackgroundList(context) {
 
-    var _backgroundList = d3_select(null);
+    const categoryGroups = [
+        { id: 'favs', sort: 0, label: 'favs', disclosureExpanded: true },
+        { id: 'photo', sort: 1, label: 'photo', disclosureExpanded: true },
+        { id: 'map', sort: 3, label: 'map', disclosureExpanded: true },
+        { id: 'qa', sort: 5, label: 'qa' },
+        { id: 'osm', sort: 6, label: 'osm' },
+        { id: 'other', sort: 8, label: 'other' },
+        { id: 'builtin', sort: 9, disclosure: false }
+    ].reduce((acc, cur) => { acc[cur.id] = cur; return acc; }, {});
+
+    const _eliCategoryMappings = {
+        'photo': categoryGroups.photo,
+        'historicphoto': categoryGroups.photo,
+        'map': categoryGroups.map,
+        'historicmap': categoryGroups.map,
+        'elevation': categoryGroups.map,
+        'osmbasedmap': categoryGroups.osm,
+        'qa': categoryGroups.qa,
+        'other': categoryGroups.other
+    };
+
+    const _layerIdMappings = {
+        'none': categoryGroups.builtin,
+        'custom': categoryGroups.builtin,
+        'mapbox_locator_overlay': categoryGroups.builtin,
+        'osm-gps': categoryGroups.builtin
+    };
+    const _favouriteLayerIdMappings = !prefs('background-favorites') ? {} :
+        JSON.parse(prefs('background-favorites')).reduce((acc, cur) => { acc[cur] = categoryGroups.favs; return acc; }, {});
+
+    function categoryMapping(layer) {
+        return _favouriteLayerIdMappings[layer && layer.id] ||
+               _layerIdMappings[layer && layer.id] ||
+               _eliCategoryMappings[layer && layer.category] ||
+               categoryGroups.photo; // default = photo
+    }
+
+    var _backgroundLists = {};
 
     var _customSource = context.background().findSource('custom');
 
     var _settingsCustomBackground = uiSettingsCustomBackground(context)
         .on('change', customChanged);
 
-    var section = uiSection('background-list', context)
-        .label(t.html('background.backgrounds'))
-        .disclosureContent(renderDisclosureContent);
+    var _sources = updateSources();
+
+    var sections = (function() {
+        var groupCounts = getGroupCounts();
+        return Object.keys(categoryGroups)
+            .map(groupId => categoryGroups[groupId])
+            .sort((a,b) => d3_ascending(a.sort, b.sort))
+            .map(group => {
+                var section = uiSection('background-list-' + group.id, context)
+                    .classes('background-list');
+                section._categoryGroup = group;
+                if (group.disclosure !== false) {
+                    return group.section = section
+                        .label(sectionLabelHtml(group, groupCounts[group.id]))
+                        .disclosureContent(selection => renderContent(selection, group))
+                        .disclosureExpanded(group.disclosureExpanded
+                            || categoryMapping(context.background().baseLayerSource()).id === group.id
+                            || context.background().overlayLayerSources().map(categoryMapping).some(overlayGroup => overlayGroup.id === group.id));
+                } else {
+                    return group.section = section.content(selection => renderContent(selection, group));
+                }
+            });
+    })();
+
+    var section = uiSection('imagery-list', context).content(selection =>
+        sections.forEach(section => section.render(selection)));
 
     function previousBackgroundID() {
         return prefs('background-last-used-toggle');
     }
 
-    function renderDisclosureContent(selection) {
+    function sectionLabelHtml(group, count) {
+        var html = t.html('background.backgrounds.' + group.label);
+        if (count) {
+            html += ' (' + count + ')';
+        }
+        return html;
+    }
 
+    function renderContent(selection, group) {
         // the background list
         var container = selection.selectAll('.layer-background-list')
             .data([0]);
 
-        _backgroundList = container.enter()
+        _backgroundLists[group.id] = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-background-list')
             .attr('dir', 'auto')
             .merge(container);
 
-
-        // add minimap toggle below list
-        var bgExtrasListEnter = selection.selectAll('.bg-extras-list')
-            .data([0])
-            .enter()
-            .append('ul')
-            .attr('class', 'layer-list bg-extras-list');
-
-        var minimapLabelEnter = bgExtrasListEnter
-            .append('li')
-            .attr('class', 'minimap-toggle-item')
-            .append('label')
-            .call(uiTooltip()
-                .title(t.html('background.minimap.tooltip'))
-                .keys([t('background.minimap.key')])
-                .placement('top')
-            );
-
-        minimapLabelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function(d3_event) {
-                d3_event.preventDefault();
-                uiMapInMap.toggle();
-            });
-
-        minimapLabelEnter
-            .append('span')
-            .call(t.append('background.minimap.description'));
-
-
-        var panelLabelEnter = bgExtrasListEnter
-            .append('li')
-            .attr('class', 'background-panel-toggle-item')
-            .append('label')
-            .call(uiTooltip()
-                .title(t.html('background.panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.background.key'))])
-                .placement('top')
-            );
-
-        panelLabelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function(d3_event) {
-                d3_event.preventDefault();
-                context.ui().info.toggle('background');
-            });
-
-        panelLabelEnter
-            .append('span')
-            .call(t.append('background.panel.description'));
-
-        var locPanelLabelEnter = bgExtrasListEnter
-            .append('li')
-            .attr('class', 'location-panel-toggle-item')
-            .append('label')
-            .call(uiTooltip()
-                .title(t.html('background.location_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.location.key'))])
-                .placement('top')
-            );
-
-        locPanelLabelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function(d3_event) {
-                d3_event.preventDefault();
-                context.ui().info.toggle('location');
-            });
-
-        locPanelLabelEnter
-            .append('span')
-            .call(t.append('background.location_panel.description'));
-
-
-        // "Info / Report a Problem" link
-        selection.selectAll('.imagery-faq')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'imagery-faq')
-            .append('a')
-            .attr('target', '_blank')
-            .call(svgIcon('#iD-icon-out-link', 'inline'))
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
-            .append('span')
-            .call(t.append('background.imagery_problem_faq'));
-
-        _backgroundList
-            .call(drawListItems, 'radio', function(d3_event, d) {
-                chooseBackground(d);
-            }, function(d) {
-                return !d.isHidden() && !d.overlay;
-            });
+        _backgroundLists[group.id].call(drawListItems, function(d3_event, d) {
+            d3_event.preventDefault();
+            chooseBackground(d);
+        }, function(d) {
+            return categoryMapping(d).id === group.id;
+        });
     }
 
     function setTooltips(selection) {
@@ -164,45 +141,86 @@ export function uiSectionBackgroundList(context) {
         });
     }
 
-    function drawListItems(layerList, type, change, filter) {
-        var sources = context.background()
+    function updateSources() {
+        return context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
-            .filter(filter)
+            .filter(source => !source.isHidden())
             .sort(function(a, b) {
-                return a.best() && !b.best() ? -1
-                    : b.best() && !a.best() ? 1
-                    : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
+                return d3_ascending(categoryMapping(a).sort, categoryMapping(b).sort) ||
+                       d3_descending(a.best() ? 1 : 0, b.best() ? 1 : 0) ||
+                       d3_ascending(a.overlay ? 1 : 0, b.overlay ? 1 : 0) ||
+                       d3_ascending(Math.floor(Math.log(Math.abs(a.area()))/3), Math.floor(Math.log(Math.abs(b.area()))/3)) ||
+                       d3_descending(a.endDate || a.startDate, b.endDate || b.startDate) ||
+                       utilSortString(localizer.localeCode()) || 0;
             });
+    }
+
+    function drawListItems(layerList, change, filter) {
+        var sources = _sources
+            .filter(filter);
 
         var layerLinks = layerList.selectAll('li')
             // We have to be a bit inefficient about reordering the list since
             // arrow key navigation of radio values likes to work in the order
             // they were added, not the display document order.
-            .data(sources, function(d, i) { return d.id + '---' + i; });
+            .data(sources, function(d, i) { return d.id + '---' + categoryMapping(d).sort + '---' + i; });
 
         layerLinks.exit()
             .remove();
 
         var enter = layerLinks.enter()
             .append('li')
-            .classed('layer-custom', function(d) { return d.id === 'custom'; })
-            .classed('best', function(d) { return d.best(); });
+            .classed('layer-custom', function(d) { return d.id === 'custom'; });
 
         var label = enter
             .append('label');
 
         label
             .append('input')
-            .attr('type', type)
+            .attr('type', d => d.overlay ? 'checkbox' : 'radio')
             .attr('name', 'background-layer')
             .attr('value', function(d) {
                 return d.id;
             })
             .on('change', change);
 
+        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        var showIcons = showThirdPartyIcons === 'true';
         label
             .append('span')
+            .style('background-image', d => showIcons && d.icon !== undefined ? 'url(' + d.icon + ')' : undefined)
+            .classed('imagery-show-icons', showIcons)
             .html(function(d) { return d.label(); });
+
+        enter
+            .append('button')
+            .attr('class', 'stamp background-favorite-button')
+            .classed('active', d => categoryMapping(d).id === 'favs')
+            .on('click', (_, d) => {
+                var group = categoryMapping(d);
+                if (group.id === 'favs') {
+                    delete _favouriteLayerIdMappings[d.id];
+                } else {
+                    _favouriteLayerIdMappings[d.id] = categoryGroups.favs;
+                }
+                prefs('background-favorites', JSON.stringify(Object.keys(_favouriteLayerIdMappings)));
+                _sources = updateSources();
+                reRender();
+                d3_selectAll('.layer-background-list li').filter(item => item === d)
+                    .transition()
+                    .duration(300)
+                    .ease(d3_easeCubicInOut)
+                    .style('background-color', '#ccc')
+                    .transition()
+                    .duration(300)
+                    .ease(d3_easeCubicInOut)
+                    .style('background-color', null);
+            })
+            .call(svgIcon('#maki-heart-11'))
+            .call(uiTooltip()
+                .title(t.html('background.add_remove_favorite'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            );
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
@@ -217,15 +235,30 @@ export function uiSectionBackgroundList(context) {
             })
             .call(svgIcon('#iD-icon-more'));
 
+        enter.filter(function(d) { return d.category && d.category.match(/^historic/); })
+            .append('div')
+            .attr('class', 'stamp')
+            .call(svgIcon('#iD-icon-info'))
+            .call(uiTooltip()
+                .title(t.html('background.historic_imagery'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            );
         enter.filter(function(d) { return d.best(); })
             .append('div')
-            .attr('class', 'best')
+            .attr('class', 'stamp')
+            .call(svgIcon('#maki-star-stroked-11'))
             .call(uiTooltip()
                 .title(t.html('background.best_imagery'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .append('span')
-            .html('&#9733;');
+            );
+        enter.filter(function(d) { return d.area() > 1E14; })
+            .append('div')
+            .attr('class', 'stamp')
+            .call(svgIcon('#maki-globe-11'))
+            .call(uiTooltip()
+                .title(t.html('background.global_imagery'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            );
 
         layerList
             .call(updateLayerSelections);
@@ -250,10 +283,15 @@ export function uiSectionBackgroundList(context) {
             return editCustom();
         }
 
-        var previousBackground = context.background().baseLayerSource();
-        prefs('background-last-used-toggle', previousBackground.id);
-        prefs('background-last-used', d.id);
-        context.background().baseLayerSource(d);
+        if (d.overlay) {
+            context.background().toggleOverlayLayer(d);
+            document.activeElement.blur();
+        } else {
+            var previousBackground = context.background().baseLayerSource();
+            prefs('background-last-used-toggle', previousBackground.id);
+            prefs('background-last-used', d.id);
+            context.background().baseLayerSource(d);
+        }
     }
 
 
@@ -273,19 +311,61 @@ export function uiSectionBackgroundList(context) {
             .call(_settingsCustomBackground);
     }
 
+    function getGroupCounts() {
+        var groupCounts = {};
+        _sources.forEach(source => {
+            var groupId = categoryMapping(source).id;
+            groupCounts[groupId] = (groupCounts[groupId] || 0) + 1;
+        });
+        return groupCounts;
+    }
+
+    function reRender() {
+        var groupCounts = getGroupCounts();
+        sections.forEach(section => {
+            var count = groupCounts[section._categoryGroup.id];
+            section.shouldDisplay(count > 0);
+            if (section._categoryGroup.disclosure !== false) {
+                (section.disclosure() || section).label(sectionLabelHtml(section._categoryGroup, count));
+            }
+            section.reRender();
+        });
+    }
 
     context.background()
-        .on('change.background_list', function() {
-            _backgroundList.call(updateLayerSelections);
-        });
+        .on('change.background_list', reRender);
 
     context.map()
         .on('move.background_list',
-            _debounce(function() {
+            _debounce(() => window.requestIdleCallback(() => {
                 // layers in-view may have changed due to map move
-                window.requestIdleCallback(section.reRender);
-            }, 1000)
+                _sources = updateSources();
+                reRender();
+            }), 1000)
         );
+
+    function chooseBackgroundAtOffset(offset) {
+        const backgrounds = _sources.filter(d => {
+            var group = categoryMapping(d);
+            return !d.overlay &&
+                d.id !== 'custom' &&
+                (group.disclosure === false || group.section.disclosure().expanded());
+        });
+        const currentBackground = context.background().baseLayerSource();
+        const foundIndex = backgrounds.indexOf(currentBackground);
+        if (foundIndex === -1) {
+            // Can't find the current background, so just do nothing
+            return;
+        }
+    
+        let nextBackgroundIndex = (foundIndex + offset + backgrounds.length) % backgrounds.length;
+        let nextBackground = backgrounds[nextBackgroundIndex];
+        chooseBackground(nextBackground);
+    }
+
+    context.keybinding()
+        .on(t('background.next_background.key'), () => chooseBackgroundAtOffset(1))
+        .on(t('background.previous_background.key'), () => chooseBackgroundAtOffset(-1));
 
     return section;
 }

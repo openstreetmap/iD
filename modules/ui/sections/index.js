@@ -1,4 +1,5 @@
 export { uiSectionBackgroundDisplayOptions } from './background_display_options';
+export { uiSectionBackgroundExtras } from '../sections/background_extras';
 export { uiSectionBackgroundList } from './background_list';
 export { uiSectionBackgroundOffset } from './background_offset';
 export { uiSectionChanges } from './changes';
@@ -7,7 +8,6 @@ export { uiSectionEntityIssues } from './entity_issues';
 export { uiSectionFeatureType } from './feature_type';
 export { uiSectionMapFeatures } from './map_features';
 export { uiSectionMapStyleOptions } from './map_style_options';
-export { uiSectionOverlayList } from './overlay_list';
 export { uiSectionPhotoOverlays } from './photo_overlays';
 export { uiSectionPresetFields } from './preset_fields';
 export { uiSectionPrivacy } from './privacy';

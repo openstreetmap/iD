@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 const fs = require('fs');
-let sources = require('editor-layer-index/imagery.json');
+let sources = JSON.parse(fs.readFileSync('node_modules/editor-layer-index/imagery.geojson'));
 const prettyStringify = require('json-stringify-pretty-compact');
 
-if (fs.existsSync('./data/manual_imagery.json')) {
+if (fs.existsSync('./data/manual_imagery.geojson')) {
   // we can include additional imagery sources that aren't in the index
-  sources = sources.concat(JSON.parse(fs.readFileSync('./data/manual_imagery.json')));
+  sources.features = sources.features.concat(
+    JSON.parse(fs.readFileSync('./data/manual_imagery.geojson')).features);
 }
 
 let imagery = [];
@@ -16,52 +17,14 @@ cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
 
 const discard = {
-  'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
-  'osmfr': true,                        // 'OpenStreetMap (French Style)'
-  'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
-  'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
-  'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
-  'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
-  'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
-
-  'hike_n_bike': true,                  // 'Hike & Bike'
-  'landsat': true,                      // 'Landsat'
-  'skobbler': true,                     // 'Skobbler'
-  'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
-  'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-  'tf-landscape': true,                 // 'Thunderforest Landscape'
-  'tf-outdoors': true,                  // 'Thunderforest Outdoors'
-  'qa_no_address': true,                // 'QA No Address'
-  'wikimedia-map': true,                // 'Wikimedia Map'
-
-  'openinframap-petroleum': true,
-  'openinframap-power': true,
-  'openinframap-telecoms': true,
-  'openpt_map': true,
-  'openrailwaymap': true,
-  'openseamap': true,
-  'opensnowmap-overlay': true,
-
-  'US-TIGER-Roads-2012': true,
-  'US-TIGER-Roads-2014': true,
-
-  'Waymarked_Trails-Cycling': true,
-  'Waymarked_Trails-Hiking': true,
-  'Waymarked_Trails-Horse_Riding': true,
-  'Waymarked_Trails-MTB': true,
-  'Waymarked_Trails-Skating': true,
-  'Waymarked_Trails-Winter_Sports': true,
-
-  'OSM_Inspector-Addresses': true,
-  'OSM_Inspector-Geometry': true,
-  'OSM_Inspector-Highways': true,
-  'OSM_Inspector-Multipolygon': true,
-  'OSM_Inspector-Places': true,
-  'OSM_Inspector-Routing': true,
-  'OSM_Inspector-Tagging': true,
+  'US-TIGER-Roads-2017': true,
+  'US-TIGER-Roads-2018': true,
+  'US-TIGER-Roads-2019': true,
 
   'EOXAT2018CLOUDLESS': true
 };
+
+
 
 const supportedWMSProjections = [
   // Web Mercator
@@ -79,7 +42,9 @@ const supportedWMSProjections = [
 ];
 
 
-sources.forEach(source => {
+sources.features.forEach(_source => {
+  var source = _source.properties;
+
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (source.id in discard) return;
 
@@ -87,6 +52,7 @@ sources.forEach(source => {
     id: source.id,
     name: source.name,
     type: source.type,
+    category: source.category,
     template: source.url
   };
 
@@ -104,7 +70,7 @@ sources.forEach(source => {
   if (source.type === 'wms') {
     const projection = source.available_projections && supportedWMSProjections.find(p => source.available_projections.indexOf(p) !== -1);
     if (!projection) return;
-    if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
+    if (sources.features.some(other => other.properties.name === source.name && other.properties.type !== source.type)) return;
     im.projection = projection;
   }
 
@@ -128,28 +94,30 @@ sources.forEach(source => {
     }
   }
 
-  let extent = source.extent || {};
-  if (extent.min_zoom || extent.max_zoom) {
+  if (source.min_zoom || source.max_zoom) {
     im.zoomExtent = [
-      extent.min_zoom || 0,
-      extent.max_zoom || 22
+      source.min_zoom || 0,
+      source.max_zoom || 22
     ];
   }
 
-  if (extent.polygon) {
-    im.polygon = extent.polygon;
-  } else if (extent.bbox) {
+  if (_source.geometry !== null) {
+    im.polygon = _source.geometry.coordinates;
+  } else if (_source.bbox) {
     im.polygon = [[
-      [extent.bbox.min_lon, extent.bbox.min_lat],
-      [extent.bbox.min_lon, extent.bbox.max_lat],
-      [extent.bbox.max_lon, extent.bbox.max_lat],
-      [extent.bbox.max_lon, extent.bbox.min_lat],
-      [extent.bbox.min_lon, extent.bbox.min_lat]
+      [_source.bbox.min_lon, _source.bbox.min_lat],
+      [_source.bbox.min_lon, _source.bbox.max_lat],
+      [_source.bbox.max_lon, _source.bbox.max_lat],
+      [_source.bbox.max_lon, _source.bbox.min_lat],
+      [_source.bbox.min_lon, _source.bbox.min_lat]
     ]];
   }
 
   if (source.id === 'mapbox_locator_overlay') {
     im.overzoom = false;
+    // override category to "other imagery"
+    // (such that this overlay is displayed alongside OSM's GPS traces overlay)
+    im.category = 'other';
   }
 
   const attribution = source.attribution || {};
