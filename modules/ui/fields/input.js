@@ -221,8 +221,10 @@ export function uiFieldText(field, context) {
             .append('div')
             .style('background-color', d => d)
             .attr('class', 'colour-box');
-        if (colour === '') outlinkButton = outlinkButton
-            .call(svgIcon('#iD-icon-edit'));
+        if (colour === '') {
+            outlinkButton = outlinkButton
+                .call(svgIcon('#iD-icon-edit'));
+        }
         outlinkButton
             .on('click', () => wrap.select('.colour-selector').node().click())
             .merge(outlinkButton);
