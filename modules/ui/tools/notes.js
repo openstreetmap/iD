@@ -108,7 +108,9 @@ export function uiToolNotes(context) {
             buttons = buttons
                 .merge(buttonsEnter)
                 .classed('disabled', function(d) { return !enabled(d); })
-                .classed('active', function(d) { return context.mode() && context.mode().button === d.button; });
+                .attr('aria-disabled', function(d) { return !enabled(d); })
+                .classed('active', function(d) { return context.mode() && context.mode().button === d.button; })
+                .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; });
         }
     };
 

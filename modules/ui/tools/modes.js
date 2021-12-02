@@ -139,7 +139,7 @@ export function uiToolOldDrawModes(context) {
                 .merge(buttonsEnter)
                 .attr('aria-disabled', function(d) { return !enabled(d); })
                 .classed('disabled', function(d) { return !enabled(d); })
-                .attr('aria-selected', function(d) { return context.mode() && context.mode().button === d.button; })
+                .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; })
                 .classed('active', function(d) { return context.mode() && context.mode().button === d.button; });
         }
     };
