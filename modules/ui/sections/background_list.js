@@ -349,7 +349,7 @@ export function uiSectionBackgroundList(context) {
             var group = categoryMapping(d);
             return !d.overlay &&
                 d.id !== 'custom' &&
-                (group.disclosure === false || group.section.disclosure().expanded())
+                (group.disclosure === false || group.section.disclosure().expanded());
         });
         const currentBackground = context.background().baseLayerSource();
         const foundIndex = backgrounds.indexOf(currentBackground);

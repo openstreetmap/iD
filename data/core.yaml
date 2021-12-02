@@ -2315,7 +2315,7 @@ en:
       display_options:
         title: "Display options"
         background: "Toggle background imagery pane"
-        background_switch: "Switch back to last background"      
+        background_switch: "Switch back to last background"
         background_previous: "Switch to previous background in list"
         background_next: "Switch to next background in list"
         map_data: "Toggle map data pane"
