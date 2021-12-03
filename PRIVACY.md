@@ -1,6 +1,6 @@
 ## iD Editor Privacy Policy
 
-iD Editor is an open source OpenStreetMap editor. You are not required to use iD in order to use or edit OpenStreetMap, and the OpenStreetMap Foundation does not operate iD. You can learn more about OpenStreetMap and the OpenStreetMap Foundation at [https://www.openstreetmap.org/about](https://www.openstreetmap.org/about) and [https://wiki.osmfoundation.org/wiki/Main_Page](https://wiki.osmfoundation.org/wiki/Main_Page). You can learn more about the iD Editor project and its maintainers at [https://github.com/openstreetmap/iD](https://github.com/openstreetmap/iD).
+iD Editor is an open source OpenStreetMap editor. You are not required to use iD in order to use or edit OpenStreetMap. You can learn more about OpenStreetMap and the OpenStreetMap Foundation at [https://www.openstreetmap.org/about](https://www.openstreetmap.org/about) and [https://wiki.osmfoundation.org/wiki/Main_Page](https://wiki.osmfoundation.org/wiki/Main_Page). You can learn more about the iD Editor project and its maintainers at [https://github.com/openstreetmap/iD](https://github.com/openstreetmap/iD).
 
 ### Source code and website ([http://ideditor.com/](http://ideditor.com/))
 
@@ -38,6 +38,7 @@ If you believe that we hold information that would allow us to correct, amend, o
 
 ### Changelog
 
+* _2021-Dec-xx_ - Remove false statement which claimed that _the OpenStreetMapFoundation does not operate iD_.
 * _2020-Dec-02_ - Add information about the JSDelivr CDN integration.
 * _2020-Apr-07_ - Update the iD GitHub repository file links to point to the `release` branch instead of the `master` branch.
 * _2019-Dec-17_ - Initial version.
