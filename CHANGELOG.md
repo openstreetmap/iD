@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
+* Tag keys of a multi-selection can now also be changed in the tags editor when the tag values differ in the selected features. ([#8836])
 #### :scissors: Operations
 * Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the operation to a single line ([#8818])
 #### :camera: Street-Level
@@ -83,6 +84,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8817]: https://github.com/openstreetmap/iD/pull/8817
 [#8818]: https://github.com/openstreetmap/iD/issues/8818
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
+[#8836]: https://github.com/openstreetmap/iD/issues/8836
 [@k-yle]: https://github.com/k-yle
 
 # 2.20.2
