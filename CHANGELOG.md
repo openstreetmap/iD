@@ -62,9 +62,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug which made it impossible to switch to a custom TMS imagery layer after using a custom WMS source and vice versa ([#8057])
 * Fix a bug where the validator might show wrong tagging suggestions for a preset if another preset has a partial match ([#8828], thanks [@bhousel])
 #### :earth_asia: Localization
-* deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM. ([#8817])
+* Deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM ([#8817])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+* Show privacy settings in splash screen (i.e. the "Welcome to iD" message) ([#8831])
 #### :rocket: Presets
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
@@ -84,6 +85,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8817]: https://github.com/openstreetmap/iD/pull/8817
 [#8818]: https://github.com/openstreetmap/iD/issues/8818
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
+[#8831]: https://github.com/openstreetmap/iD/issues/8831
 [#8836]: https://github.com/openstreetmap/iD/issues/8836
 [@k-yle]: https://github.com/k-yle
 

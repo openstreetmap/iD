@@ -4965,6 +4965,14 @@ img.tile-debug {
     color: #7092ff;
 }
 
+.modal-splash .section-preferences-third-party {
+    margin-top: 20px;
+}
+
+.modal-splash .section-preferences-third-party .privacy-link {
+    display: none;
+}
+
 
 /* Shortcuts Modal
 ------------------------------------------------------- */
@@ -5377,22 +5385,26 @@ button.conflicts-button {
 /* dark tooltips for sidebar / panels */
 .tooltip.dark.top .popover-arrow,
 .map-pane .tooltip.top .popover-arrow,
-.sidebar .tooltip.top .popover-arrow {
+.sidebar .tooltip.top .popover-arrow,
+.modal .tooltip.top .popover-arrow {
     border-top-color: #000;
 }
 .tooltip.dark.bottom .popover-arrow,
 .map-pane .tooltip.bottom .popover-arrow,
-.sidebar .tooltip.bottom .popover-arrow {
+.sidebar .tooltip.bottom .popover-arrow,
+.modal .tooltip.bottom .popover-arrow {
     border-bottom-color: #000;
 }
 .tooltip.dark.left .popover-arrow,
 .map-pane .tooltip.left .popover-arrow,
-.sidebar .tooltip.left .popover-arrow {
+.sidebar .tooltip.left .popover-arrow,
+.modal .tooltip.left .popover-arrow {
     border-left-color: #000;
 }
 .tooltip.dark.right .popover-arrow,
 .map-pane .tooltip.right .popover-arrow,
-.sidebar .tooltip.right .popover-arrow {
+.sidebar .tooltip.right .popover-arrow,
+.modal .tooltip.right .popover-arrow {
     border-right-color: #000;
 }
 .tooltip.dark .popover-inner,
@@ -5403,7 +5415,8 @@ button.conflicts-button {
 .map-pane .keyhint-wrap,
 .sidebar .popover-inner,
 .sidebar .tooltip-heading,
-.sidebar .keyhint-wrap {
+.sidebar .keyhint-wrap,
+.modal .popover-inner {
     background: #000;
     color: #ccc;
 }
