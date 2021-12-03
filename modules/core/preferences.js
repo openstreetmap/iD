@@ -46,6 +46,6 @@ function corePreferences(k, v) {
 corePreferences.onChange = function(k, handler) {
   _listeners[k] = _listeners[k] || [];
   _listeners[k].push(handler);
-}
+};
 
 export { corePreferences as prefs };
