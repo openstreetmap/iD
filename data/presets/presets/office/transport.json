@@ -5,10 +5,9 @@
       "area"
   ],
   "fields": [
-    "namne",
+    "name",
     "{office}",
-    "transport",
-    "trucks",
+    "truck",
     "bus",
     "public_transport",
     "school_bus"
