@@ -1,0 +1,24 @@
+{
+  "icon": "maki-golf",
+  "fields": [
+      "name",
+      "sport",
+      "{club}"
+  ],
+  "geometry": [
+      "point",
+      "area"
+  ],
+  "tags": {
+      "club": "sport",
+      "golf": "clubhouse",
+      "sport": "golf"
+  },
+  "terms": [
+      "golf club",
+      "golf clubhouse",
+      "clubhouse",
+      "golf"
+  ],
+  "name": "Golf Clubhouse"
+}

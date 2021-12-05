@@ -5,7 +5,8 @@
         "shelter_type",
         "building_area",
         "bench",
-        "bin"
+        "bin",
+        "access_simple"
     ],
     "moreFields": [
         "gnis/feature_id",
