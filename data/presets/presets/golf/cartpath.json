@@ -13,7 +13,8 @@
     "addTags": {
         "golf": "cartpath",
         "golf_cart": "designated",
-        "highway": "service"
+        "highway": "service",
+        "access": "customers"
     },
     "name": "Golf Cartpath"
 }
