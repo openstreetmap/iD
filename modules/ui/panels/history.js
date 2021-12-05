@@ -68,7 +68,7 @@ export function uiPanelHistory(context) {
 
         var links = selection
             .append('div')
-            .attr('class', 'links')
+            .attr('class', 'links');
 
         if (osm) {
             links
@@ -76,7 +76,8 @@ export function uiPanelHistory(context) {
                 .attr('class', 'changeset-osm-link')
                 .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
-                .text('OSM');
+                .call(t.append('translate.'))
+                .text('OSM Changeset');
         }
 
         links
@@ -98,8 +99,6 @@ export function uiPanelHistory(context) {
     function redraw(selection) {
         var selectedNoteID = context.selectedNoteID();
         osm = context.connection();
-        
-
         var selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
             selected = [ t.html('note.note') + ' ' + selectedNoteID ];

@@ -77,7 +77,6 @@ export function operationSplit(context, selectedIDs) {
         return t('operations.split.annotation.' + _geometry, { n: _ways.length });
     };
 
-    
     operation.icon = function() {
         if (_waysAmount === 'multiple') {
             return '#iD-operation-split-multiple';

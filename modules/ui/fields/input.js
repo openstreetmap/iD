@@ -221,13 +221,14 @@ export function uiFieldText(field, context) {
             .append('div')
             .style('background-color', d => d)
             .attr('class', 'colour-box');
-        if (colour === '') outlinkButton = outlinkButton
+        if (colour === '') {
+            outlinkButton = outlinkButton
             .call(svgIcon('#iD-icon-edit'));
-        outlinkButton
+            outlinkButton
             .on('click', () => wrap.select('.colour-selector').node().click())
             .merge(outlinkButton);
+        }
     }
-
 
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
