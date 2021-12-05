@@ -7,6 +7,7 @@ export { actionChangePreset } from './change_preset';
 export { actionChangeTags } from './change_tags';
 export { actionCircularize } from './circularize';
 export { actionFollow } from './follow';
+export { actionFollowOld } from './follow_old';
 export { actionConnect } from './connect';
 export { actionCurverize } from './curverize';
 export { actionCopyEntities } from './copy_entities';

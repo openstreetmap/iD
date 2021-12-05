@@ -27,6 +27,7 @@ export function uiTopToolbar(context) {
 
     var circularize = uiToolOperation(context, operationCircularize),
         follow = uiToolOperation(context, operationFollow),
+        follow_old = uiToolOperation(context, operationFollowOld),
         curverize = uiToolOperation(context, operationCurverize),
         continueTool = uiToolOperation(context, operationContinue),
         deleteTool = uiToolOperation(context, operationDelete),
@@ -117,6 +118,7 @@ export function uiTopToolbar(context) {
                 circularize,
                 curverize,
                 follow,
+                follow_old,
                 reverse,
                 split,
                 disconnect,
