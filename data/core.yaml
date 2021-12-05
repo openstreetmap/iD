@@ -220,7 +220,7 @@ en:
       title: Follow (old)
       description:
         points: Follow snapped line between points (old version).
-      key: L
+      key: "%"
       annotation:
         points: Followed a line (old version).
       nodes_are_not_shared_by_both_ways: The two nodes are not shared by both the source and target ways
@@ -818,7 +818,7 @@ en:
   preferences:
     title: Preferences
     description: Preferences
-    key: P
+    key: ""
     privacy:
       title: Privacy
       privacy_link: View the iD privacy policy
