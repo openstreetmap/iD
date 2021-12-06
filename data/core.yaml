@@ -565,7 +565,6 @@ en:
   tooltip_keyhint: "Shortcut:"
   translate:
     translate: Add multilingual name
-    english: English
     localized_translation_label: Multilingual Name
     localized_translation_language: Choose language
     localized_translation_name: Name
@@ -644,6 +643,9 @@ en:
       last_edit: Last Edit
       edited_by: Edited By
       changeset: Changeset
+      changeset_link: Changeset on osm.org
+      profile_link: profile on osm.org
+      history_link: history on osm.org
       unknown: Unknown
       link_text: History on openstreetmap.org
       note_no_history: "No History (New Note)"

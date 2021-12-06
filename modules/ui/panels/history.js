@@ -40,7 +40,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
-                .call(t.append('translate.english'))
+                .call(t.append('info_panels.history.profile_link'))
                 .text('OSM Profile');
         }
 
@@ -77,7 +77,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'changeset-osm-link')
                 .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
-                .call(t.append('translate.'))
+                .call(t.append('info_panels.history.changeset_link'))
                 .text('OSM Changeset');
         }
 
@@ -199,7 +199,8 @@ export function uiPanelHistory(context) {
                 .attr('class', 'view-history-on-osm')
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
-                .attr('title', t('info_panels.history.link_text'))
+                .attr('title')
+                .call(t.append('info_panels.history.history_link'))
                 .text('OSM History');
         }
         links
