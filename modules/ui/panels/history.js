@@ -40,6 +40,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
+                .call(t.append('translate.english'))
                 .text('OSM Profile');
         }
 

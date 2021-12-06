@@ -565,6 +565,7 @@ en:
   tooltip_keyhint: "Shortcut:"
   translate:
     translate: Add multilingual name
+    english: English
     localized_translation_label: Multilingual Name
     localized_translation_language: Choose language
     localized_translation_name: Name
