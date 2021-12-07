@@ -472,7 +472,7 @@ rendererBackgroundSource.Esri = function(data) {
             .then(function(result) {
                 delete inflight[tileID];
 
-                var result = result.features.map(f => f.attributes)
+                result = result.features.map(f => f.attributes)
                     .filter(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom)[0];
 
                 if (!result) {
