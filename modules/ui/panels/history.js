@@ -40,7 +40,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'user-osm-link')
                 .attr('href', osm.userURL(userName))
                 .attr('target', '_blank')
-                .text('OSM');
+                .call(t.append('info_panels.history.profile_link'));
         }
 
         links
@@ -76,7 +76,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'changeset-osm-link')
                 .attr('href', osm.changesetURL(changeset))
                 .attr('target', '_blank')
-                .text('OSM');
+                .call(t.append('info_panels.history.changeset_link'));
         }
 
         links
@@ -98,7 +98,6 @@ export function uiPanelHistory(context) {
     function redraw(selection) {
         var selectedNoteID = context.selectedNoteID();
         osm = context.connection();
-
         var selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
             selected = [ t.html('note.note') + ' ' + selectedNoteID ];
@@ -198,8 +197,7 @@ export function uiPanelHistory(context) {
                 .attr('class', 'view-history-on-osm')
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
-                .attr('title', t('info_panels.history.link_text'))
-                .text('OSM');
+                .call(t.append('info_panels.history.history_link'));
         }
         links
             .append('a')
