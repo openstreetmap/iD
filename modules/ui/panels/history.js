@@ -197,7 +197,6 @@ export function uiPanelHistory(context) {
                 .attr('class', 'view-history-on-osm')
                 .attr('href', osm.historyURL(entity))
                 .attr('target', '_blank')
-                .attr('title')
                 .call(t.append('info_panels.history.history_link'));
         }
         links

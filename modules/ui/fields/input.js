@@ -223,12 +223,13 @@ export function uiFieldText(field, context) {
             .attr('class', 'colour-box');
         if (colour === '') {
             outlinkButton = outlinkButton
-            .call(svgIcon('#iD-icon-edit'));
-            outlinkButton
+                .call(svgIcon('#iD-icon-edit'));
+        }
+        outlinkButton
             .on('click', () => wrap.select('.colour-selector').node().click())
             .merge(outlinkButton);
-        }
     }
+
 
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
