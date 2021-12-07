@@ -315,6 +315,21 @@ export function svgData(projection, context, dispatch) {
     }
 
 
+    function stringifyGeojsonProperties(feature) {
+        const properties = feature.properties;
+        for (const key in properties) {
+            const property = properties[key];
+            if (typeof property === 'number' || typeof property === 'boolean' || Array.isArray(property)) {
+                properties[key] = property.toString();
+            } else if (property === null) {
+                properties[key] = 'null';
+            } else if (typeof property === 'object') {
+                properties[key] = JSON.stringify(property);
+            }
+        }
+    }
+
+
     drawData.setFile = function(extension, data) {
         _template = null;
         _fileList = null;
@@ -332,6 +347,11 @@ export function svgData(projection, context, dispatch) {
             case '.geojson':
             case '.json':
                 gj = JSON.parse(data);
+                if (gj.type === 'FeatureCollection') {
+                    gj.features.forEach(stringifyGeojsonProperties);
+                } else if (gj.type === 'Feature') {
+                    stringifyGeojsonProperties(gj);
+                }
                 break;
         }
 

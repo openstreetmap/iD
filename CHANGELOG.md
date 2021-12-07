@@ -60,6 +60,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
+* Fix non-string properties of GeoJSON custom map data not being displayed correctly ([#8825], thanks [@k-yle])
 * Fix a bug which made it impossible to switch to a custom TMS imagery layer after using a custom WMS source and vice versa ([#8057])
 * Fix a bug where the validator might show wrong tagging suggestions for a preset if another preset has a partial match ([#8828], thanks [@bhousel])
 * Show correct vintage and other metadata for "Esri World Imagery"'s higher zoom levels
@@ -88,6 +89,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8813]: https://github.com/openstreetmap/iD/issues/8813
 [#8817]: https://github.com/openstreetmap/iD/pull/8817
 [#8818]: https://github.com/openstreetmap/iD/issues/8818
+[#8825]: https://github.com/openstreetmap/iD/pull/8825
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
 [#8831]: https://github.com/openstreetmap/iD/issues/8831
 [#8836]: https://github.com/openstreetmap/iD/issues/8836
