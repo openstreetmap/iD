@@ -74,9 +74,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
 #### :hammer: Development
+* switch test runner to [karma](https://karma-runner.github.io/) ([#8764], thanks [@wvanderp])
 
 [#8057]: https://github.com/openstreetmap/iD/issues/8057
 [#8519]: https://github.com/openstreetmap/iD/issues/8519
+[#8764]: https://github.com/openstreetmap/iD/pull/8764
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
 [#8782]: https://github.com/openstreetmap/iD/pull/8782
@@ -96,6 +98,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8839]: https://github.com/openstreetmap/iD/pull/8839
 [@k-yle]: https://github.com/k-yle
 [@tpetillon]: https://github.com/tpetillon
+[@wvanderp]: https://github.com/wvanderp
 
 # 2.20.2
 ##### 2021-Oct-28
