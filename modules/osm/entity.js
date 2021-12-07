@@ -36,7 +36,11 @@ osmEntity.id.fromOSM = function(type, id) {
 
 
 osmEntity.id.toOSM = function(id) {
-    return id.slice(1);
+    var match = id.match(/^[cnwr](-?\d+)$/);
+    if (match) {
+        return match[1];
+    }
+    return '';
 };
 
 
@@ -129,7 +133,8 @@ osmEntity.prototype = {
 
 
     isNew: function() {
-        return this.osmId() < 0;
+        var osmId = osmEntity.id.toOSM(this.id);
+        return osmId.length === 0 || osmId[0] === '-';
     },
 
 

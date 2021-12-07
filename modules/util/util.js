@@ -581,3 +581,51 @@ export function utilUnicodeCharsCount(str) {
 export function utilUnicodeCharsTruncated(str, limit) {
     return Array.from(str).slice(0, limit).join('');
 }
+
+function toNumericID(id) {
+    var match = id.match(/^[cnwr](-?\d+)$/);
+    if (match) {
+        return parseInt(match[1], 10);
+    }
+    return NaN;
+}
+
+function compareNumericIDs(left, right) {
+    if (isNaN(left) && isNaN(right)) return -1;
+    if (isNaN(left)) return 1;
+    if (isNaN(right)) return -1;
+    if (Math.sign(left) !== Math.sign(right)) return -Math.sign(left);
+    if (Math.sign(left) < 0) return Math.sign(right - left);
+    return Math.sign(left - right);
+}
+
+// Returns -1 if the first parameter ID is older than the second,
+// 1 if the second parameter is older, 0 if they are the same.
+// If both IDs are test IDs, the function returns -1.
+export function utilCompareIDs(left, right) {
+    return compareNumericIDs(toNumericID(left), toNumericID(right));
+}
+
+// Returns the chronologically oldest ID in the list.
+// Database IDs (with positive numbers) before editor ones (with negative numbers).
+// Among each category, the closest number to 0 is the oldest.
+// Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
+export function utilOldestID(ids) {
+    if (ids.length === 0) {
+        return undefined;
+    }
+
+    var oldestIDIndex = 0;
+    var oldestID = toNumericID(ids[0]);
+
+    for (var i = 1; i < ids.length; i++) {
+        var num = toNumericID(ids[i]);
+
+        if (compareNumericIDs(oldestID, num) === 1) {
+            oldestIDIndex = i;
+            oldestID = num;
+        }
+    }
+
+    return ids[oldestIDIndex];
+}
