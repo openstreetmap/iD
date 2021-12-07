@@ -1,6 +1,5 @@
 import { actionDeleteNode } from './delete_node';
 import { actionDeleteWay } from './delete_way';
-import { osmEntity } from '../osm';
 import { utilArrayUniq, utilOldestID } from '../util';
 
 

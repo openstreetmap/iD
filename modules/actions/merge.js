@@ -1,4 +1,3 @@
-import { osmEntity } from '../osm';
 import { osmTagSuggestingArea } from '../osm/tags';
 import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 
