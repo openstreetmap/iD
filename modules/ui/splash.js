@@ -3,6 +3,7 @@ import { fileFetcher } from '../core/file_fetcher';
 import { t } from '../core/localizer';
 import { uiIntro } from './intro';
 import { uiModal } from './modal';
+import { uiSectionPrivacy } from './sections/privacy';
 
 
 export function uiSplash(context) {
@@ -63,6 +64,10 @@ export function uiSplash(context) {
         privacyLink: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/release/PRIVACY.md">' +
           t('splash.privacy_policy') + '</a>' }
       }));
+
+    uiSectionPrivacy(context)
+      .label(t.html('splash.privacy_settings'))
+      .render(modalSection);
 
     let buttonWrap = introModal
       .append('div')

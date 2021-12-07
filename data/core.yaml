@@ -1029,6 +1029,7 @@ en:
     privacy_update: "Our privacy policy has recently been updated."
     privacy_policy: iD privacy policy
     privacy: "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}."
+    privacy_settings: Your Privacy Settings
     walkthrough: "Start the Walkthrough"
     start: "Edit now"
   source_switch:

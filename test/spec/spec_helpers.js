@@ -131,6 +131,14 @@ if (typeof ArrayBuffer.isView === 'undefined') {
     ArrayBuffer.isView = function() { return false; };
 }
 
+// Polyfill for `Math.sign()` in PhantomJS
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign#Polyfill
+if (!Math.sign) {
+    Math.sign = function(x) {
+        return ((x > 0) - (x < 0)) || +x;
+    };
+}
+
 // Add support for sinon-stubbing `fetch` API
 // (sinon fakeServer works only on `XMLHttpRequest`)
 // see https://github.com/sinonjs/nise/issues/7

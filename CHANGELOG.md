@@ -48,8 +48,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
+* Tag keys of a multi-selection can now also be changed in the tags editor when the tag values differ in the selected features. ([#8836])
 #### :scissors: Operations
 * Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the operation to a single line ([#8818])
+* Many operations now better preserve OSM object history ([#8839], thanks [@tpetillon])
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
@@ -58,18 +60,23 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
+* Fix non-string properties of GeoJSON custom map data not being displayed correctly ([#8825], thanks [@k-yle])
 * Fix a bug which made it impossible to switch to a custom TMS imagery layer after using a custom WMS source and vice versa ([#8057])
 * Fix a bug where the validator might show wrong tagging suggestions for a preset if another preset has a partial match ([#8828], thanks [@bhousel])
+* Show correct vintage and other metadata for "Esri World Imagery"'s higher zoom levels
+* Fix wrong order of route relation members after a split operation ([#8519], thanks [@tpetillon])
 #### :earth_asia: Localization
-* deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM. ([#8817])
+* Deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM ([#8817])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+* Show privacy settings in splash screen (i.e. the "Welcome to iD" message) ([#8831])
 #### :rocket: Presets
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
 #### :hammer: Development
 
 [#8057]: https://github.com/openstreetmap/iD/issues/8057
+[#8519]: https://github.com/openstreetmap/iD/issues/8519
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
 [#8782]: https://github.com/openstreetmap/iD/pull/8782
@@ -82,8 +89,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8813]: https://github.com/openstreetmap/iD/issues/8813
 [#8817]: https://github.com/openstreetmap/iD/pull/8817
 [#8818]: https://github.com/openstreetmap/iD/issues/8818
+[#8825]: https://github.com/openstreetmap/iD/pull/8825
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
+[#8831]: https://github.com/openstreetmap/iD/issues/8831
+[#8836]: https://github.com/openstreetmap/iD/issues/8836
+[#8839]: https://github.com/openstreetmap/iD/pull/8839
 [@k-yle]: https://github.com/k-yle
+[@tpetillon]: https://github.com/tpetillon
 
 # 2.20.2
 ##### 2021-Oct-28
