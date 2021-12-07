@@ -262,7 +262,7 @@ iD's preset database is stored in the `iD.fileFetcher.cache().presets` object an
 or modified prior to creating the iD context.
 
 The format of the `presets` object is
-[documented here](https://github.com/openstreetmap/iD/tree/develop/data/presets#custom-presets).
+[documented as part of the schema-builder project](https://github.com/ideditor/schema-builder#presets).
 
 To add a new preset to iD's existing preset database.
 ```js

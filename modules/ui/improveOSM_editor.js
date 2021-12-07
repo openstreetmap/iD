@@ -37,7 +37,7 @@ export function uiImproveOsmEditor(context) {
 
     headerEnter
       .append('h2')
-        .html(t.html('QA.improveOSM.title'));
+        .call(t.append('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')
       .data([0]);
@@ -81,7 +81,7 @@ export function uiImproveOsmEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .html(t.html('note.newComment'));
+        .call(t.append('note.newComment'));
 
     saveSectionEnter
       .append('textarea')
@@ -136,7 +136,7 @@ export function uiImproveOsmEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .html(t.html('QA.keepRight.save_comment'));
+        .call(t.append('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')

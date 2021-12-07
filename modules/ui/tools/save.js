@@ -67,7 +67,7 @@ export function uiToolSave(context) {
                 .style('background', bgColor(_numChanges));
 
             button.select('span.count')
-                .html(_numChanges);
+                .text(_numChanges);
         }
     }
 
@@ -112,7 +112,7 @@ export function uiToolSave(context) {
             .append('span')
             .attr('class', 'count')
             .attr('aria-hidden', 'true')
-            .html('0');
+            .text('0');
 
         updateCount();
 

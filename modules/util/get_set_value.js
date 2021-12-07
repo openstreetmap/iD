@@ -1,5 +1,6 @@
 // Like selection.property('value', ...), but avoids no-op value sets,
 // which can result in layout/repaint thrashing in some situations.
+/** @returns {string} */
 export function utilGetSetValue(selection, value) {
     function d3_selection_value(value) {
         function valueNull() {

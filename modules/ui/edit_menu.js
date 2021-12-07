@@ -114,7 +114,7 @@ export function uiEditMenu(context) {
                 .call(tooltip)
                 .append('div')
                 .attr('class', 'icon-wrap')
-                .call(svgIcon('#iD-operation-' + d.id, 'operation'));
+                .call(svgIcon(d.icon && d.icon() || '#iD-operation-' + d.id, 'operation'));
         });
 
         if (showLabels) {

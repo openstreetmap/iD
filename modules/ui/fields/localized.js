@@ -374,7 +374,7 @@ export function uiFieldLocalized(field, context) {
                 text
                     .append('span')
                     .attr('class', 'label-textvalue')
-                    .html(t.html('translate.localized_translation_label'));
+                    .call(t.append('translate.localized_translation_label'));
 
                 text
                     .append('span')

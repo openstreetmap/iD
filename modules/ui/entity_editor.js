@@ -165,7 +165,10 @@ export function uiEntityEditor(context) {
             for (var k in changed) {
                 if (!k) continue;
                 var v = changed[k];
-                if (v !== undefined || tags.hasOwnProperty(k)) {
+                if (typeof v === 'object') {
+                    // a "key only" tag change
+                    tags[k] = tags[v.oldKey];
+                } else if (v !== undefined || tags.hasOwnProperty(k)) {
                     tags[k] = v;
                 }
             }

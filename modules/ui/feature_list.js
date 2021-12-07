@@ -34,7 +34,7 @@ export function uiFeatureList(context) {
 
         header
             .append('h2')
-            .html(t.html('inspector.feature_list'));
+            .call(t.append('inspector.feature_list'));
 
         var searchWrap = selection
             .append('div')
@@ -255,7 +255,8 @@ export function uiFeatureList(context) {
                 .attr('class', 'entity-name');
 
             list.selectAll('.no-results-item .entity-name')
-                .html(t.html('geocoder.no_results_worldwide'));
+                .html('')
+                .call(t.append('geocoder.no_results_worldwide'));
 
             if (services.geocoder) {
               list.selectAll('.geocode-item')
@@ -268,7 +269,7 @@ export function uiFeatureList(context) {
                   .attr('class', 'label')
                   .append('span')
                   .attr('class', 'entity-name')
-                  .html(t.html('geocoder.search'));
+                  .call(t.append('geocoder.search'));
             }
 
             list.selectAll('.no-results-item')
@@ -304,12 +305,12 @@ export function uiFeatureList(context) {
             label
                 .append('span')
                 .attr('class', 'entity-type')
-                .html(function(d) { return d.type; });
+                .text(function(d) { return d.type; });
 
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .html(function(d) { return d.name; });
+                .text(function(d) { return d.name; });
 
             enter
                 .style('opacity', 0)

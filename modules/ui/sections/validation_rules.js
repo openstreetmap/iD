@@ -46,7 +46,7 @@ export function uiSectionValidationRules(context) {
             .attr('class', 'issue-rules-link')
             .attr('role', 'button')
             .attr('href', '#')
-            .html(t.html('issues.disable_all'))
+            .call(t.append('issues.disable_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 context.validator().disableRules(_ruleKeys);
@@ -57,7 +57,7 @@ export function uiSectionValidationRules(context) {
             .attr('class', 'issue-rules-link')
             .attr('role', 'button')
             .attr('href', '#')
-            .html(t.html('issues.enable_all'))
+            .call(t.append('issues.enable_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 context.validator().disableRules([]);
@@ -106,7 +106,7 @@ export function uiSectionValidationRules(context) {
             .html(function(d) {
                 var params = {};
                 if (d === 'unsquare_way') {
-                    params.val = '<span class="square-degrees"></span>';
+                    params.val = { html: '<span class="square-degrees"></span>' };
                 }
                 return t.html('issues.' + d + '.title', params);
             });

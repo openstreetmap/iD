@@ -50,9 +50,9 @@ export function uiNoteHeader() {
             .append('div')
             .attr('class', 'note-header-label')
             .html(function(d) {
-                if (_note.isNew()) { return t('note.new'); }
-                return t('note.note') + ' ' + d.id + ' ' +
-                    (d.status === 'closed' ? t('note.closed') : '');
+                if (_note.isNew()) { return t.html('note.new'); }
+                return t.html('note.note') + ' ' + d.id + ' ' +
+                    (d.status === 'closed' ? t.html('note.closed') : '');
             });
     }
 

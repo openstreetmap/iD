@@ -33,7 +33,7 @@ export function uiSectionRawMemberEditor(context) {
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t('inspector.title_count', { title: t.html('inspector.members'), count: count });
+            return t.html('inspector.title_count', { title: { html: t.html('inspector.members') }, count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -190,7 +190,7 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .html(function(d) {
+                        .text(function(d) {
                             var matched = presetManager.match(d.member, context.graph());
                             return (matched && matched.name()) || utilDisplayType(d.member.id);
                         });
@@ -198,7 +198,7 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .html(function(d) { return utilDisplayName(d.member); });
+                        .text(function(d) { return utilDisplayName(d.member); });
 
                     label
                         .append('button')
@@ -221,12 +221,12 @@ export function uiSectionRawMemberEditor(context) {
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-type')
-                        .html(t.html('inspector.' + d.type, { id: d.id }));
+                        .call(t.append('inspector.' + d.type, { id: d.id }));
 
                     labelText
                         .append('span')
                         .attr('class', 'member-entity-name')
-                        .html(t.html('inspector.incomplete', { id: d.id }));
+                        .call(t.append('inspector.incomplete', { id: d.id }));
 
                     label
                         .append('button')

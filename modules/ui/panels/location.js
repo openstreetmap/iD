@@ -23,15 +23,15 @@ export function uiPanelLocation(context) {
 
         list
             .append('li')
-            .html(dmsCoordinatePair(coord))
+            .text(dmsCoordinatePair(coord))
             .append('li')
-            .html(decimalCoordinatePair(coord));
+            .text(decimalCoordinatePair(coord));
 
         // Location Info
         selection
             .append('div')
             .attr('class', 'location-info')
-            .html(currLocation || ' ');
+            .text(currLocation || ' ');
 
         debouncedGetLocation(selection, coord);
     }
@@ -42,12 +42,12 @@ export function uiPanelLocation(context) {
         if (!services.geocoder) {
             currLocation = t('info_panels.location.unknown_location');
             selection.selectAll('.location-info')
-                .html(currLocation);
+                .text(currLocation);
         } else {
             services.geocoder.reverse(coord, function(err, result) {
                 currLocation = result ? result.display_name : t('info_panels.location.unknown_location');
                 selection.selectAll('.location-info')
-                    .html(currLocation);
+                    .text(currLocation);
             });
         }
     }

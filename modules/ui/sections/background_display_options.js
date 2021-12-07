@@ -103,7 +103,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', 'display-option-resetlink')
             .attr('role', 'button')
             .attr('href', '#')
-            .html(t.html('background.reset_all'))
+            .call(t.append('background.reset_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 for (var i = 0; i < _sliders.length; i++) {
@@ -119,7 +119,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .property('value', function(d) { return _options[d]; });
 
         container.selectAll('.display-option-value')
-            .html(function(d) { return Math.floor(_options[d] * 100) + '%'; });
+            .text(function(d) { return Math.floor(_options[d] * 100) + '%'; });
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });

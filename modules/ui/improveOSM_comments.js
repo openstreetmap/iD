@@ -55,7 +55,7 @@ export function uiImproveOsmComments() {
                   .attr('target', '_blank');
               }
               selection
-                .html(d => d.username);
+                .text(d => d.username);
             });
 
         metadataEnter
@@ -67,7 +67,7 @@ export function uiImproveOsmComments() {
           .append('div')
             .attr('class', 'comment-text')
           .append('p')
-            .html(d => d.text);
+            .text(d => d.text);
     })
     .catch(err => {
       console.log(err); // eslint-disable-line no-console

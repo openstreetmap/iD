@@ -1,5 +1,6 @@
 import { geoArea as d3_geoArea, geoMercatorRaw as d3_geoMercatorRaw } from 'd3-geo';
 import { json as d3_json } from 'd3-fetch';
+import { escape } from 'lodash';
 
 import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
@@ -68,19 +69,19 @@ export function rendererBackgroundSource(data) {
 
     source.name = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t('imagery.' + id_safe + '.name', { default: _name });
+        return t('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.name', { default: _name });
+        return t.html('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.description', { default: _description });
+        return t.html('imagery.' + id_safe + '.description', { default: escape(_description) });
     };
 
 
@@ -442,42 +443,22 @@ rendererBackgroundSource.Esri = function(data) {
 
 
     esri.getMetadata = function(center, tileCoord, callback) {
+        if (esri.id !== 'EsriWorldImagery') {
+            // rest endpoint is not available for ESRI's "clarity" imagery
+            return callback(null, {});
+        }
         var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], esri.zoomExtent[1]);
         var centerPoint = center[0] + ',' + center[1];  // long, lat (as it should be)
         var unknown = t('info_panels.background.unknown');
-        var metadataLayer;
         var vintage = {};
         var metadata = {};
 
         if (inflight[tileID]) return;
 
-        switch (true) {
-            case (zoom >= 20 && esri.id === 'EsriWorldImageryClarity'):
-                metadataLayer = 4;
-                break;
-            case zoom >= 19:
-                metadataLayer = 3;
-                break;
-            case zoom >= 17:
-                metadataLayer = 2;
-                break;
-            case zoom >= 13:
-                metadataLayer = 0;
-                break;
-            default:
-                metadataLayer = 99;
-        }
-
-        var url;
         // build up query using the layer appropriate to the current zoom
-        if (esri.id === 'EsriWorldImagery') {
-            url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/';
-        } else if (esri.id === 'EsriWorldImageryClarity') {
-            url = 'https://serviceslab.arcgisonline.com/arcgis/rest/services/Clarity_World_Imagery/MapServer/';
-        }
-
-        url += metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json';
+        var url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/4/query';
+        url += '?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json';
 
         if (!cache[tileID]) {
             cache[tileID] = {};
@@ -486,67 +467,52 @@ rendererBackgroundSource.Esri = function(data) {
             return callback(null, cache[tileID].metadata);
         }
 
-        // accurate metadata is only available >= 13
-        if (metadataLayer === 99) {
-            vintage = {
-                start: null,
-                end: null,
-                range: null
-            };
-            metadata = {
-                vintage: null,
-                source: unknown,
-                description: unknown,
-                resolution: unknown,
-                accuracy: unknown
-            };
+        inflight[tileID] = true;
+        d3_json(url)
+            .then(function(result) {
+                delete inflight[tileID];
 
-            callback(null, metadata);
+                result = result.features.map(f => f.attributes)
+                    .filter(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom)[0];
 
-        } else {
-            inflight[tileID] = true;
-            d3_json(url)
-                .then(function(result) {
-                    delete inflight[tileID];
-                    if (!result) {
-                        throw new Error('Unknown Error');
-                    } else if (result.features && result.features.length < 1) {
-                        throw new Error('No Results');
-                    } else if (result.error && result.error.message) {
-                        throw new Error(result.error.message);
-                    }
+                if (!result) {
+                    throw new Error('Unknown Error');
+                } else if (result.features && result.features.length < 1) {
+                    throw new Error('No Results');
+                } else if (result.error && result.error.message) {
+                    throw new Error(result.error.message);
+                }
 
-                    // pass through the discrete capture date from metadata
-                    var captureDate = localeDateString(result.features[0].attributes.SRC_DATE2);
-                    vintage = {
-                        start: captureDate,
-                        end: captureDate,
-                        range: captureDate
-                    };
-                    metadata = {
-                        vintage: vintage,
-                        source: clean(result.features[0].attributes.NICE_NAME),
-                        description: clean(result.features[0].attributes.NICE_DESC),
-                        resolution: clean(+parseFloat(result.features[0].attributes.SRC_RES).toFixed(4)),
-                        accuracy: clean(+parseFloat(result.features[0].attributes.SRC_ACC).toFixed(4))
-                    };
+                // pass through the discrete capture date from metadata
+                var captureDate = localeDateString(result.SRC_DATE2);
+                vintage = {
+                    start: captureDate,
+                    end: captureDate,
+                    range: captureDate
+                };
+                metadata = {
+                    vintage: vintage,
+                    source: clean(result.NICE_NAME),
+                    description: clean(result.NICE_DESC),
+                    resolution: clean(+parseFloat(result.SRC_RES).toFixed(4)),
+                    accuracy: clean(+parseFloat(result.SRC_ACC).toFixed(4))
+                };
 
-                    // append units - meters
-                    if (isFinite(metadata.resolution)) {
-                        metadata.resolution += ' m';
-                    }
-                    if (isFinite(metadata.accuracy)) {
-                        metadata.accuracy += ' m';
-                    }
+                // append units - meters
+                if (isFinite(metadata.resolution)) {
+                    metadata.resolution += ' m';
+                }
+                if (isFinite(metadata.accuracy)) {
+                    metadata.accuracy += ' m';
+                }
 
-                    cache[tileID].metadata = metadata;
-                    if (callback) callback(null, metadata);
-                })
-                .catch(function(err) {
-                    delete inflight[tileID];
-                    if (callback) callback(err.message);
-                });
-        }
+                cache[tileID].metadata = metadata;
+                if (callback) callback(null, metadata);
+            })
+            .catch(function(err) {
+                delete inflight[tileID];
+                if (callback) callback(err.message);
+            });
 
 
         function clean(val) {

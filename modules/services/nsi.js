@@ -458,10 +458,13 @@ function _upgradeTags(tags, loc) {
     return changed ? { newTags: newTags, matched: null } : null;
   }
 
-  // Order the [key,value,name] tuples - test primary before alternate
+  // Order the [key,value,name] tuples - test primary names before alternate names
   const tuples = gatherTuples(tryKVs, tryNames);
+  let foundPrimary = false;
+  let bestItem;
 
-  for (let i = 0; i < tuples.length; i++) {
+  // Test [key,value,name] tuples against the NSI matcher until we get a primary match or exhaust all options.
+  for (let i = 0; (i < tuples.length && !foundPrimary); i++) {
     const tuple = tuples[i];
     const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
 
@@ -470,14 +473,15 @@ function _upgradeTags(tags, loc) {
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
-    let itemID, item;
     for (let j = 0; j < hits.length; j++) {
       const hit = hits[j];
-      itemID = hit.itemID;
+      const isPrimary = (hits[j].match === 'primary');
+      const itemID = hit.itemID;
       if (_nsi.dissolved[itemID]) continue;       // Don't upgrade to a dissolved item
 
-      item = _nsi.ids.get(itemID);
+      const item = _nsi.ids.get(itemID);
       if (!item) continue;
+
       const mainTag = item.mainTag;               // e.g. `brand:wikidata`
       const itemQID = item.tags[mainTag];         // e.g. `brand:wikidata` qid
       const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
@@ -486,18 +490,25 @@ function _upgradeTags(tags, loc) {
         (!itemQID || itemQID === notQID) ||       // No `*:wikidata` or matched a `not:*:wikidata`
         (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
       ) {
-        item = null;
         continue;  // continue looking
-      } else {
-        break;     // use `item`
+      }
+
+      // If we get here, the hit is good..
+      if (!bestItem || isPrimary) {
+        bestItem = item;
+        if (isPrimary) {
+          foundPrimary = true;
+        }
+        break;  // can ignore the rest of the hits from this match
       }
     }
+  }
 
-    // Can't use any of these hits, try next tuple..
-    if (!item) continue;
 
-    // At this point we have matched a canonical item and can suggest tag upgrades..
-    item = JSON.parse(JSON.stringify(item));   // deep copy
+  // At this point we have matched a canonical item and can suggest tag upgrades..
+  if (bestItem) {
+    const itemID = bestItem.id;
+    const item = JSON.parse(JSON.stringify(bestItem));   // deep copy
     const tkv = item.tkv;
     const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
     const k = parts[1];

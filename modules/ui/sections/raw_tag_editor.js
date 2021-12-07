@@ -12,13 +12,14 @@ import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 import { uiTooltip } from '..';
 
+
 export function uiSectionRawTagEditor(id, context) {
 
     var section = uiSection(id, context)
         .classes('raw-tag-editor')
         .label(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
-            return t('inspector.title_count', { title: t.html('inspector.tags'), count: count });
+            return t.html('inspector.title_count', { title: { html: t.html('inspector.tags') }, count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
@@ -261,7 +262,7 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('title', function(d) { return d.key; })
             .call(utilGetSetValue, function(d) { return d.key; })
             .attr('readonly', function(d) {
-                return (isReadOnly(d) || (typeof d.value !== 'string')) || null;
+                return isReadOnly(d) || null;
             });
 
         items.selectAll('input.value')
@@ -495,27 +496,29 @@ export function uiSectionRawTagEditor(id, context) {
         }
 
 
-        var row = this.parentNode.parentNode;
-        var inputVal = d3_select(row).selectAll('input.value');
-        var vNew = context.cleanTagValue(utilGetSetValue(inputVal));
-
         _pendingChange = _pendingChange || {};
 
         if (kOld) {
+            if (kOld === kNew) return;
+            // a tag key was renamed
+            _pendingChange[kNew] = _pendingChange[kOld] || { oldKey: kOld };
             _pendingChange[kOld] = undefined;
+        } else {
+            // a new tag was added
+            let row = this.parentNode.parentNode;
+            let inputVal = d3_select(row).selectAll('input.value');
+            let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+            _pendingChange[kNew] = vNew;
+            utilGetSetValue(inputVal, vNew);
         }
-
-        _pendingChange[kNew] = vNew;
 
         // update the ordered key index so this row doesn't change position
         var existingKeyIndex = _orderedKeys.indexOf(kOld);
         if (existingKeyIndex !== -1) _orderedKeys[existingKeyIndex] = kNew;
 
         d.key = kNew;    // update datum to avoid exit/enter on tag update
-        d.value = vNew;
 
         this.value = kNew;
-        utilGetSetValue(inputVal, vNew);
         scheduleChange();
     }
 

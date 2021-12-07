@@ -31,7 +31,7 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t('inspector.title_count', { title: t.html('inspector.relations'), count: count });
+            return t.html('inspector.title_count', { title: { html: t.html('inspector.relations') }, count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -341,15 +341,15 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .html(function(d) {
+            .text(function(d) {
                 var matched = presetManager.match(d.relation, context.graph());
-                return (matched && matched.name()) || t('inspector.relation');
+                return (matched && matched.name()) || t.html('inspector.relation');
             });
 
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .html(function(d) { return utilDisplayName(d.relation); });
+            .text(function(d) { return utilDisplayName(d.relation); });
 
         labelEnter
             .append('button')
