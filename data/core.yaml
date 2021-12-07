@@ -813,6 +813,11 @@ en:
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
     offset_label: "Adjust Imagery Offset"
+    nudge:
+      top: "nudge top"
+      left: "nudge left"
+      right: "nudge right"
+      bottom: "nudge bottom"
   map_data:
     title: Map Data
     description: Map Data

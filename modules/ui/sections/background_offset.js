@@ -156,7 +156,7 @@ export function uiSectionBackgroundOffset(context) {
             .selectAll('button')
             .data(_directions).enter()
             .append('button')
-            .attr('title', function(d) { return 'nudge ' + d[0]; })
+            .attr('title', function(d) { return t(`background.nudge.${d[0]}`); })
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('click', function(d3_event, d) {
                 nudge(d[1]);
