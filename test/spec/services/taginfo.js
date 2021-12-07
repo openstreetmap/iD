@@ -1,5 +1,5 @@
 describe('iD.serviceTaginfo', function() {
-    var server, taginfo;
+    var taginfo;
 
 
     before(function() {
@@ -11,43 +11,40 @@ describe('iD.serviceTaginfo', function() {
     });
 
     beforeEach(function() {
-        server = window.fakeFetch().create();
         taginfo = iD.services.taginfo;
+
+        fetchMock.mock(new RegExp('\/keys\/all.*sortname=values_all'), {
+            body: '{"data":[{"count_all":56136034,"key":"name","count_all_fraction":0.0132}]}',
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
 
         // prepopulate popular keys list with "name"
         taginfo.init();
-        server.respondWith('GET',
-            new RegExp('\/keys\/all.*sortname=values_all'),
-            [200, { 'Content-Type': 'application/json' },
-                '{"data":[{"count_all":56136034,"key":"name","count_all_fraction":0.0132}]}']
-        );
-        server.respond();
-        server.restore();
-        server = window.fakeFetch().create();
+        fetchMock.reset();
     });
 
     afterEach(function() {
-        server.restore();
+        fetchMock.reset();
     });
 
-    function query(url) {
+    function parseQueryString(url) {
         return iD.utilStringQs(url.substring(url.indexOf('?')));
     }
 
-
     describe('#keys', function() {
         it('calls the given callback with the results of the keys query', function(done) {
-            var callback = sinon.spy();
-            taginfo.keys({query: 'amen'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.keys({ query: 'amen' }, callback);
 
             window.setTimeout(function() {
-                expect(query(server.requests()[0].url)).to.eql(
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
                     {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
                 );
                 expect(callback).to.have.been.calledWith(
@@ -58,15 +55,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes popular keys', function(done) {
-            var callback = sinon.spy();
-            taginfo.keys({query: 'amen'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":5190337,"count_nodes":500000,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},'
+                    + '{"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes":100}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0,"count_nodes_fraction":1.0},'
-                          + '{"count_all":1,"key":"amenityother","count_all_fraction":0.0,"count_nodes_fraction":0.0}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.keys({ query: 'amen' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -77,15 +74,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes popular keys with an entity type filter', function(done) {
-            var callback = sinon.spy();
-            taginfo.keys({query: 'amen', filter: 'nodes'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":5190337,"count_nodes":500000,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},'
+                    + '{"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes":100}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":5190337,"count_nodes":500000,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},'
-                            + '{"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes":100}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.keys({ query: 'amen', filter: 'nodes' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -96,15 +93,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes unpopular keys with a wiki page', function(done) {
-            var callback = sinon.spy();
-            taginfo.keys({query: 'amen'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},'
+                    + '{"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes_fraction":0.0, "in_wiki": true}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":5190337,"key":"amenity","count_all_fraction":1.0, "count_nodes_fraction":1.0},'
-                            + '{"count_all":1,"key":"amenityother","count_all_fraction":0.0, "count_nodes_fraction":0.0, "in_wiki": true}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.keys({ query: 'amen' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(null, [
@@ -116,15 +113,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('sorts keys with \':\' below keys without \':\'', function(done) {
-            var callback = sinon.spy();
-            taginfo.keys({query: 'ref'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"key":"ref:bag","count_all":9790586,"count_all_fraction":0.0028},' +
+                    '{"key":"ref","count_all":7933528,"count_all_fraction":0.0023}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"key":"ref:bag","count_all":9790586,"count_all_fraction":0.0028},' +
-                            '{"key":"ref","count_all":7933528,"count_all_fraction":0.0023}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.keys({ query: 'ref' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -137,17 +134,17 @@ describe('iD.serviceTaginfo', function() {
 
     describe('#multikeys', function() {
         it('calls the given callback with the results of the multikeys query', function(done) {
-            var callback = sinon.spy();
-            taginfo.multikeys({query: 'recycling:'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":69593,"key":"recycling:glass","count_all_fraction":0.0}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":69593,"key":"recycling:glass","count_all_fraction":0.0}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.multikeys({ query: 'recycling:' }, callback);
 
             window.setTimeout(function() {
-                expect(query(server.requests()[0].url)).to.eql(
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
                     {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
                 );
                 expect(callback).to.have.been.calledWith(
@@ -158,15 +155,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('excludes multikeys with extra colons', function(done) {
-            var callback = sinon.spy();
-            taginfo.multikeys({query: 'service:bicycle:'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":4426,"key":"service:bicycle:retail","count_all_fraction":0.0},' +
+                    '{"count_all":22,"key":"service:bicycle:retail:ebikes","count_all_fraction":0.0}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":4426,"key":"service:bicycle:retail","count_all_fraction":0.0},' +
-                            '{"count_all":22,"key":"service:bicycle:retail:ebikes","count_all_fraction":0.0}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.multikeys({ query: 'service:bicycle:' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -177,15 +174,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('excludes multikeys with wrong prefix', function(done) {
-            var callback = sinon.spy();
-            taginfo.multikeys({query: 'service:bicycle:'}, callback);
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":4426,"key":"service:bicycle:retail","count_all_fraction":0.0},' +
+                    '{"count_all":22,"key":"disused:service:bicycle","count_all_fraction":0.0}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/keys\/all/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"count_all":4426,"key":"service:bicycle:retail","count_all_fraction":0.0},' +
-                            '{"count_all":22,"key":"disused:service:bicycle","count_all_fraction":0.0}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.multikeys({ query: 'service:bicycle:' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -198,17 +195,17 @@ describe('iD.serviceTaginfo', function() {
 
     describe('#values', function() {
         it('calls the given callback with the results of the values query', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'amenity', query: 'par'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.1}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.1}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             window.setTimeout(function() {
-                expect(query(server.requests()[0].url)).to.eql(
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
                     {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
                 );
                 expect(callback).to.have.been.calledWith(
@@ -219,15 +216,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes popular values', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'amenity', query: 'par'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},' +
+                    '{"value":"party","description":"A place for partying", "fraction":0.0}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},' +
-                              '{"value":"party","description":"A place for partying", "fraction":0.0}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -238,15 +235,15 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('does not get values for extremely unpopular keys', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'name', query: 'ste'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"Rue Pasteur","description":"", "fraction":0.0001},' +
+                    '{"value":"Via Trieste","description":"", "fraction":0.0001}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"Rue Pasteur","description":"", "fraction":0.0001},' +
-                              '{"value":"Via Trieste","description":"", "fraction":0.0001}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'name', query: 'ste' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(null, []);
@@ -255,18 +252,18 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('excludes values with capital letters and some punctuation', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'amenity', query: 'par'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.2},'
+                    + '{"value":"PArking","description":"A common misspelling", "fraction":0.2},'
+                    + '{"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
+                    + '{"value":"parking, partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
+                    + '{"value":"*","description":"", "fraction":0.2}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.2},'
-                            + '{"value":"PArking","description":"A common misspelling", "fraction":0.2},'
-                            + '{"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
-                            + '{"value":"parking, partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
-                            + '{"value":"*","description":"", "fraction":0.2}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -277,18 +274,18 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes network values with capital letters and some punctuation', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'network', query: 'us'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"US:TX:FM","description":"Farm to Market Roads in the U.S. state of Texas.", "fraction":0.34},'
+                    + '{"value":"US:KY","description":"Primary and secondary state highways in the U.S. state of Kentucky.", "fraction":0.31},'
+                    + '{"value":"US:US","description":"U.S. routes in the United States.", "fraction":0.19},'
+                    + '{"value":"US:I","description":"Interstate highways in the United States.", "fraction":0.11},'
+                    + '{"value":"US:MD","description":"State highways in the U.S. state of Maryland.", "fraction":0.06}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"US:TX:FM","description":"Farm to Market Roads in the U.S. state of Texas.", "fraction":0.34},'
-                            + '{"value":"US:KY","description":"Primary and secondary state highways in the U.S. state of Kentucky.", "fraction":0.31},'
-                            + '{"value":"US:US","description":"U.S. routes in the United States.", "fraction":0.19},'
-                            + '{"value":"US:I","description":"Interstate highways in the United States.", "fraction":0.11},'
-                            + '{"value":"US:MD","description":"State highways in the U.S. state of Maryland.", "fraction":0.06}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'network', query: 'us' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(null, [
@@ -303,14 +300,14 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes biological genus values with capital letters', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'genus', query: 'qu'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"Quercus","description":"Oak", "fraction":0.5}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"Quercus","description":"Oak", "fraction":0.5}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'genus', query: 'qu' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -321,14 +318,14 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes biological taxon values with capital letters', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'taxon', query: 'qu'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'taxon', query: 'qu' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -339,14 +336,14 @@ describe('iD.serviceTaginfo', function() {
         });
 
         it('includes biological species values with capital letters', function(done) {
-            var callback = sinon.spy();
-            taginfo.values({key: 'species', query: 'qu'}, callback);
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/key\/values/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.values({ key: 'species', query: 'qu' }, callback);
 
             window.setTimeout(function() {
                 expect(callback).to.have.been.calledWith(
@@ -359,18 +356,18 @@ describe('iD.serviceTaginfo', function() {
 
     describe('#roles', function() {
         it('calls the given callback with the results of the roles query', function(done) {
-            var callback = sinon.spy();
-            taginfo.roles({rtype: 'route', query: 's', geometry: 'relation'}, callback);
+            fetchMock.mock(/\/relation\/roles/, {
+                body: '{"data":[{"role":"stop","count_relation_members_fraction":0.1757},' +
+                    '{"role":"south","count_relation_members_fraction":0.0035}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/relation\/roles/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"role":"stop","count_relation_members_fraction":0.1757},' +
-                             '{"role":"south","count_relation_members_fraction":0.0035}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.roles({ rtype: 'route', query: 's', geometry: 'relation' }, callback);
 
             window.setTimeout(function() {
-                expect(query(server.requests()[0].url)).to.eql(
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
                     {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
                 );
                 expect(callback).to.have.been.calledWith(null, [
@@ -384,17 +381,17 @@ describe('iD.serviceTaginfo', function() {
 
     describe('#docs', function() {
         it('calls the given callback with the results of the docs query', function(done) {
-            var callback = sinon.spy();
-            taginfo.docs({key: 'amenity', value: 'parking'}, callback);
+            fetchMock.mock(/\/tag\/wiki_page/, {
+                body: '{"data":[{"on_way":false,"lang":"en","on_area":true,"image":"File:Car park2.jpg"}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-            server.respondWith('GET', /\/tag\/wiki_page/,
-                [200, { 'Content-Type': 'application/json' },
-                    '{"data":[{"on_way":false,"lang":"en","on_area":true,"image":"File:Car park2.jpg"}]}']
-            );
-            server.respond();
+            var callback = sinon.spy();
+            taginfo.docs({ key: 'amenity', value: 'parking' }, callback);
 
             window.setTimeout(function() {
-                expect(query(server.requests()[0].url)).to.eql(
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
                     {key: 'amenity', value: 'parking'}
                 );
                 expect(callback).to.have.been.calledWith(
