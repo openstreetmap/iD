@@ -42,6 +42,7 @@ export function uiNoteHeader() {
             iconEnter
                 .append('div')
                 .attr('class', 'note-icon-annotation')
+                .attr('title', t('icons.close'))
                 .call(svgIcon(statusIcon, 'icon-annotation'));
         });
 

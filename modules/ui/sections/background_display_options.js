@@ -60,11 +60,10 @@ export function uiSectionBackgroundDisplayOptions(context) {
         var slidersEnter = containerEnter.selectAll('.display-control')
             .data(_sliders)
             .enter()
-            .append('div')
+            .append('label')
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .append('h5')
             .html(function(d) { return t.html('background.' + d); })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
@@ -90,7 +89,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
         sildersControlEnter
             .append('button')
-            .attr('title', t('background.reset'))
+            .attr('title', function(d) { return `${t('background.reset')} ${t('background.' + d)}`; })
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
             .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
@@ -102,6 +101,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
         containerEnter
             .append('a')
             .attr('class', 'display-option-resetlink')
+            .attr('role', 'button')
             .attr('href', '#')
             .call(t.append('background.reset_all'))
             .on('click', function(d3_event) {

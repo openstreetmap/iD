@@ -220,12 +220,13 @@ export function uiCommit(context) {
 
         headerTitle
             .append('div')
-            .append('h3')
+            .append('h2')
             .call(t.append('commit.title'));
 
         headerTitle
             .append('button')
             .attr('class', 'close')
+            .attr('title', t('icons.close'))
             .on('click', function() {
                 dispatch.call('cancel', this);
             })

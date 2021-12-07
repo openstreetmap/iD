@@ -110,6 +110,10 @@ export function uiFieldText(field, context) {
                     var which = (d > 0 ? 'increment' : 'decrement');
                     return 'form-field-button ' + which;
                 })
+                .attr('title', function(d){
+                    var which = (d > 0 ? 'increment' : 'decrement');
+                    return t(`inspector.${which}`);
+                })
                 .merge(buttons)
                 .on('click', function(d3_event, d) {
                     d3_event.preventDefault();

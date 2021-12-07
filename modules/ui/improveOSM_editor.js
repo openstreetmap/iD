@@ -31,11 +31,12 @@ export function uiImproveOsmEditor(context) {
     headerEnter
       .append('button')
         .attr('class', 'close')
+        .attr('title', t('icons.close'))
         .on('click', () => context.enter(modeBrowse(context)))
         .call(svgIcon('#iD-icon-close'));
 
     headerEnter
-      .append('h3')
+      .append('h2')
         .call(t.append('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')

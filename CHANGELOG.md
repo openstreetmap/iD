@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
 * Tag keys of a multi-selection can now also be changed in the tags editor when the tag values differ in the selected features. ([#8836])
+* Improve screen reader accessibility ([#8835], thanks [@mbrzakovic])
 #### :scissors: Operations
 * Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the operation to a single line ([#8818])
 * Many operations now better preserve OSM object history ([#8839], thanks [@tpetillon])
@@ -92,10 +93,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8825]: https://github.com/openstreetmap/iD/pull/8825
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
 [#8831]: https://github.com/openstreetmap/iD/issues/8831
+[#8835]: https://github.com/openstreetmap/iD/pull/8835
 [#8836]: https://github.com/openstreetmap/iD/issues/8836
 [#8839]: https://github.com/openstreetmap/iD/pull/8839
 [@k-yle]: https://github.com/k-yle
 [@tpetillon]: https://github.com/tpetillon
+[@mbrzakovic]: https://github.com/mbrzakovic
 
 # 2.20.2
 ##### 2021-Oct-28

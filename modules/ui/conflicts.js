@@ -60,11 +60,12 @@ export function uiConflicts(context) {
         headerEnter
             .append('button')
             .attr('class', 'fr')
+            .attr('title', t('icons.close'))
             .on('click', cancel)
             .call(svgIcon('#iD-icon-close'));
 
         headerEnter
-            .append('h3')
+            .append('h2')
             .call(t.append('save.conflict.header'));
 
         var bodyEnter = selection.selectAll('.body')

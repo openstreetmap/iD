@@ -13,6 +13,7 @@ export function uiToolSidebarToggle(context) {
         selection
             .append('button')
             .attr('class', 'bar-button')
+            .attr('aria-label', t('sidebar.tooltip'))
             .on('click', function() {
                 context.ui().sidebar.toggle();
             })

@@ -148,6 +148,7 @@ export function uiSectionBackgroundOffset(context) {
             .attr('class', 'nudge-inner-rect')
             .append('input')
             .attr('type', 'text')
+            .attr('aria-label', t('background.offset_label'))
             .on('change', inputOffset);
 
         nudgeWrapEnter
@@ -155,6 +156,7 @@ export function uiSectionBackgroundOffset(context) {
             .selectAll('button')
             .data(_directions).enter()
             .append('button')
+            .attr('title', function(d) { return t(`background.nudge.${d[0]}`); })
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('click', function(d3_event, d) {
                 nudge(d[1]);

@@ -44,6 +44,7 @@ export function uiSectionValidationRules(context) {
         ruleLinks
             .append('a')
             .attr('class', 'issue-rules-link')
+            .attr('role', 'button')
             .attr('href', '#')
             .call(t.append('issues.disable_all'))
             .on('click', function(d3_event) {
@@ -54,6 +55,7 @@ export function uiSectionValidationRules(context) {
         ruleLinks
             .append('a')
             .attr('class', 'issue-rules-link')
+            .attr('role', 'button')
             .attr('href', '#')
             .call(t.append('issues.enable_all'))
             .on('click', function(d3_event) {

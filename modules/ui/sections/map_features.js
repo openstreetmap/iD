@@ -31,6 +31,7 @@ export function uiSectionMapFeatures(context) {
         footer
             .append('a')
             .attr('class', 'feature-list-link')
+            .attr('role', 'button')
             .attr('href', '#')
             .call(t.append('issues.disable_all'))
             .on('click', function(d3_event) {
@@ -41,6 +42,7 @@ export function uiSectionMapFeatures(context) {
         footer
             .append('a')
             .attr('class', 'feature-list-link')
+            .attr('role', 'button')
             .attr('href', '#')
             .call(t.append('issues.enable_all'))
             .on('click', function(d3_event) {

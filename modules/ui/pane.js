@@ -3,7 +3,7 @@ import {
 } from 'd3-selection';
 
 import { svgIcon } from '../svg/icon';
-import { localizer } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 
 
@@ -110,6 +110,7 @@ export function uiPane(id, context) {
 
         heading
             .append('button')
+            .attr('title', t('icons.close'))
             .on('click', hidePane)
             .call(svgIcon('#iD-icon-close'));
 

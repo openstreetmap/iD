@@ -81,12 +81,13 @@ export function uiSuccess(context) {
       .attr('class', 'header fillL');
 
     header
-      .append('h3')
+      .append('h2')
       .call(t.append('success.just_edited'));
 
     header
       .append('button')
       .attr('class', 'close')
+      .attr('title', t('icons.close'))
       .on('click', () => dispatch.call('cancel'))
       .call(svgIcon('#iD-icon-close'));
 

@@ -63,6 +63,7 @@ export function uiInfo(context) {
             title
                 .append('button')
                 .attr('class', 'close')
+                .attr('title', t('icons.close'))
                 .on('click', function(d3_event, d) {
                     d3_event.stopImmediatePropagation();
                     d3_event.preventDefault();
