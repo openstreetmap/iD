@@ -203,6 +203,11 @@ en:
       too_large: This can't be followed because not enough of it is currently visible.
       connected_to_hidden: This can't be followed because it is connected to a hidden feature.
       not_downloaded: This can't be followed because parts of it have not yet been downloaded.
+    clone_address:
+      title: Clone address
+      description: Clone address from the first selected entity.
+      key: "&"
+      annotation: Clone the address.
     follow:
       title: Follow
       description:

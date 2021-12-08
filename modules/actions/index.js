@@ -10,6 +10,7 @@ export { actionFollow } from './follow';
 export { actionFollowOld } from './follow_old';
 export { actionConnect } from './connect';
 export { actionCurverize } from './curverize';
+export { actionCloneAddress } from './clone_address';
 export { actionCopyEntities } from './copy_entities';
 export { actionDeleteMember } from './delete_member';
 export { actionDeleteMultiple } from './delete_multiple';

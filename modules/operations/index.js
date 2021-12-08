@@ -2,6 +2,7 @@ export { operationCircularize } from './circularize';
 export { operationFollow } from './follow';
 export { operationFollowOld } from './follow_old';
 export { operationCurverize } from './curverize';
+export { operationCloneAddress } from './clone_address';
 export { operationContinue } from './continue';
 export { operationDelete } from './delete';
 export { operationDisconnect } from './disconnect';

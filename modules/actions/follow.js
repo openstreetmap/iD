@@ -45,18 +45,12 @@ export function actionFollow(selectedIDs, projection, reverse = false, customGra
     };
 
     var action = function (graph) {
-        window.graph = graph;
-        window.entities = graph.entities;
 
         let tgtWay = graph.entity(selectedIDs[0]);
         let tgtWayIsClosed = tgtWay.isClosed();
         let tgtNodes = tgtWay.nodes.slice();
-        let tgtNodesCnt = tgtNodes.length;
         let srcWay = graph.entity(selectedIDs[1]);
-        let srcWayIsClosed = srcWay.isClosed();
         let srcNodes = srcWay.nodes.slice();
-        let srcNodesCnt = srcNodes.length;
-
 
         let startNodeId = getStartNodeId(selectedIDs[2], tgtNodes, srcNodes);
         let endNodeId = getEndNodeId(startNodeId, selectedIDs[3], tgtNodes, srcNodes);
