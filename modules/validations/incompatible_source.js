@@ -17,7 +17,7 @@ export function validationIncompatibleSource() {
     {
       id: 'google',
       regex: /google/i,
-      exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))/i
+      exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_Africa_Buildings)/i
     }
   ];
 
