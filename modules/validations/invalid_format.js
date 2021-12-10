@@ -16,12 +16,7 @@ export function validationFormatting() {
             // An empty value is also acceptable
             return (!email || valid_email.test(email));
         }
-        /*
-        function isSchemePresent(url) {
-            var valid_scheme = /^https?:\/\//i;
-            return (!url || valid_scheme.test(url));
-        }
-        */
+
         function showReferenceEmail(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
@@ -30,7 +25,12 @@ export function validationFormatting() {
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_format.email.reference'));
         }
-        /*
+
+        /* see https://github.com/openstreetmap/iD/issues/6831#issuecomment-537121379
+        function isSchemePresent(url) {
+            var valid_scheme = /^https?:\/\//i;
+            return (!url || valid_scheme.test(url));
+        }
         function showReferenceWebsite(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
@@ -64,8 +64,8 @@ export function validationFormatting() {
                     data: (websites.length > 1) ? '_multi' : ''
                 }));
             }
-        }
-        */
+        }*/
+
         if (entity.tags.email) {
             // Multiple emails are possible
             var emails = entity.tags.email
