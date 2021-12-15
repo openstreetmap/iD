@@ -467,7 +467,7 @@ export function uiPresetList(context) {
                 var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
                 d3_select(this).call(uiTooltip()
                     .title(t.html('inspector.hidden_preset.' + (isAutoHidden ? 'zoom' : 'manual'), {
-                        features: t.html('feature.' + hiddenPresetFeaturesId + '.description')
+                        features: { html: t.html('feature.' + hiddenPresetFeaturesId + '.description') }
                     }))
                     .placement(index < 2 ? 'bottom' : 'top')
                 );
