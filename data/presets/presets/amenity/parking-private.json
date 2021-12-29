@@ -33,7 +33,8 @@
   ],
   "tags": {
       "amenity": "parking",
-      "access": "private"
+      "access": "private",
+      "parking": "surface"
   },
   "terms": [
       "automobile parking",

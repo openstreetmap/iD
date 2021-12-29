@@ -42,6 +42,5 @@
         "truck parking",
         "vehicle parking"
     ],
-    "name": "Parking Lot",
-    "shortcut": ["⇧+p"]
+    "name": "Parking Lot"
 }

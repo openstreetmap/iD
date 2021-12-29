@@ -1,0 +1,50 @@
+{
+  "icon": "temaki-car_parked",
+  "fields": [
+      "operator",
+      "operator/type",
+      "parking",
+      "capacity",
+      "capacity_disabled",
+      "access_simple",
+      "fee",
+      "surface",
+      "parking/condition"
+  ],
+  "moreFields": [
+      "address",
+      "payment_multi_fee",
+      "charge_fee",
+      "covered",
+      "email",
+      "fax",
+      "maxstay",
+      "name",
+      "opening_hours",
+      "park_ride",
+      "phone",
+      "ref",
+      "supervised",
+      "website",
+      "wheelchair"
+  ],
+  "geometry": [
+      "area"
+  ],
+  "tags": {
+      "amenity": "parking",
+      "parking": "surface",
+      "surface": "unpaved"
+  },
+  "terms": [
+      "automobile parking",
+      "car lot",
+      "car parking",
+      "rv parking",
+      "truck parking",
+      "vehicle parking",
+      "surface parking",
+      "unpaved parking"
+  ],
+  "name": "Parking Lot unpaved (Surface)"
+}
