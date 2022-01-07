@@ -13,6 +13,33 @@ export function osmSetAreaKeys(value) {
     osmAreaKeys = value;
 }
 
+export const osmLifecyclePrefixes = {
+    // nonexistent, might be built
+    proposed: true, planned: true,
+    // under maintentance or between groundbreaking and opening
+    construction: true,
+    // existent but not functional
+    disused: true,
+    // dilapidated to nonexistent
+    abandoned: true, was: true,
+    // nonexistent, still may appear in imagery
+    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true, obliterated: true,
+    // existent occasionally, e.g. stormwater drainage basin
+    intermittent: true
+};
+
+/** @param {string} key */
+export function osmRemoveLifecyclePrefix(key) {
+    const keySegments = key.split(':');
+    if (keySegments.length === 1) return key;
+
+    if (keySegments[0] in osmLifecyclePrefixes) {
+        return key.slice(keySegments[0].length + 1);
+    }
+
+    return key;
+}
+
 // returns an object with the tag from `tags` that implies an area geometry, if any
 export function osmTagSuggestingArea(tags) {
     if (tags.area === 'yes') return { area: 'yes' };
@@ -35,13 +62,14 @@ export function osmTagSuggestingArea(tags) {
         }
     };
     var returnTags = {};
-    for (var key in tags) {
+    for (var realKey in tags) {
+        const key = osmRemoveLifecyclePrefix(realKey);
         if (key in osmAreaKeys && !(tags[key] in osmAreaKeys[key])) {
-            returnTags[key] = tags[key];
+            returnTags[realKey] = tags[realKey];
             return returnTags;
         }
         if (key in lineKeys && tags[key] in lineKeys[key]) {
-            returnTags[key] = tags[key];
+            returnTags[realKey] = tags[realKey];
             return returnTags;
         }
     }

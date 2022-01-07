@@ -35,6 +35,8 @@ export {
     osmOneWayTags,
     osmPavedTags,
     osmIsInterestingTag,
+    osmLifecyclePrefixes,
+    osmRemoveLifecyclePrefix,
     osmRoutableHighwayTagValues,
     osmFlowingWaterwayTagValues,
     osmRailwayTrackTagValues
