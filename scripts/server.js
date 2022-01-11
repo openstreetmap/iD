@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const colors = require('colors/safe');
+const chalk = require('chalk');
 const gaze = require('gaze');
 const StaticServer = require('static-server');
 
@@ -12,5 +12,5 @@ gaze(['css/**/*.css'], (err, watcher) => {
 
 const server = new StaticServer({ rootPath: process.cwd(), port: 8080, followSymlink: true });
 server.start(() => {
-  console.log(colors.yellow(`Listening on ${server.port}`));
+  console.log(chalk.yellow(`Listening on ${server.port}`));
 });
