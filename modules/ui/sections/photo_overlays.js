@@ -73,7 +73,7 @@ export function uiSectionPhotoOverlays(context) {
                 var titleID;
                 if (d.id === 'mapillary-signs') titleID = 'mapillary.signs.tooltip';
                 else if (d.id === 'mapillary') titleID = 'mapillary_images.tooltip';
-                else if (d.id === 'openstreetcam') titleID = 'openstreetcam_images.tooltip';
+                else if (d.id === 'kartaview') titleID = 'kartaview_images.tooltip';
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
                     .call(uiTooltip()
@@ -273,7 +273,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
-            .html(t.html('photo_overlays.username_filter.title'));
+            .call(t.append('photo_overlays.username_filter.title'));
 
         labelEnter
             .append('input')

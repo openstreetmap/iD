@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
+const chalk = require('chalk');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const btoa = require('btoa');
 const YAML = require('js-yaml');
-const colors = require('colors/safe');
 
 const resourceIds = ['core', 'imagery', 'community'];
 const reviewedOnlyLangs = ['vi'];
@@ -331,7 +331,7 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       let shortcut = modifier + rep;
       if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
         let message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
-        console.warn(colors.yellow(message));
+        console.warn(chalk.yellow(message));
       } else {
         usedShortcuts[shortcut] = shortcutPathString;
       }

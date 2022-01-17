@@ -60,11 +60,10 @@ export function uiSectionBackgroundDisplayOptions(context) {
         var slidersEnter = containerEnter.selectAll('.display-control')
             .data(_sliders)
             .enter()
-            .append('div')
+            .append('label')
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .append('h5')
             .html(function(d) { return t.html('background.' + d); })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
@@ -90,7 +89,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
         sildersControlEnter
             .append('button')
-            .attr('title', t('background.reset'))
+            .attr('title', function(d) { return `${t('background.reset')} ${t('background.' + d)}`; })
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
             .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
@@ -102,8 +101,9 @@ export function uiSectionBackgroundDisplayOptions(context) {
         containerEnter
             .append('a')
             .attr('class', 'display-option-resetlink')
+            .attr('role', 'button')
             .attr('href', '#')
-            .html(t.html('background.reset_all'))
+            .call(t.append('background.reset_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 for (var i = 0; i < _sliders.length; i++) {
@@ -119,7 +119,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .property('value', function(d) { return _options[d]; });
 
         container.selectAll('.display-option-value')
-            .html(function(d) { return Math.floor(_options[d] * 100) + '%'; });
+            .text(function(d) { return Math.floor(_options[d] * 100) + '%'; });
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });

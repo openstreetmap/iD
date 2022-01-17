@@ -3,7 +3,7 @@ import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
-import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection } from '../util';
+import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldestID } from '../util';
 
 
 // Join ways at the end node they share.
@@ -28,6 +28,11 @@ export function actionJoin(ids) {
     var action = function(graph) {
         var ways = ids.map(graph.entity, graph);
 
+        // Prefer to keep an existing way.
+        // if there are multiple existing ways, keep the oldest one
+        // the oldest way is determined by the ID of the way.
+        var survivorID = utilOldestID(ways.map(way => way.id));
+
         // if any of the ways are sided (e.g. coastline, cliff, kerb)
         // sort them first so they establish the overall order - #6033
         ways.sort(function(a, b) {
@@ -37,17 +42,6 @@ export function actionJoin(ids) {
                 : (bSided && !aSided) ? 1
                 : 0;
         });
-
-        // Prefer to keep an existing way.
-        // if there are multiple existing ways, keep the oldest one
-        // the oldest way is determined by the ID of the way
-        const survivorID = (
-            ways
-                .filter((way) => !way.isNew())
-                .sort((a, b) => +a.osmId() - +b.osmId())[0] || ways[0]
-        ).id;
-
-
 
         var sequences = osmJoinWays(ways, graph);
         var joined = sequences[0];

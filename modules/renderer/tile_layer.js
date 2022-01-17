@@ -198,6 +198,7 @@ export function rendererTileLayer(context) {
         image.enter()
           .append('img')
             .attr('class', 'tile')
+            .attr('alt', '')
             .attr('draggable', 'false')
             .style('width', _tileSize + 'px')
             .style('height', _tileSize + 'px')
@@ -238,7 +239,7 @@ export function rendererTileLayer(context) {
 
             debug
                 .selectAll('.tile-label-debug-coord')
-                .html(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; });
+                .text(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; });
 
             debug
                 .selectAll('.tile-label-debug-vintage')
@@ -246,9 +247,11 @@ export function rendererTileLayer(context) {
                     var span = d3_select(this);
                     var center = context.projection.invert(tileCenter(d));
                     _source.getMetadata(center, d, function(err, result) {
-                        span.html((result && result.vintage && result.vintage.range) ||
-                            t('info_panels.background.vintage') + ': ' + t('info_panels.background.unknown')
-                        );
+                        if (result && result.vintage && result.vintage.range) {
+                          span.text(result.vintage.range);
+                        } else {
+                          span.html(t.html('info_panels.background.vintage') + ': ' + t.html('info_panels.background.unknown'));
+                        }
                     });
                 });
         }

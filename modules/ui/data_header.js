@@ -32,7 +32,7 @@ export function uiDataHeader() {
         headerEnter
             .append('div')
             .attr('class', 'data-header-label')
-            .html(t.html('map_data.layers.custom.title'));
+            .call(t.append('map_data.layers.custom.title'));
     }
 
 

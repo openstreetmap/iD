@@ -12,6 +12,8 @@ _storage = _storage || (() => {
   };
 })();
 
+const _listeners = {};
+
 //
 // corePreferences is an interface for persisting basic key-value strings
 // within and between iD sessions on the same site.
@@ -22,11 +24,13 @@ _storage = _storage || (() => {
  * @returns {boolean} true if the action succeeded
  */
 function corePreferences(k, v) {
-
   try {
-    if (arguments.length === 1) return _storage.getItem(k);
+    if (v === undefined) return _storage.getItem(k);
     else if (v === null) _storage.removeItem(k);
     else _storage.setItem(k, v);
+    if (_listeners[k]) {
+      _listeners[k].forEach(handler => handler(v));
+    }
     return true;
   } catch (e) {
     /* eslint-disable no-console */
@@ -36,7 +40,12 @@ function corePreferences(k, v) {
     /* eslint-enable no-console */
     return false;
   }
-
 }
+
+// adds an event listener which is triggered whenever
+corePreferences.onChange = function(k, handler) {
+  _listeners[k] = _listeners[k] || [];
+  _listeners[k].push(handler);
+};
 
 export { corePreferences as prefs };

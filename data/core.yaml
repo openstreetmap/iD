@@ -12,6 +12,12 @@ en:
     list: list
     text: text
     deselect: deselect
+    close: close
+    forward: forward
+    backward: backward
+    expand: expand
+    collapse: collapse
+    plus: add
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
@@ -468,8 +474,8 @@ en:
             single_node: Divide this line into two at this point.
             multiple_node: Divide this line at these points.
           multiple:
-            single_node: Divide these lines at this point.
-            multiple_node: Divide these lines at these points.
+            single_node: "Divide all lines at this point. Tip: To limit this operation to a specific line, select both the line and point before performing the split."
+            multiple_node: "Divide all lines at these points. Tip: To limit this operation to a specific line, select the line as well as the points before performing the split."
         area:
           single:
             single_node: Divide the edge of this area into two at this point.
@@ -563,7 +569,6 @@ en:
     tooltip: "Redo: {action}"
     nothing: Nothing to redo.
   tooltip_keyhint: "Shortcut:"
-  browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
   translate:
     translate: Add multilingual name
     localized_translation_label: Multilingual Name
@@ -644,8 +649,10 @@ en:
       last_edit: Last Edit
       edited_by: Edited By
       changeset: Changeset
+      changeset_link: Changeset on osm.org
+      profile_link: Profile on osm.org
+      history_link: History on osm.org
       unknown: Unknown
-      link_text: History on openstreetmap.org
       note_no_history: "No History (New Note)"
       note_comments: Comments
       note_created_date: Created Date
@@ -703,6 +710,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_to_tag: Add a tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -712,7 +720,7 @@ en:
       one: "{n} result for {search}"
       other: "{n} results for {search}"
     no_documentation_key: "There is no documentation available."
-    edit_reference: "edit/translate"
+    edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
@@ -739,6 +747,8 @@ en:
         type: Type
         default: Default
         layer: Layer
+    increment: increment
+    decrement: decrement
     add: Add
     none: None
     node: Node
@@ -764,6 +774,7 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+    speed_unit: "Speed unit"
     roadheight:
       # symbol for meters
       meter: m
@@ -801,6 +812,12 @@ en:
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset_label: "Adjust Imagery Offset"
+    nudge:
+      top: "nudge top"
+      left: "nudge left"
+      right: "nudge right"
+      bottom: "nudge bottom"
   map_data:
     title: Map Data
     description: Map Data
@@ -1000,7 +1017,7 @@ en:
       location: 'This feature was moved by both you and {user}.'
       nodelist: 'Nodes were changed by both you and {user}.'
       memberlist: 'Relation members were changed by both you and {user}.'
-      tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
+      tags: 'You changed the "{tag}" tag to "{local}" and {user} changed it to "{remote}".'
   success:
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
@@ -1028,6 +1045,7 @@ en:
     privacy_update: "Our privacy policy has recently been updated."
     privacy_policy: iD privacy policy
     privacy: "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}."
+    privacy_settings: Your Privacy Settings
     walkthrough: "Start the Walkthrough"
     start: "Edit now"
   source_switch:
@@ -1405,11 +1423,11 @@ en:
     signs:
       tooltip: "Traffic signs from Mapillary"
     view_on_mapillary: "View this image on Mapillary"
-  openstreetcam_images:
-    tooltip: "Street-level photos from OpenStreetCam"
-  openstreetcam:
-    title: OpenStreetCam
-    view_on_openstreetcam: "View this image on OpenStreetCam"
+  kartaview_images:
+    tooltip: "Street-level photos from KartaView"
+  kartaview:
+    title: KartaView
+    view_on_kartaview: "View this image on KartaView"
   note:
     note: Note
     title: Edit note
@@ -1609,7 +1627,7 @@ en:
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [OpenStreetCam](https://www.openstreetcam.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [KartaView](https://kartaview.org)."
       using_h: "Using Street Level Photos"
       using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
       photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
@@ -1768,7 +1786,7 @@ en:
         message:
           one: "{highway} is disconnected from other roads and paths"
           other: "{count} routable features are connected only to each other"
-        reference: "All roads, paths, and ferry routes should connect to form a single routing network."
+        reference: "All roads, paths, and ferry routes should connect to form a single routing network. This feature (or small collection of features) is either disconnected from the routing network or only connected to it via a feature that few applications consider routable."
     fixme_tag:
       message: '{feature} has a "Fix Me" request'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
@@ -1886,7 +1904,7 @@ en:
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
     vertex_as_point:
-      message: '{feature} should be part of a line or area based on its tags'
+      message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     fix:
       add_a_bridge:

@@ -1,6 +1,6 @@
 describe('iD.serviceMapillary', function() {
     var dimensions = [64, 64];
-    var context, server, mapillary;
+    var context, mapillary;
 
 
     before(function() {
@@ -18,14 +18,11 @@ describe('iD.serviceMapillary', function() {
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
-        server = window.fakeFetch().create();
         mapillary = iD.services.mapillary;
         mapillary.reset();
     });
 
-    afterEach(function() {
-        server.restore();
-    });
+    afterEach(function() {});
 
 
     describe('#init', function() {

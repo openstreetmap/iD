@@ -85,8 +85,8 @@ export function uiToolUndoRedo(context) {
                     // there are no tooltips for touch interactions so flash feedback instead
 
                     var text = annotation ?
-                        t(d.id + '.tooltip', { action: annotation }) :
-                        t(d.id + '.nothing');
+                        t.html(d.id + '.tooltip', { action: annotation }) :
+                        t.html(d.id + '.nothing');
                     context.ui().flash
                         .duration(2000)
                         .iconName('#' + d.icon)

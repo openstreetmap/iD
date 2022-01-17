@@ -41,7 +41,7 @@ export function uiSourceSwitch(context) {
         selection
             .append('a')
             .attr('href', '#')
-            .html(t.html('source_switch.live'))
+            .call(t.append('source_switch.live'))
             .attr('class', 'live chip')
             .on('click', click);
     };

@@ -7,9 +7,11 @@ import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { uiTooltip } from '..';
+
 
 export function uiSectionRawTagEditor(id, context) {
 
@@ -17,7 +19,7 @@ export function uiSectionRawTagEditor(id, context) {
         .classes('raw-tag-editor')
         .label(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
-            return t('inspector.title_count', { title: t.html('inspector.tags'), count: count });
+            return t.html('inspector.title_count', { title: { html: t.html('inspector.tags') }, count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
@@ -83,7 +85,8 @@ export function uiSectionRawTagEditor(id, context) {
 
         var optionsEnter = options.enter()
             .insert('div', ':first-child')
-            .attr('class', 'raw-tag-options');
+            .attr('class', 'raw-tag-options')
+            .attr('role', 'tablist');
 
         var optionEnter = optionsEnter.selectAll('.raw-tag-option')
             .data(availableViews, function(d) { return d.id; })
@@ -94,13 +97,16 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', function(d) {
                 return 'raw-tag-option raw-tag-option-' + d.id + (_tagView === d.id ? ' selected' : '');
             })
+            .attr('aria-selected', function(d) { return _tagView === d.id; })
+            .attr('role', 'tab')
             .attr('title', function(d) { return t('icons.' + d.id); })
             .on('click', function(d3_event, d) {
                 _tagView = d.id;
                 prefs('raw-tag-editor-view', d.id);
 
                 wrap.selectAll('.raw-tag-option')
-                    .classed('selected', function(datum) { return datum === d; });
+                    .classed('selected', function(datum) { return datum === d; })
+                    .attr('aria-selected', function(datum) { return datum === d; });
 
                 wrap.selectAll('.tag-text')
                     .classed('hide', (d.id !== 'text'))
@@ -157,7 +163,9 @@ export function uiSectionRawTagEditor(id, context) {
         addRowEnter
             .append('button')
             .attr('class', 'add-tag')
+            .attr('aria-label', t('inspector.add_to_tag'))
             .call(svgIcon('#iD-icon-plus', 'light'))
+            .call(uiTooltip().title(t.html('inspector.add_to_tag')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
             .on('click', addTag);
 
         addRowEnter
@@ -254,7 +262,7 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('title', function(d) { return d.key; })
             .call(utilGetSetValue, function(d) { return d.key; })
             .attr('readonly', function(d) {
-                return (isReadOnly(d) || (typeof d.value !== 'string')) || null;
+                return isReadOnly(d) || null;
             });
 
         items.selectAll('input.value')
@@ -488,27 +496,29 @@ export function uiSectionRawTagEditor(id, context) {
         }
 
 
-        var row = this.parentNode.parentNode;
-        var inputVal = d3_select(row).selectAll('input.value');
-        var vNew = context.cleanTagValue(utilGetSetValue(inputVal));
-
         _pendingChange = _pendingChange || {};
 
         if (kOld) {
+            if (kOld === kNew) return;
+            // a tag key was renamed
+            _pendingChange[kNew] = _pendingChange[kOld] || { oldKey: kOld };
             _pendingChange[kOld] = undefined;
+        } else {
+            // a new tag was added
+            let row = this.parentNode.parentNode;
+            let inputVal = d3_select(row).selectAll('input.value');
+            let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+            _pendingChange[kNew] = vNew;
+            utilGetSetValue(inputVal, vNew);
         }
-
-        _pendingChange[kNew] = vNew;
 
         // update the ordered key index so this row doesn't change position
         var existingKeyIndex = _orderedKeys.indexOf(kOld);
         if (existingKeyIndex !== -1) _orderedKeys[existingKeyIndex] = kNew;
 
         d.key = kNew;    // update datum to avoid exit/enter on tag update
-        d.value = vNew;
 
         this.value = kNew;
-        utilGetSetValue(inputVal, vNew);
         scheduleChange();
     }
 

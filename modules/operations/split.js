@@ -78,6 +78,15 @@ export function operationSplit(context, selectedIDs) {
     };
 
 
+    operation.icon = function() {
+        if (_waysAmount === 'multiple') {
+            return '#iD-operation-split-multiple';
+        } else {
+            return '#iD-operation-split';
+        }
+    };
+
+
     operation.id = 'split';
     operation.keys = [t('operations.split.key')];
     operation.title = t('operations.split.title');

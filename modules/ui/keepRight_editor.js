@@ -30,12 +30,13 @@ export function uiKeepRightEditor(context) {
     headerEnter
       .append('button')
         .attr('class', 'close')
+        .attr('title', t('icons.close'))
         .on('click', () => context.enter(modeBrowse(context)))
         .call(svgIcon('#iD-icon-close'));
 
     headerEnter
-      .append('h3')
-        .html(t.html('QA.keepRight.title'));
+      .append('h2')
+        .call(t.append('QA.keepRight.title'));
 
 
     let body = selection.selectAll('.body')
@@ -90,7 +91,7 @@ export function uiKeepRightEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .html(t.html('QA.keepRight.comment'));
+        .call(t.append('QA.keepRight.comment'));
 
     saveSectionEnter
       .append('textarea')
@@ -146,7 +147,7 @@ export function uiKeepRightEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .html(t.html('QA.keepRight.save_comment'));
+        .call(t.append('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')

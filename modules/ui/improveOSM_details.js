@@ -42,12 +42,12 @@ export function uiImproveOsmDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .html(t.html('QA.keepRight.detail_description'));
+        .call(t.append('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')
         .attr('class', 'qa-details-description-text')
-        .html(issueDetail);
+        .text(issueDetail);
 
     // If there are entity links in the error message..
     let relatedEntities = [];

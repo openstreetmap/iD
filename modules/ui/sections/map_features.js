@@ -31,8 +31,9 @@ export function uiSectionMapFeatures(context) {
         footer
             .append('a')
             .attr('class', 'feature-list-link')
+            .attr('role', 'button')
             .attr('href', '#')
-            .html(t.html('issues.disable_all'))
+            .call(t.append('issues.disable_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 context.features().disableAll();
@@ -41,8 +42,9 @@ export function uiSectionMapFeatures(context) {
         footer
             .append('a')
             .attr('class', 'feature-list-link')
+            .attr('role', 'button')
             .attr('href', '#')
-            .html(t.html('issues.enable_all'))
+            .call(t.append('issues.enable_all'))
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 context.features().enableAll();

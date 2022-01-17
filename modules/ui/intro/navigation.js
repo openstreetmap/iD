@@ -355,7 +355,7 @@ export function uiIntroNavigation(context, reveal) {
         var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
         reveal('.entity-editor-pane',
-            helpHtml('intro.navigation.close_townhall', { button: icon(href, 'inline') })
+            helpHtml('intro.navigation.close_townhall', { button: { html: icon(href, 'inline') } })
         );
 
         context.on('exit.intro', function() {
@@ -368,7 +368,7 @@ export function uiIntroNavigation(context, reveal) {
             var href = d3_select(selector).attr('href') || '#iD-icon-close';
 
             reveal('.entity-editor-pane',
-                helpHtml('intro.navigation.close_townhall', { button: icon(href, 'inline') }),
+                helpHtml('intro.navigation.close_townhall', { button: { html: icon(href, 'inline') } }),
                 { duration: 0 }
             );
         });
@@ -492,9 +492,9 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal('.entity-editor-pane', helpHtml('intro.navigation.street_different_fields') + '{br}' +
             helpHtml('intro.navigation.editor_street', {
-                button: icon(href, 'inline'),
-                field1: onewayField.label(),
-                field2: maxspeedField.label()
+                button: { html: icon(href, 'inline') },
+                field1: { html: onewayField.label() },
+                field2: { html: maxspeedField.label() }
             }));
 
         context.on('exit.intro', function() {
@@ -508,9 +508,9 @@ export function uiIntroNavigation(context, reveal) {
 
             reveal('.entity-editor-pane', helpHtml('intro.navigation.street_different_fields') + '{br}' +
                 helpHtml('intro.navigation.editor_street', {
-                    button: icon(href, 'inline'),
-                    field1: onewayField.label(),
-                    field2: maxspeedField.label()
+                    button: { html: icon(href, 'inline') },
+                    field1: { html: onewayField.label() },
+                    field2: { html: maxspeedField.label() }
                 }), { duration: 0 }
             );
         });

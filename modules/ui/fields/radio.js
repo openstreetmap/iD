@@ -129,7 +129,7 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
-            .html(t.html('inspector.radio.structure.type'));
+            .call(t.append('inspector.radio.structure.type'));
 
         typeEnter
             .append('div')
@@ -174,7 +174,7 @@ export function uiFieldRadio(field, context) {
             .append('span')
             .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
-            .html(t.html('inspector.radio.structure.layer'));
+            .call(t.append('inspector.radio.structure.layer'));
 
         layerEnter
             .append('div')
@@ -265,13 +265,12 @@ export function uiFieldRadio(field, context) {
 
 
     radio.tags = function(tags) {
-
-        radios.property('checked', function(d) {
+        function isOptionChecked(d) {
             if (field.key) {
                 return tags[field.key] === d;
             }
             return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
-        });
+        }
 
         function isMixed(d) {
             if (field.key) {
@@ -280,13 +279,19 @@ export function uiFieldRadio(field, context) {
             return Array.isArray(tags[d]);
         }
 
+        radios.property('checked', function(d) {
+            return isOptionChecked(d) &&
+                (field.key || field.options.filter(isOptionChecked).length === 1);
+        });
+
         labels
             .classed('active', function(d) {
                 if (field.key) {
                     return (Array.isArray(tags[field.key]) && tags[field.key].includes(d))
                         || tags[field.key] === d;
                 }
-                return Array.isArray(tags[d]) || !!(tags[d] && tags[d].toLowerCase() !== 'no');
+                return Array.isArray(tags[d]) && tags[d].some(v => typeof v === 'string' && v.toLowerCase() !== 'no') ||
+                    !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
             })
             .classed('mixed', isMixed)
             .attr('title', function(d) {
@@ -297,9 +302,9 @@ export function uiFieldRadio(field, context) {
         var selection = radios.filter(function() { return this.checked; });
 
         if (selection.empty()) {
-            placeholder.html(t.html('inspector.none'));
+            placeholder.call(t.append('inspector.none'));
         } else {
-            placeholder.html(selection.attr('value'));
+            placeholder.text(selection.attr('value'));
             _oldType[selection.datum()] = tags[selection.datum()];
         }
 

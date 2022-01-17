@@ -24,11 +24,10 @@ if you're looking for something to do.
   * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.com
   * Development mirror of `v3-prototype` branch: https://preview.ideditor.com/master
 
-Come on in, the water's lovely. More help? Ping `quincylvania` or `bhousel` on:
-* [OpenStreetMap US Slack](https://slack.openstreetmap.us/)
-(`#id` or `#general` channels)
-* [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC)
-(`irc.oftc.net`, in `#osm-dev` or `#osm`)
+Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
+* [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
+* [OpenStreetMap Discord](https://discord.gg/openstreetmap) (`#id` channel)
+* [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
 * [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
 ## Prerequisites

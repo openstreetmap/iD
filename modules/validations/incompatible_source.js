@@ -17,7 +17,7 @@ export function validationIncompatibleSource() {
     {
       id: 'google',
       regex: /google/i,
-      exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))/i
+      exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_Africa_Buildings)/i
     }
   ];
 
@@ -68,7 +68,7 @@ export function validationIncompatibleSource() {
             .enter()
             .append('div')
             .attr('class', 'issue-reference')
-            .html(t.html(`issues.incompatible_source.reference.${id}`));
+            .call(t.append(`issues.incompatible_source.reference.${id}`));
         };
       }
     };

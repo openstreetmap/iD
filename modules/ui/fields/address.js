@@ -288,7 +288,7 @@ export function uiFieldAddress(field, context) {
             })
             .attr('title', function(subfield) {
                 var val = tags[field.key + ':' + subfield.id];
-                return val && Array.isArray(val) && val.filter(Boolean).join('\n');
+                return (val && Array.isArray(val)) ? val.filter(Boolean).join('\n') : undefined;
             })
             .classed('mixed', function(subfield) {
                 return Array.isArray(tags[field.key + ':' + subfield.id]);

@@ -182,7 +182,11 @@ export function uiInit(context) {
             .call(uiSpinner(context));
 
         // Map controls
-        var controls = overMap
+        var controlsWrap = overMap
+            .append('div')
+            .attr('class', 'map-controls-wrap');
+
+        var controls = controlsWrap
             .append('div')
             .attr('class', 'map-controls');
 
@@ -201,9 +205,9 @@ export function uiInit(context) {
             .attr('class', 'map-control geolocate-control')
             .call(uiGeolocate(context));
 
-        controls.on('wheel.mapControls', function(d3_event) {
+        controlsWrap.on('wheel.mapControls', function(d3_event) {
             if (!d3_event.deltaX) {
-                controls.node().scrollTop += d3_event.deltaY;
+                controlsWrap.node().scrollTop += d3_event.deltaY;
             }
         });
 
@@ -316,6 +320,7 @@ export function uiInit(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
+            .attr('aria-label', t('report_a_bug'))
             .call(svgIcon('#iD-icon-bug', 'light'))
             .call(uiTooltip().title(t.html('report_a_bug')).placement('top'));
 
@@ -323,6 +328,7 @@ export function uiInit(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
+            .attr('aria-label', t('help_translate'))
             .call(svgIcon('#iD-icon-translate', 'light'))
             .call(uiTooltip().title(t.html('help_translate')).placement('top'));
 

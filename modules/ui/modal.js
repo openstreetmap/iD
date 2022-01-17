@@ -1,5 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
+import { t } from './../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
@@ -55,6 +56,7 @@ export function uiModal(selection, blocking) {
     modal
       .append('button')
       .attr('class', 'close')
+      .attr('title', t('icons.close'))
       .on('click', shaded.close)
       .call(svgIcon('#iD-icon-close'));
 

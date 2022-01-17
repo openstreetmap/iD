@@ -157,7 +157,7 @@ export function validationAlmostJunction(context) {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .html(t.html('issues.almost_junction.highway-highway.reference'));
+        .call(t.append('issues.almost_junction.highway-highway.reference'));
     }
 
     function isExtendableCandidate(node, way) {

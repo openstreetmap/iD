@@ -70,7 +70,7 @@ export function uiSectionBackgroundList(context) {
 
         minimapLabelEnter
             .append('span')
-            .html(t.html('background.minimap.description'));
+            .call(t.append('background.minimap.description'));
 
 
         var panelLabelEnter = bgExtrasListEnter
@@ -93,7 +93,7 @@ export function uiSectionBackgroundList(context) {
 
         panelLabelEnter
             .append('span')
-            .html(t.html('background.panel.description'));
+            .call(t.append('background.panel.description'));
 
         var locPanelLabelEnter = bgExtrasListEnter
             .append('li')
@@ -115,7 +115,7 @@ export function uiSectionBackgroundList(context) {
 
         locPanelLabelEnter
             .append('span')
-            .html(t.html('background.location_panel.description'));
+            .call(t.append('background.location_panel.description'));
 
 
         // "Info / Report a Problem" link
@@ -129,7 +129,7 @@ export function uiSectionBackgroundList(context) {
             .call(svgIcon('#iD-icon-out-link', 'inline'))
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
-            .html(t.html('background.imagery_problem_faq'));
+            .call(t.append('background.imagery_problem_faq'));
 
         _backgroundList
             .call(drawListItems, 'radio', function(d3_event, d) {

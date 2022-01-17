@@ -60,6 +60,7 @@ export function uiFieldRoadspeed(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('class', 'roadspeed-unit')
+            .attr('aria-label', t('inspector.speed_unit'))
             .call(unitCombo)
             .merge(unitInput);
 

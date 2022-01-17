@@ -32,7 +32,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
     // Add a way member into the relation "wherever it makes sense".
     // In this situation we were not supplied a memberIndex.
     function addWayMember(relation, graph) {
-        var groups, tempWay, item, i, j, k;
+        var groups, tempWay, insertPairIsReversed, item, i, j, k;
 
         // remove PTv2 stops and platforms before doing anything.
         var PTv2members = [];
@@ -65,6 +65,14 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             groups = utilArrayGroupBy(tempRelation.members, 'type');
             groups.way = groups.way || [];
 
+            // Insert pair is reversed if the inserted way comes before the original one.
+            // (Except when they form a loop.)
+            var originalWay = graph.entity(insertPair.originalID);
+            var insertedWay = graph.entity(insertPair.insertedID);
+            insertPairIsReversed = originalWay.nodes.length > 0 && insertedWay.nodes.length > 0 &&
+                insertedWay.nodes[insertedWay.nodes.length - 1] === originalWay.nodes[0] &&
+                originalWay.nodes[originalWay.nodes.length - 1] !== insertedWay.nodes[0];
+
         } else {
             // Add the member anywhere, one time. Just push and let `osmJoinWays` decide where to put it.
             groups = utilArrayGroupBy(relation.members, 'type');
@@ -96,15 +104,16 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
 
                 // If this is a paired item, generate members in correct order and role
                 if (tempWay && item.id === tempWay.id) {
-                    if (nodes[0].id === insertPair.nodes[0]) {
-                        item.pair = [
-                            { id: insertPair.originalID, type: 'way', role: item.role },
-                            { id: insertPair.insertedID, type: 'way', role: item.role }
-                        ];
-                    } else {
+                    var reverse = nodes[0].id !== insertPair.nodes[0] ^ insertPairIsReversed;
+                    if (reverse) {
                         item.pair = [
                             { id: insertPair.insertedID, type: 'way', role: item.role },
                             { id: insertPair.originalID, type: 'way', role: item.role }
+                        ];
+                    } else {
+                        item.pair = [
+                            { id: insertPair.originalID, type: 'way', role: item.role },
+                            { id: insertPair.insertedID, type: 'way', role: item.role }
                         ];
                     }
                 }

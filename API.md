@@ -41,15 +41,15 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`offset`__ - Background imagery alignment offset in meters, formatted as `east,north`.<br/>
   _Example:_ `offset=-10,5`
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
-  _Example:_ `photo_overlay=streetside,mapillary,openstreetcam`<br/>
-  _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `mapillary-map-features`, `openstreetcam`
+  _Example:_ `photo_overlay=streetside,mapillary,kartaview`<br/>
+  _Available values:_ `streetside` (Microsoft Bing), `mapillary`, `mapillary-signs`, `mapillary-map-features`, `kartaview`
 * __`photo_dates`__ - The range of capture dates by which to filter street-level photos. Dates are given in YYYY-MM-DD format and separated by `_`. One-sided ranges are supported.<br/>
   _Example:_ `photo_dates=2019-01-01_2020-12-31`, `photo_dates=2019-01-01_`, `photo_dates=_2020-12-31`<br/>
-* __`photo_username`__ - The Mapillary or OpenStreetCam username by which to filter street-level photos. Multiple comma-separated usernames are supported.<br/>
+* __`photo_username`__ - The Mapillary or KartaView username by which to filter street-level photos. Multiple comma-separated usernames are supported.<br/>
   _Example:_ `photo_user=quincylvania`, `photo_user=quincylvania,chrisbeddow`<br/>
 * __`photo`__ - The service and ID of the street-level photo to show.<br/>
   _Example:_ `photo=streetside/718514589`<br/>
-  _Available prefixes:_ `streetside/`, `mapillary/`, `openstreetcam/`
+  _Available prefixes:_ `streetside/`, `mapillary/`, `kartaview`
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
@@ -262,7 +262,7 @@ iD's preset database is stored in the `iD.fileFetcher.cache().presets` object an
 or modified prior to creating the iD context.
 
 The format of the `presets` object is
-[documented here](https://github.com/openstreetmap/iD/tree/develop/data/presets#custom-presets).
+[documented as part of the schema-builder project](https://github.com/ideditor/schema-builder#presets).
 
 To add a new preset to iD's existing preset database.
 ```js

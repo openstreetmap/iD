@@ -81,9 +81,14 @@ h2 {
     font-weight: bold;
     margin-bottom: 20px;
 }
+.header h2 {
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
 
 h3:last-child,
-h2:last-child,
 h4:last-child { margin-bottom: 0;}
 
 h3 {
@@ -189,7 +194,8 @@ input[type=number],
 input[type=url],
 input[type=tel],
 input[type=email],
-input[type=date] {
+input[type=date],
+input[type=color] {
     /* need this since line-height interpretation may vary by font or browser */
     height: 2.585em;
 }
@@ -1505,6 +1511,34 @@ a.hide-toggle {
     fill: #333;
     opacity: .5;
 }
+.form-field-button.colour-preview {
+    border-radius: 0 0 4px 0;
+}
+.form-field-button.colour-preview > div.colour-box {
+    border: 3px solid #fff;
+    height: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 20px;
+    padding: 1px 0 0 1px;
+}
+.inspector-hover .form-field-button.colour-preview > div.colour-box {
+    border-color: #ececec;
+}
+.form-field-button.colour-preview:active > div.colour-box,
+.form-field-button.colour-preview:focus > div.colour-box {
+    border-color: #f1f1f1;
+}
+@media (hover: hover) {
+    .form-field-button.colour-preview:hover > div.colour-box {
+        border-color: #f1f1f1;
+    }
+}
+.form-field-button.colour-selector {
+    visibility: hidden;
+    position: absolute;
+}
 
 
 /* round corners of first/last child elements */
@@ -1703,12 +1737,13 @@ a.hide-toggle {
 
 /* Field - Text / Numeric
 ------------------------------------------------------- */
-.form-field-input-text > input:only-of-type,
+.form-field-input-text > input:only-child,
 .form-field-input-tel > input:only-of-type,
 .form-field-input-email > input:only-of-type,
 .form-field-input-url > input:only-child {
     border-radius: 0 0 4px 4px;
 }
+.form-field-input-text > input:not(:only-child),
 .form-field-input-url > input:not(:only-child) {
     border-radius: 0 0 0 4px;
 }
@@ -2953,22 +2988,32 @@ img.tag-reference-wiki-image {
 
 /* Map Controls
 ------------------------------------------------------- */
+.map-controls-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 100;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    pointer-events: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.map-controls-wrap::-webkit-scrollbar {
+    display: none;
+}
 .map-controls {
     right: 0;
     top: 0;
     width: 40px;
     position: absolute;
-    z-index: 100;
     bottom: 0;
     display: flex;
     flex-direction: column;
     padding: 5px 0;
     pointer-events: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-.map-controls::-webkit-scrollbar {
-    display: none;
 }
 .map-controls:before {
     content: '';
@@ -3612,12 +3657,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     padding: 10px;
 }
 
-.display-control h5 {
+.display-options-container label {
     padding-bottom: 0;
     padding-top: 10px;
 }
 
-.display-control h5 span {
+.display-options-container label span {
+    font-weight: bold;
     margin: 5px;
 }
 
@@ -4925,6 +4971,14 @@ img.tile-debug {
     color: #7092ff;
 }
 
+.modal-splash .section-preferences-third-party {
+    margin-top: 20px;
+}
+
+.modal-splash .section-preferences-third-party .privacy-link {
+    display: none;
+}
+
 
 /* Shortcuts Modal
 ------------------------------------------------------- */
@@ -5337,22 +5391,26 @@ button.conflicts-button {
 /* dark tooltips for sidebar / panels */
 .tooltip.dark.top .popover-arrow,
 .map-pane .tooltip.top .popover-arrow,
-.sidebar .tooltip.top .popover-arrow {
+.sidebar .tooltip.top .popover-arrow,
+.modal .tooltip.top .popover-arrow {
     border-top-color: #000;
 }
 .tooltip.dark.bottom .popover-arrow,
 .map-pane .tooltip.bottom .popover-arrow,
-.sidebar .tooltip.bottom .popover-arrow {
+.sidebar .tooltip.bottom .popover-arrow,
+.modal .tooltip.bottom .popover-arrow {
     border-bottom-color: #000;
 }
 .tooltip.dark.left .popover-arrow,
 .map-pane .tooltip.left .popover-arrow,
-.sidebar .tooltip.left .popover-arrow {
+.sidebar .tooltip.left .popover-arrow,
+.modal .tooltip.left .popover-arrow {
     border-left-color: #000;
 }
 .tooltip.dark.right .popover-arrow,
 .map-pane .tooltip.right .popover-arrow,
-.sidebar .tooltip.right .popover-arrow {
+.sidebar .tooltip.right .popover-arrow,
+.modal .tooltip.right .popover-arrow {
     border-right-color: #000;
 }
 .tooltip.dark .popover-inner,
@@ -5363,7 +5421,8 @@ button.conflicts-button {
 .map-pane .keyhint-wrap,
 .sidebar .popover-inner,
 .sidebar .tooltip-heading,
-.sidebar .keyhint-wrap {
+.sidebar .keyhint-wrap,
+.modal .popover-inner {
     background: #000;
     color: #ccc;
 }

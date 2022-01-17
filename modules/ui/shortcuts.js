@@ -25,9 +25,9 @@ export function uiShortcuts(context) {
 
         content
             .append('div')
-            .attr('class', 'modal-section')
-            .append('h3')
-            .html(t.html('shortcuts.title'));
+            .attr('class', 'modal-section header')
+            .append('h2')
+            .call(t.append('shortcuts.title'));
 
         fileFetcher.get('shortcuts')
             .then(function(data) {
@@ -152,11 +152,11 @@ export function uiShortcuts(context) {
                 selection
                     .append('kbd')
                     .attr('class', 'modifier')
-                    .html(function (d) { return uiCmd.display(d); });
+                    .text(function (d) { return uiCmd.display(d); });
 
                 selection
                     .append('span')
-                    .html('+');
+                    .text('+');
             });
 
 
@@ -201,7 +201,7 @@ export function uiShortcuts(context) {
                     selection
                         .append('kbd')
                         .attr('class', 'shortcut')
-                        .html(function (d) { return d.shortcut; });
+                        .text(function (d) { return d.shortcut; });
                 }
 
                 if (i < nodes.length - 1) {
@@ -211,7 +211,7 @@ export function uiShortcuts(context) {
                 } else if (i === nodes.length - 1 && d.suffix) {
                     selection
                         .append('span')
-                        .html(d.suffix);
+                        .text(d.suffix);
                 }
             });
 
@@ -223,7 +223,7 @@ export function uiShortcuts(context) {
 
                 selection
                     .append('span')
-                    .html('+');
+                    .text('+');
 
                 selection
                     .append('span')
