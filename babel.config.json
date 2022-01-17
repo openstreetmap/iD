@@ -1,9 +1,22 @@
 {
-  "compact": false,
-  "plugins": [
-    ["inline-json-import", {}]
-  ],
   "presets": [
-    ["@babel/preset-env", {"modules": false, "targets": { "ie": "11" }}]
-  ]
+    [
+      "@babel/preset-env", {
+        "useBuiltIns": "entry",
+        "corejs": 3,
+        "modules": false,
+        "targets": {
+          "chrome": "58",
+          "ie": 11
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "inline-json-import",
+    ["@babel/transform-runtime", {
+      "regenerator": true
+    }]
+  ],
+  "compact": false
 }

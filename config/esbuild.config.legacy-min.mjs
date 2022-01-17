@@ -6,11 +6,19 @@ esbuild
     minify: true,
     bundle: true,
     sourcemap: true,
-    entryPoints: ['./modules/id.legacy.js'],
+    entryPoints: ['./modules/id.js'],
     legalComments: 'none',
     logLevel: 'info',
     outfile: 'dist/iD.legacy.min.js',
     target: 'es5',
-    plugins: [babel()]
+    plugins: [babel({
+      filter: /.*/,
+      namespace: '',
+      babelHelpers: 'bundled',
+      // avoid circular dependencies due to `useBuiltIns: usage` option
+      exclude: [/\/core-js\//],
+      sourceType: 'unambiguous',
+    })],
   })
   .catch(() => process.exit(1));
+

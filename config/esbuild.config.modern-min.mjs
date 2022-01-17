@@ -5,7 +5,7 @@ esbuild
     minify: true,
     bundle: true,
     sourcemap: true,
-    entryPoints: ['./modules/id.modern.js'],
+    entryPoints: ['./modules/id.js'],
     legalComments: 'none',
     logLevel: 'info',
     outfile: 'dist/iD.min.js'
