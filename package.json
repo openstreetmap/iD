@@ -106,7 +106,7 @@
     "minimist": "^1.2.3",
     "mocha": "^8.4.0",
     "name-suggestion-index": "~6.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.0",
     "npm-run-all": "^4.0.0",
     "object-inspect": "1.10.3",
     "osm-community-index": "~5.1.0",
