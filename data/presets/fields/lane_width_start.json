@@ -1,5 +1,5 @@
 {
     "key": "width:lanes:start",
     "type": "typeCombo",
-    "label": "Largeur de voie (début)"
+    "label": "lane width start"
 }

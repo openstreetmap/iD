@@ -199,6 +199,25 @@ export function geoLineIntersection(a, b) {
 }
 
 
+// Same as LineIntersection but for infinite lines (will return intersection point even if outside the line segments)
+export function geoInfiniteLineIntersection(a, b) {
+    var p = [a[0][0], a[0][1]];
+    var p2 = [a[1][0], a[1][1]];
+    var q = [b[0][0], b[0][1]];
+    var q2 = [b[1][0], b[1][1]];
+    var r = geoVecSubtract(p2, p);
+    var s = geoVecSubtract(q2, q);
+    var uNumerator = geoVecCross(geoVecSubtract(q, p), r);
+    var denominator = geoVecCross(r, s);
+
+    if (uNumerator && denominator) {
+        var t = geoVecCross(geoVecSubtract(q, p), s) / denominator;
+        return geoVecInterp(p, p2, t);
+    }
+
+    return null;
+}
+
 export function geoPathIntersections(path1, path2) {
     var intersections = [];
     for (var i = 0; i < path1.length - 1; i++) {

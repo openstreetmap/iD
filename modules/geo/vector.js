@@ -63,6 +63,11 @@ export function geoVecAngle(a, b) {
     return Math.atan2(b[1] - a[1], b[0] - a[0]);
 }
 
+// Return the angle in radians between two angles (a and b) in radians
+export function geoVecAngleBetween(a, b) {
+    return Math.atan2(Math.sin(a - b), Math.cos(a - b));
+}
+
 // dot product
 export function geoVecDot(a, b, origin) {
     origin = origin || [0, 0];

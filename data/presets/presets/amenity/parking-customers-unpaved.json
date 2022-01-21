@@ -34,7 +34,8 @@
   "tags": {
       "amenity": "parking",
       "access": "customers",
-      "surface": "unpaved"
+      "surface": "unpaved",
+      "parking": "surface"
   },
   "terms": [
       "automobile parking",

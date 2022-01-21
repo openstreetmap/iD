@@ -33,7 +33,8 @@
   ],
   "tags": {
       "amenity": "parking",
-      "access": "customers"
+      "access": "customers",
+      "parking": "surface"
   },
   "terms": [
       "automobile parking",

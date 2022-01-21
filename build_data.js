@@ -91,7 +91,7 @@ function buildData() {
     'data/taginfo.json',
     'data/territory-languages.json',
     'dist/locales/en.json',
-    'svg/fontawesome/*.svg',
+    //'svg/fontawesome/*.svg',
   ]);
 
   var groups = generateGroups(tstrings);

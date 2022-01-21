@@ -29,6 +29,9 @@
         "lcn": "yes"
     },
     "addTags": {
+        "highway": "cycleway",
+        "foot": "no",
+        "lcn": "yes",
         "surface": "asphalt"
     },
     "terms": [

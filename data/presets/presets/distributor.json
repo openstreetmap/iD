@@ -1,0 +1,39 @@
+{
+  "icon": "maki-warehouse",
+  "fields": [
+      "name",
+      "operator",
+      "address",
+      "distributor",
+      "opening_hours"
+  ],
+  "moreFields": [
+      "air_conditioning",
+      "email",
+      "fax",
+      "gnis/feature_id",
+      "height_building",
+      "internet_access",
+      "internet_access/fee",
+      "internet_access/ssid",
+      "level",
+      "phone",
+      "ref/vatin",
+      "website",
+      "wheelchair"
+  ],
+  "geometry": [
+      "point",
+      "area"
+  ],
+  "tags": {
+    "office": "distributor",
+    "industrial": "distributor"
+  },
+  "terms": [
+    "warehouse",
+    "distribution",
+    "distributor"
+  ],
+  "name": "Distributor"
+}

@@ -14,7 +14,7 @@
   {"pID": "entrance/home", "hidden" : true},
   {"pID": "entrance/garage", "hidden" : true},
   {"pID": "leisure/playground", "hidden" : true},
-  {"pID": "amenity/parking", "hidden" : true},
+  {"pID": "amenity/parking_surface", "hidden" : true},
   {"pID": "amenity/parking-private", "hidden" : true},
   {"pID": "amenity/parking-customers", "hidden" : true},
   {"pID": "amenity/parking-private-unpaved", "hidden" : true},

@@ -1,6 +1,7 @@
 {
     "fields": [
-        "name"
+        "name",
+        "note_chaire_mobilite"
     ],
     "geometry": [
         "line"

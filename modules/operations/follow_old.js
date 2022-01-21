@@ -1,21 +1,13 @@
 import { t } from '../util/locale';
 import { geoExtent } from '../geo';
-import { actionFollow } from '../actions/follow';
+import { actionFollowOld} from '../actions/follow_old';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
-//import { test } from '../actions/follow.test';
 
-//window.tested = false;
 
-export function operationFollow(selectedIDs, context) {
+export function operationFollowOld(selectedIDs, context) {
 
-    /*if (!window.tested) {
-        test();
-        window.tested = true;
-    }*/
-
-    var action = actionFollow(selectedIDs, context.projection);
-    
+    var action = actionFollowOld(selectedIDs, context.projection);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
 
@@ -29,7 +21,6 @@ export function operationFollow(selectedIDs, context) {
 
 
     operation.available = function() {
-
 
         if (selectedIDs.length < 2 || selectedIDs.length > 4) {
             return false;
@@ -86,19 +77,19 @@ export function operationFollow(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.follow.' + disable) :
-            t('operations.follow.description.points');
+            t('operations.follow_old.' + disable) :
+            t('operations.follow_old.description.points');
     };
 
 
     operation.annotation = function() {
-        return t('operations.follow.annotation.points');
+        return t('operations.follow_old.annotation.points');
     };
 
 
-    operation.id = 'follow';
-    operation.keys = [t('operations.follow.key')];
-    operation.title = t('operations.follow.title');
+    operation.id = 'follow_old';
+    operation.keys = [t('operations.follow_old.key')];
+    operation.title = t('operations.follow_old.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

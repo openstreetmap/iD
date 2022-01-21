@@ -1,0 +1,24 @@
+{
+  "icon": "fas-people-carry",
+  "geometry": [
+      "point",
+      "area"
+  ],
+  "fields": [
+    "name",
+    "{office}",
+    "truck",
+    "bus",
+    "public_transport",
+    "school_bus"
+  ],
+  "tags": {
+      "office": "transport",
+      "industrial": "transport"
+  },
+  "terms": [
+      "transport",
+      "logistics"
+  ],
+  "name": "Transport Company / Logistics"
+}

@@ -13,3 +13,5 @@ function startServer() {
 }
 
 startServer();
+
+// npm run build && afplay /System/Library/Sounds/Funk.aiff && npm run start_no_build 8081
