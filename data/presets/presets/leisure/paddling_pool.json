@@ -1,0 +1,33 @@
+{
+    "icon": "fas-swimmer",
+    "fields": [
+        "name",
+        "operator",
+        "playground/theme",
+        "surface",
+        "access_simple",
+        "min_age",
+        "max_age"
+    ],
+    "moreFields": [
+        "blind",
+        "dog",
+        "gnis/feature_id",
+        "wheelchair"
+    ],
+    "geometry": [
+        "area",
+        "point"
+    ],
+    "terms": [
+        "pataugeoire",
+        "paddling pool",
+        "water",
+        "splash"
+    ],
+    "tags": {
+        "leisure": "paddling_pool",
+        "seasonal": "summer"
+    },
+    "name": "Paddling Pool"
+  }
