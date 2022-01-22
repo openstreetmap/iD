@@ -489,7 +489,7 @@ export function coreValidator(context) {
       _headIsCurrent = false;   // We will need to catch up after the validation promise fulfills
       return _headPromise;
     }
-	
+
     // Re-validate all issues that are disconnected_way or impossible_oneway
     // fix #8758
     let additionalEntityIDs = new Set();
