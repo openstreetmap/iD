@@ -490,17 +490,6 @@ export function coreValidator(context) {
       return _headPromise;
     }
 
-    // Re-validate all issues that are disconnected_way or impossible_oneway
-    // fix #8758
-    let additionalEntityIDs = new Set();
-    for (const IssueID in _headCache.issuesByIssueID) {
-      const issue = _headCache.issuesByIssueID[IssueID];
-      if (['disconnected_way', 'impossible_oneway'].includes(issue.type)) {
-        issue.entityIds.forEach(additionalEntityIDs.add, additionalEntityIDs);
-      }
-    }
-    entityIDs = new Set([...entityIDs, ...additionalEntityIDs]);
-
     // If we get here, its time to start validating stuff.
     _headCache.graph = currGraph;  // take snapshot
     _completeDiff = context.history().difference().complete();
@@ -512,6 +501,17 @@ export function coreValidator(context) {
       dispatch.call('validated');
       return Promise.resolve();
     }
+
+    // Re-validate all issues that are disconnected_way or impossible_oneway
+    // fix #8758
+    let additionalEntityIDs = new Set();
+    for (const IssueID in _headCache.issuesByIssueID) {
+      const issue = _headCache.issuesByIssueID[IssueID];
+      if (['disconnected_way', 'impossible_oneway'].includes(issue.type)) {
+        issue.entityIds.forEach(additionalEntityIDs.add, additionalEntityIDs);
+      }
+    }
+    entityIDs = new Set([...entityIDs, ...additionalEntityIDs]);
 
     _headPromise = validateEntitiesAsync(entityIDs, _headCache)
       .then(() => updateResolvedIssues(entityIDs))
