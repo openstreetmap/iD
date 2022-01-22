@@ -502,30 +502,13 @@ export function coreValidator(context) {
             return Promise.resolve();
         }
 
-        // Get child nodes of EntityIDs for re-validation
-        let childNodes = new Set();
-        for (const entity of entityIDs) {
-            if (currGraph.entities[entity] !== undefined && currGraph.entities[entity].nodes !== undefined) {
-                currGraph.entities[entity].nodes.forEach(childNodes.add, childNodes);
-            }
-        }
-
         // Re-validate all issues that are disconnected_way or impossible_oneway
-        // and which are connected to modified nodes - fix #8758
+        // fix #8758
         let additionalEntityIDs = new Set();
         for (const IssueID in _headCache.issuesByIssueID) {
             const issue = _headCache.issuesByIssueID[IssueID];
             if (['disconnected_way', 'impossible_oneway'].includes(issue.type)) {
-                for (const issueEntity of issue.entityIds) {
-                    const issueNodes = currGraph.entities[issueEntity].nodes;
-                    // See if any of issue way's nodes match nodes of modified ways
-                    const intersection = new Set(
-                        Array.from(issueNodes).filter(x => childNodes.has(x))
-                    );
-                    if (intersection.size > 0) {
-                        issue.entityIds.forEach(additionalEntityIDs.add, additionalEntityIDs);
-                    }
-                }
+                issue.entityIds.forEach(additionalEntityIDs.add, additionalEntityIDs);
             }
         }
         entityIDs = new Set([...entityIDs, ...additionalEntityIDs]);
