@@ -39,6 +39,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     var _drawNode;
 
     var _didResolveTempEdit = false;
+    var _focusedParentWay;
 
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
@@ -453,11 +454,12 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
             // If the way has looped over itself, follow some other way.
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
+            console.log('LAST NODES PARENT: ', lastNodesParents);
             const secondLastNodesParents = historyGraph.parentWays(historyGraph.entity(secondLastNodeId)).filter(w => w.id !== wayID);
 
             const featureType = getFeatureType(lastNodesParents);
 
-            if (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0) {
+            if (!_focusedParentWay && (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0)) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
@@ -468,7 +470,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // Check if the last node's parent is also the parent of the second last node.
             // The last node must only have one parent, but the second last node can have
             // multiple parents.
-            if (!secondLastNodesParents.some(n => n.id === lastNodesParents[0].id)) {
+            if (!_focusedParentWay && (!secondLastNodesParents.some(n => n.id === lastNodesParents[0].id))) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
@@ -476,7 +478,15 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 return;
             }
 
-            const way = lastNodesParents[0];
+            let way = lastNodesParents[0];
+
+            if (!_focusedParentWay) {
+                console.log('NOT FOCUSED PARENT WAY ID: ', lastNodesParents[0]);
+                _focusedParentWay = lastNodesParents[0];
+            } else {
+                way = _focusedParentWay;
+                console.log('ELSE WAY ID: ', way);
+            }
 
             const indexOfLast = way.nodes.indexOf(lastNodeId);
             const indexOfSecondLast = way.nodes.indexOf(secondLastNodeId);
