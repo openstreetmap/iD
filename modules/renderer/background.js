@@ -483,8 +483,8 @@ export function rendererBackground(context) {
         } else {
           background.baseLayerSource(
             background.findSource(requested) ||
-            best ||
             background.findSource(prefs('background-last-used')) ||
+            best ||
             background.findSource('Bing') ||
             first ||
             background.findSource('none')
