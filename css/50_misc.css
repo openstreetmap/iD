@@ -425,6 +425,32 @@ path.line.stroke.tag-highway.tag-status.tag-status-construction,
     stroke-dasharray: 8, 8;
 }
 
+/** Closed Paths */
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-path,
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
+    stroke-width: 10;
+}
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-path,
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
+    stroke-width: 5;
+    stroke-linecap: butt;
+    stroke-dasharray: none
+}
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-path,
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
+    stroke-width: 4;
+    stroke-linecap: butt;
+    stroke-dasharray: 10, 10;
+}
 
 /* Buildings */
 path.stroke.tag-building {
