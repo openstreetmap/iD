@@ -74,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
+* Activate new access values (`customers` and `unknown`) introduced in `id-tagging-schema` v3.2 ([#8876])
 #### :hammer: Development
 * switch test runner to [karma](https://karma-runner.github.io/) ([#8764], thanks [@wvanderp])
 
@@ -98,6 +99,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8835]: https://github.com/openstreetmap/iD/pull/8835
 [#8836]: https://github.com/openstreetmap/iD/issues/8836
 [#8839]: https://github.com/openstreetmap/iD/pull/8839
+[#8876]: https://github.com/openstreetmap/iD/pull/8876
 [@k-yle]: https://github.com/k-yle
 [@tpetillon]: https://github.com/tpetillon
 [@mbrzakovic]: https://github.com/mbrzakovic
