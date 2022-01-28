@@ -50,7 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
 * Tag keys of a multi-selection can now also be changed in the tags editor when the tag values differ in the selected features. ([#8836])
 * Improve screen reader accessibility ([#8835], thanks [@mbrzakovic])
-* Render footways, cycleways, bridleways, paths and steps which are under construction thinner than generic roads under construction ([#8743], thanks [@k-yle])
+* Render footways, cycleways, bridleways, paths and steps which are under construction (or proposed) thinner than generic roads under construction ([#8743], thanks [@k-yle])
 #### :scissors: Operations
 * Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the operation to a single line ([#8818])
 * Many operations now better preserve OSM object history ([#8839], thanks [@tpetillon])

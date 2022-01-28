@@ -431,7 +431,7 @@ path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction
 path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
 path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
 path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
-    stroke-width: 10;
+    stroke-width: 15;
 }
 path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-path,
 path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
@@ -450,6 +450,29 @@ path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction
     stroke-width: 4;
     stroke-linecap: butt;
     stroke-dasharray: 10, 10;
+}
+
+/** Proposed Paths */
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridleway,
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
+    stroke-width: 15;
+}
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridleway,
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
+    stroke-width: 4.5;
+}
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridleway,
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
+    stroke-width: 3;
 }
 
 /* Buildings */

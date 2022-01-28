@@ -27,7 +27,7 @@ export function svgTagClasses() {
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
-        'man_made', 'indoor', 'construction'
+        'man_made', 'indoor', 'construction', 'proposed'
     ];
     var _tags = function(entity) { return entity.tags; };
 
