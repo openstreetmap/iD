@@ -66,7 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix a bug where the validator might show wrong tagging suggestions for a preset if another preset has a partial match ([#8828], thanks [@bhousel])
 * Show correct vintage and other metadata for "Esri World Imagery"'s higher zoom levels
 * Fix wrong order of route relation members after a split operation ([#8519], thanks [@tpetillon])
-* Do not open disabled localized combobox when clicking on it ([#8871])
+* Do not open disabled localized combobox when clicking on it ([#8871], thanks [@hodigabi])
 #### :earth_asia: Localization
 * Deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM ([#8817])
 #### :hourglass: Performance
@@ -99,6 +99,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8835]: https://github.com/openstreetmap/iD/pull/8835
 [#8836]: https://github.com/openstreetmap/iD/issues/8836
 [#8839]: https://github.com/openstreetmap/iD/pull/8839
+[#8871]: https://github.com/openstreetmap/iD/issues/8871
 [@k-yle]: https://github.com/k-yle
 [@tpetillon]: https://github.com/tpetillon
 [@mbrzakovic]: https://github.com/mbrzakovic
