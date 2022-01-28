@@ -8,7 +8,7 @@ export function validationIncompatibleSource() {
   const incompatibleRules = [
     {
       id: 'amap',
-      regex: /(^amap$|amap\.at|^amap\.com|autonavi|mapabc|高德)/i
+      regex: /(^amap$|^amap\.com|autonavi|mapabc|高德)/i
     },
     {
       id: 'baidu',
