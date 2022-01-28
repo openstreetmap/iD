@@ -60,7 +60,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Allow disconnecting members of certain "grouping" types of relation ([#8771])
 * Clarify description of "disconnected way" validation rule ([#8800])
-* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Africa_building` ([#8844], thanks [@Bonkles])
+* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Africa_building` ([#8844], thanks [@Bonkles]) and `*amap` ([#8889], thanks [@cicku])
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
@@ -85,8 +85,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Switch test runner to [karma](https://karma-runner.github.io/) ([#8764], thanks [@wvanderp])
 * Switch to `chalk` package for build scripts
+* Upgrade to temaki library to v5 ([#8434])
 
 [#8057]: https://github.com/openstreetmap/iD/issues/8057
+[#8434]: https://github.com/openstreetmap/iD/pull/8434
 [#8519]: https://github.com/openstreetmap/iD/issues/8519
 [#8676]: https://github.com/openstreetmap/iD/issues/8676
 [#8743]: https://github.com/openstreetmap/iD/issues/8743
@@ -114,6 +116,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8871]: https://github.com/openstreetmap/iD/issues/8871
 [#8876]: https://github.com/openstreetmap/iD/pull/8876
 [#8880]: https://github.com/openstreetmap/iD/pull/8880
+[#8889]: https://github.com/openstreetmap/iD/pull/8889
 [#8906]: https://github.com/openstreetmap/iD/pull/8906
 [@k-yle]: https://github.com/k-yle
 [@tpetillon]: https://github.com/tpetillon
@@ -121,6 +124,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@wvanderp]: https://github.com/wvanderp
 [@hodigabi]: https://github.com/hodigabi
 [@jtracey]: https://github.com/jtracey
+[@cicku]: https://github.com/cicku
 
 # 2.20.2
 ##### 2021-Oct-28
