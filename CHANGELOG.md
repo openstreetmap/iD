@@ -58,6 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Allow disconnecting members of certain "grouping" types of relation ([#8771])
 * Clarify description of "disconnected way" validation rule ([#8800])
+* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Africa_building` ([#8844], thanks [@Bonkles])
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
@@ -69,14 +70,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM ([#8817])
 #### :hourglass: Performance
+* Compare regexes as strings when checking imagery blocklists ([#8860], thanks [@bhousel])
 #### :mortar_board: Walkthrough / Help
 * Show privacy settings in splash screen (i.e. the "Welcome to iD" message) ([#8831])
+* Fix broken labels in part of the walkthrough ([#8906], thanks [@hodigabi])
 #### :rocket: Presets
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
 * Activate new access values (`customers` and `unknown`) introduced in `id-tagging-schema` v3.2 ([#8876])
 #### :hammer: Development
-* switch test runner to [karma](https://karma-runner.github.io/) ([#8764], thanks [@wvanderp])
+* Switch test runner to [karma](https://karma-runner.github.io/) ([#8764], thanks [@wvanderp])
+* Switch to `chalk` package for build scripts
 
 [#8057]: https://github.com/openstreetmap/iD/issues/8057
 [#8519]: https://github.com/openstreetmap/iD/issues/8519
@@ -97,13 +101,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8828]: https://github.com/openstreetmap/iD/pull/8828
 [#8831]: https://github.com/openstreetmap/iD/issues/8831
 [#8835]: https://github.com/openstreetmap/iD/pull/8835
+[#8844]: https://github.com/openstreetmap/iD/pull/8844
 [#8836]: https://github.com/openstreetmap/iD/issues/8836
 [#8839]: https://github.com/openstreetmap/iD/pull/8839
+[#8860]: https://github.com/openstreetmap/iD/pull/8860
 [#8876]: https://github.com/openstreetmap/iD/pull/8876
+[#8906]: https://github.com/openstreetmap/iD/pull/8906
 [@k-yle]: https://github.com/k-yle
 [@tpetillon]: https://github.com/tpetillon
 [@mbrzakovic]: https://github.com/mbrzakovic
 [@wvanderp]: https://github.com/wvanderp
+[@hodigabi]: https://github.com/hodigabi
 
 # 2.20.2
 ##### 2021-Oct-28
