@@ -38,14 +38,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased
+# 2.20.3
+##### 2022-Jan-31
 
 #### :newspaper: News
 * We maintain a running changelog now! Upcoming changes will be added to the _[Unreleased](#Unreleased)_ section of this changelog as soon as they are ready in the [development version](https://ideditor.netlify.app/) of the iD editor. ([#8805])
+* This version will be the last version which will run on Internet Explorer 11
 #### :shield: Security
 * Fix missing escaping of external texts and content such as OSM user names, OSM tags, etc. which had opened a way to inject arbitrary HTML into the iD editor, potentially making XSS attacks possible. ([#8813])
-#### :boom: Breaking Changes
-#### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
 * Tag keys of a multi-selection can now also be changed in the tags editor when the tag values differ in the selected features. ([#8836])
