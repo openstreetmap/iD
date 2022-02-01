@@ -38,6 +38,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# Unreleased
+
+#### :hammer: Development
+* Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
+
+[#8774]: https://github.com/openstreetmap/iD/pull/8774
+
+
 # 2.20.3
 ##### 2022-Jan-31
 
