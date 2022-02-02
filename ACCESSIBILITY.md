@@ -30,14 +30,14 @@ should fallback gracefully without breaking other aspects of the app.
 This table covers high-level compatibility, with individual features to be detailed
 elsewhere in this document.
 
-|   | Icon | Browser | Notes | Issues |
-|---|---|---|---|---|
+|   | Icon | Browser | Notes |
+|---|---|---|---|
 | ✅ | ![chrome logo] | [Chrome](https://en.wikipedia.org/wiki/Google_Chrome) | |
-| ✅* | ![firefox logo] | [Firefox](https://en.wikipedia.org/wiki/Firefox) | \*Minor known issues | [#7132](https://github.com/openstreetmap/iD/issues/7132) |
+| ✅ | ![firefox logo] | [Firefox](https://en.wikipedia.org/wiki/Firefox) | |
 | ✅ | ![safari logo] | [Safari](https://en.wikipedia.org/wiki/Safari_(web_browser)) | |
 | 🟩 | ![opera logo] | [Opera](https://en.wikipedia.org/wiki/Opera_(web_browser)) | |
 | 🟩 | ![edge logo] | [Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) | |
-| 🟠 | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD [polyfills](https://en.wikipedia.org/wiki/Polyfill_(programming)) modern web features for IE 11 where possible, but full support should not be expected |
+| ❌ | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD uses features of modern web standard which are not supported by Internet Explorer. |
 | ✅ | ![webkit logo] | [iOS](https://en.wikipedia.org/wiki/IOS) browsers | All browsers on iOS (e.g. Safari, Chrome, Firefox, Edge) use the [WebKit](https://en.wikipedia.org/wiki/WebKit) engine and should thus have equivalent support |
 | 🟩 | ![android logo] | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
 | 🟩 | 🌐 | Others | iD should run on any browser implementing [modern web standards](https://www.w3.org/standards/). Hardware factors such as screen size may affect usability |
@@ -74,7 +74,7 @@ It's impractical to ensure every single input device works as expected, so the t
 | 🟩 | ![apple adb mouse] | Single-button [mouse](https://en.wikipedia.org/wiki/Computer_mouse) | Primary click (e.g. left-click) can be used for all pointer interactions. Long-clicking on map features opens the edit menu |
 | 🟩 | ![ibm mouse] | Multi-button mouse | Secondary click (e.g. right-click) can be used on map features to open the edit menu. Middle click, etc., are not needed by iD but are passed through to the browser |
 | 🟩 | [![magic mouse]](https://en.wikipedia.org/wiki/Magic_Mouse) | Multi-touch mouse | 2D scrolling in the map is treated as panning, not zooming |
-| 🟠 | ![vertical scroll wheel] | Vertical [scroll wheel](https://en.wikipedia.org/wiki/Scroll_wheel) | Should zoom the map in and out | [#5550](https://github.com/openstreetmap/iD/issues/5550) | 
+| 🟠 | ![vertical scroll wheel] | Vertical [scroll wheel](https://en.wikipedia.org/wiki/Scroll_wheel) | Should zoom the map in and out | [#5550](https://github.com/openstreetmap/iD/issues/5550) |
 | ❌ |  | Horizontal scroll wheel | Currently does nothing in the map | [#7134](https://github.com/openstreetmap/iD/issues/7134) |
 | 🤷 | [![apple mighty mouse]](https://en.wikipedia.org/wiki/Apple_Mighty_Mouse) | Scroll ball | Works like combined vertical/horizontal scroll wheels |
 | 🟩 | 🖲 | [Trackball](https://en.wikipedia.org/wiki/Trackball) | |

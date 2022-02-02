@@ -45,7 +45,7 @@ export function uiSettingsCustomData(context) {
             .attr('class', 'field-file')
             .attr('type', 'file')
             .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
-            .property('files', _currSettings.fileList)  // works for all except IE11
+            .property('files', _currSettings.fileList)
             .on('change', function(d3_event) {
                 var files = d3_event.target.files;
                 if (files && files.length) {

@@ -322,9 +322,7 @@ instead of surprising us with a pull request.
 
 ### JavaScript
 
-Legacy iD code was written with ES5 syntax, however we now support most ES6 syntax via [Rollup.js](https://rollupjs.org/guide/en) and the [Rollup Bublé plugin](https://github.com/rollup/plugins/tree/master/packages/buble). You can find details about Bublé [here](https://buble.surge.sh/guide/).
-
-In order to continue to support older browsers like IE11 and our PhantomJS-based test runner, we also include the [browser-polyfills](https://github.com/tiagomapmarques/browser-polyfills#what-does-it-have) package.
+iD code was initially written with ES5 syntax, however we do now develop using ES6 syntax.
 
 We mostly follow the Airbnb style guide for JavaScript:
 - [Modern ES6](https://github.com/airbnb/javascript)
@@ -360,7 +358,7 @@ Just like HTML and JavaScript, 4 space soft tabs always.
 ```
 
 We write vanilla CSS with no preprocessing step. Since iD targets modern browsers,
-(Chrome, Firefox, Safari, Opera, IE11, and Edge) feel free to use newer features wisely.
+(Chrome, Firefox, Safari, Opera, and Edge) feel free to use newer features wisely.
 
 
 ### Tests

@@ -12,20 +12,18 @@
   ],
   "license": "ISC",
   "scripts": {
-    "all": "run-s clean build build:legacy dist",
+    "all": "run-s clean build dist",
     "build": "run-s build:css build:data build:modern",
     "build:css": "node scripts/build_css.js",
     "build:data": "shx mkdir -p dist/data && node scripts/build_data.js",
     "build:stats": "esbuild-visualizer --metadata dist/esbuild.json --exclude *.png --filename docs/statistics.html",
     "build:modern": "node config/esbuild.config.modern.mjs",
     "build:modern:watch": "node config/esbuild.config.modern.mjs --watch",
-    "build:legacy": "node config/esbuild.config.legacy.mjs",
     "clean": "shx rm -f dist/esbuild.json dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "run-p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
     "dist:pannellum": "shx mkdir -p dist/pannellum-streetside && shx cp -R node_modules/pannellum/build/* dist/pannellum-streetside/",
     "dist:min:modern": "node config/esbuild.config.modern-min.mjs",
-    "dist:min:legacy": "node config/esbuild.config.legacy-min.mjs",
     "dist:svg:iD": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"iD-%s\" --symbol-sprite dist/img/iD-sprite.svg \"svg/iD-sprite/**/*.svg\"",
     "dist:svg:community": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"community-%s\" --symbol-sprite dist/img/community-sprite.svg node_modules/osm-community-index/dist/img/*.svg",
     "dist:svg:fa": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/fa-sprite.svg svg/fontawesome/*.svg",
@@ -70,9 +68,6 @@
     "which-polygon": "2.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/plugin-transform-runtime": "^7.15.8",
-    "@babel/preset-env": "^7.15.6",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "~5.15.1",
     "@fortawesome/free-regular-svg-icons": "~5.15.1",
@@ -80,7 +75,6 @@
     "@ideditor/temaki": "~5.0.0",
     "@mapbox/maki": "^6.0.0",
     "autoprefixer": "^10.0.1",
-    "babel-plugin-inline-json-import": "^0.3.2",
     "btoa": "^1.2.1",
     "chai": "^4.3.4",
     "cldr-core": "37.0.0",
@@ -90,7 +84,6 @@
     "d3": "~6.6.0",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
     "esbuild": "^0.14.17",
-    "esbuild-plugin-babel": "^0.2.3",
     "esbuild-visualizer": "^0.3.1",
     "eslint": "^8.8.0",
     "fetch-mock": "^9.11.0",
@@ -125,9 +118,9 @@
     "vparse": "~1.1.0"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "browserslist": [
-    "> 0.2%, last 6 major versions, Firefox ESR, IE 11, maintained node versions"
+    "> 0.2%, last 6 major versions, Firefox ESR, maintained node versions"
   ]
 }

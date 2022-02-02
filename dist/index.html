@@ -30,16 +30,14 @@
       newScript.type = 'text/javascript';
       newScript.onload = checkScript;
       newScript.onerror = checkScript;
-
-      var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
-      newScript.src = isIE11 ? 'iD.legacy.min.js' : 'iD.min.js';
+      newScript.src = 'iD.min.js';
 
       document.getElementsByTagName('head')[0].appendChild(newScript);
 
 
       function checkScript() {
         if (typeof iD === 'undefined' || !iD.utilDetect().support) {
-          container.innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
+          container.innerHTML = 'Sorry, your browser is not currently supported. Please use another <a href="https://github.com/openstreetmap/iD#basics">browser</a> or <a href="https://wiki.openstreetmap.org/wiki/Editors">editor</a> to contribute to the map.';
           container.style.padding = '20px';
 
         } else {

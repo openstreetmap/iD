@@ -7,7 +7,6 @@ import { JXON } from '../../util/jxon';
 import { actionDiscardTags } from '../../actions/discard_tags';
 import { osmChangeset } from '../../osm';
 import { svgIcon } from '../../svg/icon';
-import { utilDetect } from '../../util/detect';
 import { uiSection } from '../section';
 
 import {
@@ -18,8 +17,6 @@ import {
 
 
 export function uiSectionChanges(context) {
-    var detected = utilDetect();
-
     var _discardTags = {};
     fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
@@ -116,18 +113,9 @@ export function uiSectionChanges(context) {
             .append('a')
             .attr('class', 'download-changes');
 
-        if (detected.download) {      // All except IE11 and Edge
-            linkEnter                 // download the data as a file
-                .attr('href', window.URL.createObjectURL(blob))
-                .attr('download', fileName);
-
-        } else {                      // IE11 and Edge
-            linkEnter                 // open data uri in a new tab
-                .attr('target', '_blank')
-                .on('click.download', function() {
-                    navigator.msSaveBlob(blob, fileName);
-                });
-        }
+        linkEnter
+            .attr('href', window.URL.createObjectURL(blob))
+            .attr('download', fileName);
 
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
