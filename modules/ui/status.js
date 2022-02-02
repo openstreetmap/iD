@@ -70,8 +70,12 @@ export function uiStatus(context) {
         osm.on('apiStatusChange.uiStatus', update);
 
         context.history().on('storage_error', () => {
-            selection.call(t.append('osm_api_status.message.local_storage_full'));
-            selection.attr('class', 'api-status error');
+            selection.selectAll('span.local-storage-full').remove();
+            selection
+                .append('span')
+                .attr('class', 'local-storage-full')
+                .call(t.append('osm_api_status.message.local_storage_full'));
+            selection.classed('error', true);
         });
 
         // reload the status periodically regardless of other factors
