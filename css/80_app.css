@@ -4698,6 +4698,11 @@ img.tile-debug {
     }
 }
 
+.local-storage-full {
+    display: block;
+    width: 100%;
+}
+
 /* Notification Badges
 ------------------------------------------------------- */
 /* For an icon (e.g. new version) */

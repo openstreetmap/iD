@@ -38,6 +38,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# Unreleased
+
+#### :bug: Bugfixes
+* Fix "local storage is exceeded" error message showing up multiple times ([#8930])
+
+[#8930]: https://github.com/openstreetmap/iD/pull/8930
+
+
 # 2.20.3
 ##### 2022-Jan-31
 
