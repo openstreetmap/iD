@@ -41,10 +41,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased
 
+#### :bug: Bugfixes
+* Fix rendering of HTML content in KeepRight and ImproveOSM issues ([#8928])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
+[#8928]: https://github.com/openstreetmap/iD/pull/8928
 
 
 # 2.20.3
