@@ -10,13 +10,14 @@ export function uiKeepRightHeader() {
     const { itemType, parentIssueType } = d;
     const unknown = t.html('inspector.unknown');
     let replacements = d.replacements || {};
-    replacements.default = unknown;  // special key `default` works as a fallback string
+    replacements.default = { html: unknown };  // special key `default` works as a fallback string
 
-    let title = t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
-    if (title === unknown) {
-      title = t.html(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
+    const title = t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    if (title !== unknown) {
+      return t.apply(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    } else {
+      return t.apply(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
     }
-    return title;
   }
 
 

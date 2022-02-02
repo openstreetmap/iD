@@ -38,6 +38,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# Unreleased
+
+#### :bug: Bugfixes
+* Fix rendering of HTML content in KeepRight and ImproveOSM issues ([#8928])
+
+[#8928]: https://github.com/openstreetmap/iD/pull/8928
+
+
 # 2.20.3
 ##### 2022-Jan-31
 
