@@ -1,28 +1,18 @@
 describe('iD.uiCmd', function () {
     var orig;
     var ua = navigator.userAgent;
-    var isPhantom = (navigator.userAgent.match(/PhantomJS/) !== null);
     var uaMock = function () { return ua; };
 
     beforeEach(function() {
         /* eslint-disable no-global-assign */
         /* mock userAgent */
-        if (isPhantom) {
-            orig = navigator;
-            navigator = Object.create(orig, { userAgent: { get: uaMock }});
-        } else {
-            orig = navigator.__lookupGetter__('userAgent');
-            navigator.__defineGetter__('userAgent', uaMock);
-        }
+        orig = navigator.__lookupGetter__('userAgent');
+        navigator.__defineGetter__('userAgent', uaMock);
     });
 
     afterEach(function() {
         /* restore userAgent */
-        if (isPhantom) {
-            navigator = orig;
-        } else {
-            navigator.__defineGetter__('userAgent', orig);
-        }
+        navigator.__defineGetter__('userAgent', orig);
         /* eslint-enable no-global-assign */
     });
 

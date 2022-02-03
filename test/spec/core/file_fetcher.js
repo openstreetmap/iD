@@ -18,7 +18,7 @@ describe('iD.coreFileFetcher', function() {
             data.cache().test = { hello: 'world' };
 
             var prom = data.get('test');
-            // expect(prom).to.be.a('promise');   // these are polyfilled in phantomjs
+            expect(prom).to.be.a('promise');
             prom
                 .then(function(data) {
                     expect(data).to.be.a('object');
@@ -28,8 +28,6 @@ describe('iD.coreFileFetcher', function() {
                 .catch(function(err) {
                     done(err);
                 });
-
-            window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
         });
 
         it('returns a promise rejected if we can not get the data', function(done) {
@@ -43,15 +41,13 @@ describe('iD.coreFileFetcher', function() {
                     expect(/^Unknown data file/.test(err)).to.be.true;
                     done();
                 });
-
-            window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
 
         it('returns a promise to fetch data if we do not already have the data', function(done) {
             var files = { 'intro_graph': 'data/intro_graph.min.json' };
             var data = iD.coreFileFetcher().assetPath('../dist/').fileMap(files);
             var prom = data.get('intro_graph');
-            // expect(prom).to.be.a('promise');   // these are polyfilled in phantomjs
+            expect(prom).to.be.a('promise');
             prom
                 .then(function(data) {
                     expect(data).to.be.a('object');
@@ -61,8 +57,6 @@ describe('iD.coreFileFetcher', function() {
                 .catch(function(err) {
                     done(err);
                 });
-
-            window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
     });
 
