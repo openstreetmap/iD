@@ -4918,6 +4918,9 @@ img.tile-debug {
 .save-success td.community-detail {
     padding-bottom: 15px;
 }
+.save-success .community-table h3 {
+    margin: 0;
+}
 
 .summary-view-on-osm,
 .community-name {
