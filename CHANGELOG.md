@@ -43,6 +43,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :newspaper: News
 * Drop legacy support for Internet Explorer 11 ([#8811])
+#### :white_check_mark: Validation
+* Handle indoor features like buildings when checking for crossing ways ([#8944])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 #### :hammer: Development
@@ -50,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8944]: https://github.com/openstreetmap/iD/issues/8944
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
 
 
