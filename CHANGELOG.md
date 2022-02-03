@@ -43,11 +43,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :newspaper: News
 * Drop legacy support for Internet Explorer 11 ([#8811])
+#### :rocket: Presets
+* Optimize order of values in dropdowns of `access` fields ([#8945])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8945]: https://github.com/openstreetmap/iD/issues/8945
+
 
 # 2.20.4
 ##### 2022-Feb-03
