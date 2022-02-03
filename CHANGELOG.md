@@ -40,7 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 # 2.20.4
-##### 2020-Feb-02
+##### 2020-Feb-03
 
 #### :bug: Bugfixes
 * Fix rendering of HTML content in KeepRight and ImproveOSM issues ([#8928])
