@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Handle indoor features like buildings when checking for crossing ways ([#8944])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
+* Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
 

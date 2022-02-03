@@ -230,6 +230,11 @@ export function uiFieldAccess(field, context) {
                 if (d === 'access') {
                     return 'yes';
                 }
+                if (d === 'bicycle' || d === 'motor_vehicle') {
+                    if (tags.vehicle && typeof tags.vehicle === 'string') {
+                        return tags.vehicle;
+                    }
+                }
                 if (tags.access && typeof tags.access === 'string') {
                     return tags.access;
                 }
