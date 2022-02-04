@@ -1,4 +1,4 @@
-describe('iD.validations.disconnected_way', function () {
+describe('iD.validations.disconnected_way', function() {
     var context;
 
     beforeEach(function() {
@@ -6,9 +6,9 @@ describe('iD.validations.disconnected_way', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -18,11 +18,11 @@ describe('iD.validations.disconnected_way', function () {
     }
 
     function createConnectingWays(tags1, tags2) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1});
-        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-1', 'n-3'], tags: tags2});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: tags1 });
+        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'], tags: tags2 });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -50,7 +50,7 @@ describe('iD.validations.disconnected_way', function () {
     });
 
     it('flags disconnected highway', function() {
-        createWay({'highway': 'unclassified'});
+        createWay({ 'highway': 'unclassified' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
@@ -62,7 +62,7 @@ describe('iD.validations.disconnected_way', function () {
     });
 
     it('flags highway connected only to service area', function() {
-        createConnectingWays({'highway': 'unclassified'}, {'highway': 'services'});
+        createConnectingWays({ 'highway': 'unclassified' }, { 'highway': 'services' });
         var issues = validate();
         expect(issues).to.have.lengthOf(1);
         var issue = issues[0];
@@ -75,11 +75,11 @@ describe('iD.validations.disconnected_way', function () {
 
     it('ignores highway with connected entrance vertex', function() {
 
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4], tags: {'entrance': 'yes'}});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2'], tags: {'highway': 'unclassified'}});
-        var w2 = iD.osmWay({id: 'w-2', nodes: ['n-1', 'n-3']});
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var n3 = iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3'] });
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -90,6 +90,32 @@ describe('iD.validations.disconnected_way', function () {
         );
 
         var issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('removes validation issue when highway is no longer disconnected', function() {
+        // Add a way which is disconnected from the rest of the map
+        const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        const n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(w)
+        );
+        let issues = validate();
+        // Should produce disconnected way error
+        expect(issues).to.have.lengthOf(1);
+
+        // Add new node with entrance node to simulate connection with rest of map
+        const n3 = iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
+        const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+        context.perform(
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(w2)
+        );
+        issues = validate();
+        // Should be no errors
         expect(issues).to.have.lengthOf(0);
     });
 
