@@ -48,11 +48,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
+* Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8927]: https://github.com/openstreetmap/iD/issues/8927
 [#8944]: https://github.com/openstreetmap/iD/issues/8944
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
 
