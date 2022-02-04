@@ -49,7 +49,7 @@ describe('iD.coreValidator', function() {
         window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
     });
 
-    it('removes validation issue when highway is no longer disconnected', function() {
+    it('removes validation issue when highway is no longer disconnected', function(done) {
         // Add a way which is disconnected from the rest of the map
         var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
         var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
@@ -79,7 +79,12 @@ describe('iD.coreValidator', function() {
                 // Should be no errors
                 issues = validator.getIssues();
                 expect(issues).to.have.lengthOf(0);
+                done();
+            }).catch(function(err) {
+                done(err);
             });
+        }).catch(function(err) {
+            done(err);
         });
 
         window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
