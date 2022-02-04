@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
 import { uiPane } from '../pane';
