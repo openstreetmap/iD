@@ -66,18 +66,11 @@ var patterns = {
         green: 'golf_green',
         tee: 'grass',
         fairway: 'grass',
-        rough: 'grass'
+        rough: 'scrub'
     },
-    traffic_calming: {
-        island: [
-            { surface: 'grass', pattern: 'grass' },
-        ],
-        chicane: [
-            { surface: 'grass', pattern: 'grass' },
-        ],
-        choker: [
-            { surface: 'grass', pattern: 'grass' },
-        ]
+    surface: {
+        grass: 'grass',
+        sand: 'beach'
     }
 };
 
