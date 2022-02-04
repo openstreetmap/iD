@@ -95,21 +95,21 @@ describe('iD.validations.disconnected_way', function() {
 
     it('removes validation issue when highway is no longer disconnected', function() {
         // Add a way which is disconnected from the rest of the map
-        const n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
-        const n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
-        const w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
+        var n1 = iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        var n2 = iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        var w = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
         context.perform(
             iD.actionAddEntity(n1),
             iD.actionAddEntity(n2),
             iD.actionAddEntity(w)
         );
-        let issues = validate();
+        var issues = validate();
         // Should produce disconnected way error
         expect(issues).to.have.lengthOf(1);
 
         // Add new node with entrance node to simulate connection with rest of map
-        const n3 = iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
-        const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
+        var n3 = iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
+        var w2 = iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'unclassified' } });
         context.perform(
             iD.actionAddEntity(n3),
             iD.actionAddEntity(w2)
