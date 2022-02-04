@@ -14,12 +14,12 @@ export function uiKeepRightDetails(context) {
 
   function issueDetail(d) {
     const { itemType, parentIssueType } = d;
-    const unknown = t.html('inspector.unknown');
+    const unknown = { html: t.html('inspector.unknown') };
     let replacements = d.replacements || {};
     replacements.default = unknown;  // special key `default` works as a fallback string
 
     let detail = t.html(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
-    if (detail === unknown) {
+    if (detail === unknown.html) {
       detail = t.html(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
     }
     return detail;

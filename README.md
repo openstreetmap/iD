@@ -8,7 +8,7 @@
 * It's intentionally simple. It lets you do the most basic tasks while
   not breaking other people's data.
 * It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
-  Opera, Edge, and IE11.
+  Opera, and Edge.
 * iD is not yet designed for mobile browsers, but this is something we hope to add!
 * Data is rendered with [d3.js](https://d3js.org/).
 

@@ -6,7 +6,6 @@ import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
-import { utilDetect } from '../../util/detect';
 
 
 export function uiSectionBackgroundDisplayOptions(context) {
@@ -15,14 +14,11 @@ export function uiSectionBackgroundDisplayOptions(context) {
         .label(t.html('background.display_options'))
         .disclosureContent(renderDisclosureContent);
 
-    var _detected = utilDetect();
     var _storedOpacity = prefs('background-opacity');
     var _minVal = 0;
-    var _maxVal = _detected.cssfilters ? 3 : 1;
+    var _maxVal = 3;
 
-    var _sliders = _detected.cssfilters
-        ? ['brightness', 'contrast', 'saturation', 'sharpness']
-        : ['brightness'];
+    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
 
     var _options = {
         brightness: (_storedOpacity !== null ? (+_storedOpacity) : 1),

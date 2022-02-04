@@ -213,7 +213,7 @@ export function uiFieldLocalized(field, context) {
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
-
+        selection.selectAll('.combobox-caret').classed('nope', true);
 
 
         function addNew(d3_event) {

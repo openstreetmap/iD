@@ -132,15 +132,9 @@ export function rendererBackgroundSource(data) {
 
         if (source.type === 'wms') {
             var tileToProjectedCoords = (function(x, y, z) {
-                //polyfill for IE11, PhantomJS
-                var sinh = Math.sinh || function(x) {
-                    var y = Math.exp(x);
-                    return (y - 1 / y) / 2;
-                };
-
                 var zoomSize = Math.pow(2, z);
                 var lon = x / zoomSize * Math.PI * 2 - Math.PI;
-                var lat = Math.atan(sinh(Math.PI * (1 - 2 * y / zoomSize)));
+                var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
                 switch (source.projection) {
                     case 'EPSG:4326':

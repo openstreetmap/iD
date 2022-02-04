@@ -7,8 +7,13 @@
 ### Prep
 - If you don't have a `transifex.auth` file in the root of your iD checkout,
 you'll need to create a Transifex account, ask @tyr_asd or @bhousel for admin rights
-on the iD project, and then create this file with contents like<br><pre>
-     {"user": "yourusername", "password": "*******"}</pre>This file is not version-controlled and will not be checked in.
+on the iD project, and then create this file with contents like
+  
+  ````json
+  { "user":"api", "password": "<your-transifex-api-key>" }
+  ````
+  
+  where you insert your personal [transifex api token](https://www.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.
 
 ### Update `iD`
 

@@ -106,6 +106,10 @@ export var osmOneWayTags = {
         'sled': true,
         'yes': true
     },
+    'seamark:type': {
+        'separation_lane': true,
+        'separation_roundabout': true
+    },
     'waterway': {
         'canal': true,
         'ditch': true,
