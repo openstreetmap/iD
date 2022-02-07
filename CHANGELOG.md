@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Handle indoor features like buildings when checking for crossing ways ([#8944])
 #### :bug: Bugfixes
 * Fix rendering of KeepRight issues ([#8963])
+* Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
@@ -56,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8925]: https://github.com/openstreetmap/iD/issues/8925
 [#8927]: https://github.com/openstreetmap/iD/issues/8927
 [#8944]: https://github.com/openstreetmap/iD/issues/8944
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
