@@ -12,12 +12,11 @@ export function uiKeepRightHeader() {
     let replacements = d.replacements || {};
     replacements.default = { html: unknown };  // special key `default` works as a fallback string
 
-    const title = t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
-    if (title !== unknown) {
-      return t.apply(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
-    } else {
-      return t.apply(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
+    let title = t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    if (title === unknown) {
+      title = t.html(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
     }
+    return title;
   }
 
 

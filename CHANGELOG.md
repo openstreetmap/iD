@@ -45,6 +45,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop legacy support for Internet Explorer 11 ([#8811])
 #### :white_check_mark: Validation
 * Handle indoor features like buildings when checking for crossing ways ([#8944])
+#### :bug: Bugfixes
+* Fix rendering of KeepRight issues ([#8963])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
@@ -57,13 +59,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8927]: https://github.com/openstreetmap/iD/issues/8927
 [#8944]: https://github.com/openstreetmap/iD/issues/8944
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
+[#8963]: https://github.com/openstreetmap/iD/issues/8963
 
 
 # 2.20.4
 ##### 2022-Feb-03
 
 #### :bug: Bugfixes
-* Fix rendering of HTML content in KeepRight and ImproveOSM issues ([#8928])
+* Fix rendering of HTML content in ~~KeepRight and~~ ImproveOSM issues ([#8928])
 * Fix "local storage is exceeded" error message showing up multiple times ([#8930])
 
 [#8928]: https://github.com/openstreetmap/iD/pull/8928
