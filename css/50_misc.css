@@ -66,6 +66,7 @@ path.line.shadow.tag-route-ferry {
     stroke-width: 16;
 }
 path.line.stroke.tag-route-ferry {
+    stroke: #58a9ed;
     stroke-width: 3;
     stroke-linecap: butt;
     stroke-dasharray: 12,8;
@@ -77,9 +78,6 @@ path.line.stroke.tag-route-ferry {
 .preset-icon-container path.line.stroke.tag-route-ferry {
     stroke-width: 2;
     stroke-dasharray: 6,4;
-}
-path.line.stroke.tag-route-ferry {
-    stroke: #58a9ed;
 }
 path.line.casing.tag-route-ferry {
     stroke: none;
@@ -238,14 +236,12 @@ path.line.stroke.tag-barrier.tag-barrier-city_wall {
 path.line.casing.tag-bridge {
     stroke-opacity: 0.6;
     stroke: #000 !important;
+    stroke-width: 16;
     stroke-linecap: butt;
     stroke-dasharray: none;
 }
 path.line.shadow.tag-bridge {
     stroke-width: 24;
-}
-path.line.casing.tag-bridge {
-    stroke-width: 16;
 }
 .low-zoom path.line.shadow.tag-bridge {
     stroke-width: 16;

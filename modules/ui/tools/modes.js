@@ -14,7 +14,7 @@ import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 
-export function uiToolOldDrawModes(context) {
+export function uiToolDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
@@ -46,7 +46,9 @@ export function uiToolOldDrawModes(context) {
     ];
 
 
-    function enabled() {
+    function enabled(
+        _mode // parameter is currently not used, but might be at some point
+    ) {
         return osmEditable();
     }
 
