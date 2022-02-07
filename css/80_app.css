@@ -3068,7 +3068,7 @@ img.tag-reference-wiki-image {
 /* Fullscreen Button (disabled)
 ------------------------------------------------------- */
 div.full-screen {
-    display: inline-block;
+    /*display: inline-block;*/
     width: 40px;
     margin-right: 10px;
     display: none;
