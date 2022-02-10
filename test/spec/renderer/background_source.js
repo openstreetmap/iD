@@ -96,6 +96,10 @@ describe('iD.rendererBackgroundSource.Custom', function() {
             var source = iD.rendererBackgroundSource.Custom('http://example.com/wms/v1/token/MYTOKEN/1.0.0/layer');
             expect(source.imageryUsed()).to.eql('Custom (http://example.com/wms/v1/token/{apikey}/1.0.0/layer )');
         });
+        it('sanitizes `key` in the URL path', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/services;key=MYTOKEN/layer');
+            expect(source.imageryUsed()).to.eql('Custom (http://example.com/services;key={apikey}/layer )');
+        });
     });
 
 });
