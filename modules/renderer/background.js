@@ -20,6 +20,7 @@ export function rendererBackground(context) {
   const dispatch = d3_dispatch('change');
   const detected = utilDetect();
   const baseLayer = rendererTileLayer(context).projection(context.projection);
+  let _checkedBlocklists = [];
   let _isValid = true;
   let _overlayLayers = [];
   let _brightness = 1;
@@ -271,7 +272,6 @@ export function rendererBackground(context) {
     context.history().photoOverlaysUsed(photoOverlaysUsed);
   };
 
-  let _checkedBlocklists;
 
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
@@ -282,16 +282,17 @@ export function rendererBackground(context) {
 
     const currSource = baseLayer.source();
 
+    // Recheck blocked sources only if we detect new blocklists pulled from the OSM API.
     const osm = context.connection();
-    const blocklists = osm && osm.imageryBlocklists();
+    const blocklists = (osm && osm.imageryBlocklists()) || [];
+    const blocklistChanged = (blocklists.length !== _checkedBlocklists.length) ||
+      blocklists.some((regex, index) => String(regex) !== _checkedBlocklists[index]);
 
-    if (blocklists && blocklists !== _checkedBlocklists) {
+    if (blocklistChanged) {
       _imageryIndex.backgrounds.forEach(source => {
-        source.isBlocked = blocklists.some(function(blocklist) {
-          return blocklist.test(source.template());
-        });
+        source.isBlocked = blocklists.some(regex => regex.test(source.template()));
       });
-      _checkedBlocklists = blocklists;
+      _checkedBlocklists = blocklists.map(regex => String(regex));
     }
 
     return _imageryIndex.backgrounds.filter(source => {

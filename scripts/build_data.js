@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const colors = require('colors/safe');
+const chalk = require('chalk');
 const fs = require('fs');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
@@ -29,8 +29,8 @@ if (process.argv[1].indexOf('build_data.js') > -1) {
 function buildData() {
   if (_currBuild) return _currBuild;
 
-  const START = '🏗   ' + colors.yellow('Building data...');
-  const END = '👍  ' + colors.green('data built');
+  const START = '🏗   ' + chalk.yellow('Building data...');
+  const END = '👍  ' + chalk.green('data built');
 
   console.log('');
   console.log(START);
