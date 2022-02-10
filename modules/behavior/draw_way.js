@@ -454,7 +454,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
             // If the way has looped over itself, follow some other way.
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
-            console.log('LAST NODES PARENT: ', lastNodesParents);
             const secondLastNodesParents = historyGraph.parentWays(historyGraph.entity(secondLastNodeId)).filter(w => w.id !== wayID);
 
             const featureType = getFeatureType(lastNodesParents);
@@ -478,14 +477,11 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 return;
             }
 
-            let way = lastNodesParents[0];
+            // If a way has already been focused let's keep following that one
+            const way = _focusedParentWay ? _focusedParentWay : lastNodesParents[0];
 
             if (!_focusedParentWay) {
-                console.log('NOT FOCUSED PARENT WAY ID: ', lastNodesParents[0]);
-                _focusedParentWay = lastNodesParents[0];
-            } else {
-                way = _focusedParentWay;
-                console.log('ELSE WAY ID: ', way);
+                _focusedParentWay = way;
             }
 
             const indexOfLast = way.nodes.indexOf(lastNodeId);
