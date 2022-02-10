@@ -3226,14 +3226,11 @@ div.full-screen > button:focus {
 .layer-list label > span {
     display: block;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    flex-grow: 1;
+    width: calc(100% - 20px); /* Ensures radio input width within flexbox */
 }
 
-.layer-list.layer-background-list label > span {
-    width: 100%;
-    white-space: normal;
+.layer-list label span.localized-text {
+    line-height: 0.95rem;
 }
 
 .layer-list input.list-item-input {
