@@ -3195,6 +3195,7 @@ div.full-screen > button:focus {
 .layer-list li.best > div.best {
     padding: 5px;
     flex: 0 0 auto;
+    align-self: center;
 }
 
 .ideditor[dir='rtl'] .list-item-data-browse svg {
