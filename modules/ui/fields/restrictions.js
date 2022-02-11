@@ -505,15 +505,15 @@ export function uiFieldRestrictions(field, context) {
 
                 if (datum.no) {
                     klass = 'restrict';
-                    turnText = t.html('restriction.help.turn.no_' + turnType, { indirect: indirect });
+                    turnText = t.html('restriction.help.turn.no_' + turnType, { indirect: { html: indirect } });
                     nextText = t.html('restriction.help.turn.only_' + turnType, { indirect: '' });
                 } else if (datum.only) {
                     klass = 'only';
-                    turnText = t.html('restriction.help.turn.only_' + turnType, { indirect: indirect });
+                    turnText = t.html('restriction.help.turn.only_' + turnType, { indirect: { html: indirect } });
                     nextText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: '' });
                 } else {
                     klass = 'allow';
-                    turnText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: indirect });
+                    turnText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: { html: indirect } });
                     nextText = t.html('restriction.help.turn.no_' + turnType, { indirect: '' });
                 }
 
