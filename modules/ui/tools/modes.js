@@ -47,6 +47,7 @@ export function uiToolDrawModes(context) {
 
 
     function enabled(
+        // eslint-disable-next-line no-unused-vars
         _mode // parameter is currently not used, but might be at some point
     ) {
         return osmEditable();
