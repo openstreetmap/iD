@@ -5,16 +5,8 @@
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
-* It's intentionally simple. It lets you do the most basic tasks while
-  not breakin
-8:50:56 AM: import esbuild from 'esbuild';
-8:50:56 AM:        ^^^^^^^
-8:50:56 AM: SyntaxError: Unexpected identifierg other people's data.
-* It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
-  Opera, and Edge.
-8:50:56 AM: import esbuild from 'esbuild';
-8:50:56 AM:        ^^^^^^^
-8:50:56 AM: SyntaxError: Unexpected identifier
+* It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
+* It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
 * iD is not yet designed for mobile browsers, but this is something we hope to add!
 * Data is rendered with [d3.js](https://d3js.org/).
 
