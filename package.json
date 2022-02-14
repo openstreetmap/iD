@@ -94,7 +94,7 @@
     "json-stringify-pretty-compact": "^3.0.0",
     "karma": "^6.3.5",
     "karma-chrome-launcher": "^3.1.0",
-    "karma-coverage": "2.1.1",
+    "karma-coverage": "2.2.0",
     "karma-mocha": "^2.0.1",
     "karma-remap-istanbul": "^0.6.0",
     "mapillary-js": "4.0.0",
