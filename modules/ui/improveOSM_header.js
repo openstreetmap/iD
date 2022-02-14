@@ -46,18 +46,10 @@ export function uiImproveOsmHeader() {
     svgEnter
       .append('use')
         .attr('class', 'icon-annotation')
-        .attr('width', '13px')
-        .attr('height', '13px')
-        .attr('transform', 'translate(3.5, 5)')
-        .attr('xlink:href', d => {
-          const picon = d.icon;
-          if (!picon) {
-            return '';
-          } else {
-            const isMaki = /^maki-/.test(picon);
-            return `#${picon}${isMaki ? '-11' : ''}`;
-          }
-        });
+        .attr('width', '12px')
+        .attr('height', '12px')
+        .attr('transform', 'translate(4, 5.5)')
+        .attr('xlink:href', d => d.icon ? '#' + d.icon : '');
 
     headerEnter
       .append('div')
