@@ -53,8 +53,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
 * Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
+* Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
+#### Other
+* Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
+* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
@@ -64,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8944]: https://github.com/openstreetmap/iD/issues/8944
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
 [#8963]: https://github.com/openstreetmap/iD/issues/8963
+[#8976]: https://github.com/openstreetmap/iD/issues/8976
 
 
 # 2.20.4
