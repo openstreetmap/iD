@@ -77,6 +77,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       }
     }
 
+    if (_this.searchable === false) {
+      score *= 0.999;
+    }
+
     return score;
   };
 
