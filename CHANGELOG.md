@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix rendering of KeepRight issues ([#8963])
 * Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
 * Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
+* Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
 [#8963]: https://github.com/openstreetmap/iD/issues/8963
 [#8976]: https://github.com/openstreetmap/iD/issues/8976
+[#8985]: https://github.com/openstreetmap/iD/issues/8985
 
 
 # 2.20.4

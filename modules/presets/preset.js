@@ -1,5 +1,5 @@
 import { t } from '../core/localizer';
-import { osmAreaKeys } from '../osm/tags';
+import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 
@@ -218,17 +218,17 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     // Add area=yes if necessary.
     // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
     // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
-    // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`)
+    // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`),
+    //    and is not an "exceptional area" tag (e.g. `waterway=dam`)
     if (!addTags.hasOwnProperty('area')) {
       delete tags.area;
       if (geometry === 'area') {
         let needsAreaTag = true;
-        if (_this.geometry.indexOf('line') === -1) {
-          for (let k in addTags) {
-            if (k in osmAreaKeys) {
-              needsAreaTag = false;
-              break;
-            }
+        for (let k in addTags) {
+          if (_this.geometry.indexOf('line') === -1 && k in osmAreaKeys
+              || k in osmAreaKeysExceptions && addTags[k] in osmAreaKeysExceptions[k]) {
+            needsAreaTag = false;
+            break;
           }
         }
         if (needsAreaTag) {
