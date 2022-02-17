@@ -503,6 +503,12 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 id: nextNode.id,
                 properties: { target: true, entity: nextNode },
             });
+
+            // If the last added node is already contained in the way that we are generating
+            // let's end following action to avoid loops
+            if (historyGraph.childNodes(_origWay).filter(n => n.id === nextNode.id).length > 0) {
+                drawWay.finish();
+            }
         } catch (ex) {
             context.ui().flash
                 .duration(4000)
