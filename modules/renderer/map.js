@@ -470,13 +470,13 @@ export function rendererMap(context) {
         // They might be triggered by the user scrolling the mouse wheel,
         // or 2-finger pinch/zoom gestures, the transform may need adjustment.
         if (source && source.type === 'wheel') {
-
-            // assume that the gesture is already handled by pointer events
-            if (_pointerDown) return;
-
-            var detected = utilDetect();
             var dX = source.deltaX;
             var dY = source.deltaY;
+
+            // assume that the gesture is already handled by pointer events
+            if (_pointerDown && dX === 0 && dY === 0) return;
+
+            var detected = utilDetect();
             var x2 = x;
             var y2 = y;
             var k2 = k;
@@ -545,7 +545,7 @@ export function rendererMap(context) {
                 y2 = p0[1] - p1[1] * k2;
 
             // Trackpad scroll zooming with shift or alt/option key down
-            } else if ((source.altKey || source.shiftKey) && isInteger(dY)) {
+            } else if ((source.altKey || source.shiftKey) && isInteger(dY) && dY !== 0) {
                 // recalculate x2,y2,k2
                 t0 = _isTransformed ? _transformLast : _transformStart;
                 p0 = _getMouseCoords(source);

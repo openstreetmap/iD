@@ -33,6 +33,14 @@ function defaultWheelDelta(d3_event) {
   return -d3_event.deltaY * (d3_event.deltaMode === 1 ? 0.05 : d3_event.deltaMode ? 1 : 0.002);
 }
 
+function defaultWheelDeltaX(d3_event) {
+  return -d3_event.deltaX * (
+      d3_event.deltaMode === WheelEvent.DOM_DELTA_PIXEL ? 2.8 :
+      d3_event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 70 :
+      d3_event.deltaMode === WheelEvent.DOM_DELTA_PAGE ? 1400 :
+      2.8);
+}
+
 function defaultConstrain(transform, extent, translateExtent) {
   var dx0 = transform.invertX(extent[0][0]) - translateExtent[0][0],
       dx1 = transform.invertX(extent[1][0]) - translateExtent[1][0],
@@ -49,6 +57,7 @@ export function utilZoomPan() {
       extent = defaultExtent,
       constrain = defaultConstrain,
       wheelDelta = defaultWheelDelta,
+      wheelDeltaX = defaultWheelDeltaX,
       scaleExtent = [0, Infinity],
       translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
       interpolate = interpolateZoom,
@@ -206,13 +215,15 @@ export function utilZoomPan() {
     var g = gesture(this, arguments),
         t = _transform,
         k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
-        p = utilFastMouse(this)(d3_event);
+        p = utilFastMouse(this)(d3_event),
+        dX = wheelDeltaX.apply(this, arguments);
 
     // If the mouse is in the same location as before, reuse it.
     // If there were recent wheel events, reset the wheel idle timeout.
     if (g.wheel) {
       if (g.mouse[0][0] !== p[0] || g.mouse[0][1] !== p[1]) {
-        g.mouse[1] = t.invert(g.mouse[0] = p);
+        g.mouse[0] = p;
+        g.mouse[1] = t.invert(g.mouse[0]);
       }
       clearTimeout(g.wheel);
 
@@ -226,6 +237,17 @@ export function utilZoomPan() {
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
     g.wheel = setTimeout(wheelidled, _wheelDelay);
+
+    g.mouse[1] = t.apply(g.mouse[1]);
+    let panAmount = dX * (
+        d3_event.shiftKey ? 0.25 :
+        d3_event.ctrlKey  ? 4 : 1);
+    if (d3_event.altKey) {
+      g.mouse[1][1] += panAmount;
+    } else {
+      g.mouse[1][0] += panAmount;
+    }
+    g.mouse[1] = t.invert(g.mouse[1]);
     g.zoom(d3_event, 'mouse', constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
 
     function wheelidled() {
