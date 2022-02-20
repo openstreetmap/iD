@@ -71,7 +71,7 @@ export function uiSuccess(context) {
     }
 
     const parsed = new Date(raw);
-    return new Date(parsed.toUTCString().substr(0, 25));  // convert to local timezone
+    return new Date(parsed.toUTCString().slice(0, 25));  // convert to local timezone
   }
 
 
