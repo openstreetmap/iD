@@ -3,6 +3,7 @@ export { operationFollow } from './follow';
 export { operationFollowOld } from './follow_old';
 export { operationCurverize } from './curverize';
 export { operationCloneAddress } from './clone_address';
+export { operationCloneName } from './clone_name';
 export { operationCloneTurnLanes } from './clone_turn_lanes';
 export { operationCloneLanes } from './clone_lanes';
 export { operationCloneCycleway } from './clone_cycleway';

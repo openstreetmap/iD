@@ -208,6 +208,11 @@ en:
       description: Clone address tags from the first selected entity.
       key: "&"
       annotation: Clone the address tags.
+    clone_name:
+      title: Clone name and operator tags
+      description: Clone name and operator tags from the first selected entity.
+      key: "%"
+      annotation: Clone the name and operator tags.
     clone_road_attributes:
       title: Clone road attributes tags
       description: Clone road attributes tags from the first selected entity.
