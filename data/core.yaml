@@ -204,10 +204,45 @@ en:
       connected_to_hidden: This can't be followed because it is connected to a hidden feature.
       not_downloaded: This can't be followed because parts of it have not yet been downloaded.
     clone_address:
-      title: Clone address
-      description: Clone address from the first selected entity.
+      title: Clone address tags
+      description: Clone address tags from the first selected entity.
       key: "&"
-      annotation: Clone the address.
+      annotation: Clone the address tags.
+    clone_road_attributes:
+      title: Clone road attributes tags
+      description: Clone road attributes tags from the first selected entity.
+      key: ""
+      annotation: Clone the road attributes tags.
+    clone_bus_lanes:
+      title: Clone bus lanes tags
+      description: Clone bus lanes tags from the first selected entity.
+      key: "@"
+      annotation: Clone the bus lanes tags.
+    clone_cycleway:
+      title: Clone cycleway tags
+      description: Clone cycleway tags from the first selected entity.
+      key: "("
+      annotation: Clone the cycleway tags.
+    clone_turn_lanes:
+      title: Clone turn lanes tags
+      description: Clone turn lanes tags from the first selected entity.
+      key: "$"
+      annotation: Clone the turn lanes tags.
+    clone_lanes:
+      title: Clone lanes tags
+      description: Clone lanes tags from the first selected entity.
+      key: "#"
+      annotation: Clone the lanes tags.
+    clone_transition:
+      title: Clone road transition tags
+      description: Clone road transition tags from the first selected entity.
+      key: "!"
+      annotation: Clone the road transition tags.
+    clone_sidewalk:
+      title: Clone sidewalk tags
+      description: Clone sidewalk tags from the first selected entity.
+      key: "="
+      annotation: Clone the sidewalk tags.
     follow:
       title: Follow
       description:
