@@ -45,23 +45,39 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop legacy support for Internet Explorer 11 ([#8811])
 #### :white_check_mark: Validation
 * Handle indoor features like buildings when checking for crossing ways ([#8944])
+#### :bug: Bugfixes
+* Fix rendering of KeepRight issues ([#8963])
+* Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
+* Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
+* Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
+* Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
+* Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
+#### Other
+* Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
+* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8905]: https://github.com/openstreetmap/iD/issues/8905
+[#8925]: https://github.com/openstreetmap/iD/issues/8925
+[#8927]: https://github.com/openstreetmap/iD/issues/8927
 [#8944]: https://github.com/openstreetmap/iD/issues/8944
 [#8945]: https://github.com/openstreetmap/iD/issues/8945
+[#8963]: https://github.com/openstreetmap/iD/issues/8963
+[#8976]: https://github.com/openstreetmap/iD/issues/8976
+[#8985]: https://github.com/openstreetmap/iD/issues/8985
 
 
 # 2.20.4
 ##### 2022-Feb-03
 
 #### :bug: Bugfixes
-* Fix rendering of HTML content in KeepRight and ImproveOSM issues ([#8928])
+* Fix rendering of HTML content in ~~KeepRight and~~ ImproveOSM issues ([#8928])
 * Fix "local storage is exceeded" error message showing up multiple times ([#8930])
 
 [#8928]: https://github.com/openstreetmap/iD/pull/8928

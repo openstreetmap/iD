@@ -119,10 +119,10 @@ export function svgPoints(projection, context) {
 
         enter
             .append('use')
-            .attr('transform', 'translate(-5, -19)')
+            .attr('transform', 'translate(-5.5, -20)')
             .attr('class', 'icon')
-            .attr('width', '11px')
-            .attr('height', '11px');
+            .attr('width', '12px')
+            .attr('height', '12px');
 
         groups = groups
             .merge(enter)
@@ -144,13 +144,7 @@ export function svgPoints(projection, context) {
             .attr('xlink:href', function(entity) {
                 var preset = presetManager.match(entity, graph);
                 var picon = preset && preset.icon;
-
-                if (!picon) {
-                    return '';
-                } else {
-                    var isMaki = /^maki-/.test(picon);
-                    return '#' + picon + (isMaki ? '-11' : '');
-                }
+                return picon ? '#' + picon : '';
             });
 
 

@@ -5,10 +5,8 @@
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
-* It's intentionally simple. It lets you do the most basic tasks while
-  not breaking other people's data.
-* It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
-  Opera, and Edge.
+* It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
+* It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
 * iD is not yet designed for mobile browsers, but this is something we hope to add!
 * Data is rendered with [d3.js](https://d3js.org/).
 
@@ -32,7 +30,7 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org/) version 10 or newer
+* [Node.js](https://nodejs.org/) version 12 or newer
 * [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
   * Note for Windows users:
     * Edit `$HOME\.gitconfig`:<br/>

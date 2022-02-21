@@ -53,7 +53,7 @@ export function uiSplash(context) {
       .append('p')
       .html(t.html('splash.text', {
         version: context.version,
-        website: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new">changelog</a>' },
+        website: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new">' + t.html('splash.changelog') + '</a>' },
         github: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/issues">github.com</a>' }
       }));
 

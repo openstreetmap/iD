@@ -302,6 +302,7 @@ export function uiFieldRadio(field, context) {
         var selection = radios.filter(function() { return this.checked; });
 
         if (selection.empty()) {
+            placeholder.text('');
             placeholder.call(t.append('inspector.none'));
         } else {
             placeholder.text(selection.attr('value'));

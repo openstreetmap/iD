@@ -54,7 +54,7 @@ export function utilKeybinding(namespace) {
 
             // Prefer a match on `KeyboardEvent.key`
             if (event.key !== undefined) {
-                tryKeyCode = (event.key.charCodeAt(0) > 255);  // outside ISO-Latin-1
+                tryKeyCode = (event.key.charCodeAt(0) > 127);  // outside ISO-Latin-1
                 isMatch = true;
 
                 if (binding.event.key === undefined) {
@@ -73,9 +73,9 @@ export function utilKeybinding(namespace) {
             }
 
             // Fallback match on `KeyboardEvent.keyCode`, can happen if:
-            // - browser doesn't support `KeyboardEvent.key`
-            // - `KeyboardEvent.key` is outside ISO-Latin-1 range (cyrillic?)
-            if (!isMatch && tryKeyCode) {
+            // - `KeyboardEvent.key` is outside ASCII range (e.g. cyrillic - #  )
+            // - alt/option/⌥ key is also requested (e.g. Spanish keyboard on MacOS - #8905)
+            if (!isMatch && (tryKeyCode || binding.event.modifiers.altKey)) {
                 isMatch = (event.keyCode === binding.event.keyCode);
             }
 

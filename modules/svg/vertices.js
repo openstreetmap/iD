@@ -155,13 +155,12 @@ export function svgVertices(projection, context) {
         iconUse.enter()
             .append('use')
             .attr('class', 'icon')
-            .attr('width', '11px')
-            .attr('height', '11px')
-            .attr('transform', 'translate(-5.5, -5.5)')
+            .attr('width', '12px')
+            .attr('height', '12px')
+            .attr('transform', 'translate(-6, -6)')
             .attr('xlink:href', function(d) {
                 var picon = getIcon(d);
-                var isMaki = /^maki-/.test(picon);
-                return '#' + picon + (isMaki ? '-11' : '');
+                return picon ? '#' + picon : '';
             });
 
 

@@ -30,10 +30,7 @@ var patterns = {
             { pattern: 'forest' } // same as 'leaf_type:mixed'
         ],
         grave_yard: 'cemetery',
-        grass: [
-            { golf: 'green', pattern: 'golf_green' },
-            { pattern: 'grass' },
-        ],
+        grass: 'grass',
         landfill: 'landfill',
         meadow: 'meadow',
         military: 'construction',
@@ -65,16 +62,15 @@ var patterns = {
             { pattern: 'forest' } // same as 'leaf_type:mixed'
         ]
     },
-    traffic_calming: {
-        island: [
-            { surface: 'grass', pattern: 'grass' },
-        ],
-        chicane: [
-            { surface: 'grass', pattern: 'grass' },
-        ],
-        choker: [
-            { surface: 'grass', pattern: 'grass' },
-        ]
+    golf: {
+        green: 'golf_green',
+        tee: 'grass',
+        fairway: 'grass',
+        rough: 'scrub'
+    },
+    surface: {
+        grass: 'grass',
+        sand: 'beach'
     }
 };
 

@@ -4,7 +4,7 @@ import {
 
 import { presetManager } from '../presets';
 import { modeSelect } from '../modes/select';
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
 
@@ -18,11 +18,11 @@ export function uiKeepRightDetails(context) {
     let replacements = d.replacements || {};
     replacements.default = unknown;  // special key `default` works as a fallback string
 
-    let detail = t.html(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
-    if (detail === unknown.html) {
-      detail = t.html(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
+    if (localizer.hasTextForStringId(`QA.keepRight.errorTypes.${itemType}.title`)) {
+      return t.html(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
+    } else {
+      return t.html(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
     }
-    return detail;
   }
 
 

@@ -1,5 +1,5 @@
 import { svgIcon } from '../svg/icon';
-import { t } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 
 
 export function uiKeepRightHeader() {
@@ -12,11 +12,10 @@ export function uiKeepRightHeader() {
     let replacements = d.replacements || {};
     replacements.default = { html: unknown };  // special key `default` works as a fallback string
 
-    const title = t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
-    if (title !== unknown) {
-      return t.apply(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    if (localizer.hasTextForStringId(`QA.keepRight.errorTypes.${itemType}.title`)) {
+      return t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
     } else {
-      return t.apply(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
+      return t.html(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
     }
   }
 
