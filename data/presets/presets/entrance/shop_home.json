@@ -1,0 +1,28 @@
+{
+    "icon": "iD-entrance-shop",
+    "fields": [
+        "address", 
+        "entrance",
+        "ref",
+        "door",
+        "access_simple",
+        "wheelchair",
+        "level"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "entrance": "shop;home"
+    },
+    "terms": [
+        "entrance",
+        "exit",
+        "door",
+        "shop",
+        "home"
+    ],
+    "matchScore": 0.8,
+    "name": "Home/Shop Entrance / Exit"
+  }
+  
