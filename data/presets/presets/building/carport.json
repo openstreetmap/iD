@@ -3,8 +3,8 @@
     "fields": [
         "{building}",
         "capacity",
-        "capacity_disabled"
-        "capacity_charging",
+        "capacity_disabled",
+        "capacity_charging"
     ],
     "geometry": [
         "area"
