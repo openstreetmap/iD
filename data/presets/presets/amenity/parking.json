@@ -6,6 +6,7 @@
         "parking",
         "capacity",
         "capacity_disabled",
+        "capacity_charging",
         "access_simple",
         "fee",
         "surface",

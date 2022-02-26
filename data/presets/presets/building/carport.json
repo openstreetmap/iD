@@ -4,6 +4,7 @@
         "{building}",
         "capacity",
         "capacity_disabled"
+        "capacity_charging",
     ],
     "geometry": [
         "area"
