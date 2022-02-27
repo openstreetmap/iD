@@ -6292,7 +6292,7 @@ en:
       man_made/pier:
         # man_made=pier
         name: Pier
-        # 'terms: berth,dock,jetty,landing,promenade,wharf'
+        # 'terms: berth,dock,jetty,landing,promenade,quay,wharf'
         terms: '<translate with synonyms or related terms for ''Pier'', separated by commas>'
       man_made/pier/floating:
         # 'man_made=pier, floating=yes'
