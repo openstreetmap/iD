@@ -97,7 +97,7 @@
     "karma-coverage": "2.1.1",
     "karma-mocha": "^2.0.1",
     "karma-remap-istanbul": "^0.6.0",
-    "mapillary-js": "4.0.0",
+    "mapillary-js": "4.1.0",
     "mapillary_sprite_source": "^1.8.0",
     "minimist": "^1.2.3",
     "mocha": "^9.2.0",
