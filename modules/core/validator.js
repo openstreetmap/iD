@@ -22,7 +22,7 @@ export function coreValidator(context) {
   let _completeDiff = {};                     // complete diff base -> head of what the user changed
   let _headIsCurrent = false;
 
-  let _deferredRIC = new Set();   // Set( RequestIdleCallback handles )
+  let _deferredRIC = {};          // Object( RequestIdleCallback handle : rejectPromise method )
   let _deferredST = new Set();    // Set( SetTimeout handles )
   let _headPromise;               // Promise fulfilled when validation is performed up to headGraph snapshot
 
@@ -98,17 +98,15 @@ export function coreValidator(context) {
   //   `resetIgnored` - `true` to clear the list of user-ignored issues
   //
   function reset(resetIgnored) {
-    // cancel deferred work
-    _deferredRIC.forEach(window.cancelIdleCallback);
-    _deferredRIC.clear();
-    _deferredST.forEach(window.clearTimeout);
-    _deferredST.clear();
-
-    // empty queues and resolve any pending promise
+    // empty queues
     _baseCache.queue = [];
     _headCache.queue = [];
-    processQueue(_headCache);
-    processQueue(_baseCache);
+
+    // cancel deferred work and reject any pending promise
+    Object.keys(_deferredRIC).forEach(key => {window.cancelIdleCallback(key); _deferredRIC[key](); });
+    _deferredRIC = {};
+    _deferredST.forEach(window.clearTimeout);
+    _deferredST.clear();
 
     // clear caches
     if (resetIgnored) _ignoredIssueIDs.clear();
@@ -754,16 +752,16 @@ export function coreValidator(context) {
     if (!cache.queue.length) return Promise.resolve();  // we're done
     const chunk = cache.queue.pop();
 
-    return new Promise(resolvePromise => {
+    return new Promise((resolvePromise, rejectPromise) => {
         const handle = window.requestIdleCallback(() => {
-          _deferredRIC.delete(handle);
+          delete (_deferredRIC[handle]);
           // const t0 = performance.now();
           chunk.forEach(job => job());
           // const t1 = performance.now();
           // console.log('chunk processed in ' + (t1 - t0) + ' ms');
           resolvePromise();
         });
-        _deferredRIC.add(handle);
+        _deferredRIC[handle] = rejectPromise;
       })
       .then(() => { // dispatch an event sometimes to redraw various UI things
         if (cache.queue.length % 25 === 0) dispatch.call('validated');
