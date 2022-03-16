@@ -71,7 +71,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "~6.0.0",
     "@fortawesome/free-regular-svg-icons": "~6.0.0",
-    "@fortawesome/free-solid-svg-icons": "~6.0.0",
+    "@fortawesome/free-solid-svg-icons": "~6.1.0",
     "@ideditor/temaki": "~5.0.0",
     "@mapbox/maki": "^7.1.0",
     "autoprefixer": "^10.0.1",
