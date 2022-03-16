@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-brands-svg-icons": "~6.0.0",
+    "@fortawesome/free-brands-svg-icons": "~6.1.0",
     "@fortawesome/free-regular-svg-icons": "~6.0.0",
     "@fortawesome/free-solid-svg-icons": "~6.0.0",
     "@ideditor/temaki": "~5.0.0",
