@@ -56,6 +56,10 @@ export function uiChangesetEditor(context) {
 
         if (initial) {
             var commentField = selection.select('.form-field-comment textarea');
+
+            // Give the comment field a max length of 255 characters since anything over that length would be truncated
+            commentField.attr('maxlength', 255);
+
             var commentNode = commentField.node();
 
             if (commentNode) {
