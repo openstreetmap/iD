@@ -4014,10 +4014,10 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border: 1px solid #ccc;
 }
 
-/* no scrollbars */
+/* scrollbars only when necessary*/
 .inspector-hover div {
     overflow-x: visible;
-    overflow-y: visible;
+    overflow-y: auto;
 }
 
 /* hide and remove from layout */
@@ -5529,7 +5529,6 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     height: 20px;
     overflow: visible;
     width: 10px;
-    background: #fff;
     border-left: 1px solid #DDD;
 }
 
