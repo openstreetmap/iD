@@ -41,7 +41,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased
 
 #### :newspaper: News
-<<<<<<< HEAD
 #### :tada: New Features
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 #### :white_check_mark: Validation
@@ -57,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix localizable labels in multiCombo fields ("chips") being rendered multiple times ([#9169])
 * Fix missing styling when rendering of proposed footway/cycleway/path bridges ([#9172], thanks [@k-yle])
 * Fix some boundary lines (and preset) not hidden by the map features filter ([#9171], thanks [@k-yle])
+* Fix iD using invalid user selected imagery ([#8732], thanks [@renancleyson-dev])
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
@@ -69,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 
 [#8419]: https://github.com/openstreetmap/iD/issues/8419
+[#8732]: https://github.com/openstreetmap/iD/issues/8732
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
 [#8975]: https://github.com/openstreetmap/iD/pull/8975
 [#9018]: https://github.com/openstreetmap/iD/issues/9018
@@ -88,6 +89,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
 [@paulklie]: https://github.com/paulklie
+[@renancleyson-dev]: https://github.com/renancleyson-dev
 
 
 # 2.21.1
@@ -103,9 +105,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2022-Jun-03
 
 #### :newspaper: News
-=======
-
->>>>>>> Fix iD using invalid user selected imagery
 * Drop legacy support for Internet Explorer 11 ([#8811])
 * Use OAuth2 for authentication with OSM API ([#9134], thanks [@bhousel] and [@dakotabenjamin])
 #### :white_check_mark: Validation
@@ -115,12 +114,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
 * Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
 * Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
-<<<<<<< HEAD
 * Fix a bug which caused validations to not take effect in certain situations ([#9021], thanks [@mbrzakovic])
 * Properly escape currently logged-in user's user name ([#9097], thanks [@jleedev])
-=======
-* Fix iD using invalid user selected imagery ([#8732])
->>>>>>> Fix iD using invalid user selected imagery
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
