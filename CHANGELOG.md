@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased
 
 #### :newspaper: News
+<<<<<<< HEAD
 #### :tada: New Features
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 #### :white_check_mark: Validation
@@ -102,6 +103,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### 2022-Jun-03
 
 #### :newspaper: News
+=======
+
+>>>>>>> Fix iD using invalid user selected imagery
 * Drop legacy support for Internet Explorer 11 ([#8811])
 * Use OAuth2 for authentication with OSM API ([#9134], thanks [@bhousel] and [@dakotabenjamin])
 #### :white_check_mark: Validation
@@ -111,8 +115,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
 * Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
 * Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
+<<<<<<< HEAD
 * Fix a bug which caused validations to not take effect in certain situations ([#9021], thanks [@mbrzakovic])
 * Properly escape currently logged-in user's user name ([#9097], thanks [@jleedev])
+=======
+* Fix iD using invalid user selected imagery ([#8732])
+>>>>>>> Fix iD using invalid user selected imagery
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`

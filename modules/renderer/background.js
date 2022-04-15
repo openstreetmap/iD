@@ -459,11 +459,13 @@ export function rendererBackground(context) {
 
     return _loadPromise = ensureImageryIndex()
       .then(imageryIndex => {
-        const first = imageryIndex.backgrounds.length && imageryIndex.backgrounds[0];
+        const validBackgrounds = background.sources(extent);
+        const first = validBackgrounds.length && validBackgrounds[0];
+        const isRequestedValid = !!validBackgrounds.find(d => d.id && d.id === requested);
 
         let best;
-        if (!requested && extent) {
-          best = background.sources(extent).find(s => s.best());
+        if (!isRequestedValid || (!requested && extent)) {
+          best = validBackgrounds.find(s => s.best());
         }
 
         // Decide which background layer to display
@@ -473,14 +475,22 @@ export function rendererBackground(context) {
           background.baseLayerSource(custom.template(template));
           prefs('background-custom-template', template);
         } else {
-          background.baseLayerSource(
-            background.findSource(requested) ||
-            best ||
-            background.findSource(prefs('background-last-used')) ||
+          const defaultSource = (
             background.findSource('Bing') ||
             first ||
             background.findSource('none')
           );
+
+          if (!isRequestedValid) {
+            background.baseLayerSource(best || defaultSource);
+          } else {
+            background.baseLayerSource(
+              background.findSource(requested) ||
+              best ||
+              background.findSource(prefs('background-last-used')) ||
+              defaultSource
+            );
+          }
         }
 
         const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
