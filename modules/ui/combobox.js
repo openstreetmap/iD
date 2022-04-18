@@ -386,7 +386,17 @@ export function uiCombobox(context, klass) {
                     return 'combobox-option ' + (d.klass || '');
                 })
                 .attr('title', function(d) { return d.title; })
-                .html(function(d) { return d.display || d.value; })
+                .html(function(d) {
+                    // d.display can be an object
+                    if ( typeof d.display === 'object' &&
+                         !Array.isArray(d.display) &&
+                         d.display !== null
+                    ) {
+                        return d.display.label.value;
+                    }
+
+                    return d.display || d.value;
+                })
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)
