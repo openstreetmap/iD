@@ -568,6 +568,11 @@ export default {
     },
 
 
+    getUrlRoot: function() {
+        return urlroot;
+    },
+
+
     changesetURL: function(changesetID) {
         return urlroot + '/changeset/' + changesetID;
     },
