@@ -148,6 +148,10 @@ export function validationCloseNodes(context) {
                 if (nearby.loc === node.loc ||
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
+                    // ignore stolperstein (https://wiki.openstreetmap.org/wiki/DE:Stolpersteine)
+                    if ('memorial:type' in node.tags && 'memorial:type' in nearby.tags && node.tags['memorial:type']==='stolperstein' && nearby.tags['memorial:type']==='stolperstein') continue;
+                    if ('memorial' in node.tags && 'memorial' in nearby.tags && node.tags.memorial==='stolperstein' && nearby.tags.memorial === 'stolperstein') continue;
+
                     // allow very close points if tags indicate the z-axis might vary
                     var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
                     var zAxisDifferentiates = false;
