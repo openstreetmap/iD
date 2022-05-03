@@ -67,7 +67,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 
 When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
-are available as **regular URL query parameters**:
+are available as **URL hash-query parameters, to put after a # instead of a ?**.  
+_Example:_ `https://www.openstreetmap.org/edit#gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
 
 * __`map`__ - same as standalone
 * __`lat`__, __`lon`__, __`zoom`__ - Self-explanatory.
