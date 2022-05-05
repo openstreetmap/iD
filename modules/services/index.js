@@ -6,6 +6,7 @@ import serviceMapRules from './maprules';
 import serviceNominatim from './nominatim';
 import serviceNsi from './nsi';
 import serviceKartaview from './kartaview';
+import serviceVegbilder from './vegbilder';
 import serviceOsm from './osm';
 import serviceOsmWikibase from './osm_wikibase';
 import serviceStreetside from './streetside';
@@ -23,6 +24,7 @@ export let services = {
   mapillary: serviceMapillary,
   nsi: serviceNsi,
   kartaview: serviceKartaview,
+  vegbilder: serviceVegbilder,
   osm: serviceOsm,
   osmWikibase: serviceOsmWikibase,
   maprules: serviceMapRules,
@@ -42,6 +44,7 @@ export {
   serviceNominatim,
   serviceNsi,
   serviceKartaview,
+  serviceVegbilder,
   serviceOsm,
   serviceOsmWikibase,
   serviceStreetside,

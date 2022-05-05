@@ -185,6 +185,18 @@
     stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
 
+/* Vegbilder Image Layer */
+.layer-vegbilder {
+    pointer-events: none;
+}
+.layer-vegbilder .viewfield-group * {
+    fill: #ed9300;
+}
+.layer-vegbilder .sequence {
+    stroke: #ed9300;
+    stroke-opacity: 0.85;  /* bump opacity - only one per road */
+}
+
 
 /* Mapillary Image Layer */
 .layer-mapillary {
@@ -273,7 +285,8 @@
     }
 }
 
-.ms-wrapper .pnlm-compass.pnlm-control {
+.ms-wrapper .pnlm-compass.pnlm-control,
+.vegbilder-wrapper  .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
@@ -341,12 +354,17 @@ label.streetside-hires {
     }
 }
 
-.kartaview-image-wrap {
+.kartaview-image-wrap,
+.vegbilder-image-wrap {
     width: 100%;
     height: 100%;
     transform-origin:0 0;
 }
 
+.vegbilder-wrapper {
+    position: relative;
+    background-color: #000;
+}
 
 /* photo-controls (step forward, back, rotate) */
 .photo-controls-wrap {
