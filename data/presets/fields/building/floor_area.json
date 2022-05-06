@@ -3,9 +3,5 @@
     "type": "number",
     "minValue": 0,
     "label": "Building total floor area (sq-meters)",
-    "placeholder": "200, 500, 1000...",
-    "prerequisiteTag": {
-        "key": "building",
-        "valueNot": "no"
-    }
+    "placeholder": "200, 500, 1000..."
 }
