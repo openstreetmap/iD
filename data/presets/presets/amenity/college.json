@@ -1,10 +1,10 @@
 {
     "icon": "maki-college",
     "fields": [
+        "{building}",
         "name",
         "operator",
         "operator/type",
-        "address",
         "website",
         "internet_access",
         "internet_access/fee",

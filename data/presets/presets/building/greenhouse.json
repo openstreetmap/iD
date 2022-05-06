@@ -1,5 +1,8 @@
 {
     "icon": "maki-garden-centre",
+    "fields": [
+        "{building}"
+    ],
     "geometry": [
         "area"
     ],
