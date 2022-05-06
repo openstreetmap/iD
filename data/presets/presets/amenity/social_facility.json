@@ -1,10 +1,10 @@
 {
     "icon": "temaki-social_facility",
     "fields": [
+        "{building}",
         "name",
         "operator",
         "operator/type",
-        "address",
         "building_area",
         "social_facility",
         "social_facility_for"
