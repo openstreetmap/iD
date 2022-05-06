@@ -5,6 +5,7 @@
         "building",
         "building/flats",
         "building/levels",
+        "building/floor_area",
         "height",
         "address"
     ],

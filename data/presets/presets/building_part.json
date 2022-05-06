@@ -2,6 +2,7 @@
     "icon": "maki-building",
     "fields": [
         "building/levels",
+        "building/floor_area",
         "height",
         "building/material",
         "roof/colour"
