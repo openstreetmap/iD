@@ -1,10 +1,10 @@
 {
     "icon": "fas-users",
     "fields": [
+        "{building}",
         "name",
         "operator",
         "building_area",
-        "address",
         "website",
         "internet_access",
         "internet_access/fee",

@@ -1,6 +1,7 @@
 {
     "icon": "temaki-hinduism",
     "fields": [
+        "{building}",
         "name",
         "religion",
         "denomination",

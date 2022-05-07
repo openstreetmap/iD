@@ -1,6 +1,7 @@
 {
     "icon": "temaki-taoism",
     "fields": [
+        "{building}",
         "name",
         "religion",
         "denomination",

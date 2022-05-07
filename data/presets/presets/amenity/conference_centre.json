@@ -1,11 +1,11 @@
 {
     "icon": "fas-user-tie",
     "fields": [
+        "{building}",
         "name",
         "operator",
         "operator/type",
         "building_area",
-        "address",
         "website",
         "internet_access",
         "internet_access/fee",

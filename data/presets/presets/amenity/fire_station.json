@@ -1,9 +1,9 @@
 {
     "icon": "maki-fire-station",
     "fields": [
+        "{building}",
         "name",
         "operator",
-        "address",
         "building_area"
     ],
     "moreFields": [

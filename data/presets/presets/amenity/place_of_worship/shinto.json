@@ -1,6 +1,7 @@
 {
     "icon": "temaki-shinto",
     "fields": [
+        "{building}",
         "name",
         "religion",
         "denomination",

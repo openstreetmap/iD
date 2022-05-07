@@ -1,6 +1,7 @@
 {
     "icon": "temaki-sikhism",
     "fields": [
+        "{building}",
         "name",
         "religion",
         "denomination",

@@ -1,10 +1,10 @@
 {
     "icon": "maki-town-hall",
     "fields": [
+        "{building}",
         "name",
         "operator",
         "townhall/type",
-        "address",
         "building_area"
     ],
     "moreFields": [

@@ -1,6 +1,7 @@
 {
     "icon": "maki-religious-jewish",
     "fields": [
+        "{building}",
         "name",
         "religion",
         "denomination",
