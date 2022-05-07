@@ -1,11 +1,11 @@
 {
     "icon": "maki-home",
     "fields": [
+        "building/floor_area",
         "name",
         "building",
         "building/flats",
         "building/levels",
-        "building/floor_area",
         "height",
         "address"
     ],
