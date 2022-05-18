@@ -3,7 +3,7 @@ import _throttle from 'lodash-es/throttle';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json, xml as d3_xml } from 'd3-fetch';
 
-import osmAuth from 'osm-auth';
+import {dummyOauth} from './dummy-oauth';
 import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
@@ -14,11 +14,9 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler,
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
-var urlroot = 'https://www.openstreetmap.org';
-var oauth = osmAuth({
+var urlroot = 'http://localhost:6790/psm/street-network';
+var oauth = dummyOauth({
     url: urlroot,
-    oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-    oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
     loading: authLoading,
     done: authDone
 });
