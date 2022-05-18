@@ -54,7 +54,6 @@ function buildData() {
     'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
-    'svg/fontawesome/*.svg',
   ]);
 
   // compile Font Awesome icons
@@ -87,32 +86,6 @@ function buildData() {
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
-    Promise.all([
-      // Fetch the icons that are needed by the expected tagging schema version
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/presets.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json'),
-      // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
-      // latest icons, but note that the format could break at any time
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/preset_categories.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/fields.min.json')
-    ])
-    .then(responses => Promise.all(responses.map(response => response.json())))
-    .then((results) => {
-      // compile the icons used by all the presets
-      results.forEach(function(data) {
-        for (var key in data) {
-          var datum  = data[key];
-          // fontawesome icon
-          if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
-            faIcons.add(datum.icon);
-          }
-        }
-      });
-      // copy over only those Font Awesome icons that we need
-      writeFaIcons(faIcons);
-    })
   ];
 
   return _currBuild =
@@ -217,21 +190,6 @@ function writeEnJson() {
 
       fs.writeFileSync('dist/locales/en.min.json', JSON.stringify(enjson));
     });
-}
-
-
-function writeFaIcons(faIcons) {
-  Array.from(faIcons).forEach(function(key) {
-    const prefix = key.substring(0, 3);   // `fas`, `far`, `fab`
-    const name = key.substring(4);
-    const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
-    try {
-      fs.writeFileSync(`svg/fontawesome/${key}.svg`, fontawesome.icon(def).html.toString());
-    } catch (error) {
-      console.error(`Error: No FontAwesome icon for ${key}`);
-      throw (error);
-    }
-  });
 }
 
 
