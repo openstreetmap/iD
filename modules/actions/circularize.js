@@ -14,7 +14,7 @@ import { geoVecLengthSquare } from '../geo/vector';
 
 export function actionCircularize(wayId, projection, maxAngle) {
     maxAngle = (maxAngle || 20) * Math.PI / 180;
-
+    var adjustedMaxAngle = maxAngle;
 
     var action = function(graph, t) {
         if (t === null || !isFinite(t)) t = 1;
@@ -37,6 +37,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
         var keyPoints = keyNodes.map(function(n) { return projection(n.loc); });
         var centroid = (points.length === 2) ? geoVecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points);
         var radius = d3_median(points, function(p) { return geoVecLength(centroid, p); });
+        adjustedMaxAngle = 40 * Math.pow(radius, -0.3) * Math.PI / 180;
         var sign = d3_polygonArea(points) > 0 ? 1 : -1;
         var ids, i, j, k;
 
@@ -100,7 +101,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             do {
                 numberNewPoints++;
                 eachAngle = totalAngle / (indexRange + numberNewPoints);
-            } while (Math.abs(eachAngle) > maxAngle);
+            } while (Math.abs(eachAngle) > adjustedMaxAngle);
 
 
             // move existing nodes
@@ -267,7 +268,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 angle = (2*Math.PI - angle);
             }
  
-            if (angle > maxAngle + epsilonAngle) {
+            if (angle > adjustedMaxAngle + epsilonAngle) {
                 return false;
             }
         }
