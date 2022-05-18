@@ -2,7 +2,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import marked from 'marked';
+import { marked } from 'marked';
 import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { icon } from './intro/helper';
@@ -54,15 +54,15 @@ export function uiFieldHelp(context, fieldName) {
     var fieldHelpHeadings = {};
 
     var replacements = {
-        distField: t.html('restriction.controls.distance'),
-        viaField: t.html('restriction.controls.via'),
-        fromShadow: icon('#iD-turn-shadow', 'inline shadow from'),
-        allowShadow: icon('#iD-turn-shadow', 'inline shadow allow'),
-        restrictShadow: icon('#iD-turn-shadow', 'inline shadow restrict'),
-        onlyShadow: icon('#iD-turn-shadow', 'inline shadow only'),
-        allowTurn: icon('#iD-turn-yes', 'inline turn'),
-        restrictTurn: icon('#iD-turn-no', 'inline turn'),
-        onlyTurn: icon('#iD-turn-only', 'inline turn')
+        distField: { html: t.html('restriction.controls.distance') },
+        viaField: { html: t.html('restriction.controls.via') },
+        fromShadow: { html: icon('#iD-turn-shadow', 'inline shadow from') },
+        allowShadow: { html: icon('#iD-turn-shadow', 'inline shadow allow') },
+        restrictShadow: { html: icon('#iD-turn-shadow', 'inline shadow restrict') },
+        onlyShadow: { html: icon('#iD-turn-shadow', 'inline shadow only') },
+        allowTurn: { html: icon('#iD-turn-yes', 'inline turn') },
+        restrictTurn: { html: icon('#iD-turn-no', 'inline turn') },
+        onlyTurn: { html: icon('#iD-turn-only', 'inline turn') }
     };
 
 
@@ -196,11 +196,12 @@ export function uiFieldHelp(context, fieldName) {
         titleEnter
             .append('h2')
             .attr('class', ((localizer.textDirection() === 'rtl') ? 'fr' : 'fl'))
-            .html(t.html('help.field.' + fieldName + '.title'));
+            .call(t.append('help.field.' + fieldName + '.title'));
 
         titleEnter
             .append('button')
             .attr('class', 'fr close')
+            .attr('title', t('icons.close'))
             .on('click', function(d3_event) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();

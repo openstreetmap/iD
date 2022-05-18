@@ -42,25 +42,29 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'header fillL');
 
+        var direction = (localizer.textDirection() === 'rtl') ? 'forward' : 'backward';
+
         headerEnter
             .append('button')
             .attr('class', 'preset-reset preset-choose')
-            .call(svgIcon((localizer.textDirection() === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
+            .attr('title', t(`icons.${direction}`))
+            .call(svgIcon(`#iD-icon-${direction}`));
 
         headerEnter
             .append('button')
             .attr('class', 'close')
+            .attr('title', t('icons.close'))
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
         headerEnter
-            .append('h3');
+            .append('h2');
 
         // Update
         header = header
             .merge(headerEnter);
 
-        header.selectAll('h3')
+        header.selectAll('h2')
             .html(_entityIDs.length === 1 ? t.html('inspector.edit') : t.html('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
@@ -161,7 +165,10 @@ export function uiEntityEditor(context) {
             for (var k in changed) {
                 if (!k) continue;
                 var v = changed[k];
-                if (v !== undefined || tags.hasOwnProperty(k)) {
+                if (typeof v === 'object') {
+                    // a "key only" tag change
+                    tags[k] = tags[v.oldKey];
+                } else if (v !== undefined || tags.hasOwnProperty(k)) {
                     tags[k] = v;
                 }
             }

@@ -402,7 +402,7 @@ describe('iD.actionJoin', function () {
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
 
-    it('prefers to keep existing ways', function () {
+    it('keeps the way already in the database', function () {
         // a --> b ==> c ++> d
         // --- is new, === is existing, +++ is new
         // Expected result:
@@ -447,6 +447,60 @@ describe('iD.actionJoin', function () {
         expect(graph.hasEntity('w-1')).to.be.undefined;
     });
 
+    it('keeps the oldest id - oldest first', function () {
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmNode({id: 'd', loc: [6,0]}),
+            iD.osmWay({id: 'w1', nodes: ['a', 'b']}),
+            iD.osmWay({id: 'w2', nodes: ['b', 'c']}),
+            iD.osmWay({id: 'w3', nodes: ['c', 'd']})
+        ]);
+
+        graph = iD.actionJoin(['w1', 'w2', 'w3'])(graph);
+
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w2')).to.be.undefined;
+        expect(graph.hasEntity('w3')).to.be.undefined;
+    });
+
+    it('keeps the oldest id - oldest last', function () {
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmNode({id: 'd', loc: [6,0]}),
+            iD.osmWay({id: 'w3', nodes: ['a', 'b']}),
+            iD.osmWay({id: 'w2', nodes: ['b', 'c']}),
+            iD.osmWay({id: 'w1', nodes: ['c', 'd']})
+        ]);
+
+        graph = iD.actionJoin(['w3', 'w2', 'w1'])(graph);
+
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w2')).to.be.undefined;
+        expect(graph.hasEntity('w3')).to.be.undefined;
+    });
+
+    it('keeps the oldest id - oldest middle', function () {
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0,0]}),
+            iD.osmNode({id: 'b', loc: [2,0]}),
+            iD.osmNode({id: 'c', loc: [4,0]}),
+            iD.osmNode({id: 'd', loc: [6,0]}),
+            iD.osmWay({id: 'w2', nodes: ['a', 'b']}),
+            iD.osmWay({id: 'w1', nodes: ['b', 'c']}),
+            iD.osmWay({id: 'w3', nodes: ['c', 'd']})
+        ]);
+
+        graph = iD.actionJoin(['w2', 'w1', 'w3'])(graph);
+
+        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w2')).to.be.undefined;
+        expect(graph.hasEntity('w3')).to.be.undefined;
+    });
+
     it('merges tags', function () {
         var graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0,0]}),
@@ -489,7 +543,7 @@ describe('iD.actionJoin', function () {
         //            v v v
         //
         //  Expected result:
-        // a =====> b =====> c
+        // a -----> b -----> c
         //   v v v    v v v
         //
         var graph = iD.coreGraph([
@@ -500,8 +554,8 @@ describe('iD.actionJoin', function () {
             iD.osmWay({id: '=', nodes: ['b', 'c'], tags: { natural: 'cliff' }})
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('=').tags).to.eql({ natural: 'cliff' });
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
+        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
     });
 
     it('preserves sidedness of start segment, contra-directional lines', function () {
@@ -529,7 +583,7 @@ describe('iD.actionJoin', function () {
         //             v v v
         //
         //  Expected result:
-        // a <===== b <===== c
+        // a <----- b <----- c
         //    v v v    v v v
         //
         var graph = iD.coreGraph([
@@ -540,8 +594,8 @@ describe('iD.actionJoin', function () {
             iD.osmWay({id: '=', nodes: ['c', 'b'], tags: { natural: 'cliff' }})
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('=').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.entity('=').tags).to.eql({ natural: 'cliff' });
+        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
+        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
     });
 
 

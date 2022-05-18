@@ -298,7 +298,14 @@ export function presetIndex() {
   // and the subkeys form the discardlist.
   _this.areaKeys = () => {
     // The ignore list is for keys that imply lines. (We always add `area=yes` for exceptions)
-    const ignore = ['barrier', 'highway', 'footway', 'railway', 'junction', 'type'];
+    const ignore = {
+      barrier: true,
+      highway: true,
+      footway: true,
+      railway: true,
+      junction: true,
+      type: true
+    };
     let areaKeys = {};
 
     // ignore name-suggestion-index and deprecated presets
@@ -309,7 +316,7 @@ export function presetIndex() {
       const keys = p.tags && Object.keys(p.tags);
       const key = keys && keys.length && keys[0];  // pick the first tag
       if (!key) return;
-      if (ignore.indexOf(key) !== -1) return;
+      if (ignore[key]) return;
 
       if (p.geometry.indexOf('area') !== -1) {    // probably an area..
         areaKeys[key] = areaKeys[key] || {};

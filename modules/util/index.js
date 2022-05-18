@@ -35,6 +35,8 @@ export { utilHighlightEntities } from './util';
 export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';
 export { utilObjectOmit } from './object';
+export { utilCompareIDs } from './util';
+export { utilOldestID } from './util';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';
 export { utilQsString } from './util';

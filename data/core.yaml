@@ -12,6 +12,12 @@ en:
     list: list
     text: text
     deselect: deselect
+    close: close
+    forward: forward
+    backward: backward
+    expand: expand
+    collapse: collapse
+    plus: add
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
@@ -468,8 +474,8 @@ en:
             single_node: Divide this line into two at this point.
             multiple_node: Divide this line at these points.
           multiple:
-            single_node: Divide these lines at this point.
-            multiple_node: Divide these lines at these points.
+            single_node: "Divide all lines at this point. Tip: To limit this operation to a specific line, select both the line and point before performing the split."
+            multiple_node: "Divide all lines at these points. Tip: To limit this operation to a specific line, select the line as well as the points before performing the split."
         area:
           single:
             single_node: Divide the edge of this area into two at this point.
@@ -643,8 +649,10 @@ en:
       last_edit: Last Edit
       edited_by: Edited By
       changeset: Changeset
+      changeset_link: Changeset on osm.org
+      profile_link: Profile on osm.org
+      history_link: History on osm.org
       unknown: Unknown
-      link_text: History on openstreetmap.org
       note_no_history: "No History (New Note)"
       note_comments: Comments
       note_created_date: Created Date
@@ -702,6 +710,7 @@ en:
     features: Features
     title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_to_tag: Add a tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
@@ -711,7 +720,7 @@ en:
       one: "{n} result for {search}"
       other: "{n} results for {search}"
     no_documentation_key: "There is no documentation available."
-    edit_reference: "edit/translate"
+    edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
@@ -738,6 +747,8 @@ en:
         type: Type
         default: Default
         layer: Layer
+    increment: increment
+    decrement: decrement
     add: Add
     none: None
     node: Node
@@ -763,6 +774,7 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+    speed_unit: "Speed unit"
     roadheight:
       # symbol for meters
       meter: m
@@ -800,6 +812,12 @@ en:
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset_label: "Adjust Imagery Offset"
+    nudge:
+      top: "nudge top"
+      left: "nudge left"
+      right: "nudge right"
+      bottom: "nudge bottom"
   map_data:
     title: Map Data
     description: Map Data
@@ -999,7 +1017,7 @@ en:
       location: 'This feature was moved by both you and {user}.'
       nodelist: 'Nodes were changed by both you and {user}.'
       memberlist: 'Relation members were changed by both you and {user}.'
-      tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
+      tags: 'You changed the "{tag}" tag to "{local}" and {user} changed it to "{remote}".'
   success:
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
@@ -1024,9 +1042,11 @@ en:
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
     text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
+    changelog: changelog
     privacy_update: "Our privacy policy has recently been updated."
     privacy_policy: iD privacy policy
     privacy: "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}."
+    privacy_settings: Your Privacy Settings
     walkthrough: "Start the Walkthrough"
     start: "Edit now"
   source_switch:
@@ -1885,7 +1905,7 @@ en:
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
     vertex_as_point:
-      message: '{feature} should be part of a line or area based on its tags'
+      message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     fix:
       add_a_bridge:

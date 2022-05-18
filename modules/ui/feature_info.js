@@ -9,7 +9,7 @@ export function uiFeatureInfo(context) {
         var hiddenList = features.hidden().map(function(k) {
             if (stats[k]) {
                 count += stats[k];
-                return t('inspector.title_count', { title: t.html('feature.' + k + '.description'), count: stats[k] });
+                return t.html('inspector.title_count', { title: { html: t.html('feature.' + k + '.description') }, count: stats[k] });
             }
             return null;
         }).filter(Boolean);
@@ -26,7 +26,7 @@ export function uiFeatureInfo(context) {
             selection.append('a')
                 .attr('class', 'chip')
                 .attr('href', '#')
-                .html(t.html('feature_info.hidden_warning', { count: count }))
+                .call(t.append('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
                 .on('click', function(d3_event) {
                     tooltipBehavior.hide();

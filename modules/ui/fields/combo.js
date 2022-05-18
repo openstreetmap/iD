@@ -527,13 +527,13 @@ export function uiFieldCombo(field, context) {
             }
 
             chips.select('span')
-                .html(function(d) { return d.value; });
+                .text(function(d) { return d.value; });
 
             chips.select('a')
                 .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
-                .html('×');
+                .text('×');
 
         } else {
             var isMixed = Array.isArray(tags[field.key]);

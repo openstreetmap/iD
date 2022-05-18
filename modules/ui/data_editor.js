@@ -26,14 +26,15 @@ export function uiDataEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'close')
+            .attr('title', t('icons.close'))
             .on('click', function() {
                 context.enter(modeBrowse(context));
             })
             .call(svgIcon('#iD-icon-close'));
 
         headerEnter
-            .append('h3')
-            .html(t.html('map_data.title'));
+            .append('h2')
+            .call(t.append('map_data.title'));
 
 
         var body = selection.selectAll('.body')

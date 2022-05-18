@@ -8,7 +8,8 @@
         "fakeFetch": true,
         "happen": false,
         "iD": false,
-        "sinon": false
+        "sinon": false,
+        "fetchMock": true
     },
     "rules": {
         "no-unused-expressions": "off"

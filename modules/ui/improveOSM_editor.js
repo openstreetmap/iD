@@ -31,12 +31,13 @@ export function uiImproveOsmEditor(context) {
     headerEnter
       .append('button')
         .attr('class', 'close')
+        .attr('title', t('icons.close'))
         .on('click', () => context.enter(modeBrowse(context)))
         .call(svgIcon('#iD-icon-close'));
 
     headerEnter
-      .append('h3')
-        .html(t.html('QA.improveOSM.title'));
+      .append('h2')
+        .call(t.append('QA.improveOSM.title'));
 
     let body = selection.selectAll('.body')
       .data([0]);
@@ -80,7 +81,7 @@ export function uiImproveOsmEditor(context) {
     saveSectionEnter
       .append('h4')
         .attr('class', '.qa-save-header')
-        .html(t.html('note.newComment'));
+        .call(t.append('note.newComment'));
 
     saveSectionEnter
       .append('textarea')
@@ -135,7 +136,7 @@ export function uiImproveOsmEditor(context) {
     buttonEnter
       .append('button')
         .attr('class', 'button comment-button action')
-        .html(t.html('QA.keepRight.save_comment'));
+        .call(t.append('QA.keepRight.save_comment'));
 
     buttonEnter
       .append('button')

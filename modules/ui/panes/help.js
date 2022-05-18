@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import { svgIcon } from '../../svg/icon';
 import { uiIntro } from '../intro/intro';
 import { uiPane } from '../pane';
@@ -361,6 +361,7 @@ export function uiPaneHelp(context) {
             .enter()
             .append('li')
             .append('a')
+            .attr('role', 'button')
             .attr('href', '#')
             .html(function(d) { return d.title; })
             .on('click', function(d3_event, d) {
@@ -382,7 +383,7 @@ export function uiPaneHelp(context) {
 
         shortcuts
             .append('div')
-            .html(t.html('shortcuts.title'));
+            .call(t.append('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
@@ -399,7 +400,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .html(t.html('splash.walkthrough'));
+            .call(t.append('splash.walkthrough'));
 
 
         var helpContent = content

@@ -5,7 +5,7 @@ import { svgIcon } from '../svg/icon';
 import { utilFunctor } from '../util';
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
-import { localizer } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 
 
 export function uiDisclosure(context, key, expandedDefault) {
@@ -30,7 +30,9 @@ export function uiDisclosure(context, key, expandedDefault) {
 
         // enter
         var hideToggleEnter = hideToggle.enter()
+            .append('h3')
             .append('a')
+            .attr('role', 'button')
             .attr('href', '#')
             .attr('class', 'hide-toggle hide-toggle-' + key)
             .call(svgIcon('', 'pre-text', 'hide-toggle-icon'));
@@ -45,6 +47,8 @@ export function uiDisclosure(context, key, expandedDefault) {
 
         hideToggle
             .on('click', toggle)
+            .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`))
+            .attr('aria-expanded', _expanded)
             .classed('expanded', _expanded);
 
         hideToggle.selectAll('.hide-toggle-text')
@@ -82,7 +86,9 @@ export function uiDisclosure(context, key, expandedDefault) {
             }
 
             hideToggle
-                .classed('expanded', _expanded);
+                .classed('expanded', _expanded)
+                .attr('aria-expanded', _expanded)
+                .attr('title', t(`icons.${_expanded ? 'collapse' : 'expand'}`));
 
             hideToggle.selectAll('.hide-toggle-icon')
                 .attr('xlink:href', _expanded ? '#iD-icon-down'

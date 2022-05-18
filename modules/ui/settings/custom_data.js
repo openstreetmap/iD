@@ -30,7 +30,7 @@ export function uiSettingsCustomData(context) {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .html(t.html('settings.custom_data.header'));
+            .call(t.append('settings.custom_data.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
@@ -38,13 +38,14 @@ export function uiSettingsCustomData(context) {
         textSection
             .append('pre')
             .attr('class', 'instructions-file')
-            .html(t.html('settings.custom_data.file.instructions'));
+            .call(t.append('settings.custom_data.file.instructions'));
 
         textSection
             .append('input')
             .attr('class', 'field-file')
             .attr('type', 'file')
-            .property('files', _currSettings.fileList)  // works for all except IE11
+            .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
+            .property('files', _currSettings.fileList)
             .on('change', function(d3_event) {
                 var files = d3_event.target.files;
                 if (files && files.length) {
@@ -58,12 +59,12 @@ export function uiSettingsCustomData(context) {
 
         textSection
             .append('h4')
-            .html(t.html('settings.custom_data.or'));
+            .call(t.append('settings.custom_data.or'));
 
         textSection
             .append('pre')
             .attr('class', 'instructions-url')
-            .html(t.html('settings.custom_data.url.instructions'));
+            .call(t.append('settings.custom_data.url.instructions'));
 
         textSection
             .append('textarea')
@@ -79,7 +80,7 @@ export function uiSettingsCustomData(context) {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .html(t.html('confirm.cancel'));
+            .call(t.append('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')

@@ -17,7 +17,7 @@ export function uiSectionSelectionList(context) {
             return _selectedIDs.length > 1;
         })
         .label(function() {
-            return t('inspector.title_count', { title: t.html('inspector.features'), count: _selectedIDs.length });
+            return t.html('inspector.title_count', { title: { html: t.html('inspector.features') }, count: _selectedIDs.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -116,10 +116,10 @@ export function uiSectionSelectionList(context) {
             });
 
         items.selectAll('.entity-type')
-            .html(function(entity) { return presetManager.match(entity, context.graph()).name(); });
+            .text(function(entity) { return presetManager.match(entity, context.graph()).name(); });
 
         items.selectAll('.entity-name')
-            .html(function(d) {
+            .text(function(d) {
                 // fetch latest entity
                 var entity = context.entity(d.id);
                 return utilDisplayName(entity);

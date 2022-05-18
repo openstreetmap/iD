@@ -2,6 +2,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
@@ -18,6 +19,7 @@ export function uiPhotoviewer(context) {
         selection
             .append('button')
             .attr('class', 'thumb-hide')
+            .attr('title', t('icons.close'))
             .on('click', function () {
                 if (services.streetside) { services.streetside.hideViewer(context); }
                 if (services.mapillary) { services.mapillary.hideViewer(context); }

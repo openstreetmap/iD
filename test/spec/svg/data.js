@@ -22,7 +22,11 @@ describe('iD.svgData', function () {
         '        "area": 19717.8,' +
         '        "name": "New Jersey",' +
         '        "name_en": "New Jersey",' +
-        '        "osm_id": 316973311' +
+        '        "osm_id": 316973311,' +
+        '        "flag": true,' +
+        '        "list": [1,2,3],' +
+        '        "null": null,' +
+        '        "object": {}' +
         '      },' +
         '      "id": 316973311' +
         '    }' +
@@ -71,8 +75,6 @@ describe('iD.svgData', function () {
         '</Document>' +
         '</kml>';
 
-
-    // this is because PhantomJS hasn't implemented a proper File constructor
     function makeFile(contents, fileName, mimeType) {
         var blob = new Blob([contents], { type: mimeType });
         blob.lastModifiedDate = new Date();
@@ -171,6 +173,11 @@ describe('iD.svgData', function () {
                 path = surface.selectAll('path.stroke');
                 expect(path.nodes().length).to.eql(1);
                 expect(path.attr('d')).to.match(/^M.*z$/);
+                expect(render.geojson().features[0].properties.osm_id).to.be.a('string');
+                expect(render.geojson().features[0].properties.flag).to.be.a('string');
+                expect(render.geojson().features[0].properties.list).to.be.a('string');
+                expect(render.geojson().features[0].properties.null).to.be.a('string');
+                expect(render.geojson().features[0].properties.object).to.be.a('string');
                 done();
             }, 200);
         });

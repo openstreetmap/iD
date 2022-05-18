@@ -49,8 +49,6 @@ describe('iD.coreLocations', function() {
                     expect(/^nothing to do/.test(err)).to.be.true;
                     done();
                 });
-
-            window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
 
         it('resolves locationSets, assigning locationSetID', function(done) {
@@ -69,8 +67,6 @@ describe('iD.coreLocations', function() {
                 .catch(function(err) {
                     done(err);
                 });
-
-            window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
         });
 
         it('resolves locationSets, falls back to world locationSetID on errror', function(done) {
@@ -89,8 +85,6 @@ describe('iD.coreLocations', function() {
                 .catch(function(err) {
                     done(err);
                 });
-
-            window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
         });
     });
 
@@ -150,8 +144,6 @@ describe('iD.coreLocations', function() {
                 .catch(function(err) {
                     done(err);
                 });
-
-            window.setTimeout(function() {}, 20);  // async - to let the promise settle in phantomjs
         });
     });
 

@@ -1,5 +1,5 @@
 import { osmTagSuggestingArea } from '../osm/tags';
-import { utilArrayGroupBy, utilArrayUniq } from '../util';
+import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 
 
 export function actionMerge(ids) {
@@ -29,21 +29,65 @@ export function actionMerge(ids) {
             var nodes = utilArrayUniq(graph.childNodes(target));
             var removeNode = point;
 
-            for (var i = 0; i < nodes.length; i++) {
-                var node = nodes[i];
-                if (graph.parentWays(node).length > 1 ||
-                    graph.parentRelations(node).length ||
-                    node.hasInterestingTags()) {
-                    continue;
+            if (!point.isNew()) {
+                // Try to preserve the original point if it already has
+                // an ID in the database.
+
+                var inserted = false;
+
+                var canBeReplaced = function(node) {
+                    return !(graph.parentWays(node).length > 1 ||
+                        graph.parentRelations(node).length);
+                };
+
+                var replaceNode = function(node) {
+                    graph = graph.replace(point.update({ tags: node.tags, loc: node.loc }));
+                    target = target.replaceNode(node.id, point.id);
+                    graph = graph.replace(target);
+                    removeNode = node;
+                    inserted = true;
+                };
+
+                var i;
+                var node;
+
+                // First, try to replace a new child node on the target way.
+                for (i = 0; i < nodes.length; i++) {
+                    node = nodes[i];
+                    if (canBeReplaced(node) && node.isNew()) {
+                        replaceNode(node);
+                        break;
+                    }
                 }
 
-                // Found an uninteresting child node on the target way.
-                // Move orig point into its place to preserve point's history. #3683
-                graph = graph.replace(point.update({ tags: {}, loc: node.loc }));
-                target = target.replaceNode(node.id, point.id);
-                graph = graph.replace(target);
-                removeNode = node;
-                break;
+                if (!inserted && point.hasInterestingTags()) {
+                    // No new child node found, try to find an existing, but
+                    // uninteresting child node instead.
+                    for (i = 0; i < nodes.length; i++) {
+                        node = nodes[i];
+                        if (canBeReplaced(node) &&
+                            !node.hasInterestingTags()) {
+                            replaceNode(node);
+                            break;
+                        }
+                    }
+
+                    if (!inserted) {
+                        // Still not inserted, try to find an existing, interesting,
+                        // but more recent child node.
+                        for (i = 0; i < nodes.length; i++) {
+                            node = nodes[i];
+                            if (canBeReplaced(node) &&
+                                utilCompareIDs(point.id, node.id) < 0) {
+                                replaceNode(node);
+                                break;
+                            }
+                        }
+                    }
+
+                    // If the point still hasn't been inserted, we give up.
+                    // There are more interesting or older nodes on the way.
+                }
             }
 
             graph = graph.remove(removeNode);

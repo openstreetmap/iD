@@ -14,6 +14,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 ##### YYYY-MMM-DD
 
 #### :newspaper: News
+#### :shield: Security
 #### :mega: Release Highlights
 #### :boom: Breaking Changes
 #### :tada: New Features
@@ -37,38 +38,141 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
 # Unreleased
 
 #### :newspaper: News
+* Drop legacy support for Internet Explorer 11 ([#8811])
+#### :white_check_mark: Validation
+* Handle indoor features like buildings when checking for crossing ways ([#8944])
+#### :bug: Bugfixes
+* Fix rendering of KeepRight issues ([#8963])
+* Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
+* Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
+* Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
+* Fix a bug which caused validations to not take effect in certain situations ([#9021], thanks [@mbrzakovic])
+#### :rocket: Presets
+* Optimize order of values in dropdowns of `access` fields ([#8945])
+* Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
+* Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
+* Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
+#### Other
+* Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
+#### :hammer: Development
+* Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
+* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
+
+[#8774]: https://github.com/openstreetmap/iD/pull/8774
+[#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8905]: https://github.com/openstreetmap/iD/issues/8905
+[#8925]: https://github.com/openstreetmap/iD/issues/8925
+[#8927]: https://github.com/openstreetmap/iD/issues/8927
+[#8944]: https://github.com/openstreetmap/iD/issues/8944
+[#8945]: https://github.com/openstreetmap/iD/issues/8945
+[#8963]: https://github.com/openstreetmap/iD/issues/8963
+[#8976]: https://github.com/openstreetmap/iD/issues/8976
+[#8985]: https://github.com/openstreetmap/iD/issues/8985
+[#9021]: https://github.com/openstreetmap/iD/pull/9021
+
+
+# 2.20.4
+##### 2022-Feb-03
+
+#### :bug: Bugfixes
+* Fix rendering of HTML content in ~~KeepRight and~~ ImproveOSM issues ([#8928])
+* Fix "local storage is exceeded" error message showing up multiple times ([#8930])
+
+[#8928]: https://github.com/openstreetmap/iD/pull/8928
+[#8930]: https://github.com/openstreetmap/iD/pull/8930
+
+
+# 2.20.3
+##### 2022-Jan-31
+
+#### :newspaper: News
 * We maintain a running changelog now! Upcoming changes will be added to the _[Unreleased](#Unreleased)_ section of this changelog as soon as they are ready in the [development version](https://ideditor.netlify.app/) of the iD editor. ([#8805])
-#### :boom: Breaking Changes
-#### :tada: New Features
+* This version will be the last version which will run on Internet Explorer 11
+#### :shield: Security
+* Fix missing escaping of external texts and content such as OSM user names, OSM tags, etc. which had opened a way to inject arbitrary HTML into the iD editor, potentially making XSS attacks possible. ([#8813])
 #### :sparkles: Usability & Accessibility
+* Add a preview to colour fields, showing a native colour picker dialog on click ([#8782], thanks [@k-yle])
+* Tag keys of a multi-selection can now also be changed in the tags editor when the tag values differ in the selected features. ([#8836])
+* Improve screen reader accessibility ([#8835], thanks [@mbrzakovic])
+* Render footways, cycleways, bridleways, paths and steps which are under construction (or proposed) thinner than generic roads under construction ([#8743], thanks [@k-yle])
+* Only show accepted file types in custom data file chooser ([#8676], thanks [@jtracey])
 #### :scissors: Operations
+* Split operation now indicates more clearly when multiple ways will be affected and gives a hint how to restrict the operation to a single line ([#8818])
+* Many operations now better preserve OSM object history ([#8839], thanks [@tpetillon])
 #### :camera: Street-Level
 * Rename OpenStreetCam overlay to KartaView ([#8807])
 #### :white_check_mark: Validation
 * Allow disconnecting members of certain "grouping" types of relation ([#8771])
 * Clarify description of "disconnected way" validation rule ([#8800])
+* Fix data `source`s incorrectly flagged as _proprietary data_: `esri/Google_Africa_building` ([#8844], thanks [@Bonkles]) and `*amap` ([#8889], thanks [@cicku])
 #### :bug: Bugfixes
 * Fix hidden tooltips on map control toolbar ([#8781])
 * Fix glitching out turn restriction minimap on narrow sidebars ([#8792])
+* Fix non-string properties of GeoJSON custom map data not being displayed correctly ([#8825], thanks [@k-yle])
+* Fix a bug which made it impossible to switch to a custom TMS imagery layer after using a custom WMS source and vice versa ([#8057])
+* Fix a bug where the validator might show wrong tagging suggestions for a preset if another preset has a partial match ([#8828], thanks [@bhousel])
+* Show correct vintage and other metadata for "Esri World Imagery"'s higher zoom levels
+* Fix wrong order of route relation members after a split operation ([#8519], thanks [@tpetillon])
+* Do not open disabled localized combobox when clicking on it ([#8871], thanks [@hodigabi])
 #### :earth_asia: Localization
+* Deprecate ~`t.html`~ for providing localized texts, which is replaced by the new method `t.append` which directly and safely appends the localized strings to the DOM ([#8817])
 #### :hourglass: Performance
+* Compare regexes as strings when checking imagery blocklists ([#8860], thanks [@bhousel])
 #### :mortar_board: Walkthrough / Help
+* Show privacy settings in splash screen (i.e. the "Welcome to iD" message) ([#8831])
+* Fix broken labels in part of the walkthrough ([#8906], thanks [@hodigabi])
 #### :rocket: Presets
 * Radio-button based presets fields can be in an non-unique state (e.g. a tunnel which is also a ford) – this is now rendered like a multi selection with conflicting states ([#8796])
 * Add colours for preset categories ([#8799])
+* Activate new access values (`customers` and `unknown`) introduced in `id-tagging-schema` v3.2 ([#8876])
+* Handle implied `oneway=yes` by `seamark:type=separation_lane` and `seamark:type=separation_roundabout` tags ([#8880], thanks [@k-yle])
 #### :hammer: Development
+* Switch test runner to [karma](https://karma-runner.github.io/) ([#8764], thanks [@wvanderp])
+* Switch to `chalk` package for build scripts
+* Upgrade to temaki library to v5 ([#8434])
 
+[#8057]: https://github.com/openstreetmap/iD/issues/8057
+[#8434]: https://github.com/openstreetmap/iD/pull/8434
+[#8519]: https://github.com/openstreetmap/iD/issues/8519
+[#8676]: https://github.com/openstreetmap/iD/issues/8676
+[#8743]: https://github.com/openstreetmap/iD/issues/8743
+[#8764]: https://github.com/openstreetmap/iD/pull/8764
 [#8771]: https://github.com/openstreetmap/iD/issues/8771
 [#8781]: https://github.com/openstreetmap/iD/issues/8781
+[#8782]: https://github.com/openstreetmap/iD/pull/8782
 [#8792]: https://github.com/openstreetmap/iD/pull/8792
 [#8796]: https://github.com/openstreetmap/iD/issues/8796
 [#8799]: https://github.com/openstreetmap/iD/issues/8799
 [#8800]: https://github.com/openstreetmap/iD/pull/8800
 [#8805]: https://github.com/openstreetmap/iD/issues/8805
 [#8807]: https://github.com/openstreetmap/iD/issues/8807
+[#8813]: https://github.com/openstreetmap/iD/issues/8813
+[#8817]: https://github.com/openstreetmap/iD/pull/8817
+[#8818]: https://github.com/openstreetmap/iD/issues/8818
+[#8825]: https://github.com/openstreetmap/iD/pull/8825
+[#8828]: https://github.com/openstreetmap/iD/pull/8828
+[#8831]: https://github.com/openstreetmap/iD/issues/8831
+[#8835]: https://github.com/openstreetmap/iD/pull/8835
+[#8844]: https://github.com/openstreetmap/iD/pull/8844
+[#8836]: https://github.com/openstreetmap/iD/issues/8836
+[#8839]: https://github.com/openstreetmap/iD/pull/8839
+[#8860]: https://github.com/openstreetmap/iD/pull/8860
+[#8871]: https://github.com/openstreetmap/iD/issues/8871
+[#8876]: https://github.com/openstreetmap/iD/pull/8876
+[#8880]: https://github.com/openstreetmap/iD/pull/8880
+[#8889]: https://github.com/openstreetmap/iD/pull/8889
+[#8906]: https://github.com/openstreetmap/iD/pull/8906
+[@k-yle]: https://github.com/k-yle
+[@tpetillon]: https://github.com/tpetillon
+[@mbrzakovic]: https://github.com/mbrzakovic
+[@wvanderp]: https://github.com/wvanderp
+[@hodigabi]: https://github.com/hodigabi
+[@jtracey]: https://github.com/jtracey
+[@cicku]: https://github.com/cicku
 
 # 2.20.2
 ##### 2021-Oct-28

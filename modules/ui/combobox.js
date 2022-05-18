@@ -77,6 +77,7 @@ export function uiCombobox(context, klass) {
 
         function mousedown(d3_event) {
             if (d3_event.button !== 0) return;    // left click only
+            if (input.classed('disabled')) return;
             _tDown = +new Date();
 
             // clear selection
@@ -95,6 +96,7 @@ export function uiCombobox(context, klass) {
         function mouseup(d3_event) {
             input.on('mouseup.combo-input', null);
             if (d3_event.button !== 0) return;    // left click only
+            if (input.classed('disabled')) return;
             if (input.node() !== document.activeElement) return;   // exit if this input is not focused
 
             var start = input.property('selectionStart');

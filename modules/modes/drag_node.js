@@ -239,7 +239,7 @@ export function modeDragNode(context) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t('operations.connect.' + isInvalid,
+                    .label(t.html('operations.connect.' + isInvalid,
                         { relation: presetManager.item('type/restriction').name() }
                     ))();
             }
@@ -248,7 +248,7 @@ export function modeDragNode(context) {
             context.ui().flash
                 .duration(3000)
                 .iconName('#iD-icon-no')
-                .label(t('self_intersection.error.' + errorID))();
+                .label(t.html('self_intersection.error.' + errorID))();
         } else {
             if (nope) {   // about to un-nope, remove hint
                 context.ui().flash

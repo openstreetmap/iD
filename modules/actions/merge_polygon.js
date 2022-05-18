@@ -1,6 +1,6 @@
 import { geoPolygonContainsPolygon } from '../geo';
 import { osmJoinWays, osmRelation } from '../osm';
-import { utilArrayGroupBy, utilArrayIntersection, utilObjectOmit } from '../util';
+import { utilArrayGroupBy, utilArrayIntersection, utilObjectOmit, utilOldestID } from '../util';
 
 
 export function actionMergePolygon(ids, newRelationId) {
@@ -85,13 +85,21 @@ export function actionMergePolygon(ids, newRelationId) {
             outer = !outer;
         }
 
-        // Move all tags to one relation
-        var relation = entities.multipolygon[0] ||
-            osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
+        // Move all tags to one relation.
+        // Keep the oldest multipolygon alive if it exists.
+        var relation;
+        if (entities.multipolygon.length > 0) {
+            var oldestID = utilOldestID(entities.multipolygon.map((entity) => entity.id));
+            relation = entities.multipolygon.find((entity) => entity.id === oldestID);
+        } else {
+            relation = osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
+        }
 
-        entities.multipolygon.slice(1).forEach(function(m) {
-            relation = relation.mergeTags(m.tags);
-            graph = graph.remove(m);
+        entities.multipolygon.forEach(function(m) {
+            if (m.id !== relation.id) {
+                relation = relation.mergeTags(m.tags);
+                graph = graph.remove(m);
+            }
         });
 
         entities.closedWay.forEach(function(way) {

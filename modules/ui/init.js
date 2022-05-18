@@ -320,6 +320,7 @@ export function uiInit(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
+            .attr('aria-label', t('report_a_bug'))
             .call(svgIcon('#iD-icon-bug', 'light'))
             .call(uiTooltip().title(t.html('report_a_bug')).placement('top'));
 
@@ -327,6 +328,7 @@ export function uiInit(context) {
             .append('a')
             .attr('target', '_blank')
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
+            .attr('aria-label', t('help_translate'))
             .call(svgIcon('#iD-icon-translate', 'light'))
             .call(uiTooltip().title(t.html('help_translate')).placement('top'));
 

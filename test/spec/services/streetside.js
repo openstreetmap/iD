@@ -1,6 +1,6 @@
 describe('iD.serviceStreetside', function() {
     var dimensions = [64, 64];
-    var context, server, streetside;
+    var context, streetside;
 
     before(function() {
         iD.services.streetside = iD.serviceStreetside;
@@ -17,14 +17,12 @@ describe('iD.serviceStreetside', function() {
             .translate([-116508, 0])  // 10,0
             .clipExtent([[0,0], dimensions]);
 
-        server = window.fakeFetch().create();
         streetside = iD.services.streetside;
         streetside.reset();
     });
 
     afterEach(function() {
         window.JSONP_FIX = undefined;
-        server.restore();
     });
 
 

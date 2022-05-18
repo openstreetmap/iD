@@ -32,6 +32,11 @@ describe('iD.osmEntity', function () {
         describe('.toOSM', function () {
             it('reverses fromOSM', function () {
                 expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '1'))).to.equal('1');
+                expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '-1'))).to.equal('-1');
+            });
+
+            it('returns the empty string for other strings', function () {
+                expect(iD.osmEntity.id.toOSM('a')).to.equal('');
             });
         });
     });

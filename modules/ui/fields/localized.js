@@ -185,6 +185,7 @@ export function uiFieldLocalized(field, context) {
         translateButton = translateButton.enter()
             .append('button')
             .attr('class', 'localized-add form-field-button')
+            .attr('aria-label', t('icons.plus'))
             .call(svgIcon('#iD-icon-plus'))
             .merge(translateButton);
 
@@ -212,7 +213,7 @@ export function uiFieldLocalized(field, context) {
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
-
+        selection.selectAll('.combobox-caret').classed('nope', true);
 
 
         function addNew(d3_event) {
@@ -373,7 +374,7 @@ export function uiFieldLocalized(field, context) {
                 text
                     .append('span')
                     .attr('class', 'label-textvalue')
-                    .html(t.html('translate.localized_translation_label'));
+                    .call(t.append('translate.localized_translation_label'));
 
                 text
                     .append('span')
@@ -382,6 +383,7 @@ export function uiFieldLocalized(field, context) {
                 label
                     .append('button')
                     .attr('class', 'remove-icon-multilingual')
+                    .attr('title', t('icons.remove'))
                     .on('click', function(d3_event, d) {
                         if (field.locked()) return;
                         d3_event.preventDefault();

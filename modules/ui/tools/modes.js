@@ -14,7 +14,7 @@ import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 
-export function uiToolOldDrawModes(context) {
+export function uiToolDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
@@ -46,7 +46,10 @@ export function uiToolOldDrawModes(context) {
     ];
 
 
-    function enabled() {
+    function enabled(
+        // eslint-disable-next-line no-unused-vars
+        _mode // parameter is currently not used, but might be at some point
+    ) {
         return osmEditable();
     }
 
@@ -137,7 +140,9 @@ export function uiToolOldDrawModes(context) {
             // update
             buttons = buttons
                 .merge(buttonsEnter)
+                .attr('aria-disabled', function(d) { return !enabled(d); })
                 .classed('disabled', function(d) { return !enabled(d); })
+                .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; })
                 .classed('active', function(d) { return context.mode() && context.mode().button === d.button; });
         }
     };

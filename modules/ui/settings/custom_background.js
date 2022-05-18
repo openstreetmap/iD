@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import marked from 'marked';
+import { marked } from 'marked';
 
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
@@ -27,7 +27,7 @@ export function uiSettingsCustomBackground() {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .html(t.html('settings.custom_background.header'));
+            .call(t.append('settings.custom_background.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
@@ -70,7 +70,7 @@ export function uiSettingsCustomBackground() {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .html(t.html('confirm.cancel'));
+            .call(t.append('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')
