@@ -116,6 +116,9 @@ export function uiFieldLocalized(field, context) {
 
     // update _multilingual, maintaining the existing order
     function calcMultilingual(tags) {
+        // tags that use the format name:<item>, but
+        // aren't languages
+        const nonLanguageTags = ["left", "right", "source", "signed"]
         var existingLangsOrdered = _multilingual.map(function(item) {
             return item.lang;
         });
@@ -124,6 +127,10 @@ export function uiFieldLocalized(field, context) {
         for (var k in tags) {
             var m = k.match(/^(.*):(.*)$/);
             if (m && m[1] === field.key && m[2]) {
+                if (nonLanguageTags.includes(m[2])) {
+                    continue;
+                }
+
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
                     // update the value
