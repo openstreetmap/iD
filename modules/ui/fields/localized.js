@@ -125,7 +125,7 @@ export function uiFieldLocalized(field, context) {
             // matches for field:<code>, where <code> is a BCP 47 locale code
             // motivation is to avoid matching on similarly formatted tags that are
             // not for languages, e.g. name:left, name:source, etc.
-            var m = k.match(/^(.*):([A-Za-z]{2,3}(?:-[A-Za-z]{3}[A-Za-z]{2})?)$/);
+            var m = k.match(/^(.*):([A-Za-z]{2,3}(?:-[A-Za-z]{4})?)$/);
             if (m && m[1] === field.key && m[2]) {
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
