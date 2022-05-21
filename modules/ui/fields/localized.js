@@ -116,21 +116,17 @@ export function uiFieldLocalized(field, context) {
 
     // update _multilingual, maintaining the existing order
     function calcMultilingual(tags) {
-        // tags that use the format name:<item>, but
-        // aren't languages
-        const nonLanguageTags = ["left", "right", "source", "signed", "etymology"]
         var existingLangsOrdered = _multilingual.map(function(item) {
             return item.lang;
         });
         var existingLangs = new Set(existingLangsOrdered.filter(Boolean));
 
         for (var k in tags) {
-            var m = k.match(/^(.*):(.*)$/);
+            // matches for field:<code>, where <code> is a BCP 47 locale code
+            // motivation is to avoid matching on similarly formatted tags that are
+            // not for languages, e.g. name:left, name:source, etc.
+            var m = k.match(/^(.*):([A-Za-z]{2,3}(?:-[A-Za-z]{3}[A-Za-z]{2})?)$/);
             if (m && m[1] === field.key && m[2]) {
-                if (nonLanguageTags.includes(m[2])) {
-                    continue;
-                }
-
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
                     // update the value
