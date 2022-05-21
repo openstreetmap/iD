@@ -118,7 +118,7 @@ export function uiFieldLocalized(field, context) {
     function calcMultilingual(tags) {
         // tags that use the format name:<item>, but
         // aren't languages
-        const nonLanguageTags = ["left", "right", "source", "signed"]
+        const nonLanguageTags = ["left", "right", "source", "signed", "etymology"]
         var existingLangsOrdered = _multilingual.map(function(item) {
             return item.lang;
         });
