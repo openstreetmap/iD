@@ -442,17 +442,20 @@ export function coreLocalizer() {
         const parts = format.formatToParts(-12345.6);
         const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
         const index = new Map(numerals.map((d, i) => [d, i]));
-        const literal = new RegExp(`[${parts.find(d => d.type === 'literal').value}]`, 'g');
-        const group = new RegExp(`[${parts.find(d => d.type === 'group').value}]`, 'g');
-        const decimal = new RegExp(`[${parts.find(d => d.type === 'decimal').value}]`);
+        const literalPart = parts.find(d => d.type === 'literal');
+        const literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');
+        const groupPart = parts.find(d => d.type === 'group');
+        const group = groupPart && new RegExp(`[${groupPart.value}]`, 'g');
+        const decimalPart = parts.find(d => d.type === 'decimal');
+        const decimal = decimalPart && new RegExp(`[${decimalPart.value}]`);
         const numeral = new RegExp(`[${numerals.join('')}]`, 'g');
         const getIndex = d => index.get(d);
         return (string) => {
-            string = string.trim()
-                .replace(literal, '')
-                .replace(group, '')
-                .replace(decimal, '.')
-                .replace(numeral, getIndex);
+            string = string.trim();
+            if (literal) string = string.replace(literal, '');
+            if (group) string = string.replace(group, '');
+            if (decimal) string = string.replace(decimal, '.');
+            string = string.replace(numeral, getIndex);
             return string ? +string : NaN;
         };
     };
