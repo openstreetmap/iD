@@ -258,14 +258,17 @@ path.fill.tag-landuse-vineyard {
 
 
 /* Tan things */
-path.stroke.tag-landuse-farmyard {
+path.stroke.tag-landuse-farmyard,
+path.stroke.tag-leisure-horse_riding {
     stroke: rgb(245, 220, 186);
 }
-path.fill.tag-landuse-farmyard {
+path.fill.tag-landuse-farmyard,
+path.fill.tag-leisure-horse_riding {
     stroke: rgba(245, 220, 186, 0.3);
     fill: rgba(245, 220, 186, 0.3);
 }
-.preset-icon-fill path.area.stroke.tag-landuse-farmyard {
+.preset-icon-fill path.area.stroke.tag-landuse-farmyard
+.preset-icon-fill path.area.stroke.tag-leisure-horse_riding {
     stroke: rgb(226, 177, 111);
 }
 .pattern-color-farmyard {

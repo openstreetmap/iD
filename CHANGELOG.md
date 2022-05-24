@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Do not overwrite existing `*=no` tags by a preset's `addTags`
 * Imply `access=no` in access field of `highway=construction` objects ([#9102])
 * Don't show non-language tag-suffixes in multilingual name field ([#9124], thanks [@wcedmisten])
+* Render horse riding centers like farmyards ([#9118])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 #### :hammer: Development
@@ -78,6 +79,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9021]: https://github.com/openstreetmap/iD/pull/9021
 [#9102]: https://github.com/openstreetmap/iD/issues/9102
 [#9124]: https://github.com/openstreetmap/iD/pull/9124
+[#9118]: https://github.com/openstreetmap/iD/issues/9118
 [@wcedmisten]: https://github.com/wcedmisten
 
 
