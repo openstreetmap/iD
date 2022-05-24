@@ -207,7 +207,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     for (let k in addTags) {
       if (addTags[k] === '*') {
         // if this tag is ancillary, don't override an existing value since any value is okay
-        if (_this.tags[k] || !tags[k] || tags[k] === 'no') {
+        if (_this.tags[k] || !tags[k]) {
           tags[k] = 'yes';
         }
       } else {
