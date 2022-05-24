@@ -57,6 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
 * Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
 * Do not overwrite existing `*=no` tags by a preset's `addTags`
+* Imply `access=no` in access field of `highway=construction` objects ([#9102])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 #### :hammer: Development
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8976]: https://github.com/openstreetmap/iD/issues/8976
 [#8985]: https://github.com/openstreetmap/iD/issues/8985
 [#9021]: https://github.com/openstreetmap/iD/pull/9021
+[#9102]: https://github.com/openstreetmap/iD/issues/9102
 
 
 # 2.20.4

@@ -207,6 +207,9 @@ export function uiFieldAccess(field, context) {
             motor_vehicle: 'yes',
             bicycle: 'yes',
             horse: 'yes'
+        },
+        construction: {
+            access: 'no'
         }
     };
 
@@ -226,9 +229,6 @@ export function uiFieldAccess(field, context) {
             .attr('placeholder', function(d) {
                 if (tags[d] && Array.isArray(tags[d])) {
                     return t('inspector.multiple_values');
-                }
-                if (d === 'access') {
-                    return 'yes';
                 }
                 if (d === 'bicycle' || d === 'motor_vehicle') {
                     if (tags.vehicle && typeof tags.vehicle === 'string') {
@@ -256,6 +256,9 @@ export function uiFieldAccess(field, context) {
                             return impliedAccesses[0];
                         }
                     }
+                }
+                if (d === 'access') {
+                    return 'yes';
                 }
                 return field.placeholder();
             });
