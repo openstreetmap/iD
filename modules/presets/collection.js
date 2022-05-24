@@ -98,7 +98,7 @@ export function presetCollection(collection) {
 
     // matches value to preset.name
     const leadingNames = searchable
-      .filter(a => leading(a.searchName()))
+      .filter(a => leading(a.searchName()) || a.searchAliases().some(leading))
       .sort(sortPresets('searchName'));
 
     // matches value to preset suggestion name
@@ -107,7 +107,7 @@ export function presetCollection(collection) {
       .sort(sortPresets('searchName'));
 
     const leadingNamesStripped = searchable
-      .filter(a => leading(a.searchNameStripped()))
+      .filter(a => leading(a.searchNameStripped()) || a.searchAliasesStripped().some(leading))
       .sort(sortPresets('searchNameStripped'));
 
     const leadingSuggestionsStripped = suggestions
