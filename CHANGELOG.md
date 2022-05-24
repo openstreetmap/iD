@@ -58,11 +58,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
 * Do not overwrite existing `*=no` tags by a preset's `addTags`
 * Imply `access=no` in access field of `highway=construction` objects ([#9102])
+* Don't show non-language tag-suffixes in multilingual name field ([#9124], thanks [@wcedmisten])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
-* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
+* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6.1`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
 
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
@@ -76,6 +77,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8985]: https://github.com/openstreetmap/iD/issues/8985
 [#9021]: https://github.com/openstreetmap/iD/pull/9021
 [#9102]: https://github.com/openstreetmap/iD/issues/9102
+[#9124]: https://github.com/openstreetmap/iD/pull/9124
+[@wcedmisten]: https://github.com/wcedmisten
 
 
 # 2.20.4
