@@ -208,9 +208,17 @@ export function svgTagClasses() {
             var footway       = null;
             var maxSpeed      = null;
             var access        = null;
+            var lanes         = null;
+            var lanesForward  = null;
+            var lanesBackward  = null;
+            var widthLanesCount = null;
+            var widthLanesForwardCount = null;
+            var widthLanesBackwardCount = null;
 
             var hasName = false;
             var hasLanes = false;
+            var hasLanesForward = false;
+            var hasLanesBackward = false;
             var isSidewalk = false;
             var isCycleway = false;
             var isCrossing = false;
@@ -298,8 +306,31 @@ export function svgTagClasses() {
                     lanes = v;
                     hasLanes = true;
                 }
+                if (k === 'lanes:forward' && v >= 1 && v <= 8) {
+                    lanesForward = v;
+                    hasLanesForward = true;
+                }
+                if (k === 'lanes:backward' && v >= 1 && v <= 8) {
+                    lanesBackward = v;
+                    hasLanesBackward = true;
+                }
                 if (k === 'turn:lanes' || k === 'turn:lanes:forward' || k === 'turn:lanes:backward' || k === 'turn:lanes:both_ways') {
                     classes.push('tag-turn_lanes-yes');
+                }
+                if (k === 'placement' && v === 'transition') {
+                    classes.push('tag-placement-transition');
+                }
+                if ((k === 'placement' && v !== 'transition') || k === 'placement:forward' || 'placement:backward') {
+                    classes.push('tag-placement-not-transition');
+                }
+                if ((k === 'width:lanes:start' || k === 'width:lanes:end')) {
+                    widthLanesCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if ((k === 'width:lanes:forward:start' || k === 'width:lanes:forward:end')) {
+                    widthLanesForwardCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if ((k === 'width:lanes:backward:start' || k === 'width:lanes:backward:end')) {
+                    widthLanesBackwardCount = (v.match(/\|/g) || []).length + 1;
                 }
                 /* unpaved */
                 if (k in osmPavedTags) {
@@ -309,6 +340,17 @@ export function svgTagClasses() {
                     }
                 }
                 
+            }
+
+            /* validate lanes */
+            if (hasLanes && lanes > 2 && lanes % 2 === 1) {
+                if (!hasLanesForward || !hasLanesBackward) {
+                    classes.push('tag-lanes-error');
+                }
+            } else if (hasLanesForward && hasLanesBackward && lanes !== lanesForward + lanesBackward) {
+                classes.push('tag-lanes-error');
+            } else if ((widthLanesCount && widthLanesCount !== lanes) || (widthLanesForwardCount && widthLanesForwardCount !== lanesForward) || (widthLanesBackwardCount && widthLanesBackwardCount !== lanesBackward)) {
+                classes.push('tag-lanes-error');
             }
 
 
