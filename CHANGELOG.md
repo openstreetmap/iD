@@ -51,20 +51,29 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
 * Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
 * Fix a bug which caused validations to not take effect in certain situations ([#9021], thanks [@mbrzakovic])
+* Properly escape currently logged-in user's user name ([#9097], thanks [@jleedev])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
 * Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
 * Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
+* Do not overwrite existing `*=no` tags by a preset's `addTags`
+* Imply `access=no` in access field of `highway=construction` objects ([#9102])
+* Don't show non-language tag-suffixes in multilingual name field ([#9124], thanks [@wcedmisten])
+* Render horse riding centers like farmyards ([#9118])
+* Support searching presets by their `aliases` ([#6139])
+* Allow searching presets by their tag (`key=value`) ([#8869])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 * New Bing imagery API key and limit tiles vintage API requests ([#9133], thanks [@mbrzakovic])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
-* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
+* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6.1`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
 
+[#6139]: https://github.com/openstreetmap/iD/issues/6139
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8869]: https://github.com/openstreetmap/iD/issues/8869
 [#8905]: https://github.com/openstreetmap/iD/issues/8905
 [#8925]: https://github.com/openstreetmap/iD/issues/8925
 [#8927]: https://github.com/openstreetmap/iD/issues/8927
@@ -74,7 +83,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8976]: https://github.com/openstreetmap/iD/issues/8976
 [#8985]: https://github.com/openstreetmap/iD/issues/8985
 [#9021]: https://github.com/openstreetmap/iD/pull/9021
+[#9097]: https://github.com/openstreetmap/iD/pull/9097
+[#9102]: https://github.com/openstreetmap/iD/issues/9102
+[#9118]: https://github.com/openstreetmap/iD/issues/9118
+[#9124]: https://github.com/openstreetmap/iD/pull/9124
 [#9133]: https://github.com/openstreetmap/iD/pull/9133
+[@wcedmisten]: https://github.com/wcedmisten
 
 
 # 2.20.4

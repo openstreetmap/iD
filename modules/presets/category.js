@@ -58,5 +58,8 @@ export function presetCategory(categoryID, category, allPresets) {
     return _searchNameStripped;
   };
 
+  _this.searchAliases = () => [];
+  _this.searchAliasesStripped = () => [];
+
   return _this;
 }

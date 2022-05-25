@@ -44,7 +44,7 @@ export function uiAccount(context) {
             // Add user name
             userLinkA.append('span')
                 .attr('class', 'label')
-                .html(details.display_name);
+                .text(details.display_name);
 
             logoutLink.append('a')
                 .attr('class', 'logout')

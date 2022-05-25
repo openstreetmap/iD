@@ -38,6 +38,9 @@ var patterns = {
         quarry: 'quarry',
         vineyard: 'vineyard'
     },
+    leisure: {
+        horse_riding: 'farmyard'
+    },
     natural: {
         beach: 'beach',
         grassland: 'grass',
