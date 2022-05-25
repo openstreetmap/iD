@@ -10,7 +10,7 @@ import {
 
 export function operationCloneBusLanes(selectedIDs, context) {
 
-    const cloneTags = ['bus:lanes', 'lanes:bus', 'busway:right', 'busway:left', 'routing:bus', 'bus'];
+    const cloneTags = ['bus:lanes', 'bus:lanes:forward', 'bus:lanes:backward', 'lanes:bus', 'lanes:bus:forward', 'lanes:bus:backward', 'busway:right', 'busway:left', 'routing:bus', 'bus'];
     var action = actionCloneRoadAttributes(selectedIDs, cloneTags);
 
     var operation = function () {

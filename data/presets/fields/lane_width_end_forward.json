@@ -1,5 +1,9 @@
 {
   "key": "width:lanes:forward:end",
   "type": "typeCombo",
-  "label": "Lane width end forward"
+  "label": "Lane width end forward",
+  "prerequisiteTag": {
+    "key": "placement",
+    "value": "transition"
+  }
 }

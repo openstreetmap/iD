@@ -13,7 +13,6 @@
         "lanes_backward",
         "access",
         "surface",
-        "structure",
         "cycleway",
         "cycleway_buffer",
         "cycleway_left_oneway",
@@ -24,10 +23,13 @@
         "placement",
         "lane_width_start",
         "lane_width_end",
+        "placement_forward",
         "lane_width_start_forward",
         "lane_width_end_forward",
+        "placement_backward",
         "lane_width_start_backward",
-        "lane_width_end_backward"
+        "lane_width_end_backward",
+        "structure"
     ],
     "moreFields": [
         "turn_lanes",

@@ -7,12 +7,12 @@
         "maxspeed",
         "minspeed",
         "lanes",
-        "surface",
-        "structure",
-        "access",
         "placement",
         "lane_width_start",
-        "lane_width_end"
+        "lane_width_end",
+        "surface",
+        "structure",
+        "access"
     ],
     "moreFields": [
         "charge_toll",

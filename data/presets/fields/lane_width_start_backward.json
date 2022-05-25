@@ -1,5 +1,9 @@
 {
   "key": "width:lanes:backward:start",
   "type": "typeCombo",
-  "label": "Lane width start backward"
+  "label": "Lane width start backward",
+  "prerequisiteTag": {
+    "key": "placement",
+    "value": "transition"
+  }
 }

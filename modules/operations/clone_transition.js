@@ -9,7 +9,11 @@ import {
 } from '../behavior/operation';
 
 export function operationCloneTransition(selectedIDs, context) {
-    const cloneTags = ['placement', 'width:lanes:start', 'width:lanes:end'];
+    const cloneTags = [
+        'placement', 'placement:start', 'placement:end', 'width:lanes:start', 'width:lanes:end',
+        'placement:forward', 'width:lanes:forward:start', 'width:lanes:forward:end',
+        'placement:backward', 'width:lanes:backward:start', 'width:lanes:backward:end'
+    ];
     var action = actionCloneRoadAttributes(selectedIDs, cloneTags);
 
     var operation = function () {
@@ -38,7 +42,7 @@ export function operationCloneTransition(selectedIDs, context) {
 
     // don't cache this because the visible extent could change
     operation.disabled = function () {
-        
+
         return false;
 
     };

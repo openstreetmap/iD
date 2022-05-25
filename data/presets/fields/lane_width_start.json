@@ -1,5 +1,9 @@
 {
     "key": "width:lanes:start",
     "type": "typeCombo",
-    "label": "lane width start"
+    "label": "lane width start",
+    "prerequisiteTag": {
+        "key": "placement",
+        "value": "transition"
+      }
 }

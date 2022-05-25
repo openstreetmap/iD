@@ -12,11 +12,14 @@ export function operationCloneRoadAttributes(selectedIDs, context) {
 
     const cloneTags = [
         'bus:lanes', 'lanes:bus', 'busway:right', 'busway:left',
+        'bus:lanes:forward', 'lanes:bus:forward', 'bus:lanes:backward', 'lanes:bus:backward',
         'lanes', 'lanes:forward', 'lanes:backward',
         'sidewalk', 'sidewalk:right', 'sidewalk:left', 'foot',
         'routing:bicycle', 'bicycle', 'cycleway:both', 'cycleway:right', 'cycleway:left',
         'turn:lanes', 'turn:lanes:forward', 'turn:lanes:backward',
-        'placement', 'width:lanes:start', 'width:lanes:end'
+        'placement', 'placement:start', 'placement:end', 'width:lanes:start', 'width:lanes:end',
+        'placement:forward', 'width:lanes:forward:start', 'width:lanes:forward:end',
+        'placement:backward', 'width:lanes:backward:start', 'width:lanes:backward:end'
     ];
     var action = actionCloneRoadAttributes(selectedIDs, cloneTags);
 
