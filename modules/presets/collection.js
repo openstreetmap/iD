@@ -65,10 +65,21 @@ export function presetCollection(collection) {
       return index === 0;
     }
 
-    function sortPresets(nameProp) {
+    function sortPresets(nameProp, aliasesProp) {
       return function sortNames(a, b) {
         let aCompare = a[nameProp]();
         let bCompare = b[nameProp]();
+        if (aliasesProp) {
+          // also search in aliases
+          const findMatchingAlias = strings => {
+            if (strings.some(s => s === value))
+              return strings.find(s => s === value);
+            else
+              return strings.find(s => s.includes(value));
+          }
+          aCompare = findMatchingAlias([aCompare].concat(a[aliasesProp]()));
+          bCompare = findMatchingAlias([bCompare].concat(b[aliasesProp]()));
+        }
 
         // priority if search string matches preset name exactly - #4325
         if (value === aCompare) return -1;
@@ -99,7 +110,7 @@ export function presetCollection(collection) {
     // matches value to preset.name
     const leadingNames = searchable
       .filter(a => leading(a.searchName()) || a.searchAliases().some(leading))
-      .sort(sortPresets('searchName'));
+      .sort(sortPresets('searchName', 'searchAliases'));
 
     // matches value to preset suggestion name
     const leadingSuggestions = suggestions
@@ -108,7 +119,7 @@ export function presetCollection(collection) {
 
     const leadingNamesStripped = searchable
       .filter(a => leading(a.searchNameStripped()) || a.searchAliasesStripped().some(leading))
-      .sort(sortPresets('searchNameStripped'));
+      .sort(sortPresets('searchNameStripped', 'searchAliasesStripped'));
 
     const leadingSuggestionsStripped = suggestions
       .filter(a => leadingStrict(a.searchNameStripped()))

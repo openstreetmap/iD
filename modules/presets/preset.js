@@ -28,7 +28,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.originalName = _this.name || '';
 
-  _this.originalAliases = _this.aliases || '';
+  _this.originalAliases = (_this.aliases || []).join('\n');
 
   _this.originalScore = _this.matchScore || 1;
 
@@ -126,11 +126,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       return null;
   };
 
-
   _this.aliases = () => {
-    return _this.t('aliases', { 'default': _this.originalAliases }).trim().split(/\s*\n\s*/);
+    return _this.t('aliases', { 'default': _this.originalAliases }).trim().split(/\s*[\r\n]+\s*/);
   };
-
 
   _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
     .toLowerCase().trim().split(/\s*,+\s*/);

@@ -28,7 +28,7 @@ describe('iD.presetCollection', function() {
             { name: 'Ğṝȁß', tags: { landuse: 'ğṝȁß' }, geometry: ['point', 'area'], terms: [] }
         ),
         park: iD.presetPreset('__TEST/leisure/park',
-            { name: 'Park', tags: { leisure: 'park' }, geometry: ['point', 'area'], terms: [ 'grass' ], matchScore: 0.5 }
+            { name: 'Park', tags: { leisure: 'park' }, geometry: ['point', 'area'], aliases: ['Field'], terms: [ 'grass' ], matchScore: 0.5 }
         ),
         parking: iD.presetPreset('__TEST/amenity/parking',
             { name: 'Parking', tags: { amenity: 'parking' }, geometry: ['point', 'area'], terms: [ 'cars' ] }
@@ -84,6 +84,11 @@ describe('iD.presetCollection', function() {
             expect(result.indexOf(p.grass1), 'Grass').to.be.within(3,5);   // 4. 'Grass' (similar name)
             expect(result.indexOf(p.grass2), 'Ğṝȁß').to.be.within(3,5);    // 5. 'Ğṝȁß' (similar name)
             expect(result.indexOf(p.park), 'Park').to.be.within(3,5);      // 6. 'Park' (similar term 'grass')
+        });
+
+        it('matches alias', function() {
+            var result = c.search('Field', 'area').collection;
+            expect(result.indexOf(p.park)).to.eql(0);  // 1. 'Park' (by alias)
         });
 
         it('sorts preset with matchScore penalty below others', function() {
