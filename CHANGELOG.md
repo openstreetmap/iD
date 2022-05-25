@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
 * Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
 * Fix a bug which caused validations to not take effect in certain situations ([#9021], thanks [@mbrzakovic])
+* Properly escape currently logged-in user's user name ([#9097], thanks [@jleedev])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
@@ -81,9 +82,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8976]: https://github.com/openstreetmap/iD/issues/8976
 [#8985]: https://github.com/openstreetmap/iD/issues/8985
 [#9021]: https://github.com/openstreetmap/iD/pull/9021
+[#9097]: https://github.com/openstreetmap/iD/pull/9097
 [#9102]: https://github.com/openstreetmap/iD/issues/9102
-[#9124]: https://github.com/openstreetmap/iD/pull/9124
 [#9118]: https://github.com/openstreetmap/iD/issues/9118
+[#9124]: https://github.com/openstreetmap/iD/pull/9124
 [@wcedmisten]: https://github.com/wcedmisten
 
 
