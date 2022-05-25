@@ -131,5 +131,10 @@ describe('iD.presetCollection', function() {
             var collection = iD.presetCollection([excluded, p.point]);
             expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
         });
+
+        it('matches tag key=value', function() {
+            var result = c.search('landuse=grass', 'area').collection;
+            expect(result.indexOf(p.grass1)).to.eql(0);  // 1. 'Grass' (by tag key=value)
+        });
     });
 });

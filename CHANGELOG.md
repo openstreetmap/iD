@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't show non-language tag-suffixes in multilingual name field ([#9124], thanks [@wcedmisten])
 * Render horse riding centers like farmyards ([#9118])
 * Support searching presets by their `aliases` ([#6139])
+* Allow searching presets by their tag (`key=value`) ([#8869])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
 #### :hammer: Development
@@ -70,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#6139]: https://github.com/openstreetmap/iD/issues/6139
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8869]: https://github.com/openstreetmap/iD/issues/8869
 [#8905]: https://github.com/openstreetmap/iD/issues/8905
 [#8925]: https://github.com/openstreetmap/iD/issues/8925
 [#8927]: https://github.com/openstreetmap/iD/issues/8927

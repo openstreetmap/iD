@@ -158,6 +158,15 @@ export function presetCollection(collection) {
         });
       });
 
+    // matches key=value to preset.tags
+    let leadingTagKeyValues = [];
+    if (value.includes('=')) {
+      leadingTagKeyValues = searchable.filter(a => a.tags &&
+          Object.keys(a.tags).some(key => key + '=' + a.tags[key] === value))
+        .concat(searchable.filter(a => a.tags &&
+          Object.keys(a.tags).some(key => leading(key + '=' + a.tags[key]))));
+    }
+
     let results = leadingNames.concat(
       leadingSuggestions,
       leadingNamesStripped,
@@ -167,7 +176,8 @@ export function presetCollection(collection) {
       leadingTagValues,
       similarName,
       similarSuggestions,
-      similarTerms
+      similarTerms,
+      leadingTagKeyValues
     ).slice(0, MAXRESULTS - 1);
 
     if (geometry) {
