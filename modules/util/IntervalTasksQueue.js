@@ -5,7 +5,7 @@
 export class IntervalTasksQueue {
 
     /**
-     * Interval in miliseconds inside which only 1 task can execute.
+     * Interval in milliseconds inside which only 1 task can execute.
      * e.g. if interval is 200ms, and 5 async tasks are unqueued,
      * they will complete in ~1s if not cleared
      * @param {number} intervalInMs
