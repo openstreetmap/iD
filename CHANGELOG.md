@@ -65,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow searching presets by their tag (`key=value`) ([#8869])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
+* New Bing imagery API key and limit tiles vintage API requests ([#9133], thanks [@mbrzakovic])
 #### :hammer: Development
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
 * Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6.1`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
@@ -86,6 +87,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9102]: https://github.com/openstreetmap/iD/issues/9102
 [#9118]: https://github.com/openstreetmap/iD/issues/9118
 [#9124]: https://github.com/openstreetmap/iD/pull/9124
+[#9133]: https://github.com/openstreetmap/iD/pull/9133
 [@wcedmisten]: https://github.com/wcedmisten
 
 
