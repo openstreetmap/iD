@@ -72,11 +72,12 @@ export function presetCollection(collection) {
         if (aliasesProp) {
           // also search in aliases
           const findMatchingAlias = strings => {
-            if (strings.some(s => s === value))
+            if (strings.some(s => s === value)) {
               return strings.find(s => s === value);
-            else
+            } else {
               return strings.find(s => s.includes(value));
-          }
+            }
+          };
           aCompare = findMatchingAlias([aCompare].concat(a[aliasesProp]()));
           bCompare = findMatchingAlias([bCompare].concat(b[aliasesProp]()));
         }
