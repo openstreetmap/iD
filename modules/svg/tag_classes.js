@@ -215,6 +215,7 @@ export function svgTagClasses() {
             var widthLanesForwardCount = null;
             var widthLanesBackwardCount = null;
 
+            var isOneWay = false;
             var hasName = false;
             var hasLanes = false;
             var hasLanesForward = false;
@@ -302,6 +303,9 @@ export function svgTagClasses() {
                 if (!ignoreMaxSpeed && (k === 'maxspeed' || k === 'maxspeed:advisory') && v >= 10 && v <= 130) {
                     maxSpeed = v;
                 }
+                if (k === 'oneway' && v === 'yes') {
+                    isOneWay = true;
+                }
                 if (k === 'lanes' && v >= 1 && v <= 8) {
                     lanes = v;
                     hasLanes = true;
@@ -343,7 +347,7 @@ export function svgTagClasses() {
             }
 
             /* validate lanes */
-            if (hasLanes && lanes > 2 && lanes % 2 === 1) {
+            if (!isOneWay && hasLanes && lanes > 2 && lanes % 2 === 1) {
                 if (!hasLanesForward || !hasLanesBackward) {
                     classes.push('tag-lanes-error');
                 }
