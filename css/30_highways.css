@@ -18,14 +18,23 @@ path.line.stroke.tag-highway {
 path.line.shadow.tag-highway {
   stroke-width: 18;
 }
+path.line.shadow.tag-highway.tag-placement-transition {
+  stroke-width: 22;
+}
 path.line.casing.tag-highway {
   stroke-width: 10;
+}
+path.line.casing.tag-highway.tag-placement-transition {
+  stroke-width: 14;
 }
 path.line.over-stroke.tag-highway {
   stroke-width: 4;
 }
 path.line.stroke.tag-highway {
   stroke-width: 8;
+}
+path.line.stroke.tag-highway .tag-placement-transition{
+  stroke-width: 12;
 }
 .low-zoom path.line.shadow.tag-highway {
   stroke-width: 14;
