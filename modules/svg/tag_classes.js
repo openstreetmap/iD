@@ -307,21 +307,21 @@ export function svgTagClasses() {
                     classes.push('tag-name-yes');
                 }
                 if (!ignoreMaxSpeed && (k === 'maxspeed' || k === 'maxspeed:advisory') && v >= 10 && v <= 130) {
-                    maxSpeed = v;
+                    maxSpeed = Number(v);
                 }
                 if (k === 'oneway' && v === 'yes') {
                     isOneWay = true;
                 }
                 if (k === 'lanes' && v >= 1 && v <= 8) {
-                    lanes = v;
+                    lanes = Number(v);
                     hasLanes = true;
                 }
                 if (k === 'lanes:forward' && v >= 1 && v <= 8) {
-                    lanesForward = v;
+                    lanesForward = Number(v);
                     hasLanesForward = true;
                 }
                 if (k === 'lanes:backward' && v >= 1 && v <= 8) {
-                    lanesBackward = v;
+                    lanesBackward = Number(v);
                     hasLanesBackward = true;
                 }
                 if (k === 'turn:lanes' || k === 'turn:lanes:forward' || k === 'turn:lanes:backward' || k === 'turn:lanes:both_ways') {
@@ -391,7 +391,7 @@ export function svgTagClasses() {
                 || (widthLanesBackwardEndCount && widthLanesBackwardEndCount !== lanesBackward)
             ) {
                 console.log('widthLanesCount Error', 'widthLanesStartCount', widthLanesStartCount, 'widthLanesEndCount', widthLanesEndCount, 'lanes', lanes);
-                
+
                 console.log('widthLanesCount && widthLanesCount !== lanes', widthLanesCount && widthLanesCount !== lanes);
                 console.log('widthLanesStartCount && widthLanesStartCount !== lanes', widthLanesStartCount && widthLanesStartCount !== lanes);
                 console.log('widthLanesForwardCount && widthLanesForwardCount !== lanesForward', widthLanesForwardCount && widthLanesForwardCount !== lanesForward);
