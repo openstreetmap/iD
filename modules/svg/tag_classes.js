@@ -390,16 +390,6 @@ export function svgTagClasses() {
                 || (widthLanesBackwardStartCount && widthLanesBackwardStartCount !== lanesBackward)
                 || (widthLanesBackwardEndCount && widthLanesBackwardEndCount !== lanesBackward)
             ) {
-                console.log('widthLanesCount Error', 'widthLanesStartCount', widthLanesStartCount, 'widthLanesEndCount', widthLanesEndCount, 'lanes', lanes);
-
-                console.log('widthLanesCount && widthLanesCount !== lanes', widthLanesCount && widthLanesCount !== lanes);
-                console.log('widthLanesStartCount && widthLanesStartCount !== lanes', widthLanesStartCount && widthLanesStartCount !== lanes);
-                console.log('widthLanesForwardCount && widthLanesForwardCount !== lanesForward', widthLanesForwardCount && widthLanesForwardCount !== lanesForward);
-                console.log('widthLanesForwardStartCount && widthLanesForwardStartCount !== lanesForward', widthLanesForwardStartCount && widthLanesForwardStartCount !== lanesForward);
-                console.log('widthLanesForwardEndCount && widthLanesForwardEndCount !== lanesForward', widthLanesForwardEndCount && widthLanesForwardEndCount !== lanesForward);
-                console.log('widthLanesBackwardCount && widthLanesBackwardCount !== lanesBackward', widthLanesBackwardCount && widthLanesBackwardCount !== lanesBackward);
-                console.log('widthLanesBackwardStartCount && widthLanesBackwardStartCount !== lanesBackward', widthLanesBackwardStartCount && widthLanesBackwardStartCount !== lanesBackward);
-                console.log('widthLanesBackwardEndCount && widthLanesBackwardEndCount !== lanesBackward', widthLanesBackwardEndCount && widthLanesBackwardEndCount !== lanesBackward);
                 classes.push('tag-lanes-error-width-lanes');
             }
 
