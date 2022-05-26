@@ -866,7 +866,9 @@ path.casing.tag-highway-cycleway.tag-segregated-undefined.tag-foot-yes,
 path.casing.tag-highway.tag-sidewalk-undefined,
 path.casing.tag-highway.tag-maxspeed-undefined,
 path.casing.tag-highway.tag-lanes-undefined,
-path.casing.tag-highway.tag-lanes-error {
+path.casing.tag-highway.tag-lanes-error-count-lanes,
+path.casing.tag-highway.tag-lanes-error-count-lanes-total-mismatch,
+path.casing.tag-highway.tag-lanes-error-width-lanes {
   stroke: rgb(0, 0, 0) !important;
   stroke-dasharray: none !important;
 }
@@ -876,7 +878,9 @@ path.casing.tag-highway.tag-lanes-error {
 .high-zoom path.casing.tag-highway.tag-sidewalk-undefined,
 .high-zoom path.casing.tag-highway.tag-maxspeed-undefined,
 .high-zoom path.casing.tag-highway.tag-lanes-undefined,
-.high-zoom path.casing.tag-highway.tag-lanes-error {
+.high-zoom path.casing.tag-highway.tag-lanes-error-count-lanes,
+.high-zoom path.casing.tag-highway.tag-lanes-error-count-lanes-total-mismatch,
+.high-zoom path.casing.tag-highway.tag-lanes-error-width-lanes {
   stroke-width: 3 !important;
   opacity: 0.5;
 }
@@ -888,12 +892,16 @@ path.casing.tag-highway.tag-lanes-error {
 .high-zoom path.stroke.tag-highway.tag-maxspeed-undefined
 .high-zoom path.stroke.tag-highway.tag-maxspeed-more_than_60.tag-highway-residential,
 .high-zoom path.stroke.tag-highway.tag-lanes-undefined,
-.high-zoom path.stroke.tag-highway.tag-lanes-error {
+.high-zoom path.stroke.tag-highway.tag-lanes-error-count-lanes,
+.high-zoom path.stroke.tag-highway.tag-lanes-error-count-lanes-total-mismatch,
+.high-zoom path.stroke.tag-highway.tag-lanes-error-width-lanes {
   stroke-width: 2 !important;
   opacity: 0.5;
 }
 
-path.stroke.tag-highway.tag-lanes-error {
+path.stroke.tag-highway.tag-lanes-error-count-lanes,
+path.stroke.tag-highway.tag-lanes-error-count-lanes-total-mismatch,
+path.stroke.tag-highway.tag-lanes-error-width-lanes {
   stroke: rgb(169, 0, 166);
   stroke-dasharray: 2, 2 !important;
   stroke-linecap: butt !important;

@@ -212,8 +212,14 @@ export function svgTagClasses() {
             var lanesForward  = null;
             var lanesBackward  = null;
             var widthLanesCount = null;
+            var widthLanesStartCount = null;
+            var widthLanesEndCount = null;
             var widthLanesForwardCount = null;
+            var widthLanesForwardStartCount = null;
+            var widthLanesForwardEndCount = null;
             var widthLanesBackwardCount = null;
+            var widthLanesBackwardStartCount = null;
+            var widthLanesBackwardEndCount = null;
 
             var isOneWay = false;
             var hasName = false;
@@ -327,14 +333,32 @@ export function svgTagClasses() {
                 if ((k === 'placement' && v !== 'transition') || k === 'placement:forward' || 'placement:backward') {
                     classes.push('tag-placement-not-transition');
                 }
-                if ((k === 'width:lanes:start' || k === 'width:lanes:end')) {
+                if (k === 'width:lanes') {
                     widthLanesCount = (v.match(/\|/g) || []).length + 1;
                 }
-                if ((k === 'width:lanes:forward:start' || k === 'width:lanes:forward:end')) {
+                if (k === 'width:lanes:start') {
+                    widthLanesStartCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if (k === 'width:lanes:end') {
+                    widthLanesEndCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if (k === 'width:lanes:forward') {
                     widthLanesForwardCount = (v.match(/\|/g) || []).length + 1;
                 }
-                if ((k === 'width:lanes:backward:start' || k === 'width:lanes:backward:end')) {
+                if (k === 'width:lanes:forward:start') {
+                    widthLanesForwardStartCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if (k === 'width:lanes:forward:end') {
+                    widthLanesForwardEndCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if (k === 'width:lanes:backward' ) {
                     widthLanesBackwardCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if (k === 'width:lanes:backward:start' ) {
+                    widthLanesBackwardStartCount = (v.match(/\|/g) || []).length + 1;
+                }
+                if (k === 'width:lanes:backward:end') {
+                    widthLanesBackwardEndCount = (v.match(/\|/g) || []).length + 1;
                 }
                 /* unpaved */
                 if (k in osmPavedTags) {
@@ -349,12 +373,25 @@ export function svgTagClasses() {
             /* validate lanes */
             if (!isOneWay && hasLanes && lanes > 2 && lanes % 2 === 1) {
                 if (!hasLanesForward || !hasLanesBackward) {
-                    classes.push('tag-lanes-error');
+                    classes.push('tag-lanes-error-count-lanes');
                 }
-            } else if (hasLanesForward && hasLanesBackward && lanes !== lanesForward + lanesBackward) {
-                classes.push('tag-lanes-error');
-            } else if ((widthLanesCount && widthLanesCount !== lanes) || (widthLanesForwardCount && widthLanesForwardCount !== lanesForward) || (widthLanesBackwardCount && widthLanesBackwardCount !== lanesBackward)) {
-                classes.push('tag-lanes-error');
+            }
+            if (hasLanesForward && hasLanesBackward && lanes !== lanesForward + lanesBackward) {
+                classes.push('tag-lanes-error-count-lanes-total-mismatch');
+            }
+            if (
+                   (widthLanesCount && widthLanesCount !== lanes)
+                || (widthLanesStartCount && widthLanesStartCount !== lanes)
+                || (widthLanesEndCount && widthLanesEndCount !== lanes)
+                || (widthLanesForwardCount && widthLanesForwardCount !== lanesForward)
+                || (widthLanesForwardStartCount && widthLanesForwardStartCount !== lanesForward)
+                || (widthLanesForwardEndCount && widthLanesForwardEndCount !== lanesForward)
+                || (widthLanesBackwardCount && widthLanesBackwardCount !== lanesBackward)
+                || (widthLanesBackwardStartCount && widthLanesBackwardStartCount !== lanesBackward)
+                || (widthLanesBackwardEndCount && widthLanesBackwardEndCount !== lanesBackward)
+            ) {
+                console.log('widthLanesCount Error', 'widthLanesStartCount', widthLanesStartCount, 'widthLanesEndCount', widthLanesEndCount, 'lanes', lanes);
+                classes.push('tag-lanes-error-width-lanes');
             }
 
 
