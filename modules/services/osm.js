@@ -18,8 +18,8 @@ var urlroot = 'https://www.openstreetmap.org';
 var redirectPath = window.location.origin + window.location.pathname;
 var oauth = osmAuth({
     url: urlroot,
-    client_id: 'O3g0mOUuA2WY5Fs826j5tP260qR3DDX7cIIE2R2WWSc',
-    client_secret: 'b4aeHD1cNeapPPQTrvpPoExqQRjybit6JBlNnxh62uE',
+    client_id: 'DEuM2edgMLAzCSEGZpCbY-JuseBe2MoMD948b20ZE98',
+    client_secret: 'TDHDqrE9CRkblkEyzKPBHNvWqf9jhm7AREKg2IDolVo',
     scope: 'read_prefs write_prefs write_api read_gpx write_notes',
     redirect_uri: redirectPath + 'land.html',
     loading: authLoading,
