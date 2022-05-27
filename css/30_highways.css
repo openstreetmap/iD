@@ -33,7 +33,7 @@ path.line.over-stroke.tag-highway {
 path.line.stroke.tag-highway {
   stroke-width: 8;
 }
-path.line.stroke.tag-highway .tag-placement-transition{
+path.line.stroke.tag-highway.tag-placement-transition{
   stroke-width: 12;
 }
 .low-zoom path.line.shadow.tag-highway {

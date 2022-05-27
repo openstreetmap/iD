@@ -1,5 +1,5 @@
 {
     "key": "placement:backward",
-    "type": "typeCombo",
+    "type": "combo",
     "label": "Placement backward"
 }

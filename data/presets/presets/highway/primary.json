@@ -10,7 +10,6 @@
         "maxspeed",
         "lanes_forward",
         "lanes_backward",
-        "access",
         "surface",
         "cycleway",
         "cycleway_buffer",
@@ -28,6 +27,7 @@
         "placement_backward",
         "lane_width_start_backward",
         "lane_width_end_backward",
+        "access",
         "structure"
     ],
     "moreFields": [

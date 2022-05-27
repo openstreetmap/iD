@@ -211,6 +211,7 @@ export function svgTagClasses() {
             var lanes         = null;
             var lanesForward  = null;
             var lanesBackward  = null;
+            var lanesBothWays  = null;
             var widthLanesCount = null;
             var widthLanesStartCount = null;
             var widthLanesEndCount = null;
@@ -226,6 +227,7 @@ export function svgTagClasses() {
             var hasLanes = false;
             var hasLanesForward = false;
             var hasLanesBackward = false;
+            var hasLanesBothWays = false;
             var isSidewalk = false;
             var isCycleway = false;
             var isCrossing = false;
@@ -324,6 +326,10 @@ export function svgTagClasses() {
                     lanesBackward = Number(v);
                     hasLanesBackward = true;
                 }
+                if (k === 'lanes:both_ways' && v >= 1 && v <= 8) {
+                    lanesBothWays = Number(v);
+                    hasLanesBothWays = true;
+                }
                 if (k === 'turn:lanes' || k === 'turn:lanes:forward' || k === 'turn:lanes:backward' || k === 'turn:lanes:both_ways') {
                     classes.push('tag-turn_lanes-yes');
                 }
@@ -377,7 +383,9 @@ export function svgTagClasses() {
                 }
             }
             if (hasLanesForward && hasLanesBackward && lanes !== lanesForward + lanesBackward) {
-                classes.push('tag-lanes-error-count-lanes-total-mismatch');
+                if (hasLanesBothWays && lanes !== lanesForward + lanesBackward + lanesBothWays) {
+                    classes.push('tag-lanes-error-count-lanes-total-mismatch');
+                }
             }
             if (
                    (widthLanesCount && widthLanesCount !== lanes)
