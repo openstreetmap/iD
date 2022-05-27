@@ -1,6 +1,6 @@
 {
     "key": "width:lanes:start",
-    "type": "typeCombo",
+    "type": "combo",
     "label": "lane width start",
     "prerequisiteTag": {
         "key": "placement",

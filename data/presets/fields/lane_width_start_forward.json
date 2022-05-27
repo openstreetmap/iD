@@ -1,6 +1,6 @@
 {
   "key": "width:lanes:forward:start",
-  "type": "typeCombo",
+  "type": "combo",
   "label": "Lane width start forward",
   "prerequisiteTag": {
     "key": "placement",

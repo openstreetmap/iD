@@ -1,6 +1,6 @@
 {
     "key": "width:lanes:end",
-    "type": "typeCombo",
+    "type": "combo",
     "label": "Lane width end",
     "prerequisiteTag": {
         "key": "placement",
