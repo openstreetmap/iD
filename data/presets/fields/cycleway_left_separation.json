@@ -1,0 +1,9 @@
+{
+    "key": "cycleway:left:separation",
+    "type": "combo",
+    "label": "Cycleway left separation",
+    "prerequisiteTag": {
+      "key": "cycleway:left",
+      "value": "lane"
+    }
+}

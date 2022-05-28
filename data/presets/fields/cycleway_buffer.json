@@ -2,7 +2,7 @@
   "key": "cycleway:buffer",
   "type": "number",
   "minValue": 0,
-  "label": "Cycleway buffer width (m)",
+  "label": "Cycleway buffer width (m) (both sides)",
   "prerequisiteTag": {
     "key": "cycleway:both",
     "value": "lane"
