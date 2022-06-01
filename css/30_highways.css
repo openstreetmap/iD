@@ -821,6 +821,16 @@ path.over-stroke.tag-cycleway_right-shared_lane {
   stroke:  rgb(0, 174, 255);
 }
 
+/* cycleway lanes/shared on road */
+path.over-stroke.tag-cycleway-track,
+path.over-stroke.tag-cycleway_both-track,
+path.over-stroke.tag-cycleway_left-track,
+path.over-stroke.tag-cycleway_right-track {
+  stroke-width: 1 !important;
+  /*stroke-dasharray: 8, 4;*/
+  stroke:  rgb(0, 4, 255);
+}
+
 /* bus designated/yes */
 path.over-stroke.tag-bus-designated,
 path.over-stroke.tag-bus-yes {
@@ -950,11 +960,10 @@ path.stroke.tag-highway.tag-lanes-undefined {
   stroke-dasharray: 2, 2 !important;
   stroke-linecap: butt !important;
 }
-path.over-stroke.tag-cycleway-track,
+/*path.over-stroke.tag-cycleway-track,
 path.over-stroke.tag-cycleway_left-track,
 path.over-stroke.tag-cycleway_right-track,
 path.over-stroke.tag-cycleway_both-track {
   stroke-width: 1 !important;
-  /*stroke-dasharray: 8, 4;*/
   stroke:  rgb(255, 0, 0) !important;
-}
+}*/
