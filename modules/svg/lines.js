@@ -10,6 +10,17 @@ import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
+/** @param {{ [key: string ]: string }} tags */
+function onewayArrowColour(tags) {
+    // the return value must be defined in ./defs.js
+    if (tags.highway === 'construction' && tags.bridge) return 'white';
+    if (tags.highway === 'pedestrian' && tags.bridge) return 'pink';
+    if (tags.railway) return 'black'; // TODO: use a better colour
+    if (tags.aeroway === 'runway') return 'pink';
+
+    return 'black';
+}
+
 export function svgLines(projection, context) {
     var detected = utilDetect();
 
@@ -307,7 +318,10 @@ export function svgLines(projection, context) {
             layergroup.selectAll('g.line-stroke-highlighted')
                 .call(drawLineGroup, 'stroke', true);
 
-            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#ideditor-oneway-marker)');
+            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, (d) => {
+                const category = onewayArrowColour(graph.entity(d.id).tags);
+                return `url(#ideditor-oneway-marker-${category})`;
+            });
             addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
                 function marker(d) {
                     var category = graph.entity(d.id).sidednessIdentifier();
