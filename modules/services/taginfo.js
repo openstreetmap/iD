@@ -205,6 +205,7 @@ export default {
             artist_name: true,
             nat_name: true,
             long_name: true,
+            via: true,
             'bridge:name': true
         };
 
