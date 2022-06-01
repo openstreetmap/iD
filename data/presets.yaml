@@ -6158,6 +6158,10 @@ en:
         name: Cairn
         # 'terms: rock pile,stone stack,stone pile,càrn'
         terms: '<translate with synonyms or related terms for ''Cairn'', separated by commas>'
+      man_made/carpet_hanger:
+        # man_made=carpet_hanger
+        name: Carpet Hanger
+        terms: '<translate with synonyms or related terms for ''Carpet Hanger'', separated by commas>'
       man_made/chimney:
         # man_made=chimney
         name: Chimney
