@@ -8,6 +8,7 @@ import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
+import { cardinal } from '../../osm/node';
 
 export {
     uiFieldText as uiFieldUrl,
@@ -121,7 +122,12 @@ export function uiFieldText(field, context) {
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
                         var num = parseFloat(v.trim(), 10);
-                        return isFinite(num) ? clamped(num + d) : v.trim();
+                        if (isFinite(num)) return clamped(num + d);
+
+                        const compassDir = cardinal[v.trim().toLowerCase()];
+                        if (compassDir !== undefined) return clamped(compassDir + d);
+
+                        return v.trim(); // do nothing if the value is neither a number, nor a cardinal direction
                     });
                     input.node().value = vals.join(';');
                     change()();
