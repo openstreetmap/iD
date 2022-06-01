@@ -466,6 +466,7 @@ path.line.stroke.tag-footway-access_aisle,
 path.line.stroke.tag-public_transport-platform,
 path.line.stroke.tag-highway-platform,
 path.line.stroke.tag-railway-platform,
+path.line.stroke.tag-railway-platform_edge,
 path.line.stroke.tag-man_made-pier {
     stroke: #dca;
 }
