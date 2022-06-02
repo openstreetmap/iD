@@ -18,6 +18,7 @@ transifex.auth
 /dist/locales/en.min.json
 /dist/mapillary-js/
 /dist/pannellum-streetside/
+/dist/translations/
 
 /coverage/
 
