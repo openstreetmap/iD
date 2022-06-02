@@ -67,7 +67,7 @@ If you want to add in the full history later on, perhaps to run `git blame` or `
 2. Run `npm install`
 3. Run `npm run all`
 3. Run `npm start`
-4. Open `http://localhost:8080/` in a web browser
+4. Open `http://127.0.0.1:8080/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
 development, see [CONTRIBUTING.md](CONTRIBUTING.md).
