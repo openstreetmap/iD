@@ -4,11 +4,10 @@ describe('iD.serviceOsm', function () {
 
     function login() {
         connection.switch({
-            urlroot: 'http://www.openstreetmap.org',
-            oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-            oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
-            oauth_token: 'foo',
-            oauth_token_secret: 'foo'
+            url: 'https://www.openstreetmap.org',
+            client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
+            client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q',
+            access_token: 'foo'  // preauth
         });
     }
 
@@ -28,7 +27,7 @@ describe('iD.serviceOsm', function () {
         serverXHR = sinon.fakeServer.create();      // authenticated calls use XHR via osm-auth
         context = iD.coreContext().assetPath('../dist/').init();
         connection = context.connection();
-        connection.switch({ urlroot: 'http://www.openstreetmap.org' });
+        connection.switch({ url: 'https://www.openstreetmap.org' });
         connection.reset();
         spy = sinon.spy();
     });
@@ -54,7 +53,7 @@ describe('iD.serviceOsm', function () {
 
         it('changes the connection id every time connection is switched', function () {
             var cid1 = connection.getConnectionId();
-            connection.switch({ urlroot: 'https://api06.dev.openstreetmap.org' });
+            connection.switch({ url: 'https://api06.dev.openstreetmap.org' });
             var cid2 = connection.getConnectionId();
             expect(cid2).to.be.above(cid1);
         });
@@ -62,11 +61,11 @@ describe('iD.serviceOsm', function () {
 
     describe('#changesetURL', function() {
         it('provides a changeset url', function() {
-            expect(connection.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
+            expect(connection.changesetURL(2)).to.eql('https://www.openstreetmap.org/changeset/2');
         });
 
         it('allows secure connections', function() {
-            connection.switch({ urlroot: 'https://www.openstreetmap.org' });
+            connection.switch({ url: 'https://www.openstreetmap.org' });
             expect(connection.changesetURL(2)).to.eql('https://www.openstreetmap.org/changeset/2');
         });
     });
@@ -75,47 +74,47 @@ describe('iD.serviceOsm', function () {
         it('provides a local changesets url', function() {
             var center = [-74.65, 40.65];
             var zoom = 17;
-            expect(connection.changesetsURL(center, zoom)).to.eql('http://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
+            expect(connection.changesetsURL(center, zoom)).to.eql('https://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
         });
     });
 
     describe('#entityURL', function() {
         it('provides an entity url for a node', function() {
             var e = iD.osmNode({id: 'n1'});
-            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/node/1');
+            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/node/1');
         });
 
         it('provides an entity url for a way', function() {
             var e = iD.osmWay({id: 'w1'});
-            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/way/1');
+            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/way/1');
         });
 
         it('provides an entity url for a relation', function() {
             var e = iD.osmRelation({id: 'r1'});
-            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/relation/1');
+            expect(connection.entityURL(e)).to.eql('https://www.openstreetmap.org/relation/1');
         });
     });
 
     describe('#historyURL', function() {
         it('provides a history url for a node', function() {
             var e = iD.osmNode({id: 'n1'});
-            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/node/1/history');
+            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/node/1/history');
         });
 
         it('provides a history url for a way', function() {
             var e = iD.osmWay({id: 'w1'});
-            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/way/1/history');
+            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/way/1/history');
         });
 
         it('provides a history url for a relation', function() {
             var e = iD.osmRelation({id: 'r1'});
-            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/relation/1/history');
+            expect(connection.historyURL(e)).to.eql('https://www.openstreetmap.org/relation/1/history');
         });
     });
 
     describe('#userURL', function() {
         it('provides a user url', function() {
-            expect(connection.userURL('bob')).to.eql('http://www.openstreetmap.org/user/bob');
+            expect(connection.userURL('bob')).to.eql('https://www.openstreetmap.org/user/bob');
         });
     });
 
@@ -127,13 +126,13 @@ describe('iD.serviceOsm', function () {
 
     describe('#switch', function() {
         it('changes the URL', function() {
-            connection.switch({ urlroot: 'http://example.com' });
-            expect(connection.changesetURL(1)).to.equal('http://example.com/changeset/1');
+            connection.switch({ url: 'https://example.com' });
+            expect(connection.changesetURL(1)).to.equal('https://example.com/changeset/1');
         });
 
         it('emits a change event', function() {
             connection.on('change', spy);
-            connection.switch({ urlroot: 'http://example.com' });
+            connection.switch({ url: 'https://example.com' });
             expect(spy).to.have.been.calledOnce;
         });
     });
@@ -152,7 +151,7 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('returns an object', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, {
+            fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -166,12 +165,12 @@ describe('iD.serviceOsm', function () {
         });
 
         it('retries an authenticated call unauthenticated if 400 Bad Request', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, {
+            fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
                 [400, { 'Content-Type': 'text/plain' }, 'Bad Request']);
 
             login();
@@ -189,12 +188,12 @@ describe('iD.serviceOsm', function () {
         });
 
         it('retries an authenticated call unauthenticated if 401 Unauthorized', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, {
+            fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
                 [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
 
             login();
@@ -211,12 +210,12 @@ describe('iD.serviceOsm', function () {
         });
 
         it('retries an authenticated call unauthenticated if 403 Forbidden', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, {
+            fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
                 [403, { 'Content-Type': 'text/plain' }, 'Forbidden']);
 
             login();
@@ -234,7 +233,7 @@ describe('iD.serviceOsm', function () {
 
 
         it('dispatches change event if 509 Bandwidth Limit Exceeded', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, {
+            fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: 'Bandwidth Limit Exceeded',
                 status: 509,
                 headers: { 'Content-Type': 'text/plain' }
@@ -250,7 +249,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('dispatches change event if 429 Too Many Requests', function (done) {
-            fetchMock.mock('http://www.openstreetmap.org' + path, {
+            fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: '429 Too Many Requests',
                 status: 429,
                 headers: { 'Content-Type': 'text/plain' }
@@ -347,7 +346,7 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('loads a node', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1.json', {
+            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1.json', {
                 body: nodeResponse,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -362,7 +361,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('loads a way', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org/api/0.6/way/1/full.json', {
+            fetchMock.mock('https://www.openstreetmap.org/api/0.6/way/1/full.json', {
                 body: wayResponse,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -377,7 +376,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('does not ignore repeat requests', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1.json', {
+            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1.json', {
                 body: wayResponse,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -416,7 +415,7 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('loads a node', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1/1.json', {
+            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1/1.json', {
                 body: nodeResponse,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -431,7 +430,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('loads a way', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org/api/0.6/way/1/1.json', {
+            fetchMock.mock('https://www.openstreetmap.org/api/0.6/way/1/1.json', {
                 body: wayResponse,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -446,7 +445,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('does not ignore repeat requests', function(done) {
-            fetchMock.mock('http://www.openstreetmap.org/api/0.6/node/1/1.json', {
+            fetchMock.mock('https://www.openstreetmap.org/api/0.6/node/1/1.json', {
                 body: nodeResponse,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
@@ -510,7 +509,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -539,7 +538,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -569,7 +568,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -768,7 +767,7 @@ describe('iD.serviceOsm', function () {
 
         describe('#status', function() {
             it('gets API status', function(done) {
-                fetchMock.mock('http://www.openstreetmap.org/api/capabilities', {
+                fetchMock.mock('https://www.openstreetmap.org/api/capabilities', {
                     body: capabilitiesXML,
                     status: 200,
                     headers: { 'Content-Type': 'text/xml' }
@@ -785,7 +784,7 @@ describe('iD.serviceOsm', function () {
 
         describe('#imageryBlocklists', function() {
             it('updates imagery blocklists', function(done) {
-                fetchMock.mock('http://www.openstreetmap.org/api/capabilities', {
+                fetchMock.mock('https://www.openstreetmap.org/api/capabilities', {
                     body: capabilitiesXML,
                     status: 200,
                     headers: { 'Content-Type': 'text/xml' }
