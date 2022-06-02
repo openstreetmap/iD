@@ -14,7 +14,7 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler,
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
-var urlroot = 'http://localhost:6790/psm/street-network';
+var urlroot = 'http://localhost:6790/street-network';
 var oauth = dummyOauth({
     url: urlroot,
     loading: authLoading,
