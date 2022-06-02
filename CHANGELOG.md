@@ -39,7 +39,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased
+# 2.21.0
+##### 2022-Jun-03
 
 #### :newspaper: News
 * Drop legacy support for Internet Explorer 11 ([#8811])
