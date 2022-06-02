@@ -5,8 +5,8 @@ describe('iD.serviceOsm', function () {
     function login() {
         connection.switch({
             url: 'https://www.openstreetmap.org',
-            client_id: 'O3g0mOUuA2WY5Fs826j5tP260qR3DDX7cIIE2R2WWSc',
-            client_secret: 'b4aeHD1cNeapPPQTrvpPoExqQRjybit6JBlNnxh62uE',
+            client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
+            client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q',
             access_token: 'foo'  // preauth
         });
     }
