@@ -75,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
 * Upgrade dependencies: maki to `v7.1`, `fontawesome` to `v6.1`, `d3` to `v7.4`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`, `temaki` to `v5.1`, `mapillary-js` to `v4.1`
 
+[#9110]: https://github.com/openstreetmap/iD/issues/9110
 [#6139]: https://github.com/openstreetmap/iD/issues/6139
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
