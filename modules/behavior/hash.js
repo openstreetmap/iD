@@ -111,9 +111,9 @@ export function behaviorHash(context) {
             updateTitle(true /* includeChangeCount */);
 
             //save last used map hash/location for future
-            const mapHash = latestHash.split("map=");
-            if (mapHash.length == 2) {
-                prefs("map-hash", mapHash[1]);
+            const mapHash = latestHash.split('map=');
+            if (mapHash.length === 2) {
+                prefs('map-hash', mapHash[1]);
             }
         }
     }
@@ -198,13 +198,12 @@ export function behaviorHash(context) {
 
             if (q.map) {
                 behavior.hadHash = true;
-            }
-            else if (prefs("map-hash")) {
+            } else if (prefs('map-hash')) {
                 //user has existing map location hash, set hash & map to location
-                const mapHash = prefs("map-hash");
+                const mapHash = prefs('map-hash');
                 let currentHash = computedHash();
 
-                currentHash = currentHash.substring(0, currentHash.indexOf("map=")) + "map=" + mapHash;
+                currentHash = currentHash.substring(0, currentHash.indexOf('map=')) + 'map=' + mapHash;
 
                 window.history.replaceState(null, computedTitle(false /* includeChangeCount */), currentHash);
                 const mapArgs = mapHash.split('/').map(Number);
