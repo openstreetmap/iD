@@ -38,6 +38,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased
+
+* When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110])
 
 # 2.21.0
 ##### 2022-Jun-03
