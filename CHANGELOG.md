@@ -47,12 +47,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
+* Don't truncate background imagery names ([#8975], thanks [@furkanmutlu])
 #### :rocket: Presets
 #### :hammer: Development
 
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
+[#8975]: https://github.com/openstreetmap/iD/pull/8975
 [#9067]: https://github.com/openstreetmap/iD/issues/9067
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
+[@furkanmutlu]: https://github.com/furkanmutlu
 
 
 # 2.21.0
