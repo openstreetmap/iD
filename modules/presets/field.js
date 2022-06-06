@@ -22,6 +22,7 @@ export function presetField(fieldID, field) {
 
   _this.t = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t.html = (scope, options) => t.html(`_tagging.presets.fields.${fieldID}.${scope}`, options);
+  _this.t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.hasTextForStringId = (scope) => localizer.hasTextForStringId(`_tagging.presets.fields.${fieldID}.${scope}`);
 
   _this.title = () => _this.overrideLabel || _this.t('label', { 'default': fieldID });
