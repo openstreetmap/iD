@@ -44,9 +44,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
+* Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
 #### :rocket: Presets
 #### :hammer: Development
 
+[#9067]: https://github.com/openstreetmap/iD/issues/9067
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
 
 
