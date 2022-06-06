@@ -335,7 +335,7 @@ export function behaviorSelect(context) {
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
 
-        } else if (datum instanceof QAItem & !isMultiselect) {
+        } else if (datum instanceof QAItem && !isMultiselect) {
             // targeting an external QA issue
             context
                 .selectedErrorID(datum.id)

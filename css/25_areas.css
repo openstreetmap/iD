@@ -36,7 +36,11 @@ path.stroke.tag-leisure-park,
 path.stroke.tag-leisure-pitch,
 path.stroke.tag-leisure-track,
 path.stroke.tag-natural,
-path.stroke.tag-natural-wood {
+path.stroke.tag-natural-wood,
+path.stroke.tag-golf-tee,
+path.stroke.tag-golf-fairway,
+path.stroke.tag-golf-rough,
+path.stroke.tag-golf-green {
     stroke: rgb(140, 208, 95);
 }
 path.fill.tag-barrier-hedge,
@@ -52,7 +56,11 @@ path.fill.tag-leisure-park,
 path.fill.tag-leisure-pitch,
 path.fill.tag-leisure-track,
 path.fill.tag-natural,
-path.fill.tag-natural-wood {
+path.fill.tag-natural-wood,
+path.fill.tag-golf-tee,
+path.fill.tag-golf-fairway,
+path.fill.tag-golf-rough,
+path.fill.tag-golf-green {
     stroke: rgba(140, 208, 95, 0.3);
     fill: rgba(140, 208, 95, 0.3);
 }
@@ -250,14 +258,17 @@ path.fill.tag-landuse-vineyard {
 
 
 /* Tan things */
-path.stroke.tag-landuse-farmyard {
+path.stroke.tag-landuse-farmyard,
+path.stroke.tag-leisure-horse_riding {
     stroke: rgb(245, 220, 186);
 }
-path.fill.tag-landuse-farmyard {
+path.fill.tag-landuse-farmyard,
+path.fill.tag-leisure-horse_riding {
     stroke: rgba(245, 220, 186, 0.3);
     fill: rgba(245, 220, 186, 0.3);
 }
-.preset-icon-fill path.area.stroke.tag-landuse-farmyard {
+.preset-icon-fill path.area.stroke.tag-landuse-farmyard
+.preset-icon-fill path.area.stroke.tag-leisure-horse_riding {
     stroke: rgb(226, 177, 111);
 }
 .pattern-color-farmyard {

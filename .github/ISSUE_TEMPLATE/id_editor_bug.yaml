@@ -39,7 +39,7 @@ body:
       multiple: true
       options:
         - Released version at openstreetmap.org/edit
-        - Development version at ideditor.netlify.com
+        - Development version at ideditor.netlify.app
         - RapiD version at mapwith.ai/rapid
     validations:
       required: false

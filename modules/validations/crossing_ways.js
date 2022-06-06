@@ -109,7 +109,8 @@ export function validationCrossingWays(context) {
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
-        if (featureType1 === 'building' || featureType2 === 'building') {
+        if (featureType1 === 'building' || featureType2 === 'building' ||
+            taggedAsIndoor(tags1) || taggedAsIndoor(tags2)) {
             // for building crossings, different layers are enough
             if (layer1 !== layer2) return true;
         }

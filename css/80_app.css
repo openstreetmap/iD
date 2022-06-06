@@ -3068,7 +3068,7 @@ img.tag-reference-wiki-image {
 /* Fullscreen Button (disabled)
 ------------------------------------------------------- */
 div.full-screen {
-    display: inline-block;
+    /*display: inline-block;*/
     width: 40px;
     margin-right: 10px;
     display: none;
@@ -4698,6 +4698,11 @@ img.tile-debug {
     }
 }
 
+.local-storage-full {
+    display: block;
+    width: 100%;
+}
+
 /* Notification Badges
 ------------------------------------------------------- */
 /* For an icon (e.g. new version) */
@@ -4912,6 +4917,9 @@ img.tile-debug {
 }
 .save-success td.community-detail {
     padding-bottom: 15px;
+}
+.save-success .community-table h3 {
+    margin: 0;
 }
 
 .summary-view-on-osm,

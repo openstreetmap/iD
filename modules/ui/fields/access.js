@@ -79,15 +79,23 @@ export function uiFieldAccess(field, context) {
 
 
     access.options = function(type) {
-        var options = ['no', 'permissive', 'private', 'permit', 'destination'];
+        var options = [
+            'yes',
+            'no',
+            'designated',
+            'permissive',
+            'destination',
+            'customers',
+            'private',
+            'permit',
+            'unknown'
+        ];
 
-        if (type !== 'access') {
-            options.unshift('yes');
-            options.push('designated');
-
-            if (type === 'bicycle') {
-                options.push('dismount');
-            }
+        if (type === 'access') {
+            options = options.filter(v => v !== 'yes' && v !== 'designated');
+        }
+        if (type === 'bicycle') {
+            options.splice(options.length - 4, 0, 'dismount');
         }
 
         return options.map(function(option) {
@@ -199,6 +207,9 @@ export function uiFieldAccess(field, context) {
             motor_vehicle: 'yes',
             bicycle: 'yes',
             horse: 'yes'
+        },
+        construction: {
+            access: 'no'
         }
     };
 
@@ -219,8 +230,10 @@ export function uiFieldAccess(field, context) {
                 if (tags[d] && Array.isArray(tags[d])) {
                     return t('inspector.multiple_values');
                 }
-                if (d === 'access') {
-                    return 'yes';
+                if (d === 'bicycle' || d === 'motor_vehicle') {
+                    if (tags.vehicle && typeof tags.vehicle === 'string') {
+                        return tags.vehicle;
+                    }
                 }
                 if (tags.access && typeof tags.access === 'string') {
                     return tags.access;
@@ -243,6 +256,9 @@ export function uiFieldAccess(field, context) {
                             return impliedAccesses[0];
                         }
                     }
+                }
+                if (d === 'access') {
+                    return 'yes';
                 }
                 return field.placeholder();
             });

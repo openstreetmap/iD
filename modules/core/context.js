@@ -8,7 +8,6 @@ import { t } from '../core/localizer';
 
 import { fileFetcher } from './file_fetcher';
 import { localizer } from './localizer';
-import { prefs } from './preferences';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
@@ -26,14 +25,11 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.21.0-dev';
+  context.version = '2.22.0-dev';
   context.privacyVersion = '20201202';
 
   // iD will alter the hash so cache the parameters intended to setup the session
   context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
-
-  context.isFirstSession = !prefs('sawSplash') && !prefs('sawPrivacyVersion');
-
 
   /* Changeset */
   // An osmChangeset object. Not loaded until needed.

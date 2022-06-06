@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const colors = require('colors/safe');
+const chalk = require('chalk');
 const concat = require('concat-files');
 const glob = require('glob');
 const fs = require('fs');
@@ -20,8 +20,8 @@ if (process.argv[1].indexOf('build_css.js') > -1) {
 function buildCSS() {
   if (_currBuild) return _currBuild;
 
-  const START = '🏗   ' + colors.yellow('Building css...');
-  const END = '👍  ' + colors.green('css built');
+  const START = '🏗   ' + chalk.yellow('Building css...');
+  const END = '👍  ' + chalk.green('css built');
 
   console.log('');
   console.log(START);

@@ -10,7 +10,6 @@ import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
-import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
@@ -18,7 +17,6 @@ let _imageryIndex = null;
 
 export function rendererBackground(context) {
   const dispatch = d3_dispatch('change');
-  const detected = utilDetect();
   const baseLayer = rendererTileLayer(context).projection(context.projection);
   let _checkedBlocklists = [];
   let _isValid = true;
@@ -110,20 +108,18 @@ export function rendererBackground(context) {
 
 
     let baseFilter = '';
-    if (detected.cssfilters) {
-      if (_brightness !== 1) {
-        baseFilter += ` brightness(${_brightness})`;
-      }
-      if (_contrast !== 1) {
-        baseFilter += ` contrast(${_contrast})`;
-      }
-      if (_saturation !== 1) {
-        baseFilter += ` saturate(${_saturation})`;
-      }
-      if (_sharpness < 1) {  // gaussian blur
-        const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
-        baseFilter += ` blur(${blur}px)`;
-      }
+    if (_brightness !== 1) {
+      baseFilter += ` brightness(${_brightness})`;
+    }
+    if (_contrast !== 1) {
+      baseFilter += ` contrast(${_contrast})`;
+    }
+    if (_saturation !== 1) {
+      baseFilter += ` saturate(${_saturation})`;
+    }
+    if (_sharpness < 1) {  // gaussian blur
+      const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+      baseFilter += ` blur(${blur}px)`;
     }
 
     let base = selection.selectAll('.layer-background')
@@ -134,11 +130,7 @@ export function rendererBackground(context) {
       .attr('class', 'layer layer-background')
       .merge(base);
 
-    if (detected.cssfilters) {
-      base.style('filter', baseFilter || null);
-    } else {
-      base.style('opacity', _brightness);
-    }
+    base.style('filter', baseFilter || null);
 
 
     let imagery = base.selectAll('.layer-imagery')
@@ -153,7 +145,7 @@ export function rendererBackground(context) {
 
     let maskFilter = '';
     let mixBlendMode = '';
-    if (detected.cssfilters && _sharpness > 1) {  // apply unsharp mask
+    if (_sharpness > 1) {  // apply unsharp mask
       mixBlendMode = 'overlay';
       maskFilter = 'saturate(0) blur(3px) invert(1)';
 
@@ -165,7 +157,7 @@ export function rendererBackground(context) {
     }
 
     let mask = base.selectAll('.layer-unsharp-mask')
-      .data(detected.cssfilters && _sharpness > 1 ? [0] : []);
+      .data(_sharpness > 1 ? [0] : []);
 
     mask.exit()
       .remove();

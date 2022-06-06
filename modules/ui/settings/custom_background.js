@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import marked from 'marked';
+import { marked } from 'marked';
 
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';

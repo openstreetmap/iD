@@ -3,7 +3,7 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import marked from 'marked';
+import { marked } from 'marked';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { localizer } from '../core/localizer';

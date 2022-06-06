@@ -1,21 +1,11 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    select as d3_select
-} from 'd3-selection';
-
-import { uiCombobox } from '../combobox';
+import { select as d3_select } from 'd3-selection';
 
 import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
-
 import { svgIcon } from '../../svg/icon';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
-
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { uiCombobox } from '../combobox';
 import { t } from '../../core/localizer';
 
 
@@ -31,16 +21,16 @@ export function uiFieldWikidata(field, context) {
     var _entityIDs = [];
 
     var _wikipediaKey = field.keys && field.keys.find(function(key) {
-            return key.includes('wikipedia');
-        }),
-        _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
+        return key.includes('wikipedia');
+    });
+    var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(true)
         .minItems(1);
 
-    function wiki(selection) {
 
+    function wiki(selection) {
         _selection = selection;
 
         var wrap = selection.selectAll('.form-field-input-wrap')
@@ -144,7 +134,6 @@ export function uiFieldWikidata(field, context) {
     }
 
     function fetchWikidataItems(q, callback) {
-
         if (!q && _hintKey) {
             // other tags may be good search terms
             for (var i in _entityIDs) {
@@ -159,12 +148,20 @@ export function uiFieldWikidata(field, context) {
         wikidata.itemsForSearchQuery(q, function(err, data) {
             if (err) return;
 
-            for (var i in data) {
-                data[i].value = data[i].label + ' (' +  data[i].id + ')';
-                data[i].title = data[i].description;
-            }
+            var result = data.map(function (item) {
+                return {
+                    id: item.id,
+                    value: item.display.label.value + ' (' + item.id + ')',
+                    display: selection => selection.append('span')
+                        .attr('class', 'localized-text')
+                        .attr('lang', item.display.label.language)
+                        .text(item.display.label.value),
+                    title: item.display.description && item.display.description.value,
+                    terms: item.aliases
+                };
+            });
 
-            if (callback) callback(data);
+            if (callback) callback(result);
         });
     }
 

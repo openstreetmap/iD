@@ -1,5 +1,5 @@
 import { t } from '../core/localizer';
-import { osmAreaKeys } from '../osm/tags';
+import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 
@@ -17,6 +17,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   let _resolvedMoreFields;  // cache
   let _searchName; // cache
   let _searchNameStripped; // cache
+  let _searchAliases; // cache
+  let _searchAliasesStripped; // cache
 
   _this.id = presetID;
 
@@ -25,6 +27,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   _this.originalTerms = (_this.terms || []).join();
 
   _this.originalName = _this.name || '';
+
+  _this.originalAliases = (_this.aliases || []).join('\n');
 
   _this.originalScore = _this.matchScore || 1;
 
@@ -77,6 +81,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       }
     }
 
+    if (_this.searchable === false) {
+      score *= 0.999;
+    }
+
     return score;
   };
 
@@ -118,6 +126,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       return null;
   };
 
+  _this.aliases = () => {
+    return _this.t('aliases', { 'default': _this.originalAliases }).trim().split(/\s*[\r\n]+\s*/);
+  };
 
   _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
     .toLowerCase().trim().split(/\s*,+\s*/);
@@ -131,13 +142,24 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.searchNameStripped = () => {
     if (!_searchNameStripped) {
-      _searchNameStripped = _this.searchName();
-      // split combined diacritical characters into their parts
-      if (_searchNameStripped.normalize) _searchNameStripped = _searchNameStripped.normalize('NFD');
-      // remove diacritics
-      _searchNameStripped = _searchNameStripped.replace(/[\u0300-\u036f]/g, '');
+      _searchNameStripped = stripDiacritics(_this.searchName());
     }
     return _searchNameStripped;
+  };
+
+  _this.searchAliases = () => {
+    if (!_searchAliases) {
+      _searchAliases = _this.aliases().map(alias => alias.toLowerCase());
+    }
+    return _searchAliases;
+  };
+
+  _this.searchAliasesStripped = () => {
+    if (!_searchAliasesStripped) {
+      _searchAliasesStripped = _this.searchAliases();
+      _searchAliasesStripped = _searchAliasesStripped.map(stripDiacritics);
+    }
+    return _searchAliasesStripped;
   };
 
   _this.isFallback = () => {
@@ -203,7 +225,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     for (let k in addTags) {
       if (addTags[k] === '*') {
         // if this tag is ancillary, don't override an existing value since any value is okay
-        if (_this.tags[k] || !tags[k] || tags[k] === 'no') {
+        if (_this.tags[k] || !tags[k]) {
           tags[k] = 'yes';
         }
       } else {
@@ -214,17 +236,17 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     // Add area=yes if necessary.
     // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
     // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
-    // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`)
+    // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`),
+    //    and is not an "exceptional area" tag (e.g. `waterway=dam`)
     if (!addTags.hasOwnProperty('area')) {
       delete tags.area;
       if (geometry === 'area') {
         let needsAreaTag = true;
-        if (_this.geometry.indexOf('line') === -1) {
-          for (let k in addTags) {
-            if (k in osmAreaKeys) {
-              needsAreaTag = false;
-              break;
-            }
+        for (let k in addTags) {
+          if (_this.geometry.indexOf('line') === -1 && k in osmAreaKeys
+              || k in osmAreaKeysExceptions && addTags[k] in osmAreaKeysExceptions[k]) {
+            needsAreaTag = false;
+            break;
           }
         }
         if (needsAreaTag) {
@@ -301,6 +323,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
   }
 
+
+  function stripDiacritics(s) {
+    // split combined diacritical characters into their parts
+    if (s.normalize) s = s.normalize('NFD');
+    // remove diacritics
+    s = s.replace(/[\u0300-\u036f]/g, '');
+    return s;
+  }
 
   return _this;
 }

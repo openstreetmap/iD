@@ -35,7 +35,7 @@ export function uiToolNotes(context) {
     }
 
     context.keybinding().on(mode.key, function() {
-        if (!enabled(mode)) return;
+        if (!enabled()) return;
 
         if (mode.id === context.mode().id) {
             context.enter(modeBrowse(context));
@@ -74,7 +74,7 @@ export function uiToolNotes(context) {
                 .append('button')
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
                 .on('click.notes', function(d3_event, d) {
-                    if (!enabled(d)) return;
+                    if (!enabled()) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
                     var currMode = context.mode().id;
@@ -107,8 +107,8 @@ export function uiToolNotes(context) {
             // update
             buttons = buttons
                 .merge(buttonsEnter)
-                .classed('disabled', function(d) { return !enabled(d); })
-                .attr('aria-disabled', function(d) { return !enabled(d); })
+                .classed('disabled', function() { return !enabled(); })
+                .attr('aria-disabled', function() { return !enabled(); })
                 .classed('active', function(d) { return context.mode() && context.mode().button === d.button; })
                 .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; });
         }
