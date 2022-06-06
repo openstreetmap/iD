@@ -230,7 +230,7 @@ export function uiSectionRawMembershipEditor(context) {
         var newRelation = {
             relation: null,
             value: t('inspector.new_relation'),
-            display: t.html('inspector.new_relation')
+            display: t.append('inspector.new_relation')
         };
 
         var entityID = _entityIDs[0];
