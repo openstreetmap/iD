@@ -52,7 +52,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix alignment of "notes" icon in sidebar ([#9018], thanks [@JackNUMBER])
 * Fix comments in notes overflowing when hovering ([#9074], thanks [@aaditya0000])
 #### :rocket: Presets
+* Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 #### :hammer: Development
+
 
 [#8419]: https://github.com/openstreetmap/iD/issues/8419
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
@@ -61,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9067]: https://github.com/openstreetmap/iD/issues/9067
 [#9074]: https://github.com/openstreetmap/iD/pull/9074
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
+[#9140]: https://github.com/openstreetmap/iD/pull/9140
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
