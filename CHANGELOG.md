@@ -48,14 +48,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
 * Don't truncate background imagery names ([#8975], thanks [@furkanmutlu])
+* Fix alignment of "notes" icon in sidebar ([#9018], thanks [@JackNUMBER])
+* Fix comments in notes overflowing when hovering ([#9074], thanks [@aaditya0000])
 #### :rocket: Presets
 #### :hammer: Development
 
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
 [#8975]: https://github.com/openstreetmap/iD/pull/8975
+[#9018]: https://github.com/openstreetmap/iD/issues/9018
 [#9067]: https://github.com/openstreetmap/iD/issues/9067
+[#9074]: https://github.com/openstreetmap/iD/pull/9074
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
 [@furkanmutlu]: https://github.com/furkanmutlu
+[@JackNUMBER]: https://github.com/JackNUMBER
+[@aaditya0000]: https://github.com/aaditya0000
 
 
 # 2.21.0
