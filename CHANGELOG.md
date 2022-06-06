@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 #### :white_check_mark: Validation
+* Don't warn on close-by "Stolperstein" memorials ([#8419], thanks [@paulklie])
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
@@ -53,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 
+[#8419]: https://github.com/openstreetmap/iD/issues/8419
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
 [#8975]: https://github.com/openstreetmap/iD/pull/8975
 [#9018]: https://github.com/openstreetmap/iD/issues/9018
@@ -62,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
+[@paulklie]: https://github.com/paulklie
 
 
 # 2.21.0
