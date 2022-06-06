@@ -501,6 +501,7 @@ button.disabled .icon.operation use,
 
 .icon-annotation {
     color: #333;
+    vertical-align: baseline;
 }
 
 
