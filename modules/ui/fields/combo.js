@@ -102,6 +102,23 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    // returns function which renders the display value for a tag value
+    // (for multiCombo, tval should be the key suffix, not the entire key)
+    function renderValue(tval) {
+        tval = tval || '';
+
+        if (field.hasTextForStringId('options.' + tval)) {
+            return field.t.append('options.' + tval, { default: tval });
+        }
+
+        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+            tval = '';
+        }
+
+        return selection => selection.text(tval);
+    }
+
+
     // Compute the difference between arrays of objects by `value` property
     //
     // objectDifference([{value:1}, {value:2}, {value:3}], [{value:2}])
@@ -421,6 +438,7 @@ export function uiFieldCombo(field, context) {
                     _multiData.push({
                         key: k,
                         value: displayValue(suffix),
+                        display: renderValue(suffix),
                         isMixed: Array.isArray(v)
                     });
                 }
@@ -461,6 +479,7 @@ export function uiFieldCombo(field, context) {
                     return {
                         key: v,
                         value: displayValue(v),
+                        display: renderValue(v),
                         isMixed: !commonValues.includes(v)
                     };
                 });
@@ -526,8 +545,13 @@ export function uiFieldCombo(field, context) {
                 registerDragAndDrop(chips);
             }
 
-            chips.select('span')
-                .text(function(d) { return d.value; });
+            chips.select('span').each(function(d) {
+                if (d.display) {
+                    d.display(d3_select(this));
+                } else {
+                    d3_select(this).text(d.value);
+                }
+            });
 
             chips.select('a')
                 .attr('href', '#')
