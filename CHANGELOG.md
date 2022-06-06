@@ -41,6 +41,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased
 
 #### :newspaper: News
+#### :tada: New Features
+* Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
@@ -48,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 
+[#8881]: https://github.com/openstreetmap/iD/issues/8881
 [#9067]: https://github.com/openstreetmap/iD/issues/9067
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
 
