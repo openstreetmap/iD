@@ -140,7 +140,7 @@ export function uiFieldCombo(field, context) {
                 key: v,
                 value: field.t('options.' + v, { default: v }),
                 title: v,
-                display: field.t.html('options.' + v, { default: v }),
+                display: field.t.append('options.' + v, { default: v }),
                 klass: field.hasTextForStringId('options.' + v) ? '' : 'raw-option'
             };
         });
@@ -206,7 +206,7 @@ export function uiFieldCombo(field, context) {
                 return {
                     key: k,
                     value: label,
-                    display: field.t.html('options.' + k, { default: k }),
+                    display: field.t.append('options.' + k, { default: k }),
                     title: d.title || label,
                     klass: field.hasTextForStringId('options.' + k) ? '' : 'raw-option'
                 };

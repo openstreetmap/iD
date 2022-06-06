@@ -150,9 +150,13 @@ export function uiFieldWikidata(field, context) {
 
             var result = data.map(function (item) {
                 return {
-                    id:    item.id,
-                    value: item.label + ' (' + item.id + ')',
-                    title: item.description,
+                    id: item.id,
+                    value: item.display.label.value + ' (' + item.id + ')',
+                    display: selection => selection.append('span')
+                        .attr('class', 'localized-text')
+                        .attr('lang', item.display.label.language)
+                        .text(item.display.label.value),
+                    title: item.display.description && item.display.description.value,
                     terms: item.aliases
                 };
             });
