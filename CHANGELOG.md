@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't render `railway=platform_edge` like train tracks ([#9142], thanks [@k-yle])
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
+* Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
 #### :hammer: Development
 
 
@@ -64,6 +65,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9067]: https://github.com/openstreetmap/iD/issues/9067
 [#9074]: https://github.com/openstreetmap/iD/pull/9074
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
+[#9139]: https://github.com/openstreetmap/iD/pull/9139
 [#9140]: https://github.com/openstreetmap/iD/pull/9140
 [#9142]: https://github.com/openstreetmap/iD/pull/9142
 [@furkanmutlu]: https://github.com/furkanmutlu
