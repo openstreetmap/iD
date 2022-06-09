@@ -164,6 +164,7 @@ export var osmPavedTags = {
         'paved': true,
         'asphalt': true,
         'concrete': true,
+        'chipseal': true,
         'concrete:lanes': true,
         'concrete:plates': true
     },
