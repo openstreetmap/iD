@@ -15,6 +15,6 @@
         "footway",
         "dismount"
     ],
-    "name": "Foot path (bicycle dismount)",
-    "shortcut": ["⇧+b"]
+    "name": "Foot path (bicycle dismount) [⇧n]",
+    "shortcut": ["⇧+n"]
 }
