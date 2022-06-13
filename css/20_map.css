@@ -440,3 +440,7 @@ g.vertex.highlighted .shadow {
 .highlight-edited path.area.shadow.geometry-edited {
     stroke: rgb(255, 126, 46);
 }
+
+.tag-postal_object path.stroke {
+    fill: yellow;
+}

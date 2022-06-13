@@ -7,7 +7,7 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'building:part', 'indoor'
+        'building:part', 'indoor', 'postal_object'
     ];
     var statuses = [
         // nonexistent, might be built
