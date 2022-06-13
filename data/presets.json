@@ -25551,7 +25551,7 @@
         }
     },
     "postal_object/sorting_center": {
-        "icon": "maki-amusement-park",
+        "icon": "dpdhl-mailbox",
         "fields": [
             "name"
         ],
@@ -25559,7 +25559,8 @@
             "point"
         ],
         "tags": {
-            "postal_object": "sorting_center"
+            "postal_object": "sorting_center",
+            "private": "yes"
         },
         "searchable": true
     }

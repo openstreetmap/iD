@@ -31,6 +31,7 @@
     "dist:svg:mapillary:signs": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-sprite.svg node_modules/mapillary_sprite_source/package_signs/*.svg",
     "dist:svg:mapillary:objects": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-object-sprite.svg node_modules/mapillary_sprite_source/package_objects/*.svg",
     "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/@ideditor/temaki/icons/*.svg",
+    "dist:svg:dpdhl": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/dpdhl-sprite.svg svg/dpdhl/*.svg",
     "imagery": "node scripts/update_imagery.js",
     "lint": "eslint scripts test/spec modules",
     "lint:fix": "eslint scripts test/spec modules --fix",
