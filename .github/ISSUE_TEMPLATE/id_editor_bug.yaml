@@ -35,7 +35,7 @@ body:
     id: environment-variant
     attributes:
       label: Which deployed environments do you see the issue in?
-      description: If possible, please test this issue in the development version (here: https://ideditor.netlify.app) as well, to make sure it is not already fixed.
+      description: "If possible, please test this issue in the development version (here: https://ideditor.netlify.app) as well, to make sure it is not already fixed."
       multiple: true
       options:
         - Released version at openstreetmap.org/edit
@@ -48,7 +48,7 @@ body:
     attributes:
       label: What version numbers does this issue effect?
       description: This can be found in the bottom right corner, next to the 'Help translate' button.
-      placeholder: For example- 2.20.3, 2.21.0, etc.
+      placeholder: "For example: 2.20.3, 2.21.0, etc."
     validations:
       required: false
   - type: dropdown
