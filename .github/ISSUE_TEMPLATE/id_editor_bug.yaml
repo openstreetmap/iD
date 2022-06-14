@@ -63,5 +63,6 @@ body:
         - Opera
         - Safari
         - Vivaldi
+        - Other (please specify)
     validations:
       required: false
