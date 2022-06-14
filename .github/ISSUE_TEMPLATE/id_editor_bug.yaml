@@ -34,7 +34,7 @@ body:
   - type: dropdown
     id: environment-variant
     attributes:
-      label: Which iD Editor versions do you see the issue on?
+      label: Which iD Editor deployment do you see the issue on?
       description: Please test your issue on the development version as well (if possible) so make sure it is not fixed already.
       multiple: true
       options:
@@ -47,8 +47,8 @@ body:
     id: version
     attributes:
       label: Version
-      description: What version of iD are you using?
-      placeholder: This can be found in the bottom right corner, next to the language selector
+      description: What is the version number of iD you are using?
+      placeholder: This can be found in the bottom right corner
     validations:
       required: false
   - type: dropdown
