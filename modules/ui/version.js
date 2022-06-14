@@ -41,7 +41,7 @@ export function uiVersion(context) {
                 .attr('class', 'badge')
                 .attr('target', '_blank')
                 .attr('href', 'https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md#whats-new')
-                .call(svgIcon('#maki-gift-11'))
+                .call(svgIcon('#maki-gift'))
                 .call(uiTooltip()
                     .title(t.html('version.whats_new', { version: currVersion }))
                     .placement('top')
