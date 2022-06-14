@@ -34,7 +34,7 @@ body:
   - type: dropdown
     id: environment-variant
     attributes:
-      label: Which iD Editor deployments do you see the issue on?
+      label: Which deployed environments do you see the issue in?
       description: Please test your issue on the development version as well (if possible) so make sure it is not fixed already.
       multiple: true
       options:
@@ -46,9 +46,9 @@ body:
   - type: input
     id: version
     attributes:
-      label: Version
-      description: What version numbers does this issue effect?
-      placeholder: This can be found in the bottom right corner
+      label: What version numbers does this issue effect?
+      description: This can be found in the bottom right corner, next to the 'Help translate' button.
+      placeholder: For example: 2.20.3, 2.21.0, etc.
     validations:
       required: false
   - type: dropdown
