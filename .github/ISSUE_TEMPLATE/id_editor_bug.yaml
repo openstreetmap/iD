@@ -48,7 +48,7 @@ body:
     attributes:
       label: What version numbers does this issue effect?
       description: This can be found in the bottom right corner, next to the 'Help translate' button.
-      placeholder: For example: 2.20.3, 2.21.0, etc.
+      placeholder: For example- 2.20.3, 2.21.0, etc.
     validations:
       required: false
   - type: dropdown
