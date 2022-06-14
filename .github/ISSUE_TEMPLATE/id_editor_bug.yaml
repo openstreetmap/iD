@@ -35,7 +35,7 @@ body:
     id: environment-variant
     attributes:
       label: Which deployed environments do you see the issue in?
-      description: Please test your issue on the development version as well (if possible) so make sure it is not fixed already.
+      description: If possible, please test this issue in the development version (here: https://ideditor.netlify.app) as well, to make sure it is not already fixed.
       multiple: true
       options:
         - Released version at openstreetmap.org/edit
