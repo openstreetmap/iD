@@ -39,6 +39,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
+# 2.21.1
+##### 2022-Jun-16
+
+#### :bug: Bugfixes
+* Fix compatibility with older versions of browsers (Firefox ≤ v77, Chrome ≤ v61, Safari ≤ v11) ([#9163], thanks [@1ec5])
+
+[#9163]: https://github.com/openstreetmap/iD/issues/9163
+
+
 # 2.21.0
 ##### 2022-Jun-03
 
