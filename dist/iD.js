@@ -22236,7 +22236,7 @@
 
   // package.json
   var name = "iD";
-  var version = "2.21.0";
+  var version = "2.21.1";
   var description = "A friendly editor for OpenStreetMap";
   var main = "dist/iD.min.js";
   var repository = "github:openstreetmap/iD";
@@ -68011,7 +68011,7 @@ ${content}</tr>
     const dispatch10 = dispatch_default("enter", "exit", "change");
     let context = utilRebind({}, dispatch10, "on");
     let _deferred2 = /* @__PURE__ */ new Set();
-    context.version = "2.21.0";
+    context.version = "2.21.1";
     context.privacyVersion = "20201202";
     context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
     context.changeset = null;
