@@ -19338,7 +19338,7 @@
       ]
     },
     "node_modules/marked/lib/marked.esm.js": {
-      "bytes": 76372,
+      "bytes": 76752,
       "imports": []
     },
     "modules/services/osmose.js": {
@@ -19546,7 +19546,7 @@
       ]
     },
     "node_modules/name-suggestion-index/config/matchGroups.json": {
-      "bytes": 5841,
+      "bytes": 5981,
       "imports": []
     },
     "node_modules/name-suggestion-index/config/genericWords.json": {
@@ -20431,7 +20431,7 @@
       "imports": []
     },
     "modules/renderer/background_source.js": {
-      "bytes": 20809,
+      "bytes": 20813,
       "imports": [
         {
           "path": "node_modules/d3-geo/src/index.js",
@@ -30817,7 +30817,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 5767918
+      "bytes": 5768502
     },
     "dist/iD.js": {
       "imports": [],
@@ -32001,7 +32001,7 @@
           "bytesInOutput": 8208
         },
         "node_modules/marked/lib/marked.esm.js": {
-          "bytesInOutput": 69414
+          "bytesInOutput": 69698
         },
         "modules/services/mapillary.js": {
           "bytesInOutput": 19685
@@ -32025,7 +32025,7 @@
           "bytesInOutput": 1323
         },
         "node_modules/name-suggestion-index/config/matchGroups.json": {
-          "bytesInOutput": 5812
+          "bytesInOutput": 5952
         },
         "node_modules/name-suggestion-index/config/genericWords.json": {
           "bytesInOutput": 738
@@ -32121,7 +32121,7 @@
           "bytesInOutput": 9718
         },
         "modules/renderer/background_source.js": {
-          "bytesInOutput": 15818
+          "bytesInOutput": 15822
         },
         "modules/util/IntervalTasksQueue.js": {
           "bytesInOutput": 575
@@ -32826,7 +32826,7 @@
           "bytesInOutput": 472
         }
       },
-      "bytes": 3474186
+      "bytes": 3474614
     }
   }
 }
