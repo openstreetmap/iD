@@ -52,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix alignment of "notes" icon in sidebar ([#9018], thanks [@JackNUMBER])
 * Fix comments in notes overflowing when hovering ([#9074], thanks [@aaditya0000])
 * Don't render `railway=platform_edge` like train tracks ([#9142], thanks [@k-yle])
+* Fix compatibility with older versions of browsers (Firefox ≤ v77, Chrome ≤ v61, Safari ≤ v11) ([#9163], thanks [@1ec5])
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9139]: https://github.com/openstreetmap/iD/pull/9139
 [#9140]: https://github.com/openstreetmap/iD/pull/9140
 [#9142]: https://github.com/openstreetmap/iD/pull/9142
+[#9163]: https://github.com/openstreetmap/iD/issues/9163
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
