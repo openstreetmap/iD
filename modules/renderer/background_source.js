@@ -112,7 +112,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.url = function(coord) {
-        var result = _template.replace(/#.*/su, ''); // strip hash part of URL
+        var result = _template.replace(/#[\s\S]*/u, ''); // strip hash part of URL
         if (result === '') return result;   // source 'none'
 
 
