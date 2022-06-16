@@ -25559,8 +25559,8 @@
             "point"
         ],
         "tags": {
-            "postal_object": "sorting_center",
-            "private": "yes"
+            "gedas:postal_object": "sorting_center",
+            "gedas:private": "yes"
         },
         "searchable": true
     }
