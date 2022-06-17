@@ -69,6 +69,11 @@ export function rendererFeatures(context) {
     }
 
 
+    /**
+     * @param {string} k
+     * @param {(tags: Record<string, string>, geometry: string, parents: osmRelation[]) => boolean} filter
+     * @param {?number} max
+     */
     function defineRule(k, filter, max) {
         var isEnabled = true;
 
@@ -133,9 +138,13 @@ export function rendererFeatures(context) {
             !_rules.pistes.filter(tags);
     });
 
-    defineRule('boundaries', function isBoundary(tags) {
+    defineRule('boundaries', function isBoundary(tags, geometry, parents) {
+        // This rule applies if the way has no interesting tags, and if either:
+        //   (a) the way has a `boundary=*` tag, or
+        //   (b) every parent of the line is a relation with `type=boundary`.
         return (
             !!tags.boundary
+            || (geometry === 'line' && parents && parents.length && parents.every(r => r.tags.type === 'boundary'))
         ) && !(
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
@@ -391,6 +400,8 @@ export function rendererFeatures(context) {
             var matches = {};
             var hasMatch = false;
 
+            const parents = features.getParents(entity, resolver, geometry);
+
             for (var i = 0; i < _keys.length; i++) {
                 if (_keys[i] === 'others') {
                     if (hasMatch) continue;
@@ -398,13 +409,9 @@ export function rendererFeatures(context) {
                     // If an entity...
                     //   1. is a way that hasn't matched other 'interesting' feature rules,
                     if (entity.type === 'way') {
-                        var parents = features.getParents(entity, resolver, geometry);
 
-                        //   2a. belongs only to a single multipolygon relation
-                        if ((parents.length === 1 && parents[0].isMultipolygon()) ||
-                            // 2b. or belongs only to boundary relations
-                            (parents.length > 0 && parents.every(function(parent) { return parent.tags.type === 'boundary'; }))) {
-
+                        //   2. and belongs only to a single multipolygon relation,
+                        if (parents.length === 1 && parents[0].isMultipolygon()) {
                             // ...then match whatever feature rules the parent relation has matched.
                             // see #2548, #2887
                             //
@@ -420,7 +427,7 @@ export function rendererFeatures(context) {
                     }
                 }
 
-                if (_rules[_keys[i]].filter(entity.tags, geometry)) {
+                if (_rules[_keys[i]].filter(entity.tags, geometry, parents)) {
                     matches[_keys[i]] = hasMatch = true;
                 }
             }
