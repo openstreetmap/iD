@@ -306,27 +306,28 @@ export function uiSectionDataLayers(context) {
             .append('ul')
             .attr('class', 'layer-list layer-list-data');
 
-        var liEnter = ulEnter
+        // Custom Map Data
+        var mapEnter = ulEnter
             .append('li')
             .attr('class', 'list-item-data');
 
-        var labelEnter = liEnter
+        var mapLabelEnter = mapEnter
             .append('label')
             .call(uiTooltip()
                 .title(t.html('map_data.layers.custom.tooltip'))
                 .placement('top')
             );
 
-        labelEnter
+        mapLabelEnter
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function() { toggleLayer('data'); });
 
-        labelEnter
+        mapLabelEnter
             .append('span')
             .call(t.append('map_data.layers.custom.title'));
 
-        liEnter
+        mapEnter
             .append('button')
             .attr('class', 'open-data-options')
             .call(uiTooltip()
@@ -339,7 +340,54 @@ export function uiSectionDataLayers(context) {
             })
             .call(svgIcon('#iD-icon-more'));
 
-        liEnter
+        mapEnter
+            .append('button')
+            .attr('class', 'zoom-to-data')
+            .call(uiTooltip()
+                .title(t.html('map_data.layers.custom.zoom'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                if (d3_select(this).classed('disabled')) return;
+
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                dataLayer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+
+        // new item - local photos
+        var localPhotosEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-local-photos');
+
+        var localPhotosLabelEnter = localPhotosEnter
+            .append('label')
+            // TODO: Add tooltip
+
+        localPhotosLabelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('data'); });
+
+        localPhotosLabelEnter
+            .append('span')
+            .text('Local Photos');
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'open-data-options')
+            .call(uiTooltip()
+                .title(t.html('settings.custom_data.tooltip'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                editCustom();
+            })
+            .call(svgIcon('#iD-icon-more'));
+
+        localPhotosEnter
             .append('button')
             .attr('class', 'zoom-to-data')
             .call(uiTooltip()
