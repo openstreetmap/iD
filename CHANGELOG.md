@@ -56,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
 * Better fallback icons for untagged points, vertices, lines and areas ([#9157])
+* Add fallback values for access field for barrier presets
 #### :hammer: Development
 
 
