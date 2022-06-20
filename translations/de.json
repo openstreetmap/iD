@@ -8574,6 +8574,12 @@
                 "waterway/weir": {
                     "name": "Wehr",
                     "terms": "wehr"
+                },
+                "postal_object": {
+                    "name": "postalisches Objekt"
+                },
+                "postal_object/sorting_center": {
+                    "name": "Sortierzentrum"
                 }
             }
         }

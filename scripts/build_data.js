@@ -90,7 +90,9 @@ function buildData() {
     minifyJSON('data/presets.json', 'dist/data/presets.min.json'),
     minifyJSON('data/preset_defaults.json', 'dist/data/preset_defaults.min.json'),
     minifyJSON('translations/index.json', 'dist/translations/index.min.json'),
-    minifyJSON('translations/en.json', 'dist/translations/en.min.json')
+    minifyJSON('translations/en.json', 'dist/translations/en.min.json'),
+    minifyJSON('translations/fr.json', 'dist/translations/fr.min.json'),
+    minifyJSON('translations/de.json', 'dist/translations/de.min.json')
   ];
 
   return _currBuild =

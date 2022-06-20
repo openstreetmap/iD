@@ -8452,6 +8452,12 @@
                 "waterway/weir": {
                     "name": "Seuil",
                     "terms": "petit barrage,seuil"
+                },
+                "postal_object": {
+                    "name": "Objet postal"
+                },
+                "postal_object/sorting_center": {
+                    "name": "Centre de tri"
                 }
             }
         }
