@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
+* Better fallback icons for untagged points, vertices, lines and areas ([#9157])
 #### :hammer: Development
 
 
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9139]: https://github.com/openstreetmap/iD/pull/9139
 [#9140]: https://github.com/openstreetmap/iD/pull/9140
 [#9142]: https://github.com/openstreetmap/iD/pull/9142
+[#9157]: https://github.com/openstreetmap/iD/issues/9157
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
