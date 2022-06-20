@@ -7,8 +7,7 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 // It is keyed on the `value` of the entry. Data should be an array of objects like:
 //   [{
 //       value:   'string value',  // required
-//       display: 'label function' // optional, if present will be called with d3 selection
-//                                              to modify/append, see localizer's t.append
+//       display: 'label html'     // optional
 //       title:   'hover text'     // optional
 //       terms:   ['search terms'] // optional
 //   }, ...]
@@ -389,7 +388,7 @@ export function uiCombobox(context, klass) {
                 .attr('title', function(d) { return d.title; })
                 .each(function(d) {
                     if (d.display) {
-                        d.display(d3_select(this));
+                        d3_select(this).html(d.display);
                     } else {
                         d3_select(this).text(d.value);
                     }
