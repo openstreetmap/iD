@@ -222,7 +222,7 @@ export function uiFieldCombo(field, context) {
                 var label = field.t('options.' + k, { default: k });
                 return {
                     key: k,
-                    value: label,
+                    value: _isMulti ? k : label,
                     display: field.t.append('options.' + k, { default: k }),
                     title: d.title || label,
                     klass: field.hasTextForStringId('options.' + k) ? '' : 'raw-option'
