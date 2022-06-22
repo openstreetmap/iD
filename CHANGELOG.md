@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix comments in notes overflowing when hovering ([#9074], thanks [@aaditya0000])
 * Don't render `railway=platform_edge` like train tracks ([#9142], thanks [@k-yle])
 * Fix leaking of localized tag values into raw tags by multiCombo fields ([#9164], thanks [@1ec5])
+* Fix localizable labels in multiCombo fields ("chips") being rendered multiple times ([#9169])
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
@@ -73,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9142]: https://github.com/openstreetmap/iD/pull/9142
 [#9157]: https://github.com/openstreetmap/iD/issues/9157
 [#9164]: https://github.com/openstreetmap/iD/issues/9164
+[#9169]: https://github.com/openstreetmap/iD/issues/9169
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000

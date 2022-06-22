@@ -546,10 +546,12 @@ export function uiFieldCombo(field, context) {
             }
 
             chips.select('span').each(function(d) {
+                const selection = d3_select(this);
                 if (d.display) {
-                    d.display(d3_select(this));
+                    selection.text('');
+                    d.display(selection);
                 } else {
-                    d3_select(this).text(d.value);
+                    selection.text(d.value);
                 }
             });
 
