@@ -33,7 +33,7 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .html(_currSourceName);
+            .text(_currSourceName);
 
         _metadataKeys.forEach(function(k) {
             // DigitalGlobe vintage is available in raster layers for now.

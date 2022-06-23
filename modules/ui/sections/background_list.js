@@ -202,7 +202,7 @@ export function uiSectionBackgroundList(context) {
 
         label
             .append('span')
-            .html(function(d) { return d.label(); });
+            .text(function(d) { return d.label(); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
@@ -225,7 +225,7 @@ export function uiSectionBackgroundList(context) {
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .append('span')
-            .html('&#9733;');
+            .text('★');
 
         layerList
             .call(updateLayerSelections);
