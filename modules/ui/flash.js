@@ -92,7 +92,7 @@ export function uiFlash(context) {
         if (typeof _ !== 'function') {
             _label = selection => selection.text(_);
         } else {
-            _label = _;
+            _label = selection => s_;
         }
         return flash;
     };

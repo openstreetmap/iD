@@ -96,8 +96,8 @@ export function operationCircularize(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.circularize.' + disable + '.' + _amount) :
-            t('operations.circularize.description.' + _amount);
+            t.append('operations.circularize.' + disable + '.' + _amount) :
+            t.append('operations.circularize.description.' + _amount);
     };
 
 
@@ -108,7 +108,7 @@ export function operationCircularize(context, selectedIDs) {
 
     operation.id = 'circularize';
     operation.keys = [t('operations.circularize.key')];
-    operation.title = t('operations.circularize.title');
+    operation.title = t.append('operations.circularize.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

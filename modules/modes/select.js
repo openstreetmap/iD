@@ -327,7 +327,7 @@ export function modeSelect(context, selectedIDs) {
                         .duration(4000)
                         .iconName('#iD-operation-' + moveOp.id)
                         .iconClass('operation disabled')
-                        .label(moveOp.tooltip)();
+                        .label(moveOp.tooltip())();
                 } else {
                     context.perform(actionMove(selectedIDs, delta, context.projection), moveOp.annotation());
                     context.validator().validate();

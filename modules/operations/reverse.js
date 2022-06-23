@@ -58,7 +58,7 @@ export function operationReverse(context, selectedIDs) {
 
 
     operation.tooltip = function() {
-        return t('operations.reverse.description.' + reverseTypeID());
+        return t.append('operations.reverse.description.' + reverseTypeID());
     };
 
 
@@ -70,7 +70,7 @@ export function operationReverse(context, selectedIDs) {
 
     operation.id = 'reverse';
     operation.keys = [t('operations.reverse.key')];
-    operation.title = t('operations.reverse.title');
+    operation.title = t.append('operations.reverse.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
