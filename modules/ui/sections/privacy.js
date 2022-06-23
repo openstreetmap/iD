@@ -25,7 +25,7 @@ export function uiSectionPrivacy(context) {
         .attr('class', 'privacy-third-party-icons-item')
         .append('label')
         .call(uiTooltip()
-          .title(t.html('preferences.privacy.third_party_icons.tooltip'))
+          .title(() => t.append('preferences.privacy.third_party_icons.tooltip'))
           .placement('bottom')
         );
 

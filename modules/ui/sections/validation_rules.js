@@ -87,7 +87,7 @@ export function uiSectionValidationRules(context) {
         if (name === 'rule') {
             enter
                 .call(uiTooltip()
-                    .title(function(d) { return t.html('issues.' + d + '.tip'); })
+                    .title(function(d) { return t.append('issues.' + d + '.tip'); })
                     .placement('top')
                 );
         }

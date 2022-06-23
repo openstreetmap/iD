@@ -44,7 +44,7 @@ export function uiSectionMapStyleOptions(context) {
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
-                    return t.html(name + '.' + d + '.tooltip');
+                    return t.append(name + '.' + d + '.tooltip');
                 })
                 .keys(function(d) {
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);

@@ -165,7 +165,9 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', 'add-tag')
             .attr('aria-label', t('inspector.add_to_tag'))
             .call(svgIcon('#iD-icon-plus', 'light'))
-            .call(uiTooltip().title(t.html('inspector.add_to_tag')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
+            .call(uiTooltip()
+                .title(() => t.append('inspector.add_to_tag'))
+                .placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
             .on('click', addTag);
 
         addRowEnter

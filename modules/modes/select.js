@@ -400,7 +400,7 @@ export function modeSelect(context, selectedIDs) {
                         .duration(4000)
                         .iconName('#iD-icon-no')
                         .iconClass('operation disabled')
-                        .label(t.html('operations.scale.' + disabled + '.' + multi))();
+                        .label(t.append('operations.scale.' + disabled + '.' + multi))();
                 } else {
                     const pivot = context.projection(extent.center());
                     const annotation = t('operations.scale.annotation.' + (isUp ? 'up' : 'down') + '.feature', { n: selectedIDs.length });

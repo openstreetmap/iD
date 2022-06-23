@@ -105,7 +105,7 @@ export function uiEditMenu(context) {
         buttonsEnter.each(function(d) {
             var tooltip = uiTooltip()
                 .heading(d.title)
-                .title(d.tooltip())
+                .title(d.tooltip)
                 .keys([d.keys[0]]);
 
             _tooltips.push(tooltip);

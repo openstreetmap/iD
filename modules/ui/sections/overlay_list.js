@@ -29,7 +29,7 @@ export function uiSectionOverlayList(context) {
             if (description || isOverflowing) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title(description || d.name())
+                    .title(() => description || d.name())
                 );
             }
         });
@@ -80,7 +80,7 @@ export function uiSectionOverlayList(context) {
 
         label
             .append('span')
-            .html(function(d) { return d.label(); });
+            .each(function(d) { d.label()(d3_select(this)); });
 
 
         layerList.selectAll('li')

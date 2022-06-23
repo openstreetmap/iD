@@ -71,10 +71,13 @@ export function uiSectionMapFeatures(context) {
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
-                    var tip = t.html(name + '.' + d + '.tooltip');
+                    var tip = t.append(name + '.' + d + '.tooltip');
                     if (autoHiddenFeature(d)) {
-                        var msg = showsLayer('osm') ? t.html('map_data.autohidden') : t.html('map_data.osmhidden');
-                        tip += '<div>' + msg + '</div>';
+                        var msg = showsLayer('osm') ? t.append('map_data.autohidden') : t.append('map_data.osmhidden');
+                        return selection => {
+                            selection.call(tip);
+                            selection.append('div').call(msg);
+                        };
                     }
                     return tip;
                 })
