@@ -140,7 +140,7 @@ export function uiField(context, presetField, entityIDs, options) {
             textEnter
                 .append('span')
                 .attr('class', 'label-textvalue')
-                .html(function(d) { return d.label(); });
+                .each(function(d) { d.label()(d3_select(this)); });
 
             textEnter
                 .append('span')

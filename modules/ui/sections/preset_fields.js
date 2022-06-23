@@ -81,7 +81,7 @@ export function uiSectionPresetFields(context) {
 
             var additionalFields = utilArrayUnion(sharedMoreFields, presetsManager.universal());
             additionalFields.sort(function(field1, field2) {
-                return field1.label().localeCompare(field2.label(), localizer.localeCode());
+                return field1.title().localeCompare(field2.title(), localizer.localeCode());
             });
 
             additionalFields.forEach(function(field) {
