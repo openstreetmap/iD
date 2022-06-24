@@ -7,7 +7,7 @@ export function uiSectionMapFeatures(context) {
     var _features = context.features().keys();
 
     var section = uiSection('map-features', context)
-        .label(t.html('map_data.map_features'))
+        .label(() => t.append('map_data.map_features'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 

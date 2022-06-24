@@ -11,7 +11,7 @@ import { uiSection } from '../section';
 export function uiSectionOverlayList(context) {
 
     var section = uiSection('overlay-list', context)
-        .label(t.html('background.overlays'))
+        .label(() => t.append('background.overlays'))
         .disclosureContent(renderDisclosureContent);
 
     var _overlayList = d3_select(null);

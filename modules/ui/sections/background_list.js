@@ -21,7 +21,7 @@ export function uiSectionBackgroundList(context) {
         .on('change', customChanged);
 
     var section = uiSection('background-list', context)
-        .label(t.html('background.backgrounds'))
+        .label(() => t.append('background.backgrounds'))
         .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {

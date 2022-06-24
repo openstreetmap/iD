@@ -6,7 +6,7 @@ import { uiSection } from '../section';
 
 export function uiSectionPrivacy(context) {
     let section = uiSection('preferences-third-party', context)
-      .label(t.html('preferences.privacy.title'))
+      .label(() => t.append('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {

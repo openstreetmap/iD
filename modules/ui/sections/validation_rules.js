@@ -16,7 +16,7 @@ export function uiSectionValidationRules(context) {
 
     var section = uiSection('issues-rules', context)
         .disclosureContent(renderDisclosureContent)
-        .label(t.html('issues.rules.title'));
+        .label(() => t.append('issues.rules.title'));
 
     var _ruleKeys = context.validator().getRuleKeys()
         .filter(function(key) { return key !== 'maprules'; })

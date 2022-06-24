@@ -12,7 +12,7 @@ import { uiSection } from '../section';
 export function uiSectionPresetFields(context) {
 
     var section = uiSection('preset-fields', context)
-        .label(t.html('inspector.fields'))
+        .label(() => t.append('inspector.fields'))
         .disclosureContent(renderDisclosureContent);
 
     var dispatch = d3_dispatch('change', 'revert');

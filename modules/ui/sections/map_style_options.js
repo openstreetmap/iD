@@ -5,7 +5,7 @@ import { uiSection } from '../section';
 export function uiSectionMapStyleOptions(context) {
 
     var section = uiSection('fill-area', context)
-        .label(t.html('map_data.style_options'))
+        .label(() => t.append('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
