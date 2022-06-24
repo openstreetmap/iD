@@ -329,7 +329,8 @@ export function uiPresetList(context) {
                 .attr('class', 'namepart')
                 .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
-                .html(function() { return preset.nameLabel() + '&hellip;'; });
+                .call(preset.nameLabel())
+                .append('span').text('…');
 
             box = selection.append('div')
                 .attr('class', 'subgrid')
@@ -402,7 +403,7 @@ export function uiPresetList(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')
-                .html(function(d) { return d; });
+                .each(function(d) { d(d3_select(this)); });
 
             wrap.call(item.reference.button);
             selection.call(item.reference.body);

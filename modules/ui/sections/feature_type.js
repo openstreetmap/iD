@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
@@ -108,7 +109,7 @@ export function uiSectionFeatureType(context) {
             .enter()
             .append('div')
             .attr('class', 'namepart')
-            .html(function(d) { return d; });
+            .each(function(d) { return d(d3_select(this)); });
     }
 
     section.entityIDs = function(val) {
