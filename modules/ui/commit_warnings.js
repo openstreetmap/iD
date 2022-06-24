@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiTooltip } from './tooltip';
@@ -89,8 +91,9 @@ export function uiCommitWarnings(context) {
                 .merge(items);
 
             items.selectAll('.issue-message')
-                .html(function(d) {
-                    return d.message(context);
+                .text('')
+                .each(function(d) {
+                    return d.message(context)(d3_select(this));
                 });
         }
     }

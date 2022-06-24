@@ -111,7 +111,7 @@ export function validationOutdatedTags() {
         let fixes = [
           new validationIssueFix({
             autoArgs: autoArgs,
-            title: t.html('issues.fix.upgrade_tags.title'),
+            title: t.append('issues.fix.upgrade_tags.title'),
             onClick: (context) => {
               context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
             }
@@ -122,7 +122,7 @@ export function validationOutdatedTags() {
         if (item) {
           fixes.push(
             new validationIssueFix({
-              title: t.html('issues.fix.tag_as_not.title', { name: item.displayName }),
+              title: t.append('issues.fix.tag_as_not.title', { name: item.displayName }),
               onClick: (context) => {
                 context.perform(addNotTag, t('issues.fix.tag_as_not.annotation'));
               }
@@ -184,7 +184,7 @@ export function validationOutdatedTags() {
       if (subtype === 'noncanonical_brand' && isOnlyAddingTags) {
         messageID += '_incomplete';
       }
-      return t.html(messageID, {
+      return t.append(messageID, {
         feature: utilDisplayLabel(currEntity, context.graph(), true /* verbose */)
       });
     }
@@ -247,7 +247,7 @@ export function validationOutdatedTags() {
         return [
           new validationIssueFix({
             autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
-            title: t.html('issues.fix.move_tags.title'),
+            title: t.append('issues.fix.move_tags.title'),
             onClick: (context) => {
               context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
             }
@@ -272,7 +272,7 @@ export function validationOutdatedTags() {
       let currMultipolygon = context.hasEntity(multipolygon.id);
       if (!currMultipolygon) return '';
 
-      return t.html('issues.old_multipolygon.message',
+      return t.append('issues.old_multipolygon.message',
           { multipolygon: utilDisplayLabel(currMultipolygon, context.graph(), true /* verbose */) }
       );
     }

@@ -205,7 +205,6 @@ export function uiConflicts(context) {
             .data(['previous', 'next'])
             .enter()
             .append('button')
-            .html(function(d) { return t.html('save.conflict.' + d); })
             .attr('class', 'conflict-nav-button action col6')
             .attr('disabled', function(d, i) {
                 return (i === 0 && index === 0) ||
@@ -223,7 +222,8 @@ export function uiConflicts(context) {
 
                 container
                     .call(showConflict, index + sign);
-            });
+            })
+            .call(function(d) { t.append('save.conflict.' + d)(d3_select(this)); });
 
     }
 

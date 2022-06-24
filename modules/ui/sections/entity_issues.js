@@ -180,8 +180,9 @@ export function uiSectionEntityIssues(context) {
             .classed('active', function(d) { return d.id === _activeIssueID; });
 
         containers.selectAll('.issue-message')
-            .html(function(d) {
-                return d.message(context);
+            .text('')
+            .each(function(d) {
+                return d.message(context)(d3_select(this));
             });
 
         // fixes
@@ -242,7 +243,7 @@ export function uiSectionEntityIssues(context) {
         buttons
             .append('span')
             .attr('class', 'fix-message')
-            .html(function(d) { return d.title; });
+            .each(function(d) { return d.title(d3_select(this)); });
 
         fixesEnter.merge(fixes)
             .selectAll('button')

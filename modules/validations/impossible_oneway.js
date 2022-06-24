@@ -162,7 +162,7 @@ export function validationImpossibleOneway() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t.html('issues.impossible_oneway.' + messageID + '.message', {
+                    return entity ? t.append('issues.impossible_oneway.' + messageID + '.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
@@ -175,7 +175,7 @@ export function validationImpossibleOneway() {
                     if (attachedOneways.length) {
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-reverse',
-                            title: t.html('issues.fix.reverse_feature.title'),
+                            title: t.append('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
                                 var id = this.issue.entityIds[0];
@@ -189,7 +189,7 @@ export function validationImpossibleOneway() {
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                            title: t.html('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
+                            title: t.append('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
                                 var entityID = this.issue.entityIds[0];
                                 var vertexID = this.issue.entityIds[1];
