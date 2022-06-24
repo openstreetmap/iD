@@ -96,11 +96,11 @@ export function uiSectionFeatureType(context) {
         var names = _presets.length === 1 ? [
             _presets[0].nameLabel(),
             _presets[0].subtitleLabel()
-        ].filter(Boolean) : [t('inspector.multiple_types')];
+        ].filter(Boolean) : [ t.append('inspector.multiple_types') ];
 
         var label = selection.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
-            .data(names, function(d) { return d; });
+            .data(names, d => d.stringId);
 
         nameparts.exit()
             .remove();
@@ -109,7 +109,8 @@ export function uiSectionFeatureType(context) {
             .enter()
             .append('div')
             .attr('class', 'namepart')
-            .each(function(d) { return d(d3_select(this)); });
+            .text('')
+            .each(function(d) { d(d3_select(this)); });
     }
 
     section.entityIDs = function(val) {

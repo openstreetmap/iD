@@ -250,7 +250,9 @@ export function rendererTileLayer(context) {
                         if (result && result.vintage && result.vintage.range) {
                           span.text(result.vintage.range);
                         } else {
-                          span.html(t.html('info_panels.background.vintage') + ': ' + t.html('info_panels.background.unknown'));
+                          span.call(t.append('info_panels.background.vintage'));
+                          span.append('span').text(': ');
+                          span.call(t.append('info_panels.background.unknown'));
                         }
                     });
                 });

@@ -399,10 +399,11 @@ export function uiPresetList(context) {
             ].filter(Boolean);
 
             label.selectAll('.namepart')
-                .data(nameparts)
+                .data(nameparts, d => d.stringId)
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')
+                .text('')
                 .each(function(d) { d(d3_select(this)); });
 
             wrap.call(item.reference.button);

@@ -34,7 +34,7 @@ export function uiCommitWarnings(context) {
 
             containerEnter
                 .append('h3')
-                .html(severity === 'warning' ? t.html('commit.warnings') : t.html('commit.errors'));
+                .call(severity === 'warning' ? t.append('commit.warnings') : t.append('commit.errors'));
 
             containerEnter
                 .append('ul')
