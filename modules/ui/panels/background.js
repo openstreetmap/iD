@@ -159,7 +159,7 @@ export function uiPanelBackground(context) {
     };
 
     panel.id = 'background';
-    panel.label = t.html('info_panels.background.title');
+    panel.label = t.append('info_panels.background.title');
     panel.key = t('info_panels.background.key');
 
 
