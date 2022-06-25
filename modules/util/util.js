@@ -168,6 +168,10 @@ export function utilDisplayName(entity) {
     var name = entity.tags[localizedNameKey] || entity.tags.name || entity.tags["building:flats"] || entity.tags.flats || entity.tags.houses || '';
     var network = entity.tags.cycle_network || entity.tags.network;
     var maxSpeed = entity.tags.maxspeed;
+    var lanes = entity.tags.lanes;
+    var lanesForward = entity.tags["lanes:forward"];
+    var lanesBackward = entity.tags["lanes:backward"];
+    var lanesBothWays = entity.tags["lanes:both_ways"];
 
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
@@ -175,12 +179,26 @@ export function utilDisplayName(entity) {
             name = network + ' ' + name;
         }
     }
-
+    var lanesStr = '';
+    if (lanes) {
+        lanesStr += 'l:' + lanes;
+        if (lanesForward) {
+            lanesStr += '>' + lanesForward;
+        }
+        if (lanesBackward) {
+            lanesStr += '<' + lanesForward;
+        }
+        if (lanesBothWays) {
+            lanesStr += '<>' + lanesBothWays;
+        }
+        lanesStr += ' ';
+    }
+    var maxSpeedStr = '';
     if (maxSpeed) {
-        name = 'ms:' + maxSpeed + '    ' + name;
+        maxSpeedStr += ' ms:' + maxSpeed + ' ';
     }
 
-    return name;
+    return maxSpeedStr + lanesStr + name;
 }
 
 

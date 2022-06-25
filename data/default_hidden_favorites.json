@@ -39,6 +39,7 @@
   {"pID": "highway/footway/customers_access_aisle", "hidden" : true},
   {"pID": "highway/footway/private_access_aisle", "hidden" : true},
   {"pID": "highway/footway/access_aisle", "hidden" : true},
+  {"pID": "highway/footway/bicycle_dismount", "hidden" : true},
   {"pID": "highway/cycleway/bicycle_foot", "hidden" : true},
   {"pID": "highway/footway/private", "hidden" : true},
   {"pID": "highway/footway/customers", "hidden" : true},
