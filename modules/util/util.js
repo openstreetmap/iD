@@ -181,7 +181,7 @@ export function utilDisplayName(entity) {
     }
     var lanesStr = '';
     if (lanes) {
-        lanesStr += 'l:' + lanes;
+        lanesStr += 'l' + lanes;
         if (lanesForward) {
             lanesStr += '>' + lanesForward;
         }
@@ -195,7 +195,7 @@ export function utilDisplayName(entity) {
     }
     var maxSpeedStr = '';
     if (maxSpeed) {
-        maxSpeedStr += ' ms:' + maxSpeed + ' ';
+        maxSpeedStr += 's' + maxSpeed + ' ';
     }
 
     return maxSpeedStr + lanesStr + name;
