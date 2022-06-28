@@ -407,16 +407,17 @@ export function svgTagClasses() {
                         classes.push('tag-sidewalk-shared-right');
                     } else if (sidewalkLeft === 'shared' && sidewalkRight === 'no') {
                         classes.push('tag-sidewalk-shared-left');
-                } else if (
-                    (sidewalk === 'no' && sidewalkLeft === null && sidewalkRight === null) ||
-                    (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'no') ||
-                    (sidewalk === 'no' && sidewalkLeft === 'no' && sidewalkRight === null)
-                ) {
-                    classes.push('tag-sidewalk-no');
-                } else if (sidewalk === null && sidewalkLeft === null && sidewalkRight === null) {
-                    classes.push('tag-sidewalk-undefined');
-                } else {
-                    classes.push('tag-sidewalk-invalid');
+                    } else if (
+                        (sidewalk === 'no' && sidewalkLeft === null && sidewalkRight === null) ||
+                        (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'no') ||
+                        (sidewalk === 'no' && sidewalkLeft === 'no' && sidewalkRight === null)
+                    ) {
+                        classes.push('tag-sidewalk-no');
+                    } else if (sidewalk === null && sidewalkLeft === null && sidewalkRight === null) {
+                        classes.push('tag-sidewalk-undefined');
+                    } else {
+                        classes.push('tag-sidewalk-invalid');
+                    }
                 }
             }
 
@@ -475,22 +476,22 @@ export function svgTagClasses() {
 
             }
 
-        }
 
-        // If this is a wikidata-tagged item, add a class for that..
-        if (t.wikidata || t['brand:wikidata']) {
-            classes.push('tag-wikidata');
-        }
+            // If this is a wikidata-tagged item, add a class for that..
+            if (t.wikidata || t['brand:wikidata']) {
+                classes.push('tag-wikidata');
+            }
 
-        return classes.join(' ').trim();
-    };
+            return classes.join(' ').trim();
+        };
 
 
-    tagClasses.tags = function (val) {
-        if (!arguments.length) return _tags;
-        _tags = val;
+        tagClasses.tags = function (val) {
+            if (!arguments.length) return _tags;
+            _tags = val;
+            return tagClasses;
+        };
+
         return tagClasses;
-    };
-
-    return tagClasses;
+    }
 }
