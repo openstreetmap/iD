@@ -382,27 +382,27 @@ export function svgTagClasses() {
                     (sidewalk === 'separate' && sidewalkLeft === 'separate' && sidewalkRight === 'separate') ||
                     (sidewalk === 'separate' && sidewalkLeft === 'no' && sidewalkRight === 'separate') ||
                     (sidewalk === 'separate' && sidewalkLeft === 'separate' && sidewalkRight === 'no') ||
-                    (sidewalk === undefined && sidewalkLeft === 'separate' && sidewalkRight === 'separate') ||
-                    (sidewalk === undefined && sidewalkLeft === 'separate' && sidewalkRight === 'no') ||
-                    (sidewalk === undefined && sidewalkLeft === 'no' && sidewalkRight === 'separate')
+                    (sidewalk === null && sidewalkLeft === 'separate' && sidewalkRight === 'separate') ||
+                    (sidewalk === null && sidewalkLeft === 'separate' && sidewalkRight === 'no') ||
+                    (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'separate')
                 ) {
                     classes.push('tag-sidewalk-separate');
                 } else if (
                     (sidewalk === 'shared' && sidewalkLeft === 'shared' && sidewalkRight === 'shared') ||
                     (sidewalk === 'shared' && sidewalkLeft === 'no' && sidewalkRight === 'shared') ||
                     (sidewalk === 'shared' && sidewalkLeft === 'shared' && sidewalkRight === 'no') ||
-                    (sidewalk === undefined && sidewalkLeft === 'shared' && sidewalkRight === 'shared') ||
-                    (sidewalk === undefined && sidewalkLeft === 'shared' && sidewalkRight === 'no') ||
-                    (sidewalk === undefined && sidewalkLeft === 'no' && sidewalkRight === 'shared')
+                    (sidewalk === null && sidewalkLeft === 'shared' && sidewalkRight === 'shared') ||
+                    (sidewalk === null && sidewalkLeft === 'shared' && sidewalkRight === 'no') ||
+                    (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'shared')
                 ) {
                     classes.push('tag-sidewalk-shared');
                 } else if (
-                    (sidewalk === 'no' && sidewalkLeft === undefined && sidewalkRight === undefined) ||
-                    (sidewalk === undefined && sidewalkLeft === 'no' && sidewalkRight === 'no') ||
-                    (sidewalk === 'no' && sidewalkLeft === 'no' && sidewalkRight === undefined)
+                    (sidewalk === 'no' && sidewalkLeft === null && sidewalkRight === null) ||
+                    (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'no') ||
+                    (sidewalk === 'no' && sidewalkLeft === 'no' && sidewalkRight === null)
                 ) {
                     classes.push('tag-sidewalk-no');
-                } else if (sidewalk === undefined && sidewalkLeft === undefined && sidewalkRight === undefined) {
+                } else if (sidewalk === null && sidewalkLeft === null && sidewalkRight === null) {
                     classes.push('tag-sidewalk-undefined');
                 } else {
                     classes.push('tag-sidewalk-invalid');
