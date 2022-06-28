@@ -197,6 +197,9 @@ export function svgTagClasses() {
 
             var sidewalk      = null;
             var sidewalkLeft  = null;
+            var hasSidewalkSeparateSharedOrNo = false;
+            var hasLeftSidewalkTag = false;
+            var hasRightSidewalkTag = false;
             var sidewalkRight = null;
             var cycleway      = null;
             var crossing      = null;
@@ -291,15 +294,17 @@ export function svgTagClasses() {
                 }
                 if (!ignoreSidewalk && k === 'sidewalk' && ['shared', 'separate','no'].includes(v)) {
                     sidewalk = v;
-                    classes.push('tag-sidewalk-' + sidewalk);
+                    hasSidewalkSeparateSharedOrNo = true;
                 }
                 if (!ignoreSidewalk && k === 'sidewalk:left' && (sidewalk === 'separate' || sidewalk === 'shared')) {
                     sidewalkLeft = v;
                     classes.push('tag-sidewalk_left-' + sidewalkLeft);
+                    hasLeftSidewalkTag = true;
                 }
                 if (!ignoreSidewalk && k === 'sidewalk:right' && (sidewalk === 'separate' || sidewalk === 'shared')) {
                     sidewalkRight = v;
                     classes.push('tag-sidewalk_right-' + sidewalkRight);
+                    hasRightSidewalkTag = true;
                 }
                 /*if ((k === 'footway' || k === 'cycleway') && v === 'crossing') {
                     isCrossing = true;
@@ -374,6 +379,14 @@ export function svgTagClasses() {
                     }
                 }
                 
+            }
+
+            // make sure sidewalk tags are present and complete + force separate on general tag if both right and left are separate:
+            if (hasSidewalkSeparateSharedOrNo || (hasLeftSidewalkTag && hasRightSidewalkTag)) {
+                if (!hasSidewalkSeparateSharedOrNo && sidewalkLeft === 'separate' && sidewalkRight === 'separate') {
+                    sidewalk = 'separate';
+                }
+                classes.push('tag-sidewalk-' + sidewalk);
             }
 
             /* validate lanes */
