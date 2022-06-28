@@ -387,6 +387,13 @@ export function svgTagClasses() {
                     (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'separate')
                 ) {
                     classes.push('tag-sidewalk-separate');
+                    if (sidewalkLeft === 'no' && sidewalkRight === 'separate') {
+                        classes.push('tag-sidewalk-separate-right');
+                    } else if (sidewalkLeft === 'separate' && sidewalkRight === 'no') {
+                        classes.push('tag-sidewalk-separate-left');
+                    } else if (sidewalkLeft === 'separate' && sidewalkRight === 'separate') {
+                        classes.push('tag-sidewalk-separate-both');
+                    }
                 } else if (
                     (sidewalk === 'shared' && sidewalkLeft === 'shared' && sidewalkRight === 'shared') ||
                     (sidewalk === 'shared' && sidewalkLeft === 'no' && sidewalkRight === 'shared') ||
@@ -396,6 +403,10 @@ export function svgTagClasses() {
                     (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'shared')
                 ) {
                     classes.push('tag-sidewalk-shared');
+                    if (sidewalkRight === 'shared' && sidewalkLeft === 'no') {
+                        classes.push('tag-sidewalk-shared-right');
+                    } else if (sidewalkLeft === 'shared' && sidewalkRight === 'no') {
+                        classes.push('tag-sidewalk-shared-left');
                 } else if (
                     (sidewalk === 'no' && sidewalkLeft === null && sidewalkRight === null) ||
                     (sidewalk === null && sidewalkLeft === 'no' && sidewalkRight === 'no') ||
@@ -462,23 +473,6 @@ export function svgTagClasses() {
                     classes.push('tag-foot-not-use_sidepath');
                 }
 
-            }
-
-            /* separate sidewalks check */
-            if (!ignoreSidewalk && (!sidewalk || (sidewalk === 'separate' && (sidewalkRight !== 'separate' || sidewalkLeft !== 'separate')))) {
-                if (!sidewalk) {
-                    classes.push('tag-sidewalk-undefined');
-                } else if (sidewalk === 'separate' && sidewalkRight === 'separate' && (sidewalkLeft === 'no' || sidewalkLeft === 'none')) {
-                    classes.push('tag-sidewalk-separate-right');
-                } else if (sidewalk === 'separate' && sidewalkLeft === 'separate' && (sidewalkRight === 'no' || sidewalkRight === 'none')) {
-                    classes.push('tag-sidewalk-separate-left');
-                } else if (sidewalk === 'separate' && sidewalkRight === 'shared' && (sidewalkLeft === 'no' || sidewalkLeft === 'none')) {
-                    classes.push('tag-sidewalk-shared-right');
-                } else if (sidewalk === 'separate' && sidewalkLeft === 'shared' && (sidewalkRight === 'no' || sidewalkRight === 'none')) {
-                    classes.push('tag-sidewalk-shared-left');
-                } else if (sidewalk === 'separate' && sidewalkLeft === 'separate' && sidewalkRight === 'separate') {
-                    classes.push('tag-sidewalk-separate-both');
-                }
             }
 
         }
