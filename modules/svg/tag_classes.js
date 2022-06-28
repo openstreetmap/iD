@@ -476,22 +476,22 @@ export function svgTagClasses() {
 
             }
 
+        }
 
-            // If this is a wikidata-tagged item, add a class for that..
-            if (t.wikidata || t['brand:wikidata']) {
-                classes.push('tag-wikidata');
-            }
+        // If this is a wikidata-tagged item, add a class for that..
+        if (t.wikidata || t['brand:wikidata']) {
+            classes.push('tag-wikidata');
+        }
 
-            return classes.join(' ').trim();
-        };
+        return classes.join(' ').trim();
+    };
 
 
-        tagClasses.tags = function (val) {
-            if (!arguments.length) return _tags;
-            _tags = val;
-            return tagClasses;
-        };
-
+    tagClasses.tags = function (val) {
+        if (!arguments.length) return _tags;
+        _tags = val;
         return tagClasses;
-    }
+    };
+
+    return tagClasses;
 }
