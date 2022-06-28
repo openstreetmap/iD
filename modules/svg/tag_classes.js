@@ -383,8 +383,12 @@ export function svgTagClasses() {
 
             // make sure sidewalk tags are present and complete + force separate on general tag if both right and left are separate:
             if (hasSidewalkSeparateSharedOrNo || (hasLeftSidewalkTag && hasRightSidewalkTag)) {
-                if (!hasSidewalkSeparateSharedOrNo && sidewalkLeft === 'separate' && sidewalkRight === 'separate') {
+                if (!hasSidewalkSeparateSharedOrNo && ((sidewalkLeft === 'separate' && sidewalkRight === 'separate') || (sidewalkLeft === 'no' && sidewalkRight === 'separate') || (sidewalkLeft === 'separate' && sidewalkRight === 'no'))) {
                     sidewalk = 'separate';
+                } else if (!hasSidewalkSeparateSharedOrNo && ((sidewalkLeft === 'shared' && sidewalkRight === 'shared') || (sidewalkLeft === 'no' && sidewalkRight === 'shared') || (sidewalkLeft === 'shared' && sidewalkRight === 'no'))) {
+                    sidewalk = 'shared';
+                } else if (!hasSidewalkSeparateSharedOrNo && ((sidewalkLeft === 'no' || sidewalkRight === 'no') || (sidewalkLeft === 'none' || sidewalkRight === 'none'))) {
+                    sidewalk = 'no';
                 }
                 classes.push('tag-sidewalk-' + sidewalk);
             }
