@@ -304,7 +304,7 @@ export function svgData(projection, context, dispatch) {
     function getExtension(fileName) {
         if (!fileName) return;
 
-        var re = /\.(gpx|kml|(geo)?json)$/i;
+        var re = /\.(gpx|kml|(geo)?json|png)$/i;
         var match = fileName.toLowerCase().match(re);
         return match && match.length && match[0];
     }
@@ -352,6 +352,11 @@ export function svgData(projection, context, dispatch) {
                 } else if (gj.type === 'Feature') {
                     stringifyGeojsonProperties(gj);
                 }
+                break;
+            case '.png':
+                // xx = JSON.parse(data);
+                console.log('Hello world!');
+                console.log(data);
                 break;
         }
 

@@ -12,11 +12,15 @@ import { modeBrowse } from '../../modes/browse';
 import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
+import { uiSettingsLocalPhotosData } from '../settings/local_photos_data';
 
 export function uiSectionDataLayers(context) {
 
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
+
+    var settingsLocalPhotosData = uiSettingsLocalPhotosData(context)
+        .on('change',  localPhotosChanged);
 
     var layers = context.layers();
 
@@ -362,7 +366,7 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'list-item-local-photos');
 
         var localPhotosLabelEnter = localPhotosEnter
-            .append('label')
+            .append('label');
             // TODO: Add tooltip
 
         localPhotosLabelEnter
@@ -383,7 +387,7 @@ export function uiSectionDataLayers(context) {
             )
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
-                editCustom();
+                 editLocalPhotos();
             })
             .call(svgIcon('#iD-icon-more'));
 
@@ -424,6 +428,11 @@ export function uiSectionDataLayers(context) {
             .call(settingsCustomData);
     }
 
+    function editLocalPhotos() {
+        context.container()
+            .call(settingsLocalPhotosData);
+    }
+
     function customChanged(d) {
         var dataLayer = layers.layer('data');
 
@@ -434,6 +443,13 @@ export function uiSectionDataLayers(context) {
         }
     }
 
+    function localPhotosChanged(d) {
+        var dataLayer = layers.layer('data');
+
+        if (d && d.fileList) {
+            dataLayer.fileList(d.fileList);
+        }
+    }
 
     function drawPanelItems(selection) {
 

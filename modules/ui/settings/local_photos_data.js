@@ -6,7 +6,7 @@ import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiSettingsCustomData(context) {
+export function uiSettingsLocalPhotosData (context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
@@ -19,7 +19,7 @@ export function uiSettingsCustomData(context) {
         };
         var _currSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
-            // url: prefs('settings-custom-data-url')
+            url: prefs('settings-custom-data-url')
         };
 
         // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
@@ -35,43 +35,46 @@ export function uiSettingsCustomData(context) {
 
         var textSection = modal.select('.modal-section.message-text');
 
+        //TODO: Add translation
         textSection
             .append('pre')
-            .attr('class', 'instructions-file')
-            .call(t.append('settings.custom_data.file.instructions'));
+            .text('Choose local photos. Supported types are: .jpg, .jpeg, .png');
+        //     .attr('class', 'instructions-file')
+        //     .call(t.append('settings.custom_data.file.instructions'));
 
         textSection
             .append('input')
             .attr('class', 'field-file')
             .attr('type', 'file')
-            .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
+            // .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
             .property('files', _currSettings.fileList)
             .on('change', function(d3_event) {
                 var files = d3_event.target.files;
+                console.log(files);
                 if (files && files.length) {
-                    _currSettings.url = '';
-                    textSection.select('.field-url').property('value', '');
+                    // _currSettings.url = '';
+                    // textSection.select('.field-url').property('value', '');
                     _currSettings.fileList = files;
                 } else {
                     _currSettings.fileList = null;
                 }
             });
 
-        textSection
-            .append('h4')
-            .call(t.append('settings.custom_data.or'));
+        // textSection
+        //     .append('h4')
+        //     .call(t.append('settings.custom_data.or'));
 
-        textSection
-            .append('pre')
-            .attr('class', 'instructions-url')
-            .call(t.append('settings.custom_data.url.instructions'));
+        // textSection
+        //     .append('pre')
+        //     .attr('class', 'instructions-url')
+        //     .call(t.append('settings.custom_data.url.instructions'));
 
-        textSection
-            .append('textarea')
-            .attr('class', 'field-url')
-            .attr('placeholder', t('settings.custom_data.url.placeholder'))
-            .call(utilNoAuto)
-            .property('value', _currSettings.url);
+        // textSection
+        //     .append('textarea')
+        //     .attr('class', 'field-url')
+        //     .attr('placeholder', t('settings.custom_data.url.placeholder'))
+        //     .call(utilNoAuto)
+        //     .property('value', _currSettings.url);
 
 
         // insert a cancel button
@@ -106,13 +109,13 @@ export function uiSettingsCustomData(context) {
 
         // accept the current url
         function clickSave() {
-            _currSettings.url = textSection.select('.field-url').property('value').trim();
+            // _currSettings.url = textSection.select('.field-url').property('value').trim();
 
             // one or the other but not both
-            if (_currSettings.url) { _currSettings.fileList = null; }
+            // if (_currSettings.url) { _currSettings.fileList = null; }
             if (_currSettings.fileList) { _currSettings.url = ''; }
 
-            prefs('settings-custom-data-url', _currSettings.url);
+            // prefs('settings-custom-data-url', _currSettings.url);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);
