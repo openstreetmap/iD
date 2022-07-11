@@ -463,6 +463,13 @@ path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridlew
 path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
     stroke-width: 4.5;
 }
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-path,
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-footway,
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-cycleway,
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-bridleway,
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-steps {
+    stroke-width: 10;
+}
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
