@@ -96,6 +96,46 @@ en:
       too_large:
         one: This can't be copied because not enough of it is currently visible.
         other: These can't be copied because not enough of them are currently visible.
+    clone_address:
+      title: Clone address tags
+      description: Clone address tags from the first selected entity.
+      key: "&"
+      annotation: Clone the address tags.
+    clone_name:
+      title: Clone name and operator tags
+      description: Clone name and operator tags from the first selected entity.
+      key: "%"
+      annotation: Clone the name and operator tags.
+    clone_bus_lanes:
+      title: Clone bus lanes tags
+      description: Clone bus lanes tags from the first selected entity.
+      key: "@"
+      annotation: Clone the bus lanes tags.
+    clone_cycleway:
+      title: Clone cycleway tags
+      description: Clone cycleway tags from the first selected entity.
+      key: "("
+      annotation: Clone the cycleway tags.
+    clone_turn_lanes:
+      title: Clone turn lanes tags
+      description: Clone turn lanes tags from the first selected entity.
+      key: "$"
+      annotation: Clone the turn lanes tags.
+    clone_lanes:
+      title: Clone lanes tags
+      description: Clone lanes tags from the first selected entity.
+      key: "#"
+      annotation: Clone the lanes tags.
+    clone_transition:
+      title: Clone road transition tags
+      description: Clone road transition tags from the first selected entity.
+      key: "!"
+      annotation: Clone the road transition tags.
+    clone_sidewalk:
+      title: Clone sidewalk tags
+      description: Clone sidewalk tags from the first selected entity.
+      key: "="
+      annotation: Clone the sidewalk tags.
     paste:
       title: Paste
       description:
