@@ -1,8 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
@@ -23,7 +21,7 @@ export function uiSectionBackgroundList(context) {
         .on('change', customChanged);
 
     var section = uiSection('background-list', context)
-        .label(t.html('background.backgrounds'))
+        .label(() => t.append('background.backgrounds'))
         .disclosureContent(renderDisclosureContent);
 
     function previousBackgroundID() {
@@ -55,7 +53,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'minimap-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('background.minimap.tooltip'))
+                .title(() => t.append('background.minimap.tooltip'))
                 .keys([t('background.minimap.key')])
                 .placement('top')
             );
@@ -78,7 +76,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'background-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('background.panel.tooltip'))
+                .title(() => t.append('background.panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.background.key'))])
                 .placement('top')
             );
@@ -100,7 +98,7 @@ export function uiSectionBackgroundList(context) {
             .attr('class', 'location-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('background.location_panel.tooltip'))
+                .title(() => t.append('background.location_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.location.key'))])
                 .placement('top')
             );
@@ -152,13 +150,13 @@ export function uiSectionBackgroundList(context) {
             if (d.id === previousBackgroundID()) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title('<div>' + t.html('background.switch') + '</div>')
+                    .title(() => t.append('background.switch'))
                     .keys([uiCmd('⌘' + t('background.key'))])
                 );
             } else if (description || isOverflowing) {
                 item.call(uiTooltip()
                     .placement(placement)
-                    .title(description || d.label())
+                    .title(() => description || d.label())
                 );
             }
         });
@@ -202,13 +200,13 @@ export function uiSectionBackgroundList(context) {
 
         label
             .append('span')
-            .html(function(d) { return d.label(); });
+            .each(function(d) { d.label()(d3_select(this)); });
 
         enter.filter(function(d) { return d.id === 'custom'; })
             .append('button')
             .attr('class', 'layer-browse')
             .call(uiTooltip()
-                .title(t.html('settings.custom_background.tooltip'))
+                .title(() => t.append('settings.custom_background.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function(d3_event) {
@@ -221,11 +219,11 @@ export function uiSectionBackgroundList(context) {
             .append('div')
             .attr('class', 'best')
             .call(uiTooltip()
-                .title(t.html('background.best_imagery'))
+                .title(() => t.append('background.best_imagery'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .append('span')
-            .html('&#9733;');
+            .text('★');
 
         layerList
             .call(updateLayerSelections);

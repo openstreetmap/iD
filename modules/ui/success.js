@@ -261,7 +261,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .label(t.html('success.more'))
+          .label(() => t.append('success.more'))
           .content(showMore)
         );
     }

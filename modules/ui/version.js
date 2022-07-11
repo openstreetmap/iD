@@ -43,7 +43,7 @@ export function uiVersion(context) {
                 .attr('href', 'https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md#whats-new')
                 .call(svgIcon('#maki-gift'))
                 .call(uiTooltip()
-                    .title(t.html('version.whats_new', { version: currVersion }))
+                    .title(() => t.append('version.whats_new', { version: currVersion }))
                     .placement('top')
                     .scrollContainer(context.container().select('.main-footer-wrap'))
                 );

@@ -25,7 +25,7 @@ export function validationDisconnectedWay() {
             message: function(context) {
                 var entity = this.entityIds.length && context.hasEntity(this.entityIds[0]);
                 var label = entity && utilDisplayLabel(entity, context.graph());
-                return t.html('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
+                return t.append('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
             },
             reference: showReference,
             entityIds: Array.from(routingIslandWays).map(function(way) { return way.id; }),
@@ -53,13 +53,13 @@ export function validationDisconnectedWay() {
                 }
                 if (!fixes.length) {
                     fixes.push(new validationIssueFix({
-                        title: t.html('issues.fix.connect_feature.title')
+                        title: t.append('issues.fix.connect_feature.title')
                     }));
                 }
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',
-                    title: t.html('issues.fix.delete_feature.title'),
+                    title: t.append('issues.fix.delete_feature.title'),
                     entityIds: [singleEntity.id],
                     onClick: function(context) {
                         var id = this.issue.entityIds[0];
@@ -71,7 +71,7 @@ export function validationDisconnectedWay() {
                 }));
             } else {
                 fixes.push(new validationIssueFix({
-                    title: t.html('issues.fix.connect_features.title')
+                    title: t.append('issues.fix.connect_features.title')
                 }));
             }
 
@@ -184,7 +184,7 @@ export function validationDisconnectedWay() {
 
             return new validationIssueFix({
                 icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                title: t.html('issues.fix.continue_from_' + whichEnd + '.title'),
+                title: t.append('issues.fix.continue_from_' + whichEnd + '.title'),
                 entityIds: [vertexID],
                 onClick: function(context) {
                     var wayId = this.issue.entityIds[0];

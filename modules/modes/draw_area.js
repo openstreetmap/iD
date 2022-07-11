@@ -12,7 +12,7 @@ export function modeDrawArea(context, wayID, startGraph, button) {
         .on('rejectedSelfIntersection.modeDrawArea', function() {
             context.ui().flash
                 .iconName('#iD-icon-no')
-                .label(t.html('self_intersection.error.areas'))();
+                .label(t.append('self_intersection.error.areas'))();
         });
 
     mode.wayID = wayID;

@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
@@ -20,7 +21,7 @@ export function uiSectionFeatureType(context) {
     var _tagReference;
 
     var section = uiSection('feature-type', context)
-        .label(t.html('inspector.feature_type'))
+        .label(() => t.append('inspector.feature_type'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -39,7 +40,7 @@ export function uiSectionFeatureType(context) {
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
             .call(uiTooltip()
-                .title(t.html('inspector.back_tooltip'))
+                .title(() => t.append('inspector.back_tooltip'))
                 .placement('bottom')
             );
 
@@ -95,11 +96,11 @@ export function uiSectionFeatureType(context) {
         var names = _presets.length === 1 ? [
             _presets[0].nameLabel(),
             _presets[0].subtitleLabel()
-        ].filter(Boolean) : [t('inspector.multiple_types')];
+        ].filter(Boolean) : [ t.append('inspector.multiple_types') ];
 
         var label = selection.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
-            .data(names, function(d) { return d; });
+            .data(names, d => d.stringId);
 
         nameparts.exit()
             .remove();
@@ -108,7 +109,8 @@ export function uiSectionFeatureType(context) {
             .enter()
             .append('div')
             .attr('class', 'namepart')
-            .html(function(d) { return d; });
+            .text('')
+            .each(function(d) { d(d3_select(this)); });
     }
 
     section.entityIDs = function(val) {

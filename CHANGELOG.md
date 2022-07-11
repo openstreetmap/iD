@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Better fallback icons for untagged points, vertices, lines and areas ([#9157])
 * Add fallback values for access field for barrier presets
 #### :hammer: Development
+* Reduce uses of unsafe html injecting code
 
 
 [#8419]: https://github.com/openstreetmap/iD/issues/8419

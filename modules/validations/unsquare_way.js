@@ -76,7 +76,7 @@ export function validationUnsquareWay(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.html('issues.unsquare_way.message', {
+                return entity ? t.append('issues.unsquare_way.message', {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
             },
@@ -87,7 +87,7 @@ export function validationUnsquareWay(context) {
                 return [
                     new validationIssueFix({
                         icon: 'iD-operation-orthogonalize',
-                        title: t.html('issues.fix.square_feature.title'),
+                        title: t.append('issues.fix.square_feature.title'),
                         autoArgs: autoArgs,
                         onClick: function(context, completionHandler) {
                             var entityId = this.issue.entityIds[0];
@@ -102,7 +102,7 @@ export function validationUnsquareWay(context) {
                     }),
                     /*
                     new validationIssueFix({
-                        title: t.html('issues.fix.tag_as_unsquare.title'),
+                        title: t.append('issues.fix.tag_as_unsquare.title'),
                         onClick: function(context) {
                             var entityId = this.issue.entityIds[0];
                             var entity = context.entity(entityId);

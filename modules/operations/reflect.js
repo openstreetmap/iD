@@ -77,8 +77,8 @@ export function operationReflect(context, selectedIDs, axis) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.reflect.' + disable + '.' + multi) :
-            t('operations.reflect.description.' + axis + '.' + multi);
+            t.append('operations.reflect.' + disable + '.' + multi) :
+            t.append('operations.reflect.description.' + axis + '.' + multi);
     };
 
 
@@ -89,7 +89,7 @@ export function operationReflect(context, selectedIDs, axis) {
 
     operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key.' + axis)];
-    operation.title = t('operations.reflect.title.' + axis);
+    operation.title = t.append('operations.reflect.title.' + axis);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

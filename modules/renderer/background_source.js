@@ -75,13 +75,13 @@ export function rendererBackgroundSource(data) {
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
     };
 
 
@@ -536,7 +536,7 @@ rendererBackgroundSource.None = function() {
 
 
     source.label = function() {
-        return t.html('background.none');
+        return t.append('background.none');
     };
 
 
@@ -563,7 +563,7 @@ rendererBackgroundSource.Custom = function(template) {
     };
 
     source.label = function() {
-        return t.html('background.custom');
+        return t.append('background.custom');
     };
 
 

@@ -58,8 +58,8 @@ export function operationMove(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.move.' + disable + '.' + multi) :
-            t('operations.move.description.' + multi);
+            t.append('operations.move.' + disable + '.' + multi) :
+            t.append('operations.move.description.' + multi);
     };
 
 
@@ -72,7 +72,7 @@ export function operationMove(context, selectedIDs) {
 
     operation.id = 'move';
     operation.keys = [t('operations.move.key')];
-    operation.title = t('operations.move.title');
+    operation.title = t.append('operations.move.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     operation.mouseOnly = true;
