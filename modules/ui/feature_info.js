@@ -26,7 +26,7 @@ export function uiFeatureInfo(context) {
                     return selection => {
                         hiddenList.forEach(hiddenFeature => {
                             selection.append('div').call(hiddenFeature);
-                        })
+                        });
                     };
                 });
 
