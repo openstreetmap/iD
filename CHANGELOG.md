@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix leaking of localized tag values into raw tags by multiCombo fields ([#9164], thanks [@1ec5])
 * Fix localizable labels in multiCombo fields ("chips") being rendered multiple times ([#9169])
 * Fix missing styling when rendering of proposed footway/cycleway/path bridges ([#9172], thanks [@k-yle])
+* Fix some boundary lines (and preset) not hidden by the map features filter ([#9171], thanks [@k-yle])
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
@@ -77,7 +78,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9157]: https://github.com/openstreetmap/iD/issues/9157
 [#9164]: https://github.com/openstreetmap/iD/issues/9164
 [#9169]: https://github.com/openstreetmap/iD/issues/9169
-[#9172]: https://github.com/openstreetmap/iD/issues/9172
+[#9171]: https://github.com/openstreetmap/iD/pull/9171
+[#9172]: https://github.com/openstreetmap/iD/pull/9172
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
