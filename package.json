@@ -73,7 +73,7 @@
     "@fortawesome/free-regular-svg-icons": "~6.1.0",
     "@fortawesome/free-solid-svg-icons": "~6.1.0",
     "@ideditor/temaki": "~5.1.0",
-    "@mapbox/maki": "^7.1.0",
+    "@mapbox/maki": "^8.0.0",
     "autoprefixer": "^10.0.1",
     "btoa": "^1.2.1",
     "chai": "^4.3.4",
