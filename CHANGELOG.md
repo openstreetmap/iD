@@ -64,7 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Support incrementing cardinal directions with the up/down buttons ([#9141], thanks [@k-yle])
 #### :hammer: Development
 * Reduce uses of unsafe html injecting code
-* Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`
+* Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`, `mocha` to `v10`
 
 
 [#8419]: https://github.com/openstreetmap/iD/issues/8419
