@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
 * Better fallback icons for untagged points, vertices, lines and areas ([#9157])
 * Add fallback values for access field for barrier presets
+* Support incrementing cardinal directions with the up/down buttons ([#9141], thanks [@k-yle])
 #### :hammer: Development
 * Reduce uses of unsafe html injecting code
 * Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`
@@ -75,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
 [#9139]: https://github.com/openstreetmap/iD/pull/9139
 [#9140]: https://github.com/openstreetmap/iD/pull/9140
+[#9141]: https://github.com/openstreetmap/iD/pull/9141
 [#9142]: https://github.com/openstreetmap/iD/pull/9142
 [#9157]: https://github.com/openstreetmap/iD/issues/9157
 [#9164]: https://github.com/openstreetmap/iD/issues/9164
