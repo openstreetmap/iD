@@ -454,43 +454,36 @@ export function rendererBackground(context) {
     }
 
     const hash = utilStringQs(window.location.hash);
-    const requested = hash.background || hash.layer;
+    const requestedBackground = hash.background || hash.layer;
+    const lastUsedBackground = prefs('background-last-used');
     let extent = parseMapParams(hash.map);
 
     return _loadPromise = ensureImageryIndex()
       .then(imageryIndex => {
-        const validBackgrounds = background.sources(extent);
+        const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
         const first = validBackgrounds.length && validBackgrounds[0];
-        const isRequestedValid = !!validBackgrounds.find(d => d.id && d.id === requested);
+        const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
 
         let best;
-        if (!isRequestedValid || (!requested && extent)) {
+        if (!requestedBackground && extent) {
           best = validBackgrounds.find(s => s.best());
         }
 
         // Decide which background layer to display
-        if (requested && requested.indexOf('custom:') === 0) {
-          const template = requested.replace(/^custom:/, '');
+        if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
+          const template = requestedBackground.replace(/^custom:/, '');
           const custom = background.findSource('custom');
           background.baseLayerSource(custom.template(template));
           prefs('background-custom-template', template);
         } else {
-          const defaultSource = (
+          background.baseLayerSource(
+            background.findSource(requestedBackground) ||
+            best ||
+            isLastUsedValid && background.findSource(lastUsedBackground) ||
             background.findSource('Bing') ||
             first ||
             background.findSource('none')
           );
-
-          if (!isRequestedValid) {
-            background.baseLayerSource(best || defaultSource);
-          } else {
-            background.baseLayerSource(
-              background.findSource(requested) ||
-              best ||
-              background.findSource(prefs('background-last-used')) ||
-              defaultSource
-            );
-          }
         }
 
         const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
