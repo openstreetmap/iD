@@ -63,7 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add fallback values for access field for barrier presets
 #### :hammer: Development
 * Reduce uses of unsafe html injecting code
-* Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`
+* Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`
 
 
 [#8419]: https://github.com/openstreetmap/iD/issues/8419
