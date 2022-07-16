@@ -5,15 +5,15 @@
         "network",
         "operator",
         "departures_board",
-        "shelter"
+        "shelter",
+        "bench",
+        "wheelchair"
     ],
     "moreFields": [
-        "bench",
         "bin",
         "gnis/feature_id",
         "level",
-        "lit",
-        "wheelchair"
+        "lit"
     ],
     "geometry": [
         "point"
