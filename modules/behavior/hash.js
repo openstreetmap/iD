@@ -198,7 +198,6 @@ export function behaviorHash(context) {
         if (q.map) {
             behavior.hadLocation = true;
         } else if (!q.id && prefs('map-location')) {
-            console.log('update map location from local storage');
             // center map at last visited map location
             const mapArgs = prefs('map-location').split('/').map(Number);
             context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
