@@ -456,10 +456,10 @@ export function rendererBackground(context) {
     const hash = utilStringQs(window.location.hash);
     const requestedBackground = hash.background || hash.layer;
     const lastUsedBackground = prefs('background-last-used');
-    let extent = parseMapParams(hash.map);
 
     return _loadPromise = ensureImageryIndex()
       .then(imageryIndex => {
+        const extent = context.map().extent();
         const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
         const first = validBackgrounds.length && validBackgrounds[0];
         const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
@@ -517,7 +517,11 @@ export function rendererBackground(context) {
           }
         }
       })
-      .catch(() => { /* ignore */ });
+      .catch(err => {
+        /* eslint-disable no-console */
+        console.error(err);
+        /* eslint-enable no-console */
+      });
   };
 
 
