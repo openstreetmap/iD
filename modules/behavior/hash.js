@@ -28,7 +28,7 @@ export function behaviorHash(context) {
         var newParams = {};
 
         delete oldParams.id;
-        var selected = context.selectedIDs().filter(function (id) {
+        var selected = context.selectedIDs().filter(function(id) {
             return context.hasEntity(id);
         });
         if (selected.length) {
@@ -53,7 +53,7 @@ export function behaviorHash(context) {
         var changeCount;
         var titleID;
 
-        var selected = context.selectedIDs().filter(function (id) {
+        var selected = context.selectedIDs().filter(function(id) {
             return context.hasEntity(id);
         });
         if (selected.length) {
@@ -110,16 +110,16 @@ export function behaviorHash(context) {
             // set the title we want displayed for the browser tab/window
             updateTitle(true /* includeChangeCount */);
 
-            //save last used map hash/location for future
-            const mapHash = latestHash.split('map=');
-            if (mapHash.length === 2) {
-                prefs('map-hash', mapHash[1]);
+            // save last used map location for future
+            const q = utilStringQs(latestHash);
+            if (q.map) {
+                prefs('map-location', q.map);
             }
         }
     }
 
     var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
-    var _throttledUpdateTitle = _throttle(function () {
+    var _throttledUpdateTitle = _throttle(function() {
         updateTitle(true /* includeChangeCount */);
     }, 500);
 
@@ -146,7 +146,7 @@ export function behaviorHash(context) {
             context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
 
             if (q.id && mode) {
-                var ids = q.id.split(',').filter(function (id) {
+                var ids = q.id.split(',').filter(function(id) {
                     return context.hasEntity(id);
                 });
                 if (ids.length &&
@@ -197,21 +197,15 @@ export function behaviorHash(context) {
             }
 
             if (q.map) {
-                behavior.hadHash = true;
-            } else if (prefs('map-hash')) {
-                //user has existing map location hash, set hash & map to location
-                const mapHash = prefs('map-hash');
-                let currentHash = computedHash();
-
-                currentHash = currentHash.substring(0, currentHash.indexOf('map=')) + 'map=' + mapHash;
-
-                window.history.replaceState(null, computedTitle(false /* includeChangeCount */), currentHash);
-                const mapArgs = mapHash.split('/').map(Number);
+                behavior.hadLocation = true;
+            } else if (!q.id && prefs('map-location')) {
+                // center map at last visited map location
+                const mapArgs = prefs('map-location').split('/').map(Number);
                 context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
 
-                _cachedHash = window.location.hash;
+                updateHashIfNeeded();
 
-                behavior.hadHash = true;
+                behavior.hadLocation = true;
             }
 
             hashchange();
@@ -220,7 +214,7 @@ export function behaviorHash(context) {
         }
     }
 
-    behavior.off = function () {
+    behavior.off = function() {
         _throttledUpdate.cancel();
         _throttledUpdateTitle.cancel();
 
