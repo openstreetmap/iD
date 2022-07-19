@@ -403,7 +403,7 @@ export function utilPrefixDOMProperty(property) {
 
     if (property in s) return property;
 
-    property = property.substr(0, 1).toUpperCase() + property.substr(1);
+    property = property.slice(0, 1).toUpperCase() + property.slice(1);
 
     while (++i < n) {
         if (prefixes[i] + property in s) {

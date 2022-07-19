@@ -102,6 +102,23 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    // returns function which renders the display value for a tag value
+    // (for multiCombo, tval should be the key suffix, not the entire key)
+    function renderValue(tval) {
+        tval = tval || '';
+
+        if (field.hasTextForStringId('options.' + tval)) {
+            return field.t.append('options.' + tval, { default: tval });
+        }
+
+        if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
+            tval = '';
+        }
+
+        return selection => selection.text(tval);
+    }
+
+
     // Compute the difference between arrays of objects by `value` property
     //
     // objectDifference([{value:1}, {value:2}, {value:3}], [{value:2}])
@@ -140,7 +157,7 @@ export function uiFieldCombo(field, context) {
                 key: v,
                 value: field.t('options.' + v, { default: v }),
                 title: v,
-                display: field.t.html('options.' + v, { default: v }),
+                display: field.t.append('options.' + v, { default: v }),
                 klass: field.hasTextForStringId('options.' + v) ? '' : 'raw-option'
             };
         });
@@ -205,8 +222,8 @@ export function uiFieldCombo(field, context) {
                 var label = field.t('options.' + k, { default: k });
                 return {
                     key: k,
-                    value: label,
-                    display: field.t.html('options.' + k, { default: k }),
+                    value: _isMulti ? k : label,
+                    display: field.t.append('options.' + k, { default: k }),
                     title: d.title || label,
                     klass: field.hasTextForStringId('options.' + k) ? '' : 'raw-option'
                 };
@@ -417,10 +434,11 @@ export function uiFieldCombo(field, context) {
                     var v = tags[k];
                     if (!v || (typeof v === 'string' && v.toLowerCase() === 'no')) continue;
 
-                    var suffix = field.key ? k.substr(field.key.length) : k;
+                    var suffix = field.key ? k.slice(field.key.length) : k;
                     _multiData.push({
                         key: k,
                         value: displayValue(suffix),
+                        display: renderValue(suffix),
                         isMixed: Array.isArray(v)
                     });
                 }
@@ -461,6 +479,7 @@ export function uiFieldCombo(field, context) {
                     return {
                         key: v,
                         value: displayValue(v),
+                        display: renderValue(v),
                         isMixed: !commonValues.includes(v)
                     };
                 });
@@ -526,8 +545,15 @@ export function uiFieldCombo(field, context) {
                 registerDragAndDrop(chips);
             }
 
-            chips.select('span')
-                .text(function(d) { return d.value; });
+            chips.select('span').each(function(d) {
+                const selection = d3_select(this);
+                if (d.display) {
+                    selection.text('');
+                    d.display(selection);
+                } else {
+                    selection.text(d.value);
+                }
+            });
 
             chips.select('a')
                 .attr('href', '#')

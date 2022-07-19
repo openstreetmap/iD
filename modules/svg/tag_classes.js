@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags } from '../osm/tags';
+import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -9,20 +9,7 @@ export function svgTagClasses() {
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
         'building:part', 'indoor'
     ];
-    var statuses = [
-        // nonexistent, might be built
-        'proposed', 'planned',
-        // under maintentance or between groundbreaking and opening
-        'construction',
-        // existent but not functional
-        'disused',
-        // dilapidated to nonexistent
-        'abandoned',
-        // nonexistent, still may appear in imagery
-        'dismantled', 'razed', 'demolished', 'obliterated',
-        // existent occasionally, e.g. stormwater drainage basin
-        'intermittent'
-    ];
+    var statuses = Object.keys(osmLifecyclePrefixes);
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',

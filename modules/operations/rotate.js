@@ -59,8 +59,8 @@ export function operationRotate(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.rotate.' + disable + '.' + multi) :
-            t('operations.rotate.description.' + multi);
+            t.append('operations.rotate.' + disable + '.' + multi) :
+            t.append('operations.rotate.description.' + multi);
     };
 
 
@@ -73,7 +73,7 @@ export function operationRotate(context, selectedIDs) {
 
     operation.id = 'rotate';
     operation.keys = [t('operations.rotate.key')];
-    operation.title = t('operations.rotate.title');
+    operation.title = t.append('operations.rotate.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     operation.mouseOnly = true;

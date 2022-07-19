@@ -70,7 +70,12 @@ export function uiFieldRoadspeed(field, context) {
 
 
         function changeUnits() {
-            _isImperial = utilGetSetValue(unitInput) === 'mph';
+            var unit = utilGetSetValue(unitInput);
+            if (unit === 'km/h') {
+                _isImperial = false;
+            } else if (unit === 'mph') {
+                _isImperial = true;
+            }
             utilGetSetValue(unitInput, _isImperial ? 'mph' : 'km/h');
             setUnitSuggestions();
             change();

@@ -103,7 +103,10 @@ export function coreValidator(context) {
     _headCache.queue = [];
 
     // cancel deferred work and reject any pending promise
-    Object.keys(_deferredRIC).forEach(key => {window.cancelIdleCallback(key); _deferredRIC[key](); });
+    Object.keys(_deferredRIC).forEach(key => {
+      window.cancelIdleCallback(key);
+      _deferredRIC[key]();
+    });
     _deferredRIC = {};
     _deferredST.forEach(window.clearTimeout);
     _deferredST.clear();

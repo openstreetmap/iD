@@ -14,7 +14,7 @@ export function uiToolUndoRedo(context) {
 
     var tool = {
         id: 'undo_redo',
-        label: t.html('toolbar.undo_redo')
+        label: t.append('toolbar.undo_redo')
     };
 
     var commands = [{
@@ -50,8 +50,8 @@ export function uiToolUndoRedo(context) {
             .placement('bottom')
             .title(function (d) {
                 return d.annotation() ?
-                    t.html(d.id + '.tooltip', { action: d.annotation() }) :
-                    t.html(d.id + '.nothing');
+                    t.append(d.id + '.tooltip', { action: d.annotation() }) :
+                    t.append(d.id + '.nothing');
             })
             .keys(function(d) {
                 return [d.cmd];
@@ -84,14 +84,14 @@ export function uiToolUndoRedo(context) {
                 ) {
                     // there are no tooltips for touch interactions so flash feedback instead
 
-                    var text = annotation ?
-                        t.html(d.id + '.tooltip', { action: annotation }) :
-                        t.html(d.id + '.nothing');
+                    var label = annotation ?
+                        t.append(d.id + '.tooltip', { action: annotation }) :
+                        t.append(d.id + '.nothing');
                     context.ui().flash
                         .duration(2000)
                         .iconName('#' + d.icon)
                         .iconClass(annotation ? '' : 'disabled')
-                        .label(text)();
+                        .label(label)();
                 }
                 lastPointerUpType = null;
             })

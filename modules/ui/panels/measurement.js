@@ -234,7 +234,7 @@ export function uiPanelMeasurement(context) {
     };
 
     panel.id = 'measurement';
-    panel.label = t.html('info_panels.measurement.title');
+    panel.label = t.append('info_panels.measurement.title');
     panel.key = t('info_panels.measurement.key');
 
 

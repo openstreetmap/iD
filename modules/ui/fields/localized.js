@@ -43,7 +43,7 @@ export function uiFieldLocalized(field, context) {
     var _selection = d3_select(null);
     var _multilingual = [];
     var _buttonTip = uiTooltip()
-        .title(t.html('translate.translate'))
+        .title(() => t.append('translate.translate'))
         .placement('left');
     var _wikiTitles;
     var _entityIDs = [];
@@ -122,7 +122,10 @@ export function uiFieldLocalized(field, context) {
         var existingLangs = new Set(existingLangsOrdered.filter(Boolean));
 
         for (var k in tags) {
-            var m = k.match(/^(.*):(.*)$/);
+            // matches for field:<code>, where <code> is a BCP 47 locale code
+            // motivation is to avoid matching on similarly formatted tags that are
+            // not for languages, e.g. name:left, name:source, etc.
+            var m = k.match(/^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/);
             if (m && m[1] === field.key && m[2]) {
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {

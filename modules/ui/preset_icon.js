@@ -17,9 +17,10 @@ export function uiPresetIcon() {
 
 
   function getIcon(p, geom) {
+    if (p.isFallback && p.isFallback()) return geom === 'vertex' ? '' : 'iD-icon-' + p.id;
     if (p.icon) return p.icon;
     if (geom === 'line') return 'iD-other-line';
-    if (geom === 'vertex') return p.isFallback() ? '' : 'temaki-vertex';
+    if (geom === 'vertex') return 'temaki-vertex';
     return 'maki-marker-stroked';
   }
 
@@ -386,7 +387,7 @@ export function uiPresetIcon() {
     const picon = getIcon(p, geom);
     const isCategory = !p.setTags;
     const drawPoint = false;
-    const drawVertex = picon !== null && geom === 'vertex' && (!isFallback);
+    const drawVertex = picon !== null && geom === 'vertex';
     const drawLine = picon && geom === 'line' && !isFallback && !isCategory;
     const drawArea = picon && geom === 'area' && !isFallback && !isCategory;
     const drawRoute = picon && geom === 'route';

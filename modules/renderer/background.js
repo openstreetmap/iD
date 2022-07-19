@@ -454,29 +454,32 @@ export function rendererBackground(context) {
     }
 
     const hash = utilStringQs(window.location.hash);
-    const requested = hash.background || hash.layer;
+    const requestedBackground = hash.background || hash.layer;
+    const lastUsedBackground = prefs('background-last-used');
     let extent = parseMapParams(hash.map);
 
     return _loadPromise = ensureImageryIndex()
       .then(imageryIndex => {
-        const first = imageryIndex.backgrounds.length && imageryIndex.backgrounds[0];
+        const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
+        const first = validBackgrounds.length && validBackgrounds[0];
+        const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
 
         let best;
-        if (!requested && extent) {
-          best = background.sources(extent).find(s => s.best());
+        if (!requestedBackground && extent) {
+          best = validBackgrounds.find(s => s.best());
         }
 
         // Decide which background layer to display
-        if (requested && requested.indexOf('custom:') === 0) {
-          const template = requested.replace(/^custom:/, '');
+        if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
+          const template = requestedBackground.replace(/^custom:/, '');
           const custom = background.findSource('custom');
           background.baseLayerSource(custom.template(template));
           prefs('background-custom-template', template);
         } else {
           background.baseLayerSource(
-            background.findSource(requested) ||
+            background.findSource(requestedBackground) ||
             best ||
-            background.findSource(prefs('background-last-used')) ||
+            isLastUsedValid && background.findSource(lastUsedBackground) ||
             background.findSource('Bing') ||
             first ||
             background.findSource('none')

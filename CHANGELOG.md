@@ -38,11 +38,75 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-
 # Unreleased
 
 #### :newspaper: News
+#### :tada: New Features
+* Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
+#### :white_check_mark: Validation
+* Don't warn on close-by "Stolperstein" memorials ([#8419], thanks [@paulklie])
+#### :bug: Bugfixes
+* When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
+* Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
+* Don't truncate background imagery names ([#8975], thanks [@furkanmutlu])
+* Fix alignment of "notes" icon in sidebar ([#9018], thanks [@JackNUMBER])
+* Fix comments in notes overflowing when hovering ([#9074], thanks [@aaditya0000])
+* Don't render `railway=platform_edge` like train tracks ([#9142], thanks [@k-yle])
+* Fix leaking of localized tag values into raw tags by multiCombo fields ([#9164], thanks [@1ec5])
+* Fix localizable labels in multiCombo fields ("chips") being rendered multiple times ([#9169])
+* Fix missing styling when rendering of proposed footway/cycleway/path bridges ([#9172], thanks [@k-yle])
+* Fix some boundary lines (and preset) not hidden by the map features filter ([#9171], thanks [@k-yle])
+* Fix iD using invalid user selected imagery ([#8732], thanks [@renancleyson-dev])
+#### :rocket: Presets
+* Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
+* Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
+* Better fallback icons for untagged points, vertices, lines and areas ([#9157])
+* Add fallback values for access field for barrier presets
+* Support incrementing cardinal directions with the up/down buttons ([#9141], thanks [@k-yle])
+#### :hammer: Development
+* Reduce uses of unsafe html injecting code
+* Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`, `mocha` to `v10`
+
+
+[#8419]: https://github.com/openstreetmap/iD/issues/8419
+[#8732]: https://github.com/openstreetmap/iD/issues/8732
+[#8881]: https://github.com/openstreetmap/iD/issues/8881
+[#8975]: https://github.com/openstreetmap/iD/pull/8975
+[#9018]: https://github.com/openstreetmap/iD/issues/9018
+[#9067]: https://github.com/openstreetmap/iD/issues/9067
+[#9074]: https://github.com/openstreetmap/iD/pull/9074
+[#9110]: https://github.com/openstreetmap/iD/issues/9110
+[#9139]: https://github.com/openstreetmap/iD/pull/9139
+[#9140]: https://github.com/openstreetmap/iD/pull/9140
+[#9141]: https://github.com/openstreetmap/iD/pull/9141
+[#9142]: https://github.com/openstreetmap/iD/pull/9142
+[#9157]: https://github.com/openstreetmap/iD/issues/9157
+[#9164]: https://github.com/openstreetmap/iD/issues/9164
+[#9169]: https://github.com/openstreetmap/iD/issues/9169
+[#9171]: https://github.com/openstreetmap/iD/pull/9171
+[#9172]: https://github.com/openstreetmap/iD/pull/9172
+[@furkanmutlu]: https://github.com/furkanmutlu
+[@JackNUMBER]: https://github.com/JackNUMBER
+[@aaditya0000]: https://github.com/aaditya0000
+[@paulklie]: https://github.com/paulklie
+[@renancleyson-dev]: https://github.com/renancleyson-dev
+
+
+# 2.21.1
+##### 2022-Jun-16
+
+#### :bug: Bugfixes
+* Fix compatibility with older versions of browsers (Firefox ≤ v77, Chrome ≤ v61, Safari ≤ v11) ([#9163], thanks [@1ec5])
+
+[#9163]: https://github.com/openstreetmap/iD/issues/9163
+
+
+# 2.21.0
+##### 2022-Jun-03
+
+#### :newspaper: News
 * Drop legacy support for Internet Explorer 11 ([#8811])
+* Use OAuth2 for authentication with OSM API ([#9134], thanks [@bhousel] and [@dakotabenjamin])
 #### :white_check_mark: Validation
 * Handle indoor features like buildings when checking for crossing ways ([#8944])
 #### :bug: Bugfixes
@@ -50,19 +114,30 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix KeepRight warnings showing up as "Unknown" issues ([#8925])
 * Fix <kbd>⌥</kbd><kbd>W</kbd> keyboard shortcut not working on MacOS in certain system languages / keyboard layouts (e.g. Spanish) ([#8905])
 * Render closed ways tagged as `public_transport=platform`, `waterway=dam` or `highway=elevator` as areas ([#8985])
+* Fix a bug which caused validations to not take effect in certain situations ([#9021], thanks [@mbrzakovic])
+* Properly escape currently logged-in user's user name ([#9097], thanks [@jleedev])
 #### :rocket: Presets
 * Optimize order of values in dropdowns of `access` fields ([#8945])
 * Use value of `vehicle` tag as placeholder value of `access` fields for `motor_vehicle` and `bicycle`
 * Render `golf` features `tee`, `fairway`, `rough` and `green` in green color and using a grass pattern ([#8927])
 * Tweak preset-matching to penalize non-searchable presets when matching OSM objects to presets
+* Do not overwrite existing `*=no` tags by a preset's `addTags`
+* Imply `access=no` in access field of `highway=construction` objects ([#9102])
+* Don't show non-language tag-suffixes in multilingual name field ([#9124], thanks [@wcedmisten])
+* Render horse riding centers like farmyards ([#9118])
+* Support searching presets by their `aliases` ([#6139])
+* Allow searching presets by their tag (`key=value`) ([#8869])
 #### Other
 * Redact more API tokens from custom imagery sources in changeset metadata tags ([#8976], thanks [@k-yle])
+* New Bing imagery API key and limit tiles vintage API requests ([#9133], thanks [@mbrzakovic])
 #### :hammer: Development
-* Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@ mbrzakovic] and [@bhousel])
-* Upgrade some dependencies: maki to `v7.1`, `fontawesome` to `v6`, `d3` to `v7.3`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`
+* Switch build system to [esbuild](https://esbuild.github.io/) for much faster builds ([#8774], thanks [@mbrzakovic] and [@bhousel])
+* Upgrade dependencies: maki to `v7.1`, `fontawesome` to `v6.1`, `d3` to `v7.4`, `node-diff` to `v3.1`, `mocha` to `v9.2`, `svg-sprite` to `v1.5.4`, `marked` to `v4.0`, `temaki` to `v5.1`, `mapillary-js` to `v4.1`
 
+[#6139]: https://github.com/openstreetmap/iD/issues/6139
 [#8774]: https://github.com/openstreetmap/iD/pull/8774
 [#8811]: https://github.com/openstreetmap/iD/issues/8811
+[#8869]: https://github.com/openstreetmap/iD/issues/8869
 [#8905]: https://github.com/openstreetmap/iD/issues/8905
 [#8925]: https://github.com/openstreetmap/iD/issues/8925
 [#8927]: https://github.com/openstreetmap/iD/issues/8927
@@ -71,7 +146,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8963]: https://github.com/openstreetmap/iD/issues/8963
 [#8976]: https://github.com/openstreetmap/iD/issues/8976
 [#8985]: https://github.com/openstreetmap/iD/issues/8985
-
+[#9021]: https://github.com/openstreetmap/iD/pull/9021
+[#9097]: https://github.com/openstreetmap/iD/pull/9097
+[#9102]: https://github.com/openstreetmap/iD/issues/9102
+[#9118]: https://github.com/openstreetmap/iD/issues/9118
+[#9124]: https://github.com/openstreetmap/iD/pull/9124
+[#9133]: https://github.com/openstreetmap/iD/pull/9133
+[#9134]: https://github.com/openstreetmap/iD/pull/9134
+[@wcedmisten]: https://github.com/wcedmisten
+[@dakotabenjamin]: https://github.com/dakotabenjamin
 
 # 2.20.4
 ##### 2022-Feb-03

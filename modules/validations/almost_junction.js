@@ -55,12 +55,12 @@ export function validationAlmostJunction(context) {
         message: function(context) {
           const entity1 = context.hasEntity(this.entityIds[0]);
           if (this.entityIds[0] === this.entityIds[2]) {
-            return entity1 ? t.html('issues.almost_junction.self.message', {
+            return entity1 ? t.append('issues.almost_junction.self.message', {
               feature: utilDisplayLabel(entity1, context.graph())
             }) : '';
           } else {
             const entity2 = context.hasEntity(this.entityIds[2]);
-            return (entity1 && entity2) ? t.html('issues.almost_junction.message', {
+            return (entity1 && entity2) ? t.append('issues.almost_junction.message', {
               feature: utilDisplayLabel(entity1, context.graph()),
               feature2: utilDisplayLabel(entity2, context.graph())
             }) : '';
@@ -88,7 +88,7 @@ export function validationAlmostJunction(context) {
     function makeFixes(context) {
       let fixes = [new validationIssueFix({
         icon: 'iD-icon-abutment',
-        title: t.html('issues.fix.connect_features.title'),
+        title: t.append('issues.fix.connect_features.title'),
         onClick: function(context) {
           const annotation = t('issues.fix.connect_almost_junction.annotation');
           const [, endNodeId, crossWayId] = this.issue.entityIds;

@@ -8,6 +8,33 @@ export function osmIsInterestingTag(key) {
         key.indexOf('tiger:') !== 0;
 }
 
+export const osmLifecyclePrefixes = {
+    // nonexistent, might be built
+    proposed: true, planned: true,
+    // under maintentance or between groundbreaking and opening
+    construction: true,
+    // existent but not functional
+    disused: true,
+    // dilapidated to nonexistent
+    abandoned: true, was: true,
+    // nonexistent, still may appear in imagery
+    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true, obliterated: true,
+    // existent occasionally, e.g. stormwater drainage basin
+    intermittent: true
+};
+
+/** @param {string} key */
+export function osmRemoveLifecyclePrefix(key) {
+    const keySegments = key.split(':');
+    if (keySegments.length === 1) return key;
+
+    if (keySegments[0] in osmLifecyclePrefixes) {
+        return key.slice(keySegments[0].length + 1);
+    }
+
+    return key;
+}
+
 export var osmAreaKeys = {};
 export function osmSetAreaKeys(value) {
     osmAreaKeys = value;
@@ -44,13 +71,14 @@ export function osmTagSuggestingArea(tags) {
     if (tags.area === 'no') return null;
 
     var returnTags = {};
-    for (var key in tags) {
+    for (var realKey in tags) {
+        const key = osmRemoveLifecyclePrefix(realKey);
         if (key in osmAreaKeys && !(tags[key] in osmAreaKeys[key])) {
-            returnTags[key] = tags[key];
+            returnTags[realKey] = tags[realKey];
             return returnTags;
         }
         if (key in osmAreaKeysExceptions && tags[key] in osmAreaKeysExceptions[key]) {
-            returnTags[key] = tags[key];
+            returnTags[realKey] = tags[realKey];
             return returnTags;
         }
     }
@@ -136,6 +164,7 @@ export var osmPavedTags = {
         'paved': true,
         'asphalt': true,
         'concrete': true,
+        'chipseal': true,
         'concrete:lanes': true,
         'concrete:plates': true
     },
