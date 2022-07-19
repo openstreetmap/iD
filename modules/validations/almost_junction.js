@@ -135,7 +135,7 @@ export function validationAlmostJunction(context) {
         // node has no descriptive tags, suggest noexit fix
         fixes.push(new validationIssueFix({
           icon: 'maki-barrier',
-          title: t.html('issues.fix.tag_as_disconnected.title'),
+          title: t.append('issues.fix.tag_as_disconnected.title'),
           onClick: function(context) {
             const nodeID = this.issue.entityIds[1];
             const tags = Object.assign({}, context.entity(nodeID).tags);
