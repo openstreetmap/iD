@@ -549,6 +549,7 @@ export function coreContext() {
       // kick off some async work
       localizer.ensureLoaded();
       presetManager.ensureLoaded();
+      _background.ensureLoaded();
 
       Object.values(services).forEach(service => {
         if (service && typeof service.init === 'function') {
@@ -573,7 +574,7 @@ export function coreContext() {
       if (!context.container().empty()) {
         _ui.ensureLoaded()
           .then(() => {
-            _background.ensureLoaded();
+            _background.init();
             _photos.init();
           });
       }

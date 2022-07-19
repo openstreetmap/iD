@@ -443,86 +443,83 @@ export function rendererBackground(context) {
   let _loadPromise;
 
   background.ensureLoaded = () => {
-
     if (_loadPromise) return _loadPromise;
 
-    function parseMapParams(qmap) {
-      if (!qmap) return false;
-      const params = qmap.split('/').map(Number);
-      if (params.length < 3 || params.some(isNaN)) return false;
-      return geoExtent([params[2], params[1]]);  // lon,lat
-    }
+    return _loadPromise = ensureImageryIndex();
+  };
+
+  background.init = () => {
+    const loadPromise = background.ensureLoaded();
 
     const hash = utilStringQs(window.location.hash);
     const requestedBackground = hash.background || hash.layer;
     const lastUsedBackground = prefs('background-last-used');
 
-    return _loadPromise = ensureImageryIndex()
-      .then(imageryIndex => {
-        const extent = context.map().extent();
-        const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
-        const first = validBackgrounds.length && validBackgrounds[0];
-        const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
+    return loadPromise.then(imageryIndex => {
+      const extent = context.map().extent();
+      const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
+      const first = validBackgrounds.length && validBackgrounds[0];
+      const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
 
-        let best;
-        if (!requestedBackground && extent) {
-          best = validBackgrounds.find(s => s.best());
+      let best;
+      if (!requestedBackground && extent) {
+        best = validBackgrounds.find(s => s.best());
+      }
+
+      // Decide which background layer to display
+      if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
+        const template = requestedBackground.replace(/^custom:/, '');
+        const custom = background.findSource('custom');
+        background.baseLayerSource(custom.template(template));
+        prefs('background-custom-template', template);
+      } else {
+        background.baseLayerSource(
+          background.findSource(requestedBackground) ||
+          best ||
+          isLastUsedValid && background.findSource(lastUsedBackground) ||
+          background.findSource('Bing') ||
+          first ||
+          background.findSource('none')
+        );
+      }
+
+      const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+      if (locator) {
+        background.toggleOverlayLayer(locator);
+      }
+
+      const overlays = (hash.overlays || '').split(',');
+      overlays.forEach(overlay => {
+        overlay = background.findSource(overlay);
+        if (overlay) {
+          background.toggleOverlayLayer(overlay);
         }
-
-        // Decide which background layer to display
-        if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
-          const template = requestedBackground.replace(/^custom:/, '');
-          const custom = background.findSource('custom');
-          background.baseLayerSource(custom.template(template));
-          prefs('background-custom-template', template);
-        } else {
-          background.baseLayerSource(
-            background.findSource(requestedBackground) ||
-            best ||
-            isLastUsedValid && background.findSource(lastUsedBackground) ||
-            background.findSource('Bing') ||
-            first ||
-            background.findSource('none')
-          );
-        }
-
-        const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
-        if (locator) {
-          background.toggleOverlayLayer(locator);
-        }
-
-        const overlays = (hash.overlays || '').split(',');
-        overlays.forEach(overlay => {
-          overlay = background.findSource(overlay);
-          if (overlay) {
-            background.toggleOverlayLayer(overlay);
-          }
-        });
-
-        if (hash.gpx) {
-          const gpx = context.layers().layer('data');
-          if (gpx) {
-            gpx.url(hash.gpx, '.gpx');
-          }
-        }
-
-        if (hash.offset) {
-          const offset = hash.offset
-            .replace(/;/g, ',')
-            .split(',')
-            .map(n => !isNaN(n) && n);
-
-          if (offset.length === 2) {
-            background.offset(geoMetersToOffset(offset));
-          }
-        }
-      })
-      .catch(err => {
-        /* eslint-disable no-console */
-        console.error(err);
-        /* eslint-enable no-console */
       });
-  };
+
+      if (hash.gpx) {
+        const gpx = context.layers().layer('data');
+        if (gpx) {
+          gpx.url(hash.gpx, '.gpx');
+        }
+      }
+
+      if (hash.offset) {
+        const offset = hash.offset
+          .replace(/;/g, ',')
+          .split(',')
+          .map(n => !isNaN(n) && n);
+
+        if (offset.length === 2) {
+          background.offset(geoMetersToOffset(offset));
+        }
+      }
+    })
+    .catch(err => {
+      /* eslint-disable no-console */
+      console.error(err);
+      /* eslint-enable no-console */
+    });
+  }
 
 
   return utilRebind(background, dispatch, 'on');
