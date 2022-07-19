@@ -6,7 +6,7 @@ import whichPolygon from 'which-polygon';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
-import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
+import { geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
