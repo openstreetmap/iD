@@ -45,6 +45,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 #### :white_check_mark: Validation
 * Don't warn on close-by "Stolperstein" memorials ([#8419], thanks [@paulklie])
+#### :sparkles: Usability & Accessibility
+* Always render `ref` tag as label ([#9054], thanks [@k-yle])
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
@@ -73,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
 [#8975]: https://github.com/openstreetmap/iD/pull/8975
 [#9018]: https://github.com/openstreetmap/iD/issues/9018
+[#9054]: https://github.com/openstreetmap/iD/issues/9054
 [#9067]: https://github.com/openstreetmap/iD/issues/9067
 [#9074]: https://github.com/openstreetmap/iD/pull/9074
 [#9110]: https://github.com/openstreetmap/iD/issues/9110
