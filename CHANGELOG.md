@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Always render `ref` tag as label ([#9054], thanks [@k-yle])
 * Remember last map location when no location is externally specified ([#7790], thanks [@bvercelli99])
+* Add a `crossing=traffic_signals` tag to the intersection node when using _connect features_ of a _crossing with pedestrian signals_ way in the validator ([#9176], thanks [@faebebin])
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
@@ -96,6 +97,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@paulklie]: https://github.com/paulklie
 [@renancleyson-dev]: https://github.com/renancleyson-dev
 [@bvercelli99]: https://github.com/bvercelli99
+[@faebebin]:_https://github.com/faebebin
 
 
 # 2.21.1

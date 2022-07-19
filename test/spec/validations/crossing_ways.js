@@ -213,9 +213,19 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), { highway: 'crossing' });
     });
 
-    it('flags road crossing crosswalk', function() {
+    it('flags road crossing marked crosswalk', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'marked' });
         verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'marked' });
+    });
+
+    it('flags road crossing crosswalk with traffic_signals', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'traffic_signals' });
+        verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'traffic_signals' });
+    });
+
+    it('flags road crossing unmarked crosswalk', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'unmarked' });
+        verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'unmarked' });
     });
 
     it('flags road=track crossing footway', function() {
