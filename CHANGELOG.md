@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't warn on close-by "Stolperstein" memorials ([#8419], thanks [@paulklie])
 #### :sparkles: Usability & Accessibility
 * Always render `ref` tag as label ([#9054], thanks [@k-yle])
+* Remember last map location when no location is externally specified ([#7790], thanks [@bvercelli99])
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
@@ -70,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`, `mocha` to `v10`
 
 
+[#7790]: https://github.com/openstreetmap/iD/issues/7790
 [#8419]: https://github.com/openstreetmap/iD/issues/8419
 [#8732]: https://github.com/openstreetmap/iD/issues/8732
 [#8881]: https://github.com/openstreetmap/iD/issues/8881
@@ -93,6 +95,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@aaditya0000]: https://github.com/aaditya0000
 [@paulklie]: https://github.com/paulklie
 [@renancleyson-dev]: https://github.com/renancleyson-dev
+[@bvercelli99]: https://github.com/bvercelli99
 
 
 # 2.21.1
