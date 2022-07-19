@@ -76,7 +76,7 @@ export function validationIssue(attrs) {
 
         fixes.forEach(function(fix) {
             // the id doesn't matter as long as it's unique to this issue/fix
-            fix.id = fix.title;
+            fix.id = fix.title.stringId;
             // add a reference to the issue for use in actions
             fix.issue = issue;
             if (fix.autoArgs) {
