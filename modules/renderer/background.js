@@ -519,7 +519,7 @@ export function rendererBackground(context) {
       console.error(err);
       /* eslint-enable no-console */
     });
-  }
+  };
 
 
   return utilRebind(background, dispatch, 'on');
