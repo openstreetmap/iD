@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix missing styling when rendering of proposed footway/cycleway/path bridges ([#9172], thanks [@k-yle])
 * Fix some boundary lines (and preset) not hidden by the map features filter ([#9171], thanks [@k-yle])
 * Fix iD using invalid user selected imagery ([#8732], thanks [@renancleyson-dev])
+* Make osmose QA service work again by upgrading API calls to the newest API version ([#9208])
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
@@ -91,6 +92,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9169]: https://github.com/openstreetmap/iD/issues/9169
 [#9171]: https://github.com/openstreetmap/iD/pull/9171
 [#9172]: https://github.com/openstreetmap/iD/pull/9172
+[#9208]: https://github.com/openstreetmap/iD/issues/9208
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
