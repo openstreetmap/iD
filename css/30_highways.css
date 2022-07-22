@@ -589,6 +589,13 @@ path.line.stroke.tag-highway-steps,
     stroke: #fff;
 }
 
+/* access: private, customers */
+path.line.casing.tag-access-customers.tag-highway-service {
+    stroke: rgb(255, 136, 0);
+}
+path.line.casing.tag-access-private.tag-highway-service {
+    stroke: rgb(189, 0, 0);
+}
 
 /* crossings */
 path.line.stroke.tag-highway.tag-crossing-unmarked {
