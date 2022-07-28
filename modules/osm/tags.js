@@ -233,6 +233,10 @@ export var osmRoutableHighwayTagValues = {
     unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
+/** aeroway tags that are treated as routable for aircraft */
+export const osmRoutableAerowayTags = {
+    runway: true, taxiway: true
+};
 // "highway" tag values that generally do not allow motor vehicles
 export var osmPathHighwayTagValues = {
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
