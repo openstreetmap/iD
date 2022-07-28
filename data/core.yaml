@@ -1748,6 +1748,16 @@ en:
       title: Crossing Ways
       message: "{feature} crosses {feature2}"
       tip: "Find features that incorrectly cross over one another"
+      aeroway-aeroway:
+        reference: "Crossing aeroways should be connected."
+      aeroway-building:
+        reference: "Aeroways crossing buildings should use bridges or different layers."
+      aeroway-highway:
+        reference: "Aeroways crossing railways should be connected."
+      aeroway-railway:
+        reference: "Aeroways crossing highways should be connected."
+      aeroway-waterway:
+        reference: "Aeroways crossing waterways should use tunnels."
       building-building:
         reference: "Buildings should not intersect except on different layers."
       building-highway:
