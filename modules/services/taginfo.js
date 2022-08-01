@@ -89,7 +89,7 @@ function filterValues(allowUpperCase) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
         if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return parseFloat(d.fraction) > 0.0;
+        return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
     };
 }
 
@@ -116,9 +116,6 @@ function valKeyDescription(d) {
         value: d.value,
         title: d.description || d.value
     };
-    if (d.count) {
-        obj.count = d.count;
-    }
     return obj;
 }
 

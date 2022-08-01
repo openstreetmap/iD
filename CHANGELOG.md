@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Always render `ref` tag as label ([#9054], thanks [@k-yle])
 * Remember last map location when no location is externally specified ([#7790], thanks [@bvercelli99])
 * Add a `crossing=traffic_signals` tag to the intersection node when using _connect features_ of a _crossing with pedestrian signals_ way in the validator ([#9176], thanks [@faebebin])
+* Don't auto-suggest tag values which have fewer than 100 uses ([#9227])
 #### :bug: Bugfixes
 * When typing an invalid unit into the Speed Limit or Max Height field, revert to the previous unit ([#9110], thanks [@1ec5])
 * Fix wikidata field displaying `[object Object]` instead of item labels after wikibase API change ([#9067])
@@ -93,6 +94,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9171]: https://github.com/openstreetmap/iD/pull/9171
 [#9172]: https://github.com/openstreetmap/iD/pull/9172
 [#9208]: https://github.com/openstreetmap/iD/issues/9208
+[#9227]: https://github.com/openstreetmap/iD/issues/9227
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
