@@ -531,7 +531,60 @@ Object.assign(osmWay.prototype, {
 
             return isNaN(area) ? 0 : area;
         });
-    }
+    },
+
+    // returns a list of the nodes between the start node and the end node
+    getNodesBetween: function(startNodeIdx, endNodeIdx) {
+        if (this.nodes.length < 2 || startNodeIdx < 0 || endNodeIdx < 0 || startNodeIdx === endNodeIdx ||
+             (this.indexIsFirstOrLastOfClosed(startNodeIdx) && this.indexIsFirstOrLastOfClosed(endNodeIdx))) {
+            return [];
+        }
+        let reverse = false;
+        if (!this.isClosed() && startNodeIdx > endNodeIdx) {
+            [startNodeIdx, endNodeIdx] = [endNodeIdx, startNodeIdx];
+            reverse = true;
+        }
+        let nodeIdx = startNodeIdx;
+        const nodesBetween = [this.nodes[startNodeIdx]];
+        const endNodeIsFirstOrLastOfClosed = this.indexIsFirstOrLastOfClosed(endNodeIdx);
+        while (nodeIdx !== endNodeIdx) {
+            nodeIdx = this.nextNodeIdx(nodeIdx);
+            nodesBetween.push(this.nodes[nodeIdx]);
+            if (!this.nodes[nodeIdx]) {
+                nodesBetween.splice(0, nodesBetween.length); // empty array
+                break;
+            }
+            // if closed and we have reach first or last node, make sure we stop if this is the end node:
+            if (endNodeIsFirstOrLastOfClosed && (nodeIdx === 0 || nodeIdx === this.nodes.length - 1)) {
+                break;
+            }
+        }
+        return reverse ? nodesBetween.reverse() : nodesBetween;
+    },
+
+    // returns true if a node is the first or last node of a closed way
+    indexIsFirstOrLastOfClosed(nodeIdx) {
+        return this.isClosed() && (nodeIdx === 0 || nodeIdx === this.nodes.length - 1);
+    },
+
+    // returns the index of the next node
+    nextNodeIdx: function(nodeIdx) {
+        if (this.isClosed()) {
+            if (this.nodes.length < 3) { // should not happen, it would mean the closed line has only 2 nodes
+                return null;
+            } else if (nodeIdx === this.nodes.length - 1) {
+                return 1; // ignore index 0 since it will be identical to the last node (closed: first = last node)
+            } else {
+                return nodeIdx + 1;
+            }
+        } else {
+            if (nodeIdx === this.nodes.length - 1) {
+                return null;
+            } else {
+                return nodeIdx + 1;
+            }
+        }
+    },
 });
 
 

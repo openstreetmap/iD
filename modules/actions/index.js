@@ -16,6 +16,7 @@ export { actionDeleteWay } from './delete_way';
 export { actionDiscardTags } from './discard_tags';
 export { actionDisconnect } from './disconnect';
 export { actionExtract } from './extract';
+export { actionSnap } from './snap';
 export { actionJoin } from './join';
 export { actionMerge } from './merge';
 export { actionMergeNodes } from './merge_nodes';

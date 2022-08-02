@@ -1090,4 +1090,183 @@ describe('iD.osmWay', function() {
         });
     });
 
+    describe('#getNodesBetween', function() {
+
+        it('There are no nodes in between if the first node == last node in closed', function() {
+            // b --- c
+            // |     |
+            // a --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 2]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmNode({id: 'd', loc: [2, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd', 'a']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(0, 4)).to.eql([]);
+        });
+
+        it('Return nodes between first and last indexes', function() {
+            // a --- b --- c --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [2, 1]}),
+                iD.osmNode({id: 'c', loc: [3, 1]}),
+                iD.osmNode({id: 'd', loc: [4, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(0, 3)).to.eql(['a', 'b', 'c', 'd']);
+        });
+
+        it('Return nodes between middle and last indexes', function() {
+            // a --- b --- c --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [2, 1]}),
+                iD.osmNode({id: 'c', loc: [3, 1]}),
+                iD.osmNode({id: 'd', loc: [4, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(1, 3)).to.eql(['b', 'c', 'd']);
+        });
+
+        it('Return nodes between 2 middle indexes', function() {
+            // a --- b --- c --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [2, 1]}),
+                iD.osmNode({id: 'c', loc: [3, 1]}),
+                iD.osmNode({id: 'd', loc: [4, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(1, 2)).to.eql(['b', 'c']);
+        });
+
+        it('Return nodes between last and first indexes in reverse order', function() {
+            // a --- b --- c --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [2, 1]}),
+                iD.osmNode({id: 'c', loc: [3, 1]}),
+                iD.osmNode({id: 'd', loc: [4, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(3, 0)).to.eql(['d', 'c', 'b', 'a']);
+        });
+
+        it('Return nodes between middle and first indexes in reverse order', function() {
+            // a --- b --- c --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [2, 1]}),
+                iD.osmNode({id: 'c', loc: [3, 1]}),
+                iD.osmNode({id: 'd', loc: [4, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(2, 0)).to.eql(['c', 'b', 'a']);
+        });
+
+        it('Return nodes between 2 middle indexes in reverse order if first index > second index', function() {
+            // a --- b --- c --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [2, 1]}),
+                iD.osmNode({id: 'c', loc: [3, 1]}),
+                iD.osmNode({id: 'd', loc: [4, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(2, 1)).to.eql(['c', 'b']);
+        });
+
+        it('Return nodes between first and last indexes in closed shape (3 nodes)', function() {
+            // b  \
+            // |   c
+            // a /
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 3]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'a']}),
+            ]);
+            expect(graph.entity('1').getNodesBetween(0, 2)).to.eql(['a', 'b', 'c']);
+        });
+
+        it('Return nodes between first and last indexes in closed shape (4 nodes)', function() {
+            // b --- c
+            // |     |
+            // a --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 2]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmNode({id: 'd', loc: [2, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd', 'a']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(0, 3)).to.eql(['a', 'b', 'c', 'd']);
+        });
+
+        it('Return nodes between last and first indexes in closed shape (3 nodes)', function() {
+            // b  \
+            // |   c
+            // a /
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 3]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'a']}),
+            ]);
+            expect(graph.entity('1').getNodesBetween(2, 0)).to.eql(['c', 'a']);
+        });
+
+        it('Return nodes between last and first indexes in closed shape (4 nodes)', function() {
+            // b --- c
+            // |     |
+            // a --- d
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 2]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmNode({id: 'd', loc: [2, 1]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'd', 'a']}),
+            ]);
+
+            expect(graph.entity('1').getNodesBetween(3, 0)).to.eql(['d', 'a']);
+        });
+
+        it('Return nodes between 2 middle indexes in closed shape', function() {
+            // b  \
+            // |   c
+            // a /
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 3]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'a']}),
+            ]);
+            expect(graph.entity('1').getNodesBetween(1, 2)).to.eql(['b', 'c']);
+        });
+
+        it('Return nodes between 2 middle indexes in closed shape (reverse)', function() {
+            // b  \
+            // |   c
+            // a /
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [1, 1]}),
+                iD.osmNode({id: 'b', loc: [1, 3]}),
+                iD.osmNode({id: 'c', loc: [2, 2]}),
+                iD.osmWay({id: '1', nodes: ['a', 'b', 'c', 'a']}),
+            ]);
+            expect(graph.entity('1').getNodesBetween(2, 1)).to.eql(['c', 'a', 'b']);
+        });
+
+    });
+
 });
