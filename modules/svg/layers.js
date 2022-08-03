@@ -2,6 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { svgData } from './data';
+import { svgLocalPhotos} from './local_photos';
 import { svgDebug } from './debug';
 import { svgGeolocate } from './geolocate';
 import { svgKeepRight } from './keepRight';
@@ -27,6 +28,7 @@ export function svgLayers(projection, context) {
         { id: 'osm', layer: svgOsm(projection, context, dispatch) },
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
+        { id: 'local-photos', layer: svgLocalPhotos(projection, context, dispatch) },
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
         { id: 'improveOSM', layer: svgImproveOSM(projection, context, dispatch) },
         { id: 'osmose', layer: svgOsmose(projection, context, dispatch) },

@@ -22,6 +22,7 @@ export function uiSectionDataLayers(context) {
     var settingsLocalPhotosData = uiSettingsLocalPhotosData(context)
         .on('change',  localPhotosChanged);
 
+    // refers to `modules/svg/layers.js` -> function drawLayers(selection) {...}
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
@@ -39,6 +40,7 @@ export function uiSectionDataLayers(context) {
             .call(drawOsmItems)
             .call(drawQAItems)
             .call(drawCustomDataItems)
+            // .call(drawLocalPhotos)
             .call(drawVectorItems)      // Beta - Detroit mapping challenge
             .call(drawPanelItems);
     }
@@ -292,6 +294,178 @@ export function uiSectionDataLayers(context) {
         }
     }
 
+    // original function
+    // function drawCustomDataItems(selection) {
+    //     var dataLayer = layers.layer('data');
+    //     var hasData = dataLayer && dataLayer.hasData();
+    //     var showsData = hasData && dataLayer.enabled();
+
+    //     var ul = selection
+    //         .selectAll('.layer-list-data')
+    //         .data(dataLayer ? [0] : []);
+
+    //     // Exit
+    //     ul.exit()
+    //         .remove();
+
+    //     // Enter
+    //     var ulEnter = ul.enter()
+    //         .append('ul')
+    //         .attr('class', 'layer-list layer-list-data');
+
+    //     var liEnter = ulEnter
+    //         .append('li')
+    //         .attr('class', 'list-item-data');
+
+    //     var labelEnter = liEnter
+    //         .append('label')
+    //         .call(uiTooltip()
+    //             .title(() => t.append('map_data.layers.custom.tooltip'))
+    //             .placement('top')
+    //         );
+
+    //     labelEnter
+    //         .append('input')
+    //         .attr('type', 'checkbox')
+    //         .on('change', function() { toggleLayer('data'); });
+
+    //     labelEnter
+    //         .append('span')
+    //         .call(t.append('map_data.layers.custom.title'));
+
+    //     liEnter
+    //         .append('button')
+    //         .attr('class', 'open-data-options')
+    //         .call(uiTooltip()
+    //             .title(() => t.append('settings.custom_data.tooltip'))
+    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+    //         )
+    //         .on('click', function(d3_event) {
+    //             d3_event.preventDefault();
+    //             editCustom();
+    //         })
+    //         .call(svgIcon('#iD-icon-more'));
+
+    //     liEnter
+    //         .append('button')
+    //         .attr('class', 'zoom-to-data')
+    //         .call(uiTooltip()
+    //             .title(() => t.append('map_data.layers.custom.zoom'))
+    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+    //         )
+    //         .on('click', function(d3_event) {
+    //             if (d3_select(this).classed('disabled')) return;
+
+    //             d3_event.preventDefault();
+    //             d3_event.stopPropagation();
+    //             dataLayer.fitZoom();
+    //         })
+    //         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+
+    //     // Update
+    //     ul = ul
+    //         .merge(ulEnter);
+
+    //     ul.selectAll('.list-item-data')
+    //         .classed('active', showsData)
+    //         .selectAll('label')
+    //         .classed('deemphasize', !hasData)
+    //         .selectAll('input')
+    //         .property('disabled', !hasData)
+    //         .property('checked', showsData);
+
+    //     ul.selectAll('button.zoom-to-data')
+    //         .classed('disabled', !hasData);
+    // }
+
+    // added/testing: new function for local photos
+    function drawLocalPhotos(selection) {
+        var dataLayer = layers.layer('local-photos');
+        console.log(dataLayer, 'dataLayer');
+        // var hasData = dataLayer && dataLayer.hasData();
+        // var showsData = hasData && dataLayer.enabled();
+
+        // var ul = selection
+        //     .selectAll('.layer-list-local-photos')
+        //     .data(dataLayer ? [0] : []);
+
+        var ul = selection
+            .selectAll('.layer-list-local-photos')
+            .data(dataLayer ? [0] : []);
+        console.log(ul, 'ul inside drawLocalPhotos');
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-data');
+        console.log(ulEnter, 'ulEnter inside drawLocalPhotos');
+        var localPhotosEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-local-photos');
+
+        var localPhotosLabelEnter = localPhotosEnter
+            .append('label');
+            // TODO: Add tooltip
+
+        localPhotosLabelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('local-photos'); });
+
+        localPhotosLabelEnter
+            .append('span')
+            .text('Local Photos');
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'open-data-options')
+            .call(uiTooltip()
+                .title(t.html('settings.custom_data.tooltip'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                 editLocalPhotos();
+            })
+            .call(svgIcon('#iD-icon-more'));
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'zoom-to-data')
+            .call(uiTooltip()
+                .title(t.html('map_data.layers.custom.zoom'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                if (d3_select(this).classed('disabled')) return;
+
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                dataLayer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        // ul.selectAll('.list-item-data')
+        //     .classed('active', showsData)
+        //     .selectAll('label')
+        //     .classed('deemphasize', !hasData)
+        //     .selectAll('input')
+        //     .property('disabled', !hasData)
+        //     .property('checked', showsData);
+
+        // ul.selectAll('button.zoom-to-data')
+        //     .classed('disabled', !hasData);
+    }
+
+    // current fn
     function drawCustomDataItems(selection) {
         var dataLayer = layers.layer('data');
         var hasData = dataLayer && dataLayer.hasData();
@@ -428,12 +602,9 @@ export function uiSectionDataLayers(context) {
             .call(settingsCustomData);
     }
 
-    function editLocalPhotos() {
-        context.container()
-            .call(settingsLocalPhotosData);
-    }
-
     function customChanged(d) {
+        console.log('customChanged called');
+        console.log(layers);
         var dataLayer = layers.layer('data');
 
         if (d && d.url) {
@@ -443,11 +614,18 @@ export function uiSectionDataLayers(context) {
         }
     }
 
+    function editLocalPhotos() {
+        context.container()
+            .call(settingsLocalPhotosData);
+    }
+
     function localPhotosChanged(d) {
-        var dataLayer = layers.layer('data');
+        console.log('localPhotosChanged called');
+        var localPhotosLayer = layers.layer('local-photos');
 
         if (d && d.fileList) {
-            dataLayer.fileList(d.fileList);
+            console.log('Step 1: fileList set', d.fileList);
+            localPhotosLayer.fileList(d.fileList);
         }
     }
 

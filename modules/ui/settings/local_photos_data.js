@@ -10,7 +10,7 @@ export function uiSettingsLocalPhotosData (context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
-        var dataLayer = context.layers().layer('data');
+        var dataLayer = context.layers().layer('local-photos');
 
         // keep separate copies of original and current settings
         var _origSettings = {
@@ -38,7 +38,7 @@ export function uiSettingsLocalPhotosData (context) {
         //TODO: Add translation
         textSection
             .append('pre')
-            .text('Choose local photos. Supported types are: .jpg, .jpeg, .png');
+            .text('Choose local photos');
         //     .attr('class', 'instructions-file')
         //     .call(t.append('settings.custom_data.file.instructions'));
 
@@ -46,11 +46,11 @@ export function uiSettingsLocalPhotosData (context) {
             .append('input')
             .attr('class', 'field-file')
             .attr('type', 'file')
+            .attr('multiple', 'multiple')
             // .attr('accept', '.gpx,.kml,.geojson,.json,application/gpx+xml,application/vnd.google-earth.kml+xml,application/geo+json,application/json')
             .property('files', _currSettings.fileList)
             .on('change', function(d3_event) {
                 var files = d3_event.target.files;
-                console.log(files);
                 if (files && files.length) {
                     // _currSettings.url = '';
                     // textSection.select('.field-url').property('value', '');
@@ -59,22 +59,6 @@ export function uiSettingsLocalPhotosData (context) {
                     _currSettings.fileList = null;
                 }
             });
-
-        // textSection
-        //     .append('h4')
-        //     .call(t.append('settings.custom_data.or'));
-
-        // textSection
-        //     .append('pre')
-        //     .attr('class', 'instructions-url')
-        //     .call(t.append('settings.custom_data.url.instructions'));
-
-        // textSection
-        //     .append('textarea')
-        //     .attr('class', 'field-url')
-        //     .attr('placeholder', t('settings.custom_data.url.placeholder'))
-        //     .call(utilNoAuto)
-        //     .property('value', _currSettings.url);
 
 
         // insert a cancel button
