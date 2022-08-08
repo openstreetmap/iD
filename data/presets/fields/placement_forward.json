@@ -1,5 +1,9 @@
 {
     "key": "placement:forward",
     "type": "combo",
-    "label": "Placement forward"
+    "label": "Placement forward",
+    "prerequisiteTag": {
+        "key": "oneway",
+        "valueNot": "yes"
+    }
 }

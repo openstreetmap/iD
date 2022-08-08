@@ -16,6 +16,14 @@
       "sidewalk:left": "no",
       "sidewalk:right": "separate"
   },
+  "addTags": {
+    "highway": "residential",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "no",
+      "sidewalk:right": "separate",
+      "surface": "asphalt"
+},
   "terms": [
       "rr",
       "res",
