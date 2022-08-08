@@ -30,8 +30,6 @@
       "lanes_backward",
       "surface",
       "oneway/bicycle",
-      "lane_width_start",
-      "lane_width_end",
       "placement_forward",
       "lane_width_start_forward",
       "lane_width_end_forward",
