@@ -34,7 +34,7 @@ export function uiFieldCycleway(field, context) {
             .attr('class', 'rows')
             .merge(div);
 
-        var keys = ['cycleway:left', 'cycleway:right'];
+        var keys = ['cycleway:both', 'cycleway:left', 'cycleway:right'];
 
         items = div.selectAll('li')
             .data(keys);
@@ -73,29 +73,37 @@ export function uiFieldCycleway(field, context) {
 
 
     function change() {
+        var both = utilGetSetValue(d3_select('.preset-input-cyclewayboth'));
         var left = utilGetSetValue(d3_select('.preset-input-cyclewayleft'));
         var right = utilGetSetValue(d3_select('.preset-input-cyclewayright'));
         var tag = {};
 
+        console.log(`both: ${both}, left: ${left}, right: ${right}`);
+
+        if (both === 'none' || both === '') { both = undefined; }
         if (left === 'none' || left === '') { left = undefined; }
         if (right === 'none' || right === '') { right = undefined; }
 
         // Always set both left and right as changing one can affect the other
         tag = {
             cycleway: undefined,
+            'cycleway:both': both,
             'cycleway:left': left,
             'cycleway:right': right
         };
 
         // If the left and right tags match, use the cycleway tag to tag both
         // sides the same way
-        if (left === right) {
+        if (left === right && left !== undefined) {
             tag = {
-                cycleway: left,
+                cycleway: undefined,
+                'cycleway:both': left,
                 'cycleway:left': undefined,
                 'cycleway:right': undefined
             };
         }
+
+        console.log('tag', tag);
 
         dispatch.call('change', this, tag);
     }
@@ -114,8 +122,8 @@ export function uiFieldCycleway(field, context) {
     cycleway.tags = function(tags) {
         utilGetSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
                 // If cycleway is set, always return that
-                if (tags.cycleway) {
-                    return tags.cycleway;
+                if (tags['cycleway:both']) {
+                    return tags['cycleway:both'];
                 }
                 return tags[d] || '';
             })
