@@ -1,5 +1,5 @@
 {
-  "key": "cycleway:buffer",
+  "key": "cycleway:both:buffer",
   "type": "number",
   "minValue": 0,
   "label": "Cycleway buffer width (m) (both sides)",

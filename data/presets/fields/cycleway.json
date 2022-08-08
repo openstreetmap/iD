@@ -1,11 +1,12 @@
 {
-    "keys": ["cycleway", "cycleway:left", "cycleway:right"],
-    "reference": {"key": "cycleway"},
+    "keys": ["cycleway:both", "cycleway:left", "cycleway:right"],
+    "reference": {"key": "cycleway:both"},
     "type": "cycleway",
     "label": "Bike Lanes",
     "placeholder": "none",
     "strings": {
         "types": {
+            "cycleway:both": "Both sides",
             "cycleway:left": "Left side",
             "cycleway:right": "Right side"
         },
