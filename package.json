@@ -10,6 +10,7 @@
   ],
   "license": "ISC",
   "scripts": {
+    "buildStart": "npm-run-all -s clean build dist start_no_build",
     "all": "npm-run-all -s clean build dist",
     "build": "node --max-old-space-size=4096 build.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
