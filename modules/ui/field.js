@@ -326,8 +326,7 @@ export function uiField(context, presetField, entity, options) {
             for (var i = 0, count = prerequisiteTag.length; i < count; i++) {
                 if (prerequisiteTag[i].key) {
                     var value = latest.tags[prerequisiteTag[i].key];
-                    if (!value 
-                        || (prerequisiteTag[i].valueNot && prerequisiteTag[i].valueNot === value)
+                    if ((prerequisiteTag[i].valueNot && prerequisiteTag[i].valueNot === value)
                         || (prerequisiteTag[i].value && prerequisiteTag[i].value !== value)
                     ) {
                         return false;
