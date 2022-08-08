@@ -319,19 +319,24 @@ export function uiField(context, presetField, entity, options) {
         var prerequisiteTag = field.prerequisiteTag;
 
         if (!tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
-            prerequisiteTag) {
-            if (prerequisiteTag.key) {
-                var value = latest.tags[prerequisiteTag.key];
-                if (!value) return false;
-
-                if (prerequisiteTag.valueNot) {
-                    return prerequisiteTag.valueNot !== value;
+            prerequisiteTag) { // added support for AND arrays (kaligrafy)
+            if (!Array.isArray(prerequisiteTag)) {
+                prerequisiteTag = [prerequisiteTag];
+            }
+            for (var i = 0, count = prerequisiteTag.length; i < count; i++) {
+                if (prerequisiteTag[i].key) {
+                    var value = latest.tags[prerequisiteTag[i].key];
+                    if (!value) return false;
+        
+                    if (prerequisiteTag[i].valueNot) {
+                        return prerequisiteTag[i].valueNot !== value;
+                    }
+                    if (prerequisiteTag[i].value) {
+                        return prerequisiteTag[i].value === value;
+                    }
+                } else if (prerequisiteTag[i].keyNot) {
+                    if (latest.tags[prerequisiteTag[i].keyNot]) return false;
                 }
-                if (prerequisiteTag.value) {
-                    return prerequisiteTag.value === value;
-                }
-            } else if (prerequisiteTag.keyNot) {
-                if (latest.tags[prerequisiteTag.keyNot]) return false;
             }
         }
 
