@@ -4,7 +4,7 @@
     "label": "Change lanes (5 lanes)",
     "prerequisiteTag": [{
         "key": "lanes",
-        "value": "3"
+        "value": "5"
       },{
         "key": "oneway",
         "value": "yes"

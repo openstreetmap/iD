@@ -22,8 +22,6 @@
         "lanes_width/3_lanes_end",
         "lanes_width/2_lanes_start",
         "lanes_width/2_lanes_end",
-        "lane_width_start",
-        "lane_width_end",
         "surface",
         "structure",
         "access",
