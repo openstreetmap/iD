@@ -7,6 +7,11 @@
         "highway": "service",
         "service": "drive-through"
     },
+    "addTags": {
+        "highway": "service",
+        "service": "drive-through",
+        "surface": "asphalt"
+    },
     "reference": {
         "key": "service",
         "value": "drive-through"

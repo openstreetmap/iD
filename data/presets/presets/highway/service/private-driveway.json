@@ -8,6 +8,12 @@
       "service": "driveway",
       "access": "private"
   },
+  "addTags": {
+    "highway": "service",
+      "service": "driveway",
+      "access": "private",
+      "surface": "asphalt"
+  },
   "reference": {
       "key": "service",
       "value": "driveway"

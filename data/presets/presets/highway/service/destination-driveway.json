@@ -8,6 +8,12 @@
       "service": "driveway",
       "motor_vehicle": "destination"
   },
+  "addTags": {
+    "highway": "service",
+      "service": "driveway",
+      "motor_vehicle": "destination",
+      "surface": "asphalt"
+  },
   "reference": {
       "key": "service",
       "value": "driveway"

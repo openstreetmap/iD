@@ -12,6 +12,10 @@
     "tags": {
         "highway": "secondary_link"
     },
+    "addTags": {
+        "highway": "secondary_link",
+        "surface": "asphalt"
+    },
     "terms": [
         "on ramp",
         "off ramp",
