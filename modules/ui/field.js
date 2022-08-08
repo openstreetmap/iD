@@ -323,20 +323,22 @@ export function uiField(context, presetField, entity, options) {
             if (!Array.isArray(prerequisiteTag)) {
                 prerequisiteTag = [prerequisiteTag];
             }
+            var showField = true;
             for (var i = 0, count = prerequisiteTag.length; i < count; i++) {
                 if (prerequisiteTag[i].key) {
                     var value = latest.tags[prerequisiteTag[i].key];
                     if (!value) return false;
                     if (prerequisiteTag[i].valueNot) {
-                        return prerequisiteTag[i].valueNot !== value;
+                        showField = prerequisiteTag[i].valueNot !== value;
                     }
                     if (prerequisiteTag[i].value) {
-                        return prerequisiteTag[i].value === value;
+                        showField = prerequisiteTag[i].value === value;
                     }
                 } else if (prerequisiteTag[i].keyNot) {
                     if (latest.tags[prerequisiteTag[i].keyNot]) return false;
                 }
             }
+            return showField;
         }
 
         return true;
