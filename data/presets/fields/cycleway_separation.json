@@ -2,6 +2,7 @@
     "key": "cycleway:both:separation",
     "type": "combo",
     "label": "Cycleway separation (both sides)",
+    "options": ["solid_line", "dashed_line", "buffer", "flex_post", "parking_lane", "bollard", "kerb", "no"],
     "prerequisiteTag": {
       "key": "cycleway:both",
       "value": "lane"

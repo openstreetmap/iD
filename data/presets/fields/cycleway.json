@@ -1,6 +1,6 @@
 {
     "keys": ["cycleway:both", "cycleway:left", "cycleway:right"],
-    "reference": {"key": "cycleway:both"},
+    "reference": {"key": "cycleway"},
     "type": "cycleway",
     "label": "Bike Lanes",
     "placeholder": "none",
@@ -18,6 +18,10 @@
             "lane": {
                 "title": "Standard bike lane",
                 "description": "A bike lane separated from auto traffic by a painted line"
+            },
+            "separate": {
+                "title": "Bike track drawned separately",
+                "description": "A bike lane separated from traffic by a physical barrier is drawned as its own separate way"
             },
             "shared_lane": {
                 "title": "Shared bike lane",
