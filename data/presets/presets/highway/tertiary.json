@@ -12,6 +12,10 @@
     "tags": {
         "highway": "tertiary"
     },
+    "addTags": {
+        "highway": "tertiary",
+        "surface": "asphalt"
+    },
     "terms": [
         "road",
         "street"

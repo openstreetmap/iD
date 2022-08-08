@@ -8,6 +8,12 @@
       "service": "parking_aisle",
       "access": "private"
   },
+  "addTags": {
+    "highway": "service",
+    "service": "parking_aisle",
+    "access": "private",
+      "surface": "asphalt"
+  },
   "reference": {
       "key": "service",
       "value": "parking_aisle"
