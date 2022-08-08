@@ -318,7 +318,7 @@ export function uiField(context, presetField, entity, options) {
 
         var prerequisiteTag = field.prerequisiteTag;
 
-        if (!tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
+        if (/*!tagsContainFieldKey() &&*/ // ignore tagging prerequisites if a value is already present // removed by kaligrafy
             prerequisiteTag) { // added support for AND arrays (kaligrafy)
             if (!Array.isArray(prerequisiteTag)) {
                 prerequisiteTag = [prerequisiteTag];
@@ -327,7 +327,6 @@ export function uiField(context, presetField, entity, options) {
                 if (prerequisiteTag[i].key) {
                     var value = latest.tags[prerequisiteTag[i].key];
                     if (!value) return false;
-        
                     if (prerequisiteTag[i].valueNot) {
                         return prerequisiteTag[i].valueNot !== value;
                     }
