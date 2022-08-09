@@ -1,0 +1,28 @@
+{
+    "key": "turn:lanes",
+    "type": "combo",
+    "label": "Turn lanes oneway (5 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes",
+            "value": "5"
+        },
+        {
+            "key": "oneway",
+            "value": "yes"
+        }
+    ],
+    "strings": {
+        "options": {
+            "left|through|through|through|right": "↰ | ↑ |↑ | ↑ | ↱",
+            "left|through|through|through|through;right": "↰ | ↑ | ↑ | ↑ | ↑↱",
+            "left;through|through|through|through|right": "↰↑ | ↑ | ↑ | ↑ | ↱",
+            "left|through|through|through|through": "↰ | ↑ | ↑ | ↑ | ↑",
+            "through|through|through|through|right": "↑ | ↑ | ↑ | ↑ | ↱",
+            "left||||": "↰ | | | |",
+            "||||right": "| | | | ↱",
+            "||||merge_to_left": "| | | | ↖︎",
+            "merge_to_right||||": "↗︎ | | | |"
+        }
+    }
+}

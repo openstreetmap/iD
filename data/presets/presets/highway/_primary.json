@@ -1,0 +1,24 @@
+{
+    "icon": "iD-highway-primary",
+    "fields": [
+        "{highway/residential}"
+    ],
+    "moreFields": [
+        "{highway/residential}"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "primary"
+    },
+    "addTags": {
+        "highway": "primary",
+        "surface": "asphalt"
+    },
+    "terms": [
+        "road",
+        "street"
+    ],
+    "name": "Primary Road"
+}

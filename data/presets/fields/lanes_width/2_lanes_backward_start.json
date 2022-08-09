@@ -1,0 +1,25 @@
+{
+    "key": "width:lanes:backward:start",
+    "type": "combo",
+    "label": "Width lanes backward start (2 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:backward",
+            "value": "2"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        },
+        {
+            "key": "placement",
+            "value": "transition"
+        }
+    ],
+    "strings": {
+        "options": {
+            "|0": "↑/  ou  /↓",
+            "0|": "\\↑  ou  ↓\\"
+        }
+    }
+}

@@ -1,10 +1,10 @@
 {
     "icon": "iD-highway-tertiary-link",
     "fields": [
-        "{highway/primary_link}"
+        "{highway/tertiary}"
     ],
     "moreFields": [
-        "{highway/primary_link}"
+        "{highway/tertiary}"
     ],
     "geometry": [
         "line"

@@ -1,0 +1,25 @@
+{
+    "key": "width:lanes:forward:end",
+    "type": "combo",
+    "label": "Width lanes forward end (3 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:forward",
+            "value": "3"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        },
+        {
+            "key": "placement",
+            "value": "transition"
+        }
+    ],
+    "strings": {
+        "options": {
+            "0||": "/↑↑  ou  ↓↓/",
+            "||0": "↑↑\\  ou  \\↓↓"
+        }
+    }
+}

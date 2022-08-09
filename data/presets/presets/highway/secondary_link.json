@@ -1,10 +1,10 @@
 {
     "icon": "iD-highway-secondary-link",
     "fields": [
-        "{highway/primary_link}"
+        "{highway/secondary}"
     ],
     "moreFields": [
-        "{highway/primary_link}"
+        "{highway/secondary}"
     ],
     "geometry": [
         "line"

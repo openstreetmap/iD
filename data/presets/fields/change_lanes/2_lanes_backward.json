@@ -1,0 +1,22 @@
+{
+    "key": "change:lanes:backward",
+    "type": "combo",
+    "label": "Change lanes backward (2 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:backward",
+            "value": "2"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        }
+    ],
+    "strings": {
+        "options": {
+            "no|no": "] | [",
+            "yes|no": "] ⋮| [",
+            "no|yes": "] |⋮ ["
+        }
+    }
+}

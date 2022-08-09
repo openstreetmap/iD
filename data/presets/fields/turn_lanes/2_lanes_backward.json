@@ -1,0 +1,30 @@
+{
+    "key": "turn:lanes:backward",
+    "type": "combo",
+    "label": "Turn lanes backward (2 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:backward",
+            "value": "2"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        }
+    ],
+    "strings": {
+        "options": {
+            "left|": "↰ |",
+            "|right": "| ↱",
+            "left|right": "↰ | ↱",
+            "left|through": "↰ | ↑",
+            "through|right": "↑ | ↱",
+            "left|through;right": "↰ | ↑↱",
+            "left;through|right": "↰↑ | ↱",
+            "through|through;right": "↑ | ↑↱",
+            "left;through|through": "↰↑ | ↑",
+            "|merge_to_left": "| ↖︎",
+            "merge_to_right|": "↗︎ |"
+        }
+    }
+}

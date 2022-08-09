@@ -1,0 +1,21 @@
+{
+    "icon": "iD-highway-service",
+    "fields": [
+        "{highway/residential}"
+    ],
+    "moreFields": [
+        "{highway/residential}"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "service"
+    },
+    "terms": [
+        "road",
+        "street"
+    ],
+    "matchScore": 0.9,
+    "name": "Service Road"
+}

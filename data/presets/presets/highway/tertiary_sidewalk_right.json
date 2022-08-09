@@ -1,11 +1,10 @@
 {
-  "icon": "iD-highway-tertiary",
-  "fields": [
-      "{highway/primary}"
-  ],
-  "moreFields": [
-      "{highway/primary}"
-  ],
+    "fields": [
+        "{highway/tertiary}"
+    ],
+    "moreFields": [
+        "{highway/tertiary}"
+    ],
   "geometry": [
       "line"
   ],

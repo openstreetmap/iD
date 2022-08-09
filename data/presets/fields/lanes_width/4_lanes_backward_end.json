@@ -1,0 +1,25 @@
+{
+    "key": "width:lanes:backward:end",
+    "type": "combo",
+    "label": "Width lanes backward end (4 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:backward",
+            "value": "4"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        },
+        {
+            "key": "placement",
+            "value": "transition"
+        }
+    ],
+    "strings": {
+        "options": {
+            "0|||": "/↑↑↑  ou  ↓↓↓/",
+            "|||0": "↑↑↑\\  ou  \\↓↓↓"
+        }
+    }
+}

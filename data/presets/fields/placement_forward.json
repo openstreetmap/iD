@@ -2,8 +2,14 @@
     "key": "placement:forward",
     "type": "combo",
     "label": "Placement forward",
-    "prerequisiteTag": {
-        "key": "oneway",
-        "valueNot": "yes"
-    }
+    "prerequisiteTag": [
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        },
+        {
+            "key": "placement",
+            "valueNot": "transition"
+        }
+    ]
 }
