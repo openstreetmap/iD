@@ -18,7 +18,8 @@
             "yes|only_left|no|no": "] ⋮ | | [",
             "no|no|only_right|yes": "] | | ⋮ [",
             "yes|no|no|no": "] ⋮| | | [",
-            "no|no|no|yes": "] | | |⋮ ["
+            "no|no|no|yes": "] | | |⋮ [",
+            "yes|yes|only_left|no": "] ⋮ ⋮ | ["
         }
     }
 }
