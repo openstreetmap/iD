@@ -1,7 +1,7 @@
 {
     "key": "width:lanes:end",
     "type": "combo",
-    "label": "Width lanes end (2 lanes)",
+    "label": "Width lanes oneway end (2 lanes)",
     "prerequisiteTag": [
         {
             "key": "lanes",
