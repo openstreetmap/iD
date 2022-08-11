@@ -21,6 +21,7 @@
             "through|right": "↑ | ↱",
             "left|through;right": "↰ | ↑↱",
             "left;through|right": "↰↑ | ↱",
+            "left;through|through;right": "↰↑ | ↑↱",
             "through|through;right": "↑ | ↑↱",
             "left;through|through": "↰↑ | ↑",
             "|merge_to_left": "| ↖︎",

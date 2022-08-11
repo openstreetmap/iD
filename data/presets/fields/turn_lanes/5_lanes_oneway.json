@@ -17,6 +17,7 @@
             "left|through|through|through|right": "↰ | ↑ |↑ | ↑ | ↱",
             "left|through|through|through|through;right": "↰ | ↑ | ↑ | ↑ | ↑↱",
             "left;through|through|through|through|right": "↰↑ | ↑ | ↑ | ↑ | ↱",
+            "left;through|through|through|through|through;right": "↰↑ | ↑ | ↑ | ↑ | ↑↱",
             "left|through|through|through|through": "↰ | ↑ | ↑ | ↑ | ↑",
             "through|through|through|through|right": "↑ | ↑ | ↑ | ↑ | ↱",
             "left||||": "↰ | | | |",
