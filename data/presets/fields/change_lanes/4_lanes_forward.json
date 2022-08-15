@@ -19,7 +19,8 @@
             "no|no|only_right|yes": "] | | ⋮ [",
             "yes|no|no|no": "] ⋮| | | [",
             "no|no|no|yes": "] | | |⋮ [",
-            "yes|yes|only_left|no": "] ⋮ ⋮ | ["
+            "yes|yes|only_left|no": "] ⋮ ⋮ | [",
+            "no|only_right|yes|yes": "] | ⋮ ⋮ ["
         }
     }
 }

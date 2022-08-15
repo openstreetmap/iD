@@ -5,6 +5,7 @@
         "ref_road_number",
         "oneway_yes",
         "maxspeed",
+        "maxspeed/advisory",
         "minspeed",
         "lanes",
         "lanes_forward",
