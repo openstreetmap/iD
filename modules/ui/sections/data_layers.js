@@ -40,7 +40,7 @@ export function uiSectionDataLayers(context) {
             .call(drawOsmItems)
             .call(drawQAItems)
             .call(drawCustomDataItems)
-            // .call(drawLocalPhotos)
+            .call(drawLocalPhotos)
             .call(drawVectorItems)      // Beta - Detroit mapping challenge
             .call(drawPanelItems);
     }
@@ -295,104 +295,14 @@ export function uiSectionDataLayers(context) {
     }
 
     // original function
-    // function drawCustomDataItems(selection) {
-    //     var dataLayer = layers.layer('data');
-    //     var hasData = dataLayer && dataLayer.hasData();
-    //     var showsData = hasData && dataLayer.enabled();
-
-    //     var ul = selection
-    //         .selectAll('.layer-list-data')
-    //         .data(dataLayer ? [0] : []);
-
-    //     // Exit
-    //     ul.exit()
-    //         .remove();
-
-    //     // Enter
-    //     var ulEnter = ul.enter()
-    //         .append('ul')
-    //         .attr('class', 'layer-list layer-list-data');
-
-    //     var liEnter = ulEnter
-    //         .append('li')
-    //         .attr('class', 'list-item-data');
-
-    //     var labelEnter = liEnter
-    //         .append('label')
-    //         .call(uiTooltip()
-    //             .title(() => t.append('map_data.layers.custom.tooltip'))
-    //             .placement('top')
-    //         );
-
-    //     labelEnter
-    //         .append('input')
-    //         .attr('type', 'checkbox')
-    //         .on('change', function() { toggleLayer('data'); });
-
-    //     labelEnter
-    //         .append('span')
-    //         .call(t.append('map_data.layers.custom.title'));
-
-    //     liEnter
-    //         .append('button')
-    //         .attr('class', 'open-data-options')
-    //         .call(uiTooltip()
-    //             .title(() => t.append('settings.custom_data.tooltip'))
-    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-    //         )
-    //         .on('click', function(d3_event) {
-    //             d3_event.preventDefault();
-    //             editCustom();
-    //         })
-    //         .call(svgIcon('#iD-icon-more'));
-
-    //     liEnter
-    //         .append('button')
-    //         .attr('class', 'zoom-to-data')
-    //         .call(uiTooltip()
-    //             .title(() => t.append('map_data.layers.custom.zoom'))
-    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-    //         )
-    //         .on('click', function(d3_event) {
-    //             if (d3_select(this).classed('disabled')) return;
-
-    //             d3_event.preventDefault();
-    //             d3_event.stopPropagation();
-    //             dataLayer.fitZoom();
-    //         })
-    //         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
-
-    //     // Update
-    //     ul = ul
-    //         .merge(ulEnter);
-
-    //     ul.selectAll('.list-item-data')
-    //         .classed('active', showsData)
-    //         .selectAll('label')
-    //         .classed('deemphasize', !hasData)
-    //         .selectAll('input')
-    //         .property('disabled', !hasData)
-    //         .property('checked', showsData);
-
-    //     ul.selectAll('button.zoom-to-data')
-    //         .classed('disabled', !hasData);
-    // }
-
-    // added/testing: new function for local photos
-    function drawLocalPhotos(selection) {
-        var dataLayer = layers.layer('local-photos');
-        console.log(dataLayer, 'dataLayer');
-        // var hasData = dataLayer && dataLayer.hasData();
-        // var showsData = hasData && dataLayer.enabled();
-
-        // var ul = selection
-        //     .selectAll('.layer-list-local-photos')
-        //     .data(dataLayer ? [0] : []);
+    function drawCustomDataItems(selection) {
+        var dataLayer = layers.layer('data');
+        var hasData = dataLayer && dataLayer.hasData();
+        var showsData = hasData && dataLayer.enabled();
 
         var ul = selection
-            .selectAll('.layer-list-local-photos')
+            .selectAll('.layer-list-data')
             .data(dataLayer ? [0] : []);
-        console.log(ul, 'ul inside drawLocalPhotos');
 
         // Exit
         ul.exit()
@@ -402,7 +312,93 @@ export function uiSectionDataLayers(context) {
         var ulEnter = ul.enter()
             .append('ul')
             .attr('class', 'layer-list layer-list-data');
-        console.log(ulEnter, 'ulEnter inside drawLocalPhotos');
+
+        var liEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-data');
+
+        var labelEnter = liEnter
+            .append('label')
+            .call(uiTooltip()
+                .title(() => t.append('map_data.layers.custom.tooltip'))
+                .placement('top')
+            );
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('data'); });
+
+        labelEnter
+            .append('span')
+            .call(t.append('map_data.layers.custom.title'));
+
+        liEnter
+            .append('button')
+            .attr('class', 'open-data-options')
+            .call(uiTooltip()
+                .title(() => t.append('settings.custom_data.tooltip'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                editCustom();
+            })
+            .call(svgIcon('#iD-icon-more'));
+
+        liEnter
+            .append('button')
+            .attr('class', 'zoom-to-data')
+            .call(uiTooltip()
+                .title(() => t.append('map_data.layers.custom.zoom'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                if (d3_select(this).classed('disabled')) return;
+
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                dataLayer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        ul.selectAll('.list-item-data')
+            .classed('active', showsData)
+            .selectAll('label')
+            .classed('deemphasize', !hasData)
+            .selectAll('input')
+            .property('disabled', !hasData)
+            .property('checked', showsData);
+
+        ul.selectAll('button.zoom-to-data')
+            .classed('disabled', !hasData);
+    }
+
+    // added/testing: new function for local photos
+    function drawLocalPhotos(selection) {
+        var dataLayer = layers.layer('local-photos');
+        console.log(dataLayer, 'dataLayer');
+        // var hasData = dataLayer && dataLayer.hasData();
+        // var showsData = hasData && dataLayer.enabled();
+
+        // creates ul, if it doesn't exist
+        var ul = selection
+            .selectAll('.layer-list-local-photos')
+            .data(dataLayer ? [0] : []);
+        
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-local-photos');
+        
         var localPhotosEnter = ulEnter
             .append('li')
             .attr('class', 'list-item-local-photos');
@@ -466,136 +462,136 @@ export function uiSectionDataLayers(context) {
     }
 
     // current fn
-    function drawCustomDataItems(selection) {
-        var dataLayer = layers.layer('data');
-        var hasData = dataLayer && dataLayer.hasData();
-        var showsData = hasData && dataLayer.enabled();
+    // function drawCustomDataItems(selection) {
+    //     var dataLayer = layers.layer('data');
+    //     var hasData = dataLayer && dataLayer.hasData();
+    //     var showsData = hasData && dataLayer.enabled();
 
-        var ul = selection
-            .selectAll('.layer-list-data')
-            .data(dataLayer ? [0] : []);
+    //     var ul = selection
+    //         .selectAll('.layer-list-data')
+    //         .data(dataLayer ? [0] : []);
 
-        // Exit
-        ul.exit()
-            .remove();
+    //     // Exit
+    //     ul.exit()
+    //         .remove();
 
-        // Enter
-        var ulEnter = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-data');
+    //     // Enter
+    //     var ulEnter = ul.enter()
+    //         .append('ul')
+    //         .attr('class', 'layer-list layer-list-data');
 
-        // Custom Map Data
-        var mapEnter = ulEnter
-            .append('li')
-            .attr('class', 'list-item-data');
+    //     // Custom Map Data
+    //     var mapEnter = ulEnter
+    //         .append('li')
+    //         .attr('class', 'list-item-data');
 
-        var mapLabelEnter = mapEnter
-            .append('label')
-            .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.tooltip'))
-                .placement('top')
-            );
+    //     var mapLabelEnter = mapEnter
+    //         .append('label')
+    //         .call(uiTooltip()
+    //             .title(t.html('map_data.layers.custom.tooltip'))
+    //             .placement('top')
+    //         );
 
-        mapLabelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('data'); });
+    //     mapLabelEnter
+    //         .append('input')
+    //         .attr('type', 'checkbox')
+    //         .on('change', function() { toggleLayer('data'); });
 
-        mapLabelEnter
-            .append('span')
-            .call(t.append('map_data.layers.custom.title'));
+    //     mapLabelEnter
+    //         .append('span')
+    //         .call(t.append('map_data.layers.custom.title'));
 
-        mapEnter
-            .append('button')
-            .attr('class', 'open-data-options')
-            .call(uiTooltip()
-                .title(t.html('settings.custom_data.tooltip'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                editCustom();
-            })
-            .call(svgIcon('#iD-icon-more'));
+    //     mapEnter
+    //         .append('button')
+    //         .attr('class', 'open-data-options')
+    //         .call(uiTooltip()
+    //             .title(t.html('settings.custom_data.tooltip'))
+    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+    //         )
+    //         .on('click', function(d3_event) {
+    //             d3_event.preventDefault();
+    //             editCustom();
+    //         })
+    //         .call(svgIcon('#iD-icon-more'));
 
-        mapEnter
-            .append('button')
-            .attr('class', 'zoom-to-data')
-            .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.zoom'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event) {
-                if (d3_select(this).classed('disabled')) return;
+    //     mapEnter
+    //         .append('button')
+    //         .attr('class', 'zoom-to-data')
+    //         .call(uiTooltip()
+    //             .title(t.html('map_data.layers.custom.zoom'))
+    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+    //         )
+    //         .on('click', function(d3_event) {
+    //             if (d3_select(this).classed('disabled')) return;
 
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                dataLayer.fitZoom();
-            })
-            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+    //             d3_event.preventDefault();
+    //             d3_event.stopPropagation();
+    //             dataLayer.fitZoom();
+    //         })
+    //         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
 
-        // new item - local photos
-        var localPhotosEnter = ulEnter
-            .append('li')
-            .attr('class', 'list-item-local-photos');
+    //     // new item - local photos
+    //     var localPhotosEnter = ulEnter
+    //         .append('li')
+    //         .attr('class', 'list-item-local-photos');
 
-        var localPhotosLabelEnter = localPhotosEnter
-            .append('label');
-            // TODO: Add tooltip
+    //     var localPhotosLabelEnter = localPhotosEnter
+    //         .append('label');
+    //         // TODO: Add tooltip
 
-        localPhotosLabelEnter
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() { toggleLayer('data'); });
+    //     localPhotosLabelEnter
+    //         .append('input')
+    //         .attr('type', 'checkbox')
+    //         .on('change', function() { toggleLayer('data'); });
 
-        localPhotosLabelEnter
-            .append('span')
-            .text('Local Photos');
+    //     localPhotosLabelEnter
+    //         .append('span')
+    //         .text('Local Photos');
 
-        localPhotosEnter
-            .append('button')
-            .attr('class', 'open-data-options')
-            .call(uiTooltip()
-                .title(t.html('settings.custom_data.tooltip'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                 editLocalPhotos();
-            })
-            .call(svgIcon('#iD-icon-more'));
+    //     localPhotosEnter
+    //         .append('button')
+    //         .attr('class', 'open-data-options')
+    //         .call(uiTooltip()
+    //             .title(t.html('settings.custom_data.tooltip'))
+    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+    //         )
+    //         .on('click', function(d3_event) {
+    //             d3_event.preventDefault();
+    //              editLocalPhotos();
+    //         })
+    //         .call(svgIcon('#iD-icon-more'));
 
-        localPhotosEnter
-            .append('button')
-            .attr('class', 'zoom-to-data')
-            .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.zoom'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event) {
-                if (d3_select(this).classed('disabled')) return;
+    //     localPhotosEnter
+    //         .append('button')
+    //         .attr('class', 'zoom-to-data')
+    //         .call(uiTooltip()
+    //             .title(t.html('map_data.layers.custom.zoom'))
+    //             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+    //         )
+    //         .on('click', function(d3_event) {
+    //             if (d3_select(this).classed('disabled')) return;
 
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                dataLayer.fitZoom();
-            })
-            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+    //             d3_event.preventDefault();
+    //             d3_event.stopPropagation();
+    //             dataLayer.fitZoom();
+    //         })
+    //         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
 
-        // Update
-        ul = ul
-            .merge(ulEnter);
+    //     // Update
+    //     ul = ul
+    //         .merge(ulEnter);
 
-        ul.selectAll('.list-item-data')
-            .classed('active', showsData)
-            .selectAll('label')
-            .classed('deemphasize', !hasData)
-            .selectAll('input')
-            .property('disabled', !hasData)
-            .property('checked', showsData);
+    //     ul.selectAll('.list-item-data')
+    //         .classed('active', showsData)
+    //         .selectAll('label')
+    //         .classed('deemphasize', !hasData)
+    //         .selectAll('input')
+    //         .property('disabled', !hasData)
+    //         .property('checked', showsData);
 
-        ul.selectAll('button.zoom-to-data')
-            .classed('disabled', !hasData);
-    }
+    //     ul.selectAll('button.zoom-to-data')
+    //         .classed('disabled', !hasData);
+    // }
 
     function editCustom() {
         context.container()

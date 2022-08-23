@@ -62,6 +62,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         _initialized = true;
     }
 
+    // TODO: after checkbox is implemented
     function showLayer() {
         console.log('showLayer() called');
         // if images are not available return
@@ -79,7 +80,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .on('end', function () { dispatch.call('change'); });
     }
 
-
+    // TODO: after checkbox is implemented
     function hideLayer() {
         console.log('hideLayer() called');
         throttledRedraw.cancel();
@@ -122,7 +123,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         context.map().centerEase(image.loc);
     }
 
-
+    // TODO: later
     function mouseover(d3_event, image) {
         console.log('mouseover() called');
         // const service = getService();
@@ -130,7 +131,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         // if (service) service.setStyles(context, image);
     }
 
-
+    // TODO: later
     function mouseout() {
         console.log('mouseout() called');
         // const service = getService();
@@ -153,6 +154,18 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // no need to filter sequence
     // function filterSequences(sequences) {...}
 
+    // function getService() {
+    //     console.log('getService() called');
+    //     if (services.mapillary && !_fileList) {
+    //         _fileList = services.mapillary;
+    //         _fileList.event.on('loadedImages', throttledRedraw);
+    //     } else if (!services.mapillary && _fileList) {
+    //         _fileList = null;
+    //     }
+
+    //     return _mapillary;
+    // }
+
     // puts the images on the map
     function update() {
         console.log('update() called');
@@ -161,16 +174,19 @@ export function svgLocalPhotos(projection, context, dispatch) {
         const showViewfields = (z >= minViewfieldZoom);
 
         // const service = getService();
+        // const service = _fileList;
         // let sequences = (service ? service.sequences(projection) : []);
         // let images = (service && showMarkers ? service.images(projection) : []);
+        // supply dummy data and see the rest of the code
 
         // images = filterImages(images);
         // sequences = filterSequences(sequences, service);
 
         // service.filterViewer(context);
 
-        let traces = layer.selectAll('.sequences').selectAll('.sequence');
+        let traces = layer.selectAll('.sequences').selectAll('.sequence')
             // .data(sequences, function(d) { return d.properties.id; });
+            .data(_fileList, function(d) { return 33;});
 
         // exit
         traces.exit()
@@ -184,8 +200,9 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .attr('d', svgPath(projection).geojson);
 
 
-        const groups = layer.selectAll('.markers').selectAll('.viewfield-group');
+        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             // .data(images, function(d) { return d.id; });
+            .data(_fileList, function(d) { return 33;});
 
         // exit
         groups.exit()
@@ -195,8 +212,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
         const groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .on('mouseenter', mouseover)
-            .on('mouseleave', mouseout)
+            // .on('mouseenter', mouseover)
+            // .on('mouseleave', mouseout)
             .on('click', click);
 
         groupsEnter
@@ -249,35 +266,33 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // create your onw css for this
     function drawPhotos(selection) {
         console.log('drawPhotos fn called');
+        
         // const enabled = svgMapillaryImages.enabled;
         const enabled = _enabled;
-        // const service = getService();
+        const fileList = _fileList;
 
-        // layer = selection.selectAll('.local-photos')
-        // layer = selection.selectAll('.layer-local-photos');
-        // layer = selection.selectAll('.data');
-            // .data(service ? [0] : []);
-            // .data([0]);
+        // creates a layer if doesn't exist
+        layer = selection.selectAll('.layer-local-photos')
+            .data(fileList ? [0] : []);
 
-        // layer.exit()
-        //     .remove();
+        layer.exit()
+            .remove();
 
-        // const layerEnter = layer.enter()
-        //     .append('g')
-        //     // .attr('class', 'layer-local-photos')
-        //     .attr('class', 'layer-mapillary')
-        //     .style('display', enabled ? 'block' : 'none');
+        const layerEnter = layer.enter()
+            .append('g')
+            .attr('class', 'layer-local-photos')
+            .style('display', enabled ? 'block' : 'none');
 
-        // layerEnter
-        //     .append('g')
-        //     .attr('class', 'sequences');
+        layerEnter
+            .append('g')
+            .attr('class', 'sequences');
 
-        // layerEnter
-        //     .append('g')
-        //     .attr('class', 'markers');
+        layerEnter
+            .append('g')
+            .attr('class', 'markers');
 
-        // layer = layerEnter
-        //     .merge(layer);
+        layer = layerEnter
+            .merge(layer);
 
         // if (enabled) {
         //     if (~~context.map().zoom() >= minZoom) {
@@ -288,6 +303,13 @@ export function svgLocalPhotos(projection, context, dispatch) {
         //         editOff();
         //     }
         // }
+
+        if (_fileList) {
+            editOn();
+            update();
+        } else {
+            editOff();
+        }
     }
 
 
@@ -316,11 +338,11 @@ export function svgLocalPhotos(projection, context, dispatch) {
         if (_enabled) {
             showLayer();
             // context.photos().on('change.mapillary_images', update);
-            context.photos().on('change.local_photos', update);
+            context.photos().on('change.', update);
         } else {
             hideLayer();
             // context.photos().on('change.mapillary_images', null);
-            context.photos().on('change.local_photos', null);
+            context.photos().on('change.', null);
         }
 
         dispatch.call('change');
@@ -345,7 +367,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // drawPhotos.setFile = function(fileList) {
     drawPhotos.setFile = function(file) {
         console.log('drawPhotos.setFile called');
-        _fileList = null;
+        // _fileList = null;
 
         // fileList.forEach(image =>
         //    extract_exif(image)
@@ -362,8 +384,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // Step 1: entry point
     drawPhotos.fileList = function(fileList) {
         console.log('drawPhotos.fileList called');
-        console.log('Step 2: fileList read in local_photos.js', fileList);
-        // if (!arguments.length) return _fileList;
+        console.log('Step 2: fileList read', fileList);
+        if (!arguments.length) return _fileList;
 
         _fileList = fileList;
 
@@ -385,6 +407,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         return this;
     };
 
+    // TODO: later
     // new
     // when all photos are uploaded, zoom to see them all
     drawPhotos.fitZoom = function() {
@@ -429,6 +452,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         return this;
     };
 
+    // TODO: later
     drawPhotos.supported = function() {
         console.log('drawPhotos.supported called');
         // return !!getService();

@@ -180,6 +180,7 @@ export function svgData(projection, context, dispatch) {
 
     function drawData(selection) {
         console.log('drawData() called');
+        console.log('selection', selection);
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
@@ -373,11 +374,6 @@ export function svgData(projection, context, dispatch) {
                     stringifyGeojsonProperties(gj);
                 }
                 break;
-            // case '.png':
-                // xx = JSON.parse(data);
-                // console.log('Hello world!');
-                // console.log(data);
-                // break;
         }
 
         gj = gj || {};
