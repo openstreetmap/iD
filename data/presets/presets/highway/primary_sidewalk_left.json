@@ -19,8 +19,8 @@
     "highway": "primary",
       "sidewalk": "separate",
       "foot": "use_sidepath",
-      "sidewalk:left": "no",
-      "sidewalk:right": "separate",
+      "sidewalk:left": "separate",
+      "sidewalk:right": "no",
       "surface": "asphalt"
   },
   "terms": [
