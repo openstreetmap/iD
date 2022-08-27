@@ -15,6 +15,13 @@
       "foot": "use_sidepath",
       "sidewalk:left": "separate",
       "sidewalk:right": "no"
+  },"addTags": {
+    "highway": "primary",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "separate",
+      "sidewalk:right": "no",
+      "surface": "asphalt"
   },
   "terms": [
       "pl",

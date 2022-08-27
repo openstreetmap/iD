@@ -1,0 +1,24 @@
+{
+    "icon": "iD-highway-tertiary",
+    "fields": [
+        "{highway/residential}"
+    ],
+    "moreFields": [
+        "{highway/residential}"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "tertiary"
+    },
+    "addTags": {
+        "highway": "tertiary",
+        "surface": "asphalt"
+    },
+    "terms": [
+        "road",
+        "street"
+    ],
+    "name": "Tertiary Road"
+}

@@ -1,10 +1,10 @@
 {
   "icon": "iD-highway-unclassified",
   "fields": [
-      "{highway/residential}"
+      "{highway/unclassified}"
   ],
   "moreFields": [
-      "{highway/residential}"
+      "{highway/unclassified}"
   ],
   "geometry": [
       "line"
@@ -15,6 +15,13 @@
       "foot": "use_sidepath",
       "sidewalk:left": "no",
       "sidewalk:right": "separate"
+  },"addTags": {
+    "highway": "unclassified",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "no",
+      "sidewalk:right": "separate",
+      "surface": "asphalt"
   },
   "terms": [
       "ur",

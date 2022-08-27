@@ -1,11 +1,10 @@
 {
-  "icon": "iD-highway-tertiary",
-  "fields": [
-      "{highway/primary}"
-  ],
-  "moreFields": [
-      "{highway/primary}"
-  ],
+    "fields": [
+        "{highway/tertiary}"
+    ],
+    "moreFields": [
+        "{highway/tertiary}"
+    ],
   "geometry": [
       "line"
   ],
@@ -15,6 +14,13 @@
       "foot": "use_sidepath",
       "sidewalk:left": "no",
       "sidewalk:right": "separate"
+  },"addTags": {
+    "highway": "tertiary",
+      "sidewalk": "separate",
+      "foot": "use_sidepath",
+      "sidewalk:left": "no",
+      "sidewalk:right": "separate",
+      "surface": "asphalt"
   },
   "terms": [
       "tr",

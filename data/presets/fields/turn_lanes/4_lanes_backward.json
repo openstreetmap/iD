@@ -1,0 +1,29 @@
+{
+    "key": "turn:lanes:backward",
+    "type": "combo",
+    "label": "Turn lanes backward (4 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:backward",
+            "value": "4"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        }
+    ],
+    "strings": {
+        "options": {
+            "left|through|through|right": "↰ | ↑ | ↑ | ↱",
+            "left|through|through|through;right": "↰ | ↑ | ↑ | ↑↱",
+            "left;through|through|through|right": "↰↑ | ↑ | ↑ | ↱",
+            "left;through|through|through|through;right": "↰↑ | ↑ | ↑ | ↑↱",
+            "left|through|through|through": "↰ | ↑ | ↑ | ↑",
+            "through|through|through|right": "↑ | ↑ | ↑ | ↱",
+            "left|||": "↰ | | |",
+            "|||right": "| | | ↱",
+            "|||merge_to_left": "| | | ↖︎",
+            "merge_to_right|||": "↗︎ | | |"
+        }
+    }
+}

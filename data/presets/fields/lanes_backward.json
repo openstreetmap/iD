@@ -3,5 +3,9 @@
   "type": "number",
   "minValue": 0,
   "label": "Lanes backward",
-  "placeholder": "1, 2, 3..."
+  "placeholder": "1, 2, 3...",
+  "prerequisiteTag": {
+    "key": "oneway",
+    "valueNot": "yes"
+  }
 }

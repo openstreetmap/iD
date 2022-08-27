@@ -1,0 +1,24 @@
+{
+    "icon": "iD-highway-trunk",
+    "fields": [
+        "{highway/residential}"
+    ],
+    "moreFields": [
+        "{highway/residential}"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "trunk"
+    },
+    "addTags": {
+        "highway": "trunk",
+        "surface": "asphalt"
+    },
+    "terms": [
+        "road",
+        "street"
+    ],
+    "name": "Trunk Road"
+}

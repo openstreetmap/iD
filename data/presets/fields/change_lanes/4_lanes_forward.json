@@ -1,0 +1,26 @@
+{
+    "key": "change:lanes:forward",
+    "type": "combo",
+    "label": "Change lanes forward (4 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes:forward",
+            "value": "4"
+        },
+        {
+            "key": "oneway",
+            "valueNot": "yes"
+        }
+    ],
+    "strings": {
+        "options": {
+            "no|no|no|no": "] | | | [",
+            "yes|only_left|no|no": "] ⋮ | | [",
+            "no|no|only_right|yes": "] | | ⋮ [",
+            "yes|no|no|no": "] ⋮| | | [",
+            "no|no|no|yes": "] | | |⋮ [",
+            "yes|yes|only_left|no": "] ⋮ ⋮ | [",
+            "no|only_right|yes|yes": "] | ⋮ ⋮ ["
+        }
+    }
+}

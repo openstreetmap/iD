@@ -2,8 +2,11 @@
   "key": "width:lanes:backward:start",
   "type": "combo",
   "label": "Lane width start backward",
-  "prerequisiteTag": {
+  "prerequisiteTag": [{
     "key": "placement",
     "value": "transition"
-  }
+  },{
+    "key": "oneway",
+    "valueNot": "yes"
+  }]
 }

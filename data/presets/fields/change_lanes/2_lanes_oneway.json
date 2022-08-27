@@ -1,0 +1,22 @@
+{
+    "key": "change:lanes",
+    "type": "combo",
+    "label": "Change lanes oneway (2 lanes)",
+    "prerequisiteTag": [
+        {
+            "key": "lanes",
+            "value": "2"
+        },
+        {
+            "key": "oneway",
+            "value": "yes"
+        }
+    ],
+    "strings": {
+        "options": {
+            "no|no": "] | [",
+            "yes|no": "] ⋮| [",
+            "no|yes": "] |⋮ ["
+        }
+    }
+}
