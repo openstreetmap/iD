@@ -57,7 +57,7 @@
     "fast-deep-equal": "~3.1.1",
     "fast-json-stable-stringify": "2.1.0",
     "lodash-es": "~4.17.15",
-    "marked": "~4.0.12",
+    "marked": "~4.1.0",
     "node-diff3": "~3.1.0",
     "osm-auth": "~2.0.0",
     "pannellum": "2.5.6",
@@ -68,9 +68,9 @@
     "which-polygon": "2.2.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~6.1.0",
+    "@fortawesome/fontawesome-svg-core": "~6.2.0",
     "@fortawesome/free-brands-svg-icons": "~6.1.0",
-    "@fortawesome/free-regular-svg-icons": "~6.1.0",
+    "@fortawesome/free-regular-svg-icons": "~6.2.0",
     "@fortawesome/free-solid-svg-icons": "~6.1.0",
     "@ideditor/temaki": "~5.1.0",
     "@mapbox/maki": "^8.0.0",
