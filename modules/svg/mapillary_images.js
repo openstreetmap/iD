@@ -111,9 +111,11 @@ export function svgMapillaryImages(projection, context, dispatch) {
     function transform(d) {
         console.log('transform() called');
         let t = svgPointTransform(projection)(d);
+        console.log('before ', t);
         if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         }
+        console.log('after', t);
         return t;
     }
 
@@ -184,6 +186,15 @@ export function svgMapillaryImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection) : []);
         let images = (service && showMarkers ? service.images(projection) : []);
+        // images[0]
+        // {
+        //    "loc":[13.235349655151367,52.50694232952122],
+        //    "captured_at":1619457514500,
+        //    "ca":0,
+        //    "id":505488307476058,
+        //    "is_pano":false,
+        //    "sequence_id":"zcyumxorbza3dq3twjybam"
+        //    }
 
         images = filterImages(images);
         sequences = filterSequences(sequences, service);

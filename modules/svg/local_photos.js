@@ -142,11 +142,12 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // this is coordinates transformation
     // converting gps coordinates on screen
     function transform(d) {
-        console.log('transform() called');
-        let t = svgPointTransform(projection)(d);
-        if (d.ca) {
-            t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
-        }
+        console.log('transform() called with d ', d);
+        // let t = svgPointTransform(projection)(d);
+        let t = 'translate(' + d.loc[0] + ',' + d.loc[1] + ')';
+        // if (d.ca) {
+        //     t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        // }
         return t;
     }
 
@@ -154,55 +155,68 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // no need to filter sequence
     // function filterSequences(sequences) {...}
 
-    // function getService() {
-    //     console.log('getService() called');
-    //     if (services.mapillary && !_fileList) {
-    //         _fileList = services.mapillary;
-    //         _fileList.event.on('loadedImages', throttledRedraw);
-    //     } else if (!services.mapillary && _fileList) {
-    //         _fileList = null;
-    //     }
-
-    //     return _mapillary;
-    // }
 
     // puts the images on the map
     function update() {
         console.log('update() called');
         const z = ~~context.map().zoom();
         const showMarkers = (z >= minMarkerZoom);
-        const showViewfields = (z >= minViewfieldZoom);
+        // const showViewfields = (z >= minViewfieldZoom);
+        const showViewfields = true;
 
         // const service = getService();
         // const service = _fileList;
         // let sequences = (service ? service.sequences(projection) : []);
-        // let images = (service && showMarkers ? service.images(projection) : []);
         // supply dummy data and see the rest of the code
+        // let images = (service && showMarkers ? service.images(projection) : []);
 
-        // images = filterImages(images);
-        // sequences = filterSequences(sequences, service);
+        // images[0]
+        // {
+        //    "loc":[13.235349655151367,52.50694232952122],
+        //    "captured_at":1619457514500,
+        //    "ca":0,
+        //    "id":505488307476058,
+        //    "is_pano":false,
+        //    "sequence_id":"zcyumxorbza3dq3twjybam"
+        //    }
+        let image_1 = { ca: 63.629999999999995,
+                        captured_at: 1629896192000,
+                        id: 1698202743707180,
+                        is_pano: false,
+                        loc: [ 52.50785, 13.23615 ],
+                        sequence_id: "DMyGn8gtvrBwN1xPbVFHAZ",
+                      }
 
-        // service.filterViewer(context);
+        // let image_2 = { ca: 154.6,
+        //                 captured_at: 1629892592000,
+        //                 id: 331503412089696,
+        //                 is_pano: false,
+        //                 loc: [52.50783, 13.23618],
+        //                 sequence_id: "eIZiowmur0COgFXAh468db"
+        //               }
 
-        let traces = layer.selectAll('.sequences').selectAll('.sequence')
+        let images = [image_1]
+
+
+        // let traces = layer.selectAll('.sequences').selectAll('.sequence')
             // .data(sequences, function(d) { return d.properties.id; });
-            .data(_fileList, function(d) { return 33;});
+            // .data(_fileList, function(d) { return 33;});
 
         // exit
-        traces.exit()
-            .remove();
+        // traces.exit()
+            // .remove();
 
         // enter/update
-        traces = traces.enter()
-            .append('path')
-            .attr('class', 'sequence')
-            .merge(traces)
-            .attr('d', svgPath(projection).geojson);
+        // traces = traces.enter()
+        //     .append('path')
+        //     .attr('class', 'sequence')
+        //     .merge(traces)
+        //     .attr('d', svgPath(projection).geojson);
 
 
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             // .data(images, function(d) { return d.id; });
-            .data(_fileList, function(d) { return 33;});
+            .data(images, function(d) { return d.id; });
 
         // exit
         groups.exit()
@@ -236,7 +250,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .append('circle')
             .attr('dx', '0')
             .attr('dy', '0')
-            .attr('r', '6');
+            .attr('r', '15');
 
         const viewfields = markers.selectAll('.viewfield')
             .data(showViewfields ? [0] : []);
@@ -244,21 +258,21 @@ export function svgLocalPhotos(projection, context, dispatch) {
         viewfields.exit()
             .remove();
 
-        viewfields.enter()               // viewfields may or may not be drawn...
-            .insert('path', 'circle')    // but if they are, draw below the circles
-            .attr('class', 'viewfield')
-            .classed('pano', function() { return this.parentNode.__data__.is_pano; })
-            .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
-            .attr('d', viewfieldPath);
+        // viewfields.enter()               // viewfields may or may not be drawn...
+        //     .insert('path', 'circle')    // but if they are, draw below the circles
+        //     .attr('class', 'viewfield')
+        //     .classed('pano', function() { return this.parentNode.__data__.is_pano; })
+        //     .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+        //     .attr('d', viewfieldPath);
 
-        function viewfieldPath() {
-        console.log('viewfieldPath() called');
-            if (this.parentNode.__data__.is_pano) {
-                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
-            } else {
-                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
-            }
-        }
+        // function viewfieldPath() {
+        // console.log('viewfieldPath() called');
+        //     if (this.parentNode.__data__.is_pano) {
+        //         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+        //     } else {
+        //         return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+        //     }
+        // }
     }
 
 
@@ -266,10 +280,11 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // create your onw css for this
     function drawPhotos(selection) {
         console.log('drawPhotos fn called');
-        
+
         // const enabled = svgMapillaryImages.enabled;
         const enabled = _enabled;
         const fileList = _fileList;
+
 
         // creates a layer if doesn't exist
         layer = selection.selectAll('.layer-local-photos')
