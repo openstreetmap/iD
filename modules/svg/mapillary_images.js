@@ -109,13 +109,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function transform(d) {
-        console.log('transform() called');
+        console.log('transform() called with', d);
         let t = svgPointTransform(projection)(d);
-        console.log('before ', t);
+        console.log('after svgPointTransform', t);
         if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         }
-        console.log('after', t);
+        // console.log('after adding rotate', t);
         return t;
     }
 

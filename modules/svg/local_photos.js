@@ -19,16 +19,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     const minViewfieldZoom = 18;
     var detected = utilDetect();
     let layer = d3_select(null);
-    // maybe required
-    // let _mapillary;
     var _fileList;
-
-    // instead of svgLocalPhotos.something, using global variable at top
-    // function init() {
-    //     if (svgMapillaryImages.initialized) return;  // run once
-    //     svgMapillaryImages.enabled = false;
-    //     svgMapillaryImages.initialized = true;
-    // }
 
     // new
     function init() {
@@ -109,6 +100,17 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // opens the image at bottom left
     function click(d3_event, image) {
         console.log('click() called');
+
+        var width = 750, height = 400;
+
+        var canvas = context.container().select('#container')
+                     .append('canvas')
+                     .attr('width', width)
+                     .attr('height', height)
+                     .style('position', 'absolute');
+// style="position: absolute; width: 320px; height: 240px;"
+        var canvas_context = canvas.node().getContext('2d');
+
         // const service = getService();
         // if (!service) return;
 
@@ -141,16 +143,23 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // if you want to put any image with geo coordinates
     // this is coordinates transformation
     // converting gps coordinates on screen
-    function transform(d) {
-        console.log('transform() called with d ', d);
-        // let t = svgPointTransform(projection)(d);
-        let t = 'translate(' + d.loc[0] + ',' + d.loc[1] + ')';
-        // if (d.ca) {
-        //     t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
-        // }
-        return t;
+    function fn_transform(projection) {
+        var svgpoint = function(entity) {
+            var pt = projection(entity.loc);
+        console.log('projection point', pt);
+            return 'translate(' + pt[0] + ',' + pt[1] + ')';
+        };
+
+        return svgpoint;
     }
 
+    function transform(d) {
+        console.log('transform() called with', d);
+        // projection expects [long, lat]
+        let t = fn_transform(projection)(d);
+        console.log('after svgPointTransform', t);
+        return t;
+    }
     // a sequence is a list of images
     // no need to filter sequence
     // function filterSequences(sequences) {...}
@@ -159,6 +168,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     // puts the images on the map
     function update() {
         console.log('update() called');
+        console.log(context.map());
         const z = ~~context.map().zoom();
         const showMarkers = (z >= minMarkerZoom);
         // const showViewfields = (z >= minViewfieldZoom);
@@ -179,13 +189,13 @@ export function svgLocalPhotos(projection, context, dispatch) {
         //    "is_pano":false,
         //    "sequence_id":"zcyumxorbza3dq3twjybam"
         //    }
-        let image_1 = { ca: 63.629999999999995,
-                        captured_at: 1629896192000,
-                        id: 1698202743707180,
-                        is_pano: false,
-                        loc: [ 52.50785, 13.23615 ],
-                        sequence_id: "DMyGn8gtvrBwN1xPbVFHAZ",
-                      }
+        // let image_1 = { ca: 63.629999999999995,
+        //                 captured_at: 1629896192000,
+        //                 id: 1698202743707180,
+        //                 is_pano: false,
+        //                 loc: [ 125, 280],
+        //                 sequence_id: "DMyGn8gtvrBwN1xPbVFHAZ",
+        //               }
 
         // let image_2 = { ca: 154.6,
         //                 captured_at: 1629892592000,
@@ -195,28 +205,26 @@ export function svgLocalPhotos(projection, context, dispatch) {
         //                 sequence_id: "eIZiowmur0COgFXAh468db"
         //               }
 
-        let images = [image_1]
+        let image_1 = {
+                        id: 1,
+                        // loc: [12.99306035041809, 51.99935827101777],
+                        loc: [12, 51]
+                      }
 
+        let image_2 = {
+                        id: 2,
+                        // loc: [12.993113994598389, 51.999364876443025],
+                        // loc: [13.23618, 52.50783],
+                        loc: [35.014377, 52]
+                      }
 
-        // let traces = layer.selectAll('.sequences').selectAll('.sequence')
-            // .data(sequences, function(d) { return d.properties.id; });
-            // .data(_fileList, function(d) { return 33;});
-
-        // exit
-        // traces.exit()
-            // .remove();
-
-        // enter/update
-        // traces = traces.enter()
-        //     .append('path')
-        //     .attr('class', 'sequence')
-        //     .merge(traces)
-        //     .attr('d', svgPath(projection).geojson);
+        let images = [image_1, image_2]
 
 
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             // .data(images, function(d) { return d.id; });
             .data(images, function(d) { return d.id; });
+
 
         // exit
         groups.exit()
@@ -237,9 +245,9 @@ export function svgLocalPhotos(projection, context, dispatch) {
         // update
         const markers = groups
             .merge(groupsEnter)
-            .sort(function(a, b) {
-                return b.loc[1] - a.loc[1];  // sort Y
-            })
+            // .sort(function(a, b) {
+            //     return b.loc[1] - a.loc[1];  // sort Y
+            // })
             .attr('transform', transform)
             .select('.viewfield-scale');
 
@@ -258,21 +266,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
         viewfields.exit()
             .remove();
 
-        // viewfields.enter()               // viewfields may or may not be drawn...
-        //     .insert('path', 'circle')    // but if they are, draw below the circles
-        //     .attr('class', 'viewfield')
-        //     .classed('pano', function() { return this.parentNode.__data__.is_pano; })
-        //     .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
-        //     .attr('d', viewfieldPath);
-
-        // function viewfieldPath() {
-        // console.log('viewfieldPath() called');
-        //     if (this.parentNode.__data__.is_pano) {
-        //         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
-        //     } else {
-        //         return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
-        //     }
-        // }
     }
 
 
@@ -282,7 +275,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
         console.log('drawPhotos fn called');
 
         // const enabled = svgMapillaryImages.enabled;
-        const enabled = _enabled;
+        // const enabled = _enabled;
+        const enabled = true;
         const fileList = _fileList;
 
 
@@ -297,10 +291,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .append('g')
             .attr('class', 'layer-local-photos')
             .style('display', enabled ? 'block' : 'none');
-
-        layerEnter
-            .append('g')
-            .attr('class', 'sequences');
 
         layerEnter
             .append('g')

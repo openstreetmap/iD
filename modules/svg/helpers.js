@@ -184,6 +184,7 @@ export function svgPointTransform(projection) {
     var svgpoint = function(entity) {
         // http://jsperf.com/short-array-join
         var pt = projection(entity.loc);
+        console.log('projection point', pt);
         return 'translate(' + pt[0] + ',' + pt[1] + ')';
     };
 
