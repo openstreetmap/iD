@@ -20,6 +20,7 @@
             "left;through|through|through|through|through;right": "↰↑ | ↑ | ↑ | ↑ | ↑↱",
             "left|through|through|through|through": "↰ | ↑ | ↑ | ↑ | ↑",
             "through|through|through|through|right": "↑ | ↑ | ↑ | ↑ | ↱",
+            "left||||right": "↰ | | | | ↱",
             "left||||": "↰ | | | |",
             "||||right": "| | | | ↱",
             "||||merge_to_left": "| | | | ↖︎",
