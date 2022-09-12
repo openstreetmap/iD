@@ -15,7 +15,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function init() {
-        console.log('init() called');
         if (svgMapillaryImages.initialized) return;  // run once
         svgMapillaryImages.enabled = false;
         svgMapillaryImages.initialized = true;
@@ -23,7 +22,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function getService() {
-        console.log('getService() called');
         if (services.mapillary && !_mapillary) {
             _mapillary = services.mapillary;
             _mapillary.event.on('loadedImages', throttledRedraw);
@@ -36,7 +34,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function showLayer() {
-        console.log('showLayer() called');
         const service = getService();
         if (!service) return;
 
@@ -52,7 +49,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function hideLayer() {
-        console.log('hideLayer() called');
         throttledRedraw.cancel();
 
         layer
@@ -64,20 +60,17 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function editOn() {
-        console.log('editOn() called');
         layer.style('display', 'block');
     }
 
 
     function editOff() {
-        console.log('editOff() called');
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
 
     function click(d3_event, image) {
-        console.log('click() called');
         const service = getService();
         if (!service) return;
 
@@ -94,7 +87,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function mouseover(d3_event, image) {
-        console.log('mouseover() called');
         const service = getService();
 
         if (service) service.setStyles(context, image);
@@ -102,26 +94,21 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function mouseout() {
-        console.log('mouseout() called');
         const service = getService();
         if (service) service.setStyles(context, null);
     }
 
 
     function transform(d) {
-        console.log('transform() called with', d);
         let t = svgPointTransform(projection)(d);
-        console.log('after svgPointTransform', t);
         if (d.ca) {
             t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
         }
-        // console.log('after adding rotate', t);
         return t;
     }
 
 
     function filterImages(images) {
-        console.log('filterImages() called');
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -148,7 +135,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
     function filterSequences(sequences) {
-        console.log('filterSequences() called');
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -178,7 +164,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
     function update() {
-        console.log('update() called');
         const z = ~~context.map().zoom();
         const showMarkers = (z >= minMarkerZoom);
         const showViewfields = (z >= minViewfieldZoom);
@@ -277,7 +262,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        console.log('drawImages() called');
         const enabled = svgMapillaryImages.enabled;
         const service = getService();
 
@@ -316,7 +300,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     drawImages.enabled = function(_) {
-        console.log('drawImages.enabled called');
         if (!arguments.length) return svgMapillaryImages.enabled;
         svgMapillaryImages.enabled = _;
         if (svgMapillaryImages.enabled) {
@@ -332,7 +315,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     drawImages.supported = function() {
-        console.log('drawImages.supported called');
         return !!getService();
     };
 

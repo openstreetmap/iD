@@ -31,14 +31,12 @@ export function svgData(projection, context, dispatch) {
 
 
     function init() {
-        console.log('init() called');
         if (_initialized) return;  // run once
 
         _geojson = {};
         _enabled = true;
 
         function over(d3_event) {
-            console.log('over() called');
             d3_event.stopPropagation();
             d3_event.preventDefault();
             d3_event.dataTransfer.dropEffect = 'copy';
@@ -61,7 +59,6 @@ export function svgData(projection, context, dispatch) {
 
 
     function getService() {
-        console.log('getService() called');
         if (services.vectorTile && !_vtService) {
             _vtService = services.vectorTile;
             _vtService.event.on('loadedData', throttledRedraw);
@@ -74,7 +71,6 @@ export function svgData(projection, context, dispatch) {
 
 
     function showLayer() {
-        console.log('showLayer() called');
         layerOn();
 
         layer
@@ -87,7 +83,6 @@ export function svgData(projection, context, dispatch) {
 
 
     function hideLayer() {
-        console.log('hideLayer() called');
         throttledRedraw.cancel();
 
         layer
@@ -99,13 +94,11 @@ export function svgData(projection, context, dispatch) {
 
 
     function layerOn() {
-        console.log('layerOn() called');
         layer.style('display', 'block');
     }
 
 
     function layerOff() {
-        console.log('layerOff() called');
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
@@ -113,7 +106,6 @@ export function svgData(projection, context, dispatch) {
 
     // ensure that all geojson features in a collection have IDs
     function ensureIDs(gj) {
-        console.log('ensureIDs() called');
         if (!gj) return null;
 
         if (gj.type === 'FeatureCollection') {
@@ -129,7 +121,6 @@ export function svgData(projection, context, dispatch) {
 
     // ensure that each single Feature object has a unique ID
     function ensureFeatureID(feature) {
-        console.log('ensureFeatureID() called');
         if (!feature) return;
         feature.__featurehash__ = utilHashcode(stringify(feature));
         return feature;
@@ -138,7 +129,6 @@ export function svgData(projection, context, dispatch) {
 
     // Prefer an array of Features instead of a FeatureCollection
     function getFeatures(gj) {
-        console.log('getFeatures() called');
         if (!gj) return [];
 
         if (gj.type === 'FeatureCollection') {
@@ -150,25 +140,21 @@ export function svgData(projection, context, dispatch) {
 
 
     function featureKey(d) {
-        console.log('featureKey() called');
         return d.__featurehash__;
     }
 
 
     function isPolygon(d) {
-        console.log('isPolygon() called');
         return d.geometry.type === 'Polygon' || d.geometry.type === 'MultiPolygon';
     }
 
 
     function clipPathID(d) {
-        console.log('clipPathID() called');
         return 'ideditor-data-' + d.__featurehash__ + '-clippath';
     }
 
 
     function featureClasses(d) {
-        console.log('featureClasses() called');
         return [
             'data' + d.__featurehash__,
             d.geometry.type,
@@ -179,8 +165,6 @@ export function svgData(projection, context, dispatch) {
 
 
     function drawData(selection) {
-        console.log('drawData() called');
-        console.log('selection', selection);
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
@@ -285,7 +269,6 @@ export function svgData(projection, context, dispatch) {
 
 
         function drawLabels(selection, textClass, data) {
-            console.log('drawLabels() called');
             var labelPath = d3_geoPath(projection);
             var labelData = data.filter(function(d) {
                 return _showLabels && d.properties && (d.properties.desc || d.properties.name);
@@ -319,7 +302,6 @@ export function svgData(projection, context, dispatch) {
 
 
     function getExtension(fileName) {
-        console.log('getExtension() called');
         if (!fileName) return;
 
         var re = /\.(gpx|kml|(geo)?json|png)$/i;
@@ -329,13 +311,11 @@ export function svgData(projection, context, dispatch) {
 
 
     function xmlToDom(textdata) {
-        console.log('xmlToDom() called');
         return (new DOMParser()).parseFromString(textdata, 'text/xml');
     }
 
 
     function stringifyGeojsonProperties(feature) {
-        console.log('stringifyGeojsonProperties() called');
         const properties = feature.properties;
         for (const key in properties) {
             const property = properties[key];
@@ -351,7 +331,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.setFile = function(extension, data) {
-        console.log('drawData.setFile called');
         _template = null;
         _fileList = null;
         _geojson = null;
@@ -389,7 +368,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.showLabels = function(val) {
-        console.log('drawData.showLabels called');
         if (!arguments.length) return _showLabels;
 
         _showLabels = val;
@@ -398,7 +376,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.enabled = function(val) {
-        console.log('drawData.enabled called');
         if (!arguments.length) return _enabled;
 
         _enabled = val;
@@ -414,14 +391,12 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.hasData = function() {
-        console.log('drawData.hasData called');
         var gj = _geojson || {};
         return !!(_template || Object.keys(gj).length);
     };
 
 
     drawData.template = function(val, src) {
-        console.log('drawData.template called');
         if (!arguments.length) return _template;
 
         // test source against OSM imagery blocklists..
@@ -460,7 +435,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.geojson = function(gj, src) {
-        console.log('drawData.geojson called');
         if (!arguments.length) return _geojson;
 
         _template = null;
@@ -480,7 +454,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.fileList = function(fileList) {
-        console.log('drawData.fileList called');
         if (!arguments.length) return _fileList;
 
         _template = null;
@@ -505,7 +478,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.url = function(url, defaultExtension) {
-        console.log('drawData.url called');
         _template = null;
         _fileList = null;
         _geojson = null;
@@ -538,7 +510,6 @@ export function svgData(projection, context, dispatch) {
 
 
     drawData.fitZoom = function() {
-        console.log('drawData.fitZoom called');
         var features = getFeatures(_geojson);
         if (!features.length) return;
 
