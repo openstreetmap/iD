@@ -82,8 +82,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     // puts the image markers on the map
     function display_markers(imageList) {
-        console.log('display_markers() called');
-
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(imageList, function(d) { return d.id; });
 
@@ -126,8 +124,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
     function drawPhotos(selection) {
-        console.log('drawPhotos fn called');
-
         layer = selection.selectAll('.layer-local-photos')
             .data(_fileList ? [0] : []);
 
@@ -198,7 +194,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
     };
 
     drawPhotos.setFile = function(fileList) {
-        console.log('drawPhotos.setFile called');
         /**
          * Holds array of file - [file_1, file_2, ...]
          * file_1 = {name: "Das.png", lastModified: 1625064498536, lastModifiedDate: Wed Jun 30 2021 20:18:18 GMT+0530 (India Standard Time), webkitRelativePath: "", size: 859658, …}
@@ -220,7 +215,6 @@ export function svgLocalPhotos(projection, context, dispatch) {
      * @param {Object} fileList.0 - A File - {name: "Das.png", lastModified: 1625064498536, lastModifiedDate: Wed Jun 30 2021 20:18:18 GMT+0530 (India Standard Time), webkitRelativePath: "", size: 859658, …}
      */
     drawPhotos.fileList = function(fileList) {
-        console.log('drawPhotos.fileList called');
         if (!arguments.length) return _fileList;
 
         _fileList = fileList;

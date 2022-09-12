@@ -436,6 +436,7 @@ export function uiSectionDataLayers(context) {
 
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
+                //TODO
                 dataLayer.fitZoom();
             })
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
