@@ -1745,7 +1745,7 @@ en:
         message: "{feature} is too close to {feature2}"
         reference: "Separate points should not share a location."
     crossing_ways:
-      title: Crossings Ways
+      title: Crossing Ways
       message: "{feature} crosses {feature2}"
       tip: "Find features that incorrectly cross over one another"
       building-building:
