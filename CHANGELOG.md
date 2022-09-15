@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :newspaper: News
 #### :tada: New Features
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
+* Render side-markers on all coastlines (new: also coastlines of small islands mapped as an area) ([#9293])
 #### :white_check_mark: Validation
 * Don't warn on close-by "Stolperstein" memorials ([#8419], thanks [@paulklie])
 #### :sparkles: Usability & Accessibility
@@ -95,6 +96,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9172]: https://github.com/openstreetmap/iD/pull/9172
 [#9208]: https://github.com/openstreetmap/iD/issues/9208
 [#9227]: https://github.com/openstreetmap/iD/issues/9227
+[#9293]: https://github.com/openstreetmap/iD/issues/9293
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
