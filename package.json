@@ -68,10 +68,10 @@
     "which-polygon": "2.2.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~6.1.0",
-    "@fortawesome/free-brands-svg-icons": "~6.1.0",
-    "@fortawesome/free-regular-svg-icons": "~6.1.0",
-    "@fortawesome/free-solid-svg-icons": "~6.1.0",
+    "@fortawesome/fontawesome-svg-core": "~6.2.0",
+    "@fortawesome/free-brands-svg-icons": "~6.2.0",
+    "@fortawesome/free-regular-svg-icons": "~6.2.0",
+    "@fortawesome/free-solid-svg-icons": "~6.2.0",
     "@ideditor/temaki": "~5.1.0",
     "@mapbox/maki": "^8.0.0",
     "autoprefixer": "^10.0.1",
@@ -98,7 +98,7 @@
     "karma-mocha": "^2.0.1",
     "karma-remap-istanbul": "^0.6.0",
     "mapillary_sprite_source": "^1.8.0",
-    "mapillary-js": "4.1.0",
+    "mapillary-js": "4.1.1",
     "minimist": "^1.2.3",
     "mocha": "^10.0.0",
     "name-suggestion-index": "~6.0",
