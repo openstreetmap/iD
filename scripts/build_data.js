@@ -5,6 +5,7 @@ const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
 const fetch = require('node-fetch');
+const lodash = require('lodash');
 
 const languageNames = require('./language_names.js');
 
@@ -70,6 +71,7 @@ function buildData() {
 
   let territoryLanguages = generateTerritoryLanguages();
   fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
+
   writeEnJson();
 
   const languageInfo = languageNames.langNamesInNativeLang;
@@ -165,6 +167,11 @@ function generateTerritoryLanguages() {
       return popPercent2 - popPercent1;
     }).map(langCode => langCode.replace('_', '-'));
   });
+
+  // override/adjust some territory languages which are not included in CLDR data
+  territoryLanguages.pk.push('pnb', 'scl', 'trw', 'kls'); // https://github.com/openstreetmap/iD/pull/9242
+  lodash.pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
+  territoryLanguages.it.push('lld'); // https://en.wikipedia.org/wiki/Ladin_language
 
   return territoryLanguages;
 }

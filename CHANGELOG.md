@@ -64,6 +64,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some boundary lines (and preset) not hidden by the map features filter ([#9171], thanks [@k-yle])
 * Fix iD using invalid user selected imagery ([#8732], thanks [@renancleyson-dev])
 * Make osmose QA service work again by upgrading API calls to the newest API version ([#9208])
+#### :earth_asia: Localization
+* Add native labels for various South Asian languages ([#9241], thanks [@bgo-eiu])
+* Correct and add country-specific languages for Pakistan ([#9242], thanks [@bgo-eiu])
+* Add Ladin as a country-specific language used in Italy
 #### :rocket: Presets
 * Disable taginfo suggestions for the `via` field ([#9140], thanks [@k-yle])
 * Treat `surface=chipseal` as a paved surface ([#9139], thanks [@k-yle])
@@ -97,6 +101,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9208]: https://github.com/openstreetmap/iD/issues/9208
 [#9227]: https://github.com/openstreetmap/iD/issues/9227
 [#9293]: https://github.com/openstreetmap/iD/issues/9293
+[#9241]: https://github.com/openstreetmap/iD/pull/9241
+[#9242]: https://github.com/openstreetmap/iD/pull/9242
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
