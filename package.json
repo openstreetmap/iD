@@ -83,7 +83,7 @@
     "concat-files": "^0.1.1",
     "d3": "~7.6.1",
     "editor-layer-index": "github:osmlab/editor-layer-index#gh-pages",
-    "esbuild": "^0.14.17",
+    "esbuild": "^0.15.7",
     "esbuild-visualizer": "^0.3.1",
     "eslint": "^8.8.0",
     "fetch-mock": "^9.11.0",
