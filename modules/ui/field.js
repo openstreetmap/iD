@@ -38,7 +38,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
     var _locked = false;
     var _lockedTip = uiTooltip()
-        .title(() => t.append('inspector.lock.suggestion', { label: field.label }))
+        .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
         .placement('bottom');
 
 
