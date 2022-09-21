@@ -69,7 +69,7 @@ export function validationPrivateData() {
                         icon: 'iD-operation-delete',
                         title: t.append('issues.fix.' + fixID + '.title'),
                         onClick: function(context) {
-                            context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
+                            context.perform(doUpgrade, t('issues.fix.remove_tag.annotation'));
                         }
                     })
                 ];
