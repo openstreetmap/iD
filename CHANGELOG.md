@@ -74,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Better fallback icons for untagged points, vertices, lines and areas ([#9157])
 * Add fallback values for access field for barrier presets
 * Support incrementing cardinal directions with the up/down buttons ([#9141], thanks [@k-yle])
+* Don't suggest (newly) hidden presets in preset selection list
 #### :hammer: Development
 * Reduce uses of unsafe html injecting code
 * Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`, `mocha` to `v10`

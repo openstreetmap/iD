@@ -440,7 +440,9 @@ export function presetIndex() {
 
   _this.recent = () => {
     return presetCollection(
-      utilArrayUniq(_this.getRecents().map(d => d.preset))
+      utilArrayUniq(_this.getRecents()
+        .map(d => d.preset)
+        .filter(d => d.searchable !== false))
     );
   };
 
