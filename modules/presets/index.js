@@ -386,7 +386,7 @@ export function presetIndex() {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n, startWithRecents, loc) => {
+  _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     let recents = [];
     if (startWithRecents) {
       recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
@@ -404,7 +404,7 @@ export function presetIndex() {
     }
 
     let result = presetCollection(
-      utilArrayUniq(recents.concat(defaults)).slice(0, n - 1)
+      utilArrayUniq(recents.concat(defaults).concat(extraPresets)).slice(0, n - 1)
     );
 
     if (Array.isArray(loc)) {

@@ -104,7 +104,9 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc);
+                var entityPresets = _entityIDs.map(entityID =>
+                    presetManager.match(context.graph().entity(entityID), context.graph()));
+                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
                 messageText = t.html('inspector.choose');
             }
             list.call(drawList, results);
@@ -142,10 +144,12 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', 'inspector-body');
 
+        var entityPresets = _entityIDs.map(entityID =>
+            presetManager.match(context.graph().entity(entityID), context.graph()));
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc));
+            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }

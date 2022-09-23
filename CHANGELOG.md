@@ -75,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add fallback values for access field for barrier presets
 * Support incrementing cardinal directions with the up/down buttons ([#9141], thanks [@k-yle])
 * Don't suggest (newly) hidden presets in preset selection list
+* Always include the current matching preset of the selected object in the preset selection list ([#9298])
 #### :hammer: Development
 * Reduce uses of unsafe html injecting code
 * Upgrade dependencies: maki to `v8.0`, `osm-community-index` to `v5.2`, `d3` to `v7.6`, `togeojson` to `v5.2`, `mocha` to `v10`
@@ -104,6 +105,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9293]: https://github.com/openstreetmap/iD/issues/9293
 [#9241]: https://github.com/openstreetmap/iD/pull/9241
 [#9242]: https://github.com/openstreetmap/iD/pull/9242
+[#9298]: https://github.com/openstreetmap/iD/issues/9298
 [@furkanmutlu]: https://github.com/furkanmutlu
 [@JackNUMBER]: https://github.com/JackNUMBER
 [@aaditya0000]: https://github.com/aaditya0000
