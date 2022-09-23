@@ -404,7 +404,7 @@ export function presetIndex() {
     }
 
     let result = presetCollection(
-      utilArrayUniq(recents.concat(defaults).concat(extraPresets)).slice(0, n - 1)
+      utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
     );
 
     if (Array.isArray(loc)) {
