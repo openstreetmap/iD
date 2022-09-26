@@ -164,21 +164,10 @@ export function validationCrossingWays(context) {
                 if (featureTypes.indexOf('railway') !== -1) {
                     if (!bothLines) return {};
 
-                    var isTram = entity1.tags.railway === 'tram' || entity2.tags.railway === 'tram';
-
                     if (osmPathHighwayTagValues[entity1.tags.highway] ||
                         osmPathHighwayTagValues[entity2.tags.highway]) {
-
-                        // path-tram connections use this tag
-                        if (isTram) return { railway: 'tram_crossing' };
-
-                        // other path-rail connections use this tag
                         return { railway: 'crossing' };
                     } else {
-                        // path-tram connections use this tag
-                        if (isTram) return { railway: 'tram_level_crossing' };
-
-                        // other road-rail connections use this tag
                         return { railway: 'level_crossing' };
                     }
                 }
