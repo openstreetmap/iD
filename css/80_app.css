@@ -4193,7 +4193,7 @@ img.tile-debug {
     overflow: hidden;
     height: 100%;
     width: 100%;
-    background: #000;
+    background: #fff;
     user-select: none;
     touch-action: none;
     -webkit-touch-callout: none;

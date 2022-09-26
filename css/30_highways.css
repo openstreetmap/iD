@@ -198,7 +198,7 @@ path.line.casing.tag-tertiary {
 }
 path.line.stroke.tag-highway-residential,
 path.line.stroke.tag-residential {
-    stroke: #fff;
+    stroke: #d3d3d3;
 }
 path.line.casing.tag-highway-residential,
 path.line.casing.tag-residential {
@@ -404,7 +404,7 @@ path.line.casing.tag-road {
 /* service roads */
 path.line.stroke.tag-highway-service,
 path.line.stroke.tag-service {
-    stroke: #fff;
+    stroke: #d3d3d3;
 }
 path.line.casing.tag-highway-service,
 path.line.casing.tag-service {
@@ -428,7 +428,7 @@ path.line.stroke.tag-highway-service.tag-service-parking_aisle {
     stroke: #cccac7;
 }
 path.line.stroke.tag-highway-service.tag-service-driveway {
-    stroke: #fff6e4;
+    stroke: #f3e9d7;
 }
 path.line.stroke.tag-highway-service.tag-service-emergency_access {
     stroke: #ddb2aa;
