@@ -43,8 +43,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :rocket: Presets
+* Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
 
+[#9294]: https://github.com/openstreetmap/iD/issues/9294
 
 # 2.22.0
 ##### 2022-Sep-27
