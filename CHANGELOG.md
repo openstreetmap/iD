@@ -42,7 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* Use standard railway crossing tags when marking tram-road/path intersections ([#9306])
+* Don't add non-standard `railway=tram_crossing/rail_level_crossing` tags when using validator to add connection nodes at tram-road/path intersections ([#9306])
 #### :rocket: Presets
 #### :hammer: Development
 

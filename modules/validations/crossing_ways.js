@@ -164,6 +164,9 @@ export function validationCrossingWays(context) {
                 if (featureTypes.indexOf('railway') !== -1) {
                     if (!bothLines) return {};
 
+                    var isTram = entity1.tags.railway === 'tram' || entity2.tags.railway === 'tram';
+                    if (isTram) return {};
+
                     if (osmPathHighwayTagValues[entity1.tags.highway] ||
                         osmPathHighwayTagValues[entity2.tags.highway]) {
                         return { railway: 'crossing' };
