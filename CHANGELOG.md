@@ -42,8 +42,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Don't add non-standard `railway=tram_crossing/rail_level_crossing` tags when using validator to add connection nodes at tram-road/path intersections ([#9306])
 #### :rocket: Presets
 #### :hammer: Development
+
+[#9306]: https://github.com/openstreetmap/iD/pull/9306
 
 
 # 2.22.0
