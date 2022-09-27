@@ -38,9 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased
-
-#### :newspaper: News
+# 2.22.0
 #### :tada: New Features
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 * Render side-markers on all coastlines (new: also coastlines of small islands mapped as an area) ([#9293])
