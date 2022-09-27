@@ -79,6 +79,13 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    source.hasDescription = function() {
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
+        return descriptionText !== '';
+    };
+
+
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
