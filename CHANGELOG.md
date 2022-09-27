@@ -27,9 +27,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
-###### New Presets
-###### Changed Presets
-###### New and Changed Fields
 #### :hammer: Development
 * ([#])
 
@@ -38,7 +35,19 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# Unreleased
+
+#### :newspaper: News
+#### :tada: New Features
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :rocket: Presets
+#### :hammer: Development
+
+
 # 2.22.0
+##### 2022-Sep-27
 #### :tada: New Features
 * Consider lifecycle prefixes when deciding whether features should be rendered as a line or an area ([#8881], thanks [@k-yle])
 * Render side-markers on all coastlines (new: also coastlines of small islands mapped as an area) ([#9293])
