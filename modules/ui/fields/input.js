@@ -323,6 +323,8 @@ export function uiFieldText(field, context) {
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 
+        if (field.type === 'tel') updatePhonePlaceholder();
+
         if (field.key.split(':').includes('colour')) updateColourPreview();
 
         if (outlinkButton && !outlinkButton.empty()) {
