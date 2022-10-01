@@ -38,6 +38,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # unreleased (v2.36.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* The flip operation now works on nodes with no `direction` tag, to support quickly adding `direction` to features like traffic signs ([#9317], thanks [@k-yle])
+
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -49,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+[#9317]: https://github.com/openstreetmap/iD/issues/9317
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 
