@@ -11,14 +11,16 @@ import { utilSafeClassName } from '../util/util';
 export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   allFields = allFields || {};
   allPresets = allPresets || {};
-  let _this = Object.assign({}, preset);   // shallow copy
+  let _this = Object.assign({}, preset); // shallow copy
   let _addable = addable || false;
-  let _resolvedFields;      // cache
-  let _resolvedMoreFields;  // cache
-  let _searchName; // cache
-  let _searchNameStripped; // cache
-  let _searchAliases; // cache
+  let _resolvedFields;        // cache
+  let _resolvedMoreFields;    // cache
+  let _searchName;            // cache
+  let _searchNameStripped;    // cache
+  let _searchAliases;         // cache
   let _searchAliasesStripped; // cache
+
+  const referenceRegex = /^\{(.*)\}$/;
 
   _this.id = presetID;
 
@@ -38,9 +40,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.originalMoreFields = (_this.moreFields || []);
 
-  _this.fields = () => _resolvedFields || (_resolvedFields = resolve('fields'));
+  _this.fields = () => _resolvedFields || (_resolvedFields = resolveFields('fields'));
 
-  _this.moreFields = () => _resolvedMoreFields || (_resolvedMoreFields = resolve('moreFields'));
+  _this.moreFields = () => _resolvedMoreFields || (_resolvedMoreFields = resolveFields('moreFields'));
 
   _this.resetFields = () => _resolvedFields = _resolvedMoreFields = null;
 
@@ -99,12 +101,27 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return t.append(textID, options);
   };
 
+  function resolveReference(which) {
+    const match = (_this[which] || '').match(referenceRegex);
+    if (match) {
+      const preset = allPresets[match[1]];
+      if (preset) {
+        return preset;
+      }
+      console.error(`Unable to resolve referenced preset: ${match[1]}`);  // eslint-disable-line no-console
+    }
+    return _this;
+  }
 
   _this.name = () => {
-    return _this.t('name', { 'default': _this.originalName });
+    return resolveReference('originalName')
+      .t('name', { 'default': _this.originalName || presetID });
   };
 
-  _this.nameLabel = () => _this.t.append('name', { 'default': _this.originalName });
+  _this.nameLabel = () => {
+    return resolveReference('originalName')
+      .t.append('name', { 'default': _this.originalName || presetID });
+  };
 
   _this.subtitle = () => {
       if (_this.suggestion) {
@@ -125,11 +142,15 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
   _this.aliases = () => {
-    return _this.t('aliases', { 'default': _this.originalAliases }).trim().split(/\s*[\r\n]+\s*/);
+    return resolveReference('originalName')
+      .t('aliases', { 'default': _this.originalAliases }).trim().split(/\s*[\r\n]+\s*/);
   };
 
-  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
-    .toLowerCase().trim().split(/\s*,+\s*/);
+  _this.terms = () => {
+    return resolveReference('originalName')
+      .t('terms', { 'default': _this.originalTerms })
+      .toLowerCase().trim().split(/\s*,+\s*/);
+  };
 
   _this.searchName = () => {
     if (!_searchName) {
@@ -267,12 +288,12 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   // For a preset without fields, use the fields of the parent preset.
   // Replace {preset} placeholders with the fields of the specified presets.
-  function resolve(which) {
+  function resolveFields(which) {
     const fieldIDs = (which === 'fields' ? _this.originalFields : _this.originalMoreFields);
     let resolved = [];
 
     fieldIDs.forEach(fieldID => {
-      const match = fieldID.match(/\{(.*)\}/);
+      const match = fieldID.match(referenceRegex);
       if (match !== null) {    // a presetID wrapped in braces {}
         resolved = resolved.concat(inheritFields(match[1], which));
       } else if (allFields[fieldID]) {    // a normal fieldID

@@ -55,16 +55,17 @@ export function uiFieldRadio(field, context) {
         enter = labels.enter()
             .append('label');
 
+        var stringsField = field.resolveReference('stringsCrossReference');
         enter
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return field.t('options.' + d, { 'default': d }); })
+            .attr('value', function(d) { return stringsField.t('options.' + d, { 'default': d }); })
             .attr('checked', false);
 
         enter
             .append('span')
-            .html(function(d) { return field.t.html('options.' + d, { 'default': d }); });
+            .each(function(d) { stringsField.t.append('options.' + d, { 'default': d })(d3_select(this)); });
 
         labels = labels
             .merge(enter);

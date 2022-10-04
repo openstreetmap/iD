@@ -115,9 +115,10 @@ export function uiFieldCycleway(field, context) {
 
 
     cycleway.options = function() {
+        var stringsField = field.resolveReference('stringsCrossReference');
         return field.options.map(function(option) {
             return {
-                title: field.t('options.' + option + '.description'),
+                title: stringsField.t('options.' + option + '.description'),
                 value: option
             };
         });
