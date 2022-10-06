@@ -1,12 +1,14 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
+import turf_bboxClip from '@turf/bbox-clip';
+import turf_bbox from '@turf/bbox';
 
 import whichPolygon from 'which-polygon';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
-import { geoMetersToOffset, geoOffsetToMeters} from '../geo';
+import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
@@ -463,7 +465,15 @@ export function rendererBackground(context) {
 
       let best;
       if (!requestedBackground && extent) {
-        best = validBackgrounds.find(s => s.best());
+        const viewArea = extent.area();
+        best = validBackgrounds.find(s => {
+          if (!s.best() || s.overlay) return false;
+          let bbox = turf_bbox(turf_bboxClip(
+                { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
+                extent.rectangle()));
+          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
+          return area / viewArea > 0.5; // min visible size: 50% of viewport area
+        });
       }
 
       // Decide which background layer to display
