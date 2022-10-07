@@ -42,11 +42,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix selection of best background source when starting on a zoomed-out view ([#9325])
 #### :rocket: Presets
 * Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
 
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
+[#9325]: https://github.com/openstreetmap/iD/issues/9325
+
 
 # 2.22.0
 ##### 2022-Sep-27
