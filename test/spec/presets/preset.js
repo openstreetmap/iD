@@ -228,4 +228,36 @@ describe('iD.presetPreset', function() {
             expect(preset.addable()).to.be.true;
         });
     });
+
+    describe('#references', function() {
+        it('references name, aliases and terms of another preset', function() {
+            var allPresets = {};
+            var other = iD.presetPreset('other', {}, undefined, undefined, allPresets);
+            var preset = iD.presetPreset('test', {name: '{other}'}, undefined, undefined, allPresets);
+            allPresets.other = other;
+            allPresets.preset = preset;
+
+            // mock localizer
+            sinon.spy(other, 't');
+            sinon.spy(preset, 't');
+
+            preset.name();
+            expect(other.t).to.have.been.calledOnce;
+            expect(preset.t).not.to.have.been.called;
+
+            other.t.resetHistory();
+            preset.t.resetHistory();
+
+            preset.aliases();
+            expect(other.t).to.have.been.calledOnce;
+            expect(preset.t).not.to.have.been.called;
+
+            other.t.resetHistory();
+            preset.t.resetHistory();
+
+            preset.terms();
+            expect(other.t).to.have.been.calledOnce;
+            expect(preset.t).not.to.have.been.called;
+        });
+    });
 });
