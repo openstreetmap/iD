@@ -300,12 +300,19 @@ export function uiFieldAccess(field, context) {
                 if (tags[accessField]) {
                     return tags[accessField];
                 }
+                // implied access
+                // motorroad: https://wiki.openstreetmap.org/wiki/OSM_tags_for_routing/Access_restrictions
+                if (tags.motorroad === 'yes' && (accessField === 'foot' || accessField === 'bicycle' || accessField === 'horse')) {
+                    return 'no';
+                }
+                // inherited access
                 if (tags.vehicle && (accessField === 'bicycle' || accessField === 'motor_vehicle')) {
                     return tags.vehicle;
                 }
                 if (tags.access) {
                     return tags.access;
                 }
+                // default access by road/barrier type
                 for (const key in placeholdersByTag) {
                     if (tags[key]) {
                         if (placeholdersByTag[key][tags[key]] &&

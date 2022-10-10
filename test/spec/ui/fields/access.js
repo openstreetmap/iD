@@ -121,6 +121,16 @@ describe('iD.uiFieldAccess', function() {
         expect(selection.selectAll('.preset-input-access-bicycle').attr('placeholder')).to.equal('destination');
     });
 
+    it('sets foot, bicycle and horse placeholder to "no" when there a "motorroad=yes" tag (#9333)', function() {
+        var access = iD.uiFieldAccess(field, context);
+        selection.call(access);
+
+        access.tags({highway: 'primary', motorroad: 'yes'});
+        expect(selection.selectAll('.preset-input-access-foot').attr('placeholder')).to.equal('no');
+        expect(selection.selectAll('.preset-input-access-bicycle').attr('placeholder')).to.equal('no');
+        expect(selection.selectAll('.preset-input-access-horse').attr('placeholder')).to.equal('no');
+    });
+
     it('sets correct placeholder on a multi selection', function() {
         var access = iD.uiFieldAccess(field, context);
         selection.call(access);
