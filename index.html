@@ -1,70 +1,150 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset='utf-8'>
     <title>iD</title>
     <link rel='stylesheet' href='dist/iD.css'>
     <link rel='icon' type='image/png' href='data:image/png;base64,iVBORw0KGgo='>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
-    <meta name='apple-mobile-web-app-capable' content='yes'/>
-    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
+    <!--<link type="text/css" rel="stylesheet" href="app.css" />--->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
     <style type='text/css'>
-      /* apply document-level styling to standalone iD only */
-      html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        /* disable elastic page bounce upon scroll */
-        overflow: hidden;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id='id-container'></div>
-
-    <script>
-      var container = document.getElementById('id-container');
-      var newScript = document.createElement('script');
-      newScript.type = 'text/javascript';
-      newScript.onload = checkScript;
-      newScript.onerror = checkScript;
-      newScript.src = 'dist/iD.js';
-
-      document.getElementsByTagName('head')[0].appendChild(newScript);
-
-
-      function checkScript() {
-        if (typeof iD === 'undefined' || !iD.utilDetect().support) {
-          container.innerHTML = 'Sorry, your browser is not currently supported. Please use another <a href="https://github.com/openstreetmap/iD#basics">browser</a> or <a href="https://wiki.openstreetmap.org/wiki/Editors">editor</a> to contribute to the map.';
-          container.style.padding = '20px';
-
-        } else {
-          var context = iD.coreContext()
-            .assetPath('dist/')
-            .apiConnections([
-              {
-                url: 'https://www.openstreetmap.org',
-                client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
-                client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q'
-              }, {
-                url: 'https://api06.dev.openstreetmap.org',
-                client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw',
-                client_secret: 'OnfWFC-JkZNHyYdr_viNn_h_RTZXRslKcUxllOXqf5g'
-              }
-            ])
-            .containerNode(container);
-          window.context = window.id = context;  // for debugging
-          context.init();
-
-          // disable boundaries (unless we have an explicit disable_features list)
-          var q = iD.utilStringQs(window.location.hash);
-          if (!q.hasOwnProperty('disable_features')) {
-            context.features().disable('boundaries');
-          }
+        /* apply document-level styling to standalone iD only */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            /* disable elastic page bounce upon scroll */
+            overflow: hidden;
         }
-      }
+
+        .btn {
+            background-color: white;
+            border: 1px solid black;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .button1 {
+            background-color: #8ED3F3;
+        }
+
+        .button2 {
+            background-color: #f5e1fd;
+        }
+
+        .button3 {
+            background-color: #bebebe;
+        }
+
+        .button4 {
+            background-color: #ff8986;
+        }
+
+        .button5 {
+            background-color: #FDF1AD;
+        }
+
+        .button6 {
+            background-color: #FEC98F;
+        }
+
+        .button7 {
+            background-color: #a6eca8;
+        }
+
+        .button8 {
+            background-color: #779ECB;
+        }
+
+        .button9 {
+            background-color: #ffcfdc;
+        }
+
+        .button10 {
+            background-color: #fff;
+        }
+
+        .btn:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.2), 0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+    </style>
+</head>
+
+<body>
+    <div id='id-container'></div>
+    <script>
+
+        var container = document.getElementById('id-container');
+        var newScript = document.createElement('script');
+        newScript.type = 'text/javascript';
+        newScript.onload = checkScript;
+        newScript.onerror = checkScript;
+        newScript.src = 'dist/iD.js';
+
+        document.getElementsByTagName('head')[0].appendChild(newScript);
+
+
+        function checkScript() {
+            if (typeof iD === 'undefined' || !iD.utilDetect().support) {
+                container.innerHTML = 'Sorry, your browser is not currently supported. Please use another <a href="https://github.com/openstreetmap/iD#basics">browser</a> or <a href="https://wiki.openstreetmap.org/wiki/Editors">editor</a> to contribute to the map.';
+                container.style.padding = '20px';
+
+            } else {
+                var context = iD.coreContext()
+                    .assetPath('dist/')
+                    .apiConnections([
+                        {
+                            url: 'https://www.openstreetmap.org',
+                            client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
+                            client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q'
+                        }, {
+                            url: 'https://api06.dev.openstreetmap.org',
+                            client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw',
+                            client_secret: 'OnfWFC-JkZNHyYdr_viNn_h_RTZXRslKcUxllOXqf5g'
+                        }
+                    ])
+                    .containerNode(container);
+                window.context = window.id = context;  // for debugging
+                context.init();
+
+                // disable boundaries (unless we have an explicit disable_features list)
+                var q = iD.utilStringQs(window.location.hash);
+                if (!q.hasOwnProperty('disable_features')) {
+                    context.features().disable('boundaries');
+                }
+            }
+        }
+
     </script>
-  </body>
+
+
+    <script type="text/javascript">
+        var bkgcolor = "black";
+        function colorChange(bkgcolor) {
+            console.log("Hello, this is button");
+            document.getElementsByClassName("main-map")[0].style.backgroundColor = bkgcolor;
+        }
+    </script>
+
+    <!--blue-->  <button class="btn button1" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left:170px;" onclick=colorChange("#8ED3F3")> </button>
+    <!--purple--><button class="btn button2" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 230px;" onclick=colorChange("#f5e1fd")> </button>
+    <!--gray-->  <button class="btn button3" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 290px;" onclick=colorChange("#bebebe")> </button>
+    <!--red-->   <button class="btn button4" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 50px;" onclick=colorChange("#ff8986")> </button>
+    <!--yellow--><button class="btn button5" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 110px;" onclick=colorChange("#FDF1AD")> </button>
+    <!--orange--><button class="btn button6" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 80px;" onclick=colorChange("#FEC98F")> </button>
+    <!--green--> <button class="btn button7" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 140px;" onclick=colorChange("#a6eca8")> </button>
+    <!--dark blue--><button class="btn button8" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 200px;" onclick=colorChange("#779ECB")> </button>
+    <!--pink--><button class="btn button9" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 260px;" onclick=colorChange("#ffcfdc")> </button>
+    <!--white--><button class="btn button10" style="width: 25px; height: 25px; position: absolute; bottom: 40px; left: 320px;" onclick=colorChange("#fff")> </button>
+
+    <p style=" position: absolute; bottom:60px; left: 50px;"> Click to Change the Color of the Background. </p>
+
+</body>
 </html>
