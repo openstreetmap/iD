@@ -43,10 +43,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :rocket: Presets
+* add support for tagging schema v5 ([#9320])
 * Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
 
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
+[#9320]: https://github.com/openstreetmap/iD/pull/9320
+
 
 # 2.22.0
 ##### 2022-Sep-27
