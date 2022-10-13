@@ -98,9 +98,10 @@ export function uiFieldAccess(field, context) {
             options.splice(options.length - 4, 0, 'dismount');
         }
 
+        var stringsField = field.resolveReference('stringsCrossReference');
         return options.map(function(option) {
             return {
-                title: field.t('options.' + option + '.description'),
+                title: stringsField.t('options.' + option + '.description'),
                 value: option
             };
         });

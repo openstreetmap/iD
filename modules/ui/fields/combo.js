@@ -90,8 +90,9 @@ export function uiFieldCombo(field, context) {
     function displayValue(tval) {
         tval = tval || '';
 
-        if (field.hasTextForStringId('options.' + tval)) {
-            return field.t('options.' + tval, { default: tval });
+        var stringsField = field.resolveReference('stringsCrossReference');
+        if (stringsField.hasTextForStringId('options.' + tval)) {
+            return stringsField.t('options.' + tval, { default: tval });
         }
 
         if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
@@ -107,8 +108,9 @@ export function uiFieldCombo(field, context) {
     function renderValue(tval) {
         tval = tval || '';
 
-        if (field.hasTextForStringId('options.' + tval)) {
-            return field.t.append('options.' + tval, { default: tval });
+        var stringsField = field.resolveReference('stringsCrossReference');
+        if (stringsField.hasTextForStringId('options.' + tval)) {
+            return stringsField.t.append('options.' + tval, { default: tval });
         }
 
         if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
