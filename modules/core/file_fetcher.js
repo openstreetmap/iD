@@ -1,4 +1,5 @@
 import parseVersion from 'vparse';
+import { presetsCdnUrl, presetsCdnVersion } from '../../config/cdn.js';
 // Double check this resolves to iD's `package.json`
 import packageJSON from '../../package.json';
 
@@ -18,8 +19,6 @@ export function coreFileFetcher() {
   let _inflight = {};
   let _fileMap = {
     'address_formats': 'data/address_formats.min.json',
-    'deprecated': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/deprecated.min.json',
-    'discarded': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/discarded.min.json',
     'imagery': 'data/imagery.min.json',
     'intro_graph': 'data/intro_graph.min.json',
     'keepRight': 'data/keepRight.min.json',
@@ -28,10 +27,13 @@ export function coreFileFetcher() {
     'oci_defaults': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/defaults.min.json`,
     'oci_features': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/featureCollection.min.json`,
     'oci_resources': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/resources.min.json`,
-    'preset_categories': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json',
-    'preset_defaults': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_defaults.min.json',
-    'preset_fields': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json',
-    'preset_presets': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/presets.min.json',
+    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsCdnVersion) + 'package.json',
+    'deprecated': presetsCdnUrl + 'dist/deprecated.min.json',
+    'discarded': presetsCdnUrl + 'dist/discarded.min.json',
+    'preset_categories': presetsCdnUrl + 'dist/preset_categories.min.json',
+    'preset_defaults': presetsCdnUrl + 'dist/preset_defaults.min.json',
+    'preset_fields': presetsCdnUrl + 'dist/fields.min.json',
+    'preset_presets': presetsCdnUrl + 'dist/presets.min.json',
     'phone_formats': 'data/phone_formats.min.json',
     'qa_data': 'data/qa_data.min.json',
     'shortcuts': 'data/shortcuts.min.json',
@@ -57,6 +59,18 @@ export function coreFileFetcher() {
       return Promise.reject(`Unknown data file for "${which}"`);
     }
 
+    if (url.includes('{presets_version}')) {
+      return _this.get('presets_package')
+        .then(result => {
+          const presetsVersion = result.version;
+          return getUrl(url.replace('{presets_version}', presetsVersion), which);
+        });
+    } else {
+      return getUrl(url);
+    }
+  };
+
+  function getUrl(url, which) {
     let prom = _inflight[url];
     if (!prom) {
       _inflight[url] = prom = fetch(url)
@@ -82,7 +96,7 @@ export function coreFileFetcher() {
     }
 
     return prom;
-  };
+  }
 
 
   // Accessor for the file map

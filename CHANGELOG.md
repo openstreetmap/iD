@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * add support for tagging schema v5 ([#9320])
 * Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
+* Synchronize fetching of released presets
 
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
 [#9320]: https://github.com/openstreetmap/iD/pull/9320
