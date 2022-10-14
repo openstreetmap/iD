@@ -172,7 +172,7 @@ export function behaviorSelect(context) {
 
         if (!+d3_event.clientX && !+d3_event.clientY) {
             if (_lastMouseEvent) {
-                d3_event.sourceEvent = _lastMouseEvent;
+                d3_event = _lastMouseEvent;
             } else {
                 return;
             }
