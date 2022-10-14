@@ -4,8 +4,10 @@ import RBush from 'rbush';
 import { geoExtent } from '../geo';
 import { utilQsString } from '../util';
 
+import { nominatimApiUrl } from '../../config/id.js';
 
-var apibase = 'https://nominatim.openstreetmap.org/';
+
+var apibase = nominatimApiUrl;
 var _inflight = {};
 var _nominatimCache;
 

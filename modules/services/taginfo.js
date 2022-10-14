@@ -5,8 +5,9 @@ import { json as d3_json } from 'd3-fetch';
 import { utilObjectOmit, utilQsString } from '../util';
 import { localizer } from '../core/localizer';
 
+import { taginfoApiUrl } from '../../config/id.js';
 
-var apibase = 'https://taginfo.openstreetmap.org/api/4/';
+var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
 var _taginfoCache = {};

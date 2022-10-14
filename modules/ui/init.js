@@ -293,7 +293,7 @@ export function uiInit(context) {
             .attr('class', 'user-list')
             .call(uiContributors(context));
 
-        var apiConnections = context.apiConnections();
+        var apiConnections = context.connection().apiConnections();
         if (apiConnections && apiConnections.length > 1) {
             aboutList
                 .append('li')

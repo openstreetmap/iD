@@ -103,14 +103,6 @@ export function coreContext() {
     return context;
   };
 
-  /* connection options for source switcher (optional) */
-  let _apiConnections;
-  context.apiConnections = function(val) {
-    if (!arguments.length) return _apiConnections;
-    _apiConnections = val;
-    return context;
-  };
-
 
   // A string or array or locale codes to prefer over the browser's settings
   context.locale = function(locale) {

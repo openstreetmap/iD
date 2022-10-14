@@ -1,5 +1,5 @@
 import parseVersion from 'vparse';
-import { presetsCdnUrl, presetsCdnVersion } from '../../config/cdn.js';
+import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
 // Double check this resolves to iD's `package.json`
 import packageJSON from '../../package.json';
 
@@ -13,7 +13,8 @@ export { _mainFileFetcher as fileFetcher };
 export function coreFileFetcher() {
   const ociVersion = packageJSON.dependencies['osm-community-index'] || packageJSON.devDependencies['osm-community-index'];
   const v = parseVersion(ociVersion);
-  const vMinor = `${v.major}.${v.minor}`;
+  const ociVersionMinor = `${v.major}.${v.minor}`;
+  const presetsVersionMajor = parseVersion(packageJSON.devDependencies['@openstreetmap/id-tagging-schema']).major;
 
   let _this = {};
   let _inflight = {};
@@ -24,21 +25,21 @@ export function coreFileFetcher() {
     'keepRight': 'data/keepRight.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',
-    'oci_defaults': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/defaults.min.json`,
-    'oci_features': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/featureCollection.min.json`,
-    'oci_resources': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/resources.min.json`,
-    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsCdnVersion) + 'package.json',
+    'phone_formats': 'data/phone_formats.min.json',
+    'qa_data': 'data/qa_data.min.json',
+    'shortcuts': 'data/shortcuts.min.json',
+    'territory_languages': 'data/territory_languages.min.json',
+    'oci_defaults': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/defaults.min.json',
+    'oci_features': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/featureCollection.min.json',
+    'oci_resources': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/resources.min.json',
+    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsVersionMajor) + 'package.json',
     'deprecated': presetsCdnUrl + 'dist/deprecated.min.json',
     'discarded': presetsCdnUrl + 'dist/discarded.min.json',
     'preset_categories': presetsCdnUrl + 'dist/preset_categories.min.json',
     'preset_defaults': presetsCdnUrl + 'dist/preset_defaults.min.json',
     'preset_fields': presetsCdnUrl + 'dist/fields.min.json',
     'preset_presets': presetsCdnUrl + 'dist/presets.min.json',
-    'phone_formats': 'data/phone_formats.min.json',
-    'qa_data': 'data/qa_data.min.json',
-    'shortcuts': 'data/shortcuts.min.json',
-    'territory_languages': 'data/territory_languages.min.json',
-    'wmf_sitematrix': 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@0.1/wikipedia.min.json'
+    'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.1') + 'wikipedia.min.json'
   };
 
   let _cachedData = {};
