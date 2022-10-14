@@ -40,6 +40,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :newspaper: News
 #### :tada: New Features
+#### :sparkles: Usability & Accessibility
+* Trigger context menu by long-presses of non-mouse inputs (touch or stylus) ([#8105])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix selection of best background source when starting on a zoomed-out view ([#9325])
@@ -49,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Synchronize fetching of released presets
 
+[#8105]: https://github.com/openstreetmap/iD/issues/8105
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
 [#9320]: https://github.com/openstreetmap/iD/pull/9320
 [#9325]: https://github.com/openstreetmap/iD/issues/9325
