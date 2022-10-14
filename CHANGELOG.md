@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * add support for tagging schema v5 ([#9320])
 * Render `natural=strait` features in blue color ([#9294])
+* Roads with `motorroad=yes` show implied access restrictions (`foot=no`, `bicycle=no`, `horse=no`) ([id-tagging-schema#609])
 #### :hammer: Development
 * Synchronize fetching of released presets
 
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
 [#9320]: https://github.com/openstreetmap/iD/pull/9320
 [#9325]: https://github.com/openstreetmap/iD/issues/9325
+[id-tagging-schema#609]: https://github.com/openstreetmap/id-tagging-schema/issues/609
 
 
 # 2.22.0

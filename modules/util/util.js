@@ -302,6 +302,7 @@ export function utilCombinedTags(entityIDs, graph) {
     var tags = {};
     var tagCounts = {};
     var allKeys = new Set();
+    var allTags = [];
 
     var entities = entityIDs.map(function(entityID) {
         return graph.hasEntity(entityID);
@@ -316,6 +317,7 @@ export function utilCombinedTags(entityIDs, graph) {
     });
 
     entities.forEach(function(entity) {
+        allTags.push(entity.tags);
 
         allKeys.forEach(function(key) {
 
@@ -362,6 +364,7 @@ export function utilCombinedTags(entityIDs, graph) {
         });
     }
 
+    tags = Object.defineProperty(tags, Symbol.for('allTags'), { enumerable: false, value: allTags });
     return tags;
 }
 
