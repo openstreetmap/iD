@@ -152,7 +152,7 @@ export function uiFieldCombo(field, context) {
 
     function setStaticValues(callback) {
         var stringsField = field.resolveReference('stringsCrossReference');
-        if (!field.options || stringsField.options) return;
+        if (!(field.options || stringsField.options)) return;
 
         _comboData = (field.options || stringsField.options).map(function(v) {
             return {
