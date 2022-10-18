@@ -16,7 +16,6 @@ export {
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
     uiFieldText as uiFieldTel,
-    uiFieldText,
     uiFieldText as uiFieldUrl
 };
 
