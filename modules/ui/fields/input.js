@@ -11,11 +11,13 @@ import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
 
 export {
-    uiFieldText as uiFieldUrl,
+    uiFieldText as uiFieldColour,
+    uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
     uiFieldText as uiFieldTel,
-    uiFieldText as uiFieldEmail
+    uiFieldText,
+    uiFieldText as uiFieldUrl
 };
 
 

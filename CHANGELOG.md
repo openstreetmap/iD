@@ -46,7 +46,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix selection of best background source when starting on a zoomed-out view ([#9325])
 #### :rocket: Presets
-* add support for tagging schema v5 ([#9320])
+* Support tagging schema v5 ([#9320]):
+  * Add new field type `colour` ([schema-builder#38], [#8782])
+  * Add ability to reference strings of other presets/fields
 * Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
 * Synchronize fetching of released presets
@@ -55,7 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
 [#9320]: https://github.com/openstreetmap/iD/pull/9320
 [#9325]: https://github.com/openstreetmap/iD/issues/9325
-
+[schema-builder#38]: https://github.com/ideditor/schema-builder/pull/38
 
 # 2.22.0
 ##### 2022-Sep-27
