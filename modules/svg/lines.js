@@ -240,7 +240,11 @@ export function svgLines(projection, context) {
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
                 oldMultiPolygonOuters[outer.id] = true;
-            } else if (entity.geometry(graph) === 'line') {
+            } else if (entity.geometry(graph) === 'line'
+                       // to render side-markers for coastlines (see
+                       // https://github.com/openstreetmap/iD/issues/9293)
+                    || entity.geometry(graph) === 'area' && entity.sidednessIdentifier
+                        && entity.sidednessIdentifier() === 'coastline') {
                 ways.push(entity);
             }
         }

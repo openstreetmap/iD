@@ -54,7 +54,7 @@ export function rendererPhotos(context) {
         // validate the date
         var date = val && new Date(val);
         if (date && !isNaN(date)) {
-            val = date.toISOString().substr(0, 10);
+            val = date.toISOString().slice(0, 10);
         } else {
             val = null;
         }

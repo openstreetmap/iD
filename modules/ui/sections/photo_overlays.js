@@ -12,7 +12,7 @@ export function uiSectionPhotoOverlays(context) {
     var layers = context.layers();
 
     var section = uiSection('photo-overlays', context)
-        .label(t.html('photo_overlays.title'))
+        .label(() => t.append('photo_overlays.title'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -77,7 +77,7 @@ export function uiSectionPhotoOverlays(context) {
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html(titleID))
+                        .title(() => t.append(titleID))
                         .placement('top')
                     );
             });
@@ -139,7 +139,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('photo_overlays.photo_type.' + d + '.tooltip'))
+                        .title(() => t.append('photo_overlays.photo_type.' + d + '.tooltip'))
                         .placement('top')
                     );
             });
@@ -200,15 +200,15 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('photo_overlays.date_filter.' + d + '.tooltip'))
+                        .title(() => t.append('photo_overlays.date_filter.' + d + '.tooltip'))
                         .placement('top')
                     );
             });
 
         labelEnter
             .append('span')
-            .html(function(d) {
-                return t.html('photo_overlays.date_filter.' + d + '.title');
+            .each(function(d) {
+                t.append('photo_overlays.date_filter.' + d + '.title')(d3_select(this));
             });
 
         labelEnter
@@ -266,7 +266,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function() {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('photo_overlays.username_filter.tooltip'))
+                        .title(() => t.append('photo_overlays.username_filter.tooltip'))
                         .placement('top')
                     );
             });

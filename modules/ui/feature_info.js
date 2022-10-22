@@ -9,18 +9,25 @@ export function uiFeatureInfo(context) {
         var hiddenList = features.hidden().map(function(k) {
             if (stats[k]) {
                 count += stats[k];
-                return t.html('inspector.title_count', { title: { html: t.html('feature.' + k + '.description') }, count: stats[k] });
+                return t.append('inspector.title_count', {
+                    title: t('feature.' + k + '.description'),
+                    count: stats[k]
+                });
             }
             return null;
         }).filter(Boolean);
 
-        selection.html('');
+        selection.text('');
 
         if (hiddenList.length) {
             var tooltipBehavior = uiTooltip()
                 .placement('top')
                 .title(function() {
-                    return hiddenList.join('<br/>');
+                    return selection => {
+                        hiddenList.forEach(hiddenFeature => {
+                            selection.append('div').call(hiddenFeature);
+                        });
+                    };
                 });
 
             selection.append('a')

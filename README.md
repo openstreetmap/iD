@@ -5,10 +5,8 @@
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
-* It's intentionally simple. It lets you do the most basic tasks while
-  not breaking other people's data.
-* It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
-  Opera, Edge, and IE11.
+* It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
+* It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
 * iD is not yet designed for mobile browsers, but this is something we hope to add!
 * Data is rendered with [d3.js](https://d3js.org/).
 
@@ -21,8 +19,7 @@ if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
 * Test a prerelease version of iD:
   * Stable mirror of `release` branch: https://ideditor-release.netlify.app
-  * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.com
-  * Development mirror of `v3-prototype` branch: https://preview.ideditor.com/master
+  * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.app
 
 Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
@@ -32,7 +29,7 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org/) version 10 or newer
+* [Node.js](https://nodejs.org/) version 16.14 or newer
 * [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
   * Note for Windows users:
     * Edit `$HOME\.gitconfig`:<br/>
@@ -69,7 +66,7 @@ If you want to add in the full history later on, perhaps to run `git blame` or `
 2. Run `npm install`
 3. Run `npm run all`
 3. Run `npm start`
-4. Open `http://localhost:8080/` in a web browser
+4. Open `http://127.0.0.1:8080/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
 development, see [CONTRIBUTING.md](CONTRIBUTING.md).

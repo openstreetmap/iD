@@ -75,8 +75,6 @@ describe('iD.svgData', function () {
         '</Document>' +
         '</kml>';
 
-
-    // this is because PhantomJS hasn't implemented a proper File constructor
     function makeFile(contents, fileName, mimeType) {
         var blob = new Blob([contents], { type: mimeType });
         blob.lastModifiedDate = new Date();

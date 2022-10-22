@@ -124,8 +124,8 @@ export function operationStraighten(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.straighten.' + disable + '.' + _amount) :
-            t('operations.straighten.description.' + _geometry + (_wayIDs.length === 1 ? '' : 's'));
+            t.append('operations.straighten.' + disable + '.' + _amount) :
+            t.append('operations.straighten.description.' + _geometry + (_wayIDs.length === 1 ? '' : 's'));
     };
 
 
@@ -136,7 +136,7 @@ export function operationStraighten(context, selectedIDs) {
 
     operation.id = 'straighten';
     operation.keys = [t('operations.straighten.key')];
-    operation.title = t('operations.straighten.title');
+    operation.title = t.append('operations.straighten.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

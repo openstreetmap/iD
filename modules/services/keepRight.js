@@ -2,6 +2,7 @@ import RBush from 'rbush';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
+import { unescape } from 'lodash-es';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoVecAdd } from '../geo';
@@ -65,7 +66,6 @@ function updateRtree(item, replace) {
 function tokenReplacements(d) {
   if (!(d instanceof QAItem)) return;
 
-  const htmlRegex = new RegExp(/<\/[a-z][\s\S]*>/);
   const replacements = {};
 
   const issueTemplate = _krData.errorTypes[d.whichType];
@@ -99,12 +99,12 @@ function tokenReplacements(d) {
     idType = 'IDs' in issueTemplate ? issueTemplate.IDs[i-1] : '';
     if (idType && capture) {   // link IDs if present in the capture
       capture = parseError(capture, idType);
-    } else if (htmlRegex.test(capture)) {   // escape any html in non-IDs
-      capture = '\\' +  capture + '\\';
     } else {
       const compare = capture.toLowerCase();
       if (_krData.localizeStrings[compare]) {   // some replacement strings can be localized
         capture = t('QA.keepRight.error_parts.' + _krData.localizeStrings[compare]);
+      } else {
+        capture = unescape(capture);
       }
     }
 
@@ -160,15 +160,15 @@ function parseError(capture, idType) {
 
 
   function linkErrorObject(d) {
-    return `<a class="error_object_link">${d}</a>`;
+    return { html: `<a class="error_object_link">${d}</a>` };
   }
 
   function linkEntity(d) {
-    return `<a class="error_entity_link">${d}</a>`;
+    return { html: `<a class="error_entity_link">${d}</a>` };
   }
 
   function linkURL(d) {
-    return `<a class="kr_external_link" target="_blank" href="${d}">${d}</a>`;
+    return { html: `<a class="kr_external_link" target="_blank" href="${d}">${d}</a>` };
   }
 
   // arbitrary node list of form: #ID, #ID, #ID...

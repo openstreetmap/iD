@@ -97,7 +97,9 @@ export function behaviorSelect(context) {
 
         context.ui().closeEditMenu();
 
-        _longPressTimeout = window.setTimeout(didLongPress, 500, id, 'longdown-' + (d3_event.pointerType || 'mouse'));
+        if (d3_event.pointerType !== 'mouse') {
+            _longPressTimeout = window.setTimeout(didLongPress, 500, id, 'longdown-' + (d3_event.pointerType || 'mouse'));
+        }
 
         _downPointers[id] = {
             firstEvent: d3_event,
@@ -172,7 +174,7 @@ export function behaviorSelect(context) {
 
         if (!+d3_event.clientX && !+d3_event.clientY) {
             if (_lastMouseEvent) {
-                d3_event.sourceEvent = _lastMouseEvent;
+                d3_event = _lastMouseEvent;
             } else {
                 return;
             }
@@ -335,7 +337,7 @@ export function behaviorSelect(context) {
                 .selectedNoteID(datum.id)
                 .enter(modeSelectNote(context, datum.id));
 
-        } else if (datum instanceof QAItem & !isMultiselect) {
+        } else if (datum instanceof QAItem && !isMultiselect) {
             // targeting an external QA issue
             context
                 .selectedErrorID(datum.id)

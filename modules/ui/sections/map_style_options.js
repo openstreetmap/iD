@@ -5,7 +5,7 @@ import { uiSection } from '../section';
 export function uiSectionMapStyleOptions(context) {
 
     var section = uiSection('fill-area', context)
-        .label(t.html('map_data.style_options'))
+        .label(() => t.append('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -44,7 +44,7 @@ export function uiSectionMapStyleOptions(context) {
             .append('li')
             .call(uiTooltip()
                 .title(function(d) {
-                    return t.html(name + '.' + d + '.tooltip');
+                    return t.append(name + '.' + d + '.tooltip');
                 })
                 .keys(function(d) {
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);

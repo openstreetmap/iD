@@ -3,7 +3,7 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import marked from 'marked';
+import { marked } from 'marked';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { localizer } from '../core/localizer';
@@ -123,7 +123,7 @@ export default {
       if (_cache.loadedTile[tile.id] || _cache.inflightTile[tile.id]) return;
 
       let [ x, y, z ] = tile.xyz;
-      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.json?` + utilQsString(params);
+      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.geojson?` + utilQsString(params);
 
       let controller = new AbortController();
       _cache.inflightTile[tile.id] = controller;

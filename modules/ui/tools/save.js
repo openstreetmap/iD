@@ -11,7 +11,7 @@ export function uiToolSave(context) {
 
     var tool = {
         id: 'save',
-        label: t.html('save.title')
+        label: t.append('save.title')
     };
 
     var button = null;
@@ -36,15 +36,15 @@ export function uiToolSave(context) {
         }
     }
 
-    function bgColor() {
+    function bgColor(numChanges) {
         var step;
-        if (_numChanges === 0) {
+        if (numChanges === 0) {
             return null;
-        } else if (_numChanges <= 50) {
-            step = _numChanges / 50;
+        } else if (numChanges <= 50) {
+            step = numChanges / 50;
             return d3_interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
         } else {
-            step = Math.min((_numChanges - 50) / 50, 1.0);
+            step = Math.min((numChanges - 50) / 50, 1.0);
             return d3_interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
         }
     }
@@ -57,7 +57,7 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(t.html(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
+                .title(() => t.append(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
                 .keys([key]);
         }
 
@@ -75,7 +75,7 @@ export function uiToolSave(context) {
     tool.render = function(selection) {
         tooltipBehavior = uiTooltip()
             .placement('bottom')
-            .title(t.html('save.no_changes'))
+            .title(() => t.append('save.no_changes'))
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
@@ -99,7 +99,7 @@ export function uiToolSave(context) {
                         .duration(2000)
                         .iconName('#iD-icon-save')
                         .iconClass('disabled')
-                        .label(t.html('save.no_changes'))();
+                        .label(t.append('save.no_changes'))();
                 }
                 lastPointerUpType = null;
             })

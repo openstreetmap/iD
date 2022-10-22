@@ -96,7 +96,7 @@ export function presetIndex() {
         let f = d.fields[fieldID];
 
         if (f) {   // add or replace
-          f = presetField(fieldID, f);
+          f = presetField(fieldID, f, _fields);
           if (f.locationSet) newLocationSets.push(f);
           _fields[fieldID] = f;
 
@@ -298,7 +298,14 @@ export function presetIndex() {
   // and the subkeys form the discardlist.
   _this.areaKeys = () => {
     // The ignore list is for keys that imply lines. (We always add `area=yes` for exceptions)
-    const ignore = ['barrier', 'highway', 'footway', 'railway', 'junction', 'type'];
+    const ignore = {
+      barrier: true,
+      highway: true,
+      footway: true,
+      railway: true,
+      junction: true,
+      type: true
+    };
     let areaKeys = {};
 
     // ignore name-suggestion-index and deprecated presets
@@ -309,7 +316,7 @@ export function presetIndex() {
       const keys = p.tags && Object.keys(p.tags);
       const key = keys && keys.length && keys[0];  // pick the first tag
       if (!key) return;
-      if (ignore.indexOf(key) !== -1) return;
+      if (ignore[key]) return;
 
       if (p.geometry.indexOf('area') !== -1) {    // probably an area..
         areaKeys[key] = areaKeys[key] || {};
@@ -379,7 +386,7 @@ export function presetIndex() {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n, startWithRecents, loc) => {
+  _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     let recents = [];
     if (startWithRecents) {
       recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
@@ -397,7 +404,7 @@ export function presetIndex() {
     }
 
     let result = presetCollection(
-      utilArrayUniq(recents.concat(defaults)).slice(0, n - 1)
+      utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
     );
 
     if (Array.isArray(loc)) {
@@ -433,7 +440,9 @@ export function presetIndex() {
 
   _this.recent = () => {
     return presetCollection(
-      utilArrayUniq(_this.getRecents().map(d => d.preset))
+      utilArrayUniq(_this.getRecents()
+        .map(d => d.preset)
+        .filter(d => d.searchable !== false))
     );
   };
 

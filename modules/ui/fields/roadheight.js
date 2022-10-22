@@ -101,7 +101,12 @@ export function uiFieldRoadheight(field, context) {
 
 
         function changeUnits() {
-            _isImperial = utilGetSetValue(primaryUnitInput) === 'ft';
+            var primaryUnit = utilGetSetValue(primaryUnitInput);
+            if (primaryUnit === 'm') {
+                _isImperial = false;
+            } else if (primaryUnit === 'ft') {
+                _isImperial = true;
+            }
             utilGetSetValue(primaryUnitInput, _isImperial ? 'ft' : 'm');
             setUnitSuggestions();
             change();

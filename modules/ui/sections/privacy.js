@@ -6,7 +6,7 @@ import { uiSection } from '../section';
 
 export function uiSectionPrivacy(context) {
     let section = uiSection('preferences-third-party', context)
-      .label(t.html('preferences.privacy.title'))
+      .label(() => t.append('preferences.privacy.title'))
       .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -25,7 +25,7 @@ export function uiSectionPrivacy(context) {
         .attr('class', 'privacy-third-party-icons-item')
         .append('label')
         .call(uiTooltip()
-          .title(t.html('preferences.privacy.third_party_icons.tooltip'))
+          .title(() => t.append('preferences.privacy.third_party_icons.tooltip'))
           .placement('bottom')
         );
 

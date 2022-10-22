@@ -127,20 +127,11 @@ export function svgImproveOSM(projection, context, dispatch) {
 
     markersEnter
       .append('use')
-        .attr('transform', 'translate(-6.5, -23)')
         .attr('class', 'icon-annotation')
-        .attr('width', '13px')
-        .attr('height', '13px')
-        .attr('xlink:href', d => {
-          const picon = d.icon;
-
-          if (!picon) {
-          return '';
-          } else {
-          const isMaki = /^maki-/.test(picon);
-          return `#${picon}${isMaki ? '-11' : ''}`;
-          }
-        });
+        .attr('transform', 'translate(-6, -22)')
+        .attr('width', '12px')
+        .attr('height', '12px')
+        .attr('xlink:href', d => d.icon ? '#' + d.icon : '');
 
     // update
     markers

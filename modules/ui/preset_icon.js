@@ -9,12 +9,6 @@ import { utilFunctor } from '../util';
 export function uiPresetIcon() {
   let _preset;
   let _geometry;
-  let _sizeClass = 'medium';
-
-
-  function isSmall() {
-    return _sizeClass === 'small';
-  }
 
 
   function presetIcon(selection) {
@@ -23,11 +17,10 @@ export function uiPresetIcon() {
 
 
   function getIcon(p, geom) {
-    if (isSmall() && p.isFallback && p.isFallback()) return 'iD-icon-' + p.id;
+    if (p.isFallback && p.isFallback()) return geom === 'vertex' ? '' : 'iD-icon-' + p.id;
     if (p.icon) return p.icon;
     if (geom === 'line') return 'iD-other-line';
-    if (geom === 'vertex') return p.isFallback() ? '' : 'temaki-vertex';
-    if (isSmall() && geom === 'point') return '';
+    if (geom === 'vertex') return 'temaki-vertex';
     return 'maki-marker-stroked';
   }
 
@@ -129,7 +122,7 @@ export function uiPresetIcon() {
 
     let fillEnter = fill.enter();
 
-    const d = isSmall() ? 40 : 60;
+    const d = 60;
     const w = d;
     const h = d;
     const l = d * 2/3;
@@ -160,17 +153,15 @@ export function uiPresetIcon() {
         .attr('r', rVertex);
     });
 
-    if (!isSmall()) {
-      const rMidpoint = 1.25;
-      [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]].forEach(point => {
-        fillEnter
-          .append('circle')
-          .attr('class', 'midpoint')
-          .attr('cx', point[0])
-          .attr('cy', point[1])
-          .attr('r', rMidpoint);
-      });
-    }
+    const rMidpoint = 1.25;
+    [[c1, w/2], [c2, w/2], [h/2, c1], [h/2, c2]].forEach(point => {
+      fillEnter
+        .append('circle')
+        .attr('class', 'midpoint')
+        .attr('cx', point[0])
+        .attr('cy', point[1])
+        .attr('r', rMidpoint);
+    });
 
     fill = fillEnter.merge(fill);
 
@@ -191,7 +182,7 @@ export function uiPresetIcon() {
 
     let lineEnter = line.enter();
 
-    const d = isSmall() ? 40 : 60;
+    const d = 60;
     // draw the line parametrically
     const w = d;
     const h = d;
@@ -243,7 +234,7 @@ export function uiPresetIcon() {
 
     let routeEnter = route.enter();
 
-    const d = isSmall() ? 40 : 60;
+    const d = 60;
     // draw the route parametrically
     const w = d;
     const h = d;
@@ -330,13 +321,8 @@ export function uiPresetIcon() {
     icon.selectAll('svg')
       .attr('class', 'icon ' + picon + ' ' + (!isiDIcon && geom !== 'line'  ? '' : tagClasses));
 
-    var suffix = '';
-    if (isMaki) {
-      suffix = isSmall() && geom === 'point' ? '-11' : '-15';
-    }
-
     icon.selectAll('use')
-      .attr('href', '#' + picon + suffix);
+      .attr('href', '#' + picon);
   }
 
 
@@ -396,12 +382,12 @@ export function uiPresetIcon() {
     }
 
     const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
-    const isFallback = isSmall() && p.isFallback && p.isFallback();
+    const isFallback = p.isFallback && p.isFallback();
     const imageURL = (showThirdPartyIcons === 'true') && p.imageURL;
     const picon = getIcon(p, geom);
     const isCategory = !p.setTags;
-    const drawPoint = picon && geom === 'point' && isSmall() && !isFallback;
-    const drawVertex = picon !== null && geom === 'vertex' && (!isSmall() || !isFallback);
+    const drawPoint = false;
+    const drawVertex = picon !== null && geom === 'vertex';
     const drawLine = picon && geom === 'line' && !isFallback && !isCategory;
     const drawArea = picon && geom === 'area' && !isFallback && !isCategory;
     const drawRoute = picon && geom === 'route';
@@ -422,7 +408,7 @@ export function uiPresetIcon() {
 
     container = container.enter()
       .append('div')
-      .attr('class', `preset-icon-container ${_sizeClass}`)
+      .attr('class', 'preset-icon-container')
       .merge(container);
 
     container
@@ -450,13 +436,6 @@ export function uiPresetIcon() {
   presetIcon.geometry = function(val) {
     if (!arguments.length) return _geometry;
     _geometry = utilFunctor(val);
-    return presetIcon;
-  };
-
-
-  presetIcon.sizeClass = function(val) {
-    if (!arguments.length) return _sizeClass;
-    _sizeClass = val;
     return presetIcon;
   };
 

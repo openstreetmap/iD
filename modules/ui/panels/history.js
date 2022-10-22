@@ -254,7 +254,7 @@ export function uiPanelHistory(context) {
     };
 
     panel.id = 'history';
-    panel.label = t.html('info_panels.history.title');
+    panel.label = t.append('info_panels.history.title');
     panel.key = t('info_panels.history.key');
 
 

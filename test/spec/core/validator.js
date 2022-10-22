@@ -45,8 +45,6 @@ describe('iD.coreValidator', function () {
             .catch(function(err) {
                 done(err);
             });
-
-        window.setTimeout(function() {}, 20); // async - to let the promise settle in phantomjs
     });
 
 });

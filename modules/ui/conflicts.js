@@ -9,7 +9,6 @@ import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
-import { utilDetect } from '../util/detect';
 
 import {
     utilEntityOrMemberSelector,
@@ -81,7 +80,6 @@ export function uiConflicts(context) {
 
 
         // Download changes link
-        var detected = utilDetect();
         var changeset = new osmChangeset();
 
         delete changeset.id;  // Export without changeset_id
@@ -94,18 +92,10 @@ export function uiConflicts(context) {
             .append('a')
             .attr('class', 'download-changes');
 
-        if (detected.download) {      // All except IE11 and Edge
-            linkEnter                 // download the data as a file
-                .attr('href', window.URL.createObjectURL(blob))
-                .attr('download', fileName);
-
-        } else {                      // IE11 and Edge
-            linkEnter                 // open data uri in a new tab
-                .attr('target', '_blank')
-                .on('click.download', function() {
-                    navigator.msSaveBlob(blob, fileName);
-                });
-        }
+        // download the data as a file
+        linkEnter
+            .attr('href', window.URL.createObjectURL(blob))
+            .attr('download', fileName);
 
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
@@ -215,7 +205,6 @@ export function uiConflicts(context) {
             .data(['previous', 'next'])
             .enter()
             .append('button')
-            .html(function(d) { return t.html('save.conflict.' + d); })
             .attr('class', 'conflict-nav-button action col6')
             .attr('disabled', function(d, i) {
                 return (i === 0 && index === 0) ||
@@ -233,7 +222,8 @@ export function uiConflicts(context) {
 
                 container
                     .call(showConflict, index + sign);
-            });
+            })
+            .call(function(d) { t.append('save.conflict.' + d)(d3_select(this)); });
 
     }
 

@@ -128,7 +128,7 @@ export function uiInit(context) {
             .on('hitMinZoom.ui', function() {
                 ui.flash
                     .iconName('#iD-icon-no')
-                    .label(t.html('cannot_zoom'))();
+                    .label(t.append('cannot_zoom'))();
             });
 
         container
@@ -293,7 +293,7 @@ export function uiInit(context) {
             .attr('class', 'user-list')
             .call(uiContributors(context));
 
-        var apiConnections = context.apiConnections();
+        var apiConnections = context.connection().apiConnections();
         if (apiConnections && apiConnections.length > 1) {
             aboutList
                 .append('li')
@@ -322,7 +322,9 @@ export function uiInit(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/issues')
             .attr('aria-label', t('report_a_bug'))
             .call(svgIcon('#iD-icon-bug', 'light'))
-            .call(uiTooltip().title(t.html('report_a_bug')).placement('top'));
+            .call(uiTooltip()
+                .title(() => t.append('report_a_bug'))
+                .placement('top'));
 
         issueLinks
             .append('a')
@@ -330,7 +332,9 @@ export function uiInit(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating')
             .attr('aria-label', t('help_translate'))
             .call(svgIcon('#iD-icon-translate', 'light'))
-            .call(uiTooltip().title(t.html('help_translate')).placement('top'));
+            .call(uiTooltip()
+                .title(() => t.append('help_translate'))
+                .placement('top'));
 
         aboutList
             .append('li')
@@ -350,7 +354,7 @@ export function uiInit(context) {
 
         ui.hash = behaviorHash(context);
         ui.hash();
-        if (!ui.hash.hadHash) {
+        if (!ui.hash.hadLocation) {
             map.centerZoom([0, 0], 2);
         }
 

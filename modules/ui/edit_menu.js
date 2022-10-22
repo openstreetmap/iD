@@ -104,8 +104,8 @@ export function uiEditMenu(context) {
 
         buttonsEnter.each(function(d) {
             var tooltip = uiTooltip()
-                .heading(d.title)
-                .title(d.tooltip())
+                .heading(() => d.title)
+                .title(d.tooltip)
                 .keys([d.keys[0]]);
 
             _tooltips.push(tooltip);
@@ -164,7 +164,7 @@ export function uiEditMenu(context) {
                         .duration(4000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation disabled')
-                        .label(operation.tooltip)();
+                        .label(operation.tooltip())();
                 }
             } else {
                 if (lastPointerUpType === 'touch' ||

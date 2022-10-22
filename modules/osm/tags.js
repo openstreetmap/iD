@@ -8,40 +8,77 @@ export function osmIsInterestingTag(key) {
         key.indexOf('tiger:') !== 0;
 }
 
+export const osmLifecyclePrefixes = {
+    // nonexistent, might be built
+    proposed: true, planned: true,
+    // under maintentance or between groundbreaking and opening
+    construction: true,
+    // existent but not functional
+    disused: true,
+    // dilapidated to nonexistent
+    abandoned: true, was: true,
+    // nonexistent, still may appear in imagery
+    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true, obliterated: true,
+    // existent occasionally, e.g. stormwater drainage basin
+    intermittent: true
+};
+
+/** @param {string} key */
+export function osmRemoveLifecyclePrefix(key) {
+    const keySegments = key.split(':');
+    if (keySegments.length === 1) return key;
+
+    if (keySegments[0] in osmLifecyclePrefixes) {
+        return key.slice(keySegments[0].length + 1);
+    }
+
+    return key;
+}
+
 export var osmAreaKeys = {};
 export function osmSetAreaKeys(value) {
     osmAreaKeys = value;
 }
+
+// `highway` and `railway` are typically linear features, but there
+// are a few exceptions that should be treated as areas, even in the
+// absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+export var osmAreaKeysExceptions = {
+    highway: {
+        elevator: true,
+        rest_area: true,
+        services: true
+    },
+    public_transport: {
+        platform: true
+    },
+    railway: {
+        platform: true,
+        roundhouse: true,
+        station: true,
+        traverser: true,
+        turntable: true,
+        wash: true
+    },
+    waterway: {
+        dam: true
+    }
+};
 
 // returns an object with the tag from `tags` that implies an area geometry, if any
 export function osmTagSuggestingArea(tags) {
     if (tags.area === 'yes') return { area: 'yes' };
     if (tags.area === 'no') return null;
 
-    // `highway` and `railway` are typically linear features, but there
-    // are a few exceptions that should be treated as areas, even in the
-    // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
-    var lineKeys = {
-        highway: {
-            rest_area: true,
-            services: true
-        },
-        railway: {
-            roundhouse: true,
-            station: true,
-            traverser: true,
-            turntable: true,
-            wash: true
-        }
-    };
     var returnTags = {};
-    for (var key in tags) {
+    for (var realKey in tags) {
+        const key = osmRemoveLifecyclePrefix(realKey);
         if (key in osmAreaKeys && !(tags[key] in osmAreaKeys[key])) {
-            returnTags[key] = tags[key];
+            returnTags[realKey] = tags[realKey];
             return returnTags;
         }
-        if (key in lineKeys && tags[key] in lineKeys[key]) {
-            returnTags[key] = tags[key];
+        if (key in osmAreaKeysExceptions && tags[key] in osmAreaKeysExceptions[key]) {
+            returnTags[realKey] = tags[realKey];
             return returnTags;
         }
     }
@@ -106,6 +143,10 @@ export var osmOneWayTags = {
         'sled': true,
         'yes': true
     },
+    'seamark:type': {
+        'separation_lane': true,
+        'separation_roundabout': true
+    },
     'waterway': {
         'canal': true,
         'ditch': true,
@@ -123,6 +164,7 @@ export var osmPavedTags = {
         'paved': true,
         'asphalt': true,
         'concrete': true,
+        'chipseal': true,
         'concrete:lanes': true,
         'concrete:plates': true
     },

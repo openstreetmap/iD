@@ -1,76 +1,118 @@
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 
+
 export function uiAccount(context) {
-    var osm = context.connection();
+  const osm = context.connection();
 
 
-    function update(selection) {
-        if (!osm) return;
+  function updateUserDetails(selection) {
+    if (!osm) return;
 
-        if (!osm.authenticated()) {
-            selection.selectAll('.userLink, .logoutLink')
-                .classed('hide', true);
-            return;
-        }
+    if (!osm.authenticated()) {  // logged out
+      render(selection, null);
+    } else {
+      osm.userDetails((err, user) => render(selection, user));
+    }
+  }
 
-        osm.userDetails(function(err, details) {
-            var userLink = selection.select('.userLink'),
-                logoutLink = selection.select('.logoutLink');
 
-            userLink.html('');
-            logoutLink.html('');
+  function render(selection, user) {
+    let userInfo = selection.select('.userInfo');
+    let loginLogout = selection.select('.loginLogout');
 
-            if (err || !details) return;
+    if (user) {
+      userInfo
+        .html('')
+        .classed('hide', false);
 
-            selection.selectAll('.userLink, .logoutLink')
-                .classed('hide', false);
+      let userLink = userInfo
+        .append('a')
+        .attr('href', osm.userURL(user.display_name))
+        .attr('target', '_blank');
 
-            // Link
-            var userLinkA = userLink.append('a')
-                .attr('href', osm.userURL(details.display_name))
-                .attr('target', '_blank');
+      // Add user's image or placeholder
+      if (user.image_url) {
+        userLink.append('img')
+          .attr('class', 'icon pre-text user-icon')
+          .attr('src', user.image_url);
+      } else {
+        userLink
+          .call(svgIcon('#iD-icon-avatar', 'pre-text light'));
+      }
 
-            // Add thumbnail or dont
-            if (details.image_url) {
-                userLinkA.append('img')
-                    .attr('class', 'icon pre-text user-icon')
-                    .attr('src', details.image_url);
-            } else {
-                userLinkA
-                    .call(svgIcon('#iD-icon-avatar', 'pre-text light'));
-            }
+      // Add user name
+      userLink.append('span')
+        .attr('class', 'label')
+        .html(user.display_name);
 
-            // Add user name
-            userLinkA.append('span')
-                .attr('class', 'label')
-                .html(details.display_name);
+      // show "Log Out"
+      loginLogout
+        .classed('hide', false)
+        .select('a')
+        .text(t('logout'))
+        .on('click', e => {
+          e.preventDefault();
+          osm.logout();
+          tryLogout();
+        });
 
-            logoutLink.append('a')
-                .attr('class', 'logout')
-                .attr('href', '#')
-                .call(t.append('logout'))
-                .on('click.logout', function(d3_event) {
-                    d3_event.preventDefault();
-                    osm.logout();
-                });
+    } else {    // no user
+      userInfo
+        .html('')
+        .classed('hide', true);
+
+      // show "Log In"
+      loginLogout
+        .classed('hide', false)
+        .select('a')
+        .text(t('login'))
+        .on('click', e => {
+          e.preventDefault();
+          osm.authenticate();
         });
     }
+  }
 
 
-    return function(selection) {
+  // OAuth2's idea of "logout" is just to get rid of the bearer token.
+  // If we try to "login" again, it will just grab the token again.
+  // What a user probably _really_ expects is to logout of OSM so that they can switch users.
+  function tryLogout()  {
+    if (!osm) return;
 
-        selection.append('li')
-            .attr('class', 'userLink')
-            .classed('hide', true);
+    const url = osm.getUrlRoot() + '/logout?referer=%2Flogin';
+    // Create a 600x550 popup window in the center of the screen
+    const w = 600;
+    const h = 550;
+    const settings = [
+      ['width', w],
+      ['height', h],
+      ['left', window.screen.width / 2 - w / 2],
+      ['top', window.screen.height / 2 - h / 2],
+    ]
+    .map(x => x.join('='))
+    .join(',');
 
-        selection.append('li')
-            .attr('class', 'logoutLink')
-            .classed('hide', true);
+    window.open(url, '_blank', settings);
+  }
 
-        if (osm) {
-            osm.on('change.account', function() { update(selection); });
-            update(selection);
-        }
-    };
+
+  return function(selection) {
+    if (!osm) return;
+
+    selection.append('li')
+      .attr('class', 'userInfo')
+      .classed('hide', true);
+
+    selection.append('li')
+      .attr('class', 'loginLogout')
+      .classed('hide', true)
+      .append('a')
+      .attr('href', '#');
+
+    osm.on('change.account', () => updateUserDetails(selection));
+    updateUserDetails(selection);
+  };
+
 }

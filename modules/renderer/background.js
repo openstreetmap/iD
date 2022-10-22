@@ -1,16 +1,17 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
+import turf_bboxClip from '@turf/bbox-clip';
+import turf_bbox from '@turf/bbox';
 
 import whichPolygon from 'which-polygon';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
-import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
+import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
-import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
@@ -18,7 +19,6 @@ let _imageryIndex = null;
 
 export function rendererBackground(context) {
   const dispatch = d3_dispatch('change');
-  const detected = utilDetect();
   const baseLayer = rendererTileLayer(context).projection(context.projection);
   let _checkedBlocklists = [];
   let _isValid = true;
@@ -110,20 +110,18 @@ export function rendererBackground(context) {
 
 
     let baseFilter = '';
-    if (detected.cssfilters) {
-      if (_brightness !== 1) {
-        baseFilter += ` brightness(${_brightness})`;
-      }
-      if (_contrast !== 1) {
-        baseFilter += ` contrast(${_contrast})`;
-      }
-      if (_saturation !== 1) {
-        baseFilter += ` saturate(${_saturation})`;
-      }
-      if (_sharpness < 1) {  // gaussian blur
-        const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
-        baseFilter += ` blur(${blur}px)`;
-      }
+    if (_brightness !== 1) {
+      baseFilter += ` brightness(${_brightness})`;
+    }
+    if (_contrast !== 1) {
+      baseFilter += ` contrast(${_contrast})`;
+    }
+    if (_saturation !== 1) {
+      baseFilter += ` saturate(${_saturation})`;
+    }
+    if (_sharpness < 1) {  // gaussian blur
+      const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+      baseFilter += ` blur(${blur}px)`;
     }
 
     let base = selection.selectAll('.layer-background')
@@ -134,11 +132,7 @@ export function rendererBackground(context) {
       .attr('class', 'layer layer-background')
       .merge(base);
 
-    if (detected.cssfilters) {
-      base.style('filter', baseFilter || null);
-    } else {
-      base.style('opacity', _brightness);
-    }
+    base.style('filter', baseFilter || null);
 
 
     let imagery = base.selectAll('.layer-imagery')
@@ -153,7 +147,7 @@ export function rendererBackground(context) {
 
     let maskFilter = '';
     let mixBlendMode = '';
-    if (detected.cssfilters && _sharpness > 1) {  // apply unsharp mask
+    if (_sharpness > 1) {  // apply unsharp mask
       mixBlendMode = 'overlay';
       maskFilter = 'saturate(0) blur(3px) invert(1)';
 
@@ -165,7 +159,7 @@ export function rendererBackground(context) {
     }
 
     let mask = base.selectAll('.layer-unsharp-mask')
-      .data(detected.cssfilters && _sharpness > 1 ? [0] : []);
+      .data(_sharpness > 1 ? [0] : []);
 
     mask.exit()
       .remove();
@@ -451,78 +445,90 @@ export function rendererBackground(context) {
   let _loadPromise;
 
   background.ensureLoaded = () => {
-
     if (_loadPromise) return _loadPromise;
 
-    function parseMapParams(qmap) {
-      if (!qmap) return false;
-      const params = qmap.split('/').map(Number);
-      if (params.length < 3 || params.some(isNaN)) return false;
-      return geoExtent([params[2], params[1]]);  // lon,lat
-    }
+    return _loadPromise = ensureImageryIndex();
+  };
+
+  background.init = () => {
+    const loadPromise = background.ensureLoaded();
 
     const hash = utilStringQs(window.location.hash);
-    const requested = hash.background || hash.layer;
-    let extent = parseMapParams(hash.map);
+    const requestedBackground = hash.background || hash.layer;
+    const lastUsedBackground = prefs('background-last-used');
 
-    return _loadPromise = ensureImageryIndex()
-      .then(imageryIndex => {
-        const first = imageryIndex.backgrounds.length && imageryIndex.backgrounds[0];
+    return loadPromise.then(imageryIndex => {
+      const extent = context.map().extent();
+      const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
+      const first = validBackgrounds.length && validBackgrounds[0];
+      const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
 
-        let best;
-        if (!requested && extent) {
-          best = background.sources(extent).find(s => s.best());
-        }
-
-        // Decide which background layer to display
-        if (requested && requested.indexOf('custom:') === 0) {
-          const template = requested.replace(/^custom:/, '');
-          const custom = background.findSource('custom');
-          background.baseLayerSource(custom.template(template));
-          prefs('background-custom-template', template);
-        } else {
-          background.baseLayerSource(
-            background.findSource(requested) ||
-            best ||
-            background.findSource(prefs('background-last-used')) ||
-            background.findSource('Bing') ||
-            first ||
-            background.findSource('none')
-          );
-        }
-
-        const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
-        if (locator) {
-          background.toggleOverlayLayer(locator);
-        }
-
-        const overlays = (hash.overlays || '').split(',');
-        overlays.forEach(overlay => {
-          overlay = background.findSource(overlay);
-          if (overlay) {
-            background.toggleOverlayLayer(overlay);
-          }
+      let best;
+      if (!requestedBackground && extent) {
+        const viewArea = extent.area();
+        best = validBackgrounds.find(s => {
+          if (!s.best() || s.overlay) return false;
+          let bbox = turf_bbox(turf_bboxClip(
+                { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
+                extent.rectangle()));
+          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
+          return area / viewArea > 0.5; // min visible size: 50% of viewport area
         });
+      }
 
-        if (hash.gpx) {
-          const gpx = context.layers().layer('data');
-          if (gpx) {
-            gpx.url(hash.gpx, '.gpx');
-          }
+      // Decide which background layer to display
+      if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
+        const template = requestedBackground.replace(/^custom:/, '');
+        const custom = background.findSource('custom');
+        background.baseLayerSource(custom.template(template));
+        prefs('background-custom-template', template);
+      } else {
+        background.baseLayerSource(
+          background.findSource(requestedBackground) ||
+          best ||
+          isLastUsedValid && background.findSource(lastUsedBackground) ||
+          background.findSource('Bing') ||
+          first ||
+          background.findSource('none')
+        );
+      }
+
+      const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+      if (locator) {
+        background.toggleOverlayLayer(locator);
+      }
+
+      const overlays = (hash.overlays || '').split(',');
+      overlays.forEach(overlay => {
+        overlay = background.findSource(overlay);
+        if (overlay) {
+          background.toggleOverlayLayer(overlay);
         }
+      });
 
-        if (hash.offset) {
-          const offset = hash.offset
-            .replace(/;/g, ',')
-            .split(',')
-            .map(n => !isNaN(n) && n);
-
-          if (offset.length === 2) {
-            background.offset(geoMetersToOffset(offset));
-          }
+      if (hash.gpx) {
+        const gpx = context.layers().layer('data');
+        if (gpx) {
+          gpx.url(hash.gpx, '.gpx');
         }
-      })
-      .catch(() => { /* ignore */ });
+      }
+
+      if (hash.offset) {
+        const offset = hash.offset
+          .replace(/;/g, ',')
+          .split(',')
+          .map(n => !isNaN(n) && n);
+
+        if (offset.length === 2) {
+          background.offset(geoMetersToOffset(offset));
+        }
+      }
+    })
+    .catch(err => {
+      /* eslint-disable no-console */
+      console.error(err);
+      /* eslint-enable no-console */
+    });
   };
 
 

@@ -57,6 +57,9 @@ export function svgLabels(projection, context) {
         ['point', 'shop', '*', 10],
         ['point', 'tourism', '*', 10],
         ['point', 'camp_site', '*', 10],
+        ['line', 'ref', '*', 12],
+        ['area', 'ref', '*', 12],
+        ['point', 'ref', '*', 10],
         ['line', 'name', '*', 12],
         ['area', 'name', '*', 12],
         ['point', 'name', '*', 10]
@@ -202,13 +205,7 @@ export function svgLabels(projection, context) {
             .attr('xlink:href', function(d) {
                 var preset = presetManager.match(d, context.graph());
                 var picon = preset && preset.icon;
-
-                if (!picon) {
-                    return '';
-                } else {
-                    var isMaki = /^maki-/.test(picon);
-                    return '#' + picon + (isMaki ? '-15' : '');
-                }
+                return picon ? '#' + picon : '';
             });
     }
 

@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity } from '../osm';
+import { osmEntity, osmLifecyclePrefixes } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
@@ -42,17 +42,6 @@ export function rendererFeatures(context) {
         'pedestrian': true
     };
 
-    var past_futures = {
-        'proposed': true,
-        'construction': true,
-        'abandoned': true,
-        'dismantled': true,
-        'disused': true,
-        'razed': true,
-        'demolished': true,
-        'obliterated': true
-    };
-
     var _cullFactor = 1;
     var _cache = {};
     var _rules = {};
@@ -80,6 +69,11 @@ export function rendererFeatures(context) {
     }
 
 
+    /**
+     * @param {string} k
+     * @param {(tags: Record<string, string>, geometry: string) => boolean} filter
+     * @param {?number} max
+     */
     function defineRule(k, filter, max) {
         var isEnabled = true;
 
@@ -144,9 +138,13 @@ export function rendererFeatures(context) {
             !_rules.pistes.filter(tags);
     });
 
-    defineRule('boundaries', function isBoundary(tags) {
+    defineRule('boundaries', function isBoundary(tags, geometry) {
+        // This rule applies if the object has no interesting tags, and if either:
+        //   (a) is a way having a `boundary=*` tag, or
+        //   (b) is a relation of `type=boundary`.
         return (
-            !!tags.boundary
+            (geometry === 'line' && !!tags.boundary) ||
+            (geometry === 'relation' && tags.type === 'boundary')
         ) && !(
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
@@ -210,7 +208,7 @@ export function rendererFeatures(context) {
 
         for (var i = 0; i < strings.length; i++) {
             var s = strings[i];
-            if (past_futures[s] || past_futures[tags[s]]) { return true; }
+            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[s]]) return true;
         }
         return false;
     });

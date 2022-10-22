@@ -104,7 +104,9 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc);
+                var entityPresets = _entityIDs.map(entityID =>
+                    presetManager.match(context.graph().entity(entityID), context.graph()));
+                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
                 messageText = t.html('inspector.choose');
             }
             list.call(drawList, results);
@@ -142,10 +144,12 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', 'inspector-body');
 
+        var entityPresets = _entityIDs.map(entityID =>
+            presetManager.match(context.graph().entity(entityID), context.graph()));
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc));
+            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }
@@ -329,7 +333,8 @@ export function uiPresetList(context) {
                 .attr('class', 'namepart')
                 .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'))
                 .append('span')
-                .html(function() { return preset.nameLabel() + '&hellip;'; });
+                .call(preset.nameLabel())
+                .append('span').text('…');
 
             box = selection.append('div')
                 .attr('class', 'subgrid')
@@ -398,11 +403,12 @@ export function uiPresetList(context) {
             ].filter(Boolean);
 
             label.selectAll('.namepart')
-                .data(nameparts)
+                .data(nameparts, d => d.stringId)
                 .enter()
                 .append('div')
                 .attr('class', 'namepart')
-                .html(function(d) { return d; });
+                .text('')
+                .each(function(d) { d(d3_select(this)); });
 
             wrap.call(item.reference.button);
             selection.call(item.reference.body);
@@ -466,8 +472,8 @@ export function uiPresetList(context) {
             if (isHiddenPreset) {
                 var isAutoHidden = context.features().autoHidden(hiddenPresetFeaturesId);
                 d3_select(this).call(uiTooltip()
-                    .title(t.html('inspector.hidden_preset.' + (isAutoHidden ? 'zoom' : 'manual'), {
-                        features: { html: t.html('feature.' + hiddenPresetFeaturesId + '.description') }
+                    .title(() => t.append('inspector.hidden_preset.' + (isAutoHidden ? 'zoom' : 'manual'), {
+                        features: t('feature.' + hiddenPresetFeaturesId + '.description')
                     }))
                     .placement(index < 2 ? 'bottom' : 'top')
                 );

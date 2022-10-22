@@ -31,7 +31,7 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t.html('inspector.title_count', { title: { html: t.html('inspector.relations') }, count: count });
+            return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -230,7 +230,7 @@ export function uiSectionRawMembershipEditor(context) {
         var newRelation = {
             relation: null,
             value: t('inspector.new_relation'),
-            display: t.html('inspector.new_relation')
+            display: t.append('inspector.new_relation')
         };
 
         var entityID = _entityIDs[0];
@@ -469,7 +469,9 @@ export function uiSectionRawMembershipEditor(context) {
         addRelationButton
             .call(svgIcon('#iD-icon-plus', 'light'));
         addRelationButton
-            .call(uiTooltip().title(t.html('inspector.add_to_relation')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
+            .call(uiTooltip()
+                .title(() => t.append('inspector.add_to_relation'))
+                .placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'));
 
         addRowEnter
             .append('div')

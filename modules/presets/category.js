@@ -36,7 +36,7 @@ export function presetCategory(categoryID, category, allPresets) {
   _this.matchScore = () => -1;
 
   _this.name = () => t(`_tagging.presets.categories.${categoryID}.name`, { 'default': categoryID });
-  _this.nameLabel = () => t.html(`_tagging.presets.categories.${categoryID}.name`, { 'default': categoryID });
+  _this.nameLabel = () => t.append(`_tagging.presets.categories.${categoryID}.name`, { 'default': categoryID });
 
   _this.terms = () => [];
 
@@ -57,6 +57,9 @@ export function presetCategory(categoryID, category, allPresets) {
     }
     return _searchNameStripped;
   };
+
+  _this.searchAliases = () => [];
+  _this.searchAliasesStripped = () => [];
 
   return _this;
 }

@@ -466,6 +466,7 @@ path.line.stroke.tag-footway-access_aisle,
 path.line.stroke.tag-public_transport-platform,
 path.line.stroke.tag-highway-platform,
 path.line.stroke.tag-railway-platform,
+path.line.stroke.tag-railway-platform_edge,
 path.line.stroke.tag-man_made-pier {
     stroke: #dca;
 }
@@ -623,13 +624,11 @@ path.line.stroke.tag-highway-cycleway.tag-crossing-marked {
 
 path.line.stroke.tag-highway.tag-footway-access_aisle {
     stroke-dasharray: 4, 2;
+    stroke: #4c4444;
 }
 .low-zoom path.line.stroke.tag-highway.tag-footway-access_aisle,
 .preset-icon-container path.stroke.tag-highway.tag-footway-access_aisle {
     stroke-dasharray: 2.5, 1.5;
-}
-path.line.stroke.tag-highway.tag-footway-access_aisle {
-    stroke: #4c4444;
 }
 .preset-icon .icon.tag-highway.tag-footway-access_aisle {
     color: #4c4444;

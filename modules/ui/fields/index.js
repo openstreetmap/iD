@@ -30,6 +30,7 @@ import {
 } from './combo';
 
 import {
+    uiFieldColour,
     uiFieldEmail,
     uiFieldIdentifier,
     uiFieldNumber,
@@ -59,6 +60,7 @@ export var uiFields = {
     access: uiFieldAccess,
     address: uiFieldAddress,
     check: uiFieldCheck,
+    colour: uiFieldColour,
     combo: uiFieldCombo,
     cycleway: uiFieldCycleway,
     defaultCheck: uiFieldDefaultCheck,
