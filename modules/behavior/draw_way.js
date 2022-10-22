@@ -455,42 +455,34 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
             const secondLastNodesParents = historyGraph.parentWays(historyGraph.entity(secondLastNodeId)).filter(w => w.id !== wayID);
 
-            const featureType = getFeatureType(lastNodesParents);
+            if (!secondLastNodesParents.length) return;
 
-            if (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0) {
-                context.ui().flash
-                    .duration(4000)
-                    .iconName('#iD-icon-no')
-                    .label(t.append(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
-                return;
+            let nextNodeIds = lastNodesParents.flatMap(({nodes}) => {
+                const indexOfLast = nodes.indexOf(lastNodeId);
+                if (indexOfLast % (nodes.length - 1)) {
+                    return [nodes[indexOfLast-1], nodes[indexOfLast+1]]
+                }
+                if (nodes[0] === nodes[nodes.length - 1]) {
+                    return [nodes[1], nodes[nodes.length - 2]]
+                }
+                return [indexOfLast ? nodes[nodes.length - 2] : nodes[1]]
+            }).filter((id) => id !== secondLastNodeId)
+
+            if (!nextNodeIds.length) return;
+
+            if (new Set([...nextNodeIds]).size > 1) {
+                nextNodeIds = nextNodeIds.filter((id,_,nodes) => nodes.lastIndexOf(id) === nodes.indexOf(id))
+                if (nextNodeIds.length !== 1) {
+                    const featureType = getFeatureType(lastNodesParents);
+                    context.ui().flash
+                        .duration(4000)
+                        .iconName('#iD-icon-no')
+                        .label(t.append(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
+                    return;
+                }
             }
 
-            // Check if the last node's parent is also the parent of the second last node.
-            // The last node must only have one parent, but the second last node can have
-            // multiple parents.
-            if (!secondLastNodesParents.some(n => n.id === lastNodesParents[0].id)) {
-                context.ui().flash
-                    .duration(4000)
-                    .iconName('#iD-icon-no')
-                    .label(t.append(`operations.follow.error.intersection_of_different_ways.${featureType}`))();
-                return;
-            }
-
-            const way = lastNodesParents[0];
-
-            const indexOfLast = way.nodes.indexOf(lastNodeId);
-            const indexOfSecondLast = way.nodes.indexOf(secondLastNodeId);
-
-            // for a closed way, the first/last node is the same so it appears twice in the array,
-            // but indexOf always finds the first occurrence. This is only an issue when following a way
-            // in descending order
-            const isDescendingPastZero = indexOfLast === way.nodes.length - 2 && indexOfSecondLast === 0;
-
-            let nextNodeIndex = indexOfLast + (indexOfLast > indexOfSecondLast && !isDescendingPastZero ? 1 : -1);
-            // if we're following a closed way and we pass the first/last node, the  next index will be -1
-            if (nextNodeIndex === -1) nextNodeIndex = indexOfSecondLast === 1 ? way.nodes.length - 2 : 1;
-
-            const nextNode = historyGraph.entity(way.nodes[nextNodeIndex]);
+            const nextNode = historyGraph.entity(nextNodeIds[0]);
 
             drawWay.addNode(nextNode, {
                 geometry: { type: 'Point', coordinates: nextNode.loc },
