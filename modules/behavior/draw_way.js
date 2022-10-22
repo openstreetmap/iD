@@ -451,27 +451,23 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 return;
             }
 
-            // If the way has looped over itself, follow some other way.
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
-            const secondLastNodesParents = historyGraph.parentWays(historyGraph.entity(secondLastNodeId)).filter(w => w.id !== wayID);
-
-            if (!secondLastNodesParents.length) return;
 
             let nextNodeIds = lastNodesParents.flatMap(({nodes}) => {
                 const indexOfLast = nodes.indexOf(lastNodeId);
                 if (indexOfLast % (nodes.length - 1)) {
-                    return [nodes[indexOfLast-1], nodes[indexOfLast+1]]
+                    return [nodes[indexOfLast-1], nodes[indexOfLast+1]];
                 }
                 if (nodes[0] === nodes[nodes.length - 1]) {
-                    return [nodes[1], nodes[nodes.length - 2]]
+                    return [nodes[1], nodes[nodes.length - 2]];
                 }
-                return [indexOfLast ? nodes[nodes.length - 2] : nodes[1]]
-            }).filter((id) => id !== secondLastNodeId)
+                return [indexOfLast ? nodes[nodes.length - 2] : nodes[1]];
+            }).filter((id) => id !== secondLastNodeId);
 
             if (!nextNodeIds.length) return;
 
             if (new Set([...nextNodeIds]).size > 1) {
-                nextNodeIds = nextNodeIds.filter((id,_,nodes) => nodes.lastIndexOf(id) === nodes.indexOf(id))
+                nextNodeIds = nextNodeIds.filter((id,_,nodes) => nodes.lastIndexOf(id) === nodes.indexOf(id));
                 if (nextNodeIds.length !== 1) {
                     const featureType = getFeatureType(lastNodesParents);
                     context.ui().flash
