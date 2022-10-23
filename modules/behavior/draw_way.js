@@ -423,34 +423,18 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         return 'generic';
     }
 
-    /** see PR #8671 */
+    /** see PR #8671 and #9340 */
     function followMode() {
         if (_didResolveTempEdit) return;
 
         try {
-
-            // get the last 2 added nodes.
-            // check if they are both part of only oneway (the same one)
-            // check if the ways that they're part of are the same way
-            // find index of the last two nodes, to determine the direction to travel around the existing way
-            // add the next node to the way we are drawing
-
             // if we're drawing an area, the first node = last node.
-            const isDrawingArea = _origWay.nodes[0] === _origWay.nodes.slice(-1)[0];
+            const isDrawingArea = _origWay.nodes.length > 1 && _origWay.nodes[0] === _origWay.nodes[_origWay.nodes.length - 1];
 
-            const [secondLastNodeId, lastNodeId] = _origWay.nodes.slice(isDrawingArea ? -3 : -2);
+            const secondLastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -3 : -2)];
+            const lastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -2 : -1)];
 
-            // Unlike startGraph, the full history graph may contain unsaved vertices to follow.
-            // https://github.com/openstreetmap/iD/issues/8749
             const historyGraph = context.history().graph();
-            if (!lastNodeId || !secondLastNodeId || !historyGraph.hasEntity(lastNodeId) || !historyGraph.hasEntity(secondLastNodeId)) {
-                context.ui().flash
-                    .duration(4000)
-                    .iconName('#iD-icon-no')
-                    .label(t.append('operations.follow.error.needs_more_initial_nodes'))();
-                return;
-            }
-
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
 
             let nextNodeIds = lastNodesParents.flatMap(({nodes}) => {
@@ -467,6 +451,13 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             if (!nextNodeIds.length) return;
 
             if (new Set([...nextNodeIds]).size > 1) {
+                if (!secondLastNodeId) {
+                    context.ui().flash
+                        .duration(4000)
+                        .iconName('#iD-icon-no')
+                        .label(t.append('operations.follow.error.needs_more_initial_nodes'))();
+                    return;
+                }
                 nextNodeIds = nextNodeIds.filter((id,_,nodes) => nodes.lastIndexOf(id) === nodes.indexOf(id));
                 if (nextNodeIds.length !== 1) {
                     const featureType = getFeatureType(lastNodesParents);
