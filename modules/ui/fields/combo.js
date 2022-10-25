@@ -141,8 +141,8 @@ export function uiFieldCombo(field, context) {
 
         if (_showTagInfoSuggestions && services.taginfo) {
             selection.call(_combobox.fetcher(setTaginfoValues), attachTo);
+            setStaticValues(); // pre-populate _combobox.data with static values
             setTaginfoValues('', setPlaceholder);
-
         } else {
             selection.call(_combobox, attachTo);
             setStaticValues(setPlaceholder);
@@ -189,7 +189,11 @@ export function uiFieldCombo(field, context) {
         }
 
         services.taginfo[fn](params, function(err, data) {
-            if (err) return;
+            if (err) {
+                // if service is unavailable: use static values (if any)
+                setStaticValues(callback);
+                return;
+            }
 
             data = data.filter(function(d) {
                 // don't show the fallback value
