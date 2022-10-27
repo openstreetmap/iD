@@ -228,7 +228,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       _this.fields().forEach(field => {
         if (field.matchGeometry(geometry) && field.key &&
             field.default === tags[field.key] &&
-            ignoringKeys.indexOf(field.key) !== -1) {
+            (!ignoringKeys || ignoringKeys.indexOf(field.key) === -1)) {
           delete tags[field.key];
         }
       });

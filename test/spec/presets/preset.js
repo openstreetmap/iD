@@ -202,16 +202,41 @@ describe('iD.presetPreset', function() {
             expect(preset.unsetTags({highway: 'pedestrian', area: 'yes'}, 'area')).to.eql({});
         });
 
-        it('preserves tags that do not match field default tags', function() {
+        it('preserves tags that do not match field default value', function() {
             var isAddable = true;
             var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
             var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
             expect(preset.unsetTags({building: 'yep'}, 'area')).to.eql({ building: 'yep'});
         });
 
+        it('preserves tags that do match field default value, but do not match geometry', function() {
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
+            expect(preset.unsetTags({building: 'yes'}, 'line')).to.eql({ building: 'yes'});
+        });
+
         it('preserves tags that are not listed in removeTags', function() {
             var preset = iD.presetPreset('test', {tags: {a: 'b'}, removeTags: {}});
             expect(preset.unsetTags({a: 'b'}, 'area')).to.eql({a: 'b'});
+        });
+
+        it('preserves field default tags when "skipFieldDefaults" flag is on', function() {
+            var isAddable = true;
+            var field = iD.presetField('field', {key: 'building', geometry: 'area', default: 'yes'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, isAddable, {field: field});
+            expect(preset.unsetTags({building: 'yes'}, 'area', undefined, true)).to.eql({building: 'yes'});
+        });
+
+        it('preserves "ignoringKeys" tags', function() {
+            var preset = iD.presetPreset('test', {tags: {a: 'a', b: 'b'}});
+            expect(preset.unsetTags({a: 'a', b: 'b'}, 'area', ['b'])).to.eql({b: 'b'});
+        });
+
+        it('preserves "ignoringKeys" tags from default fields', function() {
+            var field = iD.presetField('field', {key: 'b', geometry: 'area', default: 'default'});
+            var preset = iD.presetPreset('test', {fields: ['field']}, true, {field: field});
+            expect(preset.unsetTags({b: 'default'}, 'area', ['b'])).to.eql({b: 'default'});
         });
 
         it('uses tags from addTags if removeTags is not defined', function() {
