@@ -52,7 +52,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
   * Add ability to reference strings of other presets/fields
 * Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
-* Synchronize fetching of released presets
+* Synchronize fetching of released presets files
+* Make settings like CDN and API urls configurable in a central config file (`/config/is.js`)
 
 [#8105]: https://github.com/openstreetmap/iD/issues/8105
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
