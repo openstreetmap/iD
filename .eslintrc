@@ -21,7 +21,6 @@
         "block-scoped-var": "error",
         "block-spacing": ["warn", "always"],
         "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
-        "class-methods-use-this": "error",
         "complexity": ["warn", 50],
         "curly": ["warn", "multi-line"],
         "default-case-last": "error",
