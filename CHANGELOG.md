@@ -47,7 +47,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix selection of best background source when starting on a zoomed-out view ([#9325])
 * Fix leaking of localized strings in combo fields when taginfo service is unavailable ([#9342])
 * Keep tags when changing presets if the new preset has a field for it ([#9341], [#9104])
-* Skip unsupported or invalid turn restriction relations instead of assuming they are a "no_*" restriction ([#9337])
+* Skip unsupported or invalid turn restriction relations instead of assuming they are a `no_*` restriction ([#9337])
+* Fix crash when conflict resolver is opened ([#9345])
 #### :rocket: Presets
 * Support tagging schema v5 ([#9320]):
   * Add new field type `colour` ([schema-builder#38], [#8782])
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9337]: https://github.com/openstreetmap/iD/issues/9337
 [#9341]: https://github.com/openstreetmap/iD/issues/9341
 [#9342]: https://github.com/openstreetmap/iD/issues/9342
+[#9345]: https://github.com/openstreetmap/iD/issues/9345
 [schema-builder#38]: https://github.com/ideditor/schema-builder/pull/38
 
 # 2.22.0

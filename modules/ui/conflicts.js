@@ -223,7 +223,7 @@ export function uiConflicts(context) {
                 container
                     .call(showConflict, index + sign);
             })
-            .call(function(d) { t.append('save.conflict.' + d)(d3_select(this)); });
+            .each(function(d) { t.append('save.conflict.' + d)(d3_select(this)); });
 
     }
 
