@@ -42,7 +42,7 @@ export function uiPresetList(context) {
         messagewrap
             .append('button')
             .attr('class', 'preset-choose')
-            .attr('title', direction)
+            .attr('title', _entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'))
             .on('click', function() { dispatch.call('cancel', this); })
             .call(svgIcon(`#iD-icon-${direction}`));
 

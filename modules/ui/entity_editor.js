@@ -47,7 +47,7 @@ export function uiEntityEditor(context) {
         headerEnter
             .append('button')
             .attr('class', 'preset-reset preset-choose')
-            .attr('title', t(`icons.${direction}`))
+            .attr('title', t('inspector.back_tooltip'))
             .call(svgIcon(`#iD-icon-${direction}`));
 
         headerEnter
