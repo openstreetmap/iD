@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Keep tags when changing presets if the new preset has a field for it ([#9341], [#9104])
 * Skip unsupported or invalid turn restriction relations instead of assuming they are a `no_*` restriction ([#9337])
 * Fix crash when conflict resolver is opened ([#9345])
+* Fix phone number placeholder text now always using the correct localization ([#8380], thanks [@k-yle])
 #### :hourglass: Performance
 * Speed up start-up by not pre-resolving complex locationSets ([#9347])
 #### :rocket: Presets
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make settings like CDN and API urls configurable in a central config file (`/config/is.js`)
 
 [#8105]: https://github.com/openstreetmap/iD/issues/8105
+[#8380]: https://github.com/openstreetmap/iD/issues/8380
 [#9104]: https://github.com/openstreetmap/iD/issues/9104
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
 [#9320]: https://github.com/openstreetmap/iD/pull/9320
