@@ -32,8 +32,12 @@ export function uiFieldCheck(field, context) {
     var _value;
 
 
+    var stringsField = field.resolveReference('stringsCrossReference');
+    if (!options && stringsField.options) {
+        options = stringsField.options;
+    }
+
     if (options) {
-        var stringsField = field.resolveReference('stringsCrossReference');
         for (var i in options) {
             var v = options[i];
             values.push(v === 'undefined' ? undefined : v);
