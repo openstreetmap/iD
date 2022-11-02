@@ -58,7 +58,7 @@
     "fast-deep-equal": "~3.1.1",
     "fast-json-stable-stringify": "2.1.0",
     "lodash-es": "~4.17.15",
-    "marked": "~4.1.0",
+    "marked": "~4.2.1",
     "node-diff3": "~3.1.0",
     "osm-auth": "~2.0.0",
     "pannellum": "2.5.6",
