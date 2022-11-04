@@ -85,6 +85,11 @@ export function osmTagSuggestingArea(tags) {
     return null;
 }
 
+export var osmLineTags = {};
+export function osmSetLineTags(value) {
+    osmLineTags = value;
+}
+
 // Tags that indicate a node can be a standalone point
 // e.g. { amenity: { bar: true, parking: true, ... } ... }
 export var osmPointTags = {};

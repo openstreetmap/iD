@@ -4,7 +4,7 @@ import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { locationManager } from '../core/LocationManager';
 
-import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
+import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetLineTags, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
@@ -73,6 +73,7 @@ export function presetIndex() {
           fields: vals[3]
         });
         osmSetAreaKeys(_this.areaKeys());
+        osmSetLineTags(_this.lineTags());
         osmSetPointTags(_this.pointTags());
         osmSetVertexTags(_this.vertexTags());
       });
@@ -338,6 +339,26 @@ export function presetIndex() {
     });
 
     return areaKeys;
+  };
+
+
+  _this.lineTags = () => {
+    return _this.collection.filter((lineTags, d) => {
+      // ignore name-suggestion-index, deprecated, and generic presets
+      if (d.suggestion || d.replacement || d.searchable === false) return lineTags;
+
+      // only care about the primary tag
+      const keys = d.tags && Object.keys(d.tags);
+      const key = keys && keys.length && keys[0];  // pick the first tag
+      if (!key) return lineTags;
+
+      // if this can be a line
+      if (d.geometry.indexOf('line') !== -1) {
+        lineTags[key] = lineTags[key] || [];
+        lineTags[key].push(d.tags);
+      }
+      return lineTags;
+    }, {});
   };
 
 

@@ -20,14 +20,15 @@ export function validationMismatchedGeometry() {
         if (entity.type !== 'way' || entity.isClosed()) return null;
 
         var tagSuggestingArea = entity.tagSuggestingArea();
+
         if (!tagSuggestingArea) {
             return null;
         }
 
         var asLine = presetManager.matchTags(tagSuggestingArea, 'line');
         var asArea = presetManager.matchTags(tagSuggestingArea, 'area');
-        if (asLine && asArea && (asLine === asArea)) {
-            // these tags also allow lines and making this an area wouldn't matter
+        if (asLine && asArea && asLine === asArea) {
+            // this tag also allows lines and making this an area wouldn't matter
             return null;
         }
 
@@ -82,6 +83,21 @@ export function validationMismatchedGeometry() {
         var tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
 
+        var validAsLine = false;
+        var presetAsLine = presetManager.matchTags(entity.tags, 'line');
+        if (presetAsLine) {
+            validAsLine = true;
+            var key = Object.keys(tagSuggestingArea)[0];
+            if (presetAsLine.tags[key] && presetAsLine.tags[key] === '*') {
+                // only matches a fallback preset of the tag which is suggesting to be an area
+                validAsLine = false;
+            }
+            if (Object.keys(presetAsLine.tags).length === 0) {
+                // only matches the fallback "line" preset
+                validAsLine = false;
+            }
+        }
+
         return new validationIssue({
             type: type,
             subtype: 'area_as_line',
@@ -103,10 +119,13 @@ export function validationMismatchedGeometry() {
                 var entity = context.entity(this.entityIds[0]);
                 var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
 
-                fixes.push(new validationIssueFix({
-                    title: t.append('issues.fix.connect_endpoints.title'),
-                    onClick: connectEndsOnClick
-                }));
+                if (!validAsLine) {
+                    // only suggest to "connect the ends" if the feature is not also valid as a line
+                    fixes.push(new validationIssueFix({
+                        title: t.append('issues.fix.connect_endpoints.title'),
+                        onClick: connectEndsOnClick
+                    }));
+                }
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',

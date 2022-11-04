@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Skip unsupported or invalid turn restriction relations instead of assuming they are a `no_*` restriction ([#9337])
 * Fix crash when conflict resolver is opened ([#9345])
 * Fix phone number placeholder text now always using the correct localization ([#8380], thanks [@k-yle])
+* Don't don't suggest to "connect the ends" if a feature with area tags also matches a line preset ([#7037])
 #### :hourglass: Performance
 * Speed up start-up by not pre-resolving complex locationSets ([#9347])
 #### :rocket: Presets
