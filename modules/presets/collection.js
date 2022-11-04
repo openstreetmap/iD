@@ -75,7 +75,7 @@ export function presetCollection(collection) {
             if (strings.some(s => s === value)) {
               return strings.find(s => s === value);
             } else {
-              return strings.find(s => s.includes(value));
+              return strings.filter(s => s.includes(value)).sort((a,b) => a.length - b.length)[0];
             }
           };
           aCompare = findMatchingAlias([aCompare].concat(a[aliasesProp]()));
