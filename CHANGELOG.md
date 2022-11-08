@@ -42,6 +42,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Trigger context menu by long-presses of non-mouse inputs (touch or stylus) ([#8105])
+* Improve comboboxes ([#9344]):
+  * (raw) tag values can be also entered (and are autocompleted) when localized strings are available for the respective options
+  * autocomplete now also works when taginfo service is slow or unavailable
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix selection of best background source when starting on a zoomed-out view ([#9325])
@@ -71,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9337]: https://github.com/openstreetmap/iD/issues/9337
 [#9341]: https://github.com/openstreetmap/iD/issues/9341
 [#9342]: https://github.com/openstreetmap/iD/issues/9342
+[#9344]: https://github.com/openstreetmap/iD/pull/9344
 [#9345]: https://github.com/openstreetmap/iD/issues/9345
 [#9347]: https://github.com/openstreetmap/iD/pull/9347
 [schema-builder#38]: https://github.com/ideditor/schema-builder/pull/38

@@ -31,7 +31,7 @@ export function uiFieldCombo(field, context) {
     var _snake_case = (field.snake_case || (field.snake_case === undefined));
     var _combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(field.caseSensitive)
-        .minItems(_isMulti || _isSemi ? 1 : 2);
+        .minItems(1);
     var _container = d3_select(null);
     var _inputWrap = d3_select(null);
     var _input = d3_select(null);
@@ -56,7 +56,7 @@ export function uiFieldCombo(field, context) {
 
 
     function snake(s) {
-        return s.replace(/\s+/g, '_').toLowerCase();
+        return s.replace(/\s+/g, '_');
     }
 
     function clean(s) {
@@ -71,7 +71,7 @@ export function uiFieldCombo(field, context) {
     function tagValue(dval) {
         dval = clean(dval || '');
 
-        var found = _comboData.find(function(o) {
+        var found = getOptions().find(function(o) {
             return o.key && clean(o.value) === dval;
         });
         if (found) return found.key;
@@ -80,7 +80,15 @@ export function uiFieldCombo(field, context) {
             return 'yes';
         }
 
-        return (_snake_case ? snake(dval) : dval) || undefined;
+        if (_snake_case) {
+            dval = snake(dval);
+        }
+
+        if (!field.caseSensitive) {
+            dval = dval.toLowerCase();
+        }
+
+        return dval || undefined;
     }
 
 
@@ -141,7 +149,6 @@ export function uiFieldCombo(field, context) {
 
         if (_showTagInfoSuggestions && services.taginfo) {
             selection.call(_combobox.fetcher(setTaginfoValues), attachTo);
-            setStaticValues(); // pre-populate _combobox.data with static values
             setTaginfoValues('', setPlaceholder);
         } else {
             selection.call(_combobox, attachTo);
@@ -149,12 +156,11 @@ export function uiFieldCombo(field, context) {
         }
     }
 
-
-    function setStaticValues(callback) {
+    function getOptions() {
         var stringsField = field.resolveReference('stringsCrossReference');
-        if (!(field.options || stringsField.options)) return;
+        if (!(field.options || stringsField.options)) return [];
 
-        _comboData = (field.options || stringsField.options).map(function(v) {
+        return (field.options || stringsField.options).map(function(v) {
             return {
                 key: v,
                 value: stringsField.t('options.' + v, { default: v }),
@@ -163,13 +169,26 @@ export function uiFieldCombo(field, context) {
                 klass: stringsField.hasTextForStringId('options.' + v) ? '' : 'raw-option'
             };
         });
+    }
 
-        _combobox.data(objectDifference(_comboData, _multiData));
+
+    function setStaticValues(callback, filter) {
+        _comboData = getOptions();
+
+        if (filter !== undefined) {
+            _comboData = _comboData.filter(filter);
+        }
+
+        _comboData = objectDifference(_comboData, _multiData);
+        _combobox.data(_comboData);
         if (callback) callback(_comboData);
     }
 
 
     function setTaginfoValues(q, callback) {
+        var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
+        setStaticValues(callback, queryFilter);
+
         var stringsField = field.resolveReference('stringsCrossReference');
         var fn = _isMulti ? 'multikeys' : 'values';
         var query = (_isMulti ? field.key : '') + q;
@@ -189,11 +208,7 @@ export function uiFieldCombo(field, context) {
         }
 
         services.taginfo[fn](params, function(err, data) {
-            if (err) {
-                // if service is unavailable: use static values (if any)
-                setStaticValues(callback);
-                return;
-            }
+            if (err) return;
 
             data = data.filter(function(d) {
                 // don't show the fallback value
@@ -214,21 +229,28 @@ export function uiFieldCombo(field, context) {
                 });
             }
 
+            const additionalOptions = (field.options || stringsField.options || [])
+                .filter(v => !data.some(dv => dv.value === (_isMulti ? field.key + v : v)))
+                .map(v => ({ value: v }));
+
             // hide the caret if there are no suggestions
             _container.classed('empty-combobox', data.length === 0);
 
-            _comboData = data.map(function(d) {
+            _comboData = data.concat(additionalOptions).map(function(d) {
                 var k = d.value;
                 if (_isMulti) k = k.replace(field.key, '');
+                var isLocalizable = stringsField.hasTextForStringId('options.' + k);
                 var label = stringsField.t('options.' + k, { default: k });
                 return {
                     key: k,
-                    value: _isMulti ? k : label,
+                    value: label,
                     display: stringsField.t.append('options.' + k, { default: k }),
-                    title: d.title || label,
-                    klass: stringsField.hasTextForStringId('options.' + k) ? '' : 'raw-option'
+                    title: isLocalizable ? k : (d.title !== label ? d.title : ''),
+                    klass: isLocalizable ? '' : 'raw-option'
                 };
             });
+
+            _comboData = _comboData.filter(queryFilter);
 
             _comboData = objectDifference(_comboData, _multiData);
             if (callback) callback(_comboData);
@@ -270,12 +292,19 @@ export function uiFieldCombo(field, context) {
         var val;
 
         if (_isMulti || _isSemi) {
-            val = tagValue(utilGetSetValue(_input).replace(/,/g, ';')) || '';
+            var vals;
+            if (_isMulti) {
+                vals = [tagValue(utilGetSetValue(_input))];
+            } else if (_isSemi) {
+                val = tagValue(utilGetSetValue(_input).replace(/,/g, ';')) || '';
+                vals = val.split(';');
+            }
+            vals = vals.filter(Boolean);
+
+            if (!vals.length) return;
+
             _container.classed('active', false);
             utilGetSetValue(_input, '');
-
-            var vals = val.split(';').filter(Boolean);
-            if (!vals.length) return;
 
             if (_isMulti) {
                 utilArrayUniq(vals).forEach(function(v) {

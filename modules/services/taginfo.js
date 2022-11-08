@@ -79,7 +79,7 @@ function filterKeys(type) {
 function filterMultikeys(prefix) {
     return function(d) {
         // d.key begins with prefix, and d.key contains no additional ':'s
-        var re = new RegExp('^' + prefix + '(.*)$');
+        var re = new RegExp('^' + prefix + '(.*)$', 'i');
         var matches = d.key.match(re) || [];
         return (matches.length === 2 && matches[1].indexOf(':') === -1);
     };
