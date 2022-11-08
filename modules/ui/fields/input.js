@@ -180,7 +180,7 @@ export function uiFieldText(field, context) {
                     if (value) window.open(value, '_blank');
                 })
                 .merge(outlinkButton);
-        } else if (field.key.split(':').includes('colour')) {
+        } else if (field.type === 'colour') {
             input.attr('type', 'text');
 
             updateColourPreview();
