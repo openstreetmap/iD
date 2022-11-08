@@ -494,13 +494,12 @@ export function uiFieldCombo(field, context) {
         value = tagValue(value);
         if (valueIcons[field.key]) {
             _container.selectAll('.tag-value-icon').remove();
-            var iconSelector = _container.selectAll('.tag-value-icon')
-                .data([value])
-                .enter()
-                .insert('div', 'input')
-                .attr('class', 'tag-value-icon');
             if (valueIcons[field.key].indexOf(value) !== -1) {
-                iconSelector
+                _container.selectAll('.tag-value-icon')
+                    .data([value])
+                    .enter()
+                    .insert('div', 'input')
+                    .attr('class', 'tag-value-icon')
                     .call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
             }
         }
