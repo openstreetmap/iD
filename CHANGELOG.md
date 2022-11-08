@@ -64,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Synchronize fetching of released presets files
 * Make settings like CDN and API urls configurable in a central config file (`/config/is.js`)
+* Upgrade dependencies: `temaki` to v5.2, `marked` to v4.2
 
 [#8105]: https://github.com/openstreetmap/iD/issues/8105
 [#8380]: https://github.com/openstreetmap/iD/issues/8380
