@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
   * Add new field type `colour` ([schema-builder#38], [#8782])
   * Add ability to reference strings of other presets/fields
 * Render `natural=strait` features in blue color ([#9294])
+* Show icons depicting the different values of the `crossing:markings` field
 #### :hammer: Development
 * Synchronize fetching of released presets files
 * Make settings like CDN and API urls configurable in a central config file (`/config/is.js`)

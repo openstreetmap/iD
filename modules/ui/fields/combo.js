@@ -8,6 +8,7 @@ import { osmEntity } from '../../osm/entity';
 import { t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
+import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
@@ -20,6 +21,22 @@ export {
     uiFieldCombo as uiFieldTypeCombo
 };
 
+const valueIcons = {
+    'crossing:markings': [
+        'dashes',
+        'dots',
+        'ladder:paired',
+        'ladder:skewed',
+        'ladder',
+        'lines:paired',
+        'lines',
+        'surface',
+        'zebra:bicolour',
+        'zebra:double',
+        'zebra:paired',
+        'zebra',
+    ]
+};
 
 export function uiFieldCombo(field, context) {
     var dispatch = d3_dispatch('change');
@@ -165,7 +182,7 @@ export function uiFieldCombo(field, context) {
                 key: v,
                 value: stringsField.t('options.' + v, { default: v }),
                 title: v,
-                display: stringsField.t.append('options.' + v, { default: v }),
+                display: beautifyDisplay(stringsField.t.append('options.' + v, { default: v }), v),
                 klass: stringsField.hasTextForStringId('options.' + v) ? '' : 'raw-option'
             };
         });
@@ -244,7 +261,7 @@ export function uiFieldCombo(field, context) {
                 return {
                     key: k,
                     value: label,
-                    display: stringsField.t.append('options.' + k, { default: k }),
+                    display: beautifyDisplay(stringsField.t.append('options.' + k, { default: k }), k),
                     title: isLocalizable ? k : (d.title !== label ? d.title : ''),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
@@ -255,6 +272,20 @@ export function uiFieldCombo(field, context) {
             _comboData = objectDifference(_comboData, _multiData);
             if (callback) callback(_comboData);
         });
+    }
+
+    // adds icons to tag values which have one
+    function beautifyDisplay(disp, value) {
+        if (valueIcons[field.key] && valueIcons[field.key].indexOf(value) !== -1) {
+            return function(selection) {
+                selection
+                    .insert('span', ':first-child')
+                    .attr('class', 'tag-value-icon')
+                    .call(svgIcon('#iD-crossing_markings-' + value.replace(':', '_')));
+                disp.call(this, selection);
+            };
+        }
+        return disp;
     }
 
 
@@ -626,6 +657,21 @@ export function uiFieldCombo(field, context) {
                         dispatch.call('change', this, t);
                     }
                 });
+
+            if (valueIcons[field.key]) {
+                _container.selectAll('.tag-value-icon').remove();
+                var value = tags[field.key];
+                if (valueIcons[field.key].indexOf(value) !== -1) {
+                    var iconSelector = _container.selectAll('.tag-value-icon')
+                        .data([value]);
+
+                    iconSelector
+                        .enter()
+                        .insert('div', 'input')
+                        .attr('class', 'tag-value-icon')
+                        .call(svgIcon('#iD-crossing_markings-' + value.replace(':', '_')));
+                }
+            }
         }
     };
 

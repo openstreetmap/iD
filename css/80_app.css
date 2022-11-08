@@ -1735,6 +1735,37 @@ a.hide-toggle {
     width: auto;
 }
 
+.form-field-input-combo .tag-value-icon {
+    display: inline-block;
+    position: relative;
+    height: 24px;
+    width: 30px;
+    margin-right: -30px;
+    align-self: center;
+    vertical-align: middle;
+    z-index: 1;
+    text-align: center;
+}
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon {
+    margin-right: 0;
+    margin-left: -30px;
+}
+.tag-value-icon .icon {
+    width: 11px;
+    height: 17px;
+    margin: auto;
+}
+.ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input {
+    padding-left: 30px;
+}
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input {
+    padding-right: 30px;
+}
+.combobox-option .tag-value-icon {
+    display: inline-block;
+    width: 18px;
+}
+
 
 /* Field - Text / Numeric
 ------------------------------------------------------- */
