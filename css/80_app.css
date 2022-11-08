@@ -228,7 +228,7 @@ input[type="checkbox"],
 input[type="radio"] {
     width: 14px;
     height: 14px;
-    margin-right: 5px;
+    margin-right: 6px;
     cursor: pointer;
     vertical-align: middle;
 }
@@ -1744,11 +1744,13 @@ a.hide-toggle {
     align-self: center;
     vertical-align: middle;
     z-index: 1;
-    text-align: center;
+    padding-left: 11px;
 }
 .ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon {
     margin-right: 0;
     margin-left: -30px;
+    padding-left: 0;
+    padding-right: 11px;
 }
 .tag-value-icon .icon {
     width: 11px;
@@ -1838,7 +1840,6 @@ a.hide-toggle {
 }
 .form-field-input-check > input[type="checkbox"] {
     flex: 0 1 auto;
-    width: 20px;
     margin-top: 0;
 }
 .form-field-input-check > span {
@@ -1931,7 +1932,6 @@ a.hide-toggle {
 }
 .form-field-input-radio > label > input[type="radio"] {
     flex: 0 1 auto;
-    width: 20px;
 }
 .form-field-input-radio > label > span {
     flex: 1 1 auto;

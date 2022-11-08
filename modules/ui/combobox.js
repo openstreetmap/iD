@@ -16,7 +16,7 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 var _comboHideTimerID;
 
 export function uiCombobox(context, klass) {
-    var dispatch = d3_dispatch('accept', 'cancel');
+    var dispatch = d3_dispatch('accept', 'cancel', 'update');
     var container = context.container();
 
     var _suggestions = [];
@@ -273,7 +273,8 @@ export function uiCombobox(context, klass) {
                 // pick new _selected
                 index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
                 _selected = _suggestions[index].value;
-                input.property('value', _selected);
+                utilGetSetValue(input, _selected);
+                dispatch.call('update');
             }
 
             render();
@@ -371,6 +372,7 @@ export function uiCombobox(context, klass) {
                 var bestVal = suggestionValues[bestIndex];
                 input.property('value', bestVal);
                 input.node().setSelectionRange(val.length, bestVal.length);
+                dispatch.call('update');
                 return bestVal;
             }
         }
@@ -460,6 +462,7 @@ export function uiCombobox(context, klass) {
             thiz.setSelectionRange(val.length, val.length);
 
             dispatch.call('cancel', thiz);
+
             hide();
         }
 

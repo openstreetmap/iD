@@ -182,7 +182,7 @@ export function uiFieldCombo(field, context) {
                 key: v,
                 value: stringsField.t('options.' + v, { default: v }),
                 title: v,
-                display: beautifyDisplay(stringsField.t.append('options.' + v, { default: v }), v),
+                display: addComboboxIcons(stringsField.t.append('options.' + v, { default: v }), v),
                 klass: stringsField.hasTextForStringId('options.' + v) ? '' : 'raw-option'
             };
         });
@@ -261,7 +261,7 @@ export function uiFieldCombo(field, context) {
                 return {
                     key: k,
                     value: label,
-                    display: beautifyDisplay(stringsField.t.append('options.' + k, { default: k }), k),
+                    display: addComboboxIcons(stringsField.t.append('options.' + k, { default: k }), k),
                     title: isLocalizable ? k : (d.title !== label ? d.title : ''),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
@@ -275,13 +275,15 @@ export function uiFieldCombo(field, context) {
     }
 
     // adds icons to tag values which have one
-    function beautifyDisplay(disp, value) {
-        if (valueIcons[field.key] && valueIcons[field.key].indexOf(value) !== -1) {
+    function addComboboxIcons(disp, value) {
+        if (valueIcons[field.key]) {
             return function(selection) {
-                selection
+                var span = selection
                     .insert('span', ':first-child')
-                    .attr('class', 'tag-value-icon')
-                    .call(svgIcon('#iD-crossing_markings-' + value.replace(':', '_')));
+                    .attr('class', 'tag-value-icon');
+                if (valueIcons[field.key].indexOf(value) !== -1) {
+                    span.call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
+                }
                 disp.call(this, selection);
             };
         }
@@ -453,7 +455,10 @@ export function uiFieldCombo(field, context) {
 
         _input
             .on('change', change)
-            .on('blur', change);
+            .on('blur', change)
+            .on('input', function() {
+                updateIcon(utilGetSetValue(_input));
+            });
 
         _input
             .on('keydown.field', function(d3_event) {
@@ -475,8 +480,30 @@ export function uiFieldCombo(field, context) {
             _input
                 .on('focus', function() { _container.classed('active', true); });
         }
+
+        _combobox
+            .on('cancel', function() {
+                _input.node().blur();
+            })
+            .on('update', function() {
+                updateIcon(utilGetSetValue(_input));
+            });
     }
 
+    function updateIcon(value) {
+        if (valueIcons[field.key]) {
+            _container.selectAll('.tag-value-icon').remove();
+            var iconSelector = _container.selectAll('.tag-value-icon')
+                .data([value])
+                .enter()
+                .insert('div', 'input')
+                .attr('class', 'tag-value-icon');
+            if (valueIcons[field.key].indexOf(value) !== -1) {
+                iconSelector
+                    .call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
+            }
+        }
+    }
 
     combo.tags = function(tags) {
         _tags = tags;
@@ -658,20 +685,7 @@ export function uiFieldCombo(field, context) {
                     }
                 });
 
-            if (valueIcons[field.key]) {
-                _container.selectAll('.tag-value-icon').remove();
-                var value = tags[field.key];
-                if (valueIcons[field.key].indexOf(value) !== -1) {
-                    var iconSelector = _container.selectAll('.tag-value-icon')
-                        .data([value]);
-
-                    iconSelector
-                        .enter()
-                        .insert('div', 'input')
-                        .attr('class', 'tag-value-icon')
-                        .call(svgIcon('#iD-crossing_markings-' + value.replace(':', '_')));
-                }
-            }
+            updateIcon(tags[field.key]);
         }
     };
 
