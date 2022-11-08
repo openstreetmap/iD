@@ -55,7 +55,7 @@ describe('iD.presetField', function() {
             var uiField = iD.uiFieldCombo(field, context);
             uiField.tags({k: 'v'});
             expect(field.t).not.to.have.been.called;
-            expect(other.t).to.have.been.calledOnce;
+            expect(other.t).to.have.been.called;
         });
     });
 });
