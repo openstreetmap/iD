@@ -38,7 +38,7 @@
     "start:watch": "run-p build:js:watch start:server",
     "start:server": "node scripts/server.js",
     "test": "npm-run-all -s lint build test:spec",
-    "test:spec": "karma start karma.conf.js",
+    "test:spec": "karma start config/karma.conf.js",
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {

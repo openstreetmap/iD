@@ -386,7 +386,12 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                         var f = restriction.memberByRole('from');
                         var v = restriction.membersByRole('via');
                         var t = restriction.memberByRole('to');
+                        var isNo = /^no_/.test(restriction.tags.restriction);
                         var isOnly = /^only_/.test(restriction.tags.restriction);
+
+                        if (!(isNo || isOnly)) {
+                            continue; // skip unsupported restriction values
+                        }
 
                         // Does the current path match this turn restriction?
                         var matchesFrom = (f.id === fromWayId);

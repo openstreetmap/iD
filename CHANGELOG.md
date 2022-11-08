@@ -49,20 +49,34 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix selection of best background source when starting on a zoomed-out view ([#9325])
 * Fix leaking of localized strings in combo fields when taginfo service is unavailable ([#9342])
+* Keep tags when changing presets if the new preset has a field for it ([#9341], [#9104])
+* Skip unsupported or invalid turn restriction relations instead of assuming they are a `no_*` restriction ([#9337])
+* Fix crash when conflict resolver is opened ([#9345])
+* Fix phone number placeholder text now always using the correct localization ([#8380], thanks [@k-yle])
+* Don't don't suggest to "connect the ends" if a feature with area tags also matches a line preset ([#6525])
+#### :hourglass: Performance
+* Speed up start-up by not pre-resolving complex locationSets ([#9347])
 #### :rocket: Presets
 * Support tagging schema v5 ([#9320]):
   * Add new field type `colour` ([schema-builder#38], [#8782])
   * Add ability to reference strings of other presets/fields
 * Render `natural=strait` features in blue color ([#9294])
 #### :hammer: Development
-* Synchronize fetching of released presets
+* Synchronize fetching of released presets files
+* Make settings like CDN and API urls configurable in a central config file (`/config/is.js`)
 
 [#8105]: https://github.com/openstreetmap/iD/issues/8105
+[#8380]: https://github.com/openstreetmap/iD/issues/8380
+[#9104]: https://github.com/openstreetmap/iD/issues/9104
 [#9294]: https://github.com/openstreetmap/iD/issues/9294
 [#9320]: https://github.com/openstreetmap/iD/pull/9320
 [#9325]: https://github.com/openstreetmap/iD/issues/9325
+[#9337]: https://github.com/openstreetmap/iD/issues/9337
+[#9341]: https://github.com/openstreetmap/iD/issues/9341
 [#9342]: https://github.com/openstreetmap/iD/issues/9342
 [#9344]: https://github.com/openstreetmap/iD/pull/9344
+[#9345]: https://github.com/openstreetmap/iD/issues/9345
+[#9347]: https://github.com/openstreetmap/iD/pull/9347
 [schema-builder#38]: https://github.com/ideditor/schema-builder/pull/38
 
 # 2.22.0

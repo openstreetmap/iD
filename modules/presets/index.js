@@ -2,9 +2,9 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
-import { locationManager } from '../core/locations';
+import { locationManager } from '../core/LocationManager';
 
-import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
+import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetLineTags, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
@@ -73,6 +73,7 @@ export function presetIndex() {
           fields: vals[3]
         });
         osmSetAreaKeys(_this.areaKeys());
+        osmSetLineTags(_this.lineTags());
         osmSetPointTags(_this.pointTags());
         osmSetVertexTags(_this.vertexTags());
       });
@@ -241,12 +242,12 @@ export function presetIndex() {
     }
 
     if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){
-      let validLocations = locationManager.locationsAt(loc);
-      if (!validLocations[bestMatch.locationSetID]){
+      const validHere = locationManager.locationSetsAt(loc);
+      if (!validHere[bestMatch.locationSetID]) {
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
-        for (let i = 0; i < matchCandidates.length; i++){
+        for (let i = 0; i < matchCandidates.length; i++) {
           const candidateScore = matchCandidates[i];
-          if (!candidateScore.candidate.locationSetID || validLocations[candidateScore.candidate.locationSetID]){
+          if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
             bestScore = candidateScore.score;
             break;
@@ -341,6 +342,26 @@ export function presetIndex() {
   };
 
 
+  _this.lineTags = () => {
+    return _this.collection.filter((lineTags, d) => {
+      // ignore name-suggestion-index, deprecated, and generic presets
+      if (d.suggestion || d.replacement || d.searchable === false) return lineTags;
+
+      // only care about the primary tag
+      const keys = d.tags && Object.keys(d.tags);
+      const key = keys && keys.length && keys[0];  // pick the first tag
+      if (!key) return lineTags;
+
+      // if this can be a line
+      if (d.geometry.indexOf('line') !== -1) {
+        lineTags[key] = lineTags[key] || [];
+        lineTags[key].push(d.tags);
+      }
+      return lineTags;
+    }, {});
+  };
+
+
   _this.pointTags = () => {
     return _this.collection.reduce((pointTags, d) => {
       // ignore name-suggestion-index, deprecated, and generic presets
@@ -408,8 +429,8 @@ export function presetIndex() {
     );
 
     if (Array.isArray(loc)) {
-      const validLocations = locationManager.locationsAt(loc);
-      result.collection = result.collection.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
+      const validHere = locationManager.locationSetsAt(loc);
+      result.collection = result.collection.filter(a => !a.locationSetID || validHere[a.locationSetID]);
     }
 
     return result;

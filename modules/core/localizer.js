@@ -4,6 +4,7 @@ import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';
 import { utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
+import { presetsCdnUrl } from '../../config/id.js';
 
 let _mainLocalizer = coreLocalizer(); // singleton
 let _t = _mainLocalizer.t;
@@ -89,7 +90,7 @@ export function coreLocalizer() {
 
         const localeDirs = {
             general: 'locales',
-            tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/translations'
+            tagging: presetsCdnUrl + 'dist/translations'
         };
 
         let fileMap = fileFetcher.fileMap();
