@@ -491,6 +491,7 @@ export function uiFieldCombo(field, context) {
     }
 
     function updateIcon(value) {
+        value = tagValue(value);
         if (valueIcons[field.key]) {
             _container.selectAll('.tag-value-icon').remove();
             var iconSelector = _container.selectAll('.tag-value-icon')
