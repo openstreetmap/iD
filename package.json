@@ -75,7 +75,7 @@
     "@fortawesome/free-solid-svg-icons": "~6.2.0",
     "@ideditor/temaki": "~5.2.0",
     "@mapbox/maki": "^8.0.0",
-    "@openstreetmap/id-tagging-schema": "^5.0.0",
+    "@openstreetmap/id-tagging-schema": "^5.0.1",
     "autoprefixer": "^10.0.1",
     "btoa": "^1.2.1",
     "chai": "^4.3.4",

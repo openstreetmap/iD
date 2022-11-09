@@ -14,7 +14,7 @@ export function coreFileFetcher() {
   const ociVersion = packageJSON.dependencies['osm-community-index'] || packageJSON.devDependencies['osm-community-index'];
   const v = parseVersion(ociVersion);
   const ociVersionMinor = `${v.major}.${v.minor}`;
-  const presetsVersionMajor = parseVersion(packageJSON.devDependencies['@openstreetmap/id-tagging-schema']).major;
+  const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
 
   let _this = {};
   let _inflight = {};
@@ -32,7 +32,7 @@ export function coreFileFetcher() {
     'oci_defaults': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/defaults.min.json',
     'oci_features': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/featureCollection.min.json',
     'oci_resources': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/resources.min.json',
-    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsVersionMajor) + 'package.json',
+    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsVersion) + 'package.json',
     'deprecated': presetsCdnUrl + 'dist/deprecated.min.json',
     'discarded': presetsCdnUrl + 'dist/discarded.min.json',
     'preset_categories': presetsCdnUrl + 'dist/preset_categories.min.json',
