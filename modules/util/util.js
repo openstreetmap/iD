@@ -190,7 +190,8 @@ export function utilDisplayName(entity) {
         network: entity.tags.cycle_network || entity.tags.network,
         ref: entity.tags.ref,
         to: entity.tags.to,
-        via: entity.tags.via
+        via: entity.tags.via,
+        'addr:housenumber': entity.tags['addr:housenumber']
     };
     var keyComponents = [];
 
@@ -199,6 +200,9 @@ export function utilDisplayName(entity) {
     }
     if (tags.ref) {
         keyComponents.push('ref');
+    }
+    if (tags['addr:housenumber']) {
+        keyComponents.push('addr:housenumber');
     }
 
     // Routes may need more disambiguation based on direction or destination

@@ -62,7 +62,9 @@ export function svgLabels(projection, context) {
         ['point', 'ref', '*', 10],
         ['line', 'name', '*', 12],
         ['area', 'name', '*', 12],
-        ['point', 'name', '*', 10]
+        ['point', 'name', '*', 10],
+        ['area', 'addr:housenumber', '*', 8],
+        ['point', 'addr:housenumber', '*', 8]
     ];
 
 
