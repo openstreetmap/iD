@@ -234,7 +234,7 @@ input[type="radio"] {
 }
 .ideditor[dir='rtl'] input[type="checkbox"],
 .ideditor[dir='rtl'] input[type="radio"] {
-    margin-left: 5px;
+    margin-left: 6px;
     margin-right: 0;
 }
 
