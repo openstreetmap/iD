@@ -35,6 +35,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased
+
+#### :sparkles: Usability & Accessibility
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :hourglass: Performance
+#### :rocket: Presets
+#### :hammer: Development
+* ([#])
+
+[#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
+[#xxxx]: https://github.com/openstreetmap/iD/pull/xxxx
+[@xxxx]: https://github.com/xxxx
+
 
 # 2.23.0
 ##### 2022-Nov-10
