@@ -43,7 +43,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :rocket: Presets
 #### :hammer: Development
-* ([#])
 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
 [#xxxx]: https://github.com/openstreetmap/iD/pull/xxxx
@@ -157,6 +156,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9169]: https://github.com/openstreetmap/iD/issues/9169
 [#9171]: https://github.com/openstreetmap/iD/pull/9171
 [#9172]: https://github.com/openstreetmap/iD/pull/9172
+[#9176]: https://github.com/openstreetmap/iD/pull/9176
 [#9208]: https://github.com/openstreetmap/iD/issues/9208
 [#9227]: https://github.com/openstreetmap/iD/issues/9227
 [#9293]: https://github.com/openstreetmap/iD/issues/9293
@@ -169,7 +169,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@paulklie]: https://github.com/paulklie
 [@renancleyson-dev]: https://github.com/renancleyson-dev
 [@bvercelli99]: https://github.com/bvercelli99
-[@faebebin]:_https://github.com/faebebin
+[@faebebin]: https://github.com/faebebin
+[@bgo-eiu]: https://github.com/bgo-eiu 
 
 
 # 2.21.1
