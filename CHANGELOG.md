@@ -36,16 +36,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased
+# 2.23.0
+##### 2022-Nov-10
 
-#### :newspaper: News
-#### :tada: New Features
+#### :mega: Release Highlights
+* Significantly quicker startup due to faster loading of presets ([#9347], thanks [@bhousel])!
+* Add support for updated tagging presets schema version 5 ([#9320])
 #### :sparkles: Usability & Accessibility
 * Trigger context menu by long-presses of non-mouse inputs (touch or stylus) ([#8105])
 * Improve comboboxes ([#9344]):
   * (raw) tag values can be also entered (and are autocompleted) when localized strings are available for the respective options
   * autocomplete now also works when taginfo service is slow or unavailable
-#### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix selection of best background source when starting on a zoomed-out view ([#9325])
 * Fix leaking of localized strings in combo fields when taginfo service is unavailable ([#9342])
@@ -55,7 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix phone number placeholder text now always using the correct localization ([#8380], thanks [@k-yle])
 * Don't don't suggest to "connect the ends" if a feature with area tags also matches a line preset ([#6525])
 #### :hourglass: Performance
-* Speed up start-up by not pre-resolving complex locationSets ([#9347])
+* Speed up start-up by not pre-resolving complex locationSets ([#9347], thanks [@bhousel])
 #### :rocket: Presets
 * Support tagging schema v5 ([#9320]):
   * Add new field type `colour` ([schema-builder#38], [#8782])
