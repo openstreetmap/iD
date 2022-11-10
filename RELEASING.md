@@ -20,6 +20,7 @@ on the iD project, and then create this file with contents like
 #### Update `develop` branch
 ```bash
 $  git checkout develop
+$  rm package-lock.json
 $  rm -rf node_modules/editor-layer-index/
 $  npm install
 $  npm run imagery
