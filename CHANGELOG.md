@@ -40,13 +40,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix crash when performing a multiselection of objects with differing tags values in a combo field ([#9369])
 #### :hourglass: Performance
 #### :rocket: Presets
 #### :hammer: Development
 
-[#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
-[#xxxx]: https://github.com/openstreetmap/iD/pull/xxxx
-[@xxxx]: https://github.com/xxxx
+[#9369]: https://github.com/openstreetmap/iD/issues/9369
 
 
 # 2.23.0

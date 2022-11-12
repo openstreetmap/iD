@@ -685,7 +685,9 @@ export function uiFieldCombo(field, context) {
                     }
                 });
 
-            updateIcon(tags[field.key]);
+            if (!Array.isArray(tags[field.key])) {
+                updateIcon(tags[field.key]);
+            }
         }
     };
 
