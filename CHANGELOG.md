@@ -40,12 +40,25 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* Fix crash when performing a multiselection of objects with differing tags values in a combo field ([#9369])
 #### :hourglass: Performance
 #### :rocket: Presets
 #### :hammer: Development
 
+
+# 2.23.2
+##### 2022-Nov-12
+
+#### :bug: Bugfixes
+* Fix crash when performing a multiselection of objects with differing tags values in a combo field ([#9369])
+
 [#9369]: https://github.com/openstreetmap/iD/issues/9369
+
+
+# 2.23.1
+##### 2022-Nov-10
+
+#### :bug: Bugfixes
+* Fix missing imagery data update in 2.23.0 release bundle
 
 
 # 2.23.0
