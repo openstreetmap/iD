@@ -40,9 +40,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372]) 
 #### :hourglass: Performance
 #### :rocket: Presets
 #### :hammer: Development
+
+[#9372]: https://github.com/openstreetmap/iD/issues/9372
 
 
 # 2.23.2
