@@ -31,7 +31,7 @@ $  git add . && git commit -m 'npm run translations'
 ```
 
 - Check and finalize `CHANGELOG.md`
-- Set release version number in `modules/core/context.js` and `package.json`
+- Set release version number in `package.json`
 
 ```bash
 $  git add . && git commit -m 'vA.B.C'

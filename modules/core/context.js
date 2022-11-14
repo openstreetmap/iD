@@ -4,6 +4,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
+import packageJSON from '../../package.json';
+
 import { t } from '../core/localizer';
 
 import { fileFetcher } from './file_fetcher';
@@ -25,7 +27,7 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.24.0-dev';
+  context.version = packageJSON.version;
   context.privacyVersion = '20201202';
 
   // iD will alter the hash so cache the parameters intended to setup the session

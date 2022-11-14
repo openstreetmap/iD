@@ -1,6 +1,6 @@
 import parseVersion from 'vparse';
 import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
-// Double check this resolves to iD's `package.json`
+
 import packageJSON from '../../package.json';
 
 let _mainFileFetcher = coreFileFetcher(); // singleton
