@@ -16,11 +16,10 @@ const transifexOrganization = 'openstreetmap';
 const transifexProject = 'id-editor';
 
 // Transifex doesn't allow anonymous downloading
+/* eslint-disable no-process-env */
 if (process.env.transifex_password) {
   // Deployment scripts may prefer environment variables
-  /* eslint-disable no-process-env */
   transifexApi.setup({ auth: process.env.transifex_password });
-  /* eslint-enable no-process-env */
 } else {
   // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
   // You must use an API token for authentication: You can generate one at https://www.transifex.com/user/settings/api/.
@@ -29,6 +28,7 @@ if (process.env.transifex_password) {
   // }
   transifexApi.setup({ auth: JSON.parse(fs.readFileSync('./transifex.auth', 'utf8')).password });
 }
+/* eslint-enable no-process-env */
 
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 
@@ -68,7 +68,7 @@ async function getResourceInfo(resourceId, callback) {
     }
     console.log(`got resource language stats collection for ${resourceId}`);
     callback(null, result);
-  } catch(err) {
+  } catch (err) {
     console.error(`error while getting resource language stats collection for ${resourceId}`);
     callback(err);
   }
@@ -166,7 +166,7 @@ function gotResource(err, results) {
 }
 
 
-async function getResource(resourceId, callback) {
+function getResource(resourceId, callback) {
   getLanguages((err, codes) => {
     if (err) return callback(err);
 
@@ -234,7 +234,7 @@ function getLanguage(resourceId) {
       const data = await fetch(url).then(d => d.text());
       console.log(`got translations for ${resourceId}, language ${code}`);
       callback(null, YAML.load(data)[code]);
-    } catch(err) {
+    } catch (err) {
       console.error(`error while getting translations for ${resourceId}, language ${code}`, err);
       callback(err);
     }
@@ -250,7 +250,7 @@ async function getLanguageInfo(code, callback) {
     });
     console.log(`got language details for ${code}`);
     callback(null, lng);
-  } catch(err) {
+  } catch (err) {
     console.error(`error while getting language details for ${code}`);
     callback(err);
   }
@@ -271,7 +271,7 @@ async function getLanguages(callback) {
     }
     console.log('got project languages');
     callback(null, result);
-  } catch(err) {
+  } catch (err) {
     console.error('error while getting project languages');
     callback(err);
   }
