@@ -40,12 +40,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372]) 
+* Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
 #### :hourglass: Performance
 #### :rocket: Presets
 #### :hammer: Development
+* Upgrade to Transifex API v3 ([#9375])
 
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
+[#9375]: https://github.com/openstreetmap/iD/pull/9375
 
 
 # 2.23.2
@@ -185,7 +187,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@renancleyson-dev]: https://github.com/renancleyson-dev
 [@bvercelli99]: https://github.com/bvercelli99
 [@faebebin]: https://github.com/faebebin
-[@bgo-eiu]: https://github.com/bgo-eiu 
+[@bgo-eiu]: https://github.com/bgo-eiu
 
 
 # 2.21.1
