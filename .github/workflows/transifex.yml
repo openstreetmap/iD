@@ -20,14 +20,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.x'
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install transifex-client
+        curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+        source ~/.bashrc
     - name: Create .transifexrc
       uses: DamianReeves/write-file-action@e19fd875ed54f16fc583a3486e62547ce4a5dde8
       with:
@@ -35,9 +31,6 @@ jobs:
         write-mode: overwrite
         contents: |
           [https://www.transifex.com]
-          api_hostname = https://api.transifex.com
-          hostname = https://www.transifex.com
-          password = ${{secrets.TX_TOKEN}}
-          username = api
+          token = ${{secrets.TX_TOKEN}}
     - name: Push source strings to Transifex
       run: tx push --source --no-interactive
