@@ -179,35 +179,7 @@ function getResource(resourceId, callback) {
           locale[codes[i]] = { community: result };  // add namespace
 
         } else {
-          if (resourceId === 'presets') {
-            // remove terms that were not really translated
-            let presets = (result.presets && result.presets.presets) || {};
-            for (const key of Object.keys(presets)) {
-              let preset = presets[key];
-              if (!preset.terms) continue;
-              preset.terms = preset.terms.replace(/<.*>/, '').trim();
-              if (!preset.terms) {
-                delete preset.terms;
-                if (!Object.keys(preset).length) {
-                  delete presets[key];
-                }
-              }
-            }
-          } else if (resourceId === 'fields') {
-            // remove terms that were not really translated
-            let fields = (result.presets && result.presets.fields) || {};
-            for (const key of Object.keys(fields)) {
-              let field = fields[key];
-              if (!field.terms) continue;
-              field.terms = field.terms.replace(/\[.*\]/, '').trim();
-              if (!field.terms) {
-                delete field.terms;
-                if (!Object.keys(field).length) {
-                  delete fields[key];
-                }
-              }
-            }
-          } else if (resourceId === 'core') {
+          if (resourceId === 'core') {
             checkForDuplicateShortcuts(codes[i], result);
           }
 
