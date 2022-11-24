@@ -47,7 +47,7 @@ export function utilDetect(refresh) {
 
   // detect other browser capabilities
   // Legacy Opera has incomplete svg style support. See #715
-  _detected.opera = (_detected.browser.toLowerCase() === 'opera' && parseFloat(_detected.version) < 15 );
+  _detected.opera = (_detected.browser.toLowerCase() === 'opera' && Number(_detected.version) < 15 );
 
   if (_detected.browser.toLowerCase() === 'msie') {
     _detected.ie = true;

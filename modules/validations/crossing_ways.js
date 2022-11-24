@@ -523,7 +523,7 @@ export function validationCrossingWays(context) {
 
                     var crossedWay = graph.hasEntity(crossedWayID);
                     // use the explicit width of the crossed feature as the structure length, if available
-                    var structLengthMeters = crossedWay && crossedWay.tags.width && parseFloat(crossedWay.tags.width);
+                    var structLengthMeters = crossedWay && isFinite(crossedWay.tags.width) && Number(crossedWay.tags.width);
                     if (!structLengthMeters) {
                         // if no explicit width is set, approximate the width based on the tags
                         structLengthMeters = crossedWay && crossedWay.impliedLineWidthMeters();

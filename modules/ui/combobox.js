@@ -340,7 +340,7 @@ export function uiCombobox(context, klass) {
             if (!val) return;
 
             // Don't autocomplete if user is typing a number - #4935
-            if (!isNaN(parseFloat(val)) && isFinite(val)) return;
+            if (isFinite(val)) return;
 
             const suggestionValues = [];
             _suggestions.forEach(s => {

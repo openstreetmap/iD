@@ -160,7 +160,7 @@ export function uiSectionValidationRules(context) {
     function changeSquare() {
         var input = d3_select(this);
         var degStr = utilGetSetValue(input).trim();
-        var degNum = parseFloat(degStr, 10);
+        var degNum = Number(degStr);
 
         if (!isFinite(degNum)) {
             degNum = DEFAULTSQUARE;

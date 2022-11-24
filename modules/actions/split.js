@@ -140,7 +140,7 @@ export function actionSplit(nodeIds, newWayIds) {
         if (wayA.tags.step_count) {
             // divide up the the step count proportionally between the two ways
 
-            var stepCount = parseFloat(wayA.tags.step_count);
+            var stepCount = Number(wayA.tags.step_count);
             if (stepCount &&
                 // ensure a number
                 isFinite(stepCount) &&

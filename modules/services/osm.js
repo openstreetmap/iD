@@ -86,7 +86,7 @@ function abortUnwantedRequests(cache, visibleTiles) {
 function getLoc(attrs) {
     var lon = attrs.lon && attrs.lon.value;
     var lat = attrs.lat && attrs.lat.value;
-    return [parseFloat(lon), parseFloat(lat)];
+    return [Number(lon), Number(lat)];
 }
 
 
@@ -208,7 +208,7 @@ var jsonparsers = {
             timestamp: obj.timestamp,
             user: obj.user,
             uid: obj.uid && obj.uid.toString(),
-            loc: [parseFloat(obj.lon), parseFloat(obj.lat)],
+            loc: [Number(obj.lon), Number(obj.lat)],
             tags: obj.tags
         });
     },

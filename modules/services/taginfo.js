@@ -71,7 +71,7 @@ function clean(params) {
 function filterKeys(type) {
     var count_type = type ? 'count_' + type : 'count_all';
     return function(d) {
-        return parseFloat(d[count_type]) > 2500 || d.in_wiki;
+        return Number(d[count_type]) > 2500 || d.in_wiki;
     };
 }
 
@@ -99,7 +99,7 @@ function filterRoles(geometry) {
     return function(d) {
         if (d.role === '') return false; // exclude empty role
         if (d.role.match(/[A-Z*;,]/) !== null) return false;  // exclude uppercase letters and some punctuation
-        return parseFloat(d[tag_members_fractions[geometry]]) > 0.0;
+        return Number(d[tag_members_fractions[geometry]]) > 0.0;
     };
 }
 
