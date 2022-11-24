@@ -43,11 +43,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
 #### :hourglass: Performance
 #### :rocket: Presets
+* Clamp degree values in `direction` fields between 0 and 359 degrees ([#9386])
+* Disable increment/decrement buttons on number fields if the input value is not numeric or when there is a multi-selection with conflicting values
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
 
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
 [#9375]: https://github.com/openstreetmap/iD/pull/9375
+[#9386]: https://github.com/openstreetmap/iD/issues/9386
 
 
 # 2.23.2

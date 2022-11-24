@@ -99,17 +99,19 @@ export function actionReverse(entityID, options) {
             return onewayReplacements[value] || value;
 
         } else if (includeAbsolute && directionKey.test(key)) {
-            if (compassReplacements[value]) return compassReplacements[value];
+            return value.split(';').map(value => {
+                if (compassReplacements[value]) return compassReplacements[value];
 
-            var degrees = parseFloat(value);
-            if (typeof degrees === 'number' && !isNaN(degrees)) {
-                if (degrees < 180) {
-                    degrees += 180;
-                } else {
-                    degrees -= 180;
+                var degrees = Number(value);
+                if (isFinite(degrees)) {
+                    if (degrees < 180) {
+                        degrees += 180;
+                    } else {
+                        degrees -= 180;
+                    }
+                    return degrees.toString();
                 }
-                return degrees.toString();
-            }
+            }).join(';');
         }
 
         return valueReplacements[value] || value;
