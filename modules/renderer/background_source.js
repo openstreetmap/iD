@@ -503,8 +503,8 @@ rendererBackgroundSource.Esri = function(data) {
                     vintage: vintage,
                     source: clean(result.NICE_NAME),
                     description: clean(result.NICE_DESC),
-                    resolution: clean(+parseFloat(result.SRC_RES).toFixed(4)),
-                    accuracy: clean(+parseFloat(result.SRC_ACC).toFixed(4))
+                    resolution: clean(+Number(result.SRC_RES).toFixed(4)),
+                    accuracy: clean(+Number(result.SRC_ACC).toFixed(4))
                 };
 
                 // append units - meters

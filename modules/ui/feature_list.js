@@ -126,7 +126,7 @@ export function uiFeatureList(context) {
             var locationMatch = sexagesimal.pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
 
             if (locationMatch) {
-                var loc = [parseFloat(locationMatch[0]), parseFloat(locationMatch[1])];
+                var loc = [Number(locationMatch[0]), Number(locationMatch[1])];
                 result.push({
                     id: -1,
                     geometry: 'point',
@@ -205,8 +205,8 @@ export function uiFeatureList(context) {
                         type: type,
                         name: d.display_name,
                         extent: new geoExtent(
-                            [parseFloat(d.boundingbox[3]), parseFloat(d.boundingbox[0])],
-                            [parseFloat(d.boundingbox[2]), parseFloat(d.boundingbox[1])])
+                            [Number(d.boundingbox[3]), Number(d.boundingbox[0])],
+                            [Number(d.boundingbox[2]), Number(d.boundingbox[1])])
                     });
                 }
             });
