@@ -110,6 +110,8 @@ export function actionReverse(entityID, options) {
                         degrees -= 180;
                     }
                     return degrees.toString();
+                } else {
+                    return value;
                 }
             }).join(';');
         }
