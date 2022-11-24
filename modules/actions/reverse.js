@@ -111,7 +111,7 @@ export function actionReverse(entityID, options) {
                     }
                     return degrees.toString();
                 } else {
-                    return value;
+                    return valueReplacements[value] || value;
                 }
             }).join(';');
         }
