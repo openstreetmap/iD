@@ -390,6 +390,8 @@ export function uiFieldCombo(field, context) {
 
             arr = utilArrayUniq(arr);
             t[field.key] = arr.length ? arr.join(';') : undefined;
+
+            _lengthIndicator.update(t[field.key]);
         }
         dispatch.call('change', this, t);
     }
@@ -449,7 +451,13 @@ export function uiFieldCombo(field, context) {
             .call(initCombo, selection)
             .merge(_input);
 
-        _container.call(_lengthIndicator);
+        if (_isSemi) {
+            _inputWrap.call(_lengthIndicator);
+        } else if (_isMulti) {
+            // todo: implement
+        } else {
+            _container.call(_lengthIndicator);
+        }
 
         if (_isNetwork) {
             var extent = combinedEntityExtent();
@@ -461,8 +469,12 @@ export function uiFieldCombo(field, context) {
             .on('change', change)
             .on('blur', change)
             .on('input', function() {
-                const val = utilGetSetValue(_input);
+                let val = utilGetSetValue(_input);
                 updateIcon(val);
+                if (_isSemi && _tags[field.key]) {
+                    // when adding a new value to existing ones
+                    val += ';' + _tags[field.key];
+                }
                 _lengthIndicator.update(val);
             });
 

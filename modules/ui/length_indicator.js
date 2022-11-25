@@ -10,7 +10,7 @@ import { uiPopover } from './popover';
 
 export function uiLengthIndicator(maxChars) {
     var _wrap = d3_select(null);
-    var _tooltip = uiPopover('tooltip')
+    var _tooltip = uiPopover('tooltip max-length-warning')
         .placement('bottom')
         .hasArrow(true)
         .content(() => selection => {
