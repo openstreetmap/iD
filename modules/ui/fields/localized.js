@@ -10,6 +10,7 @@ import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
+import { uiLengthIndicator } from '../length_indicator';
 
 var _languagesArray = [];
 
@@ -19,6 +20,7 @@ export function uiFieldLocalized(field, context) {
     var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
+    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
     var _countryCode;
     var _tags;
 
@@ -180,6 +182,8 @@ export function uiFieldLocalized(field, context) {
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
+
+        wrap.call(_lengthIndicator);
 
 
         var translateButton = wrap.selectAll('.localized-add')
@@ -497,6 +501,10 @@ export function uiFieldLocalized(field, context) {
 
         _selection
             .call(localized);
+
+        if (!isMixed) {
+            _lengthIndicator.update(tags[field.key]);
+        }
     };
 
 

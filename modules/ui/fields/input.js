@@ -9,6 +9,7 @@ import { t, localizer } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
+import { uiLengthIndicator } from '..';
 
 export {
     uiFieldText as uiFieldColour,
@@ -25,6 +26,7 @@ export function uiFieldText(field, context) {
     var input = d3_select(null);
     var outlinkButton = d3_select(null);
     var wrap = d3_select(null);
+    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
     var _entityIDs = [];
     var _tags;
     var _phoneFormats = {};
@@ -93,6 +95,7 @@ export function uiFieldText(field, context) {
             .on('blur', change())
             .on('change', change());
 
+        wrap.call(_lengthIndicator);
 
         if (field.type === 'tel') {
             updatePhonePlaceholder();
@@ -364,6 +367,10 @@ export function uiFieldText(field, context) {
         if (outlinkButton && !outlinkButton.empty()) {
             var disabled = !validIdentifierValueForLink();
             outlinkButton.classed('disabled', disabled);
+        }
+
+        if (!isMixed) {
+            _lengthIndicator.update(tags[field.key]);
         }
     };
 

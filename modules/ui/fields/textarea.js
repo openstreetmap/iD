@@ -7,7 +7,7 @@ import {
     utilNoAuto,
     utilRebind
 } from '../../util';
-import { uiLengthIndicator } from '../length_indicator';
+import { uiLengthIndicator } from '..';
 
 
 export function uiFieldTextarea(field, context) {
