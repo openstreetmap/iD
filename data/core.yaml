@@ -782,6 +782,7 @@ en:
       foot: ft
       # abbreviation of inches
       inch: in
+    max_length_reached: "Please keep in mind that texts cannot be longer than a maximum of {maxChars} characters. Anything exceeding that length will be truncated."
   background:
     title: Background
     description: Background Settings
