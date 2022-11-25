@@ -2338,6 +2338,7 @@ div.combobox {
 
 .form-field-input-wrap > input:focus + span.length-indicator-wrap,
 .form-field-input-wrap > textarea:focus + span.length-indicator-wrap,
+.form-field-input-wrap > input:focus + div.combobox-caret + span.length-indicator-wrap,
 .form-field-input-wrap > textarea:focus + div.combobox-caret + span.length-indicator-wrap {
     visibility: visible;
 }

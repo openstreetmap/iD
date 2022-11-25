@@ -12,6 +12,7 @@ import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
+import { uiLengthIndicator } from '../length_indicator';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -52,6 +53,7 @@ export function uiFieldCombo(field, context) {
     var _container = d3_select(null);
     var _inputWrap = d3_select(null);
     var _input = d3_select(null);
+    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
     var _comboData = [];
     var _multiData = [];
     var _entityIDs = [];
@@ -447,6 +449,8 @@ export function uiFieldCombo(field, context) {
             .call(initCombo, selection)
             .merge(_input);
 
+        _container.call(_lengthIndicator);
+
         if (_isNetwork) {
             var extent = combinedEntityExtent();
             var countryCode = extent && countryCoder.iso1A2Code(extent.center());
@@ -457,7 +461,9 @@ export function uiFieldCombo(field, context) {
             .on('change', change)
             .on('blur', change)
             .on('input', function() {
-                updateIcon(utilGetSetValue(_input));
+                const val = utilGetSetValue(_input);
+                updateIcon(val);
+                _lengthIndicator.update(val);
             });
 
         _input
@@ -687,6 +693,10 @@ export function uiFieldCombo(field, context) {
 
             if (!Array.isArray(tags[field.key])) {
                 updateIcon(tags[field.key]);
+            }
+
+            if (!isMixed) {
+                _lengthIndicator.update(tags[field.key]);
             }
         }
     };
