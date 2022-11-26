@@ -453,9 +453,7 @@ export function uiFieldCombo(field, context) {
 
         if (_isSemi) {
             _inputWrap.call(_lengthIndicator);
-        } else if (_isMulti) {
-            // todo: implement
-        } else {
+        } else if (!_isMulti) {
             _container.call(_lengthIndicator);
         }
 

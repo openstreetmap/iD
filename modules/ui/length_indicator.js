@@ -30,12 +30,12 @@ export function uiLengthIndicator(maxChars) {
     lengthIndicator.update = function(val) {
         const strLen = utilUnicodeCharsCount(utilCleanOsmString(val, Number.POSITIVE_INFINITY));
 
-        var lengthIndicator = _wrap.selectAll('span.length-indicator')
+        let indicator = _wrap.selectAll('span.length-indicator')
             .data([strLen]);
 
-        lengthIndicator = lengthIndicator.enter()
+        indicator.enter()
             .append('span')
-            .merge(lengthIndicator)
+            .merge(indicator)
             .classed('length-indicator', true)
             .classed('limit-reached', d => d > maxChars)
             .style('border-right-width', d => `${Math.abs(maxChars - d) * 2}px`)
@@ -52,7 +52,7 @@ export function uiLengthIndicator(maxChars) {
         } else {
             _tooltip.hide();
         }
-    }
+    };
 
     return lengthIndicator;
 }
