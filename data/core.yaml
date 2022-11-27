@@ -615,6 +615,7 @@ en:
     comment_needed_message: Please add a changeset comment first.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
+    changeset_comment_length_warning: "Changeset comments can have a maximum of 255 characters"
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
     google_warning_link: https://www.openstreetmap.org/copyright
   contributors:
