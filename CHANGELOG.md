@@ -37,6 +37,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased
 
+#### :tada: New Features
+* Show a _remaining input length_ indicator and a warning if the maximum for OSM tags (typically, 255 characters) is exceeded ([#9390], [#9392] thanks [@alanb43], [#7943], [#9374])
 #### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
@@ -48,9 +50,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
 
+[#7943]: https://github.com/openstreetmap/iD/issues/7943
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
+[#9374]: https://github.com/openstreetmap/iD/issues/9374
 [#9375]: https://github.com/openstreetmap/iD/pull/9375
 [#9386]: https://github.com/openstreetmap/iD/issues/9386
+[#9390]: https://github.com/openstreetmap/iD/pull/9390
+[#9392]: https://github.com/openstreetmap/iD/pull/9392
+[@alanb43]: https://github.com/alanb43
 
 
 # 2.23.2
