@@ -85,10 +85,10 @@ export function uiChangesetEditor(context) {
             }
         }
 
-        // Add warning if comment mentions Google
         var hasGoogle = _tags.comment.match(/google/i);
+        var commentTooLong = _tags.comment.length > 255;
         var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
-            .data(hasGoogle ? [0] : []);
+            .data(hasGoogle || commentTooLong ? [0] : []);
 
         commentWarning.exit()
             .transition()
@@ -96,23 +96,30 @@ export function uiChangesetEditor(context) {
             .style('opacity', 0)
             .remove();
 
-        var commentEnter = commentWarning.enter()
-            .insert('div', '.tag-reference-body')
-            .attr('class', 'field-warning comment-warning')
-            .style('opacity', 0);
+        function displayWarningMessage(msg, link) {
+            var commentEnter = commentWarning.enter()
+                .insert('div', '.tag-reference-body')
+                .attr('class', 'field-warning comment-warning')
+                .style('opacity', 0);
 
-        commentEnter
-            .append('a')
-            .attr('target', '_blank')
-            .call(svgIcon('#iD-icon-alert', 'inline'))
-            .attr('href', t('commit.google_warning_link'))
-            .append('span')
-            .call(t.append('commit.google_warning'));
+            commentEnter
+                .append('a')
+                .attr('target', '_blank')
+                .call(svgIcon('#iD-icon-alert', 'inline'))
+                .attr('href', t(link))
+                .append('span')
+                .call(t.append(msg));
 
-        commentEnter
-            .transition()
-            .duration(200)
-            .style('opacity', 1);
+            commentEnter
+                .transition()
+                .duration(200)
+                .style('opacity', 1);
+        }
+
+        // Add warning if comment mentions Google or comment length
+        // exceeds 255 chars
+        if (hasGoogle) displayWarningMessage('commit.google_warning', 'commit.google_warning_link');
+        if (commentTooLong) displayWarningMessage('commit.changeset_comment_length_warning', 'commit.about_changeset_comments_link');
     }
 
 
