@@ -13,7 +13,8 @@ import { uiLengthIndicator } from '..';
 export function uiFieldTextarea(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
-    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
+    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue())
+        .silent(field.usage === 'changeset' && field.key === 'comment');
     var _tags;
 
 

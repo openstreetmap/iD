@@ -17,6 +17,7 @@ export function uiLengthIndicator(maxChars) {
             selection.text('');
             t.append('inspector.max_length_reached', { maxChars })(selection);
         });
+    var _silent = false;
 
     var lengthIndicator = function(selection) {
         _wrap = selection.selectAll('span.length-indicator-wrap').data([0]);
@@ -47,11 +48,18 @@ export function uiLengthIndicator(maxChars) {
                 : 0)
             .style('pointer-events', d => d > maxChars * 0.8 ? null: 'none');
 
+        if (_silent) return;
         if (strLen > maxChars) {
             _tooltip.show();
         } else {
             _tooltip.hide();
         }
+    };
+
+    lengthIndicator.silent = function(val) {
+        if (!arguments.length) return _silent;
+        _silent = val;
+        return lengthIndicator;
     };
 
     return lengthIndicator;

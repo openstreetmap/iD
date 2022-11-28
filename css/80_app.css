@@ -5201,11 +5201,14 @@ a.user-info {
     display: none;
 }
 
-.field-warning,
 .changeset-info,
 .request-review,
 .commit-info {
     margin-bottom: 10px;
+}
+
+.field-warning {
+    margin-top: 10px;
 }
 
 .request-review label {
