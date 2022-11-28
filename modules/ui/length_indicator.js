@@ -1,6 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
 import { t } from '../core/localizer';
+import { svgIcon } from '../svg';
 import {
     utilUnicodeCharsCount,
     utilCleanOsmString
@@ -15,7 +16,8 @@ export function uiLengthIndicator(maxChars) {
         .hasArrow(true)
         .content(() => selection => {
             selection.text('');
-            t.append('inspector.max_length_reached', { maxChars })(selection);
+            selection.call(svgIcon('#iD-icon-alert', 'inline'));
+            selection.call(t.append('inspector.max_length_reached', { maxChars }));
         });
     var _silent = false;
 
