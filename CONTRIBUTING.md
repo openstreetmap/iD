@@ -217,9 +217,9 @@ switch to the development database.
 ## Translating
 
 Translations are managed using the
-[Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
+[Transifex](https://www.transifex.com/openstreetmap/id-editor/) platform. After
 signing up, you can go to [iD's project
-page](https://www.transifex.com/projects/p/id-editor/), select a language and
+page](https://www.transifex.com/openstreetmap/id-editor/), select a language and
 click **Translate** to start translating. Translations are divided into
 separate resources:
 
@@ -240,7 +240,7 @@ to the target language, separated by commas.
 You can check your translations on the [development preview site](https://ideditor.netlify.app),
 which is updated every time we change the `develop` branch.
 
-[iD translation project on Transifex](https://www.transifex.com/projects/p/id-editor/)
+[iD translation project on Transifex](https://www.transifex.com/openstreetmap/id-editor/)
 
 To get notifications when translation source files change, click **Watch
 project** button near the bottom of the project page. You can edit your
@@ -267,7 +267,7 @@ These are separate translations for uniformity reasons and because some language
 
 **Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
  pulled in from the external Osmose API. You can contribute to the
- [Osmose Transifex project](https://www.transifex.com/projects/p/osmose/)
+ [Osmose Transifex project](https://explore.transifex.com/openstreetmap-france/osmose/)
  and the results will be seen in iD once deployed.
 
 Note that if you want to add/update English translations in Osmose then you will
