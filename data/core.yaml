@@ -1527,7 +1527,7 @@ en:
       add_line_h: "Adding Lines"
       add_line: "To add a line, press the {line_icon} **{line}** button on the toolbar above the map, or press the shortcut key `2`."
       add_line_draw: "Next, mark the line's starting location. With a mouse, position the cursor where the line should begin and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location."
-      add_line_continue: "Continue placing nodes by {leftclick} clicking or {tap_icon} tapping, or using the `{space}` key along the shape of the line. While drawing, you can zoom in or drag the map in order to add more detail."
+      add_line_continue: "Continue placing nodes by {leftclick} clicking, {tap_icon} tapping, or pressing the `{space}` key along the shape of the line. While drawing, you can zoom in or drag the map in order to add more detail."
       add_line_finish: "To finish a line, click or tap on the last node again or press `{return}`."
       modify_line_h: "Modifying Lines"
       modify_line_dragnode: "Often you'll see lines that aren't shaped correctly, for example a road that does not match up with the background imagery. To adjust the shape of a line, first select it. All nodes of the line will be drawn as small circles. You can then drag the nodes to better locations."
