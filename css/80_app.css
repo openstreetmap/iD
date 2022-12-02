@@ -1717,7 +1717,7 @@ a.hide-toggle {
 
 .form-field-input-multicombo .input-wrap {
     border: 1px solid #ddd;
-    width: 100px;
+    width: 180px;
 }
 .form-field-input-multicombo input {
     border: none;
@@ -2324,6 +2324,42 @@ div.combobox {
     color: #333;
 }
 
+.form-field-input-wrap {
+    position: relative;
+}
+
+.form-field-input-wrap span.length-indicator-wrap {
+    visibility: hidden;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+}
+
+.form-field-input-wrap input:focus + span.length-indicator-wrap,
+.form-field-input-wrap textarea:focus + span.length-indicator-wrap,
+.form-field-input-wrap input:focus + div.combobox-caret + span.length-indicator-wrap,
+.form-field-input-wrap textarea:focus + div.combobox-caret + span.length-indicator-wrap {
+    visibility: visible;
+}
+
+.form-field-input-wrap span.length-indicator {
+    display: block;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #7092ff;
+    border-right-style: solid;
+    border-right-color: lightgray;
+}
+
+.form-field-input-wrap span.length-indicator.limit-reached {
+    border-right-color: red;
+}
+
+.tooltip.max-length-warning {
+    z-index: 10;
+}
 
 /* Field Help
 ------------------------------------------------------- */
@@ -5165,11 +5201,14 @@ a.user-info {
     display: none;
 }
 
-.field-warning,
 .changeset-info,
 .request-review,
 .commit-info {
     margin-bottom: 10px;
+}
+
+.field-warning {
+    margin-top: 10px;
 }
 
 .request-review label {
