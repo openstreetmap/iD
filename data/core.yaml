@@ -1553,7 +1553,7 @@ en:
       add_area_h: "Adding Areas"
       add_area_command: "To add an area, press the {area_icon} **{area}** button on the toolbar above the map, or press the shortcut key `3`."
       add_area_draw: "Next, place the first corner of the area. With a mouse, position the cursor over any corner and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
-      add_area_continue: "Continue placing nodes along the edge of the area by {leftclick} clicking or {tap_icon} tapping key. While drawing, you can zoom in or drag the map in order to add more detail."
+      add_area_continue: "Continue placing nodes along the edge of the area by {leftclick} clicking, {tap_icon} tapping, or pressing the `{space}` key. While drawing, you can zoom in or drag the map in order to add more detail."
       add_area_finish: "To finish an area, click or tap on the first or last node again or press `{return}`."
       square_area_h: "Square Corners"
       square_area_command: "Many area features like buildings have square corners. To square the corners of an area, {rightclick} right-click or {longpress_icon} long-press the edge of the area and choose the {orthogonalize_icon} **{orthogonalize}** operation from the edit menu."
