@@ -45,12 +45,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Clamp degree values in `direction` fields between 0 and 359 degrees ([#9386])
 * Disable increment/decrement buttons on number fields if the input value is not numeric or when there is a multi-selection with conflicting values
+* Filter out misspelled taginfo suggestions in combo field ([#9397])
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
 
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
 [#9375]: https://github.com/openstreetmap/iD/pull/9375
 [#9386]: https://github.com/openstreetmap/iD/issues/9386
+[#9397]: https://github.com/openstreetmap/iD/issues/9397
 
 
 # 2.23.2

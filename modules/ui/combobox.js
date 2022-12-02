@@ -349,8 +349,6 @@ export function uiCombobox(context, klass) {
                     suggestionValues.push(s.key);
                 }
             });
-            //_suggestions.map(s => s.value)
-            //    .concat(_suggestions.filter(s => s.key !== s.value).map(s => s.key));
 
             var bestIndex = -1;
             for (var i = 0; i < suggestionValues.length; i++) {

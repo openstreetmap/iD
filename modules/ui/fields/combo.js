@@ -97,6 +97,10 @@ export function uiFieldCombo(field, context) {
             return 'yes';
         }
 
+        return restrictTagValueSpelling(dval) || undefined;
+    }
+
+    function restrictTagValueSpelling(dval) {
         if (_snake_case) {
             dval = snake(dval);
         }
@@ -105,7 +109,7 @@ export function uiFieldCombo(field, context) {
             dval = dval.toLowerCase();
         }
 
-        return dval || undefined;
+        return dval;
     }
 
 
@@ -227,23 +231,29 @@ export function uiFieldCombo(field, context) {
         services.taginfo[fn](params, function(err, data) {
             if (err) return;
 
-            data = data.filter(function(d) {
-                // don't show the fallback value
-                return field.type !== 'typeCombo' || d.value !== 'yes';
+            // don't show the fallback value
+            data = data.filter(d =>
+                field.type !== 'typeCombo' || d.value !== 'yes');
+
+            // don't show misspelled values
+            data = data.filter(d => {
+                var value = d.value;
+                if (_isMulti) {
+                    value = value.slice(field.key.length);
+                }
+                return value === restrictTagValueSpelling(value);
             });
 
             var deprecatedValues = osmEntity.deprecatedTagValuesByKey(_dataDeprecated)[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
-                data = data.filter(function(d) {
-                    return deprecatedValues.indexOf(d.value) === -1;
-                });
+                data = data.filter(d  =>
+                    !deprecatedValues.includes(d.value));
             }
 
             if (hasCountryPrefix) {
-                data = data.filter(function(d) {
-                    return d.value.toLowerCase().indexOf(_countryCode + ':') === 0;
-                });
+                data = data.filter(d =>
+                    d.value.toLowerCase().indexOf(_countryCode + ':') === 0);
             }
 
             const additionalOptions = (field.options || stringsField.options || [])
