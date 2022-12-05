@@ -7715,6 +7715,7 @@
     "name": "PCRS raster ouvert",
     "type": "tms",
     "template": "https://wxs.ign.fr/ortho/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=PCRS.LAMB93&STYLE=normal&FORMAT=image/jpeg&tileMatrixSet=LAMB93_5cm_EPSG&tileMatrix={zoom}&tileRow={y}&tileCol={x}",
+    "projection": "EPSG:2154",
     "zoomExtent": [3, 21],
     "polygon": [
       [
