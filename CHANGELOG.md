@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Filter out misspelled taginfo suggestions in combo field ([#9397])
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
+* Upgrade dependencies: `d3` to v7.7
 
 [#7943]: https://github.com/openstreetmap/iD/issues/7943
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
