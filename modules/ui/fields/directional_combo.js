@@ -1,9 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../core/localizer';
+import { uiFieldCombo } from './combo';
 
 
 export function uiFieldDirectionalCombo(field, context) {
@@ -11,6 +11,8 @@ export function uiFieldDirectionalCombo(field, context) {
     var items = d3_select(null);
     var wrap = d3_select(null);
     var _tags;
+
+    var _combos = {};
 
     function directionalCombo(selection) {
 
@@ -53,16 +55,17 @@ export function uiFieldDirectionalCombo(field, context) {
 
         enter
             .append('div')
-            .attr('class', 'preset-input-directionalcombo-wrap')
-            .append('input')
-            .attr('type', 'text')
-            .attr('class', function(d) { return 'preset-input-directionalcombo preset-input-' + stripcolon(d); })
-            .call(utilNoAuto)
-            .each(function(d) {
-                d3_select(this)
-                    .call(uiCombobox(context, 'directionalcombo-' + stripcolon(d))
-                        .data(directionalCombo.options(d))
-                    );
+            .attr('class', 'preset-input-directionalcombo-wrap form-field-input-wrap')
+            .each(function(key) {
+                const subField = {
+                    ...field,
+                    type: 'combo',
+                    key
+                };
+                const combo = uiFieldCombo(subField, context);
+                combo.on('change', t => change(key, t[key]));
+                _combos[key] = combo;
+                d3_select(this).call(combo);
             });
 
         items = items.merge(enter);
@@ -74,10 +77,7 @@ export function uiFieldDirectionalCombo(field, context) {
     }
 
 
-    function change(d3_event, key) {
-
-        var newValue = context.cleanTagValue(utilGetSetValue(d3_select(this)));
-
+    function change(key, newValue) {
         const commonKey = field.keys[0];
 
         // don't override multiple values with blank string
@@ -111,53 +111,17 @@ export function uiFieldDirectionalCombo(field, context) {
     }
 
 
-    directionalCombo.options = function() {
-        var stringsField = field.resolveReference('stringsCrossReference');
-        return field.options.map(function(option) {
-            const hasTitle = stringsField.hasTextForStringId('options.' + option + '.title');
-            const hasDescription = stringsField.hasTextForStringId('options.' + option + '.description')
-            return {
-                title: hasDescription ? stringsField.t('options.' + option + '.description') : null,
-                value: hasTitle ? stringsField.t('options.' + option + '.title') : stringsField.t('options.' + option)
-            };
-        });
-    };
-
-
     directionalCombo.tags = function(tags) {
         _tags = tags;
 
         const commonKey = field.keys[0];
-
-        // If generic key is set, use that instead of individual values
-        var commonValue = typeof tags[commonKey] === 'string' && tags[commonKey];
-
-        utilGetSetValue(items.selectAll('.preset-input-directionalcombo'), function(d) {
-                if (commonValue) return commonValue;
-                return !tags[commonKey] && typeof tags[d] === 'string' ? tags[d] : '';
-            })
-            .attr('title', function(d) {
-                if (Array.isArray(tags[commonKey]) || Array.isArray(tags[d])) {
-                    var vals = [];
-                    if (Array.isArray(tags[commonKey])) {
-                        vals = vals.concat(tags[commonKey]);
-                    }
-                    if (Array.isArray(tags[d])) {
-                        vals = vals.concat(tags[d]);
-                    }
-                    return vals.filter(Boolean).join('\n');
-                }
-                return null;
-            })
-            .attr('placeholder', function(d) {
-                if (Array.isArray(tags[commonKey]) || Array.isArray(tags[d])) {
-                    return t('inspector.multiple_values');
-                }
-                return field.placeholder();
-            })
-            .classed('mixed', function(d) {
-                return Array.isArray(tags[commonKey]) || Array.isArray(tags[d]);
-            });
+        for (let key in _combos) {
+            const uniqueValues = [... new Set([]
+                .concat(tags[commonKey])
+                .concat(tags[key])
+                .filter(Boolean))];
+            _combos[key].tags({ [key]: uniqueValues.length > 1 ? uniqueValues : uniqueValues[0] });
+        }
     };
 
 
