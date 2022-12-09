@@ -79,35 +79,23 @@ export function uiFieldDirectionalCombo(field, context) {
 
     function change(key, newValue) {
         const commonKey = field.keys[0];
-
-        // don't override multiple values with blank string
-        if (!newValue && (Array.isArray(_tags[commonKey]) || Array.isArray(_tags[key]))) return;
-
-        if (newValue === 'none' || newValue === '') { newValue = undefined; }
-
         const otherKey = key === field.keys[1] ? field.keys[2] : field.keys[1];
-        let otherValue = typeof _tags[commonKey] === 'string' ? _tags[commonKey] : _tags[otherKey];
-        if (otherValue && Array.isArray(otherValue)) {
-            // we must always have an explicit value for comparison
-            otherValue = otherValue[0];
-        }
-        if (otherValue === 'none' || otherValue === '') { otherValue = undefined; }
 
-        var tag = {};
-
-        // If the left and right tags match, use the common tag to tag both sides the same way
-        if (newValue === otherValue) {
-            tag[commonKey] = newValue;
-            tag[key] = undefined;
-            tag[otherKey] = undefined;
-        } else {
-            // Always set both left and right as changing one can affect the other
-            tag[commonKey] = undefined;
-            tag[key] = newValue;
-            tag[otherKey] = otherValue;
-        }
-
-        dispatch.call('change', this, tag);
+        dispatch.call('change', this, tags => {
+            const otherValue = tags[otherKey] || tags[commonKey];
+            if (newValue === otherValue) {
+                // both tags match, use the common tag to tag both sides the same way
+                tags[commonKey] = newValue;
+                delete tags[key];
+                delete tags[otherKey];
+            } else {
+                // Always set both left and right as changing one can affect the other
+                tags[key] = newValue;
+                delete tags[commonKey];
+                tags[otherKey] = otherValue;
+            }
+            return tags;
+        });
     }
 
 
@@ -117,8 +105,8 @@ export function uiFieldDirectionalCombo(field, context) {
         const commonKey = field.keys[0];
         for (let key in _combos) {
             const uniqueValues = [... new Set([]
-                .concat(tags[commonKey])
-                .concat(tags[key])
+                .concat(_tags[commonKey])
+                .concat(_tags[key])
                 .filter(Boolean))];
             _combos[key].tags({ [key]: uniqueValues.length > 1 ? uniqueValues : uniqueValues[0] });
         }
