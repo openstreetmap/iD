@@ -6,13 +6,13 @@ import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { t } from '../../core/localizer';
 
 
-export function uiFieldCycleway(field, context) {
+export function uiFieldDirectionalCombo(field, context) {
     var dispatch = d3_dispatch('change');
     var items = d3_select(null);
     var wrap = d3_select(null);
     var _tags;
 
-    function cycleway(selection) {
+    function directionalCombo(selection) {
 
         function stripcolon(s) {
             return s.replace(':', '');
@@ -43,32 +43,32 @@ export function uiFieldCycleway(field, context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', function(d) { return 'labeled-input preset-cycleway-' + stripcolon(d); });
+            .attr('class', function(d) { return 'labeled-input preset-directionalcombo-' + stripcolon(d); });
 
         enter
             .append('span')
-            .attr('class', 'label preset-label-cycleway')
-            .attr('for', function(d) { return 'preset-input-cycleway-' + stripcolon(d); })
+            .attr('class', 'label preset-label-directionalcombo')
+            .attr('for', function(d) { return 'preset-input-directionalcombo-' + stripcolon(d); })
             .html(function(d) { return field.t.html('types.' + d); });
 
         enter
             .append('div')
-            .attr('class', 'preset-input-cycleway-wrap')
+            .attr('class', 'preset-input-directionalcombo-wrap')
             .append('input')
             .attr('type', 'text')
-            .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
+            .attr('class', function(d) { return 'preset-input-directionalcombo preset-input-' + stripcolon(d); })
             .call(utilNoAuto)
             .each(function(d) {
                 d3_select(this)
-                    .call(uiCombobox(context, 'cycleway-' + stripcolon(d))
-                        .data(cycleway.options(d))
+                    .call(uiCombobox(context, 'directionalcombo-' + stripcolon(d))
+                        .data(directionalCombo.options(d))
                     );
             });
 
         items = items.merge(enter);
 
         // Update
-        wrap.selectAll('.preset-input-cycleway')
+        wrap.selectAll('.preset-input-directionalcombo')
             .on('change', change)
             .on('blur', change);
     }
@@ -111,18 +111,20 @@ export function uiFieldCycleway(field, context) {
     }
 
 
-    cycleway.options = function() {
+    directionalCombo.options = function() {
         var stringsField = field.resolveReference('stringsCrossReference');
         return field.options.map(function(option) {
+            const hasTitle = stringsField.hasTextForStringId('options.' + option + '.title');
+            const hasDescription = stringsField.hasTextForStringId('options.' + option + '.description')
             return {
-                title: stringsField.t('options.' + option + '.description'),
-                value: option
+                title: hasDescription ? stringsField.t('options.' + option + '.description') : null,
+                value: hasTitle ? stringsField.t('options.' + option + '.title') : stringsField.t('options.' + option)
             };
         });
     };
 
 
-    cycleway.tags = function(tags) {
+    directionalCombo.tags = function(tags) {
         _tags = tags;
 
         const commonKey = field.keys[0];
@@ -130,7 +132,7 @@ export function uiFieldCycleway(field, context) {
         // If generic key is set, use that instead of individual values
         var commonValue = typeof tags[commonKey] === 'string' && tags[commonKey];
 
-        utilGetSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
+        utilGetSetValue(items.selectAll('.preset-input-directionalcombo'), function(d) {
                 if (commonValue) return commonValue;
                 return !tags[commonKey] && typeof tags[d] === 'string' ? tags[d] : '';
             })
@@ -159,11 +161,11 @@ export function uiFieldCycleway(field, context) {
     };
 
 
-    cycleway.focus = function() {
+    directionalCombo.focus = function() {
         var node = wrap.selectAll('input').node();
         if (node) node.focus();
     };
 
 
-    return utilRebind(cycleway, dispatch, 'on');
+    return utilRebind(directionalCombo, dispatch, 'on');
 }

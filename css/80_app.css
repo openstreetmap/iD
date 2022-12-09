@@ -1551,10 +1551,10 @@ a.hide-toggle {
 }
 
 
-/* Field - Access, Cycleway
+/* Field - Access, DirectionalCombo
 ------------------------------------------------------- */
 .form-field-input-access,
-.form-field-input-cycleway {
+.form-field-input-directionalcombo {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
