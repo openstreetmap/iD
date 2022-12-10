@@ -24,7 +24,8 @@ export function rendererFeatures(context) {
         'tertiary_link': true,
         'residential': true,
         'unclassified': true,
-        'living_street': true
+        'living_street': true,
+        'busway': true
     };
 
     var service_roads = {
