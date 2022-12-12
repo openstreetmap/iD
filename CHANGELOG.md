@@ -48,9 +48,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Clamp degree values in `direction` fields between 0 and 359 degrees ([#9386])
 * Disable increment/decrement buttons on number fields if the input value is not numeric or when there is a multi-selection with conflicting values
 * Filter out misspelled taginfo suggestions in combo field ([#9397])
+* Add `highway=busway` to 'Traffic Roads' group of map features ([#9413], thanks [@Rewinteer])
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
-* Upgrade dependencies: `d3` to v7.7
+* Upgrade dependencies: `d3` to v7.7, `@ideditor/country-coder` to v5.1, `@ideditor/location-conflation` to v1.1, `esbuild` to v0.16
 
 [#7943]: https://github.com/openstreetmap/iD/issues/7943
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
@@ -60,7 +61,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9390]: https://github.com/openstreetmap/iD/pull/9390
 [#9392]: https://github.com/openstreetmap/iD/pull/9392
 [#9397]: https://github.com/openstreetmap/iD/issues/9397
+[#9413]: https://github.com/openstreetmap/iD/pull/9413
 [@alanb43]: https://github.com/alanb43
+[@Rewinteer]: https://github.com/Rewinteer
 
 
 # 2.23.2
