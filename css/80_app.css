@@ -1412,7 +1412,7 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .field-label .label-text {
     padding: 5px 10px 4px 0;
 }
-.field-label .label-text span {
+.field-label .label-text {
     white-space: nowrap;
 }
 
@@ -2748,12 +2748,39 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
+.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
+.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
+.feature-list .entity-name.has-colour::before,
+.combobox-parent-relation .has-colour::before {
+    display: inline-block;
+    content: '';
+    margin-left: -5px;
+    margin-right: 5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 4px;
+    border-color: inherit;
+}
+.combobox-parent-relation .has-colour::before  {
+    margin-left: 2px;
+}
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
 .ideditor[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name {
     padding-left:0;
     padding-right: 10px;
 }
+.ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name.has-colour::before,
+.ideditor[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
+.ideditor[dir='rtl'] .feature-list .entity-name.has-colour::before {
+    margin-left: 5px;
+    margin-right: -5px;
+}
+.ideditor[dir='rtl'] .combobox-parent-relation .has-colour::before  {
+    margin-left: 5px;
+    margin-right: 2px;
+}
+
 
 .form-field-input-member > input.member-role {
     border-radius: 0 0 4px 4px;

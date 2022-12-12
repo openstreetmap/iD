@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 * Show a _remaining input length_ indicator and a warning if the maximum for OSM tags (typically, 255 characters) is exceeded ([#9390], [#9392] thanks [@alanb43], [#7943], [#9374])
 #### :sparkles: Usability & Accessibility
+* Show the color of (route) relations in the form of small colored circles in relation membership section and feature search results ([#9424])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9397]: https://github.com/openstreetmap/iD/issues/9397
 [#9413]: https://github.com/openstreetmap/iD/pull/9413
 [#9423]: https://github.com/openstreetmap/iD/pull/9423
+[#9424]: https://github.com/openstreetmap/iD/pull/9424
 [@alanb43]: https://github.com/alanb43
 [@Rewinteer]: https://github.com/Rewinteer
 

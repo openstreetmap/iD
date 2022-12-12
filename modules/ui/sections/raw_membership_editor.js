@@ -239,12 +239,29 @@ export function uiSectionRawMembershipEditor(context) {
 
         var graph = context.graph();
 
-        function baseDisplayLabel(entity) {
+        function baseDisplayValue(entity) {
             var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
             var entityName = utilDisplayName(entity) || '';
 
             return presetName + ' ' + entityName;
+        }
+
+        function baseDisplayLabel(entity) {
+            var matched = presetManager.match(entity, graph);
+            var presetName = (matched && matched.name()) || t('inspector.relation');
+            var entityName = utilDisplayName(entity) || '';
+
+            return selection => {
+                selection
+                    .append('b')
+                    .text(presetName + ' ');
+                selection
+                    .append('span')
+                    .classed('has-colour', entity.tags.colour)
+                    .style('border-color', entity.tags.colour)
+                    .text(entityName);
+            };
         }
 
         var explicitRelation = q && context.hasEntity(q.toLowerCase());
@@ -253,17 +270,22 @@ export function uiSectionRawMembershipEditor(context) {
 
             result.push({
                 relation: explicitRelation,
-                value: baseDisplayLabel(explicitRelation) + ' ' + explicitRelation.id
+                value: baseDisplayValue(explicitRelation) + ' ' + explicitRelation.id,
+                display: baseDisplayLabel(explicitRelation)
             });
         } else {
 
             context.history().intersects(context.map().extent()).forEach(function(entity) {
                 if (entity.type !== 'relation' || entity.id === entityID) return;
 
-                var value = baseDisplayLabel(entity);
+                var value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
-                result.push({ relation: entity, value: value });
+                result.push({
+                    relation: entity,
+                    value,
+                    display: baseDisplayLabel(entity)
+                });
             });
 
             result.sort(function(a, b) {
@@ -349,6 +371,8 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
+            .classed('has-colour', d => d.relation.tags.colour)
+            .style('border-color', d => d.relation.tags.colour)
             .text(function(d) { return utilDisplayName(d.relation); });
 
         labelEnter

@@ -310,6 +310,8 @@ export function uiFeatureList(context) {
             label
                 .append('span')
                 .attr('class', 'entity-name')
+                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
+                .style('border-color', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
                 .text(function(d) { return d.name; });
 
             enter

@@ -198,6 +198,8 @@ export function uiSectionRawMemberEditor(context) {
                     labelLink
                         .append('span')
                         .attr('class', 'member-entity-name')
+                        .classed('has-colour', d => d.member.type === 'relation' && d.member.tags.colour)
+                        .style('border-color', d => d.member.type === 'relation' && d.member.tags.colour)
                         .text(function(d) { return utilDisplayName(d.member); });
 
                     label
