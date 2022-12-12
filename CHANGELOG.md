@@ -43,12 +43,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
+* Fix corruption of (directional) `cycleway` tags when editing a multi-selection ([#9423])
 #### :hourglass: Performance
 #### :rocket: Presets
 * Clamp degree values in `direction` fields between 0 and 359 degrees ([#9386])
 * Disable increment/decrement buttons on number fields if the input value is not numeric or when there is a multi-selection with conflicting values
 * Filter out misspelled taginfo suggestions in combo field ([#9397])
 * Add `highway=busway` to 'Traffic Roads' group of map features ([#9413], thanks [@Rewinteer])
+* Rename `cycleway` field type to `directionalCombo` and make it reusable for arbitrary directional tags ([#9423])
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
 * Upgrade dependencies: `d3` to v7.7, `@ideditor/country-coder` to v5.1, `@ideditor/location-conflation` to v1.1, `esbuild` to v0.16
@@ -62,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9392]: https://github.com/openstreetmap/iD/pull/9392
 [#9397]: https://github.com/openstreetmap/iD/issues/9397
 [#9413]: https://github.com/openstreetmap/iD/pull/9413
+[#9423]: https://github.com/openstreetmap/iD/pull/9423
 [@alanb43]: https://github.com/alanb43
 [@Rewinteer]: https://github.com/Rewinteer
 

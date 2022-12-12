@@ -115,14 +115,22 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    function getLabelId(field, v) {
+        return field.hasTextForStringId(`options.${v}.title`)
+            ? `options.${v}.title`
+            : `options.${v}`;
+    }
+
+
     // returns the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function displayValue(tval) {
         tval = tval || '';
 
         var stringsField = field.resolveReference('stringsCrossReference');
-        if (stringsField.hasTextForStringId('options.' + tval)) {
-            return stringsField.t('options.' + tval, { default: tval });
+        const labelId = getLabelId(stringsField, tval);
+        if (stringsField.hasTextForStringId(labelId)) {
+            return stringsField.t(labelId, { default: tval });
         }
 
         if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
@@ -139,8 +147,9 @@ export function uiFieldCombo(field, context) {
         tval = tval || '';
 
         var stringsField = field.resolveReference('stringsCrossReference');
-        if (stringsField.hasTextForStringId('options.' + tval)) {
-            return stringsField.t.append('options.' + tval, { default: tval });
+        const labelId = getLabelId(stringsField, tval);
+        if (stringsField.hasTextForStringId(labelId)) {
+            return stringsField.t(labelId, { default: tval });
         }
 
         if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
@@ -184,12 +193,13 @@ export function uiFieldCombo(field, context) {
         if (!(field.options || stringsField.options)) return [];
 
         return (field.options || stringsField.options).map(function(v) {
+            const labelId = getLabelId(stringsField, v);
             return {
                 key: v,
-                value: stringsField.t('options.' + v, { default: v }),
-                title: v,
-                display: addComboboxIcons(stringsField.t.append('options.' + v, { default: v }), v),
-                klass: stringsField.hasTextForStringId('options.' + v) ? '' : 'raw-option'
+                value: stringsField.t(labelId, { default: v }),
+                title: stringsField.t(`options.${v}.description`, { default: v }),
+                display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
+                klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
         });
     }
@@ -266,15 +276,17 @@ export function uiFieldCombo(field, context) {
             _container.classed('empty-combobox', data.length === 0);
 
             _comboData = data.concat(additionalOptions).map(function(d) {
-                var k = d.value;
-                if (_isMulti) k = k.replace(field.key, '');
-                var isLocalizable = stringsField.hasTextForStringId('options.' + k);
-                var label = stringsField.t('options.' + k, { default: k });
+                var v = d.value;
+                if (_isMulti) v = v.replace(field.key, '');
+                const labelId = getLabelId(stringsField, v);
+                var isLocalizable = stringsField.hasTextForStringId(labelId);
+                var label = stringsField.t(labelId, { default: v });
                 return {
-                    key: k,
+                    key: v,
                     value: label,
-                    display: addComboboxIcons(stringsField.t.append('options.' + k, { default: k }), k),
-                    title: isLocalizable ? k : (d.title !== label ? d.title : ''),
+                    title: stringsField.t(`options.${v}.description`, { default:
+                        isLocalizable ? v : (d.title !== label ? d.title : '') }),
+                    display: addComboboxIcons(stringsField.t.append(labelId, { default: v }), v),
                     klass: isLocalizable ? '' : 'raw-option'
                 };
             });
@@ -684,7 +696,8 @@ export function uiFieldCombo(field, context) {
             }).filter(Boolean);
 
             var showsValue = !isMixed && tags[field.key] && !(field.type === 'typeCombo' && tags[field.key] === 'yes');
-            var isRawValue = showsValue && !stringsField.hasTextForStringId('options.' + tags[field.key]);
+            var isRawValue = showsValue && !stringsField.hasTextForStringId(`options.${tags[field.key]}`)
+                                        && !stringsField.hasTextForStringId(`options.${tags[field.key]}.title`);
             var isKnownValue = showsValue && !isRawValue;
 
             var isReadOnly = !_allowCustomValues || isKnownValue;
