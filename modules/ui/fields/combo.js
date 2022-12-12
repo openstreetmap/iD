@@ -115,13 +115,20 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    function getLabelId(field, v) {
+        return field.hasTextForStringId(`options.${v}.title`)
+            ? `options.${v}.title`
+            : `options.${v}`;
+    }
+
+
     // returns the display value for a tag value
     // (for multiCombo, tval should be the key suffix, not the entire key)
     function displayValue(tval) {
         tval = tval || '';
 
         var stringsField = field.resolveReference('stringsCrossReference');
-        const labelId = stringsField.hasTextForStringId(`options.${tval}.title`) ? `options.${tval}.title` : `options.${tval}`;
+        const labelId = getLabelId(stringsField, tval);
         if (stringsField.hasTextForStringId(labelId)) {
             return stringsField.t(labelId, { default: tval });
         }
@@ -140,7 +147,7 @@ export function uiFieldCombo(field, context) {
         tval = tval || '';
 
         var stringsField = field.resolveReference('stringsCrossReference');
-        const labelId = stringsField.hasTextForStringId(`options.${tval}.title`) ? `options.${tval}.title` : `options.${tval}`;
+        const labelId = getLabelId(stringsField, tval);
         if (stringsField.hasTextForStringId(labelId)) {
             return stringsField.t(labelId, { default: tval });
         }
@@ -186,8 +193,7 @@ export function uiFieldCombo(field, context) {
         if (!(field.options || stringsField.options)) return [];
 
         return (field.options || stringsField.options).map(function(v) {
-            const labelId = stringsField.hasTextForStringId(`options.${v}.title`) ? `options.${v}.title` : `options.${v}`;
-            const hasDescription = stringsField.hasTextForStringId(`options.${v}.description`);
+            const labelId = getLabelId(stringsField, v);
             return {
                 key: v,
                 value: stringsField.t(labelId, { default: v }),
@@ -272,7 +278,7 @@ export function uiFieldCombo(field, context) {
             _comboData = data.concat(additionalOptions).map(function(d) {
                 var v = d.value;
                 if (_isMulti) v = v.replace(field.key, '');
-                const labelId = stringsField.hasTextForStringId(`options.${v}.title`) ? `options.${v}.title` : `options.${v}`;
+                const labelId = getLabelId(stringsField, v);
                 var isLocalizable = stringsField.hasTextForStringId(labelId);
                 var label = stringsField.t(labelId, { default: v });
                 return {

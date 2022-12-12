@@ -1,8 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
-import { t } from '../../core/localizer';
+import { utilRebind } from '../../util';
 import { uiFieldCombo } from './combo';
 
 
