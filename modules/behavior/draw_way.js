@@ -441,8 +441,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // Get all ways that include the last created node and are not the way you are currently drawing
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
 
-            // Find all the adjacent nodes in the graph that are not the last created node
-            let nextNodeIds = lastNodesParents.flatMap(({nodes}) => {
+            // Find all the adjacent nodes in the graph
+            const unfilteredNextNodeIds = lastNodesParents.flatMap(({nodes}) => {
                 const indexOfLast = nodes.indexOf(lastNodeId);
                 // If last created node is not first or last in way
                 // (example: nodes = [1,2,3,4,1]; lastNodeId = 2; return [1,3])
@@ -456,7 +456,9 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 // Way is not an area (example: nodes = [1,2,3,4,5]; lastNodeId = 5; return [4])
                 // Way is not an area (example: nodes = [1,2,3,4,5]; lastNodeId = 1; return [2])
                 return [indexOfLast ? nodes[nodes.length - 2] : nodes[1]];
-            }).filter((id) => id !== secondLastNodeId);
+            });
+            // Removed the last created node from all possible candidates
+            let nextNodeIds = unfilteredNextNodeIds.filter((id) => id !== secondLastNodeId);
 
             // There are no nodes that are adjacent to the last create node
             if (!nextNodeIds.length) return;
@@ -465,13 +467,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // (example: new Set([1,1,1]).size === 1) we will connect to `1`
             // (example: new Set([1,1,2]).size === 2) we will du further checks
             if (new Set([...nextNodeIds]).size > 1) {
-                if (!secondLastNodeId) {
-                    context.ui().flash
-                        .duration(4000)
-                        .iconName('#iD-icon-no')
-                        .label(t.append('operations.follow.error.needs_more_initial_nodes'))();
-                    return;
-                }
                 // This covers Case 1
                 // video and illustration can be found at https://github.com/openstreetmap/iD/pull/9340
                 //
@@ -487,7 +482,13 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                     context.ui().flash
                         .duration(4000)
                         .iconName('#iD-icon-no')
-                        .label(t.append(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
+                        .label(t.append(
+                            // Needs more nodes when the previous node is not adjacent
+                            // https://github.com/openstreetmap/iD/pull/9340#discussion_r1050118322
+                            nextNodeIds.length === unfilteredNextNodeIds.length
+                                ? 'operations.follow.error.needs_more_initial_nodes'
+                                : `operations.follow.error.intersection_of_multiple_ways.${featureType}`
+                        ))();
                     return;
                 }
             }
