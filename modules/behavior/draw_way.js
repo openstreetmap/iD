@@ -428,28 +428,42 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         if (_didResolveTempEdit) return;
 
         try {
-            // if we're drawing an area, the first node = last node.
+            // If we're drawing an area, the first node = last node.
+            // (example: _origWay.nodes = [1,2,3,4,1])
             const isDrawingArea = _origWay.nodes.length > 1 && _origWay.nodes[0] === _origWay.nodes[_origWay.nodes.length - 1];
 
+            // (example: isDrawingArea = true; _origWay.nodes = [1,2,3,4,1]; secondLastNodeId = 3; lastNodeId = 4)
+            // (example: isDrawingArea = false; _origWay.nodes = [1,2,3,4,5]; secondLastNodeId = 4; lastNodeId = 5)
             const secondLastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -3 : -2)];
             const lastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -2 : -1)];
 
             const historyGraph = context.history().graph();
+            // Get all ways that include the last created node and are not the way you are currently drawing
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
 
+            // Find all the adjacent nodes in the graph that are not the last created node
             let nextNodeIds = lastNodesParents.flatMap(({nodes}) => {
                 const indexOfLast = nodes.indexOf(lastNodeId);
+                // If last created node is not first or last in way
+                // (example: nodes = [1,2,3,4,1]; lastNodeId = 2; return [1,3])
                 if (indexOfLast % (nodes.length - 1)) {
                     return [nodes[indexOfLast-1], nodes[indexOfLast+1]];
                 }
+                // If way is an area (example: nodes = [1,2,3,4,1]; lastNodeId = 1; return [2,4])
                 if (nodes[0] === nodes[nodes.length - 1]) {
                     return [nodes[1], nodes[nodes.length - 2]];
                 }
+                // Way is not an area (example: nodes = [1,2,3,4,5]; lastNodeId = 5; return [4])
+                // Way is not an area (example: nodes = [1,2,3,4,5]; lastNodeId = 1; return [2])
                 return [indexOfLast ? nodes[nodes.length - 2] : nodes[1]];
             }).filter((id) => id !== secondLastNodeId);
 
+            // There are no nodes that are adjacent to the last create node
             if (!nextNodeIds.length) return;
 
+            // Check if there are multiple candidates or are all the same
+            // (example: new Set([1,1,1]).size === 1) we will connect to `1`
+            // (example: new Set([1,1,2]).size === 2) we will du further checks
             if (new Set([...nextNodeIds]).size > 1) {
                 if (!secondLastNodeId) {
                     context.ui().flash
@@ -458,6 +472,15 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                         .label(t.append('operations.follow.error.needs_more_initial_nodes'))();
                     return;
                 }
+                // This covers Case 1
+                // video and illustration can be found at https://github.com/openstreetmap/iD/pull/9340
+                //
+                // Given Way segments that connect the current node to more than two nodes.
+                // When Exactly one of the next nodes is only connected using one way segment.
+                // Then Connect the current node to the node that is only connected using one way segment.
+                //
+                // (example: nextNodeIds = [1,1,2] will be converted to [2])
+                // (example: nextNodeIds = [1,2] will be converted to [1, 2])
                 nextNodeIds = nextNodeIds.filter((id,_,nodes) => nodes.lastIndexOf(id) === nodes.indexOf(id));
                 if (nextNodeIds.length !== 1) {
                     const featureType = getFeatureType(lastNodesParents);
@@ -469,6 +492,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 }
             }
 
+            // Now we have only one candidate and will connect the path
             const nextNode = historyGraph.entity(nextNodeIds[0]);
 
             drawWay.addNode(nextNode, {
