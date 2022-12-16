@@ -300,13 +300,14 @@ export function uiFieldCombo(field, context) {
 
     // adds icons to tag values which have one
     function addComboboxIcons(disp, value) {
-        if (valueIcons[field.key]) {
+        const key = field.type !== 'multiCombo' ? field.key : field.key.slice(0, -1);
+        if (valueIcons[key]) {
             return function(selection) {
                 var span = selection
                     .insert('span', ':first-child')
                     .attr('class', 'tag-value-icon');
-                if (valueIcons[field.key].indexOf(value) !== -1) {
-                    span.call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
+                if (valueIcons[key].indexOf(value) !== -1) {
+                    span.call(svgIcon('#iD-' + key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
                 }
                 disp.call(this, selection);
             };
@@ -565,7 +566,7 @@ export function uiFieldCombo(field, context) {
                     _multiData.push({
                         key: k,
                         value: displayValue(suffix),
-                        display: renderValue(suffix),
+                        display: addComboboxIcons(renderValue(suffix), suffix),
                         isMixed: Array.isArray(v)
                     });
                 }
