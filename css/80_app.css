@@ -1654,7 +1654,7 @@ a.hide-toggle {
 .form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 3px;
     margin-top: 3px;
     border-radius: 4px;
@@ -1696,7 +1696,7 @@ a.hide-toggle {
     font-style: italic;
 }
 
-.form-field-input-multicombo li.chip span {
+.form-field-input-multicombo li.chip > span {
     display: block;
     flex: 1 1 auto;
     overflow: hidden;
@@ -1766,6 +1766,17 @@ a.hide-toggle {
 .combobox-option .tag-value-icon {
     display: inline-block;
     width: 18px;
+}
+.form-field-input-multicombo li.chip .tag-value-icon {
+    margin-right: 8px;
+    margin-left: 2px;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-bottom: 2px;
+}
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .tag-value-icon {
+    margin-right: 8px;
+    margin-left: 2px;
 }
 
 

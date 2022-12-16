@@ -606,7 +606,7 @@ export function uiFieldCombo(field, context) {
                     return {
                         key: v,
                         value: displayValue(v),
-                        display: renderValue(v),
+                        display: addComboboxIcons(renderValue(v), v),
                         isMixed: !commonValues.includes(v)
                     };
                 });
