@@ -122,6 +122,7 @@
     "format": [
       ["neighbourhood"],
       ["street", "housenumber"],
+      ["housename"],
       ["postcode", "district", "city"]
     ]
   },
