@@ -696,14 +696,15 @@ export function uiFieldCombo(field, context) {
                 return displayValue(val);
             }).filter(Boolean);
 
-            var showsValue = !isMixed && tags[field.key] && !(field.type === 'typeCombo' && tags[field.key] === 'yes');
-            var isRawValue = showsValue && !stringsField.hasTextForStringId(`options.${tags[field.key]}`)
-                                        && !stringsField.hasTextForStringId(`options.${tags[field.key]}.title`);
-            var isKnownValue = showsValue && !isRawValue;
-
-            var isReadOnly = !_allowCustomValues || isKnownValue;
+            var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
+            var isRawValue = value => showsValue(value)
+                && !stringsField.hasTextForStringId(`options.${value}`)
+                && !stringsField.hasTextForStringId(`options.${value}.title`);
+            var isKnownValue = value => showsValue(value) && !isRawValue(value);
+            var isReadOnly = !_allowCustomValues;
 
             utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
+                .data([tags[field.key]])
                 .classed('raw-value', isRawValue)
                 .classed('known-value', isKnownValue)
                 .attr('readonly', isReadOnly ? 'readonly' : undefined)
@@ -712,7 +713,7 @@ export function uiFieldCombo(field, context) {
                 .classed('mixed', isMixed)
                 .on('keydown.deleteCapture', function(d3_event) {
                     if (isReadOnly &&
-                        isKnownValue &&
+                        isKnownValue(tags[field.key]) &&
                         (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
                         d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
 
@@ -724,6 +725,15 @@ export function uiFieldCombo(field, context) {
                         dispatch.call('change', this, t);
                     }
                 });
+
+            const refreshStyles = () => {
+                _input
+                    .data([tagValue(utilGetSetValue(_input))])
+                    .classed('raw-value', isRawValue)
+                    .classed('known-value', isKnownValue);
+            };
+            _input.on('input.refreshStyles', refreshStyles);
+            _combobox.on('update.refreshStyles', refreshStyles);
 
             if (!Array.isArray(tags[field.key])) {
                 updateIcon(tags[field.key]);
