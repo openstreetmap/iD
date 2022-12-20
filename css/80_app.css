@@ -1767,14 +1767,14 @@ a.hide-toggle {
     display: inline-block;
     width: 18px;
 }
-.form-field-input-multicombo li.chip .tag-value-icon {
+.form-field-input-multicombo li.chip .tag-value-icon .icon {
     margin-right: 8px;
     margin-left: 2px;
     display: inline-block;
     vertical-align: bottom;
     margin-bottom: 2px;
 }
-.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .tag-value-icon {
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .tag-value-icon .icon {
     margin-right: 8px;
     margin-left: 2px;
 }
