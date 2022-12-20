@@ -47,15 +47,15 @@ describe('iD.presetField', function() {
             allFields.preset = field;
 
             // mock localizer
-            sinon.spy(other, 't');
-            sinon.spy(field, 't');
+            sinon.spy(other.t, 'append');
+            sinon.spy(field.t, 'append');
             sinon.stub(other, 'hasTextForStringId').returns(true);
 
             var context = iD.coreContext().assetPath('../dist/').init();
             var uiField = iD.uiFieldCombo(field, context);
             uiField.tags({k: 'v'});
-            expect(field.t).not.to.have.been.called;
-            expect(other.t).to.have.been.called;
+            expect(field.t.append).not.to.have.been.called;
+            expect(other.t.append).to.have.been.called;
         });
     });
 });

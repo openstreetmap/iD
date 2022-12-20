@@ -149,7 +149,7 @@ export function uiFieldCombo(field, context) {
         var stringsField = field.resolveReference('stringsCrossReference');
         const labelId = getLabelId(stringsField, tval);
         if (stringsField.hasTextForStringId(labelId)) {
-            return stringsField.t(labelId, { default: tval });
+            return stringsField.t.append(labelId, { default: tval });
         }
 
         if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
