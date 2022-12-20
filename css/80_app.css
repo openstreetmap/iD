@@ -1739,7 +1739,9 @@ a.hide-toggle {
     width: auto;
 }
 
-.form-field-input-combo .tag-value-icon {
+.form-field-input-combo .tag-value-icon,
+.form-field-input-semicombo .input-wrap .tag-value-icon,
+.form-field-input-multicombo .input-wrap .tag-value-icon {
     display: inline-block;
     position: relative;
     height: 24px;
@@ -1750,7 +1752,9 @@ a.hide-toggle {
     z-index: 1;
     padding-left: 11px;
 }
-.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon {
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon,
+.ideditor[dir='rtl'] .form-field-input-semicombo .input-wrap .tag-value-icon,
+.ideditor[dir='rtl'] .form-field-input-multicombo .input-wrap .tag-value-icon  {
     margin-right: 0;
     margin-left: -30px;
     padding-left: 0;
@@ -1761,10 +1765,14 @@ a.hide-toggle {
     height: 17px;
     margin: auto;
 }
-.ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input {
+.ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input,
+.ideditor[dir='ltr'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
+.ideditor[dir='ltr'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {
     padding-left: 30px;
 }
-.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input {
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input,
+.ideditor[dir='rtl'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
+.ideditor[dir='rtl'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {
     padding-right: 30px;
 }
 .combobox-option .tag-value-icon {

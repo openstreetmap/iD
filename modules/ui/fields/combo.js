@@ -530,16 +530,21 @@ export function uiFieldCombo(field, context) {
     }
 
     function updateIcon(value) {
+        const key = field.type !== 'multiCombo' ? field.key : field.key.slice(0, -1);
         value = tagValue(value);
-        if (valueIcons[field.key]) {
-            _container.selectAll('.tag-value-icon').remove();
-            if (valueIcons[field.key].indexOf(value) !== -1) {
-                _container.selectAll('.tag-value-icon')
+        let container = _container;
+        if (field.type === 'multiCombo' || field.type === 'semiCombo') {
+            container = _container.select('.input-wrap');
+        }
+        if (valueIcons[key]) {
+            container.selectAll('.tag-value-icon').remove();
+            if (valueIcons[key].indexOf(value) !== -1) {
+                container.selectAll('.tag-value-icon')
                     .data([value])
                     .enter()
                     .insert('div', 'input')
                     .attr('class', 'tag-value-icon')
-                    .call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
+                    .call(svgIcon('#iD-' + key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
             }
         }
     }
@@ -696,7 +701,7 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'remove')
                 .text('×');
 
-            _input.data([tags[field.key]]);
+            updateIcon('');
         } else {
             var isMixed = Array.isArray(tags[field.key]);
 
@@ -744,6 +749,7 @@ export function uiFieldCombo(field, context) {
         };
         _input.on('input.refreshStyles', refreshStyles);
         _combobox.on('update.refreshStyles', refreshStyles);
+        refreshStyles();
     };
 
     function registerDragAndDrop(selection) {
