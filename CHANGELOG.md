@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
 * Fix corruption of (directional) `cycleway` tags when editing a multi-selection ([#9423])
 #### :hourglass: Performance
+* Speed up "outdated tags" validation by optimizing order of operations ([#9434], thanks [@Zaczero])
 #### :rocket: Presets
 * Clamp degree values in `direction` fields between 0 and 359 degrees ([#9386])
 * Disable increment/decrement buttons on number fields if the input value is not numeric or when there is a multi-selection with conflicting values
@@ -67,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9423]: https://github.com/openstreetmap/iD/pull/9423
 [@alanb43]: https://github.com/alanb43
 [@Rewinteer]: https://github.com/Rewinteer
+[@Zaczero]: https://github.com/Zaczero
 
 
 # 2.23.2
