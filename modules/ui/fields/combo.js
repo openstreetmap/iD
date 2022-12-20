@@ -548,6 +548,13 @@ export function uiFieldCombo(field, context) {
         _tags = tags;
         var stringsField = field.resolveReference('stringsCrossReference');
 
+        var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
+        var isRawValue = value => showsValue(value)
+            && !stringsField.hasTextForStringId(`options.${value}`)
+            && !stringsField.hasTextForStringId(`options.${value}.title`);
+        var isKnownValue = value => showsValue(value) && !isRawValue(value);
+        var isReadOnly = !_allowCustomValues;
+
         if (_isMulti || _isSemi) {
             _multiData = [];
 
@@ -689,19 +696,13 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'remove')
                 .text('×');
 
+            _input.data([tags[field.key]]);
         } else {
             var isMixed = Array.isArray(tags[field.key]);
 
             var mixedValues = isMixed && tags[field.key].map(function(val) {
                 return displayValue(val);
             }).filter(Boolean);
-
-            var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
-            var isRawValue = value => showsValue(value)
-                && !stringsField.hasTextForStringId(`options.${value}`)
-                && !stringsField.hasTextForStringId(`options.${value}.title`);
-            var isKnownValue = value => showsValue(value) && !isRawValue(value);
-            var isReadOnly = !_allowCustomValues;
 
             utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
                 .data([tags[field.key]])
@@ -726,15 +727,6 @@ export function uiFieldCombo(field, context) {
                     }
                 });
 
-            const refreshStyles = () => {
-                _input
-                    .data([tagValue(utilGetSetValue(_input))])
-                    .classed('raw-value', isRawValue)
-                    .classed('known-value', isKnownValue);
-            };
-            _input.on('input.refreshStyles', refreshStyles);
-            _combobox.on('update.refreshStyles', refreshStyles);
-
             if (!Array.isArray(tags[field.key])) {
                 updateIcon(tags[field.key]);
             }
@@ -743,6 +735,15 @@ export function uiFieldCombo(field, context) {
                 _lengthIndicator.update(tags[field.key]);
             }
         }
+
+        const refreshStyles = () => {
+            _input
+                .data([tagValue(utilGetSetValue(_input))])
+                .classed('raw-value', isRawValue)
+                .classed('known-value', isKnownValue);
+        };
+        _input.on('input.refreshStyles', refreshStyles);
+        _combobox.on('update.refreshStyles', refreshStyles);
     };
 
     function registerDragAndDrop(selection) {

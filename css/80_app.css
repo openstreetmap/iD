@@ -1636,10 +1636,14 @@ a.hide-toggle {
     display: none;
 }
 
-.form-field-input-combo input.raw-value {
+.form-field-input-combo input.raw-value,
+.form-field-input-semicombo input.raw-value,
+.form-field-input-multicombo input.raw-value {
     font-family: monospace;
 }
-.form-field-input-combo input.known-value {
+.form-field-input-combo input.known-value,
+.form-field-input-semicombo input.known-value,
+.form-field-input-multicombo input.known-value {
     color: #7092ff;
 }
 
