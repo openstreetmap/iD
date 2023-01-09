@@ -25,7 +25,12 @@ export { _mainPresetIndex as presetManager };
 //
 export function presetIndex() {
   const dispatch = d3_dispatch('favoritePreset', 'recentsChange');
+
+  // how many recents to store in-memory
   const MAXRECENTS = 30;
+
+  // how many recents to display during defaults() function call
+  const MAXRECENTS_DEFAULTS = 6;
 
   // seed the preset lists with geometry fallbacks
   const POINT = presetPreset('point', { name: 'Point', tags: {}, geometry: ['point', 'vertex'], matchScore: 0.1 } );
@@ -410,7 +415,7 @@ export function presetIndex() {
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     let recents = [];
     if (startWithRecents) {
-      recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
+      recents = _this.recent().matchGeometry(geometry).collection.slice(0, MAXRECENTS_DEFAULTS);
     }
 
     let defaults;
