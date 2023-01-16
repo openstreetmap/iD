@@ -66,6 +66,61 @@ export function uiFieldText(field, context) {
 
 
     function i(selection) {
+	function first_click(d3_event, d) {
+            d3_event.preventDefault();
+
+            // Set the click-held attribute so click_func runs
+            d3_event.target.setAttribute('click-held', '');
+            click_func(d3_event, d);
+        }
+
+        function stop_click(d3_event) {
+            d3_event.target.removeAttribute('click-held');
+        }
+
+        function click_func(d3_event, d) {
+            if (!d3_event.target.hasAttribute('click-held')) {
+                // This button has been clicked before but now we should stop the clicking
+                return;
+            }
+
+            // Repeat in 250 ms. If the mouse has left or stopped holding, we won't even get this far
+            setTimeout(function() { click_func(d3_event, d); }, 250);
+
+            // do nothing if this is a multi-selection with mixed values
+            var isMixed = Array.isArray(_tags[field.key]);
+            if (isMixed) return;
+
+            var raw_vals = input.node().value || '0';
+            var vals = raw_vals.split(';');
+            vals = vals.map(function(v) {
+                var num = Number(v);
+                if (isDirectionField) {
+                    const compassDir = cardinal[v.trim().toLowerCase()];
+                    if (compassDir !== undefined) {
+                        num = compassDir;
+                    }
+                }
+
+                if (!isFinite(num)) {
+                    // do nothing if the value is neither a number, nor a cardinal direction
+                    return v.trim();
+                }
+
+                num += d;
+                // clamp to 0..359 degree range if it's a direction field
+                // https://github.com/openstreetmap/iD/issues/9386
+                if (isDirectionField) {
+                    num = ((num % 360) + 360) % 360;
+                }
+                // make sure no extra decimals are introduced
+                const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
+                return clamped(num).toFixed(numDecimals);
+            });
+            input.node().value = vals.join(';');
+            change()();
+        }
+
         calcLocked();
         var isLocked = field.locked();
 
@@ -121,42 +176,9 @@ export function uiFieldText(field, context) {
                     return t(`inspector.${which}`);
                 })
                 .merge(buttons)
-                .on('click', function(d3_event, d) {
-                    d3_event.preventDefault();
+                .on('mousedown', first_click)
+                .on('mouseup mouseout', stop_click);
 
-                    // do nothing if this is a multi-selection with mixed values
-                    var isMixed = Array.isArray(_tags[field.key]);
-                    if (isMixed) return;
-
-                    var raw_vals = input.node().value || '0';
-                    var vals = raw_vals.split(';');
-                    vals = vals.map(function(v) {
-                        var num = Number(v);
-                        if (isDirectionField) {
-                            const compassDir = cardinal[v.trim().toLowerCase()];
-                            if (compassDir !== undefined) {
-                                num = compassDir;
-                            }
-                        }
-
-                        if (!isFinite(num)) {
-                            // do nothing if the value is neither a number, nor a cardinal direction
-                            return v.trim();
-                        }
-
-                        num += d;
-                        // clamp to 0..359 degree range if it's a direction field
-                        // https://github.com/openstreetmap/iD/issues/9386
-                        if (isDirectionField) {
-                            num = ((num % 360) + 360) % 360;
-                        }
-                        // make sure no extra decimals are introduced
-                        const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
-                        return clamped(num).toFixed(numDecimals);
-                    });
-                    input.node().value = vals.join(';');
-                    change()();
-                });
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
