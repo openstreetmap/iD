@@ -16,7 +16,7 @@
     "build": "run-s build:css build:data build:js",
     "build:css": "node scripts/build_css.js",
     "build:data": "shx mkdir -p dist/data && node scripts/build_data.js",
-    "build:stats": "esbuild-visualizer --metadata dist/esbuild.json --exclude *.png --filename docs/statistics.html",
+    "build:stats": "node config/esbuild.config.mjs --stats && esbuild-visualizer --metadata dist/esbuild.json --exclude *.png --filename docs/statistics.html && shx rm dist/esbuild.json",
     "build:js": "node config/esbuild.config.mjs",
     "build:js:watch": "node config/esbuild.config.mjs --watch",
     "clean": "shx rm -f dist/esbuild.json dist/*.js dist/*.map dist/*.css dist/img/*.svg",
