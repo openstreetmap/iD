@@ -353,7 +353,8 @@ export function uiFieldCombo(field, context) {
             if (_isMulti) {
                 vals = [tagValue(utilGetSetValue(_input))];
             } else if (_isSemi) {
-                val = tagValue(utilGetSetValue(_input).replace(/,/g, ';')) || '';
+                val = tagValue(utilGetSetValue(_input)) || '';
+                val = val.replace(/,/g, ';');
                 vals = val.split(';');
             }
             vals = vals.filter(Boolean);

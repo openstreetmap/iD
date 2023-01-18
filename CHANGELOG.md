@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
 * Fix corruption of (directional) `cycleway` tags when editing a multi-selection ([#9423])
+* Fix unintended splitting of tag values in `semiCombo` fields into two values when the description contains a comma ([#9471])
 #### :hourglass: Performance
 * Speed up "outdated tags" validation by optimizing order of operations ([#9434], thanks [@Zaczero])
 #### :rocket: Presets
@@ -67,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9413]: https://github.com/openstreetmap/iD/pull/9413
 [#9423]: https://github.com/openstreetmap/iD/pull/9423
 [#9434]: https://github.com/openstreetmap/iD/pull/9434
+[#9471]: https://github.com/openstreetmap/iD/issues/9471
 [@alanb43]: https://github.com/alanb43
 [@Rewinteer]: https://github.com/Rewinteer
 [@Zaczero]: https://github.com/Zaczero
