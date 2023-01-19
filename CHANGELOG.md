@@ -4107,7 +4107,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 _Activate the OpenStreetMap notes layer by opening the Map Data pane (shortcut <kbd>F</kbd>)_
 * :wrench: We've added a new Detach Node operation to remove a tagged node from a way. Thanks [@Psigio]!<br/>
 _With a node selected, use the right-click edit menu to find the Detach command (shortcut <kbd>E</kbd>)_
-* :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizeable by dragging any of its edges.  Thanks [@kratico]!<br/>
+* :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizable by dragging any of its edges.  Thanks [@kratico]!<br/>
 _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and resizing the viewer._
 
 [@thomas-hervey]: https://github.com/thomas-hervey
@@ -5975,7 +5975,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 [#3975]: https://github.com/openstreetmap/iD/issues/3975
 
 #### :mortar_board: Walkthrough / Help - major updates! ([#3921])
-* Add training for modifiying geometry, moving nodes, reshaping ways ([#2381])
+* Add training for modifying geometry, moving nodes, reshaping ways ([#2381])
 * Add training for new right-click context menu
 * Allow user to freeform play and explore ([#3067])
 * Refresh walkthrough data with POIs, Buildings, Addresses ([#3068])
