@@ -35,6 +35,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased
+
+#### :bug: Bugfixes
+* Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
+
+[#9425]: https://github.com/openstreetmap/iD/issues/9425
+
+
 # 2.24.0
 ##### 2023-Jan-19
 
