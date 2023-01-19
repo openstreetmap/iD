@@ -30,7 +30,7 @@
     ]
   },
   {
-    "countryCodes": ["at", "ch", "de", "si", "pl"],
+    "countryCodes": ["at", "bg", "ch", "de", "si", "pl"],
     "format": [
       ["street", "housenumber"],
       ["postcode", "city"]
