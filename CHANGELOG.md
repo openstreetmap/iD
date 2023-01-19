@@ -35,7 +35,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# 2.4.0
+# 2.24.0
 ##### 2023-Jan-19
 
 #### :tada: New Features
