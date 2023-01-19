@@ -35,11 +35,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased
+# 2.4.0
+##### 2023-Jan-19
 
 #### :tada: New Features
 * Show a _remaining input length_ indicator and a warning if the maximum for OSM tags (typically, 255 characters) is exceeded ([#9390], [#9392] thanks [@alanb43], [#7943], [#9374])
-#### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
 * Add support value `uncontrolled` when using _connect features_ validation fix on crossings with `crossing=uncontrolled` ([#9443], thanks [@arch0345])
 #### :bug: Bugfixes
