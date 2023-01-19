@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show a _remaining input length_ indicator and a warning if the maximum for OSM tags (typically, 255 characters) is exceeded ([#9390], [#9392] thanks [@alanb43], [#7943], [#9374])
 #### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
+* Add support value `uncontrolled` when using _connect features_ validation fix on crossings with `crossing=uncontrolled` ([#9443], thanks [@arch0345])
 #### :bug: Bugfixes
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
 * Fix corruption of (directional) `cycleway` tags when editing a multi-selection ([#9423])
@@ -71,6 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9413]: https://github.com/openstreetmap/iD/pull/9413
 [#9423]: https://github.com/openstreetmap/iD/pull/9423
 [#9434]: https://github.com/openstreetmap/iD/pull/9434
+[#9443]: https://github.com/openstreetmap/iD/pull/9443
 [#9446]: https://github.com/openstreetmap/iD/pull/9446
 [#9471]: https://github.com/openstreetmap/iD/issues/9471
 [#9458]: https://github.com/openstreetmap/iD/pull/9458
