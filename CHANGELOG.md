@@ -89,6 +89,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@Zaczero]: https://github.com/Zaczero
 [@Dimitar5555]: https://github.com/Dimitar5555
 [@furkanmutlu-tomtom]: https://github.com/furkanmutlu-tomtom
+[@arch0345]: https://github.com/arch0345
 
 
 # 2.23.2
