@@ -4,7 +4,7 @@ import parseVersion from 'vparse';
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
 
-import { nsiCdnUrl } from '../../config/id.js';
+import { nsiCdnUrlTemplate } from '../../config/id.js';
 
 // Make very sure this resolves to iD's `package.json`
 // If you mess up the `../`s, the resolver may import another random package.json from somewhere else.
@@ -50,7 +50,7 @@ function setNsiSources() {
   const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
   const v = parseVersion(nsiVersion);
   const vMinor = `${v.major}.${v.minor}`;
-  const cdn = nsiCdnUrl.replace('{version}', vMinor);
+  const cdn = nsiCdnUrlTemplate.replace('{version}', vMinor);
   const sources = {
     'nsi_data': cdn + 'dist/nsi.min.json',
     'nsi_dissolved': cdn + 'dist/dissolved.min.json',

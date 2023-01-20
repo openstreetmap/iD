@@ -1,8 +1,8 @@
 // cdns for external data packages
-const presetsCdnUrl = 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
-const ociCdnUrl = 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
-const wmfSitematrixCdnUrl = 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
-const nsiCdnUrl = 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
+const presetsCdnUrlTemplate = 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
+const ociCdnUrlTemplate = 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
+const wmfSitematrixCdnUrlTemplate = 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
+const nsiCdnUrlTemplate = 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
 
 // api urls and settings
 const osmApiConnections = [
@@ -20,10 +20,10 @@ const taginfoApiUrl = 'https://taginfo.openstreetmap.org/api/4/';
 const nominatimApiUrl = 'https://nominatim.openstreetmap.org/';
 
 export {
-  presetsCdnUrl,
-  ociCdnUrl,
-  wmfSitematrixCdnUrl,
-  nsiCdnUrl,
+  presetsCdnUrlTemplate,
+  ociCdnUrlTemplate,
+  wmfSitematrixCdnUrlTemplate,
+  nsiCdnUrlTemplate,
   osmApiConnections,
   taginfoApiUrl,
   nominatimApiUrl,

@@ -4,7 +4,8 @@ import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';
 import { utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
-import { presetsCdnUrl } from '../../config/id.js';
+import { presetsCdnUrlTemplate } from '../../config/id.js';
+import packageJSON from '../../package.json';
 
 let _mainLocalizer = coreLocalizer(); // singleton
 let _t = _mainLocalizer.t;
@@ -88,6 +89,8 @@ export function coreLocalizer() {
             'locales'     // load the list of supported locales
         ];
 
+        const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
+        const presetsCdnUrl = presetsCdnUrlTemplate.replace('{presets_version}', presetsVersion);
         const localeDirs = {
             general: 'locales',
             tagging: presetsCdnUrl + 'dist/translations'

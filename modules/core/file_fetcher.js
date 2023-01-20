@@ -1,5 +1,5 @@
 import parseVersion from 'vparse';
-import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
+import { presetsCdnUrlTemplate, ociCdnUrlTemplate, wmfSitematrixCdnUrlTemplate } from '../../config/id.js';
 
 import packageJSON from '../../package.json';
 
@@ -11,10 +11,15 @@ export { _mainFileFetcher as fileFetcher };
 // coreFileFetcher asynchronously fetches data from JSON files
 //
 export function coreFileFetcher() {
+  const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
+  const presetsCdnUrl = presetsCdnUrlTemplate.replace('{presets_version}', presetsVersion);
+
   const ociVersion = packageJSON.dependencies['osm-community-index'] || packageJSON.devDependencies['osm-community-index'];
   const v = parseVersion(ociVersion);
   const ociVersionMinor = `${v.major}.${v.minor}`;
-  const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
+  const ociCdnUrl = ociCdnUrlTemplate.replace('{version}', ociVersionMinor);
+
+  const wmfSitematrixCdnUrl = wmfSitematrixCdnUrlTemplate.replace('{version}', '0.1');
 
   let _this = {};
   let _inflight = {};
@@ -29,23 +34,22 @@ export function coreFileFetcher() {
     'qa_data': 'data/qa_data.min.json',
     'shortcuts': 'data/shortcuts.min.json',
     'territory_languages': 'data/territory_languages.min.json',
-    'oci_defaults': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/defaults.min.json',
-    'oci_features': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/featureCollection.min.json',
-    'oci_resources': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/resources.min.json',
-    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsVersion) + 'package.json',
+    'oci_defaults': ociCdnUrl + 'dist/defaults.min.json',
+    'oci_features': ociCdnUrl + 'dist/featureCollection.min.json',
+    'oci_resources': ociCdnUrl + 'dist/resources.min.json',
+    'presets_package': presetsCdnUrl + 'package.json',
     'deprecated': presetsCdnUrl + 'dist/deprecated.min.json',
     'discarded': presetsCdnUrl + 'dist/discarded.min.json',
     'preset_categories': presetsCdnUrl + 'dist/preset_categories.min.json',
     'preset_defaults': presetsCdnUrl + 'dist/preset_defaults.min.json',
     'preset_fields': presetsCdnUrl + 'dist/fields.min.json',
     'preset_presets': presetsCdnUrl + 'dist/presets.min.json',
-    'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.1') + 'wikipedia.min.json'
+    'wmf_sitematrix': wmfSitematrixCdnUrl + 'wikipedia.min.json'
   };
 
   let _cachedData = {};
   // expose the cache; useful for tests
   _this.cache = () => _cachedData;
-
 
   // Returns a Promise to fetch data
   // (resolved with the data if we have it already)
