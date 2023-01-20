@@ -1,5 +1,6 @@
 import parseVersion from 'vparse';
 import { presetsCdnUrlTemplate, ociCdnUrlTemplate, wmfSitematrixCdnUrlTemplate } from '../../config/id.js';
+import { utilStringQs } from '../util';
 
 import packageJSON from '../../package.json';
 
@@ -12,7 +13,13 @@ export { _mainFileFetcher as fileFetcher };
 //
 export function coreFileFetcher() {
   const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
-  const presetsCdnUrl = presetsCdnUrlTemplate.replace('{presets_version}', presetsVersion);
+  let presetsCdnUrl = presetsCdnUrlTemplate.replace('{presets_version}', presetsVersion);
+  // Allow to overwrite the preset source to enable testing PRs for the id-editor-presets repo.
+  const presetUrlOverwrite = utilStringQs(window.location.hash)?.presetUrlOverwrote;
+  if (presetUrlOverwrite) {
+    presetsCdnUrl = presetUrlOverwrite;
+    console.info('`presetUrlOverwrite` applied. Presets are fetched from', presetsCdnUrl);
+  }
 
   const ociVersion = packageJSON.dependencies['osm-community-index'] || packageJSON.devDependencies['osm-community-index'];
   const v = parseVersion(ociVersion);

@@ -62,6 +62,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationError=crossing_ways/highway*,crossing_ways/tunnel*`
 * __`walkthrough=true`__ - Start the walkthrough automatically
+* __`presetUrlOverwrite=https://example.com`__ - Overwrite the source for presets. Default is the [id-tagging-schema](https://github.com/openstreetmap/id-tagging-schema) release on jsdelivery ([Code](https://github.com/openstreetmap/iD/blob/develop/config/id.js#L2)). The URL has to serve the root of the id-tagging-schema repo after running `npm run dist`.
 
 ##### iD on openstreetmap.org (Rails Port)
 
