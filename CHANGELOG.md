@@ -39,6 +39,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :bug: Bugfixes
 * Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
+#### :hammer: Development
+* `npm start` runs in _watch_ (i.e. `npm run start:watch`) mode by default (to start the dev server in _single build_ mode one can now use `npm run start:single-build`)
 
 [#9425]: https://github.com/openstreetmap/iD/issues/9425
 
