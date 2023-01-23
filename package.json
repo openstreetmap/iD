@@ -30,6 +30,7 @@
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"maki-%s\" --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
     "dist:svg:mapillary:signs": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-sprite.svg node_modules/mapillary_sprite_source/package_signs/*.svg",
     "dist:svg:mapillary:objects": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/mapillary-object-sprite.svg node_modules/mapillary_sprite_source/package_objects/*.svg",
+    "dist:svg:roentgen": "svg-sprite --shape-id-generator \"roentgen-%s\" --shape-dim-width 16 --shape-dim-height 16 --symbol --symbol-dest . --symbol-sprite dist/img/roentgen-sprite.svg svg/roentgen/*.svg",
     "dist:svg:temaki": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"temaki-%s\" --symbol-sprite dist/img/temaki-sprite.svg node_modules/@ideditor/temaki/icons/*.svg",
     "imagery": "node scripts/update_imagery.js",
     "lint": "eslint scripts test/spec modules",

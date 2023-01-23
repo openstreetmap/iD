@@ -37,6 +37,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased
 
+#### :mega: Release Highlights
+* Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set) for presets, etc.
 #### :bug: Bugfixes
 * Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
 #### :hammer: Development

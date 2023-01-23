@@ -1468,6 +1468,7 @@ en:
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
+      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Map Machine](https://github.com/enzet/map-machine) (CC BY 4.0)."
       open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
