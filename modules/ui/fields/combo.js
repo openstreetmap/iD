@@ -22,23 +22,6 @@ export {
     uiFieldCombo as uiFieldTypeCombo
 };
 
-const valueIcons = {
-    'crossing:markings': [
-        'dashes',
-        'dots',
-        'ladder:paired',
-        'ladder:skewed',
-        'ladder',
-        'lines:paired',
-        'lines',
-        'surface',
-        'zebra:bicolour',
-        'zebra:double',
-        'zebra:paired',
-        'zebra',
-    ]
-};
-
 export function uiFieldCombo(field, context) {
     var dispatch = d3_dispatch('change');
     var _isMulti = (field.type === 'multiCombo' || field.type === 'manyCombo');
@@ -300,13 +283,14 @@ export function uiFieldCombo(field, context) {
 
     // adds icons to tag values which have one
     function addComboboxIcons(disp, value) {
-        if (valueIcons[field.key]) {
+        const iconsField = field.resolveReference('iconsCrossReference');
+        if (iconsField.icons) {
             return function(selection) {
                 var span = selection
                     .insert('span', ':first-child')
                     .attr('class', 'tag-value-icon');
-                if (valueIcons[field.key].indexOf(value) !== -1) {
-                    span.call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
+                if (iconsField.icons[value]) {
+                    span.call(svgIcon(`#${iconsField.icons[value]}`));
                 }
                 disp.call(this, selection);
             };
@@ -531,15 +515,16 @@ export function uiFieldCombo(field, context) {
 
     function updateIcon(value) {
         value = tagValue(value);
-        if (valueIcons[field.key]) {
+        const iconsField = field.resolveReference('iconsCrossReference');
+        if (iconsField.icons) {
             _container.selectAll('.tag-value-icon').remove();
-            if (valueIcons[field.key].indexOf(value) !== -1) {
+            if (iconsField.icons[value]) {
                 _container.selectAll('.tag-value-icon')
                     .data([value])
                     .enter()
                     .insert('div', 'input')
                     .attr('class', 'tag-value-icon')
-                    .call(svgIcon('#iD-' + field.key.replace(/:/g, '_') + '-' + value.replace(/:/g, '_')));
+                    .call(svgIcon(`#${iconsField.icons[value]}`));
             }
         }
     }
