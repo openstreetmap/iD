@@ -13,6 +13,15 @@ export function uiFieldDirectionalCombo(field, context) {
 
     var _combos = {};
 
+    // fallback for schema-builder v5's cycleway field type: can be removed eventually
+    if (field.type === 'cycleway') {
+        field = {
+            ...field,
+            key: field.keys[0],
+            keys: field.keys.slice(1)
+        };
+    }
+
     function directionalCombo(selection) {
 
         function stripcolon(s) {
@@ -37,10 +46,8 @@ export function uiFieldDirectionalCombo(field, context) {
             .attr('class', 'rows')
             .merge(div);
 
-        var keys = field.keys.slice(1);
-
         items = div.selectAll('li')
-            .data(keys);
+            .data(field.keys);
 
         var enter = items.enter()
             .append('li')
@@ -77,8 +84,8 @@ export function uiFieldDirectionalCombo(field, context) {
 
 
     function change(key, newValue) {
-        const commonKey = field.keys[0];
-        const otherKey = key === field.keys[1] ? field.keys[2] : field.keys[1];
+        const commonKey = field.key;
+        const otherKey = key === field.keys[0] ? field.keys[1] : field.keys[0];
 
         dispatch.call('change', this, tags => {
             const otherValue = tags[otherKey] || tags[commonKey];
@@ -101,7 +108,7 @@ export function uiFieldDirectionalCombo(field, context) {
     directionalCombo.tags = function(tags) {
         _tags = tags;
 
-        const commonKey = field.keys[0];
+        const commonKey = field.key;
         for (let key in _combos) {
             const uniqueValues = [... new Set([]
                 .concat(_tags[commonKey])
