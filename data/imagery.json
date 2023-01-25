@@ -62437,7 +62437,7 @@
     "id": "Mapbox",
     "name": "Mapbox Satellite",
     "type": "tms",
-    "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/mapbox.satellite/{zoom}/{x}/{y}@2x.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJja2w5YWt5bnYwNjZmMnFwZjhtbHk1MnA1In0.eq2aumBK6JuRoIuBMm6Gew",
+    "template": "https://{switch:a,b,c,d}.tiles.mapbox.com/v4/mapbox.satellite/{zoom}/{x}/{y}@2x.jpg?access_token=pk.eyJ1Ijoib3BlbnN0cmVldG1hcCIsImEiOiJjbGRiamRwa2UwMTN4M25yeHc3Yzh5bTVsIn0.9wwMW_915dmCXadG-qNj0w",
     "tileSize": 512,
     "zoomExtent": [0, 22],
     "terms_url": "https://www.mapbox.com/about/maps",
