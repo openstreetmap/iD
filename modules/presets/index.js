@@ -305,6 +305,7 @@ export function presetIndex() {
       footway: true,
       railway: true,
       junction: true,
+      traffic_calming: true,
       type: true
     };
     let areaKeys = {};

@@ -57,7 +57,7 @@ $  git push origin -f release vA.B.C
 $  git checkout develop
 ```
 
-- Increment version number and add `-dev` suffix in `modules/core/context.js` and `package.json`, e.g. `2.18.5-dev`
+- Increment version number and add `-dev` suffix in `package.json`, e.g. `2.25.0-dev`
 
 ```bash
 $  git add . && git commit -m 'Set development version number'

@@ -1753,19 +1753,19 @@ a.hide-toggle {
     padding-right: 11px;
 }
 .tag-value-icon .icon {
-    width: 11px;
-    height: 17px;
+    width: 21px;
+    height: 21px;
     margin: auto;
 }
 .ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input {
-    padding-left: 30px;
+    padding-left: 40px;
 }
 .ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input {
-    padding-right: 30px;
+    padding-right: 40px;
 }
 .combobox-option .tag-value-icon {
     display: inline-block;
-    width: 18px;
+    width: 28px;
 }
 
 

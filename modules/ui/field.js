@@ -41,9 +41,6 @@ export function uiField(context, presetField, entityIDs, options) {
         .title(() => t.append('inspector.lock.suggestion', { label: field.title }))
         .placement('bottom');
 
-
-    field.keys = field.keys || [field.key];
-
     // only create the fields that are actually being shown
     if (_show && !field.impl) {
         createField();
@@ -67,12 +64,23 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
+    function allKeys() {
+        let keys = field.keys || [field.key];
+        if (field.type === 'directionalCombo' && field.key) {
+            // directionalCombo fields can have an additional key describing the for
+            // cases where both directions share a "common" value.
+            keys = keys.concat(field.key);
+        }
+        return keys;
+    }
+
+
     function isModified() {
         if (!entityIDs || !entityIDs.length) return false;
         return entityIDs.some(function(entityID) {
             var original = context.graph().base().entities[entityID];
             var latest = context.graph().entity(entityID);
-            return field.keys.some(function(key) {
+            return allKeys().some(function(key) {
                 return original ? latest.tags[key] !== original.tags[key] : latest.tags[key];
             });
         });
@@ -80,7 +88,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
 
     function tagsContainFieldKey() {
-        return field.keys.some(function(key) {
+        return allKeys().some(function(key) {
             if (field.type === 'multiCombo') {
                 for (var tagKey in _tags) {
                     if (tagKey.indexOf(key) === 0) {
@@ -99,7 +107,7 @@ export function uiField(context, presetField, entityIDs, options) {
         d3_event.preventDefault();
         if (!entityIDs || _locked) return;
 
-        dispatch.call('revert', d, d.keys);
+        dispatch.call('revert', d, allKeys());
     }
 
 
@@ -109,7 +117,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (_locked) return;
 
         var t = {};
-        d.keys.forEach(function(key) {
+        allKeys().forEach(function(key) {
             t[key] = undefined;
         });
 

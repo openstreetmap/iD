@@ -214,6 +214,11 @@ describe('iD.validations.crossing_ways', function () {
     });
 
     it('flags road crossing marked crosswalk', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'uncontrolled' });
+        verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'uncontrolled' });
+    });
+
+    it('flags road crossing marked crosswalk (alternative tagging)', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'marked' });
         verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'marked' });
     });

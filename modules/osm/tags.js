@@ -60,6 +60,9 @@ export var osmAreaKeysExceptions = {
         turntable: true,
         wash: true
     },
+    traffic_calming: {
+        island: true
+    },
     waterway: {
         dam: true
     }
