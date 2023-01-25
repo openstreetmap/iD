@@ -47,6 +47,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9425]: https://github.com/openstreetmap/iD/issues/9425
 
 
+# 2.24.1
+##### 2023-Jan-25
+
+* Rotate Mapbox Satellite imagery access token
+
+
 # 2.24.0
 ##### 2023-Jan-19
 
