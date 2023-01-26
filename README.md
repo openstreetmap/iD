@@ -85,6 +85,7 @@ iD also bundles portions of the following open source software.
 * [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
 * [Maki (CC0 1.0)](https://github.com/mapbox/maki)
 * [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
+* [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
 * [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
 * [iD Tagging Schema (ISC)](https://github.com/openstreetmap/id-tagging-schema)
 * [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)
