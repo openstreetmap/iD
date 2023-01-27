@@ -6,10 +6,11 @@ import * as countryCoder from '@ideditor/country-coder';
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
 import { uiLengthIndicator } from '..';
+import { uiTooltip } from '../tooltip';
 
 export {
     uiFieldText as uiFieldColour,
@@ -208,38 +209,44 @@ export function uiFieldText(field, context) {
             input.attr('type', 'text');
 
             updateColourPreview();
+        } else if (field.type === 'date') {
+            input.attr('type', 'text');
+
+            updateDateField();
         }
     }
 
-    function isColourValid(colour) {
-        if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
-            // OSM only supports hex or named colors
-            return false;
-        } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
-            // see https://stackoverflow.com/a/68217760/1627467
-            return false;
-        }
-        return true;
-    }
+
     function updateColourPreview() {
+        function isColourValid(colour) {
+            if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
+                // OSM only supports hex or named colors
+                return false;
+            } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
+                // see https://stackoverflow.com/a/68217760/1627467
+                return false;
+            }
+            return true;
+        }
         wrap.selectAll('.colour-preview')
             .remove();
 
         const colour = utilGetSetValue(input);
 
-        if (!isColourValid(colour) && colour !== '') return;
+        if (!isColourValid(colour) && colour !== '') {
+            wrap.selectAll('input.colour-selector').remove();
+            wrap.selectAll('.form-field-button').remove();
+            return;
+        }
 
         var colourSelector = wrap.selectAll('.colour-selector')
             .data([0]);
-        outlinkButton = wrap.selectAll('.colour-preview')
-            .data([colour]);
 
         colourSelector
             .enter()
             .append('input')
             .attr('type', 'color')
-            .attr('class', 'form-field-button colour-selector')
-            .attr('value', colour)
+            .attr('class', 'colour-selector')
             .on('input', _debounce(function(d3_event) {
                 d3_event.preventDefault();
                 var colour = this.value;
@@ -248,8 +255,12 @@ export function uiFieldText(field, context) {
                 change()();
                 updateColourPreview();
             }, 100));
+        wrap.selectAll('input.colour-selector')
+            .attr('value', colour);
 
-        outlinkButton = outlinkButton
+        var chooserButton = wrap.selectAll('.colour-preview')
+            .data([colour]);
+        chooserButton = chooserButton
             .enter()
             .append('div')
             .attr('class', 'form-field-button colour-preview')
@@ -257,12 +268,83 @@ export function uiFieldText(field, context) {
             .style('background-color', d => d)
             .attr('class', 'colour-box');
         if (colour === '') {
-            outlinkButton = outlinkButton
+            chooserButton = chooserButton
                 .call(svgIcon('#iD-icon-edit'));
         }
-        outlinkButton
-            .on('click', () => wrap.select('.colour-selector').node().click())
-            .merge(outlinkButton);
+        chooserButton
+            .on('click', () => wrap.select('.colour-selector').node().showPicker());
+    }
+
+
+    function updateDateField() {
+        function isDateValid(date) {
+            return date.match(/^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$/);
+        }
+        wrap.selectAll('.date-preview') // todo: rename
+            .remove();
+
+        const date = utilGetSetValue(input);
+
+        const now = new Date();
+        const today = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+        if (field.key === 'check_date' && date !== today) {
+            wrap.selectAll('.date-set-today')
+                .data([0])
+                .enter()
+                .append('button')
+                .attr('class', 'form-field-button date-set-today')
+                .call(svgIcon('#fas-rotate'))
+                .call(uiTooltip().title(() => t.append('inspector.set_today')))
+                .on('click', () => {
+                    utilGetSetValue(input, today);
+                    change()();
+                    updateDateField();
+                });
+        } else {
+            wrap.selectAll('.date-set-today').remove();
+        }
+
+        if (!isDateValid(date) && date !== '') {
+            wrap.selectAll('input.date-selector').remove();
+            wrap.selectAll('.date-calendar').remove();
+            return;
+        }
+
+        if (utilDetect().browser !== 'Safari') {
+            console.log(utilDetect());
+            // opening of the calendar pick is not yet supported in safari <= 16
+            // https://caniuse.com/mdn-api_htmlinputelement_showpicker_date_input
+
+            var dateSelector = wrap.selectAll('.date-selector')
+                .data([0]);
+
+            dateSelector
+                .enter()
+                .append('input')
+                .attr('type', 'date')
+                .attr('class', 'date-selector')
+                .on('input', _debounce(function(d3_event) {
+                    d3_event.preventDefault();
+                    var date = this.value;
+                    if (!isDateValid(date)) return;
+                    utilGetSetValue(input, this.value);
+                    change()();
+                    updateDateField();
+                }, 100));
+            wrap.selectAll('input.date-selector')
+                .attr('value', date);
+
+            var calendarButton = wrap.selectAll('.date-calendar')
+                .data([date]);
+            calendarButton = calendarButton
+                .enter()
+                .append('button')
+                .attr('class', 'form-field-button date-calendar')
+                .call(svgIcon('#fas-calendar-days'));
+
+            calendarButton
+                .on('click', () => wrap.select('.date-selector').node().showPicker());
+        }
     }
 
 
@@ -362,7 +444,9 @@ export function uiFieldText(field, context) {
 
         if (field.type === 'tel') updatePhonePlaceholder();
 
-        if (field.key.split(':').includes('colour')) updateColourPreview();
+        if (field.type === 'colour') updateColourPreview();
+
+        if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
             var disabled = !validIdentifierValueForLink();

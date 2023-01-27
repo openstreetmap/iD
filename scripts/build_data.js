@@ -64,7 +64,9 @@ function buildData() {
     'fas-i-cursor',
     'fas-lock',
     'fas-th-list',
-    'fas-user-cog'
+    'fas-user-cog',
+    'fas-calendar-days',
+    'fas-rotate'
   ]);
   // add icons for QA integrations
   readQAIssueIcons(faIcons);

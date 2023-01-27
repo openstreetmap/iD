@@ -784,6 +784,7 @@ en:
       # abbreviation of inches
       inch: in
     max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
+    set_today: "Sets the value to today."
   background:
     title: Background
     description: Background Settings

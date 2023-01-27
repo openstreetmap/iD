@@ -1536,7 +1536,11 @@ a.hide-toggle {
         border-color: #f1f1f1;
     }
 }
-.form-field-button.colour-selector {
+input.colour-selector {
+    visibility: hidden;
+    position: absolute;
+}
+input.date-selector {
     visibility: hidden;
     position: absolute;
 }
