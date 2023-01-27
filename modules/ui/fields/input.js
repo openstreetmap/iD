@@ -285,7 +285,7 @@ export function uiFieldText(field, context) {
 
         const now = new Date();
         const today = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().split('T')[0];
-        if (field.key === 'check_date' && date !== today) {
+        if ((field.key === 'check_date' || field.key === 'survey:date') && date !== today) {
             wrap.selectAll('.date-set-today')
                 .data([0])
                 .enter()
