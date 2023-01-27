@@ -280,8 +280,6 @@ export function uiFieldText(field, context) {
         function isDateValid(date) {
             return date.match(/^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$/);
         }
-        wrap.selectAll('.date-preview') // todo: rename
-            .remove();
 
         const date = utilGetSetValue(input);
 
@@ -311,7 +309,6 @@ export function uiFieldText(field, context) {
         }
 
         if (utilDetect().browser !== 'Safari') {
-            console.log(utilDetect());
             // opening of the calendar pick is not yet supported in safari <= 16
             // https://caniuse.com/mdn-api_htmlinputelement_showpicker_date_input
 
