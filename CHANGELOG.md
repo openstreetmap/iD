@@ -41,10 +41,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set) for presets, etc.
 #### :bug: Bugfixes
 * Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
+#### :rocket: Presets
+* Upgrade to tagging schema v6 ([#9477]):
+  * Add new `date` field for tags like `check_date`
+  * Add [Röntgen icons set](https://wiki.openstreetmap.org/wiki/R%C3%B6ntgen)
+  * Combo fields can now specify arbitrary icons for individual tag values
 #### :hammer: Development
 * `npm start` runs in _watch_ (i.e. `npm run start:watch`) mode by default (to start the dev server in _single build_ mode one can now use `npm run start:single-build`)
 
 [#9425]: https://github.com/openstreetmap/iD/issues/9425
+[#9477]: https://github.com/openstreetmap/iD/issues/9477
 
 
 # 2.24.1
