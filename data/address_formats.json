@@ -178,5 +178,13 @@
       "state": 0.4,
       "postcode": 0.2
     }
+  },
+  {
+    "countryCodes": ["in"],
+    "format": [
+      ["housenumber", "street"],
+      ["city", "postcode"],
+      ["district"]
+    ]
   }
 ]
