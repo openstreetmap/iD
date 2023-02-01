@@ -76,11 +76,11 @@ export function osmTagSuggestingArea(tags) {
     var returnTags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
-        if (key in osmAreaKeys && !(tags[key] in osmAreaKeys[key])) {
+        if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
         }
-        if (key in osmAreaKeysExceptions && tags[key] in osmAreaKeysExceptions[key]) {
+        if (key in osmAreaKeysExceptions && tags[realKey] in osmAreaKeysExceptions[key]) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
         }
