@@ -152,6 +152,8 @@ export var osmOneWayTags = {
         'yes': true
     },
     'seamark:type': {
+        'two-way_route': true,
+        'recommended_traffic_lane': true,
         'separation_lane': true,
         'separation_roundabout': true
     },
@@ -160,7 +162,9 @@ export var osmOneWayTags = {
         'ditch': true,
         'drain': true,
         'fish_pass': true,
+        'pressurised': true,
         'river': true,
+        'spillway': true,
         'stream': true,
         'tidal_channel': true
     }
