@@ -35,10 +35,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.24.2
+##### 2023-Feb-09
+
+* Rotate _Maxar Premium_ imagery access token
+
+
 # 2.24.1
 ##### 2023-Jan-25
 
-* Rotate Mapbox Satellite imagery access token
+* Rotate _Mapbox Satellite_ imagery access token
 
 
 # 2.24.0

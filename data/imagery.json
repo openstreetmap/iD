@@ -63303,7 +63303,7 @@
     "id": "Maxar-Premium",
     "name": "Maxar Premium Imagery",
     "type": "tms",
-    "template": "7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f015cf9dd7a76f004360017065667dc1cfe028f1332689e2d001bd06d4ebf019f829f3aac2",
+    "template": "7586487389962e3f6e31ab2ed8ca321f2f3fe2cf87f1dedce8fc918b4692efd86fcd816ab8a35303effb1be9abe39b1cce3fe6db2c740044364ae68560822c88373d2c784325baf4e1fa007c6dbedab4cea3fa0dd86ee0ae4feeef032d33dcac28e4b16c90d55a42087c6b66526423ea1b4cc7e63c613940eb1c60f48270060bf41c5fcb6a628985ebe6801e9e71f0429fc68cf06d571460537465377dc1cfe12ff133738be4d00ab302d1e6fe1cf827f3a493",
     "terms_url": "https://wiki.openstreetmap.org/wiki/DigitalGlobe",
     "terms_text": "Terms & Feedback",
     "default": true,
