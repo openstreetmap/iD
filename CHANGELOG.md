@@ -53,10 +53,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9477]: https://github.com/openstreetmap/iD/issues/9477
 
 
+# 2.24.2
+##### 2023-Feb-09
+
+* Rotate _Maxar Premium_ imagery access token
+
+
 # 2.24.1
 ##### 2023-Jan-25
 
-* Rotate Mapbox Satellite imagery access token
+* Rotate _Mapbox Satellite_ imagery access token
 
 
 # 2.24.0
