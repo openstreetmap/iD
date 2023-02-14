@@ -243,7 +243,7 @@ export function svgVegbilder(projection, context, dispatch) {
 
     function viewfieldPath() {
       const d = this.parentNode.__data__;
-      if (d.is_pano) {
+      if (d.is_sphere) {
         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
       } else {
         return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
@@ -286,7 +286,7 @@ export function svgVegbilder(projection, context, dispatch) {
       if (service && ~~context.map().zoom() >= minZoom) {
         editOn();
         update();
-        service.loadImages(projection);
+        service.loadImages(projection, context.photos());
       } else {
         editOff();
       }

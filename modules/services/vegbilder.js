@@ -1,4 +1,4 @@
-import { json as d3_json } from 'd3-fetch';
+import { json as d3_json, xml as d3_xml} from 'd3-fetch';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
@@ -27,126 +27,174 @@ let _sceneOptions = {
 let _vegbilderCache;
 let _loadViewerPromise;
 let _pannellumViewer;
+let _availableLayers;
 
 
 function abortRequest(controller) {
   controller.abort();
 }
 
-/**
-* loadTiles() wraps the process of generating tiles and then fetching image points for each tile.
-*/
-function loadTiles(which, url, projection, margin) {
-  const tiles = tiler.margin(margin).getTiles(projection);
+async function fetchAvailableLayers() {
+  const params = {
+    service: 'WFS',
+    request: 'GetCapabilities',
+    version: '2.0.0',
+  };
 
-  // abort inflight requests that are no longer needed
-  const cache = _vegbilderCache[which];
-  Object.keys(cache.inflight).forEach(k => {
-    const wanted = tiles.find(tile => k.indexOf(tile.id + ',') === 0);
-    if (!wanted) {
-      abortRequest(cache.inflight[k]);
-      delete cache.inflight[k];
+  const urlForRequest = owsEndpoint + utilQsString(params);
+  const repsonse = await d3_xml(urlForRequest);
+  const xPathSelector = '/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType/wfs:Name';
+  const regexMatcher = /^vegbilder_1_0:Vegbilder(?<image_type>_360)?_(?<year>\d{4})$/;
+  const NSResolver = repsonse.createNSResolver(repsonse);
+  const l = repsonse.evaluate(
+    xPathSelector,
+    repsonse,
+    NSResolver,
+    XPathResult.ANY_TYPE
+    );
+  let node;
+  _availableLayers = [];
+  while (node = l.iterateNext()) {
+    let match = node.textContent?.match(regexMatcher);
+    if (match) {
+      _availableLayers.push({
+        name: match[0],
+        is_sphere: !!match.groups?.image_type,
+        year: parseInt(match.groups?.year)
+      });
     }
-  });
-
-  tiles.forEach(tile => loadNextTilePage(which, url, tile));
+  }
 }
 
+function filterAvailableLayers(photos) {
+  const fromDate = photos.fromDate();
+  const toDate = photos.toDate();
+  const fromYear = fromDate ? new Date(fromDate).getFullYear() : 2016;
+  const toYear = toDate ? new Date(toDate).getFullYear() : null;
+  const showsFlat = photos.showsFlat();
+  const showsPano = photos.showsPanoramic();
+  return _availableLayers.filter(layerInfo => (
+    (layerInfo.year >= fromYear) &&
+    (!toYear || (layerInfo.year <= toYear)) &&
+    ((!layerInfo.is_sphere && showsFlat) || (layerInfo.is_sphere && showsPano))
+  ));
+}
+
+function loadWFSLayers(projection, margin, layers) {
+  for (let {name} of layers) {
+    loadWFSLayer(name, projection, margin);
+  }
+}
+
+function loadWFSLayer(layername, projection, margin) {
+  const tiles = tiler.margin(margin).getTiles(projection);
+  let cache = _vegbilderCache.wfslayers.get(layername);
+
+  if (!cache) {
+    cache = {loaded: new Map(), inflight: new Map()};
+    _vegbilderCache.wfslayers.set(layername, cache);
+  }
+
+  // abort inflight requests that are no longer needed
+  for (let key of cache.inflight.keys()) {
+    const wanted = tiles.find(tile => key.indexOf(tile.id + ',') === 0);
+    if (!wanted) {
+      abortRequest(cache.inflight.get(key));
+      cache.inflight.delete(key);
+    }
+  }
+
+  for (let tile of tiles) {
+    loadTile(cache, layername, tile);
+  }
+}
 
 /**
 * loadNextTilePage() load data for the next tile page in line.
 */
-function loadNextTilePage(which, url, tile) {
-  const cache = _vegbilderCache[which];
+async function loadTile(cache, layername, tile) {
   const bbox = tile.extent.bbox();
-  const years = [2019, 2020, 2021];
-  const typenames = years.map(year => `vegbilder_1_0:Vegbilder_360_${year}`);
-  const id = tile.id;
-  if (cache.loaded[id] || cache.inflight[id]) return;
-
+  const tileid = tile.id;
+  if (cache.loaded.get(tileid) || cache.inflight.get(tileid)) return;
 
   const params = {
     service: 'WFS',
     request: 'GetFeature',
     version: '2.0.0',
-    typenames: typenames[2],
+    typenames: layername,
     bbox: [bbox.minY, bbox.minX, bbox.maxY, bbox.maxX].join(','),
     outputFormat: 'json'
   };
 
   const controller = new AbortController();
-  cache.inflight[id] = controller;
+  cache.inflight.set(tileid, controller);
 
   const options = {
     method: 'GET',
     signal: controller.signal,
-};
+  };
 
-  let urlForRequest = url + utilQsString(params);
+  const urlForRequest = owsEndpoint + utilQsString(params);
 
-  d3_json(urlForRequest, options)
-    .then(featureCollection => {
-      cache.loaded[id] = true;
-      delete cache.inflight[id];
+  try {
+    var featureCollection = await d3_json(urlForRequest, options);
+  } catch {
+    cache.loaded.set(tileid, false);
+    return;
+  } finally {
+    cache.inflight.delete(tileid);
+  }
 
-      if (featureCollection.features.length === 0) { return; }
+  cache.loaded.set(tileid, true);
 
-      const features = featureCollection.features.map(feature => {
-        const loc = feature.geometry.coordinates;
-        const key = feature.id;
-        const properties = feature.properties;
-        const {
-          RETNING: ca,
-          TIDSPUNKT: captured_at,
-          URL: image_path,
-          BILDETYPE: image_type,
-          METER: metering,
-          FELTKODE: lane_kode
-        } = properties;
-        const sequence_reference = roadReference(properties);
-        const d = {
-          loc,
-          key,
-          ca,
-          image_path,
-          metering,
-          sequence_reference,
-          captured_at: new Date(captured_at),
-          is_pano: image_type === '360'
-        };
+  if (featureCollection.features.length === 0) { return; }
 
-        cache.points.set(key, d);
+  const features = featureCollection.features.map(feature => {
+    const loc = feature.geometry.coordinates;
+    const key = feature.id;
+    const properties = feature.properties;
+    const {
+      RETNING: ca,
+      TIDSPUNKT: captured_at,
+      URL: image_path,
+      BILDETYPE: image_type,
+      METER: metering,
+      FELTKODE: lane_kode
+    } = properties;
+    const sequence_reference = roadReference(properties);
+    const d = {
+      loc,
+      key,
+      ca,
+      image_path,
+      metering,
+      sequence_reference,
+      captured_at: new Date(captured_at),
+      is_sphere: image_type === '360'
+    };
 
-        const lane_number = Number(lane_kode.match(/^[0-9]+/)[0]);
-        const direction = lane_number % 2 === 0;
-        let sequence = _vegbilderCache.sequences.get(sequence_reference);
+    _vegbilderCache.points.set(key, d);
 
-        if (!sequence) { sequence = { direction, images: [], geometry: {type: 'LineString', coordinates: [] }}; }
-          _vegbilderCache.sequences.set(sequence_reference, sequence);
+    const lane_number = parseInt(lane_kode.match(/^[0-9]+/)[0]);
+    const direction = lane_number % 2 === 0;
+    let sequence = _vegbilderCache.sequences.get(sequence_reference);
 
-        sequence.images.push(d);
+    if (!sequence) { sequence = { direction, images: [], geometry: {type: 'LineString', coordinates: [] }}; }
+      _vegbilderCache.sequences.set(sequence_reference, sequence);
 
-        return {
-          minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
-        };
-      });
+    sequence.images.push(d);
 
-      cache.rtree.load(features);
+    return {
+      minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+    };
+  });
 
-      if (which === 'images') {
-        dispatch.call('loadedImages');
-      }
-
-    })
-    .catch(() => {
-      cache.loaded[id] = true;
-      delete cache.inflight[id];
-    });
+  _vegbilderCache.rtree.load(features);
+  dispatch.call('loadedImages');
 }
 
-
 function OrderSequences() {
-  for (let [_, sequence] of _vegbilderCache.sequences) {
+  for (let [, sequence] of _vegbilderCache.sequences) {
     const {images, direction, geometry} = sequence;
     if (direction) {
       images.sort((a, b) => b.metering - a.metering);
@@ -218,29 +266,35 @@ function searchLimited(limit, projection, rtree) {
 
 export default {
 
-  init: function () {
+  init: async function () {
     if (!_vegbilderCache) {
-      this.reset();
+      await this.reset();
     }
 
     this.event = utilRebind(this, dispatch, 'on');
   },
 
-  reset: function () {
+  reset: async function () {
     if (_vegbilderCache) {
-      Object.values(_vegbilderCache.images.inflight).forEach(abortRequest);
+      for (let layer of _vegbilderCache.wfslayers.values()) {
+        for (let tile of layer.values()) {abortRequest(tile);}
+      }
     }
 
     _vegbilderCache = {
-      images: { inflight: {}, loaded: {}, rtree: new RBush(), points: new Map()},
+      wfslayers: new Map(),
+      rtree: new RBush(),
+      points: new Map(),
       sequences: new Map()
     };
+
+    await fetchAvailableLayers();
   },
 
 
   images: function (projection) {
     const limit = 5;
-    return searchLimited(limit, projection, _vegbilderCache.images.rtree);
+    return searchLimited(limit, projection, _vegbilderCache.rtree);
   },
 
 
@@ -253,7 +307,7 @@ export default {
     let seen = new Set();
     let line_strings = [];
 
-    for (let d of _vegbilderCache.images.rtree.search(bbox)) {
+    for (let d of _vegbilderCache.rtree.search(bbox)) {
       const key = d.data.sequence_reference;
       if (!seen.has(key)) {
           seen.add(key);
@@ -271,7 +325,7 @@ export default {
 
 
   cachedImage: function (key) {
-    return _vegbilderCache.images.points.get(key);
+    return _vegbilderCache.points.get(key);
   },
 
 
@@ -280,16 +334,17 @@ export default {
   },
 
 
-  loadImages: function (projection) {
+    loadImages: function (projection, photos) {
     const margin = 1;
-    loadTiles('images', owsEndpoint, projection, margin);
+    const layers = filterAvailableLayers(photos);
+    loadWFSLayers(projection, margin, layers);
   },
 
   viewer: function() {
     return _pannellumViewer;
   },
 
-  initViewer: function () {
+  initViewerpannellumViewer: function () {
     if (!window.pannellum) return;
     if (_pannellumViewer) return;
 
@@ -301,7 +356,7 @@ export default {
     };
     options.scenes[sceneID] = _sceneOptions;
 
-    _pannellumViewer = window.pannellum.viewer('ideditor-viewer-streetside', options);
+    _pannellumViewer = window.pannellum.viewer('ideditor-viewer-vegbilder', options);
   },
 
   ensureViewerLoaded: function(context) {
@@ -353,7 +408,6 @@ export default {
         .on('zoom', zoomPan);
       }
     });
-
 
     _loadViewerPromise = new Promise((resolve, reject) => {
 
@@ -422,7 +476,6 @@ export default {
         that.selectImage(context, nextImage.key);
       };
     }
-
   },
 
   selectImage: function(context, key) {
@@ -452,7 +505,7 @@ export default {
       .selectAll('.vegbilder-image')
       .remove();
 
-    if (!d.is_pano) {
+    if (!d.is_sphere) {
       imageWrap
         .append('img')
         .attr('class', 'vegbilder-image')
@@ -466,7 +519,7 @@ export default {
 
       _sceneOptions.panorama = d.image_path;
       _sceneOptions.northOffset = d.ca;
-      _pannellumViewer = window.pannellum.viewer('vegbilder-panorama', _sceneOptions);
+      _pannellumViewer = window.pannellum.viewer('vegbilder-imagesphere', _sceneOptions);
       _pannellumViewer
         .on('mousedown', () => {
           d3_select(window)
@@ -493,6 +546,8 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://vegvesen.no')
       .text('Norwegian Public Roads Administration');
+
+    this.showViewer(context);
 
     return this;
   },
@@ -578,7 +633,7 @@ export default {
 
     function viewfieldPath() {
       const d = this.parentNode.__data__;
-      if (d.is_pano && d.key !== selectedImageKey) {
+      if (d.is_sphere && d.key !== selectedImageKey) {
         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
       } else {
         return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
