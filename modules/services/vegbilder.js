@@ -7,8 +7,8 @@ import { geoExtent, geoScaleToZoom } from '../geo';
 import RBush from 'rbush';
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
-const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
-const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
+const pannellumViewerCSS = 'pannellum/pannellum.css';
+const pannellumViewerJS = 'pannellum/pannellum.js';
 const tileZoom = 14;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
@@ -367,33 +367,33 @@ export default {
       const head = d3_select('head');
 
       // load streetside pannellum viewer css
-      head.selectAll('#ideditor-streetside-viewercss')
+      head.selectAll('#ideditor-vegbilder-viewercss')
         .data([0])
         .enter()
         .append('link')
-        .attr('id', 'ideditor-streetside-viewercss')
+        .attr('id', 'ideditor-vegbilder-viewercss')
         .attr('rel', 'stylesheet')
         .attr('crossorigin', 'anonymous')
         .attr('href', context.asset(pannellumViewerCSS))
-        .on('load.serviceStreetside', loaded)
-        .on('error.serviceStreetside', function() {
+        .on('load.serviceVegbilder', loaded)
+        .on('error.serviceVegbilder', function() {
             reject();
         });
 
       // load streetside pannellum viewer js
-      head.selectAll('#ideditor-streetside-viewerjs')
+      head.selectAll('#ideditor-vegbilder-viewerjs')
         .data([0])
         .enter()
         .append('script')
-        .attr('id', 'ideditor-streetside-viewerjs')
+        .attr('id', 'ideditor-vegbilder-viewerjs')
         .attr('crossorigin', 'anonymous')
         .attr('src', context.asset(pannellumViewerJS))
-        .on('load.serviceStreetside', loaded)
-        .on('error.serviceStreetside', function() {
+        .on('load.serviceVegbilder', loaded)
+        .on('error.serviceVegbilder', function() {
             reject();
         });
     })
-      .catch(function() {
+      .catch(() => {
         _loadViewerPromise = null;
     });
 

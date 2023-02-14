@@ -20,8 +20,8 @@ import { utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, util
 const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
 const streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
 const bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
-const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
-const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
+const pannellumViewerCSS = 'pannellum/pannellum.css';
+const pannellumViewerJS = 'pannellum/pannellum.js';
 const maxResults = 2000;
 const tileZoom = 16.5;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);

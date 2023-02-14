@@ -22,7 +22,7 @@
     "clean": "shx rm -f dist/esbuild.json dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "run-p dist:**",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
-    "dist:pannellum": "shx mkdir -p dist/pannellum-streetside && shx cp -R node_modules/pannellum/build/* dist/pannellum-streetside/",
+    "dist:pannellum": "shx mkdir -p dist/pannellum && shx cp -R node_modules/pannellum/build/* dist/pannellum/",
     "dist:min": "node config/esbuild.config.min.mjs",
     "dist:svg:iD": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"iD-%s\" --symbol-sprite dist/img/iD-sprite.svg \"svg/iD-sprite/**/*.svg\"",
     "dist:svg:community": "svg-sprite --symbol --symbol-dest . --shape-id-generator \"community-%s\" --symbol-sprite dist/img/community-sprite.svg node_modules/osm-community-index/dist/img/*.svg",
