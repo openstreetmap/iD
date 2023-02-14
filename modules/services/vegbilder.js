@@ -66,13 +66,13 @@ async function fetchAvailableLayers() {
   }
 }
 
-function filterAvailableLayers(photos) {
-  const fromDate = photos.fromDate();
-  const toDate = photos.toDate();
-  const fromYear = fromDate ? new Date(fromDate).getFullYear() : 2016;
-  const toYear = toDate ? new Date(toDate).getFullYear() : null;
-  const showsFlat = photos.showsFlat();
-  const showsPano = photos.showsPanoramic();
+function filterAvailableLayers(photoContex) {
+  const fromDateString = photoContex.fromDate();
+  const toDateString = photoContex.toDate();
+  const fromYear = fromDateString ? new Date(fromDateString).getFullYear() : 2016;
+  const toYear = toDateString ? new Date(toDateString).getFullYear() : null;
+  const showsFlat = photoContex.showsFlat();
+  const showsPano = photoContex.showsPanoramic();
   return _availableLayers.filter(layerInfo => (
     (layerInfo.year >= fromYear) &&
     (!toYear || (layerInfo.year <= toYear)) &&
@@ -193,7 +193,7 @@ async function loadTile(cache, layername, tile) {
   dispatch.call('loadedImages');
 }
 
-function OrderSequences() {
+function orderSequences() {
   for (let [, sequence] of _vegbilderCache.sequences) {
     const {images, direction, geometry} = sequence;
     if (direction) {
@@ -299,7 +299,7 @@ export default {
 
 
   sequences: function (projection) {
-    OrderSequences();
+    orderSequences();
     const viewport = projection.clipExtent();
     const min = [viewport[0][0], viewport[1][1]];
     const max = [viewport[1][0], viewport[0][1]];
@@ -334,9 +334,9 @@ export default {
   },
 
 
-    loadImages: function (projection, photos) {
+  loadImages: function (projection, photosContext) {
     const margin = 1;
-    const layers = filterAvailableLayers(photos);
+    const layers = filterAvailableLayers(photosContext);
     loadWFSLayers(projection, margin, layers);
   },
 
@@ -344,7 +344,7 @@ export default {
     return _pannellumViewer;
   },
 
-  initViewerpannellumViewer: function () {
+  initPannellumViewer: function () {
     if (!window.pannellum) return;
     if (_pannellumViewer) return;
 

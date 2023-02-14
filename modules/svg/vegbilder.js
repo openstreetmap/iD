@@ -152,8 +152,32 @@ export function svgVegbilder(projection, context, dispatch) {
       .attr('transform', transform);
   }
 
-  function filterSequences(sequences) {
+  function filterImages(images) {
+    const photoContext = context.photos();
+    const fromDateString = photoContext.fromDate();
+    const toDateString = photoContext.toDate();
+    const showsFlat = photoContext.showsFlat();
+    const showsPano = photoContext.showsPanoramic();
 
+    if (fromDateString) {
+      const fromDate = new Date(fromDateString);
+      images = images.filter(image => image.captured_at.getTime() >= fromDate.getTime());
+    }
+
+    if (toDateString) {
+      const toDate = new Date(toDateString);
+      images = images.filter(image => image.captured_at.getTime() <= toDate.getTime());
+    }
+
+    if (!showsPano) {
+      images = images.filter(image => !image.is_sphere);
+    }
+
+    if (!showsFlat) {
+      images = images.filter(image => image.is_sphere);
+    }
+
+    return images;
   }
 
   /**
@@ -166,12 +190,17 @@ export function svgVegbilder(projection, context, dispatch) {
     const showMarkers = (z >= minMarkerZoom);
     const showViewfields = (z >= minViewfieldZoom);
     const service = getService();
-
     let sequences = [];
     let images = [];
 
-    sequences = (service ? service.sequences(projection) : []);
-    images = (service && showMarkers ? service.images(projection) : []);
+    if (service) {
+      // The WFS-layer for that year or image type may not be loaded after a filter is changed
+      service.loadImages(projection, context.photos());
+
+      sequences = service.sequences(projection);
+      images = showMarkers ? service.images(projection) : [];
+      images = filterImages(images);
+    }
 
     let traces = layer.selectAll('.sequences').selectAll('.sequence')
       .data(sequences, d => d.properties.key);
@@ -181,7 +210,7 @@ export function svgVegbilder(projection, context, dispatch) {
       .remove();
 
     // enter/update
-    traces = traces.enter()
+    traces.enter()
       .append('path')
       .attr('class', 'sequence')
       .merge(traces)
