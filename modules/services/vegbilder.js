@@ -12,6 +12,10 @@ const pannellumViewerJS = 'pannellum/pannellum.js';
 const tileZoom = 14;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
+const directionEnum = Object.freeze({
+  forward: Symbol(0),
+  backward: Symbol(1)
+});
 
 let imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
@@ -81,12 +85,13 @@ function filterAvailableLayers(photoContex) {
 }
 
 function loadWFSLayers(projection, margin, layers) {
-  for (let {name} of layers) {
-    loadWFSLayer(name, projection, margin);
-  }
+  Promise.all(layers.map(
+          ({name}) => loadWFSLayer(name, projection, margin)
+          ))
+  .then(orderSequences);
 }
 
-function loadWFSLayer(layername, projection, margin) {
+async function loadWFSLayer(layername, projection, margin) {
   const tiles = tiler.margin(margin).getTiles(projection);
   let cache = _vegbilderCache.wfslayers.get(layername);
 
@@ -97,16 +102,16 @@ function loadWFSLayer(layername, projection, margin) {
 
   // abort inflight requests that are no longer needed
   for (let key of cache.inflight.keys()) {
-    const wanted = tiles.find(tile => key.indexOf(tile.id + ',') === 0);
+    const wanted = tiles.some(tile => key === tile.id);
     if (!wanted) {
       abortRequest(cache.inflight.get(key));
       cache.inflight.delete(key);
     }
   }
 
-  for (let tile of tiles) {
-    loadTile(cache, layername, tile);
-  }
+  await Promise.all(tiles.map(
+          tile => loadTile(cache, layername, tile)
+          ));
 }
 
 /**
@@ -115,7 +120,7 @@ function loadWFSLayer(layername, projection, margin) {
 async function loadTile(cache, layername, tile) {
   const bbox = tile.extent.bbox();
   const tileid = tile.id;
-  if (cache.loaded.get(tileid) || cache.inflight.get(tileid)) return;
+  if (cache.loaded.has(tileid) || cache.inflight.has(tileid)) return;
 
   const params = {
     service: 'WFS',
@@ -136,8 +141,9 @@ async function loadTile(cache, layername, tile) {
 
   const urlForRequest = owsEndpoint + utilQsString(params);
 
+  let featureCollection;
   try {
-    var featureCollection = await d3_json(urlForRequest, options);
+    featureCollection = await d3_json(urlForRequest, options);
   } catch {
     cache.loaded.set(tileid, false);
     return;
@@ -159,30 +165,25 @@ async function loadTile(cache, layername, tile) {
       URL: image_path,
       BILDETYPE: image_type,
       METER: metering,
-      FELTKODE: lane_kode
+      FELTKODE: lane_code
     } = properties;
-    const sequence_reference = roadReference(properties);
+    const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0]);
+    const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
     const d = {
       loc,
       key,
       ca,
       image_path,
+      layername,
+      road_reference: roadReference(properties),
       metering,
-      sequence_reference,
+      lane_code,
+      direction,
       captured_at: new Date(captured_at),
       is_sphere: image_type === '360'
     };
 
     _vegbilderCache.points.set(key, d);
-
-    const lane_number = parseInt(lane_kode.match(/^[0-9]+/)[0]);
-    const direction = lane_number % 2 === 0;
-    let sequence = _vegbilderCache.sequences.get(sequence_reference);
-
-    if (!sequence) { sequence = { direction, images: [], geometry: {type: 'LineString', coordinates: [] }}; }
-      _vegbilderCache.sequences.set(sequence_reference, sequence);
-
-    sequence.images.push(d);
 
     return {
       minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -194,16 +195,68 @@ async function loadTile(cache, layername, tile) {
 }
 
 function orderSequences() {
-  for (let [, sequence] of _vegbilderCache.sequences) {
-    const {images, direction, geometry} = sequence;
-    if (direction) {
-      images.sort((a, b) => b.metering - a.metering);
+  const {points} = _vegbilderCache;
+  if (points.size === 0) return;
+
+  const imageSequences = [];
+
+  const grouped = Array.from(points.values()).reduce((mapping, image) => {
+    let key = `${image.layername} ${image.road_reference}`;
+    if (mapping.has(key)) {
+      mapping.get(key).push(image);
     } else {
-      images.sort((a, b) => a.metering - b.metering);
+      mapping.set(key, [image]);
     }
-    geometry.coordinates = images.map(d => d.loc);
+    return mapping;
+  }, new Map()
+  );
+  for (const imageGroup of grouped.values()) {
+    imageGroup.sort((a, b) => {
+      if (a.captured_at.valueOf() > b.captured_at.valueOf()) {
+        return 1;
+      } else if (a.captured_at.valueOf() < b.captured_at.valueOf()) {
+        return -1;
+      } else {
+        const {direction} = a;
+        if (direction === directionEnum.forward) {
+          return a.metering - b.metering;
+        } else {
+          return b.metering - a.metering;
+        }
+      }
+    });
+    let lastImage = imageGroup[0];
+    let imageSequence = [];
+    for (const image of imageGroup) {
+      if (
+              image.direction === lastImage.direction &&
+              image.captured_at.valueOf() - lastImage.captured_at.valueOf() <= 20000
+              ) {
+        imageSequence.push(image);
+      } else {
+        imageSequences.push(imageSequence);
+        imageSequence = [image];
+      }
+      lastImage = image;
+    }
+    imageSequences.push(imageSequence);
   }
+
+  _vegbilderCache.sequences = imageSequences.map(images => {
+    const seqence = {
+      images,
+      key: images[0].key,
+      geometry : {
+        type : 'LineString',
+        coordinates : images.map(image => image.loc)
+    }};
+    for (const image of images) {
+      _vegbilderCache.image_sequence_map.set(image.key, seqence);
+    }
+    return seqence;
+  });
 }
+
 
 function roadReference(properties) {
   let {
@@ -217,27 +270,22 @@ function roadReference(properties) {
     KRYSSDEL: junction_part,
     SIDEANLEGGSDEL: services_part,
     ANKERPUNKT: anker_point,
-    FELTKODE: lane,
     AAR: year,
-    BILDETYPE: image_type
   } = properties;
 
-  if (image_type === undefined) { image_type = 'Planar'; }
-
-  let reference = `${year} ${image_type}`;
+  let reference;
 
   if (year >= 2020) {
-    reference = `${reference}:${road_class}${road_status}${road_number} S${section}D${subsection}`;
+    reference = `${road_class}${road_status}${road_number} S${section}D${subsection}`;
     if (junction_part) {
       reference = `${reference} M${anker_point} KD${junction_part}`;
     } else if (services_part) {
       reference = `${reference} M${anker_point} SD${services_part}`;
     }
   } else {
-    reference = `${reference} ${county_number}${road_class}${road_status}${road_number} HP${parcel}`;
+    reference = `${county_number}${road_class}${road_status}${road_number} HP${parcel}`;
   }
 
-  reference = `${reference} F${lane}`;
   return reference;
 }
 
@@ -277,7 +325,7 @@ export default {
   reset: async function () {
     if (_vegbilderCache) {
       for (let layer of _vegbilderCache.wfslayers.values()) {
-        for (let tile of layer.values()) {abortRequest(tile);}
+        for (let tile of layer.values()) { abortRequest(tile); }
       }
     }
 
@@ -285,7 +333,8 @@ export default {
       wfslayers: new Map(),
       rtree: new RBush(),
       points: new Map(),
-      sequences: new Map()
+      sequences: new Map(),
+      image_sequence_map: new Map()
     };
 
     await fetchAvailableLayers();
@@ -299,7 +348,6 @@ export default {
 
 
   sequences: function (projection) {
-    orderSequences();
     const viewport = projection.clipExtent();
     const min = [viewport[0][0], viewport[1][1]];
     const max = [viewport[1][0], viewport[0][1]];
@@ -307,19 +355,19 @@ export default {
     let seen = new Set();
     let line_strings = [];
 
-    for (let d of _vegbilderCache.rtree.search(bbox)) {
-      const key = d.data.sequence_reference;
-      if (!seen.has(key)) {
-          seen.add(key);
-          let sequence = _vegbilderCache.sequences.get(key);
-          let geometry = {
-            type: 'LineString',
-            coordinates: sequence.geometry.coordinates,
-            properties: {key}
-          };
-          line_strings.push(geometry);
-      }
-    }
+    for (let {data} of _vegbilderCache.rtree.search(bbox)) {
+      const sequence = _vegbilderCache.image_sequence_map.get(data.key);
+      if (!sequence) continue;
+      const {key, geometry} = sequence;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      let line = {
+        type: 'LineString',
+        coordinates: geometry.coordinates,
+        key
+      };
+      line_strings.push(line);
+  }
     return line_strings;
   },
 
@@ -328,11 +376,9 @@ export default {
     return _vegbilderCache.points.get(key);
   },
 
-
-  getSequenceKeyForImage: function (d) {
-    return d && d.sequence_reference;
-  },
-
+  getSequenceForImage: function (image) {
+    return _vegbilderCache.image_sequence_map.get(image?.key);
+    },
 
   loadImages: function (projection, photosContext) {
     const margin = 1;
@@ -603,17 +649,17 @@ export default {
         .classed('currentView', false);
     }
 
-    const hoveredImageKey = hovered && hovered.key;
-    const hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
-    const hoveredSequence = hoveredSequenceKey && _vegbilderCache.sequences.get(hoveredSequenceKey);
-    const hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(d => d.key)) || [];
+    const hoveredImageKey = hovered?.key;
+    const hoveredSequence = this.getSequenceForImage(hovered);
+    const hoveredSequenceKey = hoveredSequence?.key;
+    const hoveredImageKeys = (hoveredSequence?.images.map(d => d.key)) || [];
 
     const viewer = context.container().select('.photoviewer');
     const selected = viewer.empty() ? undefined : viewer.datum();
-    const selectedImageKey = selected && selected.key;
-    const selectedSequenceKey = this.getSequenceKeyForImage(selected);
-    const selectedSequence = selectedSequenceKey && _vegbilderCache.sequences.get(selectedSequenceKey);
-    const selectedImageKeys = (selectedSequence && selectedSequence.images.map(d => d.key)) || [];
+    const selectedImageKey = selected?.key;
+    const selectedSequence = this.getSequenceForImage(selected);
+    const selectedSequenceKey = selectedSequence?.key;
+    const selectedImageKeys = (selectedSequence?.images.map(d => d.key)) || [];
 
     // highlight sibling viewfields on either the selected or the hovered sequences
     const highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
@@ -624,8 +670,8 @@ export default {
       .classed('currentView', d => d.key === selectedImageKey);
 
     context.container().selectAll('.layer-vegbilder .sequence')
-      .classed('highlighted', d => d.properties.key === hoveredSequenceKey)
-      .classed('currentView', d => d.properties.key === selectedSequenceKey);
+      .classed('highlighted', d => d.key === hoveredSequenceKey)
+      .classed('currentView', d => d.key === selectedSequenceKey);
 
     // update viewfields if needed
     context.container().selectAll('.layer-vegbilder .viewfield-group .viewfield')

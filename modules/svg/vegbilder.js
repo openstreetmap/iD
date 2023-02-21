@@ -203,7 +203,7 @@ export function svgVegbilder(projection, context, dispatch) {
     }
 
     let traces = layer.selectAll('.sequences').selectAll('.sequence')
-      .data(sequences, d => d.properties.key);
+      .data(sequences, d => d.key);
 
     // exit
     traces.exit()
