@@ -124,9 +124,12 @@ export function svgVegbilder(projection, context, dispatch) {
   /**
    * transform().
    */
-  function transform(d) {
+  function transform(d, selected) {
     let t = svgPointTransform(projection)(d);
-    const rot = d.ca + _viewerYaw;
+    let rot = d.ca;
+    if (d === selected) {
+      rot += _viewerYaw;
+    }
     if (rot) {
       t += ' rotate(' + Math.floor(rot) + ',0,0)';
     }
@@ -149,7 +152,7 @@ export function svgVegbilder(projection, context, dispatch) {
     if (context.map().isTransformed()) return;
 
     layer.selectAll('.viewfield-group.currentView')
-      .attr('transform', transform);
+      .attr('transform', (d) => transform(d, d));
   }
 
   function filterImages(images) {
@@ -180,6 +183,34 @@ export function svgVegbilder(projection, context, dispatch) {
     return images;
   }
 
+  function filterSequences(sequences) {
+    const photoContext = context.photos();
+    const fromDateString = photoContext.fromDate();
+    const toDateString = photoContext.toDate();
+    const showsFlat = photoContext.showsFlat();
+    const showsPano = photoContext.showsPanoramic();
+
+    if (fromDateString) {
+      const fromDate = new Date(fromDateString);
+      sequences = sequences.filter(({images}) => images[0].captured_at.getTime() >= fromDate.getTime());
+    }
+
+    if (toDateString) {
+      const toDate = new Date(toDateString);
+      sequences = sequences.filter(({images}) => images[-1].captured_at.getTime() <= toDate.getTime());
+    }
+
+    if (!showsPano) {
+      sequences = sequences.filter(({images}) => !images[0].is_sphere);
+    }
+
+    if (!showsFlat) {
+      sequences = sequences.filter(({images}) => images[0].is_sphere);
+    }
+
+    return sequences;
+  }
+
   /**
    * update().
    */
@@ -200,6 +231,7 @@ export function svgVegbilder(projection, context, dispatch) {
       sequences = service.sequences(projection);
       images = showMarkers ? service.images(projection) : [];
       images = filterImages(images);
+      sequences = filterSequences(sequences);
     }
 
     let traces = layer.selectAll('.sequences').selectAll('.sequence')
@@ -244,7 +276,7 @@ export function svgVegbilder(projection, context, dispatch) {
           : (b === selected) ? -1
             : b.loc[1] - a.loc[1];
       })
-      .attr('transform', transform)
+      .attr('transform', (d) => transform(d, selected))
       .select('.viewfield-scale');
 
 

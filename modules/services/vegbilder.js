@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import { pairs as d3_pairs } from 'd3-array';
-import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs, utilSetTransform} from '../util';
+import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
 import {geoExtent, geoScaleToZoom, geoVecAngle} from '../geo';
 import RBush from 'rbush';
 
@@ -315,7 +315,7 @@ function searchLimited(limit, projection, rtree) {
         .slice(0, limit)
         .map(d => d.data);
 
-      return (found.length ? result.concat(found) : result);
+      return result.concat(found);
     }, []);
 }
 
@@ -366,13 +366,14 @@ export default {
     for (let {data} of _vegbilderCache.rtree.search(bbox)) {
       const sequence = _vegbilderCache.image_sequence_map.get(data.key);
       if (!sequence) continue;
-      const {key, geometry} = sequence;
+      const {key, geometry, images} = sequence;
       if (seen.has(key)) continue;
       seen.add(key);
       let line = {
         type: 'LineString',
         coordinates: geometry.coordinates,
-        key
+        key,
+        images
       };
       line_strings.push(line);
   }
