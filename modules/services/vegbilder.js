@@ -2,8 +2,9 @@ import { json as d3_json, xml as d3_xml} from 'd3-fetch';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
+import { pairs as d3_pairs } from 'd3-array';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs, utilSetTransform} from '../util';
-import { geoExtent, geoScaleToZoom } from '../geo';
+import {geoExtent, geoScaleToZoom, geoVecAngle} from '../geo';
 import RBush from 'rbush';
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
@@ -88,7 +89,7 @@ function loadWFSLayers(projection, margin, layers) {
   Promise.all(layers.map(
           ({name}) => loadWFSLayer(name, projection, margin)
           ))
-  .then(orderSequences);
+  .then(() => orderSequences(projection));
 }
 
 async function loadWFSLayer(layername, projection, margin) {
@@ -194,7 +195,7 @@ async function loadTile(cache, layername, tile) {
   dispatch.call('loadedImages');
 }
 
-function orderSequences() {
+function orderSequences(projection) {
   const {points} = _vegbilderCache;
   if (points.size === 0) return;
 
@@ -225,9 +226,17 @@ function orderSequences() {
         }
       }
     });
-    let lastImage = imageGroup[0];
-    let imageSequence = [];
-    for (const image of imageGroup) {
+    let imageSequence = [imageGroup[0]];
+    for (const [lastImage, image] of d3_pairs(imageGroup)) {
+      if (lastImage.ca === null) {
+        let b = projection(lastImage.loc);
+        let a = projection(image.loc);
+        let angle = geoVecAngle(a, b);
+        angle *= (180 / Math.PI);
+        angle -= 90;
+        angle = angle >= 0 ? angle : angle + 360;
+        lastImage.ca = angle;
+      }
       if (
               image.direction === lastImage.direction &&
               image.captured_at.valueOf() - lastImage.captured_at.valueOf() <= 20000
@@ -237,7 +246,6 @@ function orderSequences() {
         imageSequences.push(imageSequence);
         imageSequence = [image];
       }
-      lastImage = image;
     }
     imageSequences.push(imageSequence);
   }
@@ -249,7 +257,7 @@ function orderSequences() {
       geometry : {
         type : 'LineString',
         coordinates : images.map(image => image.loc)
-    }};
+      }};
     for (const image of images) {
       _vegbilderCache.image_sequence_map.set(image.key, seqence);
     }
@@ -513,7 +521,7 @@ export default {
         const selected = viewer.empty() ? undefined : viewer.datum();
         if (!selected) return;
 
-        const sequence = _vegbilderCache.sequences.get(that.getSequenceKeyForImage(selected));
+        const sequence = that.getSequenceForImage(selected);
         const nextIndex = sequence.images.indexOf(selected) + stepBy;
         const nextImage = sequence.images[nextIndex];
 
