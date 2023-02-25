@@ -106,9 +106,14 @@ In addition, the following parameters are available as **URL query parameters**:
 
 Environment variables or a dotenv file can be used to configure certain aspects of iD at build time.
 
+* __`ID_API_CONNECTION_URL`__, __`ID_API_CONNECTION_CLIENT_ID`__, __`ID_API_CONNECTION_CLIENT_SECRET`__ - Custom [Oauth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server.
+* __`ID_API_CONNECTION`__ - Either `live` or `dev`, if only either one should be made offered for editing.
 * __`ID_PRESETS_CDN_URL`__ - The URL where iD should fetch it's tagging presets from. Needs to point to a CORS enabled web server which is serving the `package.json` and `dist` folder of a repository built on [`@ideditor/schema-builder`](https://github.com/ideditor/schema-builder).
-* __`ID_API_CONNECTION_URL`__, __`ID_API_CONNECTION_CLIENT_ID`__, __`ID_API_CONNECTION_CLIENT_SECRET`__ - custom [Oauth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server
-* __`ID_API_CONNECTION`__ - either `live` or `dev`, if only either one should be made offered for editing
+* __`ENV__ID_OCI_CDN_URL`__ - URL to a hosted version of the [osm-community-index](https://github.com/osmlab/osm-community-index)
+* __`ENV__ID_NSI_CDN_URL`__ - URL to a hosted version of the [name-suggestion-index](https://github.com/osmlab/name-suggestion-index)
+* __`ENV__ID_WMF_SITEMATRIX_CDN_URL`__ - URL to a hosted version of the [wmf-sitematrix](https://github.com/osmlab/wmf-sitematrix)
+* __`ID_TAGINFO_API_URL`__ - URL to a [taginfo](https://wiki.openstreetmap.org/wiki/Taginfo) service.
+* __`ID_NOMINATIM_API_URL`__ - URL to a [nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) geocoding service.
 
 ## CSS selectors
 

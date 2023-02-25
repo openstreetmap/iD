@@ -1,10 +1,12 @@
-//import * as env from 'env';
-
 // cdns for external data packages
-const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
-const ociCdnUrl = 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
-const wmfSitematrixCdnUrl = 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
-const nsiCdnUrl = 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
+const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL
+  || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
+const ociCdnUrl = ENV__ID_OCI_CDN_URL
+  || 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
+const wmfSitematrixCdnUrl = ENV__ID_WMF_SITEMATRIX_CDN_URL
+  || 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
+const nsiCdnUrl = ENV__ID_NSI_CDN_URL
+  || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
 
 // api urls and settings
 const defaultOsmApiConnections = {
@@ -42,8 +44,10 @@ if (ENV__ID_API_CONNECTION_URL !== null &&
 }
 
 // auxiliary OSM services
-const taginfoApiUrl = 'https://taginfo.openstreetmap.org/api/4/';
-const nominatimApiUrl = 'https://nominatim.openstreetmap.org/';
+const taginfoApiUrl = ENV__ID_TAGINFO_API_URL
+  || 'https://taginfo.openstreetmap.org/api/4/';
+const nominatimApiUrl = ENV__ID_NOMINATIM_API_URL
+  || 'https://nominatim.openstreetmap.org/';
 
 export {
   presetsCdnUrl,
