@@ -1,5 +1,7 @@
+//import * as env from 'env';
+
 // cdns for external data packages
-const presetsCdnUrl = 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
+const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
 const ociCdnUrl = 'https://cdn.jsdelivr.net/npm/osm-community-index@{version}/';
 const wmfSitematrixCdnUrl = 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
 const nsiCdnUrl = 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';

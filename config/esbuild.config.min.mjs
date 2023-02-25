@@ -1,7 +1,9 @@
 import esbuild from 'esbuild';
+import envs from './envs.mjs';
 
 esbuild
   .build({
+    define: envs,
     minify: true,
     bundle: true,
     sourcemap: true,
