@@ -386,7 +386,11 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'member-entity-name')
             .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
             .style('border-color', d => d.relation.tags.colour)
-            .text(function(d) { return utilDisplayName(d.relation); });
+            .html(function(d) {
+                const matched = presetManager.match(d.relation, context.graph());
+                // hide the network from the name if there is NSI match
+                return utilDisplayName(d.relation, matched.suggestion);
+            });
 
         labelEnter
             .append('button')
