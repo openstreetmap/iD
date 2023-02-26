@@ -57,8 +57,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Support more complex logic to define preset fields that are conditionally hidden ([#9511], thanks [@k-yle])
 #### :hammer: Development
 
+[#9511]: https://github.com/openstreetmap/iD/pull/9511
 [#9896]: https://github.com/openstreetmap/iD/issues/9896
 [#10889]: https://github.com/openstreetmap/iD/pull/10889
 [#10970]: https://github.com/openstreetmap/iD/pull/10970
