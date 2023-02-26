@@ -342,7 +342,13 @@ export function uiField(context, presetField, entityIDs, options) {
                         return prerequisiteTag.valueNot !== value;
                     }
                     if (prerequisiteTag.value) {
-                        return prerequisiteTag.value === value;
+                        if (Array.isArray(prerequisiteTag.value)) {
+                            return prerequisiteTag.value.includes(value);
+                        } else if (prerequisiteTag.value.startsWith('/') && prerequisiteTag.value.endsWith('/')) {
+                            return new RegExp(prerequisiteTag.value.slice(1, -1)).test(value);
+                        } else {
+                            return prerequisiteTag.value === value;
+                        }
                     }
                 } else if (prerequisiteTag.keyNot) {
                     if (entity.tags[prerequisiteTag.keyNot]) return false;
