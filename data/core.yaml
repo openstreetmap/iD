@@ -1361,6 +1361,8 @@ en:
   vegbilder:
     title: "Vegbilder"
     tooltip: "Street-level photos from the Norwegian Public Roads Administration"
+    publisher: "Norwegian Public Roads Administration"
+    view_on: "View it on Vegbilder"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
   mapillary_map_features:

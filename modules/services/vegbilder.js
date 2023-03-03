@@ -1,6 +1,7 @@
 import { json as d3_json, xml as d3_xml} from 'd3-fetch';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { pairs as d3_pairs } from 'd3-array';
+import { t, localizer } from '../core/localizer';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
 import {geoExtent, geoScaleToZoom, geoVecAngle} from '../geo';
 import pannellumPhotoFrame from './pannellum_photo';
@@ -287,6 +288,12 @@ function roadReference(properties) {
   return reference;
 }
 
+function localeTimestamp(date) {
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric',
+    hour: 'numeric', minute: 'numeric', second: 'numeric' };
+  return date.toLocaleString(localizer.localeCode(), options);
+}
+
 function partitionViewport(projection) {
   let z = geoScaleToZoom(projection.scale());
   let z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
@@ -466,15 +473,21 @@ export default {
     if (d.captured_at) {
       attribution
         .append('span')
-        .attr('class', 'year')
-        .text(d.captured_at.getFullYear());
+        .attr('class', 'captured_at')
+        .text(localeTimestamp(d.captured_at));
     }
 
     attribution
       .append('a')
       .attr('target', '_blank')
       .attr('href', 'https://vegvesen.no')
-      .text('Norwegian Public Roads Administration');
+      .call(t.append('vegbilder.publisher'));
+
+    attribution
+      .append('a')
+      .attr('target', '_blank')
+      .attr('href', `https://vegbilder.atlas.vegvesen.no/?year=${d.captured_at.getFullYear()}&lat=${d.loc[1]}&lng=${d.loc[0]}&view=image&imageId=${d.key}`)
+      .call(t.append('vegbilder.view_on'));
 
     _currentFrame = d.is_sphere? _pannellumFrame : _planeFrame;
 
