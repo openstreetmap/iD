@@ -1,6 +1,6 @@
 {
   "name": "iD",
-  "version": "2.25.0",
+  "version": "2.25.1",
   "description": "A friendly editor for OpenStreetMap",
   "main": "dist/iD.min.js",
   "repository": "github:openstreetmap/iD",

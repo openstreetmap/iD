@@ -35,17 +35,33 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased (2.26.0-dev)
+#### :tada: New Features
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+# 2.25.1
+##### 2023-Mar-03
+* Fix accidentally committed dev settings in production build
+
+
 # 2.25.0
+##### 2023-Mar-03
 
 #### :mega: Release Highlights
-* Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set) for presets, etc.
-#### :bug: Bugfixes
-* Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
-#### :rocket: Presets
 * Upgrade to tagging schema v6 ([#9477]):
   * Add new `date` field for tags like `check_date`
-  * Add [Röntgen icons set](https://wiki.openstreetmap.org/wiki/R%C3%B6ntgen)
+  * Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
   * Combo fields can now specify arbitrary icons for individual tag values
+#### :bug: Bugfixes
+* Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
 #### :hammer: Development
 * `npm start` runs in _watch_ (i.e. `npm run start:watch`) mode by default (to start the dev server in _single build_ mode one can now use `npm run start:single-build`)
 * CDNs for resources (id-tagging-schema, osm-community-index, name-suggestion-index and others) are now configurable via environment variables (or a dotenv file)

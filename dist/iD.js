@@ -22690,7 +22690,7 @@
   var import_vparse = __toESM(require_vparse());
 
   // config/id.js
-  var presetsCdnUrl = "http://127.0.0.1:3000/";
+  var presetsCdnUrl = "https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/";
   var ociCdnUrl = "https://cdn.jsdelivr.net/npm/osm-community-index@{version}/";
   var wmfSitematrixCdnUrl = "https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/";
   var nsiCdnUrl = "https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/";
@@ -22725,7 +22725,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.25.0",
+    version: "2.25.1",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
