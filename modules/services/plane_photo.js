@@ -1,5 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { zoom as d3_zoom } from 'd3-zoom';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import { utilSetTransform, utilRebind } from '../util';
 
 const dispatch = d3_dispatch('viewerChanged');
@@ -57,6 +57,7 @@ export default {
     return this;
     },
 
+
   hidePhotoFrame: function (context) {
     context
       .select('photo-frame.plane-frame')
@@ -65,8 +66,11 @@ export default {
     return this;
     },
 
-  selectPhoto: function (data) {
+  selectPhoto: function (data, keepOrientation) {
     _photo.attr('src', data.image_path);
+    if (!keepOrientation) {
+      _photo.call(imgZoom.transform, d3_zoomIdentity);
+    }
     return this;
   },
 
