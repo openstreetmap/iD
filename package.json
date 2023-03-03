@@ -68,7 +68,7 @@
     "polygon-clipping": "~0.15.1",
     "rbush": "3.0.1",
     "whatwg-fetch": "^3.4.1",
-    "which-polygon": "2.2.0"
+    "which-polygon": "2.2.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "~6.2.0",
