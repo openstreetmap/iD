@@ -323,7 +323,7 @@ export default {
   reset: async function () {
     if (_vegbilderCache) {
       for (let layer of _vegbilderCache.wfslayers.values()) {
-        for (let tile of layer.values()) { abortRequest(tile); }
+        for (let tile of layer.inflight.values()) { abortRequest(tile); }
       }
     }
 
