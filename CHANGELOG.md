@@ -46,6 +46,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1
+
 
 # 2.25.0
 ##### 2023-Mar-03
