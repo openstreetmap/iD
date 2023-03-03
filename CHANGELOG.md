@@ -48,7 +48,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
-* Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane`
+* Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
+* Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 #### :hammer: Development
 * Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1
 
