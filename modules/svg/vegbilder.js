@@ -11,7 +11,6 @@ export function svgVegbilder(projection, context, dispatch) {
   const minViewfieldZoom = 18;
   let layer = d3_select(null);
   let _viewerYaw = 0;
-  let _selectedSequence = null;
   let _vegbilder;
 
   /**
@@ -84,15 +83,9 @@ export function svgVegbilder(projection, context, dispatch) {
     layer.style('display', 'none');
   }
 
-  /**
-   * click() Handles 'bubble' point click event.
-   */
   function click(d3_event, d) {
     const service = getService();
     if (!service) return;
-
-    // try to preserve the viewer rotation when staying on the same sequence
-    _selectedSequence = d.sequence_reference;
 
     service
       .ensureViewerLoaded(context)
@@ -141,11 +134,10 @@ export function svgVegbilder(projection, context, dispatch) {
     const service = getService();
     if (!service) return;
 
-    const viewer = service.viewer();
-    if (!viewer) return;
+    const frame = service.photoFrame();
 
     // update viewfield rotation
-    _viewerYaw = viewer.getYaw();
+    _viewerYaw = frame.getYaw();
 
     // avoid updating if the map is currently transformed
     // e.g. during drags or easing.

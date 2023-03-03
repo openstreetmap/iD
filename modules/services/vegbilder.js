@@ -1,15 +1,13 @@
 import { json as d3_json, xml as d3_xml} from 'd3-fetch';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select } from 'd3-selection';
-import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 import { pairs as d3_pairs } from 'd3-array';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
 import {geoExtent, geoScaleToZoom, geoVecAngle} from '../geo';
+import pannellumPhotoFrame from './pannellum_photo';
+import planePhotoFrame from './plane_photo';
 import RBush from 'rbush';
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
-const pannellumViewerCSS = 'pannellum/pannellum.css';
-const pannellumViewerJS = 'pannellum/pannellum.js';
 const tileZoom = 14;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
@@ -18,22 +16,12 @@ const directionEnum = Object.freeze({
   backward: Symbol(1)
 });
 
-let imgZoom = d3_zoom()
-    .extent([[0, 0], [320, 240]])
-    .translateExtent([[0, 0], [320, 240]])
-    .scaleExtent([1, 15]);
-let _sceneOptions = {
-  showFullscreenCtrl: false,
-  autoLoad: true,
-  compass: true,
-  yaw: 0,
-  type: 'equirectangular',
-};
-let _vegbilderCache;
+let _planeFrame;
+let _pannellumFrame;
+let _currentFrame;
 let _loadViewerPromise;
-let _pannellumViewer;
+let _vegbilderCache;
 let _availableLayers;
-
 
 function abortRequest(controller) {
   controller.abort();
@@ -59,13 +47,13 @@ async function fetchAvailableLayers() {
     );
   let node;
   _availableLayers = [];
-  while (node = l.iterateNext()) {
+  while ( (node = l.iterateNext()) !== null ) {
     let match = node.textContent?.match(regexMatcher);
     if (match) {
       _availableLayers.push({
         name: match[0],
         is_sphere: !!match.groups?.image_type,
-        year: parseInt(match.groups?.year)
+        year: parseInt(match.groups?.year, 10)
       });
     }
   }
@@ -86,14 +74,14 @@ function filterAvailableLayers(photoContex) {
 }
 
 function loadWFSLayers(projection, margin, layers) {
+  const tiles = tiler.margin(margin).getTiles(projection);
   Promise.all(layers.map(
-          ({name}) => loadWFSLayer(name, projection, margin)
+          ({name}) => loadWFSLayer(name, tiles)
           ))
   .then(() => orderSequences(projection));
 }
 
-async function loadWFSLayer(layername, projection, margin) {
-  const tiles = tiler.margin(margin).getTiles(projection);
+async function loadWFSLayer(layername, tiles) {
   let cache = _vegbilderCache.wfslayers.get(layername);
 
   if (!cache) {
@@ -164,17 +152,19 @@ async function loadTile(cache, layername, tile) {
       RETNING: ca,
       TIDSPUNKT: captured_at,
       URL: image_path,
+      URLPREVIEW : preview_path,
       BILDETYPE: image_type,
       METER: metering,
       FELTKODE: lane_code
     } = properties;
-    const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0]);
+    const lane_number = parseInt(lane_code.match(/^[0-9]+/)[0], 10);
     const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
-    const d = {
+    const data = {
       loc,
       key,
       ca,
       image_path,
+      preview_path,
       layername,
       road_reference: roadReference(properties),
       metering,
@@ -184,10 +174,10 @@ async function loadTile(cache, layername, tile) {
       is_sphere: image_type === '360'
     };
 
-    _vegbilderCache.points.set(key, d);
+    _vegbilderCache.points.set(key, data);
 
     return {
-      minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+      minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data
     };
   });
 
@@ -395,28 +385,29 @@ export default {
     loadWFSLayers(projection, margin, layers);
   },
 
-  viewer: function() {
-    return _pannellumViewer;
-  },
-
-  initPannellumViewer: function () {
-    if (!window.pannellum) return;
-    if (_pannellumViewer) return;
-
-    _currScene += 1;
-    const sceneID = _currScene.toString();
-    const options = {
-      'default': { firstScene: sceneID },
-      scenes: {}
-    };
-    options.scenes[sceneID] = _sceneOptions;
-
-    _pannellumViewer = window.pannellum.viewer('ideditor-viewer-vegbilder', options);
+  photoFrame: function() {
+    return _currentFrame;
   },
 
   ensureViewerLoaded: function(context) {
 
     if (_loadViewerPromise) return _loadViewerPromise;
+
+    const step = (stepBy) => () => {
+      const viewer = context.container().select('.photoviewer');
+      const selected = viewer.empty() ? undefined : viewer.datum();
+      if (!selected) return;
+
+      const sequence = this.getSequenceForImage(selected);
+      const nextIndex = sequence.images.indexOf(selected) + stepBy;
+      const nextImage = sequence.images[nextIndex];
+      const nextKey = nextImage.key;
+
+      if (!nextKey) return;
+
+      context.map().centerEase(nextImage.loc);
+      this.selectImage(context, nextKey, true);
+    };
 
     const wrap = context.container().select('.photoviewer')
       .selectAll('.vegbilder-wrapper')
@@ -447,147 +438,31 @@ export default {
       .on('click.forward', step(1))
       .text('►');
 
-    wrapEnter
-      .append('div')
-      .attr('class', 'vegbilder-image-wrap');
-
-
-    context.ui().photoviewer.on('resize.vegbilder', dimensions => {
-      if (_pannellumViewer) {
-        _pannellumViewer.resize();
-      } else {
-        imgZoom = d3_zoom()
-        .extent([[0, 0], dimensions])
-        .translateExtent([[0, 0], dimensions])
-        .scaleExtent([1, 15])
-        .on('zoom', zoomPan);
-      }
+    _loadViewerPromise = Promise.all([
+      pannellumPhotoFrame.init(context, wrapEnter),
+      planePhotoFrame.init(context, wrapEnter)
+    ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
+      _pannellumFrame = pannellumPhotoFrame;
+      _planeFrame = planePhotoFrame;
+      _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
     });
-
-    _loadViewerPromise = new Promise((resolve, reject) => {
-
-      let loadedCount = 0;
-      function loaded() {
-        loadedCount += 1;
-        // wait until both files are loaded
-        if (loadedCount === 2) resolve();
-      }
-
-      const head = d3_select('head');
-
-      // load streetside pannellum viewer css
-      head.selectAll('#ideditor-vegbilder-viewercss')
-        .data([0])
-        .enter()
-        .append('link')
-        .attr('id', 'ideditor-vegbilder-viewercss')
-        .attr('rel', 'stylesheet')
-        .attr('crossorigin', 'anonymous')
-        .attr('href', context.asset(pannellumViewerCSS))
-        .on('load.serviceVegbilder', loaded)
-        .on('error.serviceVegbilder', function() {
-            reject();
-        });
-
-      // load streetside pannellum viewer js
-      head.selectAll('#ideditor-vegbilder-viewerjs')
-        .data([0])
-        .enter()
-        .append('script')
-        .attr('id', 'ideditor-vegbilder-viewerjs')
-        .attr('crossorigin', 'anonymous')
-        .attr('src', context.asset(pannellumViewerJS))
-        .on('load.serviceVegbilder', loaded)
-        .on('error.serviceVegbilder', function() {
-            reject();
-        });
-    })
-      .catch(() => {
-        _loadViewerPromise = null;
-    });
-
-    const that = this;
 
     return _loadViewerPromise;
-
-    function zoomPan(d3_event) {
-      const t = d3_event.transform;
-      context.container().select('.photoviewer .vegbilder-image-wrap')
-        .call(utilSetTransform, t.x, t.y, t.k);
-  }
-
-    function step(stepBy) {
-      return () => {
-        const viewer = context.container().select('.photoviewer');
-        const selected = viewer.empty() ? undefined : viewer.datum();
-        if (!selected) return;
-
-        const sequence = that.getSequenceForImage(selected);
-        const nextIndex = sequence.images.indexOf(selected) + stepBy;
-        const nextImage = sequence.images[nextIndex];
-
-        if (!nextImage) return;
-        // TODO jump to a spatial and temporal close sequence when reaching the start or end.
-        that.selectImage(context, nextImage.key);
-      };
-    }
   },
 
-  selectImage: function(context, key) {
+  selectImage: function(context, key, keepOrientation) {
     const d = this.cachedImage(key);
     this.updateUrlImage(key);
 
     const viewer = context.container().select('.photoviewer');
-    if (!viewer.empty()) viewer.datum(d);
+    if (!viewer.empty()) { viewer.datum(d); }
 
     this.setStyles(context, null, true);
-
-    context.container().selectAll('.icon-sign')
-      .classed('currentView', false);
 
     if (!d) return this;
 
     const wrap = context.container().select('.photoviewer .vegbilder-wrapper');
-    const imageWrap = wrap.selectAll('.vegbilder-image-wrap');
     const attribution = wrap.selectAll('.photo-attribution').text('');
-
-    wrap
-      .transition()
-      .duration(100)
-      .call(imgZoom.transform, d3_zoomIdentity);
-
-    imageWrap
-      .selectAll('.vegbilder-image')
-      .remove();
-
-    if (!d.is_sphere) {
-      imageWrap
-        .append('img')
-        .attr('class', 'vegbilder-image')
-        .attr('src', d.image_path);
-    } else {
-      imageWrap
-        .append('div')
-        .attr('class', 'vegbilder-panorama')
-        .attr('id', 'vegbilder-panorama')
-        .on();
-
-      _sceneOptions.panorama = d.image_path;
-      _sceneOptions.northOffset = d.ca;
-      _pannellumViewer = window.pannellum.viewer('vegbilder-imagesphere', _sceneOptions);
-      _pannellumViewer
-        .on('mousedown', () => {
-          d3_select(window)
-            .on('mousemove', () => {
-              dispatch.call('viewerChanged');
-            });
-        })
-        .on('animatefinished', () => {
-          d3_select(window)
-          .on('mousemove', null);
-          dispatch.call('viewerChanged');
-        });
-    }
 
     if (d.captured_at) {
       attribution
@@ -602,7 +477,11 @@ export default {
       .attr('href', 'https://vegvesen.no')
       .text('Norwegian Public Roads Administration');
 
-    this.showViewer(context);
+    _currentFrame = d.is_sphere? _pannellumFrame : _planeFrame;
+
+    _currentFrame
+      .selectPhoto(d, keepOrientation)
+      .showPhotoFrame(wrap);
 
     return this;
   },
@@ -636,7 +515,7 @@ export default {
         .selectAll('.photo-wrapper')
         .classed('hide', true);
 
-    context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
+    context.container().selectAll('.viewfield-group, .sequence')
         .classed('currentView', false);
 
     return this.setStyles(context, null, true);
@@ -697,7 +576,6 @@ export default {
 
     return this;
   },
-
 
   updateUrlImage: function (key) {
     if (!window.mocha) {
