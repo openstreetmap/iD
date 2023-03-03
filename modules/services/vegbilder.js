@@ -249,7 +249,7 @@ function orderSequences(projection) {
         coordinates : images.map(image => image.loc)
       }};
     for (const image of images) {
-      _vegbilderCache.image_sequence_map.set(image.key, seqence);
+      _vegbilderCache.image2sequence_map.set(image.key, seqence);
     }
     return seqence;
   });
@@ -332,7 +332,7 @@ export default {
       rtree: new RBush(),
       points: new Map(),
       sequences: new Map(),
-      image_sequence_map: new Map()
+      image2sequence_map: new Map()
     };
 
     await fetchAvailableLayers();
@@ -354,7 +354,7 @@ export default {
     let line_strings = [];
 
     for (let {data} of _vegbilderCache.rtree.search(bbox)) {
-      const sequence = _vegbilderCache.image_sequence_map.get(data.key);
+      const sequence = _vegbilderCache.image2sequence_map.get(data.key);
       if (!sequence) continue;
       const {key, geometry, images} = sequence;
       if (seen.has(key)) continue;
@@ -376,7 +376,7 @@ export default {
   },
 
   getSequenceForImage: function (image) {
-    return _vegbilderCache.image_sequence_map.get(image?.key);
+    return _vegbilderCache.image2sequence_map.get(image?.key);
     },
 
   loadImages: function (projection, photosContext) {
@@ -401,12 +401,11 @@ export default {
       const sequence = this.getSequenceForImage(selected);
       const nextIndex = sequence.images.indexOf(selected) + stepBy;
       const nextImage = sequence.images[nextIndex];
-      const nextKey = nextImage.key;
 
-      if (!nextKey) return;
+      if (!nextImage) return;
 
       context.map().centerEase(nextImage.loc);
-      this.selectImage(context, nextKey, true);
+      this.selectImage(context, nextImage.key, true);
     };
 
     const wrap = context.container().select('.photoviewer')
