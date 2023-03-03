@@ -44,12 +44,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
+* Add Address and Phone Format for India ([#9482], thanks [@biswajit-k])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1
 
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
+[@biswajit-k]: https://github.com/biswajit-k
 
 
 # 2.25.0
