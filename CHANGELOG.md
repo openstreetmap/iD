@@ -36,6 +36,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 # 2.25.0
+##### 2023-Mar-03
 
 #### :mega: Release Highlights
 * Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set) for presets, etc.
