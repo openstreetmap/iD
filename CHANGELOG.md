@@ -35,7 +35,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased
+# 2.25.0
 
 #### :mega: Release Highlights
 * Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set) for presets, etc.
@@ -48,6 +48,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
   * Combo fields can now specify arbitrary icons for individual tag values
 #### :hammer: Development
 * `npm start` runs in _watch_ (i.e. `npm run start:watch`) mode by default (to start the dev server in _single build_ mode one can now use `npm run start:single-build`)
+* CDNs for resources (id-tagging-schema, osm-community-index, name-suggestion-index and others) are now configurable via environment variables (or a dotenv file)
+* API connections (main OSM API, taginfo, nominatim) are now configurable via environment variables (or a dotenv file)
 
 [#9425]: https://github.com/openstreetmap/iD/issues/9425
 [#9477]: https://github.com/openstreetmap/iD/issues/9477
