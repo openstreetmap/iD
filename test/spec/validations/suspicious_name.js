@@ -31,6 +31,10 @@ describe('iD.validations.suspicious_name', function () {
         iD.fileFetcher.cache().nsi_generics = {
           genericWords: ['^stores?$']
         };
+        iD.fileFetcher.cache().preset_presets = {
+            'Velero': { tags: { craft: 'sailmaker' }, geometry: ['line'] },
+            'Constructor de barco': { tags: { craft: 'boatbuilder' }, geometry: ['line'] },
+        };
     });
 
     after(function() {
@@ -182,5 +186,30 @@ describe('iD.validations.suspicious_name', function () {
             expect(issue.entityIds[0]).to.eql('w-1');
             done();
         }, 20);
+    });
+
+    it('flags feature with a name that matches the preset name', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createWay({ craft: 'sailmaker', 'name:ca': 'Velero' });
+        const validator = iD.validationSuspiciousName(context);
+
+        const issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        expect(issues[0].type).to.eql('suspicious_name');
+        expect(issues[0].hash).to.eql('name:ca=Velero');
+    });
+
+    it('flags feature with a name that matches the preset name and tag name', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createWay({ craft: 'boatbuilder', 'name:mi': 'boatbuilder', name: 'cOnStRuCtOr de barco' });
+        const validator = iD.validationSuspiciousName(context);
+
+        const issues = validate(validator);
+        expect(issues).to.have.lengthOf(2);
+        expect(issues[0].type).to.eql('suspicious_name');
+        expect(issues[0].hash).to.eql('name:mi=boatbuilder');
+
+        expect(issues[1].type).to.eql('suspicious_name');
+        expect(issues[1].hash).to.eql('name=cOnStRuCtOr de barco');
     });
 });

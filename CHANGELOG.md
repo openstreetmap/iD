@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
 * Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
+* The Suspicious Names validator warning now compares the Name field to the preset’s name in the user’s language, not just the raw tag value (typically in British English). ([#9522], thanks [@k-yle])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#7381]: https://github.com/openstreetmap/iD/issues/7381
+[#9522]: https://github.com/openstreetmap/iD/issues/9522
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
