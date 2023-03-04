@@ -137,8 +137,11 @@ export function uiFieldRoadspeed(field, context) {
             }
 
             value = parseInt(value, 10);
-            if (isNaN(value)) value = rawValue;
-            value = formatFloat(value);
+            if (isNaN(value)) {
+                value = rawValue;
+            } else {
+                value = formatFloat(value);
+            }
         }
 
         setUnitSuggestions();

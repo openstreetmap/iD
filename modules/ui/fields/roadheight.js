@@ -175,8 +175,11 @@ export function uiFieldRoadheight(field, context) {
             } else if (primaryValue) {
                 var rawValue = primaryValue;
                 primaryValue = parseFloat(rawValue);
-                if (isNaN(primaryValue)) primaryValue = rawValue;
-                primaryValue = formatFloat(primaryValue);
+                if (isNaN(primaryValue)) {
+                    primaryValue = rawValue;
+                } else {
+                    primaryValue = formatFloat(primaryValue);
+                }
                 _isImperial = false;
             }
         }
