@@ -30,7 +30,7 @@ describe('iD.serviceVegbilder', function() {
       const cache = vegbilder.cache();
       expect(cache).to.have.property('wfslayers');
       expect(cache).to.have.property('rtree');
-      expect(cache).to.have.property('sequences');
+      expect(cache).to.have.property('image2sequence_map');
 
       vegbilder.init();
       const cache2 = vegbilder.cache();

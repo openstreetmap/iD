@@ -189,7 +189,7 @@ export function svgVegbilder(projection, context, dispatch) {
 
     if (toDateString) {
       const toDate = new Date(toDateString);
-      sequences = sequences.filter(({images}) => images[-1].captured_at.getTime() <= toDate.getTime());
+      sequences = sequences.filter(({images}) => images[images.length - 1].captured_at.getTime() <= toDate.getTime());
     }
 
     if (!showsPano) {

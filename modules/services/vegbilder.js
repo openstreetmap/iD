@@ -76,17 +76,20 @@ function filterAvailableLayers(photoContex) {
 
 function loadWFSLayers(projection, margin, layers) {
   const tiles = tiler.margin(margin).getTiles(projection);
-  Promise.all(layers.map(
-          ({name}) => loadWFSLayer(name, tiles)
-          ))
-  .then(() => orderSequences(projection));
+  for (const {name} of layers) {
+    loadWFSLayer(projection, name, tiles);
+  }
 }
 
-async function loadWFSLayer(layername, tiles) {
+function loadWFSLayer(projection, layername, tiles) {
   let cache = _vegbilderCache.wfslayers.get(layername);
 
   if (!cache) {
-    cache = {loaded: new Map(), inflight: new Map()};
+    cache = {
+      loaded: new Map(),
+      inflight: new Map(),
+      points: new Map(),
+      sequences: []};
     _vegbilderCache.wfslayers.set(layername, cache);
   }
 
@@ -99,9 +102,9 @@ async function loadWFSLayer(layername, tiles) {
     }
   }
 
-  await Promise.all(tiles.map(
+  Promise.all(tiles.map(
           tile => loadTile(cache, layername, tile)
-          ));
+          )).then(() => orderSequences(projection, cache));
 }
 
 /**
@@ -166,7 +169,6 @@ async function loadTile(cache, layername, tile) {
       ca,
       image_path,
       preview_path,
-      layername,
       road_reference: roadReference(properties),
       metering,
       lane_code,
@@ -175,7 +177,7 @@ async function loadTile(cache, layername, tile) {
       is_sphere: image_type === '360'
     };
 
-    _vegbilderCache.points.set(key, data);
+    cache.points.set(key, data);
 
     return {
       minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data
@@ -186,14 +188,12 @@ async function loadTile(cache, layername, tile) {
   dispatch.call('loadedImages');
 }
 
-function orderSequences(projection) {
-  const {points} = _vegbilderCache;
-  if (points.size === 0) return;
-
+function orderSequences(projection, cache) {
   const imageSequences = [];
+  const {points} = cache;
 
   const grouped = Array.from(points.values()).reduce((mapping, image) => {
-    let key = `${image.layername} ${image.road_reference}`;
+    let key = image.road_reference;
     if (mapping.has(key)) {
       mapping.get(key).push(image);
     } else {
@@ -241,7 +241,7 @@ function orderSequences(projection) {
     imageSequences.push(imageSequence);
   }
 
-  _vegbilderCache.sequences = imageSequences.map(images => {
+  cache.sequences = imageSequences.map(images => {
     const seqence = {
       images,
       key: images[0].key,
@@ -255,7 +255,6 @@ function orderSequences(projection) {
     return seqence;
   });
 }
-
 
 function roadReference(properties) {
   let {
@@ -337,8 +336,6 @@ export default {
     _vegbilderCache = {
       wfslayers: new Map(),
       rtree: new RBush(),
-      points: new Map(),
-      sequences: new Map(),
       image2sequence_map: new Map()
     };
 
@@ -377,9 +374,10 @@ export default {
     return line_strings;
   },
 
-
   cachedImage: function (key) {
-    return _vegbilderCache.points.get(key);
+    for (const {points} of _vegbilderCache.wfslayers.values()) {
+      if (points.has(key)) return points.get(key);
+    }
   },
 
   getSequenceForImage: function (image) {
