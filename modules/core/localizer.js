@@ -448,7 +448,7 @@ export function coreLocalizer() {
      */
     localizer.floatParser = (locale) => {
         // https://stackoverflow.com/a/55366435/4585461
-        const polyfill = (string) => parseFloat(string.trim());
+        const polyfill = (string) => +string.trim();
         if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
         const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
         if (!('formatToParts' in format)) return polyfill;
@@ -481,7 +481,7 @@ export function coreLocalizer() {
         var literal, group, decimal;
         if ('Intl' in window && 'NumberFormat' in Intl) {
             const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
-            if (('formatToParts' in format)) {
+            if ('formatToParts' in format) {
                 const parts = format.formatToParts(-12345.6);
                 const literalPart = parts.find(d => d.type === 'literal');
                 literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');

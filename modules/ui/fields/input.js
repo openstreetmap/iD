@@ -401,7 +401,8 @@ export function uiFieldText(field, context) {
                 var vals = val.split(';');
                 vals = vals.map(function(v) {
                     var num = parseLocaleFloat(v);
-                    return isFinite(num) ? clamped(num) : v;
+                    const fractionDigits = countDecimalPlaces(v);
+                    return isFinite(num) ? clamped(num).toFixed(fractionDigits) : v;
                 });
                 val = vals.join(';');
             }
@@ -429,9 +430,10 @@ export function uiFieldText(field, context) {
             var vals = val.split(';');
             vals = vals.map(function(v) {
                 v = v.trim();
-                var num = parseFloat(v);
+                var num = Number(v);
                 if (!isFinite(num)) return v;
-                return formatFloat(clamped(num));
+                const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
+                return formatFloat(clamped(num), fractionDigits);
             });
             val = vals.join(';');
         }
