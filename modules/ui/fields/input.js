@@ -34,6 +34,7 @@ export function uiFieldText(field, context) {
     const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
+    const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
@@ -155,8 +156,7 @@ export function uiFieldText(field, context) {
                             num = ((num % 360) + 360) % 360;
                         }
                         // make sure no extra decimals are introduced
-                        const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
-                        return formatFloat(clamped(num).toFixed(numDecimals));
+                        return formatFloat(clamped(num), countDecimalPlaces(v));
                     });
                     input.node().value = vals.join(';');
                     change()();

@@ -6,6 +6,15 @@ describe('iD.coreLocalizer', function() {
             expect(selection.selectChild().classed('localized-text')).to.be.true;
         });
     });
+    describe('#floatFormatter', function () {
+        it('uses the specified number of fraction digits', function () {
+            var localizer = iD.coreLocalizer();
+            var formatFloat = localizer.floatFormatter('en');
+            expect(formatFloat(-0.1)).to.eql('-0.1');
+            expect(formatFloat(-0.1, 0)).to.eql('-0');
+            expect(formatFloat(-0.1, 2)).to.eql('-0.10');
+        });
+    });
     describe('#floatParser', function () {
         it('roundtrips English numbers', function () {
             var localizer = iD.coreLocalizer();
@@ -56,6 +65,16 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(1234))).to.eql(1234);
             expect(parseFloat(formatFloat(1234.56))).to.eql(1234.56);
             expect(parseFloat(formatFloat(3.14159))).to.eql(3.14159);
+        });
+    });
+    describe('#decimalPlaceCounter', function () {
+        it('counts decimal places in English numbers', function () {
+            var localizer = iD.coreLocalizer();
+            var countDecimalPlaces = localizer.decimalPlaceCounter('en');
+            expect(countDecimalPlaces('-0')).to.eql(0);
+            expect(countDecimalPlaces('-0.1')).to.eql(1);
+            expect(countDecimalPlaces('1.234')).to.eql(3);
+            expect(countDecimalPlaces('10')).to.eql(0);
         });
     });
 });

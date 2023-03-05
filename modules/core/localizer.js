@@ -424,15 +424,28 @@ export function coreLocalizer() {
         return code;  // if not found, use the code
     };
 
+    /**
+     * Returns a function that formats a floating-point number in the given
+     * locale.
+     */
     localizer.floatFormatter = (locale) => {
         if (!('Intl' in window && 'NumberFormat' in Intl &&
               'formatToParts' in Intl.NumberFormat.prototype)) {
-            return (number) => number.toString();
+            return (number, fractionDigits) => {
+                return fractionDigits === undefined ? number.toString() : number.toFixed(fractionDigits);
+            };
         } else {
-            return (number) => number.toLocaleString(locale, { maximumFractionDigits: 20 });
+            return (number, fractionDigits) => number.toLocaleString(locale, {
+                minimumFractionDigits: fractionDigits,
+                maximumFractionDigits: fractionDigits === undefined ? 20 : fractionDigits,
+            });
         }
     };
 
+    /**
+     * Returns a function that parses a number formatted according to the given
+     * locale as a floating-point number.
+     */
     localizer.floatParser = (locale) => {
         // https://stackoverflow.com/a/55366435/4585461
         const polyfill = (string) => parseFloat(string.trim());
@@ -457,6 +470,33 @@ export function coreLocalizer() {
             if (decimal) string = string.replace(decimal, '.');
             string = string.replace(numeral, getIndex);
             return string ? +string : NaN;
+        };
+    };
+
+    /**
+     * Returns a function that returns the number of decimal places in a
+     * formatted number string.
+     */
+    localizer.decimalPlaceCounter = (locale) => {
+        var literal, group, decimal;
+        if ('Intl' in window && 'NumberFormat' in Intl) {
+            const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
+            if (('formatToParts' in format)) {
+                const parts = format.formatToParts(-12345.6);
+                const literalPart = parts.find(d => d.type === 'literal');
+                literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');
+                const groupPart = parts.find(d => d.type === 'group');
+                group = groupPart && new RegExp(`[${groupPart.value}]`, 'g');
+                const decimalPart = parts.find(d => d.type === 'decimal');
+                decimal = decimalPart && new RegExp(`[${decimalPart.value}]`);
+            }
+        }
+        return (string) => {
+            string = string.trim();
+            if (literal) string = string.replace(literal, '');
+            if (group) string = string.replace(group, '');
+            const parts = string.split(decimal || '.');
+            return parts && parts[1] && parts[1].length || 0;
         };
     };
 
