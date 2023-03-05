@@ -13,6 +13,19 @@ describe('iD.coreLocalizer', function() {
             expect(formatFloat(-0.1)).to.eql('-0.1');
             expect(formatFloat(-0.1, 0)).to.eql('-0');
             expect(formatFloat(-0.1, 2)).to.eql('-0.10');
+            expect(formatFloat(0.0, 1)).to.eql('0.0');
+        });
+        it('roundtrips English numbers', function () {
+            var localizer = iD.coreLocalizer();
+            var parseFloat = localizer.floatParser('en');
+            var formatFloat = localizer.floatFormatter('en');
+            expect(formatFloat(parseFloat('0.1'))).to.eql('0.1');
+            expect(formatFloat(parseFloat('.1'))).to.eql('0.1');
+            expect(formatFloat(parseFloat('-0.1'))).to.eql('-0.1');
+            expect(formatFloat(parseFloat('1.234'))).to.eql('1.234');
+            expect(formatFloat(parseFloat('1234'))).to.eql('1,234');
+            expect(formatFloat(parseFloat('1234.56'))).to.eql('1,234.56');
+            expect(formatFloat(parseFloat('3.14159'))).to.eql('3.14159');
         });
     });
     describe('#floatParser', function () {
