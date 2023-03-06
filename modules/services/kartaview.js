@@ -298,13 +298,20 @@ export default {
             .attr('class', 'kartaview-image-wrap');
 
 
+
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize.kartaview', function(dimensions) {
-            imgZoom = d3_zoom()
-                .extent([[0, 0], dimensions])
-                .translateExtent([[0, 0], dimensions])
-                .scaleExtent([1, 15])
-                .on('zoom', zoomPan);
+        context.ui().photoviewer.on('resize.kartaview', function() {
+          const {width, height} = wrapEnter.node().getBoundingClientRect();
+          const dimensions = [width, height];
+          imgZoom = d3_zoom()
+              .extent([[0, 0], dimensions])
+              .translateExtent([[0, 0], dimensions])
+              .scaleExtent([1, 15])
+              .on('zoom', zoomPan);
+
+          wrapEnter
+            .call(imgZoom)
+            .on('dblclick.zoom', null);
         });
 
 
