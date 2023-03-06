@@ -10,30 +10,33 @@ let imgZoom;
 export default {
 
   init: async function(context, selection) {
+    this.event = utilRebind(this, dispatch, 'on');
+
     imgZoom = d3_zoom()
                 .extent([[0, 0], [320, 240]])
-                //.translateExtent(?)
+                .translateExtent([[0, 0], [320, 240]])
                 .scaleExtent([1, 15])
                 .on('zoom', this.zoomPan);
 
     const wrapper = selection
       .append('div')
       .attr('class', 'photo-frame plane-frame')
-      .call(imgZoom)
       .classed('hide', true);
 
     _photo = wrapper
       .append('img')
       .attr('class', 'plane-photo');
 
-    this.event = utilRebind(this, dispatch, 'on');
-
-    context.ui().photoviewer.on('resize.plane', (dimensions) => {
+    context.ui().photoviewer.on('resize.plane', () => {
+      const {width: wrapperWidth} = wrapper.node().getBoundingClientRect();
+      const {width, height} = _photo.node().getBoundingClientRect();
+      const widthOverflow = width - wrapperWidth;
       imgZoom = d3_zoom()
-                .extent([[0, 0], dimensions])
-                //.translateExtent(?)
-                .scaleExtent([1, 15])
-                .on('zoom', this.zoomPan);
+        .extent([[widthOverflow / 2, 0], [wrapperWidth + widthOverflow / 2, height]])
+        .translateExtent([[0, 0], [width, height]])
+        .scaleExtent([1, 15])
+        .on('zoom', this.zoomPan);
+      wrapper.call(imgZoom);
     });
 
     await Promise.resolve();
