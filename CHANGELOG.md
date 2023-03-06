@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.26.0-dev)
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
+* Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -51,8 +52,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1
+* Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1, `glob` to v9.2
 
+[#9482]: https://github.com/openstreetmap/iD/pull/9482
+[#9492]: https://github.com/openstreetmap/iD/pull/9492
+[#9493]: https://github.com/openstreetmap/iD/pull/9493
+[#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
 [@biswajit-k]: https://github.com/biswajit-k
 
