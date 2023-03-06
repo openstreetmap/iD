@@ -29,8 +29,8 @@ function buildCSS() {
 
   return _currBuild =
     Promise.resolve()
-      .then(() => doGlob('css/**/*.css'))
-      .then(files => doConcat(files, 'dist/iD.css'))
+      .then(() => glob('css/**/*.css'))
+      .then(files => doConcat(files.sort(), 'dist/iD.css'))
       .then(() => {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
         return postcss([
@@ -53,15 +53,6 @@ function buildCSS() {
       });
 }
 
-
-function doGlob(pattern) {
-  return new Promise((resolve, reject) => {
-    glob(pattern, (err, files) => {
-      if (err) return reject(err);
-      resolve(files);
-    });
-  });
-}
 
 function doConcat(files, output) {
   return new Promise((resolve, reject) => {
