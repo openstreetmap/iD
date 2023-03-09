@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { pairs as d3_pairs } from 'd3-array';
 import { t, localizer } from '../core/localizer';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
-import {geoExtent, geoScaleToZoom, geoVecAngle} from '../geo';
+import {geoExtent, geoScaleToZoom, geoVecAngle, geoVecEqual} from '../geo';
 import pannellumPhotoFrame from './pannellum_photo';
 import planePhotoFrame from './plane_photo';
 import RBush from 'rbush';
@@ -218,14 +218,17 @@ function orderSequences(projection, cache) {
       }
     });
     let imageSequence = [imageGroup[0]];
+    let angle = null;
     for (const [lastImage, image] of d3_pairs(imageGroup)) {
       if (lastImage.ca === null) {
         let b = projection(lastImage.loc);
         let a = projection(image.loc);
-        let angle = geoVecAngle(a, b);
-        angle *= (180 / Math.PI);
-        angle -= 90;
-        angle = angle >= 0 ? angle : angle + 360;
+        if (!geoVecEqual(a, b)) {
+          angle = geoVecAngle(a, b);
+          angle *= (180 / Math.PI);
+          angle -= 90;
+          angle = angle >= 0 ? angle : angle + 360;
+        }
         lastImage.ca = angle;
       }
       if (
