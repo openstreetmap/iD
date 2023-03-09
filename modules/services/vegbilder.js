@@ -113,7 +113,7 @@ function loadWFSLayer(projection, layername, tiles) {
 async function loadTile(cache, layername, tile) {
   const bbox = tile.extent.bbox();
   const tileid = tile.id;
-  if (cache.loaded.has(tileid) || cache.inflight.has(tileid)) return;
+  if ((cache.loaded.get(tileid) === true) || cache.inflight.has(tileid)) return;
 
   const params = {
     service: 'WFS',
