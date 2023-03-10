@@ -35,19 +35,47 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased
+# Unreleased (2.26.0-dev)
+#### :tada: New Features
+#### :sparkles: Usability & Accessibility
+* Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+* Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
+* Add Address and Phone Format for India ([#9482], thanks [@biswajit-k])
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
+* Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
+#### :hammer: Development
+* Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1, `glob` to v9.2
+
+[#9482]: https://github.com/openstreetmap/iD/pull/9482
+[#9492]: https://github.com/openstreetmap/iD/pull/9492
+[#9493]: https://github.com/openstreetmap/iD/pull/9493
+[#9520]: https://github.com/openstreetmap/iD/pull/9520
+[#9501]: https://github.com/openstreetmap/iD/pull/9501
+[@biswajit-k]: https://github.com/biswajit-k
+
+
+# 2.25.0
+##### 2023-Mar-03
 
 #### :mega: Release Highlights
-* Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set) for presets, etc.
-#### :bug: Bugfixes
-* Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
-#### :rocket: Presets
 * Upgrade to tagging schema v6 ([#9477]):
   * Add new `date` field for tags like `check_date`
-  * Add [Röntgen icons set](https://wiki.openstreetmap.org/wiki/R%C3%B6ntgen)
+  * Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
   * Combo fields can now specify arbitrary icons for individual tag values
+#### :bug: Bugfixes
+* Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
 #### :hammer: Development
 * `npm start` runs in _watch_ (i.e. `npm run start:watch`) mode by default (to start the dev server in _single build_ mode one can now use `npm run start:single-build`)
+* CDNs for resources (id-tagging-schema, osm-community-index, name-suggestion-index and others) are now configurable via environment variables (or a dotenv file)
+* API connections (main OSM API, taginfo, nominatim) are now configurable via environment variables (or a dotenv file)
 
 [#9425]: https://github.com/openstreetmap/iD/issues/9425
 [#9477]: https://github.com/openstreetmap/iD/issues/9477
