@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
+* Render "right-side" arrows for `man_made=quay` features
 #### :hammer: Development
 * Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.3
 * Bundle `package.json` file in repository for faster `clean-install` builds
