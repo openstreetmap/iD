@@ -306,7 +306,7 @@ function partitionViewport(projection) {
 }
 
 function searchLimited(limit, projection, rtree) {
-  limit = limit || 5;
+  limit ??= 5;
 
   return partitionViewport(projection)
     .reduce((result, extent) => {
@@ -553,14 +553,14 @@ export default {
     const hoveredImageKey = hovered?.key;
     const hoveredSequence = this.getSequenceForImage(hovered);
     const hoveredSequenceKey = hoveredSequence?.key;
-    const hoveredImageKeys = (hoveredSequence?.images.map(d => d.key)) || [];
+    const hoveredImageKeys = hoveredSequence?.images.map(d => d.key) ?? [];
 
     const viewer = context.container().select('.photoviewer');
     const selected = viewer.empty() ? undefined : viewer.datum();
     const selectedImageKey = selected?.key;
     const selectedSequence = this.getSequenceForImage(selected);
     const selectedSequenceKey = selectedSequence?.key;
-    const selectedImageKeys = (selectedSequence?.images.map(d => d.key)) || [];
+    const selectedImageKeys = selectedSequence?.images.map(d => d.key) ?? [];
 
     // highlight sibling viewfields on either the selected or the hovered sequences
     const highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
