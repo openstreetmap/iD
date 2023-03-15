@@ -56,44 +56,37 @@ export default {
     },
 
   loadPannellum: function(context) {
-    return new Promise((resolve, reject) => {
+    const head = d3_select('head');
 
-      let loadedCount = 0;
-      function loaded() {
-        loadedCount += 1;
-        // wait until both files are loaded
-        if (loadedCount === 2) resolve();
-      }
-
-      const head = d3_select('head');
-
-      // load pannellum viewer css
-      head.selectAll('#ideditor-pannellum-viewercss')
-            .data([0])
-            .enter()
-            .append('link')
-            .attr('id', 'ideditor-pannellum-viewercss')
-            .attr('rel', 'stylesheet')
-            .attr('crossorigin', 'anonymous')
-            .attr('href', context.asset(pannellumViewerCSS))
-            .on('load.pannellum', loaded)
-            .on('error.pannellum', () => {
-              reject();
-            });
-
-      // load streetside pannellum viewer js
-      head.selectAll('#ideditor-pannellum-viewerjs')
-            .data([0])
-            .enter()
-            .append('script')
-            .attr('id', 'ideditor-pannellum-viewerjs')
-            .attr('crossorigin', 'anonymous')
-            .attr('src', context.asset(pannellumViewerJS))
-            .on('load.pannellum', loaded)
-            .on('error.pannellum', () => {
-              reject();
-            });
-    });
+    return Promise.all([
+      new Promise((resolve, reject) => {
+        // load pannellum viewer css
+        head
+          .selectAll('#ideditor-pannellum-viewercss')
+          .data([0])
+          .enter()
+          .append('link')
+          .attr('id', 'ideditor-pannellum-viewercss')
+          .attr('rel', 'stylesheet')
+          .attr('crossorigin', 'anonymous')
+          .attr('href', context.asset(pannellumViewerCSS))
+          .on('load.pannellum', resolve)
+          .on('error.pannellum', reject);
+      }),
+      new Promise((resolve, reject) => {
+        // load pannellum viewer js
+        head
+          .selectAll('#ideditor-pannellum-viewerjs')
+          .data([0])
+          .enter()
+          .append('script')
+          .attr('id', 'ideditor-pannellum-viewerjs')
+          .attr('crossorigin', 'anonymous')
+          .attr('src', context.asset(pannellumViewerJS))
+          .on('load.pannellum', resolve)
+          .on('error.pannellum', reject);
+      })
+    ]);
   },
 
   showPhotoFrame: function (context) {
