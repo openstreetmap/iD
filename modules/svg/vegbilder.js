@@ -218,7 +218,7 @@ export function svgVegbilder(projection, context, dispatch) {
 
     if (service) {
       // The WFS-layer for that year or image type may not be loaded after a filter is changed
-      service.loadImages(projection, context.photos());
+      service.loadImages(context);
 
       sequences = service.sequences(projection);
       images = showMarkers ? service.images(projection) : [];
@@ -339,7 +339,7 @@ export function svgVegbilder(projection, context, dispatch) {
       if (service && ~~context.map().zoom() >= minZoom) {
         editOn();
         update();
-        service.loadImages(projection, context.photos());
+        service.loadImages(context);
       } else {
         editOff();
       }

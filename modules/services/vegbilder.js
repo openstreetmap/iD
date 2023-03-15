@@ -387,10 +387,10 @@ export default {
     return _vegbilderCache.image2sequence_map.get(image?.key);
     },
 
-  loadImages: function (projection, photosContext) {
-    const margin = 1;
-    const layers = filterAvailableLayers(photosContext);
-    loadWFSLayers(projection, margin, layers);
+  loadImages: function (context, margin) {
+    margin ??= 1;
+    const layers = filterAvailableLayers(context.photos());
+    loadWFSLayers(context.projection, margin, layers);
   },
 
   photoFrame: function() {
