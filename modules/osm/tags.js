@@ -201,7 +201,7 @@ export var osmSemipavedTags = {
 export var osmRightSideIsInsideTags = {
     'natural': {
         'cliff': true,
-        'coastline': 'coastline',
+        'coastline': 'coastline'
     },
     'barrier': {
         'retaining_wall': true,
@@ -210,7 +210,8 @@ export var osmRightSideIsInsideTags = {
         'city_wall': true,
     },
     'man_made': {
-        'embankment': true
+        'embankment': true,
+        'quay': true
     },
     'waterway': {
         'weir': true
