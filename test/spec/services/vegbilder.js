@@ -141,12 +141,18 @@ describe('iD.serviceVegbilder', function() {
       const cache2 = vegbilder.cache();
       expect(cache).to.equal(cache2);
     });
+
+    it('fetches available layers', function() {
+      const availableLayers = vegbilder.cache().wfslayers;
+      expect(availableLayers).to.have.key('vegbilder_1_0:Vegbilder_2020');
+      expect(availableLayers).to.not.have.key('not_matched_layer:Vegbilder_2020');
+    });
   });
 
   describe('#reset', function() {
-    it('resets cache', function() {
+    it('resets cache', async function() {
       vegbilder.cache().foo = 'bar';
-      vegbilder.reset();
+      await vegbilder.reset();
       expect(vegbilder.cache()).to.not.have.property('foo');
     });
   });

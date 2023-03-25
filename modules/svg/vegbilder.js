@@ -42,7 +42,7 @@ export function svgVegbilder(projection, context, dispatch) {
    * showLayer().
    */
   function showLayer() {
-    let service = getService();
+    const service = getService();
     if (!service) return;
 
     editOn();

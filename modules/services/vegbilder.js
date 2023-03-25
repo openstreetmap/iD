@@ -22,11 +22,6 @@ let _pannellumFrame;
 let _currentFrame;
 let _loadViewerPromise;
 let _vegbilderCache;
-let _availableLayers;
-
-function abortRequest(controller) {
-  controller.abort();
-}
 
 async function fetchAvailableLayers() {
   const params = {
@@ -47,17 +42,18 @@ async function fetchAvailableLayers() {
     XPathResult.ANY_TYPE
     );
   let node;
-  _availableLayers = [];
+  const availableLayers = [];
   while ( (node = l.iterateNext()) !== null ) {
-    let match = node.textContent?.match(regexMatcher);
+    const match = node.textContent?.match(regexMatcher);
     if (match) {
-      _availableLayers.push({
+      availableLayers.push({
         name: match[0],
         is_sphere: !!match.groups?.image_type,
         year: parseInt(match.groups?.year, 10)
       });
     }
   }
+  return availableLayers;
 }
 
 function filterAvailableLayers(photoContex) {
@@ -67,50 +63,39 @@ function filterAvailableLayers(photoContex) {
   const toYear = toDateString ? new Date(toDateString).getFullYear() : null;
   const showsFlat = photoContex.showsFlat();
   const showsPano = photoContex.showsPanoramic();
-  return _availableLayers.filter(layerInfo => (
+  return Array.from(_vegbilderCache.wfslayers.values()).filter(({layerInfo}) => (
     (layerInfo.year >= fromYear) &&
     (!toYear || (layerInfo.year <= toYear)) &&
     ((!layerInfo.is_sphere && showsFlat) || (layerInfo.is_sphere && showsPano))
   ));
 }
 
-function loadWFSLayers(projection, margin, layers) {
+function loadWFSLayers(projection, margin, wfslayers) {
   const tiles = tiler.margin(margin).getTiles(projection);
-  for (const {name} of layers) {
-    loadWFSLayer(projection, name, tiles);
+  for (const cache of wfslayers) {
+    loadWFSLayer(projection, cache, tiles);
   }
 }
 
-function loadWFSLayer(projection, layername, tiles) {
-  let cache = _vegbilderCache.wfslayers.get(layername);
-
-  if (!cache) {
-    cache = {
-      loaded: new Map(),
-      inflight: new Map(),
-      points: new Map(),
-      sequences: []};
-    _vegbilderCache.wfslayers.set(layername, cache);
-  }
-
+function loadWFSLayer(projection, cache, tiles) {
   // abort inflight requests that are no longer needed
-  for (let key of cache.inflight.keys()) {
+  for (const [key, controller] of cache.inflight.entries()) {
     const wanted = tiles.some(tile => key === tile.id);
     if (!wanted) {
-      abortRequest(cache.inflight.get(key));
+      controller.abort();
       cache.inflight.delete(key);
     }
   }
 
   Promise.all(tiles.map(
-          tile => loadTile(cache, layername, tile)
+          tile => loadTile(cache, cache.layerInfo.name, tile)
           )).then(() => orderSequences(projection, cache));
 }
 
 /**
 * loadNextTilePage() load data for the next tile page in line.
 */
-async function loadTile(cache, layername, tile) {
+async function loadTile(cache, typename, tile) {
   const bbox = tile.extent.bbox();
   const tileid = tile.id;
   if ((cache.loaded.get(tileid) === true) || cache.inflight.has(tileid)) return;
@@ -119,7 +104,7 @@ async function loadTile(cache, layername, tile) {
     service: 'WFS',
     request: 'GetFeature',
     version: '2.0.0',
-    typenames: layername,
+    typenames: typename,
     bbox: [bbox.minY, bbox.minX, bbox.maxY, bbox.maxX].join(','),
     outputFormat: 'json'
   };
@@ -189,20 +174,19 @@ async function loadTile(cache, layername, tile) {
 }
 
 function orderSequences(projection, cache) {
-  const imageSequences = [];
   const {points} = cache;
 
-  const grouped = Array.from(points.values()).reduce((mapping, image) => {
-    let key = image.road_reference;
-    if (mapping.has(key)) {
-      mapping.get(key).push(image);
+  const grouped = Array.from(points.values()).reduce((grouped, image) => {
+    const key = image.road_reference;
+    if (grouped.has(key)) {
+      grouped.get(key).push(image);
     } else {
-      mapping.set(key, [image]);
+      grouped.set(key, [image]);
     }
-    return mapping;
-  }, new Map()
-  );
-  for (const imageGroup of grouped.values()) {
+    return grouped;
+  }, new Map());
+
+  const imageSequences = Array.from(grouped.values()).reduce((imageSequences, imageGroup) => {
     imageGroup.sort((a, b) => {
       if (a.captured_at.valueOf() > b.captured_at.valueOf()) {
         return 1;
@@ -221,8 +205,8 @@ function orderSequences(projection, cache) {
     let angle = null;
     for (const [lastImage, image] of d3_pairs(imageGroup)) {
       if (lastImage.ca === null) {
-        let b = projection(lastImage.loc);
-        let a = projection(image.loc);
+        const b = projection(lastImage.loc);
+        const a = projection(image.loc);
         if (!geoVecEqual(a, b)) {
           angle = geoVecAngle(a, b);
           angle *= (180 / Math.PI);
@@ -242,7 +226,8 @@ function orderSequences(projection, cache) {
       }
     }
     imageSequences.push(imageSequence);
-  }
+    return imageSequences;
+  }, []);
 
   cache.sequences = imageSequences.map(images => {
     const seqence = {
@@ -260,7 +245,7 @@ function orderSequences(projection, cache) {
 }
 
 function roadReference(properties) {
-  let {
+  const {
     FYLKENUMMER: county_number,
     VEGKATEGORI: road_class,
     VEGSTATUS: road_status,
@@ -297,9 +282,9 @@ function localeTimestamp(date) {
 }
 
 function partitionViewport(projection) {
-  let z = geoScaleToZoom(projection.scale());
-  let z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-  let tiler = utilTiler().zoomExtent([z2, z2]);
+  const zoom = geoScaleToZoom(projection.scale());
+  const roundZoom = (Math.ceil(zoom * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+  const tiler = utilTiler().zoomExtent([roundZoom, roundZoom]);
 
   return tiler.getTiles(projection)
     .map(tile => tile.extent);
@@ -310,7 +295,7 @@ function searchLimited(limit, projection, rtree) {
 
   return partitionViewport(projection)
     .reduce((result, extent) => {
-      let found = rtree.search(extent.bbox())
+      const found = rtree.search(extent.bbox())
         .slice(0, limit)
         .map(d => d.data);
 
@@ -330,19 +315,33 @@ export default {
   },
 
   reset: async function () {
+    const availableLayers = await fetchAvailableLayers();
+
     if (_vegbilderCache) {
-      for (let layer of _vegbilderCache.wfslayers.values()) {
-        for (let tile of layer.inflight.values()) { abortRequest(tile); }
+      for (const layer of _vegbilderCache.wfslayers.values()) {
+        for (const controller of layer.inflight.values()) {
+          controller.abort();
+        }
       }
     }
 
+    const wfslayers = availableLayers.reduce((wfslayers, layerInfo) => {
+      const cache = {
+        layerInfo,
+        loaded: new Map(),
+        inflight: new Map(),
+        points: new Map(),
+        sequences: []
+      };
+      wfslayers.set(layerInfo.name, cache);
+      return wfslayers;
+    }, new Map());
+
     _vegbilderCache = {
-      wfslayers: new Map(),
+      wfslayers,
       rtree: new RBush(),
       image2sequence_map: new Map()
     };
-
-    await fetchAvailableLayers();
   },
 
 
@@ -357,16 +356,16 @@ export default {
     const min = [viewport[0][0], viewport[1][1]];
     const max = [viewport[1][0], viewport[0][1]];
     const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-    let seen = new Set();
-    let line_strings = [];
+    const seen = new Set();
+    const line_strings = [];
 
-    for (let {data} of _vegbilderCache.rtree.search(bbox)) {
+    for (const {data} of _vegbilderCache.rtree.search(bbox)) {
       const sequence = _vegbilderCache.image2sequence_map.get(data.key);
       if (!sequence) continue;
       const {key, geometry, images} = sequence;
       if (seen.has(key)) continue;
       seen.add(key);
-      let line = {
+      const line = {
         type: 'LineString',
         coordinates: geometry.coordinates,
         key,
@@ -389,8 +388,8 @@ export default {
 
   loadImages: function (context, margin) {
     margin ??= 1;
-    const layers = filterAvailableLayers(context.photos());
-    loadWFSLayers(context.projection, margin, layers);
+    const wfslayers = filterAvailableLayers(context.photos());
+    loadWFSLayers(context.projection, margin, wfslayers);
   },
 
   photoFrame: function() {
