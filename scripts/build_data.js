@@ -97,9 +97,9 @@ function buildData() {
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
-      fetch(`${presetsUrl}/dist/presets.min.json`),
-      fetch(`${presetsUrl}/dist/preset_categories.min.json`),
-      fetch(`${presetsUrl}/dist/fields.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/preset_categories.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`),
       // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
       // latest icons, but note that the format could break at any time
       fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
@@ -264,6 +264,15 @@ function minifyJSON(inPath, outPath) {
 
     });
   });
+}
+
+
+function fetchOrRequire(url) {
+  if (url.startsWith('.')) {
+    return Promise.resolve({ json: () => Promise.resolve(require(url)) });
+  } else {
+    return fetch(url);
+  }
 }
 
 
