@@ -16,6 +16,11 @@ const far = require('@fortawesome/free-regular-svg-icons').far;
 const fab = require('@fortawesome/free-brands-svg-icons').fab;
 fontawesome.library.add(fas, far, fab);
 
+const dotenv = require('dotenv');
+dotenv.config();
+const presetsVersion = require('../package.json').devDependencies['@openstreetmap/id-tagging-schema'];
+const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
+
 let _currBuild = null;
 
 
@@ -92,9 +97,9 @@ function buildData() {
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/presets.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json'),
+      fetch(`${presetsUrl}/dist/presets.min.json`),
+      fetch(`${presetsUrl}/dist/preset_categories.min.json`),
+      fetch(`${presetsUrl}/dist/fields.min.json`),
       // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
       // latest icons, but note that the format could break at any time
       fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
@@ -110,6 +115,9 @@ function buildData() {
           // fontawesome icon
           if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
             faIcons.add(datum.icon);
+          }
+          if (datum.icons) {
+            Object.values(datum.icons).filter(icon => /^fa[srb]-/.test(icon)).forEach(faIcons.add);
           }
         }
       });
