@@ -19,7 +19,9 @@ fontawesome.library.add(fas, far, fab);
 const dotenv = require('dotenv');
 dotenv.config();
 const presetsVersion = require('../package.json').devDependencies['@openstreetmap/id-tagging-schema'];
+/* eslint-disable no-process-env */
 const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
+/* eslint-enable no-process-env */
 
 let _currBuild = null;
 
