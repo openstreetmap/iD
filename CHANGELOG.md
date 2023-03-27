@@ -54,7 +54,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "right-side" arrows for `man_made=quay` features
 #### :hammer: Development
 * Upgrade dependencies: `fortawesome` to v6.3, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.3
-* Bundle `package.json` file in repository for faster `clean-install` builds
+* Bundle `package-lock.json` file in repository for faster `clean-install` builds
+* Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
 [#9492]: https://github.com/openstreetmap/iD/pull/9492
