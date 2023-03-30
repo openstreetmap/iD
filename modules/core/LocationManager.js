@@ -1,4 +1,4 @@
-import LocationConflation from '@ideditor/location-conflation';
+import LocationConflation from '@rapideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 import calcArea from '@mapbox/geojson-area';
 
@@ -16,8 +16,8 @@ const _loco = new LocationConflation();    // instance of a location-conflation 
  * };
  *
  * For more info see the location-conflation and country-coder projects, see:
- * https://github.com/ideditor/location-conflation
- * https://github.com/ideditor/country-coder
+ * https://github.com/rapideditor/location-conflation
+ * https://github.com/rapideditor/country-coder
  */
 export class LocationManager {
 
