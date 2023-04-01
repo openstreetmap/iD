@@ -148,7 +148,9 @@ export function validationCrossingWays(context) {
                     var pathFeature = entity1IsPath ? entity1 : entity2;
                     if (['marked', 'unmarked', 'traffic_signals', 'uncontrolled'].indexOf(pathFeature.tags.crossing) !== -1) {
                         // if the path is a crossing, match the crossing type
-                        return bothLines ? { highway: 'crossing', crossing: pathFeature.tags.crossing } : {};
+                        return bothLines
+                            ? { highway: 'crossing', crossing: pathFeature.tags.crossing, 'crossing:markings': pathFeature.tags['crossing:markings'] }
+                            : {};
                     }
                     // don't add a `crossing` subtag to ambiguous crossings
                     return bothLines ? { highway: 'crossing' } : {};
