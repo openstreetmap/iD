@@ -5177,6 +5177,9 @@ img.tile-debug {
     margin-bottom: 20px;
 }
 
+.settings-custom_features .instructions-template {
+    margin-bottom: 10px;
+}
 
 /* Save Mode
 ------------------------------------------------------- */

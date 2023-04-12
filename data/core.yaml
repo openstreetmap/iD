@@ -932,6 +932,9 @@ en:
     others:
       description: Other Features
       tooltip: "Everything Else"
+    custom:
+      description: Custom filter
+      tooltip: "Set a key=value filter"
   area_fill:
     wireframe:
       description: No Fill (Wireframe)
@@ -977,6 +980,14 @@ en:
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
         placeholder: Enter a url
+    custom_features:
+        tooltip: Edit custom filter
+        header: Custom Features Filter Settings
+        template:
+          placeholder: Enter a key=value
+        instructions:
+          info: "Enter an OpenStreetMap tag combination, example:"
+          additional_info: You can also use `*` to filter any value for a key, like `highway=*`.
   preferences:
     title: Preferences
     description: Preferences
