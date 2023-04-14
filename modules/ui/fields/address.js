@@ -36,62 +36,51 @@ export function uiFieldAddress(field, context) {
         .catch(function() { /* ignore */ });
 
 
-    function getNearStreets() {
+    function getNear(isAddressable, searchRadius, resultProp) {
         var extent = combinedEntityExtent();
         var l = extent.center();
-        var box = geoExtent(l).padByMeters(200);
+        var box = geoExtent(l).padByMeters(searchRadius);
 
-        var streets = context.history().intersects(box)
+        var features = context.history().intersects(box)
             .filter(isAddressable)
-            .map(function(d) {
-                var loc = context.projection([
-                    (extent[0][0] + extent[1][0]) / 2,
-                    (extent[0][1] + extent[1][1]) / 2
-                ]);
-                var choice = geoChooseEdge(context.graph().childNodes(d), loc, context.projection);
+            .map(d => {
+                let dist = geoSphericalDistance(d.extent(context.graph()).center(), l);
 
+                if (d.type === 'way') {
+                    var loc = context.projection([
+                        (extent[0][0] + extent[1][0]) / 2,
+                        (extent[0][1] + extent[1][1]) / 2
+                    ]);
+                    var choice = geoChooseEdge(context.graph().childNodes(d), loc, context.projection);
+                    dist = Math.min(dist, choice.distance);
+                }
+
+                let value = resultProp && d.tags[resultProp] ? d.tags[resultProp] : d.tags.name;
                 return {
-                    title: d.tags.name,
-                    value: d.tags.name,
-                    dist: choice.distance
+                    title: value,
+                    value,
+                    dist
                 };
             })
             .sort(function(a, b) {
                 return a.dist - b.dist;
             });
 
-        return utilArrayUniqBy(streets, 'value');
+        return utilArrayUniqBy(features, 'value');
+    }
 
+    function getNearStreets() {
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
         }
+
+        return getNear(isAddressable, 200);
     }
 
-
     function getNearCities() {
-        var extent = combinedEntityExtent();
-        var l = extent.center();
-        var box = geoExtent(l).padByMeters(200);
-
-        var cities = context.history().intersects(box)
-            .filter(isAddressable)
-            .map(function(d) {
-                return {
-                    title: d.tags['addr:city'] || d.tags.name,
-                    value: d.tags['addr:city'] || d.tags.name,
-                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
-                };
-            })
-            .sort(function(a, b) {
-                return a.dist - b.dist;
-            });
-
-        return utilArrayUniqBy(cities, 'value');
-
-
         function isAddressable(d) {
             if (d.tags.name) {
-                if (d.tags.admin_level === '8' && d.tags.boundary === 'administrative') return true;
+                if (d.tags.boundary === 'administrative' && d.tags.admin_level === '8') return true;
                 if (d.tags.border_type === 'city') return true;
                 if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village') return true;
             }
@@ -100,27 +89,16 @@ export function uiFieldAddress(field, context) {
 
             return false;
         }
+
+        return getNear(isAddressable, 200, 'addr:city');
     }
 
     function getNearValues(key) {
-        var extent = combinedEntityExtent();
-        var l = extent.center();
-        var box = geoExtent(l).padByMeters(200);
+        function hasTag(d) {
+            return _entityIDs.indexOf(d.id) === -1 && d.tags[key];
+        }
 
-        var results = context.history().intersects(box)
-            .filter(function hasTag(d) { return _entityIDs.indexOf(d.id) === -1 && d.tags[key]; })
-            .map(function(d) {
-                return {
-                    title: d.tags[key],
-                    value: d.tags[key],
-                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
-                };
-            })
-            .sort(function(a, b) {
-                return a.dist - b.dist;
-            });
-
-        return utilArrayUniqBy(results, 'value');
+        return getNear(hasTag, 200, key);
     }
 
 
