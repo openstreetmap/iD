@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Update id-tagging-schema to [version 7](https://github.com/ideditor/schema-builder/blob/main/MIGRATION_GUIDE.md#v7-migration-guide), allowing to add more detailed information to be defined for presets and fields, adding [_pinhead_](https://pinhead.ink/) icon set, and unlocking additional functionality to be implemented for presets in the future ([#12358])
 #### :sparkles: Usability & Accessibility
 * Display radio field options in a two-column layout if there is insufficient space for them in a single line ([#12455])
+* Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Render `highway=track` using different styles depending on the `tracktype` ([#12392], thanks [@RudyTheDev])
 * Add dedicated pattern for `landuse=flowerbed` features ([#12458], thanks [@RudyTheDev])
 * Apply most recently used preset when immediately pressing <kbd>Enter</kbd> in the preset list ([#12526])
@@ -76,6 +77,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8713]: https://github.com/openstreetmap/iD/issues/8713
 [#8724]: https://github.com/openstreetmap/iD/issues/8724
 [#9340]: https://github.com/openstreetmap/iD/pull/9340
+[#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#9734]: https://github.com/openstreetmap/iD/issues/9734
 [#10120]: https://github.com/openstreetmap/iD/pull/10120
 [#10911]: https://github.com/openstreetmap/iD/pull/10911

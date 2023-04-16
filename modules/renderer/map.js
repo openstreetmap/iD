@@ -249,7 +249,15 @@ export function rendererMap(context) {
 
         context.on('enter.map',  function() {
             if (!map.editableDataEnabled(true /* skip zoom check */)) return;
-            if (_isTransformed) return;
+
+            if (_isTransformed) {
+                // if we're part way through a transform, don't run
+                // any expensive redraws. Just cleanup any state
+                // that depended on the selected feature.
+                surface
+                    .call(drawVertices.clearSelected);
+                return;
+            }
 
             // redraw immediately any objects affected by a change in selectedIDs.
             var graph = context.graph();
@@ -271,6 +279,7 @@ export function rendererMap(context) {
             data = context.features().filter(data, graph);
 
             surface
+                .call(drawPoints.drawSelected, graph)
                 .call(drawVertices.drawSelected, graph, map.extent())
                 .call(drawLines, graph, data, filter)
                 .call(drawAreas, graph, data, filter)
@@ -376,6 +385,7 @@ export function rendererMap(context) {
         if (mode && mode.id === 'select') {
             // update selected vertices - the user might have just double-clicked a way,
             // creating a new vertex, triggering a partial redraw without a mode change
+            surface.call(drawPoints.drawSelected, graph);
             surface.call(drawVertices.drawSelected, graph, map.extent());
         }
 
