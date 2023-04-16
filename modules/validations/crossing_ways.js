@@ -140,6 +140,8 @@ export function validationCrossingWays(context) {
                 if ((entity1IsPath || entity2IsPath) && entity1IsPath !== entity2IsPath) {
                     // one feature is a path but not both
 
+                    if (!bothLines) return {};
+
                     var roadFeature = entity1IsPath ? entity2 : entity1;
                     if (nonCrossingHighways[roadFeature.tags.highway]) {
                         // don't mark path connections with certain roads as crossings
@@ -147,11 +149,15 @@ export function validationCrossingWays(context) {
                     }
                     var pathFeature = entity1IsPath ? entity1 : entity2;
                     if (['marked', 'unmarked', 'traffic_signals', 'uncontrolled'].indexOf(pathFeature.tags.crossing) !== -1) {
-                        // if the path is a crossing, match the crossing type
-                        return bothLines ? { highway: 'crossing', crossing: pathFeature.tags.crossing } : {};
+                        // if the path is a crossing, match the crossing type and markings
+                        var tags = { highway: 'crossing', crossing: pathFeature.tags.crossing };
+                        if ('crossing:markings' in pathFeature.tags) {
+                            tags['crossing:markings'] = pathFeature.tags['crossing:markings'];
+                        }
+                        return tags;
                     }
                     // don't add a `crossing` subtag to ambiguous crossings
-                    return bothLines ? { highway: 'crossing' } : {};
+                    return { highway: 'crossing' };
                 }
                 return {};
             }
