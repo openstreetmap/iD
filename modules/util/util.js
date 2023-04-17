@@ -215,10 +215,35 @@ export function utilDisplayName(entity) {
     }
 
     if (keyComponents.length) {
-        name = t('inspector.display_name.' + keyComponents.join('_'), tags);
+        return t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
 
-    return name;
+    const alternativeNameKeys = [
+        'alt_name',
+        'official_name',
+        'loc_name',
+        'loc_ref',
+        'unsigned_ref',
+        'seamark:name',
+        'sector:name',
+        'addr:housename',
+        'lock_name'
+    ];
+
+    if (entity.tags.highway === 'milestone' || entity.tags.railway === 'milestone') {
+        // distance & railway:position are only valid as names when used on a milestone
+        alternativeNameKeys.push('distance', 'railway:position');
+    }
+
+    // if there's still no name found, try some other name-like tags
+    for (const key of alternativeNameKeys) {
+        if (key in entity.tags) {
+            return entity.tags[key];
+        }
+    }
+
+    // no match found
+    return '';
 }
 
 
