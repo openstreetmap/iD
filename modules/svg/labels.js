@@ -55,6 +55,16 @@ export function svgLabels(projection, context) {
         ['point', 'shop', '*', 10],
         ['point', 'tourism', '*', 10],
         ['point', 'camp_site', '*', 10],
+        ['*', 'alt_name', '*', 12],
+        ['*', 'official_name', '*', 12],
+        ['*', 'loc_name', '*', 12],
+        ['*', 'loc_ref', '*', 12],
+        ['*', 'unsigned_ref', '*', 12],
+        ['*', 'seamark:name', '*', 12],
+        ['*', 'sector:name', '*', 12],
+        ['*', 'lock_name', '*', 12],
+        ['*', 'distance', '*', 12],
+        ['*', 'railway:position', '*', 12],
         ['line', 'ref', '*', 12],
         ['area', 'ref', '*', 12],
         ['point', 'ref', '*', 10],
@@ -297,7 +307,7 @@ export function svgLabels(projection, context) {
                 var matchVal = labelStack[k][2];
                 var hasVal = entity.tags[matchKey];
 
-                if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
+                if ((matchGeom === '*' || geometry === matchGeom) && hasVal && (matchVal === '*' || matchVal === hasVal)) {
                     labelable[k].push(entity);
                     break;
                 }
