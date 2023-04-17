@@ -177,8 +177,10 @@ export function uiFieldAddress(field, context) {
                 .call(uiCombobox(context, 'address-' + d.id)
                     .minItems(1)
                     .caseSensitive(true)
-                    .fetcher(function(value, callback) {
-                        callback(nearValues('addr:' + d.id));
+                    .fetcher(function(typedValue, callback) {
+                        typedValue = typedValue.toLowerCase();
+                        callback(nearValues('addr:' + d.id)
+                            .filter(v => v.value.toLowerCase().indexOf(typedValue) !== -1));
                     })
                 );
         }
