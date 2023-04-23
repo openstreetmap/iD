@@ -260,7 +260,7 @@ export function utilDisplayLabel(entity, graphOrGeometry, verbose) {
     var presetName = preset && (preset.suggestion ? preset.subtitle() : preset.name());
 
     if (verbose) {
-        result = [presetName, displayName].filter(Boolean).join(' ');
+        result = [`The ${presetName} POI,`, `"${displayName}"`].filter(Boolean).join(' ');
     } else {
         result = displayName || presetName;
     }

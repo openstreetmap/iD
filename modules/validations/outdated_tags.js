@@ -220,6 +220,11 @@ export function validationOutdatedTags() {
           return `tagDiff-cell tagDiff-cell-${klass}`;
         })
         .html(d => d.display);
+      
+      enter
+        .append('div')
+        .attr('class', 'issue-reference')
+        .call(t.append(`issues.outdated_tags.${prefix}nsi_reference`));
     }
   }
 

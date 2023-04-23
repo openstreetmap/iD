@@ -1860,6 +1860,7 @@ en:
         message: "{feature} looks like a common feature with nonstandard tags"
         message_incomplete: "{feature} looks like a common feature with incomplete tags"
         reference: "Some features, for example retail chains or post offices, are expected to have certain tags in common."
+        nsi_reference: "The suggestions above are powered by the Name Suggestion Index."
     point_as_area:
       message: '{feature} should be a point, not an area'
     point_as_line:
