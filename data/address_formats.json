@@ -32,7 +32,7 @@
   {
     "countryCodes": ["at", "bg", "ch", "de", "si", "pl"],
     "format": [
-      ["street", "housenumber"],
+      ["street+place", "housenumber"],
       ["postcode", "city"]
     ]
   },
@@ -42,7 +42,7 @@
       "it", "li", "nl", "no", "pt", "se", "sk", "sm", "va"
     ],
     "format": [
-      ["street", "housenumber", "unit"],
+      ["street+place", "housenumber", "unit"],
       ["postcode", "city"]
     ]
   },
@@ -185,6 +185,13 @@
       ["housenumber", "street"],
       ["city", "postcode"],
       ["district"]
+    ]
+  },
+  {
+    "countryCodes": ["ru"],
+    "format": [
+      ["housenumber", "street+place"],
+      ["city", "postcode"]
     ]
   }
 ]
