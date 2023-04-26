@@ -47,6 +47,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
+# 2.25.2
+##### 2023-Apr-26
+* Rotate _Maxar Premium_ imagery access token
+
+
 # 2.25.1
 ##### 2023-Mar-03
 * Fix accidentally committed dev settings in production build
