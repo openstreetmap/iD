@@ -53,7 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 * Render "right-side" arrows for `man_made=quay` features
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.3
+* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.3, `marked` to v4.3, `core-js-bundle` to v3.30
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
