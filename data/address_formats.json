@@ -112,7 +112,7 @@
     "countryCodes": ["tw"],
     "format": [
       ["postcode", "city", "district"],
-      ["place", "street"],
+      ["street+place"],
       ["housenumber", "floor", "unit"]
     ]
   },
