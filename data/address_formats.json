@@ -38,8 +38,8 @@
   },
   {
     "countryCodes": [
-      "ad", "ba", "be", "cz", "dk", "es", "gr", "hr",
-      "it", "pt", "se", "sk", "sm", "va"
+      "ad", "ba", "be", "dk", "es", "gr", "hr",
+      "it", "pt", "se", "sm", "va"
     ],
     "format": [
       ["street+place", "housenumber", "unit"],
@@ -215,6 +215,13 @@
     "format": [
       ["housenumber", "street+place"],
       ["city", "postcode"]
+    ]
+  },
+  {
+    "countryCodes": ["cz", "sk"],
+    "format": [
+      ["street", "housenumber"],
+      ["postcode", "city"]
     ]
   }
 ]
