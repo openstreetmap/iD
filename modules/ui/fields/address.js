@@ -294,9 +294,9 @@ export function uiFieldAddress(field, context) {
                         if (Array.isArray(_tags[key]) && !value) return;
 
                         if (subfield.isAutoStreetPlace) {
-                            if (key === `${field.key}:street`) {
+                            if (subfield.id === 'street') {
                                 tags[`${field.key}:place`] = undefined;
-                            } else if (key === `${field.key}:place`) {
+                            } else if (subfield.id === 'place') {
                                 tags[`${field.key}:street`] = undefined;
                             }
                         }
@@ -336,8 +336,16 @@ export function uiFieldAddress(field, context) {
         utilGetSetValue(_wrap.selectAll('input'), subfield => {
                 var val;
                 if (subfield.isAutoStreetPlace) {
-                    val = tags[`${field.key}:place`] || tags[`${field.key}:street`];
-                    subfield.id = _tags[`${field.key}:place`] ? 'place' : 'street';
+                    const streetKey = `${field.key}:street`;
+                    const placeKey = `${field.key}:place`;
+
+                    if (tags[streetKey] !== undefined || tags[placeKey] === undefined) {
+                        val = tags[streetKey];
+                        subfield.id = 'street';
+                    } else {
+                        val = tags[placeKey];
+                        subfield.id = 'place';
+                    }
                 } else {
                     val = tags[`${field.key}:${subfield.id}`];
                 }
