@@ -97,7 +97,7 @@
     "happen": "^0.3.2",
     "js-yaml": "^4.0.0",
     "json-stringify-pretty-compact": "^3.0.0",
-    "karma": "^6.3.5",
+    "karma": "^6.4.2",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "2.1.1",
     "karma-mocha": "^2.0.1",
