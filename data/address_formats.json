@@ -1,7 +1,7 @@
 [
   {
     "format": [
-      ["housenumber", "street"],
+      ["housenumber", "street+place"],
       ["city", "postcode"]
     ]
   },
@@ -16,7 +16,7 @@
     "countryCodes": ["gb"],
     "format": [
       ["housename"],
-      ["housenumber", "street"],
+      ["housenumber", "street+place"],
       ["city", "postcode"]
     ]
   },
@@ -24,13 +24,13 @@
     "countryCodes": ["ie"],
     "format": [
       ["housename"],
-      ["housenumber", "street"],
+      ["housenumber", "street+place"],
       ["city"],
       ["postcode"]
     ]
   },
   {
-    "countryCodes": ["at", "bg", "ch", "de", "si", "pl"],
+    "countryCodes": ["at", "bg", "ch", "de", "si", "pl", "lt"],
     "format": [
       ["street+place", "housenumber"],
       ["postcode", "city"]
@@ -38,8 +38,8 @@
   },
   {
     "countryCodes": [
-      "ad", "ba", "be", "cz", "dk", "es", "fi", "gr", "hr", "is",
-      "it", "li", "nl", "no", "pt", "se", "sk", "sm", "va"
+      "ad", "ba", "be", "cz", "dk", "es", "gr", "hr",
+      "it", "pt", "se", "sk", "sm", "va"
     ],
     "format": [
       ["street+place", "housenumber", "unit"],
@@ -47,16 +47,39 @@
     ]
   },
   {
-    "countryCodes": ["fr", "lu", "mo"],
+    "countryCodes": [
+        "fi", "is", "li", "nl", "no"
+    ],
+    "format": [
+      ["street", "housenumber", "unit"],
+      ["postcode", "city"]
+    ]
+  },
+  {
+    "countryCodes": ["fr", "lu"],
+    "format": [
+      ["housenumber", "street+place"],
+      ["postcode", "city"]
+    ]
+  },
+  {
+    "countryCodes": ["mo"],
     "format": [
       ["housenumber", "street"],
       ["postcode", "city"]
     ]
   },
   {
+    "countryCodes": ["lv"],
+    "format": [
+      ["street", "housenumber"],
+      ["city", "postcode"]
+    ]
+  },
+  {
     "countryCodes": ["br"],
     "format": [
-      ["street"],
+      ["street+place"],
       ["housenumber", "suburb"],
       ["city", "postcode"]
     ]
@@ -121,7 +144,7 @@
     "countryCodes": ["tr"],
     "format": [
       ["neighbourhood"],
-      ["street", "housenumber"],
+      ["street+place", "housenumber"],
       ["postcode", "district", "city"]
     ]
   },
