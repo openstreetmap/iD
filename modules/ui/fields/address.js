@@ -112,8 +112,8 @@ export function uiFieldAddress(field, context) {
 
     function getNearPostcodes() {
         return [... new Set([]
-            .concat(getNearValues('postcode')))
-            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code'))];
+            .concat(getNearValues('postcode'))
+            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code')))];
     }
 
     function getNearValues(key) {
