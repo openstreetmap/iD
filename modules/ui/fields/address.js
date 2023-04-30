@@ -89,7 +89,7 @@ export function uiFieldAddress(field, context) {
         function isAddressable(d) {
             if (d.tags.name) {
                 if (d.tags.place) return true;
-                if (d.tags.boundary === 'administrative' && d.tags.admin_level >= 8) return true;
+                if (d.tags.boundary === 'administrative' && d.tags.admin_level > 8) return true;
             }
             return false;
         }
