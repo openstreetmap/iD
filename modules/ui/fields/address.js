@@ -87,8 +87,11 @@ export function uiFieldAddress(field, context) {
 
     function getNearPlaces() {
         function isAddressable(d) {
-            return d.tags.name && d.tags.place ||
-                d.tags.boundary === 'administrative' && d.tags.admin_level >= 8;
+            if (d.tags.name) {
+                if (d.tags.place) return true;
+                if (d.tags.boundary === 'administrative' && d.tags.admin_level >= 8) return true;
+            }
+            return false;
         }
 
         return getNear(isAddressable, 'place', 200);
