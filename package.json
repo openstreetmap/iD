@@ -80,7 +80,7 @@
     "@openstreetmap/id-tagging-schema": "^6.0.0",
     "@transifex/api": "^5.2.0",
     "autoprefixer": "^10.4.14",
-    "chai": "^4.3.4",
+    "chai": "^4.3.7",
     "chalk": "^4.1.2",
     "cldr-core": "^41.0.0",
     "cldr-localenames-full": "^41.0.0",
