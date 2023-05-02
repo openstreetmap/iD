@@ -167,7 +167,7 @@ export function uiFieldCombo(field, context) {
             setTaginfoValues('', setPlaceholder);
         } else {
             selection.call(_combobox, attachTo);
-            setStaticValues(setPlaceholder);
+            setTimeout(() => setStaticValues(setPlaceholder), 0);
         }
     }
 
