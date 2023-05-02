@@ -325,6 +325,12 @@ export function uiFieldCombo(field, context) {
 
         _container.selectAll('input')
             .attr('placeholder', ph);
+
+        // Hide 'Add' button if this field uses fixed set of
+        // options and they're all currently used
+        var hideAdd = (!_allowCustomValues && !values.length);
+        _container.selectAll('.chiplist .input-wrap')
+            .style('display', hideAdd ? 'none' : null);
     }
 
 
@@ -610,20 +616,13 @@ export function uiFieldCombo(field, context) {
             // a negative maxlength doesn't make sense
             maxLength = Math.max(0, maxLength);
 
-            var allowDragAndDrop = _isSemi // only semiCombo values are ordered
-                && !Array.isArray(tags[field.key]);
-
-            // Exclude existing multikeys from combo options..
-            var available = objectDifference(_comboData, _multiData);
-            _combobox.data(available);
-
-            // Hide 'Add' button if this field uses fixed set of
-            // options and they're all currently used,
-            // or if the field is already at its character limit
-            var hideAdd = (!_allowCustomValues && !available.length) || maxLength <= 0;
+            // Hide 'Add' button if this field is already at its character limit
+            var hideAdd = maxLength <= 0;
             _container.selectAll('.chiplist .input-wrap')
                 .style('display', hideAdd ? 'none' : null);
 
+            var allowDragAndDrop = _isSemi // only semiCombo values are ordered
+                && !Array.isArray(tags[field.key]);
 
             // Render chips
             var chips = _container.selectAll('.chip')
