@@ -505,36 +505,36 @@ describe('iD.osmNode', function () {
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
-        it('supports camera:direction=forward', function () {
+        it('supports surveillance:type=camera:direction=forward', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'forward' }});
+            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'surveillance:type=camera:direction': 'forward' }});
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([270]);
         });
 
-        it('supports camera:direction=backward', function () {
+        it('supports surveillance:type=camera:direction=backward', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'backward' }});
+            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'surveillance:type=camera:direction': 'backward' }});
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.eql([90]);
         });
 
-        it('supports camera:direction=both', function () {
+        it('supports surveillance:type=camera:direction=both', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both' }});
+            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'surveillance:type=camera:direction': 'both' }});
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
             expect(node2.directions(graph, projection)).to.have.members([90, 270]);
         });
 
-        it('supports camera:direction=all', function () {
+        it('supports surveillance:type=camera:direction=all', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'all' }});
+            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'surveillance:type=camera:direction': 'all' }});
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
@@ -582,7 +582,7 @@ describe('iD.osmNode', function () {
 
         it('supports mixing textual, cardinal, numeric directions, delimited by ;', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
-            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'camera:direction': 'both;ne;60' }});
+            var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'surveillance:type=camera:direction': 'both;ne;60' }});
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
