@@ -186,5 +186,13 @@
       ["city", "postcode"],
       ["district"]
     ]
+  },
+  {
+    "countryCodes": ["ph"],
+    "format": [
+      ["unit","housenumber", "street"],
+	  ["district", "city"],
+	  ["postcode", "province"]
+    ]
   }
 ]
