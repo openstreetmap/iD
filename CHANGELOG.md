@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix `multi/many/semiCombo` options for not being selectable immediately after removing them for fields with predefined options
 * Fix a bug where the _Add_ input element on comboboxes with a fixed set of allowed options is still hidden after an option of a previously "fully saturated" field is removed
+* Fix wrongly flagged "incorrect geometry type" warnings for features with lifecycle-prefixed tags ([#9483], thanks [@biswajit-k])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone Format for India ([#9482], thanks [@biswajit-k])
@@ -60,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
+[#9483]: https://github.com/openstreetmap/iD/pull/9483
 [#9492]: https://github.com/openstreetmap/iD/pull/9492
 [#9493]: https://github.com/openstreetmap/iD/pull/9493
 [#9520]: https://github.com/openstreetmap/iD/pull/9520
