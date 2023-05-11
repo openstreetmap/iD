@@ -73,7 +73,7 @@ export function uiFieldCombo(field, context) {
     function tagValue(dval) {
         dval = clean(dval || '');
 
-        var found = getOptions().find(function(o) {
+        var found = getOptions(true).find(function(o) {
             return o.key && clean(o.value) === dval;
         });
         if (found) return found.key;
@@ -171,11 +171,17 @@ export function uiFieldCombo(field, context) {
         }
     }
 
-    function getOptions() {
+    function getOptions(allOptions) {
         var stringsField = field.resolveReference('stringsCrossReference');
         if (!(field.options || stringsField.options)) return [];
 
-        return (field.options || stringsField.options).map(function(v) {
+        let options;
+        if (allOptions !== true) {
+            options = field.options || stringsField.options;
+        } else {
+            options = [].concat(field.options, stringsField.options).filter(Boolean);
+        }
+        return options.map(function(v) {
             const labelId = getLabelId(stringsField, v);
             return {
                 key: v,
