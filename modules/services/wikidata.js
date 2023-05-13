@@ -32,9 +32,11 @@ export default {
             search: query,
             type: 'item',
             // the language to search
-            language: lang,
+            // do not include the country-code suffix
+            language: lang.split('-')[0],
             // the language for the label and description in the result
-            uselang: lang,
+            // do not include the country-code suffix
+            uselang: lang.split('-')[0],
             limit: 10,
             origin: '*'
         });
