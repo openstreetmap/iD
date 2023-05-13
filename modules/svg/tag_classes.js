@@ -159,7 +159,12 @@ export function svgTagClasses() {
             classes.push('tag-wikidata');
         }
 
-        return classes.join(' ').trim();
+        // ensure that tags keys/values with spaces are not added to the DOM,
+        // because it can cause bizarre issues (#9448)
+        return classes
+            .filter(clāss => !clāss.includes(' '))
+            .join(' ')
+            .trim();
     };
 
 
