@@ -43,6 +43,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             'unclassified': true,
             'living_street': true,
             'service': true,
+            'busway': true,
             'road': true,
             'track': true
         };

@@ -25,7 +25,8 @@ export function svgLines(projection, context) {
         unclassified: 8,
         residential: 9,
         service: 10,
-        footway: 11
+        busway: 11,
+        footway: 12
     };
 
 

@@ -109,7 +109,7 @@ Object.assign(osmWay.prototype, {
                 motorway: 5, motorway_link: 5, trunk: 4.5, trunk_link: 4.5,
                 primary: 4, secondary: 4, tertiary: 4,
                 primary_link: 4, secondary_link: 4, tertiary_link: 4,
-                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, pedestrian: 4,
+                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, busway: 4, pedestrian: 4,
                 residential: 3.5, service: 3.5, track: 3, cycleway: 2.5,
                 bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5
             },

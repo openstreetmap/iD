@@ -212,6 +212,11 @@ export function uiFieldAccess(field, context) {
             },
             construction: {
                 access: 'no'
+            },
+            busway: {
+                access: 'no',
+                bus: 'designated',
+                emergency: 'yes',
             }
         },
         barrier: {

@@ -369,6 +369,7 @@ export function uiPresetIcon() {
     subway: ['railway/subway', 'railway/subway', 'railway/subway'],
     train: ['railway/rail', 'railway/rail', 'railway/rail'],
     tram: ['railway/tram', 'railway/tram', 'railway/tram'],
+    railway: ['railway/rail', 'railway/rail', 'railway/rail'],
     waterway: ['waterway/stream', 'waterway/stream', 'waterway/stream']
   };
 
