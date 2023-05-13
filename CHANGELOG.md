@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Fix flickering when switching between background imagery layers, make switching backgrounds snappier
 * Prevent password managers from autofilling tag fields ([#10508], thanks [@michaelabon])
+* remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
 #### :scissors: Operations
 * When extracting a node from a way (shortcut: <kbd>E</kbd>), the relations are now preserved by default. Extracting a node without its relations is still possible using <kbd>⇧ Shift</kbd> <kbd>E</kbd> ([#9816], thanks [@k-yle])
 * Remove rarely-used keyboard shortcut <kbd>L</kbd> to prevent accidental activation of the geolocate tool ([#9999], thanks [@k-yle])
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Migrate unit tests from karma to vitest ([#10452])
 
 [#9013]: https://github.com/openstreetmap/iD/issues/9013
+[#9634]: https://github.com/openstreetmap/iD/pull/9634
 [#9816]: https://github.com/openstreetmap/iD/issues/9816
 [#9999]: https://github.com/openstreetmap/iD/issues/9999
 [#10452]: https://github.com/openstreetmap/iD/pull/10452
