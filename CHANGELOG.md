@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow broken (unclosed) areas to be continued ([#9635], thanks [@k-yle])
 * Render `*_link` roads narrower than their "regular" counterpart ([#10722])
 * Remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
+* Add a changeset tag if a merge conflict occurred ([#9636], thanks [@k-yle])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 * Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
@@ -80,6 +81,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9586]: https://github.com/openstreetmap/iD/pull/9586
 [#9634]: https://github.com/openstreetmap/iD/pull/9634
 [#9635]: https://github.com/openstreetmap/iD/pull/9635
+[#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10618]: https://github.com/openstreetmap/iD/pull/10618
 [#10646]: https://github.com/openstreetmap/iD/pull/10646

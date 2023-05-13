@@ -876,6 +876,16 @@ export default {
         }
     },
 
+    /** updates the tags on an existing unclosed changeset */
+    // PUT /api/0.6/changeset/#id
+    updateChangesetTags: (changeset) => {
+        return oauth.fetch(`${oauth.options().apiUrl}/api/0.6/changeset/${changeset.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'text/xml' },
+            body: JXON.stringify(changeset.asJXON())
+        });
+    },
+
 
     // Load multiple users in chunks
     // (note: callback may be called multiple times)
