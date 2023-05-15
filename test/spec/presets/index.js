@@ -420,7 +420,7 @@ describe('iD.presetIndex', function () {
             var graph = iD.coreGraph([surfShop]);
             var url = 'https://fakemaprules.io/fake.json';
 
-            // no exernal presets yet
+            // no external presets yet
             expect(iD.presetIndex().match(surfShop, graph).id).to.eql('point');
 
             // reset graph...
