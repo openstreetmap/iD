@@ -49,7 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix corruption of tag values of fields with referenced strings, but restricted `options`, when an unavailable option is entered manually into the field.
 * Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
 * Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
-
+* Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone Format for India ([#9482], thanks [@biswajit-k])
@@ -70,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9493]: https://github.com/openstreetmap/iD/pull/9493
 [#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
+[#9637]: https://github.com/openstreetmap/iD/pull/9637
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [@biswajit-k]: https://github.com/biswajit-k
