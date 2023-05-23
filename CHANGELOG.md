@@ -48,6 +48,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix wrongly flagged "incorrect geometry type" warnings for features with lifecycle-prefixed tags ([#9483], thanks [@biswajit-k])
 * Fix corruption of tag values of fields with referenced strings, but restricted `options`, when an unavailable option is entered manually into the field.
 * Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
+* Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
+
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone Format for India ([#9482], thanks [@biswajit-k])
@@ -68,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9493]: https://github.com/openstreetmap/iD/pull/9493
 [#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
+[#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [@biswajit-k]: https://github.com/biswajit-k
 

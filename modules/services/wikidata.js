@@ -17,13 +17,13 @@ export default {
 
 
     // Search for Wikidata items matching the query
-    itemsForSearchQuery: function(query, callback) {
+    itemsForSearchQuery: function _itemsForSearchQuery(query, callback, language) {
         if (!query) {
             if (callback) callback('No query', {});
             return;
         }
 
-        var lang = this.languagesToQuery()[0];
+        var lang = language || this.languagesToQuery()[0];
 
         var url = apibase + utilQsString({
             action: 'wbsearchentities',
@@ -42,7 +42,14 @@ export default {
         d3_json(url)
             .then(function(result) {
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    if (result.error.code === 'badvalue' &&
+                        result.error.info.includes(lang) &&
+                        !language && lang.includes('-')) {
+                        // retry without "country suffix" region subtag
+                        _itemsForSearchQuery(query, callback, lang.split('-')[0]);
+                    } else {
+                        throw new Error(result.error);
+                    }
                 }
                 if (callback) callback(null, result.search || {});
             })
