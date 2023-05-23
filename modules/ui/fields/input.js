@@ -384,6 +384,17 @@ export function uiFieldText(field, context) {
     }
 
 
+    // returns all values of a (potential) multiselection and/or multi-key field
+    function getVals(tags) {
+        if (field.keys) {
+            return new Set(field.keys.reduce((acc, key) => acc.concat(tags[key]), [])
+                .filter(Boolean));
+        } else {
+            return new Set([].concat(tags[field.key]).filter(Boolean));
+        }
+    }
+
+
     function change(onInput) {
         return function() {
             var t = {};
@@ -391,7 +402,7 @@ export function uiFieldText(field, context) {
             if (!onInput) val = context.cleanTagValue(val);
 
             // don't override multiple values with blank string
-            if (!val && Array.isArray(_tags[field.key])) return;
+            if (!val && getVals(_tags).size > 1) return;
 
             if (!onInput) {
                 if (field.type === 'number' && val) {
@@ -405,7 +416,24 @@ export function uiFieldText(field, context) {
                 utilGetSetValue(input, val);
             }
             t[field.key] = val || undefined;
-            dispatch.call('change', this, t, onInput);
+            if (field.keys) {
+                // for multi-key fields with: handle alternative tag keys gracefully
+                // https://github.com/openstreetmap/id-tagging-schema/issues/905
+                dispatch.call('change', this, tags => {
+                    if (field.keys.some(key => tags[key])) {
+                        // use exiting key(s)
+                        field.keys.filter(key => tags[key]).forEach(key => {
+                            tags[key] = val || undefined;
+                        });
+                    } else {
+                        // fall back to default key if none of the `keys` is preset
+                        tags[field.key] = val || undefined;
+                    }
+                    return tags;
+                }, onInput);
+            } else {
+                dispatch.call('change', this, t, onInput);
+            }
         };
     }
 
@@ -416,14 +444,14 @@ export function uiFieldText(field, context) {
         return i;
     };
 
-
     i.tags = function(tags) {
         _tags = tags;
 
-        var isMixed = Array.isArray(tags[field.key]);
-
-        utilGetSetValue(input, !isMixed && tags[field.key] ? tags[field.key] : '')
-            .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : undefined)
+        const vals = getVals(tags);
+        const isMixed = vals.size > 1;
+        const val = vals.size === 1 ? [...vals][0] : '';
+        utilGetSetValue(input, val)
+            .attr('title', isMixed ? [...vals].join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
 

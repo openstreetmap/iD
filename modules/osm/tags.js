@@ -242,3 +242,6 @@ export var osmRailwayTrackTagValues = {
 export var osmFlowingWaterwayTagValues = {
     canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
 };
+
+// Tags which values should be considered case sensitive when offering tag suggestions
+export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
