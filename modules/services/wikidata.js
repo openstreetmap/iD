@@ -23,7 +23,7 @@ export default {
             return;
         }
 
-        var lang = language || this.languagesToQuery()[0];
+        var lang = this.languagesToQuery()[0];
 
         var url = apibase + utilQsString({
             action: 'wbsearchentities',
@@ -32,7 +32,7 @@ export default {
             search: query,
             type: 'item',
             // the language to search
-            language: lang,
+            language: language || lang,
             // the language for the label and description in the result
             uselang: lang,
             limit: 10,
