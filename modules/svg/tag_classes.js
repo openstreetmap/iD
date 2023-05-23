@@ -162,7 +162,7 @@ export function svgTagClasses() {
         // ensure that classes for tags keys/values with special characters like spaces
         // are not added to the DOM, because it can cause bizarre issues (#9448)
         return classes
-            .filter(klass => /^[-_a-z]+$/.test(klass))
+            .filter(klass => /^[-_a-z0-9]+$/.test(klass))
             .join(' ')
             .trim();
     };
