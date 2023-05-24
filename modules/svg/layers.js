@@ -13,6 +13,7 @@ import { svgMapillaryPosition } from './mapillary_position';
 import { svgMapillarySigns } from './mapillary_signs';
 import { svgMapillaryMapFeatures } from './mapillary_map_features';
 import { svgKartaviewImages } from './kartaview_images';
+import { svgMapilioImages } from './mapilio_images';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
 import { svgTouch } from './touch';
@@ -38,7 +39,8 @@ export function svgLayers(projection, context) {
         { id: 'kartaview', layer: svgKartaviewImages(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
         { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
-        { id: 'touch', layer: svgTouch(projection, context, dispatch) }
+        { id: 'touch', layer: svgTouch(projection, context, dispatch) },
+        { id: 'mapilio', layer: svgMapilioImages(projection, context, dispatch) }
     ];
 
 
