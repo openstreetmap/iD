@@ -5,9 +5,12 @@ import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilRebind, utilTiler } from '../util';
+import {geoExtent, geoScaleToZoom} from '../geo';
 
 const baseTileUrl = 'https://geo.mapilio.com/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=mapilio:';
-const pointsTileUrl = `${baseTileUrl}points_mapilio_map&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}`;
+const pointLayer = 'points_mapilio_map';
+const lineLayer = 'captured_roads_line';
+const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
 
 const minZoom = 14;
 const dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'imageChanged');
@@ -15,6 +18,31 @@ const dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMap
 let _mlyActiveImage;
 let _mlyCache;
 
+
+// Partition viewport into higher zoom tiles
+function partitionViewport(projection) {
+    const z = geoScaleToZoom(projection.scale());
+    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    const tiler = utilTiler().zoomExtent([z2, z2]);
+
+    return tiler.getTiles(projection)
+        .map(function(tile) { return tile.extent; });
+}
+
+
+// Return no more than `limit` results per partition.
+function searchLimited(limit, projection, rtree) {
+    limit = limit || 5;
+
+    return partitionViewport(projection)
+        .reduce(function(result, extent) {
+            const found = rtree.search(extent.bbox())
+                .slice(0, limit)
+                .map(function(d) { return d.data; });
+
+            return (found.length ? result.concat(found) : result);
+        }, []);
+}
 
 // Load all data for the specified type from Mapilio vector tiles
 function loadTiles(which, url, maxZoom, projection) {
@@ -100,43 +128,18 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('sequence')) {
+    if (vectorTile.layers.hasOwnProperty('captured_roads_line')) {
         features = [];
         cache = _mlyCache.sequences;
-        layer = vectorTile.layers.sequence;
+        layer = vectorTile.layers.captured_roads_line;
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            if (cache.lineString[feature.properties.id]) {
-                cache.lineString[feature.properties.id].push(feature);
+            if (cache.lineString[feature.properties.sequence_uuid]) {
+                cache.lineString[feature.properties.sequence_uuid].push(feature);
             } else {
-                cache.lineString[feature.properties.id] = [feature];
+                cache.lineString[feature.properties.sequence_uuid] = [feature];
             }
-        }
-    }
-
-    if (vectorTile.layers.hasOwnProperty('point')) {
-        features = [];
-        cache = _mlyCache[which];
-        layer = vectorTile.layers.point;
-
-        for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            loc = feature.geometry.coordinates;
-
-            d = {
-                loc: loc,
-                id: feature.properties.id,
-                first_seen_at: feature.properties.first_seen_at,
-                last_seen_at: feature.properties.last_seen_at,
-                value: feature.properties.value
-            };
-            features.push({
-                minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
-            });
-        }
-        if (cache.rtree) {
-            cache.rtree.load(features);
         }
     }
 
@@ -168,10 +171,48 @@ export default {
         _mlyActiveImage = null;
     },
 
+    // Get visible images
+    images: function(projection) {
+        const limit = 5;
+        return searchLimited(limit, projection, _mlyCache.images.rtree);
+    },
+
 
     // Load images in the visible area
     loadImages: function(projection) {
-        loadTiles('images', pointsTileUrl, 14, projection);
+        let url = baseTileUrl + pointLayer + tileStyle;
+        loadTiles('images', url, 14, projection);
+    },
+
+    // Load line in the visible area
+    loadLines: function(projection) {
+        let url = baseTileUrl + lineLayer + tileStyle;
+        loadTiles('line', url, 14, projection);
+    },
+
+    // Get visible sequences
+    sequences: function(projection) {
+        const viewport = projection.clipExtent();
+        const min = [viewport[0][0], viewport[1][1]];
+        const max = [viewport[1][0], viewport[0][1]];
+        const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        const sequenceIds = {};
+        let lineStrings = [];
+
+        _mlyCache.images.rtree.search(bbox)
+            .forEach(function(d) {
+                if (d.data.sequence_id) {
+                    sequenceIds[d.data.sequence_id] = true;
+                }
+            });
+
+        Object.keys(sequenceIds).forEach(function(sequenceId) {
+            if (_mlyCache.sequences.lineString[sequenceId]) {
+                lineStrings = lineStrings.concat(_mlyCache.sequences.lineString[sequenceId]);
+            }
+        });
+
+        return lineStrings;
     },
 
 

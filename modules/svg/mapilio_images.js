@@ -2,6 +2,7 @@ import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
 import { services } from '../services';
+import {svgPath, svgPointTransform} from './helpers';
 
 
 export function svgMapilioImages(projection, context, dispatch) {
@@ -55,6 +56,14 @@ export function svgMapilioImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
+    function transform(d) {
+        let t = svgPointTransform(projection)(d);
+        if (d.ca) {
+            t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        }
+        return t;
+    }
+
 
     function editOn() {
         layer.style('display', 'block');
@@ -64,6 +73,79 @@ export function svgMapilioImages(projection, context, dispatch) {
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
+    }
+
+    function update() {
+
+        const z = ~~context.map().zoom();
+
+        const service = getService();
+        let sequences = (service ? service.sequences(projection) : []);
+        let images = (service ? service.images(projection) : []);
+
+
+        // service.filterViewer(context);
+
+        let traces = layer.selectAll('.sequences').selectAll('.sequence')
+            .data(sequences, function(d) { return d.properties.id; });
+
+        // exit
+        traces.exit()
+            .remove();
+        //
+        // // enter/update
+        traces = traces.enter()
+            .append('path')
+            .attr('class', 'sequence')
+            .merge(traces)
+            .attr('d', svgPath(projection).geojson);
+
+
+        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+            .data(images, function(d) { return d.id; });
+
+        // exit
+        groups.exit()
+            .remove();
+
+        // enter
+        const groupsEnter = groups.enter()
+            .append('g')
+            .attr('class', 'viewfield-group');
+
+        groupsEnter
+            .append('g')
+            .attr('class', 'viewfield-scale');
+
+        // update
+        const markers = groups
+            .merge(groupsEnter)
+            .sort(function(a, b) {
+                return b.loc[1] - a.loc[1];  // sort Y
+            })
+            .attr('transform', transform)
+            .select('.viewfield-scale');
+
+
+        markers.selectAll('circle')
+            .data([0])
+            .enter()
+            .append('circle')
+            .attr('dx', '0')
+            .attr('dy', '0')
+            .attr('r', '6');
+
+        const viewfields = markers.selectAll('.viewfield')
+            .data([0]);
+
+        viewfields.exit()
+            .remove();
+
+        viewfields.enter()               // viewfields may or may not be drawn...
+            .insert('path', 'circle')    // but if they are, draw below the circles
+            .attr('class', 'viewfield')
+            .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+
     }
 
 
@@ -96,7 +178,9 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (enabled) {
             if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
+                update();
                 service.loadImages(projection);
+                service.loadLines(projection);
             } else {
                 editOff();
             }
