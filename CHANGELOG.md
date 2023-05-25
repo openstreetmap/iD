@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Offer to connect sidewalk to service road without tagging the connection as a crossing ([#9650], thanks [@1ec5])
 #### :bug: Bugfixes
 * Fix `multi/many/semiCombo` options for not being selectable immediately after removing them for fields with predefined options
 * Fix a bug where the _Add_ input element on comboboxes with a fixed set of allowed options is still hidden after an option of a previously "fully saturated" field is removed
@@ -73,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9637]: https://github.com/openstreetmap/iD/pull/9637
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
+[#9650]: https://github.com/openstreetmap/iD/pull/9650
 [@biswajit-k]: https://github.com/biswajit-k
 
 
