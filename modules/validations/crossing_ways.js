@@ -716,7 +716,7 @@ export function validationCrossingWays(context) {
             }
         }
 
-        return new validationIssueFix({
+        const fix = new validationIssueFix({
             icon: fixIcon,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
@@ -756,6 +756,8 @@ export function validationCrossingWays(context) {
                 );
             }
         });
+        fix._connectionTags = connectionTags;
+        return fix;
     }
 
     function makeChangeLayerFix(higherOrLower) {
