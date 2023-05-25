@@ -151,7 +151,7 @@ export function uiFieldCombo(field, context) {
     function objectDifference(a, b) {
         return a.filter(function(d1) {
             return !b.some(function(d2) {
-                return !d2.isMixed && d1.value === d2.value;
+                return d1.value === d2.value;
             });
         });
     }

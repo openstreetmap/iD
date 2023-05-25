@@ -37,7 +37,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.26.0-dev)
 #### :tada: New Features
-* Combo fields for tags with `yes/no` values now correctly display the `no` state and allow to toggle between the two states ([#7427])
+* Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 #### :scissors: Operations
