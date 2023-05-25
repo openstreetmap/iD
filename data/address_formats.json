@@ -190,7 +190,7 @@
   {
     "countryCodes": ["ph"],
     "format": [
-      ["unit","housenumber", "street"],
+      ["unit", "housenumber", "street"],
 	  ["district", "city"],
 	  ["postcode", "province"]
     ]
