@@ -1,3 +1,5 @@
+import { isEqual } from 'lodash';
+
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -442,7 +444,7 @@ export function validationCrossingWays(context) {
                 if (connectionTags) {
                     fixes.push(makeConnectWaysFix(this.data.connectionTags));
                     let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
-                    if (lessLikelyConnectionTags && JSON.stringify(connectionTags) !== JSON.stringify(lessLikelyConnectionTags)) {
+                    if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
                         fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
                     }
                 }
@@ -709,7 +711,9 @@ export function validationCrossingWays(context) {
         }
         if (connectionTags.ford) {
             fixTitleID = 'connect_using_ford';
-            fixIcon = 'temaki-pedestrian';
+            if (connectionTags.highway) {
+                fixIcon = 'temaki-pedestrian';
+            }
         }
 
         return new validationIssueFix({
