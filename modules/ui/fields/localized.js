@@ -96,7 +96,7 @@ export function uiFieldLocalized(field, context) {
                 var preset = presetManager.match(entity, context.graph());
                 if (preset) {
                     var isSuggestion = preset.suggestion;
-                    var fields = preset.fields();
+                    var fields = preset.fields(entity.extent(context.graph()).center());
                     var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
                     var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
                     var setsName = preset.addTags.name;

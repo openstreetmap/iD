@@ -61,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
+* Take regional variants of parent presets into account when resolving preset fields ([#9524])
 * Render "right-side" arrows for `man_made=quay` features
 #### :hammer: Development
 * Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v4.3, `core-js-bundle` to v3.30, `osm-auth` to v2.1
@@ -72,8 +73,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9483]: https://github.com/openstreetmap/iD/pull/9483
 [#9492]: https://github.com/openstreetmap/iD/pull/9492
 [#9493]: https://github.com/openstreetmap/iD/pull/9493
-[#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
+[#9520]: https://github.com/openstreetmap/iD/pull/9520
+[#9524]: https://github.com/openstreetmap/iD/issues/9524
 [#9630]: https://github.com/openstreetmap/iD/pull/9630
 [#9637]: https://github.com/openstreetmap/iD/pull/9637
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
