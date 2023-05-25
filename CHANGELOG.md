@@ -54,7 +54,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
-* Add Address and Phone Format for India ([#9482], thanks [@biswajit-k])
+* Add Address and Phone format for India ([#9482], thanks [@biswajit-k])
+* Add Address format for the Philippines ([#9482], thanks [@bryceco])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -62,7 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 * Render "right-side" arrows for `man_made=quay` features
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.3, `marked` to v4.3, `core-js-bundle` to v3.30
+* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v4.3, `core-js-bundle` to v3.30, `osm-auth` to v2.1
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
@@ -73,11 +74,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9493]: https://github.com/openstreetmap/iD/pull/9493
 [#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
+[#9630]: https://github.com/openstreetmap/iD/pull/9630
 [#9637]: https://github.com/openstreetmap/iD/pull/9637
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [#9650]: https://github.com/openstreetmap/iD/pull/9650
 [@biswajit-k]: https://github.com/biswajit-k
+[@bryceco]: https://github.com/bryceco
 
 
 # 2.25.2
