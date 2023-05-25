@@ -37,6 +37,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.26.0-dev)
 #### :tada: New Features
+* Combo fields for tags with `yes/no` values now correctly display the `no` state and allow to toggle between the two states ([#7427])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 #### :scissors: Operations
@@ -65,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
+[#7427]: https://github.com/openstreetmap/iD/issues/7427
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
 [#9483]: https://github.com/openstreetmap/iD/pull/9483
 [#9492]: https://github.com/openstreetmap/iD/pull/9492

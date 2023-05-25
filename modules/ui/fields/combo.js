@@ -416,6 +416,17 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    function invertMultikey(d3_event, d) {
+        d3_event.preventDefault();
+        d3_event.stopPropagation();
+        var t = {};
+        if (_isMulti) {
+            t[d.key] = _tags[d.key] === 'yes' ? 'no' : 'yes';
+        }
+        dispatch.call('change', this, t);
+    }
+
+
     function combo(selection) {
         _container = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -454,6 +465,11 @@ export function uiFieldCombo(field, context) {
                 .append('li')
                 .attr('class', 'input-wrap')
                 .merge(_inputWrap);
+
+            // Hide 'Add' button if this field uses fixed set of
+            // options and they're all currently used
+            var hideAdd = (!_allowCustomValues && !_comboData.length);
+            _inputWrap.style('display', hideAdd ? 'none' : null);
 
             _input = _inputWrap.selectAll('input')
                 .data([0]);
@@ -557,13 +573,13 @@ export function uiFieldCombo(field, context) {
                     if (!field.key && field.keys.indexOf(k) === -1) continue;
 
                     var v = tags[k];
-                    if (!v || (typeof v === 'string' && v.toLowerCase() === 'no')) continue;
 
                     var suffix = field.key ? k.slice(field.key.length) : k;
                     _multiData.push({
                         key: k,
                         value: displayValue(suffix),
                         display: renderValue(suffix),
+                        state: typeof v === 'string' ? v.toLowerCase() : '',
                         isMixed: Array.isArray(v)
                     });
                 }
@@ -623,7 +639,7 @@ export function uiFieldCombo(field, context) {
             maxLength = Math.max(0, maxLength);
 
             // Hide 'Add' button if this field is already at its character limit
-            var hideAdd = maxLength <= 0;
+            var hideAdd = maxLength <= 0 || (!_allowCustomValues && !_comboData.length);
             _container.selectAll('.chiplist .input-wrap')
                 .style('display', hideAdd ? 'none' : null);
 
@@ -656,8 +672,24 @@ export function uiFieldCombo(field, context) {
                     return d.isMixed;
                 })
                 .attr('title', function(d) {
-                    return d.isMixed ? t('inspector.unshared_value_tooltip') : null;
-                });
+                    if (d.isMixed) {
+                        return t('inspector.unshared_value_tooltip');
+                    }
+                    if (!['yes', 'no'].includes(d.state)) {
+                        return d.state;
+                    }
+                    return null;
+                })
+                .classed('negated', d => d.state === 'no');
+
+            if (!_isSemi) {
+                chips.selectAll('input[type=checkbox]').remove();
+                chips.insert('input', 'span')
+                    .attr('type', 'checkbox')
+                    .property('checked', d => d.state === 'yes')
+                    .property('indeterminate', d => d.isMixed || !['yes', 'no'].includes(d.state))
+                    .on('click', invertMultikey);
+            }
 
             if (allowDragAndDrop) {
                 registerDragAndDrop(chips);
