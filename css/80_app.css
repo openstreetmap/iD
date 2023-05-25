@@ -1662,7 +1662,7 @@ input.date-selector {
 .form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
-    align-items: baseline;
+    align-items: center;
     margin-bottom: 3px;
     margin-top: 3px;
     border-radius: 4px;
@@ -1790,15 +1790,14 @@ input.date-selector {
     width: 28px;
 }
 .form-field-input-multicombo li.chip .tag-value-icon .icon {
-    margin-right: 8px;
-    margin-left: 2px;
+    margin: 0;
+    margin-right: 6px;
     display: inline-block;
-    vertical-align: bottom;
-    margin-bottom: 2px;
+    vertical-align: center;
 }
 .ideditor[dir='rtl'] .form-field-input-multicombo li.chip .tag-value-icon .icon {
-    margin-right: 8px;
-    margin-left: 2px;
+    margin-right: 6px;
+    margin-left: 0;
 }
 
 
