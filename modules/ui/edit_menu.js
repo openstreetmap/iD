@@ -120,8 +120,8 @@ export function uiEditMenu(context) {
         if (showLabels) {
             buttonsEnter.append('span')
                 .attr('class', 'label')
-                .html(function(d) {
-                    return d.title;
+                .each(function(d) {
+                    d3_select(this).call(d.title);
                 });
         }
 

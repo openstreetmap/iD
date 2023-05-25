@@ -180,7 +180,14 @@ export function behaviorSelect(context) {
             }
         } else {
             _lastMouseEvent = d3_event;
-            _lastInteractionType = 'rightclick';
+            if (d3_event.pointerType === 'touch' || d3_event.pointerType === 'pen' ||
+                d3_event.mozInputSource && ( // firefox doesn't give a pointerType on contextmenu events
+                    d3_event.mozInputSource === MouseEvent.MOZ_SOURCE_TOUCH ||
+                    d3_event.mozInputSource === MouseEvent.MOZ_SOURCE_PEN)) {
+                _lastInteractionType = 'touch';
+            } else {
+                _lastInteractionType = 'rightclick';
+            }
         }
 
         _showMenu = true;

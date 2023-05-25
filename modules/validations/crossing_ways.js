@@ -1,3 +1,5 @@
+import { isEqual } from 'lodash';
+
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -123,9 +125,8 @@ export function validationCrossingWays(context) {
         motorway: true, motorway_link: true, trunk: true, trunk_link: true,
         primary: true, primary_link: true, secondary: true, secondary_link: true
     };
-    var nonCrossingHighways = { track: true };
 
-    function tagsForConnectionNodeIfAllowed(entity1, entity2, graph) {
+    function tagsForConnectionNodeIfAllowed(entity1, entity2, graph, lessLikelyTags) {
         var featureType1 = getFeatureType(entity1, graph);
         var featureType2 = getFeatureType(entity2, graph);
 
@@ -141,12 +142,19 @@ export function validationCrossingWays(context) {
                     // one feature is a path but not both
 
                     var roadFeature = entity1IsPath ? entity2 : entity1;
-                    if (nonCrossingHighways[roadFeature.tags.highway]) {
-                        // don't mark path connections with certain roads as crossings
+                    var pathFeature = entity1IsPath ? entity1 : entity2;
+                    // don't mark path connections with tracks as crossings
+                    if (roadFeature.tags.highway === 'track') {
                         return {};
                     }
-                    var pathFeature = entity1IsPath ? entity1 : entity2;
-                    if (['marked', 'unmarked', 'traffic_signals'].indexOf(pathFeature.tags.crossing) !== -1) {
+                    // a sidewalk crossing a driveway is unremarkable and unlikely to be interrupted by the driveway
+                    // a sidewalk crossing another kind of service road may be similarly unremarkable
+                    if (!lessLikelyTags &&
+                        roadFeature.tags.highway === 'service' &&
+                        pathFeature.tags.highway === 'footway' && pathFeature.tags.footway === 'sidewalk') {
+                        return {};
+                    }
+                    if (['marked', 'unmarked', 'traffic_signals', 'uncontrolled'].indexOf(pathFeature.tags.crossing) !== -1) {
                         // if the path is a crossing, match the crossing type
                         return bothLines ? { highway: 'crossing', crossing: pathFeature.tags.crossing } : {};
                     }
@@ -435,6 +443,10 @@ export function validationCrossingWays(context) {
 
                 if (connectionTags) {
                     fixes.push(makeConnectWaysFix(this.data.connectionTags));
+                    let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
+                    if (lessLikelyConnectionTags && !isEqual(connectionTags, lessLikelyConnectionTags)) {
+                        fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
+                    }
                 }
 
                 if (isCrossingIndoors) {
@@ -692,16 +704,23 @@ export function validationCrossingWays(context) {
     function makeConnectWaysFix(connectionTags) {
 
         var fixTitleID = 'connect_features';
+        var fixIcon = 'iD-icon-crossing';
+        if (connectionTags.highway === 'crossing') {
+            fixTitleID = 'connect_using_crossing';
+            fixIcon = 'temaki-pedestrian';
+        }
         if (connectionTags.ford) {
             fixTitleID = 'connect_using_ford';
+            if (connectionTags.highway) {
+                fixIcon = 'temaki-pedestrian';
+            }
         }
 
-        return new validationIssueFix({
-            icon: 'iD-icon-crossing',
+        const fix = new validationIssueFix({
+            icon: fixIcon,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
                 var loc = this.issue.loc;
-                var connectionTags = this.issue.data.connectionTags;
                 var edges = this.issue.data.edges;
 
                 context.perform(
@@ -737,6 +756,8 @@ export function validationCrossingWays(context) {
                 );
             }
         });
+        fix._connectionTags = connectionTags;
+        return fix;
     }
 
     function makeChangeLayerFix(higherOrLower) {

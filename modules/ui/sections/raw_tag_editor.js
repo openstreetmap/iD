@@ -11,6 +11,7 @@ import { localizer, t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 import { uiTooltip } from '..';
+import { allowUpperCaseTagValues } from '../../osm/tags';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -421,7 +422,9 @@ export function uiSectionRawTagEditor(id, context) {
                     query: value
                 }, function(err, data) {
                     if (!err) {
-                        var filtered = data.filter(function(d) { return _tags[d.value] === undefined; });
+                        const filtered = data
+                            .filter(d => _tags[d.value] === undefined)
+                            .filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
                         callback(sort(value, filtered));
                     }
                 });
@@ -435,9 +438,13 @@ export function uiSectionRawTagEditor(id, context) {
                     geometry: geometry,
                     query: value
                 }, function(err, data) {
-                    if (!err) callback(sort(value, data));
+                    if (!err) {
+                        const filtered = data.filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
+                        callback(sort(value, filtered));
+                    }
                 });
-            }));
+            })
+            .caseSensitive(allowUpperCaseTagValues.test(utilGetSetValue(key))));
 
 
         function sort(value, data) {

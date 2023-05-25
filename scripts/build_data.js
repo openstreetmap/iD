@@ -16,6 +16,13 @@ const far = require('@fortawesome/free-regular-svg-icons').far;
 const fab = require('@fortawesome/free-brands-svg-icons').fab;
 fontawesome.library.add(fas, far, fab);
 
+const dotenv = require('dotenv');
+dotenv.config();
+const presetsVersion = require('../package.json').devDependencies['@openstreetmap/id-tagging-schema'];
+/* eslint-disable no-process-env */
+const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
+/* eslint-enable no-process-env */
+
 let _currBuild = null;
 
 
@@ -39,7 +46,6 @@ function buildData() {
 
   // Create symlinks if necessary..  { 'target': 'source' }
   const symlinks = {
-    'land.html': 'dist/land.html',
     img: 'dist/img'
   };
 
@@ -64,7 +70,9 @@ function buildData() {
     'fas-i-cursor',
     'fas-lock',
     'fas-th-list',
-    'fas-user-cog'
+    'fas-user-cog',
+    'fas-calendar-days',
+    'fas-rotate'
   ]);
   // add icons for QA integrations
   readQAIssueIcons(faIcons);
@@ -91,9 +99,9 @@ function buildData() {
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/presets.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json'),
-      fetch('https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json'),
+      fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/preset_categories.min.json`),
+      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`),
       // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
       // latest icons, but note that the format could break at any time
       fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
@@ -109,6 +117,9 @@ function buildData() {
           // fontawesome icon
           if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
             faIcons.add(datum.icon);
+          }
+          if (datum.icons) {
+            Object.values(datum.icons).filter(icon => /^fa[srb]-/.test(icon)).forEach(faIcons.add);
           }
         }
       });
@@ -255,6 +266,15 @@ function minifyJSON(inPath, outPath) {
 
     });
   });
+}
+
+
+function fetchOrRequire(url) {
+  if (url.startsWith('.')) {
+    return Promise.resolve({ json: () => Promise.resolve(require(url)) });
+  } else {
+    return fetch(url);
+  }
 }
 
 

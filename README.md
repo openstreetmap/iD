@@ -39,9 +39,6 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
 
 ## Installation
 
-Note: Windows users should run these steps in a shell started with "Run as administrator".
-This is only necessary the first time so that the build process can create symbolic links.
-
 To run the current development version of iD on your own computer:
 
 #### Cloning the repository
@@ -85,6 +82,7 @@ iD also bundles portions of the following open source software.
 * [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
 * [Maki (CC0 1.0)](https://github.com/mapbox/maki)
 * [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
+* [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
 * [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
 * [iD Tagging Schema (ISC)](https://github.com/openstreetmap/id-tagging-schema)
 * [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)

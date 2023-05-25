@@ -137,7 +137,7 @@ export function uiFeatureList(context) {
             }
 
             // A location search takes priority over an ID search
-            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|[nwr])\W?0*([1-9]\d*)(?:\W|$)/i);
+            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
 
             if (idMatch) {
                 var elemType = idMatch[1].charAt(0);

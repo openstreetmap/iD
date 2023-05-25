@@ -35,25 +35,122 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased
+# Unreleased (2.26.0-dev)
+#### :tada: New Features
+* Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
+#### :sparkles: Usability & Accessibility
+* Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+* Offer to connect sidewalk to service road without tagging the connection as a crossing ([#9650], thanks [@1ec5])
+#### :bug: Bugfixes
+* Fix `multi/many/semiCombo` options for not being selectable immediately after removing them for fields with predefined options
+* Fix a bug where the _Add_ input element on comboboxes with a fixed set of allowed options is still hidden after an option of a previously "fully saturated" field is removed
+* Fix wrongly flagged "incorrect geometry type" warnings for features with lifecycle-prefixed tags ([#9483], thanks [@biswajit-k])
+* Fix corruption of tag values of fields with referenced strings, but restricted `options`, when an unavailable option is entered manually into the field.
+* Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
+* Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
+* Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
+#### :earth_asia: Localization
+* Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
+* Add Address and Phone format for India ([#9482], thanks [@biswajit-k])
+* Add Address format for the Philippines ([#9482], thanks [@bryceco])
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
+* Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
+* Take regional variants of parent presets into account when resolving preset fields ([#9524])
+* Render "right-side" arrows for `man_made=quay` features
+#### :hammer: Development
+* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v4.3, `core-js-bundle` to v3.30, `osm-auth` to v2.1
+* Bundle `package-lock.json` file in repository for faster `clean-install` builds
+* Build icons from configured presets source and also process field value `icons` in `npm run build:data`
+
+[#7427]: https://github.com/openstreetmap/iD/issues/7427
+[#9482]: https://github.com/openstreetmap/iD/pull/9482
+[#9483]: https://github.com/openstreetmap/iD/pull/9483
+[#9492]: https://github.com/openstreetmap/iD/pull/9492
+[#9493]: https://github.com/openstreetmap/iD/pull/9493
+[#9501]: https://github.com/openstreetmap/iD/pull/9501
+[#9520]: https://github.com/openstreetmap/iD/pull/9520
+[#9524]: https://github.com/openstreetmap/iD/issues/9524
+[#9630]: https://github.com/openstreetmap/iD/pull/9630
+[#9637]: https://github.com/openstreetmap/iD/pull/9637
+[#9638]: https://github.com/openstreetmap/iD/pull/9638
+[#9640]: https://github.com/openstreetmap/iD/issues/9640
+[#9650]: https://github.com/openstreetmap/iD/pull/9650
+[@biswajit-k]: https://github.com/biswajit-k
+[@bryceco]: https://github.com/bryceco
+
+
+# 2.25.2
+##### 2023-Apr-26
+* Rotate _Maxar Premium_ imagery access token
+
+
+# 2.25.1
+##### 2023-Mar-03
+* Fix accidentally committed dev settings in production build
+
+
+# 2.25.0
+##### 2023-Mar-03
+
+#### :mega: Release Highlights
+* Upgrade to tagging schema v6 ([#9477]):
+  * Add new `date` field for tags like `check_date`
+  * Add [Röntgen icon set](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
+  * Combo fields can now specify arbitrary icons for individual tag values
+#### :bug: Bugfixes
+* Fix context "edit" menu on touchscreens: render labels properly and always open the touch-specific edit menu ([#9425])
+#### :hammer: Development
+* `npm start` runs in _watch_ (i.e. `npm run start:watch`) mode by default (to start the dev server in _single build_ mode one can now use `npm run start:single-build`)
+* CDNs for resources (id-tagging-schema, osm-community-index, name-suggestion-index and others) are now configurable via environment variables (or a dotenv file)
+* API connections (main OSM API, taginfo, nominatim) are now configurable via environment variables (or a dotenv file)
+
+[#9425]: https://github.com/openstreetmap/iD/issues/9425
+[#9477]: https://github.com/openstreetmap/iD/issues/9477
+
+
+# 2.24.2
+##### 2023-Feb-09
+
+* Rotate _Maxar Premium_ imagery access token
+
+
+# 2.24.1
+##### 2023-Jan-25
+
+* Rotate _Mapbox Satellite_ imagery access token
+
+
+# 2.24.0
+##### 2023-Jan-19
 
 #### :tada: New Features
 * Show a _remaining input length_ indicator and a warning if the maximum for OSM tags (typically, 255 characters) is exceeded ([#9390], [#9392] thanks [@alanb43], [#7943], [#9374])
-#### :sparkles: Usability & Accessibility
 #### :white_check_mark: Validation
+* Add support value `uncontrolled` when using _connect features_ validation fix on crossings with `crossing=uncontrolled` ([#9443], thanks [@arch0345])
 #### :bug: Bugfixes
 * Fix bug which made it impossible to change an object's preset from a sub-preset to the respective parents preset (e.g. from Driveway to Service Road) ([#9372])
 * Fix corruption of (directional) `cycleway` tags when editing a multi-selection ([#9423])
+* Fix unintended splitting of tag values in `semiCombo` fields into two values when the description contains a comma ([#9471])
+* Fix rendering of imagery tile vintage when it is unknown ([#9458], thanks [@furkanmutlu-tomtom])
 #### :hourglass: Performance
+* Speed up "outdated tags" validation by optimizing order of operations ([#9434], thanks [@Zaczero])
 #### :rocket: Presets
 * Clamp degree values in `direction` fields between 0 and 359 degrees ([#9386])
 * Disable increment/decrement buttons on number fields if the input value is not numeric or when there is a multi-selection with conflicting values
 * Filter out misspelled taginfo suggestions in combo field ([#9397])
 * Add `highway=busway` to 'Traffic Roads' group of map features ([#9413], thanks [@Rewinteer])
 * Rename `cycleway` field type to `directionalCombo` and make it reusable for arbitrary directional tags ([#9423])
+#### :earth_asia: Localization
+* Specify address format for Bulgaria ([#9446], thanks [@Dimitar5555])
 #### :hammer: Development
 * Upgrade to Transifex API v3 ([#9375])
-* Upgrade dependencies: `d3` to v7.7, `@ideditor/country-coder` to v5.1, `@ideditor/location-conflation` to v1.1, `esbuild` to v0.16
+* Upgrade dependencies: `d3` to v7.8, `@ideditor/country-coder` to v5.1, `@ideditor/location-conflation` to v1.1, `esbuild` to v0.17, `osm-community-index` to `v5.5`
 
 [#7943]: https://github.com/openstreetmap/iD/issues/7943
 [#9372]: https://github.com/openstreetmap/iD/issues/9372
@@ -65,8 +162,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9397]: https://github.com/openstreetmap/iD/issues/9397
 [#9413]: https://github.com/openstreetmap/iD/pull/9413
 [#9423]: https://github.com/openstreetmap/iD/pull/9423
+[#9434]: https://github.com/openstreetmap/iD/pull/9434
+[#9443]: https://github.com/openstreetmap/iD/pull/9443
+[#9446]: https://github.com/openstreetmap/iD/pull/9446
+[#9471]: https://github.com/openstreetmap/iD/issues/9471
+[#9458]: https://github.com/openstreetmap/iD/pull/9458
 [@alanb43]: https://github.com/alanb43
 [@Rewinteer]: https://github.com/Rewinteer
+[@Zaczero]: https://github.com/Zaczero
+[@Dimitar5555]: https://github.com/Dimitar5555
+[@furkanmutlu-tomtom]: https://github.com/furkanmutlu-tomtom
+[@arch0345]: https://github.com/arch0345
 
 
 # 2.23.2
@@ -4095,7 +4201,7 @@ _When mapping around Detroit, try out the special Detroit vector tile layers on 
 _Activate the OpenStreetMap notes layer by opening the Map Data pane (shortcut <kbd>F</kbd>)_
 * :wrench: We've added a new Detach Node operation to remove a tagged node from a way. Thanks [@Psigio]!<br/>
 _With a node selected, use the right-click edit menu to find the Detach command (shortcut <kbd>E</kbd>)_
-* :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizeable by dragging any of its edges.  Thanks [@kratico]!<br/>
+* :arrow_upper_right: The photo viewer (Mapillary, OpenStreetCam, and Bing Streetside) is now resizable by dragging any of its edges.  Thanks [@kratico]!<br/>
 _Try activating one of the streetlevel photo layers (shortcut <kbd>F</kbd>) and resizing the viewer._
 
 [@thomas-hervey]: https://github.com/thomas-hervey
@@ -5963,7 +6069,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 [#3975]: https://github.com/openstreetmap/iD/issues/3975
 
 #### :mortar_board: Walkthrough / Help - major updates! ([#3921])
-* Add training for modifiying geometry, moving nodes, reshaping ways ([#2381])
+* Add training for modifying geometry, moving nodes, reshaping ways ([#2381])
 * Add training for new right-click context menu
 * Allow user to freeform play and explore ([#3067])
 * Refresh walkthrough data with POIs, Buildings, Addresses ([#3068])
