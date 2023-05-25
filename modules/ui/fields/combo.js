@@ -542,7 +542,6 @@ export function uiFieldCombo(field, context) {
     }
 
     function updateIcon(value) {
-        const key = field.type !== 'multiCombo' ? field.key : field.key.slice(0, -1);
         value = tagValue(value);
         let container = _container;
         if (field.type === 'multiCombo' || field.type === 'semiCombo') {
@@ -566,6 +565,7 @@ export function uiFieldCombo(field, context) {
         _tags = tags;
         var stringsField = field.resolveReference('stringsCrossReference');
 
+        var isMixed = Array.isArray(tags[field.key]);
         var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
         var isRawValue = value => showsValue(value)
             && !stringsField.hasTextForStringId(`options.${value}`)
@@ -725,8 +725,6 @@ export function uiFieldCombo(field, context) {
 
             updateIcon('');
         } else {
-            var isMixed = Array.isArray(tags[field.key]);
-
             var mixedValues = isMixed && tags[field.key].map(function(val) {
                 return displayValue(val);
             }).filter(Boolean);
