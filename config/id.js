@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // cdns for external data packages
 const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/';
@@ -10,12 +12,12 @@ const nsiCdnUrl = ENV__ID_NSI_CDN_URL
 
 // api urls and settings
 const defaultOsmApiConnections = {
-  "live": {
+  live: {
     url: 'https://www.openstreetmap.org',
     client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
     client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q'
   },
-  "dev": {
+  dev: {
     url: 'https://api06.dev.openstreetmap.org',
     client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw',
     client_secret: 'OnfWFC-JkZNHyYdr_viNn_h_RTZXRslKcUxllOXqf5g'

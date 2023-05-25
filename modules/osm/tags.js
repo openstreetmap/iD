@@ -76,11 +76,11 @@ export function osmTagSuggestingArea(tags) {
     var returnTags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
-        if (key in osmAreaKeys && !(tags[key] in osmAreaKeys[key])) {
+        if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
         }
-        if (key in osmAreaKeysExceptions && tags[key] in osmAreaKeysExceptions[key]) {
+        if (key in osmAreaKeysExceptions && tags[realKey] in osmAreaKeysExceptions[key]) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
         }
@@ -201,7 +201,7 @@ export var osmSemipavedTags = {
 export var osmRightSideIsInsideTags = {
     'natural': {
         'cliff': true,
-        'coastline': 'coastline',
+        'coastline': 'coastline'
     },
     'barrier': {
         'retaining_wall': true,
@@ -210,7 +210,8 @@ export var osmRightSideIsInsideTags = {
         'city_wall': true,
     },
     'man_made': {
-        'embankment': true
+        'embankment': true,
+        'quay': true
     },
     'waterway': {
         'weir': true
@@ -241,3 +242,6 @@ export var osmRailwayTrackTagValues = {
 export var osmFlowingWaterwayTagValues = {
     canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
 };
+
+// Tags which values should be considered case sensitive when offering tag suggestions
+export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
