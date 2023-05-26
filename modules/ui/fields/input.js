@@ -35,6 +35,7 @@ export function uiFieldText(field, context) {
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
     const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
+    const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
@@ -136,7 +137,8 @@ export function uiFieldText(field, context) {
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
                         v = v.trim();
-                        var num = parseLocaleFloat(v);
+                        const isRawNumber = likelyRawNumberFormat.test(v);
+                        var num = isRawNumber ? parseFloat(v) : parseLocaleFloat(v);
                         if (isDirectionField) {
                             const compassDir = cardinal[v.toLowerCase()];
                             if (compassDir !== undefined) {
@@ -156,7 +158,9 @@ export function uiFieldText(field, context) {
                             num = ((num % 360) + 360) % 360;
                         }
                         // make sure no extra decimals are introduced
-                        return formatFloat(clamped(num), countDecimalPlaces(v));
+                        return formatFloat(clamped(num), isRawNumber
+                            ? (v.includes('.') ? v.split('.')[1].length : 0)
+                            : countDecimalPlaces(v));
                     });
                     input.node().value = vals.join(';');
                     change()();
@@ -411,8 +415,8 @@ export function uiFieldText(field, context) {
             if (field.type === 'number' && val) {
                 var numbers = val.split(';');
                 numbers = numbers.map(function(v) {
-                    if (/^\d+\.\d{1}$/.test(v)) {
-                        // ignore numbers entered in "raw" format
+                    if (likelyRawNumberFormat.test(v)) {
+                        // input number likely in "raw" format
                         return v;
                     }
                     var num = parseLocaleFloat(v);
@@ -457,19 +461,41 @@ export function uiFieldText(field, context) {
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
         var val = vals.size === 1 ? [...vals][0] : '';
+        var shouldUpdate = true;
 
         if (field.type === 'number' && val) {
+            // for number fields, we don't want to override the content of the
+            // input element with the same number using a different formatting
+            // (e.g. when entering "1234.5", this should not be reformatted to
+            // "1.234,5" which could otherwise cause the cursor to be in the
+            // wrong location after the change)
+            // but if the actual numeric value of the field has changed (e.g.
+            // by pressing the +/- buttons or using the raw tag editor), we
+            // can and should update the content of the input element.
+            shouldUpdate = false;
             var numbers = val.split(';');
-            numbers = numbers.map(function(v) {
+            var oriNumbers = utilGetSetValue(input).split(';');
+            if (numbers.length !== oriNumbers.length) shouldUpdate = true;
+            numbers = numbers.map(function(v, idx) {
                 v = v.trim();
                 var num = Number(v);
-                if (!isFinite(num) || v === '') return v;
+                var oriNumber = oriNumbers[idx] || '';
+                if (!isFinite(num) || v === '') {
+                    if (v !== oriNumber) shouldUpdate = true;
+                    return v;
+                }
+                oriNumber = likelyRawNumberFormat.test(oriNumber) ? parseFloat(oriNumber) : parseLocaleFloat(oriNumber);
+                if (num !== oriNumber) shouldUpdate = true;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
-                return formatFloat(clamped(num), fractionDigits);
+                return formatFloat(num, fractionDigits);
             });
             val = numbers.join(';');
         }
-        utilGetSetValue(input, val)
+
+        if (shouldUpdate) {
+            utilGetSetValue(input, val);
+        }
+        input
             .attr('title', isMixed ? [...vals].join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
