@@ -1,5 +1,6 @@
 import { t } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
+import { modeDrawArea } from '../modes/draw_area';
 import { behaviorOperation } from '../behavior/operation';
 import { actionDeleteNode } from '../actions/delete_node';
 import { utilArrayGroupBy } from '../util';
@@ -17,8 +18,7 @@ export function operationContinue(context, selectedIDs) {
 
     function candidateWays() {
         return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
-            return parent.geometry(context.graph()) === 'line' &&
-                parent.contains(_vertex.id) &&
+            return parent.contains(_vertex.id) &&
                 (_geometries.line.length === 0 || _geometries.line[0] === parent);
         }) : [];
     }
@@ -35,7 +35,9 @@ export function operationContinue(context, selectedIDs) {
             context.perform(actionDeleteNode(_vertex.id));
         }
         context.enter(
-            modeDrawLine(context, candidate.id, context.graph(), 'line', affix || candidate.nodes.indexOf(_vertex.id), true)
+            candidate.geometry(context.graph()) === 'line' ?
+            modeDrawLine(context, candidate.id, context.graph(), 'line', affix || candidate.nodes.indexOf(_vertex.id), true) :
+            modeDrawArea(context, candidate.id, context.graph(), 'area', candidate.nodes.indexOf(_vertex.id), true)
         );
     };
 
