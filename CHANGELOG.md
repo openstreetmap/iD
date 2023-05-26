@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
+* Localize numbers in numeric fields ([#8769], thanks [@1ec5])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
+[#8769]: https://github.com/openstreetmap/iD/pull/8769
 [#7427]: https://github.com/openstreetmap/iD/issues/7427
 [#9233]: https://github.com/openstreetmap/iD/issues/9233
 [#9482]: https://github.com/openstreetmap/iD/pull/9482

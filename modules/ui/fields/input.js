@@ -32,6 +32,9 @@ export function uiFieldText(field, context) {
     var _tags;
     var _phoneFormats = {};
     const isDirectionField = field.key.split(':').some(keyPart => keyPart === 'direction');
+    const formatFloat = localizer.floatFormatter(localizer.languageCode());
+    const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
+    const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')
@@ -132,18 +135,19 @@ export function uiFieldText(field, context) {
                     var raw_vals = input.node().value || '0';
                     var vals = raw_vals.split(';');
                     vals = vals.map(function(v) {
-                        var num = Number(v);
+                        v = v.trim();
+                        var num = parseLocaleFloat(v);
                         if (isDirectionField) {
-                            const compassDir = cardinal[v.trim().toLowerCase()];
+                            const compassDir = cardinal[v.toLowerCase()];
                             if (compassDir !== undefined) {
                                 num = compassDir;
                             }
                         }
 
-                        if (!isFinite(num)) {
-                            // do nothing if the value is neither a number, nor a cardinal direction
-                            return v.trim();
-                        }
+                        // do nothing if the value is neither a number, nor a cardinal direction
+                        if (!isFinite(num)) return v;
+                        num = parseFloat(num);
+                        if (!isFinite(num)) return v;
 
                         num += d;
                         // clamp to 0..359 degree range if it's a direction field
@@ -152,8 +156,7 @@ export function uiFieldText(field, context) {
                             num = ((num % 360) + 360) % 360;
                         }
                         // make sure no extra decimals are introduced
-                        const numDecimals = v.includes('.') ? v.split('.')[1].length : 0;
-                        return clamped(num).toFixed(numDecimals);
+                        return formatFloat(clamped(num), countDecimalPlaces(v));
                     });
                     input.node().value = vals.join(';');
                     change()();
@@ -404,17 +407,21 @@ export function uiFieldText(field, context) {
             // don't override multiple values with blank string
             if (!val && getVals(_tags).size > 1) return;
 
-            if (!onInput) {
-                if (field.type === 'number' && val) {
-                    var vals = val.split(';');
-                    vals = vals.map(function(v) {
-                        var num = Number(v);
-                        return isFinite(num) ? clamped(num) : v.trim();
-                    });
-                    val = vals.join(';');
-                }
-                utilGetSetValue(input, val);
+            var displayVal = val;
+            if (field.type === 'number' && val) {
+                var numbers = val.split(';');
+                numbers = numbers.map(function(v) {
+                    if (/^\d+\.\d{1}$/.test(v)) {
+                        // ignore numbers entered in "raw" format
+                        return v;
+                    }
+                    var num = parseLocaleFloat(v);
+                    const fractionDigits = countDecimalPlaces(v);
+                    return isFinite(num) ? clamped(num).toFixed(fractionDigits) : v;
+                });
+                val = numbers.join(';');
             }
+            if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
             if (field.keys) {
                 // for multi-key fields with: handle alternative tag keys gracefully
@@ -449,7 +456,19 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        const val = vals.size === 1 ? [...vals][0] : '';
+        var val = vals.size === 1 ? [...vals][0] : '';
+
+        if (field.type === 'number' && val) {
+            var numbers = val.split(';');
+            numbers = numbers.map(function(v) {
+                v = v.trim();
+                var num = Number(v);
+                if (!isFinite(num) || v === '') return v;
+                const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
+                return formatFloat(clamped(num), fractionDigits);
+            });
+            val = numbers.join(';');
+        }
         utilGetSetValue(input, val)
             .attr('title', isMixed ? [...vals].join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
