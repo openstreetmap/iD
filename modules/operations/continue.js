@@ -24,20 +24,21 @@ export function operationContinue(context, selectedIDs) {
     }
 
     var _candidates = candidateWays();
+    var _candidate = _candidates[0];
+    var _candidateGeometry = _candidate && _candidate.geometry(context.graph());
 
 
     var operation = function() {
-        var candidate = _candidates[0];
-        var affix = candidate.affix(_vertex.id);
+        var affix = _candidate.affix(_vertex.id);
         // Unless an endpoint is selected, delete the selected node in favor of whatever we're going to draw.
         // This avoids a situation where it's possible to draw along all but one of the edges.
         if (!affix) {
             context.perform(actionDeleteNode(_vertex.id));
         }
         context.enter(
-            candidate.geometry(context.graph()) === 'line' ?
-            modeDrawLine(context, candidate.id, context.graph(), 'line', affix || candidate.nodes.indexOf(_vertex.id), true) :
-            modeDrawArea(context, candidate.id, context.graph(), 'area', candidate.nodes.indexOf(_vertex.id), true)
+            _candidateGeometry === 'line' ?
+            modeDrawLine(context, _candidate.id, context.graph(), 'line', affix || _candidate.nodes.indexOf(_vertex.id), true) :
+            modeDrawArea(context, _candidate.id, context.graph(), 'area', _candidate.nodes.indexOf(_vertex.id), true)
         );
     };
 
@@ -69,12 +70,12 @@ export function operationContinue(context, selectedIDs) {
         var disable = operation.disabled();
         return disable ?
             t.append('operations.continue.' + disable) :
-            t.append('operations.continue.description');
+            t.append('operations.continue.description.' + _candidateGeometry);
     };
 
 
     operation.annotation = function() {
-        return t('operations.continue.annotation.line');
+        return t('operations.continue.annotation.' + _candidateGeometry);
     };
 
 

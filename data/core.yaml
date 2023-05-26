@@ -70,13 +70,15 @@ en:
         area: Started an area.
     continue:
       key: A
-      title: Continue
-      description: Continue this line.
-      not_eligible: No line can be continued here.
-      multiple: Several lines can be continued here. Add one to the selection to continue.
+      title: Draw
+      description:
+        line: Continue drawing this line.
+        area: Continue drawing this area.
+      not_eligible: No line or area can be continued here.
+      multiple: Several lines or areas are connected here. Add one to the selection to continue drawing it.
       annotation:
-        line: Continued a line.
-        area: Continued an area.
+        line: Continued drawing a line.
+        area: Continued drawing an area.
     cancel_draw:
       annotation: Canceled drawing.
     change_role:
@@ -1601,7 +1603,7 @@ en:
       move: "{move_icon} **{move}** lets you drag features around the map."
       rotate: "{rotate_icon} **{rotate}** lets you swivel features around their center points."
       reflect: "{reflect_short_icon} **{reflect_short}** and {reflect_long_icon} **{reflect_long}** reflect features over their short and long axes."
-      continue: "{continue_icon} **{continue}** lets you extend existing lines from their endpoints."
+      continue: "{continue_icon} **{continue}** lets you extend an existing line or area starting from a point along it."
       reverse: "{reverse_icon} **{reverse}** changes the direction of features. The direction matters for things like one-way roads, traffic signs, waterways, and cliffs."
       disconnect: "{disconnect_icon} **{disconnect}** separates connected lines and areas from each other. You can disconnect entire features or just selected points."
       merge: "{merge_icon} **{merge}** combines multiple features into one. You can merge areas together to create multipolygons, merge lines together to create longer lines, and merge points into anything to transfer their tags."
@@ -2371,7 +2373,7 @@ en:
         stop_line: "Finish drawing a line or area"
       operations:
         title: "Operations"
-        continue_line: "Continue a line at the selected endpoint"
+        continue_line: "Continue drawing a line or area from the selected point"
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
