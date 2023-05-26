@@ -2,7 +2,7 @@
 // which can result in layout/repaint thrashing in some situations.
 /** @returns {string} */
 export function utilGetSetValue(selection, value) {
-    function d3_selection_value(value) {
+    function setValue(value) {
         function valueNull() {
             delete this.value;
         }
@@ -27,9 +27,17 @@ export function utilGetSetValue(selection, value) {
             ? valueFunction : valueConstant);
     }
 
+    function stickyCursor(func) {
+        return function() {
+            const cursor = { start: this.selectionStart, end: this.selectionEnd };
+            func.apply(this, arguments);
+            this.setSelectionRange(cursor.start, cursor.end);
+        }
+    }
+
     if (arguments.length === 1) {
         return selection.property('value');
     }
 
-    return selection.each(d3_selection_value(value));
+    return selection.each(stickyCursor(setValue(value)));
 }
