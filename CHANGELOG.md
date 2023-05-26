@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
+* Localize numbers in numeric fields ([#8769], thanks [@1ec5])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
 * Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
 * Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
+* Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone format for India ([#9482], thanks [@biswajit-k])
@@ -69,7 +71,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
+[#8769]: https://github.com/openstreetmap/iD/pull/8769
 [#7427]: https://github.com/openstreetmap/iD/issues/7427
+[#9233]: https://github.com/openstreetmap/iD/issues/9233
 [#9433]: https://github.com/openstreetmap/iD/pull/9433
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
 [#9483]: https://github.com/openstreetmap/iD/pull/9483
