@@ -1676,6 +1676,12 @@ input.date-selector {
     max-width: 100%;
     color: #7092ff;
 }
+.form-field-input-multicombo li.chip.negated span {
+    text-decoration: line-through;
+}
+.form-field-input-multicombo li.chip input {
+    width: 1em;
+}
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
 }
