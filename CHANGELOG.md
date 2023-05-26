@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 * Localize numbers in numeric fields ([#8769], thanks [@1ec5])
+* The Address field now supports the `addr:place` tag (as an alternative to `addr:street`), this functionality is activated in selected countries ([#9603])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -65,7 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 * Take regional variants of parent presets into account when resolving preset fields ([#9524])
 * Render "right-side" arrows for `man_made=quay` features
-* Add support icons also in `multiCombo` and `semiCombo` fields ([#9433])
+* Support icons also in `multiCombo` and `semiCombo` fields ([#9433])
 #### :hammer: Development
 * Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v4.3, `core-js-bundle` to v3.30, `osm-auth` to v2.1
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
@@ -82,6 +83,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
 [#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9524]: https://github.com/openstreetmap/iD/issues/9524
+[#9603]: https://github.com/openstreetmap/iD/pull/9603
 [#9630]: https://github.com/openstreetmap/iD/pull/9630
 [#9637]: https://github.com/openstreetmap/iD/pull/9637
 [#9638]: https://github.com/openstreetmap/iD/pull/9638

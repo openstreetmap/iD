@@ -2128,6 +2128,19 @@ input.date-selector {
 .ideditor[dir='rtl'] .addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 0 4px;
 }
+.combobox-address-street-place .combobox-option.address-street,
+.combobox-address-street-place .combobox-option.address-place {
+    padding-right: 20px;
+}
+.combobox-address-street-place .combobox-option.address-street::after,
+.combobox-address-street-place .combobox-option.address-place::after {
+    position: absolute;
+    right: 2px;
+    opacity: 0.4;
+}
+.combobox-address-street-place .combobox-option.address-place::after {
+    content: url(data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPg0KICAgIDxwYXRoIGQ9Ik0xMCwzIEM2LjY4NiwzIDQsNS42MTIgNCw4LjgzMyBDNCwxMi4wNTUgMTAsMTcgMTAsMTcgQzEwLDE3IDE2LDEyLjA1NSAxNiw4LjgzMyBDMTYsNS42MTIgMTMuMzE0LDMgMTAsMyB6IE0xMC4xODcsNi41IEMxMS41MTMsNi41IDEyLjU4Nyw3LjU0NSAxMi41ODcsOC44MzMgQzEyLjU4NywxMC4xMjIgMTEuNTEzLDExLjE2NyAxMC4xODcsMTEuMTY3IEM4Ljg2MiwxMS4xNjcgNy43ODcsMTAuMTIyIDcuNzg3LDguODMzIEM3Ljc4Nyw3LjU0NSA4Ljg2Miw2LjUgMTAuMTg3LDYuNSB6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz4NCjwvc3ZnPg==);
+}
 
 
 /* Field - Wikipedia
