@@ -409,13 +409,13 @@ export function uiFieldText(field, context) {
 
             var displayVal = val;
             if (field.type === 'number' && val) {
-                var vals = val.split(';');
-                vals = vals.map(function(v) {
+                var numbers = val.split(';');
+                numbers = numbers.map(function(v) {
                     var num = parseLocaleFloat(v);
                     const fractionDigits = countDecimalPlaces(v);
                     return isFinite(num) ? clamped(num).toFixed(fractionDigits) : v;
                 });
-                val = vals.join(';');
+                val = numbers.join(';');
             }
             if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
@@ -452,18 +452,18 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        const val = vals.size === 1 ? [...vals][0] : '';
+        var val = vals.size === 1 ? [...vals][0] : '';
 
         if (field.type === 'number' && val) {
-            var vals = val.split(';');
-            vals = vals.map(function(v) {
+            var numbers = val.split(';');
+            numbers = numbers.map(function(v) {
                 v = v.trim();
                 var num = Number(v);
                 if (!isFinite(num)) return v;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
                 return formatFloat(clamped(num), fractionDigits);
             });
-            val = vals.join(';');
+            val = numbers.join(';');
         }
         utilGetSetValue(input, val)
             .attr('title', isMixed ? [...vals].join('\n') : undefined)
