@@ -411,6 +411,10 @@ export function uiFieldText(field, context) {
             if (field.type === 'number' && val) {
                 var numbers = val.split(';');
                 numbers = numbers.map(function(v) {
+                    if (/^\d+\.\d{1}$/.test(v)) {
+                        // ignore numbers entered in "raw" format
+                        return v;
+                    }
                     var num = parseLocaleFloat(v);
                     const fractionDigits = countDecimalPlaces(v);
                     return isFinite(num) ? clamped(num).toFixed(fractionDigits) : v;
