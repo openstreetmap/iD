@@ -11,6 +11,7 @@ import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
+import { isEqual } from 'lodash-es';
 
 export {
     uiFieldText as uiFieldColour,
@@ -461,9 +462,20 @@ export function uiFieldText(field, context) {
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
         var val = vals.size === 1 ? [...vals][0] : '';
-        var shouldUpdate = true;
+        var shouldUpdate;
 
         if (field.type === 'number' && val) {
+            var numbers = val.split(';');
+            var oriNumbers = utilGetSetValue(input).split(';');
+            if (numbers.length !== oriNumbers.length) shouldUpdate = true;
+            numbers = numbers.map(function(v) {
+                v = v.trim();
+                var num = Number(v);
+                if (!isFinite(num) || v === '') return v;
+                const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
+                return formatFloat(num, fractionDigits);
+            });
+            val = numbers.join(';');
             // for number fields, we don't want to override the content of the
             // input element with the same number using a different formatting
             // (e.g. when entering "1234.5", this should not be reformatted to
@@ -472,30 +484,18 @@ export function uiFieldText(field, context) {
             // but if the actual numeric value of the field has changed (e.g.
             // by pressing the +/- buttons or using the raw tag editor), we
             // can and should update the content of the input element.
-            shouldUpdate = false;
-            var numbers = val.split(';');
-            var oriNumbers = utilGetSetValue(input).split(';');
-            if (numbers.length !== oriNumbers.length) shouldUpdate = true;
-            numbers = numbers.map(function(v, idx) {
-                v = v.trim();
-                var num = Number(v);
-                var oriNumber = oriNumbers[idx] || '';
-                if (!isFinite(num) || v === '') {
-                    if (v !== oriNumber) shouldUpdate = true;
-                    return v;
-                }
-                oriNumber = likelyRawNumberFormat.test(oriNumber) ? parseFloat(oriNumber) : parseLocaleFloat(oriNumber);
-                if (num !== oriNumber) shouldUpdate = true;
-                const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
-                return formatFloat(num, fractionDigits);
-            });
-            val = numbers.join(';');
+            shouldUpdate = (inputValue, setValue) => {
+                const inputNums = inputValue.split(';').map(setVal =>
+                    likelyRawNumberFormat.test(setVal)
+                        ? parseFloat(setVal)
+                        : parseLocaleFloat(setVal)
+                );
+                const setNums = setValue.split(';').map(parseLocaleFloat);
+                return !isEqual(inputNums, setNums);
+            };
         }
 
-        if (shouldUpdate) {
-            utilGetSetValue(input, val);
-        }
-        input
+        utilGetSetValue(input, val, shouldUpdate)
             .attr('title', isMixed ? [...vals].join('\n') : undefined)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : (field.placeholder() || t('inspector.unknown')))
             .classed('mixed', isMixed);
