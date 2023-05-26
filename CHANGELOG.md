@@ -68,7 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render "right-side" arrows for `man_made=quay` features
 * Support icons also in `multiCombo` and `semiCombo` fields ([#9433])
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v4.3, `core-js-bundle` to v3.30, `osm-auth` to v2.1
+* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v5.0, `core-js-bundle` to v3.30, `osm-auth` to v2.1, `cldr-core` and `cldr-localenames-full` to v43
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
