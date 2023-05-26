@@ -312,7 +312,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         let parent = allPresets[parentID];
         if (loc) {
           const validHere = locationManager.locationSetsAt(loc);
-          if (!validHere[parent.locationSetID]) {
+          if (parent.locationSetID && !validHere[parent.locationSetID]) {
             // this is a preset for which a regional variant of the main preset exists
             const candidateIDs = Object.keys(allPresets).filter(k => k.startsWith(parentID));
             parent = allPresets[candidateIDs.find(candidateID => {
