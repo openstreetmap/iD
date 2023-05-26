@@ -852,7 +852,7 @@ export default {
       bubbleIdQuadKey = '0' + bubbleIdQuadKey;
     }
     const imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
-    const imgUrlSuffix = '.jpg?g=6338&n=z';
+    const imgUrlSuffix = '.jpg?g=13305&n=z';
 
     // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
     const faceKeys = ['01','02','03','10','11','12'];

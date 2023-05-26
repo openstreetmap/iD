@@ -1,3 +1,5 @@
+/* eslint-disable no-process-env */
+
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,6 +16,6 @@ const envs = {
 
   ENV__ID_TAGINFO_API_URL: JSON.stringify(process.env.ENV__ID_TAGINFO_API_URL || null),
   ENV__ID_NOMINATIM_API_URL: JSON.stringify(process.env.ENV__ID_NOMINATIM_API_URL || null),
-}
+};
 
 export default envs;

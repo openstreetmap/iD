@@ -3,6 +3,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
         var entity = graph.entity(entityID);
         var geometry = entity.geometry(graph);
         var tags = entity.tags;
+        const loc = entity.extent(graph).center();
 
         // preserve tags that the new preset might care about, if any
         var preserveKeys;
@@ -15,14 +16,14 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                 // only if old preset is not a sub-preset of the new one:
                 // preserve tags for which the new preset has a field
                 // https://github.com/openstreetmap/iD/issues/9372
-                newPreset.fields().concat(newPreset.moreFields())
+                newPreset.fields(loc).concat(newPreset.moreFields(loc))
                     .filter(f => f.matchGeometry(geometry))
                     .map(f => f.key).filter(Boolean)
                     .forEach(key => preserveKeys.push(key));
             }
         }
-        if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys);
-        if (newPreset) tags = newPreset.setTags(tags, geometry, skipFieldDefaults);
+        if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, loc);
+        if (newPreset) tags = newPreset.setTags(tags, geometry, skipFieldDefaults, loc);
 
         return graph.replace(entity.update({tags: tags}));
     };
