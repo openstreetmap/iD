@@ -19,9 +19,11 @@ export {
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
     uiFieldText as uiFieldTel,
-    uiFieldText as uiFieldUrl
+    uiFieldText as uiFieldUrl,
+    likelyRawNumberFormat
 };
 
+const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
@@ -36,7 +38,6 @@ export function uiFieldText(field, context) {
     const formatFloat = localizer.floatFormatter(localizer.languageCode());
     const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
     const countDecimalPlaces = localizer.decimalPlaceCounter(localizer.languageCode());
-    const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
 
     if (field.type === 'tel') {
         fileFetcher.get('phone_formats')

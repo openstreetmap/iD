@@ -5,6 +5,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { uiCombobox } from '../combobox';
 import { t, localizer } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { likelyRawNumberFormat } from './input';
 
 
 export function uiFieldRoadspeed(field, context) {
@@ -109,7 +110,9 @@ export function uiFieldRoadspeed(field, context) {
         if (!value) {
             tag[field.key] = undefined;
         } else {
-            var rawValue = parseLocaleFloat(value);
+            var rawValue = likelyRawNumberFormat.test(value)
+                ? parseFloat(value)
+                : parseLocaleFloat(value);
             if (isNaN(rawValue)) rawValue = value;
             if (isNaN(rawValue) || !_isImperial) {
                 tag[field.key] = context.cleanTagValue(rawValue);

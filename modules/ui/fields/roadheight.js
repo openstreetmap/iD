@@ -5,6 +5,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { uiCombobox } from '../combobox';
 import { t, localizer } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { likelyRawNumberFormat } from './input';
 
 
 export function uiFieldRoadheight(field, context) {
@@ -132,9 +133,13 @@ export function uiFieldRoadheight(field, context) {
         if (!primaryValue && !secondaryValue) {
             tag[field.key] = undefined;
         } else {
-            var rawPrimaryValue = parseLocaleFloat(primaryValue);
+            var rawPrimaryValue = likelyRawNumberFormat.test(primaryValue)
+                ? parseFloat(primaryValue)
+                : parseLocaleFloat(primaryValue);
             if (isNaN(rawPrimaryValue)) rawPrimaryValue = primaryValue;
-            var rawSecondaryValue = parseLocaleFloat(secondaryValue);
+            var rawSecondaryValue = likelyRawNumberFormat.test(secondaryValue)
+                ? parseFloat(secondaryValue)
+                : parseLocaleFloat(secondaryValue);
             if (isNaN(rawSecondaryValue)) rawSecondaryValue = secondaryValue;
 
             if (isNaN(rawPrimaryValue) || isNaN(rawSecondaryValue) || !_isImperial) {
