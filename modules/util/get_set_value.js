@@ -32,7 +32,7 @@ export function utilGetSetValue(selection, value) {
             const cursor = { start: this.selectionStart, end: this.selectionEnd };
             func.apply(this, arguments);
             this.setSelectionRange(cursor.start, cursor.end);
-        }
+        };
     }
 
     if (arguments.length === 1) {
