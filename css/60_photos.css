@@ -251,7 +251,8 @@
 .layer-mapilio .viewfield-group * {
     fill: #0056f1;
     stroke: #ffffff;
-    fill-opacity: .7;
+    stroke-opacity: .6;
+    fill-opacity: .6;
 }
 .layer-mapilio .sequence {
     stroke: #0056f1;

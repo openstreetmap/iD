@@ -24,6 +24,7 @@ export function uiPhotoviewer(context) {
                 if (services.streetside) { services.streetside.hideViewer(context); }
                 if (services.mapillary) { services.mapillary.hideViewer(context); }
                 if (services.kartaview) { services.kartaview.hideViewer(context); }
+                if (services.mapilio) { services.mapilio.hideViewer(context); }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));

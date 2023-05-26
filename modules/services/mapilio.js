@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
 import Protobuf from 'pbf';
 import RBush from 'rbush';
@@ -7,16 +8,32 @@ import { VectorTile } from '@mapbox/vector-tile';
 import { utilRebind, utilTiler } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';
 
+const apiUrl = 'https://end.mapilio.com';
+const imageBaseUrl = 'https://cdn.mapilio.com/im';
 const baseTileUrl = 'https://geo.mapilio.com/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=mapilio:';
 const pointLayer = 'points_mapilio_map';
 const lineLayer = 'captured_roads_line';
 const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
 
 const minZoom = 14;
-const dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'imageChanged');
+const dispatch = d3_dispatch('change', 'loadedImages', 'loadedLine');
+const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
+const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
+const resolution = 1080;
 
 let _mlyActiveImage;
 let _mlyCache;
+let _loadViewerPromise;
+let _pannellumViewer;
+let _mlySceneOptions = {
+    showFullscreenCtrl: false,
+    autoLoad: true,
+    yaw: 0,
+    minHfov: 10,
+    maxHfov: 90,
+    hfov: 60,
+};
+let _currScene = 0;
 
 
 // Partition viewport into higher zoom tiles
@@ -84,6 +101,8 @@ function loadTile(which, url, tile) {
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
+            } else {
+                dispatch.call('loadedLines');
             }
         })
         .catch(function() {
@@ -94,7 +113,7 @@ function loadTile(which, url, tile) {
 
 
 // Load the data from the vector tile into cache
-function loadTileDataToCache(data, tile, which) {
+function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new Protobuf(data));
     let features,
         cache,
@@ -113,10 +132,10 @@ function loadTileDataToCache(data, tile, which) {
             loc = feature.geometry.coordinates;
             d = {
                 loc: loc,
-                captured_at: feature.properties.captured_at,
                 created_at: feature.properties.created_at,
                 id: feature.properties.id,
                 sequence_id: feature.properties.sequence_uuid,
+                heading:feature.properties.heading
             };
             cache.forImageId[d.id] = d;
             features.push({
@@ -129,7 +148,6 @@ function loadTileDataToCache(data, tile, which) {
     }
 
     if (vectorTile.layers.hasOwnProperty('captured_roads_line')) {
-        features = [];
         cache = _mlyCache.sequences;
         layer = vectorTile.layers.captured_roads_line;
 
@@ -143,6 +161,22 @@ function loadTileDataToCache(data, tile, which) {
         }
     }
 
+}
+
+function getImageData(imageId, sequenceId) {
+
+    return fetch(apiUrl + `/api/sequence-detail?sequence_uuid=${sequenceId}`, {method: 'GET'})
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error(response.status + ' ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            let index = data.data.findIndex((feature) => feature.id === imageId);
+            const {filename, uploaded_hash} = data.data[index];
+            _mlySceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
+        });
 }
 
 
@@ -175,6 +209,10 @@ export default {
     images: function(projection) {
         const limit = 5;
         return searchLimited(limit, projection, _mlyCache.images.rtree);
+    },
+
+    cachedImage: function(imageKey) {
+        return _mlyCache.images.forImageId[imageKey];
     },
 
 
@@ -215,24 +253,199 @@ export default {
         return lineStrings;
     },
 
+    // Set the currently visible image
+    setActiveImage: function(image) {
+        if (image) {
+            _mlyActiveImage = {
+                id: image.id,
+                sequence_id: image.sequence_id
+            };
+        } else {
+            _mlyActiveImage = null;
+        }
+    },
+
 
     // Update the currently highlighted sequence and selected bubble.
     setStyles: function(context, hovered) {
         const hoveredImageId = hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
         const selectedSequenceId = _mlyActiveImage && _mlyActiveImage.sequence_id;
+        const selectedImageId =  _mlyActiveImage && _mlyActiveImage.id;
 
-        context.container().selectAll('.layer-mapilio .viewfield-group')
-            .classed('highlighted', function(d) { return (d.sequence_id === selectedSequenceId) || (d.id === hoveredImageId); })
-            .classed('hovered', function(d) { return d.id === hoveredImageId; });
+        const markers = context.container().selectAll('.layer-mapilio .viewfield-group');
+        const sequences = context.container().selectAll('.layer-mapilio .sequence');
 
-        context.container().selectAll('.layer-mapilio .sequence')
-            .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
+        markers.classed('highlighted', function(d) { return d.id === hoveredImageId; })
+            .classed('hovered', function(d) { return d.id === hoveredImageId; })
+            .classed('currentView', function(d) { return d.id === selectedImageId; });
+
+        sequences.classed('highlighted', function(d) { return d.properties.sequence_uuid === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.sequence_uuid === selectedSequenceId; });
 
         return this;
     },
 
+    initViewer: function () {
+        if (!window.pannellum) return;
+        if (_pannellumViewer) return;
+
+        _currScene += 1;
+        const sceneID = _currScene.toString();
+        const options = {
+            'default': { firstScene: sceneID },
+            scenes: {}
+        };
+        options.scenes[sceneID] = _mlySceneOptions;
+
+        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio', options);
+    },
+
+    selectImage: function (context, id) {
+
+        let that = this;
+
+        let d = this.cachedImage(id);
+
+        this.setActiveImage(d);
+
+        let viewer = context.container().select('.photoviewer');
+        if (!viewer.empty()) viewer.datum(d);
+
+        this.setStyles(context, null);
+
+        if (!d) return this;
+
+        getImageData(d.id,d.sequence_id).then(function () {
+
+            if (!_pannellumViewer) {
+                that.initViewer();
+            } else {
+                // make a new scene
+                _currScene += 1;
+                let sceneID = _currScene.toString();
+                _pannellumViewer
+                    .addScene(sceneID, _mlySceneOptions)
+                    .loadScene(sceneID);
+
+                // remove previous scene
+                if (_currScene > 2) {
+                    sceneID = (_currScene - 1).toString();
+                    _pannellumViewer
+                        .removeScene(sceneID);
+                }
+            }
+        });
+
+        return this;
+    },
+
+    ensureViewerLoaded: function(context) {
+        if (_loadViewerPromise) return _loadViewerPromise;
+
+        let wrap = context.container().select('.photoviewer').selectAll('.mapilio-wrapper')
+            .data([0]);
+
+        let wrapEnter = wrap.enter()
+            .append('div')
+            .attr('class', 'photo-wrapper mapilio-wrapper')
+            .classed('hide', true);
+
+        wrapEnter
+            .append('div')
+            .attr('id', 'ideditor-viewer-mapilio');
+
+
+        // Register viewer resize handler
+        context.ui().photoviewer.on('resize.mapilio', () => {
+            if (_pannellumViewer) {
+                _pannellumViewer.resize();
+            }
+        });
+
+        _loadViewerPromise = new Promise((resolve, reject) => {
+            let loadedCount = 0;
+            function loaded() {
+                loadedCount += 1;
+
+                // wait until both files are loaded
+                if (loadedCount === 2) resolve();
+            }
+
+            const head = d3_select('head');
+
+            // load pannellum-viewercss
+            head.selectAll('#ideditor-mapilio-viewercss')
+                .data([0])
+                .enter()
+                .append('link')
+                .attr('id', 'ideditor-mapilio-viewercss')
+                .attr('rel', 'stylesheet')
+                .attr('crossorigin', 'anonymous')
+                .attr('href', context.asset(pannellumViewerCSS))
+                .on('load.serviceMapilio', loaded)
+                .on('error.serviceMapilio', function() {
+                    reject();
+                });
+
+            // load pannellum-viewerjs
+            head.selectAll('#ideditor-mapilio-viewerjs')
+                .data([0])
+                .enter()
+                .append('script')
+                .attr('id', 'ideditor-mapilio-viewerjs')
+                .attr('crossorigin', 'anonymous')
+                .attr('src', context.asset(pannellumViewerJS))
+                .on('load.serviceMapilio', loaded)
+                .on('error.serviceMapilio', function() {
+                    reject();
+                });
+        })
+            .catch(function() {
+                _loadViewerPromise = null;
+            });
+
+        return _loadViewerPromise;
+    },
+
+    showViewer:function (context) {
+        let wrap = context.container().select('.photoviewer')
+            .classed('hide', false);
+
+        let isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
+
+        if (isHidden) {
+            wrap
+                .selectAll('.photo-wrapper:not(.mapilio-wrapper)')
+                .classed('hide', true);
+
+            wrap
+                .selectAll('.photo-wrapper.mapilio-wrapper')
+                .classed('hide', false);
+        }
+
+        return this;
+    },
+
+    /**
+     * hideViewer()
+     */
+    hideViewer: function (context) {
+        let viewer = context.container().select('.photoviewer');
+        if (!viewer.empty()) viewer.datum(null);
+
+        viewer
+            .classed('hide', true)
+            .selectAll('.photo-wrapper')
+            .classed('hide', true);
+
+        context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
+            .classed('currentView', false);
+
+        this.setActiveImage();
+
+        return this.setStyles(context, null);
+    },
 
     // Return the current cache
     cache: function() {

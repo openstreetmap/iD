@@ -10,6 +10,7 @@ export function svgMapilioImages(projection, context, dispatch) {
     const minZoom = 12;
     let layer = d3_select(null);
     let _mapilio;
+    const viewFieldZoomLevel = 18;
 
 
     function init() {
@@ -58,8 +59,8 @@ export function svgMapilioImages(projection, context, dispatch) {
 
     function transform(d) {
         let t = svgPointTransform(projection)(d);
-        if (d.ca) {
-            t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        if (d.heading) {
+            t += ' rotate(' + Math.floor(d.heading) + ',0,0)';
         }
         return t;
     }
@@ -75,9 +76,36 @@ export function svgMapilioImages(projection, context, dispatch) {
         layer.style('display', 'none');
     }
 
+    function click(d3_event, image) {
+        const service = getService();
+        if (!service) return;
+
+        service
+            .ensureViewerLoaded(context)
+            .then(function() {
+                service
+                    .selectImage(context, image.id)
+                    .showViewer(context);
+            });
+
+        context.map().centerEase(image.loc);
+    }
+
+    function mouseover(d3_event, image) {
+        const service = getService();
+        if (service) service.setStyles(context, image);
+    }
+
+
+    function mouseout() {
+        const service = getService();
+        if (service) service.setStyles(context, null);
+    }
+
     function update() {
 
         const z = ~~context.map().zoom();
+        const showViewfields = (z >= viewFieldZoomLevel);
 
         const service = getService();
         let sequences = (service ? service.sequences(projection) : []);
@@ -92,9 +120,8 @@ export function svgMapilioImages(projection, context, dispatch) {
         // exit
         traces.exit()
             .remove();
-        //
-        // // enter/update
-        traces = traces.enter()
+
+        traces.enter()
             .append('path')
             .attr('class', 'sequence')
             .merge(traces)
@@ -111,7 +138,10 @@ export function svgMapilioImages(projection, context, dispatch) {
         // enter
         const groupsEnter = groups.enter()
             .append('g')
-            .attr('class', 'viewfield-group');
+            .attr('class', 'viewfield-group')
+            .on('mouseenter', mouseover)
+            .on('mouseleave', mouseout)
+            .on('click', click);
 
         groupsEnter
             .append('g')
@@ -136,15 +166,24 @@ export function svgMapilioImages(projection, context, dispatch) {
             .attr('r', '6');
 
         const viewfields = markers.selectAll('.viewfield')
-            .data([0]);
+            .data(showViewfields ? [0] : []);
 
         viewfields.exit()
             .remove();
 
-        viewfields.enter()               // viewfields may or may not be drawn...
-            .insert('path', 'circle')    // but if they are, draw below the circles
+        viewfields.enter()
+            .insert('path', 'circle')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+            .attr('d', viewfieldPath);
+
+        function viewfieldPath() {
+            if (this.parentNode.__data__.is_pano) {
+                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+            } else {
+                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+            }
+        }
 
     }
 
