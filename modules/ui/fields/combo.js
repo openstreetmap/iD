@@ -543,11 +543,15 @@ export function uiFieldCombo(field, context) {
 
     function updateIcon(value) {
         value = tagValue(value);
+        let container = _container;
+        if (field.type === 'multiCombo' || field.type === 'semiCombo') {
+            container = _container.select('.input-wrap');
+        }
         const iconsField = field.resolveReference('iconsCrossReference');
         if (iconsField.icons) {
-            _container.selectAll('.tag-value-icon').remove();
+            container.selectAll('.tag-value-icon').remove();
             if (iconsField.icons[value]) {
-                _container.selectAll('.tag-value-icon')
+                container.selectAll('.tag-value-icon')
                     .data([value])
                     .enter()
                     .insert('div', 'input')
@@ -560,6 +564,14 @@ export function uiFieldCombo(field, context) {
     combo.tags = function(tags) {
         _tags = tags;
         var stringsField = field.resolveReference('stringsCrossReference');
+
+        var isMixed = Array.isArray(tags[field.key]);
+        var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
+        var isRawValue = value => showsValue(value)
+            && !stringsField.hasTextForStringId(`options.${value}`)
+            && !stringsField.hasTextForStringId(`options.${value}.title`);
+        var isKnownValue = value => showsValue(value) && !isRawValue(value);
+        var isReadOnly = !_allowCustomValues;
 
         if (_isMulti || _isSemi) {
             _multiData = [];
@@ -578,7 +590,7 @@ export function uiFieldCombo(field, context) {
                     _multiData.push({
                         key: k,
                         value: displayValue(suffix),
-                        display: renderValue(suffix),
+                        display: addComboboxIcons(renderValue(suffix), suffix),
                         state: typeof v === 'string' ? v.toLowerCase() : '',
                         isMixed: Array.isArray(v)
                     });
@@ -620,7 +632,7 @@ export function uiFieldCombo(field, context) {
                     return {
                         key: v,
                         value: displayValue(v),
-                        display: renderValue(v),
+                        display: addComboboxIcons(renderValue(v), v),
                         isMixed: !commonValues.includes(v)
                     };
                 });
@@ -711,21 +723,14 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'remove')
                 .text('×');
 
+            updateIcon('');
         } else {
-            var isMixed = Array.isArray(tags[field.key]);
-
             var mixedValues = isMixed && tags[field.key].map(function(val) {
                 return displayValue(val);
             }).filter(Boolean);
 
-            var showsValue = !isMixed && tags[field.key] && !(field.type === 'typeCombo' && tags[field.key] === 'yes');
-            var isRawValue = showsValue && !stringsField.hasTextForStringId(`options.${tags[field.key]}`)
-                                        && !stringsField.hasTextForStringId(`options.${tags[field.key]}.title`);
-            var isKnownValue = showsValue && !isRawValue;
-
-            var isReadOnly = !_allowCustomValues || isKnownValue;
-
             utilGetSetValue(_input, !isMixed ? displayValue(tags[field.key]) : '')
+                .data([tags[field.key]])
                 .classed('raw-value', isRawValue)
                 .classed('known-value', isKnownValue)
                 .attr('readonly', isReadOnly ? 'readonly' : undefined)
@@ -734,7 +739,7 @@ export function uiFieldCombo(field, context) {
                 .classed('mixed', isMixed)
                 .on('keydown.deleteCapture', function(d3_event) {
                     if (isReadOnly &&
-                        isKnownValue &&
+                        isKnownValue(tags[field.key]) &&
                         (d3_event.keyCode === utilKeybinding.keyCodes['⌫'] ||
                         d3_event.keyCode === utilKeybinding.keyCodes['⌦'])) {
 
@@ -755,6 +760,16 @@ export function uiFieldCombo(field, context) {
                 _lengthIndicator.update(tags[field.key]);
             }
         }
+
+        const refreshStyles = () => {
+            _input
+                .data([tagValue(utilGetSetValue(_input))])
+                .classed('raw-value', isRawValue)
+                .classed('known-value', isKnownValue);
+        };
+        _input.on('input.refreshStyles', refreshStyles);
+        _combobox.on('update.refreshStyles', refreshStyles);
+        refreshStyles();
     };
 
     function registerDragAndDrop(selection) {

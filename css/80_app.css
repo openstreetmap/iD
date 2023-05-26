@@ -1640,10 +1640,14 @@ input.date-selector {
     display: none;
 }
 
-.form-field-input-combo input.raw-value {
+.form-field-input-combo input.raw-value,
+.form-field-input-semicombo input.raw-value,
+.form-field-input-multicombo input.raw-value {
     font-family: monospace;
 }
-.form-field-input-combo input.known-value {
+.form-field-input-combo input.known-value,
+.form-field-input-semicombo input.known-value,
+.form-field-input-multicombo input.known-value {
     color: #7092ff;
 }
 
@@ -1706,7 +1710,7 @@ input.date-selector {
     font-style: italic;
 }
 
-.form-field-input-multicombo li.chip span {
+.form-field-input-multicombo li.chip > span {
     display: block;
     flex: 1 1 auto;
     overflow: hidden;
@@ -1745,7 +1749,9 @@ input.date-selector {
     width: auto;
 }
 
-.form-field-input-combo .tag-value-icon {
+.form-field-input-combo .tag-value-icon,
+.form-field-input-semicombo .input-wrap .tag-value-icon,
+.form-field-input-multicombo .input-wrap .tag-value-icon {
     display: inline-block;
     position: relative;
     height: 24px;
@@ -1756,7 +1762,9 @@ input.date-selector {
     z-index: 1;
     padding-left: 11px;
 }
-.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon {
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon,
+.ideditor[dir='rtl'] .form-field-input-semicombo .input-wrap .tag-value-icon,
+.ideditor[dir='rtl'] .form-field-input-multicombo .input-wrap .tag-value-icon  {
     margin-right: 0;
     margin-left: -30px;
     padding-left: 0;
@@ -1767,15 +1775,29 @@ input.date-selector {
     height: 21px;
     margin: auto;
 }
-.ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input {
+.ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input,
+.ideditor[dir='ltr'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
+.ideditor[dir='ltr'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {
     padding-left: 40px;
 }
-.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input {
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input,
+.ideditor[dir='rtl'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
+.ideditor[dir='rtl'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {
     padding-right: 40px;
 }
 .combobox-option .tag-value-icon {
     display: inline-block;
     width: 28px;
+}
+.form-field-input-multicombo li.chip .tag-value-icon .icon {
+    margin: 0;
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: center;
+}
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .tag-value-icon .icon {
+    margin-right: 6px;
+    margin-left: 0;
 }
 
 
