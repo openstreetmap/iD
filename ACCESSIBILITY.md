@@ -165,12 +165,12 @@ for more info.
 | ✅ | Browser language preference | iD tries to use the language set in the browser |
 | ✅ | Base language fallback | E.g. if `pt_BR` is incomplete, `pt` should be tried before `en` | [#7996](https://github.com/openstreetmap/iD/issues/7996)
 | ✅ | Custom fallback languages | If the preferred language is incomplete, user-specified ones should be tried before `en` (e.g. `kk` → `ru`) | [#7996](https://github.com/openstreetmap/iD/issues/7996)
-| 🟠 | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages | [#7963](https://github.com/openstreetmap/iD/issues/7963)
+| ✅ | [`lang` HTML attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) | Helps with text-to-speech, text formatting, and auto-transliteration, particularly when iD mixes strings from different languages | [#7998](https://github.com/openstreetmap/iD/pull/7998)
 | ✅ | Locale URL parameters | `locale` and `rtl` can be used to manually set iD's locale preferences. See the [API](API.md#url-parameters) |
 | ❌ | Language selection in UI | The mapper should be able to view and change iD's language in the interface at any time. Useful for public computers with fixed browser languages | [#3120](https://github.com/openstreetmap/iD/issues/3120) |
 | 🟩 | Right-to-left layouts | The [`dir` HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir) is properly set for languages like Hebrew and Arabic |
 | ✅ | [Language-specific plurals](https://docs.transifex.com/localization-tips-workflows/plurals-and-genders#how-pluralized-strings-are-handled-by-transifex) | English has two plural forms, but some languages need more to be grammatically correct | [#597](https://github.com/openstreetmap/iD/issues/597), [#7991](https://github.com/openstreetmap/iD/issues/7991) |
-| 🟠 | [Localized number formats](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) | Most in-text numbers are localized. Numeric fields are not | [#3615](https://github.com/openstreetmap/iD/issues/3615), [#7993](https://github.com/openstreetmap/iD/issues/7993) |
+| ✅ | [Localized number formats](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) | Most in-text numbers are localized, including numeric fields | [#8769](https://github.com/openstreetmap/iD/pull/8769), [#7993](https://github.com/openstreetmap/iD/issues/7993) |
 | 🟠 | Label icons | Icons should accompany text labels to illustrate the meaning of untranslated terms |
 
 ### Translatability

@@ -223,5 +223,13 @@
       ["street", "housenumber"],
       ["postcode", "city"]
     ]
+  },
+  {
+    "countryCodes": ["ph"],
+    "format": [
+      ["unit", "housenumber", "street"],
+	  ["district", "city"],
+	  ["postcode", "province"]
+    ]
   }
 ]

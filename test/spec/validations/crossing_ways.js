@@ -2,7 +2,12 @@ describe('iD.validations.crossing_ways', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext().assetPath('../dist/').init();
+        const container = d3.select('body').append('div');
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        container
+            .append('div')
+            .attr('class', 'main-map')
+            .call(context.map());
     });
 
     function createWaysWithOneCrossingPoint(tags1, tags2) {
@@ -251,6 +256,17 @@ describe('iD.validations.crossing_ways', function () {
     it('flags footway crossing footway', function() {
         createWaysWithOneCrossingPoint({ highway: 'footway' }, { highway: 'footway' });
         verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags sidewalk crossing service road', function() {
+        createWaysWithOneCrossingPoint({ highway: 'service' }, { highway: 'footway', footway: 'sidewalk' });
+        const issues = validate();
+        verifySingleCrossingIssue(issues, {});
+        context.enter(iD.modeSelect(context, ['w-1']));
+        const dynamicFixes = issues[0].dynamicFixes(context);
+        expect(dynamicFixes).to.have.lengthOf(5);
+        expect(dynamicFixes[0]._connectionTags).to.eql({});
+        expect(dynamicFixes[1]._connectionTags).to.eql({ highway: 'crossing' });
     });
 
     it('flags road crossing railway', function() {
