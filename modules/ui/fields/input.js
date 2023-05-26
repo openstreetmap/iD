@@ -463,7 +463,7 @@ export function uiFieldText(field, context) {
             numbers = numbers.map(function(v) {
                 v = v.trim();
                 var num = Number(v);
-                if (!isFinite(num)) return v;
+                if (!isFinite(num) || v === '') return v;
                 const fractionDigits = v.includes('.') ? v.split('.')[1].length : 0;
                 return formatFloat(clamped(num), fractionDigits);
             });
