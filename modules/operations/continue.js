@@ -18,7 +18,6 @@ export function operationContinue(context, selectedIDs) {
     function candidateWays() {
         return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
             return parent.geometry(context.graph()) === 'line' &&
-                !parent.isClosed() &&
                 parent.contains(_vertex.id) &&
                 (_geometries.line.length === 0 || _geometries.line[0] === parent);
         }) : [];
