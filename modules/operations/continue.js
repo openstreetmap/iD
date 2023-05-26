@@ -1,6 +1,7 @@
 import { t } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { behaviorOperation } from '../behavior/operation';
+import { actionDeleteNode } from '../actions/delete_node';
 import { utilArrayGroupBy } from '../util';
 
 
@@ -18,7 +19,7 @@ export function operationContinue(context, selectedIDs) {
         return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
             return parent.geometry(context.graph()) === 'line' &&
                 !parent.isClosed() &&
-                parent.affix(_vertex.id) &&
+                parent.contains(_vertex.id) &&
                 (_geometries.line.length === 0 || _geometries.line[0] === parent);
         }) : [];
     }
@@ -28,8 +29,14 @@ export function operationContinue(context, selectedIDs) {
 
     var operation = function() {
         var candidate = _candidates[0];
+        var affix = candidate.affix(_vertex.id);
+        // Unless an endpoint is selected, delete the selected node in favor of whatever we're going to draw.
+        // This avoids a situation where it's possible to draw along all but one of the edges.
+        if (!affix) {
+            context.perform(actionDeleteNode(_vertex.id));
+        }
         context.enter(
-            modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(_vertex.id), true)
+            modeDrawLine(context, candidate.id, context.graph(), 'line', affix || candidate.nodes.indexOf(_vertex.id), true)
         );
     };
 
