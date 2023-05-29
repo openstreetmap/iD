@@ -203,6 +203,26 @@
     }
   },
   {
+    "countryCodes": ["lv"],
+    "format": [
+      ["street", "housenumber"],
+      ["housename", "subdistrict"],
+      ["district", "city", "postcode"]
+    ],
+    "dropdowns": [
+      "street", "city", "subdistrict", "district", "postcode"
+    ],
+    "widths": {
+      "street": 0.7,
+      "housenumber": 0.3,
+      "housename": 0.4,
+      "subdistrict": 0.6,
+      "district": 0.4,
+      "city": 0.4,
+      "postcode": 0.2
+    }
+  },
+  {
     "countryCodes": ["in"],
     "format": [
       ["housenumber", "street"],
