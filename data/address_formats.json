@@ -70,13 +70,6 @@
     ]
   },
   {
-    "countryCodes": ["lv"],
-    "format": [
-      ["street", "housenumber"],
-      ["city", "postcode"]
-    ]
-  },
-  {
     "countryCodes": ["br"],
     "format": [
       ["street+place"],
