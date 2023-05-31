@@ -29,7 +29,7 @@ function buildCSS() {
 
   return _currBuild =
     Promise.resolve()
-      .then(() => glob('css/**/*.css'))
+      .then(() => glob.globSync('css/**/*.css'))
       .then(files => doConcat(files.sort(), 'dist/iD.css'))
       .then(() => {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
