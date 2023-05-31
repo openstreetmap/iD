@@ -231,5 +231,12 @@
 	  ["district", "city"],
 	  ["postcode", "province"]
     ]
+  },
+  {
+    "countryCodes": ["hu"],
+    "format": [
+      ["postcode", "city"],
+      ["street", "housenumber"]
+    ]
   }
 ]
