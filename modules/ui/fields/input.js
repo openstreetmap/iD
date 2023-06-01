@@ -18,12 +18,14 @@ export {
     uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
+    uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldUrl,
     likelyRawNumberFormat
 };
 
 const likelyRawNumberFormat = /^-?(0\.\d*|\d*\.\d{0,2}(\d{4,})?|\d{4,}\.\d{3})$/;
+const yoHoursURLFormat = 'https://projets.pavie.info/yohours/?oh={value}';
 
 export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
@@ -194,6 +196,26 @@ export function uiFieldText(field, context) {
                         var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
                         window.open(url, '_blank');
                     }
+                })
+                .merge(outlinkButton);
+        } else if (field.type === 'schedule') {
+
+            input.attr('type', 'text');
+
+            outlinkButton = wrap.selectAll('.foreign-id-permalink')
+                .data([0]);
+
+            outlinkButton.enter()
+                .append('button')
+                .call(svgIcon('#iD-icon-out-link'))
+                .attr('class', 'form-field-button foreign-id-permalink')
+                .attr('title', () => t('icons.edit_in', { tool: 'YoHours' }))
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+
+                    var value = validIdentifierValueForLink();
+                    var url = yoHoursURLFormat.replace(/{value}/, encodeURIComponent(value || ''));
+                    window.open(url, '_blank');
                 })
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
@@ -377,6 +399,9 @@ export function uiFieldText(field, context) {
         if (field.type === 'identifier' && field.pattern) {
             return value && value.match(new RegExp(field.pattern))[0];
         }
+        if (field.type === 'schedule') {
+            return value;
+        }
         return null;
     }
 
@@ -520,7 +545,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'date') updateDateField();
 
         if (outlinkButton && !outlinkButton.empty()) {
-            var disabled = !validIdentifierValueForLink();
+            var disabled = !validIdentifierValueForLink() && field.type !== 'schedule';
             outlinkButton.classed('disabled', disabled);
         }
 
