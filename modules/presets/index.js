@@ -69,7 +69,9 @@ export function presetIndex() {
         // https://github.com/ideditor/schema-builder/issues/100
         const scheduleFields = ['opening_hours', 'opening_hours/covid19', 'service_times', 'collection_times'];
         scheduleFields.forEach(id => {
-          vals[3][id].type = 'schedule';
+          if (id in vals[3]) {
+            vals[3][id].type = 'schedule';
+          }
         });
 
         _this.merge({
