@@ -240,8 +240,8 @@
   {
     "countryCodes": ["ph"],
     "format": [
-      ["unit", "housenumber", "street"],
-	  ["district", "city"],
+      ["unit", "housename", "housenumber", "street"],
+	  ["neighbourhood", "district", "city"],
 	  ["postcode", "province"]
     ]
   },
