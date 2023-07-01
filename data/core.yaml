@@ -2169,7 +2169,7 @@ en:
       title: "Points"
       points_info: "*Points* can be used to represent features such as shops, restaurants, and monuments."
       add_point: "They mark a specific location, and describe what's there. **Press the {point_icon} {point} button to add a new point.**"
-      place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer over this building, then left-click or press `{space}`.**"
+      place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer inside the outline of this building, then left-click or press `{space}`.**"
       place_point_touch: "To place the new point on the map, {tap_icon} tap the location where it should go. **Tap the center of this building.**"
       search_cafe: "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**"
       choose_cafe: "**Choose {preset} from the list.**"

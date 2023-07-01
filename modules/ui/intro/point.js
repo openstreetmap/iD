@@ -87,6 +87,7 @@ export function uiIntroPoint(context, reveal) {
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return chapter.restart();
             _pointID = context.mode().selectedIDs()[0];
+            if (context.graph().geometry(_pointID) === 'vertex') return chapter.restart();
             continueTo(searchPreset);
         });
 
