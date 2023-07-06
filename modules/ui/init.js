@@ -380,10 +380,17 @@ export function uiInit(context) {
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
             .on('↓', pan([0, -panPixels]))
+
             .on(uiCmd('⌥←'), pan([map.dimensions()[0], 0]))
             .on(uiCmd('⌥↑'), pan([0, map.dimensions()[1]]))
             .on(uiCmd('⌥→'), pan([-map.dimensions()[0], 0]))
             .on(uiCmd('⌥↓'), pan([0, -map.dimensions()[1]]))
+
+            .on(uiCmd('⇞'), (e) => context.mode().id !== 'select' && pan([map.dimensions()[0], 0])(e))
+            .on(uiCmd('↖'), (e) => context.mode().id !== 'select' && pan([0, map.dimensions()[1]])(e))
+            .on(uiCmd('⇟'), (e) => context.mode().id !== 'select' && pan([-map.dimensions()[0], 0])(e))
+            .on(uiCmd('↘'), (e) => context.mode().id !== 'select' && pan([0, -map.dimensions()[1]])(e))
+
             .on(uiCmd('⌘' + t('background.key')), function quickSwitch(d3_event) {
                 if (d3_event) {
                     d3_event.stopImmediatePropagation();

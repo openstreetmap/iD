@@ -252,10 +252,10 @@ export function modeSelect(context, selectedIDs) {
 
         keybinding
             .on(t('inspector.zoom_to.key'), mode.zoomToSelected)
-            .on(['[', 'pgup'], previousVertex)
-            .on([']', 'pgdown'], nextVertex)
-            .on(['{', uiCmd('⌘['), 'home'], firstVertex)
-            .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
+            .on(['[', uiCmd('↖')], previousVertex)
+            .on([']', uiCmd('↘')], nextVertex)
+            .on(['{', uiCmd('⌘['), uiCmd('⇞')], firstVertex)
+            .on(['}', uiCmd('⌘]'), uiCmd('⇟')], lastVertex)
             .on(uiCmd('⇧←'), nudgeSelection([-10, 0]))
             .on(uiCmd('⇧↑'), nudgeSelection([0, -10]))
             .on(uiCmd('⇧→'), nudgeSelection([10, 0]))

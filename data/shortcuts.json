@@ -21,6 +21,11 @@
             "separator": ","
           },
           {
+            "shortcuts": ["↖", "↘", "⇞", "⇟"],
+            "text": "shortcuts.browsing.navigation.pan_more",
+            "separator": ","
+          },
+          {
             "shortcuts": ["+", "-"],
             "text": "shortcuts.browsing.navigation.zoom",
             "separator": ","
