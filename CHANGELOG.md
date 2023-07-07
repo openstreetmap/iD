@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
 * Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
 * Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
+* Fix crash when using certain locales (e.g. `fr-FR`) ([#9737], thanks [@k-yle])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone format for India ([#9482], thanks [@biswajit-k])
@@ -89,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [#9650]: https://github.com/openstreetmap/iD/pull/9650
+[#9737]: https://github.com/openstreetmap/iD/pull/9737
 [@biswajit-k]: https://github.com/biswajit-k
 [@bryceco]: https://github.com/bryceco
 

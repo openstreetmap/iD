@@ -401,7 +401,7 @@ export function coreLocalizer() {
 
     localizer.languageName = (code, options) => {
 
-        if (_languageNames[code]) {  // name in locale language
+        if (_languageNames && _languageNames[code]) {  // name in locale language
           // e.g. "German"
           return _languageNames[code];
         }
@@ -418,9 +418,9 @@ export function coreLocalizer() {
           } else if (langInfo.base && langInfo.script) {
             const base = langInfo.base;   // the code of the language this is based on
 
-            if (_languageNames[base]) {   // base language name in locale language
+            if (_languageNames && _languageNames[base]) {   // base language name in locale language
               const scriptCode = langInfo.script;
-              const script = _scriptNames[scriptCode] || scriptCode;
+              const script = (_scriptNames && _scriptNames[scriptCode]) || scriptCode;
               // e.g. "Serbian (Cyrillic)"
               return localizer.t('translate.language_and_code', { language: _languageNames[base], code: script });
 
