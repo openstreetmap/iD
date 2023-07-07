@@ -176,8 +176,17 @@ export function coreLocalizer() {
 
         let locale = _localeCode;
         if (locale.toLowerCase() === 'en-us') locale = 'en';
-        _languageNames = _localeStrings.general[locale].languageNames;
-        _scriptNames = _localeStrings.general[locale].scriptNames;
+
+        // some locales (like fr-FR) have no languageNames or scriptNames,
+        // so we need to load them from the base language (see #8673)
+        _languageNames = (
+          _localeStrings.general[locale].languageNames ||
+          _localeStrings.general[_languageCode].languageNames
+        );
+        _scriptNames = (
+          _localeStrings.general[locale].scriptNames ||
+          _localeStrings.general[_languageCode].scriptNames
+        );
 
         _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }
@@ -232,7 +241,7 @@ export function coreLocalizer() {
     * the given `stringId`. If no string can be found in the requested locale,
     * we'll recurse down all the `_localeCodes` until one is found.
     *
-    * @param  {string}   stringId      string identifier
+    * @param  {string}   origStringId  string identifier
     * @param  {object?}  replacements  token replacements and default string
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
     * @return {string?}  localized string
