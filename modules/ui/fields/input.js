@@ -396,10 +396,19 @@ export function uiFieldText(field, context) {
     // returns all values of a (potential) multiselection and/or multi-key field
     function getVals(tags) {
         if (field.keys) {
-            return new Set(field.keys.reduce((acc, key) => acc.concat(tags[key]), [])
-                .filter(Boolean));
+            const multiSelection = context.selectedIDs();
+            tags = multiSelection.length > 1
+                ? context.selectedIDs()
+                    .map(id => context.graph().entity(id))
+                    .map(entity => entity.tags)
+                : [tags];
+            return tags.map(tags => new Set(field.keys
+                    .reduce((acc, key) => acc.concat(tags[key]), [])
+                    .filter(Boolean)))
+                .map(vals => vals.size === 0 ? new Set([undefined]) : vals)
+                .reduce((a, b) => new Set([...a, ...b]));
         } else {
-            return new Set([].concat(tags[field.key]).filter(Boolean));
+            return new Set([].concat(tags[field.key]));
         }
     }
 
