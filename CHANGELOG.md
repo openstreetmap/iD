@@ -71,8 +71,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Take regional variants of parent presets into account when resolving preset fields ([#9524])
 * Render "right-side" arrows for `man_made=quay` features
 * Support icons also in `multiCombo` and `semiCombo` fields ([#9433])
+* Support input fields with multiple tag keys: one main key and an optional list of _alternative_ keys, e.g. `email` / `contact:email` ([schema-builder#98])
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v5.0, `core-js-bundle` to v3.30, `osm-auth` to v2.1, `cldr-core` and `cldr-localenames-full` to v43
+* Upgrade dependencies: `id-tagging-schema` to v6.3, `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v5.1, `core-js-bundle` to v3.30, `osm-auth` to v2.1, `cldr-core` and `cldr-localenames-full` to v43, `dotenv` to v16.3, `eslint` to v8.44
 * Bundle `package-lock.json` file in repository for faster `clean-install` builds
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
@@ -95,6 +96,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9650]: https://github.com/openstreetmap/iD/pull/9650
 [#9710]: https://github.com/openstreetmap/iD/issues/9710
 [#9737]: https://github.com/openstreetmap/iD/pull/9737
+[schema-builder#98]: https://github.com/ideditor/schema-builder/pull/98
 [@biswajit-k]: https://github.com/biswajit-k
 [@bryceco]: https://github.com/bryceco
 
