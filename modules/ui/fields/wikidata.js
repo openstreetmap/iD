@@ -146,7 +146,10 @@ export function uiFieldWikidata(field, context) {
         }
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
-            if (err) return;
+            if (err) {
+                if (err !== 'No query') console.error(err);
+                return;
+            }
 
             var result = data.map(function (item) {
                 return {
