@@ -38,6 +38,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.26.0-dev)
 #### :tada: New Features
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
+#### :newspaper: News
+* Remove dysfunctional _Maxar Premium_ imagery layer from background selection list ([#9710])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 * Localize numbers in numeric fields ([#8769], thanks [@1ec5])
@@ -90,6 +92,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [#9650]: https://github.com/openstreetmap/iD/pull/9650
+[#9710]: https://github.com/openstreetmap/iD/issues/9710
 [#9737]: https://github.com/openstreetmap/iD/pull/9737
 [@biswajit-k]: https://github.com/biswajit-k
 [@bryceco]: https://github.com/bryceco
