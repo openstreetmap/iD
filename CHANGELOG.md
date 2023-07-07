@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 * Localize numbers in numeric fields ([#8769], thanks [@1ec5])
 * The Address field now supports the `addr:place` tag (as an alternative to `addr:street`), this functionality is activated in selected countries ([#9603])
+* Clean up background imagery list by discarding layers which are not helpful for mapping
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
