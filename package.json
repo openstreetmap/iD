@@ -78,7 +78,7 @@
     "@rapideditor/temaki": "~5.4.0",
     "@mapbox/maki": "^8.0.1",
     "@openstreetmap/id-tagging-schema": "^6.3.0",
-    "@transifex/api": "^5.2.0",
+    "@transifex/api": "^5.4.0",
     "autoprefixer": "^10.4.14",
     "chai": "^4.3.7",
     "chalk": "^4.1.2",
