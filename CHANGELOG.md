@@ -35,7 +35,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.26.0-dev)
+# 2.26.0
 #### :tada: New Features
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
 #### :newspaper: News
@@ -45,8 +45,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Localize numbers in numeric fields ([#8769], thanks [@1ec5])
 * The Address field now supports the `addr:place` tag (as an alternative to `addr:street`), this functionality is activated in selected countries ([#9603])
 * Clean up background imagery list by discarding layers which are not helpful for mapping
-#### :scissors: Operations
-#### :camera: Street-Level
 #### :white_check_mark: Validation
 * Offer to connect sidewalk to service road without tagging the connection as a crossing ([#9650], thanks [@1ec5])
 #### :bug: Bugfixes
@@ -66,8 +64,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add Address format for Latvia ([#9667], thanks [@soshial])
 * Add Phone format for Hungary ([#9673], thanks [@Yogurt4])
 * Add Phone format for Bulgaria ([#8775], thanks [@Dimitar5555])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
