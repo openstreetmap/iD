@@ -36,91 +36,97 @@ export function uiFieldAddress(field, context) {
         .catch(function() { /* ignore */ });
 
 
-    function getNearStreets() {
+    function getNear(isAddressable, type, searchRadius, resultProp) {
         var extent = combinedEntityExtent();
         var l = extent.center();
-        var box = geoExtent(l).padByMeters(200);
+        var box = geoExtent(l).padByMeters(searchRadius);
 
-        var streets = context.history().intersects(box)
+        var features = context.history().intersects(box)
             .filter(isAddressable)
-            .map(function(d) {
-                var loc = context.projection([
-                    (extent[0][0] + extent[1][0]) / 2,
-                    (extent[0][1] + extent[1][1]) / 2
-                ]);
-                var choice = geoChooseEdge(context.graph().childNodes(d), loc, context.projection);
+            .map(d => {
+                let dist = geoSphericalDistance(d.extent(context.graph()).center(), l);
 
+                if (d.type === 'way') {
+                    var loc = context.projection([
+                        (extent[0][0] + extent[1][0]) / 2,
+                        (extent[0][1] + extent[1][1]) / 2
+                    ]);
+                    var choice = geoChooseEdge(context.graph().childNodes(d), loc, context.projection);
+                    dist = Math.min(dist, choice.distance);
+                }
+
+                const value = resultProp && d.tags[resultProp] ? d.tags[resultProp] : d.tags.name;
+                let title = value;
+                if (type === 'street') {
+                    title = `${addrField.t('placeholders.street')}: ${title}`;
+                } else if (type === 'place') {
+                    title = `${addrField.t('placeholders.place')}: ${title}`;
+                }
                 return {
-                    title: d.tags.name,
-                    value: d.tags.name,
-                    dist: choice.distance
+                    title,
+                    value,
+                    dist,
+                    type,
+                    klass: `address-${type}`
                 };
             })
             .sort(function(a, b) {
                 return a.dist - b.dist;
             });
 
-        return utilArrayUniqBy(streets, 'value');
+        return utilArrayUniqBy(features, 'value');
+    }
 
+    function getNearStreets() {
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
         }
+
+        return getNear(isAddressable, 'street', 200);
     }
 
-
-    function getNearCities() {
-        var extent = combinedEntityExtent();
-        var l = extent.center();
-        var box = geoExtent(l).padByMeters(200);
-
-        var cities = context.history().intersects(box)
-            .filter(isAddressable)
-            .map(function(d) {
-                return {
-                    title: d.tags['addr:city'] || d.tags.name,
-                    value: d.tags['addr:city'] || d.tags.name,
-                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
-                };
-            })
-            .sort(function(a, b) {
-                return a.dist - b.dist;
-            });
-
-        return utilArrayUniqBy(cities, 'value');
-
-
+    function getNearPlaces() {
         function isAddressable(d) {
             if (d.tags.name) {
-                if (d.tags.admin_level === '8' && d.tags.boundary === 'administrative') return true;
+                if (d.tags.place) return true;
+                if (d.tags.boundary === 'administrative' && d.tags.admin_level > 8) return true;
+            }
+            return false;
+        }
+
+        return getNear(isAddressable, 'place', 200);
+    }
+
+    function getNearCities() {
+        function isAddressable(d) {
+            if (d.tags.name) {
+                if (d.tags.boundary === 'administrative' && d.tags.admin_level === '8') return true;
                 if (d.tags.border_type === 'city') return true;
                 if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village') return true;
             }
 
-            if (d.tags['addr:city']) return true;
+            if (d.tags[`${field.key}:city`]) return true;
 
             return false;
         }
+
+        return getNear(isAddressable, 'city', 200, `${field.key}:city`);
+    }
+
+    function getNearPostcodes() {
+        return [... new Set([]
+            .concat(getNearValues('postcode'))
+            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code')))];
     }
 
     function getNearValues(key) {
-        var extent = combinedEntityExtent();
-        var l = extent.center();
-        var box = geoExtent(l).padByMeters(200);
+        const tagKey = `${field.key}:${key}`;
 
-        var results = context.history().intersects(box)
-            .filter(function hasTag(d) { return _entityIDs.indexOf(d.id) === -1 && d.tags[key]; })
-            .map(function(d) {
-                return {
-                    title: d.tags[key],
-                    value: d.tags[key],
-                    dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
-                };
-            })
-            .sort(function(a, b) {
-                return a.dist - b.dist;
-            });
+        function hasTag(d) {
+            return _entityIDs.indexOf(d.id) === -1 && d.tags[tagKey];
+        }
 
-        return utilArrayUniqBy(results, 'value');
+        return getNear(hasTag, key, 200, tagKey);
     }
 
 
@@ -142,11 +148,11 @@ export function uiFieldAddress(field, context) {
         var dropdowns = addressFormat.dropdowns || [
             'city', 'county', 'country', 'district', 'hamlet',
             'neighbourhood', 'place', 'postcode', 'province',
-            'quarter', 'state', 'street', 'subdistrict', 'suburb'
+            'quarter', 'state', 'street', 'street+place', 'subdistrict', 'suburb'
         ];
 
         var widths = addressFormat.widths || {
-            housenumber: 1/3, street: 2/3,
+            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
             city: 2/3, state: 1/4, postcode: 1/3
         };
 
@@ -191,16 +197,45 @@ export function uiFieldAddress(field, context) {
         function addDropdown(d) {
             if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
 
-            var nearValues = (d.id === 'street') ? getNearStreets
-                : (d.id === 'city') ? getNearCities
-                : getNearValues;
+            var nearValues;
+            switch (d.id) {
+                case 'street':
+                    nearValues = getNearStreets;
+                break;
+                case 'place':
+                    nearValues = getNearPlaces;
+                break;
+                case 'street+place':
+                    nearValues = () => []
+                        .concat(getNearStreets())
+                        .concat(getNearPlaces());
+                    d.isAutoStreetPlace = true;
+                    d.id = _tags[`${field.key}:place`] ? 'place' : 'street';
+                break;
+                case 'city':
+                    nearValues = getNearCities;
+                break;
+                case 'postcode':
+                    nearValues = getNearPostcodes;
+                break;
+                default:
+                    nearValues = getNearValues;
+            }
 
             d3_select(this)
-                .call(uiCombobox(context, 'address-' + d.id)
+                .call(uiCombobox(context, `address-${d.isAutoStreetPlace ? 'street-place' : d.id}`)
                     .minItems(1)
                     .caseSensitive(true)
-                    .fetcher(function(value, callback) {
-                        callback(nearValues('addr:' + d.id));
+                    .fetcher(function(typedValue, callback) {
+                        typedValue = typedValue.toLowerCase();
+                        callback(nearValues(d.id)
+                            .filter(v => v.value.toLowerCase().indexOf(typedValue) !== -1));
+                    })
+                    .on('accept', function(selected) {
+                        if (d.isAutoStreetPlace) {
+                            // set subtag depending on selected entry
+                            d.id = selected ? selected.type : 'street';
+                        }
                     })
                 );
         }
@@ -248,42 +283,75 @@ export function uiFieldAddress(field, context) {
 
     function change(onInput) {
         return function() {
-            var tags = {};
+            setTimeout(() => {
+                var tags = {};
 
-            _wrap.selectAll('input')
-                .each(function (subfield) {
-                    var key = field.key + ':' + subfield.id;
+                _wrap.selectAll('input')
+                    .each(function (subfield) {
+                        var key = field.key + ':' + subfield.id;
 
-                    var value = this.value;
-                    if (!onInput) value = context.cleanTagValue(value);
+                        var value = this.value;
+                        if (!onInput) value = context.cleanTagValue(value);
 
-                    // don't override multiple values with blank string
-                    if (Array.isArray(_tags[key]) && !value) return;
+                        // don't override multiple values with blank string
+                        if (Array.isArray(_tags[key]) && !value) return;
 
-                    tags[key] = value || undefined;
-                });
+                        if (subfield.isAutoStreetPlace) {
+                            if (subfield.id === 'street') {
+                                tags[`${field.key}:place`] = undefined;
+                            } else if (subfield.id === 'place') {
+                                tags[`${field.key}:street`] = undefined;
+                            }
+                        }
 
-            dispatch.call('change', this, tags, onInput);
+                        tags[key] = value || undefined;
+                    });
+
+                dispatch.call('change', this, tags, onInput);
+            }, 0);
         };
     }
+
 
     function updatePlaceholder(inputSelection) {
         return inputSelection.attr('placeholder', function(subfield) {
             if (_tags && Array.isArray(_tags[field.key + ':' + subfield.id])) {
                 return t('inspector.multiple_values');
             }
-            if (_countryCode) {
-                var localkey = subfield.id + '!' + _countryCode;
-                var tkey = addrField.hasTextForStringId('placeholders.' + localkey) ? localkey : subfield.id;
-                return addrField.t('placeholders.' + tkey);
+            if (subfield.isAutoStreetPlace) {
+                return `${getLocalPlaceholder('street')} / ${getLocalPlaceholder('place')}`;
             }
+            return getLocalPlaceholder(subfield.id);
         });
     }
 
 
+    function getLocalPlaceholder(key) {
+        if (_countryCode) {
+            var localkey = key + '!' + _countryCode;
+            var tkey = addrField.hasTextForStringId('placeholders.' + localkey) ? localkey : key;
+            return addrField.t('placeholders.' + tkey);
+        }
+    }
+
+
     function updateTags(tags) {
-        utilGetSetValue(_wrap.selectAll('input'), function (subfield) {
-                var val = tags[field.key + ':' + subfield.id];
+        utilGetSetValue(_wrap.selectAll('input'), subfield => {
+                var val;
+                if (subfield.isAutoStreetPlace) {
+                    const streetKey = `${field.key}:street`;
+                    const placeKey = `${field.key}:place`;
+
+                    if (tags[streetKey] !== undefined || tags[placeKey] === undefined) {
+                        val = tags[streetKey];
+                        subfield.id = 'street';
+                    } else {
+                        val = tags[placeKey];
+                        subfield.id = 'place';
+                    }
+                } else {
+                    val = tags[`${field.key}:${subfield.id}`];
+                }
                 return typeof val === 'string' ? val : '';
             })
             .attr('title', function(subfield) {

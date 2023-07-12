@@ -22,7 +22,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                     .forEach(key => preserveKeys.push(key));
             }
         }
-        if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, loc);
+        if (oldPreset) tags = oldPreset.unsetTags(tags, geometry, preserveKeys, false, loc);
         if (newPreset) tags = newPreset.setTags(tags, geometry, skipFieldDefaults, loc);
 
         return graph.replace(entity.update({tags: tags}));

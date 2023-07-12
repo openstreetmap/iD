@@ -35,13 +35,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.26.0-dev)
+# 2.26.0
 #### :tada: New Features
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
+#### :newspaper: News
+* Remove nonfunctional _Maxar Premium_ imagery layer from background selection list ([#9710])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
-#### :scissors: Operations
-#### :camera: Street-Level
+* Localize numbers in numeric fields ([#8769], thanks [@1ec5])
+* The Address field now supports the `addr:place` tag (as an alternative to `addr:street`), this functionality is activated in selected countries ([#9603])
+* Clean up background imagery list by discarding layers which are not helpful for mapping
 #### :white_check_mark: Validation
 * Offer to connect sidewalk to service road without tagging the connection as a crossing ([#9650], thanks [@1ec5])
 #### :bug: Bugfixes
@@ -50,25 +53,37 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix wrongly flagged "incorrect geometry type" warnings for features with lifecycle-prefixed tags ([#9483], thanks [@biswajit-k])
 * Fix corruption of tag values of fields with referenced strings, but restricted `options`, when an unavailable option is entered manually into the field.
 * Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
-* Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
+* Fix broken autocomplete of wikidata fields for some languages with country-codes ([#9638])
 * Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
+* Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
+* Fix crash when using certain locales (e.g. `fr-FR`) ([#9737], thanks [@k-yle])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone format for India ([#9482], thanks [@biswajit-k])
 * Add Address format for the Philippines ([#9482], thanks [@bryceco])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
+* Add Address format for Latvia ([#9667], thanks [@soshial])
+* Add Phone format for Hungary ([#9673], thanks [@Yogurt4])
+* Add Phone format for Bulgaria ([#8775], thanks [@Dimitar5555])
 #### :rocket: Presets
 * Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 * Take regional variants of parent presets into account when resolving preset fields ([#9524])
 * Render "right-side" arrows for `man_made=quay` features
+* Support icons also in `multiCombo` and `semiCombo` fields ([#9433])
+* Support input fields with multiple tag keys: one main key and an optional list of _alternative_ keys, e.g. `email` / `contact:email` ([schema-builder#98])
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v4.3, `core-js-bundle` to v3.30, `osm-auth` to v2.1
-* Bundle `package-lock.json` file in repository for faster `clean-install` builds
+* Bundle `package-lock.json` file in repository for faster `npm clean-install` builds
+* Upgrade OSM data dependencies: `id-tagging-schema` to v6.3, `osm-community-index` to 5.5.3
+* Upgrade icon sets: `fortawesome` to v6.4, `temaki` to v5.4
+* Upgrade `osm-auth` to v2.1,
+* Upgrade dev dependecies, including the following major version upgrades: `glob` to v10, `marked` to v5, `cldr-core` and `cldr-localenames-full` to v43, `esbuild` to v0.18
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
+[#8769]: https://github.com/openstreetmap/iD/pull/8769
+[#8775]: https://github.com/openstreetmap/iD/pull/8775
 [#7427]: https://github.com/openstreetmap/iD/issues/7427
+[#9233]: https://github.com/openstreetmap/iD/issues/9233
+[#9433]: https://github.com/openstreetmap/iD/pull/9433
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
 [#9483]: https://github.com/openstreetmap/iD/pull/9483
 [#9492]: https://github.com/openstreetmap/iD/pull/9492
@@ -76,13 +91,22 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9501]: https://github.com/openstreetmap/iD/pull/9501
 [#9520]: https://github.com/openstreetmap/iD/pull/9520
 [#9524]: https://github.com/openstreetmap/iD/issues/9524
+[#9603]: https://github.com/openstreetmap/iD/pull/9603
 [#9630]: https://github.com/openstreetmap/iD/pull/9630
 [#9637]: https://github.com/openstreetmap/iD/pull/9637
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [#9650]: https://github.com/openstreetmap/iD/pull/9650
+[#9667]: https://github.com/openstreetmap/iD/pull/9667
+[#9673]: https://github.com/openstreetmap/iD/pull/9673
+[#9710]: https://github.com/openstreetmap/iD/issues/9710
+[#9737]: https://github.com/openstreetmap/iD/pull/9737
+[#9738]: https://github.com/openstreetmap/iD/pull/9738
+[schema-builder#98]: https://github.com/ideditor/schema-builder/pull/98
 [@biswajit-k]: https://github.com/biswajit-k
 [@bryceco]: https://github.com/bryceco
+[@soshial]: https://github.com/soshial
+[@Yogurt4]: https://github.com/Yogurt4
 
 
 # 2.25.2

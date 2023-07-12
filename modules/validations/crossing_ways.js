@@ -711,9 +711,7 @@ export function validationCrossingWays(context) {
         }
         if (connectionTags.ford) {
             fixTitleID = 'connect_using_ford';
-            if (connectionTags.highway) {
-                fixIcon = 'temaki-pedestrian';
-            }
+            fixIcon = 'roentgen-ford';
         }
 
         const fix = new validationIssueFix({

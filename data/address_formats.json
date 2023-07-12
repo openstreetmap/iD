@@ -1,7 +1,7 @@
 [
   {
     "format": [
-      ["housenumber", "street"],
+      ["housenumber", "street+place"],
       ["city", "postcode"]
     ]
   },
@@ -16,7 +16,7 @@
     "countryCodes": ["gb"],
     "format": [
       ["housename"],
-      ["housenumber", "street"],
+      ["housenumber", "street+place"],
       ["city", "postcode"]
     ]
   },
@@ -24,22 +24,31 @@
     "countryCodes": ["ie"],
     "format": [
       ["housename"],
-      ["housenumber", "street"],
+      ["housenumber", "street+place"],
       ["city"],
       ["postcode"]
     ]
   },
   {
-    "countryCodes": ["at", "bg", "ch", "de", "si", "pl"],
+    "countryCodes": ["at", "bg", "ch", "de", "si", "pl", "lt"],
     "format": [
-      ["street", "housenumber"],
+      ["street+place", "housenumber"],
       ["postcode", "city"]
     ]
   },
   {
     "countryCodes": [
-      "ad", "ba", "be", "cz", "dk", "es", "fi", "gr", "hr", "is",
-      "it", "li", "nl", "no", "pt", "se", "sk", "sm", "va"
+      "ad", "ba", "be", "dk", "es", "gr", "hr",
+      "it", "pt", "se", "sm", "va"
+    ],
+    "format": [
+      ["street+place", "housenumber", "unit"],
+      ["postcode", "city"]
+    ]
+  },
+  {
+    "countryCodes": [
+        "fi", "is", "li", "nl", "no"
     ],
     "format": [
       ["street", "housenumber", "unit"],
@@ -47,7 +56,14 @@
     ]
   },
   {
-    "countryCodes": ["fr", "lu", "mo"],
+    "countryCodes": ["fr", "lu"],
+    "format": [
+      ["housenumber", "street+place"],
+      ["postcode", "city"]
+    ]
+  },
+  {
+    "countryCodes": ["mo"],
     "format": [
       ["housenumber", "street"],
       ["postcode", "city"]
@@ -56,7 +72,7 @@
   {
     "countryCodes": ["br"],
     "format": [
-      ["street"],
+      ["street+place"],
       ["housenumber", "suburb"],
       ["city", "postcode"]
     ]
@@ -89,7 +105,7 @@
     "countryCodes": ["tw"],
     "format": [
       ["postcode", "city", "district"],
-      ["place", "street"],
+      ["street+place"],
       ["housenumber", "floor", "unit"]
     ]
   },
@@ -121,7 +137,7 @@
     "countryCodes": ["tr"],
     "format": [
       ["neighbourhood"],
-      ["street", "housenumber"],
+      ["street+place", "housenumber"],
       ["postcode", "district", "city"]
     ]
   },
@@ -180,6 +196,26 @@
     }
   },
   {
+    "countryCodes": ["lv"],
+    "format": [
+      ["street", "housenumber"],
+      ["housename", "subdistrict"],
+      ["district", "city", "postcode"]
+    ],
+    "dropdowns": [
+      "street", "city", "subdistrict", "district", "postcode"
+    ],
+    "widths": {
+      "street": 0.7,
+      "housenumber": 0.3,
+      "housename": 0.4,
+      "subdistrict": 0.6,
+      "district": 0.4,
+      "city": 0.4,
+      "postcode": 0.2
+    }
+  },
+  {
     "countryCodes": ["in"],
     "format": [
       ["housenumber", "street"],
@@ -188,11 +224,32 @@
     ]
   },
   {
+    "countryCodes": ["ru"],
+    "format": [
+      ["housenumber", "street+place"],
+      ["city", "postcode"]
+    ]
+  },
+  {
+    "countryCodes": ["cz", "sk"],
+    "format": [
+      ["street", "housenumber"],
+      ["postcode", "city"]
+    ]
+  },
+  {
     "countryCodes": ["ph"],
     "format": [
       ["unit", "housenumber", "street"],
 	  ["district", "city"],
 	  ["postcode", "province"]
+    ]
+  },
+  {
+    "countryCodes": ["hu"],
+    "format": [
+      ["postcode", "city"],
+      ["street", "housenumber"]
     ]
   }
 ]

@@ -176,8 +176,17 @@ export function coreLocalizer() {
 
         let locale = _localeCode;
         if (locale.toLowerCase() === 'en-us') locale = 'en';
-        _languageNames = _localeStrings.general[locale].languageNames;
-        _scriptNames = _localeStrings.general[locale].scriptNames;
+
+        // some locales (like fr-FR) have no languageNames or scriptNames,
+        // so we need to load them from the base language (see #8673)
+        _languageNames = (
+          _localeStrings.general[locale].languageNames ||
+          _localeStrings.general[_languageCode].languageNames
+        );
+        _scriptNames = (
+          _localeStrings.general[locale].scriptNames ||
+          _localeStrings.general[_languageCode].scriptNames
+        );
 
         _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }
@@ -232,7 +241,7 @@ export function coreLocalizer() {
     * the given `stringId`. If no string can be found in the requested locale,
     * we'll recurse down all the `_localeCodes` until one is found.
     *
-    * @param  {string}   stringId      string identifier
+    * @param  {string}   origStringId  string identifier
     * @param  {object?}  replacements  token replacements and default string
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
     * @return {string?}  localized string
@@ -392,7 +401,7 @@ export function coreLocalizer() {
 
     localizer.languageName = (code, options) => {
 
-        if (_languageNames[code]) {  // name in locale language
+        if (_languageNames && _languageNames[code]) {  // name in locale language
           // e.g. "German"
           return _languageNames[code];
         }
@@ -409,9 +418,9 @@ export function coreLocalizer() {
           } else if (langInfo.base && langInfo.script) {
             const base = langInfo.base;   // the code of the language this is based on
 
-            if (_languageNames[base]) {   // base language name in locale language
+            if (_languageNames && _languageNames[base]) {   // base language name in locale language
               const scriptCode = langInfo.script;
-              const script = _scriptNames[scriptCode] || scriptCode;
+              const script = (_scriptNames && _scriptNames[scriptCode]) || scriptCode;
               // e.g. "Serbian (Cyrillic)"
               return localizer.t('translate.language_and_code', { language: _languageNames[base], code: script });
 
@@ -422,6 +431,82 @@ export function coreLocalizer() {
           }
         }
         return code;  // if not found, use the code
+    };
+
+    /**
+     * Returns a function that formats a floating-point number in the given
+     * locale.
+     */
+    localizer.floatFormatter = (locale) => {
+        if (!('Intl' in window && 'NumberFormat' in Intl &&
+              'formatToParts' in Intl.NumberFormat.prototype)) {
+            return (number, fractionDigits) => {
+                return fractionDigits === undefined ? number.toString() : number.toFixed(fractionDigits);
+            };
+        } else {
+            return (number, fractionDigits) => number.toLocaleString(locale, {
+                minimumFractionDigits: fractionDigits,
+                maximumFractionDigits: fractionDigits === undefined ? 20 : fractionDigits,
+            });
+        }
+    };
+
+    /**
+     * Returns a function that parses a number formatted according to the given
+     * locale as a floating-point number.
+     */
+    localizer.floatParser = (locale) => {
+        // https://stackoverflow.com/a/55366435/4585461
+        const polyfill = (string) => +string.trim();
+        if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
+        const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
+        if (!('formatToParts' in format)) return polyfill;
+        const parts = format.formatToParts(-12345.6);
+        const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
+        const index = new Map(numerals.map((d, i) => [d, i]));
+        const literalPart = parts.find(d => d.type === 'literal');
+        const literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');
+        const groupPart = parts.find(d => d.type === 'group');
+        const group = groupPart && new RegExp(`[${groupPart.value}]`, 'g');
+        const decimalPart = parts.find(d => d.type === 'decimal');
+        const decimal = decimalPart && new RegExp(`[${decimalPart.value}]`);
+        const numeral = new RegExp(`[${numerals.join('')}]`, 'g');
+        const getIndex = d => index.get(d);
+        return (string) => {
+            string = string.trim();
+            if (literal) string = string.replace(literal, '');
+            if (group) string = string.replace(group, '');
+            if (decimal) string = string.replace(decimal, '.');
+            string = string.replace(numeral, getIndex);
+            return string ? +string : NaN;
+        };
+    };
+
+    /**
+     * Returns a function that returns the number of decimal places in a
+     * formatted number string.
+     */
+    localizer.decimalPlaceCounter = (locale) => {
+        var literal, group, decimal;
+        if ('Intl' in window && 'NumberFormat' in Intl) {
+            const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
+            if ('formatToParts' in format) {
+                const parts = format.formatToParts(-12345.6);
+                const literalPart = parts.find(d => d.type === 'literal');
+                literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');
+                const groupPart = parts.find(d => d.type === 'group');
+                group = groupPart && new RegExp(`[${groupPart.value}]`, 'g');
+                const decimalPart = parts.find(d => d.type === 'decimal');
+                decimal = decimalPart && new RegExp(`[${decimalPart.value}]`);
+            }
+        }
+        return (string) => {
+            string = string.trim();
+            if (literal) string = string.replace(literal, '');
+            if (group) string = string.replace(group, '');
+            const parts = string.split(decimal || '.');
+            return parts && parts[1] && parts[1].length || 0;
+        };
     };
 
     return localizer;
