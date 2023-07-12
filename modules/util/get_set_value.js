@@ -28,6 +28,8 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
     }
 
     function stickyCursor(func) {
+        // only certain input element types allow manipulating the cursor
+        // see https://html.spec.whatwg.org/multipage/input.html#concept-input-apply
         const supportedTypes = ['text', 'search', 'url', 'tel', 'password'];
         return function() {
             if (!supportedTypes.includes(this.type)) {
