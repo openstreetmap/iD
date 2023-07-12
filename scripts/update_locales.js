@@ -197,7 +197,7 @@ function getLanguage(resourceId) {
   return async (code, callback) => {
     try {
       code = code.replace(/-/g, '_');
-      function delay(t) { return new Promise(resolve => setTimeout(resolve, t)); }
+      // random delay to avoid rate-limit of Transifex' API
       await delay(Math.random() * 60000);
       const url = await transifexApi.ResourceTranslationsAsyncDownload.download({
         resource: {data:{type:'resources', id:`o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`}},
@@ -307,4 +307,8 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       }
     }
   });
+}
+
+function delay(t) {
+  return new Promise(resolve => { setTimeout(resolve, t); });
 }
