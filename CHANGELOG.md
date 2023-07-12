@@ -98,7 +98,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Bundle `package-lock.json` file in repository for faster `npm clean-install` builds
 * Upgrade OSM data dependencies: `id-tagging-schema` to v6.3, `osm-community-index` to 5.5.3
-* Upgrade icon sets: `fortawesome` to v6.4, `temaki` to v5.4
+* Upgrade icon sets: `fontawesome` to v6.4, `temaki` to v5.4
 * Upgrade `osm-auth` to v2.1,
 * Upgrade dev dependecies, including the following major version upgrades: `glob` to v10, `marked` to v5, `cldr-core` and `cldr-localenames-full` to v43, `esbuild` to v0.18
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
