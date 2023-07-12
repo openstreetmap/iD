@@ -28,7 +28,11 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
     }
 
     function stickyCursor(func) {
+        const supportedTypes = ['text', 'search', 'url', 'tel', 'password'];
         return function() {
+            if (!supportedTypes.includes(this.type)) {
+                return;
+            }
             const cursor = { start: this.selectionStart, end: this.selectionEnd };
             func.apply(this, arguments);
             this.setSelectionRange(cursor.start, cursor.end);

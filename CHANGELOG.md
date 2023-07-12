@@ -49,6 +49,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 
+# 2.26.1
+##### 2023-Jul-12
+
+* Fix crash when rendering and `email` UI field ([#9752])
+
+[#9752]: https://github.com/openstreetmap/iD/issues/9752
+
+
 # 2.26.0
 ##### 2023-Jul-12
 
