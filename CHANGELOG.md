@@ -35,7 +35,23 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased (2.27.0-dev)
+
+#### :tada: New Features
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+
 # 2.26.0
+##### 2023-Jul-12
+
 #### :tada: New Features
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
 #### :newspaper: News
