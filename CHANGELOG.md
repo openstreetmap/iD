@@ -35,6 +35,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# 2.26.1
+##### 2023-Jul-12
+
+* Fix crash when rendering and `email` UI field ([#9752])
+
+[#9752]: https://github.com/openstreetmap/iD/issues/9752
+
+
 # 2.26.0
 #### :tada: New Features
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
