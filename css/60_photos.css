@@ -258,6 +258,14 @@
     stroke: #0056f1;
 }
 
+.ideditor .mapilio-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {
     display: block;

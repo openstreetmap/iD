@@ -81,7 +81,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (!service) return;
 
         service
-            .ensureViewerLoaded(context)
+            .ensureViewerLoaded(context, image.id)
             .then(function() {
                 service
                     .selectImage(context, image.id)
@@ -110,9 +110,6 @@ export function svgMapilioImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection) : []);
         let images = (service ? service.images(projection) : []);
-
-
-        // service.filterViewer(context);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });

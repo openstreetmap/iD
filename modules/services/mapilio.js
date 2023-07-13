@@ -7,12 +7,13 @@ import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilRebind, utilTiler } from '../util';
 import {geoExtent, geoScaleToZoom} from '../geo';
+import {localizer} from '../core/localizer';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
 const baseTileUrl = 'https://geo.mapilio.com/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=mapilio:';
-const pointLayer = 'points_mapilio_map';
-const lineLayer = 'captured_roads_line';
+const pointLayer = 'map_points';
+const lineLayer = 'map_roads_line';
 const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
 
 const minZoom = 14;
@@ -122,20 +123,28 @@ function loadTileDataToCache(data, tile) {
         feature,
         loc,
         d;
-    if (vectorTile.layers.hasOwnProperty('points_mapilio_map')) {
+    if (vectorTile.layers.hasOwnProperty(pointLayer)) {
         features = [];
         cache = _mlyCache.images;
-        layer = vectorTile.layers.points_mapilio_map;
+        layer = vectorTile.layers[pointLayer];
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
             loc = feature.geometry.coordinates;
+
+            let resolutionArr = feature.properties.resolution.split('x');
+            let sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
+            let sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
+            let isPano = sourceWidth % sourceHeight === 0;
+
             d = {
                 loc: loc,
-                created_at: feature.properties.created_at,
+                capture_time: feature.properties.capture_time,
                 id: feature.properties.id,
                 sequence_id: feature.properties.sequence_uuid,
-                heading:feature.properties.heading
+                heading: feature.properties.heading,
+                resolution: feature.properties.resolution,
+                isPano: isPano
             };
             cache.forImageId[d.id] = d;
             features.push({
@@ -147,9 +156,9 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty('captured_roads_line')) {
+    if (vectorTile.layers.hasOwnProperty(lineLayer)) {
         cache = _mlyCache.sequences;
-        layer = vectorTile.layers.captured_roads_line;
+        layer = vectorTile.layers[lineLayer];
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
@@ -316,31 +325,94 @@ export default {
 
         if (!d) return this;
 
+        let wrap = context.container().select('.photoviewer .mapilio-wrapper');
+        let attribution = wrap.selectAll('.photo-attribution').text('');
+
+        if (d.capture_time) {
+            attribution
+                .append('span')
+                .attr('class', 'captured_at')
+                .text(localeDateString(d.capture_time));
+
+            attribution
+                .append('span')
+                .text('|');
+        }
+
+        attribution
+            .append('a')
+            .attr('class', 'image-link')
+            .attr('target', '_blank')
+            .attr('href', `https://mapilio.com/app?lat=${d.loc[1]}&lng=${d.loc[0]}&zoom=17&pId=${d.id}`)
+            .text('mapilio.com');
+
         getImageData(d.id,d.sequence_id).then(function () {
 
-            if (!_pannellumViewer) {
-                that.initViewer();
-            } else {
-                // make a new scene
-                _currScene += 1;
-                let sceneID = _currScene.toString();
-                _pannellumViewer
-                    .addScene(sceneID, _mlySceneOptions)
-                    .loadScene(sceneID);
-
-                // remove previous scene
-                if (_currScene > 2) {
-                    sceneID = (_currScene - 1).toString();
+            if (d.isPano){
+                if (!_pannellumViewer) {
+                    that.initViewer();
+                } else {
+                    // make a new scene
+                    _currScene += 1;
+                    let sceneID = _currScene.toString();
                     _pannellumViewer
-                        .removeScene(sceneID);
+                        .addScene(sceneID, _mlySceneOptions)
+                        .loadScene(sceneID);
+
+                    // remove previous scene
+                    if (_currScene > 2) {
+                        sceneID = (_currScene - 1).toString();
+                        _pannellumViewer
+                            .removeScene(sceneID);
+                    }
                 }
+            } else {
+                // make non-panoramic photo viewer
+                that.initOnlyPhoto(context);
             }
         });
+
+        function localeDateString(s) {
+            if (!s) return null;
+            var options = { day: 'numeric', month: 'short', year: 'numeric' };
+            var d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toLocaleDateString(localizer.localeCode(), options);
+        }
 
         return this;
     },
 
-    ensureViewerLoaded: function(context) {
+    initOnlyPhoto: function (context) {
+
+        if (_pannellumViewer) {
+            _pannellumViewer.destroy();
+            _pannellumViewer = null;
+        }
+
+        let wrap = context.container().select('#ideditor-viewer-mapilio');
+
+        let imgWrap = wrap.select('img');
+
+        wrap.style('height','100%');
+
+        if (!imgWrap.empty()){
+            imgWrap.attr('src',_mlySceneOptions.panorama);
+        } else {
+            wrap.append('img')
+                .attr('src',_mlySceneOptions.panorama);
+        }
+
+    },
+
+    ensureViewerLoaded: function(context,) {
+
+        let imgWrap = context.container().select('#ideditor-viewer-mapilio > img');
+
+        if (!imgWrap.empty()) {
+            imgWrap.remove();
+        }
+
         if (_loadViewerPromise) return _loadViewerPromise;
 
         let wrap = context.container().select('.photoviewer').selectAll('.mapilio-wrapper')
@@ -350,6 +422,10 @@ export default {
             .append('div')
             .attr('class', 'photo-wrapper mapilio-wrapper')
             .classed('hide', true);
+
+        wrapEnter
+            .append('div')
+            .attr('class', 'photo-attribution fillD');
 
         wrapEnter
             .append('div')
