@@ -54,7 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Fix broken in raw tag editor ([#9766], thanks [@k-yle])
 
-[#9766]: https://github.com/openstreetmap/iD/issues/9766
+[#9766]: https://github.com/openstreetmap/iD/pull/9766
 
 
 # 2.26.1
