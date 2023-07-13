@@ -22762,7 +22762,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.26.1",
+    version: "2.26.2",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
@@ -25793,11 +25793,7 @@
       return value2 === null || value2 === void 0 ? valueNull : typeof value2 === "function" ? valueFunction : valueConstant;
     }
     function stickyCursor(func) {
-      const supportedTypes = ["text", "search", "url", "tel", "password"];
       return function() {
-        if (!supportedTypes.includes(this.type)) {
-          return;
-        }
         const cursor = { start: this.selectionStart, end: this.selectionEnd };
         func.apply(this, arguments);
         this.setSelectionRange(cursor.start, cursor.end);
@@ -25808,6 +25804,10 @@
     }
     if (shouldUpdate === void 0) {
       shouldUpdate = (a, b) => a !== b;
+    }
+    const supportedTypes = ["text", "search", "url", "tel", "password"];
+    if (!supportedTypes.includes(this.type)) {
+      return selection2.each(setValue(value, shouldUpdate));
     }
     return selection2.each(stickyCursor(setValue(value, shouldUpdate)));
   }

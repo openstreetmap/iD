@@ -36,6 +36,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
+# 2.26.2
+##### 2023-Jul-13
+
+* Fix broken in raw tag editor ([#9766], thanks [@k-yle])
+
+[#9766]: https://github.com/openstreetmap/iD/issues/9766
+
+
 # 2.26.1
 ##### 2023-Jul-12
 
@@ -85,7 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade OSM data dependencies: `id-tagging-schema` to v6.3, `osm-community-index` to 5.5.3
 * Upgrade icon sets: `fortawesome` to v6.4, `temaki` to v5.4
 * Upgrade `osm-auth` to v2.1,
-* Upgrade dev dependecies, including the following major version upgrades: `glob` to v10, `marked` to v5, `cldr-core` and `cldr-localenames-full` to v43, `esbuild` to v0.18
+* Upgrade dev dependencies, including the following major version upgrades: `glob` to v10, `marked` to v5, `cldr-core` and `cldr-localenames-full` to v43, `esbuild` to v0.18
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
 [#8769]: https://github.com/openstreetmap/iD/pull/8769
