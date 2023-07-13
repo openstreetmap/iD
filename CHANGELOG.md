@@ -49,6 +49,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 
+# 2.26.2
+##### 2023-Jul-13
+
+* Fix broken in raw tag editor ([#9766], thanks [@k-yle])
+
+[#9766]: https://github.com/openstreetmap/iD/issues/9766
+
+
 # 2.26.1
 ##### 2023-Jul-12
 
