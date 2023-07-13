@@ -32,11 +32,12 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
         // see https://html.spec.whatwg.org/multipage/input.html#concept-input-apply
         const supportedTypes = ['text', 'search', 'url', 'tel', 'password'];
         return function() {
+            func.apply(this, arguments);
+
             if (!supportedTypes.includes(this.type)) {
                 return;
             }
             const cursor = { start: this.selectionStart, end: this.selectionEnd };
-            func.apply(this, arguments);
             this.setSelectionRange(cursor.start, cursor.end);
         };
     }
