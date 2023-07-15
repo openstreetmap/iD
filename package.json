@@ -110,7 +110,7 @@
     "node-fetch": "^2.6.12",
     "npm-run-all": "^4.0.0",
     "osm-community-index": "~5.5.4",
-    "postcss": "^8.4.25",
+    "postcss": "^8.4.26",
     "postcss-selector-prepend": "^0.5.0",
     "shelljs": "^0.8.0",
     "shx": "^0.3.0",
