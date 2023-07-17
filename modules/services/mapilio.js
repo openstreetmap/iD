@@ -405,7 +405,9 @@ export default {
 
     },
 
-    ensureViewerLoaded: function(context,) {
+    ensureViewerLoaded: function(context) {
+
+        let that = this;
 
         let imgWrap = context.container().select('#ideditor-viewer-mapilio > img');
 
@@ -426,6 +428,22 @@ export default {
         wrapEnter
             .append('div')
             .attr('class', 'photo-attribution fillD');
+
+        const controlsEnter = wrapEnter
+            .append('div')
+            .attr('class', 'photo-controls-wrap')
+            .append('div')
+            .attr('class', 'photo-controls-mapilio');
+
+        controlsEnter
+            .append('button')
+            .on('click.back', step(-1))
+            .text('◄');
+
+        controlsEnter
+            .append('button')
+            .on('click.forward', step(1))
+            .text('►');
 
         wrapEnter
             .append('div')
@@ -480,6 +498,22 @@ export default {
             .catch(function() {
                 _loadViewerPromise = null;
             });
+
+        function step(stepBy) {
+            return function () {
+                if (!_mlyActiveImage) return;
+                const imageId = _mlyActiveImage.id;
+
+                const nextIndex = imageId + stepBy;
+                if (!nextIndex) return;
+
+                const nextImage = _mlyCache.images.forImageId[nextIndex];
+
+                context.map().centerEase(nextImage.loc);
+
+                that.selectImage(context, nextImage.id);
+            };
+        }
 
         return _loadViewerPromise;
     },

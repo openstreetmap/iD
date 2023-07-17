@@ -257,6 +257,17 @@
 .layer-mapilio .sequence {
     stroke: #0056f1;
 }
+.photo-controls-mapilio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    pointer-events: initial;
+}
+
+.photo-controls-mapilio button{
+    padding:0 6px;
+}
 
 .ideditor .mapilio-wrapper {
     position: relative;
