@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Validator: Don't falsely flag certain tags as "should be a closed area" if the tag also allows both area and line geometries in two separate presets (e.g. `highway=elevator` in the "Elevator" and "Inclined Lift" presets)
+* Fix sorting of nearby streets in address field dropdown
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
