@@ -1936,6 +1936,8 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_using_crossing:
+        title: Connect using a crossing
       connect_using_ford:
         title: Connect using a ford
       continue_from_start:

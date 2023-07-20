@@ -1,10 +1,11 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import * as countryCoder from '@ideditor/country-coder';
+import * as countryCoder from '@rapideditor/country-coder';
 
 import { uiCombobox } from '../combobox';
-import { t } from '../../core/localizer';
+import { t, localizer } from '../../core/localizer';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { likelyRawNumberFormat } from './input';
 
 
 export function uiFieldRoadspeed(field, context) {
@@ -14,6 +15,8 @@ export function uiFieldRoadspeed(field, context) {
     var _entityIDs = [];
     var _tags;
     var _isImperial;
+    var formatFloat = localizer.floatFormatter(localizer.languageCode());
+    var parseLocaleFloat = localizer.floatParser(localizer.languageCode());
 
     var speedCombo = uiCombobox(context, 'roadspeed');
     var unitCombo = uiCombobox(context, 'roadspeed-unit')
@@ -91,8 +94,8 @@ export function uiFieldRoadspeed(field, context) {
 
     function comboValues(d) {
         return {
-            value: d.toString(),
-            title: d.toString()
+            value: formatFloat(d),
+            title: formatFloat(d)
         };
     }
 
@@ -106,10 +109,16 @@ export function uiFieldRoadspeed(field, context) {
 
         if (!value) {
             tag[field.key] = undefined;
-        } else if (isNaN(value) || !_isImperial) {
-            tag[field.key] = context.cleanTagValue(value);
         } else {
-            tag[field.key] = context.cleanTagValue(value + ' mph');
+            var rawValue = likelyRawNumberFormat.test(value)
+                ? parseFloat(value)
+                : parseLocaleFloat(value);
+            if (isNaN(rawValue)) rawValue = value;
+            if (isNaN(rawValue) || !_isImperial) {
+                tag[field.key] = context.cleanTagValue(rawValue);
+            } else {
+                tag[field.key] = context.cleanTagValue(rawValue + ' mph');
+            }
         }
 
         dispatch.call('change', this, tag);
@@ -119,15 +128,22 @@ export function uiFieldRoadspeed(field, context) {
     roadspeed.tags = function(tags) {
         _tags = tags;
 
-        var value = tags[field.key];
+        var rawValue = tags[field.key];
+        var value = rawValue;
         var isMixed = Array.isArray(value);
 
         if (!isMixed) {
-            if (value && value.indexOf('mph') >= 0) {
-                value = parseInt(value, 10).toString();
+            if (rawValue && rawValue.indexOf('mph') >= 0) {
                 _isImperial = true;
-            } else if (value) {
+            } else if (rawValue) {
                 _isImperial = false;
+            }
+
+            value = parseInt(value, 10);
+            if (isNaN(value)) {
+                value = rawValue;
+            } else {
+                value = formatFloat(value);
             }
         }
 
