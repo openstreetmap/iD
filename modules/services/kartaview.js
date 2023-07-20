@@ -300,7 +300,6 @@ export default {
 
         // Register viewer resize handler
         context.ui().photoviewer.on('resize.kartaview', function(dimensions) {
-            dimensions = dimensions.map(d => d - 10);
             imgZoom
                 .extent([[0, 0], dimensions])
                 .translateExtent([[0, 0], dimensions]);

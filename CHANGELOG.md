@@ -46,10 +46,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Validator: Don't falsely flag certain tags as "should be a closed area" if the tag also allows both area and line geometries in two separate presets (e.g. `highway=elevator` in the "Elevator" and "Inclined Lift" presets)
 * Fix sorting of nearby streets in address field dropdown
 * Fix bug where "outlink" buttons would not be disabled on invalid values of `identifier` fields
+* Fix zooming/panning in KartaView photo layer after resizing the panel ([#8997])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+
+[#8997]: https://github.com/openstreetmap/iD/issues/8997
 
 
 # 2.26.2
