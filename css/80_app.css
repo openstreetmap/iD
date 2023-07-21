@@ -2730,13 +2730,18 @@ button.raw-tag-option svg.icon {
 }
 .tag-reference-body.expanded {
     padding-bottom: 10px;
-    display: inline-block;
+    padding-left: 10px;
+    display: block;
 }
-.tag-reference-description {
-
+.ideditor[dir='rtl'] .tag-reference-body.expanded {
+    padding-left: 0;
+    padding-right: 10px;
 }
 .tag-reference-link {
     display: block;
+}
+.tag-reference-link .icon:first-child {
+    margin-left: 0;
 }
 
 img.tag-reference-wiki-image {
