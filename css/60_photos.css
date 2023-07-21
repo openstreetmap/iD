@@ -276,6 +276,11 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+#ideditor-viewer-mapilio{
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {
