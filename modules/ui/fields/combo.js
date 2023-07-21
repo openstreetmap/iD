@@ -483,7 +483,7 @@ export function uiFieldCombo(field, context) {
             .attr('type', 'text')
             .attr('id', field.domId)
             .call(utilNoAuto)
-            .call(initCombo, selection)
+            .call(initCombo, _container)
             .merge(_input);
 
         if (_isSemi) {
