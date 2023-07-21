@@ -195,6 +195,7 @@ export function uiFieldText(field, context) {
                         window.open(url, '_blank');
                     }
                 })
+                .classed('disabled', () => !validIdentifierValueForLink())
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
             input.attr('type', 'text');
@@ -375,7 +376,7 @@ export function uiFieldText(field, context) {
             }
         }
         if (field.type === 'identifier' && field.pattern) {
-            return value && value.match(new RegExp(field.pattern))[0];
+            return value && value.match(new RegExp(field.pattern))?.[0];
         }
         return null;
     }

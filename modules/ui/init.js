@@ -1,3 +1,4 @@
+import { marked } from 'marked';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -688,6 +689,11 @@ export function uiInit(context) {
             _saveLoading.close();
             _saveLoading = d3_select(null);
         });
+
+    marked.use({
+        mangle: false,
+        headerIds: false,
+    });
 
     return ui;
 }

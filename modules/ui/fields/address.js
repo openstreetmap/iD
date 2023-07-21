@@ -46,13 +46,13 @@ export function uiFieldAddress(field, context) {
             .map(d => {
                 let dist = geoSphericalDistance(d.extent(context.graph()).center(), l);
 
-                if (d.type === 'way') {
+                if (d.geometry(context.graph()) === 'line') {
                     var loc = context.projection([
                         (extent[0][0] + extent[1][0]) / 2,
                         (extent[0][1] + extent[1][1]) / 2
                     ]);
                     var choice = geoChooseEdge(context.graph().childNodes(d), loc, context.projection);
-                    dist = Math.min(dist, choice.distance);
+                    dist = geoSphericalDistance(choice.loc, l);
                 }
 
                 const value = resultProp && d.tags[resultProp] ? d.tags[resultProp] : d.tags.name;
