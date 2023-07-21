@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
+* Show tag reference information for the currently filled-in tag value in UI fields (if available), instead of only showing the more generic _key_ documentation of the field ([#9786])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -53,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#8997]: https://github.com/openstreetmap/iD/issues/8997
+[#9786]: https://github.com/openstreetmap/iD/issues/9786
 
 
 # 2.26.2
