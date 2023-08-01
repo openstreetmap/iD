@@ -307,16 +307,13 @@ function searchLimited(limit, projection, rtree) {
 export default {
 
   init: async function () {
+    this.event = utilRebind(this, dispatch, 'on');
     if (!_vegbilderCache) {
       await this.reset();
     }
-
-    this.event = utilRebind(this, dispatch, 'on');
   },
 
   reset: async function () {
-    const availableLayers = await fetchAvailableLayers();
-
     if (_vegbilderCache) {
       for (const layer of _vegbilderCache.wfslayers.values()) {
         for (const controller of layer.inflight.values()) {
@@ -325,7 +322,16 @@ export default {
       }
     }
 
-    const wfslayers = availableLayers.reduce((wfslayers, layerInfo) => {
+    _vegbilderCache = {
+      wfslayers: new Map(),
+      rtree: new RBush(),
+      image2sequence_map: new Map()
+    };
+
+    const availableLayers = await fetchAvailableLayers();
+    const {wfslayers} = _vegbilderCache;
+
+    for (const layerInfo of availableLayers) {
       const cache = {
         layerInfo,
         loaded: new Map(),
@@ -334,16 +340,8 @@ export default {
         sequences: []
       };
       wfslayers.set(layerInfo.name, cache);
-      return wfslayers;
-    }, new Map());
-
-    _vegbilderCache = {
-      wfslayers,
-      rtree: new RBush(),
-      image2sequence_map: new Map()
-    };
+    }
   },
-
 
   images: function (projection) {
     const limit = 5;

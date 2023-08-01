@@ -118,7 +118,7 @@ export default {
     if ( !(key in _currScenes) ) {
       let newSceneOptions = {
         showFullscreenCtrl: false,
-        autoLoad: true,
+        autoLoad: false,
         compass: true,
         yaw: 0,
         type: 'equirectangular',
