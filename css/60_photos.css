@@ -254,6 +254,46 @@
     stroke: #20c4ff;
 }
 
+/* Mapilio Image Layer */
+.layer-mapilio {
+    pointer-events: none;
+}
+.layer-mapilio .viewfield-group * {
+    fill: #0056f1;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-mapilio .sequence {
+    stroke: #0056f1;
+}
+.photo-controls-mapilio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.photo-controls-mapilio button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+
+.ideditor .mapilio-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#ideditor-viewer-mapilio-simple-wrap {
+    height: 100%;
+}
+#ideditor-viewer-mapilio-simple {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {
@@ -304,6 +344,10 @@ label.streetside-hires {
     width: 12px;
     height: 12px;
     margin: 0 5px;
+}
+
+.pnlm-zoom-controls {
+    margin-top: 6px;
 }
 
 

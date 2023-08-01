@@ -204,7 +204,11 @@ export function uiField(context, presetField, entityIDs, options) {
                         referenceKey = referenceKey.replace(/:$/, '');
                     }
 
-                    reference = uiTagReference(d.reference || { key: referenceKey }, context);
+                    var referenceOptions = d.reference || {
+                        key: referenceKey,
+                        value: _tags[referenceKey]
+                    };
+                    reference = uiTagReference(referenceOptions, context);
                     if (_state === 'hover') {
                         reference.showing(false);
                     }

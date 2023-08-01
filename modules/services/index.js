@@ -14,6 +14,7 @@ import serviceTaginfo from './taginfo';
 import serviceVectorTile from './vector_tile';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
+import serviceMapilio from './mapilio';
 
 
 export let services = {
@@ -32,7 +33,8 @@ export let services = {
   taginfo: serviceTaginfo,
   vectorTile: serviceVectorTile,
   wikidata: serviceWikidata,
-  wikipedia: serviceWikipedia
+  wikipedia: serviceWikipedia,
+  mapilio: serviceMapilio
 };
 
 export {
@@ -51,5 +53,6 @@ export {
   serviceTaginfo,
   serviceVectorTile,
   serviceWikidata,
-  serviceWikipedia
+  serviceWikipedia,
+  serviceMapilio
 };
