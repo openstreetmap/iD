@@ -327,7 +327,7 @@ export default {
         };
         options.scenes[sceneID] = _mlySceneOptions;
 
-        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio', options);
+        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio-pnlm', options);
     },
 
     selectImage: function (context, id) {
@@ -379,7 +379,7 @@ export default {
 
         getImageData(d.id,d.sequence_id).then(function () {
 
-            if (d.isPano){
+            if (d.isPano) {
                 if (!_pannellumViewer) {
                     that.initViewer();
                 } else {
@@ -421,13 +421,11 @@ export default {
             _pannellumViewer = null;
         }
 
-        let wrap = context.container().select('#ideditor-viewer-mapilio');
+        let wrap = context.container().select('#ideditor-viewer-mapilio-simple');
 
         let imgWrap = wrap.select('img');
 
-        wrap.style('height','100%');
-
-        if (!imgWrap.empty()){
+        if (!imgWrap.empty()) {
             imgWrap.attr('src',_mlySceneOptions.panorama);
         } else {
             wrap.append('img')
@@ -440,7 +438,7 @@ export default {
 
         let that = this;
 
-        let imgWrap = context.container().select('#ideditor-viewer-mapilio > img');
+        let imgWrap = context.container().select('#ideditor-viewer-mapilio-simple > img');
 
         if (!imgWrap.empty()) {
             imgWrap.remove();
@@ -455,7 +453,6 @@ export default {
             .append('div')
             .attr('class', 'photo-wrapper mapilio-wrapper')
             .classed('hide', true)
-            .call(imgZoom.on('zoom', zoomPan))
             .on('dblclick.zoom', null);
 
         wrapEnter
@@ -480,7 +477,15 @@ export default {
 
         wrapEnter
             .append('div')
-            .attr('id', 'ideditor-viewer-mapilio');
+            .attr('id', 'ideditor-viewer-mapilio-pnlm');
+
+        wrapEnter
+            .append('div')
+            .attr('id', 'ideditor-viewer-mapilio-simple-wrap')
+            .call(imgZoom.on('zoom', zoomPan))
+            .append('div')
+            .attr('id', 'ideditor-viewer-mapilio-simple');
+
 
 
         // Register viewer resize handler
@@ -550,7 +555,7 @@ export default {
 
         function zoomPan(d3_event) {
             var t = d3_event.transform;
-            context.container().select('.photoviewer #ideditor-viewer-mapilio')
+            context.container().select('.photoviewer #ideditor-viewer-mapilio-simple')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
 
