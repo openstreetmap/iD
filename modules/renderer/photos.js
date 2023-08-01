@@ -7,7 +7,7 @@ import { utilQsString, utilStringQs } from '../util';
 
 export function rendererPhotos(context) {
     var dispatch = d3_dispatch('change');
-    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview'];
+    var _layerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio'];
     var _allPhotoTypes = ['flat', 'panoramic'];
     var _shownPhotoTypes = _allPhotoTypes.slice();   // shallow copy
     var _dateFilters = ['fromDate', 'toDate'];

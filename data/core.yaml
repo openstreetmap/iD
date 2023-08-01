@@ -1432,6 +1432,9 @@ en:
   kartaview:
     title: KartaView
     view_on_kartaview: "View this image on KartaView"
+  mapilio:
+    title: Mapilio
+    tooltip: "Street-level photos from Mapilio"
   note:
     note: Note
     title: Edit note
