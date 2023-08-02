@@ -308,11 +308,8 @@ function searchLimited(limit, projection, rtree) {
 
 export default {
 
-  init: async function () {
+  init: function () {
     this.event = utilRebind(this, dispatch, 'on');
-    if (!_vegbilderCache) {
-      await this.reset();
-    }
   },
 
   reset: async function () {
@@ -383,10 +380,13 @@ export default {
   },
 
   getSequenceForImage: function (image) {
-    return _vegbilderCache.image2sequence_map.get(image?.key);
-    },
+    return _vegbilderCache?.image2sequence_map.get(image?.key);
+  },
 
-  loadImages: function (context, margin) {
+  loadImages: async function (context, margin) {
+    if (!_vegbilderCache) {
+      await this.reset();
+    }
     margin ??= 1;
     const wfslayers = filterAvailableLayers(context.photos());
     loadWFSLayers(context.projection, margin, wfslayers);
