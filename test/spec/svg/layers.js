@@ -26,7 +26,7 @@ describe('iD.svgLayers', function () {
     it('creates default data layers', function () {
         container.call(iD.svgLayers(projection, context));
         var nodes = container.selectAll('svg .data-layer').nodes();
-        expect(nodes.length).to.eql(16);
+        expect(nodes.length).to.eql(17);
         expect(d3.select(nodes[0]).classed('osm')).to.be.true;
         expect(d3.select(nodes[1]).classed('notes')).to.be.true;
         expect(d3.select(nodes[2]).classed('data')).to.be.true;
@@ -40,10 +40,10 @@ describe('iD.svgLayers', function () {
         expect(d3.select(nodes[10]).classed('mapillary-signs')).to.be.true;
         expect(d3.select(nodes[11]).classed('kartaview')).to.be.true;
         expect(d3.select(nodes[12]).classed('mapilio')).to.be.true;
-        expect(d3.select(nodes[12]).classed('vegbilder')).to.be.true;
-        expect(d3.select(nodes[13]).classed('debug')).to.be.true;
-        expect(d3.select(nodes[14]).classed('geolocate')).to.be.true;
-        expect(d3.select(nodes[15]).classed('touch')).to.be.true;
+        expect(d3.select(nodes[13]).classed('vegbilder')).to.be.true;
+        expect(d3.select(nodes[14]).classed('debug')).to.be.true;
+        expect(d3.select(nodes[15]).classed('geolocate')).to.be.true;
+        expect(d3.select(nodes[16]).classed('touch')).to.be.true;
     });
 
 });
