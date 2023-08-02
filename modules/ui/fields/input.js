@@ -472,7 +472,7 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] : '';
+        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
         var shouldUpdate;
 
         if (field.type === 'number' && val) {

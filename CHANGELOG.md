@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix sorting of nearby streets in address field dropdown
 * Fix bug where "outlink" buttons would not be disabled on invalid values of `identifier` fields
 * Fix zooming/panning in KartaView photo layer after resizing the panel ([#8997])
+* Fix clearing of contents of some input field when the respective tag is removed (e.g. when using the trash can icon on the UI field)
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
