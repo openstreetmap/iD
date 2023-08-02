@@ -1,12 +1,14 @@
 import { json as d3_json, xml as d3_xml} from 'd3-fetch';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { pairs as d3_pairs } from 'd3-array';
+import RBush from 'rbush';
+import { iso1A2Codes } from '@rapideditor/country-coder';
 import { t, localizer } from '../core/localizer';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion, utilStringQs} from '../util';
 import {geoExtent, geoScaleToZoom, geoVecAngle, geoVecEqual} from '../geo';
 import pannellumPhotoFrame from './pannellum_photo';
 import planePhotoFrame from './plane_photo';
-import RBush from 'rbush';
+
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
 const tileZoom = 14;
@@ -597,6 +599,11 @@ export default {
       }
       window.location.replace('#' + utilQsString(hash, true));
     }
+  },
+
+  validHere: function(extent) {
+    const bbox = Object.values(extent.bbox());
+    return iso1A2Codes(bbox).includes('NO');
   },
 
 

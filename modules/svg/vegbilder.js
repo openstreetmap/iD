@@ -371,6 +371,15 @@ export function svgVegbilder(projection, context, dispatch) {
     return !!getService();
   };
 
+  drawImages.rendered = function(zoom) {
+    return zoom >= minZoom;
+  };
+
+  drawImages.validHere = function(extent, zoom) {
+    return zoom >= (minZoom - 2)
+        && getService().validHere(extent);
+  };
+
   init();
 
   return drawImages;
