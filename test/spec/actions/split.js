@@ -1354,8 +1354,8 @@ describe('iD.actionSplit', function () {
 
                 graph = iD.actionSplit('b', ['~'])(graph);
 
-                expect(graph.entity('-').nodes).to.eql(['b', 'c']);
-                expect(graph.entity('~').nodes).to.eql(['a', 'b']);
+                expect(graph.entity('~').nodes).to.eql(['b', 'c']);
+                expect(graph.entity('-').nodes).to.eql(['a', 'b']);
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
             });
