@@ -449,8 +449,9 @@ export default {
       planePhotoFrame.init(context, wrapEnter)
     ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
       _pannellumFrame = pannellumPhotoFrame;
-      _planeFrame = planePhotoFrame;
       _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
+      _planeFrame = planePhotoFrame;
+      _planeFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
     });
 
     return _loadViewerPromise;

@@ -86,6 +86,7 @@ export default {
     },
 
   selectPhoto: function (data, keepOrientation) {
+    dispatch.call('viewerChanged');
     loadImage(_photo, '');
     loadImage(_photo, data.image_path)
       .then(() => {

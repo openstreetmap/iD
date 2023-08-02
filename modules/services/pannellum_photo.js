@@ -139,6 +139,7 @@ export default {
       pitch = _pannellumViewer.getPitch();
     }
     _pannellumViewer.loadScene(key, pitch, yaw);
+    dispatch.call('viewerChanged');
 
     if (_currScenes.length > 3) {
       const old_key = _currScenes.shift();
