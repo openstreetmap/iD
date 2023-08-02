@@ -415,9 +415,7 @@ label.streetside-hires {
 }
 
 .vegbilder-wrapper .plane-frame {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     overflow: hidden;
     height: 100%;
     width: 100%;

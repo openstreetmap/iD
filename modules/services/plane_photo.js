@@ -7,6 +7,7 @@ const dispatch = d3_dispatch('viewerChanged');
 let _photo;
 let _wrapper;
 let imgZoom;
+let _widthOverflow;
 
 function zoomPan (d3_event) {
   let t = d3_event.transform;
@@ -17,10 +18,10 @@ function zoomBeahvior () {
   const {width: wrapperWidth, height: wrapperHeight} = _wrapper.node().getBoundingClientRect();
   const {naturalHeight, naturalWidth} = _photo.node();
   const intrinsicRatio = naturalWidth / naturalHeight;
-  const widthOverflow = wrapperHeight * intrinsicRatio - wrapperWidth;
+  _widthOverflow = wrapperHeight * intrinsicRatio - wrapperWidth;
   return d3_zoom()
-        .extent([[widthOverflow / 2, 0], [wrapperWidth + widthOverflow / 2, wrapperHeight]])
-        .translateExtent([[0, 0], [wrapperWidth + widthOverflow, wrapperHeight]])
+        .extent([[0, 0], [wrapperWidth, wrapperHeight]])
+        .translateExtent([[0, 0], [wrapperWidth + _widthOverflow, wrapperHeight]])
         .scaleExtent([1, 15])
         .on('zoom', zoomPan);
 }
@@ -39,12 +40,6 @@ export default {
 
   init: async function(context, selection) {
     this.event = utilRebind(this, dispatch, 'on');
-
-    imgZoom = d3_zoom()
-                .extent([[0, 0], [320, 240]])
-                .translateExtent([[0, 0], [320, 240]])
-                .scaleExtent([1, 15])
-                .on('zoom', this.zoomPan);
 
     _wrapper = selection
       .append('div')
@@ -96,7 +91,7 @@ export default {
         if (!keepOrientation) {
           imgZoom = zoomBeahvior();
           _wrapper.call(imgZoom);
-          _wrapper.call(imgZoom.transform, d3_zoomIdentity);
+          _wrapper.call(imgZoom.transform, d3_zoomIdentity.translate(-_widthOverflow / 2, 0));
         }
       });
     return this;
