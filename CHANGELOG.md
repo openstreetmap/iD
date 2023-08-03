@@ -51,12 +51,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix bug where "outlink" buttons would not be disabled on invalid values of `identifier` fields
 * Fix zooming/panning in KartaView photo layer after resizing the panel ([#8997])
 * Fix clearing of contents of some input field when the respective tag is removed (e.g. when using the trash can icon on the UI field)
+* Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 
 [#8997]: https://github.com/openstreetmap/iD/issues/8997
+[#9233]: https://github.com/openstreetmap/iD/issues/9233
 [#9786]: https://github.com/openstreetmap/iD/issues/9786
 [#9664]: https://github.com/openstreetmap/iD/pull/9664
 [@channel-s]: https://github.com/channel-s
@@ -100,7 +102,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
 * Fix broken autocomplete of wikidata fields for some languages with country-codes ([#9638])
 * Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
-* Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
 * Fix crash when using certain locales (e.g. `fr-FR`) ([#9737], thanks [@k-yle])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
@@ -127,7 +128,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8769]: https://github.com/openstreetmap/iD/pull/8769
 [#8775]: https://github.com/openstreetmap/iD/pull/8775
 [#7427]: https://github.com/openstreetmap/iD/issues/7427
-[#9233]: https://github.com/openstreetmap/iD/issues/9233
 [#9433]: https://github.com/openstreetmap/iD/pull/9433
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
 [#9483]: https://github.com/openstreetmap/iD/pull/9483
