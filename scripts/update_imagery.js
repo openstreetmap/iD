@@ -68,7 +68,10 @@ const discard = {
   'OSM_Inspector-Routing': true,
   'OSM_Inspector-Tagging': true,
 
-  'EOXAT2018CLOUDLESS': true
+  'EOXAT2018CLOUDLESS': true,
+  'EOXAT2019CLOUDLESS': true,
+  'EOXAT2020CLOUDLESS': true,
+  'EOXAT2021CLOUDLESS': true
 };
 
 const supportedWMSProjections = [
