@@ -272,6 +272,11 @@
             "text": "shortcuts.editing.operations.extract"
           },
           {
+            "modifiers": ["⇧"],
+            "shortcuts": ["operations.extract.key"],
+            "text": "shortcuts.editing.operations.extract_with_relations"
+          },
+          {
             "shortcuts": ["operations.split.key"],
             "text": "shortcuts.editing.operations.split"
           },

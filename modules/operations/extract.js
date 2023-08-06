@@ -32,11 +32,13 @@ export function operationExtract(context, selectedIDs) {
         return actionExtract(entityID, context.projection);
     }).filter(Boolean);
 
+    /** @param {KeyboardEvent | undefined} d3_event */
+    var operation = function (d3_event) {
+        const shiftKeyPressed = d3_event?.shiftKey || false;
 
-    var operation = function () {
         var combinedAction = function(graph) {
             _actions.forEach(function(action) {
-                graph = action(graph);
+                graph = action(graph, shiftKeyPressed);
             });
             return graph;
         };
