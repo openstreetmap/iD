@@ -2413,6 +2413,7 @@ en:
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
+        extract_without_relations: "Extract a point from a feature, without extracting its relations"
         split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"

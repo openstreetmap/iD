@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix flickering when switching between background imagery layers, make switching backgrounds snappier
 * Prevent password managers from autofilling tag fields ([#10508], thanks [@michaelabon])
 #### :scissors: Operations
+* When extracting a node from a way (shortcut: <kbd>E</kbd>), the relations are now preserved by default. Extracting a node without its relations is still possible using <kbd>⇧ Shift</kbd> <kbd>E</kbd> ([#9816], thanks [@k-yle])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Migrate unit tests from karma to vitest ([#10452])
 
 [#9013]: https://github.com/openstreetmap/iD/issues/9013
+[#9816]: https://github.com/openstreetmap/iD/issues/9816
 [#10452]: https://github.com/openstreetmap/iD/pull/10452
 [#10459]: https://github.com/openstreetmap/iD/pull/10459
 [#10488]: https://github.com/openstreetmap/iD/pull/10488
