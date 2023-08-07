@@ -2,6 +2,7 @@ import exifr from 'exifr';
 
 import { utilDetect } from '../util/detect';
 import { select as d3_select } from 'd3-selection';
+import { geoExtent } from '../geo';
 
 var _initialized = false;
 
@@ -187,15 +188,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
     drawPhotos.setFile = function(fileList) {
-        /**
-         * Holds array of file - [file_1, file_2, ...]
-         * file_1 = {name: "Das.png", lastModified: 1625064498536, lastModifiedDate: Wed Jun 30 2021 20:18:18 GMT+0530 (India Standard Time), webkitRelativePath: "", size: 859658, …}
-         * @type {Array<object>}
-         */
-        var arrayFiles = Object.keys(fileList).map(function(k) { return fileList[k]; });
-
         // read and parse asynchronously
-        readmultifiles(arrayFiles);
+        readmultifiles(Array.from(fileList));
 
         dispatch.call('change');
         return this;
@@ -216,12 +210,19 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
         drawPhotos.setFile(_fileList);
 
+        // TODO: when all photos are uploaded, zoom to see them all
         return this;
     };
 
-    // TODO: when all photos are uploaded, zoom to see them all
-    // drawPhotos.fitZoom = function() {
-    // };
+    drawPhotos.fitZoom = function() {
+        let extent = _imageList
+            .map(image => image.loc)
+            .map(l => geoExtent(l, l))
+            .reduce((a, b) => a.extend(b));
+
+        const map = context.map();
+        map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
+    };
 
     init();
     return drawPhotos;
