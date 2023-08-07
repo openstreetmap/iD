@@ -224,7 +224,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .reduce((a, b) => a.extend(b));
 
         const map = context.map();
-        map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
+        map.centerZoom(extent.center(), Math.min(18, map.trimmedExtentZoom(extent)));
     };
 
     init();
