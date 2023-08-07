@@ -3,6 +3,7 @@ import exifr from 'exifr';
 import { utilDetect } from '../util/detect';
 import { select as d3_select } from 'd3-selection';
 import { geoExtent } from '../geo';
+import { isArray, isNumber } from 'lodash-es';
 
 var _initialized = false;
 
@@ -79,6 +80,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     // puts the image markers on the map
     function display_markers(imageList) {
+        imageList = imageList.filter(image => isArray(image.loc) && isNumber(image.loc[0]) && isNumber(image.loc[1]));
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(imageList, function(d) { return d.id; });
 
@@ -168,7 +170,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
                                 src: reader.result,
                                 loc: [output.longitude, output.latitude]
                             });
-                         });
+                        });
                         // Resolve the promise with the response value
                         resolve(response);
                     } catch (err) {
@@ -217,6 +219,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     drawPhotos.fitZoom = function() {
         let extent = _imageList
             .map(image => image.loc)
+            .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]))
             .map(l => geoExtent(l, l))
             .reduce((a, b) => a.extend(b));
 
