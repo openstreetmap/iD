@@ -22,6 +22,7 @@ export { svgPoints } from './points.js';
 export { svgRelationMemberTags } from './helpers.js';
 export { svgSegmentWay } from './helpers.js';
 export { svgStreetside } from './streetside.js';
+export { svgVegbilder } from './vegbilder';
 export { svgTagClasses } from './tag_classes.js';
 export { svgTagPattern } from './tag_pattern.js';
 export { svgTouch } from './touch.js';

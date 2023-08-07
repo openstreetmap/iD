@@ -252,6 +252,7 @@ export function rendererBackground(context) {
       'mapillary-map-features': 'Mapillary Map Features',
       'mapillary-signs': 'Mapillary Signs',
       kartaview: 'KartaView Images',
+      vegbilder: 'Norwegian Road Administration Images',
       mapilio: 'Mapilio Images'
     };
 

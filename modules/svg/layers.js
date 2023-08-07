@@ -8,6 +8,7 @@ import { svgKeepRight } from './keepRight';
 import { svgImproveOSM } from './improveOSM';
 import { svgOsmose } from './osmose';
 import { svgStreetside } from './streetside';
+import { svgVegbilder} from './vegbilder';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillaryPosition } from './mapillary_position';
 import { svgMapillarySigns } from './mapillary_signs';
@@ -38,6 +39,7 @@ export function svgLayers(projection, context) {
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
         { id: 'kartaview', layer: svgKartaviewImages(projection, context, dispatch) },
         { id: 'mapilio', layer: svgMapilioImages(projection, context, dispatch) },
+        { id: 'vegbilder', layer: svgVegbilder(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
         { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },
         { id: 'touch', layer: svgTouch(projection, context, dispatch) },
