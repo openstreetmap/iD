@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
-import { utilNoAuto, utilRebind } from '../../util';
+import { utilRebind } from '../../util';
 
 
 export function uiSettingsLocalPhotosData (context) {

@@ -1,19 +1,15 @@
-import _throttle from 'lodash-es/throttle';
+import exifr from 'exifr';
 
 import { utilDetect } from '../util/detect';
 import { select as d3_select } from 'd3-selection';
-import { svgPath, svgPointTransform } from './helpers';
-// Modern Node.js can import CommonJS
-import exifr from 'exifr'; // => exifr/dist/full.umd.cjs
 
 var _initialized = false;
 
 export function svgLocalPhotos(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     var detected = utilDetect();
     let layer = d3_select(null);
     var _fileList;
-    var _imageList= [];
+    var _imageList = [];
 
     function init() {
         if (_initialized) return;  // run once
@@ -49,24 +45,24 @@ export function svgLocalPhotos(projection, context, dispatch) {
         closePhotoViewer();
 
         var image_container = d3_select('.over-map')
-                              .append('div')
-                              .attr('style', 'position: relative;margin: 5px;border: 5px solid white;')
-                              .attr('class', 'local-photo-viewer');
+            .append('div')
+            .attr('style', 'position: relative;margin: 5px;border: 5px solid white;')
+            .attr('class', 'local-photo-viewer');
 
-        var close_button = image_container
-                           .append('button')
-                           .text('X')
-                           .on('click', function(d3_event) {
-                                d3_event.preventDefault();
-                                closePhotoViewer();
-                            })
-                           .attr('style', 'position: absolute;right: 0;padding: 3px 10px;font-size: medium;border-radius:0;');
+        image_container
+            .append('button')
+            .text('X')
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                closePhotoViewer();
+            })
+            .attr('style', 'position: absolute;right: 0;padding: 3px 10px;font-size: medium;border-radius:0;');
 
-        var myimage = image_container
-                      .append('img')
-                      .attr('src', image.src)
-                      .attr('width', 400)
-                      .attr('height', 300);
+        image_container
+            .append('img')
+            .attr('src', image.src)
+            .attr('width', 400)
+            .attr('height', 300);
 
 
         // centers the map with image location
@@ -141,9 +137,9 @@ export function svgLocalPhotos(projection, context, dispatch) {
         layer = layerEnter
             .merge(layer);
 
-         // if (_imageList.length !== 0) {
-         // if (_fileList && _fileList.length !== 0) {
-         if (_imageList && _imageList.length !== 0) {
+        // if (_imageList.length !== 0) {
+        // if (_fileList && _fileList.length !== 0) {
+        if (_imageList && _imageList.length !== 0) {
             display_markers(_imageList);
         }
     }
@@ -164,16 +160,13 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 reader.onload = async () => {
                     try {
                         const response = await exifr.parse(file)
-                         .then(output => {
-
-                             _imageList.push(
-                                {
-                                  id: i,
-                                  name: file.name,
-                                  src: reader.result,
-                                  loc: [output.longitude, output.latitude]
-                                }
-                             );
+                        .then(output => {
+                            _imageList.push({
+                                id: i,
+                                name: file.name,
+                                src: reader.result,
+                                loc: [output.longitude, output.latitude]
+                            });
                          });
                         // Resolve the promise with the response value
                         resolve(response);
@@ -189,9 +182,9 @@ export function svgLocalPhotos(projection, context, dispatch) {
         });
 
         // Wait for all promises to be resolved
-        const fileInfos = await Promise.all(filePromises);
+        await Promise.all(filePromises);
         dispatch.call('change');
-    };
+    }
 
     drawPhotos.setFile = function(fileList) {
         /**
