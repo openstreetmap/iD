@@ -12,15 +12,11 @@ import { modeBrowse } from '../../modes/browse';
 import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
-import { uiSettingsLocalPhotosData } from '../settings/local_photos_data';
 
 export function uiSectionDataLayers(context) {
 
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
-
-    var settingsLocalPhotosData = uiSettingsLocalPhotosData(context)
-        .on('change',  localPhotosChanged);
 
     // refers to `modules/svg/layers.js` -> function drawLayers(selection) {...}
     var layers = context.layers();
@@ -40,7 +36,6 @@ export function uiSectionDataLayers(context) {
             .call(drawOsmItems)
             .call(drawQAItems)
             .call(drawCustomDataItems)
-            .call(drawLocalPhotos)
             .call(drawVectorItems)      // Beta - Detroit mapping challenge
             .call(drawPanelItems);
     }
@@ -377,76 +372,6 @@ export function uiSectionDataLayers(context) {
             .classed('disabled', !hasData);
     }
 
-    function drawLocalPhotos(selection) {
-        var dataLayer = layers.layer('local-photos');
-
-        var ul = selection
-            .selectAll('.layer-list-local-photos')
-            .data(dataLayer ? [0] : []);
-
-        // Exit
-        ul.exit()
-            .remove();
-
-        // Enter
-        var ulEnter = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-local-photos');
-
-        var localPhotosEnter = ulEnter
-            .append('li')
-            .attr('class', 'list-item-local-photos');
-
-        var localPhotosLabelEnter = localPhotosEnter
-            .append('label');
-            // TODO: Add tooltip
-
-        // TODO
-        // localPhotosLabelEnter
-        //     .append('input')
-        //     .attr('type', 'checkbox')
-        //     .on('change', function() { toggleLayer('local-photos'); });
-
-        localPhotosLabelEnter
-            .append('span')
-            .text('Local Photos');
-
-        localPhotosEnter
-            .append('button')
-            .attr('class', 'open-data-options')
-            .call(uiTooltip()
-                .title(t.html('settings.custom_data.tooltip'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                 editLocalPhotos();
-            })
-            .call(svgIcon('#iD-icon-more'));
-
-        localPhotosEnter
-            .append('button')
-            .attr('class', 'zoom-to-data')
-            .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.zoom'))
-                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-            )
-            .on('click', function(d3_event) {
-                if (d3_select(this).classed('disabled')) return;
-
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-                //TODO
-                dataLayer.fitZoom();
-            })
-            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
-
-        // Update
-        ul = ul
-            .merge(ulEnter);
-
-    }
-
     function editCustom() {
         context.container()
             .call(settingsCustomData);
@@ -459,19 +384,6 @@ export function uiSectionDataLayers(context) {
             dataLayer.url(d.url);
         } else if (d && d.fileList) {
             dataLayer.fileList(d.fileList);
-        }
-    }
-
-    function editLocalPhotos() {
-        context.container()
-            .call(settingsLocalPhotosData);
-    }
-
-    function localPhotosChanged(d) {
-        var localPhotosLayer = layers.layer('local-photos');
-
-        if (d && d.fileList) {
-            localPhotosLayer.fileList(d.fileList);
         }
     }
 

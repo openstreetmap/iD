@@ -6,7 +6,7 @@ import { uiConfirm } from '../confirm';
 import { utilRebind } from '../../util';
 
 
-export function uiSettingsLocalPhotosData (context) {
+export function uiSettingsLocalPhotos(context) {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {

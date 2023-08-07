@@ -1,14 +1,17 @@
 import _debounce from 'lodash-es/debounce';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 import { utilGetSetValue, utilNoAuto } from '../../util';
+import { uiSettingsLocalPhotos } from '../settings/local_photos';
+import { svgIcon } from '../../svg';
 
 export function uiSectionPhotoOverlays(context) {
+
+    var settingsLocalPhotos = uiSettingsLocalPhotos(context)
+        .on('change',  localPhotosChanged);
 
     var layers = context.layers();
 
@@ -28,7 +31,8 @@ export function uiSectionPhotoOverlays(context) {
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems)
             .call(drawDateFilter)
-            .call(drawUsernameFilter);
+            .call(drawUsernameFilter)
+            .call(drawLocalPhotos);
     }
 
     function drawPhotoItems(selection) {
@@ -332,6 +336,89 @@ export function uiSectionPhotoOverlays(context) {
         var layer = layers.layer(which);
         if (layer) {
             layer.enabled(enabled);
+        }
+    }
+
+    function drawLocalPhotos(selection) {
+        var dataLayer = layers.layer('local-photos');
+
+        var ul = selection
+            .selectAll('.layer-list-local-photos')
+            .data(dataLayer ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-local-photos');
+
+        var localPhotosEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-local-photos');
+
+        var localPhotosLabelEnter = localPhotosEnter
+            .append('label');
+            // TODO: Add tooltip
+
+        // TODO
+        // localPhotosLabelEnter
+        //     .append('input')
+        //     .attr('type', 'checkbox')
+        //     .on('change', function() { toggleLayer('local-photos'); });
+
+        localPhotosLabelEnter
+            .append('span')
+            .text('Local Photos');
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'open-data-options')
+            .call(uiTooltip()
+                .title(t.html('settings.custom_data.tooltip'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                editLocalPhotos();
+            })
+            .call(svgIcon('#iD-icon-more'));
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'zoom-to-data')
+            .call(uiTooltip()
+                .title(t.html('map_data.layers.custom.zoom'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                if (d3_select(this).classed('disabled')) return;
+
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                //TODO
+                dataLayer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+    }
+
+    function editLocalPhotos() {
+        context.container()
+            .call(settingsLocalPhotos);
+    }
+
+    function localPhotosChanged(d) {
+        var localPhotosLayer = layers.layer('local-photos');
+
+        if (d && d.fileList) {
+            localPhotosLayer.fileList(d.fileList);
         }
     }
 
