@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Show tag reference information for the currently filled-in tag value in UI fields (if available), instead of only showing the more generic _key_ documentation of the field ([#9786])
+* Don't suggest _discardable_ (i.e. deprecated and automatically removed tags) in the auto-suggestions of the raw tag editor ([#9817], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -59,8 +60,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8997]: https://github.com/openstreetmap/iD/issues/8997
 [#9233]: https://github.com/openstreetmap/iD/issues/9233
-[#9786]: https://github.com/openstreetmap/iD/issues/9786
 [#9664]: https://github.com/openstreetmap/iD/pull/9664
+[#9786]: https://github.com/openstreetmap/iD/issues/9786
+[#9817]: https://github.com/openstreetmap/iD/pull/9817
 [@channel-s]: https://github.com/channel-s
 
 
