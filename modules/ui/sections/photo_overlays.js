@@ -340,11 +340,13 @@ export function uiSectionPhotoOverlays(context) {
     }
 
     function drawLocalPhotos(selection) {
-        var dataLayer = layers.layer('local-photos');
+        var photoLayer = layers.layer('local-photos');
+        var hasData = photoLayer && photoLayer.hasData();
+        var showsData = hasData && photoLayer.enabled();
 
         var ul = selection
             .selectAll('.layer-list-local-photos')
-            .data(dataLayer ? [0] : []);
+            .data(photoLayer ? [0] : []);
 
         // Exit
         ul.exit()
@@ -360,24 +362,22 @@ export function uiSectionPhotoOverlays(context) {
             .attr('class', 'list-item-local-photos');
 
         var localPhotosLabelEnter = localPhotosEnter
-            .append('label');
-            // TODO: Add tooltip
-
-        // TODO
-        // localPhotosLabelEnter
-        //     .append('input')
-        //     .attr('type', 'checkbox')
-        //     .on('change', function() { toggleLayer('local-photos'); });
+            .append('label')
+            .call(uiTooltip().title(() => t.append('local_photos.tooltip')));
 
         localPhotosLabelEnter
-            .append('span')
-            .text('Local Photos');
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('local-photos'); });
+
+        localPhotosLabelEnter
+            .call(t.append('local_photos.header'));
 
         localPhotosEnter
             .append('button')
             .attr('class', 'open-data-options')
             .call(uiTooltip()
-                .title(t.html('settings.custom_data.tooltip'))
+                .title(() => t.append('local_photos.tooltip_edit'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function(d3_event) {
@@ -390,7 +390,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('button')
             .attr('class', 'zoom-to-data')
             .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.zoom'))
+                .title(() => t.append('map_data.layers.custom.zoom'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function(d3_event) {
@@ -399,7 +399,7 @@ export function uiSectionPhotoOverlays(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
                 //TODO
-                dataLayer.fitZoom();
+                photoLayer.fitZoom();
             })
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
 
@@ -407,6 +407,16 @@ export function uiSectionPhotoOverlays(context) {
         ul = ul
             .merge(ulEnter);
 
+        ul.selectAll('.list-item-local-photos')
+            .classed('active', showsData)
+            .selectAll('label')
+            .classed('deemphasize', !hasData)
+            .selectAll('input')
+            .property('disabled', !hasData)
+            .property('checked', showsData);
+
+        ul.selectAll('button.zoom-to-data')
+            .classed('disabled', !hasData);
     }
 
     function editLocalPhotos() {

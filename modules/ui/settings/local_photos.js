@@ -1,6 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilRebind } from '../../util';
@@ -12,14 +11,8 @@ export function uiSettingsLocalPhotos(context) {
     function render(selection) {
         var dataLayer = context.layers().layer('local-photos');
 
-        // keep separate copies of original and current settings
-        var _origSettings = {
-            fileList: (dataLayer && dataLayer.fileList()) || null,
-            url: prefs('settings-custom-data-url')
-        };
         var _currSettings = {
-            fileList: (dataLayer && dataLayer.fileList()) || null,
-            url: prefs('settings-custom-data-url')
+            fileList: (dataLayer && dataLayer.fileList()) || null
         };
 
         // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
@@ -30,17 +23,15 @@ export function uiSettingsLocalPhotos(context) {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .call(t.append('settings.custom_data.header'));
+            .call(t.append('local_photos.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
 
-        //TODO: Add translation
         textSection
             .append('pre')
-            .text('Choose local photos');
-        //     .attr('class', 'instructions-file')
-        //     .call(t.append('settings.custom_data.file.instructions'));
+            .attr('class', 'instructions-local-photos')
+            .call(t.append('local_photos.file.instructions'));
 
         textSection
             .append('input')
@@ -52,8 +43,6 @@ export function uiSettingsLocalPhotos(context) {
             .on('change', function(d3_event) {
                 var files = d3_event.target.files;
                 if (files && files.length) {
-                    // _currSettings.url = '';
-                    // textSection.select('.field-url').property('value', '');
                     _currSettings.fileList = files;
                 } else {
                     _currSettings.fileList = null;
@@ -83,23 +72,12 @@ export function uiSettingsLocalPhotos(context) {
         }
 
 
-        // restore the original url
         function clickCancel() {
-            textSection.select('.field-url').property('value', _origSettings.url);
-            prefs('settings-custom-data-url', _origSettings.url);
             this.blur();
             modal.close();
         }
 
-        // accept the current url
         function clickSave() {
-            // _currSettings.url = textSection.select('.field-url').property('value').trim();
-
-            // one or the other but not both
-            // if (_currSettings.url) { _currSettings.fileList = null; }
-            if (_currSettings.fileList) { _currSettings.url = ''; }
-
-            // prefs('settings-custom-data-url', _currSettings.url);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

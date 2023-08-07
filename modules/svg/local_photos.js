@@ -6,6 +6,7 @@ import { geoExtent } from '../geo';
 import { isArray, isNumber } from 'lodash-es';
 
 var _initialized = false;
+var _enabled = false;
 
 export function svgLocalPhotos(projection, context, dispatch) {
     var detected = utilDetect();
@@ -15,6 +16,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     function init() {
         if (_initialized) return;  // run once
+
+        _enabled = true;
 
         function over(d3_event) {
             d3_event.stopPropagation();
@@ -226,6 +229,48 @@ export function svgLocalPhotos(projection, context, dispatch) {
         const map = context.map();
         map.centerZoom(extent.center(), Math.min(18, map.trimmedExtentZoom(extent)));
     };
+
+    function showLayer() {
+        layer.style('display', 'block');
+
+        layer
+            .style('opacity', 0)
+            .transition()
+            .duration(250)
+            .style('opacity', 1)
+            .on('end', function () { dispatch.call('change'); });
+    }
+
+
+    function hideLayer() {
+        layer
+            .transition()
+            .duration(250)
+            .style('opacity', 0)
+            .on('end', () => {
+                layer.selectAll('.viewfield-group').remove();
+                layer.style('display', 'none');
+            });
+    }
+
+    drawPhotos.enabled = function(val) {
+        if (!arguments.length) return _enabled;
+
+        _enabled = val;
+        if (_enabled) {
+            showLayer();
+        } else {
+            hideLayer();
+        }
+
+        dispatch.call('change');
+        return this;
+    };
+
+    drawPhotos.hasData = function() {
+        return isArray(_imageList) && _imageList.length > 0;
+    };
+
 
     init();
     return drawPhotos;

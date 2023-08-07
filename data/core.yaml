@@ -1442,6 +1442,13 @@ en:
     tooltip: "Street-level photos from Mapilio"
   street_side:
     minzoom_tooltip: "Zoom in to see street-side photos"
+  local_photos:
+    tooltip: Add georeferenced photos from local files
+    tooltip_edit: Edit georeferenced photos
+    header: Georeferenced Photos
+    file:
+      instructions: "Choose georeferenced photos to be displayed. Supported types are:\n   .jpg with exif location data"
+      label: "Browse files"
   note:
     note: Note
     title: Edit note
