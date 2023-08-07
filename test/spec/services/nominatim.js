@@ -75,6 +75,9 @@ describe('iD.serviceNominatim', function() {
                     expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
                         {zoom: '13', format: 'json', addressdetails: '1', lat: '49', lon: '17'}
                     );
+                    expect(fetchMock.calls()[0][1].headers).to.eql({
+                        'Accept-Language': 'en'
+                    });
                     expect(callback).to.have.been.calledWithExactly(null, {address: {country_code:'cz'}});
                     done();
                 }, 50);
@@ -143,7 +146,14 @@ describe('iD.serviceNominatim', function() {
             nominatim.search('philadelphia', callback);
 
             window.setTimeout(function() {
-                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql({format: 'json', limit: '10'});
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql({
+                    q: 'philadelphia',
+                    format: 'json',
+                    limit: '10'
+                });
+                expect(fetchMock.calls()[0][1].headers).to.eql({
+                    'Accept-Language': 'en'
+                });
                 expect(callback).to.have.been.calledOnce;
                 done();
             }, 50);

@@ -4,9 +4,12 @@ import parseVersion from 'vparse';
 import { fileFetcher, locationManager } from '../core';
 import { presetManager } from '../presets';
 
+import { nsiCdnUrl } from '../../config/id.js';
+
 // Make very sure this resolves to iD's `package.json`
 // If you mess up the `../`s, the resolver may import another random package.json from somewhere else.
 import packageJSON from '../../package.json';
+
 
 // This service contains all the code related to the **name-suggestion-index** (aka NSI)
 // NSI contains the most correct tagging for many commonly mapped features.
@@ -47,14 +50,15 @@ function setNsiSources() {
   const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
   const v = parseVersion(nsiVersion);
   const vMinor = `${v.major}.${v.minor}`;
+  const cdn = nsiCdnUrl.replace('{version}', vMinor);
   const sources = {
-    'nsi_data': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/nsi.min.json`,
-    'nsi_dissolved': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/dissolved.min.json`,
-    'nsi_features': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/featureCollection.min.json`,
-    'nsi_generics': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/genericWords.min.json`,
-    'nsi_presets': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/presets/nsi-id-presets.min.json`,
-    'nsi_replacements': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/replacements.min.json`,
-    'nsi_trees': `https://cdn.jsdelivr.net/npm/name-suggestion-index@${vMinor}/dist/trees.min.json`
+    'nsi_data': cdn + 'dist/nsi.min.json',
+    'nsi_dissolved': cdn + 'dist/dissolved.min.json',
+    'nsi_features': cdn + 'dist/featureCollection.min.json',
+    'nsi_generics': cdn + 'dist/genericWords.min.json',
+    'nsi_presets': cdn + 'dist/presets/nsi-id-presets.min.json',
+    'nsi_replacements': cdn + 'dist/replacements.min.json',
+    'nsi_trees': cdn + 'dist/trees.min.json'
   };
 
   let fileMap = fileFetcher.fileMap();
@@ -109,9 +113,61 @@ function loadNsiData() {
         ids:           new Map()               // Map (id -> NSI item)
       };
 
-      _nsi.matcher = new Matcher();
-      _nsi.matcher.buildMatchIndex(_nsi.data);
-      _nsi.matcher.buildLocationIndex(_nsi.data, locationManager.loco());
+      const matcher = _nsi.matcher = new Matcher();
+      matcher.buildMatchIndex(_nsi.data);
+
+// *** BEGIN HACK ***
+
+// old - built in matcher will set up the locationindex by resolving all the locationSets one-by-one
+      // matcher.buildLocationIndex(_nsi.data, locationManager.loco());
+
+// new - Use the location manager instead of redoing that work
+// It has already processed the presets at this point
+
+// We need to monkeypatch a few of the collections that the NSI matcher depends on.
+// The `itemLocation` structure maps itemIDs to locationSetIDs
+matcher.itemLocation = new Map();
+
+// The `locationSets` structure maps locationSetIDs to GeoJSON
+// We definitely need this, but don't need full geojson, just { properties: { area: xxx }}
+matcher.locationSets = new Map();
+
+Object.keys(_nsi.data).forEach(tkv => {
+  const items = _nsi.data[tkv].items;
+  if (!Array.isArray(items) || !items.length) return;
+
+  items.forEach(item => {
+    if (matcher.itemLocation.has(item.id)) return;   // we've seen item id already - shouldn't be possible?
+
+    const locationSetID = locationManager.locationSetID(item.locationSet);
+    matcher.itemLocation.set(item.id, locationSetID);
+
+    if (matcher.locationSets.has(locationSetID)) return;   // we've seen this locationSet before..
+
+    const fakeFeature = { id: locationSetID, properties: { id: locationSetID, area: 1 } };
+    matcher.locationSets.set(locationSetID, fakeFeature);
+  });
+});
+
+// The `locationIndex` is an instance of which-polygon spatial index for the locationSets.
+// We only really need this to _look like_ which-polygon query `_wp.locationIndex(bbox, true);`
+// i.e. it needs to return the properties of the locationsets
+matcher.locationIndex = (bbox) => {
+  const validHere = locationManager.locationSetsAt([bbox[0], bbox[1]]);
+  const results = [];
+
+  for (const [locationSetID, area] of Object.entries(validHere)) {
+    const fakeFeature = matcher.locationSets.get(locationSetID);
+    if (fakeFeature) {
+      fakeFeature.properties.area = area;
+      results.push(fakeFeature);
+    }
+  }
+  return results;
+};
+
+// *** END HACK ***
+
 
       Object.keys(_nsi.data).forEach(tkv => {
         const category = _nsi.data[tkv];
@@ -458,13 +514,10 @@ function _upgradeTags(tags, loc) {
     return changed ? { newTags: newTags, matched: null } : null;
   }
 
-  // Order the [key,value,name] tuples - test primary names before alternate names
+  // Order the [key,value,name] tuples - test primary before alternate
   const tuples = gatherTuples(tryKVs, tryNames);
-  let foundPrimary = false;
-  let bestItem;
 
-  // Test [key,value,name] tuples against the NSI matcher until we get a primary match or exhaust all options.
-  for (let i = 0; (i < tuples.length && !foundPrimary); i++) {
+  for (let i = 0; i < tuples.length; i++) {
     const tuple = tuples[i];
     const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
 
@@ -473,15 +526,14 @@ function _upgradeTags(tags, loc) {
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
+    let itemID, item;
     for (let j = 0; j < hits.length; j++) {
       const hit = hits[j];
-      const isPrimary = (hits[j].match === 'primary');
-      const itemID = hit.itemID;
+      itemID = hit.itemID;
       if (_nsi.dissolved[itemID]) continue;       // Don't upgrade to a dissolved item
 
-      const item = _nsi.ids.get(itemID);
+      item = _nsi.ids.get(itemID);
       if (!item) continue;
-
       const mainTag = item.mainTag;               // e.g. `brand:wikidata`
       const itemQID = item.tags[mainTag];         // e.g. `brand:wikidata` qid
       const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
@@ -490,25 +542,18 @@ function _upgradeTags(tags, loc) {
         (!itemQID || itemQID === notQID) ||       // No `*:wikidata` or matched a `not:*:wikidata`
         (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
       ) {
+        item = null;
         continue;  // continue looking
-      }
-
-      // If we get here, the hit is good..
-      if (!bestItem || isPrimary) {
-        bestItem = item;
-        if (isPrimary) {
-          foundPrimary = true;
-        }
-        break;  // can ignore the rest of the hits from this match
+      } else {
+        break;     // use `item`
       }
     }
-  }
 
+    // Can't use any of these hits, try next tuple..
+    if (!item) continue;
 
-  // At this point we have matched a canonical item and can suggest tag upgrades..
-  if (bestItem) {
-    const itemID = bestItem.id;
-    const item = JSON.parse(JSON.stringify(bestItem));   // deep copy
+    // At this point we have matched a canonical item and can suggest tag upgrades..
+    item = JSON.parse(JSON.stringify(item));   // deep copy
     const tkv = item.tkv;
     const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
     const k = parts[1];
@@ -654,17 +699,9 @@ export default {
     setNsiSources();
     presetManager.ensureLoaded()
       .then(() => loadNsiPresets())
-      .then(() => delay(100))  // wait briefly for locationSets to enter the locationManager queue
-      .then(() => locationManager.mergeLocationSets([]))   // wait for locationSets to resolve
       .then(() => loadNsiData())
       .then(() => _nsiStatus = 'ok')
       .catch(() => _nsiStatus = 'failed');
-
-    function delay(msec) {
-      return new Promise(resolve => {
-        window.setTimeout(resolve, msec);
-      });
-    }
   },
 
 

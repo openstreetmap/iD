@@ -78,12 +78,14 @@ path.fill.tag-golf-green {
 path.stroke.tag-amenity-fountain,
 path.stroke.tag-leisure-swimming_pool,
 path.stroke.tag-natural-bay,
+path.stroke.tag-natural-strait,
 path.stroke.tag-natural-water {
     stroke: rgb(119, 211, 222);
 }
 path.fill.tag-amenity-fountain,
 path.fill.tag-leisure-swimming_pool,
 path.fill.tag-natural-bay,
+path.fill.tag-natural-strait,
 path.fill.tag-natural-water {
     stroke: rgba(119, 211, 222, 0.3);
     fill: rgba(119, 211, 222, 0.3);

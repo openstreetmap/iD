@@ -11,6 +11,8 @@ import { localizer, t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 import { uiTooltip } from '..';
+import { allowUpperCaseTagValues } from '../../osm/tags';
+import { fileFetcher } from '../../core';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -19,7 +21,7 @@ export function uiSectionRawTagEditor(id, context) {
         .classes('raw-tag-editor')
         .label(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
-            return t.html('inspector.title_count', { title: { html: t.html('inspector.tags') }, count: count });
+            return t.append('inspector.title_count', { title: t('inspector.tags'), count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
@@ -30,6 +32,11 @@ export function uiSectionRawTagEditor(id, context) {
         { id: 'list', icon: '#fas-th-list' },
         { id: 'text', icon: '#fas-i-cursor' }
     ];
+
+    let _discardTags = {};
+    fileFetcher.get('discarded')
+        .then((d) => { _discardTags = d; })
+        .catch(() => { /* ignore */ });
 
     var _tagView = (prefs('raw-tag-editor-view') || 'list');   // 'list, 'text'
     var _readOnlyTags = [];
@@ -165,7 +172,9 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', 'add-tag')
             .attr('aria-label', t('inspector.add_to_tag'))
             .call(svgIcon('#iD-icon-plus', 'light'))
-            .call(uiTooltip().title(t.html('inspector.add_to_tag')).placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
+            .call(uiTooltip()
+                .title(() => t.append('inspector.add_to_tag'))
+                .placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
             .on('click', addTag);
 
         addRowEnter
@@ -419,7 +428,10 @@ export function uiSectionRawTagEditor(id, context) {
                     query: value
                 }, function(err, data) {
                     if (!err) {
-                        var filtered = data.filter(function(d) { return _tags[d.value] === undefined; });
+                        const filtered = data
+                            .filter(d => _tags[d.value] === undefined)
+                            .filter(d => !(d.value in _discardTags)) // do not suggest discardable tags (see #9817)
+                            .filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
                         callback(sort(value, filtered));
                     }
                 });
@@ -433,9 +445,13 @@ export function uiSectionRawTagEditor(id, context) {
                     geometry: geometry,
                     query: value
                 }, function(err, data) {
-                    if (!err) callback(sort(value, data));
+                    if (!err) {
+                        const filtered = data.filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
+                        callback(sort(value, filtered));
+                    }
                 });
-            }));
+            })
+            .caseSensitive(allowUpperCaseTagValues.test(utilGetSetValue(key))));
 
 
         function sort(value, data) {

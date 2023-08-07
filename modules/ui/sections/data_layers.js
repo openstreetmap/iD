@@ -26,7 +26,7 @@ export function uiSectionDataLayers(context) {
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
-        .label(t.html('map_data.data_layers'))
+        .label(() => t.append('map_data.data_layers'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -101,14 +101,14 @@ export function uiSectionDataLayers(context) {
                 if (d.id === 'osm') {
                     d3_select(this)
                         .call(uiTooltip()
-                            .title(t.html('map_data.layers.' + d.id + '.tooltip'))
+                            .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                             .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
                             .placement('bottom')
                         );
                 } else {
                     d3_select(this)
                         .call(uiTooltip()
-                            .title(t.html('map_data.layers.' + d.id + '.tooltip'))
+                            .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                             .placement('bottom')
                         );
                 }
@@ -160,7 +160,7 @@ export function uiSectionDataLayers(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('map_data.layers.' + d.id + '.tooltip'))
+                        .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                         .placement('bottom')
                     );
             });
@@ -172,7 +172,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
+            .each(function(d) { t.append('map_data.layers.' + d.id + '.title')(d3_select(this)); });
 
 
         // Update
@@ -488,7 +488,7 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'history-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('map_data.history_panel.tooltip'))
+                .title(() => t.append('map_data.history_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.history.key'))])
                 .placement('top')
             );
@@ -510,7 +510,7 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'measurement-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('map_data.measurement_panel.tooltip'))
+                .title(() => t.append('map_data.measurement_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.measurement.key'))])
                 .placement('top')
             );

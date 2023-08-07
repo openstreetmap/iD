@@ -629,3 +629,22 @@ export function utilOldestID(ids) {
 
     return ids[oldestIDIndex];
 }
+
+// returns a normalized and truncated string to `maxChars` utf-8 characters
+export function utilCleanOsmString(val, maxChars) {
+    // be lenient with input
+    if (val === undefined || val === null) {
+      val = '';
+    } else {
+      val = val.toString();
+    }
+
+    // remove whitespace
+    val = val.trim();
+
+    // use the canonical form of the string
+    if (val.normalize) val = val.normalize('NFC');
+
+    // trim to the number of allowed characters
+    return utilUnicodeCharsTruncated(val, maxChars);
+  }

@@ -15,9 +15,11 @@ export function modeAddArea(context, mode) {
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
-    var defaultTags = { area: 'yes' };
-    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area');
-
+    function defaultTags(loc) {
+        var defaultTags = { area: 'yes' };
+        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'area', false, loc);
+        return defaultTags;
+    }
 
     function actionClose(wayId) {
         return function (graph) {
@@ -29,7 +31,7 @@ export function modeAddArea(context, mode) {
     function start(loc) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -45,7 +47,7 @@ export function modeAddArea(context, mode) {
     function startFromWay(loc, edge) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -61,7 +63,7 @@ export function modeAddArea(context, mode) {
 
     function startFromNode(node) {
         var startGraph = context.graph();
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: defaultTags(node.loc) });
 
         context.perform(
             actionAddEntity(way),

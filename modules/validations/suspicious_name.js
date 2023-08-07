@@ -60,7 +60,7 @@ export function validationSuspiciousName() {
         if (!entity) return '';
         let preset = presetManager.match(entity, context.graph());
         let langName = langCode && localizer.languageName(langCode);
-        return t.html('issues.generic_name.message' + (langName ? '_language' : ''),
+        return t.append('issues.generic_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: genericName, language: langName }
         );
       },
@@ -71,7 +71,7 @@ export function validationSuspiciousName() {
         return [
           new validationIssueFix({
             icon: 'iD-operation-delete',
-            title: t.html('issues.fix.remove_the_name.title'),
+            title: t.append('issues.fix.remove_the_name.title'),
             onClick: function(context) {
               let entityId = this.issue.entityIds[0];
               let entity = context.entity(entityId);
@@ -106,7 +106,7 @@ export function validationSuspiciousName() {
         if (!entity) return '';
         const preset = presetManager.match(entity, context.graph());
         const langName = langCode && localizer.languageName(langCode);
-        return t.html('issues.incorrect_name.message' + (langName ? '_language' : ''),
+        return t.append('issues.incorrect_name.message' + (langName ? '_language' : ''),
           { feature: preset.name(), name: incorrectName, language: langName }
         );
       },
@@ -117,7 +117,7 @@ export function validationSuspiciousName() {
         return [
           new validationIssueFix({
             icon: 'iD-operation-delete',
-            title: t.html('issues.fix.remove_the_name.title'),
+            title: t.append('issues.fix.remove_the_name.title'),
             onClick: function(context) {
               const entityId = this.issue.entityIds[0];
               const entity = context.entity(entityId);

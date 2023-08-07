@@ -71,9 +71,9 @@ export function operationExtract(context, selectedIDs) {
     operation.tooltip = function () {
         var disableReason = operation.disabled();
         if (disableReason) {
-            return t('operations.extract.' + disableReason + '.' + _amount);
+            return t.append('operations.extract.' + disableReason + '.' + _amount);
         } else {
-            return t('operations.extract.description.' + _geometryID + '.' + _amount);
+            return t.append('operations.extract.description.' + _geometryID + '.' + _amount);
         }
     };
 
@@ -85,7 +85,7 @@ export function operationExtract(context, selectedIDs) {
 
     operation.id = 'extract';
     operation.keys = [t('operations.extract.key')];
-    operation.title = t('operations.extract.title');
+    operation.title = t.append('operations.extract.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
 

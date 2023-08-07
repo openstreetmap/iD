@@ -25,7 +25,7 @@ export function uiPanelBackground(context) {
             _metadata = {};
         }
 
-        selection.html('');
+        selection.text('');
 
         var list = selection
             .append('ul')
@@ -33,7 +33,7 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .html(_currSourceName);
+            .call(_currSourceName);
 
         _metadataKeys.forEach(function(k) {
             // DigitalGlobe vintage is available in raster layers for now.
@@ -159,7 +159,7 @@ export function uiPanelBackground(context) {
     };
 
     panel.id = 'background';
-    panel.label = t.html('info_panels.background.title');
+    panel.label = t.append('info_panels.background.title');
     panel.key = t('info_panels.background.key');
 
 

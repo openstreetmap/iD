@@ -85,9 +85,7 @@ export function uiTopToolbar(context) {
             actionableItems
                 .append('div')
                 .attr('class', 'item-label')
-                .html(function(d) {
-                    return d.label;
-                });
+                .each(function(d) { d.label(d3_select(this)); });
         }
 
     }

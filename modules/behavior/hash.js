@@ -8,7 +8,7 @@ import { modeSelect } from '../modes/select';
 import { utilDisplayLabel, utilObjectOmit, utilQsString, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { t } from '../core/localizer';
-
+import { prefs } from '../core/preferences';
 
 export function behaviorHash(context) {
 
@@ -58,7 +58,7 @@ export function behaviorHash(context) {
         });
         if (selected.length) {
             var firstLabel = utilDisplayLabel(context.entity(selected[0]), context.graph());
-            if (selected.length > 1 ) {
+            if (selected.length > 1) {
                 contextual = t('title.labeled_and_more', {
                     labeled: firstLabel,
                     count: selected.length - 1
@@ -109,6 +109,12 @@ export function behaviorHash(context) {
 
             // set the title we want displayed for the browser tab/window
             updateTitle(true /* includeChangeCount */);
+
+            // save last used map location for future
+            const q = utilStringQs(latestHash);
+            if (q.map) {
+                prefs('map-location', q.map);
+            }
         }
     }
 
@@ -176,28 +182,34 @@ export function behaviorHash(context) {
         d3_select(window)
             .on('hashchange.behaviorHash', hashchange);
 
-        if (window.location.hash) {
-            var q = utilStringQs(window.location.hash);
+        var q = utilStringQs(window.location.hash);
 
-            if (q.id) {
-                //if (!context.history().hasRestorableChanges()) {
-                    // targeting specific features: download, select, and zoom to them
-                    context.zoomToEntity(q.id.split(',')[0], !q.map);
-                //}
-            }
-
-            if (q.walkthrough === 'true') {
-                behavior.startWalkthrough = true;
-            }
-
-            if (q.map) {
-                behavior.hadHash = true;
-            }
-
-            hashchange();
-
-            updateTitle(false);
+        if (q.id) {
+            //if (!context.history().hasRestorableChanges()) {
+            // targeting specific features: download, select, and zoom to them
+            context.zoomToEntity(q.id.split(',')[0], !q.map);
+            //}
         }
+
+        if (q.walkthrough === 'true') {
+            behavior.startWalkthrough = true;
+        }
+
+        if (q.map) {
+            behavior.hadLocation = true;
+        } else if (!q.id && prefs('map-location')) {
+            // center map at last visited map location
+            const mapArgs = prefs('map-location').split('/').map(Number);
+            context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
+
+            updateHashIfNeeded();
+
+            behavior.hadLocation = true;
+        }
+
+        hashchange();
+
+        updateTitle(false);
     }
 
     behavior.off = function() {

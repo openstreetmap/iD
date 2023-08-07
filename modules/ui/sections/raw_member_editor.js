@@ -33,7 +33,7 @@ export function uiSectionRawMemberEditor(context) {
 
             var gt = entity.members.length > _maxMembers ? '>' : '';
             var count = gt + entity.members.slice(0, _maxMembers).length;
-            return t.html('inspector.title_count', { title: { html: t.html('inspector.members') }, count: count });
+            return t.append('inspector.title_count', { title: t('inspector.members'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 

@@ -156,7 +156,7 @@ osmEntity.prototype = {
                 changed = true;
                 merged[k] = utilUnicodeCharsTruncated(
                     utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
-                    255 // avoid exceeding character limit; see also services/osm.js -> maxCharsForTagValue()
+                    255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
                 );
             }
         }

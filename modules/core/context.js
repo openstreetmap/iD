@@ -4,6 +4,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
+import packageJSON from '../../package.json';
+
 import { t } from '../core/localizer';
 
 import { fileFetcher } from './file_fetcher';
@@ -17,7 +19,7 @@ import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
-import { utilKeybinding, utilRebind, utilStringQs, utilUnicodeCharsTruncated } from '../util';
+import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
 
 
 export function coreContext() {
@@ -25,7 +27,7 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.22.0-dev';
+  context.version = packageJSON.version;
   context.privacyVersion = '20201202';
 
   // iD will alter the hash so cache the parameters intended to setup the session
@@ -100,14 +102,6 @@ export function coreContext() {
     if (_connection) {
       _connection.switch(options);
     }
-    return context;
-  };
-
-  /* connection options for source switcher (optional) */
-  let _apiConnections;
-  context.apiConnections = function(val) {
-    if (!arguments.length) return _apiConnections;
-    _apiConnections = val;
     return context;
   };
 
@@ -226,26 +220,9 @@ export function coreContext() {
   context.maxCharsForTagValue = () => 255;
   context.maxCharsForRelationRole = () => 255;
 
-  function cleanOsmString(val, maxChars) {
-    // be lenient with input
-    if (val === undefined || val === null) {
-      val = '';
-    } else {
-      val = val.toString();
-    }
-
-    // remove whitespace
-    val = val.trim();
-
-    // use the canonical form of the string
-    if (val.normalize) val = val.normalize('NFC');
-
-    // trim to the number of allowed characters
-    return utilUnicodeCharsTruncated(val, maxChars);
-  }
-  context.cleanTagKey = (val) => cleanOsmString(val, context.maxCharsForTagKey());
-  context.cleanTagValue = (val) => cleanOsmString(val, context.maxCharsForTagValue());
-  context.cleanRelationRole = (val) => cleanOsmString(val, context.maxCharsForRelationRole());
+  context.cleanTagKey = (val) => utilCleanOsmString(val, context.maxCharsForTagKey());
+  context.cleanTagValue = (val) => utilCleanOsmString(val, context.maxCharsForTagValue());
+  context.cleanRelationRole = (val) => utilCleanOsmString(val, context.maxCharsForRelationRole());
 
 
   /* History */
@@ -548,8 +525,8 @@ export function coreContext() {
 
       // kick off some async work
       localizer.ensureLoaded();
-      _background.ensureLoaded();
       presetManager.ensureLoaded();
+      _background.ensureLoaded();
 
       Object.values(services).forEach(service => {
         if (service && typeof service.init === 'function') {
@@ -574,6 +551,7 @@ export function coreContext() {
       if (!context.container().empty()) {
         _ui.ensureLoaded()
           .then(() => {
+            _background.init();
             _photos.init();
           });
       }

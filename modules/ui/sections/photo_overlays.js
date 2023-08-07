@@ -1,3 +1,4 @@
+import _debounce from 'lodash-es/debounce';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -12,7 +13,7 @@ export function uiSectionPhotoOverlays(context) {
     var layers = context.layers();
 
     var section = uiSection('photo-overlays', context)
-        .label(t.html('photo_overlays.title'))
+        .label(() => t.append('photo_overlays.title'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -33,13 +34,23 @@ export function uiSectionPhotoOverlays(context) {
     function drawPhotoItems(selection) {
         var photoKeys = context.photos().overlayLayerIDs();
         var photoLayers = layers.all().filter(function(obj) { return photoKeys.indexOf(obj.id) !== -1; });
-        var data = photoLayers.filter(function(obj) { return obj.layer.supported(); });
+        var data = photoLayers.filter(function(obj) {
+            if (!obj.layer.supported()) return false;
+            if (layerEnabled(obj)) return true;
+            if (typeof obj.layer.validHere === 'function') {
+                return obj.layer.validHere(context.map().extent(), context.map().zoom());
+            }
+            return true;
+        });
 
         function layerSupported(d) {
             return d.layer && d.layer.supported();
         }
         function layerEnabled(d) {
             return layerSupported(d) && d.layer.enabled();
+        }
+        function layerRendered(d) {
+            return d.layer.rendered?.(context.map().zoom()) ?? true;
         }
 
         var ul = selection
@@ -77,7 +88,13 @@ export function uiSectionPhotoOverlays(context) {
                 else titleID = d.id.replace(/-/g, '_') + '.tooltip';
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html(titleID))
+                        .title(() => {
+                            if (!layerRendered(d)) {
+                                return t.append('street_side.minzoom_tooltip');
+                            } else {
+                                return t.append(titleID);
+                            }
+                        })
                         .placement('top')
                     );
             });
@@ -100,6 +117,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(liEnter)
             .classed('active', layerEnabled)
             .selectAll('input')
+            .property('disabled', d => !layerRendered(d))
             .property('checked', layerEnabled);
     }
 
@@ -139,7 +157,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('photo_overlays.photo_type.' + d + '.tooltip'))
+                        .title(() => t.append('photo_overlays.photo_type.' + d + '.tooltip'))
                         .placement('top')
                     );
             });
@@ -200,15 +218,15 @@ export function uiSectionPhotoOverlays(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('photo_overlays.date_filter.' + d + '.tooltip'))
+                        .title(() => t.append('photo_overlays.date_filter.' + d + '.tooltip'))
                         .placement('top')
                     );
             });
 
         labelEnter
             .append('span')
-            .html(function(d) {
-                return t.html('photo_overlays.date_filter.' + d + '.title');
+            .each(function(d) {
+                t.append('photo_overlays.date_filter.' + d + '.title')(d3_select(this));
             });
 
         labelEnter
@@ -266,7 +284,7 @@ export function uiSectionPhotoOverlays(context) {
             .each(function() {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('photo_overlays.username_filter.tooltip'))
+                        .title(() => t.append('photo_overlays.username_filter.tooltip'))
                         .placement('top')
                     );
             });
@@ -319,6 +337,14 @@ export function uiSectionPhotoOverlays(context) {
 
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
     context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
+
+    context.map()
+        .on('move.background_list',
+            _debounce(function() {
+                // layers in-view may have changed due to map move
+                window.requestIdleCallback(section.reRender);
+            }, 1000)
+        );
 
     return section;
 }

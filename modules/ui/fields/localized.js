@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import * as countryCoder from '@ideditor/country-coder';
+import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
@@ -10,6 +10,7 @@ import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
+import { uiLengthIndicator } from '../length_indicator';
 
 var _languagesArray = [];
 
@@ -19,6 +20,7 @@ export function uiFieldLocalized(field, context) {
     var wikipedia = services.wikipedia;
     var input = d3_select(null);
     var localizedInputs = d3_select(null);
+    var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
     var _countryCode;
     var _tags;
 
@@ -43,7 +45,7 @@ export function uiFieldLocalized(field, context) {
     var _selection = d3_select(null);
     var _multilingual = [];
     var _buttonTip = uiTooltip()
-        .title(t.html('translate.translate'))
+        .title(() => t.append('translate.translate'))
         .placement('left');
     var _wikiTitles;
     var _entityIDs = [];
@@ -94,7 +96,7 @@ export function uiFieldLocalized(field, context) {
                 var preset = presetManager.match(entity, context.graph());
                 if (preset) {
                     var isSuggestion = preset.suggestion;
-                    var fields = preset.fields();
+                    var fields = preset.fields(entity.extent(context.graph()).center());
                     var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
                     var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
                     var setsName = preset.addTags.name;
@@ -180,6 +182,8 @@ export function uiFieldLocalized(field, context) {
             .on('input', change(true))
             .on('blur', change())
             .on('change', change());
+
+        wrap.call(_lengthIndicator);
 
 
         var translateButton = wrap.selectAll('.localized-add')
@@ -497,6 +501,10 @@ export function uiFieldLocalized(field, context) {
 
         _selection
             .call(localized);
+
+        if (!isMixed) {
+            _lengthIndicator.update(tags[field.key]);
+        }
     };
 
 

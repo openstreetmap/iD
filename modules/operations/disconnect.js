@@ -189,10 +189,9 @@ export function operationDisconnect(context, selectedIDs) {
 
     operation.tooltip = function() {
         var disable = operation.disabled();
-        if (disable) {
-            return t('operations.disconnect.' + disable);
-        }
-        return t('operations.disconnect.description.' + _descriptionID);
+        return disable ?
+            t.append('operations.disconnect.' + disable) :
+            t.append('operations.disconnect.description.' + _descriptionID);
     };
 
 
@@ -203,7 +202,7 @@ export function operationDisconnect(context, selectedIDs) {
 
     operation.id = 'disconnect';
     operation.keys = [t('operations.disconnect.key')];
-    operation.title = t('operations.disconnect.title');
+    operation.title = t.append('operations.disconnect.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

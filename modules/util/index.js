@@ -54,3 +54,4 @@ export { utilUnicodeCharsCount } from './util';
 export { utilUnicodeCharsTruncated } from './util';
 export { utilUniqueDomId } from './util';
 export { utilWrap } from './util';
+export { utilCleanOsmString } from './util';

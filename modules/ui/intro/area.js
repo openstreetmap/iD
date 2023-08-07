@@ -328,8 +328,8 @@ export function uiIntroArea(context, reveal) {
             timeout(function() {
                 reveal('.more-fields .combobox-input',
                     helpHtml('intro.areas.add_field', {
-                        name: { html: nameField.label() },
-                        description: { html: descriptionField.label() }
+                        name: nameField.title(),
+                        description: descriptionField.title()
                     }),
                     { duration: 300 }
                 );
@@ -395,7 +395,7 @@ export function uiIntroArea(context, reveal) {
         }, 300);
 
         reveal('div.combobox',
-            helpHtml('intro.areas.choose_field', { field: { html: descriptionField.label() } }),
+            helpHtml('intro.areas.choose_field', { field: descriptionField.title() }),
             { duration: 300 }
         );
 
@@ -456,7 +456,7 @@ export function uiIntroArea(context, reveal) {
         context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
         reveal('.entity-editor-pane',
-            helpHtml('intro.areas.retry_add_field', { field: { html: descriptionField.label() } }), {
+            helpHtml('intro.areas.retry_add_field', { field: descriptionField.title() }), {
             buttonText: t.html('intro.ok'),
             buttonCallback: function() { continueTo(clickAddField); }
         });

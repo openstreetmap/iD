@@ -19,7 +19,7 @@ export function behaviorOperation(context) {
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
-                .label(_operation.tooltip)();
+                .label(_operation.tooltip())();
 
         } else {
             context.ui().flash

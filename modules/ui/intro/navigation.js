@@ -493,8 +493,8 @@ export function uiIntroNavigation(context, reveal) {
         reveal('.entity-editor-pane', helpHtml('intro.navigation.street_different_fields') + '{br}' +
             helpHtml('intro.navigation.editor_street', {
                 button: { html: icon(href, 'inline') },
-                field1: { html: onewayField.label() },
-                field2: { html: maxspeedField.label() }
+                field1: onewayField.title(),
+                field2: maxspeedField.title()
             }));
 
         context.on('exit.intro', function() {
@@ -509,8 +509,8 @@ export function uiIntroNavigation(context, reveal) {
             reveal('.entity-editor-pane', helpHtml('intro.navigation.street_different_fields') + '{br}' +
                 helpHtml('intro.navigation.editor_street', {
                     button: { html: icon(href, 'inline') },
-                    field1: { html: onewayField.label() },
-                    field2: { html: maxspeedField.label() }
+                    field1: onewayField.title(),
+                    field2: maxspeedField.title()
                 }), { duration: 0 }
             );
         });

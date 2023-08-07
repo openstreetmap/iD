@@ -25,14 +25,14 @@ export function validationHelpRequest(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.html('issues.fixme_tag.message', {
+                return entity ? t.append('issues.fixme_tag.message', {
                     feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
                 }) : '';
             },
             dynamicFixes: function() {
                 return [
                     new validationIssueFix({
-                        title: t.html('issues.fix.address_the_concern.title')
+                        title: t.append('issues.fix.address_the_concern.title')
                     })
                 ];
             },

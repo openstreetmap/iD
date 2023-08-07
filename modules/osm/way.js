@@ -3,7 +3,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
+import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix } from './tags';
 import { utilArrayUniq } from '../util';
 
 
@@ -167,8 +167,9 @@ Object.assign(osmWay.prototype, {
     // i.e. the right side is the 'inside' (e.g. the right side of a
     // natural=cliff is lower).
     sidednessIdentifier: function() {
-        for (var key in this.tags) {
-            var value = this.tags[key];
+        for (const realKey in this.tags) {
+            const value = this.tags[realKey];
+            const key = osmRemoveLifecyclePrefix(realKey);
             if (key in osmRightSideIsInsideTags && (value in osmRightSideIsInsideTags[key])) {
                 if (osmRightSideIsInsideTags[key][value] === true) {
                     return key;

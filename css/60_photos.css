@@ -68,12 +68,10 @@
 }
 
 
-.photo-wrapper,
-.photo-wrapper img {
+.photo-wrapper {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    object-fit: cover;
 }
 
 .photo-wrapper .photo-attribution {
@@ -185,6 +183,18 @@
     stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
 
+/* Vegbilder Image Layer */
+.layer-vegbilder {
+    pointer-events: none;
+}
+.layer-vegbilder .viewfield-group * {
+    fill: #ed9300;
+}
+.layer-vegbilder .sequence {
+    stroke: #ed9300;
+    stroke-opacity: 0.85;  /* bump opacity - only one per road */
+}
+
 
 /* Mapillary Image Layer */
 .layer-mapillary {
@@ -244,6 +254,46 @@
     stroke: #20c4ff;
 }
 
+/* Mapilio Image Layer */
+.layer-mapilio {
+    pointer-events: none;
+}
+.layer-mapilio .viewfield-group * {
+    fill: #0056f1;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-mapilio .sequence {
+    stroke: #0056f1;
+}
+.photo-controls-mapilio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.photo-controls-mapilio button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+
+.ideditor .mapilio-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#ideditor-viewer-mapilio-simple-wrap {
+    height: 100%;
+}
+#ideditor-viewer-mapilio-simple {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {
@@ -273,7 +323,8 @@
     }
 }
 
-.ms-wrapper .pnlm-compass.pnlm-control {
+.ms-wrapper .pnlm-compass.pnlm-control,
+.vegbilder-wrapper  .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
@@ -293,6 +344,10 @@ label.streetside-hires {
     width: 12px;
     height: 12px;
     margin: 0 5px;
+}
+
+.pnlm-zoom-controls {
+    margin-top: 6px;
 }
 
 
@@ -332,6 +387,13 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
+.kartaview-wrapper img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
 .kartaview-wrapper .photo-attribution a:active {
     color: #20c4ff;
 }
@@ -344,9 +406,29 @@ label.streetside-hires {
 .kartaview-image-wrap {
     width: 100%;
     height: 100%;
-    transform-origin:0 0;
+    transform-origin: 0 0;
 }
 
+.vegbilder-wrapper {
+    position: relative;
+    background-color: #000;
+}
+
+.vegbilder-wrapper .plane-frame {
+    display: block;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.vegbilder-wrapper .plane-frame > img.plane-photo{
+    width: auto;
+    height: 100%;
+    transform-origin: 0 0;
+}
 
 /* photo-controls (step forward, back, rotate) */
 .photo-controls-wrap {
@@ -368,6 +450,7 @@ label.streetside-hires {
 .photo-controls button:focus {
     height: 18px;
     width: 18px;
+    line-height: 18px;
     background: rgba(0,0,0,0.65);
     color: #eee;
     border-radius: 0;

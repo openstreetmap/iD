@@ -57,6 +57,9 @@ export function svgLabels(projection, context) {
         ['point', 'shop', '*', 10],
         ['point', 'tourism', '*', 10],
         ['point', 'camp_site', '*', 10],
+        ['line', 'ref', '*', 12],
+        ['area', 'ref', '*', 12],
+        ['point', 'ref', '*', 10],
         ['line', 'name', '*', 12],
         ['area', 'name', '*', 12],
         ['point', 'name', '*', 10]

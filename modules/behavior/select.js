@@ -97,7 +97,9 @@ export function behaviorSelect(context) {
 
         context.ui().closeEditMenu();
 
-        _longPressTimeout = window.setTimeout(didLongPress, 500, id, 'longdown-' + (d3_event.pointerType || 'mouse'));
+        if (d3_event.pointerType !== 'mouse') {
+            _longPressTimeout = window.setTimeout(didLongPress, 500, id, 'longdown-' + (d3_event.pointerType || 'mouse'));
+        }
 
         _downPointers[id] = {
             firstEvent: d3_event,
@@ -172,13 +174,20 @@ export function behaviorSelect(context) {
 
         if (!+d3_event.clientX && !+d3_event.clientY) {
             if (_lastMouseEvent) {
-                d3_event.sourceEvent = _lastMouseEvent;
+                d3_event = _lastMouseEvent;
             } else {
                 return;
             }
         } else {
             _lastMouseEvent = d3_event;
-            _lastInteractionType = 'rightclick';
+            if (d3_event.pointerType === 'touch' || d3_event.pointerType === 'pen' ||
+                d3_event.mozInputSource && ( // firefox doesn't give a pointerType on contextmenu events
+                    d3_event.mozInputSource === MouseEvent.MOZ_SOURCE_TOUCH ||
+                    d3_event.mozInputSource === MouseEvent.MOZ_SOURCE_PEN)) {
+                _lastInteractionType = 'touch';
+            } else {
+                _lastInteractionType = 'rightclick';
+            }
         }
 
         _showMenu = true;

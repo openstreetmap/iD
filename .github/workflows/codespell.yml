@@ -3,16 +3,19 @@
 # https://github.com/codespell-project/codespell
 name: codespell
 on: [push, pull_request]
+permissions:
+  contents: read
+
 jobs:
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: codespell-project/actions-codespell@master
         with:
           check_filenames: true
           skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img
-          ignore_words_list: "auxilary,casette,cemetary,chancel,childs,extentions,files',froms,generat,guerilla,kindergarden,nd,specialties,vias,visibles,tos"
+          ignore_words_list: "auxilary,casette,cemetary,chancel,childs,extentions,falsy,files',froms,generat,guerilla,inflight,kindergarden,nd,specialties,tos,vias,visibles"
           exclude_file: .codespellignorelines
           only_warn: 1

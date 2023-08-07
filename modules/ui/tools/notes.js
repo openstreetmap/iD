@@ -15,7 +15,7 @@ export function uiToolNotes(context) {
 
     var tool = {
         id: 'notes',
-        label: t.html('modes.add_note.label')
+        label: t.append('modes.add_note.label')
     };
 
     var mode = modeAddNote(context);

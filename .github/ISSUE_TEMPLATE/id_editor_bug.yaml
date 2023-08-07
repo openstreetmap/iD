@@ -34,13 +34,21 @@ body:
   - type: dropdown
     id: environment-variant
     attributes:
-      label: Which iD Editor versions do you see the issue on?
-      description: Please test your issue on the development version as well (if possible) so make sure it is not fixed already.
+      label: Which deployed environments do you see the issue in?
+      description: "If possible, please test this issue in the development version (here: https://ideditor.netlify.app) as well, to make sure it is not already fixed."
       multiple: true
       options:
         - Released version at openstreetmap.org/edit
         - Development version at ideditor.netlify.app
         - RapiD version at mapwith.ai/rapid
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: What version numbers does this issue effect?
+      description: This can be found in the bottom right corner, next to the 'Help translate' button.
+      placeholder: "For example: 2.20.3, 2.21.0, etc."
     validations:
       required: false
   - type: dropdown
@@ -49,9 +57,12 @@ body:
       label: Which browsers are you seeing this problem on?
       multiple: true
       options:
-        - Firefox
         - Chrome
-        - Safari
+        - Firefox
         - Microsoft Edge
+        - Opera
+        - Safari
+        - Vivaldi
+        - Other (please specify)
     validations:
       required: false

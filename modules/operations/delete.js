@@ -131,8 +131,8 @@ export function operationDelete(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.delete.' + disable + '.' + multi) :
-            t('operations.delete.description.' + multi);
+            t.append('operations.delete.' + disable + '.' + multi) :
+            t.append('operations.delete.description.' + multi);
     };
 
 
@@ -145,7 +145,7 @@ export function operationDelete(context, selectedIDs) {
 
     operation.id = 'delete';
     operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
-    operation.title = t('operations.delete.title');
+    operation.title = t.append('operations.delete.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

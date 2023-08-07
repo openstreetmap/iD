@@ -12,7 +12,7 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, continui
         .on('rejectedSelfIntersection.modeDrawLine', function() {
             context.ui().flash
                 .iconName('#iD-icon-no')
-                .label(t.html('self_intersection.error.lines'))();
+                .label(t.append('self_intersection.error.lines'))();
         });
 
     mode.wayID = wayID;

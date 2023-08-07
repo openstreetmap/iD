@@ -11,7 +11,7 @@ export function uiToolSave(context) {
 
     var tool = {
         id: 'save',
-        label: t.html('save.title')
+        label: t.append('save.title')
     };
 
     var button = null;
@@ -57,7 +57,7 @@ export function uiToolSave(context) {
 
         if (tooltipBehavior) {
             tooltipBehavior
-                .title(t.html(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
+                .title(() => t.append(_numChanges > 0 ? 'save.help' : 'save.no_changes'))
                 .keys([key]);
         }
 
@@ -75,7 +75,7 @@ export function uiToolSave(context) {
     tool.render = function(selection) {
         tooltipBehavior = uiTooltip()
             .placement('bottom')
-            .title(t.html('save.no_changes'))
+            .title(() => t.append('save.no_changes'))
             .keys([key])
             .scrollContainer(context.container().select('.top-toolbar'));
 
@@ -99,7 +99,7 @@ export function uiToolSave(context) {
                         .duration(2000)
                         .iconName('#iD-icon-save')
                         .iconClass('disabled')
-                        .label(t.html('save.no_changes'))();
+                        .label(t.append('save.no_changes'))();
                 }
                 lastPointerUpType = null;
             })

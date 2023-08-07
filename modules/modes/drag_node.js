@@ -138,7 +138,7 @@ export function modeDragNode(context) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t('modes.drag_node.connected_to_hidden'))();
+                    .label(t.append('modes.drag_node.connected_to_hidden'))();
             }
             return drag.cancel();
         }
@@ -239,7 +239,7 @@ export function modeDragNode(context) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t.html('operations.connect.' + isInvalid,
+                    .label(t.append('operations.connect.' + isInvalid,
                         { relation: presetManager.item('type/restriction').name() }
                     ))();
             }
@@ -248,7 +248,7 @@ export function modeDragNode(context) {
             context.ui().flash
                 .duration(3000)
                 .iconName('#iD-icon-no')
-                .label(t.html('self_intersection.error.' + errorID))();
+                .label(t.append('self_intersection.error.' + errorID))();
         } else {
             if (nope) {   // about to un-nope, remove hint
                 context.ui().flash

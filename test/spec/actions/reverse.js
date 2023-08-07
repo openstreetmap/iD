@@ -70,6 +70,18 @@ describe('iD.actionReverse', function () {
             expect(graph.entity(node1.id).tags).to.eql({ 'direction': '94.5' });
         });
 
+        it('reverses directions with multiple semicolon separated values', function () {
+            var node1 = iD.osmNode({ tags: { 'direction': 'N;90' } });
+            var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+            expect(graph.entity(node1.id).tags).to.eql({ 'direction': 'S;270' });
+        });
+
+        it('reverses directions with multiple semicolon separated values, preserves non-directional part', function () {
+            var node1 = iD.osmNode({ tags: { 'direction': '0;error' } });
+            var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+            expect(graph.entity(node1.id).tags).to.eql({ 'direction': '180;error' });
+        });
+
         it('preserves non-directional tags', function () {
             var node1 = iD.osmNode({ tags: { 'traffic_sign': 'maxspeed' } });
             var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));

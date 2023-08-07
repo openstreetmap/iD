@@ -1,4 +1,4 @@
-import { locationManager } from '../core/locations';
+import { locationManager } from '../core/LocationManager';
 import { utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
 
@@ -75,7 +75,7 @@ export function presetCollection(collection) {
             if (strings.some(s => s === value)) {
               return strings.find(s => s === value);
             } else {
-              return strings.find(s => s.includes(value));
+              return strings.filter(s => s.includes(value)).sort((a,b) => a.length - b.length)[0];
             }
           };
           aCompare = findMatchingAlias([aCompare].concat(a[aliasesProp]()));
@@ -101,8 +101,8 @@ export function presetCollection(collection) {
 
     let pool = _this.collection;
     if (Array.isArray(loc)) {
-      const validLocations = locationManager.locationsAt(loc);
-      pool = pool.filter(a => !a.locationSetID || validLocations[a.locationSetID]);
+      const validHere = locationManager.locationSetsAt(loc);
+      pool = pool.filter(a => !a.locationSetID || validHere[a.locationSetID]);
     }
 
     const searchable = pool.filter(a => a.searchable !== false && a.suggestion !== true);

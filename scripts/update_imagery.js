@@ -4,8 +4,11 @@ let sources = require('editor-layer-index/imagery.json');
 const prettyStringify = require('json-stringify-pretty-compact');
 
 if (fs.existsSync('./data/manual_imagery.json')) {
+  const manualImagery = JSON.parse(fs.readFileSync('./data/manual_imagery.json'));
   // we can include additional imagery sources that aren't in the index
-  sources = sources.concat(JSON.parse(fs.readFileSync('./data/manual_imagery.json')));
+  sources = sources
+    .filter(source => !manualImagery.find(manualSource => manualSource.id === source.id))
+    .concat(manualImagery);
 }
 
 let imagery = [];
@@ -18,15 +21,20 @@ cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 const discard = {
   'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
   'osmfr': true,                        // 'OpenStreetMap (French Style)'
+  'osmfr-basque': true,                 // 'OpenStreetMap (Basque Style)'
+  'osmfr-breton': true,                 // 'OpenStreetMap (Breton Style)'
+  'osmfr-occitan': true,                // 'OpenStreetMap (Occitan Style)'
   'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
   'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
   'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
   'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
   'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
 
+  'cyclosm': true,                      // 'CyclOSM'
   'hike_n_bike': true,                  // 'Hike & Bike'
   'landsat': true,                      // 'Landsat'
   'skobbler': true,                     // 'Skobbler'
+  'stamen-terrain-background': true,    // 'Stamen Terrain'
   'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
   'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
   'tf-landscape': true,                 // 'Thunderforest Landscape'
@@ -60,7 +68,10 @@ const discard = {
   'OSM_Inspector-Routing': true,
   'OSM_Inspector-Tagging': true,
 
-  'EOXAT2018CLOUDLESS': true
+  'EOXAT2018CLOUDLESS': true,
+  'EOXAT2019CLOUDLESS': true,
+  'EOXAT2020CLOUDLESS': true,
+  'EOXAT2021CLOUDLESS': true
 };
 
 const supportedWMSProjections = [

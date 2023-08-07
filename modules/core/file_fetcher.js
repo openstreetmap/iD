@@ -1,5 +1,6 @@
 import parseVersion from 'vparse';
-// Double check this resolves to iD's `package.json`
+import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
+
 import packageJSON from '../../package.json';
 
 let _mainFileFetcher = coreFileFetcher(); // singleton
@@ -12,31 +13,33 @@ export { _mainFileFetcher as fileFetcher };
 export function coreFileFetcher() {
   const ociVersion = packageJSON.dependencies['osm-community-index'] || packageJSON.devDependencies['osm-community-index'];
   const v = parseVersion(ociVersion);
-  const vMinor = `${v.major}.${v.minor}`;
+  const ociVersionMinor = `${v.major}.${v.minor}`;
+  const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
 
   let _this = {};
   let _inflight = {};
   let _fileMap = {
     'address_formats': 'data/address_formats.min.json',
-    'deprecated': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/deprecated.min.json',
-    'discarded': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/discarded.min.json',
     'imagery': 'data/imagery.min.json',
     'intro_graph': 'data/intro_graph.min.json',
     'keepRight': 'data/keepRight.min.json',
     'languages': 'data/languages.min.json',
     'locales': 'locales/index.min.json',
-    'oci_defaults': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/defaults.min.json`,
-    'oci_features': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/featureCollection.min.json`,
-    'oci_resources': `https://cdn.jsdelivr.net/npm/osm-community-index@${vMinor}/dist/resources.min.json`,
-    'preset_categories': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_categories.min.json',
-    'preset_defaults': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/preset_defaults.min.json',
-    'preset_fields': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/fields.min.json',
-    'preset_presets': 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/presets.min.json',
     'phone_formats': 'data/phone_formats.min.json',
     'qa_data': 'data/qa_data.min.json',
     'shortcuts': 'data/shortcuts.min.json',
     'territory_languages': 'data/territory_languages.min.json',
-    'wmf_sitematrix': 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@0.1/wikipedia.min.json'
+    'oci_defaults': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/defaults.min.json',
+    'oci_features': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/featureCollection.min.json',
+    'oci_resources': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/resources.min.json',
+    'presets_package': presetsCdnUrl.replace('{presets_version}', presetsVersion) + 'package.json',
+    'deprecated': presetsCdnUrl + 'dist/deprecated.min.json',
+    'discarded': presetsCdnUrl + 'dist/discarded.min.json',
+    'preset_categories': presetsCdnUrl + 'dist/preset_categories.min.json',
+    'preset_defaults': presetsCdnUrl + 'dist/preset_defaults.min.json',
+    'preset_fields': presetsCdnUrl + 'dist/fields.min.json',
+    'preset_presets': presetsCdnUrl + 'dist/presets.min.json',
+    'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.1') + 'wikipedia.min.json'
   };
 
   let _cachedData = {};
@@ -57,6 +60,18 @@ export function coreFileFetcher() {
       return Promise.reject(`Unknown data file for "${which}"`);
     }
 
+    if (url.includes('{presets_version}')) {
+      return _this.get('presets_package')
+        .then(result => {
+          const presetsVersion = result.version;
+          return getUrl(url.replace('{presets_version}', presetsVersion), which);
+        });
+    } else {
+      return getUrl(url);
+    }
+  };
+
+  function getUrl(url, which) {
     let prom = _inflight[url];
     if (!prom) {
       _inflight[url] = prom = fetch(url)
@@ -82,7 +97,7 @@ export function coreFileFetcher() {
     }
 
     return prom;
-  };
+  }
 
 
   // Accessor for the file map

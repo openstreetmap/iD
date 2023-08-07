@@ -6,7 +6,7 @@ export function uiFlash(context) {
     var _duration = 2000;
     var _iconName = '#iD-icon-no';
     var _iconClass = 'disabled';
-    var _label = '';
+    var _label = s => s.text('');
 
     function flash() {
         if (_flashTimer) {
@@ -64,7 +64,7 @@ export function uiFlash(context) {
         content
             .selectAll('.flash-text')
             .attr('class', 'flash-text')
-            .html(_label);
+            .call(_label);
 
 
         _flashTimer = d3_timeout(function() {
@@ -89,7 +89,11 @@ export function uiFlash(context) {
 
     flash.label = function(_) {
         if (!arguments.length) return _label;
-        _label = _;
+        if (typeof _ !== 'function') {
+            _label = selection => selection.text(_);
+        } else {
+            _label = selection => selection.text('').call(_);
+        }
         return flash;
     };
 

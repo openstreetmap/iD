@@ -447,7 +447,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t.html('operations.follow.error.needs_more_initial_nodes'))();
+                    .label(t.append('operations.follow.error.needs_more_initial_nodes'))();
                 return;
             }
 
@@ -461,7 +461,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t.html(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
+                    .label(t.append(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
                 return;
             }
 
@@ -472,7 +472,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
-                    .label(t.html(`operations.follow.error.intersection_of_different_ways.${featureType}`))();
+                    .label(t.append(`operations.follow.error.intersection_of_different_ways.${featureType}`))();
                 return;
             }
 
@@ -501,7 +501,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             context.ui().flash
                 .duration(4000)
                 .iconName('#iD-icon-no')
-                .label(t.html('operations.follow.error.unknown'))();
+                .label(t.append('operations.follow.error.unknown'))();
         }
     }
 

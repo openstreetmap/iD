@@ -120,8 +120,8 @@ export function operationDowngrade(context, selectedIDs) {
     operation.tooltip = function () {
         var disable = operation.disabled();
         return disable ?
-            t('operations.downgrade.' + disable + '.' + _multi) :
-            t('operations.downgrade.description.' + _downgradeType);
+            t.append('operations.downgrade.' + disable + '.' + _multi) :
+            t.append('operations.downgrade.description.' + _downgradeType);
     };
 
 
@@ -138,7 +138,7 @@ export function operationDowngrade(context, selectedIDs) {
 
     operation.id = 'downgrade';
     operation.keys = [uiCmd('⌫')];
-    operation.title = t('operations.downgrade.title');
+    operation.title = t.append('operations.downgrade.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
 

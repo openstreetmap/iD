@@ -51,8 +51,13 @@ export function uiDisclosure(context, key, expandedDefault) {
             .attr('aria-expanded', _expanded)
             .classed('expanded', _expanded);
 
-        hideToggle.selectAll('.hide-toggle-text')
-            .html(_label());
+        const label = _label();
+        const labelSelection = hideToggle.selectAll('.hide-toggle-text');
+        if (typeof label !== 'function') {
+            labelSelection.text(_label());
+        } else {
+            labelSelection.text('').call(label);
+        }
 
         hideToggle.selectAll('.hide-toggle-icon')
             .attr('xlink:href', _expanded ? '#iD-icon-down'

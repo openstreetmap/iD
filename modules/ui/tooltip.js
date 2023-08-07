@@ -45,6 +45,9 @@ export function uiTooltip(klass) {
         var text = _title.apply(this, arguments);
         var keys = _keys.apply(this, arguments);
 
+        var headingCallback = typeof heading === 'function' ? heading : s => s.text(heading);
+        var textCallback = typeof text === 'function' ? text : s => s.text(text);
+
         return function(selection) {
 
             var headingSelect = selection
@@ -58,7 +61,8 @@ export function uiTooltip(klass) {
                 .append('div')
                 .attr('class', 'tooltip-heading')
                 .merge(headingSelect)
-                .html(heading);
+                .text('')
+                .call(headingCallback);
 
             var textSelect = selection
                 .selectAll('.tooltip-text')
@@ -71,7 +75,8 @@ export function uiTooltip(klass) {
                 .append('div')
                 .attr('class', 'tooltip-text')
                 .merge(textSelect)
-                .html(text);
+                .text('')
+                .call(textCallback);
 
             var keyhintWrap = selection
                 .selectAll('.keyhint-wrap')
@@ -95,7 +100,7 @@ export function uiTooltip(klass) {
                 .enter()
                 .append('kbd')
                 .attr('class', 'shortcut')
-                .html(function(d) {
+                .text(function(d) {
                     return d;
                 });
         };

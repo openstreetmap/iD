@@ -22,8 +22,8 @@ export function behaviorBreathe() {
 
 
     function ratchetyInterpolator(a, b, steps, units) {
-        a = parseFloat(a);
-        b = parseFloat(b);
+        a = Number(a);
+        b = Number(b);
         var sample = d3_scaleQuantize()
             .domain([0, 1])
             .range(d3_quantize(d3_interpolateNumber(a, b), steps));
@@ -92,11 +92,11 @@ export function behaviorBreathe() {
 
                 // determine base opacity and width
                 if (tag === 'circle') {
-                    opacity = parseFloat(s.style('fill-opacity') || 0.5);
-                    width = parseFloat(s.style('r') || 15.5);
+                    opacity = Number(s.style('fill-opacity') || 0.5);
+                    width = Number(s.style('r') || 15.5);
                 } else {
-                    opacity = parseFloat(s.style('stroke-opacity') || 0.7);
-                    width = parseFloat(s.style('stroke-width') || 10);
+                    opacity = Number(s.style('stroke-opacity') || 0.7);
+                    width = Number(s.style('stroke-width') || 10);
                 }
 
                 // calculate from/to interpolation params..

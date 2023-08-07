@@ -75,13 +75,20 @@ export function rendererBackgroundSource(data) {
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
+    };
+
+
+    source.hasDescription = function() {
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
+        return descriptionText !== '';
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
     };
 
 
@@ -496,8 +503,8 @@ rendererBackgroundSource.Esri = function(data) {
                     vintage: vintage,
                     source: clean(result.NICE_NAME),
                     description: clean(result.NICE_DESC),
-                    resolution: clean(+parseFloat(result.SRC_RES).toFixed(4)),
-                    accuracy: clean(+parseFloat(result.SRC_ACC).toFixed(4))
+                    resolution: clean(+Number(result.SRC_RES).toFixed(4)),
+                    accuracy: clean(+Number(result.SRC_ACC).toFixed(4))
                 };
 
                 // append units - meters
@@ -536,7 +543,7 @@ rendererBackgroundSource.None = function() {
 
 
     source.label = function() {
-        return t.html('background.none');
+        return t.append('background.none');
     };
 
 
@@ -563,7 +570,7 @@ rendererBackgroundSource.Custom = function(template) {
     };
 
     source.label = function() {
-        return t.html('background.custom');
+        return t.append('background.custom');
     };
 
 

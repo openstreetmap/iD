@@ -60,8 +60,8 @@ export function operationContinue(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.continue.' + disable) :
-            t('operations.continue.description');
+            t.append('operations.continue.' + disable) :
+            t.append('operations.continue.description');
     };
 
 
@@ -72,7 +72,7 @@ export function operationContinue(context, selectedIDs) {
 
     operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
-    operation.title = t('operations.continue.title');
+    operation.title = t.append('operations.continue.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

@@ -11,6 +11,7 @@ let referencedScripts = [];
 
 function getLangNamesInNativeLang() {
   // manually add languages we want that aren't in CLDR
+  // see for example https://github.com/openstreetmap/iD/pull/9241/
   let unordered = {
     'oc': {
       nativeName: 'Occitan'
@@ -30,13 +31,43 @@ function getLangNamesInNativeLang() {
     'zh_pinyin': {
       base: 'zh',
       script: 'Latn'
+    },
+    'bft': {
+      nativeName: 'بلتی'
+    },
+    'bha': {
+      nativeName: 'भरीयाटी'
+    },
+    'brh': {
+      nativeName: 'براہوئی'
+    },
+    'kls': {
+      nativeName: 'Kal\'as\'amondr'
+    },
+    'pnb': {
+      nativeName: 'پنجابی'
+    },
+    'scl': {
+      nativeName: 'ݜݨیاٗ'
+    },
+    'shg': {
+      nativeName: 'хуг̌ну̊н зив'
+    },
+    'skr': {
+      nativeName: 'سرائیکی'
+    },
+    'trw': {
+      nativeName: 'توروالی'
+    },
+    'wbl': {
+      nativeName: 'وخی'
     }
   };
 
   let langDirectoryPaths = fs.readdirSync(cldrMainDir);
   langDirectoryPaths.forEach(code => {
     let languagesPath = `${cldrMainDir}${code}/languages.json`;
-    //if (!fs.existsSync(languagesPath)) return;
+    if (!fs.existsSync(languagesPath)) return;
     let languageObj = JSON.parse(fs.readFileSync(languagesPath, 'utf8')).main[code];
     let identity = languageObj.identity;
 
@@ -68,6 +99,10 @@ function getLangNamesInNativeLang() {
     if (codesToSkip.indexOf(code) !== -1) return;
     unordered[code] = {};
   });
+
+  // delete codes which should not be used
+  delete unordered['pa-Arab']; // https://github.com/openstreetmap/iD/pull/9241/
+  delete unordered['pa-Guru']; // - " -
 
   let ordered = {};
   Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);

@@ -1,24 +1,27 @@
 [main]
 host = https://www.transifex.com
-minimum_perc = 1
 
-[id-editor.community]
+[o:openstreetmap:p:id-editor:r:community]
 file_filter = .tx/tmp/community/<lang>.yaml
+source_file = .tx/tmp/community/en.yaml
 source_lang = en
-type = YAML
+type        = YAML
 
-[id-editor.core]
+[o:openstreetmap:p:id-editor:r:core]
 file_filter = .tx/tmp/core/<lang>.yaml
 source_file = data/core.yaml
 source_lang = en
-type = YAML
+type        = YAML
 
-[id-editor.presets]
-file_filter = .tx/tmp/presets/<lang>.yaml
-source_lang = en
-type = YAML
-
-[id-editor.imagery]
+[o:openstreetmap:p:id-editor:r:imagery]
 file_filter = .tx/tmp/imagery/<lang>.yaml
+source_file = .tx/tmp/imagery/en.yaml
 source_lang = en
-type = YAML
+type        = YAML
+
+[o:openstreetmap:p:id-editor:r:presets]
+file_filter = .tx/tmp/presets/<lang>.yaml
+source_file = .tx/tmp/presets/en.yaml
+source_lang = en
+type        = YAML
+

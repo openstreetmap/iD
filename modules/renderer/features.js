@@ -24,7 +24,8 @@ export function rendererFeatures(context) {
         'tertiary_link': true,
         'residential': true,
         'unclassified': true,
-        'living_street': true
+        'living_street': true,
+        'busway': true
     };
 
     var service_roads = {
@@ -69,6 +70,11 @@ export function rendererFeatures(context) {
     }
 
 
+    /**
+     * @param {string} k
+     * @param {(tags: Record<string, string>, geometry: string) => boolean} filter
+     * @param {?number} max
+     */
     function defineRule(k, filter, max) {
         var isEnabled = true;
 
@@ -133,9 +139,13 @@ export function rendererFeatures(context) {
             !_rules.pistes.filter(tags);
     });
 
-    defineRule('boundaries', function isBoundary(tags) {
+    defineRule('boundaries', function isBoundary(tags, geometry) {
+        // This rule applies if the object has no interesting tags, and if either:
+        //   (a) is a way having a `boundary=*` tag, or
+        //   (b) is a relation of `type=boundary`.
         return (
-            !!tags.boundary
+            (geometry === 'line' && !!tags.boundary) ||
+            (geometry === 'relation' && tags.type === 'boundary')
         ) && !(
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||

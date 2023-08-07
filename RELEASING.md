@@ -20,6 +20,7 @@ on the iD project, and then create this file with contents like
 #### Update `develop` branch
 ```bash
 $  git checkout develop
+$  rm package-lock.json
 $  rm -rf node_modules/editor-layer-index/
 $  npm install
 $  npm run imagery
@@ -30,7 +31,7 @@ $  git add . && git commit -m 'npm run translations'
 ```
 
 - Check and finalize `CHANGELOG.md`
-- Set release version number in `modules/core/context.js` and `package.json`
+- Set release version number in `package.json`
 
 ```bash
 $  git add . && git commit -m 'vA.B.C'
@@ -56,7 +57,7 @@ $  git push origin -f release vA.B.C
 $  git checkout develop
 ```
 
-- Increment version number and add `-dev` suffix in `modules/core/context.js` and `package.json`, e.g. `2.18.5-dev`
+- Increment version number and add `-dev` suffix in `package.json`, e.g. `2.25.0-dev`
 
 ```bash
 $  git add . && git commit -m 'Set development version number'
@@ -92,7 +93,7 @@ $  rm -rf vendor/assets/iD/* && vendorer
 
 ```bash
 $  git add . && git commit -m 'Update to iD vA.B.C'
-$  git push osmlab
+$  git push osmlab iD-A.B.C
 ```
 
-- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:master) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment
+- [Open a pull request](https://github.com/openstreetmap/openstreetmap-website/compare/master...osmlab:) using the [markdown text from the changelog](https://raw.githubusercontent.com/openstreetmap/iD/release/CHANGELOG.md) as the comment

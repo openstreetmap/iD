@@ -119,8 +119,8 @@ export function operationOrthogonalize(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.orthogonalize.' + disable + '.' + _amount) :
-            t('operations.orthogonalize.description.' + _type + '.' + _amount);
+            t.append('operations.orthogonalize.' + disable + '.' + _amount) :
+            t.append('operations.orthogonalize.description.' + _type + '.' + _amount);
     };
 
 
@@ -131,7 +131,7 @@ export function operationOrthogonalize(context, selectedIDs) {
 
     operation.id = 'orthogonalize';
     operation.keys = [t('operations.orthogonalize.key')];
-    operation.title = t('operations.orthogonalize.title');
+    operation.title = t.append('operations.orthogonalize.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

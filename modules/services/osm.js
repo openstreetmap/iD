@@ -10,21 +10,24 @@ import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
 
+import { osmApiConnections } from '../../config/id.js';
+
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 
-var urlroot = 'https://www.openstreetmap.org';
+var urlroot = osmApiConnections[0].url;
 var redirectPath = window.location.origin + window.location.pathname;
 var oauth = osmAuth({
     url: urlroot,
-    client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
-    client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q',
+    client_id: osmApiConnections[0].client_id,
+    client_secret: osmApiConnections[0].client_secret,
     scope: 'read_prefs write_prefs write_api read_gpx write_notes',
     redirect_uri: redirectPath + 'land.html',
     loading: authLoading,
     done: authDone
 });
+var _apiConnections = osmApiConnections;
 
 // hardcode default block of Google Maps
 var _imageryBlocklists = [/.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/];
@@ -83,7 +86,7 @@ function abortUnwantedRequests(cache, visibleTiles) {
 function getLoc(attrs) {
     var lon = attrs.lon && attrs.lon.value;
     var lat = attrs.lat && attrs.lat.value;
-    return [parseFloat(lon), parseFloat(lat)];
+    return [Number(lon), Number(lat)];
 }
 
 
@@ -205,7 +208,7 @@ var jsonparsers = {
             timestamp: obj.timestamp,
             user: obj.user,
             uid: obj.uid && obj.uid.toString(),
-            loc: [parseFloat(obj.lon), parseFloat(obj.lat)],
+            loc: [Number(obj.lon), Number(obj.lat)],
             tags: obj.tags
         });
     },
@@ -1273,6 +1276,14 @@ export default {
                 }
             }, options);
         }
+    },
+
+
+    /* connection options for source switcher (optional) */
+    apiConnections: function(val) {
+        if (!arguments.length) return _apiConnections;
+        _apiConnections = val;
+        return this;
     },
 
 
