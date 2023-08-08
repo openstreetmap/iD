@@ -1,7 +1,7 @@
+import { select as d3_select } from 'd3-selection';
 import exifr from 'exifr';
 
 import { utilDetect } from '../util/detect';
-import { select as d3_select } from 'd3-selection';
 import { geoExtent } from '../geo';
 import { isArray, isNumber } from 'lodash-es';
 
@@ -12,7 +12,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
     var detected = utilDetect();
     let layer = d3_select(null);
     var _fileList;
-    var _imageList = [];
+    var _photos = [];
+    var _idAutoinc = 0;
 
     function init() {
         if (_initialized) return;  // run once
@@ -45,7 +46,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
     // opens the image at bottom left
-    function click(d3_event, image) {
+    function click(d3_event, image, zoomTo) {
         // removes old div(s), if any
         closePhotoViewer();
 
@@ -71,7 +72,9 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
 
         // centers the map with image location
-        context.map().centerEase(image.loc);
+        if (zoomTo) {
+            context.map().centerEase(image.loc);
+        }
     }
 
 
@@ -127,7 +130,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     function drawPhotos(selection) {
         layer = selection.selectAll('.layer-local-photos')
-            .data(_fileList ? [0] : []);
+            .data(_photos ? [0] : []);
 
         layer.exit()
             .remove();
@@ -143,20 +146,18 @@ export function svgLocalPhotos(projection, context, dispatch) {
         layer = layerEnter
             .merge(layer);
 
-        // if (_imageList.length !== 0) {
-        // if (_fileList && _fileList.length !== 0) {
-        if (_imageList && _imageList.length !== 0) {
-            display_markers(_imageList);
+        if (_photos && _photos.length !== 0) {
+            display_markers(_photos);
         }
     }
 
 
     /**
      * Reads and parses files
-     * @param {Array<object>} arrayFiles - Holds array of file - [file_1, file_2, ...]
+     * @param {Array<object>} files - Holds array of file - [file_1, file_2, ...]
      */
-    async function readmultifiles(arrayFiles) {
-        const filePromises = arrayFiles.map((file, i) => {
+    async function readmultifiles(files) {
+        const filePromises = files.map(file => {
             // Return a promise per file
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -167,8 +168,12 @@ export function svgLocalPhotos(projection, context, dispatch) {
                     try {
                         const response = await exifr.parse(file)
                         .then(output => {
-                            _imageList.push({
-                                id: i,
+                            if (_photos.find(i => i.name === file.name && i.src === reader.result)) {
+                                // skip if already loaded photos
+                                return;
+                            }
+                            _photos.push({
+                                id: _idAutoinc++,
                                 name: file.name,
                                 src: reader.result,
                                 loc: [output.longitude, output.latitude]
@@ -177,10 +182,12 @@ export function svgLocalPhotos(projection, context, dispatch) {
                         // Resolve the promise with the response value
                         resolve(response);
                     } catch (err) {
+                        console.error(err); // eslint-disable-line no-console
                         reject(err);
                     }
                 };
                 reader.onerror = (error) => {
+                    console.error(err); // eslint-disable-line no-console
                     reject(error);
                 };
 
@@ -188,15 +195,14 @@ export function svgLocalPhotos(projection, context, dispatch) {
         });
 
         // Wait for all promises to be resolved
-        await Promise.all(filePromises);
+        await Promise.allSettled(filePromises);
+        _photos = _photos.sort((a, b) => a.id - b.id);
         dispatch.call('change');
     }
 
     drawPhotos.setFile = function(fileList) {
         // read and parse asynchronously
         readmultifiles(Array.from(fileList));
-
-        dispatch.call('change');
         return this;
     };
 
@@ -219,8 +225,20 @@ export function svgLocalPhotos(projection, context, dispatch) {
         return this;
     };
 
+    drawPhotos.getPhotos = function() {
+        return _photos;
+    };
+
+    drawPhotos.removePhoto = function(id) {
+        _photos = _photos.filter(i => i.id !== id);
+        dispatch.call('change');
+        return _photos;
+    };
+
+    drawPhotos.openPhoto = click;
+
     drawPhotos.fitZoom = function() {
-        let extent = _imageList
+        let extent = _photos
             .map(image => image.loc)
             .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]))
             .map(l => geoExtent(l, l))
@@ -268,7 +286,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     };
 
     drawPhotos.hasData = function() {
-        return isArray(_imageList) && _imageList.length > 0;
+        return isArray(_photos) && _photos.length > 0;
     };
 
 

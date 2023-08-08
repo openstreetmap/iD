@@ -292,7 +292,11 @@ export function uiSectionRawTagEditor(id, context) {
             });
 
         items.selectAll('button.remove')
-            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', removeTag);  // 'click' fires too late - #5878
+            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
+                (d3_event, d) => {
+                    if (d3_event.button !== 0) return;
+                    removeTag(d3_event, d);
+                });
 
     }
 

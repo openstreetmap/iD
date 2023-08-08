@@ -390,7 +390,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('button')
             .attr('class', 'zoom-to-data')
             .call(uiTooltip()
-                .title(() => t.append('map_data.layers.custom.zoom'))
+                .title(() => t.append('local_photos.zoom'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function(d3_event) {
@@ -427,9 +427,7 @@ export function uiSectionPhotoOverlays(context) {
     function localPhotosChanged(d) {
         var localPhotosLayer = layers.layer('local-photos');
 
-        if (d && d.fileList) {
-            localPhotosLayer.fileList(d.fileList);
-        }
+        localPhotosLayer.fileList(d);
     }
 
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
