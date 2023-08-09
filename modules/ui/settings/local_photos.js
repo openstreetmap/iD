@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select } from 'd3-selection';
 import { isArray, isNumber } from 'lodash-es';
 
 import { t } from '../../core/localizer';
@@ -49,7 +48,7 @@ export function uiSettingsLocalPhotos(context) {
             .on('change', function(d3_event) {
                 var files = d3_event.target.files;
                 if (files && files.length) {
-                    previews
+                    photoList
                         .select('ul')
                         .append('li')
                         .classed('placeholder', true)
@@ -64,20 +63,20 @@ export function uiSettingsLocalPhotos(context) {
             .classed('button', true)
             .call(t.append('local_photos.file.label'));
 
-        const previews = modal.select('.modal-section.message-text .local-photos')
+        const photoList = modal.select('.modal-section.message-text .local-photos')
             .append('div')
             .append('div')
-            .classed('preview-local-photos', true)
+            .classed('list-local-photos', true);
 
-        previews
+        photoList
             .append('ul');
 
-        updatePreviews(previews.select('ul'));
+        updatePhotoList(photoList.select('ul'));
 
-        context.layers().on('change', () => updatePreviews(previews.select('ul')));
+        context.layers().on('change', () => updatePhotoList(photoList.select('ul')));
     }
 
-    function updatePreviews(container) {
+    function updatePhotoList(container) {
         function locationUnavailable(d) {
             return !(isArray(d.loc) && isNumber(d.loc[0]) && isNumber(d.loc[1]));
         }
@@ -132,7 +131,7 @@ export function uiSettingsLocalPhotos(context) {
         selection.select('button.remove')
             .on('click', (d3_event, d) => {
                 photoLayer.removePhoto(d.id);
-                updatePreviews(container);
+                updatePhotoList(container);
             });
     }
 

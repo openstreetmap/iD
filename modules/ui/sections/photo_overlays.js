@@ -398,7 +398,6 @@ export function uiSectionPhotoOverlays(context) {
 
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
-                //TODO
                 photoLayer.fitZoom();
             })
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));

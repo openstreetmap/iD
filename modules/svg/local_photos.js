@@ -69,18 +69,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         return planePhotoFrame.init(context, viewerEnter)
             .then(planePhotoFrame => {
                 _photoFrame = planePhotoFrame;
-                //_photoFrame.event.on('viewerChanged', () => …);
             });
-    }
-
-    function closePhotoViewer() {
-        const viewer = context.container().select('.photoviewer');
-        if (!viewer.empty()) viewer.datum(null);
-
-        viewer
-            .classed('hide', true)
-            .selectAll('.photo-wrapper')
-            .classed('hide', true);
     }
 
     // opens the image at bottom left
@@ -148,7 +137,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .append('g')
             .attr('class', 'viewfield-group')
             .on('mouseenter', (d3_event, d) => setStyles(d))
-            .on('mouseleave', (d3_event, d) => setStyles(null))
+            .on('mouseleave', () => setStyles(null))
             .on('click', click);
 
         groupsEnter
@@ -235,7 +224,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
         for (const file of files) {
             try {
-                const exifData = await exifr.parse(file);
+                const exifData = await exifr.parse(file); // eslint-disable-line no-await-in-loop
                 const photo = {
                     id: _idAutoinc++,
                     name: file.name,
@@ -249,8 +238,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 if (sameName.length === 0) {
                     _photos.push(photo);
                 } else {
-                    const thisContent = await photo.getSrc();
-                    const sameNameContent = await Promise.allSettled(sameName.map(i => i.getSrc()));
+                    const thisContent = await photo.getSrc(); // eslint-disable-line no-await-in-loop
+                    const sameNameContent = await Promise.allSettled(sameName.map(i => i.getSrc())); // eslint-disable-line no-await-in-loop
                     if (!sameNameContent.some(i => i.value === thisContent)) {
                         _photos.push(photo);
                     }

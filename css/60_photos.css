@@ -489,7 +489,7 @@ label.streetside-hires {
     margin-right: 20px;
 }
 
-.preview-local-photos {
+.list-local-photos {
     max-height: 40vh;
     overflow-y: scroll;
     overflow-x: auto;
@@ -498,16 +498,16 @@ label.streetside-hires {
     margin-left: -100px;
     padding-left: 100px;
 }
-.preview-local-photos::-webkit-scrollbar {
+.list-local-photos::-webkit-scrollbar {
     border-left: none;
 }
-.preview-local-photos li {
+.list-local-photos li {
     list-style: none;
     display: flex;
     justify-content: space-between;
     height: 30px;
 }
-.preview-local-photos span.filename {
+.list-local-photos span.filename {
     display: block;
     width: 100%;
     white-space: nowrap;
@@ -519,39 +519,35 @@ label.streetside-hires {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
-.preview-local-photos li:first-child span.filename {
+.list-local-photos li:first-child span.filename {
     border-top: 1px solid #ccc;
     border-top-left-radius: 4px;
 }
-.preview-local-photos li:first-child button {
+.list-local-photos li:first-child button {
     border-top: 1px solid #ccc;
 }
-.preview-local-photos li:first-child button.remove {
+.list-local-photos li:first-child button.remove {
     border-top-right-radius: 4px;
 }
-.preview-local-photos li:last-child span.filename {
+.list-local-photos li:last-child span.filename {
     border-bottom-left-radius: 4px;
 }
-.preview-local-photos li:last-child button.remove {
+.list-local-photos li:last-child button.remove {
     border-bottom-right-radius: 4px;
 }
-.preview-local-photos li.invalid span.filename {
+.list-local-photos li.invalid span.filename {
     color: #ccc;
 }
-/*.preview-local-photos li.invalid span.filename::before {
-    content: "! ";
-    color: red;
-}*/
-.preview-local-photos li.invalid button.zoom-to-data {
+.list-local-photos li.invalid button.zoom-to-data {
     display: none;
 }
-.preview-local-photos li button.no-geolocation {
+.list-local-photos li button.no-geolocation {
     display: none;
 }
-.preview-local-photos li.invalid button.no-geolocation {
+.list-local-photos li.invalid button.no-geolocation {
     display: block;
 }
-.preview-local-photos .placeholder div {
+.list-local-photos .placeholder div {
     display: block;
     height: 40px;
     width: 40px;
