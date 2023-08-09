@@ -473,6 +473,12 @@ label.streetside-hires {
 }
 
 /* local georeferenced photos */
+.layer-local-photos {
+    pointer-events: none;
+}
+.layer-local-photos .viewfield-group * {
+    fill: #ed00d9;
+}
 .local-photos {
     display: flex;
 }

@@ -8,6 +8,7 @@ import planePhotoFrame from '../services/plane_photo';
 
 var _initialized = false;
 var _enabled = false;
+const minViewfieldZoom = 16;
 
 export function svgLocalPhotos(projection, context, dispatch) {
     const detected = utilDetect();
@@ -147,15 +148,30 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .append('circle')
             .attr('dx', '0')
             .attr('dy', '0')
-            .attr('r', '20')
-            .attr('fill', 'red');
+            .attr('r', '6');
+
+        const showViewfields = context.map().zoom() >= minViewfieldZoom;
 
         const viewfields = markers.selectAll('.viewfield')
-            .data([0]);
+            .data(showViewfields ? [0] : []);
 
         viewfields.exit()
             .remove();
 
+        // viewfields may or may not be drawn...
+        // but if they are, draw below the circles
+        viewfields.enter()
+            .insert('path', 'circle')
+            .attr('class', 'viewfield')
+            .attr('transform', function() {
+                const d = this.parentNode.__data__;
+                return `rotate(${Math.round(d.direction ?? 0)},0,0),scale(1.5,1.5),translate(-8, -13)`;
+            })
+            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z')
+            .style('visibility', function() {
+                const d = this.parentNode.__data__;
+                return isNumber(d.direction) ? 'visible' : 'hidden';
+            });
     }
 
     function drawPhotos(selection) {
@@ -206,7 +222,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
                                 id: _idAutoinc++,
                                 name: file.name,
                                 src: reader.result,
-                                loc: [output.longitude, output.latitude]
+                                loc: [output.longitude, output.latitude],
+                                direction: output.GPSImgDirection
                             });
                         });
                         // Resolve the promise with the response value
