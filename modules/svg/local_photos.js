@@ -102,9 +102,12 @@ export function svgLocalPhotos(projection, context, dispatch) {
                     .text(image.name);
             }
 
-            _photoFrame
-                .selectPhoto({ image_path: image.src }, false)
-                .showPhotoFrame(viewerWrap);
+            _photoFrame.selectPhoto({ image_path: '' });
+            image.getSrc().then(src => {
+                _photoFrame
+                    .selectPhoto({ image_path: src })
+                    .showPhotoFrame(viewerWrap);
+            });
         });
 
         // centers the map with image location
@@ -215,54 +218,47 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
 
+    function readFileAsDataURL(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
     /**
      * Reads and parses files
      * @param {Array<object>} files - Holds array of file - [file_1, file_2, ...]
      */
     async function readmultifiles(files, callback) {
         const loaded = [];
-        const filePromises = files.map(file => {
-            // Return a promise per file
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                // converts image to base64
-                reader.readAsDataURL(file);
 
-                reader.onload = async () => {
-                    try {
-                        const response = await exifr.parse(file)
-                        .then(output => {
-                            const photo = {
-                                id: _idAutoinc++,
-                                name: file.name,
-                                src: reader.result,
-                                loc: [output.longitude, output.latitude],
-                                direction: output.GPSImgDirection
-                            };
-                            loaded.push(photo);
-                            if (!_photos.some(i => i.name === photo.name && i.src === photo.src)) {
-                                // only add photos which have not yet been parsed
-                                _photos.push(photo);
-                            }
-                        });
-                        // Resolve the promise with the response value
-                        resolve(response);
-                    } catch (err) {
-                        // skip files which are not a supported image file
-                        reject(err);
+        for (const file of files) {
+            try {
+                const exifData = await exifr.parse(file);
+                const photo = {
+                    id: _idAutoinc++,
+                    name: file.name,
+                    getSrc: () => readFileAsDataURL(file),
+                    file: file,
+                    loc: [exifData.longitude, exifData.latitude],
+                    direction: exifData.GPSImgDirection
+                };
+                loaded.push(photo);
+                const sameName = _photos.filter(i => i.name === photo.name);
+                if (sameName.length === 0) {
+                    _photos.push(photo);
+                } else {
+                    const thisContent = await photo.getSrc();
+                    const sameNameContent = await Promise.allSettled(sameName.map(i => i.getSrc()));
+                    if (!sameNameContent.some(i => i.value === thisContent)) {
+                        _photos.push(photo);
                     }
-                };
-                reader.onerror = (error) => {
-                    console.error(err); // eslint-disable-line no-console
-                    reject(error);
-                };
-
-            });
-        });
-
-        // Wait for all promises to be resolved
-        await Promise.allSettled(filePromises);
-        _photos = _photos.sort((a, b) => a.id - b.id);
+                }
+            } catch (err) {
+                // skip files which are not a supported image file
+            }
+        }
 
         if (typeof callback === 'function') callback(loaded);
         dispatch.call('change');
