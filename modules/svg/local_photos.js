@@ -83,6 +83,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     function click(d3_event, image, zoomTo) {
         ensureViewerLoaded(context).then(() => {
             const viewer = context.container().select('.photoviewer')
+                .datum(image)
                 .classed('hide', false);
 
             const viewerWrap = viewer.select('.local-photos-wrapper')
@@ -115,6 +116,16 @@ export function svgLocalPhotos(projection, context, dispatch) {
         return 'translate(' + svgpoint[0] + ',' + svgpoint[1] + ')';
     }
 
+    function setStyles(hovered) {
+        const viewer = context.container().select('.photoviewer');
+        const selected = viewer.empty() ? undefined : viewer.datum();
+
+        context.container().selectAll('.layer-local-photos .viewfield-group')
+            .classed('hovered', d => d.id === hovered?.id)
+            .classed('highlighted', d => d.id === hovered?.id || d.id === selected?.id)
+            .classed('currentView', d => d.id === selected?.id);
+    }
+
     // puts the image markers on the map
     function display_markers(imageList) {
         imageList = imageList.filter(image => isArray(image.loc) && isNumber(image.loc[0]) && isNumber(image.loc[1]));
@@ -129,6 +140,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
         const groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
+            .on('mouseenter', (d3_event, d) => setStyles(d))
+            .on('mouseleave', (d3_event, d) => setStyles(null))
             .on('click', click);
 
         groupsEnter
@@ -165,7 +178,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .attr('class', 'viewfield')
             .attr('transform', function() {
                 const d = this.parentNode.__data__;
-                return `rotate(${Math.round(d.direction ?? 0)},0,0),scale(1.5,1.5),translate(-8, -13)`;
+                return `rotate(${Math.round(d.direction ?? 0)},0,0),scale(1.5,1.5),translate(-8,-13)`;
             })
             .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z')
             .style('visibility', function() {
