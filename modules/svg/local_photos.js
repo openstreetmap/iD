@@ -3,7 +3,7 @@ import exifr from 'exifr';
 import { isArray, isNumber } from 'lodash-es';
 
 import { utilDetect } from '../util/detect';
-import { geoExtent } from '../geo';
+import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import planePhotoFrame from '../services/plane_photo';
 
 var _initialized = false;
@@ -35,7 +35,11 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawPhotos.fileList(d3_event.dataTransfer.files);
+                drawPhotos.fileList(d3_event.dataTransfer.files, loaded => {
+                    if (loaded.length > 0) {
+                        drawPhotos.fitZoom();
+                    }
+                });
             })
             .on('dragenter.svgLocalPhotos', over)
             .on('dragexit.svgLocalPhotos', over)
@@ -215,7 +219,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
      * Reads and parses files
      * @param {Array<object>} files - Holds array of file - [file_1, file_2, ...]
      */
-    async function readmultifiles(files) {
+    async function readmultifiles(files, callback) {
+        const loaded = [];
         const filePromises = files.map(file => {
             // Return a promise per file
             return new Promise((resolve, reject) => {
@@ -227,22 +232,23 @@ export function svgLocalPhotos(projection, context, dispatch) {
                     try {
                         const response = await exifr.parse(file)
                         .then(output => {
-                            if (_photos.find(i => i.name === file.name && i.src === reader.result)) {
-                                // skip if already loaded photos
-                                return;
-                            }
-                            _photos.push({
+                            const photo = {
                                 id: _idAutoinc++,
                                 name: file.name,
                                 src: reader.result,
                                 loc: [output.longitude, output.latitude],
                                 direction: output.GPSImgDirection
-                            });
+                            };
+                            loaded.push(photo);
+                            if (!_photos.some(i => i.name === photo.name && i.src === photo.src)) {
+                                // only add photos which have not yet been parsed
+                                _photos.push(photo);
+                            }
                         });
                         // Resolve the promise with the response value
                         resolve(response);
                     } catch (err) {
-                        console.error(err); // eslint-disable-line no-console
+                        // skip files which are not a supported image file
                         reject(err);
                     }
                 };
@@ -257,12 +263,14 @@ export function svgLocalPhotos(projection, context, dispatch) {
         // Wait for all promises to be resolved
         await Promise.allSettled(filePromises);
         _photos = _photos.sort((a, b) => a.id - b.id);
+
+        if (typeof callback === 'function') callback(loaded);
         dispatch.call('change');
     }
 
-    drawPhotos.setFile = function(fileList) {
+    drawPhotos.setFiles = function(fileList, callback) {
         // read and parse asynchronously
-        readmultifiles(Array.from(fileList));
+        readmultifiles(Array.from(fileList), callback);
         return this;
     };
 
@@ -271,17 +279,17 @@ export function svgLocalPhotos(projection, context, dispatch) {
      * Sets the fileList
      * @param {Object} fileList - The uploaded files. fileList is an object, not an array object
      * @param {Object} fileList.0 - A File - {name: "Das.png", lastModified: 1625064498536, lastModifiedDate: Wed Jun 30 2021 20:18:18 GMT+0530 (India Standard Time), webkitRelativePath: "", size: 859658, …}
+     * @param {Function} callback - A callback to be called after the photos have been loaded and parsed
      */
-    drawPhotos.fileList = function(fileList) {
+    drawPhotos.fileList = function(fileList, callback) {
         if (!arguments.length) return _fileList;
 
         _fileList = fileList;
 
         if (!fileList || !fileList.length) return this;
 
-        drawPhotos.setFile(_fileList);
+        drawPhotos.setFiles(_fileList, callback);
 
-        // TODO: when all photos are uploaded, zoom to see them all
         return this;
     };
 
@@ -298,14 +306,19 @@ export function svgLocalPhotos(projection, context, dispatch) {
     drawPhotos.openPhoto = click;
 
     drawPhotos.fitZoom = function() {
-        let extent = _photos
-            .map(image => image.loc)
+        const coords = _photos
+            .map(image => image.loc);
+        const extent = coords
             .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]))
             .map(l => geoExtent(l, l))
             .reduce((a, b) => a.extend(b));
 
         const map = context.map();
-        map.centerZoom(extent.center(), Math.min(18, map.trimmedExtentZoom(extent)));
+        var viewport = map.trimmedExtent().polygon();
+
+        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
+            map.centerZoom(extent.center(), Math.min(18, map.trimmedExtentZoom(extent)));
+        }
     };
 
     function showLayer() {
