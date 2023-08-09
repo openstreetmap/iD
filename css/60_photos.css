@@ -409,12 +409,12 @@ label.streetside-hires {
     transform-origin: 0 0;
 }
 
-.vegbilder-wrapper {
+.photo-wrapper {
     position: relative;
     background-color: #000;
 }
 
-.vegbilder-wrapper .plane-frame {
+.photoviewer .plane-frame {
     display: block;
     overflow: hidden;
     height: 100%;
@@ -424,7 +424,7 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
-.vegbilder-wrapper .plane-frame > img.plane-photo{
+.photoviewer .plane-frame > img.plane-photo{
     width: auto;
     height: 100%;
     transform-origin: 0 0;

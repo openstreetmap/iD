@@ -1,19 +1,21 @@
 import { select as d3_select } from 'd3-selection';
 import exifr from 'exifr';
+import { isArray, isNumber } from 'lodash-es';
 
 import { utilDetect } from '../util/detect';
 import { geoExtent } from '../geo';
-import { isArray, isNumber } from 'lodash-es';
+import planePhotoFrame from '../services/plane_photo';
 
 var _initialized = false;
 var _enabled = false;
 
 export function svgLocalPhotos(projection, context, dispatch) {
-    var detected = utilDetect();
+    const detected = utilDetect();
     let layer = d3_select(null);
-    var _fileList;
-    var _photos = [];
-    var _idAutoinc = 0;
+    let _fileList;
+    let _photos = [];
+    let _idAutoinc = 0;
+    let _photoFrame;
 
     function init() {
         if (_initialized) return;  // run once
@@ -41,35 +43,63 @@ export function svgLocalPhotos(projection, context, dispatch) {
         _initialized = true;
     }
 
+   function ensureViewerLoaded(context) {
+        if (_photoFrame) {
+            return Promise.resolve(_photoFrame);
+        }
+
+        const viewer = context.container().select('.photoviewer')
+            .selectAll('.local-photos-wrapper')
+            .data([0]);
+
+        const viewerEnter = viewer.enter()
+            .append('div')
+            .attr('class', 'photo-wrapper local-photos-wrapper')
+            .classed('hide', true);
+
+        viewerEnter
+            .append('div')
+            .attr('class', 'photo-attribution fillD');
+
+        return planePhotoFrame.init(context, viewerEnter)
+            .then(planePhotoFrame => {
+                _photoFrame = planePhotoFrame;
+                //_photoFrame.event.on('viewerChanged', () => …);
+            });
+    }
+
     function closePhotoViewer() {
-        d3_select('.over-map').selectAll('.local-photo-viewer').remove();
+        const viewer = context.container().select('.photoviewer');
+        if (!viewer.empty()) viewer.datum(null);
+
+        viewer
+            .classed('hide', true)
+            .selectAll('.photo-wrapper')
+            .classed('hide', true);
     }
 
     // opens the image at bottom left
     function click(d3_event, image, zoomTo) {
-        // removes old div(s), if any
-        closePhotoViewer();
+        ensureViewerLoaded(context).then(() => {
+            const viewer = context.container().select('.photoviewer')
+                .classed('hide', false);
 
-        var image_container = d3_select('.over-map')
-            .append('div')
-            .attr('style', 'position: relative;margin: 5px;border: 5px solid white;')
-            .attr('class', 'local-photo-viewer');
+            const viewerWrap = viewer.select('.local-photos-wrapper')
+                .classed('hide', false);
 
-        image_container
-            .append('button')
-            .text('X')
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                closePhotoViewer();
-            })
-            .attr('style', 'position: absolute;right: 0;padding: 3px 10px;font-size: medium;border-radius:0;');
+            const attribution = viewerWrap.selectAll('.photo-attribution').text('');
 
-        image_container
-            .append('img')
-            .attr('src', image.src)
-            .attr('width', 400)
-            .attr('height', 300);
+            if (image.name) {
+                attribution
+                    .append('span')
+                    .classed('filename', true)
+                    .text(image.name);
+            }
 
+            _photoFrame
+                .selectPhoto({ image_path: image.src }, false)
+                .showPhotoFrame(viewerWrap);
+        });
 
         // centers the map with image location
         if (zoomTo) {

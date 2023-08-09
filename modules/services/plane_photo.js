@@ -12,7 +12,7 @@ let _widthOverflow;
 function zoomPan (d3_event) {
   let t = d3_event.transform;
   _photo.call(utilSetTransform, t.x, t.y, t.k);
-  }
+}
 
 function zoomBeahvior () {
   const {width: wrapperWidth, height: wrapperHeight} = _wrapper.node().getBoundingClientRect();
@@ -58,7 +58,7 @@ export default {
     await Promise.resolve();
 
     return this;
-    },
+  },
 
   showPhotoFrame: function (context) {
     const isHidden = context.selectAll('.photo-frame.plane-frame.hide').size();
@@ -74,7 +74,7 @@ export default {
     }
 
     return this;
-    },
+  },
 
 
   hidePhotoFrame: function (context) {
@@ -83,7 +83,7 @@ export default {
       .classed('hide', false);
 
     return this;
-    },
+  },
 
   selectPhoto: function (data, keepOrientation) {
     dispatch.call('viewerChanged');

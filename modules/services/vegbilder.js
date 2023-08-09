@@ -500,19 +500,19 @@ export default {
   },
 
   showViewer: function (context) {
-  const viewer = context.container().select('.photoviewer')
-  .classed('hide', false);
-
-  const isHidden = viewer.selectAll('.photo-wrapper.vegbilder-wrapper.hide').size();
-
-  if (isHidden) {
-    viewer
-      .selectAll('.photo-wrapper:not(.vegbilder-wrapper)')
-      .classed('hide', true);
-
-    viewer
-      .selectAll('.photo-wrapper.vegbilder-wrapper')
+    const viewer = context.container().select('.photoviewer')
       .classed('hide', false);
+
+    const isHidden = viewer.selectAll('.photo-wrapper.vegbilder-wrapper.hide').size();
+
+    if (isHidden) {
+      viewer
+        .selectAll('.photo-wrapper:not(.vegbilder-wrapper)')
+        .classed('hide', true);
+
+      viewer
+        .selectAll('.photo-wrapper.vegbilder-wrapper')
+        .classed('hide', false);
     }
     return this;
   },
@@ -532,7 +532,7 @@ export default {
         .classed('currentView', false);
 
     return this.setStyles(context, null, true);
-},
+  },
 
 
   // Updates the currently highlighted sequence and selected bubble.
