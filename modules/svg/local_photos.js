@@ -292,9 +292,10 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     drawPhotos.fitZoom = function() {
         const coords = _photos
-            .map(image => image.loc);
+            .map(image => image.loc)
+            .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]));
+        if (coords.length === 0) return;
         const extent = coords
-            .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]))
             .map(l => geoExtent(l, l))
             .reduce((a, b) => a.extend(b));
 
