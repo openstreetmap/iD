@@ -33,13 +33,13 @@ async function fetchAvailableLayers() {
   };
 
   const urlForRequest = owsEndpoint + utilQsString(params);
-  const repsonse = await d3_xml(urlForRequest);
+  const response = await d3_xml(urlForRequest);
   const xPathSelector = '/wfs:WFS_Capabilities/wfs:FeatureTypeList/wfs:FeatureType/wfs:Name';
   const regexMatcher = /^vegbilder_1_0:Vegbilder(?<image_type>_360)?_(?<year>\d{4})$/;
-  const NSResolver = repsonse.createNSResolver(repsonse);
-  const l = repsonse.evaluate(
+  const NSResolver = response.createNSResolver(response);
+  const l = response.evaluate(
     xPathSelector,
-    repsonse,
+    response,
     NSResolver,
     XPathResult.ANY_TYPE
     );
@@ -232,17 +232,18 @@ function orderSequences(projection, cache) {
   }, []);
 
   cache.sequences = imageSequences.map(images => {
-    const seqence = {
+    const sequence = {
       images,
       key: images[0].key,
       geometry : {
         type : 'LineString',
         coordinates : images.map(image => image.loc)
-      }};
+      }
+    };
     for (const image of images) {
-      _vegbilderCache.image2sequence_map.set(image.key, seqence);
+      _vegbilderCache.image2sequence_map.set(image.key, sequence);
     }
-    return seqence;
+    return sequence;
   });
 }
 

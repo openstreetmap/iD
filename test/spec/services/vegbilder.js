@@ -159,7 +159,7 @@ describe('iD.serviceVegbilder', function() {
 
   describe('loadImages', function () {
     it('fires loadedImages when images are loaded', function() {
-      const respons = {
+      const response = {
         'type': 'FeatureCollection',
         'features': [
           {
@@ -203,7 +203,7 @@ describe('iD.serviceVegbilder', function() {
           service: 'WFS',
           request: 'GetFeature'
         }
-      }, respons);
+      }, response);
 
       return new Promise((resolve) => {
         vegbilder.on('loadedImages', () => {
@@ -216,7 +216,7 @@ describe('iD.serviceVegbilder', function() {
     });
 
     it('does not load images around null island', async function() {
-      const respons = {
+      const response = {
         'type': 'FeatureCollection',
         'features': [
           {
@@ -240,7 +240,7 @@ describe('iD.serviceVegbilder', function() {
           service: 'WFS',
           request: 'GetFeature'
         }
-      }, respons);
+      }, response);
 
       context.projection.translate([0, 0]);
 
