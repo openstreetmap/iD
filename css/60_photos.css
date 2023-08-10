@@ -409,12 +409,12 @@ label.streetside-hires {
     transform-origin: 0 0;
 }
 
-.vegbilder-wrapper {
+.photo-wrapper {
     position: relative;
     background-color: #000;
 }
 
-.vegbilder-wrapper .plane-frame {
+.photoviewer .plane-frame {
     display: block;
     overflow: hidden;
     height: 100%;
@@ -424,7 +424,7 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
-.vegbilder-wrapper .plane-frame > img.plane-photo{
+.photoviewer .plane-frame > img.plane-photo{
     width: auto;
     height: 100%;
     transform-origin: 0 0;
@@ -470,4 +470,101 @@ label.streetside-hires {
         background: rgba(0,0,0,0.85);
         color: #fff;
     }
+}
+
+/* local georeferenced photos */
+.layer-local-photos {
+    pointer-events: none;
+}
+.layer-local-photos .viewfield-group * {
+    fill: #ed00d9;
+}
+.local-photos {
+    display: flex;
+}
+.local-photos > div {
+    width: 50%;
+}
+.local-photos > div:first-child {
+    margin-right: 20px;
+}
+
+.list-local-photos {
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-x: auto;
+    /* workaround for something like "overflow-x: visible"
+       see https://stackoverflow.com/a/39554003 */
+    margin-left: -100px;
+    padding-left: 100px;
+}
+.list-local-photos::-webkit-scrollbar {
+    border-left: none;
+}
+.list-local-photos li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+}
+.list-local-photos span.filename {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    padding-left: 8px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.list-local-photos li:first-child span.filename {
+    border-top: 1px solid #ccc;
+    border-top-left-radius: 4px;
+}
+.list-local-photos li:first-child button {
+    border-top: 1px solid #ccc;
+}
+.list-local-photos li:first-child button.remove {
+    border-top-right-radius: 4px;
+}
+.list-local-photos li:last-child span.filename {
+    border-bottom-left-radius: 4px;
+}
+.list-local-photos li:last-child button.remove {
+    border-bottom-right-radius: 4px;
+}
+.list-local-photos li.invalid span.filename {
+    color: #ccc;
+}
+.list-local-photos li.invalid button.zoom-to-data {
+    display: none;
+}
+.list-local-photos li button.no-geolocation {
+    display: none;
+}
+.list-local-photos li.invalid button.no-geolocation {
+    display: block;
+}
+.list-local-photos .placeholder div {
+    display: block;
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(img/loader-black.gif);
+    filter: invert(1);
+}
+.local-photos label.button {
+    background: #7092ff;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 25px;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
 }

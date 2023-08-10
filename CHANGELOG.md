@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 * Add [_Mapilio_](https://mapilio.com/openstreetmap) as new street-level imagery provider ([#9664], thanks [@channel-s])
 * Add photos from the [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/) as new street-level imagery provider in Norway ([#9509], thanks [@noenandre])
+* Add functionality to display georeferenced photos from local files ([#9291], thanks [@nontech])
 * Gray out street level layers in "Map Data" pane when map is zoomed out too far
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
@@ -61,12 +62,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8997]: https://github.com/openstreetmap/iD/issues/8997
 [#9233]: https://github.com/openstreetmap/iD/issues/9233
+[#9291]: https://github.com/openstreetmap/iD/pull/9291
 [#9509]: https://github.com/openstreetmap/iD/pull/9509
 [#9664]: https://github.com/openstreetmap/iD/pull/9664
 [#9786]: https://github.com/openstreetmap/iD/issues/9786
 [#9817]: https://github.com/openstreetmap/iD/pull/9817
 [@channel-s]: https://github.com/channel-s
 [@noenandre]: https://github.com/noenandre
+[@nontech]: https://github.com/nontech
 
 
 # 2.26.2

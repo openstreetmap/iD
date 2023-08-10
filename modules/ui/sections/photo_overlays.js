@@ -1,14 +1,17 @@
 import _debounce from 'lodash-es/debounce';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 import { utilGetSetValue, utilNoAuto } from '../../util';
+import { uiSettingsLocalPhotos } from '../settings/local_photos';
+import { svgIcon } from '../../svg';
 
 export function uiSectionPhotoOverlays(context) {
+
+    var settingsLocalPhotos = uiSettingsLocalPhotos(context)
+        .on('change',  localPhotosChanged);
 
     var layers = context.layers();
 
@@ -28,7 +31,8 @@ export function uiSectionPhotoOverlays(context) {
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems)
             .call(drawDateFilter)
-            .call(drawUsernameFilter);
+            .call(drawUsernameFilter)
+            .call(drawLocalPhotos);
     }
 
     function drawPhotoItems(selection) {
@@ -333,6 +337,96 @@ export function uiSectionPhotoOverlays(context) {
         if (layer) {
             layer.enabled(enabled);
         }
+    }
+
+    function drawLocalPhotos(selection) {
+        var photoLayer = layers.layer('local-photos');
+        var hasData = photoLayer && photoLayer.hasData();
+        var showsData = hasData && photoLayer.enabled();
+
+        var ul = selection
+            .selectAll('.layer-list-local-photos')
+            .data(photoLayer ? [0] : []);
+
+        // Exit
+        ul.exit()
+            .remove();
+
+        // Enter
+        var ulEnter = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-local-photos');
+
+        var localPhotosEnter = ulEnter
+            .append('li')
+            .attr('class', 'list-item-local-photos');
+
+        var localPhotosLabelEnter = localPhotosEnter
+            .append('label')
+            .call(uiTooltip().title(() => t.append('local_photos.tooltip')));
+
+        localPhotosLabelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() { toggleLayer('local-photos'); });
+
+        localPhotosLabelEnter
+            .call(t.append('local_photos.header'));
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'open-data-options')
+            .call(uiTooltip()
+                .title(() => t.append('local_photos.tooltip_edit'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                editLocalPhotos();
+            })
+            .call(svgIcon('#iD-icon-more'));
+
+        localPhotosEnter
+            .append('button')
+            .attr('class', 'zoom-to-data')
+            .call(uiTooltip()
+                .title(() => t.append('local_photos.zoom'))
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', function(d3_event) {
+                if (d3_select(this).classed('disabled')) return;
+
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                photoLayer.fitZoom();
+            })
+            .call(svgIcon('#iD-icon-framed-dot', 'monochrome'));
+
+        // Update
+        ul = ul
+            .merge(ulEnter);
+
+        ul.selectAll('.list-item-local-photos')
+            .classed('active', showsData)
+            .selectAll('label')
+            .classed('deemphasize', !hasData)
+            .selectAll('input')
+            .property('disabled', !hasData)
+            .property('checked', showsData);
+
+        ul.selectAll('button.zoom-to-data')
+            .classed('disabled', !hasData);
+    }
+
+    function editLocalPhotos() {
+        context.container()
+            .call(settingsLocalPhotos);
+    }
+
+    function localPhotosChanged(d) {
+        var localPhotosLayer = layers.layer('local-photos');
+
+        localPhotosLayer.fileList(d);
     }
 
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
