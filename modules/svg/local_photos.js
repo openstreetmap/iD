@@ -37,7 +37,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 if (!detected.filedrop) return;
                 drawPhotos.fileList(d3_event.dataTransfer.files, loaded => {
                     if (loaded.length > 0) {
-                        drawPhotos.fitZoom();
+                        drawPhotos.fitZoom(false);
                     }
                 });
             })
@@ -96,6 +96,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 _photoFrame
                     .selectPhoto({ image_path: src })
                     .showPhotoFrame(viewerWrap);
+
+                setStyles();
             });
         });
 
@@ -290,7 +292,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     drawPhotos.openPhoto = click;
 
-    drawPhotos.fitZoom = function() {
+    drawPhotos.fitZoom = function(force) {
         const coords = _photos
             .map(image => image.loc)
             .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]));
@@ -302,7 +304,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         const map = context.map();
         var viewport = map.trimmedExtent().polygon();
 
-        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
+        if (force !== false || !geoPolygonIntersectsPolygon(viewport, coords, true)) {
             map.centerZoom(extent.center(), Math.min(18, map.trimmedExtentZoom(extent)));
         }
     };
