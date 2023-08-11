@@ -433,7 +433,7 @@ export function uiSectionPhotoOverlays(context) {
     context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
 
     context.map()
-        .on('move.background_list',
+        .on('move.photo_overlays',
             _debounce(function() {
                 // layers in-view may have changed due to map move
                 window.requestIdleCallback(section.reRender);
