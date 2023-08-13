@@ -6,6 +6,8 @@ path.line.shadow.tag-attraction-water_slide,
 path.line.shadow.tag-golf-cartpath,
 path.line.shadow.tag-man_made-pipeline,
 path.line.shadow.tag-natural-tree_row,
+path.line.shadow.tag-roller_coaster-track,
+path.line.shadow.tag-roller_coaster-support,
 path.line.shadow.tag-piste {
     stroke-width: 16;
 }
@@ -15,6 +17,8 @@ path.line.casing.tag-attraction-water_slide,
 path.line.casing.tag-golf-cartpath,
 path.line.casing.tag-man_made-pipeline,
 path.line.casing.tag-natural-tree_row,
+path.line.casing.tag-roller_coaster-track,
+path.line.casing.tag-roller_coaster-support,
 path.line.casing.tag-piste {
     stroke-width: 7;
 }
@@ -24,6 +28,8 @@ path.line.stroke.tag-attraction-water_slide,
 path.line.stroke.tag-golf-cartpath,
 path.line.stroke.tag-man_made-pipeline,
 path.line.stroke.tag-natural-tree_row,
+path.line.stroke.tag-roller_coaster-track,
+path.line.stroke.tag-roller_coaster-support,
 path.line.stroke.tag-piste {
     stroke-width: 5;
 }
@@ -34,6 +40,8 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.shadow.tag-golf-cartpath,
 .low-zoom path.line.shadow.tag-man_made-pipeline,
 .low-zoom path.line.shadow.tag-natural-tree_row,
+.low-zoom path.line.shadow.tag-roller_coaster-track,
+.low-zoom path.line.shadow.tag-roller_coaster-support,
 .low-zoom path.line.shadow.tag-piste {
     stroke-width: 12;
 }
@@ -43,6 +51,8 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.casing.tag-golf-cartpath,
 .low-zoom path.line.casing.tag-man_made-pipeline,
 .low-zoom path.line.casing.tag-natural-tree_row,
+.low-zoom path.line.casing.tag-roller_coaster-track,
+.low-zoom path.line.casing.tag-roller_coaster-support,
 .low-zoom path.line.casing.tag-piste {
     stroke-width: 5;
 }
@@ -52,6 +62,8 @@ path.line.stroke.tag-piste {
 .low-zoom path.line.stroke.tag-golf-cartpath,
 .low-zoom path.line.stroke.tag-man_made-pipeline,
 .low-zoom path.line.stroke.tag-natural-tree_row,
+.low-zoom path.line.stroke.tag-roller_coaster-track,
+.low-zoom path.line.stroke.tag-roller_coaster-support,
 .low-zoom path.line.stroke.tag-piste {
     stroke-width: 3;
 }
@@ -115,6 +127,23 @@ path.line.stroke.tag-attraction-water_slide {
 }
 path.line.casing.tag-attraction-water_slide {
     stroke: #3d6c71;
+}
+
+path.line.stroke.tag-roller_coaster-track {
+    stroke: #dddddd;
+    stroke-width: 3;
+    stroke-dasharray: 5, 1;
+    stroke-linecap: butt;
+}
+path.line.casing.tag-roller_coaster-track {
+    stroke: #707070;
+}
+
+path.line.stroke.tag-roller_coaster-support {
+    stroke: #707070;
+}
+path.line.casing.tag-roller_coaster-support {
+    stroke: #707070;
 }
 
 
