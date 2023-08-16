@@ -35,30 +35,29 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.27.0-dev)
+# 2.27.0
 
-#### :tada: New Features
+#### :mega: Release Highlights
+* Added the ability to show georeferenced photos on the map and added two new street-level imagery from [_Mapilio_](https://mapilio.com/openstreetmap) and [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/).
 #### :sparkles: Usability & Accessibility
 * Show tag reference information for the currently filled-in tag value in UI fields (if available), instead of only showing the more generic _key_ documentation of the field ([#9786])
 * Don't suggest _discardable_ (i.e. deprecated and automatically removed tags) in the auto-suggestions of the raw tag editor ([#9817], thanks [@k-yle])
-#### :scissors: Operations
 #### :camera: Street-Level
 * Add [_Mapilio_](https://mapilio.com/openstreetmap) as new street-level imagery provider ([#9664], thanks [@channel-s])
 * Add photos from the [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/) as new street-level imagery provider in Norway ([#9509], thanks [@noenandre])
 * Add functionality to display georeferenced photos from local files ([#9291], thanks [@nontech])
 * Gray out street level layers in "Map Data" pane when map is zoomed out too far
-#### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix broken place search via Nominatim ([#9822])
 * Validator: Don't falsely flag certain tags as "should be a closed area" if the tag also allows both area and line geometries in two separate presets (e.g. `highway=elevator` in the "Elevator" and "Inclined Lift" presets)
 * Fix sorting of nearby streets in address field dropdown
 * Fix bug where "outlink" buttons would not be disabled on invalid values of `identifier` fields
 * Fix zooming/panning in KartaView photo layer after resizing the panel ([#8997])
 * Fix clearing of contents of some input field when the respective tag is removed (e.g. when using the trash can icon on the UI field)
 * Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
-#### :earth_asia: Localization
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+* Upgrade osm-auth to v2.2
+* Upgrade dependencies, including the following major version upgrades: `marked` to v7, `esbuild` to v0.18
 
 [#8997]: https://github.com/openstreetmap/iD/issues/8997
 [#9233]: https://github.com/openstreetmap/iD/issues/9233
@@ -67,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9664]: https://github.com/openstreetmap/iD/pull/9664
 [#9786]: https://github.com/openstreetmap/iD/issues/9786
 [#9817]: https://github.com/openstreetmap/iD/pull/9817
+[#9822]: https://github.com/openstreetmap/iD/issues/9822
 [@channel-s]: https://github.com/channel-s
 [@noenandre]: https://github.com/noenandre
 [@nontech]: https://github.com/nontech
