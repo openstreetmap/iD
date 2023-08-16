@@ -57,9 +57,10 @@ $  git push origin -f release vA.B.C
 $  git checkout develop
 ```
 
-- Increment version number and add `-dev` suffix in `package.json`, e.g. `2.25.0-dev`
+Add section in `CHANGELOG.md` for new version number (e.g. `# Unreleased (2.28.0-dev)`).
 
 ```bash
+$  npm version --no-git-tag-version vAA.BB.0-dev
 $  git add . && git commit -m 'Set development version number'
 $  git push origin develop
 ```
