@@ -36,6 +36,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 # 2.27.0
+##### 2023-Aug-16
 
 #### :mega: Release Highlights
 * Added the ability to show georeferenced photos on the map and added two new street-level imagery from [_Mapilio_](https://mapilio.com/openstreetmap) and [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/).
