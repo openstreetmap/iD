@@ -35,7 +35,22 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# Unreleased (2.28.0-dev)
+
+#### :tada: New Features
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :hammer: Development
+
+
 # 2.27.0
+##### 2023-Aug-16
 
 #### :mega: Release Highlights
 * Added the ability to show georeferenced photos on the map and added two new street-level imagery from [_Mapilio_](https://mapilio.com/openstreetmap) and [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/).
