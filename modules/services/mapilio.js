@@ -23,8 +23,8 @@ const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
     .scaleExtent([1, 15]);
-const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
-const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
+const pannellumViewerCSS = 'pannellum/pannellum.css';
+const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
 
 let _mlyActiveImage;
