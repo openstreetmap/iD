@@ -27,21 +27,6 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
             ? valueFunction : valueConstant);
     }
 
-    function stickyCursor(func) {
-        // only certain input element types allow manipulating the cursor
-        // see https://html.spec.whatwg.org/multipage/input.html#concept-input-apply
-        const supportedTypes = ['text', 'search', 'url', 'tel', 'password'];
-        if (!supportedTypes.includes(selection.node()?.type)) {
-            return func;
-        }
-
-        return function() {
-            const cursor = { start: this.selectionStart, end: this.selectionEnd };
-            func.apply(this, arguments);
-            this.setSelectionRange(cursor.start, cursor.end);
-        };
-    }
-
     if (arguments.length === 1) {
         return selection.property('value');
     }
@@ -50,5 +35,5 @@ export function utilGetSetValue(selection, value, shouldUpdate) {
         shouldUpdate = (a, b) => a !== b;
     }
 
-    return selection.each(stickyCursor(setValue(value, shouldUpdate)));
+    return selection.each(setValue(value, shouldUpdate));
 }
