@@ -30,11 +30,6 @@ export function svgData(projection, context, dispatch) {
     var _tilejson;
     var _src;
 
-    function supportsType(file) {
-        const extension = mime.getExtension(file.type);
-        return supportedFormats.includes(extension);
-    }
-
     const supportedFormats = [
         'gpx',
         'kml',
@@ -62,7 +57,7 @@ export function svgData(projection, context, dispatch) {
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
                 const f = d3_event.dataTransfer.files[0];
-                if (!supportsType(f)) return;
+                if (!supportedFormats.includes(getFileType(f))) return;
                 drawData.fileList(d3_event.dataTransfer.files);
             })
             .on('dragenter.svgData', over)
@@ -316,15 +311,38 @@ export function svgData(projection, context, dispatch) {
     }
 
 
-    function guessFormat(url) {
-        if (!url) return;
+    // Get the type of a File object
+    // Misconfigured servers or browsers might supply a bogus type, so fall
+    // back on examining the file extension.
+    function getFileType(file) {
+        if (file.type) {
+            const extension = mime.getExtension(file.type);
+            if (supportedFormats.includes(extension)) {
+                return extension;
+            }
+        }
+        return getExtension(file.name);
+    }
+
+
+    // Get the type of a file name, if it's one we support.
+    function getExtension(fileName) {
+        if (!fileName) return;
 
         const re = /\.(gpx|kml|(geo)?json|png)$/i;
-        const match = url.toLowerCase().match(re);
-        if (match) return match[0];
-        if (url.match(/\{x\}/)) {
+        const match = fileName.toLowerCase().match(re);
+        return match?.[1];
+    }
+
+
+    // Decide what to do with URL prior to fetching it.
+    // A vector tile template usually ends with .mvt or .pbf, so it's unlikely
+    // that the order would matter.
+    function guessFormat(url) {
+        if (url?.match(/\{x\}/)) {
             return 'xyz';
         }
+        return getExtension(url);
     }
 
 
@@ -354,7 +372,7 @@ export function svgData(projection, context, dispatch) {
         _geojson = null;
         _src = null;
 
-        format ??= mime.getExtension(file.type) ?? guessFormat(file.name);
+        format ??= getFileType(file);
         const data = await file.text();
 
         let gj;
