@@ -49,6 +49,18 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 
+# 2.27.1
+##### 2023-Aug-17
+
+#### :bug: Bugfixes
+* Fix stuck cursor in input fields on Safari ([#9848])
+* Fix non-360° Mapilio images from being zoomed in too far ([#9846], thanks [@ozcan-durak])
+
+[#9846]: https://github.com/openstreetmap/iD/issues/9846
+[#9848]: https://github.com/openstreetmap/iD/issues/9848
+[@ozcan-durak]: https://github.com/ozcan-durak
+
+
 # 2.27.0
 ##### 2023-Aug-16
 
