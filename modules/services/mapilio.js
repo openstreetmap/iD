@@ -27,11 +27,11 @@ const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
 
-let _mlyActiveImage;
-let _mlyCache;
+let _activeImage;
+let _cache;
 let _loadViewerPromise;
 let _pannellumViewer;
-let _mlySceneOptions = {
+let _sceneOptions = {
     showFullscreenCtrl: false,
     autoLoad: true,
     yaw: 0,
@@ -80,7 +80,7 @@ function loadTiles(which, url, maxZoom, projection) {
 
 // Load all data for the specified type from one vector tile
 function loadTile(which, url, tile) {
-    const cache = _mlyCache.requests;
+    const cache = _cache.requests;
     const tileId = `${tile.id}-${which}`;
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
     const controller = new AbortController();
@@ -133,7 +133,7 @@ function loadTileDataToCache(data, tile) {
         d;
     if (vectorTile.layers.hasOwnProperty(pointLayer)) {
         features = [];
-        cache = _mlyCache.images;
+        cache = _cache.images;
         layer = vectorTile.layers[pointLayer];
 
         for (i = 0; i < layer.length; i++) {
@@ -165,7 +165,7 @@ function loadTileDataToCache(data, tile) {
     }
 
     if (vectorTile.layers.hasOwnProperty(lineLayer)) {
-        cache = _mlyCache.sequences;
+        cache = _cache.sequences;
         layer = vectorTile.layers[lineLayer];
 
         for (i = 0; i < layer.length; i++) {
@@ -192,7 +192,7 @@ function getImageData(imageId, sequenceId) {
         .then(function (data) {
             let index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
-            _mlySceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
+            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
         });
 }
 
@@ -200,7 +200,7 @@ function getImageData(imageId, sequenceId) {
 export default {
     // Initialize Mapilio
     init: function() {
-        if (!_mlyCache) {
+        if (!_cache) {
             this.reset();
         }
 
@@ -209,27 +209,27 @@ export default {
 
     // Reset cache and state
     reset: function() {
-        if (_mlyCache) {
-            Object.values(_mlyCache.requests.inflight).forEach(function(request) { request.abort(); });
+        if (_cache) {
+            Object.values(_cache.requests.inflight).forEach(function(request) { request.abort(); });
         }
 
-        _mlyCache = {
+        _cache = {
             images: { rtree: new RBush(), forImageId: {} },
             sequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
 
-        _mlyActiveImage = null;
+        _activeImage = null;
     },
 
     // Get visible images
     images: function(projection) {
         const limit = 5;
-        return searchLimited(limit, projection, _mlyCache.images.rtree);
+        return searchLimited(limit, projection, _cache.images.rtree);
     },
 
     cachedImage: function(imageKey) {
-        return _mlyCache.images.forImageId[imageKey];
+        return _cache.images.forImageId[imageKey];
     },
 
 
@@ -254,7 +254,7 @@ export default {
         const sequenceIds = {};
         let lineStrings = [];
 
-        _mlyCache.images.rtree.search(bbox)
+        _cache.images.rtree.search(bbox)
             .forEach(function(d) {
                 if (d.data.sequence_id) {
                     sequenceIds[d.data.sequence_id] = true;
@@ -262,8 +262,8 @@ export default {
             });
 
         Object.keys(sequenceIds).forEach(function(sequenceId) {
-            if (_mlyCache.sequences.lineString[sequenceId]) {
-                lineStrings = lineStrings.concat(_mlyCache.sequences.lineString[sequenceId]);
+            if (_cache.sequences.lineString[sequenceId]) {
+                lineStrings = lineStrings.concat(_cache.sequences.lineString[sequenceId]);
             }
         });
 
@@ -273,12 +273,12 @@ export default {
     // Set the currently visible image
     setActiveImage: function(image) {
         if (image) {
-            _mlyActiveImage = {
+            _activeImage = {
                 id: image.id,
                 sequence_id: image.sequence_id
             };
         } else {
-            _mlyActiveImage = null;
+            _activeImage = null;
         }
     },
 
@@ -287,8 +287,8 @@ export default {
     setStyles: function(context, hovered) {
         const hoveredImageId = hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
-        const selectedSequenceId = _mlyActiveImage && _mlyActiveImage.sequence_id;
-        const selectedImageId =  _mlyActiveImage && _mlyActiveImage.id;
+        const selectedSequenceId = _activeImage && _activeImage.sequence_id;
+        const selectedImageId =  _activeImage && _activeImage.id;
 
         const markers = context.container().selectAll('.layer-mapilio .viewfield-group');
         const sequences = context.container().selectAll('.layer-mapilio .sequence');
@@ -325,7 +325,7 @@ export default {
             'default': { firstScene: sceneID },
             scenes: {}
         };
-        options.scenes[sceneID] = _mlySceneOptions;
+        options.scenes[sceneID] = _sceneOptions;
 
         _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio-pnlm', options);
     },
@@ -387,7 +387,7 @@ export default {
                     _currScene += 1;
                     let sceneID = _currScene.toString();
                     _pannellumViewer
-                        .addScene(sceneID, _mlySceneOptions)
+                        .addScene(sceneID, _sceneOptions)
                         .loadScene(sceneID);
 
                     // remove previous scene
@@ -426,10 +426,10 @@ export default {
         let imgWrap = wrap.select('img');
 
         if (!imgWrap.empty()) {
-            imgWrap.attr('src',_mlySceneOptions.panorama);
+            imgWrap.attr('src',_sceneOptions.panorama);
         } else {
             wrap.append('img')
-                .attr('src',_mlySceneOptions.panorama);
+                .attr('src',_sceneOptions.panorama);
         }
 
     },
@@ -539,13 +539,13 @@ export default {
 
         function step(stepBy) {
             return function () {
-                if (!_mlyActiveImage) return;
-                const imageId = _mlyActiveImage.id;
+                if (!_activeImage) return;
+                const imageId = _activeImage.id;
 
                 const nextIndex = imageId + stepBy;
                 if (!nextIndex) return;
 
-                const nextImage = _mlyCache.images.forImageId[nextIndex];
+                const nextImage = _cache.images.forImageId[nextIndex];
 
                 context.map().centerEase(nextImage.loc);
 
@@ -605,6 +605,6 @@ export default {
 
     // Return the current cache
     cache: function() {
-        return _mlyCache;
+        return _cache;
     }
 };
