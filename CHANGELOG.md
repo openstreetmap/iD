@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
+* Show field for changeset sources by default in the upload form
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
