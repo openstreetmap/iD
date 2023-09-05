@@ -2050,6 +2050,9 @@ en:
       tag_as_oneway_reversible:
         title: Tag as reversible
         annotation: Marked a way as reversible.
+      tag_as_oneway_no_markings:
+        title: There are no painted lanes
+        annotation: Tagged the absense of lane markings.
       tag_this_as_higher:
         title: Tag this as higher
       tag_this_as_lower:
