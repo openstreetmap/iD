@@ -44,6 +44,16 @@ describe('iD.validations.oneway_onelane', () => {
         }, 20);
     });
 
+    it('has no errors for roads that are implicitly oneway', (done) => {
+        createWay({ lanes: '1', 'junction': 'roundabout' });
+        const validator = iD.validationOneLaneWithNoOneway();
+        window.setTimeout(() => {   // async, so data will be available
+            const issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
+    });
+
     it('has no errors for multi-lane roads', (done) => {
         createWay({ lanes: '2' });
         const validator = iD.validationOneLaneWithNoOneway();
