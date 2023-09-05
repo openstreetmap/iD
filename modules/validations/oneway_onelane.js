@@ -39,7 +39,20 @@ export function validationOneLaneWithNoOneway() {
         ...['yes', 'alternating'].map(onewayValue => createSuggestion(onewayValue, entity)),
 
         // or changing the `lanes` tag (manual)
-        new validationIssueFix({ title: t.append('issues.fix.change_lane_tag.title') })
+        new validationIssueFix({ title: t.append('issues.fix.change_lane_tag.title') }),
+
+        // or suggest adding the `lane_markings=no` tag (automatic)
+        new validationIssueFix({
+          icon: 'iD-icon-data',
+          title: t.append('issues.fix.tag_as_oneway_no_markings.title'),
+          onClick: (context) => {
+            const newTags = { ...entity.tags, lane_markings: 'no' };
+            delete newTags.lanes;
+            context.perform(
+              actionChangeTags(entity.id, newTags), t('issues.fix.tag_as_oneway_no_markings.annotation')
+            );
+          }
+        }),
       ]
     });
   }
