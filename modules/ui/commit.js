@@ -124,7 +124,7 @@ export function uiCommit(context) {
                 }
             });
 
-            tags.source = context.cleanTagValue(sources.join(';'));
+            tags.source = context.cleanTagValue(sources.filter(Boolean).join(';'));
         }
 
         context.changeset = new osmChangeset({ tags: tags });
