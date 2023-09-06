@@ -2020,8 +2020,10 @@ en:
         annotation: Tagged a way as having unsquare corners.
       tag_this_as_higher:
         title: Tag this as higher
+        informative_title: Tag {feature} as higher
       tag_this_as_lower:
         title: Tag this as lower
+        informative_title: Tag {feature} as lower
       upgrade_tags:
         title: Upgrade the tags
         annotation: Upgraded old tags.
