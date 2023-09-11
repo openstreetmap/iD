@@ -197,6 +197,10 @@ export function svgMapillarySigns(projection, context, dispatch) {
         return !!getService();
     };
 
+    drawSigns.rendered = function(zoom) {
+      return zoom >= minZoom;
+    };
+
 
     init();
     return drawSigns;

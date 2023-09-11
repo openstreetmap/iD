@@ -12,6 +12,7 @@ import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 import { uiTooltip } from '..';
 import { allowUpperCaseTagValues } from '../../osm/tags';
+import { fileFetcher } from '../../core';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -31,6 +32,11 @@ export function uiSectionRawTagEditor(id, context) {
         { id: 'list', icon: '#fas-th-list' },
         { id: 'text', icon: '#fas-i-cursor' }
     ];
+
+    let _discardTags = {};
+    fileFetcher.get('discarded')
+        .then((d) => { _discardTags = d; })
+        .catch(() => { /* ignore */ });
 
     var _tagView = (prefs('raw-tag-editor-view') || 'list');   // 'list, 'text'
     var _readOnlyTags = [];
@@ -286,7 +292,11 @@ export function uiSectionRawTagEditor(id, context) {
             });
 
         items.selectAll('button.remove')
-            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', removeTag);  // 'click' fires too late - #5878
+            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
+                (d3_event, d) => {
+                    if (d3_event.button !== 0) return;
+                    removeTag(d3_event, d);
+                });
 
     }
 
@@ -424,6 +434,7 @@ export function uiSectionRawTagEditor(id, context) {
                     if (!err) {
                         const filtered = data
                             .filter(d => _tags[d.value] === undefined)
+                            .filter(d => !(d.value in _discardTags)) // do not suggest discardable tags (see #9817)
                             .filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
                         callback(sort(value, filtered));
                     }

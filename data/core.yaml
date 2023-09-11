@@ -1358,6 +1358,11 @@ en:
     report: Report a privacy concern with this image
     view_on_bing: "View on Bing Maps"
     hires: "High resolution"
+  vegbilder:
+    title: "Vegbilder"
+    tooltip: "Street-level photos from the Norwegian Public Roads Administration"
+    publisher: "Norwegian Public Roads Administration"
+    view_on: "View it on Vegbilder"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
   mapillary_map_features:
@@ -1435,6 +1440,19 @@ en:
   mapilio:
     title: Mapilio
     tooltip: "Street-level photos from Mapilio"
+  street_side:
+    minzoom_tooltip: "Zoom in to see street-side photos"
+  local_photos:
+    tooltip: Add georeferenced photos from local files
+    tooltip_edit: Edit georeferenced photos
+    header: Georeferenced Photos
+    zoom: Zoom to photos
+    zoom_single: Zoom to photo
+    file:
+      instructions: "Choose georeferenced photos to be displayed. Supported types are .jpg and .png with exif location data"
+      label: "Browse files"
+    no_geolocation:
+      tooltip: Image without geolocation cannot be located on the map
   note:
     note: Note
     title: Edit note

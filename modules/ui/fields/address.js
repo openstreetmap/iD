@@ -307,6 +307,9 @@ export function uiFieldAddress(field, context) {
                         tags[key] = value || undefined;
                     });
 
+                Object.keys(tags)
+                    .filter(k => tags[k])
+                    .forEach(k => _tags[k] = tags[k]);
                 dispatch.call('change', this, tags, onInput);
             }, 0);
         };

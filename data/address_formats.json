@@ -145,7 +145,7 @@
     "countryCodes": ["ua"],
     "format": [
       ["housenumber", "postcode"],
-      ["street"]
+      ["street+place"]
     ]
   },
   {

@@ -5650,7 +5650,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 /* Scrollbars
  ----------------------------------------------------- */
 ::-webkit-scrollbar {
-    height: 20px;
+    height: 10px;
     overflow: visible;
     width: 10px;
     border-left: 1px solid #DDD;
@@ -5676,6 +5676,9 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     ::-webkit-scrollbar-track:hover {
         background-color: rgba(0,0,0,.05);
     }
+}
+body {
+    scrollbar-width: 10px;
 }
 
 
