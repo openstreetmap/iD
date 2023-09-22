@@ -54,6 +54,10 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.available = function() {
+        if(selectedIDs.length < 2)
+        {
+            return t.append('operations.merge.less_feature');
+        }
         return selectedIDs.length >= 2;
     };
 
@@ -74,6 +78,10 @@ export function operationMerge(context, selectedIDs) {
     operation.tooltip = function() {
         var disabled = operation.disabled();
         if (disabled) {
+            if(selectedIDs.length < 2)              //this will display error message if less features are selected for merging
+            {
+                return t.append('operations.merge.less_feature');
+            }
             if (disabled === 'conflicting_relations') {
                 return t.append('operations.merge.conflicting_relations');
             }
@@ -87,7 +95,7 @@ export function operationMerge(context, selectedIDs) {
     };
 
     operation.annotation = function() {
-        return t('operations.merge.annotation', { n: selectedIDs.length });
+        return t('operations.merge.annotation', { n: selectedIDs.length});
     };
 
     operation.id = 'merge';

@@ -317,6 +317,7 @@ en:
         one: "Merged a feature."
         other: "Merged {n} features."
       not_eligible: These features can't be merged.
+      less_feature: Select two or more features to combine.
       not_adjacent: These features can't be merged because their endpoints aren't connected.
       damage_relation: "These features can't be merged because it would damage a \"{relation}\" relation."
       relation: These features can't be merged because they have conflicting relation roles.
