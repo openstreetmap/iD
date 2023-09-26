@@ -57,9 +57,9 @@ export function uiSidebar(context) {
         var flagCollapse = false;
         var flagExpand = false;
 
-        var holdWindowSize = 0;
+        var previousWindowSize = 0;
 
-        d3_select(window).on('mouseover', function(){checkWindowWidth()}); //event listener
+        d3_select(window).on('resize', function(){checkWindowWidth()}); //event listener
 
         function pointerdown(d3_event) {
             if (downPointerId) return;
@@ -425,32 +425,31 @@ export function uiSidebar(context) {
             the side bar when the window width is below 700 then it will automatically collapse the side bar
             which is not what we want.
         */ 
-            function checkWindowWidth()
+        function checkWindowWidth()
+        {
+            containerWidth = container.node().getBoundingClientRect().width;
+
+            /*
+                Reset `flagCollapse` every time we resize the window
+                otherwise the behavior would only apply the first time iD is loaded.
+            */ 
+            if(containerWidth != previousWindowSize)
             {
-                containerWidth = container.node().getBoundingClientRect().width;
-    
-                /*
-                    this is to reset the flag every time we resize the window
-                    so that the functionality offered by the function is not just for the first time the
-                    iD is loaded.
-                */ 
-                if(containerWidth != holdWindowSize)
-                {
-                    holdWindowSize = containerWidth;
-                    flagCollapse = false;
-                    flagExpand = false;
-                }
-                if(containerWidth < 700 && !flagCollapse)
-                {
-                    flagCollapse = true;
-                    sidebar.collapse();
-                }
-                else if(containerWidth >= 700 && !flagExpand)
-                {
-                    flagExpand = true;
-                    sidebar.expand();
-                }
+                previousWindowSize = containerWidth;
+                flagCollapse = false;
+                flagExpand = false;
             }
+            if(containerWidth < 750 && !flagCollapse)
+            {
+                flagCollapse = true;
+                sidebar.collapse();
+            }
+            else if(containerWidth >= 750 && !flagExpand)
+            {
+                flagExpand = true;
+                sidebar.expand();
+            }
+        }
     
         // toggle the sidebar collapse when double-clicking the resizer
         resizer.on('dblclick', function(d3_event) {
