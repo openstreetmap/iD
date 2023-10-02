@@ -13,6 +13,14 @@
     ]
   },
   {
+    "countryCodes": ["id"],
+    "format": [
+      ["unit", "housename", "street", "housenumber", "neighbourhood"],
+      ["subdistrict", "district"],
+      ["city", "province", "postcode"]
+    ]
+  },
+  {
     "countryCodes": ["gb"],
     "format": [
       ["housename"],
