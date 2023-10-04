@@ -13,6 +13,14 @@
     ]
   },
   {
+    "countryCodes": ["mx"],
+    "format": [
+      ["street", "housenumber"],
+      ["neighbourhood"],
+      ["postcode", "district", "city", "state"]
+    ]
+  },
+  {
     "countryCodes": ["gb"],
     "format": [
       ["housename"],
