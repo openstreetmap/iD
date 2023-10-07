@@ -337,6 +337,18 @@ export function rendererBackground(context) {
     baseLayer.source(!fail ? d : background.findSource('none'));
     dispatch.call('change');
     background.updateImagery();
+
+    // if switching to a background layer that contains labels,
+    // disable the locator overlay to avoid overlapping labels.
+    if (d.id === 'MAPNIK') {
+      const locatorOverlay = background.overlayLayerSources().find(
+        overlay => overlay.isLocatorOverlay()
+      );
+      const isLocatorOverlayActive = !!locatorOverlay;
+      if (isLocatorOverlayActive) {
+        setTimeout(() => background.toggleOverlayLayer(locatorOverlay), 0);
+      }
+    }
     return background;
   };
 
