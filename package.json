@@ -81,6 +81,7 @@
     "@rapideditor/temaki": "~5.4.0",
     "@transifex/api": "^5.4.0",
     "autoprefixer": "^10.4.15",
+    "browserslist-to-esbuild": "^1.2.0",
     "chai": "^4.3.7",
     "chalk": "^4.1.2",
     "cldr-core": "^43.0.0",
@@ -126,6 +127,6 @@
     "node": ">=16.14"
   },
   "browserslist": [
-    "> 0.2%, last 6 major versions, Firefox ESR, maintained node versions"
+    "> 0.3%, last 6 major versions, Firefox ESR, maintained node versions"
   ]
 }
