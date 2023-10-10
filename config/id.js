@@ -14,6 +14,7 @@ const nsiCdnUrl = ENV__ID_NSI_CDN_URL
 const defaultOsmApiConnections = {
   live: {
     url: 'https://www.openstreetmap.org',
+    apiUrl: 'https://api.openstreetmap.org',
     client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
     client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q'
   },

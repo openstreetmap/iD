@@ -263,6 +263,23 @@ describe('iD.serviceOsm', function () {
                 done();
             });
         });
+
+        it('uses apiUrl', function(done) {
+            fetchMock.mock('https://api.openstreetmap.org' + path, {
+                body: response,
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            connection.switch({ url: 'https://api.openstreetmap.org' });
+
+            connection.loadFromAPI(path, function (err) {
+                expect(err).to.not.be.ok;
+                expect(fetchMock.calls().length).to.eql(1);
+                expect(fetchMock.calls()[0][0]).to.eql('https://api.openstreetmap.org' + path);
+                done();
+            });
+        });
     });
 
 

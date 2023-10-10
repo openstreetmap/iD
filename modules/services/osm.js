@@ -17,6 +17,7 @@ var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 
 var urlroot = osmApiConnections[0].url;
+var apiUrlroot = osmApiConnections[0].apiUrl || urlroot;
 var redirectPath = window.location.origin + window.location.pathname;
 var oauth = osmAuth({
     url: urlroot,
@@ -669,7 +670,11 @@ export default {
         }
 
         if (this.authenticated()) {
-            return oauth.xhr({ method: 'GET', path: path }, done);
+            return oauth.xhr({
+                method: 'GET',
+                prefix: false,
+                path: urlroot + path
+            }, done);
         } else {
             var url = urlroot + path;
             var controller = new AbortController();
@@ -796,7 +801,8 @@ export default {
         } else {   // Open a new changeset..
             var options = {
                 method: 'PUT',
-                path: '/api/0.6/changeset/create',
+                prefix: false,
+                path: apiUrlroot + '/api/0.6/changeset/create',
                 headers: { 'Content-Type': 'text/xml' },
                 content: JXON.stringify(changeset.asJXON())
             };
@@ -817,7 +823,8 @@ export default {
             // Upload the changeset..
             var options = {
                 method: 'POST',
-                path: '/api/0.6/changeset/' + changesetID + '/upload',
+                prefix: false,
+                path: apiUrlroot + '/api/0.6/changeset/' + changesetID + '/upload',
                 headers: { 'Content-Type': 'text/xml' },
                 content: JXON.stringify(changeset.osmChangeJXON(changes))
             };
@@ -843,7 +850,8 @@ export default {
                 // Still attempt to close changeset, but ignore response because #2667
                 oauth.xhr({
                     method: 'PUT',
-                    path: '/api/0.6/changeset/' + changeset.id + '/close',
+                    prefix: false,
+                    path: apiUrlroot + '/api/0.6/changeset/' + changeset.id + '/close',
                     headers: { 'Content-Type': 'text/xml' }
                 }, function() { return true; });
             }
@@ -873,10 +881,11 @@ export default {
         }
 
         utilArrayChunk(toLoad, 150).forEach(function(arr) {
-            oauth.xhr(
-                { method: 'GET', path: '/api/0.6/users.json?users=' + arr.join() },
-                wrapcb(this, done, _connectionID)
-            );
+            oauth.xhr({
+                method: 'GET',
+                prefix: false,
+                path: apiUrlroot + '/api/0.6/users.json?users=' + arr.join()
+            }, wrapcb(this, done, _connectionID));
         }.bind(this));
 
         function done(err, payload) {
@@ -899,10 +908,11 @@ export default {
             return callback(undefined, _userCache.user[uid]);
         }
 
-        oauth.xhr(
-            { method: 'GET', path: '/api/0.6/user/' + uid + '.json' },
-            wrapcb(this, done, _connectionID)
-        );
+        oauth.xhr({
+            method: 'GET',
+            prefix: false,
+            path: apiUrlroot + '/api/0.6/user/' + uid + '.json'
+        }, wrapcb(this, done, _connectionID));
 
         function done(err, payload) {
             if (err) return callback(err);
@@ -923,10 +933,11 @@ export default {
             return callback(undefined, _userDetails);
         }
 
-        oauth.xhr(
-            { method: 'GET', path: '/api/0.6/user/details.json' },
-            wrapcb(this, done, _connectionID)
-        );
+        oauth.xhr({
+            method: 'GET',
+            prefix: false,
+            path: apiUrlroot + '/api/0.6/user/details.json'
+        }, wrapcb(this, done, _connectionID));
 
         function done(err, payload) {
             if (err) return callback(err);
@@ -956,10 +967,11 @@ export default {
         function gotDetails(err, user) {
             if (err) { return callback(err); }
 
-            oauth.xhr(
-                { method: 'GET', path: '/api/0.6/changesets?user=' + user.id },
-                wrapcb(this, done, _connectionID)
-            );
+            oauth.xhr({
+                method: 'GET',
+                prefix: false,
+                path: apiUrlroot + '/api/0.6/changesets?user=' + user.id
+            }, wrapcb(this, done, _connectionID));
         }
 
         function done(err, xml) {
@@ -981,7 +993,7 @@ export default {
     // Fetch the status of the OSM API
     // GET /api/capabilities
     status: function(callback) {
-        var url = urlroot + '/api/capabilities';
+        var url = apiUrlroot + '/api/capabilities';
         var errback = wrapcb(this, done, _connectionID);
         d3_xml(url)
             .then(function(data) { errback(null, data); })
@@ -1195,10 +1207,11 @@ export default {
 
         var path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
 
-        _noteCache.inflightPost[note.id] = oauth.xhr(
-            { method: 'POST', path: path },
-            wrapcb(this, done, _connectionID)
-        );
+        _noteCache.inflightPost[note.id] = oauth.xhr({
+            method: 'POST',
+            prefix: false,
+            path: urlroot + path
+        }, wrapcb(this, done, _connectionID));
 
 
         function done(err, xml) {
@@ -1247,10 +1260,11 @@ export default {
             path += '?' + utilQsString({ text: note.newComment });
         }
 
-        _noteCache.inflightPost[note.id] = oauth.xhr(
-            { method: 'POST', path: path },
-            wrapcb(this, done, _connectionID)
-        );
+        _noteCache.inflightPost[note.id] = oauth.xhr({
+            method: 'POST',
+            prefix: false,
+            path: urlroot + path
+        }, wrapcb(this, done, _connectionID));
 
 
         function done(err, xml) {
@@ -1289,6 +1303,7 @@ export default {
 
     switch: function(newOptions) {
         urlroot = newOptions.url;
+        apiUrlroot = newOptions.apiUrl || urlroot;
 
         // Copy the existing options, but omit 'access_token'.
         // (if we did preauth, access_token won't work on a different server)
