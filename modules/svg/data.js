@@ -1,11 +1,12 @@
 import _throttle from 'lodash-es/throttle';
 
 import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
-import { text as d3_text } from 'd3-fetch';
+import { blob as d3_blob } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
 import stringify from 'fast-json-stable-stringify';
 import { gpx, kml } from '@tmcw/togeojson';
+import mime from 'mime';
 
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { services } from '../services';
@@ -26,14 +27,14 @@ export function svgData(projection, context, dispatch) {
     var layer = d3_select(null);
     var _vtService;
     var _fileList;
-    var _template;
+    var _tilejson;
     var _src;
 
     const supportedFormats = [
-        '.gpx',
-        '.kml',
-        '.geojson',
-        '.json'
+        'gpx',
+        'kml',
+        'geojson',
+        'json'
     ];
 
 
@@ -55,9 +56,8 @@ export function svgData(projection, context, dispatch) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                var f = d3_event.dataTransfer.files[0];
-                var extension = getExtension(f.name);
-                if (!supportedFormats.includes(extension)) return;
+                const f = d3_event.dataTransfer.files[0];
+                if (!supportedFormats.includes(getFileType(f))) return;
                 drawData.fileList(d3_event.dataTransfer.files);
             })
             .on('dragenter.svgData', over)
@@ -197,9 +197,9 @@ export function svgData(projection, context, dispatch) {
 
         // Gather data
         var geoData, polygonData;
-        if (_template && vtService) {   // fetch data from vector tile service
-            var sourceID = _template;
-            vtService.loadTiles(sourceID, _template, projection);
+        if (_tilejson && vtService) {   // fetch data from vector tile service
+            var sourceID = _tilejson.tiles[0];
+            vtService.loadTiles(sourceID, _tilejson, projection);
             geoData = vtService.data(sourceID, projection);
         } else {
             geoData = getFeatures(_geojson);
@@ -311,12 +311,38 @@ export function svgData(projection, context, dispatch) {
     }
 
 
+    // Get the type of a File object
+    // Misconfigured servers or browsers might supply a bogus type, so fall
+    // back on examining the file extension.
+    function getFileType(file) {
+        if (file.type) {
+            const extension = mime.getExtension(file.type);
+            if (supportedFormats.includes(extension)) {
+                return extension;
+            }
+        }
+        return getExtension(file.name);
+    }
+
+
+    // Get the type of a file name, if it's one we support.
     function getExtension(fileName) {
         if (!fileName) return;
 
-        var re = /\.(gpx|kml|(geo)?json|png)$/i;
-        var match = fileName.toLowerCase().match(re);
-        return match && match.length && match[0];
+        const re = /\.(gpx|kml|(geo)?json|png)$/i;
+        const match = fileName.toLowerCase().match(re);
+        return match?.[1];
+    }
+
+
+    // Decide what to do with URL prior to fetching it.
+    // A vector tile template usually ends with .mvt or .pbf, so it's unlikely
+    // that the order would matter.
+    function guessFormat(url) {
+        if (url?.match(/\{x\}/)) {
+            return 'xyz';
+        }
+        return getExtension(url);
     }
 
 
@@ -340,23 +366,31 @@ export function svgData(projection, context, dispatch) {
     }
 
 
-    drawData.setFile = function(extension, data) {
-        _template = null;
+    drawData.setFile = async function(file, format = undefined) {
+        _tilejson = null;
         _fileList = null;
         _geojson = null;
         _src = null;
 
-        var gj;
-        switch (extension) {
-            case '.gpx':
+        format ??= getFileType(file);
+        const data = await file.text();
+
+        let gj;
+        switch (format) {
+            case 'gpx':
                 gj = gpx(xmlToDom(data));
                 break;
-            case '.kml':
+            case 'kml':
                 gj = kml(xmlToDom(data));
                 break;
-            case '.geojson':
-            case '.json':
+            case 'json':
+            case 'geojson':
                 gj = JSON.parse(data);
+                if (format === 'json') {
+                    if (gj.tilejson && gj.tiles?.[0] && gj.vector_layers) {
+                        return this.tilejson(gj);
+                    }
+                }
                 if (gj.type === 'FeatureCollection') {
                     gj.features.forEach(stringifyGeojsonProperties);
                 } else if (gj.type === 'Feature') {
@@ -365,10 +399,10 @@ export function svgData(projection, context, dispatch) {
                 break;
         }
 
-        gj = gj || {};
+        gj ??= {};
         if (Object.keys(gj).length) {
             _geojson = ensureIDs(gj);
-            _src = extension + ' data file';
+            _src = format + ' data file';
             this.fitZoom();
         }
 
@@ -402,12 +436,19 @@ export function svgData(projection, context, dispatch) {
 
     drawData.hasData = function() {
         var gj = _geojson || {};
-        return !!(_template || Object.keys(gj).length);
+        return !!(_tilejson || Object.keys(gj).length);
     };
 
 
+    drawData.tilejson = function(val) {
+        if (!arguments.length) return _tilejson;
+
+        _tilejson = val;
+        return this.template(val.tiles[0]);
+    };
+
     drawData.template = function(val, src) {
-        if (!arguments.length) return _template;
+        if (!arguments.length) return _tilejson?.tiles?.[0];
 
         // test source against OSM imagery blocklists..
         var osm = context.connection();
@@ -431,7 +472,7 @@ export function svgData(projection, context, dispatch) {
             }
         }
 
-        _template = val;
+        _tilejson ??= { tiles: [val] };
         _fileList = null;
         _geojson = null;
 
@@ -447,7 +488,7 @@ export function svgData(projection, context, dispatch) {
     drawData.geojson = function(gj, src) {
         if (!arguments.length) return _geojson;
 
-        _template = null;
+        _tilejson = null;
         _fileList = null;
         _geojson = null;
         _src = null;
@@ -466,48 +507,41 @@ export function svgData(projection, context, dispatch) {
     drawData.fileList = function(fileList) {
         if (!arguments.length) return _fileList;
 
-        _template = null;
+        _tilejson = null;
         _geojson = null;
         _src = null;
         _fileList = fileList;
 
         if (!fileList || !fileList.length) return this;
-        var f = fileList[0];
-        var extension = getExtension(f.name);
-        var reader = new FileReader();
-        reader.onload = (function() {
-            return function(e) {
-                drawData.setFile(extension, e.target.result);
-            };
-        })(f);
-
-        reader.readAsText(f);
+        drawData.setFile(fileList[0])
+            .catch(function() {
+                /* ignore */
+            });
 
         return this;
     };
 
 
-    drawData.url = function(url, defaultExtension) {
-        _template = null;
+    drawData.url = function(url, format=undefined) {
+        _tilejson = null;
         _fileList = null;
         _geojson = null;
         _src = null;
 
         // strip off any querystring/hash from the url before checking extension
-        var testUrl = url.split(/[?#]/)[0];
-        var extension = getExtension(testUrl) || defaultExtension;
-        if (extension) {
-            _template = null;
-            d3_text(url)
-                .then(function(data) {
-                    drawData.setFile(extension, data);
+        const testUrl = url.split(/[?#]/)[0];
+        if (guessFormat(testUrl) === 'xyz') {
+            drawData.template(url);
+        } else {
+            d3_blob(url)
+                .then((blob) => {
+                    // Thread the request URL along to fall back on in case
+                    // the mime type is bad.
+                    drawData.setFile(new File([blob], url, blob), format);
                 })
                 .catch(function() {
                     /* ignore */
                 });
-
-        } else {
-            drawData.template(url);
         }
 
         return this;

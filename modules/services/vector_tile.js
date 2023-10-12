@@ -95,7 +95,7 @@ function vtToGeoJSON(data, tile, mergeCache) {
 function loadTile(source, tile) {
     if (source.loaded[tile.id] || source.inflight[tile.id]) return;
 
-    var url = source.template
+    const url = source.tilejson.tiles[0]
         .replace('{x}', tile.xyz[0])
         .replace('{y}', tile.xyz[1])
         // TMS-flipped y coordinate
@@ -162,8 +162,8 @@ export default {
     },
 
 
-    addSource: function(sourceID, template) {
-        _vtCache[sourceID] = { template: template, inflight: {}, loaded: {}, canMerge: {} };
+    addSource(sourceID, tilejson) {
+        _vtCache[sourceID] = { tilejson, inflight: {}, loaded: {}, canMerge: {} };
         return _vtCache[sourceID];
     },
 
@@ -196,17 +196,18 @@ export default {
     },
 
 
-    loadTiles: function(sourceID, template, projection) {
+    loadTiles(sourceID, tilejson, projection) {
         var source = _vtCache[sourceID];
         if (!source) {
-            source = this.addSource(sourceID, template);
+            source = this.addSource(sourceID, tilejson);
         }
 
-        var tiles = tiler.getTiles(projection);
+        const zoomExtent = [tilejson.minzoom ?? 0, tilejson.maxzoom ?? 20];
+        const tiles = tiler.zoomExtent(zoomExtent).getTiles(projection);
 
         // abort inflight requests that are no longer needed
         Object.keys(source.inflight).forEach(function(k) {
-            var wanted = tiles.find(function(tile) { return k === tile.id; });
+            const wanted = tiles.find(function(tile) { return k === tile.id; });
             if (!wanted) {
                 abortRequest(source.inflight[k]);
                 delete source.inflight[k];
