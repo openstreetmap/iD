@@ -3961,7 +3961,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .map-pane {
     position: relative;
     top: 0;
-    width: 400px;
+    width: 315px;
     max-width: 100%;
     height: 100%;
     z-index: 10;
