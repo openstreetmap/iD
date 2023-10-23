@@ -44,7 +44,6 @@ export function validationMissingTag(context) {
 
     function isWayWithNoTollConnectedToGantry(way, context) {
         if (way.type !== 'way' || way.tags.toll !== 'no') return false;
-    
         var childNodes = context.graph().childNodes(way);
         return childNodes.some(node => node.tags.highway === 'toll_gantry');
     }
@@ -75,13 +74,10 @@ export function validationMissingTag(context) {
         if (isWayWithNoTollConnectedToGantry(entity, context)) {
             subtype = 'way_with_no_toll_connected_to_gantry';
         }
-        
         // flag an unknown road even if it's a member of a relation
         if (!subtype && isUnknownRoad(entity)) {
             subtype = 'highway_classification';
         }
-
-       
 
         if (!subtype) return [];
 
