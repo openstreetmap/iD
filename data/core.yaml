@@ -1903,6 +1903,9 @@ en:
     unknown_road:
       message: "{feature} has no classification"
       reference: "Roads without a specific type may not appear in maps or routing."
+    no_toll:
+      message: "Warn when toll_gantry on {feature} without toll=yes."
+      reference: "Ensure that highways with toll_gantry are properly tagged with toll=yes for accurate mapping and routing."
     impossible_oneway:
       title: Impossible One-Ways
       tip: "Find route issues with one-way features"
