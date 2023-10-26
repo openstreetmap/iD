@@ -230,32 +230,32 @@ export function uiCombobox(context, klass) {
         // Called whenever the input value is changed (e.g. on typing)
         function change(doAutoComplete) {
             if (doAutoComplete === undefined) doAutoComplete = true;
-            fetchComboData(value(), function() {
-                _selected = null;
-                var val = input.property('value');
-
-                if (_suggestions.length) {
-                    if (doAutoComplete && input.property('selectionEnd') === val.length) {
-                        _selected = tryAutocomplete();
-                    }
-
-                    if (!_selected) {
-                        _selected = val;
-                    }
+        
+            _selected = null;
+            var val = input.property('value');
+        
+            if (_suggestions.length) {
+                if (doAutoComplete && input.property('selectionEnd') === val.length) {
+                    _selected = tryAutocomplete();
                 }
-
-                if (val.length) {
-                    var combo = container.selectAll('.combobox');
-                    if (combo.empty()) {
-                        show();
-                    }
-                } else {
-                    hide();
+        
+                if (!_selected) {
+                    _selected = val;
                 }
-
-                render();
-            });
+            }
+        
+            if (val.length) {
+                var combo = container.selectAll('.combobox');
+                if (combo.empty()) {
+                    show();
+                }
+            } else {
+                hide();
+            }
+        
+            render();
         }
+        
 
 
         // Called when the user presses up/down arrows to navigate the list
