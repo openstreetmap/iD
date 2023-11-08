@@ -35,6 +35,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.27.3
+##### 2023-Nov-08
+
+* Use `api.openstreetmap.org` domain also for _map_ API calls
+
+
 # 2.27.2
 ##### 2023-Nov-08
 

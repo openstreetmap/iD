@@ -673,10 +673,10 @@ export default {
             return oauth.xhr({
                 method: 'GET',
                 prefix: false,
-                path: urlroot + path
+                path: apiUrlroot + path
             }, done);
         } else {
-            var url = urlroot + path;
+            var url = apiUrlroot + path;
             var controller = new AbortController();
             var fn;
             if (path.indexOf('.json') !== -1) {
