@@ -194,6 +194,11 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    function hasStaticValues() {
+        return getOptions().length > 0;
+    }
+
+
     function setStaticValues(callback, filter) {
         _comboData = getOptions();
 
@@ -209,7 +214,9 @@ export function uiFieldCombo(field, context) {
 
     function setTaginfoValues(q, callback) {
         var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
-        setStaticValues(callback, queryFilter);
+        if (hasStaticValues()) {
+            setStaticValues(callback, queryFilter);
+        }
 
         var stringsField = field.resolveReference('stringsCrossReference');
         var fn = _isMulti ? 'multikeys' : 'values';
@@ -283,7 +290,7 @@ export function uiFieldCombo(field, context) {
             _comboData = _comboData.filter(queryFilter);
 
             _comboData = objectDifference(_comboData, _multiData);
-            if (callback) callback(_comboData);
+            if (callback) callback(_comboData, hasStaticValues());
         });
     }
 

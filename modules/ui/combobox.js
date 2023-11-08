@@ -230,12 +230,12 @@ export function uiCombobox(context, klass) {
         // Called whenever the input value is changed (e.g. on typing)
         function change(doAutoComplete) {
             if (doAutoComplete === undefined) doAutoComplete = true;
-            fetchComboData(value(), function() {
+            fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
                 var val = input.property('value');
 
                 if (_suggestions.length) {
-                    if (doAutoComplete && input.property('selectionEnd') === val.length) {
+                    if (doAutoComplete && !skipAutosuggest && input.property('selectionEnd') === val.length) {
                         _selected = tryAutocomplete();
                     }
 
@@ -319,7 +319,7 @@ export function uiCombobox(context, klass) {
         function fetchComboData(v, cb) {
             _cancelFetch = false;
 
-            _fetcher.call(input, v, function(results) {
+            _fetcher.call(input, v, function(results, skipAutosuggest) {
                 // already chose a value, don't overwrite or autocomplete it
                 if (_cancelFetch) return;
 
@@ -327,7 +327,7 @@ export function uiCombobox(context, klass) {
                 results.forEach(function(d) { _fetched[d.value] = d; });
 
                 if (cb) {
-                    cb();
+                    cb(skipAutosuggest);
                 }
             });
         }
