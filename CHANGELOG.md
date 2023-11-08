@@ -35,20 +35,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.28.0-dev)
+# 2.27.2
+##### 2023-Nov-08
 
-#### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Show field for changeset sources by default in the upload form
-#### :scissors: Operations
-#### :camera: Street-Level
-#### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix autocomplete in combo fields sometimes switching to a different value after a short time ([#9898])
 * Fix regression in improperly escaped usernames ([#9906], thanks [@jleedev])
-#### :earth_asia: Localization
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :hammer: Development
 * Switch to `api.openstreetmap.org` domain for OSM API calls ([operations#951])
 * Improve backwards compatibility with some old browsers ([#9934], thanks [@k-yle])
