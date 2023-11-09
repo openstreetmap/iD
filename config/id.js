@@ -32,6 +32,7 @@ if (ENV__ID_API_CONNECTION_URL !== null &&
   // see https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2
   osmApiConnections.push({
     url: ENV__ID_API_CONNECTION_URL,
+    apiUrl: ENV__ID_API_CONNECTION_API_URL,
     client_id: ENV__ID_API_CONNECTION_CLIENT_ID,
     client_secret: ENV__ID_API_CONNECTION_CLIENT_SECRET
   });
