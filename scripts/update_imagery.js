@@ -71,7 +71,8 @@ const discard = {
   'EOXAT2018CLOUDLESS': true,
   'EOXAT2019CLOUDLESS': true,
   'EOXAT2020CLOUDLESS': true,
-  'EOXAT2021CLOUDLESS': true
+  'EOXAT2021CLOUDLESS': true,
+  'EOXAT2022CLOUDLESS': true
 };
 
 const supportedWMSProjections = [
