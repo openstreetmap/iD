@@ -1718,7 +1718,7 @@ input.date-selector {
     word-wrap: break-word;
 }
 
-.form-field-input-multicombo a {
+.form-field-input-multicombo a, .form-field-input-multicombo button {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
     padding: 0px 5px 0px 5px;
@@ -1728,6 +1728,8 @@ input.date-selector {
     display: block;
     text-align: center;
     flex: 0 0 auto;
+    background: transparent;
+    border: 0;
 }
 
 .form-field-input-multicombo .input-wrap {
