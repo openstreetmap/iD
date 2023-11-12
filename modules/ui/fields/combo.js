@@ -717,27 +717,28 @@ export function uiFieldCombo(field, context) {
             chips.each(function(d) {
                 const selection = d3_select(this);
                 const span = selection.select('span');
-                span.text('');
                 const clean_value = d.value.trim();
-                if (clean_value.startsWith("https://")) {
+                span.text('');
+                if (clean_value.startsWith('https://')) {
+                    // create a button to open the link in a new tab
                     span.text(clean_value);
                     selection.select('button').remove();
                     selection.insert('button', 'a.remove')
                         .call(svgIcon('#iD-icon-out-link'))
                         .attr('class', 'form-field-button foreign-id-permalink')
                         .attr('title', () => t('icons.visit_website'))
+                        .attr('aria-label', () => t('icons.visit_website'))
                         .on('click', function(d3_event) {
                             d3_event.preventDefault();
-
                             window.open(clean_value, '_blank');
-                        })
-                    return
+                        });
+                    return;
                 }
                 if (d.display) {
                     d.display(span);
-                } else {
-                    span.text(d.value);
+                    return;
                 }
+                span.text(d.value);
             });
 
             chips.select('a.remove')
