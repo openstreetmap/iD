@@ -17,63 +17,36 @@ let imagery = [];
 let cutoffDate = new Date();
 cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
+const discard = [
+  /^osmbe$/,                              // 'OpenStreetMap (Belgian Style)'
+  /^osmfr(-(basque|breton|occitan))?$/,   // 'OpenStreetMap (French, Basque, Breton, Occitan Style)'
+  /^osm-mapnik-german_style$/,            // 'OpenStreetMap (German Style)'
+  /^HDM_HOT$/,                            // 'OpenStreetMap (HOT Style)'
+  /^osm-mapnik-black_and_white$/,         // 'OpenStreetMap (Standard Black & White)'
+  /^osm-mapnik-no_labels$/,               // 'OpenStreetMap (Mapnik, no labels)'
+  /^OpenStreetMap-turistautak$/,          // 'OpenStreetMap (turistautak)'
 
-const discard = {
-  'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
-  'osmfr': true,                        // 'OpenStreetMap (French Style)'
-  'osmfr-basque': true,                 // 'OpenStreetMap (Basque Style)'
-  'osmfr-breton': true,                 // 'OpenStreetMap (Breton Style)'
-  'osmfr-occitan': true,                // 'OpenStreetMap (Occitan Style)'
-  'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
-  'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
-  'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
-  'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
-  'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
+  /^cyclosm$/,                            // 'CyclOSM'
+  /^hike_n_bike$/,                        // 'Hike & Bike'
+  /^landsat$/,                            // 'Landsat'
+  /^skobbler$/,                           // 'Skobbler'
+  /^stamen-terrain-background$/,          // 'Stamen Terrain'
+  /^public_transport_oepnv$/,             // 'Public Transport (ÖPNV)'
+  /^tf-(cycle|landscape|outdoors)$/,      // 'Thunderforest OpenCycleMap, Landscape, Outdoors'
+  /^qa_no_address$/,                      // 'QA No Address'
+  /^wikimedia-map$/,                      // 'Wikimedia Map'
 
-  'cyclosm': true,                      // 'CyclOSM'
-  'hike_n_bike': true,                  // 'Hike & Bike'
-  'landsat': true,                      // 'Landsat'
-  'skobbler': true,                     // 'Skobbler'
-  'stamen-terrain-background': true,    // 'Stamen Terrain'
-  'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
-  'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-  'tf-landscape': true,                 // 'Thunderforest Landscape'
-  'tf-outdoors': true,                  // 'Thunderforest Outdoors'
-  'qa_no_address': true,                // 'QA No Address'
-  'wikimedia-map': true,                // 'Wikimedia Map'
+  /^openinframap-(petroleum|power|telecoms)$/,
+  /^openpt_map$/,
+  /^openrailwaymap$/,
+  /^openseamap$/,
+  /^opensnowmap-overlay$/,
 
-  'openinframap-petroleum': true,
-  'openinframap-power': true,
-  'openinframap-telecoms': true,
-  'openpt_map': true,
-  'openrailwaymap': true,
-  'openseamap': true,
-  'opensnowmap-overlay': true,
-
-  'US-TIGER-Roads-2012': true,
-  'US-TIGER-Roads-2014': true,
-
-  'Waymarked_Trails-Cycling': true,
-  'Waymarked_Trails-Hiking': true,
-  'Waymarked_Trails-Horse_Riding': true,
-  'Waymarked_Trails-MTB': true,
-  'Waymarked_Trails-Skating': true,
-  'Waymarked_Trails-Winter_Sports': true,
-
-  'OSM_Inspector-Addresses': true,
-  'OSM_Inspector-Geometry': true,
-  'OSM_Inspector-Highways': true,
-  'OSM_Inspector-Multipolygon': true,
-  'OSM_Inspector-Places': true,
-  'OSM_Inspector-Routing': true,
-  'OSM_Inspector-Tagging': true,
-
-  'EOXAT2018CLOUDLESS': true,
-  'EOXAT2019CLOUDLESS': true,
-  'EOXAT2020CLOUDLESS': true,
-  'EOXAT2021CLOUDLESS': true,
-  'EOXAT2022CLOUDLESS': true
-};
+  /^US-TIGER-Roads-201\d/,     
+  /^Waymarked_Trails/,         
+  /^OSM_Inspector/,           
+  /^EOXAT/                     
+];
 
 const supportedWMSProjections = [
   // Web Mercator
@@ -93,7 +66,7 @@ const supportedWMSProjections = [
 
 sources.forEach(source => {
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
-  if (source.id in discard) return;
+  if (discard.some(regex => regex.test(source.id))) return;
 
   let im = {
     id: source.id,
