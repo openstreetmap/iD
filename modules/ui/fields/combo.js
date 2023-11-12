@@ -677,7 +677,7 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'chip');
 
             enter.append('span');
-            enter.append('a');
+            enter.append('a').attr('class', 'remove');
 
             chips = chips.merge(enter)
                 .order()
@@ -714,17 +714,33 @@ export function uiFieldCombo(field, context) {
                 registerDragAndDrop(chips);
             }
 
-            chips.select('span').each(function(d) {
+            chips.each(function(d) {
                 const selection = d3_select(this);
+                const span = selection.select('span');
+                span.text('');
+                const clean_value = d.value.trim();
+                if (clean_value.startsWith("https://")) {
+                    span.text(clean_value);
+                    selection.select('button').remove();
+                    selection.insert('button', 'a.remove')
+                        .call(svgIcon('#iD-icon-out-link'))
+                        .attr('class', 'form-field-button foreign-id-permalink')
+                        .attr('title', () => t('icons.visit_website'))
+                        .on('click', function(d3_event) {
+                            d3_event.preventDefault();
+
+                            window.open(clean_value, '_blank');
+                        })
+                    return
+                }
                 if (d.display) {
-                    selection.text('');
-                    d.display(selection);
+                    d.display(span);
                 } else {
-                    selection.text(d.value);
+                    span.text(d.value);
                 }
             });
 
-            chips.select('a')
+            chips.select('a.remove')
                 .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
