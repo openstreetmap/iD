@@ -42,10 +42,10 @@ const discard = [
   /^openseamap$/,
   /^opensnowmap-overlay$/,
 
-  /^US-TIGER-Roads-201\d/,     
-  /^Waymarked_Trails/,         
-  /^OSM_Inspector/,           
-  /^EOXAT/                     
+  /^US-TIGER-Roads-201\d/,
+  /^Waymarked_Trails/,
+  /^OSM_Inspector/,
+  /^EOXAT/
 ];
 
 const supportedWMSProjections = [
