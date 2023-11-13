@@ -14,7 +14,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
-  _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+  _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
 * __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
