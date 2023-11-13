@@ -677,7 +677,12 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'chip');
 
             enter.append('span');
-            enter.append('a').attr('class', 'remove');
+            const field_buttons = enter
+                .append('div')
+                .attr('class', 'field_buttons');
+            field_buttons
+                .append('a')
+                .attr('class', 'remove');
 
             chips = chips.merge(enter)
                 .order()
@@ -716,14 +721,15 @@ export function uiFieldCombo(field, context) {
 
             chips.each(function(d) {
                 const selection = d3_select(this);
-                const span = selection.select('span');
+                const text_span = selection.select('span');
+                const field_buttons = selection.select('.field_buttons');
                 const clean_value = d.value.trim();
-                span.text('');
+                text_span.text('');
                 if (clean_value.startsWith('https://')) {
                     // create a button to open the link in a new tab
-                    span.text(clean_value);
-                    selection.select('button').remove();
-                    selection.insert('button', 'a.remove')
+                    text_span.text(clean_value);
+                    field_buttons.select('button').remove();
+                    field_buttons.insert('button', 'a.remove')
                         .call(svgIcon('#iD-icon-out-link'))
                         .attr('class', 'form-field-button foreign-id-permalink')
                         .attr('title', () => t('icons.visit_website'))
@@ -735,10 +741,10 @@ export function uiFieldCombo(field, context) {
                     return;
                 }
                 if (d.display) {
-                    d.display(span);
+                    d.display(text_span);
                     return;
                 }
-                span.text(d.value);
+                text_span.text(d.value);
             });
 
             chips.select('a.remove')
