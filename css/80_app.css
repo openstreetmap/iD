@@ -1663,7 +1663,6 @@ input.date-selector {
 .form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
-    align-items: center;
     margin-bottom: 3px;
     margin-top: 3px;
     border-radius: 4px;
@@ -1686,6 +1685,8 @@ input.date-selector {
 }
 .form-field-input-multicombo li.chip input {
     width: 1em;
+    height: 11px;
+    margin-top: 7px;
 }
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
@@ -1716,9 +1717,11 @@ input.date-selector {
     flex: 1 1 auto;
     overflow: hidden;
     word-wrap: break-word;
+    margin-top: 4px;
 }
 
-.form-field-input-multicombo a {
+.form-field-input-multicombo a,
+.form-field-input-multicombo button {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
     padding: 0px 5px 0px 5px;
@@ -1728,6 +1731,35 @@ input.date-selector {
     display: block;
     text-align: center;
     flex: 0 0 auto;
+    background: transparent;
+    border: 0;
+}
+
+.form-field-input-multicombo li.chip .field_buttons {
+    display: inline-block;
+    text-align: right;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons a {
+    display: block;
+    float: right;
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons button {
+    display: inline-block;
+    margin-right: -4px;
+    margin-top: -4px;
+    margin-bottom: -2px;
+    margin-left: -2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons button:hover {
+    background-color: transparent;
 }
 
 .form-field-input-multicombo .input-wrap {
