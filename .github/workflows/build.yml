@@ -27,5 +27,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm clean-install
+      env:
+        FORCE_COLOR: 2
     - run: npm run all
+      env:
+        FORCE_COLOR: 2
     - run: npm run test
+      env:
+        FORCE_COLOR: 2
