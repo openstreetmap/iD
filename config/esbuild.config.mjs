@@ -2,9 +2,9 @@ import esbuild from 'esbuild';
 import fs from 'node:fs';
 import parse from 'minimist';
 import envs from './envs.mjs';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 
 let args = parse(process.argv.slice(2), {boolean: true});
-delete args._;
 
 const context = await esbuild.context({
   define: envs,
@@ -14,7 +14,8 @@ const context = await esbuild.context({
   legalComments: 'none',
   logLevel: 'info',
   metafile: true,
-  outfile: 'dist/iD.js'
+  outfile: 'dist/iD.js',
+  target: browserslistToEsbuild(),
 });
 
 if (args.watch) {

@@ -13,11 +13,12 @@
     ]
   },
   {
-    "countryCodes": ["mx"],
+    "countryCodes": ["id"],
     "format": [
-      ["street", "housenumber"],
-      ["neighbourhood"],
-      ["postcode", "city", "state"]
+      ["unit", "housename"],
+      ["street", "housenumber", "neighbourhood"],
+      ["subdistrict", "district"],
+      ["city", "province", "postcode"]
     ]
   },
   {
@@ -142,6 +143,14 @@
     }
   },
   {
+    "countryCodes": ["kr"],
+    "format": [
+      ["province", "city", "district"],
+      ["street", "housenumber", "unit"],
+      ["postcode"]
+    ]
+  },
+  {
     "countryCodes": ["tr"],
     "format": [
       ["neighbourhood"],
@@ -202,6 +211,14 @@
       "state": 0.4,
       "postcode": 0.2
     }
+  },
+  {
+    "countryCodes": ["mx"],
+    "format": [
+      ["street", "housenumber"],
+      ["neighbourhood"],
+      ["postcode", "city", "state"]
+    ]
   },
   {
     "countryCodes": ["lv"],
