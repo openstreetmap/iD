@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import * as countryCoder from '@ideditor/country-coder';
+import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
@@ -96,7 +96,7 @@ export function uiFieldLocalized(field, context) {
                 var preset = presetManager.match(entity, context.graph());
                 if (preset) {
                     var isSuggestion = preset.suggestion;
-                    var fields = preset.fields();
+                    var fields = preset.fields(entity.extent(context.graph()).center());
                     var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
                     var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
                     var setsName = preset.addTags.name;

@@ -1,4 +1,5 @@
 import deepEqual from 'fast-deep-equal';
+
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -27,7 +28,7 @@ export function validationMismatchedGeometry() {
 
         var asLine = presetManager.matchTags(tagSuggestingArea, 'line');
         var asArea = presetManager.matchTags(tagSuggestingArea, 'area');
-        if (asLine && asArea && asLine === asArea) {
+        if (asLine && asArea && deepEqual(asLine.tags, asArea.tags)) {
             // this tag also allows lines and making this an area wouldn't matter
             return null;
         }

@@ -63,6 +63,7 @@ export var uiFields = {
     colour: uiFieldColour,
     combo: uiFieldCombo,
     cycleway: uiFieldDirectionalCombo,
+    date: uiFieldText,
     defaultCheck: uiFieldDefaultCheck,
     directionalCombo: uiFieldDirectionalCombo,
     email: uiFieldEmail,

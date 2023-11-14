@@ -298,7 +298,8 @@ export function uiPresetIcon() {
     const isMaki = picon && /^maki-/.test(picon);
     const isTemaki = picon && /^temaki-/.test(picon);
     const isFa = picon && /^fa[srb]-/.test(picon);
-    const isiDIcon = picon && !(isMaki || isTemaki || isFa);
+    const isRöntgen = picon && /^roentgen-/.test(picon);
+    const isiDIcon = picon && !(isMaki || isTemaki || isFa || isRöntgen);
 
     let icon = container.selectAll('.preset-icon')
       .data(picon ? [0] : []);
@@ -368,6 +369,7 @@ export function uiPresetIcon() {
     subway: ['railway/subway', 'railway/subway', 'railway/subway'],
     train: ['railway/rail', 'railway/rail', 'railway/rail'],
     tram: ['railway/tram', 'railway/tram', 'railway/tram'],
+    railway: ['railway/rail', 'railway/rail', 'railway/rail'],
     waterway: ['waterway/stream', 'waterway/stream', 'waterway/stream']
   };
 

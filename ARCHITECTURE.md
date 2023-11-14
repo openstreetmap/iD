@@ -1,8 +1,8 @@
 ## iD Architecture
 
-iD is written in a modular code style using ES6 modules. The modules are bundled
-with [rollup.js](http://rollupjs.org/). iD eventually aims to be a reusable,
-modular library to kickstart other JavaScript-based tools for OpenStreetMap.
+iD is written in a modular code style using ES6 modules.
+iD eventually aims to be a reusable, modular library to kickstart other
+JavaScript-based tools for OpenStreetMap.
 
 ### d3
 

@@ -4,6 +4,7 @@ import { json as d3_json } from 'd3-fetch';
 
 import { utilObjectOmit, utilQsString } from '../util';
 import { localizer } from '../core/localizer';
+import { allowUpperCaseTagValues } from '../osm/tags';
 
 import { taginfoApiUrl } from '../../config/id.js';
 
@@ -312,8 +313,7 @@ export default {
                 // A few OSM keys expect values to contain uppercase values (see #3377).
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
-                var re = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale/;
-                var allowUpperCase = re.test(params.key);
+                var allowUpperCase = allowUpperCaseTagValues.test(params.key);
                 var f = filterValues(allowUpperCase);
 
                 var result = d.data.filter(f).map(valKeyDescription);

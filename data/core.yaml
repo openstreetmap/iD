@@ -784,6 +784,7 @@ en:
       # abbreviation of inches
       inch: in
     max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
+    set_today: "Sets the value to today."
   background:
     title: Background
     description: Background Settings
@@ -1357,6 +1358,11 @@ en:
     report: Report a privacy concern with this image
     view_on_bing: "View on Bing Maps"
     hires: "High resolution"
+  vegbilder:
+    title: "Vegbilder"
+    tooltip: "Street-level photos from the Norwegian Public Roads Administration"
+    publisher: "Norwegian Public Roads Administration"
+    view_on: "View it on Vegbilder"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
   mapillary_map_features:
@@ -1431,6 +1437,22 @@ en:
   kartaview:
     title: KartaView
     view_on_kartaview: "View this image on KartaView"
+  mapilio:
+    title: Mapilio
+    tooltip: "Street-level photos from Mapilio"
+  street_side:
+    minzoom_tooltip: "Zoom in to see street-side photos"
+  local_photos:
+    tooltip: Add georeferenced photos from local files
+    tooltip_edit: Edit georeferenced photos
+    header: Georeferenced Photos
+    zoom: Zoom to photos
+    zoom_single: Zoom to photo
+    file:
+      instructions: "Choose georeferenced photos to be displayed. Supported types are .jpg and .png with exif location data"
+      label: "Browse files"
+    no_geolocation:
+      tooltip: Image without geolocation cannot be located on the map
   note:
     note: Note
     title: Edit note
@@ -1468,6 +1490,7 @@ en:
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
+      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Map Machine](https://github.com/enzet/map-machine) (CC BY 4.0)."
       open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
@@ -1929,6 +1952,8 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_using_crossing:
+        title: Connect using a crossing
       connect_using_ford:
         title: Connect using a ford
       continue_from_start:

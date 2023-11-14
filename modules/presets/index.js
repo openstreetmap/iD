@@ -163,9 +163,6 @@ export function presetIndex() {
     // Rebuild universal fields array
     _universal = Object.values(_fields).filter(field => field.universal);
 
-    // Reset all the preset fields - they'll need to be resolved again
-    Object.values(_presets).forEach(preset => preset.resetFields());
-
     // Rebuild geometry index
     _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
     _this.collection.forEach(preset => {
@@ -305,6 +302,7 @@ export function presetIndex() {
       footway: true,
       railway: true,
       junction: true,
+      traffic_calming: true,
       type: true
     };
     let areaKeys = {};

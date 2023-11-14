@@ -14,7 +14,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
-  _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+  _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
 * __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
@@ -100,6 +100,21 @@ In addition, the following parameters are available as **URL query parameters**:
   _Example:_ `https://www.openstreetmap.org/edit?editor=id&locale=de`<br/>
 * __`gpx`__ - Expects a trace ID of a [public gps trace](https://www.openstreetmap.org/traces) uploaded on OpenStreetMap.<br/>
   _Example:_ `https://www.openstreetmap.org/edit?editor=id&gpx=4009513`<br/>
+
+
+## Environment variables
+
+Environment variables or a dotenv file can be used to configure certain aspects of iD at build time.
+
+* __`ID_API_CONNECTION_URL`__, __`ID_API_CONNECTION_CLIENT_ID`__, __`ID_API_CONNECTION_CLIENT_SECRET`__ - Custom [OAuth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server.
+* __`ID_API_CONNECTION_API_URL`__ Optional url to use for OSM API calls aftern the initial authentication is complete when using a custom OAuth2 connection (see above). If unspecified, `ID_API_CONNECTION_URL` will be used for both the authentication and subsequent API calls.
+* __`ID_API_CONNECTION`__ - Either `live` or `dev`, if only either one should be made offered for editing.
+* __`ID_PRESETS_CDN_URL`__ - The URL where iD should fetch it's tagging presets from. Needs to point to a CORS enabled web server which is serving the `package.json` and `dist` folder of a repository built on [`@ideditor/schema-builder`](https://github.com/ideditor/schema-builder).
+* __`ENV__ID_OCI_CDN_URL`__ - URL to a hosted version of the [osm-community-index](https://github.com/osmlab/osm-community-index)
+* __`ENV__ID_NSI_CDN_URL`__ - URL to a hosted version of the [name-suggestion-index](https://github.com/osmlab/name-suggestion-index)
+* __`ENV__ID_WMF_SITEMATRIX_CDN_URL`__ - URL to a hosted version of the [wmf-sitematrix](https://github.com/osmlab/wmf-sitematrix)
+* __`ID_TAGINFO_API_URL`__ - URL to a [taginfo](https://wiki.openstreetmap.org/wiki/Taginfo) service.
+* __`ID_NOMINATIM_API_URL`__ - URL to a [nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) geocoding service.
 
 ## CSS selectors
 

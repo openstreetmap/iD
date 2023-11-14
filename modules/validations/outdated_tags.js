@@ -24,11 +24,13 @@ export function validationOutdatedTags() {
 
 
   function oldTagIssues(entity, graph) {
-    const oldTags = Object.assign({}, entity.tags);  // shallow copy
-    let preset = presetManager.match(entity, graph);
-    let subtype = 'deprecated_tags';
-    if (!preset) return [];
     if (!entity.hasInterestingTags()) return [];
+
+    let preset = presetManager.match(entity, graph);
+    if (!preset) return [];
+
+    const oldTags = Object.assign({}, entity.tags);  // shallow copy
+    let subtype = 'deprecated_tags';
 
     // Upgrade preset, if a replacement is available..
     if (preset.replacement) {

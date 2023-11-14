@@ -29,7 +29,7 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org/) version 16.14 or newer
+* [Node.js](https://nodejs.org/) version 18 or newer
 * [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
   * Note for Windows users:
     * Edit `$HOME\.gitconfig`:<br/>
@@ -38,9 +38,6 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
           autocrlf = input</pre>
 
 ## Installation
-
-Note: Windows users should run these steps in a shell started with "Run as administrator".
-This is only necessary the first time so that the build process can create symbolic links.
 
 To run the current development version of iD on your own computer:
 
@@ -85,6 +82,7 @@ iD also bundles portions of the following open source software.
 * [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
 * [Maki (CC0 1.0)](https://github.com/mapbox/maki)
 * [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
+* [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
 * [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
 * [iD Tagging Schema (ISC)](https://github.com/openstreetmap/id-tagging-schema)
 * [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)
