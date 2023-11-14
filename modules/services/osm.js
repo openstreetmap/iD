@@ -21,6 +21,7 @@ var apiUrlroot = osmApiConnections[0].apiUrl || urlroot;
 var redirectPath = window.location.origin + window.location.pathname;
 var oauth = osmAuth({
     url: urlroot,
+    apiUrl: apiUrlroot,
     client_id: osmApiConnections[0].client_id,
     client_secret: osmApiConnections[0].client_secret,
     scope: 'read_prefs write_prefs write_api read_gpx write_notes',
@@ -577,6 +578,11 @@ export default {
     },
 
 
+    getApiUrlRoot: function() {
+        return apiUrlroot;
+    },
+
+
     changesetURL: function(changesetID) {
         return urlroot + '/changeset/' + changesetID;
     },
@@ -672,8 +678,7 @@ export default {
         if (this.authenticated()) {
             return oauth.xhr({
                 method: 'GET',
-                prefix: false,
-                path: apiUrlroot + path
+                path
             }, done);
         } else {
             var url = apiUrlroot + path;
@@ -801,8 +806,7 @@ export default {
         } else {   // Open a new changeset..
             var options = {
                 method: 'PUT',
-                prefix: false,
-                path: apiUrlroot + '/api/0.6/changeset/create',
+                path: '/api/0.6/changeset/create',
                 headers: { 'Content-Type': 'text/xml' },
                 content: JXON.stringify(changeset.asJXON())
             };
@@ -823,8 +827,7 @@ export default {
             // Upload the changeset..
             var options = {
                 method: 'POST',
-                prefix: false,
-                path: apiUrlroot + '/api/0.6/changeset/' + changesetID + '/upload',
+                path: '/api/0.6/changeset/' + changesetID + '/upload',
                 headers: { 'Content-Type': 'text/xml' },
                 content: JXON.stringify(changeset.osmChangeJXON(changes))
             };
@@ -850,8 +853,7 @@ export default {
                 // Still attempt to close changeset, but ignore response because #2667
                 oauth.xhr({
                     method: 'PUT',
-                    prefix: false,
-                    path: apiUrlroot + '/api/0.6/changeset/' + changeset.id + '/close',
+                    path: '/api/0.6/changeset/' + changeset.id + '/close',
                     headers: { 'Content-Type': 'text/xml' }
                 }, function() { return true; });
             }
@@ -883,8 +885,7 @@ export default {
         utilArrayChunk(toLoad, 150).forEach(function(arr) {
             oauth.xhr({
                 method: 'GET',
-                prefix: false,
-                path: apiUrlroot + '/api/0.6/users.json?users=' + arr.join()
+                path: '/api/0.6/users.json?users=' + arr.join()
             }, wrapcb(this, done, _connectionID));
         }.bind(this));
 
@@ -910,8 +911,7 @@ export default {
 
         oauth.xhr({
             method: 'GET',
-            prefix: false,
-            path: apiUrlroot + '/api/0.6/user/' + uid + '.json'
+            path: '/api/0.6/user/' + uid + '.json'
         }, wrapcb(this, done, _connectionID));
 
         function done(err, payload) {
@@ -935,8 +935,7 @@ export default {
 
         oauth.xhr({
             method: 'GET',
-            prefix: false,
-            path: apiUrlroot + '/api/0.6/user/details.json'
+            path: '/api/0.6/user/details.json'
         }, wrapcb(this, done, _connectionID));
 
         function done(err, payload) {
@@ -969,8 +968,7 @@ export default {
 
             oauth.xhr({
                 method: 'GET',
-                prefix: false,
-                path: apiUrlroot + '/api/0.6/changesets?user=' + user.id
+                path: '/api/0.6/changesets?user=' + user.id
             }, wrapcb(this, done, _connectionID));
         }
 
@@ -1209,8 +1207,7 @@ export default {
 
         _noteCache.inflightPost[note.id] = oauth.xhr({
             method: 'POST',
-            prefix: false,
-            path: urlroot + path
+            path: path
         }, wrapcb(this, done, _connectionID));
 
 
@@ -1262,8 +1259,7 @@ export default {
 
         _noteCache.inflightPost[note.id] = oauth.xhr({
             method: 'POST',
-            prefix: false,
-            path: urlroot + path
+            path: path
         }, wrapcb(this, done, _connectionID));
 
 
@@ -1304,11 +1300,17 @@ export default {
     switch: function(newOptions) {
         urlroot = newOptions.url;
         apiUrlroot = newOptions.apiUrl || urlroot;
+        if (newOptions.url && !newOptions.apiUrl) {
+            newOptions = {
+                ...newOptions,
+                apiUrl: newOptions.url
+            };
+        }
 
         // Copy the existing options, but omit 'access_token'.
         // (if we did preauth, access_token won't work on a different server)
-        var oldOptions = utilObjectOmit(oauth.options(), 'access_token');
-        oauth.options(Object.assign(oldOptions, newOptions));
+        const oldOptions = utilObjectOmit(oauth.options(), 'access_token');
+        oauth.options({...oldOptions, ...newOptions});
 
         this.reset();
         this.userChangesets(function() {});  // eagerly load user details/changesets

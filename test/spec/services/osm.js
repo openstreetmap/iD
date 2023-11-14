@@ -271,7 +271,10 @@ describe('iD.serviceOsm', function () {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            connection.switch({ url: 'https://api.openstreetmap.org' });
+            connection.switch({
+                url: 'https://www.openstreetmap.org',
+                apiUrl: 'https://api.openstreetmap.org'
+            });
 
             connection.loadFromAPI(path, function (err) {
                 expect(err).to.not.be.ok;
