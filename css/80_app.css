@@ -1750,6 +1750,10 @@ input.date-selector {
     margin-bottom: -2px;
 }
 
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .field_buttons a {
+    float: left;
+}
+
 .form-field-input-multicombo li.chip .field_buttons button {
     display: inline-block;
     margin-right: -4px;
