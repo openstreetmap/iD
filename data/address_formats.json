@@ -13,11 +13,12 @@
     ]
   },
   {
-    "countryCodes": ["kr"],
+    "countryCodes": ["id"],
     "format": [
-      ["province", "city", "district"],
-      ["street", "housenumber", "unit"],
-      ["postcode"]
+      ["unit", "housename"],
+      ["street", "housenumber", "neighbourhood"],
+      ["subdistrict", "district"],
+      ["city", "province", "postcode"]
     ]
   },
   {
@@ -140,6 +141,14 @@
       "block_number": 0.5,
       "housenumber": 0.5
     }
+  },
+  {
+    "countryCodes": ["kr"],
+    "format": [
+      ["province", "city", "district"],
+      ["street", "housenumber", "unit"],
+      ["postcode"]
+    ]
   },
   {
     "countryCodes": ["tr"],
