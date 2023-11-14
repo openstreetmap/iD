@@ -17,7 +17,7 @@
     "format": [
       ["street", "housenumber"],
       ["neighbourhood"],
-      ["postcode", "district", "city", "state"]
+      ["postcode", "city", "state"]
     ]
   },
   {
