@@ -3426,7 +3426,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * When adding a duplicate tag, focus the existing key instead of adding a "_1" suffix ([#2896])
 * Exclude tags already on object from auto-completion in the All tags list ([#3625])
 * Allow tag values to be entered before keys ([#5872])
-* Allow deletetion of tags while one is focused ([#5878])
+* Allow deletion of tags while one is focused ([#5878])
 * Make address field suggestions case sensitive ([#5887])
 * Replace the "Edit or translate documentation" link text with a pencil icon ([#5753])
 * When upload is disabled, show a tooltip on the button explaining the reason ([#5830])
@@ -3705,7 +3705,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fetch multilingual tag descriptions and images from the OSM Wikibase ([#5647], thanks [@nyurik])
 * Set the localization via a URL parameter ([#5644], [#5650], thanks [@tordans])
 * Fix misaligned labels in the right-to-left layout ([#5687], [#5692], [#5699], [#5705], thanks [@iriman])
-* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keboards ([#5663])
+* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keyboards ([#5663])
 * Press <kbd>?</kbd> to toggle the help pane regardless of the localization ([#5663])
 * Display translated names and descriptions of more background sources ([#5737])
 
