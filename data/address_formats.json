@@ -241,7 +241,7 @@
     "countryCodes": ["ph"],
     "format": [
       ["unit", "housename", "housenumber", "street"],
-	  ["neighbourhood", "district", "city"],
+	  ["neighbourhood", "barangay", "city"],
 	  ["postcode", "province"]
     ]
   },
