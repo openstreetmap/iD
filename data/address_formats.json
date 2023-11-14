@@ -143,6 +143,14 @@
     }
   },
   {
+    "countryCodes": ["kr"],
+    "format": [
+      ["province", "city", "district"],
+      ["street", "housenumber", "unit"],
+      ["postcode"]
+    ]
+  },
+  {
     "countryCodes": ["tr"],
     "format": [
       ["neighbourhood"],
