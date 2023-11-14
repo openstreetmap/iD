@@ -223,7 +223,7 @@ export var osmRightSideIsInsideTags = {
 export var osmRoutableHighwayTagValues = {
     motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
     motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
-    unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true,
+    unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
     path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
 };
 // "highway" tag values that generally do not allow motor vehicles
