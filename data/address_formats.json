@@ -213,6 +213,14 @@
     }
   },
   {
+    "countryCodes": ["mx"],
+    "format": [
+      ["street", "housenumber"],
+      ["neighbourhood"],
+      ["postcode", "city", "state"]
+    ]
+  },
+  {
     "countryCodes": ["lv"],
     "format": [
       ["street", "housenumber"],
