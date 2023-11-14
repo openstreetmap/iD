@@ -15,7 +15,8 @@
   {
     "countryCodes": ["id"],
     "format": [
-      ["unit", "housename", "street", "housenumber", "neighbourhood"],
+      ["unit", "housename"],
+      ["street", "housenumber", "neighbourhood"],
       ["subdistrict", "district"],
       ["city", "province", "postcode"]
     ]
