@@ -245,3 +245,16 @@ export var osmFlowingWaterwayTagValues = {
 
 // Tags which values should be considered case sensitive when offering tag suggestions
 export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
+
+// Returns whether a `colour` tag value looks like a valid color we can display
+export function isColourValid(value) {
+    if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
+        // OSM only supports hex or named colors
+        return false;
+    }
+    if (!CSS.supports('color', value) || ['unset', 'inherit', 'initial', 'revert'].includes(value)) {
+        // see https://stackoverflow.com/a/68217760/1627467
+        return false;
+    }
+    return true;
+}

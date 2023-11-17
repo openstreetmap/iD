@@ -11,6 +11,7 @@ import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
+import { isColourValid } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -310,7 +311,7 @@ export function uiFeatureList(context) {
             label
                 .append('span')
                 .attr('class', 'entity-name')
-                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
+                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour && isColourValid(d.entity.tags.colour))
                 .style('border-color', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
                 .text(function(d) { return d.name; });
 

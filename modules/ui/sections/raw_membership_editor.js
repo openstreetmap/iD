@@ -12,6 +12,7 @@ import { actionDeleteMembers } from '../../actions/delete_members';
 
 import { modeSelect } from '../../modes/select';
 import { osmEntity, osmRelation } from '../../osm';
+import { isColourValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
@@ -258,7 +259,7 @@ export function uiSectionRawMembershipEditor(context) {
                     .text(presetName + ' ');
                 selection
                     .append('span')
-                    .classed('has-colour', entity.tags.colour)
+                    .classed('has-colour', entity.tags.colour && isColourValid(entity.tags.colour))
                     .style('border-color', entity.tags.colour)
                     .text(entityName);
             };
@@ -371,7 +372,7 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .classed('has-colour', d => d.relation.tags.colour)
+            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
             .style('border-color', d => d.relation.tags.colour)
             .text(function(d) { return utilDisplayName(d.relation); });
 
