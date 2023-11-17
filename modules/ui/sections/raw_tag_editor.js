@@ -433,9 +433,10 @@ export function uiSectionRawTagEditor(id, context) {
                 }, function(err, data) {
                     if (!err) {
                         const filtered = data
-                            .filter(d => _tags[d.value] === undefined)
+                            .filter(d => _tags[d.value] === undefined) // already used tag
                             .filter(d => !(d.value in _discardTags)) // do not suggest discardable tags (see #9817)
-                            .filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
+                            .filter(d => !/_\d$/.test(d)) // tag like name_1 (see #9422)
+                            .filter(d => d.value.toLowerCase().includes(value.toLowerCase())); // tag does not match user input
                         callback(sort(value, filtered));
                     }
                 });
