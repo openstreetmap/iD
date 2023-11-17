@@ -1,14 +1,31 @@
 /* eslint-disable no-console */
 const fs = require('fs');
-let sources = require('editor-layer-index/imagery.json');
 const prettyStringify = require('json-stringify-pretty-compact');
 
+/** @type {import("geojson").FeatureCollection} */
+const sources = JSON.parse(
+  fs.readFileSync(require.resolve('editor-layer-index/imagery.geojson'), 'utf8')
+);
+
 if (fs.existsSync('./data/manual_imagery.json')) {
-  const manualImagery = JSON.parse(fs.readFileSync('./data/manual_imagery.json'));
+  /** @type {any[]} */
+  const manualImagery = JSON.parse(fs.readFileSync('./data/manual_imagery.json', 'utf8'));
   // we can include additional imagery sources that aren't in the index
-  sources = sources
-    .filter(source => !manualImagery.find(manualSource => manualSource.id === source.id))
-    .concat(manualImagery);
+  sources.features = sources.features
+    .filter(source => !manualImagery.find(manualSource => manualSource.id === source.properties?.id));
+
+  sources.features.push(
+    ...manualImagery.map(source => {
+      /** @type {import("geojson").Feature} */
+      const feature = {
+        type: 'Feature',
+        properties: { ...source, ...source.extent },
+        geometry: null,
+        bbox: source.bbox,
+      };
+      return feature;
+    })
+  );
 }
 
 let imagery = [];
@@ -63,8 +80,10 @@ const supportedWMSProjections = [
   'EPSG:4326'
 ];
 
+sources.features.forEach(feature => {
+  const source = feature.properties;
 
-sources.forEach(source => {
+  if (!source) return;
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (discard.some(regex => regex.test(source.id))) return;
 
@@ -72,7 +91,8 @@ sources.forEach(source => {
     id: source.id,
     name: source.name,
     type: source.type,
-    template: source.url
+    template: source.url,
+    category: source.category,
   };
 
   // Some sources support 512px tiles
@@ -89,7 +109,7 @@ sources.forEach(source => {
   if (source.type === 'wms') {
     const projection = source.available_projections && supportedWMSProjections.find(p => source.available_projections.indexOf(p) !== -1);
     if (!projection) return;
-    if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
+    if (sources.features.some(other => other.properties?.name === source.name && other.properties?.type !== source.type)) return;
     im.projection = projection;
   }
 
@@ -113,7 +133,7 @@ sources.forEach(source => {
     }
   }
 
-  let extent = source.extent || {};
+  let extent = source;
   if (extent.min_zoom || extent.max_zoom) {
     im.zoomExtent = [
       extent.min_zoom || 0,
@@ -121,9 +141,13 @@ sources.forEach(source => {
     ];
   }
 
-  if (extent.polygon) {
-    im.polygon = extent.polygon;
-  } else if (extent.bbox) {
+  if (feature.geometry) {
+    if (feature.geometry.type === 'Polygon') {
+      im.polygon = [feature.geometry.coordinates?.[0]];
+    } else if (feature.geometry.type === 'MultiPolygon') {
+      im.polygon = feature.geometry.coordinates.map(ring => ring[0]);
+    }
+  } else if (feature.bbox) {
     im.polygon = [[
       [extent.bbox.min_lon, extent.bbox.min_lat],
       [extent.bbox.min_lon, extent.bbox.max_lat],
