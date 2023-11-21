@@ -64,7 +64,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
         viewerEnter
             .append('div')
-            .attr('class', 'photo-attribution fillD');
+            .attr('class', 'photo-attribution photo-attribution-dual fillD');
 
         return planePhotoFrame.init(context, viewerEnter)
             .then(planePhotoFrame => {
@@ -84,6 +84,11 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
             const attribution = viewerWrap.selectAll('.photo-attribution').text('');
 
+            if (image.date) {
+                attribution
+                    .append('span')
+                    .text(image.date.toLocaleString());
+            }
             if (image.name) {
                 attribution
                     .append('span')
@@ -233,7 +238,8 @@ export function svgLocalPhotos(projection, context, dispatch) {
                     getSrc: () => readFileAsDataURL(file),
                     file: file,
                     loc: [exifData.longitude, exifData.latitude],
-                    direction: exifData.GPSImgDirection
+                    direction: exifData.GPSImgDirection,
+                    date: exifData.CreateDate || exifData.DateTimeOriginal || exifData.ModifyDate,
                 };
                 loaded.push(photo);
                 const sameName = _photos.filter(i => i.name === photo.name);

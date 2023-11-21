@@ -85,6 +85,10 @@
     padding: 4px 2px;
     z-index: 10;
 }
+.photo-attribution-dual {
+    display: flex;
+    justify-content: space-between;
+}
 
 .photo-attribution a,
 .photo-attribution a:visited,
