@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow tiles in minimap to be slightly underzoomed, preventing them from blacking out on low map zoom levels ([#10653])
 * Fix confusing behaviour after logging out in the standalone build of iD ([#10683], thanks [@k-yle])
 * Fix editor being stuck in a disabled state when login popup window is closed prematurely ([#10651])
+* Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 #### :earth_asia: Localization
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
@@ -70,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9013]: https://github.com/openstreetmap/iD/issues/9013
 [#9816]: https://github.com/openstreetmap/iD/issues/9816
 [#9999]: https://github.com/openstreetmap/iD/issues/9999
+[#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10452]: https://github.com/openstreetmap/iD/pull/10452
 [#10459]: https://github.com/openstreetmap/iD/pull/10459
 [#10488]: https://github.com/openstreetmap/iD/pull/10488

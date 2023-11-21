@@ -278,10 +278,11 @@ describe('iD.actionCircularize', function () {
         var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 2]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'a']})
+                iD.osmNode({id: 'c', loc: [2, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'a']})
             ]);
 
-        expect(area('-', graph)).to.eql(0);
+        expect(area('-', graph)).to.eql(2);
 
         graph = iD.actionCircularize('-', projection)(graph);
 
