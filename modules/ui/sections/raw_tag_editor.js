@@ -13,7 +13,16 @@ import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
+import { TAG2LINK } from '../../services/tag2Link';
 
+/** @param {string} key */
+export function getUrlHost(key) {
+    try {
+        return new URL(TAG2LINK[key]).host.replace(/^www\./, '');
+    } catch {
+        return undefined;
+    }
+}
 
 export function uiSectionRawTagEditor(id, context) {
 
@@ -199,6 +208,14 @@ export function uiSectionRawTagEditor(id, context) {
         innerWrap
             .append('button')
             .attr('tabindex', -1)
+            .attr('class', 'form-field-button foreignKey')
+            .attr('title', d => t('icons.view_on', { domain: getUrlHost(d.key) }))
+            .style('display', d => d.key in TAG2LINK ? 'block' : 'none')
+            .call(svgIcon('#iD-icon-out-link'));
+
+        innerWrap
+            .append('button')
+            .attr('tabindex', -1)
             .attr('class', 'form-field-button remove')
             .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'));
@@ -238,6 +255,7 @@ export function uiSectionRawTagEditor(id, context) {
 
                 row.call(reference.body);
 
+                row.select('button.foreignKey'); // propagate bound data
                 row.select('button.remove');   // propagate bound data
             });
 
@@ -273,6 +291,18 @@ export function uiSectionRawTagEditor(id, context) {
                     return typeof d.value === 'string' ? d.value : '';
                 }, (_, newValue) => newValue !== null
             );
+
+        items.selectAll('button.foreignKey')
+            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
+                (d3_event, d) => {
+                    if (d3_event.button !== 0) return;
+                    for (const value of d.value.split(';')) {
+                        const url = /^https?:\/\//i.test(value)
+                            ? value
+                            : TAG2LINK[d.key].replace(/\$1/g, value);
+                        window.open(url, '_blank');
+                    }
+                });
 
         items.selectAll('button.remove')
             .classed('disabled', d => d.key === '')  // disabled for blank tag line
