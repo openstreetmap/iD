@@ -13,7 +13,27 @@ import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util
 import { uiTooltip } from '..';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
+import { loadTag2Link } from '../../services/tag2Link';
 
+
+/** @type {Map<string, string> | undefined} */
+let tag2Link;
+
+// singleton request
+loadTag2Link()
+    .then((result) => { tag2Link = result; })
+    .catch(() => undefined); // no-op
+
+/** @param {string} key */
+export function getUrlHost(key) {
+    const url = tag2Link?.get(key);
+    if (!url) return undefined;
+    try {
+        return new URL(url).host.replace(/^www\./, '');
+    } catch {
+        return undefined;
+    }
+}
 
 export function uiSectionRawTagEditor(id, context) {
 
@@ -229,6 +249,13 @@ export function uiSectionRawTagEditor(id, context) {
 
         innerWrap
             .append('button')
+            .attr('class', 'form-field-button foreignKey')
+            .attr('title', d => t('icons.view_on', { domain: getUrlHost(d.key) }))
+            .style('display', d => tag2Link?.get(d.key) ? 'block' : 'none')
+            .call(svgIcon('#iD-icon-out-link'));
+
+        innerWrap
+            .append('button')
             .attr('class', 'form-field-button remove')
             .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'));
@@ -264,6 +291,7 @@ export function uiSectionRawTagEditor(id, context) {
 
                 row.call(reference.body);
 
+                row.select('button.foreignKey'); // propagate bound data
                 row.select('button.remove');   // propagate bound data
             });
 
@@ -290,6 +318,15 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
             });
+
+        items.selectAll('button.foreignKey')
+            .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
+                (d3_event, d) => {
+                    if (d3_event.button !== 0) return;
+                    const url = tag2Link?.get(d.key)?.replace(/\$1/g, d.value);
+                    if (!url) return; // this should be impossible
+                    window.open(url, '_blank');
+                });
 
         items.selectAll('button.remove')
             .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
