@@ -32,6 +32,7 @@
             "separator": ","
           },
           {
+            "modifiers": ["⌘"],
             "shortcuts": ["geolocate.key"],
             "text": "shortcuts.browsing.navigation.geolocate"
           },
