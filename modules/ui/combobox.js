@@ -403,7 +403,7 @@ export function uiCombobox(context, klass) {
                     if (d.display) {
                         d.display(d3_select(this));
                     } else {
-                        d3_select(this).text(d.value);
+                        d3_select(this).text(d.title);
                     }
                 })
                 .on('mouseenter', _mouseEnterHandler)

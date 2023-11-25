@@ -411,7 +411,13 @@ export function uiSectionRawTagEditor(id, context) {
                 .fetcher(function(value, callback) {
                     var keyString = utilGetSetValue(key);
                     if (!_tags[keyString]) return;
-                    var data = _tags[keyString].filter(Boolean).map(function(tagValue) {
+                    var data = _tags[keyString].map(function(tagValue) {
+                        if (!tagValue) {
+                            return {
+                                value: ' ',
+                                title: t('inspector.empty'),
+                            };
+                        }
                         return {
                             value: tagValue,
                             title: tagValue
@@ -548,6 +554,9 @@ export function uiSectionRawTagEditor(id, context) {
 
         // exit if this is a multiselection and no value was entered
         if (typeof d.value !== 'string' && !this.value) return;
+
+        // remove tag if it is now empty
+        if (!this.value.trim()) return removeTag(d3_event, d);
 
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;

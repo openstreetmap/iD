@@ -725,6 +725,7 @@ en:
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
+    empty: (empty)
     multiple_values: Multiple Values
     multiple_types: Multiple Types
     unshared_value_tooltip: not shared by all features
