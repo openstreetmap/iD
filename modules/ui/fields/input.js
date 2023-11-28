@@ -171,7 +171,6 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
-            const foreignId = utilGetSetValue(input);
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
                 .data([0]);
             
