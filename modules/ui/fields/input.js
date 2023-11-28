@@ -171,11 +171,11 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
-
+            const foreignId = utilGetSetValue(input);
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
                 .data([0]);
-
-            outlinkButton.enter()
+            
+            outlinkButton = outlinkButton.enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
@@ -187,9 +187,10 @@ export function uiFieldText(field, context) {
                     }
                     return '';
                 })
+                .merge(outlinkButton);
+                outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-
                     var value = validIdentifierValueForLink();
                     if (value) {
                         var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
