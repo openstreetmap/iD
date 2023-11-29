@@ -74,7 +74,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "~6.4.2",
     "@fortawesome/free-brands-svg-icons": "~6.4.2",
-    "@fortawesome/free-regular-svg-icons": "~6.4.2",
+    "@fortawesome/free-regular-svg-icons": "~6.5.0",
     "@fortawesome/free-solid-svg-icons": "~6.4.2",
     "@mapbox/maki": "^8.0.1",
     "@openstreetmap/id-tagging-schema": "^6.4.1",
