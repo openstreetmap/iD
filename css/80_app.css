@@ -2406,6 +2406,11 @@ div.combobox {
     color: #333;
 }
 
+.combobox .combobox-option.virtual-option {
+    font-style: italic;
+    color: #333;
+}
+
 .form-field-input-wrap {
     position: relative;
 }
