@@ -497,12 +497,15 @@ label.streetside-hires {
 
 .list-local-photos {
     max-height: 40vh;
-    overflow-y: visible;
-    overflow-x: visible;
+    overflow-y: scroll;
+    overflow-x: auto;
     /* workaround for something like "overflow-x: visible"
        see https://stackoverflow.com/a/39554003 */
     margin-left: -100px;
     padding-left: 100px;
+    margin-top: -20px;
+    padding-top: 20px;
+    min-height: 100px;
 }
 .list-local-photos::-webkit-scrollbar {
     border-left: none;
@@ -540,9 +543,6 @@ label.streetside-hires {
 }
 .list-local-photos li:last-child button.remove {
     border-bottom-right-radius: 4px;
-}
-.list-local-photos li.invalid span.filename {
-    color: #222222;
 }
 .list-local-photos li.invalid button.zoom-to-data {
     display: none;
