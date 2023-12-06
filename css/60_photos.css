@@ -507,6 +507,9 @@ label.streetside-hires {
        see https://stackoverflow.com/a/39554003 */
     margin-left: -100px;
     padding-left: 100px;
+    margin-top: -20px;
+    padding-top: 20px;
+    min-height: 100px;
 }
 .list-local-photos::-webkit-scrollbar {
     border-left: none;
@@ -545,9 +548,6 @@ label.streetside-hires {
 .list-local-photos li:last-child button.remove {
     border-bottom-right-radius: 4px;
 }
-.list-local-photos li.invalid span.filename {
-    color: #ccc;
-}
 .list-local-photos li.invalid button.zoom-to-data {
     display: none;
 }
@@ -556,6 +556,7 @@ label.streetside-hires {
 }
 .list-local-photos li.invalid button.no-geolocation {
     display: block;
+    color: red;
 }
 .list-local-photos .placeholder div {
     display: block;
