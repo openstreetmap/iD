@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
 * Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
+* Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -55,6 +56,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9424]: https://github.com/openstreetmap/iD/pull/9424
 [#9422]: https://github.com/openstreetmap/iD/issues/9422
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
+[#9992]: https://github.com/openstreetmap/iD/issues/9992
+[@ramith-kulal]: https://github.com/ramith-kulal
 
 
 # 2.27.3
