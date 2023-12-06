@@ -208,7 +208,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         layer = layerEnter
             .merge(layer);
 
-        if (_photos && _photos.length !== 0) {
+        if (_photos) {
             display_markers(_photos);
         }
     }
