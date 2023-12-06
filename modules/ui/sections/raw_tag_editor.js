@@ -416,6 +416,9 @@ export function uiSectionRawTagEditor(id, context) {
                             return {
                                 value: ' ',
                                 title: t('inspector.empty'),
+                                display: selection => selection.text('')
+                                    .classed('virtual-option', true)
+                                    .call(t.append('inspector.empty'))
                             };
                         }
                         return {
