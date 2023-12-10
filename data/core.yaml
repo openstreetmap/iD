@@ -1839,9 +1839,6 @@ en:
         amap: "Amap products are proprietary and must not be used as references."
         baidu: "Baidu products are proprietary and must not be used as references."
         google: "Google products are proprietary and must not be used as references."
-    incorrect_name:
-      message: '{feature} has the mistaken name "{name}"'
-      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
@@ -1873,6 +1870,15 @@ en:
         message: "{feature} has no descriptive tags"
       relation_type:
         message: "{feature} is a relation without a type"
+    mutually_exclusive_tags:
+      title: Contradictory Tags
+      tip: "Find features that have contradictory tags."
+      default:
+        message: "{feature} has both {tag1} and {tag2}"
+        reference: 'The tags "{tag1}" and "{tag2}" contradict each other. Only one tag should be set.'
+      same_value:
+        message: "{feature}: {tag1} and {tag2} have same value"
+        reference: 'The tags "{tag1}" and "{tag2}" have the same value. Only one tag should be set.'
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."
@@ -1998,6 +2004,9 @@ en:
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_named_tag:
+        title: 'Remove the "{tag}" tag'
+        annotation: 'Removed "{tag}" tag.'
       remove_tags:
         title: Remove the tags
       remove_the_name:
