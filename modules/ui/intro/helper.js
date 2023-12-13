@@ -64,7 +64,7 @@ export function helpHtml(id, replacements) {
         help_icon: icon('#iD-icon-help', 'inline'),
         undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'inline'),
         redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'inline'),
-        save_icon: icon('#iD-icon-save', 'inline'),
+        save_icon: icon('#iD-icon-save', 'inline'),        
 
         // operation icons
         circularize_icon: icon('#iD-operation-circularize', 'inline operation'),
@@ -107,6 +107,7 @@ export function helpHtml(id, replacements) {
 
         // reference localized UI labels directly so that they'll always match
         save: t.html('save.title'),
+        discard: t.html('discard.title'),
         undo: t.html('undo.title'),
         redo: t.html('redo.title'),
         upload: t.html('commit.save'),

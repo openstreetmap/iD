@@ -15,7 +15,7 @@ import {
 
 
 export function coreHistory(context) {
-    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error');
+    var dispatch = d3_dispatch('reset', 'change', 'merge', 'restore', 'undone', 'redone', 'storage_error','discarded');
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
@@ -194,6 +194,19 @@ export function coreHistory(context) {
                 _index--;
                 _stack.pop();
             }
+            return change(previous);
+        },
+
+        discard: function() {
+            d3_select(document).interrupt('history.perform');            
+            
+            var previousStack = _stack[_index];
+            var previous = previousStack.graph;
+
+            // Discards changes by setting current state of map as the initial state
+            _stack[++_index] = _stack[0];           
+
+            dispatch.call('discarded', this, _stack[_index], previousStack);
             return change(previous);
         },
 
