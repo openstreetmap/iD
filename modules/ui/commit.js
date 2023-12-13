@@ -507,12 +507,11 @@ export function uiCommit(context) {
             detectedHashtags = detectedHashtags.concat(hashtagHashtags());
         }
 
-        var allLowerCase = new Set();
+        var checkHashTag = new Set();
         return detectedHashtags.filter(function(hashtag) {
-            // Compare tags as lowercase strings, but keep original case tags
-            var lowerCase = hashtag.toLowerCase();
-            if (!allLowerCase.has(lowerCase)) {
-                allLowerCase.add(lowerCase);
+            // keep only unique hashtags
+            if (!checkHashTag.has(hashtag)) {
+                checkHashTag.add(hashtag);
                 return true;
             }
             return false;
