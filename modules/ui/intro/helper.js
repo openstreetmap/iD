@@ -64,7 +64,7 @@ export function helpHtml(id, replacements) {
         help_icon: icon('#iD-icon-help', 'inline'),
         undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'inline'),
         redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'inline'),
-        save_icon: icon('#iD-icon-save', 'inline'),        
+        save_icon: icon('#iD-icon-save', 'inline'),
 
         // operation icons
         circularize_icon: icon('#iD-operation-circularize', 'inline operation'),

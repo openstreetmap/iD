@@ -5,7 +5,7 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolDiscard(context) {
 
-    var button = null
+    var button = null;
     var _numChanges = 0;
     var tooltipBehavior = null;
     var key = uiCmd('⌘⌦');
@@ -23,16 +23,14 @@ export function uiToolDiscard(context) {
     function isDisabled() {
         return _numChanges === 0 || isSaving();
     }
-    
 
     function discard() {
-        // Discard changes        
+        // Discard changes
         context.history().discard();
-        
     }
 
     function updateCount() {
-        var val = context.history().difference().summary().length;        
+        var val = context.history().difference().summary().length;
         if (val === _numChanges) return;
 
         _numChanges = val;
@@ -45,8 +43,8 @@ export function uiToolDiscard(context) {
 
         if (button) {
             button
-                .classed('disabled', isDisabled())   
-        }
+                .classed('disabled', isDisabled());
+            }
     }
 
     tool.render = function(selection) {
@@ -66,11 +64,9 @@ export function uiToolDiscard(context) {
             })
             .on('click', function() {
                 discard();
-                
                 if (_numChanges === 0 && (
-                    lastPointerUpType === 'touch' ||
-                    lastPointerUpType === 'pen')
-                    ) {
+                    lastPointerUpType === 'touch' || lastPointerUpType === 'pen')
+                    ){
                         // there are no tooltips for touch interactions so flash feedback instead
                         context.ui().flash
                         .duration(2000)
@@ -81,12 +77,12 @@ export function uiToolDiscard(context) {
                     lastPointerUpType = null;
             })
             .classed('disabled', isDisabled())
-            .call(tooltipBehavior)
+            .call(tooltipBehavior);
 
         button
             .call(svgIcon('#iD-operation-delete'));
 
-        updateCount()
+        updateCount();
 
         context.keybinding()
             .on(uiCmd('⌘⌦'), function(d3_event) {
