@@ -13,6 +13,7 @@ import { isColourValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
 import { isEqual } from 'lodash-es';
+import { services } from '../../services';
 
 export {
     uiFieldText as uiFieldColour,
@@ -30,6 +31,7 @@ export function uiFieldText(field, context) {
     var dispatch = d3_dispatch('change');
     var input = d3_select(null);
     var outlinkButton = d3_select(null);
+    var mapillaryViewButton = d3_select(null);
     var wrap = d3_select(null);
     var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
     var _entityIDs = [];
@@ -169,8 +171,60 @@ export function uiFieldText(field, context) {
                     change()();
                 });
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
-
             input.attr('type', 'text');
+
+            if (field.id==='mapillary'){
+                const service = services.mapillary;
+                // set button
+                wrap.selectAll('.mapillary-set-current')
+                    .data([0])
+                    .enter()
+                    .append('button')
+                    .attr('class', 'form-field-button mapillary-set-current')
+                    .call(svgIcon('#fas-rotate'))
+                    .call(uiTooltip().title(() => t.append('inspector.set_mapillary')))
+                    .on('click', function(d3_event) {
+                        d3_event.preventDefault();
+                        const image = service.getActiveImage();
+                        if (!image) return;
+                        service
+                            .ensureViewerLoaded(context)
+                            .then(function() {
+                                service
+                                    .showViewer(context)
+                                    .selectImage(context, image.id)
+                                    .initViewer(context);
+                                utilGetSetValue(input, image.id);
+                                change()();
+                            });
+                    })
+                    .merge(wrap.selectAll('.mapillary-set-current'))
+                    .classed('disabled', () => !service.getActiveImage());
+                // view button
+                mapillaryViewButton = wrap.selectAll('.mapillary-show-view')
+                    .data([0])
+                    .enter()
+                    .append('button')
+                    .attr('class', 'form-field-button mapillary-show-view')
+                    .call(svgIcon('#fas-eye'))
+                    .call(uiTooltip().title(() => t.append('inspector.show_mapillary_from_field')))
+                    .on('click', function(d3_event) {
+                        d3_event.preventDefault();
+                        if ( !utilGetSetValue(input).trim()) return;
+                        service
+                            .ensureViewerLoaded(context)
+                            .then(function() {
+                                service
+                                    .showViewer(context)
+                                    .selectImage(context, utilGetSetValue(input).trim())
+                                    .initViewer(context);
+                            });
+
+                    })
+                    .merge(wrap.selectAll('.mapillary-show-view'))
+                    .classed('disabled', () => !utilGetSetValue(input).trim());
+            }
+
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
                 .data([0]);
 
@@ -523,6 +577,10 @@ export function uiFieldText(field, context) {
         if (outlinkButton && !outlinkButton.empty()) {
             var disabled = !validIdentifierValueForLink();
             outlinkButton.classed('disabled', disabled);
+        }
+
+        if (mapillaryViewButton && !mapillaryViewButton.empty()) {
+            mapillaryViewButton.classed('disabled', !utilGetSetValue(input).trim());
         }
 
         if (!isMixed) {
