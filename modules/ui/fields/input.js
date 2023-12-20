@@ -9,6 +9,7 @@ import { t, localizer } from '../../core/localizer';
 import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
+import { isColourValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
 import { isEqual } from 'lodash-es';
@@ -170,11 +171,10 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
-
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
                 .data([0]);
 
-            outlinkButton.enter()
+            outlinkButton = outlinkButton.enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
@@ -186,9 +186,10 @@ export function uiFieldText(field, context) {
                     }
                     return '';
                 })
+                .merge(outlinkButton);
+            outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-
                     var value = validIdentifierValueForLink();
                     if (value) {
                         var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
@@ -228,16 +229,6 @@ export function uiFieldText(field, context) {
 
 
     function updateColourPreview() {
-        function isColourValid(colour) {
-            if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
-                // OSM only supports hex or named colors
-                return false;
-            } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
-                // see https://stackoverflow.com/a/68217760/1627467
-                return false;
-            }
-            return true;
-        }
         wrap.selectAll('.colour-preview')
             .remove();
 

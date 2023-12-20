@@ -39,14 +39,52 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
+* Show the color of (route) relations in the form of small colored circles in relation membership section and feature search results ([#9424])
+* Hide tag suggestions for tags like `name_1` in raw tag editor autocomplete ([#9422])
+* Show `(empty)` as a tag value option in the raw tag editor when a multi selections contains at least one feature which does not have the particular tag ([#9876], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
+* Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
+* Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :hammer: Development
+
+[#9424]: https://github.com/openstreetmap/iD/pull/9424
+[#9422]: https://github.com/openstreetmap/iD/issues/9422
+[#9876]: https://github.com/openstreetmap/iD/issues/9876
+[#9983]: https://github.com/openstreetmap/iD/issues/9983
+[#9992]: https://github.com/openstreetmap/iD/issues/9992
+[@ramith-kulal]: https://github.com/ramith-kulal
+
+
+# 2.27.3
+##### 2023-Nov-08
+
+* Use `api.openstreetmap.org` domain also for _map_ API calls
+
+
+# 2.27.2
+##### 2023-Nov-08
+
+#### :sparkles: Usability & Accessibility
+* Show field for changeset sources by default in the upload form
+#### :bug: Bugfixes
+* Fix autocomplete in combo fields sometimes switching to a different value after a short time ([#9898])
+* Fix regression in improperly escaped usernames ([#9906], thanks [@jleedev])
+#### :hammer: Development
+* Switch to `api.openstreetmap.org` domain for OSM API calls ([operations#951])
+* Improve backwards compatibility with some old browsers ([#9934], thanks [@k-yle])
+* Refresh dependencies, including `osm-community-index` to 5.6.0, `temaki` to 5.6
+
+[#9898]: https://github.com/openstreetmap/iD/issues/9898
+[#9906]: https://github.com/openstreetmap/iD/pull/9906
+[#9934]: https://github.com/openstreetmap/iD/pull/9934
+[operations#951]: https://github.com/openstreetmap/operations/issues/951
 
 
 # 2.27.1
@@ -3401,7 +3439,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * When adding a duplicate tag, focus the existing key instead of adding a "_1" suffix ([#2896])
 * Exclude tags already on object from auto-completion in the All tags list ([#3625])
 * Allow tag values to be entered before keys ([#5872])
-* Allow deletetion of tags while one is focused ([#5878])
+* Allow deletion of tags while one is focused ([#5878])
 * Make address field suggestions case sensitive ([#5887])
 * Replace the "Edit or translate documentation" link text with a pencil icon ([#5753])
 * When upload is disabled, show a tooltip on the button explaining the reason ([#5830])
@@ -3680,7 +3718,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fetch multilingual tag descriptions and images from the OSM Wikibase ([#5647], thanks [@nyurik])
 * Set the localization via a URL parameter ([#5644], [#5650], thanks [@tordans])
 * Fix misaligned labels in the right-to-left layout ([#5687], [#5692], [#5699], [#5705], thanks [@iriman])
-* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keboards ([#5663])
+* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keyboards ([#5663])
 * Press <kbd>?</kbd> to toggle the help pane regardless of the localization ([#5663])
 * Display translated names and descriptions of more background sources ([#5737])
 

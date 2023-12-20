@@ -22,7 +22,7 @@ export function uiSettingsCustomData(context) {
             // url: prefs('settings-custom-data-url')
         };
 
-        // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+        // var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
         modal

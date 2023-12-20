@@ -411,7 +411,16 @@ export function uiSectionRawTagEditor(id, context) {
                 .fetcher(function(value, callback) {
                     var keyString = utilGetSetValue(key);
                     if (!_tags[keyString]) return;
-                    var data = _tags[keyString].filter(Boolean).map(function(tagValue) {
+                    var data = _tags[keyString].map(function(tagValue) {
+                        if (!tagValue) {
+                            return {
+                                value: ' ',
+                                title: t('inspector.empty'),
+                                display: selection => selection.text('')
+                                    .classed('virtual-option', true)
+                                    .call(t.append('inspector.empty'))
+                            };
+                        }
                         return {
                             value: tagValue,
                             title: tagValue
@@ -433,9 +442,10 @@ export function uiSectionRawTagEditor(id, context) {
                 }, function(err, data) {
                     if (!err) {
                         const filtered = data
-                            .filter(d => _tags[d.value] === undefined)
+                            .filter(d => _tags[d.value] === undefined) // already used tag
                             .filter(d => !(d.value in _discardTags)) // do not suggest discardable tags (see #9817)
-                            .filter(d => d.value.toLowerCase().includes(value.toLowerCase()));
+                            .filter(d => !/_\d$/.test(d)) // tag like name_1 (see #9422)
+                            .filter(d => d.value.toLowerCase().includes(value.toLowerCase())); // tag does not match user input
                         callback(sort(value, filtered));
                     }
                 });
@@ -547,6 +557,9 @@ export function uiSectionRawTagEditor(id, context) {
 
         // exit if this is a multiselection and no value was entered
         if (typeof d.value !== 'string' && !this.value) return;
+
+        // remove tag if it is now empty
+        if (!this.value.trim()) return removeTag(d3_event, d);
 
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
