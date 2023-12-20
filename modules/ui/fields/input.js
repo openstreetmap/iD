@@ -32,6 +32,7 @@ export function uiFieldText(field, context) {
     var input = d3_select(null);
     var outlinkButton = d3_select(null);
     var mapillaryViewButton = d3_select(null);
+    var mapillarySetButton = d3_select(null);
     var wrap = d3_select(null);
     var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
     var _entityIDs = [];
@@ -176,7 +177,7 @@ export function uiFieldText(field, context) {
             if (field.id==='mapillary'){
                 const service = services.mapillary;
                 // set button
-                wrap.selectAll('.mapillary-set-current')
+                mapillarySetButton = wrap.selectAll('.mapillary-set-current')
                     .data([0])
                     .enter()
                     .append('button')
@@ -187,6 +188,7 @@ export function uiFieldText(field, context) {
                         d3_event.preventDefault();
                         const image = service.getActiveImage();
                         if (!image) return;
+                        if (image.id===utilGetSetValue(input).trim()) return;
                         service
                             .ensureViewerLoaded(context)
                             .then(function() {
@@ -199,7 +201,19 @@ export function uiFieldText(field, context) {
                             });
                     })
                     .merge(wrap.selectAll('.mapillary-set-current'))
-                    .classed('disabled', () => !service.getActiveImage());
+                    .classed('disabled', () => {
+                        const image = service.getActiveImage();
+                        if (!image) return true;
+                        if (image.id===utilGetSetValue(input).trim()) return true;
+                    });
+                service.on('imageChanged', function() {
+                    mapillarySetButton.classed('disabled', () => {
+                        const image = service.getActiveImage();
+                        if (!image) return true;
+                        if (image.id===utilGetSetValue(input).trim()) return true;
+                        return false;
+                    });
+                });
                 // view button
                 mapillaryViewButton = wrap.selectAll('.mapillary-show-view')
                     .data([0])
@@ -219,7 +233,6 @@ export function uiFieldText(field, context) {
                                     .selectImage(context, utilGetSetValue(input).trim())
                                     .initViewer(context);
                             });
-
                     })
                     .merge(wrap.selectAll('.mapillary-show-view'))
                     .classed('disabled', () => !utilGetSetValue(input).trim());
@@ -581,6 +594,19 @@ export function uiFieldText(field, context) {
 
         if (mapillaryViewButton && !mapillaryViewButton.empty()) {
             mapillaryViewButton.classed('disabled', !utilGetSetValue(input).trim());
+        }
+
+        if (mapillarySetButton && !mapillarySetButton.empty()) {
+            const service = services.mapillary;
+            mapillarySetButton.classed('disabled', () => {
+                const image = service.getActiveImage();
+                if (!image) return true;
+                if (image.id===utilGetSetValue(input).trim()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         }
 
         if (!isMixed) {
