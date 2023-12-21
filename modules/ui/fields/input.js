@@ -183,7 +183,7 @@ export function uiFieldText(field, context) {
                     .append('button')
                     .attr('class', 'form-field-button mapillary-set-current')
                     .call(svgIcon('#fas-rotate'))
-                    .call(uiTooltip().title(() => t.append('inspector.set_mapillary')))
+                    .attr('title', t('inspector.set_mapillary'))
                     .on('click', function(d3_event) {
                         d3_event.preventDefault();
                         const image = service.getActiveImage();
@@ -221,7 +221,7 @@ export function uiFieldText(field, context) {
                     .append('button')
                     .attr('class', 'form-field-button mapillary-show-view')
                     .call(svgIcon('#fas-eye'))
-                    .call(uiTooltip().title(() => t.append('inspector.show_mapillary_from_field')))
+                    .attr('title', t('inspector.show_mapillary_from_field'))
                     .on('click', function(d3_event) {
                         d3_event.preventDefault();
                         if ( !utilGetSetValue(input).trim()) return;
