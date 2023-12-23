@@ -91,7 +91,7 @@ export function uiFieldCombo(field, context) {
         }
 
         if (!field.caseSensitive) {
-            dval = dval.toLowerCase();
+            dval = dval;
         }
 
         return dval;
