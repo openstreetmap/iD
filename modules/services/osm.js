@@ -729,6 +729,21 @@ export default {
         );
     },
 
+    // Load a single note by id , XML format
+    // GET /api/0.6/notes/#id
+    loadEntityNote: function(id, callback) {
+        // var type = osmEntity.id.type(id);
+        // var osmID = osmEntity.id.toOSM(id);
+        var options = { skipSeen: false };
+        this.loadFromAPI(
+            '/api/0.6/notes/' + id ,
+            function(err, entities) {
+                if (callback) callback(err, { data: entities });
+            },
+            options
+        );
+    },
+
 
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version

@@ -15,6 +15,7 @@ import { isColourValid } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
+import { modeSelectNote } from '../modes';
 
 import {
     utilDisplayName,
@@ -232,6 +233,12 @@ export function uiFeatureList(context) {
                     type: t('inspector.relation'),
                     name: q
                 });
+                result.push({
+                    id: 'note' + q,
+                    geometry: 'note',
+                    type: t('note.note'),
+                    name: q
+                });
             }
 
             return result;
@@ -353,6 +360,26 @@ export function uiFeatureList(context) {
                 context.enter(modeSelect(context, [d.entity.id]));
                 context.map().zoomToEase(d.entity);
 
+            } else if (d.geometry  === 'note'){
+                // note
+                // get number part 'note12345'
+                const noteId = d.id.replace(/\D/g, '');
+
+                // load note
+                context.loadNote(noteId, (err, result) => {
+                    if (err) return;
+                    const entity = result.data.find(e => e.id === noteId);
+                    if (entity) {
+                        // zoom to, used note loc
+                        const note = services.osm.getNote(noteId);
+                        context.map().centerZoom(note.loc,15);
+                        // open note layer
+                        const noteLayer = context.layers().layer('notes');
+                        noteLayer.enabled(true);
+                        // select the note
+                        context.enter(modeSelectNote(context, noteId));
+                    }
+                });
             } else {
                 // download, zoom to, and select the entity with the given ID
                 context.zoomToEntity(d.id);
