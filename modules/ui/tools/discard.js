@@ -63,6 +63,8 @@ export function uiToolDiscard(context) {
                 lastPointerUpType = d3_event.pointerType;
             })
             .on('click', function() {
+                if (context.history().hasChanges() &&
+                !window.confirm("All your unsaved changes will be discarded. You can undo this action if you want ")) return;
                 discard();
                 if (_numChanges === 0 && (
                     lastPointerUpType === 'touch' || lastPointerUpType === 'pen')
