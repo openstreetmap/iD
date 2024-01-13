@@ -106,18 +106,33 @@ function clamp(x, min, max) {
     return Math.max(min, Math.min(x, max));
 }
 
+function roundToDecimal (target, decimalPlace) {
+    target = Number(target);
+    decimalPlace = Number(decimalPlace);
+    const factor = Math.pow(10, decimalPlace);
+    return Math.round(target * factor) /  factor;
+}
+
 function displayCoordinate(deg, pos, neg) {
+    // eslint-disable-next-line no-console
+    var displayCoordinate;
     var locale = localizer.localeCode();
+
     var degreesFloor = Math.floor(Math.abs(deg));
     var min = (Math.abs(deg) - degreesFloor) * 60;
     var minFloor = Math.floor(min);
     var sec = (min - minFloor) * 60;
 
-    var displayCoordinate;
-    var secToFixedDisplayPrecision = 1;
-    var secFixed = Number(sec.toFixed(secToFixedDisplayPrecision));
-    if (secFixed === 60) {
-        secFixed = 0;
+    // console.log(sec);
+    //  mitigate  precision errors after calculate
+    var fix = roundToDecimal(sec, 8);
+    // console.log(fix);
+    var secRoundDisplayPrecision = 1;
+    var secRounded = roundToDecimal(fix, secRoundDisplayPrecision);
+    // console.log(secRounded);
+
+    if (secRounded === 60) {
+        secRounded = 0;
         minFloor += 1;
         if (minFloor === 60) {
             minFloor = 0;
@@ -128,13 +143,13 @@ function displayCoordinate(deg, pos, neg) {
         t('units.arcdegrees', {
             quantity: degreesFloor.toLocaleString(locale)
         }) +
-        (minFloor !== 0 || secFixed !== 0 ?
+        (minFloor !== 0 || secRounded !== 0 ?
             t('units.arcminutes', {
                 quantity: minFloor.toLocaleString(locale)
             }) : '') +
-        (secFixed !== 0 ?
+        (secRounded !== 0 ?
             t('units.arcseconds', {
-                quantity: secFixed.toLocaleString(locale)
+                quantity: secRounded.toLocaleString(locale)
             }) : '' );
 
     if (deg === 0) {
