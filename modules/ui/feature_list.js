@@ -5,7 +5,7 @@ import * as sexagesimal from '@mapbox/sexagesimal';
 
 import { presetManager } from '../presets';
 import { t } from '../core/localizer';
-import { dmsCoordinatePair } from '../util/units';
+import { dmsCoordinatePair ,dmsMatcher } from '../util/units';
 import { coreGraph } from '../core/graph';
 import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
@@ -124,7 +124,7 @@ export function uiFeatureList(context) {
 
             if (!q) return result;
 
-            var locationMatch = sexagesimal.pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
+            var locationMatch = sexagesimal.pair(q.toUpperCase()) || dmsMatcher(q);
 
             if (locationMatch) {
                 var loc = [Number(locationMatch[0]), Number(locationMatch[1])];
