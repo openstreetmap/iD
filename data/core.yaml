@@ -965,6 +965,13 @@ en:
             switch: "`{switch:a,b,c}`: DNS server multiplexing"
             quadtile: "`{u}`: quadtile (Bing) scheme"
             scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
+        multiple:
+          multiple_label: "Adding multiple layers"
+          steps:
+            step1: "Type or paste the URLs in the input field, each on a new line."
+            step2: "To include a layer, leave it without any prefix."
+            step3: "To exclude a layer, prefix it with `#`."
+            example_step: "In this case the 2nd layer i.e `https://example-2` will be selected"
         example: "Example:"
       template:
         placeholder: Enter a url template
