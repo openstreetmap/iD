@@ -139,15 +139,15 @@ export function uiFeatureList(context) {
             }
 
             // A location search takes priority over an ID search
-            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
+            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
 
             if (idMatch) {
-                var elemType = idMatch[1].charAt(0);
+                var elemType = idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0);
                 var elemId = idMatch[2];
                 result.push({
                     id: elemType + elemId,
-                    geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : 'relation',
-                    type: elemType === 'n' ? t('inspector.node') : elemType === 'w' ? t('inspector.way') : t('inspector.relation'),
+                    geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : elemType === 'note' ? 'note' : 'relation',
+                    type: elemType === 'n' ? t('inspector.node') : elemType === 'w' ? t('inspector.way') : elemType === 'note' ? t('note.note') : t('inspector.relation'),
                     name: elemId
                 });
             }
