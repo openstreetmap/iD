@@ -114,7 +114,6 @@ function roundToDecimal (target, decimalPlace) {
 }
 
 function displayCoordinate(deg, pos, neg) {
-    // eslint-disable-next-line no-console
     var displayCoordinate;
     var locale = localizer.localeCode();
 
@@ -123,13 +122,15 @@ function displayCoordinate(deg, pos, neg) {
     var minFloor = Math.floor(min);
     var sec = (min - minFloor) * 60;
 
-    // console.log(sec);
-    //  mitigate  precision errors after calculate
+
+    // if you input 45°,90°0'0.5" , sec should be 0.5
+    // eslint-disable-next-line no-console
+    // console.log(sec); // instead 0.499999999829015
+    // in order to mitigate precision errors after calculating, round two time
+    // 0.499999999829015 => 0.5
     var fix = roundToDecimal(sec, 8);
-    // console.log(fix);
-    var secRoundDisplayPrecision = 1;
-    var secRounded = roundToDecimal(fix, secRoundDisplayPrecision);
-    // console.log(secRounded);
+    // 0.5 => 1
+    var secRounded = roundToDecimal(fix, 0);
 
     if (secRounded === 60) {
         secRounded = 0;
