@@ -115,7 +115,7 @@ export function uiPhotoviewer(context) {
                     }
                 })
                 .append('div')
-                .call(svgIcon('#fas-rotate'))
+                .call(svgIcon('#iD-operation-merge'))
                 .attr('title', t('inspector.set_mapillary'));
         }
 
