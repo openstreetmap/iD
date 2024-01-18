@@ -116,7 +116,7 @@ export function uiPhotoviewer(context) {
                 })
                 .append('div')
                 .call(svgIcon('#iD-operation-merge'))
-                .attr('title', t('inspector.set_mapillary'));
+                .attr('title', t('inspector.set_photo_from_viewer'));
         }
 
         function buildResizeListener(target, eventName, dispatch, options) {
