@@ -86,7 +86,7 @@
     "chai": "^4.3.10",
     "chalk": "^4.1.2",
     "cldr-core": "^44.0.1",
-    "cldr-localenames-full": "^44.0.1",
+    "cldr-localenames-full": "^44.1.0",
     "concat-files": "^0.1.1",
     "d3": "~7.8.5",
     "dotenv": "^16.3.1",
