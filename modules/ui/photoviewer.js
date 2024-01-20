@@ -6,7 +6,7 @@ import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind , utilGetSetValue } from '../util';
+import { utilRebind, utilGetSetValue, utilStringQs } from '../util';
 import { services } from '../services';
 
 export function uiPhotoviewer(context) {
@@ -61,62 +61,86 @@ export function uiPhotoviewer(context) {
                 buildResizeListener(selection, 'resize', dispatch, { resizeOnY: true })
             );
 
-        if (services.mapillary) {
-            addMapillayIdButton();
-        }
+        // set_photo_from_viewer button
+        context.features()
+            // need fix : click sidebar not listen, maybe has more precise way to listen to
+            .on('change', function() {
+                const hash = utilStringQs(window.location.hash);
+                let [serviceId, photoId] = [];
+                let photo_overlay = [];
+                if (hash.photo) {
+                    [serviceId, photoId] = hash.photo.split('/');
+                }
 
-        // add set-mapillary-button in mapillary viewer
-        function addMapillayIdButton () {
+                if (hash.photo_overlay) {
+                    photo_overlay = hash.photo_overlay.split(',');
+                }
+                // check photoviewer open && photo and layer match && currently only support mapillary
+                if (serviceId && photo_overlay.includes(serviceId) && serviceId === 'mapillary') {
+                    context.container()
+                        .on('click.set_photo_from_viewer', function() {
+                            const inspector_wrap = d3_select('.inspector-wrap');
+                            const editorPane = d3_select('.entity-editor-pane');
 
+                            const button = selection.selectAll('.set_photo_from_viewer').data([0]);
+
+                            if (!inspector_wrap.classed('inspector-hidden') &&
+                                !editorPane.classed('hide')  &&
+                                context.mode().id === 'select') {
+                                    button.enter()
+                                        .append('button')
+                                        .attr('class', 'set_photo_from_viewer')
+                                        .on('click', function() {
+                                            if (serviceId === 'mapillary' && services.mapillary) { set_photo_from_mapillary_viewer(); }
+                                        })
+                                        .append('div')
+                                        .call(svgIcon('#iD-operation-merge'))
+                                        .attr('title', t('inspector.set_photo_from_viewer'));
+                            } else {
+                                button.remove();
+                            }
+                        });
+                } else {
+                    // remove listener and button
+                    context.container()
+                        .on('click.set_photo_from_viewer', null);
+                    const button = selection.selectAll('.set_photo_from_viewer');
+                    button.remove();
+                }
+            });
+
+        function set_photo_from_mapillary_viewer() {
+            const mapillary_image_ID_field = d3_select('.wrap-form-field-mapillary');
+            const changeEvent = new Event('change');
             const service = services.mapillary;
-            selection
-                .append('button')
-                .attr('class', 'set-mapillary-image-ID-field')
-                .on('click', function(d3_event) {
-                    d3_event.preventDefault();
-                    const editorPane = d3_select('.entity-editor-pane');
-                    const inspector_wrap = d3_select('.inspector-wrap');
-                    const mailallary_image_ID_field = d3_select('.wrap-form-field-mapillary');
-                    const  changeEvent = new Event('change');
-                    if (!editorPane) return;
 
-                    if (!editorPane.classed('hide')&&!inspector_wrap.classed('inspector-hidden')){
-                        // check if mapillary image id field exist
-                        if (!mailallary_image_ID_field.empty()) {
-                            // insert id
-                            const image = service.getActiveImage();
-                            const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
-                            utilGetSetValue(fieldInput,image.id);
+            // check if mapillary image id field exist
+            if (!mapillary_image_ID_field.empty()) {
+                // insert id
+                const image = service.getActiveImage();
+                const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
+                utilGetSetValue(fieldInput,image.id);
 
-                            // trigger change at field
-                            fieldInput.node().focus();
-                            fieldInput.node().dispatchEvent(changeEvent);
-                        } else {
-                            // open the Mapillary field
-                            const comboboxInput = d3_select('.value.combobox-input');
-                            const EnterEvent = new KeyboardEvent('keydown',{keyCode : 13});
-                            utilGetSetValue(comboboxInput,'Mapillary Image ID');
-                            comboboxInput.node().focus();
-                            comboboxInput.node().dispatchEvent(EnterEvent);
+                // trigger change at field
+                fieldInput.node().focus();
+                fieldInput.node().dispatchEvent(changeEvent);
+            } else {
+                // open the Mapillary field
+                const comboboxInput = d3_select('.value.combobox-input');
+                const EnterEvent = new KeyboardEvent('keydown',{keyCode : 13});
+                utilGetSetValue(comboboxInput,'Mapillary Image ID');
+                comboboxInput.node().focus();
+                comboboxInput.node().dispatchEvent(EnterEvent);
 
-                            // insert id
-                            const image = service.getActiveImage();
-                            const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
-                            utilGetSetValue(fieldInput,image.id);
+                // insert id
+                const image = service.getActiveImage();
+                const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
+                utilGetSetValue(fieldInput,image.id);
 
-                            // trigger change at field
-                            fieldInput.node().focus();
-                            fieldInput.node().dispatchEvent(changeEvent);
-                        }
-                    } else {
-                        /* eslint-disable no-console */
-                        console.log('editorPane hide');
-                        /* eslint-disable no-console */
-                    }
-                })
-                .append('div')
-                .call(svgIcon('#iD-operation-merge'))
-                .attr('title', t('inspector.set_photo_from_viewer'));
+                // trigger change at field
+                fieldInput.node().focus();
+                fieldInput.node().dispatchEvent(changeEvent);
+            }
         }
 
         function buildResizeListener(target, eventName, dispatch, options) {
