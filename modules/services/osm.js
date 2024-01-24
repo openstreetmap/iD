@@ -732,8 +732,6 @@ export default {
     // Load a single note by id , XML format
     // GET /api/0.6/notes/#id
     loadEntityNote: function(id, callback) {
-        // var type = osmEntity.id.type(id);
-        // var osmID = osmEntity.id.toOSM(id);
         var options = { skipSeen: false };
         this.loadFromAPI(
             '/api/0.6/notes/' + id ,
