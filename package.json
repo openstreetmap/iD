@@ -82,7 +82,8 @@
     "@rapideditor/temaki": "^5.7.0",
     "@transifex/api": "^6.0.1",
     "autoprefixer": "^10.4.16",
-    "browserslist-to-esbuild": "^1.2.0",
+    "browserslist": "^4.22.2",
+    "browserslist-to-esbuild": "^2.1.1",
     "chai": "^4.4.1",
     "chalk": "^4.1.2",
     "cldr-core": "^44.0.1",
@@ -127,6 +128,6 @@
     "node": ">=18"
   },
   "browserslist": [
-    "> 0.3%, last 6 major versions, Firefox ESR, maintained node versions"
+    "> 0.3%, last 6 major versions, not dead, Firefox ESR, maintained node versions"
   ]
 }
