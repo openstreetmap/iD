@@ -389,15 +389,20 @@ var parsers = {
         props.loc = getLoc(attrs);
 
         // if notes are coincident, move them apart slightly
-        var coincident = false;
-        var epsilon = 0.00001;
-        do {
-            if (coincident) {
-                props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
-            }
-            var bbox = geoExtent(props.loc).bbox();
-            coincident = _noteCache.rtree.search(bbox).length;
-        } while (coincident);
+        if (!_noteCache.note[uid]) {
+            let coincident = false;
+            const epsilon = 0.00001;
+            do {
+                if (coincident) {
+                    props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
+                }
+                const bbox = geoExtent(props.loc).bbox();
+                coincident = _noteCache.rtree.search(bbox).length;
+            } while (coincident);
+        } else {
+            // we already saw this note: don't change its location again
+            props.loc = _noteCache.note[uid].loc;
+        }
 
         // parse note contents
         for (var i = 0; i < childNodes.length; i++) {
@@ -416,7 +421,7 @@ var parsers = {
         var note = new osmNote(props);
         var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
-        _noteCache.rtree.insert(item);
+        updateRtree(item, true);
 
         return note;
     },

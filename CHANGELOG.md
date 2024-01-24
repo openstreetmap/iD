@@ -50,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
 * Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
 * Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
+* Don't show duplicates of notes when they lie exactly on special locations like null island (0.0,0.0)
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
