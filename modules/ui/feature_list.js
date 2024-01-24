@@ -360,7 +360,7 @@ export function uiFeatureList(context) {
                 context.enter(modeSelect(context, [d.entity.id]));
                 context.map().zoomToEase(d.entity);
 
-            } else if (d.geometry  === 'note'){
+            } else if (d.geometry  === 'note') {
                 // note
                 // get number part 'note12345'
                 const noteId = d.id.replace(/\D/g, '');
