@@ -52,6 +52,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
 #### :hammer: Development
 
 [#9424]: https://github.com/openstreetmap/iD/pull/9424
@@ -59,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9876]: https://github.com/openstreetmap/iD/issues/9876
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
+[id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
 
 
