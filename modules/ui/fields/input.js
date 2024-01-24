@@ -174,68 +174,8 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
             input.attr('type', 'text');
 
-            if (field.id==='mapillary'){
-                const service = services.mapillary;
-                // set button
-                mapillarySetButton = wrap.selectAll('.mapillary-set-current')
-                    .data([0])
-                    .enter()
-                    .append('button')
-                    .attr('class', 'form-field-button mapillary-set-current')
-                    .call(svgIcon('#fas-rotate'))
-                    .attr('title', t('inspector.set_photo_from_field'))
-                    .on('click', function(d3_event) {
-                        d3_event.preventDefault();
-                        const image = service.getActiveImage();
-                        if (!image) return;
-                        if (image.id===utilGetSetValue(input).trim()) return;
-                        service
-                            .ensureViewerLoaded(context)
-                            .then(function() {
-                                service
-                                    .showViewer(context)
-                                    .selectImage(context, image.id)
-                                    .initViewer(context);
-                                utilGetSetValue(input, image.id);
-                                change()();
-                            });
-                    })
-                    .merge(wrap.selectAll('.mapillary-set-current'))
-                    .classed('disabled', () => {
-                        const image = service.getActiveImage();
-                        if (!image) return true;
-                        if (image.id===utilGetSetValue(input).trim()) return true;
-                    });
-                service.on('imageChanged', function() {
-                    mapillarySetButton.classed('disabled', () => {
-                        const image = service.getActiveImage();
-                        if (!image) return true;
-                        if (image.id===utilGetSetValue(input).trim()) return true;
-                        return false;
-                    });
-                });
-                // view button
-                mapillaryViewButton = wrap.selectAll('.mapillary-show-view')
-                    .data([0])
-                    .enter()
-                    .append('button')
-                    .attr('class', 'form-field-button mapillary-show-view')
-                    .call(svgIcon('#fas-eye'))
-                    .attr('title', t('inspector.show_photo_from_field'))
-                    .on('click', function(d3_event) {
-                        d3_event.preventDefault();
-                        if ( !utilGetSetValue(input).trim()) return;
-                        service
-                            .ensureViewerLoaded(context)
-                            .then(function() {
-                                service
-                                    .showViewer(context)
-                                    .selectImage(context, utilGetSetValue(input).trim())
-                                    .initViewer(context);
-                            });
-                    })
-                    .merge(wrap.selectAll('.mapillary-show-view'))
-                    .classed('disabled', () => !utilGetSetValue(input).trim());
+            if (field.id === 'mapillary') {
+                updateMapillaryImageIDField();
             }
 
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
@@ -422,6 +362,111 @@ export function uiFieldText(field, context) {
         if (format) input.attr('placeholder', format);
     }
 
+    function updateMapillaryImageIDField() {
+        const service = services.mapillary;
+        // set button
+        mapillarySetButton = wrap.selectAll('.mapillary-set-current')
+            .data([0]);
+
+        mapillarySetButton.enter()
+            .append('button')
+            .attr('class', 'form-field-button mapillary-set-current')
+            .call(svgIcon('#fas-rotate'))
+            .attr('title', t('inspector.set_photo_from_field'))
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                const image = service.getActiveImage();
+                if (!image) return;
+                if (image.id === utilGetSetValue(input).trim()) return;
+                service
+                    .ensureViewerLoaded(context)
+                    .then(function() {
+                        utilGetSetValue(input, image.id);
+                        change()();
+                    });
+                mapillarySetButton.node().blur();
+            })
+            .merge(mapillarySetButton)
+            .classed('disabled', _debounce(() => {
+                const image = service.getActiveImage();
+                if (!image) return true;
+                if (image.id === utilGetSetValue(input).trim()) return true;
+                return false;
+            }), 100);
+
+        // view button
+        mapillaryViewButton = wrap.selectAll('.mapillary-show-view')
+            .data([0]);
+
+        mapillaryViewButton.enter()
+            .append('button')
+            .attr('class', 'form-field-button mapillary-show-view')
+            .call(svgIcon('#fas-eye'))
+            .attr('title', t('inspector.show_photo_from_field'))
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                const isHidden = context.container()
+                    .select('.photoviewer')
+                    .selectAll('.photo-wrapper.mly-wrapper.hide')
+                    .size();
+
+                if (isHidden) {
+                    if (!utilGetSetValue(input).trim()) return;
+                    service
+                        .ensureViewerLoaded(context)
+                        .then(function() {
+                            service
+                                .showViewer(context)
+                                .selectImage(context, utilGetSetValue(input).trim())
+                                .initViewer(context);
+                        });
+                } else {
+                    if (!utilGetSetValue(input).trim()) return;
+                    const image = service.getActiveImage();
+                    if (!image) return;
+                    if (image.id === utilGetSetValue(input).trim()) return;
+
+                    service
+                        .ensureViewerLoaded(context)
+                        .then(function() {
+                            service
+                                .selectImage(context, utilGetSetValue(input).trim())
+                                .initViewer(context);
+                        });
+                }
+                mapillaryViewButton.node().blur();
+            })
+            .merge(mapillaryViewButton)
+            .classed('disabled', _debounce(() => {
+                if (!utilGetSetValue(input).trim()) return true;
+                const isHidden = context.container()
+                        .select('.photoviewer')
+                        .selectAll('.photo-wrapper.mly-wrapper.hide')
+                        .size();
+                if (isHidden) return false;
+                const image = service.getActiveImage();
+                if (!image) return true;
+                if (image.id === utilGetSetValue(input).trim()) return true;
+                return false;
+            }, 100));
+
+        service.on('imageChanged', function() {
+            mapillarySetButton.classed('disabled', () => {
+                const image = service.getActiveImage();
+                if (!image) return true;
+                if (image.id === utilGetSetValue(input).trim()) return true;
+                return false;
+            });
+            mapillaryViewButton.classed('disabled', () => {
+                if (!utilGetSetValue(input).trim()) return true;
+                const image = service.getActiveImage();
+                if (!image) return true;
+                if (image.id === utilGetSetValue(input).trim()) return true;
+                return false;
+            });
+        });
+    }
+
 
     function validIdentifierValueForLink() {
         const value = utilGetSetValue(input).trim();
@@ -592,20 +637,29 @@ export function uiFieldText(field, context) {
             outlinkButton.classed('disabled', disabled);
         }
 
-        if (mapillaryViewButton && !mapillaryViewButton.empty()) {
-            mapillaryViewButton.classed('disabled', !utilGetSetValue(input).trim());
-        }
-
         if (mapillarySetButton && !mapillarySetButton.empty()) {
             const service = services.mapillary;
             mapillarySetButton.classed('disabled', () => {
                 const image = service.getActiveImage();
                 if (!image) return true;
-                if (image.id===utilGetSetValue(input).trim()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                if (image.id === utilGetSetValue(input).trim()) return true;
+                return false;
+            });
+        }
+
+        if (mapillaryViewButton && !mapillaryViewButton.empty()) {
+            const service = services.mapillary;
+            mapillaryViewButton.classed('disabled', () => {
+                if (!utilGetSetValue(input).trim()) return true;
+                const isHidden = context.container()
+                                    .select('.photoviewer')
+                                    .selectAll('.photo-wrapper.mly-wrapper.hide')
+                                    .size();
+                if (isHidden) return false;
+                const image = service.getActiveImage();
+                if (!image) return true;
+                if (image.id === utilGetSetValue(input).trim()) return true;
+                return false;
             });
         }
 
