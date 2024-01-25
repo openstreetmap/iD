@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show the color of (route) relations in the form of small colored circles in relation membership section and feature search results ([#9424])
 * Hide tag suggestions for tags like `name_1` in raw tag editor autocomplete ([#9422])
 * Show `(empty)` as a tag value option in the raw tag editor when a multi selections contains at least one feature which does not have the particular tag ([#9876], thanks [@k-yle])
+* Allow to search for OSM notes by id in search bar ([#10062], thanks [@NaVis0mple])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -49,17 +50,26 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
 * Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
 * Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
+* Don't show duplicates of notes when they lie exactly on special locations like null island (0.0,0.0)
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+* Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
+* Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
 #### :hammer: Development
 
 [#9424]: https://github.com/openstreetmap/iD/pull/9424
 [#9422]: https://github.com/openstreetmap/iD/issues/9422
 [#9876]: https://github.com/openstreetmap/iD/issues/9876
+[#9891]: https://github.com/openstreetmap/iD/pull/9891
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
+[#10062]: https://github.com/openstreetmap/iD/pull/10062
+[id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
+[@mangerlahn]: https://github.com/mangerlahn
+[@NaVis0mple]: https://github.com/NaVis0mple
 
 
 # 2.27.3
