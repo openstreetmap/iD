@@ -44,7 +44,6 @@ export function uiToolUndoRedo(context) {
         return context.mode() && context.mode().id !== 'save' && context.map().editableDataEnabled(true /* ignore min zoom */);
     }
 
-
     tool.render = function(selection) {
         var tooltipBehavior = uiTooltip()
             .placement('bottom')
@@ -60,6 +59,9 @@ export function uiToolUndoRedo(context) {
 
         var lastPointerUpType;
 
+        var longPressTimer;
+        var longPressFlag = false;
+
         var buttons = selection.selectAll('button')
             .data(commands)
             .enter()
@@ -69,21 +71,32 @@ export function uiToolUndoRedo(context) {
                 // `pointerup` is always called before `click`
                 lastPointerUpType = d3_event.pointerType;
             })
-            .on('click', function(d3_event, d) {
+            .on('mousedown', function(d3_event, d) {
                 d3_event.preventDefault();
-
-                var annotation = d.annotation();
-
-                if (editable() && annotation) {
-                    d.action();
+                if(d.id === 'undo'){
+                    //logic to check for long-press of undo button
+                    longPressTimer = setTimeout(function() {
+                        longPressFlag = true;
+                        context.history().discard();                        
+                    }, 1000);
                 }
 
+            })
+            .on('mouseup', function(d3_event, d) {
+                var annotation = d.annotation();
+                
+                if (editable() && annotation && !longPressFlag) {                 
+                    d.action();
+                }
+                longPressFlag = false ;
+                clearTimeout(longPressTimer);
+                
                 if (editable() && (
                     lastPointerUpType === 'touch' ||
                     lastPointerUpType === 'pen')
                 ) {
                     // there are no tooltips for touch interactions so flash feedback instead
-
+    
                     var label = annotation ?
                         t.append(d.id + '.tooltip', { action: annotation }) :
                         t.append(d.id + '.nothing');

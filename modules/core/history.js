@@ -203,8 +203,8 @@ export function coreHistory(context) {
             var previousStack = _stack[_index];
             var previous = previousStack.graph;
 
-            // Discards changes by setting current state of map as the initial state
-            _stack[++_index] = _stack[0];
+            // Discards changes by reverting to the initial state of the map
+            _index = 0;
             dispatch.call('discarded', this, _stack[_index], previousStack);
             return change(previous);
         },
