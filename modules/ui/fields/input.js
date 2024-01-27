@@ -384,7 +384,7 @@ export function uiFieldText(field, context) {
                         utilGetSetValue(input, image.id);
                         change()();
                     });
-                mapillarySetButton.node().blur();
+                mapillarySetButton.node()?.blur();
             })
             .merge(mapillarySetButton)
             .classed('disabled', _debounce(() => {
@@ -412,13 +412,13 @@ export function uiFieldText(field, context) {
 
                 if (isHidden) {
                     if (!utilGetSetValue(input).trim()) return;
+
                     service
                         .ensureViewerLoaded(context)
                         .then(function() {
                             service
-                                .showViewer(context)
                                 .selectImage(context, utilGetSetValue(input).trim())
-                                .initViewer(context);
+                                .showViewer(context);
                         });
                 } else {
                     if (!utilGetSetValue(input).trim()) return;
@@ -430,11 +430,10 @@ export function uiFieldText(field, context) {
                         .ensureViewerLoaded(context)
                         .then(function() {
                             service
-                                .selectImage(context, utilGetSetValue(input).trim())
-                                .initViewer(context);
+                                .selectImage(context, utilGetSetValue(input).trim());
                         });
                 }
-                mapillaryViewButton.node().blur();
+                mapillaryViewButton.node()?.blur();
             })
             .merge(mapillaryViewButton)
             .classed('disabled', _debounce(() => {

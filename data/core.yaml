@@ -789,6 +789,7 @@ en:
     set_photo_from_viewer: "Store this photo on the currently selected map object"
     set_photo_from_field: "Use the currently displayed photo"
     show_photo_from_field: "Open image in viewer"
+    show_photo_from_field_error: "Invalid ID"
   background:
     title: Background
     description: Background Settings
