@@ -420,6 +420,7 @@ export function uiFieldText(field, context) {
                                 .selectImage(context, utilGetSetValue(input).trim())
                                 .showViewer(context);
                         });
+                    mapillaryViewButton.classed('disabled', true);
                 } else {
                     if (!utilGetSetValue(input).trim()) return;
                     const image = service.getActiveImage();
@@ -457,6 +458,11 @@ export function uiFieldText(field, context) {
                 return false;
             });
             mapillaryViewButton.classed('disabled', () => {
+                const isHidden = context.container()
+                    .select('.photoviewer')
+                    .selectAll('.photo-wrapper.mly-wrapper.hide')
+                    .size();
+                if (isHidden) return false;
                 if (!utilGetSetValue(input).trim()) return true;
                 const image = service.getActiveImage();
                 if (!image) return true;
