@@ -5,7 +5,7 @@ import * as sexagesimal from '@mapbox/sexagesimal';
 
 import { presetManager } from '../presets';
 import { t } from '../core/localizer';
-import { dmsCoordinatePair ,dmsMatcher } from '../util/units';
+import { dmsCoordinatePair, dmsMatcher } from '../util/units';
 import { coreGraph } from '../core/graph';
 import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
