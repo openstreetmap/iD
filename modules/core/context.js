@@ -176,6 +176,13 @@ export function coreContext() {
       _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
     }
   };
+  // Download single note
+  context.loadNote = (entityID, callback) => {
+    if (_connection) {
+      const cid = _connection.getConnectionId();
+      _connection.loadEntityNote(entityID, afterLoad(cid, callback));
+    }
+  };
 
   context.zoomToEntity = (entityID, zoomTo) => {
 
