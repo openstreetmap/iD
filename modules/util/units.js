@@ -199,9 +199,9 @@ export function dmsMatcher(q) {
                 const match = this.condition.exec(q);
                 const lat = (+match[2]) + (+match[3]) / 60 + (+match[4]) / 3600;
                 const lng = (+match[6]) + (+match[7]) / 60 + (+match[8]) / 3600;
-                const isNagLat = match[1] === '-' ? -lat : lat;
-                const isNagLng = match[5] === '-' ? -lng : lng;
-                const d = [isNagLat, isNagLng];
+                const isNegLat = match[1] === '-' ? -lat : lat;
+                const isNegLng = match[5] === '-' ? -lng : lng;
+                const d = [isNegLat, isNegLng];
 
                 return d;
             }
@@ -213,9 +213,9 @@ export function dmsMatcher(q) {
                 const match = this.condition.exec(q);
                 const lat = +match[2] + (+match[3]) / 60;
                 const lng = +match[5] + (+match[6]) / 60;
-                const isNagLat = match[1] === '-' ? -lat : lat;
-                const isNagLng = match[4] === '-' ? -lng : lng;
-                const d = [isNagLat, isNagLng];
+                const isNegLat = match[1] === '-' ? -lat : lat;
+                const isNegLng = match[4] === '-' ? -lng : lng;
+                const d = [isNegLat, isNegLng];
 
                 return d;
             }
