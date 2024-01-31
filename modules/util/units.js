@@ -123,11 +123,9 @@ function displayCoordinate(deg, pos, neg) {
     var sec = (min - minFloor) * 60;
 
 
-    // if you input 45°,90°0'0.5" , sec should be 0.5
-    // eslint-disable-next-line no-console
-    // console.log(sec); // instead 0.499999999829015
+    // if you input 45°,90°0'0.5" , sec should be 0.5 instead 0.499999…
     // in order to mitigate precision errors after calculating, round two time
-    // 0.499999999829015 => 0.5
+    // 0.499999… => 0.5
     var fix = roundToDecimal(sec, 8);
     // 0.5 => 1
     var secRounded = roundToDecimal(fix, 0);
