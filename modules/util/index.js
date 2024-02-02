@@ -55,3 +55,6 @@ export { utilUnicodeCharsTruncated } from './util';
 export { utilUniqueDomId } from './util';
 export { utilWrap } from './util';
 export { utilCleanOsmString } from './util';
+
+export { dmsCoordinatePair } from './units';
+export { dmsMatcher } from './units';

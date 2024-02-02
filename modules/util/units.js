@@ -106,33 +106,50 @@ function clamp(x, min, max) {
     return Math.max(min, Math.min(x, max));
 }
 
-function displayCoordinate(deg, pos, neg) {
-    var locale = localizer.localeCode();
-    var min = (Math.abs(deg) - Math.floor(Math.abs(deg))) * 60;
-    var sec = (min - Math.floor(min)) * 60;
-    var displayDegrees = t('units.arcdegrees', {
-        quantity: Math.floor(Math.abs(deg)).toLocaleString(locale)
-    });
-    var displayCoordinate;
+function roundToDecimal (target, decimalPlace) {
+    target = Number(target);
+    decimalPlace = Number(decimalPlace);
+    const factor = Math.pow(10, decimalPlace);
+    return Math.round(target * factor) /  factor;
+}
 
-    if (Math.floor(sec) > 0) {
-        displayCoordinate = displayDegrees +
-            t('units.arcminutes', {
-                quantity: Math.floor(min).toLocaleString(locale)
-            }) +
-            t('units.arcseconds', {
-                quantity: Math.round(sec).toLocaleString(locale)
-            });
-    } else if (Math.floor(min) > 0) {
-        displayCoordinate = displayDegrees +
-            t('units.arcminutes', {
-                quantity: Math.round(min).toLocaleString(locale)
-            });
-    } else {
-        displayCoordinate = t('units.arcdegrees', {
-            quantity: Math.round(Math.abs(deg)).toLocaleString(locale)
-        });
+function displayCoordinate(deg, pos, neg) {
+    var displayCoordinate;
+    var locale = localizer.localeCode();
+
+    var degreesFloor = Math.floor(Math.abs(deg));
+    var min = (Math.abs(deg) - degreesFloor) * 60;
+    var minFloor = Math.floor(min);
+    var sec = (min - minFloor) * 60;
+
+
+    // if you input 45°,90°0'0.5" , sec should be 0.5 instead 0.499999…
+    // in order to mitigate precision errors after calculating, round two time
+    // 0.499999… => 0.5
+    var fix = roundToDecimal(sec, 8);
+    // 0.5 => 1
+    var secRounded = roundToDecimal(fix, 0);
+
+    if (secRounded === 60) {
+        secRounded = 0;
+        minFloor += 1;
+        if (minFloor === 60) {
+            minFloor = 0;
+            degreesFloor += 1;
+        }
     }
+    displayCoordinate =
+        t('units.arcdegrees', {
+            quantity: degreesFloor.toLocaleString(locale)
+        }) +
+        (minFloor !== 0 || secRounded !== 0 ?
+            t('units.arcminutes', {
+                quantity: minFloor.toLocaleString(locale)
+            }) : '') +
+        (secRounded !== 0 ?
+            t('units.arcseconds', {
+                quantity: secRounded.toLocaleString(locale)
+            }) : '' );
 
     if (deg === 0) {
         return displayCoordinate;
@@ -167,4 +184,45 @@ export function decimalCoordinatePair(coord) {
         latitude: clamp(coord[1], -90, 90).toFixed(OSM_PRECISION),
         longitude: wrap(coord[0], -180, 180).toFixed(OSM_PRECISION)
     });
+}
+
+// Return the parsed value  that @mapbox/sexagesimal can't parse
+// return value format : [D, D]  ex:[ 35.1861, 136.83161 ]
+export function dmsMatcher(q) {
+    const matchers = [
+        // D M SS , D M SS  ex: 35 11 10.1 , 136 49 53.8
+        {
+            condition: /^\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+)\s+(\d+\.?\d*)\s*$/,
+            parser: function(q) {
+                const match = this.condition.exec(q);
+                const lat = (+match[2]) + (+match[3]) / 60 + (+match[4]) / 3600;
+                const lng = (+match[6]) + (+match[7]) / 60 + (+match[8]) / 3600;
+                const isNegLat = match[1] === '-' ? -lat : lat;
+                const isNegLng = match[5] === '-' ? -lng : lng;
+                const d = [isNegLat, isNegLng];
+
+                return d;
+            }
+        },
+        // D MM , D MM ex: 35 11.1683 , 136 49.8966
+        {
+            condition: /^\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*\,\s*(-?)\s*(\d+)\s+(\d+\.?\d*)\s*$/,
+            parser: function(q) {
+                const match = this.condition.exec(q);
+                const lat = +match[2] + (+match[3]) / 60;
+                const lng = +match[5] + (+match[6]) / 60;
+                const isNegLat = match[1] === '-' ? -lat : lat;
+                const isNegLng = match[4] === '-' ? -lng : lng;
+                const d = [isNegLat, isNegLng];
+
+                return d;
+            }
+        }
+    ];
+    for (const matcher of matchers) {
+        if (matcher.condition.test(q)){
+            return matcher.parser(q);
+        }
+    }
+    return null;
 }
