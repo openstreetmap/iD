@@ -110,36 +110,31 @@ export function uiPhotoviewer(context) {
             });
 
         function set_photo_from_mapillary_viewer() {
-            const mapillary_image_ID_field = d3_select('.wrap-form-field-mapillary');
-            const changeEvent = new Event('change');
-            const service = services.mapillary;
-
-            // check if mapillary image id field exist
-            if (!mapillary_image_ID_field.empty()) {
+            function insertIdAndTriggerChangeAtField() {
+                const changeEvent = new Event('change');
+                const service = services.mapillary;
                 // insert id
                 const image = service.getActiveImage();
                 const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
-                utilGetSetValue(fieldInput,image.id);
+                utilGetSetValue(fieldInput, image.id);
 
                 // trigger change at field
                 fieldInput.node().focus();
                 fieldInput.node().dispatchEvent(changeEvent);
+            }
+            // check if mapillary image id field exist
+            const mapillary_image_ID_field = d3_select('.wrap-form-field-mapillary');
+            if (!mapillary_image_ID_field.empty()) {
+                insertIdAndTriggerChangeAtField();
             } else {
                 // open the Mapillary field
                 const comboboxInput = d3_select('.value.combobox-input');
-                const EnterEvent = new KeyboardEvent('keydown',{keyCode : 13});
-                utilGetSetValue(comboboxInput,'Mapillary Image ID');
+                const EnterEvent = new KeyboardEvent('keydown', { keyCode: 13 });
+                utilGetSetValue(comboboxInput, 'Mapillary Image ID');
                 comboboxInput.node().focus();
                 comboboxInput.node().dispatchEvent(EnterEvent);
 
-                // insert id
-                const image = service.getActiveImage();
-                const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
-                utilGetSetValue(fieldInput,image.id);
-
-                // trigger change at field
-                fieldInput.node().focus();
-                fieldInput.node().dispatchEvent(changeEvent);
+                insertIdAndTriggerChangeAtField();
             }
         }
 
