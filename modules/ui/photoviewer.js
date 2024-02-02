@@ -64,7 +64,7 @@ export function uiPhotoviewer(context) {
         // set_photo_from_viewer button
         context.features()
             // need fix : click sidebar not listen, maybe has more precise way to listen to
-            .on('change', function() {
+            .on('change', function () {
                 const hash = utilStringQs(window.location.hash);
                 let [serviceId, photoId] = [];
                 let photo_overlay = [];
@@ -78,24 +78,24 @@ export function uiPhotoviewer(context) {
                 // check photoviewer open && photo and layer match && currently only support mapillary
                 if (serviceId && photo_overlay.includes(serviceId) && serviceId === 'mapillary') {
                     context.container()
-                        .on('click.set_photo_from_viewer', function() {
+                        .on('click.set_photo_from_viewer', function () {
                             const inspector_wrap = d3_select('.inspector-wrap');
                             const editorPane = d3_select('.entity-editor-pane');
 
                             const button = selection.selectAll('.set_photo_from_viewer').data([0]);
 
                             if (!inspector_wrap.classed('inspector-hidden') &&
-                                !editorPane.classed('hide')  &&
+                                !editorPane.classed('hide') &&
                                 context.mode().id === 'select') {
-                                    button.enter()
-                                        .append('button')
-                                        .attr('class', 'set_photo_from_viewer')
-                                        .on('click', function() {
-                                            if (serviceId === 'mapillary' && services.mapillary) { set_photo_from_mapillary_viewer(); }
-                                        })
-                                        .append('div')
-                                        .call(svgIcon('#iD-operation-merge'))
-                                        .attr('title', t('inspector.set_photo_from_viewer'));
+                                button.enter()
+                                    .append('button')
+                                    .attr('class', 'set_photo_from_viewer')
+                                    .on('click', function () {
+                                        if (serviceId === 'mapillary' && services.mapillary) { set_photo_from_mapillary_viewer(); }
+                                    })
+                                    .append('div')
+                                    .call(svgIcon('#iD-operation-merge'))
+                                    .attr('title', t('inspector.set_photo_from_viewer'));
                             } else {
                                 button.remove();
                             }
@@ -147,7 +147,7 @@ export function uiPhotoviewer(context) {
 
 
         services.mapillary
-            .on('error', function(e) {
+            .on('error', function () {
                 errorHandler
                     .text(t('inspector.show_photo_from_field_error'))
                     .style('opacity', '1')
