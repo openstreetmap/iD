@@ -62,54 +62,55 @@ export function uiPhotoviewer(context) {
             );
 
         // set_photo_from_viewer button
-        context.features()
-            // need fix : click sidebar not listen, maybe has more precise way to listen to
-            .on('change', function () {
-                const hash = utilStringQs(window.location.hash);
-                let [serviceId, photoId] = [];
-                let photo_overlay = [];
-                if (hash.photo) {
-                    [serviceId, photoId] = hash.photo.split('/');
-                }
+        context.container().on('click.setPhotoFromViewer', setPhotoFromViewerButton);
 
-                if (hash.photo_overlay) {
-                    photo_overlay = hash.photo_overlay.split(',');
-                }
-                // check photoviewer open && photo and layer match && currently only support mapillary
-                if (serviceId && photo_overlay.includes(serviceId) && serviceId === 'mapillary') {
-                    context.container()
-                        .on('click.set_photo_from_viewer', function () {
-                            const inspector_wrap = d3_select('.inspector-wrap');
-                            const editorPane = d3_select('.entity-editor-pane');
+        function setPhotoFromViewerButton() {
+            const inspectorWrap = d3_select('.inspector-wrap');
+            const editorPane = d3_select('.entity-editor-pane');
+            const presetPane = d3_select('.preset-list-pane');
+            const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+            const hash = utilStringQs(window.location.hash);
+            let [serviceId, photoId] = [];
+            let photo_overlay = [];
+            if (hash.photo) {
+                [serviceId, photoId] = hash.photo.split('/');
+            }
 
-                            const button = selection.selectAll('.set_photo_from_viewer').data([0]);
+            if (hash.photo_overlay) {
+                photo_overlay = hash.photo_overlay.split(',');
+            }
 
-                            if (!inspector_wrap.classed('inspector-hidden') &&
-                                !editorPane.classed('hide') &&
-                                context.mode().id === 'select') {
-                                button.enter()
-                                    .append('button')
-                                    .attr('class', 'set_photo_from_viewer')
-                                    .on('click', function () {
-                                        if (serviceId === 'mapillary' && services.mapillary) { set_photo_from_mapillary_viewer(); }
-                                    })
-                                    .append('div')
-                                    .call(svgIcon('#iD-operation-merge'))
-                                    .attr('title', t('inspector.set_photo_from_viewer'));
-                            } else {
-                                button.remove();
-                            }
-                        });
-                } else {
-                    // remove listener and button
-                    context.container()
-                        .on('click.set_photo_from_viewer', null);
-                    const button = selection.selectAll('.set_photo_from_viewer');
-                    button.remove();
-                }
-            });
+            // check photoviewer open && photo and layer match && currently only support mapillary && editorpane open
+            if (serviceId &&
+                photo_overlay.includes(serviceId) &&
+                serviceId === 'mapillary' &&
+                !inspectorWrap.classed('inspector-hidden') &&
+                !editorPane.classed('hide') &&
+                presetPane.classed('hide') &&
+                context.mode().id === 'select') {
+                buttonCreate();
+                context.features().on('change.setPhotoFromViewerButtonCreate', buttonCreate);
+            } else {
+                // remove listener and button
+                context.features().on('change.setPhotoFromViewerButtonCreate', null);
+                const button = selection.selectAll('.set-photo-from-viewer');
+                button.remove();
+            }
 
-        function set_photo_from_mapillary_viewer() {
+            function buttonCreate() {
+                button.enter()
+                    .append('button')
+                    .attr('class', 'set-photo-from-viewer')
+                    .on('click', function () {
+                        if (serviceId === 'mapillary' && services.mapillary) { setPhotoFromMapillaryViewer(); }
+                    })
+                    .append('div')
+                    .call(svgIcon('#iD-operation-merge'))
+                    .attr('title', t('inspector.set_photo_from_viewer'));
+            }
+        }
+
+        function setPhotoFromMapillaryViewer() {
             function insertIdAndTriggerChangeAtField() {
                 const changeEvent = new Event('change');
                 const service = services.mapillary;
@@ -123,8 +124,8 @@ export function uiPhotoviewer(context) {
                 fieldInput.node().dispatchEvent(changeEvent);
             }
             // check if mapillary image id field exist
-            const mapillary_image_ID_field = d3_select('.wrap-form-field-mapillary');
-            if (!mapillary_image_ID_field.empty()) {
+            const mapillaryImageIDField = d3_select('.wrap-form-field-mapillary');
+            if (!mapillaryImageIDField.empty()) {
                 insertIdAndTriggerChangeAtField();
             } else {
                 // open the Mapillary field
