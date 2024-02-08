@@ -7,7 +7,6 @@ import {
 
 import RBush from 'rbush';
 import { t, localizer } from '../core/localizer';
-import { jsonpRequest } from '../util/jsonp_request';
 
 import {
   geoExtent, geoMetersToLat, geoMetersToLon, geoPointInPolygon,
@@ -17,7 +16,7 @@ import {
 import { utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
 
-const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
+const bubbleApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/cmd/StreetSideBubbleMetaData?';
 const streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
 const bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
 const pannellumViewerCSS = 'pannellum/pannellum.css';
@@ -210,22 +209,33 @@ function connectSequences() {
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
   let urlForRequest = url + utilQsString({
-    n: rect[3],
-    s: rect[1],
-    e: rect[2],
-    w: rect[0],
-    c: maxResults,
-    appkey: bubbleAppKey,
-    jsCallback: '{callback}'
+    north: rect[3],
+    south: rect[1],
+    east: rect[2],
+    west: rect[0],
+    count: maxResults,
+    key: bubbleAppKey
   });
 
-  return jsonpRequest(urlForRequest, (data) => {
-    if (!data || data.error) {
-      callback(null);
-    } else {
-      callback(data);
-    }
-  });
+  return loadData(urlForRequest, callback);
+}
+
+
+// Get data from the API
+function loadData(url, callback) {
+  return fetch(url, callback)
+    .then(function(response) {
+      if (!response.ok) {
+        throw new Error(response.status + ' ' + response.statusText);
+      }
+      return response.json();
+      })
+    .then(function(result) {
+      if (!result) {
+        callback(null);
+      }
+      return callback(result || []);
+   });
 }
 
 
