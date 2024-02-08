@@ -2650,7 +2650,9 @@ button.raw-tag-option svg.icon {
     width: 100%;
     position: relative;
 }
-.tag-row .key-wrap,
+.tag-row .key-wrap {
+    flex: 1 0 40%;
+}
 .tag-row .value-wrap {
     flex: 1 1 50%;
 }

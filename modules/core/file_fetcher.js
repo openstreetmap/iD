@@ -1,5 +1,5 @@
 import parseVersion from 'vparse';
-import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
+import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl, tag2LinkUrl } from '../../config/id.js';
 
 import packageJSON from '../../package.json';
 
@@ -39,6 +39,7 @@ export function coreFileFetcher() {
     'preset_defaults': presetsCdnUrl + 'dist/preset_defaults.min.json',
     'preset_fields': presetsCdnUrl + 'dist/fields.min.json',
     'preset_presets': presetsCdnUrl + 'dist/presets.min.json',
+    'tag2link': tag2LinkUrl,
     'wmf_sitematrix': wmfSitematrixCdnUrl.replace('{version}', '0.1') + 'wikipedia.min.json'
   };
 
