@@ -1,41 +1,59 @@
-# iD - friendly JavaScript editor for [OpenStreetMap](https://www.openstreetmap.org/)
+# iD <img src="img/logo.png"/>
+
+#### A simple and user-friendly JavaScript editor for [OpenStreetMap](https://www.openstreetmap.org/).
 
 [![build](https://github.com/openstreetmap/iD/workflows/build/badge.svg)](https://github.com/openstreetmap/iD/actions?query=workflow%3A%22build%22)
+![Static Badge](https://img.shields.io/badge/latest_version-2.27.3-blue)
+![Static Badge](https://img.shields.io/badge/latest_release-Nov_8,_2023-blue)
+![Static Badge](https://img.shields.io/badge/last_modified-last_month-green)
+
+<details style="margin-bottom: 10px">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#basics">Basics</a></li>
+    <li><a href="#key-features">Key Features</a></li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li>
+      <a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#cloning-the-repository">Cloning the Repository</a></li>
+      </ul>
+      <ul>
+        <li><a href="#Building-iD">Building ID</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-contribute">How to Contribute</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#thank-you">Thank You</a></li>
+  </ol>
+</details>
+
+<img src="img/demo.png" width="800"/>
 
 ## Basics
 
-* iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
-* It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
-* It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
-* iD is not yet designed for mobile browsers, but this is something we hope to add!
-* Data is rendered with [d3.js](https://d3js.org/).
+- iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
+- It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
+- It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
+- iD is not yet designed for mobile browsers, but this is something we hope to add!
+- Data is rendered with [d3.js](https://d3js.org/).
 
-## Participate!
+## Key Features
 
-* Read the project [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
-* Read up on [Contributing and the code style of iD](CONTRIBUTING.md).
-* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open)
-if you're looking for something to do.
-* [Translate!](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
-* Test a prerelease version of iD:
-  * Stable mirror of `release` branch: https://ideditor-release.netlify.app
-  * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.app
-
-Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
-* [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
-* [OpenStreetMap Discord](https://discord.gg/openstreetmap) (`#id` channel)
-* [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
-* [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
+- ability to place points, draw lines, and create areas on map
+- edits are saved locally for future use by users
+- can create custom names for points, lines, and areas
+- ability to upload map edits to OpenStreetMap for other to see
 
 ## Prerequisites
 
-* [Node.js](https://nodejs.org/) version 18 or newer
-* [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
-  * Note for Windows users:
-    * Edit `$HOME\.gitconfig`:<br/>
+- [Node.js](https://nodejs.org/) version 18 or newer
+- [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
+  - Note for Windows users:
+    - Edit `$HOME\.gitconfig`:<br/>
       Add these lines to avoid checking in files with CRLF newlines<br><pre>
       [core]
-          autocrlf = input</pre>
+      autocrlf = input</pre>
 
 ## Installation
 
@@ -62,12 +80,29 @@ If you want to add in the full history later on, perhaps to run `git blame` or `
 1. `cd` into the newly cloned project folder
 2. Run `npm install`
 3. Run `npm run all`
-3. Run `npm start`
-4. Open `http://127.0.0.1:8080/` in a web browser
+4. Run `npm start`
+5. Open `http://127.0.0.1:8080/` in a web browser
 
 For guidance on building a packaged version, running tests, and contributing to
-development, see [CONTRIBUTING.md](CONTRIBUTING.md).
+development, see [CONTRIBUTING.md](CONTRIBUTING.md), or keep reading on how to contribute.
 
+## How to Contribute!
+
+- Read the project [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
+- Read up on [Contributing and the code style of iD](CONTRIBUTING.md).
+- See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open)
+  if you're looking for something to do.
+- [Translate!](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
+- Test a prerelease version of iD:
+  - Stable mirror of `release` branch: https://ideditor-release.netlify.app
+  - Development mirror of `develop` branch + latest translations: https://ideditor.netlify.app
+
+Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
+
+- [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
+- [OpenStreetMap Discord](https://discord.gg/openstreetmap) (`#id` channel)
+- [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
+- [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
 ## License
 
@@ -76,18 +111,17 @@ See the [LICENSE.md](LICENSE.md) file for more details.
 
 iD also bundles portions of the following open source software.
 
-* [D3.js (BSD-3-Clause)](https://github.com/d3/d3)
-* [CLDR (Unicode Consortium Terms of Use)](https://github.com/unicode-cldr/cldr-json)
-* [editor-layer-index (CC-BY-SA 3.0)](https://github.com/osmlab/editor-layer-index)
-* [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
-* [Maki (CC0 1.0)](https://github.com/mapbox/maki)
-* [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
-* [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
-* [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
-* [iD Tagging Schema (ISC)](https://github.com/openstreetmap/id-tagging-schema)
-* [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)
-* [osm-community-index (ISC)](https://github.com/osmlab/osm-community-index)
-
+- [D3.js (BSD-3-Clause)](https://github.com/d3/d3)
+- [CLDR (Unicode Consortium Terms of Use)](https://github.com/unicode-cldr/cldr-json)
+- [editor-layer-index (CC-BY-SA 3.0)](https://github.com/osmlab/editor-layer-index)
+- [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
+- [Maki (CC0 1.0)](https://github.com/mapbox/maki)
+- [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
+- [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
+- [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
+- [iD Tagging Schema (ISC)](https://github.com/openstreetmap/id-tagging-schema)
+- [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)
+- [osm-community-index (ISC)](https://github.com/osmlab/osm-community-index)
 
 ## Thank you
 
