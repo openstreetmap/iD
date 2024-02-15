@@ -5,7 +5,7 @@ import { t, localizer } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationSuspiciousName() {
+export function validationSuspiciousName(context) {
   const type = 'suspicious_name';
   const keysToTestForGenericValues = [
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
@@ -45,9 +45,17 @@ export function validationSuspiciousName() {
     return false;
   }
 
-  function isGenericName(name, tags) {
+  /** @param {string} name @param {string} presetName */
+  function nameMatchesPresetName(name, presetName) {
+    if (!presetName) return false;
+
+    return name.toLowerCase() === presetName.toLowerCase();
+  }
+
+  /** @param {string} name @param {string} presetName */
+  function isGenericName(name, tags, presetName) {
     name = name.toLowerCase();
-    return nameMatchesRawTag(name, tags) || isGenericMatchInNsi(tags);
+    return nameMatchesRawTag(name, tags) || nameMatchesPresetName(name, presetName) || isGenericMatchInNsi(tags);
   }
 
   function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
@@ -153,6 +161,8 @@ export function validationSuspiciousName() {
     let issues = [];
     const notNames = (tags['not:name'] || '').split(';');
 
+    const presetName = presetManager.match(entity, context.graph()).name();
+
     for (let key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
       if (!m) continue;
@@ -168,7 +178,7 @@ export function validationSuspiciousName() {
           }
         }
       }
-      if (isGenericName(value, tags)) {
+      if (isGenericName(value, tags, presetName)) {
         issues.provisional = _waitingForNsi;  // retry later if we are waiting on NSI to finish loading
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }
