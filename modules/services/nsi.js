@@ -82,6 +82,21 @@ function loadNsiPresets() {
       // The preset json schema doesn't include it, but the iD code still uses it
       Object.values(vals[0].presets).forEach(preset => preset.suggestion = true);
 
+      // nsi does not specify *:wikipedia (anymore):
+      // clean up previous values to prevent that the wikidata/wikipedia information
+      // is going to be out of sync, see #9103
+      Object.values(vals[0].presets).forEach(preset => {
+        if (preset.tags['brand:wikidata']) {
+          preset.addTags['brand:wikipedia'] = '';
+        }
+        if (preset.tags['operator:wikidata']) {
+          preset.addTags['operator:wikipedia'] = '';
+        }
+        if (preset.tags['network:wikidata']) {
+          preset.addTags['network:wikipedia'] = '';
+        }
+      });
+
       presetManager.merge({
         presets: vals[0].presets,
         featureCollection: vals[1]

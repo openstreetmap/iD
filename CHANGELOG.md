@@ -58,8 +58,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
 * Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
+* Drop `*:wikipedia` tags when switching to a new NSI-based preset which specifies a corresponding `*:wikidata` tag ([#9103])
 #### :hammer: Development
 
+[#9103]: https://github.com/openstreetmap/iD/issues/9103
 [#9424]: https://github.com/openstreetmap/iD/pull/9424
 [#9422]: https://github.com/openstreetmap/iD/issues/9422
 [#9876]: https://github.com/openstreetmap/iD/issues/9876

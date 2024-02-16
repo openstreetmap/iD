@@ -248,6 +248,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         if (_this.tags[k] || !tags[k]) {
           tags[k] = 'yes';
         }
+      } else if (addTags[k] === '') {
+        // empty string equates to a tag which should be removed
+        delete tags[k];
       } else {
         tags[k] = addTags[k];
       }
