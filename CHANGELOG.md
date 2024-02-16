@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add support for coordinates in `<degree> <minutes>[ <seconds>]` format to search bar ([#10066], thanks [@NaVis0mple])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074]) 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
@@ -70,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
 [#10062]: https://github.com/openstreetmap/iD/pull/10062
 [#10066]: https://github.com/openstreetmap/iD/pull/10066
+[#10074]: https://github.com/openstreetmap/iD/issues/10074
 [id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
 [@mangerlahn]: https://github.com/mangerlahn
