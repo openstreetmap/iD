@@ -251,10 +251,10 @@ describe('iD.geoExtent', function () {
         it('splits into four parts', function () {
             var splits = iD.geoExtent([0, 10], [5, 20]).split();
             expect(splits).to.have.length(4);
-            expect(splits[0]).to.eql([[0, 10], [2.5, 15]]);
-            expect(splits[1]).to.eql([[2.5, 10], [5, 15]]);
-            expect(splits[2]).to.eql([[2.5, 15], [5, 20]]);
-            expect(splits[3]).to.eql([[0, 15], [2.5, 20]]);
+            expect(splits[0].equals([[0, 10], [2.5, 15]])).to.be.ok;
+            expect(splits[1].equals([[2.5, 10], [5, 15]])).to.be.ok;
+            expect(splits[2].equals([[2.5, 15], [5, 20]])).to.be.ok;
+            expect(splits[3].equals([[0, 15], [2.5, 20]])).to.be.ok;
         });
     });
 
