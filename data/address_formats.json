@@ -79,6 +79,14 @@
     ]
   },
   {
+    "countryCodes": ["nz"],
+    "format": [
+      ["housenumber", "street"],
+      ["suburb"],
+      ["city", "postcode"]
+    ]
+  },
+  {
     "countryCodes": ["br"],
     "format": [
       ["street+place"],
