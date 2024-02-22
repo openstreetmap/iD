@@ -65,6 +65,15 @@ export var osmAreaKeysExceptions = {
     }
 };
 
+/** iD will not allow nodes with this tag to be moved */
+export const osmTagsPreventingMove = {
+    man_made: {
+        survey_point: true
+    },
+    latitude: true,
+    longitude: true,
+};
+
 // returns an object with the tag from `tags` that implies an area geometry, if any
 export function osmTagSuggestingArea(tags) {
     if (tags.area === 'yes') return { area: 'yes' };
