@@ -648,3 +648,9 @@ export function utilCleanOsmString(val, maxChars) {
     // trim to the number of allowed characters
     return utilUnicodeCharsTruncated(val, maxChars);
   }
+
+/**
+ * Indicates if the current mode is a drawing mode
+ * @param {string} mode
+ */
+export const utilIsDrawing = (mode) => mode.startsWith('draw');
