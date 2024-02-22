@@ -351,7 +351,7 @@ export function uiFieldText(field, context) {
 
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
-        change()();
+        change()(); 
         var extent = combinedEntityExtent();
         var countryCode = extent && countryCoder.iso1A2Code(extent.center());
         var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
@@ -425,7 +425,7 @@ export function uiFieldText(field, context) {
                 var numbers = val.split(';');
                 numbers = numbers.map(function(v) {
                     if (likelyRawNumberFormat.test(v)) {
-                        // Input number likely in "raw" format
+                        // input number likely in "raw" format
                         return v;
                     }
                     var num = parseLocaleFloat(v);
@@ -438,6 +438,7 @@ export function uiFieldText(field, context) {
             t[field.key] = val || undefined;
             if (field.keys) {
                 // For multi-key fields: handle alternative tag keys gracefully
+                // https://github.com/openstreetmap/id-tagging-schema/issues/905
                 dispatch.call('change', this, tags => {
                     if (field.keys.some(key => tags[key])) {
                         // Use existing key(s)
@@ -445,7 +446,7 @@ export function uiFieldText(field, context) {
                             tags[key] = val || undefined;
                         });
                     } else {
-                        // Fall back to default key if none of the `keys` is preset
+                        // fall back to default key if none of the `keys` is preset
                         tags[field.key] = val || undefined;
                     }
                     return tags;
