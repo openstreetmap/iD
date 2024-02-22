@@ -2759,7 +2759,7 @@ button.raw-tag-option svg.icon {
     background-color: #f5f5f5;
 }
 .tag-reference-loading .icon {
-    background-image: url(img/mini-loader);
+    background-image: url(img/mini-loader.gif);
     background-position: 0 0;
 }
 
