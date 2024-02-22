@@ -9,6 +9,7 @@ import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
+import { localizer } from '../core/localizer.js';
 
 import { osmApiConnections } from '../../config/id.js';
 
@@ -1437,6 +1438,12 @@ export default {
             if (callback) callback(err, res);
             that.userChangesets(function() {});  // eagerly load user details/changesets
         }
+
+        // ensure the locale is correctly set before opening the popup
+        oauth.options({
+            ...oauth.options(),
+            locale: localizer.localeCode(),
+        });
 
         oauth.authenticate(done);
     },
