@@ -304,7 +304,7 @@ export function coreValidator(context) {
     }
 
     if (focusCenter) {  // Adjust the view
-      const setZoom = Math.max(context.map().zoom(), 19.3);
+      const setZoom = Math.max(context.map().zoom(), 19);
       context.map().unobscuredCenterZoomEase(focusCenter, setZoom);
     }
 
