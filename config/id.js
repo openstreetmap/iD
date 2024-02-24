@@ -53,6 +53,9 @@ const taginfoApiUrl = ENV__ID_TAGINFO_API_URL
 const nominatimApiUrl = ENV__ID_NOMINATIM_API_URL
   || 'https://nominatim.openstreetmap.org/';
 
+// support/donation message on upload success screen
+const showDonationMessage = ENV__ID_SHOW_DONATION_MESSAGE !== 'false';
+
 export {
   presetsCdnUrl,
   ociCdnUrl,
@@ -61,4 +64,5 @@ export {
   osmApiConnections,
   taginfoApiUrl,
   nominatimApiUrl,
+  showDonationMessage
 };

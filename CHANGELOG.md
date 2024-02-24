@@ -56,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+* Show message about how to support OSM (e.g. in form of a donation) after a successful save ([#10054])
 #### :rocket: Presets
 * Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
 * Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9891]: https://github.com/openstreetmap/iD/pull/9891
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
+[#10054]: https://github.com/openstreetmap/iD/issues/10054
 [#10062]: https://github.com/openstreetmap/iD/pull/10062
 [#10066]: https://github.com/openstreetmap/iD/pull/10066
 [#10074]: https://github.com/openstreetmap/iD/issues/10074

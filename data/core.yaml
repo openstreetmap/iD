@@ -1034,6 +1034,12 @@ en:
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
+    supporting:
+      title: "OpenStreetMap is free to use, but not free to run"
+      details: "Its stability, quality, independence, and strength depend on donations from people like you."
+      donation:
+        title: "Support the map"
+        details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
     events: Events

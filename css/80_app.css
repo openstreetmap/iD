@@ -5078,10 +5078,12 @@ img.tile-debug {
 }
 
 .save-summary,
+.save-supporting,
 .save-communityLinks {
     padding: 0px 20px 15px 20px;
 }
 
+.save-supporting,
 .save-communityLinks {
     border-top: 1px solid #ccc;
 }
@@ -5113,6 +5115,7 @@ img.tile-debug {
 }
 
 .summary-view-on-osm,
+.support-the-map,
 .community-name {
     font-size: 14px;
     font-weight: bold;
