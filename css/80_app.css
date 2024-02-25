@@ -2354,9 +2354,8 @@ div.combobox {
     display: block;
     padding: 5px 10px;
     border-top: 1px solid #ccc;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    line-height: 0.95rem;
+    break: all;
 }
 
 .combobox a.selected,
