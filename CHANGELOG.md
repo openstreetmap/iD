@@ -53,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
 * Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
 * Don't show duplicates of notes when they lie exactly on special locations like null island (0.0,0.0)
+* Preserve `side` tag of `highway=cyclist_waiting_aid` features when reversing its way ([#10128])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10062]: https://github.com/openstreetmap/iD/pull/10062
 [#10066]: https://github.com/openstreetmap/iD/pull/10066
 [#10074]: https://github.com/openstreetmap/iD/issues/10074
+[#10128]: https://github.com/openstreetmap/iD/issues/10128 
 [id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
 [@mangerlahn]: https://github.com/mangerlahn
