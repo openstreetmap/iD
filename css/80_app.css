@@ -1589,6 +1589,7 @@ input.date-selector {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
+    line-height: 0.95rem;
 }
 .form-field ul.rows li input {
     border-radius: 0;
@@ -1605,6 +1606,28 @@ input.date-selector {
 .ideditor[dir='rtl'] .form-field ul.rows li.labeled-input input,
 .ideditor[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
+}
+
+/* Field - lists with labeled input items as table
+------------------------------------------------------- */
+.form-field ul.rows.rows-table {
+    display: table;
+    width: 100%;
+}
+.form-field ul.rows.rows-table li.labeled-input {
+    display: table-row;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:first-child {
+    display: table-cell;
+    width: auto;
+    max-width: 170px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:nth-child(2) {
+    display: table-cell;
+    width: auto;
 }
 
 

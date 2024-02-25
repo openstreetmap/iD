@@ -43,7 +43,7 @@ export function uiFieldDirectionalCombo(field, context) {
 
         div = div.enter()
             .append('ul')
-            .attr('class', 'rows')
+            .attr('class', 'rows rows-table')
             .merge(div);
 
         items = div.selectAll('li')
