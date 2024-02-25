@@ -166,21 +166,17 @@ open while we wait for something to happen.
 
 Light grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
-(ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
 
 * <sub>[![wontfix][wontfix]][wontfix_link]
 [![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
-[![wontfix-ISATIDL][wontfix-ISATIDL]][wontfix-ISATIDL_link]
 [![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
 
 [wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
 [wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
-[wontfix-ISATIDL]: http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee
 [wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
 
 [wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
 [wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
-[wontfix-ISATIDL_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-ISATIDL
 [wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
 
 Special:
