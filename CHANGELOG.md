@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show `(empty)` as a tag value option in the raw tag editor when a multi selections contains at least one feature which does not have the particular tag ([#9876], thanks [@k-yle])
 * Allow to search for OSM notes by id in search bar ([#10062], thanks [@NaVis0mple])
 * Add support for coordinates in `<degree> <minutes>[ <seconds>]` format to search bar ([#10066], thanks [@NaVis0mple])
+* Improve styling of combobox dopdown list to give entries with long labels more room for better readability ([#10127], thanks [@tordans])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074]) 
@@ -75,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10062]: https://github.com/openstreetmap/iD/pull/10062
 [#10066]: https://github.com/openstreetmap/iD/pull/10066
 [#10074]: https://github.com/openstreetmap/iD/issues/10074
+[#10127]: https://github.com/openstreetmap/iD/issues/10127
 [#10128]: https://github.com/openstreetmap/iD/issues/10128 
 [id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
