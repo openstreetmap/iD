@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 * Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074]) 
 #### :white_check_mark: Validation
+* Warn when objects contain tags which are considered to be _mutually exclusive_ like for example `noname` and `name` (replaces previous `incorrect_name` validator) ([#10035], thanks [@mtmail])
 #### :bug: Bugfixes
 * Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
 * Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
@@ -72,6 +73,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9891]: https://github.com/openstreetmap/iD/pull/9891
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
+[#10035]: https://github.com/openstreetmap/iD/pull/10035
 [#10054]: https://github.com/openstreetmap/iD/issues/10054
 [#10062]: https://github.com/openstreetmap/iD/pull/10062
 [#10066]: https://github.com/openstreetmap/iD/pull/10066
@@ -82,6 +84,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@ramith-kulal]: https://github.com/ramith-kulal
 [@mangerlahn]: https://github.com/mangerlahn
 [@NaVis0mple]: https://github.com/NaVis0mple
+[@mtmail]: https://github.com/mtmail
 
 
 # 2.27.3

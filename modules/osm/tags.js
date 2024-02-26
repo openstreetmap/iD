@@ -255,3 +255,15 @@ export function isColourValid(value) {
     }
     return true;
 }
+
+// https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
+export var osmMutuallyExclusiveTagPairs = [
+    ['noname', 'name'],
+    ['noref', 'ref'],
+    ['nohousenumber', 'addr:housenumber'],
+    ['noaddress', 'addr:housenumber'],
+    ['noaddress', 'addr:housename'],
+    ['noaddress', 'addr:unit'],
+    ['addr:nostreet', 'addr:street']
+];
+
