@@ -107,6 +107,7 @@ export function helpHtml(id, replacements) {
 
         // reference localized UI labels directly so that they'll always match
         save: t.html('save.title'),
+        discard: t.html('discard.title'),
         undo: t.html('undo.title'),
         redo: t.html('redo.title'),
         upload: t.html('commit.save'),
