@@ -7,7 +7,8 @@ export function utilArrayIdentical(a, b) {
     var i = a.length;
     if (i !== b.length) return false;
     while (i--) {
-        if (a[i] !== b[i]) return false;
+        // When a and b contain objects, the !== operator will compare their references which may be diffrent even if the object is the same, related #9502
+        if (JSON.stringify(a[i]) !== JSON.stringify(b[i])) return false;
     }
     return true;
 }
