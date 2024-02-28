@@ -689,6 +689,9 @@ export function coreValidator(context) {
         const entity = graph.hasEntity(entityID);   // Sanity check: don't validate deleted entities
         if (!entity) return;
 
+        // If we are validating base entity and it has been modified in the head, skip it #9530.
+        if (entity === graph.base().entities[entityID] && _completeDiff.hasOwnProperty(entityID)) return;
+        
         // detect new issues and update caches
         const result = validateEntity(entity, graph);
         if (result.provisional) {                       // provisional result
