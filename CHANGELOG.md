@@ -44,10 +44,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :earth_asia: Localization
+* Add address format for New Zealand ([#10123], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+
+[#10123]: https://github.com/openstreetmap/iD/pull/10123
 
 
 # 2.28.0
