@@ -35,9 +35,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.28.0-dev)
+# 2.28.0
+##### 2024-Feb-28
 
-#### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Show the color of (route) relations in the form of small colored circles in relation membership section and feature search results ([#9424])
 * Hide tag suggestions for tags like `name_1` in raw tag editor autocomplete ([#9422])
@@ -45,9 +45,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow to search for OSM notes by id in search bar ([#10062], thanks [@NaVis0mple])
 * Add support for coordinates in `<degree> <minutes>[ <seconds>]` format to search bar ([#10066], thanks [@NaVis0mple])
 * Improve styling of combobox dopdown list to give entries with long labels more room for better readability ([#10127], thanks [@tordans])
-#### :scissors: Operations
 #### :camera: Street-Level
-* Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074]) 
+* Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074])
 #### :white_check_mark: Validation
 * Warn when objects contain tags which are considered to be _mutually exclusive_ like for example `noname` and `name` (replaces previous `incorrect_name` validator) ([#10035], thanks [@mtmail])
 #### :bug: Bugfixes
@@ -56,15 +55,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
 * Don't show duplicates of notes when they lie exactly on special locations like null island (0.0,0.0)
 * Preserve `side` tag of `highway=cyclist_waiting_aid` features when reversing its way ([#10128])
-#### :earth_asia: Localization
-#### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Show message about how to support OSM (e.g. in form of a donation) after a successful save ([#10054])
 #### :rocket: Presets
 * Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
 * Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
 * Drop `*:wikipedia` tags when switching to a new NSI-based preset which specifies a corresponding `*:wikidata` tag ([#9103])
-#### :hammer: Development
 
 [#9103]: https://github.com/openstreetmap/iD/issues/9103
 [#9424]: https://github.com/openstreetmap/iD/pull/9424
@@ -79,7 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10066]: https://github.com/openstreetmap/iD/pull/10066
 [#10074]: https://github.com/openstreetmap/iD/issues/10074
 [#10127]: https://github.com/openstreetmap/iD/issues/10127
-[#10128]: https://github.com/openstreetmap/iD/issues/10128 
+[#10128]: https://github.com/openstreetmap/iD/issues/10128
 [id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
 [@mangerlahn]: https://github.com/mangerlahn
