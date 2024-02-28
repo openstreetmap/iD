@@ -423,74 +423,78 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         return 'generic';
     }
 
-    /** see PR #8671 */
+    /** see PR #8671 and #9340 */
     function followMode() {
         if (_didResolveTempEdit) return;
 
         try {
+            // If we're drawing an area, the first node = last node.
+            // (example: _origWay.nodes = [1,2,3,4,1])
+            const isDrawingArea = _origWay.nodes.length > 1 && _origWay.nodes[0] === _origWay.nodes[_origWay.nodes.length - 1];
 
-            // get the last 2 added nodes.
-            // check if they are both part of only oneway (the same one)
-            // check if the ways that they're part of are the same way
-            // find index of the last two nodes, to determine the direction to travel around the existing way
-            // add the next node to the way we are drawing
+            // (example: isDrawingArea = true; _origWay.nodes = [1,2,3,4,1]; secondLastNodeId = 3; lastNodeId = 4)
+            // (example: isDrawingArea = false; _origWay.nodes = [1,2,3,4,5]; secondLastNodeId = 4; lastNodeId = 5)
+            const secondLastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -3 : -2)];
+            const lastNodeId = _origWay.nodes[_origWay.nodes.length + (isDrawingArea ? -2 : -1)];
 
-            // if we're drawing an area, the first node = last node.
-            const isDrawingArea = _origWay.nodes[0] === _origWay.nodes.slice(-1)[0];
-
-            const [secondLastNodeId, lastNodeId] = _origWay.nodes.slice(isDrawingArea ? -3 : -2);
-
-            // Unlike startGraph, the full history graph may contain unsaved vertices to follow.
-            // https://github.com/openstreetmap/iD/issues/8749
             const historyGraph = context.history().graph();
-            if (!lastNodeId || !secondLastNodeId || !historyGraph.hasEntity(lastNodeId) || !historyGraph.hasEntity(secondLastNodeId)) {
-                context.ui().flash
-                    .duration(4000)
-                    .iconName('#iD-icon-no')
-                    .label(t.append('operations.follow.error.needs_more_initial_nodes'))();
-                return;
-            }
-
-            // If the way has looped over itself, follow some other way.
+            // Get all ways that include the last created node and are not the way you are currently drawing
             const lastNodesParents = historyGraph.parentWays(historyGraph.entity(lastNodeId)).filter(w => w.id !== wayID);
-            const secondLastNodesParents = historyGraph.parentWays(historyGraph.entity(secondLastNodeId)).filter(w => w.id !== wayID);
 
-            const featureType = getFeatureType(lastNodesParents);
+            // Find all the adjacent nodes in the graph
+            const unfilteredNextNodeIds = lastNodesParents.flatMap(({nodes}) => {
+                const indexOfLast = nodes.indexOf(lastNodeId);
+                // If last created node is not first or last in way
+                // (example: nodes = [1,2,3,4,1]; lastNodeId = 2; return [1,3])
+                if (indexOfLast % (nodes.length - 1)) {
+                    return [nodes[indexOfLast-1], nodes[indexOfLast+1]];
+                }
+                // If way is an area (example: nodes = [1,2,3,4,1]; lastNodeId = 1; return [2,4])
+                if (nodes[0] === nodes[nodes.length - 1]) {
+                    return [nodes[1], nodes[nodes.length - 2]];
+                }
+                // Way is not an area (example: nodes = [1,2,3,4,5]; lastNodeId = 5; return [4])
+                // Way is not an area (example: nodes = [1,2,3,4,5]; lastNodeId = 1; return [2])
+                return [indexOfLast ? nodes[nodes.length - 2] : nodes[1]];
+            });
+            // Removed the last created node from all possible candidates
+            let nextNodeIds = unfilteredNextNodeIds.filter((id) => id !== secondLastNodeId);
 
-            if (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0) {
-                context.ui().flash
-                    .duration(4000)
-                    .iconName('#iD-icon-no')
-                    .label(t.append(`operations.follow.error.intersection_of_multiple_ways.${featureType}`))();
-                return;
+            // There are no nodes that are adjacent to the last create node
+            if (!nextNodeIds.length) return;
+
+            // Check if there are multiple candidates or are all the same
+            // (example: new Set([1,1,1]).size === 1) we will connect to `1`
+            // (example: new Set([1,1,2]).size === 2) we will du further checks
+            if (new Set([...nextNodeIds]).size > 1) {
+                // This covers Case 1
+                // video and illustration can be found at https://github.com/openstreetmap/iD/pull/9340
+                //
+                // Given Way segments that connect the current node to more than two nodes.
+                // When Exactly one of the next nodes is only connected using one way segment.
+                // Then Connect the current node to the node that is only connected using one way segment.
+                //
+                // (example: nextNodeIds = [1,1,2] will be converted to [2])
+                // (example: nextNodeIds = [1,2] will be converted to [1, 2])
+                nextNodeIds = nextNodeIds.filter((id,_,nodes) => nodes.lastIndexOf(id) === nodes.indexOf(id));
+                if (nextNodeIds.length !== 1) {
+                    const featureType = getFeatureType(lastNodesParents);
+                    context.ui().flash
+                        .duration(4000)
+                        .iconName('#iD-icon-no')
+                        .label(t.append(
+                            // Needs more nodes when the previous node is not adjacent
+                            // https://github.com/openstreetmap/iD/pull/9340#discussion_r1050118322
+                            nextNodeIds.length === unfilteredNextNodeIds.length
+                                ? 'operations.follow.error.needs_more_initial_nodes'
+                                : `operations.follow.error.intersection_of_multiple_ways.${featureType}`
+                        ))();
+                    return;
+                }
             }
 
-            // Check if the last node's parent is also the parent of the second last node.
-            // The last node must only have one parent, but the second last node can have
-            // multiple parents.
-            if (!secondLastNodesParents.some(n => n.id === lastNodesParents[0].id)) {
-                context.ui().flash
-                    .duration(4000)
-                    .iconName('#iD-icon-no')
-                    .label(t.append(`operations.follow.error.intersection_of_different_ways.${featureType}`))();
-                return;
-            }
-
-            const way = lastNodesParents[0];
-
-            const indexOfLast = way.nodes.indexOf(lastNodeId);
-            const indexOfSecondLast = way.nodes.indexOf(secondLastNodeId);
-
-            // for a closed way, the first/last node is the same so it appears twice in the array,
-            // but indexOf always finds the first occurrence. This is only an issue when following a way
-            // in descending order
-            const isDescendingPastZero = indexOfLast === way.nodes.length - 2 && indexOfSecondLast === 0;
-
-            let nextNodeIndex = indexOfLast + (indexOfLast > indexOfSecondLast && !isDescendingPastZero ? 1 : -1);
-            // if we're following a closed way and we pass the first/last node, the  next index will be -1
-            if (nextNodeIndex === -1) nextNodeIndex = indexOfSecondLast === 1 ? way.nodes.length - 2 : 1;
-
-            const nextNode = historyGraph.entity(way.nodes[nextNodeIndex]);
+            // Now we have only one candidate and will connect the path
+            const nextNode = historyGraph.entity(nextNodeIds[0]);
 
             drawWay.addNode(nextNode, {
                 geometry: { type: 'Point', coordinates: nextNode.loc },
