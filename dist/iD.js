@@ -22251,7 +22251,7 @@
   var import_vparse = __toESM(require_vparse());
 
   // config/id.js
-  var presetsCdnUrl = "http://127.0.0.1:3000/";
+  var presetsCdnUrl = "https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}/";
   var ociCdnUrl = "https://cdn.jsdelivr.net/npm/osm-community-index@{version}/";
   var wmfSitematrixCdnUrl = "https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/";
   var nsiCdnUrl = "https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/";
@@ -22276,8 +22276,8 @@
       client_id: null,
       client_secret: null
     });
-  } else if (defaultOsmApiConnections["dev"] !== void 0) {
-    osmApiConnections.push(defaultOsmApiConnections["dev"]);
+  } else if (false) {
+    osmApiConnections.push(defaultOsmApiConnections[null]);
   } else {
     osmApiConnections.push(defaultOsmApiConnections.live);
     osmApiConnections.push(defaultOsmApiConnections.dev);
