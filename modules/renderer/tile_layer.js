@@ -202,6 +202,7 @@ export function rendererTileLayer(context) {
             .attr('draggable', 'false')
             .style('width', _tileSize + 'px')
             .style('height', _tileSize + 'px')
+            .style('z-index', function(d) { return d[2]; })
             .attr('src', function(d) { return d[3]; })
             .on('error', error)
             .on('load', load)
