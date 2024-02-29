@@ -35,21 +35,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.29.0-dev)
+# 2.28.1
+##### 2024-Feb-29
 
-#### :tada: New Features
-#### :sparkles: Usability & Accessibility
-#### :scissors: Operations
-#### :camera: Street-Level
-#### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix false validation message, which was suggesting to add empty `*:wikipedia` tags to NSI presets ([#10140])
 #### :earth_asia: Localization
 * Add address format for New Zealand ([#10123], thanks [@k-yle])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
-#### :rocket: Presets
-#### :hammer: Development
 
 [#10123]: https://github.com/openstreetmap/iD/pull/10123
 [#10140]: https://github.com/openstreetmap/iD/issues/10140
