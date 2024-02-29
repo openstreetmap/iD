@@ -1,6 +1,5 @@
 import { actionAddMember } from './add_member';
 import { geoSphericalDistance } from '../geo/geo';
-import { osmIsOldMultipolygonOuterMember } from '../osm/multipolygon';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
 import { utilArrayIntersection, utilWrap, utilArrayUniq } from '../util';
@@ -100,7 +99,6 @@ export function actionSplit(nodeIds, newWayIds) {
         var nodesA;
         var nodesB;
         var isArea = wayA.isArea();
-        var isOuter = osmIsOldMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1);
@@ -220,12 +218,6 @@ export function actionSplit(nodeIds, newWayIds) {
             // 1. Both `wayA` and `wayB` remain in the relation
             // 2. But must be inserted as a pair (see `actionAddMember` for details)
             } else {
-                if (relation === isOuter) {
-                    graph = graph.replace(relation.mergeTags(wayA.tags));
-                    graph = graph.replace(wayA.update({ tags: {} }));
-                    graph = graph.replace(wayB.update({ tags: {} }));
-                }
-
                 member = {
                     id: wayB.id,
                     type: 'way',
@@ -242,7 +234,7 @@ export function actionSplit(nodeIds, newWayIds) {
             }
         });
 
-        if (!isOuter && isArea) {
+        if (isArea) {
             var multipolygon = osmRelation({
                 tags: Object.assign({}, wayA.tags, { type: 'multipolygon' }),
                 members: [

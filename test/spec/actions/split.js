@@ -1359,23 +1359,6 @@ describe('iD.actionSplit', function () {
                 expect(graph.entity('=').nodes).to.eql(['a', 'b', 'c', 'a']);
                 expect(graph.parentRelations(graph.entity('='))).to.have.length(0);
             });
-
-            it('converts simple multipolygon to a proper multipolygon', function () {
-                var graph = iD.coreGraph([
-                    iD.osmNode({id: 'a'}),
-                    iD.osmNode({id: 'b'}),
-                    iD.osmNode({id: 'c'}),
-                    iD.osmWay({'id': '-', nodes: ['a', 'b', 'c'], tags: { area: 'yes' }}),
-                    iD.osmRelation({id: 'r', members: [{id: '-', type: 'way', role: 'outer'}], tags: {type: 'multipolygon'}})
-                ]);
-
-                graph = iD.actionSplit('b', ['='])(graph);
-
-                expect(graph.entity('-').tags).to.eql({});
-                expect(graph.entity('r').tags).to.eql({type: 'multipolygon', area: 'yes' });
-                var ids = graph.entity('r').members.map(function(m) { return m.id; });
-                expect(ids).to.have.ordered.members(['-', '=']);
-            });
         });
 
 
