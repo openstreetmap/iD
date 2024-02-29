@@ -87,13 +87,13 @@ function loadNsiPresets() {
       // is going to be out of sync, see #9103
       Object.values(vals[0].presets).forEach(preset => {
         if (preset.tags['brand:wikidata']) {
-          preset.addTags['brand:wikipedia'] = '';
+          preset.removeTags = {'brand:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
         }
         if (preset.tags['operator:wikidata']) {
-          preset.addTags['operator:wikipedia'] = '';
+          preset.removeTags = {'operator:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
         }
         if (preset.tags['network:wikidata']) {
-          preset.addTags['network:wikipedia'] = '';
+          preset.removeTags = {'network:wikipedia': '*', ...(preset.removeTags || preset.addTags || preset.tags)};
         }
       });
 
