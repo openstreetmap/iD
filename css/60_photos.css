@@ -381,7 +381,10 @@ label.streetside-hires {
 }
 
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-username {
-    display: none;
+    display: block;
+    padding: 0px 7px 2px 5px;
+    align-items: center;
+    
 }
 
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-date {
