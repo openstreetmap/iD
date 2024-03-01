@@ -8,7 +8,7 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationMissingTag(context) {
     var type = 'missing_tag';
 
-    function hasDescriptiveTags(entity, graph) {
+    function hasDescriptiveTags(entity) {
         var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
         var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
@@ -54,7 +54,7 @@ export function validationMissingTag(context) {
 
             if (Object.keys(entity.tags).length === 0) {
                 subtype = 'any';
-            } else if (!hasDescriptiveTags(entity, graph)) {
+            } else if (!hasDescriptiveTags(entity)) {
                 subtype = 'descriptive';
             } else if (isUntypedRelation(entity)) {
                 subtype = 'relation_type';
