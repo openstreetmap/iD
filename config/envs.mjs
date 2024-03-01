@@ -14,10 +14,10 @@ const envs = {
   ENV__ID_API_CONNECTION_CLIENT_SECRET: JSON.stringify(process.env.ID_API_CONNECTION_CLIENT_SECRET || null),
   ENV__ID_API_CONNECTION: JSON.stringify(process.env.ID_API_CONNECTION || null),
 
-  ENV__ID_TAGINFO_API_URL: JSON.stringify(process.env.ENV__ID_TAGINFO_API_URL || null),
-  ENV__ID_NOMINATIM_API_URL: JSON.stringify(process.env.ENV__ID_NOMINATIM_API_URL || null),
+  ENV__ID_TAGINFO_API_URL: JSON.stringify(process.env.ID_TAGINFO_API_URL || null),
+  ENV__ID_NOMINATIM_API_URL: JSON.stringify(process.env.ID_NOMINATIM_API_URL || null),
 
-  ENV__ID_SHOW_DONATION_MESSAGE: JSON.stringify(process.env.ENV__ID_SHOW_DONATION_MESSAGE || null),
+  ENV__ID_SHOW_DONATION_MESSAGE: JSON.stringify(process.env.ID_SHOW_DONATION_MESSAGE || null),
 };
 
 export default envs;
