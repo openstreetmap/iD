@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 #### :camera: Street-Level
+* Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
 #### :white_check_mark: Validation
 * Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
 #### :bug: Bugfixes
@@ -49,6 +50,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+
+[#10135]: https://github.com/openstreetmap/iD/issues/10135#
+[@Sushil642]: https://github.com/Sushil642
 
 
 # 2.28.1
