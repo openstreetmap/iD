@@ -107,12 +107,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
         return t;
     }
 
-
+    // added the username lines
     function filterImages(images) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
@@ -130,15 +131,21 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return new Date(image.captured_at).getTime() <= new Date(toDate).getTime();
             });
         }
-
+        if(usernames){
+            images = images.filter(function(image) {
+                return usernames.indexOf(image.captured_by) !== -1;
+            });
+        }
         return images;
     }
 
+    // added the username lines
     function filterSequences(sequences) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
@@ -159,7 +166,11 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return new Date(sequence.properties.captured_at).getTime() <= new Date(toDate).getTime().toString();
             });
         }
-
+        if (usernames) {
+            sequences = sequences.filter(function(sequence) {
+                return usernames.indexOf(sequence.properties.username) !== -1;
+            });
+        }
         return sequences;
     }
 

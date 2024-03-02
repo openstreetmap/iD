@@ -87,6 +87,9 @@ export function svgMapillarySigns(projection, context, dispatch) {
     function filterData(detectedFeatures) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
+        var usernames = context.photos().usernames();
+        var service = getService();
+        
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
@@ -98,6 +101,15 @@ export function svgMapillarySigns(projection, context, dispatch) {
             var toTimestamp = new Date(toDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
                 return new Date(feature.first_seen_at).getTime() <= toTimestamp;
+            });
+        }
+        if (usernames && service) {
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return feature.detections.some(function(detection) {
+                    var imageKey = detection.image_key;
+                    var image = service.cachedImage(imageKey);
+                    return image && usernames.indexOf(image.captured_by) !== -1;
+                });
             });
         }
 

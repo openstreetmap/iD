@@ -85,8 +85,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
 
     function filterData(detectedFeatures) {
+        const service = getService();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
         if (fromDate) {
             detectedFeatures = detectedFeatures.filter(function(feature) {
@@ -98,7 +100,16 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                 return new Date(feature.first_seen_at).getTime() <= new Date(toDate).getTime();
             });
         }
-
+        // added the username and service lines
+        if (usernames && service) {
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return feature.detections.some(function(detection) {
+                    var imageKey = detection.image_key;
+                    var image = service.cachedImage(imageKey);
+                    return image && usernames.indexOf(image.captured_by) !== -1;
+                });
+            });
+        }
         return detectedFeatures;
     }
 
