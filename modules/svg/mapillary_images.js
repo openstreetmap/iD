@@ -131,7 +131,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
                 return new Date(image.captured_at).getTime() <= new Date(toDate).getTime();
             });
         }
-        if(usernames){
+        if (usernames) {
             images = images.filter(function(image) {
                 return usernames.indexOf(image.captured_by) !== -1;
             });
