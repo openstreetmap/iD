@@ -439,6 +439,7 @@ export default {
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
         const filter = ['all'];
 
         if (!showsPano) filter.push([ '!=', 'cameraType', 'spherical' ]);
@@ -449,7 +450,9 @@ export default {
         if (toDate) {
             filter.push(['>=', 'capturedAt', new Date(toDate).getTime()]);
         }
-
+        if (usernames && usernames.length) {
+            filter.push(['==', 'creatorUsername', usernames[0]]);
+        }
         if (_mlyViewer) {
             _mlyViewer.setFilter(filter);
         }
