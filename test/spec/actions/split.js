@@ -425,15 +425,14 @@ describe('iD.actionSplit', function () {
         }
 
 
-        it('handles incomplete relations', function () {
+        it('disables split action on too incomplete relations', function () {
             //
             // Situation:
             //    a ---> b ---> c         split at 'b'
-            //    Relation: ['~', '-']
+            //    Relation: ['?', '-']    member '?' missing
             //
             // Expected result:
-            //    a ---> b ===> c
-            //    Relation: ['~', '-', '=']
+            //    forbidden, because correct order of -/= cannot be determined
             //
             var graph = iD.coreGraph([
                 iD.osmNode({ id: 'a', loc: [0, 0] }),
@@ -441,13 +440,73 @@ describe('iD.actionSplit', function () {
                 iD.osmNode({ id: 'c', loc: [2, 0] }),
                 iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
                 iD.osmRelation({id: 'r', members: [
-                    { id: '~', type: 'way' },
+                    { id: '?', type: 'way' },
                     { id: '-', type: 'way' }
                 ]})
             ]);
 
-            graph = iD.actionSplit('b', ['='])(graph);
-            expect(members(graph)).to.eql(['~', '-', '=']);
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.be.ok;
+        });
+
+        it('enables split action on partially incomplete, but still sufficiently complete relations (before split)', function () {
+            //
+            // Situation:
+            //    a ~~~> b ---> c ---> d        split at 'c'
+            //    Relation: ['~', '-', '?']     member '?' missing
+            //
+            // Expected result:
+            //    a ~~~> b ---> c ===> d
+            //    Relation: ['~', '-', '=', '?']
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [2, 0] }),
+                iD.osmNode({ id: 'd', loc: [3, 0] }),
+                iD.osmWay({ id: '~', nodes: ['a', 'b'] }),
+                iD.osmWay({ id: '-', nodes: ['b', 'c', 'd'] }),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '~', type: 'way' },
+                    { id: '-', type: 'way' },
+                    { id: '?', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('c', ['=']);
+            expect(action.disabled(graph)).to.be.not.ok;
+            graph = action(graph);
+            expect(members(graph)).to.eql(['~', '-', '=', '?']);
+        });
+
+        it('enables split action on partially incomplete, but still sufficiently complete relations (after split)', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c ~~~> d        split at 'b'
+            //    Relation: ['?', '-', '~']     member '?' missing
+            //
+            // Expected result:
+            //    a ---> b ===> c ~~~> d
+            //    Relation: ['?', '-', '=', '~']
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [2, 0] }),
+                iD.osmNode({ id: 'd', loc: [3, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                iD.osmWay({ id: '~', nodes: ['c', 'd'] }),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '?', type: 'way' },
+                    { id: '-', type: 'way' },
+                    { id: '~', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.be.not.ok;
+            graph = action(graph);
+            expect(members(graph)).to.eql(['?', '-', '=', '~']);
         });
 
 
@@ -593,28 +652,28 @@ describe('iD.actionSplit', function () {
                 ]);
             });
 
-            it('reorders members as node, way, relation (for Public Transport routing)', function () {
+            it('preserves other members (example: Public Transport routing)', function () {
                 var graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
                     iD.osmNode({ id: 'b', loc: [1, 0] }),
                     iD.osmNode({ id: 'c', loc: [2, 0] }),
                     iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
                     iD.osmRelation({id: 'r', members: [
-                        { id: 'n1', type: 'node', role: 'forward' },
+                        { id: 'n1', type: 'node', role: 'stop' },
                         { id: '-', type: 'way', role: 'forward' },
-                        { id: 'r1', type: 'relation', role: 'forward' },
-                        { id: 'n2', type: 'node', role: 'forward' }
+                        { id: 'r1', type: 'relation', role: '' },
+                        { id: 'n2', type: 'node', role: 'stop' }
                     ]})
                 ]);
 
                 graph = iD.actionSplit('b', ['='])(graph);
 
                 expect(graph.entity('r').members).to.eql([
-                    { id: 'n1', type: 'node', role: 'forward' },
-                    { id: 'n2', type: 'node', role: 'forward' },
+                    { id: 'n1', type: 'node', role: 'stop' },
                     { id: '-', type: 'way', role: 'forward' },
                     { id: '=', type: 'way', role: 'forward' },
-                    { id: 'r1', type: 'relation', role: 'forward'}
+                    { id: 'r1', type: 'relation', role: ''},
+                    { id: 'n2', type: 'node', role: 'stop' }
                 ]);
             });
         });

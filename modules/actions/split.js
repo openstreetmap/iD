@@ -1,4 +1,3 @@
-import { actionAddMember } from './add_member';
 import { geoSphericalDistance } from '../geo/geo';
 import { osmRelation } from '../osm/relation';
 import { osmWay } from '../osm/way';
@@ -95,7 +94,6 @@ export function actionSplit(nodeIds, newWayIds) {
 
     function split(graph, nodeId, wayA, newWayId) {
         var wayB = osmWay({ id: newWayId, tags: wayA.tags });   // `wayB` is the NEW way
-        var origNodes = wayA.nodes.slice();
         var nodesA;
         var nodesB;
         var isArea = wayA.isArea();
@@ -165,8 +163,6 @@ export function actionSplit(nodeIds, newWayIds) {
         graph = graph.replace(wayB);
 
         graph.parentRelations(wayA).forEach(function(relation) {
-            var member;
-
             // Turn restrictions - make sure:
             // 1. Splitting a FROM/TO way - only `wayA` OR `wayB` remains in relation
             //    (whichever one is connected to the VIA node/ways)
@@ -203,34 +199,16 @@ export function actionSplit(nodeIds, newWayIds) {
                 } else {
                     for (i = 0; i < v.length; i++) {
                         if (v[i].type === 'way' && v[i].id === wayA.id) {
-                            member = {
-                                id: wayB.id,
-                                type: 'way',
-                                role: 'via'
-                            };
-                            graph = actionAddMember(relation.id, member, v[i].index + 1)(graph);
-                            break;
+                            graph = splitWayMember(graph, relation.id, wayA, wayB);
                         }
                     }
                 }
 
             // All other relations (Routes, Multipolygons, etc):
             // 1. Both `wayA` and `wayB` remain in the relation
-            // 2. But must be inserted as a pair (see `actionAddMember` for details)
+            // 2. But must be inserted in the correct order
             } else {
-                member = {
-                    id: wayB.id,
-                    type: 'way',
-                    role: relation.memberById(wayA.id).role
-                };
-
-                var insertPair = {
-                    originalID: wayA.id,
-                    insertedID: wayB.id,
-                    nodes: origNodes
-                };
-
-                graph = actionAddMember(relation.id, member, undefined, insertPair)(graph);
+                graph = splitWayMember(graph, relation.id, wayA, wayB);
             }
         });
 
@@ -250,6 +228,154 @@ export function actionSplit(nodeIds, newWayIds) {
 
         _createdWayIDs.push(wayB.id);
 
+        return graph;
+    }
+
+    function splitWayMember(graph, relationId, wayA, wayB) {
+        let relation = graph.entity(relationId);
+        const insertMembers = [];
+        for (let i = 0; i < relation.members.length; i++) {
+            const member = relation.members[i];
+            if (member.id === wayA.id) {
+                let wayAconnectsPrev = false;
+                let wayAconnectsNext = false;
+                let wayBconnectsPrev = false;
+                let wayBconnectsNext = false;
+
+                function connects(way1, way2) {
+                    if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
+                    if (way1.nodes[0] === way2.nodes[0]) return true;
+                    if (way1.nodes[0] === way2.nodes[way2.nodes.length - 1]) return true;
+                    if (way1.nodes[way1.nodes.length - 1] === way2.nodes[way2.nodes.length - 1]) return true;
+                    if (way1.nodes[way1.nodes.length - 1] === way2.nodes[0]) return true;
+                    return false;
+                }
+
+                if (i > 0 && graph.hasEntity(relation.members[i - 1].id)) {
+                    const prevMember = relation.members[i - 1];
+                    const prevEntity = graph.entity(prevMember.id);
+                    if (prevEntity.type === 'way' && prevEntity.id !== wayA.id && prevEntity.nodes.length > 0) {
+                        wayAconnectsPrev = connects(prevEntity, wayA);
+                        wayBconnectsPrev = connects(prevEntity, wayB);
+                    }
+                }
+                if (i < relation.members.length - 1 && graph.hasEntity(relation.members[i + 1].id)) {
+                    const nextMember = relation.members[i + 1];
+                    const nextEntity = graph.entity(nextMember.id);
+                    if (nextEntity.type === 'way' && nextEntity.nodes.length > 0) {
+                        wayAconnectsNext = connects(nextEntity, wayA);
+                        wayBconnectsNext = connects(nextEntity, wayB);
+                    }
+                }
+
+                if (wayAconnectsPrev && !wayBconnectsPrev && !wayAconnectsNext && !wayBconnectsNext) {
+                    // wayA connects to prev member -> insert B after A
+                    insertMembers.push({at: i + 1, role: member.role});
+                    continue;
+                }
+                if (wayAconnectsPrev && !wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
+                    // wayB only connects to next -> insert B after A
+                    insertMembers.push({at: i + 1, role: member.role});
+                    continue;
+                }
+                if (!wayAconnectsPrev && !wayBconnectsPrev && !wayAconnectsNext && wayBconnectsNext) {
+                    // wayB connects to next member -> insert B after A
+                    insertMembers.push({at: i + 1, role: member.role});
+                    continue;
+                }
+                if (wayAconnectsPrev && wayBconnectsPrev && !wayAconnectsNext && wayBconnectsNext) {
+                    // wayA only connects to prev -> insert B after A
+                    insertMembers.push({at: i + 1, role: member.role});
+                    continue;
+                }
+                if (wayAconnectsPrev && !wayBconnectsPrev && !wayAconnectsNext && wayBconnectsNext) {
+                    // wayA connects to prev, wayB connects to next -> insert B after A
+                    insertMembers.push({at: i + 1, role: member.role});
+                    continue;
+                }
+
+                if (!wayAconnectsPrev && wayBconnectsPrev && !wayAconnectsNext && !wayBconnectsNext) {
+                    // wayB connects to prev member -> insert B before A
+                    insertMembers.push({at: i, role: member.role});
+                    continue;
+                }
+                if (!wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
+                    // wayA only connects to next -> insert B before A
+                    insertMembers.push({at: i, role: member.role});
+                    continue;
+                }
+                if (!wayAconnectsPrev && !wayBconnectsPrev && wayAconnectsNext && !wayBconnectsNext) {
+                    // wayA connects to next member -> insert B before A
+                    insertMembers.push({at: i, role: member.role});
+                    continue;
+                }
+                if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && !wayBconnectsNext) {
+                    // wayB only connects to prev -> insert B before A
+                    insertMembers.push({at: i, role: member.role});
+                    continue;
+                }
+                if (!wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && !wayBconnectsNext) {
+                    // wayB connects to prev, wayA connects to next -> insert B before A
+                    insertMembers.push({at: i, role: member.role});
+                    continue;
+                }
+
+                // check for loops
+                if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
+                    // complete loop
+                    // look one more member ahead
+                    if (i > 2 && graph.hasEntity(relation.members[i - 2].id)) {
+                        const prev2Entity = graph.entity(relation.members[i - 2].id);
+                        if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
+                            // prev-2 member connects only to A: insert B before A
+                            insertMembers.push({at: i, role: member.role});
+                            continue;
+                        }
+                        if (connects(prev2Entity, wayB) && !connects(prev2Entity, wayA)) {
+                            // prev-2 member connects only to B: insert B after A
+                            insertMembers.push({at: i + 1, role: member.role});
+                            continue;
+                        }
+                    }
+                    if (i < relation.members.length - 2 && graph.hasEntity(relation.members[i + 2].id)) {
+                        const next2Entity = graph.entity(relation.members[i + 2].id);
+                        if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
+                            // next+2 member connects only to A: insert B after A
+                            insertMembers.push({at: i + 1, role: member.role});
+                            continue;
+                        }
+                        if (connects(next2Entity, wayB) && !connects(next2Entity, wayA)) {
+                            // next+2 member connects only to B: insert B before A
+                            insertMembers.push({at: i, role: member.role});
+                            continue;
+                        }
+                    }
+                }
+                // could not determine how new member should connect (i.e. existing way was not connected to other member ways)
+                // just make sure before/after still connect
+                if (wayA.nodes[wayA.nodes.length - 1] === wayB.nodes[0]) {
+                    insertMembers.push({at: i + 1, role: member.role});
+                    continue;
+                } else {
+                    insertMembers.push({at: i, role: member.role});
+                    continue;
+                }
+
+                /*
+                // could not determine how new member should connect (i.e. existing way was not connected to other member ways)
+                // -> insert new way after existing way
+                insertMembers.push({at: i + 1, role: member.role});*/
+            }
+        }
+        // insert new member(s)
+        insertMembers.reverse().forEach(item => {
+            graph = graph.replace(relation.addMember({
+                id: wayB.id,
+                type: 'way',
+                role: item.role
+            }, item.at));
+            relation = graph.entity(relation.id);
+        });
         return graph;
     }
 
@@ -313,11 +439,33 @@ export function actionSplit(nodeIds, newWayIds) {
 
 
     action.disabled = function(graph) {
-        for (var i = 0; i < nodeIds.length; i++) {
-            var nodeId = nodeIds[i];
-            var candidates = action.waysForNode(nodeId, graph);
+        for (const nodeId of nodeIds) {
+            const candidates = action.waysForNode(nodeId, graph);
             if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length)) {
                 return 'not_eligible';
+            }
+            for (const way of candidates) {
+                const parentRelations = graph.parentRelations(way);
+                for (const parentRelation of parentRelations) {
+                    if (parentRelation.hasFromViaTo()) {
+                        // turn restrictions: via memebers must be loaded
+                        const vias = parentRelation.membersByRole('via');
+                        if (!vias.every(via => graph.hasEntity(via.id))) {
+                            return 'parent_incomplete';
+                        }
+                    } else {
+                        // other relations (e.g. route relations): at least one members before or after way must be present
+                        for (let i = 0; i < parentRelation.members.length; i++) {
+                            if (parentRelation.members[i].id === way.id) {
+                                const memberBeforePresent = i > 0 && graph.hasEntity(parentRelation.members[i - 1].id);
+                                const memberAfterPresent = i < parentRelation.members.length - 1 && graph.hasEntity(parentRelation.members[i + 1].id);
+                                if (!memberBeforePresent && !memberAfterPresent) {
+                                    return 'parent_incomplete';
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     };
