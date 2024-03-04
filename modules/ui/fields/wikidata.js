@@ -106,7 +106,7 @@ export function uiFieldWikidata(field, context) {
             .attr('class', function(d) { return 'labeled-input preset-wikidata-' + d; });
 
         enter
-            .append('span')
+            .append('div')
             .attr('class', 'label')
             .html(function(d) { return t.html('wikidata.' + d); });
 
