@@ -411,7 +411,7 @@ export function actionSplit(nodeIds, newWayIds) {
                 const parentRelations = graph.parentRelations(way);
                 for (const parentRelation of parentRelations) {
                     if (parentRelation.hasFromViaTo()) {
-                        // turn restrictions: via memebers must be loaded
+                        // turn restrictions: via members must be loaded
                         const vias = parentRelation.membersByRole('via');
                         if (!vias.every(via => graph.hasEntity(via.id))) {
                             return 'parent_incomplete';
