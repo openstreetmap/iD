@@ -428,6 +428,9 @@ export function actionSplit(nodeIds, newWayIds) {
                             }
                         }
                     }
+                    if (way.tags.junction === 'roundabout' && way.isClosed()) {
+                        return 'simple_roundabout';
+                    }
                 }
             }
         }
