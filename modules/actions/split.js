@@ -232,6 +232,15 @@ export function actionSplit(nodeIds, newWayIds) {
     }
 
     function splitWayMember(graph, relationId, wayA, wayB) {
+        function connects(way1, way2) {
+            if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
+            if (way1.nodes[0] === way2.nodes[0]) return true;
+            if (way1.nodes[0] === way2.nodes[way2.nodes.length - 1]) return true;
+            if (way1.nodes[way1.nodes.length - 1] === way2.nodes[way2.nodes.length - 1]) return true;
+            if (way1.nodes[way1.nodes.length - 1] === way2.nodes[0]) return true;
+            return false;
+        }
+
         let relation = graph.entity(relationId);
         const insertMembers = [];
         for (let i = 0; i < relation.members.length; i++) {
@@ -241,15 +250,6 @@ export function actionSplit(nodeIds, newWayIds) {
                 let wayAconnectsNext = false;
                 let wayBconnectsPrev = false;
                 let wayBconnectsNext = false;
-
-                function connects(way1, way2) {
-                    if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
-                    if (way1.nodes[0] === way2.nodes[0]) return true;
-                    if (way1.nodes[0] === way2.nodes[way2.nodes.length - 1]) return true;
-                    if (way1.nodes[way1.nodes.length - 1] === way2.nodes[way2.nodes.length - 1]) return true;
-                    if (way1.nodes[way1.nodes.length - 1] === way2.nodes[0]) return true;
-                    return false;
-                }
 
                 if (i > 0 && graph.hasEntity(relation.members[i - 1].id)) {
                     const prevMember = relation.members[i - 1];
@@ -268,61 +268,21 @@ export function actionSplit(nodeIds, newWayIds) {
                     }
                 }
 
-                if (wayAconnectsPrev && !wayBconnectsPrev && !wayAconnectsNext && !wayBconnectsNext) {
-                    // wayA connects to prev member -> insert B after A
+                if (wayAconnectsPrev && !wayAconnectsNext ||
+                    !wayBconnectsPrev && wayBconnectsNext && !(!wayAconnectsPrev && wayAconnectsNext)
+                ) {
                     insertMembers.push({at: i + 1, role: member.role});
                     continue;
                 }
-                if (wayAconnectsPrev && !wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
-                    // wayB only connects to next -> insert B after A
-                    insertMembers.push({at: i + 1, role: member.role});
-                    continue;
-                }
-                if (!wayAconnectsPrev && !wayBconnectsPrev && !wayAconnectsNext && wayBconnectsNext) {
-                    // wayB connects to next member -> insert B after A
-                    insertMembers.push({at: i + 1, role: member.role});
-                    continue;
-                }
-                if (wayAconnectsPrev && wayBconnectsPrev && !wayAconnectsNext && wayBconnectsNext) {
-                    // wayA only connects to prev -> insert B after A
-                    insertMembers.push({at: i + 1, role: member.role});
-                    continue;
-                }
-                if (wayAconnectsPrev && !wayBconnectsPrev && !wayAconnectsNext && wayBconnectsNext) {
-                    // wayA connects to prev, wayB connects to next -> insert B after A
-                    insertMembers.push({at: i + 1, role: member.role});
-                    continue;
-                }
-
-                if (!wayAconnectsPrev && wayBconnectsPrev && !wayAconnectsNext && !wayBconnectsNext) {
-                    // wayB connects to prev member -> insert B before A
-                    insertMembers.push({at: i, role: member.role});
-                    continue;
-                }
-                if (!wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
-                    // wayA only connects to next -> insert B before A
-                    insertMembers.push({at: i, role: member.role});
-                    continue;
-                }
-                if (!wayAconnectsPrev && !wayBconnectsPrev && wayAconnectsNext && !wayBconnectsNext) {
-                    // wayA connects to next member -> insert B before A
-                    insertMembers.push({at: i, role: member.role});
-                    continue;
-                }
-                if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && !wayBconnectsNext) {
-                    // wayB only connects to prev -> insert B before A
-                    insertMembers.push({at: i, role: member.role});
-                    continue;
-                }
-                if (!wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && !wayBconnectsNext) {
-                    // wayB connects to prev, wayA connects to next -> insert B before A
+                if (!wayAconnectsPrev && wayAconnectsNext ||
+                    wayBconnectsPrev && !wayBconnectsNext && !(wayAconnectsPrev && !wayAconnectsNext)
+                ) {
                     insertMembers.push({at: i, role: member.role});
                     continue;
                 }
 
                 // check for loops
                 if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
-                    // complete loop
                     // look one more member ahead
                     if (i > 2 && graph.hasEntity(relation.members[i - 2].id)) {
                         const prev2Entity = graph.entity(relation.members[i - 2].id);
@@ -351,6 +311,7 @@ export function actionSplit(nodeIds, newWayIds) {
                         }
                     }
                 }
+
                 // could not determine how new member should connect (i.e. existing way was not connected to other member ways)
                 // just make sure before/after still connect
                 if (wayA.nodes[wayA.nodes.length - 1] === wayB.nodes[0]) {
@@ -360,11 +321,6 @@ export function actionSplit(nodeIds, newWayIds) {
                     insertMembers.push({at: i, role: member.role});
                     continue;
                 }
-
-                /*
-                // could not determine how new member should connect (i.e. existing way was not connected to other member ways)
-                // -> insert new way after existing way
-                insertMembers.push({at: i + 1, role: member.role});*/
             }
         }
         // insert new member(s)
