@@ -234,6 +234,15 @@ export function actionSplit(nodeIds, newWayIds) {
     function splitWayMember(graph, relationId, wayA, wayB) {
         function connects(way1, way2) {
             if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
+            if (way1.tags.junction === 'roundabout' && way1.isClosed()) {
+                return way1.nodes.some(nodeId =>
+                    nodeId === way2.nodes[0] ||
+                    nodeId === way2.nodes[way2.nodes.length - 1]);
+            } else if (way2.tags.junction === 'roundabout' && way2.isClosed()) {
+                return way2.nodes.some(nodeId =>
+                    nodeId === way1.nodes[0] ||
+                    nodeId === way1.nodes[way1.nodes.length - 1]);
+            }
             if (way1.nodes[0] === way2.nodes[0]) return true;
             if (way1.nodes[0] === way2.nodes[way2.nodes.length - 1]) return true;
             if (way1.nodes[way1.nodes.length - 1] === way2.nodes[way2.nodes.length - 1]) return true;
@@ -283,7 +292,7 @@ export function actionSplit(nodeIds, newWayIds) {
 
                 // check for loops
                 if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
-                    // look one more member ahead
+                    // try looking one more member ahead
                     if (i > 2 && graph.hasEntity(relation.members[i - 2].id)) {
                         const prev2Entity = graph.entity(relation.members[i - 2].id);
                         if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
@@ -316,10 +325,8 @@ export function actionSplit(nodeIds, newWayIds) {
                 // just make sure before/after still connect
                 if (wayA.nodes[wayA.nodes.length - 1] === wayB.nodes[0]) {
                     insertMembers.push({at: i + 1, role: member.role});
-                    continue;
                 } else {
                     insertMembers.push({at: i, role: member.role});
-                    continue;
                 }
             }
         }
