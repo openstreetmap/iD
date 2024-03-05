@@ -252,24 +252,25 @@ export function actionSplit(nodeIds, newWayIds) {
 
         let relation = graph.entity(relationId);
         const insertMembers = [];
-        for (let i = 0; i < relation.members.length; i++) {
-            const member = relation.members[i];
+        const members = relation.members;
+        for (let i = 0; i < members.length; i++) {
+            const member = members[i];
             if (member.id === wayA.id) {
                 let wayAconnectsPrev = false;
                 let wayAconnectsNext = false;
                 let wayBconnectsPrev = false;
                 let wayBconnectsNext = false;
 
-                if (i > 0 && graph.hasEntity(relation.members[i - 1].id)) {
-                    const prevMember = relation.members[i - 1];
+                if (i > 0 && graph.hasEntity(members[i - 1].id)) {
+                    const prevMember = members[i - 1];
                     const prevEntity = graph.entity(prevMember.id);
                     if (prevEntity.type === 'way' && prevEntity.id !== wayA.id && prevEntity.nodes.length > 0) {
                         wayAconnectsPrev = connects(prevEntity, wayA);
                         wayBconnectsPrev = connects(prevEntity, wayB);
                     }
                 }
-                if (i < relation.members.length - 1 && graph.hasEntity(relation.members[i + 1].id)) {
-                    const nextMember = relation.members[i + 1];
+                if (i < members.length - 1 && graph.hasEntity(members[i + 1].id)) {
+                    const nextMember = members[i + 1];
                     const nextEntity = graph.entity(nextMember.id);
                     if (nextEntity.type === 'way' && nextEntity.nodes.length > 0) {
                         wayAconnectsNext = connects(nextEntity, wayA);
@@ -293,8 +294,8 @@ export function actionSplit(nodeIds, newWayIds) {
                 // check for loops
                 if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
                     // try looking one more member ahead
-                    if (i > 2 && graph.hasEntity(relation.members[i - 2].id)) {
-                        const prev2Entity = graph.entity(relation.members[i - 2].id);
+                    if (i > 2 && graph.hasEntity(members[i - 2].id)) {
+                        const prev2Entity = graph.entity(members[i - 2].id);
                         if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
                             // prev-2 member connects only to A: insert B before A
                             insertMembers.push({at: i, role: member.role});
@@ -306,8 +307,8 @@ export function actionSplit(nodeIds, newWayIds) {
                             continue;
                         }
                     }
-                    if (i < relation.members.length - 2 && graph.hasEntity(relation.members[i + 2].id)) {
-                        const next2Entity = graph.entity(relation.members[i + 2].id);
+                    if (i < members.length - 2 && graph.hasEntity(members[i + 2].id)) {
+                        const next2Entity = graph.entity(members[i + 2].id);
                         if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
                             // next+2 member connects only to A: insert B after A
                             insertMembers.push({at: i + 1, role: member.role});
