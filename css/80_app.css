@@ -504,6 +504,12 @@ button.disabled .icon.operation use,
     vertical-align: baseline;
 }
 
+button.loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+    background-size: auto;
+}
+
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */

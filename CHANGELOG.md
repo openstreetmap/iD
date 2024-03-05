@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.29.0-dev)
 
 #### :tada: New Features
+* Add button to fully load incompletely downloaded relations ([#5420])
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
 #### :camera: Street-Level
@@ -51,7 +52,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 
-[#10135]: https://github.com/openstreetmap/iD/issues/10135#
+[#5420]: https://github.com/openstreetmap/iD/issues/5420
+[#10135]: https://github.com/openstreetmap/iD/issues/10135
 [@Sushil642]: https://github.com/Sushil642
 
 
