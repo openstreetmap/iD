@@ -1436,6 +1436,167 @@ describe('iD.actionSplit', function () {
 
         });
 
+        describe('splitting Y routes', function () {
+            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
+            var b = iD.osmNode({ id: 'b', loc: [1, 0] });
+            var c = iD.osmNode({ id: 'c', loc: [2, 0] });
+            var d = iD.osmNode({ id: 'd', loc: [2, -1] });
+            var e = iD.osmNode({ id: 'e', loc: [3, -1] });
+
+            it('splits excursion part of a forking route', function () {
+                //
+                // Situation:
+                //    a ---> b ~~~> c
+                //           #
+                //           #####> d ###> e
+                //
+                //    Relation: ['-', '~', '#']
+                //
+                //
+                // Expected result:
+                //    a ---> b ~~~> c
+                //           #
+                //           #####> d ***> e
+                //
+                //    Relation: ['-', '~', '#', '*']
+                //
+                var graph = iD.coreGraph([
+                    a, b, c, d, e,
+                    iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    iD.osmWay({id: '~', nodes: ['b', 'c']}),
+                    iD.osmWay({id: '#', nodes: ['b', 'd', 'e']}),
+                    iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way', role: 'main'},
+                        {id: '~', type: 'way', role: 'main'},
+                        {id: '#', type: 'way', role: 'excursion'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('d', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['d', 'e']);
+                expect(members(graph)).to.eql(['-', '~', '#', '*']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('excursion');
+            });
+
+            it('splits main part of forking route', function () {
+                //
+                // Situation:
+                //    a ---> b ###> c
+                //           ~
+                //           ~~~~~> d ~~~> e
+                //
+                //    Relation: ['-', '~', '#']
+                //
+                //
+                // Expected result:
+                //    a ---> b ###> c
+                //           ~
+                //           ~~~~~> d ***> e
+                //
+                //    Relation: ['-', '~', '*', '#']
+                //
+                var graph = iD.coreGraph([
+                    a, b, c, d, e,
+                    iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    iD.osmWay({id: '~', nodes: ['b', 'd', 'e']}),
+                    iD.osmWay({id: '#', nodes: ['b', 'c']}),
+                    iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way', role: 'main'},
+                        {id: '~', type: 'way', role: 'main'},
+                        {id: '#', type: 'way', role: 'excursion'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('d', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['d', 'e']);
+                expect(members(graph)).to.eql(['-', '~', '*', '#']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('main');
+            });
+        });
+
+        describe('splitting dual carriageway routes', function () {
+            var a = iD.osmNode({ id: 'a', loc: [0, 0] });
+            var b = iD.osmNode({ id: 'b', loc: [1, 0] });
+            var c = iD.osmNode({ id: 'c', loc: [2, 0] });
+            var d = iD.osmNode({ id: 'd', loc: [3, 0] });
+            var e = iD.osmNode({ id: 'e', loc: [1.5, -1] });
+
+            it('splits dual-carriageway route, preserving role (forward way)', function () {
+                //
+                // Situation:
+                //    a ---> b <~~~~~ c ===> d
+                //           #        #
+                //           ###> e ###
+                //
+                //    Relation: ['-', '~', '#', '=']
+                //
+                //
+                // Expected result:
+                //    a ---> b <~~~~~ c ===> d
+                //           #        *
+                //           ###> e ***
+                //
+                //    Relation: ['-', '~', '#', '*', '=']
+                //
+                var graph = iD.coreGraph([
+                    a, b, c, d, e,
+                    iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    iD.osmWay({id: '~', nodes: ['b', 'c']}),
+                    iD.osmWay({id: '#', nodes: ['b', 'e', 'c']}),
+                    iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                    iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way', role: 'forward'},
+                        {id: '#', type: 'way', role: 'forward'},
+                        {id: '=', type: 'way'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('e', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['e', 'c']);
+                expect(members(graph)).to.eql(['-', '~', '#', '*', '=']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('forward');
+            });
+
+            it('splits dual-carriageway route, preserving role (backward way)', function () {
+                //
+                // Situation:
+                //    a ---> b <~~~~~ c ===> d
+                //           #        #
+                //           ### e <###
+                //
+                //    Relation: ['-', '~', '#', '=']
+                //
+                //
+                // Expected result:
+                //    a ---> b <~~~~~ c ===> d
+                //           *        #
+                //           **< e <###
+                //
+                //    Relation: ['-', '~', '*', '#', '=']
+                //
+                var graph = iD.coreGraph([
+                    a, b, c, d, e,
+                    iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                    iD.osmWay({id: '~', nodes: ['b', 'c']}),
+                    iD.osmWay({id: '#', nodes: ['c', 'e', 'b']}),
+                    iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                    iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way', role: 'forward'},
+                        {id: '#', type: 'way', role: 'backward'},
+                        {id: '=', type: 'way'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('e', ['*'])(graph);
+
+                expect(graph.entity('*').nodes).to.eql(['e', 'b']);
+                expect(members(graph)).to.eql(['-', '~', '*', '#', '=']);
+                expect(graph.entity('r').members.find(m => m.id === '*').role).to.eql('backward');
+            });
+
+        });
+
 
         describe('type = multipolygon', function () {
 
