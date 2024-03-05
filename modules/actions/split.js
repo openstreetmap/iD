@@ -422,13 +422,14 @@ export function actionSplit(nodeIds, newWayIds) {
                             if (parentRelation.members[i].id === way.id) {
                                 const memberBeforePresent = i > 0 && graph.hasEntity(parentRelation.members[i - 1].id);
                                 const memberAfterPresent = i < parentRelation.members.length - 1 && graph.hasEntity(parentRelation.members[i + 1].id);
-                                if (!memberBeforePresent && !memberAfterPresent) {
+                                if (!memberBeforePresent && !memberAfterPresent && parentRelation.members.length > 1) {
                                     return 'parent_incomplete';
                                 }
                             }
                         }
                     }
-                    if (way.tags.junction === 'roundabout' && way.isClosed()) {
+                    const relTypesExceptions = ['junction', 'enforcement']; // some relation types should not prehibit a member from being split
+                    if (way.tags.junction === 'roundabout' && way.isClosed() && !relTypesExceptions.includes(parentRelation.tags.type)) {
                         return 'simple_roundabout';
                     }
                 }

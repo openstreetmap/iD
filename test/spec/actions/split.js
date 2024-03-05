@@ -122,6 +122,102 @@ describe('iD.actionSplit', function () {
 
             expect(iD.actionSplit('*').limitWays(['-', '=']).disabled(graph)).to.equal('not_eligible');
         });
+
+        it('returns \'parent_incomplete\' when parent relations are too incomplete', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c         split at 'b'
+            //    Relation: ['?', '-']    member '?' missing
+            //
+            // Expected result:
+            //    forbidden, because correct order of -/= cannot be determined
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [2, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '?', type: 'way' },
+                    { id: '-', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.equal('parent_incomplete');
+        });
+
+        it('allows split operation for single-member relations', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c         split at 'b'
+            //    Relation: ['-']
+            //
+            // Expected result:
+            //    any order is allowed, because the way is the only member of the relation
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [2, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '-', type: 'way' }
+                ]})
+            ]);
+
+            var action = iD.actionSplit('b', ['=']);
+            expect(action.disabled(graph)).to.be.not.ok;
+        });
+
+        it('returns \'simple_roundabout\' when a closed roundabout is part of a route relations', function () {
+            //
+            // Situation:
+            //    x ~~~> b / a ---> b ---> c ---> a / c ===> y      split at 'b'
+            //    Relation: ['~', '-', '='], '-' tagged as 'junction=roundabout'
+            //
+            // Expected result:
+            //    forbidden, because the split action would break the connectedness of the route relation
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [1, 1] }),
+                iD.osmNode({ id: 'x', loc: [-1, -1] }),
+                iD.osmNode({ id: 'y', loc: [2, 2] }),
+                iD.osmWay({ id: '~', nodes: ['x', 'b'] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a'], tags: { junction: 'roundabout' } }),
+                iD.osmWay({ id: '=', nodes: ['c', 'y'] }),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '~', type: 'way' },
+                    { id: '-', type: 'way' },
+                    { id: '=', type: 'way' }
+                ], tags: { type: 'route' }})
+            ]);
+
+            var action = iD.actionSplit('b', ['*']);
+            expect(action.disabled(graph)).to.equal('simple_roundabout');
+        });
+
+        it('allows splitting of a closed roundabout that is part of a junction relation', function () {
+            //
+            // Situation:
+            //    a ---> b ---> c ---> a      split at 'b'
+            //    Relation: ['-'], '-' tagged as 'junction=roundabout'
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 0] }),
+                iD.osmNode({ id: 'b', loc: [1, 0] }),
+                iD.osmNode({ id: 'c', loc: [1, 1] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'a'], tags: { junction: 'roundabout' } }),
+                iD.osmRelation({id: 'r', members: [
+                    { id: '-', type: 'way' }
+                ], tags: { type: 'junction' }})
+            ]);
+
+            var action = iD.actionSplit('a', ['*']);
+            expect(action.disabled(graph)).to.not.be.ok;
+        });
     });
 
 
@@ -424,32 +520,7 @@ describe('iD.actionSplit', function () {
             return graph.entity('r').members.map(function (m) { return m.id; });
         }
 
-
-        it('disables split action on too incomplete relations', function () {
-            //
-            // Situation:
-            //    a ---> b ---> c         split at 'b'
-            //    Relation: ['?', '-']    member '?' missing
-            //
-            // Expected result:
-            //    forbidden, because correct order of -/= cannot be determined
-            //
-            var graph = iD.coreGraph([
-                iD.osmNode({ id: 'a', loc: [0, 0] }),
-                iD.osmNode({ id: 'b', loc: [1, 0] }),
-                iD.osmNode({ id: 'c', loc: [2, 0] }),
-                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
-                iD.osmRelation({id: 'r', members: [
-                    { id: '?', type: 'way' },
-                    { id: '-', type: 'way' }
-                ]})
-            ]);
-
-            var action = iD.actionSplit('b', ['=']);
-            expect(action.disabled(graph)).to.be.ok;
-        });
-
-        it('enables split action on partially incomplete, but still sufficiently complete relations (before split)', function () {
+        it('allows split action on partially incomplete relation, when member before split is present', function () {
             //
             // Situation:
             //    a ~~~> b ---> c ---> d        split at 'c'
@@ -479,7 +550,7 @@ describe('iD.actionSplit', function () {
             expect(members(graph)).to.eql(['~', '-', '=', '?']);
         });
 
-        it('enables split action on partially incomplete, but still sufficiently complete relations (after split)', function () {
+        it('allows split action on partially incomplete relation, when member after split is present', function () {
             //
             // Situation:
             //    a ---> b ---> c ~~~> d        split at 'b'
