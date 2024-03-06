@@ -26,6 +26,9 @@ export function actionSplit(nodeIds, newWayIds) {
     // the strategy for picking which way will have a new version and which way is newly created
     var _keepHistoryOn = 'longest'; // 'longest', 'first'
 
+    // these closed ways have to be treated in a special way when contained in a (route) relation
+    const circularJunctions = ['roundabout', 'circular'];
+
     // The IDs of the ways actually created by running this action
     var _createdWayIDs = [];
 
@@ -231,14 +234,32 @@ export function actionSplit(nodeIds, newWayIds) {
         return graph;
     }
 
+    // Handles (most kinds of) parent relations of a way that is split:
+    // We need to find the correct order to insert the newly created way
+    // relative to the existing way.
+    //
+    // This applies some heuristics to find the most likely correct order to
+    // perform the operation, working under the assumption that the members
+    // of the relation are already "properly" sorted and that the relevant
+    // member entities are loaded in graph: The new way is inserted into the
+    // relation before or after the existing way depending on how the old/new
+    // way connect to their neighboring members.
+    //
+    // As this is a local operation, it means that even if these conditions
+    // are not met, the order of the relation members will at most be incorrect
+    // between the existing and newly created way; other relation members are
+    // kept unmodified.
     function splitWayMember(graph, relationId, wayA, wayB) {
+        // returns true if way1 connects to way2 at either end node, or if one
+        // of the two ways is tagged as a "roundabout" and connects to the other
+        // way at any of its nodes.
         function connects(way1, way2) {
             if (way1.nodes.length < 2 || way2.nodes.length < 2) return false;
-            if (way1.tags.junction === 'roundabout' && way1.isClosed()) {
+            if (circularJunctions.includes(way1.tags.junction) && way1.isClosed()) {
                 return way1.nodes.some(nodeId =>
                     nodeId === way2.nodes[0] ||
                     nodeId === way2.nodes[way2.nodes.length - 1]);
-            } else if (way2.tags.junction === 'roundabout' && way2.isClosed()) {
+            } else if (circularJunctions.includes(way2.tags.junction) && way2.isClosed()) {
                 return way2.nodes.some(nodeId =>
                     nodeId === way1.nodes[0] ||
                     nodeId === way1.nodes[way1.nodes.length - 1]);
@@ -251,33 +272,60 @@ export function actionSplit(nodeIds, newWayIds) {
         }
 
         let relation = graph.entity(relationId);
+        // insertMembers stores the positions where the new way (wayB) is to be inserted
+        // into the parent relation
         const insertMembers = [];
         const members = relation.members;
         for (let i = 0; i < members.length; i++) {
             const member = members[i];
-            if (member.id === wayA.id) {
+            if (member.id === wayA.id) { // wayA is the existing way
+                // determine connection matrix of wayA, wayB and their neighboring members
                 let wayAconnectsPrev = false;
                 let wayAconnectsNext = false;
                 let wayBconnectsPrev = false;
                 let wayBconnectsNext = false;
-
                 if (i > 0 && graph.hasEntity(members[i - 1].id)) {
-                    const prevMember = members[i - 1];
-                    const prevEntity = graph.entity(prevMember.id);
-                    if (prevEntity.type === 'way' && prevEntity.id !== wayA.id && prevEntity.nodes.length > 0) {
+                    const prevEntity = graph.entity(members[i - 1].id);
+                    if (prevEntity.type === 'way') {
                         wayAconnectsPrev = connects(prevEntity, wayA);
                         wayBconnectsPrev = connects(prevEntity, wayB);
                     }
                 }
                 if (i < members.length - 1 && graph.hasEntity(members[i + 1].id)) {
-                    const nextMember = members[i + 1];
-                    const nextEntity = graph.entity(nextMember.id);
-                    if (nextEntity.type === 'way' && nextEntity.nodes.length > 0) {
+                    const nextEntity = graph.entity(members[i + 1].id);
+                    if (nextEntity.type === 'way') {
                         wayAconnectsNext = connects(nextEntity, wayA);
                         wayBconnectsNext = connects(nextEntity, wayB);
                     }
                 }
-
+                // possible outcomes of connection matrix
+                //
+                //  ⟍    0   0   1   1    <- wayA connects to next member
+                //    ⟍  0   1   0   1    <- wayB connects to next member
+                //      +---+---+---+---+
+                //  0 0 | ? | → | ← | * |        → ... wayB should be inserted after wayA
+                //      +---+---+---+---+        ← ... wayB should be inserted before wayA
+                //  0 1 | ← | x | ← | ← |        ↺ ... members form a loop
+                //      +---+---+---+---+        ? ... wayA/B do not connect to their neighbor members
+                //  1 0 | → | → | x | → |        x ... undefined state
+                //      +---+---+---+---+        * ... undefined state (any order results in a connection)
+                //  1 1 | * | → | ← | ↺ |
+                //      +---+---+---+---+
+                //  ^ ^
+                //  | |
+                //  | +-- wayB connects to previous member
+                //  +---- wayA connects to previous member
+                //
+                // These boolean conditions can be simplified to the following conditions
+                // (considering the outcome as arbitrary for the undefined "*" cases),
+                // i.e. wayB should be inserted after wayA if:
+                // * wayA connects the the previous member but not the next one, or
+                // * wayB connects to the next member but not the previous one, and wayA's connectivity does not contradict that
+                // (and vice versa)
+                // the remaining cases to be handles specifically are:
+                // * unconnected ways
+                // * members for a loop
+                // * a few invalid/undefined cases (e.g. forks with no proper solution)
                 if (wayAconnectsPrev && !wayAconnectsNext ||
                     !wayBconnectsPrev && wayBconnectsNext && !(!wayAconnectsPrev && wayAconnectsNext)
                 ) {
@@ -290,10 +338,9 @@ export function actionSplit(nodeIds, newWayIds) {
                     insertMembers.push({at: i, role: member.role});
                     continue;
                 }
-
-                // check for loops
+                // loops: try to look one further member ahead/behind to resolve the connectivity
                 if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
-                    // try looking one more member ahead
+                    // look one further member ahead
                     if (i > 2 && graph.hasEntity(members[i - 2].id)) {
                         const prev2Entity = graph.entity(members[i - 2].id);
                         if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
@@ -307,6 +354,7 @@ export function actionSplit(nodeIds, newWayIds) {
                             continue;
                         }
                     }
+                    // look one further member behind
                     if (i < members.length - 2 && graph.hasEntity(members[i + 2].id)) {
                         const next2Entity = graph.entity(members[i + 2].id);
                         if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
@@ -322,8 +370,8 @@ export function actionSplit(nodeIds, newWayIds) {
                     }
                 }
 
-                // could not determine how new member should connect (i.e. existing way was not connected to other member ways)
-                // just make sure before/after still connect
+                // could not determine how new member should connect (e.g. existing way was not
+                // connected to other member ways): insert them in the original orientation of wayA
                 if (wayA.nodes[wayA.nodes.length - 1] === wayB.nodes[0]) {
                     insertMembers.push({at: i + 1, role: member.role});
                 } else {
@@ -331,7 +379,7 @@ export function actionSplit(nodeIds, newWayIds) {
                 }
             }
         }
-        // insert new member(s)
+        // insert new member(s) at the determined indices
         insertMembers.reverse().forEach(item => {
             graph = graph.replace(relation.addMember({
                 id: wayB.id,
@@ -430,7 +478,7 @@ export function actionSplit(nodeIds, newWayIds) {
                         }
                     }
                     const relTypesExceptions = ['junction', 'enforcement']; // some relation types should not prehibit a member from being split
-                    if (way.tags.junction === 'roundabout' && way.isClosed() && !relTypesExceptions.includes(parentRelation.tags.type)) {
+                    if (circularJunctions.includes(way.tags.junction) && way.isClosed() && !relTypesExceptions.includes(parentRelation.tags.type)) {
                         return 'simple_roundabout';
                     }
                 }
