@@ -499,6 +499,8 @@ en:
           one: "Split a feature."
           other: "Split {n} features."
       not_eligible: Lines can't be split at their beginning or end.
+      parent_incomplete: This line cannot be split because it is part of a larger relation which has only been partially loaded. Make sure that all ways connected to this way are present on the map.
+      simple_roundabout: This line cannot be split because this roundabout is part of a larger relation. You must remove it from the relation first.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
       annotation:

@@ -1,9 +1,8 @@
 import { osmJoinWays } from '../osm/multipolygon';
-import { osmWay } from '../osm/way';
 import { utilArrayGroupBy, utilObjectOmit } from '../util';
 
 
-export function actionAddMember(relationId, member, memberIndex, insertPair) {
+export function actionAddMember(relationId, member, memberIndex) {
 
     return function action(graph) {
         var relation = graph.entity(relationId);
@@ -11,7 +10,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         // There are some special rules for Public Transport v2 routes.
         var isPTv2 = /stop|platform/.test(member.role);
 
-        if ((isNaN(memberIndex) || insertPair) && member.type === 'way' && !isPTv2) {
+        if (member.type === 'way' && !isPTv2) {
             // Try to perform sensible inserts based on how the ways join together
             graph = addWayMember(relation, graph);
         } else {
@@ -30,9 +29,8 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
 
 
     // Add a way member into the relation "wherever it makes sense".
-    // In this situation we were not supplied a memberIndex.
     function addWayMember(relation, graph) {
-        var groups, tempWay, insertPairIsReversed, item, i, j, k;
+        var groups, item, i, j, k;
 
         // remove PTv2 stops and platforms before doing anything.
         var PTv2members = [];
@@ -47,38 +45,10 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
         }
         relation = relation.update({ members: members });
 
-
-        if (insertPair) {
-            // We're adding a member that must stay paired with an existing member.
-            // (This feature is used by `actionSplit`)
-            //
-            // This is tricky because the members may exist multiple times in the
-            // member list, and with different A-B/B-A ordering and different roles.
-            // (e.g. a bus route that loops out and back - #4589).
-            //
-            // Replace the existing member with a temporary way,
-            // so that `osmJoinWays` can treat the pair like a single way.
-            tempWay = osmWay({ id: 'wTemp', nodes: insertPair.nodes });
-            graph = graph.replace(tempWay);
-            var tempMember = { id: tempWay.id, type: 'way', role: member.role };
-            var tempRelation = relation.replaceMember({id: insertPair.originalID}, tempMember, true);
-            groups = utilArrayGroupBy(tempRelation.members, 'type');
-            groups.way = groups.way || [];
-
-            // Insert pair is reversed if the inserted way comes before the original one.
-            // (Except when they form a loop.)
-            var originalWay = graph.entity(insertPair.originalID);
-            var insertedWay = graph.entity(insertPair.insertedID);
-            insertPairIsReversed = originalWay.nodes.length > 0 && insertedWay.nodes.length > 0 &&
-                insertedWay.nodes[insertedWay.nodes.length - 1] === originalWay.nodes[0] &&
-                originalWay.nodes[originalWay.nodes.length - 1] !== insertedWay.nodes[0];
-
-        } else {
-            // Add the member anywhere, one time. Just push and let `osmJoinWays` decide where to put it.
-            groups = utilArrayGroupBy(relation.members, 'type');
-            groups.way = groups.way || [];
-            groups.way.push(member);
-        }
+        // Add the member anywhere, one time. Just push and let `osmJoinWays` decide where to put it.
+        groups = utilArrayGroupBy(relation.members, 'type');
+        groups.way = groups.way || [];
+        groups.way.push(member);
 
         members = withIndex(groups.way);
         var joined = osmJoinWays(members, graph);
@@ -102,22 +72,6 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
                 item = segment[k];
                 var way = graph.entity(item.id);
 
-                // If this is a paired item, generate members in correct order and role
-                if (tempWay && item.id === tempWay.id) {
-                    var reverse = nodes[0].id !== insertPair.nodes[0] ^ insertPairIsReversed;
-                    if (reverse) {
-                        item.pair = [
-                            { id: insertPair.insertedID, type: 'way', role: item.role },
-                            { id: insertPair.originalID, type: 'way', role: item.role }
-                        ];
-                    } else {
-                        item.pair = [
-                            { id: insertPair.originalID, type: 'way', role: item.role },
-                            { id: insertPair.insertedID, type: 'way', role: item.role }
-                        ];
-                    }
-                }
-
                 // reorder `members` if necessary
                 if (k > 0) {
                     if (j+k >= members.length || item.index !== members[j+k].index) {
@@ -129,22 +83,13 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             }
         }
 
-        if (tempWay) {
-            graph = graph.remove(tempWay);
-        }
-
-        // Final pass: skip dead items, split pairs, remove index properties
+        // Final pass: skip dead items, remove index properties
         var wayMembers = [];
         for (i = 0; i < members.length; i++) {
             item = members[i];
             if (item.index === -1) continue;
 
-            if (item.pair) {
-                wayMembers.push(item.pair[0]);
-                wayMembers.push(item.pair[1]);
-            } else {
-                wayMembers.push(utilObjectOmit(item, ['index']));
-            }
+            wayMembers.push(utilObjectOmit(item, ['index']));
         }
 
         // Put stops and platforms first, then nodes, ways, relations
@@ -186,8 +131,8 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             }
 
             var item = Object.assign({}, arr[i]);   // shallow copy
-            arr[i].index = -1;   // mark as dead
-            item.index = toIndex;
+            arr[i].index = -1; // mark previous entry as dead
+            delete item.index; // inserted items must never be moved again
             arr.splice(toIndex, 0, item);
         }
 
