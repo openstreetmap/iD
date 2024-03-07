@@ -50,12 +50,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+* Show message when a POI point is incorrectly placed as vertex ([#9439], thanks [@mattiapezzotti])
 #### :rocket: Presets
 #### :hammer: Development
 
 [#5420]: https://github.com/openstreetmap/iD/issues/5420
 [#7653]: https://github.com/openstreetmap/iD/issues/7653
 [#8415]: https://github.com/openstreetmap/iD/issues/8415
+[#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [@Sushil642]: https://github.com/Sushil642
 
