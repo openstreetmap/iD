@@ -2210,6 +2210,7 @@ en:
       add_point: "They mark a specific location, and describe what's there. **Press the {point_icon} {point} button to add a new point.**"
       place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer over this building, then left-click or press `{space}`.**"
       place_point_touch: "To place the new point on the map, {tap_icon} tap the location where it should go. **Tap the center of this building.**"
+      place_point_error: "The point should be placed inside the building area, not on its outline. Let's try again."
       search_cafe: "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**"
       choose_cafe: "**Choose {preset} from the list.**"
       feature_editor: "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe."
