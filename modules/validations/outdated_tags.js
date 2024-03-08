@@ -6,7 +6,6 @@ import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { fileFetcher } from '../core';
 import { presetManager } from '../presets';
 import { services } from '../services';
-import { osmIsOldMultipolygonOuterMember, osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { utilDisplayLabel, utilHashcode, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
@@ -40,12 +39,18 @@ export function validationOutdatedTags() {
       preset = newPreset;
     }
 
+    const upgradeReasons = [];
+
     // Upgrade deprecated tags..
     if (_dataDeprecated) {
       const deprecatedTags = entity.deprecatedTags(_dataDeprecated);
       if (deprecatedTags.length) {
         deprecatedTags.forEach(tag => {
           graph = actionUpgradeTags(entity.id, tag.old, tag.replace)(graph);
+          upgradeReasons.push({
+            source: 'id-tagging-schema--deprecated',
+            data: tag
+          });
         });
         entity = graph.entity(entity.id);
       }
@@ -58,9 +63,13 @@ export function validationOutdatedTags() {
         if (!newTags[k]) {
           if (preset.addTags[k] === '*') {
             newTags[k] = 'yes';
-          } else {
+          } else if (preset.addTags[k]) {
             newTags[k] = preset.addTags[k];
           }
+          upgradeReasons.push({
+            source: 'id-tagging-schema--preset-addTags',
+            data: preset
+          });
         }
       });
     }
@@ -77,6 +86,10 @@ export function validationOutdatedTags() {
         if (nsiResult) {
           newTags = nsiResult.newTags;
           subtype = 'noncanonical_brand';
+          upgradeReasons.push({
+            source: 'name-suggestion-index',
+            data: nsiResult
+          });
         }
       }
     }
@@ -224,79 +237,7 @@ export function validationOutdatedTags() {
   }
 
 
-  function oldMultipolygonIssues(entity, graph) {
-    let multipolygon, outerWay;
-    if (entity.type === 'relation') {
-      outerWay = osmOldMultipolygonOuterMemberOfRelation(entity, graph);
-      multipolygon = entity;
-    } else if (entity.type === 'way') {
-      multipolygon = osmIsOldMultipolygonOuterMember(entity, graph);
-      outerWay = entity;
-    } else {
-      return [];
-    }
-
-    if (!multipolygon || !outerWay) return [];
-
-    return [new validationIssue({
-      type: type,
-      subtype: 'old_multipolygon',
-      severity: 'warning',
-      message: showMessage,
-      reference: showReference,
-      entityIds: [outerWay.id, multipolygon.id],
-      dynamicFixes: () => {
-        return [
-          new validationIssueFix({
-            autoArgs: [doUpgrade, t('issues.fix.move_tags.annotation')],
-            title: t.append('issues.fix.move_tags.title'),
-            onClick: (context) => {
-              context.perform(doUpgrade, t('issues.fix.move_tags.annotation'));
-            }
-          })
-        ];
-      }
-    })];
-
-
-    function doUpgrade(graph) {
-      let currMultipolygon = graph.hasEntity(multipolygon.id);
-      let currOuterWay = graph.hasEntity(outerWay.id);
-      if (!currMultipolygon || !currOuterWay) return graph;
-
-      currMultipolygon = currMultipolygon.mergeTags(currOuterWay.tags);
-      graph = graph.replace(currMultipolygon);
-      return actionChangeTags(currOuterWay.id, {})(graph);
-    }
-
-
-    function showMessage(context) {
-      let currMultipolygon = context.hasEntity(multipolygon.id);
-      if (!currMultipolygon) return '';
-
-      return t.append('issues.old_multipolygon.message',
-          { multipolygon: utilDisplayLabel(currMultipolygon, context.graph(), true /* verbose */) }
-      );
-    }
-
-
-    function showReference(selection) {
-      selection.selectAll('.issue-reference')
-        .data([0])
-        .enter()
-        .append('div')
-        .attr('class', 'issue-reference')
-        .call(t.append('issues.old_multipolygon.reference'));
-    }
-  }
-
-
-  let validation = function checkOutdatedTags(entity, graph) {
-    let issues = oldMultipolygonIssues(entity, graph);
-    if (!issues.length) issues = oldTagIssues(entity, graph);
-    return issues;
-  };
-
+  let validation = oldTagIssues;
 
   validation.type = type;
 

@@ -17,9 +17,6 @@ export {
 } from './lanes';
 
 export {
-    osmOldMultipolygonOuterMemberOfRelation,
-    osmIsOldMultipolygonOuterMember,
-    osmOldMultipolygonOuterMember,
     osmJoinWays
 } from './multipolygon';
 

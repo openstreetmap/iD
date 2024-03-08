@@ -380,8 +380,12 @@ label.streetside-hires {
     align-items: center;
 }
 
+.mapillary-attribution-image-container {
+  height: auto;
+}
+
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-username {
-    display: none;
+    padding: 0px 8px 0 6px;
 }
 
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-date {

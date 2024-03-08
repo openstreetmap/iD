@@ -206,6 +206,18 @@ export function uiSectionRawMembershipEditor(context) {
     }
 
 
+    function downloadMembers(d3_event, d) {
+        d3_event.preventDefault();
+        const button = d3_select(this);
+
+        // display the loading indicator
+        button.classed('loading', true);
+        context.loadEntity(d.relation.id, function() {
+            section.reRender();
+        });
+    }
+
+
     function deleteMembership(d3_event, d) {
         this.blur();           // avoid keeping focus on the button
         if (d === 0) return;   // called on newrow (shouldn't happen)
@@ -378,6 +390,13 @@ export function uiSectionRawMembershipEditor(context) {
 
         labelEnter
             .append('button')
+            .attr('class', 'members-download')
+            .attr('title', t('icons.download'))
+            .call(svgIcon('#iD-icon-load'))
+            .on('click', downloadMembers);
+
+        labelEnter
+            .append('button')
             .attr('class', 'remove member-delete')
             .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'))
@@ -389,6 +408,13 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('title', t('icons.zoom_to'))
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
             .on('click', zoomToRelation);
+
+        items = items.merge(itemsEnter);
+        items.selectAll('button.members-download')
+            .classed('hide', d => {
+                const graph = context.graph();
+                return d.relation.members.every(m => graph.hasEntity(m.id));
+            });
 
         var wrapEnter = itemsEnter
             .append('div')

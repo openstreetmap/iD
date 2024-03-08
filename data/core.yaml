@@ -499,6 +499,8 @@ en:
           one: "Split a feature."
           other: "Split {n} features."
       not_eligible: Lines can't be split at their beginning or end.
+      parent_incomplete: This line cannot be split because a parent relation isn’t fully downloaded. Download the full relation.
+      simple_roundabout: This line cannot be split because this roundabout is part of a larger relation. You must remove it from the relation first.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
       annotation:
@@ -1034,6 +1036,12 @@ en:
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
+    supporting:
+      title: "OpenStreetMap is free to use, but not free to run"
+      details: "Its stability, quality, independence, and strength depend on donations from people like you."
+      donation:
+        title: "Support the map"
+        details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
     events: Events
@@ -1833,9 +1841,6 @@ en:
         amap: "Amap products are proprietary and must not be used as references."
         baidu: "Baidu products are proprietary and must not be used as references."
         google: "Google products are proprietary and must not be used as references."
-    incorrect_name:
-      message: '{feature} has the mistaken name "{name}"'
-      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
@@ -1867,6 +1872,15 @@ en:
         message: "{feature} has no descriptive tags"
       relation_type:
         message: "{feature} is a relation without a type"
+    mutually_exclusive_tags:
+      title: Contradictory Tags
+      tip: "Find features that have contradictory tags."
+      default:
+        message: "{feature} has both {tag1} and {tag2}"
+        reference: 'The tags "{tag1}" and "{tag2}" contradict each other. Only one tag should be set.'
+      same_value:
+        message: "{feature}: {tag1} and {tag2} have same value"
+        reference: 'The tags "{tag1}" and "{tag2}" have the same value. Only one tag should be set.'
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."
@@ -1992,6 +2006,9 @@ en:
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_named_tag:
+        title: 'Remove the "{tag}" tag'
+        annotation: 'Removed "{tag}" tag.'
       remove_tags:
         title: Remove the tags
       remove_the_name:
@@ -2193,6 +2210,7 @@ en:
       add_point: "They mark a specific location, and describe what's there. **Press the {point_icon} {point} button to add a new point.**"
       place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer over this building, then left-click or press `{space}`.**"
       place_point_touch: "To place the new point on the map, {tap_icon} tap the location where it should go. **Tap the center of this building.**"
+      place_point_error: "The point should be placed inside the building area, not on its outline. Let's try again."
       search_cafe: "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**"
       choose_cafe: "**Choose {preset} from the list.**"
       feature_editor: "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe."

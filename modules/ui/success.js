@@ -3,6 +3,8 @@ import { select as d3_select } from 'd3-selection';
 
 import { resolveStrings } from 'osm-community-index';
 
+import { showDonationMessage } from '../../config/id.js';
+
 import { fileFetcher } from '../core/file_fetcher';
 import { locationManager } from '../core/LocationManager';
 import { t, localizer } from '../core/localizer';
@@ -155,6 +157,55 @@ export function uiSuccess(context) {
         changeset_id: { html: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>` }
       }));
 
+    if (showDonationMessage !== false) {
+      // support ask
+      const donationUrl = 'https://supporting.openstreetmap.org/';
+      let supporting = body
+        .append('div')
+        .attr('class', 'save-supporting');
+
+      supporting
+        .append('h3')
+        .call(t.append('success.supporting.title'));
+
+      supporting
+        .append('p')
+        .call(t.append('success.supporting.details'));
+
+      table = supporting
+        .append('table')
+        .attr('class', 'supporting-table');
+
+      row = table
+        .append('tr')
+        .attr('class', 'supporting-row');
+
+      row
+        .append('td')
+        .attr('class', 'cell-icon supporting-icon')
+        .append('a')
+        .attr('target', '_blank')
+        .attr('href', donationUrl)
+        .append('svg')
+        .attr('class', 'logo-small')
+        .append('use')
+        .attr('xlink:href', '#iD-donation');
+
+      let supportingDetail = row
+        .append('td')
+        .attr('class', 'cell-detail supporting-detail');
+
+      supportingDetail
+        .append('a')
+        .attr('class', 'cell-detail support-the-map')
+        .attr('target', '_blank')
+        .attr('href', donationUrl)
+        .call(t.append('success.supporting.donation.title'));
+
+      supportingDetail
+        .append('div')
+        .call(t.append('success.supporting.donation.details'));
+    }
 
     // Get OSM community index features intersecting the map..
     ensureOSMCommunityIndex()

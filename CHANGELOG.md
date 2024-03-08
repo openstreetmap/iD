@@ -35,31 +35,91 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.28.0-dev)
+# Unreleased (2.29.0-dev)
 
 #### :tada: New Features
+* Add button to fully load incompletely downloaded relations ([#5420])
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+* Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
+#### :white_check_mark: Validation
+* Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
+#### :bug: Bugfixes
+* Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+* Show message when a POI point is incorrectly placed as vertex ([#9439], thanks [@mattiapezzotti])
+#### :rocket: Presets
+#### :hammer: Development
+
+[#5420]: https://github.com/openstreetmap/iD/issues/5420
+[#7653]: https://github.com/openstreetmap/iD/issues/7653
+[#8415]: https://github.com/openstreetmap/iD/issues/8415
+[#9439]: https://github.com/openstreetmap/iD/issues/9439
+[#10135]: https://github.com/openstreetmap/iD/issues/10135
+[@Sushil642]: https://github.com/Sushil642
+
+
+# 2.28.1
+##### 2024-Feb-29
+
+#### :bug: Bugfixes
+* Fix false validation message, which was suggesting to add empty `*:wikipedia` tags to NSI presets ([#10140])
+#### :earth_asia: Localization
+* Add address format for New Zealand ([#10123], thanks [@k-yle])
+
+[#10123]: https://github.com/openstreetmap/iD/pull/10123
+[#10140]: https://github.com/openstreetmap/iD/issues/10140
+
+
+# 2.28.0
+##### 2024-Feb-28
+
 #### :sparkles: Usability & Accessibility
 * Show the color of (route) relations in the form of small colored circles in relation membership section and feature search results ([#9424])
 * Hide tag suggestions for tags like `name_1` in raw tag editor autocomplete ([#9422])
 * Show `(empty)` as a tag value option in the raw tag editor when a multi selections contains at least one feature which does not have the particular tag ([#9876], thanks [@k-yle])
-#### :scissors: Operations
+* Allow to search for OSM notes by id in search bar ([#10062], thanks [@NaVis0mple])
+* Add support for coordinates in `<degree> <minutes>[ <seconds>]` format to search bar ([#10066], thanks [@NaVis0mple])
+* Improve styling of combobox dopdown list to give entries with long labels more room for better readability ([#10127], thanks [@tordans])
 #### :camera: Street-Level
+* Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074])
 #### :white_check_mark: Validation
+* Warn when objects contain tags which are considered to be _mutually exclusive_ like for example `noname` and `name` (replaces previous `incorrect_name` validator) ([#10035], thanks [@mtmail])
 #### :bug: Bugfixes
 * Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
 * Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
 * Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
-#### :earth_asia: Localization
-#### :hourglass: Performance
+* Don't show duplicates of notes when they lie exactly on special locations like null island (0.0,0.0)
+* Preserve `side` tag of `highway=cyclist_waiting_aid` features when reversing its way ([#10128])
 #### :mortar_board: Walkthrough / Help
-#### :hammer: Development
+* Show message about how to support OSM (e.g. in form of a donation) after a successful save ([#10054])
+#### :rocket: Presets
+* Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
+* Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
+* Drop `*:wikipedia` tags when switching to a new NSI-based preset which specifies a corresponding `*:wikidata` tag ([#9103])
 
+[#9103]: https://github.com/openstreetmap/iD/issues/9103
 [#9424]: https://github.com/openstreetmap/iD/pull/9424
 [#9422]: https://github.com/openstreetmap/iD/issues/9422
 [#9876]: https://github.com/openstreetmap/iD/issues/9876
+[#9891]: https://github.com/openstreetmap/iD/pull/9891
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
+[#10035]: https://github.com/openstreetmap/iD/pull/10035
+[#10054]: https://github.com/openstreetmap/iD/issues/10054
+[#10062]: https://github.com/openstreetmap/iD/pull/10062
+[#10066]: https://github.com/openstreetmap/iD/pull/10066
+[#10074]: https://github.com/openstreetmap/iD/issues/10074
+[#10127]: https://github.com/openstreetmap/iD/issues/10127
+[#10128]: https://github.com/openstreetmap/iD/issues/10128
+[id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
 [@ramith-kulal]: https://github.com/ramith-kulal
+[@mangerlahn]: https://github.com/mangerlahn
+[@NaVis0mple]: https://github.com/NaVis0mple
+[@mtmail]: https://github.com/mtmail
 
 
 # 2.27.3
