@@ -377,6 +377,14 @@ export default {
             .selectAll('img')
             .remove();
 
+        wrap
+            .selectAll('button.back')
+            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id - 1));
+        wrap
+            .selectAll('button.forward')
+            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
+
+
         getImageData(d.id,d.sequence_id).then(function () {
 
             if (d.isPano) {
@@ -467,11 +475,13 @@ export default {
 
         controlsEnter
             .append('button')
+            .classed('back', true)
             .on('click.back', step(-1))
             .text('◄');
 
         controlsEnter
             .append('button')
+            .classed('forward', true)
             .on('click.forward', step(1))
             .text('►');
 
