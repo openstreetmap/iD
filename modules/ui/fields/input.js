@@ -413,7 +413,8 @@ export function uiFieldText(field, context) {
             var val = utilGetSetValue(input);
 
             if (field.type === 'tel') {
-                val = val.replace(/[^0-9+]/g, '');
+                val = val.replace(/^tel:\/\//, ''); // Remove 'tel://' prefix if present
+                val = val.replace(/^tel:/, ''); // Remove 'tel:' prefix if present
             }
     
             if (!onInput) val = context.cleanTagValue(val);
