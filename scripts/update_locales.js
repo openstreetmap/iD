@@ -2,7 +2,6 @@
 /* Downloads the latest translations from Transifex */
 const chalk = require('chalk');
 const fs = require('fs');
-const fetch = require('node-fetch');
 const YAML = require('js-yaml');
 const transifexApi = require('@transifex/api').transifexApi;
 
