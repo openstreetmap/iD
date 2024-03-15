@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 * Add button to fully load incompletely downloaded relations ([#5420])
 #### :sparkles: Usability & Accessibility
+* Preserve rows with empty tag values in raw tag editor ([#10145], thanks [@Asif-Sheriff])
 #### :scissors: Operations
 #### :camera: Street-Level
 * Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
@@ -59,8 +60,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8415]: https://github.com/openstreetmap/iD/issues/8415
 [#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
+[#10145]: https://github.com/openstreetmap/iD/issues/10145
 [@Sushil642]: https://github.com/Sushil642
 [@mattiapezzotti]: https://github.com/mattiapezzotti
+[@Asif-Sheriff]: https://github.com/Asif-Sheriff
 
 
 # 2.28.1
