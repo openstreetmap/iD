@@ -44,6 +44,14 @@ export function validationOutdatedTags() {
     // Upgrade deprecated tags..
     if (_dataDeprecated) {
       const deprecatedTags = entity.deprecatedTags(_dataDeprecated);
+      if (entity.type === 'way' && entity.isClosed() &&
+          entity.tags.traffic_calming === 'island' && !entity.tags.highway) {
+        // https://github.com/openstreetmap/id-tagging-schema/issues/1162#issuecomment-2000356902
+        deprecatedTags.push({
+          old: {traffic_calming: 'island'},
+          replace: {'area:highway': 'traffic_island'}
+        });
+      }
       if (deprecatedTags.length) {
         deprecatedTags.forEach(tag => {
           graph = actionUpgradeTags(entity.id, tag.old, tag.replace)(graph);

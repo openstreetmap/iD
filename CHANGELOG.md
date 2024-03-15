@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
 #### :white_check_mark: Validation
 * Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
+* Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_calming` ([id-tagging-schema#1162])
 #### :bug: Bugfixes
 * Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
 #### :earth_asia: Localization
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [#10145]: https://github.com/openstreetmap/iD/issues/10145
+[id-tagging-schema#1162]: https://github.com/openstreetmap/id-tagging-schema/issues/1162
 [@Sushil642]: https://github.com/Sushil642
 [@mattiapezzotti]: https://github.com/mattiapezzotti
 [@Asif-Sheriff]: https://github.com/Asif-Sheriff
