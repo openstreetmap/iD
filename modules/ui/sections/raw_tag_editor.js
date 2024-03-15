@@ -558,9 +558,6 @@ export function uiSectionRawTagEditor(id, context) {
         // exit if this is a multiselection and no value was entered
         if (typeof d.value !== 'string' && !this.value) return;
 
-        // remove tag if it is now empty
-        // if (!this.value.trim()) return removeTag(d3_event, d);
-
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
 
