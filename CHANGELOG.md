@@ -62,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [#10145]: https://github.com/openstreetmap/iD/issues/10145
 [@Sushil642]: https://github.com/Sushil642
+[@mattiapezzotti]: https://github.com/mattiapezzotti
 [@Asif-Sheriff]: https://github.com/Asif-Sheriff
 
 
