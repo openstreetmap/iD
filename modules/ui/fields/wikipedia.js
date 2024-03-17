@@ -308,9 +308,9 @@ export function uiFieldWikipedia(field, context) {
   }
 
   function updateEncodedWikiUrl(tagLang, tagArticleTitle, anchor) {
-    const underscored = tagArticleTitle.replace(/ /g, '_');
+    const underscoredUrlEncodedTitle = encodeURIComponent(tagArticleTitle.replace(/ /g, '_'));
     const urlAnchored = toUrlAnchor(anchor);
-    _wikiURL = encodeURI(`${scheme}${tagLang}.${domain}/wiki/${underscored}${urlAnchored}`);
+    _wikiURL = `${scheme}${tagLang}.${domain}/wiki/${underscoredUrlEncodedTitle}${urlAnchored}`;
   }
 
   function toUrlAnchor(anchor) {
