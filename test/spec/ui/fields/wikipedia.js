@@ -113,6 +113,24 @@ describe('iD.uiFieldWikipedia', function() {
         }, 20);
     });
 
+    it('sets encoded wiki URLs', function(done) {
+        var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+
+        window.setTimeout(function() {   // async, so data will be available
+            wikipedia.on('change', changeTags);
+            selection.call(wikipedia);
+
+            iD.utilGetSetValue(selection.selectAll('.wiki-title'), '? (film)');
+            happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
+
+            expect(context.entity(entity.id).tags.wikipedia).to.equal('en:? (film)');
+            
+            // TODO assert wikiURL is correct
+
+            done();
+        }, 20);
+    });
+
     // note - currently skipping the tests that use `options` to delay responses
     it('preserves existing language', function(done) {
         var wikipedia1 = iD.uiFieldWikipedia(field, context);

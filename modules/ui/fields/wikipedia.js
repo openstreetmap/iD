@@ -11,6 +11,8 @@ import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
+  const scheme = 'https://';
+  const domain = 'wikipedia.org';
   const dispatch = d3_dispatch('change');
   const wikipedia = services.wikipedia;
   const wikidata = services.wikidata;
@@ -132,7 +134,7 @@ export function uiFieldWikipedia(field, context) {
     link = link.enter()
       .append('button')
       .attr('class', 'form-field-button wiki-link')
-      .attr('title', t('icons.view_on', { domain: 'wikipedia.org' }))
+      .attr('title', t('icons.view_on', { domain }))
       .call(svgIcon('#iD-icon-out-link'))
       .merge(link);
 
@@ -279,7 +281,7 @@ export function uiFieldWikipedia(field, context) {
     if (tagLangInfo) {
       const nativeLangName = tagLangInfo[1];
       utilGetSetValue(_langInput, nativeLangName);
-      utilGetSetValue(_titleInput, tagArticleTitle + (anchor ? ('#' + anchor) : ''));
+      utilGetSetValue(_titleInput, tagArticleTitle + toUrlAnchor(anchor));
       if (anchor) {
         try {
           // Best-effort `anchorencode:` implementation
@@ -288,8 +290,7 @@ export function uiFieldWikipedia(field, context) {
           anchor = anchor.replace(/ /g, '_');
         }
       }
-      _wikiURL = 'https://' + tagLang + '.wikipedia.org/wiki/' +
-        tagArticleTitle.replace(/ /g, '_') + (anchor ? ('#' + anchor) : '');
+      updateEncodedWikiUrl(tagLang, tagArticleTitle, anchor);
 
     // unrecognized value format
     } else {
@@ -297,7 +298,7 @@ export function uiFieldWikipedia(field, context) {
       if (value && value !== '') {
         utilGetSetValue(_langInput, '');
         const defaultLangInfo = defaultLanguageInfo();
-        _wikiURL = `https://${defaultLangInfo[2]}.wikipedia.org/w/index.php?fulltext=1&search=${value}`;
+        _wikiURL = `${scheme}${defaultLangInfo[2]}.${domain}/w/index.php?fulltext=1&search=${value}`;
       } else {
         const shownOrDefaultLangInfo = language(true /* skipEnglishFallback */);
         utilGetSetValue(_langInput, shownOrDefaultLangInfo[1]);
@@ -306,6 +307,15 @@ export function uiFieldWikipedia(field, context) {
     }
   }
 
+  function updateEncodedWikiUrl(tagLang, tagArticleTitle, anchor) {
+    const underscored = tagArticleTitle.replace(/ /g, '_');
+    const urlAnchored = toUrlAnchor(anchor);
+    _wikiURL = encodeURI(`${scheme}${tagLang}.${domain}/wiki/${underscored}${urlAnchored}`);
+  }
+
+  function toUrlAnchor(anchor) {
+    return anchor ? '#' + anchor : '';
+  }
 
   wiki.entityIDs = (val) => {
     if (!arguments.length) return _entityIDs;
