@@ -112,7 +112,7 @@
     "name-suggestion-index": "~6.0",
     "npm-run-all": "^4.0.0",
     "osm-community-index": "~5.6.2",
-    "postcss": "^8.4.35",
+    "postcss": "^8.4.36",
     "postcss-selector-prepend": "^0.5.0",
     "shelljs": "^0.8.0",
     "shx": "^0.3.0",
