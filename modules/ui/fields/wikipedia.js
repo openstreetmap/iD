@@ -281,18 +281,8 @@ export function uiFieldWikipedia(field, context) {
     if (tagLangInfo) {
       const nativeLangName = tagLangInfo[1];
       utilGetSetValue(_langInput, nativeLangName);
-      utilGetSetValue(_titleInput, tagArticleTitle + toUrlAnchor(anchor));
-      if (anchor) {
-        try {
-          // Best-effort `anchorencode:` implementation
-          anchor = encodeURIComponent(anchor.replace(/ /g, '_')).replace(/%/g, '.');
-        } catch (e) {
-          anchor = anchor.replace(/ /g, '_');
-        }
-      }
-      updateEncodedWikiUrl(tagLang, tagArticleTitle, anchor);
-
-    // unrecognized value format
+      utilGetSetValue(_titleInput, tagArticleTitle + (anchor ? ('#' + anchor) : ''));
+      _wikiURL = `${scheme}${tagLang}.${domain}/wiki/${wiki.encodePath(tagArticleTitle, anchor)}`;
     } else {
       utilGetSetValue(_titleInput, value);
       if (value && value !== '') {
@@ -307,15 +297,25 @@ export function uiFieldWikipedia(field, context) {
     }
   }
 
-  function updateEncodedWikiUrl(tagLang, tagArticleTitle, anchor) {
-    const underscoredUrlEncodedTitle = encodeURIComponent(tagArticleTitle.replace(/ /g, '_'));
-    const urlAnchored = toUrlAnchor(anchor);
-    _wikiURL = `${scheme}${tagLang}.${domain}/wiki/${underscoredUrlEncodedTitle}${urlAnchored}`;
-  }
+  wiki.encodePath = (tagArticleTitle, anchor) => {
+    const underscoredTitle = tagArticleTitle.replace(/ /g, '_');
+    return `${encodeURIComponent(underscoredTitle)}${anchor ? '#' + encodeURIComponent(wiki.anchorFragment(anchor)): ''}`;
+  };
 
-  function toUrlAnchor(anchor) {
-    return anchor ? '#' + anchor : '';
-  }
+  wiki.anchorFragment = (anchor) => {
+    if (!anchor) {
+      return '';
+    }
+
+    try {
+      // Best-effort `anchorencode:` implementation
+      anchor = anchor.replace(/ /g, '_').replace(/%/g, '.');
+    } catch (e) {
+      anchor = anchor.replace(/ /g, '_');
+    }
+
+    return anchor;
+  };
 
   wiki.entityIDs = (val) => {
     if (!arguments.length) return _entityIDs;

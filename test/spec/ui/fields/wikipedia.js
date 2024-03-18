@@ -113,22 +113,11 @@ describe('iD.uiFieldWikipedia', function() {
         }, 20);
     });
 
-    it('sets encoded wiki URLs', function(done) {
+    it('has an encodePath function that returns an encoded URI component that contains the title and optional anchor', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-
-        window.setTimeout(function() {   // async, so data will be available
-            wikipedia.on('change', changeTags);
-            selection.call(wikipedia);
-
-            iD.utilGetSetValue(selection.selectAll('.wiki-title'), '? (film)');
-            happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
-
-            expect(context.entity(entity.id).tags.wikipedia).to.equal('en:? (film)');
-            
-            // TODO assert wikiURL is correct
-
-            done();
-        }, 20);
+        expect(wikipedia.encodePath('? (film)', undefined)).to.equal('%3F_(film)');
+        expect(wikipedia.encodePath('? (film)', 'Themes and style')).to.equal('%3F_(film)#Themes_and_style');
+        done();
     });
 
     // note - currently skipping the tests that use `options` to delay responses
