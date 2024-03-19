@@ -39,6 +39,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     var _drawNode;
 
     var _didResolveTempEdit = false;
+    var _focusedParentWay;
 
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
@@ -457,7 +458,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
             const featureType = getFeatureType(lastNodesParents);
 
-            if (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0) {
+            if (!_focusedParentWay && (lastNodesParents.length !== 1 || secondLastNodesParents.length === 0)) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
@@ -468,7 +469,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // Check if the last node's parent is also the parent of the second last node.
             // The last node must only have one parent, but the second last node can have
             // multiple parents.
-            if (!secondLastNodesParents.some(n => n.id === lastNodesParents[0].id)) {
+            if (!_focusedParentWay && (!secondLastNodesParents.some(n => n.id === lastNodesParents[0].id))) {
                 context.ui().flash
                     .duration(4000)
                     .iconName('#iD-icon-no')
@@ -476,7 +477,12 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 return;
             }
 
-            const way = lastNodesParents[0];
+            // If a way has already been focused let's keep following that one
+            const way = _focusedParentWay ? _focusedParentWay : lastNodesParents[0];
+
+            if (!_focusedParentWay) {
+                _focusedParentWay = way;
+            }
 
             const indexOfLast = way.nodes.indexOf(lastNodeId);
             const indexOfSecondLast = way.nodes.indexOf(secondLastNodeId);
@@ -497,6 +503,12 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 id: nextNode.id,
                 properties: { target: true, entity: nextNode },
             });
+
+            // If the last added node is already contained in the way that we are generating
+            // let's end following action to avoid loops
+            if (historyGraph.childNodes(_origWay).filter(n => n.id === nextNode.id).length > 0) {
+                drawWay.finish();
+            }
         } catch (ex) {
             context.ui().flash
                 .duration(4000)
