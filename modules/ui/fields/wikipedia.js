@@ -299,22 +299,15 @@ export function uiFieldWikipedia(field, context) {
 
   wiki.encodePath = (tagArticleTitle, anchor) => {
     const underscoredTitle = tagArticleTitle.replace(/ /g, '_');
-    return `${encodeURIComponent(underscoredTitle)}${anchor ? '#' + encodeURIComponent(wiki.anchorFragment(anchor)): ''}`;
+    const uriEncodedUnderscoredTitle = encodeURIComponent(underscoredTitle);
+    const uriEncodedAnchorFragment = wiki.encodeURIAnchorFragment(anchor);
+    return `${uriEncodedUnderscoredTitle}${uriEncodedAnchorFragment}`;
   };
 
-  wiki.anchorFragment = (anchor) => {
-    if (!anchor) {
-      return '';
-    }
-
-    try {
-      // Best-effort `anchorencode:` implementation
-      anchor = anchor.replace(/ /g, '_').replace(/%/g, '.');
-    } catch (e) {
-      anchor = anchor.replace(/ /g, '_');
-    }
-
-    return anchor;
+  wiki.encodeURIAnchorFragment = (anchor) => {
+    if (!anchor) return '';
+    const underscoredAnchor = anchor.replace(/ /g, '_');
+    return '#' + encodeURIComponent(underscoredAnchor);
   };
 
   wiki.entityIDs = (val) => {
