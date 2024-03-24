@@ -66,6 +66,14 @@ export function presetIndex() {
         fileFetcher.get('preset_fields')
       ])
       .then(vals => {
+        // https://github.com/ideditor/schema-builder/issues/100
+        const scheduleFields = ['opening_hours', 'opening_hours/covid19', 'service_times', 'collection_times'];
+        scheduleFields.forEach(id => {
+          if (id in vals[3]) {
+            vals[3][id].type = 'schedule';
+          }
+        });
+
         _this.merge({
           categories: vals[0],
           defaults: vals[1],

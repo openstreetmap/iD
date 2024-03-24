@@ -34,6 +34,7 @@ import {
     uiFieldEmail,
     uiFieldIdentifier,
     uiFieldNumber,
+    uiFieldSchedule,
     uiFieldTel,
     uiFieldText,
     uiFieldUrl
@@ -79,6 +80,7 @@ export var uiFields = {
     onewayCheck: uiFieldOnewayCheck,
     radio: uiFieldRadio,
     restrictions: uiFieldRestrictions,
+    schedule: uiFieldSchedule,
     semiCombo: uiFieldSemiCombo,
     structureRadio: uiFieldStructureRadio,
     tel: uiFieldTel,
