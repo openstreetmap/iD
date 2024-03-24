@@ -342,7 +342,11 @@ export function uiField(context, presetField, entityIDs, options) {
                         return prerequisiteTag.valueNot !== value;
                     }
                     if (prerequisiteTag.value) {
-                        return prerequisiteTag.value === value;
+                        if (Array.isArray(prerequisiteTag.value)) {
+                            return prerequisiteTag.value.includes(value);
+                        } else {
+                            return prerequisiteTag.value === value;
+                        }
                     }
                 } else if (prerequisiteTag.keyNot) {
                     if (entity.tags[prerequisiteTag.keyNot]) return false;
