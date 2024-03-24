@@ -5,6 +5,8 @@ import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
+import { getRadiusInPixels, getRadiusTag } from '../core';
+
 
 export function svgVertices(projection, context) {
     var radiuses = {
@@ -114,6 +116,23 @@ export function svgVertices(projection, context) {
         enter
             .append('circle')
             .attr('class', 'shadow');
+
+        // add a ring if there's a radius/diameter tag
+        enter
+            .filter((d) => getRadiusTag(d.tags))
+            .append('circle')
+            .attr('class', 'radius')
+            .attr('data-nodeId', node => node.id);
+
+        // we need to trigger a re-render when the zoom changes
+        selection
+            .selectAll('.radius')
+            .data([zoom])
+            .attr('r', (_zoom, _zero, [self]) => {
+                const node = graph.entities[self.dataset.nodeId];
+                return getRadiusInPixels(node, context.projection);
+            });
+
 
         enter
             .append('circle')

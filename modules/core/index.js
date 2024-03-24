@@ -5,6 +5,7 @@ export { coreGraph } from './graph';
 export { coreHistory } from './history';
 export { coreLocalizer, t, localizer } from './localizer';
 export { LocationManager, locationManager } from './LocationManager';
+export * from './planar';
 export { prefs } from './preferences';
 export { coreTree } from './tree';
 export { coreUploader } from './uploader';

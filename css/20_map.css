@@ -186,6 +186,17 @@ g.vertex.selected .shadow {
     fill-opacity: 0.7;
 }
 
+/* circle to visualize radius/diameter */
+g:is(.point, .vertex) .radius {
+    display: none;
+}
+g:is(.point, .vertex):is(.active, .selected) .radius {
+    display: block;
+    fill: none;
+    stroke: #f6634f;
+    stroke-width: 2px;
+}
+
 
 /* lines */
 .preset-icon .icon.iD-other-line {
