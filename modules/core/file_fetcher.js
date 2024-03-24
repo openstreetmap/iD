@@ -67,7 +67,7 @@ export function coreFileFetcher() {
           return getUrl(url.replace('{presets_version}', presetsVersion), which);
         });
     } else {
-      return getUrl(url);
+      return getUrl(url, which);
     }
   };
 
