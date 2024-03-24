@@ -15,9 +15,9 @@ const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
 const _impOsmUrls = {
-  ow: 'https://grab.community.improve-osm.org/directionOfFlowService',
-  mr: 'https://grab.community.improve-osm.org/missingGeoService',
-  tr: 'https://grab.community.improve-osm.org/turnRestrictionService'
+  ow: 'https://community.improveosm.org/directionOfFlowService',
+  mr: 'https://community.improveosm.org/missingGeoService',
+  tr: 'https://community.improveosm.org/turnRestrictionService'
 };
 let _impOsmData = { icons: {} };
 
