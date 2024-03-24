@@ -69,7 +69,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (field.type === 'directionalCombo' && field.key) {
             // directionalCombo fields can have an additional key describing the for
             // cases where both directions share a "common" value.
-            keys = keys.concat(field.key);
+            keys = keys.concat(field.key, `${field.key}:both`);
         }
         return keys;
     }
