@@ -5,7 +5,7 @@ import {
 import { svgIcon } from '../svg/icon';
 import { t, localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
-
+import { initializeResizePane } from './pane_features.js'
 
 export function uiPane(id, context) {
 
@@ -93,12 +93,18 @@ export function uiPane(id, context) {
         }
     };
 
+    pane.resizePane = function(selection){
+        const map_pane = document.querySelector('.map-pane')
+        initializeResizePane(map_pane)
+    }
+
     pane.renderPane = function(selection) {
 
         _paneSelection = selection
             .append('div')
             .attr('class', 'fillL map-pane hide ' + id + '-pane')
-            .attr('pane', id);
+            .attr('pane', id)
+            .call(pane.resizePane);
 
         var heading = _paneSelection
             .append('div')
