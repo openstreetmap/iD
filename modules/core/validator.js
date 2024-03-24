@@ -503,6 +503,17 @@ export function coreValidator(context) {
       return Promise.resolve();
     }
 
+    // Re-validate all issues that are disconnected_way or impossible_oneway
+    // fix #8758
+    let additionalEntityIDs = new Set();
+    for (const IssueID in _headCache.issuesByIssueID) {
+      const issue = _headCache.issuesByIssueID[IssueID];
+      if (['disconnected_way', 'impossible_oneway'].includes(issue.type)) {
+        issue.entityIds.forEach(additionalEntityIDs.add, additionalEntityIDs);
+      }
+    }
+    entityIDs = new Set([...entityIDs, ...additionalEntityIDs]);
+
     _headPromise = validateEntitiesAsync(entityIDs, _headCache)
       .then(() => updateResolvedIssues(entityIDs))
       .then(() => dispatch.call('validated'))
