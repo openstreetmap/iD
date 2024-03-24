@@ -508,8 +508,10 @@ export function uiFieldText(field, context) {
                 buttons.attr('disabled', 'disabled').classed('disabled', true);
             } else {
                 var raw_vals = tags[field.key] || '0';
-                const canIncDec = raw_vals.split(';').some(val => isFinite(Number(val))
-                        || isDirectionField && cardinal[val.trim().toLowerCase()]);
+                const canIncDec = raw_vals.split(';').some((val) =>
+                    isFinite(Number(val))
+                    || (isDirectionField && (val.trim().toLowerCase() in cardinal))
+                );
                 buttons.attr('disabled', canIncDec ? null : 'disabled').classed('disabled', !canIncDec);
             }
         }
