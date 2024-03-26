@@ -62,6 +62,9 @@ export var osmAreaKeysExceptions = {
     },
     waterway: {
         dam: true
+    },
+    amenity: {
+        bicycle_parking: true
     }
 };
 
