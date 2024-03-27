@@ -2055,6 +2055,7 @@ input.date-selector {
 .form-field-input-roadheight input.roadheight-secondary-number,
 .form-field-input-roadspeed input.roadspeed-number {
     flex-basis: 0;
+    width: 0;
 }
 .form-field-input-roadheight input.roadheight-unit,
 .form-field-input-roadheight input.roadheight-secondary-unit {

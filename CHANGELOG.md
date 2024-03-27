@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_calming` ([id-tagging-schema#1162])
 #### :bug: Bugfixes
 * Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
+* Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5]) 
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -62,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [#10145]: https://github.com/openstreetmap/iD/issues/10145
+[#10175]: https://github.com/openstreetmap/iD/pull/10175
 [id-tagging-schema#1162]: https://github.com/openstreetmap/id-tagging-schema/issues/1162
 [@Sushil642]: https://github.com/Sushil642
 [@mattiapezzotti]: https://github.com/mattiapezzotti
