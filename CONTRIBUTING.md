@@ -228,10 +228,11 @@ new language: it's replaced with a place name when iD presents the text. So a
 French translation of `Couldn't locate a place named '{name}'` would look like
 `Impossible de localiser l'endroit nommé '{name}'`.
 
-The translations for presets consist of the names of presets, labels for
+The translations for presets, [maintained in this repository] (https://github.com/openstreetmap/id-tagging-schema), consist of the names of presets, labels for
 preset fields, and lists of search terms. You do _not_ need to translate the
 search terms literally -- use a set of synonyms and related terms appropriate
 to the target language, separated by commas.
+For more information on translating the presets [please see this contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating). 
 
 You can check your translations on the [development preview site](https://ideditor.netlify.app),
 which is updated every time we change the `develop` branch.
