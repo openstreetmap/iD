@@ -32,7 +32,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity, and, unless a `map` parameter is also provided, centers the map on it.<br/>
   _Example:_ `id=n1207480649`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Multiple codes may be specified in order of preference. The first valid code will be the locale, while the rest will be used as fallbacks if certain text hasn't been translated. The default locale preferences are set by the browser.<br/>
-  _Example:_ `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>
+  _Example:_ `locale=en-GB` (default), `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>
   _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/develop/dist/locales).
 * __`map`__ - A slash-separated `zoom/latitude/longitude`.<br/>
   _Example:_ `map=20.00/38.90085/-77.02271`
