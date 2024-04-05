@@ -113,6 +113,48 @@ describe('iD.uiFieldWikipedia', function() {
         }, 20);
     });
 
+    describe('encodePath', function() {
+        it('returns an encoded URI component that contains the title with spaces replaced by underscores', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodePath('? (film)', undefined)).to.equal('%3F_(film)');
+            done();
+        });
+
+        it('returns an encoded URI component that includes an anchor fragment', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            // this can be tested manually by entering '? (film)#Themes and style in the search box before focusing out'
+            expect(wikipedia.encodePath('? (film)', 'Themes and style')).to.equal('%3F_(film)#Themes_and_style');
+            done();
+        });
+    });
+
+    describe('encodeURIAnchorFragment', function() {
+        it('returns an encoded URI anchor fragment', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            // this can be similarily tested by entering 'Section#Arts, entertainment and media' in the search box before focusing out'
+            expect(wikipedia.encodeURIAnchorFragment('Theme?')).to.equal('#Theme%3F');
+            done();
+        });
+
+        it('replaces all whitespace characters with underscore', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodeURIAnchorFragment('Themes And Styles')).to.equal('#Themes_And_Styles');
+            done();
+        });
+
+        it('encodes % characters, does not replace them with a dot', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodeURIAnchorFragment('Is%this_100% correct')).to.equal('#Is%25this_100%25_correct');
+            done();
+        });
+
+        it('encodes characters that are URI encoded characters', function (done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodeURIAnchorFragment('Section %20%25')).to.equal('#Section_%2520%2525');
+            done();
+        });
+    });
+
     // note - currently skipping the tests that use `options` to delay responses
     it('preserves existing language', function(done) {
         var wikipedia1 = iD.uiFieldWikipedia(field, context);

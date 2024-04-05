@@ -504,6 +504,12 @@ button.disabled .icon.operation use,
     vertical-align: baseline;
 }
 
+button.loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+    background-size: auto;
+}
+
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -1585,11 +1591,11 @@ input.date-selector {
     display: flex;
     flex-flow: row nowrap;
 }
-.form-field ul.rows li.labeled-input > span,
 .form-field ul.rows li.labeled-input > div {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
+    line-height: 0.95rem;
 }
 .form-field ul.rows li input {
     border-radius: 0;
@@ -1606,6 +1612,28 @@ input.date-selector {
 .ideditor[dir='rtl'] .form-field ul.rows li.labeled-input input,
 .ideditor[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
+}
+
+/* Field - lists with labeled input items as table
+------------------------------------------------------- */
+.form-field ul.rows.rows-table {
+    display: table;
+    width: 100%;
+}
+.form-field ul.rows.rows-table li.labeled-input {
+    display: table-row;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:first-child {
+    display: table-cell;
+    width: auto;
+    max-width: 170px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:nth-child(2) {
+    display: table-cell;
+    width: auto;
 }
 
 
@@ -2027,6 +2055,7 @@ input.date-selector {
 .form-field-input-roadheight input.roadheight-secondary-number,
 .form-field-input-roadspeed input.roadspeed-number {
     flex-basis: 0;
+    width: 0;
 }
 .form-field-input-roadheight input.roadheight-unit,
 .form-field-input-roadheight input.roadheight-secondary-unit {
@@ -2354,9 +2383,8 @@ div.combobox {
     display: block;
     padding: 5px 10px;
     border-top: 1px solid #ccc;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    line-height: 0.95rem;
+    break: all;
 }
 
 .combobox a.selected,
@@ -5078,10 +5106,12 @@ img.tile-debug {
 }
 
 .save-summary,
+.save-supporting,
 .save-communityLinks {
     padding: 0px 20px 15px 20px;
 }
 
+.save-supporting,
 .save-communityLinks {
     border-top: 1px solid #ccc;
 }
@@ -5113,6 +5143,7 @@ img.tile-debug {
 }
 
 .summary-view-on-osm,
+.support-the-map,
 .community-name {
     font-size: 14px;
     font-weight: bold;

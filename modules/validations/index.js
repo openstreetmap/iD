@@ -10,6 +10,7 @@ export { validationMaprules } from './maprules';
 export { validationMismatchedGeometry } from './mismatched_geometry';
 export { validationMissingRole } from './missing_role';
 export { validationMissingTag } from './missing_tag';
+export { validationMutuallyExclusiveTags } from './mutually_exclusive_tags';
 export { validationOutdatedTags } from './outdated_tags';
 export { validationPrivateData } from './private_data';
 export { validationSuspiciousName } from './suspicious_name';
