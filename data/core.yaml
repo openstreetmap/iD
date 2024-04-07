@@ -789,7 +789,6 @@ en:
     max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
     set_today: "Sets the value to today."
     set_photo_from_viewer: "Store this photo on the currently selected map object"
-    show_photo_from_field_error: "Invalid ID"
   background:
     title: Background
     description: Background Settings

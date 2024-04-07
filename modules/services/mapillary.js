@@ -19,7 +19,7 @@ const trafficSignTileUrl = `${baseTileUrl}/mly_map_feature_traffic_sign/2/{z}/{x
 const viewercss = 'mapillary-js/mapillary.css';
 const viewerjs = 'mapillary-js/mapillary.js';
 const minZoom = 14;
-const dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'imageChanged', 'error');
+const dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'imageChanged');
 
 let _loadViewerPromise;
 let _mlyActiveImage;
@@ -606,7 +606,6 @@ export default {
             _mlyViewer.moveTo(imageId)
                 .catch(function(e) {
                     console.error('mly3', e); // eslint-disable-line no-console
-                    dispatch.call('error', undefined, e);
                 });
         }
 

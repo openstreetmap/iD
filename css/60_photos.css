@@ -76,18 +76,6 @@
     width: 100%;
 }
 
-.photoviewer .error-handler {
-    border-radius: 0;
-    padding: 15px;
-    position: absolute;
-    left: 50%;
-    top: 75px;
-    transform: translate(-50%, -50%);
-    z-index: 50;
-    color: red;
-    font-size: 20px;
-}
-
 
 .photo-wrapper {
     width: 100%;

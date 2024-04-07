@@ -155,24 +155,6 @@ export function uiPhotoviewer(context) {
             }
         }
 
-        // error message handler
-        const errorHandler = selection
-            .append('div')
-            .attr('class', 'error-handler')
-            .append('div')
-            .style('opacity', '0');
-
-
-        services.mapillary
-            .on('error', function () {
-                errorHandler
-                    .text(t('inspector.show_photo_from_field_error'))
-                    .style('opacity', '1')
-                    .transition()
-                    .duration(1000)
-                    .style('opacity', '0');
-        });
-
         function buildResizeListener(target, eventName, dispatch, options) {
 
             var resizeOnX = !!options.resizeOnX;
