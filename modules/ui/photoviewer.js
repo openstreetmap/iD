@@ -65,48 +65,64 @@ export function uiPhotoviewer(context) {
         context.container().on('click.setPhotoFromViewer', setPhotoFromViewerButton);
 
         function setPhotoFromViewerButton() {
-            const inspectorWrap = d3_select('.inspector-wrap');
-            const editorPane = d3_select('.entity-editor-pane');
-            const presetPane = d3_select('.preset-list-pane');
-            const button = selection.selectAll('.set-photo-from-viewer').data([0]);
-            const hash = utilStringQs(window.location.hash);
-            let [serviceId, photoId] = [];
-            let photo_overlay = [];
-            if (hash.photo) {
-                [serviceId, photoId] = hash.photo.split('/');
+            services.mapillary.on('imageChanged', function() {
+                let activeImageId;
+                const layers = context.layers();
+                function layerStatus(which) {
+                    const layer = layers.layer(which);
+                    return layer.enabled();
+                }
+
+                const hash = utilStringQs(window.location.hash);
+                let serviceId;
+                if (hash.photo) {
+                    let result = hash.photo.split('/');
+                    serviceId = result[0];
+                }
+                activeImageId = services.mapillary.getActiveImage()?.id;
+                // check layer enabled && currently only support mapillary && editorpane open
+                if (layerStatus('mapillary') && serviceId === 'mapillary' && paneCheck()) {
+                    const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
+                    if (!fieldInput.empty()) {
+                        if (activeImageId === utilGetSetValue(fieldInput)) return buttonRemove();
+                    }
+                    const buttonWithoutClickEvent = buttonCreate();
+                    buttonWithoutClickEvent.on('click', function () {
+                        setPhotoFromMapillaryViewer();
+                        buttonRemove();
+                    });
+                } else {
+                    buttonRemove();
+                }
+            });
+
+            function paneCheck() {
+                const inspectorWrap = d3_select('.inspector-wrap');
+                const editorPane = d3_select('.entity-editor-pane');
+                const presetPane = d3_select('.preset-list-pane');
+
+                return !inspectorWrap.classed('inspector-hidden') &&
+                        !editorPane.classed('hide') &&
+                        presetPane.classed('hide') &&
+                        context.mode().id === 'select';
             }
 
-            if (hash.photo_overlay) {
-                photo_overlay = hash.photo_overlay.split(',');
-            }
-
-            // check photoviewer open && photo and layer match && currently only support mapillary && editorpane open
-            if (serviceId &&
-                photo_overlay.includes(serviceId) &&
-                serviceId === 'mapillary' &&
-                !inspectorWrap.classed('inspector-hidden') &&
-                !editorPane.classed('hide') &&
-                presetPane.classed('hide') &&
-                context.mode().id === 'select') {
-                buttonCreate();
-                context.features().on('change.setPhotoFromViewerButtonCreate', buttonCreate);
-            } else {
-                // remove listener and button
-                context.features().on('change.setPhotoFromViewerButtonCreate', null);
-                const button = selection.selectAll('.set-photo-from-viewer');
-                button.remove();
-            }
 
             function buttonCreate() {
-                button.enter()
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                const buttonEnter = button.enter()
                     .append('button')
                     .attr('class', 'set-photo-from-viewer')
-                    .on('click', function () {
-                        if (serviceId === 'mapillary' && services.mapillary) { setPhotoFromMapillaryViewer(); }
-                    })
                     .append('div')
                     .call(svgIcon('#iD-operation-merge'))
                     .attr('title', t('inspector.set_photo_from_viewer'));
+
+                return buttonEnter;
+            }
+
+            function buttonRemove() {
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                button?.remove();
             }
         }
 
