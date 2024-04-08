@@ -8,6 +8,7 @@ import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind, utilGetSetValue, utilStringQs } from '../util';
 import { services } from '../services';
+import { uiTooltip } from './tooltip';
 
 export function uiPhotoviewer(context) {
 
@@ -115,7 +116,15 @@ export function uiPhotoviewer(context) {
                     .attr('class', 'set-photo-from-viewer')
                     .append('div')
                     .call(svgIcon('#iD-operation-merge'))
-                    .attr('title', t('inspector.set_photo_from_viewer'));
+                    .call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer'))
+                        .placement('right')
+                    );
+
+                buttonEnter
+                    .select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
 
                 return buttonEnter;
             }
