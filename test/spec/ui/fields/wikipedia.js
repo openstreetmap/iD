@@ -131,7 +131,7 @@ describe('iD.uiFieldWikipedia', function() {
     describe('encodeURIAnchorFragment', function() {
         it('returns an encoded URI anchor fragment', function(done) {
             var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
-            // this can be similarily tested by entering 'Section#Arts, entertainment and media' in the search box before focusing out'
+            // this can be similarly tested by entering 'Section#Arts, entertainment and media' in the search box before focusing out'
             expect(wikipedia.encodeURIAnchorFragment('Theme?')).to.equal('#Theme%3F');
             done();
         });
