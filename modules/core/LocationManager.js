@@ -109,7 +109,7 @@ export class LocationManager {
 
       this._knownLocationSets.set(locationSetID, area);
 
-    } catch (err) {
+    } catch {
       obj.locationSet = { include: ['Q2'] };  // default worldwide
       obj.locationSetID = '+[Q2]';
     }
@@ -144,7 +144,7 @@ export class LocationManager {
       geojson.properties.id = locationSetID;
       this._resolved.set(locationSetID, geojson);
 
-    } catch (err) {
+    } catch {
       obj.locationSet = { include: ['Q2'] };  // default worldwide
       obj.locationSetID = '+[Q2]';
     }
@@ -244,7 +244,7 @@ export class LocationManager {
     let locationSetID;
     try {
       locationSetID = _loco.validateLocationSet(locationSet).id;
-    } catch (err) {
+    } catch {
       locationSetID = '+[Q2]';  // the world
     }
     return locationSetID;

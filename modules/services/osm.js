@@ -1030,7 +1030,7 @@ export default {
                     try {
                         var regex = new RegExp(regexString);
                         regexes.push(regex);
-                    } catch (e) {
+                    } catch {
                         /* noop */
                     }
                 }
