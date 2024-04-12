@@ -63,39 +63,103 @@ export function uiPhotoviewer(context) {
             );
 
         // set_photo_from_viewer button
-        context.container().on('click.setPhotoFromViewer', setPhotoFromViewerButton);
+        let _selectedID = context.selectedIDs();
+        context.container().on('click.setPhotoFromViewer', function(e) {
+            setPhotoFromViewerButton(e);
+        });
 
-        function setPhotoFromViewerButton() {
-            services.mapillary.on('imageChanged', function() {
-                let activeImageId;
-                const layers = context.layers();
-                function layerStatus(which) {
-                    const layer = layers.layer(which);
-                    return layer.enabled();
+        function setPhotoFromViewerButton(e) {
+            services.mapillary.ensureViewerLoaded(context).then(() => {
+                if (e.target.closest('.mly-wrapper')) {
+                    services.mapillary.on('imageChanged.set', function() {
+                        MapillaryButtonDisabledUpdate();
+                    });
+                    return;
                 }
 
+                if (!services.mapillary.isViewerOpen()) return;
+
+                if (context.mode().id !== 'select' || !paneCheck() || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
+                    buttonRemove();
+                } else {
+                    if (selection.select('.set-photo-from-viewer').empty()) {
+                        const button = buttonCreate();
+                        button.on('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setMapillaryPhotoId();
+                            buttonDisable(true);
+                        });
+                        MapillaryButtonDisabledUpdate();
+                    } else {
+                        if (isSelectedIDChanged()) {
+                            MapillaryButtonDisabledUpdate();
+                            updateSelectedID();
+                        }
+                    }
+                }
+
+                function MapillaryButtonDisabledUpdate() {
+                    let activeImageId = services.mapillary.getActiveImage()?.id;
+
+                    const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
+                    if (!fieldInput.empty()) {
+                        if (activeImageId === utilGetSetValue(fieldInput)) {
+                            buttonDisable(true);
+                        } else {
+                            buttonDisable(false);
+                        }
+                    } else {
+                        buttonDisable(false);
+                    }
+                }
+
+                function setMapillaryPhotoId() {
+                    function insertIdAndTriggerChangeAtField() {
+                        const changeEvent = new Event('change');
+                        const service = services.mapillary;
+                        // insert id
+                        const image = service.getActiveImage();
+                        const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
+                        utilGetSetValue(fieldInput, image.id);
+
+                        // trigger change at field
+                        fieldInput.node().focus();
+                        fieldInput.node().dispatchEvent(changeEvent);
+                    }
+                    // check if mapillary image id field exist
+                    const mapillaryImageIDField = d3_select('.wrap-form-field-mapillary');
+                    if (!mapillaryImageIDField.empty()) {
+                        insertIdAndTriggerChangeAtField();
+                    } else {
+                        // open the Mapillary field
+                        const comboboxInput = d3_select('.value.combobox-input');
+                        const EnterEvent = new KeyboardEvent('keydown', { keyCode: 13 });
+                        utilGetSetValue(comboboxInput, 'Mapillary Image ID');
+                        comboboxInput.node().focus();
+                        comboboxInput.node().dispatchEvent(EnterEvent);
+
+                        insertIdAndTriggerChangeAtField();
+                    }
+                }
+            });
+
+
+            function layerStatus(which) {
+                const layers = context.layers();
+                const layer = layers.layer(which);
+                return layer.enabled();
+            }
+
+            function getServiceId() {
                 const hash = utilStringQs(window.location.hash);
                 let serviceId;
                 if (hash.photo) {
                     let result = hash.photo.split('/');
                     serviceId = result[0];
                 }
-                activeImageId = services.mapillary.getActiveImage()?.id;
-                // check layer enabled && currently only support mapillary && editorpane open
-                if (layerStatus('mapillary') && serviceId === 'mapillary' && paneCheck()) {
-                    const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
-                    if (!fieldInput.empty()) {
-                        if (activeImageId === utilGetSetValue(fieldInput)) return buttonRemove();
-                    }
-                    const buttonWithoutClickEvent = buttonCreate();
-                    buttonWithoutClickEvent.on('click', function () {
-                        setPhotoFromMapillaryViewer();
-                        buttonRemove();
-                    });
-                } else {
-                    buttonRemove();
-                }
-            });
+                return serviceId;
+            }
 
             function paneCheck() {
                 const inspectorWrap = d3_select('.inspector-wrap');
@@ -103,26 +167,35 @@ export function uiPhotoviewer(context) {
                 const presetPane = d3_select('.preset-list-pane');
 
                 return !inspectorWrap.classed('inspector-hidden') &&
-                        !editorPane.classed('hide') &&
-                        presetPane.classed('hide') &&
-                        context.mode().id === 'select';
+                    !editorPane.classed('hide') &&
+                    presetPane.classed('hide');
             }
 
+            function isSelectedIDChanged() {
+                const currentSelectId = context.selectedIDs();
+                if (JSON.stringify(_selectedID) === JSON.stringify(currentSelectId)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function updateSelectedID() {
+                _selectedID = context.selectedIDs();
+            }
 
             function buttonCreate() {
                 const button = selection.selectAll('.set-photo-from-viewer').data([0]);
                 const buttonEnter = button.enter()
                     .append('button')
                     .attr('class', 'set-photo-from-viewer')
-                    .append('div')
                     .call(svgIcon('#iD-operation-merge'))
                     .call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer'))
                         .placement('right')
                     );
 
-                buttonEnter
-                    .select('.tooltip')
+                buttonEnter.select('.tooltip')
                     .classed('dark', true)
                     .style('width', '300px');
 
@@ -131,36 +204,13 @@ export function uiPhotoviewer(context) {
 
             function buttonRemove() {
                 const button = selection.selectAll('.set-photo-from-viewer').data([0]);
-                button?.remove();
+                button.remove();
             }
-        }
 
-        function setPhotoFromMapillaryViewer() {
-            function insertIdAndTriggerChangeAtField() {
-                const changeEvent = new Event('change');
-                const service = services.mapillary;
-                // insert id
-                const image = service.getActiveImage();
-                const fieldInput = d3_select('.wrap-form-field-mapillary .identifier');
-                utilGetSetValue(fieldInput, image.id);
-
-                // trigger change at field
-                fieldInput.node().focus();
-                fieldInput.node().dispatchEvent(changeEvent);
-            }
-            // check if mapillary image id field exist
-            const mapillaryImageIDField = d3_select('.wrap-form-field-mapillary');
-            if (!mapillaryImageIDField.empty()) {
-                insertIdAndTriggerChangeAtField();
-            } else {
-                // open the Mapillary field
-                const comboboxInput = d3_select('.value.combobox-input');
-                const EnterEvent = new KeyboardEvent('keydown', { keyCode: 13 });
-                utilGetSetValue(comboboxInput, 'Mapillary Image ID');
-                comboboxInput.node().focus();
-                comboboxInput.node().dispatchEvent(EnterEvent);
-
-                insertIdAndTriggerChangeAtField();
+            function buttonDisable(disabled) {
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                button.attr('disabled', disabled ? 'true' : null);
+                button.classed('disabled', disabled);
             }
         }
 
