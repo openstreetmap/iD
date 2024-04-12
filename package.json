@@ -72,7 +72,7 @@
     "which-polygon": "2.2.1"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "~6.5.1",
+    "@fortawesome/fontawesome-svg-core": "~6.5.2",
     "@fortawesome/free-brands-svg-icons": "~6.5.2",
     "@fortawesome/free-regular-svg-icons": "~6.5.2",
     "@fortawesome/free-solid-svg-icons": "~6.5.2",
