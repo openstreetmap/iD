@@ -252,7 +252,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
                         _photos.push(photo);
                     }
                 }
-            } catch (err) {
+            } catch {
                 // skip files which are not a supported image file
             }
         }

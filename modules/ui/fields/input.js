@@ -362,7 +362,7 @@ export function uiFieldText(field, context) {
         if (field.type === 'url' && value) {
             try {
                 return (new URL(value)).href;
-            } catch (e) {
+            } catch {
                 return null;
             }
         }

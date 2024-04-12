@@ -497,7 +497,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 id: nextNode.id,
                 properties: { target: true, entity: nextNode },
             });
-        } catch (ex) {
+        } catch {
             context.ui().flash
                 .duration(4000)
                 .iconName('#iD-icon-no')
