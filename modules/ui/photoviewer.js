@@ -211,6 +211,23 @@ export function uiPhotoviewer(context) {
                 const button = selection.selectAll('.set-photo-from-viewer').data([0]);
                 button.attr('disabled', disabled ? 'true' : null);
                 button.classed('disabled', disabled);
+                button.call(uiTooltip().destroyAny);
+                if (disabled) {
+                    button.call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer.disable'))
+                        .placement('right')
+                    );
+                } else {
+                    button.call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer.enable'))
+                        .placement('right')
+                    );
+                }
+
+                button.select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
+
             }
         }
 
