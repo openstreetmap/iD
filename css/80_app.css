@@ -294,6 +294,7 @@ table.tags, table.tags td, table.tags th {
 .fillD {
     background: rgba(0,0,0,.5);
     color: #fff;
+    backdrop-filter: blur(2px);
 }
 .fillD2 {
     background: rgba(0,0,0,.75);
@@ -3256,6 +3257,7 @@ img.tag-reference-wiki-image {
     background: rgba(0,0,0,.5);
     border-radius: 0;
     pointer-events: auto;
+    backdrop-filter: blur(2px);
 }
 
 .map-control > button:not(.disabled):focus,
