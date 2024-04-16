@@ -371,7 +371,9 @@ export function uiNoteEditor(context) {
                 var andComment = (d.newComment ? '_comment' : '');
                 return t.html('note.' + action + andComment);
             })
-            .on('click.status', clickStatus);
+            .on('click.status', clickStatus)
+            .select('span')       // fix double click bug - #8994
+            .attr('style', 'pointer-events: none;');
 
         buttonSection.select('.comment-button')   // select and propagate data
             .attr('disabled', isSaveDisabled)
