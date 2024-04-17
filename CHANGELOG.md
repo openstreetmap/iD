@@ -46,7 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
 #### :white_check_mark: Validation
 * Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
-* Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_calming` ([id-tagging-schema#1162])
+* Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_island` ([id-tagging-schema#1162])
 #### :bug: Bugfixes
 * Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
 * Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5]) 

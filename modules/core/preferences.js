@@ -2,7 +2,7 @@
 // https://github.com/openstreetmap/iD/issues/772
 // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
 let _storage;
-try { _storage = localStorage; } catch (e) {}  // eslint-disable-line no-empty
+try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
   let s = {};
   return {
@@ -32,7 +32,7 @@ function corePreferences(k, v) {
       _listeners[k].forEach(handler => handler(v));
     }
     return true;
-  } catch (e) {
+  } catch {
     /* eslint-disable no-console */
     if (typeof console !== 'undefined') {
       console.error('localStorage quota exceeded');
