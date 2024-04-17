@@ -1,0 +1,57 @@
+.ideditor {
+    --bg-color: #fff; /* ~Bootstrap .bg-body */
+    --bg-color-2: #f6f6f6; /* ~Bootstrap .bg-body-tertiary */
+    --bg-color-3: #ececec; /* ~Bootstrap .bg-body-secondary */
+    --active-bg-color: #f1f1f1; /* in the middle between --bg-color-2 and --bg-color-3 */
+    --border-color: #ccc; /* ~Bootstrap .border-secondary-subtle */
+    --transparent-border-color: #cccccc94; /* --border-color with alpha value to match rgba(0, 0, 0, .1) over --bg-color-2 */
+    --border-color-2: #ddd; /* mix 66% of --border-color with white */
+    --outset-color: #fcfcfc; /* brighter than --border-color with white */
+    --shadow-color: #bbb; /* mix 91.5% of --border-color with black */
+    --text-color: #333;
+    --muted-text-color: #aaa;
+    --passive-bg-color: #cccccc; /* = --border-color */
+    --passive-text-color: #888;
+    --widget-color: #222;
+    --widget-bg-color: #eee;
+    --nested-bg-color: #eff2f7;
+    --nested-highlight-color: #e3e8ef;
+    --nested-border-color: #ccd5e3;
+    --selected-bg-color: #e8ebff;
+    --warning-bg-color: #ffc; /* mix 60% of --warning-label-color with white */
+    --warning-label-color: #ffa;
+    --warning-highlight-color: #ff8; /* ~saturate(1.5) of --warning-label-color */
+    --warning-border-color: #fb2;
+    --warning-text-color: #b15500;
+    --warning-highlight-text-color: #7f3d00;
+    --warning-icon-color: #f90;
+}
+
+@media (prefers-color-scheme: dark) {
+    .ideditor {
+        --bg-color: #212529;
+        --bg-color-2: #2b3035;
+        --bg-color-3: #343a40;
+        --active-bg-color: #30353b;
+        --passive-bg-color: #41464b;
+        --border-color: #41464b;
+        --transparent-border-color: #41464b94;
+        --border-color-2: #2b2e32;
+        --outset-color: #54595d;
+        --shadow-color: #3b4045;
+        --text-color: #dee2e6;
+        --muted-text-color: #6e7276;
+        --widget-color: #e9ecef;
+        --widget-bg-color: #31373c;
+        --nested-bg-color: #2d2e33;
+        --nested-highlight-color: #33363b;
+        --nested-border-color: #3e434e;
+        --selected-bg-color: #3b3c49;
+        --warning-bg-color: #332701;
+        --warning-label-color: #554102;
+        --warning-highlight-color: #5f4100;
+        --warning-border-color: #7e3b00;
+        --warning-text-color: #e98c38;
+        --warning-highlight-text-color: #f0ac71;
+    }
+}
