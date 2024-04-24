@@ -44,11 +44,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+
+[#8994]: https://github.com/openstreetmap/iD/issues/8994
 
 
 # 2.29.0
@@ -67,7 +70,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5])
 * Fix external URL links when rearrangin multi-valued combo field options ([#10153], thanks [@laigyu])
 * Preserve whitespace after semicolons in `inscription` field ([#10188], thanks [@matkoniecz])
-* Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
 #### :mortar_board: Walkthrough / Help
 * Show message when a POI point is incorrectly placed as vertex ([#9439], thanks [@mattiapezzotti])
 #### :hammer: Development
@@ -77,7 +79,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#5420]: https://github.com/openstreetmap/iD/issues/5420
 [#7653]: https://github.com/openstreetmap/iD/issues/7653
 [#8415]: https://github.com/openstreetmap/iD/issues/8415
-[#8994]: https://github.com/openstreetmap/iD/issues/8994
 [#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [#10145]: https://github.com/openstreetmap/iD/issues/10145
