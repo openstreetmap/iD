@@ -725,10 +725,12 @@ export function uiFieldCombo(field, context) {
                 const field_buttons = selection.select('.field_buttons');
                 const clean_value = d.value.trim();
                 text_span.text('');
+                if (!field_buttons.select('button').empty()) {
+                    field_buttons.select('button').remove();
+                }
                 if (clean_value.startsWith('https://')) {
                     // create a button to open the link in a new tab
                     text_span.text(clean_value);
-                    field_buttons.select('button').remove();
                     field_buttons.append('button')
                         .call(svgIcon('#iD-icon-out-link'))
                         .attr('class', 'form-field-button foreign-id-permalink')
