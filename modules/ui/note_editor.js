@@ -370,7 +370,8 @@ export function uiNoteEditor(context) {
                 var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
                 return t.html('note.' + action + andComment);
-            })
+            });
+        buttonSection.select('.status-button')
             .on('click.status', clickStatus);
 
         buttonSection.select('.comment-button')   // select and propagate data
