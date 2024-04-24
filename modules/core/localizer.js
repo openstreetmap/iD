@@ -399,6 +399,24 @@ export function coreLocalizer() {
       return ret;
     };
 
+    // Adds or updates a localized text wrapped as an HTML span element with locale info to the DOM
+    localizer.t.addOrUpdate = function(stringId, replacements, locale) {
+      const ret = function(selection) {
+        const info = localizer.tInfo(stringId, replacements, locale);
+        const span = selection.selectAll('span.localized-text').data([info]);
+        const enter = span.enter()
+            .append('span')
+            .classed('localized-text', true);
+        span.merge(enter)
+            .attr('lang', info.locale || 'und')
+            .text((replacements && replacements.prefix || '')
+                + info.text
+                + (replacements &&replacements.suffix || ''));
+      };
+      ret.stringId = stringId;
+      return ret;
+    };
+
     localizer.languageName = (code, options) => {
 
         if (_languageNames && _languageNames[code]) {  // name in locale language

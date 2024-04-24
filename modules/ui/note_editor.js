@@ -371,13 +371,11 @@ export function uiNoteEditor(context) {
 
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
-            .text('')
             .each(function(d) {
                 var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
-                t.append('note.' + action + andComment)(d3_select(this));
-            });
-        buttonSection.select('.status-button')
+                t.addOrUpdate('note.' + action + andComment)(d3_select(this));
+            })
             .on('click.status', clickStatus);
 
         buttonSection.select('.comment-button')   // select and propagate data
