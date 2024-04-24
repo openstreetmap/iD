@@ -35,7 +35,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.29.0-dev)
+# 2.29.0
+##### 2024-Apr-24
 
 #### :sparkles: Usability & Accessibility
 * Preserve rows with empty tag values in raw tag editor ([#10145], thanks [@Asif-Sheriff])
