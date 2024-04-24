@@ -17,7 +17,7 @@ export function utilCleanTags(tags) {
         }
 
         function skip(k) {
-            return /^(description|note|fixme)$/.test(k);
+            return /^(description|note|fixme|inscription)$/.test(k);
         }
 
         if (skip(k)) return v;

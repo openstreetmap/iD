@@ -370,10 +370,7 @@ Note that in order to run the tests, Chrome needs to be installed on the system.
 
 ### Building / Installing
 
-You can rebuild iD completely with the command `npm run all`.
-
-iD will be built to the `dist` directory. This directory is self-contained; you can copy it
-into the public directory of your webserver to deploy iD.
+Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to build and run iD.
 
 
 ### Licensing
