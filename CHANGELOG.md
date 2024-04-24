@@ -37,11 +37,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.29.0-dev)
 
-#### :tada: New Features
-* Add button to fully load incompletely downloaded relations ([#5420])
 #### :sparkles: Usability & Accessibility
 * Preserve rows with empty tag values in raw tag editor ([#10145], thanks [@Asif-Sheriff])
-#### :scissors: Operations
+* Add button to fully load incompletely downloaded relations ([#5420])
 #### :camera: Street-Level
 * Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
 #### :white_check_mark: Validation
@@ -49,25 +47,31 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_island` ([id-tagging-schema#1162])
 #### :bug: Bugfixes
 * Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
-* Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5]) 
-#### :earth_asia: Localization
-#### :hourglass: Performance
+* Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5])
+* Fix external URL links when rearrangin multi-valued combo field options ([#10153], thanks [@laigyu])
+* Preserve whitespace after semicolons in `inscription` field ([#10188], thanks [@matkoniecz])
+* Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
 #### :mortar_board: Walkthrough / Help
 * Show message when a POI point is incorrectly placed as vertex ([#9439], thanks [@mattiapezzotti])
-#### :rocket: Presets
 #### :hammer: Development
+* Upgrade eslint config to version 9
+
 
 [#5420]: https://github.com/openstreetmap/iD/issues/5420
 [#7653]: https://github.com/openstreetmap/iD/issues/7653
 [#8415]: https://github.com/openstreetmap/iD/issues/8415
+[#8994]: https://github.com/openstreetmap/iD/issues/8994
 [#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [#10145]: https://github.com/openstreetmap/iD/issues/10145
+[#10153]: https://github.com/openstreetmap/iD/issues/10153
 [#10175]: https://github.com/openstreetmap/iD/pull/10175
+[#10188]: https://github.com/openstreetmap/iD/issues/10188
 [id-tagging-schema#1162]: https://github.com/openstreetmap/id-tagging-schema/issues/1162
 [@Sushil642]: https://github.com/Sushil642
 [@mattiapezzotti]: https://github.com/mattiapezzotti
 [@Asif-Sheriff]: https://github.com/Asif-Sheriff
+[@laigyu]: https://github.com/laigyu
 
 
 # 2.28.1
