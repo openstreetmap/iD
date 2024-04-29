@@ -63,7 +63,7 @@
     "lodash-es": "~4.17.15",
     "marked": "~12.0.2",
     "node-diff3": "~3.1.0",
-    "osm-auth": "~2.4.0",
+    "osm-auth": "~2.5.0",
     "pannellum": "2.5.6",
     "pbf": "^3.2.1",
     "polygon-clipping": "~0.15.7",
