@@ -9,6 +9,7 @@ import { t, localizer } from '../../core/localizer';
 import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
+import { isColourValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
 import { isEqual } from 'lodash-es';
@@ -170,11 +171,10 @@ export function uiFieldText(field, context) {
         } else if (field.type === 'identifier' && field.urlFormat && field.pattern) {
 
             input.attr('type', 'text');
-
             outlinkButton = wrap.selectAll('.foreign-id-permalink')
                 .data([0]);
 
-            outlinkButton.enter()
+            outlinkButton = outlinkButton.enter()
                 .append('button')
                 .call(svgIcon('#iD-icon-out-link'))
                 .attr('class', 'form-field-button foreign-id-permalink')
@@ -186,15 +186,17 @@ export function uiFieldText(field, context) {
                     }
                     return '';
                 })
+                .merge(outlinkButton);
+            outlinkButton
                 .on('click', function(d3_event) {
                     d3_event.preventDefault();
-
                     var value = validIdentifierValueForLink();
                     if (value) {
                         var url = field.urlFormat.replace(/{value}/, encodeURIComponent(value));
                         window.open(url, '_blank');
                     }
                 })
+                .classed('disabled', () => !validIdentifierValueForLink())
                 .merge(outlinkButton);
         } else if (field.type === 'url') {
             input.attr('type', 'text');
@@ -227,16 +229,6 @@ export function uiFieldText(field, context) {
 
 
     function updateColourPreview() {
-        function isColourValid(colour) {
-            if (!colour.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
-                // OSM only supports hex or named colors
-                return false;
-            } else if (!CSS.supports('color', colour) || ['unset', 'inherit', 'initial', 'revert'].includes(colour)) {
-                // see https://stackoverflow.com/a/68217760/1627467
-                return false;
-            }
-            return true;
-        }
         wrap.selectAll('.colour-preview')
             .remove();
 
@@ -370,12 +362,12 @@ export function uiFieldText(field, context) {
         if (field.type === 'url' && value) {
             try {
                 return (new URL(value)).href;
-            } catch (e) {
+            } catch {
                 return null;
             }
         }
         if (field.type === 'identifier' && field.pattern) {
-            return value && value.match(new RegExp(field.pattern))[0];
+            return value && value.match(new RegExp(field.pattern))?.[0];
         }
         return null;
     }
@@ -396,10 +388,19 @@ export function uiFieldText(field, context) {
     // returns all values of a (potential) multiselection and/or multi-key field
     function getVals(tags) {
         if (field.keys) {
-            return new Set(field.keys.reduce((acc, key) => acc.concat(tags[key]), [])
-                .filter(Boolean));
+            const multiSelection = context.selectedIDs();
+            tags = multiSelection.length > 1
+                ? context.selectedIDs()
+                    .map(id => context.graph().entity(id))
+                    .map(entity => entity.tags)
+                : [tags];
+            return tags.map(tags => new Set(field.keys
+                    .reduce((acc, key) => acc.concat(tags[key]), [])
+                    .filter(Boolean)))
+                .map(vals => vals.size === 0 ? new Set([undefined]) : vals)
+                .reduce((a, b) => new Set([...a, ...b]));
         } else {
-            return new Set([].concat(tags[field.key]).filter(Boolean));
+            return new Set([].concat(tags[field.key]));
         }
     }
 
@@ -462,7 +463,7 @@ export function uiFieldText(field, context) {
 
         const vals = getVals(tags);
         const isMixed = vals.size > 1;
-        var val = vals.size === 1 ? [...vals][0] : '';
+        var val = vals.size === 1 ? [...vals][0] ?? '' : '';
         var shouldUpdate;
 
         if (field.type === 'number' && val) {

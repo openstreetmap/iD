@@ -137,5 +137,48 @@ const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
 fetchMock.sticky('https://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
 fetchMock.sticky('http://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
 
+const vegbilderOwsCapabilities = `<?xml version="1.0" encoding="UTF-8"?>
+<wfs:WFS_Capabilities version="2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.opengis.net/wfs/2.0"
+	xmlns:wfs="http://www.opengis.net/wfs/2.0"
+	xmlns:ows="http://www.opengis.net/ows/1.1"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:fes="http://www.opengis.net/fes/2.0"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 https://www.vegvesen.no/kart/ogc/schemas/wfs/2.0/wfs.xsd"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:vegbilder_1_0="http://vegbilder_1_0">
+<ows:ServiceIdentification>
+	<ows:Title>Mock OGC</ows:Title>
+	<ows:ServiceType>WFS</ows:ServiceType>
+	<ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+</ows:ServiceIdentification>
+<FeatureTypeList>
+	<FeatureType xmlns:vegbilder_1_0="http://vegbilder_1_0">
+		<Name>vegbilder_1_0:Vegbilder_2020</Name>
+		<Title>Vegbilder_2020</Title>
+		<Abstract>Testlayer</Abstract>
+		<DefaultCRS>urn:ogc:def:crs:EPSG::4326</DefaultCRS>
+		<OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
+	</FeatureType>
+	<FeatureType xmlns:vegbilder_1_0="http://vegbilder_1_0">
+		<Name>not_matched_layer:Vegbilder_2020</Name>
+		<Title>Vegbilder_2020_4</Title>
+		<Abstract>Not matched layer</Abstract>
+		<DefaultCRS>urn:ogc:def:crs:EPSG::4326</DefaultCRS>
+		<OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
+	</FeatureType>
+</FeatureTypeList>
+<fes:Filter_Capabilities/>
+</wfs:WFS_Capabilities>`;
+
+fetchMock.sticky({
+          url: 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows',
+            query: {
+              service: 'WFS',
+              request: 'GetCapabilities'
+            }
+          }, vegbilderOwsCapabilities, {sticky: true});
 fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;

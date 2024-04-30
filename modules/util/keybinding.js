@@ -283,7 +283,7 @@ utilKeybinding.keys = {
     'open-bracket': '[',
     // Back slash, or \
     'back-slash': '\\',
-    // Close backet, or ]
+    // Close bracket, or ]
     'close-bracket': ']',
     // Apostrophe, or Quote, or '
     quote: '\'', apostrophe: '\'',
@@ -394,7 +394,7 @@ utilKeybinding.keyCodes = {
     '[': 219, 'open-bracket': 219,
     // Back slash, or \
     '\\': 220, 'back-slash': 220,
-    // Close backet, or ]
+    // Close bracket, or ]
     ']': 221, 'close-bracket': 221,
     // Apostrophe, or Quote, or '
     '\'': 222, quote: 222, apostrophe: 222

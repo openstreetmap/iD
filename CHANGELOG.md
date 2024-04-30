@@ -35,15 +35,226 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.26.0-dev)
+
+# Unreleased (2.30.0-dev)
+
+#### :tada: New Features
+#### :sparkles: Usability & Accessibility
+#### :scissors: Operations
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+#### :bug: Bugfixes
+* Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
+#### :earth_asia: Localization
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+#### :rocket: Presets
+#### :hammer: Development
+
+[#8994]: https://github.com/openstreetmap/iD/issues/8994
+
+
+# 2.29.0
+##### 2024-Apr-24
+
+#### :sparkles: Usability & Accessibility
+* Preserve rows with empty tag values in raw tag editor ([#10145], thanks [@Asif-Sheriff])
+* Add button to fully load incompletely downloaded relations ([#5420])
+#### :camera: Street-Level
+* Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
+#### :white_check_mark: Validation
+* Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
+* Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_island` ([id-tagging-schema#1162])
+#### :bug: Bugfixes
+* Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
+* Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5])
+* Fix external URL links when rearrangin multi-valued combo field options ([#10153], thanks [@laigyu])
+* Preserve whitespace after semicolons in `inscription` field ([#10188], thanks [@matkoniecz])
+#### :mortar_board: Walkthrough / Help
+* Show message when a POI point is incorrectly placed as vertex ([#9439], thanks [@mattiapezzotti])
+#### :hammer: Development
+* Upgrade eslint config to version 9
+
+
+[#5420]: https://github.com/openstreetmap/iD/issues/5420
+[#7653]: https://github.com/openstreetmap/iD/issues/7653
+[#8415]: https://github.com/openstreetmap/iD/issues/8415
+[#9439]: https://github.com/openstreetmap/iD/issues/9439
+[#10135]: https://github.com/openstreetmap/iD/issues/10135
+[#10145]: https://github.com/openstreetmap/iD/issues/10145
+[#10153]: https://github.com/openstreetmap/iD/issues/10153
+[#10175]: https://github.com/openstreetmap/iD/pull/10175
+[#10188]: https://github.com/openstreetmap/iD/issues/10188
+[id-tagging-schema#1162]: https://github.com/openstreetmap/id-tagging-schema/issues/1162
+[@Sushil642]: https://github.com/Sushil642
+[@mattiapezzotti]: https://github.com/mattiapezzotti
+[@Asif-Sheriff]: https://github.com/Asif-Sheriff
+[@laigyu]: https://github.com/laigyu
+
+
+# 2.28.1
+##### 2024-Feb-29
+
+#### :bug: Bugfixes
+* Fix false validation message, which was suggesting to add empty `*:wikipedia` tags to NSI presets ([#10140])
+#### :earth_asia: Localization
+* Add address format for New Zealand ([#10123], thanks [@k-yle])
+
+[#10123]: https://github.com/openstreetmap/iD/pull/10123
+[#10140]: https://github.com/openstreetmap/iD/issues/10140
+
+
+# 2.28.0
+##### 2024-Feb-28
+
+#### :sparkles: Usability & Accessibility
+* Show the color of (route) relations in the form of small colored circles in relation membership section and feature search results ([#9424])
+* Hide tag suggestions for tags like `name_1` in raw tag editor autocomplete ([#9422])
+* Show `(empty)` as a tag value option in the raw tag editor when a multi selections contains at least one feature which does not have the particular tag ([#9876], thanks [@k-yle])
+* Allow to search for OSM notes by id in search bar ([#10062], thanks [@NaVis0mple])
+* Add support for coordinates in `<degree> <minutes>[ <seconds>]` format to search bar ([#10066], thanks [@NaVis0mple])
+* Improve styling of combobox dopdown list to give entries with long labels more room for better readability ([#10127], thanks [@tordans])
+#### :camera: Street-Level
+* Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074])
+#### :white_check_mark: Validation
+* Warn when objects contain tags which are considered to be _mutually exclusive_ like for example `noname` and `name` (replaces previous `incorrect_name` validator) ([#10035], thanks [@mtmail])
+#### :bug: Bugfixes
+* Show turn restriction editor also when there is only one possible "to" way, as there might exist restrictions with that way as _via_ ([#9983])
+* Local photos: Fix bug which prevented the last image from being removed from the map when removed from the list
+* Fix wrong mouse cursor on "foreign link" field buttons (for example in the Mapillary or Wikimedia Commons fields) ([#9992], thanks [@ramith-kulal])
+* Don't show duplicates of notes when they lie exactly on special locations like null island (0.0,0.0)
+* Preserve `side` tag of `highway=cyclist_waiting_aid` features when reversing its way ([#10128])
+#### :mortar_board: Walkthrough / Help
+* Show message about how to support OSM (e.g. in form of a donation) after a successful save ([#10054])
+#### :rocket: Presets
+* Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
+* Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
+* Drop `*:wikipedia` tags when switching to a new NSI-based preset which specifies a corresponding `*:wikidata` tag ([#9103])
+
+[#9103]: https://github.com/openstreetmap/iD/issues/9103
+[#9424]: https://github.com/openstreetmap/iD/pull/9424
+[#9422]: https://github.com/openstreetmap/iD/issues/9422
+[#9876]: https://github.com/openstreetmap/iD/issues/9876
+[#9891]: https://github.com/openstreetmap/iD/pull/9891
+[#9983]: https://github.com/openstreetmap/iD/issues/9983
+[#9992]: https://github.com/openstreetmap/iD/issues/9992
+[#10035]: https://github.com/openstreetmap/iD/pull/10035
+[#10054]: https://github.com/openstreetmap/iD/issues/10054
+[#10062]: https://github.com/openstreetmap/iD/pull/10062
+[#10066]: https://github.com/openstreetmap/iD/pull/10066
+[#10074]: https://github.com/openstreetmap/iD/issues/10074
+[#10127]: https://github.com/openstreetmap/iD/issues/10127
+[#10128]: https://github.com/openstreetmap/iD/issues/10128
+[id-tagging-schema#1076]: https://github.com/openstreetmap/id-tagging-schema/pull/1076
+[@ramith-kulal]: https://github.com/ramith-kulal
+[@mangerlahn]: https://github.com/mangerlahn
+[@NaVis0mple]: https://github.com/NaVis0mple
+[@mtmail]: https://github.com/mtmail
+
+
+# 2.27.3
+##### 2023-Nov-08
+
+* Use `api.openstreetmap.org` domain also for _map_ API calls
+
+
+# 2.27.2
+##### 2023-Nov-08
+
+#### :sparkles: Usability & Accessibility
+* Show field for changeset sources by default in the upload form
+#### :bug: Bugfixes
+* Fix autocomplete in combo fields sometimes switching to a different value after a short time ([#9898])
+* Fix regression in improperly escaped usernames ([#9906], thanks [@jleedev])
+#### :hammer: Development
+* Switch to `api.openstreetmap.org` domain for OSM API calls ([operations#951])
+* Improve backwards compatibility with some old browsers ([#9934], thanks [@k-yle])
+* Refresh dependencies, including `osm-community-index` to 5.6.0, `temaki` to 5.6
+
+[#9898]: https://github.com/openstreetmap/iD/issues/9898
+[#9906]: https://github.com/openstreetmap/iD/pull/9906
+[#9934]: https://github.com/openstreetmap/iD/pull/9934
+[operations#951]: https://github.com/openstreetmap/operations/issues/951
+
+
+# 2.27.1
+##### 2023-Aug-17
+
+#### :bug: Bugfixes
+* Fix stuck cursor in input fields on Safari ([#9848])
+* Fix non-360° Mapilio images from being zoomed in too far ([#9846], thanks [@ozcan-durak])
+
+[#9846]: https://github.com/openstreetmap/iD/issues/9846
+[#9848]: https://github.com/openstreetmap/iD/issues/9848
+[@ozcan-durak]: https://github.com/ozcan-durak
+
+
+# 2.27.0
+##### 2023-Aug-16
+
+#### :mega: Release Highlights
+* Added the ability to show georeferenced photos on the map and added two new street-level imagery from [_Mapilio_](https://mapilio.com/openstreetmap) and [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/).
+#### :sparkles: Usability & Accessibility
+* Show tag reference information for the currently filled-in tag value in UI fields (if available), instead of only showing the more generic _key_ documentation of the field ([#9786])
+* Don't suggest _discardable_ (i.e. deprecated and automatically removed tags) in the auto-suggestions of the raw tag editor ([#9817], thanks [@k-yle])
+#### :camera: Street-Level
+* Add [_Mapilio_](https://mapilio.com/openstreetmap) as new street-level imagery provider ([#9664], thanks [@channel-s])
+* Add photos from the [Norwegian Public Road Administration](https://vegbilder.atlas.vegvesen.no/) as new street-level imagery provider in Norway ([#9509], thanks [@noenandre])
+* Add functionality to display georeferenced photos from local files ([#9291], thanks [@nontech])
+* Gray out street level layers in "Map Data" pane when map is zoomed out too far
+#### :bug: Bugfixes
+* Fix broken place search via Nominatim ([#9822])
+* Validator: Don't falsely flag certain tags as "should be a closed area" if the tag also allows both area and line geometries in two separate presets (e.g. `highway=elevator` in the "Elevator" and "Inclined Lift" presets)
+* Fix sorting of nearby streets in address field dropdown
+* Fix bug where "outlink" buttons would not be disabled on invalid values of `identifier` fields
+* Fix zooming/panning in KartaView photo layer after resizing the panel ([#8997])
+* Fix clearing of contents of some input field when the respective tag is removed (e.g. when using the trash can icon on the UI field)
+* Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
+#### :hammer: Development
+* Upgrade osm-auth to v2.2
+* Upgrade dependencies, including the following major version upgrades: `marked` to v7, `esbuild` to v0.18
+
+[#8997]: https://github.com/openstreetmap/iD/issues/8997
+[#9233]: https://github.com/openstreetmap/iD/issues/9233
+[#9291]: https://github.com/openstreetmap/iD/pull/9291
+[#9509]: https://github.com/openstreetmap/iD/pull/9509
+[#9664]: https://github.com/openstreetmap/iD/pull/9664
+[#9786]: https://github.com/openstreetmap/iD/issues/9786
+[#9817]: https://github.com/openstreetmap/iD/pull/9817
+[#9822]: https://github.com/openstreetmap/iD/issues/9822
+[@channel-s]: https://github.com/channel-s
+[@noenandre]: https://github.com/noenandre
+[@nontech]: https://github.com/nontech
+
+
+# 2.26.2
+##### 2023-Jul-13
+
+* Fix broken in raw tag editor ([#9766], thanks [@k-yle])
+
+[#9766]: https://github.com/openstreetmap/iD/pull/9766
+
+
+# 2.26.1
+##### 2023-Jul-12
+
+* Fix crash when rendering an `email` UI field ([#9752])
+
+[#9752]: https://github.com/openstreetmap/iD/issues/9752
+
+
+# 2.26.0
+##### 2023-Jul-12
+
 #### :tada: New Features
 * Combo fields for tags with `yes/no` values now also display the `no` state and allow to toggle between the two states ([#7427])
+#### :newspaper: News
+* Remove nonfunctional _Maxar Premium_ imagery layer from background selection list ([#9710])
 #### :sparkles: Usability & Accessibility
 * Make it easier to search for OSM objects by id ([#9520], thanks [@k-yle])
 * Localize numbers in numeric fields ([#8769], thanks [@1ec5])
 * The Address field now supports the `addr:place` tag (as an alternative to `addr:street`), this functionality is activated in selected countries ([#9603])
-#### :scissors: Operations
-#### :camera: Street-Level
+* Clean up background imagery list by discarding layers which are not helpful for mapping
 #### :white_check_mark: Validation
 * Offer to connect sidewalk to service road without tagging the connection as a crossing ([#9650], thanks [@1ec5])
 #### :bug: Bugfixes
@@ -52,29 +263,34 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix wrongly flagged "incorrect geometry type" warnings for features with lifecycle-prefixed tags ([#9483], thanks [@biswajit-k])
 * Fix corruption of tag values of fields with referenced strings, but restricted `options`, when an unavailable option is entered manually into the field.
 * Properly handle case sensitive tag values in taginfo suggestions in raw tag editor ([#9640])
-* Fix dysfunctional autocomplete of wikidata fields for some languages with country-codes ([#9638])
+* Fix broken autocomplete of wikidata fields for some languages with country-codes ([#9638])
 * Prevent certain tag values from corrupting css classes when they contain whitespaces ([#9637], thanks [@k-yle])
-* Don't move the cursor to the end of (some) input fields while editing in the middle ([#9233])
+* Fix crash when using certain locales (e.g. `fr-FR`) ([#9737], thanks [@k-yle])
 #### :earth_asia: Localization
 * Send `Accept-Language` header on Nominatim API calls ([#9501], thanks [@k-yle])
 * Add Address and Phone format for India ([#9482], thanks [@biswajit-k])
 * Add Address format for the Philippines ([#9482], thanks [@bryceco])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
+* Add Address format for Latvia ([#9667], thanks [@soshial])
+* Add Phone format for Hungary ([#9673], thanks [@Yogurt4])
+* Add Phone format for Bulgaria ([#8775], thanks [@Dimitar5555])
 #### :rocket: Presets
 * Render "oneway" arrows for features with `waterway=pressurized`, `waterway=spillway`, `seamark:type=two-way_route` or `seamark:type=recommended_traffic_lane` ([#9492], thanks [@k-yle])
 * Render "right-side" arrows for features with lifecycle prefixes ([#9493], thanks [@k-yle])
 * Take regional variants of parent presets into account when resolving preset fields ([#9524])
 * Render "right-side" arrows for `man_made=quay` features
 * Support icons also in `multiCombo` and `semiCombo` fields ([#9433])
+* Support input fields with multiple tag keys: one main key and an optional list of _alternative_ keys, e.g. `email` / `contact:email` ([schema-builder#98])
 #### :hammer: Development
-* Upgrade dependencies: `fortawesome` to v6.4, `which-polygon` to v2.2.1, `glob` to v9.2, `temaki` to v5.4, `marked` to v5.0, `core-js-bundle` to v3.30, `osm-auth` to v2.1, `cldr-core` and `cldr-localenames-full` to v43
-* Bundle `package-lock.json` file in repository for faster `clean-install` builds
+* Bundle `package-lock.json` file in repository for faster `npm clean-install` builds
+* Upgrade OSM data dependencies: `id-tagging-schema` to v6.3, `osm-community-index` to 5.5.3
+* Upgrade icon sets: `fortawesome` to v6.4, `temaki` to v5.4
+* Upgrade `osm-auth` to v2.1,
+* Upgrade dev dependencies, including the following major version upgrades: `glob` to v10, `marked` to v5, `cldr-core` and `cldr-localenames-full` to v43, `esbuild` to v0.18
 * Build icons from configured presets source and also process field value `icons` in `npm run build:data`
 
 [#8769]: https://github.com/openstreetmap/iD/pull/8769
+[#8775]: https://github.com/openstreetmap/iD/pull/8775
 [#7427]: https://github.com/openstreetmap/iD/issues/7427
-[#9233]: https://github.com/openstreetmap/iD/issues/9233
 [#9433]: https://github.com/openstreetmap/iD/pull/9433
 [#9482]: https://github.com/openstreetmap/iD/pull/9482
 [#9483]: https://github.com/openstreetmap/iD/pull/9483
@@ -89,8 +305,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9638]: https://github.com/openstreetmap/iD/pull/9638
 [#9640]: https://github.com/openstreetmap/iD/issues/9640
 [#9650]: https://github.com/openstreetmap/iD/pull/9650
+[#9667]: https://github.com/openstreetmap/iD/pull/9667
+[#9673]: https://github.com/openstreetmap/iD/pull/9673
+[#9710]: https://github.com/openstreetmap/iD/issues/9710
+[#9737]: https://github.com/openstreetmap/iD/pull/9737
+[#9738]: https://github.com/openstreetmap/iD/pull/9738
+[schema-builder#98]: https://github.com/ideditor/schema-builder/pull/98
 [@biswajit-k]: https://github.com/biswajit-k
 [@bryceco]: https://github.com/bryceco
+[@soshial]: https://github.com/soshial
+[@Yogurt4]: https://github.com/Yogurt4
 
 
 # 2.25.2
@@ -3305,7 +3529,7 @@ _Open the Map Data pane (shortcut <kbd>F</kbd>) and select "ImproveOSM Issues" t
 * When adding a duplicate tag, focus the existing key instead of adding a "_1" suffix ([#2896])
 * Exclude tags already on object from auto-completion in the All tags list ([#3625])
 * Allow tag values to be entered before keys ([#5872])
-* Allow deletetion of tags while one is focused ([#5878])
+* Allow deletion of tags while one is focused ([#5878])
 * Make address field suggestions case sensitive ([#5887])
 * Replace the "Edit or translate documentation" link text with a pencil icon ([#5753])
 * When upload is disabled, show a tooltip on the button explaining the reason ([#5830])
@@ -3584,7 +3808,7 @@ _Click the new "zoom to" link on the sidebar under the preset icon, or press <kb
 * Fetch multilingual tag descriptions and images from the OSM Wikibase ([#5647], thanks [@nyurik])
 * Set the localization via a URL parameter ([#5644], [#5650], thanks [@tordans])
 * Fix misaligned labels in the right-to-left layout ([#5687], [#5692], [#5699], [#5705], thanks [@iriman])
-* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keboards ([#5663])
+* Press <kbd>²</kbd> to toggle the sidebar on AZERTY keyboards ([#5663])
 * Press <kbd>?</kbd> to toggle the help pane regardless of the localization ([#5663])
 * Display translated names and descriptions of more background sources ([#5737])
 

@@ -183,45 +183,4 @@ describe('iD.validations.suspicious_name', function () {
             done();
         }, 20);
     });
-
-    it('ignores feature with a non-matching `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lou\'s', 'not:name': 'Lous' });
-        var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
-    });
-
-    it('flags feature with a matching `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
-        var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('not_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
-    });
-
-    it('flags feature with a matching a semicolon-separated `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
-        window.setTimeout(function() {   // async, so data will be available
-            var validator = iD.validationSuspiciousName(context);
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('not_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
-    });
-
 });

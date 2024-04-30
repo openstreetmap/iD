@@ -2,7 +2,6 @@
 /* Downloads the latest translations from Transifex */
 const chalk = require('chalk');
 const fs = require('fs');
-const fetch = require('node-fetch');
 const YAML = require('js-yaml');
 const transifexApi = require('@transifex/api').transifexApi;
 
@@ -197,6 +196,8 @@ function getLanguage(resourceId) {
   return async (code, callback) => {
     try {
       code = code.replace(/-/g, '_');
+      // random delay to avoid rate-limit of Transifex' API
+      await delay(Math.random() * 60000);
       const url = await transifexApi.ResourceTranslationsAsyncDownload.download({
         resource: {data:{type:'resources', id:`o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`}},
         language: {data:{type:'languages', id:`l:${code}`}},
@@ -305,4 +306,8 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       }
     }
   });
+}
+
+function delay(t) {
+  return new Promise(resolve => { setTimeout(resolve, t); });
 }

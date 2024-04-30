@@ -12,6 +12,7 @@ import { actionDeleteMembers } from '../../actions/delete_members';
 
 import { modeSelect } from '../../modes/select';
 import { osmEntity, osmRelation } from '../../osm';
+import { isColourValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
@@ -205,6 +206,18 @@ export function uiSectionRawMembershipEditor(context) {
     }
 
 
+    function downloadMembers(d3_event, d) {
+        d3_event.preventDefault();
+        const button = d3_select(this);
+
+        // display the loading indicator
+        button.classed('loading', true);
+        context.loadEntity(d.relation.id, function() {
+            section.reRender();
+        });
+    }
+
+
     function deleteMembership(d3_event, d) {
         this.blur();           // avoid keeping focus on the button
         if (d === 0) return;   // called on newrow (shouldn't happen)
@@ -239,12 +252,29 @@ export function uiSectionRawMembershipEditor(context) {
 
         var graph = context.graph();
 
-        function baseDisplayLabel(entity) {
+        function baseDisplayValue(entity) {
             var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
             var entityName = utilDisplayName(entity) || '';
 
             return presetName + ' ' + entityName;
+        }
+
+        function baseDisplayLabel(entity) {
+            var matched = presetManager.match(entity, graph);
+            var presetName = (matched && matched.name()) || t('inspector.relation');
+            var entityName = utilDisplayName(entity) || '';
+
+            return selection => {
+                selection
+                    .append('b')
+                    .text(presetName + ' ');
+                selection
+                    .append('span')
+                    .classed('has-colour', entity.tags.colour && isColourValid(entity.tags.colour))
+                    .style('border-color', entity.tags.colour)
+                    .text(entityName);
+            };
         }
 
         var explicitRelation = q && context.hasEntity(q.toLowerCase());
@@ -253,17 +283,22 @@ export function uiSectionRawMembershipEditor(context) {
 
             result.push({
                 relation: explicitRelation,
-                value: baseDisplayLabel(explicitRelation) + ' ' + explicitRelation.id
+                value: baseDisplayValue(explicitRelation) + ' ' + explicitRelation.id,
+                display: baseDisplayLabel(explicitRelation)
             });
         } else {
 
             context.history().intersects(context.map().extent()).forEach(function(entity) {
                 if (entity.type !== 'relation' || entity.id === entityID) return;
 
-                var value = baseDisplayLabel(entity);
+                var value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
-                result.push({ relation: entity, value: value });
+                result.push({
+                    relation: entity,
+                    value,
+                    display: baseDisplayLabel(entity)
+                });
             });
 
             result.sort(function(a, b) {
@@ -349,7 +384,16 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
+            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
+            .style('border-color', d => d.relation.tags.colour)
             .text(function(d) { return utilDisplayName(d.relation); });
+
+        labelEnter
+            .append('button')
+            .attr('class', 'members-download')
+            .attr('title', t('icons.download'))
+            .call(svgIcon('#iD-icon-load'))
+            .on('click', downloadMembers);
 
         labelEnter
             .append('button')
@@ -364,6 +408,13 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('title', t('icons.zoom_to'))
             .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
             .on('click', zoomToRelation);
+
+        items = items.merge(itemsEnter);
+        items.selectAll('button.members-download')
+            .classed('hide', d => {
+                const graph = context.graph();
+                return d.relation.members.every(m => graph.hasEntity(m.id));
+            });
 
         var wrapEnter = itemsEnter
             .append('div')

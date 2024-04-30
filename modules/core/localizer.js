@@ -176,8 +176,17 @@ export function coreLocalizer() {
 
         let locale = _localeCode;
         if (locale.toLowerCase() === 'en-us') locale = 'en';
-        _languageNames = _localeStrings.general[locale].languageNames;
-        _scriptNames = _localeStrings.general[locale].scriptNames;
+
+        // some locales (like fr-FR) have no languageNames or scriptNames,
+        // so we need to load them from the base language (see #8673)
+        _languageNames = (
+          _localeStrings.general[locale].languageNames ||
+          _localeStrings.general[_languageCode].languageNames
+        );
+        _scriptNames = (
+          _localeStrings.general[locale].scriptNames ||
+          _localeStrings.general[_languageCode].scriptNames
+        );
 
         _usesMetric = _localeCode.slice(-3).toLowerCase() !== '-us';
     }
@@ -232,7 +241,7 @@ export function coreLocalizer() {
     * the given `stringId`. If no string can be found in the requested locale,
     * we'll recurse down all the `_localeCodes` until one is found.
     *
-    * @param  {string}   stringId      string identifier
+    * @param  {string}   origStringId  string identifier
     * @param  {object?}  replacements  token replacements and default string
     * @param  {string?}  locale        locale to use (defaults to currentLocale)
     * @return {string?}  localized string
@@ -390,9 +399,27 @@ export function coreLocalizer() {
       return ret;
     };
 
+    // Adds or updates a localized text wrapped as an HTML span element with locale info to the DOM
+    localizer.t.addOrUpdate = function(stringId, replacements, locale) {
+      const ret = function(selection) {
+        const info = localizer.tInfo(stringId, replacements, locale);
+        const span = selection.selectAll('span.localized-text').data([info]);
+        const enter = span.enter()
+            .append('span')
+            .classed('localized-text', true);
+        span.merge(enter)
+            .attr('lang', info.locale || 'und')
+            .text((replacements && replacements.prefix || '')
+                + info.text
+                + (replacements &&replacements.suffix || ''));
+      };
+      ret.stringId = stringId;
+      return ret;
+    };
+
     localizer.languageName = (code, options) => {
 
-        if (_languageNames[code]) {  // name in locale language
+        if (_languageNames && _languageNames[code]) {  // name in locale language
           // e.g. "German"
           return _languageNames[code];
         }
@@ -409,9 +436,9 @@ export function coreLocalizer() {
           } else if (langInfo.base && langInfo.script) {
             const base = langInfo.base;   // the code of the language this is based on
 
-            if (_languageNames[base]) {   // base language name in locale language
+            if (_languageNames && _languageNames[base]) {   // base language name in locale language
               const scriptCode = langInfo.script;
-              const script = _scriptNames[scriptCode] || scriptCode;
+              const script = (_scriptNames && _scriptNames[scriptCode]) || scriptCode;
               // e.g. "Serbian (Cyrillic)"
               return localizer.t('translate.language_and_code', { language: _languageNames[base], code: script });
 

@@ -37,7 +37,7 @@ export function uiFieldAccess(field, context) {
             .attr('class', function(d) { return 'labeled-input preset-access-' + d; });
 
         enter
-            .append('span')
+            .append('div')
             .attr('class', 'label preset-label-access')
             .attr('for', function(d) { return 'preset-input-access-' + d; })
             .html(function(d) { return field.t.html('types.' + d); });
@@ -212,6 +212,11 @@ export function uiFieldAccess(field, context) {
             },
             construction: {
                 access: 'no'
+            },
+            busway: {
+                access: 'no',
+                bus: 'designated',
+                emergency: 'yes',
             }
         },
         barrier: {

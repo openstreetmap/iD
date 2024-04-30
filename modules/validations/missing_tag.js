@@ -1,6 +1,5 @@
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
-import { osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -9,7 +8,7 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationMissingTag(context) {
     var type = 'missing_tag';
 
-    function hasDescriptiveTags(entity, graph) {
+    function hasDescriptiveTags(entity) {
         var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
         var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
@@ -25,10 +24,7 @@ export function validationMissingTag(context) {
             entity.tags.type === 'multipolygon') {
             // this relation's only interesting tag just says its a multipolygon,
             // which is not descriptive enough
-
-            // It's okay for a simple multipolygon to have no descriptive tags
-            // if its outer way has them (old model, see `outdated_tags.js`)
-            return osmOldMultipolygonOuterMemberOfRelation(entity, graph);
+            return false;
         }
 
         return entityDescriptiveKeys.length > 0;
@@ -58,7 +54,7 @@ export function validationMissingTag(context) {
 
             if (Object.keys(entity.tags).length === 0) {
                 subtype = 'any';
-            } else if (!hasDescriptiveTags(entity, graph)) {
+            } else if (!hasDescriptiveTags(entity)) {
                 subtype = 'descriptive';
             } else if (isUntypedRelation(entity)) {
                 subtype = 'relation_type';

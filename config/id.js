@@ -14,6 +14,7 @@ const nsiCdnUrl = ENV__ID_NSI_CDN_URL
 const defaultOsmApiConnections = {
   live: {
     url: 'https://www.openstreetmap.org',
+    apiUrl: 'https://api.openstreetmap.org',
     client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
     client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q'
   },
@@ -31,6 +32,7 @@ if (ENV__ID_API_CONNECTION_URL !== null &&
   // see https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2
   osmApiConnections.push({
     url: ENV__ID_API_CONNECTION_URL,
+    apiUrl: ENV__ID_API_CONNECTION_API_URL,
     client_id: ENV__ID_API_CONNECTION_CLIENT_ID,
     client_secret: ENV__ID_API_CONNECTION_CLIENT_SECRET
   });
@@ -51,6 +53,9 @@ const taginfoApiUrl = ENV__ID_TAGINFO_API_URL
 const nominatimApiUrl = ENV__ID_NOMINATIM_API_URL
   || 'https://nominatim.openstreetmap.org/';
 
+// support/donation message on upload success screen
+const showDonationMessage = ENV__ID_SHOW_DONATION_MESSAGE !== 'false';
+
 export {
   presetsCdnUrl,
   ociCdnUrl,
@@ -59,4 +64,5 @@ export {
   osmApiConnections,
   taginfoApiUrl,
   nominatimApiUrl,
+  showDonationMessage
 };

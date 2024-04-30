@@ -251,7 +251,9 @@ export function rendererBackground(context) {
       mapillary: 'Mapillary Images',
       'mapillary-map-features': 'Mapillary Map Features',
       'mapillary-signs': 'Mapillary Signs',
-      kartaview: 'KartaView Images'
+      kartaview: 'KartaView Images',
+      vegbilder: 'Norwegian Road Administration Images',
+      mapilio: 'Mapilio Images'
     };
 
     for (let layerID in photoOverlayLayers) {
