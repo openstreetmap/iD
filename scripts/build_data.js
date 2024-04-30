@@ -4,7 +4,6 @@ const fs = require('fs');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
-const fetch = require('node-fetch');
 const lodash = require('lodash');
 
 const languageNames = require('./language_names.js');
@@ -101,12 +100,7 @@ function buildData() {
       // Fetch the icons that are needed by the expected tagging schema version
       fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
       fetchOrRequire(`${presetsUrl}/dist/preset_categories.min.json`),
-      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`),
-      // WARNING: we fetch the bleeding edge data too to make sure we're always hosting the
-      // latest icons, but note that the format could break at any time
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/presets.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/preset_categories.min.json'),
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/dist/fields.min.json')
+      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`)
     ])
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then((results) => {
@@ -119,10 +113,20 @@ function buildData() {
             faIcons.add(datum.icon);
           }
           if (datum.icons) {
-            Object.values(datum.icons).filter(icon => /^fa[srb]-/.test(icon)).forEach(faIcons.add);
+            Object.values(datum.icons)
+              .filter(icon => /^fa[srb]-/.test(icon))
+              .forEach(icon => faIcons.add(icon));
           }
         }
       });
+    }).then(() =>
+      // also fetch the bleeding edge data too to make sure we're always hosting the latest icons
+      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/interim/icons.json')
+    ).then(response => response.json()).then(cuttingEdgeIcons => {
+      cuttingEdgeIcons
+        .filter(icon => /^fa[srb]-/.test(icon))
+        .forEach(icon => faIcons.add(icon));
+    }).then(() => {
       // copy over only those Font Awesome icons that we need
       writeFaIcons(faIcons);
     })

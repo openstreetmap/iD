@@ -1,7 +1,7 @@
 import deepEqual from 'fast-deep-equal';
 import { bisector as d3_bisector } from 'd3-array';
 
-import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
+import { osmEntity } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
@@ -90,20 +90,12 @@ export function svgAreas(projection, context) {
     function drawAreas(selection, graph, entities, filter) {
         var path = svgPath(projection, graph, true);
         var areas = {};
-        var multipolygon;
         var base = context.history().base();
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
-
-            multipolygon = osmIsOldMultipolygonOuterMember(entity, graph);
-            if (multipolygon) {
-                areas[multipolygon.id] = {
-                    entity: multipolygon.mergeTags(entity.tags),
-                    area: Math.abs(entity.area(graph))
-                };
-            } else if (!areas[entity.id]) {
+            if (!areas[entity.id]) {
                 areas[entity.id] = {
                     entity: entity,
                     area: Math.abs(entity.area(graph))

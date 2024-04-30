@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
 const fs = require('fs');
 

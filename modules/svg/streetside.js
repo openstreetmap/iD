@@ -379,6 +379,10 @@ export function svgStreetside(projection, context, dispatch) {
         return !!getService();
     };
 
+    drawImages.rendered = function(zoom) {
+      return zoom >= minZoom;
+    };
+
     init();
 
     return drawImages;

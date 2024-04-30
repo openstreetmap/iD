@@ -19,10 +19,10 @@ export function uiSettingsCustomData(context) {
         };
         var _currSettings = {
             fileList: (dataLayer && dataLayer.fileList()) || null,
-            url: prefs('settings-custom-data-url')
+            // url: prefs('settings-custom-data-url')
         };
 
-        // var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+        // var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
         modal

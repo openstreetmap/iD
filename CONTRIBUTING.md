@@ -166,21 +166,17 @@ open while we wait for something to happen.
 
 Light grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
-(ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
 
 * <sub>[![wontfix][wontfix]][wontfix_link]
 [![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
-[![wontfix-ISATIDL][wontfix-ISATIDL]][wontfix-ISATIDL_link]
 [![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
 
 [wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
 [wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
-[wontfix-ISATIDL]: http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee
 [wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
 
 [wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
 [wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
-[wontfix-ISATIDL_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-ISATIDL
 [wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
 
 Special:
@@ -232,10 +228,11 @@ new language: it's replaced with a place name when iD presents the text. So a
 French translation of `Couldn't locate a place named '{name}'` would look like
 `Impossible de localiser l'endroit nommé '{name}'`.
 
-The translations for presets consist of the names of presets, labels for
+The translations for presets, [maintained in the id-tagging-schema repository](https://github.com/openstreetmap/id-tagging-schema), consist of the names of presets, labels for
 preset fields, and lists of search terms. You do _not_ need to translate the
 search terms literally -- use a set of synonyms and related terms appropriate
 to the target language, separated by commas.
+For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating). 
 
 You can check your translations on the [development preview site](https://ideditor.netlify.app),
 which is updated every time we change the `develop` branch.
@@ -373,10 +370,7 @@ Note that in order to run the tests, Chrome needs to be installed on the system.
 
 ### Building / Installing
 
-You can rebuild iD completely with the command `npm run all`.
-
-iD will be built to the `dist` directory. This directory is self-contained; you can copy it
-into the public directory of your webserver to deploy iD.
+Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to build and run iD.
 
 
 ### Licensing

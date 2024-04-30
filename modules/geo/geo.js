@@ -1,7 +1,7 @@
 // constants
 var TAU = 2 * Math.PI;
-var EQUATORIAL_RADIUS = 6356752.314245179;
-var POLAR_RADIUS = 6378137.0;
+const EQUATORIAL_RADIUS = 6.3781370E6;
+const POLAR_RADIUS = 6.3567523E6;
 
 
 export function geoLatToMeters(dLat) {

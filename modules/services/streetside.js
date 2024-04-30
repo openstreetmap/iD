@@ -7,22 +7,20 @@ import {
 
 import RBush from 'rbush';
 import { t, localizer } from '../core/localizer';
-import { jsonpRequest } from '../util/jsonp_request';
 
 import {
   geoExtent, geoMetersToLat, geoMetersToLon, geoPointInPolygon,
   geoRotate, geoScaleToZoom, geoVecLength
 } from '../geo';
 
-import { utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
 
-const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
-const streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
-const bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
-const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
-const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
-const maxResults = 2000;
+const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}';
+const maxResults = 500;
+const bubbleAppKey = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
+const pannellumViewerCSS = 'pannellum/pannellum.css';
+const pannellumViewerJS = 'pannellum/pannellum.js';
 const tileZoom = 16.5;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
 const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
@@ -98,40 +96,39 @@ function loadNextTilePage(which, url, tile) {
   const id = tile.id + ',' + String(nextPage);
   if (cache.loaded[id] || cache.inflight[id]) return;
 
-  cache.inflight[id] = getBubbles(url, tile, (bubbles) => {
+  cache.inflight[id] = getBubbles(url, tile, response => {
     cache.loaded[id] = true;
     delete cache.inflight[id];
-    if (!bubbles) return;
+    if (!response) return;
 
-    // [].shift() removes the first element, some statistics info, not a bubble point
-    bubbles.shift();
+    if (response.resourceSets[0].resources.length === maxResults) {
+      // there are more bubbles than the response can fit: re-fetch using tile split into 4
+      const split = tile.extent.split();
+      loadNextTilePage(which, url, { id: tile.id + ',a', extent: split[0] });
+      loadNextTilePage(which, url, { id: tile.id + ',b', extent: split[1] });
+      loadNextTilePage(which, url, { id: tile.id + ',c', extent: split[2] });
+      loadNextTilePage(which, url, { id: tile.id + ',d', extent: split[3] });
+    }
 
-    const features = bubbles.map(bubble => {
-      if (cache.points[bubble.id]) return null;  // skip duplicates
+    const features = response.resourceSets[0].resources.map(bubble => {
+      const bubbleId = bubble.imageUrl;
+      if (cache.points[bubbleId]) return null;  // skip duplicates
 
-      const loc = [bubble.lo, bubble.la];
+      const loc = [bubble.lon, bubble.lat];
       const d = {
         loc: loc,
-        key: bubble.id,
+        key: bubbleId,
+        imageUrl: bubble.imageUrl.replace('{subdomain}',
+          bubble.imageUrlSubdomains[0]
+        ),
         ca: bubble.he,
-        captured_at: bubble.cd,
+        captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',
-        // nbn: bubble.nbn,
-        // pbn: bubble.pbn,
-        // ad: bubble.ad,
-        // rn: bubble.rn,
-        pr: bubble.pr,  // previous
-        ne: bubble.ne,  // next
         pano: true,
         sequenceKey: null
       };
 
-      cache.points[bubble.id] = d;
-
-      // a sequence starts here
-      if (bubble.pr === undefined) {
-        cache.leaders.push(bubble.id);
-      }
+      cache.points[bubbleId] = d;
 
       return {
         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -141,66 +138,10 @@ function loadNextTilePage(which, url, tile) {
 
     cache.rtree.load(features);
 
-    connectSequences();
-
     if (which === 'bubbles') {
       dispatch.call('loadedImages');
     }
   });
-}
-
-
-// call this sometimes to connect the bubbles into sequences
-function connectSequences() {
-  let cache = _ssCache.bubbles;
-  let keepLeaders = [];
-
-  for (let i = 0; i < cache.leaders.length; i++) {
-    let bubble = cache.points[cache.leaders[i]];
-    let seen = {};
-
-    // try to make a sequence.. use the key of the leader bubble.
-    let sequence = { key: bubble.key, bubbles: [] };
-    let complete = false;
-
-    do {
-      sequence.bubbles.push(bubble);
-      seen[bubble.key] = true;
-
-      if (bubble.ne === undefined) {
-        complete = true;
-      } else {
-        bubble = cache.points[bubble.ne];  // advance to next
-      }
-    } while (bubble && !seen[bubble.key] && !complete);
-
-
-    if (complete) {
-      _ssCache.sequences[sequence.key] = sequence;
-
-      // assign bubbles to the sequence
-      for (let j = 0; j < sequence.bubbles.length; j++) {
-        sequence.bubbles[j].sequenceKey = sequence.key;
-      }
-
-      // create a GeoJSON LineString
-      sequence.geojson = {
-        type: 'LineString',
-        properties: {
-          captured_at: sequence.bubbles[0] ? sequence.bubbles[0].captured_at : null,
-          captured_by: sequence.bubbles[0] ? sequence.bubbles[0].captured_by : null,
-          key: sequence.key
-        },
-        coordinates: sequence.bubbles.map(d => d.loc)
-      };
-
-    } else {
-      keepLeaders.push(cache.leaders[i]);
-    }
-  }
-
-  // couldn't complete these, save for later
-  cache.leaders = keepLeaders;
 }
 
 
@@ -209,24 +150,32 @@ function connectSequences() {
  */
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
-  let urlForRequest = url + utilQsString({
-    n: rect[3],
-    s: rect[1],
-    e: rect[2],
-    w: rect[0],
-    c: maxResults,
-    appkey: bubbleAppKey,
-    jsCallback: '{callback}'
-  });
+  let urlForRequest = url
+    .replace('{key}', bubbleAppKey)
+    .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
+    .replace('{count}', maxResults);
 
-  return jsonpRequest(urlForRequest, (data) => {
-    if (!data || data.error) {
-      callback(null);
-    } else {
-      callback(data);
-    }
-  });
-}
+    const controller = new AbortController();
+    fetch(urlForRequest, { signal: controller.signal })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error(response.status + ' ' + response.statusText);
+        }
+        return response.json();
+      }).then(function(result) {
+        if (!result) {
+          callback(null);
+        }
+        return callback(result || []);
+      }).catch(function(err) {
+        if (err.name === 'AbortError') {
+        // ignore aborted requests, e.g. from duplicate requests while zooming/panning the map
+        } else {
+          throw new Error(err);
+        }
+      });
+    return controller;
+  }
 
 
 // partition viewport into higher zoom tiles
@@ -418,7 +367,7 @@ export default {
     }
 
     _ssCache = {
-      bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {}, leaders: [] },
+      bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {} },
       sequences: {}
     };
   },
@@ -466,7 +415,7 @@ export default {
     // by default: request 2 nearby tiles so we can connect sequences.
     if (margin === undefined) margin = 2;
 
-    loadTiles('bubbles', bubbleApi, projection, margin);
+    loadTiles('bubbles', streetsideApi, projection, margin);
   },
 
 
@@ -845,15 +794,6 @@ export default {
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
       .call(t.append('streetside.report'));
 
-
-    let bubbleIdQuadKey = d.key.toString(4);
-    const paddingNeeded = 16 - bubbleIdQuadKey.length;
-    for (let i = 0; i < paddingNeeded; i++) {
-      bubbleIdQuadKey = '0' + bubbleIdQuadKey;
-    }
-    const imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
-    const imgUrlSuffix = '.jpg?g=13515&n=z';
-
     // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
     const faceKeys = ['01','02','03','10','11','12'];
 
@@ -864,7 +804,9 @@ export default {
         const xy = qkToXY(quadKey);
         return {
           face: faceKey,
-          url: imgUrlPrefix + faceKey + quadKey + imgUrlSuffix,
+          url: d.imageUrl
+            .replace('{faceId}', faceKey)
+            .replace('{tileId}', quadKey),
           x: xy[0],
           y: xy[1]
         };

@@ -13,7 +13,7 @@ describe('uiCombobox', function() {
         var keyCode = iD.utilKeybinding.keyCodes[key];
         var value = input.property('value');
         var start = input.property('selectionStart');
-        var finis = input.property('selectionEnd');
+        var finish = input.property('selectionEnd');
 
         happen.keydown(input.node(), {keyCode: keyCode});
 
@@ -22,13 +22,13 @@ describe('uiCombobox', function() {
                 break;
 
             case '←':
-                start = finis = Math.max(0, start - 1);
-                input.node().setSelectionRange(start, finis);
+                start = finish = Math.max(0, start - 1);
+                input.node().setSelectionRange(start, finish);
                 break;
 
             case '→':
-                start = finis = Math.max(start + 1, value.length);
-                input.node().setSelectionRange(start, finis);
+                start = finish = Math.max(start + 1, value.length);
+                input.node().setSelectionRange(start, finish);
                 break;
 
             case '↑':
@@ -38,21 +38,21 @@ describe('uiCombobox', function() {
                 break;
 
             case '⌫':
-                value = value.substring(0, start - (start === finis ? 1 : 0)) +
-                    value.substring(finis, value.length);
+                value = value.substring(0, start - (start === finish ? 1 : 0)) +
+                    value.substring(finish, value.length);
                 input.property('value', value);
                 happen.once(input.node(), {type: 'input'});
                 break;
 
             case '⌦':
                 value = value.substring(0, start) +
-                    value.substring(finis + (start === finis ? 1 : 0), value.length);
+                    value.substring(finish + (start === finish ? 1 : 0), value.length);
                 input.property('value', value);
                 happen.once(input.node(), {type: 'input'});
                 break;
 
             default:
-                value = value.substring(0, start) + key + value.substring(finis, value.length);
+                value = value.substring(0, start) + key + value.substring(finish, value.length);
                 input.property('value', value);
                 happen.once(input.node(), {type: 'input'});
         }

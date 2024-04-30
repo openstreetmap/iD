@@ -18,6 +18,7 @@ export function uiSectionDataLayers(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
+    // refers to `modules/svg/layers.js` -> function drawLayers(selection) {...}
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
@@ -385,7 +386,6 @@ export function uiSectionDataLayers(context) {
             dataLayer.fileList(d.fileList);
         }
     }
-
 
     function drawPanelItems(selection) {
 

@@ -87,7 +87,20 @@ export function uiIntroPoint(context, reveal) {
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return chapter.restart();
             _pointID = context.mode().selectedIDs()[0];
-            continueTo(searchPreset);
+
+            if (context.graph().geometry(_pointID) === 'vertex'){
+
+                //disallow all
+                context.map().on('move.intro drawn.intro', null);
+                context.on('enter.intro', null);
+
+                reveal(pointBox, helpHtml('intro.points.place_point_error'), {
+                    buttonText: t.html('intro.ok'),
+                    buttonCallback: function() { return chapter.restart(); }
+                });
+            } else {
+                continueTo(searchPreset);
+            }
         });
 
         function continueTo(nextStep) {

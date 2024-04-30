@@ -24,6 +24,8 @@ export function uiPhotoviewer(context) {
                 if (services.streetside) { services.streetside.hideViewer(context); }
                 if (services.mapillary) { services.mapillary.hideViewer(context); }
                 if (services.kartaview) { services.kartaview.hideViewer(context); }
+                if (services.mapilio) { services.mapilio.hideViewer(context); }
+                if (services.vegbilder) { services.vegbilder.hideViewer(context); }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));
@@ -91,7 +93,7 @@ export function uiPhotoviewer(context) {
                     target.style('height', newHeight + 'px');
                 }
 
-                dispatch.call(eventName, target, utilGetDimensions(target, true));
+                dispatch.call(eventName, target, subtractPadding(utilGetDimensions(target, true), target));
             }
 
             function clamp(num, min, max) {
@@ -150,9 +152,16 @@ export function uiPhotoviewer(context) {
                 .style('width', setPhotoDimensions[0] + 'px')
                 .style('height', setPhotoDimensions[1] + 'px');
 
-            dispatch.call('resize', photoviewer, setPhotoDimensions);
+            dispatch.call('resize', photoviewer, subtractPadding(setPhotoDimensions, photoviewer));
         }
     };
+
+    function subtractPadding(dimensions, selection) {
+        return [
+            dimensions[0] - parseFloat(selection.style('padding-left')) - parseFloat(selection.style('padding-right')),
+            dimensions[1] - parseFloat(selection.style('padding-top')) - parseFloat(selection.style('padding-bottom'))
+        ];
+    }
 
     return utilRebind(photoviewer, dispatch, 'on');
 }

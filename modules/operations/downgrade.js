@@ -62,7 +62,7 @@ export function operationDowngrade(context, selectedIDs) {
         return null;
     }
 
-    var buildingKeysToKeep = ['architect', 'building', 'height', 'layer', 'source', 'type', 'wheelchair'];
+    var buildingKeysToKeep = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'source', 'type', 'wheelchair'];
     var addressKeysToKeep = ['source'];
 
     var operation = function () {
