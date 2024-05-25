@@ -1829,6 +1829,9 @@ en:
       message: '{feature} has the suspicious name "{name}"'
       message_language: '{feature} has the suspicious name "{name}" in {language}'
       reference: "Names should be the actual, on-the-ground names of features."
+    oneway_onelane:
+      message: '{feature} needs a one-way tag since it only has 1 lane'
+      reference: "A road that only has 1 lane must one-way or bidirectional."
     help_request:
       title: 'Help Requests'
       tip: 'Find features where others requested assistance'
@@ -1956,6 +1959,8 @@ en:
         annotation: Added a tunnel.
       address_the_concern:
         title: Address the concern
+      change_lane_tag:
+        title: Increase the number of lanes
       connect_almost_junction:
         annotation: Connected very close features.
       connect_crossing_features:
@@ -2036,6 +2041,15 @@ en:
       tag_as_unsquare:
         title: Tag as physically unsquare
         annotation: Tagged a way as having unsquare corners.
+      tag_as_oneway_yes:
+        title: Tag as one-way
+        annotation: Marked a way as one-way.
+      tag_as_oneway_alternating:
+        title: Tag as bidirectional
+        annotation: Marked a way as bidirectional.
+      tag_as_oneway_reversible:
+        title: Tag as reversible
+        annotation: Marked a way as reversible.
       tag_this_as_higher:
         title: Tag this as higher
       tag_this_as_lower:
