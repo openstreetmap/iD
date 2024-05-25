@@ -111,7 +111,7 @@ Object.assign(osmWay.prototype, {
                 primary_link: 4, secondary_link: 4, tertiary_link: 4,
                 unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, busway: 4, pedestrian: 4,
                 residential: 3.5, service: 3.5, track: 3, cycleway: 2.5,
-                bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5
+                bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5, ladder: 0.5,
             },
             railway: { // width includes ties and rail bed, not just track gauge
                 rail: 2.5, light_rail: 2.5, tram: 2.5, subway: 2.5,
