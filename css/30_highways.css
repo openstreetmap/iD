@@ -538,6 +538,27 @@ path.line.stroke.tag-highway-cycleway,
     stroke: #fff;
 }
 
+/* shared paths */
+path.line.casing.tag-highway-cycleway.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing),
+path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #fff;
+}
+.preset-icon .icon.tag-highway-cycleway.tag-bicycle-designated.tag-foot-designated,
+.preset-icon .icon.tag-highway-path.tag-bicycle-designated.tag-foot-designated {
+    color: #b458ed;
+    fill: #fff;
+}
+path.line.stroke.tag-highway-cycleway.tag-bicycle-designated.tag-foot-designated,
+path.line.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated,
+.preset-icon-container path.casing.tag-highway-cycleway.tag-bicycle-designated.tag-foot-designated,
+.preset-icon-container path.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated {
+    stroke: #b458ed;
+}
+.preset-icon-container path.stroke.tag-highway-cycleway.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing),
+.preset-icon-container path.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #fff;
+}
+
 /* bridleways */
 .preset-icon .icon.tag-route-horse,
 .preset-icon .icon.tag-highway-bridleway {
