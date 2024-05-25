@@ -10,3 +10,16 @@ export function svgIcon(name, svgklass, useklass) {
             .attr('class', useklass);
     };
 }
+
+/** @param {string} url */
+export function svgIconExternal(url) {
+    /** @param {import("d3-selection").Selection} selection */
+    return function drawIcon(selection) {
+        selection.selectAll('img.icon')
+            .data([0])
+            .enter()
+            .append('img')
+            .attr('class', 'icon')
+            .attr('src', url);
+    };
+}
