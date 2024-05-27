@@ -304,6 +304,51 @@
     overflow: hidden
 }
 
+/* panoramax Image Layer */
+.layer-panoramax {
+    pointer-events: none;
+}
+.layer-panoramax .viewfield-group * {
+    fill: purple;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-panoramax .sequence {
+    stroke: purple;
+}
+.photo-controls-panoramax {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-panoramax button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+.ideditor .panoramax-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#ideditor-viewer-panoramax-simple-wrap {
+    height: 100%;
+}
+#ideditor-viewer-panoramax-simple {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
+#ideditor-viewer-panoramax-simple img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden
+}
+
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {
