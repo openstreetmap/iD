@@ -1449,6 +1449,9 @@ en:
   mapilio:
     title: Mapilio
     tooltip: "Street-level photos from Mapilio"
+  panoramax:
+    title: Panoramax
+    tooltip: "Street-level photos from Panoramax"
   street_side:
     minzoom_tooltip: "Zoom in to see street-side photos"
   local_photos:

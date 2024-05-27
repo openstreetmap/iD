@@ -16,6 +16,7 @@ import { svgMapillarySigns } from './mapillary_signs';
 import { svgMapillaryMapFeatures } from './mapillary_map_features';
 import { svgKartaviewImages } from './kartaview_images';
 import { svgMapilioImages } from './mapilio_images';
+import { svgPanoramaxImages } from './panoramax_images';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
 import { svgTouch } from './touch';
@@ -40,6 +41,7 @@ export function svgLayers(projection, context) {
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
         { id: 'kartaview', layer: svgKartaviewImages(projection, context, dispatch) },
         { id: 'mapilio', layer: svgMapilioImages(projection, context, dispatch) },
+        { id: 'panoramax', layer: svgPanoramaxImages(projection, context, dispatch) },
         { id: 'vegbilder', layer: svgVegbilder(projection, context, dispatch) },
         { id: 'local-photos', layer: svgLocalPhotos(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },

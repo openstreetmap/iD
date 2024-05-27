@@ -15,6 +15,7 @@ import serviceVectorTile from './vector_tile';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
 import serviceMapilio from './mapilio';
+import servicePanoramax from './panoramax';
 
 
 export let services = {
@@ -34,7 +35,8 @@ export let services = {
   vectorTile: serviceVectorTile,
   wikidata: serviceWikidata,
   wikipedia: serviceWikipedia,
-  mapilio: serviceMapilio
+  mapilio: serviceMapilio,
+  panoramax: servicePanoramax
 };
 
 export {
@@ -54,5 +56,6 @@ export {
   serviceVectorTile,
   serviceWikidata,
   serviceWikipedia,
-  serviceMapilio
+  serviceMapilio,
+  servicePanoramax
 };
