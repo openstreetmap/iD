@@ -41,19 +41,26 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
 * Login/logout pages are now using the user's locale ([#3595], thanks [@k-yle])
+* Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
+* Fix API URLs for ImproveOSM QA service ([#9993], thanks [@k-yle])
+* Fix icons with inline css styles not properly being displayed on osm.org
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
 [#3595]: https://github.com/openstreetmap/iD/issues/3595
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
+[#9993]: https://github.com/openstreetmap/iD/issues/9993
+[#10181]: https://github.com/openstreetmap/iD/pull/10181
+[@zbycz]: https://github.com/zbycz
 
 
 # 2.29.0
