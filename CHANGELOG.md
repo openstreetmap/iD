@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :tada: New Features
 #### :sparkles: Usability & Accessibility
+* Login/logout pages are now using the user's locale ([#3595], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 #### :hammer: Development
 
+[#3595]: https://github.com/openstreetmap/iD/issues/3595
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
 
 
