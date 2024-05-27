@@ -4,6 +4,7 @@ import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
+import { getRadiusInPixels, getRadiusTag } from '../core';
 
 export function svgPoints(projection, context) {
 
@@ -104,6 +105,22 @@ export function svgPoints(projection, context) {
         enter
             .append('path')
             .call(markerPath, 'shadow');
+
+        // add a ring if there's a radius/diameter tag
+        enter
+            .filter((d) => getRadiusTag(d.tags))
+            .append('circle')
+            .attr('class', 'radius')
+            .attr('data-nodeId', node => node.id);
+
+        // we need to trigger a re-render when the zoom changes
+        selection
+            .selectAll('.radius')
+            .data([zoom])
+            .attr('r', (_zoom, _zero, [self]) => {
+                const node = graph.entities[self.dataset.nodeId];
+                return getRadiusInPixels(node, context.projection);
+            });
 
         enter
             .append('ellipse')
