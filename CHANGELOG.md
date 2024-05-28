@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.30.0-dev)
 
 #### :tada: New Features
+* Allow to start up iD with a preselected OSM note or multiselection of OSM ids in the `id` hash parameter
 #### :sparkles: Usability & Accessibility
 * Login/logout pages are now using the user's locale ([#3595], thanks [@k-yle])
 * Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
