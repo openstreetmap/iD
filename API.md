@@ -29,7 +29,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
-* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity, and, unless a `map` parameter is also provided, centers the map on it.<br/>
+* __`id`__ - Selects the specified OSM node, way, relation or note, and, unless a `map` parameter is also provided, centers the map on it. Supported formats are: a) `[nwr]<osm-id>` where the character 'n', 'w', or 'r' correspond to a OSM node, way or relation, repectively; or b) `<osm-type>/<osm-id>` which also allows to specify OSM notes (example: `note/1`).<br/>
   _Example:_ `id=n1207480649`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Multiple codes may be specified in order of preference. The first valid code will be the locale, while the rest will be used as fallbacks if certain text hasn't been translated. The default locale preferences are set by the browser.<br/>
   _Example:_ `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>

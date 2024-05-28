@@ -1,4 +1,5 @@
 import _debounce from 'lodash-es/debounce';
+import _throttle from 'lodash-es/throttle';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -14,7 +15,7 @@ import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
 import { geoRawMercator } from '../geo/raw_mercator';
-import { modeSelect } from '../modes/select';
+import { modeSelect, modeSelectNote } from '../modes';
 import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
@@ -176,6 +177,7 @@ export function coreContext() {
       _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
     }
   };
+
   // Download single note
   context.loadNote = (entityID, callback) => {
     if (_connection) {
@@ -185,29 +187,50 @@ export function coreContext() {
   };
 
   context.zoomToEntity = (entityID, zoomTo) => {
+    context.zoomToEntities([entityID], zoomTo);
+  };
 
+  context.zoomToEntities = (entityIDs, zoomTo) => {
     // be sure to load the entity even if we're not going to zoom to it
-    context.loadEntity(entityID, (err, result) => {
+    let loadedEntities = [];
+    const throttledZoomTo = _throttle(() => _map.zoomTo(loadedEntities), 500);
+    entityIDs.forEach(entityID => context.loadEntity(entityID, (err, result) => {
       if (err) return;
+      loadedEntities.push(result.data.find(e => e.id === entityID));
       if (zoomTo !== false) {
-          const entity = result.data.find(e => e.id === entityID);
-          if (entity) {
-            _map.zoomTo(entity);
-          }
+        throttledZoomTo();
       }
-    });
+    }));
 
     _map.on('drawn.zoomToEntity', () => {
-      if (!context.hasEntity(entityID)) return;
+      if (!entityIDs.every(entityID => context.hasEntity(entityID))) return;
       _map.on('drawn.zoomToEntity', null);
       context.on('enter.zoomToEntity', null);
-      context.enter(modeSelect(context, [entityID]));
+      context.enter(modeSelect(context, entityIDs));
     });
 
     context.on('enter.zoomToEntity', () => {
       if (_mode.id !== 'browse') {
         _map.on('drawn.zoomToEntity', null);
         context.on('enter.zoomToEntity', null);
+      }
+    });
+  };
+
+  context.zoomToNote = (noteId, zoomTo) => {
+    context.loadNote(noteId, (err, result) => {
+      if (err) return;
+      if (zoomTo === false) return;
+      const entity = result.data.find(e => e.id === noteId);
+      if (entity) {
+          // zoom to, used note loc
+          const note = services.osm.getNote(noteId);
+          context.map().centerZoom(note.loc,15);
+          // open note layer
+          const noteLayer = context.layers().layer('notes');
+          noteLayer.enabled(true);
+          // select the note
+          context.enter(modeSelectNote(context, noteId));
       }
     });
   };
