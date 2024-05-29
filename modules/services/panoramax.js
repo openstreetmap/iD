@@ -7,15 +7,15 @@ import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
-import {geoExtent, geoScaleToZoom} from '../geo';
-import {localizer} from '../core/localizer';
+import { geoExtent, geoScaleToZoom } from '../geo';
+import { localizer } from '../core/localizer';
 
-const apiUrl = 'https://end.mapilio.com';
-const imageBaseUrl = 'https://cdn.mapilio.com/im';
-const baseTileUrl = 'https://geo.mapilio.com/geoserver/gwc/service/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&LAYER=mapilio:';
+const apiUrl = 'https://panoramax.openstreetmap.fr/api';
+const tileUrl = apiUrl + '/map/{z}/{x}/{y}.pbf';
+
 const pointLayer = 'map_points';
 const lineLayer = 'map_roads_line';
-const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
+
 
 const minZoom = 14;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines');
@@ -67,7 +67,7 @@ function searchLimited(limit, projection, rtree) {
         }, []);
 }
 
-// Load all data for the specified type from Mapilio vector tiles
+// Load all data for the specified type from Panoramax vector tiles
 function loadTiles(which, url, maxZoom, projection) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
@@ -182,7 +182,7 @@ function loadTileDataToCache(data, tile) {
 
 function getImageData(imageId, sequenceId) {
 
-    return fetch(apiUrl + `/api/sequence-detail?sequence_uuid=${sequenceId}`, {method: 'GET'})
+    return fetch(apiUrl + `/api/collections/${sequenceId}`, {method: 'GET'})
         .then(function (response) {
             if (!response.ok) {
                 throw new Error(response.status + ' ' + response.statusText);
@@ -198,7 +198,7 @@ function getImageData(imageId, sequenceId) {
 
 
 export default {
-    // Initialize Mapilio
+    // Initialize Panoramax
     init: function() {
         if (!_cache) {
             this.reset();
@@ -235,13 +235,13 @@ export default {
 
     // Load images in the visible area
     loadImages: function(projection) {
-        let url = baseTileUrl + pointLayer + tileStyle;
+        let url = tileUrl;
         loadTiles('images', url, 14, projection);
     },
 
     // Load line in the visible area
     loadLines: function(projection) {
-        let url = baseTileUrl + lineLayer + tileStyle;
+        let url = tileUrl;
         loadTiles('line', url, 14, projection);
     },
 
@@ -290,8 +290,8 @@ export default {
         const selectedSequenceId = _activeImage && _activeImage.sequence_id;
         const selectedImageId =  _activeImage && _activeImage.id;
 
-        const markers = context.container().selectAll('.layer-mapilio .viewfield-group');
-        const sequences = context.container().selectAll('.layer-mapilio .sequence');
+        const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
+        const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
         markers.classed('highlighted', function(d) { return d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
@@ -307,7 +307,7 @@ export default {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
             if (imageKey) {
-                hash.photo = 'mapilio/' + imageKey;
+                hash.photo = 'panoramax/' + imageKey;
             } else {
                 delete hash.photo;
             }
@@ -327,7 +327,7 @@ export default {
         };
         options.scenes[sceneID] = _sceneOptions;
 
-        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio-pnlm', options);
+        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-panoramax-pnlm', options);
     },
 
     selectImage: function (context, id) {
@@ -347,7 +347,7 @@ export default {
 
         if (!d) return this;
 
-        let wrap = context.container().select('.photoviewer .mapilio-wrapper');
+        let wrap = context.container().select('.photoviewer .panoramax-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('');
 
         if (d.capture_time) {
@@ -365,8 +365,8 @@ export default {
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
-            .attr('href', `https://mapilio.com/app?lat=${d.loc[1]}&lng=${d.loc[0]}&zoom=17&pId=${d.id}`)
-            .text('mapilio.com');
+            .attr('href', apiUrl + '/pictures/' + d.id + '/hd.jpg')
+            .text('panoramax.com');
 
         wrap
             .transition()
@@ -429,7 +429,7 @@ export default {
             _pannellumViewer = null;
         }
 
-        let wrap = context.container().select('#ideditor-viewer-mapilio-simple');
+        let wrap = context.container().select('#ideditor-viewer-panoramax-simple');
 
         let imgWrap = wrap.select('img');
 
@@ -446,7 +446,7 @@ export default {
 
         let that = this;
 
-        let imgWrap = context.container().select('#ideditor-viewer-mapilio-simple > img');
+        let imgWrap = context.container().select('#ideditor-viewer-panoramax-simple > img');
 
         if (!imgWrap.empty()) {
             imgWrap.remove();
@@ -454,12 +454,12 @@ export default {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
-        let wrap = context.container().select('.photoviewer').selectAll('.mapilio-wrapper')
+        let wrap = context.container().select('.photoviewer').selectAll('.panoramax-wrapper')
             .data([0]);
 
         let wrapEnter = wrap.enter()
             .append('div')
-            .attr('class', 'photo-wrapper mapilio-wrapper')
+            .attr('class', 'photo-wrapper panoramax-wrapper')
             .classed('hide', true)
             .on('dblclick.zoom', null);
 
@@ -471,7 +471,7 @@ export default {
             .append('div')
             .attr('class', 'photo-controls-wrap')
             .append('div')
-            .attr('class', 'photo-controls-mapilio');
+            .attr('class', 'photo-controls-panoramax');
 
         controlsEnter
             .append('button')
@@ -487,19 +487,19 @@ export default {
 
         wrapEnter
             .append('div')
-            .attr('id', 'ideditor-viewer-mapilio-pnlm');
+            .attr('id', 'ideditor-viewer-panoramax-pnlm');
 
         wrapEnter
             .append('div')
-            .attr('id', 'ideditor-viewer-mapilio-simple-wrap')
+            .attr('id', 'ideditor-viewer-panoramax-simple-wrap')
             .call(imgZoom.on('zoom', zoomPan))
             .append('div')
-            .attr('id', 'ideditor-viewer-mapilio-simple');
+            .attr('id', 'ideditor-viewer-panoramax-simple');
 
 
 
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize.mapilio', () => {
+        context.ui().photoviewer.on('resize.panoramax', () => {
             if (_pannellumViewer) {
                 _pannellumViewer.resize();
             }
@@ -517,11 +517,11 @@ export default {
             const head = d3_select('head');
 
             // load pannellum-viewercss
-            head.selectAll('#ideditor-mapilio-viewercss')
+            head.selectAll('#ideditor-panoramax-viewercss')
                 .data([0])
                 .enter()
                 .append('link')
-                .attr('id', 'ideditor-mapilio-viewercss')
+                .attr('id', 'ideditor-panoramax-viewercss')
                 .attr('rel', 'stylesheet')
                 .attr('crossorigin', 'anonymous')
                 .attr('href', context.asset(pannellumViewerCSS))
@@ -531,11 +531,11 @@ export default {
                 });
 
             // load pannellum-viewerjs
-            head.selectAll('#ideditor-mapilio-viewerjs')
+            head.selectAll('#ideditor-panoramax-viewerjs')
                 .data([0])
                 .enter()
                 .append('script')
-                .attr('id', 'ideditor-mapilio-viewerjs')
+                .attr('id', 'ideditor-panoramax-viewerjs')
                 .attr('crossorigin', 'anonymous')
                 .attr('src', context.asset(pannellumViewerJS))
                 .on('load.serviceMapilio', loaded)
@@ -565,7 +565,7 @@ export default {
 
         function zoomPan(d3_event) {
             var t = d3_event.transform;
-            context.container().select('.photoviewer #ideditor-viewer-mapilio-simple')
+            context.container().select('.photoviewer #ideditor-viewer-panoramax-simple')
                 .call(utilSetTransform, t.x, t.y, t.k);
         }
 
@@ -576,24 +576,21 @@ export default {
         let wrap = context.container().select('.photoviewer')
             .classed('hide', false);
 
-        let isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
+        let isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
 
         if (isHidden) {
             wrap
-                .selectAll('.photo-wrapper:not(.mapilio-wrapper)')
+                .selectAll('.photo-wrapper:not(.panoramax-wrapper)')
                 .classed('hide', true);
 
             wrap
-                .selectAll('.photo-wrapper.mapilio-wrapper')
+                .selectAll('.photo-wrapper.panoramax-wrapper')
                 .classed('hide', false);
         }
 
         return this;
     },
 
-    /**
-     * hideViewer()
-     */
     hideViewer: function (context) {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
@@ -613,7 +610,6 @@ export default {
         return this.setStyles(context, null);
     },
 
-    // Return the current cache
     cache: function() {
         return _cache;
     }
