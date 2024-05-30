@@ -25,6 +25,7 @@ export function uiPhotoviewer(context) {
                 if (services.mapillary) { services.mapillary.hideViewer(context); }
                 if (services.kartaview) { services.kartaview.hideViewer(context); }
                 if (services.mapilio) { services.mapilio.hideViewer(context); }
+                if (services.panoramax) { services.panoramax.hideViewer(context); }
                 if (services.vegbilder) { services.vegbilder.hideViewer(context); }
             })
             .append('div')

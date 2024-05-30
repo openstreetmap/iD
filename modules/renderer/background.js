@@ -13,7 +13,6 @@ import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
-import panoramax from '../services/panoramax';
 
 
 let _imageryIndex = null;

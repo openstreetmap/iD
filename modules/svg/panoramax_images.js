@@ -216,7 +216,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 editOn();
                 update();
                 service.loadImages(projection);
-                service.loadLines(projection);
             } else {
                 editOff();
             }

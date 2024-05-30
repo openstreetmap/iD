@@ -10,12 +10,11 @@ import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } f
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { localizer } from '../core/localizer';
 
-const apiUrl = 'https://panoramax.openstreetmap.fr/api';
-const tileUrl = apiUrl + '/map/{z}/{x}/{y}.pbf';
+const apiUrl = 'https://panoramax.openstreetmap.fr/';
+const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
 
-const pointLayer = 'map_points';
-const lineLayer = 'map_roads_line';
-
+const pictureLayer = 'pictures';
+const sequenceLayer = 'sequences';
 
 const minZoom = 14;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines');
@@ -124,6 +123,9 @@ function loadTile(which, url, tile) {
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new Protobuf(data));
+
+    console.log(vectorTile)
+
     let features,
         cache,
         layer,
@@ -131,28 +133,26 @@ function loadTileDataToCache(data, tile) {
         feature,
         loc,
         d;
-    if (vectorTile.layers.hasOwnProperty(pointLayer)) {
+
+    if (vectorTile.layers.hasOwnProperty(pictureLayer)) {
         features = [];
         cache = _cache.images;
-        layer = vectorTile.layers[pointLayer];
+        layer = vectorTile.layers[pictureLayer];
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
             loc = feature.geometry.coordinates;
 
-            let resolutionArr = feature.properties.resolution.split('x');
-            let sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
-            let sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
-            let isPano = sourceWidth % sourceHeight === 0;
-
             d = {
                 loc: loc,
-                capture_time: feature.properties.capture_time,
+                capture_time: feature.properties.ts,
                 id: feature.properties.id,
-                sequence_id: feature.properties.sequence_uuid,
+                acc_id: feature.properties.account_id,
+                sequence_id: feature.properties.sequences[0],
                 heading: feature.properties.heading,
                 resolution: feature.properties.resolution,
-                isPano: isPano
+                type: feature.properties.type,
+                model: feature.properties.model,
             };
             cache.forImageId[d.id] = d;
             features.push({
@@ -162,18 +162,20 @@ function loadTileDataToCache(data, tile) {
         if (cache.rtree) {
             cache.rtree.load(features);
         }
+        console.log(feature)
     }
 
-    if (vectorTile.layers.hasOwnProperty(lineLayer)) {
+    if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
+        features = [];
         cache = _cache.sequences;
-        layer = vectorTile.layers[lineLayer];
+        layer = vectorTile.layers[sequenceLayer];
 
         for (i = 0; i < layer.length; i++) {
             feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            if (cache.lineString[feature.properties.sequence_uuid]) {
-                cache.lineString[feature.properties.sequence_uuid].push(feature);
+            if (cache.lineString[feature.properties.id]) {
+                cache.lineString[feature.properties.id].push(feature);
             } else {
-                cache.lineString[feature.properties.sequence_uuid] = [feature];
+                cache.lineString[feature.properties.id] = [feature];
             }
         }
     }
@@ -182,7 +184,7 @@ function loadTileDataToCache(data, tile) {
 
 function getImageData(imageId, sequenceId) {
 
-    return fetch(apiUrl + `/api/collections/${sequenceId}`, {method: 'GET'})
+    return fetch(apiUrl + `api/collections/${sequenceId}/items`, {method: 'GET'})
         .then(function (response) {
             if (!response.ok) {
                 throw new Error(response.status + ' ' + response.statusText);
@@ -198,7 +200,6 @@ function getImageData(imageId, sequenceId) {
 
 
 export default {
-    // Initialize Panoramax
     init: function() {
         if (!_cache) {
             this.reset();
@@ -207,7 +208,6 @@ export default {
         this.event = utilRebind(this, dispatch, 'on');
     },
 
-    // Reset cache and state
     reset: function() {
         if (_cache) {
             Object.values(_cache.requests.inflight).forEach(function(request) { request.abort(); });
@@ -297,8 +297,8 @@ export default {
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
-        sequences.classed('highlighted', function(d) { return d.properties.sequence_uuid === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.properties.sequence_uuid === selectedSequenceId; });
+        sequences.classed('highlighted', function(d) { return d.properties.sequence_id === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.sequence_id === selectedSequenceId; });
 
         return this;
     },
@@ -365,8 +365,8 @@ export default {
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
-            .attr('href', apiUrl + '/pictures/' + d.id + '/hd.jpg')
-            .text('panoramax.com');
+            .attr('href', apiUrl + 'api/pictures/' + d.id + '/hd.jpg')
+            .text('panoramax.fr');
 
         wrap
             .transition()
@@ -387,7 +387,7 @@ export default {
 
         getImageData(d.id,d.sequence_id).then(function () {
 
-            if (d.isPano) {
+            if (d.type == "equirectangular") {
                 if (!_pannellumViewer) {
                     that.initViewer();
                 } else {
@@ -525,8 +525,8 @@ export default {
                 .attr('rel', 'stylesheet')
                 .attr('crossorigin', 'anonymous')
                 .attr('href', context.asset(pannellumViewerCSS))
-                .on('load.serviceMapilio', loaded)
-                .on('error.serviceMapilio', function() {
+                .on('load.servicePanoramax', loaded)
+                .on('error.servicePanoramax', function() {
                     reject();
                 });
 
@@ -538,8 +538,8 @@ export default {
                 .attr('id', 'ideditor-panoramax-viewerjs')
                 .attr('crossorigin', 'anonymous')
                 .attr('src', context.asset(pannellumViewerJS))
-                .on('load.serviceMapilio', loaded)
-                .on('error.serviceMapilio', function() {
+                .on('load.servicePanoramax', loaded)
+                .on('error.servicePanoramax', function() {
                     reject();
                 });
         })
