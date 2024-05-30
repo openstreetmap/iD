@@ -43,7 +43,7 @@ export function uiFieldDirectionalCombo(field, context) {
 
         div = div.enter()
             .append('ul')
-            .attr('class', 'rows')
+            .attr('class', 'rows rows-table')
             .merge(div);
 
         items = div.selectAll('li')
@@ -54,7 +54,7 @@ export function uiFieldDirectionalCombo(field, context) {
             .attr('class', function(d) { return 'labeled-input preset-directionalcombo-' + stripcolon(d); });
 
         enter
-            .append('span')
+            .append('div')
             .attr('class', 'label preset-label-directionalcombo')
             .attr('for', function(d) { return 'preset-input-directionalcombo-' + stripcolon(d); })
             .html(function(d) { return field.t.html('types.' + d); });

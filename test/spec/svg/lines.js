@@ -66,37 +66,6 @@ describe('iD.svgLines', function () {
         expect(surface.select('.stroke').classed('tag-natural-wood')).to.be.true;
     });
 
-    it('renders stroke for outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({id: 'w-1', tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: w.id}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, w, r]);
-
-        surface.call(iD.svgLines(projection, context), graph, [w], all);
-
-        expect(surface.select('.stroke.w-1').classed('tag-natural-wood')).to.equal(true, 'outer tag-natural-wood true');
-        expect(surface.select('.stroke.w-1').classed('old-multipolygon')).to.equal(true, 'outer old-multipolygon true');
-    });
-
-    it('adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var o = iD.osmWay({id: 'w-1', nodes: [a.id, b.id, c.id, a.id], tags: {natural: 'wood'}});
-        var i = iD.osmWay({id: 'w-2', nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: o.id, role: 'outer'}, {id: i.id, role: 'inner'}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, o, i, r]);
-
-        surface.call(iD.svgLines(projection, context), graph, [i, o], all);
-
-        expect(surface.select('.stroke.w-1').classed('tag-natural-wood')).to.equal(true, 'outer tag-natural-wood true');
-        expect(surface.select('.stroke.w-1').classed('old-multipolygon')).to.equal(true, 'outer old-multipolygon true');
-        expect(surface.select('.stroke.w-2').classed('tag-natural-wood')).to.equal(true, 'inner tag-natural-wood true');
-        expect(surface.select('.stroke.w-2').classed('old-multipolygon')).to.equal(false, 'inner old-multipolygon false');
-    });
-
     describe('z-indexing', function() {
         var graph = iD.coreGraph([
             iD.osmNode({id: 'a', loc: [0, 0]}),

@@ -17,6 +17,7 @@ import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
+import { isArray } from 'lodash-es';
 
 // constants
 var TILESIZE = 256;
@@ -908,8 +909,17 @@ export function rendererMap(context) {
     };
 
 
-    map.zoomTo = function(entity) {
-        var extent = entity.extent(context.graph());
+    map.zoomTo = function(entities) {
+        if (!isArray(entities)) {
+            entities = [entities];
+        }
+
+        if (entities.length === 0) return map;
+
+        var extent = entities
+            .map(entity => entity.extent(context.graph()))
+            .reduce((a, b) => a.extend(b));
+
         if (!isFinite(extent.area())) return map;
 
         var z2 = clamp(map.trimmedExtentZoom(extent), 0, 20);

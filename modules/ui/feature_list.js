@@ -5,12 +5,13 @@ import * as sexagesimal from '@mapbox/sexagesimal';
 
 import { presetManager } from '../presets';
 import { t } from '../core/localizer';
-import { dmsCoordinatePair } from '../util/units';
+import { dmsCoordinatePair, dmsMatcher } from '../util/units';
 import { coreGraph } from '../core/graph';
 import { geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo';
 import { modeSelect } from '../modes/select';
 import { osmEntity } from '../osm/entity';
+import { isColourValid } from '../osm/tags';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { uiCmd } from './cmd';
@@ -123,7 +124,7 @@ export function uiFeatureList(context) {
 
             if (!q) return result;
 
-            var locationMatch = sexagesimal.pair(q.toUpperCase()) || q.match(/^(-?\d+\.?\d*)\s+(-?\d+\.?\d*)$/);
+            var locationMatch = sexagesimal.pair(q.toUpperCase()) || dmsMatcher(q);
 
             if (locationMatch) {
                 var loc = [Number(locationMatch[0]), Number(locationMatch[1])];
@@ -137,15 +138,15 @@ export function uiFeatureList(context) {
             }
 
             // A location search takes priority over an ID search
-            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
+            var idMatch = !locationMatch && q.match(/(?:^|\W)(node|way|relation|note|[nwr])\W{0,2}0*([1-9]\d*)(?:\W|$)/i);
 
             if (idMatch) {
-                var elemType = idMatch[1].charAt(0);
+                var elemType = idMatch[1] === 'note' ? idMatch[1] : idMatch[1].charAt(0);
                 var elemId = idMatch[2];
                 result.push({
                     id: elemType + elemId,
-                    geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : 'relation',
-                    type: elemType === 'n' ? t('inspector.node') : elemType === 'w' ? t('inspector.way') : t('inspector.relation'),
+                    geometry: elemType === 'n' ? 'point' : elemType === 'w' ? 'line' : elemType === 'note' ? 'note' : 'relation',
+                    type: elemType === 'n' ? t('inspector.node') : elemType === 'w' ? t('inspector.way') : elemType === 'note' ? t('note.note') : t('inspector.relation'),
                     name: elemId
                 });
             }
@@ -231,6 +232,12 @@ export function uiFeatureList(context) {
                     type: t('inspector.relation'),
                     name: q
                 });
+                result.push({
+                    id: 'note' + q,
+                    geometry: 'note',
+                    type: t('note.note'),
+                    name: q
+                });
             }
 
             return result;
@@ -310,6 +317,8 @@ export function uiFeatureList(context) {
             label
                 .append('span')
                 .attr('class', 'entity-name')
+                .classed('has-colour', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour && isColourValid(d.entity.tags.colour))
+                .style('border-color', d => d.entity && d.entity.type === 'relation' && d.entity.tags.colour)
                 .text(function(d) { return d.name; });
 
             enter
@@ -350,6 +359,13 @@ export function uiFeatureList(context) {
                 context.enter(modeSelect(context, [d.entity.id]));
                 context.map().zoomToEase(d.entity);
 
+            } else if (d.geometry  === 'note') {
+                // note
+                // get number part 'note12345'
+                const noteId = d.id.replace(/\D/g, '');
+
+                // load note
+                context.zoomToNote(noteId);
             } else {
                 // download, zoom to, and select the entity with the given ID
                 context.zoomToEntity(d.id);

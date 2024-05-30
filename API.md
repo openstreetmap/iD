@@ -14,7 +14,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
-  _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+  _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
 * __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
@@ -29,7 +29,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
-* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity, and, unless a `map` parameter is also provided, centers the map on it.<br/>
+* __`id`__ - Selects the specified OSM node, way, relation or note, and, unless a `map` parameter is also provided, centers the map on it. Supported formats are: a) `[nwr]<osm-id>` where the character 'n', 'w', or 'r' correspond to a OSM node, way or relation, respectively; or b) `<osm-type>/<osm-id>` which also allows to specify OSM notes (example: `note/1`).<br/>
   _Example:_ `id=n1207480649`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Multiple codes may be specified in order of preference. The first valid code will be the locale, while the rest will be used as fallbacks if certain text hasn't been translated. The default locale preferences are set by the browser.<br/>
   _Example:_ `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>
@@ -106,7 +106,8 @@ In addition, the following parameters are available as **URL query parameters**:
 
 Environment variables or a dotenv file can be used to configure certain aspects of iD at build time.
 
-* __`ID_API_CONNECTION_URL`__, __`ID_API_CONNECTION_CLIENT_ID`__, __`ID_API_CONNECTION_CLIENT_SECRET`__ - Custom [Oauth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server.
+* __`ID_API_CONNECTION_URL`__, __`ID_API_CONNECTION_CLIENT_ID`__, __`ID_API_CONNECTION_CLIENT_SECRET`__ - Custom [OAuth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server.
+* __`ID_API_CONNECTION_API_URL`__ Optional url to use for OSM API calls aftern the initial authentication is complete when using a custom OAuth2 connection (see above). If unspecified, `ID_API_CONNECTION_URL` will be used for both the authentication and subsequent API calls.
 * __`ID_API_CONNECTION`__ - Either `live` or `dev`, if only either one should be made offered for editing.
 * __`ID_PRESETS_CDN_URL`__ - The URL where iD should fetch it's tagging presets from. Needs to point to a CORS enabled web server which is serving the `package.json` and `dist` folder of a repository built on [`@ideditor/schema-builder`](https://github.com/ideditor/schema-builder).
 * __`ENV__ID_OCI_CDN_URL`__ - URL to a hosted version of the [osm-community-index](https://github.com/osmlab/osm-community-index)

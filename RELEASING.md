@@ -8,21 +8,21 @@
 - If you don't have a `transifex.auth` file in the root of your iD checkout,
 you'll need to create a Transifex account, ask @tyr_asd or @bhousel for admin rights
 on the iD project, and then create this file with contents like
-  
+
   ````json
   { "user":"api", "password": "<your-transifex-api-key>" }
   ````
-  
+
   where you insert your personal [transifex api token](https://www.transifex.com/user/settings/api/). This file is not version-controlled and will not be checked in.
 
 ### Update `iD`
 
 #### Update `develop` branch
+
 ```bash
 $  git checkout develop
-$  rm package-lock.json
-$  rm -rf node_modules/editor-layer-index/
-$  npm install
+$  npm clean-install
+$  npm install editor-layer-index
 $  npm run imagery
 $  npm run all
 $  git add . && git commit -m 'npm run imagery'
@@ -31,9 +31,9 @@ $  git add . && git commit -m 'npm run translations'
 ```
 
 - Check and finalize `CHANGELOG.md`
-- Set release version number in `package.json`
 
 ```bash
+$  npm version --no-git-tag-version vA.B.C
 $  git add . && git commit -m 'vA.B.C'
 $  git push origin develop
 ```
@@ -57,9 +57,10 @@ $  git push origin -f release vA.B.C
 $  git checkout develop
 ```
 
-- Increment version number and add `-dev` suffix in `package.json`, e.g. `2.25.0-dev`
+Add section in `CHANGELOG.md` for new version number (e.g. `# Unreleased (2.28.0-dev)`).
 
 ```bash
+$  npm version --no-git-tag-version vAA.BB.0-dev
 $  git add . && git commit -m 'Set development version number'
 $  git push origin develop
 ```

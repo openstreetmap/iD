@@ -300,11 +300,9 @@ export default {
 
         // Register viewer resize handler
         context.ui().photoviewer.on('resize.kartaview', function(dimensions) {
-            imgZoom = d3_zoom()
+            imgZoom
                 .extent([[0, 0], dimensions])
-                .translateExtent([[0, 0], dimensions])
-                .scaleExtent([1, 15])
-                .on('zoom', zoomPan);
+                .translateExtent([[0, 0], dimensions]);
         });
 
 

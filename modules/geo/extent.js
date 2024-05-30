@@ -132,6 +132,16 @@ Object.assign(geoExtent.prototype, {
 
     toParam: function() {
         return this.rectangle().join(',');
+    },
+
+    split: function() {
+        const center = this.center();
+        return [
+            geoExtent(this[0], center),
+            geoExtent([center[0], this[0][1]], [this[1][0], center[1]]),
+            geoExtent(center, this[1]),
+            geoExtent([this[0][0], center[1]], [center[0], this[1][1]])
+        ];
     }
 
 });

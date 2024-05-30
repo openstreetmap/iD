@@ -504,6 +504,12 @@ button.disabled .icon.operation use,
     vertical-align: baseline;
 }
 
+button.loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+    background-size: auto;
+}
+
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -844,7 +850,8 @@ a.hide-toggle {
 .sidebar-component .body {
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
 }
 
@@ -1412,7 +1419,7 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .field-label .label-text {
     padding: 5px 10px 4px 0;
 }
-.field-label .label-text span {
+.field-label .label-text {
     white-space: nowrap;
 }
 
@@ -1584,11 +1591,11 @@ input.date-selector {
     display: flex;
     flex-flow: row nowrap;
 }
-.form-field ul.rows li.labeled-input > span,
 .form-field ul.rows li.labeled-input > div {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
+    line-height: 0.95rem;
 }
 .form-field ul.rows li input {
     border-radius: 0;
@@ -1605,6 +1612,28 @@ input.date-selector {
 .ideditor[dir='rtl'] .form-field ul.rows li.labeled-input input,
 .ideditor[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
+}
+
+/* Field - lists with labeled input items as table
+------------------------------------------------------- */
+.form-field ul.rows.rows-table {
+    display: table;
+    width: 100%;
+}
+.form-field ul.rows.rows-table li.labeled-input {
+    display: table-row;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:first-child {
+    display: table-cell;
+    width: auto;
+    max-width: 170px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:nth-child(2) {
+    display: table-cell;
+    width: auto;
 }
 
 
@@ -1662,7 +1691,6 @@ input.date-selector {
 .form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
-    align-items: center;
     margin-bottom: 3px;
     margin-top: 3px;
     border-radius: 4px;
@@ -1685,6 +1713,8 @@ input.date-selector {
 }
 .form-field-input-multicombo li.chip input {
     width: 1em;
+    height: 11px;
+    margin-top: 7px;
 }
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
@@ -1715,9 +1745,11 @@ input.date-selector {
     flex: 1 1 auto;
     overflow: hidden;
     word-wrap: break-word;
+    margin-top: 4px;
 }
 
-.form-field-input-multicombo a {
+.form-field-input-multicombo a,
+.form-field-input-multicombo button {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
     padding: 0px 5px 0px 5px;
@@ -1727,6 +1759,39 @@ input.date-selector {
     display: block;
     text-align: center;
     flex: 0 0 auto;
+    background: transparent;
+    border: 0;
+}
+
+.form-field-input-multicombo li.chip .field_buttons {
+    display: inline-block;
+    text-align: right;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons a {
+    display: block;
+    float: right;
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
+
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .field_buttons a {
+    float: left;
+}
+
+.form-field-input-multicombo li.chip .field_buttons button {
+    display: inline-block;
+    margin-right: -4px;
+    margin-top: -4px;
+    margin-bottom: -2px;
+    margin-left: -2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons button:hover {
+    background-color: transparent;
 }
 
 .form-field-input-multicombo .input-wrap {
@@ -1990,6 +2055,7 @@ input.date-selector {
 .form-field-input-roadheight input.roadheight-secondary-number,
 .form-field-input-roadspeed input.roadspeed-number {
     flex-basis: 0;
+    width: 0;
 }
 .form-field-input-roadheight input.roadheight-unit,
 .form-field-input-roadheight input.roadheight-secondary-unit {
@@ -2317,9 +2383,8 @@ div.combobox {
     display: block;
     padding: 5px 10px;
     border-top: 1px solid #ccc;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    line-height: 0.95rem;
+    break: all;
 }
 
 .combobox a.selected,
@@ -2366,6 +2431,11 @@ div.combobox {
 
 .combobox .combobox-option.raw-option {
     font-family: monospace;
+    color: #333;
+}
+
+.combobox .combobox-option.virtual-option {
+    font-style: italic;
     color: #333;
 }
 
@@ -2730,13 +2800,18 @@ button.raw-tag-option svg.icon {
 }
 .tag-reference-body.expanded {
     padding-bottom: 10px;
-    display: inline-block;
+    padding-left: 10px;
+    display: block;
 }
-.tag-reference-description {
-
+.ideditor[dir='rtl'] .tag-reference-body.expanded {
+    padding-left: 0;
+    padding-right: 10px;
 }
 .tag-reference-link {
     display: block;
+}
+.tag-reference-link .icon:first-child {
+    margin-left: 0;
 }
 
 img.tag-reference-wiki-image {
@@ -2793,12 +2868,39 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
+.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
+.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
+.feature-list .entity-name.has-colour::before,
+.combobox-parent-relation .has-colour::before {
+    display: inline-block;
+    content: '';
+    margin-left: -5px;
+    margin-right: 5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 4px;
+    border-color: inherit;
+}
+.combobox-parent-relation .has-colour::before  {
+    margin-left: 2px;
+}
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
 .ideditor[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name {
     padding-left:0;
     padding-right: 10px;
 }
+.ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name.has-colour::before,
+.ideditor[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
+.ideditor[dir='rtl'] .feature-list .entity-name.has-colour::before {
+    margin-left: 5px;
+    margin-right: -5px;
+}
+.ideditor[dir='rtl'] .combobox-parent-relation .has-colour::before  {
+    margin-left: 5px;
+    margin-right: 2px;
+}
+
 
 .form-field-input-member > input.member-role {
     border-radius: 0 0 4px 4px;
@@ -4339,6 +4441,7 @@ img.tile-debug {
     z-index: 2;
     background: #000;
     border: #aaa 1px solid;
+    border-radius: 4px;
     box-shadow: 0 0 2em black;
 }
 .ideditor[dir='ltr'] .map-in-map {
@@ -5005,10 +5108,12 @@ img.tile-debug {
 }
 
 .save-summary,
+.save-supporting,
 .save-communityLinks {
     padding: 0px 20px 15px 20px;
 }
 
+.save-supporting,
 .save-communityLinks {
     border-top: 1px solid #ccc;
 }
@@ -5040,6 +5145,7 @@ img.tile-debug {
 }
 
 .summary-view-on-osm,
+.support-the-map,
 .community-name {
     font-size: 14px;
     font-weight: bold;
@@ -5646,7 +5752,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 /* Scrollbars
  ----------------------------------------------------- */
 ::-webkit-scrollbar {
-    height: 20px;
+    height: 10px;
     overflow: visible;
     width: 10px;
     border-left: 1px solid #DDD;
@@ -5672,6 +5778,9 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     ::-webkit-scrollbar-track:hover {
         background-color: rgba(0,0,0,.05);
     }
+}
+body {
+    scrollbar-width: 10px;
 }
 
 

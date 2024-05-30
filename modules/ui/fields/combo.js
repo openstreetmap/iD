@@ -194,6 +194,11 @@ export function uiFieldCombo(field, context) {
     }
 
 
+    function hasStaticValues() {
+        return getOptions().length > 0;
+    }
+
+
     function setStaticValues(callback, filter) {
         _comboData = getOptions();
 
@@ -209,7 +214,9 @@ export function uiFieldCombo(field, context) {
 
     function setTaginfoValues(q, callback) {
         var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
-        setStaticValues(callback, queryFilter);
+        if (hasStaticValues()) {
+            setStaticValues(callback, queryFilter);
+        }
 
         var stringsField = field.resolveReference('stringsCrossReference');
         var fn = _isMulti ? 'multikeys' : 'values';
@@ -283,7 +290,7 @@ export function uiFieldCombo(field, context) {
             _comboData = _comboData.filter(queryFilter);
 
             _comboData = objectDifference(_comboData, _multiData);
-            if (callback) callback(_comboData);
+            if (callback) callback(_comboData, hasStaticValues());
         });
     }
 
@@ -483,7 +490,7 @@ export function uiFieldCombo(field, context) {
             .attr('type', 'text')
             .attr('id', field.domId)
             .call(utilNoAuto)
-            .call(initCombo, selection)
+            .call(initCombo, _container)
             .merge(_input);
 
         if (_isSemi) {
@@ -670,7 +677,12 @@ export function uiFieldCombo(field, context) {
                 .attr('class', 'chip');
 
             enter.append('span');
-            enter.append('a');
+            const field_buttons = enter
+                .append('div')
+                .attr('class', 'field_buttons');
+            field_buttons
+                .append('a')
+                .attr('class', 'remove');
 
             chips = chips.merge(enter)
                 .order()
@@ -707,17 +719,37 @@ export function uiFieldCombo(field, context) {
                 registerDragAndDrop(chips);
             }
 
-            chips.select('span').each(function(d) {
+            chips.each(function(d) {
                 const selection = d3_select(this);
-                if (d.display) {
-                    selection.text('');
-                    d.display(selection);
-                } else {
-                    selection.text(d.value);
+                const text_span = selection.select('span');
+                const field_buttons = selection.select('.field_buttons');
+                const clean_value = d.value.trim();
+                text_span.text('');
+                if (!field_buttons.select('button').empty()) {
+                    field_buttons.select('button').remove();
                 }
+                if (clean_value.startsWith('https://')) {
+                    // create a button to open the link in a new tab
+                    text_span.text(clean_value);
+                    field_buttons.append('button')
+                        .call(svgIcon('#iD-icon-out-link'))
+                        .attr('class', 'form-field-button foreign-id-permalink')
+                        .attr('title', () => t('icons.visit_website'))
+                        .attr('aria-label', () => t('icons.visit_website'))
+                        .on('click', function(d3_event) {
+                            d3_event.preventDefault();
+                            window.open(clean_value, '_blank');
+                        });
+                    return;
+                }
+                if (d.display) {
+                    d.display(text_span);
+                    return;
+                }
+                text_span.text(d.value);
             });
 
-            chips.select('a')
+            chips.select('a.remove')
                 .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')

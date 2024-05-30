@@ -27,47 +27,9 @@ Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bh
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
 * [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
-## Prerequisites
-
-* [Node.js](https://nodejs.org/) version 16.14 or newer
-* [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
-  * Note for Windows users:
-    * Edit `$HOME\.gitconfig`:<br/>
-      Add these lines to avoid checking in files with CRLF newlines<br><pre>
-      [core]
-          autocrlf = input</pre>
-
 ## Installation
 
-To run the current development version of iD on your own computer:
-
-#### Cloning the repository
-
-The repository is reasonably large, and it's unlikely that you need the full history (~200 MB). If you are happy to wait for it all to download, run:
-
-```
-git clone https://github.com/openstreetmap/iD.git
-```
-
-To clone only the most recent version, instead use a 'shallow clone':
-
-```
-git clone --depth=1 https://github.com/openstreetmap/iD.git
-```
-
-If you want to add in the full history later on, perhaps to run `git blame` or `git log`, run `git fetch --depth=1000000`
-
-#### Building iD
-
-1. `cd` into the newly cloned project folder
-2. Run `npm install`
-3. Run `npm run all`
-3. Run `npm start`
-4. Open `http://127.0.0.1:8080/` in a web browser
-
-For guidance on building a packaged version, running tests, and contributing to
-development, see [CONTRIBUTING.md](CONTRIBUTING.md).
-
+Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to install, build and run iD locally.
 
 ## License
 

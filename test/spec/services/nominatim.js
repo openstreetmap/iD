@@ -146,7 +146,11 @@ describe('iD.serviceNominatim', function() {
             nominatim.search('philadelphia', callback);
 
             window.setTimeout(function() {
-                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql({format: 'json', limit: '10'});
+                expect(parseQueryString(fetchMock.calls()[0][0])).to.eql({
+                    q: 'philadelphia',
+                    format: 'json',
+                    limit: '10'
+                });
                 expect(fetchMock.calls()[0][1].headers).to.eql({
                     'Accept-Language': 'en'
                 });
