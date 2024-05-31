@@ -196,7 +196,9 @@ export function coreContext() {
     const throttledZoomTo = _throttle(() => _map.zoomTo(loadedEntities), 500);
     entityIDs.forEach(entityID => context.loadEntity(entityID, (err, result) => {
       if (err) return;
-      loadedEntities.push(result.data.find(e => e.id === entityID));
+      const entity = result.data.find(e => e.id === entityID);
+      if (!entity) return;
+      loadedEntities.push(entity);
       if (zoomTo !== false) {
         throttledZoomTo();
       }
