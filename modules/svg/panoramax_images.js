@@ -8,11 +8,10 @@ import {svgPath, svgPointTransform} from './helpers';
 export function svgPanoramaxImages(projection, context, dispatch) {
     const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     const minZoom = 12;
+    const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _panoramax;
-    const viewFieldZoomLevel = 18;
-
-
+    
     function init() {
         if (svgPanoramaxImages.initialized) return;
         svgPanoramaxImages.enabled = false;

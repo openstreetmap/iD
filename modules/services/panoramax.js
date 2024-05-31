@@ -16,7 +16,7 @@ const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
 const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
 
-const minZoom = 14;
+const minZoom = 15;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines');
 const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
@@ -124,8 +124,6 @@ function loadTile(which, url, tile) {
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new Protobuf(data));
 
-    console.log(vectorTile)
-
     let features,
         cache,
         layer,
@@ -148,12 +146,13 @@ function loadTileDataToCache(data, tile) {
                 capture_time: feature.properties.ts,
                 id: feature.properties.id,
                 acc_id: feature.properties.account_id,
-                sequence_id: feature.properties.sequences[0],
+                sequence_id: feature.properties.sequences.split("\"")[1],
                 heading: feature.properties.heading,
                 resolution: feature.properties.resolution,
                 type: feature.properties.type,
                 model: feature.properties.model,
             };
+            console.log(d.sequence_id)
             cache.forImageId[d.id] = d;
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -162,11 +161,9 @@ function loadTileDataToCache(data, tile) {
         if (cache.rtree) {
             cache.rtree.load(features);
         }
-        console.log(feature)
     }
 
     if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
-        features = [];
         cache = _cache.sequences;
         layer = vectorTile.layers[sequenceLayer];
 
@@ -181,23 +178,6 @@ function loadTileDataToCache(data, tile) {
     }
 
 }
-
-function getImageData(imageId, sequenceId) {
-
-    return fetch(apiUrl + `api/collections/${sequenceId}/items`, {method: 'GET'})
-        .then(function (response) {
-            if (!response.ok) {
-                throw new Error(response.status + ' ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(function (data) {
-            let index = data.data.findIndex((feature) => feature.id === imageId);
-            const {filename, uploaded_hash} = data.data[index];
-            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
-        });
-}
-
 
 export default {
     init: function() {
@@ -236,13 +216,13 @@ export default {
     // Load images in the visible area
     loadImages: function(projection) {
         let url = tileUrl;
-        loadTiles('images', url, 14, projection);
+        loadTiles('images', url, 15, projection);
     },
 
     // Load line in the visible area
     loadLines: function(projection) {
         let url = tileUrl;
-        loadTiles('line', url, 14, projection);
+        loadTiles('line', url, 15, projection);
     },
 
     // Get visible sequences
@@ -281,7 +261,6 @@ export default {
             _activeImage = null;
         }
     },
-
 
     // Update the currently highlighted sequence and selected bubble.
     setStyles: function(context, hovered) {
@@ -384,32 +363,31 @@ export default {
             .selectAll('button.forward')
             .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
 
-
-        getImageData(d.id,d.sequence_id).then(function () {
-
-            if (d.type == "equirectangular") {
-                if (!_pannellumViewer) {
-                    that.initViewer();
-                } else {
-                    // make a new scene
-                    _currScene += 1;
-                    let sceneID = _currScene.toString();
-                    _pannellumViewer
-                        .addScene(sceneID, _sceneOptions)
-                        .loadScene(sceneID);
-
-                    // remove previous scene
-                    if (_currScene > 2) {
-                        sceneID = (_currScene - 1).toString();
-                        _pannellumViewer
-                            .removeScene(sceneID);
-                    }
-                }
+        that.initOnlyPhoto(context, id);
+        /*
+        if (d.type == "equirectangular") {
+            if (!_pannellumViewer) {
+                that.initViewer();
             } else {
-                // make non-panoramic photo viewer
-                that.initOnlyPhoto(context);
+                // make a new scene
+                _currScene += 1;
+                let sceneID = _currScene.toString();
+                _pannellumViewer
+                    .addScene(sceneID, _sceneOptions)
+                    .loadScene(sceneID);
+
+                // remove previous scene
+                if (_currScene > 2) {
+                    sceneID = (_currScene - 1).toString();
+                    _pannellumViewer
+                        .removeScene(sceneID);
+                }
             }
-        });
+        } else {
+            // make non-panoramic photo viewer
+            that.initOnlyPhoto(context);
+        }
+        */
 
         function localeDateString(s) {
             if (!s) return null;
@@ -422,7 +400,7 @@ export default {
         return this;
     },
 
-    initOnlyPhoto: function (context) {
+    initOnlyPhoto: function (context, id) {
 
         if (_pannellumViewer) {
             _pannellumViewer.destroy();
@@ -434,10 +412,10 @@ export default {
         let imgWrap = wrap.select('img');
 
         if (!imgWrap.empty()) {
-            imgWrap.attr('src',_sceneOptions.panorama);
+            imgWrap.attr('src',apiUrl + 'api/pictures/' + id + '/sd.jpg');
         } else {
             wrap.append('img')
-                .attr('src',_sceneOptions.panorama);
+                .attr('src',apiUrl + 'api/pictures/' + id + '/sd.jpg');
         }
 
     },
