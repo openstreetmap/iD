@@ -12,11 +12,12 @@ import { localizer } from '../core/localizer';
 
 const apiUrl = 'https://panoramax.openstreetmap.fr/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
-const imageUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
+const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
+const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
 
 const highDefinition = "hd";
 const standardDefinition = "sd";
-const lowDefinition = "thumb";
+const thumbnailDefinition = "thumb";
 
 const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
@@ -313,11 +314,22 @@ export default {
         _pannellumViewer = window.pannellum.viewer('ideditor-viewer-panoramax-pnlm', options);
     },
 
-    getImageUrl: function(id, definition){
-        const requestUrl = imageUrl.replace('{pictureID}', id)
+    getImageBlob: function(image_id, definition){
+        const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
             .replace('{definition}', definition);
 
         return requestUrl;
+    },
+
+    getImageData: async function(collection_id, image_id){
+        const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
+            .replace('{itemId}', image_id)
+
+        const response = await fetch(requestUrl, { method: 'GET' });
+        if (!response.ok) {
+            throw new Error(response.status + ' ' + response.statusText);
+        }
+        return await response.json();
     },
 
     selectImage: function (context, id) {
@@ -327,7 +339,7 @@ export default {
         let definition = highDefinition;
 
         if(!isHighDefinition){
-            definition = lowDefinition;
+            definition = standardDefinition;
         }
 
         let d = this.cachedImage(id);
@@ -336,7 +348,17 @@ export default {
 
         this.updateUrlImage(d.id);
 
-        requestUrl = this.getImageUrl(d.id, highDefinition);
+        let imageJSON = this.getImageData(d.sequence_id, d.id)
+
+        console.log(imageJSON)["assets"];
+
+        let imageUrl = imageJSON["assets"]["hd"].href; 
+
+        let prevImageId = imageJSON.links.find(x => x.rel === 'prev').id;
+        let nextImageId = imageJSON.links.find(x => x.rel === 'next').id;
+
+        console.log(prevImageId);
+        console.log(nextImageId);
 
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -363,7 +385,7 @@ export default {
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
-            .attr('href', requestUrl)
+            .attr('href', imageUrl)
             .text('panoramax.fr');
 
         wrap
@@ -384,7 +406,7 @@ export default {
 
         if (d.type == "equirectangular") {
             _sceneOptions.type = "equirectangular";
-            _sceneOptions.panorama = requestUrl;
+            _sceneOptions.panorama = imageUrl;
             if (!_pannellumViewer) {
                 that.initViewer();
             } else {
@@ -401,7 +423,7 @@ export default {
                 }
             }
         } else {
-            that.initOnlyPhoto(context, id, highDefinition);
+            that.initOnlyPhoto(context, imageUrl);
         }
 
         function localeDateString(s) {
@@ -415,9 +437,7 @@ export default {
         return this;
     },
 
-    initOnlyPhoto: function (context, id, definition) {
-
-        const requestUrl = this.getImageUrl(id, definition);
+    initOnlyPhoto: function (context, imageUrl) {
 
         if (_pannellumViewer) {
             _pannellumViewer.destroy();
@@ -429,10 +449,10 @@ export default {
         let imgWrap = wrap.select('img');
 
         if (!imgWrap.empty()) {
-            imgWrap.attr('src', requestUrl);
+            imgWrap.attr('src', imageUrl);
         } else {
             wrap.append('img')
-                .attr('src', requestUrl);
+                .attr('src', imageUrl);
         }
 
     },
