@@ -313,16 +313,30 @@ export default {
         _pannellumViewer = window.pannellum.viewer('ideditor-viewer-panoramax-pnlm', options);
     },
 
-    selectImage: function (context, id) {
+    getImageUrl: function(id, definition){
+        const requestUrl = imageUrl.replace('{pictureID}', id)
+            .replace('{definition}', definition);
 
+        return requestUrl;
+    },
+
+    selectImage: function (context, id) {
         let that = this;
-        let url = imageUrl;
+
+        let isHighDefinition = true;
+        let definition = highDefinition;
+
+        if(!isHighDefinition){
+            definition = lowDefinition;
+        }
 
         let d = this.cachedImage(id);
 
         this.setActiveImage(d);
 
         this.updateUrlImage(d.id);
+
+        requestUrl = this.getImageUrl(d.id, highDefinition);
 
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -333,9 +347,6 @@ export default {
 
         let wrap = context.container().select('.photoviewer .panoramax-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('');
-
-        const requestUrl = url.replace('{pictureID}', id)
-            .replace('{definition}', highDefinition);
 
         if (d.capture_time) {
             attribution
@@ -366,25 +377,23 @@ export default {
 
         wrap
             .selectAll('button.back')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id - 1));
+            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+ id - 1));
         wrap
             .selectAll('button.forward')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
+            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+ id + 1));
 
-        that.initOnlyPhoto(context, id);
-        /*
         if (d.type == "equirectangular") {
+            _sceneOptions.type = "equirectangular";
+            _sceneOptions.panorama = requestUrl;
             if (!_pannellumViewer) {
                 that.initViewer();
             } else {
-                // make a new scene
                 _currScene += 1;
                 let sceneID = _currScene.toString();
                 _pannellumViewer
                     .addScene(sceneID, _sceneOptions)
                     .loadScene(sceneID);
 
-                // remove previous scene
                 if (_currScene > 2) {
                     sceneID = (_currScene - 1).toString();
                     _pannellumViewer
@@ -392,10 +401,8 @@ export default {
                 }
             }
         } else {
-            // make non-panoramic photo viewer
-            that.initOnlyPhoto(context);
+            that.initOnlyPhoto(context, id, highDefinition);
         }
-        */
 
         function localeDateString(s) {
             if (!s) return null;
@@ -408,20 +415,9 @@ export default {
         return this;
     },
 
-    initOnlyPhoto: function (context, id) {
+    initOnlyPhoto: function (context, id, definition) {
 
-        // TODO: change it into a checkbox in UI
-        let isHighDefinition = true;
-        let definition = highDefinition;
-
-        if(!isHighDefinition){
-            definition = lowDefinition;
-        }
-
-        let url = imageUrl;
-
-        const requestUrl = url.replace('{pictureID}', id)
-            .replace('{definition}', definition);
+        const requestUrl = this.getImageUrl(id, definition);
 
         if (_pannellumViewer) {
             _pannellumViewer.destroy();

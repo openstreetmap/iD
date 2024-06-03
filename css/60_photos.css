@@ -309,13 +309,13 @@
     pointer-events: none;
 }
 .layer-panoramax .viewfield-group * {
-    fill: purple;
+    fill: #1234ae;
     stroke: #ffffff;
     stroke-opacity: .6;
     fill-opacity: .6;
 }
 .layer-panoramax .sequence {
-    stroke: purple;
+    stroke: #1234ae;
 }
 .photo-controls-panoramax {
     display: flex;
