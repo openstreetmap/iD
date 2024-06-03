@@ -12,6 +12,11 @@ import { localizer } from '../core/localizer';
 
 const apiUrl = 'https://panoramax.openstreetmap.fr/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
+const imageUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
+
+const highDefinition = "hd";
+const standardDefinition = "sd";
+const lowDefinition = "thumb";
 
 const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
@@ -152,7 +157,6 @@ function loadTileDataToCache(data, tile) {
                 type: feature.properties.type,
                 model: feature.properties.model,
             };
-            console.log(d.sequence_id)
             cache.forImageId[d.id] = d;
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -312,6 +316,7 @@ export default {
     selectImage: function (context, id) {
 
         let that = this;
+        let url = imageUrl;
 
         let d = this.cachedImage(id);
 
@@ -329,6 +334,9 @@ export default {
         let wrap = context.container().select('.photoviewer .panoramax-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('');
 
+        const requestUrl = url.replace('{pictureID}', id)
+            .replace('{definition}', highDefinition);
+
         if (d.capture_time) {
             attribution
                 .append('span')
@@ -344,7 +352,7 @@ export default {
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
-            .attr('href', apiUrl + 'api/pictures/' + d.id + '/hd.jpg')
+            .attr('href', requestUrl)
             .text('panoramax.fr');
 
         wrap
@@ -402,6 +410,19 @@ export default {
 
     initOnlyPhoto: function (context, id) {
 
+        // TODO: change it into a checkbox in UI
+        let isHighDefinition = true;
+        let definition = highDefinition;
+
+        if(!isHighDefinition){
+            definition = lowDefinition;
+        }
+
+        let url = imageUrl;
+
+        const requestUrl = url.replace('{pictureID}', id)
+            .replace('{definition}', definition);
+
         if (_pannellumViewer) {
             _pannellumViewer.destroy();
             _pannellumViewer = null;
@@ -412,10 +433,10 @@ export default {
         let imgWrap = wrap.select('img');
 
         if (!imgWrap.empty()) {
-            imgWrap.attr('src',apiUrl + 'api/pictures/' + id + '/sd.jpg');
+            imgWrap.attr('src', requestUrl);
         } else {
             wrap.append('img')
-                .attr('src',apiUrl + 'api/pictures/' + id + '/sd.jpg');
+                .attr('src', requestUrl);
         }
 
     },
