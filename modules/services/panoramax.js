@@ -131,8 +131,6 @@ function loadTile(which, url, tile) {
         });
 }
 
-
-// Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new Protobuf(data));
 
@@ -190,6 +188,7 @@ function loadTileDataToCache(data, tile) {
 
 }
 
+// Quick access to image
 function getImage(image_id, definition){
     const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
         .replace('{definition}', definition);
@@ -197,50 +196,16 @@ function getImage(image_id, definition){
     return requestUrl;
 }
 
-function getImageData(collection_id, image_id, definition){
+async function getImageData(collection_id, image_id, definition){
     const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
         .replace('{itemId}', image_id)
 
-    return fetch(requestUrl, { method: 'GET' }).then(function(response){
-        if (!response.ok) {
-            throw new Error(response.status + ' ' + response.statusText);
-        }
-        return response.json();
-    }).then(function(data){
-        _currentScene = {
-            currentImage : null,
-            nextImage : null,
-            prevImage : null
-        };
-
-        _currentScene.currentImage = data["assets"][definition]; 
-
-        // TODO: make it modular
-        _currentScene.nextImage = data.links[5];
-        if(_currentScene.nextImage != null){
-            if(_currentScene.nextImage.rel == "prev"){
-                _currentScene.prevImage = data.links[5];
-                _currentScene.nextImage = null;
-            }
-            else
-                _currentScene.prevImage = data.links[6];
-        }   
-
-        _sceneOptions.panorama = _currentScene.currentImage.href;
-
-
-        // TODO: how to move this outta here
-        let wrap = context.container().select('.photoviewer .panoramax-wrapper');
-
-        wrap
-            .selectAll('button.back')
-            .classed('hide', _currentScene.prevImage == null);
-        wrap
-            .selectAll('button.forward')
-            .classed('hide', _currentScene.nextImage == null);
-
-        return data;
-    });
+    const response = await fetch(requestUrl, { method: 'GET' });
+    if (!response.ok) {
+        throw new Error(response.status + ' ' + response.statusText);
+    }
+    const data = await response.json();
+    return data;
 }
 
 export default {
@@ -279,14 +244,12 @@ export default {
 
     // Load images in the visible area
     loadImages: function(projection) {
-        let url = tileUrl;
-        loadTiles('images', url, 15, projection);
+        loadTiles('images', tileUrl, 15, projection);
     },
 
     // Load line in the visible area
     loadLines: function(projection) {
-        let url = tileUrl;
-        loadTiles('line', url, 15, projection);
+        loadTiles('line', tileUrl, 15, projection);
     },
 
     // Get visible sequences
@@ -389,8 +352,6 @@ export default {
 
         this.updateUrlImage(d.id);
 
-        getImageData(d.sequence_id, d.id, definition);
-
         let imageUrl = getImage(d.id, highDefinition);
 
         let viewer = context.container().select('.photoviewer');
@@ -429,27 +390,50 @@ export default {
         wrap
             .selectAll('img')
             .remove();
-        
-        if (d.type == "equirectangular") {
-            _sceneOptions.type = "equirectangular";
-            if (!_pannellumViewer) {
-                that.initViewer();
-            } else {
-                _currScene += 1;
-                let sceneID = _currScene.toString();
-                _pannellumViewer
-                    .addScene(sceneID, _sceneOptions)
-                    .loadScene(sceneID);
 
-                if (_currScene > 2) {
-                    sceneID = (_currScene - 1).toString();
+        getImageData(d.sequence_id, d.id, definition).then(function(data){
+            _currentScene = {
+                currentImage: null,
+                nextImage: null,
+                prevImage: null
+            };
+            _currentScene.currentImage = data["assets"][definition];
+            const nextIndex = data.links.findIndex(x => x.rel == "next");
+            const prevIndex = data.links.findIndex(x_1 => x_1.rel == "prev");
+            if (nextIndex != -1)
+                _currentScene.nextImage = data.links[nextIndex];
+            if (prevIndex != -1)
+                _currentScene.prevImage = data.links[prevIndex];
+            _sceneOptions.panorama = _currentScene.currentImage.href;
+
+            wrap
+                .selectAll('button.back')
+                .classed('hide', _currentScene.prevImage == null);
+            wrap
+                .selectAll('button.forward')
+                .classed('hide', _currentScene.nextImage == null);
+            
+            if (d.type == "equirectangular") {
+                _sceneOptions.type = "equirectangular";
+                if (!_pannellumViewer) {
+                    that.initViewer();
+                } else {
+                    _currScene += 1;
+                    let sceneID = _currScene.toString();
                     _pannellumViewer
-                        .removeScene(sceneID);
+                        .addScene(sceneID, _sceneOptions)
+                        .loadScene(sceneID);
+
+                    if (_currScene > 2) {
+                        sceneID = (_currScene - 1).toString();
+                        _pannellumViewer
+                            .removeScene(sceneID);
+                    }
                 }
+            } else {
+                that.initOnlyPhoto(context, imageUrl);
             }
-        } else {
-            that.initOnlyPhoto(context, imageUrl);
-        }
+        });
 
         function localeDateString(s) {
             if (!s) return null;
@@ -462,24 +446,24 @@ export default {
         return this;
     },
 
-    initOnlyPhoto: function (context, imageUrl) {
+    initOnlyPhoto: function(context, imageUrl) {
 
         if (_pannellumViewer) {
             _pannellumViewer.destroy();
             _pannellumViewer = null;
         }
-
+    
         let wrap = context.container().select('#ideditor-viewer-panoramax-simple');
-
+    
         let imgWrap = wrap.select('img');
-
+    
         if (!imgWrap.empty()) {
             imgWrap.attr('src', imageUrl);
         } else {
             wrap.append('img')
                 .attr('src', imageUrl);
         }
-
+    
     },
 
     ensureViewerLoaded: function(context) {
@@ -497,6 +481,7 @@ export default {
         let wrap = context.container().select('.photoviewer').selectAll('.panoramax-wrapper')
             .data([0]);
 
+        //TODO maybe all of this should be in panoramax_images?
         let wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper panoramax-wrapper')
@@ -587,6 +572,7 @@ export default {
                 _loadViewerPromise = null;
             });
 
+        //TODO: maybe this should be here (export?)
         function step(stepBy) {
             return function () {
                 if (!_activeImage) return;
