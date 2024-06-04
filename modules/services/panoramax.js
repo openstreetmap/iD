@@ -46,6 +46,12 @@ let _sceneOptions = {
 };
 let _currScene = 0;
 
+let _currentScene = {
+    currentImage : null,
+    nextImage : null,
+    prevImage : null
+};
+
 
 // Partition viewport into higher zoom tiles
 function partitionViewport(projection) {
@@ -184,6 +190,59 @@ function loadTileDataToCache(data, tile) {
 
 }
 
+function getImage(image_id, definition){
+    const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
+        .replace('{definition}', definition);
+
+    return requestUrl;
+}
+
+function getImageData(collection_id, image_id, definition){
+    const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
+        .replace('{itemId}', image_id)
+
+    return fetch(requestUrl, { method: 'GET' }).then(function(response){
+        if (!response.ok) {
+            throw new Error(response.status + ' ' + response.statusText);
+        }
+        return response.json();
+    }).then(function(data){
+        _currentScene = {
+            currentImage : null,
+            nextImage : null,
+            prevImage : null
+        };
+
+        _currentScene.currentImage = data["assets"][definition]; 
+
+        // TODO: make it modular
+        _currentScene.nextImage = data.links[5];
+        if(_currentScene.nextImage != null){
+            if(_currentScene.nextImage.rel == "prev"){
+                _currentScene.prevImage = data.links[5];
+                _currentScene.nextImage = null;
+            }
+            else
+                _currentScene.prevImage = data.links[6];
+        }   
+
+        _sceneOptions.panorama = _currentScene.currentImage.href;
+
+
+        // TODO: how to move this outta here
+        let wrap = context.container().select('.photoviewer .panoramax-wrapper');
+
+        wrap
+            .selectAll('button.back')
+            .classed('hide', _currentScene.prevImage == null);
+        wrap
+            .selectAll('button.forward')
+            .classed('hide', _currentScene.nextImage == null);
+
+        return data;
+    });
+}
+
 export default {
     init: function() {
         if (!_cache) {
@@ -314,24 +373,6 @@ export default {
         _pannellumViewer = window.pannellum.viewer('ideditor-viewer-panoramax-pnlm', options);
     },
 
-    getImageBlob: function(image_id, definition){
-        const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
-            .replace('{definition}', definition);
-
-        return requestUrl;
-    },
-
-    getImageData: async function(collection_id, image_id){
-        const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
-            .replace('{itemId}', image_id)
-
-        const response = await fetch(requestUrl, { method: 'GET' });
-        if (!response.ok) {
-            throw new Error(response.status + ' ' + response.statusText);
-        }
-        return await response.json();
-    },
-
     selectImage: function (context, id) {
         let that = this;
 
@@ -348,17 +389,9 @@ export default {
 
         this.updateUrlImage(d.id);
 
-        let imageJSON = this.getImageData(d.sequence_id, d.id)
+        getImageData(d.sequence_id, d.id, definition);
 
-        console.log(imageJSON)["assets"];
-
-        let imageUrl = imageJSON["assets"]["hd"].href; 
-
-        let prevImageId = imageJSON.links.find(x => x.rel === 'prev').id;
-        let nextImageId = imageJSON.links.find(x => x.rel === 'next').id;
-
-        console.log(prevImageId);
-        console.log(nextImageId);
+        let imageUrl = getImage(d.id, highDefinition);
 
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -396,17 +429,9 @@ export default {
         wrap
             .selectAll('img')
             .remove();
-
-        wrap
-            .selectAll('button.back')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+ id - 1));
-        wrap
-            .selectAll('button.forward')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+ id + 1));
-
+        
         if (d.type == "equirectangular") {
             _sceneOptions.type = "equirectangular";
-            _sceneOptions.panorama = imageUrl;
             if (!_pannellumViewer) {
                 that.initViewer();
             } else {
@@ -565,12 +590,16 @@ export default {
         function step(stepBy) {
             return function () {
                 if (!_activeImage) return;
-                const imageId = _activeImage.id;
 
-                const nextIndex = imageId + stepBy;
-                if (!nextIndex) return;
+                let nextId;
+                if(stepBy === 1)
+                    nextId = _currentScene.nextImage.id;
+                else nextId = _currentScene.prevImage.id;
 
-                const nextImage = _cache.images.forImageId[nextIndex];
+                if (!nextId) return;
+                
+
+                const nextImage = _cache.images.forImageId[nextId];
 
                 context.map().centerEase(nextImage.loc);
 
