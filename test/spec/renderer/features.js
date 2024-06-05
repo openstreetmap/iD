@@ -152,6 +152,7 @@ describe('iD.rendererFeatures', function() {
             iD.osmWay({id: 'scrub', tags: {area: 'yes', natural: 'scrub'}, version: 1}),
             iD.osmWay({id: 'industrial', tags: {area: 'yes', landuse: 'industrial'}, version: 1}),
             iD.osmWay({id: 'parkinglot', tags: {area: 'yes', amenity: 'parking', parking: 'surface'}, version: 1}),
+            iD.osmWay({id: 'park', tags: {area: 'yes', leisure: 'park', parking: 'surface'}, version: 1}),
 
             // Landuse Multipolygon
             iD.osmWay({id: 'outer', version: 1}),
