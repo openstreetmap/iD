@@ -135,6 +135,11 @@ export var osmOneWayTags = {
         't-bar': true,
         'zip_line': true
     },
+    'conveying': {
+        'forward': true,
+        'backward': true,
+        'reversible': true,
+    },
     'highway': {
         'motorway': true
     },
