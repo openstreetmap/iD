@@ -339,18 +339,18 @@ export default {
     selectImage: function (context, id) {
         let that = this;
 
-        let isHighDefinition = true;
-        let definition = highDefinition;
-
-        if(!isHighDefinition){
-            definition = standardDefinition;
-        }
-
         let d = this.cachedImage(id);
 
         this.setActiveImage(d);
 
         this.updateUrlImage(d.id);
+
+        let isHighDefinition = true;
+        let definition = highDefinition;
+
+        if(d.type == "equirectangular"){
+            definition = standardDefinition;
+        }
 
         let imageUrl = getImage(d.id, highDefinition);
 
@@ -374,6 +374,16 @@ export default {
                 .append('span')
                 .text('|');
         }
+
+        attribution
+            .append('a')
+            .attr('class', 'report-photo')
+            .attr('href', "mailto:signalement.ign@panoramax.fr")
+            .text('Report');
+
+        attribution
+            .append('span')
+            .text('|');
 
         attribution
             .append('a')
