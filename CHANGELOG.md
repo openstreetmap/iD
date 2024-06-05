@@ -45,12 +45,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
+* Properly sort map features with lifecycle prefixes in the _Past/Futures_ features ([#7582])
+* Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
 
+[#7582]: https://github.com/openstreetmap/iD/issues/7582
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
 
 
