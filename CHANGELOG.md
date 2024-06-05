@@ -52,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix icons with inline css styles not properly being displayed on osm.org
 * Properly sort map features with lifecycle prefixes in the _Past/Futures_ features ([#7582])
 * Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
+* Fix address field overwriting existing data when switching selected map features under certain circumstances ([#10260])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -68,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10181]: https://github.com/openstreetmap/iD/pull/10181
 [#10255]: https://github.com/openstreetmap/iD/pull/10255
 [#10257]: https://github.com/openstreetmap/iD/pull/10257
+[#10260]: https://github.com/openstreetmap/iD/issues/10260
 [@zbycz]: https://github.com/zbycz
 
 

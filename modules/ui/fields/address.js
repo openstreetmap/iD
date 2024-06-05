@@ -6,7 +6,7 @@ import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
 
 
@@ -235,6 +235,7 @@ export function uiFieldAddress(field, context) {
                         if (d.isAutoStreetPlace) {
                             // set subtag depending on selected entry
                             d.id = selected ? selected.type : 'street';
+                            utilTriggerEvent(d3_select(this), 'change');
                         }
                     })
                 );
@@ -283,35 +284,33 @@ export function uiFieldAddress(field, context) {
 
     function change(onInput) {
         return function() {
-            setTimeout(() => {
-                var tags = {};
+            var tags = {};
 
-                _wrap.selectAll('input')
-                    .each(function (subfield) {
-                        var key = field.key + ':' + subfield.id;
+            _wrap.selectAll('input')
+                .each(function (subfield) {
+                    var key = field.key + ':' + subfield.id;
 
-                        var value = this.value;
-                        if (!onInput) value = context.cleanTagValue(value);
+                    var value = this.value;
+                    if (!onInput) value = context.cleanTagValue(value);
 
-                        // don't override multiple values with blank string
-                        if (Array.isArray(_tags[key]) && !value) return;
+                    // don't override multiple values with blank string
+                    if (Array.isArray(_tags[key]) && !value) return;
 
-                        if (subfield.isAutoStreetPlace) {
-                            if (subfield.id === 'street') {
-                                tags[`${field.key}:place`] = undefined;
-                            } else if (subfield.id === 'place') {
-                                tags[`${field.key}:street`] = undefined;
-                            }
+                    if (subfield.isAutoStreetPlace) {
+                        if (subfield.id === 'street') {
+                            tags[`${field.key}:place`] = undefined;
+                        } else if (subfield.id === 'place') {
+                            tags[`${field.key}:street`] = undefined;
                         }
+                    }
 
-                        tags[key] = value || undefined;
-                    });
+                    tags[key] = value || undefined;
+                });
 
-                Object.keys(tags)
-                    .filter(k => tags[k])
-                    .forEach(k => _tags[k] = tags[k]);
-                dispatch.call('change', this, tags, onInput);
-            }, 0);
+            Object.keys(tags)
+                .filter(k => tags[k])
+                .forEach(k => _tags[k] = tags[k]);
+            dispatch.call('change', this, tags, onInput);
         };
     }
 
