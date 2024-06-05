@@ -40,6 +40,7 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
+        'ladder': true,
         'pedestrian': true
     };
 

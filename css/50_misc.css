@@ -287,6 +287,7 @@ path.line.shadow.tag-highway-pedestrian.tag-bridge,
 path.line.shadow.tag-highway-service.tag-bridge,
 path.line.shadow.tag-highway-track.tag-bridge,
 path.line.shadow.tag-highway-steps.tag-bridge,
+path.line.shadow.tag-highway-ladder.tag-bridge,
 path.line.shadow.tag-highway-footway.tag-bridge,
 path.line.shadow.tag-highway-cycleway.tag-bridge,
 path.line.shadow.tag-highway-bridleway.tag-bridge {
@@ -300,6 +301,7 @@ path.line.casing.tag-highway-pedestrian.tag-bridge,
 path.line.casing.tag-highway-service.tag-bridge,
 path.line.casing.tag-highway-track.tag-bridge,
 path.line.casing.tag-highway-steps.tag-bridge,
+path.line.casing.tag-highway-ladder.tag-bridge,
 path.line.casing.tag-highway-footway.tag-bridge,
 path.line.casing.tag-highway-cycleway.tag-bridge,
 path.line.casing.tag-highway-bridleway.tag-bridge {
@@ -314,6 +316,7 @@ path.line.casing.tag-highway-bridleway.tag-bridge {
 .low-zoom path.line.shadow.tag-highway-service.tag-bridge,
 .low-zoom path.line.shadow.tag-highway-track.tag-bridge,
 .low-zoom path.line.shadow.tag-highway-steps.tag-bridge,
+.low-zoom path.line.shadow.tag-highway-ladder.tag-bridge,
 .low-zoom path.line.shadow.tag-highway-footway.tag-bridge,
 .low-zoom path.line.shadow.tag-highway-cycleway.tag-bridge,
 .low-zoom path.line.shadow.tag-highway-bridleway.tag-bridge {
@@ -327,6 +330,7 @@ path.line.casing.tag-highway-bridleway.tag-bridge {
 .low-zoom path.line.casing.tag-highway-service.tag-bridge,
 .low-zoom path.line.casing.tag-highway-track.tag-bridge,
 .low-zoom path.line.casing.tag-highway-steps.tag-bridge,
+.low-zoom path.line.casing.tag-highway-ladder.tag-bridge,
 .low-zoom path.line.casing.tag-highway-footway.tag-bridge,
 .low-zoom path.line.casing.tag-highway-cycleway.tag-bridge,
 .low-zoom path.line.casing.tag-highway-bridleway.tag-bridge {
@@ -455,14 +459,18 @@ path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction
 path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
 path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
 path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
-path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-corridor,
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-steps,
+path.line.shadow.tag-highway.tag-status.tag-status-construction.tag-construction-ladder {
     stroke-width: 15;
 }
 path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-path,
 path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
 path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
 path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
-path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-corridor,
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-steps,
+path.line.casing.tag-highway.tag-status.tag-status-construction.tag-construction-ladder {
     stroke-width: 5;
     stroke-linecap: butt;
     stroke-dasharray: none
@@ -471,7 +479,9 @@ path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction
 path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-footway,
 path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-cycleway,
 path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-bridleway,
-path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-steps {
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-corridor,
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-steps,
+path.line.stroke.tag-highway.tag-status.tag-status-construction.tag-construction-ladder {
     stroke-width: 4;
     stroke-linecap: butt;
     stroke-dasharray: 10, 10;
@@ -482,28 +492,32 @@ path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
 path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
 path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
 path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridleway,
-path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps,
+path.line.shadow.tag-highway.tag-status.tag-status-proposed.tag-proposed-ladder {
     stroke-width: 15;
 }
 path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
 path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
 path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
 path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridleway,
-path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps,
+path.line.casing.tag-highway.tag-status.tag-status-proposed.tag-proposed-ladder {
     stroke-width: 4.5;
 }
 path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-path,
 path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-footway,
 path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-cycleway,
 path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-bridleway,
-path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-steps {
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-steps,
+path.line.casing.tag-highway.tag-bridge.tag-status.tag-status-proposed.tag-proposed-ladder {
     stroke-width: 10;
 }
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-path,
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-footway,
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-cycleway,
 path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-bridleway,
-path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps {
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-steps,
+path.line.stroke.tag-highway.tag-status.tag-status-proposed.tag-proposed-ladder {
     stroke-width: 3;
 }
 

@@ -39,22 +39,36 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.30.0-dev)
 
 #### :tada: New Features
+* Allow to start up iD with a preselected OSM note or multiselection of OSM ids in the `id` hash parameter
 #### :sparkles: Usability & Accessibility
+* Login/logout pages are now using the user's locale ([#3595], thanks [@k-yle])
+* Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
+* Fix API URLs for ImproveOSM QA service ([#9993], thanks [@k-yle])
+* Fix icons with inline css styles not properly being displayed on osm.org
 * Properly sort map features with lifecycle prefixes in the _Past/Futures_ features ([#7582])
 * Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Render `highway=ladder` in a style similar to stairs ([#10257], thanks [@k-yle])
+* Render arrows on lines with `conveying` tag ([#10255], thanks [@k-yle])
 #### :hammer: Development
+* Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
+[#3595]: https://github.com/openstreetmap/iD/issues/3595
 [#7582]: https://github.com/openstreetmap/iD/issues/7582
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
+[#9993]: https://github.com/openstreetmap/iD/issues/9993
+[#10181]: https://github.com/openstreetmap/iD/pull/10181
+[#10255]: https://github.com/openstreetmap/iD/pull/10255
+[#10257]: https://github.com/openstreetmap/iD/pull/10257
+[@zbycz]: https://github.com/zbycz
 
 
 # 2.29.0
@@ -71,7 +85,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Prevent (route) relations from getting corrupted while splitting their way members in certain conditions ([#7653], [#8415])
 * Fix overflowing UI input elements of maxheight field when in imperial units mode on Firefox ([#10175], thanks [@1ec5])
-* Fix external URL links when rearrangin multi-valued combo field options ([#10153], thanks [@laigyu])
+* Fix external URL links when rearranging multi-valued combo field options ([#10153], thanks [@laigyu])
 * Preserve whitespace after semicolons in `inscription` field ([#10188], thanks [@matkoniecz])
 #### :mortar_board: Walkthrough / Help
 * Show message when a POI point is incorrectly placed as vertex ([#9439], thanks [@mattiapezzotti])
@@ -3151,7 +3165,7 @@ _Map all the branded businesses in your town!_
 - Don't flag disconnected highways that overlap unloaded regions ([#5938], [#6140])
 - Don't flag almost junctions between features on different layers or levels ([#6355])
 - Discard untagged relations that appear to have been created accidentally ([#3812])
-- Include the number and type of warnings ignored by the user in the changset tags ([#6123])
+- Include the number and type of warnings ignored by the user in the changeset tags ([#6123])
 - Recommend adding `highway` tags to piers, racetracks, and transit platforms for routing purposes ([#6042])
 - Indicate iD's tag deprecations on Taginfo ([#5995])
 - When connecting crossing paths and roads, don't automatically set the `crossing` tag of the connection node if it is ambiguous ([#6244])
@@ -7442,7 +7456,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 # 1.1.6
 ##### 2013-Aug-24
 * Fix walkthrough on Firefox (#1743)
-* Fix icon at end of walkthough (#1740)
+* Fix icon at end of walkthrough (#1740)
 * Fix walkthrough (#1739)
 
 

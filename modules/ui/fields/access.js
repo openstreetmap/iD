@@ -120,6 +120,12 @@ export function uiFieldAccess(field, context) {
                 bicycle: 'no',
                 horse: 'no'
             },
+            ladder: {
+                foot: 'yes',
+                motor_vehicle: 'no',
+                bicycle: 'no',
+                horse: 'no'
+            },
             pedestrian: {
                 foot: 'yes',
                 motor_vehicle: 'no'
