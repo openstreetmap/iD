@@ -6,7 +6,7 @@ import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
+import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform, utilUniqueDomId} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { localizer } from '../core/localizer';
 
@@ -36,6 +36,8 @@ let _activeImage;
 let _cache;
 let _loadViewerPromise;
 let _pannellumViewer;
+let _definition = standardDefinition;
+let _isHD = false;
 let _sceneOptions = {
     showFullscreenCtrl: false,
     autoLoad: true,
@@ -196,7 +198,7 @@ function getImage(image_id, definition){
     return requestUrl;
 }
 
-async function getImageData(collection_id, image_id, definition){
+async function getImageData(collection_id, image_id){
     const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
         .replace('{itemId}', image_id)
 
@@ -345,13 +347,6 @@ export default {
 
         this.updateUrlImage(d.id);
 
-        let isHighDefinition = true;
-        let definition = highDefinition;
-
-        if(d.type == "equirectangular"){
-            definition = standardDefinition;
-        }
-
         let imageUrl = getImage(d.id, highDefinition);
 
         let viewer = context.container().select('.photoviewer');
@@ -392,6 +387,36 @@ export default {
             .attr('href', imageUrl)
             .text('panoramax.fr');
 
+        let line1 = attribution
+            .append('div')
+            .attr('class', 'attribution-row');
+
+        const hiresDomId = utilUniqueDomId('panoramax-hd');
+
+        let label = line1
+        .append('label')
+        .attr('for', hiresDomId)
+        .attr('class', 'panoramax-hd');
+
+        label
+            .append('input')
+            .attr('type', 'checkbox')
+            .attr('id', hiresDomId)
+            .property('checked', _isHD)
+            .on('click', (d3_event) => {
+            d3_event.stopPropagation();
+            
+            _isHD = !_isHD;
+            _definition = _isHD ? highDefinition : standardDefinition;
+            wrap.call(setupCanvas, true);
+
+            that.selectImage(context, d.id)
+                .showViewer(context);
+            });
+
+        label
+            .append('span');
+
         wrap
             .transition()
             .duration(100)
@@ -401,13 +426,13 @@ export default {
             .selectAll('img')
             .remove();
 
-        getImageData(d.sequence_id, d.id, definition).then(function(data){
+        getImageData(d.sequence_id, d.id).then(function(data){
             _currentScene = {
                 currentImage: null,
                 nextImage: null,
                 prevImage: null
             };
-            _currentScene.currentImage = data["assets"][definition];
+            _currentScene.currentImage = data["assets"][_definition];
             const nextIndex = data.links.findIndex(x => x.rel == "next");
             const prevIndex = data.links.findIndex(x_1 => x_1.rel == "prev");
             if (nextIndex != -1)
