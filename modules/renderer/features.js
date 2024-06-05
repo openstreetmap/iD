@@ -40,6 +40,7 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
+        'ladder': true,
         'pedestrian': true
     };
 
@@ -115,7 +116,6 @@ export function rendererFeatures(context) {
     defineRule('buildings', function isBuilding(tags) {
         return (
             (!!tags.building && tags.building !== 'no') ||
-            !!tags['demolished:building'] ||
             tags.parking === 'multi-storey' ||
             tags.parking === 'sheds' ||
             tags.parking === 'carports' ||
@@ -203,8 +203,7 @@ export function rendererFeatures(context) {
         if (
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
-            paths[tags.highway] ||
-            !!tags['demolished:building']
+            paths[tags.highway]
         ) { return false; }
 
         var strings = Object.keys(tags);
