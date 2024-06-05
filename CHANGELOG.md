@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Render `highway=ladder` in a style similar to stairs ([#10257], thanks [@k-yle])
 #### :hammer: Development
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
@@ -61,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
 [#9993]: https://github.com/openstreetmap/iD/issues/9993
 [#10181]: https://github.com/openstreetmap/iD/pull/10181
+[#10257]: https://github.com/openstreetmap/iD/pull/10257
 [@zbycz]: https://github.com/zbycz
 
 

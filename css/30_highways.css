@@ -253,6 +253,7 @@ path.line.shadow.tag-highway-footway,
 path.line.shadow.tag-highway-cycleway,
 path.line.shadow.tag-highway-bridleway,
 path.line.shadow.tag-highway-corridor,
+path.line.shadow.tag-highway-ladder,
 path.line.shadow.tag-highway-steps {
     stroke-width: 16;
 }
@@ -261,6 +262,7 @@ path.line.casing.tag-highway-footway,
 path.line.casing.tag-highway-cycleway,
 path.line.casing.tag-highway-bridleway,
 path.line.casing.tag-highway-corridor,
+path.line.casing.tag-highway-ladder,
 path.line.casing.tag-highway-steps {
     stroke-width: 5;
 }
@@ -269,6 +271,7 @@ path.line.stroke.tag-highway-footway,
 path.line.stroke.tag-highway-cycleway,
 path.line.stroke.tag-highway-bridleway,
 path.line.stroke.tag-highway-corridor,
+path.line.stroke.tag-highway-ladder,
 path.line.stroke.tag-highway-steps {
     stroke-width: 3;
 }
@@ -306,6 +309,7 @@ path.line.stroke.tag-highway-steps {
 .low-zoom path.line.shadow.tag-highway-cycleway,
 .low-zoom path.line.shadow.tag-highway-bridleway,
 .low-zoom path.line.shadow.tag-highway-corridor,
+.low-zoom path.line.shadow.tag-highway-ladder,
 .low-zoom path.line.shadow.tag-highway-steps {
     stroke-width: 12;
 }
@@ -314,6 +318,7 @@ path.line.stroke.tag-highway-steps {
 .low-zoom path.line.casing.tag-highway-cycleway,
 .low-zoom path.line.casing.tag-highway-bridleway,
 .low-zoom path.line.casing.tag-highway-corridor,
+.low-zoom path.line.casing.tag-highway-ladder,
 .low-zoom path.line.casing.tag-highway-steps {
     stroke-width: 3;
 }
@@ -322,6 +327,7 @@ path.line.stroke.tag-highway-steps {
 .low-zoom path.line.stroke.tag-highway-cycleway,
 .low-zoom path.line.stroke.tag-highway-bridleway,
 .low-zoom path.line.stroke.tag-highway-corridor,
+.low-zoom path.line.stroke.tag-highway-ladder,
 .low-zoom path.line.stroke.tag-highway-steps {
     stroke-width: 1;
 }
@@ -565,27 +571,34 @@ path.line.stroke.tag-leisure-track,
 }
 
 /* steps */
-.preset-icon .icon.tag-highway-steps {
+.preset-icon .icon.tag-highway-steps,
+.preset-icon .icon.tag-highway-ladder {
     color: #81d25c;
     fill: #fff;
 }
-path.line.stroke.tag-highway-steps {
+path.line.stroke.tag-highway-steps,
+path.line.stroke.tag-highway-ladder {
     stroke-linecap: butt;
     stroke-dasharray: 3, 3;
 }
-.low-zoom path.line.stroke.tag-highway-steps {
+.low-zoom path.line.stroke.tag-highway-steps,
+.low-zoom path.line.stroke.tag-highway-ladder {
     stroke-dasharray: 2, 2;
 }
-path.line.casing.tag-highway-steps {
+path.line.casing.tag-highway-steps,
+path.line.casing.tag-highway-ladder {
     stroke: #fff;
     stroke-linecap: round;
     stroke-dasharray: none;
 }
 path.line.stroke.tag-highway-steps,
-.preset-icon-container path.line.casing.tag-highway-steps {
+path.line.stroke.tag-highway-ladder,
+.preset-icon-container path.line.casing.tag-highway-steps,
+.preset-icon-container path.line.casing.tag-highway-ladder {
     stroke: #81d25c;
 }
-.preset-icon-container path.line.stroke.tag-highway-steps {
+.preset-icon-container path.line.stroke.tag-highway-steps,
+.preset-icon-container path.line.stroke.tag-highway-ladder {
     stroke: #fff;
 }
 
@@ -638,6 +651,7 @@ path.line.stroke.tag-highway.tag-footway-access_aisle {
 /* highway midpoints */
 g.midpoint.tag-highway-corridor .fill,
 g.midpoint.tag-highway-steps .fill,
+g.midpoint.tag-highway-ladder .fill,
 g.midpoint.tag-highway-path .fill,
 g.midpoint.tag-highway-footway .fill,
 g.midpoint.tag-highway-cycleway .fill,
