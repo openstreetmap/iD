@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity, osmLifecyclePrefixes } from '../osm';
+import { osmEntity, osmLifecyclePrefixes, osmRemoveLifecyclePrefix } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
@@ -40,7 +40,6 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
-        'ladder': true,
         'pedestrian': true
     };
 
@@ -132,12 +131,11 @@ export function rendererFeatures(context) {
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' &&
-            !_rules.buildings.filter(tags) &&
-            !_rules.building_parts.filter(tags) &&
-            !_rules.indoor.filter(tags) &&
-            !_rules.water.filter(tags) &&
-            !_rules.pistes.filter(tags);
+        return geometry === 'area' && (
+            !!tags.landuse ||
+            !!tags.natural ||
+            !!tags.leisure
+        );
     });
 
     defineRule('boundaries', function isBoundary(tags, geometry) {
@@ -188,7 +186,7 @@ export function rendererFeatures(context) {
         return tags['piste:type'];
     });
 
-    defineRule('aerialways', function isPiste(tags) {
+    defineRule('aerialways', function isAerialways(tags) {
         return tags.aerialway &&
             tags.aerialway !== 'yes' &&
             tags.aerialway !== 'station';
@@ -206,11 +204,12 @@ export function rendererFeatures(context) {
             paths[tags.highway]
         ) { return false; }
 
-        var strings = Object.keys(tags);
+        const keys = Object.keys(tags);
 
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[s]]) return true;
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const s = key.split(':')[0];
+            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[key]]) return true;
         }
         return false;
     });
