@@ -134,8 +134,14 @@ export function rendererFeatures(context) {
         return geometry === 'area' && (
             !!tags.landuse ||
             !!tags.natural ||
-            !!tags.leisure
-        );
+            !!tags.leisure ||
+            !!tags.amenity
+        ) &&
+            !_rules.buildings.filter(tags) &&
+            !_rules.building_parts.filter(tags) &&
+            !_rules.indoor.filter(tags) &&
+            !_rules.water.filter(tags) &&
+            !_rules.pistes.filter(tags);
     });
 
     defineRule('boundaries', function isBoundary(tags, geometry) {
