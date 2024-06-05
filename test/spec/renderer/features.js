@@ -551,13 +551,13 @@ describe('iD.rendererFeatures', function() {
         });
 
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
-            var outer = iD.osmWay({id: 'outer', tags: {area: 'yes', natural: 'wood'}, version: 1});
+            var outer = iD.osmWay({id: 'outer', tags: {}, version: 1});
             var inner1 = iD.osmWay({id: 'inner1', tags: {barrier: 'fence'}, version: 1});
             var inner2 = iD.osmWay({id: 'inner2', version: 1});
             var inner3 = iD.osmWay({id: 'inner3', tags: {highway: 'residential'}, version: 1});
             var r = iD.osmRelation({
                 id: 'r',
-                tags: {type: 'multipolygon'},
+                tags: {type: 'multipolygon', natural: 'wood'},
                 members: [
                     {id: outer.id, role: 'outer', type: 'way'},
                     {id: inner1.id, role: 'inner', type: 'way'},
