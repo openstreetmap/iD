@@ -50,6 +50,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
 * Fix API URLs for ImproveOSM QA service ([#9993], thanks [@k-yle])
 * Fix icons with inline css styles not properly being displayed on osm.org
+* Properly sort map features with lifecycle prefixes in the _Past/Futures_ features ([#7582])
+* Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -60,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
 [#3595]: https://github.com/openstreetmap/iD/issues/3595
+[#7582]: https://github.com/openstreetmap/iD/issues/7582
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
 [#9993]: https://github.com/openstreetmap/iD/issues/9993
 [#10181]: https://github.com/openstreetmap/iD/pull/10181

@@ -132,7 +132,12 @@ export function rendererFeatures(context) {
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' &&
+        return geometry === 'area' && (
+            !!tags.landuse ||
+            !!tags.natural ||
+            !!tags.leisure ||
+            !!tags.amenity
+        ) &&
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
             !_rules.indoor.filter(tags) &&
@@ -188,7 +193,7 @@ export function rendererFeatures(context) {
         return tags['piste:type'];
     });
 
-    defineRule('aerialways', function isPiste(tags) {
+    defineRule('aerialways', function isAerialways(tags) {
         return tags.aerialway &&
             tags.aerialway !== 'yes' &&
             tags.aerialway !== 'station';
@@ -206,11 +211,12 @@ export function rendererFeatures(context) {
             paths[tags.highway]
         ) { return false; }
 
-        var strings = Object.keys(tags);
+        const keys = Object.keys(tags);
 
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[s]]) return true;
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const s = key.split(':')[0];
+            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[key]]) return true;
         }
         return false;
     });
