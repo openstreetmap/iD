@@ -54,3 +54,32 @@ iD also bundles portions of the following open source software.
 ## Thank you
 
 Initial development of iD was made possible by a [grant of the Knight Foundation](https://www.mapbox.com/blog/knight-invests-openstreetmap/).
+
+
+
+### 建置與測試指南
+
+### 安裝
+若要在您自己的電腦上運行 iD 的當前開發版本，請執行以下操作：
+
+### 克隆存儲庫
+存儲庫相對較大，完整的歷史記錄大約需要200MB。如果您不介意等待所有數據下載，可以運行：
+
+**git clone https://github.com/openstreetmap/iD.git**
+
+如果您只想克隆最新版本，請使用「淺克隆」：
+
+**git clone --depth=1 https://github.com/openstreetmap/iD.git**
+
+如果稍後想添加完整的歷史記錄，以便運行 git blame 或 git log，可以運行：
+
+**git fetch --depth=1000000**
+
+### 構建 iD
+1. 進入新克隆的項目文件夾
+2. 運行 npm install
+3. 運行 npm run all
+4. 運行 npm start
+5. 在網頁瀏覽器中打開 http://127.0.0.1:8080/
+
+最後更新：24 年 6 月 5 日
