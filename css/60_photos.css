@@ -349,6 +349,19 @@
     overflow: hidden
 }
 
+label.panoramax-hd {
+    float: left;
+    cursor: pointer;
+}
+.panoramax-hd span {
+    margin-top: 2px;
+}
+.panoramax-hd input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+}
+
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {

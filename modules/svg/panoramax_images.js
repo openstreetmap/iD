@@ -11,6 +11,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _panoramax;
+    let _viewerYaw = 0;
+    let _selectedSequence;
     
     function init() {
         if (svgPanoramaxImages.initialized) return;
@@ -58,8 +60,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
     function transform(d) {
         let t = svgPointTransform(projection)(d);
-        if (d.heading) {
-            t += ' rotate(' + Math.floor(d.heading) + ',0,0)';
+        var rot = d.heading + _viewerYaw;
+        if (rot) {
+            t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
         return t;
     }
@@ -79,11 +82,18 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         if (!service) return;
 
+        if (image.sequence_id !== _selectedSequence) {
+            _viewerYaw = 0;  // reset
+        }
+
+        _selectedSequence = image.sequence_id;
+
         service
             .ensureViewerLoaded(context, image.id)
             .then(function() {
                 service
                     .selectImage(context, image.id)
+                    .yaw(_viewerYaw)
                     .showViewer(context);
             });
 

@@ -8,7 +8,7 @@ import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform, utilUniqueDomId} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { localizer } from '../core/localizer';
+import { t, localizer } from '../core/localizer';
 
 const apiUrl = 'https://panoramax.openstreetmap.fr/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
@@ -308,6 +308,18 @@ export default {
         sequences.classed('highlighted', function(d) { return d.properties.sequence_id === hoveredSequenceId; })
             .classed('currentView', function(d) { return d.properties.sequence_id === selectedSequenceId; });
 
+        // update viewfields if needed
+        context.container().selectAll('.layer-streetside-images .viewfield-group .viewfield')
+            .attr('d', viewfieldPath);
+
+        function viewfieldPath() {
+            if (this.parentNode.__data__.type == "equirectangular") {
+            return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+            } else {
+            return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+        }
+    }
+
         return this;
     },
 
@@ -359,6 +371,51 @@ export default {
         let wrap = context.container().select('.photoviewer .panoramax-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('');
 
+        let line1 = attribution
+            .append('div')
+
+        const hiresDomId = utilUniqueDomId('panoramax-hd');
+
+        let label = line1
+        .append('label')
+        .attr('for', hiresDomId)
+        .attr('class', 'panoramax-hd');
+
+        label
+            .append('input')
+            .attr('type', 'checkbox')
+            .attr('id', hiresDomId)
+            .property('checked', _isHD)
+            .on('click', (d3_event) => {
+                d3_event.stopPropagation();
+                
+                _isHD = !_isHD;
+                _definition = _isHD ? highDefinition : standardDefinition;
+
+                let viewstate = {
+                    yaw: _pannellumViewer.getYaw(),
+                    pitch: _pannellumViewer.getPitch(),
+                    hfov: _pannellumViewer.getHfov()
+                };
+            
+                _sceneOptions = Object.assign(_sceneOptions, viewstate);
+                that.selectImage(context, d.id)
+                .showViewer(context);
+            });
+
+        label
+            .append('span')
+            .call(t.append('panoramax.hd'));
+
+        wrap
+            .transition()
+            .duration(100)
+            .call(imgZoom.transform, d3_zoomIdentity);
+
+        wrap
+            .selectAll('img')
+            .remove();
+
         if (d.capture_time) {
             attribution
                 .append('span')
@@ -374,7 +431,7 @@ export default {
             .append('a')
             .attr('class', 'report-photo')
             .attr('href', "mailto:signalement.ign@panoramax.fr")
-            .text('Report');
+            .call(t.append('panoramax.report'));
 
         attribution
             .append('span')
@@ -386,45 +443,6 @@ export default {
             .attr('target', '_blank')
             .attr('href', imageUrl)
             .text('panoramax.fr');
-
-        let line1 = attribution
-            .append('div')
-            .attr('class', 'attribution-row');
-
-        const hiresDomId = utilUniqueDomId('panoramax-hd');
-
-        let label = line1
-        .append('label')
-        .attr('for', hiresDomId)
-        .attr('class', 'panoramax-hd');
-
-        label
-            .append('input')
-            .attr('type', 'checkbox')
-            .attr('id', hiresDomId)
-            .property('checked', _isHD)
-            .on('click', (d3_event) => {
-            d3_event.stopPropagation();
-            
-            _isHD = !_isHD;
-            _definition = _isHD ? highDefinition : standardDefinition;
-            wrap.call(setupCanvas, true);
-
-            that.selectImage(context, d.id)
-                .showViewer(context);
-            });
-
-        label
-            .append('span');
-
-        wrap
-            .transition()
-            .duration(100)
-            .call(imgZoom.transform, d3_zoomIdentity);
-
-        wrap
-            .selectAll('img')
-            .remove();
 
         getImageData(d.sequence_id, d.id).then(function(data){
             _currentScene = {
@@ -619,6 +637,13 @@ export default {
 
                 if (!nextId) return;
                 
+                let viewstate = {
+                    yaw: _pannellumViewer.getYaw(),
+                    pitch: _pannellumViewer.getPitch(),
+                    hfov: _pannellumViewer.getHfov()
+                };
+            
+                _sceneOptions = Object.assign(_sceneOptions, viewstate);
 
                 const nextImage = _cache.images.forImageId[nextId];
 
@@ -637,7 +662,13 @@ export default {
         return _loadViewerPromise;
     },
 
-    showViewer:function (context) {
+    yaw: function(yaw) {
+        if (typeof yaw !== 'number') return yaw;
+        _sceneOptions.yaw = yaw;
+        return this;
+    },
+
+    showViewer: function (context) {
         let wrap = context.container().select('.photoviewer')
             .classed('hide', false);
 

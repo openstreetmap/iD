@@ -1452,6 +1452,8 @@ en:
   panoramax:
     title: Panoramax
     tooltip: "Street-level photos from Panoramax"
+    report: "Report"
+    hd: "High resolution"
   street_side:
     minzoom_tooltip: "Zoom in to see street-side photos"
   local_photos:
