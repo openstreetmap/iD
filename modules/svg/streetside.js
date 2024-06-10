@@ -137,6 +137,26 @@ export function svgStreetside(projection, context, dispatch) {
         return t;
     }
 
+
+    function viewerChanged() {
+        var service = getService();
+        if (!service) return;
+
+        var viewer = service.viewer();
+        if (!viewer) return;
+
+        // update viewfield rotation
+        _viewerYaw = viewer.getYaw();
+
+        // avoid updating if the map is currently transformed
+        // e.g. during drags or easing.
+        if (context.map().isTransformed()) return;
+
+        layer.selectAll('.viewfield-group.currentView')
+            .attr('transform', transform);
+    }
+
+
     function filterBubbles(bubbles) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
@@ -289,24 +309,7 @@ export function svgStreetside(projection, context, dispatch) {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
-    }
 
-    function viewerChanged() {
-        var service = getService();
-        if (!service) return;
-
-        var viewer = service.viewer();
-        if (!viewer) return;
-
-        // update viewfield rotation
-        _viewerYaw = viewer.getYaw();
-
-        // avoid updating if the map is currently transformed
-        // e.g. during drags or easing.
-        if (context.map().isTransformed()) return;
-
-        layer.selectAll('.viewfield-group.currentView')
-            .attr('transform', transform);
     }
 
     /**
