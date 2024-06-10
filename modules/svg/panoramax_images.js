@@ -24,7 +24,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     function getService() {
         if (services.panoramax && !_panoramax) {
             _panoramax = services.panoramax;
-            _panoramax.event.on('loadedImages', throttledRedraw);
+            _panoramax.event
+                .on('viewerChanged', viewerChanged)
+                .on('loadedImages', throttledRedraw);
         } else if (!services.panoramax && _panoramax) {
             _panoramax = null;
         }
@@ -121,7 +123,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         let images = (service ? service.images(projection) : []);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.properties.id; });
+            .data(sequences, function(d) { return d.id; });
 
         // exit
         traces.exit()
@@ -191,6 +193,24 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             }
         }
 
+    }
+
+    function viewerChanged() {
+        var service = getService();
+        if (!service) return;
+
+        var viewer = service.viewer();
+        if (!viewer) return;
+
+        // update viewfield rotation
+        _viewerYaw = viewer.getYaw();
+
+        // avoid updating if the map is currently transformed
+        // e.g. during drags or easing.
+        if (context.map().isTransformed()) return;
+
+        layer.selectAll('.viewfield-group.currentView')
+            .attr('transform', transform);
     }
 
 

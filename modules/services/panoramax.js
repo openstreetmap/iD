@@ -1,5 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
+import { timer as d3_timer } from 'd3-timer';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import Protobuf from 'pbf';
@@ -23,7 +24,7 @@ const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
 
 const minZoom = 15;
-const dispatch = d3_dispatch('loadedImages', 'loadedLines');
+const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
 const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
@@ -301,24 +302,27 @@ export default {
         const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
-        markers.classed('highlighted', function(d) { return d.id === hoveredImageId; })
+        markers
+            .classed('highlighted', function(d) { return d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
-        sequences.classed('highlighted', function(d) { return d.properties.sequence_id === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.properties.sequence_id === selectedSequenceId; });
+        sequences
+            .classed('highlighted', function(d) { return d.sequence_id === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.sequence_id === selectedSequenceId; });
 
         // update viewfields if needed
-        context.container().selectAll('.layer-streetside-images .viewfield-group .viewfield')
+        context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
-            if (this.parentNode.__data__.type == "equirectangular") {
+            let d = this.parentNode.__data__;
+            if (d.type == "equirectangular" && d.id !== selectedImageId) {
             return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
             return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+            }
         }
-    }
 
         return this;
     },
@@ -373,18 +377,19 @@ export default {
 
         let line1 = attribution
             .append('div')
+            .attr('class', 'attribution-row');
 
-        const hiresDomId = utilUniqueDomId('panoramax-hd');
+        const hdDomId = utilUniqueDomId('panoramax-hd');
 
         let label = line1
         .append('label')
-        .attr('for', hiresDomId)
+        .attr('for', hdDomId)
         .attr('class', 'panoramax-hd');
 
         label
             .append('input')
             .attr('type', 'checkbox')
-            .attr('id', hiresDomId)
+            .attr('id', hdDomId)
             .property('checked', _isHD)
             .on('click', (d3_event) => {
                 d3_event.stopPropagation();
@@ -452,7 +457,7 @@ export default {
             };
             _currentScene.currentImage = data["assets"][_definition];
             const nextIndex = data.links.findIndex(x => x.rel == "next");
-            const prevIndex = data.links.findIndex(x_1 => x_1.rel == "prev");
+            const prevIndex = data.links.findIndex(x => x.rel == "prev");
             if (nextIndex != -1)
                 _currentScene.nextImage = data.links[nextIndex];
             if (prevIndex != -1)
@@ -519,6 +524,10 @@ export default {
     
     },
 
+    viewer: function() {
+        return _pannellumViewer;
+    },
+
     ensureViewerLoaded: function(context) {
 
         let that = this;
@@ -541,9 +550,31 @@ export default {
             .classed('hide', true)
             .on('dblclick.zoom', null);
 
+        let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
         wrapEnter
             .append('div')
-            .attr('class', 'photo-attribution fillD');
+            .attr('id', 'ideditor-viewer-panoramax-pnlm')
+            .on(pointerPrefix + 'down.panoramax', () => {
+            d3_select(window)
+                .on(pointerPrefix + 'move.panoramax', () => {
+                dispatch.call('viewerChanged');
+                }, true);
+            })
+            .on(pointerPrefix + 'up.panoramax pointercancel.panoramax', () => {
+            d3_select(window)
+                .on(pointerPrefix + 'move.panoramax', null);
+    
+            // continue dispatching events for a few seconds, in case viewer has inertia.
+            let t = d3_timer(elapsed => {
+                dispatch.call('viewerChanged');
+                if (elapsed > 2000) {
+                t.stop();
+                }
+            });
+        })
+        .append('div')
+        .attr('class', 'photo-attribution fillD');
 
         const controlsEnter = wrapEnter
             .append('div')
