@@ -58,7 +58,8 @@ export var osmAreaKeysExceptions = {
         station: true,
         traverser: true,
         turntable: true,
-        wash: true
+        wash: true,
+        ventilation_shaft: true
     },
     waterway: {
         dam: true
