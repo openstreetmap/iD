@@ -34,6 +34,57 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return _panoramax;
     }
 
+    function filterImages(images) {
+        const showsPano = context.photos().showsPanoramic();
+        const showsFlat = context.photos().showsFlat();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+
+        if (!showsPano || !showsFlat) {
+            images = images.filter(function(image) {
+                if (image.isPano) return showsPano;
+                return showsFlat;
+            });
+        }
+        if (fromDate) {
+            images = images.filter(function(image) {
+                return new Date(image.capture_time).getTime() >= new Date(fromDate).getTime();
+            });
+        }
+        if (toDate) {
+            images = images.filter(function(image) {
+                return new Date(image.capture_time).getTime() <= new Date(toDate).getTime();
+            });
+        }
+
+        return images;
+    }
+
+    function filterSequences(sequences) {
+        const showsPano = context.photos().showsPanoramic();
+        const showsFlat = context.photos().showsFlat();
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+
+        if (!showsPano || !showsFlat) {
+            sequences = sequences.filter(function(sequence) {
+                    if (sequence.properties.type === "equirectangular") return showsPano;
+                    return showsFlat;
+            });
+        }
+        if (fromDate) {
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.date).getTime() >= new Date(fromDate).getTime().toString();
+            });
+        }
+        if (toDate) {
+            sequences = sequences.filter(function(sequence) {
+                return new Date(sequence.properties.date).getTime() <= new Date(toDate).getTime().toString();
+            });
+        }
+
+        return sequences;
+    }
 
     function showLayer() {
         const service = getService();
@@ -122,6 +173,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         let sequences = (service ? service.sequences(projection) : []);
         let images = (service ? service.images(projection) : []);
 
+        images = filterImages(images);
+        sequences = filterSequences(sequences, service);
+
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.id; });
 
@@ -186,7 +240,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('d', viewfieldPath);
 
         function viewfieldPath() {
-            if (this.parentNode.__data__.type == "equirectangular") {
+            if (this.parentNode.__data__.isPano) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';

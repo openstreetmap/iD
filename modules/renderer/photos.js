@@ -119,12 +119,12 @@ export function rendererPhotos(context) {
     }
 
     photos.shouldFilterByDate = function() {
-        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder');
+        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
     };
 
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||
-            (showsLayer('streetside') && showsLayer('kartaview')) || showsLayer('vegbilder');
+            (showsLayer('streetside') && showsLayer('kartaview')) || showsLayer('vegbilder') || showsLayer('panoramax');
     };
 
     photos.shouldFilterByUsername = function() {

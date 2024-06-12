@@ -162,7 +162,7 @@ function loadTileDataToCache(data, tile) {
                 sequence_id: feature.properties.sequences.split("\"")[1],
                 heading: feature.properties.heading,
                 resolution: feature.properties.resolution,
-                type: feature.properties.type,
+                isPano: feature.properties.type === "equirectangular",
                 model: feature.properties.model,
             };
             cache.forImageId[d.id] = d;
@@ -317,7 +317,7 @@ export default {
 
         function viewfieldPath() {
             let d = this.parentNode.__data__;
-            if (d.type == "equirectangular" && d.id !== selectedImageId) {
+            if (d.isPano && d.id !== selectedImageId) {
             return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
             return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
@@ -471,7 +471,7 @@ export default {
                 .selectAll('button.forward')
                 .classed('hide', _currentScene.nextImage == null);
             
-            if (d.type == "equirectangular") {
+            if (d.isPano) {
                 _sceneOptions.type = "equirectangular";
                 if (!_pannellumViewer) {
                     that.initViewer();
@@ -568,7 +568,7 @@ export default {
             // continue dispatching events for a few seconds, in case viewer has inertia.
             let t = d3_timer(elapsed => {
                 dispatch.call('viewerChanged');
-                if (elapsed > 2000) {
+                if (elapsed > 1000) {
                 t.stop();
                 }
             });
