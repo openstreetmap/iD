@@ -7,7 +7,8 @@ import {svgPath, svgPointTransform} from './helpers';
 
 export function svgPanoramaxImages(projection, context, dispatch) {
     const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    const minZoom = 15;
+    const imageMinZoom = 15;
+    const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _panoramax;
@@ -26,6 +27,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             _panoramax = services.panoramax;
             _panoramax.event
                 .on('viewerChanged', viewerChanged)
+                .on('loadedLines', throttledRedraw)
                 .on('loadedImages', throttledRedraw);
         } else if (!services.panoramax && _panoramax) {
             _panoramax = null;
@@ -269,6 +271,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
+        
         const enabled = svgPanoramaxImages.enabled;
         const service = getService();
 
@@ -295,15 +298,28 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .merge(layer);
 
         if (enabled) {
-            if (service && ~~context.map().zoom() >= minZoom) {
-                editOn();
-                update();
-                service.loadImages(projection);
+            let zoom = ~~context.map().zoom();
+            console.log(zoom)
+            if (service){
+                if(zoom >= imageMinZoom) {
+                    editOn();
+                    update();
+                    service.loadImages(projection);
+                }
+                else if(zoom >= lineMinZoom) {
+                    editOn();
+                    update();
+                    service.loadLines(projection);
+                }
+                else {
+                    editOff();
+                }
             } else {
                 editOff();
             }
         }
     }
+
 
 
     drawImages.enabled = function(_) {
@@ -326,7 +342,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     };
 
     drawImages.rendered = function(zoom) {
-      return zoom >= minZoom;
+      return zoom >= lineMinZoom;
     };
 
 

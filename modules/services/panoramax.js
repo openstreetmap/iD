@@ -23,7 +23,7 @@ const thumbnailDefinition = "thumb";
 const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
 
-const minZoom = 15;
+const minZoom = 10;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
 const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
@@ -33,7 +33,6 @@ const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
 
-let _activeImage;
 let _cache;
 let _loadViewerPromise;
 let _pannellumViewer;
@@ -231,7 +230,7 @@ export default {
             requests: { loaded: {}, inflight: {} }
         };
 
-        _activeImage = null;
+        _currentScene.currentImage = null;
     },
 
     // Get visible images
@@ -252,7 +251,7 @@ export default {
 
     // Load line in the visible area
     loadLines: function(projection) {
-        loadTiles('line', tileUrl, 15, projection);
+        loadTiles('line', tileUrl, 10, projection);
     },
 
     // Get visible sequences
@@ -283,12 +282,12 @@ export default {
     // Set the currently visible image
     setActiveImage: function(image) {
         if (image) {
-            _activeImage = {
+            _currentScene.currentImage = {
                 id: image.id,
                 sequence_id: image.sequence_id
             };
         } else {
-            _activeImage = null;
+            _currentScene.currentImage = null;
         }
     },
 
@@ -296,8 +295,8 @@ export default {
     setStyles: function(context, hovered) {
         const hoveredImageId = hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
-        const selectedSequenceId = _activeImage && _activeImage.sequence_id;
-        const selectedImageId =  _activeImage && _activeImage.id;
+        const selectedSequenceId = _currentScene.currentImage && _currentScene.currentImage.sequence_id;
+        const selectedImageId =  _currentScene.currentImage && _currentScene.currentImage.id;
 
         const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
@@ -659,7 +658,7 @@ export default {
         //TODO: maybe this should be here (export?)
         function step(stepBy) {
             return function () {
-                if (!_activeImage) return;
+                if (!_currentScene.currentImage) return;
 
                 let nextId;
                 if(stepBy === 1)
