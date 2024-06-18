@@ -144,11 +144,10 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         _selectedSequence = image.sequence_id;
 
         service
-            .ensureViewerLoaded(context, image.id)
+            .ensureViewerLoaded(context)
             .then(function() {
                 service
                     .selectImage(context, image.id)
-                    .yaw(_viewerYaw)
                     .showViewer(context);
             });
 
@@ -252,14 +251,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     }
 
     function viewerChanged() {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
-        var viewer = service.viewer();
-        if (!viewer) return;
+        const frame = service.photoFrame();
 
         // update viewfield rotation
-        _viewerYaw = viewer.getYaw();
+        _viewerYaw = frame.getYaw();
 
         // avoid updating if the map is currently transformed
         // e.g. during drags or easing.
@@ -299,7 +297,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
         if (enabled) {
             let zoom = ~~context.map().zoom();
-            console.log(zoom)
             if (service){
                 if(zoom >= imageMinZoom) {
                     editOn();

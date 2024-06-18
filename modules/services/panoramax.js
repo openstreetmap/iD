@@ -1,7 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select } from 'd3-selection';
-import { timer as d3_timer } from 'd3-timer';
-import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import Protobuf from 'pbf';
 import RBush from 'rbush';
@@ -10,6 +7,8 @@ import { VectorTile } from '@mapbox/vector-tile';
 import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform, utilUniqueDomId} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { t, localizer } from '../core/localizer';
+import pannellumPhotoFrame from './pannellum_photo';
+import planePhotoFrame from './plane_photo';
 
 const apiUrl = 'https://panoramax.openstreetmap.fr/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
@@ -25,28 +24,16 @@ const sequenceLayer = 'sequences';
 
 const minZoom = 10;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
-const imgZoom = d3_zoom()
-    .extent([[0, 0], [320, 240]])
-    .translateExtent([[0, 0], [320, 240]])
-    .scaleExtent([1, 15]);
-const pannellumViewerCSS = 'pannellum/pannellum.css';
-const pannellumViewerJS = 'pannellum/pannellum.js';
-const resolution = 1080;
 
 let _cache;
 let _loadViewerPromise;
 let _pannellumViewer;
 let _definition = standardDefinition;
 let _isHD = false;
-let _sceneOptions = {
-    showFullscreenCtrl: false,
-    autoLoad: true,
-    yaw: 0,
-    minHfov: 10,
-    maxHfov: 90,
-    hfov: 60,
-};
-let _currScene = 0;
+
+let _planeFrame;
+let _pannellumFrame;
+let _currentFrame;
 
 let _currentScene = {
     currentImage : null,
@@ -160,8 +147,9 @@ function loadTileDataToCache(data, tile) {
                 acc_id: feature.properties.account_id,
                 sequence_id: feature.properties.sequences.split("\"")[1],
                 heading: feature.properties.heading,
+                image_path: "",
                 resolution: feature.properties.resolution,
-                isPano: feature.properties.type === "equirectangular",
+                isPano: feature.properties.type == "equirectangular",
                 model: feature.properties.model,
             };
             cache.forImageId[d.id] = d;
@@ -338,40 +326,28 @@ export default {
         }
     },
 
-    initViewer: function () {
-        if (!window.pannellum) return;
-        if (_pannellumViewer) return;
-
-        _currScene += 1;
-        const sceneID = _currScene.toString();
-        const options = {
-            'default': { firstScene: sceneID },
-            scenes: {}
-        };
-        options.scenes[sceneID] = _sceneOptions;
-
-        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-panoramax-pnlm', options);
-    },
-
     selectImage: function (context, id) {
         let that = this;
 
-        let d = this.cachedImage(id);
-
-        this.setActiveImage(d);
-
-        this.updateUrlImage(d.id);
+        let d = that.cachedImage(id);
+        that.setActiveImage(d);
+        that.updateUrlImage(d.id);
 
         let imageUrl = getImage(d.id, highDefinition);
 
-        let viewer = context.container().select('.photoviewer');
-        if (!viewer.empty()) viewer.datum(d);
+        let viewer = context.container()
+            .select('.photoviewer');
+
+        if (!viewer.empty()) 
+            viewer.datum(d);
 
         this.setStyles(context, null);
 
         if (!d) return this;
 
-        let wrap = context.container().select('.photoviewer .panoramax-wrapper');
+        let wrap = context.container()
+            .select('.photoviewer .panoramax-wrapper');
+            
         let attribution = wrap.selectAll('.photo-attribution').text('');
 
         let line1 = attribution
@@ -392,17 +368,8 @@ export default {
             .property('checked', _isHD)
             .on('click', (d3_event) => {
                 d3_event.stopPropagation();
-                
                 _isHD = !_isHD;
                 _definition = _isHD ? highDefinition : standardDefinition;
-
-                let viewstate = {
-                    yaw: _pannellumViewer.getYaw(),
-                    pitch: _pannellumViewer.getPitch(),
-                    hfov: _pannellumViewer.getHfov()
-                };
-            
-                _sceneOptions = Object.assign(_sceneOptions, viewstate);
                 that.selectImage(context, d.id)
                 .showViewer(context);
             });
@@ -410,15 +377,6 @@ export default {
         label
             .append('span')
             .call(t.append('panoramax.hd'));
-
-        wrap
-            .transition()
-            .duration(100)
-            .call(imgZoom.transform, d3_zoomIdentity);
-
-        wrap
-            .selectAll('img')
-            .remove();
 
         if (d.capture_time) {
             attribution
@@ -449,6 +407,7 @@ export default {
             .text('panoramax.fr');
 
         getImageData(d.sequence_id, d.id).then(function(data){
+
             _currentScene = {
                 currentImage: null,
                 nextImage: null,
@@ -461,7 +420,8 @@ export default {
                 _currentScene.nextImage = data.links[nextIndex];
             if (prevIndex != -1)
                 _currentScene.prevImage = data.links[prevIndex];
-            _sceneOptions.panorama = _currentScene.currentImage.href;
+
+            d.image_path = _currentScene.currentImage.href;
 
             wrap
                 .selectAll('button.back')
@@ -470,26 +430,12 @@ export default {
                 .selectAll('button.forward')
                 .classed('hide', _currentScene.nextImage == null);
             
-            if (d.isPano) {
-                _sceneOptions.type = "equirectangular";
-                if (!_pannellumViewer) {
-                    that.initViewer();
-                } else {
-                    _currScene += 1;
-                    let sceneID = _currScene.toString();
-                    _pannellumViewer
-                        .addScene(sceneID, _sceneOptions)
-                        .loadScene(sceneID);
+            _currentFrame = d.isPano ? _pannellumFrame : _planeFrame;
 
-                    if (_currScene > 2) {
-                        sceneID = (_currScene - 1).toString();
-                        _pannellumViewer
-                            .removeScene(sceneID);
-                    }
-                }
-            } else {
-                that.initOnlyPhoto(context, imageUrl);
-            }
+            _currentFrame
+                .selectPhoto(d, true)
+                .showPhotoFrame(wrap);
+        
         });
 
         function localeDateString(s) {
@@ -503,35 +449,16 @@ export default {
         return this;
     },
 
-    initOnlyPhoto: function(context, imageUrl) {
-
-        if (_pannellumViewer) {
-            _pannellumViewer.destroy();
-            _pannellumViewer = null;
-        }
-    
-        let wrap = context.container().select('#ideditor-viewer-panoramax-simple');
-    
-        let imgWrap = wrap.select('img');
-    
-        if (!imgWrap.empty()) {
-            imgWrap.attr('src', imageUrl);
-        } else {
-            wrap.append('img')
-                .attr('src', imageUrl);
-        }
-    
-    },
-
-    viewer: function() {
-        return _pannellumViewer;
+    photoFrame: function() {
+        return _currentFrame;
     },
 
     ensureViewerLoaded: function(context) {
 
         let that = this;
 
-        let imgWrap = context.container().select('#ideditor-viewer-panoramax-simple > img');
+        let imgWrap = context.container()
+            .select('#ideditor-viewer-panoramax-simple > img');
 
         if (!imgWrap.empty()) {
             imgWrap.remove();
@@ -539,7 +466,9 @@ export default {
 
         if (_loadViewerPromise) return _loadViewerPromise;
 
-        let wrap = context.container().select('.photoviewer').selectAll('.panoramax-wrapper')
+        let wrap = context.container()
+            .select('.photoviewer')
+            .selectAll('.panoramax-wrapper')
             .data([0]);
 
         //TODO maybe all of this should be in panoramax_images?
@@ -549,31 +478,9 @@ export default {
             .classed('hide', true)
             .on('dblclick.zoom', null);
 
-        let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
-
         wrapEnter
             .append('div')
-            .attr('id', 'ideditor-viewer-panoramax-pnlm')
-            .on(pointerPrefix + 'down.panoramax', () => {
-            d3_select(window)
-                .on(pointerPrefix + 'move.panoramax', () => {
-                dispatch.call('viewerChanged');
-                }, true);
-            })
-            .on(pointerPrefix + 'up.panoramax pointercancel.panoramax', () => {
-            d3_select(window)
-                .on(pointerPrefix + 'move.panoramax', null);
-    
-            // continue dispatching events for a few seconds, in case viewer has inertia.
-            let t = d3_timer(elapsed => {
-                dispatch.call('viewerChanged');
-                if (elapsed > 1000) {
-                t.stop();
-                }
-            });
-        })
-        .append('div')
-        .attr('class', 'photo-attribution fillD');
+            .attr('class', 'photo-attribution fillD');
 
         const controlsEnter = wrapEnter
             .append('div')
@@ -593,67 +500,16 @@ export default {
             .on('click.forward', step(1))
             .text('►');
 
-        wrapEnter
-            .append('div')
-            .attr('id', 'ideditor-viewer-panoramax-pnlm');
-
-        wrapEnter
-            .append('div')
-            .attr('id', 'ideditor-viewer-panoramax-simple-wrap')
-            .call(imgZoom.on('zoom', zoomPan))
-            .append('div')
-            .attr('id', 'ideditor-viewer-panoramax-simple');
-
-
-
         // Register viewer resize handler
-        context.ui().photoviewer.on('resize.panoramax', () => {
-            if (_pannellumViewer) {
-                _pannellumViewer.resize();
-            }
-        });
-
-        _loadViewerPromise = new Promise((resolve, reject) => {
-            let loadedCount = 0;
-            function loaded() {
-                loadedCount += 1;
-
-                // wait until both files are loaded
-                if (loadedCount === 2) resolve();
-            }
-
-            const head = d3_select('head');
-
-            // load pannellum-viewercss
-            head.selectAll('#ideditor-panoramax-viewercss')
-                .data([0])
-                .enter()
-                .append('link')
-                .attr('id', 'ideditor-panoramax-viewercss')
-                .attr('rel', 'stylesheet')
-                .attr('crossorigin', 'anonymous')
-                .attr('href', context.asset(pannellumViewerCSS))
-                .on('load.servicePanoramax', loaded)
-                .on('error.servicePanoramax', function() {
-                    reject();
-                });
-
-            // load pannellum-viewerjs
-            head.selectAll('#ideditor-panoramax-viewerjs')
-                .data([0])
-                .enter()
-                .append('script')
-                .attr('id', 'ideditor-panoramax-viewerjs')
-                .attr('crossorigin', 'anonymous')
-                .attr('src', context.asset(pannellumViewerJS))
-                .on('load.servicePanoramax', loaded)
-                .on('error.servicePanoramax', function() {
-                    reject();
-                });
-        })
-            .catch(function() {
-                _loadViewerPromise = null;
-            });
+        _loadViewerPromise = Promise.all([
+            pannellumPhotoFrame.init(context, wrapEnter),
+            planePhotoFrame.init(context, wrapEnter)
+          ]).then(([pannellumPhotoFrame, planePhotoFrame]) => {
+            _pannellumFrame = pannellumPhotoFrame;
+            _pannellumFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
+            _planeFrame = planePhotoFrame;
+            _planeFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
+          });
 
         //TODO: maybe this should be here (export?)
         function step(stepBy) {
@@ -666,15 +522,7 @@ export default {
                 else nextId = _currentScene.prevImage.id;
 
                 if (!nextId) return;
-                
-                let viewstate = {
-                    yaw: _pannellumViewer.getYaw(),
-                    pitch: _pannellumViewer.getPitch(),
-                    hfov: _pannellumViewer.getHfov()
-                };
             
-                _sceneOptions = Object.assign(_sceneOptions, viewstate);
-
                 const nextImage = _cache.images.forImageId[nextId];
 
                 context.map().centerEase(nextImage.loc);
@@ -683,56 +531,35 @@ export default {
             };
         }
 
-        function zoomPan(d3_event) {
-            var t = d3_event.transform;
-            context.container().select('.photoviewer #ideditor-viewer-panoramax-simple')
-                .call(utilSetTransform, t.x, t.y, t.k);
-        }
-
         return _loadViewerPromise;
-    },
-
-    yaw: function(yaw) {
-        if (typeof yaw !== 'number') return yaw;
-        _sceneOptions.yaw = yaw;
-        return this;
     },
 
     showViewer: function (context) {
         let wrap = context.container().select('.photoviewer')
             .classed('hide', false);
-
         let isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
-
         if (isHidden) {
             wrap
                 .selectAll('.photo-wrapper:not(.panoramax-wrapper)')
                 .classed('hide', true);
-
             wrap
                 .selectAll('.photo-wrapper.panoramax-wrapper')
                 .classed('hide', false);
         }
-
         return this;
     },
 
     hideViewer: function (context) {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
-
         this.updateUrlImage(null);
-
         viewer
             .classed('hide', true)
             .selectAll('.photo-wrapper')
             .classed('hide', true);
-
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
-
         this.setActiveImage();
-
         return this.setStyles(context, null);
     },
 
