@@ -167,6 +167,7 @@ export var osmOneWayTags = {
         'ditch': true,
         'drain': true,
         'fish_pass': true,
+        'flowline': true,
         'pressurised': true,
         'river': true,
         'spillway': true,
@@ -245,7 +246,7 @@ export var osmRailwayTrackTagValues = {
 
 // "waterway" tag values for line features representing water flow
 export var osmFlowingWaterwayTagValues = {
-    canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
+    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
 };
 
 // Tags which values should be considered case sensitive when offering tag suggestions
