@@ -23,6 +23,8 @@ const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
 
 const minZoom = 10;
+const imageMinZoom = 15;
+const lineMinZoom = 10;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
 
 let _cache;
@@ -40,6 +42,8 @@ let _currentScene = {
     nextImage : null,
     prevImage : null
 };
+
+let _activeImage;
 
 
 // Partition viewport into higher zoom tiles
@@ -129,6 +133,8 @@ function loadTileDataToCache(data, tile) {
         i,
         feature,
         loc,
+        locX,
+        locY,
         d;
 
     if (vectorTile.layers.hasOwnProperty(pictureLayer)) {
@@ -144,7 +150,7 @@ function loadTileDataToCache(data, tile) {
                 loc: loc,
                 capture_time: feature.properties.ts,
                 id: feature.properties.id,
-                acc_id: feature.properties.account_id,
+                account_id: feature.properties.account_id,
                 sequence_id: feature.properties.sequences.split("\"")[1],
                 heading: feature.properties.heading,
                 image_path: "",
@@ -179,7 +185,7 @@ function loadTileDataToCache(data, tile) {
 }
 
 // Quick access to image
-function getImage(image_id, definition){
+function getImageURL(image_id, definition){
     const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
         .replace('{definition}', definition);
 
@@ -219,6 +225,7 @@ export default {
         };
 
         _currentScene.currentImage = null;
+        _activeImage = null;
     },
 
     // Get visible images
@@ -234,16 +241,16 @@ export default {
 
     // Load images in the visible area
     loadImages: function(projection) {
-        loadTiles('images', tileUrl, 15, projection);
+        loadTiles('images', tileUrl, imageMinZoom, projection);
     },
 
     // Load line in the visible area
     loadLines: function(projection) {
-        loadTiles('line', tileUrl, 10, projection);
+        loadTiles('line', tileUrl, lineMinZoom, projection);
     },
 
     // Get visible sequences
-    sequences: function(projection) {
+    sequences: function(projection, zoom) {
         const viewport = projection.clipExtent();
         const min = [viewport[0][0], viewport[1][1]];
         const max = [viewport[1][0], viewport[0][1]];
@@ -251,40 +258,46 @@ export default {
         const sequenceIds = {};
         let lineStrings = [];
 
-        _cache.images.rtree.search(bbox)
-            .forEach(function(d) {
-                if (d.data.sequence_id) {
-                    sequenceIds[d.data.sequence_id] = true;
-                }
-            });
-
-        Object.keys(sequenceIds).forEach(function(sequenceId) {
-            if (_cache.sequences.lineString[sequenceId]) {
+        
+        if(zoom >= imageMinZoom){
+            _cache.images.rtree.search(bbox).forEach(function(d) {
+                    if (d.data.sequence_id) {
+                        sequenceIds[d.data.sequence_id] = true;
+                    }
+                });
+                Object.keys(sequenceIds).forEach(function(sequenceId) {
+                    if (_cache.sequences.lineString[sequenceId]) {
+                        lineStrings = lineStrings.concat(_cache.sequences.lineString[sequenceId]);
+                    }
+                });
+                return lineStrings;
+        }
+        if(zoom >= lineMinZoom){
+            Object.keys(_cache.sequences.lineString).forEach(function(sequenceId) {
                 lineStrings = lineStrings.concat(_cache.sequences.lineString[sequenceId]);
-            }
-        });
-
+            });
+        }  
         return lineStrings;
     },
 
     // Set the currently visible image
     setActiveImage: function(image) {
         if (image) {
-            _currentScene.currentImage = {
+            _activeImage = {
                 id: image.id,
                 sequence_id: image.sequence_id
             };
         } else {
-            _currentScene.currentImage = null;
+            _activeImage = null;
         }
     },
 
     // Update the currently highlighted sequence and selected bubble.
     setStyles: function(context, hovered) {
-        const hoveredImageId = hovered && hovered.id;
+        const hoveredImageId =  hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
-        const selectedSequenceId = _currentScene.currentImage && _currentScene.currentImage.sequence_id;
-        const selectedImageId =  _currentScene.currentImage && _currentScene.currentImage.id;
+        const selectedSequenceId = _activeImage && _activeImage.sequence_id;
+        const selectedImageId = _activeImage && _activeImage.id;
 
         const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
@@ -305,9 +318,9 @@ export default {
         function viewfieldPath() {
             let d = this.parentNode.__data__;
             if (d.isPano && d.id !== selectedImageId) {
-            return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
-            return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
 
@@ -333,7 +346,7 @@ export default {
         that.setActiveImage(d);
         that.updateUrlImage(d.id);
 
-        let imageUrl = getImage(d.id, highDefinition);
+        let imageUrl = getImageURL(d.id, highDefinition);
 
         let viewer = context.container()
             .select('.photoviewer');

@@ -166,7 +166,7 @@
 .sequence {
     fill: none;
     stroke-width: 2;
-    stroke-opacity: 0.4;
+    stroke-opacity: 0.6;
 }
 .sequence.highlighted,
 .sequence.currentView {
@@ -301,7 +301,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    overflow: hidden
+    overflow: hidden;
 }
 
 /* panoramax Image Layer */
@@ -464,23 +464,22 @@ label.streetside-hires {
 .photo-wrapper {
     position: relative;
     background-color: #000;
-}
-
-.photoviewer .plane-frame {
-    display: block;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
     background-image: url(img/loader-black.gif);
     background-position: center;
     background-repeat: no-repeat;
-    object-fit: cover;
+}
+
+.photoviewer .plane-frame {
+    height: 100%;
+    width: 100%;
+    transform-origin: 0 0;
 }
 
 .photoviewer .plane-frame > img.plane-photo{
-    width: auto;
+    width: 100%;
     height: 100%;
-    transform-origin: 0 0;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 /* photo-controls (step forward, back, rotate) */

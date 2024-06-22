@@ -167,11 +167,11 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
     function update() {
 
-        const z = ~~context.map().zoom();
-        const showViewfields = (z >= viewFieldZoomLevel);
+        const zoom = ~~context.map().zoom();
+        const showViewfields = (zoom >= viewFieldZoomLevel);
 
         const service = getService();
-        let sequences = (service ? service.sequences(projection) : []);
+        let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service ? service.images(projection) : []);
 
         images = filterImages(images);

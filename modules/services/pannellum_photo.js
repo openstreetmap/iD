@@ -119,7 +119,7 @@ export default {
       let newSceneOptions = {
         showFullscreenCtrl: false,
         autoLoad: false,
-        compass: true,
+        compass: false,
         yaw: 0,
         type: 'equirectangular',
         preview: data.preview_path,
