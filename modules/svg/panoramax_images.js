@@ -41,6 +41,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
+        const username = context.photos().usernames();
+
+        const service = getService();
 
         if (!showsPano || !showsFlat) {
             images = images.filter(function(image) {
@@ -58,6 +61,14 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 return new Date(image.capture_time).getTime() <= new Date(toDate).getTime();
             });
         }
+        if (username && service) {
+            service.getUserIdFromName(username).then(function(id){
+                images = images.filter(function(image) {
+                    return id == image.account_id ;
+                });
+            })
+            
+        }
 
         return images;
     }
@@ -67,21 +78,27 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
+        const usernames = context.photos().usernames();
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                    if (sequence.properties.type === "equirectangular") return showsPano;
+                    if (sequence.type === "equirectangular") return showsPano;
                     return showsFlat;
             });
         }
         if (fromDate) {
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.date).getTime() >= new Date(fromDate).getTime().toString();
+                return new Date(sequence.date).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
         if (toDate) {
             sequences = sequences.filter(function(sequence) {
-                return new Date(sequence.properties.date).getTime() <= new Date(toDate).getTime().toString();
+                return new Date(sequence.date).getTime() <= new Date(toDate).getTime().toString();
+            });
+        }
+        if (usernames) {
+            sequences = sequences.filter(function(sequence) {
+                return usernames.indexOf(sequence.account_id) !== -1;
             });
         }
 
