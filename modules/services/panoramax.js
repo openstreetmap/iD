@@ -15,7 +15,7 @@ const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
 const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
 const userIdUrl = apiUrl + 'api/users/search?q={username}'
-const usernameURL = apiUrl + '/api/users/{userId}'
+const usernameURL = apiUrl + 'api/users/{userId}'
 
 const highDefinition = "hd";
 const standardDefinition = "sd";
@@ -154,7 +154,6 @@ function loadTileDataToCache(data, tile) {
                 sequence_id: feature.properties.sequences.split("\"")[1],
                 heading: feature.properties.heading,
                 image_path: "",
-                captured_by: "",
                 resolution: feature.properties.resolution,
                 isPano: feature.properties.type == "equirectangular",
                 model: feature.properties.model,
@@ -203,17 +202,6 @@ async function getImageData(collection_id, image_id){
     }
     const data = await response.json();
     return data;
-}
-
-async function getUserId(username){
-    const requestUrl = userIdUrl.replace('{username}', username);
-
-    const response = await fetch(requestUrl, { method: 'GET' });
-    if (!response.ok) {
-        throw new Error(response.status + ' ' + response.statusText);
-    }
-    const data = await response.json();
-    return data.features[0].id;
 }
 
 async function getUsername(user_id){
@@ -270,6 +258,17 @@ export default {
     // Load line in the visible area
     loadLines: function(projection) {
         loadTiles('line', tileUrl, lineMinZoom, projection);
+    },
+
+    getUserId: async function(username){
+        const requestUrl = userIdUrl.replace('{username}', username);
+    
+        const response = await fetch(requestUrl, { method: 'GET' });
+        if (!response.ok) {
+            throw new Error(response.status + ' ' + response.statusText);
+        }
+        const data = await response.json();
+        return data.features[0].id;
     },
 
     // Get visible sequences
@@ -360,11 +359,6 @@ export default {
             }
             window.location.replace('#' + utilQsString(hash, true));
         }
-    },
-
-    getUserIdFromName: async function(username){
-        const id = await getUserId(username)
-        return id;
     },
 
     selectImage: function (context, id) {
@@ -497,7 +491,6 @@ export default {
                     .append('span')
                     .attr('class', 'captured_by')
                     .text('Captured by: ' + username);
-                d.captured_by = username;
             });
         }
 
