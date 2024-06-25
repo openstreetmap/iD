@@ -13,6 +13,7 @@ export function rendererPhotos(context) {
     var _dateFilters = ['fromDate', 'toDate'];
     var _fromDate;
     var _toDate;
+    var _maxPhotoAge;
     var _usernames;
 
     function photos() {}
@@ -44,6 +45,10 @@ export function rendererPhotos(context) {
 
     photos.dateFilters = function() {
         return _dateFilters;
+    };
+
+    photos.maxPhotoAge = function() {
+        return _maxPhotoAge;
     };
 
     photos.dateFilterValue = function(val) {
@@ -79,6 +84,22 @@ export function rendererPhotos(context) {
             setUrlFilterValue('photo_dates', rangeString);
         }
     };
+
+    photos.setMaxPhotoAge = function(maxPhotoAge){
+        if(maxPhotoAge != -1){
+            var fromDate = new Date();
+            fromDate.setDate(fromDate.getDate() - maxPhotoAge);
+            var dd = String(fromDate.getDate()).padStart(2, '0');
+            var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
+            var yyyy = fromDate.getFullYear();
+
+            fromDate = mm + '/' + dd + '/' + yyyy;
+            photos.setDateFilter('fromDate', fromDate)
+            _maxPhotoAge = maxPhotoAge;
+        }
+        else
+            photos.setDateFilter('fromDate', null)
+    }
 
     photos.setUsernameFilter = function(val, updateUrl) {
         if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
@@ -119,8 +140,12 @@ export function rendererPhotos(context) {
     }
 
     photos.shouldFilterByDate = function() {
-        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
+        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder');
     };
+
+    photos.shouldFilterByMaxAge = function(){
+        return showsLayer('panoramax');
+    }
 
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||

@@ -30,6 +30,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(container)
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems)
+            .call(drawMaxAgeFilter)
             .call(drawDateFilter)
             .call(drawUsernameFilter)
             .call(drawLocalPhotos);
@@ -253,6 +254,86 @@ export function uiSectionPhotoOverlays(context) {
             });
 
         li = li
+            .merge(liEnter)
+            .classed('active', filterEnabled);
+    }
+
+    function drawMaxAgeFilter(selection){
+        function filterEnabled(d) {
+            return context.photos().maxPhotoAge(d);
+        }
+
+        var ul = selection
+            .selectAll('.layer-list-date-age')
+            .data([0]);
+
+        ul.exit()
+            .remove();
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-date-age')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item-date-age')
+            .data(context.photos().shouldFilterByMaxAge() ? ['max-age'] : []);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', 'list-item-date-age');
+
+            var labelEnter = liEnter
+            .append('label')
+            .each(function() {
+                d3_select(this)
+                    .call(uiTooltip()
+                        .title(() => t.append('photo_overlays.max_age_filter.tooltip'))
+                        .placement('top')
+                    );
+            });
+
+        labelEnter
+            .append('span')
+            .call(t.append('photo_overlays.max_age_filter.title'));
+
+        labelEnter
+            .append('select')
+            .attr('type', 'text')
+            .attr('class', 'list-option')
+            .call(utilNoAuto)
+        
+        var select = labelEnter.selectAll('.list-option');
+
+        select
+            .append('option')
+            .attr('value', -1)
+            .call(t.append('photo_overlays.max_age_filter.all'));
+
+        select
+            .append('option')
+            .attr('value', 7)
+            .call(t.append('photo_overlays.max_age_filter.week'));
+
+        select
+            .append('option')
+            .attr('value', 31)
+            .call(t.append('photo_overlays.max_age_filter.month'));
+
+        select
+            .append('option')
+            .attr('value', 365)
+            .call(t.append('photo_overlays.max_age_filter.year'));
+
+        select
+            .on('change', function() {
+                var value = d3_select(this).property('value');
+                context.photos().setMaxPhotoAge(parseInt(value));
+            });
+
+        li
             .merge(liEnter)
             .classed('active', filterEnabled);
     }

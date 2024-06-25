@@ -886,6 +886,13 @@ en:
     username_filter:
       title: "Username"
       tooltip: "Show only photos by this user"
+    max_age_filter:
+      year: "Last year"
+      month: "Last month"
+      week: "Last week"
+      all: "Show all"
+      title: "Photo age"
+      tooltip: "Select maximum photo age"
   feature:
     points:
       description: Points
