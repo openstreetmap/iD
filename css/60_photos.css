@@ -475,11 +475,10 @@ label.streetside-hires {
     transform-origin: 0 0;
 }
 
-.photoviewer .plane-frame > img.plane-photo{
-    width: 100%;
+.photoviewer .plane-frame > img.plane-photo {
+    width: auto;
     height: 100%;
-    object-fit: cover;
-    overflow: hidden;
+    transform-origin: 0 0;
 }
 
 /* photo-controls (step forward, back, rotate) */
