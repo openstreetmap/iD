@@ -30,7 +30,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(container)
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems)
-            .call(drawMaxAgeFilter)
+            .call(drawDateSlider)
             .call(drawDateFilter)
             .call(drawUsernameFilter)
             .call(drawLocalPhotos);
@@ -332,6 +332,78 @@ export function uiSectionPhotoOverlays(context) {
                 var value = d3_select(this).property('value');
                 context.photos().setMaxPhotoAge(parseInt(value));
             });
+
+        li
+            .merge(liEnter)
+            .classed('active', filterEnabled);
+    }
+
+    function drawDateSlider(selection){
+
+        function filterEnabled(d) {
+            return context.photos().maxPhotoYear(d);
+        }
+
+        var currYear = new Date();
+        currYear = currYear.getFullYear();
+
+        var ul = selection
+            .selectAll('.layer-list-date-slider')
+            .data([0]);
+
+        ul.exit()
+            .remove();
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-date-slider')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item-date-slider')
+            .data(context.photos().shouldFilterDateBySlider() ? ['date-slider'] : []);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', 'list-item-date-slider');
+
+            var labelEnter = liEnter
+            .append('label')
+            .each(function() {
+                d3_select(this)
+                    .call(uiTooltip()
+                        .title(() => t.append('photo_overlays.age_slider_filter.tooltip'))
+                        .placement('top')
+                    );
+            });
+
+        labelEnter
+            .append('span')
+            .call(t.append('photo_overlays.age_slider_filter.title'));
+
+        labelEnter
+            .append('input')
+            .attr('type', 'range')
+            .attr('max', currYear)
+            .attr('min', currYear)
+            .attr('list', 'dateValues')
+            .attr('class', 'list-option-date-slider')
+            .call(utilNoAuto)
+            .on('change', function() {
+                var value = d3_select(this).property('value');
+                context.photos().setMaxPhotoYear(parseInt(value));
+            });
+
+        let datalist = labelEnter
+            .append('datalist')
+            .attr('id', 'dateValues')
+        
+        datalist
+            .append('option')
+            .attr('value', currYear)
+            .attr('label', currYear)
 
         li
             .merge(liEnter)

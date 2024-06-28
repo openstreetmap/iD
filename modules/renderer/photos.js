@@ -14,6 +14,7 @@ export function rendererPhotos(context) {
     var _fromDate;
     var _toDate;
     var _maxPhotoAge;
+    var _maxPhotoYear;
     var _usernames;
 
     function photos() {}
@@ -49,6 +50,10 @@ export function rendererPhotos(context) {
 
     photos.maxPhotoAge = function() {
         return _maxPhotoAge;
+    };
+
+    photos.maxPhotoYear = function() {
+        return _maxPhotoYear;
     };
 
     photos.dateFilterValue = function(val) {
@@ -101,6 +106,19 @@ export function rendererPhotos(context) {
             photos.setDateFilter('fromDate', null)
     }
 
+    photos.setMaxPhotoYear = function(maxPhotoYear){
+        if(maxPhotoYear != null){
+            var fromDate = new Date();
+            fromDate = '01/01/' + maxPhotoYear;
+            photos.setDateFilter('fromDate', fromDate);
+            _maxPhotoYear = maxPhotoYear;
+        }
+        else{
+            photos.setDateFilter('fromDate', null);
+        }
+    }
+
+
     photos.setUsernameFilter = function(val, updateUrl) {
         if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
         if (val) {
@@ -144,6 +162,10 @@ export function rendererPhotos(context) {
     };
 
     photos.shouldFilterByMaxAge = function(){
+        return false;
+    }
+
+    photos.shouldFilterDateBySlider = function(){
         return showsLayer('panoramax');
     }
 

@@ -185,6 +185,31 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
+    function updateSlider(oldestDate){
+        let currYear = new Date();
+        let slider = d3_select('.list-option-date-slider');
+
+        let label = slider.select(function() { return this.parentNode; })
+
+        label.selectAll('datalist').remove();
+
+        let datalist = label.append('datalist').attr('id', 'dateValues');
+
+        datalist
+            .append('option')
+            .attr('value', currYear.getFullYear())
+            .attr('label', currYear.getFullYear())
+
+        if(oldestDate){
+            slider.attr('min', oldestDate);
+
+            datalist
+                .append('option')
+                .attr('value', oldestDate)
+                .attr('label', oldestDate)
+        }
+    }
+
     async function update() {
         const zoom = ~~context.map().zoom();
         const showViewfields = (zoom >= viewFieldZoomLevel);
@@ -192,6 +217,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service ? service.images(projection) : []);
+        let oldestDate = service.getOldestDate();
+        
+        updateSlider(oldestDate);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
@@ -266,7 +294,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
-
     }
 
     function viewerChanged() {

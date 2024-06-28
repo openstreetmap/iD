@@ -893,6 +893,9 @@ en:
       all: "Show all"
       title: "Photo age"
       tooltip: "Select maximum photo age"
+    age_slider_filter:
+      title: "Year Slider"
+      tooltip: "Select oldest photo year"
   feature:
     points:
       description: Points

@@ -621,3 +621,8 @@ label.streetside-hires {
     border-radius: 4px;
     cursor: pointer;
 }
+
+datalist {
+    display: inline-block;
+    vertical-align: middle;
+  }

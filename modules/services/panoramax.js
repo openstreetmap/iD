@@ -39,6 +39,8 @@ let _planeFrame;
 let _pannellumFrame;
 let _currentFrame;
 
+let _oldestDate;
+
 let _currentScene = {
     currentImage : null,
     nextImage : null,
@@ -162,6 +164,14 @@ function loadTileDataToCache(data, tile) {
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             });
+            
+            if(_oldestDate){
+                if(d.capture_time < _oldestDate)
+                    _oldestDate = d.capture_time;
+            }
+            else{
+                _oldestDate = d.capture_time;
+            }
         }
         if (cache.rtree) {
             cache.rtree.load(features);
@@ -178,6 +188,13 @@ function loadTileDataToCache(data, tile) {
                 cache.lineString[feature.properties.id].push(feature);
             } else {
                 cache.lineString[feature.properties.id] = [feature];
+            }
+            if(_oldestDate){
+                if(feature.properties.date < _oldestDate)
+                    _oldestDate = feature.properties.date;
+            }
+            else{
+                _oldestDate = feature.properties.date;
             }
         }
     }
@@ -269,6 +286,11 @@ export default {
         }
         const data = await response.json();
         return data.features[0].id;
+    },
+
+    getOldestDate: function(){
+        if(_oldestDate)
+            return _oldestDate.substr(0, 4);
     },
 
     // Get visible sequences
