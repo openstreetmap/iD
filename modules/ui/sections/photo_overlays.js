@@ -383,7 +383,16 @@ export function uiSectionPhotoOverlays(context) {
             .append('span')
             .call(t.append('photo_overlays.age_slider_filter.title'));
 
-        labelEnter
+        let sliderWrap = labelEnter
+            .append('div')
+            .attr('class','slider-wrap')
+
+        let output = sliderWrap
+            .append('output')
+            .html(currYear)
+            .attr('class','year-selected');
+
+        sliderWrap
             .append('input')
             .attr('type', 'range')
             .attr('max', currYear)
@@ -394,10 +403,12 @@ export function uiSectionPhotoOverlays(context) {
             .on('change', function() {
                 var value = d3_select(this).property('value');
                 context.photos().setMaxPhotoYear(parseInt(value));
+                output.html(value);
             });
 
-        let datalist = labelEnter
+        let datalist = sliderWrap
             .append('datalist')
+            .attr('class', 'year-datalist')
             .attr('id', 'dateValues')
         
         datalist

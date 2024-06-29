@@ -186,21 +186,19 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     }
 
     function updateSlider(oldestDate){
+        let maxOldestYear = 2010;
         let currYear = new Date();
         let slider = d3_select('.list-option-date-slider');
 
-        let label = slider.select(function() { return this.parentNode; })
+        let sliderWrap = slider.select(function() { return this.parentNode; })
 
-        label.selectAll('datalist').remove();
+        sliderWrap.selectAll('datalist').remove();
 
-        let datalist = label.append('datalist').attr('id', 'dateValues');
+        let datalist = sliderWrap.append('datalist')
+            .attr('id', 'dateValues')
+            .attr('class', 'year-datalist');
 
-        datalist
-            .append('option')
-            .attr('value', currYear.getFullYear())
-            .attr('label', currYear.getFullYear())
-
-        if(oldestDate){
+        if(oldestDate > maxOldestYear){
             slider.attr('min', oldestDate);
 
             datalist
@@ -208,6 +206,19 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 .attr('value', oldestDate)
                 .attr('label', oldestDate)
         }
+        else{
+            slider.attr('min', maxOldestYear);
+
+            datalist
+                .append('option')
+                .attr('value', maxOldestYear)
+                .attr('label', maxOldestYear)
+        }
+
+        datalist
+            .append('option')
+            .attr('value', currYear.getFullYear())
+            .attr('label', currYear.getFullYear())
     }
 
     async function update() {

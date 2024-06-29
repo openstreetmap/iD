@@ -621,7 +621,11 @@ label.streetside-hires {
     cursor: pointer;
 }
 
-datalist {
-    display: inline-block;
-    vertical-align: middle;
-  }
+.slider-wrap {
+    display: inline-block;  
+}
+
+.year-datalist {
+    display: flex;
+    justify-content: space-between;
+}
