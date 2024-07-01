@@ -1,6 +1,6 @@
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
-import { utilArrayUniq } from '../util';
+import { utilArrayUniqBy } from '../util';
 
 export const cardinal = {
     north: 0,               n: 0,
@@ -20,6 +20,8 @@ export const cardinal = {
     northwest: 315,         nw: 315,
     northnorthwest: 337,    nnw: 337
 };
+
+const SIDES = new Set(['left', 'right', 'both']);
 
 export function osmNode() {
     if (!(this instanceof osmNode)) {
@@ -65,16 +67,28 @@ Object.assign(osmNode.prototype, {
 
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
-        var val;
+        /** @type {{ type: 'side' | 'direction'; value: string }[]} */
+        const rawValues = [];
         var i;
 
         // which tag to use?
         if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
             // all-way stop tag on a highway intersection
-            val = 'all';
+            rawValues.push({
+                type: 'direction',
+                value: 'all',
+            });
         } else {
+            // generic side tag
+            if (SIDES.has(this.tags.side?.toLowerCase())) {
+                rawValues.push({
+                    type: 'side',
+                    value: this.tags.side.toLowerCase(),
+                });
+            }
+
             // generic direction tag
-            val = (this.tags.direction || '').toLowerCase();
+            let val = (this.tags.direction || '').toLowerCase();
 
             // better suffix-style direction tag
             var re = /:direction$/i;
@@ -85,15 +99,18 @@ Object.assign(osmNode.prototype, {
                     break;
                 }
             }
+            for (const value of val.split(';')) {
+                rawValues.push({ type: 'direction', value });
+            }
         }
 
-        if (val === '') return [];
+        if (!rawValues.length) return [];
 
 
-        var values = val.split(';');
+        /** @type {{ type: 'side' | 'direction'; angle: number }[]} */
         var results = [];
 
-        values.forEach(function(v) {
+        rawValues.forEach(({ type, value: v }) => {
             // swap cardinal for numeric directions
             if (cardinal[v] !== undefined) {
                 v = cardinal[v];
@@ -101,15 +118,17 @@ Object.assign(osmNode.prototype, {
 
             // numeric direction - just add to results
             if (v !== '' && !isNaN(+v)) {
-                results.push(+v);
+                results.push({ type: 'direction', angle: +v });
                 return;
             }
 
+            const isSide = type === 'side' && SIDES.has(v);
+
             // string direction - inspect parent ways
             var lookBackward =
-                (this.tags['traffic_sign:backward'] || v === 'backward' || v === 'both' || v === 'all');
+                (this.tags['traffic_sign:backward'] || v === (isSide ? 'left' : 'backward') || v === 'both' || v === 'all');
             var lookForward =
-                (this.tags['traffic_sign:forward'] || v === 'forward' || v === 'both' || v === 'all');
+                (this.tags['traffic_sign:forward'] || v === (isSide ? 'right' : 'forward') || v === 'both' || v === 'all');
 
             if (!lookForward && !lookBackward) return;
 
@@ -130,14 +149,15 @@ Object.assign(osmNode.prototype, {
 
             Object.keys(nodeIds).forEach(function(nodeId) {
                 // +90 because geoAngle returns angle from X axis, not Y (north)
-                results.push(
-                    (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + 90
-                );
+                results.push({
+                    type: isSide ? 'side' : 'direction',
+                    angle: (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + (isSide ? 0 : 90)
+                });
             }, this);
 
         }, this);
 
-        return utilArrayUniq(results);
+        return utilArrayUniqBy(results, item => item.type + item.angle);
     },
 
     isCrossing: function(){
