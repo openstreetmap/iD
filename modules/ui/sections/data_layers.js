@@ -128,7 +128,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['keepRight', 'improveOSM', 'osmose'];
+        var qaKeys = ['keepRight', 'osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
