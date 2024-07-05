@@ -24,7 +24,6 @@ var oauth = osmAuth({
     url: urlroot,
     apiUrl: apiUrlroot,
     client_id: osmApiConnections[0].client_id,
-    client_secret: osmApiConnections[0].client_secret,
     scope: 'read_prefs write_prefs write_api read_gpx write_notes',
     redirect_uri: redirectPath + 'land.html',
     loading: authLoading,
