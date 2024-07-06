@@ -90,7 +90,7 @@ export function rendererPhotos(context) {
         }
     };
 
-    photos.setFromDateFilter = function(date){
+    photos.setFromDateFilter = function(date, updateUrl){
         if (date !== -1){
             var fromDate = new Date();
             fromDate.setDate(fromDate.getDate() - date);
@@ -99,21 +99,20 @@ export function rendererPhotos(context) {
             var yyyy = fromDate.getFullYear();
 
             fromDate = mm + '/' + dd + '/' + yyyy;
-            photos.setDateFilter('fromDate', fromDate);
+            photos.setDateFilter('fromDate', fromDate, updateUrl);
             _maxPhotoDate = date;
         } else {
-            photos.setDateFilter('fromDate', null);
+            photos.setDateFilter('fromDate', null, updateUrl);
         }
     };
 
-    photos.setFromYearFilter = function(year){
-        if (year !== null){
-            var fromDate = new Date();
-            fromDate = '01/01/' + year;
-            photos.setDateFilter('fromDate', fromDate);
+    photos.setFromYearFilter = function(year, updateUrl){
+        if (year){
+            var fromDate = new Date(year, 0, 1);
+            photos.setDateFilter('fromDate', fromDate, updateUrl);
             _maxPhotoYear = year;
         } else {
-            photos.setDateFilter('fromDate', null);
+            photos.setDateFilter('fromDate', null, updateUrl);
         }
     };
 
@@ -221,6 +220,7 @@ export function rendererPhotos(context) {
             var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
+            this.setFromYearFilter(parts && parts.length >= 2 && parts[1], false);
         }
         if (hash.photo_username) {
             this.setUsernameFilter(hash.photo_username, false);

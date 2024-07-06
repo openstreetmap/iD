@@ -402,7 +402,7 @@ export function uiSectionPhotoOverlays(context) {
                 let value = parseInt(d3_select(this).property('value'), 10);
                 let minYear = parseInt(d3_select(this).property('min'), 10);
                 value = minYear + (currYear - value);
-                context.photos().setFromYearFilter(value);
+                context.photos().setFromYearFilter(value, true);
                 output.html(value + ' - ' + currYear);
             });
 
