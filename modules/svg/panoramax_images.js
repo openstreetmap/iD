@@ -10,11 +10,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     const imageMinZoom = 15;
     const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;
+    const maxOldestYear = 2010;
     let layer = d3_select(null);
     let _panoramax;
     let _viewerYaw = 0;
     let _selectedSequence;
-    
+
     function init() {
         if (svgPanoramaxImages.initialized) return;
         svgPanoramaxImages.enabled = false;
@@ -65,8 +66,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             let id = await service.getUserId(username);
 
             images = images.filter(function(image) {
-                return id == image.account_id;
-            });      
+                return id === image.account_id;
+            });
         }
 
         return images;
@@ -83,7 +84,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                    if (sequence.properties.type === "equirectangular") return showsPano;
+                    if (sequence.properties.type === 'equirectangular') return showsPano;
                     return showsFlat;
             });
         }
@@ -101,7 +102,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             let id = await service.getUserId(username);
 
             sequences = sequences.filter(function(sequence) {
-                return id == sequence.properties.account_id;
+                return id === sequence.properties.account_id;
             });
         }
 
@@ -185,12 +186,11 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
-    function updateSlider(oldestDate){
-        let maxOldestYear = 2010;
+    function updateYearSlider(oldestDate){
         let currYear = new Date();
         let slider = d3_select('.list-option-date-slider');
 
-        let sliderWrap = slider.select(function() { return this.parentNode; })
+        let sliderWrap = slider.select(function() { return this.parentNode; });
 
         sliderWrap.selectAll('datalist').remove();
 
@@ -198,28 +198,27 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('id', 'dateValues')
             .attr('class', 'year-datalist');
 
-        if(oldestDate > maxOldestYear){
+        if (oldestDate > maxOldestYear){
             slider.attr('min', oldestDate);
 
             datalist
                 .append('option')
                 .attr('value', oldestDate)
-                .attr('label', oldestDate)
-        }
-        else{
+                .attr('label', oldestDate);
+        } else {
             slider.attr('min', maxOldestYear);
 
             datalist
                 .append('option')
                 .attr('value', maxOldestYear)
-                .attr('label', maxOldestYear)
-        }
+                .attr('label', maxOldestYear);
+        };
 
         datalist
             .append('option')
             .attr('value', currYear.getFullYear())
-            .attr('label', currYear.getFullYear())
-    }
+            .attr('label', currYear.getFullYear());
+    };
 
     async function update() {
         const zoom = ~~context.map().zoom();
@@ -229,8 +228,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service ? service.images(projection) : []);
         let oldestDate = service.getOldestDate();
-        
-        updateSlider(oldestDate);
+
+        updateYearSlider(oldestDate);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
@@ -326,7 +325,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        
+
         const enabled = svgPanoramaxImages.enabled;
         const service = getService();
 
@@ -355,17 +354,15 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (enabled) {
             let zoom = ~~context.map().zoom();
             if (service){
-                if(zoom >= imageMinZoom) {
+                if (zoom >= imageMinZoom) {
                     editOn();
                     update();
                     service.loadImages(projection);
-                }
-                else if(zoom >= lineMinZoom) {
+                } else if (zoom >= lineMinZoom) {
                     editOn();
                     update();
                     service.loadLines(projection);
-                }
-                else {
+                } else {
                     editOff();
                 }
             } else {

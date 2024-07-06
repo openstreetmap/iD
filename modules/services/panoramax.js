@@ -4,22 +4,21 @@ import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform, utilUniqueDomId} from '../util';
+import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId} from '../util';
 import { geoExtent, geoScaleToZoom } from '../geo';
 import { t, localizer } from '../core/localizer';
 import pannellumPhotoFrame from './pannellum_photo';
 import planePhotoFrame from './plane_photo';
 
 const apiUrl = 'https://panoramax.openstreetmap.fr/';
-const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.pbf';
+const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.mvt';
 const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
-const userIdUrl = apiUrl + 'api/users/search?q={username}'
-const usernameURL = apiUrl + 'api/users/{userId}'
+const userIdUrl = apiUrl + 'api/users/search?q={username}';
+const usernameURL = apiUrl + 'api/users/{userId}';
 
-const highDefinition = "hd";
-const standardDefinition = "sd";
-const thumbnailDefinition = "thumb";
+const highDefinition = 'hd';
+const standardDefinition = 'sd';
 
 const pictureLayer = 'pictures';
 const sequenceLayer = 'sequences';
@@ -31,7 +30,6 @@ const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
 
 let _cache;
 let _loadViewerPromise;
-let _pannellumViewer;
 let _definition = standardDefinition;
 let _isHD = false;
 
@@ -153,23 +151,23 @@ function loadTileDataToCache(data, tile) {
                 capture_time: feature.properties.ts,
                 id: feature.properties.id,
                 account_id: feature.properties.account_id,
-                sequence_id: feature.properties.sequences.split("\"")[1],
+                sequence_id: feature.properties.sequences.split('\"')[1],
                 heading: feature.properties.heading,
-                image_path: "",
+                image_path: '',
                 resolution: feature.properties.resolution,
-                isPano: feature.properties.type == "equirectangular",
+                isPano: feature.properties.type === 'equirectangular',
                 model: feature.properties.model,
             };
             cache.forImageId[d.id] = d;
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             });
-            
-            if(_oldestDate){
-                if(d.capture_time < _oldestDate)
+
+            if (_oldestDate){
+                if (d.capture_time < _oldestDate){
                     _oldestDate = d.capture_time;
-            }
-            else{
+                }
+            } else {
                 _oldestDate = d.capture_time;
             }
         }
@@ -189,16 +187,15 @@ function loadTileDataToCache(data, tile) {
             } else {
                 cache.lineString[feature.properties.id] = [feature];
             }
-            if(_oldestDate){
-                if(feature.properties.date < _oldestDate)
+            if (_oldestDate){
+                if (feature.properties.date < _oldestDate){
                     _oldestDate = feature.properties.date;
-            }
-            else{
+                }
+            } else {
                 _oldestDate = feature.properties.date;
             }
         }
     }
-
 }
 
 // Quick access to image
@@ -211,7 +208,7 @@ function getImageURL(image_id, definition){
 
 async function getImageData(collection_id, image_id){
     const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
-        .replace('{itemId}', image_id)
+        .replace('{itemId}', image_id);
 
     const response = await fetch(requestUrl, { method: 'GET' });
     if (!response.ok) {
@@ -266,7 +263,6 @@ export default {
         return _cache.images.forImageId[imageKey];
     },
 
-
     // Load images in the visible area
     loadImages: function(projection) {
         loadTiles('images', tileUrl, imageMinZoom, projection);
@@ -279,7 +275,7 @@ export default {
 
     getUserId: async function(username){
         const requestUrl = userIdUrl.replace('{username}', username);
-    
+
         const response = await fetch(requestUrl, { method: 'GET' });
         if (!response.ok) {
             throw new Error(response.status + ' ' + response.statusText);
@@ -289,8 +285,9 @@ export default {
     },
 
     getOldestDate: function(){
-        if(_oldestDate)
+        if (_oldestDate){
             return _oldestDate.substr(0, 4);
+        }
     },
 
     // Get visible sequences
@@ -302,8 +299,7 @@ export default {
         const sequenceIds = {};
         let lineStrings = [];
 
-        
-        if(zoom >= imageMinZoom){
+        if (zoom >= imageMinZoom){
             _cache.images.rtree.search(bbox).forEach(function(d) {
                     if (d.data.sequence_id) {
                         sequenceIds[d.data.sequence_id] = true;
@@ -316,11 +312,11 @@ export default {
                 });
                 return lineStrings;
         }
-        if(zoom >= lineMinZoom){
+        if (zoom >= lineMinZoom){
             Object.keys(_cache.sequences.lineString).forEach(function(sequenceId) {
                 lineStrings = lineStrings.concat(_cache.sequences.lineString[sequenceId]);
             });
-        }  
+        }
         return lineStrings;
     },
 
@@ -395,8 +391,7 @@ export default {
         let viewer = context.container()
             .select('.photoviewer');
 
-        if (!viewer.empty()) 
-            viewer.datum(d);
+        if (!viewer.empty()) viewer.datum(d);
 
         this.setStyles(context, null);
 
@@ -404,7 +399,7 @@ export default {
 
         let wrap = context.container()
             .select('.photoviewer .panoramax-wrapper');
-            
+
         let attribution = wrap.selectAll('.photo-attribution').text('');
 
         let line1 = attribution
@@ -449,7 +444,7 @@ export default {
         attribution
             .append('a')
             .attr('class', 'report-photo')
-            .attr('href', "mailto:signalement.ign@panoramax.fr")
+            .attr('href', 'mailto:signalement.ign@panoramax.fr')
             .call(t.append('panoramax.report'));
 
         attribution
@@ -464,35 +459,37 @@ export default {
             .text('panoramax.fr');
 
         getImageData(d.sequence_id, d.id).then(function(data){
-
             _currentScene = {
                 currentImage: null,
                 nextImage: null,
                 prevImage: null
             };
-            _currentScene.currentImage = data["assets"][_definition];
-            const nextIndex = data.links.findIndex(x => x.rel == "next");
-            const prevIndex = data.links.findIndex(x => x.rel == "prev");
-            if (nextIndex != -1)
+            _currentScene.currentImage = data.assets[_definition];
+            const nextIndex = data.links.findIndex(x => x.rel === 'next');
+            const prevIndex = data.links.findIndex(x => x.rel === 'prev');
+
+            if (nextIndex !== -1){
                 _currentScene.nextImage = data.links[nextIndex];
-            if (prevIndex != -1)
+            }
+            if (prevIndex !== -1){
                 _currentScene.prevImage = data.links[prevIndex];
+            }
 
             d.image_path = _currentScene.currentImage.href;
 
             wrap
                 .selectAll('button.back')
-                .classed('hide', _currentScene.prevImage == null);
+                .classed('hide', _currentScene.prevImage === null);
             wrap
                 .selectAll('button.forward')
-                .classed('hide', _currentScene.nextImage == null);
-            
+                .classed('hide', _currentScene.nextImage === null);
+
             _currentFrame = d.isPano ? _pannellumFrame : _planeFrame;
 
             _currentFrame
                 .selectPhoto(d, true)
                 .showPhotoFrame(wrap);
-        
+
         });
 
         function localeDateString(s) {
@@ -502,7 +499,7 @@ export default {
             if (isNaN(d.getTime())) return null;
             return d.toLocaleDateString(localizer.localeCode(), options);
         }
-        
+
         if (d.account_id) {
             let line2 = attribution
                 .append('div')
@@ -541,7 +538,6 @@ export default {
             .selectAll('.panoramax-wrapper')
             .data([0]);
 
-        //TODO maybe all of this should be in panoramax_images?
         let wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper panoramax-wrapper')
@@ -581,18 +577,16 @@ export default {
             _planeFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
           });
 
-        //TODO: maybe this should be here (export?)
         function step(stepBy) {
             return function () {
                 if (!_currentScene.currentImage) return;
 
                 let nextId;
-                if(stepBy === 1)
-                    nextId = _currentScene.nextImage.id;
+                if (stepBy === 1) nextId = _currentScene.nextImage.id;
                 else nextId = _currentScene.prevImage.id;
 
                 if (!nextId) return;
-            
+
                 const nextImage = _cache.images.forImageId[nextId];
 
                 context.map().centerEase(nextImage.loc);

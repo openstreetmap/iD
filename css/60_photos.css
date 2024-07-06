@@ -341,6 +341,19 @@ label.panoramax-hd {
     margin: 0 5px;
 }
 
+.slider-wrap {
+    display: inline-block;  
+}
+
+.year-datalist {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-option-date-slider{
+    direction: rtl
+}
+
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution .image-link {
@@ -621,11 +634,3 @@ label.streetside-hires {
     cursor: pointer;
 }
 
-.slider-wrap {
-    display: inline-block;  
-}
-
-.year-datalist {
-    display: flex;
-    justify-content: space-between;
-}

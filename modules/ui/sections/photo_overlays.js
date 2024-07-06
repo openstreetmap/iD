@@ -303,8 +303,8 @@ export function uiSectionPhotoOverlays(context) {
             .append('select')
             .attr('type', 'text')
             .attr('class', 'list-option')
-            .call(utilNoAuto)
-        
+            .call(utilNoAuto);
+
         var select = labelEnter.selectAll('.list-option');
 
         select
@@ -330,7 +330,7 @@ export function uiSectionPhotoOverlays(context) {
         select
             .on('change', function() {
                 var value = d3_select(this).property('value');
-                context.photos().setMaxPhotoAge(parseInt(value));
+                context.photos().setMaxPhotoAge(parseInt(value, 10));
             });
 
         li
@@ -345,7 +345,7 @@ export function uiSectionPhotoOverlays(context) {
         }
 
         var currYear = new Date();
-        currYear = currYear.getFullYear();
+        currYear = parseInt(currYear.getFullYear(), 10);
 
         var ul = selection
             .selectAll('.layer-list-date-slider')
@@ -385,36 +385,36 @@ export function uiSectionPhotoOverlays(context) {
 
         let sliderWrap = labelEnter
             .append('div')
-            .attr('class','slider-wrap')
+            .attr('class','slider-wrap');
 
         let output = sliderWrap
             .append('output')
-            .html(currYear)
             .attr('class','year-selected');
 
         sliderWrap
             .append('input')
             .attr('type', 'range')
             .attr('max', currYear)
-            .attr('min', currYear)
             .attr('list', 'dateValues')
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)
             .on('change', function() {
-                var value = d3_select(this).property('value');
-                context.photos().setMaxPhotoYear(parseInt(value));
-                output.html(value);
+                let value = parseInt(d3_select(this).property('value'), 10);
+                let minYear = parseInt(d3_select(this).property('min'), 10);
+                value = minYear + (currYear - value);
+                context.photos().setFromYearFilter(value);
+                output.html(value + ' - ' + currYear);
             });
 
         let datalist = sliderWrap
             .append('datalist')
             .attr('class', 'year-datalist')
-            .attr('id', 'dateValues')
-        
+            .attr('id', 'dateValues');
+
         datalist
             .append('option')
             .attr('value', currYear)
-            .attr('label', currYear)
+            .attr('label', currYear);
 
         li
             .merge(liEnter)

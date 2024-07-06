@@ -13,7 +13,7 @@ export function rendererPhotos(context) {
     var _dateFilters = ['fromDate', 'toDate'];
     var _fromDate;
     var _toDate;
-    var _maxPhotoAge;
+    var _maxPhotoDate;
     var _maxPhotoYear;
     var _usernames;
 
@@ -49,7 +49,7 @@ export function rendererPhotos(context) {
     };
 
     photos.maxPhotoAge = function() {
-        return _maxPhotoAge;
+        return _maxPhotoDate;
     };
 
     photos.maxPhotoYear = function() {
@@ -90,33 +90,32 @@ export function rendererPhotos(context) {
         }
     };
 
-    photos.setMaxPhotoAge = function(maxPhotoAge){
-        if(maxPhotoAge != -1){
+    photos.setFromDateFilter = function(date){
+        if (date !== -1){
             var fromDate = new Date();
-            fromDate.setDate(fromDate.getDate() - maxPhotoAge);
+            fromDate.setDate(fromDate.getDate() - date);
             var dd = String(fromDate.getDate()).padStart(2, '0');
             var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
             var yyyy = fromDate.getFullYear();
 
             fromDate = mm + '/' + dd + '/' + yyyy;
-            photos.setDateFilter('fromDate', fromDate)
-            _maxPhotoAge = maxPhotoAge;
-        }
-        else
-            photos.setDateFilter('fromDate', null)
-    }
-
-    photos.setMaxPhotoYear = function(maxPhotoYear){
-        if(maxPhotoYear != null){
-            var fromDate = new Date();
-            fromDate = '01/01/' + maxPhotoYear;
             photos.setDateFilter('fromDate', fromDate);
-            _maxPhotoYear = maxPhotoYear;
-        }
-        else{
+            _maxPhotoDate = date;
+        } else {
             photos.setDateFilter('fromDate', null);
         }
-    }
+    };
+
+    photos.setFromYearFilter = function(year){
+        if (year !== null){
+            var fromDate = new Date();
+            fromDate = '01/01/' + year;
+            photos.setDateFilter('fromDate', fromDate);
+            _maxPhotoYear = year;
+        } else {
+            photos.setDateFilter('fromDate', null);
+        }
+    };
 
 
     photos.setUsernameFilter = function(val, updateUrl) {
@@ -163,11 +162,11 @@ export function rendererPhotos(context) {
 
     photos.shouldFilterByMaxAge = function(){
         return false;
-    }
+    };
 
     photos.shouldFilterDateBySlider = function(){
         return showsLayer('panoramax');
-    }
+    };
 
     photos.shouldFilterByPhotoType = function() {
         return showsLayer('mapillary') ||
