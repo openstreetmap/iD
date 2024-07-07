@@ -340,12 +340,18 @@ export function uiSectionPhotoOverlays(context) {
 
     function drawDateSlider(selection){
 
-        function filterEnabled(d) {
-            return context.photos().maxPhotoYear(d);
+        function filterEnabled() {
+            return context.photos().yearSlider();
         }
 
-        var currYear = new Date();
-        currYear = parseInt(currYear.getFullYear(), 10);
+        var maxYear = new Date();
+        maxYear = parseInt(maxYear.getFullYear(), 10);
+
+        let yearSlider = context.photos().yearSlider();
+        let currYear;
+
+        if (yearSlider) currYear = yearSlider;
+        else currYear = maxYear;
 
         var ul = selection
             .selectAll('.layer-list-date-slider')
@@ -369,15 +375,15 @@ export function uiSectionPhotoOverlays(context) {
             .append('li')
             .attr('class', 'list-item-date-slider');
 
-            var labelEnter = liEnter
-            .append('label')
-            .each(function() {
-                d3_select(this)
-                    .call(uiTooltip()
-                        .title(() => t.append('photo_overlays.age_slider_filter.tooltip'))
-                        .placement('top')
-                    );
-            });
+        var labelEnter = liEnter
+        .append('label')
+        .each(function() {
+            d3_select(this)
+                .call(uiTooltip()
+                    .title(() => t.append('photo_overlays.age_slider_filter.tooltip'))
+                    .placement('top')
+                );
+        });
 
         labelEnter
             .append('span')
@@ -389,32 +395,24 @@ export function uiSectionPhotoOverlays(context) {
 
         let output = sliderWrap
             .append('output')
-            .attr('class','year-selected');
+            .attr('class','year-selected')
+            .html(currYear + ' - ' + maxYear);
 
         sliderWrap
             .append('input')
             .attr('type', 'range')
-            .attr('max', currYear)
+            .attr('max', maxYear)
+            .attr('value', currYear)
             .attr('list', 'dateValues')
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)
             .on('change', function() {
                 let value = parseInt(d3_select(this).property('value'), 10);
                 let minYear = parseInt(d3_select(this).property('min'), 10);
-                value = minYear + (currYear - value);
+                value = minYear + (maxYear - value);
                 context.photos().setFromYearFilter(value, true);
-                output.html(value + ' - ' + currYear);
+                output.html(value + ' - ' + maxYear);
             });
-
-        let datalist = sliderWrap
-            .append('datalist')
-            .attr('class', 'year-datalist')
-            .attr('id', 'dateValues');
-
-        datalist
-            .append('option')
-            .attr('value', currYear)
-            .attr('label', currYear);
 
         li
             .merge(liEnter)
