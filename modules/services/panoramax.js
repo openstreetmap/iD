@@ -10,7 +10,7 @@ import { t, localizer } from '../core/localizer';
 import pannellumPhotoFrame from './pannellum_photo';
 import planePhotoFrame from './plane_photo';
 
-const apiUrl = 'https://panoramax.openstreetmap.fr/';
+const apiUrl = 'https://api.panoramax.xyz/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.mvt';
 const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
