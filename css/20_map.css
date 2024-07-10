@@ -294,12 +294,14 @@ text.point {
 
 
 /* Wikidata-tagged */
-g.point.tag-wikidata path.stroke {
+g.point.tag-wikidata path.stroke,
+g.vertex.tag-wikidata circle.stroke {
     stroke-width: 2px;
     stroke: #666;
     fill: #eee;
 }
-g.point.tag-wikidata .icon {
+g.point.tag-wikidata .icon,
+g.vertex.tag-wikidata .icon {
     color: #666;
 }
 

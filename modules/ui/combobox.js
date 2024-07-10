@@ -439,7 +439,9 @@ export function uiCombobox(context, klass) {
             var val = utilGetSetValue(input);
             thiz.setSelectionRange(val.length, val.length);
 
-            d = _fetched[val];
+            if (!d) {
+                d = _fetched[val];
+            }
             dispatch.call('accept', thiz, d, val);
             hide();
         }

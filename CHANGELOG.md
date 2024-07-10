@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.30.0-dev)
 
 #### :tada: New Features
+* Allow to start up iD with a preselected OSM note or multiselection of OSM ids in the `id` hash parameter
 #### :sparkles: Usability & Accessibility
 * Login/logout pages are now using the user's locale ([#3595], thanks [@k-yle])
 * Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
@@ -49,17 +50,26 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
 * Fix API URLs for ImproveOSM QA service ([#9993], thanks [@k-yle])
 * Fix icons with inline css styles not properly being displayed on osm.org
+* Properly sort map features with lifecycle prefixes in the _Past/Futures_ features ([#7582])
+* Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
+* Fix address field overwriting existing data when switching selected map features under certain circumstances ([#10260])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Render `highway=ladder` in a style similar to stairs ([#10257], thanks [@k-yle])
+* Render arrows on lines with `conveying` tag ([#10255], thanks [@k-yle])
 #### :hammer: Development
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
 [#3595]: https://github.com/openstreetmap/iD/issues/3595
+[#7582]: https://github.com/openstreetmap/iD/issues/7582
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
 [#9993]: https://github.com/openstreetmap/iD/issues/9993
 [#10181]: https://github.com/openstreetmap/iD/pull/10181
+[#10255]: https://github.com/openstreetmap/iD/pull/10255
+[#10257]: https://github.com/openstreetmap/iD/pull/10257
+[#10260]: https://github.com/openstreetmap/iD/issues/10260
 [@zbycz]: https://github.com/zbycz
 
 

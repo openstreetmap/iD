@@ -254,9 +254,18 @@ export function svgLines(projection, context) {
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
                 projection, graph, 35,
-                function shouldReverse(entity) { return entity.tags.oneway === '-1'; },
+                function shouldReverse(entity) {
+                    return (
+                        entity.tags.oneway === '-1'
+                        || entity.tags.conveying === 'backward'
+                    );
+                },
                 function bothDirections(entity) {
-                    return entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating';
+                    return (
+                        entity.tags.oneway === 'alternating'
+                        || entity.tags.oneway === 'reversible'
+                        || entity.tags.conveying === 'reversible'
+                    );
                 }
             );
             onewaydata[k] = utilArrayFlatten(onewayArr.map(onewaySegments));
