@@ -186,38 +186,49 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (service) service.setStyles(context, null);
     }
 
-    function updateYearSlider(oldestDate){
+    function updateYearSlider(minYear){
         let maxYear = new Date();
         maxYear = maxYear.getFullYear();
         let slider = d3_select('.list-option-date-slider');
 
-        let sliderWrap = slider.select(function() { return this.parentNode; });
+        if (slider && minYear){
+            let sliderWrap = slider.select(function() { return this.parentNode; });
+            let sliderLabel = sliderWrap.select('.year-selected');
 
-        sliderWrap.selectAll('datalist').remove();
+            sliderWrap.selectAll('datalist').remove();
 
-        let datalist = sliderWrap.append('datalist')
-            .attr('id', 'dateValues')
-            .attr('class', 'year-datalist');
+            let datalist = sliderWrap.append('datalist')
+                .attr('id', 'dateValues')
+                .attr('class', 'year-datalist');
 
-        if (oldestDate < maxOldestYear) oldestDate = maxOldestYear;
+            minYear = parseInt(minYear, 10);
 
-        if(slider.attr('value')){
-            let currYear = parseInt(slider.attr('value'), 10);
-            currYear = oldestDate + (maxYear - currYear);
-            slider.attr('value', currYear)
+            if (minYear < maxOldestYear) minYear = maxOldestYear;
+
+            let currYear = sliderLabel.html();
+            currYear = currYear.substring(0, 4);
+            currYear = parseInt(currYear, 10);
+
+            let sliderValue = maxYear - (currYear - minYear);
+
+            if (minYear > currYear){
+                sliderValue = maxYear;
+                sliderLabel.html(minYear + ' - ' + maxYear);
+            }
+
+            slider.attr('value', sliderValue);
+            slider.attr('min', minYear);
+
+            datalist
+                .append('option')
+                .attr('value', minYear)
+                .attr('label', minYear);
+
+            datalist
+                .append('option')
+                .attr('value', maxYear)
+                .attr('label', maxYear);
         }
-
-        slider.attr('min', oldestDate);
-
-        datalist
-            .append('option')
-            .attr('value', oldestDate)
-            .attr('label', oldestDate);
-
-        datalist
-            .append('option')
-            .attr('value', maxYear)
-            .attr('label', maxYear);
     }
 
     async function update() {
@@ -227,12 +238,11 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service ? service.images(projection) : []);
-        let oldestDate = service.getOldestDate();
-
-        updateYearSlider(oldestDate);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
+
+        let oldestDate = (service ? service.getOldestDate() : null);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.id; });
@@ -296,6 +306,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
+        if (oldestDate) updateYearSlider(oldestDate.substring(0, 4));
 
         function viewfieldPath() {
             if (this.parentNode.__data__.isPano) {

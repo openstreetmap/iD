@@ -341,16 +341,16 @@ export function uiSectionPhotoOverlays(context) {
     function drawDateSlider(selection){
 
         function filterEnabled() {
-            return context.photos().yearSlider();
+            return context.photos().yearSliderValue();
         }
 
         var maxYear = new Date();
         maxYear = parseInt(maxYear.getFullYear(), 10);
 
-        let yearSlider = context.photos().yearSlider();
+        let yearSliderValue = context.photos().yearSliderValue();
         let currYear;
 
-        if (yearSlider) currYear = yearSlider;
+        if (yearSliderValue) currYear = yearSliderValue;
         else currYear = maxYear;
 
         var ul = selection
@@ -402,7 +402,6 @@ export function uiSectionPhotoOverlays(context) {
             .append('input')
             .attr('type', 'range')
             .attr('max', maxYear)
-            .attr('value', currYear)
             .attr('list', 'dateValues')
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)

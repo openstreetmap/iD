@@ -14,7 +14,7 @@ export function rendererPhotos(context) {
     var _fromDate;
     var _toDate;
     var _maxPhotoDate;
-    var _yearSlider;
+    var _yearSliderValue;
     var _usernames;
 
     function photos() {}
@@ -52,8 +52,8 @@ export function rendererPhotos(context) {
         return _maxPhotoDate;
     };
 
-    photos.yearSlider = function() {
-        return _yearSlider;
+    photos.yearSliderValue = function() {
+        return _yearSliderValue;
     };
 
     photos.dateFilterValue = function(val) {
@@ -110,7 +110,7 @@ export function rendererPhotos(context) {
         if (currYear){
             var fromDate = new Date(currYear, 0, 1);
             photos.setDateFilter('fromDate', fromDate, updateUrl);
-            _yearSlider = currYear;
+            _yearSliderValue = currYear;
         } else {
             photos.setDateFilter('fromDate', null, updateUrl);
         }

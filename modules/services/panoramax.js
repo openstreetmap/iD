@@ -285,9 +285,7 @@ export default {
     },
 
     getOldestDate: function(){
-        if (_oldestDate){
-            return _oldestDate.substr(0, 4);
-        }
+        return _oldestDate;
     },
 
     // Get visible sequences
