@@ -330,6 +330,10 @@ export default {
         }
     },
 
+    getActiveImage: function(){
+        return _activeImage;
+    },
+
     // Update the currently highlighted sequence and selected bubble.
     setStyles: function(context, hovered) {
         const hoveredImageId =  hovered && hovered.id;
