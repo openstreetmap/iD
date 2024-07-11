@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Added base functionalities for new Panoramax Street level ([#9941])
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
