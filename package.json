@@ -82,7 +82,7 @@
     "@rapideditor/temaki": "^5.8.0",
     "@transifex/api": "^7.1.0",
     "autoprefixer": "^10.4.19",
-    "browserslist": "^4.23.0",
+    "browserslist": "^4.23.2",
     "browserslist-to-esbuild": "^2.1.1",
     "chai": "^4.4.1",
     "chalk": "^4.1.2",
