@@ -10,6 +10,7 @@ import { utilRebind, utilGetSetValue, utilStringQs } from '../util';
 import { services } from '../services';
 import { uiTooltip } from './tooltip';
 import { actionChangeTags } from '../actions';
+import { geoSphericalDistance } from '../geo';
 
 export function uiPhotoviewer(context) {
 
@@ -82,7 +83,7 @@ export function uiPhotoviewer(context) {
                             e.preventDefault();
                             e.stopPropagation();
                             setMapillaryPhotoId();
-                            buttonDisable(true);
+                            buttonDisable('already_set');
                         });
                     }
                     buttonShowHide();
@@ -144,23 +145,33 @@ export function uiPhotoviewer(context) {
             }
 
             function buttonShowHide() {
-                let activeImageId = services.mapillary.getActiveImage()?.id;
+                const activeImage = services.mapillary.getActiveImage();
+                const activeImageId = activeImage?.id;
 
                 const graph = context.graph();
+                const entities = context.selectedIDs()
+                    .map(id => graph.entity(id));
 
-                buttonDisable(context.selectedIDs()
-                    .map(entityID => graph.entity(entityID).tags.mapillary)
-                    .every(value => value === activeImageId));
+                if (entities.map(entity => entity.tags.mapillary)
+                    .every(value => value === activeImage?.id)) {
+                    buttonDisable('already_set');
+                } else if (activeImage && entities.map(entity => entity.extent().center())
+                    .every(loc => geoSphericalDistance(loc, activeImage.loc) > 100)) {
+                    buttonDisable('too_far');
+                } else {
+                    buttonDisable(false);
+                }
             }
 
-            function buttonDisable(disabled) {
+            function buttonDisable(reason) {
+                const disabled = reason !== false;
                 const button = selection.selectAll('.set-photo-from-viewer').data([0]);
                 button.attr('disabled', disabled ? 'true' : null);
                 button.classed('disabled', disabled);
                 button.call(uiTooltip().destroyAny);
                 if (disabled) {
                     button.call(uiTooltip()
-                        .title(() => t.append('inspector.set_photo_from_viewer.disable'))
+                        .title(() => t.append(`inspector.set_photo_from_viewer.disable.${reason}`))
                         .placement('right')
                     );
                 } else {
