@@ -6,7 +6,7 @@ import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind, utilGetSetValue, utilStringQs } from '../util';
+import { utilRebind, utilStringQs } from '../util';
 import { services } from '../services';
 import { uiTooltip } from './tooltip';
 import { actionChangeTags } from '../actions';
@@ -96,7 +96,7 @@ export function uiPhotoviewer(context) {
                     const action = graph =>
                         context.selectedIDs().reduce((graph, entityID) => {
                             const tags = graph.entity(entityID).tags;
-                            const action = actionChangeTags(entityID, {...tags, mapillary: image.id})
+                            const action = actionChangeTags(entityID, {...tags, mapillary: image.id});
                             return action(graph);
                         }, graph);
 
@@ -146,7 +146,6 @@ export function uiPhotoviewer(context) {
 
             function buttonShowHide() {
                 const activeImage = services.mapillary.getActiveImage();
-                const activeImageId = activeImage?.id;
 
                 const graph = context.graph();
                 const entities = context.selectedIDs()
