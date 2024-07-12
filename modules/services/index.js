@@ -1,5 +1,4 @@
 import serviceKeepRight from './keepRight';
-import serviceImproveOSM from './improveOSM';
 import serviceOsmose from './osmose';
 import serviceMapillary from './mapillary';
 import serviceMapRules from './maprules';
@@ -20,7 +19,6 @@ import serviceMapilio from './mapilio';
 export let services = {
   geocoder: serviceNominatim,
   keepRight: serviceKeepRight,
-  improveOSM: serviceImproveOSM,
   osmose: serviceOsmose,
   mapillary: serviceMapillary,
   nsi: serviceNsi,
@@ -39,7 +37,6 @@ export let services = {
 
 export {
   serviceKeepRight,
-  serviceImproveOSM,
   serviceOsmose,
   serviceMapillary,
   serviceMapRules,
