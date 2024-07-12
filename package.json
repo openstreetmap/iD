@@ -79,7 +79,7 @@
     "@mapbox/maki": "^8.0.1",
     "@openstreetmap/id-tagging-schema": "^6.7.3",
     "@rapideditor/mapillary_sprite_source": "^1.8.0",
-    "@rapideditor/temaki": "^5.8.0",
+    "@rapideditor/temaki": "^5.9.0",
     "@transifex/api": "^7.1.2",
     "autoprefixer": "^10.4.19",
     "browserslist": "^4.23.2",
