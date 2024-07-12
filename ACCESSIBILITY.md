@@ -193,7 +193,6 @@ translated to one or more languages.
 | ✅ | OSM community index | | |
 | ✅ | iD validation issues | | |
 | ✅ | KeepRight issues | | |
-| ✅ | ImproveOSM issues | | |
 | ✅ | Osmose issues | Translated strings are [provided by Osmose](https://www.transifex.com/openstreetmap-france/osmose/) itself, not iD | |
 
 ### Language Coverage
