@@ -71,9 +71,7 @@ export function uiPhotoviewer(context) {
 
 
         function setPhotoFromViewerButton() {
-            services.mapillary.ensureViewerLoaded(context).then(() => {
-                if (!services.mapillary.isViewerOpen()) return;
-
+            if (services.mapillary.isViewerOpen()) {
                 if (context.mode().id !== 'select' || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
                     buttonRemove();
                 } else {
@@ -103,7 +101,7 @@ export function uiPhotoviewer(context) {
                     const annotation = t('operations.change_tags.annotation');
                     context.perform(action, annotation);
                 }
-            });
+            }
 
             function layerStatus(which) {
                 const layers = context.layers();
