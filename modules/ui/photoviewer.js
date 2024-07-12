@@ -189,7 +189,7 @@ export function uiPhotoviewer(context) {
                 const buttonEnter = button.enter()
                     .append('button')
                     .attr('class', 'set-photo-from-viewer')
-                    .call(svgIcon('#iD-operation-merge'))
+                    .call(svgIcon('#iD-icon-plus'))
                     .call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer'))
                         .placement('right')
