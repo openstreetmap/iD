@@ -138,6 +138,13 @@ export function rendererFeatures(context) {
         return !!tags.indoor;
     });
 
+    defineRule('underground', function isUnterground(tags) {
+        // console.log('xx', tags, tags?.layer?.startsWith('-'), tags?.location === 'underground')
+        if (tags?.layer?.startsWith('-')) return true;
+        if (tags?.location === 'underground') return true;
+        return false;
+    });
+
     defineRule('landuse', function isLanduse(tags, geometry) {
         return geometry === 'area' && (
             !!tags.landuse ||
@@ -197,7 +204,7 @@ export function rendererFeatures(context) {
     });
 
     defineRule('pistes', function isPiste(tags) {
-        return tags['piste:type'];
+        return !!tags['piste:type'];
     });
 
     defineRule('aerialways', function isAerialways(tags) {

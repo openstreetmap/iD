@@ -17,7 +17,7 @@ describe('iD.rendererFeatures', function() {
             expect(keys).to.include(
                 'points', 'traffic_roads', 'service_roads', 'paths',
                 'buildings', 'landuse', 'boundaries', 'water', 'rail',
-                'power', 'past_future', 'others'
+                'power', 'past_future', 'underground', 'others'
             );
         });
     });
@@ -57,7 +57,7 @@ describe('iD.rendererFeatures', function() {
                 iD.osmNode({id: 'point_bar', tags: {amenity: 'bar'}, version: 1}),
                 iD.osmNode({id: 'point_dock', tags: {waterway: 'dock'}, version: 1}),
                 iD.osmNode({id: 'point_rail_station', tags: {railway: 'station'}, version: 1}),
-                iD.osmNode({id: 'point_generator', tags: {power: 'generator'}, version: 1}),
+                iD.osmNode({id: 'point_generator', tags: {power: 'generator', layer: '-2'}, version: 1}),
                 iD.osmNode({id: 'point_old_rail_station', tags: {railway: 'station', disused: 'yes'}, version: 1}),
                 iD.osmWay({id: 'motorway', tags: {highway: 'motorway'}, version: 1}),
                 iD.osmWay({id: 'building_yes', tags: {area: 'yes', amenity: 'school', building: 'yes'}, version: 1}),
@@ -77,6 +77,7 @@ describe('iD.rendererFeatures', function() {
             expect(stats.service_roads).to.eql(0);
             expect(stats.others).to.eql(1);
             expect(stats.past_future).to.eql(1);
+            expect(stats.underground).to.eql(1);
             expect(stats.paths).to.eql(0);
             expect(stats.points).to.eql(5);
             expect(stats.power).to.eql(1);
