@@ -20,7 +20,7 @@ const _listeners = {};
 //
 /**
  * @param {string} k
- * @param {string?} v
+ * @param {string?} [v]
  * @returns {boolean} true if the action succeeded
  */
 function corePreferences(k, v) {
