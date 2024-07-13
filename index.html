@@ -47,10 +47,11 @@
           window.context = window.id = context;  // for debugging
           context.init();
 
-          // disable boundaries (unless we have an explicit disable_features list)
+          // disable boundaries and custom (unless we have an explicit disable_features list)
           var q = iD.utilStringQs(window.location.hash);
           if (!q.hasOwnProperty('disable_features')) {
             context.features().disable('boundaries');
+            context.features().disable('custom');
           }
         }
       }
