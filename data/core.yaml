@@ -929,6 +929,9 @@ en:
     past_future:
       description: Past/Future Features
       tooltip: "Proposed, Construction, Abandoned, Demolished, etc."
+    underground:
+      description: Unterground
+      tooltip: "Unterground features or negative level"
     others:
       description: Other Features
       tooltip: "Everything Else"

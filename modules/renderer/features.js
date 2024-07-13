@@ -72,9 +72,16 @@ export function rendererFeatures(context) {
 
 
     /**
+     * @callback FilterFunction
+     * @param {Record<string, string>} tags
+     * @param {string} [geometry]
+     * @returns {boolean}
+     */
+
+    /**
      * @param {string} k
-     * @param {(tags: Record<string, string>, geometry: string) => boolean} filter
-     * @param {?number} max
+     * @param {FilterFunction} filter
+     * @param {number} [max]
      */
     function defineRule(k, filter, max) {
         var isEnabled = true;
@@ -124,11 +131,18 @@ export function rendererFeatures(context) {
     }, 250);
 
     defineRule('building_parts', function isBuildingPart(tags) {
-        return tags['building:part'];
+        return !!tags['building:part'];
     });
 
     defineRule('indoor', function isIndoor(tags) {
-        return tags.indoor;
+        return !!tags.indoor;
+    });
+
+    defineRule('underground', function isUnterground(tags) {
+        // console.log('xx', tags, tags?.layer?.startsWith('-'), tags?.location === 'underground')
+        if (tags?.layer?.startsWith('-')) return true;
+        if (tags?.location === 'underground') return true;
+        return false;
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
@@ -190,13 +204,11 @@ export function rendererFeatures(context) {
     });
 
     defineRule('pistes', function isPiste(tags) {
-        return tags['piste:type'];
+        return !!tags['piste:type'];
     });
 
     defineRule('aerialways', function isAerialways(tags) {
-        return tags.aerialway &&
-            tags.aerialway !== 'yes' &&
-            tags.aerialway !== 'station';
+        return tags?.aerialway !== 'yes' && tags?.aerialway !== 'station';
     });
 
     defineRule('power', function isPower(tags) {
@@ -260,7 +272,7 @@ export function rendererFeatures(context) {
         if (!arguments.length) {
             return _keys.filter(function(k) { return _rules[k].hidden(); });
         }
-        return _rules[k] && _rules[k].hidden();
+        return _rules[k]?.hidden();
     };
 
 
