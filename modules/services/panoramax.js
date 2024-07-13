@@ -152,7 +152,7 @@ function loadTileDataToCache(data, tile) {
                 id: feature.properties.id,
                 account_id: feature.properties.account_id,
                 sequence_id: feature.properties.sequences.split('\"')[1],
-                heading: feature.properties.heading,
+                heading: parseInt(feature.properties.heading, 10),
                 image_path: '',
                 resolution: feature.properties.resolution,
                 isPano: feature.properties.type === 'equirectangular',
