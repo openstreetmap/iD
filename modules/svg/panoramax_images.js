@@ -136,7 +136,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     function transform(d) {
         let t = svgPointTransform(projection)(d);
         var rot = d.heading + _viewerYaw;
-        if (rot && !isNaN(rot)) {
+        if (rot) {
             t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
         return t;
