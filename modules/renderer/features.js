@@ -201,7 +201,7 @@ export function rendererFeatures(context) {
     });
 
     defineRule('aerialways', function isAerialways(tags) {
-        return tags?.aerialway !== 'yes' && tags?.aerialway !== 'station';
+        return !!tags?.aerialway && tags.aerialway !== 'yes' && tags.aerialway !== 'station';
     });
 
     defineRule('power', function isPower(tags) {
