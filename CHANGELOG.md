@@ -45,9 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
 #### :scissors: Operations
 #### :camera: Street-Level
-* Added base functionalities for new Panoramax Street level ([#9941])
 #### :white_check_mark: Validation
-* Drop deprecated validation service _ImproveOSM_ ([#10302], thanks [@arch0345])
 #### :bug: Bugfixes
 * Fix bug which required a second button click when resolving/reopening of OSM notes ([#8994], thanks [@laigyu])
 * Fix API URLs for ImproveOSM QA service ([#9993], thanks [@k-yle])
@@ -72,7 +70,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10255]: https://github.com/openstreetmap/iD/pull/10255
 [#10257]: https://github.com/openstreetmap/iD/pull/10257
 [#10260]: https://github.com/openstreetmap/iD/issues/10260
-[#10302]: https://github.com/openstreetmap/iD/issues/10302
 [@zbycz]: https://github.com/zbycz
 
 

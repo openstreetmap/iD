@@ -157,7 +157,15 @@ export function rendererPhotos(context) {
     }
 
     photos.shouldFilterByDate = function() {
-        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder') || showsLayer('panoramax');
+        return showsLayer('mapillary') || showsLayer('kartaview') || showsLayer('streetside') || showsLayer('vegbilder');
+    };
+
+    photos.shouldFilterByMaxAge = function(){
+        return false;
+    };
+
+    photos.shouldFilterDateBySlider = function(){
+        return showsLayer('panoramax');
     };
 
     photos.shouldFilterByPhotoType = function() {

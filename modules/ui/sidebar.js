@@ -12,6 +12,7 @@ import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
+import { uiImproveOsmEditor } from './improveOSM_editor';
 import { uiKeepRightEditor } from './keepRight_editor';
 import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
@@ -22,6 +23,7 @@ export function uiSidebar(context) {
     var inspector = uiInspector(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
+    var improveOsmEditor = uiImproveOsmEditor(context);
     var keepRightEditor = uiKeepRightEditor(context);
     var osmoseEditor = uiOsmoseEditor(context);
     var _current;
@@ -209,8 +211,10 @@ export function uiSidebar(context) {
                 var errEditor;
                 if (datum.service === 'keepRight') {
                     errEditor = keepRightEditor;
-                } else {
+                } else if (datum.service === 'osmose') {
                     errEditor = osmoseEditor;
+                } else {
+                    errEditor = improveOsmEditor;
                 }
 
                 context.container().selectAll('.qaItem.' + datum.service)

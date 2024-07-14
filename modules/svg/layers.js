@@ -6,6 +6,7 @@ import { svgLocalPhotos} from './local_photos';
 import { svgDebug } from './debug';
 import { svgGeolocate } from './geolocate';
 import { svgKeepRight } from './keepRight';
+import { svgImproveOSM } from './improveOSM';
 import { svgOsmose } from './osmose';
 import { svgStreetside } from './streetside';
 import { svgVegbilder} from './vegbilder';
@@ -31,6 +32,7 @@ export function svgLayers(projection, context) {
         { id: 'notes', layer: svgNotes(projection, context, dispatch) },
         { id: 'data', layer: svgData(projection, context, dispatch) },
         { id: 'keepRight', layer: svgKeepRight(projection, context, dispatch) },
+        { id: 'improveOSM', layer: svgImproveOSM(projection, context, dispatch) },
         { id: 'osmose', layer: svgOsmose(projection, context, dispatch) },
         { id: 'streetside', layer: svgStreetside(projection, context, dispatch)},
         { id: 'mapillary', layer: svgMapillaryImages(projection, context, dispatch) },
@@ -39,8 +41,8 @@ export function svgLayers(projection, context) {
         { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
         { id: 'kartaview', layer: svgKartaviewImages(projection, context, dispatch) },
         { id: 'mapilio', layer: svgMapilioImages(projection, context, dispatch) },
-        { id: 'vegbilder', layer: svgVegbilder(projection, context, dispatch) },
         { id: 'panoramax', layer: svgPanoramaxImages(projection, context, dispatch) },
+        { id: 'vegbilder', layer: svgVegbilder(projection, context, dispatch) },
         { id: 'local-photos', layer: svgLocalPhotos(projection, context, dispatch) },
         { id: 'debug', layer: svgDebug(projection, context, dispatch) },
         { id: 'geolocate', layer: svgGeolocate(projection, context, dispatch) },

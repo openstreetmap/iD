@@ -27,6 +27,7 @@ var readOnlyTags = [
     /^resolved:/,
     /^closed:note$/,
     /^closed:keepright$/,
+    /^closed:improveosm:/,
     /^closed:osmose:/
 ];
 
@@ -152,6 +153,12 @@ export function uiCommit(context) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
                 tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
+            }
+        }
+        if (services.improveOSM) {
+            var iOsmClosed = services.improveOSM.getClosedCounts();
+            for (itemType in iOsmClosed) {
+                tags['closed:improveosm:' + itemType] = context.cleanTagValue(iOsmClosed[itemType].toString());
             }
         }
         if (services.osmose) {
