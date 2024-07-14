@@ -14,6 +14,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     let _panoramax;
     let _viewerYaw = 0;
     let _selectedSequence;
+    let _activeId;
 
     function init() {
         if (svgPanoramaxImages.initialized) return;
@@ -62,7 +63,15 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             });
         }
         if (username && service) {
-            let id = await service.getUserId(username);
+            if (!_activeId) {
+                const tempId = await service.getUserId(username);
+
+                if (!_activeId) {
+                  _activeId = tempId;
+                }
+            }
+
+            let id = _activeId;
 
             images = images.filter(function(image) {
                 return id === image.account_id;
@@ -98,7 +107,15 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             });
         }
         if (username && service) {
-            let id = await service.getUserId(username);
+            if (!_activeId) {
+                const tempId = await service.getUserId(username);
+
+                if (!_activeId) {
+                  _activeId = tempId;
+                }
+            }
+
+            let id = _activeId;
 
             sequences = sequences.filter(function(sequence) {
                 return id === sequence.properties.account_id;
