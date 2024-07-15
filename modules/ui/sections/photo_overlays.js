@@ -307,8 +307,8 @@ export function uiSectionPhotoOverlays(context) {
         sliderWrap
             .append('input')
             .attr('type', 'range')
-            .attr('min', 0)
-            .attr('max', 3)
+            .attr('min', 1)
+            .attr('max', 5)
             .attr('list', 'dateValues')
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)
@@ -320,26 +320,26 @@ export function uiSectionPhotoOverlays(context) {
             let datalist = sliderWrap.append('datalist')
                 .attr('id', 'dateValues')
                 .attr('class', 'year-datalist');
-    
+
             datalist
                 .append('option')
                 .attr('value', 0)
-                .call(t.append('photo_overlays.max_age_filter.one_year'));
+                .call(t.append('photo_overlays.age_slider_filter.all'));
+
+            datalist
+                .append('option')
+                .attr('value', 5)
+                .call(t.append('photo_overlays.age_slider_filter.five_year'));
+
+            datalist
+                .append('option')
+                .attr('value', 2)
+                .call(t.append('photo_overlays.age_slider_filter.two_year'));
     
             datalist
                 .append('option')
                 .attr('value', 1)
-                .call(t.append('photo_overlays.max_age_filter.two_year'));
-            
-            datalist
-                .append('option')
-                .attr('value', 2)
-                .call(t.append('photo_overlays.max_age_filter.five_year'));
-    
-            datalist
-                .append('option')
-                .attr('value', 3)
-                .call(t.append('photo_overlays.max_age_filter.all'));
+                .call(t.append('photo_overlays.age_slider_filter.one_year'));
 
         li
             .merge(liEnter)

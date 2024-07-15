@@ -90,33 +90,23 @@ export function rendererPhotos(context) {
         }
     };
 
-    photos.setFromDateFilter = function(date, updateUrl){
-        if (date !== -1){
+    photos.setFromYearFilter = function(year, updateUrl){
+        if (year !== 0) {
+            let days = 365 * year;
             var fromDate = new Date();
-            fromDate.setDate(fromDate.getDate() - date);
+            fromDate.setDate(fromDate.getDate() - days);
             var dd = String(fromDate.getDate()).padStart(2, '0');
             var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
             var yyyy = fromDate.getFullYear();
 
             fromDate = mm + '/' + dd + '/' + yyyy;
             photos.setDateFilter('fromDate', fromDate, updateUrl);
-            _maxPhotoDate = date;
+            _maxPhotoDate = year;
         } else {
             photos.setDateFilter('fromDate', null, updateUrl);
+            return;
         }
     };
-
-    photos.setFromYearFilter = function(currYear, updateUrl){
-        if (currYear){
-            var fromDate = new Date(currYear, 0, 1);
-            photos.setDateFilter('fromDate', fromDate, updateUrl);
-            _yearSliderValue = currYear;
-        } else {
-            photos.setDateFilter('fromDate', null, updateUrl);
-        }
-        setUrlFilterValue('slider_date', currYear);
-    };
-
 
     photos.setUsernameFilter = function(val, updateUrl) {
         if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
