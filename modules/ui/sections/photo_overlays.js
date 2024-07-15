@@ -258,100 +258,11 @@ export function uiSectionPhotoOverlays(context) {
             .classed('active', filterEnabled);
     }
 
-    function drawMaxAgeFilter(selection){
-        function filterEnabled(d) {
-            return context.photos().maxPhotoAge(d);
-        }
-
-        var ul = selection
-            .selectAll('.layer-list-date-age')
-            .data([0]);
-
-        ul.exit()
-            .remove();
-
-        ul = ul.enter()
-            .append('ul')
-            .attr('class', 'layer-list layer-list-date-age')
-            .merge(ul);
-
-        var li = ul.selectAll('.list-item-date-age')
-            .data(context.photos().shouldFilterByMaxAge() ? ['max-age'] : []);
-
-        li.exit()
-            .remove();
-
-        var liEnter = li.enter()
-            .append('li')
-            .attr('class', 'list-item-date-age');
-
-            var labelEnter = liEnter
-            .append('label')
-            .each(function() {
-                d3_select(this)
-                    .call(uiTooltip()
-                        .title(() => t.append('photo_overlays.max_age_filter.tooltip'))
-                        .placement('top')
-                    );
-            });
-
-        labelEnter
-            .append('span')
-            .call(t.append('photo_overlays.max_age_filter.title'));
-
-        labelEnter
-            .append('select')
-            .attr('type', 'text')
-            .attr('class', 'list-option')
-            .call(utilNoAuto);
-
-        var select = labelEnter.selectAll('.list-option');
-
-        select
-            .append('option')
-            .attr('value', -1)
-            .call(t.append('photo_overlays.max_age_filter.all'));
-
-        select
-            .append('option')
-            .attr('value', 7)
-            .call(t.append('photo_overlays.max_age_filter.week'));
-
-        select
-            .append('option')
-            .attr('value', 31)
-            .call(t.append('photo_overlays.max_age_filter.month'));
-
-        select
-            .append('option')
-            .attr('value', 365)
-            .call(t.append('photo_overlays.max_age_filter.year'));
-
-        select
-            .on('change', function() {
-                var value = d3_select(this).property('value');
-                context.photos().setMaxPhotoAge(parseInt(value, 10));
-            });
-
-        li
-            .merge(liEnter)
-            .classed('active', filterEnabled);
-    }
-
     function drawDateSlider(selection){
 
         function filterEnabled() {
             return context.photos().yearSliderValue();
         }
-
-        var maxYear = new Date();
-        maxYear = parseInt(maxYear.getFullYear(), 10);
-
-        let yearSliderValue = context.photos().yearSliderValue();
-        let currYear;
-
-        if (yearSliderValue) currYear = yearSliderValue;
-        else currYear = maxYear;
 
         var ul = selection
             .selectAll('.layer-list-date-slider')
@@ -393,25 +304,42 @@ export function uiSectionPhotoOverlays(context) {
             .append('div')
             .attr('class','slider-wrap');
 
-        let output = sliderWrap
-            .append('output')
-            .attr('class','year-selected')
-            .html(currYear + ' - ' + maxYear);
-
         sliderWrap
             .append('input')
             .attr('type', 'range')
-            .attr('max', maxYear)
+            .attr('min', 0)
+            .attr('max', 3)
             .attr('list', 'dateValues')
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)
             .on('change', function() {
-                let value = parseInt(d3_select(this).property('value'), 10);
-                let minYear = parseInt(d3_select(this).property('min'), 10);
-                value = minYear + (maxYear - value);
+                let value = d3_select(this).property('value');
                 context.photos().setFromYearFilter(value, true);
-                output.html(value + ' - ' + maxYear);
             });
+
+            let datalist = sliderWrap.append('datalist')
+                .attr('id', 'dateValues')
+                .attr('class', 'year-datalist');
+    
+            datalist
+                .append('option')
+                .attr('value', 0)
+                .call(t.append('photo_overlays.max_age_filter.one_year'));
+    
+            datalist
+                .append('option')
+                .attr('value', 1)
+                .call(t.append('photo_overlays.max_age_filter.two_year'));
+            
+            datalist
+                .append('option')
+                .attr('value', 2)
+                .call(t.append('photo_overlays.max_age_filter.five_year'));
+    
+            datalist
+                .append('option')
+                .attr('value', 3)
+                .call(t.append('photo_overlays.max_age_filter.all'));
 
         li
             .merge(liEnter)
