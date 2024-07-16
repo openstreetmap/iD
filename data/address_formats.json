@@ -284,5 +284,14 @@
       ["postcode", "city"],
       ["street", "housenumber"]
     ]
+  },
+  {
+    "countryCodes": ["th"],
+    "format": [
+      ["housenumber", "place"],
+      ["street"],
+      ["subdistrict", "district"],
+      ["province", "postcode"]
+    ]
   }
 ]
