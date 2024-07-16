@@ -64,8 +64,11 @@ export function uiPhotoviewer(context) {
                 buildResizeListener(selection, 'resize', dispatch, { resizeOnY: true })
             );
 
-        // set_photo_from_viewer button
+        // update sett_photo_from_viewer button on selection change and when tags change
         context.features().on('change.setPhotoFromViewer', function() {
+            setPhotoFromViewerButton();
+        });
+        context.history().on('change.setPhotoFromViewer', function() {
             setPhotoFromViewerButton();
         });
 
