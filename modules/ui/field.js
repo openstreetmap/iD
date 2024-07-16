@@ -8,6 +8,7 @@ import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
+import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
 
@@ -96,6 +97,15 @@ export function uiField(context, presetField, entityIDs, options) {
                     }
                 }
                 return false;
+            }
+            if (field.type === 'localized') {
+                for (let tagKey in _tags) {
+                    // matches for field:<code>, where <code> is a BCP 47 locale code
+                    let match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
+                    if (match && match[1] === field.key && match[2]) {
+                        return true;
+                    }
+                }
             }
             return _tags[key] !== undefined;
         });
