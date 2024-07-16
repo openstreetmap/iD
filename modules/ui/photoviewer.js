@@ -6,8 +6,11 @@ import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind } from '../util';
+import { utilRebind, utilStringQs } from '../util';
 import { services } from '../services';
+import { uiTooltip } from './tooltip';
+import { actionChangeTags } from '../actions';
+import { geoSphericalDistance } from '../geo';
 
 export function uiPhotoviewer(context) {
 
@@ -60,6 +63,129 @@ export function uiPhotoviewer(context) {
                 _pointerPrefix + 'down',
                 buildResizeListener(selection, 'resize', dispatch, { resizeOnY: true })
             );
+
+        // update sett_photo_from_viewer button on selection change and when tags change
+        context.features().on('change.setPhotoFromViewer', function() {
+            setPhotoFromViewerButton();
+        });
+        context.history().on('change.setPhotoFromViewer', function() {
+            setPhotoFromViewerButton();
+        });
+
+
+        function setPhotoFromViewerButton() {
+            if (services.mapillary.isViewerOpen()) {
+                if (context.mode().id !== 'select' || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
+                    buttonRemove();
+                } else {
+                    if (selection.select('.set-photo-from-viewer').empty()) {
+                        const button = buttonCreate();
+                        button.on('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setMapillaryPhotoId();
+                            buttonDisable('already_set');
+                        });
+                    }
+                    buttonShowHide();
+                }
+
+                function setMapillaryPhotoId() {
+                    const service = services.mapillary;
+                    const image = service.getActiveImage();
+
+                    const action = graph =>
+                        context.selectedIDs().reduce((graph, entityID) => {
+                            const tags = graph.entity(entityID).tags;
+                            const action = actionChangeTags(entityID, {...tags, mapillary: image.id});
+                            return action(graph);
+                        }, graph);
+
+                    const annotation = t('operations.change_tags.annotation');
+                    context.perform(action, annotation);
+                }
+            }
+
+            function layerStatus(which) {
+                const layers = context.layers();
+                const layer = layers.layer(which);
+                return layer.enabled();
+            }
+
+            function getServiceId() {
+                const hash = utilStringQs(window.location.hash);
+                let serviceId;
+                if (hash.photo) {
+                    let result = hash.photo.split('/');
+                    serviceId = result[0];
+                }
+                return serviceId;
+            }
+
+            function buttonCreate() {
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                const buttonEnter = button.enter()
+                    .append('button')
+                    .attr('class', 'set-photo-from-viewer')
+                    .call(svgIcon('#iD-icon-plus'))
+                    .call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer'))
+                        .placement('right')
+                    );
+
+                buttonEnter.select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
+
+                return buttonEnter;
+            }
+
+            function buttonRemove() {
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                button.remove();
+            }
+
+            function buttonShowHide() {
+                const activeImage = services.mapillary.getActiveImage();
+
+                const graph = context.graph();
+                const entities = context.selectedIDs()
+                    .map(id => graph.entity(id));
+
+                if (entities.map(entity => entity.tags.mapillary)
+                    .every(value => value === activeImage?.id)) {
+                    buttonDisable('already_set');
+                } else if (activeImage && entities.map(entity => entity.extent().center())
+                    .every(loc => geoSphericalDistance(loc, activeImage.loc) > 100)) {
+                    buttonDisable('too_far');
+                } else {
+                    buttonDisable(false);
+                }
+            }
+
+            function buttonDisable(reason) {
+                const disabled = reason !== false;
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                button.attr('disabled', disabled ? 'true' : null);
+                button.classed('disabled', disabled);
+                button.call(uiTooltip().destroyAny);
+                if (disabled) {
+                    button.call(uiTooltip()
+                        .title(() => t.append(`inspector.set_photo_from_viewer.disable.${reason}`))
+                        .placement('right')
+                    );
+                } else {
+                    button.call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_from_viewer.enable'))
+                        .placement('right')
+                    );
+                }
+
+                button.select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
+            }
+        }
 
         function buildResizeListener(target, eventName, dispatch, options) {
 
