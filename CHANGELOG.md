@@ -62,6 +62,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Render `highway=ladder` in a style similar to stairs ([#10257], thanks [@k-yle])
 * Render arrows on lines with `conveying` tag ([#10255], thanks [@k-yle])
+* Render arrows on lines tagged as `waterway=flowline` ([#10283], thanks [@waldyrious])
 #### :hammer: Development
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
@@ -73,12 +74,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10255]: https://github.com/openstreetmap/iD/pull/10255
 [#10257]: https://github.com/openstreetmap/iD/pull/10257
 [#10260]: https://github.com/openstreetmap/iD/issues/10260
+[#10283]: https://github.com/openstreetmap/iD/pull/10283
 [#10291]: https://github.com/openstreetmap/iD/pull/10291
 [#10302]: https://github.com/openstreetmap/iD/issues/10302
 [#10323]: https://github.com/openstreetmap/iD/issues/10323
 [@zbycz]: https://github.com/zbycz
 [@samhoooo]: https://github.com/samhoooo
 [@cmoffroad]: https://github.com/cmoffroad
+[@waldyrious]: https://github.com/waldyrious
 
 
 # 2.29.0
