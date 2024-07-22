@@ -298,6 +298,7 @@ export function uiSectionPhotoOverlays(context) {
 
         labelEnter
             .append('span')
+            .attr('class', 'yearSliderSpan')
             .call(t.append('photo_overlays.age_slider_filter.title'));
 
         let sliderWrap = labelEnter
@@ -310,6 +311,7 @@ export function uiSectionPhotoOverlays(context) {
             .attr('min', 1)
             .attr('max', 5)
             .attr('list', 'dateValues')
+            .attr('value', yearSliderValue)
             .attr('class', 'list-option-date-slider')
             .call(utilNoAuto)
             .on('change', function() {
@@ -323,18 +325,21 @@ export function uiSectionPhotoOverlays(context) {
 
             datalist
                 .append('option')
-                .attr('value', 0)
+                .attr('value', 5)
                 .call(t.append('photo_overlays.age_slider_filter.all'));
 
             datalist
                 .append('option')
-                .attr('value', 5)
-                .call(t.append('photo_overlays.age_slider_filter.five_year'));
+                .attr('value', 4)
+
+            datalist
+                .append('option')
+                .attr('value', 3)
+                .call(t.append('photo_overlays.age_slider_filter.three_year'));
 
             datalist
                 .append('option')
                 .attr('value', 2)
-                .call(t.append('photo_overlays.age_slider_filter.two_year'));
     
             datalist
                 .append('option')
@@ -344,6 +349,12 @@ export function uiSectionPhotoOverlays(context) {
         li
             .merge(liEnter)
             .classed('active', filterEnabled);
+
+        function yearSliderValue() {
+                var sliderValue = context.photos().yearSliderValue();
+                if (sliderValue) return sliderValue;
+                return 5;
+        }
     }
 
     function drawUsernameFilter(selection) {

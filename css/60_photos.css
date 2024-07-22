@@ -343,6 +343,7 @@ label.panoramax-hd {
 
 .slider-wrap {
     display: inline-block;  
+    width: 100%;
 }
 
 .year-datalist {
@@ -353,6 +354,15 @@ label.panoramax-hd {
 .list-option-date-slider{
     direction: rtl;
     width: 100%;
+}
+
+.yearSliderSpan{
+    padding: 2px;
+}
+
+
+.list-item-date-slider label{
+    display: block !important;
 }
 
 

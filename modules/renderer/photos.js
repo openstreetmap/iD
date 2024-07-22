@@ -13,7 +13,6 @@ export function rendererPhotos(context) {
     var _dateFilters = ['fromDate', 'toDate'];
     var _fromDate;
     var _toDate;
-    var _maxPhotoDate;
     var _yearSliderValue;
     var _usernames;
 
@@ -46,10 +45,6 @@ export function rendererPhotos(context) {
 
     photos.dateFilters = function() {
         return _dateFilters;
-    };
-
-    photos.maxPhotoAge = function() {
-        return _maxPhotoDate;
     };
 
     photos.yearSliderValue = function() {
@@ -91,7 +86,10 @@ export function rendererPhotos(context) {
     };
 
     photos.setFromYearFilter = function(year, updateUrl){
-        if (year !== 0) {
+        
+        _yearSliderValue = year;
+
+        if (year !== 5) {
             let days = 365 * year;
             var fromDate = new Date();
             fromDate.setDate(fromDate.getDate() - days);
@@ -101,10 +99,12 @@ export function rendererPhotos(context) {
 
             fromDate = mm + '/' + dd + '/' + yyyy;
             photos.setDateFilter('fromDate', fromDate, updateUrl);
-            _maxPhotoDate = year;
         } else {
-            photos.setDateFilter('fromDate', null, updateUrl);
-            return;
+            photos.setDateFilter('fromDate', null, updateUrl);  
+        }
+
+        if (updateUrl) {
+            setUrlFilterValue('year_slider', year);
         }
     };
 
@@ -212,8 +212,8 @@ export function rendererPhotos(context) {
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
         }
-        if (hash.slider_date){
-            this.setFromYearFilter(hash.slider_date, false);
+        if (hash.year_slider){
+            this.setFromYearFilter(hash.year_slider, false);
         }
         if (hash.photo_username) {
             this.setUsernameFilter(hash.photo_username, false);
