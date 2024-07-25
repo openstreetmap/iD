@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
 * Fix address field overwriting existing data when switching selected map features under certain circumstances ([#10260])
 * Show `name` field also when only a localized name is present (e.g. only `name:xy`, but not `name`) and the preset does not show the name field by default ([#10323], thanks [@samhoooo])
+* Fix bug which in some cases prevented the list of relations in _raw membership editor_ from showing all relations in the visible map area ([#10342])
 #### :earth_asia: Localization
 * Add address format for Thailand ([#10291], thanks [@cmoffroad])
 #### :hourglass: Performance
@@ -78,6 +79,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10291]: https://github.com/openstreetmap/iD/pull/10291
 [#10302]: https://github.com/openstreetmap/iD/issues/10302
 [#10323]: https://github.com/openstreetmap/iD/issues/10323
+[#10342]: https://github.com/openstreetmap/iD/issues/10342
 [@zbycz]: https://github.com/zbycz
 [@samhoooo]: https://github.com/samhoooo
 [@cmoffroad]: https://github.com/cmoffroad
