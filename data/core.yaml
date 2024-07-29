@@ -888,16 +888,6 @@ en:
     username_filter:
       title: "Username"
       tooltip: "Show only photos by this user"
-    max_age_filter:
-      year: "Last year"
-      month: "Last month"
-      week: "Last week"
-      all: "Show all"
-      title: "Photo age"
-      tooltip: "Select maximum photo age"
-    age_slider_filter:
-      title: "Year Slider"
-      tooltip: "Select oldest photo year"
   feature:
     points:
       description: Points
