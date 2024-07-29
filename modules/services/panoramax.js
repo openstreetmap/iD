@@ -12,7 +12,6 @@ import planePhotoFrame from './plane_photo';
 
 const apiUrl = 'https://api.panoramax.xyz/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.mvt';
-const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
 const userIdUrl = apiUrl + 'api/users/search?q={username}';
 const usernameURL = apiUrl + 'api/users/{userId}';
@@ -199,14 +198,6 @@ function loadTileDataToCache(data, tile) {
     }
 }
 
-// Quick access to image
-function getImageURL(image_id, definition){
-    const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
-        .replace('{definition}', definition);
-
-    return requestUrl;
-}
-
 async function getImageData(collection_id, image_id){
     const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
         .replace('{itemId}', image_id);
@@ -281,6 +272,7 @@ export default {
         const responses = await Promise.all(requestUrls.map(requestUrl =>
             fetch(requestUrl, { method: 'GET' })));
         if (responses.some(response => !response.ok)) {
+            const response = responses.find(response => !response.ok);
             throw new Error(response.status + ' ' + response.statusText);
         }
         const data = await Promise.all(responses.map(response => response.json()));

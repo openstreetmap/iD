@@ -65,13 +65,14 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         }
         if (username && service) {
             if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
+
                 const tempIds = await service.getUserIds(username);
 
-                _activeUsernameFilter = username;
                 _activeIds = {};
                 tempIds.forEach(id => {
                     _activeIds[id] = true;
-                })
+                });
             }
 
             images = images.filter(function(image) {
@@ -109,13 +110,14 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         }
         if (username && service) {
             if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
+
                 const tempIds = await service.getUserIds(username);
 
-                _activeUsernameFilter = username;
                 _activeIds = {};
                 tempIds.forEach(id => {
                     _activeIds[id] = true;
-                })
+                });
             }
 
             sequences = sequences.filter(function(sequence) {
