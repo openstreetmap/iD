@@ -355,7 +355,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         svgPanoramaxImages.enabled = _;
         if (svgPanoramaxImages.enabled) {
             showLayer();
-            context.photos().on('change.panoramax_images', null);
+            context.photos().on('change.panoramax_images', update);
         } else {
             hideLayer();
             context.photos().on('change.panoramax_images', null);

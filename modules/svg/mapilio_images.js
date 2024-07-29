@@ -229,7 +229,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         svgMapilioImages.enabled = _;
         if (svgMapilioImages.enabled) {
             showLayer();
-            context.photos().on('change.mapilio_images', null);
+            context.photos().on('change.mapilio_images', update);
         } else {
             hideLayer();
             context.photos().on('change.mapilio_images', null);
