@@ -84,7 +84,7 @@
     "autoprefixer": "^10.4.19",
     "browserslist": "^4.23.2",
     "browserslist-to-esbuild": "^2.1.1",
-    "chai": "^4.4.1",
+    "chai": "^4.5.0",
     "chalk": "^4.1.2",
     "cldr-core": "^45.0.0",
     "cldr-localenames-full": "^45.0.0",
