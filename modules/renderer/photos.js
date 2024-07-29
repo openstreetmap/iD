@@ -13,8 +13,6 @@ export function rendererPhotos(context) {
     var _dateFilters = ['fromDate', 'toDate'];
     var _fromDate;
     var _toDate;
-    var _maxPhotoDate;
-    var _yearSliderValue;
     var _usernames;
 
     function photos() {}
@@ -46,14 +44,6 @@ export function rendererPhotos(context) {
 
     photos.dateFilters = function() {
         return _dateFilters;
-    };
-
-    photos.maxPhotoAge = function() {
-        return _maxPhotoDate;
-    };
-
-    photos.yearSliderValue = function() {
-        return _yearSliderValue;
     };
 
     photos.dateFilterValue = function(val) {
@@ -89,34 +79,6 @@ export function rendererPhotos(context) {
             setUrlFilterValue('photo_dates', rangeString);
         }
     };
-
-    photos.setFromDateFilter = function(date, updateUrl){
-        if (date !== -1){
-            var fromDate = new Date();
-            fromDate.setDate(fromDate.getDate() - date);
-            var dd = String(fromDate.getDate()).padStart(2, '0');
-            var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
-            var yyyy = fromDate.getFullYear();
-
-            fromDate = mm + '/' + dd + '/' + yyyy;
-            photos.setDateFilter('fromDate', fromDate, updateUrl);
-            _maxPhotoDate = date;
-        } else {
-            photos.setDateFilter('fromDate', null, updateUrl);
-        }
-    };
-
-    photos.setFromYearFilter = function(currYear, updateUrl){
-        if (currYear){
-            var fromDate = new Date(currYear, 0, 1);
-            photos.setDateFilter('fromDate', fromDate, updateUrl);
-            _yearSliderValue = currYear;
-        } else {
-            photos.setDateFilter('fromDate', null, updateUrl);
-        }
-        setUrlFilterValue('slider_date', currYear);
-    };
-
 
     photos.setUsernameFilter = function(val, updateUrl) {
         if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
@@ -213,9 +175,6 @@ export function rendererPhotos(context) {
             var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
-        }
-        if (hash.slider_date){
-            this.setFromYearFilter(hash.slider_date, false);
         }
         if (hash.photo_username) {
             this.setUsernameFilter(hash.photo_username, false);
