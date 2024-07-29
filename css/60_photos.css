@@ -104,6 +104,7 @@
 .photo-attribution span {
     padding: 4px 2px;
     color: #fff;
+    text-wrap: nowrap;
 }
 
 /* markers and sequences */

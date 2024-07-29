@@ -504,15 +504,19 @@ export default {
         }
 
         if (d.account_id) {
+            attribution
+                .append('span')
+                .text('|');
+
             let line2 = attribution
-                .append('div')
+                .append('span')
                 .attr('class', 'attribution-row');
 
             getUsername(d.account_id).then(function(username){
                 line2
                     .append('span')
                     .attr('class', 'captured_by')
-                    .text('Captured by: ' + username);
+                    .text(t('panoramax.captured_by', {username}));
             });
         }
 
