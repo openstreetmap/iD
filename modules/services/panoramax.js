@@ -274,15 +274,19 @@ export default {
         loadTiles('line', tileUrl, lineMinZoom, projection);
     },
 
-    getUserId: async function(username){
-        const requestUrl = userIdUrl.replace('{username}', username);
+    getUserIds: async function(usernames) {
+        const requestUrls = usernames.map(username =>
+            userIdUrl.replace('{username}', username));
 
-        const response = await fetch(requestUrl, { method: 'GET' });
-        if (!response.ok) {
+        const responses = await Promise.all(requestUrls.map(requestUrl =>
+            fetch(requestUrl, { method: 'GET' })));
+        if (responses.some(response => !response.ok)) {
             throw new Error(response.status + ' ' + response.statusText);
         }
-        const data = await response.json();
-        return data.features[0].id;
+        const data = await Promise.all(responses.map(response => response.json()));
+        // in panoramax, a username can have multiple ids, when the same name is
+        // used on different servers
+        return data.flatMap((d, i) => d.features.filter(f => f.name === usernames[i]).map(f => f.id));
     },
 
     getOldestDate: function(){

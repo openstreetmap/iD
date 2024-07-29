@@ -14,7 +14,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     let _panoramax;
     let _viewerYaw = 0;
     let _selectedSequence;
-    let _activeId;
+    let _activeUsernameFilter;
+    let _activeIds;
 
     function init() {
         if (svgPanoramaxImages.initialized) return;
@@ -63,18 +64,18 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             });
         }
         if (username && service) {
-            if (!_activeId) {
-                const tempId = await service.getUserId(username);
+            if (_activeUsernameFilter !== username) {
+                const tempIds = await service.getUserIds(username);
 
-                if (!_activeId) {
-                  _activeId = tempId;
-                }
+                _activeUsernameFilter = username;
+                _activeIds = {};
+                tempIds.forEach(id => {
+                    _activeIds[id] = true;
+                })
             }
 
-            let id = _activeId;
-
             images = images.filter(function(image) {
-                return id === image.account_id;
+                return _activeIds[image.account_id];
             });
         }
 
@@ -107,18 +108,18 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             });
         }
         if (username && service) {
-            if (!_activeId) {
-                const tempId = await service.getUserId(username);
+            if (_activeUsernameFilter !== username) {
+                const tempIds = await service.getUserIds(username);
 
-                if (!_activeId) {
-                  _activeId = tempId;
-                }
+                _activeUsernameFilter = username;
+                _activeIds = {};
+                tempIds.forEach(id => {
+                    _activeIds[id] = true;
+                })
             }
 
-            let id = _activeId;
-
             sequences = sequences.filter(function(sequence) {
-                return id === sequence.properties.account_id;
+                return _activeIds[sequence.properties.account_id];
             });
         }
 
