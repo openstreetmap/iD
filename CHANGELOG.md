@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
 #### :scissors: Operations
 #### :camera: Street-Level
+* Add Panoramax as new street level imagery provider ([#9941], thanks [@mattiapezzotti])
 #### :white_check_mark: Validation
 * Drop deprecated validation service _ImproveOSM_ ([#10302], thanks [@arch0345])
 #### :bug: Bugfixes

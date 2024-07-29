@@ -85,16 +85,15 @@ export default {
     return this;
   },
 
-  selectPhoto: function (data, keepOrientation) {
+  selectPhoto: function (data) {
     dispatch.call('viewerChanged');
+
     loadImage(_photo, '');
     loadImage(_photo, data.image_path)
       .then(() => {
-        if (!keepOrientation) {
-          imgZoom = zoomBeahvior();
-          _wrapper.call(imgZoom);
-          _wrapper.call(imgZoom.transform, d3_zoomIdentity.translate(-_widthOverflow / 2, 0));
-        }
+        imgZoom = zoomBeahvior();
+        _wrapper.call(imgZoom);
+        _wrapper.call(imgZoom.transform, d3_zoomIdentity.translate(-_widthOverflow / 2, 0));
       });
     return this;
   },

@@ -104,6 +104,7 @@
 .photo-attribution span {
     padding: 4px 2px;
     color: #fff;
+    text-wrap: nowrap;
 }
 
 /* markers and sequences */
@@ -175,7 +176,7 @@
 .sequence {
     fill: none;
     stroke-width: 2;
-    stroke-opacity: 0.4;
+    stroke-opacity: 0.6;
 }
 .sequence.highlighted,
 .sequence.currentView {
@@ -310,7 +311,57 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    overflow: hidden
+    overflow: hidden;
+}
+
+/* panoramax Image Layer */
+.layer-panoramax {
+    pointer-events: none;
+}
+.layer-panoramax .viewfield-group * {
+    fill: #1234ae;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-panoramax .sequence {
+    stroke: #1234ae;
+}
+.photo-controls-panoramax {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-panoramax button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+
+label.panoramax-hd {
+    float: left;
+    cursor: pointer;
+}
+.panoramax-hd span {
+    margin-top: 2px;
+}
+.panoramax-hd input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+}
+
+.slider-wrap {
+    display: inline-block;  
+}
+
+.year-datalist {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-option-date-slider{
+    direction: rtl
 }
 
 
@@ -343,7 +394,8 @@
 }
 
 .ms-wrapper .pnlm-compass.pnlm-control,
-.vegbilder-wrapper  .pnlm-compass.pnlm-control {
+.vegbilder-wrapper  .pnlm-compass.pnlm-control,
+.panoramax-wrapper  .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
@@ -435,19 +487,18 @@ label.streetside-hires {
 .photo-wrapper {
     position: relative;
     background-color: #000;
-}
-
-.photoviewer .plane-frame {
-    display: block;
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
     background-image: url(img/loader-black.gif);
     background-position: center;
     background-repeat: no-repeat;
 }
 
-.photoviewer .plane-frame > img.plane-photo{
+.photoviewer .plane-frame {
+    height: 100%;
+    width: 100%;
+    transform-origin: 0 0;
+}
+
+.photoviewer .plane-frame > img.plane-photo {
     width: auto;
     height: 100%;
     transform-origin: 0 0;
@@ -592,3 +643,4 @@ label.streetside-hires {
     border-radius: 4px;
     cursor: pointer;
 }
+

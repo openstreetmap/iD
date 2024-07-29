@@ -1424,6 +1424,12 @@ en:
   mapilio:
     title: Mapilio
     tooltip: "Street-level photos from Mapilio"
+  panoramax:
+    title: Panoramax
+    tooltip: "Street-level photos from Panoramax"
+    report: "Report"
+    captured_by: "Captured by {username}"
+    hd: "High resolution"
   street_side:
     minzoom_tooltip: "Zoom in to see street-side photos"
   local_photos:
