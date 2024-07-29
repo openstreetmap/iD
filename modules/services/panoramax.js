@@ -16,6 +16,7 @@ const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
 const userIdUrl = apiUrl + 'api/users/search?q={username}';
 const usernameURL = apiUrl + 'api/users/{userId}';
+const viewerUrl = apiUrl;
 
 const highDefinition = 'hd';
 const standardDefinition = 'sd';
@@ -388,7 +389,7 @@ export default {
         that.setActiveImage(d);
         that.updateUrlImage(d.id);
 
-        let imageUrl = getImageURL(d.id, highDefinition);
+        const viewerLink = `${viewerUrl}#pic=${d.id}&focus=pic`;
 
         let viewer = context.container()
             .select('.photoviewer');
@@ -457,8 +458,8 @@ export default {
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
-            .attr('href', imageUrl)
-            .text('panoramax.fr');
+            .attr('href', viewerLink)
+            .text('panoramax.xyz');
 
         getImageData(d.sequence_id, d.id).then(function(data){
             _currentScene = {
