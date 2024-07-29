@@ -55,12 +55,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Properly sort map features with lifecycle prefixes in the _Past/Futures_ features ([#7582])
 * Only consider features with either `landuse`, `natural`, `amentiy` or `leisure` tag to be classified as _Landuse_ areas
 * Fix address field overwriting existing data when switching selected map features under certain circumstances ([#10260])
+* Show `name` field also when only a localized name is present (e.g. only `name:xy`, but not `name`) and the preset does not show the name field by default ([#10323], thanks [@samhoooo])
+* Fix bug which in some cases prevented the list of relations in _raw membership editor_ from showing all relations in the visible map area ([#10342])
 #### :earth_asia: Localization
+* Add address format for Thailand ([#10291], thanks [@cmoffroad])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Render `highway=ladder` in a style similar to stairs ([#10257], thanks [@k-yle])
 * Render arrows on lines with `conveying` tag ([#10255], thanks [@k-yle])
+* Render arrows on lines tagged as `waterway=flowline` ([#10283], thanks [@waldyrious])
 #### :hammer: Development
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
@@ -72,8 +76,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10255]: https://github.com/openstreetmap/iD/pull/10255
 [#10257]: https://github.com/openstreetmap/iD/pull/10257
 [#10260]: https://github.com/openstreetmap/iD/issues/10260
+[#10283]: https://github.com/openstreetmap/iD/pull/10283
+[#10291]: https://github.com/openstreetmap/iD/pull/10291
 [#10302]: https://github.com/openstreetmap/iD/issues/10302
+[#10323]: https://github.com/openstreetmap/iD/issues/10323
+[#10342]: https://github.com/openstreetmap/iD/issues/10342
 [@zbycz]: https://github.com/zbycz
+[@samhoooo]: https://github.com/samhoooo
+[@cmoffroad]: https://github.com/cmoffroad
+[@waldyrious]: https://github.com/waldyrious
 
 
 # 2.29.0
@@ -84,6 +95,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add button to fully load incompletely downloaded relations ([#5420])
 #### :camera: Street-Level
 * Show Mapillary username and deep link to external viewer on Mapillary photos ([#10135], thanks [@Sushil642])
+* Add button to directly attach the id of a mapillary photo as the `mapillary` tag of selected map features ([#9339])
 #### :white_check_mark: Validation
 * Drop validation which checks for [old style multipolygons](https://wiki.openstreetmap.org/wiki/Old_style_multipolygons), as these have long been [fixed](https://blog.jochentopf.com/2017-08-28-polygon-fixing-effort-concluded.html) in OSM
 * Upgrade closed ways with `traffic_calming=island` to `area:highway=traffic_island` ([id-tagging-schema#1162])
@@ -101,6 +113,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#5420]: https://github.com/openstreetmap/iD/issues/5420
 [#7653]: https://github.com/openstreetmap/iD/issues/7653
 [#8415]: https://github.com/openstreetmap/iD/issues/8415
+[#9339]: https://github.com/openstreetmap/iD/issues/9339
 [#9439]: https://github.com/openstreetmap/iD/issues/9439
 [#10135]: https://github.com/openstreetmap/iD/issues/10135
 [#10145]: https://github.com/openstreetmap/iD/issues/10145
@@ -152,6 +165,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't consider traffic_calming features as areas ([id-tagging-schema#1076])
 * Add rendering style for roller coaster tracks and supports ([#9891], thanks [@mangerlahn])
 * Drop `*:wikipedia` tags when switching to a new NSI-based preset which specifies a corresponding `*:wikidata` tag ([#9103])
+* Add rendering style for `waterway=flowline` features: as wide as rivers, but without border and slightly opaque ([#10283])
 
 [#9103]: https://github.com/openstreetmap/iD/issues/9103
 [#9424]: https://github.com/openstreetmap/iD/pull/9424

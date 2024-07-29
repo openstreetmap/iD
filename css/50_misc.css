@@ -346,7 +346,7 @@ path.line.stroke.tag-location-underwater {
 }
 path.line.casing.tag-tunnel,
 path.line.casing.tag-location-underground,
-path.line.stroke.tag-location-underwater {
+path.line.casing.tag-location-underwater {
     stroke-opacity: 0.5;
     stroke-linecap: butt;
     stroke-dasharray: none;
