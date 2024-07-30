@@ -2,7 +2,7 @@ describe('iD.rendererTileLayer', function() {
     var context, d, c;
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         d = d3.select(document.createElement('div'));
         c = iD.rendererTileLayer(context).projection(d3.geoMercator());
     });

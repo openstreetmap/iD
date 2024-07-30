@@ -1,9 +1,0 @@
-{
-    "key": "denomination",
-    "type": "combo",
-    "label": "Denomination",
-    "prerequisiteTag": {
-        "key": "religion",
-        "valueNot": "none"
-    }
-}

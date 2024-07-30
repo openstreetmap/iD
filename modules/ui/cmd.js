@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDetect } from '../util/detect';
 
 
@@ -53,8 +53,9 @@ uiCmd.display = function(code) {
         '↘': mac ? '↘ ' + t('shortcuts.key.pgdn')   : t('shortcuts.key.pgdn'),
         '⇞': mac ? '⇞ ' + t('shortcuts.key.home')   : t('shortcuts.key.home'),
         '⇟': mac ? '⇟ ' + t('shortcuts.key.end')    : t('shortcuts.key.end'),
-        '↵': mac ? '↵ ' + t('shortcuts.key.return') : t('shortcuts.key.enter'),
+        '↵': mac ? '⏎ ' + t('shortcuts.key.return') : t('shortcuts.key.enter'),
         '⎋': mac ? '⎋ ' + t('shortcuts.key.esc')    : t('shortcuts.key.esc'),
+        '☰': mac ? '☰ ' + t('shortcuts.key.menu')  : t('shortcuts.key.menu'),
     };
 
     return replacements[code] || code;

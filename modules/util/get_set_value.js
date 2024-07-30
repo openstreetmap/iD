@@ -1,27 +1,28 @@
 // Like selection.property('value', ...), but avoids no-op value sets,
 // which can result in layout/repaint thrashing in some situations.
-export function utilGetSetValue(selection, value) {
-    function d3_selection_value(value) {
+/** @returns {string} */
+export function utilGetSetValue(selection, value, shouldUpdate) {
+    function setValue(value, shouldUpdate) {
         function valueNull() {
             delete this.value;
         }
 
         function valueConstant() {
-            if (this.value !== value) {
+            if (shouldUpdate(this.value, value)) {
                 this.value = value;
             }
         }
 
         function valueFunction() {
             var x = value.apply(this, arguments);
-            if (x == null) {
+            if (x === null || x === undefined) {
                 delete this.value;
-            } else if (this.value !== x) {
+            } else if (shouldUpdate(this.value, x)) {
                 this.value = x;
             }
         }
 
-        return value == null
+        return (value === null || value === undefined)
             ? valueNull : (typeof value === 'function'
             ? valueFunction : valueConstant);
     }
@@ -30,5 +31,9 @@ export function utilGetSetValue(selection, value) {
         return selection.property('value');
     }
 
-    return selection.each(d3_selection_value(value));
+    if (shouldUpdate === undefined) {
+        shouldUpdate = (a, b) => a !== b;
+    }
+
+    return selection.each(setValue(value, shouldUpdate));
 }

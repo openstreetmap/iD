@@ -1,5 +1,5 @@
 import { actionChangeTags } from '../actions/change_tags';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel, utilTagDiff } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
@@ -67,9 +67,9 @@ export function validationPrivateData() {
                 return [
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.' + fixID + '.title'),
+                        title: t.append('issues.fix.' + fixID + '.title'),
                         onClick: function(context) {
-                            context.perform(doUpgrade, t('issues.fix.upgrade_tags.annotation'));
+                            context.perform(doUpgrade, t('issues.fix.remove_tag.annotation'));
                         }
                     })
                 ];
@@ -98,8 +98,8 @@ export function validationPrivateData() {
             var currEntity = context.hasEntity(this.entityIds[0]);
             if (!currEntity) return '';
 
-            return t('issues.private_data.contact.message',
-                { feature: utilDisplayLabel(currEntity, context) }
+            return t.append('issues.private_data.contact.message',
+                { feature: utilDisplayLabel(currEntity, context.graph()) }
             );
         }
 
@@ -112,11 +112,11 @@ export function validationPrivateData() {
             enter
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.private_data.reference'));
+                .call(t.append('issues.private_data.reference'));
 
             enter
                 .append('strong')
-                .text(t('issues.suggested'));
+                .call(t.append('issues.suggested'));
 
             enter
                 .append('table')
@@ -131,7 +131,7 @@ export function validationPrivateData() {
                     var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .text(function(d) { return d.display; });
+                .html(function(d) { return d.display; });
         }
     };
 

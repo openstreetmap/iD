@@ -1,5 +1,5 @@
 import { svgIcon } from '../svg/icon';
-import { t } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 
 
 export function uiKeepRightHeader() {
@@ -8,15 +8,15 @@ export function uiKeepRightHeader() {
 
   function issueTitle(d) {
     const { itemType, parentIssueType } = d;
-    const unknown = t('inspector.unknown');
+    const unknown = t.html('inspector.unknown');
     let replacements = d.replacements || {};
-    replacements.default = unknown;  // special key `default` works as a fallback string
+    replacements.default = { html: unknown };  // special key `default` works as a fallback string
 
-    let title = t(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
-    if (title === unknown) {
-      title = t(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
+    if (localizer.hasTextForStringId(`QA.keepRight.errorTypes.${itemType}.title`)) {
+      return t.html(`QA.keepRight.errorTypes.${itemType}.title`, replacements);
+    } else {
+      return t.html(`QA.keepRight.errorTypes.${parentIssueType}.title`, replacements);
     }
-    return title;
   }
 
 
@@ -47,7 +47,7 @@ export function uiKeepRightHeader() {
     headerEnter
       .append('div')
         .attr('class', 'qa-header-label')
-        .text(issueTitle);
+        .html(issueTitle);
   }
 
 

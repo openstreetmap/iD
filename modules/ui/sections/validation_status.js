@@ -1,7 +1,8 @@
 import _debounce from 'lodash-es/debounce';
 
 import { svgIcon } from '../../svg/icon';
-import { t } from '../../util/locale';
+import { prefs } from '../../core/preferences';
+import { t } from '../../core/localizer';
 import { uiSection } from '../section';
 
 export function uiSectionValidationStatus(context) {
@@ -15,8 +16,8 @@ export function uiSectionValidationStatus(context) {
 
     function getOptions() {
         return {
-            what: context.storage('validate-what') || 'edited',
-            where: context.storage('validate-where') || 'all'
+            what: prefs('validate-what') || 'edited',
+            where: prefs('validate-where') || 'all'
         };
     }
 
@@ -77,9 +78,10 @@ export function uiSectionValidationStatus(context) {
             .merge(resetIgnoredEnter);
 
         resetIgnored.select('a')
-            .text(t('issues.reset_ignored', { count: ignoredIssues.length.toString() }));
+            .html(t.html('inspector.title_count', { title: { html: t.html('issues.reset_ignored') }, count: ignoredIssues.length }));
 
-        resetIgnored.on('click', function() {
+        resetIgnored.on('click', function(d3_event) {
+            d3_event.preventDefault();
             context.validator().resetIgnoredIssues();
         });
     }
@@ -94,7 +96,8 @@ export function uiSectionValidationStatus(context) {
                 var hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     selection.select('.box .details')
-                        .text(t(
+                        .html('')
+                        .call(t.append(
                             'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
                         ));
@@ -102,7 +105,8 @@ export function uiSectionValidationStatus(context) {
                 }
             }
             selection.select('.box .details')
-                .text(t('issues.no_issues.hidden_issues.none'));
+                .html('')
+                .call(t.append('issues.no_issues.hidden_issues.none'));
         }
 
         var messageType;
@@ -157,7 +161,8 @@ export function uiSectionValidationStatus(context) {
         }
 
         selection.select('.box .message')
-            .text(t('issues.no_issues.message.' + messageType));
+            .html('')
+            .call(t.append('issues.no_issues.message.' + messageType));
 
     }
 

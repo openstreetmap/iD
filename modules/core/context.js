@@ -4,21 +4,22 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 import { select as d3_select } from 'd3-selection';
 
-import { t, setLocale, localeStrings, localeData } from '../util/locale';
+import packageJSON from '../../package.json';
 
-import { coreData } from './data';
+import { t } from '../core/localizer';
+
+import { fileFetcher } from './file_fetcher';
+import { localizer } from './localizer';
 import { coreHistory } from './history';
 import { coreValidator } from './validator';
 import { coreUploader } from './uploader';
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
-import { osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
-import { presetIndex } from '../presets';
+import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
-import { utilDetect } from '../util/detect';
-import { utilKeybinding, utilRebind, utilStringQs } from '../util';
+import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
 
 
 export function coreContext() {
@@ -26,41 +27,58 @@ export function coreContext() {
   let context = utilRebind({}, dispatch, 'on');
   let _deferred = new Set();
 
-  context.version = '2.17.2';
-  context.privacyVersion = '20200312';
+  context.version = packageJSON.version;
+  context.privacyVersion = '20201202';
 
+  // iD will alter the hash so cache the parameters intended to setup the session
+  context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
 
-  // https://github.com/openstreetmap/iD/issues/772
-  // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
-  let _storage;
-  try { _storage = localStorage; } catch (e) {}  // eslint-disable-line no-empty
-  _storage = _storage || (() => {
-    let s = {};
-    return {
-      getItem: (k) => s[k],
-      setItem: (k, v) => s[k] = v,
-      removeItem: (k) => delete s[k]
-    };
-  })();
+  /* Changeset */
+  // An osmChangeset object. Not loaded until needed.
+  context.changeset = null;
 
-  context.storage = function(k, v) {
-    try {
-      if (arguments.length === 1) return _storage.getItem(k);
-      else if (v === null) _storage.removeItem(k);
-      else _storage.setItem(k, v);
-    } catch (e) {
-      /* eslint-disable no-console */
-      if (typeof console !== 'undefined') {
-        console.error('localStorage quota exceeded');
-      }
-      /* eslint-enable no-console */
-    }
+  let _defaultChangesetComment = context.initialHashParams.comment;
+  let _defaultChangesetSource = context.initialHashParams.source;
+  let _defaultChangesetHashtags = context.initialHashParams.hashtags;
+  context.defaultChangesetComment = function(val) {
+    if (!arguments.length) return _defaultChangesetComment;
+    _defaultChangesetComment = val;
+    return context;
+  };
+  context.defaultChangesetSource = function(val) {
+    if (!arguments.length) return _defaultChangesetSource;
+    _defaultChangesetSource = val;
+    return context;
+  };
+  context.defaultChangesetHashtags = function(val) {
+    if (!arguments.length) return _defaultChangesetHashtags;
+    _defaultChangesetHashtags = val;
+    return context;
+  };
+
+  /* Document title */
+  /* (typically shown as the label for the browser window/tab) */
+
+  // If true, iD will update the title based on what the user is doing
+  let _setsDocumentTitle = true;
+  context.setsDocumentTitle = function(val) {
+    if (!arguments.length) return _setsDocumentTitle;
+    _setsDocumentTitle = val;
+    return context;
+  };
+  // The part of the title that is always the same
+  let _documentTitleBase = document.title;
+  context.documentTitleBase = function(val) {
+    if (!arguments.length) return _documentTitleBase;
+    _documentTitleBase = val;
+    return context;
   };
 
 
   /* User interface and keybinding */
   let _ui;
   context.ui = () => _ui;
+  context.lastPointerType = () => _ui.lastPointerType();
 
   let _keybinding = utilKeybinding('context');
   context.keybinding = () => _keybinding;
@@ -68,13 +86,13 @@ export function coreContext() {
 
 
   /* Straight accessors. Avoid using these if you can. */
-  let _connection;
-  let _data;
+  // Instantiate the connection here because it doesn't require passing in
+  // `context` and it's needed for pre-init calls like `preauth`
+  let _connection = services.osm;
   let _history;
   let _validator;
   let _uploader;
   context.connection = () => _connection;
-  context.data = () => _data;
   context.history = () => _history;
   context.validator = () => _validator;
   context.uploader = () => _uploader;
@@ -84,6 +102,14 @@ export function coreContext() {
     if (_connection) {
       _connection.switch(options);
     }
+    return context;
+  };
+
+
+  // A string or array or locale codes to prefer over the browser's settings
+  context.locale = function(locale) {
+    if (!arguments.length) return localizer.localeCode();
+    localizer.preferredLocaleCodes(locale);
     return context;
   };
 
@@ -141,23 +167,35 @@ export function coreContext() {
     _deferred.add(handle);
   };
 
+  // Download the full entity and its parent relations. The callback may be called multiple times.
   context.loadEntity = (entityID, callback) => {
     if (_connection) {
       const cid = _connection.getConnectionId();
       _connection.loadEntity(entityID, afterLoad(cid, callback));
+      // We need to fetch the parent relations separately.
+      _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
+    }
+  };
+  // Download single note
+  context.loadNote = (entityID, callback) => {
+    if (_connection) {
+      const cid = _connection.getConnectionId();
+      _connection.loadEntityNote(entityID, afterLoad(cid, callback));
     }
   };
 
   context.zoomToEntity = (entityID, zoomTo) => {
-    if (zoomTo !== false) {
-      context.loadEntity(entityID, (err, result) => {
-        if (err) return;
-        const entity = result.data.find(e => e.id === entityID);
-        if (entity) {
-          _map.zoomTo(entity);
-        }
-      });
-    }
+
+    // be sure to load the entity even if we're not going to zoom to it
+    context.loadEntity(entityID, (err, result) => {
+      if (err) return;
+      if (zoomTo !== false) {
+          const entity = result.data.find(e => e.id === entityID);
+          if (entity) {
+            _map.zoomTo(entity);
+          }
+      }
+    });
 
     _map.on('drawn.zoomToEntity', () => {
       if (!context.hasEntity(entityID)) return;
@@ -184,12 +222,14 @@ export function coreContext() {
     return context;
   };
 
-
+  // String length limits in Unicode characters, not JavaScript UTF-16 code units
   context.maxCharsForTagKey = () => 255;
-
   context.maxCharsForTagValue = () => 255;
-
   context.maxCharsForRelationRole = () => 255;
+
+  context.cleanTagKey = (val) => utilCleanOsmString(val, context.maxCharsForTagKey());
+  context.cleanTagValue = (val) => utilCleanOsmString(val, context.maxCharsForTagValue());
+  context.cleanRelationRole = (val) => utilCleanOsmString(val, context.maxCharsForRelationRole());
 
 
   /* History */
@@ -204,7 +244,7 @@ export function coreContext() {
   // This is called someteimes, but also on the `window.onbeforeunload` handler
   context.save = () => {
     // no history save, no message onbeforeunload
-    if (_inIntro || d3_select('.modal').size()) return;
+    if (_inIntro || context.container().select('.modal').size()) return;
 
     let canSave;
     if (_mode && _mode.id === 'save') {
@@ -247,8 +287,6 @@ export function coreContext() {
   /* Graph */
   context.hasEntity = (id) => _history.graph().hasEntity(id);
   context.entity = (id) => _history.graph().entity(id);
-  context.childNodes = (way) => _history.graph().childNodes(way);
-  context.geometry = (id) => context.entity(id).geometry(_history.graph());
 
 
   /* Modes */
@@ -301,6 +339,13 @@ export function coreContext() {
     return context;
   };
 
+  let _copyLonLat;
+  context.copyLonLat = function(val) {
+    if (!arguments.length) return _copyLonLat;
+    _copyLonLat = val;
+    return context;
+  };
+
 
   /* Background */
   let _background;
@@ -322,15 +367,10 @@ export function coreContext() {
   context.photos = () => _photos;
 
 
-  /* Presets */
-  let _presets;
-  context.presets = () => _presets;
-
-
   /* Map */
   let _map;
   context.map = () => _map;
-  context.layers = () => _map.layers;
+  context.layers = () => _map.layers();
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
   context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
@@ -361,13 +401,19 @@ export function coreContext() {
 
 
   /* Container */
-  let _container = d3_select(document.body);
+  let _container = d3_select(null);
   context.container = function(val) {
     if (!arguments.length) return _container;
     _container = val;
-    _container.classed('id-container', true);
+    _container.classed('ideditor', true);
     return context;
   };
+  context.containerNode = function(val) {
+    if (!arguments.length) return context.container().node();
+    context.container(d3_select(val));
+    return context;
+  };
+
   let _embed;
   context.embed = function(val) {
     if (!arguments.length) return _embed;
@@ -381,6 +427,7 @@ export function coreContext() {
   context.assetPath = function(val) {
     if (!arguments.length) return _assetPath;
     _assetPath = val;
+    fileFetcher.assetPath(val);
     return context;
   };
 
@@ -388,6 +435,7 @@ export function coreContext() {
   context.assetMap = function(val) {
     if (!arguments.length) return _assetMap;
     _assetMap = val;
+    fileFetcher.assetMap(val);
     return context;
   };
 
@@ -398,37 +446,6 @@ export function coreContext() {
   };
 
   context.imagePath = (val) => context.asset(`img/${val}`);
-
-
-  /* Locales */
-  // Returns a Promise to load the strings for the requested locale
-  context.loadLocale = (requested) => {
-    let locale = requested;
-
-    if (!_data) {
-      return Promise.reject('loadLocale called before init');
-    }
-    if (!localeData[locale]) {        // Locale not supported, e.g. 'es-FAKE'
-      locale = locale.split('-')[0];  // Fallback to the first part 'es'
-    }
-    if (!localeData[locale]) {
-      return Promise.reject(`Unsupported locale: ${requested}`);
-    }
-
-    if (localeStrings[locale]) {    // already loaded
-      return Promise.resolve(locale);
-    }
-
-    let fileMap = _data.fileMap();
-    const key = `locale_${locale}`;
-    fileMap[key] = `locales/${locale}.json`;
-
-    return _data.get(key)
-      .then(d => {
-        localeStrings[locale] = d[locale];
-        return locale;
-      });
-  };
 
 
   /* reset (aka flush) */
@@ -446,13 +463,15 @@ export function coreContext() {
       }
     });
 
+    context.changeset = null;
+
     _validator.reset();
     _features.reset();
     _history.reset();
     _uploader.reset();
 
     // don't leave stale state in the inspector
-    d3_select('.inspector-wrap *').remove();
+    context.container().select('.inspector-wrap *').remove();
 
     return context;
   };
@@ -465,93 +484,86 @@ export function coreContext() {
 
   /* Init */
   context.init = () => {
-    const hash = utilStringQs(window.location.hash);
 
-    _data = coreData(context);
+    instantiateInternal();
 
-    // Start loading data:
-    // 1. the list of supported locales
-    // 2. the English locale strings (used as fallbacks)
-    // 3. the preferred locale strings (detected by utilDetect)
-    const requested = utilDetect().locale;
-    _data.get('locales')
-      .then(d => Object.assign(localeData, d))
-      .then(() => context.loadLocale('en'))
-      .then(() => context.loadLocale(requested))
-      .then(received => {      // `received` may not match `requested`.
-        setLocale(received);   // (e.g. 'es-FAKE' will return 'es')
-        utilDetect(true);      // Then force redetection
-      })
-      .catch(err => console.error(err));  // eslint-disable-line
-
-    _history = coreHistory(context);
-    _validator = coreValidator(context);
-    _uploader = coreUploader(context);
-
-    context.graph = _history.graph;
-    context.changes = _history.changes;
-    context.intersects = _history.intersects;
-    context.pauseChangeDispatch = _history.pauseChangeDispatch;
-    context.resumeChangeDispatch = _history.resumeChangeDispatch;
-
-    context.perform = withDebouncedSave(_history.perform);
-    context.replace = withDebouncedSave(_history.replace);
-    context.pop = withDebouncedSave(_history.pop);
-    context.overwrite = withDebouncedSave(_history.overwrite);
-    context.undo = withDebouncedSave(_history.undo);
-    context.redo = withDebouncedSave(_history.redo);
-
-    _ui = uiInit(context);
-
-    _connection = services.osm;
-    _background = rendererBackground(context);
-    _features = rendererFeatures(context);
-    _photos = rendererPhotos(context);
-    _presets = presetIndex(context);
-
-    if (hash.presets) {
-      _presets.addablePresetIDs(new Set(hash.presets.split(',')));
-    }
-
-    _map = rendererMap(context);
-    context.mouse = _map.mouse;
-    context.extent = _map.extent;
-    context.pan = _map.pan;
-    context.zoomIn = _map.zoomIn;
-    context.zoomOut = _map.zoomOut;
-    context.zoomInFurther = _map.zoomInFurther;
-    context.zoomOutFurther = _map.zoomOutFurther;
-    context.redrawEnable = _map.redrawEnable;
-
-    Object.values(services).forEach(service => {
-      if (service && typeof service.init === 'function') {
-        service.init(context);
-      }
-    });
-
-    _validator.init();
-    _background.init();
-    _features.init();
-    _photos.init();
-    _presets.init()
-      .then(() => {
-        osmSetAreaKeys(_presets.areaKeys());
-        osmSetPointTags(_presets.pointTags());
-        osmSetVertexTags(_presets.vertexTags());
-      });
-
-    if (services.maprules && hash.maprules) {
-      d3_json(hash.maprules)
-        .then(mapcss => {
-          services.maprules.init();
-          mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
-        })
-        .catch(() => { /* ignore */ });
-    }
+    initializeDependents();
 
     return context;
-  };
 
+    // Load variables and properties. No property of `context` should be accessed
+    // until this is complete since load statuses are indeterminate. The order
+    // of instantiation shouldn't matter.
+    function instantiateInternal() {
+
+      _history = coreHistory(context);
+      context.graph = _history.graph;
+      context.pauseChangeDispatch = _history.pauseChangeDispatch;
+      context.resumeChangeDispatch = _history.resumeChangeDispatch;
+      context.perform = withDebouncedSave(_history.perform);
+      context.replace = withDebouncedSave(_history.replace);
+      context.pop = withDebouncedSave(_history.pop);
+      context.overwrite = withDebouncedSave(_history.overwrite);
+      context.undo = withDebouncedSave(_history.undo);
+      context.redo = withDebouncedSave(_history.redo);
+
+      _validator = coreValidator(context);
+      _uploader = coreUploader(context);
+
+      _background = rendererBackground(context);
+      _features = rendererFeatures(context);
+      _map = rendererMap(context);
+      _photos = rendererPhotos(context);
+
+      _ui = uiInit(context);
+    }
+
+    // Set up objects that might need to access properties of `context`. The order
+    // might matter if dependents make calls to each other. Be wary of async calls.
+    function initializeDependents() {
+
+      if (context.initialHashParams.presets) {
+        presetManager.addablePresetIDs(new Set(context.initialHashParams.presets.split(',')));
+      }
+
+      if (context.initialHashParams.locale) {
+        localizer.preferredLocaleCodes(context.initialHashParams.locale);
+      }
+
+      // kick off some async work
+      localizer.ensureLoaded();
+      presetManager.ensureLoaded();
+      _background.ensureLoaded();
+
+      Object.values(services).forEach(service => {
+        if (service && typeof service.init === 'function') {
+          service.init();
+        }
+      });
+
+      _map.init();
+      _validator.init();
+      _features.init();
+
+      if (services.maprules && context.initialHashParams.maprules) {
+        d3_json(context.initialHashParams.maprules)
+          .then(mapcss => {
+            services.maprules.init();
+            mapcss.forEach(mapcssSelector => services.maprules.addRule(mapcssSelector));
+          })
+          .catch(() => { /* ignore */ });
+      }
+
+      // if the container isn't available, e.g. when testing, don't load the UI
+      if (!context.container().empty()) {
+        _ui.ensureLoaded()
+          .then(() => {
+            _background.init();
+            _photos.init();
+          });
+      }
+    }
+  };
 
   return context;
 }

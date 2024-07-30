@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 
 
@@ -32,7 +32,7 @@ export function uiDataHeader() {
         headerEnter
             .append('div')
             .attr('class', 'data-header-label')
-            .text(t('map_data.layers.custom.title'));
+            .call(t.append('map_data.layers.custom.title'));
     }
 
 

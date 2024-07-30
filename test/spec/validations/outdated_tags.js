@@ -2,14 +2,14 @@ describe('iD.validations.outdated_tags', function () {
     var context;
 
     before(function() {
-        iD.data.deprecated = [
+        iD.fileFetcher.cache().deprecated = [
           { old: { highway: 'no' } },
           { old: { highway: 'ford' }, replace: { ford: '*' } }
         ];
     });
 
     after(function() {
-        iD.data.deprecated = [];
+        iD.fileFetcher.cache().deprecated = [];
     });
 
     beforeEach(function() {
@@ -125,21 +125,4 @@ describe('iD.validations.outdated_tags', function () {
             done();
         }, 20);
     });
-
-    it('flags multipolygon tagged on the outer way', function(done) {
-        createRelation({ building: 'yes' }, { type: 'multipolygon' });
-        var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.not.have.lengthOf(0);
-            var issue = issues[0];
-            expect(issue.type).to.eql('outdated_tags');
-            expect(issue.subtype).to.eql('old_multipolygon');
-            expect(issue.entityIds).to.have.lengthOf(2);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            expect(issue.entityIds[1]).to.eql('r-1');
-            done();
-        }, 20);
-    });
-
 });

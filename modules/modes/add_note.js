@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { behaviorDraw } from '../behavior/draw';
 import { modeBrowse } from './browse';
 import { modeSelectNote } from './select_note';
@@ -10,13 +10,11 @@ export function modeAddNote(context) {
     var mode = {
         id: 'add-note',
         button: 'note',
-        title: t('modes.add_note.title'),
-        description: t('modes.add_note.description'),
+        description: t.append('modes.add_note.description'),
         key: t('modes.add_note.key')
     };
 
     var behavior = behaviorDraw(context)
-        .tail(t('modes.add_note.tail'))
         .on('click', add)
         .on('cancel', cancel)
         .on('finish', cancel);
@@ -30,7 +28,7 @@ export function modeAddNote(context) {
         osm.replaceNote(note);
 
         // force a reraw (there is no history change that would otherwise do this)
-        context.pan([0,0]);
+        context.map().pan([0,0]);
 
         context
             .selectedNoteID(note.id)

@@ -1,9 +1,0 @@
-{
-    "key": "microbrewery",
-    "type": "check",
-    "label": "Microbrewery",
-    "terms": [
-        "brewpub",
-        "craft beer"
-    ]
-}

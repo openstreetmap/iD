@@ -1,9 +1,8 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
-import { utilDetect } from '../util/detect';
 
 export function uiImproveOsmComments() {
   let _qaItem;
@@ -53,7 +52,6 @@ export function uiImproveOsmComments() {
                   .append('a')
                   .attr('class', 'comment-author-link')
                   .attr('href', osm.userURL(d.username))
-                  .attr('tabindex', -1)
                   .attr('target', '_blank');
               }
               selection
@@ -63,7 +61,7 @@ export function uiImproveOsmComments() {
         metadataEnter
           .append('div')
             .attr('class', 'comment-date')
-            .text(d => t('note.status.commented', { when: localeDateString(d.timestamp) }));
+            .html(d => t.html('note.status.commented', { when: localeDateString(d.timestamp) }));
 
         mainEnter
           .append('div')
@@ -71,16 +69,17 @@ export function uiImproveOsmComments() {
           .append('p')
             .text(d => d.text);
     })
-    .catch(err => {}); // TODO: Handle failed json request gracefully in some way
+    .catch(err => {
+      console.log(err); // eslint-disable-line no-console
+    });
   }
 
   function localeDateString(s) {
     if (!s) return null;
-    const detected = utilDetect();
     const options = { day: 'numeric', month: 'short', year: 'numeric' };
     const d = new Date(s * 1000); // timestamp is served in seconds, date takes ms
     if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString(detected.locale, options);
+    return d.toLocaleDateString(localizer.localeCode(), options);
   }
 
   issueComments.issue = function(val) {

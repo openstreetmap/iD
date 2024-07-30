@@ -46,6 +46,11 @@ coreGraph.prototype = {
     },
 
 
+    geometry: function(id) {
+        return this.entity(id).geometry(this);
+    },
+
+
     transient: function(entity, key, fn) {
         var id = entity.id;
         var transients = this.transients[id] || (this.transients[id] = {});
@@ -138,8 +143,7 @@ coreGraph.prototype = {
         for (i = 0; i < entities.length; i++) {
             var entity = entities[i];
 
-            if (!entity.visible || (!force && base.entities[entity.id]))
-                continue;
+            if (!entity.visible || (!force && base.entities[entity.id])) continue;
 
             // Merging data into the base graph
             base.entities[entity.id] = entity;

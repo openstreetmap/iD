@@ -6,15 +6,21 @@ describe('iD.operationExtract', function () {
     fakeContext = {};
     fakeContext.graph = function () { return graph; };
     fakeContext.hasHiddenConnections = function () { return false; };
-    fakeContext.geometry = function () { return 'vertex'; };
+    fakeContext.map = function() {
+        return {
+            extent: function() {
+                return iD.geoExtent([-180, -90], [180, 90]);
+            }
+        };
+    };
 
     var fakeTags = { 'name': 'fake' };
 
     // Set up graph
     var createFakeNode = function (id, hasTags) {
         return hasTags
-            ? { id: id, type: 'node', tags: fakeTags }
-            : { id: id, type: 'node' };
+            ? { id: id, type: 'node', loc: [0, 0], tags: fakeTags }
+            : { id: id, type: 'node', loc: [0, 0] };
     };
 
     describe('available', function () {
@@ -38,52 +44,52 @@ describe('iD.operationExtract', function () {
         });
 
         it('is not available for no selected ids', function () {
-            var result = iD.operationExtract([], fakeContext).available();
-            expect(result).to.be.not.ok;
-        });
-
-        it('is not available for two selected ids', function () {
-            var result = iD.operationExtract(['a', 'b'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, []).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for unknown selected id', function () {
-            var result = iD.operationExtract(['z'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['z']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected way', function () {
-            var result = iD.operationExtract(['x'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['x']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with tags, no parent way', function () {
-            var result = iD.operationExtract(['e'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['e']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with no tags, no parent way', function () {
-            var result = iD.operationExtract(['f'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['f']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with no tags, parent way', function () {
-            var result = iD.operationExtract(['c'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['c']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is not available for selected node with no tags, two parent ways', function () {
-            var result = iD.operationExtract(['d'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['d']).available();
             expect(result).to.be.not.ok;
         });
 
         it('is available for selected node with tags, parent way', function () {
-            var result = iD.operationExtract(['a'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['a']).available();
             expect(result).to.be.ok;
         });
 
         it('is available for selected node with tags, two parent ways', function () {
-            var result = iD.operationExtract(['b'], fakeContext).available();
+            var result = iD.operationExtract(fakeContext, ['b']).available();
+            expect(result).to.be.ok;
+        });
+
+        it('is available for two selected nodes with tags and parent ways', function () {
+            var result = iD.operationExtract(fakeContext, ['a', 'b']).available();
             expect(result).to.be.ok;
         });
     });
@@ -97,7 +103,7 @@ describe('iD.operationExtract', function () {
                 iD.osmNode(createFakeNode('c', false)),
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] })
             ]);
-            var result = iD.operationExtract(['b'], fakeContext).disabled();
+            var result = iD.operationExtract(fakeContext, ['b']).disabled();
             expect(result).to.be.not.ok;
         });
 
@@ -109,11 +115,11 @@ describe('iD.operationExtract', function () {
                 iD.osmWay({ id: 'x', nodes: ['a', 'b', 'c'] }),
                 iD.osmRelation({ id: 'r', members: [{ id: 'b', role: 'label' }] })
             ]);
-            var result = iD.operationExtract(['b'], fakeContext).disabled();
+            var result = iD.operationExtract(fakeContext, ['b']).disabled();
             expect(result).to.be.not.ok;
         });
 
-        it('returns not-enabled for via node in restriction', function () {
+        it('returns enabled for via node in restriction', function () {
             // https://wiki.openstreetmap.org/wiki/Relation:restriction indicates that
             // from & to roles are only appropriate for Ways
             graph = iD.coreGraph([
@@ -134,11 +140,11 @@ describe('iD.operationExtract', function () {
                     ]
                 })
             ]);
-            var result = iD.operationExtract(['d'], fakeContext).disabled();
-            expect(result).to.eql('restriction');
+            var result = iD.operationExtract(fakeContext, ['d']).disabled();
+            expect(result).to.be.not.ok;
         });
 
-        it('returns not-enabled for location_hint node in restriction', function () {
+        it('returns enabled for location_hint node in restriction', function () {
             // https://wiki.openstreetmap.org/wiki/Relation:restriction indicates that
             // from & to roles are only appropriate for Ways
             graph = iD.coreGraph([
@@ -160,8 +166,8 @@ describe('iD.operationExtract', function () {
                     ]
                 })
             ]);
-            var result = iD.operationExtract(['d'], fakeContext).disabled();
-            expect(result).to.eql('restriction');
+            var result = iD.operationExtract(fakeContext, ['d']).disabled();
+            expect(result).to.be.not.ok;
         });
     });
 });

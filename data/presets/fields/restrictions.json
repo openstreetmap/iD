@@ -1,9 +1,0 @@
-{
-    "type": "restrictions",
-    "geometry": "vertex",
-    "icon": "iD-restrictions",
-    "reference": {
-        "rtype": "restriction"
-    },
-    "label": "Turn Restrictions"
-}

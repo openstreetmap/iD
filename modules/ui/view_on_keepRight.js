@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { QAItem } from '../osm';
@@ -30,7 +30,7 @@ export function uiViewOnKeepRight() {
 
     linkEnter
       .append('span')
-        .text(t('inspector.view_on_keepRight'));
+        .call(t.append('inspector.view_on_keepRight'));
   }
 
   viewOnKeepRight.what = function(val) {

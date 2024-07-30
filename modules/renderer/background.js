@@ -1,22 +1,26 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
+import turf_bboxClip from '@turf/bbox-clip';
+import turf_bbox from '@turf/bbox';
 
-import LocationConflation from '@ideditor/location-conflation';
 import whichPolygon from 'which-polygon';
 
-import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
+import { prefs } from '../core/preferences';
+import { fileFetcher } from '../core/file_fetcher';
+import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilAesDecrypt, utilDetect, utilQsString, utilStringQs, utilRebind } from '../util';
+import { utilQsString, utilStringQs } from '../util';
+import { utilRebind } from '../util/rebind';
 
 
 let _imageryIndex = null;
 
 export function rendererBackground(context) {
   const dispatch = d3_dispatch('change');
-  const detected = utilDetect();
   const baseLayer = rendererTileLayer(context).projection(context.projection);
+  let _checkedBlocklists = [];
   let _isValid = true;
   let _overlayLayers = [];
   let _brightness = 1;
@@ -26,57 +30,55 @@ export function rendererBackground(context) {
 
 
   function ensureImageryIndex() {
-    const data = context.data();
-    return Promise.all([ data.get('imagery_sources'), data.get('imagery_features') ])
-      .then(vals => {
+    return fileFetcher.get('imagery')
+      .then(sources => {
         if (_imageryIndex) return _imageryIndex;
 
-        const sources = preprocessSources(Object.values(vals[0]));
-        const loco = new LocationConflation(vals[1]);
-        let features = {};
-        let backgrounds = [];
-
-        // process all sources
-        sources.forEach(source => {
-          // Resolve the locationSet to a GeoJSON feature..
-          const resolvedFeature = loco.resolveLocationSet(source.locationSet);
-          let feature = features[resolvedFeature.id];
-          if (!feature) {
-            feature = JSON.parse(JSON.stringify(resolvedFeature));  // deep clone
-            feature.properties.sourceIDs = new Set();
-            features[resolvedFeature.id] = feature;
-          }
-          feature.properties.sourceIDs.add(source.id);
-
-          // Features resolved from loco should have area precalculated.
-          source.area = feature.properties.area || Infinity;
-
-          // Flag if this is a "global" source
-          source.isGlobal = feature.id === 'Q2';
-
-          // Instantiate a `rendererBackgroundSource`
-          let background;
-          if (source.type === 'bing') {
-            background = rendererBackgroundSource.Bing(source, dispatch);
-          } else if (/^EsriWorldImagery/.test(source.id)) {
-            background = rendererBackgroundSource.Esri(source);
-          } else {
-            background = rendererBackgroundSource(source);
-          }
-          backgrounds.push(background);
-        });
-
         _imageryIndex = {
-          features: features,
-          backgrounds: backgrounds,
-          query: whichPolygon({ type: 'FeatureCollection', features: Object.values(features) })
+          imagery: sources,
+          features: {}
         };
+
+        // use which-polygon to support efficient index and querying for imagery
+        const features = sources.map(source => {
+          if (!source.polygon) return null;
+          // workaround for editor-layer-index weirdness..
+          // Add an extra array nest to each element in `source.polygon`
+          // so the rings are not treated as a bunch of holes:
+          // what we have: [ [[outer],[hole],[hole]] ]
+          // what we want: [ [[outer]],[[outer]],[[outer]] ]
+          const rings = source.polygon.map(ring => [ring]);
+
+          const feature = {
+            type: 'Feature',
+            properties: { id: source.id },
+            geometry: { type: 'MultiPolygon', coordinates: rings }
+          };
+
+          _imageryIndex.features[source.id] = feature;
+          return feature;
+
+        }).filter(Boolean);
+
+        _imageryIndex.query = whichPolygon({ type: 'FeatureCollection', features: features });
+
+
+        // Instantiate `rendererBackgroundSource` objects for each source
+        _imageryIndex.backgrounds = sources.map(source => {
+          if (source.type === 'bing') {
+            return rendererBackgroundSource.Bing(source, dispatch);
+          } else if (/^EsriWorldImagery/.test(source.id)) {
+            return rendererBackgroundSource.Esri(source);
+          } else {
+            return rendererBackgroundSource(source);
+          }
+        });
 
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
 
         // Add 'Custom'
-        let template = context.storage('background-custom-template') || '';
+        let template = prefs('background-custom-template') || '';
         const custom = rendererBackgroundSource.Custom(template);
         _imageryIndex.backgrounds.unshift(custom);
 
@@ -108,20 +110,18 @@ export function rendererBackground(context) {
 
 
     let baseFilter = '';
-    if (detected.cssfilters) {
-      if (_brightness !== 1) {
-        baseFilter += ` brightness(${_brightness})`;
-      }
-      if (_contrast !== 1) {
-        baseFilter += ` contrast(${_contrast})`;
-      }
-      if (_saturation !== 1) {
-        baseFilter += ` saturate(${_saturation})`;
-      }
-      if (_sharpness < 1) {  // gaussian blur
-        const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
-        baseFilter += ` blur(${blur}px)`;
-      }
+    if (_brightness !== 1) {
+      baseFilter += ` brightness(${_brightness})`;
+    }
+    if (_contrast !== 1) {
+      baseFilter += ` contrast(${_contrast})`;
+    }
+    if (_saturation !== 1) {
+      baseFilter += ` saturate(${_saturation})`;
+    }
+    if (_sharpness < 1) {  // gaussian blur
+      const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+      baseFilter += ` blur(${blur}px)`;
     }
 
     let base = selection.selectAll('.layer-background')
@@ -132,11 +132,7 @@ export function rendererBackground(context) {
       .attr('class', 'layer layer-background')
       .merge(base);
 
-    if (detected.cssfilters) {
-      base.style('filter', baseFilter || null);
-    } else {
-      base.style('opacity', _brightness);
-    }
+    base.style('filter', baseFilter || null);
 
 
     let imagery = base.selectAll('.layer-imagery')
@@ -151,7 +147,7 @@ export function rendererBackground(context) {
 
     let maskFilter = '';
     let mixBlendMode = '';
-    if (detected.cssfilters && _sharpness > 1) {  // apply unsharp mask
+    if (_sharpness > 1) {  // apply unsharp mask
       mixBlendMode = 'overlay';
       maskFilter = 'saturate(0) blur(3px) invert(1)';
 
@@ -163,7 +159,7 @@ export function rendererBackground(context) {
     }
 
     let mask = base.selectAll('.layer-unsharp-mask')
-      .data(detected.cssfilters && _sharpness > 1 ? [0] : []);
+      .data(_sharpness > 1 ? [0] : []);
 
     mask.exit()
       .remove();
@@ -255,7 +251,9 @@ export function rendererBackground(context) {
       mapillary: 'Mapillary Images',
       'mapillary-map-features': 'Mapillary Map Features',
       'mapillary-signs': 'Mapillary Signs',
-      openstreetcam: 'OpenStreetCam Images'
+      kartaview: 'KartaView Images',
+      vegbilder: 'Norwegian Road Administration Images',
+      mapilio: 'Mapilio Images'
     };
 
     for (let layerID in photoOverlayLayers) {
@@ -274,18 +272,29 @@ export function rendererBackground(context) {
   background.sources = (extent, zoom, includeCurrent) => {
     if (!_imageryIndex) return [];   // called before init()?
 
-    // Gather the source ids visible in the given extent
     let visible = {};
-    let hits = _imageryIndex.query.bbox(extent.rectangle(), true) || [];
-    hits.forEach(properties => {
-      Array.from(properties.sourceIDs).forEach(sourceID => visible[sourceID] = true);
-    });
+    (_imageryIndex.query.bbox(extent.rectangle(), true) || [])
+      .forEach(d => visible[d.id] = true);
 
     const currSource = baseLayer.source();
 
+    // Recheck blocked sources only if we detect new blocklists pulled from the OSM API.
+    const osm = context.connection();
+    const blocklists = (osm && osm.imageryBlocklists()) || [];
+    const blocklistChanged = (blocklists.length !== _checkedBlocklists.length) ||
+      blocklists.some((regex, index) => String(regex) !== _checkedBlocklists[index]);
+
+    if (blocklistChanged) {
+      _imageryIndex.backgrounds.forEach(source => {
+        source.isBlocked = blocklists.some(regex => regex.test(source.template()));
+      });
+      _checkedBlocklists = blocklists.map(regex => String(regex));
+    }
+
     return _imageryIndex.backgrounds.filter(source => {
-      if (source.isGlobal) return true;                          // always include imagery with worldwide coverage
-      if (includeCurrent && currSource === source) return true;  // optionally include the current imagery
+      if (includeCurrent && currSource === source) return true;  // optionally always include the current imagery
+      if (source.isBlocked) return false;                        // even bundled sources may be blocked - #7905
+      if (!source.polygon) return true;                          // always include imagery with worldwide coverage
       if (zoom && zoom < 6) return false;                        // optionally exclude local imagery at low zooms
       return visible[source.id];                                 // include imagery visible in given extent
     });
@@ -302,30 +311,26 @@ export function rendererBackground(context) {
   background.baseLayerSource = function(d) {
     if (!arguments.length) return baseLayer.source();
 
-    // test source against OSM imagery blacklists..
+    // test source against OSM imagery blocklists..
     const osm = context.connection();
     if (!osm) return background;
 
-    const blacklists = osm.imageryBlacklists();
+    const blocklists = osm.imageryBlocklists();
     const template = d.template();
     let fail = false;
     let tested = 0;
     let regex;
 
-    for (let i = 0; i < blacklists.length; i++) {
-      try {
-        regex = new RegExp(blacklists[i]);
-        fail = regex.test(template);
-        tested++;
-        if (fail) break;
-      } catch (e) {
-        /* noop */
-      }
+    for (let i = 0; i < blocklists.length; i++) {
+      regex = blocklists[i];
+      fail = regex.test(template);
+      tested++;
+      if (fail) break;
     }
 
     // ensure at least one test was run.
     if (!tested) {
-      regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
+      regex = /.*\.google(apis)?\..*\/(vt|kh)[\?\/].*([xyz]=.*){3}.*/;
       fail = regex.test(template);
     }
 
@@ -439,248 +444,95 @@ export function rendererBackground(context) {
     return background;
   };
 
+  let _loadPromise;
+
+  background.ensureLoaded = () => {
+    if (_loadPromise) return _loadPromise;
+
+    return _loadPromise = ensureImageryIndex();
+  };
 
   background.init = () => {
-    function parseMapParams(qmap) {
-      if (!qmap) return false;
-      const params = qmap.split('/').map(Number);
-      if (params.length < 3 || params.some(isNaN)) return false;
-      return geoExtent([params[2], params[1]]);  // lon,lat
-    }
+    const loadPromise = background.ensureLoaded();
 
     const hash = utilStringQs(window.location.hash);
-    const requested = hash.background || hash.layer;
-    let extent = parseMapParams(hash.map);
+    const requestedBackground = hash.background || hash.layer;
+    const lastUsedBackground = prefs('background-last-used');
 
-    ensureImageryIndex()
-      .then(imageryIndex => {
-        const first = imageryIndex.backgrounds.length && imageryIndex.backgrounds[0];
+    return loadPromise.then(imageryIndex => {
+      const extent = context.map().extent();
+      const validBackgrounds = background.sources(extent).filter(d => d.id !== 'none' && d.id !== 'custom');
+      const first = validBackgrounds.length && validBackgrounds[0];
+      const isLastUsedValid = !!validBackgrounds.find(d => d.id && d.id === lastUsedBackground);
 
-        let best;
-        if (!requested && extent) {
-          best = background.sources(extent).find(s => s.best());
-        }
-
-        // Decide which background layer to display
-        if (requested && requested.indexOf('custom:') === 0) {
-          const template = requested.replace(/^custom:/, '');
-          const custom = background.findSource('custom');
-          background.baseLayerSource(custom.template(template));
-          context.storage('background-custom-template', template);
-        } else {
-          background.baseLayerSource(
-            background.findSource(requested) ||
-            best ||
-            background.findSource(context.storage('background-last-used')) ||
-            background.findSource('Bing') ||
-            first ||
-            background.findSource('none')
-          );
-        }
-
-        const locator = imageryIndex.backgrounds.find(d => d.id === 'mapbox_locator_overlay');
-        if (locator) {
-          background.toggleOverlayLayer(locator);
-        }
-
-        const overlays = (hash.overlays || '').split(',');
-        overlays.forEach(overlay => {
-          overlay = background.findSource(overlay);
-          if (overlay) {
-            background.toggleOverlayLayer(overlay);
-          }
+      let best;
+      if (!requestedBackground && extent) {
+        const viewArea = extent.area();
+        best = validBackgrounds.find(s => {
+          if (!s.best() || s.overlay) return false;
+          let bbox = turf_bbox(turf_bboxClip(
+                { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
+                extent.rectangle()));
+          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
+          return area / viewArea > 0.5; // min visible size: 50% of viewport area
         });
+      }
 
-        if (hash.gpx) {   // todo: move elsewhere - this doesn't belong in background
-          const gpx = context.layers().layer('data');
-          if (gpx) {
-            gpx.url(hash.gpx, '.gpx');
-          }
-        }
+      // Decide which background layer to display
+      if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
+        const template = requestedBackground.replace(/^custom:/, '');
+        const custom = background.findSource('custom');
+        background.baseLayerSource(custom.template(template));
+        prefs('background-custom-template', template);
+      } else {
+        background.baseLayerSource(
+          background.findSource(requestedBackground) ||
+          best ||
+          isLastUsedValid && background.findSource(lastUsedBackground) ||
+          background.findSource('Bing') ||
+          first ||
+          background.findSource('none')
+        );
+      }
 
-        if (hash.offset) {
-          const offset = hash.offset
-            .replace(/;/g, ',')
-            .split(',')
-            .map(n => !isNaN(n) && n);
+      const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+      if (locator) {
+        background.toggleOverlayLayer(locator);
+      }
 
-          if (offset.length === 2) {
-            background.offset(geoMetersToOffset(offset));
-          }
+      const overlays = (hash.overlays || '').split(',');
+      overlays.forEach(overlay => {
+        overlay = background.findSource(overlay);
+        if (overlay) {
+          background.toggleOverlayLayer(overlay);
         }
       });
-      // .catch(() => { /* ignore */ });
+
+      if (hash.gpx) {
+        const gpx = context.layers().layer('data');
+        if (gpx) {
+          gpx.url(hash.gpx, '.gpx');
+        }
+      }
+
+      if (hash.offset) {
+        const offset = hash.offset
+          .replace(/;/g, ',')
+          .split(',')
+          .map(n => !isNaN(n) && n);
+
+        if (offset.length === 2) {
+          background.offset(geoMetersToOffset(offset));
+        }
+      }
+    })
+    .catch(err => {
+      /* eslint-disable no-console */
+      console.error(err);
+      /* eslint-enable no-console */
+    });
   };
 
 
   return utilRebind(background, dispatch, 'on');
-}
-
-
-
-// Historically, iD has used a different imagery subset than what we pulled
-// from the external imagery index.  This remapping previously happened
-// in the `update_imagery.js` script before the imagery was bundled with iD.
-//
-// Now that the client fetches imagery at runtime, it needs to happen here.
-// *This code should change to be more flexible.*
-//
-function preprocessSources(sources) {
-
-  // ignore imagery more than 20 years old..
-  let cutoffDate = new Date();
-  cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
-
-  const discard = {
-    'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
-    'osmfr': true,                        // 'OpenStreetMap (French Style)'
-    'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
-    'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
-    'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
-    'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
-    'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
-
-    'hike_n_bike': true,                  // 'Hike & Bike'
-    'landsat': true,                      // 'Landsat'
-    'skobbler': true,                     // 'Skobbler'
-    'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
-    'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-    'tf-landscape': true,                 // 'Thunderforest Landscape'
-    'qa_no_address': true,                // 'QA No Address'
-    'wikimedia-map': true,                // 'Wikimedia Map'
-
-    'openinframap-petroleum': true,
-    'openinframap-power': true,
-    'openinframap-telecoms': true,
-    'openpt_map': true,
-    'openrailwaymap': true,
-    'openseamap': true,
-    'opensnowmap-overlay': true,
-
-    'US-TIGER-Roads-2012': true,
-    'US-TIGER-Roads-2014': true,
-
-    'Waymarked_Trails-Cycling': true,
-    'Waymarked_Trails-Hiking': true,
-    'Waymarked_Trails-Horse_Riding': true,
-    'Waymarked_Trails-MTB': true,
-    'Waymarked_Trails-Skating': true,
-    'Waymarked_Trails-Winter_Sports': true,
-
-    'OSM_Inspector-Addresses': true,
-    'OSM_Inspector-Geometry': true,
-    'OSM_Inspector-Highways': true,
-    'OSM_Inspector-Multipolygon': true,
-    'OSM_Inspector-Places': true,
-    'OSM_Inspector-Routing': true,
-    'OSM_Inspector-Tagging': true,
-
-    'EOXAT2018CLOUDLESS': true
-  };
-
-  const supportedWMSProjections = {
-    'EPSG:4326': true,
-    'EPSG:3857': true,
-    'EPSG:900913': true,
-    'EPSG:3587': true,
-    'EPSG:54004': true,
-    'EPSG:41001': true,
-    'EPSG:102113': true,
-    'EPSG:102100': true,
-    'EPSG:3785': true
-  };
-
-  const apikeys = {
-    'Maxar-Premium': '2ac35d3bc99b64243066ef6888846358386da6cadbe0de9dbaf6ce8c17dae8d532d0d46f',
-    'Maxar-Standard': '7bc70b61c29b34243064bd6f818463583262a6ca8ae78b9db9a4cf8b46d9ed8261d08168'
-  };
-
-
-  let keepImagery = [];
-  sources.forEach(source => {
-    if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
-    if (source.id in discard) return;
-
-    let im = {
-      id: source.id,
-      type: source.type,
-      name: source.name,
-      template: source.url,   // this one renamed
-      locationSet: source.locationSet
-    };
-
-    // decrypt api keys
-    if (apikeys[source.id]) {
-      im.apikey = utilAesDecrypt(apikeys[source.id]);
-    }
-
-    // A few sources support 512px tiles
-    if (source.id === 'Mapbox') {
-      im.template = im.template.replace('.jpg', '@2x.jpg');
-      im.tileSize = 512;
-    } else if (source.id === 'mtbmap-no') {
-      im.tileSize = 512;
-    } else {
-      im.tileSize = 256;
-    }
-
-    // Some WMS sources are supported, check projection
-    if (source.type === 'wms') {
-      const projection = (source.available_projections || []).find(p => supportedWMSProjections[p]);
-      if (!projection) return;
-      if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
-      im.projection = projection;
-    }
-
-
-    let startDate, endDate, isValid;
-
-    if (source.end_date) {
-      endDate = new Date(source.end_date);
-      isValid = !isNaN(endDate.getTime());
-      if (isValid) {
-        if (endDate <= cutoffDate) return;  // too old
-        im.endDate = endDate;
-      }
-    }
-
-    if (source.start_date) {
-      startDate = new Date(source.start_date);
-      isValid = !isNaN(startDate.getTime());
-      if (isValid) {
-        im.startDate = startDate;
-      }
-    }
-
-    im.zoomExtent = [
-      source.min_zoom || 0,
-      source.max_zoom || 24
-    ];
-
-    if (source.id === 'mapbox_locator_overlay') {
-      im.overzoom = false;
-    }
-
-    const attribution = source.attribution || {};
-    if (attribution.url)  { im.terms_url = attribution.url; }
-    if (attribution.text) { im.terms_text = attribution.text; }
-    if (attribution.html) { im.terms_html = attribution.html; }
-
-
-    if (source.icon) {
-      if (/^http(s)?/i.test(source.icon)) {
-        im.icon = source.icon;
-      } else {
-        im.icon = `https://cdn.jsdelivr.net/npm/@ideditor/imagery-index@0.1/dist/images/${source.icon}`;
-      }
-    }
-
-    if (source.best)        { im.best = source.best; }
-    if (source.overlay)     { im.overlay = source.overlay; }
-    if (source.description) { im.description = source.description; }
-
-    keepImagery.push(im);
-  });
-
-  return keepImagery;
 }

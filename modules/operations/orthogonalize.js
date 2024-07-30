@@ -1,10 +1,10 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionOrthogonalize } from '../actions/orthogonalize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationOrthogonalize(selectedIDs, context) {
+export function operationOrthogonalize(context, selectedIDs) {
     var _extent;
     var _type;
     var _actions = selectedIDs.map(chooseAction).filter(Boolean);
@@ -16,7 +16,7 @@ export function operationOrthogonalize(selectedIDs, context) {
     function chooseAction(entityID) {
 
         var entity = context.entity(entityID);
-        var geometry = context.geometry(entityID);
+        var geometry = entity.geometry(context.graph());
 
         if (!_extent) {
             _extent =  entity.extent(context.graph());
@@ -89,8 +89,8 @@ export function operationOrthogonalize(selectedIDs, context) {
                 return 'multiple_blockers';
             }
             return actionDisableds[0];
-        } else if (_type !== 'corner' &&
-                   _extent.percentContainedIn(context.extent()) < 0.8) {
+        } else if (_extent &&
+                   _extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
@@ -119,19 +119,19 @@ export function operationOrthogonalize(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.orthogonalize.' + disable + '.' + _amount) :
-            t('operations.orthogonalize.description.' + _type + '.' + _amount);
+            t.append('operations.orthogonalize.' + disable + '.' + _amount) :
+            t.append('operations.orthogonalize.description.' + _type + '.' + _amount);
     };
 
 
     operation.annotation = function() {
-        return t('operations.orthogonalize.annotation.' + _type + '.' + _amount);
+        return t('operations.orthogonalize.annotation.' + _type, { n: _actions.length });
     };
 
 
     operation.id = 'orthogonalize';
     operation.keys = [t('operations.orthogonalize.key')];
-    operation.title = t('operations.orthogonalize.title');
+    operation.title = t.append('operations.orthogonalize.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

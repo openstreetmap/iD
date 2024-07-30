@@ -1,13 +1,16 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import LocationConflation from '@ideditor/location-conflation';
-import whichPolygon from 'which-polygon';
+import { resolveStrings } from 'osm-community-index';
 
-import { t, languageName } from '../util/locale';
+import { showDonationMessage } from '../../config/id.js';
+
+import { fileFetcher } from '../core/file_fetcher';
+import { locationManager } from '../core/LocationManager';
+import { t, localizer } from '../core/localizer';
+
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
-import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
@@ -15,7 +18,6 @@ let _oci = null;
 
 export function uiSuccess(context) {
   const MAXEVENTS = 2;
-  const detected = utilDetect();
   const dispatch = d3_dispatch('cancel');
   let _changeset;
   let _location;
@@ -23,31 +25,38 @@ export function uiSuccess(context) {
 
 
   function ensureOSMCommunityIndex() {
-    const data = context.data();
-    return Promise.all([ data.get('oci_resources'), data.get('oci_features') ])
+    const data = fileFetcher;
+    return Promise.all([
+        data.get('oci_features'),
+        data.get('oci_resources'),
+        data.get('oci_defaults')
+      ])
       .then(vals => {
         if (_oci) return _oci;
 
-        const ociResources = vals[0].resources;
-        const loco = new LocationConflation(vals[1]);
-        let ociFeatures = {};
+        // Merge Custom Features
+        if (vals[0] && Array.isArray(vals[0].features)) {
+          locationManager.mergeCustomGeoJSON(vals[0]);
+        }
 
-        Object.values(ociResources).forEach(resource => {
-          const feature = loco.resolveLocationSet(resource.locationSet);
-          let ociFeature = ociFeatures[feature.id];
-          if (!ociFeature) {
-            ociFeature = JSON.parse(JSON.stringify(feature));  // deep clone
-            ociFeature.properties.resourceIDs = new Set();
-            ociFeatures[feature.id] = ociFeature;
-          }
-          ociFeature.properties.resourceIDs.add(resource.id);
-        });
-
-        return _oci = {
-          features: ociFeatures,
-          resources: ociResources,
-          query: whichPolygon({ type: 'FeatureCollection', features: Object.values(ociFeatures) })
-        };
+        let ociResources = Object.values(vals[1].resources);
+        if (ociResources.length) {
+          // Resolve all locationSet features.
+          return locationManager.mergeLocationSets(ociResources)
+            .then(() => {
+              _oci = {
+                resources: ociResources,
+                defaults: vals[2].defaults
+              };
+              return _oci;
+            });
+        } else {
+          _oci = {
+            resources: [],  // no resources?
+            defaults: vals[2].defaults
+          };
+          return _oci;
+        }
       });
   }
 
@@ -64,7 +73,7 @@ export function uiSuccess(context) {
     }
 
     const parsed = new Date(raw);
-    return new Date(parsed.toUTCString().substr(0, 25));  // convert to local timezone
+    return new Date(parsed.toUTCString().slice(0, 25));  // convert to local timezone
   }
 
 
@@ -74,14 +83,15 @@ export function uiSuccess(context) {
       .attr('class', 'header fillL');
 
     header
-      .append('button')
-      .attr('class', 'fr')
-      .on('click', () => dispatch.call('cancel'))
-      .call(svgIcon('#iD-icon-close'));
+      .append('h2')
+      .call(t.append('success.just_edited'));
 
     header
-      .append('h3')
-      .text(t('success.just_edited'));
+      .append('button')
+      .attr('class', 'close')
+      .attr('title', t('icons.close'))
+      .on('click', () => dispatch.call('cancel'))
+      .call(svgIcon('#iD-icon-close'));
 
     let body = selection
       .append('div')
@@ -93,19 +103,18 @@ export function uiSuccess(context) {
 
     summary
       .append('h3')
-      .text(t('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
+      .call(t.append('success.thank_you' + (_location ? '_location' : ''), { where: _location }));
 
     summary
       .append('p')
-      .text(t('success.help_html'))
+      .call(t.append('success.help_html'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
-      .attr('tabindex', -1)
       .attr('href', t('success.help_link_url'))
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .append('span')
-      .text(t('success.help_link_text'));
+      .call(t.append('success.help_link_text'));
 
     let osm = context.connection();
     if (!osm) return;
@@ -140,31 +149,84 @@ export function uiSuccess(context) {
       .attr('class', 'cell-detail summary-view-on-osm')
       .attr('target', '_blank')
       .attr('href', changesetURL)
-      .text(t('success.view_on_osm'));
+      .call(t.append('success.view_on_osm'));
 
     summaryDetail
       .append('div')
-      .html(t('success.changeset_id', {
-        changeset_id: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>`
+      .html(t.html('success.changeset_id', {
+        changeset_id: { html: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>` }
       }));
 
+    if (showDonationMessage !== false) {
+      // support ask
+      const donationUrl = 'https://supporting.openstreetmap.org/';
+      let supporting = body
+        .append('div')
+        .attr('class', 'save-supporting');
+
+      supporting
+        .append('h3')
+        .call(t.append('success.supporting.title'));
+
+      supporting
+        .append('p')
+        .call(t.append('success.supporting.details'));
+
+      table = supporting
+        .append('table')
+        .attr('class', 'supporting-table');
+
+      row = table
+        .append('tr')
+        .attr('class', 'supporting-row');
+
+      row
+        .append('td')
+        .attr('class', 'cell-icon supporting-icon')
+        .append('a')
+        .attr('target', '_blank')
+        .attr('href', donationUrl)
+        .append('svg')
+        .attr('class', 'logo-small')
+        .append('use')
+        .attr('xlink:href', '#iD-donation');
+
+      let supportingDetail = row
+        .append('td')
+        .attr('class', 'cell-detail supporting-detail');
+
+      supportingDetail
+        .append('a')
+        .attr('class', 'cell-detail support-the-map')
+        .attr('target', '_blank')
+        .attr('href', donationUrl)
+        .call(t.append('success.supporting.donation.title'));
+
+      supportingDetail
+        .append('div')
+        .call(t.append('success.supporting.donation.details'));
+    }
 
     // Get OSM community index features intersecting the map..
     ensureOSMCommunityIndex()
       .then(oci => {
-        let communities = [];
-        const properties = oci.query(context.map().center(), true) || [];
+        const loc = context.map().center();
+        const validHere = locationManager.locationSetsAt(loc);
 
-        // Gather the communities from the result
-        properties.forEach(props => {
-          const resourceIDs = Array.from(props.resourceIDs);
-          resourceIDs.forEach(resourceID => {
-            const resource = oci.resources[resourceID];
-            communities.push({
-              area: props.area || Infinity,
-              order: resource.order || 0,
-              resource: resource
-            });
+        // Gather the communities
+        let communities = [];
+        oci.resources.forEach(resource => {
+          let area = validHere[resource.locationSetID];
+          if (!area) return;
+
+          // Resolve strings
+          const localizer = (stringID) => t.html(`community.${stringID}`);
+          resource.resolved = resolveStrings(resource, oci.defaults, localizer);
+
+          communities.push({
+            area: area,
+            order: resource.order || 0,
+            resource: resource
           });
         });
 
@@ -184,7 +246,7 @@ export function uiSuccess(context) {
 
     communityLinks
       .append('h3')
-      .text(t('success.like_osm'));
+      .call(t.append('success.like_osm'));
 
     let table = communityLinks
       .append('table')
@@ -202,7 +264,7 @@ export function uiSuccess(context) {
       .attr('class', 'cell-icon community-icon')
       .append('a')
       .attr('target', '_blank')
-      .attr('href', d => d.url)
+      .attr('href', d => d.resolved.url)
       .append('svg')
       .attr('class', 'logo-small')
       .append('use')
@@ -218,53 +280,39 @@ export function uiSuccess(context) {
     communityLinks
       .append('div')
       .attr('class', 'community-missing')
-      .text(t('success.missing'))
+      .call(t.append('success.missing'))
       .append('a')
       .attr('class', 'link-out')
       .attr('target', '_blank')
-      .attr('tabindex', -1)
       .call(svgIcon('#iD-icon-out-link', 'inline'))
       .attr('href', 'https://github.com/osmlab/osm-community-index/issues')
       .append('span')
-      .text(t('success.tell_us'));
+      .call(t.append('success.tell_us'));
   }
 
 
   function showCommunityDetails(d) {
     let selection = d3_select(this);
     let communityID = d.id;
-    let replacements = {
-      url: linkify(d.url),
-      signupUrl: linkify(d.signupUrl || d.url)
-    };
 
     selection
       .append('div')
       .attr('class', 'community-name')
-      .append('a')
-      .attr('target', '_blank')
-      .attr('href', d.url)
-      .text(t(`community.${d.id}.name`));
-
-    let descriptionHTML = t(`community.${d.id}.description`, replacements);
-
-    if (d.type === 'reddit') {   // linkify subreddits  #4997
-      descriptionHTML = descriptionHTML
-        .replace(/(\/r\/\w*\/*)/i, match => linkify(d.url, match));
-    }
+      .html(d.resolved.nameHTML);
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(descriptionHTML);
+      .html(d.resolved.descriptionHTML);
 
-    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
+    // Create an expanding section if any of these are present..
+    if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .title(t('success.more'))
+          .label(() => t.append('success.more'))
           .content(showMore)
         );
     }
@@ -290,7 +338,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-events-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .title(t('success.events'))
+          .label(t.html('success.events'))
           .content(showNextEvents)
         )
         .select('.hide-toggle')
@@ -308,22 +356,22 @@ export function uiSuccess(context) {
         .append('div')
         .attr('class', 'community-more');
 
-      if (d.extendedDescription) {
+      if (d.resolved.extendedDescriptionHTML) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(t(`community.${d.id}.extendedDescription`, replacements));
+          .html(d.resolved.extendedDescriptionHTML);
       }
 
       if (d.languageCodes && d.languageCodes.length) {
         const languageList = d.languageCodes
-          .map(code => languageName(context, code))
+          .map(code => localizer.languageName(code))
           .join(', ');
 
         moreEnter
           .append('div')
           .attr('class', 'community-languages')
-          .text(t('success.languages', { languages: languageList }));
+          .call(t.append('success.languages', { languages: languageList }));
       }
     }
 
@@ -363,7 +411,7 @@ export function uiSuccess(context) {
             options.hour = 'numeric';
             options.minute = 'numeric';
           }
-          return d.date.toLocaleString(detected.locale, options);
+          return d.date.toLocaleString(localizer.localeCode(), options);
         });
 
       itemEnter
@@ -387,12 +435,6 @@ export function uiSuccess(context) {
           }
           return description;
         });
-    }
-
-
-    function linkify(url, text) {
-      text = text || url;
-      return `<a target="_blank" href="${url}">${text}</a>`;
     }
   }
 

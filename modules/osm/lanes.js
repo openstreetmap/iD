@@ -136,23 +136,19 @@ function parseLaneDirections(tags, isOneWay, laneCount) {
         forward = 0;
         bothways = 0;
         backward = laneCount;
-    }
-    else if (isOneWay) {
+    } else if (isOneWay) {
         forward = laneCount;
         bothways = 0;
         backward = 0;
-    }
-    else if (isNaN(forward) && isNaN(backward)) {
+    } else if (isNaN(forward) && isNaN(backward)) {
         backward = Math.floor((laneCount - bothways) / 2);
         forward = laneCount - bothways - backward;
-    }
-    else if (isNaN(forward)) {
+    } else if (isNaN(forward)) {
         if (backward > laneCount - bothways) {
             backward = laneCount - bothways;
         }
         forward = laneCount - bothways - backward;
-    }
-    else if (isNaN(backward)) {
+    } else if (isNaN(backward)) {
         if (forward > laneCount - bothways) {
             forward = laneCount - bothways;
         }
@@ -229,16 +225,22 @@ function parseBicycleWay(tag) {
 
 
 function mapToLanesObj(lanesObj, data, key) {
-    if (data.forward) data.forward.forEach(function(l, i) {
-        if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
-        lanesObj.forward[i][key] = l;
-    });
-    if (data.backward) data.backward.forEach(function(l, i) {
-        if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
-        lanesObj.backward[i][key] = l;
-    });
-    if (data.unspecified) data.unspecified.forEach(function(l, i) {
-        if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
-        lanesObj.unspecified[i][key] = l;
-    });
+    if (data.forward) {
+        data.forward.forEach(function(l, i) {
+            if (!lanesObj.forward[i]) lanesObj.forward[i] = {};
+            lanesObj.forward[i][key] = l;
+        });
+    }
+    if (data.backward) {
+        data.backward.forEach(function(l, i) {
+            if (!lanesObj.backward[i]) lanesObj.backward[i] = {};
+            lanesObj.backward[i][key] = l;
+        });
+    }
+    if (data.unspecified) {
+        data.unspecified.forEach(function(l, i) {
+            if (!lanesObj.unspecified[i]) lanesObj.unspecified[i] = {};
+            lanesObj.unspecified[i][key] = l;
+        });
+    }
 }

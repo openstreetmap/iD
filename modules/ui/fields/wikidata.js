@@ -1,44 +1,37 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    select as d3_select,
-    event as d3_event
-} from 'd3-selection';
-
-import { uiCombobox } from '../combobox';
+import { select as d3_select } from 'd3-selection';
 
 import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
-
 import { svgIcon } from '../../svg/icon';
-import {
-    utilGetSetValue,
-    utilNoAuto,
-    utilRebind
-} from '../../util';
-
-import { t } from '../../util/locale';
+import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { uiCombobox } from '../combobox';
+import { t } from '../../core/localizer';
 
 
 export function uiFieldWikidata(field, context) {
     var wikidata = services.wikidata;
     var dispatch = d3_dispatch('change');
-    var searchInput = d3_select(null);
+
+    var _selection = d3_select(null);
+    var _searchInput = d3_select(null);
     var _qid = null;
     var _wikidataEntity = null;
     var _wikiURL = '';
     var _entityIDs = [];
 
     var _wikipediaKey = field.keys && field.keys.find(function(key) {
-            return key.includes('wikipedia');
-        }),
-        _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
+        return key.includes('wikipedia');
+    });
+    var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
         .caseSensitive(true)
         .minItems(1);
 
+
     function wiki(selection) {
+        _selection = selection;
 
         var wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
@@ -64,13 +57,12 @@ export function uiFieldWikidata(field, context) {
             .append('li')
             .attr('class', 'wikidata-search');
 
-        searchInput = searchRowEnter
+        searchRowEnter
             .append('input')
             .attr('type', 'text')
+            .attr('id', field.domId)
             .style('flex', '1')
-            .call(utilNoAuto);
-
-        searchInput
+            .call(utilNoAuto)
             .on('focus', function() {
                 var node = d3_select(this).node();
                 node.setSelectionRange(0, node.value.length);
@@ -81,8 +73,10 @@ export function uiFieldWikidata(field, context) {
             .call(combobox.fetcher(fetchWikidataItems));
 
         combobox.on('accept', function(d) {
-            _qid = d.id;
-            change();
+            if (d) {
+                _qid = d.id;
+                change();
+            }
         }).on('cancel', function() {
             setLabelForEntity();
         });
@@ -91,12 +85,15 @@ export function uiFieldWikidata(field, context) {
             .append('button')
             .attr('class', 'form-field-button wiki-link')
             .attr('title', t('icons.view_on', { domain: 'wikidata.org' }))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-out-link'))
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 if (_wikiURL) window.open(_wikiURL, '_blank');
             });
+
+        searchRow = searchRow.merge(searchRowEnter);
+
+        _searchInput = searchRow.select('input');
 
         var wikidataProperties = ['description', 'identifier'];
 
@@ -109,15 +106,13 @@ export function uiFieldWikidata(field, context) {
             .attr('class', function(d) { return 'labeled-input preset-wikidata-' + d; });
 
         enter
-            .append('span')
+            .append('div')
             .attr('class', 'label')
-            .attr('for', function(d) { return 'preset-input-wikidata-' + d; })
-            .text(function(d) { return t('wikidata.' + d); });
+            .html(function(d) { return t.html('wikidata.' + d); });
 
         enter
             .append('input')
             .attr('type', 'text')
-            .attr('id', function(d) { return 'preset-input-wikidata-' + d; })
             .call(utilNoAuto)
             .classed('disabled', 'true')
             .attr('readonly', 'true');
@@ -126,9 +121,8 @@ export function uiFieldWikidata(field, context) {
             .append('button')
             .attr('class', 'form-field-button')
             .attr('title', t('icons.copy'))
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-operation-copy'))
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 d3_select(this.parentNode)
                     .select('input')
@@ -140,7 +134,6 @@ export function uiFieldWikidata(field, context) {
     }
 
     function fetchWikidataItems(q, callback) {
-
         if (!q && _hintKey) {
             // other tags may be good search terms
             for (var i in _entityIDs) {
@@ -153,14 +146,25 @@ export function uiFieldWikidata(field, context) {
         }
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
-            if (err) return;
-
-            for (var i in data) {
-                data[i].value = data[i].label + ' (' +  data[i].id + ')';
-                data[i].title = data[i].description;
+            if (err) {
+                if (err !== 'No query') console.error(err); // eslint-disable-line
+                return;
             }
 
-            if (callback) callback(data);
+            var result = data.map(function (item) {
+                return {
+                    id: item.id,
+                    value: item.display.label.value + ' (' + item.id + ')',
+                    display: selection => selection.append('span')
+                        .attr('class', 'localized-text')
+                        .attr('lang', item.display.label.language)
+                        .text(item.display.label.value),
+                    title: item.display.description && item.display.description.value,
+                    terms: item.aliases
+                };
+            });
+
+            if (callback) callback(result);
         });
     }
 
@@ -231,18 +235,18 @@ export function uiFieldWikidata(field, context) {
             }
 
             if (newWikipediaValue) {
-                newWikipediaValue = newWikipediaValue.substr(0, context.maxCharsForTagValue());
+                newWikipediaValue = context.cleanTagValue(newWikipediaValue);
             }
 
             if (typeof newWikipediaValue === 'undefined') return;
 
             var actions = initEntityIDs.map(function(entityID) {
                 var entity = context.hasEntity(entityID);
-                if (!entity) return;
+                if (!entity) return null;
 
                 var currTags = Object.assign({}, entity.tags);  // shallow copy
                 if (newWikipediaValue === null) {
-                    if (!currTags[_wikipediaKey]) return;
+                    if (!currTags[_wikipediaKey]) return null;
 
                     delete currTags[_wikipediaKey];
                 } else {
@@ -278,14 +282,14 @@ export function uiFieldWikidata(field, context) {
                 label = _wikidataEntity.id.toString();
             }
         }
-        utilGetSetValue(d3_select('li.wikidata-search input'), label);
+        utilGetSetValue(_searchInput, label);
     }
 
 
     wiki.tags = function(tags) {
 
         var isMixed = Array.isArray(tags[field.key]);
-        d3_select('li.wikidata-search input')
+        _searchInput
             .attr('title', isMixed ? tags[field.key].filter(Boolean).join('\n') : null)
             .attr('placeholder', isMixed ? t('inspector.multiple_values') : '')
             .classed('mixed', isMixed);
@@ -310,17 +314,17 @@ export function uiFieldWikidata(field, context) {
 
             var description = entityPropertyForDisplay(entity, 'descriptions');
 
-            d3_select('.form-field-wikidata button.wiki-link')
+            _selection.select('button.wiki-link')
                 .classed('disabled', false);
 
-            d3_select('.preset-wikidata-description')
+            _selection.select('.preset-wikidata-description')
                 .style('display', function(){
                     return description.length > 0 ? 'flex' : 'none';
                 })
                 .select('input')
                 .attr('value', description);
 
-            d3_select('.preset-wikidata-identifier')
+            _selection.select('.preset-wikidata-identifier')
                 .style('display', function(){
                     return entity.id ? 'flex' : 'none';
                 })
@@ -334,12 +338,12 @@ export function uiFieldWikidata(field, context) {
             _wikidataEntity = null;
             setLabelForEntity();
 
-            d3_select('.preset-wikidata-description')
+            _selection.select('.preset-wikidata-description')
                 .style('display', 'none');
-            d3_select('.preset-wikidata-identifier')
+            _selection.select('.preset-wikidata-identifier')
                 .style('display', 'none');
 
-            d3_select('.form-field-wikidata button.wiki-link')
+            _selection.select('button.wiki-link')
                 .classed('disabled', true);
 
             if (_qid && _qid !== '') {
@@ -375,7 +379,7 @@ export function uiFieldWikidata(field, context) {
 
 
     wiki.focus = function() {
-        searchInput.node().focus();
+        _searchInput.node().focus();
     };
 
 

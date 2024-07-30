@@ -198,11 +198,11 @@
     dominant-baseline: middle;
 }
 .layer-mapdata text.label {
-    fill: #ff26d4;
+    fill: #ddd;
 }
 .layer-mapdata text.label.hover,
 .layer-mapdata text.label.selected {
-    fill: #f6634f;
+    fill: #fff;
 }
 .layer-mapdata text.label-halo {
     opacity: 0.7;

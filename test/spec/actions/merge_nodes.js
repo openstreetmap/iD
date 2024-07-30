@@ -72,9 +72,79 @@ describe('iD.actionMergeNodes', function () {
     });
 
 
+    it('keeps the id of the interesting node', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'n1', loc: [0, 0] }),
+            iD.osmNode({ id: 'n2', loc: [4, 4], tags: { highway: 'traffic_signals' }})
+        ]);
+
+        graph = iD.actionMergeNodes(['n1', 'n2'])(graph);
+
+        expect(graph.hasEntity('n1')).to.be.undefined;
+
+        var survivor = graph.hasEntity('n2');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals' }, 'merge all tags');
+        expect(survivor.loc).to.eql([4, 4], 'use loc of interesting node');
+    });
+
+
+    it('keeps the id of the existing node', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'n1', loc: [0, 0] }),
+            iD.osmNode({ id: 'b', loc: [4, 4], tags: { highway: 'traffic_signals' }})
+        ]);
+
+        graph = iD.actionMergeNodes(['n1', 'b'])(graph);
+
+        expect(graph.hasEntity('b')).to.be.undefined;
+
+        var survivor = graph.hasEntity('n1');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals' }, 'merge all tags');
+        expect(survivor.loc).to.eql([4, 4], 'use loc of interesting node');
+    });
+
+
+    it('keeps the id of the oldest node', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'n2', loc: [0, 0] }),
+            iD.osmNode({ id: 'n1', loc: [2, 2] }),
+            iD.osmNode({ id: 'n3', loc: [4, 4] })
+        ]);
+
+        graph = iD.actionMergeNodes(['n2', 'n1', 'n3'])(graph);
+
+        expect(graph.hasEntity('n2')).to.be.undefined;
+        expect(graph.hasEntity('n3')).to.be.undefined;
+
+        var survivor = graph.hasEntity('n1');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+    });
+
+
+    it('keeps the id of the oldest interesting node', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({ id: 'n3', loc: [0, 0] }),
+            iD.osmNode({ id: 'n1', loc: [2, 2] }),
+            iD.osmNode({ id: 'n2', loc: [4, 4], tags: { highway: 'traffic_signals' }}),
+            iD.osmNode({ id: 'n4', loc: [8, 8], tags: { crossing: 'marked' }})
+        ]);
+
+        graph = iD.actionMergeNodes(['n2', 'n1', 'n3', 'n4'])(graph);
+
+        expect(graph.hasEntity('n1')).to.be.undefined;
+        expect(graph.hasEntity('n3')).to.be.undefined;
+        expect(graph.hasEntity('n4')).to.be.undefined;
+
+        var survivor = graph.hasEntity('n2');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+    });
+
+
     it('merges two nodes along a single way', function() {
         //
-        //  scenerio:         merge b,c:
+        //  scenario:         merge b,c:
         //
         //  a -- b -- c       a ---- c
         //
@@ -98,7 +168,7 @@ describe('iD.actionMergeNodes', function () {
 
     it('merges two nodes from two ways', function() {
         //
-        //  scenerio:        merge b,d:
+        //  scenario:        merge b,d:
         //
         //  a -- b -- c      a -_   _- c
         //                        d
@@ -129,7 +199,7 @@ describe('iD.actionMergeNodes', function () {
 
     it('merges three nodes from three ways', function () {
         //
-        //  scenerio:        merge b,d:
+        //  scenario:        merge b,d,e:
         //
         //        c                c
         //        |                |

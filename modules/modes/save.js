@@ -1,5 +1,5 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
-import { t } from '../util/locale';
+import { select as d3_select } from 'd3-selection';
+import { t } from '../core/localizer';
 
 import { modeBrowse } from './browse';
 import { services } from '../services';
@@ -16,6 +16,7 @@ export function modeSave(context) {
 
     var commit = uiCommit(context)
         .on('cancel', cancel);
+    var _conflictsUi; // uiConflicts
 
     var _location;
     var _success;
@@ -57,33 +58,36 @@ export function modeSave(context) {
     function showConflicts(changeset, conflicts, origChanges) {
 
         var selection = context.container()
-            .select('#sidebar')
+            .select('.sidebar')
             .append('div')
             .attr('class','sidebar-component');
 
-        context.container().selectAll('#content')
-            .attr('class', 'active');
+        context.container().selectAll('.main-content')
+            .classed('active', true)
+            .classed('inactive', false);
 
-        var ui = uiConflicts(context)
+        _conflictsUi = uiConflicts(context)
             .conflictList(conflicts)
             .origChanges(origChanges)
             .on('cancel', function() {
-                context.container().selectAll('#content')
-                    .attr('class', 'inactive');
+                context.container().selectAll('.main-content')
+                    .classed('active', false)
+                    .classed('inactive', true);
                 selection.remove();
                 keybindingOn();
 
                 uploader.cancelConflictResolution();
             })
             .on('save', function() {
-                context.container().selectAll('#content')
-                    .attr('class', 'inactive');
+                context.container().selectAll('.main-content')
+                    .classed('active', false)
+                    .classed('inactive', true);
                 selection.remove();
 
                 uploader.processResolvedConflicts(changeset);
             });
 
-        selection.call(ui);
+        selection.call(_conflictsUi);
     }
 
 
@@ -119,7 +123,7 @@ export function modeSave(context) {
             .attr('href', '#')
             .classed('hide-toggle', true)
             .text(function(d) { return d.msg || t('save.unknown_error_details'); })
-            .on('click', function() {
+            .on('click', function(d3_event) {
                 d3_event.preventDefault();
 
                 var error = d3_select(this);
@@ -196,6 +200,11 @@ export function modeSave(context) {
     }
 
 
+    mode.selectedIDs = function() {
+        return _conflictsUi ? _conflictsUi.shownEntityIds() : [];
+    };
+
+
     mode.enter = function() {
         // Show sidebar
         context.ui().sidebar.expand();
@@ -206,8 +215,9 @@ export function modeSave(context) {
 
         keybindingOn();
 
-        context.container().selectAll('#content')
-            .attr('class', 'inactive');
+        context.container().selectAll('.main-content')
+            .classed('active', false)
+            .classed('inactive', true);
 
         var osm = context.connection();
         if (!osm) {
@@ -233,8 +243,9 @@ export function modeSave(context) {
 
         keybindingOff();
 
-        context.container().selectAll('#content')
-            .attr('class', 'active');
+        context.container().selectAll('.main-content')
+            .classed('active', true)
+            .classed('inactive', false);
 
         context.ui().sidebar.hide();
     };

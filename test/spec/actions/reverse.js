@@ -70,6 +70,18 @@ describe('iD.actionReverse', function () {
             expect(graph.entity(node1.id).tags).to.eql({ 'direction': '94.5' });
         });
 
+        it('reverses directions with multiple semicolon separated values', function () {
+            var node1 = iD.osmNode({ tags: { 'direction': 'N;90' } });
+            var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+            expect(graph.entity(node1.id).tags).to.eql({ 'direction': 'S;270' });
+        });
+
+        it('reverses directions with multiple semicolon separated values, preserves non-directional part', function () {
+            var node1 = iD.osmNode({ tags: { 'direction': '0;error' } });
+            var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
+            expect(graph.entity(node1.id).tags).to.eql({ 'direction': '180;error' });
+        });
+
         it('preserves non-directional tags', function () {
             var node1 = iD.osmNode({ tags: { 'traffic_sign': 'maxspeed' } });
             var graph = iD.actionReverse(node1.id)(iD.coreGraph([node1]));
@@ -576,6 +588,20 @@ describe('iD.actionReverse', function () {
             var target = graph.entity(node2.id);
             expect(target.tags['traffic_signals:direction']).to.eql('empty');
         });
-    });
 
+        it('preserves the value of the side tag of a cycling waiting aid', function () {
+            var node1 = iD.osmNode();
+            var node2 = iD.osmNode({tags: {
+                'highway': 'cyclist_waiting_aid',
+                'direction': 'forward',
+                'side': 'right'
+            }});
+            var node3 = iD.osmNode();
+            var way = iD.osmWay({nodes: [node1.id, node2.id, node3.id]});
+            var graph = iD.actionReverse(way.id)(iD.coreGraph([node1, node2, node3, way]));
+            var target = graph.entity(node2.id);
+            expect(target.tags.direction).to.eql('backward');
+            expect(target.tags.side).to.eql('right');
+        });
+    });
 });

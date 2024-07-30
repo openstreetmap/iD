@@ -6,7 +6,7 @@ import {
 } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
-import { osmEntity, osmOldMultipolygonOuterMember } from '../osm';
+import { osmEntity } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
 
@@ -25,7 +25,8 @@ export function svgLines(projection, context) {
         unclassified: 8,
         residential: 9,
         service: 10,
-        footway: 11
+        busway: 11,
+        footway: 12
     };
 
 
@@ -185,10 +186,11 @@ export function svgLines(projection, context) {
                 var layer = this.parentNode.__data__;
                 var data = pathdata[layer] || [];
                 return data.filter(function(d) {
-                    if (isSelected)
+                    if (isSelected) {
                         return context.selectedIDs().indexOf(d.id) !== -1;
-                    else
+                    } else {
                         return context.selectedIDs().indexOf(d.id) === -1;
+                    }
                 });
             };
         }
@@ -235,11 +237,11 @@ export function svgLines(projection, context) {
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
-            var outer = osmOldMultipolygonOuterMember(entity, graph);
-            if (outer) {
-                ways.push(entity.mergeTags(outer.tags));
-                oldMultiPolygonOuters[outer.id] = true;
-            } else if (entity.geometry(graph) === 'line') {
+            if (entity.geometry(graph) === 'line'
+                       // to render side-markers for coastlines (see
+                       // https://github.com/openstreetmap/iD/issues/9293)
+                    || entity.geometry(graph) === 'area' && entity.sidednessIdentifier
+                        && entity.sidednessIdentifier() === 'coastline') {
                 ways.push(entity);
             }
         }
@@ -306,11 +308,11 @@ export function svgLines(projection, context) {
             layergroup.selectAll('g.line-stroke-highlighted')
                 .call(drawLineGroup, 'stroke', true);
 
-            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#oneway-marker)');
+            addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, 'url(#ideditor-oneway-marker)');
             addMarkers(layergroup, 'sided', 'sidedgroup', sideddata,
                 function marker(d) {
                     var category = graph.entity(d.id).sidednessIdentifier();
-                    return 'url(#sided-marker-' + category + ')';
+                    return 'url(#ideditor-sided-marker-' + category + ')';
                 }
             );
         });

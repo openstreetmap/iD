@@ -1,7 +1,7 @@
 import deepEqual from 'fast-deep-equal';
 import { bisector as d3_bisector } from 'd3-array';
 
-import { osmEntity, osmIsOldMultipolygonOuterMember } from '../osm';
+import { osmEntity } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
@@ -12,7 +12,7 @@ export function svgAreas(projection, context) {
     function getPatternStyle(tags) {
         var imageID = svgTagPattern(tags);
         if (imageID) {
-            return 'url("#' + imageID + '")';
+            return 'url("#ideditor-' + imageID + '")';
         }
         return '';
     }
@@ -90,20 +90,12 @@ export function svgAreas(projection, context) {
     function drawAreas(selection, graph, entities, filter) {
         var path = svgPath(projection, graph, true);
         var areas = {};
-        var multipolygon;
         var base = context.history().base();
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             if (entity.geometry(graph) !== 'area') continue;
-
-            multipolygon = osmIsOldMultipolygonOuterMember(entity, graph);
-            if (multipolygon) {
-                areas[multipolygon.id] = {
-                    entity: multipolygon.mergeTags(entity.tags),
-                    area: Math.abs(entity.area(graph))
-                };
-            } else if (!areas[entity.id]) {
+            if (!areas[entity.id]) {
                 areas[entity.id] = {
                     entity: entity,
                     area: Math.abs(entity.area(graph))
@@ -134,7 +126,7 @@ export function svgAreas(projection, context) {
         var clipPathsEnter = clipPaths.enter()
            .append('clipPath')
            .attr('class', 'clipPath-osm')
-           .attr('id', function(entity) { return entity.id + '-clippath'; });
+           .attr('id', function(entity) { return 'ideditor-' + entity.id + '-clippath'; });
 
         clipPathsEnter
            .append('path');
@@ -183,7 +175,7 @@ export function svgAreas(projection, context) {
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {
-                    this.setAttribute('clip-path', 'url(#' + entity.id + '-clippath)');
+                    this.setAttribute('clip-path', 'url(#ideditor-' + entity.id + '-clippath)');
                     this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
                 }
             })

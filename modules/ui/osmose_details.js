@@ -1,11 +1,10 @@
 import {
-  event as d3_event,
-  select as d3_select,
-  selectAll as d3_selectAll
+  select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { modeSelect } from '../modes/select';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { services } from '../services';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 
@@ -45,7 +44,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.keepRight.detail_description'));
+          .call(t.append('QA.keepRight.detail_description'));
 
       div
         .append('p')
@@ -65,7 +64,7 @@ export function uiOsmoseDetails(context) {
       .append('div')
         .attr('class', 'qa-details-subsection');
 
-    // Suggested Fix (musn't exist for every issue type)
+    // Suggested Fix (mustn't exist for every issue type)
     if (issueString(_qaItem, 'fix')) {
       const div = detailsEnter
         .append('div')
@@ -73,7 +72,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.osmose.fix_title'));
+          .call(t.append('QA.osmose.fix_title'));
 
       div
         .append('p')
@@ -83,7 +82,7 @@ export function uiOsmoseDetails(context) {
           .attr('target', '_blank');
     }
 
-    // Common Pitfalls (musn't exist for every issue type)
+    // Common Pitfalls (mustn't exist for every issue type)
     if (issueString(_qaItem, 'trap')) {
       const div = detailsEnter
         .append('div')
@@ -91,7 +90,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('h4')
-          .text(() => t('QA.osmose.trap_title'));
+          .call(t.append('QA.osmose.trap_title'));
 
       div
         .append('p')
@@ -111,14 +110,14 @@ export function uiOsmoseDetails(context) {
         // Do nothing if UI has moved on by the time this resolves
         if (
           context.selectedErrorID() !== thisItem.id
-          && d3_selectAll(`.qaItem.osmose.hover.itemId-${thisItem.id}`).empty()
+          && context.container().selectAll(`.qaItem.osmose.hover.itemId-${thisItem.id}`).empty()
         ) return;
 
         // Things like keys and values are dynamically added to a subtitle string
         if (d.detail) {
           detailsDiv
             .append('h4')
-              .text(() => t('QA.osmose.detail_title'));
+              .call(t.append('QA.osmose.detail_title'));
 
           detailsDiv
             .append('p')
@@ -131,7 +130,7 @@ export function uiOsmoseDetails(context) {
         // Create list of linked issue elements
         elemsDiv
           .append('h4')
-            .text(() => t('QA.osmose.elems_title'));
+            .call(t.append('QA.osmose.elems_title'));
 
         elemsDiv
           .append('ul').selectAll('li')
@@ -139,6 +138,7 @@ export function uiOsmoseDetails(context) {
           .enter()
           .append('li')
           .append('a')
+            .attr('href', '#')
             .attr('class', 'error_entity_link')
             .text(d => d)
             .each(function() {
@@ -154,7 +154,7 @@ export function uiOsmoseDetails(context) {
                 .on('mouseleave', () => {
                   utilHighlightEntities([entityID], false, context);
                 })
-                .on('click', () => {
+                .on('click', (d3_event) => {
                   d3_event.preventDefault();
 
                   utilHighlightEntities([entityID], false, context);
@@ -169,8 +169,10 @@ export function uiOsmoseDetails(context) {
                   if (entity) {
                     context.enter(modeSelect(context, [entityID]));
                   } else {
-                    context.loadEntity(entityID, () => {
-                      context.enter(modeSelect(context, [entityID]));
+                    context.loadEntity(entityID, (err, result) => {
+                      if (err) return;
+                      const entity = result.data.find(e => e.id === entityID);
+                      if (entity) context.enter(modeSelect(context, [entityID]));
                     });
                   }
                 });
@@ -181,7 +183,7 @@ export function uiOsmoseDetails(context) {
                 let name = utilDisplayName(entity);  // try to use common name
 
                 if (!name) {
-                  const preset = context.presets().match(entity, context.graph());
+                  const preset = presetManager.match(entity, context.graph());
                   name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
                 }
 
@@ -195,7 +197,9 @@ export function uiOsmoseDetails(context) {
         context.features().forceVisible(d.elems);
         context.map().pan([0,0]);  // trigger a redraw
       })
-      .catch(err => {}); // TODO: Handle failed json request gracefully in some way
+      .catch(err => {
+        console.log(err); // eslint-disable-line no-console
+      });
   }
 
 

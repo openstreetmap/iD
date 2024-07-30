@@ -78,7 +78,7 @@ describe('iD.util', function() {
         expect(iD.utilTagText({tags:{foo:'bar',two:'three'}})).to.eql('foo=bar, two=three');
     });
 
-    it('utilStringQs', function() {
+    describe('utilStringQs', function() {
         it('splits a parameter string into k=v pairs', function() {
             expect(iD.utilStringQs('foo=bar')).to.eql({foo: 'bar'});
             expect(iD.utilStringQs('foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
@@ -141,6 +141,168 @@ describe('iD.util', function() {
                     expect(err).to.eql(['whoops 1', 'whoops 2', 'whoops 3']);
                     expect(res).to.eql([null, null, null]);
                 });
+        });
+    });
+
+    describe('utilUnicodeCharsCount', function() {
+        it('counts empty string', function() {
+            expect(iD.utilUnicodeCharsCount('')).to.eql(0);
+        });
+        it('counts latin text', function() {
+            expect(iD.utilUnicodeCharsCount('Lorem')).to.eql(5);
+        });
+        it('counts diacritics', function() {
+            expect(iD.utilUnicodeCharsCount('Ĺo͂řȩm̅')).to.eql(7);
+        });
+        it('counts Korean text', function() {
+            expect(iD.utilUnicodeCharsCount('뎌쉐')).to.eql(2);
+        });
+        it('counts Hindi text with combining marks', function() {
+            expect(iD.utilUnicodeCharsCount('अनुच्छेद')).to.eql(8);
+        });
+        it('counts demonic multiple combining marks', function() {
+            expect(iD.utilUnicodeCharsCount('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞')).to.eql(74);
+        });
+        it('counts emoji', function() {
+            // The `Array.from` polyfill may not account for emojis, so
+            // be lenient here. Worst case scenario is that IE users might be
+            // limited to somewhat fewer characters on tag and role input.
+            expect(iD.utilUnicodeCharsCount('😎')).to.be.oneOf([1, 2]);
+            expect(iD.utilUnicodeCharsCount('🇨🇦')).to.be.oneOf([2, 4]);
+            expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).to.be.oneOf([4, 6]);
+            expect(iD.utilUnicodeCharsCount('‍👩‍👩‍👧‍👧')).to.be.oneOf([8, 12]);
+            expect(iD.utilUnicodeCharsCount('👩‍❤️‍💋‍👩')).to.be.oneOf([8, 11]);
+            expect(iD.utilUnicodeCharsCount('😎😬😆😵😴😄🙂🤔')).to.be.oneOf([8, 16]);
+        });
+    });
+
+    describe('utilUnicodeCharsTruncated', function() {
+        it('truncates empty string', function() {
+            expect(iD.utilUnicodeCharsTruncated('', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('', 255)).to.eql('');
+        });
+        it('truncates latin text', function() {
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 3)).to.eql('Lor');
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 5)).to.eql('Lorem');
+            expect(iD.utilUnicodeCharsTruncated('Lorem', 255)).to.eql('Lorem');
+        });
+        it('truncates diacritics', function() {
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 3)).to.eql('Ĺo͂');
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 7)).to.eql('Ĺo͂řȩm̅');
+            expect(iD.utilUnicodeCharsTruncated('Ĺo͂řȩm̅', 255)).to.eql('Ĺo͂řȩm̅');
+        });
+        it('truncates Korean text', function() {
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 1)).to.eql('뎌');
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 2)).to.eql('뎌쉐');
+            expect(iD.utilUnicodeCharsTruncated('뎌쉐', 255)).to.eql('뎌쉐');
+        });
+        it('truncates Hindi text with combining marks', function() {
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 3)).to.eql('अनु');
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 8)).to.eql('अनुच्छेद');
+            expect(iD.utilUnicodeCharsTruncated('अनुच्छेद', 255)).to.eql('अनुच्छेद');
+        });
+        it('truncates demonic multiple combining marks', function() {
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖', 59)).to.eql('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖');
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞', 74)).to.eql('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞');
+            expect(iD.utilUnicodeCharsTruncated('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞', 255)).to.eql('Z͑ͫ̓ͪ̂ͫ̽͏̴̙̤̞͉͚̯̞̠͍A̴̵̜̰͔ͫ͗͢L̠ͨͧͩ͘G̴̻͈͍͔̹̑͗̎̅͛́Ǫ̵̹̻̝̳͂̌̌͘!͖̬̰̙̗̿̋ͥͥ̂ͣ̐́́͜͞');
+        });
+        it('truncates emoji', function() {
+            expect(iD.utilUnicodeCharsTruncated('😎', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('😎', 1)).to.be.oneOf(['😎', '\ud83d']);
+            expect(iD.utilUnicodeCharsTruncated('🇨🇦', 1)).to.be.oneOf(['🇨', '\ud83c']);
+            expect(iD.utilUnicodeCharsTruncated('🏳️‍🌈', 2)).to.be.oneOf(['🏳️', '\ud83c\udff3']);
+            expect(iD.utilUnicodeCharsTruncated('‍👩‍👩‍👧‍👧', 4)).to.be.oneOf(['‍👩‍👩', '‍👩‍']);
+            expect(iD.utilUnicodeCharsTruncated('👩‍❤️‍💋‍👩', 6)).to.be.oneOf(['👩‍❤️‍💋', '👩‍❤️‍']);
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 0)).to.eql('');
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 4)).to.be.oneOf(['😎😬😆😵', '😎😬']);
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 8)).to.be.oneOf(['😎😬😆😵😴😄🙂🤔', '😎😬😆😵']);
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 16)).to.eql('😎😬😆😵😴😄🙂🤔');
+            expect(iD.utilUnicodeCharsTruncated('😎😬😆😵😴😄🙂🤔', 255)).to.eql('😎😬😆😵😴😄🙂🤔');
+        });
+    });
+
+    describe('utilCompareIDs', function() {
+        it('sorts existing IDs numerically in ascending order', function() {
+            expect(iD.utilCompareIDs('w100', 'w200')).to.eql(-1);
+            expect(iD.utilCompareIDs('w100', 'w50')).to.eql(1);
+            expect(iD.utilCompareIDs('w100', 'w100')).to.eql(0);
+        });
+        it('sorts new IDs numerically in descending order', function() {
+            expect(iD.utilCompareIDs('w-100', 'w-200')).to.eql(-1);
+            expect(iD.utilCompareIDs('w-100', 'w-50')).to.eql(1);
+            expect(iD.utilCompareIDs('w-100', 'w-100')).to.eql(0);
+        });
+        it('sorts existing IDs before new IDs', function() {
+            expect(iD.utilCompareIDs('w-1', 'w1')).to.eql(1);
+            expect(iD.utilCompareIDs('w1', 'w-1')).to.eql(-1);
+            expect(iD.utilCompareIDs('w-100', 'w1')).to.eql(1);
+            expect(iD.utilCompareIDs('w100', 'w-1')).to.eql(-1);
+            expect(iD.utilCompareIDs('w-1', 'w100')).to.eql(1);
+            expect(iD.utilCompareIDs('w1', 'w-100')).to.eql(-1);
+        });
+        it('sorts existing and new IDs before anything else', function() {
+            expect(iD.utilCompareIDs('w1', 'asdf')).to.eql(-1);
+            expect(iD.utilCompareIDs('asdf', 'w1')).to.eql(1);
+            expect(iD.utilCompareIDs('w-1', 'asdf')).to.eql(-1);
+            expect(iD.utilCompareIDs('asdf', 'w-1')).to.eql(1);
+        });
+        it('returns -1 for other strings', function() {
+            expect(iD.utilCompareIDs('aaa', 'b')).to.eql(-1);
+            expect(iD.utilCompareIDs('b', 'aaa')).to.eql(-1);
+            expect(iD.utilCompareIDs('a', 'a')).to.eql(-1);
+        });
+    });
+
+    describe('utilDisplayName', function() {
+        it('returns the name if tagged with a name', function() {
+            expect(iD.utilDisplayName({tags: {name: 'East Coast Greenway'}})).to.eql('East Coast Greenway');
+        });
+        it('distinguishes unnamed features by ref', function() {
+            expect(iD.utilDisplayName({tags: {ref: '66'}})).to.eql('66');
+        });
+        it('distinguishes unnamed features by network or cycle_network', function() {
+            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X'}})).to.eql('SORTA 3X');
+            expect(iD.utilDisplayName({tags: {network: 'ncn', cycle_network: 'US:US', ref: '76'}})).to.eql('US:US 76');
+        });
+        it('distinguishes unnamed routes by direction', function() {
+            expect(iD.utilDisplayName({tags: {network: 'US:US', ref: '66', direction: 'west', route: 'road'}})).to.eql('US:US 66 west');
+            // Marguerite X: Counter-Clockwise
+            expect(iD.utilDisplayName({tags: {network: 'Marguerite', ref: 'X', direction: 'anticlockwise', route: 'bus'}})).to.eql('Marguerite X anticlockwise');
+        });
+        it('distinguishes unnamed routes by waypoints', function() {
+            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', from: 'Downtown', route: 'bus'}})).to.eql('SORTA 3X');
+            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', to: 'Kings Island', route: 'bus'}})).to.eql('SORTA 3X');
+            expect(iD.utilDisplayName({tags: {network: 'SORTA', ref: '3X', via: 'Montgomery', route: 'bus'}})).to.eql('SORTA 3X');
+            // Green Line: Old Ironsides => Winchester
+            expect(iD.utilDisplayName({tags: {network: 'VTA', ref: 'Green', from: 'Old Ironsides', to: 'Winchester', route: 'bus'}})).to.eql('VTA Green from Old Ironsides to Winchester');
+            // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
+            expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
+        });
+    });
+
+    describe('utilOldestID', function() {
+        it('returns the oldest database ID', function() {
+            expect(iD.utilOldestID(['w3', 'w1', 'w2'])).to.eql('w1');
+        });
+        it('returns the oldest editor ID', function() {
+            expect(iD.utilOldestID(['w-3', 'w-2', 'w-1'])).to.eql('w-1');
+        });
+        it('returns the oldest IDs among database and editor IDs', function() {
+            expect(iD.utilOldestID(['w-1', 'w1', 'w-2'])).to.eql('w1');
+        });
+        it('returns the oldest database ID', function() {
+            expect(iD.utilOldestID(['w100', 'w-1', 'a', 'w-300', 'w2'])).to.eql('w2');
+        });
+        it('returns the oldest editor ID if no database IDs', function() {
+            expect(iD.utilOldestID(['w-100', 'w-1', 'a', 'w-300', 'w-2'])).to.eql('w-1');
+        });
+        it('returns the first ID in the list otherwise', function() {
+            expect(iD.utilOldestID(['z', 'a', 'A', 'Z'])).to.eql('z');
         });
     });
 });

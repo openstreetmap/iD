@@ -6,8 +6,19 @@
     <link rel='stylesheet' href='iD.css'>
     <link rel='icon' type='image/png' href='data:image/png;base64,iVBORw0KGgo='>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
-    <meta name='apple-mobile-web-app-capable' content='yes' />
-    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
+    <style type='text/css'>
+      /* apply document-level styling to standalone iD only */
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        /* disable elastic page bounce upon scroll */
+        overflow: hidden;
+      }
+    </style>
   </head>
 
   <body>
@@ -19,21 +30,20 @@
       newScript.type = 'text/javascript';
       newScript.onload = checkScript;
       newScript.onerror = checkScript;
-
-      var isIE11 = !!(navigator.userAgent.match(/Trident/) && !navigator.userAgent.match(/MSIE/));
-      // currently all minified files are legacy ES5 because of uglifyJS
-      newScript.src = isIE11 ? 'iD.min.js' : 'id.min.js';
+      newScript.src = 'iD.min.js';
 
       document.getElementsByTagName('head')[0].appendChild(newScript);
 
 
       function checkScript() {
         if (typeof iD === 'undefined' || !iD.utilDetect().support) {
-          container.innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
-          container.className = 'unsupported';
+          container.innerHTML = 'Sorry, your browser is not currently supported. Please use another <a href="https://github.com/openstreetmap/iD#basics">browser</a> or <a href="https://wiki.openstreetmap.org/wiki/Editors">editor</a> to contribute to the map.';
+          container.style.padding = '20px';
 
         } else {
-          var context = iD.coreContext();
+          var context = iD.coreContext()
+            .assetPath('')
+            .containerNode(container);
           context.init();
 
           // disable boundaries (unless we have an explicit disable_features list)
@@ -41,24 +51,6 @@
           if (!q.hasOwnProperty('disable_features')) {
             context.features().disable('boundaries');
           }
-
-          context.ui()(container, function() {
-            context.container().select('#about-list')
-              .insert('li', '.user-list')
-              .attr('class', 'source-switch')
-              .call(iD.uiSourceSwitch(context)
-                .keys([{
-                    'urlroot': 'https://www.openstreetmap.org',
-                    'oauth_consumer_key': '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-                    'oauth_secret': 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL'
-                  }, {
-                    'urlroot': 'https://api06.dev.openstreetmap.org',
-                    'oauth_consumer_key': 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
-                    'oauth_secret': 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p'
-                  }
-                ])
-              );
-          });
         }
       }
     </script>

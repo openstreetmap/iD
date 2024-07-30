@@ -1,8 +1,5 @@
-import {
-    event as d3_event
-} from 'd3-selection';
-
-import { t } from '../../util/locale';
+import { prefs } from '../../core/preferences';
+import { t } from '../../core/localizer';
 import { uiSection } from '../section';
 
 export function uiSectionValidationOptions(context) {
@@ -35,7 +32,7 @@ export function uiSectionValidationOptions(context) {
         optionsEnter
             .append('div')
             .attr('class', 'issues-option-title')
-            .text(function(d) { return t('issues.options.' + d.key + '.title'); });
+            .html(function(d) { return t.html('issues.options.' + d.key + '.title'); });
 
         var valuesEnter = optionsEnter.selectAll('label')
             .data(function(d) {
@@ -50,26 +47,26 @@ export function uiSectionValidationOptions(context) {
             .attr('name', function(d) { return 'issues-option-' + d.key; })
             .attr('value', function(d) { return d.value; })
             .property('checked', function(d) { return getOptions()[d.key] === d.value; })
-            .on('change', function(d) { updateOptionValue(d.key, d.value); });
+            .on('change', function(d3_event, d) { updateOptionValue(d3_event, d.key, d.value); });
 
         valuesEnter
             .append('span')
-            .text(function(d) { return t('issues.options.' + d.key + '.' + d.value); });
+            .html(function(d) { return t.html('issues.options.' + d.key + '.' + d.value); });
     }
 
     function getOptions() {
         return {
-            what: context.storage('validate-what') || 'edited',  // 'all', 'edited'
-            where: context.storage('validate-where') || 'all'    // 'all', 'visible'
+            what: prefs('validate-what') || 'edited',  // 'all', 'edited'
+            where: prefs('validate-where') || 'all'    // 'all', 'visible'
         };
     }
 
-    function updateOptionValue(d, val) {
+    function updateOptionValue(d3_event, d, val) {
         if (!val && d3_event && d3_event.target) {
             val = d3_event.target.value;
         }
 
-        context.storage('validate-' + d, val);
+        prefs('validate-' + d, val);
         context.validator().validate();
     }
 

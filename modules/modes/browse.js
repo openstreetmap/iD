@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 import { behaviorHover } from '../behavior/hover';
 import { behaviorLasso } from '../behavior/lasso';
@@ -8,27 +8,41 @@ import { behaviorSelect } from '../behavior/select';
 import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 
+import { operationPaste } from '../operations/paste';
 
 export function modeBrowse(context) {
     var mode = {
         button: 'browse',
         id: 'browse',
-        title: t('modes.browse.title'),
-        description: t('modes.browse.description')
-    }, sidebar;
+        title: t.append('modes.browse.title'),
+        description: t.append('modes.browse.description')
+    };
+    var sidebar;
 
-    var behaviors = [
-        behaviorPaste(context),
-        behaviorHover(context).on('hover', context.ui().sidebar.hover),
-        behaviorSelect(context),
-        behaviorLasso(context),
-        modeDragNode(context).behavior,
-        modeDragNote(context).behavior
-    ];
+    var _selectBehavior;
+    var _behaviors = [];
+
+
+    mode.selectBehavior = function(val) {
+        if (!arguments.length) return _selectBehavior;
+        _selectBehavior = val;
+        return mode;
+    };
 
 
     mode.enter = function() {
-        behaviors.forEach(context.install);
+        if (!_behaviors.length) {
+            if (!_selectBehavior) _selectBehavior = behaviorSelect(context);
+            _behaviors = [
+                behaviorPaste(context),
+                behaviorHover(context).on('hover', context.ui().sidebar.hover),
+                _selectBehavior,
+                behaviorLasso(context),
+                modeDragNode(context).behavior,
+                modeDragNote(context).behavior
+            ];
+        }
+        _behaviors.forEach(context.install);
 
         // Get focus on the body.
         if (document.activeElement && document.activeElement.blur) {
@@ -45,7 +59,7 @@ export function modeBrowse(context) {
 
     mode.exit = function() {
         context.ui().sidebar.hover.cancel();
-        behaviors.forEach(context.uninstall);
+        _behaviors.forEach(context.uninstall);
 
         if (sidebar) {
             context.ui().sidebar.hide();
@@ -57,6 +71,11 @@ export function modeBrowse(context) {
         if (!arguments.length) return sidebar;
         sidebar = _;
         return mode;
+    };
+
+
+    mode.operations = function() {
+        return [operationPaste(context)];
     };
 
 

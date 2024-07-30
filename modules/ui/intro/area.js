@@ -1,27 +1,23 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
-
-import {
     interpolateNumber as d3_interpolateNumber
 } from 'd3-interpolate';
 
-import { t } from '../../util/locale';
+import { presetManager } from '../../presets';
+import { t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { utilRebind } from '../../util/rebind';
-import { uiCmd } from '../cmd';
-import { icon, pad, transitionTime } from './helper';
+import { helpHtml, icon, pad, transitionTime } from './helper';
 
 
 export function uiIntroArea(context, reveal) {
     var dispatch = d3_dispatch('done');
     var playground = [-85.63552, 41.94159];
-    var playgroundPreset = context.presets().item('leisure/playground');
-    var descriptionField = context.presets().field('description');
+    var playgroundPreset = presetManager.item('leisure/playground');
+    var nameField = presetManager.field('name');
+    var descriptionField = presetManager.field('description');
     var timeouts = [];
     var _areaID;
 
@@ -36,7 +32,7 @@ export function uiIntroArea(context, reveal) {
     }
 
 
-    function eventCancel() {
+    function eventCancel(d3_event) {
         d3_event.stopPropagation();
         d3_event.preventDefault();
     }
@@ -60,7 +56,7 @@ export function uiIntroArea(context, reveal) {
 
         timeout(function() {
             var tooltip = reveal('button.add-area',
-                t('intro.areas.add_playground', { button: icon('#iD-icon-area', 'pre-text') }));
+                helpHtml('intro.areas.add_playground'));
 
             tooltip.selectAll('.popover-inner')
                 .insert('svg', 'span')
@@ -90,14 +86,16 @@ export function uiIntroArea(context, reveal) {
         context.map().zoomEase(19.5, 500);
 
         timeout(function() {
+            var textId = context.lastPointerType() === 'mouse' ? 'starting_node_click' : 'starting_node_tap';
+            var startDrawString = helpHtml('intro.areas.start_playground') + helpHtml('intro.areas.' + textId);
             revealPlayground(playground,
-                t('intro.areas.start_playground'), { duration: 250 }
+                startDrawString, { duration: 250 }
             );
 
             timeout(function() {
                 context.map().on('move.intro drawn.intro', function() {
                     revealPlayground(playground,
-                        t('intro.areas.start_playground'), { duration: 0 }
+                        startDrawString, { duration: 0 }
                     );
                 });
                 context.on('enter.intro', function(mode) {
@@ -123,14 +121,14 @@ export function uiIntroArea(context, reveal) {
 
         _areaID = null;
         revealPlayground(playground,
-            t('intro.areas.continue_playground', { alt: uiCmd.display('⌥') }),
+            helpHtml('intro.areas.continue_playground'),
             { duration: 250 }
         );
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
                 revealPlayground(playground,
-                    t('intro.areas.continue_playground', { alt: uiCmd.display('⌥') }),
+                    helpHtml('intro.areas.continue_playground'),
                     { duration: 0 }
                 );
             });
@@ -166,14 +164,17 @@ export function uiIntroArea(context, reveal) {
         }
 
         _areaID = null;
+
+        var finishString = helpHtml('intro.areas.finish_area_' + (context.lastPointerType() === 'mouse' ? 'click' : 'tap')) +
+            helpHtml('intro.areas.finish_playground');
         revealPlayground(playground,
-            t('intro.areas.finish_playground'), { duration: 250 }
+            finishString, { duration: 250 }
         );
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
                 revealPlayground(playground,
-                    t('intro.areas.finish_playground'), { duration: 0 }
+                    finishString, { duration: 0 }
                 );
             });
         }, 250);  // after reveal
@@ -207,18 +208,18 @@ export function uiIntroArea(context, reveal) {
         }
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+            context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            d3_select('.preset-search-input')
+            context.container().select('.preset-search-input')
                 .on('keydown.intro', null)
                 .on('keyup.intro', checkPresetSearch);
 
             reveal('.preset-search-input',
-                t('intro.areas.search_playground', { preset: playgroundPreset.name() })
+                helpHtml('intro.areas.search_playground', { preset: playgroundPreset.name() })
             );
         }, 400);  // after preset list pane visible..
 
@@ -233,16 +234,16 @@ export function uiIntroArea(context, reveal) {
                 context.enter(modeSelect(context, [_areaID]));
 
                 // reset pane, in case user somehow happened to change it..
-                d3_select('.inspector-wrap .panewrap').style('right', '-100%');
+                context.container().select('.inspector-wrap .panewrap').style('right', '-100%');
                 // disallow scrolling
-                d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+                context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-                d3_select('.preset-search-input')
+                context.container().select('.preset-search-input')
                     .on('keydown.intro', null)
                     .on('keyup.intro', checkPresetSearch);
 
                 reveal('.preset-search-input',
-                    t('intro.areas.search_playground', { preset: playgroundPreset.name() })
+                    helpHtml('intro.areas.search_playground', { preset: playgroundPreset.name() })
                 );
 
                 context.history().on('change.intro', null);
@@ -250,15 +251,15 @@ export function uiIntroArea(context, reveal) {
         });
 
         function checkPresetSearch() {
-            var first = d3_select('.preset-list-item:first-child');
+            var first = context.container().select('.preset-list-item:first-child');
 
             if (first.classed('preset-leisure-playground')) {
                 reveal(first.select('.preset-list-button').node(),
-                    t('intro.areas.choose_playground', { preset: playgroundPreset.name() }),
+                    helpHtml('intro.areas.choose_playground', { preset: playgroundPreset.name() }),
                     { duration: 300 }
                 );
 
-                d3_select('.preset-search-input')
+                context.container().select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
 
@@ -269,10 +270,10 @@ export function uiIntroArea(context, reveal) {
         }
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
+            context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
@@ -287,16 +288,16 @@ export function uiIntroArea(context, reveal) {
             return searchPresets();
         }
 
-        if (!d3_select('.form-field-description').empty()) {
+        if (!context.container().select('.form-field-description').empty()) {
             return continueTo(describePlayground);
         }
 
         // disallow scrolling
-        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
+        context.container().select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3_select('.inspector-wrap .panewrap').style('right', '0%');
+            context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
             // It's possible for the user to add a description in a previous step..
             // If they did this already, just continue to next step.
@@ -306,9 +307,9 @@ export function uiIntroArea(context, reveal) {
             }
 
             // scroll "Add field" into view
-            var box = d3_select('.more-fields').node().getBoundingClientRect();
+            var box = context.container().select('.more-fields').node().getBoundingClientRect();
             if (box.top > 300) {
-                var pane = d3_select('.entity-editor-pane .inspector-body');
+                var pane = context.container().select('.entity-editor-pane .inspector-body');
                 var start = pane.node().scrollTop;
                 var end = start + (box.top - 300);
 
@@ -326,16 +327,19 @@ export function uiIntroArea(context, reveal) {
 
             timeout(function() {
                 reveal('.more-fields .combobox-input',
-                    t('intro.areas.add_field'),
+                    helpHtml('intro.areas.add_field', {
+                        name: nameField.title(),
+                        description: descriptionField.title()
+                    }),
                     { duration: 300 }
                 );
 
-                d3_select('.more-fields .combobox-input')
+                context.container().select('.more-fields .combobox-input')
                     .on('click.intro', function() {
                         // Watch for the combobox to appear...
                         var watcher;
                         watcher = window.setInterval(function() {
-                            if (!d3_select('div.combobox').empty()) {
+                            if (!context.container().select('div.combobox').empty()) {
                                 window.clearInterval(watcher);
                                 continueTo(chooseDescriptionField);
                             }
@@ -350,8 +354,8 @@ export function uiIntroArea(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            d3_select('.inspector-wrap').on('wheel.intro', null);
-            d3_select('.more-fields .combobox-input').on('click.intro', null);
+            context.container().select('.inspector-wrap').on('wheel.intro', null);
+            context.container().select('.more-fields .combobox-input').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -367,21 +371,21 @@ export function uiIntroArea(context, reveal) {
             return searchPresets();
         }
 
-        if (!d3_select('.form-field-description').empty()) {
+        if (!context.container().select('.form-field-description').empty()) {
             return continueTo(describePlayground);
         }
 
         // Make sure combobox is ready..
-        if (d3_select('div.combobox').empty()) {
+        if (context.container().select('div.combobox').empty()) {
             return continueTo(clickAddField);
         }
         // Watch for the combobox to go away..
         var watcher;
         watcher = window.setInterval(function() {
-            if (d3_select('div.combobox').empty()) {
+            if (context.container().select('div.combobox').empty()) {
                 window.clearInterval(watcher);
                 timeout(function() {
-                    if (d3_select('.form-field-description').empty()) {
+                    if (context.container().select('.form-field-description').empty()) {
                         continueTo(retryChooseDescription);
                     } else {
                         continueTo(describePlayground);
@@ -391,7 +395,7 @@ export function uiIntroArea(context, reveal) {
         }, 300);
 
         reveal('div.combobox',
-            t('intro.areas.choose_field', { field: descriptionField.label() }),
+            helpHtml('intro.areas.choose_field', { field: descriptionField.title() }),
             { duration: 300 }
         );
 
@@ -417,9 +421,9 @@ export function uiIntroArea(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        d3_select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
-        if (d3_select('.form-field-description').empty()) {
+        if (context.container().select('.form-field-description').empty()) {
             return continueTo(retryChooseDescription);
         }
 
@@ -428,7 +432,7 @@ export function uiIntroArea(context, reveal) {
         });
 
         reveal('.entity-editor-pane',
-            t('intro.areas.describe_playground', { button: icon('#iD-icon-apply', 'pre-text') }),
+            helpHtml('intro.areas.describe_playground', { button: { html: icon('#iD-icon-close', 'inline') } }),
             { duration: 300 }
         );
 
@@ -449,11 +453,11 @@ export function uiIntroArea(context, reveal) {
         }
 
         // reset pane, in case user happened to change it..
-        d3_select('.inspector-wrap .panewrap').style('right', '0%');
+        context.container().select('.inspector-wrap .panewrap').style('right', '0%');
 
         reveal('.entity-editor-pane',
-            t('intro.areas.retry_add_field', { field: descriptionField.label() }), {
-            buttonText: t('intro.ok'),
+            helpHtml('intro.areas.retry_add_field', { field: descriptionField.title() }), {
+            buttonText: t.html('intro.ok'),
             buttonCallback: function() { continueTo(clickAddField); }
         });
 
@@ -470,11 +474,11 @@ export function uiIntroArea(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('#id-container',
-            t('intro.areas.play', { next: t('intro.lines.title') }), {
+        reveal('.ideditor',
+            helpHtml('intro.areas.play', { next: t('intro.lines.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-line',
-                buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonText: t.html('intro.ok'),
+                buttonCallback: function() { reveal('.ideditor'); }
             }
         );
     }
@@ -490,9 +494,9 @@ export function uiIntroArea(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3_select('.inspector-wrap').on('wheel.intro', null);
-        d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
-        d3_select('.more-fields .combobox-input').on('click.intro', null);
+        context.container().select('.inspector-wrap').on('wheel.intro', null);
+        context.container().select('.preset-search-input').on('keydown.intro keyup.intro', null);
+        context.container().select('.more-fields .combobox-input').on('click.intro', null);
     };
 
 

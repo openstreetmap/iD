@@ -1,4 +1,4 @@
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util';
@@ -23,11 +23,9 @@ export function validationDisconnectedWay() {
             subtype: 'highway',
             severity: 'warning',
             message: function(context) {
-                if (this.entityIds.length === 1) {
-                    var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.disconnected_way.highway.message', { highway: utilDisplayLabel(entity, context) }) : '';
-                }
-                return t('issues.disconnected_way.routable.message.multiple', { count: this.entityIds.length.toString() });
+                var entity = this.entityIds.length && context.hasEntity(this.entityIds[0]);
+                var label = entity && utilDisplayLabel(entity, context.graph());
+                return t.append('issues.disconnected_way.routable.message', { count: this.entityIds.length, highway: label });
             },
             reference: showReference,
             entityIds: Array.from(routingIslandWays).map(function(way) { return way.id; }),
@@ -45,25 +43,27 @@ export function validationDisconnectedWay() {
 
                 if (singleEntity.type === 'way' && !singleEntity.isClosed()) {
 
-                    var startFix = makeContinueDrawingFixIfAllowed(singleEntity.first(), 'start');
+                    var textDirection = localizer.textDirection();
+
+                    var startFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.first(), 'start');
                     if (startFix) fixes.push(startFix);
 
-                    var endFix = makeContinueDrawingFixIfAllowed(singleEntity.last(), 'end');
+                    var endFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.last(), 'end');
                     if (endFix) fixes.push(endFix);
                 }
                 if (!fixes.length) {
                     fixes.push(new validationIssueFix({
-                        title: t('issues.fix.connect_feature.title')
+                        title: t.append('issues.fix.connect_feature.title')
                     }));
                 }
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-operation-delete',
-                    title: t('issues.fix.delete_feature.title'),
+                    title: t.append('issues.fix.delete_feature.title'),
                     entityIds: [singleEntity.id],
                     onClick: function(context) {
                         var id = this.issue.entityIds[0];
-                        var operation = operationDelete([id], context);
+                        var operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
                         }
@@ -71,7 +71,7 @@ export function validationDisconnectedWay() {
                 }));
             } else {
                 fixes.push(new validationIssueFix({
-                    title: t('issues.fix.connect_features.title')
+                    title: t.append('issues.fix.connect_features.title')
                 }));
             }
 
@@ -85,7 +85,7 @@ export function validationDisconnectedWay() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.disconnected_way.routable.reference'));
+                .call(t.append('issues.disconnected_way.routable.reference'));
         }
 
         function routingIslandForEntity(entity) {
@@ -170,10 +170,12 @@ export function validationDisconnectedWay() {
                 if (parentRelation.isMultipolygon() &&
                     isTaggedAsHighway(parentRelation) &&
                     (!ignoreInnerWays || parentRelation.memberById(way.id).role !== 'inner')) return true;
+
+                return false;
             });
         }
 
-        function makeContinueDrawingFixIfAllowed(vertexID, whichEnd) {
+        function makeContinueDrawingFixIfAllowed(textDirection, vertexID, whichEnd) {
             var vertex = graph.hasEntity(vertexID);
             if (!vertex || vertex.tags.noexit === 'yes') return null;
 
@@ -182,7 +184,7 @@ export function validationDisconnectedWay() {
 
             return new validationIssueFix({
                 icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                title: t('issues.fix.continue_from_' + whichEnd + '.title'),
+                title: t.append('issues.fix.continue_from_' + whichEnd + '.title'),
                 entityIds: [vertexID],
                 onClick: function(context) {
                     var wayId = this.issue.entityIds[0];
@@ -199,7 +201,7 @@ export function validationDisconnectedWay() {
                     }
 
                     context.enter(
-                        modeDrawLine(context, wayId, context.graph(), context.graph(), 'line', way.affix(vertexId), true)
+                        modeDrawLine(context, wayId, context.graph(), 'line', way.affix(vertexId), true)
                     );
                 }
             });

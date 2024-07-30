@@ -1,36 +1,35 @@
 /* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
+const chalk = require('chalk');
 const fs = require('fs');
-const prettyStringify = require('json-stringify-pretty-compact');
-const request = require('request').defaults({ maxSockets: 1 });
 const YAML = require('js-yaml');
-const colors = require('colors/safe');
+const transifexApi = require('@transifex/api').transifexApi;
 
-const resources = ['core', 'presets', 'imagery', 'community'];
+const resourceIds = ['core', 'imagery', 'community'];
+const reviewedOnlyLangs = ['vi'];
 const outdir = 'dist/locales/';
-const apiroot = 'https://www.transifex.com/api/2';
-const projectURL = `${apiroot}/project/id-editor`;
 
+const languageNames = require('./language_names.js');
 
-/*
- * Transifex oddly doesn't allow anonymous downloading
- *
- * auth is stored in transifex.auth in a json object:
- *  {
- *      "user": "username",
- *      "pass": "password"
- *  }
- *  */
+const transifexOrganization = 'openstreetmap';
+const transifexProject = 'id-editor';
 
-const auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
+// Transifex doesn't allow anonymous downloading
+/* eslint-disable no-process-env */
+if (process.env.transifex_password) {
+  // Deployment scripts may prefer environment variables
+  transifexApi.setup({ auth: process.env.transifex_password });
+} else {
+  // Credentials can be stored in transifex.auth as a json object. This file is gitignored.
+  // You must use an API token for authentication: You can generate one at https://www.transifex.com/user/settings/api/.
+  // {
+  //   "password": "<api_key>"
+  // }
+  transifexApi.setup({ auth: JSON.parse(fs.readFileSync('./transifex.auth', 'utf8')).password });
+}
+/* eslint-enable no-process-env */
+
 const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
-const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
-
-let referencedScripts = [];
-
-const languageInfo = getLangNamesInNativeLang();
-fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
-fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
 let shortcuts = [];
 dataShortcuts.forEach(tab => {
@@ -50,7 +49,47 @@ dataShortcuts.forEach(tab => {
   });
 });
 
-asyncMap(resources, getResource, (err, results) => {
+let coverageByLocaleCode = {};
+
+// There's a race condition here, but it's highly unlikely that the info will
+// return after the resources. There's an error check just in case.
+asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
+asyncMap(resourceIds, getResource, gotResource);
+
+async function getResourceInfo(resourceId, callback) {
+  try {
+    const result = [];
+    for await (const stat of transifexApi.ResourceLanguageStats.filter({
+      project: `o:${transifexOrganization}:p:${transifexProject}`,
+      resource: `o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`
+    }).all()) {
+      result.push(stat);
+    }
+    console.log(`got resource language stats collection for ${resourceId}`);
+    callback(null, result);
+  } catch (err) {
+    console.error(`error while getting resource language stats collection for ${resourceId}`);
+    callback(err);
+  }
+}
+function gotResourceInfo(err, results) {
+  if (err) return console.log(err);
+  results.forEach(info => {
+    info.forEach(stat => {
+      let code = stat.relationships.language.data.id.substr(2).replace(/_/g, '-');
+      let type = 'translated_strings';
+      if (reviewedOnlyLangs.indexOf(code) !== -1) {
+        type = 'reviewed_strings';
+      }
+      let coveragePart = (stat.attributes[type] /  stat.attributes.total_strings) / results.length;
+
+      if (coverageByLocaleCode[code] === undefined) coverageByLocaleCode[code] = 0;
+      coverageByLocaleCode[code] += coveragePart;
+    });
+  });
+}
+
+function gotResource(err, results) {
   if (err) return console.log(err);
 
   // merge in strings fetched from transifex
@@ -66,29 +105,47 @@ asyncMap(resources, getResource, (err, results) => {
 
   // write files and fetch language info for each locale
   let dataLocales = {
-    en: { rtl: false, languageNames: languageNamesInLanguageOf('en'), scriptNames: scriptNamesInLanguageOf('en') }
+    en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
     (code, done) => {
-      if (code === 'en' || !Object.keys(allStrings[code]).length) {
+      if (code === 'en') {
         done();
       } else {
         let obj = {};
-        obj[code] = allStrings[code];
-        fs.writeFileSync(`${outdir}${code}.json`, JSON.stringify(obj));
+        obj[code] = allStrings[code] || {};
+        let lNames = languageNames.languageNamesInLanguageOf(code) || {};
+        if (Object.keys(lNames).length) {
+          obj[code].languageNames = lNames;
+        }
+        let sNames = languageNames.scriptNamesInLanguageOf(code) || {};
+        if (Object.keys(sNames).length) {
+          obj[code].scriptNames = sNames;
+        }
+        fs.writeFileSync(`${outdir}${code}.min.json`, JSON.stringify(obj));
 
         getLanguageInfo(code, (err, info) => {
-          let rtl = info && info.rtl;
+          if (err) return console.log(err);
+
+          let rtl = info && info.attributes && info.attributes.rtl;
           // exceptions: see #4783
           if (code === 'ckb') {
             rtl = true;
           } else if (code === 'ku') {
             rtl = false;
           }
+
+          let coverage = coverageByLocaleCode[code];
+          if (coverage === undefined) {
+            console.log(`Could not get language coverage for ${code}`, coverageByLocaleCode);
+            process.exit(1);
+          }
+          // we don't need high precision here, but we need to know if it's exactly 100% or not
+          coverage = Math.floor(coverage * 100) / 100;
+
           dataLocales[code] = {
             rtl: rtl,
-            languageNames: languageNamesInLanguageOf(code) || {},
-            scriptNames: scriptNamesInLanguageOf(code) || {}
+            pct: coverage
           };
           done();
         });
@@ -96,60 +153,32 @@ asyncMap(resources, getResource, (err, results) => {
     },
     (err) => {
       if (!err) {
+        // list the default locale as explicitly supported
+        dataLocales['en-US'] = dataLocales.en;
         const keys = Object.keys(dataLocales).sort();
         let sortedLocales = {};
         keys.forEach(k => sortedLocales[k] = dataLocales[k]);
-        fs.writeFileSync('data/locales.json', prettyStringify(sortedLocales, { maxLength: 99999 }));
-        fs.writeFileSync('dist/data/locales.min.json', JSON.stringify(sortedLocales));
+        fs.writeFileSync('dist/locales/index.min.json', JSON.stringify(sortedLocales));
       }
     }
   );
-});
+}
 
 
-function getResource(resource, callback) {
-  let resourceURL = `${projectURL}/resource/${resource}`;
-  getLanguages(resourceURL, (err, codes) => {
+function getResource(resourceId, callback) {
+  getLanguages((err, codes) => {
     if (err) return callback(err);
 
-    asyncMap(codes, getLanguage(resourceURL), (err, results) => {
+    asyncMap(codes, getLanguage(resourceId), (err, results) => {
       if (err) return callback(err);
 
       let locale = {};
       results.forEach((result, i) => {
-        if (resource === 'community' && Object.keys(result).length) {
+        if (resourceId === 'community' && Object.keys(result).length) {
           locale[codes[i]] = { community: result };  // add namespace
 
         } else {
-          if (resource === 'presets') {
-            // remove terms that were not really translated
-            let presets = (result.presets && result.presets.presets) || {};
-            for (const key of Object.keys(presets)) {
-              let preset = presets[key];
-              if (!preset.terms) continue;
-              preset.terms = preset.terms.replace(/<.*>/, '').trim();
-              if (!preset.terms) {
-                delete preset.terms;
-                if (!Object.keys(preset).length) {
-                  delete presets[key];
-                }
-              }
-            }
-          } else if (resource === 'fields') {
-            // remove terms that were not really translated
-            let fields = (result.presets && result.presets.fields) || {};
-            for (const key of Object.keys(fields)) {
-              let field = fields[key];
-              if (!field.terms) continue;
-              field.terms = field.terms.replace(/\[.*\]/, '').trim();
-              if (!field.terms) {
-                delete field.terms;
-                if (!Object.keys(field).length) {
-                  delete fields[key];
-                }
-              }
-            }
-          } else if (resource === 'core') {
+          if (resourceId === 'core') {
             checkForDuplicateShortcuts(codes[i], result);
           }
 
@@ -163,43 +192,62 @@ function getResource(resource, callback) {
 }
 
 
-function getLanguage(resourceURL) {
-  return (code, callback) => {
-    code = code.replace(/-/g, '_');
-    let url = `${resourceURL}/translation/${code}`;
-    if (code === 'vi') { url += '?mode=reviewed'; }
-
-    request.get(url, { auth : auth }, (err, resp, body) => {
-      if (err) return callback(err);
-      console.log(`${resp.statusCode}: ${url}`);
-      let content = JSON.parse(body).content;
-      callback(null, YAML.safeLoad(content)[code]);
-    });
+function getLanguage(resourceId) {
+  return async (code, callback) => {
+    try {
+      code = code.replace(/-/g, '_');
+      // random delay to avoid rate-limit of Transifex' API
+      await delay(Math.random() * 60000);
+      const url = await transifexApi.ResourceTranslationsAsyncDownload.download({
+        resource: {data:{type:'resources', id:`o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`}},
+        language: {data:{type:'languages', id:`l:${code}`}},
+        // fetch only reviewed strings for some languages
+        mode: reviewedOnlyLangs.indexOf(code) !== -1 ? 'reviewed' : 'default'
+      });
+      const data = await fetch(url).then(d => d.text());
+      console.log(`got translations for ${resourceId}, language ${code}`);
+      callback(null, YAML.load(data)[code]);
+    } catch (err) {
+      console.error(`error while getting translations for ${resourceId}, language ${code}`, err);
+      callback(err);
+    }
   };
 }
 
 
-function getLanguageInfo(code, callback) {
+async function getLanguageInfo(code, callback) {
   code = code.replace(/-/g, '_');
-  let url = `${apiroot}/language/${code}`;
-  request.get(url, { auth : auth }, (err, resp, body) => {
-    if (err) return callback(err);
-    console.log(`${resp.statusCode}: ${url}`);
-    callback(null, JSON.parse(body));
-  });
+  try {
+    const lng = await transifexApi.Language.get({
+      code: code
+    });
+    console.log(`got language details for ${code}`);
+    callback(null, lng);
+  } catch (err) {
+    console.error(`error while getting language details for ${code}`);
+    callback(err);
+  }
 }
 
 
-function getLanguages(resourceURL, callback) {
-  let url = `${resourceURL}?details`;
-  request.get(url, { auth: auth }, (err, resp, body) => {
-    if (err) return callback(err);
-    console.log(`${resp.statusCode}: ${url}`);
-    callback(null, JSON.parse(body).available_languages
-      .map(d => d.code.replace(/_/g, '-'))
-      .filter(d => d !== 'en')
-    );
-  });
+async function getLanguages(callback) {
+  try {
+    const result = [];
+    const project = await transifexApi.Project.get({
+      organization: `o:${transifexOrganization}`,
+      slug: transifexProject
+    });
+    const lngs = await project.fetch('languages');
+    for await (const lng of lngs.all()) {
+      if (lng.attributes.code === 'en') continue;
+      result.push(lng.attributes.code.replace(/_/g, '-'));
+    }
+    console.log('got project languages');
+    callback(null, result);
+  } catch (err) {
+    console.error('error while getting project languages');
+    callback(err);
+  }
 }
 
 
@@ -214,7 +262,7 @@ function asyncMap(inputs, func, callback) {
   function next() {
     callFunc(index++);
     if (index < inputs.length) {
-      setTimeout(next, 200);
+      setTimeout(next, 50);
     }
   }
 
@@ -252,7 +300,7 @@ function checkForDuplicateShortcuts(code, coreStrings) {
       let shortcut = modifier + rep;
       if (usedShortcuts[shortcut] && usedShortcuts[shortcut] !== shortcutPathString) {
         let message = code + ': duplicate shortcut "' + shortcut + '" for "' + usedShortcuts[shortcut] + '" and "' + shortcutPathString + '"';
-        console.warn(colors.yellow(message));
+        console.warn(chalk.yellow(message));
       } else {
         usedShortcuts[shortcut] = shortcutPathString;
       }
@@ -260,108 +308,6 @@ function checkForDuplicateShortcuts(code, coreStrings) {
   });
 }
 
-function getLangNamesInNativeLang() {
-  // manually add languages we want that aren't in CLDR
-  let unordered = {
-    'oc': {
-      nativeName: 'Occitan'
-    },
-    'ja-Hira': {
-      base: 'ja',
-      script: 'Hira'
-    },
-    'ja-Latn': {
-      base: 'ja',
-      script: 'Latn'
-    },
-    'ko-Latn': {
-      base: 'ko',
-      script: 'Latn'
-    },
-    'zh_pinyin': {
-      base: 'zh',
-      script: 'Latn'
-    }
-  };
-
-  let langDirectoryPaths = fs.readdirSync(cldrMainDir);
-  langDirectoryPaths.forEach(code => {
-    let languagesPath = `${cldrMainDir}${code}/languages.json`;
-    //if (!fs.existsSync(languagesPath)) return;
-    let languageObj = JSON.parse(fs.readFileSync(languagesPath, 'utf8')).main[code];
-    let identity = languageObj.identity;
-
-    // skip locale-specific languages
-    if (identity.letiant || identity.territory) return;
-
-    let info = {};
-    const script = identity.script;
-    if (script) {
-      referencedScripts.push(script);
-      info.base = identity.language;
-      info.script = script;
-    }
-
-    const nativeName = languageObj.localeDisplayNames.languages[code];
-    if (nativeName) {
-      info.nativeName = nativeName;
-    }
-
-    unordered[code] = info;
-  });
-
-  let ordered = {};
-  Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);
-  return ordered;
-}
-
-
-const rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh-Hant', 'pt-BR': 'pt', 'pt': 'pt-PT' };
-
-function languageNamesInLanguageOf(code) {
-  if (rematchCodes[code]) code = rematchCodes[code];
-
-  let languageFilePath = `${cldrMainDir}${code}/languages.json`;
-  if (!fs.existsSync(languageFilePath)) return null;
-
-  let translatedLangsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.languages;
-
-  // ignore codes for non-languages
-  for (let nonLangCode in { mis: true, mul: true, und: true, zxx: true }) {
-    delete translatedLangsByCode[nonLangCode];
-  }
-
-  for (let langCode in translatedLangsByCode) {
-    let altLongIndex = langCode.indexOf('-alt-long');
-    if (altLongIndex !== -1) {    // prefer long names (e.g. Chinese -> Mandarin Chinese)
-      let base = langCode.substring(0, altLongIndex);
-      translatedLangsByCode[base] = translatedLangsByCode[langCode];
-    }
-
-    if (langCode.includes('-alt-')) {    // remove alternative names
-      delete translatedLangsByCode[langCode];
-    } else if (langCode === translatedLangsByCode[langCode]) {   // no localized value available
-      delete translatedLangsByCode[langCode];
-    }
-  }
-
-  return translatedLangsByCode;
-}
-
-
-function scriptNamesInLanguageOf(code) {
-  if (rematchCodes[code]) code = rematchCodes[code];
-
-  let languageFilePath = `${cldrMainDir}${code}/scripts.json`;
-  if (!fs.existsSync(languageFilePath)) return null;
-
-  let allTranslatedScriptsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.scripts;
-
-  let translatedScripts = {};
-  referencedScripts.forEach(script => {
-    if (!allTranslatedScriptsByCode[script] || script === allTranslatedScriptsByCode[script]) return;
-    translatedScripts[script] = allTranslatedScriptsByCode[script];
-  });
-
-  return translatedScripts;
+function delay(t) {
+  return new Promise(resolve => { setTimeout(resolve, t); });
 }

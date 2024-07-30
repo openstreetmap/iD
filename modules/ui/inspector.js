@@ -1,5 +1,5 @@
 import { interpolate as d3_interpolate } from 'd3-interpolate';
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
@@ -17,14 +17,13 @@ export function uiInspector(context) {
     var _newFeature = false;
 
 
-    function inspector(selection, newFeature) {
+    function inspector(selection) {
         presetList
             .entityIDs(_entityIDs)
             .autofocus(_newFeature)
             .on('choose', inspector.setPreset)
             .on('cancel', function() {
-                wrap.transition()
-                    .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+                inspector.setPreset();
             });
 
         entityEditor
@@ -52,6 +51,9 @@ export function uiInspector(context) {
         editorPane = wrap.selectAll('.entity-editor-pane');
 
         function shouldDefaultToPresetList() {
+            // always show the inspector on hover
+            if (_state !== 'select') return false;
+
             // can only change preset on single selection
             if (_entityIDs.length !== 1) return false;
 
@@ -63,15 +65,18 @@ export function uiInspector(context) {
             if (entity.hasNonGeometryTags()) return false;
 
             // prompt to select preset if feature is new and untagged
-            if (newFeature) return true;
+            if (_newFeature) return true;
 
             // all existing features except vertices should default to inspector
             if (entity.geometry(context.graph()) !== 'vertex') return false;
 
+            // show vertex relations if any
+            if (context.graph().parentRelations(entity).length) return false;
+
             // show vertex issues if there are any
             if (context.validator().getEntityIssues(entityID).length) return false;
 
-            // show turn retriction editor for junction vertices
+            // show turn restriction editor for junction vertices
             if (entity.isHighwayIntersection(context.graph())) return false;
 
             // otherwise show preset list for uninteresting vertices
@@ -80,10 +85,14 @@ export function uiInspector(context) {
 
         if (shouldDefaultToPresetList()) {
             wrap.style('right', '-100%');
-            presetPane.call(presetList);
+            editorPane.classed('hide', true);
+            presetPane.classed('hide', false)
+                .call(presetList);
         } else {
             wrap.style('right', '0%');
-            editorPane.call(entityEditor);
+            presetPane.classed('hide', true);
+            editorPane.classed('hide', false)
+                .call(entityEditor);
         }
 
         var footer = selection.selectAll('.footer')
@@ -102,8 +111,15 @@ export function uiInspector(context) {
 
     inspector.showList = function(presets) {
 
+        presetPane.classed('hide', false);
+
         wrap.transition()
-            .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
+            .styleTween('right', function() {
+                return d3_interpolate('0%', '-100%');
+            })
+            .on('end', function () {
+                editorPane.classed('hide', true);
+            });
 
         if (presets) {
             presetList.presets(presets);
@@ -116,16 +132,25 @@ export function uiInspector(context) {
     inspector.setPreset = function(preset) {
 
         // upon setting multipolygon, go to the area preset list instead of the editor
-        if (preset.id === 'type/multipolygon') {
+        if (preset && preset.id === 'type/multipolygon') {
             presetPane
                 .call(presetList.autofocus(true));
 
         } else {
+            editorPane.classed('hide', false);
             wrap.transition()
-                .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
+                .styleTween('right', function() {
+                    return d3_interpolate('-100%', '0%');
+                })
+                .on('end', function () {
+                    presetPane.classed('hide', true);
+                });
 
+            if (preset) {
+                entityEditor.presets([preset]);
+            }
             editorPane
-                .call(entityEditor.presets([preset]));
+                .call(entityEditor);
         }
 
     };
@@ -136,7 +161,7 @@ export function uiInspector(context) {
         entityEditor.state(_state);
 
         // remove any old field help overlay that might have gotten attached to the inspector
-        d3_selectAll('.field-help-body').remove();
+        context.container().selectAll('.field-help-body').remove();
 
         return inspector;
     };

@@ -1,9 +1,0 @@
-{
-    "key": "voltage",
-    "type": "combo",
-    "label": "Voltage",
-    "prerequisiteTag": {
-        "key": "electrified",
-        "valueNot": "no"
-    }
-}

@@ -3,9 +3,10 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
-import marked from 'marked';
+import { marked } from 'marked';
 
-import { currentLocale } from '../util/locale';
+import { fileFetcher } from '../core/file_fetcher';
+import { localizer } from '../core/localizer';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
@@ -13,7 +14,7 @@ import { utilRebind, utilTiler, utilQsString } from '../util';
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
-const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/en/api/0.3beta';
+const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/api/0.3';
 let _osmoseData = { icons: {}, items: [] };
 
 // This gets reassigned if reset
@@ -48,7 +49,7 @@ function updateRtree(item, replace) {
   }
 }
 
-// Issues shouldn't obscure eachother
+// Issues shouldn't obscure each other
 function preventCoincident(loc) {
   let coincident = false;
   do {
@@ -65,8 +66,8 @@ function preventCoincident(loc) {
 export default {
   title: 'osmose',
 
-  init(context) {
-    context.data().get('qa_data')
+  init() {
+    fileFetcher.get('qa_data')
       .then(d => {
         _osmoseData = d.osmose;
         _osmoseData.items = Object.keys(d.osmose.icons)
@@ -82,8 +83,13 @@ export default {
   },
 
   reset() {
+    let _strings = {};
+    let _colors = {};
     if (_cache) {
       Object.values(_cache.inflightTile).forEach(abortRequest);
+      // Strings and colors are static and should not be re-populated
+      _strings = _cache.strings;
+      _colors = _cache.colors;
     }
     _cache = {
       data: {},
@@ -92,8 +98,8 @@ export default {
       inflightPost: {},
       closed: {},
       rtree: new RBush(),
-      strings: {},
-      colors: {}
+      strings: _strings,
+      colors: _colors
     };
   },
 
@@ -117,7 +123,7 @@ export default {
       if (_cache.loadedTile[tile.id] || _cache.inflightTile[tile.id]) return;
 
       let [ x, y, z ] = tile.xyz;
-      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.json?` + utilQsString(params);
+      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.geojson?` + utilQsString(params);
 
       let controller = new AbortController();
       _cache.inflightTile[tile.id] = controller;
@@ -167,14 +173,14 @@ export default {
       return Promise.resolve(issue);
     }
 
-    const url = `${_osmoseUrlRoot}/issue/${issue.id}?langs=${currentLocale}`;
+    const url = `${_osmoseUrlRoot}/issue/${issue.id}?langs=${localizer.localeCode()}`;
     const cacheDetails = data => {
       // Associated elements used for highlighting
       // Assign directly for immediate use in the callback
       issue.elems = data.elems.map(e => e.type.substring(0,1) + e.id);
 
       // Some issues have instance specific detail in a subtitle
-      issue.detail = marked(data.subtitle);
+      issue.detail = data.subtitle ? marked(data.subtitle.auto) : '';
 
       this.replaceItem(issue);
     };
@@ -182,7 +188,7 @@ export default {
     return d3_json(url).then(cacheDetails).then(() => issue);
   },
 
-  loadStrings(locale=currentLocale) {
+  loadStrings(locale=localizer.localeCode()) {
     const items = Object.keys(_osmoseData.icons);
 
     if (
@@ -201,7 +207,7 @@ export default {
     // Using multiple individual item + class requests to reduce fetched data size
     const allRequests = items.map(itemType => {
       // No need to request data we already have
-      if (itemType in _cache.strings[locale]) return;
+      if (itemType in _cache.strings[locale]) return null;
 
       const cacheData = data => {
         // Bunch of nested single value arrays of objects
@@ -243,12 +249,12 @@ export default {
       const url = `${_osmoseUrlRoot}/items/${item}/class/${cl}?langs=${locale}`;
 
       return d3_json(url).then(cacheData);
-    });
+    }).filter(Boolean);
 
     return Promise.all(allRequests).then(() => _cache.strings[locale]);
   },
 
-  getStrings(itemType, locale=currentLocale) {
+  getStrings(itemType, locale=localizer.localeCode()) {
     // No need to fallback to English, Osmose API handles this for us
     return (locale in _cache.strings) ? _cache.strings[locale][itemType] : {};
   },
@@ -333,6 +339,6 @@ export default {
   },
 
   itemURL(item) {
-    return `https://osmose.openstreetmap.fr/error/${item.id}`;
+    return `https://osmose.openstreetmap.fr/en/error/${item.id}`;
   }
 };

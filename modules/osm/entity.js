@@ -1,6 +1,7 @@
 import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
-import { utilArrayUnion } from '../util';
+import { utilArrayUnion } from '../util/array';
+import { utilUnicodeCharsTruncated } from '../util/util';
 
 
 export function osmEntity(attrs) {
@@ -35,7 +36,11 @@ osmEntity.id.fromOSM = function(type, id) {
 
 
 osmEntity.id.toOSM = function(id) {
-    return id.slice(1);
+    var match = id.match(/^[cnwr](-?\d+)$/);
+    if (match) {
+        return match[1];
+    }
+    return '';
 };
 
 
@@ -113,8 +118,7 @@ osmEntity.prototype = {
 
 
     copy: function(resolver, copies) {
-        if (copies[this.id])
-            return copies[this.id];
+        if (copies[this.id]) return copies[this.id];
 
         var copy = osmEntity(this, { id: undefined, user: undefined, version: undefined });
         copies[this.id] = copy;
@@ -129,7 +133,8 @@ osmEntity.prototype = {
 
 
     isNew: function() {
-        return this.osmId() < 0;
+        var osmId = osmEntity.id.toOSM(this.id);
+        return osmId.length === 0 || osmId[0] === '-';
     },
 
 
@@ -149,8 +154,10 @@ osmEntity.prototype = {
                 merged[k] = t2;
             } else if (t1 !== t2) {
                 changed = true;
-                merged[k] = utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';')
-                    .substr(0, 255); // avoid exceeding character limit; see also services/osm.js -> maxCharsForTagValue()
+                merged[k] = utilUnicodeCharsTruncated(
+                    utilArrayUnion(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'),
+                    255 // avoid exceeding character limit; see also context.maxCharsForTagValue()
+                );
             }
         }
         return changed ? this.update({ tags: merged }) : this;
@@ -174,10 +181,6 @@ osmEntity.prototype = {
         return Object.keys(this.tags).some(osmIsInterestingTag);
     },
 
-    hasWikidata: function() {
-        return !!this.tags.wikidata || !!this.tags['brand:wikidata'];
-    },
-
     isHighwayIntersection: function() {
         return false;
     },
@@ -195,9 +198,21 @@ osmEntity.prototype = {
         var deprecated = [];
         dataDeprecated.forEach(function(d) {
             var oldKeys = Object.keys(d.old);
+            if (d.replace) {
+                var hasExistingValues = Object.keys(d.replace).some(function(replaceKey) {
+                    if (!tags[replaceKey] || d.old[replaceKey]) return false;
+                    var replaceValue = d.replace[replaceKey];
+                    if (replaceValue === '*') return false;
+                    if (replaceValue === tags[replaceKey]) return false;
+                    return true;
+                });
+                // don't flag deprecated tags if the upgrade path would overwrite existing data - #7843
+                if (hasExistingValues) return;
+            }
             var matchesDeprecatedTags = oldKeys.every(function(oldKey) {
                 if (!tags[oldKey]) return false;
                 if (d.old[oldKey] === '*') return true;
+                if (d.old[oldKey] === tags[oldKey]) return true;
 
                 var vals = tags[oldKey].split(';').filter(Boolean);
                 if (vals.length === 0) {

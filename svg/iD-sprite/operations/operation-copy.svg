@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="20" height="20" viewBox="0 0 20 20">
-    <path d="M16,7 C16.552,7 17,7.448 17,8 L17,16 C17,16.552 16.552,17 16,17 L8,17 C7.448,17 7,16.552 7,16 L7,8 C7,7.448 7.448,7 8,7 L16,7 z M15,9 L9,9 L9,15 L15,15 L15,9 z" fill="inherit"/>
-    <path d="M11,1 C11.552,1 12,1.448 12,2 L12,6 L10,6 L10,3 L4,3 L4,9 L6,9 L6,11 L3,11 C2.448,11 2,10.552 2,10 L2,2 C2,1.448 2.448,1 3,1 L11,1 z" fill="inherit"/>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="M13,6 L11,6 L11,4 L4,4 L4,11 L6,11 L6,13 L3,13 C2.44771525,13 2,12.5522847 2,12 L2,3 C2,2.44771525 2.44771525,2 3,2 L12,2 C12.5522847,2 13,2.44771525 13,3 L13,6 Z" fill="inherit"></path>
+    <path d="M18,8 L18,17 C18,17.5522847 17.5522847,18 17,18 L8,18 C7.44771525,18 7,17.5522847 7,17 L7,8 C7,7.44771525 7.44771525,7 8,7 L17,7 C17.5522847,7 18,7.44771525 18,8 Z M16,9 L9,9 L9,16 L16,16 L16,9 Z" fill="currentColor"></path>
 </svg>

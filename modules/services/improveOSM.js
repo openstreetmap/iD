@@ -3,10 +3,11 @@ import RBush from 'rbush';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
+import { fileFetcher } from '../core/file_fetcher';
 import { geoExtent, geoVecAdd, geoVecScale } from '../geo';
 import { QAItem } from '../osm';
 import { serviceOsm } from './index';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilRebind, utilTiler, utilQsString } from '../util';
 
 
@@ -56,11 +57,11 @@ function updateRtree(item, replace) {
 }
 
 function linkErrorObject(d) {
-  return `<a class="error_object_link">${d}</a>`;
+  return { html: `<a class="error_object_link">${d}</a>` };
 }
 
 function linkEntity(d) {
-  return `<a class="error_entity_link">${d}</a>`;
+  return { html: `<a class="error_entity_link">${d}</a>` };
 }
 
 function pointAverage(points) {
@@ -103,12 +104,14 @@ function cardinalDirection(bearing) {
   return t(`QA.improveOSM.directions.${compass[dir]}`);
 }
 
-// Errors shouldn't obscure eachother
+// Errors shouldn't obscure each other
 function preventCoincident(loc, bumpUp) {
   let coincident = false;
   do {
     // first time, move marker up. after that, move marker right.
-    let delta = coincident ? [0.00001, 0] : (bumpUp ? [0, 0.00001] : [0, 0]);
+    let delta = coincident ? [0.00001, 0] :
+        bumpUp ? [0, 0.00001] :
+        [0, 0];
     loc = geoVecAdd(loc, delta);
     let bbox = geoExtent(loc).bbox();
     coincident = _cache.rtree.search(bbox).length;
@@ -120,8 +123,8 @@ function preventCoincident(loc, bumpUp) {
 export default {
   title: 'improveOSM',
 
-  init(context) {
-    context.data().get('qa_data')
+  init() {
+    fileFetcher.get('qa_data')
       .then(d => _impOsmData = d.improveOSM);
 
     if (!_cache) {

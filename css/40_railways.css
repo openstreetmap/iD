@@ -20,7 +20,7 @@ path.line.casing.tag-railway {
 path.line.stroke.tag-railway {
     stroke-width: 2;
     stroke-linecap: butt;
-    stroke-dasharray: 12,12;
+    stroke-dasharray: 12, 12;
 }
 .low-zoom path.line.shadow.tag-railway {
     stroke-width: 12;
@@ -30,16 +30,18 @@ path.line.stroke.tag-railway {
 }
 .low-zoom path.line.stroke.tag-railway {
     stroke-width: 2;
-    stroke-dasharray: 6,6;
+    stroke-dasharray: 6, 6;
 }
 .preset-icon-container path.line.stroke.tag-railway:not(.tag-status),
 .preset-icon-container path.line.stroke.tag-railway.tag-status-disused {
     stroke-dasharray: 6;
 }
 
+path.line.casing.tag-railway.tag-railway-platform_edge,
 path.line.casing.tag-railway.tag-railway-platform {
     stroke-width: 0;
 }
+path.line.stroke.tag-railway.tag-railway-platform_edge,
 path.line.stroke.tag-railway.tag-railway-platform {
     stroke-dasharray: none;
 }
@@ -51,7 +53,6 @@ path.line.casing.tag-railway {
 path.line.stroke.tag-railway {
     stroke: #eee;
 }
-
 
 .preset-icon .icon.tag-railway.tag-status {
     color: #999;
@@ -68,7 +69,6 @@ path.line.stroke.tag-railway.tag-status:not(.tag-service) {
 path.line.casing.tag-railway.tag-status-disused {
     stroke: #808080;
 }
-
 
 path.line.casing.tag-railway-subway {
     stroke: #222;

@@ -1,6 +1,0 @@
-{
-    "key": "intermittent",
-    "type": "check",
-    "label": "Intermittent",
-    "default": "yes"
-}

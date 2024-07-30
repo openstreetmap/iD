@@ -3,7 +3,7 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmAreaKeys, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
+import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix } from './tags';
 import { utilArrayUniq } from '../util';
 
 
@@ -109,7 +109,7 @@ Object.assign(osmWay.prototype, {
                 motorway: 5, motorway_link: 5, trunk: 4.5, trunk_link: 4.5,
                 primary: 4, secondary: 4, tertiary: 4,
                 primary_link: 4, secondary_link: 4, tertiary_link: 4,
-                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, pedestrian: 4,
+                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, busway: 4, pedestrian: 4,
                 residential: 3.5, service: 3.5, track: 3, cycleway: 2.5,
                 bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5
             },
@@ -155,8 +155,10 @@ Object.assign(osmWay.prototype, {
 
         // implied oneway tag..
         for (var key in this.tags) {
-            if (key in osmOneWayTags && (this.tags[key] in osmOneWayTags[key]))
+            if (key in osmOneWayTags &&
+                (this.tags[key] in osmOneWayTags[key])) {
                 return true;
+            }
         }
         return false;
     },
@@ -165,8 +167,9 @@ Object.assign(osmWay.prototype, {
     // i.e. the right side is the 'inside' (e.g. the right side of a
     // natural=cliff is lower).
     sidednessIdentifier: function() {
-        for (var key in this.tags) {
-            var value = this.tags[key];
+        for (const realKey in this.tags) {
+            const value = this.tags[realKey];
+            const key = osmRemoveLifecyclePrefix(realKey);
             if (key in osmRightSideIsInsideTags && (value in osmRightSideIsInsideTags[key])) {
                 if (osmRightSideIsInsideTags[key][value] === true) {
                     return key;
@@ -228,44 +231,12 @@ Object.assign(osmWay.prototype, {
 
     // returns an object with the tag that implies this is an area, if any
     tagSuggestingArea: function() {
-        if (this.tags.area === 'yes') return { area: 'yes' };
-        if (this.tags.area === 'no') return null;
-
-        // `highway` and `railway` are typically linear features, but there
-        // are a few exceptions that should be treated as areas, even in the
-        // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
-        var lineKeys = {
-            highway: {
-                rest_area: true,
-                services: true
-            },
-            railway: {
-                roundhouse: true,
-                station: true,
-                traverser: true,
-                turntable: true,
-                wash: true
-            }
-        };
-        var returnTags = {};
-        for (var key in this.tags) {
-            if (key in osmAreaKeys && !(this.tags[key] in osmAreaKeys[key])) {
-                returnTags[key] = this.tags[key];
-                return returnTags;
-            }
-            if (key in lineKeys && this.tags[key] in lineKeys[key]) {
-                returnTags[key] = this.tags[key];
-                return returnTags;
-            }
-        }
-        return null;
+        return osmTagSuggestingArea(this.tags);
     },
 
     isArea: function() {
-        if (this.tags.area === 'yes')
-            return true;
-        if (!this.isClosed() || this.tags.area === 'no')
-            return false;
+        if (this.tags.area === 'yes') return true;
+        if (!this.isClosed() || this.tags.area === 'no') return false;
         return this.tagSuggestingArea() !== null;
     },
 
@@ -289,6 +260,40 @@ Object.assign(osmWay.prototype, {
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
             return this.isArea() ? 'area' : 'line';
+        });
+    },
+
+
+    // returns an array of objects representing the segments between the nodes in this way
+    segments: function(graph) {
+
+        function segmentExtent(graph) {
+            var n1 = graph.hasEntity(this.nodes[0]);
+            var n2 = graph.hasEntity(this.nodes[1]);
+            return n1 && n2 && geoExtent([
+                [
+                    Math.min(n1.loc[0], n2.loc[0]),
+                    Math.min(n1.loc[1], n2.loc[1])
+                ],
+                [
+                    Math.max(n1.loc[0], n2.loc[0]),
+                    Math.max(n1.loc[1], n2.loc[1])
+                ]
+            ]);
+        }
+
+        return graph.transient(this, 'segments', function() {
+            var segments = [];
+            for (var i = 0; i < this.nodes.length - 1; i++) {
+                segments.push({
+                    id: this.id + '-' + i,
+                    wayId: this.id,
+                    index: i,
+                    nodes: [this.nodes[i], this.nodes[i + 1]],
+                    extent: segmentExtent
+                });
+            }
+            return segments;
         });
     },
 

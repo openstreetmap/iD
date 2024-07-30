@@ -1,6 +1,7 @@
-import { t } from '../util/locale';
+import { prefs } from '../core/preferences';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
-import { tooltip } from '../util/tooltip';
+import { uiTooltip } from './tooltip';
 
 
 // these are module variables so they are preserved through a ui.restart()
@@ -15,9 +16,14 @@ export function uiVersion(context) {
     var matchedVersion = currVersion.match(/\d+\.\d+\.\d+.*/);
 
     if (sawVersion === null && matchedVersion !== null) {
-        isNewVersion = (context.storage('sawVersion') !== currVersion);
-        isNewUser = !context.storage('sawSplash');
-        context.storage('sawVersion', currVersion);
+        if (prefs('sawVersion')) {
+            isNewUser = false;
+            isNewVersion = prefs('sawVersion') !== currVersion && currVersion.indexOf('-') === -1;
+        } else {
+            isNewUser = true;
+            isNewVersion = true;
+        }
+        prefs('sawVersion', currVersion);
         sawVersion = currVersion;
     }
 
@@ -31,15 +37,15 @@ export function uiVersion(context) {
         // only show new version indicator to users that have used iD before
         if (isNewVersion && !isNewUser) {
             selection
-                .append('div')
-                .attr('class', 'badge')
                 .append('a')
+                .attr('class', 'badge')
                 .attr('target', '_blank')
-                .attr('href', 'https://github.com/openstreetmap/iD/blob/master/CHANGELOG.md#whats-new')
-                .call(svgIcon('#maki-gift-11'))
-                .call(tooltip()
-                    .title(t('version.whats_new', { version: currVersion }))
+                .attr('href', 'https://github.com/openstreetmap/iD/blob/release/CHANGELOG.md#whats-new')
+                .call(svgIcon('#maki-gift'))
+                .call(uiTooltip()
+                    .title(() => t.append('version.whats_new', { version: currVersion }))
                     .placement('top')
+                    .scrollContainer(context.container().select('.main-footer-wrap'))
                 );
         }
     };

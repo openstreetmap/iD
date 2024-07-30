@@ -2,6 +2,24 @@ import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
 
+export const cardinal = {
+    north: 0,               n: 0,
+    northnortheast: 22,     nne: 22,
+    northeast: 45,          ne: 45,
+    eastnortheast: 67,      ene: 67,
+    east: 90,               e: 90,
+    eastsoutheast: 112,     ese: 112,
+    southeast: 135,         se: 135,
+    southsoutheast: 157,    sse: 157,
+    south: 180,             s: 180,
+    southsouthwest: 202,    ssw: 202,
+    southwest: 225,         sw: 225,
+    westsouthwest: 247,     wsw: 247,
+    west: 270,              w: 270,
+    westnorthwest: 292,     wnw: 292,
+    northwest: 315,         nw: 315,
+    northnorthwest: 337,    nnw: 337
+};
 
 export function osmNode() {
     if (!(this instanceof osmNode)) {
@@ -71,25 +89,6 @@ Object.assign(osmNode.prototype, {
 
         if (val === '') return [];
 
-        var cardinal = {
-            north: 0,               n: 0,
-            northnortheast: 22,     nne: 22,
-            northeast: 45,          ne: 45,
-            eastnortheast: 67,      ene: 67,
-            east: 90,               e: 90,
-            eastsoutheast: 112,     ese: 112,
-            southeast: 135,         se: 135,
-            southsoutheast: 157,    sse: 157,
-            south: 180,             s: 180,
-            southsouthwest: 202,    ssw: 202,
-            southwest: 225,         sw: 225,
-            westsouthwest: 247,     wsw: 247,
-            west: 270,              w: 270,
-            westnorthwest: 292,     wnw: 292,
-            northwest: 315,         nw: 315,
-            northnorthwest: 337,    nnw: 337
-        };
-
 
         var values = val.split(';');
         var results = [];
@@ -141,6 +140,10 @@ Object.assign(osmNode.prototype, {
         return utilArrayUniq(results);
     },
 
+    isCrossing: function(){
+        return this.tags.highway === 'crossing' ||
+               this.tags.railway && this.tags.railway.indexOf('crossing') !== -1;
+    },
 
     isEndpoint: function(resolver) {
         return resolver.transient(this, 'isEndpoint', function() {
@@ -156,15 +159,12 @@ Object.assign(osmNode.prototype, {
         return resolver.transient(this, 'isConnected', function() {
             var parents = resolver.parentWays(this);
 
-            function isLine(entity) {
-                return entity.geometry(resolver) === 'line' &&
-                    entity.hasInterestingTags();
-            }
-
-            // vertex is connected to multiple parent lines
-            if (parents.length > 1 && parents.some(isLine)) {
-                return true;
-
+            if (parents.length > 1) {
+                // vertex is connected to multiple parent ways
+                for (var i in parents) {
+                    if (parents[i].geometry(resolver) === 'line' &&
+                        parents[i].hasInterestingTags()) return true;
+                }
             } else if (parents.length === 1) {
                 var way = parents[0];
                 var nodes = way.nodes.slice();

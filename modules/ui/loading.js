@@ -23,7 +23,7 @@ export function uiLoading(context) {
 
     loadertext
       .append('h3')
-      .text(_message);
+      .html(_message);
 
     _modalSelection.select('button.close')
       .attr('class', 'hide');
@@ -48,6 +48,11 @@ export function uiLoading(context) {
 
   loading.close = () => {
     _modalSelection.remove();
+  };
+
+
+  loading.isShown = () => {
+    return _modalSelection && !_modalSelection.empty() && _modalSelection.node().parentNode;
   };
 
 

@@ -17,15 +17,13 @@ export {
 } from './lanes';
 
 export {
-    osmOldMultipolygonOuterMemberOfRelation,
-    osmIsOldMultipolygonOuterMember,
-    osmOldMultipolygonOuterMember,
     osmJoinWays
 } from './multipolygon';
 
 export {
     osmAreaKeys,
     osmSetAreaKeys,
+    osmTagSuggestingArea,
     osmPointTags,
     osmSetPointTags,
     osmVertexTags,
@@ -34,6 +32,8 @@ export {
     osmOneWayTags,
     osmPavedTags,
     osmIsInterestingTag,
+    osmLifecyclePrefixes,
+    osmRemoveLifecyclePrefix,
     osmRoutableHighwayTagValues,
     osmFlowingWaterwayTagValues,
     osmRailwayTrackTagValues

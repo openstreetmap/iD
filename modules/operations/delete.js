@@ -1,21 +1,19 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionDeleteMultiple } from '../actions/delete_multiple';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent, geoSphericalDistance } from '../geo';
+import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { uiCmd } from '../ui/cmd';
-import { utilGetAllNodes } from '../util';
+import { utilGetAllNodes, utilTotalExtent } from '../util';
 
 
-export function operationDelete(selectedIDs, context) {
+export function operationDelete(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var action = actionDeleteMultiple(selectedIDs);
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
     var operation = function() {
@@ -25,7 +23,7 @@ export function operationDelete(selectedIDs, context) {
         if (selectedIDs.length === 1) {
             var id = selectedIDs[0];
             var entity = context.entity(id);
-            var geometry = context.geometry(id);
+            var geometry = entity.geometry(context.graph());
             var parents = context.graph().parentWays(entity);
             var parent = parents[0];
 
@@ -72,7 +70,7 @@ export function operationDelete(selectedIDs, context) {
 
 
     operation.disabled = function() {
-        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
@@ -133,21 +131,21 @@ export function operationDelete(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.delete.' + disable + '.' + multi) :
-            t('operations.delete.description' + '.' + multi);
+            t.append('operations.delete.' + disable + '.' + multi) :
+            t.append('operations.delete.description.' + multi);
     };
 
 
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
-            t('operations.delete.annotation.' + context.geometry(selectedIDs[0])) :
-            t('operations.delete.annotation.multiple', { n: selectedIDs.length });
+            t('operations.delete.annotation.' + context.graph().geometry(selectedIDs[0])) :
+            t('operations.delete.annotation.feature', { n: selectedIDs.length });
     };
 
 
     operation.id = 'delete';
     operation.keys = [uiCmd('⌘⌫'), uiCmd('⌘⌦'), uiCmd('⌦')];
-    operation.title = t('operations.delete.title');
+    operation.title = t.append('operations.delete.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

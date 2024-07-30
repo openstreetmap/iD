@@ -1,11 +1,12 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { presetManager } from '../../presets';
+import { fileFetcher } from '../../core/file_fetcher';
+import { t } from '../../core/localizer';
 import { JXON } from '../../util/jxon';
 import { actionDiscardTags } from '../../actions/discard_tags';
 import { osmChangeset } from '../../osm';
 import { svgIcon } from '../../svg/icon';
-import { utilDetect } from '../../util/detect';
 import { uiSection } from '../section';
 
 import {
@@ -16,18 +17,16 @@ import {
 
 
 export function uiSectionChanges(context) {
-    var detected = utilDetect();
-
     var _discardTags = {};
-    context.data().get('discarded')
+    fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
     var section = uiSection('changes-list', context)
-        .title(function() {
+        .label(function() {
             var history = context.history();
             var summary = history.difference().summary();
-            return t('commit.changes', { count: summary.length });
+            return t.append('inspector.title_count', { title: t('commit.changes'), count: summary.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -57,26 +56,32 @@ export function uiSectionChanges(context) {
             .append('li')
             .attr('class', 'change-item');
 
-        itemsEnter
+        var buttons = itemsEnter
+            .append('button')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', click);
+
+        buttons
             .each(function(d) {
                 d3_select(this)
                     .call(svgIcon('#iD-icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
             });
 
-        itemsEnter
+        buttons
             .append('span')
             .attr('class', 'change-type')
-            .text(function(d) { return t('commit.' + d.changeType) + ' '; });
+            .html(function(d) { return t.html('commit.' + d.changeType) + ' '; });
 
-        itemsEnter
+        buttons
             .append('strong')
             .attr('class', 'entity-type')
             .text(function(d) {
-                var matched = context.presets().match(d.entity, d.graph);
+                var matched = presetManager.match(d.entity, d.graph);
                 return (matched && matched.name()) || utilDisplayType(d.entity.id);
             });
 
-        itemsEnter
+        buttons
             .append('span')
             .attr('class', 'entity-name')
             .text(function(d) {
@@ -88,18 +93,8 @@ export function uiSectionChanges(context) {
                 return string += ' ' + name;
             });
 
-        itemsEnter
-            .style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
-
         items = itemsEnter
             .merge(items);
-
-        items
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', click);
 
 
         // Download changeset link
@@ -118,23 +113,14 @@ export function uiSectionChanges(context) {
             .append('a')
             .attr('class', 'download-changes');
 
-        if (detected.download) {      // All except IE11 and Edge
-            linkEnter                 // download the data as a file
-                .attr('href', window.URL.createObjectURL(blob))
-                .attr('download', fileName);
-
-        } else {                      // IE11 and Edge
-            linkEnter                 // open data uri in a new tab
-                .attr('target', '_blank')
-                .on('click.download', function() {
-                    navigator.msSaveBlob(blob, fileName);
-                });
-        }
+        linkEnter
+            .attr('href', window.URL.createObjectURL(blob))
+            .attr('download', fileName);
 
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .text(t('commit.download_changes'));
+            .call(t.append('commit.download_changes'));
 
 
         function mouseover(d) {
@@ -152,7 +138,7 @@ export function uiSectionChanges(context) {
         }
 
 
-        function click(change) {
+        function click(d3_event, change) {
             if (change.changeType !== 'deleted') {
                 var entity = change.entity;
                 context.map().zoomToEase(entity);

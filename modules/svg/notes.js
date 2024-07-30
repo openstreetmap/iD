@@ -153,7 +153,9 @@ export function svgNotes(projection, context, dispatch) {
             .attr('x', '-3px')
             .attr('y', '-19px')
             .attr('xlink:href', function(d) {
-                return '#iD-icon-' + (d.id < 0 ? 'plus' : (d.status === 'open' ? 'close' : 'apply'));
+                if (d.id < 0) return '#iD-icon-plus';
+                if (d.status === 'open') return '#iD-icon-close';
+                return '#iD-icon-apply';
             });
 
         // update
@@ -196,7 +198,9 @@ export function svgNotes(projection, context, dispatch) {
 
 
         function sortY(a, b) {
-            return (a.id === selectedID) ? 1 : (b.id === selectedID) ? -1 : b.loc[1] - a.loc[1];
+            if (a.id === selectedID) return 1;
+            if (b.id === selectedID) return -1;
+            return b.loc[1] - a.loc[1];
         }
     }
 

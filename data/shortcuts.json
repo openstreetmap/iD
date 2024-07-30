@@ -15,7 +15,7 @@
             "separator": ","
           },
           {
-            "modifiers": ["⌘"],
+            "modifiers": ["⌥"],
             "shortcuts": ["↓", "↑", "←", "→"],
             "text": "shortcuts.browsing.navigation.pan_more",
             "separator": ","
@@ -26,7 +26,7 @@
             "separator": ","
           },
           {
-            "modifiers": ["⌘"],
+            "modifiers": ["⌥"],
             "shortcuts": ["+", "-"],
             "text": "shortcuts.browsing.navigation.zoom_more",
             "separator": ","
@@ -85,11 +85,7 @@
           {
             "shortcuts": ["map_data.highlight_edits.key"],
             "text": "shortcuts.browsing.display_options.highlight_edits"
-          }
-        ]
-      },
-      {
-        "rows": [
+          },
           {
             "section": "help",
             "text": "shortcuts.browsing.help.title"
@@ -101,13 +97,17 @@
           {
             "shortcuts": ["shortcuts.toggle.key", "?"],
             "text": "shortcuts.browsing.help.keyboard"
-          },
+          }
+        ]
+      },
+      {
+        "rows": [
           {
             "section": "selecting",
             "text": "shortcuts.browsing.selecting.title"
           },
           {
-            "shortcuts": ["Left-click"],
+            "shortcuts": ["Left-click", "Tap", "shortcuts.key.space"],
             "text": "shortcuts.browsing.selecting.select_one"
           },
           {
@@ -131,7 +131,7 @@
             "text": "shortcuts.browsing.with_selected.title"
           },
           {
-            "shortcuts": ["Right-click", "shortcuts.key.space"],
+            "shortcuts": ["Right-click", "Long-press", "☰"],
             "text": "shortcuts.browsing.with_selected.edit_menu"
           },
           {
@@ -159,8 +159,22 @@
             "text": "shortcuts.browsing.vertex_selected.last"
           },
           {
+            "modifiers": ["⌘"],
+            "shortcuts": ["↑"],
+            "text": "shortcuts.browsing.vertex_selected.parent"
+          },
+          {
             "shortcuts": ["\\", "shortcuts.key.pause"],
             "text": "shortcuts.browsing.vertex_selected.change_parent"
+          },
+          {
+            "section": "way_selected",
+            "text": "shortcuts.browsing.way_selected.title"
+          },
+          {
+            "modifiers": ["⌘"],
+            "shortcuts": ["↓"],
+            "text": "shortcuts.browsing.way_selected.child"
           }
         ]
       }
@@ -193,7 +207,7 @@
             "text": "shortcuts.editing.drawing.add_note"
           },
           {
-            "shortcuts": ["Left-click", "shortcuts.key.space"],
+            "shortcuts": ["Left-click", "Tap", "shortcuts.key.space"],
             "text": "shortcuts.editing.drawing.place_point"
           },
           {
@@ -268,6 +282,34 @@
           {
             "shortcuts": ["operations.move.key"],
             "text": "shortcuts.editing.operations.move"
+          },
+          {
+            "shortcuts": ["operations.follow.key"],
+            "text": "shortcuts.editing.operations.follow"
+          },
+          {
+            "modifiers": ["⇧"],
+            "shortcuts": ["↓", "↑", "←", "→"],
+            "text": "shortcuts.editing.operations.nudge",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⌥", "⇧"],
+            "shortcuts": ["↓", "↑", "←", "→"],
+            "text": "shortcuts.editing.operations.nudge_more",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⇧"],
+            "shortcuts": ["+", "-"],
+            "text": "shortcuts.editing.operations.scale",
+            "separator": ","
+          },
+          {
+            "modifiers": ["⌥", "⇧"],
+            "shortcuts": ["+", "-"],
+            "text": "shortcuts.editing.operations.scale_more",
+            "separator": ","
           },
           {
             "shortcuts": ["operations.rotate.key"],

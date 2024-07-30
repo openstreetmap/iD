@@ -1,5 +1,5 @@
 /* photo viewer div */
-#photoviewer {
+.photoviewer {
     position: relative;
     flex-shrink: 0;
     margin-bottom: 10px;
@@ -8,23 +8,23 @@
     padding: 5px;
     background-color: #fff;
 }
-[dir='ltr'] #photoviewer {
+.ideditor[dir='ltr'] .photoviewer {
     margin-left: 10px;
     margin-right: 2px;
 }
-[dir='rtl'] #photoviewer {
+.ideditor[dir='rtl'] .photoviewer {
     margin-right: 10px;
     margin-left: 2px;
 }
 
 @media screen and (min-width: 1600px) {
-    #photoviewer {
+    .photoviewer {
         width: 490px;
         height: 370px;
     }
 }
 
-#photoviewer button.thumb-hide {
+.photoviewer button.thumb-hide {
     border-radius: 0;
     padding: 5px;
     position: absolute;
@@ -33,7 +33,7 @@
     z-index: 50;
 }
 
-#photoviewer button.resize-handle-xy {
+.photoviewer button.resize-handle-xy {
     border-radius: 0;
     position: absolute;
     top: 0;
@@ -44,7 +44,7 @@
     width: 25px;
 }
 
-#photoviewer button.resize-handle-x {
+.photoviewer button.resize-handle-x {
     border-radius: 0;
     position: absolute;
     top: 0;
@@ -56,7 +56,7 @@
     width: 6px;
 }
 
-#photoviewer button.resize-handle-y {
+.photoviewer button.resize-handle-y {
     border-radius: 0;
     position: absolute;
     top: 0;
@@ -68,12 +68,10 @@
 }
 
 
-.photo-wrapper,
-.photo-wrapper img {
+.photo-wrapper {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    object-fit: cover;
 }
 
 .photo-wrapper .photo-attribution {
@@ -87,6 +85,10 @@
     padding: 4px 2px;
     z-index: 10;
 }
+.photo-attribution-dual {
+    display: flex;
+    justify-content: space-between;
+}
 
 .photo-attribution a,
 .photo-attribution a:visited,
@@ -99,8 +101,11 @@
 .viewfield-group {
     pointer-events: none;
 }
-.mode-browse .viewfield-group,
-.mode-select .viewfield-group {
+.ideditor.mode-browse .viewfield-group,
+.ideditor.mode-select .viewfield-group,
+.ideditor.mode-select-data .viewfield-group,
+.ideditor.mode-select-error .viewfield-group,
+.ideditor.mode-select-note .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }
@@ -182,6 +187,18 @@
     stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
 
+/* Vegbilder Image Layer */
+.layer-vegbilder {
+    pointer-events: none;
+}
+.layer-vegbilder .viewfield-group * {
+    fill: #ed9300;
+}
+.layer-vegbilder .sequence {
+    stroke: #ed9300;
+    stroke-opacity: 0.85;  /* bump opacity - only one per road */
+}
+
 
 /* Mapillary Image Layer */
 .layer-mapillary {
@@ -208,27 +225,83 @@
 .layer-mapillary-detections .icon-detected rect {
     fill: none;
 }
-.layer-mapillary-detections .icon-detected:hover rect {
+.layer-mapillary-detections .icon-detected:active {
+    opacity: 1;
+}
+.layer-mapillary-detections .icon-detected:active rect {
     outline: 3px solid rgba(255, 238, 0, 0.6);
+}
+@media (hover: hover) {
+    .layer-mapillary-detections .icon-detected:hover {
+        opacity: 1;
+    }
+    .layer-mapillary-detections .icon-detected:hover rect {
+        outline: 3px solid rgba(255, 238, 0, 0.6);
+    }
+}
+.layer-mapillary-detections .icon-detected.currentView {
+    opacity: 1;
 }
 .layer-mapillary-detections .icon-detected.currentView rect {
     outline: 3px solid rgba(255, 238, 0, 1);
 }
-.layer-mapillary-detections .icon-detected:hover,
-.layer-mapillary-detections .icon-detected.currentView {
-    opacity: 1;
-}
 
 
-/* OpenStreetCam Image Layer */
-.layer-openstreetcam {
+/* KartaView Image Layer */
+.layer-kartaview {
     pointer-events: none;
 }
-.layer-openstreetcam .viewfield-group * {
+.layer-kartaview .viewfield-group * {
     fill: #20c4ff;
 }
-.layer-openstreetcam .sequence {
+.layer-kartaview .sequence {
     stroke: #20c4ff;
+}
+
+
+/* Mapilio Image Layer */
+.layer-mapilio {
+    pointer-events: none;
+}
+.layer-mapilio .viewfield-group * {
+    fill: #0056f1;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-mapilio .sequence {
+    stroke: #0056f1;
+}
+.photo-controls-mapilio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-mapilio button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+.ideditor .mapilio-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#ideditor-viewer-mapilio-simple-wrap {
+    height: 100%;
+}
+#ideditor-viewer-mapilio-simple {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
+#ideditor-viewer-mapilio-simple img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden
 }
 
 
@@ -251,12 +324,17 @@
     text-align: right;
 }
 
-.ms-wrapper .photo-attribution a:active,
-.ms-wrapper .photo-attribution a:hover {
+.ms-wrapper .photo-attribution a:active {
     color: #0fffc4;
 }
+@media (hover: hover) {
+    .ms-wrapper .photo-attribution a:hover {
+        color: #0fffc4;
+    }
+}
 
-.ms-wrapper .pnlm-compass.pnlm-control {
+.ms-wrapper .pnlm-compass.pnlm-control,
+.vegbilder-wrapper  .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
@@ -278,32 +356,44 @@ label.streetside-hires {
     margin: 0 5px;
 }
 
+.pnlm-zoom-controls {
+    margin-top: 6px;
+}
+
 
 /* Mapillary viewer */
-#mly .domRenderer .TagSymbol {
+#ideditor-mly .domRenderer .TagSymbol {
     font-size: 10px;
     background-color: rgba(0,0,0,0.4);
     padding: 0 4px;
     border-radius: 4px;
     top: -25px;
 }
-#mly .domRenderer .Attribution {
-    /* we will roll our own to avoid async update issues like #4526 */
-    display: none;
+
+.mly-wrapper .mapillary-attribution-container {
+    display: flex;
+    align-items: center;
 }
 
-.mly-wrapper .photo-attribution a:active,
-.mly-wrapper .photo-attribution a:hover {
-    color: #35af6d;
+.mly-wrapper .mapillary-attribution-container .mapillary-attribution-icon-container {
+    display: flex;
+    align-items: center;
 }
 
-.mly-wrapper .mapillary-js-dom {
-    z-index: 9;
+.mapillary-attribution-image-container {
+  height: auto;
 }
 
+.mly-wrapper .mapillary-attribution-container .mapillary-attribution-username {
+    padding: 0px 8px 0 6px;
+}
 
-/* OpenStreetCam viewer */
-.osc-wrapper {
+.mly-wrapper .mapillary-attribution-container .mapillary-attribution-date {
+    margin-right: 6px;
+}
+
+/* KartaView viewer */
+.kartaview-wrapper {
     position: relative;
     background-color: #000;
     background-image: url(img/loader-black.gif);
@@ -311,21 +401,48 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
-.osc-wrapper .photo-attribution a:active,
-.osc-wrapper .photo-attribution a:hover {
-    color: #20c4ff;
-}
-
-.osc-image-wrap {
+.kartaview-wrapper img {
     width: 100%;
     height: 100%;
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
+    overflow: hidden;
+    object-fit: cover;
 }
 
+.kartaview-wrapper .photo-attribution a:active {
+    color: #20c4ff;
+}
+@media (hover: hover) {
+    .kartaview-wrapper .photo-attribution a:hover {
+        color: #20c4ff;
+    }
+}
+
+.kartaview-image-wrap {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
+
+.photo-wrapper {
+    position: relative;
+    background-color: #000;
+}
+
+.photoviewer .plane-frame {
+    display: block;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.photoviewer .plane-frame > img.plane-photo{
+    width: auto;
+    height: 100%;
+    transform-origin: 0 0;
+}
 
 /* photo-controls (step forward, back, rotate) */
 .photo-controls-wrap {
@@ -334,17 +451,20 @@ label.streetside-hires {
     top: 10px;
     width: 100%;
     z-index: 10;
+    pointer-events: none;
 }
 
 .photo-controls {
     display: inline-block;
     z-index: 10;
+    pointer-events: initial;
 }
 
 .photo-controls button,
 .photo-controls button:focus {
     height: 18px;
     width: 18px;
+    line-height: 18px;
     background: rgba(0,0,0,0.65);
     color: #eee;
     border-radius: 0;
@@ -355,8 +475,111 @@ label.streetside-hires {
 .photo-controls button:last-of-type {
     border-radius: 0 3px 3px 0;
 }
-.photo-controls button:hover,
 .photo-controls button:active {
     background: rgba(0,0,0,0.85);
     color: #fff;
+}
+@media (hover: hover) {
+    .photo-controls button:hover {
+        background: rgba(0,0,0,0.85);
+        color: #fff;
+    }
+}
+
+/* local georeferenced photos */
+.layer-local-photos {
+    pointer-events: none;
+}
+.layer-local-photos .viewfield-group * {
+    fill: #ed00d9;
+}
+.local-photos {
+    display: flex;
+}
+.local-photos > div {
+    width: 50%;
+}
+.local-photos > div:first-child {
+    margin-right: 20px;
+}
+
+.list-local-photos {
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-x: auto;
+    /* workaround for something like "overflow-x: visible"
+       see https://stackoverflow.com/a/39554003 */
+    margin-left: -100px;
+    padding-left: 100px;
+    margin-top: -20px;
+    padding-top: 20px;
+    min-height: 100px;
+}
+.list-local-photos::-webkit-scrollbar {
+    border-left: none;
+}
+.list-local-photos li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+}
+.list-local-photos span.filename {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    padding-left: 8px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.list-local-photos li:first-child span.filename {
+    border-top: 1px solid #ccc;
+    border-top-left-radius: 4px;
+}
+.list-local-photos li:first-child button {
+    border-top: 1px solid #ccc;
+}
+.list-local-photos li:first-child button.remove {
+    border-top-right-radius: 4px;
+}
+.list-local-photos li:last-child span.filename {
+    border-bottom-left-radius: 4px;
+}
+.list-local-photos li:last-child button.remove {
+    border-bottom-right-radius: 4px;
+}
+.list-local-photos li.invalid button.zoom-to-data {
+    display: none;
+}
+.list-local-photos li button.no-geolocation {
+    display: none;
+}
+.list-local-photos li.invalid button.no-geolocation {
+    display: block;
+    color: red;
+}
+.list-local-photos .placeholder div {
+    display: block;
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(img/loader-black.gif);
+    filter: invert(1);
+}
+.local-photos label.button {
+    background: #7092ff;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 25px;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
 }

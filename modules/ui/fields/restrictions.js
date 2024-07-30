@@ -1,7 +1,9 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select, event as d3_event } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { presetManager } from '../../presets';
+import { prefs } from '../../core/preferences';
+import { t, localizer } from '../../core/localizer';
 import { actionRestrictTurn } from '../../actions/restrict_turn';
 import { actionUnrestrictTurn } from '../../actions/unrestrict_turn';
 import { behaviorBreathe } from '../../behavior/breathe';
@@ -9,7 +11,6 @@ import { geoExtent, geoRawMercator, geoVecScale, geoVecSubtract, geoZoomToScale 
 import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
 import { svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
 import { utilDisplayName, utilDisplayType, utilEntitySelector, utilFunctor, utilRebind } from '../../util';
-import { utilDetect } from '../../util/detect';
 import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
@@ -17,9 +18,9 @@ export function uiFieldRestrictions(field, context) {
     var dispatch = d3_dispatch('change');
     var breathe = behaviorBreathe(context);
 
-    context.storage('turn-restriction-via-way', null);                 // remove old key
-    var storedViaWay = context.storage('turn-restriction-via-way0');   // use new key #6922
-    var storedDistance = context.storage('turn-restriction-distance');
+    prefs('turn-restriction-via-way', null);                 // remove old key
+    var storedViaWay = prefs('turn-restriction-via-way0');   // use new key #6922
+    var storedDistance = prefs('turn-restriction-distance');
 
     var _maxViaWay = storedViaWay !== null ? (+storedViaWay) : 0;
     var _maxDistance = storedDistance ? (+storedDistance) : 30;
@@ -52,9 +53,7 @@ export function uiFieldRestrictions(field, context) {
             _intersection.vertices.length &&           // has vertices
             _intersection.vertices                     // has the vertex that the user selected
                 .filter(function(vertex) { return vertex.id === _vertexID; }).length &&
-            _intersection.ways.length > 2 &&           // has more than 2 ways
-            _intersection.ways                         // has more than 1 TO way
-                .filter(function(way) { return way.__to; }).length > 1
+            _intersection.ways.length > 2              // has more than 2 ways
         );
 
         // Also hide in the case where
@@ -62,7 +61,7 @@ export function uiFieldRestrictions(field, context) {
 
         // if form field is hidden or has detached from dom, clean up.
         if (!isOK ||
-            !d3_select('.inspector-wrap.inspector-hidden').empty() ||
+            !context.container().select('.inspector-wrap.inspector-hidden').empty() ||
             !selection.node().parentNode ||
             !selection.node().parentNode.parentNode) {
             selection.call(restrictions.off);
@@ -123,7 +122,7 @@ export function uiFieldRestrictions(field, context) {
         distControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-distance-label')
-            .text(t('restriction.controls.distance') + ':');
+            .call(t.append('restriction.controls.distance', { suffix: ':' }));
 
         distControlEnter
             .append('input')
@@ -145,12 +144,12 @@ export function uiFieldRestrictions(field, context) {
                 _maxDistance = +val;
                 _intersection = null;
                 _container.selectAll('.layer-osm .layer-turns *').remove();
-                context.storage('turn-restriction-distance', _maxDistance);
+                prefs('turn-restriction-distance', _maxDistance);
                 _parent.call(restrictions);
             });
 
         selection.selectAll('.restriction-distance-text')
-            .text(displayMaxDistance(_maxDistance));
+            .call(displayMaxDistance(_maxDistance));
 
 
         var viaControl = selection.selectAll('.restriction-via-way')
@@ -166,7 +165,7 @@ export function uiFieldRestrictions(field, context) {
         viaControlEnter
             .append('span')
             .attr('class', 'restriction-control-label restriction-via-way-label')
-            .text(t('restriction.controls.via') + ':');
+            .call(t.append('restriction.controls.via', { suffix: ':' }));
 
         viaControlEnter
             .append('input')
@@ -187,12 +186,12 @@ export function uiFieldRestrictions(field, context) {
                 var val = d3_select(this).property('value');
                 _maxViaWay = +val;
                 _container.selectAll('.layer-osm .layer-turns *').remove();
-                context.storage('turn-restriction-via-way0', _maxViaWay);
+                prefs('turn-restriction-via-way0', _maxViaWay);
                 _parent.call(restrictions);
             });
 
         selection.selectAll('.restriction-via-way-text')
-            .text(displayMaxVia(_maxViaWay));
+            .call(displayMaxVia(_maxViaWay));
     }
 
 
@@ -205,11 +204,11 @@ export function uiFieldRestrictions(field, context) {
 
         // Reflow warning: `utilGetDimensions` calls `getBoundingClientRect`
         // Instead of asking the restriction-container for its dimensions,
-        //  we can ask the #sidebar, which can have its dimensions cached.
+        //  we can ask the .sidebar, which can have its dimensions cached.
         // width: calc as sidebar - padding
         // height: hardcoded (from `80_app.css`)
         // var d = utilGetDimensions(selection);
-        var sdims = utilGetDimensions(d3_select('#sidebar'));
+        var sdims = utilGetDimensions(context.container().select('.sidebar'));
         var d = [ sdims[0] - 50, 370 ];
         var c = geoVecScale(d, 0.5);
         var z = 22;
@@ -222,22 +221,24 @@ export function uiFieldRestrictions(field, context) {
             extent._extend(_intersection.vertices[i].extent());
         }
 
+        var padTop = 35; // reserve top space for hint text
+
         // If this is a large intersection, adjust zoom to fit extent
         if (_intersection.vertices.length > 1) {
-            var padding = 180;   // in z22 pixels
+            var hPadding = Math.min(160, Math.max(110, d[0] * 0.4));
+            var vPadding = 160;
             var tl = projection([extent[0][0], extent[1][1]]);
             var br = projection([extent[1][0], extent[0][1]]);
-            var hFactor = (br[0] - tl[0]) / (d[0] - padding);
-            var vFactor = (br[1] - tl[1]) / (d[1] - padding);
+            var hFactor = (br[0] - tl[0]) / (d[0] - hPadding);
+            var vFactor = (br[1] - tl[1]) / (d[1] - vPadding - padTop);
             var hZoomDiff = Math.log(Math.abs(hFactor)) / Math.LN2;
             var vZoomDiff = Math.log(Math.abs(vFactor)) / Math.LN2;
             z = z - Math.max(hZoomDiff, vZoomDiff);
             projection.scale(geoZoomToScale(z));
         }
 
-        var padTop = 35;   // reserve top space for hint text
         var extentCenter = projection(extent.center());
-        extentCenter[1] = extentCenter[1] - padTop;
+        extentCenter[1] = extentCenter[1] - padTop / 2;
 
         projection
             .translate(geoVecSubtract(c, extentCenter))
@@ -288,8 +289,9 @@ export function uiFieldRestrictions(field, context) {
             .selectAll('.related')
             .classed('related', false);
 
+        var way;
         if (_fromWayID) {
-            var way = vgraph.entity(_fromWayID);
+            way = vgraph.entity(_fromWayID);
             surface
                 .selectAll('.' + _fromWayID)
                 .classed('selected', true)
@@ -304,7 +306,7 @@ export function uiFieldRestrictions(field, context) {
         updateHints(null);
 
 
-        function click() {
+        function click(d3_event) {
             surface
                 .call(breathe.off)
                 .call(breathe);
@@ -396,7 +398,7 @@ export function uiFieldRestrictions(field, context) {
         }
 
 
-        function mouseover() {
+        function mouseover(d3_event) {
             var datum = d3_event.target.__data__;
             updateHints(datum);
         }
@@ -407,7 +409,7 @@ export function uiFieldRestrictions(field, context) {
             var xPos = -1;
 
             if (minChange) {
-                xPos = utilGetDimensions(d3_select('#sidebar'))[0];
+                xPos = utilGetDimensions(context.container().select('.sidebar'))[0];
             }
 
             if (!minChange || (minChange && Math.abs(xPos - _lastXPos) >= minChange)) {
@@ -459,7 +461,7 @@ export function uiFieldRestrictions(field, context) {
 
             var placeholders = {};
             ['from', 'via', 'to'].forEach(function(k) {
-                placeholders[k] = '<span class="qualifier">' + t('restriction.help.' + k) + '</span>';
+                placeholders[k] = { html: '<span class="qualifier">' + t('restriction.help.' + k) + '</span>' };
             });
 
             var entity = datum && datum.properties && datum.properties.entity;
@@ -486,7 +488,7 @@ export function uiFieldRestrictions(field, context) {
                 var clickSelect = (!_fromWayID || _fromWayID !== way.id);
                 help
                     .append('div')      // "Click to select FROM {fromName}." / "FROM {fromName}"
-                    .html(t('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
+                    .html(t.html('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
                         from: placeholders.from,
                         fromName: displayName(way.id, vgraph)
                     }));
@@ -496,31 +498,31 @@ export function uiFieldRestrictions(field, context) {
             } else if (datum instanceof osmTurn) {
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
                 var turnType = restrictionType.replace(/^(only|no)\_/, '');
-                var indirect = (datum.direct === false ? t('restriction.help.indirect') : '');
+                var indirect = (datum.direct === false ? t.html('restriction.help.indirect') : '');
                 var klass, turnText, nextText;
 
                 if (datum.no) {
                     klass = 'restrict';
-                    turnText = t('restriction.help.turn.no_' + turnType, { indirect: indirect });
-                    nextText = t('restriction.help.turn.only_' + turnType, { indirect: '' });
+                    turnText = t.html('restriction.help.turn.no_' + turnType, { indirect: { html: indirect } });
+                    nextText = t.html('restriction.help.turn.only_' + turnType, { indirect: '' });
                 } else if (datum.only) {
                     klass = 'only';
-                    turnText = t('restriction.help.turn.only_' + turnType, { indirect: indirect });
-                    nextText = t('restriction.help.turn.allowed_' + turnType, { indirect: '' });
+                    turnText = t.html('restriction.help.turn.only_' + turnType, { indirect: { html: indirect } });
+                    nextText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: '' });
                 } else {
                     klass = 'allow';
-                    turnText = t('restriction.help.turn.allowed_' + turnType, { indirect: indirect });
-                    nextText = t('restriction.help.turn.no_' + turnType, { indirect: '' });
+                    turnText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: { html: indirect } });
+                    nextText = t.html('restriction.help.turn.no_' + turnType, { indirect: '' });
                 }
 
                 help
                     .append('div')      // "NO Right Turn (indirect)"
                     .attr('class', 'qualifier ' + klass)
-                    .text(turnText);
+                    .html(turnText);
 
                 help
                     .append('div')      // "FROM {fromName} TO {toName}"
-                    .html(t('restriction.help.from_name_to_name', {
+                    .html(t.html('restriction.help.from_name_to_name', {
                         from: placeholders.from,
                         fromName: displayName(datum.from.way, vgraph),
                         to: placeholders.to,
@@ -532,13 +534,15 @@ export function uiFieldRestrictions(field, context) {
                     for (var i = 0; i < datum.via.ways.length; i++) {
                         var prev = names[names.length - 1];
                         var curr = displayName(datum.via.ways[i], vgraph);
-                        if (!prev || curr !== prev)   // collapse identical names
+                        if (!prev || curr !== prev) {
+                            // collapse identical names
                             names.push(curr);
+                        }
                     }
 
                     help
                         .append('div')      // "VIA {viaNames}"
-                        .html(t('restriction.help.via_names', {
+                        .html(t.html('restriction.help.via_names', {
                             via: placeholders.via,
                             viaNames: names.join(', ')
                         }));
@@ -547,7 +551,7 @@ export function uiFieldRestrictions(field, context) {
                 if (!indirect) {
                     help
                         .append('div')      // Click for "No Right Turn"
-                        .text(t('restriction.help.toggle', { turn: nextText.trim() }));
+                        .html(t.html('restriction.help.toggle', { turn: { html: nextText.trim() } }));
                 }
 
                 highlightPathsFrom(null);
@@ -565,7 +569,7 @@ export function uiFieldRestrictions(field, context) {
                 if (_fromWayID) {
                     help
                         .append('div')      // "FROM {fromName}"
-                        .html(t('restriction.help.from_name', {
+                        .html(t.html('restriction.help.from_name', {
                             from: placeholders.from,
                             fromName: displayName(_fromWayID, vgraph)
                         }));
@@ -573,7 +577,7 @@ export function uiFieldRestrictions(field, context) {
                 } else {
                     help
                         .append('div')      // "Click to select a FROM segment."
-                        .html(t('restriction.help.select_from', {
+                        .html(t.html('restriction.help.select_from', {
                             from: placeholders.from
                         }));
                 }
@@ -583,33 +587,40 @@ export function uiFieldRestrictions(field, context) {
 
 
     function displayMaxDistance(maxDist) {
-        var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
-        var opts;
+        return selection => {
+            var isImperial = !localizer.usesMetric();
+            var opts;
 
-        if (isImperial) {
-            var distToFeet = {   // imprecise conversion for prettier display
-                20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
-            }[maxDist];
-            opts = { distance: t('units.feet', { quantity: distToFeet }) };
-        } else {
-            opts = { distance: t('units.meters', { quantity: maxDist }) };
-        }
+            if (isImperial) {
+                var distToFeet = {   // imprecise conversion for prettier display
+                    20: 70, 25: 85, 30: 100, 35: 115, 40: 130, 45: 145, 50: 160
+                }[maxDist];
+                opts = { distance: t('units.feet', { quantity: distToFeet }) };
+            } else {
+                opts = { distance: t('units.meters', { quantity: maxDist }) };
+            }
 
-        return t('restriction.controls.distance_up_to', opts);
+            return selection
+                .html('')
+                .call(t.append('restriction.controls.distance_up_to', opts));
+        };
     }
 
 
     function displayMaxVia(maxVia) {
-        return maxVia === 0 ? t('restriction.controls.via_node_only')
-            : maxVia === 1 ? t('restriction.controls.via_up_to_one')
-            : t('restriction.controls.via_up_to_two');
+        return selection => {
+            selection = selection.html('');
+            return maxVia === 0 ? selection.call(t.append('restriction.controls.via_node_only'))
+                : maxVia === 1 ? selection.call(t.append('restriction.controls.via_up_to_one'))
+                : selection.call(t.append('restriction.controls.via_up_to_two'));
+        };
     }
 
 
     function displayName(entityID, graph) {
         var entity = graph.entity(entityID);
         var name = utilDisplayName(entity) || '';
-        var matched = context.presets().match(entity, graph);
+        var matched = presetManager.match(entity, graph);
         var type = (matched && matched.name()) || utilDisplayType(entity.id);
         return name || type;
     }

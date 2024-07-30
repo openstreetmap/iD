@@ -1,10 +1,10 @@
 import {
-  event as d3_event,
   select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { modeSelect } from '../modes/select';
-import { t } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
 
@@ -14,15 +14,15 @@ export function uiKeepRightDetails(context) {
 
   function issueDetail(d) {
     const { itemType, parentIssueType } = d;
-    const unknown = t('inspector.unknown');
+    const unknown = { html: t.html('inspector.unknown') };
     let replacements = d.replacements || {};
     replacements.default = unknown;  // special key `default` works as a fallback string
 
-    let detail = t(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
-    if (detail === unknown) {
-      detail = t(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
+    if (localizer.hasTextForStringId(`QA.keepRight.errorTypes.${itemType}.title`)) {
+      return t.html(`QA.keepRight.errorTypes.${itemType}.description`, replacements);
+    } else {
+      return t.html(`QA.keepRight.errorTypes.${parentIssueType}.description`, replacements);
     }
-    return detail;
   }
 
 
@@ -47,7 +47,7 @@ export function uiKeepRightDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .text(() => t('QA.keepRight.detail_description'));
+        .call(t.append('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')
@@ -57,6 +57,7 @@ export function uiKeepRightDetails(context) {
     // If there are entity links in the error message..
     let relatedEntities = [];
     descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+      .attr('href', '#')
       .each(function() {
         const link = d3_select(this);
         const isObjectLink = link.classed('error_object_link');
@@ -75,7 +76,7 @@ export function uiKeepRightDetails(context) {
           .on('mouseleave', () => {
             utilHighlightEntities([entityID], false, context);
           })
-          .on('click', () => {
+          .on('click', (d3_event) => {
             d3_event.preventDefault();
 
             utilHighlightEntities([entityID], false, context);
@@ -90,8 +91,10 @@ export function uiKeepRightDetails(context) {
             if (entity) {
               context.enter(modeSelect(context, [entityID]));
             } else {
-              context.loadEntity(entityID, () => {
-                context.enter(modeSelect(context, [entityID]));
+              context.loadEntity(entityID, (err, result) => {
+                if (err) return;
+                const entity = result.data.find(e => e.id === entityID);
+                if (entity) context.enter(modeSelect(context, [entityID]));
               });
             }
           });
@@ -102,7 +105,7 @@ export function uiKeepRightDetails(context) {
           let name = utilDisplayName(entity);  // try to use common name
 
           if (!name && !isObjectLink) {
-            const preset = context.presets().match(entity, context.graph());
+            const preset = presetManager.match(entity, context.graph());
             name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
           }
 

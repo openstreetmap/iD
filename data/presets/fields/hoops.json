@@ -1,7 +1,0 @@
-{
-    "key": "hoops",
-    "type": "number",
-    "minValue": 0,
-    "label": "Hoops",
-    "placeholder": "1, 2, 4..."
-}

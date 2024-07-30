@@ -1,23 +1,25 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { marked } from 'marked';
 
-import { t } from '../../util/locale';
+import { prefs } from '../../core/preferences';
+import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
 
 
-export function uiSettingsCustomBackground(context) {
+export function uiSettingsCustomBackground() {
     var dispatch = d3_dispatch('change');
 
     function render(selection) {
         // keep separate copies of original and current settings
         var _origSettings = {
-            template: context.storage('background-custom-template')
+            template: prefs('background-custom-template')
         };
         var _currSettings = {
-            template: context.storage('background-custom-template')
+            template: prefs('background-custom-template')
         };
 
-        var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+        var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
         var modal = uiConfirm(selection).okButton();
 
         modal
@@ -25,15 +27,34 @@ export function uiSettingsCustomBackground(context) {
 
         modal.select('.modal-section.header')
             .append('h3')
-            .text(t('settings.custom_background.header'));
+            .call(t.append('settings.custom_background.header'));
 
 
         var textSection = modal.select('.modal-section.message-text');
 
+        var instructions =
+            `${t.html('settings.custom_background.instructions.info')}\n` +
+            '\n' +
+            `#### ${t.html('settings.custom_background.instructions.wms.tokens_label')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.proj')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.wkid')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.dimensions')}\n` +
+            `* ${t.html('settings.custom_background.instructions.wms.tokens.bbox')}\n` +
+            '\n' +
+            `#### ${t.html('settings.custom_background.instructions.tms.tokens_label')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.xyz')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.flipped_y')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.switch')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.quadtile')}\n` +
+            `* ${t.html('settings.custom_background.instructions.tms.tokens.scale_factor')}\n` +
+            '\n' +
+            `#### ${t.html('settings.custom_background.instructions.example')}\n` +
+            `\`${example}\``;
+
         textSection
-            .append('pre')
+            .append('div')
             .attr('class', 'instructions-template')
-            .text(t('settings.custom_background.instructions', { example: example }));
+            .html(marked(instructions));
 
         textSection
             .append('textarea')
@@ -49,7 +70,7 @@ export function uiSettingsCustomBackground(context) {
         buttonSection
             .insert('button', '.ok-button')
             .attr('class', 'button cancel-button secondary-action')
-            .text(t('confirm.cancel'));
+            .call(t.append('confirm.cancel'));
 
 
         buttonSection.select('.cancel-button')
@@ -68,7 +89,7 @@ export function uiSettingsCustomBackground(context) {
         // restore the original template
         function clickCancel() {
             textSection.select('.field-template').property('value', _origSettings.template);
-            context.storage('background-custom-template', _origSettings.template);
+            prefs('background-custom-template', _origSettings.template);
             this.blur();
             modal.close();
         }
@@ -76,7 +97,7 @@ export function uiSettingsCustomBackground(context) {
         // accept the current template
         function clickSave() {
             _currSettings.template = textSection.select('.field-template').property('value');
-            context.storage('background-custom-template', _currSettings.template);
+            prefs('background-custom-template', _currSettings.template);
             this.blur();
             modal.close();
             dispatch.call('change', this, _currSettings);

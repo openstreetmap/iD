@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util';
 import { validationIssue } from '../core/validation';
 
@@ -16,28 +16,28 @@ export function validationFormatting() {
             // An empty value is also acceptable
             return (!email || valid_email.test(email));
         }
-        /*
-        function isSchemePresent(url) {
-            var valid_scheme = /^https?:\/\//i;
-            return (!url || valid_scheme.test(url));
-        }
-        */
+
         function showReferenceEmail(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.invalid_format.email.reference'));
+                .call(t.append('issues.invalid_format.email.reference'));
         }
-        /*
+
+        /* see https://github.com/openstreetmap/iD/issues/6831#issuecomment-537121379
+        function isSchemePresent(url) {
+            var valid_scheme = /^https?:\/\//i;
+            return (!url || valid_scheme.test(url));
+        }
         function showReferenceWebsite(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.invalid_format.website.reference'));
+                .call(t.append('issues.invalid_format.website.reference'));
         }
 
         if (entity.tags.website) {
@@ -55,8 +55,8 @@ export function validationFormatting() {
                     severity: 'warning',
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t('issues.invalid_format.website.message' + this.data,
-                            { feature: utilDisplayLabel(entity, context), site: websites.join(', ') }) : '';
+                        return entity ? t.append('issues.invalid_format.website.message' + this.data,
+                            { feature: utilDisplayLabel(entity, context.graph()), site: websites.join(', ') }) : '';
                     },
                     reference: showReferenceWebsite,
                     entityIds: [entity.id],
@@ -64,8 +64,8 @@ export function validationFormatting() {
                     data: (websites.length > 1) ? '_multi' : ''
                 }));
             }
-        }
-        */
+        }*/
+
         if (entity.tags.email) {
             // Multiple emails are possible
             var emails = entity.tags.email
@@ -80,8 +80,8 @@ export function validationFormatting() {
                     severity: 'warning',
                     message: function(context) {
                         var entity = context.hasEntity(this.entityIds[0]);
-                        return entity ? t('issues.invalid_format.email.message' + this.data,
-                            { feature: utilDisplayLabel(entity, context), email: emails.join(', ') }) : '';
+                        return entity ? t.append('issues.invalid_format.email.message' + this.data,
+                            { feature: utilDisplayLabel(entity, context.graph()), email: emails.join(', ') }) : '';
                     },
                     reference: showReferenceEmail,
                     entityIds: [entity.id],

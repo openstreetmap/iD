@@ -1,8 +1,8 @@
 describe('iD.uiFieldWikipedia', function() {
-    var entity, context, selection, field, server;
+    var entity, context, selection, field;
 
     before(function() {
-        iD.data.wmf_sitematrix = [
+        iD.fileFetcher.cache().wmf_sitematrix = [
           ['German','Deutsch','de'],
           ['English','English','en']
         ];
@@ -11,14 +11,14 @@ describe('iD.uiFieldWikipedia', function() {
     });
 
     after(function() {
-        delete iD.data.wmf_sitematrix;
+        delete iD.fileFetcher.cache().wmf_sitematrix;
         delete iD.services.wikipedia;
         delete iD.services.wikidata;
     });
 
     beforeEach(function() {
         entity = iD.osmNode({id: 'n12345'});
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         context.history().merge([entity]);
         selection = d3.select(document.createElement('div'));
         field = iD.presetField('wikipedia', {
@@ -26,11 +26,16 @@ describe('iD.uiFieldWikipedia', function() {
             keys: ['wikipedia', 'wikidata'],
             type: 'wikipedia'
         });
-        server = createServer({ respondImmediately: true });
+        fetchMock.reset();
+        fetchMock.mock(new RegExp('\/w\/api\.php.*action=wbgetentities'), {
+            body: '{"entities":{"Q216353":{"id":"Q216353"}}}',
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
     });
 
     afterEach(function() {
-        server.restore();
+        fetchMock.reset();
     });
 
 
@@ -54,19 +59,6 @@ describe('iD.uiFieldWikipedia', function() {
             context.perform(iD.actionChangeTags(e.id, tags), annotation);
         }
     }
-
-    function createServer(options) {  // eslint-disable-line no-unused-vars
-        // note - currently skipping the tests that use `options` to delay responses
-        // var server =  sinon.fakeServer.create(options);
-        var server = window.fakeFetch().create();
-        server.respondWith('GET',
-            new RegExp('\/w\/api\.php.*action=wbgetentities'),
-            [200, { 'Content-Type': 'application/json' },
-                '{"entities":{"Q216353":{"id":"Q216353"}}}']
-        );
-        return server;
-    }
-
 
     it('recognizes lang:title format', function(done) {
         var wikipedia = iD.uiFieldWikipedia(field, context);
@@ -121,6 +113,49 @@ describe('iD.uiFieldWikipedia', function() {
         }, 20);
     });
 
+    describe('encodePath', function() {
+        it('returns an encoded URI component that contains the title with spaces replaced by underscores', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodePath('? (film)', undefined)).to.equal('%3F_(film)');
+            done();
+        });
+
+        it('returns an encoded URI component that includes an anchor fragment', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            // this can be tested manually by entering '? (film)#Themes and style in the search box before focusing out'
+            expect(wikipedia.encodePath('? (film)', 'Themes and style')).to.equal('%3F_(film)#Themes_and_style');
+            done();
+        });
+    });
+
+    describe('encodeURIAnchorFragment', function() {
+        it('returns an encoded URI anchor fragment', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            // this can be similarly tested by entering 'Section#Arts, entertainment and media' in the search box before focusing out'
+            expect(wikipedia.encodeURIAnchorFragment('Theme?')).to.equal('#Theme%3F');
+            done();
+        });
+
+        it('replaces all whitespace characters with underscore', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodeURIAnchorFragment('Themes And Styles')).to.equal('#Themes_And_Styles');
+            done();
+        });
+
+        it('encodes % characters, does not replace them with a dot', function(done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodeURIAnchorFragment('Is%this_100% correct')).to.equal('#Is%25this_100%25_correct');
+            done();
+        });
+
+        it('encodes characters that are URI encoded characters', function (done) {
+            var wikipedia = iD.uiFieldWikipedia(field, context).entityIDs([entity.id]);
+            expect(wikipedia.encodeURIAnchorFragment('Section %20%25')).to.equal('#Section_%2520%2525');
+            done();
+        });
+    });
+
+    // note - currently skipping the tests that use `options` to delay responses
     it('preserves existing language', function(done) {
         var wikipedia1 = iD.uiFieldWikipedia(field, context);
         window.setTimeout(function() {   // async, so data will be available
@@ -146,7 +181,14 @@ describe('iD.uiFieldWikipedia', function() {
         wikipedia.on('change.spy', spy);
 
         // Create an XHR server that will respond after 60ms
-        createServer({ autoRespond: true, autoRespondAfter: 60 });
+        fetchMock.reset();
+        fetchMock.mock(new RegExp('\/w\/api\.php.*action=wbgetentities'), {
+            body: '{"entities":{"Q216353":{"id":"Q216353"}}}',
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        }, {
+            delay: 60
+        });
 
         // Set title to "Skip"
         iD.utilGetSetValue(selection.selectAll('.wiki-lang'), 'Deutsch');
@@ -159,7 +201,14 @@ describe('iD.uiFieldWikipedia', function() {
 
         // Create a new XHR server that will respond after 60ms to
         // separate requests after this point from those before
-        createServer({ autoRespond: true, autoRespondAfter: 60 });
+        fetchMock.reset();
+        fetchMock.mock(new RegExp('\/w\/api\.php.*action=wbgetentities'), {
+            body: '{"entities":{"Q216353":{"id":"Q216353"}}}',
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        }, {
+            delay: 60
+        });
 
         // t30:  graph change - Set title to "Title"
         window.setTimeout(function() {

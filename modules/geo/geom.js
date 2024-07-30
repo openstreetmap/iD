@@ -326,14 +326,18 @@ export function geoViewportEdge(point, dimensions) {
     var x = 0;
     var y = 0;
 
-    if (point[0] > dimensions[0] - pad[1])
+    if (point[0] > dimensions[0] - pad[1]) {
         x = -10;
-    if (point[0] < pad[3])
+    }
+    if (point[0] < pad[3]) {
         x = 10;
-    if (point[1] > dimensions[1] - pad[2])
+    }
+    if (point[1] > dimensions[1] - pad[2]) {
         y = -10;
-    if (point[1] < pad[0])
+    }
+    if (point[1] < pad[0]) {
         y = 10;
+    }
 
     if (x || y) {
         return [x, y];

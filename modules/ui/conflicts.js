@@ -1,16 +1,14 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg/icon';
-import { utilDetect } from '../util/detect';
 
 import {
     utilEntityOrMemberSelector,
@@ -25,6 +23,7 @@ export function uiConflicts(context) {
     var keybinding = utilKeybinding('conflicts');
     var _origChanges;
     var _conflictList;
+    var _shownConflictIndex;
 
 
     function keybindingOn() {
@@ -60,12 +59,13 @@ export function uiConflicts(context) {
         headerEnter
             .append('button')
             .attr('class', 'fr')
+            .attr('title', t('icons.close'))
             .on('click', cancel)
             .call(svgIcon('#iD-icon-close'));
 
         headerEnter
-            .append('h3')
-            .text(t('save.conflict.header'));
+            .append('h2')
+            .call(t.append('save.conflict.header'));
 
         var bodyEnter = selection.selectAll('.body')
             .data([0])
@@ -76,11 +76,10 @@ export function uiConflicts(context) {
         var conflictsHelpEnter = bodyEnter
             .append('div')
             .attr('class', 'conflicts-help')
-            .text(t('save.conflict.help'));
+            .call(t.append('save.conflict.help'));
 
 
         // Download changes link
-        var detected = utilDetect();
         var changeset = new osmChangeset();
 
         delete changeset.id;  // Export without changeset_id
@@ -93,23 +92,15 @@ export function uiConflicts(context) {
             .append('a')
             .attr('class', 'download-changes');
 
-        if (detected.download) {      // All except IE11 and Edge
-            linkEnter                 // download the data as a file
-                .attr('href', window.URL.createObjectURL(blob))
-                .attr('download', fileName);
-
-        } else {                      // IE11 and Edge
-            linkEnter                 // open data uri in a new tab
-                .attr('target', '_blank')
-                .on('click.download', function() {
-                    navigator.msSaveBlob(blob, fileName);
-                });
-        }
+        // download the data as a file
+        linkEnter
+            .attr('href', window.URL.createObjectURL(blob))
+            .attr('download', fileName);
 
         linkEnter
             .call(svgIcon('#iD-icon-load', 'inline'))
             .append('span')
-            .text(t('save.conflict.download_changes'));
+            .call(t.append('save.conflict.download_changes'));
 
 
         bodyEnter
@@ -122,7 +113,7 @@ export function uiConflicts(context) {
             .attr('class', 'conflicts-done')
             .attr('opacity', 0)
             .style('display', 'none')
-            .text(t('save.conflict.done'));
+            .call(t.append('save.conflict.done'));
 
         var buttonsEnter = bodyEnter
             .append('div')
@@ -132,19 +123,20 @@ export function uiConflicts(context) {
             .append('button')
             .attr('disabled', _conflictList.length > 1)
             .attr('class', 'action conflicts-button col6')
-            .text(t('save.title'))
+            .call(t.append('save.title'))
             .on('click.try_again', tryAgain);
 
         buttonsEnter
             .append('button')
             .attr('class', 'secondary-action conflicts-button col6')
-            .text(t('confirm.cancel'))
+            .call(t.append('confirm.cancel'))
             .on('click.cancel', cancel);
     }
 
 
     function showConflict(selection, index) {
         index = utilWrap(index, _conflictList.length);
+        _shownConflictIndex = index;
 
         var parent = d3_select(selection.node().parentNode);
 
@@ -175,14 +167,14 @@ export function uiConflicts(context) {
         conflictEnter
             .append('h4')
             .attr('class', 'conflict-count')
-            .text(t('save.conflict.count', { num: index + 1, total: _conflictList.length }));
+            .call(t.append('save.conflict.count', { num: index + 1, total: _conflictList.length }));
 
         conflictEnter
             .append('a')
             .attr('class', 'conflict-description')
             .attr('href', '#')
             .text(function(d) { return d.name; })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
                 zoomToEntity(d.id);
             });
@@ -213,17 +205,16 @@ export function uiConflicts(context) {
             .data(['previous', 'next'])
             .enter()
             .append('button')
-            .text(function(d) { return t('save.conflict.' + d); })
             .attr('class', 'conflict-nav-button action col6')
             .attr('disabled', function(d, i) {
                 return (i === 0 && index === 0) ||
                     (i === 1 && index === _conflictList.length - 1) || null;
             })
-            .on('click', function(d, i) {
+            .on('click', function(d3_event, d) {
                 d3_event.preventDefault();
 
                 var container = parent.selectAll('.conflict-container');
-                var sign = (i === 0 ? -1 : 1);
+                var sign = (d === 'previous' ? -1 : 1);
 
                 container
                     .selectAll('.conflict')
@@ -231,7 +222,8 @@ export function uiConflicts(context) {
 
                 container
                     .call(showConflict, index + sign);
-            });
+            })
+            .each(function(d) { t.append('save.conflict.' + d)(d3_select(this)); });
 
     }
 
@@ -255,10 +247,10 @@ export function uiConflicts(context) {
             .append('input')
             .attr('type', 'radio')
             .attr('name', function(d) { return d.id; })
-            .on('change', function(d, i) {
+            .on('change', function(d3_event, d) {
                 var ul = this.parentNode.parentNode.parentNode;
-                ul.__data__.chosen = i;
-                choose(ul, d);
+                ul.__data__.chosen = d.id;
+                choose(d3_event, ul, d);
             });
 
         labelEnter
@@ -268,16 +260,16 @@ export function uiConflicts(context) {
         // update
         choicesEnter
             .merge(choices)
-            .each(function(d, i) {
+            .each(function(d) {
                 var ul = this.parentNode;
-                if (ul.__data__.chosen === i) {
-                    choose(ul, d);
+                if (ul.__data__.chosen === d.id) {
+                    choose(null, ul, d);
                 }
             });
     }
 
 
-    function choose(ul, datum) {
+    function choose(d3_event, ul, datum) {
         if (d3_event) d3_event.preventDefault();
 
         d3_select(ul)
@@ -340,6 +332,14 @@ export function uiConflicts(context) {
         if (!arguments.length) return _origChanges;
         _origChanges = _;
         return conflicts;
+    };
+
+
+    conflicts.shownEntityIds = function() {
+        if (_conflictList && typeof _shownConflictIndex === 'number') {
+            return [_conflictList[_shownConflictIndex].id];
+        }
+        return [];
     };
 
 

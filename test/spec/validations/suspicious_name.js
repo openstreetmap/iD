@@ -2,15 +2,43 @@ describe('iD.validations.suspicious_name', function () {
     var context;
 
     before(function() {
-        iD.data.nsi_filters = { discardNames: ['^stores?$'] };
+        iD.services.nsi = iD.serviceNsi;
+        iD.fileFetcher.cache().nsi_presets = { presets: {} };
+        iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
+        iD.fileFetcher.cache().nsi_dissolved = { dissolved: {} };
+        iD.fileFetcher.cache().nsi_replacements = { replacements: {} };
+
+        iD.fileFetcher.cache().nsi_trees = {
+          trees: {
+            brands: {
+              mainTag: 'brand:wikidata'
+            }
+          }
+        };
+        iD.fileFetcher.cache().nsi_data = {
+          nsi: {
+            'brands/shop/supermarket': {
+              properties: {
+                path: 'brands/shop/supermarket',
+                exclude: {
+                  generic: ['^(mini|super)?\\s?(market|mart|mercado)( municipal)?$' ],
+                  named: ['^(famiglia cooperativa|семейный)$']
+                }
+              }
+            }
+          }
+        };
+        iD.fileFetcher.cache().nsi_generics = {
+          genericWords: ['^stores?$']
+        };
     });
 
     after(function() {
-        iD.data.nsi_filters = { discardNames: [] };
+        delete iD.services.nsi;
     });
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
     });
 
     function createWay(tags) {
@@ -86,8 +114,33 @@ describe('iD.validations.suspicious_name', function () {
         }, 20);
     });
 
-    it('flags feature with a known generic name', function(done) {
-        createWay({ shop: 'supermarket', name: 'Store' });
+    it('ignores feature matching excludeNamed pattern in name-suggestion-index', function(done) {
+        createWay({ shop: 'supermarket', name: 'famiglia cooperativa' });
+        var validator = iD.validationSuspiciousName(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(0);
+            done();
+        }, 20);
+    });
+
+    it('flags feature matching a excludeGeneric pattern in name-suggestion-index', function(done) {
+        createWay({ shop: 'supermarket', name: 'super mercado' });
+        var validator = iD.validationSuspiciousName(context);
+        window.setTimeout(function() {   // async, so data will be available
+            var issues = validate(validator);
+            expect(issues).to.have.lengthOf(1);
+            var issue = issues[0];
+            expect(issue.type).to.eql('suspicious_name');
+            expect(issue.subtype).to.eql('generic_name');
+            expect(issue.entityIds).to.have.lengthOf(1);
+            expect(issue.entityIds[0]).to.eql('w-1');
+            done();
+        }, 20);
+    });
+
+    it('flags feature matching a global exclude pattern in name-suggestion-index', function(done) {
+        createWay({ shop: 'supermarket', name: 'store' });
         var validator = iD.validationSuspiciousName(context);
         window.setTimeout(function() {   // async, so data will be available
             var issues = validate(validator);
@@ -130,45 +183,4 @@ describe('iD.validations.suspicious_name', function () {
             done();
         }, 20);
     });
-
-    it('ignores feature with a non-matching `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lou\'s', 'not:name': 'Lous' });
-        var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
-    });
-
-    it('flags feature with a matching `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
-        var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('not_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
-    });
-
-    it('flags feature with a matching a semicolon-separated `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
-        window.setTimeout(function() {   // async, so data will be available
-            var validator = iD.validationSuspiciousName(context);
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('not_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
-    });
-
 });

@@ -1,5 +1,5 @@
-import { select as d3_select } from 'd3-selection';
 
+import { fileFetcher } from '../core/file_fetcher';
 import { svgPath } from './helpers';
 
 
@@ -30,7 +30,7 @@ export function svgDebug(projection, context) {
     }
 
 
-    let legend = d3_select('#content')
+    let legend = context.container().select('.main-content')
       .selectAll('.debug-legend')
       .data(debugData.length ? [0] : []);
 
@@ -69,7 +69,7 @@ export function svgDebug(projection, context) {
 
     // imagery
     const extent = context.map().extent();
-    context.data().get('imagery')
+    fileFetcher.get('imagery')
       .then(d => {
         const hits = (showImagery && d.query.bbox(extent.rectangle(), true)) || [];
         const features = hits.map(d => d.features[d.id]);

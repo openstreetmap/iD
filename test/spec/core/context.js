@@ -5,7 +5,7 @@ describe('iD.coreContext', function() {
 
     describe('#assetPath', function() {
         it('sets and gets assetPath', function() {
-            var context = iD.coreContext().init();
+            var context = iD.coreContext();
             expect(context.assetPath()).to.eql('');
 
             context.assetPath('iD/');
@@ -15,7 +15,7 @@ describe('iD.coreContext', function() {
 
     describe('#assetMap', function() {
         it('sets and gets assetMap', function() {
-            var context = iD.coreContext().init();
+            var context = iD.coreContext();
             expect(context.assetMap()).to.eql({});
 
             context.assetMap(assets);
@@ -26,7 +26,7 @@ describe('iD.coreContext', function() {
     describe('#asset', function() {
         var context;
         beforeEach(function() {
-            context = iD.coreContext().assetPath('iD/').assetMap(assets).init();
+            context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
 
         it('ignores absolute urls', function() {
@@ -44,7 +44,7 @@ describe('iD.coreContext', function() {
     describe('#imagePath', function() {
         var context;
         beforeEach(function() {
-            context = iD.coreContext().assetPath('iD/').assetMap(assets).init();
+            context = iD.coreContext().assetPath('iD/').assetMap(assets);
         });
 
         it('looks first in assetMap', function() {
@@ -57,7 +57,7 @@ describe('iD.coreContext', function() {
 
     describe('#debug', function() {
         it('sets and gets debug flags', function() {
-            var context = iD.coreContext().init();
+            var context = iD.coreContext();
             var flags = {
                 tile: false,
                 collision: false,

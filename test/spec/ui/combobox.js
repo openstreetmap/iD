@@ -13,25 +13,22 @@ describe('uiCombobox', function() {
         var keyCode = iD.utilKeybinding.keyCodes[key];
         var value = input.property('value');
         var start = input.property('selectionStart');
-        var finis = input.property('selectionEnd');
+        var finish = input.property('selectionEnd');
 
-        d3.customEvent(happen.makeEvent({
-            type: 'keydown',
-            keyCode: keyCode
-        }), input.on('keydown.combo-input'));
+        happen.keydown(input.node(), {keyCode: keyCode});
 
         switch (key) {
             case '⇥':
                 break;
 
             case '←':
-                start = finis = Math.max(0, start - 1);
-                input.node().setSelectionRange(start, finis);
+                start = finish = Math.max(0, start - 1);
+                input.node().setSelectionRange(start, finish);
                 break;
 
             case '→':
-                start = finis = Math.max(start + 1, value.length);
-                input.node().setSelectionRange(start, finis);
+                start = finish = Math.max(start + 1, value.length);
+                input.node().setSelectionRange(start, finish);
                 break;
 
             case '↑':
@@ -41,21 +38,21 @@ describe('uiCombobox', function() {
                 break;
 
             case '⌫':
-                value = value.substring(0, start - (start === finis ? 1 : 0)) +
-                    value.substring(finis, value.length);
+                value = value.substring(0, start - (start === finish ? 1 : 0)) +
+                    value.substring(finish, value.length);
                 input.property('value', value);
                 happen.once(input.node(), {type: 'input'});
                 break;
 
             case '⌦':
                 value = value.substring(0, start) +
-                    value.substring(finis + (start === finis ? 1 : 0), value.length);
+                    value.substring(finish + (start === finish ? 1 : 0), value.length);
                 input.property('value', value);
                 happen.once(input.node(), {type: 'input'});
                 break;
 
             default:
-                value = value.substring(0, start) + key + value.substring(finis, value.length);
+                value = value.substring(0, start) + key + value.substring(finish, value.length);
                 input.property('value', value);
                 happen.once(input.node(), {type: 'input'});
         }
@@ -65,8 +62,8 @@ describe('uiCombobox', function() {
 
     beforeEach(function() {
         body = d3.select('body');
-        container = body.append('div').attr('class', 'id-container');
-        context = iD.coreContext().container(container).init();
+        container = body.append('div').attr('class', 'ideditor');
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
         content = container.append('div');
         input = content.append('input');
         combobox = iD.uiCombobox(context);
@@ -80,7 +77,6 @@ describe('uiCombobox', function() {
 
     function focusTypeahead(input) {
         input.node().focus();
-        d3.customEvent(happen.makeEvent('focus'), input.on('focus.combo-input'));
     }
 
     it('adds the combobox-input class', function() {
@@ -92,7 +88,7 @@ describe('uiCombobox', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('↓');
-        expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);
+        expect(d3.selectAll('.ideditor > div.combobox').size()).to.equal(1);
     });
 
     it('filters entries to those matching the value', function() {

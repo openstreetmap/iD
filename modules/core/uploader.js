@@ -1,11 +1,13 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { escape } from 'lodash-es';
 
+import { fileFetcher } from './file_fetcher';
 import { actionDiscardTags } from '../actions/discard_tags';
 import { actionMergeRemoteChanges } from '../actions/merge_remote_changes';
 import { actionNoop } from '../actions/noop';
 import { actionRevert } from '../actions/revert';
 import { coreGraph } from '../core/graph';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRebind } from '../util';
 
 
@@ -33,7 +35,7 @@ export function coreUploader(context) {
     var _origChanges;
 
     var _discardTags = {};
-    context.data().get('discarded')
+    fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
@@ -217,7 +219,7 @@ export function coreUploader(context) {
                 };
             }
             function formatUser(d) {
-                return '<a href="' + osm.userURL(d) + '" target="_blank">' + d + '</a>';
+                return '<a href="' + osm.userURL(d) + '" target="_blank">' + escape(d) + '</a>';
             }
             function entityName(entity) {
                 return utilDisplayName(entity) || (utilDisplayType(entity.id) + ' ' + entity.id);

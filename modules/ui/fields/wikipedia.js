@@ -1,30 +1,33 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select, event as d3_event } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
-import { t } from '../../util/locale';
+import { fileFetcher } from '../../core/file_fetcher';
+import { t, localizer } from '../../core/localizer';
 import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
-import { utilDetect } from '../../util/detect';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
+  const scheme = 'https://';
+  const domain = 'wikipedia.org';
   const dispatch = d3_dispatch('change');
   const wikipedia = services.wikipedia;
   const wikidata = services.wikidata;
-  let _lang = d3_select(null);
-  let _title = d3_select(null);
+  let _langInput = d3_select(null);
+  let _titleInput = d3_select(null);
   let _wikiURL = '';
   let _entityIDs;
+  let _tags;
 
-  // A concern here in switching to async data means that _dataWikipedia will not
-  // be available the first time through, so things like the fetchers and
-  // the language() function will not work immediately.
   let _dataWikipedia = [];
-  context.data().get('wmf_sitematrix')
-    .then(d => _dataWikipedia = d)
+  fileFetcher.get('wmf_sitematrix')
+    .then(d => {
+      _dataWikipedia = d;
+      if (_tags) updateForTags(_tags);
+    })
     .catch(() => { /* ignore */ });
 
 
@@ -79,21 +82,19 @@ export function uiFieldWikipedia(field, context) {
       .merge(langContainer);
 
 
-    _lang = langContainer.selectAll('input.wiki-lang')
+    _langInput = langContainer.selectAll('input.wiki-lang')
       .data([0]);
 
-    _lang = _lang.enter()
+    _langInput = _langInput.enter()
       .append('input')
       .attr('type', 'text')
       .attr('class', 'wiki-lang')
       .attr('placeholder', t('translate.localized_translation_language'))
       .call(utilNoAuto)
       .call(langCombo)
-      .merge(_lang);
+      .merge(_langInput);
 
-    utilGetSetValue(_lang, language()[1]);
-
-    _lang
+    _langInput
       .on('blur', changeLang)
       .on('change', changeLang);
 
@@ -106,22 +107,25 @@ export function uiFieldWikipedia(field, context) {
       .attr('class', 'wiki-title-container')
       .merge(titleContainer);
 
-    _title = titleContainer.selectAll('input.wiki-title')
+    _titleInput = titleContainer.selectAll('input.wiki-title')
       .data([0]);
 
-    _title = _title.enter()
+    _titleInput = _titleInput.enter()
       .append('input')
       .attr('type', 'text')
       .attr('class', 'wiki-title')
-      .attr('id', `preset-input-${field.safeid}`)
-      .attr('maxlength', context.maxCharsForTagValue() - 4)
+      .attr('id', field.domId)
       .call(utilNoAuto)
       .call(titleCombo)
-      .merge(_title);
+      .merge(_titleInput);
 
-    _title
-      .on('blur', blur)
-      .on('change', change);
+    _titleInput
+      .on('blur', function() {
+        change(true);
+      })
+      .on('change', function() {
+        change(false);
+      });
 
 
     let link = titleContainer.selectAll('.wiki-link')
@@ -130,48 +134,62 @@ export function uiFieldWikipedia(field, context) {
     link = link.enter()
       .append('button')
       .attr('class', 'form-field-button wiki-link')
-      .attr('tabindex', -1)
-      .attr('title', t('icons.view_on', { domain: 'wikipedia.org' }))
+      .attr('title', t('icons.view_on', { domain }))
       .call(svgIcon('#iD-icon-out-link'))
       .merge(link);
 
     link
-      .on('click', () => {
+      .on('click', (d3_event) => {
         d3_event.preventDefault();
         if (_wikiURL) window.open(_wikiURL, '_blank');
       });
   }
 
 
-  function language() {
-    const value = utilGetSetValue(_lang).toLowerCase();
-    const locale = utilDetect().locale.toLowerCase();
-    let localeLanguage;
-    return _dataWikipedia.find(d => {
-      if (d[2] === locale) localeLanguage = d;
-      return d[0].toLowerCase() === value || d[1].toLowerCase() === value || d[2] === value;
-    }) || localeLanguage || ['English', 'English', 'en'];
+  function defaultLanguageInfo(skipEnglishFallback) {
+    const langCode = localizer.languageCode().toLowerCase();
+
+    for (let i in _dataWikipedia) {
+      let d = _dataWikipedia[i];
+      // default to the language of iD's current locale
+      if (d[2] === langCode) return d;
+    }
+
+    // fallback to English
+    return skipEnglishFallback ? ['', '', ''] : ['English', 'English', 'en'];
+  }
+
+
+  function language(skipEnglishFallback) {
+    const value = utilGetSetValue(_langInput).toLowerCase();
+
+    for (let i in _dataWikipedia) {
+      let d = _dataWikipedia[i];
+      // return the language already set in the UI, if supported
+      if (d[0].toLowerCase() === value ||
+        d[1].toLowerCase() === value ||
+        d[2] === value) return d;
+    }
+
+    // fallback to English
+    return defaultLanguageInfo(skipEnglishFallback);
   }
 
 
   function changeLang() {
-    utilGetSetValue(_lang, language()[1]);
-    change(true);
-  }
-
-
-  function blur() {
+    utilGetSetValue(_langInput, language()[1]);
     change(true);
   }
 
 
   function change(skipWikidata) {
-    let value = utilGetSetValue(_title);
+    let value = utilGetSetValue(_titleInput);
     const m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/);
-    const l = m && _dataWikipedia.find(d => m[1] === d[2]);
+    const langInfo = m && _dataWikipedia.find(d => m[1] === d[2]);
     let syncTags = {};
 
-    if (l) {
+    if (langInfo) {
+      const nativeLangName = langInfo[1];
       // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
       value = decodeURIComponent(m[2]).replace(/_/g, ' ');
       if (m[3]) {
@@ -186,12 +204,12 @@ export function uiFieldWikipedia(field, context) {
         value += '#' + anchor.replace(/_/g, ' ');
       }
       value = value.slice(0, 1).toUpperCase() + value.slice(1);
-      utilGetSetValue(_lang, l[1]);
-      utilGetSetValue(_title, value);
+      utilGetSetValue(_langInput, nativeLangName);
+      utilGetSetValue(_titleInput, value);
     }
 
     if (value) {
-      syncTags.wikipedia = (language()[2] + ':' + value).substr(0, context.maxCharsForTagValue());
+      syncTags.wikipedia = context.cleanTagValue(language()[2] + ':' + value);
     } else {
       syncTags.wikipedia = undefined;
     }
@@ -221,6 +239,7 @@ export function uiFieldWikipedia(field, context) {
             currTags.wikidata = value;
             return actionChangeTags(entityID, currTags);
         }
+        return null;
       }).filter(Boolean);
 
       if (!actions.length) return;
@@ -243,38 +262,53 @@ export function uiFieldWikipedia(field, context) {
 
 
   wiki.tags = (tags) => {
+    _tags = tags;
+    updateForTags(tags);
+  };
+
+  function updateForTags(tags) {
+
     const value = typeof tags[field.key] === 'string' ? tags[field.key] : '';
+    // Expect tag format of `tagLang:tagArticleTitle`, e.g. `fr:Paris`, with
+    // optional suffix of `#anchor`
     const m = value.match(/([^:]+):([^#]+)(?:#(.+))?/);
-    const l = m && _dataWikipedia.find(d => m[1] === d[2]);
+    const tagLang = m && m[1];
+    const tagArticleTitle = m && m[2];
     let anchor = m && m[3];
+    const tagLangInfo = tagLang && _dataWikipedia.find(d => tagLang === d[2]);
 
     // value in correct format
-    if (l) {
-      utilGetSetValue(_lang, l[1]);
-      utilGetSetValue(_title, m[2] + (anchor ? ('#' + anchor) : ''));
-      if (anchor) {
-        try {
-          // Best-effort `anchorencode:` implementation
-          anchor = encodeURIComponent(anchor.replace(/ /g, '_')).replace(/%/g, '.');
-        } catch (e) {
-          anchor = anchor.replace(/ /g, '_');
-        }
-      }
-      _wikiURL = 'https://' + m[1] + '.wikipedia.org/wiki/' +
-        m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : '');
-
-    // unrecognized value format
+    if (tagLangInfo) {
+      const nativeLangName = tagLangInfo[1];
+      utilGetSetValue(_langInput, nativeLangName);
+      utilGetSetValue(_titleInput, tagArticleTitle + (anchor ? ('#' + anchor) : ''));
+      _wikiURL = `${scheme}${tagLang}.${domain}/wiki/${wiki.encodePath(tagArticleTitle, anchor)}`;
     } else {
-      utilGetSetValue(_title, value);
+      utilGetSetValue(_titleInput, value);
       if (value && value !== '') {
-        utilGetSetValue(_lang, '');
-        _wikiURL = `https://en.wikipedia.org/wiki/Special:Search?search=${value}`;
+        utilGetSetValue(_langInput, '');
+        const defaultLangInfo = defaultLanguageInfo();
+        _wikiURL = `${scheme}${defaultLangInfo[2]}.${domain}/w/index.php?fulltext=1&search=${value}`;
       } else {
+        const shownOrDefaultLangInfo = language(true /* skipEnglishFallback */);
+        utilGetSetValue(_langInput, shownOrDefaultLangInfo[1]);
         _wikiURL = '';
       }
     }
+  }
+
+  wiki.encodePath = (tagArticleTitle, anchor) => {
+    const underscoredTitle = tagArticleTitle.replace(/ /g, '_');
+    const uriEncodedUnderscoredTitle = encodeURIComponent(underscoredTitle);
+    const uriEncodedAnchorFragment = wiki.encodeURIAnchorFragment(anchor);
+    return `${uriEncodedUnderscoredTitle}${uriEncodedAnchorFragment}`;
   };
 
+  wiki.encodeURIAnchorFragment = (anchor) => {
+    if (!anchor) return '';
+    const underscoredAnchor = anchor.replace(/ /g, '_');
+    return '#' + encodeURIComponent(underscoredAnchor);
+  };
 
   wiki.entityIDs = (val) => {
     if (!arguments.length) return _entityIDs;
@@ -284,7 +318,7 @@ export function uiFieldWikipedia(field, context) {
 
 
   wiki.focus = () => {
-    _title.node().focus();
+    _titleInput.node().focus();
   };
 
 

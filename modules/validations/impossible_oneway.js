@@ -1,4 +1,4 @@
-import { t, textDirection } from '../util/locale';
+import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { actionReverse } from '../actions/reverse';
 import { utilDisplayLabel } from '../util';
@@ -45,11 +45,11 @@ export function validationImpossibleOneway() {
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
-            var occurences = 0;
+            var occurrences = 0;
             for (var index in way.nodes) {
                 if (way.nodes[index] === nodeID) {
-                    occurences += 1;
-                    if (occurences > 1) return true;
+                    occurrences += 1;
+                    if (occurrences > 1) return true;
                 }
             }
             return false;
@@ -162,8 +162,8 @@ export function validationImpossibleOneway() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.impossible_oneway.' + messageID + '.message', {
-                        feature: utilDisplayLabel(entity, context)
+                    return entity ? t.append('issues.impossible_oneway.' + messageID + '.message', {
+                        feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
                 reference: getReference(referenceID),
@@ -175,20 +175,21 @@ export function validationImpossibleOneway() {
                     if (attachedOneways.length) {
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-reverse',
-                            title: t('issues.fix.reverse_feature.title'),
+                            title: t.append('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
                                 var id = this.issue.entityIds[0];
-                                context.perform(actionReverse(id), t('operations.reverse.annotation'));
+                                context.perform(actionReverse(id), t('operations.reverse.annotation.line', { n: 1 }));
                             }
                         }));
                     }
                     if (node.tags.noexit !== 'yes') {
+                        var textDirection = localizer.textDirection();
                         var useLeftContinue = (isFirst && textDirection === 'ltr') ||
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                            title: t('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
+                            title: t.append('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
                                 var entityID = this.issue.entityIds[0];
                                 var vertexID = this.issue.entityIds[1];
@@ -211,7 +212,7 @@ export function validationImpossibleOneway() {
                         .enter()
                         .append('div')
                         .attr('class', 'issue-reference')
-                        .text(t('issues.impossible_oneway.' + referenceID + '.reference'));
+                        .call(t.append('issues.impossible_oneway.' + referenceID + '.reference'));
                 };
             }
         }
@@ -225,7 +226,7 @@ export function validationImpossibleOneway() {
         }
 
         context.enter(
-            modeDrawLine(context, way.id, context.graph(), context.graph(), 'line', way.affix(vertex.id), true)
+            modeDrawLine(context, way.id, context.graph(), 'line', way.affix(vertex.id), true)
         );
     }
 

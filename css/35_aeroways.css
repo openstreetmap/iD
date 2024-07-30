@@ -20,10 +20,12 @@ path.line.shadow.tag-taxiway {
 }
 path.line.casing.tag-aeroway-taxiway,
 path.line.casing.tag-taxiway {
+    stroke: #666;
     stroke-width: 7;
 }
 path.line.stroke.tag-aeroway-taxiway,
 path.line.stroke.tag-taxiway {
+    stroke: #ff0;
     stroke-width: 5;
 }
 .low-zoom path.line.shadow.tag-aeroway-taxiway,
@@ -37,15 +39,6 @@ path.line.stroke.tag-taxiway {
 .low-zoom path.line.stroke.tag-aeroway-taxiway,
 .low-zoom path.line.stroke.tag-taxiway {
     stroke-width: 3;
-}
-
-path.line.stroke.tag-aeroway-taxiway,
-path.line.stroke.tag-taxiway {
-    stroke: #ff0;
-}
-path.line.casing.tag-aeroway-taxiway,
-path.line.casing.tag-taxiway {
-    stroke: #666;
 }
 
 /* wide aeroways (runway) */

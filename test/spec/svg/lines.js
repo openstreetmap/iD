@@ -9,9 +9,9 @@ describe('iD.svgLines', function () {
 
 
     beforeEach(function () {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
     });
@@ -64,37 +64,6 @@ describe('iD.svgLines', function () {
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
         expect(surface.select('.stroke').classed('tag-natural-wood')).to.be.true;
-    });
-
-    it('renders stroke for outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({id: 'w-1', tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: w.id}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, w, r]);
-
-        surface.call(iD.svgLines(projection, context), graph, [w], all);
-
-        expect(surface.select('.stroke.w-1').classed('tag-natural-wood')).to.equal(true, 'outer tag-natural-wood true');
-        expect(surface.select('.stroke.w-1').classed('old-multipolygon')).to.equal(true, 'outer old-multipolygon true');
-    });
-
-    it('adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var o = iD.osmWay({id: 'w-1', nodes: [a.id, b.id, c.id, a.id], tags: {natural: 'wood'}});
-        var i = iD.osmWay({id: 'w-2', nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: o.id, role: 'outer'}, {id: i.id, role: 'inner'}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, o, i, r]);
-
-        surface.call(iD.svgLines(projection, context), graph, [i, o], all);
-
-        expect(surface.select('.stroke.w-1').classed('tag-natural-wood')).to.equal(true, 'outer tag-natural-wood true');
-        expect(surface.select('.stroke.w-1').classed('old-multipolygon')).to.equal(true, 'outer old-multipolygon true');
-        expect(surface.select('.stroke.w-2').classed('tag-natural-wood')).to.equal(true, 'inner tag-natural-wood true');
-        expect(surface.select('.stroke.w-2').classed('old-multipolygon')).to.equal(false, 'inner old-multipolygon false');
     });
 
     describe('z-indexing', function() {
@@ -162,9 +131,9 @@ describe('iD.svgLines', function () {
             var selection = surface.selectAll('g.onewaygroup > path');
 
             expect(selection.size()).to.eql(3);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
         });
 
         it('has two marker layers for alternating oneway ways', function() {
@@ -179,8 +148,8 @@ describe('iD.svgLines', function () {
 
             var selection = surface.selectAll('g.onewaygroup > path');
             expect(selection.size()).to.eql(2);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#oneway-marker)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-oneway-marker)');
         });
 
         it('has no marker layer for oneway=no ways', function() {
@@ -216,10 +185,10 @@ describe('iD.svgLines', function () {
             surface.call(iD.svgLines(projection, context), graph, [i_n, i_nc, i_b, i_mm], all);
             var selection = surface.selectAll('g.sidedgroup > path');
             expect(selection.size()).to.eql(4);
-            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-natural)');
-            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-coastline)');
-            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-barrier)');
-            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).to.eql('url(#sided-marker-man_made)');
+            expect(selection.nodes()[0].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-natural)');
+            expect(selection.nodes()[1].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-coastline)');
+            expect(selection.nodes()[2].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-barrier)');
+            expect(selection.nodes()[3].attributes['marker-mid'].nodeValue).to.eql('url(#ideditor-sided-marker-man_made)');
         });
 
         it('has no marker layer for two_sided way', function() {

@@ -1,5 +1,5 @@
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
 import { uiSectionPrivacy } from '../sections/privacy';
 
@@ -7,8 +7,8 @@ export function uiPanePreferences(context) {
 
   let preferencesPane = uiPane('preferences', context)
     .key(t('preferences.key'))
-    .title(t('preferences.title'))
-    .description(t('preferences.description'))
+    .label(t.append('preferences.title'))
+    .description(t.append('preferences.description'))
     .iconName('fas-user-cog')
     .sections([
         uiSectionPrivacy(context)

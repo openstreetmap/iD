@@ -1,7 +1,3 @@
-import {
-    event as d3_event,
-    select as d3_select
-} from 'd3-selection';
 
 import { services } from '../services';
 import { actionNoop } from '../actions/noop';
@@ -24,11 +20,11 @@ export function modeDragNote(context) {
     var _note;    // most current note.. dragged note may have stale datum.
 
 
-    function startNudge(nudge) {
+    function startNudge(d3_event, nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
-            context.pan(nudge);
-            doMove(nudge);
+            context.map().pan(nudge);
+            doMove(d3_event, nudge);
         }, 50);
     }
 
@@ -46,7 +42,7 @@ export function modeDragNote(context) {
     }
 
 
-    function start(note) {
+    function start(d3_event, note) {
         _note = note;
         var osm = services.osm;
         if (osm) {
@@ -64,21 +60,21 @@ export function modeDragNote(context) {
     }
 
 
-    function move() {
-        d3_event.sourceEvent.stopPropagation();
-        _lastLoc = context.projection.invert(d3_event.point);
+    function move(d3_event, entity, point) {
+        d3_event.stopPropagation();
+        _lastLoc = context.projection.invert(point);
 
-        doMove();
-        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
+        doMove(d3_event);
+        var nudge = geoViewportEdge(point, context.map().dimensions());
         if (nudge) {
-            startNudge(nudge);
+            startNudge(d3_event, nudge);
         } else {
             stopNudge();
         }
     }
 
 
-    function doMove(nudge) {
+    function doMove(d3_event, nudge) {
         nudge = nudge || [0, 0];
 
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
@@ -107,7 +103,7 @@ export function modeDragNote(context) {
 
     var drag = behaviorDrag()
         .selector('.layer-touch.markers .target.note.new')
-        .surface(d3_select('#map').node())
+        .surface(context.container().select('.main-map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)

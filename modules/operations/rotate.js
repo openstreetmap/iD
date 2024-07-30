@@ -1,17 +1,14 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent } from '../geo';
 import { modeRotate } from '../modes/rotate';
-import { utilGetAllNodes } from '../util';
+import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
-export function operationRotate(selectedIDs, context) {
+export function operationRotate(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
     var operation = function() {
@@ -26,7 +23,7 @@ export function operationRotate(selectedIDs, context) {
 
     operation.disabled = function() {
 
-        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
@@ -62,22 +59,24 @@ export function operationRotate(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.rotate.' + disable + '.' + multi) :
-            t('operations.rotate.description.' + multi);
+            t.append('operations.rotate.' + disable + '.' + multi) :
+            t.append('operations.rotate.description.' + multi);
     };
 
 
     operation.annotation = function() {
         return selectedIDs.length === 1 ?
-            t('operations.rotate.annotation.' + context.geometry(selectedIDs[0])) :
-            t('operations.rotate.annotation.multiple');
+            t('operations.rotate.annotation.' + context.graph().geometry(selectedIDs[0])) :
+            t('operations.rotate.annotation.feature', { n: selectedIDs.length });
     };
 
 
     operation.id = 'rotate';
     operation.keys = [t('operations.rotate.key')];
-    operation.title = t('operations.rotate.title');
+    operation.title = t.append('operations.rotate.title');
     operation.behavior = behaviorOperation(context).which(operation);
+
+    operation.mouseOnly = true;
 
     return operation;
 }

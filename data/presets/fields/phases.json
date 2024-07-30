@@ -1,7 +1,0 @@
-{
-    "key": "phases",
-    "type": "number",
-    "minValue": 1,
-    "label": "Phases",
-    "placeholder": "1, 2, 3..."
-}

@@ -7,16 +7,15 @@ import {
     modeBrowse
 } from '../../modes';
 
-import { t } from '../../util/locale';
+import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
-import { tooltip } from '../../util/tooltip';
-import { uiTooltipHtml } from '../tooltipHtml';
+import { uiTooltip } from '../tooltip';
 
 export function uiToolNotes(context) {
 
     var tool = {
         id: 'notes',
-        label: t('modes.add_note.label')
+        label: t.append('modes.add_note.label')
     };
 
     var mode = modeAddNote(context);
@@ -36,7 +35,7 @@ export function uiToolNotes(context) {
     }
 
     context.keybinding().on(mode.key, function() {
-        if (!enabled(mode)) return;
+        if (!enabled()) return;
 
         if (mode.id === context.mode().id) {
             context.enter(modeBrowse(context));
@@ -46,21 +45,6 @@ export function uiToolNotes(context) {
     });
 
     tool.render = function(selection) {
-
-        context
-            .on('enter.editor.notes', function(entered) {
-                selection.selectAll('button.add-button')
-                    .classed('active', function(mode) { return entered.button === mode.button; });
-                context.container()
-                    .classed('mode-' + entered.id, true);
-            });
-
-        context
-            .on('exit.editor.notes', function(exited) {
-                context.container()
-                    .classed('mode-' + exited.id, false);
-            });
-
 
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
@@ -88,10 +72,9 @@ export function uiToolNotes(context) {
             // enter
             var buttonsEnter = buttons.enter()
                 .append('button')
-                .attr('tabindex', -1)
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
-                .on('click.notes', function(d) {
-                    if (!enabled(d)) return;
+                .on('click.notes', function(d3_event, d) {
+                    if (!enabled()) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
                     var currMode = context.mode().id;
@@ -103,11 +86,11 @@ export function uiToolNotes(context) {
                         context.enter(d);
                     }
                 })
-                .call(tooltip()
+                .call(uiTooltip()
                     .placement('bottom')
-                    .html(true)
-                    .title(function(d) { return uiTooltipHtml(d.description, d.key); })
-                    .scrollContainer(d3_select('#bar'))
+                    .title(function(d) { return d.description; })
+                    .keys(function(d) { return [d.key]; })
+                    .scrollContainer(context.container().select('.top-toolbar'))
                 );
 
             buttonsEnter
@@ -118,13 +101,16 @@ export function uiToolNotes(context) {
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {
-                context.ui().checkOverflow('#bar', true);
+                context.ui().checkOverflow('.top-toolbar', true);
             }
 
             // update
             buttons = buttons
                 .merge(buttonsEnter)
-                .classed('disabled', function(d) { return !enabled(d); });
+                .classed('disabled', function() { return !enabled(); })
+                .attr('aria-disabled', function() { return !enabled(); })
+                .classed('active', function(d) { return context.mode() && context.mode().button === d.button; })
+                .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; });
         }
     };
 

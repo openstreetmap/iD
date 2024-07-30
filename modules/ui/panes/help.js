@@ -1,15 +1,11 @@
-
-import marked from 'marked';
+import { marked } from 'marked';
 import { svgIcon } from '../../svg/icon';
-import { uiCmd } from '../cmd';
 import { uiIntro } from '../intro/intro';
-import { uiShortcuts } from '../shortcuts';
-import { uiTooltipHtml } from '../tooltipHtml';
 import { uiPane } from '../pane';
 
-import { t, textDirection } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
-import { icon } from '../intro/helper';
+import { t, localizer } from '../../core/localizer';
+import { uiTooltip } from '../tooltip';
+import { helpHtml } from '../intro/helper';
 
 export function uiPaneHelp(context) {
 
@@ -22,6 +18,7 @@ export function uiPaneHelp(context) {
             'before_start',
             'open_source_h',
             'open_source',
+            'open_source_attribution',
             'open_source_help'
         ]],
         ['overview', [
@@ -36,7 +33,9 @@ export function uiPaneHelp(context) {
             'select_h',
             'select_left_click',
             'select_right_click',
+            'select_space',
             'multiselect_h',
+            'multiselect',
             'multiselect_shift_click',
             'multiselect_lasso',
             'undo_redo_h',
@@ -81,6 +80,7 @@ export function uiPaneHelp(context) {
             'add_line_h',
             'add_line',
             'add_line_draw',
+            'add_line_continue',
             'add_line_finish',
             'modify_line_h',
             'modify_line_dragnode',
@@ -106,6 +106,7 @@ export function uiPaneHelp(context) {
             'add_area_h',
             'add_area_command',
             'add_area_draw',
+            'add_area_continue',
             'add_area_finish',
             'square_area_h',
             'square_area_command',
@@ -140,17 +141,36 @@ export function uiPaneHelp(context) {
             'boundary',
             'boundary_add'
         ]],
+        ['operations', [
+            'intro',
+            'intro_2',
+            'straighten',
+            'orthogonalize',
+            'circularize',
+            'move',
+            'rotate',
+            'reflect',
+            'continue',
+            'reverse',
+            'disconnect',
+            'split',
+            'extract',
+            'merge',
+            'delete',
+            'downgrade',
+            'copy_paste'
+        ]],
         ['notes', [
             'intro',
             'add_note_h',
             'add_note',
+            'place_note',
             'move_note',
             'update_note_h',
             'update_note',
             'save_note_h',
             'save_note'
         ]],
-
         ['imagery', [
             'intro',
             'sources_h',
@@ -232,63 +252,41 @@ export function uiPaneHelp(context) {
         'help.qa.issues_h': 3
     };
 
-    var replacements = {
-        point: icon('#iD-icon-point', 'pre-text'),
-        line: icon('#iD-icon-line', 'pre-text'),
-        area: icon('#iD-icon-area', 'pre-text'),
-        note: icon('#iD-icon-note', 'pre-text add-note'),
-        plus: icon('#iD-icon-plus', 'pre-text'),
-        minus: icon('#iD-icon-minus', 'pre-text'),
-        orthogonalize: icon('#iD-operation-orthogonalize', 'pre-text'),
-        disconnect: icon('#iD-operation-disconnect', 'pre-text'),
-        layers: icon('#iD-icon-layers', 'pre-text'),
-        data: icon('#iD-icon-data', 'pre-text'),
-        inspect: icon('#iD-icon-inspect', 'pre-text'),
-        move: icon('#iD-operation-move', 'pre-text'),
-        merge: icon('#iD-operation-merge', 'pre-text'),
-        delete: icon('#iD-operation-delete', 'pre-text'),
-        close: icon('#iD-icon-close', 'pre-text'),
-        undo: icon(textDirection === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'pre-text'),
-        redo: icon(textDirection === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'pre-text'),
-        save: icon('#iD-icon-save', 'pre-text'),
-        leftclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'left'),
-        rightclick: icon('#iD-walkthrough-mouse', 'pre-text mouseclick', 'right'),
-        shift: uiCmd.display('⇧'),
-        alt: uiCmd.display('⌥'),
-        return: uiCmd.display('↵'),
-        version: context.version
-    };
-
     // For each section, squash all the texts into a single markdown document
     var docs = docKeys.map(function(key) {
         var helpkey = 'help.' + key[0];
+        var helpPaneReplacements = { version: context.version };
         var text = key[1].reduce(function(all, part) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t(subkey, replacements) + '\n\n';
+            return all + hhh + helpHtml(subkey, helpPaneReplacements) + '\n\n';
         }, '');
 
         return {
-            title: t(helpkey + '.title'),
-            html: marked(text.trim())
+            title: t.html(helpkey + '.title'),
+            content: marked(text.trim())
+                // use keyboard key styling for shortcuts
+                .replace(/<code>/g, '<kbd>')
+                .replace(/<\/code>/g, '<\/kbd>')
         };
     });
 
     var helpPane = uiPane('help', context)
         .key(t('help.key'))
-        .title(t('help.title'))
-        .description(t('help.title'))
+        .label(t.append('help.title'))
+        .description(t.append('help.title'))
         .iconName('iD-icon-help');
 
     helpPane.renderContent = function(content) {
 
         function clickHelp(d, i) {
-            var rtl = (textDirection === 'rtl');
+
+            var rtl = (localizer.textDirection() === 'rtl');
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').html(d.title);
 
-            body.html(d.html);
+            body.html(d.content);
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
@@ -307,14 +305,16 @@ export function uiPaneHelp(context) {
                 if (i < docs.length - 1) {
                     var nextLink = selection
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'next')
-                        .on('click', function() {
+                        .on('click', function(d3_event) {
+                            d3_event.preventDefault();
                             clickHelp(docs[i + 1], i + 1);
                         });
 
                     nextLink
                         .append('span')
-                        .text(docs[i + 1].title)
+                        .html(docs[i + 1].title)
                         .call(svgIcon((rtl ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
                 }
             }
@@ -324,29 +324,33 @@ export function uiPaneHelp(context) {
                 if (i > 0) {
                     var prevLink = selection
                         .append('a')
+                        .attr('href', '#')
                         .attr('class', 'previous')
-                        .on('click', function() {
+                        .on('click', function(d3_event) {
+                            d3_event.preventDefault();
                             clickHelp(docs[i - 1], i - 1);
                         });
 
                     prevLink
                         .call(svgIcon((rtl ? '#iD-icon-forward' : '#iD-icon-backward'), 'inline'))
                         .append('span')
-                        .text(docs[i - 1].title);
+                        .html(docs[i - 1].title);
                 }
             }
         }
 
 
-        function clickWalkthrough() {
+        function clickWalkthrough(d3_event) {
+            d3_event.preventDefault();
             if (context.inIntro()) return;
             context.container().call(uiIntro(context));
             context.ui().togglePanes();
         }
 
 
-        function clickShortcuts() {
-            context.container().call(uiShortcuts(context), true);
+        function clickShortcuts(d3_event) {
+            d3_event.preventDefault();
+            context.container().call(context.ui().shortcuts, true);
         }
 
         var toc = content
@@ -358,28 +362,35 @@ export function uiPaneHelp(context) {
             .enter()
             .append('li')
             .append('a')
+            .attr('role', 'button')
+            .attr('href', '#')
             .html(function(d) { return d.title; })
-            .on('click', clickHelp);
+            .on('click', function(d3_event, d) {
+                d3_event.preventDefault();
+                clickHelp(d, docs.indexOf(d));
+            });
 
         var shortcuts = toc
             .append('li')
             .attr('class', 'shortcuts')
-            .call(tooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('shortcuts.tooltip'), '?'))
+            .call(uiTooltip()
+                .title(() => t.append('shortcuts.tooltip'))
+                .keys(['?'])
                 .placement('top')
             )
             .append('a')
+            .attr('href', '#')
             .on('click', clickShortcuts);
 
         shortcuts
             .append('div')
-            .text(t('shortcuts.title'));
+            .call(t.append('shortcuts.title'));
 
         var walkthrough = toc
             .append('li')
             .attr('class', 'walkthrough')
             .append('a')
+            .attr('href', '#')
             .on('click', clickWalkthrough);
 
         walkthrough
@@ -390,7 +401,7 @@ export function uiPaneHelp(context) {
 
         walkthrough
             .append('div')
-            .text(t('splash.walkthrough'));
+            .call(t.append('splash.walkthrough'));
 
 
         var helpContent = content
@@ -406,7 +417,6 @@ export function uiPaneHelp(context) {
             .attr('class', 'nav');
 
         clickHelp(docs[0], 0);
-
     };
 
     return helpPane;

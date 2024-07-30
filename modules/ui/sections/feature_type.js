@@ -1,11 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    event as d3_event
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
+import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
-import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { t } from '../../core/localizer';
+import { uiTooltip } from '../tooltip';
 import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
@@ -22,7 +21,7 @@ export function uiSectionFeatureType(context) {
     var _tagReference;
 
     var section = uiSection('feature-type', context)
-        .title(t('inspector.feature_type'))
+        .label(() => t.append('inspector.feature_type'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -40,8 +39,8 @@ export function uiSectionFeatureType(context) {
         var presetButton = presetButtonWrap
             .append('button')
             .attr('class', 'preset-list-button preset-reset')
-            .call(tooltip()
-                .title(t('inspector.back_tooltip'))
+            .call(uiTooltip()
+                .title(() => t.append('inspector.back_tooltip'))
                 .placement('bottom')
             );
 
@@ -82,28 +81,26 @@ export function uiSectionFeatureType(context) {
             .on('click', function() {
                  dispatch.call('choose', this, _presets);
             })
-            .on('mousedown', function() {
-                d3_event.preventDefault();
-                d3_event.stopPropagation();
-            })
-            .on('mouseup', function() {
+            .on('pointerdown pointerup mousedown mouseup', function(d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             });
 
         var geometries = entityGeometries();
         selection.select('.preset-list-item button')
-            .call(uiPresetIcon(context)
+            .call(uiPresetIcon()
                 .geometry(_presets.length === 1 ? (geometries.length === 1 && geometries[0]) : null)
-                .preset(_presets.length === 1 ? _presets[0] : context.presets().item('point'))
+                .preset(_presets.length === 1 ? _presets[0] : presetManager.item('point'))
             );
 
-        // NOTE: split on en-dash, not a hypen (to avoid conflict with hyphenated names)
-        var names = _presets.length === 1 ? _presets[0].name().split(' – ') : [t('inspector.multiple_types')];
+        var names = _presets.length === 1 ? [
+            _presets[0].nameLabel(),
+            _presets[0].subtitleLabel()
+        ].filter(Boolean) : [ t.append('inspector.multiple_types') ];
 
         var label = selection.select('.label-inner');
         var nameparts = label.selectAll('.namepart')
-            .data(names, function(d) { return d; });
+            .data(names, d => d.stringId);
 
         nameparts.exit()
             .remove();
@@ -112,7 +109,8 @@ export function uiSectionFeatureType(context) {
             .enter()
             .append('div')
             .attr('class', 'namepart')
-            .text(function(d) { return d; });
+            .text('')
+            .each(function(d) { d(d3_select(this)); });
     }
 
     section.entityIDs = function(val) {
@@ -128,9 +126,8 @@ export function uiSectionFeatureType(context) {
         if (!utilArrayIdentical(val, _presets)) {
             _presets = val;
 
-            var geometries = entityGeometries();
-            if (_presets.length === 1 && geometries.length) {
-                _tagReference = uiTagReference(_presets[0].reference(geometries[0]), context)
+            if (_presets.length === 1) {
+                _tagReference = uiTagReference(_presets[0].reference(), context)
                     .showing(false);
             }
         }
@@ -143,7 +140,7 @@ export function uiSectionFeatureType(context) {
         var counts = {};
 
         for (var i in _entityIDs) {
-            var geometry = context.geometry(_entityIDs[i]);
+            var geometry = context.graph().geometry(_entityIDs[i]);
             if (!counts[geometry]) counts[geometry] = 0;
             counts[geometry] += 1;
         }

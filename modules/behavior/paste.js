@@ -1,33 +1,31 @@
-import { event as d3_event } from 'd3-selection';
-
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
 import { modeMove } from '../modes/move';
 import { uiCmd } from '../ui/cmd';
 
-
+// see also `operationPaste`
 export function behaviorPaste(context) {
 
-    function doPaste() {
+    function doPaste(d3_event) {
         // prevent paste during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 
         d3_event.preventDefault();
 
         var baseGraph = context.graph();
-        var mouse = context.mouse();
+        var mouse = context.map().mouse();
         var projection = context.projection;
         var viewport = geoExtent(projection.clipExtent()).polygon();
 
         if (!geoPointInPolygon(mouse, viewport)) return;
 
-        var extent = geoExtent();
         var oldIDs = context.copyIDs();
+        if (!oldIDs.length) return;
+
+        var extent = geoExtent();
         var oldGraph = context.copyGraph();
         var newIDs = [];
-
-        if (!oldIDs.length) return;
 
         var action = actionCopyEntities(oldIDs, oldGraph);
         context.perform(action);
@@ -54,8 +52,8 @@ export function behaviorPaste(context) {
         }
 
         // Put pasted objects where mouse pointer is..
-        var center = projection(extent.center());
-        var delta = geoVecSubtract(mouse, center);
+        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) || projection(extent.center());
+        var delta = geoVecSubtract(mouse, copyPoint);
 
         context.perform(actionMove(newIDs, delta, projection));
         context.enter(modeMove(context, newIDs, baseGraph));

@@ -1,28 +1,85 @@
 describe('iD.actionConnect', function() {
-    it('chooses the first non-new node as the survivor', function() {
+    it('merges tags', function() {
         var graph = iD.coreGraph([
-            iD.osmNode({id: 'a'}),
-            iD.osmNode({id: 'b', version: '1'}),
-            iD.osmNode({id: 'c', version: '1'})
+            iD.osmNode({id: 'a', tags: { highway: 'traffic_signals' }}),
+            iD.osmNode({id: 'b', tags: { crossing: 'marked' }}),
         ]);
 
-        graph = iD.actionConnect(['a', 'b', 'c'])(graph);
+        graph = iD.actionConnect(['a', 'b'])(graph);
         expect(graph.hasEntity('a')).not.to.be.ok;
-        expect(graph.hasEntity('b')).to.be.ok;
-        expect(graph.hasEntity('c')).not.to.be.ok;
+
+        var survivor = graph.hasEntity('b');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+    });
+
+    it('chooses the oldest node as the survivor', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'n3'}),
+            iD.osmNode({id: 'n-1'}),
+            iD.osmNode({id: 'n2'}),
+            iD.osmNode({id: 'n4'})
+        ]);
+
+        graph = iD.actionConnect(['n3', 'n-1', 'n2', 'n4'])(graph);
+        expect(graph.hasEntity('n3')).not.to.be.ok;
+        expect(graph.hasEntity('n-1')).not.to.be.ok;
+        expect(graph.hasEntity('n2')).to.be.ok;
+        expect(graph.hasEntity('n4')).not.to.be.ok;
+    });
+
+    it('chooses the oldest interesting node as the survivor', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'n3'}),
+            iD.osmNode({id: 'n1'}),
+            iD.osmNode({id: 'n2', tags: { highway: 'traffic_signals' }}),
+            iD.osmNode({id: 'n4', tags: { crossing: 'marked' }})
+        ]);
+
+        graph = iD.actionConnect(['n3', 'n1', 'n2', 'n4'])(graph);
+
+        expect(graph.hasEntity('n3')).not.to.be.ok;
+        expect(graph.hasEntity('n1')).not.to.be.ok;
+        expect(graph.hasEntity('n4')).not.to.be.ok;
+
+        var survivor = graph.hasEntity('n2');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
+    });
+
+    it('chooses an existing node as the survivor', function() {
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'n3'}),
+            iD.osmNode({id: 'n-1'}),
+            iD.osmNode({id: 'n-2', tags: { highway: 'traffic_signals' }}),
+            iD.osmNode({id: 'n-4', tags: { crossing: 'marked' }})
+        ]);
+
+        graph = iD.actionConnect(['n3', 'n-1', 'n-2', 'n-4'])(graph);
+
+        expect(graph.hasEntity('n-1')).not.to.be.ok;
+        expect(graph.hasEntity('n-2')).not.to.be.ok;
+        expect(graph.hasEntity('n-4')).not.to.be.ok;
+
+        var survivor = graph.hasEntity('n3');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
     it('chooses the last node as the survivor when all are new', function() {
         var graph = iD.coreGraph([
-            iD.osmNode({id: 'a'}),
-            iD.osmNode({id: 'b'}),
+            iD.osmNode({id: 'a', tags: { highway: 'traffic_signals' }}),
+            iD.osmNode({id: 'b', tags: { crossing: 'marked' }}),
             iD.osmNode({id: 'c'})
         ]);
 
         graph = iD.actionConnect(['a', 'b', 'c'])(graph);
         expect(graph.hasEntity('a')).not.to.be.ok;
         expect(graph.hasEntity('b')).not.to.be.ok;
-        expect(graph.hasEntity('c')).to.be.ok;
+
+        var survivor = graph.hasEntity('c');
+        expect(survivor).to.be.an.instanceof(iD.osmNode);
+        expect(survivor.tags).to.eql({ highway: 'traffic_signals', crossing: 'marked' }, 'merge all tags');
     });
 
 

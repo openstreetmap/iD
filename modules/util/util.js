@@ -1,9 +1,11 @@
 import { remove as removeDiacritics } from 'diacritics';
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
-import { t, textDirection } from './locale';
+import { presetManager } from '../presets';
+import { t, localizer } from '../core/localizer';
 import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
+import { geoExtent } from '../geo/extent';
 
 
 export function utilTagText(entity) {
@@ -11,6 +13,20 @@ export function utilTagText(entity) {
     return Object.keys(obj)
         .map(function(k) { return k + '=' + obj[k]; })
         .join(', ');
+}
+
+
+export function utilTotalExtent(array, graph) {
+    var extent = geoExtent();
+    var val, entity;
+    for (var i = 0; i < array.length; i++) {
+        val = array[i];
+        entity = typeof val === 'string' ? graph.hasEntity(val) : val;
+        if (entity) {
+            extent._extend(entity.extent(graph));
+        }
+    }
+    return extent;
 }
 
 
@@ -164,15 +180,42 @@ export function utilGetAllNodes(ids, graph) {
 
 
 export function utilDisplayName(entity) {
-    var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0];
+    var localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
-    var network = entity.tags.cycle_network || entity.tags.network;
+    if (name) return name;
 
-    if (!name && entity.tags.ref) {
-        name = entity.tags.ref;
-        if (network) {
-            name = network + ' ' + name;
+    var tags = {
+        direction: entity.tags.direction,
+        from: entity.tags.from,
+        network: entity.tags.cycle_network || entity.tags.network,
+        ref: entity.tags.ref,
+        to: entity.tags.to,
+        via: entity.tags.via
+    };
+    var keyComponents = [];
+
+    if (tags.network) {
+        keyComponents.push('network');
+    }
+    if (tags.ref) {
+        keyComponents.push('ref');
+    }
+
+    // Routes may need more disambiguation based on direction or destination
+    if (entity.tags.route) {
+        if (tags.direction) {
+            keyComponents.push('direction');
+        } else if (tags.from && tags.to) {
+            keyComponents.push('from');
+            keyComponents.push('to');
+            if (tags.via) {
+                keyComponents.push('via');
+            }
         }
+    }
+
+    if (keyComponents.length) {
+        name = t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
 
     return name;
@@ -182,8 +225,9 @@ export function utilDisplayName(entity) {
 export function utilDisplayNameForPath(entity) {
     var name = utilDisplayName(entity);
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+    var isNewChromium = Number(utilDetect().version.split('.')[0]) >= 96.0;
 
-    if (!isFirefox && name && rtlRegex.test(name)) {
+    if (!isFirefox && !isNewChromium && name && rtlRegex.test(name)) {
         name = fixRTLTextForSvg(name);
     }
 
@@ -200,24 +244,29 @@ export function utilDisplayType(id) {
 }
 
 
-export function utilDisplayLabel(entity, context) {
+// `utilDisplayLabel`
+// Returns a string suitable for display
+// By default returns something like name/ref, fallback to preset type, fallback to OSM type
+//   "Main Street" or "Tertiary Road"
+// If `verbose=true`, include both preset name and feature name.
+//   "Tertiary Road Main Street"
+//
+export function utilDisplayLabel(entity, graphOrGeometry, verbose) {
+    var result;
     var displayName = utilDisplayName(entity);
-    if (displayName) {
-        // use the display name if there is one
-        return displayName;
-    }
-    var preset = utilPreset(entity, context);
-    if (preset && preset.name()) {
-        // use the preset name if there is a match
-        return preset.name();
-    }
-    // fallback to the display type (node/way/relation)
-    return utilDisplayType(entity.id);
-}
+    var preset = typeof graphOrGeometry === 'string' ?
+        presetManager.matchTags(entity.tags, graphOrGeometry) :
+        presetManager.match(entity, graphOrGeometry);
+    var presetName = preset && (preset.suggestion ? preset.subtitle() : preset.name());
 
+    if (verbose) {
+        result = [presetName, displayName].filter(Boolean).join(' ');
+    } else {
+        result = displayName || presetName;
+    }
 
-export function utilPreset(entity, context) {
-    return context.presets().match(entity, context.graph());
+    // Fallback to the OSM type (node/way/relation)
+    return result || utilDisplayType(entity.id);
 }
 
 
@@ -352,10 +401,9 @@ export function utilPrefixDOMProperty(property) {
     var n = prefixes.length;
     var s = document.body;
 
-    if (property in s)
-        return property;
+    if (property in s) return property;
 
-    property = property.substr(0, 1).toUpperCase() + property.substr(1);
+    property = property.slice(0, 1).toUpperCase() + property.slice(1);
 
     while (++i < n) {
         if (prefixes[i] + property in s) {
@@ -405,8 +453,9 @@ export function utilEditDistance(a, b) {
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
     var matrix = [];
-    for (var i = 0; i <= b.length; i++) { matrix[i] = [i]; }
-    for (var j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+    var i, j;
+    for (i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+    for (j = 0; j <= a.length; j++) { matrix[0][j] = j; }
     for (i = 1; i <= b.length; i++) {
         for (j = 1; j <= a.length; j++) {
             if (b.charAt(i-1) === a.charAt(j-1)) {
@@ -431,14 +480,11 @@ export function utilFastMouse(container) {
     var rectTop = rect.top;
     var clientLeft = +container.clientLeft;
     var clientTop = +container.clientTop;
-
-    if (textDirection === 'rtl') {
-        rectLeft = 0;
-    }
     return function(e) {
         return [
             e.clientX - rectLeft - clientLeft,
-            e.clientY - rectTop - clientTop];
+            e.clientY - rectTop - clientTop
+        ];
     };
 }
 
@@ -509,8 +555,96 @@ export function utilHashcode(str) {
     return hash;
 }
 
-// returns version of `str` with all runs of special characters replaced by `_`;
+// Returns version of `str` with all runs of special characters replaced by `_`;
 // suitable for HTML ids, classes, selectors, etc.
 export function utilSafeClassName(str) {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '_');
 }
+
+// Returns string based on `val` that is highly unlikely to collide with an id
+// used previously or that's present elsewhere in the document. Useful for preventing
+// browser-provided autofills or when embedding iD on pages with unknown elements.
+export function utilUniqueDomId(val) {
+    return 'ideditor-' + utilSafeClassName(val.toString()) + '-' + new Date().getTime().toString();
+}
+
+// Returns the length of `str` in unicode characters. This can be less than
+// `String.length()` since a single unicode character can be composed of multiple
+// JavaScript UTF-16 code units.
+export function utilUnicodeCharsCount(str) {
+    // Native ES2015 implementations of `Array.from` split strings into unicode characters
+    return Array.from(str).length;
+}
+
+// Returns a new string representing `str` cut from its start to `limit` length
+// in unicode characters. Note that this runs the risk of splitting graphemes.
+export function utilUnicodeCharsTruncated(str, limit) {
+    return Array.from(str).slice(0, limit).join('');
+}
+
+function toNumericID(id) {
+    var match = id.match(/^[cnwr](-?\d+)$/);
+    if (match) {
+        return parseInt(match[1], 10);
+    }
+    return NaN;
+}
+
+function compareNumericIDs(left, right) {
+    if (isNaN(left) && isNaN(right)) return -1;
+    if (isNaN(left)) return 1;
+    if (isNaN(right)) return -1;
+    if (Math.sign(left) !== Math.sign(right)) return -Math.sign(left);
+    if (Math.sign(left) < 0) return Math.sign(right - left);
+    return Math.sign(left - right);
+}
+
+// Returns -1 if the first parameter ID is older than the second,
+// 1 if the second parameter is older, 0 if they are the same.
+// If both IDs are test IDs, the function returns -1.
+export function utilCompareIDs(left, right) {
+    return compareNumericIDs(toNumericID(left), toNumericID(right));
+}
+
+// Returns the chronologically oldest ID in the list.
+// Database IDs (with positive numbers) before editor ones (with negative numbers).
+// Among each category, the closest number to 0 is the oldest.
+// Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
+export function utilOldestID(ids) {
+    if (ids.length === 0) {
+        return undefined;
+    }
+
+    var oldestIDIndex = 0;
+    var oldestID = toNumericID(ids[0]);
+
+    for (var i = 1; i < ids.length; i++) {
+        var num = toNumericID(ids[i]);
+
+        if (compareNumericIDs(oldestID, num) === 1) {
+            oldestIDIndex = i;
+            oldestID = num;
+        }
+    }
+
+    return ids[oldestIDIndex];
+}
+
+// returns a normalized and truncated string to `maxChars` utf-8 characters
+export function utilCleanOsmString(val, maxChars) {
+    // be lenient with input
+    if (val === undefined || val === null) {
+      val = '';
+    } else {
+      val = val.toString();
+    }
+
+    // remove whitespace
+    val = val.trim();
+
+    // use the canonical form of the string
+    if (val.normalize) val = val.normalize('NFC');
+
+    // trim to the number of allowed characters
+    return utilUnicodeCharsTruncated(val, maxChars);
+  }

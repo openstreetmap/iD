@@ -68,15 +68,15 @@ describe('iD.actionMergePolygon', function () {
         expect(r.members.length).to.equal(3);
     });
 
-    it('creates a multipolygon from two multipolygon relations', function() {
-        graph = iD.actionMergePolygon(['w0', 'w1'], 'r')(graph);
-        graph = iD.actionMergePolygon(['w2', 'w5'], 'r2')(graph);
-        graph = iD.actionMergePolygon(['r', 'r2'])(graph);
+    it('creates a multipolygon from two multipolygon relations and keeps the oldest alive', function() {
+        graph = iD.actionMergePolygon(['w0', 'w1'], 'r2')(graph);
+        graph = iD.actionMergePolygon(['w2', 'w5'], 'r1')(graph);
+        graph = iD.actionMergePolygon(['r2', 'r1'])(graph);
 
         // Delete other relation
         expect(graph.hasEntity('r2')).to.equal(undefined);
 
-        var r = graph.entity('r');
+        var r = graph.entity('r1');
         expect(find(r, 'w0').role).to.equal('outer');
         expect(find(r, 'w1').role).to.equal('inner');
         expect(find(r, 'w2').role).to.equal('outer');

@@ -7,53 +7,54 @@ en:
     zoom_to: zoom to
     copy: copy
     view_on: view on {domain}
+    visit_website: visit website
     favorite: favorite
     list: list
     text: text
     deselect: deselect
+    close: close
+    forward: forward
+    backward: backward
+    expand: expand
+    collapse: collapse
+    plus: add
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
     recent: Recent
     favorites: Favorites
     add_feature: Add Feature
+  title:
+    format:
+      context: "{base} – {context}"
+      changes: "({changes}) {base}"
+      changes_context: "({changes}) {base} – {context}"
+    labeled_and_more:
+      one: "{labeled} and {count} more"
+      other: "{labeled} and {count} more"
   modes:
-    add_feature:
-      title: Add a feature
-      description: "Search for features to add to the map."
-      key: Tab
-      result: "{count} result"
-      results: "{count} results"
     add_area:
       title: Area
       description: "Add parks, buildings, lakes or other areas to the map."
-      tail: "Click on the map to start drawing an area, like a park, lake, or building."
       filter_tooltip: areas
     add_line:
       title: Line
       description: "Add highways, streets, pedestrian paths, canals or other lines to the map."
-      tail: "Click on the map to start drawing a road, path, or route."
       filter_tooltip: lines
     add_point:
       title: Point
       description: "Add restaurants, monuments, postal boxes or other points to the map."
-      tail: Click on the map to add a point.
       filter_tooltip: points
     add_note:
       title: Note
       label: Add Note
       description: "Spotted an issue? Let other mappers know."
-      tail: Click on the map to add a note.
       key: N
     add_preset:
       title: "Add {feature}"
     browse:
       title: Browse
       description: Pan and zoom the map.
-    draw_area:
-      tail: Click to add nodes to your area. Click the first node to finish the area.
-    draw_line:
-      tail: "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
     drag_node:
       connected_to_hidden: This can't be edited because it is connected to a hidden feature.
   operations:
@@ -72,16 +73,38 @@ en:
       title: Continue
       description: Continue this line.
       not_eligible: No line can be continued here.
-      multiple: Several lines can be continued here. To choose a line, press the Shift key and click on it to select it.
+      multiple: Several lines can be continued here. Add one to the selection to continue.
       annotation:
         line: Continued a line.
         area: Continued an area.
     cancel_draw:
       annotation: Canceled drawing.
     change_role:
-      annotation: Changed the role of a relation member.
+      annotation:
+        one: Changed the role of a relation member.
+        other: "Changed the roles of {n} relation members."
     change_tags:
       annotation: Changed tags.
+    copy:
+      title: Copy
+      description:
+        one: Set this feature for pasting.
+        other: Set these features for pasting.
+      annotation:
+        one: Copied a feature.
+        other: "Copied {n} features."
+      too_large:
+        one: This can't be copied because not enough of it is currently visible.
+        other: These can't be copied because not enough of them are currently visible.
+    paste:
+      title: Paste
+      description:
+        one: "Add a duplicate {feature} here."
+        other: "Add {n} duplicate features here."
+      annotation:
+        one: Pasted a feature.
+        other: "Pasted {n} features."
+      nothing_copied: No features have been copied.
     circularize:
       title: Circularize
       description:
@@ -89,8 +112,9 @@ en:
         multiple: Make these features circular.
       key: O
       annotation:
-        single: Made a feature circular.
-        multiple: Made features circular.
+        feature:
+          one: Made a feature circular.
+          other: "Made {n} features circular."
       multiple_blockers:
         multiple: These can't be made circular for multiple reasons.
       not_closed:
@@ -120,11 +144,11 @@ en:
       key: Q
       annotation:
         corner:
-          single: Squared a corner.
-          multiple: Squared several corners.
+          one: Squared a corner.
+          other: "Squared {n} corners."
         feature:
-          single: Squared the corners of a feature.
-          multiple: Squared the corners of several features.
+          one: Squared the corners of a feature.
+          other: "Squared the corners of {n} features."
       multiple_blockers:
         multiple: These can't be squared for multiple reasons.
       end_vertex:
@@ -150,13 +174,30 @@ en:
       description:
         points: Straighten these points.
         line: Straighten this line.
+        lines: Straighten these lines.
       key: S
       annotation:
-        points: Straightened several points.
-        line: Straightened a line.
-      too_bendy: This can't be straightened because it bends too much.
-      connected_to_hidden: This can't be straightened because it is connected to a hidden feature.
-      not_downloaded: This can't be straightened because parts of it have not yet been downloaded.
+        point:
+          one: Straightened a point.
+          other: "Straightened {n} points."
+        line:
+          one: Straightened a line.
+          other: "Straightened {n} lines."
+      too_bendy:
+        single: This can't be straightened because it bends too much.
+        multiple: These can't be straightened because they bend too much.
+      connected_to_hidden:
+        single: This can't be straightened because it is connected to a hidden feature.
+        multiple: These can't be straightened because some are connected to hidden features.
+      not_downloaded:
+        single: This can't be straightened because parts of it have not yet been downloaded.
+        multiple: These can't be straightened because parts of them have not yet been downloaded.
+      straight_enough:
+        single: This can't be made straighter than it already is.
+        multiple: These can't be made straighter than they already are.
+      too_large:
+        single: This can't be straightened because not enough of it is currently visible.
+        multiple: These can't be straightened because not enough of them are currently visible.
     delete:
       title: Delete
       description:
@@ -168,7 +209,9 @@ en:
         line: Deleted a line.
         area: Deleted an area.
         relation: Deleted a relation.
-        multiple: "Deleted {n} features."
+        feature:
+          one: "Deleted a feature."
+          other: "Deleted {n} features."
       too_large:
         single: This feature can't be deleted because not enough of it is currently visible.
         multiple: These features can't be deleted because not enough of them are currently visible.
@@ -193,21 +236,28 @@ en:
         building_address: Remove all non-address and non-building tags.
         building: Remove all non-building tags.
         address: Remove all non-address tags.
+        generic: Remove tags.
       annotation:
         building:
-          single: Downgraded a feature to a basic building.
-          multiple: "Downgraded {n} features to basic buildings."
+          one: Downgraded a feature to a basic building.
+          other: "Downgraded {n} features to basic buildings."
         address:
-          single: Downgraded a feature to an address.
-          multiple: "Downgraded {n} features to addresses."
-        multiple: "Downgraded {n} features."
+          one: Downgraded a feature to an address.
+          other: "Downgraded {n} features to addresses."
+        generic:
+          one: "Downgraded a feature."
+          other: "Downgraded {n} features."
       has_wikidata_tag:
         single: This feature can't be downgraded because it has a Wikidata tag.
         multiple: These features can't be downgraded because some have Wikidata tags.
     add_member:
-      annotation: Added a member to a relation.
+      annotation:
+        one: Added a member to a relation.
+        other: "Added {n} members to a relation."
     delete_member:
-      annotation: Removed a member from a relation.
+      annotation:
+        one: Removed a member from a relation.
+        other: "Removed {n} members from a relation."
     reorder_members:
       annotation: Reordered a relation's members.
     connect:
@@ -228,15 +278,33 @@ en:
       restriction: "These features can't be connected because it would damage a \"{relation}\" relation."
     disconnect:
       title: Disconnect
-      description: Disconnect these lines/areas from each other.
-      line:
-        description: Disconnect this line from other features.
-      area:
-        description: Disconnect this area from other features.
+      description:
+        no_points:
+          single_way:
+            line: Disconnect this line from other features.
+            area: Disconnect this area from other features.
+          multiple_ways:
+            conjoined: Disconnect these features from each other.
+            separate: Disconnect these features from everything.
+        single_point:
+          no_ways: Disconnect the features at this point.
+          single_way:
+            line: Disconnect the selected line at this point.
+            area: Disconnect the selected area at this point.
+          multiple_ways: Disconnect the selected features at this point.
+        multiple_points:
+          no_ways: Disconnect the features at these points.
+          single_way:
+            line: Disconnect the selected line at these points.
+            area: Disconnect the selected area at these points.
+          multiple_ways: Disconnect the selected features at these points.
       key: D
-      annotation: Disconnected lines/areas.
+      annotation:
+        features: Disconnected features.
+        from_each_other: Disconnected features from each other.
       too_large:
         single: This can't be disconnected because not enough of it is currently visible.
+        multiple: These can't be disconnected because not enough of them are currently visible.
       not_connected: There aren't enough lines/areas here to disconnect.
       not_downloaded: This can't be disconnected because parts of it have not yet been downloaded.
       connected_to_hidden: This can't be disconnected because it is connected to a hidden feature.
@@ -245,14 +313,18 @@ en:
       title: Merge
       description: Merge these features.
       key: C
-      annotation: "Merged {n} features."
+      annotation:
+        one: "Merged a feature."
+        other: "Merged {n} features."
       not_eligible: These features can't be merged.
       not_adjacent: These features can't be merged because their endpoints aren't connected.
-      restriction: "These features can't be merged because it would damage a \"{relation}\" relation."
+      damage_relation: "These features can't be merged because it would damage a \"{relation}\" relation."
       relation: These features can't be merged because they have conflicting relation roles.
       incomplete_relation: These features can't be merged because at least one hasn't been fully downloaded.
       conflicting_tags: These features can't be merged because some of their tags have conflicting values.
+      conflicting_relations: These features can't be merged because they belong to conflicting relations.
       paths_intersect: These features can't be merged because the resulting path would intersect itself.
+      too_many_vertices: These features can't be merged because the resulting path would have too many points.
     move:
       title: Move
       description:
@@ -264,7 +336,10 @@ en:
         vertex: Moved a node in a way.
         line: Moved a line.
         area: Moved an area.
-        multiple: Moved multiple features.
+        relation: Moved a relation.
+        feature:
+          one: "Moved a feature."
+          other: "Moved {n} features."
       incomplete_relation:
         single: This feature can't be moved because it hasn't been fully downloaded.
         multiple: These features can't be moved because they haven't been fully downloaded.
@@ -277,39 +352,54 @@ en:
       not_downloaded:
         single: This feature can't be moved because parts of it have not yet been downloaded.
         multiple: These features can't be moved because parts of them have not yet been downloaded.
+    follow:
+      key: F
+      error:
+        needs_more_initial_nodes: This feature can't follow another feature because it isn't connected to enough consecutive points along another feature. Add another point manually to continue.
+        intersection_of_multiple_ways:
+          line: This feature can't follow a line because multiple lines are connected to the last two points. Add another point manually to continue.
+          area: This feature can't follow an area because multiple areas are connected to the last two points. Add another point manually to continue.
+          generic: This feature can't follow another feature because multiple features are connected to the last two points. Add another point manually to continue.
+        intersection_of_different_ways:
+          line: This feature can't follow the line because it is only connected at a single point. Add another point manually to continue.
+          area: This feature can't follow the area because it is only connected at a single point. Add another point manually to continue.
+          generic: This feature can't follow the other feature because they are only connected at a single point. Add another point manually to continue.
+        unknown: This feature can't follow another feature.
     reflect:
       title:
-        long: Reflect Long
-        short: Reflect Short
+        long: Flip Long
+        short: Flip Short
       description:
         long:
-          single: Reflect this feature across its long axis.
-          multiple: Reflect these features across their long axis.
+          single: Flip this feature across its long axis.
+          multiple: Flip these features across their long axis.
         short:
-          single: Reflect this feature across its short axis.
-          multiple: Reflect these features across their short axis.
+          single: Flip this feature across its short axis.
+          multiple: Flip these features across their short axis.
       key:
         long: T
         short: Y
       annotation:
         long:
-          single: Reflected a feature across its long axis.
-          multiple: Reflected multiple features across their long axis.
+          feature:
+            one: Flipped a feature across its long axis.
+            other: "Flipped {n} features across their long axis."
         short:
-          single: Reflected a feature across its short axis.
-          multiple: Reflected multiple features across their short axis.
+          feature:
+            one: Flipped a feature across its short axis.
+            other: "Flipped {n} features across their short axis."
       incomplete_relation:
-        single: This feature can't be reflected because it hasn't been fully downloaded.
-        multiple: These features can't be reflected because they haven't been fully downloaded.
+        single: This feature can't be flipped because it hasn't been fully downloaded.
+        multiple: These features can't be flipped because they haven't been fully downloaded.
       too_large:
-        single: This feature can't be reflected because not enough of it is currently visible.
-        multiple: These features can't be reflected because not enough of them are currently visible.
+        single: This feature can't be flipped because not enough of it is currently visible.
+        multiple: These features can't be flipped because not enough of them are currently visible.
       connected_to_hidden:
-        single: This feature can't be reflected because it is connected to a hidden feature.
-        multiple: These features can't be reflected because some are connected to hidden features.
+        single: This feature can't be flipped because it is connected to a hidden feature.
+        multiple: These features can't be flipped because some are connected to hidden features.
       not_downloaded:
-        single: This feature can't be reflected because parts of it have not yet been downloaded.
-        multiple: These features can't be reflected because parts of them have not yet been downloaded.
+        single: This feature can't be flipped because parts of it have not yet been downloaded.
+        multiple: These features can't be flipped because parts of them have not yet been downloaded.
     rotate:
       title: Rotate
       description:
@@ -319,7 +409,10 @@ en:
       annotation:
         line: Rotated a line.
         area: Rotated an area.
-        multiple: Rotated multiple features.
+        relation: Rotated a relation.
+        feature:
+          one: Rotated a feature.
+          other: "Rotated {n} features."
       incomplete_relation:
         single: This feature can't be rotated because it hasn't been fully downloaded.
         multiple: These features can't be rotated because they haven't been fully downloaded.
@@ -342,24 +435,72 @@ en:
         features: Flip the directions of these features.
       key: V
       annotation:
-        point: Reversed a point.
-        points: Reversed multiple points.
-        line: Reversed a line.
-        lines: Reversed multiple lines.
-        features: Reversed multiple features.
+        point:
+          one: Reversed a point.
+          other: "Reversed {n} points."
+        line:
+          one: Reversed a line.
+          other: "Reversed {n} lines."
+        feature:
+          one: Reversed a feature.
+          other: "Reversed {n} features."
+    scale:
+      annotation:
+        down:
+          feature:
+            one: Scaled down a feature.
+            other: "Scaled down {n} features."
+        up:
+          feature:
+            one: Scaled up a feature.
+            other: "Scaled up {n} features."
+      too_small:
+        single: This feature can't be scaled down because it would become too small.
+        multiple: These features can't be scaled down because they would become too small.
+      too_large:
+        single: This feature can't be scaled because not enough of it is currently visible.
+        multiple: These features can't be scaled because not enough of them are currently visible.
+      connected_to_hidden:
+        single: This feature can't be scaled because it is connected to a hidden feature.
+        multiple: These features can't be scaled because some are connected to hidden features.
+      not_downloaded:
+        single: This feature can't be scaled because parts of it have not yet been downloaded.
+        multiple: These features can't be scaled because parts of them have not yet been downloaded.
     split:
       title: Split
       description:
-        line: Split this line into two at this node.
-        area: Split the boundary of this area into two.
-        multiple: Split the lines/area boundaries at this node into two.
+        line:
+          single:
+            single_node: Divide this line into two at this point.
+            multiple_node: Divide this line at these points.
+          multiple:
+            single_node: "Divide all lines at this point. Tip: To limit this operation to a specific line, select both the line and point before performing the split."
+            multiple_node: "Divide all lines at these points. Tip: To limit this operation to a specific line, select the line as well as the points before performing the split."
+        area:
+          single:
+            single_node: Divide the edge of this area into two at this point.
+            multiple_node: Divide the edge of this area at these points.
+          multiple:
+            single_node: Divide the edges of these areas at this point.
+            multiple_node: Divide the edges of these areas at these points.
+        feature:
+          multiple:
+            single_node: Divide these features at this point.
+            multiple_node: Divide these features at these points.
       key: X
       annotation:
-        line: Split a line.
-        area: Split an area boundary.
-        multiple: "Split {n} lines/area boundaries."
+        line:
+          one: "Split a line."
+          other: "Split {n} lines."
+        area:
+          one: "Split the edge of an area."
+          other: "Split {n} areas."
+        feature:
+          one: "Split a feature."
+          other: "Split {n} features."
       not_eligible: Lines can't be split at their beginning or end.
-      multiple_ways: There are too many lines here to split.
+      parent_incomplete: This line cannot be split because a parent relation isn’t fully downloaded. Download the full relation.
+      simple_roundabout: This line cannot be split because this roundabout is part of a larger relation. You must remove it from the relation first.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
       annotation:
@@ -371,19 +512,24 @@ en:
       description:
         vertex:
           single: Extract this point from its parent lines/areas.
+          multiple: Extract these points from their parent features.
+        line:
+          single: Extract a point from this line.
+          multiple: Extract points from these lines.
         area:
           single: Extract a point from this area.
+          multiple: Extract points from these areas.
+        feature:
+          multiple: Extract points from these features.
       annotation:
-        single: Extracted a point.
+        one: Extracted a point.
+        other: "Extracted {n} points."
       too_large:
-        area:
-          single: A point can't be extracted from this area because not enough of it is currently visible.
-      restriction:
-        vertex:
-          single: "This point can't be extracted because it would damage a \"{relation}\" relation."
+        single: A point can't be extracted because not enough of this feature is visible.
+        multiple: Points can't be extracted because not enough of these features are visible.
       connected_to_hidden:
-        vertex:
-          single: This point can't be extracted because it is connected to a hidden feature.
+        single: This point can't be extracted because it is connected to a hidden feature.
+        multiple: Points can't be extracted from these features because some are connected to hidden features.
   restriction:
     controls:
       distance: Distance
@@ -417,15 +563,16 @@ en:
       select_from_name: "Click to select {from} {fromName}"
       toggle: "Click for \"{turn}\""
   undo:
+    title: Undo
     tooltip: "Undo: {action}"
     nothing: Nothing to undo.
   redo:
+    title: Redo
     tooltip: "Redo: {action}"
     nothing: Nothing to redo.
   tooltip_keyhint: "Shortcut:"
-  browser_notice: "This editor is supported in Firefox, Chrome, Safari, Opera, and Internet Explorer 11 and above. Please upgrade your browser or use Potlatch 2 to edit the map."
   translate:
-    translate: Translate
+    translate: Add multilingual name
     localized_translation_label: Multilingual Name
     localized_translation_language: Choose language
     localized_translation_name: Name
@@ -440,23 +587,26 @@ en:
     key: '`'
     tooltip: Toggle the sidebar.
   feature_info:
-    hidden_warning: "{count} hidden features"
-    hidden_details: "These features are currently hidden: {details}"
+    hidden_warning:
+      one: "{count} hidden feature"
+      other: "{count} hidden features"
   osm_api_status:
     message:
       error: Unable to reach the OpenStreetMap API. Your edits are safe locally. Check your network connection.
       offline: The OpenStreetMap API is offline. Your edits are safe locally. Please come back later.
       readonly: The OpenStreetMap API is currently read-only. You can continue editing, but must wait to save your changes.
       rateLimit: The OpenStreetMap API is limiting anonymous connections. You can fix this by logging in.
+      local_storage_full: You have made too many edits to back up. Consider saving your changes now.
     retry: Retry
   commit:
     title: Upload to OpenStreetMap
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
     request_review: "I would like someone to review my edits."
+    request_review_info: "Unsure about something? Invite an experienced mapper to check your work once it's live."
     save: Upload
     cancel: Cancel
-    changes: "Changes ({count})"
+    changes: Changes
     download_changes: Download osmChange file
     errors: Errors
     warnings: Warnings
@@ -467,13 +617,19 @@ en:
     comment_needed_message: Please add a changeset comment first.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
+    changeset_comment_length_warning: "Changeset comments can have a maximum of {maxChars} characters."
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
     google_warning_link: https://www.openstreetmap.org/copyright
   contributors:
     list: "Edits by {users}"
-    truncated_list: "Edits by {users} and {count} others"
+    truncated_list:
+      one: "Edits by {users} and {count} other"
+      other: "Edits by {users} and {count} others"
   info_panels:
     key: I
+    selected:
+      one: "{n} selected"
+      other: "{n} selected"
     background:
       key: B
       title: Background
@@ -491,14 +647,15 @@ en:
     history:
       key: H
       title: History
-      selected: "{n} selected"
       no_history: "No History (New Feature)"
       version: Version
       last_edit: Last Edit
       edited_by: Edited By
       changeset: Changeset
+      changeset_link: Changeset on osm.org
+      profile_link: Profile on osm.org
+      history_link: History on osm.org
       unknown: Unknown
-      link_text: History on openstreetmap.org
       note_no_history: "No History (New Note)"
       note_comments: Comments
       note_created_date: Created Date
@@ -511,13 +668,13 @@ en:
     measurement:
       key: M
       title: Measurement
-      selected: "{n} selected"
       geometry: Geometry
       closed_line: closed line
       closed_area: closed area
       center: Center
       perimeter: Perimeter
       length: Length
+      distance: Distance
       area: Area
       centroid: Centroid
       location: Location
@@ -543,27 +700,34 @@ en:
     zoom_to:
       key: Z
       title: Zoom To Selection
+      no_selection: Nothing to zoom to.
     show_more: Show More
     view_on_osm: View on openstreetmap.org
     view_on_osmose: View on osmose.openstreetmap.fr
     view_on_keepRight: View on keepright.at
     feature_type: Feature Type
     fields: Fields
-    tags_count: "Tags ({count})"
-    members_count: "Members ({count})"
-    relations_count: "Relations ({count})"
-    features_count: "Features ({count})"
+    tags: Tags
+    members: Members
+    relations: Relations
+    features: Features
+    title_count: "{title} ({count})"
     add_to_relation: Add to a relation
+    add_to_tag: Add a tag
     new_relation: New relation...
     choose_relation: Choose a parent relation
     role: Role
+    multiple_roles: Multiple Roles
     choose: Select feature type
-    results: "{n} results for {search}"
+    results:
+      one: "{n} result for {search}"
+      other: "{n} results for {search}"
     no_documentation_key: "There is no documentation available."
-    edit_reference: "edit/translate"
+    edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
+    empty: (empty)
     multiple_values: Multiple Values
     multiple_types: Multiple Types
     unshared_value_tooltip: not shared by all features
@@ -587,6 +751,8 @@ en:
         type: Type
         default: Default
         layer: Layer
+    increment: increment
+    decrement: decrement
     add: Add
     none: None
     node: Node
@@ -596,9 +762,35 @@ en:
     add_fields: "Add field:"
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+    display_name:
+      direction: "{direction}"
+      network: "{network}"
+      from_to: "from {from} to {to}"
+      from_to_via: "from {from} to {to} via {via}"
+      network_direction: "{network} {direction}"
+      network_from_to: "{network} from {from} to {to}"
+      network_from_to_via: "{network} from {from} to {to} via {via}"
+      ref: "{ref}"
+      ref_direction: "{ref} {direction}"
+      ref_from_to: "{ref} from {from} to {to}"
+      ref_from_to_via: "{ref} from {from} to {to} via {via}"
+      network_ref: "{network} {ref}"
+      network_ref_direction: "{network} {ref} {direction}"
+      network_ref_from_to: "{network} {ref} from {from} to {to}"
+      network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+    speed_unit: "Speed unit"
+    roadheight:
+      # symbol for meters
+      meter: m
+      # abbreviation of feet
+      foot: ft
+      # abbreviation of inches
+      inch: in
+    max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
+    set_today: "Sets the value to today."
   background:
     title: Background
-    description: Background settings
+    description: Background Settings
     key: B
     backgrounds: Backgrounds
     none: None
@@ -619,22 +811,31 @@ en:
       tooltip: Show a zoomed out map to help locate the area currently displayed.
       key: '/'
     panel:
-      description: Show Detail Panel
+      description: Show Background Panel
       tooltip: Show advanced background information.
+    location_panel:
+      description: Show Location Panel
+      tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
     offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset_label: "Adjust Imagery Offset"
+    nudge:
+      top: "nudge top"
+      left: "nudge left"
+      right: "nudge right"
+      bottom: "nudge bottom"
   map_data:
     title: Map Data
     description: Map Data
-    key: F
+    key: U
     data_layers: Data Layers
     layers:
       osm:
         tooltip: Map data from OpenStreetMap
-        title: OpenStreetMap data
+        title: OpenStreetMap Data
       notes:
         tooltip: Note data from OpenStreetMap
-        title: OpenStreetMap notes
+        title: OpenStreetMap Notes
       keepRight:
         tooltip: Data issues detected by keepright.at
         title: KeepRight Issues
@@ -648,6 +849,12 @@ en:
         tooltip: "Drag and drop a data file onto the page, or click the button to setup"
         title: Custom Map Data
         zoom: Zoom to data
+    history_panel:
+      title: Show History Panel
+      tooltip: Show version details for the selection.
+    measurement_panel:
+      title: Show Measurement Panel
+      tooltip: Show geometry values for the selection.
     style_options: Style Options
     highlight_edits:
       key: G
@@ -669,6 +876,16 @@ en:
       panoramic:
         title: "Panoramic Photos"
         tooltip: "360° photos"
+    date_filter:
+      fromDate:
+        title: "From"
+        tooltip: "Show photos taken after this date"
+      toDate:
+        title: "To"
+        tooltip: "Show photos taken before this date"
+    username_filter:
+      title: "Username"
+      tooltip: "Show only photos by this user"
   feature:
     points:
       description: Points
@@ -733,7 +950,24 @@ en:
     custom_background:
       tooltip: Edit custom background
       header: Custom Background Settings
-      instructions: "Enter a tile URL template below.\n\nSupported WMS tokens:\n  `{proj}`: requested projection (`EPSG:3857` only)\n  `{wkid}`: same as proj, but without the EPSG (`3857` only)\n  `{width}`, `{height}`: requested image dimensions (`256` only)\n  `{bbox}`: requested bounding box (e.g. `minX,minY,maxX,maxY`)\n\nSupported TMS tokens:\n  `{zoom}` or `{z}, `{x}`, `{y}`: Z/X/Y tile coordinates\n  `{-y}` or `{ty}`: flipped TMS-style Y coordinates\n  `{switch:a,b,c}`: DNS server multiplexing\n  `{u}`: quadtile (Bing) scheme\n\nExample:\n{example}"
+      instructions:
+        info: Enter a tile URL template below.
+        wms:
+          tokens_label: "Supported WMS tokens:"
+          tokens:
+            proj: "`{proj}`: requested projection (`EPSG:3857` only)"
+            wkid: "`{wkid}`: same as proj, but without the EPSG (`3857` only)"
+            dimensions: "`{width}`, `{height}`: requested image dimensions (`256` only)"
+            bbox: "`{bbox}`: requested bounding box (e.g. `minX,minY,maxX,maxY`)"
+        tms:
+          tokens_label: "Supported TMS tokens:"
+          tokens:
+            xyz: "`{zoom}` or `{z}`, `{x}`, `{y}`: Z/X/Y tile coordinates"
+            flipped_y: "`{-y}` or `{ty}`: flipped TMS-style Y coordinates"
+            switch: "`{switch:a,b,c}`: DNS server multiplexing"
+            quadtile: "`{u}`: quadtile (Bing) scheme"
+            scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
+        example: "Example:"
       template:
         placeholder: Enter a url template
     custom_data:
@@ -782,17 +1016,14 @@ en:
       delete: Leave Deleted
       download_changes: Or download osmChange file
       done: "All conflicts resolved!"
-      help: |
-        Another user changed some of the same map features you changed.
-        Click on each feature below for more details about the conflict, and choose whether to keep
-        your changes or the other user's changes.
+      help: "Another user changed some of the same map features you changed. Click on each feature below for more details about the conflict, and choose whether to keep your changes or the other user's changes."
   merge_remote_changes:
     conflict:
       deleted: 'This feature has been deleted by {user}.'
       location: 'This feature was moved by both you and {user}.'
       nodelist: 'Nodes were changed by both you and {user}.'
       memberlist: 'Relation members were changed by both you and {user}.'
-      tags: 'You changed the <b>{tag}</b> tag to "{local}" and {user} changed it to "{remote}".'
+      tags: 'You changed the "{tag}" tag to "{local}" and {user} changed it to "{remote}".'
   success:
     just_edited: "You just edited OpenStreetMap!"
     thank_you: "Thank you for improving the map."
@@ -805,6 +1036,12 @@ en:
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
+    supporting:
+      title: "OpenStreetMap is free to use, but not free to run"
+      details: "Its stability, quality, independence, and strength depend on donations from people like you."
+      donation:
+        title: "Support the map"
+        details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
     events: Events
@@ -817,9 +1054,11 @@ en:
   splash:
     welcome: Welcome to the iD OpenStreetMap editor
     text: "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}."
+    changelog: changelog
     privacy_update: "Our privacy policy has recently been updated."
     privacy_policy: iD privacy policy
     privacy: "{updateMessage} By using this software, you agree to do so in accordance with the {privacyLink}."
+    privacy_settings: Your Privacy Settings
     walkthrough: "Start the Walkthrough"
     start: "Edit now"
   source_switch:
@@ -835,6 +1074,9 @@ en:
   zoom:
     in: Zoom In
     out: Zoom Out
+    disabled:
+      in: Cannot zoom in further.
+      out: Cannot zoom out further.
   cannot_zoom: "Cannot zoom out further in current mode."
   full_screen: Toggle Full Screen
   self_intersection:
@@ -1125,18 +1367,38 @@ en:
     report: Report a privacy concern with this image
     view_on_bing: "View on Bing Maps"
     hires: "High resolution"
+  vegbilder:
+    title: "Vegbilder"
+    tooltip: "Street-level photos from the Norwegian Public Roads Administration"
+    publisher: "Norwegian Public Roads Administration"
+    view_on: "View it on Vegbilder"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
   mapillary_map_features:
     title: "Map Features"
     tooltip: "Map features from Mapillary"
-    request_data: "Request Data"
     construction:
+      barrier:
+        temporary: temporary barrier
       flat:
         crosswalk_plain: plain crosswalk
+        driveway: driveway
     marking:
       discrete:
-        crosswalk_zebra: zebra crosswalk
+        arrow:
+          left: lane marking - arrow (left)
+          right: lane marking - arrow (right)
+          split_left_or_straight: lane marking - arrow (split left or straight)
+          split_right_or_straight: lane marking - arrow (split right or straight)
+          straight: lane marking - arrow (straight)
+        crosswalk_zebra: lane marking - crosswalk
+        give_way_row: lane marking - give way (row)
+        give_way_single: lane marking - give way (single)
+        other_marking: lane marking - other
+        stop_line: lane marking - stop line
+        symbol:
+          bicycle: lane marking - symbol (bicycle)
+        text: lane marking - text
     object:
       banner: banner
       bench: bench
@@ -1145,15 +1407,24 @@ en:
       catch_basin: catch basin
       cctv_camera: CCTV camera
       fire_hydrant: fire hydrant
+      junction_box: junction box
       mailbox: mailbox
       manhole: manhole
+      parking_meter: parking meter
       phone_booth: phone booth
       sign:
         advertisement: advertisement
         information: information sign
+        other: other sign
         store: shop sign
+        traffic_sign:
+          back: traffic sign - back
+          direction_front: traffic sign - front
+          front: traffic sign - front
       street_light: street light
       support:
+        pole: pole
+        traffic_sign_frame: traffic sign frame
         utility_pole: utility pole
       traffic_cone: traffic cone
       traffic_light:
@@ -1164,16 +1435,33 @@ en:
         other: traffic light
         pedestrians: pedestrian traffic light
       trash_can: trash can
+      water_valve: water valve
   mapillary:
     title: Mapillary
     signs:
       tooltip: "Traffic signs from Mapillary"
     view_on_mapillary: "View this image on Mapillary"
-  openstreetcam_images:
-    tooltip: "Street-level photos from OpenStreetCam"
-  openstreetcam:
-    title: OpenStreetCam
-    view_on_openstreetcam: "View this image on OpenStreetCam"
+  kartaview_images:
+    tooltip: "Street-level photos from KartaView"
+  kartaview:
+    title: KartaView
+    view_on_kartaview: "View this image on KartaView"
+  mapilio:
+    title: Mapilio
+    tooltip: "Street-level photos from Mapilio"
+  street_side:
+    minzoom_tooltip: "Zoom in to see street-side photos"
+  local_photos:
+    tooltip: Add georeferenced photos from local files
+    tooltip_edit: Edit georeferenced photos
+    header: Georeferenced Photos
+    zoom: Zoom to photos
+    zoom_single: Zoom to photo
+    file:
+      instructions: "Choose georeferenced photos to be displayed. Supported types are .jpg and .png with exif location data"
+      label: "Browse files"
+    no_geolocation:
+      tooltip: Image without geolocation cannot be located on the map
   note:
     note: Note
     title: Edit note
@@ -1208,167 +1496,192 @@ en:
       open_data_h: "Open Data"
       open_data: "Edits that you make on this map will be visible to everyone who uses OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying, or imagery collected from aerial or street level photos. Copying from commercial sources, like Google Maps, [is strictly forbidden](https://www.openstreetmap.org/copyright)."
       before_start_h: "Before you start"
-      before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Click \"Start the Walkthrough\" on this screen to take the tutorial - it takes only about 15 minutes."
+      before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
-      open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
+      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Map Machine](https://github.com/enzet/map-machine) (CC BY 4.0)."
+      open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
       navigation_h: "Navigation"
-      navigation_drag: "You can drag the map by pressing and holding down the {leftclick} left mouse button and moving the mouse around. You can also use the `↓`, `↑`, `←`, `→` arrow keys on your keyboard."
-      navigation_zoom: "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons along the side of the map. You can also use the `+`, `-` keys on your keyboard."
+      navigation_drag: "You can drag the map by holding down the {leftclick} left mouse button and moving the mouse around, or by {touchdrag_icon} dragging on a touchscreen. You can also use the `↓`, `↑`, `←`, `→` arrow keys on a keyboard."
+      navigation_zoom: "You can zoom in or out by scrolling with a {mousewheel_icon} mouse wheel or trackpad, or by {pinch_icon} pinching with two fingers on a touchscreen. You can also press the {plus} / {minus} buttons along the side of the map or the `+`, `-` keys on a keyboard."
       features_h: "Map Features"
       features: "We use the word *features* to describe things that appear on the map, such as roads, buildings, or points of interest. Anything in the real world can be mapped as a feature on OpenStreetMap. Map features are represented on the map using *points*, *lines*, or *areas*."
       nodes_ways: "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
     editing:
       title: "Editing & Saving"
       select_h: "Select"
-      select_left_click: "{leftclick} Left-click on a feature to select it. This will highlight it with a pulsing glow, and the sidebar will display details about that feature, such as its name or address."
-      select_right_click: "{rightclick} Right-click on a feature to display the editing menu, which shows the commands that are available, such as rotating, moving, and deleting."
+      select_left_click: "{leftclick} Left-click or {tap_icon} tap a feature to select it. This will highlight it with a pulsing glow and display further details about it in the sidebar."
+      select_right_click: "{rightclick} Right-click or {longpress_icon} long-press a feature to display the edit menu, which provides operations such as copy, rotate, and delete."
+      select_space: "The `{space}` key can also be used instead of left-click when selecting and drawing."
       multiselect_h: "Multiselect"
-      multiselect_shift_click: "`{shift}`+{leftclick} left-click to select several features together.  This makes it easier to move or delete multiple items."
+      multiselect: "Selecting multiple features together lets you quickly edit them all at once."
+      multiselect_shift_click: "With a mouse and keyboard, hold `{shift}` and {leftclick} left-click features to add them to the selection. On a touchscreen, {longpress_icon} tap-and-hold one feature while {tap_icon} tapping additional features with another finger."
       multiselect_lasso: "Another way to select multiple features is to hold down the `{shift}` key, then press and hold down the {leftclick} left mouse button and drag the mouse to draw a selection lasso. All of the points inside the lasso area will be selected."
       undo_redo_h: "Undo & Redo"
-      undo_redo: "Your edits are stored locally in your browser until you choose to save them to the OpenStreetMap server. You can undo edits by clicking the {undo} **Undo** button, and redo them by clicking the {redo} **Redo** button."
+      undo_redo: "Your edits are stored locally in your browser until you choose to save them to the OpenStreetMap server. You can undo edits by pressing the {undo_icon} **{undo}** button, and redo them by pressing the {redo_icon} **{redo}** button."
       save_h: "Save"
-      save: "Click {save} **Save** to finish your edits and send them to OpenStreetMap. You should remember to save your work frequently!"
+      save: "Press the {save_icon} **{save}** button to finish your edits and send them to OpenStreetMap. You should remember to save your work frequently!"
       save_validation: "On the save screen, you'll have a chance to review what you've done. iD will also perform some basic checks for missing data and may offer helpful suggestions and warnings if something doesn't seem right."
       upload_h: "Upload"
-      upload: "Before uploading your changes you must enter a [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Then click **Upload** to send your changes to OpenStreetMap, where they will be merged into the map and publicly visible to everyone."
+      upload: "Before uploading your changes you must enter a [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments). Then press **{upload}** to send your changes to OpenStreetMap, where they will be merged into the map and publicly visible to everyone."
       backups_h: "Automatic Backups"
-      backups: "If you can't finish your edits in one sitting, for example if your computer crashes or you close the browser tab, your edits are still saved in your browser's storage. You can come back later (on the same browser and computer), and iD will offer to restore your work."
+      backups: "If you happen to close the browser before saving, your edits are still stored locally. iD will offer to restore your work when you come back later on the same browser and device."
       keyboard_h: "Keyboard Shortcuts"
-      keyboard: "You can view a list of keyboard shortcuts by pressing the `?` key."
+      keyboard: "You can view a list of keyboard shortcuts by pressing the `{shortcuts_key}` key."
     feature_editor:
       title: Feature Editor
       intro: "The *feature editor* appears alongside the map, and allows you to see and edit all of the information for the selected feature."
       definitions: "The top section displays the feature's type. The middle section contains *fields* showing the feature's attributes, such as its name or address."
       type_h: "Feature Type"
-      type: "You can click on the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from."
-      type_picker: "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also click the {inspect} **Info** icon next to the feature type to learn more about it."
+      type: "You can press the feature type to change the feature to a different type. Everything that exists in the real world can be added to OpenStreetMap, so there are thousands of feature types to choose from."
+      type_picker: "The type picker displays the most common feature types, such as parks, hospitals, restaurants, roads, and buildings. You can search for anything by typing what you're looking for in the search box. You can also press the {inspect} **Info** icon next to the feature type to learn more about it."
       fields_h: "Fields"
-      fields_all_fields: "The \"Fields\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
+      fields_all_fields: "The \"{fields}\" section contains all of the feature's details that you may edit. In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
       fields_example: "Each feature type will display different fields. For example, a road may display fields for its surface and speed limit, but a restaurant may display fields for the type of food it serves and the hours it is open."
-      fields_add_field: "You can also click the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more."
+      fields_add_field: "You can also use the \"Add field\" dropdown to add more fields, such as a description, Wikipedia link, wheelchair access, and more."
       tags_h: "Tags"
-      tags_all_tags: "Below the fields section, you can expand the \"Tags\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
+      tags_all_tags: "Below the fields section, you can expand the \"{tags}\" section to edit any of the OpenStreetMap *tags* for the selected feature. Each tag consists of a *key* and *value*, data elements that define all of the features stored in OpenStreetMap."
       tags_resources: "Editing a feature's tags requires intermediate knowledge about OpenStreetMap. You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page) or [Taginfo](https://taginfo.openstreetmap.org/) to learn more about accepted OpenStreetMap tagging practices."
     points:
       title: Points
       intro: "*Points* can be used to represent features such as shops, restaurants, and monuments. They mark a specific location, and describe what's there."
       add_point_h: "Adding Points"
-      add_point: "To add a point, click the {point} **Point** button on the toolbar above the map, or press the shortcut key `1`. This will change the mouse cursor to a cross symbol."
-      add_point_finish: "To place the new point on the map, position the mouse cursor where the point should go, then {leftclick} left-click or press `Space`."
+      add_point: "To add a point, press the {point_icon} **{point}** button on the toolbar above the map, or press the shortcut key `1`."
+      add_point_finish: "Next, place the new point on the map. With a mouse, position the cursor where the point should go and {leftclick} left-click. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
       move_point_h: "Moving Points"
-      move_point: "To move a point, place the mouse cursor over the point, then press and hold the {leftclick} left mouse button while dragging the point to its new location."
+      move_point: "To move a point, {leftclick} left-click and drag it with a mouse or {touchdrag_icon} tap-and-drag it on a touchscreen."
       delete_point_h: "Deleting Points"
       delete_point: "It's OK to delete features that don't exist in the real world. Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it."
-      delete_point_command: "To delete a point, {rightclick} right-click on the point to select it and show the edit menu, then use the {delete} **Delete** command."
+      delete_point_command: "To delete a point, {rightclick} right-click or {longpress_icon} long-press the point to show the edit menu, then use the {delete_icon} **{delete}** operation."
     lines:
       title: Lines
       intro: "*Lines* are used to represent features such as roads, railroads, and rivers. Lines should be drawn down the center of the feature that they represent."
       add_line_h: "Adding Lines"
-      add_line: "To add a line, click the {line} **Line** button on the toolbar above the map, or press the shortcut key `2`. This will change the mouse cursor to a cross symbol."
-      add_line_draw: "Next, position the mouse cursor where the line should begin and {leftclick} left-click or press `Space` to begin placing nodes along the line. Continue placing more nodes by clicking or pressing `Space`. While drawing, you can zoom in or drag the map in order to add more detail."
-      add_line_finish: "To finish a line, press `{return}` or click again on the last node."
+      add_line: "To add a line, press the {line_icon} **{line}** button on the toolbar above the map, or press the shortcut key `2`."
+      add_line_draw: "Next, mark the line's starting location. With a mouse, position the cursor where the line should begin and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
+      add_line_continue: "Continue placing nodes along the shape of the line by {leftclick} clicking, {tap_icon} tapping, or pressing the `{space}` key. While drawing, you can zoom in or drag the map in order to add more detail."
+      add_line_finish: "To finish a line, click or tap on the last node again or press `{return}`."
       modify_line_h: "Modifying Lines"
-      modify_line_dragnode: "Often you'll see lines that aren't shaped correctly, for example a road that does not match up with the background imagery. To adjust the shape of a line, first {leftclick} left-click to select it. All nodes of the line will be drawn as small circles. You can then drag the nodes to better locations."
-      modify_line_addnode: "You can also create new nodes along a line either by {leftclick}**x2** double-clicking on the line or by dragging the small triangles at the midpoints between nodes."
+      modify_line_dragnode: "Often you'll see lines that aren't shaped correctly, for example a road that does not match up with the background imagery. To adjust the shape of a line, first select it. All nodes of the line will be drawn as small circles. You can then drag the nodes to better locations."
+      modify_line_addnode: "You can also create new nodes along a line by {leftclick}**x2** double-clicking or {doubletap_icon} double-tapping the line, or by dragging the small triangles at the midpoints between nodes."
       connect_line_h: "Connecting Lines"
       connect_line: "Having roads connected properly is important for the map and essential for providing driving directions."
       connect_line_display: "The connections between roads are drawn with gray circles. The endpoints of a line are drawn with larger white circles if they don't connect to anything."
       connect_line_drag: "To connect a line to another feature, drag one of the line's nodes onto the other feature until both features snap together. Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features."
       connect_line_tag: "If you know that the connection has traffic lights or crosswalks, you can add them by selecting the connecting node and using the feature editor to select the correct feature's type."
       disconnect_line_h: "Disconnecting Lines"
-      disconnect_line_command: "To disconnect a road from another feature, {rightclick} right-click the connecting node and select the {disconnect} **Disconnect** command from the editing menu."
+      disconnect_line_command: "To disconnect a road from another feature, {rightclick} right-click or {longpress_icon} long-press the connecting node and choose the {disconnect_icon} **{disconnect}** operation from the edit menu."
       move_line_h: "Moving Lines"
-      move_line_command: "To move an entire line, {rightclick} right-click the line and select the {move} **Move** command from the editing menu. Then move the mouse, and {leftclick} left-click to place the line in a new location."
+      move_line_command: "To move an entire line, {rightclick} right-click the line and choose the {move_icon} **{move}** operation from the edit menu. Then move the mouse, and {leftclick} left-click to place the line in a new location."
       move_line_connected: "Lines that are connected to other features will stay connected as you move the line to a new location. iD may prevent you from moving a line across another connected line."
       delete_line_h: "Deleting Lines"
       delete_line: "If a line is entirely incorrect, for example a road that doesn't exist in the real world, it's OK to delete it. Be careful when deleting features: the background imagery you are using might be outdated, and a road that looks wrong could simply be newly built."
-      delete_line_command: "To delete a line, {rightclick} right-click on the line to select it and show the edit menu, then use the {delete} **Delete** command."
+      delete_line_command: "To delete a line, {rightclick} right-click or {longpress_icon} long-press the line to show the edit menu, then use the {delete_icon} **{delete}** operation."
     areas:
       title: Areas
       intro: "*Areas* are used to show the boundaries of features like lakes, buildings, and residential areas. Areas should be traced around the edge of the feature that they represent, for example, around the base of a building."
       point_or_area_h: "Points or Areas?"
       point_or_area: "Many features can be represented as points or areas. You should map buildings and property outlines as areas whenever possible. Place points inside a building area to represent businesses, amenities, and other features located inside the building."
       add_area_h: "Adding Areas"
-      add_area_command: "To add an area, click the {area} **Area** button on the toolbar above the map, or press the shortcut key `3`. This will change the mouse cursor to a cross symbol."
-      add_area_draw: "Next, position the mouse cursor at one of the corners of the feature and {leftclick} left-click or press `Space` to begin placing nodes around the outer edge of the area. Continue placing more nodes by clicking or pressing `Space`. While drawing, you can zoom in or drag the map in order to add more detail."
-      add_area_finish: "To finish an area, press `{return}` or click again on either the first or last node."
+      add_area_command: "To add an area, press the {area_icon} **{area}** button on the toolbar above the map, or press the shortcut key `3`."
+      add_area_draw: "Next, place the first corner of the area. With a mouse, position the cursor over any corner and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
+      add_area_continue: "Continue placing nodes along the edge of the area by {leftclick} clicking, {tap_icon} tapping, or pressing the `{space}` key. While drawing, you can zoom in or drag the map in order to add more detail."
+      add_area_finish: "To finish an area, click or tap on the first or last node again or press `{return}`."
       square_area_h: "Square Corners"
-      square_area_command: "Many area features like buildings have square corners. To square the corners of an area, {rightclick} right-click the edge of the area and select the {orthogonalize} **Square** command from the editing menu."
+      square_area_command: "Many area features like buildings have square corners. To square the corners of an area, {rightclick} right-click or {longpress_icon} long-press the edge of the area and choose the {orthogonalize_icon} **{orthogonalize}** operation from the edit menu."
       modify_area_h: "Modifying Areas"
-      modify_area_dragnode: "Often you'll see areas that aren't shaped correctly, for example a building that does not match up with the background imagery. To adjust the shape of an area, first {leftclick} left-click to select it. All nodes of the area will be drawn as small circles. You can then drag the nodes to better locations."
-      modify_area_addnode: "You can also create new nodes along an area either by {leftclick}**x2** double-clicking on the edge of the area or by dragging the small triangles at the midpoints between nodes."
+      modify_area_dragnode: "Often you'll see areas that aren't shaped correctly, for example a building that does not match up with the background imagery. To adjust the shape of an area, first select it. All nodes of the area will be drawn as small circles. You can then drag the nodes to better locations."
+      modify_area_addnode: "You can also create new nodes along an area by {leftclick}**x2** double-clicking or {doubletap_icon} double-tapping an edge, or by dragging the small triangles at the midpoints between nodes."
       delete_area_h: "Deleting Areas"
       delete_area: "If an area is entirely incorrect, for example a building that doesn't exist in the real world, it's OK to delete it. Be cautious when deleting features - the background imagery you are using might be outdated, and a building that looks wrong could simply be newly built."
-      delete_area_command: "To delete an area, {rightclick} right-click on the area to select it and show the edit menu, then use the {delete} **Delete** command."
+      delete_area_command: "To delete an area, {rightclick} right-click or {longpress_icon} long-press the area to show the edit menu, then use the {delete_icon} **{delete}** operation."
     relations:
       title: Relations
       intro: "A *relation* is a special type of feature in OpenStreetMap that groups together other features. The features that belong to a relation are called *members*, and each member can have a *role* in the relation."
       edit_relation_h: "Editing Relations"
-      edit_relation: "At the bottom of the feature editor, you can expand the \"Relations\" section to see if the selected feature is a member of any relations. You can then click on the relation to select and edit it."
-      edit_relation_add: "To add a feature to a relation, select the feature, then click the {plus} add button in the \"Relations\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"New relation...\" option."
-      edit_relation_delete: "You can also click the {delete} **Delete** button to remove the selected feature from the relation. If you remove all of the members from a relation, the relation will be deleted automatically."
+      edit_relation: "At the bottom of the feature editor, you can expand the \"{relations}\" section to see if the selected feature is a member of any relations. You can then select a relation to edit it."
+      edit_relation_add: "To add a feature to a relation, select the feature, then press the {plus} add button in the \"{relations}\" section of the feature editor. You can choose from a list of nearby relations, or choose the \"{new_relation}\" option."
+      edit_relation_delete: "You can also press the {delete_icon} **{delete}** button to remove the selected feature from the relation. If you remove all of the members from a relation, the relation will be deleted automatically."
       maintain_relation_h: "Maintaining Relations"
       maintain_relation: "For the most part, iD will maintain relations automatically as you edit. You should take care when replacing features that might be members of relations. For example if you delete a section of road and draw a new section of road to replace it, you should add the new section to the same relations (routes, turn restrictions, etc.) as the original."
       relation_types_h: "Relation Types"
       multipolygon_h: "Multipolygons"
       multipolygon: "A *multipolygon* relation is a group of one or more *outer* features and one or more inner features. The outer features define the outer edges of the multipolygon, and the inner features define sub-areas or holes cut out from the inside of the multipolygon."
-      multipolygon_create: "To create a multipolygon, for example a building with a hole in it, draw the outer edge as an area and the inner edge as a line or different kind of area. Then `{shift}`+{leftclick} left-click to select both features, {rightclick} right-click to show the edit menu, and select the {merge} **Merge** command."
+      multipolygon_create: "To create a multipolygon, for example a building with a hole in it, draw the outer edge as an area and the inner edge as a line or different kind of area. Then `{shift}`+{leftclick} left-click to select both features, {rightclick} right-click to show the edit menu, and choose the {merge_icon} **{merge}** operation."
       multipolygon_merge: "Merging several lines or areas will create a new multipolygon relation with all selected areas as members. iD will choose the inner and outer roles automatically, based on which features are contained inside other features."
       turn_restriction_h: "Turn restrictions"
       turn_restriction: "A *turn restriction* relation is a group of several road segments in an intersection. Turn restrictions consist of a *from* road, *via* node or roads, and a *to* road."
-      turn_restriction_field: "To edit turn restrictions, select a junction node where two or more roads meet. The feature editor will display a special \"Turn Restrictions\" field containing a model of the intersection."
-      turn_restriction_editing: "In the \"Turn Restrictions\" field, click to select a \"from\" road, and see whether turns are allowed or restricted to any of the \"to\" roads. You can click on the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices."
+      turn_restriction_field: "To edit turn restrictions, select a junction node where two or more roads meet. The feature editor will display a special \"{turn_restrictions}\" field containing a model of the intersection."
+      turn_restriction_editing: "In the \"{turn_restrictions}\" field, select a \"from\" road, and see whether turns are allowed or restricted to any of the \"to\" roads. You can press the turn icons to toggle them between allowed and restricted. iD will create relations automatically and set the from, via, and to roles based on your choices."
       route_h: "Routes"
       route: "A *route* relation is a group of one or more line features that together form a route network, like a bus route, train route, or highway route."
-      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"Relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      route_add: "To add a feature to a route relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation."
       boundary_h: "Boundaries"
       boundary: "A *boundary* relation is a group of one or more line features that together form an administrative boundary."
-      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"Relations\" section of the feature editor, then click the {plus} add button to add this feature to a nearby existing relation or a new relation."
+      boundary_add: "To add a feature to a boundary relation, select the feature and scroll down to the \"{relations}\" section of the feature editor, then press the {plus} add button to add this feature to a nearby existing relation or a new relation."
+    operations:
+      title: Operations
+      intro: "*Operations* are special commands you can use to edit features. {rightclick} Right-click or {longpress_icon} long-press any feature to view the available operations."
+      intro_2: "Each operation has its own keyboard shortcut. Most operations can be applied to multiple features at once."
+      straighten: "{straighten_icon} **{straighten}** removes bends from lines. It can also align groups of points into neat rows."
+      orthogonalize: "{orthogonalize_icon} **{orthogonalize}** snaps the corners of areas and lines to 90°. You can square individual corners or entire features."
+      circularize: "{circularize_icon} **{circularize}** turns areas and closed lines into circles."
+      move: "{move_icon} **{move}** lets you drag features around the map."
+      rotate: "{rotate_icon} **{rotate}** lets you swivel features around their center points."
+      reflect: "{reflect_short_icon} **{reflect_short}** and {reflect_long_icon} **{reflect_long}** reflect features over their short and long axes."
+      continue: "{continue_icon} **{continue}** lets you extend existing lines from their endpoints."
+      reverse: "{reverse_icon} **{reverse}** changes the direction of features. The direction matters for things like one-way roads, traffic signs, waterways, and cliffs."
+      disconnect: "{disconnect_icon} **{disconnect}** separates connected lines and areas from each other. You can disconnect entire features or just selected points."
+      merge: "{merge_icon} **{merge}** combines multiple features into one. You can merge areas together to create multipolygons, merge lines together to create longer lines, and merge points into anything to transfer their tags."
+      split: "{split_icon} **{split}** divides lines at the selected points. If specific lines are also selected, only those are split."
+      extract: "{extract_icon} **{extract}** detaches points from lines. It also pulls points out of buildings and other areas."
+      delete: "{delete_icon} **{delete}** removes features from the map. Anything that doesn't exist in the real world should be deleted."
+      downgrade: "{downgrade_icon} **{downgrade}** removes most tags except building and address info. This is helpful when businesses close yet their facilities remain."
+      copy_paste: "{copy_icon} **{copy}** and {paste_icon} **{paste}** let you duplicate features."
     notes:
       title: Notes
-      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, click the {data} **Map data** panel to enable the OpenStreetMap notes layer."
+      intro: "*Notes* are used to alert other users that a feature requires fixing or attention. Notes mark a specific location on the map. To view existing notes or add new ones, open the {data_icon} **{map_data}** panel and enable the {osm_notes} layer."
       add_note_h: "Adding Notes"
-      add_note: "To add a new note, click the {note} **Note** button on the toolbar above the map, or press the shortcut key `4`. This will change the mouse cursor to a cross symbol. To place the new note on the map, position the mouse cursor where the note should go, then {leftclick} left-click or press `Space`."
-      move_note: "Only new notes can be moved. To move a note, place the mouse cursor over the new note, then press and hold the {leftclick} left mouse button while dragging the note to its new location."
+      add_note: "To add a new note, press the {note_icon} **{note}** button on the toolbar above the map, or press the shortcut key `{add_note_key}`."
+      place_note: "Next, place the new note on the map. With a mouse, position the cursor where the note should go and {leftclick} left-click. On a touchscreen, {tap_icon} tap the location."
+      move_note: "To move a note, {leftclick} left-click and drag it with a mouse or {touchdrag_icon} tap-and-drag it on a touchscreen. Only new notes can be moved."
       update_note_h: "Closing, Reopening, and Commenting"
       update_note: "An existing note can be updated by closing it, reopening it, or adding a comment to it. Closing a note indicates that the problem has been resolved. Reopening a note indicates that the original issue is not resolved."
       save_note_h: "Saving Notes"
-      save_note: "You must save any note edits individually by clicking the buttons below the note comments. Note edits are **not** included in changesets that you upload to OpenStreetMap."
+      save_note: "You must save any note edits individually by pressing the buttons below the note comments. Note edits are **not** included in changesets that you upload to OpenStreetMap."
     imagery:
       title: Background Imagery
       intro: "The background imagery that appears beneath the map data is an important resource for mapping. This imagery can be aerial photos collected from satellites, airplanes, and drones, or it can be scanned historical maps or other freely available source data."
       sources_h: "Imagery Sources"
-      choosing: "To see which imagery sources are available for editing, click the {layers} **Background settings** button on the side of the map."
-      sources: "By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is chosen as the background image. Depending on where you are editing, other imagery sources will be available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference."
+      choosing: "To see which imagery sources are available for editing, open the {layers_icon} **{background_settings}** panel on the side of the map."
+      sources: "The [Bing Maps](https://www.bing.com/maps/) satellite layer or the best local imagery is set as the default background. Depending on where you are editing, multiple imagery sources are available. Some may be newer or have higher resolution, so it is always useful to check and see which layer is the best one to use as a mapping reference."
       offsets_h: "Adjusting Imagery Offset"
-      offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"Adjust Imagery Offset\" section at the bottom of the Background Settings pane."
-      offset_change: "Click on the small triangles to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
+      offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"{imagery_offset}\" section at the bottom of the Background Settings pane."
+      offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
       title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [OpenStreetCam](https://www.openstreetcam.org)."
+      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from [Bing Streetside](https://www.microsoft.com/en-us/maps/streetside), [Mapillary](https://www.mapillary.com), and [KartaView](https://kartaview.org)."
       using_h: "Using Street Level Photos"
-      using: "To use street level photos for mapping, click the {data} **Map data** panel on the side of the map to enable or disable the available photo layers."
-      photos: "When enabled, the photo layer displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
-      viewer: "When you click on one of the photo locations, a photo viewer appears in the bottom corner of the map. The photo viewer contains controls to step forward and backward in the image sequence. It also shows the username of the person who captured the image, the date it was captured, and a link to view the image on the original site."
+      using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
+      photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
+      viewer: "When you select one of the photo locations, a photo viewer appears in the bottom corner of the map. The photo viewer contains controls to step forward and backward in the image sequence. It also shows the username of the person who captured the image, the date it was captured, and a link to view the image on the original site."
     gps:
       title: GPS Traces
-      intro: "Collected GPS traces are a valuable source of data for OpenStreetMap. This editor supports *.gpx*, *.geojson*, and *.kml* files on your local computer. You can collect GPS traces with a smartphone, sports watch, or other GPS device."
+      intro: "Collected GPS traces are a valuable source of data for OpenStreetMap. This editor supports *.gpx*, *.geojson*, and *.kml* files on your local device. You can collect GPS traces with a smartphone, sports watch, or other GPS device."
       survey: "For information on how to perform a GPS survey, read [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/)."
       using_h: "Using GPS Traces"
-      using: "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Click the {data} **Map data** panel on the side of the map to enable, disable, or zoom to your GPS data."
+      using: "To use a GPS trace for mapping, drag and drop the data file onto the map editor. If it's recognized, it will be drawn on the map as a bright purple line. Open the {data_icon} **{map_data}** panel on the side of the map to enable, disable, or zoom to your GPS data."
       tracing: "The GPS track isn't sent to OpenStreetMap - the best way to use it is to draw on the map, using it as a guide for the new features that you add."
       upload: "You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create) for other users to use."
     qa:
       title: Quality Assurance
-      intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, click the {data} **Map data** panel to enable a specific Q/A layer."
+      intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, open the {data_icon} **{map_data}** panel and enable a specific Q/A layer."
       tools_h: "Tools"
       tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/)."
       issues_h: "Handling Issues"
-      issues: "Handling Q/A issues is similar to handling notes. Click on a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
+      issues: "Handling Q/A issues is similar to handling notes. Select a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
       restrictions:
         title: Turn Restrictions Help
@@ -1404,11 +1717,11 @@ en:
   issues:
     title: Issues
     key: I
-    list_title: "Issues ({count})"
+    list_title: "Issues"
     errors:
-      list_title: "Errors ({count})"
+      list_title: "Errors"
     warnings:
-      list_title: "Warnings ({count})"
+      list_title: "Warnings"
     rules:
       title: Rules
     user_resolved_issues: Issues resolved by your edits
@@ -1441,7 +1754,7 @@ en:
     suggested: "Suggested updates:"
     enable_all: Enable All
     disable_all: Disable All
-    reset_ignored: Reset Ignored ({count})
+    reset_ignored: Reset Ignored
     fix_one:
       title: fix
     fix_all:
@@ -1455,6 +1768,8 @@ en:
         message: "{feature} ends very close to itself but does not reconnect"
       highway-highway:
         reference: Intersecting highways should share a junction vertex.
+    area_as_point:
+      message: '{feature} should be an area, not a point'
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1464,7 +1779,7 @@ en:
         message: "{feature} is too close to {feature2}"
         reference: "Separate points should not share a location."
     crossing_ways:
-      title: Crossings Ways
+      title: Crossing Ways
       message: "{feature} crosses {feature2}"
       tip: "Find features that incorrectly cross over one another"
       building-building:
@@ -1504,10 +1819,9 @@ en:
       tip: "Find unroutable roads, paths, and ferry routes"
       routable:
         message:
-          multiple: "{count} routable features are connected only to each other."
-        reference: "All roads, paths, and ferry routes should connect to form a single routing network."
-      highway:
-        message: "{highway} is disconnected from other roads and paths"
+          one: "{highway} is disconnected from other roads and paths"
+          other: "{count} routable features are connected only to each other"
+        reference: "All roads, paths, and ferry routes should connect to form a single routing network. This feature (or small collection of features) is either disconnected from the routing network or only connected to it via a feature that few applications consider routable."
     fixme_tag:
       message: '{feature} has a "Fix Me" request'
       reference: 'A "fixme" tag indicates that a mapper has requested help with a feature.'
@@ -1521,13 +1835,12 @@ en:
     incompatible_source:
       title: Suspicious Sources
       tip: "Find features with suspicious source tags"
-      google:
-        feature:
-          message: '{feature} lists Google as a data source'
-        reference: "Google products are proprietary and must not be used as references."
-    incorrect_name:
-      message: '{feature} has the mistaken name "{name}"'
-      message_language: '{feature} has the mistaken name "{name}" in {language}'
+      feature:
+        message: '{feature} lists "{value}" as a data source'
+      reference:
+        amap: "Amap products are proprietary and must not be used as references."
+        baidu: "Baidu products are proprietary and must not be used as references."
+        google: "Google products are proprietary and must not be used as references."
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
@@ -1535,9 +1848,14 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+    line_as_area:
+      message: '{feature} should be a line, not an area'
+    line_as_point:
+      message: '{feature} should be a line, not a point'
     mismatched_geometry:
       title: Mismatched Geometry
       tip: "Find features with conflicting tags and geometry"
+      reference: Most features are limited to certain geometry types.
     missing_role:
       title: Missing Roles
       message: "{member} has no role within {relation}"
@@ -1554,6 +1872,15 @@ en:
         message: "{feature} has no descriptive tags"
       relation_type:
         message: "{feature} is a relation without a type"
+    mutually_exclusive_tags:
+      title: Contradictory Tags
+      tip: "Find features that have contradictory tags."
+      default:
+        message: "{feature} has both {tag1} and {tag2}"
+        reference: 'The tags "{tag1}" and "{tag2}" contradict each other. Only one tag should be set.'
+      same_value:
+        message: "{feature}: {tag1} and {tag2} have same value"
+        reference: 'The tags "{tag1}" and "{tag2}" have the same value. Only one tag should be set.'
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."
@@ -1566,9 +1893,13 @@ en:
         message: "{feature} has incomplete tags"
         reference: "Some features should have additional tags."
       noncanonical_brand:
-        message: "{feature} looks like a brand with nonstandard tags"
-        message_incomplete: "{feature} looks like a brand with incomplete tags"
-        reference: "All features of the same brand should be tagged the same way."
+        message: "{feature} looks like a common feature with nonstandard tags"
+        message_incomplete: "{feature} looks like a common feature with incomplete tags"
+        reference: "Some features, for example retail chains or post offices, are expected to have certain tags in common."
+    point_as_area:
+      message: '{feature} should be a point, not an area'
+    point_as_line:
+      message: '{feature} should be a point, not a line'
     point_as_vertex:
       message: '{feature} should be a standalone point based on its tags'
       reference: "Some features shouldn't be part of lines or areas."
@@ -1614,7 +1945,7 @@ en:
       buildings:
         reference: "Buildings with unsquare corners can often be drawn more accurately."
     vertex_as_point:
-      message: '{feature} should be part of a line or area based on its tags'
+      message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     fix:
       add_a_bridge:
@@ -1636,12 +1967,17 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_using_crossing:
+        title: Connect using a crossing
       connect_using_ford:
         title: Connect using a ford
       continue_from_start:
         title: Continue drawing from start
       continue_from_end:
         title: Continue drawing from end
+      convert_to_line:
+        title: Convert this to a line
+        annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
       extract_point:
@@ -1670,6 +2006,9 @@ en:
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_named_tag:
+        title: 'Remove the "{tag}" tag'
+        annotation: 'Removed "{tag}" tag.'
       remove_tags:
         title: Remove the tags
       remove_the_name:
@@ -1691,6 +2030,9 @@ en:
       tag_as_disconnected:
         title: Tag as disconnected
         annotation: Tagged very close features as disconnected.
+      tag_as_not:
+        title: "Tag as not the same \"{name}\""
+        annotation: "Added not: tag"
       tag_as_unsquare:
         title: Tag as physically unsquare
         annotation: Tagged a way as having unsquare corners.
@@ -1838,116 +2180,152 @@ en:
       welcome: "Welcome! This walkthrough will teach you the basics of editing on OpenStreetMap."
       practice: "All of the data in this walkthrough is just for practicing, and any edits that you make in the walkthrough will not be saved."
       words: "This walkthrough will introduce some new words and concepts. When we introduce a new word, we'll use *italics*."
-      mouse: "You can use any input device to edit the map, but this walkthrough assumes you have a mouse with left and right buttons. **If you want to attach a mouse, do so now, then click OK.**"
-      leftclick: "When this tutorial asks you to click or double-click, we mean with the left button. On a trackpad it might be a single-click or single-finger tap. **Left-click {num} times.**"
-      rightclick: "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**"
-      chapters: "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
+      chapters: "You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Press '{next}' to continue.**"
     navigation:
       title: "Navigation"
-      drag: "The main map area shows OpenStreetMap data on top of a background.{br}You can drag the map by pressing and holding the left mouse button while moving the mouse around. You can also use the arrow keys on your keyboard. **Drag the map!**"
-      zoom: "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons. **Zoom the map!**"
+      map_info: "The main map area shows OpenStreetMap data on top of a background."
+      drag: "You can click-and-drag the map with the {leftclick} left mouse button to move it around. You can also use the arrow keys on a keyboard. **Drag the map!**"
+      drag_touch: "You can {touchdrag_icon} tap-and-drag the map to move it around. You can also use the arrow keys on a keyboard. **Drag the map!**"
+      zoom: "You can zoom the map by scrolling with a {mousewheel_icon} mouse wheel or trackpad, or by pressing the {plus} / {minus} buttons. **Zoom the map!**"
+      zoom_touch: "You can zoom the map by {pinch_icon} pinching it with two fingers, {doubletap_icon} double-tapping a location, or pressing the {plus} / {minus} buttons. **Zoom the map!**"
       features: "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap."
       points_lines_areas: "Map features are represented using *points, lines, or areas.*"
       nodes_ways: "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*."
-      click_townhall: "All features on the map can be selected by clicking on them. **Click on the point to select it.**"
+      click_townhall: "All features on the map can be selected by {leftclick} clicking on them. **Click the point to select it.**"
+      tap_townhall: "All features on the map can be selected by {tap_icon} tapping on them. **Tap the point to select it.**"
       selected_townhall: "Great! The point is now selected. Selected features are drawn with a pulsing glow."
       editor_townhall: "When a feature is selected, the *feature editor* is displayed alongside the map."
       preset_townhall: "The top part of the feature editor shows the feature's type. This point is a {preset}."
       fields_townhall: "The middle part of the feature editor contains *fields* showing the feature's attributes, such as its name and address."
-      close_townhall: "**Close the feature editor by hitting escape or pressing the {button} button in the upper corner.**"
+      close_townhall: "**Close the feature editor by pressing the {button} button in the upper corner or `{esc}`.**"
       search_street: "You can also search for features in the current view, or worldwide. **Search for '{name}'.**"
       choose_street: "**Choose {name} from the list to select it.**"
       selected_street: "Great! {name} is now selected."
-      editor_street: "The fields shown for a street are different than the fields that were shown for the town hall.{br}For this selected street, the feature editor shows fields like '{field1}' and '{field2}'. **Close the feature editor by hitting escape or pressing the {button} button.**"
-      play: "Try moving the map and clicking on some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
+      street_different_fields: "The fields shown for a street are different than the fields that were shown for the town hall."
+      editor_street: "For this selected street, the feature editor shows fields like '{field1}' and '{field2}'. **Close the feature editor by pressing the {button} button or `{esc}`.**"
+      play: "Try exploring the map and selecting some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, press '{next}'.**"
     points:
       title: "Points"
-      add_point: "*Points* can be used to represent features such as shops, restaurants, and monuments.{br}They mark a specific location, and describe what's there. **Click the {button} Point button to add a new point.**"
-      place_point: "To place the new point on the map, position your mouse cursor where the point should go, then left-click or press the spacebar. **Move the mouse pointer over this building, then left-click or press the spacebar.**"
+      points_info: "*Points* can be used to represent features such as shops, restaurants, and monuments."
+      add_point: "They mark a specific location, and describe what's there. **Press the {point_icon} {point} button to add a new point.**"
+      place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer over this building, then left-click or press `{space}`.**"
+      place_point_touch: "To place the new point on the map, {tap_icon} tap the location where it should go. **Tap the center of this building.**"
+      place_point_error: "The point should be placed inside the building area, not on its outline. Let's try again."
       search_cafe: "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**"
       choose_cafe: "**Choose {preset} from the list.**"
       feature_editor: "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe."
-      add_name: "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure.{br}Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**"
-      add_close: "The feature editor will remember all of your changes automatically. **When you are finished adding the name, hit escape, enter, or click the {button} button to close the feature editor.**"
-      reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the cafe you just created.**"
+      fields_info: "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
+      add_name: "Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**"
+      add_close: "The feature editor will remember all of your changes automatically. **When you are finished adding the name, press the {button} button or `{esc}` to close the feature editor.**"
+      reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the cafe you just created.**"
       update: "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details.**"
-      update_close: "**When you are finished updating the cafe, hit escape, enter, or click the {button} button to close the feature editor.**"
-      rightclick: "You can right-click on any feature to see the *edit menu*, which shows a list of editing operations that can be performed. **Right-click to select the point you created and show the edit menu.**"
-      delete: "It's OK to delete features that don't exist in the real world.{br}Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it. **Click on the {button} button to delete the point.**"
-      undo: "You can always undo any changes up until you save your edits to OpenStreetMap. **Click on the {button} button to undo the delete and get the point back.**"
-      play: "Now that you know how to create and edit points, try creating a few more points for practice! **When you are ready to continue to the next chapter, click '{next}'.**"
+      update_close: "**When you are finished updating the cafe, press the {button} button or `{esc}` to close the feature editor.**"
+      rightclick: "You can {rightclick} right-click on any feature to see the *edit menu*, which shows a list of editing operations that can be performed.{br}A right-click might be the same as a control-click or two-finger click. **Right-click to select the point you created and show the edit menu.**"
+      edit_menu_touch: "You can {longpress_icon} long-press on any feature to see the *edit menu*, which shows a list of editing operations that can be performed. **Press-and-hold the point you created to show the edit menu.**"
+      delete: "It's OK to delete features that don't exist in the real world.{br}Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it. **Press the {delete_icon} {delete} button to remove the point.**"
+      undo: "You can always undo any changes up until you save your edits to OpenStreetMap. **Press the {undo_icon} {undo} button to get the point back.**"
+      play: "Now that you know how to create and edit points, try creating a few more points for practice! **When you are ready to continue to the next chapter, press '{next}'.**"
     areas:
       title: "Areas"
-      add_playground: "*Areas* are used to show the boundaries of features like lakes, buildings, and residential areas.{br}They can also be used for more detailed mapping of many features you might normally map as points. **Click the {button} Area button to add a new area.**"
-      start_playground: "Let's add this playground to the map by drawing an area. Areas are drawn by placing *nodes* along the outer edge of the feature. **Click or press spacebar to place a starting node on one of the corners of the playground.**"
-      continue_playground: "Continue drawing the area by placing more nodes along the playground's edge. It is OK to connect the area to the existing walking paths.{br}Tip: You can hold down the '{alt}' key to prevent nodes from connecting to other features. **Continue drawing an area for the playground.**"
-      finish_playground: "Finish the area by pressing enter, or clicking again on either the first or last node. **Finish drawing an area for the playground.**"
+      add_playground: "*Areas* are used to show the boundaries of features like lakes, buildings, and residential areas.{br}They can also be used for more detailed mapping of many features you might normally map as points. **Press the {area_icon} {area} button to add a new area.**"
+      start_playground: "Let's add this playground to the map by drawing an area. Areas are drawn by placing *nodes* along the outer edge of the feature."
+      starting_node_click: "**Click or press `{space}` to place a starting node on one of the corners of the playground.**"
+      starting_node_tap: "**{tap_icon} Tap to place a starting node on one of the corners of the playground.**"
+      continue_playground: "Continue drawing the area by placing more nodes along the playground's edge. It is OK to connect the area to the existing walking paths.{br}Tip: You can hold down the `{alt}` key to prevent nodes from connecting to other features. **Continue drawing an area for the playground.**"
+      finish_area_click: "Finish the area by pressing `{return}`, or clicking again on either the first or last node."
+      finish_area_tap: "Finish the area by {tap_icon} tapping again on either the first or last node, or by pressing `{return}` on a keyboard."
+      finish_playground: "**Finish drawing an area for the playground.**"
       search_playground: "**Search for '{preset}'.**"
       choose_playground: "**Choose {preset} from the list.**"
-      add_field: "This playground doesn't have an official name, so we won't add anything in the Name field.{br}Instead let's add some additional details about the playground to the Description field. **Open the Add Field list.**"
+      add_field: "This playground doesn't have an official name, so we won't add anything in the {name} field.{br}Instead let's add some additional details about the playground to the {description} field. **Open the Add Field list.**"
       choose_field: "**Choose {field} from the list.**"
       retry_add_field: "You didn't select the {field} field. Let's try again."
-      describe_playground: "**Add a description, then click the {button} button to close the feature editor.**"
-      play: "Good job! Try drawing a few more areas, and see what other kinds of area features you can add to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
+      describe_playground: "**Add a description, then press the {button} button to close the feature editor.**"
+      play: "Good job! Try drawing a few more areas, and see what other kinds of area features you can add to OpenStreetMap. **When you are ready to continue to the next chapter, press '{next}'.**"
     lines:
       title: "Lines"
-      add_line: "*Lines* are used to represent features such as roads, railroads, and rivers. **Click the {button} Line button to add a new line.**"
-      start_line: "Here is a road that is missing. Let's add it!{br}In OpenStreetMap, lines should be drawn down the center of the road. You can drag and zoom the map while drawing if necessary. **Start a new line by clicking at the top end of this missing road.**"
-      intersect: "Click or press spacebar to add more nodes to the line.{br}Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**"
+      add_line: "*Lines* are used to represent features such as roads, railroads, and rivers. **Press the {line_icon} {line} button to add a new line.**"
+      missing_road: "Here is a road that is missing. Let's add it!"
+      line_draw_info: "In OpenStreetMap, lines should be drawn down the center of the road. You can drag and zoom the map while drawing if necessary."
+      start_line: "**Start a new line by clicking at the top end of this missing road.**"
+      start_line_tap: "**Start a new line by {tap_icon} tapping at the top end of this missing road.**"
+      intersect: "Continue drawing the line by placing more nodes along the road.{br}Roads, along with paths and ferry routes, must be properly connected to each other for navigation apps to work. **Place an intersection node on {name} to connect the two lines.**"
       retry_intersect: "The road needs to intersect {name}. Let's try again!"
-      continue_line: "Continue drawing the line for the new road. Remember that you can drag and zoom the map if needed.{br}When you are finished drawing, click on the last node again. **Finish drawing the road.**"
+      continue_line: "Continue drawing the line for the new road. Remember that you can drag and zoom the map if needed."
+      finish_line_click: "When you're finished, click the last node again or press `{return}`."
+      finish_line_tap: "When you're finished, {tap_icon} tap the last node again or press `{return}` on a keyboard."
+      finish_road: "**Finish drawing the road.**"
       choose_category_road: "**Select {category} from the list.**"
       choose_preset_residential: "There are many different types of roads, but this one is a residential road. **Choose the {preset} type.**"
-      retry_preset_residential: "You didn't select the {preset} type. **Click here to choose again.**"
-      name_road: "**Give this road a name, then hit escape, enter, or click the {button} button to close the feature editor.**"
+      retry_preset_residential: "You didn't select the {preset} type. **Press this button to choose again.**"
+      name_road: "**Give this road a name, then press the {button} button or `{esc}` to close the feature editor.**"
       did_name_road: "Looks good! Next we will learn how to update the shape of a line."
       update_line: "Sometimes you will need to change the shape of an existing line. Here is a road that doesn't look quite right."
       add_node: "We can add some nodes to this line to improve its shape. One way to add a node is to double-click the line where you want to add a node. **Double-click on the line to create a new node.**"
-      start_drag_endpoint: "When a line is selected, you can drag any of its nodes by clicking and holding down the left mouse button while you drag. **Drag the endpoint to the place where these roads should intersect.**"
-      finish_drag_endpoint: "This spot looks good. **Release the left mouse button to finish dragging.**"
+      add_node_touch: "We can add some nodes to this line to improve its shape. One way to add a node is to {doubletap_icon} double-tap the line where you want to add a node. **Double-tap on the line to create a new node.**"
+      start_drag_endpoint: "When a line is selected, you can adjust any of its nodes by clicking and holding down the {leftclick} left mouse button while you drag."
+      start_drag_endpoint_touch: "When a line is selected, you can {touchdrag_icon} tap-and-drag any of its nodes to adjust them."
+      drag_to_intersection: "**Drag the endpoint to the place where these roads should intersect.**"
+      spot_looks_good: "This spot looks good."
+      finish_drag_endpoint: "**Release the mouse button to finish dragging.**"
+      finish_drag_endpoint_touch: "**Let go of the node to finish dragging.**"
       start_drag_midpoint: "Small triangles are drawn at the *midpoints* between nodes. Another way to create a new node is to drag a midpoint to a new location. **Drag the midpoint triangle to create a new node along the curve of the road.**"
-      continue_drag_midpoint: "This line is looking much better! Continue to adjust this line by double-clicking or dragging midpoints until the curve matches the road shape. **When you're happy with how the line looks, click OK.**"
+      continue_drag_midpoint: "This line is looking much better! Continue to adjust this line until the curve matches the road shape. **When you're happy with how the line looks, press {ok}.**"
       delete_lines: "It's OK to delete lines for roads that don't exist in the real world.{br}Here's an example where the city planned a {street} but never built it. We can improve this part of the map by deleting the extra lines."
-      rightclick_intersection: "The last real street is {street1}, so we will *split* {street2} at this intersection and remove everything above it. **Right click on the intersection node.**"
-      split_intersection: "**Click on the {button} button to split {street}.**"
-      retry_split: "You didn't click the Split button. Try again."
-      did_split_multi: "Good job! {street1} is now split into two pieces. The top part can be removed. **Click the top part of {street2} to select it.**"
-      did_split_single: "**Click the top part of {street2} to select it.**"
-      multi_select: "{selected} is now selected. Let's also select {other1}. You can shift-click to select multiple things. **Shift-click on {other2}.**"
-      multi_rightclick: "Good! Both lines to delete are now selected. **Right-click on one of the lines to show the edit menu.**"
-      multi_delete: "**Click on the {button} button to delete the extra lines.**"
-      retry_delete: "You didn't click the Delete button. Try again."
-      play: "Great! Use the skills that you've learned in this chapter to practice editing some more lines. **When you are ready to continue to the next chapter, click '{next}'.**"
+      split_street: "The last real street is {street1}, so we will *split* {street2} at this intersection and remove everything above it."
+      rightclick_intersection: "**{rightclick} Right-click on the intersection node.**"
+      edit_menu_intersection_touch: "**{longpress_icon} Long-press on the intersection node.**"
+      split_intersection: "**Press the {split_icon} {split} button to divide {street}.**"
+      retry_split: "You didn't press the {split_icon} {split} button. Try again."
+      did_split_multi: "Good job! {street1} is now split into two pieces. The top part can be removed. **Select the top part of {street2}.**"
+      did_split_single: "**Select the top part of {street2}.**"
+      multi_select: "{selected} is now selected. Let's also select {other1}."
+      add_to_selection_click: "You can hold `{shift}` while clicking to select multiple things. **Shift-click on {other2}.**"
+      add_to_selection_touch: "**{longpress_icon} Tap-and-hold {selected} and then {tap_icon} tap {other2} with another finger to select both.**"
+      multi_select_success: "Good! Both lines to delete are now selected."
+      multi_rightclick: "**{rightclick} Right-click on one of the lines to show the edit menu.**"
+      multi_edit_menu_touch: "**{longpress_icon} Long-press on one of the lines to show the edit menu.**"
+      multi_delete: "**Press the {delete_icon} {delete} button to remove the extra lines.**"
+      retry_delete: "You didn't press the {delete_icon} {delete} button. Try again."
+      play: "Great! Use the skills that you've learned in this chapter to practice editing some more lines. **When you are ready to continue to the next chapter, press '{next}'.**"
     buildings:
       title: "Buildings"
-      add_building: "OpenStreetMap is the world's largest database of buildings.{br}You can help improve this database by tracing buildings that aren't already mapped. **Click the {button} Area button to add a new area.**"
-      start_building: "Let's add this house to the map by tracing its outline.{br}Buildings should be traced around their footprint as accurately as possible. **Click or press spacebar to place a starting node on one of the corners of the building.**"
-      continue_building: "Continue adding more nodes to trace the outline of the building. Remember that you can zoom in if you want to add more details.{br}Finish the building by pressing enter, or clicking again on either the first or last node. **Finish tracing the building.**"
+      add_building: "OpenStreetMap is the world's largest database of buildings.{br}You can help improve this database by tracing buildings that aren't already mapped. **Press the {area_icon} {area} button to add a new area.**"
+      start_building: "Let's add this house to the map by tracing its outline.{br}Buildings should be traced around their footprint as accurately as possible."
+      building_corner_click: "**Click or press `{space}` to place a starting node on one of the corners of the building.**"
+      building_corner_tap: "**{tap_icon} Tap one of the corners of the building to place a starting node.**"
+      continue_building: "Continue placing nodes to trace the outline of the building. Remember that you can zoom in if you want to add more details."
+      finish_building: "**Finish tracing the building.**"
       retry_building: "It looks like you had some trouble placing the nodes at the building corners. Try again!"
       choose_category_building: "**Choose {category} from the list.**"
       choose_preset_house: "There are many different types of buildings, but this one is clearly a house.{br}If you're not sure of the type, it's OK to just choose the generic Building type. **Choose the {preset} type.**"
-      close: "**Hit escape or click the {button} button to close the feature editor.**"
-      rightclick_building: "**Right-click to select the building you created and show the edit menu.**"
-      square_building: "The house that you just added will look even better with perfectly square corners. **Click on the {button} button to square the building shape.**"
-      retry_square: "You didn't click the Square button. Try again."
+      close: "**Press the {button} button or `{esc}` to close the feature editor.**"
+      rightclick_building: "**{rightclick} Right-click to select the building you created and show the edit menu.**"
+      edit_menu_building_touch: "**{longpress_icon} Long-press the building you created to show the edit menu.**"
+      square_building: "The house that you just added will look even better with perfectly square corners. **Press the {orthogonalize_icon} {orthogonalize} button to tidy up the building's shape.**"
+      retry_square: "You didn't press the {orthogonalize_icon} {orthogonalize} button. Try again."
       done_square: "See how the corners of the building moved into place? Let's learn another useful trick."
-      add_tank: "Next we'll trace this circular storage tank. **Click the {button} Area button to add a new area.**"
-      start_tank: "Don't worry, you won't need to draw a perfect circle. Just draw an area inside the tank that touches its edge. **Click or press spacebar to place a starting node on the edge of the tank.**"
-      continue_tank: "Add a few more nodes around the edge. The circle will be created outside the nodes that you draw.{br}Finish the area by pressing enter, or clicking again on either the first or last node. **Finish tracing the tank.**"
+      add_tank: "Next we'll trace this circular storage tank. **Press the {area_icon} {area} button to add a new area.**"
+      start_tank: "Don't worry, you won't need to draw a perfect circle. Just draw an area inside the tank that touches its edge."
+      tank_edge_click: "**Click or press `{space}` to place a starting node on the edge of the tank.**"
+      tank_edge_tap: "**{tap_icon} Tap the edge of the tank to place a starting node.**"
+      continue_tank: "Add a few more nodes around the edge. The circle will be created outside the nodes that you draw."
+      finish_tank: "**Finish tracing the tank.**"
       search_tank: "**Search for '{preset}'.**"
       choose_tank: "**Choose {preset} from the list.**"
-      rightclick_tank: "**Right-click to select the storage tank you created and show the edit menu.**"
-      circle_tank: "**Click on the {button} button to make the tank a circle.**"
-      retry_circle: "You didn't click the Circularize button. Try again."
-      play: "Great Job! Practice tracing a few more buildings, and try some of the other commands on the edit menu. **When you are ready to continue to the next chapter, click '{next}'.**"
+      rightclick_tank: "**{rightclick} Right-click to select the storage tank you created and show the edit menu.**"
+      edit_menu_tank_touch: "**{longpress_icon} Long-press the storage tank you created to show the edit menu.**"
+      circle_tank: "**Press the {circularize_icon} {circularize} button to make the tank a circle.**"
+      retry_circle: "You didn't press the {circularize_icon} {circularize} button. Try again."
+      play: "Great Job! Practice tracing a few more buildings, and try some of the other operations in the edit menu. **When you are ready to continue to the next chapter, press '{next}'.**"
     startediting:
       title: "Start Editing"
-      help: "You're now ready to edit OpenStreetMap!{br}You can replay this walkthrough anytime or view more documentation by clicking the {button} Help button or pressing the '{key}' key."
-      shortcuts: "You can view a list of commands along with their keyboard shortcuts by pressing the '{key}' key."
+      help: "You're now ready to edit OpenStreetMap!{br}You can replay this walkthrough anytime or view more documentation by pressing the {help_icon} {help} button or the `{help_key}` key."
+      shortcuts: "You can view a list of commands along with their keyboard shortcuts by pressing the `{shortcuts_key}` key."
       save: "Don't forget to regularly save your changes!"
       start: "Start mapping!"
   shortcuts:
-    title: "Keyboard shortcuts"
+    title: "Keyboard Shortcuts"
     tooltip: "Show the keyboard shortcuts screen."
     toggle:
       key: '?'
@@ -1962,6 +2340,7 @@ en:
       enter: Enter
       esc: Esc
       home: Home
+      menu: Menu
       option: Option
       pause: Pause
       pgdn: PgDn
@@ -2014,7 +2393,11 @@ en:
         next: "Jump to next node"
         first: "Jump to first node"
         last: "Jump to last node"
+        parent: "Select parent way"
         change_parent: "Switch parent way"
+      way_selected:
+        title: "With way selected"
+        child: "Select child nodes"
     editing:
       title: "Editing"
       drawing:
@@ -2028,19 +2411,24 @@ en:
         stop_line: "Finish drawing a line or area"
       operations:
         title: "Operations"
-        continue_line: "Continue a line at the selected node"
+        continue_line: "Continue a line at the selected endpoint"
         merge: "Combine (merge) selected features"
-        disconnect: "Disconnect features at the selected node"
+        disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
-        split: "Split a line into two at the selected node"
+        split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"
+        follow: "Follow a line or area"
+        nudge: "Nudge selected features"
+        nudge_more: "Nudge selected features by a lot"
+        scale: "Scale selected features"
+        scale_more: "Scale selected features by a lot"
         rotate: "Rotate selected features"
         orthogonalize: "Square corners of a line or area"
         straighten: "Straighten a line or points"
         circularize: "Circularize a closed line or area"
-        reflect_long: "Reflect features across the longer axis"
-        reflect_short: "Reflect features across the shorter axis"
+        reflect_long: "Flip features across the longer axis"
+        reflect_short: "Flip features across the shorter axis"
         delete: "Delete selected features"
       commands:
         title: "Commands"
@@ -2079,6 +2467,8 @@ en:
     west: "W"
     coordinate: "{coordinate}{direction}"
     coordinate_pair: "{latitude}, {longitude}"
+    # translate the letters but leave the format the same
+    year_month_day: "YYYY-MM-DD"
   wikidata:
     identifier: "Identifier"
     label: "Label"

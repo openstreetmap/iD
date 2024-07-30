@@ -4,49 +4,32 @@ import { select as d3_select } from 'd3-selection';
 
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
-import { utilObjectOmit, utilQsString, utilStringQs } from '../util';
-
+import { modeSelect } from '../modes/select';
+import { utilDisplayLabel, utilObjectOmit, utilQsString, utilStringQs } from '../util';
+import { utilArrayIdentical } from '../util/array';
+import { t } from '../core/localizer';
+import { prefs } from '../core/preferences';
 
 export function behaviorHash(context) {
-    var s0 = null; // cached window.location.hash
-    var lat = 90 - 1e-8; // allowable latitude range
 
+    // cached window.location.hash
+    var _cachedHash = null;
+    // allowable latitude range
+    var _latitudeLimit = 90 - 1e-8;
 
-    var parser = function(map, s) {
-        var q = utilStringQs(s);
-        var args = (q.map || '').split('/').map(Number);
-
-        if (args.length < 3 || args.some(isNaN)) {
-            return true; // replace bogus hash
-
-        } else if (s !== formatter(map).slice(1)) {   // hash has changed
-            var mode = context.mode();
-            var dist = geoSphericalDistance(map.center(), [args[2], args[1]]);
-            var maxdist = 500;
-
-            // Don't allow the hash location to change too much while drawing
-            // This can happen if the user accidently hit the back button.  #3996
-            if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
-                context.enter(modeBrowse(context));
-            }
-
-            map.centerZoom([args[2], Math.min(lat, Math.max(-lat, args[1]))], args[0]);
-        }
-    };
-
-
-    var formatter = function(map) {
+    function computedHashParameters() {
+        var map = context.map();
         var center = map.center();
         var zoom = map.zoom();
         var precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
-        var q = utilObjectOmit(utilStringQs(window.location.hash),
+        var oldParams = utilObjectOmit(utilStringQs(window.location.hash),
             ['comment', 'source', 'hashtags', 'walkthrough']
         );
         var newParams = {};
 
-        delete q.id;
+        delete oldParams.id;
         var selected = context.selectedIDs().filter(function(id) {
-            return !context.entity(id).isNew();
+            return context.hasEntity(id);
         });
         if (selected.length) {
             newParams.id = selected.join(',');
@@ -56,81 +39,194 @@ export function behaviorHash(context) {
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
-        return '#' + utilQsString(Object.assign(q, newParams), true);
-    };
+        return Object.assign(oldParams, newParams);
+    }
 
+    function computedHash() {
+        return '#' + utilQsString(computedHashParameters(), true);
+    }
 
-    function update() {
-        if (context.inIntro()) return;
-        var s1 = formatter(context.map());
-        if (s0 !== s1) {
-            window.location.replace(s0 = s1);  // don't recenter the map!
+    function computedTitle(includeChangeCount) {
+
+        var baseTitle = context.documentTitleBase() || 'iD';
+        var contextual;
+        var changeCount;
+        var titleID;
+
+        var selected = context.selectedIDs().filter(function(id) {
+            return context.hasEntity(id);
+        });
+        if (selected.length) {
+            var firstLabel = utilDisplayLabel(context.entity(selected[0]), context.graph());
+            if (selected.length > 1) {
+                contextual = t('title.labeled_and_more', {
+                    labeled: firstLabel,
+                    count: selected.length - 1
+                });
+            } else {
+                contextual = firstLabel;
+            }
+            titleID = 'context';
+        }
+
+        if (includeChangeCount) {
+            changeCount = context.history().difference().summary().length;
+            if (changeCount > 0) {
+                titleID = contextual ? 'changes_context' : 'changes';
+            }
+        }
+
+        if (titleID) {
+            return t('title.format.' + titleID, {
+                changes: changeCount,
+                base: baseTitle,
+                context: contextual
+            });
+        }
+
+        return baseTitle;
+    }
+
+    function updateTitle(includeChangeCount) {
+        if (!context.setsDocumentTitle()) return;
+
+        var newTitle = computedTitle(includeChangeCount);
+        if (document.title !== newTitle) {
+            document.title = newTitle;
         }
     }
 
+    function updateHashIfNeeded() {
+        if (context.inIntro()) return;
 
-    var throttledUpdate = _throttle(update, 500);
+        var latestHash = computedHash();
+        if (_cachedHash !== latestHash) {
+            _cachedHash = latestHash;
 
+            // Update the URL hash without affecting the browser navigation stack,
+            // though unavoidably creating a browser history entry
+            window.history.replaceState(null, computedTitle(false /* includeChangeCount */), latestHash);
+
+            // set the title we want displayed for the browser tab/window
+            updateTitle(true /* includeChangeCount */);
+
+            // save last used map location for future
+            const q = utilStringQs(latestHash);
+            if (q.map) {
+                prefs('map-location', q.map);
+            }
+        }
+    }
+
+    var _throttledUpdate = _throttle(updateHashIfNeeded, 500);
+    var _throttledUpdateTitle = _throttle(function() {
+        updateTitle(true /* includeChangeCount */);
+    }, 500);
 
     function hashchange() {
-        if (window.location.hash === s0) return;  // ignore spurious hashchange events
-        if (parser(context.map(), (s0 = window.location.hash).substring(1))) {
-            update(); // replace bogus hash
+
+        // ignore spurious hashchange events
+        if (window.location.hash === _cachedHash) return;
+
+        _cachedHash = window.location.hash;
+
+        var q = utilStringQs(_cachedHash);
+        var mapArgs = (q.map || '').split('/').map(Number);
+
+        if (mapArgs.length < 3 || mapArgs.some(isNaN)) {
+            // replace bogus hash
+            updateHashIfNeeded();
+
+        } else {
+            // don't update if the new hash already reflects the state of iD
+            if (_cachedHash === computedHash()) return;
+
+            var mode = context.mode();
+
+            context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
+
+            if (q.id && mode) {
+                var ids = q.id.split(',').filter(function(id) {
+                    return context.hasEntity(id);
+                });
+                if (ids.length &&
+                    (mode.id === 'browse' || (mode.id === 'select' && !utilArrayIdentical(mode.selectedIDs(), ids)))) {
+                    context.enter(modeSelect(context, ids));
+                    return;
+                }
+            }
+
+            var center = context.map().center();
+            var dist = geoSphericalDistance(center, [mapArgs[2], mapArgs[1]]);
+            var maxdist = 500;
+
+            // Don't allow the hash location to change too much while drawing
+            // This can happen if the user accidentally hit the back button.  #3996
+            if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
+                context.enter(modeBrowse(context));
+                return;
+            }
         }
     }
-
 
     function behavior() {
         context.map()
-            .on('move.hash', throttledUpdate);
+            .on('move.behaviorHash', _throttledUpdate);
+
+        context.history()
+            .on('change.behaviorHash', _throttledUpdateTitle);
 
         context
-            .on('enter.hash', throttledUpdate);
+            .on('enter.behaviorHash', _throttledUpdate);
 
         d3_select(window)
-            .on('hashchange.hash', hashchange);
+            .on('hashchange.behaviorHash', hashchange);
 
-        if (window.location.hash) {
-            var q = utilStringQs(window.location.hash);
+        var q = utilStringQs(window.location.hash);
 
-            if (q.id) {
-                context.zoomToEntity(q.id.split(',')[0], !q.map);
-            }
-
-            // Store these here instead of updating local storage since local
-            // storage could be flushed if the user discards pending changes
-            if (q.comment)  behavior.comment = q.comment;
-            if (q.source)   behavior.source = q.source;
-            if (q.hashtags) behavior.hashtags = q.hashtags;
-
-            if (q.walkthrough === 'true') {
-                behavior.startWalkthrough = true;
-            }
-
-            hashchange();
-
-            if (q.map) {
-                behavior.hadHash = true;
-            }
+        if (q.id) {
+            //if (!context.history().hasRestorableChanges()) {
+            // targeting specific features: download, select, and zoom to them
+            context.zoomToEntity(q.id.split(',')[0], !q.map);
+            //}
         }
+
+        if (q.walkthrough === 'true') {
+            behavior.startWalkthrough = true;
+        }
+
+        if (q.map) {
+            behavior.hadLocation = true;
+        } else if (!q.id && prefs('map-location')) {
+            // center map at last visited map location
+            const mapArgs = prefs('map-location').split('/').map(Number);
+            context.map().centerZoom([mapArgs[2], Math.min(_latitudeLimit, Math.max(-_latitudeLimit, mapArgs[1]))], mapArgs[0]);
+
+            updateHashIfNeeded();
+
+            behavior.hadLocation = true;
+        }
+
+        hashchange();
+
+        updateTitle(false);
     }
 
-
     behavior.off = function() {
-        throttledUpdate.cancel();
+        _throttledUpdate.cancel();
+        _throttledUpdateTitle.cancel();
 
         context.map()
-            .on('move.hash', null);
+            .on('move.behaviorHash', null);
 
         context
-            .on('enter.hash', null);
+            .on('enter.behaviorHash', null);
 
         d3_select(window)
-            .on('hashchange.hash', null);
+            .on('hashchange.behaviorHash', null);
 
         window.location.hash = '';
     };
-
 
     return behavior;
 }

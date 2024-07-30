@@ -34,7 +34,7 @@ describe('iD.actionUpgradeTags', function () {
 
     it('upgrades a tag with no replacement tags', function () {
         var oldTags = { highway: 'no' },
-            newTags = undefined,
+            newTags,
             entity = iD.osmEntity({ tags: { highway: 'no', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
         expect(graph.entity(entity.id).tags).to.eql({ name: 'Foo' });
@@ -64,7 +64,7 @@ describe('iD.actionUpgradeTags', function () {
         expect(graph.entity(entity.id).tags).to.eql({ shop: 'supermarket', name: 'Foo' });
     });
 
-    it('upgrades a tag with a wildcard replacement and replaces the exisiting "no" value', function () {
+    it('upgrades a tag with a wildcard replacement and replaces the existing "no" value', function () {
         var oldTags = { amenity: 'shop' },
             newTags = { shop: '*' },
             entity = iD.osmEntity({ tags: { amenity: 'shop', shop: 'no', name: 'Foo' }}),
@@ -94,6 +94,14 @@ describe('iD.actionUpgradeTags', function () {
             entity = iD.osmEntity({ tags: { leisure: 'ice_rink', sport: 'curling;hockey;multi', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
         expect(graph.entity(entity.id).tags).to.eql({ leisure: 'ice_rink', sport: 'curling;ice_hockey;multi', name: 'Foo' });
+    });
+
+    it('upgrades an entire semicolon-delimited tag value', function () {
+        var oldTags = { vending: 'parcel_mail_in;parcel_pickup' },
+            newTags = { vending: 'parcel_pickup;parcel_mail_in' },
+            entity = iD.osmEntity({ tags: { vending: 'parcel_mail_in;parcel_pickup', name: 'Foo' }}),
+            graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(iD.coreGraph([entity]));
+        expect(graph.entity(entity.id).tags).to.eql({ vending: 'parcel_pickup;parcel_mail_in', name: 'Foo' });
     });
 
 });

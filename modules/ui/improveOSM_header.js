@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 
 export function uiImproveOsmHeader() {
@@ -8,8 +8,8 @@ export function uiImproveOsmHeader() {
   function issueTitle(d) {
     const issueKey = d.issueKey;
     d.replacements = d.replacements || {};
-    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
-    return t(`QA.improveOSM.error_types.${issueKey}.title`, d.replacements);
+    d.replacements.default = { html: t.html('inspector.unknown') };  // special key `default` works as a fallback string
+    return t.html(`QA.improveOSM.error_types.${issueKey}.title`, d.replacements);
   }
 
 
@@ -46,23 +46,15 @@ export function uiImproveOsmHeader() {
     svgEnter
       .append('use')
         .attr('class', 'icon-annotation')
-        .attr('width', '13px')
-        .attr('height', '13px')
-        .attr('transform', 'translate(3.5, 5)')
-        .attr('xlink:href', d => {
-          const picon = d.icon;
-          if (!picon) {
-            return '';
-          } else {
-            const isMaki = /^maki-/.test(picon);
-            return `#${picon}${isMaki ? '-11' : ''}`;
-          }
-        });
+        .attr('width', '12px')
+        .attr('height', '12px')
+        .attr('transform', 'translate(4, 5.5)')
+        .attr('xlink:href', d => d.icon ? '#' + d.icon : '');
 
     headerEnter
       .append('div')
         .attr('class', 'qa-header-label')
-        .text(issueTitle);
+        .html(issueTitle);
   }
 
   improveOsmHeader.issue = function(val) {

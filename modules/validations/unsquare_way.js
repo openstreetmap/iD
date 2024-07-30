@@ -1,4 +1,5 @@
-import { t } from '../util/locale';
+import { prefs } from '../core/preferences';
+import { t } from '../core/localizer';
 //import { actionChangeTags } from '../actions/change_tags';
 import { actionOrthogonalize } from '../actions/orthogonalize';
 import { geoOrthoCanOrthogonalize } from '../geo/ortho';
@@ -54,8 +55,8 @@ export function validationUnsquareWay(context) {
 
 
         // user-configurable square threshold
-        var storedDegreeThreshold = context.storage('validate-square-degrees');
-        var degreeThreshold = isNaN(storedDegreeThreshold) ? DEFAULT_DEG_THRESHOLD : parseFloat(storedDegreeThreshold);
+        var storedDegreeThreshold = prefs('validate-square-degrees');
+        var degreeThreshold = isFinite(storedDegreeThreshold) ? Number(storedDegreeThreshold) : DEFAULT_DEG_THRESHOLD;
 
         var points = nodes.map(function(node) { return context.projection(node.loc); });
         if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
@@ -66,7 +67,7 @@ export function validationUnsquareWay(context) {
             // use same degree threshold as for detection
             var autoAction = actionOrthogonalize(entity.id, context.projection, undefined, degreeThreshold);
             autoAction.transitionable = false;  // when autofixing, do it instantly
-            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature.single')];
+            autoArgs = [autoAction, t('operations.orthogonalize.annotation.feature', { n: 1 })];
         }
 
         return [new validationIssue({
@@ -75,23 +76,25 @@ export function validationUnsquareWay(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.unsquare_way.message', { feature: utilDisplayLabel(entity, context) }) : '';
+                return entity ? t.append('issues.unsquare_way.message', {
+                    feature: utilDisplayLabel(entity, context.graph())
+                }) : '';
             },
             reference: showReference,
             entityIds: [entity.id],
-            hash: JSON.stringify(autoArgs !== undefined) + degreeThreshold,
+            hash: degreeThreshold,
             dynamicFixes: function() {
                 return [
                     new validationIssueFix({
                         icon: 'iD-operation-orthogonalize',
-                        title: t('issues.fix.square_feature.title'),
+                        title: t.append('issues.fix.square_feature.title'),
                         autoArgs: autoArgs,
                         onClick: function(context, completionHandler) {
                             var entityId = this.issue.entityIds[0];
                             // use same degree threshold as for detection
                             context.perform(
                                 actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
-                                t('operations.orthogonalize.annotation.feature.single')
+                                t('operations.orthogonalize.annotation.feature', { n: 1 })
                             );
                             // run after the squaring transition (currently 150ms)
                             window.setTimeout(function() { completionHandler(); }, 175);
@@ -99,7 +102,7 @@ export function validationUnsquareWay(context) {
                     }),
                     /*
                     new validationIssueFix({
-                        title: t('issues.fix.tag_as_unsquare.title'),
+                        title: t.append('issues.fix.tag_as_unsquare.title'),
                         onClick: function(context) {
                             var entityId = this.issue.entityIds[0];
                             var entity = context.entity(entityId);
@@ -122,7 +125,7 @@ export function validationUnsquareWay(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.unsquare_way.buildings.reference'));
+                .call(t.append('issues.unsquare_way.buildings.reference'));
         }
     };
 

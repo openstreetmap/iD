@@ -1,6 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { uiCombobox } from './combobox';
 import { utilGetSetValue, utilNoAuto } from '../util';
 
@@ -52,16 +52,17 @@ export function uiFormFields(context) {
 
         var titles = [];
         var moreFields = notShown.map(function(field) {
-            var label = field.label();
-            titles.push(label);
+            var title = field.title();
+            titles.push(title);
 
             var terms = field.terms();
             if (field.key) terms.push(field.key);
             if (field.keys) terms = terms.concat(field.keys);
 
             return {
-                title: label,
-                value: label,
+                display: field.label(),
+                value: title,
+                title: title,
                 field: field,
                 terms: terms
             };
@@ -76,11 +77,16 @@ export function uiFormFields(context) {
         more.exit()
             .remove();
 
-        more = more.enter()
+        var moreEnter = more.enter()
             .append('div')
             .attr('class', 'more-fields')
-            .append('label')
-            .text(t('inspector.add_fields'))
+            .append('label');
+
+        moreEnter
+            .append('span')
+            .call(t.append('inspector.add_fields'));
+
+        more = moreEnter
             .merge(more);
 
 
@@ -107,9 +113,7 @@ export function uiFormFields(context) {
                     var field = d.field;
                     field.show();
                     selection.call(formFields);  // rerender
-                    if (field.type !== 'semiCombo' && field.type !== 'multiCombo') {
-                        field.focus();
-                    }
+                    field.focus();
                 })
             );
 

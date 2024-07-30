@@ -1,7 +1,0 @@
-{
-    "key": "par",
-    "type": "number",
-    "minValue": 1,
-    "label": "Par",
-    "placeholder": "3, 4, 5..."
-}

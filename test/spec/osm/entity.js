@@ -32,6 +32,11 @@ describe('iD.osmEntity', function () {
         describe('.toOSM', function () {
             it('reverses fromOSM', function () {
                 expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '1'))).to.equal('1');
+                expect(iD.osmEntity.id.toOSM(iD.osmEntity.id.fromOSM('node', '-1'))).to.equal('-1');
+            });
+
+            it('returns the empty string for other strings', function () {
+                expect(iD.osmEntity.id.toOSM('a')).to.equal('');
             });
         });
     });
@@ -272,20 +277,6 @@ describe('iD.osmEntity', function () {
             expect(iD.osmEntity({ tags: { amenity: 'gambling', gambling: 'casino' } }).deprecatedTags(deprecated)).to.eql(
                 [{ old: { amenity: 'gambling', gambling: 'casino' }, replace: { amenity: 'casino' } }]
             );
-        });
-    });
-
-    describe('#hasWikidata', function () {
-        it('returns false if entity has no tags', function () {
-            expect(iD.osmEntity().hasWikidata()).to.be.not.ok;
-        });
-
-        it('returns true if entity has a wikidata tag', function () {
-            expect(iD.osmEntity({ tags: { wikidata: 'Q18275868' } }).hasWikidata()).to.be.ok;
-        });
-
-        it('returns true if entity has a brand:wikidata tag', function () {
-            expect(iD.osmEntity({ tags: { 'brand:wikidata': 'Q18275868' } }).hasWikidata()).to.be.ok;
         });
     });
 

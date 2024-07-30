@@ -1,6 +1,6 @@
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { utilDisplayLabel } from '../util';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmPathHighwayTagValues } from '../osm/tags';
 import { geoMetersToLat, geoMetersToLon, geoSphericalDistance } from '../geo/geo';
@@ -148,6 +148,10 @@ export function validationCloseNodes(context) {
                 if (nearby.loc === node.loc ||
                     geoSphericalDistance(node.loc, nearby.loc) < pointThresholdMeters) {
 
+                    // ignore stolperstein (https://wiki.openstreetmap.org/wiki/DE:Stolpersteine)
+                    if ('memorial:type' in node.tags && 'memorial:type' in nearby.tags && node.tags['memorial:type']==='stolperstein' && nearby.tags['memorial:type']==='stolperstein') continue;
+                    if ('memorial' in node.tags && 'memorial' in nearby.tags && node.tags.memorial==='stolperstein' && nearby.tags.memorial === 'stolperstein') continue;
+
                     // allow very close points if tags indicate the z-axis might vary
                     var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
                     var zAxisDifferentiates = false;
@@ -168,9 +172,9 @@ export function validationCloseNodes(context) {
                         message: function(context) {
                             var entity = context.hasEntity(this.entityIds[0]),
                                 entity2 = context.hasEntity(this.entityIds[1]);
-                            return (entity && entity2) ? t('issues.close_nodes.detached.message', {
-                                feature: utilDisplayLabel(entity, context),
-                                feature2: utilDisplayLabel(entity2, context)
+                            return (entity && entity2) ? t.append('issues.close_nodes.detached.message', {
+                                feature: utilDisplayLabel(entity, context.graph()),
+                                feature2: utilDisplayLabel(entity2, context.graph())
                             }) : '';
                         },
                         reference: showReference,
@@ -179,11 +183,11 @@ export function validationCloseNodes(context) {
                             return [
                                 new validationIssueFix({
                                     icon: 'iD-operation-disconnect',
-                                    title: t('issues.fix.move_points_apart.title')
+                                    title: t.append('issues.fix.move_points_apart.title')
                                 }),
                                 new validationIssueFix({
                                     icon: 'iD-icon-layers',
-                                    title: t('issues.fix.use_different_layers_or_levels.title')
+                                    title: t.append('issues.fix.use_different_layers_or_levels.title')
                                 })
                             ];
                         }
@@ -200,7 +204,7 @@ export function validationCloseNodes(context) {
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .text(referenceText);
+                    .html(referenceText);
             }
         }
 
@@ -233,7 +237,7 @@ export function validationCloseNodes(context) {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t('issues.close_nodes.message', { way: utilDisplayLabel(entity, context) }) : '';
+                    return entity ? t.append('issues.close_nodes.message', { way: utilDisplayLabel(entity, context.graph()) }) : '';
                 },
                 reference: showReference,
                 entityIds: [way.id, node1.id, node2.id],
@@ -242,7 +246,7 @@ export function validationCloseNodes(context) {
                     return [
                         new validationIssueFix({
                             icon: 'iD-icon-plus',
-                            title: t('issues.fix.merge_points.title'),
+                            title: t.append('issues.fix.merge_points.title'),
                             onClick: function(context) {
                                 var entityIds = this.issue.entityIds;
                                 var action = actionMergeNodes([entityIds[1], entityIds[2]]);
@@ -251,7 +255,7 @@ export function validationCloseNodes(context) {
                         }),
                         new validationIssueFix({
                             icon: 'iD-operation-disconnect',
-                            title: t('issues.fix.move_points_apart.title')
+                            title: t.append('issues.fix.move_points_apart.title')
                         })
                     ];
                 }
@@ -264,7 +268,7 @@ export function validationCloseNodes(context) {
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .text(referenceText);
+                    .html(referenceText);
             }
         }
 

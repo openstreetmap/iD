@@ -1,28 +1,25 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
-import { geoExtent } from '../geo';
-import { utilGetAllNodes } from '../util';
+import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
-export function operationReflectShort(selectedIDs, context) {
-    return operationReflect(selectedIDs, context, 'short');
+export function operationReflectShort(context, selectedIDs) {
+    return operationReflect(context, selectedIDs, 'short');
 }
 
 
-export function operationReflectLong(selectedIDs, context) {
-    return operationReflect(selectedIDs, context, 'long');
+export function operationReflectLong(context, selectedIDs) {
+    return operationReflect(context, selectedIDs, 'long');
 }
 
 
-export function operationReflect(selectedIDs, context, axis) {
+export function operationReflect(context, selectedIDs, axis) {
     axis = axis || 'long';
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = nodes.reduce(function(extent, node) {
-        return extent.extend(node.extent(context.graph()));
-    }, geoExtent());
+    var extent = utilTotalExtent(selectedIDs, context.graph());
 
 
     var operation = function() {
@@ -44,7 +41,7 @@ export function operationReflect(selectedIDs, context, axis) {
 
     // don't cache this because the visible extent could change
     operation.disabled = function() {
-        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+        if (extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
@@ -80,19 +77,19 @@ export function operationReflect(selectedIDs, context, axis) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.reflect.' + disable + '.' + multi) :
-            t('operations.reflect.description.' + axis + '.' + multi);
+            t.append('operations.reflect.' + disable + '.' + multi) :
+            t.append('operations.reflect.description.' + axis + '.' + multi);
     };
 
 
     operation.annotation = function() {
-        return t('operations.reflect.annotation.' + axis + '.' + multi);
+        return t('operations.reflect.annotation.' + axis + '.feature', { n: selectedIDs.length });
     };
 
 
     operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key.' + axis)];
-    operation.title = t('operations.reflect.title.' + axis);
+    operation.title = t.append('operations.reflect.title.' + axis);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

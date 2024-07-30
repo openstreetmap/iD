@@ -6,9 +6,9 @@ describe('iD.svgPoints', function () {
         .clipExtent([[0, 0], [Infinity, Infinity]]);
 
     beforeEach(function () {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
     });

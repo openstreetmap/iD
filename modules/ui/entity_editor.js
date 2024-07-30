@@ -1,8 +1,8 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { event as d3_event, selectAll as d3_selectAll } from 'd3-selection';
 import deepEqual from 'fast-deep-equal';
 
-import { t, textDirection } from '../util/locale';
+import { presetManager } from '../presets';
+import { t, localizer } from '../core/localizer';
 import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
@@ -40,28 +40,33 @@ export function uiEntityEditor(context) {
         // Enter
         var headerEnter = header.enter()
             .append('div')
-            .attr('class', 'header fillL cf');
+            .attr('class', 'header fillL');
+
+        var direction = (localizer.textDirection() === 'rtl') ? 'forward' : 'backward';
 
         headerEnter
             .append('button')
-            .attr('class', 'fl preset-reset preset-choose')
-            .call(svgIcon((textDirection === 'rtl') ? '#iD-icon-forward' : '#iD-icon-backward'));
+            .attr('class', 'preset-reset preset-choose')
+            .attr('title', t('inspector.back_tooltip'))
+            .call(svgIcon(`#iD-icon-${direction}`));
 
         headerEnter
             .append('button')
-            .attr('class', 'fr preset-close')
+            .attr('class', 'close')
+            .attr('title', t('icons.close'))
             .on('click', function() { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
         headerEnter
-            .append('h3');
+            .append('h2');
 
         // Update
         header = header
             .merge(headerEnter);
 
-        header.selectAll('h3')
-            .text(_entityIDs.length === 1 ? t('inspector.edit') : t('inspector.edit_features'));
+        header.selectAll('h2')
+            .text('')
+            .call(_entityIDs.length === 1 ? t.append('inspector.edit') : t.append('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
             .on('click', function() {
@@ -111,24 +116,6 @@ export function uiEntityEditor(context) {
             body.call(section.render);
         });
 
-        body
-            .selectAll('.key-trap-wrap')
-            .data([0])
-            .enter()
-            .append('div')
-            .attr('class', 'key-trap-wrap')
-            .append('input')
-            .attr('type', 'text')
-            .attr('class', 'key-trap')
-            .on('keydown.key-trap', function() {
-                // On tabbing, send focus back to the first field on the inspector-body
-                // (probably the `name` field) #4159
-                if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
-                    d3_event.preventDefault();
-                    body.select('input').node().focus();
-                }
-            });
-
         context.history()
             .on('change.entity-editor', historyChanged);
 
@@ -154,7 +141,7 @@ export function uiEntityEditor(context) {
 
             if (priorActivePreset && _activePresets.length === 1 && priorActivePreset !== _activePresets[0]) {
                 // flash the button to indicate the preset changed
-                d3_selectAll('.entity-editor button.preset-reset .label')
+                context.container().selectAll('.entity-editor button.preset-reset .label')
                     .style('background-color', '#fff')
                     .transition()
                     .duration(750)
@@ -176,11 +163,19 @@ export function uiEntityEditor(context) {
 
             var tags = Object.assign({}, entity.tags);   // shallow copy
 
-            for (var k in changed) {
-                if (!k) continue;
-                var v = changed[k];
-                if (v !== undefined || tags.hasOwnProperty(k)) {
-                    tags[k] = v;
+            if (typeof changed === 'function') {
+                // a complex callback tag change
+                tags = changed(tags);
+            } else {
+                for (var k in changed) {
+                    if (!k) continue;
+                    var v = changed[k];
+                    if (typeof v === 'object') {
+                        // a "key only" tag change
+                        tags[k] = tags[v.oldKey];
+                    } else if (v !== undefined || tags.hasOwnProperty(k)) {
+                        tags[k] = v;
+                    }
                 }
             }
 
@@ -288,13 +283,17 @@ export function uiEntityEditor(context) {
 
     entityEditor.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
-        if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
-        _entityIDs = val;
+        // always reload these even if the entityIDs are unchanged, since we
+        // could be reselecting after something like dragging a node
         _base = context.graph();
         _coalesceChanges = false;
 
-        loadActivePresets();
+        if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
+
+        _entityIDs = val;
+
+        loadActivePresets(true);
 
         return entityEditor
             .modified(false);
@@ -308,7 +307,7 @@ export function uiEntityEditor(context) {
     };
 
 
-    function loadActivePresets() {
+    function loadActivePresets(isForNewSelection) {
 
         var graph = context.graph();
 
@@ -318,7 +317,7 @@ export function uiEntityEditor(context) {
             var entity = graph.hasEntity(_entityIDs[i]);
             if (!entity) return;
 
-            var match = context.presets().match(entity, graph);
+            var match = presetManager.match(entity, graph);
 
             if (!counts[match.id]) counts[match.id] = 0;
             counts[match.id] += 1;
@@ -327,14 +326,17 @@ export function uiEntityEditor(context) {
         var matches = Object.keys(counts).sort(function(p1, p2) {
             return counts[p2] - counts[p1];
         }).map(function(pID) {
-            return context.presets().item(pID);
+            return presetManager.item(pID);
         });
 
-        // A "weak" preset doesn't set any tags. (e.g. "Address")
-        var weakPreset = _activePresets.length === 1 &&
-            Object.keys(_activePresets[0].addTags || {}).length === 0;
-        // Don't replace a weak preset with a fallback preset (e.g. "Point")
-        if (weakPreset && matches.length === 1 && matches[0].isFallback()) return;
+        if (!isForNewSelection) {
+            // A "weak" preset doesn't set any tags. (e.g. "Address")
+            var weakPreset = _activePresets.length === 1 &&
+                !_activePresets[0].isFallback() &&
+                Object.keys(_activePresets[0].addTags || {}).length === 0;
+            // Don't replace a weak preset with a fallback preset (e.g. "Point")
+            if (weakPreset && matches.length === 1 && matches[0].isFallback()) return;
+        }
 
         entityEditor.presets(matches);
     }

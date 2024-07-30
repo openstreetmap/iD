@@ -6,7 +6,8 @@ import {
 //import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../../geo';
 import { svgIcon } from '../../svg/icon';
-import { t } from '../../util/locale';
+import { prefs } from '../../core/preferences';
+import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 
@@ -15,10 +16,10 @@ export function uiSectionValidationIssues(id, severity, context) {
     var _issues = [];
 
     var section = uiSection(id, context)
-        .title(function() {
+        .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t('issues.' + severity + 's.list_title', { count: issueCountText });
+            return t.append('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {
@@ -27,8 +28,8 @@ export function uiSectionValidationIssues(id, severity, context) {
 
     function getOptions() {
         return {
-            what: context.storage('validate-what') || 'edited',
-            where: context.storage('validate-where') || 'all'
+            what: prefs('validate-what') || 'edited',
+            where: prefs('validate-where') || 'all'
         };
     }
 
@@ -72,7 +73,7 @@ export function uiSectionValidationIssues(id, severity, context) {
 
 
         var items = list.selectAll('li')
-            .data(issues, function(d) { return d.id; });
+            .data(issues, function(d) { return d.key; });
 
         // Exit
         items.exit()
@@ -81,21 +82,20 @@ export function uiSectionValidationIssues(id, severity, context) {
         // Enter
         var itemsEnter = items.enter()
             .append('li')
-            .attr('class', function (d) { return 'issue severity-' + d.severity; })
-            .on('click', function(d) {
-                context.validator().focusIssue(d);
-            })
-            .on('mouseover', function(d) {
-                utilHighlightEntities(d.entityIds, true, context);
-            })
-            .on('mouseout', function(d) {
-                utilHighlightEntities(d.entityIds, false, context);
-            });
-
+            .attr('class', function (d) { return 'issue severity-' + d.severity; });
 
         var labelsEnter = itemsEnter
-            .append('div')
-            .attr('class', 'issue-label');
+            .append('button')
+            .attr('class', 'issue-label')
+            .on('click', function(d3_event, d) {
+                context.validator().focusIssue(d);
+            })
+            .on('mouseover', function(d3_event, d) {
+                utilHighlightEntities(d.entityIds, true, context);
+            })
+            .on('mouseout', function(d3_event, d) {
+                utilHighlightEntities(d.entityIds, false, context);
+            });
 
         var textEnter = labelsEnter
             .append('span')
@@ -126,7 +126,7 @@ export function uiSectionValidationIssues(id, severity, context) {
                     .attr('title', t('issues.fix_one.title'))
                     .datum(d.autoFix)  // set button datum to the autofix
                     .attr('class', 'autofix action')
-                    .on('click', function(d) {
+                    .on('click', function(d3_event, d) {
                         d3_event.preventDefault();
                         d3_event.stopPropagation();
 
@@ -146,8 +146,9 @@ export function uiSectionValidationIssues(id, severity, context) {
             .order();
 
         items.selectAll('.issue-message')
-            .text(function(d) {
-                return d.message(context);
+            .text('')
+            .each(function(d) {
+                return d.message(context)(d3_select(this));
             });
 
         /*
@@ -174,7 +175,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         linkEnter
             .append('span')
             .attr('class', 'autofix-all-link-text')
-            .text(t('issues.fix_all.title'));
+            .call(t.append('issues.fix_all.title'));
 
         linkEnter
             .append('span')

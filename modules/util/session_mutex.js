@@ -10,7 +10,7 @@ export function utilSessionMutex(name) {
     function renew() {
         var expires = new Date();
         expires.setSeconds(expires.getSeconds() + 5);
-        document.cookie = name + '=1; expires=' + expires.toUTCString();
+        document.cookie = name + '=1; expires=' + expires.toUTCString() + '; sameSite=strict';
     }
 
     mutex.lock = function () {
@@ -24,7 +24,7 @@ export function utilSessionMutex(name) {
 
     mutex.unlock = function () {
         if (!intervalID) return;
-        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; sameSite=strict';
         clearInterval(intervalID);
         intervalID = null;
     };

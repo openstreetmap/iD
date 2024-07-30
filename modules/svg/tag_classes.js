@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { osmPavedTags } from '../osm/tags';
+import { osmPathHighwayTagValues, osmPavedTags, osmSemipavedTags, osmLifecyclePrefixes } from '../osm/tags';
 
 
 export function svgTagClasses() {
@@ -7,27 +7,14 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'building:part', 'indoor'
+        'roller_coaster', 'building:part', 'indoor'
     ];
-    var statuses = [
-        // nonexistent, might be built
-        'proposed', 'planned',
-        // under maintentance or between groundbreaking and opening
-        'construction',
-        // existent but not functional
-        'disused',
-        // dilapidated to nonexistent
-        'abandoned',
-        // nonexistent, still may appear in imagery
-        'dismantled', 'razed', 'demolished', 'obliterated',
-        // existent occasionally, e.g. stormwater drainage basin
-        'intermittent'
-    ];
+    var statuses = Object.keys(osmLifecyclePrefixes);
     var secondaries = [
         'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
         'surface', 'tracktype', 'footway', 'crossing', 'service', 'sport',
         'public_transport', 'location', 'parking', 'golf', 'type', 'leisure',
-        'man_made', 'indoor'
+        'man_made', 'indoor', 'construction', 'proposed'
     ];
     var _tags = function(entity) { return entity.tags; };
 
@@ -118,8 +105,7 @@ export function svgTagClasses() {
 
                 if (v === 'yes') {   // e.g. `railway=rail + abandoned=yes`
                     status = k;
-                }
-                else if (primary && primary === v) {  // e.g. `railway=rail + abandoned=railway`
+                } else if (primary && primary === v) {  // e.g. `railway=rail + abandoned=railway`
                     status = k;
                 } else if (!primary && primaries.indexOf(v) !== -1) {  // e.g. `abandoned=railway`
                     status = k;
@@ -146,26 +132,39 @@ export function svgTagClasses() {
         }
 
         // For highways, look for surface tagging..
-        if (primary === 'highway' || primary === 'aeroway') {
-            var paved = (t.highway !== 'track');
+        if ((primary === 'highway' && !osmPathHighwayTagValues[t.highway]) || primary === 'aeroway') {
+            var surface = t.highway === 'track' ? 'unpaved' : 'paved';
             for (k in t) {
                 v = t[k];
                 if (k in osmPavedTags) {
-                    paved = !!osmPavedTags[k][v];
-                    break;
+                    surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                }
+                if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
+                    surface = 'semipaved';
                 }
             }
-            if (!paved) {
-                classes.push('tag-unpaved');
-            }
+            classes.push('tag-' + surface);
         }
 
         // If this is a wikidata-tagged item, add a class for that..
-        if (t.wikidata || t['brand:wikidata']) {
+        var qid = (
+            t.wikidata ||
+            t['flag:wikidata'] ||
+            t['brand:wikidata'] ||
+            t['network:wikidata'] ||
+            t['operator:wikidata']
+        );
+
+        if (qid) {
             classes.push('tag-wikidata');
         }
 
-        return classes.join(' ').trim();
+        // ensure that classes for tags keys/values with special characters like spaces
+        // are not added to the DOM, because it can cause bizarre issues (#9448)
+        return classes
+            .filter(klass => /^[-_a-z0-9]+$/.test(klass))
+            .join(' ')
+            .trim();
     };
 
 

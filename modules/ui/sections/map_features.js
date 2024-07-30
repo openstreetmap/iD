@@ -1,14 +1,13 @@
-import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { t } from '../../core/localizer';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiSectionMapFeatures(context) {
 
     var _features = context.features().keys();
 
     var section = uiSection('map-features', context)
-        .title(t('map_data.map_features'))
+        .label(() => t.append('map_data.map_features'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -32,19 +31,23 @@ export function uiSectionMapFeatures(context) {
         footer
             .append('a')
             .attr('class', 'feature-list-link')
+            .attr('role', 'button')
             .attr('href', '#')
-            .text(t('issues.enable_all'))
-            .on('click', function() {
-                context.features().enableAll();
+            .call(t.append('issues.disable_all'))
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                context.features().disableAll();
             });
 
         footer
             .append('a')
             .attr('class', 'feature-list-link')
+            .attr('role', 'button')
             .attr('href', '#')
-            .text(t('issues.disable_all'))
-            .on('click', function() {
-                context.features().disableAll();
+            .call(t.append('issues.enable_all'))
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
+                context.features().enableAll();
             });
 
         // Update
@@ -66,15 +69,17 @@ export function uiSectionMapFeatures(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .call(tooltip()
-                .html(true)
+            .call(uiTooltip()
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip');
+                    var tip = t.append(name + '.' + d + '.tooltip');
                     if (autoHiddenFeature(d)) {
-                        var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
-                        tip += '<div>' + msg + '</div>';
+                        var msg = showsLayer('osm') ? t.append('map_data.autohidden') : t.append('map_data.osmhidden');
+                        return selection => {
+                            selection.call(tip);
+                            selection.append('div').call(msg);
+                        };
                     }
-                    return uiTooltipHtml(tip);
+                    return tip;
                 })
                 .placement('top')
             );
@@ -90,7 +95,7 @@ export function uiSectionMapFeatures(context) {
 
         label
             .append('span')
-            .text(function(d) { return t(name + '.' + d + '.description'); });
+            .html(function(d) { return t.html(name + '.' + d + '.description'); });
 
         // Update
         items = items
@@ -111,7 +116,7 @@ export function uiSectionMapFeatures(context) {
         return context.features().enabled(d);
     }
 
-    function clickFeature(d) {
+    function clickFeature(d3_event, d) {
         context.features().toggle(d);
     }
 

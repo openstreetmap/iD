@@ -2,20 +2,20 @@ describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
     before(function() {
-        iD.data.languages = {
+        iD.fileFetcher.cache().languages = {
           de: { nativeName: 'Deutsch' },
           en: { nativeName: 'English' }
         };
-        iD.data.territory_languages = {};
+        iD.fileFetcher.cache().territory_languages = {};
     });
 
     after(function() {
-        delete iD.data.languages;
-        delete iD.data.territory_languages;
+        delete iD.fileFetcher.cache().languages;
+        delete iD.fileFetcher.cache().territory_languages;
     });
 
     beforeEach(function() {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         selection = d3.select(document.createElement('div'));
         field = iD.presetField('name', { key: 'name', type: 'localized' });
         field.locked = function() { return false; };

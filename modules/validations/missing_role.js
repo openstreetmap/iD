@@ -1,6 +1,6 @@
 import { actionChangeMember } from '../actions/change_member';
 import { actionDeleteMember } from '../actions/delete_member';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
@@ -44,9 +44,9 @@ export function validationMissingRole() {
             message: function(context) {
                 var member = context.hasEntity(this.entityIds[1]),
                     relation = context.hasEntity(this.entityIds[0]);
-                return (member && relation) ? t('issues.missing_role.message', {
-                    member: utilDisplayLabel(member, context),
-                    relation: utilDisplayLabel(relation, context)
+                return (member && relation) ? t.append('issues.missing_role.message', {
+                    member: utilDisplayLabel(member, context.graph()),
+                    relation: utilDisplayLabel(relation, context.graph())
                 }) : '';
             },
             reference: showReference,
@@ -61,11 +61,13 @@ export function validationMissingRole() {
                     makeAddRoleFix('outer'),
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.remove_from_relation.title'),
+                        title: t.append('issues.fix.remove_from_relation.title'),
                         onClick: function(context) {
                             context.perform(
                                 actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
-                                t('operations.delete_member.annotation')
+                                t('operations.delete_member.annotation', {
+                                    n: 1
+                                })
                             );
                         }
                     })
@@ -80,20 +82,22 @@ export function validationMissingRole() {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.missing_role.multipolygon.reference'));
+                .call(t.append('issues.missing_role.multipolygon.reference'));
         }
     }
 
 
     function makeAddRoleFix(role) {
         return new validationIssueFix({
-            title: t('issues.fix.set_as_' + role + '.title'),
+            title: t.append('issues.fix.set_as_' + role + '.title'),
             onClick: function(context) {
                 var oldMember = this.issue.data.member;
                 var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };
                 context.perform(
                     actionChangeMember(this.issue.entityIds[0], member, oldMember.index),
-                    t('operations.change_role.annotation')
+                    t('operations.change_role.annotation', {
+                        n: 1
+                    })
                 );
             }
         });

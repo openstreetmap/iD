@@ -1,10 +1,9 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import marked from 'marked';
-import { t, textDirection } from '../util/locale';
+import { marked } from 'marked';
+import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { icon } from './intro/helper';
 
@@ -55,15 +54,15 @@ export function uiFieldHelp(context, fieldName) {
     var fieldHelpHeadings = {};
 
     var replacements = {
-        distField: t('restriction.controls.distance'),
-        viaField: t('restriction.controls.via'),
-        fromShadow: icon('#iD-turn-shadow', 'pre-text shadow from'),
-        allowShadow: icon('#iD-turn-shadow', 'pre-text shadow allow'),
-        restrictShadow: icon('#iD-turn-shadow', 'pre-text shadow restrict'),
-        onlyShadow: icon('#iD-turn-shadow', 'pre-text shadow only'),
-        allowTurn: icon('#iD-turn-yes', 'pre-text turn'),
-        restrictTurn: icon('#iD-turn-no', 'pre-text turn'),
-        onlyTurn: icon('#iD-turn-only', 'pre-text turn')
+        distField: { html: t.html('restriction.controls.distance') },
+        viaField: { html: t.html('restriction.controls.via') },
+        fromShadow: { html: icon('#iD-turn-shadow', 'inline shadow from') },
+        allowShadow: { html: icon('#iD-turn-shadow', 'inline shadow allow') },
+        restrictShadow: { html: icon('#iD-turn-shadow', 'inline shadow restrict') },
+        onlyShadow: { html: icon('#iD-turn-shadow', 'inline shadow only') },
+        allowTurn: { html: icon('#iD-turn-yes', 'inline turn') },
+        restrictTurn: { html: icon('#iD-turn-no', 'inline turn') },
+        onlyTurn: { html: icon('#iD-turn-only', 'inline turn') }
     };
 
 
@@ -74,12 +73,12 @@ export function uiFieldHelp(context, fieldName) {
             var subkey = helpkey + '.' + part;
             var depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t(subkey, replacements) + '\n\n';
+            return all + hhh + t.html(subkey, replacements) + '\n\n';
         }, '');
 
         return {
             key: helpkey,
-            title: t(helpkey + '.title'),
+            title: t.html(helpkey + '.title'),
             html: marked(text.trim())
         };
     });
@@ -149,10 +148,9 @@ export function uiFieldHelp(context, fieldName) {
         button.enter()
             .append('button')
             .attr('class', 'field-help-button')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-help'))
             .merge(button)
-            .on('click', function () {
+            .on('click', function (d3_event) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (_body.classed('hide')) {
@@ -181,7 +179,7 @@ export function uiFieldHelp(context, fieldName) {
         if (_wrap.empty()) return;
 
         // absolute position relative to the inspector, so it "floats" above the fields
-        _inspector = d3_select('#sidebar .entity-editor-pane .inspector-body');
+        _inspector = context.container().select('.sidebar .entity-editor-pane .inspector-body');
         if (_inspector.empty()) return;
 
         _body = _inspector.selectAll('.field-help-body')
@@ -197,13 +195,14 @@ export function uiFieldHelp(context, fieldName) {
 
         titleEnter
             .append('h2')
-            .attr('class', ((textDirection === 'rtl') ? 'fr' : 'fl'))
-            .text(t('help.field.' + fieldName + '.title'));
+            .attr('class', ((localizer.textDirection() === 'rtl') ? 'fr' : 'fl'))
+            .call(t.append('help.field.' + fieldName + '.title'));
 
         titleEnter
             .append('button')
             .attr('class', 'fr close')
-            .on('click', function() {
+            .attr('title', t('icons.close'))
+            .on('click', function(d3_event) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 hide();
@@ -220,11 +219,11 @@ export function uiFieldHelp(context, fieldName) {
             .enter()
             .append('div')
             .attr('class', 'field-help-nav-item')
-            .text(function(d) { return d; })
-            .on('click', function(d, i) {
+            .html(function(d) { return d; })
+            .on('click', function(d3_event, d) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
-                clickHelp(i);
+                clickHelp(titles.indexOf(d));
             });
 
         enter

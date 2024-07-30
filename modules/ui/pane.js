@@ -1,18 +1,16 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
 import { svgIcon } from '../svg/icon';
-import { textDirection } from '../util/locale';
-import { tooltip } from '../util/tooltip';
-import { uiTooltipHtml } from './tooltipHtml';
+import { t, localizer } from '../core/localizer';
+import { uiTooltip } from './tooltip';
 
 
 export function uiPane(id, context) {
 
     var _key;
-    var _title = '';
+    var _label = '';
     var _description = '';
     var _iconName = '';
     var _sections; // array of uiSection objects
@@ -25,9 +23,9 @@ export function uiPane(id, context) {
         id: id
     };
 
-    pane.title = function(val) {
-        if (!arguments.length) return _title;
-        _title = val;
+    pane.label = function(val) {
+        if (!arguments.length) return _label;
+        _label = val;
         return pane;
     };
 
@@ -63,7 +61,7 @@ export function uiPane(id, context) {
         context.ui().togglePanes();
     }
 
-    pane.togglePane = function() {
+    pane.togglePane = function(d3_event) {
         if (d3_event) d3_event.preventDefault();
         _paneTooltip.hide();
         context.ui().togglePanes(!_paneSelection.classed('shown') ? _paneSelection : undefined);
@@ -72,10 +70,10 @@ export function uiPane(id, context) {
     pane.renderToggleButton = function(selection) {
 
         if (!_paneTooltip) {
-            _paneTooltip = tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(_description, _key));
+            _paneTooltip = uiTooltip()
+                .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
+                .title(() => _description)
+                .keys([_key]);
         }
 
         selection
@@ -108,10 +106,12 @@ export function uiPane(id, context) {
 
         heading
             .append('h2')
-            .text(_title);
+            .text('')
+            .call(_label);
 
         heading
             .append('button')
+            .attr('title', t('icons.close'))
             .on('click', hidePane)
             .call(svgIcon('#iD-icon-close'));
 

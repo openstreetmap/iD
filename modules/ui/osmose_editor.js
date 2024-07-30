@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { services } from '../services';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
@@ -29,13 +29,14 @@ export function uiOsmoseEditor(context) {
 
     headerEnter
       .append('button')
-        .attr('class', 'fr qa-editor-close')
+        .attr('class', 'close')
+        .attr('title', t('icons.close'))
         .on('click', () => context.enter(modeBrowse(context)))
         .call(svgIcon('#iD-icon-close'));
 
     headerEnter
-      .append('h3')
-        .text(t('QA.osmose.title'));
+      .append('h2')
+        .call(t.append('QA.osmose.title'));
 
     let body = selection.selectAll('.body')
       .data([0]);
@@ -117,8 +118,8 @@ export function uiOsmoseEditor(context) {
       .merge(buttonEnter);
 
     buttonSection.select('.close-button')
-      .text(() => t('QA.keepRight.close'))
-      .on('click.close', function(d) {
+      .call(t.append('QA.keepRight.close'))
+      .on('click.close', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.osmose;
         if (qaService) {
@@ -128,8 +129,8 @@ export function uiOsmoseEditor(context) {
       });
 
     buttonSection.select('.ignore-button')
-      .text(() => t('QA.keepRight.ignore'))
-      .on('click.ignore', function(d) {
+      .call(t.append('QA.keepRight.ignore'))
+      .on('click.ignore', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         const qaService = services.osmose;
         if (qaService) {

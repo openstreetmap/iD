@@ -1,5 +1,6 @@
 
 import { geoPath as d3_geoPath } from 'd3-geo';
+
 import { osmNode } from '../osm/node';
 
 export function actionExtract(entityID, projection) {
@@ -13,7 +14,7 @@ export function actionExtract(entityID, projection) {
             return extractFromNode(entity, graph);
         }
 
-        return extractFromArea(entity, graph);
+        return extractFromWayOrRelation(entity, graph);
     };
 
     function extractFromNode(node, graph) {
@@ -37,19 +38,41 @@ export function actionExtract(entityID, projection) {
             }, graph);
     }
 
-    function extractFromArea(entity, graph) {
+    function extractFromWayOrRelation(entity, graph) {
+
+        var fromGeometry = entity.geometry(graph);
 
         var keysToCopyAndRetain = ['source', 'wheelchair'];
-        var keysToRetain = ['area', 'type'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer'];
+        var keysToRetain = ['area'];
+        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin'];
 
-        var centroid = d3_geoPath(projection).centroid(entity.asGeoJSON(graph, true));
+        var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
+        extractedLoc = extractedLoc && projection.invert(extractedLoc);
+        if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
+            extractedLoc = entity.extent(graph).center();
+        }
 
-        var isBuilding = entity.tags.building;
+        var indoorAreaValues = {
+            area: true,
+            corridor: true,
+            elevator: true,
+            level: true,
+            room: true
+        };
 
-        var areaTags = Object.assign({}, entity.tags);  // shallow copy
+        var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
+            (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
+
+        var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
+
+        var entityTags = Object.assign({}, entity.tags);  // shallow copy
         var pointTags = {};
-        for (var key in areaTags) {
+        for (var key in entityTags) {
+
+            if (entity.type === 'relation' &&
+                key === 'type') {
+                continue;
+            }
 
             if (keysToRetain.indexOf(key) !== -1) {
                 continue;
@@ -61,57 +84,43 @@ export function actionExtract(entityID, projection) {
                     key.match(/^building:.{1,}/) ||
                     key.match(/^roof:.{1,}/)) continue;
             }
-
-            // copy the tag from the area to the point
-            pointTags[key] = areaTags[key];
-
-            // leave addresses and some other tags so they're on both features
-            if (keysToCopyAndRetain.indexOf(key) !== -1 || key.match(/^addr:.{1,}/)) {
+            // leave `indoor` tag on the area
+            if (isIndoorArea && key === 'indoor') {
                 continue;
             }
 
-            // remove the tag from the area
-            delete areaTags[key];
+            // copy the tag from the entity to the point
+            pointTags[key] = entityTags[key];
+
+            // leave addresses and some other tags so they're on both features
+            if (keysToCopyAndRetain.indexOf(key) !== -1 ||
+                key.match(/^addr:.{1,}/)) {
+                continue;
+            } else if (isIndoorArea && key === 'level') {
+                // leave `level` on both features
+                continue;
+            }
+
+            // remove the tag from the entity
+            delete entityTags[key];
         }
 
-        if (!isBuilding) {
-            // ensure that the area keeps the area geometry
-            areaTags.area = 'yes';
+        if (!isBuilding && !isIndoorArea && fromGeometry === 'area') {
+            // ensure that areas keep area geometry
+            entityTags.area = 'yes';
         }
 
-        var replacement = osmNode({ loc: centroid, tags: pointTags });
+        var replacement = osmNode({ loc: extractedLoc, tags: pointTags });
         graph = graph.replace(replacement);
 
         extractedNodeID = replacement.id;
 
-        return graph.replace(entity.update({tags: areaTags}));
+        return graph.replace(entity.update({tags: entityTags}));
     }
 
     action.getExtractedNodeID = function() {
         return extractedNodeID;
     };
-
-    action.disabled = function(graph) {
-        var entity = graph.entity(entityID);
-
-        if (entity.type === 'node') {
-            var parentRels = graph.parentRelations(entity);
-            for (var i = 0; i < parentRels.length; i++) {
-                var relation = parentRels[i];
-                if (!relation.hasFromViaTo()) continue;
-
-                for (var j = 0; j < relation.members.length; j++) {
-                    var m = relation.members[j];
-                    if (m.id === entityID && (m.role === 'via' || m.role === 'location_hint')) {
-                        return 'restriction';
-                    }
-                }
-            }
-        }
-
-        return false;
-    };
-
 
     return action;
 }

@@ -1,9 +1,8 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { modeBrowse } from '../modes/browse';
 
 
@@ -11,7 +10,7 @@ export function uiSourceSwitch(context) {
     var keys;
 
 
-    function click() {
+    function click(d3_event) {
         d3_event.preventDefault();
 
         var osm = context.connection();
@@ -31,7 +30,7 @@ export function uiSourceSwitch(context) {
         context.flush();                         // remove stored data
 
         d3_select(this)
-            .text(isLive ? t('source_switch.live') : t('source_switch.dev'))
+            .html(isLive ? t.html('source_switch.live') : t.html('source_switch.dev'))
             .classed('live', isLive)
             .classed('chip', isLive);
 
@@ -42,7 +41,7 @@ export function uiSourceSwitch(context) {
         selection
             .append('a')
             .attr('href', '#')
-            .text(t('source_switch.live'))
+            .call(t.append('source_switch.live'))
             .attr('class', 'live chip')
             .on('click', click);
     };

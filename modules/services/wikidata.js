@@ -1,7 +1,7 @@
 import { json as d3_json } from 'd3-fetch';
 
-import { utilArrayUniq, utilQsString } from '../util';
-import { currentLocale } from '../util/locale';
+import { utilQsString } from '../util';
+import { localizer } from '../core/localizer';
 
 var apibase = 'https://www.wikidata.org/w/api.php?';
 var _wikidataCache = {};
@@ -17,11 +17,13 @@ export default {
 
 
     // Search for Wikidata items matching the query
-    itemsForSearchQuery: function(query, callback) {
+    itemsForSearchQuery: function(query, callback, language) {
         if (!query) {
             if (callback) callback('No query', {});
             return;
         }
+
+        var lang = this.languagesToQuery()[0];
 
         var url = apibase + utilQsString({
             action: 'wbsearchentities',
@@ -29,15 +31,26 @@ export default {
             formatversion: 2,
             search: query,
             type: 'item',
-            language: this.languagesToQuery()[0],
+            // the language to search
+            language: language || lang,
+            // the language for the label and description in the result
+            uselang: lang,
             limit: 10,
             origin: '*'
         });
 
         d3_json(url)
-            .then(function(result) {
+            .then(result => {
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    if (result.error.code === 'badvalue' &&
+                        result.error.info.includes(lang) &&
+                        !language && lang.includes('-')) {
+                        // retry without "country suffix" region subtag
+                        this.itemsForSearchQuery(query, callback, lang.split('-')[0]);
+                        return;
+                    } else {
+                        throw new Error(result.error);
+                    }
                 }
                 if (callback) callback(null, result.search || {});
             })
@@ -80,11 +93,13 @@ export default {
 
 
     languagesToQuery: function() {
-        return utilArrayUniq([
-            currentLocale.toLowerCase(),
-            currentLocale.split('-', 2)[0].toLowerCase(),
-            'en'
-        ]);
+        return localizer.localeCodes().map(function(code) {
+            return code.toLowerCase();
+        }).filter(function(code) {
+            // HACK: en-us isn't a wikidata language. We should really be filtering by
+            // the languages known to be supported by wikidata.
+            return code !== 'en-us';
+        });
     },
 
 
@@ -148,14 +163,20 @@ export default {
 
             var i;
             var description;
-            if (entity.descriptions && Object.keys(entity.descriptions).length > 0) {
-                description = entity.descriptions[Object.keys(entity.descriptions)[0]].value;
+            for (i in langs) {
+                let code = langs[i];
+                if (entity.descriptions[code] && entity.descriptions[code].language === code) {
+                    description = entity.descriptions[code];
+                    break;
+                }
             }
+            if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
 
             // prepare result
             var result = {
                 title: entity.id,
-                description: description,
+                description: description ? description.value : '',
+                descriptionLocaleCode: description ? description.language : '',
                 editURL: 'https://www.wikidata.org/wiki/' + entity.id
             };
 
@@ -180,7 +201,7 @@ export default {
             }
 
             if (entity.sitelinks) {
-                var englishLocale = (currentLocale.split('-', 2)[0].toLowerCase() === 'en');
+                var englishLocale = localizer.languageCode().toLowerCase() === 'en';
 
                 // must be one of these that we requested..
                 for (i = 0; i < langs.length; i++) {   // check each, in order of preference
@@ -188,7 +209,7 @@ export default {
                     if (entity.sitelinks[w]) {
                         var title = entity.sitelinks[w].title;
                         var tKey = 'inspector.wiki_reference';
-                        if (!englishLocale && langs[i] === 'en') {   // user's currentLocale isn't English but
+                        if (!englishLocale && langs[i] === 'en') {   // user's locale isn't English but
                             tKey = 'inspector.wiki_en_reference';    // we are sending them to enwiki anyway..
                         }
 

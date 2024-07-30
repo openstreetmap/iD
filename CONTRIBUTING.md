@@ -1,23 +1,20 @@
 # Contributing to iD
 
-Thinking of contributing to iD? High five! Here are some basics for our habits
-so that you can write code that fits in perfectly.
+Thinking of contributing to iD? High five! There are plenty of ways to get involved.
+You don't need to know the first thing about programming (though it's always a
+great time to learn!)
+
+Everyone involved in the iD project is subject to the [Code of Conduct](CODE_OF_CONDUCT.md).
+Please take a moment to read it before proceeding, it's short and simple. We want
+everyone to feel comfortable contributing to iD.
 
 
-## Code of Conduct
+## Submitting Issues
 
-We want everyone to feel comfortable contributing to iD.  Please read the project
-[Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
+We'd love to hear your feedback about iD. Please [search existing issues](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
+before [opening a new one](https://github.com/openstreetmap/iD/issues/new). Many bugs and ideas have already been posted.
 
-
-## Reporting Issues
-
-We'd love to hear what you think about iD, about any specific problems or
-concerns you have. Here's a quick list of things to consider:
-
-Please [search for your issue before filing it: many bugs and improvements have already been reported](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
-
-To report a bug:
+When reporting a bug:
 
 * Write specifically what browser (type and version, like "Firefox 49.0"), OS,
 and browser extensions you have installed
@@ -29,18 +26,17 @@ You can drag the image file onto the GitHub issue and it will be included with y
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
 * If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
 JavaScript error message.
+* When in doubt, over-describe the bug and how you discovered it.
 
-When in doubt, be over-descriptive of the bug and how you discovered it.
+When requesting a feature:
 
-To request a feature:
-
-* If the feature is available in some other software (like Potlatch), link to that software and the implementation.
+* Provide a link if the feature is available in some other software.
   We care about prior art.
-* Understand that iD is meant to be a simple editor and doesn't aim to be
-  as complete or complicated as JOSM or similar.
+* Understand that iD is focused on simplicity and doesn't aim to be
+  as complete as JOSM or other editors.
 
 
-## Issue Labels
+### Issue Labels
 
 We use GitHub labels to keep track of issues.  Some guidelines:
 
@@ -94,42 +90,60 @@ documentation, repository gardening, and other stuff that makes developers happy
 * <sub>[![chore][chore]][chore_link]
 [![chore-dependency][chore-dependency]][chore-dependency_link]
 [![chore-documentation][chore-documentation]][chore-documentation_link]
-[![chore-greenkeeper][chore-greenkeeper]][chore-greenkeeper_link]</sub>
+[![chore-dependabot][chore-dependabot]][chore-dependabot_link]</sub>
 
 [chore]: http://labl.es/svg?text=chore&bgcolor=fef2c0
 [chore-dependency]: http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0
 [chore-documentation]: http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0
-[chore-greenkeeper]: http://labl.es/svg?text=chore-greenkeeper&bgcolor=fef2c0
+[chore-dependabot]: http://labl.es/svg?text=chore-dependabot&bgcolor=fef2c0
 
 [chore_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore
 [chore-dependency_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependency
 [chore-documentation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-documentation
-[chore-greenkeeper_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-greenkeeper
+[chore-dependabot_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependabot
 
-Light blue labels are for **features**. We use labels to group them into categories.
+Light blue labels are for **components**, the specific parts of iD that concern the issue.
 
 * <sub>[![core][core]][core_link]
-[![localization][localization]][localization_link]
-[![performance][performance]][performance_link]
+[![operation][operation]][operation_link]
 [![preset][preset]][preset_link]
-[![renderer][renderer]][renderer_link]
+[![streetlevel][streetlevel]][streetlevel_link]
 [![validation][validation]][validation_link]</sub>
 
 [core]: http://labl.es/svg?text=core&bgcolor=c5def5
-[localization]: http://labl.es/svg?text=localization&bgcolor=c5def5
-[performance]: http://labl.es/svg?text=performance&bgcolor=c5def5
+[operation]: http://labl.es/svg?text=operation&bgcolor=c5def5
 [preset]: http://labl.es/svg?text=preset&bgcolor=c5def5
-[renderer]: http://labl.es/svg?text=renderer&bgcolor=c5def5
+[streetlevel]: http://labl.es/svg?text=streetlevel&bgcolor=c5def5
 [validation]: http://labl.es/svg?text=validation&bgcolor=c5def5
 
 [core_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acore
-[localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
-[performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
+[operation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%operation
 [preset_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apreset
-[renderer_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Arenderer
+[streetlevel_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Astreetlevel
 [validation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Avalidation
 
-Dark Grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
+Dark teal labels are for **categories**, the high-level concepts that the issue falls under.
+
+* <sub>[![accessibility][accessibility]][accessibility_link]
+[![compatibility][compatibility]][compatibility_link]
+[![localization][localization]][localization_link]
+[![performance][performance]][performance_link]
+[![usability][usability]][usability_link]</sub>
+
+[accessibility]: http://labl.es/svg?text=accessibility&bgcolor=007f99
+[compatibility]: http://labl.es/svg?text=compatibility&bgcolor=007f99
+[localization]: http://labl.es/svg?text=localization&bgcolor=007f99
+[performance]: http://labl.es/svg?text=performance&bgcolor=007f99
+[usability]: http://labl.es/svg?text=usability&bgcolor=007f99
+
+[accessibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aaccessibility
+[compatibility_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acompatibility
+[localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
+[performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
+[usability_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Ausability
+
+
+Dark grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
 open while we wait for something to happen.
 
 * <sub>[![waitfor][waitfor]][waitfor_link]
@@ -150,23 +164,19 @@ open while we wait for something to happen.
 [waitfor-info_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-info
 [waitfor-upstream_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-upstream
 
-Light Grey labels are for **wontfix items**. We've decided these doesn't belong in
+Light grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
-(ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
 
 * <sub>[![wontfix][wontfix]][wontfix_link]
 [![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
-[![wontfix-ISATIDL][wontfix-ISATIDL]][wontfix-ISATIDL_link]
 [![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
 
 [wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
 [wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
-[wontfix-ISATIDL]: http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee
 [wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
 
 [wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
 [wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
-[wontfix-ISATIDL_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-ISATIDL
 [wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
 
 Special:
@@ -183,22 +193,29 @@ Work in Progress.  Don't start work on these, somebody else already did!
 [wip_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awip
 
 
-## Verifying Bug Fixes
+## Testing
 
-To verify a bug fix (or test a new feature), use the [master deployment](http://preview.ideditor.com/master/)
-(http://preview.ideditor.com/master/), which is updated every 10 minutes with the
-latest code and translation strings.
+You can use the [development preview site](https://ideditor.netlify.app) to test
+unreleased features and verify bug fixes, all without building iD yourself. This site
+is updated with the latest code and translations every time we change the `develop` branch.
 
-The deployments on openstreetmap.org and http://preview.ideditor.com/release/ are updated only
-with stable releases. Issues that are marked fixed in the tracker may still be present.
+The deployments on https://openstreetmap.org and https://ideditor-release.netlify.app
+are updated only with [stable releases](https://github.com/openstreetmap/iD/releases).
+Recently fixed issues may still be present on these sites until the next version of iD
+is released.
+
+While it's possible to edit the live OpenStreetMap database with development versions
+of iD, it's risky to do so. Your edits could be lost or garbled at any time. Press
+the ![live](http://labl.es/svg?text=live&bgcolor=d32232) button in the bottom bar to
+switch to the development database.
 
 
 ## Translating
 
 Translations are managed using the
-[Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
+[Transifex](https://www.transifex.com/openstreetmap/id-editor/) platform. After
 signing up, you can go to [iD's project
-page](https://www.transifex.com/projects/p/id-editor/), select a language and
+page](https://www.transifex.com/openstreetmap/id-editor/), select a language and
 click **Translate** to start translating. Translations are divided into
 separate resources:
 
@@ -211,16 +228,16 @@ new language: it's replaced with a place name when iD presents the text. So a
 French translation of `Couldn't locate a place named '{name}'` would look like
 `Impossible de localiser l'endroit nommé '{name}'`.
 
-The translations for presets consist of the names of presets, labels for
+The translations for presets, [maintained in the id-tagging-schema repository](https://github.com/openstreetmap/id-tagging-schema), consist of the names of presets, labels for
 preset fields, and lists of search terms. You do _not_ need to translate the
 search terms literally -- use a set of synonyms and related terms appropriate
 to the target language, separated by commas.
+For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating). 
 
-You can check your translations in the [master deployment](http://preview.ideditor.com/master/)
-(http://preview.ideditor.com/master/), which is updated every 10 minutes with the
-latest code and translation strings.
+You can check your translations on the [development preview site](https://ideditor.netlify.app),
+which is updated every time we change the `develop` branch.
 
-[iD translation project on Transifex](https://www.transifex.com/projects/p/id-editor/)
+[iD translation project on Transifex](https://www.transifex.com/openstreetmap/id-editor/)
 
 To get notifications when translation source files change, click **Watch
 project** button near the bottom of the project page. You can edit your
@@ -228,7 +245,7 @@ project** button near the bottom of the project page. You can edit your
 getting too many notifications.
 
 Translations are licensed under
-[ISC](https://raw.github.com/openstreetmap/iD/master/LICENSE.md), the same license
+[ISC](https://raw.github.com/openstreetmap/iD/develop/LICENSE.md), the same license
 as iD.
 
 **Why are there so many duplicate "Type" translations?** There are multiple
@@ -247,22 +264,22 @@ These are separate translations for uniformity reasons and because some language
 
 **Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
  pulled in from the external Osmose API. You can contribute to the
- [Osmose Transifex project](https://www.transifex.com/projects/p/osmose/)
+ [Osmose Transifex project](https://explore.transifex.com/openstreetmap-france/osmose/)
  and the results will be seen in iD once deployed.
 
 Note that if you want to add/update English translations in Osmose then you will
  need to head on over to the [Osmose backend source code](https://github.com/osm-fr/osmose-backend).
 
-## Adding New Strings for Translation or Updating Existing Strings
+### Translations in Code
 
-iD translates strings with a `t` function - `t('foo.bar')` translate the key
-`foo.bar` into the current language. If you introduce new translatable strings
-to iD, only display them in the interface through the `t()` function.
+iD translates strings with a `t` function: `t('foo.bar')` translates the key
+`foo.bar` into the current language. If you introduce new translatable strings,
+only display them in the interface through the `t()` function.
 
 Then, add the new string to `data/core.yaml`. The translation system, Transifex,
 will automatically detect the change.
 
-If you are updating an existing string, update it in `data/core/yaml` and run
+If you are updating an existing string, update it in `data/core.yaml` and run
 `npm run build` to generate the `en.json` file automatically, then commit both
 modified files.
 
@@ -288,18 +305,21 @@ same format as the rest, include your new corresponding `docKey` in
 [/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
 
 
-## Adding or Refining Presets
+## Editing Presets or Tagging
 
-Presets save time for iD users by automatically showing them the tags they are
-likely to add for a given feature. They are stored in `data/presets/presets`. If
-you're going to update the presets, [review the Presets README](/data/presets/README.md).
+iD's knowledge of OpenStreetMap tags is mostly handled by the [iD Tagging Schema](https://github.com/openstreetmap/id-tagging-schema)
+project, which has its own opportunities to contribute.
 
 
-## JavaScript
+## Contributing Code
 
-Legacy iD code was written with ES5 syntax, however we now support most ES6 syntax via [Rollup.js](https://rollupjs.org/guide/en) and the [Rollup Bublé plugin](https://github.com/rollup/plugins/tree/master/packages/buble). You can find details about Bublé [here](https://buble.surge.sh/guide/).
+We like when people get involved! iD is a busy project, so it helps if you first
+open an issue to ask whether an idea makes sense,
+instead of surprising us with a pull request.
 
-In order to continue to support older browsers like IE11 and our PhantomJS-based test runner, we also include the [browser-polyfills](https://github.com/tiagomapmarques/browser-polyfills#what-does-it-have) package.
+### JavaScript
+
+iD code was initially written with ES5 syntax, however we do now develop using ES6 syntax.
 
 We mostly follow the Airbnb style guide for JavaScript:
 - [Modern ES6](https://github.com/airbnb/javascript)
@@ -312,7 +332,7 @@ Always spaces, never tabs.
 JavaScript code should pass through [ESLint](http://eslint.org/) with no warnings.
 
 
-## HTML
+### HTML
 
 There isn't much HTML in iD, but what there is is similar to JavaScript: 4 spaces
 always, indented by the level of the tree:
@@ -324,7 +344,7 @@ always, indented by the level of the tree:
 ```
 
 
-## CSS
+### CSS
 
 Just like HTML and JavaScript, 4 space soft tabs always.
 
@@ -335,10 +355,10 @@ Just like HTML and JavaScript, 4 space soft tabs always.
 ```
 
 We write vanilla CSS with no preprocessing step. Since iD targets modern browsers,
-(Chrome, Firefox, Safari, Opera, IE11, and Edge) feel free to use newer features wisely.
+(Chrome, Firefox, Safari, Opera, and Edge) feel free to use newer features wisely.
 
 
-## Tests
+### Tests
 
 Test your code and make sure it passes.
 
@@ -346,16 +366,14 @@ Test your code and make sure it passes.
 2. run `npm install`
 3. run `npm test` to see whether your tests pass or fail.
 
+Note that in order to run the tests, Chrome needs to be installed on the system. Chromium can be used as an alternative, but requires setting the environment variable `CHROME_BIN` to the corresponding executable (e.g. `export CHROME_BIN="`which chromium`"`).
 
-## Building / Installing
+### Building / Installing
 
-You can rebuild iD completely with the command `npm run all`.
-
-iD will be built to the `dist` directory. This directory is self-contained; you can copy it
-into the public directory of your webserver to deploy iD.
+Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to build and run iD.
 
 
-## Licensing
+### Licensing
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
 Some of the libraries it uses are under different licenses. If you're contributing
@@ -364,10 +382,6 @@ to iD, you're contributing ISC Licensed code.
 
 ## Submitting Changes
 
-We like when people get involved! iD is a busy project, and it helps the
-maintainers if you first open an issue to ask whether an idea makes sense,
-instead of surprising us with a pull request.
-
 In your local copy, make a branch for this change using a descriptive branch name:
 
     git checkout -b fix-the-thing
@@ -375,10 +389,11 @@ In your local copy, make a branch for this change using a descriptive branch nam
 Make your changes to source files under `modules/`.
 The `iD.js` and `iD.min.js` files in this project are autogenerated - don't edit them.
 
-1. Try your change locally.  Run `npm start` and visit `localhost:8080` in a browser.
-2. Run lint and tests with `npm test`
-3. Commit your changes with an informative commit message
-4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `openstreetmap/iD` project.
+1. Try your change locally.  Run `npm start` and visit `http://127.0.0.1:8080` in a browser.
+2. Run lint and tests with `npm test`.
+3. If you feel like it, append a line describing your changes to the project's [changelog](https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md).
+4. Commit your changes with an informative commit message.
+5. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `openstreetmap/iD` project.
 
 
 ## Using GitHub and git
@@ -398,7 +413,7 @@ Additionally here is a step-by-step workflow example for beginners:
 
 4. Clone or download your local copy of iD from your GitHub account using https `git clone https://github.com/<yourgithubaccount>/iD.git` or using ssh `git clone git@github.com:{{yourgithubaccount}}/iD.git`. In your local copy you'll have a "remote" called origin.
 
-5. Switch to the iD directory, create a working branch (choose a descriptive name) and switch to it : `cd iD ; git checkout -b <working-branch-name>`. Never do anything in master branch.
+5. Switch to the iD directory, create a working branch (choose a descriptive name) and switch to it : `cd iD ; git checkout -b <working-branch-name>`. Never do anything in the `develop` branch.
 
 6. Edit file(s) and try your change locally (See above).
 
@@ -419,13 +434,13 @@ you can clean up by deleting the branch from your GitHub-iD-Clone and your local
 
 ### Restart with another PR after some while
 
-If you did not use your copy of iD for some while, other Pull Request gets merged and you don't have the latest version of iD. You can replace your master with whatever is in our master. If you have not done so yet: Add the main repo as an "upstream" remote:
+If you did not use your copy of iD for some while, other Pull Request gets merged and you don't have the latest version of iD. You can replace your `develop` with whatever is in our `develop`. If you have not done so yet: Add the main repo as an "upstream" remote:
 
 `git remote add upstream git@github.com:openstreetmap/iD.git`
 
-Then change to the master branch and get everything from upstream (the main repository)
+Then change to the `develop` branch and get everything from upstream (the main repository)
 
-`git checkout master ; git fetch --all && git reset --hard upstream/master`
+`git checkout develop ; git fetch --all && git reset --hard upstream/develop`
 
 
 ## Submitting directly in the Browser
@@ -442,11 +457,11 @@ Additionally here is a step-by-step workflow example for beginners:
 
 2. Go to the [iD main repository](https://github.com/openstreetmap/iD) and fork iD into your GitHub account (Fork is top right).
 
-3. Create a New Branch by clicking on "Branch: master" and entering the name of a new branch (choose a descriptive name).
+3. Create a New Branch by clicking on "Branch: develop" and entering the name of a new branch (choose a descriptive name).
 
 4. Navigate to the file you want to edit and click on "Edit this file" and apply your changes to the file. Alternatively, you could also "Create a new file".
 
-5. When finished editing the file enter a commit text (the description is optional) and commit directly to the newly created branch. You may repeat 4 and 5 until all required changes are commited.
+5. When finished editing the file enter a commit text (the description is optional) and commit directly to the newly created branch. You may repeat 4 and 5 until all required changes are committed.
 
 6. Navigate back to your "id" project - https://github.com/{{yourgithubaccount}}/iD
 

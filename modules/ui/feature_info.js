@@ -1,9 +1,5 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
-
-import { t } from '../util/locale';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
-
+import { t } from '../core/localizer';
+import { uiTooltip } from './tooltip';
 
 export function uiFeatureInfo(context) {
     function update(selection) {
@@ -13,31 +9,37 @@ export function uiFeatureInfo(context) {
         var hiddenList = features.hidden().map(function(k) {
             if (stats[k]) {
                 count += stats[k];
-                return String(stats[k]) + ' ' + t('feature.' + k + '.description');
+                return t.append('inspector.title_count', {
+                    title: t('feature.' + k + '.description'),
+                    count: stats[k]
+                });
             }
+            return null;
         }).filter(Boolean);
 
-        selection.html('');
+        selection.text('');
 
         if (hiddenList.length) {
-            var tooltipBehavior = tooltip()
+            var tooltipBehavior = uiTooltip()
                 .placement('top')
-                .html(true)
                 .title(function() {
-                    return uiTooltipHtml(hiddenList.join('<br/>'));
+                    return selection => {
+                        hiddenList.forEach(hiddenFeature => {
+                            selection.append('div').call(hiddenFeature);
+                        });
+                    };
                 });
 
             selection.append('a')
                 .attr('class', 'chip')
                 .attr('href', '#')
-                .attr('tabindex', -1)
-                .html(t('feature_info.hidden_warning', { count: count }))
+                .call(t.append('feature_info.hidden_warning', { count: count }))
                 .call(tooltipBehavior)
-                .on('click', function() {
+                .on('click', function(d3_event) {
                     tooltipBehavior.hide();
                     d3_event.preventDefault();
                     // open the Map Data pane
-                    context.ui().togglePanes(d3_select('.map-panes .map-data-pane'));
+                    context.ui().togglePanes(context.container().select('.map-panes .map-data-pane'));
                 });
         }
 

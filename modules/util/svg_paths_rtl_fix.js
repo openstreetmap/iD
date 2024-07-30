@@ -1,5 +1,6 @@
 // see https://github.com/openstreetmap/iD/pull/3707
 // https://gist.github.com/mapmeld/556b09ddec07a2044c76e1ef45f01c60
+// fixed in Chromium 96.0 https://bugs.chromium.org/p/chromium/issues/detail?id=374526
 
 import { WordShaper } from 'alif-toolkit';
 

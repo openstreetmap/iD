@@ -1,7 +1,0 @@
-{
-    "key": "windings",
-    "type": "number",
-    "minValue": 1,
-    "label": "Windings",
-    "placeholder": "1, 2, 3..."
-}

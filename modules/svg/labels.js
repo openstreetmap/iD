@@ -2,13 +2,13 @@ import _throttle from 'lodash-es/throttle';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
-import { textDirection } from '../util/locale';
+import { localizer } from '../core/localizer';
 
 import {
     geoExtent, geoPolygonIntersectsPolygon, geoPathLength,
     geoScaleToZoom, geoVecInterp, geoVecLength
 } from '../geo';
-
+import { presetManager } from '../presets';
 import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
 import { utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
@@ -57,13 +57,16 @@ export function svgLabels(projection, context) {
         ['point', 'shop', '*', 10],
         ['point', 'tourism', '*', 10],
         ['point', 'camp_site', '*', 10],
+        ['line', 'ref', '*', 12],
+        ['area', 'ref', '*', 12],
+        ['point', 'ref', '*', 10],
         ['line', 'name', '*', 12],
         ['area', 'name', '*', 12],
         ['point', 'name', '*', 10]
     ];
 
 
-    function blacklisted(preset) {
+    function shouldSkipIcon(preset) {
         var noIcons = ['building', 'landuse', 'natural'];
         return noIcons.some(function(s) {
             return preset.id.indexOf(s) >= 0;
@@ -111,7 +114,7 @@ export function svgLabels(projection, context) {
         paths.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d) { return 'labelpath-' + d.id; })
+            .attr('id', function(d) { return 'ideditor-labelpath-' + d.id; })
             .attr('class', classes)
             .merge(paths)
             .attr('d', get(labels, 'lineString'));
@@ -140,7 +143,7 @@ export function svgLabels(projection, context) {
             .filter(filter)
             .data(entities, osmEntity.key)
             .attr('startOffset', '50%')
-            .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
+            .attr('xlink:href', function(d) { return '#ideditor-labelpath-' + d.id; })
             .text(utilDisplayNameForPath);
     }
 
@@ -200,15 +203,9 @@ export function svgLabels(projection, context) {
             .merge(icons)
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
-                var preset = context.presets().match(d, context.graph());
+                var preset = presetManager.match(d, context.graph());
                 var picon = preset && preset.icon;
-
-                if (!picon) {
-                    return '';
-                } else {
-                    var isMaki = /^maki-/.test(picon);
-                    return '#' + picon + (isMaki ? '-15' : '');
-                }
+                return picon ? '#' + picon : '';
             });
     }
 
@@ -312,11 +309,10 @@ export function svgLabels(projection, context) {
             }
 
             // Determine which entities are label-able
-            var preset = geometry === 'area' && context.presets().match(entity, graph);
-            var icon = preset && !blacklisted(preset) && preset.icon;
+            var preset = geometry === 'area' && presetManager.match(entity, graph);
+            var icon = preset && !shouldSkipIcon(preset) && preset.icon;
 
-            if (!icon && !utilDisplayName(entity))
-                continue;
+            if (!icon && !utilDisplayName(entity)) continue;
 
             for (k = 0; k < labelStack.length; k++) {
                 var matchGeom = labelStack[k][0];
@@ -402,6 +398,8 @@ export function svgLabels(projection, context) {
                 rtl: [-15, y, 'end']
             };
 
+            var textDirection = localizer.textDirection();
+
             var coord = projection(entity.loc);
             var textPadding = 2;
             var offset = pointOffsets[textDirection];
@@ -444,8 +442,6 @@ export function svgLabels(projection, context) {
             var length = geoPathLength(points);
 
             if (length < width + 20) return;
-
-            // todo: properly clip points to viewport
 
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
@@ -551,13 +547,13 @@ export function svgLabels(projection, context) {
 
 
         function getAreaLabel(entity, width, height) {
-            var centroid = path.centroid(entity.asGeoJSON(graph, true));
+            var centroid = path.centroid(entity.asGeoJSON(graph));
             var extent = entity.extent(graph);
             var areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
 
             if (isNaN(centroid[0]) || areaWidth < 20) return;
 
-            var preset = context.presets().match(entity, context.graph());
+            var preset = presetManager.match(entity, context.graph());
             var picon = preset && preset.icon;
             var iconSize = 17;
             var padding = 2;
@@ -703,7 +699,7 @@ export function svgLabels(projection, context) {
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
 
-        var mouse = context.mouse();
+        var mouse = context.map().mouse();
         var graph = context.graph();
         var selectedIDs = context.selectedIDs();
         var ids = [];

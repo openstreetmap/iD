@@ -1,21 +1,15 @@
-import { event as d3_event } from 'd3-selection';
-
 import {
     geoLength as d3_geoLength,
-    geoCentroid as d3_geoCentroid
+    geoPath as d3_geoPath
 } from 'd3-geo';
 
-import { t } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
-import { geoExtent } from '../../geo';
-import { utilDetect } from '../../util/detect';
+import { geoExtent, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
-
+import { utilGetAllNodes } from '../../util';
 
 export function uiPanelMeasurement(context) {
-    var locale = utilDetect().locale;
-    var isImperial = (locale.toLowerCase() === 'en-us');
-
 
     function radiansToMeters(r) {
         // using WGS84 authalic radius (6371007.1809 m)
@@ -41,146 +35,181 @@ export function uiPanelMeasurement(context) {
         return result;
     }
 
-
-    function nodeCount(feature) {
-      if (feature.type === 'LineString') return feature.coordinates.length;
-      if (feature.type === 'Polygon') return feature.coordinates[0].length - 1;
-    }
-
+    var _isImperial = !localizer.usesMetric();
 
     function redraw(selection) {
-        var resolver = context.graph();
+        var graph = context.graph();
         var selectedNoteID = context.selectedNoteID();
         var osm = services.osm;
 
-        var selected, center, entity, note, geometry;
+        var localeCode = localizer.localeCode();
+
+        var heading;
+        var center, location, centroid;
+        var closed, geometry;
+        var totalNodeCount, length = 0, area = 0, distance;
 
         if (selectedNoteID && osm) {       // selected 1 note
-            selected = [ t('note.note') + ' ' + selectedNoteID ];
-            note = osm.getNote(selectedNoteID);
-            center = note.loc;
+
+            var note = osm.getNote(selectedNoteID);
+            heading = t.html('note.note') + ' ' + selectedNoteID;
+            location = note.loc;
             geometry = 'note';
 
         } else {                           // selected 1..n entities
-            var extent = geoExtent();
-            selected = context.selectedIDs()
-                .filter(function(e) { return context.hasEntity(e); });
+            var selectedIDs = context.selectedIDs().filter(function(id) {
+                return context.hasEntity(id);
+            });
+            var selected = selectedIDs.map(function(id) {
+                return context.entity(id);
+            });
+
+            heading = selected.length === 1 ? selected[0].id :
+                t.html('info_panels.selected', { n: selected.length });
+
             if (selected.length) {
-                for (var i = 0; i < selected.length; i++) {
-                    entity = context.entity(selected[i]);
-                    extent._extend(entity.extent(resolver));
+                var extent = geoExtent();
+                for (var i in selected) {
+                    var entity = selected[i];
+                    extent._extend(entity.extent(graph));
+
+                    geometry = entity.geometry(graph);
+                    if (geometry === 'line' || geometry === 'area') {
+                        closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
+                        var feature = entity.asGeoJSON(graph);
+                        length += radiansToMeters(d3_geoLength(toLineString(feature)));
+                        centroid = d3_geoPath(context.projection).centroid(entity.asGeoJSON(graph));
+                        centroid = centroid && context.projection.invert(centroid);
+                        if (!centroid  || !isFinite(centroid[0]) || !isFinite(centroid[1])) {
+                            centroid = entity.extent(graph).center();
+                        }
+                        if (closed) {
+                            area += steradiansToSqmeters(entity.area(graph));
+                        }
+                    }
                 }
-                center = extent.center();
-                geometry = entity.geometry(resolver);
+
+                if (selected.length > 1) {
+                    geometry = null;
+                    closed = null;
+                    centroid = null;
+                }
+
+                if (selected.length === 2 &&
+                    selected[0].type === 'node' &&
+                    selected[1].type === 'node') {
+                    distance = geoSphericalDistance(selected[0].loc, selected[1].loc);
+                }
+
+                if (selected.length === 1 && selected[0].type === 'node') {
+                    location = selected[0].loc;
+                } else {
+                    totalNodeCount = utilGetAllNodes(selectedIDs, context.graph()).length;
+                }
+
+                if (!location && !centroid) {
+                    center = extent.center();
+                }
             }
         }
 
-        var singular = selected.length === 1 ? selected[0] : null;
-
         selection.html('');
 
-        selection
-            .append('h4')
-            .attr('class', 'measurement-heading')
-            .text(singular || t('info_panels.measurement.selected', { n: selected.length.toLocaleString(locale) }));
-
-        if (!selected.length) return;
-
+        if (heading) {
+            selection
+                .append('h4')
+                .attr('class', 'measurement-heading')
+                .html(heading);
+        }
 
         var list = selection
             .append('ul');
         var coordItem;
 
-        // multiple selected features, just display extent center..
-        if (!singular) {
-            coordItem = list
+        if (geometry) {
+            list
                 .append('li')
-                .text(t('info_panels.measurement.center') + ':');
-            coordItem.append('span')
-                .text(dmsCoordinatePair(center));
-            coordItem.append('span')
-                .text(decimalCoordinatePair(center));
-            return;
+                .call(t.append('info_panels.measurement.geometry', { suffix: ':' }))
+                .append('span')
+                .html(
+                    closed ? t.html('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
+                );
         }
 
-        // single selected feature, display details..
-        if (geometry === 'line' || geometry === 'area') {
-            var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate());
-            var feature = entity.asGeoJSON(resolver);
-            var length = radiansToMeters(d3_geoLength(toLineString(feature)));
-            var lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length'));
-            var centroid = d3_geoCentroid(feature);
-
+        if (totalNodeCount) {
             list
                 .append('li')
-                .text(t('info_panels.measurement.geometry') + ':')
+                .call(t.append('info_panels.measurement.node_count', { suffix: ':' }))
                 .append('span')
-                .text(
-                    closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
-                );
+                .text(totalNodeCount.toLocaleString(localeCode));
+        }
 
-            if (entity.type !== 'relation') {
-                list
-                    .append('li')
-                    .text(t('info_panels.measurement.node_count') + ':')
-                    .append('span')
-                    .text(nodeCount(feature).toLocaleString(locale));
-            }
-
-            if (closed) {
-                var area = steradiansToSqmeters(entity.area(resolver));
-                list
-                    .append('li')
-                    .text(t('info_panels.measurement.area') + ':')
-                    .append('span')
-                    .text(displayArea(area, isImperial));
-            }
-
-
+        if (area) {
             list
                 .append('li')
-                .text(lengthLabel + ':')
+                .call(t.append('info_panels.measurement.area', { suffix: ':' }))
                 .append('span')
-                .text(displayLength(length, isImperial));
+                .text(displayArea(area, _isImperial));
+        }
 
+        if (length) {
+            list
+                .append('li')
+                .call(t.append('info_panels.measurement.' + (closed ? 'perimeter' : 'length'), { suffix: ':' }))
+                .append('span')
+                .text(displayLength(length, _isImperial));
+        }
+
+        if (typeof distance === 'number') {
+            list
+                .append('li')
+                .call(t.append('info_panels.measurement.distance', { suffix: ':' }))
+                .append('span')
+                .text(displayLength(distance, _isImperial));
+        }
+
+        if (location) {
             coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.centroid') + ':');
+                .call(t.append('info_panels.measurement.location', { suffix: ':' }));
+            coordItem.append('span')
+                .text(dmsCoordinatePair(location));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(location));
+        }
+
+        if (centroid) {
+            coordItem = list
+                .append('li')
+                .call(t.append('info_panels.measurement.centroid', { suffix: ':' }));
             coordItem.append('span')
                 .text(dmsCoordinatePair(centroid));
             coordItem.append('span')
                 .text(decimalCoordinatePair(centroid));
+        }
 
-            var toggle  = isImperial ? 'imperial' : 'metric';
-
-            selection
-                .append('a')
-                .text(t('info_panels.measurement.' + toggle))
-                .attr('href', '#')
-                .attr('class', 'button button-toggle-units')
-                .on('click', function() {
-                    d3_event.preventDefault();
-                    isImperial = !isImperial;
-                    selection.call(redraw);
-                });
-
-        } else {
-            var centerLabel = t('info_panels.measurement.' +
-                (note || entity.type === 'node' ? 'location' : 'center'));
-
-            list
-                .append('li')
-                .text(t('info_panels.measurement.geometry') + ':')
-                .append('span')
-                .text(t('geometry.' + geometry));
-
+        if (center) {
             coordItem = list
                 .append('li')
-                .text(centerLabel + ':');
+                .call(t.append('info_panels.measurement.center', { suffix: ':' }));
             coordItem.append('span')
                 .text(dmsCoordinatePair(center));
             coordItem.append('span')
                 .text(decimalCoordinatePair(center));
+        }
+
+        if (length || area || typeof distance === 'number') {
+            var toggle  = _isImperial ? 'imperial' : 'metric';
+            selection
+                .append('a')
+                .call(t.append('info_panels.measurement.' + toggle))
+                .attr('href', '#')
+                .attr('class', 'button button-toggle-units')
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+                    _isImperial = !_isImperial;
+                    selection.call(redraw);
+                });
         }
     }
 
@@ -205,7 +234,7 @@ export function uiPanelMeasurement(context) {
     };
 
     panel.id = 'measurement';
-    panel.title = t('info_panels.measurement.title');
+    panel.label = t.append('info_panels.measurement.title');
     panel.key = t('info_panels.measurement.key');
 
 

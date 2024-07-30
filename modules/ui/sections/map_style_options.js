@@ -1,16 +1,11 @@
-import {
-    event as d3_event
-} from 'd3-selection';
-
-import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { t } from '../../core/localizer';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
-import { uiTooltipHtml } from '../tooltipHtml';
 
 export function uiSectionMapStyleOptions(context) {
 
     var section = uiSection('fill-area', context)
-        .title(t('map_data.style_options'))
+        .label(() => t.append('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -47,13 +42,14 @@ export function uiSectionMapStyleOptions(context) {
         // Enter
         var enter = items.enter()
             .append('li')
-            .call(tooltip()
-                .html(true)
+            .call(uiTooltip()
                 .title(function(d) {
-                    var tip = t(name + '.' + d + '.tooltip');
+                    return t.append(name + '.' + d + '.tooltip');
+                })
+                .keys(function(d) {
                     var key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
-                    return uiTooltipHtml(tip, key);
+                    return key ? [key] : null;
                 })
                 .placement('top')
             );
@@ -69,7 +65,7 @@ export function uiSectionMapStyleOptions(context) {
 
         label
             .append('span')
-            .text(function(d) { return t(name + '.' + d + '.description'); });
+            .html(function(d) { return t.html(name + '.' + d + '.description'); });
 
         // Update
         items = items
@@ -86,12 +82,12 @@ export function uiSectionMapStyleOptions(context) {
         return context.map().activeAreaFill() === d;
     }
 
-    function toggleHighlightEdited() {
+    function toggleHighlightEdited(d3_event) {
         d3_event.preventDefault();
         context.map().toggleHighlightEdited();
     }
 
-    function setFill(d) {
+    function setFill(d3_event, d) {
         context.map().activeAreaFill(d);
     }
 

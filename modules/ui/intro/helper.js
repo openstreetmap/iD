@@ -1,8 +1,6 @@
-import { select as d3_select } from 'd3-selection';
-
-import { t } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { geoSphericalDistance, geoVecNormalizedDot } from '../../geo';
-
+import { uiCmd } from '../cmd';
 
 export function pointBox(loc, context) {
     var rect = context.surfaceRect();
@@ -42,6 +40,127 @@ export function icon(name, svgklass, useklass) {
     return '<svg class="icon ' + (svgklass || '') + '">' +
          '<use xlink:href="' + name + '"' +
          (useklass ? ' class="' + useklass + '"' : '') + '></use></svg>';
+}
+
+var helpStringReplacements;
+
+// Returns the localized HTML element for `id` with a standardized set of icon, key, and
+// label replacements suitable for tutorials and documentation. Optionally supplemented
+// with custom `replacements`
+export function helpHtml(id, replacements) {
+    // only load these the first time
+    if (!helpStringReplacements) {
+        helpStringReplacements = {
+        // insert icons corresponding to various UI elements
+        point_icon: icon('#iD-icon-point', 'inline'),
+        line_icon: icon('#iD-icon-line', 'inline'),
+        area_icon: icon('#iD-icon-area', 'inline'),
+        note_icon: icon('#iD-icon-note', 'inline add-note'),
+        plus: icon('#iD-icon-plus', 'inline'),
+        minus: icon('#iD-icon-minus', 'inline'),
+        layers_icon: icon('#iD-icon-layers', 'inline'),
+        data_icon: icon('#iD-icon-data', 'inline'),
+        inspect: icon('#iD-icon-inspect', 'inline'),
+        help_icon: icon('#iD-icon-help', 'inline'),
+        undo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-redo' : '#iD-icon-undo', 'inline'),
+        redo_icon: icon(localizer.textDirection() === 'rtl' ? '#iD-icon-undo' : '#iD-icon-redo', 'inline'),
+        save_icon: icon('#iD-icon-save', 'inline'),
+
+        // operation icons
+        circularize_icon: icon('#iD-operation-circularize', 'inline operation'),
+        continue_icon: icon('#iD-operation-continue', 'inline operation'),
+        copy_icon: icon('#iD-operation-copy', 'inline operation'),
+        delete_icon: icon('#iD-operation-delete', 'inline operation'),
+        disconnect_icon: icon('#iD-operation-disconnect', 'inline operation'),
+        downgrade_icon: icon('#iD-operation-downgrade', 'inline operation'),
+        extract_icon: icon('#iD-operation-extract', 'inline operation'),
+        merge_icon: icon('#iD-operation-merge', 'inline operation'),
+        move_icon: icon('#iD-operation-move', 'inline operation'),
+        orthogonalize_icon: icon('#iD-operation-orthogonalize', 'inline operation'),
+        paste_icon: icon('#iD-operation-paste', 'inline operation'),
+        reflect_long_icon: icon('#iD-operation-reflect-long', 'inline operation'),
+        reflect_short_icon: icon('#iD-operation-reflect-short', 'inline operation'),
+        reverse_icon: icon('#iD-operation-reverse', 'inline operation'),
+        rotate_icon: icon('#iD-operation-rotate', 'inline operation'),
+        split_icon: icon('#iD-operation-split', 'inline operation'),
+        straighten_icon: icon('#iD-operation-straighten', 'inline operation'),
+
+        // interaction icons
+        leftclick: icon('#iD-walkthrough-mouse-left', 'inline operation'),
+        rightclick: icon('#iD-walkthrough-mouse-right', 'inline operation'),
+        mousewheel_icon: icon('#iD-walkthrough-mousewheel', 'inline operation'),
+        tap_icon: icon('#iD-walkthrough-tap', 'inline operation'),
+        doubletap_icon: icon('#iD-walkthrough-doubletap', 'inline operation'),
+        longpress_icon: icon('#iD-walkthrough-longpress', 'inline operation'),
+        touchdrag_icon: icon('#iD-walkthrough-touchdrag', 'inline operation'),
+        pinch_icon: icon('#iD-walkthrough-pinch-apart', 'inline operation'),
+
+        // insert keys; may be localized and platform-dependent
+        shift: uiCmd.display('⇧'),
+        alt: uiCmd.display('⌥'),
+        return: uiCmd.display('↵'),
+        esc: t.html('shortcuts.key.esc'),
+        space: t.html('shortcuts.key.space'),
+        add_note_key: t.html('modes.add_note.key'),
+        help_key: t.html('help.key'),
+        shortcuts_key: t.html('shortcuts.toggle.key'),
+
+        // reference localized UI labels directly so that they'll always match
+        save: t.html('save.title'),
+        undo: t.html('undo.title'),
+        redo: t.html('redo.title'),
+        upload: t.html('commit.save'),
+        point: t.html('modes.add_point.title'),
+        line: t.html('modes.add_line.title'),
+        area: t.html('modes.add_area.title'),
+        note: t.html('modes.add_note.label'),
+
+        circularize: t.html('operations.circularize.title'),
+        continue: t.html('operations.continue.title'),
+        copy: t.html('operations.copy.title'),
+        delete: t.html('operations.delete.title'),
+        disconnect: t.html('operations.disconnect.title'),
+        downgrade: t.html('operations.downgrade.title'),
+        extract: t.html('operations.extract.title'),
+        merge: t.html('operations.merge.title'),
+        move: t.html('operations.move.title'),
+        orthogonalize: t.html('operations.orthogonalize.title'),
+        paste: t.html('operations.paste.title'),
+        reflect_long: t.html('operations.reflect.title.long'),
+        reflect_short: t.html('operations.reflect.title.short'),
+        reverse: t.html('operations.reverse.title'),
+        rotate: t.html('operations.rotate.title'),
+        split: t.html('operations.split.title'),
+        straighten: t.html('operations.straighten.title'),
+
+        map_data: t.html('map_data.title'),
+        osm_notes: t.html('map_data.layers.notes.title'),
+        fields: t.html('inspector.fields'),
+        tags: t.html('inspector.tags'),
+        relations: t.html('inspector.relations'),
+        new_relation: t.html('inspector.new_relation'),
+        turn_restrictions: t.html('_tagging.presets.fields.restrictions.label'),
+        background_settings: t.html('background.description'),
+        imagery_offset: t.html('background.fix_misalignment'),
+        start_the_walkthrough: t.html('splash.walkthrough'),
+        help: t.html('help.title'),
+        ok: t.html('intro.ok')
+        };
+        for (var key in helpStringReplacements) {
+            helpStringReplacements[key] = { html: helpStringReplacements[key] };
+        }
+    }
+
+    var reps;
+    if (replacements) {
+        reps = Object.assign(replacements, helpStringReplacements);
+    } else {
+        reps = helpStringReplacements;
+    }
+
+    return t.html(id, reps)
+         // use keyboard key styling for shortcuts
+        .replace(/\`(.*?)\`/g, '<kbd>$1</kbd>');
 }
 
 
@@ -134,17 +253,18 @@ export function isMostlySquare(points) {
 }
 
 
-export function selectMenuItem(operation) {
-    return d3_select('.edit-menu .edit-menu-item-' + operation);
+export function selectMenuItem(context, operation) {
+    return context.container().select('.edit-menu .edit-menu-item-' + operation);
 }
 
 
 export function transitionTime(point1, point2) {
     var distance = geoSphericalDistance(point1, point2);
-    if (distance === 0)
+    if (distance === 0) {
         return 0;
-    else if (distance < 80)
+    } else if (distance < 80) {
         return 500;
-    else
+    } else {
         return 1000;
+    }
 }

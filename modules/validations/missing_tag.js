@@ -1,7 +1,6 @@
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
-import { osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
@@ -9,28 +8,26 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationMissingTag(context) {
     var type = 'missing_tag';
 
-    function hasDescriptiveTags(entity, graph) {
-        var keys = Object.keys(entity.tags)
+    function hasDescriptiveTags(entity) {
+        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
+        var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
-                if (k === 'area' || k === 'name') {
-                    return false;
-                } else {
-                    return osmIsInterestingTag(k);
-                }
+                if (k === 'area' || !osmIsInterestingTag(k)) return false;
+
+                return !onlyAttributeKeys.some(function(attributeKey) {
+                    return k === attributeKey || k.indexOf(attributeKey + ':') === 0;
+                });
             });
 
         if (entity.type === 'relation' &&
-            keys.length === 1 &&
+            entityDescriptiveKeys.length === 1 &&
             entity.tags.type === 'multipolygon') {
             // this relation's only interesting tag just says its a multipolygon,
             // which is not descriptive enough
-
-            // It's okay for a simple multipolygon to have no descriptive tags
-            // if its outer way has them (old model, see `outdated_tags.js`)
-            return osmOldMultipolygonOuterMemberOfRelation(entity, graph);
+            return false;
         }
 
-        return keys.length > 0;
+        return entityDescriptiveKeys.length > 0;
     }
 
     function isUnknownRoad(entity) {
@@ -57,7 +54,7 @@ export function validationMissingTag(context) {
 
             if (Object.keys(entity.tags).length === 0) {
                 subtype = 'any';
-            } else if (!hasDescriptiveTags(entity, graph)) {
+            } else if (!hasDescriptiveTags(entity)) {
                 subtype = 'descriptive';
             } else if (isUntypedRelation(entity)) {
                 subtype = 'relation_type';
@@ -84,8 +81,8 @@ export function validationMissingTag(context) {
             severity: severity,
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.' + messageID + '.message', {
-                    feature: utilDisplayLabel(entity, context)
+                return entity ? t.append('issues.' + messageID + '.message', {
+                    feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
             },
             reference: showReference,
@@ -98,7 +95,7 @@ export function validationMissingTag(context) {
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-icon-search',
-                    title: t('issues.fix.' + selectFixType + '.title'),
+                    title: t.append('issues.fix.' + selectFixType + '.title'),
                     onClick: function(context) {
                         context.ui().sidebar.showPresetList();
                     }
@@ -107,12 +104,12 @@ export function validationMissingTag(context) {
                 var deleteOnClick;
 
                 var id = this.entityIds[0];
-                var operation = operationDelete([id], context);
+                var operation = operationDelete(context, [id]);
                 var disabledReasonID = operation.disabled();
                 if (!disabledReasonID) {
                     deleteOnClick = function(context) {
                         var id = this.issue.entityIds[0];
-                        var operation = operationDelete([id], context);
+                        var operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
                         }
@@ -122,7 +119,7 @@ export function validationMissingTag(context) {
                 fixes.push(
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t('issues.fix.delete_feature.title'),
+                        title: t.append('issues.fix.delete_feature.title'),
                         disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
                         onClick: deleteOnClick
                     })
@@ -138,7 +135,7 @@ export function validationMissingTag(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.' + referenceID + '.reference'));
+                .call(t.append('issues.' + referenceID + '.reference'));
         }
     };
 

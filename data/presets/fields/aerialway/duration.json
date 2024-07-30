@@ -1,7 +1,0 @@
-{
-    "key": "aerialway:duration",
-    "type": "number",
-    "minValue": 0,
-    "label": "Duration (minutes)",
-    "placeholder": "1, 2, 3..."
-}

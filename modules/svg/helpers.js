@@ -26,18 +26,20 @@ export function svgPassiveVertex(node, graph, activeID) {
 
     var parents = graph.parentWays(node);
 
-    for (var i = 0; i < parents.length; i++) {
-        var nodes = parents[i].nodes;
-        var isClosed = parents[i].isClosed();
-        for (var j = 0; j < nodes.length; j++) {   // find this vertex, look nearby
+    var i, j, nodes, isClosed, ix1, ix2, ix3, ix4, max;
+
+    for (i = 0; i < parents.length; i++) {
+        nodes = parents[i].nodes;
+        isClosed = parents[i].isClosed();
+        for (j = 0; j < nodes.length; j++) {   // find this vertex, look nearby
             if (nodes[j] === node.id) {
-                var ix1 = j - 2;
-                var ix2 = j - 1;
-                var ix3 = j + 1;
-                var ix4 = j + 2;
+                ix1 = j - 2;
+                ix2 = j - 1;
+                ix3 = j + 1;
+                ix4 = j + 2;
 
                 if (isClosed) {  // wraparound if needed
-                    var max = nodes.length - 1;
+                    max = nodes.length - 1;
                     if (ix1 < 0)   ix1 = max + ix1;
                     if (ix2 < 0)   ix2 = max + ix2;
                     if (ix3 > max) ix3 = ix3 - max;

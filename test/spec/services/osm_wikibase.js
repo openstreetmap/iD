@@ -1,5 +1,5 @@
 describe('iD.serviceOsmWikibase', function () {
-  var server, wikibase;
+  var wikibase;
 
   before(function () {
     iD.services.osmWikibase = iD.serviceOsmWikibase;
@@ -10,32 +10,21 @@ describe('iD.serviceOsmWikibase', function () {
   });
 
   beforeEach(function () {
-    server = window.fakeFetch().create();
     wikibase = iD.services.osmWikibase;
     wikibase.init();
   });
 
   afterEach(function () {
-    server.restore();
+    fetchMock.reset();
   });
 
 
-  function query(url) {
+  function parseQueryString(url) {
     return iD.utilStringQs(url.substring(url.indexOf('?')));
   }
 
-  function adjust(params, data) {
-    if (params) {
-      if (params.norm) {
-        data.description = data.descriptions.fr.value;
-        data.label = data.labels.fr.value;
-      }
-    }
-    return data;
-  }
-
-  function keyData(params) {
-    return adjust(params, {
+  function keyData() {
+    return {
       pageid: 205725,
       ns: 120,
       title: 'Item:Q42',
@@ -143,11 +132,11 @@ describe('iD.serviceOsmWikibase', function () {
           badges: []
         }
       }
-    });
+    };
   }
 
-  function tagData(params) {
-    return adjust(params, {
+  function tagData() {
+    return {
       pageid: 210934,
       ns: 120,
       title: 'Item:Q13',
@@ -263,7 +252,7 @@ describe('iD.serviceOsmWikibase', function () {
           badges: []
         }
       }
-    });
+    };
   }
 
 
@@ -275,22 +264,23 @@ describe('iD.serviceOsmWikibase', function () {
   describe('#getEntity', function () {
     it('calls the given callback with the results of the getEntity data item query', function (done) {
       var callback = sinon.spy();
-      wikibase.getEntity({key: 'amenity', value: 'parking', langCode: 'fr'}, callback);
-
-      server.respondWith('GET', /action=wbgetentities/,
-        [200, {'Content-Type': 'application/json'}, JSON.stringify({
+      fetchMock.mock(/action=wbgetentities/, {
+        body: JSON.stringify({
           entities: {
             Q42: keyData(),
             Q13: tagData(),
             Q7792: localeData,
           },
           success: 1
-        })]
-      );
-      server.respond();
+        }),
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+    });
 
-      window.setTimeout(function() {
-        expect(query(server.requests()[0].url)).to.eql(
+      wikibase.getEntity({ key: 'amenity', value: 'parking', langCodes: ['fr'] }, callback);
+
+      window.setTimeout(function () {
+        expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
           {
             action: 'wbgetentities',
             sites: 'wiki',
@@ -302,8 +292,8 @@ describe('iD.serviceOsmWikibase', function () {
           }
         );
         expect(callback).to.have.been.calledWith(null, {
-          key: keyData({norm: true}),
-          tag: tagData({norm: true})
+          key: keyData(),
+          tag: tagData()
         });
         done();
       }, 50);

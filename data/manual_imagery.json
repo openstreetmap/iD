@@ -1,0 +1,46 @@
+[
+    {
+        "id": "Mapbox",
+        "name": "Mapbox Satellite",
+        "type": "tms",
+        "category": "photo",
+        "default": true,
+        "attribution": {
+            "required": true,
+            "text": "Terms & Feedback",
+            "url": "https://www.mapbox.com/about/maps"
+        },
+        "privacy_policy_url": "https://www.mapbox.com/legal/privacy/",
+        "permission_osm": "explicit",
+        "description": "Mapbox-provided raster tileset that includes a global basemap of high resolution satellite and aerial imagery",
+        "i18n": true,
+        "icon": "https://osmlab.github.io/editor-layer-index/sources/world/MapBoxSatellite.png",
+        "license_url": "https://wiki.openstreetmap.org/wiki/Vertical_Aerial_Photographs#DigitalGlobe_.2F_MapBox",
+        "extent": {
+            "max_zoom": 22
+        },
+        "url": "7586487389962e3f6627ae31c5ca3f566077e9848da9dbcda1e4978546cfa2da63928664b2f9581fe7a61bb4e7ebd518c123ff963c7007527552e2822a9c79c276626e410539abfdafed3e6d42eec7a0edbefc55dc7ffa9f55f1d524272acfab76f19a07a5ff5749722e3138703d11e15659f3b930611203f4232cb39a1e3605931b6ac51a68ac81e7c4b106b652bd479fcdd2b4132123397c7263371ea2c0f604946236f0b9af59c209d7fc901cf152f5a3957d04c08f30c042f0fa8c473eda579e",
+        "encrypted": true
+    },
+    {
+        "id": "mapbox_locator_overlay",
+        "name": "Locator Overlay",
+        "type": "tms",
+        "category": "osmbasedmap",
+        "overlay": true,
+        "default": true,
+        "attribution": {
+            "url": "https://www.mapbox.com/about/maps",
+            "text": "Terms & Feedback",
+            "required": true
+        },
+        "privacy_policy_url": "https://www.mapbox.com/legal/privacy/",
+        "description": "Shows major features to help orient you.",
+        "i18n": true,
+        "extent": {
+            "max_zoom": 16
+        },
+        "url": "7586487389962e3f7c24b076dcc8270e6e23a5cb81e890c3fbe9928c5093fa862d8d946ea4a44f02efec19eda9f69b0bc82df4d53b740a5e284aef977eda72de707e354b5b2aa6f1afe22e7c67af90bcb2f8b411c773f6975badf128356ed1bc36fab11bb8fb221958273b22615127e25f52d3b423676a0ae92e2c9293321614e93443ce3b4fd688e8d58f0e9024a515beb7c68a31231802580a3c6517a795e413b83920f5818a6ad329d49ffb16eb7e90e2c67606ded433f813e8deae3d45fd629591f5a240e172c1663beab003ab12ce9f497037",
+        "encrypted": true
+    }
+]

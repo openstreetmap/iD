@@ -1,10 +1,10 @@
 import {
-  event as d3_event,
   select as d3_select
 } from 'd3-selection';
 
+import { presetManager } from '../presets';
 import { modeSelect } from '../modes/select';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayName, utilHighlightEntities, utilEntityRoot } from '../util';
 
 export function uiImproveOsmDetails(context) {
@@ -15,8 +15,8 @@ export function uiImproveOsmDetails(context) {
     if (d.desc) return d.desc;
     const issueKey = d.issueKey;
     d.replacements = d.replacements || {};
-    d.replacements.default = t('inspector.unknown');  // special key `default` works as a fallback string
-    return t(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
+    d.replacements.default = { html: t.html('inspector.unknown') };  // special key `default` works as a fallback string
+    return t.html(`QA.improveOSM.error_types.${issueKey}.description`, d.replacements);
   }
 
 
@@ -42,7 +42,7 @@ export function uiImproveOsmDetails(context) {
 
     descriptionEnter
       .append('h4')
-        .text(() => t('QA.keepRight.detail_description'));
+        .call(t.append('QA.keepRight.detail_description'));
 
     descriptionEnter
       .append('div')
@@ -52,6 +52,7 @@ export function uiImproveOsmDetails(context) {
     // If there are entity links in the error message..
     let relatedEntities = [];
     descriptionEnter.selectAll('.error_entity_link, .error_object_link')
+      .attr('href', '#')
       .each(function() {
         const link = d3_select(this);
         const isObjectLink = link.classed('error_object_link');
@@ -70,7 +71,7 @@ export function uiImproveOsmDetails(context) {
           .on('mouseleave', () => {
             utilHighlightEntities([entityID], false, context);
           })
-          .on('click', () => {
+          .on('click', (d3_event) => {
             d3_event.preventDefault();
 
             utilHighlightEntities([entityID], false, context);
@@ -85,8 +86,10 @@ export function uiImproveOsmDetails(context) {
             if (entity) {
               context.enter(modeSelect(context, [entityID]));
             } else {
-              context.loadEntity(entityID, () => {
-                context.enter(modeSelect(context, [entityID]));
+              context.loadEntity(entityID, (err, result) => {
+                if (err) return;
+                const entity = result.data.find(e => e.id === entityID);
+                if (entity) context.enter(modeSelect(context, [entityID]));
               });
             }
           });
@@ -97,7 +100,7 @@ export function uiImproveOsmDetails(context) {
           let name = utilDisplayName(entity);  // try to use common name
 
           if (!name && !isObjectLink) {
-            const preset = context.presets().match(entity, context.graph());
+            const preset = presetManager.match(entity, context.graph());
             name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
           }
 

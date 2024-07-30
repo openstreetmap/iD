@@ -1,10 +1,10 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionCircularize } from '../actions/circularize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 
 
-export function operationCircularize(selectedIDs, context) {
+export function operationCircularize(context, selectedIDs) {
     var _extent;
     var _actions = selectedIDs.map(getAction).filter(Boolean);
     var _amount = _actions.length === 1 ? 'single' : 'multiple';
@@ -67,7 +67,7 @@ export function operationCircularize(selectedIDs, context) {
                 return 'multiple_blockers';
             }
             return actionDisableds[0];
-        } else if (_extent.percentContainedIn(context.extent()) < 0.8) {
+        } else if (_extent.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
             return 'not_downloaded';
@@ -96,19 +96,19 @@ export function operationCircularize(selectedIDs, context) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.circularize.' + disable + '.' + _amount) :
-            t('operations.circularize.description.' + _amount);
+            t.append('operations.circularize.' + disable + '.' + _amount) :
+            t.append('operations.circularize.description.' + _amount);
     };
 
 
     operation.annotation = function() {
-        return t('operations.circularize.annotation.' + _amount);
+        return t('operations.circularize.annotation.feature', { n: _actions.length });
     };
 
 
     operation.id = 'circularize';
     operation.keys = [t('operations.circularize.key')];
-    operation.title = t('operations.circularize.title');
+    operation.title = t.append('operations.circularize.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

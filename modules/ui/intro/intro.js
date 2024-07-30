@@ -1,8 +1,8 @@
-import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
-
-import { t, textDirection } from '../../util/locale';
+import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
+import { prefs } from '../../core/preferences';
+import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
@@ -47,7 +47,7 @@ export function uiIntro(context) {
 
 
   function intro(selection) {
-    context.data().get('intro_graph')
+    fileFetcher.get('intro_graph')
       .then(dataIntroGraph => {
         // create entities for intro graph and localize names
         for (let id in dataIntroGraph) {
@@ -72,14 +72,14 @@ export function uiIntro(context) {
     let zoom = context.map().zoom();
     let background = context.background().baseLayerSource();
     let overlays = context.background().overlayLayerSources();
-    let opacity = d3_selectAll('#map .layer-background').style('opacity');
+    let opacity = context.container().selectAll('.main-map .layer-background').style('opacity');
     let caches = osm && osm.caches();
     let baseEntities = context.history().graph().base().entities;
 
     // Show sidebar and disable the sidebar resizing button
     // (this needs to be before `context.inIntro(true)`)
     context.ui().sidebar.expand();
-    d3_selectAll('button.sidebar-toggle').classed('disabled', true);
+    context.container().selectAll('button.sidebar-toggle').classed('disabled', true);
 
     // Block saving
     context.inIntro(true);
@@ -109,22 +109,21 @@ export function uiIntro(context) {
     });
 
 
-    d3_selectAll('#map .layer-background').style('opacity', 1);
+    context.container().selectAll('.main-map .layer-background').style('opacity', 1);
 
-    let curtain = uiCurtain();
+    let curtain = uiCurtain(context.container().node());
     selection.call(curtain);
 
     // Store that the user started the walkthrough..
-    context.storage('walkthrough_started', 'yes');
+    prefs('walkthrough_started', 'yes');
 
     // Restore previous walkthrough progress..
-    let storedProgress = context.storage('walkthrough_progress') || '';
+    let storedProgress = prefs('walkthrough_progress') || '';
     let progress = storedProgress.split(';').filter(Boolean);
 
     let chapters = chapterFlow.map((chapter, i) => {
       let s = chapterUi[chapter](context, curtain.reveal)
         .on('done', () => {
-          context.presets().init();  // clear away "recent" presets
 
           buttons
             .filter(d => d.title === s.title)
@@ -132,13 +131,13 @@ export function uiIntro(context) {
 
           if (i < chapterFlow.length - 1) {
             const next = chapterFlow[i + 1];
-            d3_select(`button.chapter-${next}`)
+            context.container().select(`button.chapter-${next}`)
               .classed('next', true);
           }
 
           // Store walkthrough progress..
           progress.push(chapter);
-          context.storage('walkthrough_progress', utilArrayUniq(progress).join(';'));
+          prefs('walkthrough_progress', utilArrayUniq(progress).join(';'));
         });
       return s;
     });
@@ -146,18 +145,18 @@ export function uiIntro(context) {
     chapters[chapters.length - 1].on('startEditing', () => {
       // Store walkthrough progress..
       progress.push('startEditing');
-      context.storage('walkthrough_progress', utilArrayUniq(progress).join(';'));
+      prefs('walkthrough_progress', utilArrayUniq(progress).join(';'));
 
       // Store if walkthrough is completed..
       let incomplete = utilArrayDifference(chapterFlow, progress);
       if (!incomplete.length) {
-        context.storage('walkthrough_completed', 'yes');
+        prefs('walkthrough_completed', 'yes');
       }
 
       curtain.remove();
       navwrap.remove();
-      d3_selectAll('#map .layer-background').style('opacity', opacity);
-      d3_selectAll('button.sidebar-toggle').classed('disabled', false);
+      context.container().selectAll('.main-map .layer-background').style('opacity', opacity);
+      context.container().selectAll('button.sidebar-toggle').classed('disabled', false);
       if (osm) { osm.toggle(true).reset().caches(caches); }
       context.history().reset().merge(Object.values(baseEntities));
       context.background().baseLayerSource(background);
@@ -192,17 +191,17 @@ export function uiIntro(context) {
 
     buttons
       .append('span')
-      .text(d => t(d.title));
+      .html(d => t.html(d.title));
 
     buttons
       .append('span')
       .attr('class', 'status')
-      .call(svgIcon((textDirection === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
+      .call(svgIcon((localizer.textDirection() === 'rtl' ? '#iD-icon-backward' : '#iD-icon-forward'), 'inline'));
 
-    enterChapter(chapters[0]);
+    enterChapter(null, chapters[0]);
 
 
-    function enterChapter(newChapter) {
+    function enterChapter(d3_event, newChapter) {
       if (_currChapter) { _currChapter.exit(); }
       context.enter(modeBrowse(context));
 

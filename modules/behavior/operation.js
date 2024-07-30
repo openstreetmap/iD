@@ -1,36 +1,34 @@
-import { event as d3_event } from 'd3-selection';
-import { uiFlash } from '../ui/flash';
 
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation(context) {
     var _operation;
 
-    function keypress() {
+    function keypress(d3_event) {
         // prevent operations during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 
+        if (_operation.availableForKeypress && !_operation.availableForKeypress()) return;
+
         d3_event.preventDefault();
+
         var disabled = _operation.disabled();
-        var flash;
 
         if (disabled) {
-            flash = uiFlash()
+            context.ui().flash
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
-                .text(_operation.tooltip);
-
-            flash();
+                .label(_operation.tooltip())();
 
         } else {
-            flash = uiFlash()
+            context.ui().flash
                 .duration(2000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation')
-                .text(_operation.annotation() || _operation.title);
+                .label(_operation.annotation() || _operation.title)();
 
-            flash();
+            if (_operation.point) _operation.point(null);
             _operation();
         }
     }

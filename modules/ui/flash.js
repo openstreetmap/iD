@@ -1,28 +1,26 @@
-import { select as d3_select } from 'd3-selection';
 import { timeout as d3_timeout } from 'd3-timer';
 
-var _flashTimer;
+export function uiFlash(context) {
+    var _flashTimer;
 
-
-export function uiFlash() {
     var _duration = 2000;
     var _iconName = '#iD-icon-no';
     var _iconClass = 'disabled';
-    var _text = '';
-    var _textClass;
-
+    var _label = s => s.text('');
 
     function flash() {
         if (_flashTimer) {
             _flashTimer.stop();
         }
 
-        d3_select('#footer-wrap')
-            .attr('class', 'footer-hide');
-        d3_select('#flash-wrap')
-            .attr('class', 'footer-show');
+        context.container().select('.main-footer-wrap')
+            .classed('footer-hide', true)
+            .classed('footer-show', false);
+        context.container().select('.flash-wrap')
+            .classed('footer-hide', false)
+            .classed('footer-show', true);
 
-        var content = d3_select('#flash-wrap').selectAll('.flash-content')
+        var content = context.container().select('.flash-wrap').selectAll('.flash-content')
             .data([0]);
 
         // Enter
@@ -32,7 +30,7 @@ export function uiFlash() {
 
         var iconEnter = contentEnter
             .append('svg')
-            .attr('class', 'flash-icon')
+            .attr('class', 'flash-icon icon')
             .append('g')
             .attr('transform', 'translate(10,10)');
 
@@ -57,7 +55,7 @@ export function uiFlash() {
 
         content
             .selectAll('.flash-icon')
-            .attr('class', 'flash-icon ' + (_iconClass || ''));
+            .attr('class', 'icon flash-icon ' + (_iconClass || ''));
 
         content
             .selectAll('.flash-icon use')
@@ -65,16 +63,18 @@ export function uiFlash() {
 
         content
             .selectAll('.flash-text')
-            .attr('class', 'flash-text ' + (_textClass || ''))
-            .text(_text);
+            .attr('class', 'flash-text')
+            .call(_label);
 
 
         _flashTimer = d3_timeout(function() {
             _flashTimer = null;
-            d3_select('#footer-wrap')
-                .attr('class', 'footer-show');
-            d3_select('#flash-wrap')
-                .attr('class', 'footer-hide');
+            context.container().select('.main-footer-wrap')
+                .classed('footer-hide', false)
+                .classed('footer-show', true);
+            context.container().select('.flash-wrap')
+                .classed('footer-hide', true)
+                .classed('footer-show', false);
         }, _duration);
 
         return content;
@@ -87,15 +87,13 @@ export function uiFlash() {
         return flash;
     };
 
-    flash.text = function(_) {
-        if (!arguments.length) return _text;
-        _text = _;
-        return flash;
-    };
-
-    flash.textClass = function(_) {
-        if (!arguments.length) return _textClass;
-        _textClass = _;
+    flash.label = function(_) {
+        if (!arguments.length) return _label;
+        if (typeof _ !== 'function') {
+            _label = selection => selection.text(_);
+        } else {
+            _label = selection => selection.text('').call(_);
+        }
         return flash;
     };
 

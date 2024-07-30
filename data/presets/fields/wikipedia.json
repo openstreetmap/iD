@@ -1,8 +1,0 @@
-{
-    "key": "wikipedia",
-    "keys": ["wikipedia", "wikidata"],
-    "type": "wikipedia",
-    "icon": "wikipedia",
-    "universal": true,
-    "label": "Wikipedia"
-}

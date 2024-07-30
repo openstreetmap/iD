@@ -2,33 +2,28 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { timer as d3_timer } from 'd3-timer';
 
 import {
-  event as d3_event,
-  select as d3_select,
-  selectAll as d3_selectAll
+  select as d3_select
 } from 'd3-selection';
 
 import RBush from 'rbush';
-import { t } from '../util/locale';
-import { jsonpRequest } from '../util/jsonp_request';
+import { t, localizer } from '../core/localizer';
 
 import {
   geoExtent, geoMetersToLat, geoMetersToLon, geoPointInPolygon,
   geoRotate, geoScaleToZoom, geoVecLength
 } from '../geo';
 
-import { utilDetect } from '../util/detect';
-import { utilArrayUnion, utilQsString, utilRebind, utilTiler } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
 
 
-const bubbleApi = 'https://dev.virtualearth.net/mapcontrol/HumanScaleServices/GetBubbles.ashx?';
-const streetsideImagesApi = 'https://t.ssl.ak.tiles.virtualearth.net/tiles/';
-const bubbleAppKey = 'AuftgJsO0Xs8Ts4M1xZUQJQXJNsvmh3IV8DkNieCiy3tCwCUMq76-WpkrBtNAuEm';
-const pannellumViewerCSS = 'pannellum-streetside/pannellum.css';
-const pannellumViewerJS = 'pannellum-streetside/pannellum.js';
-const maxResults = 2000;
+const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}';
+const maxResults = 500;
+const bubbleAppKey = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
+const pannellumViewerCSS = 'pannellum/pannellum.css';
+const pannellumViewerJS = 'pannellum/pannellum.js';
 const tileZoom = 16.5;
 const tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
-const dispatch = d3_dispatch('loadedBubbles', 'viewerChanged');
+const dispatch = d3_dispatch('loadedImages', 'viewerChanged');
 const minHfov = 10;         // zoom in degrees:  20, 10, 5
 const maxHfov = 90;         // zoom out degrees
 const defaultHfov = 45;
@@ -38,8 +33,18 @@ let _resolution = 512;    // higher numbers are slower - 512, 1024, 2048, 4096
 let _currScene = 0;
 let _ssCache;
 let _pannellumViewer;
-let _sceneOptions;
-let _dataUrlArray = [];
+let _sceneOptions = {
+  showFullscreenCtrl: false,
+  autoLoad: true,
+  compass: true,
+  yaw: 0,
+  minHfov: minHfov,
+  maxHfov: maxHfov,
+  hfov: defaultHfov,
+  type: 'cubemap',
+  cubeMap: []
+};
+let _loadViewerPromise;
 
 
 /**
@@ -55,11 +60,10 @@ function abortRequest(i) {
  */
 function localeTimestamp(s) {
   if (!s) return null;
-  const detected = utilDetect();
   const options = { day: 'numeric', month: 'short', year: 'numeric' };
   const d = new Date(s);
   if (isNaN(d.getTime())) return null;
-  return d.toLocaleString(detected.locale, options);
+  return d.toLocaleString(localizer.localeCode(), options);
 }
 
 
@@ -92,40 +96,39 @@ function loadNextTilePage(which, url, tile) {
   const id = tile.id + ',' + String(nextPage);
   if (cache.loaded[id] || cache.inflight[id]) return;
 
-  cache.inflight[id] = getBubbles(url, tile, (bubbles) => {
+  cache.inflight[id] = getBubbles(url, tile, response => {
     cache.loaded[id] = true;
     delete cache.inflight[id];
-    if (!bubbles) return;
+    if (!response) return;
 
-    // [].shift() removes the first element, some statistics info, not a bubble point
-    bubbles.shift();
+    if (response.resourceSets[0].resources.length === maxResults) {
+      // there are more bubbles than the response can fit: re-fetch using tile split into 4
+      const split = tile.extent.split();
+      loadNextTilePage(which, url, { id: tile.id + ',a', extent: split[0] });
+      loadNextTilePage(which, url, { id: tile.id + ',b', extent: split[1] });
+      loadNextTilePage(which, url, { id: tile.id + ',c', extent: split[2] });
+      loadNextTilePage(which, url, { id: tile.id + ',d', extent: split[3] });
+    }
 
-    const features = bubbles.map(bubble => {
-      if (cache.points[bubble.id]) return null;  // skip duplicates
+    const features = response.resourceSets[0].resources.map(bubble => {
+      const bubbleId = bubble.imageUrl;
+      if (cache.points[bubbleId]) return null;  // skip duplicates
 
-      const loc = [bubble.lo, bubble.la];
+      const loc = [bubble.lon, bubble.lat];
       const d = {
         loc: loc,
-        key: bubble.id,
+        key: bubbleId,
+        imageUrl: bubble.imageUrl.replace('{subdomain}',
+          bubble.imageUrlSubdomains[0]
+        ),
         ca: bubble.he,
-        captured_at: bubble.cd,
+        captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',
-        // nbn: bubble.nbn,
-        // pbn: bubble.pbn,
-        // ad: bubble.ad,
-        // rn: bubble.rn,
-        pr: bubble.pr,  // previous
-        ne: bubble.ne,  // next
         pano: true,
         sequenceKey: null
       };
 
-      cache.points[bubble.id] = d;
-
-      // a sequence starts here
-      if (bubble.pr === undefined) {
-        cache.leaders.push(bubble.id);
-      }
+      cache.points[bubbleId] = d;
 
       return {
         minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
@@ -135,62 +138,10 @@ function loadNextTilePage(which, url, tile) {
 
     cache.rtree.load(features);
 
-    connectSequences();
-
     if (which === 'bubbles') {
-      dispatch.call('loadedBubbles');
+      dispatch.call('loadedImages');
     }
   });
-}
-
-
-// call this sometimes to connect the bubbles into sequences
-function connectSequences() {
-  let cache = _ssCache.bubbles;
-  let keepLeaders = [];
-
-  for (let i = 0; i < cache.leaders.length; i++) {
-    let bubble = cache.points[cache.leaders[i]];
-    let seen = {};
-
-    // try to make a sequence.. use the key of the leader bubble.
-    let sequence = { key: bubble.key, bubbles: [] };
-    let complete = false;
-
-    do {
-      sequence.bubbles.push(bubble);
-      seen[bubble.key] = true;
-
-      if (bubble.ne === undefined) {
-        complete = true;
-      } else {
-        bubble = cache.points[bubble.ne];  // advance to next
-      }
-    } while (bubble && !seen[bubble.key] && !complete);
-
-
-    if (complete) {
-      _ssCache.sequences[sequence.key] = sequence;
-
-      // assign bubbles to the sequence
-      for (let j = 0; j < sequence.bubbles.length; j++) {
-        sequence.bubbles[j].sequenceKey = sequence.key;
-      }
-
-      // create a GeoJSON LineString
-      sequence.geojson = {
-        type: 'LineString',
-        properties: { key: sequence.key },
-        coordinates: sequence.bubbles.map(d => d.loc)
-      };
-
-    } else {
-      keepLeaders.push(cache.leaders[i]);
-    }
-  }
-
-  // couldn't complete these, save for later
-  cache.leaders = keepLeaders;
 }
 
 
@@ -199,24 +150,32 @@ function connectSequences() {
  */
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
-  let urlForRequest = url + utilQsString({
-    n: rect[3],
-    s: rect[1],
-    e: rect[2],
-    w: rect[0],
-    c: maxResults,
-    appkey: bubbleAppKey,
-    jsCallback: '{callback}'
-  });
+  let urlForRequest = url
+    .replace('{key}', bubbleAppKey)
+    .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
+    .replace('{count}', maxResults);
 
-  return jsonpRequest(urlForRequest, (data) => {
-    if (!data || data.error) {
-      callback(null);
-    } else {
-      callback(data);
-    }
-  });
-}
+    const controller = new AbortController();
+    fetch(urlForRequest, { signal: controller.signal })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error(response.status + ' ' + response.statusText);
+        }
+        return response.json();
+      }).then(function(result) {
+        if (!result) {
+          callback(null);
+        }
+        return callback(result || []);
+      }).catch(function(err) {
+        if (err.name === 'AbortError') {
+        // ignore aborted requests, e.g. from duplicate requests while zooming/panning the map
+        } else {
+          throw new Error(err);
+        }
+      });
+    return controller;
+  }
 
 
 // partition viewport into higher zoom tiles
@@ -252,7 +211,7 @@ function loadImage(imgInfo) {
   return new Promise(resolve => {
     let img = new Image();
     img.onload = () => {
-      let canvas = document.getElementById('canvas' + imgInfo.face);
+      let canvas = document.getElementById('ideditor-canvas' + imgInfo.face);
       let ctx = canvas.getContext('2d');
       ctx.drawImage(img, imgInfo.x, imgInfo.y);
       resolve({ imgInfo: imgInfo, status: 'ok' });
@@ -272,10 +231,10 @@ function loadImage(imgInfo) {
 function loadCanvas(imageGroup) {
   return Promise.all(imageGroup.map(loadImage))
     .then((data) => {
-      let canvas = document.getElementById('canvas' + data[0].imgInfo.face);
+      let canvas = document.getElementById('ideditor-canvas' + data[0].imgInfo.face);
       const which = { '01': 0, '02': 1, '03': 2, '10': 3, '11': 4, '12': 5 };
       let face = data[0].imgInfo.face;
-      _dataUrlArray[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
+      _sceneOptions.cubeMap[which[face]] = canvas.toDataURL('image/jpeg', 1.0);
       return { status: 'loadCanvas for face ' + data[0].imgInfo.face + 'ok'};
     });
 }
@@ -292,23 +251,23 @@ function loadFaces(faceGroup) {
 
 function setupCanvas(selection, reset) {
   if (reset) {
-    selection.selectAll('#divForCanvasWork')
+    selection.selectAll('#ideditor-stitcher-canvases')
       .remove();
   }
 
   // Add the Streetside working canvases. These are used for 'stitching', or combining,
   // multiple images for each of the six faces, before passing to the Pannellum control as DataUrls
-  selection.selectAll('#divForCanvasWork')
+  selection.selectAll('#ideditor-stitcher-canvases')
     .data([0])
     .enter()
     .append('div')
-    .attr('id', 'divForCanvasWork')
+    .attr('id', 'ideditor-stitcher-canvases')
     .attr('display', 'none')
     .selectAll('canvas')
     .data(['canvas01', 'canvas02', 'canvas03', 'canvas10', 'canvas11', 'canvas12'])
     .enter()
     .append('canvas')
-    .attr('id', d => d)
+    .attr('id', d => 'ideditor-' + d)
     .attr('width', _resolution)
     .attr('height', _resolution);
 }
@@ -408,7 +367,7 @@ export default {
     }
 
     _ssCache = {
-      bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {}, leaders: [] },
+      bubbles: { inflight: {}, loaded: {}, nextPage: {}, rtree: new RBush(), points: {} },
       sequences: {}
     };
   },
@@ -419,6 +378,11 @@ export default {
   bubbles: function(projection) {
     const limit = 5;
     return searchLimited(limit, projection, _ssCache.bubbles.rtree);
+  },
+
+
+  cachedImage: function(imageKey) {
+      return _ssCache.bubbles.points[imageKey];
   },
 
 
@@ -451,7 +415,7 @@ export default {
     // by default: request 2 nearby tiles so we can connect sequences.
     if (margin === undefined) margin = 2;
 
-    loadTiles('bubbles', bubbleApi, projection, margin);
+    loadTiles('bubbles', streetsideApi, projection, margin);
   },
 
 
@@ -464,23 +428,50 @@ export default {
     if (!window.pannellum) return;
     if (_pannellumViewer) return;
 
-    const sceneID = ++_currScene + '';
+    _currScene += 1;
+    const sceneID = _currScene.toString();
     const options = {
       'default': { firstScene: sceneID },
       scenes: {}
     };
     options.scenes[sceneID] = _sceneOptions;
 
-    _pannellumViewer = window.pannellum.viewer('viewer-streetside', options);
+    _pannellumViewer = window.pannellum.viewer('ideditor-viewer-streetside', options);
+  },
 
-    _pannellumViewer
-      .on('mousedown', () => {
+
+  ensureViewerLoaded: function(context) {
+
+    if (_loadViewerPromise) return _loadViewerPromise;
+
+    // create ms-wrapper, a photo wrapper class
+    let wrap = context.container().select('.photoviewer').selectAll('.ms-wrapper')
+      .data([0]);
+
+    // inject ms-wrapper into the photoviewer div
+    // (used by all to house each custom photo viewer)
+    let wrapEnter = wrap.enter()
+      .append('div')
+      .attr('class', 'photo-wrapper ms-wrapper')
+      .classed('hide', true);
+
+    let that = this;
+
+    let pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
+
+    // inject div to support streetside viewer (pannellum) and attribution line
+    wrapEnter
+      .append('div')
+      .attr('id', 'ideditor-viewer-streetside')
+      .on(pointerPrefix + 'down.streetside', () => {
         d3_select(window)
-          .on('mousemove.pannellum', () => { dispatch.call('viewerChanged'); });
+          .on(pointerPrefix + 'move.streetside', () => {
+            dispatch.call('viewerChanged');
+          }, true);
       })
-      .on('mouseup', () => {
+      .on(pointerPrefix + 'up.streetside pointercancel.streetside', () => {
         d3_select(window)
-          .on('mousemove.pannellum', null);
+          .on(pointerPrefix + 'move.streetside', null);
 
         // continue dispatching events for a few seconds, in case viewer has inertia.
         let t = d3_timer(elapsed => {
@@ -489,32 +480,7 @@ export default {
             t.stop();
           }
         });
-      });
-  },
-
-
-  /**
-   * loadViewer() create the streeside viewer.
-   */
-  loadViewer: function(context) {
-    let that = this;
-
-    // create ms-wrapper, a photo wrapper class
-    let wrap = d3_select('#photoviewer').selectAll('.ms-wrapper')
-      .data([0]);
-
-    // inject ms-wrapper into the photoviewer div
-    // (used by all to house each custom photo viewer)
-    let wrapEnter = wrap.enter()
-      .append('div')
-      .attr('id', 'ms')
-      .attr('class', 'photo-wrapper ms-wrapper')
-      .classed('hide', true);
-
-    // inject div to support streetside viewer (pannellum) and attribution line
-    wrapEnter
-      .append('div')
-      .attr('id', 'viewer-streetside')
+      })
       .append('div')
       .attr('class', 'photo-attribution fillD');
 
@@ -540,24 +506,6 @@ export default {
       .merge(wrapEnter)
       .call(setupCanvas, true);
 
-    // load streetside pannellum viewer css
-    d3_select('head').selectAll('#streetside-viewercss')
-      .data([0])
-      .enter()
-      .append('link')
-      .attr('id', 'streetside-viewercss')
-      .attr('rel', 'stylesheet')
-      .attr('href', context.asset(pannellumViewerCSS));
-
-    // load streetside pannellum viewer js
-    d3_select('head').selectAll('#streetside-viewerjs')
-      .data([0])
-      .enter()
-      .append('script')
-      .attr('id', 'streetside-viewerjs')
-      .attr('src', context.asset(pannellumViewerJS));
-
-
     // Register viewer resize handler
     context.ui().photoviewer.on('resize.streetside', () => {
       if (_pannellumViewer) {
@@ -565,10 +513,53 @@ export default {
       }
     });
 
+    _loadViewerPromise = new Promise((resolve, reject) => {
+
+      let loadedCount = 0;
+      function loaded() {
+        loadedCount += 1;
+        // wait until both files are loaded
+        if (loadedCount === 2) resolve();
+      }
+
+      const head = d3_select('head');
+
+      // load streetside pannellum viewer css
+      head.selectAll('#ideditor-streetside-viewercss')
+        .data([0])
+        .enter()
+        .append('link')
+        .attr('id', 'ideditor-streetside-viewercss')
+        .attr('rel', 'stylesheet')
+        .attr('crossorigin', 'anonymous')
+        .attr('href', context.asset(pannellumViewerCSS))
+        .on('load.serviceStreetside', loaded)
+        .on('error.serviceStreetside', function() {
+            reject();
+        });
+
+      // load streetside pannellum viewer js
+      head.selectAll('#ideditor-streetside-viewerjs')
+        .data([0])
+        .enter()
+        .append('script')
+        .attr('id', 'ideditor-streetside-viewerjs')
+        .attr('crossorigin', 'anonymous')
+        .attr('src', context.asset(pannellumViewerJS))
+        .on('load.serviceStreetside', loaded)
+        .on('error.serviceStreetside', function() {
+            reject();
+        });
+      })
+      .catch(function() {
+        _loadViewerPromise = null;
+      });
+
+    return _loadViewerPromise;
 
     function step(stepBy) {
       return () => {
-        let viewer = d3_select('#photoviewer');
+        let viewer = context.container().select('.photoviewer');
         let selected = viewer.empty() ? undefined : viewer.datum();
         if (!selected) return;
 
@@ -626,51 +617,31 @@ export default {
             }
           });
 
-        let nextBubble = nextID && _ssCache.bubbles.points[nextID];
+        let nextBubble = nextID && that.cachedImage(nextID);
         if (!nextBubble) return;
 
         context.map().centerEase(nextBubble.loc);
 
-        that.selectImage(nextBubble)
-          .then(response => {
-            if (response.status === 'ok') {
-              _sceneOptions.yaw = yaw;
-              that.showViewer();
-            }
-          });
+        that.selectImage(context, nextBubble.key)
+          .yaw(yaw)
+          .showViewer(context);
       };
     }
   },
 
 
+  yaw: function(yaw) {
+    if (typeof yaw !== 'number') return yaw;
+    _sceneOptions.yaw = yaw;
+    return this;
+  },
+
   /**
    * showViewer()
    */
-  showViewer: function(yaw) {
-    if (!_sceneOptions) return;
+  showViewer: function(context) {
 
-    if (yaw !== undefined) {
-      _sceneOptions.yaw = yaw;
-    }
-
-    if (!_pannellumViewer) {
-      this.initViewer();
-    } else {
-      // make a new scene
-      let sceneID = ++_currScene + '';
-      _pannellumViewer
-        .addScene(sceneID, _sceneOptions)
-        .loadScene(sceneID);
-
-      // remove previous scene
-      if (_currScene > 2) {
-        sceneID = (_currScene - 1) + '';
-        _pannellumViewer
-          .removeScene(sceneID);
-      }
-    }
-
-    let wrap = d3_select('#photoviewer')
+    let wrap = context.container().select('.photoviewer')
       .classed('hide', false);
 
     let isHidden = wrap.selectAll('.photo-wrapper.ms-wrapper.hide').size();
@@ -692,8 +663,8 @@ export default {
   /**
    * hideViewer()
    */
-  hideViewer: function () {
-    let viewer = d3_select('#photoviewer');
+  hideViewer: function (context) {
+    let viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(null);
 
     viewer
@@ -701,48 +672,58 @@ export default {
       .selectAll('.photo-wrapper')
       .classed('hide', true);
 
-    d3_selectAll('.viewfield-group, .sequence, .icon-sign')
+    context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
-    return this.setStyles(null, true);
+    this.updateUrlImage(null);
+
+    return this.setStyles(context, null, true);
   },
 
 
   /**
    * selectImage().
    */
-  selectImage: function (d) {
+  selectImage: function (context, key) {
     let that = this;
-    let viewer = d3_select('#photoviewer');
+
+    let d = this.cachedImage(key);
+
+    let viewer = context.container().select('.photoviewer');
     if (!viewer.empty()) viewer.datum(d);
 
-    this.setStyles(null, true);
+    this.setStyles(context, null, true);
 
-    let wrap = d3_select('#photoviewer .ms-wrapper');
+    let wrap = context.container().select('.photoviewer .ms-wrapper');
     let attribution = wrap.selectAll('.photo-attribution').html('');
 
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
       .style('display', 'block');
 
-    if (!d) {
-      return Promise.resolve({ status: 'ok' });
-    }
+    if (!d) return this;
+
+    this.updateUrlImage(key);
+
+    _sceneOptions.northOffset = d.ca;
 
     let line1 = attribution
       .append('div')
       .attr('class', 'attribution-row');
 
+    const hiresDomId = utilUniqueDomId('streetside-hires');
+
     // Add hires checkbox
     let label = line1
       .append('label')
+      .attr('for', hiresDomId)
       .attr('class', 'streetside-hires');
 
     label
       .append('input')
       .attr('type', 'checkbox')
-      .attr('id', 'streetside-hires-input')
+      .attr('id', hiresDomId)
       .property('checked', _hires)
-      .on('click', () => {
+      .on('click', (d3_event) => {
         d3_event.stopPropagation();
 
         _hires = !_hires;
@@ -755,18 +736,14 @@ export default {
           hfov: _pannellumViewer.getHfov()
         };
 
-        that.selectImage(d)
-          .then(response => {
-            if (response.status === 'ok') {
-              _sceneOptions = Object.assign(_sceneOptions, viewstate);
-              that.showViewer();
-            }
-          });
+        _sceneOptions = Object.assign(_sceneOptions, viewstate);
+        that.selectImage(context, d.key)
+          .showViewer(context);
       });
 
     label
       .append('span')
-      .text(t('streetside.hires'));
+      .call(t.append('streetside.hires'));
 
 
     let captureInfo = line1
@@ -807,7 +784,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
         '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .text(t('streetside.view_on_bing'));
+      .call(t.append('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -815,16 +792,7 @@ export default {
       .attr('target', '_blank')
       .attr('href', 'https://www.bing.com/maps/privacyreport/streetsideprivacyreport?bubbleid=' +
         encodeURIComponent(d.key) + '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
-      .text(t('streetside.report'));
-
-
-    let bubbleIdQuadKey = d.key.toString(4);
-    const paddingNeeded = 16 - bubbleIdQuadKey.length;
-    for (let i = 0; i < paddingNeeded; i++) {
-      bubbleIdQuadKey = '0' + bubbleIdQuadKey;
-    }
-    const imgUrlPrefix = streetsideImagesApi + 'hs' + bubbleIdQuadKey;
-    const imgUrlSuffix = '.jpg?g=6338&n=z';
+      .call(t.append('streetside.report'));
 
     // Cubemap face code order matters here: front=01, right=02, back=03, left=10, up=11, down=12
     const faceKeys = ['01','02','03','10','11','12'];
@@ -832,40 +800,42 @@ export default {
     // Map images to cube faces
     let quadKeys = getQuadKeys();
     let faces = faceKeys.map((faceKey) => {
-      return quadKeys.map((quadKey) =>{
+      return quadKeys.map((quadKey) => {
         const xy = qkToXY(quadKey);
         return {
           face: faceKey,
-          url: imgUrlPrefix + faceKey + quadKey + imgUrlSuffix,
+          url: d.imageUrl
+            .replace('{faceId}', faceKey)
+            .replace('{tileId}', quadKey),
           x: xy[0],
           y: xy[1]
         };
       });
     });
 
-    return loadFaces(faces)
-      .then(() => {
-        _sceneOptions = {
-          showFullscreenCtrl: false,
-          autoLoad: true,
-          compass: true,
-          northOffset: d.ca,
-          yaw: 0,
-          minHfov: minHfov,
-          maxHfov: maxHfov,
-          hfov: defaultHfov,
-          type: 'cubemap',
-          cubeMap: [
-            _dataUrlArray[0],
-            _dataUrlArray[1],
-            _dataUrlArray[2],
-            _dataUrlArray[3],
-            _dataUrlArray[4],
-            _dataUrlArray[5]
-          ]
-        };
-        return { status: 'ok' };
+    loadFaces(faces)
+      .then(function() {
+
+        if (!_pannellumViewer) {
+          that.initViewer();
+        } else {
+          // make a new scene
+          _currScene += 1;
+          let sceneID = _currScene.toString();
+          _pannellumViewer
+            .addScene(sceneID, _sceneOptions)
+            .loadScene(sceneID);
+
+          // remove previous scene
+          if (_currScene > 2) {
+            sceneID = (_currScene - 1).toString();
+            _pannellumViewer
+              .removeScene(sceneID);
+          }
+        }
       });
+
+    return this;
   },
 
 
@@ -877,14 +847,14 @@ export default {
   // Updates the currently highlighted sequence and selected bubble.
   // Reset is only necessary when interacting with the viewport because
   // this implicitly changes the currently selected bubble/sequence
-  setStyles: function (hovered, reset) {
+  setStyles: function (context, hovered, reset) {
     if (reset) {  // reset all layers
-      d3_selectAll('.viewfield-group')
+      context.container().selectAll('.viewfield-group')
         .classed('highlighted', false)
         .classed('hovered', false)
         .classed('currentView', false);
 
-      d3_selectAll('.sequence')
+      context.container().selectAll('.sequence')
         .classed('highlighted', false)
         .classed('currentView', false);
     }
@@ -894,7 +864,7 @@ export default {
     let hoveredSequence = hoveredSequenceKey && _ssCache.sequences[hoveredSequenceKey];
     let hoveredBubbleKeys =  (hoveredSequence && hoveredSequence.bubbles.map(d => d.key)) || [];
 
-    let viewer = d3_select('#photoviewer');
+    let viewer = context.container().select('.photoviewer');
     let selected = viewer.empty() ? undefined : viewer.datum();
     let selectedBubbleKey = selected && selected.key;
     let selectedSequenceKey = this.getSequenceKeyForBubble(selected);
@@ -904,17 +874,17 @@ export default {
     // highlight sibling viewfields on either the selected or the hovered sequences
     let highlightedBubbleKeys = utilArrayUnion(hoveredBubbleKeys, selectedBubbleKeys);
 
-    d3_selectAll('.layer-streetside-images .viewfield-group')
+    context.container().selectAll('.layer-streetside-images .viewfield-group')
       .classed('highlighted', d => highlightedBubbleKeys.indexOf(d.key) !== -1)
       .classed('hovered',     d => d.key === hoveredBubbleKey)
       .classed('currentView', d => d.key === selectedBubbleKey);
 
-    d3_selectAll('.layer-streetside-images .sequence')
+    context.container().selectAll('.layer-streetside-images .sequence')
       .classed('highlighted', d => d.properties.key === hoveredSequenceKey)
       .classed('currentView', d => d.properties.key === selectedSequenceKey);
 
     // update viewfields if needed
-    d3_selectAll('.viewfield-group .viewfield')
+    context.container().selectAll('.layer-streetside-images .viewfield-group .viewfield')
       .attr('d', viewfieldPath);
 
     function viewfieldPath() {
@@ -927,6 +897,19 @@ export default {
     }
 
     return this;
+  },
+
+
+  updateUrlImage: function(imageKey) {
+      if (!window.mocha) {
+          var hash = utilStringQs(window.location.hash);
+          if (imageKey) {
+              hash.photo = 'streetside/' + imageKey;
+          } else {
+              delete hash.photo;
+          }
+          window.location.replace('#' + utilQsString(hash, true));
+      }
   },
 
 

@@ -1,9 +1,9 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { actionReverse } from '../actions/reverse';
 import { behaviorOperation } from '../behavior/operation';
 
 
-export function operationReverse(selectedIDs, context) {
+export function operationReverse(context, selectedIDs) {
 
     var operation = function() {
         context.perform(function combinedReverseAction(graph) {
@@ -18,18 +18,18 @@ export function operationReverse(selectedIDs, context) {
     function actions(situation) {
         return selectedIDs.map(function(entityID) {
             var entity = context.hasEntity(entityID);
-            if (!entity) return;
+            if (!entity) return null;
 
             if (situation === 'toolbar') {
                 if (entity.type === 'way' &&
-                    (!entity.isOneWay() && !entity.isSided())) return;
+                    (!entity.isOneWay() && !entity.isSided())) return null;
             }
 
             var geometry = entity.geometry(context.graph());
-            if (entity.type !== 'node' && geometry !== 'line') return;
+            if (entity.type !== 'node' && geometry !== 'line') return null;
 
             var action = actionReverse(entityID);
-            if (action.disabled(context.graph())) return;
+            if (action.disabled(context.graph())) return null;
 
             return action;
         }).filter(Boolean);
@@ -41,9 +41,9 @@ export function operationReverse(selectedIDs, context) {
             var entity = context.hasEntity(act.entityID());
             return entity && entity.type === 'node';
         }).length;
-        var typeID = nodeActionCount === 0 ? 'line' : (nodeActionCount === acts.length ? 'point' : 'features');
-        if (typeID !== 'features' && acts.length > 1) typeID += 's';
-        return typeID;
+        if (nodeActionCount === 0) return 'line';
+        if (nodeActionCount === acts.length) return 'point';
+        return 'feature';
     }
 
 
@@ -58,18 +58,19 @@ export function operationReverse(selectedIDs, context) {
 
 
     operation.tooltip = function() {
-        return t('operations.reverse.description.' + reverseTypeID());
+        return t.append('operations.reverse.description.' + reverseTypeID());
     };
 
 
     operation.annotation = function() {
-        return t('operations.reverse.annotation.' + reverseTypeID());
+        var acts = actions();
+        return t('operations.reverse.annotation.' + reverseTypeID(), { n: acts.length });
     };
 
 
     operation.id = 'reverse';
     operation.keys = [t('operations.reverse.key')];
-    operation.title = t('operations.reverse.title');
+    operation.title = t.append('operations.reverse.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

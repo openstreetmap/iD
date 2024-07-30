@@ -3,15 +3,16 @@
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
-import { event as d3_event, customEvent as d3_customEvent, mouse as d3_mouse } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
-import ZoomEvent from '../../node_modules/d3-zoom/src/event.js';
-import { Transform, identity } from '../../node_modules/d3-zoom/src/transform.js';
+import { zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
+import { Transform } from '../../node_modules/d3-zoom/src/transform.js';
 
-import { utilFunctor } from './util';
+import { utilFastMouse, utilFunctor } from './util';
+import { utilRebind } from './rebind';
 
 // Ignore right-click, since that should open the context menu.
-function defaultFilter() {
+function defaultFilter(d3_event) {
   return !d3_event.ctrlKey && !d3_event.button;
 }
 
@@ -28,11 +29,7 @@ function defaultExtent() {
   return [[0, 0], [e.clientWidth, e.clientHeight]];
 }
 
-function defaultTransform() {
-  return this.__zoom || identity;
-}
-
-function defaultWheelDelta() {
+function defaultWheelDelta(d3_event) {
   return -d3_event.deltaY * (d3_event.deltaMode === 1 ? 0.05 : d3_event.deltaMode ? 1 : 0.002);
 }
 
@@ -54,40 +51,41 @@ export function utilZoomPan() {
       wheelDelta = defaultWheelDelta,
       scaleExtent = [0, Infinity],
       translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
-      duration = 250,
       interpolate = interpolateZoom,
-      listeners = d3_dispatch('start', 'zoom', 'end'),
-      wheelDelay = 150;
+      dispatch = d3_dispatch('start', 'zoom', 'end'),
+      _wheelDelay = 150,
+      _transform = d3_zoomIdentity,
+      _activeGesture;
 
   function zoom(selection) {
     selection
-        .property('__zoom', defaultTransform)
         .on('pointerdown.zoom', pointerdown)
-        .on('pointermove.zoom', pointermove)
-        .on('pointerup.zoom pointercancel.zoom', pointerup)
         .on('wheel.zoom', wheeled)
         .style('touch-action', 'none')
         .style('-webkit-tap-highlight-color', 'rgba(0,0,0,0)');
+
+    d3_select(window)
+        .on('pointermove.zoompan', pointermove)
+        .on('pointerup.zoompan pointercancel.zoompan', pointerup);
   }
 
   zoom.transform = function(collection, transform, point) {
     var selection = collection.selection ? collection.selection() : collection;
-    selection.property('__zoom', defaultTransform);
     if (collection !== selection) {
       schedule(collection, transform, point);
     } else {
       selection.interrupt().each(function() {
         gesture(this, arguments)
-            .start()
-            .zoom(null, typeof transform === 'function' ? transform.apply(this, arguments) : transform)
-            .end();
+            .start(null)
+            .zoom(null, null, typeof transform === 'function' ? transform.apply(this, arguments) : transform)
+            .end(null);
       });
     }
   };
 
   zoom.scaleBy = function(selection, k, p) {
     zoom.scaleTo(selection, function() {
-      var k0 = this.__zoom.k,
+      var k0 = _transform.k,
           k1 = typeof k === 'function' ? k.apply(this, arguments) : k;
       return k0 * k1;
     }, p);
@@ -96,8 +94,8 @@ export function utilZoomPan() {
   zoom.scaleTo = function(selection, k, p) {
     zoom.transform(selection, function() {
       var e = extent.apply(this, arguments),
-          t0 = this.__zoom,
-          p0 = p == null ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p,
+          t0 = _transform,
+          p0 = !p ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p,
           p1 = t0.invert(p0),
           k1 = typeof k === 'function' ? k.apply(this, arguments) : k;
       return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
@@ -106,7 +104,7 @@ export function utilZoomPan() {
 
   zoom.translateBy = function(selection, x, y) {
     zoom.transform(selection, function() {
-      return constrain(this.__zoom.translate(
+      return constrain(_transform.translate(
         typeof x === 'function' ? x.apply(this, arguments) : x,
         typeof y === 'function' ? y.apply(this, arguments) : y
       ), extent.apply(this, arguments), translateExtent);
@@ -116,9 +114,9 @@ export function utilZoomPan() {
   zoom.translateTo = function(selection, x, y, p) {
     zoom.transform(selection, function() {
       var e = extent.apply(this, arguments),
-          t = this.__zoom,
-          p0 = p == null ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p;
-      return constrain(identity.translate(p0[0], p0[1]).scale(t.k).translate(
+          t = _transform,
+          p0 = !p ? centroid(e) : typeof p === 'function' ? p.apply(this, arguments) : p;
+      return constrain(d3_zoomIdentity.translate(p0[0], p0[1]).scale(t.k).translate(
         typeof x === 'function' ? -x.apply(this, arguments) : -x,
         typeof y === 'function' ? -y.apply(this, arguments) : -y
       ), e, translateExtent);
@@ -141,28 +139,34 @@ export function utilZoomPan() {
 
   function schedule(transition, transform, point) {
     transition
-        .on('start.zoom', function() { gesture(this, arguments).start(); })
-        .on('interrupt.zoom end.zoom', function() { gesture(this, arguments).end(); })
+        .on('start.zoom', function() { gesture(this, arguments).start(null); })
+        .on('interrupt.zoom end.zoom', function() { gesture(this, arguments).end(null); })
         .tween('zoom', function() {
           var that = this,
               args = arguments,
               g = gesture(that, args),
               e = extent.apply(that, args),
-              p = point == null ? centroid(e) : typeof point === 'function' ? point.apply(that, args) : point,
+              p = !point ? centroid(e) : typeof point === 'function' ? point.apply(that, args) : point,
               w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]),
-              a = that.__zoom,
+              a = _transform,
               b = typeof transform === 'function' ? transform.apply(that, args) : transform,
               i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
           return function(t) {
-            if (t === 1) t = b; // Avoid rounding error on end.
-            else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }
-            g.zoom(null, t);
+            if (t === 1) {
+              // Avoid rounding error on end.
+              t = b;
+            } else {
+              var l = i(t);
+              var k = w / l[2];
+              t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k);
+            }
+            g.zoom(null, null, t);
           };
         });
   }
 
   function gesture(that, args, clean) {
-    return (!clean && that.__zooming) || new Gesture(that, args);
+    return (!clean && _activeGesture) || new Gesture(that, args);
   }
 
   function Gesture(that, args) {
@@ -173,39 +177,36 @@ export function utilZoomPan() {
   }
 
   Gesture.prototype = {
-    start: function() {
+    start: function(d3_event) {
       if (++this.active === 1) {
-        this.that.__zooming = this;
-        this.emit('start');
+        _activeGesture = this;
+        dispatch.call('start', this, d3_event);
       }
       return this;
     },
-    zoom: function(key, transform) {
+    zoom: function(d3_event, key, transform) {
       if (this.mouse && key !== 'mouse') this.mouse[1] = transform.invert(this.mouse[0]);
       if (this.pointer0 && key !== 'touch') this.pointer0[1] = transform.invert(this.pointer0[0]);
       if (this.pointer1 && key !== 'touch') this.pointer1[1] = transform.invert(this.pointer1[0]);
-      this.that.__zoom = transform;
-      this.emit('zoom');
+      _transform = transform;
+      dispatch.call('zoom', this, d3_event, key, transform);
       return this;
     },
-    end: function() {
+    end: function(d3_event) {
       if (--this.active === 0) {
-        delete this.that.__zooming;
-        this.emit('end');
+        _activeGesture = null;
+        dispatch.call('end', this, d3_event);
       }
       return this;
-    },
-    emit: function(type) {
-      d3_customEvent(new ZoomEvent(zoom, type, this.that.__zoom), listeners.apply, listeners, [type, this.that, this.args]);
     }
   };
 
-  function wheeled() {
+  function wheeled(d3_event) {
     if (!filter.apply(this, arguments)) return;
     var g = gesture(this, arguments),
-        t = this.__zoom,
+        t = _transform,
         k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
-        p = d3_mouse(this);
+        p = utilFastMouse(this)(d3_event);
 
     // If the mouse is in the same location as before, reuse it.
     // If there were recent wheel events, reset the wheel idle timeout.
@@ -214,42 +215,40 @@ export function utilZoomPan() {
         g.mouse[1] = t.invert(g.mouse[0] = p);
       }
       clearTimeout(g.wheel);
-    }
-
-    // If this wheel event won’t trigger a transform change, ignore it.
-    else if (t.k === k) return;
 
     // Otherwise, capture the mouse point and location at the start.
-    else {
+    } else {
       g.mouse = [p, t.invert(p)];
       d3_interrupt(this);
-      g.start();
+      g.start(d3_event);
     }
 
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
-    g.wheel = setTimeout(wheelidled, wheelDelay);
-    g.zoom('mouse', constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
+    g.wheel = setTimeout(wheelidled, _wheelDelay);
+    g.zoom(d3_event, 'mouse', constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
 
     function wheelidled() {
       g.wheel = null;
-      g.end();
+      g.end(d3_event);
     }
   }
 
-  var downPointerIDs = new Set();
+  var _downPointerIDs = new Set();
+  var _pointerLocGetter;
 
-  function pointerdown() {
-    downPointerIDs.add(d3_event.pointerId);
+  function pointerdown(d3_event) {
+    _downPointerIDs.add(d3_event.pointerId);
 
     if (!filter.apply(this, arguments)) return;
 
-    var g = gesture(this, arguments, downPointerIDs.size === 1);
+    var g = gesture(this, arguments, _downPointerIDs.size === 1);
     var started;
 
     d3_event.stopImmediatePropagation();
-    var loc = d3_mouse(this);
-    var p = [loc, this.__zoom.invert(loc), d3_event.pointerId];
+    _pointerLocGetter = utilFastMouse(this);
+    var loc = _pointerLocGetter(d3_event);
+    var p = [loc, _transform.invert(loc), d3_event.pointerId];
     if (!g.pointer0) {
        g.pointer0 = p;
        started = true;
@@ -260,12 +259,14 @@ export function utilZoomPan() {
 
     if (started) {
       d3_interrupt(this);
-      g.start();
+      g.start(d3_event);
     }
   }
 
-  function pointermove() {
-    if (!this.__zooming) return;
+  function pointermove(d3_event) {
+    if (!_downPointerIDs.has(d3_event.pointerId)) return;
+
+    if (!_activeGesture || !_pointerLocGetter) return;
 
     var g = gesture(this, arguments);
 
@@ -275,22 +276,22 @@ export function utilZoomPan() {
     if ((isPointer0 || isPointer1) && 'buttons' in d3_event && !d3_event.buttons) {
       // The pointer went up without ending the gesture somehow, e.g.
       // a down mouse was moved off the map and released. End it here.
-      if (g.pointer0) downPointerIDs.delete(g.pointer0[2]);
-      if (g.pointer1) downPointerIDs.delete(g.pointer1[2]);
-      g.end();
+      if (g.pointer0) _downPointerIDs.delete(g.pointer0[2]);
+      if (g.pointer1) _downPointerIDs.delete(g.pointer1[2]);
+      g.end(d3_event);
       return;
     }
 
     d3_event.preventDefault();
     d3_event.stopImmediatePropagation();
 
-    var loc = d3_mouse(this);
+    var loc = _pointerLocGetter(d3_event);
     var t, p, l;
 
     if (isPointer0) g.pointer0[0] = loc;
     else if (isPointer1) g.pointer1[0] = loc;
 
-    t = g.that.__zoom;
+    t = _transform;
     if (g.pointer1) {
       var p0 = g.pointer0[0], l0 = g.pointer0[1],
           p1 = g.pointer1[0], l1 = g.pointer1[1],
@@ -302,15 +303,18 @@ export function utilZoomPan() {
     } else if (g.pointer0) {
       p = g.pointer0[0];
       l = g.pointer0[1];
+    } else {
+      return;
     }
-    else return;
-    g.zoom('touch', constrain(translate(t, p, l), g.extent, translateExtent));
+    g.zoom(d3_event, 'touch', constrain(translate(t, p, l), g.extent, translateExtent));
   }
 
-  function pointerup() {
-    downPointerIDs.delete(d3_event.pointerId);
+  function pointerup(d3_event) {
+    if (!_downPointerIDs.has(d3_event.pointerId)) return;
 
-    if (!this.__zooming) return;
+    _downPointerIDs.delete(d3_event.pointerId);
+
+    if (!_activeGesture) return;
 
     var g = gesture(this, arguments);
 
@@ -323,9 +327,10 @@ export function utilZoomPan() {
       g.pointer0 = g.pointer1;
       delete g.pointer1;
     }
-    if (g.pointer0) g.pointer0[1] = this.__zoom.invert(g.pointer0[0]);
-    else {
-      g.end();
+    if (g.pointer0) {
+      g.pointer0[1] = _transform.invert(g.pointer0[0]);
+    } else {
+      g.end(d3_event);
     }
   }
 
@@ -353,18 +358,13 @@ export function utilZoomPan() {
     return arguments.length ? (constrain = _, zoom) : constrain;
   };
 
-  zoom.duration = function(_) {
-    return arguments.length ? (duration = +_, zoom) : duration;
-  };
-
   zoom.interpolate = function(_) {
     return arguments.length ? (interpolate = _, zoom) : interpolate;
   };
 
-  zoom.on = function() {
-    var value = listeners.on.apply(listeners, arguments);
-    return value === listeners ? zoom : value;
+  zoom._transform = function(_) {
+    return arguments.length ? (_transform = _, zoom) : _transform;
   };
 
-  return zoom;
+  return utilRebind(zoom, dispatch, 'on');
 }

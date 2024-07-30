@@ -1,9 +1,9 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { presetManager } from '../presets';
+import { t } from '../core/localizer';
 
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionConnect } from '../actions/connect';
@@ -25,7 +25,6 @@ import {
 import { modeBrowse } from './browse';
 import { modeSelect } from './select';
 import { osmJoinWays, osmNode } from '../osm';
-import { uiFlash } from '../ui/flash';
 import { utilArrayIntersection, utilKeybinding } from '../util';
 
 
@@ -48,11 +47,11 @@ export function modeDragNode(context) {
     var _lastLoc;
 
 
-    function startNudge(entity, nudge) {
+    function startNudge(d3_event, entity, nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
         _nudgeInterval = window.setInterval(function() {
-            context.pan(nudge);
-            doMove(entity, nudge);
+            context.map().pan(nudge);
+            doMove(d3_event, entity, nudge);
         }, 50);
     }
 
@@ -93,7 +92,7 @@ export function modeDragNode(context) {
     function shouldSnapToNode(target) {
         if (!_activeEntity) return false;
         return _activeEntity.geometry(context.graph()) !== 'vertex' ||
-            (target.geometry(context.graph()) === 'vertex' || context.presets().allowsVertex(target, context.graph()));
+            (target.geometry(context.graph()) === 'vertex' || presetManager.allowsVertex(target, context.graph()));
     }
 
 
@@ -102,7 +101,7 @@ export function modeDragNode(context) {
     }
 
 
-    function keydown() {
+    function keydown(d3_event) {
         if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope')) {
                 context.surface()
@@ -115,7 +114,7 @@ export function modeDragNode(context) {
     }
 
 
-    function keyup() {
+    function keyup(d3_event) {
         if (d3_event.keyCode === utilKeybinding.modifierCodes.alt) {
             if (context.surface().classed('nope-suppressed')) {
                 context.surface()
@@ -128,17 +127,18 @@ export function modeDragNode(context) {
     }
 
 
-    function start(entity) {
+    function start(d3_event, entity) {
         _wasMidpoint = entity.type === 'midpoint';
         var hasHidden = context.features().hasHiddenConnections(entity, context.graph());
-        _isCancelled = !context.editable() || d3_event.sourceEvent.shiftKey || hasHidden;
+        _isCancelled = !context.editable() || d3_event.shiftKey || hasHidden;
 
 
         if (_isCancelled) {
             if (hasHidden) {
-                uiFlash()
+                context.ui().flash
                     .duration(4000)
-                    .text(t('modes.drag_node.connected_to_hidden'))();
+                    .iconName('#iD-icon-no')
+                    .label(t.append('modes.drag_node.connected_to_hidden'))();
             }
             return drag.cancel();
         }
@@ -150,7 +150,8 @@ export function modeDragNode(context) {
             entity = context.entity(entity.id);   // get post-action entity
 
             var vertex = context.surface().selectAll('.' + entity.id);
-            drag.target(vertex.node(), entity);
+            drag.targetNode(vertex.node())
+                .targetEntity(entity);
 
         } else {
             context.perform(actionNoop());
@@ -170,36 +171,36 @@ export function modeDragNode(context) {
 
     // related code
     // - `behavior/draw.js` `datum()`
-    function datum() {
-        var event = d3_event && d3_event.sourceEvent;
-        if (!event || event.altKey) {
+    function datum(d3_event) {
+        if (!d3_event || d3_event.altKey) {
             return {};
         } else {
             // When dragging, snap only to touch targets..
             // (this excludes area fills and active drawing elements)
-            var d = event.target.__data__;
+            var d = d3_event.target.__data__;
             return (d && d.properties && d.properties.target) ? d : {};
         }
     }
 
 
-    function doMove(entity, nudge) {
+    function doMove(d3_event, entity, nudge) {
         nudge = nudge || [0, 0];
 
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
+        var target, edge;
+
         if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
             // related code
             // - `mode/drag_node.js`     `doMove()`
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
-            var d = datum();
-            var target = d && d.properties && d.properties.entity;
+            var d = datum(d3_event);
+            target = d && d.properties && d.properties.entity;
             var targetLoc = target && target.loc;
             var targetNodes = d && d.properties && d.properties.nodes;
-            var edge;
 
             if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
                 if (shouldSnapToNode(target)) {
@@ -207,7 +208,7 @@ export function modeDragNode(context) {
                 }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                edge = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, end.id);
                 if (edge) {
                     loc = edge.loc;
                 }
@@ -235,22 +236,24 @@ export function modeDragNode(context) {
         var nope = context.surface().classed('nope');
         if (isInvalid === 'relation' || isInvalid === 'restriction') {
             if (!nope) {   // about to nope - show hint
-                uiFlash()
+                context.ui().flash
                     .duration(4000)
-                    .text(t('operations.connect.' + isInvalid,
-                        { relation: context.presets().item('type/restriction').name() }
+                    .iconName('#iD-icon-no')
+                    .label(t.append('operations.connect.' + isInvalid,
+                        { relation: presetManager.item('type/restriction').name() }
                     ))();
             }
         } else if (isInvalid) {
             var errorID = isInvalid === 'line' ? 'lines' : 'areas';
-            uiFlash()
+            context.ui().flash
                 .duration(3000)
-                .text(t('self_intersection.error.' + errorID))();
+                .iconName('#iD-icon-no')
+                .label(t.append('self_intersection.error.' + errorID))();
         } else {
             if (nope) {   // about to un-nope, remove hint
-                uiFlash()
+                context.ui().flash
                     .duration(1)
-                    .text('')();
+                    .label('')();
             }
         }
 
@@ -324,7 +327,7 @@ export function modeDragNode(context) {
                 for (k = 0; k < rings.length; k++) {
                     if (k === activeIndex) continue;
 
-                    // make sure active ring doesnt cross passive rings
+                    // make sure active ring doesn't cross passive rings
                     if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {
                         return 'multipolygonRing';
                     }
@@ -347,29 +350,29 @@ export function modeDragNode(context) {
     }
 
 
-    function move(entity) {
+    function move(d3_event, entity, point) {
         if (_isCancelled) return;
-        d3_event.sourceEvent.stopPropagation();
+        d3_event.stopPropagation();
 
-        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
+        context.surface().classed('nope-disabled', d3_event.altKey);
 
-        _lastLoc = context.projection.invert(d3_event.point);
+        _lastLoc = context.projection.invert(point);
 
-        doMove(entity);
-        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
+        doMove(d3_event, entity);
+        var nudge = geoViewportEdge(point, context.map().dimensions());
         if (nudge) {
-            startNudge(entity, nudge);
+            startNudge(d3_event, entity, nudge);
         } else {
             stopNudge();
         }
     }
 
-    function end(entity) {
+    function end(d3_event, entity) {
         if (_isCancelled) return;
 
         var wasPoint = entity.geometry(context.graph()) === 'point';
 
-        var d = datum();
+        var d = datum(d3_event);
         var nope = (d && d.properties && d.properties.nope) || context.surface().classed('nope');
         var target = d && d.properties && d.properties.entity;   // entity to snap to
 
@@ -379,7 +382,7 @@ export function modeDragNode(context) {
             );
 
         } else if (target && target.type === 'way') {
-            var choice = geoChooseEdge(context.childNodes(target), context.mouse(), context.projection, entity.id);
+            var choice = geoChooseEdge(context.graph().childNodes(target), context.map().mouse(), context.projection, entity.id);
             context.replace(
                 actionAddMidpoint({
                     loc: choice.loc,
@@ -445,7 +448,7 @@ export function modeDragNode(context) {
 
     var drag = behaviorDrag()
         .selector('.layer-touch.points .target')
-        .surface(d3_select('#map').node())
+        .surface(context.container().select('.main-map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)
@@ -457,8 +460,8 @@ export function modeDragNode(context) {
         context.install(edit);
 
         d3_select(window)
-            .on('keydown.drawWay', keydown)
-            .on('keyup.drawWay', keyup);
+            .on('keydown.dragNode', keydown)
+            .on('keyup.dragNode', keyup);
 
         context.history()
             .on('undone.drag-node', cancel);
@@ -471,8 +474,8 @@ export function modeDragNode(context) {
         context.uninstall(edit);
 
         d3_select(window)
-            .on('keydown.hover', null)
-            .on('keyup.hover', null);
+            .on('keydown.dragNode', null)
+            .on('keyup.dragNode', null);
 
         context.history()
             .on('undone.drag-node', null);

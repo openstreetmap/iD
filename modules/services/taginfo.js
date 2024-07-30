@@ -3,10 +3,12 @@ import _debounce from 'lodash-es/debounce';
 import { json as d3_json } from 'd3-fetch';
 
 import { utilObjectOmit, utilQsString } from '../util';
-import { currentLocale } from '../util/locale';
+import { localizer } from '../core/localizer';
+import { allowUpperCaseTagValues } from '../osm/tags';
 
+import { taginfoApiUrl } from '../../config/id.js';
 
-var apibase = 'https://taginfo.openstreetmap.org/api/4/';
+var apibase = taginfoApiUrl;
 var _inflight = {};
 var _popularKeys = {};
 var _taginfoCache = {};
@@ -70,7 +72,7 @@ function clean(params) {
 function filterKeys(type) {
     var count_type = type ? 'count_' + type : 'count_all';
     return function(d) {
-        return parseFloat(d[count_type]) > 2500 || d.in_wiki;
+        return Number(d[count_type]) > 2500 || d.in_wiki;
     };
 }
 
@@ -78,7 +80,7 @@ function filterKeys(type) {
 function filterMultikeys(prefix) {
     return function(d) {
         // d.key begins with prefix, and d.key contains no additional ':'s
-        var re = new RegExp('^' + prefix + '(.*)$');
+        var re = new RegExp('^' + prefix + '(.*)$', 'i');
         var matches = d.key.match(re) || [];
         return (matches.length === 2 && matches[1].indexOf(':') === -1);
     };
@@ -89,7 +91,7 @@ function filterValues(allowUpperCase) {
     return function(d) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
         if (!allowUpperCase && d.value.match(/[A-Z*]/) !== null) return false;  // exclude uppercase letters
-        return parseFloat(d.fraction) > 0.0;
+        return d.count > 100 || d.in_wiki; // exclude rare undocumented tags
     };
 }
 
@@ -98,7 +100,7 @@ function filterRoles(geometry) {
     return function(d) {
         if (d.role === '') return false; // exclude empty role
         if (d.role.match(/[A-Z*;,]/) !== null) return false;  // exclude uppercase letters and some punctuation
-        return parseFloat(d[tag_members_fractions[geometry]]) > 0.0;
+        return Number(d[tag_members_fractions[geometry]]) > 0.0;
     };
 }
 
@@ -116,9 +118,6 @@ function valKeyDescription(d) {
         value: d.value,
         title: d.description || d.value
     };
-    if (d.count) {
-        obj.count = d.count;
-    }
     return obj;
 }
 
@@ -195,7 +194,18 @@ export default {
         _inflight = {};
         _taginfoCache = {};
         _popularKeys = {
-            postal_code: true   // #5377
+            // manually exclude some keys – #5377, #7485
+            postal_code: true,
+            full_name: true,
+            loc_name: true,
+            reg_name: true,
+            short_name: true,
+            sorting_name: true,
+            artist_name: true,
+            nat_name: true,
+            long_name: true,
+            via: true,
+            'bridge:name': true
         };
 
         // Fetch popular keys.  We'll exclude these from `values`
@@ -207,7 +217,7 @@ export default {
             sortorder: 'desc',
             page: 1,
             debounce: false,
-            lang: currentLocale
+            lang: localizer.languageCode()
         };
         this.keys(params, function(err, data) {
             if (err) return;
@@ -233,7 +243,7 @@ export default {
             sortname: 'count_all',
             sortorder: 'desc',
             page: 1,
-            lang: currentLocale
+            lang: localizer.languageCode()
         }, params);
 
         var url = apibase + 'keys/all?' + utilQsString(params);
@@ -258,7 +268,7 @@ export default {
             sortname: 'count_all',
             sortorder: 'desc',
             page: 1,
-            lang: currentLocale
+            lang: localizer.languageCode()
         }, params);
 
         var prefix = params.query;
@@ -291,7 +301,7 @@ export default {
             sortname: 'count_all',
             sortorder: 'desc',
             page: 1,
-            lang: currentLocale
+            lang: localizer.languageCode()
         }, params);
 
         var url = apibase + 'key/values?' + utilQsString(params);
@@ -303,8 +313,7 @@ export default {
                 // A few OSM keys expect values to contain uppercase values (see #3377).
                 // This is not an exhaustive list (e.g. `name` also has uppercase values)
                 // but these are the fields where taginfo value lookup is most useful.
-                var re = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery/;
-                var allowUpperCase = re.test(params.key);
+                var allowUpperCase = allowUpperCaseTagValues.test(params.key);
                 var f = filterValues(allowUpperCase);
 
                 var result = d.data.filter(f).map(valKeyDescription);
@@ -324,7 +333,7 @@ export default {
             sortname: 'count_all_members',
             sortorder: 'desc',
             page: 1,
-            lang: currentLocale
+            lang: localizer.languageCode()
         }, params);
 
         var url = apibase + 'relation/roles?' + utilQsString(params);

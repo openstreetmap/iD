@@ -9,44 +9,47 @@ import {
     modeBrowse
 } from '../../modes';
 
-import { t } from '../../util/locale';
+import { presetManager } from '../../presets';
+import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
-import { tooltip } from '../../util/tooltip';
-import { uiTooltipHtml } from '../tooltipHtml';
+import { uiTooltip } from '../tooltip';
 
-export function uiToolOldDrawModes(context) {
+export function uiToolDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
-        label: t('toolbar.add_feature')
+        label: t.append('toolbar.add_feature')
     };
 
     var modes = [
         modeAddPoint(context, {
-            title: t('modes.add_point.title'),
+            title: t.append('modes.add_point.title'),
             button: 'point',
-            description: t('modes.add_point.description'),
-            preset: context.presets().item('point'),
+            description: t.append('modes.add_point.description'),
+            preset: presetManager.item('point'),
             key: '1'
         }),
         modeAddLine(context, {
-            title: t('modes.add_line.title'),
+            title: t.append('modes.add_line.title'),
             button: 'line',
-            description: t('modes.add_line.description'),
-            preset: context.presets().item('line'),
+            description: t.append('modes.add_line.description'),
+            preset: presetManager.item('line'),
             key: '2'
         }),
         modeAddArea(context, {
-            title: t('modes.add_area.title'),
+            title: t.append('modes.add_area.title'),
             button: 'area',
-            description: t('modes.add_area.description'),
-            preset: context.presets().item('area'),
+            description: t.append('modes.add_area.description'),
+            preset: presetManager.item('area'),
             key: '3'
         })
     ];
 
 
-    function enabled() {
+    function enabled(
+        // eslint-disable-next-line no-unused-vars
+        _mode // parameter is currently not used, but might be at some point
+    ) {
         return osmEditable();
     }
 
@@ -73,21 +76,6 @@ export function uiToolOldDrawModes(context) {
             .attr('class', 'joined')
             .style('display', 'flex');
 
-        context
-            .on('enter.editor', function(entered) {
-                selection.selectAll('button.add-button')
-                    .classed('active', function(mode) { return entered.button === mode.button; });
-                context.container()
-                    .classed('mode-' + entered.id, true);
-            });
-
-        context
-            .on('exit.editor', function(exited) {
-                context.container()
-                    .classed('mode-' + exited.id, false);
-            });
-
-
         var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
@@ -113,7 +101,7 @@ export function uiToolOldDrawModes(context) {
             var buttonsEnter = buttons.enter()
                 .append('button')
                 .attr('class', function(d) { return d.id + ' add-button bar-button'; })
-                .on('click.mode-buttons', function(d) {
+                .on('click.mode-buttons', function(d3_event, d) {
                     if (!enabled(d)) return;
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
@@ -126,11 +114,11 @@ export function uiToolOldDrawModes(context) {
                         context.enter(d);
                     }
                 })
-                .call(tooltip()
+                .call(uiTooltip()
                     .placement('bottom')
-                    .html(true)
-                    .title(function(d) { return uiTooltipHtml(d.description, d.key); })
-                    .scrollContainer(d3_select('#bar'))
+                    .title(function(d) { return d.description; })
+                    .keys(function(d) { return [d.key]; })
+                    .scrollContainer(context.container().select('.top-toolbar'))
                 );
 
             buttonsEnter
@@ -142,17 +130,21 @@ export function uiToolOldDrawModes(context) {
             buttonsEnter
                 .append('span')
                 .attr('class', 'label')
-                .text(function(mode) { return mode.title; });
+                .text('')
+                .each(function(mode) { mode.title(d3_select(this)); });
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {
-                context.ui().checkOverflow('#bar', true);
+                context.ui().checkOverflow('.top-toolbar', true);
             }
 
             // update
             buttons = buttons
                 .merge(buttonsEnter)
-                .classed('disabled', function(d) { return !enabled(d); });
+                .attr('aria-disabled', function(d) { return !enabled(d); })
+                .classed('disabled', function(d) { return !enabled(d); })
+                .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; })
+                .classed('active', function(d) { return context.mode() && context.mode().button === d.button; });
         }
     };
 

@@ -2,13 +2,13 @@ import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
 export function svgMapillaryMapFeatures(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
-    var minZoom = 12;
-    var layer = d3_select(null);
-    var _mapillary;
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const minZoom = 12;
+    let layer = d3_select(null);
+    let _mapillary;
 
 
     function init() {
@@ -30,9 +30,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
 
     function showLayer() {
-        var service = getService();
+        const service = getService();
         if (!service) return;
 
+        service.loadObjectResources(context);
         editOn();
     }
 
@@ -54,45 +55,70 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
-    function click(d) {
-        var service = getService();
+    function click(d3_event, d) {
+        const service = getService();
         if (!service) return;
 
         context.map().centerEase(d.loc);
 
-        var selectedImageKey = service.getSelectedImageKey();
-        var imageKey;
+        const selectedImageId = service.getActiveImage() && service.getActiveImage().id;
 
-        // Pick one of the images the map feature was detected in,
-        // preference given to an image already selected.
-        d.detections.forEach(function(detection) {
-            if (!imageKey || selectedImageKey === detection.image_key) {
-                imageKey = detection.image_key;
+        service.getDetections(d.id).then(detections => {
+            if (detections.length) {
+                const imageId = detections[0].image.id;
+                if (imageId === selectedImageId) {
+                    service
+                        .highlightDetection(detections[0])
+                        .selectImage(context, imageId);
+                } else {
+                    service.ensureViewerLoaded(context)
+                        .then(function() {
+                            service
+                                .highlightDetection(detections[0])
+                                .selectImage(context, imageId)
+                                .showViewer(context);
+                        });
+                }
             }
         });
+    }
 
-        service
-            .selectImage(imageKey)
-            .updateViewer(imageKey, context)
-            .showViewer();
+
+    function filterData(detectedFeatures) {
+        const fromDate = context.photos().fromDate();
+        const toDate = context.photos().toDate();
+
+        if (fromDate) {
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return new Date(feature.last_seen_at).getTime() >= new Date(fromDate).getTime();
+            });
+        }
+        if (toDate) {
+            detectedFeatures = detectedFeatures.filter(function(feature) {
+                return new Date(feature.first_seen_at).getTime() <= new Date(toDate).getTime();
+            });
+        }
+
+        return detectedFeatures;
     }
 
 
     function update() {
-        var service = getService();
-        var data = (service ? service.mapFeatures(projection) : []);
-        var selectedImageKey = service && service.getSelectedImageKey();
-        var transform = svgPointTransform(projection);
+        const service = getService();
+        let data = (service ? service.mapFeatures(projection) : []);
+        data = filterData(data);
 
-        var mapFeatures = layer.selectAll('.icon-map-feature')
-            .data(data, function(d) { return d.key; });
+        const transform = svgPointTransform(projection);
+
+        const mapFeatures = layer.selectAll('.icon-map-feature')
+            .data(data, function(d) { return d.id; });
 
         // exit
         mapFeatures.exit()
             .remove();
 
         // enter
-        var enter = mapFeatures.enter()
+        const enter = mapFeatures.enter()
             .append('g')
             .attr('class', 'icon-map-feature icon-detected')
             .on('click', click);
@@ -128,32 +154,13 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         // update
         mapFeatures
             .merge(enter)
-            .attr('transform', transform)
-            .classed('currentView', function(d) {
-                return d.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-            })
-            .sort(function(a, b) {
-                var aSelected = a.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-                var bSelected = b.detections.some(function(detection) {
-                    return detection.image_key === selectedImageKey;
-                });
-                if (aSelected === bSelected) {
-                    return b.loc[1] - a.loc[1]; // sort Y
-                } else if (aSelected) {
-                    return 1;
-                }
-                return -1;
-            });
+            .attr('transform', transform);
     }
 
 
     function drawMapFeatures(selection) {
-        var enabled = svgMapillaryMapFeatures.enabled;
-        var service = getService();
+        const enabled = svgMapillaryMapFeatures.enabled;
+        const service = getService();
 
         layer = selection.selectAll('.layer-mapillary-map-features')
             .data(service ? [0] : []);
@@ -172,9 +179,12 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
                 editOn();
                 update();
                 service.loadMapFeatures(projection);
+                service.showFeatureDetections(true);
             } else {
                 editOff();
             }
+        } else if (service) {
+            service.showFeatureDetections(false);
         }
     }
 
@@ -184,8 +194,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         svgMapillaryMapFeatures.enabled = _;
         if (svgMapillaryMapFeatures.enabled) {
             showLayer();
+            context.photos().on('change.mapillary_map_features', update);
         } else {
             hideLayer();
+            context.photos().on('change.mapillary_map_features', null);
         }
         dispatch.call('change');
         return this;
@@ -194,6 +206,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
     drawMapFeatures.supported = function() {
         return !!getService();
+    };
+
+    drawMapFeatures.rendered = function(zoom) {
+      return zoom >= minZoom;
     };
 
 

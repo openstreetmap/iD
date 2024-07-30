@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { osmEntity, osmNote } from '../osm';
 import { svgIcon } from '../svg/icon';
 
@@ -33,7 +33,7 @@ export function uiViewOnOSM(context) {
 
         linkEnter
             .append('span')
-            .text(t('inspector.view_on_osm'));
+            .call(t.append('inspector.view_on_osm'));
     }
 
 

@@ -1,18 +1,17 @@
 import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { t } from '../../util/locale';
-import { tooltip } from '../../util/tooltip';
+import { t } from '../../core/localizer';
+import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 
 export function uiSectionOverlayList(context) {
 
     var section = uiSection('overlay-list', context)
-        .title(t('background.overlays'))
+        .label(() => t.append('background.overlays'))
         .disclosureContent(renderDisclosureContent);
 
     var _overlayList = d3_select(null);
@@ -25,12 +24,12 @@ export function uiSectionOverlayList(context) {
             var description = d.description();
             var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
-            item.call(tooltip().destroyAny);
+            item.call(uiTooltip().destroyAny);
 
             if (description || isOverflowing) {
-                item.call(tooltip()
+                item.call(uiTooltip()
                     .placement(placement)
-                    .title(description || d.name())
+                    .title(() => description || d.name())
                 );
             }
         });
@@ -49,7 +48,7 @@ export function uiSectionOverlayList(context) {
     }
 
 
-    function chooseOverlay(d) {
+    function chooseOverlay(d3_event, d) {
         d3_event.preventDefault();
         context.background().toggleOverlayLayer(d);
         _overlayList.call(updateLayerSelections);
@@ -81,7 +80,7 @@ export function uiSectionOverlayList(context) {
 
         label
             .append('span')
-            .text(function(d) { return d.name(); });
+            .each(function(d) { d.label()(d3_select(this)); });
 
 
         layerList.selectAll('li')

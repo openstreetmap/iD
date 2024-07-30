@@ -2,12 +2,12 @@ describe('iD.presetIndex', function () {
     var _savedPresets, _savedAreaKeys;
 
     before(function() {
-        _savedPresets = iD.data.preset_presets;
+        _savedPresets = iD.fileFetcher.cache().preset_presets;
         _savedAreaKeys = iD.osmAreaKeys;
     });
 
     after(function() {
-        iD.data.preset_presets = _savedPresets;
+        iD.fileFetcher.cache().preset_presets = _savedPresets;
         iD.osmSetAreaKeys(_savedAreaKeys);
     });
 
@@ -16,27 +16,27 @@ describe('iD.presetIndex', function () {
         it('has a fallback point preset', function () {
             var node = iD.osmNode({ id: 'n' });
             var graph = iD.coreGraph([node]);
-            var presets = iD.coreContext().init().presets();
+            var presets = iD.presetIndex();
             expect(presets.match(node, graph).id).to.eql('point');
         });
         it('has a fallback line preset', function () {
             var node = iD.osmNode({ id: 'n' });
             var way = iD.osmWay({ id: 'w', nodes: ['n'] });
             var graph = iD.coreGraph([node, way]);
-            var presets = iD.coreContext().init().presets();
+            var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('line');
         });
         it('has a fallback area preset', function () {
             var node = iD.osmNode({ id: 'n' });
             var way = iD.osmWay({ id: 'w', nodes: ['n'], tags: { area: 'yes' }});
             var graph = iD.coreGraph([node, way]);
-            var presets = iD.coreContext().init().presets();
+            var presets = iD.presetIndex();
             expect(presets.match(way, graph).id).to.eql('area');
         });
         it('has a fallback relation preset', function () {
             var relation = iD.osmRelation({ id: 'r' });
             var graph = iD.coreGraph([relation]);
-            var presets = iD.coreContext().init().presets();
+            var presets = iD.presetIndex();
             expect(presets.match(relation, graph).id).to.eql('relation');
         });
     });
@@ -49,54 +49,54 @@ describe('iD.presetIndex', function () {
         };
 
         it('returns a collection containing presets matching a geometry and tags', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            var way = iD.osmWay({ tags: { highway: 'residential' } });
-            var graph = iD.coreGraph([way]);
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+                var way = iD.osmWay({ tags: { highway: 'residential' } });
+                var graph = iD.coreGraph([way]);
                 expect(presets.match(way, graph).id).to.eql('residential');
                 done();
-            }, 20);
+            });
         });
 
         it('returns the appropriate fallback preset when no tags match', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
             var point = iD.osmNode();
             var line = iD.osmWay({ tags: { foo: 'bar' } });
             var graph = iD.coreGraph([point, line]);
 
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.match(point, graph).id).to.eql('point');
                 expect(presets.match(line, graph).id).to.eql('line');
                 done();
-            }, 20);
+            });
         });
 
         it('matches vertices on a line as points', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'highway': 'residential' } });
             var graph = iD.coreGraph([point, line]);
 
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.match(point, graph).id).to.eql('point');
                 done();
-            }, 20);
+            });
         });
 
         it('matches vertices on an addr:interpolation line as points', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
             var point = iD.osmNode({ tags: { leisure: 'park' } });
             var line = iD.osmWay({ nodes: [point.id], tags: { 'addr:interpolation': 'even' } });
             var graph = iD.coreGraph([point, line]);
 
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 expect(presets.match(point, graph).id).to.eql('park');
                 done();
-            }, 20);
+            });
         });
     });
 
@@ -113,89 +113,166 @@ describe('iD.presetIndex', function () {
         };
 
         it('includes keys for presets with area geometry', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys()).to.include.keys('natural');
                 done();
-            }, 20);
+            });
         });
 
         it('discards key-values for presets with a line geometry', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().natural).to.include.keys('tree_row');
                 expect(presets.areaKeys().natural.tree_row).to.be.true;
                 done();
-            }, 20);
+            });
         });
 
         it('discards key-values for presets with both area and line geometry', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().leisure).to.include.keys('track');
                 done();
-            }, 20);
+            });
         });
 
         it('does not discard key-values for presets with neither area nor line geometry', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().natural).not.to.include.keys('peak');
                 done();
-            }, 20);
+            });
         });
 
         it('does not discard generic \'*\' key-values', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys().natural).not.to.include.keys('natural');
                 done();
-            }, 20);
+            });
         });
 
         it('ignores keys like \'highway\' that are assumed to be lines', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys()).not.to.include.keys('highway');
                 done();
-            }, 20);
+            });
         });
 
         it('ignores suggestion presets', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
-            window.setTimeout(function() {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
                 expect(presets.areaKeys()).not.to.include.keys('amenity');
                 done();
-            }, 20);
+            });
         });
     });
 
 
     describe('#addablePresetIDs', function () {
-        it('addablePresetIDs is initially null', function () {
-            var presets = iD.coreContext().init().presets();
-            expect(presets.addablePresetIDs()).to.be.null;
+        var testPresets = {
+            residential: { tags: { highway: 'residential' }, geometry: ['line'] },
+            park: { tags: { leisure: 'park' }, geometry: ['point', 'area'] },
+            bench: { tags: { amenity: 'bench' }, geometry: ['point', 'line'] }
+        };
+
+        it('addablePresetIDs is initially null', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+                expect(presets.addablePresetIDs()).to.be.null;
+                done();
+            });
         });
 
-        it('can set and get addablePresetIDs', function () {
-            var presets = iD.coreContext().init().presets();
-            var ids = new Set(['point']);   // can only add points
-            presets.addablePresetIDs(ids);
+        it('can set and get addablePresetIDs', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
 
-            expect(presets.item('point').addable()).to.be.true;
-            expect(presets.item('line').addable()).to.be.false;
-            expect(presets.addablePresetIDs()).to.eql(ids);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
 
-            presets.addablePresetIDs(null);
-            expect(presets.item('point').addable()).to.be.true;
-            expect(presets.item('line').addable()).to.be.true;
+                var ids = new Set(['residential']);   // can only add preset with this ID
+                presets.addablePresetIDs(ids);
+
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.false;
+                expect(presets.addablePresetIDs()).to.eql(ids);
+
+                presets.addablePresetIDs(null);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
+                done();
+            });
+        });
+
+        it('ignores invalid IDs in addablePresetIDs', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
+                var ids = new Set([null, undefined, '', 'garbage', 'residential']);   // can only add preset with these IDs
+                presets.addablePresetIDs(ids);
+
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.false;
+                expect(presets.addablePresetIDs()).to.eql(ids);
+
+                presets.addablePresetIDs(null);
+                expect(presets.item(null)).to.eql(undefined);
+                expect(presets.item(undefined)).to.eql(undefined);
+                expect(presets.item('')).to.eql(undefined);
+                expect(presets.item('garbage')).to.eql(undefined);
+                expect(presets.item('residential').addable()).to.be.true;
+                expect(presets.item('park').addable()).to.be.true;
+
+                done();
+            });
+        });
+
+        it('addablePresetIDs are default presets', function (done) {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            presets.ensureLoaded().then(function() {
+                var ids = new Set(['bench', 'residential']);   // can only add presets with these IDs
+                presets.addablePresetIDs(ids);
+
+                var areaDefaults = presets.defaults('area', 10).collection;
+                expect(areaDefaults.length).to.eql(0);
+
+                var pointDefaults = presets.defaults('point', 10).collection;
+                expect(pointDefaults.length).to.eql(1);
+                expect(pointDefaults[0].id).to.eql('bench');
+
+                var lineDefaults = presets.defaults('line', 10).collection;
+                expect(lineDefaults.length).to.eql(2);
+                expect(lineDefaults[0].id).to.eql('bench');
+                expect(lineDefaults[1].id).to.eql('residential');
+
+                done();
+            });
         });
     });
 
@@ -204,7 +281,7 @@ describe('iD.presetIndex', function () {
         it('builds presets from provided', function () {
             var surfShop = iD.osmNode({ tags: { amenity: 'shop', 'shop:type': 'surf' } });
             var graph = iD.coreGraph([surfShop]);
-            var presets = iD.coreContext().init().presets();
+            var presets = iD.presetIndex();
             var presetData = {
                 presets: {
                     'amenity/shop/surf': {
@@ -224,7 +301,7 @@ describe('iD.presetIndex', function () {
             var firstStreetJetty = iD.osmNode({ tags: { man_made: 'jetty' } });
             var entities = [surfShop, firstStreetJetty];
             var graph = iD.coreGraph(entities);
-            var presets = iD.coreContext().init().presets();
+            var presets = iD.presetIndex();
             var presetData = {
                 presets: {
                     'amenity/shop/surf': {
@@ -271,39 +348,39 @@ describe('iD.presetIndex', function () {
         };
 
         it('prefers building to multipolygon', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
             var relation = iD.osmRelation({ tags: { type: 'multipolygon', building: 'yes' } });
             var graph = iD.coreGraph([relation]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 var match = presets.match(relation, graph);
                 expect(match.id).to.eql('building');
                 done();
-            }, 20);
+            });
         });
 
         it('prefers building to address', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
             var way = iD.osmWay({ tags: { area: 'yes', building: 'yes', 'addr:housenumber': '1234' } });
             var graph = iD.coreGraph([way]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 var match = presets.match(way, graph);
                 expect(match.id).to.eql('building');
                 done();
-            }, 20);
+            });
         });
 
         it('prefers pedestrian to area', function (done) {
-            iD.data.preset_presets = testPresets;
-            var presets = iD.coreContext().init().presets();
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
             var way = iD.osmWay({ tags: { area: 'yes', highway: 'pedestrian' } });
             var graph = iD.coreGraph([way]);
-            window.setTimeout(function() {
+            presets.ensureLoaded().then(function() {
                 var match = presets.match(way, graph);
                 expect(match.id).to.eql('highway/pedestrian_area');
                 done();
-            }, 20);
+            });
         });
     });
 
@@ -343,14 +420,14 @@ describe('iD.presetIndex', function () {
             var graph = iD.coreGraph([surfShop]);
             var url = 'https://fakemaprules.io/fake.json';
 
-            // no exernal presets yet
-            expect(iD.coreContext().init().presets().match(surfShop, graph).id).to.eql('point');
+            // no external presets yet
+            expect(iD.presetIndex().match(surfShop, graph).id).to.eql('point');
 
             // reset graph...
             graph = iD.coreGraph([surfShop]);
 
             // add the validations query param...
-            iD.coreContext().init().presets().fromExternal(url, function (externalPresets) {
+            iD.presetIndex().fromExternal(url, function (externalPresets) {
                 expect(externalPresets.match(surfShop, graph).id).to.eql('8bc64d6d');
             });
 
@@ -363,7 +440,7 @@ describe('iD.presetIndex', function () {
         it('makes only the external presets initially addable', function () {
             var url = 'https://fakemaprules.io/fake.json';
 
-            iD.coreContext().init().presets().fromExternal(url, function(externalPresets) {
+            iD.presetIndex().fromExternal(url, function(externalPresets) {
                 var external = externalPresets.collection.reduce(function(presets, preset) {
                     if (!preset.hasOwnProperty('members') && preset.addable()) {
                         presets.push(preset.id);

@@ -37,7 +37,7 @@ Object.assign(osmNote.prototype, {
         }
 
         if (!this.id) {
-            this.id = osmNote.id() + '';  // as string
+            this.id = osmNote.id().toString();
         }
 
         return this;

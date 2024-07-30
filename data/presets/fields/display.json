@@ -1,6 +1,0 @@
-{
-    "key": "display",
-    "type": "combo",
-    "label": "Display",
-    "options": ["analog", "digital", "sundial", "unorthodox"]
-}

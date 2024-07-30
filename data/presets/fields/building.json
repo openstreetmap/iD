@@ -1,8 +1,0 @@
-{
-    "key": "building",
-    "type": "combo",
-    "label": "Building",
-    "terms": [
-        "structure"
-    ]
-}

@@ -3,6 +3,7 @@ import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
+import { presetManager } from '../presets';
 
 export function svgPoints(projection, context) {
 
@@ -118,10 +119,10 @@ export function svgPoints(projection, context) {
 
         enter
             .append('use')
-            .attr('transform', 'translate(-5, -19)')
+            .attr('transform', 'translate(-5.5, -20)')
             .attr('class', 'icon')
-            .attr('width', '11px')
-            .attr('height', '11px');
+            .attr('width', '12px')
+            .attr('height', '12px');
 
         groups = groups
             .merge(enter)
@@ -141,15 +142,9 @@ export function svgPoints(projection, context) {
         groups.select('.stroke');   // propagate bound data
         groups.select('.icon')      // propagate bound data
             .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, graph);
+                var preset = presetManager.match(entity, graph);
                 var picon = preset && preset.icon;
-
-                if (!picon) {
-                    return '';
-                } else {
-                    var isMaki = /^maki-/.test(picon);
-                    return '#' + picon + (isMaki ? '-11' : '');
-                }
+                return picon ? '#' + picon : '';
             });
 
 

@@ -1,6 +1,0 @@
-{
-    "key": "traffic_signals",
-    "type": "combo",
-    "label": "Type",
-    "default": "signal"
-}

@@ -1,0 +1,68 @@
+name: 'iD Editor: Bug'
+description: You found an issue with iD Editor on openstreetmap.org/edit.
+# title:
+# labels:
+# assignees:
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: Please share the URL where the issue can be seen.
+      placeholder: https://www.openstreetmap.org/edit#map=…
+    validations:
+      required: false
+  - type: textarea
+    id: steps-reproduce
+    attributes:
+      label: How to reproduce the issue?
+      description: Please share the steps to reproduce the issue.
+      placeholder: 1. …, 2. …, 3. …
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Screenshot(s) or anything else?
+      description: Please add screenshots or additional information to help us understand your issue.
+      placeholder:
+    validations:
+      required: false
+  - type: dropdown
+    id: environment-variant
+    attributes:
+      label: Which deployed environments do you see the issue in?
+      description: "If possible, please test this issue in the development version (here: https://ideditor.netlify.app) as well, to make sure it is not already fixed."
+      multiple: true
+      options:
+        - Released version at openstreetmap.org/edit
+        - Development version at ideditor.netlify.app
+        - RapiD version at mapwith.ai/rapid
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: What version numbers does this issue effect?
+      description: This can be found in the bottom right corner, next to the 'Help translate' button.
+      placeholder: "For example: 2.20.3, 2.21.0, etc."
+    validations:
+      required: false
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: Which browsers are you seeing this problem on?
+      multiple: true
+      options:
+        - Chrome
+        - Firefox
+        - Microsoft Edge
+        - Opera
+        - Safari
+        - Vivaldi
+        - Other (please specify)
+    validations:
+      required: false

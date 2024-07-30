@@ -38,7 +38,7 @@
     pointer-events: none;
 }
 
-.lasso #map {
+.lasso .main-map {
     pointer-events: visibleStroke;
 }
 
@@ -65,6 +65,17 @@
     stroke-linejoin: round;
 }
 
+.ideditor[pointer='pen'] .way.target {
+    stroke-width: 18;
+}
+.ideditor[pointer='touch'] .way.target {
+    stroke-width: 32;
+}
+.ideditor[pointer='touch'] .node.vertex.target {
+    pointer-events: painted;
+    stroke: currentColor;
+    stroke-width: 10;
+}
 
 /* `.target-nope` objects are explicitly forbidden to join to */
 .surface:not(.nope-disabled) .node.target.target-nope,
@@ -132,8 +143,8 @@ g.point.selected .shadow {
 g.point ellipse.stroke {
     display: none;
 }
-.mode-drag-note g.note.active ellipse.stroke,
-.mode-drag-node g.point.active ellipse.stroke {
+.ideditor.mode-drag-note g.note.active ellipse.stroke,
+.ideditor.mode-drag-node g.point.active ellipse.stroke {
     display: block;
 }
 
@@ -245,9 +256,7 @@ text.pointlabel {
     font-size: 12px;
     font-weight: bold;
     fill: #333;
-    -webkit-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
-    -moz-transition: opacity 100ms linear;
 }
 
 /* Opera doesn't support dominant-baseline. See #715 */

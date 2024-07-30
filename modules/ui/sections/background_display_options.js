@@ -1,28 +1,24 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
-import { t, textDirection } from '../../util/locale';
+import { prefs } from '../../core/preferences';
+import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
-import { utilDetect } from '../../util/detect';
 
 
 export function uiSectionBackgroundDisplayOptions(context) {
 
     var section = uiSection('background-display-options', context)
-        .title(t('background.display_options'))
+        .label(() => t.append('background.display_options'))
         .disclosureContent(renderDisclosureContent);
 
-    var _detected = utilDetect();
-    var _storedOpacity = context.storage('background-opacity');
-    var _minVal = 0.25;
-    var _maxVal = _detected.cssfilters ? 2 : 1;
+    var _storedOpacity = prefs('background-opacity');
+    var _minVal = 0;
+    var _maxVal = 3;
 
-    var _sliders = _detected.cssfilters
-        ? ['brightness', 'contrast', 'saturation', 'sharpness']
-        : ['brightness'];
+    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
 
     var _options = {
         brightness: (_storedOpacity !== null ? (+_storedOpacity) : 1),
@@ -36,17 +32,13 @@ export function uiSectionBackgroundDisplayOptions(context) {
     }
 
     function updateValue(d, val) {
-        if (!val && d3_event && d3_event.target) {
-            val = d3_event.target.value;
-        }
-
         val = clamp(val, _minVal, _maxVal);
 
         _options[d] = val;
         context.background()[d](val);
 
         if (d === 'brightness') {
-            context.storage('background-opacity', val);
+            prefs('background-opacity', val);
         }
 
         section.reRender();
@@ -64,46 +56,54 @@ export function uiSectionBackgroundDisplayOptions(context) {
         var slidersEnter = containerEnter.selectAll('.display-control')
             .data(_sliders)
             .enter()
-            .append('div')
+            .append('label')
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .append('h5')
-            .text(function(d) { return t('background.' + d); })
+            .html(function(d) { return t.html('background.' + d); })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
 
-        slidersEnter
+        var sildersControlEnter = slidersEnter
+            .append('div')
+            .attr('class', 'control-wrap');
+
+        sildersControlEnter
             .append('input')
             .attr('class', function(d) { return 'display-option-input display-option-input-' + d; })
             .attr('type', 'range')
             .attr('min', _minVal)
             .attr('max', _maxVal)
             .attr('step', '0.05')
-            .on('input', function(d) {
+            .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
+                if (!val && d3_event && d3_event.target) {
+                    val = d3_event.target.value;
+                }
                 updateValue(d, val);
             });
 
-        slidersEnter
+        sildersControlEnter
             .append('button')
-            .attr('title', t('background.reset'))
+            .attr('title', function(d) { return `${t('background.reset')} ${t('background.' + d)}`; })
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
-            .on('click', function(d) {
+            .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
                 updateValue(d, 1);
             })
-            .call(svgIcon('#iD-icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
+            .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
         // reset all button
         containerEnter
             .append('a')
             .attr('class', 'display-option-resetlink')
+            .attr('role', 'button')
             .attr('href', '#')
-            .text(t('background.reset_all'))
-            .on('click', function() {
+            .call(t.append('background.reset_all'))
+            .on('click', function(d3_event) {
+                d3_event.preventDefault();
                 for (var i = 0; i < _sliders.length; i++) {
-                    updateValue(_sliders[i],1);
+                    updateValue(_sliders[i], 1);
                 }
             });
 

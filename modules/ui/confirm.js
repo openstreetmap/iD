@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { uiModal } from './modal';
 
 
@@ -27,7 +27,7 @@ export function uiConfirm(selection) {
             .on('click.confirm', function() {
                 modalSelection.remove();
             })
-            .text(t('confirm.okay'))
+            .call(t.append('confirm.okay'))
             .node()
             .focus();
 

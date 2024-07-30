@@ -1,5 +1,4 @@
 import {
-    event as d3_event,
     select as d3_select
 } from 'd3-selection';
 
@@ -8,7 +7,7 @@ import { behaviorHover } from '../behavior/hover';
 import { behaviorLasso } from '../behavior/lasso';
 import { behaviorSelect } from '../behavior/select';
 
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { services } from '../services';
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
@@ -114,7 +113,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
 
 
         // class the error as selected, or return to browse mode if the error is gone
-        function selectError(drawn) {
+        function selectError(d3_event, drawn) {
             if (!checkSelectedID()) return;
 
             var selection = context.surface()
@@ -124,7 +123,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
                 // Return to browse mode if selected DOM elements have
                 // disappeared because the user moved them out of view..
                 var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
-                if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
+                if (drawn && source && (source.type === 'pointermove' || source.type === 'mousemove' || source.type === 'touchmove')) {
                     context.enter(modeBrowse(context));
                 }
 
@@ -137,7 +136,7 @@ export function modeSelectError(context, selectedErrorID, selectedErrorService) 
         }
 
         function esc() {
-            if (d3_select('.combobox').size()) return;
+            if (context.container().select('.combobox').size()) return;
             context.enter(modeBrowse(context));
         }
     };

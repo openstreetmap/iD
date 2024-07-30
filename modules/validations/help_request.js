@@ -1,4 +1,4 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
@@ -25,12 +25,14 @@ export function validationHelpRequest(context) {
             severity: 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t('issues.fixme_tag.message', { feature: utilDisplayLabel(entity, context) }) : '';
+                return entity ? t.append('issues.fixme_tag.message', {
+                    feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
+                }) : '';
             },
             dynamicFixes: function() {
                 return [
                     new validationIssueFix({
-                        title: t('issues.fix.address_the_concern.title')
+                        title: t.append('issues.fix.address_the_concern.title')
                     })
                 ];
             },
@@ -44,7 +46,7 @@ export function validationHelpRequest(context) {
                 .enter()
                 .append('div')
                 .attr('class', 'issue-reference')
-                .text(t('issues.fixme_tag.reference'));
+                .call(t.append('issues.fixme_tag.reference'));
         }
     };
 

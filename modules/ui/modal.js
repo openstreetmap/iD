@@ -1,5 +1,6 @@
-import { event as d3_event, select as d3_select } from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
+import { t } from './../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { utilKeybinding } from '../util';
 
@@ -40,8 +41,13 @@ export function uiModal(selection, blocking) {
     .append('div')
     .attr('class', 'modal fillL');
 
+  modal
+    .append('input')
+    .attr('class', 'keytrap keytrap-first')
+    .on('focus.keytrap', moveFocusToLast);
+
   if (!blocking) {
-    shaded.on('click.remove-modal', () => {
+    shaded.on('click.remove-modal', (d3_event) => {
       if (d3_event.target === this) {
         shaded.close();
       }
@@ -50,6 +56,7 @@ export function uiModal(selection, blocking) {
     modal
       .append('button')
       .attr('class', 'close')
+      .attr('title', t('icons.close'))
       .on('click', shaded.close)
       .call(svgIcon('#iD-icon-close'));
 
@@ -65,6 +72,11 @@ export function uiModal(selection, blocking) {
     .append('div')
     .attr('class', 'content');
 
+  modal
+    .append('input')
+    .attr('class', 'keytrap keytrap-last')
+    .on('focus.keytrap', moveFocusToFirst);
+
   if (animate) {
     shaded.transition().style('opacity', 1);
   } else {
@@ -72,4 +84,30 @@ export function uiModal(selection, blocking) {
   }
 
   return shaded;
+
+
+  function moveFocusToFirst() {
+    let node = modal
+      // there are additional rules about what's focusable, but this suits our purposes
+      .select('a, button, input:not(.keytrap), select, textarea')
+      .node();
+
+    if (node) {
+      node.focus();
+    } else {
+      d3_select(this).node().blur();
+    }
+  }
+
+  function moveFocusToLast() {
+    let nodes = modal
+      .selectAll('a, button, input:not(.keytrap), select, textarea')
+      .nodes();
+
+    if (nodes.length) {
+      nodes[nodes.length - 1].focus();
+    } else {
+      d3_select(this).node().blur();
+    }
+  }
 }

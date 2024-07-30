@@ -1,16 +1,14 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
-    customEvent as d3_customEvent,
-    event as d3_event,
-    mouse as d3_mouse,
     select as d3_select,
     selection as d3_selection
 } from 'd3-selection';
 
+import { geoVecLength } from '../geo';
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
-import { utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
+import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
 
 
 /*
@@ -30,11 +28,17 @@ import { utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
 
 export function behaviorDrag() {
     var dispatch = d3_dispatch('start', 'move', 'end');
+
+    // see also behaviorSelect
+    var _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
+    var _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
+
     var _origin = null;
     var _selector = '';
-    var _event;
-    var _target;
+    var _targetNode;
+    var _targetEntity;
     var _surface;
+    var _pointerId;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -50,36 +54,28 @@ export function behaviorDrag() {
         };
 
 
-    function d3_eventCancel() {
-        d3_event.stopPropagation();
-        d3_event.preventDefault();
-    }
+    function pointerdown(d3_event) {
 
+        if (_pointerId) return;
 
-    function eventOf(thiz, argumentz) {
-        return function(e1) {
-            e1.target = behavior;
-            d3_customEvent(e1, dispatch.apply, dispatch, [e1.type, thiz, argumentz]);
-        };
-    }
+        _pointerId = d3_event.pointerId || 'mouse';
 
+        _targetNode = this;
 
-    function pointerdown() {
-        _target = this;
-        _event = eventOf(_target, arguments);
+        // only force reflow once per drag
+        var pointerLocGetter = utilFastMouse(_surface || _targetNode.parentNode);
 
-        var eventTarget = d3_event.target;
         var offset;
-        var startOrigin = point();
+        var startOrigin = pointerLocGetter(d3_event);
         var started = false;
         var selectEnable = d3_event_userSelectSuppress();
 
         d3_select(window)
             .on(_pointerPrefix + 'move.drag', pointermove)
-            .on(_pointerPrefix + 'up.drag', pointerup, true);
+            .on(_pointerPrefix + 'up.drag pointercancel.drag', pointerup, true);
 
         if (_origin) {
-            offset = _origin.apply(_target, arguments);
+            offset = _origin.call(_targetNode, _targetEntity);
             offset = [offset[0] - startOrigin[0], offset[1] - startOrigin[1]];
         } else {
             offset = [0, 0];
@@ -88,59 +84,51 @@ export function behaviorDrag() {
         d3_event.stopPropagation();
 
 
-        function point() {
-            var p = _surface || _target.parentNode;
-            return d3_mouse(p);
-        }
+        function pointermove(d3_event) {
+            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
 
-
-        function pointermove() {
-            var p = point();
-            var dx = p[0] - startOrigin[0];
-            var dy = p[1] - startOrigin[1];
-
-            if (dx === 0 && dy === 0)
-                return;
-
-            startOrigin = p;
-            d3_eventCancel();
+            var p = pointerLocGetter(d3_event);
 
             if (!started) {
+                var dist = geoVecLength(startOrigin,  p);
+                var tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
+                // don't start until the drag has actually moved somewhat
+                if (dist < tolerance) return;
+
                 started = true;
-                _event({ type: 'start' });
+                dispatch.call('start', this, d3_event, _targetEntity);
+
+            // Don't send a `move` event in the same cycle as `start` since dragging
+            // a midpoint will convert the target to a node.
             } else {
-                _event({
-                    type: 'move',
-                    point: [p[0] + offset[0],  p[1] + offset[1]],
-                    delta: [dx, dy]
-                });
+
+                startOrigin = p;
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
+
+                var dx = p[0] - startOrigin[0];
+                var dy = p[1] - startOrigin[1];
+                dispatch.call('move', this, d3_event, _targetEntity, [p[0] + offset[0],  p[1] + offset[1]], [dx, dy]);
             }
         }
 
 
-        function pointerup() {
-            if (started) {
-                _event({ type: 'end' });
+        function pointerup(d3_event) {
+            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
 
-                d3_eventCancel();
-                if (d3_event.target === eventTarget) {
-                    d3_select(window)
-                        .on('click.drag', click, true);
-                }
+            _pointerId = null;
+
+            if (started) {
+                dispatch.call('end', this, d3_event, _targetEntity);
+
+                d3_event.preventDefault();
             }
 
             d3_select(window)
                 .on(_pointerPrefix + 'move.drag', null)
-                .on(_pointerPrefix + 'up.drag', null);
+                .on(_pointerPrefix + 'up.drag pointercancel.drag', null);
 
             selectEnable();
-        }
-
-
-        function click() {
-            d3_eventCancel();
-            d3_select(window)
-                .on('click.drag', null);
         }
     }
 
@@ -150,17 +138,17 @@ export function behaviorDrag() {
         var delegate = pointerdown;
 
         if (_selector) {
-            delegate = function() {
+            delegate = function(d3_event) {
                 var root = this;
                 var target = d3_event.target;
                 for (; target && target !== root; target = target.parentNode) {
                     var datum = target.__data__;
 
-                    var entity = datum instanceof osmNote ? datum
+                    _targetEntity = datum instanceof osmNote ? datum
                         : datum && datum.properties && datum.properties.entity;
 
-                    if (entity && target[matchesSelector](_selector)) {
-                        return pointerdown.call(target, entity);
+                    if (_targetEntity && target[matchesSelector](_selector)) {
+                        return pointerdown.call(target, d3_event);
                     }
                 }
             };
@@ -194,22 +182,28 @@ export function behaviorDrag() {
     behavior.cancel = function() {
         d3_select(window)
             .on(_pointerPrefix + 'move.drag', null)
-            .on(_pointerPrefix + 'up.drag', null);
+            .on(_pointerPrefix + 'up.drag pointercancel.drag', null);
         return behavior;
     };
 
 
-    behavior.target = function() {
-        if (!arguments.length) return _target;
-        _target = arguments[0];
-        _event = eventOf(_target, Array.prototype.slice.call(arguments, 1));
+    behavior.targetNode = function(_) {
+        if (!arguments.length) return _targetNode;
+        _targetNode = _;
         return behavior;
     };
 
 
-    behavior.surface = function() {
+    behavior.targetEntity = function(_) {
+        if (!arguments.length) return _targetEntity;
+        _targetEntity = _;
+        return behavior;
+    };
+
+
+    behavior.surface = function(_) {
         if (!arguments.length) return _surface;
-        _surface = arguments[0];
+        _surface = _;
         return behavior;
     };
 

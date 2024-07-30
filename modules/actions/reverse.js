@@ -42,6 +42,13 @@ export function actionReverse(entityID, options) {
         forwards: 'backward',
         backwards: 'forward',
     };
+    // tags whose values should not be reversed when certain other tags are also present
+    // https://github.com/openstreetmap/iD/issues/10128
+    const valueReplacementsExceptions = {
+        'side': [
+            {highway: 'cyclist_waiting_aid'}
+        ]
+    };
     var roleReplacements = {
         forward: 'backward',
         backward: 'forward',
@@ -85,7 +92,7 @@ export function actionReverse(entityID, options) {
     }
 
 
-    function reverseValue(key, value, includeAbsolute) {
+    function reverseValue(key, value, includeAbsolute, allTags) {
         if (ignoreKey.test(key)) return value;
 
         // Turn lanes are left/right to key (not way) direction - #5674
@@ -99,19 +106,33 @@ export function actionReverse(entityID, options) {
             return onewayReplacements[value] || value;
 
         } else if (includeAbsolute && directionKey.test(key)) {
-            if (compassReplacements[value]) return compassReplacements[value];
+            return value.split(';').map(value => {
+                if (compassReplacements[value]) return compassReplacements[value];
 
-            var degrees = parseFloat(value);
-            if (typeof degrees === 'number' && !isNaN(degrees)) {
-                if (degrees < 180) {
-                    degrees += 180;
+                var degrees = Number(value);
+                if (isFinite(degrees)) {
+                    if (degrees < 180) {
+                        degrees += 180;
+                    } else {
+                        degrees -= 180;
+                    }
+                    return degrees.toString();
                 } else {
-                    degrees -= 180;
+                    return valueReplacements[value] || value;
                 }
-                return degrees.toString();
-            }
+            }).join(';');
         }
 
+        if (valueReplacementsExceptions[key] && valueReplacementsExceptions[key].some(exceptionTags =>
+            Object.keys(exceptionTags).every(k => {
+                const v = exceptionTags[k];
+                return allTags[k] && (v === '*' || allTags[k] === v);
+            })
+        )) {
+            // don't reverse, for example, side=left/right on highway=cyclist_waiting_aid features
+            // see https://github.com/openstreetmap/iD/issues/10128
+            return value;
+        }
         return valueReplacements[value] || value;
     }
 
@@ -124,7 +145,7 @@ export function actionReverse(entityID, options) {
 
             var tags = {};
             for (var key in node.tags) {
-                tags[reverseKey(key)] = reverseValue(key, node.tags[key], node.id === entityID);
+                tags[reverseKey(key)] = reverseValue(key, node.tags[key], node.id === entityID, node.tags);
             }
             graph = graph.replace(node.update({tags: tags}));
         }
@@ -138,7 +159,7 @@ export function actionReverse(entityID, options) {
         var role;
 
         for (var key in way.tags) {
-            tags[reverseKey(key)] = reverseValue(key, way.tags[key]);
+            tags[reverseKey(key)] = reverseValue(key, way.tags[key], false, way.tags);
         }
 
         graph.parentRelations(way).forEach(function(relation) {
@@ -171,7 +192,7 @@ export function actionReverse(entityID, options) {
 
         for (var key in entity.tags) {
             var value = entity.tags[key];
-            if (reverseKey(key) !== key || reverseValue(key, value, true) !== value) {
+            if (reverseKey(key) !== key || reverseValue(key, value, true, entity.tags) !== value) {
                 return false;
             }
         }

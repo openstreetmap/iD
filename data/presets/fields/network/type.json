@@ -1,8 +1,0 @@
-{
-    "key": "network:type",
-    "type": "combo",
-    "label": "Network Type",
-    "prerequisiteTag": {
-        "key": "network"
-    }
-}

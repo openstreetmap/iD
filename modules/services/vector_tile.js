@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import deepEqual from 'fast-deep-equal';
 import turf_bboxClip from '@turf/bbox-clip';
 import stringify from 'fast-json-stable-stringify';
-import * as martinez from 'martinez-polygon-clipping';
+import polygonClipping from 'polygon-clipping';
 
 import Protobuf from 'pbf';
 import vt from '@mapbox/vector-tile';
@@ -40,9 +40,10 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     geometry.coordinates = [geometry.coordinates];
                 }
 
+                var isClipped = false;
+
                 // Clip to tile bounds
                 if (geometry.type === 'MultiPolygon') {
-                    var isClipped = false;
                     var featureClip = turf_bboxClip(feature, tile.extent.rectangle());
                     if (!deepEqual(feature.geometry, featureClip.geometry)) {
                         // feature = featureClip;
@@ -65,13 +66,13 @@ function vtToGeoJSON(data, tile, mergeCache) {
                     var merged = mergeCache[propertyhash];
                     if (merged && merged.length) {
                         var other = merged[0];
-                        var coords = martinez.union(
+                        var coords = polygonClipping.union(
                             feature.geometry.coordinates,
                             other.geometry.coordinates
                         );
 
                         if (!coords || !coords.length) {
-                            continue;  // something failed in martinez union
+                            continue;  // something failed in polygon union
                         }
 
                         merged.push(feature);

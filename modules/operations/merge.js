@@ -1,6 +1,5 @@
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 
-import { actionChangePreset } from '../actions/change_preset';
 import { actionJoin } from '../actions/join';
 import { actionMerge } from '../actions/merge';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -8,110 +7,92 @@ import { actionMergePolygon } from '../actions/merge_polygon';
 
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
+import { presetManager } from '../presets';
 
+export function operationMerge(context, selectedIDs) {
 
-export function operationMerge(selectedIDs, context) {
+    var _action = getAction();
 
-    function updatePresetTags(newGraph, ids) {
-        var id = ids[0];
-        var newEntity = newGraph.hasEntity(id);
+    function getAction() {
+        // prefer a non-disabled action first
+        var join = actionJoin(selectedIDs);
+        if (!join.disabled(context.graph())) return join;
 
-        if (!newEntity) return;
-        var newPreset = context.presets().match(newEntity, newGraph);
-        context.replace(actionChangePreset(id, null, newPreset), operation.annotation());
+        var merge = actionMerge(selectedIDs);
+        if (!merge.disabled(context.graph())) return merge;
+
+        var mergePolygon = actionMergePolygon(selectedIDs);
+        if (!mergePolygon.disabled(context.graph())) return mergePolygon;
+
+        var mergeNodes = actionMergeNodes(selectedIDs);
+        if (!mergeNodes.disabled(context.graph())) return mergeNodes;
+
+        // otherwise prefer an action with an interesting disabled reason
+        if (join.disabled(context.graph()) !== 'not_eligible') return join;
+        if (merge.disabled(context.graph()) !== 'not_eligible') return merge;
+        if (mergePolygon.disabled(context.graph()) !== 'not_eligible') return mergePolygon;
+
+        return mergeNodes;
     }
 
-
-    var join = actionJoin(selectedIDs);
-    var merge = actionMerge(selectedIDs);
-    var mergePolygon = actionMergePolygon(selectedIDs);
-    var mergeNodes = actionMergeNodes(selectedIDs);
-
-
     var operation = function() {
-        var doUpdateTags;
-        var action;
 
-        if (!join.disabled(context.graph())) {
-            doUpdateTags = false;
-            action = join;
-        } else if (!merge.disabled(context.graph())) {
-            doUpdateTags = true;
-            action = merge;
-        } else if (!mergePolygon.disabled(context.graph())) {
-            doUpdateTags = false;
-            action = mergePolygon;
-        } else {
-            doUpdateTags = true;
-            action = mergeNodes;
-        }
+        if (operation.disabled()) return;
 
-        context.perform(action, operation.annotation());
-
-        var ids = selectedIDs.filter(function(id) {
-            var entity = context.hasEntity(id);
-            return entity && entity.type !== 'node';
-        });
-
-        // if we merged tags, rematch preset to update tags if necessary (#3851)
-        if (doUpdateTags) {
-            updatePresetTags(context.graph(), ids);
-        }
+        context.perform(_action, operation.annotation());
 
         context.validator().validate();
-        context.enter(modeSelect(context, ids));
-    };
 
+        var resultIDs = selectedIDs.filter(context.hasEntity);
+        if (resultIDs.length > 1) {
+            var interestingIDs = resultIDs.filter(function(id) {
+                return context.entity(id).hasInterestingTags();
+            });
+            if (interestingIDs.length) resultIDs = interestingIDs;
+        }
+        context.enter(modeSelect(context, resultIDs));
+    };
 
     operation.available = function() {
         return selectedIDs.length >= 2;
     };
 
-
     operation.disabled = function() {
-        return join.disabled(context.graph()) &&
-            merge.disabled(context.graph()) &&
-            mergePolygon.disabled(context.graph()) &&
-            mergeNodes.disabled(context.graph());
-    };
+        var actionDisabled = _action.disabled(context.graph());
+        if (actionDisabled) return actionDisabled;
 
+        var osm = context.connection();
+        if (osm &&
+            _action.resultingWayNodesLength &&
+            _action.resultingWayNodesLength(context.graph()) > osm.maxWayNodes()) {
+            return 'too_many_vertices';
+        }
+
+        return false;
+    };
 
     operation.tooltip = function() {
-        var j = join.disabled(context.graph());          // 'not_eligible', 'not_adjacent', 'restriction', 'conflicting_tags'
-        var m = merge.disabled(context.graph());         // 'not_eligible'
-        var p = mergePolygon.disabled(context.graph());  // 'not_eligible', 'incomplete_relation'
-        var n = mergeNodes.disabled(context.graph());    // 'not_eligible', 'relation', 'restriction'
-
-        // disabled for one of various reasons
-        if (j && m && p && n) {
-            if (j === 'restriction' || n === 'restriction') {
-                return t('operations.merge.restriction',
-                    { relation: context.presets().item('type/restriction').name() });
-
-            } else if (p === 'incomplete_relation') {
-                return t('operations.merge.incomplete_relation');
-
-            } else if (n === 'relation') {
-                return t('operations.merge.relation');
-
-            } else {
-                return t('operations.merge.' + j);
+        var disabled = operation.disabled();
+        if (disabled) {
+            if (disabled === 'conflicting_relations') {
+                return t.append('operations.merge.conflicting_relations');
             }
-
-        } else {
-            return t('operations.merge.description');
+            if (disabled === 'restriction' || disabled === 'connectivity') {
+                return t.append('operations.merge.damage_relation',
+                    { relation: presetManager.item('type/' + disabled).name() });
+            }
+            return t.append('operations.merge.' + disabled);
         }
+        return t.append('operations.merge.description');
     };
-
 
     operation.annotation = function() {
         return t('operations.merge.annotation', { n: selectedIDs.length });
     };
 
-
     operation.id = 'merge';
     operation.keys = [t('operations.merge.key')];
-    operation.title = t('operations.merge.title');
+    operation.title = t.append('operations.merge.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

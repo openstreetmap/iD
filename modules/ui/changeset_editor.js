@@ -1,11 +1,13 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
 
-import { t } from '../util/locale';
+import { presetManager } from '../presets';
+import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiCombobox} from './combobox';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
-import { utilArrayUniqBy, utilRebind, utilTriggerEvent } from '../util';
+import { utilArrayUniqBy, utilCleanOsmString, utilRebind, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
 
 
 export function uiChangesetEditor(context) {
@@ -27,18 +29,18 @@ export function uiChangesetEditor(context) {
 
         if (!_fieldsArr) {
             initial = true;
-            var presets = context.presets();
+            var presets = presetManager;
 
             _fieldsArr = [
                 uiField(context, presets.field('comment'), null, { show: true, revert: false }),
-                uiField(context, presets.field('source'), null, { show: false, revert: false }),
+                uiField(context, presets.field('source'), null, { show: true, revert: false }),
                 uiField(context, presets.field('hashtags'), null, { show: false, revert: false }),
             ];
 
             _fieldsArr.forEach(function(field) {
                 field
                     .on('change', function(t, onInput) {
-                        dispatch.call('change', field, t, onInput);
+                        dispatch.call('change', field, undefined, t, onInput);
                     });
             });
         }
@@ -54,7 +56,7 @@ export function uiChangesetEditor(context) {
 
 
         if (initial) {
-            var commentField = selection.select('#preset-input-comment');
+            var commentField = selection.select('.form-field-comment textarea');
             var commentNode = commentField.node();
 
             if (commentNode) {
@@ -84,10 +86,26 @@ export function uiChangesetEditor(context) {
             }
         }
 
-        // Add warning if comment mentions Google
-        var hasGoogle = _tags.comment.match(/google/i);
+        // Show warning(s) if comment mentions Google or comment length exceeds 255 chars
+        const warnings = [];
+        if (_tags.comment.match(/google/i)) {
+            warnings.push({
+                id: 'contains "google"',
+                msg: t.append('commit.google_warning'),
+                link: t('commit.google_warning_link')
+            });
+        }
+        const maxChars = context.maxCharsForTagValue();
+        const strLen = utilUnicodeCharsCount(utilCleanOsmString(_tags.comment, Number.POSITIVE_INFINITY));
+        if (strLen > maxChars || !true) {
+            warnings.push({
+                id: 'message too long',
+                msg: t.append('commit.changeset_comment_length_warning', { maxChars: maxChars }),
+            });
+        }
+
         var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
-            .data(hasGoogle ? [0] : []);
+            .data(warnings, d => d.id);
 
         commentWarning.exit()
             .transition()
@@ -96,23 +114,30 @@ export function uiChangesetEditor(context) {
             .remove();
 
         var commentEnter = commentWarning.enter()
-            .insert('div', '.tag-reference-body')
-            .attr('class', 'field-warning comment-warning')
+            .insert('div', '.comment-warning')
+            .attr('class', 'comment-warning field-warning')
             .style('opacity', 0);
 
         commentEnter
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
             .call(svgIcon('#iD-icon-alert', 'inline'))
-            .attr('href', t('commit.google_warning_link'))
-            .append('span')
-            .text(t('commit.google_warning'));
+            .append('span');
 
         commentEnter
             .transition()
             .duration(200)
             .style('opacity', 1);
+
+        commentWarning.merge(commentEnter).selectAll('div > span')
+            .text('')
+            .each(function(d) {
+                let selection = d3_select(this);
+                if (d.link) {
+                    selection = selection.append('a')
+                        .attr('target', '_blank')
+                        .attr('href', d.link);
+                }
+                selection.call(d.msg);
+            });
     }
 
 

@@ -1,9 +1,0 @@
-{
-    "key": "cuisine",
-    "type": "semiCombo",
-    "label": "Cuisines",
-    "terms": [
-        "fare",
-        "food types"
-    ]
-}

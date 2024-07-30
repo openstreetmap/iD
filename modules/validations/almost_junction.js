@@ -7,7 +7,7 @@ import {
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
-import { t } from '../util/locale';
+import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -52,17 +52,17 @@ export function validationAlmostJunction(context) {
         type,
         subtype: 'highway-highway',
         severity: 'warning',
-        message(context) {
+        message: function(context) {
           const entity1 = context.hasEntity(this.entityIds[0]);
           if (this.entityIds[0] === this.entityIds[2]) {
-            return entity1 ? t('issues.almost_junction.self.message', {
-              feature: utilDisplayLabel(entity1, context)
+            return entity1 ? t.append('issues.almost_junction.self.message', {
+              feature: utilDisplayLabel(entity1, context.graph())
             }) : '';
           } else {
             const entity2 = context.hasEntity(this.entityIds[2]);
-            return (entity1 && entity2) ? t('issues.almost_junction.message', {
-              feature: utilDisplayLabel(entity1, context),
-              feature2: utilDisplayLabel(entity2, context)
+            return (entity1 && entity2) ? t.append('issues.almost_junction.message', {
+              feature: utilDisplayLabel(entity1, context.graph()),
+              feature2: utilDisplayLabel(entity2, context.graph())
             }) : '';
           }
         },
@@ -88,8 +88,8 @@ export function validationAlmostJunction(context) {
     function makeFixes(context) {
       let fixes = [new validationIssueFix({
         icon: 'iD-icon-abutment',
-        title: t('issues.fix.connect_features.title'),
-        onClick(context) {
+        title: t.append('issues.fix.connect_features.title'),
+        onClick: function(context) {
           const annotation = t('issues.fix.connect_almost_junction.annotation');
           const [, endNodeId, crossWayId] = this.issue.entityIds;
           const midNode = context.entity(this.issue.data.midId);
@@ -135,8 +135,8 @@ export function validationAlmostJunction(context) {
         // node has no descriptive tags, suggest noexit fix
         fixes.push(new validationIssueFix({
           icon: 'maki-barrier',
-          title: t('issues.fix.tag_as_disconnected.title'),
-          onClick(context) {
+          title: t.append('issues.fix.tag_as_disconnected.title'),
+          onClick: function(context) {
             const nodeID = this.issue.entityIds[1];
             const tags = Object.assign({}, context.entity(nodeID).tags);
             tags.noexit = 'yes';
@@ -157,7 +157,7 @@ export function validationAlmostJunction(context) {
         .enter()
         .append('div')
         .attr('class', 'issue-reference')
-        .text(t('issues.almost_junction.highway-highway.reference'));
+        .call(t.append('issues.almost_junction.highway-highway.reference'));
     }
 
     function isExtendableCandidate(node, way) {
@@ -170,11 +170,11 @@ export function validationAlmostJunction(context) {
         return false;
       }
 
-      let occurences = 0;
+      let occurrences = 0;
       for (const index in way.nodes) {
         if (way.nodes[index] === node.id) {
-          occurences += 1;
-          if (occurences > 1) {
+          occurrences += 1;
+          if (occurrences > 1) {
             return false;
           }
         }
@@ -292,32 +292,32 @@ export function validationAlmostJunction(context) {
       const extTipLoc = geoVecInterp(midNode.loc, tipNode.loc, t);
 
       // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
-      const intersected = tree.intersects(queryExtent, graph);
-      for (let i = 0; i < intersected.length; i++) {
-        let way2 = intersected[i];
+      const segmentInfos = tree.waySegments(queryExtent, graph);
+      for (let i = 0; i < segmentInfos.length; i++) {
+        let segmentInfo = segmentInfos[i];
+
+        let way2 = graph.entity(segmentInfo.wayId);
 
         if (!isHighway(way2)) continue;
 
         if (!canConnectWays(way, way2)) continue;
 
-        for (let j = 0; j < way2.nodes.length - 1; j++) {
-          let nAid = way2.nodes[j],
-            nBid = way2.nodes[j + 1];
+        let nAid = segmentInfo.nodes[0],
+          nBid = segmentInfo.nodes[1];
 
-          if (nAid === tipNid || nBid === tipNid) continue;
+        if (nAid === tipNid || nBid === tipNid) continue;
 
-          let nA = graph.entity(nAid),
-            nB = graph.entity(nBid);
-          let crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
-          if (crossLoc) {
-            return {
-              mid: midNode,
-              node: tipNode,
-              wid: way2.id,
-              edge: [nA.id, nB.id],
-              cross_loc: crossLoc
-            };
-          }
+        let nA = graph.entity(nAid),
+          nB = graph.entity(nBid);
+        let crossLoc = geoLineIntersection([tipNode.loc, extTipLoc], [nA.loc, nB.loc]);
+        if (crossLoc) {
+          return {
+            mid: midNode,
+            node: tipNode,
+            wid: way2.id,
+            edge: [nA.id, nB.id],
+            cross_loc: crossLoc
+          };
         }
       }
       return null;

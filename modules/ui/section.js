@@ -14,7 +14,7 @@ export function uiSection(id, context) {
     var _content;
 
     var _disclosure;
-    var _title;
+    var _label;
     var _expandedByDefault = utilFunctor(true);
     var _disclosureContent;
     var _disclosureExpanded;
@@ -31,9 +31,9 @@ export function uiSection(id, context) {
         return section;
     };
 
-    section.title = function(val) {
-        if (!arguments.length) return _title;
-        _title = utilFunctor(val);
+    section.label = function(val) {
+        if (!arguments.length) return _label;
+        _label = utilFunctor(val);
         return section;
     };
 
@@ -113,7 +113,7 @@ export function uiSection(id, context) {
         if (_disclosureContent) {
             if (!_disclosure) {
                 _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault())
-                    .title(_title || '')
+                    .label(_label || '')
                     /*.on('toggled', function(expanded) {
                         if (expanded) { selection.node().parentNode.scrollTop += 200; }
                     })*/

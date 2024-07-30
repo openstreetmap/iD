@@ -10,9 +10,9 @@ describe('iD.svgAreas', function () {
 
 
     beforeEach(function () {
-        context = iD.coreContext().init();
+        context = iD.coreContext().assetPath('../dist/').init();
         d3.select(document.createElement('div'))
-            .attr('id', 'map')
+            .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         _surface = context.surface();
 
@@ -141,34 +141,6 @@ describe('iD.svgAreas', function () {
         var areas = [w, r];
 
         _surface.call(iD.svgAreas(projection, context), graph, areas, none);
-
-        expect(_surface.selectAll('.stroke').size()).to.equal(0);
-    });
-
-    it('renders fill for a multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, w, r]);
-
-        _surface.call(iD.svgAreas(projection, context), graph, [w, r], none);
-
-        expect(_surface.selectAll('.way.fill').size()).to.equal(0);
-        expect(_surface.selectAll('.relation.fill').size()).to.equal(1);
-        expect(_surface.select('.relation.fill').classed('tag-natural-wood')).to.be.true;
-    });
-
-    it('renders no strokes for a multipolygon with tags on the outer way', function() {
-        var a = iD.osmNode({loc: [1, 1]});
-        var b = iD.osmNode({loc: [2, 2]});
-        var c = iD.osmNode({loc: [3, 3]});
-        var w = iD.osmWay({tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
-        var r = iD.osmRelation({members: [{id: w.id, type: 'way'}], tags: {type: 'multipolygon'}});
-        var graph = iD.coreGraph([a, b, c, w, r]);
-
-        _surface.call(iD.svgAreas(projection, context), graph, [w, r], none);
 
         expect(_surface.selectAll('.stroke').size()).to.equal(0);
     });

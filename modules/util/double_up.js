@@ -1,10 +1,11 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { mouse as d3_mouse } from 'd3-selection';
 
+import { utilFastMouse } from './util';
 import { utilRebind } from './rebind';
 import { geoVecLength } from '../geo/vector';
 
-// a double-click / double-tap event detector with wider
+// A custom double-click / double-tap event detector that works on touch devices
+// if pointer events are supported. Falls back to default `dblclick` event.
 export function utilDoubleUp() {
 
     var dispatch = d3_dispatch('doubleUp');
@@ -20,33 +21,46 @@ export function utilDoubleUp() {
             geoVecLength(_pointer.startLoc, loc) <= _maxDistance;
     }
 
-    function pointerdown() {
-        // d3_mouse works since pointer events inherit from mouse events
-        var loc = d3_mouse(this);
+    function pointerdown(d3_event) {
 
+        // ignore right-click
+        if (d3_event.ctrlKey || d3_event.button === 2) return;
+
+        var loc = [d3_event.clientX, d3_event.clientY];
+
+        // Don't rely on pointerId here since it can change between pointerdown
+        // events on touch devices
         if (_pointer && !pointerIsValidFor(loc)) {
             // if this pointer is no longer valid, clear it so another can be started
             _pointer = undefined;
         }
+
         if (!_pointer) {
-            // don't rely on the pointerId since it can change between down events on touch devices
             _pointer = {
                 startLoc: loc,
                 startTime: new Date().getTime(),
-                upCount: 0
+                upCount: 0,
+                pointerId: d3_event.pointerId
             };
+        } else { // double down
+            _pointer.pointerId = d3_event.pointerId;
         }
     }
 
-    function pointerup() {
-        if (!_pointer) return;
+    function pointerup(d3_event) {
+
+        // ignore right-click
+        if (d3_event.ctrlKey || d3_event.button === 2) return;
+
+        if (!_pointer || _pointer.pointerId !== d3_event.pointerId) return;
 
         _pointer.upCount += 1;
 
         if (_pointer.upCount === 2) { // double up!
-            var loc = d3_mouse(this);
+            var loc = [d3_event.clientX, d3_event.clientY];
             if (pointerIsValidFor(loc)) {
-                dispatch.call('doubleUp', this, loc);
+                var locInThis = utilFastMouse(this)(d3_event);
+                dispatch.call('doubleUp', this, d3_event, locInThis);
             }
             // clear the pointer info in any case
             _pointer = undefined;
@@ -63,8 +77,8 @@ export function utilDoubleUp() {
         } else {
             // fallback to dblclick
             selection
-                .on('dblclick.doubleUp', function() {
-                    dispatch.call('doubleUp', this, d3_mouse(this));
+                .on('dblclick.doubleUp', function(d3_event) {
+                    dispatch.call('doubleUp', this, d3_event, utilFastMouse(this)(d3_event));
                 });
         }
     }

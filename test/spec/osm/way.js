@@ -359,6 +359,7 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
             expect(iD.osmWay({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).to.eql('barrier');
             expect(iD.osmWay({tags: { man_made: 'embankment' }}).sidednessIdentifier()).to.eql('man_made');
+            expect(iD.osmWay({tags: { 'abandoned:barrier': 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
         });
 
         it('returns null when tag does not have implied sidedness', function() {
@@ -366,6 +367,8 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({tags: { barrier: 'fence' }}).sidednessIdentifier()).to.be.null;
             expect(iD.osmWay({tags: { man_made: 'dyke' }}).sidednessIdentifier()).to.be.null;
             expect(iD.osmWay({tags: { highway: 'motorway' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.osmWay({tags: { 'demolished:highway': 'motorway' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.osmWay({tags: { 'not:natural': 'cliff' }}).sidednessIdentifier()).to.be.null;
         });
     });
 
@@ -1019,7 +1022,7 @@ describe('iD.osmWay', function() {
                 c = iD.osmNode({loc: [3, 4]}),
                 w = iD.osmWay({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id, a.id]}),
                 graph = iD.coreGraph([a, b, c, w]),
-                json = w.asGeoJSON(graph, true);
+                json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('Polygon');
             expect(json.coordinates).to.eql([[a.loc, b.loc, c.loc, a.loc]]);
@@ -1031,7 +1034,7 @@ describe('iD.osmWay', function() {
                 c = iD.osmNode({loc: [3, 4]}),
                 w = iD.osmWay({tags: {area: 'yes'}, nodes: [a.id, b.id, c.id]}),
                 graph = iD.coreGraph([a, b, c, w]),
-                json = w.asGeoJSON(graph, true);
+                json = w.asGeoJSON(graph);
 
             expect(json.type).to.equal('LineString');
             expect(json.coordinates).to.eql([a.loc, b.loc, c.loc]);

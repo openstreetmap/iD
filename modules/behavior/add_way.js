@@ -37,11 +37,5 @@ export function behaviorAddWay(context) {
     };
 
 
-    behavior.tail = function(text) {
-        draw.tail(text);
-        return behavior;
-    };
-
-
     return utilRebind(behavior, dispatch, 'on');
 }

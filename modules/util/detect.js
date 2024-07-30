@@ -1,14 +1,11 @@
-import { currentLocale, localeData, setTextDirection, setLanguageNames, setScriptNames } from './locale';
-import { utilStringQs } from './util';
 
 let _detected;
 
-export function utilDetect(force) {
-  if (_detected && !force) return _detected;
+export function utilDetect(refresh) {
+  if (_detected && !refresh) return _detected;
   _detected = {};
 
   const ua = navigator.userAgent;
-  const hash = utilStringQs(window.location.hash);
   let m = null;
 
   /* Browser */
@@ -50,20 +47,18 @@ export function utilDetect(force) {
 
   // detect other browser capabilities
   // Legacy Opera has incomplete svg style support. See #715
-  _detected.opera = (_detected.browser.toLowerCase() === 'opera' && parseFloat(_detected.version) < 15 );
+  _detected.opera = (_detected.browser.toLowerCase() === 'opera' && Number(_detected.version) < 15 );
 
   if (_detected.browser.toLowerCase() === 'msie') {
     _detected.ie = true;
     _detected.browser = 'Internet Explorer';
-    _detected.support = parseFloat(_detected.version) >= 11;
+    _detected.support = false;
   } else {
     _detected.ie = false;
     _detected.support = true;
   }
 
   _detected.filedrop = (window.FileReader && 'ondrop' in window);
-  _detected.download = !(_detected.ie || _detected.browser.toLowerCase() === 'edge');
-  _detected.cssfilters = !(_detected.ie || _detected.browser.toLowerCase() === 'edge');
 
 
   /* Platform */
@@ -81,59 +76,28 @@ export function utilDetect(force) {
     _detected.platform = 'Unknown';
   }
 
+  _detected.isMobileWebKit = (/\b(iPad|iPhone|iPod)\b/.test(ua) ||
+    // HACK: iPadOS 13+ requests desktop sites by default by using a Mac user agent,
+    // so assume any "mac" with multitouch is actually iOS
+    (navigator.platform === 'MacIntel' && 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 1)) &&
+    /WebKit/.test(ua) &&
+    !/Edge/.test(ua) &&
+    !window.MSStream;
 
-  /* Locale, Language */
-  // The locale and language specified in the url hash
-  if (hash.locale) {
-    _detected.hashLocale = hash.locale;
-    _detected.hashLanguage = hash.locale.split('-')[0];
-  }
 
-  // The locale and language specified by the user's browser
-  _detected.browserLocale = (navigator.language || navigator.userLanguage || 'en-US');
-  _detected.browserLanguage = _detected.browserLocale.split('-')[0];
+  /* Locale */
+  // An array of locales requested by the browser in priority order.
+  _detected.browserLocales = Array.from(new Set( // remove duplicates
+      [navigator.language]
+        .concat(navigator.languages || [])
+        .concat([
+            // old property for backwards compatibility
+            navigator.userLanguage
+        ])
+        // remove any undefined values
+        .filter(Boolean)
+    ));
 
-  // Search `navigator.languages` for a better locale.  Prefer the first language,
-  //   unless the second language is a culture-specific version of the first one, see #3842
-  if (navigator.languages && navigator.languages.length > 0) {
-    const code0 = navigator.languages[0];
-    const parts0 = code0.split('-');
-
-    _detected.browserLocale = code0;
-    _detected.browserLanguage = parts0[0];
-
-    if (navigator.languages.length > 1 && parts0.length === 1) {
-      const code1 = navigator.languages[1];
-      const parts1 = code1.split('-');
-
-      if (parts1[0] === parts0[0]) {
-        _detected.browserLocale = code1;
-      }
-    }
-  }
-
-  // The locale and language actually being used by iD.
-  // This can be changed at any time and is stored in the `currentLocale` export.
-  // So report those instead (except in the situation where 'en' might override 'en-US')
-  const current = currentLocale || 'en';
-  if (current === 'en') {
-    _detected.locale = _detected.hashLocale || _detected.browserLocale;
-    _detected.language = _detected.hashLanguage || _detected.browserLanguage;
-  } else {
-    _detected.locale = current;
-    _detected.language = current.split('-')[0];
-  }
-
-  // detect text direction
-  const lang = localeData[_detected.locale] || localeData[_detected.language];
-  if ((lang && lang.rtl) || (hash.rtl === 'true')) {
-    _detected.textDirection = 'rtl';
-  } else {
-    _detected.textDirection = 'ltr';
-  }
-  setTextDirection(_detected.textDirection);
-  setLanguageNames((lang && lang.languageNames) || {});
-  setScriptNames((lang && lang.scriptNames) || {});
 
   /* Host */
   const loc = window.top.location;
