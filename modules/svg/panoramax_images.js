@@ -10,7 +10,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     const imageMinZoom = 15;
     const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;
-    const maxOldestYear = 2010;
     let layer = d3_select(null);
     let _panoramax;
     let _viewerYaw = 0;
@@ -22,7 +21,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         svgPanoramaxImages.enabled = false;
         svgPanoramaxImages.initialized = true;
     }
-
 
     function getService() {
         if (services.panoramax && !_panoramax) {
@@ -160,13 +158,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return t;
     }
 
-
     function editOn() {
         layer.style('display', 'block');
     }
 
-
     function editOff() {
+        const service = getService();
+        service.hideViewer(context);
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
@@ -178,8 +176,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (image.sequence_id !== _selectedSequence) {
             _viewerYaw = 0;  // reset
         }
-
-        _selectedSequence = image.sequence_id;
 
         service
             .ensureViewerLoaded(context)
@@ -194,13 +190,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
     function mouseover(d3_event, image) {
         const service = getService();
-        if (service) service.setStyles(context, image);
+        if (service) service.setStyles(context, image, false);
     }
 
 
     function mouseout() {
         const service = getService();
-        if (service) service.setStyles(context, null);
+        if (service) service.setStyles(context, null, false);
     }
 
     async function update() {
@@ -213,8 +209,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
-
-        let oldestDate = (service ? service.getOldestDate() : null);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.id; });
