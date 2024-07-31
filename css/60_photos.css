@@ -90,8 +90,8 @@
     width: 100%;
     font-size: 10px;
     text-align: right;
-    line-height: 1.1em;
-    padding: 4px 2px;
+    line-height: 150%;
+    padding: 4px 8px;
     z-index: 10;
 }
 .photo-attribution-dual {
@@ -348,7 +348,7 @@ label.panoramax-hd {
 .panoramax-hd input[type="checkbox"] {
     width: 12px;
     height: 12px;
-    margin: 0 5px;
+    margin: 0 2px;
 }
 
 .slider-wrap {
@@ -366,6 +366,10 @@ label.panoramax-hd {
 
 
 /* Streetside Viewer (pannellum) */
+.ms-wrapper .photo-attribution {
+    line-height: 1.1em;
+    padding: 4px 2px;
+}
 .ms-wrapper .photo-attribution .image-link {
     display: block;
 }
