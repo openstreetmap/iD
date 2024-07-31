@@ -67,7 +67,7 @@ export function uiSectionPhotoOverlays(context) {
             .merge(ul);
 
         var li = ul.selectAll('.list-item-photos')
-            .data(data);
+            .data(data, d => d.id);
 
         li.exit()
             .remove();
