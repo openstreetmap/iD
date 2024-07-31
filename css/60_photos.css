@@ -1,3 +1,17 @@
+/* legend */
+li.list-item-photos.active:after {
+    display: block;
+    content: "";
+    height: 100%;
+    position: absolute;
+    right: 0;
+    width: 8px;
+}
+.ideditor[dir='rtl'] li.list-item-photos.active:after {
+    right: auto;
+    left: 0;
+}
+
 /* photo viewer div */
 .photoviewer {
     position: relative;
@@ -186,6 +200,9 @@
 
 
 /* Streetside Image Layer */
+li.list-item-photos.list-item-streetside.active:after {
+    background-color: #0fffc4;
+}
 .layer-streetside-images {
     pointer-events: none;
 }
@@ -198,19 +215,25 @@
 }
 
 /* Vegbilder Image Layer */
+li.list-item-photos.list-item-vegbilder.active:after {
+    background-color: #ed1c2e;
+}
 .layer-vegbilder {
     pointer-events: none;
 }
 .layer-vegbilder .viewfield-group * {
-    fill: #ed9300;
+    fill: #ed1c2e;
 }
 .layer-vegbilder .sequence {
-    stroke: #ed9300;
+    stroke: #ed1c2e;
     stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
 
 
 /* Mapillary Image Layer */
+li.list-item-photos.list-item-mapillary.active:after {
+    background-color: #55ff22;
+}
 .layer-mapillary {
     pointer-events: none;
 }
@@ -258,6 +281,9 @@
 
 
 /* KartaView Image Layer */
+li.list-item-photos.list-item-kartaview.active:after {
+    background-color: #20c4ff;
+}
 .layer-kartaview {
     pointer-events: none;
 }
@@ -270,6 +296,9 @@
 
 
 /* Mapilio Image Layer */
+li.list-item-photos.list-item-mapilio.active:after {
+    background-color: #0056f1;
+}
 .layer-mapilio {
     pointer-events: none;
 }
@@ -315,17 +344,20 @@
 }
 
 /* panoramax Image Layer */
+li.list-item-photos.list-item-panoramax.active:after {
+    background-color: #ff6f00;
+}
 .layer-panoramax {
     pointer-events: none;
 }
 .layer-panoramax .viewfield-group * {
-    fill: #1234ae;
+    fill: #ff6f00;
     stroke: #ffffff;
     stroke-opacity: .6;
     fill-opacity: .6;
 }
 .layer-panoramax .sequence {
-    stroke: #1234ae;
+    stroke: #ff6f00;
 }
 .photo-controls-panoramax {
     display: flex;
