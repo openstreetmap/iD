@@ -332,7 +332,11 @@ export function uiSectionRawTagEditor(id, context) {
     function unstringify(s) {
         const isQuoted = s.length > 1 && s.charAt(0) === '"' && s.charAt(s.length - 1) === '"';
         if (isQuoted) {
-            return JSON.parse(s);
+            try {
+                return JSON.parse(s);
+            } catch {
+                return s;
+            }
         } else {
             return s;
         }
