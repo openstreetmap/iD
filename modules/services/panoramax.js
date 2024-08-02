@@ -486,8 +486,9 @@ export default {
             _currentFrame = d.isPano ? _pannellumFrame : _planeFrame;
 
             _currentFrame
-                .showPhotoFrame(wrap)
-                .selectPhoto(d, true);
+                .selectPhoto(d, true)
+                .showPhotoFrame(wrap);
+                
                 
 
         });
