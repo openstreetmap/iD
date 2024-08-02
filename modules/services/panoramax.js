@@ -486,8 +486,9 @@ export default {
             _currentFrame = d.isPano ? _pannellumFrame : _planeFrame;
 
             _currentFrame
-                .selectPhoto(d, true)
-                .showPhotoFrame(wrap);
+                .showPhotoFrame(wrap)
+                .selectPhoto(d, true);
+                
 
         });
 
@@ -592,9 +593,10 @@ export default {
 
                 const nextImage = _cache.images.forImageId[nextId];
 
-                context.map().centerEase(nextImage.loc);
-
-                that.selectImage(context, nextImage.id);
+                if (nextImage){
+                    context.map().centerEase(nextImage.loc);
+                    that.selectImage(context, nextImage.id);
+                }
             };
         }
 
