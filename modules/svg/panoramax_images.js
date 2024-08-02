@@ -322,7 +322,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('class', 'layer-panoramax')
             .style('display', enabled ? 'block' : 'none');
 
-        layerEnter
+        const sequences = layerEnter
             .append('g')
             .attr('class', 'sequences');
 
@@ -343,7 +343,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 } else if (zoom >= lineMinZoom) {
                     editOn();
                     update();
-                    service.loadLines(projection);
+                    service.loadLines(projection, zoom);
                 } else {
                     editOff();
                 }
