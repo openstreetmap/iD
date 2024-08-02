@@ -347,8 +347,8 @@ export default {
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
         sequences
-            .classed('highlighted', function(d) { return d.sequence_id === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.sequence_id === selectedSequenceId; });
+            .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
 
         // update viewfields if needed
         context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
