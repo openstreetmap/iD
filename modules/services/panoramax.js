@@ -488,9 +488,6 @@ export default {
             _currentFrame
                 .selectPhoto(d, true)
                 .showPhotoFrame(wrap);
-                
-                
-
         });
 
         function localeDateString(s) {
