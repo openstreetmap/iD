@@ -177,10 +177,10 @@ function loadTileDataToCache(data, tile, zoom) {
     }
 
     if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
-        
+
         cache = _cache.sequences;
 
-        if(zoom >= lineMinZoom && zoom < imageMinZoom) cache = _cache.mockSequences;
+        if (zoom >= lineMinZoom && zoom < imageMinZoom) cache = _cache.mockSequences;
 
         layer = vectorTile.layers[sequenceLayer];
 
