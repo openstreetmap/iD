@@ -342,7 +342,7 @@ export default {
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
         markers
-            .classed('highlighted', function(d) { return d.id === hoveredImageId; })
+            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
