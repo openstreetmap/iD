@@ -96,7 +96,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().images.rtree.load(features);
             panoramax.cache().sequences.lineString['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
-            var res = panoramax.sequences(context.projection, 14);
+            var res = panoramax.sequences(context.projection, 15);
             expect(res).to.deep.eql([{
                 rotation: 0, images: [features[0].data, features[1].data, features[2].data]
             }]);

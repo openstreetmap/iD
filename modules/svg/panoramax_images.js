@@ -345,7 +345,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 } else if (zoom >= lineMinZoom) {
                     editOn();
                     update();
-                    service.loadLines(projection);
+                    service.loadLines(projection, zoom);
                 } else {
                     editOff();
                 }
