@@ -10,6 +10,10 @@ import { svgIcon } from '../../svg';
 
 export function uiSectionPhotoOverlays(context) {
 
+    let _savedLayers = [];
+    let _layersHidden = false;
+    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
+
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
 
@@ -529,8 +533,28 @@ export function uiSectionPhotoOverlays(context) {
         localPhotosLayer.fileList(d);
     }
 
+    function toggleStreetSide(){
+        if (!_layersHidden){
+            layers.all().forEach(d => {
+                if(_streetLayerIDs.includes(d.id)) {
+                    if(showsLayer(d.id)) _savedLayers.push(d.id);
+                    setLayer(d.id, false);
+                }
+            });
+        }
+        else {
+            _savedLayers.forEach(d => {
+                setLayer(d, true);
+            });
+            _savedLayers = [];
+        }
+        console.log(_savedLayers);
+        _layersHidden = !_layersHidden;
+    };
+
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
     context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
+    context.keybinding().on('⇧B', toggleStreetSide);
 
     context.map()
         .on('move.photo_overlays',
