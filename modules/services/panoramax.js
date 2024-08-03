@@ -347,13 +347,13 @@ export default {
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
         markers
-            .classed('highlighted', function(d) { return d.id === hoveredImageId; })
+            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
         sequences
-            .classed('highlighted', function(d) { return d.sequence_id === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.sequence_id === selectedSequenceId; });
+            .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
 
         // update viewfields if needed
         context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
@@ -493,7 +493,6 @@ export default {
             _currentFrame
                 .selectPhoto(d, true)
                 .showPhotoFrame(wrap);
-
         });
 
         function localeDateString(s) {
@@ -597,9 +596,10 @@ export default {
 
                 const nextImage = _cache.images.forImageId[nextId];
 
-                context.map().centerEase(nextImage.loc);
-
-                that.selectImage(context, nextImage.id);
+                if (nextImage){
+                    context.map().centerEase(nextImage.loc);
+                    that.selectImage(context, nextImage.id);
+                }
             };
         }
 

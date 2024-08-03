@@ -217,7 +217,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         sequences = await filterSequences(sequences, service);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.id; });
+            .data(sequences, function(d) { return d.properties.id; });
 
         // exit
         traces.exit()
@@ -278,6 +278,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
+        service.setStyles(context, null);
 
         function viewfieldPath() {
             if (this.parentNode.__data__.isPano) {
