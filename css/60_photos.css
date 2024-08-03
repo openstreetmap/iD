@@ -158,8 +158,7 @@ li.list-item-photos.active:after {
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
-.viewfield-group.highlighted.currentView circle,
-.viewfield-group.currentView circle {
+.viewfield-group.highlighted.currentView circle {
     stroke: #222;
     stroke-width: 2;
     stroke-opacity: 1;
@@ -179,8 +178,7 @@ li.list-item-photos.active:after {
     stroke-width: 1;
     fill-opacity: 0.8;
 }
-.viewfield-group.highlighted.currentView .viewfield,
-.viewfield-group.currentView .viewfield {
+.viewfield-group.highlighted.currentView .viewfield {
     stroke-width: 1;
     fill-opacity: 0.9;
 }
@@ -196,7 +194,7 @@ li.list-item-photos.active:after {
 }
 .sequence.highlighted,
 .sequence.currentView {
-    stroke-width: 6;
+    stroke-width: 4;
     stroke-opacity: 1;
 }
 
