@@ -74,18 +74,18 @@ function searchLimited(limit, projection, rtree) {
 }
 
 // Load all data for the specified type from Panoramax vector tiles
-function loadTiles(which, url, maxZoom, projection) {
+function loadTiles(which, url, maxZoom, projection, zoom) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
 
     tiles.forEach(function(tile) {
-        loadTile(which, url, tile);
+        loadTile(which, url, tile, zoom);
     });
 }
 
 
 // Load all data for the specified type from one vector tile
-function loadTile(which, url, tile) {
+function loadTile(which, url, tile, zoom) {
     const cache = _cache.requests;
     const tileId = `${tile.id}-${which}`;
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
@@ -109,7 +109,7 @@ function loadTile(which, url, tile) {
                 throw new Error('No Data');
             }
 
-            loadTileDataToCache(data, tile, which);
+            loadTileDataToCache(data, tile, zoom);
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
@@ -126,7 +126,7 @@ function loadTile(which, url, tile) {
         });
 }
 
-function loadTileDataToCache(data, tile) {
+function loadTileDataToCache(data, tile, zoom) {
     const vectorTile = new VectorTile(new Protobuf(data));
 
     let features,
@@ -177,7 +177,11 @@ function loadTileDataToCache(data, tile) {
     }
 
     if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
+
         cache = _cache.sequences;
+
+        if (zoom >= lineMinZoom && zoom < imageMinZoom) cache = _cache.mockSequences;
+
         layer = vectorTile.layers[sequenceLayer];
 
         for (i = 0; i < layer.length; i++) {
@@ -238,6 +242,7 @@ export default {
         _cache = {
             images: { rtree: new RBush(), forImageId: {} },
             sequences: { rtree: new RBush(), lineString: {} },
+            mockSequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
 
@@ -261,8 +266,8 @@ export default {
     },
 
     // Load line in the visible area
-    loadLines: function(projection) {
-        loadTiles('line', tileUrl, lineMinZoom, projection);
+    loadLines: function(projection, zoom) {
+        loadTiles('line', tileUrl, lineMinZoom, projection, zoom);
     },
 
     getUserIds: async function(usernames) {
@@ -308,8 +313,8 @@ export default {
                 return lineStrings;
         }
         if (zoom >= lineMinZoom){
-            Object.keys(_cache.sequences.lineString).forEach(function(sequenceId) {
-                lineStrings = lineStrings.concat(_cache.sequences.lineString[sequenceId]);
+            Object.keys(_cache.mockSequences.lineString).forEach(function(sequenceId) {
+                lineStrings = lineStrings.concat(_cache.mockSequences.lineString[sequenceId]);
             });
         }
         return lineStrings;
@@ -342,13 +347,13 @@ export default {
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
         markers
-            .classed('highlighted', function(d) { return d.id === hoveredImageId; })
+            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
         sequences
-            .classed('highlighted', function(d) { return d.sequence_id === hoveredSequenceId; })
-            .classed('currentView', function(d) { return d.sequence_id === selectedSequenceId; });
+            .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
 
         // update viewfields if needed
         context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
