@@ -85,28 +85,6 @@ export function rendererPhotos(context) {
         }
     };
 
-    photos.setFromYearFilter = function(year, updateUrl){
-        _yearSliderValue = year;
-
-        if (year !== 5) {
-            let days = 365 * year;
-            var fromDate = new Date();
-            fromDate.setDate(fromDate.getDate() - days);
-            var dd = String(fromDate.getDate()).padStart(2, '0');
-            var mm = String(fromDate.getMonth() + 1).padStart(2, '0');
-            var yyyy = fromDate.getFullYear();
-
-            fromDate = mm + '/' + dd + '/' + yyyy;
-            photos.setDateFilter('fromDate', fromDate, updateUrl);
-        } else {
-            photos.setDateFilter('fromDate', null, updateUrl);
-        }
-
-        if (updateUrl) {
-            setUrlFilterValue('year_slider', year);
-        }
-    };
-
     photos.setUsernameFilter = function(val, updateUrl) {
         if (val && typeof val === 'string') val = val.replace(/;/g, ',').split(',');
         if (val) {

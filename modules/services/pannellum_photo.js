@@ -18,7 +18,8 @@ export default {
       .append('div')
       .attr('class', 'photo-frame pannellum-frame')
       .attr('id', 'ideditor-pannellum-viewer')
-      .classed('hide', true);
+      .classed('hide', true)
+      .on('keydown', function(e) { e.stopPropagation(); });
 
     if (!window.pannellum) {
       await this.loadPannellum(context);

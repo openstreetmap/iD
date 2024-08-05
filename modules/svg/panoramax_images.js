@@ -14,7 +14,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     let _panoramax;
     let _viewerYaw = 0;
     let _selectedSequence;
-    let _activeId;
+    let _activeUsernameFilter;
+    let _activeIds;
 
     function init() {
         if (svgPanoramaxImages.initialized) return;
@@ -62,18 +63,19 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             });
         }
         if (username && service) {
-            if (!_activeId) {
-                const tempId = await service.getUserId(username);
+            if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
 
-                if (!_activeId) {
-                  _activeId = tempId;
-                }
+                const tempIds = await service.getUserIds(username);
+
+                _activeIds = {};
+                tempIds.forEach(id => {
+                    _activeIds[id] = true;
+                });
             }
 
-            let id = _activeId;
-
             images = images.filter(function(image) {
-                return id === image.account_id;
+                return _activeIds[image.account_id];
             });
         }
 
@@ -106,18 +108,19 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             });
         }
         if (username && service) {
-            if (!_activeId) {
-                const tempId = await service.getUserId(username);
+            if (_activeUsernameFilter !== username) {
+                _activeUsernameFilter = username;
 
-                if (!_activeId) {
-                  _activeId = tempId;
-                }
+                const tempIds = await service.getUserIds(username);
+
+                _activeIds = {};
+                tempIds.forEach(id => {
+                    _activeIds[id] = true;
+                });
             }
 
-            let id = _activeId;
-
             sequences = sequences.filter(function(sequence) {
-                return id === sequence.properties.account_id;
+                return _activeIds[sequence.properties.account_id];
             });
         }
 
@@ -211,7 +214,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         sequences = await filterSequences(sequences, service);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences, function(d) { return d.id; });
+            .data(sequences, function(d) { return d.properties.id; });
 
         // exit
         traces.exit()
@@ -272,6 +275,8 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
             .attr('d', viewfieldPath);
+
+        service.setStyles(context, null);
 
         function viewfieldPath() {
             if (this.parentNode.__data__.isPano) {
@@ -337,7 +342,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 } else if (zoom >= lineMinZoom) {
                     editOn();
                     update();
-                    service.loadLines(projection);
+                    service.loadLines(projection, zoom);
                 } else {
                     editOff();
                 }
@@ -352,7 +357,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         svgPanoramaxImages.enabled = _;
         if (svgPanoramaxImages.enabled) {
             showLayer();
-            context.photos().on('change.panoramax_images', null);
+            context.photos().on('change.panoramax_images', update);
         } else {
             hideLayer();
             context.photos().on('change.panoramax_images', null);

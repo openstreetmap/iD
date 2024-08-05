@@ -12,10 +12,10 @@ import planePhotoFrame from './plane_photo';
 
 const apiUrl = 'https://api.panoramax.xyz/';
 const tileUrl = apiUrl + 'api/map/{z}/{x}/{y}.mvt';
-const imageBlobUrl = apiUrl + 'api/pictures/{pictureID}/{definition}.jpg';
 const imageDataUrl = apiUrl + 'api/collections/{collectionId}/items/{itemId}';
 const userIdUrl = apiUrl + 'api/users/search?q={username}';
 const usernameURL = apiUrl + 'api/users/{userId}';
+const viewerUrl = apiUrl;
 
 const highDefinition = 'hd';
 const standardDefinition = 'sd';
@@ -74,18 +74,18 @@ function searchLimited(limit, projection, rtree) {
 }
 
 // Load all data for the specified type from Panoramax vector tiles
-function loadTiles(which, url, maxZoom, projection) {
+function loadTiles(which, url, maxZoom, projection, zoom) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
 
     tiles.forEach(function(tile) {
-        loadTile(which, url, tile);
+        loadTile(which, url, tile, zoom);
     });
 }
 
 
 // Load all data for the specified type from one vector tile
-function loadTile(which, url, tile) {
+function loadTile(which, url, tile, zoom) {
     const cache = _cache.requests;
     const tileId = `${tile.id}-${which}`;
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
@@ -109,7 +109,7 @@ function loadTile(which, url, tile) {
                 throw new Error('No Data');
             }
 
-            loadTileDataToCache(data, tile, which);
+            loadTileDataToCache(data, tile, zoom);
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
@@ -126,7 +126,7 @@ function loadTile(which, url, tile) {
         });
 }
 
-function loadTileDataToCache(data, tile) {
+function loadTileDataToCache(data, tile, zoom) {
     const vectorTile = new VectorTile(new Protobuf(data));
 
     let features,
@@ -176,7 +176,11 @@ function loadTileDataToCache(data, tile) {
     }
 
     if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
+
         cache = _cache.sequences;
+
+        if (zoom >= lineMinZoom && zoom < imageMinZoom) cache = _cache.mockSequences;
+
         layer = vectorTile.layers[sequenceLayer];
 
         for (i = 0; i < layer.length; i++) {
@@ -195,14 +199,6 @@ function loadTileDataToCache(data, tile) {
             }
         }
     }
-}
-
-// Quick access to image
-function getImageURL(image_id, definition){
-    const requestUrl = imageBlobUrl.replace('{pictureID}', image_id)
-        .replace('{definition}', definition);
-
-    return requestUrl;
 }
 
 async function getImageData(collection_id, image_id){
@@ -245,6 +241,7 @@ export default {
         _cache = {
             images: { rtree: new RBush(), forImageId: {} },
             sequences: { rtree: new RBush(), lineString: {} },
+            mockSequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
 
@@ -268,8 +265,8 @@ export default {
     },
 
     // Load line in the visible area
-    loadLines: function(projection) {
-        loadTiles('line', tileUrl, lineMinZoom, projection);
+    loadLines: function(projection, zoom) {
+        loadTiles('line', tileUrl, lineMinZoom, projection, zoom);
     },
 
     getUserIds: async function(usernames) {
@@ -278,11 +275,10 @@ export default {
 
         const responses = await Promise.all(requestUrls.map(requestUrl =>
             fetch(requestUrl, { method: 'GET' })));
-
         if (responses.some(response => !response.ok)) {
-            throw new Error(responses.status + ' ' + responses.statusText);
+            const response = responses.find(response => !response.ok);
+            throw new Error(response.status + ' ' + response.statusText);
         }
-
         const data = await Promise.all(responses.map(response => response.json()));
         // in panoramax, a username can have multiple ids, when the same name is
         // used on different servers
@@ -320,8 +316,8 @@ export default {
                 return lineStrings;
         }
         if (zoom >= lineMinZoom){
-            Object.keys(_cache.sequences.lineString).forEach(function(sequenceId) {
-                lineStrings = lineStrings.concat(_cache.sequences.lineString[sequenceId]);
+            Object.keys(_cache.mockSequences.lineString).forEach(function(sequenceId) {
+                lineStrings = lineStrings.concat(_cache.mockSequences.lineString[sequenceId]);
             });
         }
         return lineStrings;
@@ -350,7 +346,7 @@ export default {
         const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
         markers
-            .classed('highlighted', function(d) { return d.id === hoveredImageId; })
+            .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
             .classed('hovered', function(d) { return d.id === hoveredImageId; })
             .classed('currentView', function(d) { return d.id === selectedImageId; });
 
@@ -392,7 +388,7 @@ export default {
         that.setActiveImage(d);
         that.updateUrlImage(d.id);
 
-        let imageUrl = getImageURL(d.id, highDefinition);
+        const viewerLink = `${viewerUrl}#pic=${d.id}&focus=pic`;
 
         let viewer = context.container()
             .select('.photoviewer');
@@ -461,8 +457,8 @@ export default {
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
-            .attr('href', imageUrl)
-            .text('panoramax.fr');
+            .attr('href', viewerLink)
+            .text('panoramax.xyz');
 
         getImageData(d.sequence_id, d.id).then(function(data){
             _currentScene = {
@@ -495,7 +491,6 @@ export default {
             _currentFrame
                 .selectPhoto(d, true)
                 .showPhotoFrame(wrap);
-
         });
 
         function localeDateString(s) {
@@ -507,8 +502,12 @@ export default {
         }
 
         if (d.account_id) {
+            attribution
+                .append('span')
+                .text('|');
+
             let line2 = attribution
-                .append('div')
+                .append('span')
                 .attr('class', 'attribution-row');
 
             getUsername(d.account_id).then(function(username){
@@ -595,9 +594,10 @@ export default {
 
                 const nextImage = _cache.images.forImageId[nextId];
 
-                context.map().centerEase(nextImage.loc);
-
-                that.selectImage(context, nextImage.id);
+                if (nextImage){
+                    context.map().centerEase(nextImage.loc);
+                    that.selectImage(context, nextImage.id);
+                }
             };
         }
 
