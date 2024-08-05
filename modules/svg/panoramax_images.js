@@ -293,6 +293,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (!service) return;
 
         const frame = service.photoFrame();
+        if (!frame) return
 
         // update viewfield rotation
         _viewerYaw = frame.getYaw();

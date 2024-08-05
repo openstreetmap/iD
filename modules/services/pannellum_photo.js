@@ -101,6 +101,7 @@ export default {
       context
         .selectAll('.photo-frame.pannellum-frame')
         .classed('hide', false);
+
     }
 
     return this;
@@ -146,6 +147,8 @@ export default {
       const old_key = _currScenes.shift();
       _pannellumViewer.removeScene(old_key);
     }
+
+    _pannellumViewer.resize();
 
     return this;
   },
