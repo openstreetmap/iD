@@ -57,7 +57,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix address field overwriting existing data when switching selected map features under certain circumstances ([#10260])
 * Show `name` field also when only a localized name is present (e.g. only `name:xy`, but not `name`) and the preset does not show the name field by default ([#10323], thanks [@samhoooo])
 * Fix bug which in some cases prevented the list of relations in _raw membership editor_ from showing all relations in the visible map area ([#10342])
-* Fix crash when entering strings with quote markes in raw tag editor ([#10369])
+* Fix crash when entering strings with quote marks in raw tag editor ([#10369])
 #### :earth_asia: Localization
 * Add address format for Thailand ([#10291], thanks [@cmoffroad])
 #### :hourglass: Performance
