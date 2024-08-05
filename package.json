@@ -95,7 +95,7 @@
     "esbuild": "^0.23.0",
     "esbuild-visualizer": "^0.6.0",
     "eslint": "^9.8.0",
-    "fetch-mock": "^9.11.0",
+    "fetch-mock": "^11.0.0",
     "gaze": "^1.1.3",
     "glob": "^10.4.5",
     "happen": "^0.3.2",
