@@ -190,13 +190,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
     function mouseover(d3_event, image) {
         const service = getService();
-        if (service) service.setStyles(context, image, false);
+        if (service) service.setStyles(context, image);
     }
 
 
     function mouseout() {
         const service = getService();
-        if (service) service.setStyles(context, null, false);
+        if (service) service.setStyles(context, null);
     }
 
     async function update() {

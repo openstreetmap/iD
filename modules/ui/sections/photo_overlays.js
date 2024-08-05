@@ -334,7 +334,7 @@ export function uiSectionPhotoOverlays(context) {
 
             datalist
                 .append('option')
-                .attr('value', 4)
+                .attr('value', 4);
 
             datalist
                 .append('option')
@@ -343,8 +343,8 @@ export function uiSectionPhotoOverlays(context) {
 
             datalist
                 .append('option')
-                .attr('value', 2)
-    
+                .attr('value', 2);
+
             datalist
                 .append('option')
                 .attr('value', 1)
@@ -536,19 +536,17 @@ export function uiSectionPhotoOverlays(context) {
     function toggleStreetSide(){
         if (!_layersHidden){
             layers.all().forEach(d => {
-                if(_streetLayerIDs.includes(d.id)) {
-                    if(showsLayer(d.id)) _savedLayers.push(d.id);
+                if (_streetLayerIDs.includes(d.id)) {
+                    if (showsLayer(d.id)) _savedLayers.push(d.id);
                     setLayer(d.id, false);
                 }
             });
-        }
-        else {
+        } else {
             _savedLayers.forEach(d => {
                 setLayer(d, true);
             });
             _savedLayers = [];
         }
-        console.log(_savedLayers);
         _layersHidden = !_layersHidden;
     };
 

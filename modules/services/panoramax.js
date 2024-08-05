@@ -154,7 +154,6 @@ function loadTileDataToCache(data, tile) {
                 sequence_id: feature.properties.sequences.split('\"')[1],
                 heading: parseInt(feature.properties.heading, 10),
                 image_path: '',
-                resolution: feature.properties.resolution,
                 isPano: feature.properties.type === 'equirectangular',
                 model: feature.properties.model,
             };
@@ -274,16 +273,16 @@ export default {
     },
 
     getUserIds: async function(usernames) {
-        const requestUrls = usernames.map(username => 
+        const requestUrls = usernames.map(username =>
             userIdUrl.replace('{username}', username));
 
         const responses = await Promise.all(requestUrls.map(requestUrl =>
             fetch(requestUrl, { method: 'GET' })));
 
         if (responses.some(response => !response.ok)) {
-            throw new Error(response.status + ' ' + response.statusText);
+            throw new Error(responses.status + ' ' + responses.statusText);
         }
-        
+
         const data = await Promise.all(responses.map(response => response.json()));
         // in panoramax, a username can have multiple ids, when the same name is
         // used on different servers
@@ -292,6 +291,10 @@ export default {
 
     getOldestDate: function(){
         return _oldestDate;
+    },
+
+    getActiveImage: function(){
+        return _activeImage;
     },
 
     // Get visible sequences
@@ -337,46 +340,34 @@ export default {
     },
 
     // Update the currently highlighted sequence and selected bubble.
-    setStyles: function(context, hovered, reset) {
-        if (reset) {
-            context.container().selectAll('.viewfield-group')
-              .classed('highlighted', false)
-              .classed('hovered', false)
-              .classed('currentView', false);
-      
-            context.container().selectAll('.sequence')
-              .classed('highlighted', false)
-              .classed('currentView', false);
-        }
-        else {
-            const hoveredImageId =  hovered && hovered.id;
-            const hoveredSequenceId = hovered && hovered.sequence_id;
-            const selectedSequenceId = _activeImage && _activeImage.sequence_id;
-            const selectedImageId = _activeImage && _activeImage.id;
+    setStyles: function(context, hovered) {
+        const hoveredImageId =  hovered && hovered.id;
+        const hoveredSequenceId = hovered && hovered.sequence_id;
+        const selectedSequenceId = _activeImage && _activeImage.sequence_id;
+        const selectedImageId = _activeImage && _activeImage.id;
 
-            const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
-            const sequences = context.container().selectAll('.layer-panoramax .sequence');
+        const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
+        const sequences = context.container().selectAll('.layer-panoramax .sequence');
 
-            markers
-                .classed('highlighted', function(d) { return d.id === hoveredImageId; })
-                .classed('hovered', function(d) { return d.id === hoveredImageId; })
-                .classed('currentView', function(d) { return d.id === selectedImageId; });
-            
-            sequences
-                .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
-                .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
+        markers
+            .classed('highlighted', function(d) { return d.id === hoveredImageId; })
+            .classed('hovered', function(d) { return d.id === hoveredImageId; })
+            .classed('currentView', function(d) { return d.id === selectedImageId; });
 
-            // update viewfields if needed
-            context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
-                .attr('d', viewfieldPath);
+        sequences
+            .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
+            .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
 
-            function viewfieldPath() {
-                let d = this.parentNode.__data__;
-                if (d.isPano && d.id !== selectedImageId) {
-                    return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
-                } else {
-                    return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
-                }
+        // update viewfields if needed
+        context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
+            .attr('d', viewfieldPath);
+
+        function viewfieldPath() {
+            let d = this.parentNode.__data__;
+            if (d.isPano && d.id !== selectedImageId) {
+                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+            } else {
+                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
         return this;
@@ -408,7 +399,7 @@ export default {
 
         if (!viewer.empty()) viewer.datum(d);
 
-        this.setStyles(context, null, true);
+        this.setStyles(context, null);
 
         if (!d) return this;
 
@@ -639,7 +630,7 @@ export default {
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
         this.setActiveImage();
-        return this.setStyles(context, null, true);
+        return this.setStyles(context, null);
     },
 
     cache: function() {
