@@ -211,7 +211,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
-        let images = (service ? service.images(projection) : []);
+        let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
