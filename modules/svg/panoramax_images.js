@@ -295,7 +295,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (!service) return;
 
         const frame = service.photoFrame();
-        if (!frame) return
+        if (!frame) return;
 
         // update viewfield rotation
         _viewerYaw = frame.getYaw();
@@ -325,7 +325,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .attr('class', 'layer-panoramax')
             .style('display', enabled ? 'block' : 'none');
 
-        const sequences = layerEnter
+        layerEnter
             .append('g')
             .attr('class', 'sequences');
 
