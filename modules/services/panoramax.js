@@ -76,7 +76,7 @@ function searchLimited(limit, projection, rtree) {
                     return 0;
                 })
                 .slice(0, limit)
-                .map(function(d) { return d.data; });
+                .map(d => d.data);
 
             return (found.length ? result.concat(found) : result);
         }, []);
@@ -158,6 +158,7 @@ function loadTileDataToCache(data, tile, zoom) {
             d = {
                 loc: loc,
                 capture_time: feature.properties.ts,
+                capture_time_parsed: new Date(feature.properties.ts),
                 id: feature.properties.id,
                 account_id: feature.properties.account_id,
                 sequence_id: feature.properties.sequences.split('\"')[1],
