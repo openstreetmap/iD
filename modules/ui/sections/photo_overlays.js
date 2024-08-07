@@ -552,7 +552,7 @@ export function uiSectionPhotoOverlays(context) {
 
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
     context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
-    context.keybinding().on('⇧B', toggleStreetSide);
+    context.keybinding().on('⇧P', toggleStreetSide);
 
     context.map()
         .on('move.photo_overlays',

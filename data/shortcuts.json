@@ -100,7 +100,7 @@
           },
           {
             "modifiers": ["⇧"],
-            "shortcuts": ["B"],
+            "shortcuts": ["P"],
             "text": "shortcuts.browsing.enable.streetlevel"
           }
         ]
