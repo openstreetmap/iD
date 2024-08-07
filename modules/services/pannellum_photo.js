@@ -147,6 +147,8 @@ export default {
       _pannellumViewer.removeScene(old_key);
     }
 
+    _pannellumViewer.resize();
+
     return this;
   },
 
