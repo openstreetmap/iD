@@ -249,10 +249,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .append('g')
             .attr('class', 'viewfield-scale');
 
+        const activeImageId = service.getActiveImage()?.id;
         // update
         const markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
+                if (a.id === activeImageId) return  1;
+                if (b.id === activeImageId) return -1;
                 return b.loc[1] - a.loc[1];  // sort Y
             })
             .attr('transform', transform)

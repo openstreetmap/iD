@@ -68,7 +68,13 @@ function searchLimited(limit, projection, rtree) {
             let found = rtree.search(extent.bbox());
             const spacing = Math.max(1, Math.floor(found.length / limit));
             found = found
-                .filter((_, idx) => idx % spacing === 0)
+                .filter((d, idx) => idx % spacing === 0 ||
+                                    d.data.id === _activeImage?.id)
+                .sort((a, b) => {
+                    if (a.data.id === _activeImage?.id) return -1;
+                    if (b.data.id === _activeImage?.id) return  1;
+                    return 0;
+                })
                 .slice(0, limit)
                 .map(function(d) { return d.data; });
 
