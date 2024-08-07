@@ -101,7 +101,6 @@ export default {
       context
         .selectAll('.photo-frame.pannellum-frame')
         .classed('hide', false);
-
     }
 
     return this;
