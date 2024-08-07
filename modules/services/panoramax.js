@@ -65,7 +65,10 @@ function searchLimited(limit, projection, rtree) {
 
     return partitionViewport(projection)
         .reduce(function(result, extent) {
-            const found = rtree.search(extent.bbox())
+            let found = rtree.search(extent.bbox());
+            const spacing = Math.max(1, Math.floor(found.length / limit));
+            found = found
+                .filter((_, idx) => idx % spacing === 0)
                 .slice(0, limit)
                 .map(function(d) { return d.data; });
 
