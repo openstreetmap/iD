@@ -46,6 +46,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 * Add Panoramax as new street level imagery provider ([#9941], thanks [@mattiapezzotti])
+* Fix intermittent issues with Bing Streetside sometimes returning API results in a undocumented format ([#10341])
 #### :white_check_mark: Validation
 * Drop deprecated validation service _ImproveOSM_ ([#10302], thanks [@arch0345])
 #### :bug: Bugfixes
