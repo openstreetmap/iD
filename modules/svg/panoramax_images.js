@@ -153,9 +153,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-    function transform(d) {
+    function transform(d, selectedImageId) {
         let t = svgPointTransform(projection)(d);
-        var rot = d.heading + _viewerYaw;
+        let rot = d.heading;
+        if (d.id === selectedImageId) {
+            rot += _viewerYaw;
+        }
         if (rot) {
             t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
@@ -260,7 +263,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 // else: sort by capture time (newest on top)
                 return a.capture_time_parsed - b.capture_time_parsed;
             })
-            .attr('transform', transform)
+            .attr('transform', d => transform(d, activeImageId))
             .select('.viewfield-scale');
 
 
@@ -310,7 +313,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (context.map().isTransformed()) return;
 
         layer.selectAll('.viewfield-group.currentView')
-            .attr('transform', transform);
+            .attr('transform', d => transform(d, d.id));
     }
 
 
