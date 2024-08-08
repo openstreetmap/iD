@@ -12,6 +12,11 @@ li.list-item-photos.active:after {
     left: 0;
 }
 
+.disabled-panel {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 /* photo viewer div */
 .photoviewer {
     position: relative;

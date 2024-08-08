@@ -355,9 +355,9 @@ export function uiSectionPhotoOverlays(context) {
             .classed('active', filterEnabled);
 
         function yearSliderValue() {
-                var sliderValue = context.photos().yearSliderValue();
-                if (sliderValue) return sliderValue;
-                return 5;
+            var sliderValue = context.photos().yearSliderValue();
+            if (sliderValue) return sliderValue;
+            return 5;
         }
     }
 
@@ -534,6 +534,7 @@ export function uiSectionPhotoOverlays(context) {
     }
 
     function toggleStreetSide(){
+        let layerContainer = d3_select('.photo-overlay-container');
         if (!_layersHidden){
             layers.all().forEach(d => {
                 if (_streetLayerIDs.includes(d.id)) {
@@ -541,11 +542,13 @@ export function uiSectionPhotoOverlays(context) {
                     setLayer(d.id, false);
                 }
             });
+            layerContainer.classed('disabled-panel', true);
         } else {
             _savedLayers.forEach(d => {
                 setLayer(d, true);
             });
             _savedLayers = [];
+            layerContainer.classed('disabled-panel', false);
         }
         _layersHidden = !_layersHidden;
     };

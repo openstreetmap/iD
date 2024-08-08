@@ -37,8 +37,6 @@ let _planeFrame;
 let _pannellumFrame;
 let _currentFrame;
 
-let _oldestDate;
-
 let _currentScene = {
     currentImage : null,
     nextImage : null,
@@ -161,14 +159,6 @@ function loadTileDataToCache(data, tile, zoom) {
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             });
-
-            if (_oldestDate){
-                if (d.capture_time < _oldestDate){
-                    _oldestDate = d.capture_time;
-                }
-            } else {
-                _oldestDate = d.capture_time;
-            }
         }
         if (cache.rtree) {
             cache.rtree.load(features);
@@ -189,13 +179,6 @@ function loadTileDataToCache(data, tile, zoom) {
                 cache.lineString[feature.properties.id].push(feature);
             } else {
                 cache.lineString[feature.properties.id] = [feature];
-            }
-            if (_oldestDate){
-                if (feature.properties.date < _oldestDate){
-                    _oldestDate = feature.properties.date;
-                }
-            } else {
-                _oldestDate = feature.properties.date;
             }
         }
     }
@@ -283,10 +266,6 @@ export default {
         // in panoramax, a username can have multiple ids, when the same name is
         // used on different servers
         return data.flatMap((d, i) => d.features.filter(f => f.name === usernames[i]).map(f => f.id));
-    },
-
-    getOldestDate: function(){
-        return _oldestDate;
     },
 
     getActiveImage: function(){
