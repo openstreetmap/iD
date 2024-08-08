@@ -501,8 +501,8 @@ export default {
             _currentFrame = d.isPano ? _pannellumFrame : _planeFrame;
 
             _currentFrame
-                .selectPhoto(d, true)
-                .showPhotoFrame(wrap);
+                .showPhotoFrame(wrap)
+                .selectPhoto(d, true);
         });
 
         function localeDateString(s) {
