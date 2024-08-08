@@ -27,7 +27,8 @@ export default {
 
     const options = {
       'default': { firstScene: '' },
-      scenes: {}
+      scenes: {},
+      minHfov: 20
     };
 
     _pannellumViewer = window.pannellum.viewer('ideditor-pannellum-viewer', options);
