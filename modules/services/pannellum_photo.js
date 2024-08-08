@@ -27,7 +27,8 @@ export default {
 
     const options = {
       'default': { firstScene: '' },
-      scenes: {}
+      scenes: {},
+      minHfov: 20
     };
 
     _pannellumViewer = window.pannellum.viewer('ideditor-pannellum-viewer', options);
@@ -146,6 +147,8 @@ export default {
       const old_key = _currScenes.shift();
       _pannellumViewer.removeScene(old_key);
     }
+
+    _pannellumViewer.resize();
 
     return this;
   },

@@ -114,14 +114,18 @@ function loadNextTilePage(which, url, tile) {
       const bubbleId = bubble.imageUrl;
       if (cache.points[bubbleId]) return null;  // skip duplicates
 
-      const loc = [bubble.lon, bubble.lat];
+      // workaround for https://github.com/openstreetmap/iD/issues/10341#issuecomment-2275724738
+      const loc = [
+        bubble.lon || bubble.longitude,
+        bubble.lat || bubble.latitude
+      ];
       const d = {
         loc: loc,
         key: bubbleId,
         imageUrl: bubble.imageUrl.replace('{subdomain}',
           bubble.imageUrlSubdomains[0]
         ),
-        ca: bubble.he,
+        ca: bubble.he || bubble.heading,
         captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',
         pano: true,

@@ -63,9 +63,18 @@ function searchLimited(limit, projection, rtree) {
 
     return partitionViewport(projection)
         .reduce(function(result, extent) {
-            const found = rtree.search(extent.bbox())
+            let found = rtree.search(extent.bbox());
+            const spacing = Math.max(1, Math.floor(found.length / limit));
+            found = found
+                .filter((d, idx) => idx % spacing === 0 ||
+                                    d.data.id === _activeImage?.id)
+                .sort((a, b) => {
+                    if (a.data.id === _activeImage?.id) return -1;
+                    if (b.data.id === _activeImage?.id) return  1;
+                    return 0;
+                })
                 .slice(0, limit)
-                .map(function(d) { return d.data; });
+                .map(d => d.data);
 
             return (found.length ? result.concat(found) : result);
         }, []);
@@ -147,6 +156,7 @@ function loadTileDataToCache(data, tile, zoom) {
             d = {
                 loc: loc,
                 capture_time: feature.properties.ts,
+                capture_time_parsed: new Date(feature.properties.ts),
                 id: feature.properties.id,
                 account_id: feature.properties.account_id,
                 sequence_id: feature.properties.sequences.split('\"')[1],
@@ -468,8 +478,8 @@ export default {
             _currentFrame = d.isPano ? _pannellumFrame : _planeFrame;
 
             _currentFrame
-                .selectPhoto(d, true)
-                .showPhotoFrame(wrap);
+                .showPhotoFrame(wrap)
+                .selectPhoto(d, true);
         });
 
         function localeDateString(s) {

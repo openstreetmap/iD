@@ -121,7 +121,7 @@ function buildData() {
       });
     }).then(() =>
       // also fetch the bleeding edge data too to make sure we're always hosting the latest icons
-      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/main/interim/icons.json')
+      fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/interim/icons.json')
     ).then(response => response.json()).then(cuttingEdgeIcons => {
       cuttingEdgeIcons
         .filter(icon => /^fa[srb]-/.test(icon))

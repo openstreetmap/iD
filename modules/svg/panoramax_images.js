@@ -152,9 +152,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-    function transform(d) {
+    function transform(d, selectedImageId) {
         let t = svgPointTransform(projection)(d);
-        var rot = d.heading + _viewerYaw;
+        let rot = d.heading;
+        if (d.id === selectedImageId) {
+            rot += _viewerYaw;
+        }
         if (rot) {
             t += ' rotate(' + Math.floor(rot) + ',0,0)';
         }
@@ -208,7 +211,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
-        let images = (service ? service.images(projection) : []);
+        let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);
@@ -246,13 +249,18 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .append('g')
             .attr('class', 'viewfield-scale');
 
+        const activeImageId = service.getActiveImage()?.id;
         // update
         const markers = groups
             .merge(groupsEnter)
             .sort(function(a, b) {
-                return b.loc[1] - a.loc[1];  // sort Y
+                // active image on top
+                if (a.id === activeImageId) return  1;
+                if (b.id === activeImageId) return -1;
+                // else: sort by capture time (newest on top)
+                return a.capture_time_parsed - b.capture_time_parsed;
             })
-            .attr('transform', transform)
+            .attr('transform', d => transform(d, activeImageId))
             .select('.viewfield-scale');
 
 
@@ -292,6 +300,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (!service) return;
 
         const frame = service.photoFrame();
+        if (!frame) return;
 
         // update viewfield rotation
         _viewerYaw = frame.getYaw();
@@ -301,7 +310,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (context.map().isTransformed()) return;
 
         layer.selectAll('.viewfield-group.currentView')
-            .attr('transform', transform);
+            .attr('transform', d => transform(d, d.id));
     }
 
 
