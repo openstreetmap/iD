@@ -317,6 +317,8 @@ We like when people get involved! iD is a busy project, so it helps if you first
 open an issue to ask whether an idea makes sense,
 instead of surprising us with a pull request.
 
+The [GOVERNANCE doc](./GOVERNANCE.md) goes into details on roles, people and processes.
+
 ### JavaScript
 
 iD code was initially written with ES5 syntax, however we do now develop using ES6 syntax.
