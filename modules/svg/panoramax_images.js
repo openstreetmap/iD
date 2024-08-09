@@ -13,7 +13,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     let layer = d3_select(null);
     let _panoramax;
     let _viewerYaw = 0;
-    let _selectedSequence;
     let _activeUsernameFilter;
     let _activeIds;
 
@@ -211,7 +210,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
 
         let isHidden = d3_select('.photo-wrapper.panoramax-wrapper.hide').size();
 
-        if(isHidden) service.setActiveImage(null);
+        if (isHidden) service.setActiveImage(null);
 
         images = await filterImages(images);
         sequences = await filterSequences(sequences, service);

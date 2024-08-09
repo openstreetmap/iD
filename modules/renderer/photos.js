@@ -105,7 +105,7 @@ export function rendererPhotos(context) {
     };
 
     photos.setFromYearFilter = function(year, updateUrl){
-        
+
         _yearSliderValue = year;
 
         if (year !== 5) {
@@ -119,7 +119,7 @@ export function rendererPhotos(context) {
             fromDate = mm + '/' + dd + '/' + yyyy;
             photos.setDateFilter('fromDate', fromDate, updateUrl);
         } else {
-            photos.setDateFilter('fromDate', null, updateUrl);  
+            photos.setDateFilter('fromDate', null, updateUrl);
         }
 
         if (updateUrl) {
