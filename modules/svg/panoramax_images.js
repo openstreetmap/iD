@@ -179,10 +179,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         if (!service) return;
 
-        if (image.sequence_id !== _selectedSequence) {
-            _viewerYaw = 0;  // reset
-        }
-
         service
             .ensureViewerLoaded(context)
             .then(function() {

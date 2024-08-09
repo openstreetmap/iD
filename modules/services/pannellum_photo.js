@@ -135,12 +135,14 @@ export default {
 
     let yaw = 0;
     let pitch = 0;
+    let hfov = 0;
 
     if (keepOrientation) {
       yaw = this.getYaw();
       pitch = _pannellumViewer.getPitch();
+      hfov = _pannellumViewer.getHfov();
     }
-    _pannellumViewer.loadScene(key, pitch, yaw);
+    _pannellumViewer.loadScene(key, pitch, yaw, hfov);
     dispatch.call('viewerChanged');
 
     if (_currScenes.length > 3) {
