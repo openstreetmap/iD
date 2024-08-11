@@ -1,14 +1,4 @@
 {
-  "improveOSM": {
-    "icons": {
-      "ow": "fas-long-arrow-alt-right",
-      "mr-both": "maki-car",
-      "mr-parking": "maki-parking",
-      "mr-path": "maki-shoe",
-      "mr-road": "maki-car",
-      "tr": "temaki-junction"
-    }
-  },
   "osmose": {
     "icons": {
       "0-1": "maki-home",

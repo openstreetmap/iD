@@ -278,10 +278,6 @@ export default {
         return data.flatMap((d, i) => d.features.filter(f => f.name === usernames[i]).map(f => f.id));
     },
 
-    getActiveImage: function(){
-        return _activeImage;
-    },
-
     // Get visible sequences
     sequences: function(projection, zoom) {
         const viewport = projection.clipExtent();
@@ -322,6 +318,10 @@ export default {
         } else {
             _activeImage = null;
         }
+    },
+
+    getActiveImage: function(){
+        return _activeImage;
     },
 
     // Update the currently highlighted sequence and selected bubble.

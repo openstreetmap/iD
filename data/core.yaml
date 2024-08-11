@@ -844,9 +844,6 @@ en:
       keepRight:
         tooltip: Data issues detected by keepright.at
         title: KeepRight Issues
-      improveOSM:
-        tooltip: Missing data detected by improveosm.org
-        title: ImproveOSM Issues
       osmose:
         tooltip: Data issues detected by osmose.openstreetmap.fr
         title: Osmose Issues
@@ -1101,33 +1098,6 @@ en:
       elems_title: Features
       fix_title: Fix Guidelines
       trap_title: Common Mistakes
-    improveOSM:
-      title: ImproveOSM Detection
-      geometry_types:
-        path: paths
-        parking: parking
-        road: roads
-        both: roads and parking
-      directions:
-        east: east
-        north: north
-        northeast: northeast
-        northwest: northwest
-        south: south
-        southeast: southeast
-        southwest: southwest
-        west: west
-      error_types:
-        ow:
-          title: Missing One-way
-          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel from {from_node} to {to_node}. There may be missing a "oneway" tag.'
-        mr:
-          title: Missing Geometry
-          description: '{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.'
-          description_alt: 'Data from a 3rd party suggests there may be unmapped {geometry_type} here.'
-        tr:
-          title: Missing Turn Restriction
-          description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
       title: KeepRight
       detail_description: Description
@@ -1696,7 +1666,7 @@ en:
       title: Quality Assurance
       intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, open the {data_icon} **{map_data}** panel and enable a specific Q/A layer."
       tools_h: "Tools"
-      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/)."
+      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/) and [Osmose](https://osmose.openstreetmap.fr/)."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Select a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
