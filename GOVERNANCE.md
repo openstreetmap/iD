@@ -15,7 +15,7 @@ The maintainer role includes:
 - Updating dependencies.
 - Assign roles.
 
-and all the following roles.
+and all responsibilities of the following roles.
 
 Github shows a `(Member)` label next to users with full access to this repository and the organisation.
 
@@ -29,7 +29,7 @@ The co-maintainer role includes:
 - Reviewing PRs.
 - Merging "clear-cut" PRs by others.
 
-and all the following roles.
+and all responsibilities of the following roles.
 
 Github shows a `(Collaborator)` label next to users with any permission on this repository.
 
@@ -50,6 +50,7 @@ Github shows a `(Collaborator)` label next to users with any permission on this 
 To all contributors, thank you so much for your support! ❤ Especially for:
 
 - Suggesting new features or report bugs.
+- Contributing bug fixes and features via PRs.
 - Researching and helping with issues and PRs.
 - Translating the project.
 
