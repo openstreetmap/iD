@@ -6,11 +6,6 @@ export function svgTouch() {
             .enter()
             .append('g')
             .attr('class', function(d) { return 'layer-touch ' + d; });
-
-        drawTouch.enabled = function(_) {
-            svgTouch.enabled = _;
-            return this;
-        };
     }
 
     return drawTouch;
