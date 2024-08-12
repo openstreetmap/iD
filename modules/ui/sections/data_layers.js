@@ -12,9 +12,11 @@ import { modeBrowse } from '../../modes/browse';
 import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
+import { uiSectionImportFile } from './import_file';
 
 export function uiSectionDataLayers(context) {
 
+    const drawImportItems = uiSectionImportFile(context);
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
@@ -37,7 +39,8 @@ export function uiSectionDataLayers(context) {
             .call(drawQAItems)
             .call(drawCustomDataItems)
             .call(drawVectorItems)      // Beta - Detroit mapping challenge
-            .call(drawPanelItems);
+            .call(drawPanelItems)
+            .call(drawImportItems);
     }
 
     function showsLayer(which) {

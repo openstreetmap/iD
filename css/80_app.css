@@ -135,19 +135,29 @@ em {
 strong {
     font-weight: bold;
 }
+
+.button-link,
 a,
 a:visited,
 a:active {
     color: #7092ff;
 }
+.button-link:focus,
 a:focus {
     color: #597be7;
 }
 @media (hover: hover) {
+    .button-link:hover,
     a:hover {
         color: #597be7;
     }
 }
+
+.button-link {
+    display: flex;
+    align-items: center;
+}
+
 kbd {
     display: inline-block;
     text-align: center;

@@ -31,7 +31,6 @@ export default [
        'indent': ['off', 4],
        'keyword-spacing': 'error',
        'linebreak-style': ['error', 'unix'],
-       'no-await-in-loop': 'error',
        'no-caller': 'error',
        'no-catch-shadow': 'error',
        'no-console': 'warn',

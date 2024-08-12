@@ -88,6 +88,7 @@ export function uiCommit(context) {
 
         var detected = utilDetect();
         var tags = {
+            ...context.defaultChangesetTags(),
             comment: prefs('comment') || '',
             created_by: context.cleanTagValue('iD ' + context.version),
             host: context.cleanTagValue(detected.host),

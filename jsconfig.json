@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "downlevelIteration": true,
+        "types": ["modules/global.d.ts"]
+    }
+}
