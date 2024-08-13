@@ -41,6 +41,7 @@ export function coreContext() {
   let _defaultChangesetComment = context.initialHashParams.comment;
   let _defaultChangesetSource = context.initialHashParams.source;
   let _defaultChangesetHashtags = context.initialHashParams.hashtags;
+  let _defaultChangesetTags = {};
   context.defaultChangesetComment = function(val) {
     if (!arguments.length) return _defaultChangesetComment;
     _defaultChangesetComment = val;
@@ -54,6 +55,11 @@ export function coreContext() {
   context.defaultChangesetHashtags = function(val) {
     if (!arguments.length) return _defaultChangesetHashtags;
     _defaultChangesetHashtags = val;
+    return context;
+  };
+  context.defaultChangesetTags = function(val) {
+    if (!arguments.length) return _defaultChangesetTags;
+    _defaultChangesetTags = val;
     return context;
   };
 
@@ -169,12 +175,12 @@ export function coreContext() {
   };
 
   // Download the full entity and its parent relations. The callback may be called multiple times.
-  context.loadEntity = (entityID, callback) => {
+  context.loadEntity = async (entityID, callback) => {
     if (_connection) {
       const cid = _connection.getConnectionId();
-      _connection.loadEntity(entityID, afterLoad(cid, callback));
+      await _connection.loadEntity(entityID, afterLoad(cid, callback));
       // We need to fetch the parent relations separately.
-      _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
+      await _connection.loadEntityRelations(entityID, afterLoad(cid, callback));
     }
   };
 

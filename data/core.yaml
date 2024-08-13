@@ -365,6 +365,17 @@ en:
           area: This feature can't follow the area because it is only connected at a single point. Add another point manually to continue.
           generic: This feature can't follow the other feature because they are only connected at a single point. Add another point manually to continue.
         unknown: This feature can't follow another feature.
+    import_from_file:
+      title: Load edits from file
+      tooltip: Import an osmChange file or osmPatch file into the editor.
+      loading: Importing file…
+      error:
+        title: Failed to import file
+        unknown: An unknown error occurred.
+        conflicts: Some features in the osmChange file have been edited by other users, causing a conflict.
+      annotation:
+        osmChange: Imported an osmChange file
+        osmPatch: Imported an osmPatch file
     reflect:
       title:
         long: Flip Long
