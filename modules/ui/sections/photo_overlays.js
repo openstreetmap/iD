@@ -56,7 +56,7 @@ export function uiSectionPhotoOverlays(context) {
             return d.layer && d.layer.supported();
         }
         function layerEnabled(d) {
-            return layerSupported(d) && d.layer.enabled();
+            return layerSupported(d) && (d.layer.enabled() || _savedLayers.includes(d.id));
         }
         function layerRendered(d) {
             return d.layer.rendered?.(context.map().zoom()) ?? true;
