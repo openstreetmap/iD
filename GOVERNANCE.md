@@ -35,7 +35,7 @@ Github shows a `(Collaborator)` label next to users with any permission on this 
 
 ### Triage Role
 
-(No one has the triage role at the moment. Please reach out if you want to help.)
+- [nickrsan](https://github.com/nickrsan) contributes to this project as a volunteer.
 
 The triage role includes:
 
