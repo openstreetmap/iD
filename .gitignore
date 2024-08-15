@@ -1,6 +1,5 @@
 .DS_Store
 .esm-cache
-.vscode/
 .idea/
 /node_modules/
 /.tx/tmp/

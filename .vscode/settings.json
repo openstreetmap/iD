@@ -1,0 +1,5 @@
+{
+    "i18n-ally.readonly": true,
+    "i18n-ally.localesPaths": ["data"],
+    "i18n-ally.pathMatcher": "core.yaml"
+}
