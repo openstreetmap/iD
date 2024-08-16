@@ -139,8 +139,8 @@ export default {
 
     if (keepOrientation) {
       yaw = this.getYaw();
-      pitch = _pannellumViewer.getPitch();
-      hfov = _pannellumViewer.getHfov();
+      pitch = this.getPitch();
+      hfov = this.getHfov();
     }
     _pannellumViewer.loadScene(key, pitch, yaw, hfov);
     dispatch.call('viewerChanged');
@@ -157,6 +157,14 @@ export default {
 
   getYaw: function() {
     return _pannellumViewer.getYaw();
+  },
+
+  getPitch: function() {
+    return _pannellumViewer.getPitch();
+  },
+
+  getHfov: function() {
+    return _pannellumViewer.getHfov();
   }
 
 };
