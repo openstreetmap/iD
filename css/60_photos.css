@@ -536,6 +536,16 @@ label.streetside-hires {
     transform-origin: 0 0;
 }
 
+.panoramax-wrapper .photo-attribution a:active {
+    color: #ff6f00;
+}
+
+@media (hover: hover) {
+    .panoramax-wrapper .photo-attribution a:hover {
+        color: #ff6f00;
+    }
+}
+
 .photo-wrapper {
     position: relative;
     background-color: #000;

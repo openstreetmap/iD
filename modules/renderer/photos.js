@@ -108,7 +108,7 @@ export function rendererPhotos(context) {
 
         _yearSliderValue = year;
 
-        if (year !== 5) {
+        if (year !== '5') {
             let days = 365 * year;
             var fromDate = new Date();
             fromDate.setDate(fromDate.getDate() - days);
@@ -125,6 +125,26 @@ export function rendererPhotos(context) {
         if (updateUrl) {
             setUrlFilterValue('year_slider', year);
         }
+    };
+
+    photos.togglePhotoType = function(val, updateUrl) {
+        var index = _shownPhotoTypes.indexOf(val);
+        if (index !== -1) {
+            _shownPhotoTypes.splice(index, 1);
+        } else {
+            _shownPhotoTypes.push(val);
+        }
+
+        if (updateUrl) {
+            var hashString;
+            if (_shownPhotoTypes) {
+                hashString = _shownPhotoTypes.join(',');
+            }
+            setUrlFilterValue('photo_type', hashString);
+        }
+
+        dispatch.call('change', this);
+        return photos;
     };
 
     function setUrlFilterValue(property, val) {
@@ -186,26 +206,16 @@ export function rendererPhotos(context) {
         return _toDate;
     };
 
-    photos.togglePhotoType = function(val) {
-        var index = _shownPhotoTypes.indexOf(val);
-        if (index !== -1) {
-            _shownPhotoTypes.splice(index, 1);
-        } else {
-            _shownPhotoTypes.push(val);
-        }
-        dispatch.call('change', this);
-        return photos;
-    };
-
     photos.usernames = function() {
         return _usernames;
     };
 
     photos.init = function() {
         var hash = utilStringQs(window.location.hash);
+        var parts;
         if (hash.photo_dates) {
             // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a couple different separators
-            var parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
+            parts = /^(.*)[–_](.*)$/g.exec(hash.photo_dates.trim());
             this.setDateFilter('fromDate', parts && parts.length >= 2 && parts[1], false);
             this.setDateFilter('toDate', parts && parts.length >= 3 && parts[2], false);
         }
@@ -214,6 +224,12 @@ export function rendererPhotos(context) {
         }
         if (hash.photo_username) {
             this.setUsernameFilter(hash.photo_username, false);
+        }
+        if (hash.photo_type) {
+            parts = hash.photo_type.replace(/;/g, ',').split(',');
+            _allPhotoTypes.forEach(d => {
+                if (!parts.includes(d)) this.togglePhotoType(d, false);
+            });
         }
         if (hash.photo_overlay) {
             // support enabling photo layers by default via a URL parameter, e.g. `photo_overlay=kartaview;mapillary;streetside`

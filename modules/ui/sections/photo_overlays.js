@@ -175,7 +175,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function(d3_event, d) {
-                context.photos().togglePhotoType(d);
+                context.photos().togglePhotoType(d, true);
             });
 
         labelEnter
