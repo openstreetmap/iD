@@ -194,18 +194,6 @@ function loadTileDataToCache(data, tile, zoom) {
     }
 }
 
-async function getImageData(collection_id, image_id){
-    const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
-        .replace('{itemId}', image_id);
-
-    const response = await fetch(requestUrl, { method: 'GET' });
-    if (!response.ok) {
-        throw new Error(response.status + ' ' + response.statusText);
-    }
-    const data = await response.json();
-    return data;
-}
-
 async function getUsername(user_id){
     const requestUrl = usernameURL.replace('{userId}', user_id);
 
@@ -310,7 +298,7 @@ export default {
 
     // Set the currently visible image
     setActiveImage: function(image) {
-        if (image) {
+        if (image && image.id && image.sequence_id) {
             _activeImage = {
                 id: image.id,
                 sequence_id: image.sequence_id
@@ -449,7 +437,7 @@ export default {
             .attr('href', viewerLink)
             .text('panoramax.xyz');
 
-        getImageData(d.sequence_id, d.id).then(function(data){
+        this.getImageData(d.sequence_id, d.id).then(function(data){
             _currentScene = {
                 currentImage: null,
                 nextImage: null,
@@ -512,6 +500,18 @@ export default {
 
     photoFrame: function() {
         return _currentFrame;
+    },
+
+    getImageData: async function(collection_id, image_id){
+        const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
+            .replace('{itemId}', image_id);
+
+        const response = await fetch(requestUrl, { method: 'GET' });
+        if (!response.ok) {
+            throw new Error(response.status + ' ' + response.statusText);
+        }
+        const data = await response.json();
+        return data;
     },
 
     ensureViewerLoaded: function(context) {
@@ -618,7 +618,7 @@ export default {
             .classed('hide', true);
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
-        this.setActiveImage();
+        this.setActiveImage(null);
         return this.setStyles(context, null);
     },
 
