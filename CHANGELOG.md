@@ -69,6 +69,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Update dependencies, including `osm-community-index` to v5.7, `osm-auth` to v2.5
 
+[#9941]: https://github.com/openstreetmap/iD/issues/9941
 [#3595]: https://github.com/openstreetmap/iD/issues/3595
 [#7582]: https://github.com/openstreetmap/iD/issues/7582
 [#8994]: https://github.com/openstreetmap/iD/issues/8994
