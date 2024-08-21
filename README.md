@@ -6,7 +6,7 @@
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
 * It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
-* It supports all popular modern desktop browsers: Chrome, Firefox, Safari and Edge.
+* It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
 * Data is rendered with [d3.js](https://d3js.org/).
 
 ## Participate!
