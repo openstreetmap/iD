@@ -36,16 +36,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
-# Unreleased (2.30.0-dev)
+# 2.30.0
+##### 2024-Aug-21
 
+#### :mega: Release Highlights
+* Add Panoramax as new street level imagery provider ([#9941], thanks [@mattiapezzotti])
 #### :tada: New Features
 * Allow to start up iD with a preselected OSM note or multiselection of OSM ids in the `id` hash parameter
 #### :sparkles: Usability & Accessibility
 * Login/logout pages are now using the user's locale ([#3595], thanks [@k-yle])
 * Sort preset-specific optional fields before universal fields in "Add field" dropdown ([#10181], thanks [@zbycz])
-#### :scissors: Operations
 #### :camera: Street-Level
-* Add Panoramax as new street level imagery provider ([#9941], thanks [@mattiapezzotti])
 * Fix intermittent issues with Bing Streetside sometimes returning API results in a undocumented format ([#10341])
 #### :white_check_mark: Validation
 * Drop deprecated validation service _ImproveOSM_ ([#10302], thanks [@arch0345])
@@ -61,8 +62,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix crash when entering strings with quote marks in raw tag editor ([#10369])
 #### :earth_asia: Localization
 * Add address format for Thailand ([#10291], thanks [@cmoffroad])
-#### :hourglass: Performance
-#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Render `highway=ladder` in a style similar to stairs ([#10257], thanks [@k-yle])
 * Render arrows on lines with `conveying` tag ([#10255], thanks [@k-yle])
