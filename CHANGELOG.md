@@ -49,6 +49,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 
+# 2.30.2
+##### 2024-Aug-21
+
+* Rotate Mapbox imagery API tokens for Mapbox Satellite and locator overlay layers
+
+
 # 2.30.1
 ##### 2024-Aug-21
 
