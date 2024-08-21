@@ -36,6 +36,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 -->
 
 
+# 2.30.1
+##### 2024-Aug-21
+
+* Fix note not loading when iD is started with both an `id=note/123` and `map=…` hash parameter
+
+
 # 2.30.0
 ##### 2024-Aug-21
 
