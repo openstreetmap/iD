@@ -11,7 +11,7 @@ everyone to feel comfortable contributing to iD.
 ## Submitting Issues
 
 We'd love to hear your feedback about iD. Please [search existing issues](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
-before [opening a new one](https://github.com/openstreetmap/iD/issues/new). Many bugs and ideas have already been posted.
+before [opening a new one](https://github.com/openstreetmap/iD/issues/new/choose). Many bugs and ideas have already been posted.
 
 When reporting a bug:
 
