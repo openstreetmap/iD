@@ -1,8 +1,7 @@
 # Contributing to iD
 
 Thinking of contributing to iD? High five! There are plenty of ways to get involved.
-You don't need to know the first thing about programming (though it's always a
-great time to learn!)
+You don't need to know anything about programming (though it's always a great time to learn!).
 
 Everyone involved in the iD project is subject to the [Code of Conduct](CODE_OF_CONDUCT.md).
 Please take a moment to read it before proceeding, it's short and simple. We want
@@ -37,7 +36,7 @@ When requesting a feature:
 
 ### Issue Labels
 
-We use GitHub labels to keep track of issues.  Some guidelines:
+We use GitHub labels to keep track of issues. Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
 * <sub>[![good-first-issue][good-first-issue]][good-first-issue_link]</sub> -
@@ -231,7 +230,7 @@ The translations for presets, [maintained in the id-tagging-schema repository](h
 preset fields, and lists of search terms. You do _not_ need to translate the
 search terms literally -- use a set of synonyms and related terms appropriate
 to the target language, separated by commas.
-For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating). 
+For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating).
 
 You can check your translations on the [development preview site](https://ideditor.netlify.app),
 which is updated every time we change the `develop` branch.
