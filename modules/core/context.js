@@ -222,17 +222,18 @@ export function coreContext() {
   context.zoomToNote = (noteId, zoomTo) => {
     context.loadNote(noteId, (err, result) => {
       if (err) return;
-      if (zoomTo === false) return;
       const entity = result.data.find(e => e.id === noteId);
       if (entity) {
-          // zoom to, used note loc
-          const note = services.osm.getNote(noteId);
+        // zoom to, used note loc
+        const note = services.osm.getNote(noteId);
+        if (zoomTo !== false) {
           context.map().centerZoom(note.loc,15);
-          // open note layer
-          const noteLayer = context.layers().layer('notes');
-          noteLayer.enabled(true);
-          // select the note
-          context.enter(modeSelectNote(context, noteId));
+        }
+        // open note layer
+        const noteLayer = context.layers().layer('notes');
+        noteLayer.enabled(true);
+        // select the note
+        context.enter(modeSelectNote(context, noteId));
       }
     });
   };
