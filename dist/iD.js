@@ -20136,7 +20136,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.30.0",
+    version: "2.30.1",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
@@ -74717,11 +74717,12 @@
     context.zoomToNote = (noteId, zoomTo) => {
       context.loadNote(noteId, (err, result) => {
         if (err) return;
-        if (zoomTo === false) return;
         const entity = result.data.find((e3) => e3.id === noteId);
         if (entity) {
           const note = services.osm.getNote(noteId);
-          context.map().centerZoom(note.loc, 15);
+          if (zoomTo !== false) {
+            context.map().centerZoom(note.loc, 15);
+          }
           const noteLayer = context.layers().layer("notes");
           noteLayer.enabled(true);
           context.enter(modeSelectNote(context, noteId));
