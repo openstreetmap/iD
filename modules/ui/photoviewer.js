@@ -130,7 +130,7 @@ export function uiPhotoviewer(context) {
                     .attr('class', 'set-photo-from-viewer')
                     .call(svgIcon('#iD-icon-plus'))
                     .call(uiTooltip()
-                        .title(() => t.append('inspector.set_photo_from_viewer'))
+                        .title(() => t.append('inspector.set_photo_from_viewer.enable'))
                         .placement('right')
                     );
 
