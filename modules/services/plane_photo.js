@@ -54,6 +54,10 @@ export default {
     return this;
   },
 
+  /**
+   * Shows the photo frame if hidden
+   * @param {*} context the HTML wrap of the frame
+   */
   showPhotoFrame: function (context) {
     const isHidden = context.selectAll('.photo-frame.plane-frame.hide').size();
 
@@ -70,6 +74,10 @@ export default {
     return this;
   },
 
+  /**
+   * Hides the photo frame if shown
+   * @param {*} context the HTML wrap of the frame
+   */
   hidePhotoFrame: function (context) {
     context
       .select('photo-frame.plane-frame')
@@ -78,6 +86,10 @@ export default {
     return this;
   },
 
+  /**
+   * Renders an image inside the frame
+   * @param {*} data the image data, it should contain an image_path attribute, a link to the actual image.
+   */
   selectPhoto: function (data) {
     dispatch.call('viewerChanged');
 

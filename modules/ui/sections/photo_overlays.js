@@ -24,6 +24,10 @@ export function uiSectionPhotoOverlays(context) {
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
+    /**
+     * Calls all draw function
+     * @param {*} selection Current HTML selection
+     */
     function renderDisclosureContent(selection) {
         var container = selection.selectAll('.photo-overlay-container')
             .data([0]);
@@ -39,7 +43,10 @@ export function uiSectionPhotoOverlays(context) {
             .call(drawUsernameFilter)
             .call(drawLocalPhotos);
     }
-
+    
+    /**
+     * Draws the streetlevels in the right panel
+     */
     function drawPhotoItems(selection) {
         var photoKeys = context.photos().overlayLayerIDs();
         var photoLayers = layers.all().filter(function(obj) { return photoKeys.indexOf(obj.id) !== -1; });
@@ -130,6 +137,9 @@ export function uiSectionPhotoOverlays(context) {
             .property('checked', layerEnabled);
     }
 
+    /**
+     * Draws the photo type filter in the right panel
+     */
     function drawPhotoTypeItems(selection) {
         var data = context.photos().allPhotoTypes();
 
@@ -193,6 +203,9 @@ export function uiSectionPhotoOverlays(context) {
             .property('checked', typeEnabled);
     }
 
+    /**
+     * Draws the date filter in the right panel
+     */
     function drawDateFilter(selection) {
         var data = context.photos().dateFilters();
 
@@ -262,6 +275,9 @@ export function uiSectionPhotoOverlays(context) {
             .classed('active', filterEnabled);
     }
 
+    /**
+     * Draws the date sliderbar filter in the right panel
+     */
     function drawDateSlider(selection){
 
         function filterEnabled() {
@@ -361,6 +377,9 @@ export function uiSectionPhotoOverlays(context) {
         }
     }
 
+    /**
+     * Draws the username filter in the right panel
+     */
     function drawUsernameFilter(selection) {
         function filterEnabled() {
             return context.photos().usernames();
@@ -424,10 +443,18 @@ export function uiSectionPhotoOverlays(context) {
         }
     }
 
+    /**
+     * Toggle on/off the selected layer
+     * @param {*} which Id of the selected layer
+     */
     function toggleLayer(which) {
         setLayer(which, !showsLayer(which));
     }
 
+    /**
+     * @param {*} which Id of the selected layer
+     * @returns whether the layer is enabled
+     */
     function showsLayer(which) {
         var layer = layers.layer(which);
         if (layer) {
@@ -436,6 +463,11 @@ export function uiSectionPhotoOverlays(context) {
         return false;
     }
 
+    /**
+     * Set the selected layer
+     * @param {string} which Id of the selected layer
+     * @param {boolean} enabled 
+     */
     function setLayer(which, enabled) {
         var layer = layers.layer(which);
         if (layer) {
@@ -533,6 +565,9 @@ export function uiSectionPhotoOverlays(context) {
         localPhotosLayer.fileList(d);
     }
 
+    /**
+     * Toggles StreetView on/off
+     */
     function toggleStreetSide(){
         let layerContainer = d3_select('.photo-overlay-container');
         if (!_layersHidden){

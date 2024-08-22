@@ -91,6 +91,10 @@ export default {
     ]);
   },
 
+  /**
+   * Shows the photo frame if hidden
+   * @param {*} context the HTML wrap of the frame
+   */
   showPhotoFrame: function (context) {
     const isHidden = context.selectAll('.photo-frame.pannellum-frame.hide').size();
 
@@ -105,8 +109,12 @@ export default {
     }
 
     return this;
-    },
+  },
 
+  /**
+   * Hides the photo frame if shown
+   * @param {*} context the HTML wrap of the frame
+   */
   hidePhotoFrame: function (viewerContext) {
     viewerContext
       .select('photo-frame.pannellum-frame')
@@ -115,6 +123,11 @@ export default {
     return this;
     },
 
+  /**
+   * Renders an image inside the frame
+   * @param {*} data the image data, it should contain an image_path attribute, a link to the actual image.
+   * @param {boolean} keepOrientation if true, HFOV, pitch and yaw will be kept between images
+   */
   selectPhoto: function (data, keepOrientation) {
     const {key} = data;
     if ( !(key in _currScenes) ) {
