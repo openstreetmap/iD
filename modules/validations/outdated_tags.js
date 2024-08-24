@@ -6,7 +6,8 @@ import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { fileFetcher } from '../core';
 import { presetManager } from '../presets';
 import { services } from '../services';
-import { utilDisplayLabel, utilHashcode, utilTagDiff } from '../util';
+import {  utilHashcode, utilTagDiff } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
