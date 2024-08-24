@@ -19,6 +19,7 @@ export default {
       .attr('class', 'photo-frame pannellum-frame')
       .attr('id', 'ideditor-pannellum-viewer')
       .classed('hide', true)
+      .on('mousedown', function(e) { e.stopPropagation(); })
       .on('keydown', function(e) { e.stopPropagation(); });
 
     if (!window.pannellum) {
