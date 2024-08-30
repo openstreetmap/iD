@@ -80,7 +80,7 @@
     "@openstreetmap/id-tagging-schema": "^6.8.1",
     "@rapideditor/mapillary_sprite_source": "^1.8.0",
     "@rapideditor/temaki": "^5.9.0",
-    "@transifex/api": "^7.1.2",
+    "@transifex/api": "^7.1.3",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.23.3",
     "browserslist-to-esbuild": "^2.1.1",
