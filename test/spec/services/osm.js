@@ -486,9 +486,9 @@ describe('iD.serviceOsm', function () {
 
 
     describe('#loadMultiple', function () {
-        it('loads nodes');
-        it('loads ways');
-        it('does not ignore repeat requests');
+        it.todo('loads nodes');
+        it.todo('loads ways');
+        it.todo('does not ignore repeat requests');
     });
 
 

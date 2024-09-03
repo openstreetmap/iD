@@ -1,5 +1,4 @@
 describe('iD.behaviorHash', function () {
-    mocha.globals('__onhashchange.hash');
 
     var hash, context;
 

@@ -298,7 +298,7 @@ export function uiCombobox(context, klass) {
             // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
             var selected = combo.selectAll('.combobox-option.selected').node();
             if (selected) {
-                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                selected.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
