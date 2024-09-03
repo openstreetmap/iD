@@ -1,7 +1,45 @@
-/* globals chai:false */
-/* eslint no-extend-native:off */
-iD.debug = true;
+import { beforeEach, afterEach, it } from 'vitest';
+import 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import 'happen';
+import fetchMock from 'fetch-mock';
+import envs from '../config/envs.mjs';
 
+chai.use(sinonChai);
+
+global.before = beforeEach;
+global.after = afterEach;
+global.fetchMock = fetchMock;
+global.sinon = sinon;
+global.VITEST = true;
+
+// create global variables for this data, to match what the esbuild config does
+for (const [key, value] of Object.entries(envs)) {
+  Reflect.set(global, key, JSON.parse(value));
+}
+
+// vitest has deprecated the done() callback, so we overwrite the `it` function
+const _it = it;
+Reflect.set(
+  global,
+  'it',
+  Object.assign(
+    (msg: string, fn: (done?: () => void) => void | Promise<void>) => {
+      _it(msg, () =>
+        fn.length ? () => new Promise<void>((resolve) => fn(resolve)) : fn(),
+      );
+    },
+    { todo: _it.todo, skip: _it.skip },
+  ),
+);
+
+// must be imported after global envs are defined
+await import('../modules/id.js');
+const iD = global.iD;
+iD.setDebug(true);
+
+// @ts-expect-error
 // Disable things that use the network
 for (var k in iD.services) { delete iD.services[k]; }
 
@@ -10,7 +48,7 @@ window.location.hash = '#background=none';
 
 // Run without data for speed (tests which need data can set it up themselves)
 iD.fileFetcher.assetPath('../dist/');
-var cached = iD.fileFetcher.cache();
+const cached: any = iD.fileFetcher.cache();
 
 // Initializing `coreContext` will try loading the locale data and English locale strings:
 cached.locales = { en: { rtl: false, pct: 1 } };
@@ -93,23 +131,10 @@ cached.deprecated = [];
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
 cached.discarded = {};
 
+// @ts-expect-error
+window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
 
-mocha.setup({
-    timeout: 5000,  // 5 sec
-    ui: 'bdd',
-    globals: [
-        '__onmousemove.zoom',
-        '__onmouseup.zoom',
-        '__onkeydown.select',
-        '__onkeyup.select',
-        '__onclick.draw',
-        '__onclick.draw-block'
-    ]
-});
-
-expect = chai.expect;
-
-window.d3 = iD.d3;   // Remove this if we can avoid exporting all of d3.js
+// @ts-expect-error
 delete window.PointerEvent;  // force the browser to use mouse events
 
 // some sticky fallbacks
@@ -182,3 +207,7 @@ fetchMock.sticky({
           }, vegbilderOwsCapabilities, {sticky: true});
 fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;
+
+beforeAll(async () => {
+  await iD.coreLocalizer().ensureLoaded();
+});
