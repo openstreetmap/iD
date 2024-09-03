@@ -74,8 +74,10 @@ export function coreFileFetcher() {
   function getUrl(url, which) {
     let prom = _inflight[url];
     if (!prom) {
-      _inflight[url] = prom = fetch(url)
+      _inflight[url] = prom = (window.VITEST ? import(`../${url}`) : fetch(url))
         .then(response => {
+          if (window.VITEST) return response.default;
+
           if (!response.ok || !response.json) {
             throw new Error(response.status + ' ' + response.statusText);
           }
