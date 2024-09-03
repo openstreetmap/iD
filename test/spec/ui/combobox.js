@@ -15,7 +15,7 @@ describe('uiCombobox', function() {
         var start = input.property('selectionStart');
         var finish = input.property('selectionEnd');
 
-        happen.keydown(input.node(), {keyCode: keyCode});
+        input.node().dispatchEvent(new KeyboardEvent('keydown', { keyCode }));
 
         switch (key) {
             case '⇥':
@@ -41,23 +41,23 @@ describe('uiCombobox', function() {
                 value = value.substring(0, start - (start === finish ? 1 : 0)) +
                     value.substring(finish, value.length);
                 input.property('value', value);
-                happen.once(input.node(), {type: 'input'});
+                input.node().dispatchEvent(new MouseEvent('input'));
                 break;
 
             case '⌦':
                 value = value.substring(0, start) +
                     value.substring(finish + (start === finish ? 1 : 0), value.length);
                 input.property('value', value);
-                happen.once(input.node(), {type: 'input'});
+                input.node().dispatchEvent(new MouseEvent('input'));
                 break;
 
             default:
                 value = value.substring(0, start) + key + value.substring(finish, value.length);
                 input.property('value', value);
-                happen.once(input.node(), {type: 'input'});
+                input.node().dispatchEvent(new MouseEvent('input'));
         }
 
-        happen.keyup(input.node(), {keyCode: keyCode});
+        input.node().dispatchEvent(new KeyboardEvent('keyup', { keyCode }));
     }
 
     beforeEach(function() {
@@ -178,7 +178,7 @@ describe('uiCombobox', function() {
     it('does not select when value is empty', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
-        happen.once(input.node(), {type: 'input'});
+        input.node().dispatchEvent(new MouseEvent('input'));
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 

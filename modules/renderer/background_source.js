@@ -11,7 +11,7 @@ import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
 // listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
-window.matchMedia(`
+window.matchMedia?.(`
         (-webkit-min-device-pixel-ratio: 2), /* Safari */
         (min-resolution: 2dppx),             /* standard */
         (min-resolution: 192dpi)             /* fallback */
