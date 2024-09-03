@@ -10,7 +10,8 @@ import { osmNodeGeometriesForTags, osmTagSuggestingArea } from '../osm/tags';
 import { presetManager } from '../presets';
 import { geoHasSelfIntersections, geoSphericalDistance } from '../geo';
 import { t } from '../core/localizer';
-import { utilDisplayLabel, utilTagText } from '../util';
+import { utilTagText } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 

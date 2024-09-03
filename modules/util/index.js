@@ -19,7 +19,6 @@ export { utilDetect } from './detect';
 export { utilDisplayName } from './util';
 export { utilDisplayNameForPath } from './util';
 export { utilDisplayType } from './util';
-export { utilDisplayLabel } from './util';
 export { utilEntityRoot } from './util';
 export { utilEditDistance } from './util';
 export { utilEntityAndDeepMemberIDs } from './util';
