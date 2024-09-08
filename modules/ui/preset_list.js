@@ -149,7 +149,7 @@ export function uiPresetList(context) {
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
+            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, context.inIntro() ? false : 'related-presets', _currLoc, entityPresets));
 
         context.features().on('change.preset-list', updateForFeatureHiddenState);
     }

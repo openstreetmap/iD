@@ -9,7 +9,7 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { utilArrayUniq, utilRebind } from '../util';
+import { utilArrayUniq, utilEditDistance, utilRebind } from '../util';
 
 export { presetCategory };
 export { presetCollection };
@@ -407,7 +407,48 @@ export function presetIndex() {
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     let recents = [];
     if (startWithRecents) {
-      recents = _this.recent().matchGeometry(geometry).collection.slice(0, 4);
+      recents = recents.concat(
+        _this.recent()
+            .matchGeometry(geometry).collection
+            .slice(0, 5) // suggest max 5 related presets
+      );
+    }
+    let relateds = [];
+    if (startWithRecents === 'related-presets') {
+      let basePreset = extraPresets[0].id;
+      const relatedCategories = Object.keys(_categories)
+          .filter(category => _categories[category].members.collection.find(p => p.id === basePreset))
+          .map(category => _categories[category]);
+      relateds = relateds.concat(relatedCategories);
+      function findPotentialSubPresets(p) {
+        if (p.suggestion) return false;
+        if (!p.searchable === false) return false;
+        if (!p.id.startsWith(basePreset)) return false;
+        if (!p.matchGeometry(geometry)) return false;
+        if (p.id === extraPresets[0].id) return false;
+        const validHere = locationManager.locationSetsAt(loc);
+        if (p.locationSetID && !validHere[p.locationSetID]) return false;
+        return true;
+      }
+      function sortByOriginalScore(a, b) {
+        return utilEditDistance(a.id, basePreset) - utilEditDistance(b.id, basePreset);
+        //return a.originalScore < b.originalScore ? 1 : -1;
+      }
+      // find child presets
+      relateds = relateds.concat(_this.collection
+          .filter(findPotentialSubPresets)
+          .sort(sortByOriginalScore));
+      if (relateds.length < 5) {
+        // try again with sibling presets
+        basePreset = basePreset.split('/').slice(0, -1).join('/');
+        if (basePreset !== '') {
+          // don't do this for the base presets --> the regular defaults are better
+          relateds = relateds.concat(_this.collection
+            .filter(findPotentialSubPresets)
+            .sort(sortByOriginalScore));
+        }
+      }
+      relateds = relateds.slice(0, 5); // suggest max 5 related presets
     }
 
     let defaults;
@@ -422,7 +463,12 @@ export function presetIndex() {
     }
 
     let result = presetCollection(
-      utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
+      utilArrayUniq([]
+        .concat(recents)
+        .concat(relateds)
+        .concat(defaults)
+        .concat(extraPresets || [])
+      ).slice(0, n - 1)
     );
 
     if (Array.isArray(loc)) {
