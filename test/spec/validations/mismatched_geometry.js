@@ -4,6 +4,17 @@ describe('iD.validations.mismatched_geometry', function () {
     beforeEach(function() {
         _savedAreaKeys = iD.osmAreaKeys;
         context = iD.coreContext().init();
+        iD.fileFetcher.cache().preset_presets = {
+            library: {
+                tags: { amenity: 'library' },
+                geometry: ['point', 'vertex', 'line', 'area'],
+                locationSet: { include: ['NU'] }
+            },
+            generic_amenity: {
+                tags: { amenity: '*' },
+                geometry: ['point', 'vertex', 'line', 'area']
+            },
+        };
     });
 
     afterEach(function() {
@@ -112,4 +123,11 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(issue.entityIds[0]).to.eql('w-1');
     });
 
+    it('does not error if the best preset is limited to certain regions', async () => {
+        await iD.presetManager.ensureLoaded(true);
+
+        createClosedWay({ amenity: 'library' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
 });
