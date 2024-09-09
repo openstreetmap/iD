@@ -21,6 +21,9 @@ describe('iD.servicePanoramax', function() {
         panoramax = iD.services.panoramax;
         panoramax.reset();
         fetchMock.reset();
+
+        // never resolve
+        fetchMock.mock(/api\.panoramax\.xyz/, new Promise(() => {}));
     });
 
     afterEach(function() {

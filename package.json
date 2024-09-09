@@ -40,7 +40,7 @@
     "start:watch": "run-p build:js:watch start:server",
     "start:server": "node scripts/server.js",
     "test": "npm-run-all -s lint build test:spec",
-    "test:spec": "vitest",
+    "test:spec": "vitest --no-isolate",
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
