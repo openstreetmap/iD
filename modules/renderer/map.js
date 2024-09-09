@@ -653,6 +653,9 @@ export function rendererMap(context) {
 
 
     function redraw(difference, extent) {
+        // in unit tests, we need to abort if the test has already completed
+        if (typeof window === 'undefined') return;
+
         if (surface.empty() || !_redrawEnabled) return;
 
         // If we are in the middle of a zoom/pan, we can't do differenced redraws.
