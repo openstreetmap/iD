@@ -197,9 +197,14 @@ export function utilDisplayName(entity, hideNetwork) {
 
     // for routes, prefer `network+ref+name` or `ref+name` over `name`
     if (name && tags.ref && entity.tags.route) {
-        return tags.network
-            ? t('inspector.display_name.network_ref_name', tags)
-            : t('inspector.display_name.ref_name', tags);
+        // A right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
+        // This name format already contains enough details to disambiguate the feature; avoid duplicating these details.
+        var nameIsPTv2 = name.match(/→|[-=]>/);
+        if (!nameIsPTv2) {
+            return tags.network
+                ? t('inspector.display_name.network_ref_name', tags)
+                : t('inspector.display_name.ref_name', tags);
+        }
     }
     if (name) return name;
 
