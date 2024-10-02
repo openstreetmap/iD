@@ -20136,7 +20136,7 @@
   // package.json
   var package_default = {
     name: "iD",
-    version: "2.30.2",
+    version: "2.30.3",
     description: "A friendly editor for OpenStreetMap",
     main: "dist/iD.min.js",
     repository: "github:openstreetmap/iD",
