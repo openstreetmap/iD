@@ -49,6 +49,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 
+# 2.30.3
+##### 2024-Oct-02
+
+* Refresh background imagery dataset ([#10483])
+
+
+[#10483]: https://github.com/openstreetmap/iD/issues/10483
+
+
 # 2.30.2
 ##### 2024-Aug-21
 
