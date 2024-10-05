@@ -187,6 +187,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow to search for OSM notes by id in search bar ([#10062], thanks [@NaVis0mple])
 * Add support for coordinates in `<degree> <minutes>[ <seconds>]` format to search bar ([#10066], thanks [@NaVis0mple])
 * Improve styling of combobox dopdown list to give entries with long labels more room for better readability ([#10127], thanks [@tordans])
+* Add button(s) to open website URLs in fields for semicolon separated tags ([#9974], thanks [@lefuturiste])
 #### :camera: Street-Level
 * Fetch Microsoft Bing Streetlevel imagery layer via the Bing Maps API (from the previously used undocumented internal API endpoints), fixing reliability issues with the service's integration ([#10074])
 #### :white_check_mark: Validation
@@ -210,6 +211,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9422]: https://github.com/openstreetmap/iD/issues/9422
 [#9876]: https://github.com/openstreetmap/iD/issues/9876
 [#9891]: https://github.com/openstreetmap/iD/pull/9891
+[#9974]: https://github.com/openstreetmap/iD/pull/9974
 [#9983]: https://github.com/openstreetmap/iD/issues/9983
 [#9992]: https://github.com/openstreetmap/iD/issues/9992
 [#10035]: https://github.com/openstreetmap/iD/pull/10035
@@ -224,6 +226,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@mangerlahn]: https://github.com/mangerlahn
 [@NaVis0mple]: https://github.com/NaVis0mple
 [@mtmail]: https://github.com/mtmail
+[@lefuturiste]: https://github.com/lefuturiste
 
 
 # 2.27.3
