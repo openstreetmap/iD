@@ -521,16 +521,52 @@ export function uiFieldLocalized(field, context) {
         loadCountryCode();
         return localized;
     };
+async function fetchCountryData() {
+    const response = await fetch('https://restcountries.com/v3.1/all');
+    const countries = await response.json();
+    const countryToISO = {};
 
-    function loadCountryCode() {
-        var extent = combinedEntityExtent();
-        var countryCode = extent && countryCoder.iso1A2Code(extent.center());
-        _countryCode = countryCode && countryCode.toLowerCase();
+    countries.forEach(country => {
+        const countryName = country.name.common.toLowerCase();
+        const isoCode = country.cca2.toLowerCase();
+        countryToISO[countryName] = isoCode;
+    });
+
+    return countryToISO;
+}
+
+let countryToISO = {};
+
+async function getISOCode(input) {
+    if (Object.keys(countryToISO).length === 0) {
+        countryToISO = await fetchCountryData();
     }
 
-    function combinedEntityExtent() {
-        return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
+    const lowerInput = input.toLowerCase();
+
+    if (Object.values(countryToISO).includes(lowerInput)) {
+        return lowerInput;
     }
 
-    return utilRebind(localized, dispatch, 'on');
+    const isoCode = countryToISO[lowerInput];
+    if (isoCode) {
+        return isoCode;
+    } else {
+        return "ISO code or country name does not exist.";
+    }
+}
+
+async function loadCountryCode() {
+    var extent = combinedEntityExtent();
+    var countryCode = extent && countryCoder.iso1A2Code(extent.center());
+    _countryCode = await getISOCode(countryCode) || (countryCode && countryCode.toLowerCase());
+}
+
+function combinedEntityExtent() {
+    return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
+}
+
+return utilRebind(localized, dispatch, 'on');
+    
+  
 }
