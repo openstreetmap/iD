@@ -4234,7 +4234,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 
 /* scrollbars only when necessary*/
 .inspector-hover div {
-    overflow-x: visible;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
