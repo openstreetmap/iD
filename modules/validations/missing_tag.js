@@ -38,6 +38,12 @@ export function validationMissingTag(context) {
         return entity.type === 'relation' && !entity.tags.type;
     }
 
+    function isWayWithNoTollConnectedToGantry(way, context) {
+        if (way.type !== 'way' || way.tags.toll !== 'no') return false;
+        var childNodes = context.graph().childNodes(way);
+        return childNodes.some(node => node.tags.highway === 'toll_gantry');
+    }
+
     var validation = function checkMissingTag(entity, graph) {
 
         var subtype;
@@ -61,6 +67,9 @@ export function validationMissingTag(context) {
             }
         }
 
+        if (isWayWithNoTollConnectedToGantry(entity, context)) {
+            subtype = 'way_with_no_toll_connected_to_gantry';
+        }
         // flag an unknown road even if it's a member of a relation
         if (!subtype && isUnknownRoad(entity)) {
             subtype = 'highway_classification';
@@ -68,12 +77,12 @@ export function validationMissingTag(context) {
 
         if (!subtype) return [];
 
-        var messageID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag.' + subtype;
-        var referenceID = subtype === 'highway_classification' ? 'unknown_road' : 'missing_tag';
+        var messageID = subtype === 'highway_classification' ? 'unknown_road' : subtype === 'way_with_no_toll_connected_to_gantry'? 'no_toll' : 'missing_tag.' + subtype;
+        var referenceID = subtype === 'highway_classification' ? 'unknown_road'  : subtype === 'way_with_no_toll_connected_to_gantry' ? 'no_toll' : 'missing_tag';
 
         // can always delete if the user created it in the first place..
         var canDelete = (entity.version === undefined || entity.v !== undefined);
-        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
+        var severity = (canDelete && (subtype !== 'highway_classification' && subtype !== 'way_with_no_toll_connected_to_gantry')) ? 'error' : 'warning';
 
         return [new validationIssue({
             type: type,
@@ -91,7 +100,7 @@ export function validationMissingTag(context) {
 
                 var fixes = [];
 
-                var selectFixType = subtype === 'highway_classification' ? 'select_road_type' : 'select_preset';
+                var selectFixType = (subtype === 'highway_classification' || subtype === 'way_with_no_toll_connected_to_gantry') ? 'select_road_type' : 'select_preset';
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-icon-search',
