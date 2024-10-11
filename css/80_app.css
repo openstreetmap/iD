@@ -2370,7 +2370,7 @@ div.combobox {
     z-index: 9999;
     display: none;
     box-shadow: 0 4px 10px 1px rgba(0,0,0,.2);
-    margin-top: -1px;
+    margin-top: -240px;
     background: #fff;
     max-height: 245px;
     overflow-y: auto;
