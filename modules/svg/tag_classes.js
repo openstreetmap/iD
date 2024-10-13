@@ -132,18 +132,30 @@ export function svgTagClasses() {
         }
 
         // For highways, look for surface tagging..
-        if ((primary === 'highway' && !osmPathHighwayTagValues[t.highway]) || primary === 'aeroway') {
-            var surface = t.highway === 'track' ? 'unpaved' : 'paved';
+        if (primary === 'highway' || primary === 'aeroway') {
+            var isNonPathHighwayTags = !osmPathHighwayTagValues[t.highway];
+            var surface = isNonPathHighwayTags ? t.highway === 'track' ? 'unpaved' : 'paved' : undefined;
+            var access = null;
             for (k in t) {
                 v = t[k];
-                if (k in osmPavedTags) {
-                    surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                if (isNonPathHighwayTags) {
+                    if (k in osmPavedTags) {
+                        surface = osmPavedTags[k][v] ? 'paved' : 'unpaved';
+                    }
+                    if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
+                        surface = 'semipaved';
+                    }
                 }
-                if (k in osmSemipavedTags && !!osmSemipavedTags[k][v]) {
-                    surface = 'semipaved';
+                // access tag
+                if (k === 'access') {
+                    access = v;
+                    classes.push('tag-access-' + access);
                 }
             }
-            classes.push('tag-' + surface);
+            if (surface) {
+                classes.push('tag-' + surface);
+            }
+            
         }
 
         // If this is a wikidata-tagged item, add a class for that..
