@@ -292,17 +292,45 @@ export function uiFeatureList(context) {
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
+            // var enter = items.enter()
+            //     .insert('button', '.geocode-item')
+            //     .attr('class', 'feature-list-item')
+            //     .on('mouseover', mouseover)
+            //     .on('mouseout', mouseout)
+            //     .on('click', click);
+
+            // var label = enter
+            //     .append('div')
+            //     .attr('class', 'label');
             var enter = items.enter()
-                .insert('button', '.geocode-item')
-                .attr('class', 'feature-list-item')
-                .on('mouseover', mouseover)
-                .on('mouseout', mouseout)
-                .on('click', click);
-
-            var label = enter
-                .append('div')
-                .attr('class', 'label');
-
+            .insert('button', '.geocode-item')
+            .attr('class', 'feature-list-item')
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
+            .on('click', click);
+        
+        var label = enter
+            .append('div')
+            .attr('class', 'label');
+        
+        // Add a checkbox for each feature
+        label.append('input')
+            .attr('type', 'checkbox')
+            .attr('class', 'feature-checkbox')
+            .on('click', function(event) {
+                event.stopPropagation(); // Stop the checkbox click from triggering the button click event
+            })
+            .on('change', function(event) {
+                // Get the current feature data (d)
+                var d = event.target.__data__; // Access the bound data for the checkbox
+        
+                // Check if the checkbox is checked
+                if (event.target.checked) {
+                    utilHighlightEntities([d.id], true, context); // Highlight the entity
+                } else {
+                    utilHighlightEntities([d.id], false, context); // Remove highlight
+                }
+            });
             label
                 .each(function(d) {
                     d3_select(this)
@@ -335,15 +363,28 @@ export function uiFeatureList(context) {
 
         function mouseover(d3_event, d) {
             if (d.id === -1) return;
-
-            utilHighlightEntities([d.id], true, context);
+        
+            // Check if the checkbox is checked
+            var isChecked = d3_select(this).select('.feature-checkbox').property('checked');
+            
+            if (!isChecked) {
+                utilHighlightEntities([d.id], true, context);
+            }
         }
+        
 
+        // function mouseout(d3_event, d) {
+        //     if (d.id === -1) return;
 
+        //     utilHighlightEntities([d.id], false, context);
+        // }
         function mouseout(d3_event, d) {
-            if (d.id === -1) return;
-
-            utilHighlightEntities([d.id], false, context);
+            var isChecked = d3_select(this).select('.feature-checkbox').property('checked');
+            
+            // If the checkbox is not checked, remove the highlight on mouseout
+            if (!isChecked) {
+                utilHighlightEntities([d.id], false, context); 
+            }
         }
 
 
