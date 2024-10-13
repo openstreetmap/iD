@@ -1,4 +1,12 @@
 export { operationCircularize } from './circularize';
+export { operationCloneAddress } from './clone_address';
+export { operationCloneName } from './clone_name';
+export { operationCloneTurnLanes } from './clone_turn_lanes';
+export { operationCloneLanes } from './clone_lanes';
+export { operationCloneCycleway } from './clone_cycleway';
+export { operationCloneSidewalk } from './clone_sidewalk';
+export { operationCloneBusLanes } from './clone_bus_lanes';
+export { operationCloneTransition } from './clone_transition';
 export { operationContinue } from './continue';
 export { operationCopy } from './copy';
 export { operationDelete } from './delete';
