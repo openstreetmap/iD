@@ -589,6 +589,7 @@ describe('iD.osmRelation', function () {
     });
 
     describe('#multipolygon', function () {
+        const specify = it;
         specify('single polygon consisting of a single way', function () {
             var a = iD.osmNode({loc: [1, 1]});
             var b = iD.osmNode({loc: [3, 3]});
@@ -810,6 +811,7 @@ describe('iD.osmRelation', function () {
     });
 
     describe('.creationOrder comparator', function () {
+        const specify = it;
         specify('orders existing relations newest-first', function () {
             var a = iD.osmRelation({ id: 'r1' });
             var b = iD.osmRelation({ id: 'r2' });

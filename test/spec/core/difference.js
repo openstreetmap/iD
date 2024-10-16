@@ -485,6 +485,6 @@ describe('iD.coreDifference', function () {
             expect(diff.complete()).to.be.ok;
         });
 
-        it('limits changes to those within a given extent');
+        it.todo('limits changes to those within a given extent');
     });
 });

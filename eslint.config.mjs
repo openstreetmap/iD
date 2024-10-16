@@ -110,7 +110,9 @@ export default [
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.mocha,
+        ...globals.jest,
+        'before': 'readonly',
+        'after': 'readonly',
         'd3': 'readonly',
         'iD': 'readonly',
         'sinon': 'readonly',

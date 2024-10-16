@@ -23,6 +23,9 @@ export * from './validations/index';
 // This is only done in testing because of the performance penalty.
 export let debug = false;
 
+/** @param {boolean} newValue */
+export const setDebug = (newValue) => { debug = newValue; };
+
 // Reexport just what our tests use, see #4379
 import * as D3 from 'd3';
 export let d3 = {
