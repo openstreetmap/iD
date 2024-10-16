@@ -207,3 +207,7 @@ fetchMock.sticky({
           }, vegbilderOwsCapabilities, {sticky: true});
 fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;
+
+beforeAll(async () => {
+  await iD.coreLocalizer().ensureLoaded();
+});
