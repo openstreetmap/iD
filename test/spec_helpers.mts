@@ -131,10 +131,11 @@ cached.deprecated = [];
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
 cached.discarded = {};
 
+// @ts-expect-error
 window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
 
 // @ts-expect-error
-delete window.PointerEvent; // force the browser to use mouse events
+delete window.PointerEvent;  // force the browser to use mouse events
 
 // some sticky fallbacks
 const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
