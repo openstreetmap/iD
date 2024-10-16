@@ -888,6 +888,12 @@ en:
     username_filter:
       title: "Username"
       tooltip: "Show only photos by this user"
+    age_slider_filter:
+      title: "Year Slider"
+      tooltip: "Select oldest photo year"
+      one_year: "Last year"
+      three_year: "Three years"
+      all: "Show all"
   feature:
     points:
       description: Points
@@ -2379,6 +2385,8 @@ en:
       way_selected:
         title: "With way selected"
         child: "Select child nodes"
+      enable:
+        streetlevel: "Toggle streetlevel photo view"
     editing:
       title: "Editing"
       drawing:

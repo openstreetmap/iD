@@ -10,6 +10,10 @@ import { svgIcon } from '../../svg';
 
 export function uiSectionPhotoOverlays(context) {
 
+    let _savedLayers = [];
+    let _layersHidden = false;
+    const _streetLayerIDs = ['streetside', 'mapillary', 'mapillary-map-features', 'mapillary-signs', 'kartaview', 'mapilio', 'vegbilder', 'panoramax'];
+
     var settingsLocalPhotos = uiSettingsLocalPhotos(context)
         .on('change',  localPhotosChanged);
 
@@ -20,6 +24,10 @@ export function uiSectionPhotoOverlays(context) {
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
+    /**
+     * Calls all draw function
+     * @param {*} selection Current HTML selection
+     */
     function renderDisclosureContent(selection) {
         var container = selection.selectAll('.photo-overlay-container')
             .data([0]);
@@ -30,11 +38,15 @@ export function uiSectionPhotoOverlays(context) {
             .merge(container)
             .call(drawPhotoItems)
             .call(drawPhotoTypeItems)
+            .call(drawDateSlider)
             .call(drawDateFilter)
             .call(drawUsernameFilter)
             .call(drawLocalPhotos);
     }
-
+    
+    /**
+     * Draws the streetlevels in the right panel
+     */
     function drawPhotoItems(selection) {
         var photoKeys = context.photos().overlayLayerIDs();
         var photoLayers = layers.all().filter(function(obj) { return photoKeys.indexOf(obj.id) !== -1; });
@@ -51,7 +63,7 @@ export function uiSectionPhotoOverlays(context) {
             return d.layer && d.layer.supported();
         }
         function layerEnabled(d) {
-            return layerSupported(d) && d.layer.enabled();
+            return layerSupported(d) && (d.layer.enabled() || _savedLayers.includes(d.id));
         }
         function layerRendered(d) {
             return d.layer.rendered?.(context.map().zoom()) ?? true;
@@ -125,6 +137,9 @@ export function uiSectionPhotoOverlays(context) {
             .property('checked', layerEnabled);
     }
 
+    /**
+     * Draws the photo type filter in the right panel
+     */
     function drawPhotoTypeItems(selection) {
         var data = context.photos().allPhotoTypes();
 
@@ -170,7 +185,7 @@ export function uiSectionPhotoOverlays(context) {
             .append('input')
             .attr('type', 'checkbox')
             .on('change', function(d3_event, d) {
-                context.photos().togglePhotoType(d);
+                context.photos().togglePhotoType(d, true);
             });
 
         labelEnter
@@ -188,6 +203,9 @@ export function uiSectionPhotoOverlays(context) {
             .property('checked', typeEnabled);
     }
 
+    /**
+     * Draws the date filter in the right panel
+     */
     function drawDateFilter(selection) {
         var data = context.photos().dateFilters();
 
@@ -257,6 +275,111 @@ export function uiSectionPhotoOverlays(context) {
             .classed('active', filterEnabled);
     }
 
+    /**
+     * Draws the date sliderbar filter in the right panel
+     */
+    function drawDateSlider(selection){
+
+        function filterEnabled() {
+            return context.photos().yearSliderValue();
+        }
+
+        var ul = selection
+            .selectAll('.layer-list-date-slider')
+            .data([0]);
+
+        ul.exit()
+            .remove();
+
+        ul = ul.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-list-date-slider')
+            .merge(ul);
+
+        var li = ul.selectAll('.list-item-date-slider')
+            .data(context.photos().shouldFilterDateBySlider() ? ['date-slider'] : []);
+
+        li.exit()
+            .remove();
+
+        var liEnter = li.enter()
+            .append('li')
+            .attr('class', 'list-item-date-slider');
+
+        var labelEnter = liEnter
+        .append('label')
+        .each(function() {
+            d3_select(this)
+                .call(uiTooltip()
+                    .title(() => t.append('photo_overlays.age_slider_filter.tooltip'))
+                    .placement('top')
+                );
+        });
+
+        labelEnter
+            .append('span')
+            .attr('class', 'yearSliderSpan')
+            .call(t.append('photo_overlays.age_slider_filter.title'));
+
+        let sliderWrap = labelEnter
+            .append('div')
+            .attr('class','slider-wrap');
+
+        sliderWrap
+            .append('input')
+            .attr('type', 'range')
+            .attr('min', 1)
+            .attr('max', 5)
+            .attr('list', 'dateValues')
+            .attr('value', yearSliderValue)
+            .attr('class', 'list-option-date-slider')
+            .call(utilNoAuto)
+            .on('change', function() {
+                let value = d3_select(this).property('value');
+                context.photos().setFromYearFilter(value, true);
+            });
+
+            let datalist = sliderWrap.append('datalist')
+                .attr('id', 'dateValues')
+                .attr('class', 'year-datalist');
+
+            datalist
+                .append('option')
+                .attr('value', 5)
+                .call(t.append('photo_overlays.age_slider_filter.all'));
+
+            datalist
+                .append('option')
+                .attr('value', 4);
+
+            datalist
+                .append('option')
+                .attr('value', 3)
+                .call(t.append('photo_overlays.age_slider_filter.three_year'));
+
+            datalist
+                .append('option')
+                .attr('value', 2);
+
+            datalist
+                .append('option')
+                .attr('value', 1)
+                .call(t.append('photo_overlays.age_slider_filter.one_year'));
+
+        li
+            .merge(liEnter)
+            .classed('active', filterEnabled);
+
+        function yearSliderValue() {
+            var sliderValue = context.photos().yearSliderValue();
+            if (sliderValue) return sliderValue;
+            return 5;
+        }
+    }
+
+    /**
+     * Draws the username filter in the right panel
+     */
     function drawUsernameFilter(selection) {
         function filterEnabled() {
             return context.photos().usernames();
@@ -320,10 +443,18 @@ export function uiSectionPhotoOverlays(context) {
         }
     }
 
+    /**
+     * Toggle on/off the selected layer
+     * @param {*} which Id of the selected layer
+     */
     function toggleLayer(which) {
         setLayer(which, !showsLayer(which));
     }
 
+    /**
+     * @param {*} which Id of the selected layer
+     * @returns whether the layer is enabled
+     */
     function showsLayer(which) {
         var layer = layers.layer(which);
         if (layer) {
@@ -332,6 +463,11 @@ export function uiSectionPhotoOverlays(context) {
         return false;
     }
 
+    /**
+     * Set the selected layer
+     * @param {string} which Id of the selected layer
+     * @param {boolean} enabled 
+     */
     function setLayer(which, enabled) {
         var layer = layers.layer(which);
         if (layer) {
@@ -429,8 +565,32 @@ export function uiSectionPhotoOverlays(context) {
         localPhotosLayer.fileList(d);
     }
 
+    /**
+     * Toggles StreetView on/off
+     */
+    function toggleStreetSide(){
+        let layerContainer = d3_select('.photo-overlay-container');
+        if (!_layersHidden){
+            layers.all().forEach(d => {
+                if (_streetLayerIDs.includes(d.id)) {
+                    if (showsLayer(d.id)) _savedLayers.push(d.id);
+                    setLayer(d.id, false);
+                }
+            });
+            layerContainer.classed('disabled-panel', true);
+        } else {
+            _savedLayers.forEach(d => {
+                setLayer(d, true);
+            });
+            _savedLayers = [];
+            layerContainer.classed('disabled-panel', false);
+        }
+        _layersHidden = !_layersHidden;
+    };
+
     context.layers().on('change.uiSectionPhotoOverlays', section.reRender);
     context.photos().on('change.uiSectionPhotoOverlays', section.reRender);
+    context.keybinding().on('⇧P', toggleStreetSide);
 
     context.map()
         .on('move.photo_overlays',

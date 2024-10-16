@@ -1,6 +1,39 @@
 describe('iD.servicePanoramax', function() {
-    var dimensions = [64, 64];
+    const dimensions = [64, 64];
     var context, panoramax;
+    const data = {
+        images:[{
+            loc: [10,0],
+            capture_time: '2020-01-01',
+            id: 'abc',
+            account_id: '123',
+            sequence_id: 'a1b2',
+            heading: 0,
+            image_path: '',
+            isPano: true,
+            model: 'camera',
+        }, {
+            loc: [10,1],
+            capture_time: '2020-02-01',
+            id: 'def',
+            account_id: 'c3d4',
+            sequence_id: '',
+            heading: 0,
+            image_path: '',
+            isPano: true,
+            model: 'camera',
+        }, {
+            loc: [10,2],
+            capture_time: '2020-02-01',
+            id: 'ghi',
+            account_id: '789',
+            sequence_id: 'e5f6',
+            heading: 0,
+            image_path: '',
+            isPano: true,
+            model: 'camera',
+        }],
+    };
 
     before(function() {
         iD.services.panoramax = iD.servicePanoramax;
@@ -54,6 +87,38 @@ describe('iD.servicePanoramax', function() {
         });
     });
 
+    describe('#loadImages', function() {
+        it('does not load images around null island', function (done) {
+            var spy = sinon.spy();
+            fetchMock.mock(new RegExp('/panoramax-test/'), {
+                body: JSON.stringify(data),
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            context.projection
+                .scale(iD.geoZoomToScale(15))
+                .translate([0, 0]);
+
+            panoramax.on('loadedImages', spy);
+            panoramax.loadImages(context.projection);
+
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                expect(fetchMock.calls().length).to.eql(0);   // no tile requests of any kind
+                done();
+            }, 200);
+        });
+
+        it('handle API error response', function(done) {
+            fetchMock.mock('/panoramax-test/', 500);
+
+            panoramax.getImageData('collection1', 'image1')
+                .then(() => done(new Error('Expected method to reject.')))
+                .catch(() => done());
+        });
+    });
+
     describe('#images', function() {
         it('returns images in the visible map area', function() {
             var features = [
@@ -85,6 +150,24 @@ describe('iD.servicePanoramax', function() {
             var res = panoramax.images(context.projection);
             expect(res).to.have.length.of.at.most(5);
         });
+
+        it('handle invalid image data', function() {
+            const invalidImage = { id: null, sequence_id: null };
+            panoramax.setActiveImage(invalidImage);
+            expect(panoramax.getActiveImage()).to.be.null;
+        });
+
+        it('return empty array when no images are available', function() {
+            const result = panoramax.images(context.projection);
+            expect(result).to.deep.equal([]);
+        });
+
+        it('load images quickly under normal conditions', function() {
+            const start = performance.now();
+            panoramax.loadImages(context.projection);
+            const duration = performance.now() - start;
+            expect(duration).to.be.lessThan(1000);
+        });
     });
 
 
@@ -114,5 +197,4 @@ describe('iD.servicePanoramax', function() {
             expect(panoramax.getActiveImage()).to.eql(d);
         });
     });
-
 });

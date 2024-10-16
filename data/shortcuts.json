@@ -97,6 +97,11 @@
           {
             "shortcuts": ["shortcuts.toggle.key", "?"],
             "text": "shortcuts.browsing.help.keyboard"
+          },
+          {
+            "modifiers": ["⇧"],
+            "shortcuts": ["P"],
+            "text": "shortcuts.browsing.enable.streetlevel"
           }
         ]
       },
