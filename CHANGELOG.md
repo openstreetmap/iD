@@ -43,18 +43,20 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
 #### :earth_asia: Localization
-
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
-
+* Add Ladin (language code `lld`) as an available option for multilingual names
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Migrate unit tests from karma to vitest ([#10452])
 
+[#10452]: https://github.com/openstreetmap/iD/pull/10452
 [#10488]: https://github.com/openstreetmap/iD/pull/10488
 [#10489]: https://github.com/openstreetmap/iD/pull/10489
 [@winstonsung]: https://github.com/winstonsung/
+
 
 # 2.30.4
 ##### 2024-Oct-07
