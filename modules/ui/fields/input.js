@@ -50,6 +50,9 @@ export function uiFieldText(field, context) {
     }
 
 
+    
+
+
     function calcLocked() {
         // Protect certain fields that have a companion `*:wikidata` value
         var isLocked = (field.id === 'brand' || field.id === 'network' || field.id === 'operator' || field.id === 'flag') &&
@@ -348,7 +351,7 @@ export function uiFieldText(field, context) {
 
     function updatePhonePlaceholder() {
         if (input.empty() || !Object.keys(_phoneFormats).length) return;
-
+        change()(); 
         var extent = combinedEntityExtent();
         var countryCode = extent && countryCoder.iso1A2Code(extent.center());
         var format = countryCode && _phoneFormats[countryCode.toLowerCase()];
@@ -404,16 +407,20 @@ export function uiFieldText(field, context) {
         }
     }
 
-
     function change(onInput) {
         return function() {
             var t = {};
             var val = utilGetSetValue(input);
+
+            if (field.type === 'tel') {
+                val = val.replace(/^tel:\/\//, ''); // Remove 'tel://' prefix if present
+                val = val.replace(/^tel:/, ''); // Remove 'tel:' prefix if present
+            }
+    
             if (!onInput) val = context.cleanTagValue(val);
-
-            // don't override multiple values with blank string
+ 
             if (!val && getVals(_tags).size > 1) return;
-
+    
             var displayVal = val;
             if (field.type === 'number' && val) {
                 var numbers = val.split(';');
@@ -431,11 +438,11 @@ export function uiFieldText(field, context) {
             if (!onInput) utilGetSetValue(input, displayVal);
             t[field.key] = val || undefined;
             if (field.keys) {
-                // for multi-key fields with: handle alternative tag keys gracefully
+                // For multi-key fields: handle alternative tag keys gracefully
                 // https://github.com/openstreetmap/id-tagging-schema/issues/905
                 dispatch.call('change', this, tags => {
                     if (field.keys.some(key => tags[key])) {
-                        // use exiting key(s)
+                        // Use existing key(s)
                         field.keys.filter(key => tags[key]).forEach(key => {
                             tags[key] = val || undefined;
                         });
@@ -450,7 +457,6 @@ export function uiFieldText(field, context) {
             }
         };
     }
-
 
     i.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
@@ -542,3 +548,4 @@ export function uiFieldText(field, context) {
 
     return utilRebind(i, dispatch, 'on');
 }
+
