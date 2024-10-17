@@ -5706,6 +5706,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     flex-direction: column;
     background: #fff;
     border-radius: 4px;
+    flex-direction: row;
     /* padding is set in edit_menu.js */
 }
 
