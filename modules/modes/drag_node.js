@@ -232,6 +232,9 @@ export function modeDragNode(context) {
             isInvalid = hasInvalidGeometry(entity, context.graph());
         }
 
+        if (entity.type === 'node' && entity.isLocked()) {
+            isInvalid ||= 'locked';
+        }
 
         var nope = context.surface().classed('nope');
         if (isInvalid === 'relation' || isInvalid === 'restriction') {
@@ -243,6 +246,11 @@ export function modeDragNode(context) {
                         { relation: presetManager.item('type/restriction').name() }
                     ))();
             }
+        } else if (isInvalid === 'locked') {
+            context.ui().flash
+                .duration(3000)
+                .iconName('#iD-icon-no')
+                .label(t.append('operations.move.locked.single'))();
         } else if (isInvalid) {
             var errorID = isInvalid === 'line' ? 'lines' : 'areas';
             context.ui().flash
