@@ -107,6 +107,44 @@ export function svgDefs(context) {
             .attr('stroke-width', '0.5px')
             .attr('stroke-opacity', '0.75');
 
+        _defsSelection
+            .append('marker')
+            .attr('id', 'ideditor-viewfield-marker-side')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield-marker-path')
+            .attr('d', 'M 6 14 C 8 13.4 8 13.4 10 14 L 14 7 L 14 5 L 2 5 L 2 7 Z')
+            .attr('fill', '#333')
+            .attr('fill-opacity', '0.75')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
+        _defsSelection
+            .append('marker')
+            .attr('id', 'ideditor-viewfield-marker-side-wireframe')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield-marker-path')
+            .attr('d', 'M 6 14 C 8 13.4 8 13.4 10 14 L 14 7 L 14 5 L 2 5 L 2 7 Z')
+            .attr('fill', 'none')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
+
         // add patterns
         var patterns = _defsSelection.selectAll('pattern')
             .data([

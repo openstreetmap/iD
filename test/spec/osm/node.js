@@ -209,11 +209,11 @@ describe('iD.osmNode', function () {
             var node5 = iD.osmNode({ loc: [0, 0], tags: { direction: '1000' }});
             var graph = iD.coreGraph([node1, node2, node3, node4, node5]);
 
-            expect(node1.directions(graph, projection)).to.eql([0], 'numeric 0');
-            expect(node2.directions(graph, projection)).to.eql([45], 'numeric 45');
-            expect(node3.directions(graph, projection)).to.eql([-45], 'numeric -45');
-            expect(node4.directions(graph, projection)).to.eql([360], 'numeric 360');
-            expect(node5.directions(graph, projection)).to.eql([1000], 'numeric 1000');
+            expect(node1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 0 }], 'numeric 0');
+            expect(node2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 45 }], 'numeric 45');
+            expect(node3.directions(graph, projection)).to.eql([{ type: 'direction', angle: -45 }], 'numeric -45');
+            expect(node4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 360 }], 'numeric 360');
+            expect(node5.directions(graph, projection)).to.eql([{ type: 'direction', angle: 1000 }], 'numeric 1000');
         });
 
         it('supports cardinal direction tags (test abbreviated and mixed case)', function () {
@@ -316,85 +316,85 @@ describe('iD.osmNode', function () {
                 nodeNNW1, nodeNNW2, nodeNNW3, nodeNNW4
             ]);
 
-            expect(nodeN1.directions(graph, projection)).to.eql([0], 'cardinal n');
-            expect(nodeN2.directions(graph, projection)).to.eql([0], 'cardinal N');
-            expect(nodeN3.directions(graph, projection)).to.eql([0], 'cardinal north');
-            expect(nodeN4.directions(graph, projection)).to.eql([0], 'cardinal NOrth');
+            expect(nodeN1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 0 }], 'cardinal n');
+            expect(nodeN2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 0 }], 'cardinal N');
+            expect(nodeN3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 0 }], 'cardinal north');
+            expect(nodeN4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 0 }], 'cardinal NOrth');
 
-            expect(nodeNNE1.directions(graph, projection)).to.eql([22], 'cardinal nne');
-            expect(nodeNNE2.directions(graph, projection)).to.eql([22], 'cardinal NnE');
-            expect(nodeNNE3.directions(graph, projection)).to.eql([22], 'cardinal northnortheast');
-            expect(nodeNNE4.directions(graph, projection)).to.eql([22], 'cardinal NOrthnorTHEast');
+            expect(nodeNNE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 22 }], 'cardinal nne');
+            expect(nodeNNE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 22 }], 'cardinal NnE');
+            expect(nodeNNE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 22 }], 'cardinal northnortheast');
+            expect(nodeNNE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 22 }], 'cardinal NOrthnorTHEast');
 
-            expect(nodeNE1.directions(graph, projection)).to.eql([45], 'cardinal ne');
-            expect(nodeNE2.directions(graph, projection)).to.eql([45], 'cardinal nE');
-            expect(nodeNE3.directions(graph, projection)).to.eql([45], 'cardinal northeast');
-            expect(nodeNE4.directions(graph, projection)).to.eql([45], 'cardinal norTHEast');
+            expect(nodeNE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 45 }], 'cardinal ne');
+            expect(nodeNE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 45 }], 'cardinal nE');
+            expect(nodeNE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 45 }], 'cardinal northeast');
+            expect(nodeNE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 45 }], 'cardinal norTHEast');
 
-            expect(nodeENE1.directions(graph, projection)).to.eql([67], 'cardinal ene');
-            expect(nodeENE2.directions(graph, projection)).to.eql([67], 'cardinal EnE');
-            expect(nodeENE3.directions(graph, projection)).to.eql([67], 'cardinal eastnortheast');
-            expect(nodeENE4.directions(graph, projection)).to.eql([67], 'cardinal EAstnorTHEast');
+            expect(nodeENE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 67 }], 'cardinal ene');
+            expect(nodeENE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 67 }], 'cardinal EnE');
+            expect(nodeENE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 67 }], 'cardinal eastnortheast');
+            expect(nodeENE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 67 }], 'cardinal EAstnorTHEast');
 
-            expect(nodeE1.directions(graph, projection)).to.eql([90], 'cardinal e');
-            expect(nodeE2.directions(graph, projection)).to.eql([90], 'cardinal E');
-            expect(nodeE3.directions(graph, projection)).to.eql([90], 'cardinal east');
-            expect(nodeE4.directions(graph, projection)).to.eql([90], 'cardinal EAst');
+            expect(nodeE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 90 }], 'cardinal e');
+            expect(nodeE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 90 }], 'cardinal E');
+            expect(nodeE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 90 }], 'cardinal east');
+            expect(nodeE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 90 }], 'cardinal EAst');
 
-            expect(nodeESE1.directions(graph, projection)).to.eql([112], 'cardinal ese');
-            expect(nodeESE2.directions(graph, projection)).to.eql([112], 'cardinal EsE');
-            expect(nodeESE3.directions(graph, projection)).to.eql([112], 'cardinal eastsoutheast');
-            expect(nodeESE4.directions(graph, projection)).to.eql([112], 'cardinal EAstsouTHEast');
+            expect(nodeESE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 112 }], 'cardinal ese');
+            expect(nodeESE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 112 }], 'cardinal EsE');
+            expect(nodeESE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 112 }], 'cardinal eastsoutheast');
+            expect(nodeESE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 112 }], 'cardinal EAstsouTHEast');
 
-            expect(nodeSE1.directions(graph, projection)).to.eql([135], 'cardinal se');
-            expect(nodeSE2.directions(graph, projection)).to.eql([135], 'cardinal sE');
-            expect(nodeSE3.directions(graph, projection)).to.eql([135], 'cardinal southeast');
-            expect(nodeSE4.directions(graph, projection)).to.eql([135], 'cardinal souTHEast');
+            expect(nodeSE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 135 }], 'cardinal se');
+            expect(nodeSE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 135 }], 'cardinal sE');
+            expect(nodeSE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 135 }], 'cardinal southeast');
+            expect(nodeSE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 135 }], 'cardinal souTHEast');
 
-            expect(nodeSSE1.directions(graph, projection)).to.eql([157], 'cardinal sse');
-            expect(nodeSSE2.directions(graph, projection)).to.eql([157], 'cardinal SsE');
-            expect(nodeSSE3.directions(graph, projection)).to.eql([157], 'cardinal southsoutheast');
-            expect(nodeSSE4.directions(graph, projection)).to.eql([157], 'cardinal SouthsouTHEast');
+            expect(nodeSSE1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 157 }], 'cardinal sse');
+            expect(nodeSSE2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 157 }], 'cardinal SsE');
+            expect(nodeSSE3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 157 }], 'cardinal southsoutheast');
+            expect(nodeSSE4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 157 }], 'cardinal SouthsouTHEast');
 
-            expect(nodeS1.directions(graph, projection)).to.eql([180], 'cardinal s');
-            expect(nodeS2.directions(graph, projection)).to.eql([180], 'cardinal S');
-            expect(nodeS3.directions(graph, projection)).to.eql([180], 'cardinal south');
-            expect(nodeS4.directions(graph, projection)).to.eql([180], 'cardinal SOuth');
+            expect(nodeS1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 180 }], 'cardinal s');
+            expect(nodeS2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 180 }], 'cardinal S');
+            expect(nodeS3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 180 }], 'cardinal south');
+            expect(nodeS4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 180 }], 'cardinal SOuth');
 
-            expect(nodeSSW1.directions(graph, projection)).to.eql([202], 'cardinal ssw');
-            expect(nodeSSW2.directions(graph, projection)).to.eql([202], 'cardinal SsW');
-            expect(nodeSSW3.directions(graph, projection)).to.eql([202], 'cardinal southsouthwest');
-            expect(nodeSSW4.directions(graph, projection)).to.eql([202], 'cardinal SouthsouTHWest');
+            expect(nodeSSW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 202 }], 'cardinal ssw');
+            expect(nodeSSW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 202 }], 'cardinal SsW');
+            expect(nodeSSW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 202 }], 'cardinal southsouthwest');
+            expect(nodeSSW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 202 }], 'cardinal SouthsouTHWest');
 
-            expect(nodeSW1.directions(graph, projection)).to.eql([225], 'cardinal sw');
-            expect(nodeSW2.directions(graph, projection)).to.eql([225], 'cardinal sW');
-            expect(nodeSW3.directions(graph, projection)).to.eql([225], 'cardinal southwest');
-            expect(nodeSW4.directions(graph, projection)).to.eql([225], 'cardinal souTHWest');
+            expect(nodeSW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 225 }], 'cardinal sw');
+            expect(nodeSW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 225 }], 'cardinal sW');
+            expect(nodeSW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 225 }], 'cardinal southwest');
+            expect(nodeSW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 225 }], 'cardinal souTHWest');
 
-            expect(nodeWSW1.directions(graph, projection)).to.eql([247], 'cardinal wsw');
-            expect(nodeWSW2.directions(graph, projection)).to.eql([247], 'cardinal WsW');
-            expect(nodeWSW3.directions(graph, projection)).to.eql([247], 'cardinal westsouthwest');
-            expect(nodeWSW4.directions(graph, projection)).to.eql([247], 'cardinal WEstsouTHWest');
+            expect(nodeWSW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 247 }], 'cardinal wsw');
+            expect(nodeWSW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 247 }], 'cardinal WsW');
+            expect(nodeWSW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 247 }], 'cardinal westsouthwest');
+            expect(nodeWSW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 247 }], 'cardinal WEstsouTHWest');
 
-            expect(nodeW1.directions(graph, projection)).to.eql([270], 'cardinal w');
-            expect(nodeW2.directions(graph, projection)).to.eql([270], 'cardinal W');
-            expect(nodeW3.directions(graph, projection)).to.eql([270], 'cardinal west');
-            expect(nodeW4.directions(graph, projection)).to.eql([270], 'cardinal WEst');
+            expect(nodeW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 270 }], 'cardinal w');
+            expect(nodeW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 270 }], 'cardinal W');
+            expect(nodeW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 270 }], 'cardinal west');
+            expect(nodeW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 270 }], 'cardinal WEst');
 
-            expect(nodeWNW1.directions(graph, projection)).to.eql([292], 'cardinal wnw');
-            expect(nodeWNW2.directions(graph, projection)).to.eql([292], 'cardinal WnW');
-            expect(nodeWNW3.directions(graph, projection)).to.eql([292], 'cardinal westnorthwest');
-            expect(nodeWNW4.directions(graph, projection)).to.eql([292], 'cardinal WEstnorTHWest');
+            expect(nodeWNW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 292 }], 'cardinal wnw');
+            expect(nodeWNW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 292 }], 'cardinal WnW');
+            expect(nodeWNW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 292 }], 'cardinal westnorthwest');
+            expect(nodeWNW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 292 }], 'cardinal WEstnorTHWest');
 
-            expect(nodeNW1.directions(graph, projection)).to.eql([315], 'cardinal nw');
-            expect(nodeNW2.directions(graph, projection)).to.eql([315], 'cardinal nW');
-            expect(nodeNW3.directions(graph, projection)).to.eql([315], 'cardinal northwest');
-            expect(nodeNW4.directions(graph, projection)).to.eql([315], 'cardinal norTHWest');
+            expect(nodeNW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 315 }], 'cardinal nw');
+            expect(nodeNW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 315 }], 'cardinal nW');
+            expect(nodeNW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 315 }], 'cardinal northwest');
+            expect(nodeNW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 315 }], 'cardinal norTHWest');
 
-            expect(nodeNNW1.directions(graph, projection)).to.eql([337], 'cardinal nnw');
-            expect(nodeNNW2.directions(graph, projection)).to.eql([337], 'cardinal NnW');
-            expect(nodeNNW3.directions(graph, projection)).to.eql([337], 'cardinal northnorthwest');
-            expect(nodeNNW4.directions(graph, projection)).to.eql([337], 'cardinal NOrthnorTHWest');
+            expect(nodeNNW1.directions(graph, projection)).to.eql([{ type: 'direction', angle: 337 }], 'cardinal nnw');
+            expect(nodeNNW2.directions(graph, projection)).to.eql([{ type: 'direction', angle: 337 }], 'cardinal NnW');
+            expect(nodeNNW3.directions(graph, projection)).to.eql([{ type: 'direction', angle: 337 }], 'cardinal northnorthwest');
+            expect(nodeNNW4.directions(graph, projection)).to.eql([{ type: 'direction', angle: 337 }], 'cardinal NOrthnorTHWest');
         });
 
         it('supports direction=forward', function () {
@@ -403,7 +403,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 }
+            ]);
         });
 
         it('supports direction=backward', function () {
@@ -412,7 +414,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([90]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 90 }
+            ]);
         });
 
         it('supports direction=both', function () {
@@ -421,7 +425,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports direction=all', function () {
@@ -430,7 +437,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports traffic_signals:direction=forward', function () {
@@ -439,7 +449,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+            ]);
         });
 
         it('supports traffic_signals:direction=backward', function () {
@@ -448,7 +460,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([90]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports traffic_signals:direction=both', function () {
@@ -457,7 +471,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports traffic_signals:direction=all', function () {
@@ -466,7 +483,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports railway:signal:direction=forward', function () {
@@ -475,7 +495,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+            ]);
         });
 
         it('supports railway:signal:direction=backward', function () {
@@ -484,7 +506,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([90]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports railway:signal:direction=both', function () {
@@ -493,7 +517,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports railway:signal:direction=all', function () {
@@ -502,7 +529,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports camera:direction=forward', function () {
@@ -511,7 +541,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+            ]);
         });
 
         it('supports camera:direction=backward', function () {
@@ -520,7 +552,9 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.eql([90]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports camera:direction=both', function () {
@@ -529,7 +563,10 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
         it('supports camera:direction=all', function () {
@@ -538,10 +575,13 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+            ]);
         });
 
-        it('returns directions for an all-way stop at a highway interstction', function () {
+        it('returns directions for an all-way stop at a highway intersection', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
             var node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { 'highway': 'stop', 'stop': 'all' }});
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
@@ -550,10 +590,15 @@ describe('iD.osmNode', function () {
             var way1 = iD.osmWay({ id: 'w1', nodes: ['n1','n2','n3'], tags: { 'highway': 'residential' } });
             var way2 = iD.osmWay({ id: 'w2', nodes: ['n4','n2','n5'], tags: { 'highway': 'residential' } });
             var graph = iD.coreGraph([node1, node2, node3, node4, node5, way1, way2]);
-            expect(node2.directions(graph, projection)).to.have.members([0, 90, 180, 270]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+                { type: 'direction', angle: 0 },
+                { type: 'direction', angle: 180 },
+            ]);
         });
 
-        it('does not return directions for an all-way stop not at a highway interstction', function () {
+        it('does not return directions for an all-way stop not at a highway intersection', function () {
             var node1 = iD.osmNode({ id: 'n1', loc: [-1, 0], tags: { 'highway': 'stop', 'stop': 'all' } });
             var node2 = iD.osmNode({ id: 'n2', loc: [0, 0] });
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0], tags: { 'highway': 'stop', 'stop': 'all' } });
@@ -573,11 +618,27 @@ describe('iD.osmNode', function () {
             var node5 = iD.osmNode({ loc: [0, 0], tags: { direction: 's;wat' }});
             var graph = iD.coreGraph([node1, node2, node3, node4, node5]);
 
-            expect(node1.directions(graph, projection)).to.eql([0, 45], 'numeric 0, numeric 45');
-            expect(node2.directions(graph, projection)).to.eql([45, 0], 'numeric 45, cardinal north');
-            expect(node3.directions(graph, projection)).to.eql([0, 90], 'cardinal north and east');
-            expect(node4.directions(graph, projection)).to.eql([0, 180, 90, 270], 'cardinal n,s,e,w');
-            expect(node5.directions(graph, projection)).to.eql([180], 'cardinal 180 and nonsense');
+            expect(node1.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 0 },
+                { type: 'direction', angle: 45 },
+            ], 'numeric 0, numeric 45');
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 45 },
+                { type: 'direction', angle: 0 },
+            ], 'numeric 45, cardinal north');
+            expect(node3.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 0 },
+                { type: 'direction', angle: 90 },
+            ], 'cardinal north and east');
+            expect(node4.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 0 },
+                { type: 'direction', angle: 180 },
+                { type: 'direction', angle: 90 },
+                { type: 'direction', angle: 270 },
+            ], 'cardinal n,s,e,w');
+            expect(node5.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 180 },
+            ], 'cardinal 180 and nonsense');
         });
 
         it('supports mixing textual, cardinal, numeric directions, delimited by ;', function () {
@@ -586,7 +647,81 @@ describe('iD.osmNode', function () {
             var node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
             var way = iD.osmWay({ nodes: ['n1','n2','n3'] });
             var graph = iD.coreGraph([node1, node2, node3, way]);
-            expect(node2.directions(graph, projection)).to.have.members([90, 270, 45, 60]);
+            expect(node2.directions(graph, projection)).to.eql([
+                { type: 'direction', angle: 270 },
+                { type: 'direction', angle: 90 },
+                { type: 'direction', angle: 45 },
+                { type: 'direction', angle: 60 },
+            ]);
+        });
+
+        describe('side', () => {
+            it('supports side=left', () => {
+                const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+                const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { side: 'left' } });
+                const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+                const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+                var graph = iD.coreGraph([node1, node2, node3, way]);
+                expect(node2.directions(graph, projection)).to.eql([
+                    { type: 'side', angle: 0 },
+                ]);
+            });
+
+            it('supports side=rigHt', () => {
+                const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+                const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { side: 'rigHt' } });
+                const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+                const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+                const graph = iD.coreGraph([node1, node2, node3, way]);
+                expect(node2.directions(graph, projection)).to.eql([
+                    { type: 'side', angle: 180 },
+                ]);
+            });
+
+            it('supports side=both', () => {
+                const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+                const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { side: 'both' } });
+                const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+                const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+                const graph = iD.coreGraph([node1, node2, node3, way]);
+                expect(node2.directions(graph, projection)).to.eql([
+                    { type: 'side', angle: 180 },
+                    { type: 'side', angle: 0 },
+                ]);
+            });
+
+            const invalidPairs = [
+                ['direction', 'left'],
+                ['direction', 'right'],
+                ['side', 'forward'],
+                ['side', 'backward'],
+                ['side', 'northwest'],
+                ['side', '45'],
+            ];
+            for (const [key, value] of invalidPairs) {
+                it(`ignores ${key}=${value} since it's invalid`, () => {
+                    const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+                    const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { [key]: value } });
+                    const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+                    const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+                    const graph = iD.coreGraph([node1, node2, node3, way]);
+                    expect(node2.directions(graph, projection)).to.eql([]);
+                });
+            }
+
+            it('supports a mix of direction=* and side=*', () => {
+                const node1 = iD.osmNode({ id: 'n1', loc: [-1, 0] });
+                const node2 = iD.osmNode({ id: 'n2', loc: [0, 0], tags: { side: 'left', direction: 'forward;ne;91' } });
+                const node3 = iD.osmNode({ id: 'n3', loc: [1, 0] });
+                const way = iD.osmWay({ nodes: ['n1','n2','n3'] });
+                const graph = iD.coreGraph([node1, node2, node3, way]);
+                expect(node2.directions(graph, projection)).to.eql([
+                    { type: 'side', angle: 0 },
+                    { type: 'direction', angle: 270 },
+                    { type: 'direction', angle: 45 },
+                    { type: 'direction', angle: 91 },
+                ]);
+            });
         });
 
     });

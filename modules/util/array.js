@@ -115,6 +115,12 @@ export function utilArrayGroupBy(a, key) {
 }
 
 
+/**
+ * @template T
+ * @param {T[]} a
+ * @param {string | ((item: T) => string)} key
+ * @returns {T[]}
+ */
 // Returns an Array with all the duplicates removed
 // where uniqueness determined by the given key
 // `key` can be passed as a property or as a key function
