@@ -244,7 +244,11 @@ export function validationMismatchedGeometry() {
         var asSource = presetManager.match(entity, graph);
 
         var targetGeom = targetGeoms.find(nodeGeom => {
-            var asTarget = presetManager.matchTags(entity.tags, nodeGeom);
+            const asTarget = presetManager.matchTags(
+                entity.tags,
+                nodeGeom,
+                entity.extent(graph).center(),
+            );
             if (!asSource || !asTarget ||
                 asSource === asTarget ||
                 // sometimes there are two presets with the same tags for different geometries
