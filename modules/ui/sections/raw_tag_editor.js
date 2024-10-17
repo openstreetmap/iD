@@ -133,6 +133,9 @@ export function uiSectionRawTagEditor(id, context) {
         var textarea = wrap.selectAll('.tag-text')
             .data([0]);
 
+        //this removes the escape sequence from the string
+        textData = textData.replace(/\\/g, '');
+
         textarea = textarea.enter()
             .append('textarea')
             .attr('class', 'tag-text' + (_tagView !== 'text' ? ' hide' : ''))
