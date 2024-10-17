@@ -6,6 +6,7 @@ import { geoExtent } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { uiLoading } from './loading';
+import { uiCmd } from './cmd';
 
 export function uiGeolocate(context) {
     var _geolocationOptions = {
@@ -83,6 +84,7 @@ export function uiGeolocate(context) {
     return function(selection) {
         if (!navigator.geolocation || !navigator.geolocation.getCurrentPosition) return;
 
+        const key = uiCmd('⌘' + t('geolocate.key'));
         _button = selection
             .append('button')
             .on('click', click)
@@ -91,9 +93,9 @@ export function uiGeolocate(context) {
             .call(uiTooltip()
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(() => t.append('geolocate.title'))
-                .keys([t('geolocate.key')])
+                .keys([key])
             );
 
-        context.keybinding().on(t('geolocate.key'), click);
+        context.keybinding().on(key, click);
     };
 }
