@@ -26,6 +26,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     // Must be set by `drawWay.nodeIndex` before each install of this behavior.
     var _nodeIndex;
+    // Must be set by `drawWay.offsetFromEndNode` before each install of this behavior.
+    var _offsetFromEndNode;
 
     var _origWay;
     var _wayGeometry;
@@ -40,6 +42,11 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
     var _didResolveTempEdit = false;
 
+    function insertionIndex(way) {
+        if (_offsetFromEndNode === undefined) return _nodeIndex;
+        return way.nodes.length - _offsetFromEndNode - 1;
+    }
+
     function createDrawNode(loc) {
         // don't make the draw node until we actually need it
         _drawNode = osmNode({ loc: loc });
@@ -50,7 +57,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             var way = graph.entity(wayID);
             return graph
                 .replace(_drawNode)
-                .replace(way.addNode(_drawNode.id, _nodeIndex));
+                .replace(way.addNode(_drawNode.id, insertionIndex(way)));
         }, _annotation);
         context.resumeChangeDispatch();
 
@@ -241,7 +248,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         _origWay = context.entity(wayID);
 
         if (typeof _nodeIndex === 'number') {
-            _headNodeID = _origWay.nodes[_nodeIndex];
+            _headNodeID = _origWay.nodes[insertionIndex(_origWay)];
         } else if (_origWay.isClosed()) {
             _headNodeID = _origWay.nodes[_origWay.nodes.length - 2];
         } else {
@@ -313,6 +320,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
 
         _drawNode = undefined;
         _nodeIndex = undefined;
+        _offsetFromEndNode = undefined;
 
         context.map()
             .on('drawn.draw', null);
@@ -405,8 +413,9 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                     graph = graph
                         .replace(graph.entity(wayID).removeNode(_drawNode.id))
                         .remove(_drawNode);
+                    var way = graph.entity(wayID);
                     return graph
-                        .replace(graph.entity(wayID).addNode(node.id, _nodeIndex));
+                        .replace(way.addNode(node.id, insertionIndex(way)));
                 },
                 _annotation
             );
@@ -561,6 +570,13 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     drawWay.nodeIndex = function(val) {
         if (!arguments.length) return _nodeIndex;
         _nodeIndex = val;
+        return drawWay;
+    };
+
+
+    drawWay.offsetFromEndNode = function(val) {
+        if (!arguments.length) return _offsetFromEndNode;
+        _offsetFromEndNode = val;
         return drawWay;
     };
 
