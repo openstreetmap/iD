@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.31.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Fix flickering when switching between background imagery layers, make switching backgrounds snappier
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
