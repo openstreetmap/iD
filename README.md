@@ -13,6 +13,7 @@
 
 * Read the project [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
 * Read up on [Contributing and the code style of iD](CONTRIBUTING.md).
+* Learn about the [roles, people and processes](GOVERNANCE.md) that maintain iD.
 * See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open)
 if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
