@@ -301,7 +301,7 @@ describe('iD.validations.crossing_ways', function () {
 
     it('flags railway crossing railway', function() {
         createWaysWithOneCrossingPoint({ railway: 'rail' }, { railway: 'rail' });
-        verifySingleCrossingIssue(validate(), {});
+        verifySingleCrossingIssue(validate(), { railway: 'railway_crossing' });
     });
 
     it('flags railway crossing waterway', function() {
