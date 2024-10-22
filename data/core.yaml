@@ -132,6 +132,20 @@ en:
       already_circular:
         single: This can't be made more circular than it already is.
         multiple: These can't be made more circular than they already are.
+    snap:
+      title: Snap
+      description:
+        points: Follow snapped line between points.
+      key: S
+      annotation:
+        points: Snap a line.
+      nodes_are_not_shared_by_both_ways: The two nodes are not shared by both the source and target ways
+      nodes_are_not_consecutive_in_target: The two nodes are not one after the other in the target way
+      source_or_target_way_is_closed_but_has_less_than_4_nodes: Source or target way is closed but has less than 4 nodes.
+      no_suitable_nodes_in_source: There are no suitable nodes in the source way.
+      too_large: This can't be snapped because not enough of it is currently visible.
+      connected_to_hidden: This can't be snapped because it is connected to a hidden feature.
+      not_downloaded: This can't be snapped because parts of it have not yet been downloaded.
     orthogonalize:
       title: Square
       description:
