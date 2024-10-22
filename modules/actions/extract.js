@@ -7,17 +7,19 @@ export function actionExtract(entityID, projection) {
 
     var extractedNodeID;
 
-    var action = function(graph) {
+    /** @param {boolean} shiftKeyPressed */
+    var action = function(graph, shiftKeyPressed) {
         var entity = graph.entity(entityID);
 
         if (entity.type === 'node') {
-            return extractFromNode(entity, graph);
+            return extractFromNode(entity, graph, shiftKeyPressed);
         }
 
         return extractFromWayOrRelation(entity, graph);
     };
 
-    function extractFromNode(node, graph) {
+    /** @param {boolean} shiftKeyPressed */
+    function extractFromNode(node, graph, shiftKeyPressed) {
 
         extractedNodeID = node.id;
 
@@ -30,6 +32,10 @@ export function actionExtract(entityID, projection) {
             .reduce(function(accGraph, parentWay) {
                 return accGraph.replace(parentWay.replaceNode(entityID, replacement.id));
             }, graph);
+
+        // if the user holds shift while pressing the keyboard shortcut,
+        // then we won't extract relations (see #8929)
+        if (shiftKeyPressed) return graph;
 
         // Process any relations too
         return graph.parentRelations(node)
