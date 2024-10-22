@@ -1,6 +1,7 @@
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
+import { osmTagsPreventingMove } from './tags';
 
 export const cardinal = {
     north: 0,               n: 0,
@@ -213,6 +214,19 @@ Object.assign(osmNode.prototype, {
                     parent.geometry(resolver) === 'line';
             }).length > 0;
         });
+    },
+
+    isLocked: function () {
+        for (const key in this.tags) {
+            const value = this.tags[key];
+            if (
+                osmTagsPreventingMove[key] === true ||
+                osmTagsPreventingMove[key]?.[value] === true
+            ) {
+                return true;
+            }
+        }
+        return false;
     },
 
 

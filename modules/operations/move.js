@@ -30,6 +30,8 @@ export function operationMove(context, selectedIDs) {
             return 'connected_to_hidden';
         } else if (selectedIDs.some(incompleteRelation)) {
             return 'incomplete_relation';
+        } else if (nodes.some(node => node.isLocked())) {
+            return 'locked';
         }
 
         return false;
