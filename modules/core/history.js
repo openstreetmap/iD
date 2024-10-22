@@ -8,6 +8,7 @@ import { coreGraph } from './graph';
 import { coreTree } from './tree';
 import { osmEntity } from '../osm/entity';
 import { uiLoading } from '../ui/loading';
+import { t } from './localizer';
 import {
     utilArrayDifference, utilArrayGroupBy, utilArrayUnion,
     utilObjectOmit, utilRebind, utilSessionMutex
@@ -89,6 +90,13 @@ export function coreHistory(context) {
         _stack.push(actionResult);
         _index++;
         return change(previous);
+    }
+
+
+    function _validAnnotation(annotation) {
+        if (!annotation) return false;
+        if (annotation === t('operations.start.annotation.area')) return false;
+        return true;
     }
 
 
@@ -206,7 +214,7 @@ export function coreHistory(context) {
             var previous = previousStack.graph;
             while (_index > 0) {
                 _index--;
-                if (_stack[_index].annotation) break;
+                if (_validAnnotation(_stack[_index].annotation)) break;
             }
 
             dispatch.call('undone', this, _stack[_index], previousStack);
@@ -223,7 +231,7 @@ export function coreHistory(context) {
             var tryIndex = _index;
             while (tryIndex < _stack.length - 1) {
                 tryIndex++;
-                if (_stack[tryIndex].annotation) {
+                if (_validAnnotation(_stack[tryIndex].annotation)) {
                     _index = tryIndex;
                     dispatch.call('redone', this, _stack[_index], previousStack);
                     break;

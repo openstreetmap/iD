@@ -269,6 +269,16 @@ describe('iD.coreHistory', function () {
             var difference = history.redo();
             expect(spy).to.have.been.calledWith(difference);
         });
+
+        it('does not redo into an invalid annotated state', function() {
+            var invalidState = iD.t('operations.start.annotation.area');
+
+            history.perform(actionNoop, invalidState);
+            history.on('redone', spy);
+            history.undo();
+            history.redo();
+            expect(spy).not.to.have.been.called;
+        });
     });
 
     describe('#pauseChangeDispatch / #resumeChangeDispatch', function() {
