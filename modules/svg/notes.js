@@ -6,9 +6,11 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { modeBrowse } from '../modes/browse';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
+import { utilStringQs } from '../util';
 
+var hash = utilStringQs(window.location.hash);
 
-var _notesEnabled = false;
+var _notesEnabled = !!hash.notes;
 var _osmService;
 
 
