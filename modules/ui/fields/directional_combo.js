@@ -88,16 +88,18 @@ export function uiFieldDirectionalCombo(field, context) {
         const otherKey = key === field.keys[0] ? field.keys[1] : field.keys[0];
 
         dispatch.call('change', this, tags => {
-            const otherValue = tags[otherKey] || tags[commonKey];
+            const otherValue = tags[otherKey] || tags[commonKey] || tags[`${commonKey}:both`];
             if (newValue === otherValue) {
                 // both tags match, use the common tag to tag both sides the same way
                 tags[commonKey] = newValue;
                 delete tags[key];
                 delete tags[otherKey];
+                delete tags[`${commonKey}:both`];
             } else {
                 // Always set both left and right as changing one can affect the other
                 tags[key] = newValue;
                 delete tags[commonKey];
+                delete tags[`${commonKey}:both`];
                 tags[otherKey] = otherValue;
             }
             return tags;
@@ -112,6 +114,7 @@ export function uiFieldDirectionalCombo(field, context) {
         for (let key in _combos) {
             const uniqueValues = [... new Set([]
                 .concat(_tags[commonKey])
+                .concat(_tags[`${commonKey}:both`])
                 .concat(_tags[key])
                 .filter(Boolean))];
             _combos[key].tags({ [key]: uniqueValues.length > 1 ? uniqueValues : uniqueValues[0] });
