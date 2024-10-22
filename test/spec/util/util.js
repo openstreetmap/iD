@@ -283,6 +283,21 @@ describe('iD.util', function() {
             // BART Yellow Line: Antioch => Pittsburg/Bay Point => SFO Airport => Millbrae
             expect(iD.utilDisplayName({tags: {network: 'BART', ref: 'Yellow', from: 'Antioch', to: 'Millbrae', via: 'Pittsburg/Bay Point;San Francisco International Airport', route: 'subway'}})).to.eql('BART Yellow from Antioch to Millbrae via Pittsburg/Bay Point;San Francisco International Airport');
         });
+        it('can use alternative name tags', () => {
+            expect(iD.utilDisplayName({ tags: { loc_ref: 'A' } })).to.eql('A');
+            expect(iD.utilDisplayName({ tags: { 'seamark:name': 'Bean Rock' } })).to.eql('Bean Rock');
+
+            expect(iD.utilDisplayName({ tags: { highway: 'milestone', distance: '12' } })).to.eql('12');
+            expect(iD.utilDisplayName({ tags: { distance: '12' } })).to.eql(''); // `distance` is not used as a name on other features
+
+            expect(iD.utilDisplayName({ tags: { railway: 'milestone', 'railway:position': '12' } })).to.eql('12');
+            expect(iD.utilDisplayName({ tags: { 'railway:position': '12' } })).to.eql(''); // `railway:position` is not used as a name on other features
+        });
+        it('prefers standard tags over alternative names', () => {
+            expect(iD.utilDisplayName({ tags: { name: '1', official_name: '2' } })).to.eql('1');
+            expect(iD.utilDisplayName({ tags: { ref: '1', loc_ref: '2' } })).to.eql('1');
+            expect(iD.utilDisplayName({ tags: { ref: '1', network: 'AT', loc_ref: '2' } })).to.eql('AT 1');
+        });
     });
 
     describe('utilOldestID', function() {
