@@ -22,6 +22,7 @@ export function geoRawMercator() {
     var clipExtent = [[0, 0], [0, 0]];
 
 
+    /** @returns {[x: number, y: number]} */
     function projection(point) {
         point = project(point[0] * Math.PI / 180, point[1] * Math.PI / 180);
         return [point[0] * k + x, y - point[1] * k];

@@ -6,6 +6,7 @@ export { actionChangeMember } from './change_member';
 export { actionChangePreset } from './change_preset';
 export { actionChangeTags } from './change_tags';
 export { actionCircularize } from './circularize';
+export { actionDivide } from './divide';
 export { actionConnect } from './connect';
 export { actionCopyEntities } from './copy_entities';
 export { actionDeleteMember } from './delete_member';
