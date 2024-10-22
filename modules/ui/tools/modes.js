@@ -60,6 +60,7 @@ export function uiToolDrawModes(context) {
     modes.forEach(function(mode) {
         context.keybinding().on(mode.key, function() {
             if (!enabled(mode)) return;
+            if (mode.disabled?.()) return;
 
             if (mode.id === context.mode().id) {
                 context.enter(modeBrowse(context));
