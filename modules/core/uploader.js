@@ -339,6 +339,9 @@ export function coreUploader(context) {
 
 
     function didResultInConflicts(changeset) {
+        // add a changeset tag to aid reviewers
+        changeset.tags.merge_conflict = 'yes';
+        context.connection().updateChangesetTags(changeset);
 
         _conflicts.sort(function(a, b) { return b.id.localeCompare(a.id); });
 
