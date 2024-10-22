@@ -111,6 +111,20 @@ describe('iD.svgLines', function () {
         });
     });
 
+    it('rounds layers down to the nearest whole number for rendering', () => {
+        const graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 1]}),
+            iD.osmWay({id: 'w1', tags: {highway: 'residential', layer: '-2.5'}, nodes: ['a', 'b']}),
+        ]);
+        surface.call(iD.svgLines(projection, context), graph, [graph.entity('w1')], none);
+
+        const layerGroup = surface.select('path.w1').nodes()[0].parentNode.parentNode;
+
+        // the feature with layer=-2.5 was rendered in layer -2
+        expect(layerGroup.className.baseVal).to.eql('layergroup layer-2');
+    });
+
     describe('oneway-markers', function() {
         it('has marker layer for oneway ways', function() {
             // use 1e-2 to make sure segments are long enough to get

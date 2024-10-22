@@ -247,7 +247,7 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-        var pathdata = utilArrayGroupBy(ways, function(way) { return way.layer(); });
+        const pathdata = utilArrayGroupBy(ways, (way) => Math.trunc(way.layer()));
 
         Object.keys(pathdata).forEach(function(k) {
             var v = pathdata[k];
