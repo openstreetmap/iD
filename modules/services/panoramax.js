@@ -37,8 +37,6 @@ let _planeFrame;
 let _pannellumFrame;
 let _currentFrame;
 
-let _oldestDate;
-
 let _currentScene = {
     currentImage : null,
     nextImage : null,
@@ -58,8 +56,13 @@ function partitionViewport(projection) {
         .map(function(tile) { return tile.extent; });
 }
 
-
-// Return no more than `limit` results per partition.
+/**
+ * Return no more than `limit` results per partition.
+ * @param {number} limit Number of maximum objects to return
+ * @param {*} projection Current projection
+ * @param {*} rtree The cache
+ * @returns Data found
+ */
 function searchLimited(limit, projection, rtree) {
     limit = limit || 5;
 
@@ -82,7 +85,14 @@ function searchLimited(limit, projection, rtree) {
         }, []);
 }
 
-// Load all data for the specified type from Panoramax vector tiles
+/**
+ * Load all data for the specified type from Panoramax vector tiles
+ * @param {string} which Either 'images' or 'lines'
+ * @param {string} url Tile endpoint
+ * @param {number} maxZoom Maximum zoom out
+ * @param {*} projection Current projection
+ * @param {number} zoom current zoom
+ */
 function loadTiles(which, url, maxZoom, projection, zoom) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
@@ -92,8 +102,13 @@ function loadTiles(which, url, maxZoom, projection, zoom) {
     });
 }
 
-
-// Load all data for the specified type from one vector tile
+/**
+ * Load all data for the specified type from one vector tile
+ * @param {*} which Either 'images' or 'lines'
+ * @param {*} url Tile endpoint
+ * @param {*} tile Current tile
+ * @param {*} zoom Current zoom
+ */
 function loadTile(which, url, tile, zoom) {
     const cache = _cache.requests;
     const tileId = `${tile.id}-${which}`;
@@ -135,6 +150,12 @@ function loadTile(which, url, tile, zoom) {
         });
 }
 
+/**
+ * Fetches all data for the specified tile and adds them to cache
+ * @param {*} data Tile data
+ * @param {*} tile Current tile
+ * @param {*} zoom Current zoom
+ */
 function loadTileDataToCache(data, tile, zoom) {
     const vectorTile = new VectorTile(new Protobuf(data));
 
@@ -164,7 +185,6 @@ function loadTileDataToCache(data, tile, zoom) {
                 sequence_id: feature.properties.sequences.split('\"')[1],
                 heading: parseInt(feature.properties.heading, 10),
                 image_path: '',
-                resolution: feature.properties.resolution,
                 isPano: feature.properties.type === 'equirectangular',
                 model: feature.properties.model,
             };
@@ -172,14 +192,6 @@ function loadTileDataToCache(data, tile, zoom) {
             features.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             });
-
-            if (_oldestDate){
-                if (d.capture_time < _oldestDate){
-                    _oldestDate = d.capture_time;
-                }
-            } else {
-                _oldestDate = d.capture_time;
-            }
         }
         if (cache.rtree) {
             cache.rtree.load(features);
@@ -201,29 +213,15 @@ function loadTileDataToCache(data, tile, zoom) {
             } else {
                 cache.lineString[feature.properties.id] = [feature];
             }
-            if (_oldestDate){
-                if (feature.properties.date < _oldestDate){
-                    _oldestDate = feature.properties.date;
-                }
-            } else {
-                _oldestDate = feature.properties.date;
-            }
         }
     }
 }
 
-async function getImageData(collection_id, image_id){
-    const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
-        .replace('{itemId}', image_id);
-
-    const response = await fetch(requestUrl, { method: 'GET' });
-    if (!response.ok) {
-        throw new Error(response.status + ' ' + response.statusText);
-    }
-    const data = await response.json();
-    return data;
-}
-
+/**
+ * Fetches the username from Panoramax
+ * @param {string} user_id 
+ * @returns the username
+ */
 async function getUsername(user_id){
     const requestUrl = usernameURL.replace('{userId}', user_id);
 
@@ -260,26 +258,46 @@ export default {
         _activeImage = null;
     },
 
-    // Get visible images
+    /**
+     * Get visible images from cache
+     * @param {*} projection Current Projection
+     * @returns images data for the current projection
+     */
     images: function(projection) {
         const limit = 5;
         return searchLimited(limit, projection, _cache.images.rtree);
     },
 
+    /**
+     * Get a specific image from cache
+     * @param {*} imageKey the image id
+     * @returns 
+     */
     cachedImage: function(imageKey) {
         return _cache.images.forImageId[imageKey];
     },
 
-    // Load images in the visible area
+    /**
+     * Fetches images data for the visible area 
+     * @param {*} projection Current Projection
+     */
     loadImages: function(projection) {
         loadTiles('images', tileUrl, imageMinZoom, projection);
     },
 
-    // Load line in the visible area
+    /**
+     * Fetches sequences data for the visible area 
+     * @param {*} projection Current Projection
+     */
     loadLines: function(projection, zoom) {
         loadTiles('line', tileUrl, lineMinZoom, projection, zoom);
     },
 
+    /**
+     * Fetches all possible userIDs from Panoramax
+     * @param {string} usernames one or multiple usernames
+     * @returns userIDs
+     */
     getUserIds: async function(usernames) {
         const requestUrls = usernames.map(username =>
             userIdUrl.replace('{username}', username));
@@ -296,11 +314,12 @@ export default {
         return data.flatMap((d, i) => d.features.filter(f => f.name === usernames[i]).map(f => f.id));
     },
 
-    getOldestDate: function(){
-        return _oldestDate;
-    },
-
-    // Get visible sequences
+    /**
+     * Get visible sequences from cache
+     * @param {*} projection Current Projection
+     * @param {number} zoom Current zoom (if zoom < `lineMinZoom` less accurate lines will be drawn)
+     * @returns sequences data for the current projection
+     */
     sequences: function(projection, zoom) {
         const viewport = projection.clipExtent();
         const min = [viewport[0][0], viewport[1][1]];
@@ -330,9 +349,12 @@ export default {
         return lineStrings;
     },
 
-    // Set the currently visible image
+    /**
+     * Updates the data for the currently visible image
+     * @param {*} image Image data
+     */
     setActiveImage: function(image) {
-        if (image) {
+        if (image && image.id && image.sequence_id) {
             _activeImage = {
                 id: image.id,
                 sequence_id: image.sequence_id
@@ -346,7 +368,11 @@ export default {
         return _activeImage;
     },
 
-    // Update the currently highlighted sequence and selected bubble.
+    /**
+     * Update the currently highlighted sequence and selected bubble
+     * @param {*} context Current HTML context
+     * @param {*} [hovered] The hovered bubble image
+     */
     setStyles: function(context, hovered) {
         const hoveredImageId =  hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
@@ -377,10 +403,13 @@ export default {
                 return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
             }
         }
-
         return this;
     },
 
+    /**
+     * Updates the URL to save the current shown image
+     * @param {*} imageKey 
+     */
     updateUrlImage: function(imageKey) {
         if (!window.mocha) {
             var hash = utilStringQs(window.location.hash);
@@ -393,6 +422,12 @@ export default {
         }
     },
 
+    /**
+     * Loads the selected image in the frame
+     * @param {*} context Current HTML context
+     * @param {*} id of the selected image
+     * @returns 
+     */
     selectImage: function (context, id) {
         let that = this;
 
@@ -472,7 +507,7 @@ export default {
             .attr('href', viewerLink)
             .text('panoramax.xyz');
 
-        getImageData(d.sequence_id, d.id).then(function(data){
+        this.getImageData(d.sequence_id, d.id).then(function(data){
             _currentScene = {
                 currentImage: null,
                 nextImage: null,
@@ -526,7 +561,7 @@ export default {
                 line2
                     .append('span')
                     .attr('class', 'captured_by')
-                    .text(t('panoramax.captured_by', {username}));
+                    .text('@' + username);
             });
         }
 
@@ -535,6 +570,24 @@ export default {
 
     photoFrame: function() {
         return _currentFrame;
+    },
+
+    /**
+     * Fetches the data for a specific image
+     * @param {*} collection_id
+     * @param {*} image_id 
+     * @returns The fetched image data
+     */
+    getImageData: async function(collection_id, image_id){
+        const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
+            .replace('{itemId}', image_id);
+
+        const response = await fetch(requestUrl, { method: 'GET' });
+        if (!response.ok) {
+            throw new Error(response.status + ' ' + response.statusText);
+        }
+        const data = await response.json();
+        return data;
     },
 
     ensureViewerLoaded: function(context) {
@@ -594,6 +647,11 @@ export default {
             _planeFrame.event.on('viewerChanged', () => dispatch.call('viewerChanged'));
           });
 
+        /**
+         * Loads the next image in the sequence
+         * @param {number} stepBy '-1' if backwards or '1' if foward
+         * @returns 
+         */
         function step(stepBy) {
             return function () {
                 if (!_currentScene.currentImage) return;
@@ -616,6 +674,10 @@ export default {
         return _loadViewerPromise;
     },
 
+    /**
+     * Shows the current viewer if hidden
+     * @param {*} context 
+     */
     showViewer: function (context) {
         let wrap = context.container().select('.photoviewer')
             .classed('hide', false);
@@ -631,6 +693,10 @@ export default {
         return this;
     },
 
+    /**
+     * Hides the current viewer if shown, resets the active image and sequence
+     * @param {*} context 
+     */
     hideViewer: function (context) {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
@@ -641,7 +707,7 @@ export default {
             .classed('hide', true);
         context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('currentView', false);
-        this.setActiveImage();
+        this.setActiveImage(null);
         return this.setStyles(context, null);
     },
 

@@ -12,6 +12,11 @@ li.list-item-photos.active:after {
     left: 0;
 }
 
+.disabled-panel {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 /* photo viewer div */
 .photoviewer {
     position: relative;
@@ -385,6 +390,7 @@ label.panoramax-hd {
 
 .slider-wrap {
     display: inline-block;  
+    width: 100%;
 }
 
 .year-datalist {
@@ -393,7 +399,17 @@ label.panoramax-hd {
 }
 
 .list-option-date-slider{
-    direction: rtl
+    direction: rtl;
+    width: 100%;
+}
+
+.yearSliderSpan{
+    padding: 2px;
+}
+
+
+.list-item-date-slider label{
+    display: block !important;
 }
 
 
@@ -520,6 +536,16 @@ label.streetside-hires {
     transform-origin: 0 0;
 }
 
+.panoramax-wrapper .photo-attribution a:active {
+    color: #ff6f00;
+}
+
+@media (hover: hover) {
+    .panoramax-wrapper .photo-attribution a:hover {
+        color: #ff6f00;
+    }
+}
+
 .photo-wrapper {
     position: relative;
     background-color: #000;
@@ -535,9 +561,10 @@ label.streetside-hires {
 }
 
 .photoviewer .plane-frame > img.plane-photo {
-    width: auto;
+    width: 100%;
     height: 100%;
-    transform-origin: 0 0;
+    overflow: hidden;
+    object-fit: cover;
 }
 
 /* photo-controls (step forward, back, rotate) */
