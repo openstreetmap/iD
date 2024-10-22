@@ -509,6 +509,10 @@ export function utilNoAuto(selection) {
         .attr('autocomplete', 'new-password')
         .attr('autocorrect', 'off')
         .attr('autocapitalize', 'off')
+        .attr('data-1p-ignore', 'true')  // 1Password
+        .attr('data-bwignore', 'true')   // Bitwarden
+        .attr('data-form-type', 'other') // Dashlane
+        .attr('data-lpignore', 'true')   // LastPass
         .attr('spellcheck', isText ? 'true' : 'false');
 }
 
