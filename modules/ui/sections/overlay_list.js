@@ -112,6 +112,13 @@ export function uiSectionOverlayList(context) {
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
 
+    context.background()
+        .on('change.background_list', () => {
+            // if the overlays change due to a keyboard shortcut or
+            // automatic update, then rerender.
+            _overlayList.call(updateLayerSelections);
+        });
+
     context.map()
         .on('move.overlay_list',
             _debounce(function() {
