@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayGroupBy } from '../util';
+import { actionChangeTags } from '../actions';
 
 
 export function operationContinue(context, selectedIDs) {
@@ -28,6 +29,17 @@ export function operationContinue(context, selectedIDs) {
 
     var operation = function() {
         var candidate = _candidates[0];
+
+        // remove fixme=continue from the vertex
+        if (_vertex.tags.fixme === 'continue') {
+            context.perform((graph) => {
+                const newTags = { ..._vertex.tags };
+                delete newTags.fixme;
+
+                return actionChangeTags(_vertex.id, newTags)(graph);
+            }, operation.annotation());
+        }
+
         context.enter(
             modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(_vertex.id), true)
         );
