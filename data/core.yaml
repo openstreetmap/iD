@@ -8,6 +8,7 @@ en:
     copy: copy
     view_on: view on {domain}
     visit_website: visit website
+    edit_in: edit in {tool}
     favorite: favorite
     list: list
     text: text
