@@ -11,6 +11,10 @@ export function behaviorPaste(context) {
         // prevent paste during low zoom selection
         if (!context.map().withinEditableZoom()) return;
 
+        // prevent paste if the pasted object would be invisible (see #10000)
+        const isOsmLayerEnabled = context.layers().layer('osm').enabled();
+        if (!isOsmLayerEnabled) return;
+
         d3_event.preventDefault();
 
         var baseGraph = context.graph();
