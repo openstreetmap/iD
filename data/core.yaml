@@ -763,8 +763,6 @@ en:
     lock:
       suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
     display_name:
-      network_ref_name: "{network} {ref}: {name}"
-      ref_name: "{ref}: {name}"
       direction: "{direction}"
       network: "{network}"
       from_to: "from {from} to {to}"
@@ -780,6 +778,22 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+      name_direction: "{name} {direction}"
+      network_name: "{network} {name}"
+      name_from_to: "{name} from {from} to {to}"
+      name_from_to_via: "{name} from {from} to {to} via {via}"
+      network_name_direction: "{network} {name} {direction}"
+      network_name_from_to: "{network} {name} from {from} to {to}"
+      network_name_from_to_via: "{network} {name} from {from} to {to} via {via}"
+      name: "{name}"
+      ref_name: "{ref}: {name}"
+      ref_name_direction: "{ref}: {name} {direction}"
+      ref_name_from_to: "{ref}: {name} from {from} to {to}"
+      ref_name_from_to_via: "{ref}: {name} from {from} to {to} via {via}"
+      network_ref_name: "{network} {ref}: {name}"
+      network_ref_name_direction: "{network} {ref}: {name} {direction}"
+      network_ref_name_from_to: "{network} {ref}: {name} from {from} to {to}"
+      network_ref_name_from_to_via: "{network} {ref}: {name} from {from} to {to} via {via}"
     speed_unit: "Speed unit"
     roadheight:
       # symbol for meters

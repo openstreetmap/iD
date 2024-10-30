@@ -186,27 +186,25 @@ export function utilDisplayName(entity, hideNetwork) {
     var name = entity.tags[localizedNameKey] || entity.tags.name || '';
 
     var tags = {
-        name,
         direction: entity.tags.direction,
         from: entity.tags.from,
+        name,
         network: hideNetwork ? undefined : (entity.tags.cycle_network || entity.tags.network),
         ref: entity.tags.ref,
         to: entity.tags.to,
         via: entity.tags.via
     };
 
-    // for routes, prefer `network+ref+name` or `ref+name` over `name`
-    if (name && tags.ref && entity.tags.route) {
-        // A right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
-        // This name format already contains enough details to disambiguate the feature; avoid duplicating these details.
-        var nameIsPTv2 = name.match(/→|[-=]>/);
-        if (!nameIsPTv2) {
-            return tags.network
-                ? t('inspector.display_name.network_ref_name', tags)
-                : t('inspector.display_name.ref_name', tags);
-        }
+    // A right or left-right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
+    // This name format already contains enough details to disambiguate the feature; avoid duplicating these details.
+    if (entity.tags.route && entity.tags.name && entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)) {
+        return entity.tags.name;
     }
-    if (name) return name;
+
+    // Non-routes tend to be labeled in many places besides the relation lists, such as the map, where brevity is important.
+    if (!entity.tags.route && name) {
+        return name;
+    }
 
     var keyComponents = [];
 
@@ -215,6 +213,9 @@ export function utilDisplayName(entity, hideNetwork) {
     }
     if (tags.ref) {
         keyComponents.push('ref');
+    }
+    if (tags.name) {
+        keyComponents.push('name');
     }
 
     // Routes may need more disambiguation based on direction or destination
