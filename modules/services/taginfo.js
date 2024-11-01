@@ -192,11 +192,13 @@ function checkCache(url, params, exactMatch, callback) {
 
 export default {
 
+    
+    
     init: function() {
         _inflight = {};
         _taginfoCache = {};
         _popularKeys = {
-            // manually exclude some keys – #5377, #7485
+            // manually exclude some keys – #5377, #7485            
             postal_code: true,
             full_name: true,
             loc_name: true,
@@ -224,7 +226,7 @@ export default {
         this.keys(params, function(err, data) {
             if (err) return;
             data.forEach(function(d) {
-                if (d.value === 'opening_hours') return;  // exception
+                if (d.value === 'opening_hours') return;
                 _popularKeys[d.value] = true;
             });
         });
@@ -291,7 +293,7 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && _popularKeys[key]) {
+        if (key && _popularKeys[key] || key.slice(0,4)==='name') {
             callback(null, []);
             return;
         }
