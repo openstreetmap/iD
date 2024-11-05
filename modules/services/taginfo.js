@@ -192,8 +192,6 @@ function checkCache(url, params, exactMatch, callback) {
 
 export default {
 
-    
-    
     init: function() {
         _inflight = {};
         _taginfoCache = {};
@@ -226,7 +224,7 @@ export default {
         this.keys(params, function(err, data) {
             if (err) return;
             data.forEach(function(d) {
-                if (d.value === 'opening_hours') return;
+                if (d.value === 'opening_hours') return;  //exception
                 _popularKeys[d.value] = true;
             });
         });
