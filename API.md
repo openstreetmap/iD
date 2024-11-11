@@ -167,7 +167,7 @@ have `.area` and `.way` classes.
 Elements also receive classes according to certain of the OSM key-value tags that are
 assigned to them.
 
-Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/js/id/svg/tag_classes.js) for details).
+Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/modules/svg/tag_classes.js) for details).
 
 #### Primary
 
