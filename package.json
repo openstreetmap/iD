@@ -76,7 +76,7 @@
     "@fortawesome/fontawesome-svg-core": "~6.6.0",
     "@fortawesome/free-brands-svg-icons": "~6.6.0",
     "@fortawesome/free-regular-svg-icons": "~6.6.0",
-    "@fortawesome/free-solid-svg-icons": "~6.6.0",
+    "@fortawesome/free-solid-svg-icons": "~6.7.1",
     "@mapbox/maki": "^8.0.1",
     "@openstreetmap/id-tagging-schema": "^6.8.1",
     "@rapideditor/mapillary_sprite_source": "^1.8.0",
