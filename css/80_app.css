@@ -4232,9 +4232,12 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     border: 1px solid #ccc;
 }
 
-/* scrollbars only when necessary*/
+/* scrollbars only when necessary */
 .inspector-hover div {
     overflow-x: visible;
+    overflow-y: visible;
+}
+.inspector-hover .comment div {
     overflow-y: auto;
 }
 
