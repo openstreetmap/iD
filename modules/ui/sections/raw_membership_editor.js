@@ -20,6 +20,7 @@ import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
+import * as d3 from 'd3';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -365,10 +366,28 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('for', function(d) {
                 return d.domId;
             });
-
+            var tooltip = d3.select('body') // tooltip made for relations
+            .append('span') // Appending a span as tooltip
+            .style('position', 'absolute')
+            .style('visibility', 'hidden')
+            .style('background-color', 'black')
+            .style('color', 'white')
+            .style('padding', '5px')
+            .style('border-radius', '4px')
+            .style('pointer-events', 'none') // Prevent interfering with mouse events
+            .text(''); // Initialize the text of tooltip empty  
+      
         var labelLink = labelEnter
             .append('span')
             .attr('class', 'label-text')
+            .on('mouseover',function(d){
+               tooltip.text(d.toElement.innerText)
+               .style('visibility','visible')
+               .style('top', (d.pageY + 10) + 'px') // Position below the cursor
+               .style('left', (d.pageX + 10) + 'px'); // Position right of the cursor
+            }).on('mouseout',function(d){
+                tooltip.style('visibility','hidden');
+            })
             .append('a')
             .attr('href', '#')
             .on('click', selectRelation);
@@ -386,7 +405,11 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('class', 'member-entity-name')
             .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
             .style('border-color', d => d.relation.tags.colour)
-            .text(function(d) { return utilDisplayName(d.relation); });
+            .html(function(d) {
+                const matched = presetManager.match(d.relation, context.graph());
+                // hide the network from the name if there is NSI match
+                return utilDisplayName(d.relation, matched.suggestion);
+            });
 
         labelEnter
             .append('button')
