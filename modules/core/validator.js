@@ -10,7 +10,7 @@ import * as Validations from '../validations/index';
 
 export function coreValidator(context) {
   let dispatch = d3_dispatch('validated', 'focusedIssue');
-  let validator = utilRebind({}, dispatch, 'on');
+  const validator = {};
 
   let _rules = {};
   let _disabledRules = {};
@@ -773,7 +773,7 @@ export function coreValidator(context) {
   }
 
 
-  return validator;
+  return utilRebind(validator, dispatch, 'on');
 }
 
 

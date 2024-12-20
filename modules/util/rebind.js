@@ -1,8 +1,16 @@
 // Copies a variable number of methods from source to target.
-export function utilRebind(target, source) {
-    var i = 1, n = arguments.length, method;
-    while (++i < n) {
-        target[method = arguments[i]] = d3_rebind(target, source, source[method]);
+/**
+ * @template T
+ * @template S
+ * @template {keyof S} Args
+ * @param {T} target
+ * @param {S} source
+ * @param {...Args} args
+ * @returns {T & Pick<S, Args>}
+ */
+export function utilRebind(target, source, ...args) {
+    for (const method of args) {
+        target[method] = d3_rebind(target, source, source[method]);
     }
     return target;
 }

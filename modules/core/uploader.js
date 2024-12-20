@@ -39,7 +39,7 @@ export function coreUploader(context) {
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
-    var uploader = utilRebind({}, dispatch, 'on');
+    const uploader = {};
 
     uploader.isSaving = function() {
         return _isSaving;
@@ -402,5 +402,5 @@ export function coreUploader(context) {
     };
 
 
-    return uploader;
+    return utilRebind(uploader, dispatch, 'on');
 }

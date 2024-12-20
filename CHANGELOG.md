@@ -56,9 +56,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* enable Intellisense (IDE auto-completion) for the main classes ([#10618], thanks [@k-yle])
 
 [#7381]: https://github.com/openstreetmap/iD/issues/7381
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
+[#10618]: https://github.com/openstreetmap/iD/pull/10618
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748

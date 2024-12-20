@@ -6,7 +6,10 @@ import { osmLanes } from './lanes';
 import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix } from './tags';
 import { utilArrayUniq } from '../util';
 
-
+/**
+ * @typedef {typeof prototype & iD.AbstractEntity} OsmWay
+ * @returns {OsmWay}
+ */
 export function osmWay() {
     if (!(this instanceof osmWay)) {
         return (new osmWay()).initialize(arguments);
@@ -21,7 +24,7 @@ osmEntity.way = osmWay;
 osmWay.prototype = Object.create(osmEntity.prototype);
 
 
-Object.assign(osmWay.prototype, {
+const prototype = {
     type: 'way',
     nodes: [],
 
@@ -533,7 +536,8 @@ Object.assign(osmWay.prototype, {
             return isNaN(area) ? 0 : area;
         });
     }
-});
+};
+Object.assign(osmWay.prototype, prototype);
 
 
 // Filter function to eliminate consecutive duplicates.
