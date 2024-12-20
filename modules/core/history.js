@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { easeLinear as d3_easeLinear } from 'd3-ease';
 import { select as d3_select } from 'd3-selection';
 
-import { prefs } from './preferences';
+import { asyncPrefs, prefs } from './preferences';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
@@ -19,7 +19,7 @@ export function coreHistory(context) {
     var lock = utilSessionMutex('lock');
 
     // restorable if iD not open in another window/tab and a saved history exists in localStorage
-    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('saved_history'));
+    var _hasUnresolvedRestorableChanges = lock.lock() && !!prefs(getKey('has_saved_history'));
 
     var duration = 150;
     var _imageryUsed = [];
@@ -659,7 +659,9 @@ export function coreHistory(context) {
             if (lock.locked() &&
                 // don't overwrite existing, unresolved changes
                 !_hasUnresolvedRestorableChanges) {
-                const success = prefs(getKey('saved_history'), history.toJSON() || null);
+                const json = history.toJSON();
+                prefs(getKey('has_saved_history'), !!json);
+                const success = asyncPrefs.set(getKey('saved_history'), json || null);
 
                 if (!success) dispatch.call('storage_error');
             }
@@ -672,7 +674,8 @@ export function coreHistory(context) {
             context.debouncedSave.cancel();
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                prefs(getKey('saved_history'), null);
+                prefs(getKey('has_saved_history'), null);
+                asyncPrefs.set(getKey('saved_history'), null);
 
                 // clear the changeset metadata associated with the saved history
                 prefs('comment', null);
@@ -684,7 +687,7 @@ export function coreHistory(context) {
 
 
         savedHistoryJSON: function() {
-            return prefs(getKey('saved_history'));
+            return asyncPrefs.get(getKey('saved_history'));
         },
 
 
@@ -694,10 +697,10 @@ export function coreHistory(context) {
 
 
         // load history from a version stored in localStorage
-        restore: function() {
+        restore: async function() {
             if (lock.locked()) {
                 _hasUnresolvedRestorableChanges = false;
-                var json = this.savedHistoryJSON();
+                var json = await this.savedHistoryJSON();
                 if (json) history.fromJSON(json, true);
             }
         },
