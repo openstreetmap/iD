@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
+* linkify keys & tags in the preset docs from the wiki ([#10763], thanks [@k-yle])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 #### :camera: Street-Level
@@ -63,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
 [#10755]: https://github.com/openstreetmap/iD/issues/10755
+[#10763]: https://github.com/openstreetmap/iD/pull/10763
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
