@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.32.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Enable autofill for the `source` tag in the changeset panel ([#10764], thanks [@k-yle])
 * Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
@@ -63,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
 [#10755]: https://github.com/openstreetmap/iD/issues/10755
+[#10764]: https://github.com/openstreetmap/iD/issues/10764
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
