@@ -2866,6 +2866,10 @@ img.tag-reference-wiki-image {
     margin: 0;
     padding-bottom: 10px;
 }
+/* only the raw-member-editor is reorederable, not the raw-membership-editor */
+.section-raw-member-editor .member-row .label-text { cursor: grab; }
+.section-raw-member-editor .member-row .label-text:active { cursor: grabbing; }
+
 .section-raw-member-editor .member-row .member-entity-name,
 .section-raw-membership-editor .member-row .member-entity-name {
     font-weight: normal;

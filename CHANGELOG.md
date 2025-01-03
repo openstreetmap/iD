@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix flickering of imagery metadata information in background panel ([#9754])
 * Immediately update raw tag key/value inputs when spaces have been trimmed ([#11206])
 * Fix duplicate values deleted when editing `destination:*` tags ([#10639], thanks [@k-yle])
+* Fix the relation role dropdown not opening on click ([#10645], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :rocket: Presets
@@ -60,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9588]: https://github.com/openstreetmap/iD/pull/9588
 [#9754]: https://github.com/openstreetmap/iD/issues/9754
 [#10639]: https://github.com/openstreetmap/iD/pull/10639
+[#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#11206]: https://github.com/openstreetmap/iD/issues/11206
 [#11211]: https://github.com/openstreetmap/iD/issues/11211
 [@bhavyaKhatri2703]: https://github.com/bhavyaKhatri2703
@@ -288,6 +290,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9636]: https://github.com/openstreetmap/iD/pull/9636
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10618]: https://github.com/openstreetmap/iD/pull/10618
+[#10645]: https://github.com/openstreetmap/iD/pull/10645
 [#10646]: https://github.com/openstreetmap/iD/pull/10646
 [#10648]: https://github.com/openstreetmap/iD/pull/10648
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
