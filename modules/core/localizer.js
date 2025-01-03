@@ -397,6 +397,7 @@ export function coreLocalizer() {
 
     // Adds localized text wrapped as an HTML span element with locale info to the DOM
     localizer.t.append = function(stringId, replacements, locale) {
+      /** @param {d3.Selection} selection */
       const ret = function(selection) {
         const info = localizer.tInfo(stringId, replacements, locale);
         return selection.append('span')
