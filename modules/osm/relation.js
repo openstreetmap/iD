@@ -259,7 +259,10 @@ Object.assign(osmRelation.prototype, {
     hasFromViaTo: function() {
         return (
             this.members.some(function(m) { return m.role === 'from'; }) &&
-            this.members.some(function(m) { return m.role === 'via'; }) &&
+            this.members.some((m) =>
+                m.role === 'via' ||
+                (m.role === 'intersection' && this.tags.type === 'destination_sign')
+            ) &&
             this.members.some(function(m) { return m.role === 'to'; })
         );
     },
