@@ -70,6 +70,62 @@ describe('iD.serviceTaginfo', function() {
                 null, [{'title':'amenity', 'value':'amenity'}]
             );
         });
+        
+        it('excludes suggestions for name:..', function(done) {
+            fetchMock.mock(/\/keys\/all/, {
+                body: '{"data":[{"count_all":56136034,"key":"name:en","count_all_fraction":0.0132},'
+                    + '{"count_all":5190337,"key":"amenity","count_all_fraction":1.0},'
+                    + '{"count_all":1,"key":"other_key","count_all_fraction":0.0}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        
+            var keysToTest = [
+                'name:en',
+                'name:fr',
+                'postal_code',
+                'other_key'
+            ];
+        
+            const _popularKeys = [
+                /^postal_code$/,       // Matches "postal_code"
+                /^full_name$/,         // Matches "full_name"
+                /^loc_name$/,          // Matches "loc_name"
+                /^reg_name$/,          // Matches "reg_name"
+                /^short_name$/,        // Matches "short_name"
+                /^sorting_name$/,      // Matches "sorting_name"
+                /^artist_name$/,       // Matches "artist_name"
+                /^nat_name$/,          // Matches "nat_name"
+                /^long_name$/,         // Matches "long_name"
+                /^via$/,               // Matches "via"
+                /^bridge:name$/,       // Matches "bridge:name"
+                /^name:..$/            // Matches "name:xx" (where xx is exactly two characters)
+            ];
+        
+            var callback = sinon.spy();
+            taginfo.keys({ query: 'name' }, callback);
+        
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(null, [
+                    {'title': 'name:en', 'value': 'name:en'},
+                    {'title': 'name:fr', 'value': 'name:fr'},
+                    {'title': 'postal_code', 'value': 'postal_code'},
+                    {'title': 'other_key', 'value': 'other_key'}
+                ]);
+        
+                keysToTest.forEach(key => {
+                    const isPopular = _popularKeys.some(regex => regex.test(key));
+        
+                    if (key.startsWith('name:')) {
+                        expect(isPopular).to.be.false; // Ensure no suggestions for name:..
+                    } else {
+                        expect(isPopular).to.be.true; // Other keys should still get suggestions
+                    }
+                });
+        
+                done();
+            }, 50);
+        });
 
         it('includes popular keys with an entity type filter', async () => {
             fetchMock.mock(/\/keys\/all/, {

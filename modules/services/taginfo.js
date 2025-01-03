@@ -195,20 +195,20 @@ export default {
     init: function() {
         _inflight = {};
         _taginfoCache = {};
-        _popularKeys = {
-            // manually exclude some keys – #5377, #7485            
-            postal_code: true,
-            full_name: true,
-            loc_name: true,
-            reg_name: true,
-            short_name: true,
-            sorting_name: true,
-            artist_name: true,
-            nat_name: true,
-            long_name: true,
-            via: true,
-            'bridge:name': true
-        };
+        _popularKeys = [
+            /^postal_code$/,       // Matches "postal_code"
+            /^full_name$/,         // Matches "full_name"
+            /^loc_name$/,          // Matches "loc_name"
+            /^reg_name$/,          // Matches "reg_name"
+            /^short_name$/,        // Matches "short_name"
+            /^sorting_name$/,      // Matches "sorting_name"
+            /^artist_name$/,       // Matches "artist_name"
+            /^nat_name$/,          // Matches "nat_name"
+            /^long_name$/,         // Matches "long_name"
+            /^via$/,               // Matches "via"
+            /^bridge:name$/,       // Matches "bridge:name"
+            /^name:..$/            // Matches "name:xx" (where xx is exactly two characters)
+        ];
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
@@ -291,7 +291,7 @@ export default {
     values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
-        if (key && _popularKeys[key] || key.slice(0,4)==='name') {
+        if (key && _popularKeys.some(regex => regex.test(key))) {
             callback(null, []);
             return;
         }
