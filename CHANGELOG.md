@@ -48,12 +48,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render highway direction cones only on matching parent ways ([#9013])
 * Prevent edit menu from being covered up by street level imagery or other map overlay panels ([#10495])
 * Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris]) 
+* Prevent search results from sometimes getting stuck in the highlighted state when mouse-hovering the list of search results while typing ([#10661])
 #### :earth_asia: Localization
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
 * Add Ladin (language code `lld`) as an available option for multilingual names
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+* Fix walkthrough from showing tooltips on wrong location under certain circumstances ([#10650], [#10624], [#10634])
 #### :rocket: Presets
 #### :hammer: Development
 * Migrate unit tests from karma to vitest ([#10452])
@@ -66,6 +68,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10495]: https://github.com/openstreetmap/iD/issues/10495
 [#10508]: https://github.com/openstreetmap/iD/pull/10508
 [#10594]: https://github.com/openstreetmap/iD/pull/10594
+[#10624]: https://github.com/openstreetmap/iD/issues/10624
+[#10634]: https://github.com/openstreetmap/iD/issues/10634
+[#10650]: https://github.com/openstreetmap/iD/issues/10650
 [@winstonsung]: https://github.com/winstonsung/
 [@Nekzuris]: https://github.com/Nekzuris
 [@michaelabon]: https://github.com/michaelabon

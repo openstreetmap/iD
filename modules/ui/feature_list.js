@@ -285,18 +285,16 @@ export function uiFeatureList(context) {
             list.selectAll('.geocode-item')
                 .style('display', (value && _geocodeResults === undefined) ? 'block' : 'none');
 
-            list.selectAll('.feature-list-item')
-                .data([-1])
-                .remove();
-
             var items = list.selectAll('.feature-list-item')
                 .data(results, function(d) { return d.id; });
 
             var enter = items.enter()
                 .insert('button', '.geocode-item')
                 .attr('class', 'feature-list-item')
-                .on('mouseover', mouseover)
-                .on('mouseout', mouseout)
+                .on('pointerenter', mouseover)
+                .on('pointerleave', mouseout)
+                .on('focus', mouseover)
+                .on('blur', mouseout)
                 .on('click', click);
 
             var label = enter
@@ -326,23 +324,21 @@ export function uiFeatureList(context) {
                 .transition()
                 .style('opacity', 1);
 
-            items.order();
-
             items.exit()
+                .each(d => mouseout(undefined, d))
                 .remove();
+
+            items.merge(enter)
+                .order();
         }
 
 
         function mouseover(d3_event, d) {
-            if (d.id === -1) return;
-
             utilHighlightEntities([d.id], true, context);
         }
 
 
         function mouseout(d3_event, d) {
-            if (d.id === -1) return;
-
             utilHighlightEntities([d.id], false, context);
         }
 
