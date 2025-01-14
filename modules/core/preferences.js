@@ -1,3 +1,4 @@
+export * as asyncPrefs from 'idb-keyval';
 
 // https://github.com/openstreetmap/iD/issues/772
 // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -48,47 +49,5 @@ corePreferences.onChange = function(k, handler) {
   _listeners[k] = _listeners[k] || [];
   _listeners[k].push(handler);
 };
-
-class AsyncPreferences {
-  /** @private @type {Record<string, FileSystemWritableFileStream>} */
-  writableCache = {};
-
-  /** @param {string} key */
-  async get(key) {
-    try {
-      const rootFolder = await navigator.storage.getDirectory();
-      const fileHandle = await rootFolder.getFileHandle(key, {
-        create: true,
-      });
-      const file = await fileHandle.getFile();
-      return await file.text();
-    } catch {
-      // async storage is not available, so fallback to localStorage
-      return /** @type {string | null} */ (corePreferences(key));
-    }
-  }
-
-  /**
-   * @param {string} key
-   * @param {string} value
-   */
-  async set(key, value) {
-    try {
-      this.writableCache[key] ||= await navigator.storage
-        .getDirectory()
-        .then(rootFolder => rootFolder.getFileHandle(key, { create: true }))
-        .then(fileHandle => fileHandle.createWritable());
-
-      await this.writableCache[key].write(new Blob([value]));
-      return true;
-    } catch {
-      // async storage is not available, so fallback to localStorage
-      return corePreferences(key, value);
-    }
-  }
-};
-
-export const asyncPrefs = new AsyncPreferences();
-
 
 export { corePreferences as prefs };
