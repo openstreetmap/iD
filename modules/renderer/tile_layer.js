@@ -122,24 +122,25 @@ export function rendererTileLayer(context) {
         var requests = [];
         var showDebug = context.getDebug('tile') && !_source.overlay;
 
-        if (_source.validZoom(_zoom)) {
-            tiler.skipNullIsland(!!_source.overlay);
+        var clampedZoom = Math.max(_source.zoomExtent[0], Math.min(_zoom, _source.zoomExtent[1]));
 
-            tiler().forEach(function(d) {
-                addSource(d);
-                if (d.url === '') return;
-                if (typeof d.url !== 'string') return; // Workaround for #2295
-                requests.push(d);
-                if (_cache[d.url] === false && lookUp(d)) {
-                    requests.push(addSource(lookUp(d)));
-                }
-            });
+        tiler.skipNullIsland(!!_source.overlay);
 
-            requests = uniqueBy(requests, 'url').filter(function(r) {
-                // don't re-request tiles which have failed in the past
-                return _cache[r.url] !== false;
-            });
-        }
+        tiler().forEach(function(d) {
+            addSource(d);
+            if (d.url === '') return;
+            if (typeof d.url !== 'string') return; // Workaround for #2295
+            requests.push(d);
+            if (_cache[d.url] === false && lookUp(d)) {
+                requests.push(addSource(lookUp(d)));
+            }
+        });
+
+        requests = uniqueBy(requests, 'url').filter(function(r) {
+            // Don't re-request tiles which have failed in the past
+            return _cache[r.url] !== false;
+        });
+
 
         function load(d3_event, d) {
             _cache[d.url] = true;
@@ -159,8 +160,8 @@ export function rendererTileLayer(context) {
         }
 
         function imageTransform(d) {
-            var ts = d.tileSize * Math.pow(2, _zoom - d[2]);
-            var scale = tileSizeAtZoom(d, _zoom);
+            var ts = d.tileSize * Math.pow(2, clampedZoom - d[2]);
+            var scale = tileSizeAtZoom(d, clampedZoom);
             return 'translate(' +
                 ((d[0] * ts) * _tileSize / d.tileSize - _tileOrigin[0]
             ) + 'px,' +
