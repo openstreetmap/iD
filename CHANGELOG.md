@@ -47,8 +47,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix unsolvable validator error triggered by regional presets ([#10459])
 * Render highway direction cones only on matching parent ways ([#9013])
 * Prevent edit menu from being covered up by street level imagery or other map overlay panels ([#10495])
-* Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris]) 
+* Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris])
 * Prevent search results from sometimes getting stuck in the highlighted state when mouse-hovering the list of search results while typing ([#10661])
+* Fix confusing behaviour after logging out in the standalone build of iD ([#10683], thanks [@k-yle])
 #### :earth_asia: Localization
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
@@ -71,6 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10624]: https://github.com/openstreetmap/iD/issues/10624
 [#10634]: https://github.com/openstreetmap/iD/issues/10634
 [#10650]: https://github.com/openstreetmap/iD/issues/10650
+[#10683]: https://github.com/openstreetmap/iD/issues/10683
 [@winstonsung]: https://github.com/winstonsung/
 [@Nekzuris]: https://github.com/Nekzuris
 [@michaelabon]: https://github.com/michaelabon
