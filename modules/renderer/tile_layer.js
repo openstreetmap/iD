@@ -16,6 +16,7 @@ export function rendererTileLayer(context) {
     var _zoom;
     var _source;
     var _epsilon = 0;
+    var _allowedUnderZoomAmount = 0;
 
     // Workaround to remove visible grid around tile borders on Chrome with dynamic epsilon for specific browser zoom levels
     // Should be removed when https://issues.chromium.org/issues/40084005 is resolved
@@ -82,7 +83,7 @@ export function rendererTileLayer(context) {
     }
 
 
-    // Update tiles based on current state of `projection`.
+    // Update tiles based on current state of projection.
     function background(selection) {
         _zoom = geoScaleToZoom(_projection.scale(), _tileSize);
 
@@ -115,14 +116,18 @@ export function rendererTileLayer(context) {
 
 
     // Derive the tiles onscreen, remove those offscreen and position them.
-    // Important that this part not depend on `_projection` because it's
+    // Important that this part not depend on _projection because it's
     // rentered when tiles load/error (see #644).
     function render(selection) {
         if (!_source) return;
         var requests = [];
         var showDebug = context.getDebug('tile') && !_source.overlay;
 
-        var clampedZoom = Math.max(_source.zoomExtent[0], Math.min(_zoom, _source.zoomExtent[1]));
+        var zoomLevel = Math.max(_source.zoomExtent[0], Math.min(_zoom, _source.zoomExtent[1]));
+        var effectiveZoom = Math.max(
+            _source.zoomExtent[0] - _allowedUnderZoomAmount,
+            Math.min(_zoom, _source.zoomExtent[1])
+        );
 
         tiler.skipNullIsland(!!_source.overlay);
 
@@ -160,8 +165,8 @@ export function rendererTileLayer(context) {
         }
 
         function imageTransform(d) {
-            var ts = d.tileSize * Math.pow(2, clampedZoom - d[2]);
-            var scale = tileSizeAtZoom(d, clampedZoom);
+            var ts = d.tileSize * Math.pow(2, effectiveZoom - d[2]);
+            var scale = tileSizeAtZoom(d, effectiveZoom);
             return 'translate(' +
                 ((d[0] * ts) * _tileSize / d.tileSize - _tileOrigin[0]
             ) + 'px,' +
@@ -304,6 +309,13 @@ export function rendererTileLayer(context) {
         _tileSize = _source.tileSize;
         _cache = {};
         tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
+        return background;
+    };
+
+
+    background.allowedUnderZoomAmount = function(val) {
+        if (!arguments.length) return _allowedUnderZoomAmount;
+        _allowedUnderZoomAmount = val;
         return background;
     };
 

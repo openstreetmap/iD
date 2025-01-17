@@ -7,13 +7,14 @@ import { geoRawMercator, geoScaleToZoom, geoVecSubtract, geoVecScale, geoZoomToS
 import { rendererTileLayer } from '../renderer';
 import { svgDebug, svgData } from '../svg';
 import { utilSetTransform } from '../util';
-// import { utilGetDimensions } from '../util/dimensions';
+import { utilGetDimensions } from '../util/dimensions';
 
 
 export function uiMapInMap(context) {
 
     function mapInMap(selection) {
-        var backgroundLayer = rendererTileLayer(context);
+        var backgroundLayer = rendererTileLayer(context)
+            .allowedUnderZoomAmount(1);
         var overlayLayers = {};
         var projection = geoRawMercator();
         var dataLayer = svgData(projection, context).showLabels(false);
