@@ -15,6 +15,8 @@ function geoOrthoFilterDotProduct(dotp, epsilon, lowerThreshold, upperThreshold,
         return 0;      // already orthogonal
     } else if (allowStraightAngles && Math.abs(val-1) < epsilon) {
         return 0;      // straight angle, which is okay in this case
+    } else if (val > 0.98 && dotp > -1) {
+        return 0;      // circular / spiky object [https://github.com/openstreetmap/iD/issues/10641]
     } else if (val < lowerThreshold || val > upperThreshold) {
         return dotp;   // can be adjusted
     } else {
