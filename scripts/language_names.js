@@ -15,10 +15,20 @@ const codesToSkip = ['ase', 'mis', 'mul', 'und', 'zxx'];
 
 let referencedScripts = [];
 
-function getLangNamesInNativeLang() {
+/**
+ * @returns {{
+ *  [code: string]: {
+ *    base?: string;
+ *    script?: string;
+ *    nativeName?: string;
+ *    names?: { [code: string]: string };
+ *  }
+ * }}
+ */
+function getCLDROverrides() {
   // manually add languages we want that aren't in CLDR
   // see for example https://github.com/openstreetmap/iD/pull/9241/
-  let unordered = {
+  return {
     aer: { nativeName: 'Arrernte' },
     aoi: { nativeName: 'Anindilyakwa' },
     aus: { nativeName: 'Australian Aboriginal Languages' },
@@ -32,7 +42,7 @@ function getLangNamesInNativeLang() {
     'brh': {
       nativeName: 'براہوئی'
     },
-    coa: { nativeName: 'Basa Pulu Kokos' },
+    coa: { nativeName: 'Basa Pulu Kokos', names: { en: 'Cocos Malay' } },
     'cdo': {
       nativeName: '閩東語'
     },
@@ -157,7 +167,7 @@ function getLangNamesInNativeLang() {
     'oc': {
       nativeName: 'Occitan'
     },
-    pih: { nativeName: 'Pitkern–Norfuk' },
+    pih: { nativeName: 'Pitkern–Norfuk', names: { en: 'Pitcairn-Norfolk', ty: 'Pitcairnais' } },
     piu: { nativeName: 'Pintupi' },
     pjt: { nativeName: 'Pitjantjatjara' },
     'pnb': {
@@ -174,7 +184,7 @@ function getLangNamesInNativeLang() {
     'skr': {
       nativeName: 'سرائیکی'
     },
-    tcs: { nativeName: 'Yumplatok' },
+    tcs: { nativeName: 'Yumplatok', names: { en: 'Torres Strait Creole' } },
     tiw: { nativeName: 'Tiwi' },
     'trw': {
       nativeName: 'توروالی'
@@ -202,7 +212,7 @@ function getLangNamesInNativeLang() {
     wyi: { nativeName: 'Woiwurrung' },
     xdk: { nativeName: 'Dharug' },
     xni: { nativeName: 'Ngarigo' },
-    xph: { nativeName: 'Tyerrernotepanner' },
+    xph: { nativeName: 'Tyerrernotepanner', names: { en: 'North Midlands Tasmanian' } },
     xrd: { nativeName: 'Gundungurra' },
     'yue-Hans': {
       base: 'yue',
@@ -221,6 +231,13 @@ function getLangNamesInNativeLang() {
     },
     zku: { nativeName: 'Kaurna' },
   };
+}
+
+function getLangNamesInNativeLang() {
+  const unordered = getCLDROverrides();
+  for (const key in unordered) {
+    delete unordered[key].names; // this is added later
+  }
 
   let langDirectoryPaths = fs.readdirSync(cldrMainDir);
   langDirectoryPaths.forEach(code => {
@@ -274,10 +291,19 @@ exports.langNamesInNativeLang = langNamesInNativeLang;
 exports.languageNamesInLanguageOf = function(code) {
   if (rematchCodes[code]) code = rematchCodes[code];
 
+  const { language } = new Intl.Locale(code);
+
   let languageFilePath = `${cldrMainDir}${code}/languages.json`;
   if (!fs.existsSync(languageFilePath)) return null;
 
   let translatedLangsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.languages;
+
+  // add any overrides that have translated names
+  for (const [key, value] of Object.entries(getCLDROverrides())) {
+    if (value.names?.[language]) {
+      translatedLangsByCode[key] ||= value.names?.[language];
+    }
+  }
 
   // ignore codes for non-languages
   codesToSkip.forEach(skipCode => {
