@@ -118,6 +118,7 @@ export default [
         'sinon': 'readonly',
         'happen': 'readonly',
         'fetchMock': 'readonly',
+        'jsdom': 'readonly',
         'expect': 'writable'
       }
     },
