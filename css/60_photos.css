@@ -47,6 +47,24 @@ li.list-item-photos.active:after {
     z-index: 50;
 }
 
+.photoviewer button.copy-id-btn {
+    border-radius: 0;
+    padding: 5px;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    z-index: 50;
+}
+.photoviewer .info{
+    border-radius: 5px;
+    padding: 6px;
+    position: absolute;
+    left: 25px;
+    bottom: 15px;
+    z-index: 100;
+    background-color: #ffffff;
+    color: #000;
+}
 .photoviewer button.set-photo-from-viewer {
     border-radius: 0;
     padding: 5px;

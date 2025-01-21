@@ -215,7 +215,7 @@ function loadTileDataToCache(data, tile, zoom) {
 async function getImageData(collection_id, image_id){
     const requestUrl = imageDataUrl.replace('{collectionId}', collection_id)
         .replace('{itemId}', image_id);
-
+        
     const response = await fetch(requestUrl, { method: 'GET' });
     if (!response.ok) {
         throw new Error(response.status + ' ' + response.statusText);

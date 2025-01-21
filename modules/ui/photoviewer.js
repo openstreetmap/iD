@@ -33,6 +33,74 @@ export function uiPhotoviewer(context) {
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));
+//add copy button
+selection
+    .append('button')
+
+    .attr('class', 'copy-id-btn')
+
+    .attr('title', 'copy id') // Or a more specific title like "Copy Image ID"
+
+    .call(svgIcon('#iD-operation-paste'))
+
+    .on('click',  function() {
+
+       // Determine the current service (Mapillary, Panoramax, etc.)
+       
+       // add copy functionlity
+       let currentService;
+
+       if (services.mapillary.isViewerOpen()) {
+         currentService = 'mapillary';
+       } else if (services.panoramax.isViewerOpen()) {
+         currentService = 'panoramax';
+       } 
+       // Add more conditions for other services if needed
+     
+       if (currentService) {
+         const service = services[currentService]; 
+         const activeImage = service.getActiveImage(); 
+     
+         if (activeImage && activeImage.id) {
+           navigator.clipboard.writeText(activeImage.id)
+             .then(() => {
+               //  display a success message 
+
+                const info=document.querySelector('#info')
+
+                info.style.display="block"
+
+               // Remove the tooltip after a short delay
+
+                    setTimeout(() => {
+
+                        info.style.display="none"
+
+                    }, 1500); // Remove after 1.5 seconds
+
+             })
+             .catch(err => {
+               console.error('Failed to copy: ', err);
+             });
+         } else {
+           console.warn('No active image or ID available.');
+         }
+       } else {
+         console.warn('No active image service detected.');
+       }
+    });
+
+    selection
+
+    .append('span')
+
+    .attr('class','info')
+
+    .style('display', 'none')
+
+    .attr('id','info')
+
+    .text("Copied!")
 
         function preventDefault(d3_event) {
             d3_event.preventDefault();
@@ -73,7 +141,7 @@ export function uiPhotoviewer(context) {
             setPhotoFromViewerButton();
         });
 
-
+        
         function setPhotoFromViewerButton() {
             if (services.mapillary.isViewerOpen()) {
                 if (context.mode().id !== 'select' || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
