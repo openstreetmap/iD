@@ -11,6 +11,7 @@ import { utilCleanTags, utilCombinedTags, utilRebind } from '../util';
 
 import { uiSectionEntityIssues } from './sections/entity_issues';
 import { uiSectionFeatureType } from './sections/feature_type';
+import { uiSectionLifecycleEditor } from './sections/lifecycle_editor';
 import { uiSectionPresetFields } from './sections/preset_fields';
 import { uiSectionRawMemberEditor } from './sections/raw_member_editor';
 import { uiSectionRawMembershipEditor } from './sections/raw_membership_editor';
@@ -96,6 +97,7 @@ export function uiEntityEditor(context) {
                 uiSectionPresetFields(context).on('change', changeTags).on('revert', revertTags),
                 uiSectionRawTagEditor('raw-tag-editor', context).on('change', changeTags),
                 uiSectionRawMemberEditor(context),
+                uiSectionLifecycleEditor(context).on('change', changeTags),
                 uiSectionRawMembershipEditor(context)
             ];
         }

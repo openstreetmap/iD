@@ -1,4 +1,12 @@
 en:
+  lifecycle:
+    proposed: Proposed 
+    planned: Planned
+    construction: Under Construction 
+    disused: Disused
+    abandoned: Abandoned
+    demolished: Demolished
+    functional: Functional
   icons:
     download: download
     information: info
@@ -697,6 +705,7 @@ en:
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
   inspector:
+    lifecycle: Lifecycle
     zoom_to:
       key: Z
       title: Zoom To Selection

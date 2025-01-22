@@ -7,6 +7,7 @@ export { uiSectionEntityIssues } from './entity_issues';
 export { uiSectionFeatureType } from './feature_type';
 export { uiSectionMapFeatures } from './map_features';
 export { uiSectionMapStyleOptions } from './map_style_options';
+export { uiSectionLifecycleEditor } from './lifecycle_editor';
 export { uiSectionOverlayList } from './overlay_list';
 export { uiSectionPhotoOverlays } from './photo_overlays';
 export { uiSectionPresetFields } from './preset_fields';
