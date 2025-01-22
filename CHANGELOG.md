@@ -49,11 +49,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent edit menu from being covered up by street level imagery or other map overlay panels ([#10495])
 * Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris])
 * Prevent search results from sometimes getting stuck in the highlighted state when mouse-hovering the list of search results while typing ([#10661])
+* Allow tiles in minimap to be slightly underzoomed, preventing them from blacking out on low map zoom levels ([#10653])
 * Fix confusing behaviour after logging out in the standalone build of iD ([#10683], thanks [@k-yle])
 #### :earth_asia: Localization
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
 * Add Ladin (language code `lld`) as an available option for multilingual names
+* Add 30 indigenous languages as dropdown options for multilingual names ([#10684], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Fix walkthrough from showing tooltips on wrong location under certain circumstances ([#10650], [#10624], [#10634])
@@ -72,7 +74,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10624]: https://github.com/openstreetmap/iD/issues/10624
 [#10634]: https://github.com/openstreetmap/iD/issues/10634
 [#10650]: https://github.com/openstreetmap/iD/issues/10650
+[#10653]: https://github.com/openstreetmap/iD/issues/10653
 [#10683]: https://github.com/openstreetmap/iD/issues/10683
+[#10684]: https://github.com/openstreetmap/iD/pull/10684
 [@winstonsung]: https://github.com/winstonsung/
 [@Nekzuris]: https://github.com/Nekzuris
 [@michaelabon]: https://github.com/michaelabon

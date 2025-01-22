@@ -8,6 +8,8 @@ import envs from '../config/envs.mjs';
 
 chai.use(sinonChai);
 
+declare var global: typeof globalThis;
+
 global.before = beforeEach;
 global.after = afterEach;
 global.fetchMock = fetchMock;
@@ -19,6 +21,19 @@ for (const [key, value] of Object.entries(envs)) {
   Reflect.set(global, key, JSON.parse(value));
 }
 
+// the 'happen' library explicitly references `window` when creating an event,
+// but we need to use jsdom's window, so we have to patch initEvent.
+const { initMouseEvent } = MouseEvent.prototype;
+MouseEvent.prototype.initMouseEvent = function (...args) {
+  args[3] = jsdom.window;
+  return initMouseEvent.apply(this, args);
+};
+const { initUIEvent } = UIEvent.prototype;
+UIEvent.prototype.initUIEvent = function (...args) {
+  args[3] = jsdom.window;
+  return initUIEvent.apply(this, args);
+};
+
 // vitest has deprecated the done() callback, so we overwrite the `it` function
 const _it = it;
 Reflect.set(
@@ -26,11 +41,17 @@ Reflect.set(
   'it',
   Object.assign(
     (msg: string, fn: (done?: () => void) => void | Promise<void>) => {
-      _it(msg, () =>
-        fn.length ? () => new Promise<void>((resolve) => fn(resolve)) : fn(),
-      );
+      _it(msg, () => {
+        if (fn.length) {
+          // there is a done callback -> return a promise instead
+          return new Promise<void>((done) => fn(done));
+        }
+
+        // no done callback -> normal behaviour
+        return fn();
+      });
     },
-    { todo: _it.todo, skip: _it.skip },
+    { todo: _it.todo, skip: _it.skip, only: _it.only, each: _it.each },
   ),
 );
 
