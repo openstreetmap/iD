@@ -113,9 +113,6 @@ function getLangNamesInNativeLang() {
       base: 'ko',
       script: 'Latn'
     },
-    'lld': {
-      nativeName: 'Ladin'
-    },
     'mnc-Latn': {
       base: 'mnc',
       script: 'Latn',

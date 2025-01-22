@@ -186,7 +186,6 @@ function generateTerritoryLanguages() {
   // override/adjust some territory languages which are not included in CLDR data
   territoryLanguages.pk.push('pnb', 'scl', 'trw', 'kls'); // https://github.com/openstreetmap/iD/pull/9242
   lodash.pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
-  territoryLanguages.it.push('lld'); // https://en.wikipedia.org/wiki/Ladin_language
 
   return territoryLanguages;
 }

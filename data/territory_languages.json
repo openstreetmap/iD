@@ -114,7 +114,7 @@
   "iq": ["ar", "en", "ckb", "az-Arab", "fa", "lrc", "syr"],
   "ir": ["fa", "az-Arab", "mzn", "glk", "ckb", "sdh", "tk", "lrc", "ar", "bal", "rmt", "bqi", "luz", "lki", "kaa", "bgn", "prd", "hy", "ps", "ka", "gbz", "kk-Arab"],
   "is": ["is", "da"],
-  "it": ["it", "en", "fr", "lmo", "sc", "de", "vec", "nap", "lij", "scn", "sdc", "sl", "fur", "egl", "lld", "ca", "el", "pms", "hr", "mhn", "rgn", "lld"],
+  "it": ["it", "en", "fr", "lmo", "sc", "de", "vec", "nap", "lij", "scn", "sdc", "sl", "fur", "egl", "lld", "ca", "el", "pms", "hr", "mhn", "rgn"],
   "je": ["en"],
   "jm": ["en", "jam"],
   "jo": ["ar", "apc", "en"],
