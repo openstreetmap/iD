@@ -429,6 +429,9 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             context.map().on('move.intro', function() {
+                if (selectMenuItem(context, 'delete').empty()) {
+                    return continueTo(rightClickPoint);
+                }
                 reveal('.edit-menu',
                     helpHtml('intro.points.delete'),
                     { duration: 0,  padding: 50 }

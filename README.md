@@ -22,7 +22,7 @@ if you're looking for something to do.
 
 Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
-* [OpenStreetMap Discord](https://discord.gg/openstreetmap) (`#id` channel)
+* [OpenStreetMap Discord](https://discord.com/invite/openstreetmap) (`#id` channel)
 * [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
 * [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
@@ -52,4 +52,4 @@ iD also bundles portions of the following open source software.
 
 ## Thank you
 
-Initial development of iD was made possible by a [grant of the Knight Foundation](https://www.mapbox.com/blog/knight-invests-openstreetmap/).
+Initial development of iD was made possible by a [grant of the Knight Foundation](https://blog.mapbox.com/large-investment-in-openstreetmap-from-knight-foundation-cf7aa00534db).

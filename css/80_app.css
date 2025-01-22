@@ -4417,7 +4417,7 @@ img.tile {
     -webkit-user-drag: none;
 
     opacity: 1;
-    transition: opacity 120ms linear;
+    transition: opacity 250ms linear;
 
     /* prevent brief flickering of "broken image" on tile loading errors, see https://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/ */
     text-indent: 100%;
@@ -4426,22 +4426,23 @@ img.tile {
 }
 
 /* Workaround to remove visible grid around tile borders on Chrome
-   Only works with browser zoom multiple of 25 (75%, 100%, 125%...) 
+   Only works with browser zoom multiple of 25 (75%, 100%, 125%...)
    Should be removed when https://issues.chromium.org/issues/40084005 is resolved.
    See https://github.com/openstreetmap/iD/pull/10594 */
 @media (-webkit-device-pixel-ratio = 1) or (-webkit-device-pixel-ratio = 1.25) or (-webkit-device-pixel-ratio = 1.5) or (-webkit-device-pixel-ratio = 1.75)
     or (-webkit-device-pixel-ratio = 2) or (-webkit-device-pixel-ratio = 2.25) or (-webkit-device-pixel-ratio = 2.5) or (-webkit-device-pixel-ratio = 2.75)
     or (-webkit-device-pixel-ratio = 3) or (-webkit-device-pixel-ratio = 3.25) or (-webkit-device-pixel-ratio = 3.5) or (-webkit-device-pixel-ratio = 3.75)
-    or (-webkit-device-pixel-ratio = 4) or (-webkit-device-pixel-ratio = 4.25) or (-webkit-device-pixel-ratio = 4.5) or (-webkit-device-pixel-ratio = 4.75) 
+    or (-webkit-device-pixel-ratio = 4) or (-webkit-device-pixel-ratio = 4.25) or (-webkit-device-pixel-ratio = 4.5) or (-webkit-device-pixel-ratio = 4.75)
     or (-webkit-device-pixel-ratio = 5) or (-webkit-device-pixel-ratio = 0.25) or (-webkit-device-pixel-ratio = 0.5) or (-webkit-device-pixel-ratio = 0.75) {
     .layer-background img.tile {
         mix-blend-mode: plus-lighter;
     }
 }
 
-img.tile-removing {
+.layer-background img.tile-removing {
     opacity: 0;
     z-index: 1;
+    mix-blend-mode: normal;
 }
 
 .tile-label-debug {
@@ -5839,6 +5840,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border: solid transparent;
     border-width: 3px 3px 3px 4px;
     border-radius: 6px;
+    cursor: auto;
 }
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);

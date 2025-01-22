@@ -213,7 +213,7 @@ export function rendererTileLayer(context) {
                     if (tile.classed('tile-removing')) {
                         tile.remove();
                     }
-                }, 120);
+                }, 250);
             });
 
         image.enter()

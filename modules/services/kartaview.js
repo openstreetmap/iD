@@ -6,7 +6,7 @@ import RBush from 'rbush';
 
 import { localizer } from '../core/localizer';
 import { geoExtent, geoScaleToZoom } from '../geo';
-import { utilArrayUnion, utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
+import { utilQsString, utilRebind, utilSetTransform, utilStringQs, utilTiler } from '../util';
 
 
 var apibase = 'https://kartaview.org';
