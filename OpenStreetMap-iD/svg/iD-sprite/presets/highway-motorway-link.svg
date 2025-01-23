@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
+  <defs>
+    <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="-660.5" y1="157.987" x2="-662" y2="152.362" gradientTransform="matrix(1, 0, 0, 1, 701, -132.362)">
+      <stop offset="0" stop-color="#444444"/>
+      <stop offset="1" stop-color="#B5B5B5"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path d="M34,14 L25,36 L36,36 L37.156,28.375 C35.72,27.032 34,25.193 34,24 L34,22 L37.906,23.5 L39.344,14 L34,14 z" fill="#B5B5B5"/>
+    <path d="M42,36 L42,32 C42,27.548 34,26.172 34,22 C34,19 34.375,14 34.375,14 L39.375,14 C39.375,14 39,17.996 39,20 C39,22 47.595,24.072 49,28 L51,36 z" fill="url(#Gradient_1)"/>
+    <path d="M19,36 L30.359,14 L25,14 L8,36 z" fill="#B5B5B5"/>
+    <path d="M32.5,33 L33.75,29 L30.75,29 L29.5,33 z M22.5,21 L24.5,17.5 L27.5,17.5 L25.5,21 z" fill="currentColor" id="highway-motorway-link-stroke3"/>
+  </g>
+</svg>

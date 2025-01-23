@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="50" height="50" viewBox="5 0 50 50">
+  <defs>
+    <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="-900.5" y1="157.987" x2="-902" y2="152.362" gradientTransform="matrix(1, 0, 0, 1, 934, -132.362)">
+      <stop offset="0" stop-color="#444444"/>
+      <stop offset="1" stop-color="#B5B5B5"/>
+    </linearGradient>
+  </defs>
+  <path d="M27,14 L25.781,17 L24.062,17 L23.656,18 L25.375,18 L24.125,21 L22.375,21 L21.937,22 L23.719,22 L22.5,25 L20.687,25 L20.25,26 L22.094,26 L20.875,29 L18.969,29 L18.562,30 L20.469,30 L19.219,33 L17.281,33 L16.844,34 L18.812,34 L18,36 L29,36 L30.156,28.375 C28.72,27.032 27,25.193 27,24 L27,22 L30.906,23.5 L32.344,14 L27,14 z" fill="#B5B5B5"/>
+  <path d="M25.5,33 L26.75,29 L23.75,29 L22.5,33 z" fill="currentColor" id="highway-tertiary-link-stroke3"/>
+  <path d="M35,36 L35,32 C35,27.548 27,26.172 27,22 C27,19 27.375,14 27.375,14 L32.375,14 C32.375,14 32,17.996 32,20 C32,22 40.595,24.072 42,28 L44,36 z" fill="url(#Gradient_1)"/>
+</svg>

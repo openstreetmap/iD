@@ -1,0 +1,30 @@
+# This workflow will push the iD source strings to transifex
+# - requires TX_TOKEN secret to be set on GitHub
+# - you can generate a token at https://www.transifex.com/user/settings/api/
+# - job does not run if no token provided
+
+name: transifex
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  transifex:
+    runs-on: ubuntu-latest
+    environment: workflows
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Transifex client
+      run: |
+        curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+    - name: Push source strings to Transifex
+      env:
+        TX_TOKEN: ${{secrets.TX_TOKEN}}
+      if: env.TX_TOKEN != null
+      run: ./tx push --source --use-git-timestamps --skip id-editor.core

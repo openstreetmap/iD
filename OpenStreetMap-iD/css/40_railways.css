@@ -1,0 +1,78 @@
+/* railways */
+
+/* defaults */
+.preset-icon .icon.tag-railway.other-line {
+    color: #fff;
+    fill: #777;
+}
+.preset-icon .icon.tag-railway {
+    color: #555;
+}
+
+/* lines */
+/* narrow widths */
+path.line.shadow.tag-railway {
+    stroke-width: 16;
+}
+path.line.casing.tag-railway {
+    stroke-width: 7;
+}
+path.line.stroke.tag-railway {
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 12, 12;
+}
+.low-zoom path.line.shadow.tag-railway {
+    stroke-width: 12;
+}
+.low-zoom path.line.casing.tag-railway {
+    stroke-width: 5;
+}
+.low-zoom path.line.stroke.tag-railway {
+    stroke-width: 2;
+    stroke-dasharray: 6, 6;
+}
+.preset-icon-container path.line.stroke.tag-railway:not(.tag-status),
+.preset-icon-container path.line.stroke.tag-railway.tag-status-disused {
+    stroke-dasharray: 6;
+}
+
+path.line.casing.tag-railway.tag-railway-platform_edge,
+path.line.casing.tag-railway.tag-railway-platform {
+    stroke-width: 0;
+}
+path.line.stroke.tag-railway.tag-railway-platform_edge,
+path.line.stroke.tag-railway.tag-railway-platform {
+    stroke-dasharray: none;
+}
+
+/* styles */
+path.line.casing.tag-railway {
+    stroke: #555;
+}
+path.line.stroke.tag-railway {
+    stroke: #eee;
+}
+
+.preset-icon .icon.tag-railway.tag-status {
+    color: #999;
+}
+path.line.casing.tag-railway.tag-status {
+    stroke: #999;
+}
+path.line.stroke.tag-railway.tag-status:not(.tag-service) {
+    stroke: #eee;
+}
+.preset-icon .icon.tag-railway.tag-status-disused {
+    color: #808080;
+}
+path.line.casing.tag-railway.tag-status-disused {
+    stroke: #808080;
+}
+
+path.line.casing.tag-railway-subway {
+    stroke: #222;
+}
+path.line.stroke.tag-railway-subway {
+    stroke: #bbb;
+}

@@ -1,0 +1,76 @@
+/* aeroways */
+
+/* areas */
+path.area.stroke.tag-aeroway,
+.low-zoom path.area.stroke.tag-aeroway {
+    stroke: #fff;
+    stroke-dasharray: none;
+    stroke-width: 1;
+}
+path.area.fill.tag-aeroway-runway {
+    stroke: rgba(0, 0, 0, 0.6);
+    fill: rgba(0, 0, 0, 0.6);
+}
+
+/* lines */
+/* narrow aeroways (taxiway) */
+path.line.shadow.tag-aeroway-taxiway,
+path.line.shadow.tag-taxiway {
+    stroke-width: 16;
+}
+path.line.casing.tag-aeroway-taxiway,
+path.line.casing.tag-taxiway {
+    stroke: #666;
+    stroke-width: 7;
+}
+path.line.stroke.tag-aeroway-taxiway,
+path.line.stroke.tag-taxiway {
+    stroke: #ff0;
+    stroke-width: 5;
+}
+.low-zoom path.line.shadow.tag-aeroway-taxiway,
+.low-zoom path.line.shadow.tag-taxiway {
+    stroke-width: 12;
+}
+.low-zoom path.line.casing.tag-aeroway-taxiway,
+.low-zoom path.line.casing.tag-taxiway {
+    stroke-width: 5;
+}
+.low-zoom path.line.stroke.tag-aeroway-taxiway,
+.low-zoom path.line.stroke.tag-taxiway {
+    stroke-width: 3;
+}
+
+/* wide aeroways (runway) */
+.preset-icon .icon.tag-aeroway-runway,
+.preset-icon .icon.tag-runway {
+    color: #444;
+    fill: #000;
+}
+path.line.shadow.tag-aeroway-runway {
+    stroke-width: 20;
+}
+path.line.casing.tag-aeroway-runway {
+    stroke-width: 10;
+    stroke: #000;
+    stroke-linecap: square;
+}
+path.line.stroke.tag-aeroway-runway {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 24, 48;
+}
+.low-zoom path.line.shadow.tag-aeroway-runway {
+    stroke-width: 16;
+}
+.low-zoom path.line.casing.tag-aeroway-runway {
+    stroke-width: 7;
+}
+.low-zoom path.line.stroke.tag-aeroway-runway {
+    stroke-width: 2;
+    stroke-dasharray: 12, 24;
+}
+.preset-icon-container path.line.stroke.tag-aeroway-runway {
+    stroke-dasharray: 0, 14, 8, 14;
+}

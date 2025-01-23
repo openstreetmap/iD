@@ -1,0 +1,53 @@
+svg.preset-icon-category-border path {
+    stroke-width: 1;
+    stroke: rgb(170, 170, 170);
+    fill: rgba(170, 170, 170, 0.3);
+}
+
+.preset-category-barrier svg.preset-icon-category-border path {
+    stroke: rgb(200, 144, 144);
+    fill: rgba(200, 144, 144, 0.3);
+}
+
+.preset-category-building svg.preset-icon-category-border path {
+    stroke: rgb(224, 110, 95);
+    fill: rgba(224, 110, 95, 0.3);
+}
+
+.preset-category-landuse svg.preset-icon-category-border path {
+    stroke: rgb(196, 189, 25);
+    fill: rgba(196, 189, 25, 0.3);
+}
+
+.preset-category-natural svg.preset-icon-category-border path,
+.preset-category-playground svg.preset-icon-category-border path,
+.preset-category-golf svg.preset-icon-category-border path {
+    stroke: rgb(140, 208, 95);
+    fill: rgba(140, 208, 95, 0.3);
+}
+
+.preset-category-water svg.preset-icon-category-border path,
+.preset-category-waterway svg.preset-icon-category-border path {
+    stroke: rgb(119, 211, 222);
+    fill: rgba(119, 211, 222, 0.3);
+}
+
+.preset-category-utility svg.preset-icon-category-border path {
+    stroke: rgb(125, 125, 125);
+    fill: rgba(219, 219, 125, 0.3);
+}
+
+.preset-category-path svg.preset-icon-category-border path {
+    stroke: rgb(221, 221, 204);
+    fill: rgba(221, 221, 204, 0.3);
+}
+
+.preset-category-road_service svg.preset-icon-category-border path,
+.preset-category-road_minor svg.preset-icon-category-border path,
+.preset-category-road_major svg.preset-icon-category-border path {
+    stroke: #999;
+}
+
+.preset-category-rail svg.preset-icon-category-border path {
+    stroke: #555;
+}
