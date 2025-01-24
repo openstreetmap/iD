@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: There is an issue with presets or osm tagging recommendations
+    url: https://github.com/openstreetmap/id-tagging-schema/issues
+    about: Please share your feedback in the id-tagging-schema repository.
+  - name: There is an issue with brand icons or brand tagging recommendations.
+    url: https://github.com/osmlab/name-suggestion-index/issues
+    about: Please create a feature request in the name-suggestion-index repository.
+  - name: There is an issue with a background imagery source.
+    url: https://github.com/osmlab/editor-layer-index/issues
+    about: Please create an issue in the editor-layer-index repository.
+  - name: You have a general question or want to discuss something.
+    url: https://github.com/openstreetmap/iD/discussions
+    about: Please ask and answer questions in iD's Discussions tab.

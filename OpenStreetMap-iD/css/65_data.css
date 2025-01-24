@@ -1,0 +1,187 @@
+
+/* OSM Notes and QA Layers */
+
+.qa-header-icon .qaItem-fill,
+.layer-keepRight .qaItem .qaItem-fill,
+.layer-osmose .qaItem .qaItem-fill {
+    stroke: #333;
+    stroke-width: 1.3px;  /* NOTE: likely a better way to scale the icon stroke */
+}
+
+.note-header-icon .note-fill,
+.layer-notes .note .note-fill {
+    color: #f30;
+    stroke: #333;
+    stroke-width: 40px;
+}
+.note-header-icon.new .note-fill,
+.layer-notes .note.new .note-fill {
+    color: #fe0;
+    stroke: #333;
+    stroke-width: 40px;
+}
+.note-header-icon.closed .note-fill,
+.layer-notes .note.closed .note-fill {
+    color: #5d0;
+    stroke: #333;
+    stroke-width: 40px;
+}
+
+/* slight adjustments to preset icon for note icons */
+.note-header-icon .preset-icon-28 {
+    top: 18px;
+}
+.note-header-icon .note-icon-annotation {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    margin: auto;
+}
+.note-header-icon .note-icon-annotation .icon {
+    width: 15px;
+    height: 15px;
+}
+
+/* adjustment to center QA icons */
+.qa-header-icon .preset-icon-28 {
+    top: auto;
+    left: auto;
+}
+.qa-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Keep Right Issues
+------------------------------------------------------- */
+.keepRight.itemType-20,     /* multiple nodes on same spot */
+.keepRight.itemType-40,     /* impossible oneways */
+.keepRight.itemType-210,    /* self intersecting ways */
+.keepRight.itemType-270,    /* unusual motorway connection */
+.keepRight.itemType-310,    /* roundabout issues */
+.keepRight.itemType-320,    /* improper _link */
+.keepRight.itemType-350 {   /* improper bridge tag */
+    color: #ff9;
+}
+
+.keepRight.itemType-50 {    /* almost junctions */
+    color: #88f;
+}
+
+.keepRight.itemType-60,     /* deprecated tags */
+.keepRight.itemType-70,     /* tagging issues */
+.keepRight.itemType-90,     /* motorway without ref */
+.keepRight.itemType-100,    /* place of worship without religion */
+.keepRight.itemType-110,    /* poi without name */
+.keepRight.itemType-150,    /* railway crossing without tag */
+.keepRight.itemType-220,    /* misspelled tag */
+.keepRight.itemType-380 {   /* non-physical sport tag */
+    color: #5d0;
+}
+
+.keepRight.itemType-130 {   /* disconnected ways */
+    color: #fa3;
+}
+
+.keepRight.itemType-170 {   /* FIXME tag */
+    color: #ff0;
+}
+
+.keepRight.itemType-190 {   /* intersection without junction */
+    color: #f33;
+}
+
+.keepRight.itemType-200 {   /* overlapping ways */
+    color: #fdbf6f;
+}
+
+.keepRight.itemType-160,    /* railway layer conflict */
+.keepRight.itemType-230 {   /* layer conflict */
+    color: #b60;
+}
+
+.keepRight.itemType-280 {   /* boundary issues */
+    color: #5f47a0;
+}
+
+.keepRight.itemType-180,    /* relation without type */
+.keepRight.itemType-290 {   /* turn restriction issues */
+    color: #ace;
+}
+
+.keepRight.itemType-300,    /* missing maxspeed */
+.keepRight.itemType-390 {   /* missing tracktype */
+    color: #090;
+}
+
+.keepRight.itemType-360,    /* language unknown */
+.keepRight.itemType-370,    /* doubled places */
+.keepRight.itemType-410 {   /* website issues */
+    color: #f9b;
+}
+
+.keepRight.itemType-120,    /* way without nodes */
+.keepRight.itemType-400 {   /* geometry / turn angles */
+    color: #c35;
+}
+
+/* Custom Map Data (geojson, gpx, kml, vector tile) */
+.layer-mapdata {
+    pointer-events: none;
+}
+
+.layer-mapdata path.shadow {
+    pointer-events: stroke;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+    fill: none;
+}
+.layer-mapdata path.MultiPoint.shadow,
+.layer-mapdata path.Point.shadow {
+    pointer-events: fill;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+.layer-mapdata path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+.layer-mapdata path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+.layer-mapdata path.stroke {
+    stroke: #ff26d4;
+    stroke-width: 2;
+    fill: none;
+}
+
+.layer-mapdata path.fill {
+    stroke-width: 0;
+    stroke-opacity: 0.3;
+    stroke: #ff26d4;
+    fill: #ff26d4;
+    fill-opacity: 0.3;
+    fill-rule: evenodd;
+}
+
+.layer-mapdata text.label-halo,
+.layer-mapdata text.label {
+    font-size: 10px;
+    font-weight: bold;
+    dominant-baseline: middle;
+}
+.layer-mapdata text.label {
+    fill: #ddd;
+}
+.layer-mapdata text.label.hover,
+.layer-mapdata text.label.selected {
+    fill: #fff;
+}
+.layer-mapdata text.label-halo {
+    opacity: 0.7;
+    stroke: #000;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}

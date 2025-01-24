@@ -1,0 +1,16 @@
+.DS_Store
+.esm-cache
+.vscode/
+/node_modules/
+/.tx/
+npm-debug.log
+package-lock.json
+
+the_noun_project.auth
+transifex.auth
+.travis.yml
+
+/docs/
+/test/
+
+/coverage/

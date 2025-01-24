@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="20" height="20" viewBox="0 0 20 20">
+    <path d="M9,14 L11,14 L11,5 L9,5 L9,14 z" fill="currentColor"/>
+    <path d="M7,7 L0,7 L0,12 L2,12 L2,9 L7,9 M13,9 L18,9 L18,12 L20,12 L20,7 L13,7" fill="inherit"/>
+</svg>
