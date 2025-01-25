@@ -11,52 +11,51 @@ export function uiSectionMapFeatures(context) {
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    function renderDisclosureContent(selection) {
-
-        var container = selection.selectAll('.layer-feature-list-container')
-            .data([0]);
-
-        var containerEnter = container.enter()
-            .append('div')
-            .attr('class', 'layer-feature-list-container');
-
-        containerEnter
-            .append('ul')
-            .attr('class', 'layer-list layer-feature-list');
-
-        var footer = containerEnter
-            .append('div')
-            .attr('class', 'feature-list-links section-footer');
-
-        footer
-            .append('a')
-            .attr('class', 'feature-list-link')
-            .attr('role', 'button')
-            .attr('href', '#')
-            .call(t.append('issues.disable_all'))
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                context.features().disableAll();
-            });
-
-        footer
-            .append('a')
-            .attr('class', 'feature-list-link')
-            .attr('role', 'button')
-            .attr('href', '#')
-            .call(t.append('issues.enable_all'))
-            .on('click', function(d3_event) {
-                d3_event.preventDefault();
-                context.features().enableAll();
-            });
-
-        // Update
-        container = container
-            .merge(containerEnter);
-
-        container.selectAll('.layer-feature-list')
-            .call(drawListItems, _features, 'checkbox', 'feature', clickFeature, showsFeature);
-    }
+        function renderDisclosureContent(selection) {
+            var container = selection.selectAll('.layer-feature-list-container')
+                .data([0]);
+        
+            var containerEnter = container.enter()
+                .append('div')
+                .attr('class', 'layer-feature-list-container');
+        
+            var footer = containerEnter
+                .append('div')
+                .attr('class', 'feature-list-links section-footer');
+        
+            footer
+                .append('a')
+                .attr('class', 'feature-list-link')
+                .attr('role', 'button')
+                .attr('href', '#')
+                .call(t.append('issues.disable_all'))
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+                    context.features().disableAll();
+                });
+        
+            footer
+                .append('a')
+                .attr('class', 'feature-list-link')
+                .attr('role', 'button')
+                .attr('href', '#')
+                .call(t.append('issues.enable_all'))
+                .on('click', function(d3_event) {
+                    d3_event.preventDefault();
+                    context.features().enableAll();
+                });
+        
+            containerEnter
+                .append('ul')
+                .attr('class', 'layer-list layer-feature-list');
+        
+            // Update
+            container = container
+                .merge(containerEnter);
+        
+            container.selectAll('.layer-feature-list')
+                .call(drawListItems, _features, 'checkbox', 'feature', clickFeature, showsFeature);
+        }
 
     function drawListItems(selection, data, type, name, change, active) {
         var items = selection.selectAll('li')
