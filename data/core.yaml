@@ -1885,7 +1885,7 @@ en:
       title: Outdated Tags
       message: "{feature} has outdated tags"
       tip: "Find features with deprecated tags that can be updated"
-      reference: "Some tags change over time and should be updated."
+      reference: "Avoid using 'cycleway=track' on 'highway=cycleway' as it is redundant. A 'highway=cycleway' already implies a dedicated cycleway."
       incomplete:
         message: "{feature} has incomplete tags"
         reference: "Some features should have additional tags."

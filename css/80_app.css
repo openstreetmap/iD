@@ -3849,6 +3849,8 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     margin-bottom: 10px;
 }
 .issue-info .tagDiff-table {
+    margin-top: 4px;
+    margin-bottom: 4px; 
     min-width: 60%;
     width: unset;
     border: 1px solid #ccc;
@@ -3866,7 +3868,14 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     background: #dfd;
 }
 .issue-info .tagDiff-cell-remove {
-    background: #fdd;
+   
+    padding: 5px;
+    background: rgb(240, 202, 202);
+    font-weight: 600;  
+}
+.tagDiff-cell-unchanged {
+    background: #eee; /* Light gray background */
+    color: #666;      /* Dimmed text color */
 }
 
 

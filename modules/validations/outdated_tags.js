@@ -202,6 +202,7 @@ export function validationOutdatedTags() {
 
     function showMessage(context) {
       const currEntity = context.hasEntity(entity.id);
+      console.log(currEntity)
       if (!currEntity) return '';
 
       let messageID = `issues.outdated_tags.${prefix}message`;
@@ -238,12 +239,13 @@ export function validationOutdatedTags() {
         .attr('class', 'tagDiff-row')
         .append('td')
         .attr('class', d => {
-          let klass = d.type === '+' ? 'add' : 'remove';
-          return `tagDiff-cell tagDiff-cell-${klass}`;
-        })
+          if (d.type === '+') return 'tagDiff-cell tagDiff-cell-add';
+          if (d.type === '-') return 'tagDiff-cell tagDiff-cell-remove';
+          return 'tagDiff-cell tagDiff-cell-unchanged'; // Add a new class for unchanged tags
+      })
         .html(d => d.display);
     }
-  }
+  } 
 
 
   let validation = oldTagIssues;
