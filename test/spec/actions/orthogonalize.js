@@ -476,7 +476,6 @@ describe('iD.actionOrthogonalize', function () {
                 //       \  c  /
                 //        \   /
                 //          a
-                // This roughly forms a hexagon near a circle
 
                 var graph = iD.coreGraph([
                     iD.osmNode({ id: 'a', loc: [0, 0] }),
