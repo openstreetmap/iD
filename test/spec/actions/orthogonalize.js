@@ -470,6 +470,62 @@ describe('iD.actionOrthogonalize', function () {
                 expect(result).to.be.false;
             });
 
+            it('returns "square_enough" for an extremely spiky shape', function() {
+                //    b          d
+                //      \ \   / /
+                //       \  c  /
+                //        \   /
+                //          a
+                // This roughly forms a hexagon near a circle
+
+                var graph = iD.coreGraph([
+                    iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    iD.osmNode({ id: 'b', loc: [-1, 6] }),
+                    iD.osmNode({ id: 'c', loc: [0, 0.02] }),
+                    iD.osmNode({ id: 'd', loc: [1, 6] }),
+                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'] })
+                ]);
+
+                var result = iD.actionOrthogonalize('-', projection).disabled(graph);
+                expect(result).to.eql('square_enough');
+            });
+
+            it('returns "square_enough" for an extremely circular shape', function() {
+                // This roughly forms a hexagon near a circle
+                // The radius is 0.001 unit, moving clockwise by 15° each step
+
+                var graph = iD.coreGraph([
+                    iD.osmNode({ id: 'a', loc: [  0.00000,  0.00100 ] }),
+                    iD.osmNode({ id: 'b', loc: [  0.00026,  0.00097 ] }),
+                    iD.osmNode({ id: 'c', loc: [  0.00050,  0.00087 ] }),
+                    iD.osmNode({ id: 'd', loc: [  0.00071,  0.00071 ] }),
+                    iD.osmNode({ id: 'e', loc: [  0.00087,  0.00050 ] }),
+                    iD.osmNode({ id: 'f', loc: [  0.00097,  0.00026 ] }),
+                    iD.osmNode({ id: 'h', loc: [  0.00100,  0.00000 ] }),
+                    iD.osmNode({ id: 'i', loc: [  0.00097, -0.00026 ] }),
+                    iD.osmNode({ id: 'j', loc: [  0.00087, -0.00050 ] }),
+                    iD.osmNode({ id: 'k', loc: [  0.00071, -0.00071 ] }),
+                    iD.osmNode({ id: 'l', loc: [  0.00050, -0.00087 ] }),
+                    iD.osmNode({ id: 'm', loc: [  0.00026, -0.00097 ] }),
+                    iD.osmNode({ id: 'n', loc: [  0.00000, -0.00100 ] }),
+                    iD.osmNode({ id: 'o', loc: [ -0.00026, -0.00097 ] }),
+                    iD.osmNode({ id: 'p', loc: [ -0.00050, -0.00087 ] }),
+                    iD.osmNode({ id: 'q', loc: [ -0.00071, -0.00071 ] }),
+                    iD.osmNode({ id: 'r', loc: [ -0.00087, -0.00050 ] }),
+                    iD.osmNode({ id: 's', loc: [ -0.00097, -0.00026 ] }),
+                    iD.osmNode({ id: 't', loc: [ -0.00100,  0.00000 ] }),
+                    iD.osmNode({ id: 'u', loc: [ -0.00097,  0.00026 ] }),
+                    iD.osmNode({ id: 'v', loc: [ -0.00087,  0.00050 ] }),
+                    iD.osmNode({ id: 'w', loc: [ -0.00071,  0.00071 ] }),
+                    iD.osmNode({ id: 'x', loc: [ -0.00050,  0.00087 ] }),
+                    iD.osmNode({ id: 'y', loc: [ -0.00026,  0.00097 ] }),
+                    iD.osmWay({ id: '-', nodes: [ 'a', 'b', 'c', 'd', 'e', 'f', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'a'] })
+                ]);
+
+                var result = iD.actionOrthogonalize('-', projection).disabled(graph);
+                expect(result).to.eql('square_enough');
+            });
+
         });
 
 
