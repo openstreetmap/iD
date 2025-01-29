@@ -167,7 +167,7 @@ describe('iD.uiFieldLocalized', function() {
         }, 20);
     });
 
-    it('has a lang attribute on an existing name field value', function(done) {
+    it('has a lang attribute on an existing multilingual name field', function(done) {
       var localized = iD.uiFieldLocalized(field, context);
       localized.tags({'name:de': 'Value'});
       window.setTimeout(function() {
