@@ -427,6 +427,9 @@ export function uiFieldLocalized(field, context) {
                     .append('input')
                     .attr('type', 'text')
                     .attr('class', 'localized-value')
+                    .attr('lang', function (d) {
+                      return d.lang;
+                    })
                     .on('blur', changeValue)
                     .on('change', changeValue);
             });
