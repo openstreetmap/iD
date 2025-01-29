@@ -136,23 +136,45 @@ export function svgKartaviewImages(projection, context, dispatch) {
         var toDate = context.photos().toDate();
         var usernames = context.photos().usernames();
 
-        if (fromDate) {
-            var fromTimestamp = new Date(fromDate).getTime();
-            sequences = sequences.filter(function(image) {
-                return new Date(image.properties.captured_at).getTime() >= fromTimestamp;
-            });
-        }
-        if (toDate) {
-            var toTimestamp = new Date(toDate).getTime();
-            sequences = sequences.filter(function(image) {
-                return new Date(image.properties.captured_at).getTime() <= toTimestamp;
-            });
-        }
-        if (usernames) {
-            sequences = sequences.filter(function(image) {
-                return usernames.indexOf(image.properties.captured_by) !== -1;
-            });
-        }
+        // Defensive filtering to handle potential undefined or malformed sequences
+        sequences = sequences.filter(function(sequence) {
+            // Ensure sequence and its properties exist
+            if (!sequence || !sequence.properties) {
+                return false;
+            }
+
+            // If no date filters, keep the sequence
+            if (!fromDate && !toDate && !usernames) {
+                return true;
+            }
+
+            // Check date filtering
+            if (fromDate) {
+                var fromTimestamp = new Date(fromDate).getTime();
+                if (!sequence.properties.captured_at || 
+                    new Date(sequence.properties.captured_at).getTime() < fromTimestamp) {
+                    return false;
+                }
+            }
+
+            if (toDate) {
+                var toTimestamp = new Date(toDate).getTime();
+                if (!sequence.properties.captured_at || 
+                    new Date(sequence.properties.captured_at).getTime() > toTimestamp) {
+                    return false;
+                }
+            }
+
+            // Check username filtering
+            if (usernames && usernames.length > 0) {
+                if (!sequence.properties.captured_by || 
+                    usernames.indexOf(sequence.properties.captured_by) === -1) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
 
         return sequences;
     }
@@ -190,7 +212,6 @@ export function svgKartaviewImages(projection, context, dispatch) {
             .merge(traces)
             .attr('d', svgPath(projection).geojson);
 
-
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(images, function(d) { return d.key; });
 
@@ -220,7 +241,6 @@ export function svgKartaviewImages(projection, context, dispatch) {
             })
             .attr('transform', transform)
             .select('.viewfield-scale');
-
 
         markers.selectAll('circle')
             .data([0])

@@ -209,28 +209,52 @@ export default {
         var sequenceKeys = {};
 
         // all sequences for images in viewport
-        _oscCache.images.rtree.search(bbox)
-            .forEach(function(d) { sequenceKeys[d.data.sequence_id] = true; });
+        var imagesInViewport = _oscCache.images.rtree.search(bbox);
+
+        // Collect unique sequence keys
+        imagesInViewport.forEach(function(d) { 
+            if (d.data && d.data.sequence_id) {
+                sequenceKeys[d.data.sequence_id] = true; 
+            } else {
+                console.warn('Image without sequence_id:', d);
+            }
+        });
 
         // make linestrings from those sequences
         var lineStrings = [];
         Object.keys(sequenceKeys)
             .forEach(function(sequenceKey) {
                 var seq = _oscCache.sequences[sequenceKey];
-                var images = seq && seq.images;
-
-                if (images) {
-                    lineStrings.push({
-                        type: 'LineString',
-                        coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
-                        properties: {
-                            captured_at: images[0] ? images[0].captured_at: null,
-                            captured_by: images[0] ? images[0].captured_by: null,
-                            key: sequenceKey
-                        }
-                    });
+                
+                // Validate sequence
+                if (!seq || !seq.images || seq.images.length === 0) {
+                    console.warn('Invalid or empty sequence:', sequenceKey);
+                    return;
                 }
+
+                // Filter out images without locations
+                var validImages = seq.images.filter(function(image) {
+                    return image && image.loc && image.loc.length === 2;
+                });
+
+                if (validImages.length === 0) {
+                    console.warn('Sequence with no valid images:', sequenceKey);
+                    return;
+                }
+
+                var sequenceLine = {
+                    type: 'LineString',
+                    coordinates: validImages.map(function (d) { return d.loc; }),
+                    properties: {
+                        captured_at: validImages[0].captured_at || null,
+                        captured_by: validImages[0].captured_by || null,
+                        key: sequenceKey
+                    }
+                };
+                
+                lineStrings.push(sequenceLine);
             });
+
         return lineStrings;
     },
 
