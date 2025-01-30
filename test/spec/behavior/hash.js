@@ -73,7 +73,9 @@ describe('iD.behaviorHash', function () {
         context.map().center([-77.0, 38.9]);
         context.map().zoom(2.0);
         window.setTimeout(function() {
-            expect(window.location.hash).to.equal('#background=none&map=2.00/38.9/-77.0');
+            // the hash might contain other things like `disable_features`
+            expect(window.location.hash).to.include('background=none');
+            expect(window.location.hash).to.include('map=2.00/38.9/-77.0');
             done();
         }, 600);
     });

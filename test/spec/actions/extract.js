@@ -579,8 +579,15 @@ describe('iD.actionExtract', function () {
             ]);
         });
 
+        it('does not extract relations by default', () => {
+            const assertionGraph = iD.actionExtract('b')(graph);
+
+            const targetNode = assertionGraph.entity('b');
+            expect(assertionGraph.parentRelations(targetNode).length).to.eql(1);
+        });
+
         it('detached node not a member of relation', function () {
-            var assertionGraph = iD.actionExtract('b')(graph);
+            var assertionGraph = iD.actionExtract('b')(graph, true);
 
             var targetNode = assertionGraph.entity('b');
             // Confirm is not a member of the relation
@@ -588,7 +595,7 @@ describe('iD.actionExtract', function () {
         });
 
         it('new node is a member of relation', function () {
-            var assertionGraph = iD.actionExtract('b')(graph);
+            var assertionGraph = iD.actionExtract('b')(graph, true);
 
             // Find the new node
             var targetWay = assertionGraph.entity('-');
@@ -603,7 +610,7 @@ describe('iD.actionExtract', function () {
         });
 
         it('Relation membership has the same properties', function () {
-            var assertionGraph = iD.actionExtract('b')(graph);
+            var assertionGraph = iD.actionExtract('b')(graph, true);
 
             // Find the new node
             var targetWay = assertionGraph.entity('-');

@@ -408,25 +408,21 @@ path.line.casing.tag-road {
 }
 
 /* service roads */
-path.line.stroke.tag-highway-service,
-path.line.stroke.tag-service {
+path.line.stroke.tag-highway-service {
     stroke: #fff;
 }
-path.line.casing.tag-highway-service,
-path.line.casing.tag-service {
+path.line.casing.tag-highway-service {
     stroke: #666;
 }
 
 /* special service roads and bus guideways */
 /* with `service=* tag`  (e.g. parking_aisle, alley, drive-through) */
 path.line.stroke.tag-highway-bus_guideway,
-path.line.stroke.tag-highway-service.tag-service,
-path.line.stroke.tag-service.tag-service {
+path.line.stroke.tag-highway-service.tag-service {
     stroke: #dca;
 }
 path.line.casing.tag-highway-bus_guideway,
-path.line.casing.tag-highway-service.tag-service,
-path.line.casing.tag-service.tag-service {
+path.line.casing.tag-highway-service.tag-service {
     stroke: #666;
 }
 
@@ -515,7 +511,7 @@ path.line.stroke.tag-highway-path.tag-bridge-boardwalk {
     fill: #fff;
 }
 path.line.stroke.tag-highway-footway,
-path.line.stroke.tag-highway_bus_stop,
+path.line.stroke.tag-highway-bus_stop,
 .preset-icon-container path.casing.tag-highway-footway {
     stroke: #988;
 }
