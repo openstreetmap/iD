@@ -41,7 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix flickering when switching between background imagery layers, make switching backgrounds snappier
 * Prevent password managers from autofilling tag fields ([#10508], thanks [@michaelabon])
 #### :scissors: Operations
-* Remove rarely-used keyboard shortcut <kbd>L</kbd> to prevent accidential activation of the geolocate tool ([#9999], thanks [@k-yle])
+* Remove rarely-used keyboard shortcut <kbd>L</kbd> to prevent accidental activation of the geolocate tool ([#9999], thanks [@k-yle])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
