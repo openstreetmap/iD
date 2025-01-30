@@ -471,6 +471,7 @@ export function uiFieldLocalized(field, context) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
             })
             .attr('lang', function (d) {
+                // for CJK and other display issues
                 return d.lang;
             })
             .classed('mixed', function(d) {

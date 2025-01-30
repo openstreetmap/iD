@@ -281,6 +281,7 @@ export function uiFieldWikipedia(field, context) {
     if (tagLangInfo) {
       const nativeLangName = tagLangInfo[1];
       utilGetSetValue(_langInput, nativeLangName);
+      _titleInput.attr('lang', tagLangInfo[2]); // for CJK and other display issues
       utilGetSetValue(_titleInput, tagArticleTitle + (anchor ? ('#' + anchor) : ''));
       _wikiURL = `${scheme}${tagLang}.${domain}/wiki/${wiki.encodePath(tagArticleTitle, anchor)}`;
     } else {
