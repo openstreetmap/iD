@@ -262,8 +262,8 @@ describe('iD.serviceKartaview', function() {
                 type: 'LineString',
                 coordinates: [[10,0], [10,0], [10,1]],
                 properties: {
-                    captured_at: undefined,
-                    captured_by: undefined,
+                    captured_at: null,
+                    captured_by: null,
                     key: '100'
                 }
             }]);
