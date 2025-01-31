@@ -204,7 +204,8 @@ export function uiFieldWikipedia(field, context) {
         value += '#' + anchor.replace(/_/g, ' ');
       }
       value = value.slice(0, 1).toUpperCase() + value.slice(1);
-      utilGetSetValue(_langInput, nativeLangName);
+      utilGetSetValue(_langInput, nativeLangName)
+        .attr('lang', langInfo[2]);
       utilGetSetValue(_titleInput, value);
     }
 

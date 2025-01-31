@@ -282,12 +282,10 @@ export function uiFieldWikidata(field, context) {
             label = entityPropertyForDisplay(_wikidataEntity, 'labels');
             if (label.value.length === 0) {
                 label.value = _wikidataEntity.id.toString();
-            } else {
-              // for CJK and other display issues
-              d3_select('.wikidata-search input').attr('lang', label.language);
             }
         }
-        utilGetSetValue(_searchInput, label.value);
+        utilGetSetValue(_searchInput, label.value)
+            .attr('lang', label.language);
     }
 
 
@@ -317,17 +315,18 @@ export function uiFieldWikidata(field, context) {
 
             setLabelForEntity();
 
-            var description = entityPropertyForDisplay(entity, 'descriptions').value;
+            var description = entityPropertyForDisplay(entity, 'descriptions');
 
             _selection.select('button.wiki-link')
                 .classed('disabled', false);
 
             _selection.select('.preset-wikidata-description')
                 .style('display', function(){
-                    return description.length > 0 ? 'flex' : 'none';
+                    return description.value.length > 0 ? 'flex' : 'none';
                 })
                 .select('input')
-                .attr('value', description);
+                .attr('value', description.value)
+                .attr('lang', description.language);
 
             _selection.select('.preset-wikidata-identifier')
                 .style('display', function(){
@@ -360,7 +359,7 @@ export function uiFieldWikidata(field, context) {
     };
 
     function entityPropertyForDisplay(wikidataEntity, propKey) {
-        var blankResponse = {value:''};
+        var blankResponse = { value: '' };
         if (!wikidataEntity[propKey]) return blankResponse;
         var propObj = wikidataEntity[propKey];
         var langKeys = Object.keys(propObj);
