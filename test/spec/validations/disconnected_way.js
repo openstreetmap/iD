@@ -59,6 +59,13 @@ describe('iD.validations.disconnected_way', function () {
         expect(issue.severity).to.eql('warning');
         expect(issue.entityIds).to.have.lengthOf(1);
         expect(issue.entityIds[0]).to.eql('w-1');
+
+        // dynamicFixes don't have IDs, but the icons can identify the dynamicFix
+        expect(issue.dynamicFixes(context).map(fix => fix.icon)).toStrictEqual([
+            'iD-operation-continue-left',
+            'iD-operation-continue',
+            'iD-operation-delete',
+        ]);
     });
 
     it('flags highway connected only to service area', function() {
@@ -93,4 +100,42 @@ describe('iD.validations.disconnected_way', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
+    describe.each([
+        ['unclassified', { amenity: 'parking_entrance' }],
+        ['path', { entrance: 'yes' }]
+    ])('highway=%s -> %s', (highway, entranceTags) => {
+        it('suggests adding an entrance node if the isolated highway network touches a building outline', () => {
+            const n1 = iD.osmNode({ id: 'n-1', loc: [1, 1] });
+            const n2 = iD.osmNode({ id: 'n-2', loc: [2, 2] });
+            const n3 = iD.osmNode({ id: 'n-3', loc: [3, 3] });
+            const n4 = iD.osmNode({ id: 'n-4', loc: [4, 4] });
+            const w1 = iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { highway } });
+            const w2 = iD.osmWay({ id: 'w-2', nodes: ['n-1', 'n-3', 'n-4', 'n-1'], tags: { building: 'yes'} });
+
+            context.perform(
+                iD.actionAddEntity(n1),
+                iD.actionAddEntity(n2),
+                iD.actionAddEntity(n3),
+                iD.actionAddEntity(n4),
+                iD.actionAddEntity(w1),
+                iD.actionAddEntity(w2),
+            );
+
+            const issues = validate();
+            expect(issues).toHaveLength(1);
+
+            // dynamicFixes don't have IDs, but the icons can identify the dynamicFix
+            expect(issues[0].dynamicFixes(context).map(fix => fix.icon)).toStrictEqual([
+                'iD-icon-wrench',
+                'iD-operation-continue-left',
+                'iD-operation-continue',
+                'iD-operation-delete',
+            ]);
+
+            // run the 'Tag as Entrance' autofix
+            issues[0].dynamicFixes(context)[0].onClick(context);
+
+            expect(context.graph().entity('n-1').tags).toStrictEqual(entranceTags);
+        });
+    });
 });

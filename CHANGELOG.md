@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
 * Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
+* Suggest adding an `entrance=*` node to fix 'disconnected highway' errors ([#10729], thanks [@k-yle])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -60,6 +61,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#7381]: https://github.com/openstreetmap/iD/issues/7381
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
+[#10729]: https://github.com/openstreetmap/iD/pull/10729
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
 [#10755]: https://github.com/openstreetmap/iD/issues/10755
@@ -92,9 +94,9 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Include wikidata errors from osmose QA service ([#9998], thanks [@k-yle])
 #### :bug: Bugfixes
-* Fix unsolvable validator error triggered by regional presets ([#10459])
+* Fix unsolvable validator error triggered by regional presets ([#10459], thanks [@k-yle])
 * Render highway direction cones only on matching parent ways ([#9013])
-* Prevent edit menu from being covered up by street level imagery or other map overlay panels ([#10495])
+* Prevent edit menu from being covered up by street level imagery or other map overlay panels ([#10495], thanks [@fahnestd])
 * Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris])
 * Prevent search results from sometimes getting stuck in the highlighted state when mouse-hovering the list of search results while typing ([#10661])
 * Allow tiles in minimap to be slightly underzoomed, preventing them from blacking out on low map zoom levels ([#10653])
@@ -144,6 +146,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@winstonsung]: https://github.com/winstonsung/
 [@Nekzuris]: https://github.com/Nekzuris
 [@michaelabon]: https://github.com/michaelabon
+[@fahnestd]: https://github.com/fahnestd
 
 
 # 2.30.4

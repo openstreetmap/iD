@@ -2,9 +2,11 @@ import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
-import { osmRoutableHighwayTagValues } from '../osm/tags';
+import { osmPathHighwayTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
+import { presetManager } from '../presets';
+import { actionChangeTags } from '../actions';
 
 export function validationDisconnectedWay() {
     var type = 'disconnected_way';
@@ -44,6 +46,8 @@ export function validationDisconnectedWay() {
                 if (singleEntity.type === 'way' && !singleEntity.isClosed()) {
 
                     var textDirection = localizer.textDirection();
+
+                    fixes.push(...makeTagAsEntranceFixIfAllowed(singleEntity));
 
                     var startFix = makeContinueDrawingFixIfAllowed(textDirection, singleEntity.first(), 'start');
                     if (startFix) fixes.push(startFix);
@@ -207,6 +211,51 @@ export function validationDisconnectedWay() {
             });
         }
 
+        /** @param {osmWay} highway */
+        function makeTagAsEntranceFixIfAllowed(highway) {
+            const fixes = [];
+            for (const vertexId of [highway.first(), highway.last()]) {
+                const vertex = graph.hasEntity(vertexId);
+                if (!vertex) continue; // not downloaded
+
+                const parents = graph.parentWays(vertex);
+
+                const isConnectedToBuilding = parents.some(way =>
+                    way.id !== highway.id &&
+                    way.tags.building &&
+                    way.tags.building !== 'no'
+                );
+
+                // ineligible for this fix
+                if (!isConnectedToBuilding) continue;
+
+                const entranceTags = highway.tags.highway in osmPathHighwayTagValues
+                    ? { entrance: 'yes' }
+                    : { amenity: 'parking_entrance' };
+
+                const presetName = presetManager.matchTags(entranceTags, 'vertex').name();
+
+                fixes.push(
+                    new validationIssueFix({
+                        icon: 'iD-icon-wrench',
+                        title: t.append('issues.fix.tag_as_entrance.title', { presetName }),
+                        entityIds: [vertexId],
+                        onClick: function(context) {
+                            const newTags = {
+                                ...graph.entity(vertexId).tags,
+                                ...entranceTags,
+                            };
+                            context.perform(
+                                actionChangeTags(vertexId, newTags),
+                                t('operations.change_tags.annotation')
+                            );
+                        }
+                    })
+                );
+            }
+
+            return fixes;
+        }
     };
 
     validation.type = type;
