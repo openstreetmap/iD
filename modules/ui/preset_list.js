@@ -37,7 +37,7 @@ export function uiPresetList(context) {
             .append('h2')
             .call(t.append('inspector.choose'));
 
-        var direction = (localizer.textDirection() === 'rtl') ? 'backward' : 'forward';
+        var direction = 'close';
 
         messagewrap
             .append('button')
