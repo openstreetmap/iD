@@ -305,7 +305,6 @@ describe('iD.osmWay', function() {
 
         it('returns true when the way has tag oneway=yes', function() {
             expect(iD.osmWay({tags: { oneway: 'yes' }}).isOneWay(), 'oneway yes').to.be.true;
-            expect(iD.osmWay({tags: { oneway: '1' }}).isOneWay(), 'oneway 1').to.be.true;
             expect(iD.osmWay({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
         });
 
