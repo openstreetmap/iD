@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
+* Fix the turn restriction editor not supporting bidirectional roads ([#10731], thanks [@k-yle])
 * Preserve imagery offset during tile layer switching transition ([#10748])
 * Fix the relation membership list using a non-deterministic order ([#10648], thanks [@k-yle])
 * Fix over-saturated map tiles near the border of the tile service's coverage area ([#10747], thanks [@hlfan])
@@ -87,6 +88,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10722]: https://github.com/openstreetmap/iD/pull/10722
 [#10727]: https://github.com/openstreetmap/iD/issues/10727
+[#10731]: https://github.com/openstreetmap/iD/pull/10731
 [#10737]: https://github.com/openstreetmap/iD/pull/10737
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
