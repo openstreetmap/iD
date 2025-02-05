@@ -64,6 +64,15 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     // match on tags
     for (let k in tags) {
+
+      /*
+      if (!valueIndex && k.indexOf(':') !== -1) {
+        let split = k.split(':')[1]
+        //tags[split] = tags[k];
+        valueIndex = keyIndex[split];
+      }
+      */
+
       seen[k] = true;
       if (entityTags[k] === tags[k]) {
         score += _this.originalScore;

@@ -1043,53 +1043,18 @@ a.hide-toggle {
 
 /* Lifecycle Section */
 
-.lifecycle-wrap {
-    display: flex;
-    flex-direction: column;
-}
-
-.lifecycle-row-wrap {
-    width: 100%;
-    height: 32px;
-    display: flex;
-    margin-bottom: 2px;
+.lifecycle-reference-button{
+    float: right;
+    height: 100%;
     border: 1px solid #ccc;
 }
 
-.lifecycle-row-wrap button {
-    min-width: 32px;
+.lifecycle-icon{
+    padding-right: 5px;
 }
 
-.lifecycle-button-wrap {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-right: 1px solid #ccc;
-}
-
-.lifecycle-button-icon {
-    padding-left: 8px;
-    padding-right: 8px;
-}
-
-.lifecycle-button-label {
-    padding-left: 8px;
-    width: 100%;
-    text-align: left;
-}
-
-.lifecycle-button-wrap:hover{
-    background-color: #ececec;
-}
-
-.lifecycle-title {
-    position: relative;
-    display: grid;
-    justify-items: left;
-    max-width: 100%;
-    padding-bottom: 5px;
-    padding-left: 3px;
-    font-size: 12px;
+.lifecycle-radio-row{
+    width: 95%;
 }
 
 /* Preset List and Icons
