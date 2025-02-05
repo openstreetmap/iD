@@ -230,8 +230,9 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.validZoom = function(z) {
-        return source.zoomExtent[0] <= z &&
+    source.validZoom = function(z, underzoom) {
+        if (underzoom === undefined) underzoom = 0;
+        return source.zoomExtent[0] - underzoom <= z &&
             (source.overzoom || source.zoomExtent[1] > z);
     };
 

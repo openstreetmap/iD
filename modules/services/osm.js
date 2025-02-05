@@ -1417,7 +1417,8 @@ export default {
     },
 
 
-    authenticate: function(callback) {
+    /** @param {import('osm-auth').LoginOptions} options */
+    authenticate: function(callback, options) {
         var that = this;
         var cid = _connectionID;
         _userChangesets = undefined;
@@ -1444,7 +1445,7 @@ export default {
             locale: localizer.localeCode(),
         });
 
-        oauth.authenticate(done);
+        oauth.authenticate(done, options);
     },
 
 

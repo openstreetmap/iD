@@ -76,3 +76,11 @@ path.line.casing.tag-railway-subway {
 path.line.stroke.tag-railway-subway {
     stroke: #bbb;
 }
+
+/* railways with `service=* tag` (e.g. sidings, crossovers, etc.) */
+path.line.stroke.tag-railway.tag-service {
+    stroke: #dca;
+}
+path.line.casing.tag-railway.tag-service {
+    stroke: #666;
+}

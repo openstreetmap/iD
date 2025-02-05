@@ -275,14 +275,17 @@ export function uiFieldWikidata(field, context) {
     }
 
     function setLabelForEntity() {
-        var label = '';
+        var label = {
+          value: ''
+        };
         if (_wikidataEntity) {
             label = entityPropertyForDisplay(_wikidataEntity, 'labels');
-            if (label.length === 0) {
-                label = _wikidataEntity.id.toString();
+            if (label.value.length === 0) {
+                label.value = _wikidataEntity.id.toString();
             }
         }
-        utilGetSetValue(_searchInput, label);
+        utilGetSetValue(_searchInput, label.value)
+            .attr('lang', label.language);
     }
 
 
@@ -319,10 +322,11 @@ export function uiFieldWikidata(field, context) {
 
             _selection.select('.preset-wikidata-description')
                 .style('display', function(){
-                    return description.length > 0 ? 'flex' : 'none';
+                    return description.value.length > 0 ? 'flex' : 'none';
                 })
                 .select('input')
-                .attr('value', description);
+                .attr('value', description.value)
+                .attr('lang', description.language);
 
             _selection.select('.preset-wikidata-identifier')
                 .style('display', function(){
@@ -355,19 +359,20 @@ export function uiFieldWikidata(field, context) {
     };
 
     function entityPropertyForDisplay(wikidataEntity, propKey) {
-        if (!wikidataEntity[propKey]) return '';
+        var blankResponse = { value: '' };
+        if (!wikidataEntity[propKey]) return blankResponse;
         var propObj = wikidataEntity[propKey];
         var langKeys = Object.keys(propObj);
-        if (langKeys.length === 0) return '';
+        if (langKeys.length === 0) return blankResponse;
         // sorted by priority, since we want to show the user's language first if possible
         var langs = wikidata.languagesToQuery();
         for (var i in langs) {
             var lang = langs[i];
             var valueObj = propObj[lang];
-            if (valueObj && valueObj.value && valueObj.value.length > 0) return valueObj.value;
+            if (valueObj && valueObj.value && valueObj.value.length > 0) return valueObj;
         }
         // default to any available value
-        return propObj[langKeys[0]].value;
+        return propObj[langKeys[0]];
     }
 
 

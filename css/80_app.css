@@ -4382,12 +4382,13 @@ img.tile {
     or (-webkit-device-pixel-ratio = 3) or (-webkit-device-pixel-ratio = 3.25) or (-webkit-device-pixel-ratio = 3.5) or (-webkit-device-pixel-ratio = 3.75)
     or (-webkit-device-pixel-ratio = 4) or (-webkit-device-pixel-ratio = 4.25) or (-webkit-device-pixel-ratio = 4.5) or (-webkit-device-pixel-ratio = 4.75)
     or (-webkit-device-pixel-ratio = 5) or (-webkit-device-pixel-ratio = 0.25) or (-webkit-device-pixel-ratio = 0.5) or (-webkit-device-pixel-ratio = 0.75) {
-    .layer-background img.tile {
+    .layer-background img.tile,
+    .map-in-map-background img.tile {
         mix-blend-mode: plus-lighter;
     }
 }
 
-.layer-background img.tile-removing {
+img.tile-removing {
     opacity: 0;
     z-index: 1;
     mix-blend-mode: normal;

@@ -129,7 +129,7 @@ export function uiFeatureList(context) {
             if (locationMatch) {
                 var loc = [Number(locationMatch[0]), Number(locationMatch[1])];
                 result.push({
-                    id: -1,
+                    id: loc[0] + '/' + loc[1],
                     geometry: 'point',
                     type: t('inspector.location'),
                     name: dmsCoordinatePair([loc[1], loc[0]]),
@@ -334,14 +334,14 @@ export function uiFeatureList(context) {
 
 
         function mouseover(d3_event, d) {
-            if (d.id === -1) return;
+            if (d.location !== undefined) return;
 
             utilHighlightEntities([d.id], true, context);
         }
 
 
         function mouseout(d3_event, d) {
-            if (d.id === -1) return;
+            if (d.location !== undefined) return;
 
             utilHighlightEntities([d.id], false, context);
         }

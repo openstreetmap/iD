@@ -15,6 +15,7 @@ export function rendererTileLayer(context) {
     var _tileOrigin;
     var _zoom;
     var _source;
+    var _underzoom = 0;
     var _epsilon = 0;
 
     // Workaround to remove visible grid around tile borders on Chrome with dynamic epsilon for specific browser zoom levels
@@ -116,13 +117,13 @@ export function rendererTileLayer(context) {
 
     // Derive the tiles onscreen, remove those offscreen and position them.
     // Important that this part not depend on `_projection` because it's
-    // rentered when tiles load/error (see #644).
+    // rendered when tiles load/error (see #644).
     function render(selection) {
         if (!_source) return;
         var requests = [];
         var showDebug = context.getDebug('tile') && !_source.overlay;
 
-        if (_source.validZoom(_zoom)) {
+        if (_source.validZoom(_zoom, _underzoom)) {
             tiler.skipNullIsland(!!_source.overlay);
 
             tiler().forEach(function(d) {
@@ -303,6 +304,13 @@ export function rendererTileLayer(context) {
         _tileSize = _source.tileSize;
         _cache = {};
         tiler.tileSize(_source.tileSize).zoomExtent(_source.zoomExtent);
+        return background;
+    };
+
+
+    background.underzoom = function(amount) {
+        if (!arguments.length) return _underzoom;
+        _underzoom = amount;
         return background;
     };
 

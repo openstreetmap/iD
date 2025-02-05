@@ -32,10 +32,6 @@
             "separator": ","
           },
           {
-            "shortcuts": ["geolocate.key"],
-            "text": "shortcuts.browsing.navigation.geolocate"
-          },
-          {
             "section": "display_options",
             "text": "shortcuts.browsing.display_options.title"
           },
@@ -270,6 +266,11 @@
           {
             "shortcuts": ["operations.extract.key"],
             "text": "shortcuts.editing.operations.extract"
+          },
+          {
+            "modifiers": ["⇧"],
+            "shortcuts": ["operations.extract.key"],
+            "text": "shortcuts.editing.operations.extract_without_relations"
           },
           {
             "shortcuts": ["operations.split.key"],

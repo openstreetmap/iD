@@ -470,6 +470,9 @@ export function uiFieldLocalized(field, context) {
             .attr('placeholder', function(d) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
             })
+            .attr('lang', function (d) {
+                return d.lang;
+            })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);
             });
