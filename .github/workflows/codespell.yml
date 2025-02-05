@@ -15,7 +15,7 @@ jobs:
       - uses: codespell-project/actions-codespell@master
         with:
           check_filenames: true
-          skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img,./css,package.json,package-lock.json
+          skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img,./css,package.json,package-lock.json,scripts,docs
           ignore_words_list: "auxilary,casette,cemetary,chancel,childs,extentions,falsy,files',froms,generat,guerilla,inflight,kindergarden,nd,ot,pavillion,specialties,tos,vias,visibles"
           exclude_file: .codespellignorelines
           only_warn: 1

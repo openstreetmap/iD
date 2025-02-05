@@ -1728,7 +1728,7 @@ en:
         everything_in_view: Everything in view looks fine
         edits: Your edits look fine
         edits_in_view: Your edits in view look fine
-        no_edits: You have no edits yet
+        no_edits: You have no unsaved changes
       hidden_issues:
         none: Detected issues will appear here
         elsewhere: "Issues elsewhere: {count}"
