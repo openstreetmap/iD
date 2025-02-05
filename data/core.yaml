@@ -700,7 +700,6 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
-    key: L
     title: Show My Location
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
@@ -2366,7 +2365,6 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
-        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"
@@ -2422,6 +2420,7 @@ en:
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
+        extract_without_relations: "Extract a point from a feature, without extracting its relations"
         split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"

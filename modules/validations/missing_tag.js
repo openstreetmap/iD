@@ -9,7 +9,7 @@ export function validationMissingTag(context) {
     var type = 'missing_tag';
 
     function hasDescriptiveTags(entity) {
-        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
+        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date', 'oneway'];
         var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
                 if (k === 'area' || !osmIsInterestingTag(k)) return false;

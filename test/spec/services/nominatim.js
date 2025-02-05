@@ -10,9 +10,10 @@ describe('iD.serviceNominatim', function() {
         delete iD.services.geocoder;
     });
 
-    beforeEach(function() {
+    beforeEach(async function() {
         nominatim = iD.services.geocoder;
         nominatim.reset();
+        await iD.localizer.ensureLoaded();
     });
 
     afterEach(function() {

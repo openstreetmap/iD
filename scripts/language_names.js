@@ -19,6 +19,10 @@ function getLangNamesInNativeLang() {
   // manually add languages we want that aren't in CLDR
   // see for example https://github.com/openstreetmap/iD/pull/9241/
   let unordered = {
+    aer: { nativeName: 'Arrernte' },
+    aoi: { nativeName: 'Anindilyakwa' },
+    aus: { nativeName: 'Australian Aboriginal Languages' },
+    bdy: { nativeName: 'Yugambeh–Bandjalangic' },
     'bft': {
       nativeName: 'بلتی'
     },
@@ -28,6 +32,7 @@ function getLangNamesInNativeLang() {
     'brh': {
       nativeName: 'براہوئی'
     },
+    coa: { nativeName: 'Basa Pulu Kokos' },
     'cdo': {
       nativeName: '閩東語'
     },
@@ -64,6 +69,7 @@ function getLangNamesInNativeLang() {
       script: 'Latn',
       nativeName: 'Pó-sing-gṳ̂ (Báⁿ-uā-ci̍)'
     },
+    dgw: { nativeName: 'Daungwurrung' },
     'gan': {
       nativeName: '贛語'
     },
@@ -77,6 +83,9 @@ function getLangNamesInNativeLang() {
       script: 'Hant',
       nativeName: '贛語（繁體）'
     },
+    gjm: { nativeName: 'Gunditjmara' },
+    gjr: { nativeName: 'Gurindji Kriol' },
+    gup: { nativeName: 'Bininj Gun-Wok' },
     'hak': {
       nativeName: '客家語'
     },
@@ -106,6 +115,7 @@ function getLangNamesInNativeLang() {
       base: 'ja',
       script: 'Latn'
     },
+    jay: { nativeName: 'Yan-nhaŋu' },
     'kls': {
       nativeName: 'Kal\'as\'amondr'
     },
@@ -123,6 +133,8 @@ function getLangNamesInNativeLang() {
       script: 'Mong',
       nativeName: 'ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ'
     },
+    mwf: { nativeName: 'Murrinh-Patha' },
+    mwp: { nativeName: 'Kalaw Lagaw Ya' },
     'nan': {
       nativeName: '閩南語'
     },
@@ -141,12 +153,18 @@ function getLangNamesInNativeLang() {
       script: 'Latn',
       nativeName: 'Bân-lâm-gú (Tâi-lô)'
     },
+    nys: { nativeName: 'Nyungar' },
     'oc': {
       nativeName: 'Occitan'
     },
+    pih: { nativeName: 'Pitkern–Norfuk' },
+    piu: { nativeName: 'Pintupi' },
+    pjt: { nativeName: 'Pitjantjatjara' },
     'pnb': {
       nativeName: 'پنجابی'
     },
+    rop: { nativeName: 'Australian Kriol' },
+    rrm: { nativeName: 'Moriori' },
     'scl': {
       nativeName: 'ݜݨیاٗ'
     },
@@ -156,12 +174,16 @@ function getLangNamesInNativeLang() {
     'skr': {
       nativeName: 'سرائیکی'
     },
+    tcs: { nativeName: 'Yumplatok' },
+    tiw: { nativeName: 'Tiwi' },
     'trw': {
       nativeName: 'توروالی'
     },
+    ulk: { nativeName: 'Meriam Mir' },
     'wbl': {
       nativeName: 'وخی'
     },
+    wlp: { nativeName: 'Warlpiri' },
     'wuu': {
       nativeName: '吳語'
     },
@@ -175,6 +197,13 @@ function getLangNamesInNativeLang() {
       script: 'Hant',
       nativeName: '吳語（正體）'
     },
+    wrh: { nativeName: 'Wiradjuri' },
+    wth: { nativeName: 'Wathawurrung' },
+    wyi: { nativeName: 'Woiwurrung' },
+    xdk: { nativeName: 'Dharug' },
+    xni: { nativeName: 'Ngarigo' },
+    xph: { nativeName: 'Tyerrernotepanner' },
+    xrd: { nativeName: 'Gundungurra' },
     'yue-Hans': {
       base: 'yue',
       script: 'Hans',
@@ -189,7 +218,8 @@ function getLangNamesInNativeLang() {
       base: 'zh',
       script: 'Latn',
       nativeName: 'Zhōngwén (Hànyǔ Pīnyīn)'
-    }
+    },
+    zku: { nativeName: 'Kaurna' },
   };
 
   let langDirectoryPaths = fs.readdirSync(cldrMainDir);

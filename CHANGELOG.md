@@ -40,37 +40,67 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Fix flickering when switching between background imagery layers, make switching backgrounds snappier
 * Prevent password managers from autofilling tag fields ([#10508], thanks [@michaelabon])
+* Make parking space thinner in partial fill rendering ([#10442], thanks [@Nekzuris])
+* Include route number in label of named route relations ([#10478], thanks [@1ec5])
+* Make oneway arrows more visible on dark colored lines ([#9143], thanks [@k-yle])
+* Add hash parameter to enable notes layer by default ([#8042], thanks [@k-yle])
 #### :scissors: Operations
+* When extracting a node from a way (shortcut: <kbd>E</kbd>), the relations are now preserved by default. Extracting a node without its relations is still possible using <kbd>⇧ Shift</kbd> <kbd>E</kbd> ([#9816], thanks [@k-yle])
+* Remove rarely-used keyboard shortcut <kbd>L</kbd> to prevent accidental activation of the geolocate tool ([#9999], thanks [@k-yle])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Include wikidata errors from osmose QA service ([#9998], thanks [@k-yle])
 #### :bug: Bugfixes
 * Fix unsolvable validator error triggered by regional presets ([#10459])
 * Render highway direction cones only on matching parent ways ([#9013])
 * Prevent edit menu from being covered up by street level imagery or other map overlay panels ([#10495])
-* Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris]) 
+* Fix grid lines from showing up on background map tiles in certain situations (semi-transparent tiles or fractional browser zoom level) ([#10594], thanks [@Nekzuris])
 * Prevent search results from sometimes getting stuck in the highlighted state when mouse-hovering the list of search results while typing ([#10661])
+* Allow tiles in minimap to be slightly underzoomed, preventing them from blacking out on low map zoom levels ([#10653])
+* Fix confusing behaviour after logging out in the standalone build of iD ([#10683], thanks [@k-yle])
+* Fix editor being stuck in a disabled state when login popup window is closed prematurely ([#10651])
+* Preserve `opening_hours` when matching a NSI preset ([#10564], thanks [@Dimitar5555])
+* Fix bug causing invisible features when `layer` tag is a decimal number ([#9933], thanks [@k-yle])
 #### :earth_asia: Localization
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
 * Add Ladin (language code `lld`) as an available option for multilingual names
+* Add 30 indigenous languages as dropdown options for multilingual names ([#10684], thanks [@k-yle])
+* Add `lang`uage attributes to input fields for multilingual names, as well as wikidata and wikipedia fields ([#10716], thanks [@mapmeld])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Fix walkthrough from showing tooltips on wrong location under certain circumstances ([#10650], [#10624], [#10634])
 #### :rocket: Presets
+* Updated the [`cycleway`](https://osm.wiki/Key:cycleway) & [`sidewalk`](https://osm.wiki/Key:sidewalk) fields to recognise the `:both` suffix, for example [`cycleway:both`](https://osm.wiki/Key:cycleway:both) ([#9587], thanks [@k-yle])
 #### :hammer: Development
-* Migrate unit tests from karma to vitest ([#10452])
+* Migrate unit tests from karma to vitest ([#10452], thanks [@k-yle])
 
+[#8042]: https://github.com/openstreetmap/iD/pull/8042
 [#9013]: https://github.com/openstreetmap/iD/issues/9013
+[#9143]: https://github.com/openstreetmap/iD/pull/9143
+[#9587]: https://github.com/openstreetmap/iD/issues/9587
+[#9816]: https://github.com/openstreetmap/iD/issues/9816
+[#9933]: https://github.com/openstreetmap/iD/pull/9933
+[#9998]: https://github.com/openstreetmap/iD/pull/9998
+[#9999]: https://github.com/openstreetmap/iD/issues/9999
+[#10442]: https://github.com/openstreetmap/iD/pull/10442
 [#10452]: https://github.com/openstreetmap/iD/pull/10452
 [#10459]: https://github.com/openstreetmap/iD/pull/10459
+[#10478]: https://github.com/openstreetmap/iD/pull/10478
 [#10488]: https://github.com/openstreetmap/iD/pull/10488
 [#10489]: https://github.com/openstreetmap/iD/pull/10489
 [#10495]: https://github.com/openstreetmap/iD/issues/10495
 [#10508]: https://github.com/openstreetmap/iD/pull/10508
+[#10564]: https://github.com/openstreetmap/iD/pull/10564
 [#10594]: https://github.com/openstreetmap/iD/pull/10594
 [#10624]: https://github.com/openstreetmap/iD/issues/10624
 [#10634]: https://github.com/openstreetmap/iD/issues/10634
 [#10650]: https://github.com/openstreetmap/iD/issues/10650
+[#10651]: https://github.com/openstreetmap/iD/issues/10651
+[#10653]: https://github.com/openstreetmap/iD/issues/10653
+[#10683]: https://github.com/openstreetmap/iD/issues/10683
+[#10684]: https://github.com/openstreetmap/iD/pull/10684
+[#10716]: https://github.com/openstreetmap/iD/pull/10716
 [@winstonsung]: https://github.com/winstonsung/
 [@Nekzuris]: https://github.com/Nekzuris
 [@michaelabon]: https://github.com/michaelabon

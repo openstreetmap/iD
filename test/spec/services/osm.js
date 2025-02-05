@@ -137,7 +137,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var path = '/api/0.6/map.json?bbox=-74.542,40.655,-74.541,40.656';
+        var path = '/api/0.6/map.json';
         var response =
             '{' +
             '    "version":"0.6",' +
@@ -528,7 +528,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -557,7 +557,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -587,7 +587,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', 'https://www.openstreetmap.org/api/0.6/changesets\\?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
