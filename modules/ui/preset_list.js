@@ -123,7 +123,7 @@ export function uiPresetList(context) {
         var search = searchWrap
             .append('input')
             .attr('class', 'preset-search-input')
-            .attr('placeholder', t('inspector.search'))
+            .attr('placeholder', 'Search feature type')
             .attr('type', 'search')
             .call(utilNoAuto)
             .on('keydown', initialKeydown)
