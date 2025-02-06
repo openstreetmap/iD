@@ -7919,7 +7919,8 @@
     }
 }
 
-.ideditor img.tile-removing {
+.ideditor .layer-background img.tile-removing,
+.ideditor .map-in-map-background img.tile-removing {
     opacity: 0;
     z-index: 1;
     mix-blend-mode: normal;

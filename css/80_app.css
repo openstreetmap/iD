@@ -4388,7 +4388,8 @@ img.tile {
     }
 }
 
-img.tile-removing {
+.layer-background img.tile-removing,
+.map-in-map-background img.tile-removing {
     opacity: 0;
     z-index: 1;
     mix-blend-mode: normal;
