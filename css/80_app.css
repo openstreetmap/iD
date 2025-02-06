@@ -4384,7 +4384,7 @@ img.tile {
     or (-webkit-device-pixel-ratio = 5) or (-webkit-device-pixel-ratio = 0.25) or (-webkit-device-pixel-ratio = 0.5) or (-webkit-device-pixel-ratio = 0.75) {
     .layer-background img.tile,
     .map-in-map-background img.tile {
-        mix-blend-mode: plus-lighter;
+        mix-blend-mode: normal;
     }
 }
 
