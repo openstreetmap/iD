@@ -208,7 +208,7 @@ export function modeDragNode(context) {
                 }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, end.id);
+                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, entity.id);
                 if (edge) {
                     loc = edge.loc;
                 }
@@ -456,6 +456,26 @@ export function modeDragNode(context) {
 
 
     mode.enter = function() {
+        var selectedIDs = context.selectedIDs();
+        _restoreSelectedIDs = selectedIDs.slice();
+
+        // Ensure only one node is selected for dragging
+        if (selectedIDs.length !== 1) {
+            context.enter(modeBrowse(context));
+            return;
+        }
+
+        _activeEntity = context.entity(selectedIDs[0]);
+        _startLoc = _activeEntity.loc;
+        _lastLoc = _startLoc;
+        _wasMidpoint = _activeEntity.type === 'midpoint';
+        _isCancelled = false;
+
+        // Track initial touch/mouse state
+        var initialTouchPoint = null;
+        var isDragging = false;
+
+        // Install behaviors
         context.install(hover);
         context.install(edit);
 
@@ -463,8 +483,83 @@ export function modeDragNode(context) {
             .on('keydown.dragNode', keydown)
             .on('keyup.dragNode', keyup);
 
+
+        context.surface()
+            .on('pointerdown.drag', handlePointerDown)
+            .on('pointermove.drag', handlePointerMove)
+            .on('pointerup.drag pointercancel.drag', handlePointerUp);
+
+        function handlePointerDown(d3_event) {
+            // Ensure d3 is imported or available
+            var entity = window.d3.select(d3_event.target).datum();
+
+            // Ignore if not primary button or multiple touches
+            if (d3_event.button !== 0 || d3_event.type === 'touchstart' && d3_event.touches.length > 1) {
+                return;
+            }
+
+            // Prevent default only if directly on the node
+            if (!entity || entity.id !== _activeEntity.id) {
+                return;
+            }
+
+            // Track initial touch point
+            initialTouchPoint = {
+                x: d3_event.clientX,
+                y: d3_event.clientY
+            };
+
+            // Prevent text selection
+            d3_event.preventDefault();
+        }
+
+        function handlePointerMove(d3_event) {
+            // Require initial touch point and minimal movement
+            if (!initialTouchPoint) return;
+
+            var currentPoint = {
+                x: d3_event.clientX,
+                y: d3_event.clientY
+            };
+
+            // Define a small tolerance to distinguish between tap and drag
+            var tolerance = 5; // pixels
+            var distance = Math.sqrt(
+                Math.pow(currentPoint.x - initialTouchPoint.x, 2) +
+                Math.pow(currentPoint.y - initialTouchPoint.y, 2)
+            );
+
+            // Start dragging only after exceeding tolerance
+            if (!isDragging && distance > tolerance) {
+                isDragging = true;
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+            }
+
+            // Only proceed with node drag if definitely dragging
+            if (isDragging) {
+                // Remove unused point variable
+                var currPoint = context.mouse(d3_event);
+                move(d3_event, _activeEntity, currPoint);
+            }
+        }
+
+        function handlePointerUp(d3_event) {
+            if (isDragging) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                end(d3_event, _activeEntity);
+            }
+
+            // Reset state
+            initialTouchPoint = null;
+            isDragging = false;
+        }
+
         context.history()
             .on('undone.drag-node', cancel);
+
+        context.enter(mode);
     };
 
 

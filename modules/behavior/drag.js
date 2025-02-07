@@ -5,7 +5,6 @@ import {
     selection as d3_selection
 } from 'd3-selection';
 
-import { geoVecLength } from '../geo';
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
@@ -29,10 +28,6 @@ import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../
 export function behaviorDrag() {
     var dispatch = d3_dispatch('start', 'move', 'end');
 
-    // see also behaviorSelect
-    var _tolerancePx = 1; // keep this low to facilitate pixel-perfect micromapping
-    var _penTolerancePx = 4; // styluses can be touchy so require greater movement - #1981
-
     var _origin = null;
     var _selector = '';
     var _targetNode;
@@ -55,11 +50,17 @@ export function behaviorDrag() {
 
 
     function pointerdown(d3_event) {
-
         if (_pointerId) return;
 
-        _pointerId = d3_event.pointerId || 'mouse';
+        // Explicitly handle touch events for mobile
+        if (d3_event.type === 'touchstart') {
+            // Ignore multi-touch scenarios
+            if (d3_event.touches.length > 1) return;
+            // Use the first touch point
+            d3_event = d3_event.touches[0];
+        }
 
+        _pointerId = d3_event.pointerId || 'touch';
         _targetNode = this;
 
         // only force reflow once per drag
@@ -70,9 +71,19 @@ export function behaviorDrag() {
         var started = false;
         var selectEnable = d3_event_userSelectSuppress();
 
+        // Track initial position to determine intentional drag
+        var initialPosition = {
+            x: d3_event.clientX,
+            y: d3_event.clientY
+        };
+
+        // Add touch event listeners for mobile
+        var moveEvent = d3_event.type === 'touchstart' ? 'touchmove' : (_pointerPrefix + 'move.drag');
+        var upEvent = d3_event.type === 'touchstart' ? 'touchend' : (_pointerPrefix + 'up.drag pointercancel.drag');
+
         d3_select(window)
-            .on(_pointerPrefix + 'move.drag', pointermove)
-            .on(_pointerPrefix + 'up.drag pointercancel.drag', pointerup, true);
+            .on(moveEvent + '.drag', pointermove)
+            .on(upEvent + '.drag', pointerup, true);
 
         if (_origin) {
             offset = _origin.call(_targetNode, _targetEntity);
@@ -83,52 +94,70 @@ export function behaviorDrag() {
 
         d3_event.stopPropagation();
 
-
         function pointermove(d3_event) {
-            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
+            // Handle touch events for mobile
+            if (d3_event.type === 'touchmove') {
+                // Ignore multi-touch scenarios
+                if (d3_event.touches.length > 1) return;
+                // Use the first touch point
+                d3_event = d3_event.touches[0];
+            }
+
+            if (_pointerId !== (d3_event.pointerId || 'touch')) return;
 
             var p = pointerLocGetter(d3_event);
 
-            if (!started) {
-                var dist = geoVecLength(startOrigin,  p);
-                var tolerance = d3_event.pointerType === 'pen' ? _penTolerancePx : _tolerancePx;
-                // don't start until the drag has actually moved somewhat
-                if (dist < tolerance) return;
+            // Determine if this is an intentional drag
+            var currentPosition = {
+                x: d3_event.clientX,
+                y: d3_event.clientY
+            };
 
+            var dragDistance = Math.sqrt(
+                Math.pow(currentPosition.x - initialPosition.x, 2) +
+                Math.pow(currentPosition.y - initialPosition.y, 2)
+            );
+
+            // Only start drag after minimal movement
+            if (!started && dragDistance > 5) {
                 started = true;
                 dispatch.call('start', this, d3_event, _targetEntity);
+            }
 
-            // Don't send a `move` event in the same cycle as `start` since dragging
-            // a midpoint will convert the target to a node.
-            } else {
+            if (started) {
+                // Precise delta calculation
+                var delta = [
+                    p[0] - startOrigin[0] - offset[0],
+                    p[1] - startOrigin[1] - offset[1]
+                ];
 
-                startOrigin = p;
-                d3_event.stopPropagation();
-                d3_event.preventDefault();
-
-                var dx = p[0] - startOrigin[0];
-                var dy = p[1] - startOrigin[1];
-                dispatch.call('move', this, d3_event, _targetEntity, [p[0] + offset[0],  p[1] + offset[1]], [dx, dy]);
+                dispatch.call('move', this, d3_event, _targetEntity, [
+                    p[0] - offset[0],
+                    p[1] - offset[1]
+                ], delta);
             }
         }
 
-
         function pointerup(d3_event) {
-            if (_pointerId !== (d3_event.pointerId || 'mouse')) return;
-
-            _pointerId = null;
-
-            if (started) {
-                dispatch.call('end', this, d3_event, _targetEntity);
-
-                d3_event.preventDefault();
+            // Handle touch events for mobile
+            if (d3_event.type === 'touchend') {
+                // Use the first touch point
+                d3_event = d3_event.changedTouches[0];
             }
+
+            if (_pointerId !== (d3_event.pointerId || 'touch')) return;
+
+            selectEnable();
 
             d3_select(window)
                 .on(_pointerPrefix + 'move.drag', null)
                 .on(_pointerPrefix + 'up.drag pointercancel.drag', null);
 
-            selectEnable();
+            if (started) {
+                dispatch.call('end', this, d3_event, _targetEntity);
+            }
+
+            _pointerId = null;
         }
     }
 
