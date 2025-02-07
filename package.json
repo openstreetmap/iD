@@ -78,7 +78,7 @@
     "@fortawesome/free-regular-svg-icons": "~6.7.2",
     "@fortawesome/free-solid-svg-icons": "~6.7.2",
     "@mapbox/maki": "^8.0.1",
-    "@openstreetmap/id-tagging-schema": "^6.8.1",
+    "@openstreetmap/id-tagging-schema": "^6.9.0",
     "@rapideditor/mapillary_sprite_source": "^1.8.0",
     "@rapideditor/temaki": "^5.9.0",
     "@transifex/api": "^7.1.3",
