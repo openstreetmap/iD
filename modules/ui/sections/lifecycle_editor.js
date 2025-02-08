@@ -3,67 +3,26 @@ import { uiSection } from '../section';
 import { svgIcon } from '../../svg/icon';
 import { uiTagReference } from '../tag_reference';
 import { utilRebind } from '../../util';
-import { uiField } from '../field';
-import { uiTooltip } from '..';
 import { presetManager } from '../../presets';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { icon } from '../intro/helper';
+import { osmLifecyclePrefixes, osmGetLifecyclePrefix } from '../../osm/tags';
 
 
 export function uiSectionLifecycleEditor(context) {
 
     var dispatch = d3_dispatch('change');
     var _entityID;
-    var _pendingChange;
+    var _pendingChange = null;
 
     var lifecycleTag;
-    var _lifecyclePresets = [
-        {
-            id : 'proposed',
-            referenceKey : 'proposed:*',
-            priority : 0,
-            icon : '#iD-icon-bug'
-        }, 
-        {
-            id : 'planned',
-            referenceKey : 'planned:*',
-            priority : 1,
-            icon : '#iD-icon-bug'
-        }, 
-        {
-            id : 'disused',
-            referenceKey : 'disused:*',
-            priority : 2,
-            icon : '#iD-icon-bug'
-        }, 
-        {
-            id : 'abandoned',
-            referenceKey : 'abandoned:*',
-            priority : 3,
-            icon : '#iD-icon-bug'
-        }, 
-        {
-            id : 'demolished',
-            referenceKey : 'demolished:*',
-            priority : 4,
-            icon : '#iD-icon-bug'
-        },
-        {
-            id : 'construction',
-            referenceKey : 'construction',
-            priority : 5,
-            icon : '#fas-tools'
-        }
-    ]
 
-    var ids = _lifecyclePresets.map(function(preset) {
-        return preset.id;
-    });
+    const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
+    const ids = Object.keys(osmLifecyclePrefixes);
 
     var section = uiSection('lifecycle-editor', context)
         .shouldDisplay(function() {
-            return true
+            return true;
         })
         .label(() => t.append('inspector.lifecycle'))
         .expandedByDefault(false)
@@ -74,18 +33,17 @@ export function uiSectionLifecycleEditor(context) {
     var radioOuterWrap = d3_select(null);
     var radioRowWrap = d3_select(null);
     var radioButtonWrap = d3_select(null);
-    var removeButton = d3_select(null);
-    var referenceWrap = d3_select(null);
-    var functionalRadioButton = d3_select(null);
 
     function renderDisclosureContent(selection) {
         outerWrap.remove();
+
+        var lifecycleToRender = checkLifecyclePreset();
 
         // Outer Wrap
         outerWrap = selection
             .append('div')
             .attr('class', 'wrap-form-field wrap-form-field-lifecycle');
-            
+
         // Title Card with Buttons
         titleWrap = outerWrap
             .append('label')
@@ -100,7 +58,21 @@ export function uiSectionLifecycleEditor(context) {
             .attr('class', 'label-textvalue')
             .text('Select Lifecycle');
 
-        removeButton = titleWrap
+        // Lifecycle List
+        radioOuterWrap = outerWrap
+            .append('div')
+            .attr('class', 'form-field-input-wrap form-field-input-radio');
+
+        // Append hidden placeholder radio button
+        radioOuterWrap
+            .append('input')
+            .attr('type', 'radio')
+            .attr('name', 'lifecycle-radio')
+            .attr('value', 'functional')
+            .attr('style', 'display:none')
+            .attr('checked', checkRadio);
+
+        titleWrap
             .append('button')
             .attr('class', 'remove-icon')
             .attr('id', 'make-functional')
@@ -109,33 +81,31 @@ export function uiSectionLifecycleEditor(context) {
             .call(svgIcon('#iD-operation-delete'))
             .on('click', makeFunctional);
 
-        // Lifecycle List
-        radioOuterWrap = outerWrap
-            .append('div')
-            .attr('class', 'form-field-input-wrap form-field-input-radio');
+        let reference = uiTagReference({ key: 'Lifecycle_prefix' }, context);
 
-        // Append hidden placeholder radio button
-        functionalRadioButton = radioOuterWrap
-            .append('input')
-            .attr('type', 'radio')
-            .attr('name', 'lifecycle-radio')
-            .attr('value', 'functional')
-            .attr('style', 'display:none')
-            .attr('checked', checkRadio);
+        titleWrap
+            .call(reference.button);
 
         // Row Wrap
         radioRowWrap = radioOuterWrap
             .selectAll('.lifecycle-radio-row')
-            .data(_lifecyclePresets)
+            .data(lifecycleToRender)
             .enter()
             .append('label');
 
+        radioOuterWrap
+            .append('div')
+            .call(reference.body)
+            .attr('class', 'reference-box');
+
+        /*
         referenceWrap = radioOuterWrap
             .selectAll('.reference-box')
-            .data(_lifecyclePresets)
+            .data(lifecycleToRender)
             .enter()
             .append('div')
             .attr('class', function(d) {return 'reference-box-' + d.id});
+        */
 
         radioButtonWrap = radioRowWrap
             .append('div')
@@ -152,38 +122,61 @@ export function uiSectionLifecycleEditor(context) {
         radioButtonWrap
             .append('label')
             .attr('class', 'lifecycle-icon')
-            .each(function(d) { 
+            .each(function(d) {
                 svgIcon(d.icon)(d3_select(this));
             });
 
         radioButtonWrap
             .append('span')
-            .each(function(d) { 
+            .each(function(d) {
                 t.append('lifecycle.' + d.id)(d3_select(this));
             });
 
+        /*
         radioRowWrap
             .append('div')
             .attr('class', 'lifecycle-reference-button')
-            .each(function(d) { 
+            .each(function(d) {
                 let reference = uiTagReference({ key: d.referenceKey }, context);
                 (reference.button)(d3_select(this));
                 (reference.body)(d3_select('.reference-box-' + d.id));
             });
+        */
+    }
+
+    function checkLifecyclePreset(){
+        const render = _lifecyclePresets.filter(tag => tag.visibleByDeafult);
+        const renderId = render.map(tag => tag.id);
+        const entityTag = getEntityTags();
+        var newTags = [];
+
+        for (let et in entityTag) {
+            newTags.push(osmGetLifecyclePrefix(et));
+        }
+
+        ids.forEach(id => {
+            if (newTags.includes(id) && !renderId.includes(id) ) {
+                render.push(_lifecyclePresets.find(tag => (tag.id === id)));
+            }
+        });
+
+        return render;
     }
 
     function checkRadio() {
 
         var id = d3_select(this).attr('value');
-        
-        if(id == "functional")
+
+        if (id === 'functional') {
             return 'true';
+        }
 
         var tags = getEntityTags();
 
-        for(let t in tags){
-            if(t.includes(id))
+        for (let t in tags) {
+            if (t.includes(id)) {
                 return 'true';
+            }
         }
 
         return null;
@@ -198,27 +191,25 @@ export function uiSectionLifecycleEditor(context) {
         lifecycleTag = d3_select(this).attr('value');
         _pendingChange = _pendingChange || {};
 
-        for(let pt in presetTags){
-            for(let id in ids){
-                _pendingChange[ids[id]] = undefined;
-                _pendingChange[ids[id] + ':' + pt] = undefined;
-                if(lifecycleTag != 'construction'){
+        for (let pt in presetTags) {
+            ids.forEach(id => {
+                _pendingChange[id] = undefined;
+                _pendingChange[id + ':' + pt] = undefined;
+                if (lifecycleTag !== 'construction') {
                     _pendingChange[pt] = undefined;
                 }
-                if(ids[id] === lifecycleTag){
-                    if(lifecycleTag == 'construction'){
-                        _pendingChange[ids[id]] = tags[pt];
+                if (id === lifecycleTag) {
+                    if (lifecycleTag === 'construction') {
+                        _pendingChange[id] = tags[pt];
                         _pendingChange[pt] = tags[pt];
-                    }
-                    else{
-                        _pendingChange[ids[id] + ':' + pt] = tags[pt];
+                    } else {
+                        _pendingChange[id + ':' + pt] = tags[pt];
                     }
                 }
-            }
+            });
         }
-        
         scheduleChange();
-    }   
+    }
 
     function scheduleChange() {
         var entityID = _entityID;
@@ -234,7 +225,7 @@ export function uiSectionLifecycleEditor(context) {
     function getPresetTag(){
         var entityID = _entityID;
         var preset = presetManager.match(context.graph().entity(entityID), context.graph());
-        console.log(preset);
+        // console.log(preset);
         return preset.tags;
     }
 
@@ -242,16 +233,15 @@ export function uiSectionLifecycleEditor(context) {
         var tags = getEntityTags();
         var baseTag;
         _pendingChange = _pendingChange || {};
-        
 
-        for(let tag in tags){
+        for (let tag in tags){
             baseTag = tag.split(':')[1];
-            for(let id in ids){
-                if(tag.includes(ids[id])){
-                    _pendingChange[baseTag] = tags[ids[id] + ':' + baseTag];
+            ids.forEach(id => {
+                if (tag.includes(id)) {
+                    _pendingChange[baseTag] = tags[id + ':' + baseTag];
                     _pendingChange[tag] = undefined;
                 }
-            }
+            });
         }
 
         scheduleChange();

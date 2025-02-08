@@ -216,13 +216,14 @@ export function presetIndex() {
       let valueIndex = keyIndex[k];
 
       if (!valueIndex && k.indexOf(':') !== -1) {
-        let split = k.split(':')[1]
+        let split = k.split(':')[1];
         //tags[split] = tags[k];
         valueIndex = keyIndex[split];
       }
-      
-      if(!valueIndex)
+
+      if (!valueIndex) {
         continue;
+      }
 
       let keyValueMatches = valueIndex[tags[k]];
       if (keyValueMatches) indexMatches.push(...keyValueMatches);

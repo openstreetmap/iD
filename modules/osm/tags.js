@@ -8,19 +8,99 @@ export function osmIsInterestingTag(key) {
         key.indexOf('tiger:') !== 0;
 }
 
+var defaultIcon = '#iD-icon-bug';
+
 export const osmLifecyclePrefixes = {
+
     // nonexistent, might be built
-    proposed: true, planned: true,
-    // under maintenance or between groundbreaking and opening
-    construction: true,
+    proposed: {
+        id : 'proposed',
+        referenceKey : 'proposed:*',
+        visibleByDeafult : true,
+        icon : defaultIcon
+    },
+    planned: {
+        id : 'planned',
+        referenceKey : 'planned:*',
+        visibleByDeafult : true,
+        icon : defaultIcon
+    },
+
     // existent but not functional
-    disused: true,
+    disused: {
+        id : 'disused',
+        referenceKey : 'disused:*',
+        visibleByDeafult : true,
+        icon : defaultIcon
+    },
+
     // dilapidated to nonexistent
-    abandoned: true, was: true,
+    abandoned: {
+        id : 'abandoned',
+        referenceKey : 'abandoned:*',
+        visibleByDeafult : true,
+        icon : defaultIcon
+    },
+    was: {
+        id : 'was',
+        referenceKey : 'was:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+
     // nonexistent, still may appear in imagery
-    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true, obliterated: true,
+    dismantled: {
+        id : 'dismantled',
+        referenceKey : 'dismantled:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+    razed: {
+        id : 'razed',
+        referenceKey : 'razed:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+    demolished: {
+        id : 'demolished',
+        referenceKey : 'demolished:*',
+        visibleByDeafult : true,
+        icon : defaultIcon
+    },
+    destroyed: {
+        id : 'destroyed',
+        referenceKey : 'destroyed:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+    removed: {
+        id : 'removed',
+        referenceKey : 'removed:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+    obliterated: {
+        id : 'obliterated',
+        referenceKey : 'obliterated:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+
     // existent occasionally, e.g. stormwater drainage basin
-    intermittent: true
+    intermittent: {
+        id : 'intermittent',
+        referenceKey : 'intermittent:*',
+        visibleByDeafult : false,
+        icon : defaultIcon
+    },
+
+    // under maintenance or between groundbreaking and opening
+    construction: {
+        id : 'construction',
+        referenceKey : 'construction',
+        visibleByDeafult : true,
+        icon : defaultIcon
+    }
 };
 
 /** @param {string} key */
@@ -30,6 +110,18 @@ export function osmRemoveLifecyclePrefix(key) {
 
     if (keySegments[0] in osmLifecyclePrefixes) {
         return key.slice(keySegments[0].length + 1);
+    }
+
+    return key;
+}
+
+/** @param {string} key */
+export function osmGetLifecyclePrefix(key) {
+    const keySegments = key.split(':');
+    if (keySegments.length === 1) return key;
+
+    if (keySegments[0] in osmLifecyclePrefixes) {
+        return keySegments[0];
     }
 
     return key;
