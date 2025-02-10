@@ -15,8 +15,6 @@ export function uiSectionLifecycleEditor(context) {
     var _entityID;
     var _pendingChange = null;
 
-    var lifecycleTag;
-
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
     const ids = Object.keys(osmLifecyclePrefixes);
 
@@ -185,29 +183,39 @@ export function uiSectionLifecycleEditor(context) {
     function changeLifecycle() {
         if (d3_select(this).attr('readonly')) return;
 
-        var presetTags = getPresetTag();
-        var tags = getEntityTags();
+        const tags = getEntityTags();
+        const tagKeys = (Object.keys(tags));
+        const presetTags = getPresetTag();
+        const newLifecycle = d3_select(this).attr('value');
+        const oldTag = tagKeys.find(value =>
+            ids.some(keyword => value.includes(keyword))
+        );
 
-        lifecycleTag = d3_select(this).attr('value');
         _pendingChange = _pendingChange || {};
 
-        for (let pt in presetTags) {
-            ids.forEach(id => {
-                _pendingChange[id] = undefined;
-                _pendingChange[id + ':' + pt] = undefined;
-                if (lifecycleTag !== 'construction') {
+        _pendingChange.construction = undefined;
+
+        if (oldTag && oldTag.includes(':')) {
+            let tag = oldTag.split(':')[1];
+            _pendingChange[oldTag] = undefined;
+            if (newLifecycle !== 'construction') {
+                _pendingChange[newLifecycle + ':' + tag] = tags[oldTag];
+            } else {
+                _pendingChange[newLifecycle] = tags[oldTag];
+                _pendingChange[tag] = tags[oldTag];
+            }
+        } else {
+            for (let pt in presetTags){
+                if (newLifecycle !== 'construction') {
                     _pendingChange[pt] = undefined;
+                    _pendingChange[newLifecycle + ':' + pt] = tags[pt];
+                } else {
+                    _pendingChange[newLifecycle] = tags[pt];
                 }
-                if (id === lifecycleTag) {
-                    if (lifecycleTag === 'construction') {
-                        _pendingChange[id] = tags[pt];
-                        _pendingChange[pt] = tags[pt];
-                    } else {
-                        _pendingChange[id + ':' + pt] = tags[pt];
-                    }
-                }
-            });
+
+            }
         }
+
         scheduleChange();
     }
 
@@ -225,24 +233,24 @@ export function uiSectionLifecycleEditor(context) {
     function getPresetTag(){
         var entityID = _entityID;
         var preset = presetManager.match(context.graph().entity(entityID), context.graph());
-        // console.log(preset);
+        //console.log(preset);
         return preset.tags;
     }
 
     function makeFunctional(){
-        var tags = getEntityTags();
-        var baseTag;
+        const tags = getEntityTags();
+        const tagKeys = (Object.keys(tags));
+        const oldTag = tagKeys.find(value =>
+            ids.some(keyword => value.includes(keyword))
+        );
+
         _pendingChange = _pendingChange || {};
 
-        for (let tag in tags){
-            baseTag = tag.split(':')[1];
-            ids.forEach(id => {
-                if (tag.includes(id)) {
-                    _pendingChange[baseTag] = tags[id + ':' + baseTag];
-                    _pendingChange[tag] = undefined;
-                }
-            });
+        if (!oldTag.includes('construction')) {
+            let newTag = oldTag.split(':')[1];
+            _pendingChange[newTag] = tags[oldTag];
         }
+        _pendingChange[oldTag] = undefined;
 
         scheduleChange();
     }

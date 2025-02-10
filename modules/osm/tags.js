@@ -8,7 +8,7 @@ export function osmIsInterestingTag(key) {
         key.indexOf('tiger:') !== 0;
 }
 
-var defaultIcon = '#iD-icon-bug';
+var defaultIcon = '#iD-icon-question-mark';
 
 export const osmLifecyclePrefixes = {
 
@@ -17,13 +17,13 @@ export const osmLifecyclePrefixes = {
         id : 'proposed',
         referenceKey : 'proposed:*',
         visibleByDeafult : true,
-        icon : defaultIcon
+        icon : '#iD-icon-lightbulb'
     },
     planned: {
         id : 'planned',
         referenceKey : 'planned:*',
         visibleByDeafult : true,
-        icon : defaultIcon
+        icon : '#iD-icon-planned'
     },
 
     // existent but not functional
@@ -31,7 +31,7 @@ export const osmLifecyclePrefixes = {
         id : 'disused',
         referenceKey : 'disused:*',
         visibleByDeafult : true,
-        icon : defaultIcon
+        icon : '#iD-icon-closed'
     },
 
     // dilapidated to nonexistent
@@ -65,7 +65,7 @@ export const osmLifecyclePrefixes = {
         id : 'demolished',
         referenceKey : 'demolished:*',
         visibleByDeafult : true,
-        icon : defaultIcon
+        icon : '#iD-icon-destroy'
     },
     destroyed: {
         id : 'destroyed',
@@ -99,7 +99,7 @@ export const osmLifecyclePrefixes = {
         id : 'construction',
         referenceKey : 'construction',
         visibleByDeafult : true,
-        icon : defaultIcon
+        icon : '#iD-icon-hammer-wrench'
     }
 };
 

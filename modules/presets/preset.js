@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
 import { t } from '../core/localizer';
-import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
+import { osmAreaKeys, osmAreaKeysExceptions} from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 import { locationManager } from '../core/LocationManager';
@@ -62,22 +62,24 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     let seen = {};
     let score = 0;
 
+    // entityTags without prefixes
+    const modifiedEntityTags = Object.fromEntries(
+      Object.entries(entityTags).map(([key, value]) => {
+          const newKey = key.includes(':') ? key.split(':')[1] : key;
+          return [newKey, value];
+      })
+    );
+
     // match on tags
     for (let k in tags) {
-
-      /*
-      if (!valueIndex && k.indexOf(':') !== -1) {
-        let split = k.split(':')[1]
-        //tags[split] = tags[k];
-        valueIndex = keyIndex[split];
-      }
-      */
 
       seen[k] = true;
       if (entityTags[k] === tags[k]) {
         score += _this.originalScore;
       } else if (tags[k] === '*' && k in entityTags) {
         score += _this.originalScore / 2;
+      } else if (modifiedEntityTags[k] === tags[k]) {
+        score += _this.originalScore;
       } else {
         return -1;
       }
@@ -245,7 +247,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     delete tags.area;
     return tags;
   };
-
 
   _this.setTags = (tags, geometry, skipFieldDefaults, loc) => {
     const addTags = _this.addTags;
