@@ -140,7 +140,17 @@ li.list-item-photos.active:after {
 .viewfield-group.hovered * {
     fill: #eebb00 !important;
 }
-
+.viewfield-group.hovered circle {
+    stroke: #222;
+    stroke-width: 2;
+    stroke-opacity: 0.9;
+    fill-opacity: 0.9;
+}
+.viewfield-group.hovered .viewfield {
+    stroke-width: 1;
+    stroke: #222;
+    fill-opacity: 0.8;
+}
 .viewfield-group circle {
     stroke: #555;
     stroke-width: 1;
