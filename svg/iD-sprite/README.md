@@ -24,7 +24,7 @@ For example, in `operation-reflect-long.svg`:
 ```svg
 <svg version="1.1" x="0" y="0" width="20" height="20" viewBox="0 0 20 20">
     <path d="M9,18 L11,18 L11,2 L9,2 L9,18 z" fill="currentColor"/>
-    <path d="M13,14 L13,6 L18,6 L18,8 L15,8 L15,14 M5,14 L5,8 L2,8 L2,6 L7,6 L7,14" fill="z"/>
+    <path d="M13,14 L13,6 L18,6 L18,8 L15,8 L15,14 M5,14 L5,8 L2,8 L2,6 L7,6 L7,14" fill="inherit"/>
 </svg>
 ```
 

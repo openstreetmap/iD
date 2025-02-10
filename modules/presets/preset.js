@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash';
 
 import { t } from '../core/localizer';
-import { osmAreaKeys, osmAreaKeysExceptions} from '../osm/tags';
+import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
 import { locationManager } from '../core/LocationManager';
