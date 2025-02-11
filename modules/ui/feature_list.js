@@ -127,14 +127,32 @@ export function uiFeatureList(context) {
             var locationMatch = sexagesimal.pair(q.toUpperCase()) || dmsMatcher(q);
 
             if (locationMatch) {
-                var loc = [Number(locationMatch[0]), Number(locationMatch[1])];
-                result.push({
-                    id: loc[0] + '/' + loc[1],
-                    geometry: 'point',
-                    type: t('inspector.location'),
-                    name: dmsCoordinatePair([loc[1], loc[0]]),
-                    location: loc
-                });
+                const latLon = [Number(locationMatch[0]), Number(locationMatch[1])];
+                const lonLat = [latLon[1], latLon[0]];  // also try swapped order
+
+                const isLatLonValid = latLon[0] >= -90 && latLon[0] <= 90 && latLon[1] >= -180 && latLon[1] <= 180;
+                let   isLonLatValid = lonLat[0] >= -90 && lonLat[0] <= 90 && lonLat[1] >= -180 && lonLat[1] <= 180;
+                isLonLatValid &&= !q.match(/[NSEW]/i);
+                isLonLatValid &&= lonLat[0] !== lonLat[1];
+
+                if (isLatLonValid) {
+                    result.push({
+                        id: latLon[0] + '/' + latLon[1],
+                        geometry: 'point',
+                        type: t('inspector.location'),
+                        name: dmsCoordinatePair([latLon[1], latLon[0]]),
+                        location: latLon
+                    });
+                }
+                if (isLonLatValid) {
+                    result.push({
+                        id: lonLat[0] + '/' + lonLat[1],
+                        geometry: 'point',
+                        type: t('inspector.location'),
+                        name: dmsCoordinatePair([lonLat[1], lonLat[0]]),
+                        location: lonLat
+                    });
+                }
             }
 
             // A location search takes priority over an ID search
