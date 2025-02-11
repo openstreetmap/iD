@@ -133,6 +133,12 @@ export function uiSectionPresetFields(context) {
         return section;
     };
 
+    section.state = function(val) {
+        if (!arguments.length) return _state;
+        _state = val;
+        return section;
+    };
+
     section.tags = function(val) {
         if (!arguments.length) return _tags;
         _tags = val;
