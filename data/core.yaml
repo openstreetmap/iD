@@ -1955,11 +1955,11 @@ en:
       message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
     osm_api_limits:
-      title: OSM Feature Restrictions
+      title: OSM Data Limitations
       tip: Limits and rules imposed by the OSM API on uploaded features
       max_way_nodes:
         message: Way has too many vertices
-        reference: "The maximum number of vertices on a way is {maxWayNodes}. Split the feature or otherwise reduce number the nodes of the affected way to fix this."
+        reference: "The maximum number of vertices of a way is {maxWayNodes}. Split the feature into smaller parts or otherwise reduce the number of nodes of the affected way."
     fix:
       add_a_bridge:
         title: Add a bridge
