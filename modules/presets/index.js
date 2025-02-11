@@ -233,15 +233,6 @@ export function presetIndex() {
 
       for (let i = 0; i < indexMatches.length; i++) {
         const candidate = indexMatches[i];
-
-        /*
-        if (split && Object.keys(osmLifecyclePrefixes).includes(split[0])) {
-          score = candidate.matchScore(tags, split[0]);
-        } else {
-          score = candidate.matchScore(tags);
-        }
-          */
-
         const score = candidate.matchScore(tags);
 
         if (score === -1){

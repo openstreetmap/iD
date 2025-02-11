@@ -1,9 +1,9 @@
 import { t } from '../../core/localizer';
 import { uiSection } from '../section';
 import { svgIcon } from '../../svg/icon';
+import { utilArrayIdentical } from '../../util/array';
 import { uiTagReference } from '../tag_reference';
 import { utilRebind } from '../../util';
-import { presetManager } from '../../presets';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { osmLifecyclePrefixes, osmGetLifecyclePrefix } from '../../osm/tags';
@@ -13,7 +13,10 @@ export function uiSectionLifecycleEditor(context) {
 
     var dispatch = d3_dispatch('change');
     var _entityID;
+    var _tags;
     var _pendingChange = null;
+    var _currentLifecycle = 'functional';
+    var _presets = [];
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
     const ids = Object.keys(osmLifecyclePrefixes);
@@ -35,7 +38,8 @@ export function uiSectionLifecycleEditor(context) {
     function renderDisclosureContent(selection) {
         outerWrap.remove();
 
-        var lifecycleToRender = checkLifecyclePreset();
+        var lifecycleToRender = getLifecycleToRender();
+        _currentLifecycle = getCurrentLifecycleTag();
 
         // Outer Wrap
         outerWrap = selection
@@ -142,7 +146,7 @@ export function uiSectionLifecycleEditor(context) {
         */
     }
 
-    function checkLifecyclePreset(){
+    function getLifecycleToRender(){
         const render = _lifecyclePresets.filter(tag => tag.visibleByDeafult);
         const renderId = render.map(tag => tag.id);
         const entityTag = getEntityTags();
@@ -159,6 +163,24 @@ export function uiSectionLifecycleEditor(context) {
         });
 
         return render;
+    }
+
+    function getCurrentLifecycleTag(){
+        
+        let lifecycleTag;
+        const tags = getEntityTags();
+        const tagKeys = (Object.keys(tags));
+        const fullTag = tagKeys.find(value =>
+            ids.some(keyword => value.includes(keyword))
+        );
+
+        if (fullTag) {
+            lifecycleTag = fullTag.split(':')[0];
+            return lifecycleTag;
+        }
+
+        return 'functional';
+        
     }
 
     function checkRadio() {
@@ -219,24 +241,6 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
-    function scheduleChange() {
-        var entityID = _entityID;
-        dispatch.call('change', this, entityID, _pendingChange);
-        _pendingChange = null;
-    }
-
-    function getEntityTags(){
-        var entityID = _entityID;
-        return context.graph().entity(entityID).tags;
-    }
-
-    function getPresetTag(){
-        var entityID = _entityID;
-        var preset = presetManager.match(context.graph().entity(entityID), context.graph());
-        //console.log(preset);
-        return preset.tags;
-    }
-
     function makeFunctional(){
         const tags = getEntityTags();
         const tagKeys = (Object.keys(tags));
@@ -255,9 +259,42 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
+    function scheduleChange() {
+        var entityID = _entityID;
+        dispatch.call('change', this, entityID, _pendingChange);
+        _pendingChange = null;
+    }
+
+    function getEntityTags(){
+        var tags = _tags;
+        return tags;
+    }
+
+    function getPresetTag(){
+        var preset = _presets[0];
+        return preset.tags;
+    }
+
     section.entityIDs = function(val) {
         if (!arguments.length) return _entityID;
         _entityID = val;
+        return section;
+    };
+
+    section.tags = function(val) {
+        if (!arguments.length) return _tags;
+        _tags = val;
+        return section;
+    };
+
+    section.presets = function(val) {
+        if (!arguments.length) return _presets;
+
+        // don't reload the same preset
+        if (!utilArrayIdentical(val, _presets)) {
+            _presets = val;
+        }
+
         return section;
     };
 
