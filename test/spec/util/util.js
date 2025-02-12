@@ -103,9 +103,12 @@ describe('iD.util', function() {
     });
 
     it('utilQsString', function() {
+        expect(iD.utilQsString({})).to.eql('');
         expect(iD.utilQsString({ foo: 'bar' })).to.eql('foo=bar');
         expect(iD.utilQsString({ foo: 'bar', one: 2 })).to.eql('foo=bar&one=2');
-        expect(iD.utilQsString({})).to.eql('');
+        expect(iD.utilQsString({ foo: 'bar baz' })).to.be.oneOf(['foo=bar%20baz', 'foo=bar+baz']);
+        expect(iD.utilQsString({ foo: 'bar/baz' })).to.eql('foo=bar%2Fbaz');
+        expect(iD.utilQsString({ foo: 'bar/baz' }, true)).to.eql('foo=bar/baz');
     });
 
     describe('utilEditDistance', function() {

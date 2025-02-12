@@ -363,17 +363,16 @@ export function utilStringQs(str) {
 }
 
 
-export function utilQsString(obj, noencode) {
-    // encode everything except special characters used in certain hash parameters:
-    // "/" in map states, ":", ",", {" and "}" in background
-    function softEncode(s) {
-        return encodeURIComponent(s).replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
+export function utilQsString(obj, softEncode) {
+    let str = new URLSearchParams(obj).toString();
+    if (softEncode) {
+        // for better readability of URL hashes: optionally
+        // leave some special characters unescaped
+        //   "/" used in map state
+        //   ":", ",", {" and "}" used in background param
+        str = str.replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
     }
-
-    return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' + (
-            noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
-    }).join('&');
+    return str;
 }
 
 
