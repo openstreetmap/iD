@@ -38,7 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.32.0-dev)
 
 #### :sparkles: Usability & Accessibility
-* Enable autofill for the `source` tag in the changeset panel ([#10764], thanks [@k-yle])
+* Autocomplete changeset `source` tag with sources of the previous 100 changesets of the user ([#10764], thanks [@k-yle])
 * Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
