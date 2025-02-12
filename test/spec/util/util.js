@@ -99,6 +99,10 @@ describe('iD.util', function() {
             expect(iD.utilStringQs('#?foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
             expect(iD.utilStringQs('#?')).to.eql({});
         });
+        it('supports both + and %20 for escaping spaces', function() {
+            expect(iD.utilStringQs('#?foo=a+b%20c')).to.eql({foo: 'a b c'});
+            expect(iD.utilStringQs('#?')).to.eql({});
+        });
     });
 
     it('utilQsString', function() {

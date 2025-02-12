@@ -362,13 +362,7 @@ export function utilStringQs(str) {
     while (i < str.length && (str[i] === '?' || str[i] === '#')) i++;
     str = str.slice(i);
 
-    return str.split('&').reduce(function(obj, pair){
-        var parts = pair.split('=');
-        if (parts.length === 2) {
-            obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
-        }
-        return obj;
-    }, {});
+    return Object.fromEntries(new URLSearchParams(str));
 }
 
 
