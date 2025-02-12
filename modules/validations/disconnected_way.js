@@ -229,9 +229,10 @@ export function validationDisconnectedWay() {
                 // ineligible for this fix
                 if (!isConnectedToBuilding) continue;
 
-                const entranceTags = highway.tags.highway in osmPathHighwayTagValues
-                    ? { entrance: 'yes' }
-                    : { amenity: 'parking_entrance' };
+                // this autofix is only supported for paths
+                if (!(highway.tags.highway in osmPathHighwayTagValues)) continue;
+
+                const entranceTags = { entrance: 'yes' };
 
                 const presetName = presetManager.matchTags(entranceTags, 'vertex').name();
 

@@ -1989,7 +1989,7 @@ en:
       continue_from_end:
         title: Continue drawing from end
       tag_as_entrance:
-        title: Mark the endpoint as a {presetName}
+        title: Mark the endpoint as “{presetName}”
       convert_to_line:
         title: Convert this to a line
         annotation: Converted an area to a line.

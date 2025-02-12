@@ -101,7 +101,7 @@ describe('iD.validations.disconnected_way', function () {
     });
 
     describe.each([
-        ['unclassified', { amenity: 'parking_entrance' }],
+        // ['unclassified', { amenity: 'parking_entrance' }],
         ['path', { entrance: 'yes' }]
     ])('highway=%s -> %s', (highway, entranceTags) => {
         it('suggests adding an entrance node if the isolated highway network touches a building outline', () => {
