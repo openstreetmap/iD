@@ -38,8 +38,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.32.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Autocomplete changeset `source` tag with sources of the previous 100 changesets of the user ([#10764], thanks [@k-yle])
 * Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
-* linkify keys & tags in the preset docs from the wiki ([#10763], thanks [@k-yle])
+* Linkify keys & tags in the preset docs from the wiki ([#10763], thanks [@k-yle])
+* Allow broken (unclosed) areas to be continued ([#9635], thanks [@k-yle])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 #### :camera: Street-Level
@@ -50,8 +52,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
 * Preserve imagery offset during tile layer switching transition ([#10748])
+* Fix the relation membership list using a non-deterministic order ([#10648], thanks [@k-yle])
 * Fix over-saturated map tiles near the border of the tile service's coverage area ([#10747], thanks [@hlfan])
 * Fix too dim markers of selected/hovered photo of some street level imagery layers ([#10755], thanks [@draunger])
+* Fix `+` symbol appearing in changeset comments from external tools ([#10766], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -59,12 +63,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 
 [#7381]: https://github.com/openstreetmap/iD/issues/7381
+[#9635]: https://github.com/openstreetmap/iD/pull/9635
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
+[#10648]: https://github.com/openstreetmap/iD/pull/10648
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
 [#10755]: https://github.com/openstreetmap/iD/issues/10755
 [#10763]: https://github.com/openstreetmap/iD/pull/10763
+[#10764]: https://github.com/openstreetmap/iD/issues/10764
+[#10766]: https://github.com/openstreetmap/iD/pull/10766
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
@@ -110,6 +118,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add Ladin (language code `lld`) as an available option for multilingual names
 * Add 30 indigenous languages as dropdown options for multilingual names ([#10684], thanks [@k-yle])
 * Add `lang`uage attributes to input fields for multilingual names, as well as wikidata and wikipedia fields ([#10716], thanks [@mapmeld])
+* Add `housename` to address format in Bolivia ([#10727])
+#### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 * Fix walkthrough from showing tooltips on wrong location under certain circumstances ([#10650], [#10624], [#10634])
 #### :rocket: Presets
@@ -143,6 +153,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10683]: https://github.com/openstreetmap/iD/issues/10683
 [#10684]: https://github.com/openstreetmap/iD/pull/10684
 [#10716]: https://github.com/openstreetmap/iD/pull/10716
+[#10727]: https://github.com/openstreetmap/iD/issues/10727
 [@winstonsung]: https://github.com/winstonsung/
 [@Nekzuris]: https://github.com/Nekzuris
 [@michaelabon]: https://github.com/michaelabon

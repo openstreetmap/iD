@@ -15,7 +15,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
   _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
-* __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
+* __`comment`__ - Prefills the changeset comment.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
   _Example:_ `disable_features=water,service_roads,points,paths,boundaries`<br/>
@@ -24,7 +24,7 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
   _Example:_ `gpx=https://gist.githubusercontent.com/answerquest/9445352b60ca5b44714675eae00f243a/raw/56a6343a29223318f4a697bfd16cbb2c3b8155ad/sample_boundary.gpx`
-* __`hashtags`__ - Prefills the changeset hashtags.  Pass a url encoded list of event
+* __`hashtags`__ - Prefills the changeset hashtags.  Pass a list of event
   hashtags separated by commas, semicolons, or spaces.  Leading '#' symbols are
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
@@ -55,15 +55,18 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
-* __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
+* __`source`__ - Prefills the changeset source.<br/>
   _Example:_ `source=Bing%3BMapillary`
-* __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationDisable=crossing_ways/highway*,crossing_ways/tunnel*`
-* __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationWarning=crossing_ways/highway*,crossing_ways/tunnel*`
-* __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationError=crossing_ways/highway*,crossing_ways/tunnel*`
 * __`walkthrough=true`__ - Start the walkthrough automatically
+
+Pass these parameters as a `x-www-form-urlencoded` string in the _hash_ portion of the URL, similarly to how you how a _query_ string of an URL is typically constructed. Input strings have to be [percent encoded](https://en.wikipedia.org/wiki/Percent-encoding) (spaces can be represented either as `+` or `%20`), for example using [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/toString) in Javascript.
+
 
 ##### iD on openstreetmap.org (Rails Port)
 

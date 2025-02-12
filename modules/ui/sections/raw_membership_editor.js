@@ -50,6 +50,8 @@ export function uiSectionRawMembershipEditor(context) {
     var _entityIDs = [];
     var _showBlank;
     var _maxMemberships = 1000;
+    /** @type {Set<string>} relations that were added after this panel was opened */
+    const recentlyAdded = new Set();
 
     function getSharedParentRelations() {
         var parents = [];
@@ -114,7 +116,37 @@ export function uiSectionRawMembershipEditor(context) {
             membership.role = roles.length === 1 ? roles[0] : roles;
         });
 
-        return memberships;
+        const existingRelations = memberships
+            .filter(membership => !recentlyAdded.has(membership.relation.id))
+            .map(membership => ({
+                ...membership,
+                // We only sort relations that were not added just now.
+                // Sorting uses the same label as shown in the UI.
+                // If the label is not unique, the relation ID ensures
+                // that the sort order is still stable.
+                _sortKey: [
+                    baseDisplayValue(membership.relation),
+                    membership.relation.id,
+                ].join('-'),
+            }))
+            .sort((a, b) => {
+                return a._sortKey.localeCompare(
+                    b._sortKey,
+                    localizer.localeCodes(),
+                    { numeric: true },
+                );
+            });
+
+
+        const newlyAddedRelations = memberships
+            .filter(membership => recentlyAdded.has(membership.relation.id));
+
+        return [
+            // the sorted relations come first
+            ...existingRelations,
+            // then the ones that were just added from this panel
+            ...newlyAddedRelations,
+        ];
     }
 
     function selectRelation(d3_event, d) {
@@ -184,6 +216,7 @@ export function uiSectionRawMembershipEditor(context) {
         }
 
         if (d.relation) {
+            recentlyAdded.add(d.relation.id);
             context.perform(
                 actionAddMembers(d.relation.id, _entityIDs, role),
                 t('operations.add_member.annotation', {
@@ -251,14 +284,6 @@ export function uiSectionRawMembershipEditor(context) {
 
         var graph = context.graph();
 
-        function baseDisplayValue(entity) {
-            var matched = presetManager.match(entity, graph);
-            var presetName = (matched && matched.name()) || t('inspector.relation');
-            var entityName = utilDisplayName(entity) || '';
-
-            return presetName + ' ' + entityName;
-        }
-
         function baseDisplayLabel(entity) {
             var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
@@ -321,6 +346,15 @@ export function uiSectionRawMembershipEditor(context) {
 
         result.unshift(newRelation);
         callback(result);
+    }
+
+    function baseDisplayValue(entity) {
+        const graph = context.graph();
+        var matched = presetManager.match(entity, graph);
+        var presetName = (matched && matched.name()) || t('inspector.relation');
+        var entityName = utilDisplayName(entity) || '';
+
+        return presetName + ' ' + entityName;
     }
 
     function renderDisclosureContent(selection) {
@@ -621,8 +655,12 @@ export function uiSectionRawMembershipEditor(context) {
 
     section.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
+        const didChange = _entityIDs.join(',') !== val.join(',');
         _entityIDs = val;
         _showBlank = false;
+        if (didChange) {
+            recentlyAdded.clear(); // reset when the selected feature changes
+        }
         return section;
     };
 

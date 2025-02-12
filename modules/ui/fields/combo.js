@@ -43,6 +43,7 @@ export function uiFieldCombo(field, context) {
     var _tags;
     var _countryCode;
     var _staticPlaceholder;
+    var _customOptions = [];
 
     // initialize deprecated tags array
     var _dataDeprecated = [];
@@ -181,7 +182,7 @@ export function uiFieldCombo(field, context) {
         } else {
             options = [].concat(field.options, stringsField.options).filter(Boolean);
         }
-        return options.map(function(v) {
+        const result = options.map(function(v) {
             const labelId = getLabelId(stringsField, v);
             return {
                 key: v,
@@ -191,6 +192,7 @@ export function uiFieldCombo(field, context) {
                 klass: stringsField.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
         });
+        return [...result, ..._customOptions];
     }
 
 
@@ -925,6 +927,10 @@ export function uiFieldCombo(field, context) {
             })
         );
     }
+
+    combo.setCustomOptions = (newValue) => {
+        _customOptions = newValue;
+    };
 
 
     combo.focus = function() {

@@ -57,6 +57,7 @@ export function uiChangesetEditor(context) {
 
         if (initial) {
             var commentField = selection.select('.form-field-comment textarea');
+            const sourceField = _fieldsArr.find(field => field.id === 'source');
             var commentNode = commentField.node();
 
             if (commentNode) {
@@ -82,6 +83,15 @@ export function uiChangesetEditor(context) {
                         .call(commentCombo
                             .data(utilArrayUniqBy(comments, 'title'))
                         );
+
+                    // add extra dropdown options to the `source` field
+                    // based on the values used in recent changesets.
+                    const recentSources = changesets
+                        .flatMap((changeset) => changeset.tags.source?.split(';'))
+                        .filter(Boolean)
+                        .map(title => ({ title, value: title, klass: 'raw-option' }));
+
+                    sourceField.impl.setCustomOptions(utilArrayUniqBy(recentSources, 'title'));
                 });
             }
         }

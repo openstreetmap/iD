@@ -2,7 +2,7 @@ import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { actionReverse } from '../actions/reverse';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
-import { osmFlowingWaterwayTagValues, osmOneWayTags, osmRoutableHighwayTagValues } from '../osm/tags';
+import { osmFlowingWaterwayTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 
@@ -17,7 +17,7 @@ export function validationImpossibleOneway() {
 
         if (!typeForWay(entity)) return [];
 
-        if (!isOneway(entity)) return [];
+        if (!entity.isOneWay()) return [];
 
         var firstIssues = issuesForNode(entity, entity.first());
         var lastIssues = issuesForNode(entity, entity.last());
@@ -30,18 +30,6 @@ export function validationImpossibleOneway() {
             if (osmRoutableHighwayTagValues[way.tags.highway]) return 'highway';
             if (osmFlowingWaterwayTagValues[way.tags.waterway]) return 'waterway';
             return null;
-        }
-
-        function isOneway(way) {
-            if (way.tags.oneway === 'yes') return true;
-            if (way.tags.oneway) return false;
-
-            for (var key in way.tags) {
-                if (osmOneWayTags[key] && osmOneWayTags[key][way.tags[key]]) {
-                    return true;
-                }
-            }
-            return false;
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
@@ -129,7 +117,7 @@ export function validationImpossibleOneway() {
             if (wayType === 'waterway' && attachedWaysOfSameType.length === 0) return [];
 
             var attachedOneways = attachedWaysOfSameType.filter(function(attachedWay) {
-                return isOneway(attachedWay);
+                return attachedWay.isOneWay();
             });
 
             // ignore if the way is connected to some non-oneway features
