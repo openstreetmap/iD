@@ -418,11 +418,11 @@ path.line.casing.tag-highway-service {
 /* special service roads and bus guideways */
 /* with `service=* tag`  (e.g. parking_aisle, alley, drive-through) */
 path.line.stroke.tag-highway-bus_guideway,
-path.line.stroke.tag-highway-service.tag-service {
+path.line.stroke.tag-highway.tag-service {
     stroke: #dca;
 }
 path.line.casing.tag-highway-bus_guideway,
-path.line.casing.tag-highway-service.tag-service {
+path.line.casing.tag-highway.tag-service {
     stroke: #666;
 }
 
