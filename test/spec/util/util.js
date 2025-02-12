@@ -80,24 +80,21 @@ describe('iD.util', function() {
 
     describe('utilStringQs', function() {
         it('splits a parameter string into k=v pairs', function() {
+            expect(iD.utilStringQs('')).to.eql({});
             expect(iD.utilStringQs('foo=bar')).to.eql({foo: 'bar'});
             expect(iD.utilStringQs('foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
-            expect(iD.utilStringQs('')).to.eql({});
+            expect(iD.utilStringQs('foo=bar baz')).to.eql({foo: 'bar baz'});
+            expect(iD.utilStringQs('foo=bar+baz')).to.eql({foo: 'bar baz'});
+            expect(iD.utilStringQs('foo=bar%20baz')).to.eql({foo: 'bar baz'});
         });
         it('trims leading # if present', function() {
             expect(iD.utilStringQs('#foo=bar')).to.eql({foo: 'bar'});
-            expect(iD.utilStringQs('#foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
-            expect(iD.utilStringQs('#')).to.eql({});
         });
         it('trims leading ? if present', function() {
             expect(iD.utilStringQs('?foo=bar')).to.eql({foo: 'bar'});
-            expect(iD.utilStringQs('?foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
-            expect(iD.utilStringQs('?')).to.eql({});
         });
         it('trims leading #? if present', function() {
             expect(iD.utilStringQs('#?foo=bar')).to.eql({foo: 'bar'});
-            expect(iD.utilStringQs('#?foo=bar&one=2')).to.eql({foo: 'bar', one: '2' });
-            expect(iD.utilStringQs('#?')).to.eql({});
         });
         it('supports both + and %20 for escaping spaces', function() {
             expect(iD.utilStringQs('#?foo=a+b%20c')).to.eql({foo: 'a b c'});

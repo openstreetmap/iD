@@ -358,10 +358,7 @@ export function utilCombinedTags(entityIDs, graph) {
 
 
 export function utilStringQs(str) {
-    var i = 0;  // advance past any leading '?' or '#' characters
-    while (i < str.length && (str[i] === '?' || str[i] === '#')) i++;
-    str = str.slice(i);
-
+    str = str.replace(/^[#?]{0,2}/, ''); // advance past any leading '?' or '#' characters
     return Object.fromEntries(new URLSearchParams(str));
 }
 
