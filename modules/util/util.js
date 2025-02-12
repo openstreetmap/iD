@@ -358,31 +358,21 @@ export function utilCombinedTags(entityIDs, graph) {
 
 
 export function utilStringQs(str) {
-    var i = 0;  // advance past any leading '?' or '#' characters
-    while (i < str.length && (str[i] === '?' || str[i] === '#')) i++;
-    str = str.slice(i);
-
-    return str.split('&').reduce(function(obj, pair){
-        var parts = pair.split('=');
-        if (parts.length === 2) {
-            obj[parts[0]] = (null === parts[1]) ? '' : decodeURIComponent(parts[1]);
-        }
-        return obj;
-    }, {});
+    str = str.replace(/^[#?]{0,2}/, ''); // advance past any leading '?' or '#' characters
+    return Object.fromEntries(new URLSearchParams(str));
 }
 
 
-export function utilQsString(obj, noencode) {
-    // encode everything except special characters used in certain hash parameters:
-    // "/" in map states, ":", ",", {" and "}" in background
-    function softEncode(s) {
-        return encodeURIComponent(s).replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
+export function utilQsString(obj, softEncode) {
+    let str = new URLSearchParams(obj).toString();
+    if (softEncode) {
+        // for better readability of URL hashes: optionally
+        // leave some special characters unescaped
+        //   "/" used in map state
+        //   ":", ",", {" and "}" used in background param
+        str = str.replace(/(%2F|%3A|%2C|%7B|%7D)/g, decodeURIComponent);
     }
-
-    return Object.keys(obj).sort().map(function(key) {
-        return encodeURIComponent(key) + '=' + (
-            noencode ? softEncode(obj[key]) : encodeURIComponent(obj[key]));
-    }).join('&');
+    return str;
 }
 
 
