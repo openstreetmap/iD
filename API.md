@@ -270,7 +270,7 @@ iD.fileFetcher.cache().imagery = [{
 
 Each imagery source should have the following properties:
 * `id` - Unique identifier for this source (also used as a url parameter)
-* `name` - Display the name of the source
+* `name` - Label of the source
 * `type` - Source type, currently only `tms` is supported
 * `template` - Url template, valid replacement tokens include:
   * `{z}`, `{x}`, `{y}` - for Z/X/Y scheme
