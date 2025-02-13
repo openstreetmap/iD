@@ -20,7 +20,6 @@ import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
-import * as d3 from 'd3';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -365,8 +364,7 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('for', function(d) {
                 return d.domId;
             });
-
-            var labelLink = labelEnter
+        var labelLink = labelEnter
             .append('span')
             .attr('class', 'label-text')
             .append('a')
