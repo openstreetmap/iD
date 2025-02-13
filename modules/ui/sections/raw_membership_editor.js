@@ -365,30 +365,17 @@ export function uiSectionRawMembershipEditor(context) {
             .attr('for', function(d) {
                 return d.domId;
             });
-            var tooltip = d3.select('body') // tooltip made for relations
-            .append('span') // Appending a span as tooltip
-            .style('position', 'absolute')
-            .style('visibility', 'hidden')
-            .style('background-color', 'black')
-            .style('color', 'white')
-            .style('padding', '5px')
-            .style('border-radius', '4px')
-            .style('pointer-events', 'none') // Prevent interfering with mouse events
-            .text(''); // Initialize the text of tooltip empty  
-      
-        var labelLink = labelEnter
+
+            var labelLink = labelEnter
             .append('span')
             .attr('class', 'label-text')
-            .on('mouseover',function(d){
-               tooltip.text(d.toElement.innerText)
-               .style('visibility','visible')
-               .style('top', (d.pageY + 10) + 'px') // Position below the cursor
-               .style('left', (d.pageX + 10) + 'px'); // Position right of the cursor
-            }).on('mouseout',function(d){
-                tooltip.style('visibility','hidden');
-            })
             .append('a')
             .attr('href', '#')
+            .attr('title', function(d) {
+                return [d.relation.tags.network, d.relation.tags.ref, d.relation.tags.name]
+                .filter(Boolean)
+                .join(' ');            
+            }) // This sets the tooltip
             .on('click', selectRelation);
 
         labelLink
