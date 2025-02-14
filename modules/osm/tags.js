@@ -39,7 +39,7 @@ export const osmLifecyclePrefixes = {
         id : 'abandoned',
         referenceKey : 'abandoned:*',
         visibleByDeafult : true,
-        icon : defaultIcon
+        icon : '#iD-icon-cobweb'
     },
     was: {
         id : 'was',

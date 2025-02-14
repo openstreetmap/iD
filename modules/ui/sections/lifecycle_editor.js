@@ -79,7 +79,7 @@ export function uiSectionLifecycleEditor(context) {
             .attr('class', 'remove-icon')
             .attr('id', 'make-functional')
             .attr('title', t('icons.remove'))
-            .attr('style', 'display:block')
+            .attr('style', _currentLifecycle === 'functional' ? 'display:none' : 'display:block')
             .call(svgIcon('#iD-operation-delete'))
             .on('click', makeFunctional);
 
@@ -166,7 +166,7 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     function getCurrentLifecycleTag(){
-        
+
         let lifecycleTag;
         const tags = getEntityTags();
         const tagKeys = (Object.keys(tags));
@@ -180,7 +180,7 @@ export function uiSectionLifecycleEditor(context) {
         }
 
         return 'functional';
-        
+
     }
 
     function checkRadio() {
