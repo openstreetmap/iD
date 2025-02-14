@@ -8,7 +8,7 @@ import { modeSelect } from '../modes/select';
 import { geoAngle, geoExtent, geoLatToMeters, geoLonToMeters, geoLineIntersection,
     geoSphericalClosestNode, geoSphericalDistance, geoVecAngle, geoVecLength, geoMetersToLat, geoMetersToLon } from '../geo';
 import { osmNode } from '../osm/node';
-import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
+import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTagValues, osmRoutableAerowayTags, osmRoutableHighwayTagValues } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
@@ -44,7 +44,7 @@ export function validationCrossingWays(context) {
     }
 
     function allowsBridge(featureType) {
-        return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
+        return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway' || featureType === 'aeroway';
     }
     function allowsTunnel(featureType) {
         return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
@@ -62,6 +62,8 @@ export function validationCrossingWays(context) {
         if (geometry !== 'line' && geometry !== 'area') return null;
 
         var tags = entity.tags;
+
+        if (tags.aeroway in osmRoutableAerowayTags) return 'aeroway';
 
         if (hasTag(tags, 'building') && !ignoredBuildings[tags.building]) return 'building';
         if (hasTag(tags, 'highway') && osmRoutableHighwayTagValues[tags.highway]) return 'highway';
@@ -126,6 +128,9 @@ export function validationCrossingWays(context) {
         primary: true, primary_link: true, secondary: true, secondary_link: true
     };
 
+    /**
+     * @returns {object | null} the tags for the connecting node, or null if the entities should not be joined
+     */
     function tagsForConnectionNodeIfAllowed(entity1, entity2, graph, lessLikelyTags) {
         var featureType1 = getFeatureType(entity1, graph);
         var featureType2 = getFeatureType(entity2, graph);
@@ -133,6 +138,27 @@ export function validationCrossingWays(context) {
         var geometry1 = entity1.geometry(graph);
         var geometry2 = entity2.geometry(graph);
         var bothLines = geometry1 === 'line' && geometry2 === 'line';
+
+        /**
+         * @typedef {NonNullable<ReturnType<getFeatureType>>} FeatureType
+         * @type {`${FeatureType}-${FeatureType}`}
+         */
+        const featureTypes = [featureType1, featureType2].sort().join('-');
+
+        if (featureTypes === 'aeroway-aeroway') return {};
+
+        if (featureTypes === 'aeroway-highway') {
+            const isServiceRoad = entity1.tags.highway === 'service' || entity2.tags.highway === 'service';
+            const isPath = entity1.tags.highway in osmPathHighwayTagValues || entity2.tags.highway in osmPathHighwayTagValues;
+            // only significant roads get the aeroway=aircraft_crossing tag
+            return isServiceRoad || isPath ? {} : { aeroway: 'aircraft_crossing' };
+        }
+
+        if (featureTypes === 'aeroway-railway') {
+            return { aeroway: 'aircraft_crossing', railway: 'level_crossing' };
+        }
+
+        if (featureTypes === 'aeroway-waterway') return null;
 
         if (featureType1 === featureType2) {
             if (featureType1 === 'highway') {
@@ -167,7 +193,6 @@ export function validationCrossingWays(context) {
             if (featureType1 === 'railway') return {};
 
         } else {
-            var featureTypes = [featureType1, featureType2];
             if (featureTypes.indexOf('highway') !== -1) {
                 if (featureTypes.indexOf('railway') !== -1) {
                     if (!bothLines) return {};

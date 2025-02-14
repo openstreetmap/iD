@@ -511,6 +511,26 @@ describe('iD.actionSplit', function () {
             expect(g4.entity('-').nodes).to.eql(['b', 'c', 'd']);
             expect(g4.entity('=').nodes).to.eql(['d', 'a', 'b']);
         });
+
+        it('splits a closed way at the given points', function () {
+            //
+            // Situation:
+            //    a ---- b
+            //    |      |
+            //    d ---- c
+            //
+            var graph = iD.coreGraph([
+                iD.osmNode({ id: 'a', loc: [0, 1] }),
+                iD.osmNode({ id: 'b', loc: [1, 1] }),
+                iD.osmNode({ id: 'c', loc: [1, 0] }),
+                iD.osmNode({ id: 'd', loc: [0, 0] }),
+                iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
+            ]);
+
+            var g1 = iD.actionSplit(['a', 'b'], ['='])(graph);
+            expect(g1.entity('-').nodes).to.eql(['b', 'c', 'd', 'a']);
+            expect(g1.entity('=').nodes).to.eql(['a', 'b']);
+        });
     });
 
 

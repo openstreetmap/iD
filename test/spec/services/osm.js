@@ -163,14 +163,14 @@ describe('iD.serviceOsm', function () {
             });
         });
 
-        it('retries an authenticated call unauthenticated if 400 Bad Request', function (done) {
+        it('retries an authenticated call unauthenticated if 401 Unauthorized', function (done) {
             fetchMock.mock('https://www.openstreetmap.org' + path, {
                 body: response,
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
             serverXHR.respondWith('GET', 'https://www.openstreetmap.org' + path,
-                [400, { 'Content-Type': 'text/plain' }, 'Bad Request']);
+                [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
 
             login();
 

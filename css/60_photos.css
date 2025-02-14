@@ -134,17 +134,15 @@ li.list-item-photos.active:after {
     cursor: pointer;
 }
 
-.viewfield-group.currentView * {
-    fill: #ffee00 !important;
-}
-.viewfield-group.hovered * {
-    fill: #eebb00 !important;
-}
-
 .viewfield-group circle {
     stroke: #555;
     stroke-width: 1;
     stroke-opacity: 0.4;
+    fill-opacity: 0.4;
+}
+.viewfield-group .viewfield {
+    stroke-width: 0;
+    stroke: #222;
     fill-opacity: 0.4;
 }
 .viewfield-group.highlighted circle {
@@ -152,36 +150,38 @@ li.list-item-photos.active:after {
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
-.viewfield-group.highlighted.hovered circle {
+.viewfield-group.highlighted .viewfield {
+    stroke-width: 1;
+    fill-opacity: 0.8;
+}
+.viewfield-group.hovered circle {
+    fill: #eebb00;
     stroke: #222;
     stroke-width: 2;
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
-.viewfield-group.highlighted.currentView circle {
+.viewfield-group.hovered .viewfield {
+    fill: #eebb00;
+    stroke: #222;
+    stroke-width: 1;
+    fill-opacity: 0.8;
+}
+.viewfield-group.currentView circle {
+    fill: #ffee00;
     stroke: #222;
     stroke-width: 2;
     stroke-opacity: 1;
     fill-opacity: 1;
 }
-
-.viewfield-group .viewfield {
-    stroke-width: 0;
+.viewfield-group.currentView .viewfield {
+    fill: #ffee00;
     stroke: #222;
-    fill-opacity: 0.4;
-}
-.viewfield-group.highlighted .viewfield {
     stroke-width: 1;
-    fill-opacity: 0.8;
-}
-.viewfield-group.highlighted.hovered .viewfield {
-    stroke-width: 1;
-    fill-opacity: 0.8;
-}
-.viewfield-group.highlighted.currentView .viewfield {
-    stroke-width: 1;
+    stroke-opacity: 1;
     fill-opacity: 0.9;
 }
+
 
 .viewfield-group.currentView .viewfield-scale {
     transform: scale(2,2);
@@ -304,6 +304,8 @@ li.list-item-photos.list-item-mapilio.active:after {
 }
 .layer-mapilio .viewfield-group * {
     fill: #0056f1;
+}
+.layer-mapilio .viewfield-group:not(.currentView):not(.hovered) * {
     stroke: #ffffff;
     stroke-opacity: .6;
     fill-opacity: .6;
@@ -384,7 +386,7 @@ label.panoramax-hd {
 }
 
 .slider-wrap {
-    display: inline-block;  
+    display: inline-block;
 }
 
 .year-datalist {
@@ -395,7 +397,6 @@ label.panoramax-hd {
 .list-option-date-slider{
     direction: rtl
 }
-
 
 /* Streetside Viewer (pannellum) */
 .ms-wrapper .photo-attribution {
