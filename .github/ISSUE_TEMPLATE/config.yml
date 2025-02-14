@@ -10,5 +10,5 @@ contact_links:
     url: https://github.com/osmlab/editor-layer-index/issues
     about: Please create an issue in the editor-layer-index repository.
   - name: You have a general question or want to discuss something.
-    url: https://github.community/
+    url: https://github.com/openstreetmap/iD/discussions
     about: Please ask and answer questions in iD's Discussions tab.

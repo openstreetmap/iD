@@ -1,7 +1,10 @@
+import css from '../../../css/55_cursors.css?raw';
+
 describe('iD.Map', function() {
     var content, context, map;
 
     beforeEach(function() {
+        d3.select('head').append('style').html(css);
         content = d3.select('body').append('div');
         context = iD.coreContext().assetPath('../dist/').init().container(content);
         map = context.map();
@@ -164,6 +167,7 @@ describe('iD.Map', function() {
             return window.getComputedStyle(selection.node()).cursor;
         }
 
+        const specify = it;
         specify('points use select-point cursor in browse and select modes', function() {
             mode.attr('class', 'ideditor mode-browse');
             expect(cursor(point)).to.match(/cursor-select-point/);

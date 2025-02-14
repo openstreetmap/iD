@@ -1,11 +1,30 @@
-/* eslint-disable no-console */
 const fs = require('fs');
-let sources = require('editor-layer-index/imagery.json');
 const prettyStringify = require('json-stringify-pretty-compact');
 
+/** @type {import("geojson").FeatureCollection} */
+const sources = JSON.parse(
+  fs.readFileSync(require.resolve('editor-layer-index/imagery.geojson'), 'utf8')
+);
+
 if (fs.existsSync('./data/manual_imagery.json')) {
+  /** @type {any[]} */
+  const manualImagery = JSON.parse(fs.readFileSync('./data/manual_imagery.json', 'utf8'));
   // we can include additional imagery sources that aren't in the index
-  sources = sources.concat(JSON.parse(fs.readFileSync('./data/manual_imagery.json')));
+  sources.features = sources.features
+    .filter(source => !manualImagery.find(manualSource => manualSource.id === source.properties?.id));
+
+  sources.features.push(
+    ...manualImagery.map(source => {
+      /** @type {import("geojson").Feature} */
+      const feature = {
+        type: 'Feature',
+        properties: { ...source, ...source.extent },
+        geometry: null,
+        bbox: source.bbox,
+      };
+      return feature;
+    })
+  );
 }
 
 let imagery = [];
@@ -14,54 +33,36 @@ let imagery = [];
 let cutoffDate = new Date();
 cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
 
+const discard = [
+  /^osmbe$/,                              // 'OpenStreetMap (Belgian Style)'
+  /^osmfr(-(basque|breton|occitan))?$/,   // 'OpenStreetMap (French, Basque, Breton, Occitan Style)'
+  /^osm-mapnik-german_style$/,            // 'OpenStreetMap (German Style)'
+  /^HDM_HOT$/,                            // 'OpenStreetMap (HOT Style)'
+  /^osm-mapnik-black_and_white$/,         // 'OpenStreetMap (Standard Black & White)'
+  /^osm-mapnik-no_labels$/,               // 'OpenStreetMap (Mapnik, no labels)'
+  /^OpenStreetMap-turistautak$/,          // 'OpenStreetMap (turistautak)'
 
-const discard = {
-  'osmbe': true,                        // 'OpenStreetMap (Belgian Style)'
-  'osmfr': true,                        // 'OpenStreetMap (French Style)'
-  'osm-mapnik-german_style': true,      // 'OpenStreetMap (German Style)'
-  'HDM_HOT': true,                      // 'OpenStreetMap (HOT Style)'
-  'osm-mapnik-black_and_white': true,   // 'OpenStreetMap (Standard Black & White)'
-  'osm-mapnik-no_labels': true,         // 'OpenStreetMap (Mapnik, no labels)'
-  'OpenStreetMap-turistautak': true,    // 'OpenStreetMap (turistautak)'
+  /^cyclosm$/,                            // 'CyclOSM'
+  /^hike_n_bike$/,                        // 'Hike & Bike'
+  /^landsat$/,                            // 'Landsat'
+  /^skobbler$/,                           // 'Skobbler'
+  /^stamen-terrain-background$/,          // 'Stamen Terrain'
+  /^public_transport_oepnv$/,             // 'Public Transport (ÖPNV)'
+  /^tf-(cycle|landscape|outdoors)$/,      // 'Thunderforest OpenCycleMap, Landscape, Outdoors'
+  /^qa_no_address$/,                      // 'QA No Address'
+  /^wikimedia-map$/,                      // 'Wikimedia Map'
 
-  'hike_n_bike': true,                  // 'Hike & Bike'
-  'landsat': true,                      // 'Landsat'
-  'skobbler': true,                     // 'Skobbler'
-  'public_transport_oepnv': true,       // 'Public Transport (ÖPNV)'
-  'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
-  'tf-landscape': true,                 // 'Thunderforest Landscape'
-  'tf-outdoors': true,                  // 'Thunderforest Outdoors'
-  'qa_no_address': true,                // 'QA No Address'
-  'wikimedia-map': true,                // 'Wikimedia Map'
+  /^openinframap-(petroleum|power|telecoms)$/,
+  /^openpt_map$/,
+  /^openrailwaymap$/,
+  /^openseamap$/,
+  /^opensnowmap-overlay$/,
 
-  'openinframap-petroleum': true,
-  'openinframap-power': true,
-  'openinframap-telecoms': true,
-  'openpt_map': true,
-  'openrailwaymap': true,
-  'openseamap': true,
-  'opensnowmap-overlay': true,
-
-  'US-TIGER-Roads-2012': true,
-  'US-TIGER-Roads-2014': true,
-
-  'Waymarked_Trails-Cycling': true,
-  'Waymarked_Trails-Hiking': true,
-  'Waymarked_Trails-Horse_Riding': true,
-  'Waymarked_Trails-MTB': true,
-  'Waymarked_Trails-Skating': true,
-  'Waymarked_Trails-Winter_Sports': true,
-
-  'OSM_Inspector-Addresses': true,
-  'OSM_Inspector-Geometry': true,
-  'OSM_Inspector-Highways': true,
-  'OSM_Inspector-Multipolygon': true,
-  'OSM_Inspector-Places': true,
-  'OSM_Inspector-Routing': true,
-  'OSM_Inspector-Tagging': true,
-
-  'EOXAT2018CLOUDLESS': true
-};
+  /^US-TIGER-Roads-201\d/,
+  /^Waymarked_Trails/,
+  /^OSM_Inspector/,
+  /^EOXAT/
+];
 
 const supportedWMSProjections = [
   // Web Mercator
@@ -78,16 +79,19 @@ const supportedWMSProjections = [
   'EPSG:4326'
 ];
 
+sources.features.forEach(feature => {
+  const source = feature.properties;
 
-sources.forEach(source => {
+  if (!source) return;
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
-  if (source.id in discard) return;
+  if (discard.some(regex => regex.test(source.id))) return;
 
   let im = {
     id: source.id,
     name: source.name,
     type: source.type,
-    template: source.url
+    template: source.url,
+    category: source.category,
   };
 
   // Some sources support 512px tiles
@@ -104,7 +108,7 @@ sources.forEach(source => {
   if (source.type === 'wms') {
     const projection = source.available_projections && supportedWMSProjections.find(p => source.available_projections.indexOf(p) !== -1);
     if (!projection) return;
-    if (sources.some(other => other.name === source.name && other.type !== source.type)) return;
+    if (sources.features.some(other => other.properties?.name === source.name && other.properties?.type !== source.type)) return;
     im.projection = projection;
   }
 
@@ -128,7 +132,7 @@ sources.forEach(source => {
     }
   }
 
-  let extent = source.extent || {};
+  let extent = source;
   if (extent.min_zoom || extent.max_zoom) {
     im.zoomExtent = [
       extent.min_zoom || 0,
@@ -136,9 +140,13 @@ sources.forEach(source => {
     ];
   }
 
-  if (extent.polygon) {
-    im.polygon = extent.polygon;
-  } else if (extent.bbox) {
+  if (feature.geometry) {
+    if (feature.geometry.type === 'Polygon') {
+      im.polygon = [feature.geometry.coordinates?.[0]];
+    } else if (feature.geometry.type === 'MultiPolygon') {
+      im.polygon = feature.geometry.coordinates.map(ring => ring[0]);
+    }
+  } else if (feature.bbox) {
     im.polygon = [[
       [extent.bbox.min_lon, extent.bbox.min_lat],
       [extent.bbox.min_lon, extent.bbox.max_lat],

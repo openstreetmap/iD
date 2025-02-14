@@ -6,6 +6,7 @@ import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
 import { utilRebind } from '../util/rebind';
 import { utilHighlightEntities } from '../util/util';
+import { utilGetDimensions } from '../util/dimensions';
 import { svgIcon } from '../svg/icon';
 
 
@@ -104,8 +105,8 @@ export function uiEditMenu(context) {
 
         buttonsEnter.each(function(d) {
             var tooltip = uiTooltip()
-                .heading(d.title)
-                .title(d.tooltip())
+                .heading(() => d.title)
+                .title(d.tooltip)
                 .keys([d.keys[0]]);
 
             _tooltips.push(tooltip);
@@ -120,8 +121,8 @@ export function uiEditMenu(context) {
         if (showLabels) {
             buttonsEnter.append('span')
                 .attr('class', 'label')
-                .html(function(d) {
-                    return d.title;
+                .each(function(d) {
+                    d3_select(this).call(d.title);
                 });
         }
 
@@ -164,7 +165,7 @@ export function uiEditMenu(context) {
                         .duration(4000)
                         .iconName('#iD-operation-' + operation.id)
                         .iconClass('operation disabled')
-                        .label(operation.tooltip)();
+                        .label(operation.tooltip())();
                 }
             } else {
                 if (lastPointerUpType === 'touch' ||
@@ -226,6 +227,9 @@ export function uiEditMenu(context) {
         }
 
         var origin = geoVecAdd(anchorLoc, offset);
+        // repositioning the menu to account for the top menu height
+        var _verticalOffset = parseFloat(utilGetDimensions(d3_select('.top-toolbar-wrap'))[1]);
+        origin[1] -= _verticalOffset;
 
         _menu
             .style('left', origin[0] + 'px')

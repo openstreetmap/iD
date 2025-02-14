@@ -10,7 +10,7 @@ export function modeAddNote(context) {
     var mode = {
         id: 'add-note',
         button: 'note',
-        description: t.html('modes.add_note.description'),
+        description: t.append('modes.add_note.description'),
         key: t('modes.add_note.key')
     };
 

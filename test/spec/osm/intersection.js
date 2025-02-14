@@ -305,7 +305,7 @@ describe('iD.osmIntersection', function() {
             expect(turns[0].u).to.be.true;
         });
 
-        it('restricts turns with a restriction relation', function() {
+        it('restricts turns with a no_* restriction relation', function() {
             // u ==== * ---> w
             var graph = iD.coreGraph([
                 iD.osmNode({ id: 'u', loc: [0, 0] }),
@@ -313,7 +313,7 @@ describe('iD.osmIntersection', function() {
                 iD.osmNode({ id: 'w', loc: [2, 0] }),
                 iD.osmWay({ id: '=', nodes: ['u', '*'], tags: { highway: 'residential' } }),
                 iD.osmWay({ id: '-', nodes: ['*', 'w'], tags: { highway: 'residential' } }),
-                iD.osmRelation({id: 'r', tags: { type: 'restriction' }, members: [
+                iD.osmRelation({id: 'r', tags: { type: 'restriction', restriction: 'no_straight_on' }, members: [
                     { id: '=', role: 'from', type: 'way' },
                     { id: '-', role: 'to', type: 'way' },
                     { id: '*', role: 'via', type: 'node' }

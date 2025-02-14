@@ -1,14 +1,4 @@
 {
-  "improveOSM": {
-    "icons": {
-      "ow": "fas-long-arrow-alt-right",
-      "mr-both": "maki-car",
-      "mr-parking": "maki-parking",
-      "mr-path": "maki-shoe",
-      "mr-road": "maki-car",
-      "tr": "temaki-junction"
-    }
-  },
   "osmose": {
     "icons": {
       "0-1": "maki-home",
@@ -33,6 +23,15 @@
       "3010-1": "maki-circle-stroked",
       "3010-3": "maki-circle-stroked",
       "3010-4": "maki-circle-stroked",
+      "3031-1": "fas-tags",
+      "3031-2": "fas-tags",
+      "3031-3": "fas-tags",
+      "3031-4": "fas-tags",
+      "3031-5": "fas-tags",
+      "3031-6": "fas-tags",
+      "3031-7": "fas-tags",
+      "3031-8": "fas-tags",
+      "3031-9": "fas-tags",
       "3040-3040": "far-times-circle",
       "3090-3090": "fas-calendar-alt",
       "3091-3091": "fas-plus",
@@ -118,7 +117,6 @@
       "8300-118": "fas-tachometer-alt",
       "8300-119": "fas-tachometer-alt",
       "8300-120": "fas-tachometer-alt",
-      "8360-1": "temaki-bench",
       "8360-2": "maki-bicycle",
       "8360-3": "temaki-security_camera",
       "8360-4": "temaki-fire_hydrant",

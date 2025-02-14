@@ -27,7 +27,6 @@ var readOnlyTags = [
     /^resolved:/,
     /^closed:note$/,
     /^closed:keepright$/,
-    /^closed:improveosm:/,
     /^closed:osmose:/
 ];
 
@@ -153,12 +152,6 @@ export function uiCommit(context) {
             var krClosed = services.keepRight.getClosedIDs();
             if (krClosed.length) {
                 tags['closed:keepright'] = context.cleanTagValue(krClosed.join(';'));
-            }
-        }
-        if (services.improveOSM) {
-            var iOsmClosed = services.improveOSM.getClosedCounts();
-            for (itemType in iOsmClosed) {
-                tags['closed:improveosm:' + itemType] = context.cleanTagValue(iOsmClosed[itemType].toString());
             }
         }
         if (services.osmose) {
@@ -329,7 +322,9 @@ export function uiCommit(context) {
 
         if (!labelEnter.empty()) {
             labelEnter
-                .call(uiTooltip().title(t.html('commit.request_review_info')).placement('top'));
+                .call(uiTooltip()
+                    .title(() => t.append('commit.request_review_info'))
+                    .placement('top'));
         }
 
         labelEnter
@@ -405,7 +400,9 @@ export function uiCommit(context) {
 
         if (uploadBlockerTooltipText) {
             buttonSection.selectAll('.save-button')
-                .call(uiTooltip().title(uploadBlockerTooltipText).placement('top'));
+                .call(uiTooltip()
+                    .title(() => uploadBlockerTooltipText)
+                    .placement('top'));
         }
 
         // Raw Tag Editor
@@ -453,12 +450,11 @@ export function uiCommit(context) {
             .getIssuesBySeverity({ what: 'edited', where: 'all' }).error;
 
         if (errors.length) {
-            return t('commit.outstanding_errors_message', { count: errors.length });
-
+            return t.append('commit.outstanding_errors_message', { count: errors.length });
         } else {
             var hasChangesetComment = context.changeset && context.changeset.tags.comment && context.changeset.tags.comment.trim().length;
             if (!hasChangesetComment) {
-                return t('commit.comment_needed_message');
+                return t.append('commit.comment_needed_message');
             }
         }
         return null;

@@ -228,13 +228,13 @@ input[type="checkbox"],
 input[type="radio"] {
     width: 14px;
     height: 14px;
-    margin-right: 5px;
+    margin-right: 6px;
     cursor: pointer;
     vertical-align: middle;
 }
 .ideditor[dir='rtl'] input[type="checkbox"],
 .ideditor[dir='rtl'] input[type="radio"] {
-    margin-left: 5px;
+    margin-left: 6px;
     margin-right: 0;
 }
 
@@ -501,6 +501,13 @@ button.disabled .icon.operation use,
 
 .icon-annotation {
     color: #333;
+    vertical-align: baseline;
+}
+
+button.loading .icon {
+    background-image: url(img/mini-loader.gif);
+    background-position: 0 0;
+    background-size: auto;
 }
 
 
@@ -843,7 +850,8 @@ a.hide-toggle {
 .sidebar-component .body {
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
 }
 
@@ -1411,7 +1419,7 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .field-label .label-text {
     padding: 5px 10px 4px 0;
 }
-.field-label .label-text span {
+.field-label .label-text {
     white-space: nowrap;
 }
 
@@ -1535,7 +1543,11 @@ a.hide-toggle {
         border-color: #f1f1f1;
     }
 }
-.form-field-button.colour-selector {
+input.colour-selector {
+    visibility: hidden;
+    position: absolute;
+}
+input.date-selector {
     visibility: hidden;
     position: absolute;
 }
@@ -1550,10 +1562,10 @@ a.hide-toggle {
 }
 
 
-/* Field - Access, Cycleway
+/* Field - Access, DirectionalCombo
 ------------------------------------------------------- */
 .form-field-input-access,
-.form-field-input-cycleway {
+.form-field-input-directionalcombo {
     flex: 1 1 auto;
     display: flex;
     flex-flow: row wrap;
@@ -1579,11 +1591,11 @@ a.hide-toggle {
     display: flex;
     flex-flow: row nowrap;
 }
-.form-field ul.rows li.labeled-input > span,
 .form-field ul.rows li.labeled-input > div {
     flex: 1 1 auto;
     width: 100%;
     border-radius: 0;
+    line-height: 0.95rem;
 }
 .form-field ul.rows li input {
     border-radius: 0;
@@ -1600,6 +1612,28 @@ a.hide-toggle {
 .ideditor[dir='rtl'] .form-field ul.rows li.labeled-input input,
 .ideditor[dir='rtl'] .form-field ul.rows li button {
     border-right-width: 1px;
+}
+
+/* Field - lists with labeled input items as table
+------------------------------------------------------- */
+.form-field ul.rows.rows-table {
+    display: table;
+    width: 100%;
+}
+.form-field ul.rows.rows-table li.labeled-input {
+    display: table-row;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:first-child {
+    display: table-cell;
+    width: auto;
+    max-width: 170px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.form-field ul.rows.rows-table li.labeled-input > div:nth-child(2) {
+    display: table-cell;
+    width: auto;
 }
 
 
@@ -1635,10 +1669,14 @@ a.hide-toggle {
     display: none;
 }
 
-.form-field-input-combo input.raw-value {
+.form-field-input-combo input.raw-value,
+.form-field-input-semicombo input.raw-value,
+.form-field-input-multicombo input.raw-value {
     font-family: monospace;
 }
-.form-field-input-combo input.known-value {
+.form-field-input-combo input.known-value,
+.form-field-input-semicombo input.known-value,
+.form-field-input-multicombo input.known-value {
     color: #7092ff;
 }
 
@@ -1653,7 +1691,6 @@ a.hide-toggle {
 .form-field-input-multicombo li {
     display: inline-flex;
     flex-flow: row nowrap;
-    align-items: center;
     margin-bottom: 3px;
     margin-top: 3px;
     border-radius: 4px;
@@ -1670,6 +1707,14 @@ a.hide-toggle {
     border: 1px solid #ccd5e3;
     max-width: 100%;
     color: #7092ff;
+}
+.form-field-input-multicombo li.chip.negated span {
+    text-decoration: line-through;
+}
+.form-field-input-multicombo li.chip input {
+    width: 1em;
+    height: 11px;
+    margin-top: 7px;
 }
 .ideditor[dir='ltr'] .form-field-input-multicombo li.chip {
     padding: 2px 0px 2px 5px;
@@ -1695,14 +1740,16 @@ a.hide-toggle {
     font-style: italic;
 }
 
-.form-field-input-multicombo li.chip span {
+.form-field-input-multicombo li.chip > span {
     display: block;
     flex: 1 1 auto;
     overflow: hidden;
     word-wrap: break-word;
+    margin-top: 4px;
 }
 
-.form-field-input-multicombo a {
+.form-field-input-multicombo a,
+.form-field-input-multicombo button {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 16px !important;
     padding: 0px 5px 0px 5px;
@@ -1712,11 +1759,44 @@ a.hide-toggle {
     display: block;
     text-align: center;
     flex: 0 0 auto;
+    background: transparent;
+    border: 0;
+}
+
+.form-field-input-multicombo li.chip .field_buttons {
+    display: inline-block;
+    text-align: right;
+    margin-right: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons a {
+    display: block;
+    float: right;
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
+
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .field_buttons a {
+    float: left;
+}
+
+.form-field-input-multicombo li.chip .field_buttons button {
+    display: inline-block;
+    margin-right: -4px;
+    margin-top: -4px;
+    margin-bottom: -2px;
+    margin-left: -2px;
+}
+
+.form-field-input-multicombo li.chip .field_buttons button:hover {
+    background-color: transparent;
 }
 
 .form-field-input-multicombo .input-wrap {
     border: 1px solid #ddd;
-    width: 100px;
+    width: 180px;
 }
 .form-field-input-multicombo input {
     border: none;
@@ -1732,6 +1812,57 @@ a.hide-toggle {
 }
 .form-field-input-multicombo .full-line-chips .input-wrap {
     width: auto;
+}
+
+.form-field-input-combo .tag-value-icon,
+.form-field-input-semicombo .input-wrap .tag-value-icon,
+.form-field-input-multicombo .input-wrap .tag-value-icon {
+    display: inline-block;
+    position: relative;
+    height: 24px;
+    width: 30px;
+    margin-right: -30px;
+    align-self: center;
+    vertical-align: middle;
+    z-index: 1;
+    padding-left: 11px;
+}
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon,
+.ideditor[dir='rtl'] .form-field-input-semicombo .input-wrap .tag-value-icon,
+.ideditor[dir='rtl'] .form-field-input-multicombo .input-wrap .tag-value-icon  {
+    margin-right: 0;
+    margin-left: -30px;
+    padding-left: 0;
+    padding-right: 11px;
+}
+.tag-value-icon .icon {
+    width: 21px;
+    height: 21px;
+    margin: auto;
+}
+.ideditor[dir='ltr'] .form-field-input-combo .tag-value-icon + input,
+.ideditor[dir='ltr'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
+.ideditor[dir='ltr'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {
+    padding-left: 40px;
+}
+.ideditor[dir='rtl'] .form-field-input-combo .tag-value-icon + input,
+.ideditor[dir='rtl'] .form-field-input-semicombo .input-wrap .tag-value-icon + input,
+.ideditor[dir='rtl'] .form-field-input-multicombo .input-wrap .tag-value-icon + input {
+    padding-right: 40px;
+}
+.combobox-option .tag-value-icon {
+    display: inline-block;
+    width: 28px;
+}
+.form-field-input-multicombo li.chip .tag-value-icon .icon {
+    margin: 0;
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: center;
+}
+.ideditor[dir='rtl'] .form-field-input-multicombo li.chip .tag-value-icon .icon {
+    margin-right: 6px;
+    margin-left: 0;
 }
 
 
@@ -1806,7 +1937,6 @@ a.hide-toggle {
 }
 .form-field-input-check > input[type="checkbox"] {
     flex: 0 1 auto;
-    width: 20px;
     margin-top: 0;
 }
 .form-field-input-check > span {
@@ -1899,7 +2029,6 @@ a.hide-toggle {
 }
 .form-field-input-radio > label > input[type="radio"] {
     flex: 0 1 auto;
-    width: 20px;
 }
 .form-field-input-radio > label > span {
     flex: 1 1 auto;
@@ -1926,6 +2055,7 @@ a.hide-toggle {
 .form-field-input-roadheight input.roadheight-secondary-number,
 .form-field-input-roadspeed input.roadspeed-number {
     flex-basis: 0;
+    width: 0;
 }
 .form-field-input-roadheight input.roadheight-unit,
 .form-field-input-roadheight input.roadheight-secondary-unit {
@@ -2063,6 +2193,19 @@ a.hide-toggle {
 }
 .ideditor[dir='rtl'] .addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 0 4px;
+}
+.combobox-address-street-place .combobox-option.address-street,
+.combobox-address-street-place .combobox-option.address-place {
+    padding-right: 20px;
+}
+.combobox-address-street-place .combobox-option.address-street::after,
+.combobox-address-street-place .combobox-option.address-place::after {
+    position: absolute;
+    right: 2px;
+    opacity: 0.4;
+}
+.combobox-address-street-place .combobox-option.address-place::after {
+    content: url(data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPg0KICAgIDxwYXRoIGQ9Ik0xMCwzIEM2LjY4NiwzIDQsNS42MTIgNCw4LjgzMyBDNCwxMi4wNTUgMTAsMTcgMTAsMTcgQzEwLDE3IDE2LDEyLjA1NSAxNiw4LjgzMyBDMTYsNS42MTIgMTMuMzE0LDMgMTAsMyB6IE0xMC4xODcsNi41IEMxMS41MTMsNi41IDEyLjU4Nyw3LjU0NSAxMi41ODcsOC44MzMgQzEyLjU4NywxMC4xMjIgMTEuNTEzLDExLjE2NyAxMC4xODcsMTEuMTY3IEM4Ljg2MiwxMS4xNjcgNy43ODcsMTAuMTIyIDcuNzg3LDguODMzIEM3Ljc4Nyw3LjU0NSA4Ljg2Miw2LjUgMTAuMTg3LDYuNSB6IiBmaWxsPSJjdXJyZW50Q29sb3IiLz4NCjwvc3ZnPg==);
 }
 
 
@@ -2240,9 +2383,8 @@ div.combobox {
     display: block;
     padding: 5px 10px;
     border-top: 1px solid #ccc;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    line-height: 0.95rem;
+    break: all;
 }
 
 .combobox a.selected,
@@ -2292,6 +2434,47 @@ div.combobox {
     color: #333;
 }
 
+.combobox .combobox-option.virtual-option {
+    font-style: italic;
+    color: #333;
+}
+
+.form-field-input-wrap {
+    position: relative;
+}
+
+.form-field-input-wrap span.length-indicator-wrap {
+    visibility: hidden;
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+}
+
+.form-field-input-wrap input:focus + span.length-indicator-wrap,
+.form-field-input-wrap textarea:focus + span.length-indicator-wrap,
+.form-field-input-wrap input:focus + div.combobox-caret + span.length-indicator-wrap,
+.form-field-input-wrap textarea:focus + div.combobox-caret + span.length-indicator-wrap {
+    visibility: visible;
+}
+
+.form-field-input-wrap span.length-indicator {
+    display: block;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #7092ff;
+    border-right-style: solid;
+    border-right-color: lightgray;
+}
+
+.form-field-input-wrap span.length-indicator.limit-reached {
+    border-right-color: red;
+}
+
+.tooltip.max-length-warning {
+    z-index: 10;
+}
 
 /* Field Help
 ------------------------------------------------------- */
@@ -2617,13 +2800,18 @@ button.raw-tag-option svg.icon {
 }
 .tag-reference-body.expanded {
     padding-bottom: 10px;
-    display: inline-block;
+    padding-left: 10px;
+    display: block;
 }
-.tag-reference-description {
-
+.ideditor[dir='rtl'] .tag-reference-body.expanded {
+    padding-left: 0;
+    padding-right: 10px;
 }
 .tag-reference-link {
     display: block;
+}
+.tag-reference-link .icon:first-child {
+    margin-left: 0;
 }
 
 img.tag-reference-wiki-image {
@@ -2680,12 +2868,39 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
+.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
+.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
+.feature-list .entity-name.has-colour::before,
+.combobox-parent-relation .has-colour::before {
+    display: inline-block;
+    content: '';
+    margin-left: -5px;
+    margin-right: 5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 4px;
+    border-color: inherit;
+}
+.combobox-parent-relation .has-colour::before  {
+    margin-left: 2px;
+}
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
 .ideditor[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name {
     padding-left:0;
     padding-right: 10px;
 }
+.ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name.has-colour::before,
+.ideditor[dir='rtl'] .section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
+.ideditor[dir='rtl'] .feature-list .entity-name.has-colour::before {
+    margin-left: 5px;
+    margin-right: -5px;
+}
+.ideditor[dir='rtl'] .combobox-parent-relation .has-colour::before  {
+    margin-left: 5px;
+    margin-right: 2px;
+}
+
 
 .form-field-input-member > input.member-role {
     border-radius: 0 0 4px 4px;
@@ -2854,6 +3069,7 @@ img.tag-reference-wiki-image {
 .comment-date {
     color: #aaa;
 }
+.inspector-hover .comment-text,
 .comment-text {
     color: #333;
     margin-top: 10px;
@@ -3195,6 +3411,7 @@ div.full-screen > button:focus {
 .layer-list li.best > div.best {
     padding: 5px;
     flex: 0 0 auto;
+    align-self: center;
 }
 
 .ideditor[dir='rtl'] .list-item-data-browse svg {
@@ -3226,9 +3443,11 @@ div.full-screen > button:focus {
 .layer-list label > span {
     display: block;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    flex-grow: 1;
+    width: calc(100% - 20px); /* Ensures radio input width within flexbox */
+}
+
+.layer-list label span.localized-text {
+    line-height: 0.95rem;
 }
 
 .layer-list input.list-item-input {
@@ -3960,11 +4179,13 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .help-pane .nav {
     position: relative;
     padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .help-pane .nav a {
-    float: left;
-    width: 50%;
+    flex: 0 0 50%;
     text-align: center;
 }
 
@@ -3978,7 +4199,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 }
 
 .help-pane .nav a:only-child {
-    width: 100%;
+    flex: 0 0 100%;
     border-radius: 4px;
 }
 
@@ -4143,17 +4364,24 @@ img.tile {
 
     -webkit-user-drag: none;
 
-    opacity: 0;
-
-    transition: opacity 200ms linear;
-}
-
-img.tile-loaded {
     opacity: 1;
+    transition: opacity 250ms linear;
+
+    /* prevent brief flickering of "broken image" on tile loading errors, see https://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/ */
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-img.tile-removing {
+.layer-background img.tile,
+.map-in-map-background img.tile {
+    filter: url(#alpha-slope5);
+}
+
+.layer-background img.tile-removing,
+.map-in-map-background img.tile-removing {
     opacity: 0;
+    z-index: 1;
 }
 
 .tile-label-debug {
@@ -4210,6 +4438,15 @@ img.tile-debug {
     bottom: 0;
 }
 
+.layer-background {
+    z-index: 1;
+}
+.layer-overlay {
+    z-index: 2;
+}
+.layer-data {
+    z-index: 3;
+}
 
 /* Map-In-Map
 ------------------------------------------------------- */
@@ -4222,6 +4459,7 @@ img.tile-debug {
     z-index: 2;
     background: #000;
     border: #aaa 1px solid;
+    border-radius: 4px;
     box-shadow: 0 0 2em black;
 }
 .ideditor[dir='ltr'] .map-in-map {
@@ -4888,10 +5126,12 @@ img.tile-debug {
 }
 
 .save-summary,
+.save-supporting,
 .save-communityLinks {
     padding: 0px 20px 15px 20px;
 }
 
+.save-supporting,
 .save-communityLinks {
     border-top: 1px solid #ccc;
 }
@@ -4923,6 +5163,7 @@ img.tile-debug {
 }
 
 .summary-view-on-osm,
+.support-the-map,
 .community-name {
     font-size: 14px;
     font-weight: bold;
@@ -5130,11 +5371,14 @@ a.user-info {
     display: none;
 }
 
-.field-warning,
 .changeset-info,
 .request-review,
 .commit-info {
     margin-bottom: 10px;
+}
+
+.field-warning {
+    margin-top: 10px;
 }
 
 .request-review label {
@@ -5526,10 +5770,9 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 /* Scrollbars
  ----------------------------------------------------- */
 ::-webkit-scrollbar {
-    height: 20px;
+    height: 10px;
     overflow: visible;
     width: 10px;
-    background: #fff;
     border-left: 1px solid #DDD;
 }
 
@@ -5545,6 +5788,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border: solid transparent;
     border-width: 3px 3px 3px 4px;
     border-radius: 6px;
+    cursor: auto;
 }
 ::-webkit-scrollbar-track:active {
     background-color: rgba(0,0,0,.05);
@@ -5553,6 +5797,12 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     ::-webkit-scrollbar-track:hover {
         background-color: rgba(0,0,0,.05);
     }
+}
+/* Firefox */
+@-moz-document url-prefix() {
+	* {
+	    scrollbar-width: thin;
+	}
 }
 
 

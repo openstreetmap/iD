@@ -1,5 +1,5 @@
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -43,7 +43,7 @@ export function validationIncompatibleSource() {
           severity: 'warning',
           message: (context) => {
             const entity = context.hasEntity(entityID);
-            return entity ? t.html('issues.incompatible_source.feature.message', {
+            return entity ? t.append('issues.incompatible_source.feature.message', {
               feature: utilDisplayLabel(entity, context.graph(), true /* verbose */),
               value: source
             }) : '';
@@ -53,7 +53,7 @@ export function validationIncompatibleSource() {
           hash: source,
           dynamicFixes: () => {
             return [
-              new validationIssueFix({ title: t.html('issues.fix.remove_proprietary_data.title') })
+              new validationIssueFix({ title: t.append('issues.fix.remove_proprietary_data.title') })
             ];
           }
         });

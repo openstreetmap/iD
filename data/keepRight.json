@@ -436,7 +436,7 @@
     "370": {
       "title": "doubled places",
       "severity": "error",
-      "description": "This node has tags in common with the surrounding way #$1 ((?:\\(including the name '.+'\\) )?)and seems to be redundand",
+      "description": "This node has tags in common with the surrounding way #$1 ((?:\\(including the name '.+'\\) )?)and seems to be redundant",
       "IDs": ["this", "w", "370"],
       "regex": "(this node) has tags in common with the surrounding way #(\\d+) ((?:\\(including the name '.+'\\) )?)and"
     },

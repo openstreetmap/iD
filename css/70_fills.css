@@ -46,6 +46,9 @@
 .fill-partial path.area.fill.tag-indoor {
     stroke-width: 20px;
 }
+.fill-partial path.area.fill.tag-amenity-parking_space {
+    stroke-width: 30px;
+}
 .ideditor.mode-browse .fill-partial path.area.fill,
 .ideditor.mode-select .fill-partial path.area.fill,
 .ideditor.mode-select-data .fill-partial path.area.fill,

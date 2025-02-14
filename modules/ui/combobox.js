@@ -7,7 +7,8 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 // It is keyed on the `value` of the entry. Data should be an array of objects like:
 //   [{
 //       value:   'string value',  // required
-//       display: 'label html'     // optional
+//       display: 'label function' // optional, if present will be called with d3 selection
+//                                              to modify/append, see localizer's t.append
 //       title:   'hover text'     // optional
 //       terms:   ['search terms'] // optional
 //   }, ...]
@@ -15,7 +16,7 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 var _comboHideTimerID;
 
 export function uiCombobox(context, klass) {
-    var dispatch = d3_dispatch('accept', 'cancel');
+    var dispatch = d3_dispatch('accept', 'cancel', 'update');
     var container = context.container();
 
     var _suggestions = [];
@@ -33,6 +34,9 @@ export function uiCombobox(context, klass) {
         cb(_data.filter(function(d) {
             var terms = d.terms || [];
             terms.push(d.value);
+            if (d.key) {
+                terms.push(d.key);
+            }
             return terms.some(function(term) {
                 return term
                     .toString()
@@ -178,7 +182,8 @@ export function uiCombobox(context, klass) {
                     input.on('input.combo-input', function() {
                         var start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
-                        input.on('input.combo-input', change);
+                        input.on('input.combo-input', change); // reset event handler
+                        change(false);
                     });
                     break;
 
@@ -189,6 +194,7 @@ export function uiCombobox(context, klass) {
                 case 13:  // ↩ Return
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
+                    accept(d3_event);
                     break;
 
                 case 38:  // ↑ Up arrow
@@ -217,22 +223,19 @@ export function uiCombobox(context, klass) {
                 case 27:  // ⎋ Escape
                     cancel();
                     break;
-
-                case 13:  // ↩ Return
-                    accept(d3_event);
-                    break;
             }
         }
 
 
         // Called whenever the input value is changed (e.g. on typing)
-        function change() {
-            fetchComboData(value(), function() {
+        function change(doAutoComplete) {
+            if (doAutoComplete === undefined) doAutoComplete = true;
+            fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
                 var val = input.property('value');
 
                 if (_suggestions.length) {
-                    if (input.property('selectionEnd') === val.length) {
+                    if (doAutoComplete && !skipAutosuggest && input.property('selectionEnd') === val.length) {
                         _selected = tryAutocomplete();
                     }
 
@@ -270,7 +273,8 @@ export function uiCombobox(context, klass) {
                 // pick new _selected
                 index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
                 _selected = _suggestions[index].value;
-                input.property('value', _selected);
+                utilGetSetValue(input, _selected);
+                dispatch.call('update');
             }
 
             render();
@@ -294,7 +298,7 @@ export function uiCombobox(context, klass) {
             // https://stackoverflow.com/questions/11039885/scrollintoview-causing-the-whole-page-to-move
             var selected = combo.selectAll('.combobox-option.selected').node();
             if (selected) {
-                selected.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                selected.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
@@ -315,7 +319,7 @@ export function uiCombobox(context, klass) {
         function fetchComboData(v, cb) {
             _cancelFetch = false;
 
-            _fetcher.call(input, v, function(results) {
+            _fetcher.call(input, v, function(results, skipAutosuggest) {
                 // already chose a value, don't overwrite or autocomplete it
                 if (_cancelFetch) return;
 
@@ -323,7 +327,7 @@ export function uiCombobox(context, klass) {
                 results.forEach(function(d) { _fetched[d.value] = d; });
 
                 if (cb) {
-                    cb();
+                    cb(skipAutosuggest);
                 }
             });
         }
@@ -336,11 +340,19 @@ export function uiCombobox(context, klass) {
             if (!val) return;
 
             // Don't autocomplete if user is typing a number - #4935
-            if (!isNaN(parseFloat(val)) && isFinite(val)) return;
+            if (isFinite(val)) return;
+
+            const suggestionValues = [];
+            _suggestions.forEach(s => {
+                suggestionValues.push(s.value);
+                if (s.key && s.key !== s.value) {
+                    suggestionValues.push(s.key);
+                }
+            });
 
             var bestIndex = -1;
-            for (var i = 0; i < _suggestions.length; i++) {
-                var suggestion = _suggestions[i].value;
+            for (var i = 0; i < suggestionValues.length; i++) {
+                var suggestion = suggestionValues[i];
                 var compare = _caseSensitive ? suggestion : suggestion.toLowerCase();
 
                 // if search string matches suggestion exactly, pick it..
@@ -355,9 +367,10 @@ export function uiCombobox(context, klass) {
             }
 
             if (bestIndex !== -1) {
-                var bestVal = _suggestions[bestIndex].value;
+                var bestVal = suggestionValues[bestIndex];
                 input.property('value', bestVal);
                 input.node().setSelectionRange(val.length, bestVal.length);
+                dispatch.call('update');
                 return bestVal;
             }
         }
@@ -386,11 +399,17 @@ export function uiCombobox(context, klass) {
                     return 'combobox-option ' + (d.klass || '');
                 })
                 .attr('title', function(d) { return d.title; })
-                .html(function(d) { return d.display || d.value; })
+                .each(function(d) {
+                    if (d.display) {
+                        d.display(d3_select(this));
+                    } else {
+                        d3_select(this).text(d.value);
+                    }
+                })
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)
-                .classed('selected', function(d) { return d.value === _selected; })
+                .classed('selected', function(d) { return d.value === _selected || d.key === _selected; })
                 .on('click.combo-option', accept)
                 .order();
 
@@ -420,7 +439,9 @@ export function uiCombobox(context, klass) {
             var val = utilGetSetValue(input);
             thiz.setSelectionRange(val.length, val.length);
 
-            d = _fetched[val];
+            if (!d) {
+                d = _fetched[val];
+            }
             dispatch.call('accept', thiz, d, val);
             hide();
         }
@@ -441,6 +462,7 @@ export function uiCombobox(context, klass) {
             thiz.setSelectionRange(val.length, val.length);
 
             dispatch.call('cancel', thiz);
+
             hide();
         }
 

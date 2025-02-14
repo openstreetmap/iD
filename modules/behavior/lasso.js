@@ -86,8 +86,8 @@ export function behaviorLasso(context) {
                             sharedParentNodes.indexOf(node2.id);
                     } else {
                         // vertices do not share a way; group them by their respective parent ways
-                        return parseFloat(parents1[0].id.slice(1)) -
-                            parseFloat(parents2[0].id.slice(1));
+                        return Number(parents1[0].id.slice(1)) -
+                            Number(parents2[0].id.slice(1));
                     }
 
                 } else if (parents1.length || parents2.length) {

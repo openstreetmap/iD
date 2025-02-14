@@ -1,8 +1,7 @@
 # Contributing to iD
 
 Thinking of contributing to iD? High five! There are plenty of ways to get involved.
-You don't need to know the first thing about programming (though it's always a
-great time to learn!)
+You don't need to know anything about programming (though it's always a great time to learn!).
 
 Everyone involved in the iD project is subject to the [Code of Conduct](CODE_OF_CONDUCT.md).
 Please take a moment to read it before proceeding, it's short and simple. We want
@@ -12,7 +11,7 @@ everyone to feel comfortable contributing to iD.
 ## Submitting Issues
 
 We'd love to hear your feedback about iD. Please [search existing issues](https://github.com/search?l=&q=repo%3Aopenstreetmap%2FiD&type=Issues)
-before [opening a new one](https://github.com/openstreetmap/iD/issues/new). Many bugs and ideas have already been posted.
+before [opening a new one](https://github.com/openstreetmap/iD/issues/new/choose). Many bugs and ideas have already been posted.
 
 When reporting a bug:
 
@@ -20,11 +19,10 @@ When reporting a bug:
 and browser extensions you have installed
 * Write steps to replicate the error: when did it happen? What did you expect to happen?
 What happened instead?
-* We love screenshots.  If you can take a picture of the issue, that is extra helpful.
-You can drag the image file onto the GitHub issue and it will be included with your bug report.
-* You can use a program like [LICEcap](http://www.cockos.com/licecap/) to record an animated gif.
+* We love screenshots. If you can take a picture of the issue, that is extra helpful.
+You can drag the image or video file onto the GitHub issue and it will be included with your bug report.
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
-* If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
+* If you can, enable web developer extensions and report the
 JavaScript error message.
 * When in doubt, over-describe the bug and how you discovered it.
 
@@ -38,7 +36,7 @@ When requesting a feature:
 
 ### Issue Labels
 
-We use GitHub labels to keep track of issues.  Some guidelines:
+We use GitHub labels to keep track of issues. Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
 * <sub>[![good-first-issue][good-first-issue]][good-first-issue_link]</sub> -
@@ -166,21 +164,17 @@ open while we wait for something to happen.
 
 Light grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
-(ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
 
 * <sub>[![wontfix][wontfix]][wontfix_link]
 [![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
-[![wontfix-ISATIDL][wontfix-ISATIDL]][wontfix-ISATIDL_link]
 [![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
 
 [wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
 [wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
-[wontfix-ISATIDL]: http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee
 [wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
 
 [wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
 [wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
-[wontfix-ISATIDL_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-ISATIDL
 [wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
 
 Special:
@@ -217,9 +211,9 @@ switch to the development database.
 ## Translating
 
 Translations are managed using the
-[Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
+[Transifex](https://www.transifex.com/openstreetmap/id-editor/) platform. After
 signing up, you can go to [iD's project
-page](https://www.transifex.com/projects/p/id-editor/), select a language and
+page](https://www.transifex.com/openstreetmap/id-editor/), select a language and
 click **Translate** to start translating. Translations are divided into
 separate resources:
 
@@ -232,15 +226,16 @@ new language: it's replaced with a place name when iD presents the text. So a
 French translation of `Couldn't locate a place named '{name}'` would look like
 `Impossible de localiser l'endroit nommé '{name}'`.
 
-The translations for presets consist of the names of presets, labels for
+The translations for presets, [maintained in the id-tagging-schema repository](https://github.com/openstreetmap/id-tagging-schema), consist of the names of presets, labels for
 preset fields, and lists of search terms. You do _not_ need to translate the
 search terms literally -- use a set of synonyms and related terms appropriate
 to the target language, separated by commas.
+For more information on translating the presets [please see this id-tagging-schema contribution guide](https://github.com/openstreetmap/id-tagging-schema/blob/main/CONTRIBUTING.md#translating).
 
 You can check your translations on the [development preview site](https://ideditor.netlify.app),
 which is updated every time we change the `develop` branch.
 
-[iD translation project on Transifex](https://www.transifex.com/projects/p/id-editor/)
+[iD translation project on Transifex](https://www.transifex.com/openstreetmap/id-editor/)
 
 To get notifications when translation source files change, click **Watch
 project** button near the bottom of the project page. You can edit your
@@ -267,7 +262,7 @@ These are separate translations for uniformity reasons and because some language
 
 **Why can't I find the Osmose QA layer translations?** The Osmose QA strings are
  pulled in from the external Osmose API. You can contribute to the
- [Osmose Transifex project](https://www.transifex.com/projects/p/osmose/)
+ [Osmose Transifex project](https://explore.transifex.com/openstreetmap-france/osmose/)
  and the results will be seen in iD once deployed.
 
 Note that if you want to add/update English translations in Osmose then you will
@@ -282,11 +277,10 @@ only display them in the interface through the `t()` function.
 Then, add the new string to `data/core.yaml`. The translation system, Transifex,
 will automatically detect the change.
 
-If you are updating an existing string, update it in `data/core.yaml` and run
-`npm run build` to generate the `en.json` file automatically, then commit both
-modified files.
-
-Use `npm run build` to build the translations with the local changes.
+If you are adding or updating an existing string, update it in `data/core.yaml`
+and run `npm run build` to generate the `en.min.json` file automatically. Only
+commit the `data/core.yaml` file in your pull request. The translation system,
+Transifex, will automatically detect the changes.
 
 `npm run translations` can be used to pull the latest translations from Transifex.
 
@@ -369,13 +363,11 @@ Test your code and make sure it passes.
 2. run `npm install`
 3. run `npm test` to see whether your tests pass or fail.
 
+Note that in order to run the tests, Chrome needs to be installed on the system. Chromium can be used as an alternative, but requires setting the environment variable `CHROME_BIN` to the corresponding executable (e.g. `export CHROME_BIN="`which chromium`"`).
 
 ### Building / Installing
 
-You can rebuild iD completely with the command `npm run all`.
-
-iD will be built to the `dist` directory. This directory is self-contained; you can copy it
-into the public directory of your webserver to deploy iD.
+Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to build and run iD.
 
 
 ### Licensing
@@ -394,7 +386,7 @@ In your local copy, make a branch for this change using a descriptive branch nam
 Make your changes to source files under `modules/`.
 The `iD.js` and `iD.min.js` files in this project are autogenerated - don't edit them.
 
-1. Try your change locally.  Run `npm start` and visit `localhost:8080` in a browser.
+1. Try your change locally.  Run `npm start` and visit `http://127.0.0.1:8080` in a browser.
 2. Run lint and tests with `npm test`.
 3. If you feel like it, append a line describing your changes to the project's [changelog](https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md).
 4. Commit your changes with an informative commit message.

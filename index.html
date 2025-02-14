@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='dist/iD.css'>
     <link rel='icon' type='image/png' href='data:image/png;base64,iVBORw0KGgo='>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/>
-    <meta name='apple-mobile-web-app-capable' content='yes'/>
+    <meta name='mobile-web-app-capable' content='yes'/>
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
     <style type='text/css'>
       /* apply document-level styling to standalone iD only */
@@ -43,17 +43,6 @@
         } else {
           var context = iD.coreContext()
             .assetPath('dist/')
-            .apiConnections([
-              {
-                'urlroot': 'https://www.openstreetmap.org',
-                'oauth_consumer_key': '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-                'oauth_secret': 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL'
-              }, {
-                'urlroot': 'https://api06.dev.openstreetmap.org',
-                'oauth_consumer_key': 'zwQZFivccHkLs3a8Rq5CoS412fE5aPCXDw9DZj7R',
-                'oauth_secret': 'aMnOOCwExO2XYtRVWJ1bI9QOdqh1cay2UgpbhA6p'
-              }
-            ])
             .containerNode(container);
           window.context = window.id = context;  // for debugging
           context.init();

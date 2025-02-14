@@ -68,7 +68,7 @@ export function uiPanelLocation(context) {
     };
 
     panel.id = 'location';
-    panel.label = t.html('info_panels.location.title');
+    panel.label = t.append('info_panels.location.title');
     panel.key = t('info_panels.location.key');
 
 

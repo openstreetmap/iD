@@ -499,6 +499,8 @@ en:
           one: "Split a feature."
           other: "Split {n} features."
       not_eligible: Lines can't be split at their beginning or end.
+      parent_incomplete: This line cannot be split because a parent relation isn’t fully downloaded. Download the full relation.
+      simple_roundabout: This line cannot be split because this roundabout is part of a larger relation. You must remove it from the relation first.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
     restriction:
       annotation:
@@ -615,6 +617,7 @@ en:
     comment_needed_message: Please add a changeset comment first.
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
+    changeset_comment_length_warning: "Changeset comments can have a maximum of {maxChars} characters."
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
     google_warning_link: https://www.openstreetmap.org/copyright
   contributors:
@@ -689,7 +692,6 @@ en:
     search: Search worldwide...
     no_results_worldwide: No results found
   geolocate:
-    key: L
     title: Show My Location
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
@@ -724,6 +726,7 @@ en:
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
     key_value: "key=value"
+    empty: (empty)
     multiple_values: Multiple Values
     multiple_types: Multiple Types
     unshared_value_tooltip: not shared by all features
@@ -733,6 +736,7 @@ en:
     back_tooltip: Change feature type
     remove: Remove
     search: Search
+    search_feature_type: Search feature type
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Search features
@@ -774,6 +778,22 @@ en:
       network_ref_direction: "{network} {ref} {direction}"
       network_ref_from_to: "{network} {ref} from {from} to {to}"
       network_ref_from_to_via: "{network} {ref} from {from} to {to} via {via}"
+      name_direction: "{name} {direction}"
+      network_name: "{network} {name}"
+      name_from_to: "{name} from {from} to {to}"
+      name_from_to_via: "{name} from {from} to {to} via {via}"
+      network_name_direction: "{network} {name} {direction}"
+      network_name_from_to: "{network} {name} from {from} to {to}"
+      network_name_from_to_via: "{network} {name} from {from} to {to} via {via}"
+      name: "{name}"
+      ref_name: "{ref}: {name}"
+      ref_name_direction: "{ref}: {name} {direction}"
+      ref_name_from_to: "{ref}: {name} from {from} to {to}"
+      ref_name_from_to_via: "{ref}: {name} from {from} to {to} via {via}"
+      network_ref_name: "{network} {ref}: {name}"
+      network_ref_name_direction: "{network} {ref}: {name} {direction}"
+      network_ref_name_from_to: "{network} {ref}: {name} from {from} to {to}"
+      network_ref_name_from_to_via: "{network} {ref}: {name} from {from} to {to} via {via}"
     speed_unit: "Speed unit"
     roadheight:
       # symbol for meters
@@ -782,6 +802,13 @@ en:
       foot: ft
       # abbreviation of inches
       inch: in
+    max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
+    set_today: "Sets the value to today."
+    set_photo_from_viewer:
+      enable: "Tag this photo id on the currently selected map feature"
+      disable:
+        already_set: "This photo is already tagged on the selected map feature"
+        too_far: "This photo is too far away from the selected map feature"
   background:
     title: Background
     description: Background Settings
@@ -833,9 +860,6 @@ en:
       keepRight:
         tooltip: Data issues detected by keepright.at
         title: KeepRight Issues
-      improveOSM:
-        tooltip: Missing data detected by improveosm.org
-        title: ImproveOSM Issues
       osmose:
         tooltip: Data issues detected by osmose.openstreetmap.fr
         title: Osmose Issues
@@ -1030,6 +1054,12 @@ en:
     help_link_url: "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
     view_on_osm: "View Changes on OSM"
     changeset_id: "Your changeset #: {changeset_id}"
+    supporting:
+      title: "OpenStreetMap is free to use, but not free to run"
+      details: "Its stability, quality, independence, and strength depend on donations from people like you."
+      donation:
+        title: "Support the map"
+        details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
     events: Events
@@ -1078,33 +1108,6 @@ en:
       elems_title: Features
       fix_title: Fix Guidelines
       trap_title: Common Mistakes
-    improveOSM:
-      title: ImproveOSM Detection
-      geometry_types:
-        path: paths
-        parking: parking
-        road: roads
-        both: roads and parking
-      directions:
-        east: east
-        north: north
-        northeast: northeast
-        northwest: northwest
-        south: south
-        southeast: southeast
-        southwest: southwest
-        west: west
-      error_types:
-        ow:
-          title: Missing One-way
-          description: 'Along this section of {highway}, {percentage}% of {num_trips} recorded trips travel from {from_node} to {to_node}. There may be missing a "oneway" tag.'
-        mr:
-          title: Missing Geometry
-          description: '{num_trips} recorded trips in this area suggest there may be unmapped {geometry_type} here.'
-          description_alt: 'Data from a 3rd party suggests there may be unmapped {geometry_type} here.'
-        tr:
-          title: Missing Turn Restriction
-          description: '{num_passed} of {num_trips} recorded trips (travelling {travel_direction}) make a turn from {from_way} to {to_way} at {junction}. There may be a missing "{turn_restriction}" restriction.'
     keepRight:
       title: KeepRight
       detail_description: Description
@@ -1355,6 +1358,11 @@ en:
     report: Report a privacy concern with this image
     view_on_bing: "View on Bing Maps"
     hires: "High resolution"
+  vegbilder:
+    title: "Vegbilder"
+    tooltip: "Street-level photos from the Norwegian Public Roads Administration"
+    publisher: "Norwegian Public Roads Administration"
+    view_on: "View it on Vegbilder"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
   mapillary_map_features:
@@ -1429,6 +1437,28 @@ en:
   kartaview:
     title: KartaView
     view_on_kartaview: "View this image on KartaView"
+  mapilio:
+    title: Mapilio
+    tooltip: "Street-level photos from Mapilio"
+  panoramax:
+    title: Panoramax
+    tooltip: "Street-level photos from Panoramax"
+    report: "Report"
+    captured_by: "Captured by {username}"
+    hd: "High resolution"
+  street_side:
+    minzoom_tooltip: "Zoom in to see street-side photos"
+  local_photos:
+    tooltip: Add georeferenced photos from local files
+    tooltip_edit: Edit georeferenced photos
+    header: Georeferenced Photos
+    zoom: Zoom to photos
+    zoom_single: Zoom to photo
+    file:
+      instructions: "Choose georeferenced photos to be displayed. Supported types are .jpg and .png with exif location data"
+      label: "Browse files"
+    no_geolocation:
+      tooltip: Image without geolocation cannot be located on the map
   note:
     note: Note
     title: Edit note
@@ -1466,6 +1496,7 @@ en:
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
+      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Map Machine](https://github.com/enzet/map-machine) (CC BY 4.0)."
       open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
@@ -1515,7 +1546,7 @@ en:
       intro: "*Points* can be used to represent features such as shops, restaurants, and monuments. They mark a specific location, and describe what's there."
       add_point_h: "Adding Points"
       add_point: "To add a point, press the {point_icon} **{point}** button on the toolbar above the map, or press the shortcut key `1`."
-      add_point_finish: "Next, place the new point on the map. With a mouse, position the cursor where the point should go and {leftclick} left-click. On a touchscreen, {tap_icon} tap the location."
+      add_point_finish: "Next, place the new point on the map. With a mouse, position the cursor where the point should go and {leftclick} left-click. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
       move_point_h: "Moving Points"
       move_point: "To move a point, {leftclick} left-click and drag it with a mouse or {touchdrag_icon} tap-and-drag it on a touchscreen."
       delete_point_h: "Deleting Points"
@@ -1526,8 +1557,8 @@ en:
       intro: "*Lines* are used to represent features such as roads, railroads, and rivers. Lines should be drawn down the center of the feature that they represent."
       add_line_h: "Adding Lines"
       add_line: "To add a line, press the {line_icon} **{line}** button on the toolbar above the map, or press the shortcut key `2`."
-      add_line_draw: "Next, mark the line's starting location. With a mouse, position the cursor where the line should begin and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location."
-      add_line_continue: "Continue placing nodes by {leftclick} clicking or {tap_icon} tapping along the shape of the line. While drawing, you can zoom in or drag the map in order to add more detail."
+      add_line_draw: "Next, mark the line's starting location. With a mouse, position the cursor where the line should begin and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
+      add_line_continue: "Continue placing nodes along the shape of the line by {leftclick} clicking, {tap_icon} tapping, or pressing the `{space}` key. While drawing, you can zoom in or drag the map in order to add more detail."
       add_line_finish: "To finish a line, click or tap on the last node again or press `{return}`."
       modify_line_h: "Modifying Lines"
       modify_line_dragnode: "Often you'll see lines that aren't shaped correctly, for example a road that does not match up with the background imagery. To adjust the shape of a line, first select it. All nodes of the line will be drawn as small circles. You can then drag the nodes to better locations."
@@ -1552,8 +1583,8 @@ en:
       point_or_area: "Many features can be represented as points or areas. You should map buildings and property outlines as areas whenever possible. Place points inside a building area to represent businesses, amenities, and other features located inside the building."
       add_area_h: "Adding Areas"
       add_area_command: "To add an area, press the {area_icon} **{area}** button on the toolbar above the map, or press the shortcut key `3`."
-      add_area_draw: "Next, place the first corner of the area. With a mouse, position the cursor over any corner and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location."
-      add_area_continue: "Continue placing nodes by {leftclick} clicking or {tap_icon} tapping along the edge of the area. While drawing, you can zoom in or drag the map in order to add more detail."
+      add_area_draw: "Next, place the first corner of the area. With a mouse, position the cursor over any corner and {leftclick} left-click to place a node. On a touchscreen, {tap_icon} tap the location. Alternatively, you can also press the `{space}` key while pointing the mouse cursor at the desired position."
+      add_area_continue: "Continue placing nodes along the edge of the area by {leftclick} clicking, {tap_icon} tapping, or pressing the `{space}` key. While drawing, you can zoom in or drag the map in order to add more detail."
       add_area_finish: "To finish an area, click or tap on the first or last node again or press `{return}`."
       square_area_h: "Square Corners"
       square_area_command: "Many area features like buildings have square corners. To square the corners of an area, {rightclick} right-click or {longpress_icon} long-press the edge of the area and choose the {orthogonalize_icon} **{orthogonalize}** operation from the edit menu."
@@ -1645,7 +1676,7 @@ en:
       title: Quality Assurance
       intro: "*Quality Assurance* (Q/A) tools can find improper tags, disconnected roads, and other issues with OpenStreetMap, which mappers can then fix. To view existing Q/A issues, open the {data_icon} **{map_data}** panel and enable a specific Q/A layer."
       tools_h: "Tools"
-      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/), [ImproveOSM](https://improveosm.org/en/) and [Osmose](https://osmose.openstreetmap.fr/)."
+      tools: "The following tools are currently supported: [KeepRight](https://www.keepright.at/) and [Osmose](https://osmose.openstreetmap.fr/)."
       issues_h: "Handling Issues"
       issues: "Handling Q/A issues is similar to handling notes. Select a marker to view the issue details in the sidebar. Each tool has its own capabilities, but generally you can comment and/or close an issue."
     field:
@@ -1698,7 +1729,7 @@ en:
         everything_in_view: Everything in view looks fine
         edits: Your edits look fine
         edits_in_view: Your edits in view look fine
-        no_edits: You have no edits yet
+        no_edits: You have no unsaved changes
       hidden_issues:
         none: Detected issues will appear here
         elsewhere: "Issues elsewhere: {count}"
@@ -1745,9 +1776,19 @@ en:
         message: "{feature} is too close to {feature2}"
         reference: "Separate points should not share a location."
     crossing_ways:
-      title: Crossings Ways
+      title: Crossing Ways
       message: "{feature} crosses {feature2}"
       tip: "Find features that incorrectly cross over one another"
+      aeroway-aeroway:
+        reference: "Crossing aeroways should be connected."
+      aeroway-building:
+        reference: "Aeroways crossing buildings should use bridges or different layers."
+      aeroway-highway:
+        reference: "Aeroways crossing railways should be connected."
+      aeroway-railway:
+        reference: "Aeroways crossing highways should be connected."
+      aeroway-waterway:
+        reference: "Aeroways crossing waterways should use tunnels."
       building-building:
         reference: "Buildings should not intersect except on different layers."
       building-highway:
@@ -1807,9 +1848,6 @@ en:
         amap: "Amap products are proprietary and must not be used as references."
         baidu: "Baidu products are proprietary and must not be used as references."
         google: "Google products are proprietary and must not be used as references."
-    incorrect_name:
-      message: '{feature} has the mistaken name "{name}"'
-      message_language: '{feature} has the mistaken name "{name}" in {language}'
     invalid_format:
       title: Invalid Formatting
       tip: Find tags with unexpected formats
@@ -1841,6 +1879,15 @@ en:
         message: "{feature} has no descriptive tags"
       relation_type:
         message: "{feature} is a relation without a type"
+    mutually_exclusive_tags:
+      title: Contradictory Tags
+      tip: "Find features that have contradictory tags."
+      default:
+        message: "{feature} has both {tag1} and {tag2}"
+        reference: 'The tags "{tag1}" and "{tag2}" contradict each other. Only one tag should be set.'
+      same_value:
+        message: "{feature}: {tag1} and {tag2} have same value"
+        reference: 'The tags "{tag1}" and "{tag2}" have the same value. Only one tag should be set.'
     old_multipolygon:
       message: "{multipolygon} has misplaced tags"
       reference: "Multipolygons should be tagged on their relation, not their outer way."
@@ -1907,6 +1954,12 @@ en:
     vertex_as_point:
       message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
+    osm_api_limits:
+      title: OSM Data Limitations
+      tip: Limits and rules imposed by the OSM API on uploaded features
+      max_way_nodes:
+        message: Way has too many vertices
+        reference: "The maximum number of vertices of a way is {maxWayNodes}. Split the feature into smaller parts or otherwise reduce the number of nodes of the affected way."
     fix:
       add_a_bridge:
         title: Add a bridge
@@ -1927,6 +1980,8 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_using_crossing:
+        title: Connect using a crossing
       connect_using_ford:
         title: Connect using a ford
       continue_from_start:
@@ -1964,6 +2019,9 @@ en:
       remove_tag:
         title: Remove the tag
         annotation: Removed tag.
+      remove_named_tag:
+        title: 'Remove the "{tag}" tag'
+        annotation: 'Removed "{tag}" tag.'
       remove_tags:
         title: Remove the tags
       remove_the_name:
@@ -1980,6 +2038,8 @@ en:
         title: Set as inner
       set_as_outer:
         title: Set as outer
+      split_way:
+        title: Split the way into smaller pieces.
       square_feature:
         title: Square this feature
       tag_as_disconnected:
@@ -2165,11 +2225,13 @@ en:
       add_point: "They mark a specific location, and describe what's there. **Press the {point_icon} {point} button to add a new point.**"
       place_point: "To place the new point on the map, position your mouse cursor where the point should go, then {leftclick} left-click or press `{space}`. **Move the mouse pointer over this building, then left-click or press `{space}`.**"
       place_point_touch: "To place the new point on the map, {tap_icon} tap the location where it should go. **Tap the center of this building.**"
+      place_point_error: "The point should be placed inside the building area, not on its outline. Let's try again."
       search_cafe: "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**"
       choose_cafe: "**Choose {preset} from the list.**"
       feature_editor: "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe."
       fields_info: "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure."
       add_name: "Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**"
+      add_reminder: "All entered information should be objective and verifiable."
       add_close: "The feature editor will remember all of your changes automatically. **When you are finished adding the name, press the {button} button or `{esc}` to close the feature editor.**"
       reselect: "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Select the cafe you just created.**"
       update: "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details.**"
@@ -2313,7 +2375,6 @@ en:
         pan_more: "Pan map by one screenful"
         zoom: "Zoom in / Zoom out"
         zoom_more: "Zoom in / Zoom out by a lot"
-        geolocate: "Zoom to my location"
       help:
         title: "Help"
         help: "Show help/documentation"
@@ -2369,6 +2430,7 @@ en:
         merge: "Combine (merge) selected features"
         disconnect: "Disconnect selected features"
         extract: "Extract a point from a feature"
+        extract_without_relations: "Extract a point from a feature, without extracting its relations"
         split: "Split features at the selected points"
         reverse: "Reverse selected features"
         move: "Move selected features"

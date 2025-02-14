@@ -16,7 +16,8 @@ export function operationContinue(context, selectedIDs) {
 
     function candidateWays() {
         return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
-            return parent.geometry(context.graph()) === 'line' &&
+            const geom = parent.geometry(context.graph());
+            return (geom === 'line' || geom === 'area') &&
                 !parent.isClosed() &&
                 parent.affix(_vertex.id) &&
                 (_geometries.line.length === 0 || _geometries.line[0] === parent);
@@ -60,8 +61,8 @@ export function operationContinue(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.continue.' + disable) :
-            t('operations.continue.description');
+            t.append('operations.continue.' + disable) :
+            t.append('operations.continue.description');
     };
 
 
@@ -72,7 +73,7 @@ export function operationContinue(context, selectedIDs) {
 
     operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
-    operation.title = t('operations.continue.title');
+    operation.title = t.append('operations.continue.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

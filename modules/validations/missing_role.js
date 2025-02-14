@@ -1,7 +1,7 @@
 import { actionChangeMember } from '../actions/change_member';
 import { actionDeleteMember } from '../actions/delete_member';
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
@@ -44,7 +44,7 @@ export function validationMissingRole() {
             message: function(context) {
                 var member = context.hasEntity(this.entityIds[1]),
                     relation = context.hasEntity(this.entityIds[0]);
-                return (member && relation) ? t.html('issues.missing_role.message', {
+                return (member && relation) ? t.append('issues.missing_role.message', {
                     member: utilDisplayLabel(member, context.graph()),
                     relation: utilDisplayLabel(relation, context.graph())
                 }) : '';
@@ -61,7 +61,7 @@ export function validationMissingRole() {
                     makeAddRoleFix('outer'),
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t.html('issues.fix.remove_from_relation.title'),
+                        title: t.append('issues.fix.remove_from_relation.title'),
                         onClick: function(context) {
                             context.perform(
                                 actionDeleteMember(this.issue.entityIds[0], this.issue.data.member.index),
@@ -89,7 +89,7 @@ export function validationMissingRole() {
 
     function makeAddRoleFix(role) {
         return new validationIssueFix({
-            title: t.html('issues.fix.set_as_' + role + '.title'),
+            title: t.append('issues.fix.set_as_' + role + '.title'),
             onClick: function(context) {
                 var oldMember = this.issue.data.member;
                 var member = { id: this.issue.entityIds[1], type: oldMember.type, role: role };

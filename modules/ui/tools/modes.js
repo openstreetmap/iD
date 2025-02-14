@@ -18,28 +18,28 @@ export function uiToolDrawModes(context) {
 
     var tool = {
         id: 'old_modes',
-        label: t.html('toolbar.add_feature')
+        label: t.append('toolbar.add_feature')
     };
 
     var modes = [
         modeAddPoint(context, {
-            title: t.html('modes.add_point.title'),
+            title: t.append('modes.add_point.title'),
             button: 'point',
-            description: t.html('modes.add_point.description'),
+            description: t.append('modes.add_point.description'),
             preset: presetManager.item('point'),
             key: '1'
         }),
         modeAddLine(context, {
-            title: t.html('modes.add_line.title'),
+            title: t.append('modes.add_line.title'),
             button: 'line',
-            description: t.html('modes.add_line.description'),
+            description: t.append('modes.add_line.description'),
             preset: presetManager.item('line'),
             key: '2'
         }),
         modeAddArea(context, {
-            title: t.html('modes.add_area.title'),
+            title: t.append('modes.add_area.title'),
             button: 'area',
-            description: t.html('modes.add_area.description'),
+            description: t.append('modes.add_area.description'),
             preset: presetManager.item('area'),
             key: '3'
         })
@@ -130,7 +130,8 @@ export function uiToolDrawModes(context) {
             buttonsEnter
                 .append('span')
                 .attr('class', 'label')
-                .html(function(mode) { return mode.title; });
+                .text('')
+                .each(function(mode) { mode.title(d3_select(this)); });
 
             // if we are adding/removing the buttons, check if toolbar has overflowed
             if (buttons.enter().size() || buttons.exit().size()) {

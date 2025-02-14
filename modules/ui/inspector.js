@@ -76,7 +76,7 @@ export function uiInspector(context) {
             // show vertex issues if there are any
             if (context.validator().getEntityIssues(entityID).length) return false;
 
-            // show turn retriction editor for junction vertices
+            // show turn restriction editor for junction vertices
             if (entity.isHighwayIntersection(context.graph())) return false;
 
             // otherwise show preset list for uninteresting vertices

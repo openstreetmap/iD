@@ -208,6 +208,10 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         return !!getService();
     };
 
+    drawMapFeatures.rendered = function(zoom) {
+      return zoom >= minZoom;
+    };
+
 
     init();
     return drawMapFeatures;

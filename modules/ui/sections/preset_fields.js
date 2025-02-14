@@ -4,7 +4,7 @@ import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 import { utilArrayIdentical } from '../../util/array';
 import { utilArrayUnion, utilRebind } from '../../util';
-import { modeBrowse } from '../../modes/browse';
+import { geoExtent } from '../../geo/extent';
 import { uiField } from '../field';
 import { uiFormFields } from '../form_fields';
 import { uiSection } from '../section';
@@ -12,7 +12,7 @@ import { uiSection } from '../section';
 export function uiSectionPresetFields(context) {
 
     var section = uiSection('preset-fields', context)
-        .label(t.html('inspector.fields'))
+        .label(() => t.append('inspector.fields'))
         .disclosureContent(renderDisclosureContent);
 
     var dispatch = d3_dispatch('change', 'revert');
@@ -33,6 +33,11 @@ export function uiSectionPresetFields(context) {
                 return geoms;
             }, {}));
 
+            const loc = _entityIDs.reduce(function(extent, entityID) {
+                var entity = context.graph().entity(entityID);
+                return extent.extend(entity.extent(context.graph()));
+            }, geoExtent()).center();
+
             var presetsManager = presetManager;
 
             var allFields = [];
@@ -40,8 +45,8 @@ export function uiSectionPresetFields(context) {
             var sharedTotalFields;
 
             _presets.forEach(function(preset) {
-                var fields = preset.fields();
-                var moreFields = preset.moreFields();
+                var fields = preset.fields(loc);
+                var moreFields = preset.moreFields(loc);
 
                 allFields = utilArrayUnion(allFields, fields);
                 allMoreFields = utilArrayUnion(allMoreFields, moreFields);
@@ -81,7 +86,7 @@ export function uiSectionPresetFields(context) {
 
             var additionalFields = utilArrayUnion(sharedMoreFields, presetsManager.universal());
             additionalFields.sort(function(field1, field2) {
-                return field1.label().localeCompare(field2.label(), localizer.localeCode());
+                return field1.title().localeCompare(field2.title(), localizer.localeCode());
             });
 
             additionalFields.forEach(function(field) {
@@ -117,17 +122,6 @@ export function uiSectionPresetFields(context) {
                 .state(_state)
                 .klass('grouped-items-area')
             );
-
-
-        selection.selectAll('.wrap-form-field input')
-            .on('keydown', function(d3_event) {
-                // if user presses enter, and combobox is not active, accept edits..
-                if (d3_event.keyCode === 13 && // ↩ Return
-                    context.container().select('.combobox').empty()) {
-
-                    context.enter(modeBrowse(context));
-                }
-            });
     }
 
     section.presets = function(val) {

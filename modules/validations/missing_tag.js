@@ -1,16 +1,15 @@
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
-import { osmOldMultipolygonOuterMemberOfRelation } from '../osm/multipolygon';
 import { t } from '../core/localizer';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
 export function validationMissingTag(context) {
     var type = 'missing_tag';
 
-    function hasDescriptiveTags(entity, graph) {
-        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date'];
+    function hasDescriptiveTags(entity) {
+        var onlyAttributeKeys = ['description', 'name', 'note', 'start_date', 'oneway'];
         var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
                 if (k === 'area' || !osmIsInterestingTag(k)) return false;
@@ -25,10 +24,7 @@ export function validationMissingTag(context) {
             entity.tags.type === 'multipolygon') {
             // this relation's only interesting tag just says its a multipolygon,
             // which is not descriptive enough
-
-            // It's okay for a simple multipolygon to have no descriptive tags
-            // if its outer way has them (old model, see `outdated_tags.js`)
-            return osmOldMultipolygonOuterMemberOfRelation(entity, graph);
+            return false;
         }
 
         return entityDescriptiveKeys.length > 0;
@@ -58,7 +54,7 @@ export function validationMissingTag(context) {
 
             if (Object.keys(entity.tags).length === 0) {
                 subtype = 'any';
-            } else if (!hasDescriptiveTags(entity, graph)) {
+            } else if (!hasDescriptiveTags(entity)) {
                 subtype = 'descriptive';
             } else if (isUntypedRelation(entity)) {
                 subtype = 'relation_type';
@@ -85,7 +81,7 @@ export function validationMissingTag(context) {
             severity: severity,
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.html('issues.' + messageID + '.message', {
+                return entity ? t.append('issues.' + messageID + '.message', {
                     feature: utilDisplayLabel(entity, context.graph())
                 }) : '';
             },
@@ -99,7 +95,7 @@ export function validationMissingTag(context) {
 
                 fixes.push(new validationIssueFix({
                     icon: 'iD-icon-search',
-                    title: t.html('issues.fix.' + selectFixType + '.title'),
+                    title: t.append('issues.fix.' + selectFixType + '.title'),
                     onClick: function(context) {
                         context.ui().sidebar.showPresetList();
                     }
@@ -123,7 +119,7 @@ export function validationMissingTag(context) {
                 fixes.push(
                     new validationIssueFix({
                         icon: 'iD-operation-delete',
-                        title: t.html('issues.fix.delete_feature.title'),
+                        title: t.append('issues.fix.delete_feature.title'),
                         disabledReason: disabledReasonID ? t('operations.delete.' + disabledReasonID + '.single') : undefined,
                         onClick: deleteOnClick
                     })

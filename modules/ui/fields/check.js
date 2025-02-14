@@ -7,7 +7,6 @@ import {
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
-import { osmOneWayTags } from '../../osm';
 import { svgIcon } from '../../svg/icon';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
@@ -32,11 +31,16 @@ export function uiFieldCheck(field, context) {
     var _value;
 
 
+    var stringsField = field.resolveReference('stringsCrossReference');
+    if (!options && stringsField.options) {
+        options = stringsField.options;
+    }
+
     if (options) {
         for (var i in options) {
             var v = options[i];
             values.push(v === 'undefined' ? undefined : v);
-            texts.push(field.t.html('options.' + v, { 'default': v }));
+            texts.push(stringsField.t.html('options.' + v, { 'default': v }));
         }
     } else {
         values = [undefined, 'yes'];
@@ -56,12 +60,9 @@ export function uiFieldCheck(field, context) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             var entity = context.entity(_entityIDs[0]);
-            for (var key in entity.tags) {
-                if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
-                    _impliedYes = true;
-                    texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
-                    break;
-                }
+            if (entity.type === 'way' && entity.isOneWay()) {
+                _impliedYes = true;
+                texts[0] = t.html('_tagging.presets.fields.oneway_yes.options.undefined');
             }
         }
     }

@@ -6,12 +6,12 @@ import { t, localizer } from '../core/localizer';
 import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
-
+import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
 // listen for DPI change, e.g. when dragging a browser window from a retina to non-retina screen
-window.matchMedia(`
+window.matchMedia?.(`
         (-webkit-min-device-pixel-ratio: 2), /* Safari */
         (min-resolution: 2dppx),             /* standard */
         (min-resolution: 192dpi)             /* fallback */
@@ -75,13 +75,20 @@ export function rendererBackgroundSource(data) {
 
     source.label = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.name', { default: escape(_name) });
+        return t.append('imagery.' + id_safe + '.name', { default: escape(_name) });
+    };
+
+
+    source.hasDescription = function() {
+        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).text;
+        return descriptionText !== '';
     };
 
 
     source.description = function() {
         var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        return t.html('imagery.' + id_safe + '.description', { default: escape(_description) });
+        return t.append('imagery.' + id_safe + '.description', { default: escape(_description) });
     };
 
 
@@ -112,7 +119,7 @@ export function rendererBackgroundSource(data) {
 
 
     source.url = function(coord) {
-        var result = _template.replace(/#.*/su, ''); // strip hash part of URL
+        var result = _template.replace(/#[\s\S]*/u, ''); // strip hash part of URL
         if (result === '') return result;   // source 'none'
 
 
@@ -223,8 +230,9 @@ export function rendererBackgroundSource(data) {
     };
 
 
-    source.validZoom = function(z) {
-        return source.zoomExtent[0] <= z &&
+    source.validZoom = function(z, underzoom) {
+        if (underzoom === undefined) underzoom = 0;
+        return source.zoomExtent[0] - underzoom <= z &&
             (source.overzoom || source.zoomExtent[1] > z);
     };
 
@@ -265,12 +273,10 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     // https://docs.microsoft.com/en-us/bingmaps/rest-services/directly-accessing-the-bing-maps-tiles
 
     //fallback url template
-    data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=587&n=z';
+    data.template = 'https://ecn.t{switch:0,1,2,3}.tiles.virtualearth.net/tiles/a{u}.jpeg?g=1&pr=odbl&n=z';
 
     var bing = rendererBackgroundSource(data);
-    //var key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU'; // P2, JOSM, etc
-    var key = 'Ak5oTE46TUbjRp08OFVcGpkARErDobfpuyNKa-W2mQ8wbt1K1KL8p1bIRwWwcF-Q';    // iD
-
+    var key = utilAesDecrypt('5c875730b09c6b422433e807e1ff060b6536c791dbfffcffc4c6b18a1bdba1f14593d151adb50e19e1be1ab19aef813bf135d0f103475e5c724dec94389e45d0');
     /*
     missing tile image strictness param (n=)
     •	n=f -> (Fail) returns a 404
@@ -279,10 +285,12 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     */
     const strictParam = 'n';
 
-    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&uriScheme=https&key=' + key;
+    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=' + key;
     var cache = {};
     var inflight = {};
     var providers = [];
+    var taskQueue = new IntervalTasksQueue(250);
+    var metadataLastZoom = -1;
 
     d3_json(url)
         .then(function(json) {
@@ -337,7 +345,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
-        var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
+        var url = 'https://dev.virtualearth.net/REST/v1/Imagery/BasicMetadata/AerialOSM/' + centerPoint +
                 '?zl=' + zoom + '&key=' + key;
 
         if (inflight[tileID]) return;
@@ -350,26 +358,34 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }
 
         inflight[tileID] = true;
-        d3_json(url)
-            .then(function(result) {
-                delete inflight[tileID];
-                if (!result) {
-                    throw new Error('Unknown Error');
-                }
-                var vintage = {
-                    start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
-                    end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
-                };
-                vintage.range = vintageRange(vintage);
 
-                var metadata = { vintage: vintage };
-                cache[tileID].metadata = metadata;
-                if (callback) callback(null, metadata);
-            })
-            .catch(function(err) {
-                delete inflight[tileID];
-                if (callback) callback(err.message);
-            });
+        if (metadataLastZoom !== tileCoord[2]){
+            metadataLastZoom = tileCoord[2];
+            taskQueue.clear();
+        }
+
+        taskQueue.enqueue(() => {
+            d3_json(url)
+                .then(function (result) {
+                    delete inflight[tileID];
+                    if (!result) {
+                        throw new Error('Unknown Error');
+                    }
+                    var vintage = {
+                        start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
+                        end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
+                    };
+                    vintage.range = vintageRange(vintage);
+
+                    var metadata = { vintage: vintage };
+                    cache[tileID].metadata = metadata;
+                    if (callback) callback(null, metadata);
+                })
+                .catch(function (err) {
+                    delete inflight[tileID];
+                    if (callback) callback(err.message);
+                });
+        });
     };
 
 
@@ -488,8 +504,8 @@ rendererBackgroundSource.Esri = function(data) {
                     vintage: vintage,
                     source: clean(result.NICE_NAME),
                     description: clean(result.NICE_DESC),
-                    resolution: clean(+parseFloat(result.SRC_RES).toFixed(4)),
-                    accuracy: clean(+parseFloat(result.SRC_ACC).toFixed(4))
+                    resolution: clean(+Number(result.SRC_RES).toFixed(4)),
+                    accuracy: clean(+Number(result.SRC_ACC).toFixed(4))
                 };
 
                 // append units - meters
@@ -528,7 +544,7 @@ rendererBackgroundSource.None = function() {
 
 
     source.label = function() {
-        return t.html('background.none');
+        return t.append('background.none');
     };
 
 
@@ -555,7 +571,7 @@ rendererBackgroundSource.Custom = function(template) {
     };
 
     source.label = function() {
-        return t.html('background.custom');
+        return t.append('background.custom');
     };
 
 
@@ -568,7 +584,7 @@ rendererBackgroundSource.Custom = function(template) {
             var parts = cleaned.split('?', 2);
             var qs = utilStringQs(parts[1]);
 
-            ['access_token', 'connectId', 'token'].forEach(function(param) {
+            ['access_token', 'connectId', 'token', 'Signature'].forEach(function(param) {
                 if (qs[param]) {
                     qs[param] = '{apikey}';
                 }

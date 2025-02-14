@@ -19,7 +19,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t.html('inspector.title_count', { title: { html: t.html('issues.' + severity + 's.list_title') }, count: issueCountText });
+            return t.append('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {
@@ -146,8 +146,9 @@ export function uiSectionValidationIssues(id, severity, context) {
             .order();
 
         items.selectAll('.issue-message')
-            .html(function(d) {
-                return d.message(context);
+            .text('')
+            .each(function(d) {
+                return d.message(context)(d3_select(this));
             });
 
         /*

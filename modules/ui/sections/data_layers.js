@@ -18,10 +18,11 @@ export function uiSectionDataLayers(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
+    // refers to `modules/svg/layers.js` -> function drawLayers(selection) {...}
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
-        .label(t.html('map_data.data_layers'))
+        .label(() => t.append('map_data.data_layers'))
         .disclosureContent(renderDisclosureContent);
 
     function renderDisclosureContent(selection) {
@@ -95,14 +96,14 @@ export function uiSectionDataLayers(context) {
                 if (d.id === 'osm') {
                     d3_select(this)
                         .call(uiTooltip()
-                            .title(t.html('map_data.layers.' + d.id + '.tooltip'))
+                            .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                             .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
                             .placement('bottom')
                         );
                 } else {
                     d3_select(this)
                         .call(uiTooltip()
-                            .title(t.html('map_data.layers.' + d.id + '.tooltip'))
+                            .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                             .placement('bottom')
                         );
                 }
@@ -127,7 +128,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['keepRight', 'improveOSM', 'osmose'];
+        var qaKeys = ['keepRight', 'osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
@@ -154,7 +155,7 @@ export function uiSectionDataLayers(context) {
             .each(function(d) {
                 d3_select(this)
                     .call(uiTooltip()
-                        .title(t.html('map_data.layers.' + d.id + '.tooltip'))
+                        .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
                         .placement('bottom')
                     );
             });
@@ -166,7 +167,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
+            .each(function(d) { t.append('map_data.layers.' + d.id + '.title')(d3_select(this)); });
 
 
         // Update
@@ -313,7 +314,7 @@ export function uiSectionDataLayers(context) {
         var labelEnter = liEnter
             .append('label')
             .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.tooltip'))
+                .title(() => t.append('map_data.layers.custom.tooltip'))
                 .placement('top')
             );
 
@@ -330,7 +331,7 @@ export function uiSectionDataLayers(context) {
             .append('button')
             .attr('class', 'open-data-options')
             .call(uiTooltip()
-                .title(t.html('settings.custom_data.tooltip'))
+                .title(() => t.append('settings.custom_data.tooltip'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function(d3_event) {
@@ -343,7 +344,7 @@ export function uiSectionDataLayers(context) {
             .append('button')
             .attr('class', 'zoom-to-data')
             .call(uiTooltip()
-                .title(t.html('map_data.layers.custom.zoom'))
+                .title(() => t.append('map_data.layers.custom.zoom'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             )
             .on('click', function(d3_event) {
@@ -386,7 +387,6 @@ export function uiSectionDataLayers(context) {
         }
     }
 
-
     function drawPanelItems(selection) {
 
         var panelsListEnter = selection.selectAll('.md-extras-list')
@@ -400,7 +400,7 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'history-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('map_data.history_panel.tooltip'))
+                .title(() => t.append('map_data.history_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.history.key'))])
                 .placement('top')
             );
@@ -422,7 +422,7 @@ export function uiSectionDataLayers(context) {
             .attr('class', 'measurement-panel-toggle-item')
             .append('label')
             .call(uiTooltip()
-                .title(t.html('map_data.measurement_panel.tooltip'))
+                .title(() => t.append('map_data.measurement_panel.tooltip'))
                 .keys([uiCmd('⌘⇧' + t('info_panels.measurement.key'))])
                 .placement('top')
             );

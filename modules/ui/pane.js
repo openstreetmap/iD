@@ -72,7 +72,7 @@ export function uiPane(id, context) {
         if (!_paneTooltip) {
             _paneTooltip = uiTooltip()
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
-                .title(_description)
+                .title(() => _description)
                 .keys([_key]);
         }
 
@@ -106,7 +106,8 @@ export function uiPane(id, context) {
 
         heading
             .append('h2')
-            .html(_label);
+            .text('')
+            .call(_label);
 
         heading
             .append('button')

@@ -55,16 +55,17 @@ export function uiFieldRadio(field, context) {
         enter = labels.enter()
             .append('label');
 
+        var stringsField = field.resolveReference('stringsCrossReference');
         enter
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return field.t('options.' + d, { 'default': d }); })
+            .attr('value', function(d) { return stringsField.t('options.' + d, { 'default': d }); })
             .attr('checked', false);
 
         enter
             .append('span')
-            .html(function(d) { return field.t.html('options.' + d, { 'default': d }); });
+            .each(function(d) { stringsField.t.append('options.' + d, { 'default': d })(d3_select(this)); });
 
         labels = labels
             .merge(enter);
@@ -126,7 +127,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'labeled-input structure-type-item');
 
         typeEnter
-            .append('span')
+            .append('div')
             .attr('class', 'label structure-label-type')
             .attr('for', 'preset-input-' + selected)
             .call(t.append('inspector.radio.structure.type'));
@@ -171,7 +172,7 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'labeled-input structure-layer-item');
 
         layerEnter
-            .append('span')
+            .append('div')
             .attr('class', 'label structure-label-layer')
             .attr('for', 'preset-input-layer')
             .call(t.append('inspector.radio.structure.layer'));

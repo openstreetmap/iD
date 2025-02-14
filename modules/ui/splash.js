@@ -66,7 +66,7 @@ export function uiSplash(context) {
       }));
 
     uiSectionPrivacy(context)
-      .label(t.html('splash.privacy_settings'))
+      .label(() => t.append('splash.privacy_settings'))
       .render(modalSection);
 
     let buttonWrap = introModal

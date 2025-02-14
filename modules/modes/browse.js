@@ -14,8 +14,8 @@ export function modeBrowse(context) {
     var mode = {
         button: 'browse',
         id: 'browse',
-        title: t('modes.browse.title'),
-        description: t('modes.browse.description')
+        title: t.append('modes.browse.title'),
+        description: t.append('modes.browse.description')
     };
     var sidebar;
 

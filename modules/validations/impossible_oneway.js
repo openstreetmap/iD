@@ -1,8 +1,8 @@
 import { t, localizer } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { actionReverse } from '../actions/reverse';
-import { utilDisplayLabel } from '../util';
-import { osmFlowingWaterwayTagValues, osmOneWayTags, osmRoutableHighwayTagValues } from '../osm/tags';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import { osmFlowingWaterwayTagValues, osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 
@@ -17,7 +17,7 @@ export function validationImpossibleOneway() {
 
         if (!typeForWay(entity)) return [];
 
-        if (!isOneway(entity)) return [];
+        if (!entity.isOneWay()) return [];
 
         var firstIssues = issuesForNode(entity, entity.first());
         var lastIssues = issuesForNode(entity, entity.last());
@@ -30,18 +30,6 @@ export function validationImpossibleOneway() {
             if (osmRoutableHighwayTagValues[way.tags.highway]) return 'highway';
             if (osmFlowingWaterwayTagValues[way.tags.waterway]) return 'waterway';
             return null;
-        }
-
-        function isOneway(way) {
-            if (way.tags.oneway === 'yes') return true;
-            if (way.tags.oneway) return false;
-
-            for (var key in way.tags) {
-                if (osmOneWayTags[key] && osmOneWayTags[key][way.tags[key]]) {
-                    return true;
-                }
-            }
-            return false;
         }
 
         function nodeOccursMoreThanOnce(way, nodeID) {
@@ -129,7 +117,7 @@ export function validationImpossibleOneway() {
             if (wayType === 'waterway' && attachedWaysOfSameType.length === 0) return [];
 
             var attachedOneways = attachedWaysOfSameType.filter(function(attachedWay) {
-                return isOneway(attachedWay);
+                return attachedWay.isOneWay();
             });
 
             // ignore if the way is connected to some non-oneway features
@@ -162,7 +150,7 @@ export function validationImpossibleOneway() {
                 severity: 'warning',
                 message: function(context) {
                     var entity = context.hasEntity(this.entityIds[0]);
-                    return entity ? t.html('issues.impossible_oneway.' + messageID + '.message', {
+                    return entity ? t.append('issues.impossible_oneway.' + messageID + '.message', {
                         feature: utilDisplayLabel(entity, context.graph())
                     }) : '';
                 },
@@ -175,7 +163,7 @@ export function validationImpossibleOneway() {
                     if (attachedOneways.length) {
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-reverse',
-                            title: t.html('issues.fix.reverse_feature.title'),
+                            title: t.append('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
                                 var id = this.issue.entityIds[0];
@@ -189,7 +177,7 @@ export function validationImpossibleOneway() {
                             (!isFirst && textDirection === 'rtl');
                         fixes.push(new validationIssueFix({
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
-                            title: t.html('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
+                            title: t.append('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
                                 var entityID = this.issue.entityIds[0];
                                 var vertexID = this.issue.entityIds[1];

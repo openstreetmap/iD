@@ -28,7 +28,7 @@ describe('iD.presetCollection', function() {
             { name: 'Ğṝȁß', tags: { landuse: 'ğṝȁß' }, geometry: ['point', 'area'], terms: [] }
         ),
         park: iD.presetPreset('__TEST/leisure/park',
-            { name: 'Park', tags: { leisure: 'park' }, geometry: ['point', 'area'], terms: [ 'grass' ], matchScore: 0.5 }
+            { name: 'Park', tags: { leisure: 'park' }, geometry: ['point', 'area'], aliases: ['Field'], terms: [ 'grass' ], matchScore: 0.5 }
         ),
         parking: iD.presetPreset('__TEST/amenity/parking',
             { name: 'Parking', tags: { amenity: 'parking' }, geometry: ['point', 'area'], terms: [ 'cars' ] }
@@ -86,6 +86,11 @@ describe('iD.presetCollection', function() {
             expect(result.indexOf(p.park), 'Park').to.be.within(3,5);      // 6. 'Park' (similar term 'grass')
         });
 
+        it('matches alias', function() {
+            var result = c.search('Field', 'area').collection;
+            expect(result.indexOf(p.park)).to.eql(0);  // 1. 'Park' (by alias)
+        });
+
         it('sorts preset with matchScore penalty below others', function() {
             var result = c.search('par', 'point').matchGeometry('point').collection;
             expect(result.indexOf(p.parking), 'Parking').to.eql(0);   // 1. 'Parking' (default matchScore)
@@ -125,6 +130,11 @@ describe('iD.presetCollection', function() {
             });
             var collection = iD.presetCollection([excluded, p.point]);
             expect(collection.search('excluded', 'point').collection).not.to.include(excluded);
+        });
+
+        it('matches tag key=value', function() {
+            var result = c.search('landuse=grass', 'area').collection;
+            expect(result.indexOf(p.grass1)).to.eql(0);  // 1. 'Grass' (by tag key=value)
         });
     });
 });

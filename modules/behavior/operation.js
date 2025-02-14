@@ -4,6 +4,7 @@
 export function behaviorOperation(context) {
     var _operation;
 
+    /** @param {KeyboardEvent} d3_event */
     function keypress(d3_event) {
         // prevent operations during low zoom selection
         if (!context.map().withinEditableZoom()) return;
@@ -19,7 +20,7 @@ export function behaviorOperation(context) {
                 .duration(4000)
                 .iconName('#iD-operation-' + _operation.id)
                 .iconClass('operation disabled')
-                .label(_operation.tooltip)();
+                .label(_operation.tooltip())();
 
         } else {
             context.ui().flash
@@ -29,7 +30,7 @@ export function behaviorOperation(context) {
                 .label(_operation.annotation() || _operation.title)();
 
             if (_operation.point) _operation.point(null);
-            _operation();
+            _operation(d3_event);
         }
     }
 

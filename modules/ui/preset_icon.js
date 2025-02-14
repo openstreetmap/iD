@@ -17,9 +17,10 @@ export function uiPresetIcon() {
 
 
   function getIcon(p, geom) {
+    if (p.isFallback && p.isFallback()) return geom === 'vertex' ? '' : 'iD-icon-' + p.id;
     if (p.icon) return p.icon;
     if (geom === 'line') return 'iD-other-line';
-    if (geom === 'vertex') return p.isFallback() ? '' : 'temaki-vertex';
+    if (geom === 'vertex') return 'temaki-vertex';
     return 'maki-marker-stroked';
   }
 
@@ -297,7 +298,8 @@ export function uiPresetIcon() {
     const isMaki = picon && /^maki-/.test(picon);
     const isTemaki = picon && /^temaki-/.test(picon);
     const isFa = picon && /^fa[srb]-/.test(picon);
-    const isiDIcon = picon && !(isMaki || isTemaki || isFa);
+    const isRöntgen = picon && /^roentgen-/.test(picon);
+    const isiDIcon = picon && !(isMaki || isTemaki || isFa || isRöntgen);
 
     let icon = container.selectAll('.preset-icon')
       .data(picon ? [0] : []);
@@ -367,6 +369,7 @@ export function uiPresetIcon() {
     subway: ['railway/subway', 'railway/subway', 'railway/subway'],
     train: ['railway/rail', 'railway/rail', 'railway/rail'],
     tram: ['railway/tram', 'railway/tram', 'railway/tram'],
+    railway: ['railway/rail', 'railway/rail', 'railway/rail'],
     waterway: ['waterway/stream', 'waterway/stream', 'waterway/stream']
   };
 
@@ -386,7 +389,7 @@ export function uiPresetIcon() {
     const picon = getIcon(p, geom);
     const isCategory = !p.setTags;
     const drawPoint = false;
-    const drawVertex = picon !== null && geom === 'vertex' && (!isFallback);
+    const drawVertex = picon !== null && geom === 'vertex';
     const drawLine = picon && geom === 'line' && !isFallback && !isCategory;
     const drawArea = picon && geom === 'area' && !isFallback && !isCategory;
     const drawRoute = picon && geom === 'route';

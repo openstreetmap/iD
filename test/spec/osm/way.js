@@ -305,7 +305,6 @@ describe('iD.osmWay', function() {
 
         it('returns true when the way has tag oneway=yes', function() {
             expect(iD.osmWay({tags: { oneway: 'yes' }}).isOneWay(), 'oneway yes').to.be.true;
-            expect(iD.osmWay({tags: { oneway: '1' }}).isOneWay(), 'oneway 1').to.be.true;
             expect(iD.osmWay({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
         });
 
@@ -359,6 +358,7 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({tags: { barrier: 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
             expect(iD.osmWay({tags: { barrier: 'city_wall' }}).sidednessIdentifier()).to.eql('barrier');
             expect(iD.osmWay({tags: { man_made: 'embankment' }}).sidednessIdentifier()).to.eql('man_made');
+            expect(iD.osmWay({tags: { 'abandoned:barrier': 'guard_rail' }}).sidednessIdentifier()).to.eql('barrier');
         });
 
         it('returns null when tag does not have implied sidedness', function() {
@@ -366,6 +366,8 @@ describe('iD.osmWay', function() {
             expect(iD.osmWay({tags: { barrier: 'fence' }}).sidednessIdentifier()).to.be.null;
             expect(iD.osmWay({tags: { man_made: 'dyke' }}).sidednessIdentifier()).to.be.null;
             expect(iD.osmWay({tags: { highway: 'motorway' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.osmWay({tags: { 'demolished:highway': 'motorway' }}).sidednessIdentifier()).to.be.null;
+            expect(iD.osmWay({tags: { 'not:natural': 'cliff' }}).sidednessIdentifier()).to.be.null;
         });
     });
 
@@ -468,6 +470,10 @@ describe('iD.osmWay', function() {
 
         it('returns false for a linear way with two or more nodes', function () {
             expect(iD.osmWay({nodes: ['a', 'b']}).isDegenerate()).to.equal(false);
+        });
+
+        it('returns true for a linear way that doubles back on itself', function () {
+            expect(iD.osmWay({nodes: ['a', 'b', 'a']}).isDegenerate()).to.equal(true);
         });
 
         it('returns true for an area with zero, one, or two unique nodes', function () {

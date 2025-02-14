@@ -1,7 +1,10 @@
+import { isEqual } from 'lodash';
+
 import { t } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilArrayUniq, utilObjectOmit } from '../util';
 import { utilSafeClassName } from '../util/util';
+import { locationManager } from '../core/LocationManager';
 
 
 //
@@ -11,12 +14,14 @@ import { utilSafeClassName } from '../util/util';
 export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   allFields = allFields || {};
   allPresets = allPresets || {};
-  let _this = Object.assign({}, preset);   // shallow copy
+  let _this = Object.assign({}, preset); // shallow copy
   let _addable = addable || false;
-  let _resolvedFields;      // cache
-  let _resolvedMoreFields;  // cache
-  let _searchName; // cache
-  let _searchNameStripped; // cache
+  let _searchName;            // cache
+  let _searchNameStripped;    // cache
+  let _searchAliases;         // cache
+  let _searchAliasesStripped; // cache
+
+  const referenceRegex = /^\{(.*)\}$/;
 
   _this.id = presetID;
 
@@ -26,6 +31,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.originalName = _this.name || '';
 
+  _this.originalAliases = (_this.aliases || []).join('\n');
+
   _this.originalScore = _this.matchScore || 1;
 
   _this.originalReference = _this.reference || {};
@@ -34,11 +41,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.originalMoreFields = (_this.moreFields || []);
 
-  _this.fields = () => _resolvedFields || (_resolvedFields = resolve('fields'));
+  _this.fields = loc => resolveFields('fields', loc);
 
-  _this.moreFields = () => _resolvedMoreFields || (_resolvedMoreFields = resolve('moreFields'));
-
-  _this.resetFields = () => _resolvedFields = _resolvedMoreFields = null;
+  _this.moreFields = loc => resolveFields('moreFields', loc);
 
   _this.tags = _this.tags || {};
 
@@ -90,18 +95,31 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     return t(textID, options);
   };
 
-  _this.t.html = (scope, options) => {
+  _this.t.append = (scope, options) => {
     const textID = `_tagging.presets.presets.${presetID}.${scope}`;
-    return t.html(textID, options);
+    return t.append(textID, options);
   };
 
+  function resolveReference(which) {
+    const match = (_this[which] || '').match(referenceRegex);
+    if (match) {
+      const preset = allPresets[match[1]];
+      if (preset) {
+        return preset;
+      }
+      console.error(`Unable to resolve referenced preset: ${match[1]}`);  // eslint-disable-line no-console
+    }
+    return _this;
+  }
 
   _this.name = () => {
-    return _this.t('name', { 'default': _this.originalName });
+    return resolveReference('originalName')
+      .t('name', { 'default': _this.originalName || presetID });
   };
 
   _this.nameLabel = () => {
-    return _this.t.html('name', { 'default': _this.originalName });
+    return resolveReference('originalName')
+      .t.append('name', { 'default': _this.originalName || presetID });
   };
 
   _this.subtitle = () => {
@@ -117,14 +135,21 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       if (_this.suggestion) {
         let path = presetID.split('/');
         path.pop();  // remove brand name
-        return t.html('_tagging.presets.presets.' + path.join('/') + '.name');
+        return t.append('_tagging.presets.presets.' + path.join('/') + '.name');
       }
       return null;
   };
 
+  _this.aliases = () => {
+    return resolveReference('originalName')
+      .t('aliases', { 'default': _this.originalAliases }).trim().split(/\s*[\r\n]+\s*/);
+  };
 
-  _this.terms = () => _this.t('terms', { 'default': _this.originalTerms })
-    .toLowerCase().trim().split(/\s*,+\s*/);
+  _this.terms = () => {
+    return resolveReference('originalName')
+      .t('terms', { 'default': _this.originalTerms })
+      .toLowerCase().trim().split(/\s*,+\s*/);
+  };
 
   _this.searchName = () => {
     if (!_searchName) {
@@ -135,13 +160,24 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.searchNameStripped = () => {
     if (!_searchNameStripped) {
-      _searchNameStripped = _this.searchName();
-      // split combined diacritical characters into their parts
-      if (_searchNameStripped.normalize) _searchNameStripped = _searchNameStripped.normalize('NFD');
-      // remove diacritics
-      _searchNameStripped = _searchNameStripped.replace(/[\u0300-\u036f]/g, '');
+      _searchNameStripped = stripDiacritics(_this.searchName());
     }
     return _searchNameStripped;
+  };
+
+  _this.searchAliases = () => {
+    if (!_searchAliases) {
+      _searchAliases = _this.aliases().map(alias => alias.toLowerCase());
+    }
+    return _searchAliases;
+  };
+
+  _this.searchAliasesStripped = () => {
+    if (!_searchAliasesStripped) {
+      _searchAliasesStripped = _this.searchAliases();
+      _searchAliasesStripped = _searchAliasesStripped.map(stripDiacritics);
+    }
+    return _searchAliasesStripped;
   };
 
   _this.isFallback = () => {
@@ -182,14 +218,16 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.unsetTags = (tags, geometry, ignoringKeys, skipFieldDefaults) => {
+  _this.unsetTags = (tags, geometry, ignoringKeys, skipFieldDefaults, loc) => {
     // allow manually keeping some tags
     let removeTags = ignoringKeys ? utilObjectOmit(_this.removeTags, ignoringKeys) : _this.removeTags;
     tags = utilObjectOmit(tags, Object.keys(removeTags));
 
     if (geometry && !skipFieldDefaults) {
-      _this.fields().forEach(field => {
-        if (field.matchGeometry(geometry) && field.key && field.default === tags[field.key]) {
+      _this.fields(loc).forEach(field => {
+        if (field.matchGeometry(geometry) && field.key &&
+            field.default === tags[field.key] &&
+            (!ignoringKeys || ignoringKeys.indexOf(field.key) === -1)) {
           delete tags[field.key];
         }
       });
@@ -200,14 +238,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
   };
 
 
-  _this.setTags = (tags, geometry, skipFieldDefaults) => {
+  _this.setTags = (tags, geometry, skipFieldDefaults, loc) => {
     const addTags = _this.addTags;
     tags = Object.assign({}, tags);   // shallow copy
 
     for (let k in addTags) {
       if (addTags[k] === '*') {
         // if this tag is ancillary, don't override an existing value since any value is okay
-        if (_this.tags[k] || !tags[k] || tags[k] === 'no') {
+        if (_this.tags[k] || !tags[k]) {
           tags[k] = 'yes';
         }
       } else {
@@ -238,7 +276,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
 
     if (geometry && !skipFieldDefaults) {
-      _this.fields().forEach(field => {
+      _this.fields(loc).forEach(field => {
         if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
           tags[field.key] = field.default;
         }
@@ -251,14 +289,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   // For a preset without fields, use the fields of the parent preset.
   // Replace {preset} placeholders with the fields of the specified presets.
-  function resolve(which) {
+  function resolveFields(which, loc) {
     const fieldIDs = (which === 'fields' ? _this.originalFields : _this.originalMoreFields);
     let resolved = [];
 
     fieldIDs.forEach(fieldID => {
-      const match = fieldID.match(/\{(.*)\}/);
+      const match = fieldID.match(referenceRegex);
       if (match !== null) {    // a presetID wrapped in braces {}
-        resolved = resolved.concat(inheritFields(match[1], which));
+        resolved = resolved.concat(inheritFields(allPresets[match[1]], which));
       } else if (allFields[fieldID]) {    // a normal fieldID
         resolved.push(allFields[fieldID]);
       } else {
@@ -271,7 +309,19 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
       const endIndex = _this.id.lastIndexOf('/');
       const parentID = endIndex && _this.id.substring(0, endIndex);
       if (parentID) {
-        resolved = inheritFields(parentID, which);
+        let parent = allPresets[parentID];
+        if (loc) {
+          const validHere = locationManager.locationSetsAt(loc);
+          if (parent?.locationSetID && !validHere[parent.locationSetID]) {
+            // this is a preset for which a regional variant of the main preset exists
+            const candidateIDs = Object.keys(allPresets).filter(k => k.startsWith(parentID));
+            parent = allPresets[candidateIDs.find(candidateID => {
+              const candidate = allPresets[candidateID];
+              return validHere[candidate.locationSetID] && isEqual(candidate.tags, parent.tags);
+            })];
+          }
+        }
+        resolved = inheritFields(parent, which);
       }
     }
 
@@ -279,8 +329,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
 
     // returns an array of fields to inherit from the given presetID, if found
-    function inheritFields(presetID, which) {
-      const parent = allPresets[presetID];
+    function inheritFields(parent, which) {
       if (!parent) return [];
 
       if (which === 'fields') {
@@ -305,6 +354,14 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     }
   }
 
+
+  function stripDiacritics(s) {
+    // split combined diacritical characters into their parts
+    if (s.normalize) s = s.normalize('NFD');
+    // remove diacritics
+    s = s.replace(/[\u0300-\u036f]/g, '');
+    return s;
+  }
 
   return _this;
 }

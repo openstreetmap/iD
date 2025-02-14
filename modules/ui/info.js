@@ -58,7 +58,7 @@ export function uiInfo(context) {
 
             title
                 .append('h3')
-                .html(function(d) { return panels[d].label; });
+                .each(function(d) { return panels[d].label(d3_select(this)); });
 
             title
                 .append('button')

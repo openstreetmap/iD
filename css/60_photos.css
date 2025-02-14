@@ -1,3 +1,17 @@
+/* legend */
+li.list-item-photos.active:after {
+    display: block;
+    content: "";
+    height: 100%;
+    position: absolute;
+    right: 0;
+    width: 8px;
+}
+.ideditor[dir='rtl'] li.list-item-photos.active:after {
+    right: auto;
+    left: 0;
+}
+
 /* photo viewer div */
 .photoviewer {
     position: relative;
@@ -29,6 +43,15 @@
     padding: 5px;
     position: absolute;
     right: 5px;
+    top: 5px;
+    z-index: 50;
+}
+
+.photoviewer button.set-photo-from-viewer {
+    border-radius: 0;
+    padding: 5px;
+    position: absolute;
+    left: 5px;
     top: 5px;
     z-index: 50;
 }
@@ -68,12 +91,10 @@
 }
 
 
-.photo-wrapper,
-.photo-wrapper img {
+.photo-wrapper {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    object-fit: cover;
 }
 
 .photo-wrapper .photo-attribution {
@@ -83,9 +104,13 @@
     width: 100%;
     font-size: 10px;
     text-align: right;
-    line-height: 1.1em;
-    padding: 4px 2px;
+    line-height: 150%;
+    padding: 4px 8px;
     z-index: 10;
+}
+.photo-attribution-dual {
+    display: flex;
+    justify-content: space-between;
 }
 
 .photo-attribution a,
@@ -93,6 +118,7 @@
 .photo-attribution span {
     padding: 4px 2px;
     color: #fff;
+    text-wrap: nowrap;
 }
 
 /* markers and sequences */
@@ -108,17 +134,15 @@
     cursor: pointer;
 }
 
-.viewfield-group.currentView * {
-    fill: #ffee00 !important;
-}
-.viewfield-group.hovered * {
-    fill: #eebb00 !important;
-}
-
 .viewfield-group circle {
     stroke: #555;
     stroke-width: 1;
     stroke-opacity: 0.4;
+    fill-opacity: 0.4;
+}
+.viewfield-group .viewfield {
+    stroke-width: 0;
+    stroke: #222;
     fill-opacity: 0.4;
 }
 .viewfield-group.highlighted circle {
@@ -126,36 +150,38 @@
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
-.viewfield-group.highlighted.hovered circle {
+.viewfield-group.highlighted .viewfield {
+    stroke-width: 1;
+    fill-opacity: 0.8;
+}
+.viewfield-group.hovered circle {
+    fill: #eebb00;
     stroke: #222;
     stroke-width: 2;
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
-.viewfield-group.highlighted.currentView circle {
+.viewfield-group.hovered .viewfield {
+    fill: #eebb00;
+    stroke: #222;
+    stroke-width: 1;
+    fill-opacity: 0.8;
+}
+.viewfield-group.currentView circle {
+    fill: #ffee00;
     stroke: #222;
     stroke-width: 2;
     stroke-opacity: 1;
     fill-opacity: 1;
 }
-
-.viewfield-group .viewfield {
-    stroke-width: 0;
+.viewfield-group.currentView .viewfield {
+    fill: #ffee00;
     stroke: #222;
-    fill-opacity: 0.4;
-}
-.viewfield-group.highlighted .viewfield {
     stroke-width: 1;
-    fill-opacity: 0.8;
-}
-.viewfield-group.highlighted.hovered .viewfield {
-    stroke-width: 1;
-    fill-opacity: 0.8;
-}
-.viewfield-group.highlighted.currentView .viewfield {
-    stroke-width: 1;
+    stroke-opacity: 1;
     fill-opacity: 0.9;
 }
+
 
 .viewfield-group.currentView .viewfield-scale {
     transform: scale(2,2);
@@ -164,7 +190,7 @@
 .sequence {
     fill: none;
     stroke-width: 2;
-    stroke-opacity: 0.4;
+    stroke-opacity: 0.6;
 }
 .sequence.highlighted,
 .sequence.currentView {
@@ -174,6 +200,9 @@
 
 
 /* Streetside Image Layer */
+li.list-item-photos.list-item-streetside.active:after {
+    background-color: #0fffc4;
+}
 .layer-streetside-images {
     pointer-events: none;
 }
@@ -185,8 +214,26 @@
     stroke-opacity: 0.85;  /* bump opacity - only one per road */
 }
 
+/* Vegbilder Image Layer */
+li.list-item-photos.list-item-vegbilder.active:after {
+    background-color: #ed1c2e;
+}
+.layer-vegbilder {
+    pointer-events: none;
+}
+.layer-vegbilder .viewfield-group * {
+    fill: #ed1c2e;
+}
+.layer-vegbilder .sequence {
+    stroke: #ed1c2e;
+    stroke-opacity: 0.85;  /* bump opacity - only one per road */
+}
+
 
 /* Mapillary Image Layer */
+li.list-item-photos.list-item-mapillary.active:after {
+    background-color: #55ff22;
+}
 .layer-mapillary {
     pointer-events: none;
 }
@@ -234,6 +281,9 @@
 
 
 /* KartaView Image Layer */
+li.list-item-photos.list-item-kartaview.active:after {
+    background-color: #20c4ff;
+}
 .layer-kartaview {
     pointer-events: none;
 }
@@ -245,7 +295,114 @@
 }
 
 
+/* Mapilio Image Layer */
+li.list-item-photos.list-item-mapilio.active:after {
+    background-color: #0056f1;
+}
+.layer-mapilio {
+    pointer-events: none;
+}
+.layer-mapilio .viewfield-group * {
+    fill: #0056f1;
+}
+.layer-mapilio .viewfield-group:not(.currentView):not(.hovered) * {
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-mapilio .sequence {
+    stroke: #0056f1;
+}
+.photo-controls-mapilio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-mapilio button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+.ideditor .mapilio-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#ideditor-viewer-mapilio-simple-wrap {
+    height: 100%;
+}
+#ideditor-viewer-mapilio-simple {
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+}
+#ideditor-viewer-mapilio-simple img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+/* panoramax Image Layer */
+li.list-item-photos.list-item-panoramax.active:after {
+    background-color: #ff6f00;
+}
+.layer-panoramax {
+    pointer-events: none;
+}
+.layer-panoramax .viewfield-group * {
+    fill: #ff6f00;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+.layer-panoramax .sequence {
+    stroke: #ff6f00;
+}
+.photo-controls-panoramax {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.photo-controls-panoramax button {
+    padding:0 6px;
+    pointer-events: initial;
+}
+
+label.panoramax-hd {
+    float: left;
+    cursor: pointer;
+}
+.panoramax-hd span {
+    margin-top: 2px;
+}
+.panoramax-hd input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    margin: 0 2px;
+}
+
+.slider-wrap {
+    display: inline-block;
+}
+
+.year-datalist {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-option-date-slider{
+    direction: rtl
+}
+
 /* Streetside Viewer (pannellum) */
+.ms-wrapper .photo-attribution {
+    line-height: 1.1em;
+    padding: 4px 2px;
+}
 .ms-wrapper .photo-attribution .image-link {
     display: block;
 }
@@ -273,7 +430,9 @@
     }
 }
 
-.ms-wrapper .pnlm-compass.pnlm-control {
+.ms-wrapper .pnlm-compass.pnlm-control,
+.vegbilder-wrapper  .pnlm-compass.pnlm-control,
+.panoramax-wrapper  .pnlm-compass.pnlm-control {
     width: 26px;
     height: 26px;
     left: 4px;
@@ -293,6 +452,10 @@ label.streetside-hires {
     width: 12px;
     height: 12px;
     margin: 0 5px;
+}
+
+.pnlm-zoom-controls {
+    margin-top: 6px;
 }
 
 
@@ -315,8 +478,12 @@ label.streetside-hires {
     align-items: center;
 }
 
+.mapillary-attribution-image-container {
+  height: auto;
+}
+
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-username {
-    display: none;
+    padding: 0px 8px 0 6px;
 }
 
 .mly-wrapper .mapillary-attribution-container .mapillary-attribution-date {
@@ -332,6 +499,13 @@ label.streetside-hires {
     background-repeat: no-repeat;
 }
 
+.kartaview-wrapper img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
 .kartaview-wrapper .photo-attribution a:active {
     color: #20c4ff;
 }
@@ -344,9 +518,28 @@ label.streetside-hires {
 .kartaview-image-wrap {
     width: 100%;
     height: 100%;
-    transform-origin:0 0;
+    transform-origin: 0 0;
 }
 
+.photo-wrapper {
+    position: relative;
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.photoviewer .plane-frame {
+    height: 100%;
+    width: 100%;
+    transform-origin: 0 0;
+}
+
+.photoviewer .plane-frame > img.plane-photo {
+    width: auto;
+    height: 100%;
+    transform-origin: 0 0;
+}
 
 /* photo-controls (step forward, back, rotate) */
 .photo-controls-wrap {
@@ -368,6 +561,7 @@ label.streetside-hires {
 .photo-controls button:focus {
     height: 18px;
     width: 18px;
+    line-height: 18px;
     background: rgba(0,0,0,0.65);
     color: #eee;
     border-radius: 0;
@@ -388,3 +582,102 @@ label.streetside-hires {
         color: #fff;
     }
 }
+
+/* local georeferenced photos */
+.layer-local-photos {
+    pointer-events: none;
+}
+.layer-local-photos .viewfield-group * {
+    fill: #ed00d9;
+}
+.local-photos {
+    display: flex;
+}
+.local-photos > div {
+    width: 50%;
+}
+.local-photos > div:first-child {
+    margin-right: 20px;
+}
+
+.list-local-photos {
+    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-x: auto;
+    /* workaround for something like "overflow-x: visible"
+       see https://stackoverflow.com/a/39554003 */
+    margin-left: -100px;
+    padding-left: 100px;
+    margin-top: -20px;
+    padding-top: 20px;
+    min-height: 100px;
+}
+.list-local-photos::-webkit-scrollbar {
+    border-left: none;
+}
+.list-local-photos li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+}
+.list-local-photos span.filename {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    padding-left: 8px;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.list-local-photos li:first-child span.filename {
+    border-top: 1px solid #ccc;
+    border-top-left-radius: 4px;
+}
+.list-local-photos li:first-child button {
+    border-top: 1px solid #ccc;
+}
+.list-local-photos li:first-child button.remove {
+    border-top-right-radius: 4px;
+}
+.list-local-photos li:last-child span.filename {
+    border-bottom-left-radius: 4px;
+}
+.list-local-photos li:last-child button.remove {
+    border-bottom-right-radius: 4px;
+}
+.list-local-photos li.invalid button.zoom-to-data {
+    display: none;
+}
+.list-local-photos li button.no-geolocation {
+    display: none;
+}
+.list-local-photos li.invalid button.no-geolocation {
+    display: block;
+    color: red;
+}
+.list-local-photos .placeholder div {
+    display: block;
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(img/loader-black.gif);
+    filter: invert(1);
+}
+.local-photos label.button {
+    background: #7092ff;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 25px;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+}
+

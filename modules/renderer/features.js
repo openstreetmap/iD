@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity } from '../osm';
+import { osmEntity, osmLifecyclePrefixes } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '../util';
 
@@ -24,7 +24,8 @@ export function rendererFeatures(context) {
         'tertiary_link': true,
         'residential': true,
         'unclassified': true,
-        'living_street': true
+        'living_street': true,
+        'busway': true
     };
 
     var service_roads = {
@@ -39,18 +40,8 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
+        'ladder': true,
         'pedestrian': true
-    };
-
-    var past_futures = {
-        'proposed': true,
-        'construction': true,
-        'abandoned': true,
-        'dismantled': true,
-        'disused': true,
-        'razed': true,
-        'demolished': true,
-        'obliterated': true
     };
 
     var _cullFactor = 1;
@@ -80,6 +71,18 @@ export function rendererFeatures(context) {
     }
 
 
+    /**
+     * @callback FilterFunction
+     * @param {Record<string, string>} tags
+     * @param {string} [geometry]
+     * @returns {boolean}
+     */
+
+    /**
+     * @param {string} k
+     * @param {FilterFunction} filter
+     * @param {number} [max]
+     */
     function defineRule(k, filter, max) {
         var isEnabled = true;
 
@@ -128,15 +131,20 @@ export function rendererFeatures(context) {
     }, 250);
 
     defineRule('building_parts', function isBuildingPart(tags) {
-        return tags['building:part'];
+        return !!tags['building:part'];
     });
 
     defineRule('indoor', function isIndoor(tags) {
-        return tags.indoor;
+        return !!tags.indoor;
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' &&
+        return geometry === 'area' && (
+            !!tags.landuse ||
+            !!tags.natural ||
+            !!tags.leisure ||
+            !!tags.amenity
+        ) &&
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
             !_rules.indoor.filter(tags) &&
@@ -144,9 +152,13 @@ export function rendererFeatures(context) {
             !_rules.pistes.filter(tags);
     });
 
-    defineRule('boundaries', function isBoundary(tags) {
+    defineRule('boundaries', function isBoundary(tags, geometry) {
+        // This rule applies if the object has no interesting tags, and if either:
+        //   (a) is a way having a `boundary=*` tag, or
+        //   (b) is a relation of `type=boundary`.
         return (
-            !!tags.boundary
+            (geometry === 'line' && !!tags.boundary) ||
+            (geometry === 'relation' && tags.type === 'boundary')
         ) && !(
             traffic_roads[tags.highway] ||
             service_roads[tags.highway] ||
@@ -188,8 +200,8 @@ export function rendererFeatures(context) {
         return tags['piste:type'];
     });
 
-    defineRule('aerialways', function isPiste(tags) {
-        return tags.aerialway &&
+    defineRule('aerialways', function isAerialways(tags) {
+        return !!tags?.aerialway &&
             tags.aerialway !== 'yes' &&
             tags.aerialway !== 'station';
     });
@@ -206,11 +218,12 @@ export function rendererFeatures(context) {
             paths[tags.highway]
         ) { return false; }
 
-        var strings = Object.keys(tags);
+        const keys = Object.keys(tags);
 
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (past_futures[s] || past_futures[tags[s]]) { return true; }
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const s = key.split(':')[0];
+            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[key]]) return true;
         }
         return false;
     });
@@ -254,7 +267,7 @@ export function rendererFeatures(context) {
         if (!arguments.length) {
             return _keys.filter(function(k) { return _rules[k].hidden(); });
         }
-        return _rules[k] && _rules[k].hidden();
+        return _rules[k]?.hidden();
     };
 
 

@@ -1,9 +1,15 @@
-/* eslint-disable no-console */
 /* Downloads the latest translations from Transifex */
 const fs = require('fs');
 
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
-const rematchCodes = { 'ar-AA': 'ar', 'zh-CN': 'zh', 'zh-HK': 'zh-Hant-HK', 'zh-TW': 'zh-Hant', 'pt-BR': 'pt', 'pt': 'pt-PT' };
+const rematchCodes = {
+  'ar-AA': 'ar',
+  'pt-BR': 'pt',
+  'pt': 'pt-PT',
+  'zh-CN': 'zh',
+  'zh-TW': 'zh-Hant',
+  'zh-HK': 'zh-Hant-HK'
+};
 
 const codesToSkip = ['ase', 'mis', 'mul', 'und', 'zxx'];
 
@@ -11,9 +17,95 @@ let referencedScripts = [];
 
 function getLangNamesInNativeLang() {
   // manually add languages we want that aren't in CLDR
+  // see for example https://github.com/openstreetmap/iD/pull/9241/
   let unordered = {
-    'oc': {
-      nativeName: 'Occitan'
+    aer: { nativeName: 'Arrernte' },
+    aoi: { nativeName: 'Anindilyakwa' },
+    aus: { nativeName: 'Australian Aboriginal Languages' },
+    bdy: { nativeName: 'Yugambeh–Bandjalangic' },
+    'bft': {
+      nativeName: 'بلتی'
+    },
+    'bha': {
+      nativeName: 'भरीयाटी'
+    },
+    'brh': {
+      nativeName: 'براہوئی'
+    },
+    coa: { nativeName: 'Basa Pulu Kokos' },
+    'cdo': {
+      nativeName: '閩東語'
+    },
+    'cdo-Hans': {
+      base: 'cdo',
+      script: 'Hans',
+      nativeName: '闽东语（简化汉字）'
+    },
+    'cdo-Hant': {
+      base: 'cdo',
+      script: 'Hant',
+      nativeName: '閩東語（傳統漢字）'
+    },
+    'cdo-Latn': {
+      base: 'cdo',
+      script: 'Latn',
+      nativeName: 'Mìng-dĕ̤ng-ngṳ̄ (Bàng-uâ-cê)'
+    },
+    'cpx': {
+      nativeName: '莆仙語'
+    },
+    'cpx-Hans': {
+      base: 'cpx',
+      script: 'Hans',
+      nativeName: '莆仙语（简体）'
+    },
+    'cpx-Hant': {
+      base: 'cpx',
+      script: 'Hant',
+      nativeName: '莆仙語（繁體）'
+    },
+    'cpx-Latn': {
+      base: 'cpx',
+      script: 'Latn',
+      nativeName: 'Pó-sing-gṳ̂ (Báⁿ-uā-ci̍)'
+    },
+    dgw: { nativeName: 'Daungwurrung' },
+    'gan': {
+      nativeName: '贛語'
+    },
+    'gan-Hans': {
+      base: 'gan',
+      script: 'Hans',
+      nativeName: '赣语（简体）'
+    },
+    'gan-Hant': {
+      base: 'gan',
+      script: 'Hant',
+      nativeName: '贛語（繁體）'
+    },
+    gjm: { nativeName: 'Gunditjmara' },
+    gjr: { nativeName: 'Gurindji Kriol' },
+    gup: { nativeName: 'Bininj Gun-Wok' },
+    'hak': {
+      nativeName: '客家語'
+    },
+    'hak-Hans': {
+      base: 'hak',
+      script: 'Hans',
+      nativeName: '客家语（简体）'
+    },
+    'hak-Hant': {
+      base: 'hak',
+      script: 'Hant',
+      nativeName: '客家語（繁體）'
+    },
+    'hak-Latn': {
+      base: 'hak',
+      script: 'Latn',
+      nativeName: 'Hak-kâ-ngî (Pha̍k-fa-sṳ)'
+    },
+    'hsn': {
+      nativeName: '湘語'
     },
     'ja-Hira': {
       base: 'ja',
@@ -23,20 +115,117 @@ function getLangNamesInNativeLang() {
       base: 'ja',
       script: 'Latn'
     },
+    jay: { nativeName: 'Yan-nhaŋu' },
+    'kls': {
+      nativeName: 'Kal\'as\'amondr'
+    },
     'ko-Latn': {
       base: 'ko',
       script: 'Latn'
     },
-    'zh_pinyin': {
+    'mnc-Latn': {
+      base: 'mnc',
+      script: 'Latn',
+      nativeName: 'manju gisun'
+    },
+    'mnc-Mong': {
+      base: 'mnc',
+      script: 'Mong',
+      nativeName: 'ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ'
+    },
+    mwf: { nativeName: 'Murrinh-Patha' },
+    mwp: { nativeName: 'Kalaw Lagaw Ya' },
+    'nan': {
+      nativeName: '閩南語'
+    },
+    'nan-Hant': {
+      base: 'nan',
+      script: 'Hant',
+      nativeName: '閩南語（傳統漢字）'
+    },
+    'nan-Latn-pehoeji': {
+      base: 'nan',
+      script: 'Latn',
+      nativeName: 'Bân-lâm-gú (Pe̍h-ōe-jī)'
+    },
+    'nan-Latn-tailo': {
+      base: 'nan',
+      script: 'Latn',
+      nativeName: 'Bân-lâm-gú (Tâi-lô)'
+    },
+    nys: { nativeName: 'Nyungar' },
+    'oc': {
+      nativeName: 'Occitan'
+    },
+    pih: { nativeName: 'Pitkern–Norfuk' },
+    piu: { nativeName: 'Pintupi' },
+    pjt: { nativeName: 'Pitjantjatjara' },
+    'pnb': {
+      nativeName: 'پنجابی'
+    },
+    rop: { nativeName: 'Australian Kriol' },
+    rrm: { nativeName: 'Moriori' },
+    'scl': {
+      nativeName: 'ݜݨیاٗ'
+    },
+    'shg': {
+      nativeName: 'хуг̌ну̊н зив'
+    },
+    'skr': {
+      nativeName: 'سرائیکی'
+    },
+    tcs: { nativeName: 'Yumplatok' },
+    tiw: { nativeName: 'Tiwi' },
+    'trw': {
+      nativeName: 'توروالی'
+    },
+    ulk: { nativeName: 'Meriam Mir' },
+    'wbl': {
+      nativeName: 'وخی'
+    },
+    wlp: { nativeName: 'Warlpiri' },
+    'wuu': {
+      nativeName: '吳語'
+    },
+    'wuu-Hans': {
+      base: 'wuu',
+      script: 'Hans',
+      nativeName: '吴语（简体）'
+    },
+    'wuu-Hant': {
+      base: 'wuu',
+      script: 'Hant',
+      nativeName: '吳語（正體）'
+    },
+    wrh: { nativeName: 'Wiradjuri' },
+    wth: { nativeName: 'Wathawurrung' },
+    wyi: { nativeName: 'Woiwurrung' },
+    xdk: { nativeName: 'Dharug' },
+    xni: { nativeName: 'Ngarigo' },
+    xph: { nativeName: 'Tyerrernotepanner' },
+    xrd: { nativeName: 'Gundungurra' },
+    'yue-Hans': {
+      base: 'yue',
+      script: 'Hans',
+      nativeName: '粵语（简体）'
+    },
+    'yue-Hant': {
+      base: 'yue',
+      script: 'Hant',
+      nativeName: '粵語（繁體）'
+    },
+    'zh-Latn-pinyin': {
       base: 'zh',
-      script: 'Latn'
-    }
+      script: 'Latn',
+      nativeName: 'Zhōngwén (Hànyǔ Pīnyīn)'
+    },
+    zku: { nativeName: 'Kaurna' },
   };
 
   let langDirectoryPaths = fs.readdirSync(cldrMainDir);
   langDirectoryPaths.forEach(code => {
     let languagesPath = `${cldrMainDir}${code}/languages.json`;
-    //if (!fs.existsSync(languagesPath)) return;
+    if (!fs.existsSync(languagesPath)) return;
     let languageObj = JSON.parse(fs.readFileSync(languagesPath, 'utf8')).main[code];
     let identity = languageObj.identity;
 
@@ -68,6 +257,10 @@ function getLangNamesInNativeLang() {
     if (codesToSkip.indexOf(code) !== -1) return;
     unordered[code] = {};
   });
+
+  // delete codes which should not be used
+  delete unordered['pa-Arab']; // https://github.com/openstreetmap/iD/pull/9241/
+  delete unordered['pa-Guru']; // - " -
 
   let ordered = {};
   Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);

@@ -196,7 +196,7 @@ describe('iD.serviceTaginfo', function() {
     describe('#values', function() {
         it('calls the given callback with the results of the values query', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.1}]}',
+                body: '{"data":[{"value":"parking","description":"A place for parking cars", "count":1000}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -217,8 +217,8 @@ describe('iD.serviceTaginfo', function() {
 
         it('includes popular values', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":1.0},' +
-                    '{"value":"party","description":"A place for partying", "fraction":0.0}]}',
+                body: '{"data":[{"value":"parking","description":"A place for parking cars", "count":1000},' +
+                    '{"value":"party","description":"A place for partying", "count":1}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -236,8 +236,8 @@ describe('iD.serviceTaginfo', function() {
 
         it('does not get values for extremely unpopular keys', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"Rue Pasteur","description":"", "fraction":0.0001},' +
-                    '{"value":"Via Trieste","description":"", "fraction":0.0001}]}',
+                body: '{"data":[{"value":"Rue Pasteur","description":"", "count":3},' +
+                    '{"value":"Via Trieste","description":"", "count":1}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -251,13 +251,31 @@ describe('iD.serviceTaginfo', function() {
             }, 50);
         });
 
+        it('includes unpopular values with a wiki page', function(done) {
+            fetchMock.mock(/\/key\/values/, {
+                body: '{"data":[{"value":"party","description":"A place for partying", "count":1, "in_wiki": true}]}',
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            var callback = sinon.spy();
+            taginfo.values({ key: 'amenity', query: 'par' }, callback);
+
+            window.setTimeout(function() {
+                expect(callback).to.have.been.calledWith(
+                    null, [{'value':'party','title':'A place for partying'}]
+                );
+                done();
+            }, 50);
+        });
+
         it('excludes values with capital letters and some punctuation', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"parking","description":"A place for parking cars", "fraction":0.2},'
-                    + '{"value":"PArking","description":"A common misspelling", "fraction":0.2},'
-                    + '{"value":"parking;partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
-                    + '{"value":"parking, partying","description":"A place for parking cars *and* partying", "fraction":0.2},'
-                    + '{"value":"*","description":"", "fraction":0.2}]}',
+                body: '{"data":[{"value":"parking","description":"A place for parking cars", "count":2000},'
+                    + '{"value":"PArking","description":"A common misspelling", "count":200},'
+                    + '{"value":"parking;partying","description":"A place for parking cars *and* partying", "count":200},'
+                    + '{"value":"parking, partying","description":"A place for parking cars *and* partying", "count":200},'
+                    + '{"value":"*","description":"", "count":200}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -275,11 +293,11 @@ describe('iD.serviceTaginfo', function() {
 
         it('includes network values with capital letters and some punctuation', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"US:TX:FM","description":"Farm to Market Roads in the U.S. state of Texas.", "fraction":0.34},'
-                    + '{"value":"US:KY","description":"Primary and secondary state highways in the U.S. state of Kentucky.", "fraction":0.31},'
-                    + '{"value":"US:US","description":"U.S. routes in the United States.", "fraction":0.19},'
-                    + '{"value":"US:I","description":"Interstate highways in the United States.", "fraction":0.11},'
-                    + '{"value":"US:MD","description":"State highways in the U.S. state of Maryland.", "fraction":0.06}]}',
+                body: '{"data":[{"value":"US:TX:FM","description":"Farm to Market Roads in the U.S. state of Texas.", "count":34000},'
+                    + '{"value":"US:KY","description":"Primary and secondary state highways in the U.S. state of Kentucky.", "count":31000},'
+                    + '{"value":"US:US","description":"U.S. routes in the United States.", "count":19000},'
+                    + '{"value":"US:I","description":"Interstate highways in the United States.", "count":11000},'
+                    + '{"value":"US:MD","description":"State highways in the U.S. state of Maryland.", "count":600}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -301,7 +319,7 @@ describe('iD.serviceTaginfo', function() {
 
         it('includes biological genus values with capital letters', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"Quercus","description":"Oak", "fraction":0.5}]}',
+                body: '{"data":[{"value":"Quercus","description":"Oak", "count": 1000}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -319,7 +337,7 @@ describe('iD.serviceTaginfo', function() {
 
         it('includes biological taxon values with capital letters', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}',
+                body: '{"data":[{"value":"Quercus robur","description":"Oak", "count": 1000}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -337,7 +355,7 @@ describe('iD.serviceTaginfo', function() {
 
         it('includes biological species values with capital letters', function(done) {
             fetchMock.mock(/\/key\/values/, {
-                body: '{"data":[{"value":"Quercus robur","description":"Oak", "fraction":0.5}]}',
+                body: '{"data":[{"value":"Quercus robur","description":"Oak", "count": 1000}]}',
                 status: 200,
                 headers: { 'Content-Type': 'application/json' }
             });

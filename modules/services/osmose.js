@@ -123,7 +123,7 @@ export default {
       if (_cache.loadedTile[tile.id] || _cache.inflightTile[tile.id]) return;
 
       let [ x, y, z ] = tile.xyz;
-      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.json?` + utilQsString(params);
+      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.geojson?` + utilQsString(params);
 
       let controller = new AbortController();
       _cache.inflightTile[tile.id] = controller;

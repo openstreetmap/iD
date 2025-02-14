@@ -14,8 +14,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
-  _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
-* __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
+  _Example:_ `background=custom:https://tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+* __`comment`__ - Prefills the changeset comment.<br/>
   _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
 * __`disable_features`__ - Disables features in the list.<br/>
   _Example:_ `disable_features=water,service_roads,points,paths,boundaries`<br/>
@@ -23,13 +23,13 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   `boundaries`, `water`, `rail`, `pistes`, `aerialways`, `power`, `past_future`, `others`
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
-  _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
-* __`hashtags`__ - Prefills the changeset hashtags.  Pass a url encoded list of event
+  _Example:_ `gpx=https://gist.githubusercontent.com/answerquest/9445352b60ca5b44714675eae00f243a/raw/56a6343a29223318f4a697bfd16cbb2c3b8155ad/sample_boundary.gpx`
+* __`hashtags`__ - Prefills the changeset hashtags.  Pass a list of event
   hashtags separated by commas, semicolons, or spaces.  Leading '#' symbols are
   optional and will be added automatically. (Note that hashtag-like strings are
   automatically detected in the `comment`).<br/>
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
-* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node, way or relation, respectively. Selects the specified entity, and, unless a `map` parameter is also provided, centers the map on it.<br/>
+* __`id`__ - Selects the specified OSM node, way, relation or note, and, unless a `map` parameter is also provided, centers the map on it. Supported formats are: a) `[nwr]<osm-id>` where the character 'n', 'w', or 'r' correspond to a OSM node, way or relation, respectively; or b) `<osm-type>/<osm-id>` which also allows to specify OSM notes (example: `note/1`).<br/>
   _Example:_ `id=n1207480649`
 * __`locale`__ - A code specifying the localization to use, affecting the language, layout, and keyboard shortcuts. Multiple codes may be specified in order of preference. The first valid code will be the locale, while the rest will be used as fallbacks if certain text hasn't been translated. The default locale preferences are set by the browser.<br/>
   _Example:_ `locale=ja`, `locale=pt-BR`, `locale=nl,fr,de`<br/>
@@ -38,6 +38,8 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Example:_ `map=20.00/38.90085/-77.02271`
 * __`maprules`__ - A path to a [MapRules](https://github.com/radiant-maxar/maprules) service endpoint for enhanced tag validation.<br/>
   _Example:_ `maprules=https://path/to/file.json`
+* __`notes`__ - Enables the notes layer by default.<br/>
+  _Example:_ `notes=true`
 * __`offset`__ - Background imagery alignment offset in meters, formatted as `east,north`.<br/>
   _Example:_ `offset=-10,5`
 * __`photo_overlay`__ - The street-level photo overlay layers to enable.<br/>
@@ -53,37 +55,72 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
 * __`presets`__ - A comma-separated list of preset IDs. These will be the only presets the user may select.<br/>
   _Example:_ `presets=building,highway/residential,highway/unclassified`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
-* __`source`__ - Prefills the changeset source. Pass a url encoded string.<br/>
+* __`source`__ - Prefills the changeset source.<br/>
   _Example:_ `source=Bing%3BMapillary`
-* __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationDisable`__ - The issues identified by these types/subtypes will be disabled (i.e. Issues will not be shown at all). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationDisable=crossing_ways/highway*,crossing_ways/tunnel*`
-* __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationWarning`__ - The issues identified by these types/subtypes will be treated as warnings (i.e. Issues will be surfaced to the user but not block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationWarning=crossing_ways/highway*,crossing_ways/tunnel*`
-* __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a urlencoded, comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
+* __`validationError`__ - The issues identified by these types/subtypes will be treated as errors (i.e. Issues will be surfaced to the user but will block changeset upload). Each parameter value should contain a comma-separated list of type/subtype match rules.  An asterisk `*` may be used as a wildcard.<br/>
   _Example:_ `validationError=crossing_ways/highway*,crossing_ways/tunnel*`
 * __`walkthrough=true`__ - Start the walkthrough automatically
 
+Pass these parameters as a `x-www-form-urlencoded` string in the _hash_ portion of the URL, similarly to how you how a _query_ string of an URL is typically constructed. Input strings have to be [percent encoded](https://en.wikipedia.org/wiki/Percent-encoding) (spaces can be represented either as `+` or `%20`), for example using [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/toString) in Javascript.
+
+
 ##### iD on openstreetmap.org (Rails Port)
 
-When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
-Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
-are available as **regular URL query parameters**:
+When constructing a URL to an instance of iD embedded on the [OpenStreetMap website](github.com/openstreetmap/openstreetmap-website/) (e.g. `https://www.openstreetmap.org/edit?editor=id`), the following parameters
+are available as **URL hash parameters**.
+_Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.githubusercontent.com/answerquest/9445352b60ca5b44714675eae00f243a/raw/56a6343a29223318f4a697bfd16cbb2c3b8155ad/sample_boundary.gpx`
 
-* __`map`__ - same as standalone
-* __`lat`__, __`lon`__, __`zoom`__ - Self-explanatory.
-* __`node`__, __`way`__, __`relation`__ - Select the specified entity.
-* __`background`__ - same as standalone
-* __`disable_features`__ - same as standalone
-* __`gpx`__ - same as standalone
-* __`maprules`__ - same as standalone
-* __`offset`__ - same as standalone
-* __`presets`__ - same as standalone
-* __`comment`__ - same as standalone
-* __`source`__ - same as standalone
-* __`hashtags`__ - same as standalone
-* __`locale`__ - same as standalone, but the default locale is set by the language settings in your OSM user account.
-* __`walkthrough`__ - same as standalone
+* __`map`__
+* __`gpx`__
+* __`background`__
+* __`comment`__
+* __`disable_features`__
+* __`hashtags`__
+* __`locale`__
+* __`maprules`__
+* __`notes`__
+* __`offset`__
+* __`photo`__
+* __`photo_dates`__
+* __`photo_overlay`__
+* __`photo_username`__
+* __`presets`__
+* __`source`__
+* __`validationDisable`__
+* __`validationWarning`__
+* __`validationError`__
 
+For a description of these parameters, refer to the [_iD standalone_ section](#id-standalone) above.
+
+In addition, the following parameters are available as **URL query parameters**:
+
+* __`lat`__, __`lon`__, __`zoom`__<br/>
+  _Example:_ `https://www.openstreetmap.org/edit?editor=id&lat=46.4705&lon=11.2423&zoom=16`<br/>
+* __`node`__, __`way`__, __`relation`__ - Selects the specified OSM object (similar to the `id` parameter of the standalone version of iD).<br/>
+  _Example:_ `https://www.openstreetmap.org/edit?editor=id&node=1`<br/>
+* __`locale`__ - Same as standalone, but the default locale is set by the language settings in your OSM user account.<br/>
+  _Example:_ `https://www.openstreetmap.org/edit?editor=id&locale=de`<br/>
+* __`gpx`__ - Expects a trace ID of a [public gps trace](https://www.openstreetmap.org/traces) uploaded on OpenStreetMap.<br/>
+  _Example:_ `https://www.openstreetmap.org/edit?editor=id&gpx=4009513`<br/>
+
+
+## Environment variables
+
+Environment variables or a dotenv file can be used to configure certain aspects of iD at build time.
+
+* __`ID_API_CONNECTION_URL`__, [__`ID_API_CONNECTION_API_URL`__,] __`ID_API_CONNECTION_CLIENT_ID`__  - Custom [OAuth2](https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2) connection details to an OSM API server.
+* __`ID_API_CONNECTION_API_URL`__ Optional url to use for OSM API calls aftern the initial authentication is complete when using a custom OAuth2 connection (see above). If unspecified, `ID_API_CONNECTION_URL` will be used for both the authentication and subsequent API calls.
+* __`ID_API_CONNECTION`__ - Either `live` or `dev`, if only either one should be made offered for editing.
+* __`ID_PRESETS_CDN_URL`__ - The URL where iD should fetch it's tagging presets from. Needs to point to a CORS enabled web server which is serving the `package.json` and `dist` folder of a repository built on [`@ideditor/schema-builder`](https://github.com/ideditor/schema-builder).
+* __`ENV__ID_OCI_CDN_URL`__ - URL to a hosted version of the [osm-community-index](https://github.com/osmlab/osm-community-index)
+* __`ENV__ID_NSI_CDN_URL`__ - URL to a hosted version of the [name-suggestion-index](https://github.com/osmlab/name-suggestion-index)
+* __`ENV__ID_WMF_SITEMATRIX_CDN_URL`__ - URL to a hosted version of the [wmf-sitematrix](https://github.com/osmlab/wmf-sitematrix)
+* __`ID_TAGINFO_API_URL`__ - URL to a [taginfo](https://wiki.openstreetmap.org/wiki/Taginfo) service.
+* __`ID_NOMINATIM_API_URL`__ - URL to a [nominatim](https://wiki.openstreetmap.org/wiki/Nominatim) geocoding service.
 
 ## CSS selectors
 
@@ -136,7 +173,7 @@ have `.area` and `.way` classes.
 Elements also receive classes according to certain of the OSM key-value tags that are
 assigned to them.
 
-Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/js/id/svg/tag_classes.js) for details).
+Tag classes are prefixed with `tag-` (see [`iD.svgTagClasses`](https://github.com/openstreetmap/iD/blob/develop/modules/svg/tag_classes.js) for details).
 
 #### Primary
 

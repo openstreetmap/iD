@@ -17,7 +17,7 @@ export default {
 
 
     // Search for Wikidata items matching the query
-    itemsForSearchQuery: function(query, callback) {
+    itemsForSearchQuery: function(query, callback, language) {
         if (!query) {
             if (callback) callback('No query', {});
             return;
@@ -32,7 +32,7 @@ export default {
             search: query,
             type: 'item',
             // the language to search
-            language: lang,
+            language: language || lang,
             // the language for the label and description in the result
             uselang: lang,
             limit: 10,
@@ -40,9 +40,17 @@ export default {
         });
 
         d3_json(url)
-            .then(function(result) {
+            .then(result => {
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    if (result.error.code === 'badvalue' &&
+                        result.error.info.includes(lang) &&
+                        !language && lang.includes('-')) {
+                        // retry without "country suffix" region subtag
+                        this.itemsForSearchQuery(query, callback, lang.split('-')[0]);
+                        return;
+                    } else {
+                        throw new Error(result.error);
+                    }
                 }
                 if (callback) callback(null, result.search || {});
             })

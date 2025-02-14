@@ -3,8 +3,8 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags } from './tags';
-import { utilArrayUniq } from '../util';
+import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
+import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 
 
 export function osmWay() {
@@ -109,9 +109,9 @@ Object.assign(osmWay.prototype, {
                 motorway: 5, motorway_link: 5, trunk: 4.5, trunk_link: 4.5,
                 primary: 4, secondary: 4, tertiary: 4,
                 primary_link: 4, secondary_link: 4, tertiary_link: 4,
-                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, pedestrian: 4,
+                unclassified: 4, road: 4, living_street: 4, bus_guideway: 4, busway: 4, pedestrian: 4,
                 residential: 3.5, service: 3.5, track: 3, cycleway: 2.5,
-                bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5
+                bridleway: 2, corridor: 2, steps: 2, path: 1.5, footway: 1.5, ladder: 0.5,
             },
             railway: { // width includes ties and rail bed, not just track gauge
                 rail: 2.5, light_rail: 2.5, tram: 2.5, subway: 2.5,
@@ -138,37 +138,41 @@ Object.assign(osmWay.prototype, {
     },
 
 
-    isOneWay: function() {
-        // explicit oneway tag..
-        var values = {
-            'yes': true,
-            '1': true,
-            '-1': true,
-            'reversible': true,
-            'alternating': true,
-            'no': false,
-            '0': false
-        };
-        if (values[this.tags.oneway] !== undefined) {
-            return values[this.tags.oneway];
-        }
+    /** @returns {boolean} for example, if `oneway=yes` */
+    isOneWayForwards() {
+        if (this.tags.oneway === 'no') return false;
 
-        // implied oneway tag..
-        for (var key in this.tags) {
-            if (key in osmOneWayTags &&
-                (this.tags[key] in osmOneWayTags[key])) {
-                return true;
-            }
-        }
-        return false;
+        return !!utilCheckTagDictionary(this.tags, osmOneWayForwardTags);
+    },
+
+    /** @returns {boolean} for example, if `oneway=-1` */
+    isOneWayBackwards() {
+        if (this.tags.oneway === 'no') return false;
+
+        return !!utilCheckTagDictionary(this.tags, osmOneWayBackwardTags);
+    },
+
+    /** @returns {boolean} for example, if `oneway=alternating` */
+    isBiDirectional() {
+        if (this.tags.oneway === 'no') return false;
+
+        return !!utilCheckTagDictionary(this.tags, osmOneWayBiDirectionalTags);
+    },
+
+    /** @returns {boolean} */
+    isOneWay() {
+        if (this.tags.oneway === 'no') return false;
+
+        return !!utilCheckTagDictionary(this.tags, osmOneWayTags);
     },
 
     // Some identifier for tag that implies that this way is "sided",
     // i.e. the right side is the 'inside' (e.g. the right side of a
     // natural=cliff is lower).
     sidednessIdentifier: function() {
-        for (var key in this.tags) {
-            var value = this.tags[key];
+        for (const realKey in this.tags) {
+            const value = this.tags[realKey];
+            const key = osmRemoveLifecyclePrefix(realKey);
             if (key in osmRightSideIsInsideTags && (value in osmRightSideIsInsideTags[key])) {
                 if (osmRightSideIsInsideTags[key][value] === true) {
                     return key;
@@ -241,7 +245,7 @@ Object.assign(osmWay.prototype, {
 
 
     isDegenerate: function() {
-        return (new Set(this.nodes).size < (this.isArea() ? 3 : 2));
+        return (new Set(this.nodes).size < (this.isClosed() ? 3 : 2));
     },
 
 

@@ -30,6 +30,7 @@ let _mlyShowFeatureDetections = false;
 let _mlyShowSignDetections = false;
 let _mlyViewer;
 let _mlyViewerFilter = ['all'];
+let _isViewerOpen = false;
 
 
 // Load all data for the specified type from Mapillary vector tiles
@@ -478,6 +479,8 @@ export default {
             _mlyViewer.resize();
         }
 
+        _isViewerOpen = true;
+
         return this;
     },
 
@@ -504,7 +507,15 @@ export default {
         dispatch.call('loadedMapFeatures');
         dispatch.call('loadedSigns');
 
+        _isViewerOpen = false;
+
         return this.setStyles(context, null);
+    },
+
+
+    // Get viewer status
+    isViewerOpen: function() {
+            return _isViewerOpen;
     },
 
 

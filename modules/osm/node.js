@@ -2,6 +2,24 @@ import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
 import { utilArrayUniq } from '../util';
 
+export const cardinal = {
+    north: 0,               n: 0,
+    northnortheast: 22,     nne: 22,
+    northeast: 45,          ne: 45,
+    eastnortheast: 67,      ene: 67,
+    east: 90,               e: 90,
+    eastsoutheast: 112,     ese: 112,
+    southeast: 135,         se: 135,
+    southsoutheast: 157,    sse: 157,
+    south: 180,             s: 180,
+    southsouthwest: 202,    ssw: 202,
+    southwest: 225,         sw: 225,
+    westsouthwest: 247,     wsw: 247,
+    west: 270,              w: 270,
+    westnorthwest: 292,     wnw: 292,
+    northwest: 315,         nw: 315,
+    northnorthwest: 337,    nnw: 337
+};
 
 export function osmNode() {
     if (!(this instanceof osmNode)) {
@@ -71,25 +89,6 @@ Object.assign(osmNode.prototype, {
 
         if (val === '') return [];
 
-        var cardinal = {
-            north: 0,               n: 0,
-            northnortheast: 22,     nne: 22,
-            northeast: 45,          ne: 45,
-            eastnortheast: 67,      ene: 67,
-            east: 90,               e: 90,
-            eastsoutheast: 112,     ese: 112,
-            southeast: 135,         se: 135,
-            southsoutheast: 157,    sse: 157,
-            south: 180,             s: 180,
-            southsouthwest: 202,    ssw: 202,
-            southwest: 225,         sw: 225,
-            westsouthwest: 247,     wsw: 247,
-            west: 270,              w: 270,
-            westnorthwest: 292,     wnw: 292,
-            northwest: 315,         nw: 315,
-            northnorthwest: 337,    nnw: 337
-        };
-
 
         var values = val.split(';');
         var results = [];
@@ -115,19 +114,23 @@ Object.assign(osmNode.prototype, {
             if (!lookForward && !lookBackward) return;
 
             var nodeIds = {};
-            resolver.parentWays(this).forEach(function(parent) {
-                var nodes = parent.nodes;
-                for (i = 0; i < nodes.length; i++) {
-                    if (nodes[i] === this.id) {  // match current entity
-                        if (lookForward && i > 0) {
-                            nodeIds[nodes[i - 1]] = true;  // look back to prev node
-                        }
-                        if (lookBackward && i < nodes.length - 1) {
-                            nodeIds[nodes[i + 1]] = true;  // look ahead to next node
+            resolver.parentWays(this)
+                .filter(p => (this.tags.highway || this.tags.traffic_sign || this.tags.traffic_calming || this.tags.barrier || this.tags.cycleway) ? p.tags.highway : true)
+                .filter(p => (this.tags.railway) ? p.tags.railway : true)
+                .filter(p => (this.tags.waterway) ? p.tags.waterway : true)
+                .forEach(function(parent) {
+                    var nodes = parent.nodes;
+                    for (i = 0; i < nodes.length; i++) {
+                        if (nodes[i] === this.id) {  // match current entity
+                            if (lookForward && i > 0) {
+                                nodeIds[nodes[i - 1]] = true;  // look back to prev node
+                            }
+                            if (lookBackward && i < nodes.length - 1) {
+                                nodeIds[nodes[i + 1]] = true;  // look ahead to next node
+                            }
                         }
                     }
-                }
-            }, this);
+                }, this);
 
             Object.keys(nodeIds).forEach(function(nodeId) {
                 // +90 because geoAngle returns angle from X axis, not Y (north)

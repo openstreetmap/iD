@@ -113,8 +113,8 @@ export function operationCopy(context, selectedIDs) {
     operation.tooltip = function() {
         var disable = operation.disabled();
         return disable ?
-            t('operations.copy.' + disable, { n: selectedIDs.length }) :
-            t('operations.copy.description', { n: selectedIDs.length });
+            t.append('operations.copy.' + disable, { n: selectedIDs.length }) :
+            t.append('operations.copy.description', { n: selectedIDs.length });
     };
 
 
@@ -132,7 +132,7 @@ export function operationCopy(context, selectedIDs) {
 
     operation.id = 'copy';
     operation.keys = [uiCmd('⌘C')];
-    operation.title = t('operations.copy.title');
+    operation.title = t.append('operations.copy.title');
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
