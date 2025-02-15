@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render `*_link` roads narrower than their "regular" counterpart ([#10722])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
+* Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
@@ -73,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10722]: https://github.com/openstreetmap/iD/pull/10722
 [#10727]: https://github.com/openstreetmap/iD/issues/10727
+[#10737]: https://github.com/openstreetmap/iD/pull/10737
 [#10747]: https://github.com/openstreetmap/iD/issues/10747
 [#10748]: https://github.com/openstreetmap/iD/issues/10748
 [#10755]: https://github.com/openstreetmap/iD/issues/10755
@@ -82,6 +84,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
+[@burrscurr]: https://github.com/burrscurr
 [@andrewpmk]: https://github.com/andrewpmk
 
 
