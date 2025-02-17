@@ -1967,6 +1967,9 @@ en:
       add_a_tunnel:
         title: Add a tunnel
         annotation: Added a tunnel.
+      add_a_culvert:
+        title: Add a culvert
+        annotation: Added a culvert.
       address_the_concern:
         title: Address the concern
       connect_almost_junction:

@@ -505,7 +505,12 @@ export function validationCrossingWays(context) {
                     // don't recommend adding tunnels under waterways since they're uncommon
                     var skipTunnelFix = otherFeatureType === 'waterway' && selectedFeatureType !== 'waterway';
                     if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
+                        if (selectedFeatureType === 'waterway') {
+                            // naming piped waterway "tunnel" is a confusing osmism, culvert should be more clear
+                            fixes.push(makeAddBridgeOrTunnelFix('add_a_culvert', 'temaki-waste', 'tunnel'));
+                        } else {
+                            fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
+                        }
                     }
                 }
 
