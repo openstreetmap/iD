@@ -1,7 +1,72 @@
-/* globals chai:false */
-/* eslint no-extend-native:off */
-iD.debug = true;
+import { beforeEach, afterEach, it } from 'vitest';
+import 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
+import 'happen';
+import fetchMock from 'fetch-mock';
+import envs from '../config/envs.mjs';
 
+chai.use(sinonChai);
+
+declare var global: typeof globalThis;
+
+global.before = beforeEach;
+global.after = afterEach;
+global.fetchMock = fetchMock;
+global.sinon = sinon;
+global.VITEST = true;
+
+// create global variables for this data, to match what the esbuild config does
+for (const [key, value] of Object.entries(envs)) {
+  Reflect.set(global, key, JSON.parse(value));
+}
+
+// the 'happen' library explicitly references `window` when creating an event,
+// but we need to use jsdom's window, so we have to patch initEvent.
+const { initMouseEvent } = MouseEvent.prototype;
+MouseEvent.prototype.initMouseEvent = function (...args) {
+  args[3] = jsdom.window;
+  return initMouseEvent.apply(this, args);
+};
+const { initUIEvent } = UIEvent.prototype;
+UIEvent.prototype.initUIEvent = function (...args) {
+  args[3] = jsdom.window;
+  return initUIEvent.apply(this, args);
+};
+
+// vitest has deprecated the done() callback, so we overwrite the `it` function
+const _it = it;
+Reflect.set(
+  global,
+  'it',
+  Object.assign(
+    (msg: string, fn: (done?: (err?: any) => void) => void | Promise<void>) => {
+      _it(msg, () => {
+        if (fn.length) {
+          // there is a done callback -> return a promise instead
+          return new Promise<void>((resolve, reject) => fn(err => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          }));
+        } else {
+          // no done callback -> normal behaviour
+          return fn();
+        }
+      });
+    },
+    { todo: _it.todo, skip: _it.skip, only: _it.only, each: _it.each },
+  ),
+);
+
+// must be imported after global envs are defined
+await import('../modules/id.js');
+const iD = global.iD;
+iD.setDebug(true);
+
+// @ts-expect-error
 // Disable things that use the network
 for (var k in iD.services) { delete iD.services[k]; }
 
@@ -10,7 +75,7 @@ window.location.hash = '#background=none';
 
 // Run without data for speed (tests which need data can set it up themselves)
 iD.fileFetcher.assetPath('../dist/');
-var cached = iD.fileFetcher.cache();
+const cached: any = iD.fileFetcher.cache();
 
 // Initializing `coreContext` will try loading the locale data and English locale strings:
 cached.locales = { en: { rtl: false, pct: 1 } };
@@ -93,23 +158,10 @@ cached.deprecated = [];
 // Initializing `coreContext` initializes `_uploader`, which tries loading:
 cached.discarded = {};
 
+// @ts-expect-error
+window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
 
-mocha.setup({
-    timeout: 5000,  // 5 sec
-    ui: 'bdd',
-    globals: [
-        '__onmousemove.zoom',
-        '__onmouseup.zoom',
-        '__onkeydown.select',
-        '__onkeyup.select',
-        '__onclick.draw',
-        '__onclick.draw-block'
-    ]
-});
-
-expect = chai.expect;
-
-window.d3 = iD.d3;   // Remove this if we can avoid exporting all of d3.js
+// @ts-expect-error
 delete window.PointerEvent;  // force the browser to use mouse events
 
 // some sticky fallbacks
@@ -137,5 +189,52 @@ const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
 fetchMock.sticky('https://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
 fetchMock.sticky('http://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
 
+const vegbilderOwsCapabilities = `<?xml version="1.0" encoding="UTF-8"?>
+<wfs:WFS_Capabilities version="2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.opengis.net/wfs/2.0"
+	xmlns:wfs="http://www.opengis.net/wfs/2.0"
+	xmlns:ows="http://www.opengis.net/ows/1.1"
+	xmlns:gml="http://www.opengis.net/gml/3.2"
+	xmlns:fes="http://www.opengis.net/fes/2.0"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.opengis.net/wfs/2.0 https://www.vegvesen.no/kart/ogc/schemas/wfs/2.0/wfs.xsd"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:vegbilder_1_0="http://vegbilder_1_0">
+<ows:ServiceIdentification>
+	<ows:Title>Mock OGC</ows:Title>
+	<ows:ServiceType>WFS</ows:ServiceType>
+	<ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+</ows:ServiceIdentification>
+<FeatureTypeList>
+	<FeatureType xmlns:vegbilder_1_0="http://vegbilder_1_0">
+		<Name>vegbilder_1_0:Vegbilder_2020</Name>
+		<Title>Vegbilder_2020</Title>
+		<Abstract>Testlayer</Abstract>
+		<DefaultCRS>urn:ogc:def:crs:EPSG::4326</DefaultCRS>
+		<OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
+	</FeatureType>
+	<FeatureType xmlns:vegbilder_1_0="http://vegbilder_1_0">
+		<Name>not_matched_layer:Vegbilder_2020</Name>
+		<Title>Vegbilder_2020_4</Title>
+		<Abstract>Not matched layer</Abstract>
+		<DefaultCRS>urn:ogc:def:crs:EPSG::4326</DefaultCRS>
+		<OtherCRS>urn:ogc:def:crs:EPSG::3857</OtherCRS>
+	</FeatureType>
+</FeatureTypeList>
+<fes:Filter_Capabilities/>
+</wfs:WFS_Capabilities>`;
+
+fetchMock.sticky({
+          url: 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows',
+            query: {
+              service: 'WFS',
+              request: 'GetCapabilities'
+            }
+          }, vegbilderOwsCapabilities, {sticky: true});
 fetchMock.config.fallbackToNetwork = true;
 fetchMock.config.overwriteRoutes = false;
+
+beforeAll(async () => {
+  await iD.coreLocalizer().ensureLoaded();
+});

@@ -148,8 +148,13 @@ export function uiNoteEditor(context) {
         noteSaveEnter
             .append('h4')
             .attr('class', '.note-save-header')
-            .html(function() {
-                return _note.isNew() ? t.html('note.newDescription') : t.html('note.newComment');
+            .text('')
+            .each(function() {
+                if (_note.isNew()) {
+                    t.append('note.newDescription')(d3_select(this));
+                } else {
+                    t.append('note.newComment')(d3_select(this));
+                }
             });
 
         var commentTextarea = noteSaveEnter
@@ -366,10 +371,10 @@ export function uiNoteEditor(context) {
 
         buttonSection.select('.status-button')   // select and propagate data
             .attr('disabled', (hasAuth ? null : true))
-            .html(function(d) {
+            .each(function(d) {
                 var action = (d.status === 'open' ? 'close' : 'open');
                 var andComment = (d.newComment ? '_comment' : '');
-                return t.html('note.' + action + andComment);
+                t.addOrUpdate('note.' + action + andComment)(d3_select(this));
             })
             .on('click.status', clickStatus);
 

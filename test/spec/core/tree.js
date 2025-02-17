@@ -146,6 +146,21 @@ describe('iD.coreTree', function() {
             expect(tree.intersects(extent, graph)).to.eql([]);
         });
 
+        it('adjusts all parent relations when a member node is moved', function() {
+            var graph = iD.coreGraph(),
+                tree = iD.coreTree(graph),
+                node = iD.osmNode({id: 'n', loc: [1, 1]}),
+                relation1 = iD.osmRelation({members: [{type: 'node', id: 'n'}]}),
+                relation2 = iD.osmRelation({members: [{type: 'node', id: 'n'}]}),
+                extent = iD.geoExtent([0, 0], [2, 2]);
+
+            graph = graph.replace(node).replace(relation1).replace(relation2);
+            expect(tree.intersects(extent, graph)).to.eql([node, relation1, relation2]);
+
+            graph = graph.replace(node.move([3, 3]));
+            expect(tree.intersects(extent, graph)).to.eql([]);
+        });
+
         it('adjusts parent relations of parent ways when a member node is moved', function() {
             var graph = iD.coreGraph(),
                 tree = iD.coreTree(graph),

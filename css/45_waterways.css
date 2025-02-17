@@ -67,24 +67,37 @@ path.line.stroke.tag-waterway {
 
 
 /* wide waterways (river) */
-path.line.shadow.tag-waterway-river {
+path.line.shadow.tag-waterway-river,
+path.line.shadow.tag-waterway-flowline {
     stroke-width: 20;
 }
-path.line.casing.tag-waterway-river {
+path.line.casing.tag-waterway-river,
+path.line.casing.tag-waterway-flowline {
     stroke-width: 10;
 }
-path.line.stroke.tag-waterway-river {
+path.line.stroke.tag-waterway-river,
+path.line.stroke.tag-waterway-flowline {
     stroke-width: 8;
 }
 
-.low-zoom path.line.shadow.tag-waterway-river {
+.low-zoom path.line.shadow.tag-waterway-river,
+.low-zoom path.line.shadow.tag-waterway-flowline {
     stroke-width: 16;
 }
-.low-zoom path.line.casing.tag-waterway-river {
+.low-zoom path.line.casing.tag-waterway-river,
+.low-zoom path.line.casing.tag-waterway-flowline {
     stroke-width: 7;
 }
-.low-zoom path.line.stroke.tag-waterway-river {
+.low-zoom path.line.stroke.tag-waterway-river,
+.low-zoom path.line.stroke.tag-waterway-flowline {
     stroke-width: 5;
+}
+
+path.line.stroke.tag-waterway-flowline {
+    stroke-opacity: 0.5;
+}
+path.line.casing.tag-waterway-flowline {
+    display: none;
 }
 
 

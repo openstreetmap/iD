@@ -15,14 +15,17 @@ export function modeAddLine(context, mode) {
         .on('startFromWay', startFromWay)
         .on('startFromNode', startFromNode);
 
-    var defaultTags = {};
-    if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line');
+    function defaultTags(loc) {
+        var defaultTags = {};
+        if (mode.preset) defaultTags = mode.preset.setTags(defaultTags, 'line', false, loc);
+        return defaultTags;
+    }
 
 
     function start(loc) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -37,7 +40,7 @@ export function modeAddLine(context, mode) {
     function startFromWay(loc, edge) {
         var startGraph = context.graph();
         var node = osmNode({ loc: loc });
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -52,7 +55,7 @@ export function modeAddLine(context, mode) {
 
     function startFromNode(node) {
         var startGraph = context.graph();
-        var way = osmWay({ tags: defaultTags });
+        var way = osmWay({ tags: defaultTags(node.loc) });
 
         context.perform(
             actionAddEntity(way),

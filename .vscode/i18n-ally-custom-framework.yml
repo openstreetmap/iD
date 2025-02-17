@@ -1,0 +1,17 @@
+# see https://github.com/antfu/i18n-ally/wiki/Custom-Framework
+languageIds:
+  - javascript
+  - typescript
+  - javascriptreact
+  - typescriptreact
+
+usageMatchRegex:
+  - "[^\\w\\d]t\\.append\\(['\"`]({key})['\"`]" # matches t.append("{key}"
+  - "[^\\w\\d]t\\.html\\(['\"`]({key})['\"`]" # matches t.html("{key}"
+  - "[^\\w\\d]t\\(['\"`]({key})['\"`]" # matches t.html("{key}"
+
+scopeRangeRegex: "(en)"
+
+refactorTemplates:
+
+monopoly: true

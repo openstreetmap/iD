@@ -3,7 +3,7 @@ import { t } from '../core/localizer';
 //import { actionChangeTags } from '../actions/change_tags';
 import { actionOrthogonalize } from '../actions/orthogonalize';
 import { geoOrthoCanOrthogonalize } from '../geo/ortho';
-import { utilDisplayLabel } from '../util';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 

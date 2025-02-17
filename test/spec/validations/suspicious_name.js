@@ -31,6 +31,10 @@ describe('iD.validations.suspicious_name', function () {
         iD.fileFetcher.cache().nsi_generics = {
           genericWords: ['^stores?$']
         };
+        iD.fileFetcher.cache().preset_presets = {
+            'Velero': { tags: { craft: 'sailmaker' }, geometry: ['line'] },
+            'Constructor de barco': { tags: { craft: 'boatbuilder' }, geometry: ['line'] },
+        };
     });
 
     after(function() {
@@ -184,44 +188,28 @@ describe('iD.validations.suspicious_name', function () {
         }, 20);
     });
 
-    it('ignores feature with a non-matching `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lou\'s', 'not:name': 'Lous' });
-        var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+    it('flags feature with a name that matches the preset name', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createWay({ craft: 'sailmaker', 'name:ca': 'Velero' });
+        const validator = iD.validationSuspiciousName(context);
+
+        const issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        expect(issues[0].type).to.eql('suspicious_name');
+        expect(issues[0].hash).to.eql('name:ca=Velero');
     });
 
-    it('flags feature with a matching `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Lous' });
-        var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('not_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
-    });
+    it('flags feature with a name that matches the preset name and tag name', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createWay({ craft: 'boatbuilder', 'name:mi': 'boatbuilder', name: 'cOnStRuCtOr de barco' });
+        const validator = iD.validationSuspiciousName(context);
 
-    it('flags feature with a matching a semicolon-separated `not:name` tag', function(done) {
-        createWay({ shop: 'supermarket', name: 'Lous', 'not:name': 'Louis\';Lous;Louis\'s' });
-        window.setTimeout(function() {   // async, so data will be available
-            var validator = iD.validationSuspiciousName(context);
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('not_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
-    });
+        const issues = validate(validator);
+        expect(issues).to.have.lengthOf(2);
+        expect(issues[0].type).to.eql('suspicious_name');
+        expect(issues[0].hash).to.eql('name:mi=boatbuilder');
 
+        expect(issues[1].type).to.eql('suspicious_name');
+        expect(issues[1].hash).to.eql('name=cOnStRuCtOr de barco');
+    });
 });

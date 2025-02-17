@@ -7,7 +7,7 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'building:part', 'indoor'
+        'roller_coaster', 'building:part', 'indoor'
     ];
     var statuses = Object.keys(osmLifecyclePrefixes);
     var secondaries = [
@@ -159,7 +159,12 @@ export function svgTagClasses() {
             classes.push('tag-wikidata');
         }
 
-        return classes.join(' ').trim();
+        // ensure that classes for tags keys/values with special characters like spaces
+        // are not added to the DOM, because it can cause bizarre issues (#9448)
+        return classes
+            .filter(klass => /^[-_a-z0-9]+$/.test(klass))
+            .join(' ')
+            .trim();
     };
 
 

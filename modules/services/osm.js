@@ -9,6 +9,7 @@ import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
 import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
+import { localizer } from '../core/localizer.js';
 
 import { osmApiConnections } from '../../config/id.js';
 
@@ -17,11 +18,12 @@ var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 
 var urlroot = osmApiConnections[0].url;
+var apiUrlroot = osmApiConnections[0].apiUrl || urlroot;
 var redirectPath = window.location.origin + window.location.pathname;
 var oauth = osmAuth({
     url: urlroot,
+    apiUrl: apiUrlroot,
     client_id: osmApiConnections[0].client_id,
-    client_secret: osmApiConnections[0].client_secret,
     scope: 'read_prefs write_prefs write_api read_gpx write_notes',
     redirect_uri: redirectPath + 'land.html',
     loading: authLoading,
@@ -387,15 +389,20 @@ var parsers = {
         props.loc = getLoc(attrs);
 
         // if notes are coincident, move them apart slightly
-        var coincident = false;
-        var epsilon = 0.00001;
-        do {
-            if (coincident) {
-                props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
-            }
-            var bbox = geoExtent(props.loc).bbox();
-            coincident = _noteCache.rtree.search(bbox).length;
-        } while (coincident);
+        if (!_noteCache.note[uid]) {
+            let coincident = false;
+            const epsilon = 0.00001;
+            do {
+                if (coincident) {
+                    props.loc = geoVecAdd(props.loc, [epsilon, epsilon]);
+                }
+                const bbox = geoExtent(props.loc).bbox();
+                coincident = _noteCache.rtree.search(bbox).length;
+            } while (coincident);
+        } else {
+            // we already saw this note: don't change its location again
+            props.loc = _noteCache.note[uid].loc;
+        }
 
         // parse note contents
         for (var i = 0; i < childNodes.length; i++) {
@@ -414,7 +421,7 @@ var parsers = {
         var note = new osmNote(props);
         var item = encodeNoteRtree(note);
         _noteCache.note[note.id] = note;
-        _noteCache.rtree.insert(item);
+        updateRtree(item, true);
 
         return note;
     },
@@ -517,8 +524,8 @@ function updateRtree(item, replace) {
 function wrapcb(thisArg, callback, cid) {
     return function(err, result) {
         if (err) {
-            // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
-            if (err.status === 400 || err.status === 401 || err.status === 403) {
+            // 401 Unauthorized, 403 Forbidden
+            if (err.status === 401 || err.status === 403) {
                 thisArg.logout();
             }
             return callback.call(thisArg, err);
@@ -576,6 +583,11 @@ export default {
     },
 
 
+    getApiUrlRoot: function() {
+        return apiUrlroot;
+    },
+
+
     changesetURL: function(changesetID) {
         return urlroot + '/changeset/' + changesetID;
     },
@@ -630,23 +642,21 @@ export default {
 
             var isAuthenticated = that.authenticated();
 
-            // 400 Bad Request, 401 Unauthorized, 403 Forbidden
-            // Logout and retry the request..
+            // 401 Unauthorized, 403 Forbidden
+            // Logout and retry the request.
             if (isAuthenticated && err && err.status &&
-                    (err.status === 400 || err.status === 401 || err.status === 403)) {
+                    (err.status === 401 || err.status === 403)) {
                 that.logout();
                 that.loadFromAPI(path, callback, options);
-
-            // else, no retry..
+            // else, no retry.
             } else {
                 // 509 Bandwidth Limit Exceeded, 429 Too Many Requests
-                // Set the rateLimitError flag and trigger a warning..
+                // Set the rateLimitError flag and trigger a warning.
                 if (!isAuthenticated && !_rateLimitError && err && err.status &&
                         (err.status === 509 || err.status === 429)) {
                     _rateLimitError = err;
                     dispatch.call('change');
                     that.reloadApiStatus();
-
                 } else if ((err && _cachedApiStatus === 'online') ||
                     (!err && _cachedApiStatus !== 'online')) {
                     // If the response's error state doesn't match the status,
@@ -669,9 +679,12 @@ export default {
         }
 
         if (this.authenticated()) {
-            return oauth.xhr({ method: 'GET', path: path }, done);
+            return oauth.xhr({
+                method: 'GET',
+                path
+            }, done);
         } else {
-            var url = urlroot + path;
+            var url = apiUrlroot + path;
             var controller = new AbortController();
             var fn;
             if (path.indexOf('.json') !== -1) {
@@ -712,6 +725,19 @@ export default {
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : '') + '.json',
+            function(err, entities) {
+                if (callback) callback(err, { data: entities });
+            },
+            options
+        );
+    },
+
+    // Load a single note by id , XML format
+    // GET /api/0.6/notes/#id
+    loadEntityNote: function(id, callback) {
+        var options = { skipSeen: false };
+        this.loadFromAPI(
+            '/api/0.6/notes/' + id ,
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
             },
@@ -873,10 +899,10 @@ export default {
         }
 
         utilArrayChunk(toLoad, 150).forEach(function(arr) {
-            oauth.xhr(
-                { method: 'GET', path: '/api/0.6/users.json?users=' + arr.join() },
-                wrapcb(this, done, _connectionID)
-            );
+            oauth.xhr({
+                method: 'GET',
+                path: '/api/0.6/users.json?users=' + arr.join()
+            }, wrapcb(this, done, _connectionID));
         }.bind(this));
 
         function done(err, payload) {
@@ -899,10 +925,10 @@ export default {
             return callback(undefined, _userCache.user[uid]);
         }
 
-        oauth.xhr(
-            { method: 'GET', path: '/api/0.6/user/' + uid + '.json' },
-            wrapcb(this, done, _connectionID)
-        );
+        oauth.xhr({
+            method: 'GET',
+            path: '/api/0.6/user/' + uid + '.json'
+        }, wrapcb(this, done, _connectionID));
 
         function done(err, payload) {
             if (err) return callback(err);
@@ -923,10 +949,10 @@ export default {
             return callback(undefined, _userDetails);
         }
 
-        oauth.xhr(
-            { method: 'GET', path: '/api/0.6/user/details.json' },
-            wrapcb(this, done, _connectionID)
-        );
+        oauth.xhr({
+            method: 'GET',
+            path: '/api/0.6/user/details.json'
+        }, wrapcb(this, done, _connectionID));
 
         function done(err, payload) {
             if (err) return callback(err);
@@ -956,10 +982,10 @@ export default {
         function gotDetails(err, user) {
             if (err) { return callback(err); }
 
-            oauth.xhr(
-                { method: 'GET', path: '/api/0.6/changesets?user=' + user.id },
-                wrapcb(this, done, _connectionID)
-            );
+            oauth.xhr({
+                method: 'GET',
+                path: '/api/0.6/changesets?user=' + user.id
+            }, wrapcb(this, done, _connectionID));
         }
 
         function done(err, xml) {
@@ -981,7 +1007,7 @@ export default {
     // Fetch the status of the OSM API
     // GET /api/capabilities
     status: function(callback) {
-        var url = urlroot + '/api/capabilities';
+        var url = apiUrlroot + '/api/capabilities';
         var errback = wrapcb(this, done, _connectionID);
         d3_xml(url)
             .then(function(data) { errback(null, data); })
@@ -1002,7 +1028,7 @@ export default {
                     try {
                         var regex = new RegExp(regexString);
                         regexes.push(regex);
-                    } catch (e) {
+                    } catch {
                         /* noop */
                     }
                 }
@@ -1195,10 +1221,10 @@ export default {
 
         var path = '/api/0.6/notes?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
 
-        _noteCache.inflightPost[note.id] = oauth.xhr(
-            { method: 'POST', path: path },
-            wrapcb(this, done, _connectionID)
-        );
+        _noteCache.inflightPost[note.id] = oauth.xhr({
+            method: 'POST',
+            path: path
+        }, wrapcb(this, done, _connectionID));
 
 
         function done(err, xml) {
@@ -1247,10 +1273,10 @@ export default {
             path += '?' + utilQsString({ text: note.newComment });
         }
 
-        _noteCache.inflightPost[note.id] = oauth.xhr(
-            { method: 'POST', path: path },
-            wrapcb(this, done, _connectionID)
-        );
+        _noteCache.inflightPost[note.id] = oauth.xhr({
+            method: 'POST',
+            path: path
+        }, wrapcb(this, done, _connectionID));
 
 
         function done(err, xml) {
@@ -1289,11 +1315,18 @@ export default {
 
     switch: function(newOptions) {
         urlroot = newOptions.url;
+        apiUrlroot = newOptions.apiUrl || urlroot;
+        if (newOptions.url && !newOptions.apiUrl) {
+            newOptions = {
+                ...newOptions,
+                apiUrl: newOptions.url
+            };
+        }
 
         // Copy the existing options, but omit 'access_token'.
         // (if we did preauth, access_token won't work on a different server)
-        var oldOptions = utilObjectOmit(oauth.options(), 'access_token');
-        oauth.options(Object.assign(oldOptions, newOptions));
+        const oldOptions = utilObjectOmit(oauth.options(), 'access_token');
+        oauth.options({...oldOptions, ...newOptions});
 
         this.reset();
         this.userChangesets(function() {});  // eagerly load user details/changesets
@@ -1382,7 +1415,8 @@ export default {
     },
 
 
-    authenticate: function(callback) {
+    /** @param {import('osm-auth').LoginOptions} options */
+    authenticate: function(callback, options) {
         var that = this;
         var cid = _connectionID;
         _userChangesets = undefined;
@@ -1403,7 +1437,13 @@ export default {
             that.userChangesets(function() {});  // eagerly load user details/changesets
         }
 
-        oauth.authenticate(done);
+        // ensure the locale is correctly set before opening the popup
+        oauth.options({
+            ...oauth.options(),
+            locale: localizer.localeCode(),
+        });
+
+        oauth.authenticate(done, options);
     },
 
 

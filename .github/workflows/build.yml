@@ -18,14 +18,20 @@ jobs:
 
     strategy:
       matrix:
-        node-version: ['16', '18']
+        node-version: ['18', '20']
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm clean-install
+      env:
+        FORCE_COLOR: 2
     - run: npm run all
+      env:
+        FORCE_COLOR: 2
     - run: npm run test
+      env:
+        FORCE_COLOR: 2

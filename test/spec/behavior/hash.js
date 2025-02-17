@@ -1,5 +1,4 @@
 describe('iD.behaviorHash', function () {
-    mocha.globals('__onhashchange.hash');
 
     var hash, context;
 
@@ -74,8 +73,19 @@ describe('iD.behaviorHash', function () {
         context.map().center([-77.0, 38.9]);
         context.map().zoom(2.0);
         window.setTimeout(function() {
-            expect(window.location.hash).to.equal('#background=none&map=2.00/38.9/-77.0');
+            // the hash might contain other things like `disable_features`
+            expect(window.location.hash).to.include('background=none');
+            expect(window.location.hash).to.include('map=2.00/38.9/-77.0');
             done();
         }, 600);
+    });
+
+    it('accepts default changeset comment as hash parameter', function () {
+        window.location.hash = '#comment=foo+bar%20%2B1';
+        var container = d3.select(document.createElement('div'));
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        iD.behaviorHash(context);
+        expect(context.defaultChangesetComment()).to.eql('foo bar +1');
+        hash.off();
     });
 });

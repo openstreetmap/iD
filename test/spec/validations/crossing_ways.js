@@ -2,7 +2,12 @@ describe('iD.validations.crossing_ways', function () {
     var context;
 
     beforeEach(function() {
-        context = iD.coreContext().assetPath('../dist/').init();
+        const container = d3.select('body').append('div');
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        container
+            .append('div')
+            .attr('class', 'main-map')
+            .call(context.map());
     });
 
     function createWaysWithOneCrossingPoint(tags1, tags2) {
@@ -197,6 +202,60 @@ describe('iD.validations.crossing_ways', function () {
         expect(issues).to.have.lengthOf(0);
     });
 
+    it('ignores a routable aeroway crossing a non-routable aeroway', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'taxiway' }, { aeroway: 'aerodrome' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway crossing a road tunnel', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { highway: 'trunk', tunnel: 'yes', layer: '-1' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway crossing a road bridge', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { highway: 'trunk', bridge: 'yes', layer: '1' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway crossing a rail tunnel', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { railway: 'track', tunnel: 'yes', layer: '-1' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway crossing a rail bridge', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { railway: 'track', bridge: 'yes', layer: '1' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway bridge crossing a road', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway', bridge: 'yes', layer: '2' }, { highway: 'trunk', layer: '1' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway bridge crossing a railway', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway', bridge: 'yes', layer: '1' }, { railway: 'track' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway crossing a culvert', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'taxiway' }, { waterway: 'ditch', tunnel: 'culvert', layer: -1 });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
+    it('ignores an aeroway crossing a building on a different layer', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { building: 'yes', layer: '0.5' });
+        const issues = validate();
+        expect(issues).to.have.lengthOf(0);
+    });
+
     // warning crossing cases between ways
     it('flags road crossing road', function() {
         createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'residential' });
@@ -261,6 +320,17 @@ describe('iD.validations.crossing_ways', function () {
     it('flags footway crossing footway', function() {
         createWaysWithOneCrossingPoint({ highway: 'footway' }, { highway: 'footway' });
         verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags sidewalk crossing service road', function() {
+        createWaysWithOneCrossingPoint({ highway: 'service' }, { highway: 'footway', footway: 'sidewalk' });
+        const issues = validate();
+        verifySingleCrossingIssue(issues, {});
+        context.enter(iD.modeSelect(context, ['w-1']));
+        const dynamicFixes = issues[0].dynamicFixes(context);
+        expect(dynamicFixes).to.have.lengthOf(5);
+        expect(dynamicFixes[0]._connectionTags).to.eql({});
+        expect(dynamicFixes[1]._connectionTags).to.eql({ highway: 'crossing' });
     });
 
     it('flags road crossing railway', function() {
@@ -447,4 +517,38 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), {});
     });
 
+    it('flags an aeroway crosing another aeroway', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { aeroway: 'taxiway' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags an aeroway crosing a major road', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { highway: 'motorway' });
+        verifySingleCrossingIssue(validate(), { aeroway: 'aircraft_crossing' });
+    });
+
+    it('flags an aeroway crosing a service road', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { highway: 'service' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags an aeroway crosing a path', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { highway: 'corridor' });
+        verifySingleCrossingIssue(validate(), {});
+    });
+
+    it('flags an aeroway crosing a railway', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'taxiway' }, { railway: 'disused' });
+        verifySingleCrossingIssue(validate(), { aeroway: 'aircraft_crossing', railway: 'level_crossing' });
+    });
+
+    it('flags an aeroway crosing a waterway', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { waterway: 'canal' });
+        verifySingleCrossingIssue(validate(), null);
+    });
+
+    it('flags an aeroway crosing a building', function() {
+        createWaysWithOneCrossingPoint({ aeroway: 'runway' }, { building: 'hangar' });
+        verifySingleCrossingIssue(validate(), null);
+    });
 });

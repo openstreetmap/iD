@@ -56,8 +56,9 @@ export function presetIndex() {
   let _loadPromise;
 
 
-  _this.ensureLoaded = () => {
-    if (_loadPromise) return _loadPromise;
+  /** @param {boolean=} bypassCache - used by unit tests */
+  _this.ensureLoaded = (bypassCache) => {
+    if (_loadPromise && !bypassCache) return _loadPromise;
 
     return _loadPromise = Promise.all([
         fileFetcher.get('preset_categories'),
@@ -162,9 +163,6 @@ export function presetIndex() {
 
     // Rebuild universal fields array
     _universal = Object.values(_fields).filter(field => field.universal);
-
-    // Reset all the preset fields - they'll need to be resolved again
-    Object.values(_presets).forEach(preset => preset.resetFields());
 
     // Rebuild geometry index
     _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
@@ -305,7 +303,6 @@ export function presetIndex() {
       footway: true,
       railway: true,
       junction: true,
-      traffic_calming: true,
       type: true
     };
     let areaKeys = {};

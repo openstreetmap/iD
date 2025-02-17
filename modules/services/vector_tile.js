@@ -6,7 +6,7 @@ import stringify from 'fast-json-stable-stringify';
 import polygonClipping from 'polygon-clipping';
 
 import Protobuf from 'pbf';
-import vt from '@mapbox/vector-tile';
+import { VectorTile } from '@mapbox/vector-tile';
 
 import { utilHashcode, utilRebind, utilTiler } from '../util';
 
@@ -22,7 +22,7 @@ function abortRequest(controller) {
 
 
 function vtToGeoJSON(data, tile, mergeCache) {
-    var vectorTile = new vt.VectorTile(new Protobuf(data));
+    var vectorTile = new VectorTile(new Protobuf(data));
     var layers = Object.keys(vectorTile.layers);
     if (!Array.isArray(layers)) { layers = [layers]; }
 

@@ -5,7 +5,7 @@ import { t, localizer } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 
 
-export function validationSuspiciousName() {
+export function validationSuspiciousName(context) {
   const type = 'suspicious_name';
   const keysToTestForGenericValues = [
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
@@ -45,9 +45,17 @@ export function validationSuspiciousName() {
     return false;
   }
 
-  function isGenericName(name, tags) {
+  /** @param {string} name @param {string} presetName */
+  function nameMatchesPresetName(name, presetName) {
+    if (!presetName) return false;
+
+    return name.toLowerCase() === presetName.toLowerCase();
+  }
+
+  /** @param {string} name @param {string} presetName */
+  function isGenericName(name, tags, presetName) {
     name = name.toLowerCase();
-    return nameMatchesRawTag(name, tags) || isGenericMatchInNsi(tags);
+    return nameMatchesRawTag(name, tags) || nameMatchesPresetName(name, presetName) || isGenericMatchInNsi(tags);
   }
 
   function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
@@ -96,53 +104,6 @@ export function validationSuspiciousName() {
     }
   }
 
-  function makeIncorrectNameIssue(entityId, nameKey, incorrectName, langCode) {
-    return new validationIssue({
-      type: type,
-      subtype: 'not_name',
-      severity: 'warning',
-      message: function(context) {
-        const entity = context.hasEntity(this.entityIds[0]);
-        if (!entity) return '';
-        const preset = presetManager.match(entity, context.graph());
-        const langName = langCode && localizer.languageName(langCode);
-        return t.append('issues.incorrect_name.message' + (langName ? '_language' : ''),
-          { feature: preset.name(), name: incorrectName, language: langName }
-        );
-      },
-      reference: showReference,
-      entityIds: [entityId],
-      hash: `${nameKey}=${incorrectName}`,
-      dynamicFixes: function() {
-        return [
-          new validationIssueFix({
-            icon: 'iD-operation-delete',
-            title: t.append('issues.fix.remove_the_name.title'),
-            onClick: function(context) {
-              const entityId = this.issue.entityIds[0];
-              const entity = context.entity(entityId);
-              let tags = Object.assign({}, entity.tags);   // shallow copy
-              delete tags[nameKey];
-              context.perform(
-                actionChangeTags(entityId, tags), t('issues.fix.remove_mistaken_name.annotation')
-              );
-            }
-          })
-        ];
-      }
-    });
-
-    function showReference(selection) {
-      selection.selectAll('.issue-reference')
-        .data([0])
-        .enter()
-        .append('div')
-        .attr('class', 'issue-reference')
-        .call(t.append('issues.generic_name.reference'));
-    }
-  }
-
-
   let validation = function checkGenericName(entity) {
     const tags = entity.tags;
 
@@ -151,7 +112,8 @@ export function validationSuspiciousName() {
     if (hasWikidata) return [];
 
     let issues = [];
-    const notNames = (tags['not:name'] || '').split(';');
+
+    const presetName = presetManager.match(entity, context.graph()).name();
 
     for (let key in tags) {
       const m = key.match(/^name(?:(?::)([a-zA-Z_-]+))?$/);
@@ -159,16 +121,8 @@ export function validationSuspiciousName() {
 
       const langCode = m.length >= 2 ? m[1] : null;
       const value = tags[key];
-      if (notNames.length) {
-        for (let i in notNames) {
-          const notName = notNames[i];
-          if (notName && value === notName) {
-            issues.push(makeIncorrectNameIssue(entity.id, key, value, langCode));
-            continue;
-          }
-        }
-      }
-      if (isGenericName(value, tags)) {
+
+      if (isGenericName(value, tags, presetName)) {
         issues.provisional = _waitingForNsi;  // retry later if we are waiting on NSI to finish loading
         issues.push(makeGenericNameIssue(entity.id, key, value, langCode));
       }

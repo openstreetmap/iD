@@ -1,0 +1,53 @@
+name: Build and Deploy Staging Instance
+
+on:
+  push:
+    branches: [ main, develop ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-deploy:
+    if: github.repository == 'openstreetmap/id'
+    runs-on: ubuntu-latest
+    environment: workflows
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      # install and build development version of id-tagging-schema
+      - uses: actions/checkout@v4
+        with:
+          repository: openstreetmap/id-tagging-schema
+          path: './id-tagging-schema'
+      - run: npm clean-install
+        working-directory: './id-tagging-schema'
+      - run: npm run translations
+        working-directory: './id-tagging-schema'
+        env:
+          transifex_password: ${{secrets.TX_TOKEN}}
+        if: env.transifex_password != null
+      - run: npm run dist
+        working-directory: './id-tagging-schema'
+      - run: mkdir dist/id-tagging-schema && mv id-tagging-schema/dist dist/id-tagging-schema/dist
+      # build iD using freshest version of presets and ELI
+      - run: npm clean-install
+      - run: npm install editor-layer-index
+      - run: mkdir dist/data
+      - run: npm run imagery
+      - run: npm run all
+      - run: npm run translations
+        env:
+          transifex_password: ${{secrets.TX_TOKEN}}
+        if: env.transifex_password != null
+      - run: npm run dist
+        env:
+          ID_PRESETS_CDN_URL: './id-tagging-schema/'
+      # deploy to netlify
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
+          NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
+        run: ./node_modules/.bin/netlify deploy --prod --dir=dist

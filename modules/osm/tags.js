@@ -1,3 +1,5 @@
+import { merge } from 'lodash-es';
+
 export function osmIsInterestingTag(key) {
     return key !== 'attribution' &&
         key !== 'created_by' &&
@@ -11,7 +13,7 @@ export function osmIsInterestingTag(key) {
 export const osmLifecyclePrefixes = {
     // nonexistent, might be built
     proposed: true, planned: true,
-    // under maintentance or between groundbreaking and opening
+    // under maintenance or between groundbreaking and opening
     construction: true,
     // existent but not functional
     disused: true,
@@ -58,13 +60,14 @@ export var osmAreaKeysExceptions = {
         station: true,
         traverser: true,
         turntable: true,
-        wash: true
-    },
-    traffic_calming: {
-        island: true
+        wash: true,
+        ventilation_shaft: true
     },
     waterway: {
         dam: true
+    },
+    amenity: {
+        bicycle_parking: true
     }
 };
 
@@ -76,11 +79,11 @@ export function osmTagSuggestingArea(tags) {
     var returnTags = {};
     for (var realKey in tags) {
         const key = osmRemoveLifecyclePrefix(realKey);
-        if (key in osmAreaKeys && !(tags[key] in osmAreaKeys[key])) {
+        if (key in osmAreaKeys && !(tags[realKey] in osmAreaKeys[key])) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
         }
-        if (key in osmAreaKeysExceptions && tags[key] in osmAreaKeysExceptions[key]) {
+        if (key in osmAreaKeysExceptions && tags[realKey] in osmAreaKeysExceptions[key]) {
             returnTags[realKey] = tags[realKey];
             return returnTags;
         }
@@ -123,7 +126,7 @@ export function osmNodeGeometriesForTags(nodeTags) {
     return geometries;
 }
 
-export var osmOneWayTags = {
+export const osmOneWayForwardTags = {
     'aerialway': {
         'chair_lift': true,
         'drag_lift': true,
@@ -135,6 +138,9 @@ export var osmOneWayTags = {
         't-bar': true,
         'zip_line': true
     },
+    'conveying': {
+        'forward': true,
+    },
     'highway': {
         'motorway': true
     },
@@ -145,6 +151,9 @@ export var osmOneWayTags = {
     'man_made': {
         'goods_conveyor': true,
         'piste:halfpipe': true
+    },
+    'oneway': {
+        'yes': true,
     },
     'piste:type': {
         'downhill': true,
@@ -162,6 +171,7 @@ export var osmOneWayTags = {
         'ditch': true,
         'drain': true,
         'fish_pass': true,
+        'flowline': true,
         'pressurised': true,
         'river': true,
         'spillway': true,
@@ -169,6 +179,28 @@ export var osmOneWayTags = {
         'tidal_channel': true
     }
 };
+export const osmOneWayBackwardTags = {
+    'conveying': {
+        'backward': true,
+    },
+    'oneway': {
+        '-1': true,
+    },
+};
+export const osmOneWayBiDirectionalTags = {
+    'conveying': {
+        'reversible': true,
+    },
+    'oneway': {
+        'alternating': true,
+        'reversible': true,
+    },
+};
+export const osmOneWayTags = merge(
+    osmOneWayForwardTags,
+    osmOneWayBackwardTags,
+    osmOneWayBiDirectionalTags,
+);
 
 // solid and smooth surfaces akin to the assumed default road surface in OSM
 export var osmPavedTags = {
@@ -223,12 +255,16 @@ export var osmRightSideIsInsideTags = {
 export var osmRoutableHighwayTagValues = {
     motorway: true, trunk: true, primary: true, secondary: true, tertiary: true, residential: true,
     motorway_link: true, trunk_link: true, primary_link: true, secondary_link: true, tertiary_link: true,
-    unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true,
-    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
+    unclassified: true, road: true, service: true, track: true, living_street: true, bus_guideway: true, busway: true,
+    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
+};
+/** aeroway tags that are treated as routable for aircraft */
+export const osmRoutableAerowayTags = {
+    runway: true, taxiway: true
 };
 // "highway" tag values that generally do not allow motor vehicles
 export var osmPathHighwayTagValues = {
-    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true
+    path: true, footway: true, cycleway: true, bridleway: true, pedestrian: true, corridor: true, steps: true, ladder: true
 };
 
 // "railway" tag values representing existing railroad tracks (purposely does not include 'abandoned')
@@ -240,5 +276,33 @@ export var osmRailwayTrackTagValues = {
 
 // "waterway" tag values for line features representing water flow
 export var osmFlowingWaterwayTagValues = {
-    canal: true, ditch: true, drain: true, fish_pass: true, river: true, stream: true, tidal_channel: true
+    canal: true, ditch: true, drain: true, fish_pass: true, flowline: true, river: true, stream: true, tidal_channel: true
 };
+
+// Tags which values should be considered case sensitive when offering tag suggestions
+export const allowUpperCaseTagValues = /network|taxon|genus|species|brand|grape_variety|royal_cypher|listed_status|booth|rating|stars|:output|_hours|_times|_ref|manufacturer|country|target|brewery|cai_scale|traffic_sign/;
+
+// Returns whether a `colour` tag value looks like a valid color we can display
+export function isColourValid(value) {
+    if (!value.match(/^(#([0-9a-fA-F]{3}){1,2}|\w+)$/)) {
+        // OSM only supports hex or named colors
+        return false;
+    }
+    if (!CSS.supports('color', value) || ['unset', 'inherit', 'initial', 'revert'].includes(value)) {
+        // see https://stackoverflow.com/a/68217760/1627467
+        return false;
+    }
+    return true;
+}
+
+// https://wiki.openstreetmap.org/wiki/Special:WhatLinksHere/Property:P44
+export var osmMutuallyExclusiveTagPairs = [
+    ['noname', 'name'],
+    ['noref', 'ref'],
+    ['nohousenumber', 'addr:housenumber'],
+    ['noaddress', 'addr:housenumber'],
+    ['noaddress', 'addr:housename'],
+    ['noaddress', 'addr:unit'],
+    ['addr:nostreet', 'addr:street']
+];
+

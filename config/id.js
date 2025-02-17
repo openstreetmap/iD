@@ -14,25 +14,23 @@ const nsiCdnUrl = ENV__ID_NSI_CDN_URL
 const defaultOsmApiConnections = {
   live: {
     url: 'https://www.openstreetmap.org',
-    client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
-    client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q'
+    apiUrl: 'https://api.openstreetmap.org',
+    client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc'
   },
   dev: {
     url: 'https://api06.dev.openstreetmap.org',
-    client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw',
-    client_secret: 'OnfWFC-JkZNHyYdr_viNn_h_RTZXRslKcUxllOXqf5g'
+    client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw'
   }
 };
 const osmApiConnections = [];
 if (ENV__ID_API_CONNECTION_URL !== null &&
-    ENV__ID_API_CONNECTION_CLIENT_ID !== null &&
-    ENV__ID_API_CONNECTION_CLIENT_SECRET !== null) {
+    ENV__ID_API_CONNECTION_CLIENT_ID !== null) {
   // user specified API Oauth2 connection details
   // see https://wiki.openstreetmap.org/wiki/OAuth#OAuth_2.0_2
   osmApiConnections.push({
     url: ENV__ID_API_CONNECTION_URL,
-    client_id: ENV__ID_API_CONNECTION_CLIENT_ID,
-    client_secret: ENV__ID_API_CONNECTION_CLIENT_SECRET
+    apiUrl: ENV__ID_API_CONNECTION_API_URL || ENV__ID_API_CONNECTION_URL,
+    client_id: ENV__ID_API_CONNECTION_CLIENT_ID
   });
 } else if (ENV__ID_API_CONNECTION !== null &&
   defaultOsmApiConnections[ENV__ID_API_CONNECTION] !== undefined) {
@@ -51,6 +49,9 @@ const taginfoApiUrl = ENV__ID_TAGINFO_API_URL
 const nominatimApiUrl = ENV__ID_NOMINATIM_API_URL
   || 'https://nominatim.openstreetmap.org/';
 
+// support/donation message on upload success screen
+const showDonationMessage = ENV__ID_SHOW_DONATION_MESSAGE !== 'false';
+
 export {
   presetsCdnUrl,
   ociCdnUrl,
@@ -59,4 +60,5 @@ export {
   osmApiConnections,
   taginfoApiUrl,
   nominatimApiUrl,
+  showDonationMessage
 };

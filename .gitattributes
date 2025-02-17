@@ -1,3 +1,4 @@
 * text=auto
 *.bat eol=crlf
 *.js eol=lf
+*.mjs eol=lf

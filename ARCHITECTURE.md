@@ -1,8 +1,8 @@
 ## iD Architecture
 
-iD is written in a modular code style using ES6 modules. The modules are bundled
-with [rollup.js](http://rollupjs.org/). iD eventually aims to be a reusable,
-modular library to kickstart other JavaScript-based tools for OpenStreetMap.
+iD is written in a modular code style using ES6 modules.
+iD eventually aims to be a reusable, modular library to kickstart other
+JavaScript-based tools for OpenStreetMap.
 
 ### d3
 
@@ -482,6 +482,10 @@ A feature does not have enough tags to define what it is.
 * `descriptive`: there are `area`, `name`, `type=multipolygon`, and/or meta tags (e.g. `source`), but no defining tags
 * `relation_type`: the OSM entity type is `relation` but there is no `type` tag
 * `highway_classification`: the OSM entity type is `way` and the feature is tagged as `highway=road`
+
+##### `osm_api_limits`
+
+A feature does not conform to the limits and rules imposed by the OSM API, such as a way with too many nodes for example.
 
 ##### `outdated_tags`
 

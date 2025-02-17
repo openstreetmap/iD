@@ -53,6 +53,7 @@ describe('iD.presetField', function() {
 
             var context = iD.coreContext().assetPath('../dist/').init();
             var uiField = iD.uiFieldCombo(field, context);
+            uiField(d3.select(document.createElement('div')).classed('form-field-input-wrap', true));
             uiField.tags({k: 'v'});
             expect(field.t.append).not.to.have.been.called;
             expect(other.t.append).to.have.been.called;

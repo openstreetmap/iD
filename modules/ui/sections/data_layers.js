@@ -18,6 +18,7 @@ export function uiSectionDataLayers(context) {
     var settingsCustomData = uiSettingsCustomData(context)
         .on('change', customChanged);
 
+    // refers to `modules/svg/layers.js` -> function drawLayers(selection) {...}
     var layers = context.layers();
 
     var section = uiSection('data-layers', context)
@@ -127,7 +128,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['keepRight', 'improveOSM', 'osmose'];
+        var qaKeys = ['keepRight', 'osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
@@ -385,7 +386,6 @@ export function uiSectionDataLayers(context) {
             dataLayer.fileList(d.fileList);
         }
     }
-
 
     function drawPanelItems(selection) {
 

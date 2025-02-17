@@ -157,6 +157,10 @@ export function svgMapillaryPosition(projection, context) {
         return !!getService();
     };
 
+    drawImages.rendered = function(zoom) {
+      return zoom >= minZoom;
+    };
+
 
     init();
     return drawImages;

@@ -14,6 +14,7 @@ import { uiLengthIndicator } from '../length_indicator';
 
 var _languagesArray = [];
 
+export const LANGUAGE_SUFFIX_REGEX = /^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/;
 
 export function uiFieldLocalized(field, context) {
     var dispatch = d3_dispatch('change', 'input');
@@ -96,7 +97,7 @@ export function uiFieldLocalized(field, context) {
                 var preset = presetManager.match(entity, context.graph());
                 if (preset) {
                     var isSuggestion = preset.suggestion;
-                    var fields = preset.fields();
+                    var fields = preset.fields(entity.extent(context.graph()).center());
                     var showsBrandField = fields.some(function(d) { return d.id === 'brand'; });
                     var showsOperatorField = fields.some(function(d) { return d.id === 'operator'; });
                     var setsName = preset.addTags.name;
@@ -127,7 +128,7 @@ export function uiFieldLocalized(field, context) {
             // matches for field:<code>, where <code> is a BCP 47 locale code
             // motivation is to avoid matching on similarly formatted tags that are
             // not for languages, e.g. name:left, name:source, etc.
-            var m = k.match(/^(.*):([a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2})?)$/);
+            var m = k.match(LANGUAGE_SUFFIX_REGEX);
             if (m && m[1] === field.key && m[2]) {
                 var item = { lang: m[2], value: tags[k] };
                 if (existingLangs.has(item.lang)) {
@@ -468,6 +469,9 @@ export function uiFieldLocalized(field, context) {
             })
             .attr('placeholder', function(d) {
                 return Array.isArray(d.value) ? t('inspector.multiple_values') : t('translate.localized_translation_name');
+            })
+            .attr('lang', function (d) {
+                return d.lang;
             })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);

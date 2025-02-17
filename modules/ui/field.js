@@ -8,6 +8,7 @@ import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
+import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
 
@@ -69,7 +70,9 @@ export function uiField(context, presetField, entityIDs, options) {
         if (field.type === 'directionalCombo' && field.key) {
             // directionalCombo fields can have an additional key describing the for
             // cases where both directions share a "common" value.
-            keys = keys.concat(field.key);
+            // The field also support *:both. The preset decides which field to write to.
+            const baseKey = field.key.replace(/:both$/, '');
+            keys = keys.concat(baseKey, `${baseKey}:both`);
         }
         return keys;
     }
@@ -96,6 +99,15 @@ export function uiField(context, presetField, entityIDs, options) {
                     }
                 }
                 return false;
+            }
+            if (field.type === 'localized') {
+                for (let tagKey in _tags) {
+                    // matches for field:<code>, where <code> is a BCP 47 locale code
+                    let match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
+                    if (match && match[1] === field.key && match[2]) {
+                        return true;
+                    }
+                }
             }
             return _tags[key] !== undefined;
         });
@@ -204,7 +216,11 @@ export function uiField(context, presetField, entityIDs, options) {
                         referenceKey = referenceKey.replace(/:$/, '');
                     }
 
-                    reference = uiTagReference(d.reference || { key: referenceKey }, context);
+                    var referenceOptions = d.reference || {
+                        key: referenceKey,
+                        value: _tags[referenceKey]
+                    };
+                    reference = uiTagReference(referenceOptions, context);
                     if (_state === 'hover') {
                         reference.showing(false);
                     }

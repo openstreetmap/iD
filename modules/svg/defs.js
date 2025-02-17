@@ -20,28 +20,37 @@ export function svgDefs(context) {
         _defsSelection = selection.append('defs');
 
         // add markers
-        _defsSelection
-            .append('marker')
-            .attr('id', 'ideditor-oneway-marker')
-            .attr('viewBox', '0 0 10 5')
-            .attr('refX', 2.5)
-            .attr('refY', 2.5)
-            .attr('markerWidth', 2)
-            .attr('markerHeight', 2)
-            .attr('markerUnits', 'strokeWidth')
-            .attr('orient', 'auto')
-            .append('path')
-            .attr('class', 'oneway-marker-path')
-            .attr('d', 'M 5,3 L 0,3 L 0,2 L 5,2 L 5,0 L 10,2.5 L 5,5 z')
-            .attr('stroke', 'none')
-            .attr('fill', '#000')
-            .attr('opacity', '0.75');
 
         // SVG markers have to be given a colour where they're defined
         // (they can't inherit it from the line they're attached to),
         // so we need to manually define markers for each color of tag
         // (also, it's slightly nicer if we can control the
         // positioning for different tags)
+
+        /** @param {string} name @param {string} colour */
+        function addOnewayMarker(name, colour) {
+            _defsSelection
+                .append('marker')
+                .attr('id', `ideditor-oneway-marker-${name}`)
+                .attr('viewBox', '0 0 10 5')
+                .attr('refX', 2.5)
+                .attr('refY', 2.5)
+                .attr('markerWidth', 2)
+                .attr('markerHeight', 2)
+                .attr('markerUnits', 'strokeWidth')
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('class', 'oneway-marker-path')
+                .attr('d', 'M 5,3 L 0,3 L 0,2 L 5,2 L 5,0 L 10,2.5 L 5,5 z')
+                .attr('stroke', 'none')
+                .attr('fill', colour)
+                .attr('opacity', '0.75');
+        }
+        addOnewayMarker('black', '#000'); // default
+        addOnewayMarker('white', '#fff'); // for dark lines (bridges under construction, railways, etc.)
+        addOnewayMarker('pink', '#eaf'); // for dark lines where white arrows don't work
+
+
         function addSidedMarker(name, color, offset) {
             _defsSelection
                 .append('marker')
@@ -177,6 +186,29 @@ export function svgDefs(context) {
             .attr('y', 0)
             .attr('width', function (d) { return d; })
             .attr('height', function (d) { return d; });
+
+        // add svg filters
+        const filters = _defsSelection.selectAll('filter')
+            .data(['alpha-slope5'])
+            .enter()
+            .append('filter')
+            .attr('id', d => d);
+        // Alters the alpha channel such that everything but
+        // (almost) transparent pixels are rendered fully opaque:
+        // This is used in a workaround for how chrome is rendering
+        // the edges of `img` elements when the page zoom is not a
+        // "round value": the semi-transparent pixels of neighboring
+        // tiles cannot "add up" to a fully opaque background layer.
+        // See https://github.com/openstreetmap/iD/issues/10747
+        // and https://github.com/openstreetmap/iD/pull/10594
+        const alphaSlope5 = filters.filter('#alpha-slope5')
+            .append('feComponentTransfer');
+        alphaSlope5.append('feFuncR').attr('type', 'identity');
+        alphaSlope5.append('feFuncG').attr('type', 'identity');
+        alphaSlope5.append('feFuncB').attr('type', 'identity');
+        alphaSlope5.append('feFuncA')
+            .attr('type', 'linear')
+            .attr('slope', 5);
 
         // add symbol spritesheets
         addSprites(_spritesheetIds, true);

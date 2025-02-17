@@ -8,7 +8,7 @@ import { utilArrayGroupBy, utilArrayUnion, utilQsString, utilStringQs } from '..
 
 export function rendererFeatures(context) {
     var dispatch = d3_dispatch('change', 'redraw');
-    var features = utilRebind({}, dispatch, 'on');
+    const features = {};
     var _deferred = new Set();
 
     var traffic_roads = {
@@ -40,6 +40,7 @@ export function rendererFeatures(context) {
         'cycleway': true,
         'bridleway': true,
         'steps': true,
+        'ladder': true,
         'pedestrian': true
     };
 
@@ -71,9 +72,16 @@ export function rendererFeatures(context) {
 
 
     /**
+     * @callback FilterFunction
+     * @param {Record<string, string>} tags
+     * @param {string} [geometry]
+     * @returns {boolean}
+     */
+
+    /**
      * @param {string} k
-     * @param {(tags: Record<string, string>, geometry: string) => boolean} filter
-     * @param {?number} max
+     * @param {FilterFunction} filter
+     * @param {number} [max]
      */
     function defineRule(k, filter, max) {
         var isEnabled = true;
@@ -123,15 +131,20 @@ export function rendererFeatures(context) {
     }, 250);
 
     defineRule('building_parts', function isBuildingPart(tags) {
-        return tags['building:part'];
+        return !!tags['building:part'];
     });
 
     defineRule('indoor', function isIndoor(tags) {
-        return tags.indoor;
+        return !!tags.indoor;
     });
 
     defineRule('landuse', function isLanduse(tags, geometry) {
-        return geometry === 'area' &&
+        return geometry === 'area' && (
+            !!tags.landuse ||
+            !!tags.natural ||
+            !!tags.leisure ||
+            !!tags.amenity
+        ) &&
             !_rules.buildings.filter(tags) &&
             !_rules.building_parts.filter(tags) &&
             !_rules.indoor.filter(tags) &&
@@ -187,8 +200,8 @@ export function rendererFeatures(context) {
         return tags['piste:type'];
     });
 
-    defineRule('aerialways', function isPiste(tags) {
-        return tags.aerialway &&
+    defineRule('aerialways', function isAerialways(tags) {
+        return !!tags?.aerialway &&
             tags.aerialway !== 'yes' &&
             tags.aerialway !== 'station';
     });
@@ -205,11 +218,12 @@ export function rendererFeatures(context) {
             paths[tags.highway]
         ) { return false; }
 
-        var strings = Object.keys(tags);
+        const keys = Object.keys(tags);
 
-        for (var i = 0; i < strings.length; i++) {
-            var s = strings[i];
-            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[s]]) return true;
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            const s = key.split(':')[0];
+            if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[key]]) return true;
         }
         return false;
     });
@@ -253,7 +267,7 @@ export function rendererFeatures(context) {
         if (!arguments.length) {
             return _keys.filter(function(k) { return _rules[k].hidden(); });
         }
-        return _rules[k] && _rules[k].hidden();
+        return _rules[k]?.hidden();
     };
 
 
@@ -602,5 +616,5 @@ export function rendererFeatures(context) {
     });
 
 
-    return features;
+    return utilRebind(features, dispatch, 'on');
 }
