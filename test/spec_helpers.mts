@@ -34,33 +34,6 @@ UIEvent.prototype.initUIEvent = function (...args) {
   return initUIEvent.apply(this, args);
 };
 
-// vitest has deprecated the done() callback, so we overwrite the `it` function
-const _it = it;
-Reflect.set(
-  global,
-  'it',
-  Object.assign(
-    (msg: string, fn: (done?: (err?: any) => void) => void | Promise<void>) => {
-      _it(msg, () => {
-        if (fn.length) {
-          // there is a done callback -> return a promise instead
-          return new Promise<void>((resolve, reject) => fn(err => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve();
-            }
-          }));
-        } else {
-          // no done callback -> normal behaviour
-          return fn();
-        }
-      });
-    },
-    { todo: _it.todo, skip: _it.skip, only: _it.only, each: _it.each },
-  ),
-);
-
 // must be imported after global envs are defined
 await import('../modules/id.js');
 const iD = global.iD;

@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.validations.outdated_tags', function () {
     var context;
 
@@ -55,74 +57,62 @@ describe('iD.validations.outdated_tags', function () {
         return issues;
     }
 
-    it('has no errors on init', function(done) {
+    it('has no errors on init', async () => {
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('has no errors on good tags', function(done) {
+    it('has no errors on good tags', async () => {
         createWay({'highway': 'unclassified'});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags deprecated tag with replacement', function(done) {
+    it('flags deprecated tag with replacement', async () => {
         createWay({'highway': 'ford'});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('outdated_tags');
-            expect(issue.subtype).to.eql('deprecated_tags');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags deprecated tag with no replacement', function(done) {
+    it('flags deprecated tag with no replacement', async () => {
         createWay({'highway': 'no'});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('outdated_tags');
-            expect(issue.subtype).to.eql('deprecated_tags');
-            expect(issue.severity).to.eql('warning');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('outdated_tags');
+        expect(issue.subtype).to.eql('deprecated_tags');
+        expect(issue.severity).to.eql('warning');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('ignores way with no relations', function(done) {
+    it('ignores way with no relations', async () => {
         createWay({});
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores multipolygon tagged on the relation', function(done) {
+    it('ignores multipolygon tagged on the relation', async () => {
         createRelation({}, { type: 'multipolygon', building: 'yes' });
         var validator = iD.validationOutdatedTags(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 });

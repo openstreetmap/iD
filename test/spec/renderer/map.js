@@ -1,3 +1,4 @@
+import { setTimeout } from 'node:timers/promises';
 import css from '../../../css/55_cursors.css?raw';
 
 describe('iD.Map', function() {
@@ -45,26 +46,22 @@ describe('iD.Map', function() {
     });
 
     describe('#zoomIn', function() {
-        it('increments zoom', function(done) {
+        it('increments zoom', async () => {
             expect(map.zoom(4)).to.equal(map);
             map.zoomIn();
-            window.setTimeout(function() {
-                d3.timerFlush();
-                expect(map.zoom()).to.be.closeTo(5, 1e-6);
-                done();
-            }, 275);
+            await setTimeout(275);
+            d3.timerFlush();
+            expect(map.zoom()).to.be.closeTo(5, 1e-6);
         });
     });
 
     describe('#zoomOut', function() {
-        it('decrements zoom', function(done) {
+        it('decrements zoom', async () => {
             expect(map.zoom(4)).to.equal(map);
             map.zoomOut();
-            window.setTimeout(function() {
-                d3.timerFlush();
-                expect(map.zoom()).to.be.closeTo(3, 1e-6);
-                done();
-            }, 275);
+            await setTimeout(275);
+            d3.timerFlush();
+            expect(map.zoom()).to.be.closeTo(3, 1e-6);
         });
     });
 
@@ -102,15 +99,13 @@ describe('iD.Map', function() {
     });
 
     describe('#centerEase', function() {
-        it('sets center', function(done) {
+        it('sets center', async () => {
             expect(map.center([10, 10])).to.equal(map);
             expect(map.centerEase([20, 20], 250)).to.equal(map);
-            window.setTimeout(function() {
-                d3.timerFlush();
-                expect(map.center()[0]).to.be.closeTo(20, 1e-6);
-                expect(map.center()[1]).to.be.closeTo(20, 1e-6);
-                done();
-            }, 275);
+            await setTimeout(275);
+            d3.timerFlush();
+            expect(map.center()[0]).to.be.closeTo(20, 1e-6);
+            expect(map.center()[1]).to.be.closeTo(20, 1e-6);
         });
     });
 

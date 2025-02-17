@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.serviceVegbilder', function() {
   const dimensions = [64, 64];
   const testImages = [{
@@ -248,7 +250,7 @@ describe('iD.serviceVegbilder', function() {
       vegbilder.on('loadedImages', spy);
       vegbilder.loadImages(context, 0);
 
-      await new Promise((resolve) => { window.setTimeout(resolve, 200); });
+      await setTimeout(200);
 
       expect(spy).to.have.been.not.called;
       expect(fetchMock.calls().length).to.eql(0);

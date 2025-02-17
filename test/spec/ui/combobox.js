@@ -231,28 +231,24 @@ describe('uiCombobox', function() {
         expect(input.property('value')).to.equal('foobar');
     });
 
-    it('emits accepted event with selected datum on ⇥', function(done) {
-        combobox.on('accept', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            combobox.on('accept', null);
-            done();
-        });
+    it('emits accepted event with selected datum on ⇥', async () => {
+        const d = new Promise(cb => { combobox.on('accept', cb); });
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('⇥');
+        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        combobox.on('accept', null);
     });
 
-    it('emits accepted event with selected datum on ↩', function(done) {
-        combobox.on('accept', function(d) {
-            expect(d).to.eql({title: 'bar', value: 'bar'});
-            combobox.on('accept', null);
-            done();
-        });
+    it('emits accepted event with selected datum on ↩', async () => {
+        const d = new Promise(cb => { combobox.on('accept', cb); });
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         simulateKeypress('↩');
+        expect(await d).to.eql({title: 'bar', value: 'bar'});
+        combobox.on('accept', null);
     });
 
     it('emits cancel event on ⎋', function() {

@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.uiSectionRawTagEditor', function() {
     var taglist, element, entity, context;
 
@@ -39,42 +41,36 @@ describe('iD.uiSectionRawTagEditor', function() {
         expect(element.select('.tag-list').selectAll('input.key').property('value')).to.be.empty;
     });
 
-    it('adds tags when clicking the add button', function (done) {
+    it('adds tags when clicking the add button', async () => {
         happen.click(element.selectAll('button.add-tag').node());
-        setTimeout(function() {
-            expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
-            expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
-            done();
-        }, 20);
+        await setTimeout(20);
+        expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
+        expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
     });
 
-    it('removes tags when clicking the remove button', function (done) {
-        taglist.on('change', function(entityIDs, tags) {
-            expect(tags).to.eql({highway: undefined});
-            done();
-        });
+    it('removes tags when clicking the remove button', async () => {
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
+        const tags = await new Promise(cb => {
+            taglist.on('change', (_, tags) => cb(tags));
+        });
+        expect(tags).to.eql({highway: undefined});
     });
 
-    it('adds tags when pressing the TAB key on last input.value', function (done) {
+    it('adds tags when pressing the TAB key on last input.value', async () => {
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value').nodes()[0];
         happen.keydown(d3.select(input).node(), {keyCode: 9});
-        setTimeout(function() {
-            expect(element.selectAll('.tag-list li').nodes().length).to.eql(2);
-            expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
-            expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
-            done();
-        }, 20);
+        await setTimeout(20);
+        expect(element.selectAll('.tag-list li').nodes().length).to.eql(2);
+        expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
+        expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
     });
 
-    it('does not add a tag when pressing TAB while shift is pressed', function (done) {
+    it('does not add a tag when pressing TAB while shift is pressed', async () => {
         expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
         var input = d3.select('.tag-list li:last-child input.value').nodes()[0];
         happen.keydown(d3.select(input).node(), {keyCode: 9, shiftKey: true});
-        setTimeout(function() {
-            expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
-            done();
-        }, 20);
+        await setTimeout(20);
+        expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
     });
 });
