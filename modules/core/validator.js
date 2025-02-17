@@ -495,13 +495,24 @@ export function coreValidator(context) {
     _headCache.graph = currGraph;  // take snapshot
     _completeDiff = context.history().difference().complete();
     const incrementalDiff = coreDifference(prevGraph, currGraph);
-    let entityIDs = Object.keys(incrementalDiff.complete());
-    entityIDs = _headCache.withAllRelatedEntities(entityIDs);  // expand set
+    const diff = Object.keys(incrementalDiff.complete());
+    const entityIDs = _headCache.withAllRelatedEntities(diff);  // expand set
 
     if (!entityIDs.size) {
       dispatch.call('validated');
       return Promise.resolve();
     }
+
+    // Re-validate also connected (or previously connected) entities to the current way
+    // fix #8758
+    const addConnectedWays = graph => diff
+      .filter(entityID => graph.hasEntity(entityID))
+      .map(entityID    => graph.entity(entityID))
+      .flatMap(entity  => graph.childNodes(entity))
+      .flatMap(vertex  => graph.parentWays(vertex))
+      .forEach(way => entityIDs.add(way.id));
+    addConnectedWays(currGraph);
+    addConnectedWays(prevGraph);
 
     _headPromise = validateEntitiesAsync(entityIDs, _headCache)
       .then(() => updateResolvedIssues(entityIDs))

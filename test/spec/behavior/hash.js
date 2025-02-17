@@ -79,4 +79,13 @@ describe('iD.behaviorHash', function () {
             done();
         }, 600);
     });
+
+    it('accepts default changeset comment as hash parameter', function () {
+        window.location.hash = '#comment=foo+bar%20%2B1';
+        var container = d3.select(document.createElement('div'));
+        context = iD.coreContext().assetPath('../dist/').init().container(container);
+        iD.behaviorHash(context);
+        expect(context.defaultChangesetComment()).to.eql('foo bar +1');
+        hash.off();
+    });
 });
