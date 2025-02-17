@@ -19,7 +19,7 @@ jobs:
     environment: workflows
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Install Transifex client
       run: |
         curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash

@@ -21,6 +21,10 @@ export const cardinal = {
     northnorthwest: 337,    nnw: 337
 };
 
+/**
+ * @typedef {typeof prototype & iD.AbstractEntity} OsmNode
+ * @returns {OsmNode}
+ */
 export function osmNode() {
     if (!(this instanceof osmNode)) {
         return (new osmNode()).initialize(arguments);
@@ -33,7 +37,7 @@ osmEntity.node = osmNode;
 
 osmNode.prototype = Object.create(osmEntity.prototype);
 
-Object.assign(osmNode.prototype, {
+const prototype = {
     type: 'node',
     loc: [9999, 9999],
 
@@ -243,4 +247,5 @@ Object.assign(osmNode.prototype, {
             coordinates: this.loc
         };
     }
-});
+};
+Object.assign(osmNode.prototype, prototype);

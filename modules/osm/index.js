@@ -29,7 +29,6 @@ export {
     osmVertexTags,
     osmSetVertexTags,
     osmNodeGeometriesForTags,
-    osmOneWayTags,
     osmPavedTags,
     osmIsInterestingTag,
     osmLifecyclePrefixes,

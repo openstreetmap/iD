@@ -33,7 +33,7 @@ export { utilHashcode } from './util';
 export { utilHighlightEntities } from './util';
 export { utilKeybinding } from './keybinding';
 export { utilNoAuto } from './util';
-export { utilObjectOmit } from './object';
+export { utilObjectOmit, utilCheckTagDictionary } from './object';
 export { utilCompareIDs } from './util';
 export { utilOldestID } from './util';
 export { utilPrefixCSSProperty } from './util';

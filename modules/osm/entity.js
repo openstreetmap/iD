@@ -80,6 +80,7 @@ osmEntity.deprecatedTagValuesByKey = function(dataDeprecated) {
 
 osmEntity.prototype = {
 
+    /** @type {Tags} */
     tags: {},
 
 
