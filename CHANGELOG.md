@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * The Suspicious Names validator warning now compares the Name field to the preset’s name in the user’s language, not just the raw tag value (typically in British English). ([#9522], thanks [@k-yle])
 * Revalidate ways that are connected to the currently edited way to also properly update/catch _disconnected way_s and _impossible oneway_ errors ([#8911], thanks [@andrewpmk])
 * Preserve `crossing:markings` tag when fixing missing connection of crossing path and road ([#9586], thanks [@jtracey])
+* Add a dedicated description to fix waterway-road intersections by adding a _culvert_ ([#10778], thanks [@matkoniecz])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -67,7 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add `housename` to address format in Bolivia ([#10727])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
-* Fix walkthrough from not correctly registering deleted ways in "Lines" step ([#10776]) 
+* Fix walkthrough from not correctly registering deleted ways in "Lines" step ([#10776])
 #### :rocket: Presets
 #### :hammer: Development
 * Enable Intellisense (IDE auto-completion) for the main classes ([#10618], thanks [@k-yle])
@@ -93,6 +94,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10764]: https://github.com/openstreetmap/iD/issues/10764
 [#10766]: https://github.com/openstreetmap/iD/pull/10766
 [#10776]: https://github.com/openstreetmap/iD/issues/10776
+[#10778]: https://github.com/openstreetmap/iD/issues/10778
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
