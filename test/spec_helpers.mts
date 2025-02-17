@@ -40,15 +40,21 @@ Reflect.set(
   global,
   'it',
   Object.assign(
-    (msg: string, fn: (done?: () => void) => void | Promise<void>) => {
+    (msg: string, fn: (done?: (err?: any) => void) => void | Promise<void>) => {
       _it(msg, () => {
         if (fn.length) {
           // there is a done callback -> return a promise instead
-          return new Promise<void>((done) => fn(done));
+          return new Promise<void>((resolve, reject) => fn(err => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          }));
+        } else {
+          // no done callback -> normal behaviour
+          return fn();
         }
-
-        // no done callback -> normal behaviour
-        return fn();
       });
     },
     { todo: _it.todo, skip: _it.skip, only: _it.only, each: _it.each },

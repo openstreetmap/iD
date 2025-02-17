@@ -16,30 +16,9 @@ export function rendererTileLayer(context) {
     var _zoom;
     var _source;
     var _underzoom = 0;
-    var _epsilon = 0;
-
-    // Workaround to remove visible grid around tile borders on Chrome with dynamic epsilon for specific browser zoom levels
-    // Should be removed when https://issues.chromium.org/issues/40084005 is resolved
-    // See https://github.com/openstreetmap/iD/pull/10594
-    if (window.chrome) {
-        updateEpsilon();
-        window.addEventListener('resize', updateEpsilon);
-    }
-    function updateEpsilon() {
-        const pageZoom = Math.round(window.devicePixelRatio * 100);
-        if (pageZoom % 25 === 0) {
-            _epsilon = 0; // uses mix-blend-mode: plus-lighter
-        } else if (pageZoom === 90) {
-            _epsilon = 0.005;
-        } else if (pageZoom === 110) {
-            _epsilon = 0.002;
-        } else {
-            _epsilon = 0.003;
-        }
-    }
 
     function tileSizeAtZoom(d, z) {
-        return ((d.tileSize * Math.pow(2, z - d[2])) / d.tileSize) + _epsilon;
+        return (d.tileSize * Math.pow(2, z - d[2])) / d.tileSize;
     }
 
 
@@ -79,6 +58,7 @@ export function rendererTileLayer(context) {
     function addSource(d) {
         d.url = _source.url(d);
         d.tileSize = _tileSize;
+        d.source = _source;
         return d;
     }
 
@@ -97,18 +77,17 @@ export function rendererTileLayer(context) {
             pixelOffset = [0, 0];
         }
 
-        var translate = [
-            _projection.translate()[0] + pixelOffset[0],
-            _projection.translate()[1] + pixelOffset[1]
-        ];
 
         tiler
             .scale(_projection.scale() * 2 * Math.PI)
-            .translate(translate);
+            .translate([
+                _projection.translate()[0] + pixelOffset[0],
+                _projection.translate()[1] + pixelOffset[1]
+            ]);
 
         _tileOrigin = [
-            _projection.scale() * Math.PI - translate[0],
-            _projection.scale() * Math.PI - translate[1]
+            _projection.scale() * Math.PI - _projection.translate()[0],
+            _projection.scale() * Math.PI - _projection.translate()[1]
         ];
 
         render(selection);
@@ -163,9 +142,9 @@ export function rendererTileLayer(context) {
             var ts = d.tileSize * Math.pow(2, _zoom - d[2]);
             var scale = tileSizeAtZoom(d, _zoom);
             return 'translate(' +
-                ((d[0] * ts) * _tileSize / d.tileSize - _tileOrigin[0]
+                ((d[0] * ts + d.source.offset()[0] * Math.pow(2, _zoom)) * _tileSize / d.tileSize - _tileOrigin[0]
             ) + 'px,' +
-                ((d[1] * ts) * _tileSize / d.tileSize - _tileOrigin[1]
+                ((d[1] * ts + d.source.offset()[1] * Math.pow(2, _zoom)) * _tileSize / d.tileSize - _tileOrigin[1]
             ) + 'px) ' +
                 'scale(' + scale * _tileSize / d.tileSize + ',' + scale * _tileSize / d.tileSize + ')';
         }

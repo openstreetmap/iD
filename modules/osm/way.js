@@ -3,8 +3,8 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
-import { osmTagSuggestingArea, osmOneWayTags, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix } from './tags';
-import { utilArrayUniq } from '../util';
+import { osmTagSuggestingArea, osmRightSideIsInsideTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
+import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 
 
 export function osmWay() {
@@ -138,29 +138,32 @@ Object.assign(osmWay.prototype, {
     },
 
 
-    isOneWay: function() {
-        // explicit oneway tag..
-        var values = {
-            'yes': true,
-            '1': true,
-            '-1': true,
-            'reversible': true,
-            'alternating': true,
-            'no': false,
-            '0': false
-        };
-        if (values[this.tags.oneway] !== undefined) {
-            return values[this.tags.oneway];
-        }
+    /** @returns {boolean} for example, if `oneway=yes` */
+    isOneWayForwards() {
+        if (this.tags.oneway === 'no') return false;
 
-        // implied oneway tag..
-        for (var key in this.tags) {
-            if (key in osmOneWayTags &&
-                (this.tags[key] in osmOneWayTags[key])) {
-                return true;
-            }
-        }
-        return false;
+        return !!utilCheckTagDictionary(this.tags, osmOneWayForwardTags);
+    },
+
+    /** @returns {boolean} for example, if `oneway=-1` */
+    isOneWayBackwards() {
+        if (this.tags.oneway === 'no') return false;
+
+        return !!utilCheckTagDictionary(this.tags, osmOneWayBackwardTags);
+    },
+
+    /** @returns {boolean} for example, if `oneway=alternating` */
+    isBiDirectional() {
+        if (this.tags.oneway === 'no') return false;
+
+        return !!utilCheckTagDictionary(this.tags, osmOneWayBiDirectionalTags);
+    },
+
+    /** @returns {boolean} */
+    isOneWay() {
+        if (this.tags.oneway === 'no') return false;
+
+        return !!utilCheckTagDictionary(this.tags, osmOneWayTags);
     },
 
     // Some identifier for tag that implies that this way is "sided",
@@ -242,7 +245,7 @@ Object.assign(osmWay.prototype, {
 
 
     isDegenerate: function() {
-        return (new Set(this.nodes).size < (this.isArea() ? 3 : 2));
+        return (new Set(this.nodes).size < (this.isClosed() ? 3 : 2));
     },
 
 

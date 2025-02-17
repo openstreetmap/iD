@@ -35,17 +35,86 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@xxxx]: https://github.com/xxxx
 -->
 
-# Unreleased (2.31.0-dev)
+# Unreleased (2.32.0-dev)
+
+#### :sparkles: Usability & Accessibility
+* Autocomplete changeset `source` tag with sources of the previous 100 changesets of the user ([#10764], thanks [@k-yle])
+* Also show search result for coordinates in `lon/lat` order in search results ([#10720], thanks [@Deeptanshu-sankhwar])
+* Linkify keys & tags in the preset docs from the wiki ([#10763], thanks [@k-yle])
+* Allow broken (unclosed) areas to be continued ([#9635], thanks [@k-yle])
+* Render `*_link` roads narrower than their "regular" counterpart ([#10722])
+* remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
+#### :scissors: Operations
+* Fix splitting of closed ways (or areas) when two or more split-points are selected
+* Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
+#### :camera: Street-Level
+#### :white_check_mark: Validation
+* Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
+* Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
+* Revalidate ways that are connected to the currently edited way to also properly update/catch _disconnected way_s and _impossible oneway_ errors ([#8911], thanks [@andrewpmk])
+#### :bug: Bugfixes
+* Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
+* Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
+* Preserve imagery offset during tile layer switching transition ([#10748])
+* Fix the relation membership list using a non-deterministic order ([#10648], thanks [@k-yle])
+* Fix over-saturated map tiles near the border of the tile service's coverage area ([#10747], thanks [@hlfan])
+* Fix too dim markers of selected/hovered photo of some street level imagery layers ([#10755], thanks [@draunger])
+* Fix `+` symbol appearing in changeset comments from external tools ([#10766], thanks [@k-yle])
+#### :earth_asia: Localization
+* Add `housename` to address format in Bolivia ([#10727])
+#### :hourglass: Performance
+#### :mortar_board: Walkthrough / Help
+* Fix walkthrough from not correctly registering deleted ways in "Lines" step ([#10776]) 
+#### :rocket: Presets
+#### :hammer: Development
+
+[#7381]: https://github.com/openstreetmap/iD/issues/7381
+[#8911]: https://github.com/openstreetmap/iD/pull/8911
+[#9634]: https://github.com/openstreetmap/iD/pull/9634
+[#9635]: https://github.com/openstreetmap/iD/pull/9635
+[#10003]: https://github.com/openstreetmap/iD/pull/10003
+[#10648]: https://github.com/openstreetmap/iD/pull/10648
+[#10720]: https://github.com/openstreetmap/iD/issues/10720
+[#10722]: https://github.com/openstreetmap/iD/pull/10722
+[#10727]: https://github.com/openstreetmap/iD/issues/10727
+[#10737]: https://github.com/openstreetmap/iD/pull/10737
+[#10747]: https://github.com/openstreetmap/iD/issues/10747
+[#10748]: https://github.com/openstreetmap/iD/issues/10748
+[#10755]: https://github.com/openstreetmap/iD/issues/10755
+[#10763]: https://github.com/openstreetmap/iD/pull/10763
+[#10764]: https://github.com/openstreetmap/iD/issues/10764
+[#10766]: https://github.com/openstreetmap/iD/pull/10766
+[#10776]: https://github.com/openstreetmap/iD/issues/10776
+[@hlfan]: https://github.com/hlfan
+[@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
+[@draunger]: https://github.com/draunger
+[@burrscurr]: https://github.com/burrscurr
+[@andrewpmk]: https://github.com/andrewpmk
+
+
+# 2.31.1
+##### 2025-Feb-06
+
+* Fix flickering when switching background layers or zooming ([#10738])
+
+[#10738]: https://github.com/openstreetmap/iD/issues/10738
+
+
+# 2.31.0
+##### 2025-Feb-05
 
 #### :sparkles: Usability & Accessibility
 * Fix flickering when switching between background imagery layers, make switching backgrounds snappier
 * Prevent password managers from autofilling tag fields ([#10508], thanks [@michaelabon])
-* remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
+* Make parking space thinner in partial fill rendering ([#10442], thanks [@Nekzuris])
+* Include route number in label of named route relations ([#10478], thanks [@1ec5])
+* Make oneway arrows more visible on dark colored lines ([#9143], thanks [@k-yle])
+* Add hash parameter to enable notes layer by default ([#8042], thanks [@k-yle])
 #### :scissors: Operations
 * When extracting a node from a way (shortcut: <kbd>E</kbd>), the relations are now preserved by default. Extracting a node without its relations is still possible using <kbd>⇧ Shift</kbd> <kbd>E</kbd> ([#9816], thanks [@k-yle])
 * Remove rarely-used keyboard shortcut <kbd>L</kbd> to prevent accidental activation of the geolocate tool ([#9999], thanks [@k-yle])
-#### :camera: Street-Level
 #### :white_check_mark: Validation
+* Include wikidata errors from osmose QA service ([#9998], thanks [@k-yle])
 #### :bug: Bugfixes
 * Fix unsolvable validator error triggered by regional presets ([#10459])
 * Render highway direction cones only on matching parent ways ([#9013])
@@ -55,6 +124,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow tiles in minimap to be slightly underzoomed, preventing them from blacking out on low map zoom levels ([#10653])
 * Fix confusing behaviour after logging out in the standalone build of iD ([#10683], thanks [@k-yle])
 * Fix editor being stuck in a disabled state when login popup window is closed prematurely ([#10651])
+* Preserve `opening_hours` when matching a NSI preset ([#10564], thanks [@Dimitar5555])
+* Fix bug causing invisible features when `layer` tag is a decimal number ([#9933], thanks [@k-yle])
 #### :earth_asia: Localization
 * Update Sinitic languages in the Multilingual Names field ([#10488], thanks [@winstonsung])
 * Update the list of languages in the Wikipedia field ([#10489])
@@ -65,19 +136,27 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :mortar_board: Walkthrough / Help
 * Fix walkthrough from showing tooltips on wrong location under certain circumstances ([#10650], [#10624], [#10634])
 #### :rocket: Presets
+* Updated the [`cycleway`](https://osm.wiki/Key:cycleway) & [`sidewalk`](https://osm.wiki/Key:sidewalk) fields to recognise the `:both` suffix, for example [`cycleway:both`](https://osm.wiki/Key:cycleway:both) ([#9587], thanks [@k-yle])
 #### :hammer: Development
-* Migrate unit tests from karma to vitest ([#10452])
+* Migrate unit tests from karma to vitest ([#10452], thanks [@k-yle])
 
+[#8042]: https://github.com/openstreetmap/iD/pull/8042
 [#9013]: https://github.com/openstreetmap/iD/issues/9013
-[#9634]: https://github.com/openstreetmap/iD/pull/9634
+[#9143]: https://github.com/openstreetmap/iD/pull/9143
+[#9587]: https://github.com/openstreetmap/iD/issues/9587
 [#9816]: https://github.com/openstreetmap/iD/issues/9816
+[#9933]: https://github.com/openstreetmap/iD/pull/9933
+[#9998]: https://github.com/openstreetmap/iD/pull/9998
 [#9999]: https://github.com/openstreetmap/iD/issues/9999
+[#10442]: https://github.com/openstreetmap/iD/pull/10442
 [#10452]: https://github.com/openstreetmap/iD/pull/10452
 [#10459]: https://github.com/openstreetmap/iD/pull/10459
+[#10478]: https://github.com/openstreetmap/iD/pull/10478
 [#10488]: https://github.com/openstreetmap/iD/pull/10488
 [#10489]: https://github.com/openstreetmap/iD/pull/10489
 [#10495]: https://github.com/openstreetmap/iD/issues/10495
 [#10508]: https://github.com/openstreetmap/iD/pull/10508
+[#10564]: https://github.com/openstreetmap/iD/pull/10564
 [#10594]: https://github.com/openstreetmap/iD/pull/10594
 [#10624]: https://github.com/openstreetmap/iD/issues/10624
 [#10634]: https://github.com/openstreetmap/iD/issues/10634

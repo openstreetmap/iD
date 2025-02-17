@@ -187,6 +187,29 @@ export function svgDefs(context) {
             .attr('width', function (d) { return d; })
             .attr('height', function (d) { return d; });
 
+        // add svg filters
+        const filters = _defsSelection.selectAll('filter')
+            .data(['alpha-slope5'])
+            .enter()
+            .append('filter')
+            .attr('id', d => d);
+        // Alters the alpha channel such that everything but
+        // (almost) transparent pixels are rendered fully opaque:
+        // This is used in a workaround for how chrome is rendering
+        // the edges of `img` elements when the page zoom is not a
+        // "round value": the semi-transparent pixels of neighboring
+        // tiles cannot "add up" to a fully opaque background layer.
+        // See https://github.com/openstreetmap/iD/issues/10747
+        // and https://github.com/openstreetmap/iD/pull/10594
+        const alphaSlope5 = filters.filter('#alpha-slope5')
+            .append('feComponentTransfer');
+        alphaSlope5.append('feFuncR').attr('type', 'identity');
+        alphaSlope5.append('feFuncG').attr('type', 'identity');
+        alphaSlope5.append('feFuncB').attr('type', 'identity');
+        alphaSlope5.append('feFuncA')
+            .attr('type', 'linear')
+            .attr('slope', 5);
+
         // add symbol spritesheets
         addSprites(_spritesheetIds, true);
     }

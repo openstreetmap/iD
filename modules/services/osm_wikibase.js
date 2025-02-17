@@ -102,6 +102,38 @@ export default {
         return result.replace(/_/g, ' ').trim();
     },
 
+    /**
+     * Converts text like `tag:...=...` into clickable links
+     *
+     * @param {string} unsafeText - unsanitized text
+     */
+    linkifyWikiText(unsafeText) {
+        /** @param {import('d3').Selection} selection */
+        return (selection) => {
+            const segments = unsafeText.split(/(key|tag):([\w-]+)(=([\w-]+))?/g);
+
+            for (let i = 0; i < segments.length; i += 5) {
+                const [plainText, , key, , value] = segments.slice(i);
+
+                if (plainText) {
+                    selection
+                        .append('span')
+                        .text(plainText);
+                }
+
+                if (key) {
+                    selection
+                        .append('a')
+                        .attr('href', `https://wiki.openstreetmap.org/wiki/${this.toSitelink(key, value)}`)
+                        .attr('target', '_blank')
+                        .attr('rel', 'noreferrer')
+                        .append('code')
+                            .text(`${key}=${value || '*'}`);
+                }
+            }
+        };
+    },
+
 
     //
     // Pass params object of the form:
@@ -269,7 +301,7 @@ export default {
             // prepare result
             var result = {
                 title: entity.title,
-                description: description ? description.value : '',
+                description: that.linkifyWikiText(description?.value || ''),
                 descriptionLocaleCode: description ? description.language : '',
                 editURL: 'https://wiki.openstreetmap.org/wiki/' + entity.title
             };

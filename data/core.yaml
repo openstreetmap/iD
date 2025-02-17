@@ -736,6 +736,7 @@ en:
     back_tooltip: Change feature type
     remove: Remove
     search: Search
+    search_feature_type: Search feature type
     unknown: Unknown
     incomplete: <not downloaded>
     feature_list: Search features
@@ -1728,7 +1729,7 @@ en:
         everything_in_view: Everything in view looks fine
         edits: Your edits look fine
         edits_in_view: Your edits in view look fine
-        no_edits: You have no edits yet
+        no_edits: You have no unsaved changes
       hidden_issues:
         none: Detected issues will appear here
         elsewhere: "Issues elsewhere: {count}"
@@ -1778,6 +1779,16 @@ en:
       title: Crossing Ways
       message: "{feature} crosses {feature2}"
       tip: "Find features that incorrectly cross over one another"
+      aeroway-aeroway:
+        reference: "Crossing aeroways should be connected."
+      aeroway-building:
+        reference: "Aeroways crossing buildings should use bridges or different layers."
+      aeroway-highway:
+        reference: "Aeroways crossing railways should be connected."
+      aeroway-railway:
+        reference: "Aeroways crossing highways should be connected."
+      aeroway-waterway:
+        reference: "Aeroways crossing waterways should use tunnels."
       building-building:
         reference: "Buildings should not intersect except on different layers."
       building-highway:
@@ -1943,6 +1954,12 @@ en:
     vertex_as_point:
       message: '{feature} should be attached to a line or area based on its tags'
       reference: "Some features shouldn't be standalone points."
+    osm_api_limits:
+      title: OSM Data Limitations
+      tip: Limits and rules imposed by the OSM API on uploaded features
+      max_way_nodes:
+        message: Way has too many vertices
+        reference: "The maximum number of vertices of a way is {maxWayNodes}. Split the feature into smaller parts or otherwise reduce the number of nodes of the affected way."
     fix:
       add_a_bridge:
         title: Add a bridge
@@ -2021,6 +2038,8 @@ en:
         title: Set as inner
       set_as_outer:
         title: Set as outer
+      split_way:
+        title: Split the way into smaller pieces.
       square_feature:
         title: Square this feature
       tag_as_disconnected:
