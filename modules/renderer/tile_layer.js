@@ -187,14 +187,7 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-removing', true)
             .classed('tile-center', false)
-            .each(function() {
-                var tile = d3_select(this);
-                window.setTimeout(function() {
-                    if (tile.classed('tile-removing')) {
-                        tile.remove();
-                    }
-                }, 250);
-            });
+            .on('transitionend', function() { d3_select(this).remove(); });
 
         image.enter()
           .append('img')
