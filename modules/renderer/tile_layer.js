@@ -208,7 +208,8 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-debug', showDebug)
             .classed('tile-removing', false)
-            .classed('tile-center', function(d) { return d === nearCenter; });
+            .classed('tile-center', function(d) { return d === nearCenter; })
+            .sort((a, b) => a[2] - b[2]);
 
 
 
