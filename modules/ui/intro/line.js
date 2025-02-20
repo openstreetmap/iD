@@ -1000,9 +1000,6 @@ export function uiIntroLine(context, reveal) {
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            if (selectMenuItem(context, 'delete').empty()) {
-                return continueTo(multiRightClick);
-            }
             reveal('.edit-menu',
                 helpHtml('intro.lines.multi_delete'),
                 { duration: 0, padding: 50 }
