@@ -711,7 +711,8 @@ en:
     locating: "Locating, please wait..."
     location_unavailable: Your location is unavailable.
   inspector:
-    lifecycle: Lifecycle
+    lifecycle : 'Lifecycle'
+    lifecycleReference: A lifecycle prefix is a tag prefix used to indicate the current state of an object. These prefixes help track changes in infrastructure over time.
     zoom_to:
       key: Z
       title: Zoom To Selection

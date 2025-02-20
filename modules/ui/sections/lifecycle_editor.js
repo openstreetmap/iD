@@ -83,7 +83,13 @@ export function uiSectionLifecycleEditor(context) {
             .call(svgIcon('#iD-operation-delete'))
             .on('click', makeFunctional);
 
-        let reference = uiTagReference({ key: 'Lifecycle_prefix' }, context);
+        let reference = uiTagReference(
+            { 
+                key: 'customStringMessage', 
+                value: 'lifecycleReference', 
+                referenceLink : 'https://wiki.openstreetmap.org/wiki/Lifecycle_prefix'
+            }, 
+            context);
 
         titleWrap
             .call(reference.button);
@@ -144,17 +150,53 @@ export function uiSectionLifecycleEditor(context) {
                 (reference.body)(d3_select('.reference-box-' + d.id));
             });
         */
+       console.log(_currentLifecycle);
+    }
+
+    function getMainTag(){
+        const presetTags = getPresetTag();
+        const presetKeys = Object.keys(presetTags);
+
+        const entityTags = getEntityTags();
+        const entityKeys = Object.keys(entityTags);
+
+        const entityTagsWithoutPrefixes = getEntityTagsWithoutPrefixes();
+        const entityTagsWithoutPrefixesKeys = Object.keys(entityTagsWithoutPrefixes);
+        
+        let intersection = presetKeys.filter(x => entityKeys.includes(x));
+
+        if (intersection[0]) {
+            return intersection[0];
+        }
+
+        intersection = presetKeys.filter(x => entityTagsWithoutPrefixesKeys.includes(x));
+
+        if (intersection[0]) {
+            return intersection[0];
+        }
+
+        return null;
     }
 
     function getLifecycleToRender(){
         const render = _lifecyclePresets.filter(tag => tag.visibleByDeafult);
         const renderId = render.map(tag => tag.id);
         const entityTag = getEntityTags();
+        const mainTag = getMainTag();
         var newTags = [];
 
         for (let et in entityTag) {
+            if (et.includes(mainTag)) {
+                newTags.push(osmGetLifecyclePrefix(et));
+            }
+        }
+
+        /* Multiple Tags
+        
+        for (let et in entityTag) {
             newTags.push(osmGetLifecyclePrefix(et));
         }
+        */
 
         ids.forEach(id => {
             if (newTags.includes(id) && !renderId.includes(id) ) {
@@ -167,17 +209,34 @@ export function uiSectionLifecycleEditor(context) {
 
     function getCurrentLifecycleTag(){
 
-        let lifecycleTag;
         const tags = getEntityTags();
+        const mainTag = getMainTag();
         const tagKeys = (Object.keys(tags));
-        const fullTag = tagKeys.find(value =>
-            ids.some(keyword => value.includes(keyword))
-        );
+        const entityTagsWithoutPrefixes = getEntityTagsWithoutPrefixes();
 
-        if (fullTag) {
-            lifecycleTag = fullTag.split(':')[0];
-            return lifecycleTag;
+        if(mainTag in entityTagsWithoutPrefixes || mainTag in tags){
+            let fullTag = tagKeys.find(value =>
+                ids.some(keyword => value.includes(keyword))
+            );
+
+            if (fullTag && fullTag.includes(mainTag)) {
+                return fullTag.split(':')[0];
+            }
         }
+
+        /* Multiple Tags
+        for(let tag in mainTag){
+            if(tag in entityTagsWithoutPrefixes || tag in tags){
+                let fullTag = tagKeys.find(value =>
+                    ids.some(keyword => value.includes(keyword))
+                );
+
+                if (fullTag) {
+                    return fullTag.split(':')[0];
+                }
+            }
+        }
+        */
 
         return 'functional';
 
@@ -263,6 +322,19 @@ export function uiSectionLifecycleEditor(context) {
         var entityID = _entityID;
         dispatch.call('change', this, entityID, _pendingChange);
         _pendingChange = null;
+    }
+
+    function getEntityTagsWithoutPrefixes(){
+        var tags = _tags;
+
+        let entityTagsWithoutPrefixes = Object.fromEntries(
+            Object.entries(tags).map(([key, value]) => {
+                const newKey = key.includes(':') ? key.split(':')[1] : key;
+                return [newKey, value];
+            })
+        );
+
+        return entityTagsWithoutPrefixes;
     }
 
     function getEntityTags(){

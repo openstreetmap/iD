@@ -9,8 +9,9 @@ import { svgIcon } from '../svg/icon';
 
 // Pass `what` object of the form:
 // {
-//   key: 'string',     // required
-//   value: 'string'    // optional
+//   key: 'string',             // required
+//   value: 'string'            // optional
+//   referenceLink : 'string'   // optional
 // }
 //   -or-
 // {
@@ -41,10 +42,28 @@ export function uiTagReference(what) {
         _body.html('');
 
         if (!docs || !docs.title) {
-            _body
-                .append('p')
-                .attr('class', 'tag-reference-description')
-                .call(t.append('inspector.no_documentation_key'));
+            if (what.value && what.key === 'customStringMessage') {           
+                _body
+                    .append('p')
+                    .attr('class', 'tag-reference-description')
+                    .call(t.append('inspector.' + what.value));
+
+                    if(what.referenceLink) {
+                        _body
+                            .append('a')
+                            .attr('class', 'tag-reference-link')
+                            .attr('target', '_blank')
+                            .attr('href', what.referenceLink)
+                            .call(svgIcon('#iD-icon-out-link', 'inline'))
+                            .append('span')
+                            .call(t.append('inspector.wiki_reference'));
+                    }
+            } else {
+                _body
+                    .append('p')
+                    .attr('class', 'tag-reference-description')
+                    .call(t.append('inspector.no_documentation_key'));
+            }
             done();
             return;
         }

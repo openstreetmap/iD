@@ -63,7 +63,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     let score = 0;
 
     // entityTags without prefixes
-    const modifiedEntityTags = Object.fromEntries(
+    const entityTagsWithoutPrefixes = Object.fromEntries(
       Object.entries(entityTags).map(([key, value]) => {
           const newKey = key.includes(':') ? key.split(':')[1] : key;
           return [newKey, value];
@@ -78,7 +78,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         score += _this.originalScore;
       } else if (tags[k] === '*' && k in entityTags) {
         score += _this.originalScore / 2;
-      } else if (modifiedEntityTags[k] === tags[k]) {
+      } else if (entityTagsWithoutPrefixes[k] === tags[k]) {
         score += _this.originalScore;
       } else {
         return -1;
