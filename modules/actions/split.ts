@@ -10,7 +10,7 @@ import type { Action } from '../core/history';
 type HistoryStrategy = 'longest' | 'first';
 
 export interface ActionSplit extends Action {
-    getCreatedWayIDs?(): WayId[];
+    getCreatedWayIDs(): WayId[];
     waysForNode(nodeId: NodeId, graph: coreGraph): osmWay[];
     ways(graph: coreGraph): osmWay[];
     limitWays(wayIds?: WayId[]): WayId[] | this;

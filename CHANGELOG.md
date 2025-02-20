@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 #### :scissors: Operations
+* Create a 'slice' operation ([#9334], thanks [@RudyTheDev])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
@@ -49,6 +50,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
+[#9334]: https://github.com/openstreetmap/iD/pull/9334
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 
 # 2.42.0

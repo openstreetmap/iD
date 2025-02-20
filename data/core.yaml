@@ -505,6 +505,25 @@ en:
       parent_incomplete: This line cannot be split because a parent relation isn’t fully downloaded. Download the full relation.
       simple_roundabout: This line cannot be split because this roundabout is part of a larger relation. You must remove it from the relation first.
       connected_to_hidden: This can't be split because it is connected to a hidden feature.
+    slice:
+      title: Slice
+      description: Divide the parent area into two areas along this line.
+      key: L
+      annotation: Sliced area into two.
+      cutline_tagged: Cannot slice using a line which has tagged values.
+      cutline_nodes_tagged: Cannot slice using a line which has nodes that have tagged values.
+      cutline_in_relation: Cannot slice using a line which is a member of a relation.
+      cutline_nodes_in_relation: Cannot slice using a line which has nodes that are a member of a relation.
+      cutline_connected_to_other: Cannot slice using a line which is connected to other ways.
+      cutline_multiple_connection: Cannot slice using a line that connects to its parent area multiple times.
+      cutline_outside_area: Cannot slice using a line outside the bounds of the area.
+      cutline_intersects_inner_members: Cannot slice using a line that intersects other members of the parent area's relation.
+      area_not_outer_relation_member: Cannot slice an area that is not an outer multipolygon area.
+      cannot_split_area: Cannot split the parent area at the connecting points.
+      cannot_split_area_annotated: "Cannot split the parent area at the connecting points. {annotation}"
+      connected_to_hidden: This can't be sliced because it is connected to a hidden feature.
+      area_member_not_downloaded: This can't be sliced because not all members of the parent area are downloaded.
+      too_large: This can't be sliced because not enough of the line is visible.
     restriction:
       annotation:
         create: Added a turn restriction
@@ -2246,6 +2265,7 @@ en:
         extract: "Extract a point from a feature"
         extract_without_relations: "Extract a point from a feature, without extracting its relations"
         split: "Split features at the selected points"
+        slice: "Split area along the selected line"
         reverse: "Reverse selected features"
         move: "Move selected features"
         follow: "Follow a line or area"

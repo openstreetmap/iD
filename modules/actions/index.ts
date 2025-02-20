@@ -31,6 +31,7 @@ export { actionReverse } from './reverse';
 export { actionRevert } from './revert';
 export { actionRotate } from './rotate';
 export { actionScale } from './scale';
+export { actionSlice } from './slice';
 export { actionSplit } from './split';
 export { actionStraightenNodes } from './straighten_nodes';
 export { actionStraightenWay } from './straighten_way';

@@ -342,6 +342,10 @@
             "text": "shortcuts.editing.operations.reflect_short"
           },
           {
+            "shortcuts": ["operations.slice.key"],
+            "text": "shortcuts.editing.operations.slice"
+          },
+          {
             "modifiers": ["⌘"],
             "shortcuts": ["⌫"],
             "text": "shortcuts.editing.operations.delete"
