@@ -4390,13 +4390,21 @@ img.tile {
     overflow: hidden;
 }
 
+.layer-overlay .img.tile,
+.map-in-map-overlay .img.tile {
+    /* dummy transition such that the `ontransitionend` event can be triggered, see https://github.com/openstreetmap/iD/pull/10785 */
+    transition: opacity 1ms linear;
+}
+
 .layer-background img.tile,
 .map-in-map-background img.tile {
     filter: url(#alpha-slope5);
 }
 
 .layer-background img.tile-removing,
-.map-in-map-background img.tile-removing {
+.layer-overlay img.tile-removing,
+.map-in-map-background img.tile-removing,
+.map-in-map-overlay img.tile-removing {
     opacity: 0;
     z-index: 1;
 }

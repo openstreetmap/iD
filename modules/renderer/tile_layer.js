@@ -187,13 +187,11 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-removing', true)
             .classed('tile-center', false)
-            .each(function() {
-                var tile = d3_select(this);
-                window.setTimeout(function() {
-                    if (tile.classed('tile-removing')) {
-                        tile.remove();
-                    }
-                }, 250);
+            .on('transitionend', function() {
+                const tile = d3_select(this);
+                if (tile.classed('tile-removing')) {
+                    tile.remove();
+                }
             });
 
         image.enter()
@@ -210,7 +208,8 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-debug', showDebug)
             .classed('tile-removing', false)
-            .classed('tile-center', function(d) { return d === nearCenter; });
+            .classed('tile-center', function(d) { return d === nearCenter; })
+            .sort((a, b) => a[2] - b[2]);
 
 
 

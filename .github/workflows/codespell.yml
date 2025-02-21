@@ -11,8 +11,8 @@ jobs:
     name: Check for spelling errors
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: codespell-project/actions-codespell@master
+      - uses: actions/checkout@v4
+      - uses: codespell-project/actions-codespell@v2
         with:
           check_filenames: true
           skip: ./.git,./data/territory_languages.json,./data/imagery.json,./data/languages.json,./data/address_formats.json,./dist/locales,./docs/img,./dist/img,./css,package.json,package-lock.json,scripts,docs

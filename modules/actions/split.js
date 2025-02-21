@@ -172,7 +172,10 @@ export function actionSplit(nodeIds, newWayIds) {
             // 2. Splitting a VIA way - `wayB` remains in relation as a VIA way
             if (relation.hasFromViaTo()) {
                 var f = relation.memberByRole('from');
-                var v = relation.membersByRole('via');
+                var v = [
+                    ...relation.membersByRole('via'),
+                    ...relation.membersByRole('intersection'),
+                ];
                 var t = relation.memberByRole('to');
                 var i;
 
@@ -461,7 +464,10 @@ export function actionSplit(nodeIds, newWayIds) {
                 for (const parentRelation of parentRelations) {
                     if (parentRelation.hasFromViaTo()) {
                         // turn restrictions: via members must be loaded
-                        const vias = parentRelation.membersByRole('via');
+                        const vias = [
+                            ...parentRelation.membersByRole('via'),
+                            ...parentRelation.membersByRole('intersection'),
+                        ];
                         if (!vias.every(via => graph.hasEntity(via.id))) {
                             return 'parent_incomplete';
                         }

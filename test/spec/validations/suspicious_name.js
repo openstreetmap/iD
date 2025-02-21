@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.validations.suspicious_name', function () {
     var context;
 
@@ -30,6 +32,10 @@ describe('iD.validations.suspicious_name', function () {
         };
         iD.fileFetcher.cache().nsi_generics = {
           genericWords: ['^stores?$']
+        };
+        iD.fileFetcher.cache().preset_presets = {
+            'Velero': { tags: { craft: 'sailmaker' }, geometry: ['line'] },
+            'Constructor de barco': { tags: { craft: 'boatbuilder' }, geometry: ['line'] },
         };
     });
 
@@ -65,122 +71,127 @@ describe('iD.validations.suspicious_name', function () {
         return issues;
     }
 
-    it('has no errors on init', function(done) {
+    it('has no errors on init', async () => {
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores way with no tags', function(done) {
+    it('ignores way with no tags', async () => {
         createWay({});
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores feature with no name', function(done) {
+    it('ignores feature with no name', async () => {
         createWay({ shop: 'supermarket' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores feature with a specific name', function(done) {
+    it('ignores feature with a specific name', async () => {
         createWay({ shop: 'supermarket', name: 'Lou\'s' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores feature with a specific name that includes a generic name', function(done) {
+    it('ignores feature with a specific name that includes a generic name', async () => {
         createWay({ shop: 'supermarket', name: 'Lou\'s Store' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('ignores feature matching excludeNamed pattern in name-suggestion-index', function(done) {
+    it('ignores feature matching excludeNamed pattern in name-suggestion-index', async () => {
         createWay({ shop: 'supermarket', name: 'famiglia cooperativa' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(0);
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(0);
     });
 
-    it('flags feature matching a excludeGeneric pattern in name-suggestion-index', function(done) {
+    it('flags feature matching a excludeGeneric pattern in name-suggestion-index', async () => {
         createWay({ shop: 'supermarket', name: 'super mercado' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('generic_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags feature matching a global exclude pattern in name-suggestion-index', function(done) {
+    it('flags feature matching a global exclude pattern in name-suggestion-index', async () => {
         createWay({ shop: 'supermarket', name: 'store' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('generic_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags feature with a name that is just a defining tag key', function(done) {
+    it('flags feature with a name that is just a defining tag key', async () => {
         createWay({ amenity: 'drinking_water', name: 'Amenity' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('generic_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
     });
 
-    it('flags feature with a name that is just a defining tag value', function(done) {
+    it('flags feature with a name that is just a defining tag value', async () => {
         createWay({ shop: 'red_bicycle_emporium', name: 'Red Bicycle Emporium' });
         var validator = iD.validationSuspiciousName(context);
-        window.setTimeout(function() {   // async, so data will be available
-            var issues = validate(validator);
-            expect(issues).to.have.lengthOf(1);
-            var issue = issues[0];
-            expect(issue.type).to.eql('suspicious_name');
-            expect(issue.subtype).to.eql('generic_name');
-            expect(issue.entityIds).to.have.lengthOf(1);
-            expect(issue.entityIds[0]).to.eql('w-1');
-            done();
-        }, 20);
+        await setTimeout(20);
+        var issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        var issue = issues[0];
+        expect(issue.type).to.eql('suspicious_name');
+        expect(issue.subtype).to.eql('generic_name');
+        expect(issue.entityIds).to.have.lengthOf(1);
+        expect(issue.entityIds[0]).to.eql('w-1');
+    });
+
+    it('flags feature with a name that matches the preset name', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createWay({ craft: 'sailmaker', 'name:ca': 'Velero' });
+        const validator = iD.validationSuspiciousName(context);
+
+        const issues = validate(validator);
+        expect(issues).to.have.lengthOf(1);
+        expect(issues[0].type).to.eql('suspicious_name');
+        expect(issues[0].hash).to.eql('name:ca=Velero');
+    });
+
+    it('flags feature with a name that matches the preset name and tag name', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createWay({ craft: 'boatbuilder', 'name:mi': 'boatbuilder', name: 'cOnStRuCtOr de barco' });
+        const validator = iD.validationSuspiciousName(context);
+
+        const issues = validate(validator);
+        expect(issues).to.have.lengthOf(2);
+        expect(issues[0].type).to.eql('suspicious_name');
+        expect(issues[0].hash).to.eql('name:mi=boatbuilder');
+
+        expect(issues[1].type).to.eql('suspicious_name');
+        expect(issues[1].hash).to.eql('name=cOnStRuCtOr de barco');
     });
 });

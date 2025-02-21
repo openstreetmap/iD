@@ -25,7 +25,7 @@ import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '..
 
 export function coreContext() {
   const dispatch = d3_dispatch('enter', 'exit', 'change');
-  let context = utilRebind({}, dispatch, 'on');
+  const context = {};
   let _deferred = new Set();
 
   context.version = packageJSON.version;
@@ -591,5 +591,5 @@ export function coreContext() {
     }
   };
 
-  return context;
+  return utilRebind(context, dispatch, 'on');
 }

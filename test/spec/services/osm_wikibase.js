@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 describe('iD.serviceOsmWikibase', function () {
   var wikibase;
 
@@ -262,7 +264,7 @@ describe('iD.serviceOsmWikibase', function () {
   };
 
   describe('#getEntity', function () {
-    it('calls the given callback with the results of the getEntity data item query', function (done) {
+    it('calls the given callback with the results of the getEntity data item query', async () => {
       var callback = sinon.spy();
       fetchMock.mock(/action=wbgetentities/, {
         body: JSON.stringify({
@@ -279,24 +281,22 @@ describe('iD.serviceOsmWikibase', function () {
 
       wikibase.getEntity({ key: 'amenity', value: 'parking', langCodes: ['fr'] }, callback);
 
-      window.setTimeout(function () {
-        expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
-          {
-            action: 'wbgetentities',
-            sites: 'wiki',
-            titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
-            languages: 'fr',
-            languagefallback: '1',
-            origin: '*',
-            format: 'json',
-          }
-        );
-        expect(callback).to.have.been.calledWith(null, {
-          key: keyData(),
-          tag: tagData()
-        });
-        done();
-      }, 50);
+      await setTimeout(50);
+      expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+        {
+          action: 'wbgetentities',
+          sites: 'wiki',
+          titles: 'Locale:fr|Key:amenity|Tag:amenity=parking',
+          languages: 'fr',
+          languagefallback: '1',
+          origin: '*',
+          format: 'json',
+        }
+      );
+      expect(callback).to.have.been.calledWith(null, {
+        key: keyData(),
+        tag: tagData()
+      });
     });
   });
 

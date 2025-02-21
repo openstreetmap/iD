@@ -8,23 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  checksecret:
-    name: check if deploy secret is present
-    environment: workflows
-    runs-on: ubuntu-latest
-    outputs:
-      deploy_secret_present: ${{ steps.checksecret_job.outputs.deploy_secret_present }}
-    steps:
-      - name: Check whether required secret is available
-        id: checksecret_job
-        env:
-            NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
-        run: |
-            echo "::set-output name=deploy_secret_present::${{ env.NETLIFY_AUTH_TOKEN != '' }}"
-
   build-deploy:
-    needs: [checksecret]
-    if: needs.checksecret.outputs.deploy_secret_present == 'true'
+    if: github.repository == 'openstreetmap/id'
     runs-on: ubuntu-latest
     environment: workflows
     steps:

@@ -167,6 +167,8 @@ export function validationCrossingWays(context) {
                 if ((entity1IsPath || entity2IsPath) && entity1IsPath !== entity2IsPath) {
                     // one feature is a path but not both
 
+                    if (!bothLines) return {};
+
                     var roadFeature = entity1IsPath ? entity2 : entity1;
                     var pathFeature = entity1IsPath ? entity1 : entity2;
                     // don't mark path connections with tracks as crossings
@@ -181,11 +183,15 @@ export function validationCrossingWays(context) {
                         return {};
                     }
                     if (['marked', 'unmarked', 'traffic_signals', 'uncontrolled'].indexOf(pathFeature.tags.crossing) !== -1) {
-                        // if the path is a crossing, match the crossing type
-                        return bothLines ? { highway: 'crossing', crossing: pathFeature.tags.crossing } : {};
+                        // if the path is a crossing, match the crossing type and markings
+                        var tags = { highway: 'crossing', crossing: pathFeature.tags.crossing };
+                        if ('crossing:markings' in pathFeature.tags) {
+                            tags['crossing:markings'] = pathFeature.tags['crossing:markings'];
+                        }
+                        return tags;
                     }
                     // don't add a `crossing` subtag to ambiguous crossings
-                    return bothLines ? { highway: 'crossing' } : {};
+                    return { highway: 'crossing' };
                 }
                 return {};
             }
@@ -499,7 +505,12 @@ export function validationCrossingWays(context) {
                     // don't recommend adding tunnels under waterways since they're uncommon
                     var skipTunnelFix = otherFeatureType === 'waterway' && selectedFeatureType !== 'waterway';
                     if (allowsTunnel(selectedFeatureType) && !skipTunnelFix) {
-                        fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
+                        if (selectedFeatureType === 'waterway') {
+                            // naming piped waterway "tunnel" is a confusing osmism, culvert should be more clear
+                            fixes.push(makeAddBridgeOrTunnelFix('add_a_culvert', 'temaki-waste', 'tunnel'));
+                        } else {
+                            fixes.push(makeAddBridgeOrTunnelFix('add_a_tunnel', 'temaki-tunnel', 'tunnel'));
+                        }
                     }
                 }
 

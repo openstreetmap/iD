@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Linkify keys & tags in the preset docs from the wiki ([#10763], thanks [@k-yle])
 * Allow broken (unclosed) areas to be continued ([#9635], thanks [@k-yle])
 * Render `*_link` roads narrower than their "regular" counterpart ([#10722])
+* Remove `noexit=yes` and `fixme=continue` when you continue a line ([#9634], thanks [@k-yle])
 #### :scissors: Operations
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 * Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
@@ -50,6 +51,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :white_check_mark: Validation
 * Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
 * Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
+* The Suspicious Names validator warning now compares the Name field to the preset’s name in the user’s language, not just the raw tag value (typically in British English). ([#9522], thanks [@k-yle])
+* Revalidate ways that are connected to the currently edited way to also properly update/catch _disconnected way_s and _impossible oneway_ errors ([#8911], thanks [@andrewpmk])
+* Revalidate ways that are added to or removed from relations ([#10786])
+* Preserve `crossing:markings` tag when fixing missing connection of crossing path and road ([#9586], thanks [@jtracey])
+* Add a dedicated description to fix waterway-road intersections by adding a _culvert_ ([#10778], thanks [@matkoniecz])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -58,16 +64,25 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix over-saturated map tiles near the border of the tile service's coverage area ([#10747], thanks [@hlfan])
 * Fix too dim markers of selected/hovered photo of some street level imagery layers ([#10755], thanks [@draunger])
 * Fix `+` symbol appearing in changeset comments from external tools ([#10766], thanks [@k-yle])
+* Fix `destination_sign` relations from being corrupted when splitting a way ([#10646], thanks [@k-yle])
 #### :earth_asia: Localization
 * Add `housename` to address format in Bolivia ([#10727])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
+* Fix walkthrough from not correctly registering deleted ways in "Lines" step ([#10776])
 #### :rocket: Presets
 #### :hammer: Development
+* Enable Intellisense (IDE auto-completion) for the main classes ([#10618], thanks [@k-yle])
 
 [#7381]: https://github.com/openstreetmap/iD/issues/7381
+[#8911]: https://github.com/openstreetmap/iD/pull/8911
+[#9522]: https://github.com/openstreetmap/iD/issues/9522
+[#9586]: https://github.com/openstreetmap/iD/pull/9586
+[#9634]: https://github.com/openstreetmap/iD/pull/9634
 [#9635]: https://github.com/openstreetmap/iD/pull/9635
 [#10003]: https://github.com/openstreetmap/iD/pull/10003
+[#10618]: https://github.com/openstreetmap/iD/pull/10618
+[#10646]: https://github.com/openstreetmap/iD/pull/10646
 [#10648]: https://github.com/openstreetmap/iD/pull/10648
 [#10720]: https://github.com/openstreetmap/iD/issues/10720
 [#10722]: https://github.com/openstreetmap/iD/pull/10722
@@ -79,10 +94,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10763]: https://github.com/openstreetmap/iD/pull/10763
 [#10764]: https://github.com/openstreetmap/iD/issues/10764
 [#10766]: https://github.com/openstreetmap/iD/pull/10766
+[#10776]: https://github.com/openstreetmap/iD/issues/10776
+[#10778]: https://github.com/openstreetmap/iD/issues/10778
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
 [@burrscurr]: https://github.com/burrscurr
+[@andrewpmk]: https://github.com/andrewpmk
 
 
 # 2.31.1

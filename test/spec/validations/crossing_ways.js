@@ -292,6 +292,16 @@ describe('iD.validations.crossing_ways', function () {
         verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'unmarked' });
     });
 
+    it('copies over `crossing:markings`', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'marked', 'crossing:markings': 'zebra' });
+        verifySingleCrossingIssue(validate(), { highway: 'crossing', crossing: 'marked', 'crossing:markings': 'zebra' });
+    });
+
+    it('does not copy `crossing` and `crossing:markings` if the `crossing` tag has an unknown value', function() {
+        createWaysWithOneCrossingPoint({ highway: 'residential' }, { highway: 'footway', crossing: 'zebra', 'crossing:markings': 'zebra' });
+        verifySingleCrossingIssue(validate(), { highway: 'crossing' });
+    });
+
     it('flags road=track crossing footway', function() {
         createWaysWithOneCrossingPoint({ highway: 'track' }, { highway: 'footway' });
         verifySingleCrossingIssue(validate(), {});
