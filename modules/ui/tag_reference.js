@@ -42,13 +42,13 @@ export function uiTagReference(what) {
         _body.html('');
 
         if (!docs || !docs.title) {
-            if (what.value && what.key === 'customStringMessage') {           
+            if (what.value && what.key === 'customStringMessage') {
                 _body
                     .append('p')
                     .attr('class', 'tag-reference-description')
                     .call(t.append('inspector.' + what.value));
 
-                    if(what.referenceLink) {
+                    if (what.referenceLink) {
                         _body
                             .append('a')
                             .attr('class', 'tag-reference-link')

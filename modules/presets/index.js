@@ -4,7 +4,7 @@ import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { locationManager } from '../core/LocationManager';
 
-import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetLineTags, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
+import { osmLifecyclePrefixes, osmNodeGeometriesForTags, osmSetAreaKeys, osmSetLineTags, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
@@ -245,6 +245,15 @@ export function presetIndex() {
           bestMatch = candidate;
         }
       }
+
+      if (bestMatch) {
+        if ('construction' in tags) {
+          bestMatch.lifecycleTag = 'construction';
+          break;
+        }
+        bestMatch.lifecycleTag = Object.keys(osmLifecyclePrefixes).find(prefix => k.includes(prefix)) || 'functional';
+      }
+
     }
 
     if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){

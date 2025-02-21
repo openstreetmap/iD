@@ -47,6 +47,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
   _this.tags = _this.tags || {};
 
+  _this.lifecycleTag = _this.lifecycleTag || 'functional';
+
   _this.addTags = _this.addTags || _this.tags;
 
   _this.removeTags = _this.removeTags || _this.addTags;

@@ -38,8 +38,8 @@ export function uiSectionLifecycleEditor(context) {
     function renderDisclosureContent(selection) {
         outerWrap.remove();
 
+        _currentLifecycle = getCurrentLifecyle();
         var lifecycleToRender = getLifecycleToRender();
-        _currentLifecycle = getCurrentLifecycleTag();
 
         // Outer Wrap
         outerWrap = selection
@@ -84,17 +84,16 @@ export function uiSectionLifecycleEditor(context) {
             .on('click', makeFunctional);
 
         let reference = uiTagReference(
-            { 
-                key: 'customStringMessage', 
-                value: 'lifecycleReference', 
+            {
+                key: 'customStringMessage',
+                value: 'lifecycleReference',
                 referenceLink : 'https://wiki.openstreetmap.org/wiki/Lifecycle_prefix'
-            }, 
+            },
             context);
 
         titleWrap
             .call(reference.button);
 
-        // Row Wrap
         radioRowWrap = radioOuterWrap
             .selectAll('.lifecycle-radio-row')
             .data(lifecycleToRender)
@@ -105,15 +104,6 @@ export function uiSectionLifecycleEditor(context) {
             .append('div')
             .call(reference.body)
             .attr('class', 'reference-box');
-
-        /*
-        referenceWrap = radioOuterWrap
-            .selectAll('.reference-box')
-            .data(lifecycleToRender)
-            .enter()
-            .append('div')
-            .attr('class', function(d) {return 'reference-box-' + d.id});
-        */
 
         radioButtonWrap = radioRowWrap
             .append('div')
@@ -139,50 +129,13 @@ export function uiSectionLifecycleEditor(context) {
             .each(function(d) {
                 t.append('lifecycle.' + d.id)(d3_select(this));
             });
-
-        /*
-        radioRowWrap
-            .append('div')
-            .attr('class', 'lifecycle-reference-button')
-            .each(function(d) {
-                let reference = uiTagReference({ key: d.referenceKey }, context);
-                (reference.button)(d3_select(this));
-                (reference.body)(d3_select('.reference-box-' + d.id));
-            });
-        */
-       console.log(_currentLifecycle);
-    }
-
-    function getMainTag(){
-        const presetTags = getPresetTag();
-        const presetKeys = Object.keys(presetTags);
-
-        const entityTags = getEntityTags();
-        const entityKeys = Object.keys(entityTags);
-
-        const entityTagsWithoutPrefixes = getEntityTagsWithoutPrefixes();
-        const entityTagsWithoutPrefixesKeys = Object.keys(entityTagsWithoutPrefixes);
-        
-        let intersection = presetKeys.filter(x => entityKeys.includes(x));
-
-        if (intersection[0]) {
-            return intersection[0];
-        }
-
-        intersection = presetKeys.filter(x => entityTagsWithoutPrefixesKeys.includes(x));
-
-        if (intersection[0]) {
-            return intersection[0];
-        }
-
-        return null;
     }
 
     function getLifecycleToRender(){
         const render = _lifecyclePresets.filter(tag => tag.visibleByDeafult);
         const renderId = render.map(tag => tag.id);
         const entityTag = getEntityTags();
-        const mainTag = getMainTag();
+        const mainTag = (Object.keys(getPresetTags()));
         var newTags = [];
 
         for (let et in entityTag) {
@@ -190,13 +143,6 @@ export function uiSectionLifecycleEditor(context) {
                 newTags.push(osmGetLifecyclePrefix(et));
             }
         }
-
-        /* Multiple Tags
-        
-        for (let et in entityTag) {
-            newTags.push(osmGetLifecyclePrefix(et));
-        }
-        */
 
         ids.forEach(id => {
             if (newTags.includes(id) && !renderId.includes(id) ) {
@@ -207,39 +153,14 @@ export function uiSectionLifecycleEditor(context) {
         return render;
     }
 
-    function getCurrentLifecycleTag(){
+    function getCurrentLifecyle() {
+        var preset = _presets[0];
+        return preset.lifecycleTag;
+    }
 
-        const tags = getEntityTags();
-        const mainTag = getMainTag();
-        const tagKeys = (Object.keys(tags));
-        const entityTagsWithoutPrefixes = getEntityTagsWithoutPrefixes();
-
-        if(mainTag in entityTagsWithoutPrefixes || mainTag in tags){
-            let fullTag = tagKeys.find(value =>
-                ids.some(keyword => value.includes(keyword))
-            );
-
-            if (fullTag && fullTag.includes(mainTag)) {
-                return fullTag.split(':')[0];
-            }
-        }
-
-        /* Multiple Tags
-        for(let tag in mainTag){
-            if(tag in entityTagsWithoutPrefixes || tag in tags){
-                let fullTag = tagKeys.find(value =>
-                    ids.some(keyword => value.includes(keyword))
-                );
-
-                if (fullTag) {
-                    return fullTag.split(':')[0];
-                }
-            }
-        }
-        */
-
-        return 'functional';
-
+    function getPresetTags(){
+        var preset = _presets[0];
+        return preset.tags;
     }
 
     function checkRadio() {
@@ -250,27 +171,39 @@ export function uiSectionLifecycleEditor(context) {
             return 'true';
         }
 
-        var tags = getEntityTags();
-
-        for (let t in tags) {
-            if (t.includes(id)) {
-                return 'true';
-            }
+        if (id === getCurrentLifecyle()) {
+            return 'true';
         }
 
         return null;
+    }
+
+    function getOldTag() {
+        let currentLifecycle = getCurrentLifecyle();
+
+        const presetTags = getPresetTags();
+        let presetKeys = (Object.keys(presetTags));
+
+        if (!ids.some(id => presetKeys.some(pk => pk.includes(id)))) {
+            if (currentLifecycle !== 'functional' && currentLifecycle !== 'construction') {
+                presetKeys = presetKeys.map(tag => currentLifecycle + ':' + tag);
+            }
+        }
+
+        const oldTag = presetKeys.find(value =>
+            ids.some(keyword => value.includes(keyword))
+        );
+
+        return oldTag;
     }
 
     function changeLifecycle() {
         if (d3_select(this).attr('readonly')) return;
 
         const tags = getEntityTags();
-        const tagKeys = (Object.keys(tags));
-        const presetTags = getPresetTag();
+        const presetTags = getPresetTags();
         const newLifecycle = d3_select(this).attr('value');
-        const oldTag = tagKeys.find(value =>
-            ids.some(keyword => value.includes(keyword))
-        );
+        const oldTag = getOldTag();
 
         _pendingChange = _pendingChange || {};
 
@@ -300,20 +233,21 @@ export function uiSectionLifecycleEditor(context) {
         scheduleChange();
     }
 
-    function makeFunctional(){
+    function makeFunctional() {
+        const oldTag = getOldTag();
         const tags = getEntityTags();
-        const tagKeys = (Object.keys(tags));
-        const oldTag = tagKeys.find(value =>
-            ids.some(keyword => value.includes(keyword))
-        );
 
         _pendingChange = _pendingChange || {};
 
-        if (!oldTag.includes('construction')) {
+        if (!oldTag) {
+            if (tags.construction) {
+                _pendingChange.construction = undefined;
+            }
+        } else {
             let newTag = oldTag.split(':')[1];
             _pendingChange[newTag] = tags[oldTag];
+            _pendingChange[oldTag] = undefined;
         }
-        _pendingChange[oldTag] = undefined;
 
         scheduleChange();
     }
@@ -324,27 +258,9 @@ export function uiSectionLifecycleEditor(context) {
         _pendingChange = null;
     }
 
-    function getEntityTagsWithoutPrefixes(){
-        var tags = _tags;
-
-        let entityTagsWithoutPrefixes = Object.fromEntries(
-            Object.entries(tags).map(([key, value]) => {
-                const newKey = key.includes(':') ? key.split(':')[1] : key;
-                return [newKey, value];
-            })
-        );
-
-        return entityTagsWithoutPrefixes;
-    }
-
     function getEntityTags(){
         var tags = _tags;
         return tags;
-    }
-
-    function getPresetTag(){
-        var preset = _presets[0];
-        return preset.tags;
     }
 
     section.entityIDs = function(val) {
