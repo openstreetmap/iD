@@ -56,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Revalidate ways that are added to or removed from relations ([#10786])
 * Preserve `crossing:markings` tag when fixing missing connection of crossing path and road ([#9586], thanks [@jtracey])
 * Add a dedicated description to fix waterway-road intersections by adding a _culvert_ ([#10778], thanks [@matkoniecz])
+* Separate tag-upgrade warnings from NSI suggestions ([#10800], thanks [@k-yle])
 #### :bug: Bugfixes
 * Prevent degenerate ways caused by deleting a corner of a triangle ([#10003], thanks [@k-yle])
 * Fix briefly disappearing data layer during background layer tile layer switching transition ([#10748])
@@ -96,6 +97,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10766]: https://github.com/openstreetmap/iD/pull/10766
 [#10776]: https://github.com/openstreetmap/iD/issues/10776
 [#10778]: https://github.com/openstreetmap/iD/issues/10778
+[#10800]: https://github.com/openstreetmap/iD/pull/10800
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
