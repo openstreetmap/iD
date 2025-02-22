@@ -88,6 +88,7 @@ export function uiChangesetEditor(context) {
                     // based on the values used in recent changesets.
                     const recentSources = changesets
                         .flatMap((changeset) => changeset.tags.source?.split(';'))
+                        .filter(value => !sourceField.options.includes(value))
                         .filter(Boolean)
                         .map(title => ({ title, value: title, klass: 'raw-option' }));
 
