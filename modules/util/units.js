@@ -199,9 +199,7 @@ export function dmsMatcher(q) {
                 const lng = (+match[6]) + (+match[7]) / 60 + (+match[8]) / 3600;
                 const isNegLat = match[1] === '-' ? -lat : lat;
                 const isNegLng = match[5] === '-' ? -lng : lng;
-                const d = [isNegLat, isNegLng];
-
-                return d;
+                return [isNegLat, isNegLng];
             }
         },
         // D MM , D MM ex: 35 11.1683 , 136 49.8966
@@ -213,9 +211,29 @@ export function dmsMatcher(q) {
                 const lng = +match[5] + (+match[6]) / 60;
                 const isNegLat = match[1] === '-' ? -lat : lat;
                 const isNegLng = match[4] === '-' ? -lng : lng;
-                const d = [isNegLat, isNegLng];
-
-                return d;
+                return [isNegLat, isNegLng];
+            }
+        },
+        // zoom/x/y ex: 2/1.23/34.44
+        {
+            condition: /^\s*(\d+\.?\d*)\/(-?\d+\.?\d*)\/(-?\d+\.?\d*)\s*$/,
+            parser: function(q) {
+                const match = this.condition.exec(q);
+                const lat = +match[2];
+                const lng = +match[3];
+                const zoom = +match[1];
+                return [lat, lng, zoom];
+            }
+        },
+        // x/y , x,y , x y  where x and y are localized floats, e.g. in German locale: 49,4109399, 8,7147086
+        {
+            condition: { test: q => q.split(/,?\s+|[\/\\]\s*/).length === 2 },
+            parser: function(q) {
+                const parseLocaleFloat = localizer.floatParser(localizer.languageCode());
+                const parts = q.split(/,?\s+/);
+                const lat = parseLocaleFloat(parts[0]);
+                const lng = parseLocaleFloat(parts[1]);
+                return [lat, lng];
             }
         }
     ];
