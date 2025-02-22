@@ -122,9 +122,9 @@ function loadNextTilePage(which, url, tile) {
       const d = {
         loc: loc,
         key: bubbleId,
-        imageUrl: bubble.imageUrl.replace('{subdomain}',
-          bubble.imageUrlSubdomains[0]
-        ),
+        imageUrl: bubble.imageUrl
+          .replace('{subdomain}', bubble.imageUrlSubdomains[0])
+          .replace(/^http:/, 'https:'), // always use HTTPS (see #10797)
         ca: bubble.he || bubble.heading,
         captured_at: bubble.vintageEnd,
         captured_by: 'microsoft',

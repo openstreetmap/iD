@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix splitting of closed ways (or areas) when two or more split-points are selected
 * Keep `red_turn:left/right` tags unchanged when reversing a way ([#10737], thanks [@burrscurr])
 #### :camera: Street-Level
+* Always use HTTPS to load Bing Streetside images ([#10798], thanks [@k-yle])
 #### :white_check_mark: Validation
 * Add warning if aeroways cross each other, buildings or highways ([#9315], thanks [@k-yle])
 * Warn when a way with more than the maximum allowed number of nodes is to be uploaded and provide a way to fix it ([#7381])
@@ -96,6 +97,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#10766]: https://github.com/openstreetmap/iD/pull/10766
 [#10776]: https://github.com/openstreetmap/iD/issues/10776
 [#10778]: https://github.com/openstreetmap/iD/issues/10778
+[#10798]: https://github.com/openstreetmap/iD/pull/10798
 [@hlfan]: https://github.com/hlfan
 [@Deeptanshu-sankhwar]: https://github.com/Deeptanshu-sankhwar
 [@draunger]: https://github.com/draunger
