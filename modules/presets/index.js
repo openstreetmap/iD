@@ -208,6 +208,7 @@ export function presetIndex() {
     const keyIndex = _geometryIndex[geometry];
     let bestScore = -1;
     let bestMatch;
+    let split;
     let matchCandidates = [];
 
     for (let k in tags) {
@@ -216,7 +217,7 @@ export function presetIndex() {
       let valueIndex = keyIndex[k];
 
       if (!valueIndex && k.indexOf(':') !== -1) {
-        let split = k.split(':');
+        split = k.split(':');
         valueIndex = keyIndex[split[1]];
       }
 
@@ -248,12 +249,11 @@ export function presetIndex() {
 
       if (bestMatch) {
         if ('construction' in tags) {
-          bestMatch.lifecycleTag = 'construction';
-          break;
+          bestMatch.lifecycle = 'construction';
+        } else {
+          bestMatch.lifecycle = Object.keys(osmLifecyclePrefixes).find(prefix => k.includes(prefix)) || 'functional';
         }
-        bestMatch.lifecycleTag = Object.keys(osmLifecyclePrefixes).find(prefix => k.includes(prefix)) || 'functional';
       }
-
     }
 
     if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){

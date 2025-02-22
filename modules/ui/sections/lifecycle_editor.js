@@ -16,6 +16,7 @@ export function uiSectionLifecycleEditor(context) {
     var _tags;
     var _pendingChange = null;
     var _currentLifecycle = 'functional';
+    var _currentMainTag = '';
     var _presets = [];
 
     const _lifecyclePresets = Object.values(osmLifecyclePrefixes);
@@ -38,7 +39,7 @@ export function uiSectionLifecycleEditor(context) {
     function renderDisclosureContent(selection) {
         outerWrap.remove();
 
-        _currentLifecycle = getCurrentLifecyle();
+        _currentLifecycle = _presets[0].lifecycle;
         var lifecycleToRender = getLifecycleToRender();
 
         // Outer Wrap
@@ -129,13 +130,19 @@ export function uiSectionLifecycleEditor(context) {
             .each(function(d) {
                 t.append('lifecycle.' + d.id)(d3_select(this));
             });
+
+        if (Object.keys(_presets[0].tags).length === 0) {
+            outerWrap.attr('class', 'wrap-form-field-lifecycle-disabled');
+        }
+
+        _currentMainTag = getMainTag();
     }
 
     function getLifecycleToRender(){
         const render = _lifecyclePresets.filter(tag => tag.visibleByDeafult);
-        const renderId = render.map(tag => tag.id);
-        const entityTag = getEntityTags();
-        const mainTag = (Object.keys(getPresetTags()));
+        const renderIds = new Set(render.map(tag => tag.id));
+        const entityTag = _tags;
+        const mainTag = (Object.keys(_presets[0].tags));
         var newTags = [];
 
         for (let et in entityTag) {
@@ -145,22 +152,12 @@ export function uiSectionLifecycleEditor(context) {
         }
 
         ids.forEach(id => {
-            if (newTags.includes(id) && !renderId.includes(id) ) {
+            if (newTags.includes(id) && !renderIds.has(id)) {
                 render.push(_lifecyclePresets.find(tag => (tag.id === id)));
             }
         });
 
         return render;
-    }
-
-    function getCurrentLifecyle() {
-        var preset = _presets[0];
-        return preset.lifecycleTag;
-    }
-
-    function getPresetTags(){
-        var preset = _presets[0];
-        return preset.tags;
     }
 
     function checkRadio() {
@@ -171,82 +168,73 @@ export function uiSectionLifecycleEditor(context) {
             return 'true';
         }
 
-        if (id === getCurrentLifecyle()) {
+        if (id === _currentLifecycle) {
             return 'true';
         }
 
         return null;
     }
 
-    function getOldTag() {
-        let currentLifecycle = getCurrentLifecyle();
+    function getMainTag() {
+        const presetKeys = Object.keys(_presets[0].tags);
 
-        const presetTags = getPresetTags();
-        let presetKeys = (Object.keys(presetTags));
-
-        if (!ids.some(id => presetKeys.some(pk => pk.includes(id)))) {
-            if (currentLifecycle !== 'functional' && currentLifecycle !== 'construction') {
-                presetKeys = presetKeys.map(tag => currentLifecycle + ':' + tag);
-            }
-        }
-
-        const oldTag = presetKeys.find(value =>
-            ids.some(keyword => value.includes(keyword))
+        const existingTag = presetKeys.find(key =>
+            ids.some(id => key.includes(id))
         );
 
-        return oldTag;
+        if (existingTag) return existingTag;
+
+        if (_currentLifecycle !== 'functional' && _currentLifecycle !== 'construction') {
+            return presetKeys.map(tag => `${_currentLifecycle}:${tag}`).find(tag =>
+                ids.some(id => tag.includes(id))
+            );
+        }
+
+        return null;
     }
 
     function changeLifecycle() {
         if (d3_select(this).attr('readonly')) return;
 
-        const tags = getEntityTags();
-        const presetTags = getPresetTags();
+        const tags = _tags;
+        let presetTags = _presets[0].tags;
+
         const newLifecycle = d3_select(this).attr('value');
-        const oldTag = getOldTag();
+        const oldTag = _currentMainTag;
 
-        _pendingChange = _pendingChange || {};
-
+        _pendingChange = _pendingChange ?? {};
         _pendingChange.construction = undefined;
 
-        if (oldTag && oldTag.includes(':')) {
-            let tag = oldTag.split(':')[1];
+        if (oldTag?.includes(':')) {
+            const [, tag] = oldTag.split(':');
             _pendingChange[oldTag] = undefined;
-            if (newLifecycle !== 'construction') {
-                _pendingChange[newLifecycle + ':' + tag] = tags[oldTag];
-            } else {
-                _pendingChange[newLifecycle] = tags[oldTag];
+            _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${tag}` : newLifecycle] = tags[oldTag];
+
+            if (newLifecycle === 'construction') {
                 _pendingChange[tag] = tags[oldTag];
             }
         } else {
-            for (let pt in presetTags){
-                if (newLifecycle !== 'construction') {
-                    _pendingChange[pt] = undefined;
-                    _pendingChange[newLifecycle + ':' + pt] = tags[pt];
-                } else {
-                    _pendingChange[newLifecycle] = tags[pt];
-                }
-
-            }
+            Object.keys(presetTags).forEach(pt => {
+                _pendingChange[pt] = undefined;
+                _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${pt}` : newLifecycle] = tags[pt] ?? 'yes';
+            });
         }
 
         scheduleChange();
     }
 
     function makeFunctional() {
-        const oldTag = getOldTag();
-        const tags = getEntityTags();
+        const oldTag = _currentMainTag;
+        const tags = _tags;
 
-        _pendingChange = _pendingChange || {};
+        _pendingChange = _pendingChange ?? {};
 
-        if (!oldTag) {
-            if (tags.construction) {
-                _pendingChange.construction = undefined;
-            }
-        } else {
-            let newTag = oldTag.split(':')[1];
+        if (oldTag) {
+            const [, newTag] = oldTag.split(':');
             _pendingChange[newTag] = tags[oldTag];
             _pendingChange[oldTag] = undefined;
+        } else if (tags.construction) {
+            _pendingChange.construction = undefined;
         }
 
         scheduleChange();
@@ -256,11 +244,6 @@ export function uiSectionLifecycleEditor(context) {
         var entityID = _entityID;
         dispatch.call('change', this, entityID, _pendingChange);
         _pendingChange = null;
-    }
-
-    function getEntityTags(){
-        var tags = _tags;
-        return tags;
     }
 
     section.entityIDs = function(val) {

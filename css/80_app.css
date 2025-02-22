@@ -1057,6 +1057,12 @@ a.hide-toggle {
     width: 95%;
 }
 
+.wrap-form-field-lifecycle-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+
 /* Preset List and Icons
 ------------------------------------------------------- */
 .preset-list  {
