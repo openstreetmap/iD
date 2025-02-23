@@ -246,14 +246,6 @@ export function presetIndex() {
           bestMatch = candidate;
         }
       }
-
-      if (bestMatch) {
-        if ('construction' in tags) {
-          bestMatch.lifecycle = 'construction';
-        } else {
-          bestMatch.lifecycle = Object.keys(osmLifecyclePrefixes).find(prefix => k.includes(prefix)) || 'functional';
-        }
-      }
     }
 
     if (bestMatch && bestMatch.locationSetID && bestMatch.locationSetID !== '+[Q2]' && Array.isArray(loc)){

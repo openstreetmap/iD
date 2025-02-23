@@ -39,7 +39,7 @@ export function uiSectionLifecycleEditor(context) {
     function renderDisclosureContent(selection) {
         outerWrap.remove();
 
-        _currentLifecycle = _presets[0].lifecycle;
+        _currentLifecycle = _presets[0].getLifecycle(_tags);
         var lifecycleToRender = getLifecycleToRender();
 
         // Outer Wrap

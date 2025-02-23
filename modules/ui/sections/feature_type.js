@@ -17,6 +17,7 @@ export function uiSectionFeatureType(context) {
 
     var _entityIDs = [];
     var _presets = [];
+    var _tags;
 
     var _tagReference;
 
@@ -111,6 +112,21 @@ export function uiSectionFeatureType(context) {
             .attr('class', 'namepart')
             .text('')
             .each(function(d) { d(d3_select(this)); });
+
+        nameparts
+            .selectAll('.lifecycle')
+            .remove();
+        
+        let lifecycleSpan = nameparts
+            .append('span')
+            .attr('class', 'lifecycle')
+
+        let lifecycle = _presets[0].getLifecycle(_tags);
+
+        if (lifecycle !== 'functional') {
+            lifecycleSpan
+                .text(' (' + t('lifecycle.' + lifecycle) + ')');
+        }
     }
 
     section.entityIDs = function(val) {
@@ -132,6 +148,12 @@ export function uiSectionFeatureType(context) {
             }
         }
 
+        return section;
+    };
+
+    section.tags = function(val) {
+        if (!arguments.length) return _tags;
+        _tags = val;
         return section;
     };
 
