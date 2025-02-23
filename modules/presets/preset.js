@@ -80,6 +80,8 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
         score += _this.originalScore / 2;
       } else if (entityTagsWithoutPrefixes[k] === tags[k]) {
         score += _this.originalScore;
+      } else if (tags[k] === '*' && k in entityTagsWithoutPrefixes) {
+        score += _this.originalScore / 2;
       } else {
         return -1;
       }
@@ -301,8 +303,11 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     entitytags = Object.keys(entitytags);
     const presetTags = Object.keys(_this.tags);
     const ids = Object.keys(osmLifecyclePrefixes);
+    let presetPrefix;
 
-    let presetPrefix = presetTags[0].split(':')[0];
+    if (presetTags[0]) {
+      presetPrefix = presetTags[0].split(':')[0] ?? null;
+    }
 
     if (presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
