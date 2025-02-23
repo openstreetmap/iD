@@ -116,10 +116,10 @@ export function uiSectionFeatureType(context) {
         nameparts
             .selectAll('.lifecycle')
             .remove();
-        
+
         let lifecycleSpan = nameparts
             .append('span')
-            .attr('class', 'lifecycle')
+            .attr('class', 'lifecycle');
 
         let lifecycle = _presets[0].getLifecycle(_tags);
 

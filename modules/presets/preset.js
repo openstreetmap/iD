@@ -304,10 +304,10 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     let presetPrefix = presetTags[0].split(':')[0];
 
-    if(presetPrefix && ids.includes(presetPrefix)) {
+    if (presetPrefix && ids.includes(presetPrefix)) {
       lifecycle = presetPrefix;
     } else {
-      if(entitytags.includes('construction')) {
+      if (entitytags.includes('construction')) {
         lifecycle = 'construction';
       } else {
         entitytags.forEach(tag => {
@@ -319,9 +319,9 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
           }
         });
       }
-    } 
+    }
     return lifecycle;
-  }
+  };
 
 
   // For a preset without fields, use the fields of the parent preset.

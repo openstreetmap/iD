@@ -200,23 +200,27 @@ export function uiSectionLifecycleEditor(context) {
         let presetTags = _presets[0].tags;
 
         const newLifecycle = d3_select(this).attr('value');
-        const oldTag = _currentMainTag;
+        const oldLifecycleTag = _currentMainTag;
 
         _pendingChange = _pendingChange ?? {};
         _pendingChange.construction = undefined;
 
-        if (oldTag?.includes(':')) {
-            const [, tag] = oldTag.split(':');
-            _pendingChange[oldTag] = undefined;
-            _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${tag}` : newLifecycle] = tags[oldTag];
+        if (oldLifecycleTag?.includes(':')) {
+            const [, tag] = oldLifecycleTag.split(':');
+            _pendingChange[oldLifecycleTag] = undefined;
+            _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${tag}` : newLifecycle] = tags[oldLifecycleTag];
 
             if (newLifecycle === 'construction') {
-                _pendingChange[tag] = tags[oldTag];
+                _pendingChange[tag] = tags[oldLifecycleTag];
             }
         } else {
             Object.keys(presetTags).forEach(pt => {
-                _pendingChange[pt] = undefined;
-                _pendingChange[newLifecycle !== 'construction' ? `${newLifecycle}:${pt}` : newLifecycle] = tags[pt] ?? 'yes';
+                if (newLifecycle !== 'construction') {
+                    _pendingChange[pt] = undefined;
+                    _pendingChange[`${newLifecycle}:${pt}`] = tags[pt] ?? 'yes';
+                } else {
+                    _pendingChange.construction = tags[pt] ?? 'yes';
+                }
             });
         }
 
@@ -224,15 +228,15 @@ export function uiSectionLifecycleEditor(context) {
     }
 
     function makeFunctional() {
-        const oldTag = _currentMainTag;
+        const oldLifecycleTag = _currentMainTag;
         const tags = _tags;
 
         _pendingChange = _pendingChange ?? {};
 
-        if (oldTag) {
-            const [, newTag] = oldTag.split(':');
-            _pendingChange[newTag] = tags[oldTag];
-            _pendingChange[oldTag] = undefined;
+        if (oldLifecycleTag) {
+            const [, newTag] = oldLifecycleTag.split(':');
+            _pendingChange[newTag] = tags[oldLifecycleTag];
+            _pendingChange[oldLifecycleTag] = undefined;
         } else if (tags.construction) {
             _pendingChange.construction = undefined;
         }
