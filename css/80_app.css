@@ -1614,6 +1614,17 @@ input.date-selector {
     border-right-width: 1px;
 }
 
+.form-field-input-traffic-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+}
+.form-field-input-traffic-preview img {
+    max-height: 100px;
+    cursor: help;
+}
+
 /* Field - lists with labeled input items as table
 ------------------------------------------------------- */
 .form-field ul.rows.rows-table {

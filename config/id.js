@@ -9,6 +9,8 @@ const wmfSitematrixCdnUrl = ENV__ID_WMF_SITEMATRIX_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
 const nsiCdnUrl = ENV__ID_NSI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
+const trafficSignsCdnUrl = ENV__ID_TRAFFIC_SIGNS_CDN_URL
+  || 'https://cdn.jsdelivr.net/npm/@osm-traffic-signs/converter@{version}/';
 
 // api urls and settings
 const defaultOsmApiConnections = {
@@ -57,6 +59,7 @@ export {
   ociCdnUrl,
   wmfSitematrixCdnUrl,
   nsiCdnUrl,
+  trafficSignsCdnUrl,
   osmApiConnections,
   taginfoApiUrl,
   nominatimApiUrl,

@@ -94,6 +94,10 @@ export function presetIndex() {
 
     // Merge Fields
     if (d.fields) {
+
+      // FIXME: (temp) make traffic_sign a semiCombo instead of plaintext
+      d.fields.traffic_sign.type = 'semiCombo';
+
       Object.keys(d.fields).forEach(fieldID => {
         let f = d.fields[fieldID];
 

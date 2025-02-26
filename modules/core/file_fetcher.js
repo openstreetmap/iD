@@ -1,5 +1,5 @@
 import parseVersion from 'vparse';
-import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl } from '../../config/id.js';
+import { presetsCdnUrl, ociCdnUrl, wmfSitematrixCdnUrl, trafficSignsCdnUrl } from '../../config/id.js';
 
 import packageJSON from '../../package.json';
 
@@ -15,6 +15,7 @@ export function coreFileFetcher() {
   const v = parseVersion(ociVersion);
   const ociVersionMinor = `${v.major}.${v.minor}`;
   const presetsVersion = packageJSON.devDependencies['@openstreetmap/id-tagging-schema'];
+  const trafficSignsVersion = packageJSON.dependencies['@osm-traffic-signs/converter'];
 
   let _this = {};
   let _inflight = {};
@@ -29,6 +30,7 @@ export function coreFileFetcher() {
     'qa_data': 'data/qa_data.min.json',
     'shortcuts': 'data/shortcuts.min.json',
     'territory_languages': 'data/territory_languages.min.json',
+    'traffic_signs': trafficSignsCdnUrl.replace('{version}', trafficSignsVersion) + 'dist/data/trafficSignData.js',
     'oci_defaults': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/defaults.min.json',
     'oci_features': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/featureCollection.min.json',
     'oci_resources': ociCdnUrl.replace('{version}', ociVersionMinor) + 'dist/resources.min.json',
@@ -74,9 +76,22 @@ export function coreFileFetcher() {
   function getUrl(url, which) {
     let prom = _inflight[url];
     if (!prom) {
-      _inflight[url] = prom = (window.VITEST ? import(`../${url}`) : fetch(url))
+      const getResource = () => {
+        // in unit tests, import files using relative URLs
+        if (window.VITEST) return import(`../${url}`);
+
+        // for JS data, import it as an ES module
+        if (url.endsWith('.js')) return import(url);
+
+        // for JSON data, fetch it normally
+        return fetch(url);
+      };
+
+      _inflight[url] = prom = getResource()
         .then(response => {
-          if (window.VITEST) return response.default;
+          if (!(response instanceof Response)) {
+            return 'default' in response ? response.default : response;
+          }
 
           if (!response.ok || !response.json) {
             throw new Error(response.status + ' ' + response.statusText);

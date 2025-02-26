@@ -6,7 +6,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { fileFetcher } from '../../core/file_fetcher';
 import { prefs } from '../../core/preferences';
 import { osmEntity } from '../../osm/entity';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { svgIcon, svgIconExternal } from '../../svg/icon';
@@ -14,6 +14,10 @@ import { svgIcon, svgIconExternal } from '../../svg/icon';
 import { utilKeybinding } from '../../util/keybinding';
 import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
+import { trafficSignTagToSigns } from '@osm-traffic-signs/converter';
+import { uiTooltip } from '../tooltip';
+
+/** @import { SignType, SignStateType } from '@osm-traffic-signs/converter*/
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -37,6 +41,7 @@ export function uiFieldCombo(field, context) {
         .caseSensitive(field.caseSensitive)
         .minItems(1);
     var _container = d3_select(null);
+    let trafficSignPreview = d3_select(null);
     var _inputWrap = d3_select(null);
     var _input = d3_select(null);
     var _lengthIndicator = uiLengthIndicator(context.maxCharsForTagValue());
@@ -47,6 +52,8 @@ export function uiFieldCombo(field, context) {
     var _countryCode;
     var _staticPlaceholder;
     var _customOptions = [];
+    /** @type {Promise<SignType[]>} */
+    let trafficSignPromise;
 
     // initialize deprecated tags array
     var _dataDeprecated = [];
@@ -221,7 +228,22 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function setTaginfoValues(q, callback) {
+    async function setTaginfoValues(q, callback) {
+        // for traffic signs, we use a different database for suggestions
+        if (field.key === 'traffic_sign') {
+            const { trafficSignData } = await trafficSignPromise;
+            callback(trafficSignData.map(sign => ({
+                key: sign.osmValuePart,
+                value: sign.osmValuePart,
+                title: sign.descriptiveName,
+                display: addComboboxIcons(
+                    selection => selection.append('span').text(sign.descriptiveName),
+                    getTrafficSignUrl(sign.image?.svgPath)
+                ),
+            })));
+            return;
+        }
+
         var queryFilter = d => d.value.toLowerCase().includes(q.toLowerCase()) || d.key.toLowerCase().includes(q.toLowerCase());
         if (hasStaticValues()) {
             setStaticValues(callback, queryFilter);
@@ -413,6 +435,49 @@ export function uiFieldCombo(field, context) {
         dispatch.call('change', this, t);
     }
 
+    /** @param {string | string[] | undefined} newValue */
+    async function updateTrafficSignPreview(newValue) {
+        if (typeof newValue !== 'string') return;
+
+        let defaultCountryCode = newValue?.split(':')[0].toUpperCase();
+
+        if (!defaultCountryCode || !trafficSignPromise) return;
+
+        const { trafficSignData } = await trafficSignPromise;
+
+        /** @type {SignStateType[]} */
+        let signs;
+        try {
+            signs = trafficSignTagToSigns(newValue, defaultCountryCode, trafficSignData);
+        } catch (ex) {
+            console.error('traffic signs:', ex);
+            signs = [];
+        }
+
+        trafficSignPreview
+            .selectAll('div')
+            .remove();
+        trafficSignPreview
+            .selectAll('div')
+            .data(signs, d => d)
+            .enter()
+            .append('div')
+            .each(function(d) {
+                d3_select(this)
+                    .call(uiTooltip()
+                    .placement((localizer.textDirection() === 'rtl') ? 'left' : 'right')
+                    .title(() => d.descriptiveName)
+                );
+            })
+            .append('img')
+            .attr('src', d => getTrafficSignUrl(d.image?.svgPath))
+            .attr('alt', d => d.descriptiveName);
+    }
+
+    /** @param {string} path */
+    function getTrafficSignUrl(path) {
+        return path?.replace(/^\/trafficSignsSvgs\//, 'https://commons.wikimedia.org/wiki/Special:FilePath/File:');
+    }
 
     function removeMultikey(d3_event, d) {
         d3_event.preventDefault();
@@ -454,6 +519,18 @@ export function uiFieldCombo(field, context) {
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-' + type)
             .merge(_container);
+
+
+        if (field.key === 'traffic_sign') {
+            trafficSignPromise ||= fileFetcher.get('traffic_signs');
+
+            trafficSignPreview = selection.selectAll('.form-field-input-traffic-preview')
+                .data([0]);
+            trafficSignPreview = trafficSignPreview.enter()
+                .append('div')
+                .attr('class', 'form-field-input-traffic-preview')
+                .merge(trafficSignPreview);
+        }
 
         if (_isMulti || _isSemi) {
             _container = _container.selectAll('.chiplist')
@@ -584,6 +661,8 @@ export function uiFieldCombo(field, context) {
     combo.tags = function(tags) {
         _tags = tags;
         var stringsField = field.resolveReference('stringsCrossReference');
+
+        updateTrafficSignPreview(tags[field.key]);
 
         var isMixed = Array.isArray(tags[field.key]);
         var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
