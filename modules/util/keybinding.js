@@ -12,7 +12,7 @@ export function utilKeybinding(namespace) {
     function testBindings(d3_event, isCapturing) {
         var didMatch = false;
         var bindings = Object.keys(_keybindings).map(function(id) { return _keybindings[id]; });
-        var i, binding;
+        var binding;
 
         // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
         // so we don't strictly match on the shift key, but we prioritize
@@ -20,8 +20,7 @@ export function utilKeybinding(namespace) {
         // (This lets us differentiate between '←'/'⇧←' or '⌘Z'/'⌘⇧Z')
 
         // priority match shifted keybindings first
-        for (i = 0; i < bindings.length; i++) {
-            binding = bindings[i];
+        for (binding of bindings) {
             if (!binding.event.modifiers.shiftKey) continue;  // no shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(d3_event, binding, true)) {
@@ -36,8 +35,7 @@ export function utilKeybinding(namespace) {
         if (didMatch) return;
 
         // then unshifted keybindings
-        for (i = 0; i < bindings.length; i++) {
-            binding = bindings[i];
+        for (binding of bindings) {
             if (binding.event.modifiers.shiftKey) continue;   // shift
             if (!!binding.capture !== isCapturing) continue;
             if (matches(d3_event, binding, false)) {

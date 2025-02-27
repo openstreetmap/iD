@@ -76,9 +76,8 @@ export function uiSectionRawMembershipEditor(context) {
 
         var isMultiselect = _entityIDs.length > 1;
 
-        var i, relation, membership, index, member, indexedMember;
-        for (i = 0; i < relations.length; i++) {
-            relation = relations[i];
+        var relation, membership, index, member, indexedMember;
+        for (relation of relations) {
             membership = {
                 relation: relation,
                 members: [],

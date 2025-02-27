@@ -18,8 +18,7 @@ export function utilTagText(entity) {
 export function utilTotalExtent(array, graph) {
     var extent = geoExtent();
     var val, entity;
-    for (var i = 0; i < array.length; i++) {
-        val = array[i];
+    for (val of array) {
         entity = typeof val === 'string' ? graph.hasEntity(val) : val;
         if (entity) {
             extent._extend(entity.extent(graph));

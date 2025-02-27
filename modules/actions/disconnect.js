@@ -54,8 +54,7 @@ export function actionDisconnect(nodeId, newNodeId) {
         var keeping = false;
         var parentWays = graph.parentWays(graph.entity(nodeId));
         var way, waynode;
-        for (var i = 0; i < parentWays.length; i++) {
-            way = parentWays[i];
+        for (way of parentWays) {
             if (wayIds && wayIds.indexOf(way.id) === -1) {
                 keeping = true;
                 continue;

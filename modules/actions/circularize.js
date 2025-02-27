@@ -155,8 +155,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 if (wayDirection1 < -1) { wayDirection1 = 1; }
 
                 var parentWays = graph.parentWays(keyNodes[i]);
-                for (j = 0; j < parentWays.length; j++) {
-                    var sharedWay = parentWays[j];
+                for (var sharedWay of parentWays) {
                     if (sharedWay === way) continue;
 
                     if (sharedWay.areAdjacent(startNode.id, endNode.id)) {
@@ -245,8 +244,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
         var i, actualPoint;
 
         // compare distances between centroid and points
-        for (i = 0; i < hull.length; i++){
-            actualPoint = hull[i];
+        for (actualPoint of hull) {
             var actualDist = geoVecLengthSquare(actualPoint, centroid);
             var diff = Math.abs(actualDist - radius);
             //compare distances with epsilon-error (5%)

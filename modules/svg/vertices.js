@@ -370,8 +370,7 @@ export function svgVertices(projection, context) {
 
         // Collect important vertices from the `entities` list..
         // (during a partial redraw, it will not contain everything)
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (var entity of entities) {
             var geometry = entity.geometry(graph);
             var keep = false;
 

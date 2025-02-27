@@ -89,8 +89,7 @@ Object.assign(osmChangeset.prototype, {
 
             if (!relations) return changes;
 
-            for (var i = 0; i < relations.length; i++) {
-                var relation = relations[i];
+            for (var relation of relations) {
 
                 // skip relation if already sorted
                 if (!sorted[relation['@id']]) {

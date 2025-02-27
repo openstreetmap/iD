@@ -89,8 +89,7 @@ export function validationCloseNodes(context) {
                 if (issue) issues.push(issue);
             }
 
-            for (var i = 0; i < parentWays.length; i++) {
-                var parentWay = parentWays[i];
+            for (var parentWay of parentWays) {
 
                 if (!shouldCheckWay(parentWay)) continue;
 
@@ -139,8 +138,7 @@ export function validationCloseNodes(context) {
             ]);
 
             var intersected = context.history().tree().intersects(queryExtent, graph);
-            for (var j = 0; j < intersected.length; j++) {
-                var nearby = intersected[j];
+            for (var nearby of intersected) {
 
                 if (nearby.id === node.id) continue;
                 if (nearby.type !== 'node' || nearby.geometry(graph) !== 'point') continue;

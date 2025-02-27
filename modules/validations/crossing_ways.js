@@ -22,8 +22,7 @@ export function validationCrossingWays(context) {
         if (getFeatureType(way, graph) === null) {
             // if the way doesn't match a feature type, check its parent relations
             var parentRels = graph.parentRelations(way);
-            for (var i = 0; i < parentRels.length; i++) {
-                var rel = parentRels[i];
+            for (var rel of parentRels) {
                 if (getFeatureType(rel, graph) !== null) {
                     return rel;
                 }
@@ -277,8 +276,7 @@ export function validationCrossingWays(context) {
             // of overlapping ways
             segmentInfos = tree.waySegments(extent, graph);
 
-            for (j = 0; j < segmentInfos.length; j++) {
-                segment2Info = segmentInfos[j];
+            for (segment2Info of segmentInfos) {
 
                 // don't check for self-intersection in this validation
                 if (segment2Info.wayId === way1.id) continue;

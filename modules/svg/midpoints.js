@@ -57,8 +57,7 @@ export function svgMidpoints(projection, context) {
         var poly = extent.polygon();
         var midpoints = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (var entity of entities) {
 
             if (entity.type !== 'way') continue;
             if (!filter(entity)) continue;

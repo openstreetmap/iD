@@ -298,8 +298,7 @@ export function rendererMap(context) {
         if (d3_event.type === 'mousedown') {
             var hasOrphan = false;
             var listeners = window.__on;
-            for (var i = 0; i < listeners.length; i++) {
-                var listener = listeners[i];
+            for (var listener of listeners) {
                 if (listener.name === 'zoom' && listener.type === 'mouseup') {
                     hasOrphan = true;
                     break;

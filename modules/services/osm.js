@@ -159,14 +159,12 @@ function parseComments(comments) {
     var parsedComments = [];
 
     // for each comment
-    for (var i = 0; i < comments.length; i++) {
-        var comment = comments[i];
+    for (var comment of comments) {
         if (comment.nodeName === 'comment') {
             var childNodes = comment.childNodes;
             var parsedComment = {};
 
-            for (var j = 0; j < childNodes.length; j++) {
-                var node = childNodes[j];
+            for (var node of childNodes) {
                 var nodeName = node.nodeName;
                 if (nodeName === '#text') continue;
                 parsedComment[nodeName] = node.textContent;
@@ -405,8 +403,7 @@ var parsers = {
         }
 
         // parse note contents
-        for (var i = 0; i < childNodes.length; i++) {
-            var node = childNodes[i];
+        for (var node of childNodes) {
             var nodeName = node.nodeName;
             if (nodeName === '#text') continue;
 

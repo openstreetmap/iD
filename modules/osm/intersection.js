@@ -82,8 +82,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         // check this vertex for parent ways that are roads
         checkWays = graph.parentWays(vertex);
         var hasWays = false;
-        for (i = 0; i < checkWays.length; i++) {
-            way = checkWays[i];
+        for (way of checkWays) {
             if (!isRoad(way) && !memberOfRestriction(way)) continue;
 
             ways.push(way);   // it's a road, or it's already in a turn restriction
@@ -91,8 +90,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
             // check the way's children for more key vertices
             nodes = utilArrayUniq(graph.childNodes(way));
-            for (j = 0; j < nodes.length; j++) {
-                node = nodes[j];
+            for (node of nodes) {
                 if (node === vertex) continue;                                           // same thing
                 if (vertices.indexOf(node) !== -1) continue;                             // seen it already
                 if (geoSphericalDistance(node.loc, startNode.loc) > maxDistance) continue;   // too far from start
@@ -100,8 +98,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
                 // a key vertex will have parents that are also roads
                 var hasParents = false;
                 parents = graph.parentWays(node);
-                for (k = 0; k < parents.length; k++) {
-                    parent = parents[k];
+                for (parent of parents) {
                     if (parent === way) continue;                 // same thing
                     if (ways.indexOf(parent) !== -1) continue;    // seen it already
                     if (!isRoad(parent)) continue;                // not a road
@@ -253,8 +250,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
         keepGoing = false;
         checkVertices = vertexIds.slice();
 
-        for (i = 0; i < checkVertices.length; i++) {
-            var vertexId = checkVertices[i];
+        for (var vertexId of checkVertices) {
             vertex = vgraph.hasEntity(vertexId);
 
             if (!vertex) {
@@ -379,8 +375,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
             var nextWays = [];
 
             // which ways can we step into?
-            for (i = 0; i < parents.length; i++) {
-                var way = parents[i];
+            for (var way of parents) {
 
                 // if next way is a oneway incoming to this vertex, skip
                 if (way.__oneWay && way.nodes[0] !== entity.id) continue;
@@ -390,8 +385,7 @@ export function osmIntersection(graph, startVertexId, maxDistance) {
 
                 // Check all "current" restrictions (where we've already walked the `FROM`)
                 var restrict = null;
-                for (j = 0; j < currRestrictions.length; j++) {
-                    var restriction = currRestrictions[j];
+                for (var restriction of currRestrictions) {
                     var f = restriction.memberByRole('from');
                     var v = restriction.membersByRole('via');
                     var t = restriction.memberByRole('to');

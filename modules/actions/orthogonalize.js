@@ -47,8 +47,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
         var corner = { i: 0, dotp: 1 };
         var node, point, loc, score, motions, i, j;
 
-        for (i = 0; i < nodes.length; i++) {
-            node = nodes[i];
+        for (node of nodes) {
             nodeCount[node.id] = (nodeCount[node.id] || 0) + 1;
             points.push({ id: node.id, coord: projection(node.loc) });
         }
@@ -126,8 +125,7 @@ export function actionOrthogonalize(wayID, projection, vertexID, degThresh, ep) 
             }
 
             // move the nodes along straight segments
-            for (i = 0; i < straights.length; i++) {
-                point = straights[i];
+            for (point of straights) {
                 if (nodeCount[point.id] > 1) continue;   // skip self-intersections
 
                 node = graph.entity(point.id);

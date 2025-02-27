@@ -115,8 +115,7 @@ export function operationDelete(context, selectedIDs) {
             if (entity.type !== 'way') return false;
 
             var parents = context.graph().parentRelations(entity);
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
+            for (var parent of parents) {
                 var type = parent.tags.type;
                 var role = parent.memberById(id).role || 'outer';
                 if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {

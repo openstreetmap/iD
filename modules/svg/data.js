@@ -417,8 +417,7 @@ export function svgData(projection, context, dispatch) {
             var tested = 0;
             var regex;
 
-            for (var i = 0; i < blocklists.length; i++) {
-                regex = blocklists[i];
+            for (regex of blocklists) {
                 fail = regex.test(val);
                 tested++;
                 if (fail) break;

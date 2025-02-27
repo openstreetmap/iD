@@ -180,8 +180,7 @@ export default {
             var features = source.loaded[tiles[i].id];
             if (!features || !features.length) continue;
 
-            for (var j = 0; j < features.length; j++) {
-                var feature = features[j];
+            for (var feature of features) {
                 var hash = feature.__featurehash__;
                 if (seen[hash]) continue;
                 seen[hash] = true;

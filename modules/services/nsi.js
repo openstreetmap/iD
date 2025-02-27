@@ -532,8 +532,7 @@ function _upgradeTags(tags, loc) {
   // Order the [key,value,name] tuples - test primary before alternate
   const tuples = gatherTuples(tryKVs, tryNames);
 
-  for (let i = 0; i < tuples.length; i++) {
-    const tuple = tuples[i];
+  for (const tuple of tuples) {
     const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
 
     if (!hits || !hits.length) continue;  // no match, try next tuple
@@ -542,8 +541,7 @@ function _upgradeTags(tags, loc) {
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
     let itemID, item;
-    for (let j = 0; j < hits.length; j++) {
-      const hit = hits[j];
+    for (const hit of hits) {
       itemID = hit.itemID;
       if (_nsi.dissolved[itemID]) continue;       // Don't upgrade to a dissolved item
 
@@ -688,8 +686,7 @@ function _isGenericName(tags) {
   // Order the [key,value,name] tuples - test primary before alternate
   const tuples = gatherTuples(tryKVs, tryNames);
 
-  for (let i = 0; i < tuples.length; i++) {
-    const tuple = tuples[i];
+  for (const tuple of tuples) {
     const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n);   // Attempt to match an item in NSI
 
     // If we get a `excludeGeneric` hit, this is a generic name.

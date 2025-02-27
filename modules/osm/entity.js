@@ -85,8 +85,7 @@ osmEntity.prototype = {
 
 
     initialize: function(sources) {
-        for (var i = 0; i < sources.length; ++i) {
-            var source = sources[i];
+        for (var source of sources) {
             for (var prop in source) {
                 if (Object.prototype.hasOwnProperty.call(source, prop)) {
                     if (source[prop] === undefined) {

@@ -293,8 +293,7 @@ export function validationAlmostJunction(context) {
 
       // then, check if the extension part [tipNode.loc -> extTipLoc] intersects any other ways
       const segmentInfos = tree.waySegments(queryExtent, graph);
-      for (let i = 0; i < segmentInfos.length; i++) {
-        let segmentInfo = segmentInfos[i];
+      for (let segmentInfo of segmentInfos) {
 
         let way2 = graph.entity(segmentInfo.wayId);
 

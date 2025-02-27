@@ -135,8 +135,7 @@ export function uiFieldAddress(field, context) {
         if (!_countryCode) return;
 
         var addressFormat;
-        for (var i = 0; i < _addressFormats.length; i++) {
-            var format = _addressFormats[i];
+        for (var format of _addressFormats) {
             if (!format.countryCodes) {
                 addressFormat = format;   // choose the default format, keep going
             } else if (format.countryCodes.indexOf(_countryCode) !== -1) {

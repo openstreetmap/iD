@@ -19,8 +19,7 @@ export function fixRTLTextForSvg(inputText) {
         inputText = WordShaper(inputText);
     }
 
-    for (var n = 0; n < inputText.length; n++) {
-        var c = inputText[n];
+    for (var c of inputText) {
         if (arabicMath.test(c)) {
             // Arabic numbers go LTR
             ret += rtlBuffer.reverse().join('');

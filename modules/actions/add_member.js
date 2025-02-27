@@ -30,13 +30,12 @@ export function actionAddMember(relationId, member, memberIndex) {
 
     // Add a way member into the relation "wherever it makes sense".
     function addWayMember(relation, graph) {
-        var groups, item, i, j, k;
+        var groups, item, j, k;
 
         // remove PTv2 stops and platforms before doing anything.
         var PTv2members = [];
         var members = [];
-        for (i = 0; i < relation.members.length; i++) {
-            var m = relation.members[i];
+        for (var m of relation.members) {
             if (/stop|platform/.test(m.role)) {
                 PTv2members.push(m);
             } else {
@@ -55,8 +54,7 @@ export function actionAddMember(relationId, member, memberIndex) {
 
         // `joined` might not contain all of the way members,
         // But will contain only the completed (downloaded) members
-        for (i = 0; i < joined.length; i++) {
-            var segment = joined[i];
+        for (var segment of joined) {
             var nodes = segment.nodes.slice();
             var startIndex = segment[0].index;
 
@@ -85,8 +83,7 @@ export function actionAddMember(relationId, member, memberIndex) {
 
         // Final pass: skip dead items, remove index properties
         var wayMembers = [];
-        for (i = 0; i < members.length; i++) {
-            item = members[i];
+        for (item of members) {
             if (item.index === -1) continue;
 
             wayMembers.push(utilObjectOmit(item, ['index']));

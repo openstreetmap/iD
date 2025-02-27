@@ -255,8 +255,7 @@ export function coreDifference(base, head) {
 
 
         function addParents(parents, result) {
-            for (var i = 0; i < parents.length; i++) {
-                var parent = parents[i];
+            for (var parent of parents) {
                 if (parent.id in result) continue;
 
                 result[parent.id] = parent;

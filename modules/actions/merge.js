@@ -48,12 +48,10 @@ export function actionMerge(ids) {
                     inserted = true;
                 };
 
-                var i;
                 var node;
 
                 // First, try to replace a new child node on the target way.
-                for (i = 0; i < nodes.length; i++) {
-                    node = nodes[i];
+                for (node of nodes) {
                     if (canBeReplaced(node) && node.isNew()) {
                         replaceNode(node);
                         break;
@@ -63,8 +61,7 @@ export function actionMerge(ids) {
                 if (!inserted && point.hasInterestingTags()) {
                     // No new child node found, try to find an existing, but
                     // uninteresting child node instead.
-                    for (i = 0; i < nodes.length; i++) {
-                        node = nodes[i];
+                    for (node of nodes) {
                         if (canBeReplaced(node) &&
                             !node.hasInterestingTags()) {
                             replaceNode(node);
@@ -75,8 +72,7 @@ export function actionMerge(ids) {
                     if (!inserted) {
                         // Still not inserted, try to find an existing, interesting,
                         // but more recent child node.
-                        for (i = 0; i < nodes.length; i++) {
-                            node = nodes[i];
+                        for (node of nodes) {
                             if (canBeReplaced(node) &&
                                 utilCompareIDs(point.id, node.id) < 0) {
                                 replaceNode(node);

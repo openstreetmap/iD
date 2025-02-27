@@ -109,8 +109,7 @@ export function coreUploader(context) {
 
         var summary = history.difference().summary();
         var _toCheck = [];
-        for (var i = 0; i < summary.length; i++) {
-            var item = summary[i];
+        for (var item of summary) {
             if (item.changeType === 'modified') {
                 _toCheck.push(item.entity.id);
             }
@@ -173,8 +172,7 @@ export function coreUploader(context) {
                     // need to also load children that aren't already being checked..
                     var i, id;
                     if (entity.type === 'way') {
-                        for (i = 0; i < entity.nodes.length; i++) {
-                            id = entity.nodes[i];
+                        for (id of entity.nodes) {
                             if (_loaded[id] === undefined) {
                                 _loaded[id] = false;
                                 loadMore.push(id);

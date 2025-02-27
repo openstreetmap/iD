@@ -52,8 +52,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         var nodes = [];
         var hunks = diff3Merge(a, o, b, { excludeFalseConflicts: true });
 
-        for (var i = 0; i < hunks.length; i++) {
-            var hunk = hunks[i];
+        for (var hunk of hunks) {
             if (hunk.ok) {
                 nodes.push.apply(nodes, hunk.ok);
             } else {
@@ -87,8 +86,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
 
         var ccount = _conflicts.length;
 
-        for (var i = 0; i < children.length; i++) {
-            var id = children[i];
+        for (var id of children) {
             var node = graph.hasEntity(id);
 
             // remove unused childNodes..
@@ -172,8 +170,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, discardTag
         var tags = Object.assign({}, a);   // shallow copy
         var changed = false;
 
-        for (var i = 0; i < keys.length; i++) {
-            var k = keys[i];
+        for (var k of keys) {
 
             if (o[k] !== b[k] && a[k] !== b[k]) {    // changed remotely..
                 if (o[k] !== a[k]) {      // changed locally..

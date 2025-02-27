@@ -29,8 +29,7 @@ export function validationSuspiciousName(context) {
 
   // Test if the name is just the key or tag value (e.g. "park")
   function nameMatchesRawTag(lowercaseName, tags) {
-    for (let i = 0; i < keysToTestForGenericValues.length; i++) {
-      let key = keysToTestForGenericValues[i];
+    for (let key of keysToTestForGenericValues) {
       let val = tags[key];
       if (val) {
         val = val.toLowerCase();

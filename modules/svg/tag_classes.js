@@ -60,8 +60,7 @@ export function svgTagClasses() {
             });
 
         // pick at most one primary classification tag..
-        for (i = 0; i < primaries.length; i++) {
-            k = primaries[i];
+        for (k of primaries) {
             v = t[k];
             if (!v || v === 'no') continue;
 
@@ -98,8 +97,7 @@ export function svgTagClasses() {
 
         // add at most one status tag, only if relates to primary tag..
         if (!status) {
-            for (i = 0; i < statuses.length; i++) {
-                k = statuses[i];
+            for (k of statuses) {
                 v = t[k];
                 if (!v || v === 'no') continue;
 
@@ -123,8 +121,7 @@ export function svgTagClasses() {
         }
 
         // add any secondary tags
-        for (i = 0; i < secondaries.length; i++) {
-            k = secondaries[i];
+        for (k of secondaries) {
             v = t[k];
             if (!v || v === 'no' || k === primary) continue;
             classes.push('tag-' + k);

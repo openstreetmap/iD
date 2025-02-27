@@ -178,8 +178,7 @@ const prototype = {
 
         var members = [];
 
-        for (var i = 0; i < this.members.length; i++) {
-            var member = this.members[i];
+        for (var member of this.members) {
             if (member.id !== needle.id) {
                 members.push(member);
             } else if (keepDuplicates || !this.memberByIdAndRole(replacement.id, member.role)) {

@@ -297,10 +297,9 @@ export function modeDragNode(context) {
 
     function hasInvalidGeometry(entity, graph) {
         var parents = graph.parentWays(entity);
-        var i, j, k;
+        var j, k;
 
-        for (i = 0; i < parents.length; i++) {
-            var parent = parents[i];
+        for (var parent of parents) {
             var nodes = [];
             var activeIndex = null;    // which multipolygon ring contains node being dragged
 

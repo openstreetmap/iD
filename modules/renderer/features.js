@@ -223,8 +223,7 @@ export function rendererFeatures(context) {
 
         const keys = Object.keys(tags);
 
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
+        for (const key of keys) {
             const s = key.split(':')[0];
             if (osmLifecyclePrefixes[s] || osmLifecyclePrefixes[tags[key]]) return true;
         }
@@ -559,8 +558,7 @@ export function rendererFeatures(context) {
         if (!_hidden.length) return d;
 
         var result = [];
-        for (var i = 0; i < d.length; i++) {
-            var entity = d[i];
+        for (var entity of d) {
             if (!features.isHidden(entity, resolver, entity.geometry(resolver))) {
                 result.push(entity);
             }

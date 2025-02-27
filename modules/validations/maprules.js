@@ -10,8 +10,7 @@ export function validationMaprules() {
         var rules = services.maprules.validationRules();
         var issues = [];
 
-        for (var i = 0; i < rules.length; i++) {
-            var rule = rules[i];
+        for (var rule of rules) {
             rule.findIssues(entity, graph, issues);
         }
 

@@ -260,8 +260,7 @@ export function svgLabels(projection, context) {
             _entitybboxes = {};
 
         } else {
-            for (i = 0; i < entities.length; i++) {
-                entity = entities[i];
+            for (entity of entities) {
                 var toRemove = []
                     .concat(_entitybboxes[entity.id] || [])
                     .concat(_entitybboxes[entity.id + 'I'] || []);
@@ -274,8 +273,7 @@ export function svgLabels(projection, context) {
         }
 
         // Loop through all the entities to do some preprocessing
-        for (i = 0; i < entities.length; i++) {
-            entity = entities[i];
+        for (entity of entities) {
             geometry = entity.geometry(graph);
 
             // Insert collision boxes around interesting points/vertices
@@ -343,8 +341,7 @@ export function svgLabels(projection, context) {
         for (k = 0; k < labelable.length; k++) {
             var fontSize = labelStack[k][3];
 
-            for (i = 0; i < labelable[k].length; i++) {
-                entity = labelable[k][i];
+            for (entity of labelable[k]) {
                 geometry = entity.geometry(graph);
 
                 var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName;
@@ -448,8 +445,7 @@ export function svgLabels(projection, context) {
                                25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
             var padding = 3;
 
-            for (var i = 0; i < lineOffsets.length; i++) {
-                var offset = lineOffsets[i];
+            for (var offset of lineOffsets) {
                 var middle = offset / 100 * length;
                 var start = middle - width / 2;
 
@@ -629,8 +625,7 @@ export function svgLabels(projection, context) {
         function tryInsert(bboxes, id, saveSkipped) {
             var skipped = false;
 
-            for (var i = 0; i < bboxes.length; i++) {
-                var bbox = bboxes[i];
+            for (var bbox of bboxes) {
                 bbox.id = id;
 
                 // Check that label is visible

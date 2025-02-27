@@ -29,8 +29,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
         }
 
         function cacheEntities(ids) {
-            for (var i = 0; i < ids.length; i++) {
-                var id = ids[i];
+            for (var id of ids) {
                 if (cache.moving[id]) continue;
                 cache.moving[id] = true;
 
@@ -56,20 +55,17 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
                 return !way.isClosed() && !!way.affix(id);
             }
 
-            for (var i = 0; i < ids.length; i++) {
-                var id = ids[i];
+            for (var id of ids) {
 
                 // consider only intersections with 1 moved and 1 unmoved way.
                 var childNodes = graph.childNodes(graph.entity(id));
-                for (var j = 0; j < childNodes.length; j++) {
-                    var node = childNodes[j];
+                for (var node of childNodes) {
                     var parents = graph.parentWays(node);
                     if (parents.length !== 2) continue;
 
                     var moved = graph.entity(id);
                     var unmoved = null;
-                    for (var k = 0; k < parents.length; k++) {
-                        var way = parents[k];
+                    for (var way of parents) {
                         if (!cache.moving[way.id]) {
                             unmoved = way;
                             break;
@@ -291,8 +287,7 @@ export function actionMove(moveIDs, tryDelta, projection, cache) {
 
 
     function cleanupIntersections(graph) {
-        for (var i = 0; i < cache.intersections.length; i++) {
-            var obj = cache.intersections[i];
+        for (var obj of cache.intersections) {
             graph = replaceMovedVertex(obj.nodeId, obj.movedId, graph, _delta);
             graph = replaceMovedVertex(obj.nodeId, obj.unmovedId, graph, null);
             graph = unZorroIntersection(obj, graph);

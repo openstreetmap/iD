@@ -340,12 +340,11 @@ export function uiFieldRestrictions(field, context) {
                     turns = _intersection.turns(_fromWayID, 2);
                     extraActions = [];
                     _oldTurns = [];
-                    for (i = 0; i < turns.length; i++) {
-                        var turn = turns[i];
+                    for (var turn of turns) {
                         if (seen[turn.restrictionID]) continue;  // avoid deleting the turn twice (#4968, #4928)
 
                         if (turn.direct && turn.path[1] === datum.path[1]) {
-                            seen[turns[i].restrictionID] = true;
+                            seen[turn.restrictionID] = true;
                             turn.restrictionType = osmInferRestriction(vgraph, turn, projection);
                             _oldTurns.push(turn);
                             extraActions.push(actionUnrestrictTurn(turn));
@@ -433,8 +432,7 @@ export function uiFieldRestrictions(field, context) {
 
             if (wayID) {
                 var turns = _intersection.turns(wayID, _maxViaWay);
-                for (var i = 0; i < turns.length; i++) {
-                    var turn = turns[i];
+                for (var turn of turns) {
                     var ids = [turn.to.way];
                     var klass = (turn.no ? 'restrict' : (turn.only ? 'only' : 'allow'));
 

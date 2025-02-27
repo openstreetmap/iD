@@ -322,8 +322,7 @@ export function rendererBackground(context) {
     let tested = 0;
     let regex;
 
-    for (let i = 0; i < blocklists.length; i++) {
-      regex = blocklists[i];
+    for (regex of blocklists) {
       fail = regex.test(template);
       tested++;
       if (fail) break;

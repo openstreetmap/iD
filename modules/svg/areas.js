@@ -92,8 +92,7 @@ export function svgAreas(projection, context) {
         var areas = {};
         var base = context.history().base();
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (var entity of entities) {
             if (entity.geometry(graph) !== 'area') continue;
             if (!areas[entity.id]) {
                 areas[entity.id] = {

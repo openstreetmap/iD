@@ -62,8 +62,7 @@ export function actionStraightenNodes(nodeIDs, projection) {
 
         var maxDistance = 0;
 
-        for (var i = 0; i < points.length; i++) {
-            var point = points[i];
+        for (var point of points) {
             var u = positionAlongWay(point, startPoint, endPoint);
             var p = geoVecInterp(startPoint, endPoint, u);
             var dist = geoVecLength(p, point);

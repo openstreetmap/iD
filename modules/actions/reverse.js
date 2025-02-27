@@ -97,8 +97,7 @@ export function actionReverse(entityID, options) {
         if (keysToKeepUnchanged.some(keyRegex => keyRegex.test(key))) {
             return key;
         }
-        for (var i = 0; i < keyReplacements.length; ++i) {
-            var replacement = keyReplacements[i];
+        for (var replacement of keyReplacements) {
             if (replacement[0].test(key)) {
                 return key.replace(replacement[0], replacement[1]);
             }

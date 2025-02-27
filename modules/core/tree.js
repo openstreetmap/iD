@@ -90,8 +90,7 @@ export function coreTree(head) {
     tree.rebase = function(entities, force) {
         var insertions = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (var entity of entities) {
             if (!entity.visible) continue;
 
             if (head.entities.hasOwnProperty(entity.id) || _bboxes[entity.id]) {

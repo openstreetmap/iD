@@ -24,8 +24,7 @@ export function uiScale(context) {
         }
 
         // determine a user-friendly endpoint for the scale
-        for (i = 0; i < buckets.length; i++) {
-            val = buckets[i];
+        for (val of buckets) {
             if (dist >= val) {
                 scale.dist = Math.floor(dist / val) * val;
                 break;

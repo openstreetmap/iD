@@ -223,8 +223,7 @@ export function presetIndex() {
 
       if (indexMatches.length === 0) continue;
 
-      for (let i = 0; i < indexMatches.length; i++) {
-        const candidate = indexMatches[i];
+      for (const candidate of indexMatches) {
         const score = candidate.matchScore(tags);
 
         if (score === -1){
@@ -243,8 +242,7 @@ export function presetIndex() {
       const validHere = locationManager.locationSetsAt(loc);
       if (!validHere[bestMatch.locationSetID]) {
         matchCandidates.sort((a, b) => (a.score < b.score) ? 1 : -1);
-        for (let i = 0; i < matchCandidates.length; i++) {
-          const candidateScore = matchCandidates[i];
+        for (const candidateScore of matchCandidates) {
           if (!candidateScore.candidate.locationSetID || validHere[candidateScore.candidate.locationSetID]) {
             bestMatch = candidateScore.candidate;
             bestScore = candidateScore.score;

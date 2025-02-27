@@ -39,8 +39,7 @@ export function actionReflect(reflectIds, projection) {
         var dy = q[1] - p[1];
         var a = (dx * dx - dy * dy) / (dx * dx + dy * dy);
         var b = 2 * dx * dy / (dx * dx + dy * dy);
-        for (var i = 0; i < nodes.length; i++) {
-            var node = nodes[i];
+        for (var node of nodes) {
             var c = projection(node.loc);
             var c2 = [
                 a * (c[0] - p[0]) + b * (c[1] - p[1]) + p[0],

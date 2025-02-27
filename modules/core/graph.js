@@ -140,8 +140,7 @@ coreGraph.prototype = {
         var base = this.base();
         var i, j, k, id;
 
-        for (i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (var entity of entities) {
 
             if (!entity.visible || (!force && base.entities[entity.id])) continue;
 
@@ -151,8 +150,7 @@ coreGraph.prototype = {
 
             // Restore provisionally-deleted nodes that are discovered to have an extant parent
             if (entity.type === 'way') {
-                for (j = 0; j < entity.nodes.length; j++) {
-                    id = entity.nodes[j];
+                for (id of entity.nodes) {
                     for (k = 1; k < stack.length; k++) {
                         var ents = stack[k].entities;
                         if (ents.hasOwnProperty(id) && ents[id] === undefined) {

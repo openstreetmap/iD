@@ -246,8 +246,7 @@ export function svgLines(projection, context) {
         var sideddata = {};
         var oldMultiPolygonOuters = {};
 
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
+        for (var entity of entities) {
             if (entity.geometry(graph) === 'line'
                        // to render side-markers for coastlines (see
                        // https://github.com/openstreetmap/iD/issues/9293)

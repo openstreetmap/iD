@@ -397,8 +397,7 @@ export function actionSplit(nodeIds, newWayIds) {
     var action = function(graph) {
         _createdWayIDs = [];
         var newWayIndex = 0;
-        for (var i = 0; i < nodeIds.length; i++) {
-            var nodeId = nodeIds[i];
+        for (var nodeId of nodeIds) {
             var candidates = action.waysForNode(nodeId, graph);
             for (var j = 0; j < candidates.length; j++) {
                 graph = split(graph, nodeId, candidates[j], newWayIds && newWayIds[newWayIndex], nodeIds.slice(j + 1));

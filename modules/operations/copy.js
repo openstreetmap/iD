@@ -20,24 +20,20 @@ export function operationCopy(context, selectedIDs) {
         var canCopy = [];
         var skip = {};
         var entity;
-        var i;
 
-        for (i = 0; i < selected.relation.length; i++) {
-            entity = selected.relation[i];
+        for (entity of selected.relation) {
             if (!skip[entity.id] && entity.isComplete(graph)) {
                 canCopy.push(entity.id);
                 skip = getDescendants(entity.id, graph, skip);
             }
         }
-        for (i = 0; i < selected.way.length; i++) {
-            entity = selected.way[i];
+        for (entity of selected.way) {
             if (!skip[entity.id]) {
                 canCopy.push(entity.id);
                 skip = getDescendants(entity.id, graph, skip);
             }
         }
-        for (i = 0; i < selected.node.length; i++) {
-            entity = selected.node[i];
+        for (entity of selected.node) {
             if (!skip[entity.id]) {
                 canCopy.push(entity.id);
             }
