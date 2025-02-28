@@ -1,0 +1,3 @@
+#      .git-blame-ignore-revs
+#10823: Replaced var with let or const
+f8c3dc2ef238e4d3648c0f2b8a56f752e9ce1dae
